@@ -1,0 +1,1 @@
+$("#dbPrefix").val('ips_');
