@@ -1,0 +1,9 @@
+#contentNav {float:right; background:#efefef; padding:15px; position:relative; top:-15px; border:1px solid #dedfe1}
+#contentNav a{color:black; font-size:12px; margin:0px; font-weight:normal}
+.content h1{font-size:28px; margin:0 0 10px 0}
+.content h2{font-size:24px;}
+.content h3{font-size:20px;}
+.content h4{font-size:16px;margin-top: 20px;}
+.content p{margin: 0}
+.content ul,.content ol{padding-left: 1em}
+h4:target {color:red; font-size:18px}
