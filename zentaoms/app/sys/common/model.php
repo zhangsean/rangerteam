@@ -24,7 +24,6 @@ class commonModel extends model
         $this->setUser();
         $this->loadConfigFromDB();
         $this->loadAlias();
-        $this->loadModel('site')->setSite();
     }
 
     /**
