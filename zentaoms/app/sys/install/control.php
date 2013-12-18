@@ -21,7 +21,6 @@ class install extends control
     {
         if(!defined('RUN_MODE') or RUN_MODE != 'install') die('error');
         parent::__construct();
-        $this->loadModel('site')->setSite();
     }
 
     /**
