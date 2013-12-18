@@ -1509,9 +1509,11 @@ class router
      * @access  public
      * @return  bool|ojbect the lang object or false.
      */
-    public function loadLang($moduleName)
+    public function loadLang($moduleName, $appName = '')
     {
-        $modulePath   = $this->getModulePath($moduleName);
+        if($moduleName == 'common' and $appName == '') $this->loadLang('common', 'sys');
+
+        $modulePath   = $this->getModulePath($moduleName, $appName);
         $mainLangFile = $modulePath . 'lang' . DS . $this->clientLang . '.php';
         $extLangPath  = $this->getModuleExtPath($moduleName, 'lang');
         $extLangFiles = helper::ls($extLangPath . $this->clientLang, '.php');
