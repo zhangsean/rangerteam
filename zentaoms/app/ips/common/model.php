@@ -114,11 +114,11 @@ class commonModel extends model
     public static function hasPriv($module, $method)
     {
         global $app, $config;
+        if($app->user->admin == 'super') return true;
 
         if(RUN_MODE == 'admin')
         {
-            if($app->user->admin == 'no')    return false;
-            if($app->user->admin == 'super') return true;
+            if($app->user->admin != 'super') return false;
         }
 
         if(!commonModel::isAvailable($module)) return false;

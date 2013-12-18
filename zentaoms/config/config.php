@@ -139,6 +139,21 @@ define('TABLE_EXTENSION',     '`' . $config->db->prefix . 'extension`');
 define('TABLE_WEBAPP',        '`' . $config->db->prefix . 'webapp`');
 define('TABLE_LANG',          '`' . $config->db->prefix . 'lang`');
 
+define('TABLE_SITE',     $config->db->prefix . 'site');
+define('TABLE_RELATION', $config->db->prefix . 'relation');
+define('TABLE_ARTICLE',  $config->db->prefix . 'article');
+define('TABLE_BLOCK',    $config->db->prefix . 'block');
+define('TABLE_TAG',      $config->db->prefix . 'tag');
+define('TABLE_BOOK',     $config->db->prefix . 'book');
+define('TABLE_LAYOUT',   $config->db->prefix . 'layout');
+define('TABLE_COMMENT',  $config->db->prefix . 'comment');
+define('TABLE_THREAD',   $config->db->prefix . 'thread');
+define('TABLE_REPLY',    $config->db->prefix . 'reply');
+define('TABLE_OAUTH',    $config->db->prefix . 'oauth');
+define('TABLE_DOWN',     $config->db->prefix . 'down');
+define('TABLE_MESSAGE',  $config->db->prefix . 'message');
+define('TABLE_ENTRY',    $config->db->prefix . 'entry');
+
 $config->objectTables['product']     = TABLE_PRODUCT;
 $config->objectTables['story']       = TABLE_STORY;
 $config->objectTables['productplan'] = TABLE_PRODUCTPLAN;
