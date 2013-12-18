@@ -26,6 +26,14 @@ class control
     protected $app;
 
     /**
+     * The global $appName.
+     * 
+     * @var string
+     * @access public
+     */
+    public $appName;
+
+    /**
      * The global $config object.
      * 
      * @var object
@@ -171,8 +179,8 @@ class control
         $this->config   = $config;
         $this->lang     = $lang;
         $this->dbh      = $dbh;
-        $this->pathFix  = $this->app->getPathFix();
         $this->viewType = $this->app->getViewType();
+        $this->appName  = $this->app->getAppName();
 
         /* Load the model file auto. */
         $this->setModuleName($moduleName);
@@ -220,19 +228,21 @@ class control
      * Load the model file of one module.
      * 
      * @param   string      $moduleName    The method name, if empty, use current module's name.
+     * @param   string      $appName       The app name, if empty, use current app's name.
      * @access  public
      * @return  object|bool If no model file, return false. Else return the model object.
      */
     public function loadModel($moduleName = '', $appName = '')
     {
         if(empty($moduleName)) $moduleName = $this->moduleName;
+        if(empty($appName))    $appName    = $this->appName;
         $modelFile = helper::setModelFile($moduleName, $appName);
 
         /* If no model file, try load config. */
         if(!helper::import($modelFile)) 
         {
-            $this->app->loadConfig($moduleName, false);
-            $this->app->loadLang($moduleName);
+            $this->app->loadConfig($moduleName, $appName, false);
+            $this->app->loadLang($moduleName, $appName);
             $this->dao = new dao();
             return false;
         }
@@ -288,15 +298,15 @@ class control
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        $modulePath  = $this->app->getModulePath($moduleName);
-        $viewExtPath = $this->app->getModuleExtPath($moduleName, 'view');
+        $modulePath  = $this->app->getModulePath($this->appName, $moduleName);
+        $viewExtPath = $this->app->getModuleExtPath($this->appName, $moduleName, 'view');
 
         /* Set infix for view file in mobile or pc. */
         $viewType = $this->viewType;
         if($this->viewType == 'mhtml') $viewType = 'html';
 
         /* The main view file, extension view file and hook file. */
-        $mainViewFile = $modulePath . 'view' . $this->pathFix . $this->viewPrefix . $methodName . '.' . $viewType . '.php';
+        $mainViewFile = $modulePath . 'view' . DS . $this->viewPrefix . $methodName . '.' . $viewType . '.php';
         $extViewFile  = $viewExtPath . $this->viewPrefix . $methodName . ".{$viewType}.php";
         $extHookFiles = glob($viewExtPath . $this->viewPrefix . $methodName . "*.{$viewType}.hook.php");
 
@@ -337,15 +347,15 @@ class control
     {
         $moduleName   = strtolower(trim($moduleName));
         $methodName   = strtolower(trim($methodName));
-        $modulePath   = $this->app->getModulePath($moduleName);
-        $cssMethodExt = $this->app->getModuleExtPath($moduleName, 'css') . $methodName . $this->pathFix;
-        $cssCommonExt = $this->app->getModuleExtPath($moduleName, 'css') . 'common' . $this->pathFix;
+        $modulePath   = $this->app->getModulePath($this->appName, $moduleName);
+        $cssMethodExt = $this->app->getModuleExtPath($this->appName, $moduleName, 'css') . $methodName . DS;
+        $cssCommonExt = $this->app->getModuleExtPath($this->appName, $moduleName, 'css') . 'common' . DS;
 
         $css = '';
-        $mainCssFile   = $modulePath . 'css' . $this->pathFix . $this->viewPrefix . 'common.css';
-        $methodCssFile = $modulePath . 'css' . $this->pathFix . $this->viewPrefix . $methodName . '.css';
-        if(file_exists($mainCssFile))   $css .= file_get_contents($mainCssFile);
-        if(is_file($methodCssFile))     $css .= file_get_contents($methodCssFile);
+        $mainCssFile   = $modulePath . 'css' . DS . $this->viewPrefix . 'common.css';
+        $methodCssFile = $modulePath . 'css' . DS . $this->viewPrefix . $methodName . '.css';
+        if(file_exists($mainCssFile)) $css .= file_get_contents($mainCssFile);
+        if(is_file($methodCssFile))   $css .= file_get_contents($methodCssFile);
 
         $cssExtFiles = glob($cssCommonExt . $this->viewPrefix . '*.css');
         if(is_array($cssExtFiles))
@@ -379,13 +389,13 @@ class control
     {
         $moduleName  = strtolower(trim($moduleName));
         $methodName  = strtolower(trim($methodName));
-        $modulePath  = $this->app->getModulePath($moduleName);
-        $jsMethodExt = $this->app->getModuleExtPath($moduleName, 'js') . $methodName . $this->pathFix;
-        $jsCommonExt = $this->app->getModuleExtPath($moduleName, 'js') . 'common' . $this->pathFix;
+        $modulePath  = $this->app->getModulePath($this->appName, $moduleName);
+        $jsMethodExt = $this->app->getModuleExtPath($this->appName, $moduleName, 'js') . $methodName . DS;
+        $jsCommonExt = $this->app->getModuleExtPath($this->appName, $moduleName, 'js') . 'common' . DS;
 
         $js = '';
-        $mainJsFile   = $modulePath . 'js' . $this->pathFix . $this->viewPrefix . 'common.js';
-        $methodJsFile = $modulePath . 'js' . $this->pathFix . $this->viewPrefix . $methodName . '.js';
+        $mainJsFile   = $modulePath . 'js' . DS . $this->viewPrefix . 'common.js';
+        $methodJsFile = $modulePath . 'js' . DS . $this->viewPrefix . $methodName . '.js';
         if(file_exists($mainJsFile))   $js .= file_get_contents($mainJsFile);
         if(is_file($methodJsFile))     $js .= file_get_contents($methodJsFile);
 
@@ -537,9 +547,9 @@ class control
         }
 
         /* Set the pathes and files to included. */
-        $modulePath        = $this->app->getModulePath($moduleName);
+        $modulePath        = $this->app->getModulePath($this->appName, $moduleName);
         $moduleControlFile = $modulePath . 'control.php';
-        $actionExtFile     = $this->app->getModuleExtPath($moduleName, 'control') . strtolower($methodName) . '.php';
+        $actionExtFile     = $this->app->getModuleExtPath($this->appName, $moduleName, 'control') . strtolower($methodName) . '.php';
         $file2Included     = file_exists($actionExtFile) ? $actionExtFile : $moduleControlFile;
 
         /* Load the control file. */

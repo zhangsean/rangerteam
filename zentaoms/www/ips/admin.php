@@ -10,7 +10,7 @@
  * @link        http://www.zentao.net
  */
 /* Turn off error reporting first. */
-error_reporting(0);
+//error_reporting(0);
 
 /* Start output buffer. */
 ob_start();
@@ -19,10 +19,10 @@ ob_start();
 define('RUN_MODE', 'admin');
 
 /* Load the framework. */
-include '../framework/router.class.php';
-include '../framework/control.class.php';
-include '../framework/model.class.php';
-include '../framework/helper.class.php';
+include '../../framework/router.class.php';
+include '../../framework/control.class.php';
+include '../../framework/model.class.php';
+include '../../framework/helper.class.php';
 
 /* Log the time. */
 $startTime = getTime();

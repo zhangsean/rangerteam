@@ -18,12 +18,12 @@
 class router
 {
     /**
-     * The directory seperator.
+     * The appName.
      * 
      * @var string
-     * @access private
+     * @access public
      */
-    private $pathFix;
+    public $appName;
 
     /**
      * The base path of the ZenTaoPMS framework.
@@ -302,8 +302,9 @@ class router
      * @access protected
      * @return void
      */
-    protected function __construct($appName = 'demo', $appRoot = '')
+    protected function __construct($appName = '', $appRoot = '')
     {
+        $this->setAppName($appName);
         $this->setPathFix();
         $this->setBasePath();
         $this->setFrameRoot();
@@ -363,6 +364,18 @@ class router
     }
 
     //-------------------- path related methods --------------------//
+
+    /**
+     * Set app name.
+     * 
+     * @param  string    $appName 
+     * @access public
+     * @return void
+     */
+    public function setAppName($appName)
+    {
+        $this->appName = $appName;
+    }
 
     /**
      * Set the path directory.
@@ -580,14 +593,14 @@ class router
     }
 
     /**
-     * Get the $pathFix var
+     * Get app name 
      * 
      * @access public
      * @return string
      */
-    public function getPathFix()
+    public function getAppName()
     {
-        return DS;
+        return $this->appName;
     }
 
     /**
@@ -1060,30 +1073,34 @@ class router
     /**
      * Get the path of one module.
      * 
-     * @param  string $moduleName the module name
      * @param  string $appName    the app name
+     * @param  string $moduleName the module name
      * @access public
      * @return string the module path
      */
-    public function getModulePath($moduleName = '', $appName = '')
+    public function getModulePath($appName = '', $moduleName = '')
     {
         if($moduleName == '') $moduleName = $this->moduleName;
-        $modulePath = $this->getModuleRoot($appName) . strtolower(trim($moduleName)) . DS;
-        if(!is_dir($modulePath)) $modulePath = $this->getModuleRoot('sys') . strtolower(trim($moduleName)) . DS;
+        $moduleName = strtolower(trim($moduleName));
+
+        $modulePath = $this->getModuleRoot($appName) . $moduleName . DS;
+        if(!is_dir($modulePath)) $modulePath = $this->getModuleRoot('sys') . $moduleName . DS;
+
         return $modulePath;
     }
 
     /**
      * Get extension path of one module.
      * 
+     * @param   string $appName        the app name
      * @param   string $moduleName     the module name
      * @param   string $ext            the extension type, can be control|model|view|lang|config
      * @access  public
      * @return  string the extension path.
      */
-    public function getModuleExtPath($moduleName, $ext)
+    public function getModuleExtPath($appName, $moduleName, $ext)
     {
-        return $this->getModuleRoot() . strtolower(trim($moduleName)) . DS . 'ext' . DS . $ext . DS;
+        return $this->getModuleRoot($appName) . strtolower(trim($moduleName)) . DS . 'ext' . DS . $ext . DS;
     }
 
     /**
@@ -1094,7 +1111,7 @@ class router
      */
     public function setActionExtFile()
     {
-        $moduleExtPath = $this->getModuleExtPath($this->moduleName, 'control');
+        $moduleExtPath = $this->getModuleExtPath($this->appName, $this->moduleName, 'control');
         $this->extActionFile = $moduleExtPath . $this->methodName . '.php';
         return file_exists($this->extActionFile);
     }
@@ -1416,11 +1433,12 @@ class router
      * If the module is common, search in $configRoot, else in $modulePath.
      *
      * @param   string $moduleName     module name
-     * @param   bool  $exitIfNone     exit or not
+     * @param   string $appName        app name
+     * @param   bool   $exitIfNone     exit or not
      * @access  public
      * @return  object|bool the config object or false.
      */
-    public function loadConfig($moduleName, $exitIfNone = true)
+    public function loadConfig($moduleName, $appName = '', $exitIfNone = true)
     {
         global $config;
         if(!is_object($config)) $config = new config();
@@ -1435,8 +1453,8 @@ class router
         }
         else
         {
-            $mainConfigFile = $this->getModulePath($moduleName) . 'config.php';
-            $extConfigPath  = $this->getModuleExtPath($moduleName, 'config');
+            $mainConfigFile = $this->getModulePath($appName, $moduleName) . 'config.php';
+            $extConfigPath  = $this->getModuleExtPath($appName, $moduleName, 'config');
             $extConfigFiles = helper::ls($extConfigPath, '.php');
         }
 
@@ -1506,6 +1524,7 @@ class router
      * Load lang and return it as the global lang object.
      * 
      * @param   string $moduleName     the module name
+     * @param   string $appName        the app name
      * @access  public
      * @return  bool|ojbect the lang object or false.
      */
@@ -1513,9 +1532,9 @@ class router
     {
         if($moduleName == 'common' and $appName == '') $this->loadLang('common', 'sys');
 
-        $modulePath   = $this->getModulePath($moduleName, $appName);
+        $modulePath   = $this->getModulePath($appName, $moduleName);
         $mainLangFile = $modulePath . 'lang' . DS . $this->clientLang . '.php';
-        $extLangPath  = $this->getModuleExtPath($moduleName, 'lang');
+        $extLangPath  = $this->getModuleExtPath($appName, $moduleName, 'lang');
         $extLangFiles = helper::ls($extLangPath . $this->clientLang, '.php');
 
         /* Set the files to includ. */

@@ -26,6 +26,14 @@ class model
     protected $app;
 
     /**
+     * The global appName.
+     * 
+     * @var string
+     * @access public
+     */
+    public $appName;
+
+    /**
      * The global $config object.
      * 
      * @var object
@@ -117,14 +125,15 @@ class model
     public function __construct()
     {
         global $app, $config, $lang, $dbh;
-        $this->app    = $app;
-        $this->config = $config;
-        $this->lang   = $lang;
-        $this->dbh    = $dbh;
+        $this->app     = $app;
+        $this->config  = $config;
+        $this->lang    = $lang;
+        $this->dbh     = $dbh;
+        $this->appName = $this->app->getAppName();
 
         $moduleName = $this->getModuleName();
-        $this->app->loadLang($moduleName,   $exit = false);
-        $this->app->loadConfig($moduleName, $exit = false);
+        $this->app->loadLang($moduleName, $this->appName);
+        $this->app->loadConfig($moduleName, $this->appName, $exitIfNone = false);
      
         $this->loadDAO();
         $this->setSuperVars();
@@ -200,10 +209,10 @@ class model
         /* Set extenson name and extension file. */
         $extensionName = strtolower($extensionName);
         $moduleName    = $moduleName ? $moduleName : $this->getModuleName();
-        $extensionFile = $this->app->getModuleExtPath($moduleName, 'model') . 'class/' . $extensionName . '.class.php';
+        $extensionFile = $this->app->getModuleExtPath($this->appName, $moduleName, 'model') . 'class/' . $extensionName . '.class.php';
 
         /* Try to import parent model file auto and then import the extension file. */
-        if(!class_exists($moduleName . 'Model')) helper::import($this->app->getModulePath($moduleName) . 'model.php');
+        if(!class_exists($moduleName . 'Model')) helper::import($this->app->getModulePath($this->appName, $moduleName) . 'model.php');
         if(!helper::import($extensionFile)) return false;
 
         /* Set the extension class name. */

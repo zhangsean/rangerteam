@@ -148,11 +148,13 @@ class helper
      */
     static public function setModelFile($moduleName, $appName = '')
     {
+        /* Set app name. */
         global $app;
+        if($appName == '') $appName = $app->getAppName();
 
         /* Set the main model file and extension and hook pathes and files. */
-        $mainModelFile = $app->getModulePath($moduleName, $appName) . 'model.php';
-        $modelExtPath  = $app->getModuleExtPath($moduleName, $appName, 'model');
+        $mainModelFile = $app->getModulePath($appName, $moduleName) . 'model.php';
+        $modelExtPath  = $app->getModuleExtPath($appName, $moduleName, 'model');
         $modelHookPath = $modelExtPath . 'hook/';
         $extFiles      = helper::ls($modelExtPath, '.php');
         $hookFiles     = helper::ls($modelHookPath, '.php');
