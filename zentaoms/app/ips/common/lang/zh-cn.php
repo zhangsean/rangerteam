@@ -1,5 +1,6 @@
 <?php
 $lang->block = new stdclass();
+
 $lang->menu->entry = 'App|entry|admin|';
  
 /* Menu entry. */
