@@ -19,7 +19,7 @@ class install extends control
      */
     public function __construct()
     {
-        if(!defined('RUN_MODE') or RUN_MODE != 'install') die('error');
+        if(!defined('IN_INSTALL') or !IN_INSTALL) die('error');
         parent::__construct();
     }
 

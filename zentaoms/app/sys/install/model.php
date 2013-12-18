@@ -276,23 +276,18 @@ class installModel extends model
      */
     public function createTable($version)
     {
-        $dbFile = $this->app->getAppRoot() . 'db' . DS . 'chanzhi.sql';
+        $dbFile = $this->app->getBasePath() . 'db' . DS . 'install.sql';
         $tables = explode(';', file_get_contents($dbFile));
         foreach($tables as $table)
         {
             $table = trim($table);
             if(empty($table)) continue;
 
-            if(strpos($table, 'CREATE') !== false and $version <= 4.1)
-            {
-                $table = str_replace('DEFAULT CHARSET=utf8', '', $table);
-            }
-            elseif(strpos($table, 'DROP') !== false and $this->post->clearDB != false)
+            if(strpos($table, 'DROP') !== false and $this->post->clearDB != false)
             {
                 $table = str_replace('--', '', $table);
             }
-            $table = str_replace('eps_', $this->config->db->prefix, $table);
-            $table = str_replace('`' . $this->config->db->prefix, $this->config->db->name . '.`' . $this->config->db->prefix, $table);
+            $table = preg_replace('/`(\w+)_/', $this->config->db->name . ".`\${1}_" . $this->config->db->prefix, $table);
 
             if(!$this->dbh->query($table)) return false;
         }
@@ -309,15 +304,14 @@ class installModel extends model
     {
         return <<<EOT
 <?php
-\$config->installed    = true;	
-\$config->debug        = false;	
-\$config->requestType  = '{$this->post->requestType}';	
-\$config->db->host     = '{$this->post->dbHost}';	
-\$config->db->port     = '{$this->post->dbPort}';	
-\$config->db->name     = '{$this->post->dbName}';	
-\$config->db->user     = '{$this->post->dbUser}';	
-\$config->db->password = '{$this->post->dbPassword}';		
-\$config->db->prefix   = '{$this->post->dbPrefix}';	
+\$config->installed    = true;
+\$config->debug        = false;
+\$config->requestType  = '{$this->post->requestType}';
+\$config->db->host     = '{$this->post->dbHost}';
+\$config->db->port     = '{$this->post->dbPort}';
+\$config->db->name     = '{$this->post->dbName}';
+\$config->db->user     = '{$this->post->dbUser}';
+\$config->db->password = '{$this->post->dbPassword}';
 EOT;
     }
 
