@@ -1,14 +1,12 @@
 <?php
 /**
- * The router file of ZenTaoPMS.
+ * The router file of ZenTaoMS.
  *
- * All request should be routed by this router.
- *
- * @copyright   Copyright 2009-2013 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商业软件，非开源软件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     ZenTaoPMS
- * @version     $Id: index.php 5036 2013-07-06 05:26:44Z wyd621@gmail.com $
+ * @version     $Id$
  * @link        http://www.zentao.net
  */
 /* Set the error reporting. */
@@ -27,10 +25,10 @@ include '../framework/helper.class.php';
 $startTime = getTime();
 
 /* Instance the app. */
-$app = router::createApp('pms', dirname(dirname(__FILE__)));
+$app = router::createApp('ips');
 
 /* Check the reqeust is getconfig or not. Check installed or not. */
-if(isset($_GET['mode']) and $_GET['mode'] == 'getconfig') die($app->exportConfig());  // 
+if(isset($_GET['mode']) and $_GET['mode'] == 'getconfig') die($app->exportConfig());
 if(!isset($config->installed) or !$config->installed) die(header('location: sys/install.php'));
 
 /* Detect mobile. */
@@ -48,6 +46,7 @@ $common = $app->loadCommon();
 $config->installedVersion = $common->loadModel('setting')->getVersion();
 if(!(!is_numeric($config->version{0}) and $config->version{0} != $config->installedVersion{0}) and version_compare($config->version, $config->installedVersion, '>')) die(header('location: upgrade.php'));
 
+/* Load module. */
 $app->parseRequest();
 $common->checkPriv();
 $app->loadModule();
