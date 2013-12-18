@@ -141,17 +141,18 @@ class helper
      * Set the model file of one module. If there's an extension file, merge it with the main model file.
      * 
      * @param   string $moduleName the module name
+     * @param   string $appName the app name
      * @static
      * @access  public
      * @return  string the model file
      */
-    static public function setModelFile($moduleName)
+    static public function setModelFile($moduleName, $appName = '')
     {
         global $app;
 
         /* Set the main model file and extension and hook pathes and files. */
-        $mainModelFile = $app->getModulePath($moduleName) . 'model.php';
-        $modelExtPath  = $app->getModuleExtPath($moduleName, 'model');
+        $mainModelFile = $app->getModulePath($moduleName, $appName) . 'model.php';
+        $modelExtPath  = $app->getModuleExtPath($moduleName, $appName, 'model');
         $modelHookPath = $modelExtPath . 'hook/';
         $extFiles      = helper::ls($modelExtPath, '.php');
         $hookFiles     = helper::ls($modelHookPath, '.php');
@@ -483,6 +484,17 @@ class helper
 
         if(isset($viewType) and strpos($config->views, ',' . $viewType . ',') === false) $viewType = $config->default->view;
         $app->viewType = isset($viewType) ? $viewType : $config->default->view;
+    }
+
+    /**
+     * Check is ajax request 
+     * 
+     * @access public
+     * @return void
+     */
+    public static function isAjaxRequest()
+    {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
     }
 }
 

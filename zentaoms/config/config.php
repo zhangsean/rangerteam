@@ -116,6 +116,8 @@ define('TABLE_STORYSPEC',     '`' . $config->db->prefix . 'storySpec`');
 define('TABLE_PRODUCTPLAN',   '`' . $config->db->prefix . 'productPlan`');
 define('TABLE_RELEASE',       '`' . $config->db->prefix . 'release`');
 
+define('TABLE_CATEGORY',      '`' . $config->db->prefix . 'category`');
+
 define('TABLE_PROJECT',       '`' . $config->db->prefix . 'project`');
 define('TABLE_TASK',          '`' . $config->db->prefix . 'task`');
 define('TABLE_TEAM',          '`' . $config->db->prefix . 'team`');

@@ -218,14 +218,14 @@ class control
     /**
      * Load the model file of one module.
      * 
-     * @param   string      $methodName    The method name, if empty, use current module's name.
+     * @param   string      $moduleName    The method name, if empty, use current module's name.
      * @access  public
      * @return  object|bool If no model file, return false. Else return the model object.
      */
-    public function loadModel($moduleName = '')
+    public function loadModel($moduleName = '', $appName = '')
     {
         if(empty($moduleName)) $moduleName = $this->moduleName;
-        $modelFile = helper::setModelFile($moduleName);
+        $modelFile = helper::setModelFile($moduleName, $appName);
 
         /* If no model file, try load config. */
         if(!helper::import($modelFile)) 

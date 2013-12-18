@@ -10,7 +10,7 @@
  * @link        http://www.zentao.net
  */
 /* Judge my.php exists or not. */
-define('IN_UPGRADE', true);
+define('RUN_MODE', 'upgrade');
 $myConfig = dirname(dirname(__FILE__)) . '/config/my.php';
 if(!file_exists($myConfig))
 {
@@ -22,10 +22,10 @@ if(!file_exists($myConfig))
 error_reporting(0);
 
 /* Load the framework. */
-include '../framework/router.class.php';
-include '../framework/control.class.php';
-include '../framework/model.class.php';
-include '../framework/helper.class.php';
+include '../../framework/router.class.php';
+include '../../framework/control.class.php';
+include '../../framework/model.class.php';
+include '../../framework/helper.class.php';
 
 /* Instance the app. */
 $app = router::createApp('sys');

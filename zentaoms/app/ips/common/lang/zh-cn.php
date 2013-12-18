@@ -40,6 +40,7 @@ EOT;
 
 /* Global lang items. */
 $lang->home           = '首页';
+$lang->chanzhiIPS     = '企业内部门户 ';
 $lang->welcome        = '欢迎您，<strong>%s</strong>！';
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = '今天是%s，';
@@ -108,122 +109,16 @@ $lang->sitemap->common = '站点地图';
 
 /* The main menus. */
 $lang->menu = new stdclass();
-$lang->menu->admin   = '首页|admin|index|';
-$lang->menu->article = '文章|article|admin|';
-$lang->menu->blog    = '博客|article|admin|type=blog';
-$lang->menu->product = '产品|product|admin|';
-$lang->menu->book    = '手册|book|admin|';
-$lang->menu->message = '评论留言|message|admin|';
-$lang->menu->page    = '单页|article|admin|type=page';
-$lang->menu->forum   = '论坛|forum|admin|';
-$lang->menu->site    = '站点|site|setbasic|';
-$lang->menu->ui      = '界面|ui|setlogo|';
-$lang->menu->company = '公司|company|setbasic|';
-$lang->menu->user    = '会员|user|admin|';
+$lang->menu->entry = '应用|entry|admin|';
 
-/* Menu of article module. */
-$lang->article = new stdclass();
-$lang->article->menu = new stdclass();
-$lang->article->menu->browse = array('link' => '文章列表|article|admin|', 'alias' => 'edit');
-$lang->article->menu->create = '发布文章|article|create|type=article';
-$lang->article->menu->tree   = '类目管理|tree|browse|type=article';
-
-/* Menu of blog module. */
-$lang->blog = new stdclass();
-$lang->blog->menu = new stdclass();
-$lang->blog->menu->browse = array('link' => '博客列表|article|admin|type=blog', 'alias' => 'edit');
-$lang->blog->menu->create = '发布博客|article|create|type=blog';
-$lang->blog->menu->tree   = '类目管理|tree|browse|type=blog';
-
-/* Menu of page module. */
-$lang->page = new stdclass();
-$lang->page->menu = new stdclass();
-$lang->page->menu->browse = array('link' => '单页列表|article|admin|type=page', 'alias' => 'edit');
-$lang->page->menu->create = '添加单页|article|create|type=page';
-
-/* Menu of product module. */
-$lang->product = new stdclass();
-$lang->product->menu = new stdclass();
-$lang->product->menu->browse = array('link' => '产品列表|product|admin|', 'alias' => 'edit');
-$lang->product->menu->create = '发布产品|product|create|';
-$lang->product->menu->tree   = '类目管理|tree|browse|type=product';
-
-/* Menu of UI module. */
-$lang->ui = new stdclass();
-$lang->ui->menu = new stdclass();
-$lang->ui->menu->logo    = 'LOGO设置|ui|setlogo|';
-$lang->ui->menu->favicon = '网站图标|ui|setfavicon|';
-$lang->ui->menu->theme   = '主题风格|ui|settheme|';
-$lang->ui->menu->slide   = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->admin   = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->pages   = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
-
-/* Menu of comment module. */
-$lang->message = new stdclass();
-$lang->message->menu = new stdclass();
-$lang->message->menu->message = '留言|message|admin|type=message';
-$lang->message->menu->comment = '评论|message|admin|type=comment';
-
-/* Menu of forum module. */
-$lang->forum = new stdclass();
-$lang->forum->menu = new stdclass();
-$lang->forum->menu->browse = '主题列表|forum|admin|';
-$lang->forum->menu->reply  = '回帖列表|reply|admin|';
-$lang->forum->menu->tree   = '版块管理|tree|browse|type=forum';
-$lang->forum->menu->update = '更新数据|forum|update|';
-
-/* Menu of site module. */
-$lang->site = new stdclass();
-$lang->site->menu = new stdclass();
-$lang->site->menu->basic     = '站点设置|site|setbasic|';
-$lang->site->menu->nav       = '导航设置|nav|admin|';
-$lang->site->menu->tag       = '关键词设置|tag|admin|';
-$lang->site->menu->oauth     = '开放登录|site|setoauth|';
-$lang->site->menu->link      = '友情链接|links|admin|';
-$lang->site->menu->mail      = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
-
-/* Menu of company module. */
-$lang->company->menu = new stdclass();
-$lang->company->menu->basic   = '公司信息|company|setbasic|';
-$lang->company->menu->contact = '联系方式|company|setcontact|';
+/* Menu entry. */
+$lang->entry       = new stdclass();
+$lang->entry->menu = new stdclass();
+$lang->entry->menu->admin  = array('link' => '应用列表|entry|admin|', 'alias' => 'edit');
+$lang->entry->menu->create = array('link' => '添加应用|entry|create|');
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
-
-/* Menu of tree module. */
-$lang->tree = new stdclass();
-$lang->tree->menu = $lang->article->menu;
-$lang->menuGroups->tree = 'article';
-
-/* Menu of tag module. */
-$lang->tag = new stdclass();
-$lang->tag->menu = $lang->site->menu;
-$lang->menuGroups->tag = 'site';
-
-/* Menu of mail module. */
-$lang->mail = new stdclass();
-$lang->mail->menu = $lang->site->menu;
-$lang->menuGroups->mail = 'site';
-
-/* Menu of nav module. */
-$lang->nav = new stdclass();
-$lang->nav->menu = $lang->site->menu;
-$lang->menuGroups->nav  = 'site';
-
-/* Menu of tree module. */
-$lang->slide = new stdclass();
-$lang->slide->menu = $lang->ui->menu;
-$lang->menuGroups->slide = 'ui';
-
-/* Menu of block module. */
-$lang->block = new stdclass();
-$lang->block->menu = $lang->ui->menu;
-$lang->menuGroups->block  = 'ui';
-
-/* Menu of tree module. */
-$lang->links = new stdclass();
-$lang->links->menu = $lang->site->menu;
-$lang->menuGroups->links = 'site';
 
 /* The error messages. */
 $lang->error = new stdclass();

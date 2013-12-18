@@ -493,7 +493,7 @@ class router
      */
     protected function setModuleRoot()
     {
-        $this->moduleRoot = $this->appRoot . DS;
+        $this->moduleRoot = $this->appRoot;
     }
 
     /**
@@ -692,12 +692,14 @@ class router
     /**
      * Get the $moduleRoot var
      * 
+     * @param  string $appName 
      * @access public
      * @return string
      */
-    public function getModuleRoot()
+    public function getModuleRoot($appName = '')
     {
-        return $this->moduleRoot;
+        if($appName == '') return $this->moduleRoot;
+        return dirname($this->moduleRoot) . DS . $appName . DS;
     }
 
     /**
@@ -993,13 +995,18 @@ class router
     public function loadCommon()
     {
         $this->setModuleName('common');
-        if($this->setControlFile($exitIfNone = false))
+        $commonModelFile = helper::setModelFile('common');
+        if(file_exists($commonModelFile))
         {
-            include $this->controlFile;
-            if(class_exists('common'))
+            helper::import($commonModelFile);
+            if(class_exists('extcommonModel'))
             {
-                return new common();
-            }    
+                return new extcommonModel();
+            }
+            elseif(class_exists('commonModel'))
+            {
+                return new commonModel();
+            }
             else
             {
                 return false;
@@ -1029,6 +1036,7 @@ class router
     public function setControlFile($exitIfNone = true)
     {
         $this->controlFile = $this->moduleRoot . $this->moduleName . DS . 'control.php';
+        if(!is_file($this->controlFile)) $this->controlFile = $this->basePath . 'app' . DS . 'sys' . DS . $this->moduleName . DS . 'control.php';
         if(!is_file($this->controlFile))
         {
             $this->triggerError("the control file $this->controlFile not found.", __FILE__, __LINE__, $exitIfNone);
@@ -1052,14 +1060,17 @@ class router
     /**
      * Get the path of one module.
      * 
-     * @param  string $moduleName    the module name
+     * @param  string $moduleName the module name
+     * @param  string $appName    the app name
      * @access public
      * @return string the module path
      */
-    public function getModulePath($moduleName = '')
+    public function getModulePath($moduleName = '', $appName = '')
     {
         if($moduleName == '') $moduleName = $this->moduleName;
-        return $this->getModuleRoot() . strtolower(trim($moduleName)) . DS;
+        $modulePath = $this->getModuleRoot($appName) . strtolower(trim($moduleName)) . DS;
+        if(!is_dir($modulePath)) $modulePath = $this->getModuleRoot('sys') . strtolower(trim($moduleName)) . DS;
+        return $modulePath;
     }
 
     /**
@@ -1376,7 +1387,7 @@ class router
         $className = strtolower($className);
 
         /* Search in $appLibRoot. */
-        $classFile = $this->appLibRoot . $className;
+        $classFile = $this->coreLibRoot . $className;
         if(is_dir($classFile)) $classFile .= DS . $className;
         $classFile .= '.class.php';
 

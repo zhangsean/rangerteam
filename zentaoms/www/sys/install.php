@@ -11,7 +11,7 @@
  */
 error_reporting(E_ALL);
 session_start();
-define('IN_INSTALL', true);
+define('RUN_MODE', 'install');
 
 /* Load the framework. */
 include '../../framework/router.class.php';

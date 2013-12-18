@@ -10,7 +10,7 @@
  * @link        http://www.zentao.net
  */
 /* Set the error reporting. */
-error_reporting(0);
+error_reporting(E_ALL);
 
 /* Start output buffer. */
 ob_start();
@@ -22,6 +22,7 @@ include '../framework/model.class.php';
 include '../framework/helper.class.php';
 
 /* Log the time and define the run mode. */
+define('RUN_MODE', 'front');
 $startTime = getTime();
 
 /* Instance the app. */
@@ -30,14 +31,6 @@ $app = router::createApp('ips');
 /* Check the reqeust is getconfig or not. Check installed or not. */
 if(isset($_GET['mode']) and $_GET['mode'] == 'getconfig') die($app->exportConfig());
 if(!isset($config->installed) or !$config->installed) die(header('location: sys/install.php'));
-
-/* Detect mobile. */
-$mobile = $app->loadClass('mobile');
-if(!$mobile->isTablet() and $mobile->isMobile())
-{
-    $config->default->view = 'mhtml';
-    helper::setViewType();
-}
 
 /* Run the app. */
 $common = $app->loadCommon();

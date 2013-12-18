@@ -23,7 +23,6 @@ class commonModel extends model
         $this->startSession();
         $this->setUser();
         $this->loadConfigFromDB();
-        $this->loadAlias();
     }
 
     /**
@@ -93,7 +92,7 @@ class commonModel extends model
         if($this->isOpenMethod($module, $method)) return true;
 
         /* If no $app->user yet, go to the login pae. */
-        if(RUN_MODE == 'admin' and $this->app->user->account == 'guest')
+        if($this->app->user->account == 'guest')
         {
             $referer  = helper::safe64Encode($this->app->getURI(true));
             die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
@@ -186,6 +185,8 @@ class commonModel extends model
     {   
         if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey', $method)) return true;
         if($module == 'api'  and $method == 'getsessionid') return true;
+        if($module == 'misc'  and $method == 'ping') return true;
+        if($module == 'sso'  and strpos(',auth|check', $method)) return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;
 
@@ -683,22 +684,5 @@ class commonModel extends model
         $config->requestType = 'GET';
 
         return $link;
-    }
-    
-    /**
-     * Load category and page alias. 
-     *
-     * @access public
-     * @return void
-     */
-    public function loadAlias()
-    {
-        if(version_compare($this->loadModel('setting')->getVersion(), 1.4) <= 0) return true;
-
-        $this->config->seo->alias->category = $this->dao->select('alias, id as category, type as module')->from(TABLE_CATEGORY)->where('alias')->ne('')->andWhere('type')->in('article,product')->fetchAll('alias');
-        $this->config->seo->alias->page     = $this->dao->select("alias, id, 'page' as module")->from(TABLE_ARTICLE)->where('type')->eq('page')->fetchAll('alias');
-
-        $this->config->categoryAlias = array();
-        foreach($this->config->seo->alias->category as $alias => $category) $this->config->categoryAlias[$category->category] = $alias;
     }
 }
