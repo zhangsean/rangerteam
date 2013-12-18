@@ -590,7 +590,9 @@ function getWebRoot()
         $path = empty($path) ? '/' : preg_replace('/\/www$/', '/www/', $path);
     }
 
-    return substr($path, 0, (strrpos($path, '/') + 1));
+    $path = dirname(dirname($path));
+    if($path == '/') return $path;
+    return $path . '/';
 }
 
 /**
