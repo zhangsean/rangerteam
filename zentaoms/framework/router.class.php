@@ -106,6 +106,22 @@ class router
     private $moduleRoot;
 
     /**
+     * The root directory of static.
+     * 
+     * @var string
+     * @access private
+     */
+    private $staticRoot;
+
+    /**
+     * The root directory of data.
+     * 
+     * @var string
+     * @access private
+     */
+    private $dataRoot;
+
+    /**
      * The root directory of theme.
      * 
      * @var string
@@ -299,6 +315,8 @@ class router
         $this->setLogRoot();
         $this->setConfigRoot();
         $this->setModuleRoot();
+        $this->setStaticRoot();
+        $this->setDataRoot();
         $this->setThemeRoot();
 
         $this->setSuperVars();
@@ -408,6 +426,7 @@ class router
         {
             $this->appRoot = realpath($appRoot) . $this->pathFix;
         }
+
         if(!is_dir($this->appRoot)) $this->triggerError("The app you call not noud in {$this->appRoot}", __FILE__, __LINE__, $exit = true);
     }
 
@@ -430,7 +449,7 @@ class router
      */
     protected function setTmpRoot()
     {
-        $this->tmpRoot = $this->appRoot . 'tmp' . $this->pathFix;
+        $this->tmpRoot = $this->basePath . 'tmp' . $this->pathFix;
     }
 
     /**
@@ -463,7 +482,7 @@ class router
      */
     protected function setConfigRoot()
     {
-        $this->configRoot = $this->appRoot . 'config' . $this->pathFix;
+        $this->configRoot = $this->basePath . 'config' . $this->pathFix;
     }
 
     /**
@@ -474,7 +493,29 @@ class router
      */
     protected function setModuleRoot()
     {
-        $this->moduleRoot = $this->appRoot . 'module' . $this->pathFix;
+        $this->moduleRoot = $this->appRoot . $this->pathFix;
+    }
+
+    /**
+     * Set the static root.
+     * 
+     * @access protected
+     * @return void
+     */
+    protected function setStaticRoot()
+    {
+        $this->staticRoot = $this->basePath . 'www' . $this->pathFix;
+    }
+
+    /**
+     * Set the data root.
+     * 
+     * @access protected
+     * @return void
+     */
+    protected function setDataRoot()
+    {
+        $this->dataRoot = $this->staticRoot . 'data' . $this->pathFix;
     }
 
     /**
@@ -485,7 +526,7 @@ class router
      */
     protected function setThemeRoot()
     {
-        $this->themeRoot = $this->appRoot . 'www' . $this->pathFix . 'theme' . $this->pathFix;
+        $this->themeRoot = $this->staticRoot . 'theme' . $this->pathFix;
     }
 
     /**
@@ -657,6 +698,28 @@ class router
     public function getModuleRoot()
     {
         return $this->moduleRoot;
+    }
+
+    /**
+     * Get the $staticRoot var
+     * 
+     * @access public
+     * @return string
+     */
+    public function getStaticRoot()
+    {
+        return $this->staticRoot;
+    }
+
+    /**
+     * Get the $dataRoot var
+     * 
+     * @access public
+     * @return string
+     */
+    public function getDataRoot()
+    {
+        return $this->dataRoot;
     }
 
     /**
