@@ -1,13 +1,13 @@
 <?php
 /**
- * The router file of chanzhiEPS.
+ * The admin router file of ZenTaoMS.
  *
- * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商业软件，非开源软件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     chanzhiEPS
+ * @package     ZenTaoMS
  * @version     $Id$
- * @link        http://www.chanzhi.org
+ * @link        http://www.zentao.net
  */
 /* Turn off error reporting first. */
 error_reporting(0);
@@ -18,18 +18,20 @@ ob_start();
 /* Define the run mode as admin. */
 define('RUN_MODE', 'admin');
 
-/* Load the framework.*/
-include 'loader.php';
+/* Load the framework. */
+include '../framework/router.class.php';
+include '../framework/control.class.php';
+include '../framework/model.class.php';
+include '../framework/helper.class.php';
+
+/* Log the time. */
+$startTime = getTime();
 
 /* Instance the app. */
-$app = router::createApp('chanzhi', $systemRoot);
-$config = $app->config;
-
-/* Check the reqeust is getconfig or not. Check installed or not. */
-if(isset($_GET['mode']) and $_GET['mode'] == 'getconfig') die($app->exportConfig());
-if(!isset($config->installed) or !$config->installed) die(header('location: install.php'));
+$app = router::createApp('ips');
 
 /* Change the request settings. */
+$config = $app->config;
 $config->frontRequestType = $config->requestType;
 $config->requestType = 'GET';
 $config->default->module = 'admin'; 

@@ -2,10 +2,10 @@
 /**
  * The install router file of ZenTaoPMS.
  *
- * @copyright   Copyright 2009-2013 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商业软件，非开源软件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     ZenTaoPMS
+ * @package     ZenTaoMS
  * @version     $Id: install.php 4677 2013-04-26 06:23:58Z chencongzhi520@gmail.com $
  * @link        http://www.zentao.net
  */

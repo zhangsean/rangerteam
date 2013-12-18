@@ -1,12 +1,12 @@
 <?php
 /**
- * The upgrade router file of ZenTaoPMS.
+ * The upgrade router file of ZenTaoMS.
  *
- * @copyright   Copyright 2009-2013 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商业软件，非开源软件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     ZenTaoPMS
- * @version     $Id: upgrade.php 4677 2013-04-26 06:23:58Z chencongzhi520@gmail.com $
+ * @package     ZenTaoMS
+ * @version     $Id$
  * @link        http://www.zentao.net
  */
 /* Judge my.php exists or not. */
@@ -28,7 +28,7 @@ include '../framework/model.class.php';
 include '../framework/helper.class.php';
 
 /* Instance the app. */
-$app = router::createApp('pms', dirname(dirname(__FILE__)));
+$app = router::createApp('sys');
 $common = $app->loadCommon();
 
 /* Reset the config params to make sure the install program will be lauched. */
@@ -38,7 +38,7 @@ $app->setDebug();
 
 /* Check the installed version is the latest or not. */
 $config->installedVersion = $common->loadModel('setting')->getVersion();
-if(!$_SERVER['HTTP_X_REQUESTED_WITH'] and version_compare($config->version, $config->installedVersion) <= 0) die(header('location: index.php'));
+if(!$_SERVER['HTTP_X_REQUESTED_WITH'] and version_compare($config->version, $config->installedVersion) <= 0) die(header('location: ../index.php'));
 
 /* Run it. */
 $app->parseRequest();
