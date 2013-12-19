@@ -48,7 +48,7 @@
           <th class='w-130px'><?php echo $lang->user->dept;?></th>
           <th class='w-80px'><?php echo $lang->user->realname;?></th>
           <th class='w-80px'><?php echo $lang->user->account;?></th>
-          <th class='w-60px'><?php echo $lang->user->gendar;?></th>
+          <th class='w-60px'><?php echo $lang->user->gender;?></th>
           <th class='w-80px'><?php echo $lang->user->role;?></th>
           <th class='w-150px'><?php echo $lang->user->email;?></th>
           <th class='w-100px'><?php echo $lang->user->mobile;?></th>
@@ -66,7 +66,7 @@
         <td class="a-left" title="<?php echo $dept?>"><?php echo $dept;?></td>
         <td title="<?php echo $user->realname?>"><?php echo $user->realname;?></td>
         <td title="<?php echo $user->account?>"><?php echo $user->account;?></td>
-        <td><?php $gendar = $user->gendar; echo $lang->user->gendarList->$gendar;?></td>
+        <td><?php $gender = $user->gender; echo $lang->user->gender->$gender;?></td>
         <td><?php echo $lang->user->roleList[$user->role];?></td>
         <td title="<?php echo $user->email?>"><?php echo $user->email;?></td>
         <td title="<?php echo $user->mobile?>"><?php echo $user->mobile;?></td>

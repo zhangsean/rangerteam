@@ -42,8 +42,8 @@
           <td><?php echo html::select('role', $lang->user->roleList, $user->role, "class='select-3'");?></td>
         </tr>  
         <tr>
-          <th><?php echo $lang->user->gendar;?></th>
-          <td><?php unset($lang->user->gendarList->u); echo html::radio('gendar', $lang->user->gendarList, $user->gendar);?></td>
+          <th><?php echo $lang->user->gender;?></th>
+          <td><?php unset($lang->user->genderList->u); echo html::radio('gender', $lang->user->genderList, $user->gender);?></td>
         </tr>  
         <tr>
           <th><?php echo $lang->user->company;?></th>
