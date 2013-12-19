@@ -20,12 +20,6 @@ $themeRoot = $webRoot . "theme/";
   <?php
   if(!isset($title))    $title    = '';
   if(!empty($title))    $title   .= $lang->minus;
-  if(empty($keywords)) $keywords  = $config->site->keywords;
-  if(empty($desc))      $desc     = $config->site->desc;
-
-  echo html::title($title . $config->site->name);
-  echo html::meta('keywords',    strip_tags($keywords));
-  echo html::meta('description', strip_tags($desc));
 
   js::exportConfigVars();
   if($config->debug)
@@ -48,7 +42,6 @@ $themeRoot = $webRoot . "theme/";
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : html::icon($webRoot . 'favicon.ico');
-  echo html::rss($config->webRoot .'rss.xml', $config->site->name);
 ?>
 <!--[if lt IE 9]>
 <?php

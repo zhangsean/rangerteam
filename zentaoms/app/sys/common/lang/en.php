@@ -18,6 +18,7 @@ $lang->raquo   = '&raquo;';
 $lang->minus   = ' - ';
 $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
+$lang->submitting   = 'Saving...';
 
 /* Lang items for xirang. */
 $lang->chanzhiEPS  = 'chanzhiEPS';
