@@ -95,7 +95,7 @@ define('TABLE_USERQUERY', 'sys_userQuery');
 define('TABLE_ACTION',    'sys_action');
 define('TABLE_FILE',      'sys_file');
 define('TABLE_HISTORY',   'sys_history');
-define('TABLE_TREE',      'sys_tree');
+define('TABLE_CATEGORY',  'sys_category');
 define('TABLE_EXTENSION', 'sys_extension`');
 define('TABLE_WEBAPP',    'sys_webapp`');
 define('TABLE_LANG',      'sys_lang`');
