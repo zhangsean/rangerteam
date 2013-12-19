@@ -18,6 +18,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 /* Basic settings. */
 $config = new config();
 $config->version      = '0.1';             // The version of zentaoms. Don't change it.
+$config->debug        = true;              // Turn debug on or off.
 $config->charset      = 'UTF-8';           // The charset of zentaoms.
 $config->cookieLife   = time() + 2592000;  // The cookie life time.
 $config->timezone     = 'Asia/Shanghai';   // The time zone setting, for more see http://www.php.net/manual/en/timezones.php
