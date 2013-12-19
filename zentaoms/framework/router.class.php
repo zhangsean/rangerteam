@@ -1049,11 +1049,7 @@ class router
     public function setControlFile($exitIfNone = true)
     {
         $this->controlFile = $this->moduleRoot . $this->moduleName . DS . 'control.php';
-        if(!is_file($this->controlFile))
-        {
-            $this->appName     = 'sys';
-            $this->controlFile = $this->basePath . 'app' . DS . $this->appName . DS . $this->moduleName . DS . 'control.php';
-        }
+        if(!is_file($this->controlFile)) $this->controlFile = $this->basePath . 'app' . DS . 'sys' . DS . $this->moduleName . DS . 'control.php';
         if(!is_file($this->controlFile))
         {
             $this->triggerError("the control file $this->controlFile not found.", __FILE__, __LINE__, $exitIfNone);
@@ -1104,7 +1100,11 @@ class router
      */
     public function getModuleExtPath($appName, $moduleName, $ext)
     {
-        return $this->getModuleRoot($appName) . strtolower(trim($moduleName)) . DS . 'ext' . DS . $ext . DS;
+        $moduleName = strtolower(trim($moduleName));
+
+        $moduleExtPath = $this->getModuleRoot($appName) . $moduleName . DS . 'ext' . DS . $ext . DS;
+        if(!is_dir($moduleExtPath)) $moduleExtPath = $this->getModuleRoot('sys') . $moduleName . DS . 'ext' . DS . $ext . DS;
+        return $moduleExtPath;
     }
 
     /**
@@ -1117,6 +1117,7 @@ class router
     {
         $moduleExtPath = $this->getModuleExtPath($this->appName, $this->moduleName, 'control');
         $this->extActionFile = $moduleExtPath . $this->methodName . '.php';
+        if(!file_exists($this->extActionFile)) $this->extActionFile = $this->getModuleExtPath('sys', $this->moduleName, 'control') . $this->methodName . '.php';
         return file_exists($this->extActionFile);
     }
 
