@@ -1,6 +1,6 @@
 <?php
 $lang->entry->common    = 'App';
-$lang->entry->browse    = 'App list';
+$lang->entry->admin     = 'App list';
 $lang->entry->create    = 'Create App';
 $lang->entry->edit      = 'Edit App';
 $lang->entry->delete    = 'Delete App';

@@ -9,9 +9,9 @@ class entry extends control
      */
     public function admin()
     {
-        $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->browse;
+        $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->admin;
         $this->view->position[] = $this->lang->entry->common;
-        $this->view->position[] = $this->lang->entry->browse;
+        $this->view->position[] = $this->lang->entry->admin;
         $this->view->entries    = $this->entry->getEntries();
         $this->display();
     }

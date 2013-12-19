@@ -32,4 +32,4 @@
   </tfoot>
   <?php endif;?>
 </table>
-<?php include '../../common/view/footer.lite.html.php';?>
+<?php include '../../common/view/footer.admin.html.php';?>
