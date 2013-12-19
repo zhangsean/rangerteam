@@ -46,4 +46,4 @@
     <tr><td></td><td colspan='2' class='a-left'><?php echo html::submitButton() . html::backButton();?></td></tr>
   </table>
 </form>
-<?php include '../../common/ext/view/footer.lite.html.php';?>
+<?php include '../../common/view/footer.lite.html.php';?>

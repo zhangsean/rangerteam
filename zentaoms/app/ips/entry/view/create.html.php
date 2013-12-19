@@ -46,4 +46,4 @@
   </table>
 </form>
 <div class="instruction"><?php echo $lang->entry->instruction;?></div>
-<?php include '../../common/ext/view/footer.lite.html.php';?>
+<?php include '../../common/view/footer.admin.html.php';?>

@@ -2,7 +2,7 @@
 needPing = true;
 $('#submit').click(function()
 {
-    var password = md5(md5(md5($('#password').val()) + $('#account').val()) + random);
+    var password = md5(md5(md5($('#password').val()) + $('#account').val()) + v.random);
 
     loginURL = createLink('user', 'login');
     $.ajax(
