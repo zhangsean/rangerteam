@@ -164,7 +164,7 @@ class helper
 
         /* Else, judge whether needed update or not .*/
         $needUpdate      = false;
-        $mergedModelFile = $app->getTmpRoot() . 'model' . $app->getPathFix() . $moduleName . '.php';
+        $mergedModelFile = $app->getTmpRoot() . 'model' . DS . $moduleName . '.php';
         $lastTime        = file_exists($mergedModelFile) ? filemtime($mergedModelFile) : 0;
 
         while(!$needUpdate)
