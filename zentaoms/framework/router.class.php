@@ -1049,7 +1049,11 @@ class router
     public function setControlFile($exitIfNone = true)
     {
         $this->controlFile = $this->moduleRoot . $this->moduleName . DS . 'control.php';
-        if(!is_file($this->controlFile)) $this->controlFile = $this->basePath . 'app' . DS . 'sys' . DS . $this->moduleName . DS . 'control.php';
+        if(!is_file($this->controlFile))
+        {
+            $this->appName     = 'sys';
+            $this->controlFile = $this->basePath . 'app' . DS . $this->appName . DS . $this->moduleName . DS . 'control.php';
+        }
         if(!is_file($this->controlFile))
         {
             $this->triggerError("the control file $this->controlFile not found.", __FILE__, __LINE__, $exitIfNone);
