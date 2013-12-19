@@ -20,6 +20,8 @@ $lang->entry->confirmDelete = 'Are you sure to delete this App?';
 $lang->entry->note = new stdClass();
 $lang->entry->note->name    = 'entry name';
 $lang->entry->note->code    = 'entry code';
+$lang->entry->note->login   = 'The url of login app';
+$lang->entry->note->logout  = 'The url of logout app';
 $lang->entry->note->visible = 'display on the left bar';
 $lang->entry->note->ip      = "Use comma between two IPs, and support IP segment, for example 192.168.1.*";
 
