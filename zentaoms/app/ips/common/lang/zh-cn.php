@@ -1,7 +1,7 @@
 <?php
 $lang->block = new stdclass();
 
-$lang->menu->entry = 'App|entry|admin|';
+$lang->menu->entry = '应用|entry|admin|';
  
 /* Menu entry. */
 $lang->entry       = new stdclass();
