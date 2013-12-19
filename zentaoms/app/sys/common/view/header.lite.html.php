@@ -5,21 +5,15 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 ?>
 <!DOCTYPE html>
-<?php if(!empty($config->oauth->sina)):?>
-<html xmlns:wb="http://open.weibo.com/wb">
-<?php else:?>
 <html>
-<?php endif;?>
 <head profile="http://www.w3.org/2005/10/profile">
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <?php if($this->app->getModuleName() == 'user' and $this->app->getMethodName() == 'deny'):?>
-  <meta http-equiv='refresh' content="5;url='<?php echo helper::createLink('index');?>'">
-  <?php endif;?>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <?php
-  if(!isset($title))    $title    = '';
-  if(!empty($title))    $title   .= $lang->minus;
+  if(!isset($title)) $title  = '';
+  if(!empty($title)) $title .= $lang->minus;
+  echo html::title($title . $lang->zentaoms);
 
   js::exportConfigVars();
   if($config->debug)
@@ -38,10 +32,7 @@ $themeRoot = $webRoot . "theme/";
   }
 
   if(RUN_MODE == 'admin') css::import($themeRoot . 'default/admin.css');
-  if(RUN_MODE == 'front' and $config->site->theme) css::import($themeRoot . $config->site->theme . '/style.css');
   if(isset($pageCSS)) css::internal($pageCSS);
-
-  echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : html::icon($webRoot . 'favicon.ico');
 ?>
 <!--[if lt IE 9]>
 <?php
@@ -50,13 +41,5 @@ js::import($jsRoot . 'respond/min.js');
 ?>
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
-<?php
-if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
-if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
-if(!empty($sina->verification)) echo $sina->verification; 
-if(!empty($qq->verification))   echo $qq->verification;
-if(empty($sina->verification) && !empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
-?>
-<?php if(RUN_MODE == 'front') $this->block->printRegion($layouts, 'all', 'header');?>
 </head>
 <body>
