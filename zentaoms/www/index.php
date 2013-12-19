@@ -1,2 +1,1 @@
-<?php
-header('location:/ips');
+<?php header('location: /ips');?>
