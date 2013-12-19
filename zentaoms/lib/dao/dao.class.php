@@ -4,7 +4,7 @@
  *
  * The author disclaims copyright to this source code.  In place of
  * a legal notice, here is a blessing:
- * 
+ *
  *  May you do good and not evil.
  *  May you find forgiveness for yourself and forgive others.
  *  May you share freely, never taking more than you give.
@@ -12,7 +12,7 @@
 
 /**
  * DAO, data access object.
- * 
+ *
  * @package framework
  */
 class dao
@@ -226,6 +226,39 @@ class dao
     }
 
     /**
+     * Begin Transaction 
+     * 
+     * @access public
+     * @return void
+     */
+    public function begin()
+    {
+        $this->dbh->beginTransaction();
+    }
+
+    /**
+     * Roll back  
+     * 
+     * @access public
+     * @return void
+     */
+    public function rollBack()
+    {
+        $this->dbh->rollBack();
+    }
+
+    /**
+     * Commit  
+     * 
+     * @access public
+     * @return void
+     */
+    public function commit()
+    {
+        $this->dbh->commit();
+    }
+
+    /**
      * The select method, call sql::select().
      * 
      * @param  string $fields 
@@ -346,14 +379,15 @@ class dao
     /**
      * Set the data to update or insert.
      * 
-     * @param  object $data         the data object or array
+     * @param  object $data        the data object or array
+     * @param  object $skipFields  the fields to skip.
      * @access public
      * @return object the dao object self.
      */
-    public function data($data)
+    public function data($data, $skipFields = '')
     {
         if(!is_object($data)) $data = (object)$data;
-        $this->sqlobj->data($data);
+        $this->sqlobj->data($data, $skipFields);
         return $this;
     }
 
@@ -382,7 +416,7 @@ class dao
     }
 
     /**
-     * Process the sql, replace the table, fields.
+     * Process the sql, replace the table, fields and add the company condition.
      * 
      * @access private
      * @return string the sql string after process.
@@ -478,16 +512,13 @@ class dao
         if($pager->recTotal == 0)
         {
             /* Get the SELECT, FROM position, thus get the fields, replace it by count(*). */
-            $sql       = $this->get();
-            $selectPOS = strpos($sql, 'SELECT') + strlen('SELECT');
-            $fromPOS   = strpos($sql, 'FROM');
-            $fields    = substr($sql, $selectPOS, $fromPOS - $selectPOS );
-            $sql       = str_replace($fields, ' COUNT(*) AS recTotal ', $sql);
+            $sql       = $this->processSQL();
+            $sql       = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS ', $sql);
 
             /* Remove the part after order and limit. */
             $subLength = strlen($sql);
-            $orderPOS  = strripos($sql, 'order');
-            $limitPOS  = strripos($sql , 'limit');
+            $orderPOS  = strripos($sql, DAO::ORDERBY);
+            $limitPOS  = strripos($sql , DAO::LIMIT);
             if($limitPOS) $subLength = $limitPOS;
             if($orderPOS) $subLength = $orderPOS;
             $sql = substr($sql, 0, $subLength);
@@ -503,6 +534,9 @@ class dao
                 $this->app->triggerError($e->getMessage() . "<p>The sql is: $sql</p>", __FILE__, __LINE__, $exit = true);
             }
 
+            $sql  = 'SELECT FOUND_ROWS() as recTotal;';
+            $row = $this->dbh->query($sql)->fetch();
+ 
             $pager->setRecTotal($row->recTotal);
             $pager->setPageTotal();
         }
@@ -700,14 +734,14 @@ class dao
      * @access public
      * @return object the dao object self.
      */
-    public function check($fieldName, $funcName)
+    public function check($fieldName, $funcName, $condition = '')
     {
         /* If no this field in the data, reuturn. */
-        if(!isset($this->sqlobj->data->$fieldName)) return $this;
+        if(!isset($this->sqlobj->data->$fieldName) && $funcName != 'notempty') return $this;
 
         /* Set the field label and value. */
         global $lang, $config, $app;
-        $table      = strtolower(str_replace(array($config->db->prefix, '`'), '', $this->table));
+        $table      = strtolower(str_replace($config->db->prefix, '', $this->table));
         $fieldLabel = isset($lang->$table->$fieldName) ? $lang->$table->$fieldName : $fieldName;
         $value = $this->sqlobj->data->$fieldName;
         
@@ -716,7 +750,7 @@ class dao
         {
             $args = func_get_args();
             $sql  = "SELECT COUNT(*) AS count FROM $this->table WHERE `$fieldName` = " . $this->sqlobj->quote($value); 
-            if(isset($args[2])) $sql .= ' AND ' . $args[2];
+            if($condition) $sql .= ' AND ' . $condition;
             try
             {
                  $row = $this->dbh->query($sql)->fetch();
@@ -898,26 +932,14 @@ class dao
     /**
      * Get the errors.
      * 
-     * @param  boolean $join 
      * @access public
      * @return array
      */
-    public static function getError($join = false)
+    public static function getError()
     {
         $errors = dao::$errors;
         dao::$errors = array();     // Must clear it.
-
-        if(!$join) return $errors;
-
-        if(is_array($errors))
-        {
-            $message = '';
-            foreach($errors as $item)
-            {
-                is_array($item) ? $message .= join('\n', $item) . '\n' : $message .= $item . '\n';
-            }
-            return $message;
-        }
+        return $errors;
     }
 
     /**
@@ -1048,6 +1070,14 @@ class sql
     private $conditionIsTrue = false;
 
     /**
+     * If in mark or not.
+     * 
+     * @var bool
+     * @access private;
+     */
+    private $inMark = false;
+
+    /**
      * Magic quote or not.
      * 
      * @var bool
@@ -1154,19 +1184,26 @@ class sql
      * Join the data items by key = value.
      * 
      * @param  object $data 
+     * @param  string $skipFields   the fields to skip.
      * @access public
      * @return object the sql object.
      */
-    public function data($data)
+    public function data($data, $skipFields = '')
     {
         $this->data = $data;
-        foreach($data as $field => $value) $this->sql .= "`$field` = " . $this->quote($value) . ',';
+        if($skipFields) $skipFields = ',' . str_replace(' ', '', $skipFields) . ',';
+
+        foreach($data as $field => $value)
+        {
+            if(strpos($skipFields, ",$field,") !== false) continue;
+            $this->sql .= "`$field` = " . $this->quote($value) . ',';
+        }
         $this->sql = rtrim($this->sql, ',');    // Remove the last ','.
         return $this;
     }
 
     /**
-     * Aadd an '(' at left.
+     * Add an '(' at left.
      * 
      * @param  int    $count 
      * @access public
@@ -1175,11 +1212,12 @@ class sql
     public function markLeft($count = 1)
     {
         $this->sql .= str_repeat('(', $count);
+        $this->inMark = true;
         return $this;
     }
 
     /**
-     * Add an ')' ad right.
+     * Add an ')' at right.
      * 
      * @param  int    $count 
      * @access public
@@ -1188,6 +1226,7 @@ class sql
     public function markRight($count = 1)
     {
         $this->sql .= str_repeat(')', $count);
+        $this->inMark = false;
         return $this;
     }
 
@@ -1200,6 +1239,9 @@ class sql
      */
     public function set($set)
     {
+        /* Add ` to avoid keywords of mysql. */
+        if(strpos($set, '=') ===false) $set = '`' . trim($set, '`') . '`';
+
         if($this->isFirstSet)
         {
             $this->sql .= " $set ";
@@ -1313,7 +1355,8 @@ class sql
             $condition = $arg1;
         }
 
-        $this->sql .= ' ' . DAO::WHERE ." $condition ";
+        if(!$this->inMark) $this->sql .= ' ' . DAO::WHERE ." $condition ";
+        if($this->inMark) $this->sql .= " $condition ";
         return $this;
     } 
 
@@ -1489,34 +1532,6 @@ class sql
     }
 
     /**
-     * Create the not like by part.
-     * 
-     * @param  string $string 
-     * @access public
-     * @return object the sql object.
-     */
-    public function notLike($string)
-    {
-        if($this->inCondition and !$this->conditionIsTrue) return $this;
-        $this->sql .= "NOT LIKE " . $this->quote($string);
-        return $this;
-    }
-
-    /**
-     * Create the find_in_set by part. 
-     * 
-     * @param  int    $str 
-     * @param  int    $strList 
-     * @access public
-     * @return object the sql object.
-     */
-    public function findInSet($str, $strList)
-    {
-        if($this->inCondition and !$this->conditionIsTrue) return $this;
-        $this->sql .= "FIND_IN_SET(" . $str . "," . $strList . ")";
-    }
-    
-    /**
      * Create the order by part.
      * 
      * @param  string $order 
@@ -1525,37 +1540,8 @@ class sql
      */
     public function orderBy($order)
     {
-        if($this->inCondition and !$this->conditionIsTrue) return $this;
-
-        $order  = str_replace(array('|', '', '_'), ' ', $order);
-
-        /* Add "`" in order string. */
-        /* When order has limit string. */
-        $pos    = stripos($order, 'limit');
-        $orders = $pos ? substr($order, 0, $pos) : $order;
-        $limit  = $pos ? substr($order, $pos) : '';
-
-        $orders = explode(',', $orders);
-        foreach($orders as $i => $order)
-        {
-            $orderParse = explode(' ', trim($order));
-            foreach($orderParse as $key => $value)
-            {
-                $value = trim($value);
-                if(empty($value) or strtolower($value) == 'desc' or strtolower($value) == 'asc') continue;
-                $field = trim($value, '`');
-
-                /* such as t1.id field. */
-                if(strpos($value, '.') !== false) list($table, $field) = explode('.', $field);
-                $field = "`$field`";
-
-                $orderParse[$key] = isset($table) ? $table . '.' . $field :  $field;
-                unset($table);
-            }
-            $orders[$i] = join(' ', $orderParse);
-        }
-        $order = join(',', $orders) . ' ' . $limit;
-
+        $order = str_replace(array('|', '', '_'), ' ', $order);
+        $order = str_replace('left', '`left`', $order); // process the left to `left`.
         $this->sql .= ' ' . DAO::ORDERBY . " $order";
         return $this;
     }
