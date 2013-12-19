@@ -18,8 +18,3 @@ public function getPairs($dept = 0)
         ->orderBy('id_asc')
         ->fetchPairs('account', 'realname');
 }
-
-public function createPassword($password, $account, $join)                                                   
-{   
-    return md5($password);                                                           
-}
