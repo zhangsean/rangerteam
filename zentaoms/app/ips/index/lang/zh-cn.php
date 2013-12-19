@@ -9,9 +9,14 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->index->common  = '首页';
-$lang->index->index   = '首页';
-$lang->index->aboutus = '关于我们';
-$lang->index->news    = '新闻动态';
-$lang->index->blog    = '最近博客';
-$lang->index->contact = '联系我们';
+$lang->index->allEntries = '所有应用';
+$lang->index->addEntry   = '添加应用';
+$lang->index->userInfo   = '查看个人信息';
+$lang->index->set        = '系统配置';
+$lang->index->theme      = '更换主题';
+
+$lang->index->countEntries = "共 <span class='apps-count'></span> 款应用";
+
+$lang->index->entryDesc = new stdclass();
+$lang->index->entryDesc->installed = '查看所有已安装应用';
+$lang->index->entryDesc->profile   = '查看或编辑个人资料';

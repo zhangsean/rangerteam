@@ -9,9 +9,14 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->index->common  = 'Home';
-$lang->index->index   = 'Home';
-$lang->index->aboutus = 'About';
-$lang->index->news    = 'News';
-$lang->index->blog    = 'Blos';
-$lang->index->contact = 'Contact';
+$lang->index->allEntries = 'All Entries';
+$lang->index->addEntry   = 'Add';
+$lang->index->userInfo   = 'User Info';
+$lang->index->set        = 'Setting';
+$lang->index->theme      = 'Theme';
+
+$lang->index->countEntries = "A total of <span class='apps-count'></span> entries";
+
+$lang->index->entryDesc = new stdclass();
+$lang->index->entryDesc->installed = 'View all installed entries';
+$lang->index->entryDesc->profile   = 'View or edit profile';

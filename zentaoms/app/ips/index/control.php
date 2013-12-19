@@ -30,14 +30,20 @@ class index extends control
      */
     public function index()
     {
-        $this->app->loadLang('user');
-        
-        $this->view->products = $this->loadModel('product')->getLatest(0, 3);
+        $entries = $this->loadModel('entry')->getEntries();
 
-        $this->view->slides         = $this->loadModel('slide')->getList();
-        $this->view->latestArticles = $this->loadModel('article')->getLatest(0, 8);
-        $this->view->latestBlogs    = $this->loadModel('article')->getLatest(0, 8, 'blog');
-        $this->view->contact        = $this->loadModel('company')->getContact();
+        $leftBarEntry = ',';
+        $allEntries   = '';
+        foreach($entries as $entry)
+        {
+            if($entry->visible) $leftBarEntry .= $entry->id . ',';
+            $ssoLoginLink = $this->createLink('entry', 'visit', "entryID=$entry->id");
+            $logo         = $entry->logoPath ? $entry->logoPath : '';
+            $allEntries  .= "entries['$entry->id'] = new entry('$entry->id', '$ssoLoginLink', '$entry->name', '$entry->openMode', '', 'max', null, null, '$logo');\n";
+        }
+
+        $this->view->allEntries   = $allEntries;
+        $this->view->leftBarEntry = $leftBarEntry;
         $this->display();
     }
 }
