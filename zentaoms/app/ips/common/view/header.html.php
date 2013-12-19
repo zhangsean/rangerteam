@@ -1,6 +1,6 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php 
-include '../../../sys/common/view/header.lite.html.php';
+include 'header.lite.html.php';
 js::set('lang', $lang->js);
 ?>
 <div class='container'>
