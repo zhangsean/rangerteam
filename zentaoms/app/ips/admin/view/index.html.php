@@ -12,15 +12,6 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='container' id='shortcutBox'>
-  <?php if(strpos($this->server->php_self, '/admin.php') !== false  && empty($this->config->global->ignoreAdminEntry)):?>
-  <form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignore');?>'>
-  <div class="alert alert-danger">
-    <button type="submit" class="close">&times;</button>
-    <strong><?php echo $lang->admin->adminEntry;?></strong>
-  </div>
-  </form>
-  <?php endif;?>
-
   <div class='row'>
     <div class='col-md-4 col-sm-6'> 
       <div class="shortcut article-create">
@@ -29,29 +20,14 @@
     </div>
     <div class='col-md-4 col-sm-6'>
       <div class="shortcut article-admin">
-        <?php echo html::a($this->createLink('product', 'create'), '<h3>' . $lang->admin->shortcuts->createProduct . '</h3>')?>
+        <?php echo html::a($this->createLink('entry', 'create'), '<h3>' . $lang->admin->shortcuts->createEntry . '</h3>')?>
       </div>
     </div>
     <div class='col-md-4 col-sm-6'>
       <div class="shortcut category">
-        <?php echo html::a($this->createLink('comment', 'admin'), '<h3>' . $lang->admin->shortcuts->comment . '</h3>')?>  
+        <?php echo html::a($this->createLink('user', 'create'), '<h3>' . $lang->admin->shortcuts->createUser . '</h3>')?>  
       </div>
     </div>
-    <div class='col-md-4 col-sm-6'>
-      <div class="shortcut site">
-        <?php echo html::a($this->createLink('site', 'setBasic'), '<h3>' . $lang->admin->shortcuts->site . '</h3>')?>
-      </div>
-    </div>
-    <div class='col-md-4 col-sm-6'>
-      <div class="shortcut company">
-        <?php echo html::a($this->createLink('company', 'setBasic'), '<h3>' . $lang->admin->shortcuts->company . '</h3>')?>
-      </div>
-    </div>
-    <div class='col-md-4 col-sm-6'>
-      <div class="shortcut contact">
-        <?php echo html::a($this->createLink('company', 'setcontact'), '<h3>' . $lang->admin->shortcuts->contact . '</h3>')?>  
-      </div>
-    </div>      
   </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
