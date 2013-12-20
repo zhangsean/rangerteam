@@ -121,8 +121,6 @@ class commonModel extends model
             if($app->user->admin != 'super') return false;
         }
 
-        if(!commonModel::isAvailable($module)) return false;
-
         $rights  = $app->user->rights;
         if(isset($rights[strtolower($module)][strtolower($method)])) return true;
         return false;

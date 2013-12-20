@@ -45,4 +45,4 @@
     </table>
   </div>
 </div>
-<?php include '../../common/ext/view/footer.lite.html.php';?>
+<?php include '../../common/view/footer.lite.html.php';?>

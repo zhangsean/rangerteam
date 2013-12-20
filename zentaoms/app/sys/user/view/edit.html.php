@@ -1,6 +1,5 @@
-<?php include '../../common/view/header.html.php';?>
+<?php include '../../common/view/header.lite.html.php';?>
 <div class='row'>
-  <?php include './side.html.php';?>
   <div class='col-md-10'>
     <form method='post' id='ajaxForm' class='form form-inline'>
       <table class='table table-form table-bordered'>
@@ -54,4 +53,6 @@
     </form>
   </div>
 </div>
-<?php include '../../common/view/footer.html.php';?>
+<?php include '../../common/view/footer.lite.html.php';?>
+</body>
+</html>
