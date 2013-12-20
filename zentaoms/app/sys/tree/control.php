@@ -105,7 +105,7 @@ class tree extends control
         else if($category->type == 'dept')
         {
             $this->lang->menuGroups->tree = 'user';
-            $this->view->users = array('' => '') + $this->loadModel('user')->getPairs($category->id);
+            $this->view->users = $this->loadModel('user')->getPairs(null, $category->id);
         }
 
         /* remove left menu. */

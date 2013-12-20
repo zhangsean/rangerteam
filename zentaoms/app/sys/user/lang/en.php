@@ -18,6 +18,8 @@ $lang->user->password  = 'Password';
 $lang->user->password2 = 'Repeat it';
 $lang->user->realname  = 'Name';
 $lang->user->nickname  = 'Nick';
+$lang->user->dept      = 'Dept';
+$lang->user->role      = 'Role';    
 $lang->user->avatar    = 'Avatar';
 $lang->user->birthyear = 'Birthyear';
 $lang->user->birthday  = 'Birthday';
@@ -144,6 +146,26 @@ $lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> Edit <i 
 //$lang->user->control->menus[28] = '<i class="icon-large icon-comments-alt"></i> Messages <i class="icon-chevron-right"></i>|user|message';
 $lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> Threads <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i> Replies <i class="icon-chevron-right"></i>|user|reply';
+
+$lang->dept = new stdclass();  
+$lang->dept->common     = 'Dept';
+$lang->dept->edit       = 'Edit Dept';
+$lang->dept->children   = 'Children';
+$lang->dept->moderators = 'Moderator';
+  
+$lang->dept->menu[] = "User|user|admin";
+$lang->dept->menu[] = "Dept|tree|browse|type=dept";
+
+$lang->user->roleList['']       = ''; 
+$lang->user->roleList['dev']    = 'Developer';
+$lang->user->roleList['qa']     = 'Tester';
+$lang->user->roleList['pm']     = 'Project manager';
+$lang->user->roleList['po']     = 'Product manager';
+$lang->user->roleList['td']     = 'Technical director';
+$lang->user->roleList['pd']     = 'Product director';
+$lang->user->roleList['qd']     = 'Quality director';
+$lang->user->roleList['top']    = 'Top manager';
+$lang->user->roleList['others'] = 'Others';
 
 $lang->user->mailContent = <<<EOT
 <html>

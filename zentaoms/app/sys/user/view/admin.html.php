@@ -21,50 +21,78 @@
     </div>
   </form>
   <div class='c-both'></div>
-  <table class='table table-hover table-striped'>
-    <caption><?php echo $lang->user->list;?></caption>
-    <thead>
-      <tr class='a-center'>
-        <th class='w-60px'><?php echo $lang->user->id;?></th>
-        <th class='w-100px'><?php echo $lang->user->realname;?></th>
-        <th class='w-100px'><?php echo $lang->user->nickname;?></th>
-        <th class='w-80px'><?php echo $lang->user->account;?></th>
-        <th class='w-60px'><?php echo $lang->user->gender;?></th>
-        <th class='a-left'><?php echo $lang->user->company;?></th>
-        <th class='w-150px'><?php echo $lang->user->join;?></th>
-        <th class='w-80px'><?php echo $lang->user->visits;?></th>
-        <th class='w-150px'><?php echo $lang->user->last;?></th>
-        <th class='w-250px'><?php echo $lang->actions;?></th>
+  <div class='col-md-2'>
+    <table class='table table-striped'>
+      <caption><?php echo $lang->dept->common?></caption> 
+      <tr>
+        <td>
+        <?php
+        echo $treeMenu;
+        echo html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit, "class='pull-right'");
+        ?>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-    <?php foreach($users as $user):?>
-    <tr class='a-center'>
-      <td><?php echo $user->id;?></td>
-      <td><?php echo $user->realname;?></td>
-      <td><?php echo $user->nickname;?></td>
-      <td><?php echo $user->account;?></td>
-      <td><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></td>
-      <td class='a-left'><?php echo $user->company;?></td>
-      <td><?php echo $user->join;?></td>
-      <td><?php echo $user->visits;?></td>
-      <td><?php echo $user->last;?></td>
-      <td class='operate'>
-        <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit);?>
-        <div class="btn-group">
-          <a  class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-          <?php foreach($lang->user->forbidDate as $date => $title):?>
-            <li><?php echo html::a($this->createLink('user', 'forbid', "userID={$user->id}&date=$date"), $title, "class='forbider'");?></li>
-          <?php endforeach;?>
-          </ul>
-        </div>
-      </td>
-    </tr>
-    <?php endforeach;?>
-    </tbody>
-    <tfoot><tr><td colspan='10' class='a-right'><?php $pager->show();?></td></tr></tfoot>
-  </table>
+    </table>
+  </div>
+  <div class='col-md-10'>
+    <table class='table table-hover table-striped'>
+      <caption>
+        <?php
+        echo $lang->user->list;
+        echo '<span class="pull-right mr-10px">' . html::a(inlink('create'), $lang->user->create) . '</span>';                                           
+        ?>
+      </caption>
+      <thead>
+        <tr class='a-center'>
+          <th class='w-60px'><?php echo $lang->user->id;?></th>
+          <th class='w-130px'><?php echo $lang->user->dept;?></th>
+          <th class='w-100px'><?php echo $lang->user->realname;?></th>
+          <th class='w-100px'><?php echo $lang->user->nickname;?></th>
+          <th class='w-80px'><?php echo $lang->user->account;?></th>
+          <th class='w-60px'><?php echo $lang->user->gender;?></th>
+          <th class='a-left'><?php echo $lang->user->company;?></th>
+          <th class='w-150px'><?php echo $lang->user->join;?></th>
+          <th class='w-80px'><?php echo $lang->user->visits;?></th>
+          <th class='w-150px'><?php echo $lang->user->last;?></th>
+          <th class='w-250px'><?php echo $lang->actions;?></th>
+        </tr>
+      </thead>
+      <tbody>
+      <?php foreach($users as $user):?>
+      <tr class='a-center'>
+        <td><?php echo $user->id;?></td>
+        <?php $dept = isset($depts[$user->dept]) ? $depts[$user->dept] : ''?>
+        <td class="a-left" title="<?php echo $dept?>"><?php echo $dept;?></td>
+        <td><?php echo $user->realname;?></td>
+        <td><?php echo $user->nickname;?></td>
+        <td><?php echo $user->account;?></td>
+        <td><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></td>
+        <td class='a-left'><?php echo $user->company;?></td>
+        <td><?php echo $user->join;?></td>
+        <td><?php echo $user->visits;?></td>
+        <td><?php echo $user->last;?></td>
+        <td class='operate'>
+          <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit);?>
+          <div class="btn-group">
+            <a  class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+            <?php foreach($lang->user->forbidDate as $date => $title):?>
+              <li><?php echo html::a($this->createLink('user', 'forbid', "userID={$user->id}&date=$date"), $title, "class='forbider'");?></li>
+            <?php endforeach;?>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      <?php endforeach;?>
+      </tbody>
+      <tfoot><tr><td colspan='11' class='a-right'><?php $pager->show();?></td></tr></tfoot>
+    </table>
+  </div>
 </div>
 
+<?php if($deptID != 0):?>
+<script>
+$('#category<?php echo $deptID?>').addClass('active');
+</script>
+<?php endif;?>
 <?php include '../../common/view/footer.admin.html.php';?>

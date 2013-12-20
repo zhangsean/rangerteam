@@ -1,9 +1,7 @@
-<?php include '../../common/view/header.html.php';?>
+<?php include '../../common/view/header.lite.html.php';?>
 <div class='row'>
-  <?php include 'side.html.php';?>
   <div class='col-md-10'>
     <table class='table table-form' id='profile'>
-      <caption><?php echo $lang->user->profile;?></caption>
       <tr>
         <th class='w-100px'><?php echo $lang->user->realname;?></th>
         <td><?php echo $user->realname;?></td>
@@ -47,4 +45,4 @@
     </table>
   </div>
 </div>
-<?php include '../../common/view/footer.html.php';?>
+<?php include '../../common/ext/view/footer.lite.html.php';?>

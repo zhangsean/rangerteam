@@ -18,30 +18,36 @@ class userModel extends model
      *
      * @param object  $pager
      * @param string  $userName
+     * @param int|array  $dept
      * @access public
      * @return object 
      */
-    public function getList($pager, $userName = '')
+    public function getList($pager, $userName = '', $dept = 0)
     {
         return $this->dao->select('*')->from(TABLE_USER)
-            ->beginIF($userName != '')->where('account')->like("%$userName%")->fi()
-            ->orderBy('id_asc')
-            ->page($pager)
-            ->fetchAll();
+            ->where('1=1')         
+            ->beginIF($userName != '')->andWhere('account')->like("%$userName%")->fi()
+            ->beginIF($dept != 0)->andWhere('dept')->in($dept)->fi()
+            ->orderBy('id_asc')    
+            ->page($pager)         
+            ->fetchAll();          
     }
 
     /**
      * Get the account=>relaname pairs.
      * 
-     * @param  string $params  admin|noempty
+     * @param  string    $params  admin|noempty
+     * @param  int|array $dept
      * @access public
      * @return array
      */
-    public function getPairs($params = '')
+    public function getPairs($params = '', $dept = 0)
     {
         $users = $this->dao->select('account, realname')->from(TABLE_USER) 
+            ->where('1=1')         
             ->beginIF(strpos($params, 'admin') !== false)->where('admin')->ne('no')->fi()
-            ->orderBy('id_asc')
+            ->beginIF($dept != 0)->andWhere('dept')->in($dept)->fi()
+            ->orderBy('id_asc')    
             ->fetchPairs();
 
         /* Append empty users. */

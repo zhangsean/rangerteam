@@ -238,6 +238,27 @@ class user extends control
     }
 
     /**
+     * Create user 
+     * 
+     * @access public
+     * @return void
+     */
+    public function create()
+    {                          
+        if(!empty($_POST))     
+        {   
+            $this->user->create();          
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError())); 
+            /* Go to the referer. */        
+            $this->send( array('result' => 'success', 'locate'=>inlink('admin')) );
+        }                      
+
+        $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptLink'));
+        $this->view->depts    = $this->tree->getOptionMenu('dept');
+        $this->display();      
+    }
+
+    /**
      * Edit a user. 
      * 
      * @param  string    $account 
@@ -248,6 +269,7 @@ class user extends control
     {
         if(!$account or RUN_MODE == 'front') $account = $this->app->user->account;
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
+        if(empty($account)) $account = $this->app->user->account;
 
         if(!empty($_POST))
         {
@@ -257,7 +279,9 @@ class user extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
         }
 
-        $this->view->user = $this->user->getByAccount($account);
+        $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptLink'));
+        $this->view->depts    = $this->tree->getOptionMenu('dept');
+        $this->view->user     = $this->user->getByAccount($account);
         if(RUN_MODE == 'admin') 
         { 
             $this->display('user', 'edit.admin');
@@ -291,16 +315,19 @@ class user extends control
      * @access public
      * @return void
      */
-    public function admin($recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function admin($dept = 0, $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $query = $this->post->query ? $this->post->query : '';
 
-        $this->view->users = $this->user->getList($pager, $query);
-        $this->view->query = $query;
-        $this->view->pager = $pager;
+        $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptLink'));
+        $this->view->depts    = $this->tree->getOptionMenu('dept');
+        $this->view->users    = $this->user->getList($pager, $key, $deptID);
+        $this->view->query    = $query;
+        $this->view->pager    = $pager;
+        $this->view->deptID   = $deptID;
 
         $this->view->title = $this->lang->user->list;
         $this->display();

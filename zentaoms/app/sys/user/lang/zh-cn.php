@@ -18,6 +18,8 @@ $lang->user->password  = '密码';
 $lang->user->password2 = '请重复密码';
 $lang->user->realname  = '真实姓名';
 $lang->user->nickname  = '昵称';
+$lang->user->dept      = '所属部门';
+$lang->user->role      = '角色';    
 $lang->user->avatar    = '头像';
 $lang->user->birthyear = '出生年';
 $lang->user->birthday  = '出生月日';
@@ -128,6 +130,26 @@ $lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> 编辑�
 //$lang->user->control->menus[28] = '<i class="icon-large icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
 $lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> 我的主题 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
+
+$lang->dept = new stdclass();  
+$lang->dept->common     = '部门结构';
+$lang->dept->edit       = '维护部门结构';
+$lang->dept->children   = '子部门';
+$lang->dept->moderators = '部门经理';
+  
+$lang->dept->menu[] = "会员列表|user|admin";
+$lang->dept->menu[] = "部门结构|tree|browse|type=dept";
+
+$lang->user->roleList['']       = ''; 
+$lang->user->roleList['dev']    = '研发';
+$lang->user->roleList['qa']     = '测试';
+$lang->user->roleList['pm']     = '项目经理';
+$lang->user->roleList['po']     = '产品经理';
+$lang->user->roleList['td']     = '研发主管';
+$lang->user->roleList['pd']     = '产品主管';
+$lang->user->roleList['qd']     = '测试主管';
+$lang->user->roleList['top']    = '高层管理';
+$lang->user->roleList['others'] = '其他';
 
 $lang->user->mailContent = <<<EOT
 <html>
