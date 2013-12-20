@@ -194,7 +194,6 @@ class control
         $this->view->lang   = $lang;
         $this->view->config = $config;
         $this->view->title  = '';
-        if(RUN_MODE == 'front') $this->view->layouts = $this->loadModel('block')->getPageBlocks($this->moduleName, $this->methodName);
 
         /* Set super vars. */
         $this->setSuperVars();
