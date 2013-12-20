@@ -28,7 +28,7 @@ include '../../framework/helper.class.php';
 $startTime = getTime();
 
 /* Instance the app. */
-$app = router::createApp('ips');
+$app = router::createApp('sys');
 
 /* Change the request settings. */
 $config = $app->config;
