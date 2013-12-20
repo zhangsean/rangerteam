@@ -29,7 +29,7 @@ $config->checkVersion = true;              // Auto check for new version or not.
 /* The request settings. */
 $config->requestType = 'PATH_INFO';       // The request type: PATH_INFO|GET, if PATH_INFO, must use url rewrite.
 $config->pathType    = 'clean';           // If the request type is PATH_INFO, the path type.
-$config->requestFix  = '/';               // The divider in the url when PATH_INFO.
+$config->requestFix  = '-';               // The divider in the url when PATH_INFO.
 $config->moduleVar   = 'm';               // requestType=GET: the module var name.
 $config->methodVar   = 'f';               // requestType=GET: the method var name.
 $config->viewVar     = 't';               // requestType=GET: the view var name.
