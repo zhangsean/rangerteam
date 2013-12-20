@@ -1,0 +1,5 @@
+.current{opacity: 1;}
+.current img{background:#5CB85C; opacity: 1;}
+.preview{max-width:400px; height:100px; margin: 20px 0;margin:0 auto; opacity: 0.5; -moz-opacity: 0.5; cursor:pointer;}
+.preview:hover { opacity: 1; -moz-opacity: 1; filter: alpha(opacity=100); transition: all .3s; -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; }
+.info{padding:8px;display:block; width:400px; border:none; margin:0 auto; border-radius: 4px 4px 4px 4px;}
