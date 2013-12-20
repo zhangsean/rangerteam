@@ -356,6 +356,19 @@ class treeModel extends model
     }
 
     /**
+     * Create dept link 
+     * 
+     * @param  object    $category 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function createDeptLink($category)
+    {
+        return html::a(helper::createLink('user', 'admin', "deptID={$category->id}"), $category->name, "id='category{$category->id}'");
+    }
+
+    /**
      * Update a category.
      * 
      * @param  int     $categoryID 

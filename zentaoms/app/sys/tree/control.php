@@ -42,6 +42,13 @@ class tree extends control
             $this->lang->menuGroups->tree = 'product';
         }
 
+        if($type == 'dept')
+        {   
+            $this->lang->category   = $this->lang->dept;
+            $this->lang->tree->menu = $this->lang->dept->menu;
+            $this->lang->menuGroups->tree = 'user';
+        }
+
         $this->view->title    = $this->lang->category->common;
         $this->view->type     = $type;
         $this->view->root     = $root;
@@ -94,6 +101,11 @@ class tree extends control
         else if($category->type == 'blog')
         {
             $this->lang->menuGroups->tree = 'blog';
+        }
+        else if($category->type == 'dept')
+        {
+            $this->lang->menuGroups->tree = 'user';
+            $this->view->users = array('' => '') + $this->loadModel('user')->getPairs($category->id);
         }
 
         /* remove left menu. */

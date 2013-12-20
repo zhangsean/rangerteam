@@ -48,6 +48,12 @@ $themeRoot = $webRoot . "theme/";
         <th><?php echo $lang->category->desc;?></th>
         <td><?php echo html::textarea('desc', $category->desc, "class='area-1' rows=3'");?></td>
       </tr>
+      <?php if($category->type == 'dept'):?>
+      <tr>
+        <th><?php echo $lang->dept->moderators;?></th>
+        <td><?php echo html::select('moderators', $users, $category->moderators, "class='select-1'");?></td>
+      </tr>  
+      <?php endif;?>
       <?php if($category->type == 'forum'):?>
       <tr>
         <th><?php echo $lang->category->moderators;?></th>
