@@ -15,6 +15,9 @@ error_reporting(E_ALL);
 /* Start output buffer. */
 ob_start();
 
+/* Define the run mode as front. */
+define('RUN_MODE', 'front');
+
 /* Load the framework. */
 $frameworkRoot = dirname(__FILE__);
 include "$frameworkRoot/router.class.php";
