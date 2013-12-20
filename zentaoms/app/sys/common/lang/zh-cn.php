@@ -99,13 +99,23 @@ $lang->user  = new stdclass();
 $lang->file  = new stdclass();
 $lang->admin = new stdclass();
 
-$lang->menu->entry = '应用|entry|admin|';
+$lang->menu->entry     = '应用|entry|admin|';
+$lang->menu->user      = '用户|user|admin|';
+$lang->menu->company   = '公司|company|setbasic|';
+$lang->menu->mail      = '发信|mail|detect|';
+$lang->menu->extension = '扩展|extension|admin|';
+$lang->menu->backup    = '备份|admin|backup|';
  
 /* Menu entry. */
 $lang->entry       = new stdclass();
 $lang->entry->menu = new stdclass();
 $lang->entry->menu->admin  = array('link' => '应用列表|entry|admin|', 'alias' => 'edit');
 $lang->entry->menu->create = '添加应用|entry|create|';
+
+/* Menu of company module. */
+$lang->company->menu = new stdclass();
+$lang->company->menu->basic   = '公司信息|company|setbasic|';
+$lang->company->menu->contact = '联系方式|company|setcontact|';
 
 /* The error messages. */
 $lang->error = new stdclass();
@@ -145,9 +155,9 @@ define('DT_DATETIME1',  'Y-m-d H:i:s');
 define('DT_DATETIME2',  'y-m-d H:i');
 define('DT_MONTHTIME1', 'n/d H:i');
 define('DT_MONTHTIME2', 'n月d日 H:i');
-define('DT_DATE1',     'Y年m月d日');
-define('DT_DATE2',     'Ymd');
-define('DT_DATE3',     'Y年m月d日');
-define('DT_DATE4',     'Y-m-d');
-define('DT_TIME1',     'H:i:s');
-define('DT_TIME2',     'H:i');
+define('DT_DATE1',      'Y年m月d日');
+define('DT_DATE2',      'Ymd');
+define('DT_DATE3',      'Y年m月d日');
+define('DT_DATE4',      'Y-m-d');
+define('DT_TIME1',      'H:i:s');
+define('DT_TIME2',      'H:i');

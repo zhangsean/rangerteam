@@ -29,7 +29,6 @@ EOT;
 
 /* Global lang items. */
 $lang->home           = 'Home';
-$lang->chanzhiIPS     = 'ips';
 $lang->welcome        = 'Welcome, <strong>%s</strong>!';
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = 'Today is %s, ';
@@ -92,10 +91,6 @@ $lang->company->weibo     = 'Weibo';
 $lang->company->weixin    = 'Weichat';
 $lang->company->wangwang  = 'Wangwang';
 
-/* Sitemap settings. */
-$lang->sitemap = new stdclass();
-$lang->sitemap->common = 'Sitemap';
-
 /* The main menus. */
 $lang->menu = new stdclass();
 
@@ -104,13 +99,23 @@ $lang->user  = new stdclass();
 $lang->file  = new stdclass();
 $lang->block = new stdclass();
 
-$lang->menu->entry = 'App|entry|admin|';
+$lang->menu->entry     = 'App|entry|admin|';
+$lang->menu->user      = 'User|user|admin|';
+$lang->menu->company   = 'Company|company|setbasic|';
+$lang->menu->mail      = 'Mail|mail|detect|';
+$lang->menu->extension = 'Extension|extension|admin|';
+$lang->menu->backup    = 'Backup|admin|backup|';
  
 /* Menu entry. */
 $lang->entry       = new stdclass();
 $lang->entry->menu = new stdclass();
 $lang->entry->menu->admin  = array('link' => 'Entries|entry|admin|', 'alias' => 'edit');
 $lang->entry->menu->create = array('link' => 'Create|entry|create|');
+
+/* Menu of company module. */
+$lang->company->menu = new stdclass();
+$lang->company->menu->basic   = '公司信息|company|setbasic|';
+$lang->company->menu->contact = '联系方式|company|setcontact|';
 
 /* The error messages. */
 $lang->error = new stdclass();
@@ -150,9 +155,9 @@ define('DT_DATETIME1',  'Y-m-d H:i:s');
 define('DT_DATETIME2',  'y-m-d H:i');
 define('DT_MONTHTIME1', 'n/d H:i');
 define('DT_MONTHTIME2', 'F j, H:i');
-define('DT_DATE1',     'Y-m-d');
-define('DT_DATE2',     'Ymd');
-define('DT_DATE3',     'F j, Y ');
-define('DT_DATE4',     'M j');
-define('DT_TIME1',     'H:i:s');
-define('DT_TIME2',     'H:i');
+define('DT_DATE1',      'Y-m-d');
+define('DT_DATE2',      'Ymd');
+define('DT_DATE3',      'F j, Y ');
+define('DT_DATE4',      'M j');
+define('DT_TIME1',      'H:i:s');
+define('DT_TIME2',      'H:i');
