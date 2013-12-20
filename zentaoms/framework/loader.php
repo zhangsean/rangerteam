@@ -12,7 +12,6 @@
 /* Set the error reporting. */
 error_reporting(E_ALL);
 
-echo 'test';
 /* Start output buffer. */
 ob_start();
 
