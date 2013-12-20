@@ -11,9 +11,9 @@
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
-  <div class='jumbotron shadow'>
+  <div class='jumbotron'>
     <h3><?php echo $lang->install->welcome;?></h3>
-    <div><?php printf(nl2br(trim($lang->install->desc)), $config->version);?></div>
+    <div><?php echo $lang->install->desc;?></div>
     
     <?php if(!isset($latestRelease)):?>
     <p class='a-center'><?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary'");?></p>
