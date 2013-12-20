@@ -10,8 +10,8 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->submitting   = '稍候...';
 
 /* Lang items for zentaoms. */
-$lang->zentaoms  = '企业门户系统';
-$lang->poweredBy = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->zentaoms}%s</a></span>";
+$lang->zentaoms  = '禅道企业管理系统';
+$lang->poweredBy = "<span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->zentaoms}%s</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
@@ -29,7 +29,6 @@ EOT;
 
 /* Global lang items. */
 $lang->home           = '首页';
-$lang->chanzhiIPS     = '企业内部门户 ';
 $lang->welcome        = '欢迎您，<strong>%s</strong>！';
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = '今天是%s，';
@@ -92,17 +91,12 @@ $lang->company->weibo     = '微博';
 $lang->company->weixin    = '微信';
 $lang->company->wangwang  = '旺旺';
 
-/* Sitemap settings. */
-$lang->sitemap = new stdclass();
-$lang->sitemap->common = '站点地图';
-
 /* The main menus. */
 $lang->menu = new stdclass();
 
 $lang->index = new stdclass();
 $lang->user  = new stdclass();
 $lang->file  = new stdclass();
-$lang->block = new stdclass();
 $lang->admin = new stdclass();
 
 $lang->menu->entry = '应用|entry|admin|';
@@ -112,7 +106,6 @@ $lang->entry       = new stdclass();
 $lang->entry->menu = new stdclass();
 $lang->entry->menu->admin  = array('link' => '应用列表|entry|admin|', 'alias' => 'edit');
 $lang->entry->menu->create = '添加应用|entry|create|';
-
 
 /* The error messages. */
 $lang->error = new stdclass();
