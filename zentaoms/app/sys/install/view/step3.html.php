@@ -12,13 +12,13 @@
 <?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
   <?php if(isset($error)):?>
-  <table class='table table-bordered' align='center'>
+  <table class='table table-bordered shadow'>
 	<caption><?php echo $lang->install->error;?></caption>
     <tr><td class='red'><?php echo $error;?></td></tr>
     <tr><td><?php echo html::backButton($lang->install->pre, 'btn btn-primary');?></td></tr>
   </table>
   <?php else:?>
-  <table class='table table-bordered'>
+  <table class='table table-bordered shadow'>
 	<caption><?php echo $lang->install->saveConfig;?></caption>
     <tr>
       <td>

@@ -127,6 +127,17 @@ class installModel extends model
     }
 
     /**
+     * Get the web root.
+     * 
+     * @access public
+     * @return string
+     */
+    public function getWebRoot()
+    {
+        return rtrim(str_replace('\\', '/', pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_DIRNAME)), '/') . '/';
+    }
+
+    /**
      * Check the user config.
      * 
      * @access public
@@ -301,7 +312,6 @@ class installModel extends model
 \$config->db->name     = '{$this->post->dbName}';
 \$config->db->user     = '{$this->post->dbUser}';
 \$config->db->password = '{$this->post->dbPassword}';
-\$config->db->password = getWebRoot();
 EOT;
     }
 
