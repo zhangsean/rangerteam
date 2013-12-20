@@ -20,7 +20,7 @@ $themeRoot = $webRoot . "theme/";
   {
       js::import($jsRoot . 'jquery/min.js');
       js::import($jsRoot . 'bootstrap/min.js');
-      js::import($jsRoot . 'chanzhi.js');
+      js::import($jsRoot . 'zentao.js');
       js::import($jsRoot . 'my.js');
       css::import($themeRoot . 'bootstrap/css/core.min.css');
       css::import($themeRoot . 'default/style.css');
