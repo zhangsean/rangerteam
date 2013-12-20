@@ -1,1 +1,1 @@
-<?php header('location: /ips');?>
+<?php header('location: /sys/index.php');?>
