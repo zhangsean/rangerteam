@@ -118,22 +118,6 @@ $lang->user->resetmail = new stdclass();
 $lang->user->resetmail->subject = "密码修改";
 $lang->user->resetmail->notice  = "系统发信，请勿回复";
 
-$lang->user->oauth = new stdclass();
-$lang->user->oauth->common       = '开放登录';
-$lang->user->oauth->provider     = '服务商';
-$lang->user->oauth->clientID     = 'App Key';
-$lang->user->oauth->clientSecret = 'App Secret';
-$lang->user->oauth->verification = '网站验证';
-$lang->user->oauth->widget       = '网页组件';
-
-$lang->user->oauth->providers['sina'] = '新浪微博';
-$lang->user->oauth->providers['qq']   = 'QQ';
-
-$lang->user->oauth->lblWelcome    = '开放登录，快捷方便';
-$lang->user->oauth->lblProfile    = "<h3>设置用户名，完成注册</h3>";
-$lang->user->oauth->lblBind       = "<h3>或绑定已有帐号</h3>";
-$lang->user->oauth->lblBindFailed = "绑定账户失败！";
-
 $lang->user->control = new stdclass();
 $lang->user->control->common      = '用户中心';
 $lang->user->control->welcome     = '欢迎您，<strong>%s</strong>';
@@ -149,23 +133,15 @@ $lang->user->mailContent = <<<EOT
 <html>
 <head>
 <style type='text/css'>
-body{
-margin:0;
-padding:0;
-}
-div{
-    padding-left:30px;
-}
+body{margin:0;padding:0;}
+div{padding-left:30px;}
 </style>
 </head>
 <body>
 <div style='padding-top:20px;height:60px;background:#fafafa;border-bottom:1px solid #ddd;font-size:18px;font-weight:bold'> 密码修改 </div>
 <div style='margin-top:20px;'>
-<p>
-尊敬的用户 %s 
-<br>
-请点击下面的链接，进行密码修改:
-<br>
+<p>尊敬的用户 %s <br />
+请点击下面的链接，进行密码修改: <br >
 <a href='%s' target='_blank'>%s</a>
 </p>
 <p>重置码：%s</p>
