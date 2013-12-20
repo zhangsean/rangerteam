@@ -440,7 +440,7 @@ class router
             $this->appRoot = realpath($appRoot) . DS;
         }
 
-        if(!is_dir($this->appRoot)) $this->triggerError("The app you call not noud in {$this->appRoot}", __FILE__, __LINE__, $exit = true);
+        if(!is_dir($this->appRoot)) $this->triggerError("The app you call not found in {$this->appRoot}", __FILE__, __LINE__, $exit = true);
     }
 
     /**
