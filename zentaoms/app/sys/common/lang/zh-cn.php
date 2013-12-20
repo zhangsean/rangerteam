@@ -9,10 +9,9 @@ $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->submitting   = '稍候...';
 
-/* Lang items for xirang. */
-$lang->chanzhiEPS  = '蝉知企业门户系统';
-$lang->chanzhiEPSx = '蝉知';
-$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPSx}%s</a></span>";
+/* Lang items for zentaoms. */
+$lang->zentaoms  = '企业门户系统';
+$lang->poweredBy = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->zentaoms}%s</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT

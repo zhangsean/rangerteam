@@ -20,7 +20,7 @@ class index extends control
             $allEntries  .= "entries['$entry->id'] = new entry('$entry->id', '$ssoLoginLink', '$entry->name', '$entry->openMode', '', 'max', null, null, '$logo');\n";
         }
 
-        $this->view->title        = $this->lang->chanzhiEPS;
+        $this->view->title        = $this->lang->zentaoms;
         $this->view->allEntries   = $allEntries;
         $this->view->leftBarEntry = $leftBarEntry;
         $this->display();
