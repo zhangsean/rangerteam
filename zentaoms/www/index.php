@@ -1,1 +1,1 @@
-<?php header('location: /sys/index.php');?>
+<?php header('location: sys/index.php');?>
