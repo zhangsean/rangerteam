@@ -19,7 +19,6 @@ class admin extends control
      */
     public function index()
     {
-        $this->view->title = $this->lang->chanzhiEPS;
         $this->display();
     }
 

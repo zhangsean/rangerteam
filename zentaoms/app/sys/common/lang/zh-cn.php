@@ -103,6 +103,7 @@ $lang->index = new stdclass();
 $lang->user  = new stdclass();
 $lang->file  = new stdclass();
 $lang->block = new stdclass();
+$lang->admin = new stdclass();
 
 $lang->menu->entry = '应用|entry|admin|';
  
