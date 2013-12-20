@@ -18,16 +18,16 @@ $lang->install->error   = '错误 ';
 $lang->install->start            = '开始安装';
 $lang->install->keepInstalling   = '继续安装当前版本';
 $lang->install->seeLatestRelease = '看看最新的版本';
-$lang->install->welcome          = '您睿智地选择了蝉知企业门户系统!';
+$lang->install->welcome          = "您睿智地选择了$lang->zentaoms!";
 $lang->install->desc             = <<<EOT
-<p>使用蝉知，您可以：</p>
 <blockquote>
-  <ul>
-    <li><strong>品牌宣传</strong>：建立品牌网站，展示企业形象。</li>
-    <li><strong>营销推广</strong>：SEO, 邮件、短信、微博、微信...</li>
-    <li><strong>电子商务</strong>：展示产品，在线销售。</li>
-    <li><strong>客户关怀</strong>：售后支持，维系客户。</li>
-  </ul>
+  <strong>{$lang->zentaoms}</strong>由<strong><a href='http://www.cnezsoft.com' target='_blank' class='red'>青岛易软天创网络科技有限公司</a>开发</strong>，
+  内置项目、客户、现金流、办公和沟通共五大核心功能模块，
+  专为中小型团队量身打造，是中小型团队信息化的首选工具！
+
+  官方网站：<a href='http://www.zentao.net' target='_blank'>http://www.zentao.net</a>
+  技术支持: <a href='http://www.zentao.net/ask/' target='_blank'>http://www.zentao.net/ask/</a>
+  您现在正在安装的版本是 <strong class='red'>%s</strong>。
 </blockquote>
 EOT;
 

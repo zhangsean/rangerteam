@@ -21,9 +21,9 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->submitting   = '稍候...';
 
 /* Lang items for xirang. */
-$lang->chanzhiEPS  = '蝉知企业门户系统';
-$lang->chanzhiEPSx = '蝉知';
-$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPSx}%s</a></span>";
+$lang->zentaoms  = '禅道协同管理系统';
+$lang->zentao    = '禅道';
+$lang->poweredBy = " <span id='poweredBy'><a href='http://www.zentao.net/?v=%s' target='_blank'>{$lang->zentaoms}%s</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
@@ -41,12 +41,10 @@ EOT;
 
 /* Global lang items. */
 $lang->home           = '首页';
-$lang->chanzhiIPS     = '企业内部门户 ';
 $lang->welcome        = '欢迎您，<strong>%s</strong>！';
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = '今天是%s，';
 $lang->aboutUs        = '关于我们';
-$lang->link           = '友情链接';
 $lang->frontHome      = '前台';
 $lang->forumHome      = '论坛';
 $lang->bookHome       = '手册';
@@ -92,29 +90,6 @@ $lang->js->deleteing     = '删除中';
 $lang->js->doing         = '处理中';
 $lang->js->timeout       = '网络超时,请重试';
 
-/* Contact fields*/
-$lang->company = new stdclass();
-$lang->company->contactUs = '联系我们';
-$lang->company->address   = '地址';
-$lang->company->phone     = '电话';
-$lang->company->email     = 'Email';
-$lang->company->fax       = '传真';
-$lang->company->qq        = 'QQ';
-$lang->company->weibo     = '微博';
-$lang->company->weixin    = '微信';
-$lang->company->wangwang  = '旺旺';
-
-/* Sitemap settings. */
-$lang->sitemap = new stdclass();
-$lang->sitemap->common = '站点地图';
-
-/* The main menus. */
-$lang->menu = new stdclass();
-
-$lang->index = new stdclass();
-$lang->user  = new stdclass();
-$lang->file  = new stdclass();
-
 /* The error messages. */
 $lang->error = new stdclass();
 $lang->error->length       = array('<strong>%s</strong>长度错误，应当为<strong>%s</strong>', '<strong>%s</strong>长度应当不超过<strong>%s</strong>，且不小于<strong>%s</strong>。');
@@ -144,18 +119,14 @@ $lang->pager->next      = '下页';
 $lang->pager->last      = '末页';
 $lang->pager->locate    = 'Go!';
 
-$lang->date = new stdclass();
-$lang->date->minute = '分钟';
-$lang->date->day    = '天';
-
 /* The datetime settings. */
 define('DT_DATETIME1',  'Y-m-d H:i:s');
 define('DT_DATETIME2',  'y-m-d H:i');
 define('DT_MONTHTIME1', 'n/d H:i');
 define('DT_MONTHTIME2', 'n月d日 H:i');
-define('DT_DATE1',     'Y年m月d日');
-define('DT_DATE2',     'Ymd');
-define('DT_DATE3',     'Y年m月d日');
-define('DT_DATE4',     'Y-m-d');
-define('DT_TIME1',     'H:i:s');
-define('DT_TIME2',     'H:i');
+define('DT_DATE1',      'Y年m月d日');
+define('DT_DATE2',      'Ymd');
+define('DT_DATE3',      'Y年m月d日');
+define('DT_DATE4',      'Y-m-d');
+define('DT_TIME1',      'H:i:s');
+define('DT_TIME2',      'H:i');

@@ -12,7 +12,7 @@
 <?php include '../../common/view/header.lite.html.php';?>
 <div class="container"> 
 <form method='post' action='<?php echo $this->createLink('install', 'step3');?>' class="form-inline" id="form1">
-  <table class='table table-bordered'>
+  <table class='table table-bordered shadow'>
     <caption><?php echo $lang->install->setConfig;?></caption>
     <tr>
       <th class='w-p20'><?php echo $lang->install->key;?></th>

@@ -15,7 +15,7 @@ $wholeResult = strpos($phpResult . $pdoResult . $pdoMySQLResult . $tmpRootResult
 js::set('wholeResult', $wholeResult);
 ?>
 <div class="container">
-  <table class='table table-bordered'>
+  <table class='table table-bordered shadow'>
     <caption><?php echo $lang->install->checking;?></caption>
     <tr>
       <th class='w-p20'><?php echo $lang->install->checkItem;?></th>
