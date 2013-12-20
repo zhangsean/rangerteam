@@ -133,13 +133,12 @@ class install extends control
     }
 
     /**
-     * Step5: save the admin user to the config.
+     * Step5: save the admin user to the database.
      * 
-     * @param  string    $admin 
      * @access public
      * @return void
      */
-    public function step5($admin)
+    public function step5()
     {
         session_destroy();
         $this->view->title = $this->lang->install->success;
