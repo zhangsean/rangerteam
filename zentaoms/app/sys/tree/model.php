@@ -378,8 +378,6 @@ class treeModel extends model
     public function update($categoryID)
     {
         $category = fixer::input('post')->join('moderators', ',')->setDefault('readonly', 0)->get();
-        $category->alias    = seo::unify($category->alias, '-');
-        $category->keywords = seo::unify($category->keywords, ',');
 
         /* Set moderators. */
         if(!isset($category->moderators))
@@ -455,7 +453,6 @@ class treeModel extends model
         foreach($children as $key => $categoryName)
         {
             $alias = $this->post->alias[$key];
-            $alias = seo::unify($alias, '-');
             if(empty($categoryName)) continue;
 
             /* First, save the child without path field. */

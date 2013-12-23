@@ -109,6 +109,7 @@ $lang->user  = new stdclass();
 $lang->file  = new stdclass();
 $lang->admin = new stdclass();
 $lang->tree  = new stdclass();
+$lang->mail  = new stdclass();
 
 $lang->menu->entry     = '应用|entry|admin|';
 $lang->menu->user      = '用户|user|admin|';
