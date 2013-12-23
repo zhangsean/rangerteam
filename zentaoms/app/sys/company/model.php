@@ -1,13 +1,13 @@
 <?php
 /**
- * The model file of company of chanzhiEPS.
+ * The model file of company module of ZenTaoMS.
  *
- * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
- * @author      Tingting Dai <daitingting@xirangit.com>
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商业软件，非开源软件
+ * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     company 
- * @version     $Id$
- * @link        http://www.chanzhi.org
+ * @version     $Id: modle.php 2605 2013-12-23 09:12:58Z wwccss $
+ * @link        http://www.zentao.net
  */
 class companyModel extends model
 {
