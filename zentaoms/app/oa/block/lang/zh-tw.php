@@ -2,7 +2,7 @@
 /**
  * The block module zh-tw file of ZenTaoMS.
  *
- * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
+ * @copyright   Copyright 2013-2014 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     block

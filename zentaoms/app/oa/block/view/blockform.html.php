@@ -2,7 +2,7 @@
 /**
  * The block form view file of block module of chanzhiEPS.
  *
- * @copyright   Copyright 2013-2013 ÇàµºÏ¢ÈÀÍøÂçÐÅÏ¢ÓÐÏÞ¹«Ë¾ (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
+ * @copyright   Copyright 2013-2014 àµºÏ¢Ï¢Þ¹Ë¾ (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     block

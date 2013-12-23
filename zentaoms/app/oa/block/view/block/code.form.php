@@ -2,7 +2,7 @@
 /**
  * The code block form view file of block module of ZenTaoMS.
  *
- * @copyright   Copyright 2013-2013 ൺϢϢ޹˾ (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
+ * @copyright   Copyright 2013-2014 ൺϢϢ޹˾ (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     block
