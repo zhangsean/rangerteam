@@ -21,7 +21,7 @@ $lang->submitting   = 'Saving...';
 
 /* Lang items for zentaoms. */
 $lang->zentaoms  = 'zentaoms';
-$lang->poweredBy = "<a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->zentaoms} %s</a>";
+$lang->poweredBy = "<a href='http://www.zentao.net/?v=%s' target='_blank'>{$lang->zentaoms} %s</a>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT

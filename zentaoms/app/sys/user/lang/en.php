@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user
  * @version     $Id$
- * @link        http://www.chanzhi.org
+ * @link        http://www.zentao.net
  */
 $lang->user->common    = 'User';
 

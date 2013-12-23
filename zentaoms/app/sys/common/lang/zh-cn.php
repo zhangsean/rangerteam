@@ -21,7 +21,7 @@ $lang->submitting   = '稍候...';
 
 /* Lang items for zentaoms. */
 $lang->zentaoms  = '禅道企业管理系统';
-$lang->poweredBy = "<span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->zentaoms}%s</a></span>";
+$lang->poweredBy = "<span id='poweredBy'><a href='http://www.zentao.net/?v=%s' target='_blank'>{$lang->zentaoms}%s</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT

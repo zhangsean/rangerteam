@@ -7,7 +7,7 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     blog
  * @version     $Id$
- * @link        http://www.chanzhi.org
+ * @link        http://www.zentao.net
  */
 $lang->blog->home     = '博客首页';
 $lang->blog->siteHome = '网站首页';

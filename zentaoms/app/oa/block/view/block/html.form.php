@@ -7,7 +7,7 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     block
  * @version     $Id$
- * @link        http://www.chanzhi.org
+ * @link        http://www.zentao.net
 */
 ?>
 <?php $config->block->editor->blockform =  array('id' => 'content', 'tools' => 'fullTools', 'filterMode' => false); ?>

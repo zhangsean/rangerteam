@@ -7,7 +7,7 @@
  * @author      Xiying Guan<guanxiying@xirangit.com>
  * @package     tag
  * @version     $Id$
- * @link        http://www.chanzhi.org
+ * @link        http://www.zentao.net
  */
 ?>
 <div class='modal-dialog' style='width:600px;'>

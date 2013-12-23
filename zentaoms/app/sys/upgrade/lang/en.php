@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $Id: en.php 5119 2013-07-12 08:06:42Z wyd621@gmail.com $
- * @link        http://www.chanzhi.org
+ * @link        http://www.zentao.net
  */
 $lang->upgrade->common  = 'Upgrade';
 

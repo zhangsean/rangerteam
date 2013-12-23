@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     tree
  * @version     $Id: edit.html.php 824 2010-05-02 15:32:06Z wwccss $
- * @link        http://www.chanzhi.org
+ * @link        http://www.zentao.net
  */
 ?>
 <?php

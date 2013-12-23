@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     block
  * @version     $ID$
- * @link        http://www.chanzhi.org
+ * @link        http://www.zentao.net
  */
 class blockModel extends model
 {

@@ -7,7 +7,7 @@
  * @author      Yangyang Shi <shiyangyangwork@yahoo.cn>
  * @package     User
  * @version     $Id$
- * @link        http://www.chanzhi.org
+ * @link        http://www.zentao.net
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>

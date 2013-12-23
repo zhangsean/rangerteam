@@ -7,7 +7,7 @@
  * @author      Yidong wang <yidong@cnezsoft.com>
  * @package     block
  * @version     $Id$
- * @link        http://www.chanzhi.org
+ * @link        http://www.zentao.net
 */
 ?>
 <?php $slides = $this->loadModel('slide')->getList();?>

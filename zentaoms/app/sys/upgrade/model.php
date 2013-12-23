@@ -8,7 +8,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $Id: model.php 5019 2013-07-05 02:02:31Z wyd621@gmail.com $
- * @link        http://www.chanzhi.org
+ * @link        http://www.zentao.net
  */
 ?>
 <?php
