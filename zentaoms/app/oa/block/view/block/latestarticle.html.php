@@ -26,54 +26,52 @@ if($articles)
     reset($articles);
     $firstArticle  = current($articles);
     $firstCategory = $this->loadModel('tree')->getByID($firstArticle->category);
-    if($firstCategory) $moreLink = html::a(helper::createLink('article', 'browse', "category=$firstCategory->id", "category=$firstCategory->alias"), $this->lang->more, "class='f-right'");
+    if($firstCategory) $moreLink = html::a(helper::createLink('article', 'browse', "category=$firstCategory->id", "category=$firstCategory->alias"), $this->lang->more, "class='text-link'");
 }
 ?>
 <?php if(isset($content->image)):?>
-<div class='box radius'>
-  <h4 class='title'><?php echo $block->title . $moreLink;?></h4>
-  <ul class="media-list">
-    <?php 
+<div class='panel panel-block'>
+  <div class='panel-heading'>
+    <h4><i class='icon-th'></i> <?php echo $block->title;?></h4>
+  </div>
+  <div class='panel-body'>
+    <div class='items'>
+    <?php
     foreach($articles as $article):
     $category = array_shift($article->categories);
     $url = helper::createLink('article', 'view', "id=$article->id", "category={$category->alias}&name=$article->alias");
     ?>
-    <li class="media">
-      <div class='media-body'>
-        <div class='image-box'>
-          <?php 
-          if(!empty($article->image))
-          {
-              $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-              echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
-          }
-          else
-          {
-              echo html::a($url, html::image($themeRoot . 'default/images/main/noimage.gif', "class='thumbnail'" ));
-          }
-        ?>
+      <div class='item'>
+        <div class='item-heading'><strong><?php echo html::a($url, $article->title);?></strong></div>
+        <div class='item-content'>
+          <div class='media'>
+            <?php 
+            if(!empty($article->image))
+            {
+                $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
+                echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
+            }
+            ?>
+          </div>
+          <div class='text small text-muted'><strong class='text-important'><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></strong> &nbsp;<?php echo $article->summary;?></div>
         </div>
-        <h4 class='media-heading'> <?php echo html::a($url, $article->title);?> <span class='label label-default'><?php echo substr($article->addedDate, 0, 10);?></span> </h4>
-        <p><?php echo $article->summary;?></p>
       </div>
-      <hr>
-    </li>
-    <?php endforeach;?>
-  </ul>
+      <?php endforeach;?>
+    </div>
+  </div>
 </div>
 <?php else:?>
-<div class="panel panel-default">
-  <div class="panel-heading"><h4><?php echo $block->title . $moreLink;?></h4></div>
-  <div class="panel-body">
-    <ul class='mg-zero pd-zero'>
+<div class='panel panel-block'>
+  <div class='panel-heading'><div class='pull-right'><?php echo $moreLink; ?></div> <h4><i class='icon-list-ul'></i> <?php echo $block->title;?></h4></div>
+  <div class='panel-body'>
+    <ul class='ul-list'>
       <?php foreach($articles as $article): ?>
       <?php 
       $category = array_shift($article->categories);
       $url = helper::createLink('article', 'view', "id={$article->id}", "category={$category->alias}&name={$article->alias}");
       ?>
-      <li class='latest-news'>
-        <i class='icon-chevron-right'></i>
-        <?php echo html::a($url, $article->title, "class='latest-news' title='{$article->title}'");?>
+      <li>
+        <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
       </li>
       <?php endforeach;?>
     </ul>

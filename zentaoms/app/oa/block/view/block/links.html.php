@@ -11,8 +11,9 @@
 */
 ?>
 <?php if(!empty($this->config->links->index)):?>
-<div id="links" class="nav nav-pills">
-  <?php echo $this->lang->link . $this->lang->colon;?>
-  <?php echo $this->config->links->index; if(!empty($this->config->links->all))echo "&nbsp;&nbsp&nbsp" . html::a(helper::createLink('links', 'index'), $this->lang->more . $this->lang->raquo);?>
-</div>
+<ul class='nav nav-pills' id='links'>
+  <li class='nav-heading'><i class='icon-link'></i> <?php echo $this->lang->link; ?></li>
+  <li><?php echo $this->config->links->index;?></li>
+  <li><?php echo html::a(helper::createLink('links', 'index'), $this->lang->more . "<i class='icon-double-angle-right'></i>"); ?></li>
+</ul>
 <?php endif;?>

@@ -15,8 +15,13 @@
 $path = explode(',', $node->path);
 js::set('path', json_encode($path));
 ?>
-<div class='box radius'>  
-  <h4 class='title'><?php echo $book->title;?></h4>
-  <dl class="books"><?php echo $catalog;?></dl>
+<div class='panel'>
+  <div class='panel-heading'>
+    <strong><i class='icon-book'></i> <?php echo $book->title;?></strong>
+    <div class='panel-actions'>
+      <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->book->createBook, "class='btn btn-info'");?>
+    </div>
+  </div>
+  <div class='panel-body'><div class='books'><?php echo $catalog;?></div></div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

@@ -11,17 +11,16 @@
 */
 ?>
 <?php $contact = $this->loadModel('company')->getContact();?>
-<div id='contact' class="panel panel-default">
-  <div class="panel-heading">
-    <h4><?php echo $block->title;?></h4>
+<div id='contact' class='panel panel-block'>
+  <div class='panel-heading'>
+    <h4><i class='icon-phone'></i> <?php echo $block->title;?></h4>
   </div>
-  <div class="panel-body">
+  <div class='panel-body'>
+    <dl class='dl-horizontal'>
     <?php foreach($contact as $item => $value):?>
-    <dl>
       <dt><?php echo $this->lang->company->$item . $this->lang->colon;?></dt>
       <dd><?php echo $value;?></dd>
-      <div class='c-both'></div>
+    <?php endforeach;?>
     </dl>
-    <?php endforeach;?>      
   </div>
 </div>

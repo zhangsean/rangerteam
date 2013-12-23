@@ -11,78 +11,106 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php $common->printPositionBar();?>
+
+
+
 <div class='row'>
   <div class='col-md-9'>
-    <?php if(!empty($messages)):?>
-    <div class='box radius'> 
-      <h4 class='title'><i class="icon-comments-alt"></i> <?php echo $lang->message->list;?></h4>
-      <ul class="media-list">
-        <li><a name='first'></a></li>
+    <div class='panel'>
+      <div class='panel-heading'><div class='panel-actions'><a href='#commentForm' class='btn btn-info'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div><strong><i class='icon-comments-alt'></i> <?php echo $lang->message->list;?></strong></div>
+      <div class='panel-body'>
+        <?php if(!empty($messages)):?>
+        <div class='comments-list'>
         <?php foreach($messages as $number => $message):?>
-        <li id='<?php echo $message->id?>' class='media'>
-          <div class="icon-stack icon"><i class="icon-comment icon-stack-base"></i><strong class="icon-content">#<?php echo ($startNumber + $number + 1)?></strong></div>
-          <div class="pull-right"><span class="text-muted"><?php echo $message->date;?></span></div>
-          <div><strong><?php echo $message->from;?></strong></div>
-          <div class="content"><?php echo nl2br($message->content);?></div>
-          <?php if(!empty($replies[$message->id])):?>
-          <dl class='alert alert-info'>
-          <?php foreach($replies[$message->id] as $reply) printf($lang->message->replyItem, $reply->from, $reply->date, $reply->content);?>
-          </dl>
-          <?php endif;?>
-        </li>
-        <?php endforeach;?>
-      </ul>
-      <div class='w-p95 pd-10px clearfix'><div id='pager'><?php $pager->show('right', 'shorter');?></div></div>
-    </div>  
-    <?php endif;?>
-    <div class='cont'>
-      <form method='post' class='form-inline' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=message');?>">
-        <table class='table table-form'>
-          <caption><?php echo $lang->message->post;?></caption>
-          <tbody>
-            <tr>
-              <th class='w-80px v-middle'><?php echo $lang->message->from;?></th>
-              <td> 
-                <?php 
-                $from  = $this->session->user->account == 'guest' ? '' : $this->session->user->account;
-                $phone = $this->session->user->account == 'guest' ? '' : $this->session->user->phone;
-                $qq    = $this->session->user->account == 'guest' ? '' : $this->session->user->qq;
-                $email = $this->session->user->account == 'guest' ? '' : $this->session->user->email;
-                echo html::input('from', $from, "class='text-4'");
-                ?>
-              </td>
-            </tr>
-            <tr>
-              <th class='v-middle'><?php echo $lang->message->phone;?></th>
-              <td><?php echo html::input('phone', $phone, "class='text-4'");?></td>
-            </tr>
-            <tr>
-              <th class='v-middle'><?php echo $lang->message->qq;?></th>
-              <td><?php echo html::input('qq', $qq, "class='text-4'");?></td>
-            </tr>
-            <tr>
-              <th class='v-middle'><?php echo $lang->message->email;?></th>
-              <td><?php echo html::input('email', $email, "class='text-4'");?></td>
-            </tr>
-           <tr>
-              <th class='v-middle'><?php echo $lang->message->content;?></th>
-              <td>
-                <?php 
-                echo html::textarea('content', '', "class='area-1' rows='3'");
-                echo html::hidden('objectType', 'message');
-                echo html::hidden('objectID', 0);
-                ?>
-              </td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->message->public;?></th>
-              <td><input type='checkbox' name='public' value='1' checked='checked'  /></td>
-            </tr>
-            <tr id='captchaBox' style="display:none;"></tr>  
-            <tr><td></td><td><div class=''><?php echo html::submitButton();?></div></td></tr>
-          </tbody>
-        </table>
-      </form>
+          <div class='comment' id="comment<?php echo $message->id?>">
+            <div class='avatar'><div class='icon-stack icon'><i class='icon-comment icon-stack-base'></i><strong class='icon-content'>#<?php echo ($startNumber + $number + 1)?></strong></div></div>
+            <div class='content'>
+              <div class='pull-right'><span class='text-muted'><?php echo $message->date;?></span>
+              </div>
+              <span class='author'><strong><i class='icon-user text-muted'></i> <?php echo $message->from;?></strong></span>
+              <div class='text'><?php echo nl2br($message->content);?></div>
+            </div>
+            <?php if(!empty($replies[$message->id])):?>
+              <div class='comments-list'>
+                <?php foreach($replies[$message->id] as $reply):?>
+                <div class='comment'>
+                  <div class='content'>
+                    <div class='pull-right'><span class='text-muted'><?php echo $reply->date;?></span>
+                    </div>
+                    <span class='author'><strong><i class='icon-user text-muted'></i> <?php echo $reply->from;?></strong> <small class='text-muted'><?php echo $lang->message->reply; ?></small></span>
+                    <div class='text'><?php echo nl2br($reply->content);?></div>
+                  </div>
+                </div>
+                <?php endforeach; ?>
+              </div>
+            <?php endif;?>
+          </div>
+        <?php endforeach; ?>
+        </div>
+        <?php endif;?>
+        <div class='pager clearfix'><?php $pager->show('right', 'short');?></div>
+      </div>
+    </div>
+
+    <div class='panel'>
+      <div class='panel-heading'><strong><i class='icon-comment-alt'></i> <?php echo $lang->message->post;?></strong></div>
+      <div class='panel-body'>
+        <form method='post' class='form-horizontal' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=message');?>">
+          <?php
+          $from  = $this->session->user->account == 'guest' ? '' : $this->session->user->account;
+          $phone = $this->session->user->account == 'guest' ? '' : $this->session->user->phone;
+          $qq    = $this->session->user->account == 'guest' ? '' : $this->session->user->qq;
+          $email = $this->session->user->account == 'guest' ? '' : $this->session->user->email; 
+          ?>
+          <div class='form-group'>
+            <label for='from' class='col-sm-2 control-label required'><?php echo $lang->message->from;?></label>
+            <div class='col-xs-10 col-sm-6 col-md-4'>
+              <?php echo html::input('from', $from, "class='form-control'"); ?>
+            </div>
+          </div>
+          <div class='form-group'>
+            <label for='phone' class='col-sm-2 control-label'><?php echo $lang->message->phone;?></label>
+            <div class='col-xs-10 col-sm-6 col-md-4'>
+              <?php echo html::input('phone', $phone, "class='form-control'"); ?>
+            </div>
+          </div>
+          <div class='form-group'>
+            <label for='qq' class='col-sm-2 control-label'><?php echo $lang->message->qq;?></label>
+            <div class='col-xs-10 col-sm-6 col-md-4'>
+              <?php echo html::input('qq', $qq, "class='form-control'"); ?>
+            </div>
+          </div>
+          <div class='form-group'>
+            <label for='email' class='col-sm-2 control-label'><?php echo $lang->message->email;?></label>
+            <div class='col-xs-10 col-sm-6 col-md-4'>
+              <?php echo html::input('email', $email, "class='form-control'"); ?>
+            </div>
+          </div>
+          <div class='form-group'>
+            <label for='content' class='col-sm-2 control-label required'><?php echo $lang->message->content;?></label>
+            <div class='col-xs-10'>
+              <?php 
+              echo html::textarea('content', '', "class='form-control' rows='3'");
+              echo html::hidden('objectType', 'message');
+              echo html::hidden('objectID', 0);
+              ?>
+            </div>
+          </div>
+          <div class='form-group'>
+            <label class='col-sm-2 control-label'><?php echo $lang->message->public;?></label>
+            <div class='col-xs-10 col-sm-6'>
+              <div class='checkbox'><label><input type='checkbox' name='public' value='1' checked='checked' /> <?php echo $lang->message->contactHidden;?></label></div>
+            </div>
+          </div>
+          <div class='form-group' id='captchaBox' style='display:none'></div>
+          <div class='form-group'>
+            <div class='col-sm-offset-2 col-sm-10'>
+              <?php echo html::submitButton();?>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
   <div class='col-md-3'><?php $this->block->printRegion($layouts, 'message_index', 'side');?></div>

@@ -4,60 +4,92 @@ js::set('objectID',   $objectID);
 css::internal($pageCSS);
 ?>
 <?php if(isset($comments) and $comments):?>
-<div id='commentList' class='commentList radius-top'> 
-  <div class='box-title'><?php echo $lang->message->list;?></div>
-  <div class='box-content'>
-    <a name='first'></a>
-    <?php foreach($comments as $number => $comment):?>
-      <div id='<?php echo $comment->id?>' class='comment'>
-        <div class='comment-head'><strong>#<?php echo ($startNumber + $number + 1)?> &nbsp;<?php echo $comment->from;?></strong> &nbsp; <span class='gray'><?php echo $comment->date;?></span></div>
-        <?php echo nl2br($comment->content);?>
-          <?php if(!empty($replies[$comment->id])):?>
-          <dl class='alert alert-info'>
-          <?php foreach($replies[$comment->id] as $reply) printf($lang->message->replyItem, $reply->from, $reply->date, $reply->content);?>
-          </dl>
-          <?php endif;?>
-
-      </div>
-    <?php endforeach;?>
-    <div id='pager'><?php $pager->show('right', 'shortest');?></div>
-    <div class='c-right'></div>
+<div class='panel'>
+  <div class='panel-heading'>
+    <div class='panel-actions'><a href='#commentForm' class='btn btn-info'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div>
+    <strong><i class='icon-comments'></i> <?php echo $lang->message->list;?></strong>
   </div>
-</div>  
+  <div class='panel-body'>
+    <div class='comments-list'>
+      <?php foreach($comments as $number => $comment):?>
+      <div class='comment' id="comment<?php echo $comment->id?>">
+        <div class='content'>
+          <div class='pull-right'><span class='text-muted'><?php echo $comment->date;?></span> &nbsp;<strong>#<?php echo ($number + 1); ?></strong>
+          </div>
+          <span class='author'><strong><i class='icon-user text-muted'></i> <?php echo $comment->from;?></strong></span>
+          <div class='text'><?php echo nl2br($comment->content);?></div>
+        </div>
+        <?php if(!empty($replies[$comment->id])):?>
+          <div class='comments-list'>
+            <?php foreach($replies[$comment->id] as $reply):?>
+            <div class='comment'>
+              <div class='content'>
+                <div class='pull-right'><span class='text-muted'><?php echo $reply->date;?></span>
+                </div>
+                <span class='author'><strong><i class='icon-user text-muted'></i> <?php echo $reply->from;?></strong> <small class='text-muted'><?php echo $lang->message->reply; ?></small></span>
+                <div class='text'><?php echo nl2br($reply->content);?></div>
+              </div>
+            </div>
+            <?php endforeach; ?>
+          </div>
+        <?php endif;?>
+      </div>
+      <?php endforeach;?>
+    </div>
+    <div class='pager clearfix'><?php $pager->show('right', 'shortest');?></div>
+  </div>
+</div>
 <?php endif;?>
-<div class='cont'>
-  <form method='post' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=comment');?>">
-    <table class='table table-form'>
-      <caption><?php echo $lang->message->post;?></caption>
-      <tbody>
-        <tr>
-          <th class='w-80px v-middle'><?php echo $lang->message->from;?></th>
-          <td> 
-          <?php 
-          $from = $this->session->user->account == 'guest' ? '' : $this->session->user->account;
-          $email  = $this->session->user->account == 'guest' ? '' : $this->session->user->email;
-          echo html::input('from', $from, "class='text-1'");
-          ?>
-          </td>
-        </tr>
-        <tr>
-          <th class='v-middle'><?php echo $lang->message->email;?></th>
-          <td><?php echo html::input('email', $email, "class='text-1'");?></td>
-        </tr>
-        <tr>
-          <th class='v-middle'><?php echo $lang->message->content;?></th>
-          <td>
-          <?php 
-          echo html::textarea('content', '', "class='area-1' rows='3'");
+
+<div class='panel'>
+  <div class='panel-heading'><strong><i class='icon-comment-alt'></i> <?php echo $lang->message->post;?></strong></div>
+  <div class='panel-body'>
+    <form method='post' class='form-horizontal' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=comment');?>">
+      <?php if($this->session->user->account == 'guest'): ?>
+      <div class='form-group'>
+        <label for='from' class='col-sm-1 control-label required'><?php echo $lang->message->from; ?></label>
+        <div class='col-sm-5'>
+          <?php echo html::input('from', '', "class='form-control'"); ?>
+        </div>
+      </div>
+      <div class='form-group'>
+        <label for='email' class='col-sm-1 control-label'><?php echo $lang->message->email; ?></label>
+        <div class='col-sm-5'>
+          <?php echo html::input('email', '', "class='form-control'"); ?>
+        </div>
+      </div>
+      <?php else: ?>
+      <div class='form-group'>
+        <label for='from' class='col-sm-1 control-label'><?php echo $lang->message->from; ?></label>
+        <div class='col-sm-11'>
+          <div class='signed-user-info'>
+            <i class='icon-user text-muted'></i> <strong><?php echo $this->session->user->account ;?></strong>
+            <?php if($this->session->user->email != ''): ?>
+            <span class='text-muted'>&nbsp;(<?php echo $this->session->user->email;?>)</span>
+            <?php 
+            echo html::hidden('from', $this->session->user->account);
+            echo html::hidden('email', $this->session->user->email);
+            ?>
+            <?php endif; ?>
+          </div>
+        </div>
+      </div>
+      <?php endif; ?>
+      <div class='form-group'>
+        <label for='content' class='col-sm-1 control-label required'><?php echo $lang->message->content; ?></label>
+        <div class='col-sm-11'>
+          <?php
+          echo html::textarea('content', '', "class='form-control'");
           echo html::hidden('objectType', $objectType);
           echo html::hidden('objectID', $objectID);
           ?>
-          </td>
-        </tr>
-        <tr id='captchaBox' style="display:none;"><td colspan='2'></td></tr>  
-        <tr><td></td><td><div class=''><?php echo html::submitButton();?></div></td></tr>
-      </tbody>
-    </table>
-  </form>
+        </div>
+      </div>
+      <div class='form-group' id='captchaBox' style='display:none'></div>
+      <div class='form-group'>
+        <div class='col-sm-11 col-sm-offset-1'><?php echo html::submitButton();?></div>
+      </div>
+    </form>
+  </div>
 </div>
 <?php js::execute($pageJS);?>

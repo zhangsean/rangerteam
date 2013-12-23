@@ -1,6 +1,22 @@
-.table{width:100%;}
-.table img{max-width:99%;}
-.thread table p{margin: 0}
-.article-files{margin: 0 -8px -8px;}
-.article-files > li.article-files-heading{margin-bottom: 0;}
-form .ke-container{margin-bottom: 10px;}
+.thread .panel-heading > i {display: inline-block;font-size: 30px;margin-right: 10px;}
+.thread .panel-actions{margin-top: 10px;}
+.thread.reply .panel-actions{margin-top: 0;}
+.thread .panel-actions .label{font-size: 14px;}
+
+.speaker { width: 180px; border-right:1px solid #ddd; padding: 10px 15px !important;}
+.thread-author {display: block; padding: 5px 0; border-bottom: 1px dashed #ddd;margin-bottom: 10px;}
+.thread-content {padding: 5px;}
+.thread .article-files {margin: 10px 0 0 0; background-color: #fff;border-top:1px dashed #ddd;padding: 0}
+.thread .article-files-heading{margin-bottom: 0;}
+
+.table>tbody>tr>td.thread-wrapper{position: relative;padding-bottom: 37px;}
+.thread-foot{position: absolute;bottom: 0;width: 100%;left: 0;padding: 8px;border-top: 1px solid #ddd;}
+.thread-actions > a,.thread-more-actions > .dropdown > a, .thread-more-actions > a { display: inline-block; margin-left: 10px; }
+.thread:hover .icon-more-actions { display: none; }
+.thread-actions .caret { border-bottom: 4px solid #999; }
+.thread-more-actions { opacity: 0; transition: all .3s; }
+.thread:hover .thread-more-actions { opacity: 1; }
+
+.pager{display: block; margin: -15px 0 5px;}
+
+#replyForm .file-form .form-group { margin-left: -15px; margin-right: -15px; }

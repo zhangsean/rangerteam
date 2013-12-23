@@ -12,24 +12,20 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('type', $type);?>
+<div class="panel">
+  <div class="panel-heading"><strong><?php echo $type == 'message' ? ('<i class="icon-comment-alt"></i> ' . $lang->message->common) : ('<i class="icon-comments-alt"></i> ' . $lang->comment->common) ?></strong> &nbsp;&nbsp;&nbsp; <?php echo html::a(inlink('admin', "type={$type}&status=0"), "<i class='icon-remove-circle'></i>" . $lang->message->statusList[0], $status == 0 ? "class='active'" : ''); echo html::a(inlink('admin', "type={$type}&status=1"), "<i class='icon-ok-circle'></i>" . $lang->message->statusList[1], $status == 1 ? "class='active'" : '');?></div>
 <table class='table table-bordered'>
-  <caption style="background:none;">
-    <ul class="nav nav-tabs">
-      <li <?php if($status == 0) echo "class='active'";?>><?php echo html::a(inlink('admin', "type={$type}&status=0"), $lang->message->statusList[0], "class='first-nav'");?></li>
-      <li <?php if($status == 1) echo "class='active'";?>><?php echo html::a(inlink('admin', "type={$type}&status=1"), $lang->message->statusList[1]);?></li>
-    </ul>
-  </caption>
   <thead>
     <tr>
-      <th class='w-60px'><?php echo $lang->message->id;?></th>
+      <th style='width:60px'><?php echo $lang->message->id;?></th>
       <th><?php echo $lang->message->content;?></th>
-      <th class='w-160px a-center'><?php echo $lang->actions;?></th>
+      <th class='text-center' style='width:180px'><?php echo $lang->actions;?></th>
     </tr>
   </thead>
   <tbody>
     <?php foreach($messages as $messageID => $message):?>
     <tr>
-      <td rowspan='2' class='a-center'><strong><?php echo $message->id;?></strong></td>
+      <td rowspan='2' class='text-center'><strong><?php echo $message->id;?></strong></td>
       <?php if($message->type == 'comment'):?>
       <td>
         <?php 
@@ -56,12 +52,12 @@ EOT;
       <td>
         <?php echo "<i class='icon-user'></i> <strong>{$message->from}</strong> &nbsp;";?>
         <?php echo "<span class='gray'>$message->date</span>{$lang->message->messageTo}<br/>";?>
-        <?php if(!empty($message->phone)) echo "<i class='icon-phone blue icon'></i> {$message->phone} &nbsp; ";?>
-        <?php if(!empty($message->email)) echo "<i class='icon-envelope green icon'></i> {$message->email} &nbsp; ";?>
+        <?php if(!empty($message->phone)) echo "<i class='icon-phone text-info icon'></i> {$message->phone} &nbsp; ";?>
+        <?php if(!empty($message->email)) echo "<i class='icon-envelope text-warning icon'></i> {$message->email} &nbsp; ";?>
         <?php if(!empty($message->qq))    echo "<strong class='text-danger'>QQ</strong> {$message->qq} &nbsp; ";?>
       </td>
       <?php endif;?>
-      <td rowspan='2' class='a-center v-middle'>
+      <td rowspan='2' class='text-center text-middle'>
         <?php 
         echo html::a(inlink('reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal'");
         echo html::a(inlink('delete', "messageID=$message->id&type=single&status=$status"), $lang->message->delete, "class='deleter'");
@@ -74,7 +70,7 @@ EOT;
     </tr>
     <tr>
       <td class='content-box'>
-        <?php echo html::textarea('', $message->content, "rows='2' class='area-1' spellcheck='false'");?>
+        <?php echo html::textarea('', $message->content, "rows='2' class='form-control borderless' spellcheck='false'");?>
         <?php 
         if(!empty($replies[$messageID]))
         {
@@ -90,6 +86,8 @@ EOT;
     </tr>
     <?php endforeach;?>
   </tbody>
-  <tfoot><tr><td colspan='3' class='a-right'><?php $pager->show();?></td></tr></tfoot>
+  <tfoot><tr><td colspan='3' class='text-right'><?php $pager->show();?></td></tr></tfoot>
 </table>
+</div>
+
 <?php include '../../common/view/footer.admin.html.php';?>

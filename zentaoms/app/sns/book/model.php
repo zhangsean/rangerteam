@@ -40,7 +40,7 @@ class bookModel extends model
      */
     public function getBookByID($id)
     {
-        $book = $this->dao->select('*')->from(TABLE_BOOK)->where('alias')->eq($id)->fetch();
+        $book = $this->dao->select('*')->from(TABLE_BOOK)->where('alias')->eq($id)->andWhere('type')->eq('book')->fetch();
         if(!$book) $book = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($id)->fetch();
         return $book;
     }
@@ -152,7 +152,7 @@ class bookModel extends model
         $upLink      = html::a(helper::createLink('book', 'up', "nodeID=$node->id"), "<i class='icon-arrow-up'></i>", "class='sort'");
         $downLink    = html::a(helper::createLink('book', 'down', "nodeID=$node->id"), "<i class='icon-arrow-down'></i>", "class='sort'");
 
-        if($node->type == 'book')    $catalog .= "<dt class='book'><strong>" . $titleLink . '</strong><span class="actions">' . $editLink . $delLink . $catalogLink . '</span></dt>';
+        if($node->type == 'book')    $catalog .= "<dt class='book'><strong>" . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . '</span></dt>';
         if($node->type == 'chapter') $catalog .= "<dd class='catalog chapter'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . $upLink . $downLink . '</span></dd>';
         if($node->type == 'article') $catalog .= "<dd class='catalog article'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong><span class="actions">' . $editLink . $filesLink . $delLink . $upLink . $downLink . '</span></dd>';
 
@@ -696,7 +696,7 @@ class bookModel extends model
      */
     public function addMenu($content)
     {
-        $nav = "<div id='contentNav'>";
+        $nav = "<ul class='nav nav-content'>";
         $content = str_replace('<h3', '<h4', $content);
         $content = str_replace('h3>', 'h4>', $content);
         preg_match_all('|<h4.*>(.*)</h4>|isU', $content, $result);
@@ -704,12 +704,12 @@ class bookModel extends model
         {
             foreach($result[0] as $id => $item)
             {
-                $nav .= "<div><a href='#$id'>" . strip_tags($item) . "</a></div>";
+                $nav .= "<li><a href='#$id'>" . strip_tags($item) . "</a></li>";
                 $replace = str_replace('<h4', "<h4 id=$id", $item);
                 $content = str_replace($item, $replace, $content);
             }
-            $nav .= "</div>";
-            $content = $nav . $content;
+            $nav .= "</ul>";
+            $content = $nav . "<div class='content'>" . $content . '</div>';
         }
 
         return $content;

@@ -1,56 +1,67 @@
-<div class='panel panel-default thread'>
+<div class='panel thread'>
   <div class='panel-heading'>
-    <h4><i class='icon-comment-alt'></i> <?php echo $thread->title; ?></h4>
-    <div class='muted'><?php echo $thread->addedDate;?></div>
-    <div class='panel-actions'><?php if($thread->readonly) echo "<span class='label label-info'><i class='icon-lock'></i> " . $lang->thread->readonly . "</span> &nbsp;"; ?></div>
+    <i class='icon-comment-alt pull-left'></i>
+    <div class='panel-actions'><?php if($thread->readonly) echo "<span class='label'><i class='icon-lock'></i> " . $lang->thread->readonly . "</span> &nbsp;"; ?></div>
+    <strong><?php echo $thread->title; ?></strong>
+    <div class='text-muted'><?php echo $thread->addedDate;?></div>
   </div>
-  <div class='panel-body no-padding'>
-    <table class='table'>
-      <tbody>
-        <tr>
-          <td class='speaker'>
-            <?php
-            $speaker = $speakers[$thread->author];
-            printf($lang->thread->lblSpeaker, $speaker->account, $speaker->visits, $speaker->shortJoin, $speaker->shortLast);
-            ?>
-          </td>
-          <td id='<?php echo $thread->id;?>'>
-            <?php echo $thread->content;?>
-            <div><?php $this->thread->printFiles($thread, $this->thread->canManage($board->id, $thread->author));?></div>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr> 
-          <td class='a-right' colspan="2" id='manageBox'>
-            <div id='manageMenu'>
-              <?php 
-              if($thread->editor) printf($lang->thread->lblEdited, $thread->editor, $thread->editedDate);
-              if($this->app->user->account != 'guest')
-              {
-                  if(!$thread->readonly) echo html::a('#reply', $lang->reply->common);
-                  if($this->thread->canManage($board->id, $thread->author)) echo html::a(inlink('edit', "threadID=$thread->id"), $lang->edit);
-
-                  if($this->thread->canManage($board->id))
-                  {
-                      echo $lang->thread->sticks[$thread->stick] . ' ';
-                      foreach($lang->thread->sticks as $stick => $label)
-                      {
-                          if($thread->stick != $stick) echo html::a(inlink('stick', "thread=$thread->id&stick=$stick"), $label, "class='jsoner'");
-                      }
-                      echo html::a(inlink('hide',   "threadID=$thread->id"), $lang->thread->hide, "class='jsoner'");
-                      echo html::a(inlink('delete', "threadID=$thread->id"), $lang->delete, "class='deleter'");
-                  }
-              }    
-              else
-              {
-                  echo html::a($this->createLink('user', 'login', 'referer=' . helper::safe64Encode($this->app->getURI(true))) . '#reply', $lang->reply->common);;
-              }
-              ?>
-            </div>
-          </td>
-        </tr>
-      </tfoot>      
-    </table>
-  </div>
+  <table class='table'>
+    <tbody>
+      <tr>
+        <td class='speaker'>
+          <?php $speaker = $speakers[$thread->author]; ?>
+          <strong class='thread-author' data-toggle='tooltip' data-placement='left' data-original-title="<?php echo $lang->thread->author;?>"><i class='icon-user'></i> <?php echo $thread->author; ?></strong>
+          <ul class='list-unstyled'>
+            <li><small>访问次数: </small><span></span></li>
+            <li><small>注册日期: </small><span></span></li>
+            <li><small>上次访问: </small><span></span></li>
+          </ul>
+        </td>
+        <td id='<?php echo $thread->id;?>' class='thread-wrapper'>
+          <div class='thread-content'><?php echo $thread->content;?></div>
+          <?php $this->thread->printFiles($thread, $this->thread->canManage($board->id, $thread->author));?>
+          <div class='thread-foot'>
+            <?php if($thread->editor): ?>
+            <small class='text-muted'><?php printf($lang->thread->lblEdited, $thread->editor, $thread->editedDate); ?></small class='text-muted'>
+            <?php endif; ?>
+            <div class='pull-right thread-actions'>
+              <?php if($this->app->user->account != 'guest'): ?>
+                <?php if($this->thread->canManage($board->id)): ?>
+                <span class='thread-more-actions'>
+                  <span class='dropdown dropup'>
+                    <a data-toggle='dropdown' href='###'><i class='icon-flag-alt'></i> <?php echo $lang->thread->sticks[$thread->stick]; ?> <span class='caret'></span></a>
+                    <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
+                    <?php
+                    foreach($lang->thread->sticks as $stick => $label)
+                    {
+                        if($thread->stick != $stick)
+                        {
+                            echo '<li>' . html::a(inlink('stick', "thread=$thread->id&stick=$stick"), $label, "class='jsoner'") . '</li>';
+                        }
+                        else
+                        {
+                            echo '<li class="active"><a href="###">' . $label . '</a></li>';
+                        }
+                    }
+                    ?>
+                    </ul>
+                  </span>
+                  <?php
+                  echo html::a(inlink('hide',   "threadID=$thread->id"), '<i class="icon-eye-close"></i> ' . $lang->thread->hide, "class='jsoner'");
+                  echo html::a(inlink('delete', "threadID=$thread->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'");
+                  ?>
+                </span>
+                <i class='icon-ellipsis-horizontal icon-more-actions'></i>&nbsp;
+                <?php endif; ?>
+              <?php if($this->thread->canManage($board->id, $thread->author)) echo html::a(inlink('edit', "threadID=$thread->id"), '<i class="icon-pencil"></i> ' . $lang->edit); ?>
+              <a href='#reply' class='thread-reply-btn'><i class='icon-reply'></i> <?php echo $lang->reply->common; ?></a>
+              <?php else: ?>
+              <a href="<?php echo $this->createLink('user', 'login', 'referer=' . helper::safe64Encode($this->app->getURI(true))); ?>#reply" class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common; ?></a>
+              <?php endif; ?>
+            </div>            
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

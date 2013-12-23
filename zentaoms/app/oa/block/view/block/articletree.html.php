@@ -18,20 +18,32 @@ $browseLink     = $type == 'article' ? 'createBrowseLink' : 'create' . ucfirst($
 ?>
 <?php if($block->content->showChildren):?>
 <?php $treeMenu = $this->tree->getTreeMenu($type, 0, array('treeModel', $browseLink));?>
-<div class='box radius panel panel-default'> 
-  <div class='panel-heading'><h4><?php echo $block->title;?></h4></div>
-  <?php echo $treeMenu;?>
+<div class='panel panel-block'>
+  <div class='panel-heading'><h4><i class='icon-sitemap'></i> <?php echo $block->title;?></h4></div>
+  <div class='panel-body'><?php echo $treeMenu;?></div>
 </div>
 <?php else:?>
 <?php $topCategories = $this->tree->getChildren(0, $type);?>
-<div class='list-group'> 
-  <strong class='list-group-item list-group-title'><?php echo $block->title;?></strong>
-  <?php
-  foreach($topCategories as $topCategory)
-  {
-      $browseLink = helper::createLink($type, 'browse', "categoryID={$topCategory->id}", "category={$topCategory->alias}");
-      echo html::a($browseLink, "<i class='icon-folder-close-alt '></i>" . $topCategory->name, "id='category{$topCategory->id}' class='list-group-item'");
-  }
-  ?>
+<div class='panel panel-block'>
+  <div class='panel-heading'>
+    <h4><i class='icon-folder-close'></i> <?php echo $block->title;?></h4>
+  </div>
+  <div class='panel-body'>
+    <ul class='nav nav-secondary nav-stacked'>
+      <?php
+      foreach($topCategories as $topCategory){
+          $browseLink = helper::createLink($type, 'browse', "categoryID={$topCategory->id}", "category={$topCategory->alias}");
+          if($category->name==$topCategory->name)
+          {
+              echo "<li class='active'>" . html::a($browseLink, "<i class='icon-folder-open-alt '></i> &nbsp;" . $topCategory->name, "id='category{$topCategory->id}'") . '</li>';
+          }
+          else
+          {
+              echo '<li>' . html::a($browseLink, "<i class='icon-folder-close-alt '></i> &nbsp;" . $topCategory->name, "id='category{$topCategory->id}'") . '</li>';
+          }
+      }
+      ?>
+    </ul>
+  </div>
 </div>
 <?php endif;?>

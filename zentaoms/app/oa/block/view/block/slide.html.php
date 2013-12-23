@@ -12,7 +12,7 @@
 ?>
 <?php $slides = $this->loadModel('slide')->getList();?>
 <?php if($slides):?>
-<div id='slide' class='carousel slide'>
+<div id='slide' class='carousel slide' data-ride='carousel'>
   <div class='carousel-inner'>
     <?php foreach($slides as $slide):?>
     <div class='item'>
@@ -20,17 +20,19 @@
       $addLink2Image = $slide->url != '' and $slide->label == '';
       $addLink2Image ? print(html::a($slide->url, html::image($slide->image))) : print(html::image($slide->image));
       ?>
-      <div class='container'>
-        <div class='carousel-caption'>
-          <h2><?php echo $slide->title;?></h2>
-          <div class='lead'><?php echo $slide->summary;?></div>
-          <?php if(trim($slide->label) != '') echo html::a($slide->url, $slide->label, "class='btn btn-lg btn-primary'");?>
-        </div>
+      <div class='carousel-caption'>
+        <h2><?php echo $slide->title;?></h2>
+        <div class='lead'><?php echo $slide->summary;?></div>
+        <?php if(trim($slide->label) != '') echo html::a($slide->url, $slide->label, "class='btn btn-lg btn-primary'");?>
       </div>
     </div>
     <?php endforeach;?>
   </div>
-  <?php echo html::a('#slide', $this->lang->prev, "class='left carousel-control' data-slide='prev'")?>
-  <?php echo html::a('#slide', $this->lang->next, "class='right carousel-control' data-slide='next'")?>
+  <a class='left carousel-control' href='#slide' data-slide='prev'>
+    <i class='icon-prev'></i>
+  </a>
+  <a class='right carousel-control' href='#slide' data-slide='next'>
+    <i class='icon-next'></i>
+  </a>
 </div>
 <?php endif;?>

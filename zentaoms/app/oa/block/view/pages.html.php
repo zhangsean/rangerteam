@@ -11,26 +11,28 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<table class='table table-bordered table-hover table-striped w-p80'>
-  <caption><?php echo $lang->block->browseRegion;?></caption>
-  <tr>
-    <th class='w-200px'><?php echo $lang->block->page;?></th>
-    <th class='a-center'><?php echo $lang->block->regionList;?></th>
-  </tr>
-  <?php foreach($this->lang->block->pages as $page => $name):?>
-  <?php if(empty($lang->block->regions->$page)) continue;?>
-  <tr>
-    <td class='a-left'><?php echo $name;?></td>
-    <td>
-    <?php
-    $regions = $lang->block->regions->$page;
-    foreach($regions as $region => $regionName)
-    {
-        echo html::a($this->inlink('setregion', "page={$page}&region={$region}"), $regionName);
-    }
-    ?>
-    </td>
-  </tr>
-  <?php endforeach;?>
-</table>
+<div class='panel'>
+  <div class='panel-heading'><strong><i class='icon-columns'></i> <?php echo $lang->block->browseRegion;?></strong></div>
+  <table class='table table-bordered table-hover table-striped'>
+    <tr>
+      <th style='width: 200px'><?php echo $lang->block->page;?></th>
+      <th class='text-center'><?php echo $lang->block->regionList;?></th>
+    </tr>
+    <?php foreach($this->lang->block->pages as $page => $name):?>
+    <?php if(empty($lang->block->regions->$page)) continue;?>
+    <tr>
+      <td><?php echo $name;?></td>
+      <td>
+      <?php
+      $regions = $lang->block->regions->$page;
+      foreach($regions as $region => $regionName)
+      {
+          echo html::a($this->inlink('setregion', "page={$page}&region={$region}"), $regionName);
+      }
+      ?>
+      </td>
+    </tr>
+    <?php endforeach;?>
+  </table>
+</div>
 <?php include '../../common/view/footer.admin.html.php';?>

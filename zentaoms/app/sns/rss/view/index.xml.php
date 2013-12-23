@@ -2,7 +2,7 @@
 <rss version="2.0">
 <channel>
   <title><?php echo $title;?></title>
-  <link><?php echo urlencode($siteLink);?></link>
+  <link><![CDATA[<?php echo $siteLink;?>]]></link>
   <description><?php echo $desc;?></description>
   <copyright><?php echo $config->company->name . $config->site->copyright . '-' . date('Y');?></copyright>
   <lastBuildDate><?php echo $lastDate;?></lastBuildDate>
@@ -16,7 +16,7 @@
   <item>
     <title><?php echo $article->title?></title>
     <description><![CDATA[  <?php echo $article->content;?>]]></description>
-    <link><?php echo urlencode($siteLink . $this->createLink('article', 'view', "id=$article->id", 'html'));?></link>
+    <link><![CDATA[<?php echo $siteLink . $this->createLink('article', 'view', "id=$article->id", 'html');?>]]></link>
     <category><?php echo $category->name; ?></category>
     <pubDate><?php echo $article->addedDate . ' +0800';?></pubDate>
   </item>

@@ -16,63 +16,88 @@ $type     = str_replace('product', '', strtolower($block->type));
 $method   = 'get' . $type;
 $products = $this->loadModel('product')->$method($content->category, $content->limit);?>
 <?php if(isset($content->image)):?>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4 class='title'><?php echo $block->title?></h4>
+<div class='panel panel-block'>
+  <div class='panel-heading'>
+    <h4><i class='icon-th'></i> <?php echo $block->title?></h4>
   </div>
-  <div class="panel-body">
-    <ul class="media-list">
+  <div class='panel-body'>
+    <div class='cards cards-borderless'>
       <?php foreach($products as $product):?>
-      <li class='media'>
-        <?php 
-        $productCategory = array_shift($product->categories);
-        $url = helper::createLink('product', 'view', "id=$product->id", "category={$productCategory->alias}&name=$product->alias");
-        $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-        if(empty($product->image)) 
-        {
-            echo html::a($url, html::image($themeRoot . 'default/images/main/noimage.gif', "title='{$title}' class='adaptive'"), "class='media-image'");
-        }
-        else
-        {
-            echo html::a($url, html::image($product->image->primary->middleURL, "title='{$title}' class='adaptive'"), "class='media-image'");
-        }
-        ?>
-        <div class='media-body'>
-          <h5 class='media-heading'><?php echo html::a($url, $product->name);?></h5>
-          <?php if($product->promotion != 0 && $product->price != 0):?>
-          <p>
-            <del><?php echo $lang->RMB . $product->price;?></del>
-            <em><?php echo $lang->RMB . $product->promotion;?></em>
-          </p>
-          <?php elseif($product->promotion == 0 && $product->price != 0):?>
-          <p><em><?php echo $lang->product->price . $lang->RMB . $product->price;?></em></p>
-          <?php elseif($product->promotion != 0 && $product->price == 0):?>
-          <p><em><?php echo $lang->product->promotion . $lang->RMB . $product->promotion;?></em></p>
-          <?php endif;?>
-        </div>
-      </li>
+      <?php 
+      $productCategory = array_shift($product->categories);
+      $url = helper::createLink('product', 'view', "id=$product->id", "category={$productCategory->alias}&name=$product->alias");
+      $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
+      ?>
+      <?php if(!empty($product->image)): ?>
+      <div class='col-md-12 col-sm-4 col-xs-6'>
+        <a class='card' href="<?php echo $url;?>">
+          <div class='media'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
+          <strong class='card-heading'>
+            <span class='pull-right text-latin'>
+            <?php
+            if($product->promotion != 0)
+            {
+                if($product->price != 0)
+                {
+                    echo "<del class='text-muted'><i class='icon-yen'></i> " . $product->price .'</del>';
+                }
+                echo "&nbsp;&nbsp;<span class='text-muted'><i class='icon-yen'></i></span> ";
+                echo "<strong class='text-danger'>" . $product->promotion . '</strong>';
+            }
+            else
+            {
+                if($product->price != 0)
+                {
+                    echo "<span class='text-muted'><i class='icon-yen'></i></span> ";
+                    echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;';
+                }
+            }
+            ?>
+            </span>
+            <?php echo $product->name; ?>
+          </strong>
+        </a>
+      </div>
+      <?php endif;?>
       <?php endforeach;?>
-    </ul>      
+    </div>
   </div>
 </div>
 <?php else:?>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4 class='title'><?php echo $block->title?></h4>
-  </div>
-  <div class="panel-body">
-    <ul class="mg-zero pd-zero">
+<div class='panel panel-block'>
+  <div class='panel-heading'><h4><i class='icon-list-ul'></i> <?php echo $block->title;?></h4></div>
+  <div class='panel-body'>
+    <ul class='ul-list'>
       <?php foreach($products as $product):?>
-      <li>
-        <?php 
-        $productCategory = array_shift($product->categories);
-        $url = helper::createLink('product', 'view', "id=$product->id", "category={$productCategory->alias}&name=$product->alias");
+      <?php 
+      $category = array_shift($product->categories);
+      $url = helper::createLink('product', 'view', "id=$product->id", "category={$productCategory->alias}&name=$product->alias");
         $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
+      ?>
+      <li>
+        <span class='text-latin pull-right'>
+        <?php
+        if($product->promotion != 0)
+        {
+            if($product->price != 0)
+            {
+                echo "<small class='text-muted'><i class='icon-yen'></i></small> ";
+                echo "<del><small class='text-muted'>" . $product->price . "</small></del>";
+            }
+            echo "&nbsp; <small class='text-muted'><i class='icon-yen'></i></small> ";
+            echo "<strong class='text-danger'>" . $product->promotion . "</strong>";
+        }
+        else if($product->price != 0)
+        {
+            echo "&nbsp; <small class='text-muted'><i class='icon-yen'></i></small> ";
+            echo "<strong class='text-important'>" . $product->price . "</strong>";
+        }
         ?>
-        <i class='icon-chevron-right'></i><?php echo html::a($url, $product->name);?>
+        </span>
+        <?php echo html::a($url, $product->name);?>
       </li>
       <?php endforeach;?>
-    </ul>      
+    </ul>
   </div>
 </div>
 <?php endif;?>

@@ -1,4 +1,11 @@
 $(document).ready(function()
 {
-    $('#commentBox').load( createLink('comment', 'show', 'objectType=article&objectID=' + v.articleID) );  
+    $('#commentBox').load( createLink('message', 'comment', 'objectType=book&objectID=' + v.articleID) );
+    
+    $('body').tooltip(
+    {
+        html: true,
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    });  
 });

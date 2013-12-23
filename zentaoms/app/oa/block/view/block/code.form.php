@@ -12,5 +12,5 @@
 ?>
 <tr>
   <th><?php echo $lang->block->code;?></th>
-  <td><?php echo html::textarea('content', isset($block) ? $block->content : '', 'rows=20 class="area-1 form-control"');?></td>
+  <td><?php echo html::textarea('content', isset($block) ? $block->content : '', 'rows=20 class="form-control"');?></td>
 </tr>

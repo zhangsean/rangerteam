@@ -10,11 +10,11 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<div id='contact' class="panel panel-default">
-  <div class="panel-heading">
-    <h4><?php echo $block->title;?></h4>
+<div id='about' class='panel panel-block'>
+  <div class='panel-heading'>
+    <h4><i class='icon-group'></i> <?php echo $block->title;?></h4>
   </div>
-  <div class="panel-body">
+  <div class='panel-body'>
     <?php echo $this->config->company->desc;?>
     <?php echo html::a(helper::createLink('company', 'index'), $this->lang->more . $this->lang->raquo);?>
   </div>

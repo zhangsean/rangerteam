@@ -11,22 +11,25 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php'; ?>
-<form id='ajaxForm' method='post'>
-  <table class='table table-hover table-striped'>
-    <caption><?php echo $lang->block->setPage . '-'. $lang->block->pages[$page] . '-' . $lang->block->regions->{$page}[$region];?></caption>
-    <thead>
-      <tr class='a-center'>
-        <th class='w-p30 a-center'><?php echo $lang->block->title;?></th>
-        <th><?php echo $lang->actions; ?></th>
-      </tr>
-    </thead>
-    <tbody>
-    <?php foreach($blocks as $block) echo $this->block->createEntry($block);?>
-    </tbody>
-    <tbody id='entry' class='hide'><?php echo $this->block->createEntry();?></tbody>
-    <tfoot>
-      <tr> <td colspan='2' class='a-center'> <?php echo html::submitButton();?> </td> </tr>
-    </tfoot>
-  </table>
-</form>
+<div class='panel'>
+  <div class='panel-heading'><strong><i class='icon-cog'></i> <?php echo $lang->block->setPage . ' - '. $lang->block->pages[$page] . ' - ' . $lang->block->regions->{$page}[$region];?></strong></div>
+    <form id='ajaxForm' method='post'>
+      <table class='table table-hover table-striped table-bordered'>
+        <caption></caption>
+        <thead>
+          <tr>
+            <th class='text-center col-xs-4'><?php echo $lang->block->title;?></th>
+            <th><?php echo $lang->actions; ?></th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php foreach($blocks as $block) echo $this->block->createEntry($block);?>
+        </tbody>
+        <tbody id='entry' class='hide'><?php echo $this->block->createEntry();?></tbody>
+        <tfoot>
+          <tr> <td colspan='2' class='a-center'> <?php echo html::submitButton();?> </td> </tr>
+        </tfoot>
+      </table>
+    </form>
+</div>
 <?php include '../../common/view/footer.admin.html.php';?>

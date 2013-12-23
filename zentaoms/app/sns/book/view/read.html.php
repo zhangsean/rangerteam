@@ -1,30 +1,43 @@
 <?php include '../../common/view/header.html.php';?>
+<?php js::set('articleID', $article->id)?>
 <?php $common->printPositionBar($article->origins);?>
-<div class='box radius'>
-  <div class='content'>
-    <h1 class='a-center'><?php echo $article->title;?></h1>
-    <div class='a-center mb-10px'>
-      <div class='f-12px'>
-      <?php
-      printf($lang->book->lblAddedDate, $article->addedDate);
-      printf($lang->book->lblAuthor,    $article->author);
-      printf($lang->book->lblViews,     $article->views);
-      ?>
-      </div>
-    </div>
-    <?php if($article->summary) echo "<div class='summary'><strong>{$lang->book->summary}</strong>$lang->colon$article->summary</div>";?>
-    <div>
-      <?php echo $content;?>
-      <div class='article-file mt-10px'><?php $this->book->printFiles($article->files);?></div>
-    </div>
-    <?php if($article->keywords) echo "<div class='keywords'><strong>{$lang->book->keywords}</strong>$lang->colon$article->keywords</div>";?>
+<div class='article'>
+  <header>
+    <h2><?php echo $article->title;?></h2>
+    <dl class='dl-inline'>
+      <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, $article->addedDate);?>'><i class='icon-time icon-large'></i> <?php echo $article->addedDate; ?></dd>
+      <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
+      <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></dd>
+    </dl>
+    <?php if($article->summary):?>
+    <section class='abstract'><strong><?php echo $lang->book->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
+    <?php endif; ?>
+  </header>
+  <section class='article-content'>
+    <?php echo $content;;?>
+  </section>
+  <section>
+    <?php $this->book->printFiles($article->files);?>
+  </section>
+  <footer>
+    <?php if($article->keywords):?>
+    <p class='small'><strong class='text-muted'><?php echo $lang->book->keywords;?></strong><span class='article-keywords'><?php echo $lang->colon . $article->keywords;?></span></p>
+    <?php endif; ?>
     <?php extract($prevAndNext);?>
-    <div class='row f-12px mt-10px'>
-      <div class='col-md-4 a-left'> <?php $prev ? print($lang->book->prev . $lang->colon . html::a(inlink('read', "id=$prev->id", "book={$book->alias}&node={$prev->alias}"), $prev->title)) : print($lang->book->none);?></div>
-      <div class='col-md-4 a-center'><?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&node={$parent->alias}"), $lang->book->chapter);?></div>
-      <div class='col-md-4 a-right'><?php $next ? print($lang->book->next . $lang->colon . html::a(inlink('read', "id=$next->id", "book={$book->alias}&node={$next->alias}"), $next->title)) : print($lang->book->none);?></div>
-    </div>
-  </div>
+    <ul class='pager pager-justify'>
+      <?php if($prev): ?>
+      <li class='previous'><?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}"), "<i class='icon-arrow-left'></i> " . $lang->book->prev . $lang->colon . $prev->title); ?></li>
+      <?php else: ?>
+      <li class='preious disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->book->none); ?></a></li>
+      <?php endif; ?>
+      <li><?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}"), "<i class='icon-list-ul'></i> " . $lang->book->chapter);?></li>
+      <?php if($next):?>
+      <li class='next'><?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}"), $lang->book->next . $lang->colon . $next->title . " <i class='icon-arrow-right'></i>"); ?></li>
+      <?php else:?>
+      <li class='next disabled'><a href='###'> <?php print($lang->book->none); ?><i class='icon-arrow-right'></i></a></li>
+      <?php endif; ?>
+    </ul>
+  </footer>
 </div>
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=book&objectID=$article->id");?></div>
 <?php include '../../common/view/footer.html.php'; ?>

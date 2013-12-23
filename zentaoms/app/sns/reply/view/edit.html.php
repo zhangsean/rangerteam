@@ -14,27 +14,29 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php $common->printPositionBar($board, $thread);?>
 
-<form method='post' id='editForm' enctype='multipart/form-data'>
-  <table class='table table-form'>
-    <caption><?php echo $lang->reply->edit;?></caption>
-    <tr>
-      <th class='w-100px'><?php echo $lang->reply->content;?></th>
-      <td><?php echo html::textarea('content', $reply->content, "rows='15' class='area-1'");?></td>
-    </tr>
-    <tr>
-      <th><?php echo $lang->thread->file;?></th>
-      <td>
-        <?php
-        $this->reply->printFiles($reply, $canManage = true);
-        echo $this->fetch('file', 'buildForm');
-        ?>
-      </td>
-    </tr>
-    <tr id='captchaBox' style="display:none;"><td colspan='2'></td></tr>  
-    <tr>
-      <th></th>
-      <td colspan='2'><?php echo html::submitButton() . html::backButton();?></td>
-    </tr>
-  </table>
-</form>
+<div class='panel'>
+  <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->reply->edit;?></strong></div>
+  <div class='panel-body'>
+    <form method='post' class='form-horizontal' id='editForm' enctype='multipart/form-data'>
+      <div class='form-group'>
+        <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->reply->content;?></label>
+        <div class='col-md-11 col-sm-10'><?php echo html::textarea('content', $reply->content, "rows='15' class='form-control'");?></div>
+      </div>
+      <div class='form-group'>
+        <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->file;?></label>
+        <div class='col-md-7 col-sm-8 col-xs-11'>
+          <?php
+          $this->reply->printFiles($reply, $canManage = true);
+          echo $this->fetch('file', 'buildForm');
+          ?>
+        </div>
+      </div>
+      <div class='form-group' id='captchaBox' style='display:none'></div>
+      <div class='form-group'>
+        <label class='col-md-1 col-sm-2'></label>
+        <div class='col-md-11 col-sm-10'><?php echo html::submitButton() . ' &nbsp; ' . html::backButton();?></div>
+      </div>
+    </form>
+  </div>
+</div>
 <?php include '../../common/view/footer.html.php';?>

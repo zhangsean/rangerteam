@@ -90,9 +90,8 @@ class book extends control
         $this->book->setMenu();
 
         if($nodeID)  ($node = $this->book->getNodeByID($nodeID))   && $book   = $node->book;
-        if(!$nodeID) ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
-        if(!$node)   ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
-        if(!$node)   $this->locate(inlink('create'));
+        if(!$nodeID or !$node)   ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
+        if(!$node)  $this->locate(inlink('create'));
 
         $this->view->title   = $this->lang->book->common;
         $this->view->book    = $book;

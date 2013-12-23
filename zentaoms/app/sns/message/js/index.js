@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+    $('.nav-system-message').addClass('active');
     $.setAjaxForm('#commentForm', function(response)
     {
         if(response.result == 'success')

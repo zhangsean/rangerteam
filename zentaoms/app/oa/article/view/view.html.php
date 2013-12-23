@@ -9,46 +9,52 @@ js::set('articleID', $article->id);
 <?php $common->printPositionBar($category, $article);?>
 <div class='row'>
   <div class='col-md-9'>
-    <div class='box radius'>
-      <div class='content' id="articleContent">
-        <h1 class='a-center'><?php echo $article->title;?></h1>
-        <div class='f-12px mb-10px a-center'>
-          <?php
-          printf($lang->article->lblAddedDate, $article->addedDate);
-          printf($lang->article->lblAuthor,    $article->author);
-          if($article->original)
-          {
-              echo "<strong>{$lang->article->originalList[$article->original]}</strong> &nbsp;&nbsp;";
-          }
-          else
-          {
-              printf($lang->article->lblSource);
-              $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); 
-          }
-          printf($lang->article->lblViews, $article->views);
-
-          if(!empty($this->config->oauth->sina))
-          {
-              $sina = json_decode($this->config->oauth->sina);
-              if($sina->widget) echo $sina->widget; 
-          }
-          ?>
-        </div>
+    <div class="article">
+      <header>
+        <h1><?php echo $article->title;?></h1>
+        <dl class="dl-inline">
+            <dd data-toggle="tooltip" data-placement="top" data-original-title="<?php printf($lang->article->lblAddedDate, $article->addedDate);?>"><i class="icon-time icon-large"></i> <?php echo $article->addedDate; ?></dd>
+            <dd data-toggle="tooltip" data-placement="top" data-original-title="<?php printf($lang->article->lblAuthor, $article->author);?>"><i class="icon-user icon-large"></i> <?php echo $article->author; ?></dd>
+            <?php if(!$article->original):?>
+            <dt><?php echo $lang->article->lblSource; ?></dt>
+            <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
+            <?php endif; ?>
+            <dd class="pull-right">
+              <?php if($article->original):?>
+              <span class="label label-success"><?php echo $lang->article->originalList[$article->original]; ?></span>
+              <?php endif;?>
+              <span class="label label-warning" data-toggle="tooltip" data-placement="top" data-original-title="<?php printf($lang->article->lblViews, $article->views);?>"><i class="icon-eye-open"></i> <?php echo $article->views; ?></span>
+              <a href="#commentBox" class="label label-info"><i class="icon-comment"></i> 0</a>
+            </dd>
+        </dl>
         <?php if($article->summary):?>
-        <div class='summary'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></div>
-        <?php endif;?>
-        <p><?php echo $article->content;?></p>
-        <div class='article-file mt-10px'><?php $this->article->printFiles($article->files);?></div>
+        <section class='abstract'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
+        <?php endif; ?>
+      </header>
+      <section class="article-content">
+        <?php echo $article->content;?>
+      </section>
+      <section>
+        <?php $this->article->printFiles($article->files);?>
+      </section>
+      <footer>
         <?php if($article->keywords):?>
-        <div class='keywords'><strong><?php echo $lang->article->keywords;?></strong><?php echo $lang->colon . $article->keywords;?></div>
-        <?php endif;?>
+        <p class='small'><strong class="text-muted"><?php echo $lang->article->keywords;?></strong><span class="article-keywords"><?php echo $lang->colon . $article->keywords;?></span></p>
+        <?php endif; ?>
         <?php extract($prevAndNext);?>
-        <div class='row f-12px mt-20px'>
-          <div class='col-sm-5 a-left'> <?php $prev ? print($lang->article->prev . $lang->colon . html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), $prev->title)) : print($lang->article->none);?></div>
-          <div class="col-sm-2 text-center"><a href="#articleContent"><i class="icon-arrow-up"></i> <?php echo $lang->article->back2Top; ?></a></div>
-          <div class='col-sm-5 a-right'><?php $next ? print($lang->article->next . $lang->colon . html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $next->title)) : print($lang->article->none);?></div>
-        </div>
-      </div>
+        <ul class="pager pager-justify">
+          <?php if($prev): ?>
+          <li class="previous"><?php echo html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), '<i class="icon-arrow-left"></i> ' . $lang->article->prev . $lang->colon . $prev->title); ?></li>
+          <?php else: ?>
+          <li class="preious disabled"><a href="###"><i class="icon-arrow-left"></i> <?php print($lang->article->none); ?></a></li>
+          <?php endif; ?>
+          <?php if($next):?>
+          <li class="next"><?php echo html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $lang->article->next . $lang->colon . $next->title . ' <i class="icon-arrow-right"></i>'); ?></li>
+          <?php else:?>
+          <li class="next disabled"><a href="###"> <?php print($lang->article->none); ?><i class="icon-arrow-right"></i></a></li>
+          <?php endif; ?>
+        </ul>
+      </footer>
     </div>
     <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
     <?php echo html::a('', '', "name='comment'");?>
