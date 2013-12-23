@@ -8,15 +8,7 @@
   <table class='table'>
     <tbody>
       <tr>
-        <td class='speaker'>
-          <?php $speaker = $speakers[$thread->author]; ?>
-          <strong class='thread-author' data-toggle='tooltip' data-placement='left' data-original-title="<?php echo $lang->thread->author;?>"><i class='icon-user'></i> <?php echo $thread->author; ?></strong>
-          <ul class='list-unstyled'>
-            <li><small>访问次数: </small><span></span></li>
-            <li><small>注册日期: </small><span></span></li>
-            <li><small>上次访问: </small><span></span></li>
-          </ul>
-        </td>
+        <td class='speaker'><?php $this->thread->printSpeaker($speakers[$thread->author]);?></td>
         <td id='<?php echo $thread->id;?>' class='thread-wrapper'>
           <div class='thread-content'><?php echo $thread->content;?></div>
           <?php $this->thread->printFiles($thread, $this->thread->canManage($board->id, $thread->author));?>

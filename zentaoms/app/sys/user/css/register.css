@@ -1,7 +1,5 @@
-#reg .panel{width: 500px;margin: 30px auto;border: none;}
-#reg .panel-heading{background-color: transparent;}
-#reg .panel-body {padding: 30px;}
-#reg .panel-body table{width: 100%;}
-#reg .panel-body td,#reg .panel-body th{padding: 5px 10px;}
-#reg .panel-body th{text-align: right;}
-#reg .text-box,#submit{width: 90%;}
+#reg
+{
+  max-width: 500px;
+  margin: 20px auto;
+}

@@ -9,32 +9,34 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-$lang->message->common      = 'Comment';
-$lang->message->id          = 'ID';
-$lang->message->type        = 'Type';
-$lang->message->from        = 'Name';
-$lang->message->content     = 'Content';
-$lang->message->phone       = 'Phone';
-$lang->message->qq          = 'QQ';
-$lang->message->email       = 'Email';
-$lang->message->public      = 'Public';
-$lang->message->captcha     = 'Captcha';
-$lang->message->list        = 'List';
-$lang->message->post        = 'Add a comment';
-$lang->message->viewArticle = 'View article';
-$lang->message->viewComment = 'View comment';
-$lang->message->thanks      = 'Thanks for your comment!';
+$lang->message->common            = 'Comment';
+$lang->message->id                = 'ID';
+$lang->message->type              = 'Type';
+$lang->message->from              = 'Name';
+$lang->message->content           = 'Content';
+$lang->message->phone             = 'Phone';
+$lang->message->qq                = 'QQ';
+$lang->message->email             = 'Email';
+$lang->message->public            = 'Public';
+$lang->message->captcha           = 'Captcha';
+$lang->message->list              = 'List';
+$lang->message->post              = 'Add a comment';
+$lang->message->viewArticle       = 'View article';
+$lang->message->viewComment       = 'View comment';
+$lang->message->thanks            = 'Thanks for your comment!';
+$lang->message->noSelectedMessage = 'No message selected.';
 
-$lang->message->pass          = 'Pass';
-$lang->message->reply         = 'Reply';
-$lang->message->view          = 'View';
-$lang->message->manage        = 'Manage';
-$lang->message->delete        = 'Delete';
-$lang->message->passPre       = 'Pass previous';
-$lang->message->deletePre     = 'Delete previous';
-$lang->message->commentTo     = 'Comment';
-$lang->message->deletedObject = 'Deleted';
-$lang->message->contactHidden = "<i class='text-muted'>Contact will be hidden.</i>";
+$lang->message->pass           = 'Pass';
+$lang->message->reply          = 'Reply';
+$lang->message->view           = 'View';
+$lang->message->manage         = 'Manage';
+$lang->message->delete         = 'Delete';
+$lang->message->deleteSelected = 'Delete selected';
+$lang->message->passPre        = 'Pass previous';
+$lang->message->deletePre      = 'Delete previous';
+$lang->message->commentTo      = 'Comment';
+$lang->message->deletedObject  = 'Deleted';
+$lang->message->contactHidden  = "<i class='text-muted'>Contact will be hidden.</i>";
 
 $lang->message->confirmDeleteSingle = 'Are you sure to delete this comment?';
 $lang->message->confirmDeletePre    = 'Are you sure to delete comments previous?';

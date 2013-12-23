@@ -14,8 +14,8 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-certificate'></i> <?php echo $lang->ui->setLogo;?></strong>
-    <div class='panel-heading-actions'>
-      <a href='###' class='action-primary'><i class='icon-edit'></i> <?php echo $lang->site->changeLogo; ?></a>
+    <div class='panel-actions'>
+      <a href='###' class='btn btn-info'><i class='icon-edit'></i> <?php echo $lang->site->changeLogo; ?></a>
     </div>
   </div>
   <div id='setContainer'>

@@ -368,6 +368,28 @@ class threadModel extends model
     }
 
     /**
+     * print speaker.
+     * 
+     * @param  object   $speaker 
+     * @access public
+     * @return string
+     */
+    public function printSpeaker($speaker)
+    {
+        $speaker->joinShort = str_replace(date('Y-'), '', substr($speaker->join, 0, 10));
+        $speaker->lastShort = str_replace(date('Y-'), '', substr($speaker->last, 0, 10));
+        echo  <<<EOT
+        <strong class='thread-author'><i class='icon-user'></i> {$speaker->realname}</strong>
+        <ul class='list-unstyled'>
+          <li><small>{$this->lang->user->visits}: </small><span>{$speaker->visits}</span></li>
+          <li><small>{$this->lang->user->join}: </small><span>{$speaker->joinShort}</span></li>
+          <li><small>{$this->lang->user->last}: </small><span>{$speaker->lastShort}</span></li>
+        </ul>
+EOT;
+
+    }
+
+    /**
      * Judge the user can manage current board nor not.
      * 
      * @param  int    $boardID 

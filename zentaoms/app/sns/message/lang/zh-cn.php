@@ -9,32 +9,36 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-$lang->message->common      = '留言';
-$lang->message->id          = '编号';
-$lang->message->type        = '类型';
-$lang->message->from        = '称呼';
-$lang->message->content     = '留言';
-$lang->message->phone       = '电话';
-$lang->message->qq          = 'QQ';
-$lang->message->email       = '邮箱';
-$lang->message->public      = '公开';
-$lang->message->captcha     = '验证码';
-$lang->message->list        = '留言列表';
-$lang->message->post        = '发表留言';
-$lang->message->viewArticle = '正文';
-$lang->message->viewComment = '留言';
-$lang->message->thanks      = '感谢您的留言！';
+$lang->message->common            = '留言';
+$lang->message->id                = '编号';
+$lang->message->type              = '类型';
+$lang->message->from              = '称呼';
+$lang->message->content           = '留言';
+$lang->message->phone             = '电话';
+$lang->message->qq                = 'QQ';
+$lang->message->email             = '邮箱';
+$lang->message->date              = '时间';
+$lang->message->public            = '公开';
+$lang->message->readed            = '已读';
+$lang->message->captcha           = '验证码';
+$lang->message->list              = '留言列表';
+$lang->message->post              = '发表留言';
+$lang->message->viewArticle       = '正文';
+$lang->message->viewComment       = '留言';
+$lang->message->thanks            = '感谢您的留言！';
+$lang->message->noSelectedMessage = '您没有选择任何留言。';
 
-$lang->message->pass          = '通过';
-$lang->message->reply         = '回复';
-$lang->message->view          = '查看';
-$lang->message->manage        = '留言管理';
-$lang->message->delete        = '删除';
-$lang->message->passPre       = '通过之前';
-$lang->message->deletePre     = '删除之前';
-$lang->message->commentTo     = '发表于';
-$lang->message->deletedObject = '已删除项目';
-$lang->message->contactHidden = "<i class='text-muted'>联系方式不会公开</i>";
+$lang->message->pass           = '通过';
+$lang->message->reply          = '回复';
+$lang->message->view           = '查看';
+$lang->message->manage         = '留言管理';
+$lang->message->delete         = '删除';
+$lang->message->deleteSelected = '删除选中项';
+$lang->message->passPre        = '通过之前';
+$lang->message->deletePre      = '删除之前';
+$lang->message->commentTo      = '发表于';
+$lang->message->deletedObject  = '已删除项目';
+$lang->message->contactHidden  = "<i class='text-muted'>联系方式不会公开</i>";
 
 $lang->message->confirmDeleteSingle = '您确定要删除该留言吗？';
 $lang->message->confirmDeletePre    = '您确定要删除之前的留言吗？';

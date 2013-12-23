@@ -70,6 +70,7 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 .help-inline{display: block;margin: 7px 0;color: #666}
 
 /* navbar */
+#mainNavbar .navbar-collapse .navbar-nav.navbar-right:last-child{margin-right: 0;}
 @media (max-width: 767px){
   #mainNavbar .navbar-collapse .navbar-nav > li > a{padding: 15px 20px;}
 }
@@ -86,6 +87,6 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 }
 @media screen and (min-width:768px) and (max-width:991px){
   #mainNavbar.navbar-simple .navbar-collapse .navbar-nav > li.simple-mode-b > a,#mainNavbar .navbar-collapse .navbar-nav > li.simple-mode-a > a{padding: 15px 8px;}
-  #mainNavbar .navbar-nav.navbar-right > li > a{padding: 15px 7px;font-size: 12px;}
+  #mainNavbar .navbar-nav.navbar-right > li > a{padding: 15px 4px;font-size: 12px;}
   #navbarSwitcher a{padding: 15px 5px;}
 }

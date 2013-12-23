@@ -7,16 +7,7 @@
   </div>
   <table class='table'>
     <tr>
-      <td class='speaker'>
-        <?php $speaker = $speakers[$reply->author]; ?>
-        <strong class='thread-author' data-toggle='tooltip' data-placement='left' data-original-title="<?php echo $lang->thread->author;?>"><i class='icon-user'></i> <?php echo $reply->author; ?></strong>
-        <ul class='list-unstyled'>
-          <li><small>访问次数: </small><span></span></li>
-          <li><small>注册日期: </small><span></span></li>
-          <li><small>上次访问: </small><span></span></li>
-          <small class='text-danger'><span class='label label-danger'>TODO</span> 内容错误</small>
-        </ul>
-      </td>
+      <td class='speaker'><?php $this->thread->printSpeaker($speakers[$reply->author]);?></td>
       <td id='<?php echo $reply->id;?>' class='thread-wrapper'>
         <div class='thread-content'><?php echo $reply->content;?></div>
         <?php $this->reply->printFiles($reply, $this->thread->canManage($board->id, $reply->author));?>
