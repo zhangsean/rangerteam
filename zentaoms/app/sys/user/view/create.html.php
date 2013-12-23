@@ -22,67 +22,69 @@
   <div class='col-md-10'>
     <div class="panel">
       <div class="panel-heading"><strong><i class="icon-plus"></i> <?php echo $lang->user->create;?></strong></div>
-      <form method='post' id='ajaxForm' class='form-inline form-horizontal' role="form">
-        <table class='table table-form table-bordered'>
-          <tr>
-            <th><?php echo $lang->user->dept;?></th>
-            <td><?php echo html::select('dept', $depts, '', "class='select-3'");?></td>
-          </tr>  
-          <tr>
-            <th class='w-100px'><?php echo $lang->user->account;?></th>
-            <td><?php echo html::input('account', '', "class='text-3'");?></td>
-          </tr>  
-          <tr>
-            <th class='w-100px'><?php echo $lang->user->realname;?></th>
-            <td><?php echo html::input('realname', '', "class='text-3'");?></td>
-          </tr>  
-          <tr>
-            <th><?php echo $lang->user->email;?></th>
-            <td><?php echo html::input('email', '', "class='text-3'");?></td>
-          </tr>  
-          <tr>
-            <th><?php echo $lang->user->password;?></th>
-            <td><?php echo html::password('password1', '', "class='text-3' autocomplete='off'")?></td>
-          </tr>  
-          <tr>
-            <th><?php echo $lang->user->password2;?></th>
-            <td><?php echo html::password('password2', '', "class='text-3'");?></td>
-          </tr>  
-          <tr>
-            <th><?php echo $lang->user->role;?></th>
-            <td><?php echo html::select('role', $lang->user->roleList, '', "class='select-3'");?></td>
-          </tr>  
-          <tr>
-            <th><?php echo $lang->user->gendar;?></th>
-            <td><?php unset($lang->user->gendarList->u); echo html::radio('gendar', $lang->user->gendarList, '');?></td>
-          </tr>  
-          <tr>
-            <th><?php echo $lang->user->company;?></th>
-            <td><?php echo html::input('company', $config->company->name, "class='text-3'");?></td>
-          </tr>  
-          <tr>
-            <th><?php echo $lang->user->address;?></th>
-            <td><?php echo html::input('address', '', "class='text-3'");?></td>
-          </tr>  
-          <tr>
-            <th><?php echo $lang->user->mobile;?></th>
-            <td><?php echo html::input('mobile', '', "class='text-3'");?></td>
-          </tr>  
-          <tr>
-            <th><?php echo $lang->user->phone;?></th>
-            <td><?php echo html::input('phone', '', "class='text-3'");?></td>
-          </tr>  
-          <tr>
-            <th><?php echo $lang->user->qq;?></th>
-            <td><?php echo html::input('qq', '', "class='text-3'");?></td>
-          </tr>  
-          <tr>
-            <th><?php echo $lang->user->gtalk;?></th>
-            <td><?php echo html::input('gtalk', '', "class='text-3'");?></td>
-          </tr>  
-          <tr><th></th><td><?php echo html::submitButton();?></td></tr>
-        </table>
-      </form>
+      <div class='panel-body'>
+        <form method='post' id='ajaxForm' class='form-inline form-horizontal' role="form">
+          <table class='table table-form'>
+            <tr>
+              <th style='width:100px'><?php echo $lang->user->dept;?></th>
+              <td style='width:40%'><?php echo html::select('dept', $depts, '', "class='form-control'");?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->account;?></th>
+              <td><?php echo html::input('account', '', "class='form-control'");?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->realname;?></th>
+              <td><?php echo html::input('realname', '', "class='form-control'");?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->email;?></th>
+              <td><?php echo html::input('email', '', "class='form-control'");?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->password;?></th>
+              <td><?php echo html::password('password1', '', "class='form-control' autocomplete='off'")?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->password2;?></th>
+              <td><?php echo html::password('password2', '', "class='form-control'");?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->role;?></th>
+              <td><?php echo html::select('role', $lang->user->roleList, '', "class='form-control'");?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->gendar;?></th>
+              <td><?php unset($lang->user->gendarList->u); echo html::radio('gendar', $lang->user->gendarList, '');?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->company;?></th>
+              <td><?php echo html::input('company', $config->company->name, "class='form-control'");?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->address;?></th>
+              <td colspan='2'><?php echo html::input('address', '', "class='form-control'");?></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->mobile;?></th>
+              <td><?php echo html::input('mobile', '', "class='form-control'");?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->phone;?></th>
+              <td><?php echo html::input('phone', '', "class='form-control'");?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->qq;?></th>
+              <td><?php echo html::input('qq', '', "class='form-control'");?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->gtalk;?></th>
+              <td><?php echo html::input('gtalk', '', "class='form-control'");?></td><td></td>
+            </tr>  
+            <tr><th></th><td colspan='2'><?php echo html::submitButton();?></td></tr>
+          </table>
+        </form>
+      </div>
     </div>
   </div>
 </div>
