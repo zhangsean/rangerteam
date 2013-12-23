@@ -160,7 +160,12 @@ class userModel extends model
         }
 
         $user = fixer::input('post')->cleanInt('imobile, qq, zipcode')->remove('ip, account, join, visits');
-        if(RUN_MODE != 'admin') $user = $user->remove('admin');
+        if(RUN_MODE != 'admin')
+        {
+            $user = $user->remove('admin');
+            /* Remove check for role in front. */
+            $this->config->user->edit->requiredFields = str_replace(',role', '', $this->config->user->edit->requiredFields);
+        }
         $user = $user->get();
 
         return $this->dao->update(TABLE_USER)

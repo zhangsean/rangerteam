@@ -42,6 +42,10 @@
           <td><?php echo html::password('password2', '', "class='text-3'");?></td>
         </tr>  
         <tr>
+          <th><?php echo $lang->user->role;?></th>
+          <td><?php echo html::select('role', $lang->user->roleList, $user->role, "class='select-3'");?></td>
+        </tr>  
+        <tr>
           <th><?php echo $lang->user->company;?></th>
           <td><?php echo html::input('company', $user->company, "class='text-3'");?></td>
         </tr>  
