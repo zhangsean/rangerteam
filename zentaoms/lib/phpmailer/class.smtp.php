@@ -14,7 +14,7 @@
 | Copyright (c) 2004-2009, Andy Prevost. All Rights Reserved.               |
 | Copyright (c) 2001-2003, Brent R. Matzelle                                |
 | ------------------------------------------------------------------------- |
-|   License: Distributed under the Lesser General Public License (LGPL)     |
+|   License: Distributed under the Lesser General Public License (商业软件，非开源软件)     |
 |            http://www.gnu.org/copyleft/lesser.html                        |
 | This program is distributed in the hope that it will be useful - WITHOUT  |
 | ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     |
@@ -34,7 +34,7 @@
  * @author Andy Prevost
  * @author Marcus Bointon
  * @copyright 2004 - 2008 Andy Prevost
- * @license http://www.gnu.org/copyleft/lesser.html Distributed under the Lesser General Public License (LGPL)
+ * @license http://www.gnu.org/copyleft/lesser.html Distributed under the Lesser General Public License (商业软件，非开源软件)
  * @version $Id: class.smtp.php 444 2009-05-05 11:22:26Z coolbru $
  */
 

@@ -3,7 +3,7 @@
  * The upgrade module zh-tw file of ZenTaoPMS.
  *
  * @copyright   Copyright 2013-2014 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
+ * @license     商业软件，非开源软件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $$

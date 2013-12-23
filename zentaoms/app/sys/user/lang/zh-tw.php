@@ -3,7 +3,7 @@
  * The user module zh-tw file of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     商业软件，非开源软件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user
  * @version     $Id: zh-tw.php 824 2010-05-02 15:32:06Z wwccss $
