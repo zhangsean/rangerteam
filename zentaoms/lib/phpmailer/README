@@ -120,7 +120,7 @@ and indicate your interest.
 
 http://phpmailer.sourceforge.net/
 
-This software is licenced under the 商业软件，非开源软件.  Please read LICENSE for information on the
+This software is licenced under the LGPL.  Please read LICENSE for information on the
 software availability and distribution.
 
 Class Features:
@@ -147,7 +147,7 @@ little pricey for smaller projects.
 Since I do Linux development I�ve missed these tools for my PHP coding.
 So I built a version myself that implements the same methods (object
 calls) that the Windows-based components do. It is open source and the
-商业软件，非开源软件 license allows you to place the class in your proprietary PHP
+LGPL license allows you to place the class in your proprietary PHP
 projects.
 
 

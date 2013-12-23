@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------
 // PclZip 2.8.2 - readme.txt
 // --------------------------------------------------------------------------------
-// License GNU/商业软件，非开源软件 - August 2009
+// License GNU/LGPL - August 2009
 // Vincent Blavet - vincent@phpconcept.net
 // http://www.phpconcept.net
 // --------------------------------------------------------------------------------
@@ -270,7 +270,7 @@
 
   Version 1.1.2 :
 
-    - Changing the license of PclZip. PclZip is now released under the GNU / 商业软件，非开源软件 license
+    - Changing the license of PclZip. PclZip is now released under the GNU / LGPL license
       (see License section).
     - Adding the optional support of a static temporary directory. You will need to configure
       the constant PCLZIP_TEMPORARY_DIR if you want to use this feature.
@@ -381,7 +381,7 @@
 5 - License
 ===========
 
-  Since version 1.1.2, PclZip Library is released under GNU/商业软件，非开源软件 license.
+  Since version 1.1.2, PclZip Library is released under GNU/LGPL license.
   This library is free, so you can use it at no cost.
 
   HOWEVER, if you release a script, an application, a library or any kind of
@@ -394,7 +394,7 @@
   I will also appreciate that you send me a mail (vincent@phpconcept.net), just to
   be aware that someone is using PclZip.
 
-  For more information about GNU/商业软件，非开源软件 license : http://www.gnu.org
+  For more information about GNU/LGPL license : http://www.gnu.org
 
 6 - Warning
 =================

@@ -15,7 +15,7 @@
  *    http://phpqrcode.sourceforge.net/
  *    https://sourceforge.net/projects/phpqrcode/
  *
- * PHP QR Code is distributed under 商业软件，非开源软件 3
+ * PHP QR Code is distributed under LGPL 3
  * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
  *
  * This library is free software; you can redistribute it and/or
@@ -53,10 +53,10 @@
  *
  * Common constants
  *
- * Based on libqrencode C library distributed under 商业软件，非开源软件 2.1
+ * Based on libqrencode C library distributed under LGPL 2.1
  * Copyright (C) 2006, 2007, 2008, 2009 Kentaro Fukuchi <fukuchi@megaui.net>
  *
- * PHP QR Code is distributed under 商业软件，非开源软件 3
+ * PHP QR Code is distributed under LGPL 3
  * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
  *
  * This library is free software; you can redistribute it and/or
@@ -137,7 +137,7 @@
  *
  * Toolset, handy and debug utilites.
  *
- * PHP QR Code is distributed under 商业软件，非开源软件 3
+ * PHP QR Code is distributed under LGPL 3
  * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
  *
  * This library is free software; you can redistribute it and/or
@@ -316,10 +316,10 @@
  *
  * QR Code specifications
  *
- * Based on libqrencode C library distributed under 商业软件，非开源软件 2.1
+ * Based on libqrencode C library distributed under LGPL 2.1
  * Copyright (C) 2006, 2007, 2008, 2009 Kentaro Fukuchi <fukuchi@megaui.net>
  *
- * PHP QR Code is distributed under 商业软件，非开源软件 3
+ * PHP QR Code is distributed under LGPL 3
  * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
  *
  * The following data / specifications are taken from
@@ -915,7 +915,7 @@
  *
  * Image output of code using GD2
  *
- * PHP QR Code is distributed under 商业软件，非开源软件 3
+ * PHP QR Code is distributed under LGPL 3
  * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
  *
  * This library is free software; you can redistribute it and/or
@@ -1017,10 +1017,10 @@
  *
  * Input encoding class
  *
- * Based on libqrencode C library distributed under 商业软件，非开源软件 2.1
+ * Based on libqrencode C library distributed under LGPL 2.1
  * Copyright (C) 2006, 2007, 2008, 2009 Kentaro Fukuchi <fukuchi@megaui.net>
  *
- * PHP QR Code is distributed under 商业软件，非开源软件 3
+ * PHP QR Code is distributed under LGPL 3
  * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
  *
  * This library is free software; you can redistribute it and/or
@@ -1753,10 +1753,10 @@
  *
  * Bitstream class
  *
- * Based on libqrencode C library distributed under 商业软件，非开源软件 2.1
+ * Based on libqrencode C library distributed under LGPL 2.1
  * Copyright (C) 2006, 2007, 2008, 2009 Kentaro Fukuchi <fukuchi@megaui.net>
  *
- * PHP QR Code is distributed under 商业软件，非开源软件 3
+ * PHP QR Code is distributed under LGPL 3
  * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
  *
  * This library is free software; you can redistribute it and/or
@@ -1941,10 +1941,10 @@
  *
  * Input splitting classes
  *
- * Based on libqrencode C library distributed under 商业软件，非开源软件 2.1
+ * Based on libqrencode C library distributed under LGPL 2.1
  * Copyright (C) 2006, 2007, 2008, 2009 Kentaro Fukuchi <fukuchi@megaui.net>
  *
- * PHP QR Code is distributed under 商业软件，非开源软件 3
+ * PHP QR Code is distributed under LGPL 3
  * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
  *
  * The following data / specifications are taken from
@@ -2262,10 +2262,10 @@
  * Copyright (C) 2002, 2003, 2004, 2006 Phil Karn, KA9Q
  * (libfec is released under the GNU Lesser General Public License.)
  *
- * Based on libqrencode C library distributed under 商业软件，非开源软件 2.1
+ * Based on libqrencode C library distributed under LGPL 2.1
  * Copyright (C) 2006, 2007, 2008, 2009 Kentaro Fukuchi <fukuchi@megaui.net>
  *
- * PHP QR Code is distributed under 商业软件，非开源软件 3
+ * PHP QR Code is distributed under LGPL 3
  * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
  *
  * This library is free software; you can redistribute it and/or
@@ -2313,7 +2313,7 @@
         {
             // Common code for intializing a Reed-Solomon control block (char or int symbols)
             // Copyright 2004 Phil Karn, KA9Q
-            // May be used under the terms of the GNU Lesser General Public License (商业软件，非开源软件)
+            // May be used under the terms of the GNU Lesser General Public License (LGPL)
 
             $rs = null;
             
@@ -2476,10 +2476,10 @@
  *
  * Masking
  *
- * Based on libqrencode C library distributed under 商业软件，非开源软件 2.1
+ * Based on libqrencode C library distributed under LGPL 2.1
  * Copyright (C) 2006, 2007, 2008, 2009 Kentaro Fukuchi <fukuchi@megaui.net>
  *
- * PHP QR Code is distributed under 商业软件，非开源软件 3
+ * PHP QR Code is distributed under LGPL 3
  * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
  *
  * This library is free software; you can redistribute it and/or
@@ -2812,10 +2812,10 @@
  *
  * Main encoder classes.
  *
- * Based on libqrencode C library distributed under 商业软件，非开源软件 2.1
+ * Based on libqrencode C library distributed under LGPL 2.1
  * Copyright (C) 2006, 2007, 2008, 2009 Kentaro Fukuchi <fukuchi@megaui.net>
  *
- * PHP QR Code is distributed under 商业软件，非开源软件 3
+ * PHP QR Code is distributed under LGPL 3
  * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
  *
  * This library is free software; you can redistribute it and/or
