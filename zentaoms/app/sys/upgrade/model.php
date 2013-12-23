@@ -7,7 +7,7 @@
  * @license     商业软件，非开源软件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
- * @version     $Id: model.php 5019 2013-07-05 02:02:31Z wyd621@gmail.com $
+ * @version     $Id$
  * @link        http://www.zentao.net
  */
 ?>

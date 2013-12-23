@@ -6,7 +6,7 @@
  * @license     商业软件，非开源软件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     ZenTaoMS
- * @version     $Id: deny.html.php 824 2010-05-02 15:32:06Z wwccss $
+ * @version     $Id$
  */
 $moduleName = isset($lang->$module->common)  ? $lang->$module->common:  $module;
 $methodName = isset($lang->$module->$method) ? $lang->$module->$method: $method;

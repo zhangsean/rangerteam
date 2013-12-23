@@ -6,7 +6,7 @@
  * @license     商业软件，非开源软件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     ZenTaoMS
- * @version     $Id: install.php 4677 2013-04-26 06:23:58Z chencongzhi520@gmail.com $
+ * @version     $Id$
  * @link        http://www.zentao.net
  */
 error_reporting(E_ALL);

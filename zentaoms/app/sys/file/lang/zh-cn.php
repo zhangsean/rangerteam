@@ -6,7 +6,7 @@
  * @license     商业软件，非开源软件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     file 
- * @version     $Id: zh-cn.php 2605 2013-12-23 09:12:58Z wwccss $
+ * @version     $Id$
  * @link        http://www.zentao.net
  */
 $lang->file->common     = '附件';
