@@ -153,7 +153,7 @@ $lang->dept->edit       = 'Edit Dept';
 $lang->dept->children   = 'Children';
 $lang->dept->moderators = 'Moderator';
   
-$lang->dept->menu[] = "User|user|admin";
+$lang->dept->menu[] = "User|user|admin|";
 $lang->dept->menu[] = "Dept|tree|browse|type=dept";
 
 $lang->user->roleList['']       = ''; 

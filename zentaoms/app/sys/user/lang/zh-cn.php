@@ -137,7 +137,7 @@ $lang->dept->edit       = '维护部门结构';
 $lang->dept->children   = '子部门';
 $lang->dept->moderators = '部门经理';
   
-$lang->dept->menu[] = "会员列表|user|admin";
+$lang->dept->menu[] = "会员列表|user|admin|";
 $lang->dept->menu[] = "部门结构|tree|browse|type=dept";
 
 $lang->user->roleList['']       = ''; 
