@@ -4,7 +4,7 @@
  *
  * The author disclaims copyright to this source code.  In place of
  * a legal notice, here is a blessing:
- * 
+ *
  *  May you do good and not evil.
  *  May you find forgiveness for yourself and forgive others.
  *  May you share freely, never taking more than you give.
@@ -12,7 +12,7 @@
 
 /**
  * The html class, to build html tags.
- * 
+ *
  * @package   framework
  */
 class html
@@ -75,26 +75,14 @@ class html
      *
      * @param  string $href      the link url.
      * @param  string $title     the link title.
-     * @param  string $target    the target window
      * @param  string $misc      other params.
-     * @param  boolean $newline 
      * @return string
      */
-    static public function a($href = '', $title = '', $target = "_self", $misc = '', $newline = true)
+    static public function a($href = '', $title = '', $misc = '')
     {
         global $config;
         if(empty($title)) $title = $href;
-        $newline = $newline ? "\n" : '';
-
-        /* if page has onlybody param then add this param in all link. the param hide header and footer. */
-        if(strpos($href, 'onlybody=yes') === false and isonlybody())
-        {
-            $onlybody = $config->requestType == 'PATH_INFO' ? "?onlybody=yes" : "&onlybody=yes";
-            $href .= $onlybody;
-        }
-
-        if($target == '_self') return "<a href='$href' $misc>$title</a>$newline";
-        return "<a href='$href' target='$target' $misc>$title</a>$newline";
+        return "<a href='$href' $misc>$title</a>\n";
     }
 
     /**
@@ -115,27 +103,26 @@ class html
      *
      * @param  string $name          the name of the select tag.
      * @param  array  $options       the array to create select tag from.
-     * @param  string $selectedItems the item(s) to be selected, can like item1,item2.
+     * @param  mixed  $selectedItems the item(s) to be selected, can like item1,item2 or array.
      * @param  string $attrib        other params such as multiple, size and style.
-     * @param  string $append        adjust if add options[$selectedItems].
      * @return string
      */
-    static public function select($name = '', $options = array(), $selectedItems = "", $attrib = "", $append = false)
+    static public function select($name = '', $options = array(), $selectedItems = "", $attrib = "")
     {
         $options = (array)($options);
-        if($append and !isset($options[$selectedItems])) $options[$selectedItems] = $selectedItems;
         if(!is_array($options) or empty($options)) return false;
 
         /* The begin. */
         $id = $name;
-        if(strpos($name, '[') !== false) $id = trim(str_replace(']', '', str_replace('[', '', $name)));
+        if($pos = strpos($name, '[')) $id = substr($name, 0, $pos);
         $string = "<select name='$name' id='$id' $attrib>\n";
 
         /* The options. */
+        if(is_array($selectedItems)) $selectedItems = implode(',', $selectedItems);
         $selectedItems = ",$selectedItems,";
+
         foreach($options as $key => $value)
         {
-            $key      = str_replace('item', '', $key);
             $selected = strpos($selectedItems, ",$key,") !== false ? " selected='selected'" : '';
             $string  .= "<option value='$key'$selected>$value</option>\n";
         }
@@ -159,7 +146,7 @@ class html
 
         /* The begin. */
         $id = $name;
-        if(strpos($name, '[') !== false) $id = trim(str_replace(']', '', str_replace('[', '', $name)));
+        if($pos = strpos($name, '[')) $id = substr($name, 0, $pos);
         $string = "<select name='$name' id='$id' $attrib>\n";
 
         /* The options. */
@@ -195,12 +182,16 @@ class html
         if(!is_array($options) or empty($options)) return false;
 
         $string  = '';
+
+        $i = 1;
         foreach($options as $key => $value)
         {
-            $string .= "<input type='radio' name='$name' value='$key' ";
+            $string .= "<input type='radio' id='{$name}{$i}' name='$name' value='$key' ";
             $string .= ($key == $checked) ? " checked ='checked'" : "";
             $string .= $attrib;
-            $string .= " id='$name$key' /><label for='$name$key'>$value</label>\n";
+            $string .= " /> <label for='{$name}{$i}'>$value</label>\n";
+            
+            $i++;
         }
         return $string;
     }
@@ -221,121 +212,18 @@ class html
         $string  = '';
         $checked = ",$checked,";
 
+        $i = 1;
         foreach($options as $key => $value)
         {
             $key     = str_replace('item', '', $key);
-            $string .= "<span><input type='checkbox' name='{$name}[]' value='$key' ";
+            $string .= "<label class='checkbox'><input type='checkbox' id='{$name}{$i}'  name='{$name}[]' value='$key' ";
             $string .= strpos($checked, ",$key,") !== false ? " checked ='checked'" : "";
             $string .= $attrib;
-            $string .= " id='$name$key' /> <label for='$name$key'>$value</label></span>\n";
+            $string .= " /> $value</label>\n";
+
+            $i++;
         }
         return $string;
-    }
-
-    /**
-     * Create tags like "<input type='$type' onclick='selectAll()'/>"
-     * 
-     * @param  string  $scope  the scope of select all.
-     * @param  string  $type   the type of input tag.
-     * @param  boolean $checked if the type is checkbox, set the checked attribute.
-     * @return string
-     */
-    static public function selectAll($scope = "", $type = "button", $checked = false)
-    {
-        $string = <<<EOT
-<script type="text/javascript">
-function selectAll(checker, scope, type)
-{ 
-    if(scope)
-    {
-        if(type == 'button')
-        {
-            $('#' + scope + ' input').each(function() 
-            {
-                $(this).attr("checked", true)
-            });
-        }
-        else if(type == 'checkbox')
-        {
-            $('#' + scope + ' input').each(function() 
-            {
-                $(this).attr("checked", checker.checked)
-            });
-         }
-    }
-    else
-    {
-        if(type == 'button')
-        {
-            $('input').each(function() 
-            {
-                $(this).attr("checked", true)
-            });
-        }
-        else if(type == 'checkbox')
-        { 
-            $('input').each(function() 
-            {
-                $(this).attr("checked", checker.checked)
-            });
-        }
-    }
-}
-</script>
-EOT;
-        global $lang;
-        if($type == 'checkbox')
-        {
-            if($checked)
-            {
-                $string .= " <input type='checkbox' name='allchecker[]' checked=$checked onclick='selectAll(this, \"$scope\", \"$type\")' />";
-            }
-            else
-            {
-                $string .= " <input type='checkbox' name='allchecker[]' onclick='selectAll(this, \"$scope\", \"$type\")' />";
-            }
-        }
-        elseif($type == 'button')
-        {
-            $string .= "<input type='button' name='allchecker' id='allchecker' value='{$lang->selectAll}' onclick='selectAll(this, \"$scope\", \"$type\")' />";
-        }
-
-        return  $string;
-    }
-
-    /**
-     * Create tags like "<input type='button' onclick='selectReverse()'/>"
-     * 
-     * @param  string $scope  the scope of select reverse.
-     * @return string
-     */
-    static public function selectReverse($scope = "")
-    {
-        $string = <<<EOT
-<script type="text/javascript">
-function selectReverse(scope)
-{ 
-    if(scope)
-    {
-        $('#' + scope + ' input').each(function() 
-        {
-            $(this).attr("checked", !$(this).attr("checked"))
-        });
-    }
-    else
-    {
-        $('input').each(function() 
-        {
-            $(this).attr("checked", !$(this).attr("checked"))
-        });
-    }
-}
-</script>
-EOT;
-        global $lang;
-        $string .= "<input type='button' name='reversechecker' id='reversechecker' value='{$lang->selectReverse}' onclick='selectReverse(\"$scope\")'/>";
-
-        return  $string;
     }
 
     /**
@@ -403,22 +291,34 @@ EOT;
     }
 
     /**
+     * create tags like "<img src='' />".
+     *
+     * @param string $name      the name of the image name.
+     * @param string $attrib    other attribs.
+     */
+    static public function image($image, $attrib = '')
+    {
+        return "<img src='$image' $attrib />\n";
+    }
+
+    /**
      * Create submit button.
      * 
      * @param  string $label    the label of the button
+     * @param  string $class    the class of the button
      * @param  string $misc     other params
      * @static
      * @access public
      * @return string the submit button tag.
      */
-    public static function submitButton($label = '', $misc = '')
+    public static function submitButton($label = '', $class = 'btn btn-primary', $misc = '')
     {
-        if(empty($label))
-        {
-            global $lang;
-            $label = $lang->save;
-        }
-        return " <input type='submit' id='submit' value='$label' $misc class='button-s' /> ";
+        global $lang;
+
+        $label = empty($label) ? $lang->save : $label;
+        $misc .= strpos($misc, 'data-loading') === false ? "data-loading='$lang->loading'" : '';
+
+        return " <input type='submit' id='submit' class='$class' value='$label' $misc /> ";
     }
 
     /**
@@ -431,35 +331,22 @@ EOT;
     public static function resetButton()
     {
         global $lang;
-        return " <input type='reset' id='reset' value='{$lang->reset}' class='button-r' /> ";
-    }
-
-    /**
-     * Back button. 
-     * 
-     * @static
-     * @access public
-     * @return string the back button tag.
-     */
-    public static function backButton($misc = '')
-    {
-        global $lang;
-        if(isonlybody()) return false;
-        return  "<input type='button' onClick='javascript:history.go(-1);' value='{$lang->goback}' class='button-b' $misc/>";
+        return " <input type='reset' id='reset' value='{$lang->reset}' class='btn btn-default' /> ";
     }
 
     /**
      * Create common button.
      * 
      * @param  string $label the label of the button
+     * @param  string $class the class of the button
      * @param  string $misc  other params
      * @static
      * @access public
      * @return string the common button tag.
      */
-    public static function commonButton($label = '', $misc = '', $class = '')
+    public static function commonButton($label = '', $class = 'btn btn-default', $misc = '')
     {
-        return " <input type='button' value='$label' $misc class='button-c $class' /> ";
+        return " <input type='button' value='$label' class='$class' $misc /> ";
     }
 
     /**
@@ -467,60 +354,43 @@ EOT;
      * 
      * @param  string $label    the link title
      * @param  string $link     the link url
-     * @param  string $target   the target window
+     * @param  string $class    the link style
      * @param  string $misc     other params
      * @static
      * @access public
      * @return string
      */
-    public static function linkButton($label = '', $link = '', $target = 'self', $misc = '')
+    public static function linkButton($label = '', $link = '', $class='btn btn-default', $misc = '', $target = 'self')
     {
-        global $config, $lang;
-
-        if(isonlybody() and $lang->goback == $label) return false;
-
-        /* if page has onlybody param then add this param in all link. the param hide header and footer. */
-        if(strpos($link, 'onlybody=') === false and isonlybody())
-        {
-            $onlybody = $config->requestType == 'PATH_INFO' ? "?onlybody=yes" : "&onlybody=yes";
-            $link .= $onlybody;
-        }
-
-        return " <input type='button' value='$label' $misc onclick='{$target}.location=\"$link\"' class='button-c' /> ";
+        return " <input type='button' value='$label' class='$class' $misc onclick='$target.location.href=\"$link\"' /> ";
     }
 
     /**
-     * Print the star images.
-     * 
-     * @param  float    $stars 0 1 1.5 2 2.5 3 3.5 4 4.5 5
+     create a button to goback.
+     *
+     * @static
      * @access public
-     * @return void
+     * @return string
      */
-    public static function printStars($stars)
+    public static function backButton($label = '', $class = "btn btn-default", $misc = '')
     {
-        $redStars   = 0;
-        $halfStars  = 0;
-        $whiteStars = 5; 
-        if($stars)
+        if($label == '')
         {
-            $redStars  = floor($stars);
-            $halfStars = $stars - $redStars ? 1 : 0;
-            $whiteStars = 5 - ceil($stars);
+            global $lang;
+            $label = $lang->goback;
         }
-        for($i = 1; $i <= $redStars;   $i ++) echo "<img src='theme/default/images/raty/star-on.png' />";
-        for($i = 1; $i <= $halfStars;  $i ++) echo "<img src='theme/default/images/raty/star-half.png' />";
-        for($i = 1; $i <= $whiteStars; $i ++) echo "<img src='theme/default/images/raty/star-off.png' />";
+        return " <input type='button' value='$label' class='$class'  $misc onclick='history.back(-1);' /> ";
     }
 }
 
 /**
  * JS class.
  * 
- * @package front
+ * @package framework
  */
 class js
 {
-   /**
+    /**
      * Import a js file.
      * 
      * @param  string $url 
@@ -528,10 +398,10 @@ class js
      * @access public
      * @return string
      */
-    public static function import($url, $version = '')
+    public static function import($url)
     {
-        if(!$version) $version = filemtime(__FILE__);
-        echo "<script src='$url?v=$version' type='text/javascript'></script>\n";
+        global $config;
+        echo "<script src='$url?v={$config->version}' type='text/javascript'></script>\n";
     }
 
     /**
@@ -550,13 +420,15 @@ class js
     /**
      * The end of javascript. 
      * 
+     * @param  bool    $newline 
      * @static
      * @access private
      * @return void
      */
-    static private function end()
+    static private function end($newline = true)
     {
-        return "\n</script>\n";
+        if($newline) return "\n</script>\n";
+        return "</script>\n";
     }
 
     /**
@@ -570,6 +442,18 @@ class js
     static public function alert($message = '')
     {
         return self::start() . "alert('" . $message . "')" . self::end() . self::resetForm();
+    }
+
+    /**
+     * Close window 
+     * 
+     * @static
+     * @access public
+     * @return void
+     */
+    static public function close()
+    {
+        return self::start() . "window.close()" . self::end();
     }
 
     /**
@@ -666,13 +550,6 @@ EOT;
      */
     static public function locate($url, $target = "self")
     {
-        /* If the url if empty, goto the home page. */
-        if(!$url)
-        {
-            global $config;
-            $url = $config->webRoot;
-        }
-
         $js  = self::start();
         if(strtolower($url) == "back")
         {
@@ -722,26 +599,7 @@ EOT;
     static public function reload($window = 'self')
     {
         $js  = self::start();
-        $js .= "var href = $window.location.href;\n";
-        $js .= "$window.location.href = href.indexOf('#') < 0 ? href : href.substring(0, href.indexOf('#'));";
-
-        $js .= self::end();
-        return $js;
-    }
-
-    /**
-     * Close colorbox in javascript.
-     * 
-     * @param  string $window 
-     * @static
-     * @access public
-     * @return void
-     */
-    static public function closeColorbox($window = 'self')
-    {
-        $js  = self::start();
-        $js .= "if($window.location.href == self.location.href){ $window.window.close();}";
-        $js .= "else{ $window.$.cookie('selfClose', 1);$window.$.colorbox.close();}";
+        $js .=  "$window.location.href=$window.location.href";
         $js .= self::end();
         return $js;
     }
@@ -755,14 +613,13 @@ EOT;
      */
     static public function exportConfigVars()
     {
-        if(!function_exists('json_encode')) return false;
-
         global $app, $config, $lang;
         $defaultViewType = $app->getViewType();
         $themeRoot       = $app->getWebRoot() . 'theme/';
         $moduleName      = $app->getModuleName();
         $methodName      = $app->getMethodName();
         $clientLang      = $app->getClientLang();
+        $runMode         = RUN_MODE;
         $requiredFields  = '';
         if(isset($config->$moduleName->$methodName->requiredFields)) $requiredFields = str_replace(' ', '', $config->$moduleName->$methodName->requiredFields);
 
@@ -770,7 +627,6 @@ EOT;
         $jsConfig->webRoot        = $config->webRoot;
         $jsConfig->cookieLife     = ceil(($config->cookieLife - time()) / 86400);
         $jsConfig->requestType    = $config->requestType;
-        $jsConfig->pathType       = $config->pathType;
         $jsConfig->requestFix     = $config->requestFix;
         $jsConfig->moduleVar      = $config->moduleVar;
         $jsConfig->methodVar      = $config->methodVar;
@@ -781,9 +637,9 @@ EOT;
         $jsConfig->currentMethod  = $methodName;
         $jsConfig->clientLang     = $clientLang;
         $jsConfig->requiredFields = $requiredFields;
-        $jsConfig->submitting     = $lang->submitting;
         $jsConfig->save           = $lang->save;
-        $jsConfig->router         = $app->server->PHP_SELF;
+        $jsConfig->router         = $app->server->SCRIPT_NAME;
+        $jsConfig->runMode        = $runMode;
 
         $js  = self::start(false);
         $js .= 'var config=' . json_encode($jsConfig);
@@ -806,7 +662,7 @@ EOT;
         $js .= self::end();
         echo $js;
     }
-
+    
     /**
      * Set js value.
      * 
@@ -818,37 +674,34 @@ EOT;
      */
     static public function set($key, $value)
     {
+        static $viewOBJOut;
         $js  = self::start(false);
+        if(!$viewOBJOut)
+        {
+            $js .= 'var v = {};'; 
+            $viewOBJOut = true;
+        }
+
         if(is_numeric($value))
         {
-            $js .= "$key = $value";
+            $js .= "v.{$key} = {$value};";
         }
         elseif(is_array($value) or is_object($value) or is_string($value))
         {
-            /* Fix for auto-complete when user is number.*/
-            if(is_array($value) or is_object($value))
-            {
-                $value = (array)$value;
-                foreach($value as $k => $v)
-                {
-                    if(is_numeric($v)) $value[$k] = (string)$v;
-                }
-            }
-            
             $value = json_encode($value);
-            $js .= "$key = $value";
+            $js .= "v.{$key} = {$value};";
         }
         elseif(is_bool($value))
         {
             $value = $value ? 'true' : 'false';
-            $js .= "$key = $value";
+            $js .= "v.{$key} = $value;";
         }
         else
         {
             $value = addslashes($value);
-            $js .= "$key = '$value'";
+            $js .= "v.{$key} = '{$value};'";
         }
-        $js .= self::end();
+        $js .= self::end($newline = false);
         echo $js;
     }
 }
@@ -856,7 +709,7 @@ EOT;
 /**
  * css class.
  *
- * @package front
+ * @package chanzhiEPS
  */
 class css
 {
@@ -868,10 +721,10 @@ class css
      * @access public
      * @return vod
      */
-    public static function import($url, $version = '')
+    public static function import($url)
     {
-        if(!$version) $version = filemtime(__FILE__);
-        echo "<link rel='stylesheet' href='$url?v=$version' type='text/css' media='screen' />\n";
+        global $config;
+        echo "<link rel='stylesheet' href='$url?v={$config->version}' type='text/css' media='screen' />\n";
     }
 
     /**
