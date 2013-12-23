@@ -288,11 +288,11 @@ CREATE TABLE IF NOT EXISTS `sys_user` (
   KEY `account` (`account`,`password`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
-INSERT INTO `ips_entry` (`name`, `code`, `openMode`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
+INSERT INTO `sys_entry` (`name`, `code`, `open`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
 VALUES ('crm', 'crm', 'iframe', 'epet8b8ae1g89rxzquf4ubv37ul5tite', '*', '', '../crm/', '', '', '1', '0');
-INSERT INTO `ips_entry` (`name`, `code`, `openMode`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
+INSERT INTO `sys_entry` (`name`, `code`, `open`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
 VALUES ('oa', 'oa', 'iframe', '1a673c4c3c85fadcf0333e0a4596d220', '*', '', '../oa/', '', '', '1', '1');
-INSERT INTO `ips_entry` (`name`, `code`, `openMode`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
+INSERT INTO `sys_entry` (`name`, `code`, `open`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
 VALUES ('cash', 'cash', 'iframe', '2byct4z7oy8r5hp3s82wuas7n0gonlof', '*', '', '../cash/', '', '', '1', '2');
-INSERT INTO `ips_entry` (`name`, `code`, `openMode`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
+INSERT INTO `sys_entry` (`name`, `code`, `open`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
 VALUES ('sns', 'sns', 'iframe', '9ce6ixdutohnbregapp8f123bvyqmyp2', '*', '', '../sns/', '', '', '1', '3');
