@@ -111,12 +111,12 @@ $lang->admin = new stdclass();
 $lang->tree  = new stdclass();
 $lang->mail  = new stdclass();
 
-$lang->menu->entry     = '应用|entry|admin|';
-$lang->menu->user      = '用户|user|admin|';
 $lang->menu->company   = '公司|company|setbasic|';
+$lang->menu->user      = '用户|user|admin|';
+$lang->menu->entry     = '应用|entry|admin|';
 $lang->menu->mail      = '发信|mail|detect|';
-$lang->menu->extension = '扩展|extension|admin|';
-$lang->menu->backup    = '备份|admin|backup|';
+//$lang->menu->extension = '扩展|extension|admin|';
+//$lang->menu->backup    = '备份|admin|backup|';
  
 /* Menu entry. */
 $lang->entry       = new stdclass();
