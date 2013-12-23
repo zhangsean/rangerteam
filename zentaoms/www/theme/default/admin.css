@@ -8,35 +8,41 @@
 * @version     $Id:style.css 1454 2009-10-23 01:45:26Z wwccss $
 * @link        http://www.chanzhi.org
  */
-/* global settings. */
-body {padding-top:70px; padding-bottom:70px;}
 
-.table-form th {text-align:right;vertical-align:middle;}
-.table-form td {vertical-align:middle;}
+/* global settings. */
+body {padding-top:70px; padding-bottom:70px;background: #fff; }
+
+/* body-content */
+#body-content { margin: 0; }
+#body-content > div {transition: all .8s cubic-bezier(0.175,0.885,0.32,1);}
+
+/* table form */
+.table-form>tbody>tr>th {text-align:right;vertical-align:middle; border-bottom:none}
+.table-form>tbody>tr>td {vertical-align:middle; border-bottom:none}
+.table-form>tfoot>tr>th {border-bottom:none}
+.table-form>tfoot>tr>td {border-bottom:none}
+.table>thead>tr>th.text-middle, .table>tbody>tr>th.text-middle, .table>tfoot>tr>th.text-middle, .table>thead>tr>td.text-middle, .table>tbody>tr>td.text-middle, .table>tfoot>tr>td.text-middle,.text-middle { vertical-align: middle; }
 .table-form td.v-bottom {vertical-align:bottom;}
 .table-form td input{vertical-align:middle;margin:0;}
 .table-form td textarea{vertical-align:middle;margin:0;}
+.table-form .checkbox,.table-form input[type="radio"] + label{margin-right: 10px;}
+form .star{display: none; }/* hide star */
+.table-form .required{position: relative;}
+.table-form .required:after{top: -4px;}
+td #aliasLabel{display: table-row;}
 
-/*The body content*/
-#body-content{margin: 0;}
-
-/* The global settings of left menu. */
-.leftmenu{width:15%; margin: 0; padding:0;}
-
-/* The list items settings. */
-.leftmenu > li+li { margin-top: -1px; }
-.leftmenu > li > a {display:block; padding:8px 14px; border:1px solid #e5e5e5;}
-.leftmenu > li > a:hover {background-color:#f5f5f5; }
-.leftmenu > li.active > a,.leftmenu > li.active > a:hover { position:relative; z-index:2; border:0;background-color: #3280fc;color:#fff;}
-
-/* The right chevron settings. */
-.leftmenu .icon-chevron-right {float:right; margin-top:2px; margin-right:-6px; opacity:.25;}
-.leftmenu a:hover .icon-chevron-right { opacity:.5; }
-.leftmenu .active .icon-chevron-right, .leftmenu .active a:hover .icon-chevron-right { opacity:1;}
-
-/* The affix settings. */
+/* left menu. */
+.leftmenu{box-shadow:0px 2px 1px rgba(0,0,0,0.15);width: 15%;border-radius: 4px}
 .leftmenu.affix {top:70px;}
 .leftmenu.affix-bottom {position:absolute; top:auto; bottom:270px;}
+
+/* panel */
+.panel {  box-shadow:0px 2px 1px rgba(0,0,0,0.1); }
+.panel-body > form { max-width: 1000px; }
+.panel .table-bordered { border:none; margin-bottom: 0; }
+.panel .table-bordered > thead > tr:first-child th,.panel .table-bordered > tbody > tr:first-child th,.panel .table-bordered > tr:first-child th { border-top: 0; }
+.panel .table-bordered tr > td:first-child,.panel .table-bordered tr > th:first-child { border-left: 0; }
+.panel .table-bordered tr > td:last-child,.panel .table-bordered tr > th:last-child { border-right: 0; }
 
 .image-small{max-height:100px; max-width:100px;}
 
@@ -44,22 +50,42 @@ body {padding-top:70px; padding-bottom:70px;}
 #summary  {background:#fff; margin-bottom:0; padding:4px 6px;}
 #keywords {margin-top:0}
 
+/* Set css for tablesorter. */
+table.tablesorter thead tr div{padding:0; margin:0}
+table.tablesorter thead tr .header{cursor:pointer;}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {color:#39B3D7;}
+table.tablesorter thead tr .headerSortDown a, table.tablesorter thead tr .headerSortUp a {color:#39B3D7}
+table.tablesorter thead tr .header a,table.tablesorter thead tr .headerSortUp a,table.tablesorter thead tr .headerSortDown a{display: inline-block; text-decoration:none}
+table.tablesorter thead tr .header a{color:#707070;}
+table.tablesorter thead tr .header:after {font-family: ZenIcon; font-weight: normal;content: " \f0dc";font-size: 14px;}
+table.tablesorter thead tr .headerSortUp:after {font-family: ZenIcon; font-weight: normal;content: " \f0d8";font-size: 14px;color:#39B3D7;}
+table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weight: normal;content: " \f0d7";font-size: 14px;color:#39B3D7;}
+
 /* Responsive. */
-@media(max-width:998px){
-	.affix{
-		position: inherit;
-	}
-	.leftmenu.affix{
-		top: 0;
-		width: 100%;
-		margin-bottom: 20px;		
-	}
+@media(max-width:998px) { .affix{ position: inherit; } .leftmenu.affix{ top: 0; width: 100%; margin-bottom: 20px; } }
+@media(max-width:768px){ body{ padding-bottom: 0; } .navbar-fixed-bottom{ display: none; } }
+@media (min-width: 992px) { .navbar-collapse .navbar-nav:first-child { margin-left: 0; } }
+
+/* help-inline */
+.help-inline{display: block;margin: 7px 0;color: #666}
+
+/* navbar */
+@media (max-width: 767px){
+  #mainNavbar .navbar-collapse .navbar-nav > li > a{padding: 15px 20px;}
 }
-@media(max-width:768px){
-	body{
-		padding-bottom: 0;
-	}
-	.navbar-fixed-bottom{
-		display: none;
-	}
+#navbarSwitcher{display: none;}
+@media screen and (min-width:768px) and (max-width:1210px){
+  #mainNavbar .navbar-collapse .navbar-nav > li > a {padding: 15px 12px;transition:all 0.5s;}
+  #mainNavbar .mainNavbarNav{height: 50px;overflow:hidden;}
+  #navbarSwitcher{display: block;}
+  #mainNavbar .navbar-collapse .navbar-nav > li.simple-mode-b > a{width: 0;padding: 0;opacity: 0}
+  #mainNavbar .navbar-collapse .navbar-nav > li.simple-mode-a > a{width: inherit;padding: 15px 12px;opacity: 1}
+  #mainNavbar.navbar-simple .navbar-collapse .navbar-nav > li.simple-mode-a > a{width: 0;padding: 0;opacity: 0}
+  #mainNavbar.navbar-simple .navbar-collapse .navbar-nav > li.simple-mode-b > a{width: inherit;padding: 15px 12px;opacity: 1}
+  #mainNavbar.navbar-simple #navbarSwitcher .icon-chevron-sign-right:before{content: '\f137'}
+}
+@media screen and (min-width:768px) and (max-width:991px){
+  #mainNavbar.navbar-simple .navbar-collapse .navbar-nav > li.simple-mode-b > a,#mainNavbar .navbar-collapse .navbar-nav > li.simple-mode-a > a{padding: 15px 8px;}
+  #mainNavbar .navbar-nav.navbar-right > li > a{padding: 15px 7px;font-size: 12px;}
+  #navbarSwitcher a{padding: 15px 5px;}
 }
