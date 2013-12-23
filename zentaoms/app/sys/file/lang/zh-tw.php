@@ -1,6 +1,6 @@
 <?php
 /**
- * The file module zh-tw file of chanzhiEPS.
+ * The file module zh-tw file of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL

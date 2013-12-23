@@ -1,11 +1,11 @@
 <?php
 /**
- * The index module simplified chinese file of chanzhiEPS.
+ * The index module simplified chinese file of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     chanzhiEPS
+ * @package     ZenTaoMS
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */

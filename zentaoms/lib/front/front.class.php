@@ -709,7 +709,7 @@ EOT;
 /**
  * css class.
  *
- * @package chanzhiEPS
+ * @package ZenTaoMS
  */
 class css
 {

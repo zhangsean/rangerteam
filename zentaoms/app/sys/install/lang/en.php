@@ -18,9 +18,9 @@ $lang->install->error   = 'Error ';
 $lang->install->start            = 'Start install';
 $lang->install->keepInstalling   = 'Keep install this version';
 $lang->install->seeLatestRelease = 'See the latest release.';
-$lang->install->welcome          = 'Welcome to use chanzhiEPS.';
+$lang->install->welcome          = 'Welcome to use ZenTaoMS.';
 $lang->install->desc             = <<<EOT
-<p>Using chanzhiEPS, you can do</p>
+<p>Using ZenTaoMS, you can do</p>
 <blockquote>
   <ul>
     <li><strong>Branding</strong>：Build a professional website to advertise your brand.</li>

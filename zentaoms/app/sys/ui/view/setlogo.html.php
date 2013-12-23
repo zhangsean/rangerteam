@@ -1,6 +1,6 @@
 <?php
 /**
- * The logo view file of ui module of chanzhiEPS.
+ * The logo view file of ui module of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
