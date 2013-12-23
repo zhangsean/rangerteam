@@ -1,13 +1,13 @@
 <?php
 /**
- * The control file of file module of chanzhiEPS.
+ * The control file of file module of ZenTaoMS.
  *
- * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商业软件，非开源软件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     file
- * @version     $Id: control.php 1042 2010-08-19 09:02:39Z yuren_@126.com $
- * @link        http://www.chanzhi.org
+ * @package     file 
+ * @version     $Id: control.php 2605 2013-12-23 09:12:58Z wwccss $
+ * @link        http://www.zentao.net
  */
 class file extends control
 {

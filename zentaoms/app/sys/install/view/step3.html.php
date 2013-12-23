@@ -1,12 +1,13 @@
 <?php
 /**
- * The html template file of step3 method of install module of chanzhiEPS.
+ * The html template file of step3 method of install module of ZenTaoMS.
  *
- * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
- * @author	  Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package	 chanzhiEPS
- * @version	 $Id: step3.html.php 824 2010-05-02 15:32:06Z wwccss $
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商业软件，非开源软件
+ * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
+ * @package     install 
+ * @version     $Id: step3.html.php 2605 2013-12-23 09:12:58Z wwccss $
+ * @link        http://www.zentao.net
  */
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
