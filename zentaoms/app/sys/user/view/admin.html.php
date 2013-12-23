@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/treeview.html.php';?>
 <div class="col-md-12">
   <div class="limit-width">
     <div class="row">
@@ -30,17 +31,8 @@
     <div class='clearfix'>
       <div class='col-md-2'>
         <div class='panel'>
-          <div class="panel-heading"><strong> <?php echo $lang->dept->common;?></strong></div>
-          <table class='table table-striped'>
-            <tr>
-              <td>
-              <?php
-              echo $treeMenu;
-              echo html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit, "class='pull-right'");
-              ?>
-              </td>
-            </tr>
-          </table>
+          <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $lang->dept->common;?></strong></div>
+          <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu . html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit, "class='pull-right'");?></div></div>
         </div>
       </div>
       <div class='col-md-10'>
@@ -105,7 +97,7 @@
 
 <?php if($deptID != 0):?>
 <script>
-$('#category<?php echo $deptID?>').addClass('active');
+$('#category<?php echo $deptID?>').addClass('red');
 </script>
 <?php endif;?>
 <?php include '../../common/view/footer.admin.html.php';?>
