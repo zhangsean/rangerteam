@@ -11,19 +11,16 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<form method='post' id='ajaxForm' enctype='multipart/form-data'>
-  <table class='table table-form'>
-    <caption><?php echo $lang->ui->setFavicon;?></caption> 
-    <tr>
-      <th class='w-150px'>     
-        <?php if(isset($this->config->site->favicon)) echo html::image($favicon->webPath);?>
-      </th> 
-      <td class='v-middle'>    
-        <?php echo html::file('files');?>
-        <?php echo html::submitButton();?>
-        <?php if($favicon) echo html::a(inlink('deleteFavicon'), $lang->ui->favicon->reset, "class='ml-10px'");?>
-      </td>
-    </tr>
-  </table>
-</form>
+<div class='panel'>
+  <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->ui->setFavicon;?></strong></div>
+  <div class='panel-body'>
+    <form method='post' id='ajaxForm' enctype='multipart/form-data'>
+      <div class='form-group'>
+          <?php if(isset($this->config->site->favicon)) echo "<div class='col-sm-2'>" . html::image($favicon->webPath) . '</div>';?>
+          <div class='col-sm-4'><input type='file' name='files' id='files' class='form-control'></div>
+          <div class='col-sm-4'><?php echo html::submitButton();?><?php if($favicon) echo html::a(inlink('deleteFavicon'), $lang->site->favicon->reset, "class='btn'");?></div>
+      </div>
+    </form>
+  </div>
+</div>
 <?php include '../../common/view/footer.admin.html.php';?>

@@ -1,13 +1,12 @@
 <?php if(!$writeable):?>
 <h5 class='text-danger a-left'> <?php echo $this->lang->file->errorUnwritable;?> </h5>
 <?php else:?>
-<div>
+<div class="file-form">
   <?php for($i = 0; $i < $fileCount; $i ++):?>
-  <p>
-    <input type='file' name='files[]' id="file<?php echo $i;?>" class='w-200px'  tabindex='-1' />
-    <label id='label<?php echo $i;?>' tabindex='-1'><?php echo $lang->file->label;?></label>
-    <input type='text' id='label<?php echo $i;?>' name='labels[]' class='text-5' tabindex='-1' />
-  </p>
+  <div class='form-group clearfix'>
+    <div class='col-sm-5'><input type='file' class='form-control' name='files[]' id="file<?php echo $i;?>"  tabindex='-1' /></div>
+    <div class='col-sm-7'><input type='text' id='label<?php echo $i;?>' name='labels[]' class='form-control' tabindex='-1' placeholder='<?php echo $lang->file->label;?>'/></div>
+  </div>
   <?php endfor;?>
 </div>
 <?php endif;?>

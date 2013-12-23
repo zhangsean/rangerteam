@@ -15,23 +15,20 @@
 <?php include '../../common/view/chosen.html.php';?>
 <?php 
 js::set('root', $root);
-js::set('book', $book);
 js::set('type', $type);
 ?>
 <?php if(strpos($treeMenu, '<li>') !== false):?>
 <div class='row'>
   <div class='col-md-4'>
-    <table class='table'>
-      <caption><?php echo $title;?></caption>
-      <tr>
-        <td><div id='treeMenuBox'><?php echo $treeMenu;?></div></td>
-      </tr>
-    </table>
+    <div class='panel'>
+      <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $title;?></strong></div>
+      <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu . $backButton;?></div></div>
+    </div>
   </div>
   <div class='col-md-8' id='categoryBox'></div>
 </div>
 <?php else:?>
-<div class='col-md-12' id='categoryBox'></div>
+<div id='categoryBox'></div>
 <?php endif;?>
 <?php include '../../common/view/treeview.html.php';?>
 <?php include '../../common/view/footer.admin.html.php';?>

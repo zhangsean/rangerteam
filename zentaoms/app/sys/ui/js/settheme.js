@@ -1,11 +1,17 @@
 $(document).ready(function()
 {
-    $('.ajax').click(function()
+    $('.ajax-theme').click(function()
     {
-        current = $(this);
+        var current = $(this);
+        $('.msg').fadeOut()
         $.getJSON($(this).attr('href'), function(data)
         {
-            bootbox.alert(data.message + '', function(){$('.current').removeClass('current'); current.parents('td').addClass('current');});
+            $('.current').removeClass('current');
+            current.find('.msg').text(data.message).fadeIn(function()
+            {
+               current.addClass('current');
+               setTimeout('$(".current .msg").fadeOut();', 4000);
+            });
         });
         return false;
     });

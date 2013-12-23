@@ -1,49 +1,46 @@
 <?php include '../../common/view/header.html.php';?>
-<section id="reg">
-  <div class="box-radius">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2><?php echo $lang->user->register->welcome;?></h2>
+<section class='page-wrapper'>
+  <div class='panel panel-body'>
+    <div class='panel panel-pure' id='reg'>
+      <div class='panel-heading'><strong><?php echo $lang->user->register->welcome;?></strong></h4></div>
+      <div class='panel-body'>
+        <form method='post' id='ajaxForm' class='form-horizontal' role='form'>
+          <div class='form-group'>
+            <label class='col-xs-3 control-label required'><?php echo $lang->user->account;?></label>
+            <div class='col-xs-9'><?php echo html::input('account', '', "class='form-control form-control' autocomplete='off' placeholder='" . $lang->user->register->lblAccount . "'");?></div>
+          </div>
+          <div class='form-group'>
+            <label class="col-xs-3 control-label required"><?php echo $lang->user->realname;?></label>
+            <div class='col-xs-9'><?php echo html::input('realname', '', "class='form-control'");?></div>
+          </div>
+          <div class='form-group'>
+            <label class="col-xs-3 control-label required"><?php echo $lang->user->email;?></label>
+            <div class='col-xs-9'><?php echo html::input('email', '', "class='form-control' autocomplete='off'") . '';?></div>
+          </div>
+          <div class='form-group'>
+            <label class="col-xs-3 control-label required"><?php echo $lang->user->password;?></label>
+            <div class='col-xs-9'><?php echo html::password('password1', '', "class='form-control' autocomplate='off' placeholder='" . $lang->user->register->lblPassword . "'");?></div>
+          </div>
+          <div class='form-group'>
+            <label class="col-xs-3 control-label"><?php echo $lang->user->password2;?></label>
+            <div class='col-xs-9'><?php echo html::password('password2', '', "class='form-control'");?></div>
+          </div>
+          <div class='form-group'>
+            <label class="col-xs-3 control-label"><?php echo $lang->user->company;?></label>
+            <div class='col-xs-9'><?php echo html::input('company', '', "class='form-control'");?></div>
+          </div>
+          <div class='form-group'>
+            <label class="col-xs-3 control-label"><?php echo $lang->user->phone;?></label>
+            <div class='col-xs-9'><?php echo html::input('phone', '', "class='form-control'");?></div>
+          </div>
+          <div class='form-group'>
+            <div class="col-xs-3"></div>
+            <div class='col-xs-9'><?php echo html::submitButton($lang->register,'btn btn-primary btn-block') . html::hidden('referer', $referer);?></div>
+          </div>
+        </form>
       </div>
-      <div class="panel-body">
-        <form method='post' id='ajaxForm' class='form-inline form-horizontal' role="form">
-          <table> 
-            <tr>
-              <th class='w-100px'><?php echo $lang->user->account;?></th>
-              <td><?php echo html::input('account', '', "class='text-box' autocomplete='off' placeholder='" . $lang->user->register->lblAccount . "'");?></td>
-            </tr>  
-            <tr>
-              <th><?php echo $lang->user->realname;?></th>
-              <td><?php echo html::input('realname', '', "class='text-box'");?></td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->user->email;?></th>
-              <td><?php echo html::input('email', '', "class='text-box' autocomplete='off'") . '';?></td>
-            </tr> 
-            <tr>
-              <th><?php echo $lang->user->password;?></th>
-              <td><?php echo html::password('password1', '', "class='text-box' autocomplate='off' placeholder='" . $lang->user->register->lblPassword . "'");?></td>
-            </tr>  
-            <tr>
-              <th><?php echo $lang->user->password2;?></th>
-              <td><?php echo html::password('password2', '', "class='text-box'");?></td>
-            </tr>  
-            <tr>
-              <th><?php echo $lang->user->company;?></th>
-              <td><?php echo html::input('company', '', "class='text-box'");?></td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->user->phone;?></th>
-              <td><?php echo html::input('phone', '', "class='text-box'");?></td>
-            </tr>  
-            <tr>
-              <th></th>
-              <td><?php echo html::submitButton($lang->register,'btn btn-primary btn-block') . html::hidden('referer', $referer);?></td>
-            </tr>
-          </table>
-        </form>      
-      </div>
-    </div>  
+    </div>    
   </div>
+
 </section>
 <?php include '../../common/view/footer.html.php'; ?>

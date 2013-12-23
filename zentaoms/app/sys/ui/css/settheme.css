@@ -1,5 +1,6 @@
-.current{opacity: 1;}
-.current img{background:#5CB85C; opacity: 1;}
-.preview{max-width:400px; height:100px; margin: 20px 0;margin:0 auto; opacity: 0.5; -moz-opacity: 0.5; cursor:pointer;}
-.preview:hover { opacity: 1; -moz-opacity: 1; filter: alpha(opacity=100); transition: all .3s; -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; }
-.info{padding:8px;display:block; width:400px; border:none; margin:0 auto; border-radius: 4px 4px 4px 4px;}
+#themes .card { position: relative; transition:all 0.3s; }
+#themes .card img { height: 100px; margin: 0 auto; width: auto; }
+#themes .card .icon-ok { display: block; position: absolute; bottom: 0; right: 0; color: #e5e5e5; padding: 7px 15px; font-size: 20px; transition:all 0.3s; z-index: 10; }
+#themes .card.current { border-color: #47A447; }
+#themes .card.current .icon-ok { background-color: #47A447; color: #fff; }
+#themes .card .msg { position: absolute; width: 100%; background-color: #47A447; color: #fff; bottom: 0; left: 0; right: 57px; height: 40px; padding: 0 15px; z-index: 5; line-height: 40px; display: none; }

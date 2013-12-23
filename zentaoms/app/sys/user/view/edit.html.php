@@ -1,58 +1,85 @@
-<?php include '../../common/view/header.lite.html.php';?>
-<div class='row'>
-  <div class='col-md-10'>
-    <form method='post' id='ajaxForm' class='form form-inline'>
-      <table class='table table-form table-bordered'>
-        <caption><?php echo $lang->user->editProfile;?></caption>
-        <tr>
-          <th class='w-100px'><?php echo $lang->user->realname;?></th>
-          <td><?php echo html::input('realname', $user->realname, "class='text-3'");?></td>
-        </tr>  
-        <tr>
-          <th><?php echo $lang->user->email;?></th>
-          <td><?php echo html::input('email', $user->email, "class='text-3'");?></td>
-        </tr>  
-        <tr>
-          <th><?php echo $lang->user->password;?></th>
-          <td><?php echo html::password('password1', '', "class='text-3' autocomplete='off'") . $lang->user->control->lblPassword;?></td>
-        </tr>  
-        <tr>
-          <th><?php echo $lang->user->password2;?></th>
-          <td><?php echo html::password('password2', '', "class='text-3'");?></td>
-        </tr>  
-        <tr>
-          <th><?php echo $lang->user->company;?></th>
-          <td><?php echo html::input('company', $user->company, "class='text-3'");?></td>
-        </tr>  
-        <tr>
-          <th><?php echo $lang->user->address;?></th>
-          <td><?php echo html::input('address', $user->address, "class='text-3'");?></td>
-        </tr>  
-        <tr>
-          <th><?php echo $lang->user->zipcode;?></th>
-          <td><?php echo html::input('zipcode', $user->zipcode, "class='text-3'");?></td>
-        </tr>  
-        <tr>
-          <th><?php echo $lang->user->mobile;?></th>
-          <td><?php echo html::input('mobile', $user->mobile, "class='text-3'");?></td>
-        </tr>  
-        <tr>
-          <th><?php echo $lang->user->phone;?></th>
-          <td><?php echo html::input('phone', $user->phone, "class='text-3'");?></td>
-        </tr>  
-        <tr>
-          <th><?php echo $lang->user->qq;?></th>
-          <td><?php echo html::input('qq', $user->qq, "class='text-3'");?></td>
-        </tr>  
-        <tr>
-          <th><?php echo $lang->user->gtalk;?></th>
-          <td><?php echo html::input('gtalk', $user->gtalk, "class='text-3'");?></td>
-        </tr>  
-        <tr><th></th><td><?php echo html::submitButton();?></td></tr>
-      </table>
-    </form>
+<?php include '../../common/view/header.html.php';?>
+<div class="page-wrapper page-user-control">
+  <div class="row">
+    <?php include './side.html.php';?>
+    <div class='col-md-10'>
+      <div class='panel'>
+        <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->user->editProfile;?></strong></div>
+        <div class='panel-body'>
+          <form method='post' id='ajaxForm' class='form form-horizontal'>
+            <div class='form-group'>
+              <label for='realname' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->realname;?></label>
+              <div class='col-md-4 col-sm-6'>
+                <?php echo html::input('realname', $user->realname, "class='form-control'");?>
+              </div>
+            </div>
+            <div class='form-group'>
+              <label for='email' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->email;?></label>
+              <div class='col-md-4 col-sm-6'>
+                <?php echo html::input('email', $user->email, "class='form-control'");?>
+              </div>
+            </div>
+            <div class='form-group'>
+              <label for='password' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->password;?></label>
+              <div class='col-md-4 col-sm-6'>
+                <?php echo html::password('password', $user->password, "class='form-control'");?>
+              </div>
+            </div>
+            <div class='form-group'>
+              <label for='password2' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->password2;?></label>
+              <div class='col-md-4 col-sm-6'>
+                <?php echo html::password('password2', $user->password2, "class='form-control'");?>
+              </div>
+            </div>
+            <div class='form-group'>
+              <label for='company' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->company;?></label>
+              <div class='col-md-4 col-sm-6'>
+                <?php echo html::input('company', $user->company, "class='form-control'");?>
+              </div>
+            </div>
+            <div class='form-group'>
+              <label for='address' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->address;?></label>
+              <div class='col-md-4 col-sm-6'>
+                <?php echo html::input('address', $user->address, "class='form-control'");?>
+              </div>
+            </div>
+            <div class='form-group'>
+              <label for='zipcode' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->zipcode;?></label>
+              <div class='col-md-4 col-sm-6'>
+                <?php echo html::input('zipcode', $user->zipcode, "class='form-control'");?>
+              </div>
+            </div>
+            <div class='form-group'>
+              <label for='mobile' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->mobile;?></label>
+              <div class='col-md-4 col-sm-6'>
+                <?php echo html::input('mobile', $user->mobile, "class='form-control'");?>
+              </div>
+            </div>
+            <div class='form-group'>
+              <label for='phone' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->phone;?></label>
+              <div class='col-md-4 col-sm-6'>
+                <?php echo html::input('phone', $user->phone, "class='form-control'");?>
+              </div>
+            </div>
+            <div class='form-group'>
+              <label for='qq' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->qq;?></label>
+              <div class='col-md-4 col-sm-6'>
+                <?php echo html::input('qq', $user->qq, "class='form-control'");?>
+              </div>
+            </div>
+            <div class='form-group'>
+              <label for='gtalk' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->gtalk;?></label>
+              <div class='col-md-4 col-sm-6'>
+                <?php echo html::input('gtalk', $user->gtalk, "class='form-control'");?>
+              </div>
+            </div>
+            <div class='form-group'>
+              <div class='col-md-4 col-sm-6 col-md-offset-2 col-sm-offset-3'><?php echo html::submitButton();?></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-<?php include '../../common/view/footer.lite.html.php';?>
-</body>
-</html>
+<?php include '../../common/view/footer.html.php';?>

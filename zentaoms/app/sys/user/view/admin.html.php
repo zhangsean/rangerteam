@@ -12,81 +12,75 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class="col-md-12">
-  <form method='post' class='form-inline mb-10px form-search pull-right'>
-    <div class="input-group w-200px">
-      <?php echo html::input('query', $query, "class='form-control text-2 search-query' placeholder='{$lang->user->inputUserName}'"); ?>
-      <span class="input-group-btn">
-        <?php echo html::submitButton($lang->user->searchUser,"btn btn-primary"); ?>
-      </span>
+  <div class="limit-width">
+    <div class="row">
+      <div class="col-sm-offset-8 col-sm-4 col-md-offset-9 col-md-3">
+        <div class="panel">
+          <form method='post' class='form-inline form-search'>
+            <div class="input-group">
+              <?php echo html::input('key', $query, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); ?>
+              <span class="input-group-btn">
+                <?php echo html::submitButton($lang->user->searchUser,"btn btn-primary"); ?>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  </form>
-  <div class='c-both'></div>
-  <div class='col-md-2'>
-    <table class='table table-striped'>
-      <caption><?php echo $lang->dept->common?></caption> 
-      <tr>
-        <td>
-        <?php
-        echo $treeMenu;
-        echo html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit, "class='pull-right'");
-        ?>
-        </td>
-      </tr>
-    </table>
-  </div>
-  <div class='col-md-10'>
-    <table class='table table-hover table-striped'>
-      <caption>
-        <?php
-        echo $lang->user->list;
-        echo '<span class="pull-right mr-10px">' . html::a(inlink('create'), $lang->user->create) . '</span>';                                           
-        ?>
-      </caption>
-      <thead>
-        <tr class='a-center'>
-          <th class='w-60px'><?php echo $lang->user->id;?></th>
-          <th class='w-130px'><?php echo $lang->user->dept;?></th>
-          <th class='w-100px'><?php echo $lang->user->realname;?></th>
-          <th class='w-100px'><?php echo $lang->user->nickname;?></th>
-          <th class='w-80px'><?php echo $lang->user->account;?></th>
-          <th class='w-60px'><?php echo $lang->user->gender;?></th>
-          <th class='a-left'><?php echo $lang->user->company;?></th>
-          <th class='w-150px'><?php echo $lang->user->join;?></th>
-          <th class='w-80px'><?php echo $lang->user->visits;?></th>
-          <th class='w-150px'><?php echo $lang->user->last;?></th>
-          <th class='w-250px'><?php echo $lang->actions;?></th>
+    <div class="panel">
+      <div class="panel-heading"><strong><i class="icon-group"></i> <?php echo $lang->user->list;?></strong></div>
+      <table class='table table-hover table-striped table-bordered'>
+        <thead>
+          <tr class='text-center'>
+            <th><?php echo $lang->user->id;?></th>
+            <th><?php echo $lang->user->status;?></th>
+            <th><?php echo $lang->user->realname;?></th>
+            <th><?php echo $lang->user->nickname;?></th>
+            <th><?php echo $lang->user->account;?></th>
+            <th><?php echo $lang->user->gender;?></th>
+            <th class='text-left'><?php echo $lang->user->company;?></th>
+            <th><?php echo $lang->user->join;?></th>
+            <th><?php echo $lang->user->visits;?></th>
+            <th><?php echo $lang->user->last;?></th>
+            <th><?php echo $lang->user->ip;?></th>
+            <th><?php echo $lang->actions;?></th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php foreach($users as $user):?>
+        <tr class='text-center'>
+          <td><?php echo $user->id;?></td>
+          <td>
+          <?php if($user->fails > 4 and $user->locked > helper::now()) echo $lang->user->statusList->locked;?>
+          <?php if($user->fails <= 4 and $user->locked > helper::now()) echo $lang->user->statusList->forbidden;?>
+          <?php if($user->locked <= helper::now()) echo $lang->user->statusList->normal;?>
+          </td>
+          <td><?php echo $user->realname;?></td>
+          <td><?php echo $user->nickname;?></td>
+          <td><?php echo $user->account;?></td>
+          <td><?php $gender = $user->gender; echo $lang->user->gendarList->$gender;?></td>
+          <td><?php echo $user->company;?></td>
+          <td><?php echo $user->join;?></td>
+          <td><?php echo $user->visits;?></td>
+          <td><?php echo $user->last;?></td>
+          <td><?php echo $user->ip;?></td>
+          <td class='operate'>
+            <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit); ?>
+            <div class="btn-group">
+              <a class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
+              <ul class="dropdown-menu pull-right" role="menu">
+              <?php foreach($lang->user->forbidDate as $date => $title):?>
+                <li><?php echo html::a($this->createLink('user', 'forbid', "userID={$user->id}&date=$date"), $title, "class='forbider'");?></li>
+              <?php endforeach;?>
+              </ul>
+            </div>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-      <?php foreach($users as $user):?>
-      <tr class='a-center'>
-        <td><?php echo $user->id;?></td>
-        <?php $dept = isset($depts[$user->dept]) ? $depts[$user->dept] : ''?>
-        <td class="a-left" title="<?php echo $dept?>"><?php echo $dept;?></td>
-        <td><?php echo $user->realname;?></td>
-        <td><?php echo $user->nickname;?></td>
-        <td><?php echo $user->account;?></td>
-        <td><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></td>
-        <td class='a-left'><?php echo $user->company;?></td>
-        <td><?php echo $user->join;?></td>
-        <td><?php echo $user->visits;?></td>
-        <td><?php echo $user->last;?></td>
-        <td class='operate'>
-          <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit);?>
-          <div class="btn-group">
-            <a  class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-            <?php foreach($lang->user->forbidDate as $date => $title):?>
-              <li><?php echo html::a($this->createLink('user', 'forbid', "userID={$user->id}&date=$date"), $title, "class='forbider'");?></li>
-            <?php endforeach;?>
-            </ul>
-          </div>
-        </td>
-      </tr>
-      <?php endforeach;?>
-      </tbody>
-      <tfoot><tr><td colspan='11' class='a-right'><?php $pager->show();?></td></tr></tfoot>
-    </table>
+        <?php endforeach;?>
+        </tbody>
+        <tfoot><tr><td colspan='12'><?php $pager->show();?></td></tr></tfoot>
+      </table>
+    </div>
   </div>
 </div>
 

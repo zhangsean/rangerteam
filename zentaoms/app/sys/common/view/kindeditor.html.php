@@ -18,6 +18,7 @@ if(!isset($config->$module->editor->$method)) return;
 
 /* Export $jsRoot var. */
 js::set('jsRoot', $jsRoot);
+js::set('themeRoot', $themeRoot);
 
 /* Get editor settings for current page. */
 $editors = $config->$module->editor->$method;
@@ -44,20 +45,20 @@ js::set('uid', $uid);
 ?>
 
 <script>
-var simpleTools = 
-[ 'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic','underline', '|', 
+var simple = 
+[ 'formatblock', 'fontsize', '|', 'bold', 'italic','underline', '|', 
 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|',
-'emoticons', 'image', 'code', 'link', '|', 'removeformat','undo', 'redo', 'fullscreen', 'source', 'about'];
+'emoticons', 'image', 'link', '|', 'removeformat','undo', 'redo' ];
 
-var fullTools = 
-[ 'formatblock', 'fontname', 'fontsize', 'lineheight', '|', 'forecolor', 'hilitecolor', '|', 'bold', 'italic','underline', 'strikethrough', '|',
+var full = 
+[ 'formatblock', 'fontsize', 'lineheight', '|', 'forecolor', 'hilitecolor', '|', 'bold', 'italic','underline', 'strikethrough', '|',
 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull', '|',
 'insertorderedlist', 'insertunorderedlist', '|',
 'emoticons', 'image', 'insertfile', 'hr', '|', 'link', 'unlink', '/',
-'undo', 'redo', '|', 'selectall', 'cut', 'copy', 'paste', '|', 'plainpaste', 'wordpaste', '|', 'removeformat', 'clearhtml','quickformat', '|',
+'undo', 'redo', '|', 'cut', 'copy', 'paste', '|', 'plainpaste', 'wordpaste', '|', 'removeformat', 'clearhtml','quickformat', '|',
 'indent', 'outdent', 'subscript', 'superscript', '|',
 'table', 'code', '|', 'pagebreak', 'anchor', '|', 
-'fullscreen', 'source', 'preview', 'about'];
+'fullscreen', 'source', 'about'];
 
 $(document).ready(initKindeditor);
 function initKindeditor(afterInit)
@@ -71,9 +72,11 @@ function initKindeditor(afterInit)
         var K = KindEditor;
         keEditor = K.create('#' + editorID,
         {
+            width:'100%',
             items:editorTool,
             filterMode:true, 
-            cssPath:[v.jsRoot + 'kindeditor/plugins/code/prettify.css'],
+            cssPath:[v.themeRoot + 'zui/css/zui.css'],
+            bodyClass:'article-content',
             urlType:'absolute', 
             uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),
             imageTabIndex:1,

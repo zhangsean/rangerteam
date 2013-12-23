@@ -9,7 +9,6 @@
  * @version     $Id: treeview.html.php 2605 2013-12-23 09:12:58Z wwccss $
  * @link        http://www.zentao.net
  */
-css::import($themeRoot . 'default/treeview.css');
 js::import($jsRoot . 'jquery/treeview/min.js');
 ?>
 <script language='javascript'>$(function() {$(".tree").treeview({collapsed: false, unique: false}) })</script>

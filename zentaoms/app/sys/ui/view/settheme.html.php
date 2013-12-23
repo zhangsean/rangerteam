@@ -11,21 +11,24 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<table class='table'>
-  <caption><?php echo $lang->ui->setTheme?></caption>
-  <tr>
-  <?php $i = 0;?>
-  <?php foreach($lang->ui->themes as $theme => $name):?>
-    <?php
-    if($i%2 == 0) echo '</tr><tr>';
-    $i++;
-    $current = $theme == $config->site->theme ? 'current' : '';
-    ?>
-    <td class='a-center <?php echo $current; ?>'>
-      <p><?php echo html::a(inlink('settheme', "theme={$theme}"), html::image($themeRoot . $theme . '/preview.png', "class='thumbnail preview {$current}'"), "class='ajax'");?></p>
-      <div class='info'> <?php echo $name;?> </div>
-    </td>
-  <?php endforeach;?>
-  </tr>
-</table>
+<div class='panel'>
+  <div class='panel-heading'>
+    <strong><i class='icon-lemon'></i> <?php echo $lang->ui->setTheme?></strong>
+  </div>
+  <div class='panel-body'>
+    <div class='cards' id='themes'>
+    <?php foreach($lang->ui->themes as $theme => $name):?>
+    <?php $current = $theme == $config->site->theme ? 'current' : ''; ?>
+      <div class='col-lg-4 col-md-6 col-sm-6'>
+        <a class='card ajax-theme <?php echo $current; ?>' href='<?php echo inlink('settheme', "theme={$theme}"); ?>'>
+          <?php echo html::image($themeRoot . $theme . DS . 'preview.png'); ?>
+          <div class='caption'><?php echo $lang->ui->changetheme; ?></div>
+          <div class='card-heading'><i class='icon-large icon-ok pull-right'></i> <strong><?php echo $name;?></strong></div>
+          <div class='msg'></div>
+        </a>
+      </div>
+    <?php endforeach;?>
+    </div>
+  </div>
+</div>
 <?php include '../../common/view/footer.admin.html.php';?>
