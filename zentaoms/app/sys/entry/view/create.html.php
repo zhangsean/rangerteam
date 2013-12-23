@@ -11,51 +11,59 @@
  */
 include '../../common/view/header.admin.html.php';
 ?>
-<form method='post' class='form-inline' id='ajaxForm'>
-  <table class='table table-form'> 
-    <caption><?php echo $lang->entry->create;?></caption>
-    <tr>
-      <th class='rowhead'><?php echo $lang->entry->name;?></th>
-      <td>
-        <?php 
-        echo html::input('name', '', "class='text-3' placeholder='{$lang->entry->note->name}'");
-        echo "<span><input type='checkbox' name='visible' value='1'>{$lang->entry->note->visible}</span>";
-        ?>
-      </td>
-    </tr>
-    <tr>
-      <th class='rowhead'><?php echo $lang->entry->code;?></th>
-      <td><?php echo html::input('code', '', "class='text-3' placeholder='{$lang->entry->note->code}'");?></td>
-    </tr>
-    <tr>
-      <th class='rowhead'><?php echo $lang->entry->open;?></th>
-      <td><?php echo html::select('open', $lang->entry->openList, '','class="select-3 form-control"');?></td>
-    </tr>
-    <tr>
-      <th class='rowhead'><?php echo $lang->entry->key;?></th>
-      <td>
-        <?php echo html::input('key', $key, "class='text-3' readonly='readonly'");?>
-        <?php echo html::a('javascript:void(0)', $lang->entry->createKey, 'onclick="createKey()"')?>
-      </td>
-    </tr>
-    <tr>
-      <th class='rowhead'><?php echo $lang->entry->login;?></th>
-      <td><?php echo html::input('login', '', "class='text-5' placeholder='{$lang->entry->note->login}'");?></td>
-    </tr>
-    <tr>
-      <th class='rowhead'><?php echo $lang->entry->logout;?></th>
-      <td><?php echo html::input('logout', '', "class='text-5' placeholder='{$lang->entry->note->logout}'");?></td>
-    </tr>
-    <tr>
-      <th class='rowhead'><?php echo $lang->entry->ip;?></th>
-      <td><?php echo html::input('ip', '', "class='text-5' placeholder='{$lang->entry->note->ip}'");?></td>
-    </tr>
-    <tr>
-      <th class='rowhead'><?php echo $lang->entry->logo;?></th>
-      <td><input type='file' name='logo' id='logo' /></td>
-    </tr>
-    <tr><td></td><td colspan='2' class='a-left'><?php echo html::submitButton() . html::backButton();?></td></tr>
-  </table>
-</form>
+<div class='panel'>
+  <div class='panel-heading'>
+    <strong><i class='icon-building'></i> <?php echo $lang->entry->create;?></strong>
+  </div>
+  <div class='panel-body'>
+    <form method='post' class='form form-horizontal' id='ajaxForm'>
+      <div class="form-group">
+        <label for='name' class='col-md-2 col-sm-3 control-label'><?php echo $lang->entry->name;?></label>
+        <div class='col-md-4 col-sm-6'>
+          <?php 
+          echo html::input('name', '', "class='text-3' placeholder='{$lang->entry->note->name}'");
+          echo "<span><input type='checkbox' name='visible' value='1'>{$lang->entry->note->visible}</span>";
+          ?>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for='code' class='col-md-2 col-sm-3 control-label'><?php echo $lang->entry->code;?></label>
+        <div class='col-md-4 col-sm-6'>
+          <?php echo html::input('code', '', "class='text-3' placeholder='{$lang->entry->note->code}'");?>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for='open' class='col-md-2 col-sm-3 control-label'><?php echo $lang->entry->open;?></label>
+        <div class='col-md-4 col-sm-6'><?php echo html::select('open', $lang->entry->openList, '', 'class="form-control"');?></div>
+      </div>
+      <div class="form-group">
+        <label for='key' class='col-md-2 col-sm-3 control-label'><?php echo $lang->entry->key;?></label>
+        <div class='col-md-4 col-sm-6'>
+          <?php echo html::input('key', $key, "class='text-3' readonly='readonly'");?>
+          <?php echo html::a('javascript:void(0)', $lang->entry->createKey, 'onclick="createKey()"')?>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for='login' class='col-md-2 col-sm-3 control-label'><?php echo $lang->entry->login;?></label>
+        <div class='col-md-4 col-sm-6'><?php echo html::input('login', '', "class='text-5' placeholder='{$lang->entry->note->login}'");?></div>
+      </div>
+      <div class="form-group">
+        <label for='login' class='col-md-2 col-sm-3 control-label'><?php echo $lang->entry->logout;?></label>
+        <div class='col-md-4 col-sm-6'><?php echo html::input('logout', '', "class='text-5' placeholder='{$lang->entry->note->logout}'");?></div>
+      </div>
+      <div class="form-group">
+        <label for='ip' class='col-md-2 col-sm-3 control-label'><?php echo $lang->entry->ip;?></label>
+        <div class='col-md-4 col-sm-6'><?php echo html::input('ip', '', "class='text-5' placeholder='{$lang->entry->note->ip}'");?></div>
+      </div>
+      <div class="form-group">
+        <label for='ip' class='col-md-2 col-sm-3 control-label'><?php echo $lang->entry->logo;?></label>
+        <div class='col-md-4 col-sm-6'><input type='file' name='logo' id='logo' /></div>
+      </div>
+      <div class="form-group">
+        <div class='col-md-4 col-sm-6 col-md-offset-2 col-sm-offset-3'><?php echo html::submitButton() . html::backButton();?></div>
+      </div>
+    </form>
+  </div>
+</div>
 <div class="instruction"><?php echo $lang->entry->instruction;?></div>
 <?php include '../../common/view/footer.admin.html.php';?>
