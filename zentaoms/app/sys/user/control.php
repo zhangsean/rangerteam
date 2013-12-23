@@ -315,7 +315,7 @@ class user extends control
      * @access public
      * @return void
      */
-    public function admin($dept = 0, $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function admin($deptID = 0, $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -324,7 +324,7 @@ class user extends control
 
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptLink'));
         $this->view->depts    = $this->tree->getOptionMenu('dept');
-        $this->view->users    = $this->user->getList($pager, $key, $deptID);
+        $this->view->users    = $this->user->getList($pager, $query, $deptID);
         $this->view->query    = $query;
         $this->view->pager    = $pager;
         $this->view->deptID   = $deptID;
