@@ -19,10 +19,10 @@ $themeRoot = $webRoot . "theme/";
   if($config->debug)
   {
       js::import($jsRoot . 'jquery/min.js');
-      js::import($jsRoot . 'bootstrap/min.js');
+      js::import($jsRoot . 'zui/min.js');
       js::import($jsRoot . 'zentao.js');
       js::import($jsRoot . 'my.js');
-      css::import($themeRoot . 'bootstrap/css/core.min.css');
+      css::import($themeRoot . 'zui/css/min.css');
       css::import($themeRoot . 'default/style.css');
   }
   else
