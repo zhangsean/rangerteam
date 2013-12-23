@@ -29,8 +29,8 @@ include '../../common/view/header.admin.html.php';
       <td><?php echo $entry->code;?></td>
     </tr>
     <tr>
-      <th class='rowhead'><?php echo $lang->entry->openMode;?></th>
-      <td><?php echo html::select('openMode', $lang->entry->modeList, $entry->openMode,'class="select-3 form-control"');?></td>
+      <th class='rowhead'><?php echo $lang->entry->open;?></th>
+      <td><?php echo html::select('open', $lang->entry->openList, $entry->open,'class="select-3 form-control"');?></td>
     </tr>
     <tr>
       <th class='rowhead'><?php echo $lang->entry->key;?></th>

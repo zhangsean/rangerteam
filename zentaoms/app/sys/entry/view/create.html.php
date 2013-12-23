@@ -28,8 +28,8 @@ include '../../common/view/header.admin.html.php';
       <td><?php echo html::input('code', '', "class='text-3' placeholder='{$lang->entry->note->code}'");?></td>
     </tr>
     <tr>
-      <th class='rowhead'><?php echo $lang->entry->openMode;?></th>
-      <td><?php echo html::select('openMode', $lang->entry->modeList, '','class="select-3 form-control"');?></td>
+      <th class='rowhead'><?php echo $lang->entry->open;?></th>
+      <td><?php echo html::select('open', $lang->entry->openList, '','class="select-3 form-control"');?></td>
     </tr>
     <tr>
       <th class='rowhead'><?php echo $lang->entry->key;?></th>

@@ -23,7 +23,7 @@ $lang->entry->createKey = '重新生成密钥';
 $lang->entry->login     = '登录地址';
 $lang->entry->logout    = '退出地址';
 $lang->entry->nothing   = '暂时没有应用';
-$lang->entry->openMode  = '打开方式';
+$lang->entry->open      = '打开方式';
 
 $lang->entry->confirmDelete = '您确定删除该应用吗？';
 
@@ -41,11 +41,9 @@ $lang->entry->error->code  = '代号不能为空';
 $lang->entry->error->key   = '密钥不能为空';
 $lang->entry->error->ip    = 'IP列表不能为空';
 
-$lang->entry->modeList['']         = '';
-$lang->entry->modeList['blank']    = '新开标签';
-$lang->entry->modeList['ajaxHtml'] = 'ajax获取Html';
-$lang->entry->modeList['ajaxJson'] = 'ajax获取Json';
-$lang->entry->modeList['iframe']   = 'iframe框架';
+$lang->entry->openList['']       = '';
+$lang->entry->openList['blank']  = '新开标签';
+$lang->entry->openList['iframe'] = '内嵌窗口';
 
 $lang->entry->instruction = <<<EOT
 EOT;

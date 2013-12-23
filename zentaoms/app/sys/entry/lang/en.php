@@ -23,7 +23,7 @@ $lang->entry->createKey = 'New one';
 $lang->entry->login     = 'Login url';
 $lang->entry->logout    = 'Logout url';
 $lang->entry->nothing   = 'No record.';
-$lang->entry->openMode  = 'Open mode';
+$lang->entry->open      = 'Open';
 
 $lang->entry->confirmDelete = 'Are you sure to delete this App?';
 
@@ -41,11 +41,9 @@ $lang->entry->error->code  = 'Please input code';
 $lang->entry->error->key   = 'Please input key';
 $lang->entry->error->ip    = 'Please input IP';
 
-$lang->entry->modeList['']         = '';
-$lang->entry->modeList['blank']    = 'blank';
-$lang->entry->modeList['ajaxHtml'] = 'ajax get html';
-$lang->entry->modeList['ajaxJson'] = 'ajax get json';
-$lang->entry->modeList['iframe']   = 'iframe';
+$lang->entry->openList['']       = '';
+$lang->entry->openList['blank']  = 'Blank';
+$lang->entry->openList['iframe'] = 'Iframe';
 
 $lang->entry->instruction = <<<EOT
 EOT;
