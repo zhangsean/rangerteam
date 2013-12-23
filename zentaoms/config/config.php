@@ -99,10 +99,8 @@ define('TABLE_CATEGORY',  'sys_category');
 define('TABLE_EXTENSION', 'sys_extension`');
 define('TABLE_WEBAPP',    'sys_webapp`');
 define('TABLE_LANG',      'sys_lang`');
-
-/* Tables for ips. */
-define('TABLE_ENTRY', 'ips_entry');
-define('TABLE_SSO',   'ips_sso');
+define('TABLE_ENTRY',     'sys_entry');
+define('TABLE_SSO',       'sys_sso');
 
 /* Tables for crm. */
 define('TABLE_PRODUCT', 'crm_product`');
