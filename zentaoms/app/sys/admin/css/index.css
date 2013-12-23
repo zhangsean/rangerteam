@@ -22,21 +22,9 @@
 #shortcutBox h3{line-height: 170px; font-size:24px; color: #FFFFFF; font-weight: 500;}
 #shortcutBox a:hover{text-decoration: none;}
 
-@media(max-width:992px){
-    #shortcutBox{
-        margin-top: 20px;
-    }
-}
-@media(max-width:768px){
-    #shortcutBox{
-        margin-top: -20px;
-    }
-}
+@media(max-width:992px){#shortcutBox{margin-top: 20px;}}
+@media(max-width:768px){#shortcutBox{margin-top: -20px;}}
 
-.article-admin {background: #2D89EF;}
-.article-create{background: #B91D47;}
-.category      {background: #00A300;}
-.company       {background: #7F4311;}
-.site          {background: #E3A21A;}
-.logo          {background: #9F00A7;}
-.contact       {background: #1E1E1E;}
+.user    {background: #00A300;}
+.company {background: #B91D47;}
+.entry   {background: #2D89EF;}

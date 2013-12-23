@@ -13,19 +13,19 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='container' id='shortcutBox'>
   <div class='row'>
-    <div class='col-md-4 col-sm-6'> 
-      <div class="shortcut article-create">
-        <?php echo html::a($this->createLink('article', 'create'), '<h3>' . $lang->admin->shortcuts->createArticle . '</h3>')?>
-      </div>
-    </div>
     <div class='col-md-4 col-sm-6'>
-      <div class="shortcut article-admin">
-        <?php echo html::a($this->createLink('entry', 'create'), '<h3>' . $lang->admin->shortcuts->createEntry . '</h3>')?>
-      </div>
-    </div>
-    <div class='col-md-4 col-sm-6'>
-      <div class="shortcut category">
+      <div class="shortcut user">
         <?php echo html::a($this->createLink('user', 'create'), '<h3>' . $lang->admin->shortcuts->createUser . '</h3>')?>  
+      </div>
+    </div>
+    <div class='col-md-4 col-sm-6'> 
+      <div class="shortcut company">
+        <?php echo html::a($this->createLink('company', 'setbasic'), '<h3>' . $lang->admin->shortcuts->company . '</h3>')?>
+      </div>
+    </div>
+    <div class='col-md-4 col-sm-6'>
+      <div class="shortcut entry">
+        <?php echo html::a($this->createLink('entry', 'create'), '<h3>' . $lang->admin->shortcuts->createEntry . '</h3>')?>
       </div>
     </div>
   </div>
