@@ -21,17 +21,4 @@ class admin extends control
     {
         $this->display();
     }
-
-    /**
-     * Ignore the admin entry warning.
-     *
-     * @access public
-     * return void
-     **/
-    public function ignore()
-    {
-        $result = $this->loadModel('setting')->setItems('system.common.global', array('ignoreAdminEntry' => true));
-        if($result) $this->send(array('result' => 'success', 'locate' => inlink('index')));
-        $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-    }
 }
