@@ -1,28 +1,3 @@
--- DROP TABLE IF EXISTS `ips_entry`;
-CREATE TABLE IF NOT EXISTS `ips_entry` (
-  `id` mediumint(8) unsigned NOT NULL auto_increment,
-  `name` varchar(50) NOT NULL,
-  `code` varchar(20) NOT NULL,
-  `openMode` varchar(20) NOT NULL,
-  `key` char(32) NOT NULL,
-  `ip` varchar(100) NOT NULL,
-  `logo` mediumint(9) NOT NULL,
-  `login` varchar(100) NOT NULL,
-  `logout` varchar(100) NOT NULL,
-  `api` varchar(100) NOT NULL,
-  `visible` tinyint(1) unsigned NOT NULL default '0',
-  `order` tinyint(5) unsigned NOT NULL default '0',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
--- DROP TABLE IF EXISTS `ips_sso`;
-CREATE TABLE IF NOT EXISTS `ips_sso` (
-  `id` mediumint(8) unsigned NOT NULL auto_increment,
-  `sid` char(32) NOT NULL,
-  `entry` mediumint(8) unsigned NOT NULL,
-  `token` char(32) NOT NULL,
-  `createdTime` datetime NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_article`;
 CREATE TABLE IF NOT EXISTS `oa_article` (
   `id` mediumint(8) unsigned NOT NULL auto_increment,
@@ -198,6 +173,22 @@ CREATE TABLE IF NOT EXISTS `sys_config` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `unique` (`owner`,`module`,`section`,`key`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sys_entry`;
+CREATE TABLE IF NOT EXISTS `sys_entry` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `name` varchar(50) NOT NULL,
+  `code` varchar(20) NOT NULL,
+  `open` varchar(20) NOT NULL,
+  `key` char(32) NOT NULL,
+  `ip` varchar(100) NOT NULL,
+  `logo` mediumint(9) NOT NULL,
+  `login` varchar(100) NOT NULL,
+  `logout` varchar(100) NOT NULL,
+  `api` varchar(100) NOT NULL,
+  `visible` tinyint(1) unsigned NOT NULL default '0',
+  `order` tinyint(5) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_file`;
 CREATE TABLE IF NOT EXISTS `sys_file` (
   `id` mediumint(8) unsigned NOT NULL auto_increment,
@@ -247,6 +238,15 @@ CREATE TABLE IF NOT EXISTS `sys_product` (
   KEY `views` (`views`),
   KEY `sticky` (`sticky`),
   KEY `model` (`model`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sys_sso`;
+CREATE TABLE IF NOT EXISTS `sys_sso` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `sid` char(32) NOT NULL,
+  `entry` mediumint(8) unsigned NOT NULL,
+  `token` char(32) NOT NULL,
+  `createdTime` datetime NOT NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE IF NOT EXISTS `sys_user` (
