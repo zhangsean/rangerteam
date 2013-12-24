@@ -17,6 +17,11 @@ $lang->company->content = "公司介绍";
 
 $lang->company->setBasic   = "设置基本信息";
 $lang->company->setContact = "设置联系方式";
+$lang->company->setLogo    = "Logo设置";
+
+$lang->company->setLogoFailed     = "设置Logo失败";
+$lang->company->noSelectedFile    = "没有选择图片";
+$lang->company->notAlloweFileType = "请选择正确的%s文件.";
 
 $lang->company->error = new stdclass(); 
 $lang->company->error->email = "请填写合法的EMAIL";

@@ -17,6 +17,11 @@ $lang->company->content = "More";
 
 $lang->company->setBasic   = "Basic";
 $lang->company->setContact = "Contact";
+$lang->company->setLogo    = "Logo";
+
+$lang->company->setLogoFailed     = "Set logo failed.";
+$lang->company->noSelectedFile    = "No file selected.";
+$lang->company->notAlloweFileType = "Please select %s files.";
 
 $lang->company->error = new stdclass(); 
 $lang->company->error->email = "email wrong.";

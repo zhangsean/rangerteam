@@ -124,8 +124,9 @@ $lang->entry->menu->create = array('link' => 'Create|entry|create|');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
-$lang->company->menu->basic   = '公司信息|company|setbasic|';
-$lang->company->menu->contact = '联系方式|company|setcontact|';
+$lang->company->menu->basic   = 'Basic|company|setbasic|';
+$lang->company->menu->contact = 'Contact|company|setcontact|';
+$lang->company->menu->setlogo = 'LOGO|company|setlogo|';
 
 /* The error messages. */
 $lang->error = new stdclass();

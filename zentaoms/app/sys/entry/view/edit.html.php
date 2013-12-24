@@ -13,7 +13,7 @@ include '../../common/view/header.admin.html.php';
 ?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class='icon-building'></i> <?php echo $lang->entry->edit;?></strong>
+    <strong><i class='icon-edit'></i> <?php echo $lang->entry->edit;?></strong>
   </div>
   <div class='panel-body'>
     <form method='post' class='form form-horizontal' id='ajaxForm'>

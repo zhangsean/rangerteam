@@ -79,4 +79,26 @@ class company extends control
         $this->view->contact = json_decode($this->config->company->contact);
         $this->display();
     }
+
+    /**
+     * set logo.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setLogo()
+    {
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $return = $this->company->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
+            
+            if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setLogo')));
+            if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
+        }
+
+        $this->view->title = $this->lang->company->setLogo;
+        $this->view->logo = isset($this->config->company->logo) ? json_decode($this->config->company->logo) : false;
+
+        $this->display();
+    }
 }
