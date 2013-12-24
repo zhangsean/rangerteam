@@ -1,11 +1,11 @@
 <?php
 /**
- * The zh-tw language file of install module of ZenTaoMS.
+ * The zh-tw file of install module of ZenTaoMS.
  *
- * @copyright   Copyright 2013-2014 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     商业软件，非开源软件
+ * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商業軟件，非開源軟件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     install
+ * @package     install 
  * @version     $Id$
  * @link        http://www.zentao.net
  */
@@ -18,16 +18,16 @@ $lang->install->error   = '錯誤 ';
 $lang->install->start            = '開始安裝';
 $lang->install->keepInstalling   = '繼續安裝當前版本';
 $lang->install->seeLatestRelease = '看看最新的版本';
-$lang->install->welcome          = '您睿智地選擇了蟬知企業門戶系統!';
+$lang->install->welcome          = "您睿智地選擇了$lang->zentaoms!";
 $lang->install->desc             = <<<EOT
-<p>使用蟬知，您可以：</p>
 <blockquote>
-  <ul>
-    <li><strong>品牌宣傳</strong>：建立品牌網站，展示企業形象。</li>
-    <li><strong>營銷推廣</strong>：SEO, 郵件、短信、微博、微信...</li>
-    <li><strong>電子商務</strong>：展示產品，在綫銷售。</li>
-    <li><strong>客戶關懷</strong>：售後支持，維繫客戶。</li>
-  </ul>
+  <strong>{$lang->zentaoms}</strong>由<strong><a href='http://www.cnezsoft.com' target='_blank' class='red'>青島易軟天創網絡科技有限公司</a>開發</strong>，
+  內置項目、客戶、現金流、辦公和溝通共五大核心功能模組，
+  專為中小型團隊量身打造，是中小型團隊信息化的首選工具！
+
+  官方網站：<a href='http://www.zentao.net' target='_blank'>http://www.zentao.net</a>
+  技術支持: <a href='http://www.zentao.net/ask/' target='_blank'>http://www.zentao.net/ask/</a>
+  您現在正在安裝的版本是 <strong class='red'>%s</strong>。
 </blockquote>
 EOT;
 
@@ -89,4 +89,5 @@ $lang->install->password = '密碼';
 $lang->install->errorEmptyPassword = '密碼不能為空';
 
 $lang->install->success    = "安裝成功！";
+$lang->install->visitFront = '登錄前台';
 $lang->install->visitAdmin = '登錄後台';

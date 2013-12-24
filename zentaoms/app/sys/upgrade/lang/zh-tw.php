@@ -2,8 +2,8 @@
 /**
  * The upgrade module zh-tw file of ZenTaoPMS.
  *
- * @copyright   Copyright 2013-2014 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     商业软件，非开源软件
+ * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商業軟件，非開源軟件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $$
@@ -39,9 +39,3 @@ EOT;
 $lang->upgrade->versionNote = "務必選擇正確的版本，否則會造成數據丟失。";
 
 $lang->upgrade->fromVersions['1_1'] = '1.1.stable';
-$lang->upgrade->fromVersions['1_2'] = '1.2.stable';
-$lang->upgrade->fromVersions['1_3'] = '1.3.stable';
-$lang->upgrade->fromVersions['1_4'] = '1.4.stable';
-$lang->upgrade->fromVersions['1_5'] = '1.5.stable';
-$lang->upgrade->fromVersions['1_6'] = '1.6.stable';
-$lang->upgrade->fromVersions['1_7'] = '1.7.stable';

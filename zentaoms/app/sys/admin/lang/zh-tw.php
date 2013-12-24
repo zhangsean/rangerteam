@@ -1,12 +1,16 @@
-<?php 
+<?php
+/**
+ * The zh-tw file of admin module of ZenTaoMS.
+ *
+ * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商業軟件，非開源軟件
+ * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
+ * @package     admin 
+ * @version     $Id$
+ * @link        http://www.zentao.net
+ */
 $lang->admin->shortcuts = new stdclass();
 
-$lang->admin->shortcuts->createArticle = '發佈文章';
-$lang->admin->shortcuts->createProduct = '添加產品';
-$lang->admin->shortcuts->comment       = '處理評論';
-$lang->admin->shortcuts->site          = '站點設置';
-$lang->admin->shortcuts->logo          = 'LOGO設置';
-$lang->admin->shortcuts->company       = '公司信息';
-$lang->admin->shortcuts->contact       = '聯繫方式';
-
-$lang->admin->adminEntry = '警告：您現在的管理入口還是預設的admin.php，建議將admin.php改名以增強系統安全!';
+$lang->admin->shortcuts->createUser  = '添加用戶';
+$lang->admin->shortcuts->company     = '公司信息';
+$lang->admin->shortcuts->createEntry = '添加應用';

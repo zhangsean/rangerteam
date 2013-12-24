@@ -1,17 +1,22 @@
 <?php
 /**
- * The index module simplified chinese file of ZenTaoMS.
+ * The zh-tw file of index module of ZenTaoMS.
  *
- * @copyright   Copyright 2013-2014 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     商业软件，非开源软件
+ * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商業軟件，非開源軟件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     ZenTaoMS
+ * @package     index 
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-$lang->index->common  = '首頁';
-$lang->index->index   = '首頁';
-$lang->index->aboutus = '關於我們';
-$lang->index->news    = '新聞動態';
-$lang->index->blog    = '最近博客';
-$lang->index->contact = '聯繫我們';
+$lang->index->allEntries = '所有應用';
+$lang->index->addEntry   = '添加應用';
+$lang->index->userInfo   = '查看個人信息';
+$lang->index->set        = '系統配置';
+$lang->index->theme      = '更換主題';
+
+$lang->index->countEntries = "共 <span class='apps-count'></span> 款應用";
+
+$lang->index->entryDesc = new stdclass();
+$lang->index->entryDesc->installed = '查看所有已安裝應用';
+$lang->index->entryDesc->profile   = '查看或編輯個人資料';

@@ -2,8 +2,8 @@
 /**
  * The user module zh-tw file of ZenTaoMS.
  *
- * @copyright   Copyright 2013-2014 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     商业软件，非开源软件
+ * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商業軟件，非開源軟件
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user
  * @version     $Id$
@@ -18,6 +18,8 @@ $lang->user->password  = '密碼';
 $lang->user->password2 = '請重複密碼';
 $lang->user->realname  = '真實姓名';
 $lang->user->nickname  = '暱稱';
+$lang->user->dept      = '所屬部門';
+$lang->user->role      = '角色';    
 $lang->user->avatar    = '頭像';
 $lang->user->birthyear = '出生年';
 $lang->user->birthday  = '出生月日';
@@ -30,7 +32,7 @@ $lang->user->gtalk     = 'Gtalk';
 $lang->user->wangwang  = '旺旺';
 $lang->user->mobile    = '手機';
 $lang->user->phone     = '電話';
-$lang->user->company   = '公司/組織';
+$lang->user->dept      = '部門';
 $lang->user->address   = '通訊地址';
 $lang->user->zipcode   = '郵編';
 $lang->user->join      = '加入日期';
@@ -41,7 +43,7 @@ $lang->user->allowTime = '開放時間';
 $lang->user->status    = '狀態';
 $lang->user->alert     = '您的帳號已被禁用';
 
-$lang->user->list            = '會員列表';
+$lang->user->list            = '用戶列表';
 $lang->user->view            = "用戶詳情";
 $lang->user->create          = "添加用戶";
 $lang->user->edit            = "編輯用戶";
@@ -110,30 +112,6 @@ $lang->user->login->common  = "登錄";
 $lang->user->login->welcome = '已有帳號';
 $lang->user->login->why     = '歡迎登陸，享用會員專屬服務！';
 
-$lang->user->resetPassword = new stdclass();
-$lang->user->resetPassword->success    = "密碼更改連結已經發送到您的郵箱中";
-$lang->user->resetPassword->failed     = "您的密保郵箱錯誤，請重新輸入";
-
-$lang->user->resetmail = new stdclass();
-$lang->user->resetmail->subject = "密碼修改";
-$lang->user->resetmail->notice  = "系統發信，請勿回覆";
-
-$lang->user->oauth = new stdclass();
-$lang->user->oauth->common       = '開放登錄';
-$lang->user->oauth->provider     = '服務商';
-$lang->user->oauth->clientID     = 'App Key';
-$lang->user->oauth->clientSecret = 'App Secret';
-$lang->user->oauth->verification = '網站驗證';
-$lang->user->oauth->widget       = '網頁組件';
-
-$lang->user->oauth->providers['sina'] = '新浪微博';
-$lang->user->oauth->providers['qq']   = 'QQ';
-
-$lang->user->oauth->lblWelcome    = '開放登錄，快捷方便';
-$lang->user->oauth->lblProfile    = "<h3>設置用戶名，完成註冊</h3>";
-$lang->user->oauth->lblBind       = "<h3>或綁定已有帳號</h3>";
-$lang->user->oauth->lblBindFailed = "綁定賬戶失敗！";
-
 $lang->user->control = new stdclass();
 $lang->user->control->common      = '用戶中心';
 $lang->user->control->welcome     = '歡迎您，<strong>%s</strong>';
@@ -145,27 +123,39 @@ $lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> 編輯�
 $lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
 
+$lang->dept = new stdclass();  
+$lang->dept->common     = '部門結構';
+$lang->dept->edit       = '維護部門結構';
+$lang->dept->children   = '子部門';
+$lang->dept->moderators = '部門經理';
+  
+$lang->dept->menu[] = "會員列表|user|admin|";
+$lang->dept->menu[] = "部門結構|tree|browse|type=dept";
+
+$lang->user->roleList['']       = ''; 
+$lang->user->roleList['dev']    = '研發';
+$lang->user->roleList['qa']     = '測試';
+$lang->user->roleList['pm']     = '項目經理';
+$lang->user->roleList['po']     = '產品經理';
+$lang->user->roleList['td']     = '研發主管';
+$lang->user->roleList['pd']     = '產品主管';
+$lang->user->roleList['qd']     = '測試主管';
+$lang->user->roleList['top']    = '高層管理';
+$lang->user->roleList['others'] = '其他';
+
 $lang->user->mailContent = <<<EOT
 <html>
 <head>
 <style type='text/css'>
-body{
-margin:0;
-padding:0;
-}
-div{
-    padding-left:30px;
-}
+body{margin:0;padding:0;}
+div{padding-left:30px;}
 </style>
 </head>
 <body>
 <div style='padding-top:20px;height:60px;background:#fafafa;border-bottom:1px solid #ddd;font-size:18px;font-weight:bold'> 密碼修改 </div>
 <div style='margin-top:20px;'>
-<p>
-尊敬的用戶 %s 
-<br>
-請點擊下面的連結，進行密碼修改:
-<br>
+<p>尊敬的用戶 %s <br />
+請點擊下面的連結，進行密碼修改: <br >
 <a href='%s' target='_blank'>%s</a>
 </p>
 <p>重置碼：%s</p>

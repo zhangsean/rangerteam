@@ -2,8 +2,8 @@
 /**
  * The block module zh-tw file of ZenTaoMS.
  *
- * @copyright   Copyright 2013-2014 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     商业软件，非开源软件
+ * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商業軟件，非開源軟件
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     block
  * @version     $Id$
@@ -110,9 +110,25 @@ $lang->block->regions->all['end']    = '結束部分';
 $lang->block->regions->index_index['header']  = '上部';
 $lang->block->regions->index_index['bottom']  = '下部';
 $lang->block->regions->index_index['footer']  = '底部';
+
 $lang->block->regions->article_browse['side'] = '側邊';
 $lang->block->regions->article_view['side']   = '側邊';
+
 $lang->block->regions->product_browse['side'] = '側邊';
 $lang->block->regions->product_view['side']   = '側邊';
+
+$lang->block->regions->blog_index['side']     = '側邊';
+$lang->block->regions->blog_view['side']      = '側邊';
+
+$lang->block->regions->forum_index['header']  = '上部';
+$lang->block->regions->forum_board['header']  = '上部';
+$lang->block->regions->thread_view['header']  = '上部';
+$lang->block->regions->forum_index['footer']  = '下部';
+$lang->block->regions->forum_board['footer']  = '下部';
+$lang->block->regions->thread_view['footer']  = '下部';
+
+$lang->block->regions->book_browse['side']    = '側邊';
+
 $lang->block->regions->message_index['side']  = '側邊';
+
 $lang->block->regions->page_view['side']      = '側邊';
