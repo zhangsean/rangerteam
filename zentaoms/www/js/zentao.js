@@ -581,7 +581,7 @@ function removeAnchor(url)
     return url;
 }
 
-function setPing()             
+function ping()             
 { 
       $.get(createLink('misc', 'ping'));
 }
