@@ -381,57 +381,6 @@ class userModel extends model
     }
 
     /**
-     * update the resetKey.
-     * 
-     * @param  string   $account
-     * @param  time     $resetTime 
-     * @access public
-     * @return void
-     */
-    public function resetKey($account, $resetKey)
-    {
-        $this->dao->update(TABLE_USER)->set('resetKey')->eq($resetKey)->set('resetTime')->eq(helper::now())->where('account')->eq($account)->exec(false);
-    }
-
-    /**
-     * Check the resetKey.
-     * 
-     * @param  string   $resetKey 
-     * @param  time     $resetTime 
-     * @access public
-     * @return void
-     */
-    public function checkResetKey($resetKey)
-    {
-        $user = $this->dao->select('*')->from(TABLE_USER)
-            ->where('resetKey')->eq($resetKey)
-            ->fetch('');
-        return $user;
-    }
-
-    /**
-     * Reset the forgotten password.
-     * 
-     * @param  string   $resetKey 
-     * @param  time     $resetTime 
-     * @access public
-     * @return void
-     */
-    public function resetPassword($resetKey, $password)
-    {
-        $user = $this->dao->select('*')->from(TABLE_USER)
-                ->where('resetKey')->eq($resetKey)
-                ->fetch();
-        
-        $this->dao->update(TABLE_USER)
-            ->set('password')->eq($this->createPassword($password, $user->account))
-            ->set('resetKey')->eq('')
-            ->set('resetTime')->eq('')
-            ->where('resetKey')->eq($resetKey)
-            ->exec();
-    }
-
-    /**
      * Create a strong password hash with md5.
      *
      * @param  string    $password 

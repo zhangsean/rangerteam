@@ -112,14 +112,6 @@ $lang->user->login->common  = "登录";
 $lang->user->login->welcome = '已有帐号';
 $lang->user->login->why     = '欢迎登陆，享用会员专属服务！';
 
-$lang->user->resetPassword = new stdclass();
-$lang->user->resetPassword->success    = "密码更改链接已经发送到您的邮箱中";
-$lang->user->resetPassword->failed     = "您的密保邮箱错误，请重新输入";
-
-$lang->user->resetmail = new stdclass();
-$lang->user->resetmail->subject = "密码修改";
-$lang->user->resetmail->notice  = "系统发信，请勿回复";
-
 $lang->user->control = new stdclass();
 $lang->user->control->common      = '用户中心';
 $lang->user->control->welcome     = '欢迎您，<strong>%s</strong>';

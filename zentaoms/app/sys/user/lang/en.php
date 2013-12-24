@@ -112,14 +112,6 @@ $lang->user->login->common  = "Login";
 $lang->user->login->welcome = 'Welcome';
 $lang->user->login->why     = 'Login, and use more feature.';
 
-$lang->user->resetPassword = new stdclass();
-$lang->user->resetPassword->success    = "Password change link has been sent to your mailbox";
-$lang->user->resetPassword->failed     = "Please input your correct mail";
-
-$lang->user->resetmail = new stdclass();
-$lang->user->resetmail->subject = "Modify password";
-$lang->user->resetmail->notice  = "System letter, please do not reply";
-
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = 'OAuth';
 $lang->user->oauth->provider     = 'Provider';
