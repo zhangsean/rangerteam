@@ -39,8 +39,8 @@ $config->sessionVar  = 'sid';             // requestType=GET: the session var na
 $config->views = ',html,json,mhtml,'; 
 
 /* Supported languages. */
-$config->langs['zh-cn'] = '中文简体';
-$config->langs['zh-tw'] = '中文繁體';
+$config->langs['zh-cn'] = '简体';
+$config->langs['zh-tw'] = '繁体';
 $config->langs['en']    = 'English';
 
 /* Supported charsets. */
