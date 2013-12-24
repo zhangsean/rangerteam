@@ -32,7 +32,7 @@ $lang->user->gtalk     = 'Gtalk';
 $lang->user->wangwang  = '旺旺';
 $lang->user->mobile    = '手机';
 $lang->user->phone     = '电话';
-$lang->user->company   = '公司/组织';
+$lang->user->dept      = '部门';
 $lang->user->address   = '通讯地址';
 $lang->user->zipcode   = '邮编';
 $lang->user->join      = '加入日期';
@@ -43,7 +43,7 @@ $lang->user->allowTime = '开放时间';
 $lang->user->status    = '状态';
 $lang->user->alert     = '您的帐号已被禁用';
 
-$lang->user->list            = '会员列表';
+$lang->user->list            = '用户列表';
 $lang->user->view            = "用户详情";
 $lang->user->create          = "添加用户";
 $lang->user->edit            = "编辑用户";

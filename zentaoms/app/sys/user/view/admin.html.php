@@ -42,16 +42,16 @@
             <thead>
               <tr class='text-center'>
                 <th><?php echo $lang->user->id;?></th>
-                <th><?php echo $lang->user->status;?></th>
                 <th><?php echo $lang->user->realname;?></th>
                 <th><?php echo $lang->user->nickname;?></th>
                 <th><?php echo $lang->user->account;?></th>
                 <th><?php echo $lang->user->gender;?></th>
-                <th class='text-left'><?php echo $lang->user->company;?></th>
+                <th class='text-left'><?php echo $lang->user->dept;?></th>
                 <th><?php echo $lang->user->join;?></th>
                 <th><?php echo $lang->user->visits;?></th>
                 <th><?php echo $lang->user->last;?></th>
                 <th><?php echo $lang->user->ip;?></th>
+                <th><?php echo $lang->user->status;?></th>
                 <th><?php echo $lang->actions;?></th>
               </tr>
             </thead>
@@ -59,20 +59,20 @@
             <?php foreach($users as $user):?>
             <tr class='text-center'>
               <td><?php echo $user->id;?></td>
+              <td><?php echo $user->realname;?></td>
+              <td><?php echo $user->nickname;?></td>
+              <td><?php echo $user->account;?></td>
+              <td><?php $gender = $user->gender; echo $lang->user->gendarList->$gender;?></td>
+              <td><?php echo $user->dept;?></td>
+              <td><?php echo $user->join;?></td>
+              <td><?php echo $user->visits;?></td>
+              <td><?php echo $user->last;?></td>
+              <td><?php echo $user->ip;?></td>
               <td>
               <?php if($user->fails > 4 and $user->locked > helper::now()) echo $lang->user->statusList->locked;?>
               <?php if($user->fails <= 4 and $user->locked > helper::now()) echo $lang->user->statusList->forbidden;?>
               <?php if($user->locked <= helper::now()) echo $lang->user->statusList->normal;?>
               </td>
-              <td><?php echo $user->realname;?></td>
-              <td><?php echo $user->nickname;?></td>
-              <td><?php echo $user->account;?></td>
-              <td><?php $gender = $user->gender; echo $lang->user->gendarList->$gender;?></td>
-              <td><?php echo $user->company;?></td>
-              <td><?php echo $user->join;?></td>
-              <td><?php echo $user->visits;?></td>
-              <td><?php echo $user->last;?></td>
-              <td><?php echo $user->ip;?></td>
               <td class='operate'>
                 <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit); ?>
                 <div class="btn-group">

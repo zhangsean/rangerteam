@@ -54,7 +54,6 @@ $lang->login          = 'Login';
 $lang->account        = 'Account';
 $lang->password       = 'Password';
 $lang->changePassword = 'Change password';
-$lang->forgotPassword = 'Forgot password?';
 $lang->currentPos     = 'Positon';
 $lang->categoryMenu   = 'Categories';
 

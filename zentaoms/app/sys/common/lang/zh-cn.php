@@ -54,7 +54,6 @@ $lang->login          = '登录';
 $lang->account        = '帐号';
 $lang->password       = '密码';
 $lang->changePassword = '修改密码';
-$lang->forgotPassword = '忘记密码?';
 $lang->currentPos     = '当前位置';
 $lang->categoryMenu   = '分类导航';
    

@@ -309,6 +309,19 @@ class helper
     }
 
     /**
+     * Json encode and addslashe if magic_quotes_gpc is on. 
+     * 
+     * @param   mixed  $data   the object to encode
+     * @static
+     * @access  public
+     * @return  string  decoded string.
+     */
+    static public function jsonEncode($data)
+    {
+        return get_magic_quotes_gpc() ? addslashes(json_encode($data)) : json_encode($data);
+    }
+
+    /**
      * Judge a string is utf-8 or not.
      * 
      * @param  string    $string 
