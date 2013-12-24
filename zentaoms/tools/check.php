@@ -76,69 +76,73 @@ if( 1 == 0)
     }
 }
 
+/* set module root path and included the resource of group module. */
+$appRoot = '../app/';
+
 /* checking actions of every module. */
 echo '-------------lang checking-----------------' . "\n";
-include '../module/common/lang/zh-cn.php';
+include '../app/sys/common/lang/zh-cn.php';
 include '../config/config.php';
-foreach(glob($moduleRoot . '*') as $modulePath)
-{
-    unset($lang);
-    $moduleName   = basename($modulePath);
-    $mainLangFile = $modulePath . '/lang/zh-cn.php';
-    if(!file_exists($mainLangFile)) continue;
-    $mainLines = file($mainLangFile);
 
-    foreach($config->langs as $langKey => $langName)
+foreach(glob($appRoot . '*') as $appPath)
+{
+    $appName = basename($appPath);
+    foreach(glob($appPath . '/*') as $modulePath)
     {
-        if($langKey == 'zh-cn' or $langKey == 'zh-tw') continue;
-        $langFile = $modulePath . '/lang/' . $langKey . '.php';
-        if(!file_exists($langFile)) continue;
-        $lines = file($langFile);
-        foreach($mainLines as $lineNO => $line)
+        unset($lang);
+        $moduleName   = basename($modulePath);
+        $mainLangFile = $modulePath . '/lang/zh-cn.php';
+        if(!file_exists($mainLangFile)) continue;
+        $mainLines = file($mainLangFile);
+
+        foreach($config->langs as $langKey => $langName)
         {
-            if(strpos($line, '$lang') === false)
+            if($langKey == 'zh-cn' or $langKey == 'zh-tw') continue;
+            $langFile = $modulePath . '/lang/' . $langKey . '.php';
+            if(!file_exists($langFile)) continue;
+            $lines = file($langFile);
+            foreach($mainLines as $lineNO => $line)
             {
-                //if($line != $lines[$lineNO]) echo $moduleName . ' ' . $langKey . ' ' . $lineNO . "\n";
-            }
-            else
-            {
-                list($mainKey, $mainValue) = explode('=', $line);
-                list($key, $value) = explode('=', $lines[$lineNO]);
-                if(trim($mainKey) != trim($key))
+                if(strpos(trim($line), '$lang') === 0)
                 {
-                    $key = trim($key);
-                    $lineNO = $lineNO + 1;
-                    echo "module $moduleName need checking, command is:";
-                    echo " vim -O +$lineNO ../module/$moduleName/lang/zh-cn.php +$lineNO ../module/$moduleName/lang/en.php \n";
-                    break;
+                    list($mainKey, $mainValue) = explode('=', $line);
+                    list($key, $value) = explode('=', $lines[$lineNO]);
+                    if(trim($mainKey) != trim($key))
+                    {
+                        $key = trim($key);
+                        $lineNO = $lineNO + 1;
+                        echo "module $moduleName of $appName need checking, command is:";
+                        echo " vim -O +$lineNO ../app/$appName/$moduleName/lang/zh-cn.php +$lineNO ../app/$appName/$moduleName/lang/$langKey.php \n";
+                        break;
+                    }
                 }
             }
         }
-    }
 
-    foreach(glob($modulePath . '/ext/lang/zh-cn/*.php') as $extMainLangFile)
-    {
-        $extMainLines = file($extMainLangFile);
-        $extLangFile  = basename($extMainLangFile);
-        $extEnFile    = $modulePath . '/ext/lang/en/' . $extLangFile;
-        $extLines     = file($extEnFile);
-        foreach($extMainLines as $lineNO => $line)
+        foreach(glob($modulePath . '/ext/lang/zh-cn/*.php') as $extMainLangFile)
         {
-            if(strpos($line, '$lang') === false)
+            $extMainLines = file($extMainLangFile);
+            $extLangFile  = basename($extMainLangFile);
+            $extEnFile    = $modulePath . '/ext/lang/en/' . $extLangFile;
+            $extLines     = file($extEnFile);
+            foreach($extMainLines as $lineNO => $line)
             {
-                //if($line != $lines[$lineNO]) echo $moduleName . ' ' . $langKey . ' ' . $lineNO . "\n";
-            }
-            else
-            {
-                list($mainKey, $mainValue) = explode('=', $line);
-                list($key, $value) = explode('=', $extLines[$lineNO]);
-                if(trim($mainKey) != trim($key))
+                if(strpos($line, '$lang') === false)
                 {
-                    $key = trim($key);
-                    $lineNO = $lineNO + 1;
-                    echo "module $moduleName need checking, command is:";
-                    echo " vim -O +$lineNO ../../module/$moduleName/ext/lang/zh-cn/$extLangFile +$lineNO ../../module/$moduleName/ext/lang/en/$extLangFile \n";
-                    break;
+                    //if($line != $lines[$lineNO]) echo $moduleName . ' ' . $langKey . ' ' . $lineNO . "\n";
+                }
+                else
+                {
+                    list($mainKey, $mainValue) = explode('=', $line);
+                    list($key, $value) = explode('=', $extLines[$lineNO]);
+                    if(trim($mainKey) != trim($key))
+                    {
+                        $key = trim($key);
+                        $lineNO = $lineNO + 1;
+                        echo "module $moduleName need checking, command is:";
+                        echo " vim -O +$lineNO ../../module/$moduleName/ext/lang/zh-cn/$extLangFile +$lineNO ../../module/$moduleName/ext/lang/en/$extLangFile \n";
+                        break;
+                    }
                 }
             }
         }
@@ -148,18 +152,21 @@ foreach(glob($moduleRoot . '*') as $modulePath)
 echo '-------------php5.4 synatax checking-----------------' . "\n";
 class app {function loadLang() {}}
 $app = new app;
-$lang = new stdclass();
-
-error_reporting(E_WARNING | E_STRICT );
-foreach(glob($moduleRoot . '*') as $modulePath)
+foreach(glob($appRoot . '*') as $appPath)
 {
-    $moduleName = basename($modulePath);
-    $cnLangFile = $modulePath . '/lang/zh-cn.php';
-    $enLangFile = $modulePath . '/lang/en.php';
-    $configFile = $modulePath . '/config.php';
+    error_reporting(E_WARNING | E_STRICT );
+    $lang = new stdclass();
 
-    if(!isset($lang->$moduleName)) $lang->$moduleName = new stdclass();
-    if(file_exists($cnLangFile)) include $cnLangFile;
-    if(file_exists($enLangFile)) include $enLangFile;
-    if(file_exists($configFile)) include $configFile;
+    foreach(glob($appPath . '/*') as $modulePath)
+    {
+        $moduleName = basename($modulePath);
+        $cnLangFile = $modulePath . '/lang/zh-cn.php';
+        $enLangFile = $modulePath . '/lang/en.php';
+        $configFile = $modulePath . '/config.php';
+
+        if(!isset($lang->$moduleName)) $lang->$moduleName = new stdclass();
+        if(file_exists($cnLangFile)) include $cnLangFile;
+        if(file_exists($enLangFile)) include $enLangFile;
+        if(file_exists($configFile)) include $configFile;
+    }
 }
