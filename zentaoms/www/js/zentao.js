@@ -13,6 +13,7 @@ $.extend(
             success: function(response)
             {
                 $.enableForm(formID);
+                var submitButton = $(formID).find(':input[type=submit], .submit');
 
                 /* The response is not an object, some error occers, bootbox.alert it. */
                 if($.type(response) != 'object')
@@ -24,23 +25,24 @@ $.extend(
                 /* The response.result is success. */
                 if(response.result == 'success')
                 {
-                    var submitButton = $(formID).find(':input[type=submit], .submit');
                     if(response.message && response.message.length)
                     {
                         submitButton.popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
                         submitButton.next('.popover').addClass('popover-success');
-                        function distroy(){submitButton.popover('hide')}
+                        function distroy(){submitButton.popover('destroy')}
                         setTimeout(distroy,2000);
                     }
 
                     if($.isFunction(callback)) return callback(response);
+
                     if($('#responser').length && response.message && response.message.length)
                     {
                         $('#responser').html(response.message).addClass('red f-12px').show().delay(3000).fadeOut(100);
                     }
+
                     if(response.locate) 
                     {
-                        return setTimeout(function() { location.href = response.locate; }, 1200);
+                        return setTimeout(function(){location.href = response.locate;}, 1200);
                     }
 
                     return true;
@@ -55,10 +57,12 @@ $.extend(
                 {
                     if($('#responser').length == 0)
                     {
-                        if(form.parents('#ajaxModal').size()) return alert(response.message);
-                        return bootbox.alert(response.message);
+                        submitButton.popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
+                        submitButton.next('.popover').addClass('popover-danger');
+                        function distroy(){submitButton.popover('destroy')}
+                        setTimeout(distroy,2000);
                     }
-                    return $('#responser').html(response.message).addClass('red f-12px').show().delay(5000).fadeOut(100);
+                    $('#responser').html(response.message).addClass('red f-12px').show().delay(5000).fadeOut(100);
                 }
 
                 /* The result.message is just a object. */
@@ -368,31 +372,27 @@ $.extend(
         if($('a[data-toggle=modal]').size() == 0) return false;
 
         /* Addpend modal div. */
-        $('<div id="ajaxModal" class="modal fade modal-dialog"></div>').appendTo('body');
+        $('<div id="ajaxModal" class="modal fade"></div>').appendTo('body');
 
         /* Set the data target for modal. */
         $('a[data-toggle=modal]').attr('data-target', '#ajaxModal');
 
         $('a[data-toggle=modal]').click(function()
         {
-            $('#ajaxModal').load($(this).attr('href'));
+            var $e = $(this);
+            $('#ajaxModal').load($e.attr('href'),function()
+            {
+                /* Set the width of modal dialog. */
+                if($e.data('width'))
+                {
+                    var modalWidth = parseInt($e.data('width'));
+                    $(this).data('width', modalWidth).find('.modal-dialog').css('width', modalWidth);
+                }
+            });
+
             /* Save the href to rel attribute thus we can save it. */
             $('#ajaxModal').attr('rel', $(this).attr('href'));
-
-            /* Set the width and margin of modal. */
-            modalWidth      = 580;
-            modalMarginLeft = 280;
-            
-            /* User can customize the width by data-width=600. */
-            if($(this).data('width'))
-            {
-                modalWidth  = parseInt($(this).data('width')); 
-                modalMarginLeft = (modalWidth - 580) / 2 + 280;
-            }
-            /* Set the width and margin-left styles. */
-            $('#ajaxModal').css('width', modalWidth);
-            $('#ajaxModal').css('margin-left', '-' + modalMarginLeft + 'px')
-        });  
+        });
     },
 
     /**
@@ -405,7 +405,7 @@ $.extend(
     reloadAjaxModal: function(duration)
     {
        if(typeof(duration) == 'undefined') duration = 1000;
-       setTimeout(function(){$('#ajaxModal').load($('#ajaxModal').attr('rel'))}, duration);
+       setTimeout(function(){$('#ajaxModal').load($('#ajaxModal').attr('rel'), function(){$(this).find('.modal-dialog').css('width', $(this).data('width'))})}, duration);
     }
 });
 
@@ -500,7 +500,7 @@ function createLink(moduleName, methodName, vars, viewType)
     }
     if(config.requestType == 'PATH_INFO')
     {
-        link = moduleName + config.requestFix + methodName;
+        link = config.webRoot + moduleName + config.requestFix + methodName;
         if(vars)
         {
             if(config.pathType == "full")
@@ -581,9 +581,15 @@ function removeAnchor(url)
     return url;
 }
 
-function ping()             
-{ 
-      $.get(createLink('misc', 'ping'));
+/**
+ * Ping to keep login 
+ * 
+ * @access public
+ * @return void
+ */
+function ping()
+{
+    $.get(createLink('misc', 'ping'));
 }
 needPing = true;
 if(config.runMode != 'admin') needPing = false;

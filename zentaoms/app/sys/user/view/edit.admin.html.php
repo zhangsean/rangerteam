@@ -47,7 +47,7 @@
             </tr>  
             <tr>
               <th><?php echo $lang->user->role;?></th>
-              <td><?php echo html::select('role', $lang->user->roleList, '', "class='form-control'");?></td><td></td>
+              <td><?php echo html::select('role', $lang->user->roleList, $user->role, "class='form-control'");?></td><td></td>
             </tr>  
             <tr>
               <th><?php echo $lang->user->company;?></th>
