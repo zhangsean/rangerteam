@@ -164,7 +164,8 @@ foreach(glob($appRoot . '*') as $appPath)
         $enLangFile = $modulePath . '/lang/en.php';
         $configFile = $modulePath . '/config.php';
 
-        if(!isset($lang->$moduleName)) $lang->$moduleName = new stdclass();
+        if(!isset($lang->$moduleName))   $lang->$moduleName   = new stdclass();
+        if(!isset($config->$moduleName)) $config->$moduleName = new stdclass();
         if(file_exists($cnLangFile)) include $cnLangFile;
         if(file_exists($enLangFile)) include $enLangFile;
         if(file_exists($configFile)) include $configFile;
