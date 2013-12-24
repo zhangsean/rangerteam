@@ -237,6 +237,19 @@ class messageModel extends model
     }
 
     /**
+     * Mark a message readed.
+     * 
+     * @param  int    $messageID 
+     * @access public
+     * @return bool
+     */
+    public function markReaded($messageID)
+    {
+        $this->dao->update(TABLE_MESSAGE)->set('readed')->eq('1')->where('id')->eq($messageID)->exec();
+        return !dao::isError();
+    }
+
+    /**
      * Set the message id the user posted to the cookie. Thus before approvaled, the user can view these messages.
      * 
      * @param string $messageID
@@ -279,5 +292,18 @@ class messageModel extends model
         }
 
         return $link;
+    }
+
+    /**
+     * Delete messages of a user..
+     * 
+     * @param  int     $message 
+     * @access public
+     * @return void
+     */
+    public function deleteByAccount($message)
+    {
+        $this->dao->delete()->from(TABLE_MESSAGE)->where('`to`')->eq($this->app->user->account)->andWhere('id')->eq($message)->exec();
+        return !dao::isError();
     }
 }

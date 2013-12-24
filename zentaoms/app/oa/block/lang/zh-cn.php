@@ -110,9 +110,25 @@ $lang->block->regions->all['end']    = '结束部分';
 $lang->block->regions->index_index['header']  = '上部';
 $lang->block->regions->index_index['bottom']  = '下部';
 $lang->block->regions->index_index['footer']  = '底部';
+
 $lang->block->regions->article_browse['side'] = '侧边';
 $lang->block->regions->article_view['side']   = '侧边';
+
 $lang->block->regions->product_browse['side'] = '侧边';
 $lang->block->regions->product_view['side']   = '侧边';
+
+$lang->block->regions->blog_index['side']     = '侧边';
+$lang->block->regions->blog_view['side']      = '侧边';
+
+$lang->block->regions->forum_index['header']  = '上部';
+$lang->block->regions->forum_board['header']  = '上部';
+$lang->block->regions->thread_view['header']  = '上部';
+$lang->block->regions->forum_index['footer']  = '下部';
+$lang->block->regions->forum_board['footer']  = '下部';
+$lang->block->regions->thread_view['footer']  = '下部';
+
+$lang->block->regions->book_browse['side']    = '侧边';
+
 $lang->block->regions->message_index['side']  = '侧边';
+
 $lang->block->regions->page_view['side']      = '侧边';

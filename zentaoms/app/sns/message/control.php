@@ -67,7 +67,8 @@ class message extends control
         $message = $this->message->getByID($messageID);
         if($message->to != $this->app->user->account) die();
         $this->message->markReaded($message->id);
-        $this->locate($message->link);
+        if($message->link) $this->locate($message->link);
+        $this->locate($this->createLink('user', 'message'));
     }
 
     /**
@@ -148,21 +149,6 @@ class message extends control
         $this->display();
     }
 
-    /** 
-     * Delete messages.
-     *
-     * @param int    $messageID 
-     * @param string $type          single|pre
-     * @access public
-     * @return void
-     */
-    public function delete($messageID, $type, $status = 0)
-    {
-        $this->message->delete($messageID, $type);
-        if(!dao::isError()) $this->send(array('result' => 'success'));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
-    }
-
     /**
      * Pass messages.
      * 
@@ -176,5 +162,40 @@ class message extends control
         $this->message->pass($messageID, $type);
         if(!dao::isError()) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /** 
+     * Delete messages.
+     *
+     * @param int    $messageID 
+     * @param string $type          single|pre
+     * @access public
+     * @return void
+     */
+    public function delete($messageID, $type)
+    {
+        $this->message->delete($messageID, $type);
+        if(!dao::isError()) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
+     * Batch delete messages.
+     * 
+     * @access public
+     * @return void
+     */
+    public function batchDelete()
+    {
+        $messages = $this->post->messages;
+        if(empty($messages)) $this->send(array('result' => 'fail', 'message' => $this->lang->message->noSelectedMessage));
+
+        foreach($messages as $message) 
+        {
+            $result = $this->message->deleteByAccount($message);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess, 'locate' => $this->createLink('user', 'message')));
     }
 }

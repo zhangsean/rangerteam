@@ -11,7 +11,7 @@ $(document).ready(function()
     $.setReload('.reload');
 
     /* Ping for keep login every six minute. */
-    if(needPing) setInterval('setPing()', 1000 * 360);
+    if(needPing) setInterval('ping()', 1000 * 360);
 
     $("#topNav li").hover(function () 
     {

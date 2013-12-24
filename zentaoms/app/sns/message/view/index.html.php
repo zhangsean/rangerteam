@@ -12,9 +12,6 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php $common->printPositionBar();?>
-
-
-
 <div class='row'>
   <div class='col-md-9'>
     <div class='panel'>

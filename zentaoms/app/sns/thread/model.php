@@ -237,37 +237,20 @@ class threadModel extends model
     }
 
     /**
-     * Hide a thread.
+     * Switch a thread's stats.
      * 
      * @param  int    $threadID 
      * @access public
      * @return void
      */
-    public function hide($threadID)
+    public function switchStats($threadID)
     {
-        $this->dao->update(TABLE_THREAD)->set('hidden')->eq(1)->where('id')->eq($threadID)->exec();
+        $thread = $this->getByID($threadID);
+        if($thread->hidden) $this->dao->update(TABLE_THREAD)->set('hidden')->eq(0)->where('id')->eq($threadID)->exec();
+        if(!$thread->hidden) $this->dao->update(TABLE_THREAD)->set('hidden')->eq(1)->where('id')->eq($threadID)->exec();
         if(dao::isError()) return false;
 
         /* Update board stats. */
-        $thread = $this->getByID($threadID);
-        $this->loadModel('forum')->updateBoardStats($thread->board);
-        return !dao::isError();
-    }
-
-    /**
-     * Show thread.
-     * 
-     * @param  int    $threadID 
-     * @access public
-     * @return void
-     */
-    public function show($threadID)
-    {
-        $this->dao->update(TABLE_THREAD)->set('hidden')->eq(0)->where('id')->eq($threadID)->exec();
-        if(dao::isError()) return false;
-
-        /* Update board stats. */
-        $thread = $this->getByID($threadID);
         $this->loadModel('forum')->updateBoardStats($thread->board);
         return !dao::isError();
     }

@@ -24,7 +24,7 @@
               <th style='width: 50px'><?php echo $lang->message->from;?></th>
               <th style='width: 100px'><?php echo $lang->message->date;?></th>
               <th><?php echo $lang->message->content;?></th>
-              <th style='width: 50px'><?php echo $lang->message->readed;?></th>
+              <th style='width: 60px'><?php echo $lang->message->readed;?></th>
               <th style='width: 80px'><?php echo $lang->actions;?></th>
             </tr>
           </thead>
@@ -33,7 +33,7 @@
             <td><input type='checkbox' name='messages[]' value="<?php echo $message->id?>" /></td>
             <td><?php echo $message->from;?></td>
             <td><?php echo substr($message->date, 5);?></td>
-            <td class='a-left'><?php echo $message->content;?></td>
+            <td class='text-left'><?php echo $message->content;?></td>
             <td><?php echo $lang->message->readedStatus[$message->readed];?></td>
             <?php if(!$message->readed):?>
             <td><?php echo html::a($this->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed);?></td>

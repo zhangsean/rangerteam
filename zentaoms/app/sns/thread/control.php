@@ -169,50 +169,20 @@ class thread extends control
     }
    
     /**
-     * Hide a thread.
+     * Switch a thread's stats.
      * 
      * @param  int    $threadID 
      * @access public
      * @return void
      */
-    public function hide($threadID)
+    public function switchStats($threadID)
     {
         $thread = $this->thread->getByID($threadID);
         if(!$thread) $this->send(array('result' => 'fail', 'message' => 'Not found'));
 
         if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
 
-        if($this->thread->hide($threadID))
-        {
-            if(RUN_MODE == 'admin')
-            {
-                $locate = helper::createLink('forum', 'admin');
-            }
-            else
-            {
-                $locate = helper::createLink('forum', 'board', "board=$thread->board");
-            }
-            $this->send(array('result' => 'success', 'locate' => $locate));
-        }
-
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
-    }
-
-    /**
-     * Show thread.
-     * 
-     * @param  int    $threadID 
-     * @access public
-     * @return void
-     */
-    public function show($threadID)
-    {
-        $thread = $this->thread->getByID($threadID);
-        if(!$thread) $this->send(array('result' => 'fail', 'message' => 'Not found'));
-
-        if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
-
-        if($this->thread->show($threadID))
+        if($this->thread->switchStats($threadID))
         {
             if(RUN_MODE == 'admin')
             {

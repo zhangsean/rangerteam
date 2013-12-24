@@ -93,7 +93,7 @@ $lang->block->pages['forum_board']    = 'Forum board';
 $lang->block->pages['thread_view']    = 'View thread';
 $lang->block->pages['search_list']    = 'Search';
 
-$lang->block->pages['book_index']     = 'Help';
+$lang->block->pages['book_index']     = 'Book';
 $lang->block->pages['book_browse']    = 'Book catalogue';
 $lang->block->pages['book_read']      = 'Book content';
 
@@ -110,9 +110,25 @@ $lang->block->regions->all['end']    = 'End';
 $lang->block->regions->index_index['header']  = 'Header';
 $lang->block->regions->index_index['bottom']  = 'Bottom';
 $lang->block->regions->index_index['footer']  = 'Footer';
+
 $lang->block->regions->article_browse['side'] = 'Side';
 $lang->block->regions->article_view['side']   = 'Side';
+
 $lang->block->regions->product_browse['side'] = 'Side';
 $lang->block->regions->product_view['side']   = 'Side';
+
+$lang->block->regions->blog_index['side']     = 'Side';
+$lang->block->regions->blog_view['side']      = 'Side';
+
+$lang->block->regions->forum_index['header']  = 'Header';
+$lang->block->regions->forum_board['header']  = 'Header';
+$lang->block->regions->thread_view['header']  = 'Header';
+$lang->block->regions->forum_index['footer']  = 'Footer';
+$lang->block->regions->forum_board['footer']  = 'Footer';
+$lang->block->regions->thread_view['footer']  = 'Footer';
+
+$lang->block->regions->book_browse['side']    = 'Side';
+
 $lang->block->regions->message_index['side']  = 'Side';
+
 $lang->block->regions->page_view['side']      = 'Side';
