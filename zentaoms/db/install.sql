@@ -279,8 +279,6 @@ CREATE TABLE IF NOT EXISTS `sys_user` (
   `fails` tinyint(3) unsigned NOT NULL default '0',
   `referer` varchar(255) NOT NULL,
   `join` datetime NOT NULL,
-  `resetKey` char(64) NOT NULL,
-  `resetTime` datetime NOT NULL,
   `locked` datetime NOT NULL,
   `deleted` enum('0','1') NOT NULL,
   PRIMARY KEY  (`id`),
