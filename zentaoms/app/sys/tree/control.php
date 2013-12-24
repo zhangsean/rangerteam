@@ -45,7 +45,7 @@ class tree extends control
         if($type == 'dept')
         {   
             $this->lang->category   = $this->lang->dept;
-            $this->lang->tree->menu = $this->lang->dept->menu;
+            unset($this->lang->tree->menu);
             $this->lang->menuGroups->tree = 'user';
         }
 
@@ -126,6 +126,11 @@ class tree extends control
     {
         /* If type is forum, assign board to category. */
         if($type == 'forum') $this->lang->category = $this->lang->board;
+        if($type == 'dept')
+        {
+            $this->app->loadLang('user');
+            $this->lang->category = $this->lang->dept;
+        }
 
         if(!empty($_POST))
         { 

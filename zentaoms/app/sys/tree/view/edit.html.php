@@ -30,6 +30,7 @@ $themeRoot = $webRoot . "theme/";
         <label class='col-md-2 control-label'><?php echo $lang->category->name;?></label>
         <div class='col-md-4'><?php echo html::input('name', $category->name, "class='form-control'");?></div>
       </div>
+      <?php if($category->type != 'dept'):?>
       <div class='form-group'> 
         <label class='col-md-2 control-label'><?php echo $lang->category->alias;?></label>
         <div class='col-md-9'>
@@ -40,6 +41,7 @@ $themeRoot = $webRoot . "theme/";
           </div>
         </div>
       </div>
+      <?php endif;?>
       <div class='form-group'> 
         <label class='col-md-2 control-label'><?php echo $lang->category->keywords;?></label>
         <div class='col-md-9'><?php echo html::input('keywords', $category->keywords, "class='form-control'");?></div>

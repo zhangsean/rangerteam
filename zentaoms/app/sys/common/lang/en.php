@@ -106,7 +106,10 @@ $lang->menu = new stdclass();
 $lang->index = new stdclass();
 $lang->user  = new stdclass();
 $lang->file  = new stdclass();
-$lang->block = new stdclass();
+$lang->admin = new stdclass();
+$lang->tree  = new stdclass();
+$lang->mail  = new stdclass();
+$lang->dept  = new stdclass();
 
 $lang->menu->entry     = 'App|entry|admin|';
 $lang->menu->user      = 'User|user|admin|';

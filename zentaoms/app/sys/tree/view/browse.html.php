@@ -17,6 +17,7 @@
 js::set('root', $root);
 js::set('type', $type);
 ?>
+<?php if(!isset($lang->tree->menu)) echo "<div class='col-md-12'>";?>
 <?php if(strpos($treeMenu, '<li>') !== false):?>
 <div class='row'>
   <div class='col-md-4'>
@@ -30,5 +31,6 @@ js::set('type', $type);
 <?php else:?>
 <div id='categoryBox'></div>
 <?php endif;?>
+<?php if(!isset($lang->tree->menu)) echo "</div>";?>
 <?php include '../../common/view/treeview.html.php';?>
 <?php include '../../common/view/footer.admin.html.php';?>
