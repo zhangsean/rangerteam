@@ -112,9 +112,8 @@ $lang->block = new stdclass();
 $lang->menu->entry     = 'App|entry|admin|';
 $lang->menu->user      = 'User|user|admin|';
 $lang->menu->company   = 'Company|company|setbasic|';
-$lang->menu->mail      = 'Mail|mail|detect|';
-$lang->menu->extension = 'Extension|extension|admin|';
-$lang->menu->backup    = 'Backup|admin|backup|';
+$lang->menu->system    = 'System|mail|admin|';
+//$lang->menu->extension = 'Extension|extension|admin|';
  
 /* Menu entry. */
 $lang->entry       = new stdclass();
@@ -127,6 +126,19 @@ $lang->company->menu = new stdclass();
 $lang->company->menu->basic   = 'Basic|company|setbasic|';
 $lang->company->menu->contact = 'Contact|company|setcontact|';
 $lang->company->menu->setlogo = 'LOGO|company|setlogo|';
+
+/* Menu system. */
+$lang->system       = new stdclass();
+$lang->system->menu = new stdclass();
+$lang->system->menu->main = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
+//$lang->system->menu->backup = 'Backup|admin|backup|';
+
+$lang->menuGroups = new stdclass();
+
+/* Menu of mail module. */
+$lang->mail = new stdclass();
+$lang->mail->menu = $lang->system->menu;
+$lang->menuGroups->mail = 'system';
 
 /* The error messages. */
 $lang->error = new stdclass();

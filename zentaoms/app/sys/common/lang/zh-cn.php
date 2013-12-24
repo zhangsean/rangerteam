@@ -114,9 +114,8 @@ $lang->mail  = new stdclass();
 $lang->menu->company   = '公司|company|setbasic|';
 $lang->menu->user      = '用户|user|admin|';
 $lang->menu->entry     = '应用|entry|admin|';
-$lang->menu->mail      = '发信|mail|detect|';
+$lang->menu->system    = '系统|mail|admin|';
 //$lang->menu->extension = '扩展|extension|admin|';
-//$lang->menu->backup    = '备份|admin|backup|';
  
 /* Menu entry. */
 $lang->entry       = new stdclass();
@@ -129,6 +128,19 @@ $lang->company->menu = new stdclass();
 $lang->company->menu->basic   = '公司信息|company|setbasic|';
 $lang->company->menu->contact = '联系方式|company|setcontact|';
 $lang->company->menu->setlogo = 'LOGO设置|company|setlogo|';
+
+/* Menu system. */
+$lang->system       = new stdclass();
+$lang->system->menu = new stdclass();
+$lang->system->menu->main = array('link' => '发信|mail|admin|', 'alias' => 'detect,edit,save,test');
+//$lang->system->menu->backup = '备份|admin|backup|';
+
+$lang->menuGroups = new stdclass();
+
+/* Menu of mail module. */
+$lang->mail = new stdclass();
+$lang->mail->menu = $lang->system->menu;
+$lang->menuGroups->mail = 'system';
 
 /* The error messages. */
 $lang->error = new stdclass();
