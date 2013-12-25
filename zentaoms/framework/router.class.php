@@ -1009,21 +1009,24 @@ class router
     {
         $this->setModuleName('common');
         $commonModelFile = helper::setModelFile('common');
-        if(file_exists($commonModelFile))
+
+        if(!file_exists($commonModelFile))
         {
-            helper::import($commonModelFile);
-            if(class_exists('extcommonModel'))
-            {
-                return new extcommonModel();
-            }
-            elseif(class_exists('commonModel'))
-            {
-                return new commonModel();
-            }
-            else
-            {
-                return false;
-            }
+            $commonModelFile = helper::setModelFile('common', 'sys');
+        }
+
+        helper::import($commonModelFile);
+        if(class_exists('extcommonModel'))
+        {
+            return new extcommonModel();
+        }
+        elseif(class_exists('commonModel'))
+        {
+            return new commonModel();
+        }
+        else
+        {
+            return false;
         }
     }
 
