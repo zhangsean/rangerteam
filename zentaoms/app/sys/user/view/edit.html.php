@@ -40,12 +40,6 @@
           </div>
         </div>
         <div class='form-group'>
-          <label for='company' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->company;?></label>
-          <div class='col-md-4 col-sm-6'>
-            <?php echo html::input('company', $user->company, "class='form-control'");?>
-          </div>
-        </div>
-        <div class='form-group'>
           <label for='address' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->address;?></label>
           <div class='col-md-4 col-sm-6'>
             <?php echo html::input('address', $user->address, "class='form-control'");?>

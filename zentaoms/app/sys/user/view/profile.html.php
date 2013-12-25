@@ -19,8 +19,6 @@
         <dd><?php echo $user->realname;?></dd>
         <dt><?php echo $lang->user->email;?></dt>
         <dd><?php echo $user->email;?></dd>
-        <dt><?php echo $lang->user->company;?></dt>
-        <dd><?php echo $user->company;?></dd>
         <dt><?php echo $lang->user->address;?></dt>
         <dd><?php echo $user->address;?></dd>
         <dt><?php echo $lang->user->zipcode;?></dt>
