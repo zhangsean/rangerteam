@@ -111,11 +111,15 @@ $lang->tree  = new stdclass();
 $lang->mail  = new stdclass();
 $lang->dept  = new stdclass();
 
-$lang->menu->company   = 'Company|company|setbasic|';
-$lang->menu->user      = 'User|user|admin|';
-$lang->menu->entry     = 'App|entry|admin|';
-$lang->menu->system    = 'System|mail|admin|';
-//$lang->menu->extension = 'Extension|extension|admin|';
+$lang->menu->sys = new stdclass();
+$lang->menu->sys->company   = 'Company|company|setbasic|';
+$lang->menu->sys->user      = 'User|user|admin|';
+$lang->menu->sys->entry     = 'App|entry|admin|';
+$lang->menu->sys->system    = 'System|mail|admin|';
+//$lang->menu->sys->extension = 'Extension|extension|admin|';
+
+$lang->menu->sns = new stdclass();
+$lang->menu->sns->forum = 'Forum|forum|index|';
  
 /* Menu entry. */
 $lang->entry       = new stdclass();
