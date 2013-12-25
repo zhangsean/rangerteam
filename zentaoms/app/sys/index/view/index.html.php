@@ -4,7 +4,7 @@
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
- * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
+ * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     index 
  * @version     $Id$
  * @link        http://www.zentao.net
@@ -13,7 +13,6 @@ include "../../common/view/header.lite.html.php";
 css::import($themeRoot . 'default/ips.css');
 js::import($jsRoot . 'jquery/ips.js');
 ?>
-
   <!-- Desktop -->
   <div id='desktop'  unselectable="on" style="-moz-user-select:none;-webkit-user-select:none;" onselectstart="return false;">
     <div id='leftBar' class='dock-left'>
