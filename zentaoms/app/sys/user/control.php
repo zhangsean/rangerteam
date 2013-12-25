@@ -253,7 +253,7 @@ class user extends control
             $this->send( array('result' => 'success', 'locate'=>inlink('admin')) );
         }                      
 
-        $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptLink'));
+        $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptAdminLink'));
         $this->view->depts    = $this->tree->getOptionMenu('dept');
         $this->display();      
     }
@@ -279,7 +279,7 @@ class user extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
         }
 
-        $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptLink'));
+        $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptAdminLink'));
         $this->view->depts    = $this->tree->getOptionMenu('dept');
         $this->view->user     = $this->user->getByAccount($account);
         if(RUN_MODE == 'admin') 
@@ -322,7 +322,7 @@ class user extends control
 
         $query = $this->post->query ? $this->post->query : '';
 
-        $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptLink'));
+        $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptAdminLink'));
         $this->view->depts    = $this->tree->getOptionMenu('dept');
         $this->view->users    = $this->user->getList($pager, $query, $deptID);
         $this->view->query    = $query;

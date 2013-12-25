@@ -14,7 +14,7 @@
 $this->loadModel('tree');
 $block->content = json_decode($block->content);
 $type           = str_replace('tree', '', strtolower($block->type));
-$browseLink     = $type == 'article' ? 'createBrowseLink' : 'create' . ucfirst($type) . 'BrowseLink';
+$browseLink     = 'create' . ucfirst($type) . 'BrowseLink';
 ?>
 <?php if($block->content->showChildren):?>
 <?php $treeMenu = $this->tree->getTreeMenu($type, 0, array('treeModel', $browseLink));?>

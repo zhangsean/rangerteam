@@ -33,19 +33,6 @@ class treeModel extends model
     }
 
     /**
-     * Get category alias by id.
-     * 
-     * @param  int      $categoryID 
-     * @access public
-     * @return string
-     */
-    public function getAliasByID($categoryID)
-    {
-        if(isset($this->config->categoryAlias[$categoryID])) return $this->config->categoryAlias[$categoryID];
-        return "";
-    }
-
-    /**
      * Get the first category.
      * 
      * @param  string $type 
@@ -265,41 +252,13 @@ class treeModel extends model
     }
 
     /**
-     * Create the admin link.
+     * Create the article browse link.
      * 
      * @param  int      $category 
      * @access public
      * @return string
      */
-    public static function createAdminLink($category)
-    {
-        if($category->type == 'forum')
-        {
-            $categoryName = 'forum';
-            $methodName   = 'boardAdmin';
-            $vars         = "categoryID=$category->id";
-            $linkHtml     = html::a(helper::createLink($categoryName, $methodName, $vars), $category->name, "id='category{$category->id}' target='mainwin'");
-            return $linkHtml;
-        }
-        else
-        {
-            $categoryName = 'article';
-            $methodName   = 'browseAdmin';
-            $orderBy      = $category->type == 'article' ? 'id_desc' : '`order`';
-            $vars         = "type=$category->type&&categoryID=$category->id&orderBy=$orderBy";
-            $linkHtml     = html::a(helper::createLink($categoryName, $methodName, $vars), $category->name, "id='category($category->id)' target='mainwin'");
-            return $linkHtml;
-        }
-    }
-
-    /**
-     * Create the browse link.
-     * 
-     * @param  int      $category 
-     * @access public
-     * @return string
-     */
-    public static function createBrowseLink($category)
+    public static function createArticleBrowseLink($category)
     {
         $linkHtml = html::a(helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
@@ -356,14 +315,14 @@ class treeModel extends model
     }
 
     /**
-     * Create dept link 
+     * Create dept admin link 
      * 
      * @param  object    $category 
      * @static
      * @access public
      * @return string
      */
-    public static function createDeptLink($category)
+    public static function createDeptAdminLink($category)
     {
         return html::a(helper::createLink('user', 'admin', "deptID={$category->id}"), $category->name, "id='category{$category->id}'");
     }
@@ -392,7 +351,6 @@ class treeModel extends model
 
         /* Add id to check alias. */
         $category->id = $categoryID; 
-        if(!$this->checkAlias($category)) return sprintf($this->lang->tree->aliasRepeat, $category);
 
         $parent = $this->getById($this->post->parent);
         $category->grade = $parent ? $parent->grade + 1 : 1;
@@ -463,7 +421,6 @@ class treeModel extends model
 
             /* Add id to check alias. */
             $category->id = $mode == 'new' ?  0: $category->id = $key;
-            if(!$this->checkAlias($category)) return sprintf($this->lang->tree->aliasRepeat, $alias);
 
             if($mode == 'new')
             {
@@ -491,36 +448,6 @@ class treeModel extends model
         }
 
         return !dao::isError();
-    }
-    
-    /**
-     * Check if alias available.
-     *
-     * @param  object    $category 
-     * @access public
-     * @return void
-     */
-    public function checkAlias($category)
-    {
-        if(empty($category)) return false;
-        if($category->alias == '') return true;
-        if(empty($category->id)) $category->id = 0;
-        if(in_array($category->type, array('article', 'product')) and strpos($this->config->tree->systemModules, ",{$category->alias},") !== false)
-        {
-            $this->lang->tree->aliasRepeat = $this->lang->tree->aliasConflict;
-            return false;
-        }
-
-        $scope = array();
-        $scope['article'] = 'article,product';
-        $scope['product'] = 'article,product';
-        $scope['blog']    = 'blog';
-        $scope['forum']   = 'forum';
-
-        $count = $this->dao->select('count(*) as count')->from(TABLE_CATEGORY)
-            ->where('`alias`')->eq($category->alias)->andWhere('id')->ne($category->id)
-            ->andWhere('type')->in($scope[$category->type])->fetch('count');
-        return $count < 1;
     }
 
     /**
