@@ -20,18 +20,18 @@ class index extends control
     {
         $entries = $this->loadModel('entry')->getEntries();
 
-        $leftBarEntry = ',';
-        $allEntries   = '';
+        $leftEntry  = ',';
+        $allEntries = '';
         foreach($entries as $entry)
         {
-            if($entry->visible) $leftBarEntry .= $entry->id . ',';
-            $ssoLoginLink = $this->createLink('entry', 'visit', "entryID=$entry->id");
-            $logo         = $entry->logoPath ? $entry->logoPath : '';
-            $allEntries  .= "entries['$entry->id'] = new entry('$entry->id', '$ssoLoginLink', '$entry->name', '$entry->openMode', '', 'max', null, null, '$logo');\n";
+            if($entry->visible) $leftEntry .= $entry->id . ',';
+            $sso  = $this->createLink('entry', 'visit', "entryID=$entry->id");
+            $logo = $entry->logoPath ? $entry->logoPath : '';
+            $allEntries .= "entries['$entry->id'] = new entry('$entry->id', '$sso', '$entry->name', '$entry->open', '', 'max', null, null, '$logo');\n";
         }
 
-        $this->view->allEntries   = $allEntries;
-        $this->view->leftBarEntry = $leftBarEntry;
+        $this->view->allEntries = $allEntries;
+        $this->view->leftEntry  = $leftEntry;
         $this->display();
     }
 }

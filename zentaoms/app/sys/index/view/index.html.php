@@ -27,7 +27,7 @@ js::import($jsRoot . 'jquery/ips.js');
             <li><a href='admin.php?m=entry&f=create' target='_blank' id='addAppBtn' title='<?php echo $lang->index->addEntry?>'><i class='icon-plus-sign'></i></a></li>
           </ul>
         </div>
-        <div id='avatar' title='<?php echo $lang->index->userInfo?>' class='app-btn' data-id='profile'>
+        <div id='avatar' title='<?php echo $lang->index->profile?>' class='app-btn' data-id='profile'>
           <img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''>
           <div class='avatar-name'><?php echo $app->user->realname?></div>
         </div>        
@@ -81,11 +81,11 @@ js::import($jsRoot . 'jquery/ips.js');
 <script>
 var entries = new Array();
 
-entries['allapps'] = new entry('allapps', '', '<?php echo $lang->index->allEntries?>', 'none', '<?php echo $lang->index->entryDesc->installed?>', 'fullscreen', null, null, null, true);
-entries['profile'] = new entry('profile', '<?php echo $this->createLink('user', 'profile')?>', '<?php echo $lang->user->profile?>', 'iframe', '<?php echo $lang->index->entryDesc->profile?>', null, null, null, null, true);
+entries['allapps'] = new entry('allapps', '', '<?php echo $lang->index->allEntries?>', 'none', '<?php echo $lang->index->allEntries?>', 'fullscreen', null, null, null, true);
+entries['profile'] = new entry('profile', '<?php echo $this->createLink('user', 'profile')?>', '<?php echo $lang->user->profile?>', 'iframe', '<?php echo $lang->index->profile?>', null, null, null, null, true);
 
 <?php echo $allEntries;?>
-var leftBarEntry = '<?php echo $leftBarEntry?>';
+var leftBarEntry = '<?php echo $leftEntry?>';
 $(function(){$('.apps-count').text(entryCount)})
 </script>
 <?php
