@@ -9,27 +9,5 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-/* Set the error reporting. */
-error_reporting(0);
-
-/* Start output buffer. */
-ob_start();
-
-/* Load the framework. */
-include '../framework/router.class.php';
-include '../framework/control.class.php';
-include '../framework/model.class.php';
-include '../framework/helper.class.php';
-
-/* Log the time and define the run mode. */
-$startTime = getTime();
-
-/* Run the app. */
-$app = router::createApp('sns');
-$common = $app->loadCommon();
-$app->parseRequest();
-$common->checkPriv();
-$app->loadModule();
-
-/* Flush the buffer. */
-echo helper::removeUTF8Bom(ob_get_clean());
+$appName = 'sns';
+include '../../framework/loader.php';
