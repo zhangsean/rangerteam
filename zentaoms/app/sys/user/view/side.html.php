@@ -21,7 +21,7 @@
         $class = '';
         list($label, $module, $method) = explode('|', $menu);
 
-        if(in_array($method, array('thread', 'reply')) && !commonModel::isAvailable('forum')) continue;
+        if(in_array($method, array('thread', 'reply'))) continue;
 
         if($module == $this->app->getModuleName() && $method == $this->app->getMethodName()) $class .= 'active';
 

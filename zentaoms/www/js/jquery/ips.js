@@ -4,7 +4,7 @@ var config =
     movingWindow         : null,    // 当前正在移动的窗口
     activeWindow         : null,    // 当前激活的窗口
     lastActiveWindow     : null,    //　上次激活的窗口
-    entryIconRoot        : 'theme/default/images/ips/',  // 应用图标库目录地址
+    entryIconRoot        : config.webRoot + 'theme/default/images/ips/',  // 应用图标库目录地址
     windowHeadheight     : 36,      　// 桌面任务栏栏高度
     bottomBarHeight      : 42,      // 应用窗口底栏高度
     desktopSize          : null,    // 当前桌面区域尺寸
