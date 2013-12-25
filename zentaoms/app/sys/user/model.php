@@ -345,18 +345,17 @@ class userModel extends model
     /**
      * Forbid the user
      *
-     * @param string $date
      * @param int $userID
      * @access public
      * @return void
      */
-    public function forbid($userID, $date)
+    public function forbid($userID)
     {
-        $intdate = strtotime("+$date day");
+        $intdate = strtotime("+5000 day");
 
         $format = 'Y-m-d H:i:s';
 
-        $date = date($format,$intdate);
+        $date = date($format, $intdate);
         $this->dao->update(TABLE_USER)->set('locked')->eq($date)->where('id')->eq($userID)->exec();
 
         return !dao::isError();

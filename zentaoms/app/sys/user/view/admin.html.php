@@ -78,14 +78,7 @@
               </td>
               <td class='operate'>
                 <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit); ?>
-                <div class="btn-group">
-                  <a class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
-                  <ul class="dropdown-menu pull-right" role="menu">
-                  <?php foreach($lang->user->forbidDate as $date => $title):?>
-                    <li><?php echo html::a($this->createLink('user', 'forbid', "userID={$user->id}&date=$date"), $title, "class='forbider'");?></li>
-                  <?php endforeach;?>
-                  </ul>
-                </div>
+                <?php echo html::a($this->createLink('user', 'forbid', "userID=$user->id"), $lang->user->forbid, "class='forbider'"); ?>
               </td>
             </tr>
             <?php endforeach;?>

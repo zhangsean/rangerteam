@@ -336,15 +336,14 @@ class user extends control
     /**
      * forbid a user.
      *
-     * @param string $date
      * @param int    $userID
      * @return viod
      */
-    public function forbid($userID, $date)
+    public function forbid($userID)
     {
-        if(!$userID or !isset($this->lang->user->forbidDate[$date])) $this->send(array('result'=>'fail', 'message' => $this->lang->user->forbidFail));       
+        if(!$userID) $this->send(array('result'=>'fail', 'message' => $this->lang->user->forbidFail));       
 
-        $result = $this->user->forbid($userID, $date);
+        $result = $this->user->forbid($userID);
         if($result)
         {
             $this->send(array('result'=>'success', 'message' => $this->lang->user->forbidSuccess));
