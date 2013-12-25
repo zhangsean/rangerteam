@@ -37,7 +37,10 @@
       </div>
       <div class='col-md-10'>
         <div class="panel">
-          <div class="panel-heading"><strong><i class="icon-group"></i> <?php echo $lang->user->list;?></strong></div>
+          <div class="panel-heading">
+            <strong><i class="icon-group"></i> <?php echo $lang->user->list;?></strong>
+            <span class='pull-right mr-10px'><?php echo html::a($this->inlink('create'), $lang->user->create);?></span>
+          </div>
           <table class='table table-hover table-striped table-bordered'>
             <thead>
               <tr class='text-center'>
