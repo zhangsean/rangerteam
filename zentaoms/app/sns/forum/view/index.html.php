@@ -1,6 +1,4 @@
 <?php include '../../common/view/header.html.php'; ?>
-<?php $this->block->printRegion($layouts, 'forum_index', 'header');?>
-<?php $common->printPositionBar();?>
 <div id='boards'>
 <?php foreach($boards as $parentBoard):?>
   <div class='panel'>
@@ -44,5 +42,4 @@
   </div>
 <?php endforeach;?>
 </div>
-<?php $this->block->printRegion($layouts, 'forum_index', 'footer');?>
 <?php include '../../common/view/footer.html.php'; ?>
