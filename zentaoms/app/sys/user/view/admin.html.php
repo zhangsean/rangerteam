@@ -13,7 +13,13 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/treeview.html.php';?>
 <div class="col-md-12">
-  <div class="limit-width">
+  <div class='col-md-2'>
+    <div class='panel'>
+      <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $lang->dept->common;?></strong></div>
+      <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu . html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit, "class='pull-right'");?></div></div>
+    </div>
+  </div>
+  <div class='col-md-10'>
     <div class="row">
       <div class="col-sm-offset-8 col-sm-4 col-md-offset-9 col-md-3">
         <div class="panel">
@@ -27,15 +33,7 @@
           </form>
         </div>
       </div>
-    </div>
-    <div class='clearfix'>
-      <div class='col-md-2'>
-        <div class='panel'>
-          <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $lang->dept->common;?></strong></div>
-          <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu . html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit, "class='pull-right'");?></div></div>
-        </div>
-      </div>
-      <div class='col-md-10'>
+      <div class='clearfix'>
         <div class="panel">
           <div class="panel-heading">
             <strong><i class="icon-group"></i> <?php echo $lang->user->list;?></strong>
