@@ -112,22 +112,6 @@ $lang->user->login->common  = "Login";
 $lang->user->login->welcome = 'Welcome';
 $lang->user->login->why     = 'Login, and use more feature.';
 
-$lang->user->oauth = new stdclass();
-$lang->user->oauth->common       = 'OAuth';
-$lang->user->oauth->provider     = 'Provider';
-$lang->user->oauth->clientID     = 'App Key';
-$lang->user->oauth->clientSecret = 'App Secret';
-$lang->user->oauth->verification = 'Verification';
-$lang->user->oauth->widget       = 'Widget';
-
-$lang->user->oauth->providers['sina'] = 'Sina weibo';
-$lang->user->oauth->providers['qq']   = 'QQ';
-
-$lang->user->oauth->lblWelcome    = 'OAuth login';
-$lang->user->oauth->lblProfile    = "<h3>Register a new account</h3>";
-$lang->user->oauth->lblBind       = "<h3>Or bind an registered account</h3>";
-$lang->user->oauth->lblBindFailed = "Bind user failed！";
-
 $lang->user->control = new stdclass();
 $lang->user->control->common      = 'User dashboard';
 $lang->user->control->welcome     = 'Welcome, <strong>%s</strong>';
@@ -141,13 +125,11 @@ $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i
 
 $lang->dept = new stdclass();  
 $lang->dept->common     = 'Dept';
+$lang->dept->name       = 'Dept Name';
 $lang->dept->edit       = 'Edit Dept';
 $lang->dept->children   = 'Children';
 $lang->dept->moderators = 'Moderator';
   
-$lang->dept->menu[] = "User|user|admin|";
-$lang->dept->menu[] = "Dept|tree|browse|type=dept";
-
 $lang->user->roleList['']       = ''; 
 $lang->user->roleList['dev']    = 'Developer';
 $lang->user->roleList['qa']     = 'Tester';

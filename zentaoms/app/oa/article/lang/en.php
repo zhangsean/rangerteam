@@ -39,11 +39,13 @@ $lang->article->create     = 'Create';
 $lang->article->edit       = 'Edit';
 $lang->article->files      = 'Files';
 
+$lang->blog = new stdclass();
 $lang->blog->admin  = 'Admin';
 $lang->blog->list   = 'List';
 $lang->blog->create = 'Create';
 $lang->blog->edit   = 'Edit';
 
+$lang->page = new stdclass();
 $lang->page->admin  = 'Admin';
 $lang->page->list   = 'List';
 $lang->page->create = 'Create';

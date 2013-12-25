@@ -39,11 +39,13 @@ $lang->article->create     = '发布文章';
 $lang->article->edit       = '编辑文章';
 $lang->article->files      = '附件';
 
+$lang->blog = new stdclass();
 $lang->blog->admin  = '维护博客';
 $lang->blog->list   = '博客列表';
 $lang->blog->create = '发布博客';
 $lang->blog->edit   = '编辑博客';
 
+$lang->page = new stdclass();
 $lang->page->admin  = '维护单页';
 $lang->page->list   = '单页列表';
 $lang->page->create = '添加单页';

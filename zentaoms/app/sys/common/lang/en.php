@@ -111,9 +111,9 @@ $lang->tree  = new stdclass();
 $lang->mail  = new stdclass();
 $lang->dept  = new stdclass();
 
-$lang->menu->entry     = 'App|entry|admin|';
-$lang->menu->user      = 'User|user|admin|';
 $lang->menu->company   = 'Company|company|setbasic|';
+$lang->menu->user      = 'User|user|admin|';
+$lang->menu->entry     = 'App|entry|admin|';
 $lang->menu->system    = 'System|mail|admin|';
 //$lang->menu->extension = 'Extension|extension|admin|';
  
