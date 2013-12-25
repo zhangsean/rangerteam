@@ -237,13 +237,13 @@ class threadModel extends model
     }
 
     /**
-     * Switch a thread's stats.
+     * Switch a thread's status.
      * 
      * @param  int    $threadID 
      * @access public
      * @return void
      */
-    public function switchStats($threadID)
+    public function switchStatus($threadID)
     {
         $thread = $this->getByID($threadID);
         if($thread->hidden) $this->dao->update(TABLE_THREAD)->set('hidden')->eq(0)->where('id')->eq($threadID)->exec();

@@ -6,7 +6,7 @@ css::internal($pageCSS);
 <?php if(isset($comments) and $comments):?>
 <div class='panel'>
   <div class='panel-heading'>
-    <div class='panel-actions'><a href='#commentForm' class='btn btn-info'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div>
+    <div class='panel-actions'><a href='#commentForm' class='btn btn-primary'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div>
     <strong><i class='icon-comments'></i> <?php echo $lang->message->list;?></strong>
   </div>
   <div class='panel-body'>

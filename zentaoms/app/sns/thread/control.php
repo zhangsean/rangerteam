@@ -169,20 +169,20 @@ class thread extends control
     }
    
     /**
-     * Switch a thread's stats.
+     * Switch a thread's status.
      * 
      * @param  int    $threadID 
      * @access public
      * @return void
      */
-    public function switchStats($threadID)
+    public function switchStatus($threadID)
     {
         $thread = $this->thread->getByID($threadID);
         if(!$thread) $this->send(array('result' => 'fail', 'message' => 'Not found'));
 
         if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
 
-        if($this->thread->switchStats($threadID))
+        if($this->thread->switchStatus($threadID))
         {
             if(RUN_MODE == 'admin')
             {

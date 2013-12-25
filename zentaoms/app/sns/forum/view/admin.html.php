@@ -37,11 +37,11 @@
         <?php 
         if($thread->hidden)
         {
-            echo html::a($this->createLink('thread', 'switchStats', "threadID=$thread->id"), $lang->thread->show, "class='reload'"); 
+            echo html::a($this->createLink('thread', 'switchStatus', "threadID=$thread->id"), $lang->thread->show, "class='reload'"); 
         }
         else
         {
-            echo html::a($this->createLink('thread', 'switchStats', "threadID=$thread->id"), $lang->thread->hide, "class='reload'"); 
+            echo html::a($this->createLink('thread', 'switchStatus', "threadID=$thread->id"), $lang->thread->hide, "class='reload'"); 
         }
         ?>
       </td>

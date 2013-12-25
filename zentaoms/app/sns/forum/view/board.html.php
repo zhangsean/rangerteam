@@ -9,7 +9,7 @@
     </strong>
     <?php if($board->moderators) printf(" &nbsp;<span class='moderators'>" . $lang->forum->lblOwner . '</span>', trim($board->moderators, ',')); ?>
     <div class='panel-actions'>
-      <?php if($this->forum->canPost($board)) echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil icon-large"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn btn-info'");?>
+      <?php if($this->forum->canPost($board)) echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil icon-large"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn btn-primary'");?>
     </div>
   </div>
   <table class='table table-hover table-striped'>

@@ -18,78 +18,80 @@
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $type == 'blog' ? $lang->blog->edit : ($type == 'page' ? $lang->page->edit : $lang->article->edit);?></strong></div>
   <div class='panel-body'>
-  <form method='post' class='form-horizontal' id='ajaxForm'>
-    <?php if($type != 'page'):?>
-    <div class='form-group'>
-      <label class='col-sm-2 control-label required'><?php echo $lang->article->category;?></label>
-      <div class='col-sm-4'>
-      <?php 
-      echo html::select("categories[]", $categories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");
-      ?>
+  <form method='post' id='ajaxForm'>
+    <table class='table table-form'>
+      <?php if($type != 'page'):?>
+      <tr>
+        <th style='width: 100px'><?php echo $lang->article->category;?></th>
+        <td style='width: 40%'>
+        <?php 
+        echo html::select("categories[]", $categories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");
+        ?>
+        </td><td></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->article->author;?></th>
+        <td><?php echo html::input('author', $article->author, "class='form-control'");?></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->article->original;?></th>
+        <td><?php echo html::select('original', $lang->article->originalList, $article->original, "class='form-control chosen'");?></td>
+        <td>
+          <div id='copyBox' class='row'>
+            <div class='col-sm-4'><?php echo html::input('copySite', $article->copySite, "class='form-control' placeholder='{$lang->article->copySite}'"); ?> </div>
+            <div class='col-sm-8'><?php echo html::input('copyURL',  $article->copyURL, "class='form-control' placeholder='{$lang->article->copyURL}'"); ?></div>
+          </div>
+        </td>
+      </tr>
+      <?php endif; ?>
+      <tr>
+        <th><?php echo $lang->article->title;?></th>
+        <td colspan='2'><?php echo html::input('title', $article->title, "class='form-control'");?></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->article->alias;?></th>
+        <td colspan='2'>
+          <div class='input-group'>
+            <?php if($type == 'page'):?>
+            <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>page/</span>
+            <?php else:?>
+            <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot . $type?>/id_</span>
+            <?php endif;?>
+            <?php echo html::input('alias', $article->alias, "class='form-control' placeholder='{$lang->alias}'");?>
+            <span class='input-group-addon'>.html</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->article->keywords;?></th>
+        <td colspan='2'> <?php echo html::input('keywords', $article->keywords, "class='form-control'");?></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->article->summary;?></th>
+        <td colspan='2'><?php echo html::textarea('summary', $article->summary, "rows='2' class='form-control'");?></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->article->content;?></th>
+        <td colspan='2'><?php echo html::textarea('content', htmlspecialchars($article->content), "rows='10' class='form-control'");?></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->article->addedDate;?></th>
+        <td>
+          <div class='input-append date'>
+            <?php echo html::input('addedDate', date('Y-m-d H:i'), "class='form-control'");?>
+            <span class='add-on'><button class="btn btn-default" type="button"><i class="icon-calendar"></i></button></span>
+          </div>
+        </td>
+        <td><span class='help-inline'><?php echo $lang->article->note->addedDate;?></span></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->article->status;?></th>
+        <td><?php echo html::select('status', $lang->article->statusList, $article->status, "class='form-control chosen'");?></td>
+      </tr>
+      <tr>
+        <th></th><td colspan='2'><?php echo html::submitButton();?></td>
       </div>
-    </div>
-    <div class='form-group'>
-      <label class='col-sm-2 control-label'><?php echo $lang->article->author;?></label>
-      <div class='col-sm-4'><?php echo html::input('author', $article->author, "class='form-control'");?></div>
-    </div>
-    <div class='form-group'>
-      <label class='col-sm-2 control-label'><?php echo $lang->article->original;?></label>
-      <div class='col-sm-4'><?php echo html::select('original', $lang->article->originalList, $article->original, "class='form-control chosen'");?></div>
-      <div id='copyBox' class='col-sm-6'>
-        <div class='row'>
-          <div class='col-sm-4'><?php echo html::input('copySite', $article->copySite, "class='form-control' placeholder='{$lang->article->copySite}'"); ?> </div>
-          <div class='col-sm-8'><?php echo html::input('copyURL',  $article->copyURL, "class='form-control' placeholder='{$lang->article->copyURL}'"); ?></div>
-        </div>
-      </div>
-    </div>
-    <?php endif; ?>
-    <div class='form-group'>
-      <label class='col-sm-2 control-label required'><?php echo $lang->article->title;?></label>
-      <div class='col-sm-10'><?php echo html::input('title', $article->title, "class='form-control'");?></div>
-    </div>
-    <div class='form-group'>
-      <label class='col-sm-2 control-label'><?php echo $lang->article->alias;?></label>
-      <div class='col-sm-10'>
-        <div class="input-group">
-          <?php if($type == 'page'):?>
-          <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>page/</span>
-          <?php else:?>
-          <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot . $type?>/id_</span>
-          <?php endif;?>
-          <?php echo html::input('alias', $article->alias, "class='form-control' placeholder='{$lang->alias}'");?>
-          <span class="input-group-addon">.html</span>
-        </div>
-      </div>
-    </div>
-    <div class='form-group'>
-      <label class='col-sm-2 control-label'><?php echo $lang->article->keywords;?></label>
-      <div class='col-sm-10'> <?php echo html::input('keywords', $article->keywords, "class='form-control'");?></div>
-    </div>
-    <div class='form-group'>
-      <label class='col-sm-2 control-label'><?php echo $lang->article->summary;?></label>
-      <div class='col-sm-10'><?php echo html::textarea('summary', $article->summary, "rows='2' class='form-control'");?></div>
-    </div>
-    <div class='form-group'>
-      <label class='col-sm-2 control-label required'><?php echo $lang->article->content;?></label>
-      <div class='col-sm-10'><?php echo html::textarea('content', htmlspecialchars($article->content), "rows='10' class='form-control'");?></div>
-    </div>
-    <div class="form-group">
-      <label for="addedDate" class="col-sm-2 control-label"><?php echo $lang->article->addedDate;?></label>
-      <div class='col-sm-4'>
-        <div class="input-append date">
-          <?php echo html::input('addedDate', date('Y-m-d H:i'), "class='form-control'");?>
-          <span class='add-on'><button class="btn btn-default" type="button"><i class="icon-calendar"></i></button></span>
-        </div>
-      </div>
-      <div class="col-sm-6"><span class="help-inline"><?php echo $lang->article->note->addedDate;?></span></div>
-    </div>
-    <div class='form-group'>
-      <label class='col-sm-2 control-label'><?php echo $lang->article->status;?></label>
-      <div class='col-sm-4'><?php echo html::select('status', $lang->article->statusList, $article->status, "class='form-control chosen'");?></div>
-    </div>
-    <div class='form-group'>
-      <div class="col-sm-2"></div><div class='col-sm-10'><?php echo html::submitButton();?></div>
-    </div>
+    </table>
   </form>
   </div>
 </div>

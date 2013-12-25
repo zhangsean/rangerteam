@@ -534,25 +534,8 @@ function setRequiredFields()
     requiredFields = config.requiredFields.split(',');
     for(i = 0; i < requiredFields.length; i++)
     {
-        $('#' + requiredFields[i]).after('<span class="star">&nbsp;*&nbsp;</span>');
+        $('#' + requiredFields[i]).parent().addClass('required');
     }
-}
-
-/**
- * Set the leftmenu for admin.
- * 
- * @access public
- * @return void
- */
-function setAdminLeftMenu()
-{
-    if($('ul.leftmenu').find('a').size()==1)
-    {
-        $('ul.leftmenu').find('a').addClass('radius');
-        return ;
-    }
-    $('ul.leftmenu').find('a').last().addClass('radius-bottom');
-    $('ul.leftmenu').find('a').first().addClass('radius-top');
 }
 
 /**

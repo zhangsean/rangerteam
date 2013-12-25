@@ -15,7 +15,7 @@
 <div class='row'>
   <div class='col-md-9'>
     <div class='panel'>
-      <div class='panel-heading'><div class='panel-actions'><a href='#commentForm' class='btn btn-info'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div><strong><i class='icon-comments-alt'></i> <?php echo $lang->message->list;?></strong></div>
+      <div class='panel-heading'><div class='panel-actions'><a href='#commentForm' class='btn btn-primary'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div><strong><i class='icon-comments-alt'></i> <?php echo $lang->message->list;?></strong></div>
       <div class='panel-body'>
         <?php if(!empty($messages)):?>
         <div class='comments-list'>

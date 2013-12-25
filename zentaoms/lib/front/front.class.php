@@ -366,7 +366,7 @@ class html
     }
 
     /**
-     create a button to goback.
+     * Create a button to goback.
      *
      * @static
      * @access public
@@ -380,6 +380,17 @@ class html
             $label = $lang->goback;
         }
         return " <input type='button' value='$label' class='$class'  $misc onclick='history.back(-1);' /> ";
+    }
+
+    /**
+     * Create a button to close.
+     *
+     * @access public
+     * @return string
+     */
+    public static function closeButton()
+    {
+        return "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>";
     }
 }
 
