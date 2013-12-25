@@ -17,54 +17,50 @@ include '../../common/view/header.admin.html.php';
   </div>
   <div class='panel-body'>
     <form method='post' class='form form-horizontal' id='ajaxForm'>
-      <div class="form-group">
-        <label for='name' class='col-md-2 col-sm-3 control-label required'><?php echo $lang->entry->name;?></label>
-        <div class='col-md-4 col-sm-6'>
-          <?php echo html::input('name', $entry->name, "class='form-control'"); ?>
-        </div>
-        <div class="col-sm-6">
-          <?php
-          $checked = $entry->visible ? 'checked="checked"' : ''; 
-          echo "<span><input type='checkbox' name='visible' value='1' $checked>{$lang->entry->note->visible}</span>";
-          ?>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for='code' class='col-md-2 col-sm-3 control-label required'><?php echo $lang->entry->code;?></label>
-        <div class='col-md-4 col-sm-6'><?php echo $entry->code;?></div>
-      </div>
-      <div class="form-group">
-        <label for='open' class='col-md-2 col-sm-3 control-label required'><?php echo $lang->entry->open;?></label>
-        <div class='col-md-4 col-sm-6'><?php echo html::select('open', $lang->entry->openList, $entry->open,'class="form-control"');?></div>
-      </div>
-      <div class="form-group">
-        <label for='key' class='col-md-2 col-sm-3 control-label required'><?php echo $lang->entry->key;?></label>
-        <div class='col-md-4 col-sm-6'>
-          <?php echo html::input('key', $entry->key, "class='form-control' readonly='readonly'");?>
-        </div>
-        <div class="col-sm-6">
-          <?php echo html::a('javascript:void(0)', $lang->entry->createKey, 'onclick="createKey()"')?>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for='login' class='col-md-2 col-sm-3 control-label required'><?php echo $lang->entry->login;?></label>
-        <div class='col-md-4 col-sm-6'><?php echo html::input('login', $entry->login, "class='form-control' placeholder='{$lang->entry->note->login}'");?></div>
-      </div>
-      <div class="form-group">
-        <label for='logout' class='col-md-2 col-sm-3 control-label'><?php echo $lang->entry->logout;?></label>
-        <div class='col-md-4 col-sm-6'><?php echo html::input('logout', $entry->logout, "class='form-control' placeholder='{$lang->entry->note->logout}'");?></div>
-      </div>
-      <div class="form-group">
-        <label for='ip' class='col-md-2 col-sm-3 control-label required'><?php echo $lang->entry->ip;?></label>
-        <div class='col-md-4 col-sm-6'><?php echo html::input('ip', $entry->ip, "class='form-control'");?></div>
-      </div>
-      <div class="form-group">
-        <label for='logo' class='col-md-2 col-sm-3 control-label'><?php echo $lang->entry->logo;?></label>
-        <div class='col-md-4 col-sm-6'><input type='file' name='logo' /></div>
-      </div>
-      <div class="form-group">
-        <div class='col-md-4 col-sm-6 col-md-offset-2 col-sm-offset-3'><?php echo html::submitButton() . html::backButton();?></div>
-      </div>
+      <table class='table table-form'>
+        <tr>
+          <th style='width: 100px'><?php echo $lang->entry->name;?></th>
+          <td style='width: 40%'><?php echo html::input('name', $entry->name, "class='form-control'");?></td>
+          <td>
+            <?php
+            $checked = $entry->visible ? 'checked="checked"' : ''; 
+            echo "<span><input type='checkbox' name='visible' value='1' $checked>{$lang->entry->note->visible}</span>";
+            ?>
+          </td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->code;?></th>
+          <td><?php echo $entry->code;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->open;?></th>
+          <td><?php echo html::select('open', $lang->entry->openList, $entry->open,'class="form-control"');?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->key;?></th>
+          <td><?php echo html::input('key', $entry->key, "class='form-control' readonly='readonly'");?></td>
+          <td><?php echo html::a('javascript:void(0)', $lang->entry->createKey, 'onclick="createKey()"')?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->login;?></th>
+          <td><?php echo html::input('login', $entry->login, "class='form-control' placeholder='{$lang->entry->note->login}'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->logout;?></th>
+          <td><?php echo html::input('logout', $entry->logout, "class='form-control' placeholder='{$lang->entry->note->logout}'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->ip;?></th>
+          <td><?php echo html::input('ip', $entry->ip, "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->logo;?></th>
+          <td><input type='file' name='logo' /></td>
+        </tr>
+        <tr>
+          <td></td><td><?php echo html::submitButton() . html::backButton();?></td>
+        </tr>
+      </table>
     </form>
   </div>
 </div>
