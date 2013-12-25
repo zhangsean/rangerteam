@@ -23,7 +23,6 @@ body {padding-top:70px; padding-bottom:70px;background: #fff;}
 
 /* panel */
 .panel {box-shadow:0px 2px 1px rgba(0,0,0,0.1);}
-.panel-body > form { max-width: 1000px; }
 .panel .table-bordered {border:none; margin-bottom: 0;}
 .panel .table-bordered > thead > tr:first-child th,.panel .table-bordered > tbody > tr:first-child th,.panel .table-bordered > tr:first-child th {border-top: 0;}
 .panel .table-bordered tr > td:first-child,.panel .table-bordered tr > th:first-child {border-left: 0;}
