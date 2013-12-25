@@ -26,8 +26,12 @@
         <form method='post' id='ajaxForm' class='form form-inline'>
           <table class='table table-form'>
             <tr>
-              <th style='width: 100px'><?php echo $lang->user->realname;?></th>
-              <td style='width: 40%'><?php echo html::input('realname', $user->realname, "class='form-control'");?></td><td></td>
+              <th style='width:100px'><?php echo $lang->user->dept;?></th>
+              <td style='width:40%'><?php echo html::select('dept', $depts, $user->dept, "class='form-control'");?></td><td></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->realname;?></th>
+              <td><?php echo html::input('realname', $user->realname, "class='form-control'");?></td><td></td>
             </tr>  
             <tr>
               <th><?php echo $lang->user->admin;?></th>
