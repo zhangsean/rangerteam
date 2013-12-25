@@ -12,22 +12,6 @@
 class company extends control
 {
     /**
-     * company profile.
-     * 
-     * @access public
-     * @return void
-     */
-    public function index()
-    {
-        $this->view->title    = $this->config->company->name;
-        $this->view->keywords = $this->config->company->name;
-        $this->view->company  = $this->config->company;
-        $this->view->contact  = $this->company->getContact();
-
-        $this->display();
-    }
-
-    /**
      * set company basic info.
      * 
      * @access public
@@ -37,10 +21,8 @@ class company extends control
     {
         if(!empty($_POST))
         {
-            $_POST[setDate] = helper::now();
             $now = helper::now();
             $company = fixer::input('post')
-            ->add('setDate', $now)
             ->stripTags('desc', $this->config->allowedTags->admin)
             ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
