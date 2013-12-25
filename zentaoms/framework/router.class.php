@@ -1010,11 +1010,6 @@ class router
         $this->setModuleName('common');
         $commonModelFile = helper::setModelFile('common');
 
-        if(!file_exists($commonModelFile))
-        {
-            $commonModelFile = helper::setModelFile('common', 'sys');
-        }
-
         helper::import($commonModelFile);
         if(class_exists('extcommonModel'))
         {
