@@ -26,7 +26,7 @@ class index extends control
         {
             if($entry->visible) $leftEntry .= $entry->id . ',';
             $sso  = $this->createLink('entry', 'visit', "entryID=$entry->id");
-            $logo = $entry->logoPath ? $entry->logoPath : '';
+            $logo = $entry->logo ? $entry->logo : '';
             $allEntries .= "entries['$entry->id'] = new entry('$entry->id', '$sso', '$entry->name', '$entry->open', '$entry->name', 'max', null, null, '$logo');\n";
         }
 
