@@ -12,14 +12,14 @@
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
-  <table class='table table-bordered shadow'>
-    <caption><?php echo $lang->install->success;?></caption>
-    <tr>
-      <th class='a-center'>
+  <div class='modal-dialog' style='width: 450px'>
+    <div class='modal-content'>
+      <div class='modal-body'><div class='alert alert-success text-center'><h4><?php echo $lang->install->success;?></h4></div></div>
+      <div class='modal-footer'>
         <?php echo html::a('index.php', $lang->install->visitFront, "class='btn btn-primary' target='_blank'");?>
         <?php echo html::a('admin.php', $lang->install->visitAdmin, "class='btn btn-primary' target='_blank'");?>
-      </th>
-    </tr>
-  </table>
+      </div>
+    </div>
+  </div>
 </div>
 <?php include './footer.html.php';?>

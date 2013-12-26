@@ -9,30 +9,34 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
+include '../../common/view/header.lite.html.php';
 ?>
-<?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
-  <?php if(isset($error)):?>
-  <table class='table table-bordered shadow'>
-	<caption><?php echo $lang->install->error;?></caption>
-    <tr><td class='red'><?php echo $error;?></td></tr>
-    <tr><td class='a-center'><?php echo html::backButton($lang->install->pre, 'btn btn-primary');?></td></tr>
-  </table>
-  <?php else:?>
-  <form method='post'>
-  <table class='table table-bordered shadow'>
-	<caption><?php echo $lang->install->setAdmin;?></caption>
-    <tr valign='middle'>
-      <th class='a-right w-100px'><?php echo $lang->install->account;?></th>
-      <td><?php echo html::input('account', '', 'class="text-2"');?></td>
-	</tr>
-    <tr>
-      <th class='a-right'><?php echo $lang->install->password;?></th>
-      <td><?php echo html::input('password', '', 'class="text-2"');?></td>
-	</tr>
-    <tr><td colspan='2' class='a-center'><?php echo html::submitButton();?></td></tr>
-  </table>
-  </form>
-  <?php endif;?>
+  <div class='modal-dialog' style='width: 450px'>
+    <form method='post' class='form-horizontal'>
+      <div class='modal-content'>
+      <?php if(isset($error)):?>
+        <div class='modal-header'><strong><?php echo $lang->install->error;?></strong></div>
+        <div class='modal-body'>
+          <div class='alert alert-danger'><?php echo $error;?></div>
+        </div>
+        <div class='modal-footer'><?php echo html::backButton($lang->install->pre, 'btn btn-primary');?></div>
+      <?php else: ?>
+        <div class='modal-header'><strong><i class='icon-key'></i> <?php echo $lang->install->setAdmin;?></strong></div>
+        <div class='modal-body'>
+          <div class='form-group'>
+            <label for='account' class='col-xs-2 control-label'><?php echo $lang->install->account;?></label>
+            <div class='col-xs-8'><?php echo html::input('account', '', "class='form-control'");?></div>
+          </div>
+          <div class='form-group'>
+            <label for='password' class='col-xs-2 control-label'><?php echo $lang->install->password;?></label>
+            <div class='col-xs-8'><?php echo html::input('password', '', "class='form-control'");?></div>
+          </div>
+        </div>
+        <div class='modal-footer'><?php echo html::submitButton();?></div>
+      <?php endif; ?>
+      </div>
+    </form>
+  </div>
 </div>
 <?php include './footer.html.php';?>

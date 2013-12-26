@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
+$lang->install = new stdclass();
 $lang->install->common  = '安装';
 $lang->install->next    = '下一步';
 $lang->install->pre     = '返回';

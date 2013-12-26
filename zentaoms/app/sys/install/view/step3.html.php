@@ -1,6 +1,6 @@
 <?php
 /**
- * The html template file of step3 method of install module of ZenTaoMS.
+ * The html template file of step2 method of install module of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
@@ -9,28 +9,24 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
+include '../../common/view/header.lite.html.php';
 ?>
-<?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
-  <?php if(isset($error)):?>
-  <table class='table table-bordered shadow'>
-	<caption><?php echo $lang->install->error;?></caption>
-    <tr><td class='red'><?php echo $error;?></td></tr>
-    <tr><td><?php echo html::backButton($lang->install->pre, 'btn btn-primary');?></td></tr>
-  </table>
-  <?php else:?>
-  <table class='table table-bordered shadow'>
-	<caption><?php echo $lang->install->saveConfig;?></caption>
-    <tr>
-      <td>
-        <?php 
-        echo html::textArea('config', $result->content, "rows='10' class='area-1 f-12px'");
-        printf($lang->install->save2File, $result->myPHP);
-        ?>
-      </td>
-    </tr>
-    <tr><td class='a-center'><?php echo html::a(inlink('step4'), $lang->install->next, "class='btn btn-primary'");?></td></tr>
-  </table>
-  <?php endif;?>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+    <?php if(isset($error)):?>
+    <div class='modal-header'><strong><?php echo $lang->install->error;?></strong></div>
+    <div class='modal-body'><div class='alert alert-danger'><?php echo $error;?></div></div>
+    <div class='modal-footer'><?php echo html::backButton($lang->install->pre, 'btn btn-primary');?></div>
+    <?php else: ?>
+    <div class='modal-header'><strong><?php echo $lang->install->saveConfig;?></strong></div>
+    <div class='modal-body'>
+      <div class='form-group'><?php echo html::textArea('config', $result->content, "rows='10' class='form-control small'");?></div>
+      <div class='alert alert-warning'><?php printf($lang->install->save2File, $result->myPHP);?></div>
+    </div>
+    <div class='modal-footer'><?php echo html::a(inlink('step4'), $lang->install->next, "class='btn btn-primary'");?></div>
+    <?php endif;?>
+    </div>
+  </div>
 </div>
 <?php include './footer.html.php';?>
