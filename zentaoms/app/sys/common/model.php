@@ -529,7 +529,7 @@ class commonModel extends model
                 $link = explode('|', $link);
                 list($label, $module, $method) = $link;
                 $vars = isset($link[3]) ? $link[3] : '';
-                if(common::hasPriv($module, $method))
+                if(commonModel::hasPriv($module, $method))
                 {
                     /* Is the currentModule active? */
                     $subModules = explode(',', $subModule);

@@ -292,3 +292,53 @@ td.required:after{right: -5px;top: 12px}
 /* --- LINKS --- */
 #links {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
 #links:hover {box-shadow: 0 1px 5px rgba(0, 0, 0, 0.175);}
+
+/* -----------HEADER AND FOOTER OF FRONT---------*/
+
+/* Header. */
+/* The frontNav bar. */
+.frontNavbar ul {margin:0; padding:0;}
+.frontNavbar li {margin:0; padding:0; float:left; text-align:center; list-style-type:none;}
+.frontNavbar li>a {text-decoration:none;-webkit-transition: all .2s;-o-transition: all .2s;-moz-transition: all .2s;transition: all .2s;}
+.frontNavbar li>a:hover {color:#ff3600;}
+
+/* Front header. */
+#frontHeader{padding:2px 20px 0 20px; background:#003366; border-bottom:1px solid #e4e4e4;}
+#frontHeader td{vertical-align: middle;}
+#frontHeader select{padding-top: 0;}
+
+/* Front Topbar. */
+#frontTopbar, #frontTopbar a {color:#ACCADF}
+#frontTopbar {margin:5px 5px 6px 5px}
+#frontTopbar select {border:none; color:#ACCADF; background:#003366}
+#frontTopbar a {color:#d1e4f2;text-decoration:none;}
+#frontTopbar a:hover {color: #fff;}
+#companyname{color:#ffcc00; font-size:14px}
+
+/* Main menu. */
+#mainmenu ul { height:32px; line-height:30px}
+#mainmenu li {margin-right: 3px;font-size:14px;}
+#mainmenu li>a {display: inline-block;white-space:nowrap;padding:2px 15px; color:#E5E5E5; font-weight:normal; background:#114f8e;-webkit-box-shadow: 0 -3px 3px rgba(0, 0, 0, 0.10);box-shadow: 0 -3px 3px rgba(0, 0, 0, 0.10);}
+#mainmenu li>a:hover{background-color: #2e6dad;color: #fff;-webkit-box-shadow: 0 -3px 5px rgba(0, 0, 0, 0.2);box-shadow: 0 -3px 5px rgba(0, 0, 0, 0.2);}
+#mainmenu li.active>a{background-color:#e5e5e5;color:#21841d; font-weight:bold;}
+
+/* Module menu. */
+#modulemenu {padding: 0 20px;height: 42px;font-size:14px;background-color: #e5e5e5;}
+#modulemenu li {color:#003366;padding:4px 0px;line-height: 30px;}
+#modulemenu li a{display: inline-block; padding: 2px 7px; font-weight:normal; font-size:14px; color:#003366}
+#modulemenu li>a:hover{background: #d1d1d1;color: #000;}
+#modulemenu li.active>a,#modulemenu li.active>a:hover {color:#21841d; font-weight:bold; }
+#modulemenu li.right {float:right; font-weight:bold;}
+#modulemenu li.right>a {font-weight:bold}
+#modulemenu #myname {display: inline-block; color: #888888;line-height: 34px;}
+
+/* Content. */
+.cont{width:100%; margin:0; border:none; text-align:left}
+.cont tr, .cont td {border:none; padding:0}
+
+/* Front footer. */
+#frontFooter {position: relative; width:100%;position:fixed; bottom:0; left:0; margin:0; border-top: 1px solid #e1e1e1; background:#eef4fe;height:40px; line-height:40px;-webkit-box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);}
+#crumbs a i.icon-home{display: none;}
+#crumbs {float: left;margin-left: 20px;}
+#crumbs .icon-angle-right{margin-right: 6px;}
+#poweredby {float: right;margin-right: 20px;}

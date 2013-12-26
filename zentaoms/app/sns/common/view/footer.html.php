@@ -5,12 +5,12 @@
 <?php $onlybody = zget($_GET, 'onlybody', 'no');?>
 <?php if($onlybody != 'yes'):?>
 </div>
-<div id='footer'>
+<div id='frontFooter'>
   <div id="crumbs">
     <?php commonModel::printBreadMenu($this->moduleName, isset($position) ? $position : ''); ?>
   </div>
   <div id="poweredby">
-    <span>Powered by <a href='http://www.zentao.net' target='_blank'>ZenTaoPMS</a> (<?php echo $config->version;?>)</span>
+    <span>Powered by <a href='http://www.zentao.net' target='_blank'>ZenTaoMS</a> (<?php echo $config->version;?>)</span>
     <?php echo $lang->proVersion;?>
     <?php commonModel::printNotifyLink();?>
   </div>

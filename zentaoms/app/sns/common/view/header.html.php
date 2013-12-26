@@ -5,8 +5,8 @@ include '../../../sys/common/view/colorbox.html.php';
 include '../../../sys/common/view/chosen.html.php';
 ?>
 <?php if(empty($_GET['onlybody']) or $_GET['onlybody'] != 'yes'):?>
-<div id='header'>
-  <table class='cont navbar' id='topbar'>
+<div id='frontHeader'>
+  <table class='cont frontNavbar' id='frontTopbar'>
     <tr>
       <td class='w-p50'>
         <?php
@@ -15,14 +15,14 @@ include '../../../sys/common/view/chosen.html.php';
         if($app->company->backyard) echo html::a($app->company->backyard, $lang->company->backyard, '_blank');
         ?>
       </td>
-      <td class='a-right'><?php commonModel::printTopBar();?></td>
+      <td class='pull-right'><?php commonModel::printTopBar();?></td>
     </tr>
   </table>
-  <table class='cont navbar' id='navbar'>
-    <tr><td id='mainmenu'><?php commonModel::printMainmenu($this->moduleName); commonModel::printSearchBox();?></td></tr>
+  <table class='cont frontNavbar' id='frontNavbar'>
+    <tr><td id='mainmenu'><?php commonModel::printMainmenu($this->moduleName);?></td></tr>
   </table>
 </div>
-<div class="navbar" id="modulemenu">
+<div class="frontNavbar" id="modulemenu">
   <?php commonModel::printModuleMenu($this->moduleName);?>
 </div>
 <div id='wrap'>
