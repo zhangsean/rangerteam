@@ -1,11 +1,11 @@
-<form method='post' class='form-horizontal' id='childForm' action="<?php echo $this->inlink('children', "type=$type&book=$book");?>">
+<form method='post' class='form-horizontal' id='childForm' action="<?php echo inlink('children', "type=$type&category=$parent");?>">
   <div class='panel'>
     <div class='panel-heading'>
     <strong><?php echo $parent ? $lang->category->children . ' <i class="icon-double-angle-right"></i> ' : $lang->category->common; ?></strong>
     <?php
     foreach($origins as $origin)
     {
-        echo html::a($this->inlink('browse', "type=$type&book=$book&category=$origin->id"), $origin->name . " <i class='icon-angle-right text-muted'></i> ");
+        echo html::a(inlink('browse', "type=$type&&category=$origin->id"), $origin->name . " <i class='icon-angle-right text-muted'></i> ");
     }
     ?>
     </div>

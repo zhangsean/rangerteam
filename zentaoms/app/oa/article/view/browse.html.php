@@ -4,7 +4,7 @@ include '../../common/view/header.html.php';
 $path = array_keys($category->pathNames);
 js::set('path',  json_encode($path));
 
-include '../../common/view/treeview.html.php';
+include '../../../sys/common/view/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category);?>
 <div class='row'>

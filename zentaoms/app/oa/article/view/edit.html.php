@@ -10,11 +10,10 @@
  * @link        http://www.zentao.net
  */
 ?>
-<?php include '../../common/view/header.admin.html.php';?>
-<?php include '../../common/view/datepicker.html.php';?>
+<?php include '../../common/view/header.html.php';?>
 <?php js::set('type',$type);?>
-<?php include '../../common/view/kindeditor.html.php';?>
-<?php include '../../common/view/chosen.html.php';?>
+<?php include '../../../sys/common/view/kindeditor.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $type == 'blog' ? $lang->blog->edit : ($type == 'page' ? $lang->page->edit : $lang->article->edit);?></strong></div>
   <div class='panel-body'>
@@ -75,16 +74,6 @@
         <td colspan='2'><?php echo html::textarea('content', htmlspecialchars($article->content), "rows='10' class='form-control'");?></td>
       </tr>
       <tr>
-        <th><?php echo $lang->article->addedDate;?></th>
-        <td>
-          <div class='input-append date'>
-            <?php echo html::input('addedDate', date('Y-m-d H:i'), "class='form-control'");?>
-            <span class='add-on'><button class="btn btn-default" type="button"><i class="icon-calendar"></i></button></span>
-          </div>
-        </td>
-        <td><span class='help-inline'><?php echo $lang->article->note->addedDate;?></span></td>
-      </tr>
-      <tr>
         <th><?php echo $lang->article->status;?></th>
         <td><?php echo html::select('status', $lang->article->statusList, $article->status, "class='form-control chosen'");?></td>
       </tr>
@@ -96,5 +85,5 @@
   </div>
 </div>
 
-<?php include '../../common/view/treeview.html.php';?>
-<?php include '../../common/view/footer.admin.html.php';?>
+<?php include '../../../sys/common/view/treeview.html.php';?>
+<?php include '../../common/view/footer.html.php';?>

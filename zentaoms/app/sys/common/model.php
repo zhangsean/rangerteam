@@ -377,13 +377,10 @@ class commonModel extends model
         }
 
         echo '&nbsp;|&nbsp; ';
-        echo html::a(helper::createLink('misc', 'about'), $lang->aboutZenTao, '', "class='about'");
-        echo $lang->agileTraining;
-        echo $lang->donate;
+        echo html::a(helper::createLink('misc', 'about'), $lang->aboutUs, '', "class='about'");
 
         echo '&nbsp;|&nbsp;';
         echo html::select('', $app->config->langs, $app->cookie->lang,  'onchange="selectLang(this.value)"');
-        echo html::select('', $app->lang->themes,  $app->cookie->theme, 'onchange="selectTheme(this.value)"');
     }
 
     /**
@@ -401,7 +398,7 @@ class commonModel extends model
  
         /* Set the main main menu. */
         $mainMenu = $moduleName;
-        if(isset($lang->menugroup->$moduleName)) $mainMenu = $lang->menugroup->$moduleName;
+        if(isset($lang->menuGroups->$moduleName)) $mainMenu = $lang->menuGroups->$moduleName;
 
         $activeName = $app->getViewType() == 'mhtml' ? 'ui-btn-active' : 'active';
 
@@ -555,8 +552,8 @@ class commonModel extends model
     {
         global $lang;
         $mainMenu = $moduleName;
-        if(isset($lang->menugroup->$moduleName)) $mainMenu = $lang->menugroup->$moduleName;
-        echo html::a(helper::createLink('my', 'index'), $lang->zentaoPMS) . $lang->arrow;
+        if(isset($lang->menuGroups->$moduleName)) $mainMenu = $lang->menuGroups->$moduleName;
+        echo html::a(helper::createLink('my', 'index'), $lang->zentaoms);
         if($moduleName != 'index')
         {
             if(!isset($lang->menu->$mainMenu)) return;

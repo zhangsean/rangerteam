@@ -27,9 +27,6 @@ class articleModel extends model
 
         if(!$article) return false;
         
-        /* Add link to content if necessary. */
-        if($replaceTag) $article->content = $this->loadModel('tag')->addLink($article->content);
-
         /* Get it's categories. */
         $article->categories = $this->dao->select('t2.*')
             ->from(TABLE_RELATION)->alias('t1')
@@ -60,30 +57,19 @@ class articleModel extends model
      */
     public function getList($type, $categories, $orderBy, $pager = null)
     {
-        if($type == 'page')
-        {
-            $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
-                ->where('type')->eq('page')
-                ->orderBy($orderBy)
-                ->page($pager)
-                ->fetchAll('id');
-        }
-        else
-        {
-            /* Get articles(use groupBy to distinct articles).  */
-            $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
-                ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-                ->where('t1.type')->eq($type)
-                ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
-                ->andWhere('t1.addedDate')->le(helper::now())
-                ->andWhere('t1.status')->eq('normal')
-                ->fi()
-                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
-                ->groupBy('t2.id')
-                ->orderBy($orderBy)
-                ->page($pager)
-                ->fetchAll('id');
-        }
+        /* Get articles(use groupBy to distinct articles).  */
+        $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
+            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+            ->where('t1.type')->eq($type)
+            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
+            ->andWhere('t1.addedDate')->le(helper::now())
+            ->andWhere('t1.status')->eq('normal')
+            ->fi()
+            ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
+            ->groupBy('t2.id')
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll('id');
         if(!$articles) return array();
 
         /* Get categories for these articles. */
@@ -243,14 +229,11 @@ class articleModel extends model
         $order = 0;
 
         $article->order    = $order;
-        $article->keywords = seo::unify($article->keywords, ',');
-        $article->alias    = seo::unify($article->alias, '-');
 
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
-            ->batchCheckIF($type != 'page', $this->config->article->create->requiredFields, 'notempty')
-            ->batchCheckIF($type == 'page', $this->config->article->page->requiredFields, 'notempty')
+            ->batchCheckIF($this->config->article->create->requiredFields, 'notempty')
             ->exec();
         $articleID = $this->dao->lastInsertID();
 
@@ -258,10 +241,7 @@ class articleModel extends model
 
         if(dao::isError()) return false;
 
-        /* Save article keywords. */
-        $this->loadModel('tag')->save($article->keywords);
-
-        if($type != 'page') $this->processCategories($articleID, $type, $this->post->categories);
+        $this->processCategories($articleID, $type, $this->post->categories);
         return $articleID;
     }
 
@@ -284,14 +264,10 @@ class articleModel extends model
             ->add('editedDate', helper::now())
             ->get();
 
-        $article->keywords = seo::unify($article->keywords, ',');
-        $article->alias    = seo::unify($article->alias, '-');
-        
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
-            ->batchCheckIF($type != 'page', $this->config->article->edit->requiredFields, 'notempty')
-            ->batchCheckIF($type == 'page', $this->config->article->page->requiredFields, 'notempty')
+            ->batchCheckIF($this->config->article->edit->requiredFields, 'notempty')
             ->where('id')->eq($articleID)
             ->exec();
 
@@ -299,8 +275,7 @@ class articleModel extends model
 
         if(dao::isError()) return false;
 
-        $this->loadModel('tag')->save($article->keywords);
-        if($type != 'page') $this->processCategories($articleID, $type, $this->post->categories);
+        $this->processCategories($articleID, $type, $this->post->categories);
 
         return !dao::isError();
     }

@@ -10,20 +10,27 @@
  * @link        http://www.zentao.net
  */
 ?>
-<?php include '../../common/view/header.admin.html.php';?>
-<?php include '../../common/view/kindeditor.html.php';?>
-<?php include '../../common/view/chosen.html.php';?>
-<?php 
+<?php
+if(RUN_MODE == 'front')
+{
+    include $app->getModuleRoot() . 'common/view/header.html.php';
+}
+else
+{
+    include '../../common/view/header.admin.html.php';
+}
+include '../../common/view/kindeditor.html.php';
+include '../../common/view/chosen.html.php';
 js::set('root', $root);
 js::set('type', $type);
 ?>
-<?php if(!isset($lang->tree->menu)) echo "<div class='col-md-12'>";?>
+<div class='col-md-12'>
 <?php if(strpos($treeMenu, '<li>') !== false):?>
 <div class='row'>
   <div class='col-md-4'>
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $title;?></strong></div>
-      <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu . $backButton;?></div></div>
+      <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu;?></div></div>
     </div>
   </div>
   <div class='col-md-8' id='categoryBox'></div>
@@ -31,6 +38,16 @@ js::set('type', $type);
 <?php else:?>
 <div id='categoryBox'></div>
 <?php endif;?>
-<?php if(!isset($lang->tree->menu)) echo "</div>";?>
-<?php include '../../common/view/treeview.html.php';?>
-<?php include '../../common/view/footer.admin.html.php';?>
+</div>
+<?php
+include '../../common/view/treeview.html.php';
+if(RUN_MODE == 'front')
+{
+    include $app->getModuleRoot() . 'common/view/footer.html.php';
+}
+else
+{
+    include '../../common/view/footer.admin.html.php';
+}
+
+?>

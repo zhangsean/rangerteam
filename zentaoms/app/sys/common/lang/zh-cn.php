@@ -121,6 +121,9 @@ $lang->menu->sys->system    = '系统|mail|admin|';
 $lang->menu->sns = new stdclass();
 $lang->menu->sns->forum = '论坛|forum|index|';
  
+$lang->menu->oa = new stdclass();
+$lang->menu->oa->article = '文章|article|index|';
+
 /* Menu entry. */
 $lang->entry       = new stdclass();
 $lang->entry->menu = new stdclass();
@@ -138,6 +141,12 @@ $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
 $lang->system->menu->main = array('link' => '发信|mail|admin|', 'alias' => 'detect,edit,save,test');
 //$lang->system->menu->backup = '备份|admin|backup|';
+
+$lang->article = new stdclass();
+$lang->article->menu = new stdclass();
+$lang->article->menu->admin  = '浏览|article|admin|';
+$lang->article->menu->tree   = '模块|tree|browse|type=article';
+$lang->article->menu->create = array('link' => '添加文章|article|create|type=article', 'float' => 'right');
 
 $lang->menuGroups = new stdclass();
 

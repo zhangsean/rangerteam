@@ -23,6 +23,12 @@ class tree extends control
      */
     public function browse($type = 'article', $root = 0)
     {
+        if($type == 'article')
+        {
+            $this->lang->tree->menu = $this->lang->article->menu;
+            $this->lang->menuGroups->tree = 'article';
+        }
+
         if($type == 'forum')
         {
             $this->lang->category   = $this->lang->board;
