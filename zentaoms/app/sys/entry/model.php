@@ -19,17 +19,7 @@ class entryModel extends model
      */
     public function getEntries()
     {
-        $entries = $this->dao->select('t1.*, t2.pathname as logoPath')->from(TABLE_ENTRY)->alias('t1')
-            ->leftJoin(TABLE_FILE)->alias('t2')
-            ->on('t1.logo = t2.id')
-            ->fetchAll();
-
-        $webPath = $this->loadModel('file')->webPath;
-        foreach($entries as $entry)
-        {
-            if($entry->logoPath) $entry->logoPath = $webPath . $entry->logoPath;
-        }
-
+        $entries = $this->dao->select('*')->from(TABLE_ENTRY)->fetchAll();
         return $entries;
     }
 
@@ -202,8 +192,8 @@ class entryModel extends model
                 unset($file['tmpname']);
                 $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
-                $logoID = $this->dao->lastInsertID();
-                $this->dao->update(TABLE_ENTRY)->set('logo')->eq($logoID)->where('id')->eq($entryID)->exec();
+                $logoPath = $this->config->webRoot . 'data/upload/' . $file['pathname'];
+                $this->dao->update(TABLE_ENTRY)->set('logo')->eq($logoPath)->where('id')->eq($entryID)->exec();
             }
             else
             {

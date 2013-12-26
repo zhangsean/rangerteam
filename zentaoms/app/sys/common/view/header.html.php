@@ -17,8 +17,8 @@ js::set('lang', $lang->js);
   <?php if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6.0') !== false ) exit($lang->IE6Alert); ?>
   <header id='header' class='clearfix'>
     <div id='headTitle'>
-      <?php if(isset($config->site->logo)):?>
-      <?php $logo = json_decode($config->site->logo);?>
+      <?php if(isset($config->company->logo)):?>
+      <?php $logo = json_decode($config->company->logo);?>
       <div id='siteLogo'>
         <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
       </div>

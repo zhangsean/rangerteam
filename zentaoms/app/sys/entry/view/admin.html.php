@@ -29,7 +29,7 @@ include '../../common/view/header.admin.html.php';
     <tbody>
       <?php foreach($entries as $entry):?>
       <tr class='a-left'>
-        <td><?php echo "<img src='$entry->logoPath' class='small-icon'>" . $entry->name?></td>
+        <td><?php echo "<img src='$entry->logo' class='small-icon'>" . $entry->name?></td>
         <td><?php echo $entry->code?></td>
         <td><?php echo $entry->key?></td>
         <td><?php echo $entry->ip?></td>

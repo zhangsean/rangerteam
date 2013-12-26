@@ -377,7 +377,7 @@ class commonModel extends model
         }
 
         echo '&nbsp;|&nbsp; ';
-        echo html::a(helper::createLink('misc', 'about'), $lang->aboutUs, '', "class='about'");
+        echo html::a(helper::createLink('misc', 'about'), $lang->about, '', "class='about'");
 
         echo '&nbsp;|&nbsp;';
         echo html::select('', $app->config->langs, $app->cookie->lang,  'onchange="selectLang(this.value)"');
@@ -417,41 +417,6 @@ class commonModel extends model
             }
         }
 
-    }
-
-    /**
-     * Print the search box.
-     * 
-     * @static
-     * @access public
-     * @return void
-     */
-    public static function printSearchBox()
-    {
-        global $app, $lang;
-        $moduleName  = $app->getModuleName();
-        $methodName  = $app->getMethodName();
-        $searchObject = $moduleName;
-
-        if($moduleName == 'product')
-        {
-            if($methodName == 'browse') $searchObject = 'story';
-        }
-        elseif($moduleName == 'project')
-        {
-            if(strpos('task|story|bug|build', $methodName) !== false) $searchObject = $methodName;
-        }
-        elseif($moduleName == 'my' or $moduleName == 'user')
-        {
-            $searchObject = $methodName;
-        }
-
-        echo "<li id='searchbox'>"; 
-        echo html::select('searchType', $lang->searchObjects, $searchObject);
-        echo html::input('searchQuery', $lang->searchTips, "onclick=this.value='' onkeydown='if(event.keyCode==13) shortcut()' class='w-80px'");
-		echo "<a href='javascript:shortcut();return false;' id='objectSwitcher' class='icon-circle-arrow-right'></a>";
-        echo "</li>";
-        echo "</ul>\n";
     }
 
     /**

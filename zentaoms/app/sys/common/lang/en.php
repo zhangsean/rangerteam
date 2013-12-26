@@ -43,6 +43,7 @@ $lang->welcome        = 'Welcome, <strong>%s</strong>!';
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = 'Today is %s, ';
 $lang->aboutUs        = 'About';
+$lang->about          = 'About';
 $lang->link           = 'Links';
 $lang->frontHome      = 'Front';
 $lang->forumHome      = 'Forum';
@@ -121,6 +122,20 @@ $lang->menu->sys->system    = 'System|mail|admin|';
 $lang->menu->sns = new stdclass();
 $lang->menu->sns->forum = 'Forum|forum|index|';
  
+$lang->forum       = new stdclass(); 
+$lang->forum->menu = new stdclass(); 
+$lang->forum->menu->index = 'Browse|forum|index'; 
+$lang->forum->menu->admin = 'Manage|forum|admin'; 
+
+$lang->message       = new stdclass(); 
+$lang->message->menu = new stdclass(); 
+$lang->message->menu->index = 'Browse|message|index'; 
+$lang->message->menu->admin = 'Manage|message|admin'; 
+
+$lang->blog       = new stdclass(); 
+$lang->blog->menu = new stdclass(); 
+$lang->blog->menu->index = 'Browse|blog|index'; 
+
 /* Menu entry. */
 $lang->entry       = new stdclass();
 $lang->entry->menu = new stdclass();

@@ -43,6 +43,7 @@ $lang->welcome        = '欢迎您，<strong>%s</strong>！';
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = '今天是%s，';
 $lang->aboutUs        = '关于我们';
+$lang->about          = '关于';
 $lang->link           = '友情链接';
 $lang->frontHome      = '前台';
 $lang->forumHome      = '论坛';
@@ -119,8 +120,24 @@ $lang->menu->sys->system    = '系统|mail|admin|';
 //$lang->menu->sys->extension = '扩展|extension|admin|';
 
 $lang->menu->sns = new stdclass();
-$lang->menu->sns->forum = '论坛|forum|index|';
+$lang->menu->sns->forum   = '论坛|forum|index|';
+$lang->menu->sns->blog    = '博客|blog|index|';
+$lang->menu->sns->message = '消息|message|index|';
  
+$lang->forum       = new stdclass(); 
+$lang->forum->menu = new stdclass(); 
+$lang->forum->menu->index = '浏览|forum|index'; 
+$lang->forum->menu->admin = '管理|forum|admin'; 
+
+$lang->message       = new stdclass(); 
+$lang->message->menu = new stdclass(); 
+$lang->message->menu->index = '浏览|message|index'; 
+$lang->message->menu->admin = '管理|message|admin'; 
+
+$lang->blog       = new stdclass(); 
+$lang->blog->menu = new stdclass(); 
+$lang->blog->menu->index = '浏览|blog|index'; 
+
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->article = '文章|article|index|';
 
