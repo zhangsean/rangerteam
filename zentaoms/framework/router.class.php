@@ -1710,7 +1710,7 @@ class router
                 $cmd  = "vim +$line $file";
                 $size = strlen($cmd);
                 echo "<pre class='alert alert-danger'>$message: ";
-                echo "<input type='text' value='$cmd' size='$size' style='border:none; background:none;' onfocus='this.select();' /></pre>";
+                echo "<input type='text' value='$cmd' size='$size' style='border:none; background:none;' onclick='this.select();' /></pre>";
             }
         }
 
