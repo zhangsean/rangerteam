@@ -54,10 +54,6 @@
               <td><?php echo html::select('role', $lang->user->roleList, $user->role, "class='form-control'");?></td><td></td>
             </tr>  
             <tr>
-              <th><?php echo $lang->user->company;?></th>
-              <td><?php echo html::input('company', $user->company, "class='form-control'");?></td><td></td>
-            </tr>  
-            <tr>
               <th><?php echo $lang->user->address;?></th>
               <td colspan='2'><?php echo html::input('address', $user->address, "class='form-control'");?></td>
             </tr>  

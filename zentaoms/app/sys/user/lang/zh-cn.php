@@ -62,6 +62,7 @@ $lang->user->goback          = "返回前一页";
 $lang->user->allUsers        = '全部用户';
 $lang->user->submit          = "提交";
 $lang->user->forbid          = '禁用';
+$lang->user->active          = '激活';
 
 $lang->user->profile     = '个人信息';
 $lang->user->editProfile = '编辑信息';
@@ -80,22 +81,20 @@ $lang->user->locked        = "用户已经被锁定，请%s后再重新尝试登
 $lang->user->lockedForEver = "用户已经被永久禁用。";
 $lang->user->lblRegistered = '恭喜您，已经成功注册。';
 $lang->user->forbidSuccess = '禁用成功';
-$lang->user->forbidFail    = '禁用失败';
+$lang->user->actionFail    = '操作失败';
 
-$lang->user->forbidUser          = '禁用管理';
-$lang->user->forbidDate = array();
-$lang->user->forbidDate['1']     = '一天';
-$lang->user->forbidDate['2']     = '两天';
-$lang->user->forbidDate['3']     = '三天';
-$lang->user->forbidDate['7']     = '一周';
-$lang->user->forbidDate['30']    = '一个月';
-$lang->user->forbidDate['3000']  = '永久';
-$lang->user->operate             = '操作';
+$lang->user->forbidUser = '禁用管理';
+$lang->user->operate    = '操作';
 
 $lang->user->genderList = new stdclass();
 $lang->user->genderList->m = '男';
 $lang->user->genderList->f = '女';
 $lang->user->genderList->u = '';
+
+$lang->user->statusList = new stdclass();
+$lang->user->statusList->locked    = "<label class='label label-danger'>锁定</label>";
+$lang->user->statusList->forbidden = "<label class='label label-danger'>禁用</label>";
+$lang->user->statusList->normal    = "<label class='label label-success'>正常</label>";
 
 $lang->user->register  = new stdclass();
 $lang->user->register->welcome     = '欢迎注册成为会员';

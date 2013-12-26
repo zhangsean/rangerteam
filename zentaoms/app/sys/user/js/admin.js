@@ -5,6 +5,7 @@ $(document).ready(function()
     {
         $.getJSON($(this).attr('href'),function(data)
         {
+            if(data.result == 'success') return location.href = data.locate;
             bootbox.alert(data.message + '');
         });
         return false;

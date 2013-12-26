@@ -352,13 +352,20 @@ class userModel extends model
      */
     public function forbid($userID)
     {
-        $intdate = strtotime("+5000 day");
+        $this->dao->update(TABLE_USER)->set('locked')->eq('2038-01-19 00:00:00')->where('id')->eq($userID)->exec();
+        return !dao::isError();
+    }
 
-        $format = 'Y-m-d H:i:s';
-
-        $date = date($format, $intdate);
-        $this->dao->update(TABLE_USER)->set('locked')->eq($date)->where('id')->eq($userID)->exec();
-
+    /**
+     * Active user 
+     * 
+     * @param  int    $userID 
+     * @access public
+     * @return bool
+     */
+    public function active($userID)
+    {
+        $this->dao->update(TABLE_USER)->set('locked')->eq('0000-00-00 00:00:00')->where('id')->eq($userID)->exec();
         return !dao::isError();
     }
 

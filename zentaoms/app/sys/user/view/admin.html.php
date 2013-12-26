@@ -16,28 +16,31 @@
   <div class='col-md-2'>
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $lang->dept->common;?></strong></div>
-      <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu . html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit, "class='pull-right'");?></div></div>
+      <div class='panel-body'>
+        <div id='treeMenuBox'>
+          <?php echo $treeMenu ?>
+          <div class='text-right'><?php echo html::a($this->inlink('create'), $lang->user->create)?></div>
+          <div class='text-right'><?php echo html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit);?></div>
+        </div>
+      </div>
     </div>
   </div>
   <div class='col-md-10'>
     <div class="row">
-      <div class="col-sm-offset-8 col-sm-4 col-md-offset-9 col-md-3">
-        <div class="panel">
-          <form method='post' class='form-inline form-search'>
-            <div class="input-group">
-              <?php echo html::input('query', $query, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); ?>
-              <span class="input-group-btn">
-                <?php echo html::submitButton($lang->user->searchUser,"btn btn-primary"); ?>
-              </span>
-            </div>
-          </form>
-        </div>
-      </div>
       <div class='clearfix'>
         <div class="panel">
           <div class="panel-heading">
             <strong><i class="icon-group"></i> <?php echo $lang->user->list;?></strong>
-            <span class='pull-right mr-10px'><?php echo html::a($this->inlink('create'), $lang->user->create);?></span>
+            <div class="pull-right col-md-3" style='margin-top:-7px;margin-right:-25px;'>
+              <form method='post' class='form-inline form-search'>
+                <div class="input-group">
+                  <?php echo html::input('query', $query, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); ?>
+                  <span class="input-group-btn">
+                    <?php echo html::submitButton($lang->user->searchUser,"btn btn-primary"); ?>
+                  </span>
+                </div>
+              </form>
+            </div>
           </div>
           <table class='table table-hover table-striped table-bordered'>
             <thead>
@@ -63,20 +66,40 @@
               <td><?php echo $user->realname;?></td>
               <td><?php echo $user->nickname;?></td>
               <td><?php echo $user->account;?></td>
-              <td><?php $gender = $user->gender; echo $lang->user->gendarList->$gender;?></td>
+              <td><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></td>
               <td><?php echo $user->dept;?></td>
               <td><?php echo $user->join;?></td>
               <td><?php echo $user->visits;?></td>
               <td><?php echo $user->last;?></td>
               <td><?php echo $user->ip;?></td>
               <td>
-              <?php if($user->fails > 4 and $user->locked > helper::now()) echo $lang->user->statusList->locked;?>
-              <?php if($user->fails <= 4 and $user->locked > helper::now()) echo $lang->user->statusList->forbidden;?>
-              <?php if($user->locked <= helper::now()) echo $lang->user->statusList->normal;?>
+                <?php
+                $status = 'normal';
+                if($user->fails > 4 and $user->locked > helper::now())
+                {
+                    $status = 'locked';
+                    echo $lang->user->statusList->locked;
+                }
+                if($user->fails <= 4 and $user->locked > helper::now())
+                {
+                    $status = 'forbidden';
+                    echo $lang->user->statusList->forbidden;
+                }
+                if($user->locked <= helper::now()) echo $lang->user->statusList->normal;
+                ?>
               </td>
               <td class='operate'>
-                <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit); ?>
-                <?php echo html::a($this->createLink('user', 'forbid', "userID=$user->id"), $lang->user->forbid, "class='forbider'"); ?>
+                <?php
+                echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit);
+                if($status == 'normal')
+                {
+                    echo html::a($this->createLink('user', 'forbid', "userID=$user->id"), $lang->user->forbid, "class='forbider'");
+                }
+                else
+                {
+                    echo html::a($this->createLink('user', 'active', "userID=$user->id"), $lang->user->active, "class='forbider'");
+                }
+                ?>
               </td>
             </tr>
             <?php endforeach;?>

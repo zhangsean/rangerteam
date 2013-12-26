@@ -341,17 +341,29 @@ class user extends control
      */
     public function forbid($userID)
     {
-        if(!$userID) $this->send(array('result'=>'fail', 'message' => $this->lang->user->forbidFail));       
+        if(!$userID) $this->send(array('result'=>'fail', 'message' => $this->lang->user->actionFail));       
 
         $result = $this->user->forbid($userID);
-        if($result)
-        {
-            $this->send(array('result'=>'success', 'message' => $this->lang->user->forbidSuccess));
-        }
-        else
-        {
-            $this->send(array('message' => dao::getError()));
-        }
+        if($result) die($this->send(array('result'=>'success', 'locate' => $this->server->http_referer)));
+
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
+     * Active user 
+     * 
+     * @param  int    $userID 
+     * @access public
+     * @return void
+     */
+    public function active($userID)
+    {
+        if(!$userID) $this->send(array('result'=>'fail', 'message' => $this->lang->user->actionFail));       
+
+        $result = $this->user->active($userID);
+        if($result) die($this->send(array('result'=>'success', 'locate' => $this->server->http_referer)));
+
+        $this->send(array( 'result' => 'fail', 'message' => dao::getError()));
     }
 
     /**

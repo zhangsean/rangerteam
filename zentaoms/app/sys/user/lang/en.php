@@ -62,6 +62,7 @@ $lang->user->goback          = "Go back";
 $lang->user->allUsers        = 'All users';
 $lang->user->submit          = "Submit";
 $lang->user->forbid          = 'Forbid';
+$lang->user->active          = 'Active';
 
 $lang->user->profile     = 'Profile';
 $lang->user->editProfile = 'Edit profile';
@@ -80,22 +81,20 @@ $lang->user->locked        = "Failed too much, please login again after ten minu
 $lang->user->lockedForEver = "User has been forbidden for ever.";
 $lang->user->lblRegistered = 'Congratulations, register successfully!';
 $lang->user->forbidSuccess = 'Successfully forbid.';
-$lang->user->forbidFail    = 'Failed forbid';
+$lang->user->actionFail    = 'Failed action';
 
 $lang->user->forbidUser = 'Manage user';
-$lang->user->forbidDate = array();
-$lang->user->forbidDate['1']     = '1d';
-$lang->user->forbidDate['2']     = '2d';
-$lang->user->forbidDate['3']     = '3d';
-$lang->user->forbidDate['7']     = '7d';
-$lang->user->forbidDate['30']    = '30d';
-$lang->user->forbidDate['3000']  = 'ever';
-$lang->user->operate             = 'Operate';
+$lang->user->operate    = 'Operate';
 
 $lang->user->genderList = new stdclass();
 $lang->user->genderList->m = 'Male';
 $lang->user->genderList->f = 'Female';
 $lang->user->genderList->u = '';
+
+$lang->user->statusList = new stdclass();
+$lang->user->statusList->locked    = "<label class='label label-danger'>Locked</label>";
+$lang->user->statusList->forbidden = "<label class='label label-danger'>Forbidden</label>";
+$lang->user->statusList->normal    = "<label class='label label-success'>Normal</label>";
 
 $lang->user->register  = new stdclass();
 $lang->user->register->welcome    = 'Welcome to register as a member.';
