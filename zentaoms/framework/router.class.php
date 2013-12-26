@@ -1687,6 +1687,9 @@ class router
      */
     public function saveError($level, $message, $file, $line)
     {
+        /* Skip the error: Redefining already defined constructor. */
+        if(strpos($message, 'Redefining') !== false) return true;
+
         /* Set the error info. */
         $errorLog  = "\n" . date('H:i:s') . " $message in <strong>$file</strong> on line <strong>$line</strong> ";
         $errorLog .= "when visiting <strong>" . $this->getURI() . "</strong>\n";
