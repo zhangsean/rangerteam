@@ -11,7 +11,6 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<?php $common->printPositionBar();?>
 <div class='row'>
   <div class='col-md-9'>
     <div class='panel'>
@@ -110,6 +109,5 @@
       </div>
     </div>
   </div>
-  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'message_index', 'side');?></div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

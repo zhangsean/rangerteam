@@ -11,7 +11,7 @@
  */
 ?>
 <?php 
-include './header.html.php';
+include '../../common/view/header.html.php';
 include '../../common/view/treeview.html.php';
 $path = array_keys($category->pathNames);
 if(!empty($path))         js::set('path',  $path);
@@ -48,4 +48,4 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
   </div>
   <?php include './side.html.php';?>
 </div>
-<?php include './footer.html.php';?>
+<?php include '../../common/view/footer.html.php';?>
