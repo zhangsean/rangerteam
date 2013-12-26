@@ -14,26 +14,44 @@
 <div class='page-user-control'>
   <div class='panel'>
     <div class='panel-body'>
-      <dl class='dl-horizontal'>
-        <dt><?php echo $lang->user->realname;?></dt>
-        <dd><?php echo $user->realname;?></dd>
-        <dt><?php echo $lang->user->email;?></dt>
-        <dd><?php echo $user->email;?></dd>
-        <dt><?php echo $lang->user->address;?></dt>
-        <dd><?php echo $user->address;?></dd>
-        <dt><?php echo $lang->user->zipcode;?></dt>
-        <dd><?php echo $user->zipcode;?></dd>
-        <dt><?php echo $lang->user->mobile;?></dt>
-        <dd><?php echo $user->mobile;?></dd>
-        <dt><?php echo $lang->user->phone;?></dt>
-        <dd><?php echo $user->phone;?></dd>
-        <dt><?php echo $lang->user->qq;?></dt>
-        <dd><?php echo $user->qq;?></dd>
-        <dt><?php echo $lang->user->gtalk;?></dt>
-        <dd><?php echo $user->gtalk;?></dd>
-        <dt></dt>
-        <dd><?php echo html::a(inlink('edit'), "<i class='icon-pencil'></i> " . $lang->user->editProfile, "class='btn btn-primary'");?></dd>
-      </dl>
+      <table class='table table-form'>
+        <tr>
+          <th style='width:100px;'><?php echo $lang->user->realname;?></th>
+          <td><?php echo $user->realname;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->user->email;?></th>
+          <td><?php echo $user->email;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->user->address;?></th>
+          <td><?php echo $user->address;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->user->zipcode;?></th>
+          <td><?php echo $user->zipcode;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->user->mobile;?></th>
+          <td><?php echo $user->mobile;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->user->phone;?></th>
+          <td><?php echo $user->phone;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->user->qq;?></th>
+          <td><?php echo $user->qq;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->user->gtalk;?></th>
+          <td><?php echo $user->gtalk;?></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td><?php echo html::a(inlink('edit'), "<i class='icon-pencil'></i> " . $lang->user->editProfile, "class='btn btn-primary'");?></td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>

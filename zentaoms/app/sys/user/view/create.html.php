@@ -54,12 +54,8 @@
               <td><?php echo html::select('role', $lang->user->roleList, '', "class='form-control'");?></td><td></td>
             </tr>  
             <tr>
-              <th><?php echo $lang->user->gendar;?></th>
-              <td><?php unset($lang->user->gendarList->u); echo html::radio('gendar', $lang->user->gendarList, '');?></td><td></td>
-            </tr>  
-            <tr>
-              <th><?php echo $lang->user->company;?></th>
-              <td><?php echo html::input('company', $config->company->name, "class='form-control'");?></td><td></td>
+              <th><?php echo $lang->user->gender;?></th>
+              <td><?php unset($lang->user->genderList->u); echo html::radio('gender', $lang->user->genderList, '');?></td><td></td>
             </tr>  
             <tr>
               <th><?php echo $lang->user->address;?></th>
