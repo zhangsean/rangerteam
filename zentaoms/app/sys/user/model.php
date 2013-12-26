@@ -320,6 +320,7 @@ class userModel extends model
      */
     public function authorize($user)
     {
+        return array();
         $rights = $this->config->rights->guest;
         if($user->account == 'guest') return $rights;
 
