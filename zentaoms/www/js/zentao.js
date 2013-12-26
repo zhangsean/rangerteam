@@ -500,7 +500,7 @@ function createLink(moduleName, methodName, vars, viewType)
     }
     if(config.requestType == 'PATH_INFO')
     {
-        link = moduleName + config.requestFix + methodName;
+        link = config.webRoot + config.appName + '/' + moduleName + config.requestFix + methodName;
         if(vars)
         {
             if(config.pathType == "full")
