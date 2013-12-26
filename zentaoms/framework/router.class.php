@@ -1705,7 +1705,13 @@ class router
         /* If the debug > 1, show warning, notice error. */
         if($level == E_NOTICE or $level == E_WARNING or $level == E_STRICT or $level == E_DEPRECATED)
         {
-            if(!empty($this->config->debug) and $this->config->debug > 1) echo "<pre class='code alert alert-danger'>$errorLog</pre>";
+            if(!empty($this->config->debug) and $this->config->debug > 1)
+            {
+                $cmd  = "vim +$line $file";
+                $size = strlen($cmd);
+                echo "<pre class='alert alert-danger'>$message: ";
+                echo "<input type='text' value='$cmd' size='$size' style='border:none; background:none;' onfocus='this.select();' /></pre>";
+            }
         }
 
         /* If error level is serious, die.  */
