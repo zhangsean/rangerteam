@@ -64,7 +64,7 @@ class helper
     static public function createLink($moduleName, $methodName = 'index', $vars = '', $viewType = '', $onlybody = false)
     {
         global $app, $config;
-        $link = $config->requestType == 'PATH_INFO' ? '' : $_SERVER['PHP_SELF'];
+        $link = $config->requestType == 'PATH_INFO' ? $config->webRoot . $app->appName . '/' : $_SERVER['PHP_SELF'];
 
         /* Set the view type and vars. */
         if(empty($viewType)) $viewType = $app->getViewType();
@@ -96,7 +96,7 @@ class helper
                 else
                 {
                     foreach($vars as $value) $link .= "{$config->requestFix}$value";
-                }    
+                }
                 $link .= '.' . $viewType;
             }
         }
@@ -107,12 +107,6 @@ class helper
             foreach($vars as $key => $value) $link .= "&$key=$value";
         }
 
-        /* if page has onlybody param then add this param in all link. the param hide header and footer. */
-        if($onlybody or isonlybody())
-        {
-            $onlybody = $config->requestType == 'PATH_INFO' ? "?onlybody=yes" : "&onlybody=yes";
-            $link .= $onlybody;
-        }
         return $link;
     }
 
