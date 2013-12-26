@@ -1702,6 +1702,12 @@ class router
         $fh = @fopen($errorFile, 'a');
         if($fh) fwrite($fh, strip_tags($errorLog)) && fclose($fh);
 
+        /* If the debug > 1, show warning, notice error. */
+        if($level == E_NOTICE or $level == E_WARNING or $level == E_STRICT or $level == E_DEPRECATED)
+        {
+            if(!empty($this->config->debug) and $this->config->debug > 1) echo "<pre class='code alert alert-danger'>$errorLog</pre>";
+        }
+
         /* If error level is serious, die.  */
         if($level == E_ERROR or $level == E_PARSE or $level == E_CORE_ERROR or $level == E_COMPILE_ERROR or $level == E_USER_ERROR)
         {
