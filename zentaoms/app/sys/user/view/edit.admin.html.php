@@ -16,7 +16,13 @@
   <div class='col-md-2'>
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $lang->dept->common;?></strong></div>
-      <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu . html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit, "class='pull-right'");?></div></div>
+      <div class='panel-body'>
+        <div id='treeMenuBox'>
+          <?php echo $treeMenu ?>
+          <div class='text-right'><?php echo html::a($this->inlink('create'), $lang->user->create)?></div>
+          <div class='text-right'><?php echo html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit);?></div>
+        </div>
+      </div>
     </div>
   </div>
   <div class='col-md-10'>
