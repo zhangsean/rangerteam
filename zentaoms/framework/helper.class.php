@@ -450,6 +450,23 @@ class helper
         if(substr($string, 0, 3) == pack('CCC', 239, 187, 191)) return substr($string, 3);
         return $string;
     }
+        
+    /** 
+     * Enhanced substr version: support multibyte languages like Chinese.
+     *
+     * @param string $string
+     * @param int $length 
+     * @param string $append 
+     * @return string 
+     **/
+    public static function substr($string, $length, $append = '') 
+    {   
+        if (strlen($string) <= $length ) $append = ''; 
+        if(function_exists('mb_substr')) return mb_substr($string, 0, $length, 'utf-8') . $append;
+
+        preg_match_all("/./su", $string, $data);
+        return join("", array_slice($data[0],  0, $length)) . $append;
+    }   
 
     /**
      * Set viewType.
