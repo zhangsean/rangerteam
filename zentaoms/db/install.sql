@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `sys_entry` (
   `open` varchar(20) NOT NULL,
   `key` char(32) NOT NULL,
   `ip` varchar(100) NOT NULL,
-  `logo` mediumint(9) NOT NULL,
+  `logo` varchar(100) NOT NULL,
   `login` varchar(100) NOT NULL,
   `logout` varchar(100) NOT NULL,
   `api` varchar(100) NOT NULL,
@@ -287,10 +287,12 @@ CREATE TABLE IF NOT EXISTS `sys_user` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 INSERT INTO `sys_entry` (`name`, `code`, `open`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
-VALUES ('crm', 'crm', 'iframe', 'epet8b8ae1g89rxzquf4ubv37ul5tite', '*', '', '../crm/', '', '', '1', '0');
+VALUES ('pms', 'pms', 'iframe', '119563c21065b09b8388c59752c0bc27', '*', '/theme/default/images/ips/app-pms.png', 'http://pms.zentao.net', '', '', '1', '0');
 INSERT INTO `sys_entry` (`name`, `code`, `open`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
-VALUES ('oa', 'oa', 'iframe', '1a673c4c3c85fadcf0333e0a4596d220', '*', '', '../oa/', '', '', '1', '1');
+VALUES ('crm', 'crm', 'iframe', 'epet8b8ae1g89rxzquf4ubv37ul5tite', '*', '/theme/default/images/ips/app-crm.png', '../crm/', '', '', '1', '0');
 INSERT INTO `sys_entry` (`name`, `code`, `open`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
-VALUES ('cash', 'cash', 'iframe', '2byct4z7oy8r5hp3s82wuas7n0gonlof', '*', '', '../cash/', '', '', '1', '2');
+VALUES ('oa', 'oa', 'iframe', '1a673c4c3c85fadcf0333e0a4596d220', '*', '/theme/default/images/ips/app-oa.png', '../oa/', '', '', '1', '1');
 INSERT INTO `sys_entry` (`name`, `code`, `open`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
-VALUES ('sns', 'sns', 'iframe', '9ce6ixdutohnbregapp8f123bvyqmyp2', '*', '', '../sns/', '', '', '1', '3');
+VALUES ('cash', 'cash', 'iframe', '2byct4z7oy8r5hp3s82wuas7n0gonlof', '*', '/theme/default/images/ips/app-cash.png', '../cash/', '', '', '1', '2');
+INSERT INTO `sys_entry` (`name`, `code`, `open`, `key`, `ip`, `logo`, `login`, `logout`, `api`, `visible`, `order`)
+VALUES ('sns', 'sns', 'iframe', '9ce6ixdutohnbregapp8f123bvyqmyp2', '*', '/theme/default/images/ips/app-sns.png', '../sns/', '', '', '1', '3');
