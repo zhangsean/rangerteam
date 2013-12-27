@@ -15,5 +15,4 @@ include '../../common/view/header.html.php';
   <h3><?php echo $lang->error->pageNotFound;?></h3>
   <p><?php echo $this->config->company->desc;?></p>
 </div>
-<?php $this->fetch('sitemap', 'index', 'onlyBody=yes')?>
 <?php include '../../common/view/footer.html.php';?>

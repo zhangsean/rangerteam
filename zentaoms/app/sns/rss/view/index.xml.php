@@ -4,7 +4,7 @@
   <title><?php echo $title;?></title>
   <link><![CDATA[<?php echo $siteLink;?>]]></link>
   <description><?php echo $desc;?></description>
-  <copyright><?php echo $config->company->name . $config->site->copyright . '-' . date('Y');?></copyright>
+  <copyright><?php echo $config->company->name . '-' . date('Y');?></copyright>
   <lastBuildDate><?php echo $lastDate;?></lastBuildDate>
   
   <?php 

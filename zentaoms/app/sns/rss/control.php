@@ -29,8 +29,8 @@ class rss extends control
         $articles = $this->article->getList($type, $this->tree->getFamily(0, $type), 'id_desc', $pager);
         $latestArticle = current((array)$articles);
 
-        $this->view->title    = $this->config->site->name;
-        $this->view->desc     = $this->config->site->desc;
+        $this->view->title    = isset($this->config->company->name) ? $this->config->company->name : $this->lang->zentaoms;
+        $this->view->desc     = isset($this->config->company->desc) ? $this->config->company->desc : '';
         $this->view->siteLink = $this->inlink('browse', "type={$type}");
         $this->view->siteLink = commonModel::getSysURL();
 

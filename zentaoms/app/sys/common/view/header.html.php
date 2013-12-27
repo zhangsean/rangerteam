@@ -23,8 +23,7 @@ js::set('lang', $lang->js);
         <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
       </div>
       <?php else: ?>
-      <div id='siteName'><h2><?php echo $config->site->name;?></h2></div>
+      <div id='siteName'><h2><?php echo $config->company->name;?></h2></div>
       <?php endif;?>
-      <div id='siteSlogan'><span><?php echo $this->config->site->slogan;?></span></div>
     </div>
   </header>

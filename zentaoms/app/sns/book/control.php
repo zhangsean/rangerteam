@@ -41,7 +41,7 @@ class book extends control
         $book = $this->book->getBookByNode($node);
 
         $this->view->title    = $book->title;
-        $this->view->keywords = trim($node->keywords . ' ' . $this->config->site->keywords);
+        $this->view->keywords = trim($node->keywords);
         $this->view->node     = $node;
         $this->view->book     = $book;
         $this->view->books    = $this->book->getBookList();

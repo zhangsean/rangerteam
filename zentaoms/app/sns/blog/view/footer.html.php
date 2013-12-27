@@ -13,8 +13,7 @@
   <footer class="footer">
     <div class='a-center mb-20px'>
       <?php 
-      echo "&copy; {$config->company->name} {$config->site->copyright}-" . date('Y') . '&nbsp;&nbsp;';
-      echo $config->site->icp;
+      echo "&copy; {$config->company->name} -" . date('Y') . '&nbsp;&nbsp;';
       printf($lang->poweredBy, $config->version, $config->version);
       echo html::a(helper::createLink('rss', 'index', '', '', 'xml') . '?type=blog', '<i class="icon icon-rss-sign icon-large"></i>', "target='_blank'");
       ?>

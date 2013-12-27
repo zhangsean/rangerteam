@@ -44,7 +44,7 @@ class forum extends control
         $threads = $this->loadModel('thread')->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
 
         $this->view->title    = $board->name;
-        $this->view->keywords = $board->keywords . '' . $this->config->site->keywords;
+        $this->view->keywords = $board->keywords;
         $this->view->desc     = strip_tags($board->desc);
         $this->view->board    = $board;
         $this->view->sticks   = $this->thread->getSticks($board->id);

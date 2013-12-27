@@ -26,16 +26,15 @@ $navs = $this->tree->getChildren(0, 'blog');
   <?php
   if(!isset($title))    $title    = ''; 
   if(!empty($title))    $title   .= $lang->minus;
-  if(!isset($keywords)) $keywords = $config->site->keywords;
-  if(!isset($desc))     $desc     = $config->site->desc;
+  if(!isset($keywords)) $keywords = '';
+  if(!isset($desc))     $desc     = '';
 
-  echo html::title($title . $config->site->name);
+  echo html::title($title . $config->company->name);
   echo html::meta('keywords',    strip_tags($keywords));
   echo html::meta('description', strip_tags($desc));
 
   css::import($themeRoot . 'bootstrap/css/core.min.css');
   css::import($themeRoot . 'default/blog.css');
-  css::import($themeRoot . $config->site->theme . '/blog.css');
 
   js::exportConfigVars();
   if($config->debug)
@@ -53,7 +52,7 @@ $navs = $this->tree->getChildren(0, 'blog');
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo html::icon($webRoot . 'favicon.ico');
-  echo html::rss($config->webRoot .'rss.xml', $config->site->name);
+  echo html::rss($config->webRoot .'rss.xml', $config->company->name);
   js::set('lang', $lang->js);
 ?>
 <!--[if lt IE 9]>
@@ -70,11 +69,11 @@ js::import($jsRoot . 'respond/min.js');
       <div class="nav pull-right">
         <?php echo commonModel::printTopBar();?>
       </div>
-      <?php if(isset($config->site->logo)):?>
-      <?php $logo = json_decode($config->site->logo);?>
+      <?php if(isset($config->company->logo)):?>
+      <?php $logo = json_decode($config->company->logo);?>
       <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "id='logo' title='{$this->config->company->name}'"));?>
       <?php else:?>
-      <h3><?php echo $this->config->site->name?></h3>
+      <h3><?php echo $this->config->company->name?></h3>
       <?php endif;?>      
     </div>
     <ul class="nav">

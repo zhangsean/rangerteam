@@ -31,7 +31,7 @@ class blog extends control
         if($category)
         {
             $title    = $category->name;
-            $keywords = trim($category->keyword . ' ' . $this->config->site->keywords);
+            $keywords = trim($category->keyword);
             $desc     = strip_tags($category->desc);
             $this->session->set('articleCategory', $category->id);
         }
@@ -66,7 +66,7 @@ class blog extends control
         $category = $this->loadModel('tree')->getByID($category);
 
         $title    = $article->title . ' - ' . $category->name;
-        $keywords = $article->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;
+        $keywords = $article->keywords . ' ' . $category->keyword;
         $desc     = strip_tags($article->summary);
         
         $this->view->title       = $title;
