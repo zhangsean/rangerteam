@@ -58,7 +58,7 @@ class company extends control
         }
 
         $this->view->title   = $this->lang->company->setContact;
-        $this->view->contact = isset($this->config->company->contact) ? json_decode($this->config->company->contact) : '';
+        $this->view->contact = isset($this->config->company->contact) ? json_decode($this->config->company->contact) : array();
         $this->display();
     }
 

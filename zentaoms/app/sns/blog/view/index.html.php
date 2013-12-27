@@ -12,7 +12,7 @@
 ?>
 <?php 
 include '../../common/view/header.html.php';
-include '../../common/view/treeview.html.php';
+include '../../../sys/common/view/treeview.html.php';
 $path = array_keys($category->pathNames);
 if(!empty($path))         js::set('path',  $path);
 if(!empty($category->id)) js::set('categoryID', $category->id );

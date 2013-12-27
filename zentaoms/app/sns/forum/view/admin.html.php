@@ -1,4 +1,4 @@
-<?php include '../../common/view/header.admin.html.php'; ?>
+<?php include '../../common/view/header.html.php'; ?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class="icon-comments-alt"></i> <?php echo $lang->forum->threadList;?></strong></div>
   <table class='table table-hover table-striped'>
@@ -51,4 +51,4 @@
     <tfoot><tr><td colspan='9'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
-<?php include '../../common/view/footer.admin.html.php'; ?>
+<?php include '../../common/view/footer.html.php'; ?>

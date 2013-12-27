@@ -37,8 +37,6 @@ class blog extends control
         }
 
         $this->view->title     = $title;
-        $this->view->keywords  = $keywords;
-        $this->view->desc      = $desc;
         $this->view->category  = $category;
         $this->view->articles  = $articles;
         $this->view->pager     = $pager;

@@ -19,7 +19,7 @@ class companyModel extends model
      */
     public function getContact()
     {
-        $contact = json_decode($this->config->company->contact);
+        $contact = isset($this->config->company->contact) ? json_decode($this->config->company->contact) : array();
         foreach($contact as $item => $value)
         {
             if($value)

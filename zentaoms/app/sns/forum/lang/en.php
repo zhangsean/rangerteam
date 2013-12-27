@@ -26,7 +26,6 @@ $lang->forum->updateDesc    = 'This action will re compute the stats(threads, re
 $lang->forum->successUpdate = 'Update sucessfully';
 
 /* Adjust the pager. */
-$lang->pager = new stdclass();
 $lang->pager->noRecord      = '';
 $lang->pager->digest        = str_replace('records', 'threads', $lang->pager->digest);
 $lang->pager->settedInForum = true;    // Set this switch thus in thread module can avoid overiding them.

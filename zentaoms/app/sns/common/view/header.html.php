@@ -1,7 +1,6 @@
 <?php
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
 include '../../../sys/common/view/header.lite.html.php';
-include '../../../sys/common/view/colorbox.html.php';
 include '../../../sys/common/view/chosen.html.php';
 ?>
 <?php if(empty($_GET['onlybody']) or $_GET['onlybody'] != 'yes'):?>
@@ -9,11 +8,7 @@ include '../../../sys/common/view/chosen.html.php';
   <table class='cont frontNavbar' id='frontTopbar'>
     <tr>
       <td class='w-p50'>
-        <?php
-        echo "<span id='companyname'>{$app->company->name}</span> ";
-        if($app->company->website)  echo html::a($app->company->website,  $lang->company->website,  '_blank');
-        if($app->company->backyard) echo html::a($app->company->backyard, $lang->company->backyard, '_blank');
-        ?>
+        <?php echo "<span id='companyname'>{$app->company->name}</span> ";?>
       </td>
       <td class='pull-right'><?php commonModel::printTopBar();?></td>
     </tr>
