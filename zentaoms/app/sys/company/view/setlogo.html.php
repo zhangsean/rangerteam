@@ -24,7 +24,7 @@
           <?php echo html::a('###', html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
         </div>
         <?php else: ?>
-        <div id='companyName'><h2><?php echo $config->company->name;?></h2></div>
+        <div id='companyName'><h2><?php echo zget($config->company, 'name', $lang->zentaoms)?></h2></div>
         <?php endif;?>
       </div>
     </div>

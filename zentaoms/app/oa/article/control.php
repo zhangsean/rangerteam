@@ -19,8 +19,6 @@ class article extends control
      */
     public function index()
     {   
-        $category = $this->loadModel('tree')->getFirst('article');
-        if($category) $this->locate(inlink('admin', "type=article&category=$category->id"));
         $this->locate(inlink('admin'));
     }   
 
