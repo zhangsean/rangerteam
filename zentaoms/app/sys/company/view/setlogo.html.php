@@ -21,7 +21,7 @@
         <?php if(isset($config->company->logo)):?>
         <?php $logo = json_decode($config->company->logo);?>
         <div id='companyLogo'>
-          <?php echo html::a('###', html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
+          <?php echo html::a('###', html::image($logo->webPath, "class='logo' title='" . zget($config->company, 'name', $lang->zentaoms) . "'"));?>
         </div>
         <?php else: ?>
         <div id='companyName'><h2><?php echo zget($config->company, 'name', $lang->zentaoms)?></h2></div>

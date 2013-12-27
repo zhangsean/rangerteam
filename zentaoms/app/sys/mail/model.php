@@ -50,7 +50,7 @@ class mailModel extends model
 
         /* Set default values. */
         $config->mta      = 'smtp';
-        $config->fromName = $this->config->site->name;
+        $config->fromName = isset($this->config->company->name) ? $this->config->company->name : '';
         $config->password = '';
         $config->debug    = 1;
         if(!isset($config->host)) $config->host = '';

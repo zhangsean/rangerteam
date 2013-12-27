@@ -29,7 +29,7 @@ js::set('type', $type);
 <div class='row'>
   <div class='col-md-4'>
     <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $title;?></strong></div>
+      <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $lang->category->common;?></strong></div>
       <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu;?></div></div>
     </div>
   </div>
