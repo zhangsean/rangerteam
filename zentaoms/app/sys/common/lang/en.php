@@ -120,8 +120,10 @@ $lang->menu->sys->system    = 'System|mail|admin|';
 //$lang->menu->sys->extension = 'Extension|extension|admin|';
 
 $lang->menu->sns = new stdclass();
-$lang->menu->sns->forum = 'Forum|forum|index|';
- 
+$lang->menu->sns->forum   = 'Forum|forum|index|';
+ $lang->menu->sns->blog   = 'Blog|blog|index|';
+$lang->menu->sns->message = 'Message|message|index|';
+
 $lang->forum       = new stdclass(); 
 $lang->forum->menu = new stdclass(); 
 $lang->forum->menu->index = 'Browse|forum|index'; 
@@ -135,6 +137,9 @@ $lang->message->menu->admin = 'Manage|message|admin';
 $lang->blog       = new stdclass(); 
 $lang->blog->menu = new stdclass(); 
 $lang->blog->menu->index = 'Browse|blog|index'; 
+
+$lang->menu->oa = new stdclass();
+$lang->menu->oa->article = 'Article|article|index|';
 
 /* Menu entry. */
 $lang->entry       = new stdclass();
@@ -153,6 +158,12 @@ $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
 $lang->system->menu->main = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
 //$lang->system->menu->backup = 'Backup|admin|backup|';
+//
+$lang->article = new stdclass();
+$lang->article->menu = new stdclass();
+$lang->article->menu->admin  = 'Browse|article|admin|';
+$lang->article->menu->tree   = 'Category|tree|browse|type=article';
+$lang->article->menu->create = array('link' => 'Add|article|create|type=article', 'float' => 'right');
 
 $lang->menuGroups = new stdclass();
 
