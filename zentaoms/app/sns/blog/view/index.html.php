@@ -13,7 +13,7 @@
 <?php 
 include '../../common/view/header.html.php';
 include '../../../sys/common/view/treeview.html.php';
-$path = array_keys($category->pathNames);
+$path = $category ? array_keys($category->pathNames) : array();
 if(!empty($path))         js::set('path',  $path);
 if(!empty($category->id)) js::set('categoryID', $category->id );
 ?>

@@ -8,8 +8,7 @@ include '../../../sys/common/view/chosen.html.php';
   <table class='cont frontNavbar' id='frontTopbar'>
     <tr>
       <td class='w-p50'>
-        <?php
-        ?>
+        <?php if(isset($app->company->name)) echo "<span id='companyname'>{$app->company->name}</span> ";?>
       </td>
       <td class='pull-right'><?php commonModel::printTopBar();?></td>
     </tr>

@@ -104,13 +104,14 @@ $lang->company->wangwang  = '旺旺';
 /* The main menus. */
 $lang->menu = new stdclass();
 
-$lang->index = new stdclass();
-$lang->user  = new stdclass();
-$lang->file  = new stdclass();
-$lang->admin = new stdclass();
-$lang->tree  = new stdclass();
-$lang->mail  = new stdclass();
-$lang->dept  = new stdclass();
+$lang->index  = new stdclass();
+$lang->user   = new stdclass();
+$lang->file   = new stdclass();
+$lang->admin  = new stdclass();
+$lang->tree   = new stdclass();
+$lang->mail   = new stdclass();
+$lang->dept   = new stdclass();
+$lang->thread = new stdclass();
 
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = '公司|company|setbasic|';
