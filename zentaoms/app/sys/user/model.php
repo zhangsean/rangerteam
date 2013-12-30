@@ -25,7 +25,7 @@ class userModel extends model
     public function getList($pager, $userName = '', $dept = 0)
     {
         return $this->dao->select('*')->from(TABLE_USER)
-            ->where('1=1')         
+            ->where('deleted')->eq('0')
             ->beginIF($userName != '')->andWhere('account')->like("%$userName%")->fi()
             ->beginIF($dept != 0)->andWhere('dept')->in($dept)->fi()
             ->orderBy('id_asc')    
@@ -44,8 +44,9 @@ class userModel extends model
     public function getPairs($params = '', $dept = 0)
     {
         $users = $this->dao->select('account, realname')->from(TABLE_USER) 
-            ->where('1=1')         
-            ->beginIF(strpos($params, 'admin') !== false)->where('admin')->ne('no')->fi()
+            ->where('1=1')
+            ->beginIF(strpos($params, 'nodeleted') !== false)->andWhere('deleted')->eq('0')->fi()
+            ->beginIF(strpos($params, 'admin') !== false)->andWhere('admin')->ne('no')->fi()
             ->beginIF($dept != 0)->andWhere('dept')->in($dept)->fi()
             ->orderBy('id_asc')    
             ->fetchPairs();
@@ -253,8 +254,9 @@ class userModel extends model
 
         /* First get the user from database by account or email. */
         $user = $this->dao->select('*')->from(TABLE_USER)
-            ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
-            ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
+            ->where('deleted')->eq('0')
+            ->beginIF(validater::checkEmail($account))->andWhere('email')->eq($account)->fi()
+            ->beginIF(!validater::checkEmail($account))->andWhere('account')->eq($account)->fi()
             ->fetch();
 
         /* Then check the password hash. */
@@ -288,7 +290,7 @@ class userModel extends model
         if(!$this->compareHashPassword($password, $user))
         {
             $user->fails ++;
-            if($user->fails > 2 * 2) $user->locked = date('Y-m-d H:i:s', time() + 10 * 60);
+            if($user->fails > 2) $user->locked = date('Y-m-d H:i:s', time() + 10 * 60);
             $this->dao->update(TABLE_USER)->data($user)->where('id')->eq($user->id)->exec();
             return false;
         }
@@ -382,7 +384,7 @@ class userModel extends model
         $user = $this->getByAccount($account);
         if(!$user) return false;
 
-        $this->dao->delete()->from(TABLE_USER)->where('account')->eq($account)->exec();
+        $this->dao->update(TABLE_USER)->set('deleted')->eq('1')->where('account')->eq($account)->exec();
 
         return !dao::isError();
     }

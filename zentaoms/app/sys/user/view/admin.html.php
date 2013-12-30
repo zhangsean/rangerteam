@@ -47,10 +47,9 @@
               <tr class='text-center'>
                 <th><?php echo $lang->user->id;?></th>
                 <th><?php echo $lang->user->realname;?></th>
-                <th><?php echo $lang->user->nickname;?></th>
                 <th><?php echo $lang->user->account;?></th>
                 <th><?php echo $lang->user->gender;?></th>
-                <th class='text-left'><?php echo $lang->user->dept;?></th>
+                <th><?php echo $lang->user->dept;?></th>
                 <th><?php echo $lang->user->join;?></th>
                 <th><?php echo $lang->user->visits;?></th>
                 <th><?php echo $lang->user->last;?></th>
@@ -64,10 +63,9 @@
             <tr class='text-center'>
               <td><?php echo $user->id;?></td>
               <td><?php echo $user->realname;?></td>
-              <td><?php echo $user->nickname;?></td>
               <td><?php echo $user->account;?></td>
               <td><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></td>
-              <td><?php echo $user->dept;?></td>
+              <td><?php echo $depts[$user->dept];?></td>
               <td><?php echo $user->join;?></td>
               <td><?php echo $user->visits;?></td>
               <td><?php echo $user->last;?></td>
@@ -99,6 +97,7 @@
                 {
                     echo html::a($this->createLink('user', 'active', "userID=$user->id"), $lang->user->active, "class='forbider'");
                 }
+                echo html::a($this->createLink('user', 'delete', "account=$user->account"), $lang->delete, "class='deleter'");
                 ?>
               </td>
             </tr>
