@@ -62,6 +62,7 @@ $lang->user->goback          = "返回前一頁";
 $lang->user->allUsers        = '全部用戶';
 $lang->user->submit          = "提交";
 $lang->user->forbid          = '禁用';
+$lang->user->active          = '激活';
 
 $lang->user->profile     = '個人信息';
 $lang->user->editProfile = '編輯信息';
@@ -80,22 +81,20 @@ $lang->user->locked        = "用戶已經被鎖定，請%s後再重新嘗試登
 $lang->user->lockedForEver = "用戶已經被永久禁用。";
 $lang->user->lblRegistered = '恭喜您，已經成功註冊。';
 $lang->user->forbidSuccess = '禁用成功';
-$lang->user->forbidFail    = '禁用失敗';
+$lang->user->actionFail    = '操作失敗';
 
-$lang->user->forbidUser          = '禁用管理';
-$lang->user->forbidDate = array();
-$lang->user->forbidDate['1']     = '一天';
-$lang->user->forbidDate['2']     = '兩天';
-$lang->user->forbidDate['3']     = '三天';
-$lang->user->forbidDate['7']     = '一周';
-$lang->user->forbidDate['30']    = '一個月';
-$lang->user->forbidDate['3000']  = '永久';
-$lang->user->operate             = '操作';
+$lang->user->forbidUser = '禁用管理';
+$lang->user->operate    = '操作';
 
 $lang->user->genderList = new stdclass();
 $lang->user->genderList->m = '男';
 $lang->user->genderList->f = '女';
 $lang->user->genderList->u = '';
+
+$lang->user->statusList = new stdclass();
+$lang->user->statusList->locked    = "<label class='label label-danger'>鎖定</label>";
+$lang->user->statusList->forbidden = "<label class='label label-danger'>禁用</label>";
+$lang->user->statusList->normal    = "<label class='label label-success'>正常</label>";
 
 $lang->user->register  = new stdclass();
 $lang->user->register->welcome     = '歡迎註冊成為會員';
@@ -125,12 +124,10 @@ $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i
 
 $lang->dept = new stdclass();  
 $lang->dept->common     = '部門結構';
+$lang->dept->name       = '部門名稱';
 $lang->dept->edit       = '維護部門結構';
 $lang->dept->children   = '子部門';
 $lang->dept->moderators = '部門經理';
-  
-$lang->dept->menu[] = "會員列表|user|admin|";
-$lang->dept->menu[] = "部門結構|tree|browse|type=dept";
 
 $lang->user->roleList['']       = ''; 
 $lang->user->roleList['dev']    = '研發';

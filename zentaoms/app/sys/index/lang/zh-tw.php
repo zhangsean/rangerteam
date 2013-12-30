@@ -11,12 +11,8 @@
  */
 $lang->index->allEntries = '所有應用';
 $lang->index->addEntry   = '添加應用';
-$lang->index->userInfo   = '查看個人信息';
+$lang->index->profile    = '個人信息';
 $lang->index->set        = '系統配置';
 $lang->index->theme      = '更換主題';
 
 $lang->index->countEntries = "共 <span class='apps-count'></span> 款應用";
-
-$lang->index->entryDesc = new stdclass();
-$lang->index->entryDesc->installed = '查看所有已安裝應用';
-$lang->index->entryDesc->profile   = '查看或編輯個人資料';

@@ -43,6 +43,7 @@ $lang->welcome        = '歡迎您，<strong>%s</strong>！';
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = '今天是%s，';
 $lang->aboutUs        = '關於我們';
+$lang->about          = '關於';
 $lang->link           = '友情連結';
 $lang->frontHome      = '前台';
 $lang->forumHome      = '論壇';
@@ -109,13 +110,37 @@ $lang->file  = new stdclass();
 $lang->admin = new stdclass();
 $lang->tree  = new stdclass();
 $lang->mail  = new stdclass();
+$lang->dept  = new stdclass();
 
-$lang->menu->company   = '公司|company|setbasic|';
-$lang->menu->user      = '用戶|user|admin|';
-$lang->menu->entry     = '應用|entry|admin|';
-$lang->menu->system    = '系統|mail|admin|';
-//$lang->menu->extension = '擴展|extension|admin|';
+$lang->menu->sys = new stdclass();
+$lang->menu->sys->company   = '公司|company|setbasic|';
+$lang->menu->sys->user      = '用戶|user|admin|';
+$lang->menu->sys->entry     = '應用|entry|admin|';
+$lang->menu->sys->system    = '系統|mail|admin|';
+//$lang->menu->sys->extension = '擴展|extension|admin|';
+
+$lang->menu->sns = new stdclass();
+$lang->menu->sns->forum   = '論壇|forum|index|';
+$lang->menu->sns->blog    = '博客|blog|index|';
+$lang->menu->sns->message = '消息|message|index|';
  
+$lang->forum       = new stdclass(); 
+$lang->forum->menu = new stdclass(); 
+$lang->forum->menu->index = '瀏覽|forum|index'; 
+$lang->forum->menu->admin = '管理|forum|admin'; 
+
+$lang->message       = new stdclass(); 
+$lang->message->menu = new stdclass(); 
+$lang->message->menu->index = '瀏覽|message|index'; 
+$lang->message->menu->admin = '管理|message|admin'; 
+
+$lang->blog       = new stdclass(); 
+$lang->blog->menu = new stdclass(); 
+$lang->blog->menu->index = '瀏覽|blog|index'; 
+
+$lang->menu->oa = new stdclass();
+$lang->menu->oa->article = '文章|article|index|';
+
 /* Menu entry. */
 $lang->entry       = new stdclass();
 $lang->entry->menu = new stdclass();
@@ -133,6 +158,12 @@ $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
 $lang->system->menu->main = array('link' => '發信|mail|admin|', 'alias' => 'detect,edit,save,test');
 //$lang->system->menu->backup = '備份|admin|backup|';
+
+$lang->article = new stdclass();
+$lang->article->menu = new stdclass();
+$lang->article->menu->admin  = '瀏覽|article|admin|';
+$lang->article->menu->tree   = '模組|tree|browse|type=article';
+$lang->article->menu->create = array('link' => '添加文章|article|create|type=article', 'float' => 'right');
 
 $lang->menuGroups = new stdclass();
 
