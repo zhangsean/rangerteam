@@ -1,9 +1,11 @@
+#!/usr/bin/env php
 <?php
 /**
  * This file is used to check the language items and actions.
  */
 /* Define an emtpty control class as the base class of every module. */
 class control {}
+$lang = new stdclass();
 
 if( 1 == 0)
 {
