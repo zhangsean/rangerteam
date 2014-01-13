@@ -35,10 +35,21 @@ body {padding-top:70px; padding-bottom:70px;background: #fff;}
 #summary  {background:#fff; margin-bottom:0; padding:4px 6px;}
 #keywords {margin-top:0}
 
+/* set css for tablesorter. */
+table.tablesorter thead tr div {padding:0; margin:0}
+table.tablesorter thead tr .header {cursor:pointer;}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {color:#2973EA;}
+table.tablesorter thead tr .headerSortDown a, table.tablesorter thead tr .headerSortUp a {color:#2973EA}
+table.tablesorter thead tr .header a,table.tablesorter thead tr .headerSortUp a,table.tablesorter thead tr .headerSortDown a{display: inline-block; text-decoration:none}
+table.tablesorter thead tr .header a{color:#707070;}
+table.tablesorter thead tr .header:after {font-family: ZenIcon; font-weight: normal;content: " \f0dc";font-size: 14px;}
+table.tablesorter thead tr .headerSortUp:after {font-family: ZenIcon; font-weight: normal;content: " \f0d8";font-size: 14px;color:#2973EA;}
+table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weight: normal;content: " \f0d7";font-size: 14px;color:#2973EA;}
+
 /* responsive. */
 @media(max-width:998px) {.affix{position: inherit;} .leftmenu.affix{top: 0; width: 100%; margin-bottom: 20px;}}
-@media(max-width:768px){body{padding-bottom: 0;} .navbar-fixed-bottom{display: none;}}
-@media (min-width: 992px) {.navbar-collapse .navbar-nav:first-child {margin-left: 0;}}
+@media(max-width:768px) {body{padding-bottom: 0;} .navbar-fixed-bottom{display: none;}}
+@media(min-width: 992px) {.navbar-collapse .navbar-nav:first-child {margin-left: 0;}}
 
 /* help-inline */
 .help-inline {display: block;margin: 7px 0;color: #666}
