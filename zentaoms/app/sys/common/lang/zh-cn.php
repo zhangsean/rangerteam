@@ -142,6 +142,16 @@ $lang->blog->menu->index = '浏览|blog|index';
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->article = '文章|article|index|';
 
+$lang->menu->crm = new stdclass();
+$lang->menu->crm->customer     = '客户|customer|index|';
+$lang->menu->crm->contact      = '联系人|contact|index|';
+$lang->menu->crm->order        = '订单|order|index|';
+$lang->menu->crm->contract     = '合同|contract|index|';
+$lang->menu->crm->product      = '产品|product|index|';
+$lang->menu->crm->aftersales   = '售后|aftersales|index|';
+$lang->menu->crm->organization = '组织|organization|index|';
+$lang->menu->crm->task         = '任务|task|index|';
+
 /* Menu entry. */
 $lang->entry       = new stdclass();
 $lang->entry->menu = new stdclass();
@@ -165,6 +175,12 @@ $lang->article->menu = new stdclass();
 $lang->article->menu->admin  = '浏览|article|admin|';
 $lang->article->menu->tree   = '模块|tree|browse|type=article';
 $lang->article->menu->create = array('link' => '添加文章|article|create|type=article', 'float' => 'right');
+
+$lang->product = new stdclass();
+$lang->product->menu = new stdclass();
+$lang->product->menu->admin  = '浏览|product|admin|';
+$lang->product->menu->tree   = '模块|product|tree|';
+$lang->product->menu->create = array('link' => '添加产品|product|create|', 'float' => 'right');
 
 $lang->menuGroups = new stdclass();
 
