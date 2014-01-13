@@ -50,6 +50,10 @@ include '../../common/view/header.admin.html.php';
           <td><?php echo html::input('logout', $entry->logout, "class='form-control' placeholder='{$lang->entry->note->logout}'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->entry->api;?></th>
+          <td><?php echo html::input('api', $entry->api, "class='form-control' placeholder='{$lang->entry->note->api}'");?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->entry->ip;?></th>
           <td><?php echo html::input('ip', $entry->ip, "class='form-control'");?></td>
         </tr>

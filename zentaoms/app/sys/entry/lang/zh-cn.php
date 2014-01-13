@@ -17,6 +17,7 @@ $lang->entry->delete    = '删除应用';
 $lang->entry->code      = '代号';
 $lang->entry->name      = '名称';
 $lang->entry->key       = '密钥';
+$lang->entry->api       = '接口地址';
 $lang->entry->ip        = 'IP列表';
 $lang->entry->logo      = 'Logo';
 $lang->entry->createKey = '重新生成密钥';
@@ -33,6 +34,7 @@ $lang->entry->note->code    = '授权应用代号';
 $lang->entry->note->login   = '登录应用的表单提交地址';
 $lang->entry->note->logout  = '退出应用的地址';
 $lang->entry->note->visible = '显示在首页左侧栏';
+$lang->entry->note->api     = '应用获取区块的接口地址';
 $lang->entry->note->ip      = "允许该应用使用这些ip访问，多个ip使用逗号隔开。支持IP段，如192.168.1.*";
 
 $lang->entry->error = new stdClass();
