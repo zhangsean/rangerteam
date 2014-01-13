@@ -24,7 +24,7 @@ class settingModel extends model
      */
     public function getItem($paramString)
     {
-        return $this->createDAO($this->parseItemParam($paramString), 'select')->fetch('value', $autoCompany = false);
+        return $this->createDAO($this->parseItemParam($paramString), 'select')->fetch('value');
     }
 
     /**
@@ -36,15 +36,14 @@ class settingModel extends model
      */
     public function getItems($paramString)
     {
-        return $this->createDAO($this->parseItemParam($paramString), 'select')->fetchAll('id', $autoCompany = false);
+        return $this->createDAO($this->parseItemParam($paramString), 'select')->fetchAll('id');
     }
 
     /**
      * Set value of an item. 
      * 
-     * @param  string      $path     system.common.global.sn or system.common.sn 
+     * @param  string      $path     system.sys.common.global.sn or system.sys.common.sn 
      * @param  string      $value 
-     * @param  string|int  $company 
      * @access public
      * @return void
      */
@@ -52,18 +51,17 @@ class settingModel extends model
     {
         $level   = substr_count($path, '.');
         $section = '';
-        if($level <= 1) return false;
-        if($level == 2) list($owner, $module, $key) = explode('.', $path);
-        if($level == 3) list($owner, $module, $section, $key) = explode('.', $path);
+        if($level <= 2) return false;
+        if($level == 3) list($owner, $app, $module, $key) = explode('.', $path);
+        if($level == 4) list($owner, $app, $module, $section, $key) = explode('.', $path);
 
         $item = new stdclass();
         $item->owner   = $owner;
+        $item->app     = $app;
         $item->module  = $module;
         $item->section = $section;
         $item->key     = $key;
         $item->value   = $value;
-
-        $this->loadModel('file')->updateObjectID($this->post->uid, 0, $section);
 
         $this->dao->replace(TABLE_CONFIG)->data($item)->exec();
     }
@@ -75,7 +73,7 @@ class settingModel extends model
      * $items->turnon = true;
      * $items->smtp->host = 'localhost';
      *
-     * @param  string         $path   like system.mail 
+     * @param  string         $path   like system.sys.mail 
      * @param  array|object   $items  the items array or object, can be mixed by one level or two levels.
      * @access public
      * @return bool
@@ -117,7 +115,7 @@ class settingModel extends model
     /**
      * Parse the param string for select or delete items.
      * 
-     * @param  string    $paramString     owner=xxx&company=1,2&key=sn and so on.
+     * @param  string    $paramString     owner=xxx&app=sys&module=common&key=sn and so on.
      * @access public
      * @return array
      */
@@ -127,12 +125,9 @@ class settingModel extends model
         parse_str($paramString, $params); 
 
         /* Init fields not set in the param string. */
-        $fields = 'company,owner,module,section,key';
+        $fields = 'owner,app,module,section,key';
         $fields = explode(',', $fields);
         foreach($fields as $field) if(!isset($params[$field])) $params[$field] = '';
-
-        /* If not set company, set as current company. */
-        if($params['company'] == '') $params['company'] = $this->app->company->id;
 
         return $params;
     }
@@ -148,8 +143,8 @@ class settingModel extends model
     public function createDAO($params, $method = 'select')
     {
         return $this->dao->$method('*')->from(TABLE_CONFIG)->where('1 = 1')
-            ->beginIF($params['company'])->andWhere('company')->in($params['company'])->fi()
             ->beginIF($params['owner'])->andWhere('owner')->in($params['owner'])->fi()
+            ->beginIF($params['app'])->andWhere('app')->in($params['app'])->fi()
             ->beginIF($params['module'])->andWhere('module')->in($params['module'])->fi()
             ->beginIF($params['section'])->andWhere('section')->in($params['section'])->fi()
             ->beginIF($params['key'])->andWhere('`key`')->in($params['key'])->fi();
@@ -168,18 +163,26 @@ class settingModel extends model
         $records = $this->dao->select('*')->from(TABLE_CONFIG)
             ->where('owner')->in($owner)
             ->orderBy('id')
-            ->fetchAll('id', false);
+            ->fetchAll('id');
         if(!$records) return array();
 
         /* Group records by owner and module. */
         $config = array();
+        $app    = $this->app->getAppName();
         foreach($records as $record)
         {
             if(!isset($record->module)) return array();    // If no module field, return directly.
             if(empty($record->module)) continue;
+            if($record->app != 'sys' and $record->app != $app) continue;
 
-            if($record->section)  $config[$record->owner]->{$record->module}[] = $record;
-            if(!$record->section) $config[$record->owner]->{$record->module}[] = $record;
+            if($record->section)
+            {
+                $config[$record->owner][$record->module][$record->section][$record->key] = $record;
+            }
+            else
+            {
+                $config[$record->owner][$record->module][$record->key] = $record;
+            }
         }
         return $config;
     }
@@ -209,51 +212,6 @@ class settingModel extends model
      */
     public function updateVersion($version)
     {
-        return $this->setItem('system.common.global.version', $version);
-    }
-
-    /**
-     * Set the sn of current zentaopms.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setSN()
-    {
-        $sn = $this->getItem('owner=system&module=common&section=global&key=sn');
-        if($this->snNeededUpdate($sn)) $this->setItem('system.common.global.sn', $this->computeSN());
-    }
-
-    /**
-     * Compute a SN. Use the server ip, and server software string as seed, and an rand number, two micro time
-     * 
-     * Note: this sn just to unique this zentaopms. No any private info. 
-     *
-     * @access public
-     * @return string
-     */
-    public function computeSN()
-    {
-        $seed = $this->server->SERVER_ADDR . $this->server->SERVER_SOFTWARE;
-        $sn   = md5(str_shuffle(md5($seed . mt_rand(0, 99999999) . microtime())) . microtime());
-        return $sn;
-    }
-
-    /**
-     * Judge a sn needed update or not.
-     * 
-     * @param  string    $sn 
-     * @access public
-     * @return bool
-     */
-    public function snNeededUpdate($sn)
-    {
-        if($sn == '') return true;
-        if($sn == '281602d8ff5ee7533eeafd26eda4e776') return true;
-        if($sn == '9bed3108092c94a0db2b934a46268b4a') return true;
-        if($sn == '8522dd4d76762a49d02261ddbe4ad432') return true;
-        if($sn == '13593e340ee2bdffed640d0c4eed8bec') return true;
-
-        return false;
+        return $this->setItem('system.sys.common.global.version', $version);
     }
 }

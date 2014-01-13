@@ -40,18 +40,21 @@ class commonModel extends model
         $this->config->personal = isset($config[$account]) ? $config[$account] : array();
 
         /* Overide the items defined in config/config.php and config/my.php. */
-        if(isset($this->config->system->common))
+        if(isset($this->config->system['common']))
         {
-            foreach($this->config->system->common as $record)
-            {   
-                if($record->section)
+            foreach($this->config->system['common'] as $config)
+            {
+                if(is_object($config))
                 {
-                    if(!isset($this->config->{$record->section})) $this->config->{$record->section} = new stdclass();
-                    if($record->key) $this->config->{$record->section}->{$record->key} = $record->value;
+                    $this->config->{$config->key} = $config->value;
                 }
                 else
                 {
-                    if(!$record->section) $this->config->{$record->key} = $record->value;
+                    foreach($config as $record)
+                    {
+                        if(!isset($this->config->{$record->section})) $this->config->{$record->section} = new stdclass();
+                        if($record->key) $this->config->{$record->section}->{$record->key} = $record->value;
+                    }
                 }
             }
         }
