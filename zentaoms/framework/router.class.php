@@ -1706,7 +1706,7 @@ class router
         if($fh) fwrite($fh, strip_tags($errorLog)) && fclose($fh);
 
         /* If the debug > 1, show warning, notice error. */
-        if($level == E_NOTICE or $level == E_WARNING or $level == E_STRICT or $level == E_DEPRECATED)
+        if($level == E_NOTICE or $level == E_WARNING or $level == E_STRICT or $level == 8192) // 8192: E_DEPRECATED
         {
             if(!empty($this->config->debug) and $this->config->debug > 1)
             {
