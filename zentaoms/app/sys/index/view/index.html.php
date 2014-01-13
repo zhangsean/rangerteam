@@ -78,14 +78,30 @@ js::import($jsRoot . 'jquery/ips.js');
     </div>
   </div>
 <script>
-var entries = new Array();
-
-entries['allapps'] = new entry('allapps', '', '<?php echo $lang->index->allEntries?>', 'none', '<?php echo $lang->index->allEntries?>', 'fullscreen', null, null, null, true);
-entries['profile'] = new entry('profile', '<?php echo $this->createLink('user', 'profile')?>', '<?php echo $lang->user->profile?>', 'iframe', '<?php echo $lang->index->profile?>', null, null, null, null, true);
+var entries = new Array(
+    {
+        id          : 'allapps',
+        title       : '<?php echo $lang->index->allEntries?>',
+        type        : 'none',
+        description : '<?php echo $lang->index->allEntries?>',
+        display     : 'fullscreen',
+        systemapp   : true,
+        menu        : false
+    },
+    {
+        id          : 'profile',
+        url         : '<?php echo $this->createLink('user', 'profile')?>',
+        title       : '<?php echo $lang->user->profile?>',
+        type        : 'iframe',
+        description : '<?php echo $lang->index->profile?>',
+        systemapp   : true,
+        menu        : false
+    }
+);
 
 <?php echo $allEntries;?>
 var leftBarEntry = '<?php echo $leftEntry?>';
-$(function(){$('.apps-count').text(entryCount)})
+// $(function(){$('.apps-count').text(entryCount)})
 </script>
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');

@@ -1,585 +1,649 @@
-var config = 
+/* ips lib */
++function($, window, document, Math)
 {
-    animateSpeed         : 200,  // 动画速度
-    movingWindow         : null,    // 当前正在移动的窗口
-    activeWindow         : null,    // 当前激活的窗口
-    lastActiveWindow     : null,    //　上次激活的窗口
-    entryIconRoot        : config.webRoot + 'theme/default/images/ips/',  // 应用图标库目录地址
-    windowHeadheight     : 36,      　// 桌面任务栏栏高度
-    bottomBarHeight      : 42,      // 应用窗口底栏高度
-    desktopSize          : null,    // 当前桌面区域尺寸
-    desktopPos           : {x: 96, y: 0},
-    defaultWindowPos     : {x: 110, y: 20},
-    defaultWindowSize    : {width:700,height:538},
-    windowidstrTemplate  : 'win-{0}',
-    safeCloseTip         : '确认要关闭　【{0}】 吗？',
-    entryNotFindTip      : '应用没有找到！',
-    busyTip              : '应用正忙，请稍候...',
-    fullscreenMode       : false,   // 是否正处于全屏状态
-    getNextDefaultWinPos : function() 
+    "use strict";
+    var debug            = true;
+
+    /* variables */
+    var movingWindow     = null;
+    var activedWindow    = null;
+    var lastActiveWindow = null;
+    var desktopPos       = {x: 96, y: 0};
+    var desktopSize      = null;
+    var fullscreenMode   = false;
+    var windowIdSeed     = 0;
+    var windowZIndexSeed = 100;
+    var defaultWindowPos = {x: 110, y: 20};
+    var entriesConfigs   = null;
+    var entries          = null;
+    var entryCount       = 0;
+
+    /* the default configs */
+    var defaults = 
     {
-        this.defaultWindowPos = {x: this.defaultWindowPos.x + 30, y: this.defaultWindowPos.y + 30};
-        return this.defaultWindowPos;
-    },
-    windowIdSeed     : 0,
-    // 获取下一个新建窗口编号
-    getNewWindowId   : function() { return this.windowIdSeed++; },
-    windowZIndexSeed : 100,
-    // 获取下一个新建窗口z-index
-    getNewZIndex     : function() { return this.windowZIndexSeed++; },
+        webRoot                       : '/',
+        animateSpeed                  : 200,
+        entryIconRoot                 : 'theme/default/images/ips/',
+        windowHeadheight              : 36, // the height of window head bar
+        bottomBarHeight               : 42, // the height of desk bottom bar
+        defaultWinPosOffset           : 30,
+        defaultWindowSize             : {width:700,height:538},
+        windowidstrTemplate           : 'win-{0}',
+        safeCloseTip                  : '确认要关闭　【{0}】 吗？',
+        entryNotFindTip               : '应用没有找到！',
+        busyTip                       : '应用正忙，请稍候...',
+        windowHtmlTemplate            : "<div id='{idstr}' class='window {cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}'><div class='window-head'><img src='{iconimg}' alt=''><strong title='{description}'>{title}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-content'></div></div>",
+        frameHtmlTemplate             : "<iframe id='iframe-{idstr}' name='iframe-{idstr}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
+        leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a href="javascript:;" class="app-btn" title="{title}" data-id="{id}"><img src="{iconimg}" alt=""></a></li>',
+        taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><a href="javascript:;" class="app-btn" title="{description}" data-id="{id}"><img src="{iconimg}" alt="">{title}</a></li>',
+        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{description}" data-id="{id}"><img src="{iconimg}" alt="">{title}</a></li>',
 
-    // window模版
-    windowHtmlTemplate            : "<div id='{idstr}' class='window {cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}'><div class='window-head'><img src='{iconimg}' alt=''><strong title='{description}'>{title}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-content'></div></div>",
-    frameHtmlTemplate             : "<iframe id='iframe-{idstr}' name='iframe-{idstr}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
-    leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a href="javascript:;" class="app-btn" title="{title}" data-id="{id}"><img src="{iconimg}" alt=""></a></li>',
-    taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><a href="javascript:;" class="app-btn" title="{description}" data-id="{id}"><img src="{iconimg}" alt="">{title}</a></li>',
-    entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{description}" data-id="{id}"><img src="{iconimg}" alt="">{title}</a></li>',
-    // taskBarShortcutHtmlTemplate : '<li id="s-task-{id}"><a href="javascript:;" class="app-btn" title="{title}:{description}" data-id="{id}"><i class="icon-list-alt"></i> {title}</a></li>',
+        init                          : function() // init the default
+        {
+            this.entryIconRoot = this.webRoot + this.entryIconRoot;
+        }
+    };
 
-    entries : null
-};
+    /* global setting */
+    var settings = {};
 
-var entryCount = 0;
+    /*
+     * Ips function: caculate the default position of the next new window
+     *  
+     * @return object:{x,y}
+     */
+    function getNextDefaultWinPos()
+    {
+        defaultWindowPos = {x: defaultWindowPos.x + settings.defaultWinPosOffset, y: defaultWindowPos.y + settings.defaultWinPosOffset};
+        // console.log('x:' +defaultWindowPos.x+',y:'+defaultWindowPos.y);
+        return defaultWindowPos;
+    }
+
+    /* Ips function: Init Settings
+     *
+     * @retrun void
+     */
+    function initSettings(options)
+    {
+        defaults.init(); // init default settings
+
+        $.extend(settings, defaults, options);
+
+        /* test: print settings */
+        // if(debug)
+        // {
+        //     console.log('> settings | length:' + Object.getOwnPropertyNames(settings).length);
+        //     for (var key in settings)
+        //     {
+        //         console.log('  * ' + key + ': ' + settings[key]);
+        //     }
+        // }
+    };
+
+    /*
+     * Ips function: Init Entries objects
+     *
+     * @return void
+     */
+    function initEntries(entriesOptions)
+    {
+        entriesConfigs = entriesOptions;
+        entries = new Array();
+        for(var i in entriesConfigs)
+        {
+            var config = entriesConfigs[i];
+
+            var et  =  new entry();
+            et.init(config);
+
+            entries[config.id] = et;
+        }
+
+        /* test print entrys config */
+        // if(debug)
+        // {
+        //     console.log('> entries | length:' + Object.getOwnPropertyNames(entries).length);
+        //     for (var key in entries)
+        //     {
+        //         var e = entries[key];
+        //         console.log('  * > ' + key + ':');
+        //         for(var ikey in e)
+        //         {
+        //             if(!$.isFunction(e[ikey]))
+        //                 console.log('        * ' + ikey + ': ' + e[ikey]);
+        //         }
+        //     }
+        // }
+    };
+
+    /* entry 
+     *
+     * @return void
+     */
+    function entry()
+    {
+        this.init = function(options)
+        {
+            this.initOptions(options);
+        };
+
+        this.initOptions = function(options)
+        {
+            $.extend(this, this.getDefaults(options.id), options);
+            this.idstr      = settings.windowidstrTemplate.format(this.id);
+            this.cssclass   = 'window-movable';
+
+            switch(this.type)
+            {
+                case 'iframe':
+                    this.cssclass += ' window-iframe';
+                    break;
+                case 'json':
+                    this.cssclass += ' window-json';
+                    break;
+            }
+
+            switch(this.display)
+            {
+                case 'normal':
+                    if(!this.position) this.position = getNextDefaultWinPos();
+                    break;
+                case 'fixed':
+                    this.cssclass += ' window-fixed';
+                    if(!this.position) this.position = getNextDefaultWinPos();
+                    break;
+                case 'fullscreen':
+                    this.cssclass += ' window-fullscreen window-active';
+                    this.zindex = this.zindex + 20000;
+                    this.position = desktopPos;
+                    this.size = desktopSize;
+                    break;
+                case 'max':
+                    this.cssclass += ' window-max';
+                    // if(!this.position) this.position = getNextDefaultWinPos();
+                    this.position = desktopPos;
+                    this.size = desktopSize;
+                    console.log('desktopSize.width:' + desktopSize.width + ',height:'+desktopSize.height);
+                    break;
+            }
+
+            if(this.position)
+            {
+                this.left     = this.position.x;
+                this.top      = this.position.y;
+            }
+            if(this.size)
+            {
+                this.width    = this.size.width;
+                this.height   = this.size.height;
+            }
+        };
+
+        this.getDefaults = function(entryId)
+        {
+            var d =
+            {
+                url           : '',
+                id            : entryId || windowIdSeed++,
+                zindex        : windowZIndexSeed++,
+                title         : 'No name entry',
+                type          : 'iframe',
+                description   : '',
+                display       : 'normal',
+                size          : settings.defaultWindowSize,
+                position      : null,
+                iconimg       : settings.entryIconRoot + 'app-' + this.id + '.png',
+                systemapp     : false,
+                cssclass      : '',
+                menu          : true // wethear show in left menu bar
+            };
+
+            return d;
+        }
+
+        this.toWindowHtml   = function()
+        {
+            return settings.windowHtmlTemplate.format(this);
+        };
+
+        this.toLeftBarShortcutHtml = function()
+        {
+            if(!this.systemapp)
+                return settings.leftBarShortcutHtmlTemplate.format(this);
+        };
+
+        this.toTaskBarShortcutHtml = function()
+        {
+            return settings.taskBarShortcutHtmlTemplate.format(this);
+        };
+
+        this.toEntryListShortcutHtml = function()
+        {
+            return settings.entryListShortcutHtmlTemplate.format(this);
+        }
+    }
+
+    /* bind windows events
+     *
+     * @return void
+     */
+    function bindEvents()
+    {
+        onWindowResize();
+        handleWindowResize();
+    }
+
+    /* event: handle varables when window size changed
+     *
+     * @return void
+     */
+    function handleWindowResize()
+    {
+        /* refresh desktop size */
+        var desktop = $('#desktop');
+        desktopSize = {width: desktop.width() - desktopPos.x, height: desktop.height() - desktopPos.y - settings.bottomBarHeight};
+        if(debug) console.log('> desktopSize:' + desktopSize.width + "," + desktopSize.height);
+        
+        /* refresh app menu size */
+        var menu = $('#apps-menu');
+        var iconHeight = menu.find('li').height();
+        var menuHeight = desktopSize.height - $('#leftBar .dock-bottom').height();
+        if(iconHeight > 0)
+        {
+            while(menuHeight % iconHeight != 0)
+            {
+                menuHeight--;
+            }
+        }
+        menu.height(menuHeight);
+
+        /* refresh entry window size */
+        $('.window-fullscreen, .window-max').each(function()
+        {
+            var win = $(this);
+            win.width(desktopSize.width);
+            win.height(desktopSize.height);
+            handleWinResized(win);
+        });
+    }
+
+
+    function onWindowResize()
+    {
+        $(window).resize(handleWindowResize);
+    }
+
+    function getWinObj(winQuery)
+    {
+        if(winQuery)
+        {
+            if(winQuery instanceof jQuery)
+            {
+                return winQuery;
+            }
+            else
+            {
+                return (winQuery.constructor == Number) ? $('#' + settings.windowidstrTemplate.format(winQuery)) : ((winQuery.constructor == String) ? $('#' + winQuery) : $(winQuery));
+            }
+        }
+        else
+        {
+            return activedWindow;
+        }
+    }
+
+    function handleWinResized(winQuery)
+    {
+        var win  = getWinObj(winQuery);
+        win.find('.window-content').height(win.height() - settings.windowHeadheight);
+    }
+
+    /* show shortcuts of entries
+     *
+     * @return void
+     */
+    function showShortcuts()
+    {
+        var leftMenu = $('#apps-menu .bar-menu');
+        var allEntriesList = $("#allAppsList .bar-menu");
+        for(var index in entries)
+        {
+            var entry = entries[index];
+            if(entry.menu) leftMenu.append(entry.toLeftBarShortcutHtml());
+            if(!isNaN(entry.id))
+            {
+              entryCount++;
+              allEntriesList.append(entry.toEntryListShortcutHtml());
+            }
+        }
+    }
+
+    function bindShortcutsEvents()
+    {
+        $(document).on('click', '.app-btn', function(event)
+        {
+            var entry = entries[$(this).attr('data-id')];
+            if(entry)
+            {
+                openWindow(entry);
+            }
+            else
+            {
+                alert(settings.entryNotFindTip);
+            }
+
+            var fullWindow = $(this).closest('.window-fullscreen.window-active');
+
+            if(fullWindow.length > 0)
+            {
+                hideWindow(fullWindow);
+            }
+
+            event.preventDefault();
+        });
+    }
+
+    function openWindow(entry)
+    {
+        if(debug) console.log('open window：' + entry.title + "," + entry.id);
+
+        var entryWin = $('#' + entry.idstr);
+
+        if(entryWin.length < 1)
+        {
+            if(entry.type == 'blank')
+            {
+                window.open(entry.url);
+                return;
+            }
+
+            createWindow(entry);
+            handleWinResized(entry.idstr);
+            reloadWindow(entry.idstr);
+            activeWindow(entry.idstr);
+        }
+        else if(entryWin.hasClass('window-active'))
+        {
+            toggleShowWindow(entryWin);
+        }
+        else
+        {
+            showWindow(entryWin);
+        }
+    }
+
+    function createWindow(entry)
+    {
+        $('#deskContainer').append(entry.toWindowHtml());
+        $('#taskbar .bar-menu').append(entry.toTaskBarShortcutHtml());
+        $('.app-btn[data-id="'+entry.id+'"]').addClass('open');
+    }
+
+    function initWindowActions()
+    {
+        $(document).on('click', '.max-win', function(event) // max-win
+        {
+            toggleMaxSizeWindow($(this).closest('.window'));
+            event.preventDefault();
+            event.stopPropagation();
+        // }).on('dblclick', '.window-head', function(event) // double click for max-win
+        // {
+        //     toggleMaxSizeWindow($(this).closest('.window'));
+        //     event.preventDefault();
+            // event.stopPropagation();
+        }).on('click', '.close-win', function(event) // close-win
+        {
+            closeWindow($(this).closest('.window'));
+            event.preventDefault();
+            event.stopPropagation();
+        }).on('click', '.min-win', function(event) // min-win
+        {
+            toggleShowWindow($(this).closest('.window'));
+            event.preventDefault();
+            event.stopPropagation();
+        }).on('click', '.reload-win', function(event)
+        {
+            reloadWindow($(this).closest('.window'));
+            event.preventDefault();
+            event.stopPropagation();
+        });
+    }
+
+    function toggleShowWindow(winQuery)
+    {
+        var win = getWinObj(winQuery);
+        if(win.hasClass('window-min'))
+        {
+            showWindow(win);
+        }
+        else
+        {
+            hideWindow(win);
+        }
+    }
+
+    function hideWindow(winQuery, silence)
+    {
+        var win = getWinObj(winQuery);
+        if(!win.hasClass('window-min'))
+        {
+            win.fadeOut(settings.animateSpeed).addClass('window-min');
+            if(!silence)
+                activeWindow(lastActiveWindow);
+        }
+    }
+
+    function showWindow(winQuery)
+    {
+        var win = getWinObj(winQuery);
+        console.log('showWindow：'+win.attr('data-id'));
+        if(win.hasClass('window-min'))
+        {
+            win.fadeIn(settings.animateSpeed).removeClass('window-min');
+        }
+        activeWindow(win);
+    }
+
+    function reloadWindow(winQuery)
+    {
+        var win = getWinObj(winQuery);
+        if(!win.hasClass('window-loading'))
+        {
+            win.addClass('window-loading').removeClass('window-error').find('.reload-win i').addClass('icon-spin');
+            var entry = entries[win.attr('data-id')];
+
+            var result = true;
+            switch(entry.type)
+            {
+                case 'iframe':
+                    result = loadIframeWindow(win, entry);
+                    break;
+                case 'html':
+                    result = loadHtmlWindow(win, entry);
+                    break;
+            }
+        }
+        else
+        {
+            alert(settings.busyTip);
+        }
+    }
+
+    function loadHtmlWindow(win, entry)
+    {
+        var result = true;
+        var content = win.find('.window-content').html('');
+        $.ajax(
+        {
+            url: entry.url,
+            dataType: 'html',
+        })
+        .done(function(data)
+        {
+            content.html(data);
+        })
+        .fail(function()
+        {
+            win.addClass('window-error');
+            result = false;
+        })
+        .always(function()
+        {
+            win.removeClass('window-loading');
+            win.find('.reload-win i').removeClass('icon-spin');
+        });
+        return result;
+    }
+
+    function loadIframeWindow(win, entry)
+    {
+        var fName = 'iframe-' + entry.idstr;
+        var frame = $('#' + fName);
+        if(frame.length > 0)
+        {
+            document.getElementById(fName).src = entry.url; 
+        }
+        else
+        {
+            win.find('.window-content').html(settings.frameHtmlTemplate.format(entry));
+        }
+        $('#' + fName).load(function(){
+            win.removeClass('window-loading');
+            win.find('.reload-win i').removeClass('icon-spin');
+        });
+        return true;
+    }
+
+    function closeWindow(winQuery)
+    {
+        var win = getWinObj(winQuery);
+        if(win.hasClass('window-safeclose') && (!confirm(settings.safeCloseTip.format(win.find('.window-head strong').text()))))
+            return;
+
+        win.fadeOut(settings.animateSpeed, function(){
+            var id = win.attr('data-id');
+            $('.app-btn[data-id="' + id + '"]').removeClass('open').removeClass('active');
+            $('#s-task-' + id).remove();
+            win.remove(); 
+        });
+        activeWindow(lastActiveWindow);
+        // todo: 此处加入销毁应用窗口的其他操作
+    }
+
+    function toggleMaxSizeWindow(winQuery)
+    {
+        var win = getWinObj(winQuery);
+        if(win.hasClass('window-fixed')) return;
+
+        if(win.hasClass('window-max'))
+        {
+            var orginLoc = win.data('orginLoc');
+            win.removeClass('window-max').css(
+            {
+                left: orginLoc.left,
+                top: orginLoc.top,
+                width: orginLoc.width,
+                height: orginLoc.height
+            }).find('.icon-resize-small').removeClass('icon-resize-small').addClass('icon-resize-full');
+        }
+        else
+        {
+            var dSize = desktopSize;
+            win.data('orginLoc', 
+            {
+                left: win.css('left'),
+                top: win.css('top'),
+                width: win.css('width'),
+                height: win.css('height')
+            }).addClass('window-max').css(
+            {
+                left: desktopPos.x,
+                top: desktopPos.y,
+                width: dSize.width,
+                height: dSize.height
+            }).find('.icon-resize-full').removeClass('icon-resize-full').addClass('icon-resize-small');
+        }
+        handleWinResized(win);
+    }
+
+    function activeWindow(query)
+    {
+        var win = getWinObj(query);
+
+        if(win.hasClass('window-active')) return;
+        if($('.window[data-id="'+win.attr('data-id')+'"]').length<1) return;
+
+        if(activedWindow)
+        {
+            if(activedWindow.hasClass('window-fullscreen'))
+            {
+                hideWindow(activedWindow,true);
+            }
+            else
+            {
+                lastActiveWindow = activedWindow;
+            }
+            activedWindow.removeClass('window-active').css('z-index', parseInt(activedWindow.css('z-index'))%10000);
+            
+        }
+
+        activedWindow = win.addClass('window-active').css('z-index',parseInt(win.css('z-index'))+10000);
+
+        $('.app-btn').removeClass('active');
+        $('.app-btn[data-id="'+win.attr('data-id')+'"]').addClass('active');
+
+        handleFullscreenMode(win);
+    }
+
+    function handleFullscreenMode(win)
+    {
+        var id = win.attr('data-id');
+        if(win.hasClass('window-fullscreen'))
+        {
+            $("#desktop").addClass('fullscreen-mode');
+            fullscreenMode = true;
+        }
+        else
+        {
+            fullscreenMode = false;
+            $("#desktop").removeClass('fullscreen-mode');
+        }
+    }
+
+
+    /* start ips
+     *
+     * @return void
+     */
+    function start(entriesOptions, options)
+    {
+        initSettings(options);
+
+        /* bind window events */
+        bindEvents();
+
+        initEntries(entriesOptions);
+
+        /* show content */
+        showShortcuts();
+        bindShortcutsEvents();
+
+        initWindowActions();
+    }
+
+    /* make jquery object call the ips interface manager */
+    $.extend({ipsStart: start});
+
+}(jQuery,window,document,Math);
 
 $(function()
 {
-    initEntries();
-    initShortcuts();
-    initShortcusEvents();
-
-    initWindowMovable();
-    initWindowActivable();
-    initWindowActions();
-
-    initWindowResize();
-    initOther();
+    /* start ips */
+    $.ipsStart(entries, config);
 });
 
-function initEntries()
-{
-    config.entries = entries;
-}
-
-function initShortcuts()
-{
-    var entries = config.entries;
-    var leftMenu = $('#apps-menu .bar-menu');
-    var allEntriesList = $("#allAppsList .bar-menu");
-    for(var index in entries)
-    {
-        var entry = entries[index];
-        if(leftBarEntry.indexOf(entry.id) >= 0) leftMenu.append(entry.toLeftBarShortcutHtml());
-        if(!isNaN(entry.id))
-        {
-          entryCount++;
-          allEntriesList.append(entry.toEntryListShortcutHtml());
-        }
-    }
-}
-
-function initShortcusEvents()
-{
-    $(document).on('click', '.app-btn', function(event)
-    {
-        var entry = config.entries[$(this).attr('data-id')];
-        if(entry)
-        {
-            openWindow(entry);
-        }
-        else
-        {
-            alert(config.entryNotFindTip);
-        }
-
-        var fullWindow = $(this).closest('.window-fullscreen.window-active');
-        if(fullWindow.length>0)
-        {
-            hideWindow(fullWindow);
-        }
-
-        event.preventDefault();
-    });
-}
-
-function initOther()
-{
-}
-
-function entry(id, url, title, type,　description, display, size, position, imgicon, systemapp)
-{
-    this.id       = id;
-    this.idstr    = config.windowidstrTemplate.format(this.id);
-    this.url      = url;
-    this.title    = title ? title : '';
-    this.type     = type ? type : 'iframe';
-    this.description = description ? description : '';
-    this.display  = display ? display: 'normal';
-    this.size     = size ? size : config.defaultWindowSize;
-    this.position = position ? position : null;
-    this.iconimg  = imgicon ? imgicon : config.entryIconRoot + 'app-' + this.id + '.png';
-    this.systemapp= systemapp ? systemapp : false;
-    this.cssclass = 'window-movable';
-
-    this.toWindowHtml   = function()
-    {
-        this.init();
-
-        return config.windowHtmlTemplate.format(this);
-    };
-
-    this.toLeftBarShortcutHtml = function()
-    {
-        if(!this.systemapp)
-            return config.leftBarShortcutHtmlTemplate.format(this);
-    };
-
-    this.toTaskBarShortcutHtml = function()
-    {
-        return config.taskBarShortcutHtmlTemplate.format(this);
-    };
-
-    this.toEntryListShortcutHtml = function()
-    {
-        return config.entryListShortcutHtmlTemplate.format(this);
-    }
-
-    this.init = function()
-    {
-        switch(this.type)
-        {
-            case 'iframe':
-                this.cssclass += ' window-iframe';
-                break;
-            case 'json':
-                this.cssclass += ' window-json';
-                break;
-        }
-
-        switch(this.display)
-        {
-            case 'normal':
-                this.zindex = config.getNewZIndex();
-                if(!this.position) this.position = config.getNextDefaultWinPos();
-                break;
-            case 'fixed':
-                this.cssclass += ' window-fixed';
-                this.zindex = config.getNewZIndex();
-                if(!this.position) this.position = config.getNextDefaultWinPos();
-                break;
-            case 'fullscreen':
-                this.cssclass += ' window-fullscreen window-active';
-                this.zindex = config.getNewZIndex() + 20000;
-                this.position = config.desktopPos;
-                this.size = config.desktopSize;
-                break;
-            case 'max':
-                this.cssclass += ' window-max';
-                this.zindex = config.getNewZIndex();
-                this.position = config.desktopPos;
-                this.size = config.desktopSize;
-                break;
-        }
-
-        this.left     = this.position.x;
-        this.top      = this.position.y;
-        this.width    = this.size.width;
-        this.height   = this.size.height;
-    }
-}
-
-function openWindow(entry)
-{
-    console.log('open window：'+entry.title+","+entry.id);
-    var entryWin = $('#' + entry.idstr);
-    if(entryWin.length<1)
-    {
-        if(entry.type == 'blank')
-        {
-            window.open(entry.url);
-            return;
-        }
-
-        createEntryWindow(entry);
-        handleWinResized(entry.idstr);
-        activeWindow(entry.idstr);
-        reloadWindow(entry.idstr);
-    }
-    else if(entryWin.hasClass('window-active'))
-    {
-        toggleShowWindow(entryWin);
-    }
-    else
-    {
-        showWindow(entryWin);
-    }
-}
-
-
-function createEntryWindow(entry)
-{
-    $('#deskContainer').append(entry.toWindowHtml());
-    $('#taskbar .bar-menu').append(entry.toTaskBarShortcutHtml());
-    $('.app-btn[data-id="'+entry.id+'"]').addClass('open');
-}
-
-function getWinObj(winQuery)
-{
-    if(winQuery)
-    {
-        if(winQuery instanceof jQuery)
-        {
-            return winQuery;
-        }
-        else
-        {
-            return (winQuery.constructor == Number) ? $('#' + config.windowidstrTemplate.format(winQuery)) : ((winQuery.constructor == String) ? $('#' + winQuery) : $(winQuery));
-        }
-    }
-    else
-    {
-        return config.activeWindow;
-    }
-
-}
-
-function getDesktopSize()
-{
-    var desk = $("#deskContainer");
-    return {width: desk.width() - config.desktopPos.x, height: desk.height() - config.desktopPos.y - config.bottomBarHeight};
-}
-
-function initWindowActions()
-{
-    // max-win
-    $(document).on('click', '.max-win', function(event)
-    {
-        toggleMaxSizeWindow($(this).closest('.window'));
-        event.preventDefault();
-        event.stopPropagation()
-    }).on('dblclick', '.window-head', function(event) // double click for max-win
-    {
-        toggleMaxSizeWindow($(this).closest('.window'));
-        event.preventDefault();
-        event.stopPropagation()
-    }).on('click', '.close-win', function(event) // close-win
-    {
-        closeWindow($(this).closest('.window'));
-        event.preventDefault();
-        event.stopPropagation()
-    }).on('click', '.min-win', function(event) // min-win
-    {
-        toggleShowWindow($(this).closest('.window'));
-        event.preventDefault();
-        event.stopPropagation()
-    }).on('click', '.reload-win', function(event)
-    {
-        reloadWindow($(this).closest('.window'));
-        event.preventDefault();
-        event.stopPropagation()
-    });
-}
-
-function toggleShowWindow(winQuery)
-{
-    var win = getWinObj(winQuery);
-    if(win.hasClass('window-min'))
-    {
-        showWindow(win);
-    }
-    else
-    {
-        hideWindow(win);
-    }
-}
-
-function hideWindow(winQuery, silence)
-{
-    var win = getWinObj(winQuery);
-    if(!win.hasClass('window-min'))
-    {
-        win.fadeOut(config.animateSpeed).addClass('window-min');
-        if(!silence)
-            activeWindow(config.lastActiveWindow);
-    }
-}
-
-function showWindow(winQuery)
-{
-    var win = getWinObj(winQuery);
-    console.log('showWindow：'+win.attr('data-id'));
-    if(win.hasClass('window-min'))
-    {
-        win.fadeIn(config.animateSpeed).removeClass('window-min');
-    }
-    activeWindow(win);
-}
-
-function reloadWindow(winQuery)
-{
-    var win = getWinObj(winQuery);
-    if(!win.hasClass('window-loading'))
-    {
-        win.addClass('window-loading').removeClass('window-error').find('.reload-win i').addClass('icon-spin');
-        var entry = config.entries[win.attr('data-id')];
-
-        var result = true;
-        switch(entry.type)
-        {
-            case 'iframe':
-                result = loadIframeWindow(win, entry);
-                break;
-            case 'html':
-                result = loadHtmlWindow(win, entry);
-                break;
-        }
-    }
-    else
-    {
-        alert(config.busyTip);
-    }
-}
-
-function loadHtmlWindow(win, entry)
-{
-    var result = true;
-    var content = win.find('.window-content').html('');
-    $.ajax(
-    {
-        url: entry.url,
-        dataType: 'html',
-    })
-    .done(function(data)
-    {
-        content.html(data);
-    })
-    .fail(function()
-    {
-        win.addClass('window-error');
-        result = false;
-    })
-    .always(function()
-    {
-        win.removeClass('window-loading');
-        win.find('.reload-win i').removeClass('icon-spin');
-    });
-    return result;
-}
-
-function loadIframeWindow(win, entry)
-{
-    var fName = 'iframe-' + entry.idstr;
-    var frame = $('#' + fName);
-    if(frame.length > 0)
-    {
-        document.getElementById(fName).src = entry.url; 
-    }
-    else
-    {
-        win.find('.window-content').html(config.frameHtmlTemplate.format(entry));
-    }
-    $('#' + fName).load(function(){
-        win.removeClass('window-loading');
-        win.find('.reload-win i').removeClass('icon-spin');
-    });
-    return true;
-}
-
-function closeWindow(winQuery)
-{
-    var win = getWinObj(winQuery);
-    if(win.hasClass('window-safeclose') && (!confirm(config.safeCloseTip.format(win.find('.window-head strong').text()))))
-        return;
-
-    win.fadeOut(config.animateSpeed, function(){
-        var id = win.attr('data-id');
-        $('.app-btn[data-id="' + id + '"]').removeClass('open').removeClass('active');
-        $('#s-task-' + id).remove();
-        win.remove(); 
-    });
-    activeWindow(config.lastActiveWindow);
-    // todo: 此处加入销毁应用窗口的其他操作
-}
-
-function toggleMaxSizeWindow(winQuery)
-{
-    var win = getWinObj(winQuery);
-    if(win.hasClass('window-fixed')) return;
-
-    if(win.hasClass('window-max'))
-    {
-        var orginLoc = win.data('orginLoc');
-        win.removeClass('window-max').css(
-        {
-            left: orginLoc.left,
-            top: orginLoc.top,
-            width: orginLoc.width,
-            height: orginLoc.height
-        }).find('.icon-resize-small').removeClass('icon-resize-small').addClass('icon-resize-full');
-    }
-    else
-    {
-        var dSize = getDesktopSize();
-        win.data('orginLoc', 
-        {
-            left: win.css('left'),
-            top: win.css('top'),
-            width: win.css('width'),
-            height: win.css('height')
-        }).addClass('window-max').css(
-        {
-            left: config.desktopPos.x,
-            top: config.desktopPos.y,
-            width: dSize.width,
-            height: dSize.height
-        }).find('.icon-resize-full').removeClass('icon-resize-full').addClass('icon-resize-small');
-    }
-    handleWinResized(win);
-}
-
-function handleWinResized(winQuery)
-{
-    var win  = getWinObj(winQuery);
-    win.find('.window-content').height(win.height() - config.windowHeadheight);
-}
-
-function initWindowMovable()
-{
-    $(document).on('mousedown', '.movable,.window-movable .window-head', function(event)
-    {
-        var win = $(this).closest('.window:not(.window-max)');
-        if(win.length<1)
-        {
-            return;
-        }
-        config.movingWindow = win;
-        var mwPos = config.movingWindow.position();
-        config.movingWindow.data('mouseOffset', {x: event.pageX-mwPos.left, y: event.pageY-mwPos.top}).addClass('window-moving');
-        $(document).bind('mousemove',mouseMove).bind('mouseup',mouseUp)
-        event.preventDefault();
-    });
-
-    function mouseUp()
-    {
-        $('.window.window-moving').removeClass('window-moving');
-        config.movingWindow = null;
-        $(document).unbind('mousemove', mouseMove).unbind('mouseup', mouseUp)
-    }
-
-    function mouseMove(event)
-    {
-        if(config.movingWindow && config.movingWindow.hasClass('window-moving'))
-        {
-            var offset = config.movingWindow.data('mouseOffset');
-            config.movingWindow.css(
-            {
-                left : event.pageX-offset.x,
-                top : event.pageY-offset.y
-            });
-        }
-    }
-}
-
-function initWindowActivable()
-{
-    config.activeWindow = $('.window-active');
-    $(document).on('mousedown', '.window', function()
-    {
-        activeWindow($(this));
-    });
-}
-
-function activeWindow(query)
-{
-    var win = getWinObj(query);
-
-    if(win.hasClass('window-active')) return;
-    if($('.window[data-id="'+win.attr('data-id')+'"]').length<1) return;
-
-    if(config.activeWindow)
-    {
-        if(config.activeWindow.hasClass('window-fullscreen'))
-        {
-            hideWindow(config.activeWindow,true);
-        }
-        else
-        {
-            config.lastActiveWindow = config.activeWindow;
-        }
-        config.activeWindow.removeClass('window-active').css('z-index', parseInt(config.activeWindow.css('z-index'))%10000);
-        
-    }
-
-    config.activeWindow = win.addClass('window-active').css('z-index',parseInt(win.css('z-index'))+10000);
-
-    $('.app-btn').removeClass('active');
-    $('.app-btn[data-id="'+win.attr('data-id')+'"]').addClass('active');
-
-    handleFullscreenMode(win);
-}
-
-function handleFullscreenMode(win)
-{
-    var id = win.attr('data-id');
-    if(win.hasClass('window-fullscreen'))
-    {
-        $("#desktop").addClass('fullscreen-mode');
-        config.fullscreenMode = true;
-    }
-    else
-    {
-        config.fullscreenMode = false;
-        $("#desktop").removeClass('fullscreen-mode');
-    }
-}
-
-function initWindowResize()
-{
-    refreshSize();
-    $(window).resize(refreshSize);
-}
-
-function refreshSize()
-{
-    refreshDesktopSize();
-    resizeEntriesMenu();
-    refreshWindowSize();
-}
-
-function refreshDesktopSize()
-{
-    var desktop = $('#desktop');
-    config.desktopSize = {width: desktop.width() - config.desktopPos.x, height: desktop.height() - config.desktopPos.y - config.bottomBarHeight};
-    console.log('desktopSize:'+config.desktopSize.width+","+config.desktopSize.height);
-}
-
-function refreshWindowSize()
-{
-    $('.window-fullscreen,.window-max').each(function()
-    {
-        var win = $(this);
-        win.width(config.desktopSize.width);
-        win.height(config.desktopSize.height);
-        handleWinResized(win);
-    });
-}
-
-function resizeEntriesMenu()
-{
-    var menu = $('#apps-menu');
-    var iconHeight = menu.find('li').height();
-    var menuHeight = config.desktopSize.height - $('#leftBar .dock-bottom').height();
-    if(iconHeight>0)
-    {
-        while(menuHeight%iconHeight!=0)
-        {
-            menuHeight--;
-        }
-    }
-    menu.height(menuHeight);
-}
-
 /**
- *  Format string 
+ * Format string
  *  
  * @param  object|array args
  * @return string

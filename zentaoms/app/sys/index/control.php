@@ -27,7 +27,7 @@ class index extends control
             if($entry->visible) $leftEntry .= $entry->id . ',';
             $sso  = $this->createLink('entry', 'visit', "entryID=$entry->id");
             $logo = $entry->logo ? $entry->logo : '';
-            $allEntries .= "entries['$entry->id'] = new entry('$entry->id', '$sso', '$entry->name', '$entry->open', '$entry->name', 'max', null, null, '$logo');\n";
+            $allEntries .= "entries.push({id: '$entry->id', url: '$sso', title: '$entry->name', type: '$entry->open', description: '$entry->name', display: 'max', iconimg: '$logo'});\n";
         }
 
         $this->view->allEntries = $allEntries;
