@@ -1,29 +1,25 @@
-<?php
-/**
- * The header view of common module of ZenTaoMS.
- *
- * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     商业软件，非开源软件
- * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     common 
- * @version     $Id$
- * @link        http://www.zentao.net
- */
-if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
-include 'header.lite.html.php';
-js::set('lang', $lang->js);
-?>
-<div class='page-container'>
-  <?php if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6.0') !== false ) exit($lang->IE6Alert); ?>
-  <header id='header' class='clearfix'>
-    <div id='headTitle'>
-      <?php if(isset($config->company->logo)):?>
-      <?php $logo = json_decode($config->company->logo);?>
-      <div id='siteLogo'>
-        <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
-      </div>
-      <?php else: ?>
-      <div id='siteName'><h2><?php echo $config->company->name;?></h2></div>
-      <?php endif;?>
-    </div>
-  </header>
+<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
+<?php include 'header.lite.html.php';?>
+<nav class='navbar navbar-inverse navbar-fixed-top' role='navigation' id='mainNavbar'>
+  <div class='navbar-header'>
+    <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-ex1-collapse'>
+      <span class='sr-only'>Toggle navigation</span>
+      <span class='icon-bar'></span>
+      <span class='icon-bar'></span>
+      <span class='icon-bar'></span>
+    </button>
+    <?php echo html::a($this->createLink($this->config->default->module), $lang->app->name, "class='navbar-brand'");?>
+  </div>
+  <div class='collapse navbar-collapse navbar-ex1-collapse'>
+    <?php echo commonModel::createMainMenu($this->moduleName);?>
+    <ul class='nav navbar-nav' id='navbarSwitcher'>
+      <li><a href='###'><i class='icon-chevron-sign-right icon-large'></i></a></li>
+    </ul>
+    <?php if(RUN_MODE == 'admin') echo commonModel::createManagerMenu();?>
+  </div>
+</nav>
+<div class="clearfix">
+  <?php 
+  $moduleMenu = commonModel::createModuleMenu($this->moduleName);
+  if($moduleMenu) echo "<div class='col-md-2'>$moduleMenu</div>\n<div class='col-md-10'>\n";
+  ?>
