@@ -522,6 +522,39 @@ class helper
     {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
     }
+
+    /**
+     * Merge db configs
+     * 
+     * @param  array  $dbConfig 
+     * @param  string $moduleName 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function mergeConfig($dbConfig, $moduleName = 'common')
+    {
+        global $config;
+
+        $currentConfig = $config;
+        if($moduleName != 'common') $currentConfig = $config->$moduleName;
+
+        foreach($dbConfig as $item)
+        {
+            if(is_object($item))
+            {
+                $currentConfig->{$item->key} = $item->value;
+            }
+            else
+            {
+                foreach($item as $record)
+                {
+                    if(!isset($currentConfig->{$record->section})) $currentConfig->{$record->section} = new stdclass();
+                    if($record->key) $currentConfig->{$record->section}->{$record->key} = $record->value;
+                }
+            }
+        }
+    }
 }
 
 /**

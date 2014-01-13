@@ -75,7 +75,7 @@ class companyModel extends model
 
         /* Upload new logo. */
         $uploadResult = $fileModel->saveUpload($htmlTagName);
-        if(!$uploadResult) return array('result' => 'fail', 'message' => $this->lang->fail);
+        if(!$uploadResult) return array('result' => false, 'message' => $this->lang->fail);
 
         $fileIdList = array_keys($uploadResult);
         $file       = $fileModel->getById($fileIdList[0]); 
@@ -88,9 +88,9 @@ class companyModel extends model
         $setting->addedBy   = $file->addedBy;
         $setting->addedDate = $file->addedDate;
 
-        $result = $this->loadModel('setting')->setItems('system.common.company', array($section => helper::jsonEncode($setting)));
+        $result = $this->loadModel('setting')->setItems('system.sys.common.company', array($section => helper::jsonEncode($setting)));
         if($result) return array('result' => true);
 
-        return array('return' => false, 'message' => $this->lang->fail);
+        return array('result' => false, 'message' => $this->lang->fail);
     }
 }

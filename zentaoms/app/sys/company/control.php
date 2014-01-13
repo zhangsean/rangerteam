@@ -27,7 +27,7 @@ class company extends control
             ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
 
-            $result = $this->loadModel('setting')->setItems('system.common.company', $company);
+            $result = $this->loadModel('setting')->setItems('system.sys.common.company', $company);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
@@ -52,7 +52,7 @@ class company extends control
             }
 
             $contact = array('contact' => helper::jsonEncode($_POST));
-            $result  = $this->loadModel('setting')->setItems('system.common.company', $contact);
+            $result  = $this->loadModel('setting')->setItems('system.sys.common.company', $contact);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }

@@ -68,7 +68,7 @@ class mail extends control
             $mailConfig = $this->config->mail->smtp;
             $mailConfig->fromAddress = $this->config->mail->fromAddress;
             $mailConfig->fromName    = $this->config->mail->fromName;
-            $this->loadModel('setting')->setItems('system.mail', $mailConfig);
+            $this->loadModel('setting')->setItems('system.sys.mail', $mailConfig);
         }
         elseif($this->session->mailConfig)
         {
@@ -113,7 +113,7 @@ class mail extends control
             $mailConfig->smtp->secure   = $this->post->secure;
             $mailConfig->smtp->debug    = $this->post->debug;
 
-            $this->loadModel('setting')->setItems('system.mail', $mailConfig);
+            $this->loadModel('setting')->setItems('system.sys.mail', $mailConfig);
             if(dao::isError()) die(js::error(dao::getError()));
 
             $this->session->set('mailConfig', '');
