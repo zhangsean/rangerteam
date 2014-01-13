@@ -1,5 +1,4 @@
 /* Keep session random valid. */
-needPing = true;
 $('#submit').click(function()
 {
     var password = md5(md5(md5($('#password').val()) + $('#account').val()) + v.random);
