@@ -8,7 +8,7 @@
       <span class='icon-bar'></span>
       <span class='icon-bar'></span>
     </button>
-    <?php echo html::a($this->createLink($this->config->default->module), $lang->app->name, "class='navbar-brand'");?>
+    <?php echo html::a($this->createLink($this->config->default->module), RUN_MODE == 'front' ? $lang->app->name : $lang->zentaoms, "class='navbar-brand'");?>
   </div>
   <div class='collapse navbar-collapse navbar-ex1-collapse'>
     <?php echo commonModel::createMainMenu($this->moduleName);?>
