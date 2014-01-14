@@ -64,11 +64,16 @@ class productModel extends model
             ->data($product)
             ->autoCheck()
             ->batchCheck($this->config->product->require->create, 'notempty')
+            ->check('code', 'unique')
+            ->check('code', 'code')
             ->exec();
 
         $productID = $this->dao->lastInsertID();
 
         if(dao::isError()) return false;
+
+        $sql = "CREATE TABLE IF NOT EXISTS `crm_order_{$product->code}` ( `order` mediumint(5) NOT NULL, PRIMARY KEY (`order`)) ENGINE=MyISAM DEFAULT CHARSET=utf8";
+        if(!$this->dbh->query($sql)) return false;
 
         return $productID;
     }
@@ -92,6 +97,8 @@ class productModel extends model
             ->data($product)
             ->autoCheck()
             ->batchCheck($this->config->product->require->edit, 'notempty')
+            ->check('code', 'unique', "id<>{$productID}")
+            ->check('code', 'code')
             ->where('id')->eq($productID)
             ->exec();
 
