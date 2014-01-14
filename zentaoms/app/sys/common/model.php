@@ -36,12 +36,12 @@ class commonModel extends model
         /* Get configs of system and current user. */
         $account = isset($this->app->user->account) ? $this->app->user->account : '';
         if(!empty($this->config->db->name)) $config = $this->loadModel('setting')->getSysAndPersonalConfig($account);
-        $this->config->system   = isset($config['system']) ? $config['system'] : array();
-        $this->config->personal = isset($config[$account]) ? $config[$account] : array();
+        $this->config->system   = isset($config['system']) ? $config['system'] : new stdclass();
+        $this->config->personal = isset($config[$account]) ? $config[$account] : new stdclass();
 
         /* Overide the items defined in config/config.php and config/my.php. */
-        if(isset($this->config->system['common']))   helper::mergeConfig($this->config->system['common'],   'common');
-        if(isset($this->config->personal['common'])) helper::mergeConfig($this->config->personal['common'], 'common');
+        if(isset($this->config->system->common))   helper::mergeConfig($this->config->system->common,   'common');
+        if(isset($this->config->personal->common)) helper::mergeConfig($this->config->personal->common, 'common');
     }
 
     /**

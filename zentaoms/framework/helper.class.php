@@ -541,17 +541,16 @@ class helper
 
         foreach($dbConfig as $item)
         {
-            if(is_object($item))
+            foreach($item as $record)
             {
-                $config2Merge->{$item->key} = $item->value;
-            }
-            else
-            {
-                foreach($item as $record)
+                if(!is_object($record))
                 {
-                    if(!isset($config2Merge->{$record->section})) $config2Merge->{$record->section} = new stdclass();
-                    if($record->key) $config2Merge->{$record->section}->{$record->key} = $record->value;
+                    $config2Merge->{$record->key} = $record->value;
+                    break;
                 }
+
+                if(!isset($config2Merge->{$record->section})) $config2Merge->{$record->section} = new stdclass();
+                if($record->key) $config2Merge->{$record->section}->{$record->key} = $record->value;
             }
         }
     }

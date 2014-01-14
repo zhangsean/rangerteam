@@ -1466,7 +1466,7 @@ class router
         if(!is_file($mainConfigFile))
         {
             if($exitIfNone) self::triggerError("config file $mainConfigFile not found", __FILE__, __LINE__, true);
-            if(empty($extConfigFiles) and !isset($config->system->$moduleName)) return false;  //  and no extension file or extension in db, exit.
+            if(empty($extConfigFiles) and !isset($config->personal->$moduleName) and !isset($config->system->$moduleName)) return false;  //  and no extension file or extension in db, exit.
             $configFiles = $extConfigFiles;
         }
         else
@@ -1483,8 +1483,8 @@ class router
         }
 
         /* Merge from the db configs. */
-        if($moduleName != 'common' and isset($config->system[$moduleName])) helper::mergeConfig($config->system[$moduleName], $moduleName);
-        if($moduleName != 'common' and isset($config->personal[$moduleName])) helper::mergeConfig($config->personal[$moduleName], $moduleName);
+        if($moduleName != 'common' and isset($config->system->$moduleName)) helper::mergeConfig($config->system->$moduleName, $moduleName);
+        if($moduleName != 'common' and isset($config->personal->$moduleName)) helper::mergeConfig($config->personal->$moduleName, $moduleName);
 
         $this->config = $config;
 

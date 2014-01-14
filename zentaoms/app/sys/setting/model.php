@@ -160,28 +160,31 @@ class settingModel extends model
     public function getSysAndPersonalConfig($account = '')
     {
         $owner   = 'system,' . ($account ? $account : '');
+        $app     = 'sys,' . $this->app->getAppName();
         $records = $this->dao->select('*')->from(TABLE_CONFIG)
             ->where('owner')->in($owner)
+            ->andWhere('app')->in($app)
             ->orderBy('id')
             ->fetchAll('id');
         if(!$records) return array();
 
         /* Group records by owner and module. */
         $config = array();
-        $app    = $this->app->getAppName();
         foreach($records as $record)
         {
             if(!isset($record->module)) return array();    // If no module field, return directly.
             if(empty($record->module)) continue;
-            if($record->app != 'sys' and $record->app != $app) continue;
 
+            if(!isset($config[$record->owner])) $config[$record->owner] = new stdclass();
+            if(!isset($config[$record->owner]->{$record->module})) $config[$record->owner]->{$record->module} = new stdclass();
             if($record->section)
             {
-                $config[$record->owner][$record->module][$record->section][$record->key] = $record;
+                if(!isset($config[$record->owner]->{$record->module}->{$record->section})) $config[$record->owner]->{$record->module}->{$record->section} = new stdclass();
+                $config[$record->owner]->{$record->module}->{$record->section}->{$record->key} = $record;
             }
             else
             {
-                $config[$record->owner][$record->module][$record->key] = $record;
+                $config[$record->owner]->{$record->module}->{$record->key} = $record;
             }
         }
         return $config;
