@@ -524,7 +524,7 @@ class helper
     }
 
     /**
-     * Merge db configs
+     * Merge config items in database and config files.
      * 
      * @param  array  $dbConfig 
      * @param  string $moduleName 
@@ -536,21 +536,21 @@ class helper
     {
         global $config;
 
-        $currentConfig = $config;
-        if($moduleName != 'common') $currentConfig = $config->$moduleName;
+        $config2Merge = $config;
+        if($moduleName != 'common') $config2Merge = $config->$moduleName;
 
         foreach($dbConfig as $item)
         {
             if(is_object($item))
             {
-                $currentConfig->{$item->key} = $item->value;
+                $config2Merge->{$item->key} = $item->value;
             }
             else
             {
                 foreach($item as $record)
                 {
-                    if(!isset($currentConfig->{$record->section})) $currentConfig->{$record->section} = new stdclass();
-                    if($record->key) $currentConfig->{$record->section}->{$record->key} = $record->value;
+                    if(!isset($config2Merge->{$record->section})) $config2Merge->{$record->section} = new stdclass();
+                    if($record->key) $config2Merge->{$record->section}->{$record->key} = $record->value;
                 }
             }
         }
