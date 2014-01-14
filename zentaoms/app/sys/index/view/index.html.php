@@ -67,34 +67,39 @@ js::import($jsRoot . 'jquery/ips.js');
             </ul>
           </div>
         </div>
-      </div>      
+      </div>
     </div>
   </div>
 <script>
 var entries = new Array(
-    {
-        id          : 'allapps',
-        title       : '<?php echo $lang->index->allEntries?>',
-        type        : 'none',
-        description : '<?php echo $lang->index->allEntries?>',
-        display     : 'fullscreen',
-        systemapp   : true,
-        menu        : false
-    },
-    {
-        id          : 'profile',
-        url         : '<?php echo $this->createLink('user', 'profile')?>',
-        title       : '<?php echo $lang->user->profile?>',
-        type        : 'iframe',
-        description : '<?php echo $lang->index->profile?>',
-        systemapp   : true,
-        menu        : false
-    }
-);
+{
+    id          : 'allapps',
+    title       : '<?php echo $lang->index->allEntries?>',
+    type        : 'none',
+    description : '<?php echo $lang->index->allEntries?>',
+    display     : 'fullscreen',
+    systemapp   : true,
+    menu        : false
+},
+{
+    id          : 'profile',
+    url         : '<?php echo $this->createLink('user', 'profile')?>',
+    title       : '<?php echo $lang->user->profile?>',
+    type        : 'iframe',
+    description : '<?php echo $lang->index->profile?>',
+    systemapp   : true,
+    menu        : false
+});
 
 <?php echo $allEntries;?>
-var leftBarEntry = '<?php echo $leftEntry?>';
-// $(function(){$('.apps-count').text(entryCount)})
+
+$(function()
+{
+    /* start ips */
+    $.ipsStart(entries, config);
+    $('.entries-count').text(entries.length - 2)
+});
+
 </script>
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');

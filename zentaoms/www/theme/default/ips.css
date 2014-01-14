@@ -282,7 +282,7 @@ button{
   cursor: default;
 }
 
-.window-fixed .window-head .max-win
+.window-fixed .window-head .max-win, .window-maxfixed .window-head .max-win
 {
   display: none;
 }

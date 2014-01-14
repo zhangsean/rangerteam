@@ -15,4 +15,4 @@ $lang->index->profile    = 'Profile';
 $lang->index->set        = 'Setting';
 $lang->index->theme      = 'Theme';
 
-$lang->index->countEntries = "A total of <span class='apps-count'></span> entries";
+$lang->index->countEntries = "A total of <span class='entries-count'></span> entries";

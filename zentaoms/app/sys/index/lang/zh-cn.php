@@ -15,4 +15,4 @@ $lang->index->profile    = '个人信息';
 $lang->index->set        = '系统配置';
 $lang->index->theme      = '更换主题';
 
-$lang->index->countEntries = "共 <span class='apps-count'></span> 款应用";
+$lang->index->countEntries = "共 <span class='entries-count'></span> 款应用";
