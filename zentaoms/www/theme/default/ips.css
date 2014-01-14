@@ -1,5 +1,6 @@
 /* globe. */
 body{
+  padding-top: 0;
   background-color: #355600;
   background-position: center center;
   background-repeat: repeat;
