@@ -47,3 +47,11 @@ CREATE TABLE IF NOT EXISTS `sys_action` (
   PRIMARY KEY (`id`),
   KEY `date` (`date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `crm_team` (
+  `order` mediumint(8) unsigned NOT NULL,
+  `account` char(30) NOT NULL,
+  `role` char(30) NOT NULL,
+  `join` date NOT NULL,
+  PRIMARY KEY  (`order`,`account`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
