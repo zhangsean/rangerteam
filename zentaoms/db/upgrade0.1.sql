@@ -43,6 +43,21 @@ CREATE TABLE IF NOT EXISTS `crm_order` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `crm_orderField` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `product` mediumint(8) unsigned NOT NULL,
+  `field` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `control` varchar(10) NOT NULL,
+  `options` varchar(255) NOT NULL,
+  `default` varchar(100) NOT NULL,
+  `rules` varchar(255) NOT NULL,
+  `placeholder` varchar(100) NOT NULL,
+  `desc` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `product` (`product`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `sys_action` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `objectType` varchar(30) NOT NULL DEFAULT '',
