@@ -64,7 +64,13 @@ class entryModel extends model
     public function create()
     {
         $entry = fixer::input('post')->get();
-        $this->dao->insert(TABLE_ENTRY)->data($entry)->autoCheck()->batchCheck($this->config->entry->require->create, 'notempty')->exec();
+        $this->dao->insert(TABLE_ENTRY)
+            ->data($entry)
+            ->autoCheck()
+            ->batchCheck($this->config->entry->require->create, 'notempty')
+            ->check('code', 'unique')
+            ->check('code', 'code')
+            ->exec();
 
         if(dao::isError()) return false;
 
