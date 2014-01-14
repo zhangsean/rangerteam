@@ -32,4 +32,18 @@ CREATE TABLE `crm_order` (
   `signedBy` varchar(50) NOT NULL,
   `closedReason` char(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `zt_action` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `objectType` varchar(30) NOT NULL DEFAULT '',
+  `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `product` varchar(255) NOT NULL,
+  `actor` varchar(30) NOT NULL DEFAULT '',
+  `action` varchar(30) NOT NULL DEFAULT '',
+  `date` datetime NOT NULL,
+  `comment` text NOT NULL,
+  `extra` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `date` (`date`),
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
