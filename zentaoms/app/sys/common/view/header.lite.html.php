@@ -34,6 +34,7 @@ $themeRoot = $webRoot . "theme/";
       js::import($jsRoot . 'my.js');
       css::import($themeRoot . 'zui/css/min.css');
       css::import($themeRoot . 'default/style.css');
+      css::import($themeRoot . 'default/admin.css');
   }
   else
   {
