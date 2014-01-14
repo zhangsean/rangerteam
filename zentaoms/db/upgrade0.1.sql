@@ -15,4 +15,21 @@ CREATE TABLE IF NOT EXISTS `crm_product` (
   `editedDate` datetime NOT NULL,
   `deleted` enum('0','1') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `crm_order` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `product` mediumint(8) unsigned NOT NULL,
+  `customer` mediumint(8) unsigned NOT NULL,
+  `plannedAmounts` float(12,2) NOT NULL,
+  `dealedAmounts` float(12,2) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `creatededBy` varchar(50) NOT NULL,
+  `createdDate` datetime NOT NULL,
+  `assignedTo` varchar(50) NOT NULL,
+  `assignedBy` varchar(50) NOT NULL,
+  `assignedDate` datetime NOT NULL,
+  `signedBy` varchar(50) NOT NULL,
+  `closedReason` char(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
