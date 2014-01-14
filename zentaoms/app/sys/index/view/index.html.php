@@ -78,7 +78,6 @@ var entries = new Array(
     type        : 'none',
     description : '<?php echo $lang->index->allEntries?>',
     display     : 'fullscreen',
-    systemapp   : true,
     menu        : false
 },
 {
@@ -87,7 +86,8 @@ var entries = new Array(
     title       : '<?php echo $lang->user->profile?>',
     type        : 'iframe',
     description : '<?php echo $lang->index->profile?>',
-    systemapp   : true,
+    display     : 'normal',
+    size        : 'default',
     menu        : false
 });
 

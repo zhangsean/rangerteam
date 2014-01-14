@@ -243,7 +243,9 @@
 
         this.toWindowHtml   = function()
         {
-            return settings.windowHtmlTemplate.format(this);
+            if(!this.html)
+                this.html = settings.windowHtmlTemplate.format(this);
+            return this.html;
         };
 
         this.toLeftBarShortcutHtml = function()
@@ -335,7 +337,8 @@
     function handleWinResized(winQuery)
     {
         var win  = getWinObj(winQuery);
-        win.find('.window-content').height(win.height() - settings.windowHeadheight);
+        var offset = win.hasClass('window-control-full') ? settings.windowHeadheight : 0;
+        win.find('.window-content').height(win.height() - offset);
     }
 
     /* show shortcuts of entries
