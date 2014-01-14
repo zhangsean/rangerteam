@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `crm_product` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `crm_order` (
+CREATE TABLE IF NOT EXISTS `crm_order` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `product` mediumint(8) unsigned NOT NULL,
   `customer` mediumint(8) unsigned NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `crm_order` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `zt_action` (
+CREATE TABLE IF NOT EXISTS `sys_action` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `objectType` varchar(30) NOT NULL DEFAULT '',
   `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -45,5 +45,5 @@ CREATE TABLE `zt_action` (
   `comment` text NOT NULL,
   `extra` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `date` (`date`),
+  KEY `date` (`date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
