@@ -37,7 +37,7 @@ class productModel extends model
      */
     public function getList($orderBy, $pager = null)
     {
-        $products = $this->dao->select('*')->from(TABLE_PRODUCT)->orderBy($orderBy)->page($pager)->fetchAll('id');
+        $products = $this->dao->select('*')->from(TABLE_PRODUCT)->where('deleted')->eq(0)->orderBy($orderBy)->page($pager)->fetchAll('id');
 
         if(!$products) return array();
 
@@ -57,12 +57,13 @@ class productModel extends model
             ->add('createdBy', $this->app->user->account)
             ->add('createDate', $now)
             ->add('editedDate', $now)
+            ->setDefault('deleted', 0)
             ->get();
 
         $this->dao->insert(TABLE_PRODUCT)
             ->data($product)
             ->autoCheck()
-            ->batchCheck($this->config->product->create->requiredFields, 'notempty')
+            ->batchCheck($this->config->product->require->create, 'notempty')
             ->exec();
 
         $productID = $this->dao->lastInsertID();
@@ -84,16 +85,31 @@ class productModel extends model
         $product = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
+            ->setDefault('deleted', 0)
             ->get();
 
         $this->dao->update(TABLE_PRODUCT)
             ->data($product)
             ->autoCheck()
-            ->batchCheck($this->config->product->edit->requiredFields, 'notempty')
+            ->batchCheck($this->config->product->require->edit, 'notempty')
             ->where('id')->eq($productID)
             ->exec();
 
         if(dao::isError()) return false;
+
+        return !dao::isError();
+    }
+
+    /**
+     * Delete a product.
+     * 
+     * @param  int      $productID 
+     * @access public
+     * @return void
+     */
+    public function delete($productID)
+    {
+        $this->dao->update(TABLE_PRODUCT)->set('deleted')->eq(1)->where('id')->eq($productID)->exec();
 
         return !dao::isError();
     }

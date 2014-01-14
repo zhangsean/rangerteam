@@ -4,9 +4,9 @@
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
- * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
+ * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     product
- * @version     $Id: zh-cn.php 7456 2013-12-25 01:31:56Z zhujinyong $
+ * @version     $Id$
  * @link        http://www.zentao.net
  */
 $lang->product->common    = '产品维护';
@@ -17,7 +17,7 @@ $lang->product->code       = '代号';
 $lang->product->type       = '类型';
 $lang->product->status     = '状态';
 $lang->product->summary    = '简介';
-$lang->product->createdBy  = '添加者';
+$lang->product->createBy   = '添加者';
 $lang->product->createDate = '添加时间';
 $lang->product->editedDate = '编辑时间';
 $lang->product->editedBy   = '编辑者';

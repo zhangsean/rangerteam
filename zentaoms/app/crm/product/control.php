@@ -87,4 +87,17 @@ class product extends control
 
         $this->display();
     }
+
+    /**
+     * Delete a product.
+     * 
+     * @param  int      $productID 
+     * @access public
+     * @return void
+     */
+    public function delete($productID)
+    {
+        if($this->product->delete($productID)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
 }
