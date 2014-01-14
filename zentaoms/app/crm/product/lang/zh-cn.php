@@ -22,10 +22,11 @@ $lang->product->createDate = '添加时间';
 $lang->product->editedDate = '编辑时间';
 $lang->product->editedBy   = '编辑者';
 
-$lang->product->list      = '产品列表';
-$lang->product->admin     = '维护产品';
-$lang->product->create    = '发布产品';
-$lang->product->edit      = '编辑产品';
+$lang->product->list       = '产品列表';
+$lang->product->admin      = '维护产品';
+$lang->product->create     = '发布产品';
+$lang->product->edit       = '编辑产品';
+$lang->product->custom     = '自定义';
 
 $lang->product->typeList['real']    = '实体类';
 $lang->product->typeList['service'] = '服务类';
