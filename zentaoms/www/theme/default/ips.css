@@ -78,18 +78,25 @@ button{
 
 /* left bar. */
 #leftBar{
-  width: 96px;
+  width: 60px;
   height: 100%;
   background-color: #314400;
   background-color: rgba(0,0,0,0.5);
   z-index: 50000;
 }
-#leftBar .dock-bottom{
-  bottom: 42px;
-}
 
 #avatar{
+  cursor: pointer;
+  padding-bottom: 10px;
+  position: relative;
   transition: all .3s;-o-transition: all .3s;-moz-transition: all .3s;-webkit-transition: all .3s;
+}
+#avatar img
+{
+  border-radius: 25px;
+  width: 50px;
+  height: 50px;
+  margin: 0 5px;
 }
 #avatar .avatar-name{
   position: absolute;
@@ -108,6 +115,7 @@ button{
   -moz-opacity:0.7;
   opacity: 0.7;
   transition: all .3s;-o-transition: all .3s;-moz-transition: all .3s;-webkit-transition: all .3s;
+  padding-bottom: 30px;
 }
 #avatar:hover .avatar-name{
   color: #fff;
@@ -121,7 +129,12 @@ button{
   display: block;
 }
 #apps-actions .bar-menu>li a{
-  font-size: 40px;
+  width: 60px;
+  height: 42px;
+  line-height: 42px;
+  padding: 0;
+  text-align: center;
+  font-size: 32px;
   text-align: center;
 }
 #apps-menu{
@@ -138,21 +151,21 @@ button{
 #apps-menu .bar-menu>li a{
   text-align: center;
   padding:10px;
-  width: 96px;
+  width: 60px;
 }
 #apps-menu .bar-menu>li img{
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
 }
 
 /* bottom bar. */
 #bottomBar{
   width: 100%;
   height: 42px;
-  padding-left: 100px;
+  padding-left: 64px;
   background-color: #1a3200;
   background-color: rgba(0,0,0,0.5);
-  z-index: 60000;
+  z-index: 40010;
 }
 #systemMenu{
   position: absolute;

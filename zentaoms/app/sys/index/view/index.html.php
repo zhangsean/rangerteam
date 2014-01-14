@@ -20,25 +20,18 @@ js::import($jsRoot . 'jquery/ips.js');
         <ul class='bar-menu'></ul>
       </div>
       <div class='dock-bottom'>
-        <div id='apps-actions'>
-          <ul class='bar-menu'>
-            <li><a class='app-btn' data-id='allapps' href='javascript:;' id='allAppsBtn' title='<?php echo $lang->index->allEntries?>'><i class='icon-th-list'></i></a></li>
-            <li><a href='admin.php?m=entry&f=create' target='_blank' id='addAppBtn' title='<?php echo $lang->index->addEntry?>'><i class='icon-plus-sign'></i></a></li>
-          </ul>
-        </div>
         <div id='avatar' title='<?php echo $lang->index->profile?>' class='app-btn' data-id='profile'>
           <img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''>
           <div class='avatar-name'><?php echo $app->user->realname?></div>
-        </div>        
+        </div>
+        <div id='apps-actions'>
+          <ul class='bar-menu'>
+            <li><a class='app-btn' data-id='allapps' href='javascript:;' id='allAppsBtn' title='<?php echo $lang->index->allEntries?>'><i class='icon-reorder'></i></a></li>
+          </ul>
+        </div>
       </div>
     </div>
     <div id='bottomBar' class='dock-bottom'>
-      <div id='systemMenu'>
-        <!-- <ul class='bar-menu'>
-          <li><a href='###' class='app-btn' title='<?php echo $lang->index->set?>' data-id='setting'><i class='icon-cog icon-large'></i></a></li>
-          <li><a href='###' class='app-btn' title='<?php echo $lang->index->theme?>' data-id='themes'><i class='icon-dashboard icon-large'></i></a></li>
-        </ul> -->
-      </div>
       <div id='taskbar'>
         <ul class='bar-menu'>
         </ul>

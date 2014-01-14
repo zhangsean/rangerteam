@@ -8,7 +8,7 @@
     var movingWindow     = null;
     var activedWindow    = null;
     var lastActiveWindow = null;
-    var desktopPos       = {x: 96, y: 0};
+    var desktopPos       = {x: 60, y: 0};
     var desktopSize      = null;
     var fullscreenMode   = false;
     var windowIdSeed     = 0;
