@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `sys_action` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `objectType` varchar(30) NOT NULL DEFAULT '',
   `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `product` varchar(255) NOT NULL,
+  `product` mediumint(8) NOT NULL,
   `actor` varchar(30) NOT NULL DEFAULT '',
   `action` varchar(30) NOT NULL DEFAULT '',
   `date` datetime NOT NULL,
