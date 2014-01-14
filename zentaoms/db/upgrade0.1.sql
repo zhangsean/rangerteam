@@ -18,20 +18,29 @@ CREATE TABLE IF NOT EXISTS `crm_product` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `crm_order` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
   `product` mediumint(8) unsigned NOT NULL,
   `customer` mediumint(8) unsigned NOT NULL,
-  `plannedAmounts` float(12,2) NOT NULL,
-  `dealedAmounts` float(12,2) NOT NULL,
+  `plan` float(12,2) NOT NULL,
+  `real` float(12,2) NOT NULL,
   `status` varchar(50) NOT NULL,
-  `creatededBy` varchar(50) NOT NULL,
+  `creatededBy` varchar(30) NOT NULL,
   `createdDate` datetime NOT NULL,
-  `assignedTo` varchar(50) NOT NULL,
-  `assignedBy` varchar(50) NOT NULL,
+  `assignedTo` varchar(30) NOT NULL,
+  `assignedBy` varchar(30) NOT NULL,
   `assignedDate` datetime NOT NULL,
   `signedBy` varchar(50) NOT NULL,
+  `signedDate` datetime NOT NULL,
+  `payedDate` datetime NOT NULL,
+  `closedBy` char(30) NOT NULL,
+  `closedDate` datetime NOT NULL,
   `closedReason` char(10) NOT NULL,
-  PRIMARY KEY (`id`)
+  `closedNote` text NOT NULL,
+  `activatedBy` char(30) NOT NULL,
+  `activatedDate` datetime NOT NULL,
+  `contactedBy` char(30) NOT NULL,
+  `contactedDate` datetime NOT NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `sys_action` (
