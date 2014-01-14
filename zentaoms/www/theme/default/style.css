@@ -8,6 +8,7 @@
 * @version     $Id$
 * @link        http://www.zentao.net
 */
+body {padding-top:70px; padding-bottom:70px;background: #fff;}
 
 /* --- LAYOUT SETTING --- */
 /* containers. */
