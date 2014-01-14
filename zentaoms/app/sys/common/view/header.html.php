@@ -10,11 +10,8 @@
     </button>
     <?php echo html::a($this->createLink($this->config->default->module), RUN_MODE == 'front' ? $lang->app->name : $lang->zentaoms, "class='navbar-brand'");?>
   </div>
-  <div class='collapse navbar-collapse navbar-ex1-collapse'>
+  <div class='collapse navbar-collapse'>
     <?php echo commonModel::createMainMenu($this->moduleName);?>
-    <ul class='nav navbar-nav' id='navbarSwitcher'>
-      <li><a href='###'><i class='icon-chevron-sign-right icon-large'></i></a></li>
-    </ul>
     <?php if(RUN_MODE == 'admin') echo commonModel::createManagerMenu();?>
   </div>
 </nav>
