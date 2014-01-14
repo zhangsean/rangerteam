@@ -191,6 +191,7 @@ $lang->error->float        = '<strong>%s</strong>应当是数字，可以是小�
 $lang->error->email        = '<strong>%s</strong>应当为合法的EMAIL。';
 $lang->error->URL          = '<strong>%s</strong>应当为合法的URL。';
 $lang->error->date         = '<strong>%s</strong>应当为合法的日期。';
+$lang->error->code         = '<strong>%s</strong>应当为字母和数字的组合。';
 $lang->error->account      = '<strong>%s</strong>应当为字母和数字的组合，至少三位';
 $lang->error->passwordsame = '两次密码应当相等。';
 $lang->error->passwordrule = '密码应该符合规则，长度至少为六位。';

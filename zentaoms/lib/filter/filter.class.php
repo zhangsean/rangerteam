@@ -231,6 +231,19 @@ class validater
     }
 
     /**
+     * Check code.
+     * 
+     * @param  string $var 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function checkCode($var)
+    {
+        return self::checkREG($var, '|^[a-zA-Z0-9_]{1}[a-zA-Z0-9_]{0,}[a-zA-Z0-9_]{1}$|');
+    }
+
+    /**
      * Check captcha.
      * 
      * @param  mixed    $var 
