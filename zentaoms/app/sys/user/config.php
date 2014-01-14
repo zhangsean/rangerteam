@@ -9,14 +9,10 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-$config->user->register = new stdclass();
-$config->user->register->requiredFields = 'account,realname,email,password1,role';
-
-$config->user->edit = new stdclass();
-$config->user->edit->requiredFields = 'realname,email,role';
-
-$config->user->create = new stdclass();
-$config->user->create->requiredFields = $config->user->register->requiredFields;
+$config->user->require = new stdclass();
+$config->user->require->register = 'account,realname,email,password1,role';
+$config->user->require->edit     = 'realname,email,role';
+$config->user->require->create   = $config->user->require->register;
 
 $config->user->default = new stdclass();
 $config->user->default->module = RUN_MODE == 'front' ? 'index' : 'admin';

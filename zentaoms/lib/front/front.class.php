@@ -632,7 +632,7 @@ EOT;
         $clientLang      = $app->getClientLang();
         $runMode         = RUN_MODE;
         $requiredFields  = '';
-        if(isset($config->$moduleName->$methodName->requiredFields)) $requiredFields = str_replace(' ', '', $config->$moduleName->$methodName->requiredFields);
+        if(isset($config->$moduleName->require->$methodName)) $requiredFields = str_replace(' ', '', $config->$moduleName->require->$methodName);
 
         $jsConfig = new stdclass();
         $jsConfig->webRoot        = $config->webRoot;

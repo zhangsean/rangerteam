@@ -1,6 +1,6 @@
 <?php
-$config->tree->edit = new stdclass();
-$config->tree->edit->requiredFields = 'name';
+$config->tree->require = new stdclass();
+$config->tree->require->edit = 'name';
 
 $config->tree->editor = new stdclass();
 $config->tree->editor->edit = array('id' => 'desc', 'tools' => 'simple');

@@ -133,7 +133,7 @@ class userModel extends model
         $this->dao->insert(TABLE_USER)
             ->data($user, $skip = 'password1,password2')
             ->autoCheck()
-            ->batchCheck($this->config->user->register->requiredFields, 'notempty')
+            ->batchCheck($this->config->user->require->register, 'notempty')
             ->check('account', 'unique')
             ->check('account', 'account')
             ->check('email', 'email')
@@ -165,14 +165,14 @@ class userModel extends model
         {
             $user = $user->remove('admin');
             /* Remove check for role in front. */
-            $this->config->user->edit->requiredFields = str_replace(',role', '', $this->config->user->edit->requiredFields);
+            $this->config->user->require->edit = str_replace(',role', '', $this->config->user->require->edit);
         }
         $user = $user->get();
 
         return $this->dao->update(TABLE_USER)
             ->data($user, $skip = 'password1,password2')
             ->autoCheck()
-            ->batchCheck($this->config->user->edit->requiredFields, 'notempty')
+            ->batchCheck($this->config->user->require->edit, 'notempty')
             ->check('email', 'email')
             ->check('email', 'unique', "account!='$account'")
             ->checkIF($this->post->gtalk != false, 'gtalk', 'email')

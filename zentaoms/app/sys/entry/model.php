@@ -64,7 +64,7 @@ class entryModel extends model
     public function create()
     {
         $entry = fixer::input('post')->get();
-        $this->dao->insert(TABLE_ENTRY)->data($entry)->autoCheck()->batchCheck($this->config->entry->create->requiredFields, 'notempty')->exec();
+        $this->dao->insert(TABLE_ENTRY)->data($entry)->autoCheck()->batchCheck($this->config->entry->require->create, 'notempty')->exec();
 
         if(dao::isError()) return false;
 
@@ -85,7 +85,7 @@ class entryModel extends model
         $entry    = fixer::input('post')->get();
         if(!isset($entry->visible)) $entry->visible = 0;
         unset($entry->logo);
-        $this->dao->update(TABLE_ENTRY)->data($entry)->autoCheck()->batchCheck($this->config->entry->edit->requiredFields, 'notempty')->where('code')->eq($code)->exec();
+        $this->dao->update(TABLE_ENTRY)->data($entry)->autoCheck()->batchCheck($this->config->entry->require->edit, 'notempty')->where('code')->eq($code)->exec();
         return $oldEntry->id;
     }
 
