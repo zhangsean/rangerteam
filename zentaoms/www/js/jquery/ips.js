@@ -3,8 +3,6 @@
 {
     "use strict";
 
-    var debug            = true;
-
     /* variables */
     var movingWindow     = null;
     var activedWindow    = null;
@@ -68,7 +66,6 @@
     function getNextDefaultWinPos()
     {
         defaultWindowPos = {x: defaultWindowPos.x + settings.defaultWinPosOffset, y: defaultWindowPos.y + settings.defaultWinPosOffset};
-        // console.log('x:' +defaultWindowPos.x+',y:'+defaultWindowPos.y);
         return defaultWindowPos;
     }
 
@@ -81,16 +78,6 @@
         defaults.init(); // init default settings
 
         $.extend(settings, defaults, options);
-
-        /* test: print settings */
-        // if(debug)
-        // {
-        //     console.log('> settings | length:' + Object.getOwnPropertyNames(settings).length);
-        //     for (var key in settings)
-        //     {
-        //         console.log('  * ' + key + ': ' + settings[key]);
-        //     }
-        // }
     };
 
     /*
@@ -110,33 +97,6 @@
             et.init(config);
 
             entries[config.id] = et;
-        }
-
-        /* test print entrys config */
-        if(debug)
-        {
-            console.log('> entries | length:' + Object.getOwnPropertyNames(entries).length);
-            for (var key in entries)
-            {
-                var e = entries[key];
-                console.log('  * > ' + key + ':');
-                for(var ikey in e)
-                {
-                    if(!$.isFunction(e[ikey]))
-                    {
-                        var value = e[ikey];
-                        if(ikey == 'size')
-                        {
-                            value = '{width: ' + value.width + ', height:' + value.height + '}';
-                        }
-                        else if(ikey == 'position')
-                        {
-                            value = '{x: ' + value.x + ', y:' + value.y + '}';
-                        }
-                        console.log('        * ' + ikey + ': ' + value);
-                    }
-                }
-            }
         }
     };
 
@@ -353,7 +313,6 @@
         /* refresh desktop size */
         var desktop = $('#desktop');
         desktopSize = {width: desktop.width() - desktopPos.x, height: desktop.height() - desktopPos.y - settings.bottomBarHeight};
-        if(debug) console.log('> desktopSize:' + desktopSize.width + "," + desktopSize.height);
         
         /* refresh app menu size */
         var menu = $('#apps-menu');
@@ -456,8 +415,6 @@
 
     function openWindow(entry)
     {
-        if(debug) console.log('open window：' + entry.title + "," + entry.id);
-
         var entryWin = $('#' + entry.idstr);
 
         if(entryWin.length < 1)
