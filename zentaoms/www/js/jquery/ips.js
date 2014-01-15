@@ -274,10 +274,22 @@
      *
      * @return void
      */
-    function bindEvents()
+    function bindWindowsEvents()
     {
         onWindowResize();
+
         handleWindowResize();
+
+        onShowDeskClick();
+    }
+
+    function onShowDeskClick()
+    {
+        $('#showDesk').click(function()
+        {
+           $('#deskContainer').toggleClass('hide-windows');
+           $('#showDesk .icon-check-empty').toggleClass('icon-sign-blank');
+        });
     }
 
     /* make the window movable with class '.movable' or '.window-movable'
@@ -451,7 +463,7 @@
             reloadWindow(entry.idstr);
             activeWindow(entry.idstr);
         }
-        else if(entryWin.hasClass('window-active'))
+        else if(entryWin.hasClass('window-active') && (!$('#deskContainer').hasClass('hide-windows')))
         {
             toggleShowWindow(entryWin);
         }
@@ -459,6 +471,9 @@
         {
             showWindow(entryWin);
         }
+
+        $('#deskContainer').removeClass('hide-windows');
+        $('#showDesk .icon-check-empty').removeClass('icon-sign-blank');
     }
 
     function createWindow(entry)
@@ -525,7 +540,6 @@
     function showWindow(winQuery)
     {
         var win = getWinObj(winQuery);
-        console.log('showWindow：'+win.attr('data-id'));
         if(win.hasClass('window-min'))
         {
             win.fadeIn(settings.animateSpeed).removeClass('window-min');
@@ -707,7 +721,7 @@
         initSettings(options);
 
         /* bind window events */
-        bindEvents();
+        bindWindowsEvents();
 
         initEntries(entriesOptions);
 

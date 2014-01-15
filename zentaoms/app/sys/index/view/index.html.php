@@ -36,6 +36,11 @@ js::import($jsRoot . 'jquery/ips.js');
         <ul class='bar-menu'>
         </ul>
       </div>
+      <div id='bottomRightBar' class='dock-right'>
+        <ul class='bar-menu'>
+          <li><a id='showDesk' href='javascript:;' title='<?php echo $lang->index->showDesk; ?>'><i class='icon-check-empty'></i></a></li>
+        </ul>
+      </div>
     </div>
     <div id='deskContainer'>
       <div id='win-allapps' class='window window-fullscreen window-min' data-id='allapps'>
@@ -46,8 +51,7 @@ js::import($jsRoot . 'jquery/ips.js');
                 <a href='###' id='closeAllApps' class='min-win'><i class='icon-circle-arrow-left'></i></a>
               </div>
               <div class='col-md-3'>
-                <h4>
-                <i class='icon-th-list'></i> <?php echo $lang->index->allEntries?> &nbsp;<small class='muted'><?php echo $lang->index->countEntries?></small></h4>
+                <h4><i class='icon-th-list'></i> <?php echo $lang->index->allEntries?> &nbsp;<small class='muted'><?php echo $lang->index->countEntries?></small></h4>
               </div>
               <div class='col-md-4'>
                 <div class='input-group'>

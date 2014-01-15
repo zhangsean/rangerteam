@@ -153,12 +153,12 @@ button {outline: none; border: none; background-color: transparent;}
     font-size: 18px;
     height: 42px;
 }
-#taskbar .bar-menu li
+#bottomBar .bar-menu li
 {
+    min-width: 41px;
+    text-align: center;
     line-height: 32px;
     font-size: 16px;
-    min-width: 120px;
-    max-width: 300px;
     height: 42px;
     margin-right:4px;
     overflow: hidden;
@@ -166,12 +166,32 @@ button {outline: none; border: none; background-color: transparent;}
     background-color: rgba(0,0,0,0.20);    
     -o-transition: width 1s;-moz-transition: width 1s;-webkit-transition: width 1s;transition: width 1s;
 }
-#taskbar .bar-menu > li > a > img
+#taskbar .bar-menu li
+{
+    text-align: left;
+    min-width: 120px;
+    max-width: 300px;
+}
+#bottomBar .bar-menu > li > a > img
 {
     width: 20px;
     height: 20px;
     margin-right: 5px;
     margin-top: -2px;
+}
+#bottomBar .bar-menu > li > a > [class^="icon-"],
+#bottomBar .bar-menu > li > a > [class*=" icon-"]
+{
+    font-size: 28px;
+}
+
+#bottomRightBar
+{
+  padding-left: 4px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-left: 1px solid rgba(255,255,255,0.10);
 }
 
 /* desk container. */
@@ -182,6 +202,11 @@ button {outline: none; border: none; background-color: transparent;}
     height: 100%;
     overflow: hidden;
     z-index: 50;
+}
+
+#deskContainer.hide-windows .window
+{
+  display: none!important;
 }
 
 /* window. */
@@ -209,9 +234,9 @@ button {outline: none; border: none; background-color: transparent;}
 
 .window-control-simple .window-head {position: absolute; height: 0; background:none; border-bottom: none; overflow: visible; width: 100%;}
 .window-control-simple .window-head > img {position: absolute; left: 10px; top: 8px; height: 32px; width: 32px; z-index: 99999}
-.window-control-simple .window-head > ul {position: absolute; right: 10px; top: 10px; z-index: 99999;}
-.window-control-simple .window-head ul li button {border-radius: 0; font-size: 16px; border-radius: 4px}
-.window-control-simple .window-head ul li button.close-win {padding:2px 15px}
+.window-control-simple .window-head > ul {position: absolute; right: 10px; top: 8px; z-index: 99999;}
+.window-control-simple .window-head ul li button {padding: 5px 10px; border-radius: 0; font-size: 16px; border-radius: 4px}
+.window-control-simple .window-head ul li button.close-win {padding:5px 15px}
 
 .window-active
 {

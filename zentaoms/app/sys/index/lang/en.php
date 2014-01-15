@@ -14,5 +14,6 @@ $lang->index->addEntry   = 'Add';
 $lang->index->profile    = 'Profile';
 $lang->index->set        = 'Setting';
 $lang->index->theme      = 'Theme';
+$lang->index->showDesk   = 'Show Desk';
 
 $lang->index->countEntries = "A total of <span class='entries-count'></span> entries";
