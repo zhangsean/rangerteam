@@ -545,7 +545,7 @@ class helper
             {
                 if(!is_object($record))
                 {
-                    $config2Merge->{$record->key} = $record->value;
+                    $config2Merge->{$item->key} = $item->value;
                     break;
                 }
 
