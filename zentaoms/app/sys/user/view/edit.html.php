@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
 <div class="page-user-control">
-  <div class='panel'>
+  <div class='panel panel-pure'>
     <div class='panel-body'>
       <form method='post' id='ajaxForm' class='form-inline form-horizontal'>
         <table class='table table-form'>
