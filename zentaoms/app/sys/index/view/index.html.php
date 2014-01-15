@@ -89,7 +89,8 @@ var entries = new Array(
     display     : 'normal',
     size        : 'default',
     menu        : false,
-    position    : 'center'
+    position    : 'center',
+    control     : 'full'
 });
 
 <?php echo $allEntries;?>
