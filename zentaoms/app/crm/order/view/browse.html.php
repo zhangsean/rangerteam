@@ -39,7 +39,7 @@
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='6'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.html.php';?>
