@@ -166,11 +166,6 @@ $lang->article->menu->admin  = '浏览|article|admin|';
 $lang->article->menu->tree   = '模块|tree|browse|type=article';
 $lang->article->menu->create = array('link' => '添加文章|article|create|type=article', 'float' => 'right');
 
-$lang->product = new stdclass();
-$lang->product->menu = new stdclass();
-$lang->product->menu->browse = array('link' => '产品列表|product|admin|', 'alias' => 'edit');
-$lang->product->menu->create = '发布产品|product|create|';
-
 $lang->menuGroups = new stdclass();
 
 /* Menu of mail module. */

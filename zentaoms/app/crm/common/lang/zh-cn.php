@@ -27,3 +27,15 @@ $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
 $lang->customer->menu->browse = array('link' => '客户列表|customer|admin|', 'alias' => 'edit');
 $lang->customer->menu->create = '添加客户|customer|create|type=customer';
+
+/* Menu of product module. */
+$lang->product = new stdclass();
+$lang->product->menu = new stdclass();
+$lang->product->menu->browse = array('link' => '产品列表|product|admin|', 'alias' => 'edit');
+$lang->product->menu->create = '发布产品|product|create|';
+
+/* Menu of order module. */
+$lang->order = new stdclass();
+$lang->order->menu = new stdclass();
+$lang->order->menu->browse = array('link' => '订单列表|order|browse|', 'alias' => 'edit');
+$lang->order->menu->create = '创建订单|order|create|';
