@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `crm_order` (
   `plan` float(12,2) NOT NULL,
   `real` float(12,2) NOT NULL,
   `status` char(50) NOT NULL,
-  `creatededBy` char(30) NOT NULL,
+  `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `assignedTo` char(30) NOT NULL,
   `assignedBy` char(30) NOT NULL,
