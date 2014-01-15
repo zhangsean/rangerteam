@@ -57,7 +57,7 @@ class product extends control
         {
             $productID = $this->product->create();       
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
         }
 
         $this->view->title = $this->lang->product->create;

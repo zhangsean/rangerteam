@@ -55,7 +55,7 @@ class productModel extends model
         $now = helper::now();
         $product = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
-            ->add('createDate', $now)
+            ->add('createdDate', $now)
             ->add('editedDate', $now)
             ->setDefault('deleted', 0)
             ->get();

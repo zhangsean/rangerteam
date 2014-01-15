@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `crm_product` (
   `status` varchar(10) NOT NULL,
   `summary` text NOT NULL,
   `createdBy` varchar(60) NOT NULL,
-  `createDate` datetime NOT NULL,
+  `createdDate` datetime NOT NULL,
   `editedBy` varchar(60) NOT NULL,
   `editedDate` datetime NOT NULL,
   `deleted` enum('0','1') NOT NULL,
