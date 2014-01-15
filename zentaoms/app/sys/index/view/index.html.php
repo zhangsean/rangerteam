@@ -88,7 +88,8 @@ var entries = new Array(
     description : '<?php echo $lang->index->profile?>',
     display     : 'normal',
     size        : 'default',
-    menu        : false
+    menu        : false,
+    position    : 'center'
 });
 
 <?php echo $allEntries;?>
