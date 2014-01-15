@@ -32,6 +32,7 @@ $lang->order->list   = '订单列表';
 $lang->order->browse = '维护订单';
 $lang->order->create = '创建订单';
 $lang->order->edit   = '编辑订单';
+$lang->order->view   = '查看';
 
 $lang->order->statusList['normal']   = '正常';
 $lang->order->statusList['assigned'] = '已指派';
