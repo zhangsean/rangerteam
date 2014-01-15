@@ -9,7 +9,7 @@
       <tr class='text-center'>
         <th style='width: 60px'><?php echo $lang->product->id;?></th>
         <th><?php echo $lang->product->name;?></th>
-        <th style='width: 160px'><?php echo $lang->product->createDate;?></th>
+        <th style='width: 160px'><?php echo $lang->product->createdDate;?></th>
         <th style='width: 60px'><?php echo $lang->product->type;?></th>
         <th style='width: 60px'><?php echo $lang->product->status;?></th>
         <th style='width: 200px'><?php echo $lang->actions;?></th>
@@ -20,7 +20,7 @@
       <tr class='text-center'>
         <td><?php echo $product->id;?></td>
         <td class='text-left'><?php echo $product->name;?></td>
-        <td><?php echo $product->createDate;?></td>
+        <td><?php echo $product->createdDate;?></td>
         <td><?php echo $lang->product->typeList[$product->type];?></td>
         <td><?php echo $lang->product->statusList[$product->status];?></td>
         <td>
