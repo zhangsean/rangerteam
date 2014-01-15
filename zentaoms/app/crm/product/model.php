@@ -87,6 +87,9 @@ class productModel extends model
      */
     public function update($productID)
     {
+        $product = $this->getByID($productID);
+        $code    = $product->code;
+
         $product = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
@@ -103,6 +106,12 @@ class productModel extends model
             ->exec();
 
         if(dao::isError()) return false;
+
+        if($code != $product->code)
+        {
+            $sql = "RENAME TABLE `crm_order_{$code}` TO `crm_order_{$product->code}`" ;
+            if(!$this->dbh->query($sql)) return false;
+        }
 
         return !dao::isError();
     }
