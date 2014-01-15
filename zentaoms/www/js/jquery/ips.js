@@ -33,15 +33,27 @@
         safeCloseTip                  : '确认要关闭　【{0}】 吗？',
         entryNotFindTip               : '应用没有找到！',
         busyTip                       : '应用正忙，请稍候...',
-        windowHtmlTemplate            : "<div id='{idstr}' class='window {cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}'><div class='window-head'><img src='{icon}' alt=''><strong title='{desc}'>{title}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-content'></div></div>",
+        reloadWindowText              : '刷新窗口内容',
+        closeWindowText               : '关闭应用窗口',
+        minWindowText                 : '隐藏窗口',
+        showWindowText                : '显示窗口',
+        windowHtmlTemplate            : "<div id='{idstr}' class='window {cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}'><div class='window-head'><img src='{icon}' alt=''><strong title='{desc}'>{title}</strong><ul><li><button class='reload-win' data-toggle='tooltip' data-placement='bottom' title='$reloadWindowText'><i class='icon-repeat'></i></button></li><li><button class='min-win' data-toggle='tooltip' data-placement='bottom' title='$minWindowText'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win' data-toggle='tooltip' data-placement='bottom' title='$closeWindowText'><i class='icon-remove'></i></button></li></ul></div><div class='window-content'></div></div>",
         frameHtmlTemplate             : "<iframe id='iframe-{idstr}' name='iframe-{idstr}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
         leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a data-toggle="tooltip" data-placement="right"  href="javascript:;" class="app-btn" title="{title}" data-id="{id}"><img src="{icon}" alt=""></a></li>',
-        taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><a data-toggle="tooltip" data-placement="top"  href="javascript:;" class="app-btn" title="{desc}" data-id="{id}"><img src="{icon}" alt="">{title}</a></li>',
+        taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><a data-toggle="tooltip" data-placement="top"  href="javascript:;" class="app-btn" title="{desc}" data-id="{id}"><img src="{icon}" alt="">{title}</a><div class="actions"><button class="reload-win" data-toggle="tooltip" data-placement="top" title="$reloadWindowText"><i class="icon-repeat"></i></button><button class="close-win" data-toggle="tooltip" data-placement="top" title="$closeWindowText"><i class="icon-remove"></i></button></div></li>',
         entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{desc}" data-id="{id}"><img src="{icon}" alt="">{title}</a></li>',
 
         init                          : function() // init the default
         {
             this.entryIconRoot = this.webRoot + this.entryIconRoot;
+            this.windowHtmlTemplate = this.windowHtmlTemplate
+                .replace('$reloadWindowText', this.reloadWindowText)
+                .replace('$minWindowText', this.minWindowText)
+                .replace('$closeWindowText', this.closeWindowText);
+            this.taskBarShortcutHtmlTemplate = this.taskBarShortcutHtmlTemplate
+                .replace('$reloadWindowText', this.reloadWindowText)
+                .replace('$minWindowText', this.minWindowText)
+                .replace('$closeWindowText', this.closeWindowText);
         }
     };
 
@@ -497,7 +509,9 @@
             event.stopPropagation();
         }).on('click', '.close-win', function(event) // close-win
         {
-            closeWindow($(this).closest('.window'));
+            var win = $(this).closest('.window');
+            if(!win.length) win = $(this).closest('.app-btn').attr('data-id');
+            closeWindow(win);
             event.preventDefault();
             event.stopPropagation();
         }).on('click', '.min-win', function(event) // min-win
@@ -507,7 +521,9 @@
             event.stopPropagation();
         }).on('click', '.reload-win', function(event) // reload window content
         {
-            reloadWindow($(this).closest('.window'));
+            var win = $(this).closest('.window');
+            if(!win.length) win = $(this).closest('.app-btn').attr('data-id');
+            reloadWindow(win);
             event.preventDefault();
             event.stopPropagation();
         });
