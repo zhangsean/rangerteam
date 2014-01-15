@@ -30,9 +30,10 @@
         <td>
           <?php
           echo html::a($this->createLink('order', 'edit',   "orderID=$order->id"), $lang->edit);
-          echo html::a($this->createLink('order', 'assign',   "orderID=$order->id"), $lang->order->assign);
+          echo html::a($this->createLink('order', 'assign', "orderID=$order->id"), $lang->order->assign);
           if($order->status != 'closed') echo html::a($this->createLink('order', 'close', "orderID=$order->id"), $lang->order->close);
           if($order->status == 'closed') echo html::a($this->createLink('order', 'activate', "orderID=$order->id"), $lang->order->activate);
+          echo html::a($this->createLink('order', 'view',   "orderID=$order->id"), $lang->order->view);
           ?>
         </td>
       </tr>

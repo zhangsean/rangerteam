@@ -19,10 +19,6 @@
           <td><?php echo html::input('plan', '', "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->order->realedAmounts;?></th>
-          <td><?php echo html::input('real', '', "class='form-control'");?></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->order->assignedTo;?></th>
           <td><?php echo html::input('assignedTo', '', "class='form-control'");?></td>
         </tr>
