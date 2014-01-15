@@ -141,6 +141,9 @@
             this.idstr      = settings.windowidstrTemplate.format(this.id);
             this.cssclass   = 'window-movable';
 
+            /* if no icon setting here, then load icon with the default rule */
+            if(!this.icon) this.icon = settings.entryIconRoot + 'entry-' + this.id + '.png';
+
             /* window open type */
             switch(this.open)
             {
@@ -215,8 +218,10 @@
                 case 'none':
                     this.cssclass += ' window-control-none';
                     break;
+                case 'full':
+                    this.cssclass += ' window-control-full';
+                    break;
             }
-
         };
 
         this.getDefaults = function(entryId)
@@ -233,7 +238,7 @@
                 display       : 'fixed',
                 size          : 'max',
                 position      : 'default',
-                icon          : settings.entryIconRoot + 'entry-' + this.id + '.png',
+                icon          : null,
                 cssclass      : '',
                 menu          : true // wethear show in left menu bar
             };
