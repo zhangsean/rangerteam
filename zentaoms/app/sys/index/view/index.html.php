@@ -20,13 +20,13 @@ js::import($jsRoot . 'jquery/ips.js');
         <ul class='bar-menu'></ul>
       </div>
       <div class='dock-bottom'>
-        <div id='avatar' title='<?php echo $lang->index->profile?>' class='app-btn' data-id='profile'>
+        <div id='avatar' data-toggle='tooltip' data-placement='right' title='<?php echo $lang->index->profile?>' class='app-btn' data-id='profile'>
           <img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''>
           <div class='avatar-name'><?php echo $app->user->realname?></div>
         </div>
         <div id='apps-actions'>
           <ul class='bar-menu'>
-            <li><a class='app-btn' data-id='allapps' href='javascript:;' id='allAppsBtn' title='<?php echo $lang->index->allEntries?>'><i class='icon-reorder'></i></a></li>
+            <li><a class='app-btn' data-toggle='tooltip' data-placement='right' data-id='allapps' href='javascript:;' id='allAppsBtn' title='<?php echo $lang->index->allEntries?>'><i class='icon-reorder'></i></a></li>
           </ul>
         </div>
       </div>
@@ -38,7 +38,7 @@ js::import($jsRoot . 'jquery/ips.js');
       </div>
       <div id='bottomRightBar' class='dock-right'>
         <ul class='bar-menu'>
-          <li><a id='showDesk' href='javascript:;' title='<?php echo $lang->index->showDesk; ?>'><i class='icon-check-empty'></i></a></li>
+          <li><a id='showDesk' href='javascript:;' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'><i class='icon-check-empty'></i></a></li>
         </ul>
       </div>
     </div>
@@ -80,7 +80,7 @@ var entries = new Array(
     id          : 'allapps',
     title       : '<?php echo $lang->index->allEntries?>',
     type        : 'none',
-    description : '<?php echo $lang->index->allEntries?>',
+    desc        : '<?php echo $lang->index->allEntries?>',
     display     : 'fullscreen',
     menu        : false
 },
@@ -89,12 +89,12 @@ var entries = new Array(
     url         : '<?php echo $this->createLink('user', 'profile')?>',
     title       : '<?php echo $lang->user->profile?>',
     type        : 'iframe',
-    description : '<?php echo $lang->index->profile?>',
+    desc        : '<?php echo $lang->index->profile?>',
     display     : 'fixed',
     size        : 'default',
     menu        : false,
     position    : 'center',
-    control     : 'full'
+    control     : 'full',
 });
 
 <?php echo $allEntries;?>
