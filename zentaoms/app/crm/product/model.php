@@ -35,13 +35,25 @@ class productModel extends model
      * @access public
      * @return array
      */
-    public function getList($orderBy, $pager = null)
+    public function getList($orderBy = 'id_desc', $pager = null)
     {
         $products = $this->dao->select('*')->from(TABLE_PRODUCT)->where('deleted')->eq(0)->orderBy($orderBy)->page($pager)->fetchAll('id');
 
         if(!$products) return array();
 
         return $products;
+    }
+
+    /** 
+     * Get product pairs.
+     * 
+     * @param  string  $orderBy 
+     * @access public
+     * @return array
+     */
+    public function getPairs($orderBy = 'id_desc')
+    {
+        return $this->dao->select('id, name')->from(TABLE_PRODUCT)->where('deleted')->eq(0)->orderBy($orderBy)->fetchPairs('id');
     }
 
     /**
