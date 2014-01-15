@@ -280,6 +280,47 @@
         handleWindowResize();
     }
 
+    /* make the window movable with class '.movable' or '.window-movable'
+     *
+     * @return void
+     */
+    function initWindowMovable()
+    {
+        $(document).on('mousedown', '.movable,.window-movable .window-head', function(event)
+        {
+            var win = $(this).closest('.window:not(.window-max)');
+            if(win.length<1)
+            {
+                return;
+            }
+            movingWindow = win;
+            var mwPos = movingWindow.position();
+            movingWindow.data('mouseOffset', {x: event.pageX-mwPos.left, y: event.pageY-mwPos.top}).addClass('window-moving');
+            $(document).bind('mousemove',mouseMove).bind('mouseup',mouseUp)
+            event.preventDefault();
+        });
+
+        function mouseUp()
+        {
+            $('.window.window-moving').removeClass('window-moving');
+            movingWindow = null;
+            $(document).unbind('mousemove', mouseMove).unbind('mouseup', mouseUp)
+        }
+
+        function mouseMove(event)
+        {
+            if(movingWindow && movingWindow.hasClass('window-moving'))
+            {
+                var offset = movingWindow.data('mouseOffset');
+                movingWindow.css(
+                {
+                    left : event.pageX-offset.x,
+                    top : event.pageY-offset.y
+                });
+            }
+        }
+    }
+
     /* event: handle varables when window size changed
      *
      * @return void
@@ -675,6 +716,7 @@
         bindShortcutsEvents();
 
         initWindowActions();
+        initWindowMovable();
     }
 
     /* make jquery object call the ips interface manager */

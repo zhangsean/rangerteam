@@ -86,7 +86,7 @@ var entries = new Array(
     title       : '<?php echo $lang->user->profile?>',
     type        : 'iframe',
     description : '<?php echo $lang->index->profile?>',
-    display     : 'normal',
+    display     : 'fixed',
     size        : 'default',
     menu        : false,
     position    : 'center',
