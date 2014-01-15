@@ -252,6 +252,20 @@
         handleWindowResize();
 
         onShowDeskClick();
+
+        onF5Click();
+    }
+
+    function onF5Click()
+    {
+        $(document).keydown(function(event)
+        {
+            if(event.keyCode == 116)
+            {
+                reloadWindow();
+                return false;
+            }
+        });
     }
 
     function onShowDeskClick()
