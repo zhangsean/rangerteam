@@ -260,8 +260,7 @@
 
         this.toWindowHtml   = function()
         {
-            if(!this.html)
-                this.html = settings.windowHtmlTemplate.format(this);
+            this.html = settings.windowHtmlTemplate.format(this);
             return this.html;
         };
 
@@ -378,7 +377,6 @@
             handleWinResized(win);
         });
     }
-
 
     function onWindowResize()
     {
@@ -639,12 +637,22 @@
         if(win.hasClass('window-safeclose') && (!confirm(settings.safeCloseTip.format(win.find('.window-head strong').text()))))
             return;
 
+        var id       = win.attr('data-id');
+
+        /* save the last position and size */
+        var entry    = entries[id];
+        entry.left   = win.position().left;
+        entry.top    = win.position().top;
+        entry.width  = win.width();
+        entry.height = win.height();
+
         win.fadeOut(settings.animateSpeed, function(){
-            var id = win.attr('data-id');
             $('.app-btn[data-id="' + id + '"]').removeClass('open').removeClass('active');
             $('#s-task-' + id).remove();
-            win.remove(); 
+            win.remove();
         });
+
+        $('.tooltip').remove();
         activeWindow(lastActiveWindow);
     }
 
@@ -726,7 +734,6 @@
             $("#desktop").removeClass('fullscreen-mode');
         }
     }
-
 
     /* start ips
      *
