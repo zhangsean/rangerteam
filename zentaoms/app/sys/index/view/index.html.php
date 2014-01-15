@@ -20,14 +20,14 @@ js::import($jsRoot . 'jquery/ips.js');
         <ul class='bar-menu'></ul>
       </div>
       <div class='dock-bottom'>
-        <div id='avatar' data-toggle='tooltip' data-placement='right' title='<?php echo $lang->index->profile?>' class='app-btn' data-id='profile'>
-          <img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''>
-          <div class='avatar-name'><?php echo $app->user->realname?></div>
-        </div>
         <div id='apps-actions'>
           <ul class='bar-menu'>
             <li><a class='app-btn' data-toggle='tooltip' data-placement='right' data-id='allapps' href='javascript:;' id='allAppsBtn' title='<?php echo $lang->index->allEntries?>'><i class='icon-reorder'></i></a></li>
           </ul>
+        </div>
+        <div id='avatar' data-toggle='tooltip' data-placement='right' title='<?php echo $lang->index->profile?>' class='app-btn' data-id='profile'>
+          <img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''>
+          <div class='avatar-name'><?php echo $app->user->realname?></div>
         </div>
       </div>
     </div>

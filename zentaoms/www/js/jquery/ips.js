@@ -25,8 +25,8 @@
         webRoot                       : '/',
         animateSpeed                  : 200,
         entryIconRoot                 : 'theme/default/images/ips/',
-        windowHeadheight              : 36, // the height of window head bar
-        bottomBarHeight               : 42, // the height of desk bottom bar
+        windowHeadheight              : 30, // the height of window head bar
+        bottomBarHeight               : 36, // the height of desk bottom bar
         defaultWinPosOffset           : 30,
         defaultWindowSize             : {width:700,height:538},
         windowidstrTemplate           : 'win-{0}',

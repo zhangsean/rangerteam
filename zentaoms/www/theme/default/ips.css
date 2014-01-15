@@ -70,6 +70,7 @@ button {outline: none; border: none; background-color: transparent;}
 
 #avatar
 {
+    margin-top: 10px;
     cursor: pointer;
     padding-bottom: 10px;
     position: relative;
@@ -78,9 +79,9 @@ button {outline: none; border: none; background-color: transparent;}
 #avatar img
 {
     border-radius: 25px;
-    width: 50px;
-    height: 50px;
-    margin: 0 5px;
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
 }
 #avatar .avatar-name
 {
@@ -101,7 +102,6 @@ button {outline: none; border: none; background-color: transparent;}
     -moz-opacity:0.7;
     opacity: 0.7;
     transition: all .3s;-o-transition: all .3s;-moz-transition: all .3s;-webkit-transition: all .3s;
-    padding-bottom: 30px;
 }
 #avatar:hover .avatar-name
 {
@@ -116,11 +116,11 @@ button {outline: none; border: none; background-color: transparent;}
 #apps-actions .bar-menu > li a
 {
     width: 60px;
-    height: 42px;
-    line-height: 42px;
+    height: 50px;
+    line-height: 50px;
     padding: 0;
     text-align: center;
-    font-size: 32px;
+    font-size: 40px;
     text-align: center;
 }
 #apps-menu
@@ -140,8 +140,8 @@ button {outline: none; border: none; background-color: transparent;}
 #bottomBar
 {
     width: 100%;
-    height: 42px;
-    padding-left: 64px;
+    height: 36px;
+    padding-left: 60px;
     background-color: #1a3200;
     background-color: rgba(0,0,0,0.5);
     z-index: 40010;
@@ -155,21 +155,26 @@ button {outline: none; border: none; background-color: transparent;}
 }
 #bottomBar .bar-menu li
 {
-    min-width: 41px;
+    min-width: 50px;
     text-align: center;
-    line-height: 32px;
     font-size: 16px;
-    height: 42px;
+    height: 36px;
     margin-right:4px;
     overflow: hidden;
     white-space: nowrap;
     background-color: rgba(0,0,0,0.20);    
     -o-transition: width 1s;-moz-transition: width 1s;-webkit-transition: width 1s;transition: width 1s;
 }
+#bottomBar .bar-menu li > a
+{
+    line-height: 28px;
+    font-size: 12px;
+    font-weight: bold;
+}
 #taskbar .bar-menu li
 {
     text-align: left;
-    min-width: 120px;
+    min-width: 180px;
     max-width: 300px;
 }
 #bottomBar .bar-menu > li > a > img
@@ -220,13 +225,13 @@ button {outline: none; border: none; background-color: transparent;}
 }
 .window-head {color: #777; -moz-user-select:none; -webkit-user-select:none;}
 .window-head img {height: 18px; width: 18px; margin-right: 5px;}
-.window-head ul {display: block; margin: 0; padding: 0; position: absolute; right: 10px; top: 5px; overflow: hidden;}
+.window-head ul {display: block; margin: 0; padding: 0; position: absolute; right: 10px; top: 2px; overflow: hidden;}
 .window-head ul li {display: inline-block;}
 .window-head ul li button {display: block; color: #ccc; border-radius: 2px; padding: 2px 10px;}
 .window-head ul li button:hover {color: #777; background-color: #fafafa; color: rgba(255,255,255,1); background-color: rgba(0,0,0,0.4);}
 .window-head ul li button.close-win:hover {background-color: #dd1111; color: #fff;}
 
-.window-control-full .window-head {background-color: #f1f2f3; height: 36px; overflow: hidden; border-bottom: 1px solid #ccc; line-height: 32px; padding: 2px 10px; position: relative;}
+.window-control-full .window-head {background-color: #f1f2f3; height: 30px; overflow: hidden; border-bottom: 1px solid #ccc; line-height: 26px; padding: 2px 10px; position: relative;}
 .window-control-full .window-head ul {line-height: 20px;}
 .window-control-full .window-head ul li button {color: #666}
 .window-control-full .window-head ul li button:hover {color: #333; background-color: #ccc}
@@ -234,7 +239,7 @@ button {outline: none; border: none; background-color: transparent;}
 
 .window-control-simple .window-head {position: absolute; height: 0; background:none; border-bottom: none; overflow: visible; width: 100%;}
 .window-control-simple .window-head > img {position: absolute; left: 10px; top: 8px; height: 32px; width: 32px; z-index: 99999}
-.window-control-simple .window-head > ul {position: absolute; right: 10px; top: 8px; z-index: 99999;}
+.window-control-simple .window-head > ul {position: absolute; right: 5px; top: 8px; z-index: 99999;}
 .window-control-simple .window-head ul li button {padding: 5px 10px; border-radius: 0; font-size: 16px; border-radius: 4px}
 .window-control-simple .window-head ul li button.close-win {padding:5px 15px}
 
