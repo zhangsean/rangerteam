@@ -65,4 +65,29 @@ class order extends control
         $this->view->products  = $this->loadModel('product')->getPairs();
         $this->display();
     }
+
+    /**
+     * Edit an order.
+     * 
+     * @param  int $orderID 
+     * @access public
+     * @return void
+     */
+    public function edit($orderID)
+    {
+        if($_POST)
+        {
+            $this->order->update($orderID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $order = $this->order->getByID($orderID);
+
+        $this->view->title    = $this->lang->order->edit;
+        $this->view->order    = $order;
+        $this->view->products = $this->loadModel('product')->getPairs();
+
+        $this->display();
+    }
 }

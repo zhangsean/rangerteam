@@ -74,4 +74,27 @@ class orderModel extends model
 
         return $orderID;
     }
+
+    /**
+     * Update an order.
+     * 
+     * @param  int $orderID 
+     * @access public
+     * @return void
+     */
+    public function update($orderID)
+    {
+        $order = fixer::input('post')->get();
+
+        $this->dao->update(TABLE_ORDER)
+            ->data($order)
+            ->autoCheck()
+            ->batchCheck($this->config->order->require->edit, 'notempty')
+            ->where('id')->eq($orderID)
+            ->exec();
+
+        if(dao::isError()) return false;
+
+        return !dao::isError();
+    }
 }
