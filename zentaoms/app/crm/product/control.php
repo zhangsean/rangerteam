@@ -12,14 +12,14 @@
 class product extends control
 {
     /** 
-     * The index page, locate to admin.
+     * The index page, locate to browse.
      * 
      * @access public
      * @return void
      */
     public function index()
     {   
-        $this->locate(inlink('admin'));
+        $this->locate(inlink('browse'));
     }   
 
     /**
@@ -32,14 +32,14 @@ class product extends control
      * @access public
      * @return void
      */
-    public function admin($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
         
         $products = $this->product->getList($orderBy, $pager);
 
-        $this->view->title    = $this->lang->product->admin;
+        $this->view->title    = $this->lang->product->browse;
         $this->view->products = $products;
         $this->view->pager    = $pager;
         $this->display();
@@ -57,7 +57,7 @@ class product extends control
         {
             $productID = $this->product->create();       
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
         $this->view->title = $this->lang->product->create;
@@ -77,7 +77,7 @@ class product extends control
         {
             $this->product->update($productID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
         $product = $this->product->getByID($productID);

@@ -23,7 +23,7 @@ $lang->product->editedDate  = '编辑时间';
 $lang->product->editedBy    = '编辑者';
 
 $lang->product->list        = '产品列表';
-$lang->product->admin       = '维护产品';
+$lang->product->browse      = '维护产品';
 $lang->product->create      = '发布产品';
 
 $lang->product->typeList['real']    = '实体类';
