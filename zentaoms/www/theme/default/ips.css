@@ -113,7 +113,7 @@ button {outline: none; border: none; background-color: transparent;}
 }
 
 #apps-actions .bar-menu > li {display: block;}
-#apps-actions .bar-menu > li a
+#apps-actions .bar-menu > li button
 {
     width: 60px;
     height: 50px;
@@ -192,14 +192,14 @@ button {outline: none; border: none; background-color: transparent;}
   color: #f1f1f1;
   font-size: 14px;
   padding: 0 10px;
-  opacity: 0.2;
+  opacity: 0;
 }
 #taskbar .bar-menu li:hover button {opacity: 1;}
 #taskbar .bar-menu li .actions button:hover {content: #fff; background-color: rgba(0,0,0,0.2);}
 #taskbar .bar-menu li .actions button.close-win:hover{background-color: #dd1111;}
 #taskbar .bar-menu li button
 {
-  padding-right: 80px;
+  padding-right: 35px;
 }
 #bottomBar .bar-menu > li > button > img
 {
@@ -290,6 +290,21 @@ button {outline: none; border: none; background-color: transparent;}
 .window-content {position: relative; height: 100%; overflow: auto;}
 .window-loading .window-content {background: url('images/ips/loading.gif') no-repeat center 30%;}
 .window-content iframe {position: absolute; overflow: auto; width: 100%; height: 100%; left: -9999px; top: 0; background-color: rgba(0, 0, 0, 0);}
+
+.window-cover
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.075);
+    z-index: 99999;
+}
+.window-active .window-cover
+{
+    display: none;
+}
 
 /* all apps menu.*/
 .window-fullscreen{color: #eee; position: absolute; width: 100% !important; height: 100% !important; z-index: 200000; background-color: #314400; background-color: rgba(0,0,0,0.7); display: none;}

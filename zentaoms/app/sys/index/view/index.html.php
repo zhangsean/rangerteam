@@ -78,7 +78,7 @@ js::import($jsRoot . 'jquery/ips.js');
 var entries = new Array(
 {
     id          : 'allapps',
-    title       : '<?php echo $lang->index->allEntries?>',
+    name        : '<?php echo $lang->index->allEntries?>',
     type        : 'none',
     desc        : '<?php echo $lang->index->allEntries?>',
     display     : 'fullscreen',
@@ -87,7 +87,7 @@ var entries = new Array(
 {
     id          : 'profile',
     url         : '<?php echo $this->createLink('user', 'profile')?>',
-    title       : '<?php echo $lang->user->profile?>',
+    name        : '<?php echo $lang->user->profile?>',
     type        : 'iframe',
     desc        : '<?php echo $lang->index->profile?>',
     display     : 'fixed',

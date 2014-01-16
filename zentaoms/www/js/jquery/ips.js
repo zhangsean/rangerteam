@@ -17,6 +17,9 @@
     var entries          = null;
     var entryCount       = 0;
 
+    /* record the index url */
+    var indexUrl         = window.location.href;
+
     /* the default configs */
     var defaults = 
     {
@@ -35,11 +38,11 @@
         closeWindowText               : '关闭应用窗口',
         minWindowText                 : '隐藏窗口',
         showWindowText                : '显示窗口',
-        windowHtmlTemplate            : "<div id='{idstr}' class='window {cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}'><div class='window-head'><img src='{icon}' alt=''><strong title='{desc}'>{title}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-content'></div></div>",
+        windowHtmlTemplate            : "<div id='{idstr}' class='window {cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}'><div class='window-head'><img src='{icon}' alt=''><strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
         frameHtmlTemplate             : "<iframe id='iframe-{idstr}' name='iframe-{idstr}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
-        leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a data-toggle="tooltip" data-placement="right"  href="javascript:;" class="app-btn" title="{title}" data-id="{id}"><img src="{icon}" alt=""></a></li>',
-        taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn" title="{desc}" data-id="{id}"><img src="{icon}" alt="">{title}</button><div class="actions"><button class="close-win"><i class="icon-remove"></i></button></div></li>',
-        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{desc}" data-id="{id}"><img src="{icon}" alt="">{title}</a></li>',
+        leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a data-toggle="tooltip" data-placement="right"  href="javascript:;" class="app-btn" title="{name}" data-id="{id}"><img src="{icon}" alt=""></a></li>',
+        taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn" title="{desc}" data-id="{id}"><img src="{icon}" alt="">{name}</button><div class="actions"><button class="close-win"><i class="icon-remove"></i></button></div></li>',
+        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{desc}" data-id="{id}"><img src="{icon}" alt="">{name}</a></li>',
 
         init                          : function() // init the default
         {
@@ -196,7 +199,7 @@
                 control       : 'simple',
                 id            : entryId || windowIdSeed++,
                 zindex        : windowZIndexSeed++,
-                title         : 'No name entry',
+                name          : 'No name entry',
                 open          : 'iframe',
                 desc          : '',
                 display       : 'fixed',
@@ -245,19 +248,60 @@
 
         onShowDeskClick();
 
-        onF5Click();
+        onWindowKeydown();
+
+        initWindowActivable();
+
+        handleUnloadEvents();
     }
 
-    function onF5Click()
+    function initWindowActivable()
     {
-        $(document).keydown(function(event)
+        activedWindow = $('.window-active');
+        $(document).on('mousedown', '.window', function()
         {
-            if(event.keyCode == 116)
+            activeWindow($(this));
+        });
+    }
+
+    function handleUnloadEvents()
+    {
+        window.onbeforeunload = function(e)
+        {
+            var n = window.event.screenX - window.screenLeft;
+            var b = n > document.documentElement.scrollWidth-20;
+            if(b && window.event.clientY < 0 || window.event.altKey)
+            {
+                /* the code to handle the event on the browser closing */
+            }
+            else
             {
                 reloadWindow();
-                return false;
+                e = e || window.event; // moderm browser, ie behind
+                if(e.preventDefault())
+                {
+                    e.preventDefault(); // moderm browser
+                }
+                else
+                {
+                    e.returnValue = false; // ie
+                }
             }
-        });
+        }
+    }
+
+    function onWindowKeydown()
+    {
+        $(document).keydown(handleWindowKeydown);
+    }
+
+    function handleWindowKeydown(event)
+    {
+        if(event.keyCode == 116)
+        {
+            reloadWindow();
+            return false;
+        }
     }
 
     function onShowDeskClick()
@@ -587,7 +631,15 @@
         var frame = $('#' + fName);
         if(frame.length > 0)
         {
-            document.getElementById(fName).src = entry.url;
+            try
+            {
+                document.getElementById(fName).src = $(window.frames[fName].document).context.URL;
+            }
+            catch(e)
+            {
+                document.getElementById(fName).src = entry.url;
+            }
+            
         }
         else
         {
@@ -598,8 +650,28 @@
         {
             win.removeClass('window-loading');
             win.find('.reload-win i').removeClass('icon-spin');
+
+            try
+            {
+                var $frame = $(window.frames[fName].document);
+                updateEntryUlr(win, $frame, entry);
+                $frame.unbind('keydown', handleWindowKeydown).keydown(handleWindowKeydown).data('data-id', entry.idStr);
+            }
+            catch(e){}
         });
         return true;
+    }
+
+    function updateEntryUlr(win, frame, entry)
+    {
+        if(frame)
+        {
+            entry.currentUrl = frame.context.URL;
+            win.attr('data-reffer-url', entry.currentUrl);
+        }
+        var url = win.attr('data-reffer-url');
+        if(url == undefined) url = indexUrl;
+        window.history.pushState({}, 0, url);
     }
 
     function closeWindow(winQuery)
@@ -687,6 +759,8 @@
 
         $('.app-btn').removeClass('active');
         $('.app-btn[data-id="' + win.attr('data-id') + '"]').addClass('active');
+
+        updateEntryUlr(win);
 
         handleFullscreenMode(win);
     }
