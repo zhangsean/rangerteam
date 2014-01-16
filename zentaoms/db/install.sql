@@ -186,6 +186,7 @@ CREATE TABLE `crm_orderField` (
   `product` mediumint(8) unsigned NOT NULL,
   `field` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
+  `order` tinyint(3) NOT NULL,
   `control` varchar(10) NOT NULL,
   `options` varchar(255) NOT NULL,
   `default` varchar(100) NOT NULL,
