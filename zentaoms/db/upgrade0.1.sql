@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS `sys_product` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `code` varchar(30) NOT NULL,
+  `order` tinyint(3) NOT NULL,
   `type` varchar(10) NOT NULL,
   `status` varchar(10) NOT NULL,
   `summary` text NOT NULL,
