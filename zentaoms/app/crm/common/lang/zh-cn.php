@@ -31,7 +31,7 @@ $lang->customer->menu->create = '添加客户|customer|create|type=customer';
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse = array('link' => '产品列表|product|admin|', 'alias' => 'edit');
+$lang->product->menu->browse = array('link' => '产品列表|product|browse|', 'alias' => 'edit');
 $lang->product->menu->create = '发布产品|product|create|';
 
 /* Menu of order module. */
