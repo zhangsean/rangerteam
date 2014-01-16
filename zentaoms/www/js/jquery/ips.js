@@ -306,10 +306,23 @@
 
     function onShowDeskClick()
     {
-        $('#showDesk').click(function()
+        $('.fullscreen-btn').click(function()
         {
-           $('#deskContainer').toggleClass('hide-windows');
-           $('#showDesk .icon-check-empty').toggleClass('icon-sign-blank');
+            var win = $('#' + $(this).attr('data-id'));
+            if(win.hasClass('fullscreen-active'))
+            {
+                $('#desktop').removeClass('fullscreen-mode');
+                win.removeClass('fullscreen-active');
+                $(this).removeClass($(this).attr('data-toggle-class'));
+            }
+            else
+            {
+                $('.fullscreen-active').removeClass('fullscreen-active');
+                win.addClass('fullscreen-active');
+                $('#desktop').addClass('fullscreen-mode');
+                $('.fullscreen-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class'))});
+                $(this).addClass($(this).attr('data-toggle-class'));
+            }
         });
     }
 
@@ -378,7 +391,7 @@
         menu.height(menuHeight);
 
         /* refresh entry window size */
-        $('.window-fullscreen, .window-max').each(function()
+        $('.fullscreen, .window-max').each(function()
         {
             var win = $(this);
             win.width(desktopSize.width);

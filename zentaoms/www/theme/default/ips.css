@@ -176,7 +176,7 @@ button {outline: none; border: none; background-color: transparent;}
 #taskbar .bar-menu li
 {
     text-align: left;
-    min-width: 80px;
+    min-width: 110px;
     max-width: 300px;
     position: relative;
 }
@@ -197,27 +197,11 @@ button {outline: none; border: none; background-color: transparent;}
 #taskbar .bar-menu li:hover button {opacity: 1;}
 #taskbar .bar-menu li .actions button:hover {content: #fff; background-color: rgba(0,0,0,0.2);}
 #taskbar .bar-menu li .actions button.close-win:hover{background-color: #dd1111;}
-#taskbar .bar-menu li button
-{
-  padding-right: 35px;
-}
-#bottomBar .bar-menu > li > button > img
-{
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-    margin-top: -2px;
-}
-#bottomBar .bar-menu > li > button > i{font-size: 28px;}
+#taskbar .bar-menu li button {padding-right: 35px;}
+#bottomBar .bar-menu > li > button > img {width: 20px; height: 20px; margin-right: 5px; margin-top: -2px;}
+#bottomBar .bar-menu > li > button[class*=' icon-'] {font-size: 20px;}
 
-#bottomRightBar
-{
-  padding-left: 4px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  border-left: 1px solid rgba(255,255,255,0.10);
-}
+#bottomRightBar {padding-left: 4px; position: absolute; right: 0; top: 0; border-left: 1px solid rgba(255,255,255,0.10);}
 
 /* desk container. */
 #deskContainer
@@ -229,10 +213,7 @@ button {outline: none; border: none; background-color: transparent;}
     z-index: 50;
 }
 
-#deskContainer.hide-windows .window
-{
-  display: none!important;
-}
+#deskContainer.hide-windows .window{display: none!important;}
 
 /* window. */
 .window
@@ -291,27 +272,13 @@ button {outline: none; border: none; background-color: transparent;}
 .window-loading .window-content {background: url('images/ips/loading.gif') no-repeat center 30%;}
 .window-content iframe {position: absolute; overflow: auto; width: 100%; height: 100%; left: -9999px; top: 0; background-color: rgba(0, 0, 0, 0);}
 
-.window-cover
-{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(0,0,0,0.075);
-    z-index: 99999;
-}
-.window-active .window-cover
-{
-    display: none;
-}
+.window-cover {position: absolute; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(0,0,0,0.075); z-index: 99999;}
+.window-active .window-cover {display: none;}
 
-/* all apps menu.*/
-.window-fullscreen{color: #eee; position: absolute; width: 100% !important; height: 100% !important; z-index: 200000; background-color: #314400; background-color: rgba(0,0,0,0.7); display: none;}
-.fullscreen-mode .window{visibility: hidden;}
-.fullscreen-mode .window-active{visibility: visible;}
-.window-fullscreen .all-apps-panel{padding:0 0px 42px 96px;}
-.window-fullscreen .all-apps-head{padding: 20px 40px; border-bottom: 1px solid #555; border-color:rgba(255,255,255,0.2);}
+/* fullscreen */
+.fullscreen {position: absolute; top: 0; left: 60px; width: 100%; height: 100%; z-index: 10; overflow-y:scroll; *overflow-y:hidden; display: none; background-color: rgba(0,0,0,0.3); color: #fff}
+.fullscreen-mode .fullscreen.fullscreen-active {display: block;}
+.fullscreen-mode #deskContainer {display: none;}
 
 #allAppsList {padding: 20px 40px;}
 #allAppsList ul {margin: 0; padding: 0;}

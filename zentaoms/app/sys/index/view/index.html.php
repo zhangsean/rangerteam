@@ -22,7 +22,7 @@ js::import($jsRoot . 'jquery/ips.js');
       <div class='dock-bottom'>
         <div id='apps-actions'>
           <ul class='bar-menu'>
-            <li><button class='app-btn' data-toggle='tooltip' data-placement='right' data-id='allapps' href='javascript:;' id='allAppsBtn' title='<?php echo $lang->index->allEntries?>'><i class='icon-reorder'></i></button></li>
+            <li><button class='fullscreen-btn' data-toggle='tooltip' data-placement='right' data-id='allapps' title='<?php echo $lang->index->allEntries?>'><i class='icon-reorder'></i></button></li>
           </ul>
         </div>
         <div id='avatar' data-toggle='tooltip' data-placement='right' title='<?php echo $lang->index->profile?>' class='app-btn' data-id='profile'>
@@ -38,52 +38,47 @@ js::import($jsRoot . 'jquery/ips.js');
       </div>
       <div id='bottomRightBar' class='dock-right'>
         <ul class='bar-menu'>
-          <li><button id='showDesk' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'><i class='icon-check-empty'></i></button></li>
+          <li><button id='showDesk' class='fullscreen-btn icon-check-empty' data-toggle-class='icon-sign-blank' data-id='home' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'></button></li>
         </ul>
       </div>
     </div>
-    <div id='deskContainer'>
-      <div id='win-allapps' class='window window-fullscreen window-min' data-id='allapps'>
-        <div class='all-apps-panel'>
-          <div class='all-apps-head'>
-            <div class='row'>
-              <div class='col-md-1'>
-                <a href='###' id='closeAllApps' class='min-win'><i class='icon-circle-arrow-left'></i></a>
+    <div id='home' class='fullscreen'>
+      
+    </div>
+    <div id='allapps' class='fullscreen'>
+      <div class='all-apps-panel'>
+        <div class='all-apps-head'>
+          <div class='row'>
+            <div class='col-md-1'>
+              <a href='###' id='closeAllApps' class='min-win'><i class='icon-circle-arrow-left'></i></a>
+            </div>
+            <div class='col-md-3'>
+              <h4><i class='icon-th-list'></i> <?php echo $lang->index->allEntries?> &nbsp;<small class='muted'><?php echo $lang->index->countEntries?></small></h4>
+            </div>
+            <div class='col-md-4'>
+              <div class='input-group'>
+                <input type='text' class='form-control-clear form-control'>
+                <span class='input-group-btn'>
+                  <button class='btn btn-clear' type='button'><i class='icon-search'></i></button>
+                </span>
               </div>
-              <div class='col-md-3'>
-                <h4><i class='icon-th-list'></i> <?php echo $lang->index->allEntries?> &nbsp;<small class='muted'><?php echo $lang->index->countEntries?></small></h4>
-              </div>
-              <div class='col-md-4'>
-                <div class='input-group'>
-                  <input type='text' class='form-control-clear form-control'>
-                  <span class='input-group-btn'>
-                    <button class='btn btn-clear' type='button'><i class='icon-search'></i></button>
-                  </span>
-                </div>
-              </div>
-              <div class='col-md-4 text-right'>
-                <a class='btn btn-clear' href='admin.php?m=entry&f=create' target='_blank'><i class='icon-plus'></i> <?php echo $lang->index->addEntry?></a>
-              </div>
-            </div>        
-          </div>
-          <div class='all-apps-list' id="allAppsList">
-            <ul class='bar-menu'>
-            </ul>
-          </div>
+            </div>
+            <div class='col-md-4 text-right'>
+              <a class='btn btn-clear' href='admin.php?m=entry&f=create' target='_blank'><i class='icon-plus'></i> <?php echo $lang->index->addEntry?></a>
+            </div>
+          </div>        
         </div>
-      </div>
+        <div class='all-apps-list' id="allAppsList">
+          <ul class='bar-menu'>
+          </ul>
+        </div>
+      </div>      
+    </div>
+    <div id='deskContainer'>
     </div>
   </div>
 <script>
 var entries = new Array(
-{
-    id          : 'allapps',
-    name        : '<?php echo $lang->index->allEntries?>',
-    type        : 'none',
-    desc        : '<?php echo $lang->index->allEntries?>',
-    display     : 'fullscreen',
-    menu        : false
-},
 {
     id          : 'profile',
     url         : '<?php echo $this->createLink('user', 'profile')?>',
