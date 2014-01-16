@@ -209,8 +209,10 @@ class html
     {
         $options = (array)($options);
         if(!is_array($options) or empty($options)) return false;
-        $string  = '';
+
+        if(is_array($checked)) $checked = implode(',', $checked);
         $checked = ",$checked,";
+        $string  = '';
 
         $i = 1;
         foreach($options as $key => $value)
