@@ -108,7 +108,9 @@ define('TABLE_ENTRY',     'sys_entry');
 define('TABLE_SSO',       'sys_sso');
 
 /* Tables for crm. */
-define('TABLE_PRODUCT', 'crm_product');
+define('TABLE_PRODUCT',    'crm_product');
+define('TABLE_ORDERFIELD', 'crm_orderField');
+define('TABLE_ORDER',      'crm_order');
 define('TABLE_ORDER',   'crm_order');
 
 /* Tables for oa. */
