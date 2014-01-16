@@ -21,6 +21,8 @@ class field extends control
     public function browse($productID)
     {
         $this->view->productID = $productID;
+        $this->view->fields    = $this->field->getList($productID);
+
         $this->display();
     }
 

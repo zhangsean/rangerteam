@@ -12,6 +12,18 @@
 class fieldModel extends model
 {
     /**
+     * Get list.
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function getList($productID)
+    {
+        return $this->dao->select('*')->from(TABLE_ORDERFIELD)->where('product')->eq($productID)->fetchAll('field');
+    }
+
+    /**
      * Create a field.
      * 
      * @access public
@@ -37,7 +49,5 @@ class fieldModel extends model
 
         return true;
     }
-
-
 }
 
