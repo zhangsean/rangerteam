@@ -111,7 +111,6 @@ define('TABLE_SSO',       'sys_sso');
 define('TABLE_PRODUCT',    'crm_product');
 define('TABLE_ORDERFIELD', 'crm_orderField');
 define('TABLE_ORDER',      'crm_order');
-define('TABLE_ORDER',   'crm_order');
 
 /* Tables for oa. */
 define('TABLE_TODO',     'oa_todo`');
