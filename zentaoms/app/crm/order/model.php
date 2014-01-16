@@ -111,14 +111,35 @@ class orderModel extends model
         $order = fixer::input('post')
             ->add('closedDate', $now)
             ->add('closedBy', $this->app->user->account)
-            ->add('assignedTo', 'closed')
-            ->add('assignedDate', $now)
             ->add('status', 'closed')
             ->get();
 
-        $this->dao->update(TABLE_ORDER)->data($order)
+        $this->dao->update(TABLE_ORDER)->data($order, $skip = 'uid')
             ->autoCheck()
             ->where('id')->eq($orderID)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
+     * Activate an order.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return bool
+     */
+    public function activate($orderID)
+    {
+        $order = $this->getByID($orderID);
+        $now   = helper::now();
+        $order = fixer::input('post')
+            ->add('activatedDate', $now)
+            ->add('activatedBy', $this->app->user->account)
+            ->setDefault('status', 'normal')
+            ->setIF($order->assignedTo != '', 'status', 'assigned')
+            ->get();
+
+        $this->dao->update(TABLE_ORDER)->data($order)->autoCheck()->where('id')->eq($orderID)->exec();
 
         return !dao::isError();
     }
