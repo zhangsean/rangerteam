@@ -2,7 +2,7 @@
 $lang->order->common         = '订单维护';
 
 $lang->order->id             = '编号';
-$lang->order->product        = '所属产品';
+$lang->order->product        = '相关产品';
 $lang->order->customer       = '所属客户';
 $lang->order->contact        = '联系人';
 $lang->order->teams          = '团队';
@@ -24,15 +24,10 @@ $lang->order->closedNote     = '关闭备注';
 $lang->order->activatedDate  = '激活时间';
 $lang->order->contactedBy    = '由谁联系';
 $lang->order->contactedDate  = '联系时间';
-$lang->order->assign         = '指派';
-$lang->order->close          = '关闭';
-$lang->order->activate       = '激活';
 
 $lang->order->list   = '订单列表';
 $lang->order->browse = '维护订单';
 $lang->order->create = '创建订单';
-$lang->order->edit   = '编辑订单';
-$lang->order->view   = '查看';
 
 $lang->order->statusList['normal']   = '正常';
 $lang->order->statusList['assigned'] = '已指派';
