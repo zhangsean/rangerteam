@@ -251,8 +251,6 @@
         onWindowKeydown();
 
         initWindowActivable();
-
-        handleUnloadEvents();
     }
 
     function initWindowActivable()
@@ -262,32 +260,6 @@
         {
             activeWindow($(this));
         });
-    }
-
-    function handleUnloadEvents()
-    {
-        window.onbeforeunload = function(e)
-        {
-            var n = window.event.screenX - window.screenLeft;
-            var b = n > document.documentElement.scrollWidth-20;
-            if(b && window.event.clientY < 0 || window.event.altKey)
-            {
-                /* the code to handle the event on the browser closing */
-            }
-            else
-            {
-                reloadWindow();
-                e = e || window.event; // moderm browser, ie behind
-                if(e.preventDefault())
-                {
-                    e.preventDefault(); // moderm browser
-                }
-                else
-                {
-                    e.returnValue = false; // ie
-                }
-            }
-        }
     }
 
     function onWindowKeydown()

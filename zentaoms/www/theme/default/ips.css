@@ -276,7 +276,9 @@ button {outline: none; border: none; background-color: transparent;}
 .window-active .window-cover {display: none;}
 
 /* fullscreen */
-.fullscreen {position: absolute; top: 0; left: 60px; width: 100%; height: 100%; z-index: 10; overflow-y:scroll; *overflow-y:hidden; display: none; background-color: rgba(0,0,0,0.3); color: #fff}
+.fullscreen {position: absolute; top: 0; left: 60px; width: 100%; height: 100%; z-index: 10; overflow: auto; display: none;}
+.fullscreen .page-header {margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.5)}
+.fullscreen > .actions {position: fixed; right: 40px;top: 20px;}
 .fullscreen-mode .fullscreen.fullscreen-active {display: block;}
 .fullscreen-mode #deskContainer {display: none;}
 
@@ -292,3 +294,20 @@ button {outline: none; border: none; background-color: transparent;}
 
 #closeAllApps {top: -5px; position: absolute; font-size: 36px; color: #aaa; color: rgba(255,255,255,0.6);}
 #closeAllApps:hover {text-decoration: none; color: #fff; color: rgba(255,255,255,0.9);}
+
+/* home */
+#home .panel {border-radius: 2px; box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);}
+#home .panel-heading {padding: 6px 15px;}
+#home .panel-body {height: 210px; overflow: auto;}
+#home .panels-container {max-width: 1600px; margin: 0 auto; padding: 0 5%; margin-top: 5%;}
+#home .panel-body > .list-group {margin: 0;}
+#home .panel-body .list-group > .list-group-item {border-left: 0; border-right: 0;}
+#home .panel-body .list-group > .list-group-item:first-child {border-top: none;}
+#home .panel-body .list-group > .list-group-item:last-child {border-bottom: none;}
+
+/* pure button to fit dark background */
+.btn-pure {background-color: transparent; background-color: rgba(255,255,255,0.1); color: #f1f1f1; color: rgba(255,255,255,0.9); border-color: #f1f1f1; border-color: rgba(255,255,255,0.3);}
+.btn-pure:hover, .btn-pure:active, .btn-pure:focus {background-color: rgba(0,0,0,0.1); color: #fff; border-color: #fff; border-color: rgba(255,255,255,0.6); outline: none;}
+
+/* css helper */
+.no-padding {padding: 0}

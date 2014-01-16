@@ -14,7 +14,7 @@ css::import($themeRoot . 'default/ips.css');
 js::import($jsRoot . 'jquery/ips.js');
 ?>
   <!-- Desktop -->
-  <div id='desktop'  unselectable="on" style="-moz-user-select:none;-webkit-user-select:none;" onselectstart="return false;">
+  <div id='desktop' class='fullscreen-mode' unselectable="on" style="-moz-user-select:none;-webkit-user-select:none;" onselectstart="return false;">
     <div id='leftBar' class='dock-left'>
       <div id='apps-menu'>
         <ul class='bar-menu'></ul>
@@ -38,12 +38,116 @@ js::import($jsRoot . 'jquery/ips.js');
       </div>
       <div id='bottomRightBar' class='dock-right'>
         <ul class='bar-menu'>
-          <li><button id='showDesk' class='fullscreen-btn icon-check-empty' data-toggle-class='icon-sign-blank' data-id='home' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'></button></li>
+          <li><button id='showDesk' class='fullscreen-btn icon-home' data-toggle-class='icon-check-empty' data-id='home' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'></button></li>
         </ul>
       </div>
     </div>
-    <div id='home' class='fullscreen'>
-      
+    <div id='home' class='fullscreen fullscreen-active'>
+      <div class='buttons-group actions'><button data-toggle='tooltip' data-placement='left' title='<?php echo $lang->index->customPanels; ?>' class='btn btn-pure'><i class='icon-cog'></i></button></div>
+      <div class='panels-container'>
+        <div class='row'>
+          <div class='col-sm-6 col-md-4 col-lg-3'>
+            <div class='panel'>
+              <div class='panel-heading'>Panel with Table</div>
+              <div class='panel-body no-padding'>
+                <table class='table table-hover table-condensed'>
+                  <tr>
+                    <td><strong>Row Title</strong></td>
+                    <td class='small'><i class='icon-user'></i> Catouse</td>
+                    <td class='text-right'><span class='label label-badge'>34</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Row Title 2</strong></td>
+                    <td class='small'><i class='icon-user'></i> Mouse</td>
+                    <td class='text-right'><span class='label label-success label label-badge'>34</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Row Title 3</strong></td>
+                    <td class='small'><i class='icon-user'></i> Cat</td>
+                    <td class='text-right'></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Row Title 3</strong></td>
+                    <td class='small'><i class='icon-user'></i> Cat</td>
+                    <td class='text-right'><span class='label label-danger label-badge'>10</span></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class='col-sm-6 col-md-4 col-lg-3'>
+            <div class='panel'>
+              <div class='panel-heading'>Panel with list group</div>
+              <div class='panel-body no-padding'>
+                <div class='list-group'>
+                  <a href='###' class='list-group-item'>Haha</a>
+                  <a href='###' class='list-group-item'>todo </a>
+                  <a href='###' class='list-group-item'>story</a>
+                  <a href='###' class='list-group-item'>task active</a>
+                  <a href='###' class='list-group-item'>bug</a>
+                  <a href='###' class='list-group-item'>case</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class='col-sm-6 col-md-4 col-lg-3'>
+            <div class='panel'>
+              <div class='panel-heading'>Panel Name</div>
+              <div class='panel-body'>
+                <button class='btn btn-block btn-danger'>HIT ME!</button>
+              </div>
+            </div>
+          </div>
+          <div class='col-sm-6 col-md-4 col-lg-3'>
+            <div class='panel'>
+              <div class='panel-heading'>Panel Name</div>
+              <div class='panel-body'></div>
+            </div>
+          </div>
+          <div class='col-sm-6 col-md-4 col-lg-3'>
+            <div class='panel'>
+              <div class='panel-heading'>Panel Name</div>
+              <div class='panel-body'></div>
+            </div>
+          </div>
+          <div class='col-sm-6 col-md-4 col-lg-3'>
+            <div class='panel'>
+              <div class='panel-heading'>Panel Name</div>
+              <div class='panel-body'></div>
+            </div>
+          </div>
+          <div class='col-sm-6 col-md-4 col-lg-3'>
+            <div class='panel'>
+              <div class='panel-heading'>Panel Name</div>
+              <div class='panel-body'></div>
+            </div>
+          </div>
+          <div class='col-sm-6 col-md-4 col-lg-3'>
+            <div class='panel'>
+              <div class='panel-heading'>Panel Name</div>
+              <div class='panel-body'></div>
+            </div>
+          </div>
+          <div class='col-sm-6 col-md-4 col-lg-3'>
+            <div class='panel'>
+              <div class='panel-heading'>Panel Name</div>
+              <div class='panel-body'></div>
+            </div>
+          </div>
+          <div class='col-sm-6 col-md-4 col-lg-3'>
+            <div class='panel'>
+              <div class='panel-heading'>Panel Name</div>
+              <div class='panel-body'></div>
+            </div>
+          </div>
+          <div class='col-sm-6 col-md-4 col-lg-3'>
+            <div class='panel'>
+              <div class='panel-heading'>Panel Name</div>
+              <div class='panel-body'></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div id='allapps' class='fullscreen'>
       <div class='all-apps-panel'>
@@ -68,7 +172,7 @@ js::import($jsRoot . 'jquery/ips.js');
             </div>
           </div>        
         </div>
-        <div class='all-apps-list' id="allAppsList">
+        <div class='all-apps-list' id='allAppsList'>
           <ul class='bar-menu'>
           </ul>
         </div>
