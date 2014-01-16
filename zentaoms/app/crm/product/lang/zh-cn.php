@@ -25,8 +25,6 @@ $lang->product->editedBy    = '编辑者';
 $lang->product->list        = '产品列表';
 $lang->product->admin       = '维护产品';
 $lang->product->create      = '发布产品';
-$lang->product->edit        = '编辑产品';
-$lang->product->custom      = '自定义';
 
 $lang->product->typeList['real']    = '实体类';
 $lang->product->typeList['service'] = '服务类';
@@ -35,3 +33,41 @@ $lang->product->typeList['virtual'] = '虚拟类';
 $lang->product->statusList['wait']    = '制作中';
 $lang->product->statusList['normal']  = '正常';
 $lang->product->statusList['offline'] = '下线';
+
+$lang->product->field  = new stdclass();
+$lang->product->field->name        = '名称';
+$lang->product->field->type        = '类型';
+$lang->product->field->field       = '字段名';
+$lang->product->field->options     = '可选值';
+$lang->product->field->control     = '控件';
+$lang->product->field->default     = '默认值';
+$lang->product->field->rules       = '验证规则';
+$lang->product->field->desc        = '描述';
+$lang->product->field->placeholder = '提示文字';
+
+$lang->product->field->admin  = '属性';
+$lang->product->field->create = '添加属性';
+
+$lang->product->field->controlTypeList = array();
+$lang->product->field->controlTypeList['input']    = '文本框';
+$lang->product->field->controlTypeList['textarea'] = '富文本';
+$lang->product->field->controlTypeList['date']     = '日期';
+$lang->product->field->controlTypeList['datetime'] = '时间';
+$lang->product->field->controlTypeList['select']   = '下拉菜单';
+$lang->product->field->controlTypeList['radio']    = '单选按钮';
+$lang->product->field->controlTypeList['checkbox'] = '复选框';
+
+$lang->product->field->rulesList = array();
+$lang->product->field->rulesList['require'] = '必填';
+$lang->product->field->rulesList['unique']  = '唯一';
+$lang->product->field->rulesList['date']    = '日期';
+$lang->product->field->rulesList['email']   = 'email';
+$lang->product->field->rulesList['number']  = '数字';
+$lang->product->field->rulesList['phone']   = '电话';
+$lang->product->field->rulesList['ip']      = 'IP';
+
+$lang->product->field->optionsPlaceholder = '多个值之间用空格或逗号隔开';
+
+
+$lang->product->action = new stdclass();
+$lang->product->action->admin = '流程';

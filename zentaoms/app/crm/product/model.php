@@ -141,4 +141,87 @@ class productModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Get field list.
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function getFieldList($productID)
+    {
+        return $this->dao->select('*')->from(TABLE_ORDERFIELD)->where('product')->eq($productID)->orderBy('`order`')->fetchAll('field');
+    }
+
+    /**
+     * Build order form of a product.
+     * 
+     * @param  int       $productID 
+     * @param  object    $values 
+     * @access public
+     * @return void
+     */
+    public function buildFieldForm($productID, $values = '')
+    {
+        $form = '';
+        $fieldList = $this->getFieldList($productID);
+        foreach($fieldList as $field)
+        {
+            $form .= '<tr><th>';
+            $form .= $field->name;
+            $form .= '</th><td>';
+            $form .= $this->buildControl($field, $values);
+            $form .= '</td></tr>';
+        }
+        return $form;
+    }
+    
+    public function buildFieldControl($field, $values = null)
+    {
+        switch($field->control)
+        {
+            case 'input':
+                return html::input($field->field, isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+            case 'textarea':
+                return html::input();
+            case 'select':
+                return html::select($field->field, array_combine($field->options), isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+            case 'radio':
+                return html::radio($field->field, array_combine($field->options), isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+            case 'checkbox':
+                return html::checkbox($field->field, array_combine($field->options), isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+            case 'date':
+                return html::input($field->field, isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+
+        }
+
+    }
+
+    /**
+     * Create a field.
+     * 
+     * @access public
+     * @return int|bool
+     */
+    public function createField($productID)
+    {
+        $field = fixer::input('post')->add('product', $productID)->get();
+        $product = $this->loadModel('product')->getByID($productID);
+        if(empty($product)) return false;
+
+        $this->dao->insert(TABLE_ORDERFIELD)
+            ->data($field)
+            ->autoCheck()
+            ->check('field', 'unique', "product={$productID}")
+            ->batchCheck($this->config->field->require->create, 'notempty')
+            ->exec();
+
+        if(dao::isError()) return false;
+        $alterQuery = "ALTER TABLE crm_order_{$product->code} ADD `{$field->field}` {$this->config->field->controlTypeList[$field->control]} NOT NULL";
+        if($field->default) $alterQuery .= " default {$field->default}";
+        if(!$this->dbh->query($alterQuery)) return false;
+
+        return true;
+    }
 }

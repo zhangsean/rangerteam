@@ -100,4 +100,48 @@ class product extends control
         if($this->product->delete($productID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
+
+    /**
+     * Browse field. 
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function adminField($productID)
+    {
+        $this->view->productID = $productID;
+        $this->view->fields    = $this->product->getFieldList($productID);
+
+        $this->display();
+    }
+
+    /**
+     * Create a field.
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function createField($productID)
+    {
+        if($_POST)
+        {
+            if($this->product->createField($productID)) $this->send(array('result' => 'success', 'locate' => $this->inlink('adminField' , "productID={$productID}")));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+        $this->display();
+    }
+
+    /**
+     * Edit a field.
+     * 
+     * @param  int    $field 
+     * @access public
+     * @return void
+     */
+    public function editField($field)
+    {
+        $this->display();
+    }
 }
