@@ -22,7 +22,7 @@ js::import($jsRoot . 'jquery/ips.js');
       <div class='dock-bottom'>
         <div id='apps-actions'>
           <ul class='bar-menu'>
-            <li><a class='app-btn' data-toggle='tooltip' data-placement='right' data-id='allapps' href='javascript:;' id='allAppsBtn' title='<?php echo $lang->index->allEntries?>'><i class='icon-reorder'></i></a></li>
+            <li><button class='app-btn' data-toggle='tooltip' data-placement='right' data-id='allapps' href='javascript:;' id='allAppsBtn' title='<?php echo $lang->index->allEntries?>'><i class='icon-reorder'></i></button></li>
           </ul>
         </div>
         <div id='avatar' data-toggle='tooltip' data-placement='right' title='<?php echo $lang->index->profile?>' class='app-btn' data-id='profile'>
@@ -38,7 +38,7 @@ js::import($jsRoot . 'jquery/ips.js');
       </div>
       <div id='bottomRightBar' class='dock-right'>
         <ul class='bar-menu'>
-          <li><a id='showDesk' href='javascript:;' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'><i class='icon-check-empty'></i></a></li>
+          <li><button id='showDesk' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'><i class='icon-check-empty'></i></button></li>
         </ul>
       </div>
     </div>
@@ -94,7 +94,7 @@ var entries = new Array(
     size        : 'default',
     menu        : false,
     position    : 'center',
-    control     : 'full',
+    control     : 'full'
 });
 
 <?php echo $allEntries;?>
