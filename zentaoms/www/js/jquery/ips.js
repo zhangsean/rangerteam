@@ -292,6 +292,7 @@
                 $('.fullscreen-active').removeClass('fullscreen-active');
                 win.addClass('fullscreen-active');
                 $('#desktop').addClass('fullscreen-mode');
+                fullscreenMode = true;
                 $('.fullscreen-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class'))});
                 $(this).addClass($(this).attr('data-toggle-class'));
             }
@@ -477,8 +478,7 @@
             showWindow(entryWin);
         }
 
-        $('#deskContainer').removeClass('hide-windows');
-        $('#showDesk .icon-check-empty').removeClass('icon-sign-blank');
+        handleFullscreenMode();
     }
 
     function createWindow(entry)
@@ -746,23 +746,14 @@
         $('.app-btn[data-id="' + win.attr('data-id') + '"]').addClass('active');
 
         updateEntryUlr(win);
-
-        handleFullscreenMode(win);
     }
 
-    function handleFullscreenMode(win)
+    function handleFullscreenMode()
     {
-        var id = win.attr('data-id');
-        if(win.hasClass('window-fullscreen'))
-        {
-            $("#desktop").addClass('fullscreen-mode');
-            fullscreenMode = true;
-        }
-        else
-        {
-            fullscreenMode = false;
-            $("#desktop").removeClass('fullscreen-mode');
-        }
+         $('#desktop').removeClass('fullscreen-mode');
+         $('.fullscreen-active').removeClass('fullscreen-active');
+         fullscreenMode = false;
+         $('.fullscreen-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class'))});
     }
 
     /* start ips

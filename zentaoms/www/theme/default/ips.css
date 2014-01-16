@@ -213,8 +213,6 @@ button {outline: none; border: none; background-color: transparent;}
     z-index: 50;
 }
 
-#deskContainer.hide-windows .window{display: none!important;}
-
 /* window. */
 .window
 {
