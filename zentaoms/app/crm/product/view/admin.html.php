@@ -27,7 +27,7 @@
           <?php
           echo html::a($this->createLink('product', 'edit', "productID=$product->id"), $lang->edit);
           echo html::a($this->createLink('product', 'delete', "productID=$product->id"), $lang->delete, "class='deleter'");
-          echo html::a($this->createLink('product', 'custom', "productID=$product->id"), $lang->product->custom);
+          echo html::a($this->createLink('field', 'browse', "productID=$product->id"), $lang->product->browseField);
           ?>
         </td>
       </tr>
