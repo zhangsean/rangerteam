@@ -2,7 +2,7 @@ ALTER TABLE `sys_config` ADD `app` varchar(30) COLLATE 'utf8_general_ci' NOT NUL
 ALTER TABLE `sys_config` ADD UNIQUE `unique` (`owner`, `app`, `module`, `section`, `key`),
 DROP INDEX `unique`;
 
-CREATE TABLE IF NOT EXISTS `crm_product` (
+CREATE TABLE IF NOT EXISTS `sys_product` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `code` varchar(30) NOT NULL,

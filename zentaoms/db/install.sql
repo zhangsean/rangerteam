@@ -210,34 +210,18 @@ CREATE TABLE IF NOT EXISTS `sys_file` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_product`;
 CREATE TABLE IF NOT EXISTS `sys_product` (
-  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
-  `alias` varchar(100) NOT NULL,
-  `mall` varchar(255) NOT NULL,
-  `brand` varchar(100) default NULL,
-  `model` char(30) default NULL,
-  `color` char(20) NOT NULL,
-  `origin` varchar(50) NOT NULL,
-  `unit` char(20) NOT NULL,
-  `price` float(8,2) NOT NULL,
-  `promotion` float(8,2) NOT NULL,
-  `amount` mediumint(8) unsigned default NULL,
-  `keywords` varchar(150) NOT NULL,
+  `code` varchar(30) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `status` varchar(10) NOT NULL,
   `summary` text NOT NULL,
-  `content` text NOT NULL,
-  `author` varchar(60) NOT NULL,
-  `editor` varchar(60) NOT NULL,
-  `addedDate` datetime NOT NULL,
+  `createdBy` varchar(60) NOT NULL,
+  `createdDate` datetime NOT NULL,
+  `editedBy` varchar(60) NOT NULL,
   `editedDate` datetime NOT NULL,
-  `status` varchar(20) NOT NULL default 'normal',
-  `views` mediumint(5) unsigned NOT NULL default '0',
-  `sticky` enum('0','1','2','3') NOT NULL default '0',
-  `order` smallint(5) unsigned NOT NULL,
-  PRIMARY KEY  (`id`),
-  KEY `order` (`order`),
-  KEY `views` (`views`),
-  KEY `sticky` (`sticky`),
-  KEY `model` (`model`)
+  `deleted` enum('0','1') NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_sso`;
 CREATE TABLE IF NOT EXISTS `sys_sso` (
