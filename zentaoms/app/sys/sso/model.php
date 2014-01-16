@@ -73,10 +73,10 @@ class ssoModel extends model
     public function createToken($sid, $entryID)
     {
         $data  = new stdClass();
-        $data->sid         = $sid;
-        $data->entry       = $entryID;
-        $data->createdTime = helper::now();
-        $data->token       = md5($sid . $entryID . helper::now());
+        $data->sid   = $sid;
+        $data->entry = $entryID;
+        $data->time  = helper::now();
+        $data->token = md5($sid . $entryID . helper::now());
         $this->dao->delete()->from(TABLE_SSO)->where('sid')->eq($sid)->andWhere('entry')->eq($entryID)->exec();
         $this->dao->insert(TABLE_SSO)->data($data)->exec();
         return $data->token;
