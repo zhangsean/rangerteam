@@ -28,11 +28,13 @@ $lang->order->contactedDate  = '联系时间';
 $lang->order->list   = '订单列表';
 $lang->order->browse = '维护订单';
 $lang->order->create = '创建订单';
+$lang->order->edit   = '编辑订单';
+$lang->order->close  = '关闭订单';
 
 $lang->order->statusList['normal']   = '正常';
 $lang->order->statusList['assigned'] = '已指派';
 $lang->order->statusList['payed']    = '已付款';
-$lang->order->statusList['closed']   = '关闭';
+$lang->order->statusList['closed']   = '已关闭';
 
 $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '订单失败';
