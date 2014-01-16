@@ -90,4 +90,23 @@ class order extends control
 
         $this->display();
     }
+
+    /**
+     * Close an order.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return void
+     */
+    public function close($orderID) 
+    {
+        if(!empty($_POST))
+        {
+            $this->order->close($orderID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->display();
+    }
 }

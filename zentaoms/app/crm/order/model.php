@@ -97,4 +97,29 @@ class orderModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Close an order.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return bool
+     */
+    public function close($orderID)
+    {
+        $now   = helper::now();
+        $order = fixer::input('post')
+            ->add('closedDate', $now)
+            ->add('closedBy', $this->app->user->account)
+            ->add('assignedTo', 'closed')
+            ->add('assignedDate', $now)
+            ->add('status', 'closed')
+            ->get();
+
+        $this->dao->update(TABLE_ORDER)->data($order)
+            ->autoCheck()
+            ->where('id')->eq($orderID)->exec();
+
+        return !dao::isError();
+    }
 }

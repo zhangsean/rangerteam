@@ -16,10 +16,18 @@
           <th><?php echo $lang->order->plannedAmounts;?></th>
           <td><?php echo html::input('plan', $order->plan, "class='form-control'");?></td>
         </tr>
+        <?php if($order->status != 'closed'):?>
         <tr>
           <th><?php echo $lang->order->assignedTo;?></th>
           <td><?php echo html::input('assignedTo', $order->assignedTo, "class='form-control'");?></td>
         </tr>
+        <?php endif;?>
+        <?php if($order->status == 'closed'):?>
+        <tr>
+          <th><?php echo $lang->order->closedReason;?></th>
+          <td><?php echo html::select('closedReason', $lang->order->closedReasonList, $order->closedReason, "class='form-control'");?></td>
+        </tr>
+        <?php endif;?>
         <tr>
           <th></th>
           <td colspan='2'><?php echo html::submitButton();?></div>
