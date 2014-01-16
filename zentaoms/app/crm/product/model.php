@@ -135,7 +135,7 @@ class productModel extends model
      * @access public
      * @return void
      */
-    public function delete($productID)
+    public function delete($productID, $table = null)
     {
         $this->dao->update(TABLE_PRODUCT)->set('deleted')->eq(1)->where('id')->eq($productID)->exec();
 
