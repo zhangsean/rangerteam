@@ -20,7 +20,7 @@ class fieldModel extends model
      */
     public function getList($productID)
     {
-        return $this->dao->select('*')->from(TABLE_ORDERFIELD)->where('product')->eq($productID)->orderBy('order_desc')->fetchAll('field');
+        return $this->dao->select('*')->from(TABLE_ORDERFIELD)->where('product')->eq($productID)->orderBy('`order`')->fetchAll('field');
     }
 
     /**
