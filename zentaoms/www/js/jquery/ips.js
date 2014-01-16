@@ -93,7 +93,7 @@
         {
             var config = entriesConfigs[i];
 
-            var et  =  new entry();
+            var et = new entry();
             et.init(config);
 
             entries[config.id] = et;
