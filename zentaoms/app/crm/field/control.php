@@ -55,4 +55,18 @@ class field extends control
         $this->display();
     }
 
+    /**
+     * Delete field.
+     * 
+     * @param  int    $productID 
+     * @param  int    $fieldID 
+     * @access public
+     * @return void
+     */
+    public function delete($productID, $fieldID)
+    {
+        $product = $this->loadModel('product')->getByID($productID);
+        if($this->field->delete($product->code, $fieldID)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
 }

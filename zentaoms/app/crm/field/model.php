@@ -12,6 +12,18 @@
 class fieldModel extends model
 {
     /**
+     * Get by id. 
+     * 
+     * @param  int    $fieldID 
+     * @access public
+     * @return object
+     */
+    public function getByID($fieldID)
+    {
+        return $this->dao->select('*')->from(TABLE_ORDERFIELD)->where('id')->eq($fieldID)->limit(1)->fetch();
+    }
+
+    /**
      * Get list.
      * 
      * @param  int    $productID 
@@ -49,5 +61,24 @@ class fieldModel extends model
 
         return true;
     }
-}
 
+    /**
+     * Delete field. 
+     * 
+     * @param  string $code 
+     * @param  int    $fieldID 
+     * @access public
+     * @return bool
+     */
+    public function delete($code, $fieldID)
+    {
+        $field = $this->getByID($fieldID);
+        $this->dao->delete()->from(TABLE_ORDERFIELD)->where('id')->eq($fieldID)->exec();
+
+        if(dao::isError()) return false;
+        $dropQuery = "ALTER TABLE crm_order_{$code} DROP `{$field->field}`";
+        if(!$this->dbh->query($dropQuery)) return false;
+
+        return true;
+    }
+}
