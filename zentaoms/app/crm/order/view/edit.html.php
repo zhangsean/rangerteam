@@ -6,11 +6,11 @@
       <table class='table table-form'>
         <tr>
           <th><?php echo $lang->order->customer;?></th>
-          <td colspan='2'><?php echo $lang->order->customers[$order->customer];?></td>
+          <td><?php echo $lang->order->customers[$order->customer];?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->product;?></th>
-          <td colspan='2'><?php echo html::select('product', $products, $order->product, "class='form-control'");?></td>
+          <td><?php echo html::select('product', $products, $order->product, "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->plannedAmounts;?></th>
@@ -30,7 +30,7 @@
         <?php endif;?>
         <tr>
           <th></th>
-          <td colspan='2'><?php echo html::submitButton();?></div>
+          <td><?php echo html::submitButton();?></div>
         </div>
       </table>
     </form>
