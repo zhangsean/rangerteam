@@ -38,7 +38,7 @@ $lang->order->statusList['closed']   = '已关闭';
 
 $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '订单失败';
-$lang->order->closedReasonList['postponed'] = '已推迟';
+$lang->order->closedReasonList['postponed'] = '延期';
 
 $lang->order->customers['1'] = '张三';
 $lang->order->customers['2'] = '李四';
