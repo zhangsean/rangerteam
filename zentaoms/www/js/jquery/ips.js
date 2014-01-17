@@ -137,16 +137,16 @@
             }
             else
             {
-                this.size       = desktopSize;
-                this.position   = desktopPos;
-                this.cssclass  += ' window-max';
+                this.size      = desktopSize;
+                this.position  = desktopPos;
+                this.cssclass += ' window-max';
             }
 
             this.width  = this.size.width;
             this.height = this.size.height;
 
             /* init position setting */
-            if(this.position == 'center')
+            if(this.position == 'center' || this.display == 'modal')
             {
                 this.position = 
                 {
@@ -171,9 +171,16 @@
             this.top  = this.position.y;
 
             /* init display setting */
-            if(this.display == 'fixed')
+            if(this.display == 'fixed' || this.display == 'modal')
             {
                 this.cssclass += ' window-fixed';
+            }
+
+            /* mark modal with css class */
+            if(this.display == 'modal')
+            {
+                this.cssclass += ' window-modal';
+                this.zindex   += 50000;
             }
 
             /* init control bar setting */
@@ -221,8 +228,7 @@
 
         this.toLeftBarShortcutHtml = function()
         {
-            if(this.menu)
-                return settings.leftBarShortcutHtmlTemplate.format(this);
+            if(this.menu) return settings.leftBarShortcutHtmlTemplate.format(this);
         };
 
         this.toTaskBarShortcutHtml = function()
@@ -442,13 +448,6 @@
                 alert(settings.entryNotFindTip);
             }
 
-            var fullWindow = $(this).closest('.window-fullscreen.window-active');
-
-            if(fullWindow.length > 0)
-            {
-                hideWindow(fullWindow);
-            }
-
             event.preventDefault();
         });
     }
@@ -469,7 +468,7 @@
             reloadWindow(entry.idstr);
             activeWindow(entry.idstr);
         }
-        else if(entryWin.hasClass('window-active') && (!$('#deskContainer').hasClass('hide-windows')))
+        else if(entryWin.hasClass('window-active'))
         {
             toggleShowWindow(entryWin);
         }
@@ -478,12 +477,22 @@
             showWindow(entryWin);
         }
 
-        handleFullscreenMode();
+        if(entry.display != 'modal') handleFullscreenMode();
+        else handleModalMode(entry);
+    }
+
+    function handleModalMode(entry)
+    {
+        if(entry.display == 'modal')
+        {
+            $('#desktop').addClass('modal-mode');
+        }
     }
 
     function createWindow(entry)
     {
-        $('#deskContainer').append(entry.toWindowHtml());
+        if(entry.display == 'modal') $('#modalContainer').append(entry.toWindowHtml());
+        else $('#deskContainer').append(entry.toWindowHtml());
         $('#taskbar .bar-menu').append(entry.toTaskBarShortcutHtml());
         $('.app-btn[data-id="'+entry.id+'"]').addClass('open');
     }
@@ -666,6 +675,7 @@
             return;
 
         var id       = win.attr('data-id');
+        var isModal  = win.hasClass('window-modal');
 
         /* save the last position and size */
         var entry    = entries[id];
@@ -674,14 +684,16 @@
         entry.width  = win.width();
         entry.height = win.height();
 
-        win.fadeOut(settings.animateSpeed, function(){
+        win.fadeOut(settings.animateSpeed, function()
+        {
             $('.app-btn[data-id="' + id + '"]').removeClass('open').removeClass('active');
             $('#s-task-' + id).remove();
             win.remove();
+            if(isModal) $('#desktop').removeClass('modal-mode');
         });
 
         $('.tooltip').remove();
-        activeWindow(lastActiveWindow);
+        if(!isModal) activeWindow(lastActiveWindow);
     }
 
     function toggleMaxSizeWindow(winQuery)
@@ -777,8 +789,13 @@
         initWindowMovable();
     }
 
+    function closeModal()
+    {
+        closeWindow($('#modalContainer .window').attr('id'));
+    }
+
     /* make jquery object call the ips interface manager */
-    $.extend({ipsStart: start});
+    $.extend({ipsStart: start, closeModal: closeModal});
 
 }(jQuery,window,document,Math);
 

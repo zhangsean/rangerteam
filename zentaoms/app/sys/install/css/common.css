@@ -1,6 +1,6 @@
 body{background-color: #f1f1f1}
 .container{padding: 0}
-.modal-dialog{padding-top: 7%;width: 800px}
+.modal-dialog{width: 800px}
 .modal-footer{text-align: center;margin-top: 0;}
 
 .table,.alert{margin: 0;}

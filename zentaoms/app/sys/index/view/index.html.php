@@ -43,7 +43,7 @@ js::import($jsRoot . 'jquery/ips.js');
       </div>
     </div>
     <div id='home' class='fullscreen fullscreen-active'>
-      <div class='buttons-group actions'><button data-toggle='tooltip' data-placement='left' title='<?php echo $lang->index->customPanels; ?>' class='btn btn-pure'><i class='icon-cog'></i></button></div>
+      <div class='btn-toolbar actions'><button data-toggle='tooltip' data-placement='bottom' data-id='addblcok' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure app-btn'><i class='icon-plus'></i></button><button data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->index->customBlocks; ?>' class='btn btn-pure'><i class='icon-wrench'></i></button></div>
       <div class='panels-container'>
         <div class='row'>
           <div class='col-sm-6 col-md-4 col-lg-3'>
@@ -53,22 +53,22 @@ js::import($jsRoot . 'jquery/ips.js');
                 <table class='table table-hover table-condensed'>
                   <tr>
                     <td><strong>Row Title</strong></td>
-                    <td class='small'><i class='icon-user'></i> Catouse</td>
+                    <td><span  class='small'><i class='icon-user'></i> Catouse</span></td>
                     <td class='text-right'><span class='label label-badge'>34</span></td>
                   </tr>
                   <tr>
                     <td><strong>Row Title 2</strong></td>
-                    <td class='small'><i class='icon-user'></i> Mouse</td>
+                    <td><span  class='small'><i class='icon-user'></i> Mouse</span></td>
                     <td class='text-right'><span class='label label-success label label-badge'>34</span></td>
                   </tr>
                   <tr>
                     <td><strong>Row Title 3</strong></td>
-                    <td class='small'><i class='icon-user'></i> Cat</td>
+                    <td><span  class='small'><i class='icon-user'></i> Cat</span></td>
                     <td class='text-right'></td>
                   </tr>
                   <tr>
                     <td><strong>Row Title 3</strong></td>
-                    <td class='small'><i class='icon-user'></i> Cat</td>
+                    <td><span  class='small'><i class='icon-user'></i> Cat</span></td>
                     <td class='text-right'><span class='label label-danger label-badge'>10</span></td>
                   </tr>
                 </table>
@@ -180,7 +180,11 @@ js::import($jsRoot . 'jquery/ips.js');
     </div>
     <div id='deskContainer'>
     </div>
+    <div id='modalContainer'>
+      
+    </div>
   </div>
+
 <script>
 var entries = new Array(
 {
@@ -193,6 +197,16 @@ var entries = new Array(
     size        : 'default',
     menu        : false,
     position    : 'center',
+    control     : 'full'
+},
+{
+    id          : 'addblcok',
+    url         : '<?php echo $this->createLink("block", "add"); ?>',
+    name        : '<?php echo $lang->index->addBlock; ?>',
+    type        : 'iframe',
+    display     : 'modal',
+    size        : 'default',
+    menu        : false,
     control     : 'full'
 });
 

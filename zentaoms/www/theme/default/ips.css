@@ -309,3 +309,18 @@ button {outline: none; border: none; background-color: transparent;}
 
 /* css helper */
 .no-padding {padding: 0}
+
+/* modal */
+#modalContainer
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 50000;
+    display: none;
+}
+#desktop.modal-mode #modalContainer {display: block;}
