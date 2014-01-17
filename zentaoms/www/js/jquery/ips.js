@@ -253,6 +253,107 @@
         onWindowKeydown();
 
         initWindowActivable();
+
+        handleToggleClass();
+
+        handleHomeBlocks();
+    }
+
+    function handleHomeBlocks()
+    {
+        $(document).on('mouseover', '#home.custom-mode:not(.dragging) .panel:not(#draggingPanel)', function()
+        {
+            $(this).addClass('hover');
+            $('#home.custom-mode').addClass('hover');
+        }).on('mouseout', '#home.custom-mode:not(.dragging) .panel', function()
+        {
+            $(this).removeClass('hover');
+            $('#home.custom-mode').removeClass('hover');
+        }).on('mousedown', '#home.custom-mode .panel.hover:not(#draggingPanel)', function(event)
+        {
+            var panel = $(this);
+            var dPanel = panel.clone().attr('id', 'draggingPanel');
+            var pos   = panel.offset();
+
+            panel.addClass('dragging');
+            panel.parent().addClass('dragging-col');
+            
+            dPanel.css(
+            {
+                left    : pos.left - desktopPos.x,
+                top     : pos.top,
+                width   : panel.width(),
+                height  : panel.height()
+            }).appendTo('#home').data('mouseOffset', {x: event.pageX - pos.left + desktopPos.x, y: event.pageY - pos.top});
+
+            $(document).bind('mousemove',mouseMove).bind('mouseup',mouseUp);
+            event.preventDefault();
+            $('#home').addClass('dragging');
+
+            function mouseMove(event)
+            {
+                var offset = dPanel.data('mouseOffset');
+                dPanel.css(
+                {
+                    left : event.pageX-offset.x,
+                    top : event.pageY-offset.y
+                });
+
+                $('#home.custom-mode .panel:not(#draggingPanel)').each(function()
+                {
+                    $('.dragging-in').removeClass('dragging-in');
+
+                    var p = $(this);
+                    var pP = p.offset(), pW = p.width(), pH = p.height();
+                    var pX = pP.left - pW / 2, pY = pP.top;
+                    var mX = event.pageX - desktopPos.x, mY = event.pageY;
+
+                    if(mX > pX && mY > pY && mX < (pX + pW) && mY < (pY + pH))
+                    {
+                        p.parent().addClass('dragging-in');
+                        return false;
+                    }
+                });
+                event.preventDefault();
+            }
+
+            function mouseUp(event)
+            {
+                if(panel.attr('id') != $('.dragging-in').attr('id'))
+                {
+                    panel.parent().insertBefore('.dragging-in');
+                    var newOrder = 1;
+                    $('#home .panel:not(#draggingPanel)').each(function()
+                    {
+                        $(this).attr('data-order', newOrder++);
+                    });
+                }
+                $('#draggingPanel').remove();
+                $('.dragging-col').removeClass('dragging-col');
+                $('.dragging').removeClass('dragging');
+                $('.dragging-in').removeClass('dragging-in');
+                $('#home').removeClass('dragging');
+                $(document).unbind('mousemove', mouseMove).unbind('mouseup', mouseUp);
+                event.preventDefault();
+            }
+        });
+
+        $('#home .panel .custom-actions').mousedown(function(event)
+        {
+            event.preventDefault();
+            event.stopPropagation();
+        });
+    }
+
+    function handleToggleClass()
+    {
+        $(document).on('click', '[data-toggle-class]', function()
+        {
+            var $e = $(this);
+            var target = $e.attr('data-target');
+            if(target != undefined) target = $(target); else target = $e;
+            target.toggleClass($e.attr('data-toggle-class'));
+        });
     }
 
     function initWindowActivable()
@@ -316,7 +417,7 @@
             }
             movingWindow = win;
             var mwPos = movingWindow.position();
-            movingWindow.data('mouseOffset', {x: event.pageX-mwPos.left, y: event.pageY-mwPos.top}).addClass('window-moving');
+            movingWindow.data('mouseOffset', {x: event.pageX - mwPos.left, y: event.pageY - mwPos.top}).addClass('window-moving');
             $(document).bind('mousemove',mouseMove).bind('mouseup',mouseUp)
             event.preventDefault();
         });

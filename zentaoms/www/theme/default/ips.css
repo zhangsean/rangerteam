@@ -294,14 +294,30 @@ button {outline: none; border: none; background-color: transparent;}
 #closeAllApps:hover {text-decoration: none; color: #fff; color: rgba(255,255,255,0.9);}
 
 /* home */
+#home {position: relative;}
+#home [class^='col-'] {height: 266px; overflow: visible;}
 #home .panel {border-radius: 2px; box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);}
-#home .panel-heading {padding: 6px 15px;}
+#home .panel-heading {padding: 6px; height: 34px; font-weight: bold}
 #home .panel-body {height: 210px; overflow: auto;}
 #home .panels-container {max-width: 1600px; margin: 0 auto; padding: 0 5%; margin-top: 5%;}
 #home .panel-body > .list-group {margin: 0;}
 #home .panel-body .list-group > .list-group-item {border-left: 0; border-right: 0;}
 #home .panel-body .list-group > .list-group-item:first-child {border-top: none;}
 #home .panel-body .list-group > .list-group-item:last-child {border-bottom: none;}
+#home .panel .custom-actions {display: none; float: right; margin-top: -1px;}
+#home [class^='col-'], #home .panel, #home .panel-heading, #home .panel-body, #draggingPanel {transition: all .3s cubic-bezier(0.175,0.885,0.32,1);}
+#home.custom-mode .panel .custom-actions {display: block;}
+#home.custom-mode .panel-body {opacity: 0.4}
+#home.custom-mode .panel {cursor: move;}
+#home.custom-mode.hover .panel {opacity: 0.8;}
+#home.custom-mode.hover .panel.hover {opacity: 1; box-shadow: 2px 0 25px rgba(0,0,0,0.8)}
+#home.custom-mode .panel.dragging {border: 2px solid rgba(255,255,255,0.1); background:rgba(0,0,0,0.3); box-shadow: none!important; color:#fff;}
+#home.custom-mode .panel.dragging > * {opacity: 0.1}
+#home.custom-mode .dragging-in:before {box-sizing: content-box; content:' '; display: block; position: absolute; left: -2px; top: -10px; width: 2px; height: 100%; background-color: rgba(255,255,255, 0.5); border: 1px solid #fff;}
+#home.custom-mode .dragging-in.dragging-col:before {display: none;}
+
+#draggingPanel {position: absolute; z-index: 42; border: 2px solid rgba(255,255,255,0.9); box-shadow: 2px 0 25px rgba(0,0,0,0.8)!important; background: rgba(255,255,255,0.5); }
+#draggingPanel > * {opacity: 0.5!important}
 
 /* pure button to fit dark background */
 .btn-pure {background-color: transparent; background-color: rgba(255,255,255,0.1); color: #f1f1f1; color: rgba(255,255,255,0.9); border-color: #f1f1f1; border-color: rgba(255,255,255,0.3);}

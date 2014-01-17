@@ -43,12 +43,18 @@ js::import($jsRoot . 'jquery/ips.js');
       </div>
     </div>
     <div id='home' class='fullscreen fullscreen-active'>
-      <div class='btn-toolbar actions'><button data-toggle='tooltip' data-placement='bottom' data-id='addblcok' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure app-btn'><i class='icon-plus'></i></button><button data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->index->customBlocks; ?>' class='btn btn-pure'><i class='icon-wrench'></i></button></div>
+      <div class='btn-toolbar actions'><button data-toggle='tooltip' data-placement='bottom' data-id='addblcok' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure app-btn'><i class='icon-plus'></i></button><button data-target='#home' data-toggle-class='custom-mode' data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->index->customBlocks; ?>' class='btn btn-pure'><i class='icon-wrench'></i></button></div>
       <div class='panels-container'>
         <div class='row'>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel'>
-              <div class='panel-heading'>Panel with Table</div>
+            <div class='panel' id='block1'>
+              <div class='panel-heading'>
+                <i class='icon-list-ul'></i> Blck Name
+                <div class='custom-actions'>
+                  <a class='btn btn-mini edit-block' data-toggle='modal' href='<?php echo $this->createLink("block", "edit"); ?>'><i class='icon-pencil'></i></a>
+                  <button class='btn btn-mini remove-block btn-danger'><i class='icon-remove'></i></button>
+                </div>
+              </div>
               <div class='panel-body no-padding'>
                 <table class='table table-hover table-condensed'>
                   <tr>
@@ -76,8 +82,13 @@ js::import($jsRoot . 'jquery/ips.js');
             </div>
           </div>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel'>
-              <div class='panel-heading'>Panel with list group</div>
+            <div class='panel' id='block2'>
+              <div class='panel-heading'>Panel with list group
+                <div class='custom-actions'>
+                  <button class='btn btn-mini edit-block'><i class='icon-pencil'></i></button>
+                  <button class='btn btn-mini remove-block btn-danger'><i class='icon-remove'></i></button>
+                </div>
+              </div>
               <div class='panel-body no-padding'>
                 <div class='list-group'>
                   <a href='###' class='list-group-item'>Haha</a>
@@ -91,7 +102,7 @@ js::import($jsRoot . 'jquery/ips.js');
             </div>
           </div>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel'>
+            <div class='panel' id='block3'>
               <div class='panel-heading'>Panel Name</div>
               <div class='panel-body'>
                 <button class='btn btn-block btn-danger'>HIT ME!</button>
@@ -99,51 +110,57 @@ js::import($jsRoot . 'jquery/ips.js');
             </div>
           </div>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel'>
+            <div class='panel' id='block4'>
               <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'></div>
+              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>4</h1></div>
             </div>
           </div>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel'>
+            <div class='panel' id='block5'>
               <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'></div>
+              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>5</h1></div>
             </div>
           </div>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel'>
+            <div class='panel' id='block6'>
               <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'></div>
+              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>6</h1></div>
             </div>
           </div>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel'>
+            <div class='panel' id='block7'>
               <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'></div>
+              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>7</h1></div>
             </div>
           </div>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel'>
+            <div class='panel' id='block8'>
               <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'></div>
+              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>8</h1></div>
             </div>
           </div>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel'>
+            <div class='panel' id='block9'>
               <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'></div>
+              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>9</h1></div>
             </div>
           </div>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel'>
+            <div class='panel' id='block10'>
               <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'></div>
+              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>10</h1></div>
             </div>
           </div>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel'>
+            <div class='panel' id='block11'>
               <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'></div>
+              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>11</h1></div>
+            </div>
+          </div>
+          <div class='col-sm-6 col-md-4 col-lg-3'>
+            <div class='panel' id='block12'>
+              <div class='panel-heading'>Panel Name</div>
+              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>12</h1></div>
             </div>
           </div>
         </div>
