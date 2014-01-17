@@ -21,12 +21,13 @@ $lang->menu->crm->contract  = '合同|contract|index|';
 $lang->menu->crm->product   = '产品|product|index|';
 $lang->menu->crm->contact   = '联系人|contact|index|';
 $lang->menu->crm->feedback  = '售后|feedback|index|';
+$lang->menu->crm->feedback  = '团队|team|index|';
 
 /* Menu of customer module. */
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
-$lang->customer->menu->browse = array('link' => '客户列表|customer|admin|', 'alias' => 'edit');
-$lang->customer->menu->create = '添加客户|customer|create|type=customer';
+$lang->customer->menu->browse = array('link' => '客户列表|customer|browse|', 'alias' => 'edit');
+$lang->customer->menu->create = '添加客户|customer|create|';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
