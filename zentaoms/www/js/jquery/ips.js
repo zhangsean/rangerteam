@@ -111,6 +111,14 @@
             /* if no icon setting here, then load icon with the default rule */
             if(!this.icon) this.icon = settings.entryIconRoot + 'entry-' + this.id + '.png';
 
+            /* mark modal with css class */
+            if(this.display == 'modal')
+            {
+                this.cssclass += ' window-modal';
+                this.zindex   += 50000;
+                this.position  = 'center';
+            }
+
             /* window open type */
             switch(this.open)
             {
@@ -122,65 +130,12 @@
                     break;
             }
 
-            /* init size setting */
-            if(this.size == 'default')
-            {
-                this.size = settings.defaultWindowSize;
-            }
-            else if(this.size.width != undefined && this.size.height != undefined)
-            {
-                this.size = 
-                {
-                    width:  Math.min(this.size.width, desktopSize.width),
-                    height: Math.min(this.size.height, desktopSize.height)
-                };
-            }
-            else
-            {
-                this.size      = desktopSize;
-                this.position  = desktopPos;
-                this.cssclass += ' window-max';
-            }
 
-            this.width  = this.size.width;
-            this.height = this.size.height;
-
-            /* init position setting */
-            if(this.position == 'center' || this.display == 'modal')
-            {
-                this.position = 
-                {
-                    x: Math.max(desktopPos.x, desktopPos.x + (desktopSize.width - this.width)/2),
-                    y: Math.max(desktopPos.y, desktopPos.y + (desktopSize.height - this.width)/2)
-                };
-            }
-            else if(this.position.x != undefined && this.position.y != undefined)
-            {
-                this.position = 
-                {
-                    x: Math.max(desktopPos.x, this.position.x),
-                    y: Math.max(desktopPos.y, this.position.y)
-                };
-            }
-            else
-            {
-                this.position = getNextDefaultWinPos();
-            }
-
-            this.left = this.position.x;
-            this.top  = this.position.y;
 
             /* init display setting */
             if(this.display == 'fixed' || this.display == 'modal')
             {
                 this.cssclass += ' window-fixed';
-            }
-
-            /* mark modal with css class */
-            if(this.display == 'modal')
-            {
-                this.cssclass += ' window-modal';
-                this.zindex   += 50000;
             }
 
             /* init control bar setting */
@@ -220,8 +175,49 @@
             return d;
         }
 
+        this.calPosSize = function()
+        {
+            /* init size setting */
+            if(this.size == 'default')
+            {
+                this.width  = settings.defaultWindowSize.width;
+                this.height = settings.defaultWindowSize.height;
+            }
+            else if(this.size.width != undefined && this.size.height != undefined)
+            {
+                this.width  = Math.min(this.size.width, desktopSize.width);
+                this.height = Math.min(this.size.height, desktopSize.height);
+            }
+            else
+            {
+                this.width  = desktopSize.width;
+                this.height = desktopSize.height;
+                this.position  = desktopPos;
+                if(this.cssclass.indexOf(' window-max') < 1) this.cssclass += ' window-max';
+            }
+
+            /* init position setting */
+            if(this.position == 'center')
+            {
+                this.left = Math.max(desktopPos.x, desktopPos.x + (desktopSize.width - this.width)/2);
+                this.top  = Math.max(desktopPos.y, desktopPos.y + (desktopSize.height - this.height)/2);
+            }
+            else if(this.position.x != undefined && this.position.y != undefined)
+            {
+                this.left = Math.max(desktopPos.x, this.position.x);
+                this.top  = Math.max(desktopPos.y, this.position.y);
+            }
+            else
+            {
+                var pos = getNextDefaultWinPos();
+                this.left = pos.x;
+                this.top  = pos.y;
+            }
+        }
+
         this.toWindowHtml   = function()
         {
+            this.calPosSize();
             this.html = settings.windowHtmlTemplate.format(this);
             return this.html;
         };
@@ -690,6 +686,8 @@
             $('#s-task-' + id).remove();
             win.remove();
             if(isModal) $('#desktop').removeClass('modal-mode');
+
+            if((!$('#desktop').hasClass('fullscreen-mode')) && $('#taskbar .bar-menu li').length < 1) $('#showDesk').click();
         });
 
         $('.tooltip').remove();

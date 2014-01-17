@@ -323,4 +323,5 @@ button {outline: none; border: none; background-color: transparent;}
     z-index: 50000;
     display: none;
 }
+#modalContainer .min-win{display: none;}
 #desktop.modal-mode #modalContainer {display: block;}
