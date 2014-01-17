@@ -6,11 +6,11 @@
       <table class='table table-form'>
         <tr>
           <th><?php echo $lang->product->name;?></th>
-          <td colspan='2'><?php echo html::input('name', $product->name, "class='form-control'");?></td>
+          <td><?php echo html::input('name', $product->name, "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->product->code;?></th>
-          <td colspan='2'><?php echo html::input('code', $product->code, "class='form-control'");?></td>
+          <td><?php echo html::input('code', $product->code, "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->product->type;?></th>
@@ -22,11 +22,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->product->summary;?></th>
-          <td colspan='2'><?php echo html::textarea('summary', $product->summary, "rows='2' class='form-control'");?></td>
+          <td><?php echo html::textarea('summary', $product->summary, "rows='2' class='form-control'");?></td>
         </tr>
         <tr>
           <th></th>
-          <td colspan='2'><?php echo html::submitButton();?></div>
+          <td><?php echo html::submitButton();?></div>
         </div>
       </table>
     </form>

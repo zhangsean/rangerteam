@@ -9,11 +9,11 @@
       <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->product->field->name;?></th>
-          <td colspan='2'><?php echo html::input('name', '', "class='form-control'");?></td>
+          <td><?php echo html::input('name', '', "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->product->field->field;?></th>
-          <td colspan='2'><?php echo html::input('field', '', "class='form-control'");?></td>
+          <td><?php echo html::input('field', '', "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->product->field->control;?></th>
@@ -25,15 +25,15 @@
         </tr>
         <tr>
           <th><?php echo $lang->product->field->default;?></th>
-          <td colspan='2'><?php echo html::textarea('default', '', "rows='2' placeholder='{$lang->product->field->optionsPlaceholder}' class='form-control'");?></td>
+          <td><?php echo html::textarea('default', '', "rows='2' placeholder='{$lang->product->field->optionsPlaceholder}' class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->product->field->rules;?></th>
-          <td colspan='2'><?php echo html::select('rules', $lang->product->field->rulesList, '', "rows='2' multiple class='chosen form-control'");?></td>
+          <td><?php echo html::select('rules', $lang->product->field->rulesList, '', "rows='2' multiple class='chosen form-control'");?></td>
         </tr>
         <tr>
           <th></th>
-          <td colspan='2'><?php echo html::submitButton();?></td>
+          <td><?php echo html::submitButton();?></td>
         </tr>
       </table>
     </form>
