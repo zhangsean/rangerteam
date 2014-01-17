@@ -26,7 +26,7 @@
         <td>
           <?php
           echo html::a($this->createLink('field', 'edit', "fieldID=$field->id"), $lang->edit);
-          echo html::a($this->createLink('field', 'delete', "fieldID=$field->id"), $lang->delete, "class='deleter'");
+          echo html::a($this->createLink('field', 'delete', "productID=$productID&fieldID=$field->id"), $lang->delete, "class='deleter'");
           ?>
         </td>
       </tr>

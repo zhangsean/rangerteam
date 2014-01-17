@@ -20,7 +20,7 @@ class productModel extends model
      */
     public function getByID($id)
     {
-       $product = $this->dao->select('*')->from(TABLE_PRODUCT)->where('id')->eq($id)->fetch();
+       $product = $this->dao->select('*')->from(TABLE_PRODUCT)->where('id')->eq($id)->limit(1)->fetch();
 
        if(!$product) return false;
 
