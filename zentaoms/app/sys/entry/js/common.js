@@ -10,11 +10,5 @@ function createKey()
     return false;
 }
 
-function toggleSize(value)
-{
-  $('#custom').hide();
-  if(value == 'custom')$('#custom').show();
-}
-
-$('#size').change(function(){toggleSize($(this).val())});
-$(function(){toggleSize($('#size').val());})
+$('#size').change(function(){$('#custom').toggle($(this).val() == 'custom')});
+$(function(){$('#custom').toggle($('#size').val() == 'custom')})
