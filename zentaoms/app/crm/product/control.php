@@ -110,9 +110,8 @@ class product extends control
      */
     public function adminField($productID)
     {
-        $this->view->productID = $productID;
         $this->view->fields    = $this->product->getFieldList($productID);
-
+        $this->view->productID = $productID;
         $this->display();
     }
 
@@ -142,6 +141,71 @@ class product extends control
      */
     public function editField($field)
     {
+        $this->display();
+    }
+
+    /**
+     * Admin actions of order. 
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function adminAction($productID)
+    {
+        $this->view->productID = $productID;
+        $this->view->actions   = $this->product->getActions($productID);
+        $this->display();
+    }
+
+    /**
+     * Create an action of an order.
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function createAction($productID)
+    {
+        if($_POST)
+        {
+            if($this->product->createAction($productID)) $this->send(array('result' => 'success', 'message' => $this->lang->success, 'locate' => $this->inlink('adminaction')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+        $this->view->productID = $productID;
+        $this->display();
+    }
+
+    /**
+     * Action conditions.
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function actionConditions($actionID)
+    {
+        $action = $this->product->getActionByID($actionID);      
+        if(empty($action)) die('');
+
+        if($_POST)
+        {
+            $result = $this->product->saveConditions($actionID);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('adminaction', "actionID={$actionID}")));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->loadModel('order');
+
+        $conditionFields = array('' => '');
+        foreach($this->config->order->conditionFields as $field) $conditionFields[$field] = $this->lang->order->{$field};
+
+        $fields  = $this->product->getFieldList($action->productID);
+        foreach($fields as $field) $conditionFields[$field->field] = $field->name;
+
+        $this->view->action          = $action;
+        $this->view->product         = $this->product->getByID($action->productID);
+        $this->view->conditionFields = $conditionFields;
         $this->display();
     }
 }

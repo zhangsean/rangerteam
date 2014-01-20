@@ -44,15 +44,16 @@ class order extends control
         $this->view->products  = $this->loadModel('product')->getPairs();
         $this->view->pager     = $pager;
         $this->display();
-    }   
+    }
 
     /**
      * Create an order.
      * 
+     * @param  int    $productID 
      * @access public
-     * @return int|bool
+     * @return viod
      */
-    public function create()
+    public function create($productID = 0)
     {
         if($_POST)
         {
@@ -60,9 +61,15 @@ class order extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
+        $this->view->productForm = '';
+        if($productID) $this->view->productForm = $this->loadModel('product')->buildForm($productID);
 
+        $this->view->productID = $productID;
         $this->view->title     = $this->lang->order->create;
-        $this->view->products  = $this->loadModel('product')->getPairs();
+
+        $products = $this->loadModel('product')->getPairs();
+        $this->view->products = array( 0 => '') + $products;
+
         $this->display();
     }
 

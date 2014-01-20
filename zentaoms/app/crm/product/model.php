@@ -177,6 +177,14 @@ class productModel extends model
         return $form;
     }
     
+    /**
+     * Build control of a field.
+     * 
+     * @param  int    $field 
+     * @param  int    $values 
+     * @access public
+     * @return void
+     */
     public function buildFieldControl($field, $values = null)
     {
         switch($field->control)
@@ -193,9 +201,7 @@ class productModel extends model
                 return html::checkbox($field->field, array_combine($field->options), isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
             case 'date':
                 return html::input($field->field, isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
-
         }
-
     }
 
     /**
@@ -207,7 +213,7 @@ class productModel extends model
     public function createField($productID)
     {
         $field = fixer::input('post')->add('product', $productID)->get();
-        $product = $this->loadModel('product')->getByID($productID);
+        $product = $this->getByID($productID);
         if(empty($product)) return false;
 
         $this->dao->insert(TABLE_ORDERFIELD)
@@ -223,5 +229,73 @@ class productModel extends model
         if(!$this->dbh->query($alterQuery)) return false;
 
         return true;
+    }
+
+    /**
+     * Get action by ID.
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function getActionByID($actionID)
+    {
+        $action =  $this->dao->select('*')->from(TABLE_ORDERACTION)->where('id')->eq($actionID)->fetch();
+
+        $action->conditions = json_decode($action->conditions);
+        $action->inputs     = json_decode($action->inputs);
+        $action->results    = json_decode($action->results);
+        $action->tasks      = json_decode($action->tasks);
+        return $action;
+    }
+
+    /**
+     * Get actions of a product.
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function getActions($productID)
+    {
+        return $this->dao->select('*')->from(TABLE_ORDERACTION)->where('product')->eq($productID)->fetchAll('id');
+    }
+
+    /**
+     * Create an action of product's order.
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function createAction($productID)
+    {
+        $action = fixer::input('post')->add('product', $productID)->get();
+
+        $this->dao->insert(TABLE_ORDERACTION)
+            ->data($action)
+            ->autoCheck()
+            ->batchCheck($this->config->action->require->create, 'notempty')
+            ->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Save conditions of an action.
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function saveConditions($actionID)
+    {
+        foreach($_POST['field'] as $key => $field)
+        {
+            if(empty($field) or empty($_POST['oprater'][$key])) continue;
+            $conditions[$field] = array('oprater' => $_POST['oprater'][$key], 'value' => $_POST['value'][$key]);
+        }
+
+        $this->dao->update(TABLE_ORDERACTION)->set('conditions')->eq(json_encode($conditions))->where('id')->eq($actionID)->exec();
+        return !dao::isError();
     }
 }

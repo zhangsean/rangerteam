@@ -36,6 +36,50 @@ class fieldModel extends model
     }
 
     /**
+     * Build order form of a product.
+     * 
+     * @param  int       $productID 
+     * @param  object    $values 
+     * @access public
+     * @return void
+     */
+    public function buildForm($productID, $values = '')
+    {
+        $form = '';
+        $fieldList = $this->getList($productID);
+        foreach($fieldList as $field)
+        {
+            $form .= '<tr><th>';
+            $form .= $field->name;
+            $form .= '</th><td>';
+            $form .= $this->buildControl($field, $values);
+            $form .= '</td></tr>';
+        }
+        return $form;
+    }
+    
+    public function buildControl($field, $values = null)
+    {
+        switch($field->control)
+        {
+            case 'input':
+                return html::input($field->field, isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+            case 'textarea':
+                return html::input();
+            case 'select':
+                return html::select($field->field, array_combine($field->options), isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+            case 'radio':
+                return html::radio($field->field, array_combine($field->options), isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+            case 'checkbox':
+                return html::checkbox($field->field, array_combine($field->options), isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+            case 'date':
+                return html::input($field->field, isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+
+        }
+
+    }
+
+    /**
      * Create a field.
      * 
      * @access public

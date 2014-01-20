@@ -36,7 +36,6 @@ $lang->product->statusList['offline'] = '下线';
 
 $lang->product->field  = new stdclass();
 $lang->product->field->name        = '名称';
-$lang->product->field->type        = '类型';
 $lang->product->field->field       = '字段名';
 $lang->product->field->options     = '可选值';
 $lang->product->field->control     = '控件';
@@ -70,4 +69,14 @@ $lang->product->field->optionsPlaceholder = '多个值之间用空格或逗号�
 
 
 $lang->product->action = new stdclass();
-$lang->product->action->admin = '流程';
+$lang->product->action->action     = '动作';
+$lang->product->action->name       = '名称';
+$lang->product->action->conditions = '条件';
+$lang->product->action->value      = '值';
+$lang->product->action->inputs     = '输入';
+$lang->product->action->results    = '结果';
+$lang->product->action->tasks      = '任务';
+
+$lang->product->action->admin           = '流程';
+$lang->product->action->create          = '添加动作';
+$lang->product->action->adminConditions = '动作条件';
