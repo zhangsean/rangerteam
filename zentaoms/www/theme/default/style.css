@@ -67,15 +67,12 @@ body {padding-bottom:70px;background: #fff;}
 td>.text-1,td>.area-1{padding-left:2px;padding-right: 2px}
 .text-2 {width: 120px}
 .text-3 {width: 240px}
-select.text-3 {width: 250px}
 .text-4 {width: 360px}
 .text-5 {width: 480px}
 
 .select-1 {width: 90%}
-select.select-1 {width: 90%}
 .select-2 {width: 125px}
-.select-3 {width: 245px}
-select.select-3{width: 250px;}
+.select-3 {width: 250px;}
 .select-4 {width: 360px}
 .select-5 {width: 480px}
 td>select{padding-left: 0;padding-right: 0}
