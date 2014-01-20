@@ -25,7 +25,6 @@ $lang->entry->login     = '登录地址';
 $lang->entry->logout    = '退出地址';
 $lang->entry->nothing   = '暂时没有应用';
 $lang->entry->open      = '打开方式';
-$lang->entry->control   = '显示控制条';
 $lang->entry->size      = '窗口大小';
 $lang->entry->position  = '显示位置';
 $lang->entry->width     = '宽';
@@ -52,13 +51,10 @@ $lang->entry->openList['']       = '';
 $lang->entry->openList['blank']  = '新开标签';
 $lang->entry->openList['iframe'] = '内嵌窗口';
 
-$lang->entry->controlList['full']   = '显示';
-$lang->entry->controlList['simple'] = '不显示';
-
 $lang->entry->sizeList['max']    = '最大化';
 $lang->entry->sizeList['custom'] = '自定义';
 
-$lang->entry->positionList['default'] = '居左';
+$lang->entry->positionList['default'] = '默认';
 $lang->entry->positionList['center']  = '居中';
 
 $lang->entry->instruction = <<<EOT

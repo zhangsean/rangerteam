@@ -63,9 +63,11 @@ class entryModel extends model
      */
     public function create()
     {
-        $entry = fixer::input('post')->remove('width,height')->get();
+        $entry = fixer::input('post')->setDefault('control', 'full')->get();
+        if($entry->size == 'custom') $entry->size = json_encode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
+
         $this->dao->insert(TABLE_ENTRY)
-            ->data($entry)
+            ->data($entry, $skip = 'width,height')
             ->autoCheck()
             ->batchCheck($this->config->entry->require->create, 'notempty')
             ->check('code', 'unique')
@@ -88,11 +90,11 @@ class entryModel extends model
     public function update($code)
     {
         $oldEntry = $this->getByCode($code);
-        $entry    = fixer::input('post')->remove('width,height')->get();
-        if($entry->size == 'custom') $entry->size = json_encode(array('width' => (int)$this->post->width, 'height' => (int)$this->post->height));
+        $entry    = fixer::input('post')->get();
+        if($entry->size == 'custom') $entry->size = json_encode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
         if(!isset($entry->visible)) $entry->visible = 0;
         unset($entry->logo);
-        $this->dao->update(TABLE_ENTRY)->data($entry)->autoCheck()->batchCheck($this->config->entry->require->edit, 'notempty')->where('code')->eq($code)->exec();
+        $this->dao->update(TABLE_ENTRY)->data($entry, $skip = 'width,height')->autoCheck()->batchCheck($this->config->entry->require->edit, 'notempty')->where('code')->eq($code)->exec();
         return $oldEntry->id;
     }
 
