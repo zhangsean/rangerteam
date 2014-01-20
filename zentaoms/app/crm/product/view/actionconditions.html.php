@@ -4,7 +4,7 @@
     <strong><i class="icon-plus"></i> <?php echo $lang->product->action->adminConditions;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForms'>
+    <form method='post' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
           <th class='text-center'><?php echo $lang->product->field->field;?></th>

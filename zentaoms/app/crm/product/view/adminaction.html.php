@@ -27,8 +27,8 @@
         <td><?php echo $action->default;?></td>
         <td>
           <?php
-          echo html::a($this->createLink('product', 'actionconditions', "actionID=$action->id"), $lang->product->action->conditions);
-          echo html::a($this->createLink('product', 'actioninputs', "actionID=$action->id"), $lang->edit);
+          echo html::a($this->createLink('product', 'actionConditions', "actionID=$action->id"), $lang->product->action->conditions);
+          echo html::a($this->createLink('product', 'actionInputs', "actionID=$action->id"), $lang->product->action->inputs);
           echo html::a($this->createLink('product', 'delete', "actionID=$action->id"), $lang->delete, "class='deleter'");
           ?>
         </td>

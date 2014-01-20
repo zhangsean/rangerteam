@@ -191,7 +191,7 @@ class product extends control
         if($_POST)
         {
             $result = $this->product->saveConditions($actionID);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('adminaction', "actionID={$actionID}")));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('adminAction', "actionID={$action->product}")));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
