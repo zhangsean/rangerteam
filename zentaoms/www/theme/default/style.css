@@ -8,7 +8,7 @@
 * @version     $Id$
 * @link        http://www.zentao.net
 */
-body {padding-bottom:70px;background: #fff;}
+body {background: #fff;}
 
 /*-----------------------WIDTH SETTING--------------------------*/
 .w-p5  {width: 5%}
@@ -228,6 +228,8 @@ tr.text-center > td, tr.text-center > th {text-align: center;}
 tr.text-center > td.text-left, tr.text-center > th.text-left {text-align: left;}
 
 /* form */
+body > form {margin-top: 20px;} /* form behind body */
+
 .form-horizontal .control-label{padding-right: 0;}
 
 .form-control[type='file'] {box-shadow: none; background-color: #fafafa;}
