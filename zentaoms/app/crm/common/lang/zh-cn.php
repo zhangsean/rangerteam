@@ -21,7 +21,6 @@ $lang->menu->crm->contract  = '合同|contract|index|';
 $lang->menu->crm->product   = '产品|product|index|';
 $lang->menu->crm->contact   = '联系人|contact|index|';
 $lang->menu->crm->feedback  = '售后|feedback|index|';
-$lang->menu->crm->team      = '团队|team|index|';
 
 /* Menu of customer module. */
 $lang->customer = new stdclass();
