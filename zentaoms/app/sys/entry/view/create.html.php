@@ -20,20 +20,18 @@ include '../../common/view/header.admin.html.php';
       <table class='table table-form'>
         <tr>
           <th style='width: 100px'><?php echo $lang->entry->name;?></th>
-          <td style='width: 40%'>
-            <?php echo html::input('name', '', "class='form-control' placeholder='{$lang->entry->note->name}'"); ?>
-          </td>
-          <td>
-            <span><?php echo "<input type='checkbox' name='visible' value='1'>{$lang->entry->note->visible}";?></span>
-          </td>
+          <td style='width: 40%'><?php echo html::input('name', '', "class='form-control' placeholder='{$lang->entry->note->name}'"); ?></td>
+          <td><span><?php echo "<input type='checkbox' name='visible' value='1'>{$lang->entry->note->visible}";?></span></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->code;?></th>
           <td><?php echo html::input('code', '', "class='form-control' placeholder='{$lang->entry->note->code}'");?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->open;?></th>
           <td><?php echo html::select('open', $lang->entry->openList, '', 'class="form-control"');?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->key;?></th>
@@ -43,25 +41,52 @@ include '../../common/view/header.admin.html.php';
         <tr>
           <th><?php echo $lang->entry->login;?></th>
           <td><?php echo html::input('login', '', "class='form-control' placeholder='{$lang->entry->note->login}'");?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->logout;?></th>
           <td><?php echo html::input('logout', '', "class='form-control' placeholder='{$lang->entry->note->logout}'");?></td>
+          <td></td>
         </tr>
         <tr>
-          <th><?php echo $lang->entry->api;?></th>
-          <td><?php echo html::input('api', '', "class='form-control' placeholder='{$lang->entry->note->api}'");?></td>
+          <th><?php echo $lang->entry->block;?></th>
+          <td><?php echo html::input('blocks', '', "class='form-control' placeholder='{$lang->entry->note->api}'");?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->ip;?></th>
           <td><?php echo html::input('ip', '', "class='form-control' placeholder='{$lang->entry->note->ip}'");?></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->control;?></th>
+          <td><?php echo html::select('control', $lang->entry->controlList, '', "class='form-control'");?></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->size;?></th>
+          <td><?php echo html::select('size', $lang->entry->sizeList, '', "class='form-control'");?></td>
+          <td id='custom'>
+            <?php
+            echo $lang->entry->width;
+            echo html::input('width', '700', "class='form-control' style='display:inline-block;width:80px;'");
+            echo $lang->entry->height;
+            echo html::input('height', '538', "class='form-control' style='display:inline-block;width:80px;'");
+            ?>
+          </td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->position;?></th>
+          <td><?php echo html::select('position', $lang->entry->positionList, '', "class='form-control'");?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->logo;?></th>
           <td><input type='file' name='logo' id='logo' /></td>
+          <td></td>
         </tr>
         <tr>
-          <td></td><td><?php echo html::submitButton() . html::backButton();?></td>
+          <td></td><td><?php echo html::submitButton() . html::backButton();?></td><td></td>
         </tr>
       </table>
     </form>

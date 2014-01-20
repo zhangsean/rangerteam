@@ -63,7 +63,7 @@ class entryModel extends model
      */
     public function create()
     {
-        $entry = fixer::input('post')->get();
+        $entry = fixer::input('post')->remove('width,height')->get();
         $this->dao->insert(TABLE_ENTRY)
             ->data($entry)
             ->autoCheck()
@@ -88,7 +88,8 @@ class entryModel extends model
     public function update($code)
     {
         $oldEntry = $this->getByCode($code);
-        $entry    = fixer::input('post')->get();
+        $entry    = fixer::input('post')->remove('width,height')->get();
+        if($entry->size == 'custom') $entry->size = json_encode(array('width' => (int)$this->post->width, 'height' => (int)$this->post->height));
         if(!isset($entry->visible)) $entry->visible = 0;
         unset($entry->logo);
         $this->dao->update(TABLE_ENTRY)->data($entry)->autoCheck()->batchCheck($this->config->entry->require->edit, 'notempty')->where('code')->eq($code)->exec();
@@ -219,5 +220,39 @@ class entryModel extends model
     public function resetLogo($entryID)
     {
         $this->dao->update(TABLE_ENTRY)->set('logo')->eq(0)->where('id')->eq($entryID)->exec();
+    }
+
+    /**
+     * Get blocks by API.
+     * 
+     * @param  string    $api 
+     * @access public
+     * @return void
+     */
+    public function getBlocksByAPI($api)
+    {
+        $http = $this->app->loadClass('http');
+
+        if(empty($api)) return array();
+        $blocks = $http->get($api);
+
+        return json_decode($blocks);
+    }
+
+    /**
+     * Get block params.
+     * 
+     * @param  sring    $link 
+     * @access public
+     * @return void
+     */
+    public function getBlockParams($link)
+    {
+        $http = $this->app->loadClass('http');
+
+        if(empty($link)) return array();
+        $params = $http->get($link);
+
+        return json_decode($params, true);
     }
 }

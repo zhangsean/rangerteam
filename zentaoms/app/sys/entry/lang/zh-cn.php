@@ -17,7 +17,7 @@ $lang->entry->delete    = '删除应用';
 $lang->entry->code      = '代号';
 $lang->entry->name      = '名称';
 $lang->entry->key       = '密钥';
-$lang->entry->api       = '接口地址';
+$lang->entry->block     = '接口地址';
 $lang->entry->ip        = 'IP列表';
 $lang->entry->logo      = 'Logo';
 $lang->entry->createKey = '重新生成密钥';
@@ -25,6 +25,11 @@ $lang->entry->login     = '登录地址';
 $lang->entry->logout    = '退出地址';
 $lang->entry->nothing   = '暂时没有应用';
 $lang->entry->open      = '打开方式';
+$lang->entry->control   = '显示控制条';
+$lang->entry->size      = '窗口大小';
+$lang->entry->position  = '显示位置';
+$lang->entry->width     = '宽';
+$lang->entry->height    = '高';
 
 $lang->entry->confirmDelete = '您确定删除该应用吗？';
 
@@ -46,6 +51,15 @@ $lang->entry->error->ip    = 'IP列表不能为空';
 $lang->entry->openList['']       = '';
 $lang->entry->openList['blank']  = '新开标签';
 $lang->entry->openList['iframe'] = '内嵌窗口';
+
+$lang->entry->controlList['full']   = '显示';
+$lang->entry->controlList['simple'] = '不显示';
+
+$lang->entry->sizeList['max']    = '最大化';
+$lang->entry->sizeList['custom'] = '自定义';
+
+$lang->entry->positionList['default'] = '居左';
+$lang->entry->positionList['center']  = '居中';
 
 $lang->entry->instruction = <<<EOT
 EOT;

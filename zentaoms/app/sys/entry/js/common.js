@@ -9,3 +9,12 @@ function createKey()
     $('#key').val(key);
     return false;
 }
+
+function toggleSize(value)
+{
+  $('#custom').hide();
+  if(value == 'custom')$('#custom').show();
+}
+
+$('#size').change(function(){toggleSize($(this).val())});
+$(function(){toggleSize($('#size').val());})

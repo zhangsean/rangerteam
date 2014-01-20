@@ -27,7 +27,8 @@ class index extends control
             if($entry->visible) $leftEntry .= $entry->id . ',';
             $sso  = $this->createLink('entry', 'visit', "entryID=$entry->id");
             $logo = $entry->logo ? $entry->logo : '';
-            $allEntries .= "entries.push({id: '$entry->id', url: '$sso', name: '$entry->name', open: '$entry->open', desc: '$entry->name', display: 'fixed', size: 'max', icon: '$logo', control: 'simple'});\n";
+            $size = json_decode($entry->size) ? $entry->size : "'$entry->size'";
+            $allEntries .= "entries.push({id: '$entry->id', url: '$sso', name: '$entry->name', open: '$entry->open', desc: '$entry->name', display: 'fixed', size: $size, icon: '$logo', control: '$entry->control', position: '$entry->position'});\n";
         }
 
         $this->view->allEntries = $allEntries;

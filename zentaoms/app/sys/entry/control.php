@@ -111,11 +111,20 @@ class entry extends control
             $this->send(array('result' => 'success', 'locate'=>inlink('admin')));
         }
 
+        $entry = $this->entry->getByCode($code);
+        $size  = json_decode($entry->size);
+        if($size)
+        {
+            $entry->size   = 'custom';
+            $entry->width  = $size->width;
+            $entry->height = $size->height;
+        }
+
         $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->edit;
         $this->view->position[] = $this->lang->entry->common;
         $this->view->position[] = $this->lang->entry->edit;
 
-        $this->view->entry = $this->entry->getByCode($code);
+        $this->view->entry = $entry;
         $this->view->code  = $code;
         $this->display();
     }
@@ -206,5 +215,27 @@ class entry extends control
         $response['status'] = 'fail';
         $response['data']   = 'key error';
         $this->send($response);
+    }
+
+    /**
+     * Set block that is from entry.
+     * 
+     * @param  int    $index 
+     * @param  string $link 
+     * @access public
+     * @return void
+     */
+    public function setBlock($index, $link)
+    {
+        $this->app->loadLang('block');
+        $configLink = helper::safe64Decode($link);
+        $type       = 'system';
+        $block      = isset($this->config->personal->index->block->{'b' . $index}->value) ? json_decode($this->config->personal->index->block->{'b' . $index}->value) : array();
+
+        $this->view->params = $this->entry->getBlockParams($configLink);
+        $this->view->block  = ($block and $block->type == $type) ? $block : array();
+        $this->view->index  = $index;
+        $this->view->type   = $type;
+        $this->display();
     }
 }
