@@ -65,23 +65,25 @@ button {outline: none; border: none; background-color: transparent;}
     height: 100%;
     background-color: #314400;
     background-color: rgba(0,0,0,0.5);
-    z-index: 50000;
+    z-index: 40010;
+    transition: left .3s;-o-transition: left .3s;-moz-transition: left .3s;-webkit-transition: left .3s;
+}
+#leftBar.menu-auto.menu-hide
+{
+    left: -58px;
 }
 
 #avatar
 {
-    margin-top: 10px;
+    margin-bottom: 36px;
     cursor: pointer;
-    padding-bottom: 10px;
     position: relative;
     transition: all .3s;-o-transition: all .3s;-moz-transition: all .3s;-webkit-transition: all .3s;
 }
 #avatar img
 {
-    border-radius: 25px;
-    width: 40px;
-    height: 40px;
-    margin: 0 10px;
+    width: 60px;
+    height: 60px;
 }
 #avatar .avatar-name
 {
@@ -111,18 +113,6 @@ button {outline: none; border: none; background-color: transparent;}
     background-color: rgba(0,0,0,0.9);
     transition: all .3s;-o-transition: all .3s;-moz-transition: all .3s;-webkit-transition: all .3s;
 }
-
-#apps-actions .bar-menu > li {display: block;}
-#apps-actions .bar-menu > li button
-{
-    width: 60px;
-    height: 50px;
-    line-height: 50px;
-    padding: 0;
-    text-align: center;
-    font-size: 40px;
-    text-align: center;
-}
 #apps-menu
 {
     position: absolute;
@@ -134,17 +124,17 @@ button {outline: none; border: none; background-color: transparent;}
 }
 #apps-menu .bar-menu > li {display: inline-block;}
 #apps-menu .bar-menu > li a {text-align: center; padding:10px; width: 60px;}
-#apps-menu .bar-menu > li img{width: 32px; height: 32px;}
+#apps-menu .bar-menu > li img{width: 36px; height: 36px;}
 
 /* bottom bar. */
 #bottomBar
 {
     width: 100%;
     height: 36px;
-    padding-left: 60px;
     background-color: #1a3200;
     background-color: rgba(0,0,0,0.5);
-    z-index: 40010;
+    z-index: 50000;
+    padding-left: 60px;
 }
 #systemMenu {position: absolute; left: 4px; top: 0;}
 #systemMenu .bar-menu a
@@ -182,17 +172,17 @@ button {outline: none; border: none; background-color: transparent;}
 }
 #taskbar .bar-menu li .actions
 {
-  position: absolute;
-  right: 0;
-  top: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 #taskbar .bar-menu li .actions button
 {
-  line-height: 36px;
-  color: #f1f1f1;
-  font-size: 14px;
-  padding: 0 10px;
-  opacity: 0;
+    line-height: 36px;
+    color: #f1f1f1;
+    font-size: 14px;
+    padding: 0 10px;
+    opacity: 0;
 }
 #taskbar .bar-menu li:hover button {opacity: 1;}
 #taskbar .bar-menu li .actions button:hover {content: #fff; background-color: rgba(0,0,0,0.2);}
@@ -202,6 +192,17 @@ button {outline: none; border: none; background-color: transparent;}
 #bottomBar .bar-menu > li > button[class*=' icon-'] {font-size: 20px;}
 
 #bottomRightBar {padding-left: 4px; position: absolute; right: 0; top: 0; border-left: 1px solid rgba(255,255,255,0.10);}
+
+#buttonLeftBar {width: 60px;}
+#buttonLeftBar .bar-menu > li button
+{
+    font-size: 28px;
+    width: 60px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0;
+    text-align: center;
+}
 
 /* desk container. */
 #deskContainer

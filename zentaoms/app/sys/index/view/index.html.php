@@ -20,11 +20,6 @@ js::import($jsRoot . 'jquery/ips.js');
         <ul class='bar-menu'></ul>
       </div>
       <div class='dock-bottom'>
-        <div id='apps-actions'>
-          <ul class='bar-menu'>
-            <li><button class='fullscreen-btn' data-toggle='tooltip' data-placement='right' data-id='allapps' title='<?php echo $lang->index->allEntries?>'><i class='icon-reorder'></i></button></li>
-          </ul>
-        </div>
         <div id='avatar' data-toggle='tooltip' data-placement='right' title='<?php echo $lang->index->profile?>' class='app-btn' data-id='profile'>
           <img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''>
           <div class='avatar-name'><?php echo $app->user->realname?></div>
@@ -32,13 +27,18 @@ js::import($jsRoot . 'jquery/ips.js');
       </div>
     </div>
     <div id='bottomBar' class='dock-bottom'>
+      <div id='buttonLeftBar' class='dock-left'>
+        <ul class='bar-menu'>
+            <li><button class='fullscreen-btn' data-toggle='tooltip' data-placement='right' data-id='allapps' title='<?php echo $lang->index->allEntries?>'><i class='icon-reorder'></i></button></li>
+          </ul>
+      </div>
       <div id='taskbar'>
         <ul class='bar-menu'>
         </ul>
       </div>
       <div id='bottomRightBar' class='dock-right'>
         <ul class='bar-menu'>
-          <li><button id='showDesk' class='fullscreen-btn icon-home' data-toggle-class='icon-check-empty' data-id='home' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'></button></li>
+          <li><button id='showDesk' class='fullscreen-btn icon-home' data-id='home' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'></button></li>
         </ul>
       </div>
     </div>
@@ -187,18 +187,17 @@ js::import($jsRoot . 'jquery/ips.js');
             <div class='col-md-4 text-right'>
               <a class='btn btn-clear' href='admin.php?m=entry&f=create' target='_blank'><i class='icon-plus'></i> <?php echo $lang->index->addEntry?></a>
             </div>
-          </div>        
+          </div>
         </div>
         <div class='all-apps-list' id='allAppsList'>
           <ul class='bar-menu'>
           </ul>
         </div>
-      </div>      
+      </div>
     </div>
     <div id='deskContainer'>
     </div>
     <div id='modalContainer'>
-      
     </div>
   </div>
 
@@ -210,7 +209,7 @@ var entries = new Array(
     name        : '<?php echo $lang->user->profile?>',
     type        : 'iframe',
     desc        : '<?php echo $lang->index->profile?>',
-    display     : 'fixed',
+    display     : 'modal',
     size        : 'default',
     menu        : false,
     position    : 'center',
@@ -232,7 +231,7 @@ var entries = new Array(
 $(function()
 {
     /* start ips */
-    $.ipsStart(entries, config);
+    $.ipsStart(entries, $.extend({autoHideMenu : true}, config));
     $('.entries-count').text(entries.length - 2)
 });
 

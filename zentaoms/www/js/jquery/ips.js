@@ -21,8 +21,9 @@
     var indexUrl         = window.location.href;
 
     /* the default configs */
-    var defaults = 
+    var defaults =
     {
+        autoHideMenu                  : false,
         webRoot                       : '/',
         animateSpeed                  : 200,
         entryIconRoot                 : 'theme/default/images/ips/',
@@ -52,17 +53,6 @@
 
     /* global setting */
     var settings = {};
-
-    /*
-     * Ips function: caculate the default position of the next new window
-     *  
-     * @return object:{x,y}
-     */
-    function getNextDefaultWinPos()
-    {
-        defaultWindowPos = {x: defaultWindowPos.x + settings.defaultWinPosOffset, y: defaultWindowPos.y + settings.defaultWinPosOffset};
-        return defaultWindowPos;
-    }
 
     /* Ips function: Init Settings
      *
@@ -106,7 +96,7 @@
             /* extend options from params */
             $.extend(this, this.getDefaults(options.id), options);
             this.idstr      = settings.windowidstrTemplate.format(this.id);
-            this.cssclass   = 'window-movable';
+            this.cssclass   = '';
 
             /* if no icon setting here, then load icon with the default rule */
             if(!this.icon) this.icon = settings.entryIconRoot + 'entry-' + this.id + '.png';
@@ -130,8 +120,6 @@
                     break;
             }
 
-
-
             /* init display setting */
             if(this.display == 'fixed' || this.display == 'modal')
             {
@@ -151,6 +139,8 @@
                     this.cssclass += ' window-control-full';
                     break;
             }
+
+            this.resetPosSize();
         };
 
         this.getDefaults = function(entryId)
@@ -175,7 +165,7 @@
             return d;
         }
 
-        this.calPosSize = function()
+        this.resetPosSize = function()
         {
             /* init size setting */
             if(this.size == 'default')
@@ -192,6 +182,7 @@
             {
                 this.width  = desktopSize.width;
                 this.height = desktopSize.height;
+                this.size = 'max';
                 this.position  = desktopPos;
                 if(this.cssclass.indexOf(' window-max') < 1) this.cssclass += ' window-max';
             }
@@ -209,15 +200,39 @@
             }
             else
             {
-                var pos = getNextDefaultWinPos();
-                this.left = pos.x;
-                this.top  = pos.y;
+                defaultWindowPos = {x: defaultWindowPos.x + settings.defaultWinPosOffset, y: defaultWindowPos.y + settings.defaultWinPosOffset};
+                this.left = defaultWindowPos.x;
+                this.top  = defaultWindowPos.y;
+            }
+
+            /* decide the window can be movable */
+            if(this.display != 'fixed' && this.size != 'max' && this.cssclass.indexOf(' window-movable') < 1) this.cssclass += ' window-movable';
+        }
+
+        this.reCalPosSize = function()
+        {
+            if(this.size.width != undefined && this.size.height != undefined)
+            {
+                this.width  = Math.min(this.size.width, desktopSize.width);
+                this.height = Math.min(this.size.height, desktopSize.height);
+            }
+            else if(this.size == 'max')
+            {
+                this.width  = desktopSize.width;
+                this.height = desktopSize.height;
+                this.position  = desktopPos;
+            }
+
+            if(this.position == 'center')
+            {
+                this.left = Math.max(desktopPos.x, desktopPos.x + (desktopSize.width - this.width)/2);
+                this.top  = Math.max(desktopPos.y, desktopPos.y + (desktopSize.height - this.height)/2);
             }
         }
 
-        this.toWindowHtml   = function()
+        this.toWindowHtml = function()
         {
-            this.calPosSize();
+            this.reCalPosSize();
             this.html = settings.windowHtmlTemplate.format(this);
             return this.html;
         };
@@ -229,7 +244,7 @@
 
         this.toTaskBarShortcutHtml = function()
         {
-            return settings.taskBarShortcutHtmlTemplate.format(this);
+            if(this.display != 'modal') return settings.taskBarShortcutHtmlTemplate.format(this);
         };
 
         this.toEntryListShortcutHtml = function()
@@ -248,7 +263,7 @@
 
         handleWindowResize();
 
-        onShowDeskClick();
+        handleFullscreenBtn();
 
         onWindowKeydown();
 
@@ -296,7 +311,7 @@
                 dPanel.css(
                 {
                     left : event.pageX-offset.x,
-                    top : event.pageY-offset.y
+                    top  : event.pageY-offset.y
                 });
 
                 $('#home.custom-mode .panel:not(#draggingPanel)').each(function()
@@ -379,7 +394,7 @@
         }
     }
 
-    function onShowDeskClick()
+    function handleFullscreenBtn()
     {
         $('.fullscreen-btn').click(function()
         {
@@ -388,7 +403,7 @@
             {
                 $('#desktop').removeClass('fullscreen-mode');
                 win.removeClass('fullscreen-active');
-                $(this).removeClass($(this).attr('data-toggle-class'));
+                $(this).removeClass($(this).attr('data-toggle-class')).removeClass('active');
             }
             else
             {
@@ -396,8 +411,8 @@
                 win.addClass('fullscreen-active');
                 $('#desktop').addClass('fullscreen-mode');
                 fullscreenMode = true;
-                $('.fullscreen-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class'))});
-                $(this).addClass($(this).attr('data-toggle-class'));
+                $('.fullscreen-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class')).removeClass('active')});
+                $(this).addClass($(this).attr('data-toggle-class')).addClass('active');
             }
         });
     }
@@ -472,9 +487,15 @@
             var win = $(this);
             win.width(desktopSize.width);
             win.height(desktopSize.height);
+            win.css(
+            {
+                left : desktopPos.x,
+                right: desktopPos.y
+            });
             handleWinResized(win);
         });
     }
+
 
     function onWindowResize()
     {
@@ -528,6 +549,33 @@
               entryCount++;
               allEntriesList.append(entry.toEntryListShortcutHtml());
             }
+        }
+    }
+
+    function initMenu()
+    {
+        if(settings.autoHideMenu)
+        {
+            $('#leftBar').addClass('menu-auto');
+            desktopPos.x = 2;
+            setTimeout(hideMenu, 2000);
+
+            $('#leftBar').addClass('menu-auto').mouseover(showMenu).mouseout(hideMenu);;
+
+        }
+
+        function hideMenu()
+        {
+            $('#leftBar').removeClass('menu-show');
+            setTimeout(function()
+            {
+                if(!$('#leftBar').hasClass('menu-show')) $('#leftBar').addClass('menu-hide')
+            }, 1000);
+        }
+
+        function showMenu()
+        {
+            $('#leftBar').removeClass('menu-hide').addClass('menu-show');
         }
     }
 
@@ -599,33 +647,34 @@
         $(document).on('click', '.max-win', function(event) // max-win
         {
             toggleMaxSizeWindow($(this).closest('.window'));
-            event.preventDefault();
-            event.stopPropagation();
+            stopEvent(event);
         }).on('dblclick', '.window-head', function(event) // double click for max-win
         {
             toggleMaxSizeWindow($(this).closest('.window'));
-            event.preventDefault();
-            event.stopPropagation();
+            stopEvent(event);
         }).on('click', '.close-win', function(event) // close-win
         {
             var win = $(this).closest('.window');
             if(!win.length) win = $(this).closest('.app-btn').attr('data-id');
             closeWindow(win);
-            event.preventDefault();
-            event.stopPropagation();
+            stopEvent(event);
         }).on('click', '.min-win', function(event) // min-win
         {
             toggleShowWindow($(this).closest('.window'));
-            event.preventDefault();
-            event.stopPropagation();
+            stopEvent(event);
         }).on('click', '.reload-win', function(event) // reload window content
         {
             var win = $(this).closest('.window');
             if(!win.length) win = $(this).closest('.app-btn').attr('data-id');
             reloadWindow(win);
+            stopEvent(event);
+        });
+
+        function stopEvent(event)
+        {
             event.preventDefault();
             event.stopPropagation();
-        });
+        }
     }
 
     function toggleShowWindow(winQuery)
@@ -874,6 +923,8 @@
     function start(entriesOptions, options)
     {
         initSettings(options);
+
+        initMenu();
 
         /* bind window events */
         bindWindowsEvents();
