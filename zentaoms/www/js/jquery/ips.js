@@ -473,7 +473,7 @@
                 win.addClass('fullscreen-active');
                 $('#desktop').addClass('fullscreen-mode');
                 fullscreenMode = true;
-                $('.fullscreen-btn, .app-btn').each(function(){e.removeClass(e.attr('data-toggle-class')).removeClass('active')});
+                $('.fullscreen-btn, .app-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class')).removeClass('active')});
                 e.addClass('active');
 
                 if(e.attr('data-id') == 'allapps') $('#search').focus();
