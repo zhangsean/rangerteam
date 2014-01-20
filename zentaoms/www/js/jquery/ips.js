@@ -129,6 +129,7 @@
             /* init control bar setting */
             switch(this.control)
             {
+                case '':
                 case 'simple':
                     this.cssclass += ' window-control-simple';
                     break;
@@ -411,7 +412,7 @@
                 win.addClass('fullscreen-active');
                 $('#desktop').addClass('fullscreen-mode');
                 fullscreenMode = true;
-                $('.fullscreen-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class')).removeClass('active')});
+                $('.fullscreen-btn, .app-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class')).removeClass('active')});
                 $(this).addClass($(this).attr('data-toggle-class')).addClass('active');
             }
         });
@@ -615,7 +616,13 @@
         }
         else if(entryWin.hasClass('window-active'))
         {
-            toggleShowWindow(entryWin);
+            if($('#desktop').hasClass('fullscreen-mode'))
+            {
+                $('#desktop').removeClass('fullscreen-mode');
+                $('.fullscreen-btn.active').removeClass('active');
+                $('.app-btn[data-id="'+entry.id+'"]').addClass('active');
+            }
+            else toggleShowWindow(entryWin);
         }
         else
         {
@@ -902,7 +909,7 @@
 
         activedWindow = win.addClass('window-active').css('z-index',parseInt(win.css('z-index')) + 10000);
 
-        $('.app-btn').removeClass('active');
+        $('.app-btn.active, .fullscreen-btn.active').removeClass('active');
         $('.app-btn[data-id="' + win.attr('data-id') + '"]').addClass('active');
 
         updateEntryUlr(win);
