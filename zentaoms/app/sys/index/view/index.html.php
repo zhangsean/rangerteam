@@ -167,32 +167,26 @@ js::import($jsRoot . 'jquery/ips.js');
       </div>
     </div>
     <div id='allapps' class='fullscreen'>
-      <div class='all-apps-panel'>
-        <div class='all-apps-head'>
-          <div class='row'>
-            <div class='col-md-1'>
-              <a href='###' id='closeAllApps' class='min-win'><i class='icon-circle-arrow-left'></i></a>
-            </div>
-            <div class='col-md-3'>
-              <h4><i class='icon-th-list'></i> <?php echo $lang->index->allEntries?> &nbsp;<small class='muted'><?php echo $lang->index->countEntries?></small></h4>
-            </div>
-            <div class='col-md-4'>
-              <div class='input-group'>
-                <input type='text' class='form-control-clear form-control'>
-                <span class='input-group-btn'>
-                  <button class='btn btn-clear' type='button'><i class='icon-search'></i></button>
-                </span>
-              </div>
-            </div>
-            <div class='col-md-4 text-right'>
-              <a class='btn btn-clear' href='admin.php?m=entry&f=create' target='_blank'><i class='icon-plus'></i> <?php echo $lang->index->addEntry?></a>
+      <header>
+        <div class='row'>
+          <div class='col-md-4'>
+            <h4><i class='icon-th-list'></i> <?php echo $lang->index->allEntries?> &nbsp;<small class='muted'><?php echo $lang->index->countEntries?></small></h4>
+          </div>
+          <div class='col-md-4'>
+            <div class='search-input'>
+              <i class='icon-search icon'></i>
+              <input id='search' type='text' class='form-control-pure form-control'>
+              <button id='cancelSearch' class='btn btn-pure btn-mini'><i class='icon-remove'></i></button>
             </div>
           </div>
+          <div class='col-md-4 text-right'>
+            <a class='btn btn-pure' href='admin.php?m=entry&f=create' target='_blank'><i class='icon-plus'></i> <?php echo $lang->index->addEntry?></a>
+          </div>
         </div>
-        <div class='all-apps-list' id='allAppsList'>
-          <ul class='bar-menu'>
-          </ul>
-        </div>
+      </header>
+      <div class='all-apps-list' id='allAppsList'>
+        <ul class='bar-menu'>
+        </ul>
       </div>
     </div>
     <div id='deskContainer'>

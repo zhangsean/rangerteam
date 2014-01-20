@@ -185,7 +185,7 @@
                 this.height = desktopSize.height;
                 this.size = 'max';
                 this.position  = desktopPos;
-                if(this.cssclass.indexOf(' window-max') < 1) this.cssclass += ' window-max';
+                if(this.cssclass.indexOf(' window-max') < 0) this.cssclass += ' window-max';
             }
 
             /* init position setting */
@@ -207,7 +207,7 @@
             }
 
             /* decide the window can be movable */
-            if(this.display != 'fixed' && this.size != 'max' && this.cssclass.indexOf(' window-movable') < 1) this.cssclass += ' window-movable';
+            if(this.display != 'fixed' && this.size != 'max' && this.cssclass.indexOf(' window-movable') < 0) this.cssclass += ' window-movable';
         }
 
         this.reCalPosSize = function()
@@ -273,6 +273,66 @@
         handleToggleClass();
 
         handleHomeBlocks();
+
+        handleAllApps();
+    }
+
+    function handleAllApps()
+    {
+        $('#search').keyup(function(e)
+        {
+            if(e.which == 27) // pressed esc
+            {
+                clearInput();
+            }
+            else if(e.which == 13) // pressed enter
+            {
+                $('#allAppsList .app-btn.search-selected').click();
+            }
+
+            $('.search-selected').removeClass('search-selected');
+
+            var val = $(this).val();
+
+            if(val.length > 0)
+            {
+                var keys = val.split(' ');
+                var first = true;
+                $('#allAppsList .app-btn').each(function()
+                {
+                    var btn = $(this);
+                    var r = true, et = entries[btn.attr('data-id')];
+                    for(var ki in keys)
+                    {
+                        var k = keys[ki];
+                        r = r && (k=='' || (et.name.indexOf(k) > -1) || (et.desc.indexOf(k) > -1) || et.id == k);
+                        if(!r) break;
+                    }
+
+                    btn.closest('li').toggleClass('search-hide', !r);
+
+                    if(r && first)
+                    {
+                        first = false;
+                        btn.addClass('search-selected');
+                    }
+                });
+
+                $('#cancelSearch').fadeIn('fast');
+            }
+            else
+            {
+                $('.search-hide').removeClass('search-hide');
+                $('#cancelSearch').fadeOut('fast');
+            }
+        });
+
+        $('#cancelSearch').click(clearInput);
+
+        function clearInput()
+        {
+            $('#search').val('').keyup();
+        }
     }
 
     function handleHomeBlocks()
@@ -570,13 +630,18 @@
             $('#leftBar').removeClass('menu-show');
             setTimeout(function()
             {
-                if(!$('#leftBar').hasClass('menu-show')) $('#leftBar').addClass('menu-hide')
+                if(!$('#leftBar').hasClass('menu-show'))
+                {
+                    $('#leftBar').addClass('menu-hide');
+                    $('#apps-menu .app-btn[data-toggle="tooltip"]').removeAttr('data-toggle');
+                }
             }, 1000);
         }
 
         function showMenu()
         {
             $('#leftBar').removeClass('menu-hide').addClass('menu-show');
+            setTimeout(function(){$('#apps-menu .app-btn').attr('data-toggle', 'tooltip');}, 500);
         }
     }
 
