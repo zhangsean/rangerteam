@@ -464,16 +464,19 @@
             {
                 $('#desktop').removeClass('fullscreen-mode');
                 win.removeClass('fullscreen-active');
-                $(this).removeClass($(this).attr('data-toggle-class')).removeClass('active');
+                $(this).removeClass('active');
             }
             else
             {
+                var e = $(this);
                 $('.fullscreen-active').removeClass('fullscreen-active');
                 win.addClass('fullscreen-active');
                 $('#desktop').addClass('fullscreen-mode');
                 fullscreenMode = true;
-                $('.fullscreen-btn, .app-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class')).removeClass('active')});
-                $(this).addClass($(this).attr('data-toggle-class')).addClass('active');
+                $('.fullscreen-btn, .app-btn').each(function(){e.removeClass(e.attr('data-toggle-class')).removeClass('active')});
+                e.addClass('active');
+
+                if(e.attr('data-id') == 'allapps') $('#search').focus();
             }
         });
     }
