@@ -14,7 +14,7 @@
         <?php foreach($action->conditions as $field => $condition):?>
         <tr>
           <th><?php echo html::select('field[]', $conditionFields, $field, "class='form-control'");?></th>
-          <td><?php echo html::select("oprater[]", $lang->order->comparerList, $condition->oprater, "class='form-control'"); ?></td>
+          <td><?php echo html::select("operater[]", $lang->order->operaterList, $condition->operater, "class='form-control'"); ?></td>
           <td><?php echo html::input("value[]", $condition->value, "class='form-control'")?></td>
           <td>
             <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>
@@ -24,7 +24,7 @@
         <?php endforeach;?>
         <tr id='originTR'>
           <th><?php echo html::select('field[]', $conditionFields, '', "class='form-control'");?></th>
-          <td><?php echo html::select("oprater[]", $lang->order->comparerList, '', "class='form-control'"); ?></td>
+          <td><?php echo html::select("operater[]", $lang->order->operaterList, '', "class='form-control'"); ?></td>
           <td><?php echo html::input("value[]", '', "class='form-control'")?></td>
           <td>
             <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>
