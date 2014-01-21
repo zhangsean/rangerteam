@@ -68,7 +68,8 @@ class order extends control
         $this->view->title     = $this->lang->order->create;
 
         $products = $this->loadModel('product')->getPairs();
-        $this->view->products = array( 0 => '') + $products;
+        $this->view->products  = array( 0 => '') + $products;
+        $this->view->customers = $this->loadModel('customer')->getPairs();
 
         $this->display();
     }

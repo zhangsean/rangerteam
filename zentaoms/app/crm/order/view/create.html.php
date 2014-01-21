@@ -8,7 +8,7 @@
       <table class='table table-form'>
         <tr>
           <th><?php echo $lang->order->customer;?></th>
-          <td><?php echo html::select('customer', $lang->order->customers, '', "class='form-control'");?></td>
+          <td><?php echo html::select('customer', $customers, '', "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->product;?></th>
