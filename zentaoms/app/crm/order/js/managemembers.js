@@ -1,0 +1,14 @@
+/**
+ * Set role when select an account.
+ * 
+ * @param  string $account 
+ * @param  int    $roleID 
+ * @access public
+ * @return void
+ */
+function setRole(account, roleID)
+{
+    role    = v.roles[account];     // get role according the account.
+    roleOBJ = $('#role' + roleID);  // get role object.
+    roleOBJ.val(role)               // set the role.
+}

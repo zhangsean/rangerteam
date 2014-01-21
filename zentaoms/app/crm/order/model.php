@@ -11,6 +11,9 @@
  */
 class orderModel extends model
 {
+    /* The members every linking. */
+    const LINK_MEMBERS_ONE_TIME = 20;
+
     /**
      * Get order by id.
      * 
@@ -69,6 +72,14 @@ class orderModel extends model
             ->exec();
 
         $orderID = $this->dao->lastInsertID();
+
+        $member = new stdclass();
+        $member->order   = $orderID;
+        $member->account = $this->app->user->account;
+        $member->role    = $this->lang->user->roleList[$this->app->user->role];
+        $member->join    = helper::today();
+
+        $this->dao->insert(TABLE_TEAM)->data($member)->exec();
 
         if(dao::isError()) return false;
 
@@ -140,6 +151,70 @@ class orderModel extends model
             ->get();
 
         $this->dao->update(TABLE_ORDER)->data($order)->autoCheck()->where('id')->eq($orderID)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
+     * Get team members. 
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return array
+     */
+    public function getTeamMembers($orderID)
+    {
+        return $this->dao->select('t1.*, t2.realname')->from(TABLE_TEAM)->alias('t1')
+            ->leftJoin(TABLE_USER)->alias('t2')->on('t1.account = t2.account')
+            ->where('t1.order')->eq((int)$orderID)
+            ->fetchAll('account');
+    }
+
+    /**
+     * Manage team members.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return void
+     */
+    public function manageMembers($orderID)
+    {
+        extract($_POST);
+
+        $accounts = array_unique($accounts);
+        foreach($accounts as $key => $account)
+        {
+            if(empty($account)) continue;
+
+            $member = new stdclass();
+            $member->role = $roles[$key];
+
+            $mode = $modes[$key];
+            if($mode == 'update')
+            {
+                $this->dao->update(TABLE_TEAM)->data($member)->where('`order`')->eq($orderID)->andWhere('account')->eq($account)->exec();
+            }
+            else
+            {
+                $member->order   = $orderID;
+                $member->account = $account;
+                $member->join    = helper::today();
+                $this->dao->insert(TABLE_TEAM)->data($member)->exec();
+            }
+        }        
+    }
+
+    /**
+     * Unlink a member.
+     * 
+     * @param  int    $orderID 
+     * @param  string $account 
+     * @access public
+     * @return void
+     */
+    public function unlinkMember($orderID, $account)
+    {
+        $this->dao->delete()->from(TABLE_TEAM)->where('`order`')->eq($orderID)->andWhere('account')->eq($account)->exec();
 
         return !dao::isError();
     }
