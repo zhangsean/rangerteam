@@ -225,7 +225,7 @@ var entries = new Array(
 $(function()
 {
     /* start ips */
-    $.ipsStart(entries, $.extend({autoHideMenu : true}, config));
+    $.ipsStart(entries, config);
     $('.entries-count').text(entries.length - 2)
 });
 
