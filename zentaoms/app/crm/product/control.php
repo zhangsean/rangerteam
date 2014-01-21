@@ -169,7 +169,7 @@ class product extends control
     {
         if($_POST)
         {
-            if($this->product->createAction($productID)) $this->send(array('result' => 'success', 'message' => $this->lang->success, 'locate' => $this->inlink('adminaction')));
+            if($this->product->createAction($productID)) $this->send(array('result' => 'success', 'message' => $this->lang->success, 'locate' => $this->inlink('adminaction', "productID={$productID}")));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
         $this->view->productID = $productID;
@@ -185,7 +185,7 @@ class product extends control
      */
     public function actionConditions($actionID)
     {
-        $action = $this->product->getActionByID($actionID);      
+        $action = $this->product->getActionByID($actionID);
         if(empty($action)) die('');
 
         if($_POST)
@@ -204,8 +204,48 @@ class product extends control
         foreach($fields as $field) $conditionFields[$field->field] = $field->name;
 
         $this->view->action          = $action;
-        $this->view->product         = $this->product->getByID($action->productID);
         $this->view->conditionFields = $conditionFields;
+        $this->display();
+    }
+    
+    /**
+     * Action inputs.
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function actionInputs($actionID)
+    {
+        $action = $this->product->getActionByID($actionID);      
+        if(empty($action)) die('');
+        if(empty($action->inputs))
+        {
+            $action->inputs = array();
+            $defaultInput = new stdclass();
+            $defaultInput->field   = '';
+            $defaultInput->rules   = '';
+            $defaultInput->default = '';
+            $action->inputs[''] = $defaultInput;
+        }
+
+        if($_POST)
+        {
+            $result = $this->product->saveInputs($actionID);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('adminAction', "actionID={$action->product}")));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->loadModel('order');
+
+        $inputFields = array('' => '');
+        foreach($this->config->order->conditionFields as $field) $inputFields[$field] = $this->lang->order->{$field};
+
+        $fields  = $this->product->getFieldList($action->productID);
+        foreach($fields as $field) $inputFields[$field->field] = $field->name;
+
+        $this->view->action  = $action;
+        $this->view->inputFields  = $inputFields;
         $this->display();
     }
 }
