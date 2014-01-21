@@ -55,8 +55,9 @@ class entry extends control
      * @access public
      * @return void
      */
-    public function visit($entryID)
+    public function visit($entryID, $referer = '')
     {
+        $referer = !empty($_GET['referer']) ? $this->get->referer : $referer;
         $entry = $this->entry->getById($entryID);
         $login = $entry->login;
         $token = $this->loadModel('sso')->createToken(session_id(), $entryID);
@@ -68,6 +69,8 @@ class entry extends control
         {
             $location = rtrim($login, '?') . "?token=$token";
         }
+        if(!empty($referer)) $location .= '&referer=' . $referer;
+
         $this->locate($location);
     }
 
@@ -112,8 +115,7 @@ class entry extends control
         }
 
         $entry = $this->entry->getByCode($code);
-        $size  = json_decode($entry->size);
-        if($size)
+        if($entry->size != 'max')
         {
             $entry->size   = 'custom';
             $entry->width  = $size->width;
@@ -218,24 +220,54 @@ class entry extends control
     }
 
     /**
-     * Set block that is from entry.
+     * Get entry blocks.
      * 
+     * @param  int    $entryID 
      * @param  int    $index 
-     * @param  string $link 
      * @access public
      * @return void
      */
-    public function setBlock($index, $link)
+    public function blocks($entryID, $index = 0)
+    {
+        $entry  = $this->entry->getById($entryID);
+        $blocks = $this->entry->getBlocksByAPI($entry);
+
+        $blockPairs = array();
+        foreach($blocks as $code => $block)
+        {
+            $blockPairs[$code] = $block->name;
+        }
+        $blockPairs = array('' => '') + $blockPairs;
+
+        $block = $this->loadModel('block')->getSavedBlock($index);
+
+        echo "<th>{$this->lang->entry->lblBlock}</th>";
+        echo '<td>' . html::select('entryBlock', $blockPairs, ($block and $block->type == 'system') ? $block->blockID : '', "class='form-control' onchange='getBlockParams(this.value, $entryID)'") . '</td>';
+        if(isset($block->entryID)) echo "<script>$(function(){getBlockParams($('#entryBlock').val(), {$block->entryID})})</script>";
+    }
+
+    /**
+     * Set block that is from entry.
+     * 
+     * @param  int    $index 
+     * @param  int    $entryID 
+     * @param  int    $blockID 
+     * @access public
+     * @return void
+     */
+    public function setBlock($index, $entryID, $blockID)
     {
         $this->app->loadLang('block');
-        $configLink = helper::safe64Decode($link);
-        $type       = 'system';
-        $block      = isset($this->config->personal->index->block->{'b' . $index}->value) ? json_decode($this->config->personal->index->block->{'b' . $index}->value) : array();
+        $type  = 'system';
+        $block = isset($this->config->personal->index->block->{'b' . $index}->value) ? json_decode($this->config->personal->index->block->{'b' . $index}->value) : array();
 
-        $this->view->params = $this->entry->getBlockParams($configLink);
-        $this->view->block  = ($block and $block->type == $type) ? $block : array();
-        $this->view->index  = $index;
-        $this->view->type   = $type;
+        $entry  = $this->entry->getById($entryID);
+        $this->view->params  = $this->entry->getBlockParams($entry, $blockID);
+        $this->view->block   = ($block and $block->type == $type) ? $block : array();
+        $this->view->index   = $index;
+        $this->view->type    = $type;
+        $this->view->blockID = $blockID;
+        $this->view->entryID = $entryID;
         $this->display();
     }
 }

@@ -39,126 +39,32 @@ js::import($jsRoot . 'jquery/ips.js');
       </div>
     </div>
     <div id='home' class='fullscreen fullscreen-active'>
-      <div class='btn-toolbar actions'><button data-toggle='tooltip' data-placement='bottom' data-id='addblcok' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure app-btn'><i class='icon-plus'></i></button><button data-target='#home' data-toggle-class='custom-mode' data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->index->customBlocks; ?>' class='btn btn-pure'><i class='icon-wrench'></i></button></div>
+      <div class='btn-toolbar actions'>
+        <button data-toggle='tooltip' data-placement='bottom' data-id='addblcok' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure app-btn'><i class='icon-plus'></i></button>
+        <button data-target='#home' data-toggle-class='custom-mode' data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->index->customBlocks; ?>' class='btn btn-pure'><i class='icon-wrench'></i></button>
+      </div>
       <div class='panels-container'>
         <div class='row'>
+        <?php foreach($blocks as $key => $block):?>
+        <?php
+        $index = str_replace('b', '', $key);
+        $block = json_decode($block);
+        ?>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block1'>
+            <div class='panel' id='block<?php echo $index?>'>
               <div class='panel-heading'>
-                <i class='icon-list-ul'></i> Blck Name
+                <?php echo $block->name?>
                 <div class='custom-actions'>
-                  <a class='btn btn-mini edit-block' data-toggle='modal' href='<?php echo $this->createLink("block", "edit"); ?>'><i class='icon-pencil'></i></a>
-                  <button class='btn btn-mini remove-block btn-danger'><i class='icon-remove'></i></button>
+                  <a class='btn btn-mini edit-block' data-toggle='modal' href='<?php echo $this->createLink("block", "browse", "index=$index"); ?>'><i class='icon-pencil'></i></a>
+                  <button class='btn btn-mini remove-block btn-danger' onclick='deleteBlock(<?php echo $index?>)'><i class='icon-remove'></i></button>
                 </div>
               </div>
               <div class='panel-body no-padding'>
-                <table class='table table-hover table-condensed'>
-                  <tr>
-                    <td><strong>Row Title</strong></td>
-                    <td><span  class='small'><i class='icon-user'></i> Catouse</span></td>
-                    <td class='text-right'><span class='label label-badge'>34</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Row Title 2</strong></td>
-                    <td><span  class='small'><i class='icon-user'></i> Mouse</span></td>
-                    <td class='text-right'><span class='label label-success label label-badge'>34</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Row Title 3</strong></td>
-                    <td><span  class='small'><i class='icon-user'></i> Cat</span></td>
-                    <td class='text-right'></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Row Title 3</strong></td>
-                    <td><span  class='small'><i class='icon-user'></i> Cat</span></td>
-                    <td class='text-right'><span class='label label-danger label-badge'>10</span></td>
-                  </tr>
-                </table>
+                <img src='<?php echo $themeRoot?>default/images/ips/loading.gif' style='display:block;margin:40px auto;'/>
               </div>
             </div>
           </div>
-          <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block2'>
-              <div class='panel-heading'>Panel with list group
-                <div class='custom-actions'>
-                  <button class='btn btn-mini edit-block'><i class='icon-pencil'></i></button>
-                  <button class='btn btn-mini remove-block btn-danger'><i class='icon-remove'></i></button>
-                </div>
-              </div>
-              <div class='panel-body no-padding'>
-                <div class='list-group'>
-                  <a href='###' class='list-group-item'>Haha</a>
-                  <a href='###' class='list-group-item'>todo </a>
-                  <a href='###' class='list-group-item'>story</a>
-                  <a href='###' class='list-group-item'>task active</a>
-                  <a href='###' class='list-group-item'>bug</a>
-                  <a href='###' class='list-group-item'>case</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block3'>
-              <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'>
-                <button class='btn btn-block btn-danger'>HIT ME!</button>
-              </div>
-            </div>
-          </div>
-          <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block4'>
-              <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>4</h1></div>
-            </div>
-          </div>
-          <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block5'>
-              <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>5</h1></div>
-            </div>
-          </div>
-          <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block6'>
-              <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>6</h1></div>
-            </div>
-          </div>
-          <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block7'>
-              <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>7</h1></div>
-            </div>
-          </div>
-          <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block8'>
-              <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>8</h1></div>
-            </div>
-          </div>
-          <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block9'>
-              <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>9</h1></div>
-            </div>
-          </div>
-          <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block10'>
-              <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>10</h1></div>
-            </div>
-          </div>
-          <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block11'>
-              <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>11</h1></div>
-            </div>
-          </div>
-          <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block12'>
-              <div class='panel-heading'>Panel Name</div>
-              <div class='panel-body'><h1 class="text-center text-muted" style='font-size:60px;line-height:120px'>12</h1></div>
-            </div>
-          </div>
+          <?php endforeach;?>
         </div>
       </div>
     </div>
@@ -190,7 +96,7 @@ js::import($jsRoot . 'jquery/ips.js');
     <div id='modalContainer'>
     </div>
   </div>
-
+<?php js::set('blockCount', $blockNum);?>
 <script>
 var entries = new Array(
 {
@@ -215,7 +121,7 @@ var entries = new Array(
 },
 {
     id          : 'addblcok',
-    url         : '<?php echo $this->createLink("block", "add"); ?>',
+    url         : '<?php echo $this->createLink("block", "browse", "index=" . ($blockNum + 1)); ?>',
     name        : '<?php echo $lang->index->addBlock; ?>',
     open        : 'iframe',
     display     : 'modal',
@@ -230,13 +136,13 @@ var entries = new Array(
 $(function()
 {
     /* start ips */
-    $.ipsStart(entries, $.extend({onBlocksOrdered: function(orders){console.log(orders)}}, config));
+    $.ipsStart(entries, $.extend({onBlocksOrdered: orderBlocks}, config));
     $('.entries-count').text(entries.length - 2)
 });
-
 </script>
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
+include "../../common/view/footer.lite.html.php";
 ?>
 </body>
 </html>

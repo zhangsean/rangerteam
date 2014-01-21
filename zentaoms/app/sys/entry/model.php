@@ -231,12 +231,22 @@ class entryModel extends model
      * @access public
      * @return void
      */
-    public function getBlocksByAPI($api)
+    public function getBlocksByAPI($entry)
     {
         $http = $this->app->loadClass('http');
 
-        if(empty($api)) return array();
-        $blocks = $http->get($api);
+        if(empty($entry)) return array();
+        $parseUrl   = parse_url($entry->block);
+        $blockQuery = "mode=getblocklist&hash={$entry->key}";
+        $parseUrl['query'] = empty($parseUrl['query']) ? $blockQuery : $parseUrl['query'] . '&' . $blockQuery;
+
+        $link = '';
+        if(!isset($parseUrl['scheme'])) return false; 
+        $link .= $parseUrl['scheme'] . '://' . $parseUrl['host'];
+        if(isset($parseUrl['port'])) $link .= ':' . $parseUrl['port']; 
+        if(isset($parseUrl['path'])) $link .= $parseUrl['path']; 
+        $link .= '?' . $parseUrl['query'];
+        $blocks = $http->get($link);
 
         return json_decode($blocks);
     }
@@ -248,11 +258,21 @@ class entryModel extends model
      * @access public
      * @return void
      */
-    public function getBlockParams($link)
+    public function getBlockParams($entry, $blockID)
     {
         $http = $this->app->loadClass('http');
 
-        if(empty($link)) return array();
+        if(empty($entry)) return array();
+        $parseUrl  = parse_url($entry->block);
+        $formQuery = "mode=getblockform&blockid=$blockID&hash={$entry->key}";
+        $parseUrl['query'] = empty($parseUrl['query']) ? $formQuery : $parseUrl['query'] . '&' . $formQuery;
+
+        $link = '';
+        if(!isset($parseUrl['scheme'])) return false; 
+        $link .= $parseUrl['scheme'] . '://' . $parseUrl['host'];
+        if(isset($parseUrl['port'])) $link .= ':' . $parseUrl['port']; 
+        if(isset($parseUrl['path'])) $link .= $parseUrl['path']; 
+        $link .= '?' . $parseUrl['query'];
         $params = $http->get($link);
 
         return json_decode($params, true);

@@ -7,6 +7,9 @@ $lang->block->add    = '添加区块';
 
 $lang->block->lblEntry = '应用';
 $lang->block->lblBlock = '区块';
+$lang->block->lblRss   = 'RSS地址';
+$lang->block->lblNum   = '条数';
+$lang->block->lblHtml  = 'HTML内容';
 
 $lang->block->params = new stdclass();
 $lang->block->params->name  = '参数名称';

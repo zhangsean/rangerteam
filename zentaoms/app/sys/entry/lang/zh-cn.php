@@ -17,7 +17,7 @@ $lang->entry->delete    = '删除应用';
 $lang->entry->code      = '代号';
 $lang->entry->name      = '名称';
 $lang->entry->key       = '密钥';
-$lang->entry->block     = '接口地址';
+$lang->entry->block     = '区块地址';
 $lang->entry->ip        = 'IP列表';
 $lang->entry->logo      = 'Logo';
 $lang->entry->createKey = '重新生成密钥';
@@ -31,6 +31,7 @@ $lang->entry->width     = '宽';
 $lang->entry->height    = '高';
 
 $lang->entry->confirmDelete = '您确定删除该应用吗？';
+$lang->entry->lblBlock      = '区块';
 
 $lang->entry->note = new stdClass();
 $lang->entry->note->name    = '授权应用名称';
