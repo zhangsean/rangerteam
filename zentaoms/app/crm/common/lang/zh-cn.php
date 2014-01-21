@@ -37,5 +37,5 @@ $lang->product->menu->create = '发布产品|product|create|';
 /* Menu of order module. */
 $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
-$lang->order->menu->browse = array('link' => '订单列表|order|browse|', 'alias' => 'edit');
+$lang->order->menu->browse = array('link' => '订单列表|order|browse|', 'alias' => 'edit, team, managemembers');
 $lang->order->menu->create = '创建订单|order|create|';
