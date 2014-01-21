@@ -611,7 +611,9 @@
             }
             else
             {
-                return (winQuery.constructor == Number) ? $('#' + settings.windowidstrTemplate.format(winQuery)) : ((winQuery.constructor == String) ? $('#' + winQuery) : $(winQuery));
+                var win = $('#' + settings.windowidstrTemplate.format(winQuery));
+                if(!win.length) win = $('#' + winQuery);
+                return win;
             }
         }
         else
@@ -711,6 +713,7 @@
 
                 if(menu.hasClass('show'))
                 {
+                    menu.attr('data-id', btn.attr('data-id'));
                     if(btn.hasClass('s-menu-btn')) menu.css({left: 62, top: offset.top, bottom: 'inherit'});
                     else if(btn.hasClass('s-task-btn')) menu.css({left: offset.left, top: 'inherit', bottom: 38});
                 }
@@ -811,6 +814,7 @@
         {
             var win = $(this).closest('.window');
             if(!win.length) win = $(this).closest('.app-btn').attr('data-id');
+            if(!win || !win.length) win = $('#taskMenu.show').attr('data-id');
             closeWindow(win);
         }).on('click', '.min-win', function(event) // min-win
         {
@@ -820,6 +824,7 @@
         {
             var win = $(this).closest('.window');
             if(!win.length) win = $(this).closest('.app-btn').attr('data-id');
+            if(!win || !win.length) win = $('#taskMenu.show').attr('data-id');
             reloadWindow(win);
         });
 
