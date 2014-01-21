@@ -45,7 +45,6 @@ $lang->order->customers['1'] = '张三';
 $lang->order->customers['2'] = '李四';
 $lang->order->customers['3'] = '王五';
 
-<<<<<<< .mine
 $lang->team = new stdclass();
 $lang->team->account = '用户';
 $lang->team->role    = '角色';
