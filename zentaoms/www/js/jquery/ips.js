@@ -35,19 +35,21 @@
         safeCloseTip                  : '确认要关闭　【{0}】 吗？',
         entryNotFindTip               : '应用没有找到！',
         busyTip                       : '应用正忙，请稍候...',
-        reloadWindowText              : '刷新应用内容 (F5)',
-        closeWindowText               : '关闭应用窗口',
+        reloadWindowText              : '重新载入应用',
+        closeWindowText               : '关闭应用',
         minWindowText                 : '隐藏窗口',
         showWindowText                : '显示窗口',
         windowHtmlTemplate            : "<div id='{idstr}' class='window {cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
         frameHtmlTemplate             : "<iframe id='iframe-{idstr}' name='iframe-{idstr}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
-        leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a data-toggle="tooltip" data-placement="right"  href="javascript:;" class="app-btn" title="{name}" data-id="{id}">{iconhtml}</a></li>',
-        taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</button><div class="actions"><button class="close-win"><i class="icon-remove"></i></button></div></li>',
+        leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a data-toggle="tooltip" data-placement="right"  href="javascript:;" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</a></li>',
+        taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</button></li>',
+        taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu' id='taskMenu'><li><a href='###' class='reload-win'><i class='icon-repeat'></i> {reloadWindowText}</a></li><li><a href='###' class='close-win'><i class='icon-remove'></i> {closeWindowText}</a></li></ul>",
         entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</a></li>',
 
         init                          : function() // init the default
         {
             this.entryIconRoot = this.webRoot + this.entryIconRoot;
+            this.taskBarMenuHtmlTemplate = this.taskBarMenuHtmlTemplate.format(this);
         }
     };
 
@@ -283,9 +285,15 @@
 
     function haddleStartMenu()
     {
-        $('#startMenu a').click(function()
+        $(document).click(function()
         {
-            $('#startMenu').removeClass($('#start').attr('data-toggle-class'));
+            $('#startMenu').removeClass('show');
+        });
+
+        $('#start').click(function(e)
+        {
+            $('#startMenu').toggleClass('show');
+            e.stopPropagation();
         });
     }
 
@@ -689,13 +697,53 @@
             event.preventDefault();
         });
 
+        /* disable the browser's contextmenu */
+        document.oncontextmenu = nocontextmenu;  // for IE5+
+        document.onmousedown = norightclick;  // for all others
+
         $(document).on('mousedown', '.app-btn.open', function(e)
         {
             if(e.which == 3)
             {
+                var btn = $(this),menu = $('#taskMenu'), offset = btn.offset();
+                if(!menu.length) menu = $(settings.taskBarMenuHtmlTemplate).appendTo('#desktop');
+                menu.toggleClass('show');
+
+                if(menu.hasClass('show'))
+                {
+                    if(btn.hasClass('s-menu-btn')) menu.css({left: 62, top: offset.top, bottom: 'inherit'});
+                    else if(btn.hasClass('s-task-btn')) menu.css({left: offset.left, top: 'inherit', bottom: 38});
+                }
+            }
+
+            e.stopPropagation();
+        });
+
+        $(document).click(function(){$('#taskMenu').removeClass('show')});
+
+        function nocontextmenu()
+        {
+            event.cancelBubble = true
+            event.returnValue = false;
+
+            return false;
+        }
+
+        function norightclick(e) 
+        {
+            if (window.Event) 
+            {
+                if (e.which == 2 || e.which == 3)
                 return false;
             }
-        });
+            else
+            if (event.button == 2 || event.button == 3)
+            {
+                event.cancelBubble = true
+                event.returnValue = false;
+                return false;
+            }
+        }
     }
 
     function openWindow(entry)
@@ -764,7 +812,6 @@
             var win = $(this).closest('.window');
             if(!win.length) win = $(this).closest('.app-btn').attr('data-id');
             closeWindow(win);
-            stopEvent(event);
         }).on('click', '.min-win', function(event) // min-win
         {
             toggleShowWindow($(this).closest('.window'));
@@ -774,7 +821,6 @@
             var win = $(this).closest('.window');
             if(!win.length) win = $(this).closest('.app-btn').attr('data-id');
             reloadWindow(win);
-            stopEvent(event);
         });
 
         function stopEvent(event)

@@ -21,7 +21,7 @@ js::import($jsRoot . 'jquery/ips.js');
       </div>
     </div>
     <div id='bottomBar' class='dock-bottom'>
-      <button id='start' class='dock-left radiance' data-toggle-class='show' data-target='#startMenu'><img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''></button>
+      <button id='start' class='dock-left radiance'><img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''></button>
       <ul id='startMenu' class='dropdown-menu'>
         <li><a href='###' class='app-btn' data-id='profile'><img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''> <strong><?php echo $app->user->realname?></strong></a></li>
         <li class="divider"></li>
