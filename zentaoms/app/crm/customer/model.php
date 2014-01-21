@@ -28,6 +28,18 @@ class customerModel extends model
         return $customers;
     }
 
+    /** 
+     * Get customer pairs.
+     * 
+     * @param  string  $orderBy 
+     * @access public
+     * @return array
+     */
+    public function getPairs($orderBy = 'id_desc')
+    {
+        return $this->dao->select('id, name')->from(TABLE_CUSTOMER)->orderBy($orderBy)->fetchPairs('id');
+    }
+
     /**
      * Create a customer.
      * 
