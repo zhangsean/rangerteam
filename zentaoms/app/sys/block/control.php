@@ -101,6 +101,8 @@ class block extends control
             $orders['b' . $index] = $this->config->personal->index->block->{'b' . $oldOrder[$key]}->value;
         }
         if($orders) $this->loadModel('setting')->setItems($this->app->user->account . '.sys.index.block', $orders);
+        if(dao::isError()) $this->send(array('result' => 'fail'));
+        $this->send(array('result' => 'success'));
     }
 
     /**

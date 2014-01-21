@@ -18,13 +18,16 @@ function deleteBlock(index)
 
 function orderBlocks(orders)
 {
-  var oldOrder = new Array();
-  var newOrder = new Array();
-  for(i in orders)
-  {
-     oldOrder.push(i.replace('block', ''));
-     newOrder.push(orders[i]);
-  }
+    var oldOrder = new Array();
+    var newOrder = new Array();
+    for(i in orders)
+    {
+       oldOrder.push(i.replace('block', ''));
+       newOrder.push(orders[i]);
+    }
 
-  $.get(createLink('block', 'order', 'oldOrder=' + oldOrder.join(',') + '&newOrder=' + newOrder.join(',')));
+    $.getJSON(createLink('block', 'order', 'oldOrder=' + oldOrder.join(',') + '&newOrder=' + newOrder.join(',')), function(data)
+    {
+        if(data.result == 'success') $('div[data-order]').each(function(){$(this).attr('id', 'block' + $(this).attr('data-order'));})
+    });
 }
