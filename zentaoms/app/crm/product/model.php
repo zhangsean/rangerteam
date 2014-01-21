@@ -291,11 +291,31 @@ class productModel extends model
     {
         foreach($_POST['field'] as $key => $field)
         {
-            if(empty($field) or empty($_POST['oprater'][$key])) continue;
-            $conditions[$field] = array('oprater' => $_POST['oprater'][$key], 'value' => $_POST['value'][$key]);
+            if(empty($field) or empty($_POST['operater'][$key])) continue;
+            $conditions[$field] = array('operater' => $_POST['operater'][$key], 'value' => $_POST['value'][$key]);
         }
 
         $this->dao->update(TABLE_ORDERACTION)->set('conditions')->eq(json_encode($conditions))->where('id')->eq($actionID)->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Save inputs of an action.
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function saveInputs($actionID)
+    {
+        foreach($_POST['field'] as $key => $field)
+        {
+            if(empty($field)) continue;
+            $inputs[$field]['rules']   = join($_POST['rules'][$key], ',');
+            $inputs[$field]['default'] = $_POST['default'][$key];
+        }
+
+        $this->dao->update(TABLE_ORDERACTION)->set('inputs')->eq(json_encode($inputs))->where('id')->eq($actionID)->exec();
         return !dao::isError();
     }
 }
