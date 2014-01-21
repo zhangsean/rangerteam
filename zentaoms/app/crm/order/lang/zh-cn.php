@@ -41,10 +41,6 @@ $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '订单失败';
 $lang->order->closedReasonList['postponed'] = '延期';
 
-$lang->order->customers['1'] = '张三';
-$lang->order->customers['2'] = '李四';
-$lang->order->customers['3'] = '王五';
-
 $lang->team = new stdclass();
 $lang->team->account = '用户';
 $lang->team->role    = '角色';
