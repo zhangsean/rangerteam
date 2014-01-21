@@ -230,7 +230,7 @@ var entries = new Array(
 $(function()
 {
     /* start ips */
-    $.ipsStart(entries, $.extend(config));
+    $.ipsStart(entries, $.extend({onBlocksOrdered: function(orders){console.log(orders)}}, config));
     $('.entries-count').text(entries.length - 2)
 });
 

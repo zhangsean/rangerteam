@@ -411,10 +411,14 @@
                 {
                     panel.parent().insertBefore('.dragging-in');
                     var newOrder = 1;
+                    var newOrders = {};
                     $('#home .panel:not(#draggingPanel)').each(function()
                     {
                         $(this).attr('data-order', newOrder++);
+                        newOrders[$(this).attr('id')] = $(this).attr('data-order');
                     });
+
+                    if(settings.onBlocksOrdered && $.isFunction(settings.onBlocksOrdered)) settings.onBlocksOrdered(newOrders);
                 }
                 $('#draggingPanel').remove();
                 $('.dragging-col').removeClass('dragging-col');
