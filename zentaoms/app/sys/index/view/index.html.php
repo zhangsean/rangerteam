@@ -19,19 +19,15 @@ js::import($jsRoot . 'jquery/ips.js');
       <div id='apps-menu'>
         <ul class='bar-menu'></ul>
       </div>
-      <div class='dock-bottom'>
-        <div id='avatar' data-toggle='tooltip' data-placement='right' title='<?php echo $lang->index->profile?>' class='app-btn' data-id='profile'>
-          <img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''>
-          <div class='avatar-name'><?php echo $app->user->realname?></div>
-        </div>
-      </div>
     </div>
     <div id='bottomBar' class='dock-bottom'>
-      <div id='buttonLeftBar' class='dock-left'>
-        <ul class='bar-menu'>
-            <li><button class='fullscreen-btn' data-toggle='tooltip' data-placement='right' data-id='allapps' title='<?php echo $lang->index->allEntries?>'><i class='icon-reorder'></i></button></li>
-          </ul>
-      </div>
+      <button id='start' class='dock-left radiance' data-toggle-class='show' data-target='#startMenu'><img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''></button>
+      <ul id='startMenu' class='dropdown-menu'>
+        <li><a href='###' class='app-btn' data-id='profile'><img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''> <strong><?php echo $app->user->realname?></strong></a></li>
+        <li class="divider"></li>
+        <li><a href='<?php echo $this->createLink('entry', 'create') ?>' target='_blank' class=><i class='icon icon-plus'></i> <?php echo $lang->index->addEntry?></a></li>
+        <li><a href='###' class='fullscreen-btn' data-id='allapps'><i class='icon icon-th-large'></i> <?php echo $lang->index->allEntries?><div class='pull-right'><span class='label label-badge entries-count'></span></div></a></li>
+      </ul>
       <div id='taskbar'>
         <ul class='bar-menu'>
         </ul>
@@ -170,7 +166,7 @@ js::import($jsRoot . 'jquery/ips.js');
       <header>
         <div class='row'>
           <div class='col-md-4'>
-            <h4><i class='icon-th-list'></i> <?php echo $lang->index->allEntries?> &nbsp;<small class='muted'><?php echo $lang->index->countEntries?></small></h4>
+            <h4><i class='icon-th-large'></i> <?php echo $lang->index->allEntries?> &nbsp;<small class='muted'><?php echo $lang->index->countEntries?></small></h4>
           </div>
           <div class='col-md-4'>
             <div class='search-input'>
@@ -180,7 +176,7 @@ js::import($jsRoot . 'jquery/ips.js');
             </div>
           </div>
           <div class='col-md-4 text-right'>
-            <a class='btn btn-pure' href='admin.php?m=entry&f=create' target='_blank'><i class='icon-plus'></i> <?php echo $lang->index->addEntry?></a>
+            <a class='btn btn-pure' href='<?php echo $this->createLink('entry', 'create') ?>' target='_blank'><i class='icon-plus'></i> <?php echo $lang->index->addEntry?></a>
           </div>
         </div>
       </header>
@@ -201,7 +197,7 @@ var entries = new Array(
     id          : 'profile',
     url         : '<?php echo $this->createLink('user', 'profile')?>',
     name        : '<?php echo $lang->user->profile?>',
-    type        : 'iframe',
+    open        : 'iframe',
     desc        : '<?php echo $lang->index->profile?>',
     display     : 'modal',
     size        : 'default',
@@ -210,14 +206,23 @@ var entries = new Array(
     control     : 'full'
 },
 {
+    id          : 'allapps',
+    name        : '<?php echo $lang->index->allEntries?>',
+    display     : 'fullscreen',
+    desc        : '<?php echo $lang->index->allEntries?>',
+    menu        : true,
+    icon        : 'icon-th-large'
+},
+{
     id          : 'addblcok',
     url         : '<?php echo $this->createLink("block", "add"); ?>',
     name        : '<?php echo $lang->index->addBlock; ?>',
-    type        : 'iframe',
+    open        : 'iframe',
     display     : 'modal',
     size        : 'default',
     menu        : false,
-    control     : 'full'
+    control     : 'full',
+    icon        : 'icon-plus'
 });
 
 <?php echo $allEntries;?>
@@ -225,7 +230,7 @@ var entries = new Array(
 $(function()
 {
     /* start ips */
-    $.ipsStart(entries, config);
+    $.ipsStart(entries, $.extend(config));
     $('.entries-count').text(entries.length - 2)
 });
 

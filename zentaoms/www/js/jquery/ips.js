@@ -39,11 +39,11 @@
         closeWindowText               : '关闭应用窗口',
         minWindowText                 : '隐藏窗口',
         showWindowText                : '显示窗口',
-        windowHtmlTemplate            : "<div id='{idstr}' class='window {cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}'><div class='window-head'><img src='{icon}' alt=''><strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
+        windowHtmlTemplate            : "<div id='{idstr}' class='window {cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
         frameHtmlTemplate             : "<iframe id='iframe-{idstr}' name='iframe-{idstr}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
-        leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a data-toggle="tooltip" data-placement="right"  href="javascript:;" class="app-btn" title="{name}" data-id="{id}"><img src="{icon}" alt=""></a></li>',
-        taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn" title="{desc}" data-id="{id}"><img src="{icon}" alt="">{name}</button><div class="actions"><button class="close-win"><i class="icon-remove"></i></button></div></li>',
-        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{desc}" data-id="{id}"><img src="{icon}" alt="">{name}</a></li>',
+        leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a data-toggle="tooltip" data-placement="right"  href="javascript:;" class="app-btn" title="{name}" data-id="{id}">{iconhtml}</a></li>',
+        taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</button><div class="actions"><button class="close-win"><i class="icon-remove"></i></button></div></li>',
+        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</a></li>',
 
         init                          : function() // init the default
         {
@@ -100,6 +100,8 @@
 
             /* if no icon setting here, then load icon with the default rule */
             if(!this.icon) this.icon = settings.entryIconRoot + 'entry-' + this.id + '.png';
+            if(this.icon.indexOf('icon-') == 0) this.iconhtml = '<i class="icon ' + this.icon + '"></i>';
+            else this.iconhtml = '<img src="' + this.icon + '" alt="" />';
 
             /* mark modal with css class */
             if(this.display == 'modal')
@@ -275,6 +277,16 @@
         handleHomeBlocks();
 
         handleAllApps();
+
+        haddleStartMenu();
+    }
+
+    function haddleStartMenu()
+    {
+        $('#startMenu a').click(function()
+        {
+            $('#startMenu').removeClass($('#start').attr('data-toggle-class'));
+        });
     }
 
     function handleAllApps()
@@ -459,27 +471,34 @@
     {
         $('.fullscreen-btn').click(function()
         {
-            var win = $('#' + $(this).attr('data-id'));
-            if(win.hasClass('fullscreen-active'))
-            {
-                $('#desktop').removeClass('fullscreen-mode');
-                win.removeClass('fullscreen-active');
-                $(this).removeClass('active');
-            }
-            else
-            {
-                var e = $(this);
-                $('.fullscreen-active').removeClass('fullscreen-active');
-                win.addClass('fullscreen-active');
-                $('#desktop').addClass('fullscreen-mode');
-                fullscreenMode = true;
-                $('.fullscreen-btn, .app-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class')).removeClass('active')});
-                e.addClass('active');
-
-                if(e.attr('data-id') == 'allapps') $('#search').focus();
-            }
+            toggleFullscreen($(this).attr('data-id'));
         });
     }
+
+    function toggleFullscreen(id)
+    {
+        var win = $('#' + id);
+        if(win.hasClass('fullscreen-active'))
+        {
+            $('#desktop').removeClass('fullscreen-mode');
+            win.removeClass('fullscreen-active');
+            $('.fullscreen-btn[data-id="' + id + '"],.app-btn[data-id="' + id + '"]').removeClass('active');
+
+            if(activedWindow) $('.app-btn[data-id="' + activedWindow.attr('data-id') + '"]').addClass('active');
+        }
+        else
+        {
+            $('.fullscreen-active').removeClass('fullscreen-active');
+            win.addClass('fullscreen-active');
+            $('#desktop').addClass('fullscreen-mode');
+            fullscreenMode = true;
+            $('.fullscreen-btn, .app-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class')).removeClass('active')});
+            $('.fullscreen-btn[data-id="' + id + '"],.app-btn[data-id="' + id + '"]').addClass('active');
+
+            if(id == 'allapps') $('#search').focus();
+        }
+    }
+
 
     /* make the window movable with class '.movable' or '.window-movable'
      *
@@ -655,7 +674,8 @@
             var entry = entries[$(this).attr('data-id')];
             if(entry)
             {
-                openWindow(entry);
+                if(entry.display == 'fullscreen') toggleFullscreen(entry.id);
+                else openWindow(entry);
             }
             else
             {
@@ -663,6 +683,14 @@
             }
 
             event.preventDefault();
+        });
+
+        $(document).on('mousedown', '.app-btn.open', function(e)
+        {
+            if(e.which == 3)
+            {
+                return false;
+            }
         });
     }
 
@@ -687,7 +715,7 @@
             if($('#desktop').hasClass('fullscreen-mode'))
             {
                 $('#desktop').removeClass('fullscreen-mode');
-                $('.fullscreen-btn.active').removeClass('active');
+                $('.fullscreen-btn.active,.app-btn.active').removeClass('active');
                 $('.app-btn[data-id="'+entry.id+'"]').addClass('active');
             }
             else toggleShowWindow(entryWin);
@@ -886,7 +914,7 @@
         }
         var url = win.attr('data-reffer-url');
         if(url == undefined) url = indexUrl;
-        window.history.pushState({}, 0, url);
+        try{window.history.pushState({}, 0, url);}catch(e){}
     }
 
     function closeWindow(winQuery)
