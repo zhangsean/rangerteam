@@ -33,7 +33,8 @@
           echo html::a($this->createLink('order', 'assign', "orderID=$order->id"), $lang->assign);
           if($order->status != 'closed') echo html::a($this->createLink('order', 'close', "orderID=$order->id"), $lang->close);
           if($order->status == 'closed' && $order->closedReason != 'payed') echo html::a($this->createLink('order', 'activate', "orderID=$order->id"), $lang->activate, "class='reload'");
-          echo html::a($this->createLink('order', 'view',   "orderID=$order->id"), $lang->view);
+          echo html::a($this->createLink('order', 'view', "orderID=$order->id"), $lang->view);
+          echo html::a($this->createLink('order', 'team', "orderID=$order->id"), $lang->order->team);
           ?>
         </td>
       </tr>
