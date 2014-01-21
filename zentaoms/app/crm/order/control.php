@@ -140,7 +140,7 @@ class order extends control
      */
     public function team($orderID = 0)
     {
-        $this->view->title       = $order->name . $this->lang->colon . $this->lang->order->team;
+        $this->view->title       = $this->lang->order->team;
         $this->view->order       = $this->order->getByID($orderID);
         $this->view->teamMembers = $this->order->getTeamMembers($orderID);
 
@@ -176,9 +176,7 @@ class order extends control
             if(!isset($users[$member->account])) $member->account .= $this->lang->user->deleted;
         }
 
-        $title = $this->lang->order->manageMembers . $this->lang->colon . $order->name;
-
-        $this->view->title          = $title;
+        $this->view->title          = $this->lang->order->manageMembers;
         $this->view->order          = $order;
         $this->view->users          = $users;
         $this->view->roles          = $roles;
