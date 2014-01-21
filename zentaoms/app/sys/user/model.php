@@ -110,6 +110,22 @@ class userModel extends model
     }
 
     /**
+     * Get roles for some users.
+     * 
+     * @param  string    $users 
+     * @access public
+     * @return array
+     */
+    public function getUserRoles($users)
+    {
+        $users = $this->dao->select('account, role')->from(TABLE_USER)->where('account')->in($users)->fetchPairs();
+        if(!$users) return array();
+
+        foreach($users as $account => $role) $users[$account] = zget($this->lang->user->roleList, $role, $role);
+        return $users;
+    }
+
+    /**
      * Create a user.
      * 
      * @access public
