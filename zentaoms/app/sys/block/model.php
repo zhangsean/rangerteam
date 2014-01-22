@@ -47,7 +47,7 @@ class blockModel extends model
         $params = base64_encode(json_encode($block->params));
 
         $parseUrl = parse_url($entry->block);
-        $query    = "mode=getblockdata&blockid=$block->blockID&param=$params&hash=$entry->key&sso=" . commonModel::getSysURL() . helper::createLink('entry', 'visit', "entry=$entry->id");
+        $query    = "mode=getblockdata&blockid={$block->blockID}&param={$params}&hash=$entry->key&sso=" . base64_encode(commonModel::getSysURL() . helper::createLink('entry', 'visit', "entry=$entry->id"));
         $parseUrl['query'] = empty($parseUrl['query']) ? $query : $parseUrl['query'] . "&" . $query;
 
         $link = '';
