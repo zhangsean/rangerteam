@@ -1,4 +1,4 @@
-function getAPIBlocks(entryID)
+function getBlocks(entryID)
 {
     var entryBlock = $('#allEntries').parent().parent().next();
     $(entryBlock).hide();
@@ -6,9 +6,10 @@ function getAPIBlocks(entryID)
     if(entryID == '') return false;
     if(entryID == 'rss' || entryID == 'html')
     {
-        getBlockParams(entryID);
+        getRssAndHtmlParams(entryID);
         return false;
     }
+
     $.get(createLink('entry', 'blocks', 'entryID=' + entryID + '&index=' + v.index), function(data)
     {
         $(entryBlock).html(data);
@@ -16,35 +17,29 @@ function getAPIBlocks(entryID)
     })
 }
 
-function getBlockParams(value, entryID)
+function getRssAndHtmlParams(type)
 {
-  $('#blockParam').empty();
-    if(value == '') return false;
-    if(value == 'rss' || value == 'html')
+    $.get(createLink('block', 'set', 'index=' + v.index + '&type=' + type), function(data)
     {
-        $.get(createLink('block', 'set', 'index=' + v.index + '&type=' + value), function(data)
-        {
-            $('#blockParam').html(data);
-            $.setAjaxForm('#ajaxForm', afterAddBlock);
-        });
-    }
-    else
-    {
-        $.get(createLink('entry', 'setBlock', 'index=' + v.index + '&entryID=' + entryID + '&blockID=' + value), function(data)
-        {
-            $('#blockParam').html(data);
-            $.setAjaxForm('#ajaxForm', afterAddBlock);
-        });
-    }
+        $('#blockParam').html(data);
+        $.setAjaxForm('#ajaxForm', function(){parent.location.href=config.webRoot + config.appName;});
+    });
 }
 
-function afterAddBlock()
+function getBlockParams(blockID, entryID)
 {
-  parent.location.href=config.webRoot + config.appName;
+    $('#blockParam').empty();
+    if(blockID == '') return false;
+
+    $.get(createLink('entry', 'setBlock', 'index=' + v.index + '&entryID=' + entryID + '&blockID=' + blockID), function(data)
+    {
+        $('#blockParam').html(data);
+        $.setAjaxForm('#ajaxForm', function(){parent.location.href=config.webRoot + config.appName;});
+    });
 }
 
 $(function()
 {
-    $('#allEntries').change(function(){getAPIBlocks($(this).val())});
-    getAPIBlocks($('#allEntries').val());
+    $('#allEntries').change(function(){getBlocks($(this).val())});
+    getBlocks($('#allEntries').val());
 })

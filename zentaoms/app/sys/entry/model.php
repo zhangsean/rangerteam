@@ -227,9 +227,9 @@ class entryModel extends model
     /**
      * Get blocks by API.
      * 
-     * @param  string    $api 
+     * @param  object    $entry 
      * @access public
-     * @return void
+     * @return json
      */
     public function getBlocksByAPI($entry)
     {
@@ -254,9 +254,10 @@ class entryModel extends model
     /**
      * Get block params.
      * 
-     * @param  sring    $link 
+     * @param  object $entry 
+     * @param  int    $blockID 
      * @access public
-     * @return void
+     * @return json
      */
     public function getBlockParams($entry, $blockID)
     {
