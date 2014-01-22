@@ -28,6 +28,14 @@ function orderBlocks(orders)
 
     $.getJSON(createLink('block', 'order', 'oldOrder=' + oldOrder.join(',') + '&newOrder=' + newOrder.join(',')), function(data)
     {
-        if(data.result == 'success') $('div[data-order]').each(function(){$(this).attr('id', 'block' + $(this).attr('data-order'));})
+        if(data.result != 'success') return false;
+
+        $('div[data-order]').each(function()
+        {
+            var index = $(this).attr('data-order');
+            $(this).attr('id', 'block' + index);
+            $(this).find('.custom-actions .edit-block').attr('href', createLink('block', 'browse', 'index=' + index));
+            $(this).find('.custom-actions .remove-block').attr('onclick', 'deleteBlock(' + index + ')');
+        })
     });
 }
