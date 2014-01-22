@@ -23,7 +23,7 @@ include '../../common/view/header.admin.html.php';
         <th class='w-80px'><?php echo $lang->entry->code;?></th>
         <th width='350'><?php echo $lang->entry->key;?></th>
         <th><?php echo $lang->entry->ip;?></th>
-        <th class='w-50px'><?php echo $lang->actions;?></th>
+        <th class='w-100px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
