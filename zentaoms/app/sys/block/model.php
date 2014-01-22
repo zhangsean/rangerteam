@@ -101,13 +101,9 @@ class blockModel extends model
             {
                 if($tag == 'title')
                 { 
-                    $html .= "<h5>{$itemTags[$tag][$i]}</h5>";
+                    $html .= '<h5>' . html::a($itemTags['link'][$i], $itemTags[$tag][$i], "target='_blank'") . '</h5>';
                 }
-                elseif($tag == 'link')
-                {
-                    $html .= "<div style='font-size:12px'>" . html::a($itemTags[$tag][$i], $itemTags[$tag][$i], "target='_blank'") . "</div>";
-                }
-                else
+                elseif($tag == 'pubdate')
                 {
                     $html .= "<div style='font-size:12px'>{$itemTags[$tag][$i]}</div>";
                 }
@@ -118,7 +114,7 @@ class blockModel extends model
     }
 
     /**
-     * Get saved glock config.
+     * Get saved block config.
      * 
      * @param  int    $index 
      * @access public
