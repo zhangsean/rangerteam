@@ -30,7 +30,7 @@ class index extends control
             $logo = $entry->logo ? $entry->logo : '';
             $size = $entry->size != 'max' ? $entry->size : "'$entry->size'";
 
-            $allEntries .= "entries.push({id: '$entry->id', url: '$sso', name: '$entry->name', open: '$entry->open', desc: '$entry->name', display: 'fixed', size: '$size', icon: '$logo', control: '$entry->control', position: '$entry->position'});\n";
+            $allEntries .= "entries.push({id: '$entry->id', url: '$sso', name: '$entry->name', open: '$entry->open', desc: '$entry->name', display: 'fixed', size: $size, icon: '$logo', control: '$entry->control', position: '$entry->position'});\n";
         }
 
         $blocks = empty($this->config->index->block) ? array() : (array)$this->config->index->block;
