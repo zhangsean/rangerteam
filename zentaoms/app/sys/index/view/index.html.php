@@ -55,7 +55,7 @@ js::import($jsRoot . 'jquery/ips.js');
               <div class='panel-heading'>
                 <?php echo $block->name?>
                 <div class='custom-actions'>
-                  <a class='btn btn-mini edit-block' data-toggle='modal' href='<?php echo $this->createLink("block", "browse", "index=$index"); ?>'><i class='icon-pencil'></i></a>
+                  <a class='btn btn-mini edit-block' data-toggle='modal' href='<?php echo $this->createLink("block", "admin", "index=$index"); ?>'><i class='icon-pencil'></i></a>
                   <button class='btn btn-mini remove-block btn-danger' onclick='deleteBlock(<?php echo $index?>)'><i class='icon-remove'></i></button>
                 </div>
               </div>
@@ -121,7 +121,7 @@ var entries = new Array(
 },
 {
     id          : 'addblcok',
-    url         : '<?php echo $this->createLink("block", "browse", "index=" . ($blockNum + 1)); ?>',
+    url         : '<?php echo $this->createLink("block", "admin", "index=" . ($blockNum + 1)); ?>',
     name        : '<?php echo $lang->index->addBlock; ?>',
     open        : 'iframe',
     display     : 'modal',

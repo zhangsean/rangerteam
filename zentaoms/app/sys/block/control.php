@@ -12,13 +12,13 @@
 class block extends control
 {
     /**
-     * Browse all blocks; 
+     * Admin all blocks; 
      * 
      * @param  int    $index 
      * @access public
      * @return void
      */
-    public function browse($index)
+    public function admin($index)
     {
         $entries = $this->dao->select('*')->from(TABLE_ENTRY)->where('block')->ne('')->fetchAll('id');
 

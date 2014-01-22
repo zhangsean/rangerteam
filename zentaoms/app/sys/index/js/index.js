@@ -34,7 +34,7 @@ function orderBlocks(orders)
         {
             var index = $(this).attr('data-order');
             $(this).attr('id', 'block' + index);
-            $(this).find('.custom-actions .edit-block').attr('href', createLink('block', 'browse', 'index=' + index));
+            $(this).find('.custom-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
             $(this).find('.custom-actions .remove-block').attr('onclick', 'deleteBlock(' + index + ')');
         })
     });
