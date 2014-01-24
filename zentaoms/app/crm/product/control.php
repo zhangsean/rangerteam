@@ -138,13 +138,60 @@ class product extends control
     /**
      * Edit a field.
      * 
-     * @param  int    $field 
+     * @param  int    $fieldID
      * @access public
      * @return void
      */
-    public function editField($field)
+    public function editField($fieldID)
     {
+        $field = $this->product->getFieldByID($fieldID);
+
+        if($_POST)
+        {
+            if($this->product->updateField($fieldID)) $this->send(array('result' => 'success', 'locate' => $this->inlink('adminField' , "productID={$field->product}")));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->field   = $field;
         $this->display();
+    }
+
+    /**
+     * Delete field.
+     * 
+     * @param  int    $productID 
+     * @param  int    $fieldID 
+     * @access public
+     * @return void
+     */
+    public function deleteField($fieldID)
+    {
+        if($this->product->deleteField($fieldID)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
+     * Check field length.
+     * 
+     * @param  int    $fieldID 
+     * @param  string $control 
+     * @access public
+     * @return void
+     */
+    public function checkFieldLength($fieldID, $control)
+    {
+        $field = $this->product->getFieldByID($fieldID);
+
+        /* Init length to 256. */
+        $oldLength = '256';
+        $newLength = '256';
+        foreach($this->config->field->lengthList as $length => $controls)
+        {
+            if(strpos($controls, ",$control,") !== false) $newLength = $length;
+            if(strpos($controls, ",{$field->control},") !== false) $oldLength = $length;
+        }
+
+        if(($newLength < $oldLength)) echo $this->lang->product->field->lengthNotice;
     }
 
     /**

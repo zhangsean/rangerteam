@@ -143,6 +143,18 @@ class productModel extends model
     }
 
     /**
+     * Get field by id. 
+     * 
+     * @param  int    $fieldID 
+     * @access public
+     * @return object
+     */
+    public function getFieldByID($fieldID)
+    {
+        return $this->dao->select('*')->from(TABLE_ORDERFIELD)->where('id')->eq($fieldID)->limit(1)->fetch();
+    }
+
+    /**
      * Get field list.
      * 
      * @param  int    $productID 
@@ -207,18 +219,17 @@ class productModel extends model
     /**
      * Create a field.
      * 
+     * @param  int    $productID 
      * @access public
      * @return int|bool
      */
     public function createField($productID)
     {
-        $field = fixer::input('post')->add('product', $productID)->get();
+        $field = fixer::input('post')->add('product', $productID)->join('rules', ',')->get();
         $product = $this->getByID($productID);
         if(empty($product)) return false;
 
-        $this->dao->insert(TABLE_ORDERFIELD)
-            ->data($field)
-            ->autoCheck()
+        $this->dao->insert(TABLE_ORDERFIELD)->data($field)->autoCheck()
             ->check('field', 'unique', "product={$productID}")
             ->batchCheck($this->config->field->require->create, 'notempty')
             ->exec();
@@ -227,6 +238,55 @@ class productModel extends model
         $alterQuery = "ALTER TABLE crm_order_{$product->code} ADD `{$field->field}` {$this->config->field->controlTypeList[$field->control]} NOT NULL";
         if($field->default) $alterQuery .= " default {$field->default}";
         if(!$this->dbh->query($alterQuery)) return false;
+
+        return true;
+    }
+
+    /**
+     * Update field.
+     * 
+     * @param  int    $fieldID 
+     * @access public
+     * @return bool
+     */
+    public function updateField($fieldID)
+    {
+        $field = $this->getFieldByID($fieldID);
+        $data  = fixer::input('post')->join('rules', ',')->get();
+
+        $this->dao->update(TABLE_ORDERFIELD)->data($data)->autoCheck()
+            ->batchCheck($this->config->field->require->edit, 'notempty')
+            ->exec();
+
+        if(dao::isError()) return false;
+        if($field->field == $data->field) return true;
+
+        $product    = $this->getByID($field->product);
+        $alterQuery = "ALTER TABLE crm_order_{$product->code} CHANGE `{$field->field}` `$data->field` {$this->config->field->controlTypeList[$data->control]} NOT NULL";
+
+        if($field->default) $alterQuery .= " default {$data->default}";
+        if(!$this->dbh->query($alterQuery)) return false;
+
+        return true;
+    }
+
+    /**
+     * Delete field. 
+     * 
+     * @param  int    $fieldID 
+     * @param  string $table 
+     * @access public
+     * @return bool
+     */
+    public function deleteField($fieldID, $table = null)
+    {
+        $field = $this->getFieldByID($fieldID);
+        $this->dao->delete()->from(TABLE_ORDERFIELD)->where('id')->eq($fieldID)->exec();
+
+        if(dao::isError()) return false;
+        $product   = $this->getByID($field->product);
+        $dropQuery = "ALTER TABLE crm_order_{$product->code} DROP `{$field->field}`";
+        if(!$this->dbh->query($dropQuery)) return false;
 
         return true;
     }
