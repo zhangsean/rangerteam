@@ -157,7 +157,7 @@ class product extends control
     public function adminAction($productID)
     {
         $this->view->productID = $productID;
-        $this->view->actions   = $this->product->getActions($productID);
+        $this->view->actions   = $this->product->getActionList($productID);
         $this->display();
     }
 
@@ -190,6 +190,15 @@ class product extends control
     {
         $action = $this->product->getActionByID($actionID);
         if(empty($action)) die('');
+        if(empty($action->condations))
+        {
+            $action->condations = array();
+            $defaultCondations  = new stdclass();
+            $defaultCondations->operater = '';
+            $defaultCondations->value    = '';
+
+            $action->condations[''] = $defaultInput;
+        }
 
         if($_POST)
         {
@@ -253,6 +262,44 @@ class product extends control
     }
 
     /**
+<<<<<<< .mine
+     * Action tasks 
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function actionTasks($actionID)
+    {
+        $action = $this->product->getActionByID($actionID);      
+        if(empty($action)) die('');
+        if(empty($action->tasks))
+        {
+            $action->inputs = array();
+            $defaultTask = new stdclass();
+            $defaultTask->field   = '';
+            $defaultTask->rules   = '';
+            $defaultTask->default = '';
+            $action->tasks =array($defaultTask);
+        }
+
+        if($_POST)
+        {
+            $result = $this->product->saveTasks($actionID);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('adminAction', "actionID={$action->product}")));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->action = $action;
+
+        $productRoles = $this->product->getRoleList($action->product);
+        $systemRoles  = $this->loadModel('user', 'sys')->getRoleList();
+        $this->view->roles = (array)$productRoles + (array)$systemRoles;
+
+        $this->display();
+    }
+
+    /**
      * Admin roles of a product.
      *
      * @param  int    $productID.
@@ -269,7 +316,7 @@ class product extends control
         }
 
         $this->view->title = $this->lang->product->roles;
-        $this->view->roles = $this->product->getRoles($productID);
+        $this->view->roles = $this->product->getRoleList($productID);
 
         $this->display(); 
     }

@@ -57,20 +57,6 @@ class productModel extends model
     }
 
     /**
-     * Get roles of a product.
-     * 
-     * @param  int    $productID 
-     * @access public
-     * @return int|bool
-     */
-    public function getRoles($productID)
-    {
-       $roles = $this->dao->select('roles')->from(TABLE_PRODUCT)->where('id')->eq($productID)->fetch('roles');
-       $roles = json_decode($roles);
-       return $roles;
-    }
-
-    /**
      * Create a product.
      * 
      * @access public
@@ -270,7 +256,7 @@ class productModel extends model
      * @access public
      * @return void
      */
-    public function getActions($productID)
+    public function getActionList($productID)
     {
         return $this->dao->select('*')->from(TABLE_ORDERACTION)->where('product')->eq($productID)->fetchAll('id');
     }
@@ -331,6 +317,44 @@ class productModel extends model
 
         $this->dao->update(TABLE_ORDERACTION)->set('inputs')->eq(json_encode($inputs))->where('id')->eq($actionID)->exec();
         return !dao::isError();
+    }
+
+    /**
+<<<<<<< .mine
+     * Save tasks of an action.
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function saveTasks($actionID)
+    {
+        $tasks = array();
+        foreach($_POST['name'] as $key => $name )
+        {
+            $task = array();
+            $task['name'] = $name;   
+            $task['role'] = $_POST['role'][$key];
+            $task['date'] = $_POST['date'][$key];
+
+            $tasks[] = $task;
+        }
+
+        $this->dao->update(TABLE_ORDERACTION)->set('tasks')->eq(json_encode($tasks))->where('id')->eq($actionID)->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Get roles of a product.
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return int|bool
+     */
+    public function getRoleList($productID)
+    {
+       $roles = $this->dao->select('roles')->from(TABLE_PRODUCT)->where('id')->eq($productID)->fetch('roles');
+       return json_decode($roles);
     }
 
     /**

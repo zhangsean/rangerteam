@@ -11,7 +11,10 @@
           <th class='text-center'><?php echo $lang->product->action->conditions;?></th>
           <th class='text-center'><?php echo $lang->product->action->value;?></th>
         </tr>
-        <?php foreach($action->conditions as $field => $condition):?>
+        <?php
+        $i = 0;
+        foreach($action->conditions as $field => $condition):
+        ?>
         <tr>
           <th><?php echo html::select('field[]', $conditionFields, $field, "class='form-control'");?></th>
           <td><?php echo html::select("operater[]", $lang->order->operaterList, $condition->operater, "class='form-control'"); ?></td>
@@ -21,7 +24,8 @@
             <?php echo html::a('javascript:;', $lang->delete, "class='condition-deleter'")?>
           </td>
         </tr>
-        <?php endforeach;?>
+        <?php $i++; endforeach;?>
+        <?php js::set('key', $i);?>
         <tr id='originTR'>
           <th><?php echo html::select('field[]', $conditionFields, '', "class='form-control'");?></th>
           <td><?php echo html::select("operater[]", $lang->order->operaterList, '', "class='form-control'"); ?></td>

@@ -125,6 +125,10 @@ class userModel extends model
         return $users;
     }
 
+    public function getRoleList()
+    {
+        return array();
+    }
     /**
      * Create a user.
      * 

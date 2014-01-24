@@ -60,6 +60,7 @@ $lang->categoryMenu   = '分类导航';
    
 /* Global action items. */
 $lang->reset          = '重填';
+$lang->add            = '添加';
 $lang->edit           = '编辑';
 $lang->copy           = '复制';
 $lang->hide           = '隐藏';

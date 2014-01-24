@@ -108,9 +108,10 @@ define('TABLE_ENTRY',     'sys_entry');
 define('TABLE_SSO',       'sys_sso');
 
 /* Tables for crm. */
-define('TABLE_PRODUCT',    'sys_product');
-define('TABLE_ORDERFIELD', 'crm_orderField');
-define('TABLE_ORDER',      'crm_order');
+define('TABLE_PRODUCT',     'sys_product');
+define('TABLE_ORDERFIELD',  'crm_orderField');
+define('TABLE_ORDERACTION', 'crm_orderAction');
+define('TABLE_ORDER',       'crm_order');
 define('TABLE_CUSTOMER',   'crm_customer');
 define('TABLE_TEAM',       'crm_team');
 
