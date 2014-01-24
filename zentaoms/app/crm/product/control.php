@@ -11,6 +11,9 @@
  */
 class product extends control
 {
+    /* The default counts when creating. */
+    const NEW_ROLE_COUNT = 5;
+
     /** 
      * The index page, locate to browse.
      * 
@@ -247,5 +250,27 @@ class product extends control
         $this->view->action  = $action;
         $this->view->inputFields  = $inputFields;
         $this->display();
+    }
+
+    /**
+     * Manage roles of a product.
+     *
+     * @param  int    $productID.
+     * @access public
+     * @return void
+     */
+    public function roles($productID)
+    {
+        if($_POST)
+        {
+            $this->product->manageRoles($productID);
+            if(!dao::isError()) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title = $this->lang->product->roles;
+        $this->view->roles = $this->product->getRoles($productID);
+
+        $this->display(); 
     }
 }

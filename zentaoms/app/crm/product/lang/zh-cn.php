@@ -17,6 +17,7 @@ $lang->product->code        = '代号';
 $lang->product->type        = '类型';
 $lang->product->status      = '状态';
 $lang->product->summary     = '简介';
+$lang->product->roles       = '角色';
 $lang->product->createdBy   = '添加者';
 $lang->product->createdDate = '添加时间';
 $lang->product->editedDate  = '编辑时间';

@@ -57,6 +57,20 @@ class productModel extends model
     }
 
     /**
+     * Get roles of a product.
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return int|bool
+     */
+    public function getRoles($productID)
+    {
+       $roles = $this->dao->select('roles')->from(TABLE_PRODUCT)->where('id')->eq($productID)->fetch('roles');
+       $roles = json_decode($roles);
+       return $roles;
+    }
+
+    /**
      * Create a product.
      * 
      * @access public
@@ -316,6 +330,22 @@ class productModel extends model
         }
 
         $this->dao->update(TABLE_ORDERACTION)->set('inputs')->eq(json_encode($inputs))->where('id')->eq($actionID)->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Manage a product's roles.
+     *
+     * @param  int    $productID 
+     * @access public
+     * @return bool
+     */
+    public function manageRoles($productID)
+    {
+        $roles = array_filter($_POST['roles']);
+        $roles = helper::jsonEncode($roles);
+        $this->dao->update(TABLE_PRODUCT)->set('roles')->eq($roles)->where('id')->eq($productID)->exec();
+
         return !dao::isError();
     }
 }
