@@ -96,7 +96,6 @@ js::import($jsRoot . 'jquery/ips.js');
     <div id='modalContainer'>
     </div>
   </div>
-<?php js::set('blockCount', $blockNum);?>
 <script>
 var entries = new Array(
 {
@@ -121,7 +120,7 @@ var entries = new Array(
 },
 {
     id          : 'addblcok',
-    url         : '<?php echo $this->createLink("block", "admin", "index=" . ($blockNum + 1)); ?>',
+    url         : '<?php echo $this->createLink("block", "admin", "index=" . ($lastID + 1)); ?>',
     name        : '<?php echo $lang->index->addBlock; ?>',
     open        : 'iframe',
     display     : 'modal',

@@ -1,7 +1,16 @@
 $(function()
 {
-   for(var i = 1; i <= v.blockCount; i++) $('#block' + i).find('.panel-body').load(createLink('block', 'printBlock', 'index=' + i));
+    printBlock();
 })
+
+function printBlock()
+{
+    $('.panels-container .row .panel').each(function()
+    {
+        var index = $(this).attr('id').replace('block', '');
+        $('#block' + index).find('.panel-body').load(createLink('block', 'printBlock', 'index=' + index));
+    })
+}
 
 function deleteBlock(index)
 {

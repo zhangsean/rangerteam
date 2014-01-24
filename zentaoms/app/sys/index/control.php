@@ -36,10 +36,16 @@ class index extends control
         $blocks = empty($this->config->index->block) ? array() : (array)$this->config->index->block;
         ksort($blocks);
 
+        if($blocks)
+        {
+            $blockKeys = array_keys($blocks);
+            $lastKey   = end($blockKeys);
+        }
+
         $this->view->allEntries = $allEntries;
         $this->view->leftEntry  = $leftEntry;
         $this->view->blocks     = $blocks;
-        $this->view->blockNum   = count($blocks);
+        $this->view->lastID     = isset($lastKey) ? str_replace('b', '', $lastKey) : 0;
         $this->display();
     }
 }
