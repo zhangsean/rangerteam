@@ -15,7 +15,7 @@
           <td><?php echo html::select('product', $products, $productID, "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->order->plannedAmounts;?></th>
+          <th><?php echo $lang->order->plan;?></th>
           <td><?php echo html::input('plan', '', "class='form-control'");?></td>
         </tr>
         <tr>
