@@ -334,13 +334,13 @@ class productModel extends model
     }
 
     /**
-     * Manage a product's roles.
+     * Admin a product's roles.
      *
      * @param  int    $productID 
      * @access public
      * @return bool
      */
-    public function manageRoles($productID)
+    public function adminRoles($productID)
     {
         $roles = array_filter($_POST['roles']);
         $roles = helper::jsonEncode($roles);

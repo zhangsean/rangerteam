@@ -253,17 +253,17 @@ class product extends control
     }
 
     /**
-     * Manage roles of a product.
+     * Admin roles of a product.
      *
      * @param  int    $productID.
      * @access public
      * @return void
      */
-    public function roles($productID)
+    public function adminRoles($productID)
     {
         if($_POST)
         {
-            $this->product->manageRoles($productID);
+            $this->product->adminRoles($productID);
             if(!dao::isError()) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
