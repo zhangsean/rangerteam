@@ -33,7 +33,7 @@ class customer extends control
         
         $customers = $this->customer->getList($orderBy, $pager);
 
-        $this->view->title     = $this->lang->customer->browse;
+        $this->view->title     = $this->lang->customer->list;
         $this->view->customers = $customers;
         $this->view->pager     = $pager;
         $this->display();
