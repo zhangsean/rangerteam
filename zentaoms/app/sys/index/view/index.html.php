@@ -99,35 +99,35 @@ js::import($jsRoot . 'jquery/ips.js');
 <script>
 var entries = new Array(
 {
-    id          : 'profile',
-    url         : '<?php echo $this->createLink('user', 'profile')?>',
-    name        : '<?php echo $lang->user->profile?>',
-    open        : 'iframe',
-    desc        : '<?php echo $lang->index->profile?>',
-    display     : 'modal',
-    size        : 'default',
-    menu        : false,
-    position    : 'center',
-    control     : 'full'
+    id       : 'profile',
+    url      : '<?php echo $this->createLink('user', 'profile')?>',
+    name     : '<?php echo $lang->user->profile?>',
+    open     : 'iframe',
+    desc     : '<?php echo $lang->index->profile?>',
+    display  : 'modal',
+    size     : 'default',
+    menu     : false,
+    position : 'center',
+    control  : 'full'
 },
 {
-    id          : 'allapps',
-    name        : '<?php echo $lang->index->allEntries?>',
-    display     : 'fullscreen',
-    desc        : '<?php echo $lang->index->allEntries?>',
-    menu        : true,
-    icon        : 'icon-th-large'
+    id       : 'allapps',
+    name     : '<?php echo $lang->index->allEntries?>',
+    display  : 'fullscreen',
+    desc     : '<?php echo $lang->index->allEntries?>',
+    menu     : true,
+    icon     : 'icon-th-large'
 },
 {
-    id          : 'addblcok',
-    url         : '<?php echo $this->createLink("block", "admin", "index=" . ($lastID + 1)); ?>',
-    name        : '<?php echo $lang->index->addBlock; ?>',
-    open        : 'iframe',
-    display     : 'modal',
-    size        : 'default',
-    menu        : false,
-    control     : 'full',
-    icon        : 'icon-plus'
+    id       : 'addblcok',
+    url      : '<?php echo $this->createLink("block", "admin", "index=" . ($lastID + 1)); ?>',
+    name     : '<?php echo $lang->index->addBlock; ?>',
+    open     : 'iframe',
+    display  : 'modal',
+    size     : 'default',
+    menu     : false,
+    control  : 'full',
+    icon     : 'icon-plus'
 });
 
 <?php echo $allEntries;?>

@@ -312,7 +312,7 @@
 
             $('.search-selected').removeClass('search-selected');
 
-            var val = $(this).val();
+            var val = $(this).val().toLowerCase();
 
             if(val.length > 0)
             {
@@ -324,7 +324,7 @@
                     var r = true, et = entries[btn.attr('data-id')];
                     for(var ki in keys)
                     {
-                        var k = keys[ki].toLowerCase();
+                        var k = keys[ki];
                         r = r && (k=='' || (et.name.toLowerCase().indexOf(k) > -1) || (et.desc.toLowerCase().indexOf(k) > -1) || et.id.toLowerCase() == k);
                         if(!r) break;
                     }
