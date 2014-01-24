@@ -45,6 +45,7 @@ js::import($jsRoot . 'jquery/ips.js');
       </div>
       <div class='panels-container'>
         <div class='row'>
+        <?php $index = 0;?>
         <?php foreach($blocks as $key => $block):?>
         <?php
         $index = str_replace('b', '', $key);
@@ -120,7 +121,7 @@ var entries = new Array(
 },
 {
     id       : 'addblcok',
-    url      : '<?php echo $this->createLink("block", "admin", "index=" . ($lastID + 1)); ?>',
+    url      : '<?php echo $this->createLink("block", "admin", "index=" . ($index + 1)); ?>',
     name     : '<?php echo $lang->index->addBlock; ?>',
     open     : 'iframe',
     display  : 'modal',
@@ -131,13 +132,6 @@ var entries = new Array(
 });
 
 <?php echo $allEntries;?>
-
-$(function()
-{
-    /* start ips */
-    $.ipsStart(entries, $.extend({onBlocksOrdered: orderBlocks}, config));
-    $('.entries-count').text(entries.length - 2)
-});
 </script>
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');

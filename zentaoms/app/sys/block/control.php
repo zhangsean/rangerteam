@@ -81,7 +81,7 @@ class block extends control
     }
 
     /**
-     * Order block 
+     * Sort block.
      * 
      * @param  string    $oldOrder 
      * @param  string    $newOrder 
@@ -93,14 +93,17 @@ class block extends control
         $oldOrder = explode(',', $oldOrder);
         $newOrder = explode(',', $newOrder);
 
-        $orders = array();
+        $orders  = array();
+        $account = $this->app->user->account;
         foreach($newOrder as $key => $index)
         {
-            if($index == $oldOrder[$key]) continue;
-
             $orders['b' . $index] = $this->config->personal->index->block->{'b' . $oldOrder[$key]}->value;
+
         }
-        if($orders) $this->loadModel('setting')->setItems($this->app->user->account . '.sys.index.block', $orders);
+
+        $this->loadModel('setting')->deleteItems("owner=$account&app=sys&module=index&section=block");
+        $this->setting->setItems($account . '.sys.index.block', $orders);
+
         if(dao::isError()) $this->send(array('result' => 'fail'));
         $this->send(array('result' => 'success'));
     }

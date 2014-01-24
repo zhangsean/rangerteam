@@ -1,3 +1,10 @@
+/**
+ * Get all blocks.
+ * 
+ * @param  string|int $entryID 
+ * @access public
+ * @return void
+ */
 function getBlocks(entryID)
 {
     var entryBlock = $('#allEntries').parent().parent().next();
@@ -7,7 +14,7 @@ function getBlocks(entryID)
     if(entryID == 'rss' || entryID == 'html')
     {
         getRssAndHtmlParams(entryID);
-        return false;
+        return true;
     }
 
     $.get(createLink('entry', 'blocks', 'entryID=' + entryID + '&index=' + v.index), function(data)
@@ -17,6 +24,13 @@ function getBlocks(entryID)
     })
 }
 
+/**
+ * Get rss and html params.
+ * 
+ * @param  string $type 
+ * @access public
+ * @return void
+ */
 function getRssAndHtmlParams(type)
 {
     $.get(createLink('block', 'set', 'index=' + v.index + '&type=' + type), function(data)
@@ -26,6 +40,14 @@ function getRssAndHtmlParams(type)
     });
 }
 
+/**
+ * Get block params.
+ * 
+ * @param  string $blockID 
+ * @param  int    $entryID 
+ * @access public
+ * @return void
+ */
 function getBlockParams(blockID, entryID)
 {
     $('#blockParam').empty();
