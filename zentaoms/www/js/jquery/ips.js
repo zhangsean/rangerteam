@@ -43,7 +43,7 @@
         frameHtmlTemplate             : "<iframe id='iframe-{idstr}' name='iframe-{idstr}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
         leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a data-toggle="tooltip" data-placement="right"  href="javascript:;" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</a></li>',
         taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</button></li>',
-        taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu' id='taskMenu'><li><a href='###' class='reload-win'><i class='icon-repeat'></i> {reloadWindowText}</a></li><li><a href='###' class='close-win'><i class='icon-remove'></i> {closeWindowText}</a></li></ul>",
+        taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu' id='taskMenu'><li><a href='###' class='reload-win'><i class='icon-repeat'></i> &nbsp;{reloadWindowText}</a></li><li><a href='###' class='close-win'><i class='icon-remove'></i> &nbsp;{closeWindowText}</a></li></ul>",
         entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</a></li>',
 
         init                          : function() // init the default
@@ -324,8 +324,8 @@
                     var r = true, et = entries[btn.attr('data-id')];
                     for(var ki in keys)
                     {
-                        var k = keys[ki];
-                        r = r && (k=='' || (et.name.indexOf(k) > -1) || (et.desc.indexOf(k) > -1) || et.id == k);
+                        var k = keys[ki].toLowerCase();
+                        r = r && (k=='' || (et.name.toLowerCase().indexOf(k) > -1) || (et.desc.toLowerCase().indexOf(k) > -1) || et.id.toLowerCase() == k);
                         if(!r) break;
                     }
 
@@ -702,6 +702,8 @@
         /* disable the browser's contextmenu */
         document.oncontextmenu = nocontextmenu;  // for IE5+
         document.onmousedown = norightclick;  // for all others
+
+        $('#leftBar').bind('oncontextmenu', nocontextmenu);
 
         $(document).on('mousedown', '.app-btn.open', function(e)
         {
