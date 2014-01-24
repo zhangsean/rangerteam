@@ -13,7 +13,7 @@
           <td><?php echo html::select('product', $products, $order->product, "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->order->plannedAmounts;?></th>
+          <th><?php echo $lang->order->plan;?></th>
           <td><?php echo html::input('plan', $order->plan, "class='form-control'");?></td>
         </tr>
         <?php if($order->status != 'closed'):?>

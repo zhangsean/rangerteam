@@ -14,7 +14,7 @@
         <th style='width: 160px'><?php echo $lang->order->assignedBy;?></th>
         <th style='width: 160px'><?php echo $lang->order->assignedTo;?></th>
         <th style='width: 60px'><?php echo $lang->order->status;?></th>
-        <th style='width: 200px'><?php echo $lang->actions;?></th>
+        <th><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -35,6 +35,13 @@
           if($order->status == 'closed' && $order->closedReason != 'payed') echo html::a($this->createLink('order', 'activate', "orderID=$order->id"), $lang->activate, "class='reload'");
           echo html::a($this->createLink('order', 'view', "orderID=$order->id"), $lang->view);
           echo html::a($this->createLink('order', 'team', "orderID=$order->id"), $lang->order->team);
+          ?>
+          <?php 
+          $actions = $this->order->getEnabledActions($order);
+          foreach($actions as $action)
+          {
+              echo html::a($this->inlink('option', "orderID={$orderID}&action={$action->action}"), $action->name);
+          }
           ?>
         </td>
       </tr>

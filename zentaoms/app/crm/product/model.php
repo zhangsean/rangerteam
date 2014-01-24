@@ -352,7 +352,7 @@ class productModel extends model
         foreach($_POST['field'] as $key => $field)
         {
             if(empty($field) or empty($_POST['operater'][$key])) continue;
-            $conditions[$field] = array('operater' => $_POST['operater'][$key], 'value' => $_POST['value'][$key]);
+            $conditions[] = array('field'=>$field, 'operater' => $_POST['operater'][$key], 'param' => $_POST['param'][$key]);
         }
 
         $this->dao->update(TABLE_ORDERACTION)->set('conditions')->eq(json_encode($conditions))->where('id')->eq($actionID)->exec();

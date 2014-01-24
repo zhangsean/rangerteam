@@ -237,14 +237,14 @@ class product extends control
     {
         $action = $this->product->getActionByID($actionID);
         if(empty($action)) die('');
-        if(empty($action->condations))
+        if(empty($action->conditions))
         {
-            $action->condations = array();
+            $action->conditions = array();
             $defaultCondations  = new stdclass();
             $defaultCondations->operater = '';
             $defaultCondations->value    = '';
 
-            $action->condations[''] = $defaultInput;
+            $action->conditions[] = $defaultInput;
         }
 
         if($_POST)

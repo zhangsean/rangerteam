@@ -9,16 +9,16 @@
         <tr>
           <th class='text-center'><?php echo $lang->product->field->field;?></th>
           <th class='text-center'><?php echo $lang->product->action->conditions;?></th>
-          <th class='text-center'><?php echo $lang->product->action->value;?></th>
+          <th class='text-center'><?php echo $lang->product->action->param;?></th>
         </tr>
         <?php
         $i = 0;
-        foreach($action->conditions as $field => $condition):
+        foreach($action->conditions as $condition):
         ?>
         <tr>
-          <th><?php echo html::select('field[]', $conditionFields, $field, "class='form-control'");?></th>
+          <th><?php echo html::select('field[]', $conditionFields, $condition->field, "class='form-control'");?></th>
           <td><?php echo html::select("operater[]", $lang->order->operaterList, $condition->operater, "class='form-control'"); ?></td>
-          <td><?php echo html::input("value[]", $condition->value, "class='form-control'")?></td>
+          <td><?php echo html::input("param[]", $condition->param, "class='form-control'")?></td>
           <td>
             <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>
             <?php echo html::a('javascript:;', $lang->delete, "class='condition-deleter'")?>
@@ -26,20 +26,22 @@
         </tr>
         <?php $i++; endforeach;?>
         <?php js::set('key', $i);?>
-        <tr id='originTR'>
-          <th><?php echo html::select('field[]', $conditionFields, '', "class='form-control'");?></th>
-          <td><?php echo html::select("operater[]", $lang->order->operaterList, '', "class='form-control'"); ?></td>
-          <td><?php echo html::input("value[]", '', "class='form-control'")?></td>
-          <td>
-            <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>
-            <?php echo html::a('javascript:;', $lang->delete, "class='condition-deleter'")?>
-          </td>
-        </tr>
         <tr>
           <td colspan='3'><?php echo html::submitButton();?></td>
         </tr>
       </table>
     </form>
+    <table class='hide'>
+        <tr id='originTR'>
+          <th><?php echo html::select('field[]', $conditionFields, '', "class='form-control'");?></th>
+          <td><?php echo html::select("operater[]", $lang->order->operaterList, '', "class='form-control'"); ?></td>
+          <td><?php echo html::input("param[]", '', "class='form-control'")?></td>
+          <td>
+            <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>
+            <?php echo html::a('javascript:;', $lang->delete, "class='condition-deleter'")?>
+          </td>
+        </tr>
+     </table>
   </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

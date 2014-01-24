@@ -23,9 +23,14 @@ class orderModel extends model
      */
     public function getByID($id)
     {
-       $order = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($id)->fetch();
-
+       $order   = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($id)->fetch();
        if(!$order) return false;
+
+       $product = $this->loadModel('product')->getByID($order->product);
+       if(!$product) return false;
+
+       $custom  = $this->dao->select('*')->from('crm_order_' . $product->code)->where('`order`')->eq($id)->fetch();
+       foreach($custom as $field => $value) $order->$field = $valeu;
 
        return $order;
     }
@@ -205,6 +210,54 @@ class orderModel extends model
     }
 
     /**
+     * Get enabled actions.
+     * 
+     * @param  object    $order 
+     * @access public
+     * @return void
+     */
+    public function getEnabledActions($order)
+    {
+        $order   = $this->getByID($order->id);
+        $actions = $this->product->getActionList($order->product);
+
+        $enabledActions = array();
+        foreach($actions as $action)
+        {
+            $conditions = json_decode($action->conditions);
+            $inputs     = json_decode($action->inputs);
+            $results    = json_decode($action->results);
+            $tasks      = json_decode($action->tasks);
+            
+            $enabled = true;
+            foreach($conditions as $condition)
+            {
+                if(!$this->checkCondition($condition, $order)) $enabled = false;
+            }
+
+            if($enabled) $enabledActions[] = $action;
+        }
+
+        return $enabledActions;
+    }
+
+    /**
+     * Check a condition is 
+     * 
+     * @param  int    $condition 
+     * @param  int    $order 
+     * @access public
+     * @return void
+     */
+    public function checkCondition($condition, $order)
+    {
+        $checkFunc = 'check' . $condition->operater;
+        $var = $order->{$condition->field};
+
+        return validater::$checkFunc($var, $condition->param);
+    }
+
+    /**
      * Unlink a member.
      * 
      * @param  int    $orderID 
@@ -218,4 +271,5 @@ class orderModel extends model
 
         return !dao::isError();
     }
+
 }

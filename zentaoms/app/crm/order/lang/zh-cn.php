@@ -48,9 +48,9 @@ $lang->team->join    = '加盟日';
 
 $lang->order->operaterList = array();
 $lang->order->operaterList['']       = '';
-$lang->order->operaterList['eq']     = '等于';
-$lang->order->operaterList['noteq']  = '不等于';
-$lang->order->operaterList['gt']     = '大于';
-$lang->order->operaterList['lt']     = '小于';
-$lang->order->operaterList['before'] = '早于';
-$lang->order->operaterList['after']  = '晚于';
+$lang->order->operaterList['equal']    = '等于';
+$lang->order->operaterList['notequal'] = '不等于';
+$lang->order->operaterList['gt']       = '大于';
+$lang->order->operaterList['lt']       = '小于';
+$lang->order->operaterList['before']   = '早于';
+$lang->order->operaterList['after']    = '晚于';
