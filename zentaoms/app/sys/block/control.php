@@ -12,7 +12,7 @@
 class block extends control
 {
     /**
-     * Admin all blocks; 
+     * Admin all blocks. 
      * 
      * @param  int    $index 
      * @access public
