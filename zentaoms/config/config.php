@@ -112,8 +112,9 @@ define('TABLE_PRODUCT',     'sys_product');
 define('TABLE_ORDERFIELD',  'crm_orderField');
 define('TABLE_ORDERACTION', 'crm_orderAction');
 define('TABLE_ORDER',       'crm_order');
-define('TABLE_CUSTOMER',   'crm_customer');
-define('TABLE_TEAM',       'crm_team');
+define('TABLE_CUSTOMER',    'crm_customer');
+define('TABLE_TEAM',        'crm_team');
+define('TABLE_CONTACT',     'crm_contact');
 
 /* Tables for oa. */
 define('TABLE_TODO',     'oa_todo`');
