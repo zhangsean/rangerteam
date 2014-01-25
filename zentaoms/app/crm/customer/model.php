@@ -54,7 +54,6 @@ class customerModel extends model
             ->add('createdDate', helper::now())
             ->get();
 
-
         $this->dao->insert(TABLE_CUSTOMER)
             ->data($customer)
             ->autoCheck()

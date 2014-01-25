@@ -11,6 +11,12 @@
  */
 class customer extends control
 {
+    /** 
+     * The index page, locate to the browse page.
+     * 
+     * @access public
+     * @return void
+     */
     public function index()
     {
         $this->locate(inlink('browse'));
