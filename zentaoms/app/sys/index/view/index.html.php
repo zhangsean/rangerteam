@@ -40,7 +40,7 @@ js::import($jsRoot . 'jquery/ips.js');
     </div>
     <div id='home' class='fullscreen fullscreen-active'>
       <div class='btn-toolbar actions'>
-        <button data-toggle='tooltip' data-placement='bottom' data-id='addblcok' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure app-btn'><i class='icon-plus'></i></button>
+        <button data-toggle='tooltip' data-placement='bottom' data-id='addblock' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure app-btn'><i class='icon-plus'></i></button>
         <button data-target='#home' data-toggle-class='custom-mode' data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->index->customBlocks; ?>' class='btn btn-pure'><i class='icon-wrench'></i></button>
       </div>
       <div class='panels-container'>
@@ -92,10 +92,8 @@ js::import($jsRoot . 'jquery/ips.js');
         </ul>
       </div>
     </div>
-    <div id='deskContainer'>
-    </div>
-    <div id='modalContainer'>
-    </div>
+    <div id='deskContainer'></div>
+    <div id='modalContainer'></div>
   </div>
 <script>
 var entries = new Array(
@@ -120,7 +118,7 @@ var entries = new Array(
     icon     : 'icon-th-large'
 },
 {
-    id       : 'addblcok',
+    id       : 'addblock',
     url      : '<?php echo $this->createLink("block", "admin", "index=" . ($index + 1)); ?>',
     name     : '<?php echo $lang->index->addBlock; ?>',
     open     : 'iframe',
