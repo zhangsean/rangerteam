@@ -6,9 +6,12 @@
  * @access public
  * @return void
  */
-function setRole(account, roleID)
+$(document).ready(function()
 {
-    role    = v.roles[account];     // get role according the account.
-    roleOBJ = $('#role' + roleID);  // get role object.
-    roleOBJ.val(role)               // set the role.
-}
+    $('.account').change(function()
+    {
+        account = $(this).val();
+        r = eval('v.userRoles.' + account);
+        $(this).parent().next().find('.role').val(v.roles[r]);
+    });
+});

@@ -42,6 +42,7 @@ class order extends control
         $this->view->title     = $this->lang->order->browse;
         $this->view->orders    = $orders;
         $this->view->products  = $this->loadModel('product')->getPairs();
+        $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->pager     = $pager;
         $this->display();
     }
@@ -92,9 +93,10 @@ class order extends control
 
         $order = $this->order->getByID($orderID);
 
-        $this->view->title    = $this->lang->order->edit;
-        $this->view->order    = $order;
-        $this->view->products = $this->loadModel('product')->getPairs();
+        $this->view->title     = $this->lang->order->edit;
+        $this->view->order     = $order;
+        $this->view->products  = $this->loadModel('product')->getPairs();
+        $this->view->customers = $this->loadModel('customer')->getPairs();
 
         $this->display();
     }
@@ -168,8 +170,12 @@ class order extends control
 
         $order          = $this->order->getById($orderID);
         $users          = $this->user->getPairs('noclosed, nodeleted, devfirst');
-        $roles          = $this->user->getUserRoles(array_keys($users));
+        $userRoles      = $this->user->getUserRoles(array_keys($users));
         $currentMembers = $this->order->getTeamMembers($orderID);
+        $systemRoles    = $this->lang->user->roleList;
+        $productRoles   = $this->loadModel('product')->getRoleList($order->product);
+        $roles          = array_merge($systemRoles, $productRoles);
+        $roles          = array_unique($roles);
 
         /* The deleted members. */
         foreach($currentMembers as $account => $member)
@@ -180,6 +186,7 @@ class order extends control
         $this->view->title          = $this->lang->order->manageMembers;
         $this->view->order          = $order;
         $this->view->users          = $users;
+        $this->view->userRoles      = $userRoles;
         $this->view->roles          = $roles;
         $this->view->currentMembers = $currentMembers;
         $this->display();

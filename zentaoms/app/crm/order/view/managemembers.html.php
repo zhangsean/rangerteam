@@ -1,5 +1,6 @@
 <?php include '../../common/view/header.html.php';?>
-<?php js::set('roles', $roles);?>
+<?php js::set('userRoles', $userRoles);?>
+<?php js::set('roles', array_flip($roles));?>
 <div class='panel'>
   <div class='panel-heading'>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->order->manageMembers;?></strong>
@@ -20,7 +21,7 @@
         <?php unset($users[$member->account]);?>
         <tr class='text-center'>
           <td><input type='text' name='realnames[]' id='account<?php echo $i;?>' value='<?php echo $realname;?>' class='form-control' readonly /></td>
-          <td><input type='text' name='roles[]'     id='role<?php echo $i;?>'    value='<?php echo $member->role;?>' class='form-control'/></td>
+          <td><?php echo html::select('roles[]', $roles, $member->role, "class='form-control'");?></td>
           <td>
             <input type='hidden' name='modes[]' value='update' />
             <input type='hidden' name='accounts[]' value='<?php echo $member->account;?>' />
@@ -36,8 +37,8 @@
 
         <?php for($j = 0; $j < $count; $j ++):?>
         <tr class='text-center'>
-          <td><?php echo html::select('accounts[]', $users, '', "class='form-control' onchange='setRole(this.value, $i)'");?></td>
-          <td><input type='text' name='roles[]' id='role<?php echo ($i);?>' class='form-control'/></td>
+          <td><?php echo html::select('accounts[]', $users, '', "class='form-control account'");?></td>
+          <td><?php echo html::select("roles[]", $roles, '', "class='form-control role'");?></td>
           <td><input type='hidden' name='modes[]' value='create'/></td>
         </tr>
         <?php $i ++;?>
