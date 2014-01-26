@@ -183,7 +183,7 @@ class productModel extends model
             $form .= '<tr><th>';
             $form .= $field->name;
             $form .= '</th><td>';
-            $form .= $this->buildControl($field, $values);
+            $form .= $this->buildControl($field, $values->{$field->field});
             $form .= '</td></tr>';
         }
         return $form;
@@ -193,26 +193,27 @@ class productModel extends model
      * Build control of a field.
      * 
      * @param  int    $field 
-     * @param  int    $values 
+     * @param  mix    $value 
      * @access public
      * @return void
      */
-    public function buildFieldControl($field, $values = null)
+    public function buildControl($field, $value = null)
     {
+        $field->options = array_combine(explode(',', $field->options), explode(',', $field->options));
         switch($field->control)
         {
             case 'input':
-                return html::input($field->field, isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+                return html::input($field->field, !empty($value) ? $value : $field->default, "class='form-control'");
             case 'textarea':
-                return html::input();
+                return html::textarea($field->field, $value, "class='form-control'");
             case 'select':
-                return html::select($field->field, array_combine($field->options), isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+                return html::select($field->field, ($field->options), !empty($value) ? $value : $field->default, "class='form-control'");
             case 'radio':
-                return html::radio($field->field, array_combine($field->options), isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+                return  html::radio($field->field, ($field->options), !empty($value) ? $value : $field->default, "class='form-control'");
             case 'checkbox':
-                return html::checkbox($field->field, array_combine($field->options), isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+                return html::checkbox($field->field, ($field->options), !empty($value) ? $value :$field->default, "class='form-control'");
             case 'date':
-                return html::input($field->field, isset($values->{$field->field}) ? $values->{$field->field} : $field->default);
+                return html::input($field->field, !empty($value) ? $value : $field->default);
         }
     }
 
@@ -236,7 +237,7 @@ class productModel extends model
 
         if(dao::isError()) return false;
         $alterQuery = "ALTER TABLE crm_order_{$product->code} ADD `{$field->field}` {$this->config->field->controlTypeList[$field->control]} NOT NULL";
-        if($field->default) $alterQuery .= " default {$field->default}";
+        if($field->default) $alterQuery .= " default '{$field->default}";
         if(!$this->dbh->query($alterQuery)) return false;
 
         return true;
@@ -380,7 +381,6 @@ class productModel extends model
     }
 
     /**
-<<<<<<< .mine
      * Save tasks of an action.
      * 
      * @param  int    $actionID 
