@@ -51,6 +51,11 @@ js::import($jsRoot . 'html5shiv/min.js');
 js::import($jsRoot . 'respond/min.js');
 ?>
 <![endif]-->
+<!--[if lt IE 10]>
+<?php
+js::import($jsRoot . 'jquery/placeholder/min.js');
+?>
+<![endif]-->
 <?php js::set('lang', $lang->js);?>
 </head>
 <body>
