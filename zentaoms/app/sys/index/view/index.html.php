@@ -132,7 +132,6 @@ var entries = new Array(
 <?php echo $allEntries;?>
 </script>
 <?php
-if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 include "../../common/view/footer.lite.html.php";
 ?>
 </body>
