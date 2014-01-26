@@ -309,7 +309,6 @@ class product extends control
     }
 
     /**
-<<<<<<< .mine
      * Action tasks 
      * 
      * @param  int    $actionID 
@@ -322,12 +321,14 @@ class product extends control
         if(empty($action)) die('');
         if(empty($action->tasks))
         {
-            $action->inputs = array();
-            $defaultTask = new stdclass();
+            $action->tasks = array();
+
+            $defaultTask   = new stdclass();
             $defaultTask->field   = '';
             $defaultTask->rules   = '';
             $defaultTask->default = '';
-            $action->tasks =array($defaultTask);
+
+            $action->tasks[] =$defaultTask;
         }
 
         if($_POST)
