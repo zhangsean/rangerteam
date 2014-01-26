@@ -6,13 +6,13 @@
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
-      <table class='table table-hover tablesorter'>
+      <table class='table table-form'>
         <thead>
           <tr class='text-center'>
-            <th><?php echo $lang->product->field->field;?></th>
-            <th class='text-center'><?php echo $lang->product->field->rules;?></th>
-            <th class='text-center w-200px'><?php echo $lang->product->field->default;?></th>
-            <th></th>
+            <td><?php echo $lang->product->field->field;?></td>
+            <td class='text-center'><?php echo $lang->product->field->rules;?></td>
+            <td class='text-center w-200px'><?php echo $lang->product->field->default;?></td>
+            <td></td>
           </tr>
         </thead>
         <?php
