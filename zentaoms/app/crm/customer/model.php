@@ -11,6 +11,22 @@
  */
 class customerModel extends model
 {
+    /**
+     * Get customer by id.
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return int|bool
+     */
+    public function getByID($id)
+    {
+       $customer = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('id')->eq($id)->limit(1)->fetch();
+
+       if(!$customer) return false;
+
+       return $customer;
+    }
+
     /** 
      * Get customer list.
      * 
