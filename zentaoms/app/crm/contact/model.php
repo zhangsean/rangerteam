@@ -79,9 +79,13 @@ class contactModel extends model
      */
     public function update($contactID)
     {
+        $contact = $this->getByID($contactID);
+        $avatar  = $contact->avatar;
+
         $contact = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
+            ->setIF($this->post->avatar == '', 'avatar', $avatar)
             ->get();
 
         $this->dao->update(TABLE_CONTACT)
