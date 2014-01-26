@@ -361,6 +361,20 @@ class productModel extends model
     }
 
     /**
+     * Delete a action.
+     * 
+     * @param  int      $actionID 
+     * @access public
+     * @return void
+     */
+    public function deleteAction($actionID, $table = null)
+    {
+        $this->dao->delete()->from(TABLE_ORDERACTION)->where('id')->eq($actionID)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
      * Save conditions of an action.
      * 
      * @param  int    $actionID 

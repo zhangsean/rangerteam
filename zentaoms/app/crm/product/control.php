@@ -209,6 +209,24 @@ class product extends control
     }
 
     /**
+     * Create an action of an order.
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function createAction($productID)
+    {
+        if($_POST)
+        {
+            if($this->product->createAction($productID)) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('adminaction', "productID={$productID}")));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+        $this->view->productID = $productID;
+        $this->display();
+    }
+
+    /**
      * Edit an action.
      * 
      * @param  int    $actionID 
@@ -229,21 +247,16 @@ class product extends control
     } 
 
     /**
-     * Create an action of an order.
+     * Delete a action.
      * 
-     * @param  int    $productID 
+     * @param  int      $actionID 
      * @access public
      * @return void
      */
-    public function createAction($productID)
+    public function deleteAction($actionID)
     {
-        if($_POST)
-        {
-            if($this->product->createAction($productID)) $this->send(array('result' => 'success', 'message' => $this->lang->success, 'locate' => $this->inlink('adminaction', "productID={$productID}")));
-            $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        }
-        $this->view->productID = $productID;
-        $this->display();
+        if($this->product->deleteAction($actionID)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
     /**
