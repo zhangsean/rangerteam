@@ -6,11 +6,14 @@
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
-        <tr>
-          <th><?php echo $lang->product->task->role;?></th>
-          <th><?php echo $lang->product->task->date;?></th>
-          <th><?php echo $lang->product->task->name;?></th>
-        </tr>
+        <thead>
+          <tr class='text-center'>
+            <td><?php echo $lang->product->task->role;?></td>
+            <td><?php echo $lang->product->task->date;?></td>
+            <td><?php echo $lang->product->task->name;?></td>
+            <td></td>
+          </tr>
+        </thead>
         <?php foreach($action->tasks as $task):?>
         <tr>
           <th><?php echo html::select('role[]', array_combine($roles, $roles), $task->role, "class='form-control'");?></th>
@@ -22,9 +25,7 @@
           </td>
         </tr>
         <?php endforeach;?>
-        <tr>
-          <td colspan='3'><?php echo html::submitButton();?></td>
-        </tr>
+        <tr><td colspan='4'><?php echo html::submitButton();?></td></tr>
       </table>
     </form>
     <table class='hide'>

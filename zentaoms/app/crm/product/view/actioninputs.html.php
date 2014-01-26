@@ -10,8 +10,8 @@
         <thead>
           <tr class='text-center'>
             <td><?php echo $lang->product->field->field;?></td>
-            <td class='text-center'><?php echo $lang->product->field->rules;?></td>
-            <td class='text-center w-200px'><?php echo $lang->product->field->default;?></td>
+            <td><?php echo $lang->product->field->rules;?></td>
+            <td class='w-200px'><?php echo $lang->product->field->default;?></td>
             <td></td>
           </tr>
         </thead>
@@ -30,9 +30,7 @@
         </tr>
         <?php $i++; endforeach;?>
         <?php js::set('key', $i)?>
-        <tr>
-          <td colspan='4'><?php echo html::submitButton();?></td>
-        </tr>
+        <tr><td colspan='4'><?php echo html::submitButton();?></td></tr>
       </table>
     </form>
     <table class='hide'>

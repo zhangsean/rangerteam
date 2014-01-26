@@ -6,11 +6,14 @@
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
-        <tr>
-          <th class='text-center'><?php echo $lang->product->field->field;?></th>
-          <th class='text-center'><?php echo $lang->product->action->conditions;?></th>
-          <th class='text-center'><?php echo $lang->product->action->param;?></th>
-        </tr>
+        <thead>
+          <tr class='text-center'>
+            <td><?php echo $lang->product->field->field;?></td>
+            <td><?php echo $lang->product->action->conditions;?></td>
+            <td><?php echo $lang->product->action->param;?></td>
+            <td></td>
+          </tr>
+        </thead>
         <?php
         $i = 0;
         foreach($action->conditions as $condition):
@@ -26,9 +29,7 @@
         </tr>
         <?php $i++; endforeach;?>
         <?php js::set('key', $i);?>
-        <tr>
-          <td colspan='3'><?php echo html::submitButton();?></td>
-        </tr>
+        <tr><td colspan='4'><?php echo html::submitButton();?></td></tr>
       </table>
     </form>
     <table class='hide'>
