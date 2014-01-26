@@ -44,7 +44,7 @@ $lang->order->menu->create = '创建订单|order|create|';
 $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
 $lang->contact->menu->browse = array('link' => '联系人列表|contact|browse|', 'alias' => 'edit');
-$lang->contact->menu->create = '创建联系人|contact|create|';
+$lang->contact->menu->create = '添加联系人|contact|create|';
 
 /* Menu of product module. */
 $lang->task = new stdclass();
