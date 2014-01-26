@@ -10,18 +10,11 @@
  * @link        http://www.zentao.net
  */
 ?>
-<div class='panel'>
   <form method='post' id='ajaxForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=$type")?>'>
-  <table class='table table-bordered table-hover table-striped'>
-    <thead>
-      <tr class='text-center'>
-        <th><?php echo $lang->block->params->name;?></th>
-        <th><?php echo $lang->block->params->value;?></th>
-      </tr>
-    </thead>
+  <table class='table table-form w-p80'>
     <tbody>
       <tr class='a-left'>
-        <th class='w-200px'><?php echo $lang->block->name;?></th>
+        <th class='w-100px'><?php echo $lang->block->name;?></th>
         <td>
         <?php
         echo html::input('name', isset($block->name) ? $block->name : '', "class='form-control'");
@@ -54,8 +47,10 @@
       <?php endforeach;?>
     </tbody>
     <tfoot>
-      <tr><td colspan="2"><?php echo html::submitButton()?></div></td></tr>
+      <tr><td></td><td><?php echo html::submitButton()?></td></tr>
     </tfoot>
   </table>
   </form>
-</div>
+<?php if(!isset($block->name)):?>
+<script>$(function(){$('#name').val($('#entryBlock').find("option:selected").text());})</script>
+<?php endif;?>

@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.lite.html.php';?>
 <table class='table table-form w-p80'>
   <tr>
-    <th class='w-80px'><?php echo $lang->block->lblEntry; ?></th>
+    <th class='w-100px'><?php echo $lang->block->lblEntry; ?></th>
     <?php
     $entryID = '';
     if($block)

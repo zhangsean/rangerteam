@@ -56,12 +56,12 @@ js::import($jsRoot . 'jquery/ips.js');
               <div class='panel-heading'>
                 <?php echo $block->name?>
                 <div class='custom-actions'>
-                  <a class='btn btn-mini edit-block' data-toggle='modal' href='<?php echo $this->createLink("block", "admin", "index=$index"); ?>'><i class='icon-pencil'></i></a>
+                  <?php echo html::a($this->createLink("block", "admin", "index=$index"), "<i class='icon-pencil'></i>", "class='btn btn-mini edit-block' data-toggle='modal'")?>
                   <button class='btn btn-mini remove-block btn-danger' onclick='deleteBlock(<?php echo $index?>)'><i class='icon-remove'></i></button>
                 </div>
               </div>
               <div class='panel-body no-padding'>
-                <img src='<?php echo $themeRoot?>default/images/ips/loading.gif' style='display:block;margin:40px auto;'/>
+                <?php echo html::image("{$themeRoot}default/images/ips/loading.gif", "style='display:block;margin:40px auto;'")?>
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@ js::import($jsRoot . 'jquery/ips.js');
             </div>
           </div>
           <div class='col-md-4 text-right'>
-            <a class='btn btn-pure' href='<?php echo $this->createLink('entry', 'create') ?>' target='_blank'><i class='icon-plus'></i> <?php echo $lang->index->addEntry?></a>
+            <?php echo html::a($this->createLink('entry', 'create'), "<i class='icon-plus'></i> {$lang->index->addEntry}", "target='_blank' class='btn btn-pure'")?>
           </div>
         </div>
       </header>
