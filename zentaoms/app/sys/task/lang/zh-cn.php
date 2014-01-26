@@ -7,7 +7,7 @@ $lang->task->create = '新建任务';
 
 $lang->task->id             = '编号';
 $lang->task->project        = '所属项目';
-$lang->task->customer       = '客户';
+$lang->task->customer       = '所属客户';
 $lang->task->order          = '相关订单';
 $lang->task->category       = '所属模块';
 $lang->task->name           = '名称';
