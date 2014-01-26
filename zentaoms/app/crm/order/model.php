@@ -30,7 +30,10 @@ class orderModel extends model
        if(!$product) return false;
 
        $custom  = $this->dao->select('*')->from('crm_order_' . $product->code)->where('`order`')->eq($id)->fetch();
-       foreach($custom as $field => $value) $order->$field = $valeu;
+       if($custom)
+       {
+           foreach($custom as $field => $value) $order->$field = $value;
+       }
 
        return $order;
     }
@@ -104,7 +107,8 @@ class orderModel extends model
      */
     public function update($orderID)
     {
-        $order = fixer::input('post')->get();
+        $oldOrder = $this->getByID($orderID);
+        $order    = fixer::input('post')->get();
 
         $this->dao->update(TABLE_ORDER)
             ->data($order)
@@ -115,7 +119,7 @@ class orderModel extends model
 
         if(dao::isError()) return false;
 
-        return !dao::isError();
+        return commonModel::createChanges($oldOrder, $order);
     }
 
     /**

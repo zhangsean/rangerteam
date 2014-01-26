@@ -428,3 +428,12 @@ td.required:after{right: -5px;top: 12px}
 #crumbs {float: left;margin-left: 20px;}
 #crumbs .icon-angle-right{margin-right: 6px;}
 #poweredby {float: right;margin-right: 20px;}
+
+.change-show,.change-hide,.log-desc,.log-asc,.diff-all,.diff-sort{display: inline-block; font-family: ZenIcon; border: 1px solid #555;color: #555; font-size: 13px;font-weight: lighter; width: 14px;height: 13px;line-height: 13px;text-align: center;}
+.change-show:hover,.change-hide:hover,.log-desc:hover,.log-asc:hover,.diff-all:hover,.diff-sort:hover{background-color: #333;color: #fff}
+.change-show:before{content: "\f067";}
+.change-hide:before{content: "\f068";}
+.log-desc:before{content: "\f063";}
+.log-asc:before{content: "\f062";}
+.diff-all:before{content: "\f0b2";}
+.diff-sort:before{content: "\f036";}

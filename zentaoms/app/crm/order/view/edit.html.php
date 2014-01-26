@@ -30,4 +30,5 @@
     </form>
   </div>
 </div>
+<?php include '../../../sys/common/view/action.html.php';?>
 <?php include '../../common/view/footer.html.php';?>

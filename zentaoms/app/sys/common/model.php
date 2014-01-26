@@ -609,4 +609,68 @@ class commonModel extends model
 
         return $link;
     }
+
+    /**
+     * Create changes of one object.
+     * 
+     * @param mixed $old    the old object
+     * @param mixed $new    the new object
+     * @static
+     * @access public
+     * @return array
+     */
+    public static function createChanges($old, $new)
+    {   
+        global $config;
+        $changes    = array();
+        $magicQuote = get_magic_quotes_gpc();
+        foreach($new as $key => $value)
+        {   
+            if(strtolower($key) == 'lastediteddate') continue;
+            if(strtolower($key) == 'lasteditedby')   continue;
+            if(strtolower($key) == 'assigneddate')   continue;
+            if(strtolower($key) == 'editedby')       continue;
+            if(strtolower($key) == 'editeddate')     continue;
+
+            if($magicQuote) $value = stripslashes($value);
+            if($value != stripslashes($old->$key))
+            {
+                $diff = '';
+                if(substr_count($value, "\n") > 1     or
+                   substr_count($old->$key, "\n") > 1 or
+                   strpos('name,title,desc,content,summary', strtolower($key)) !== false)
+                {
+                    $diff = commonModel::diff($old->$key, $value);
+                }
+                $changes[] = array('field' => $key, 'old' => $old->$key, 'new' => $value, 'diff' => $diff);
+            }
+        }
+        return $changes;
+    }
+
+    /**
+     * Diff two string. (see phpt)
+     * 
+     * @param string $text1 
+     * @param string $text2 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function diff($text1, $text2)
+    {
+        $text1 = str_replace('&nbsp;', '', trim($text1));
+        $text2 = str_replace('&nbsp;', '', trim($text2));
+        $w  = explode("\n", $text1);
+        $o  = explode("\n", $text2);
+        $w1 = array_diff_assoc($w,$o);
+        $o1 = array_diff_assoc($o,$w);
+        $w2 = array();
+        $o2 = array();
+        foreach($w1 as $idx => $val) $w2[sprintf("%03d<",$idx)] = sprintf("%03d- ", $idx+1) . "<del>" . trim($val) . "</del>";
+        foreach($o1 as $idx => $val) $o2[sprintf("%03d>",$idx)] = sprintf("%03d+ ", $idx+1) . "<ins>" . trim($val) . "</ins>";
+        $diff = array_merge($w2, $o2);
+        ksort($diff);
+        return implode("\n", $diff);
+    }
 }

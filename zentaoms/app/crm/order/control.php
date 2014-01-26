@@ -58,8 +58,10 @@ class order extends control
     {
         if($_POST)
         {
-            $this->order->create();
+            $orderID = $this->order->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            $this->loadModel('action')->create('order', $orderID, 'Created', '');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
         $this->view->productForm = '';
@@ -86,8 +88,13 @@ class order extends control
     {
         if($_POST)
         {
-            $this->order->update($orderID);
+            $changes = $this->order->update($orderID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if(!empty($changes))
+            {   
+                $actionID = $this->loadModel('action')->create('order', $orderID, 'Edited');
+                $this->action->logHistory($actionID, $changes);
+            }   
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
@@ -97,6 +104,7 @@ class order extends control
         $this->view->order     = $order;
         $this->view->products  = $this->loadModel('product')->getPairs();
         $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->actions   = $this->loadModel('action')->getList('order', $orderID);
 
         $this->display();
     }

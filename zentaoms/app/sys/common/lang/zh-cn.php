@@ -76,6 +76,9 @@ $lang->activate       = '激活';
 $lang->view           = '查看';
 $lang->more           = '更多';
 $lang->actions        = '操作';
+$lang->history        = '历史记录';
+$lang->reverse        = '切换顺序';
+$lang->switchDisplay  = '切换显示';
 $lang->feature        = '未来';
 $lang->year           = '年';
 $lang->loading        = '稍候...';
@@ -85,6 +88,8 @@ $lang->sendSuccess    = '发送成功';
 $lang->fail           = '失败';
 $lang->noResultsMatch = '没有匹配的选项';
 $lang->alias          = '搜索引擎优化使用，可使用英文、数字';
+$lang->unfold         = '+';
+$lang->fold           = '-';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -117,6 +122,7 @@ $lang->mail   = new stdclass();
 $lang->dept   = new stdclass();
 $lang->thread = new stdclass();
 $lang->block  = new stdclass();
+$lang->action = new stdclass();
 
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = '公司|company|setbasic|';

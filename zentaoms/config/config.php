@@ -134,11 +134,14 @@ define('TABLE_REPLY',   'sns_reply');
 define('TABLE_MESSAGE', 'sns_message');
 
 /* The mapping list of object and tables. */
-$config->objectTables['product'] = TABLE_PRODUCT;
-$config->objectTables['project'] = TABLE_PROJECT;
-$config->objectTables['task']    = TABLE_TASK;
-$config->objectTables['user']    = TABLE_USER;
-$config->objectTables['todo']    = TABLE_TODO;
+$config->objectTables['product']     = TABLE_PRODUCT;
+$config->objectTables['project']     = TABLE_PROJECT;
+$config->objectTables['task']        = TABLE_TASK;
+$config->objectTables['user']        = TABLE_USER;
+$config->objectTables['todo']        = TABLE_TODO;
+$config->objectTables['order']       = TABLE_ORDER;
+$config->objectTables['orderAction'] = TABLE_ORDERACTION;
+$config->objectTables['orderField']  = TABLE_ORDERFIELD;
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext/*.php');
