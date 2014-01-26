@@ -4,3 +4,5 @@ CHANGE `api` `block` varchar(255) COLLATE 'utf8_general_ci' NOT NULL AFTER `logo
 ALTER TABLE `sys_entry` ADD `control` varchar(10) COLLATE 'utf8_general_ci' NOT NULL DEFAULT 'simple' AFTER `block`,
 ADD `size` varchar(50) COLLATE 'utf8_general_ci' NOT NULL DEFAULT 'max' AFTER `control`,
 ADD `position` varchar(10) COLLATE 'utf8_general_ci' NOT NULL DEFAULT 'default' AFTER `size`;
+ALTER TABLE sys_task CHANGE openedBy createdBy char(30) NOT NULL;
+ALTER TABLE sys_task CHANGE openedDate createdDate datetime NOT NULL;
