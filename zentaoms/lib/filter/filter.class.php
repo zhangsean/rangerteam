@@ -280,7 +280,7 @@ class validater
      * @access public
      * @return bool
      */
-    public function checkNotEqual($var, $value)
+    public static function checkNotEqual($var, $value)
     {
         return $var == $value;
     }
@@ -294,7 +294,7 @@ class validater
      * @access public
      * @return bool
      */
-    public function checkGT($var, $value)
+    public static function checkGT($var, $value)
     {
         return $var > $value;
     }
@@ -308,11 +308,10 @@ class validater
      * @access public
      * @return bool
      */
-    public function checkLT($var, $value)
+    public static function checkLT($var, $value)
     {
         return $var < $value;
     }
-
 
     /**
      * Must in value list.
