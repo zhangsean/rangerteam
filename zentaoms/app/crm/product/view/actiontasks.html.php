@@ -13,7 +13,7 @@
         </tr>
         <?php foreach($action->tasks as $task):?>
         <tr>
-          <th><?php echo html::select('role[]', $roles, $task->role, "class='form-control'");?></th>
+          <th><?php echo html::select('role[]', array_combine($roles, $roles), $task->role, "class='form-control'");?></th>
           <td class='w-150px'><?php echo html::input("date[]", $task->date, "class='form-control'")?></td>
           <td><?php echo html::input("name[]", $task->name, "class='form-control'")?></td>
           <td>
@@ -26,18 +26,18 @@
           <td colspan='3'><?php echo html::submitButton();?></td>
         </tr>
       </table>
-      <table class='hide'>
-        <tr id='originTR'>
-          <th><?php echo html::select('role[]', $roles, '', "class='form-control'");?></th>
-          <td class='w-150px'><?php echo html::input('date[]', '', "class='form-control'")?></td>
-          <td><?php echo html::input('name[]', '', "class='form-control'")?></td>
-          <td>
-            <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>
-            <?php echo html::a('javascript:;', $lang->delete, "class='condition-deleter'")?>
-          </td>
-        </tr>
-      </table>
     </form>
+    <table class='hide'>
+      <tr id='originTR'>
+        <th><?php echo html::select('role[]', $roles, '', "class='form-control'");?></th>
+        <td class='w-150px'><?php echo html::input('date[]', '', "class='form-control'")?></td>
+        <td><?php echo html::input('name[]', '', "class='form-control'")?></td>
+        <td>
+          <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>
+          <?php echo html::a('javascript:;', $lang->delete, "class='condition-deleter'")?>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>
