@@ -272,6 +272,49 @@ class validater
     }
 
     /**
+     * Must not equal a value.
+     * 
+     * @param  mixed    $var 
+     * @param  mixed    $value 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public function checkNotEqual($var, $value)
+    {
+        return $var == $value;
+    }
+
+    /**
+     * Must greater than a value.
+     * 
+     * @param  mixed    $var 
+     * @param  mixed    $value 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public function checkGT($var, $value)
+    {
+        return $var > $value;
+    }
+
+    /**
+     * Must less than a value.
+     * 
+     * @param  mixed    $var 
+     * @param  mixed    $value 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public function checkLT($var, $value)
+    {
+        return $var < $value;
+    }
+
+
+    /**
      * Must in value list.
      * 
      * @param  mixed  $var 
