@@ -6,7 +6,7 @@
       <table class='table table-form'>
         <tr>
           <th><?php echo $lang->order->customer;?></th>
-          <td><?php echo $lang->order->customers[$order->customer];?></td>
+          <td><?php echo html::select('customer', $customers, $order->customer, "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->product;?></th>
@@ -16,12 +16,6 @@
           <th><?php echo $lang->order->plan;?></th>
           <td><?php echo html::input('plan', $order->plan, "class='form-control'");?></td>
         </tr>
-        <?php if($order->status != 'closed'):?>
-        <tr>
-          <th><?php echo $lang->order->assignedTo;?></th>
-          <td><?php echo html::input('assignedTo', $order->assignedTo, "class='form-control'");?></td>
-        </tr>
-        <?php endif;?>
         <?php if($order->status == 'closed'):?>
         <tr>
           <th><?php echo $lang->order->closedReason;?></th>

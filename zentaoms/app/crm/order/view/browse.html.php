@@ -21,7 +21,7 @@
       <?php foreach($orders as $order):?>
       <tr class='text-center'>
         <td><?php echo $order->id;?></td>
-        <td><?php echo $lang->order->customers[$order->customer];?></td>
+        <td><?php echo $customers[$order->customer];?></td>
         <td><?php echo $products[$order->product];?></td>
         <td><?php echo $order->createdBy;?></td>
         <td><?php echo $order->assignedBy;?></td>

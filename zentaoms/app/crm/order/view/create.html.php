@@ -18,10 +18,6 @@
           <th><?php echo $lang->order->plan;?></th>
           <td><?php echo html::input('plan', '', "class='form-control'");?></td>
         </tr>
-        <tr>
-          <th><?php echo $lang->order->assignedTo;?></th>
-          <td><?php echo html::input('assignedTo', '', "class='form-control'");?></td>
-        </tr>
         <?php echo $productForm;?>
         <tr>
           <th></th>
