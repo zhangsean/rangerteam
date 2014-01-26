@@ -15,7 +15,7 @@ class index extends control
     {
         parent::__construct();
     }
-    
+
     public function index()
     {
         $entries    = $this->loadModel('entry')->getEntries();
@@ -28,7 +28,7 @@ class index extends control
 
             $sso  = $this->createLink('entry', 'visit', "entryID=$entry->id");
             $logo = $entry->logo ? $entry->logo : '';
-            $size = $entry->size != 'max' ? $entry->size : "'$entry->size'";
+            $size = $entry->size ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
 
             $allEntries .= "entries.push({id: '$entry->id', url: '$sso', name: '$entry->name', open: '$entry->open', desc: '$entry->name', display: 'fixed', size: $size, icon: '$logo', control: '$entry->control', position: '$entry->position'});\n";
         }
