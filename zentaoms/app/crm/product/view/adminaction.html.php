@@ -11,9 +11,6 @@
       <tr class='text-center'>
         <th><?php echo $lang->product->action->action;?></th>
         <th><?php echo $lang->product->action->name;?></th>
-        <th style='width: 160px'><?php echo $lang->product->action->control;?></th>
-        <th ><?php echo $lang->product->action->options;?></th>
-        <th ><?php echo $lang->product->action->default;?></th>
         <th style='width: 200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
@@ -22,11 +19,9 @@
       <tr class='text-center'>
         <td class='text-left'><?php echo $action->action;?></td>
         <td class='text-left'><?php echo $action->name;?></td>
-        <td><?php echo $lang->product->action->controlTypeList[$action->control];?></td>
-        <td><?php echo $action->options;?></td>
-        <td><?php echo $action->default;?></td>
         <td>
           <?php
+          echo html::a($this->createLink('product', 'editAction', "actionID=$action->id"), $lang->edit, "class='editr'");
           echo html::a($this->createLink('product', 'actionConditions', "actionID=$action->id"), $lang->product->action->conditions);
           echo html::a($this->createLink('product', 'actionInputs', "actionID=$action->id"), $lang->product->action->inputs);
           echo html::a($this->createLink('product', 'actionTasks', "actionID=$action->id"), $lang->product->action->tasks);

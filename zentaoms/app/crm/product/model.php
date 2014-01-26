@@ -342,6 +342,25 @@ class productModel extends model
     }
 
     /**
+     * Update an action.
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function updateAction($actionID)
+    {
+       $action = fixer::input('post')->get(); 
+       $this->dao->update(TABLE_ORDERACTION)
+           ->data($action)
+           ->autoCheck()
+           ->batchCheck($this->config->action->require->edit, 'notempty')
+           ->where('id')->eq($actionID)
+           ->exec();
+       return !dao::isError();
+    }
+
+    /**
      * Save conditions of an action.
      * 
      * @param  int    $actionID 

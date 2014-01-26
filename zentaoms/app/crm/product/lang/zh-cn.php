@@ -80,6 +80,7 @@ $lang->product->action->tasks      = '任务';
 
 $lang->product->action->admin           = '流程';
 $lang->product->action->create          = '添加动作';
+$lang->product->action->edit            = '编辑动作';
 $lang->product->action->adminConditions = '动作条件';
 
 $lang->product->task = new stdclass();

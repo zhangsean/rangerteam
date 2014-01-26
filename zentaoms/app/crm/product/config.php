@@ -33,4 +33,4 @@ $config->field->lengthList[200] = ',input,select,radio,checkbox,';
 $config->action = new stdclass();
 $config->action->require = new stdclass();
 $config->action->require->create = 'name, action, product';
-$config->action->require->edit   = 'name, action, product';
+$config->action->require->edit   = 'name, action';

@@ -209,6 +209,26 @@ class product extends control
     }
 
     /**
+     * Edit an action.
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function editAction($actionID)
+    {
+        $action = $this->product->getActionByID($actionID);
+        if($_POST)
+        {
+            if($this->product->updateAction($actionID)) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('adminaction', "productID={$action->product}")));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->action = $action;
+        $this->display();
+    } 
+
+    /**
      * Create an action of an order.
      * 
      * @param  int    $productID 
