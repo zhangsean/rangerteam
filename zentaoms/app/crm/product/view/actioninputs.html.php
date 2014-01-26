@@ -6,12 +6,15 @@
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
-      <table class='table table-form'>
-        <tr class='text-center'>
-          <td><?php echo $lang->product->field->field;?></th>
-          <td class='text-center'><?php echo $lang->product->field->rules;?></th>
-          <td class='text-center w-200px'><?php echo $lang->product->field->default;?></th>
-        </tr>
+      <table class='table table-hover tablesorter'>
+        <thead>
+          <tr class='text-center'>
+            <th><?php echo $lang->product->field->field;?></th>
+            <th class='text-center'><?php echo $lang->product->field->rules;?></th>
+            <th class='text-center w-200px'><?php echo $lang->product->field->default;?></th>
+            <th></th>
+          </tr>
+        </thead>
         <?php
         $i = 0;
         foreach($action->inputs as $field => $input):
@@ -28,7 +31,7 @@
         <?php $i++; endforeach;?>
         <?php js::set('key', $i)?>
         <tr>
-          <td colspan='3'><?php echo html::submitButton();?></td>
+          <td colspan='4'><?php echo html::submitButton();?></td>
         </tr>
       </table>
     </form>
