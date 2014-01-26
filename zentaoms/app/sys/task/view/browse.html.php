@@ -39,7 +39,7 @@
         <td class='text-left'><?php echo $task->name;?></td>
         <td><?php echo $task->deadline;?></td>
         <td><?php echo $task->assignedTo;?></td>
-        <td><?php echo $task->openedDate;?></td>
+        <td><?php echo $task->createdDate;?></td>
         <td><?php echo $lang->task->typeList[$task->type];?></td>
         <td><?php echo $lang->task->statusList[$task->status];?></td>
         <td><?php echo $task->order;?></td>
