@@ -279,7 +279,7 @@ class product extends control
         $conditionFields = array('' => '');
         foreach($this->config->order->conditionFields as $field) $conditionFields[$field] = $this->lang->order->{$field};
 
-        $fields  = $this->product->getFieldList($action->productID);
+        $fields  = $this->product->getFieldList($action->product);
         foreach($fields as $field) $conditionFields[$field->field] = $field->name;
 
         $this->view->action          = $action;
