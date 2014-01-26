@@ -110,6 +110,27 @@ class order extends control
     }
 
     /**
+     * View an order.
+     * 
+     * @param  int $orderID 
+     * @access public
+     * @return void
+     */
+
+    public function view($orderID)
+    {
+        $order    = $this->order->getByID($orderID);
+        $product  = $this->loadModel('product')->getByID($order->product);
+        $customer = $this->loadModel('customer')->getByID($order->customer);
+    
+        $this->view->order    = $order;
+        $this->view->product  = $product;
+        $this->view->customer = $customer;
+    
+        $this->display();
+    }
+    
+    /**
      * Close an order.
      * 
      * @param  int    $orderID 
@@ -151,9 +172,18 @@ class order extends control
      */
     public function team($orderID = 0)
     {
+        $roles        = $this->lang->user->roleList;
+        $productRoles = $this->loadModel('product')->getRoleList($order->product);
+        if($productRoles)
+        {
+            $roles = array_merge($roles, $productRoles);
+            $roles = array_unique($roles);
+        }
+
         $this->view->title       = $this->lang->order->team;
         $this->view->order       = $this->order->getByID($orderID);
         $this->view->teamMembers = $this->order->getTeamMembers($orderID);
+        $this->view->roles       = $roles;
 
         $this->display();
     }
@@ -180,10 +210,13 @@ class order extends control
         $users          = $this->user->getPairs('noclosed, nodeleted, devfirst');
         $userRoles      = $this->user->getUserRoles(array_keys($users));
         $currentMembers = $this->order->getTeamMembers($orderID);
-        $systemRoles    = $this->lang->user->roleList;
+        $roles          = $this->lang->user->roleList;
         $productRoles   = $this->loadModel('product')->getRoleList($order->product);
-        $roles          = array_merge($systemRoles, $productRoles);
-        $roles          = array_unique($roles);
+        if($productRoles)
+        {
+            $roles = array_merge($roles, $productRoles);
+            $roles = array_unique($roles);
+        }
 
         /* The deleted members. */
         foreach($currentMembers as $account => $member)
