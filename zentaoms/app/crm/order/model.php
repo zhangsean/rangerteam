@@ -64,10 +64,10 @@ class orderModel extends model
         $order = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
-            ->setDefault('status', 'normal')
-            ->setIF($this->post->assignedTo != '', 'assignedBy', $this->app->user->account)
-            ->setIF($this->post->assignedTo != '', 'assignedDate', $now)
-            ->setIF($this->post->assignedTo != '', 'status', 'assigned')
+            ->setDefault('status', 'assigned')
+            ->setDefault('assignedBy', $this->app->user->account)
+            ->setDefault('assignedTo', $this->app->user->account)
+            ->setDefault('assignedDate', $now)
             ->get();
 
         $this->dao->insert(TABLE_ORDER)
@@ -87,6 +87,10 @@ class orderModel extends model
         $this->dao->insert(TABLE_TEAM)->data($member)->exec();
 
         if(dao::isError()) return false;
+
+        $product = $this->loadModel('product')->getByID($order->product);
+        $sql = "INSERT INTO `crm_order_{$product->code}` (`order`) VALUES ({$orderID})";
+        if(!$this->dbh->query($sql)) return false;
 
         return $orderID;
     }
