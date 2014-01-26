@@ -198,4 +198,30 @@ class order extends control
         if($this->order->unlinkMember($orderID, $account)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
+
+    /**
+     * Operate an order.
+     * 
+     * @param  int    $orderID 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function operate($orderID, $actionID)
+    {
+        $order  = $this->order->getByID($orderID); 
+        $action = $this->loadModel('product')->getActionByID($actionID);
+
+        if($_POST)
+        {
+            if($this->order->operate($order, $action))  $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('tasks', "actionID={$actionID}")));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+        
+        $customFields = $this->product->getFieldList($order->product);
+        $this->view->fields = array_merge($this->config->order->commonFields, $customFields);
+        $this->view->order  = $order;
+        $this->view->action = $action;
+        $this->display();
+    }
 }

@@ -272,4 +272,50 @@ class orderModel extends model
         return !dao::isError();
     }
 
+    /**
+     * operate an order.
+     * 
+     * @param  object    $order 
+     * @param  object    $action 
+     * @access public
+     * @return void
+     */
+    public function operate($order, $action)
+    {
+        $product = $this->loadModel('product')->getByID($order->product);
+        $common = array();
+        $custom = array();
+        foreach($this->config->order->commonFields as $field)
+        {
+            if(isset($_POST[$field->field])) $common[$field->field] = $_POST[$field->field];
+        }
+
+        $customFields = $this->product->getFieldList($order->product);
+        foreach($customFields as $field)
+        {
+            if(isset($_POST[$field->field])) $custom[$field->field] = $_POST[$field->field];
+        }
+        
+        $dao = $this->dao->update(TABLE_ORDER)->data($common);
+        foreach($common as $field => $value)
+        {
+            if(empty($action->inputs->{$field}->rules)) continue;
+            $rules = explode(',', $action->inputs->{$field}->rules);
+            foreach($rules as $rule) $dao->check($rule, $field, $value);
+        }
+        $dao->where('id')->eq($order->id)->exec();
+
+        if(dao::isError()) return false;
+
+        $this->dao->update('crm_order_' . $product->code)->data($custom);
+        foreach($custom as $field => $value)
+        {
+            if(empty($action->inputs->{$field}->rules)) continue;
+            $rules = explode(',', $action->inputs->{$field}->rules);
+            foreach($rules as $rule) $dao->check($rule, $field, $value);
+        }
+        $dao->where('`order`')->eq($order->id)->exec();
+
+        return !dao::isError();
+    }
 }

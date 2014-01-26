@@ -40,7 +40,7 @@
           $actions = $this->order->getEnabledActions($order);
           foreach($actions as $action)
           {
-              echo html::a($this->inlink('option', "orderID={$orderID}&action={$action->action}"), $action->name);
+              echo html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name);
           }
           ?>
         </td>
