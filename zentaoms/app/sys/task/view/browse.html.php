@@ -25,8 +25,8 @@
         <th class='w-150px'><?php echo $lang->task->deadline;?></th>
         <th class='w-80px'><?php echo $lang->task->assignedTo;?></th>
         <th class='w-150px'><?php echo $lang->task->openedDate;?></th>
-        <th class='w-60px'><?php echo $lang->task->type;?></th>
-        <th class='w-60px'><?php echo $lang->task->status;?></th>
+        <th class='w-80px'><?php echo $lang->task->type;?></th>
+        <th class='w-80px'><?php echo $lang->task->status;?></th>
         <th class='w-80px'><?php echo $lang->task->order;?></th>
         <th class='w-80px'><?php echo $lang->actions;?></th>
       </tr>
