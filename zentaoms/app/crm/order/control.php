@@ -221,7 +221,7 @@ class order extends control
 
         if($_POST)
         {
-            if($this->order->operate($order, $action))  $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('tasks', "actionID={$actionID}")));
+            if($this->order->operate($order, $action))  $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('tasks', "orderID={$orderID}&actionID={$actionID}")));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
         
@@ -229,6 +229,33 @@ class order extends control
         $this->view->fields = array_merge($this->config->order->commonFields, $customFields);
         $this->view->order  = $order;
         $this->view->action = $action;
+        $this->display();
+    }
+
+    /**
+     * create tasks after order operates.
+     * 
+     * @param  int    $orderID 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function tasks($orderID, $actionID)
+    {
+        $this->loadModel('task');
+        $this->loadModel('user', 'sys');
+        $action = $this->loadModel('product')->getActionByID($actionID);
+        $order  = $this->order->getByID($orderID);
+
+        if($_POST)
+        {
+            if($this->order->createTasks($order))  $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('browse')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+        
+        $this->view->team   = $this->order->getRoleList($orderID);
+        $this->view->action = $action;
+        $this->view->order  = $order;
         $this->display();
     }
 }

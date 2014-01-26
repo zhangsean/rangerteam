@@ -58,6 +58,23 @@ class userModel extends model
     }
 
     /**
+     * Print use select.
+     * 
+     * @param  int    $name 
+     * @param  string $selectedItems 
+     * @param  string $attrib 
+     * @param  string $params 
+     * @param  int    $dept 
+     * @access public
+     * @return void
+     */
+    public function printSelect($name, $selectedItems = '', $attrib = '', $params = '', $dept = 0)
+    {
+        $options = $this->getPairs($params, $dept);
+        return html::select($name, $options, $selectedItems, $attrib);
+    }
+
+    /**
      * Get the basic info of some user.
      * 
      * @param mixed $users 
@@ -125,10 +142,17 @@ class userModel extends model
         return $users;
     }
 
+    /**
+     * Get role list.
+     * 
+     * @access public
+     * @return void
+     */
     public function getRoleList()
     {
-        return array();
+        return array_values($this->lang->user->roleList);
     }
+
     /**
      * Create a user.
      * 
@@ -144,8 +168,6 @@ class userModel extends model
             ->setForce('last', helper::now())
             ->setForce('visits', 1)
             ->setIF($this->post->password1 == false, 'password', '')
-            ->setIF($this->cookie->referer != '', 'referer', $this->cookie->referer)
-            ->setIF($this->cookie->referer == '', 'referer', '')
             ->remove('admin, ip')
             ->get();
         $user->password = $this->createPassword($this->post->password1, $user->account); 

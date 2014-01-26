@@ -179,6 +179,13 @@ class orderModel extends model
             ->fetchAll('account');
     }
 
+    public function getRoleList($orderID)
+    {
+        return $this->dao->select('account, role')->from(TABLE_TEAM)
+            ->where('`order`')->eq($orderID)
+            ->fetchPairs('role', 'account');
+    }
+
     /**
      * Manage team members.
      * 
@@ -300,26 +307,55 @@ class orderModel extends model
             if(isset($_POST[$field->field])) $custom[$field->field] = $_POST[$field->field];
         }
         
-        $dao = $this->dao->update(TABLE_ORDER)->data($common);
-        foreach($common as $field => $value)
+        if(!empty($common))
         {
-            if(empty($action->inputs->{$field}->rules)) continue;
-            $rules = explode(',', $action->inputs->{$field}->rules);
-            foreach($rules as $rule) $dao->check($rule, $field, $value);
+            $dao = $this->dao->update(TABLE_ORDER)->data($common);
+            foreach($common as $field => $value)
+            {
+                if(empty($action->inputs->{$field}->rules)) continue;
+                $rules = explode(',', $action->inputs->{$field}->rules);
+                foreach($rules as $rule) $dao->check($rule, $field, $value);
+            }
+            $dao->where('id')->eq($order->id)->exec();
+            if(dao::isError()) return false;
         }
-        $dao->where('id')->eq($order->id)->exec();
 
-        if(dao::isError()) return false;
-
-        $this->dao->update('crm_order_' . $product->code)->data($custom);
-        foreach($custom as $field => $value)
+        if(!empty($custom))
         {
-            if(empty($action->inputs->{$field}->rules)) continue;
-            $rules = explode(',', $action->inputs->{$field}->rules);
-            foreach($rules as $rule) $dao->check($rule, $field, $value);
+            $this->dao->update('crm_order_' . $product->code)->data($custom);
+            foreach($custom as $field => $value)
+            {
+                if(empty($action->inputs->{$field}->rules)) continue;
+                $rules = explode(',', $action->inputs->{$field}->rules);
+                foreach($rules as $rule) $dao->check($rule, $field, $value);
+            }
+            $dao->where('`order`')->eq($order->id)->exec();
         }
-        $dao->where('`order`')->eq($order->id)->exec();
+        return !dao::isError();
+    }
 
+    /**
+     * Create tasks after operate an order.
+     * 
+     * @param  object    $order 
+     * @access public
+     * @return void
+     */
+    public function createTasks($order)
+    {
+        $task = array();       
+        $task['customer']    = $order->customer;
+        $task['order']       = $order->id;
+        $task['createdBy']   = $this->app->user->account;
+        $task['createdDate'] = helper::now();
+
+        foreach($_POST['name'] as $key => $name)
+        {
+            $task['name'] = $name;
+            $task['assignedTo'] = $_POST['assignedTo'][$key];
+            $task['estStarted'] = $_POST['estStarted'][$key];
+            $this->dao->insert(TABLE_TASK)->data($task)->exec();
+        }
         return !dao::isError();
     }
 }
