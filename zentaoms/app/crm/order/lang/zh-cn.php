@@ -33,11 +33,13 @@ $lang->order->edit          = '编辑订单';
 $lang->order->view          = '订单详情';
 $lang->order->close         = '关闭订单';
 $lang->order->manageMembers = '团队管理';
+$lang->order->contract      = '签约';
 
-$lang->order->statusList['normal']   = '正常';
-$lang->order->statusList['assigned'] = '已指派';
-$lang->order->statusList['payed']    = '已付款';
-$lang->order->statusList['closed']   = '已关闭';
+$lang->order->statusList['normal']     = '正常';
+$lang->order->statusList['assigned']   = '已指派';
+$lang->order->statusList['payed']      = '已付款';
+$lang->order->statusList['contracted'] = '已签约';
+$lang->order->statusList['closed']     = '已关闭';
 
 $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '订单失败';

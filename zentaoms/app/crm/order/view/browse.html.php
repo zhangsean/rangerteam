@@ -35,6 +35,7 @@
           if($order->status == 'closed' && $order->closedReason != 'payed') echo html::a($this->createLink('order', 'activate', "orderID=$order->id"), $lang->activate, "class='reload'");
           echo html::a($this->createLink('order', 'view', "orderID=$order->id"), $lang->view);
           echo html::a($this->createLink('order', 'team', "orderID=$order->id"), $lang->order->team);
+          echo html::a($this->createLink('contract', 'create', "orderID=$order->id"), $lang->order->contract);
           ?>
           <?php 
           $actions = $this->order->getEnabledActions($order);

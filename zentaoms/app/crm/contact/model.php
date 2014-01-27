@@ -45,6 +45,18 @@ class contactModel extends model
     }
 
     /**
+     * Get contact pairs.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getPairs()
+    {
+        $contacts = $this->dao->select('*')->from(TABLE_CONTACT)->fetchPairs('id', 'realname');
+        return array(0 => '') + $contacts;
+    }
+
+    /**
      * Create a contact.
      * 
      * @access public

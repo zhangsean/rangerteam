@@ -53,6 +53,37 @@ class orderModel extends model
     }
 
     /**
+     * Get order pairs.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getPairs()
+    {
+        return $this->dao->select('*')->from(TABLE_ORDER)->fetchPairs('id', 'id');
+    }
+
+    /**
+     * Get amount.
+     * 
+     * @param  int|string|array    $idList 
+     * @access public
+     * @return float
+     */
+    public function getAmount($idList)
+    {
+        $orders = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->in($idList)->fetchAll();
+
+        $amount = 0;
+        foreach($orders as $order)
+        {
+            $amount += $order->real == '0.00' ? $order->plan : $order->real;
+        }
+
+        return $amount;
+    }
+
+    /**
      * Create an order.
      * 
      * @access public

@@ -53,7 +53,8 @@ class customerModel extends model
      */
     public function getPairs($orderBy = 'id_desc')
     {
-        return $this->dao->select('id, name')->from(TABLE_CUSTOMER)->orderBy($orderBy)->fetchPairs('id');
+        $customers = $this->dao->select('id, name')->from(TABLE_CUSTOMER)->orderBy($orderBy)->fetchPairs('id');
+        return array(0 => '') + $customers;
     }
 
     /**
