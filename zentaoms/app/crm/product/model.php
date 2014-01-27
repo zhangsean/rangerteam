@@ -199,7 +199,8 @@ class productModel extends model
      */
     public function buildControl($field, $value = null)
     {
-        $field->options = array_combine(explode(',', $field->options), explode(',', $field->options));
+        $field->options = isset($field->options) ? array_combine(explode(',', $field->options), explode(',', $field->options)) : array();
+        if(!isset($field->default)) $field->default = '';
         switch($field->control)
         {
             case 'input':

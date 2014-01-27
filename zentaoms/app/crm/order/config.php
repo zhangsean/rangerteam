@@ -18,6 +18,8 @@ $config->order->commonFields['real']->control = 'input';
 $config->order->commonFields['status'] = new stdclass();
 $config->order->commonFields['status']->field   = 'status';
 $config->order->commonFields['status']->control = 'select';
+global $lang;
+$config->order->commonFields['status']->options = join(',', array_values($lang->order->statusList));
 
 $config->order->commonFields['assignedTo'] = new stdclass();
 $config->order->commonFields['assignedTo']->field   = 'assignedTo';
@@ -71,4 +73,4 @@ $config->order->commonFields['contactedDate'] = new stdclass();
 $config->order->commonFields['contactedDate']->field   = 'contactedDate';
 $config->order->commonFields['contactedDate']->control = 'input';
 
-$config->order->conditionFields = array('plan', 'real', 'status', 'createdDate', 'assignedDate', 'signedDate', 'payedDate', 'closedDate', 'closedReason', 'activatedDate', 'contactedDate');
+$config->order->conditionFields = array('plan', 'real', 'status', 'assignedDate', 'signedDate', 'payedDate', 'closedDate', 'closedReason', 'activatedDate', 'contactedDate');

@@ -29,11 +29,8 @@ class orderModel extends model
        $product = $this->loadModel('product')->getByID($order->product);
        if(!$product) return false;
 
-       $custom  = $this->dao->select('*')->from('crm_order_' . $product->code)->where('`order`')->eq($id)->fetch();
-       if($custom)
-       {
-           foreach($custom as $field => $value) $order->$field = $value;
-       }
+       $custom  = (array) $this->dao->select('*')->from('crm_order_' . $product->code)->where('`order`')->eq($id)->fetch();
+       foreach($custom as $field => $value) $order->$field = $value;
 
        return $order;
     }

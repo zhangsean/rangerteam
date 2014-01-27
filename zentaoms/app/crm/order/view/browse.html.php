@@ -26,7 +26,7 @@
         <td><?php echo $order->createdBy;?></td>
         <td><?php echo $order->assignedBy;?></td>
         <td><?php echo $order->assignedTo;?></td>
-        <td><?php echo $lang->order->statusList[$order->status];?></td>
+        <td><?php echo isset($lang->order->statusList[$order->status]) ? $lang->order->statusList[$order->status] : $order->status;?></td>
         <td>
           <?php
           echo html::a($this->createLink('order', 'edit',   "orderID=$order->id"), $lang->edit);

@@ -356,10 +356,10 @@ class product extends control
         {
             $action->tasks = array();
 
-            $defaultTask   = new stdclass();
-            $defaultTask->field   = '';
-            $defaultTask->rules   = '';
-            $defaultTask->default = '';
+            $defaultTask = new stdclass();
+            $defaultTask->name = '';
+            $defaultTask->role = '';
+            $defaultTask->date = '';
 
             $action->tasks[] =$defaultTask;
         }
