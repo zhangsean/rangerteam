@@ -39,6 +39,10 @@
         closeWindowText               : '关闭应用',
         minWindowText                 : '隐藏窗口',
         showWindowText                : '显示窗口',
+        safeRemoveBlock               : '确定要移除区块 【{0}】 吗？',
+        removedBlock                  : '区块已删除',
+        orderdBlocksSaved             : '排序已保存',
+        blocksEditTip                 : '开始编辑您的区块：拖动区块来排序，点击删除和编辑按钮来操作。',
         windowHtmlTemplate            : "<div id='{idstr}' class='window {cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
         frameHtmlTemplate             : "<iframe id='iframe-{idstr}' name='iframe-{idstr}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
         leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a data-toggle="tooltip" data-placement="right"  href="javascript:;" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</a></li>',
@@ -357,7 +361,28 @@
 
     function handleHomeBlocks()
     {
-        $(document).on('mouseover', '#home.custom-mode:not(.dragging) .panel:not(#draggingPanel)', function()
+        var msg = null;
+        $('#customHome').click(function()
+        {
+            if(!$('#home').hasClass('custom-mode')) msg = messager.info(settings.blocksEditTip, 'top', 6000); 
+            else if(msg != null) msg.hide();
+        });
+
+        $(document).on('click', '#home.custom-mode .remove-block', function()
+        {
+            var panel = $(this).closest('.panel');
+            var index = panel.attr('data-id');
+            var name = panel.find('.panel-heading').text().replace('\n', '').replace(/(^\s*)|(\s*$)/g, "");
+            if(confirm(settings.safeRemoveBlock.format(name)))
+            {
+                if(settings.onDeleteBlock && $.isFunction(settings.onDeleteBlock))
+                {
+                    settings.onDeleteBlock(index);
+                    messager.info(settings.removedBlock);
+                }
+                $('#block' + index).parent().remove();
+            }
+        }).on('mouseover', '#home.custom-mode:not(.dragging) .panel:not(#draggingPanel)', function()
         {
             $(this).addClass('hover');
             $('#home.custom-mode').addClass('hover');
@@ -426,7 +451,11 @@
                         newOrders[$(this).attr('id')] = $(this).attr('data-order');
                     });
 
-                    if(settings.onBlocksOrdered && $.isFunction(settings.onBlocksOrdered)) settings.onBlocksOrdered(newOrders);
+                    if(settings.onBlocksOrdered && $.isFunction(settings.onBlocksOrdered))
+                    {
+                        settings.onBlocksOrdered(newOrders);
+                        messager.success(settings.orderdBlocksSaved);
+                    }
                 }
                 $('#draggingPanel').remove();
                 $('.dragging-col').removeClass('dragging-col');
@@ -1108,41 +1137,3 @@
     $.extend({ipsStart: start, closeModal: closeModal});
 
 }(jQuery,window,document,Math);
-
-/**
- * Format string
- *  
- * @param  object|array args
- * @return string
- */
-String.prototype.format = function(args)
-{
-    var result = this;
-    if (arguments.length > 0)
-    {
-        var reg;
-        if (arguments.length == 1 && typeof(args) == "object")
-        {
-            for (var key in args)
-            {
-                if (args[key] != undefined)
-                {
-                    reg = new RegExp("({" + key + "})", "g");
-                    result = result.replace(reg, args[key]);
-                }
-            }
-        }
-        else
-        {
-            for (var i = 0; i < arguments.length; i++)
-            {
-                if (arguments[i] != undefined)
-                {
-                    reg = new RegExp("({[" + i + "]})", "g");
-                    result = result.replace(reg, arguments[i]);
-                }
-            }
-        }
-    }
-    return result;
-};

@@ -1,7 +1,7 @@
 $(function()
 {
     /* start ips */
-    $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks}, config));
+    $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock}, config));
     $('.entries-count').text(entries.length - 2)
 
     printBlock();
@@ -38,9 +38,6 @@ function deleteBlock(index)
             alert(data.message);
             return false;
         }
-
-        /* remove div for this bloc.  */
-        $('#block' + index).parent().remove();
     })
 }
 
@@ -69,9 +66,8 @@ function sortBlocks(orders)
         {
             var index = $(this).attr('data-order');
             /* Update new index for block id edit and delete. */
-            $(this).attr('id', 'block' + index);
+            $(this).attr('id', 'block' + index).attr('data-id', index);
             $(this).find('.custom-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
-            $(this).find('.custom-actions .remove-block').attr('onclick', 'deleteBlock(' + index + ')');
         })
     });
 }

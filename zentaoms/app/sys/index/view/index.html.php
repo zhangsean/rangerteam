@@ -41,7 +41,7 @@ js::import($jsRoot . 'jquery/ips.js');
     <div id='home' class='fullscreen fullscreen-active'>
       <div class='btn-toolbar actions'>
         <button data-toggle='tooltip' data-placement='bottom' data-id='addblock' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure app-btn'><i class='icon-plus'></i></button>
-        <button data-target='#home' data-toggle-class='custom-mode' data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->index->customBlocks; ?>' class='btn btn-pure'><i class='icon-wrench'></i></button>
+        <button id='customHome' data-target='#home' data-toggle-class='custom-mode' data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->index->customBlocks; ?>' class='btn btn-pure'><i class='icon-wrench'></i></button>
       </div>
       <div class='panels-container'>
         <div class='row'>
@@ -52,12 +52,12 @@ js::import($jsRoot . 'jquery/ips.js');
         $block = json_decode($block);
         ?>
           <div class='col-sm-6 col-md-4 col-lg-3'>
-            <div class='panel' id='block<?php echo $index?>'>
+            <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>'>
               <div class='panel-heading'>
                 <?php echo $block->name?>
                 <div class='custom-actions'>
                   <?php echo html::a($this->createLink("block", "admin", "index=$index"), "<i class='icon-pencil'></i>", "class='btn btn-mini edit-block' data-toggle='modal'")?>
-                  <button class='btn btn-mini remove-block btn-danger' onclick='deleteBlock(<?php echo $index?>)'><i class='icon-remove'></i></button>
+                  <button class='btn btn-mini remove-block btn-danger'><i class='icon-remove'></i></button>
                 </div>
               </div>
               <div class='panel-body no-padding'>
