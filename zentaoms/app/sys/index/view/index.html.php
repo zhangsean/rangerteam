@@ -56,7 +56,7 @@ js::import($jsRoot . 'jquery/ips.js');
               <div class='panel-heading'>
                 <?php echo $block->name?>
                 <div class='custom-actions'>
-                  <?php echo html::a($this->createLink("block", "admin", "index=$index"), "<i class='icon-pencil'></i>", "class='btn btn-mini edit-block' data-toggle='modal'")?>
+                  <button class='btn btn-mini edit-block window-btn' data-name='<?php echo $block->name; ?>' data-icon='icon-pencil' data-url='<?php echo $this->createLink("block", "admin", "index=$index"); ?>'><i class='icon-pencil'></i></button>
                   <button class='btn btn-mini remove-block btn-danger'><i class='icon-remove'></i></button>
                 </div>
               </div>

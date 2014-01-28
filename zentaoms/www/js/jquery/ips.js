@@ -9,6 +9,7 @@
     var desktopPos       = {x: 60, y: 0};
     var fullscreenMode   = false;
     var windowIdSeed     = 0;
+    var windowIdTeamplate= 'WID{0}';
     var windowZIndexSeed = 100;
     var defaultWindowPos = {x: 110, y: 20};
     var entriesConfigs   = null;
@@ -43,7 +44,7 @@
         removedBlock                  : '区块已删除',
         orderdBlocksSaved             : '排序已保存',
         blocksEditTip                 : '开始编辑您的区块：拖动区块来排序，点击删除和编辑按钮来操作。',
-        windowHtmlTemplate            : "<div id='{idstr}' class='window{cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
+        windowHtmlTemplate            : "<div id='{idstr}' class='window{cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}' data-url='{url}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
         frameHtmlTemplate             : "<iframe id='iframe-{id}' name='iframe-{idstr}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
         leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a data-toggle="tooltip" data-placement="right"  href="javascript:;" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</a></li>',
         taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</button></li>',
@@ -136,7 +137,7 @@
             {
                 url           : '',
                 control       : 'simple',
-                id            : entryId || windowIdSeed++,
+                id            : entryId || windowIdTeamplate.format(windowIdSeed++),
                 zindex        : windowZIndexSeed++,
                 name          : 'No name entry',
                 open          : 'iframe',
@@ -245,7 +246,7 @@
             $('#taskbar .bar-menu').append(this.toTaskBarShortcutHtml());
             $('.app-btn[data-id="'+this.id+'"]').addClass('open');
 
-            return new Window(this.idstr);
+            return new Window(this);
         }
 
         this.init = function(options)
@@ -478,6 +479,22 @@
             else desktop.turnOnModalMode();
         }
 
+        this.open = function(options)
+        {
+            var config = $.extend(
+            {
+                id      : windowIdTeamplate.format(windowIdSeed++),
+                name    : '',
+                open    : 'iframe',
+                display : 'modal',
+                size    : 'default',
+                menu    : false,
+                control : 'full'
+            }, options);
+            var entry = new Entry(config);
+            this.openEntry(entry);
+        }
+
         this.beforeActive = function()
         {
             if(this.activedWindow)
@@ -581,18 +598,18 @@
         this.bindEvents();
     }
 
-    function Window(idStr)
+    function Window(entry)
     {
-        this.init = function(idStr)
+        this.init = function(entry)
         {
-            this.$ = $('#' + idStr);
+            this.$ = $('#' + entry.idstr);
 
-            if(this.$.length < 1) throw new Error('Can not find the window: ' + idStr + ' when init it.');
+            if(this.$.length < 1) throw new Error('Can not find the window: ' + entry.idstr + ' when init it.');
 
             this.idstr   = this.$.attr('id');
             this.id      = this.$.attr('data-id');
             this.isModal = this.$.hasClass('window-modal');
-            this.entry   = entries[this.$.attr('data-id')];
+            this.entry   = entry;
             this.getUrl();
 
             this.afterResized(true);
@@ -855,7 +872,7 @@
             // updateEntryUlr(win);
         }
 
-        this.init(idStr);
+        this.init(entry);
     }
 
     function StartMenu()
@@ -1119,7 +1136,19 @@
 
         this.bindEvents = function()
         {
-            $(document).on('click', '.app-btn', function(event)
+            $(document).on('click', '.window-btn', function(event)
+            {
+                var btn = $(this);
+                windows.open(
+                {
+                    url : btn.attr('href') || btn.attr('data-url'),
+                    open: btn.attr('data-open') || 'iframe', 
+                    icon: btn.attr('data-icon'), 
+                    name: btn.attr('data-name')
+                });
+                stopEvent(event);
+                return false;
+            }).on('click', '.app-btn', function(event)
             {
                 var entry = entries[$(this).attr('data-id')];
                 if(entry)
