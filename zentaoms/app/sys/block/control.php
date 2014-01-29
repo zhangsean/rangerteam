@@ -75,7 +75,7 @@ class block extends control
         $html = '';
         if($block->type == 'system') $html = $this->block->getSystem($block);
         if($block->type == 'rss')    $html = $this->block->getRss($block);
-        if($block->type == 'html')   $html = htmlspecialchars_decode($block->html);
+        if($block->type == 'html')   $html = "<div class='article-content'>" . htmlspecialchars_decode($block->html) .'</div>';
 
         die($html);
     }

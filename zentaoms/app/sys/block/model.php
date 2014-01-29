@@ -94,23 +94,25 @@ class blockModel extends model
         }
 
         $maxNum = $block->params->num == 0 ? count(current($itemTags)) : $block->params->num;
-        $html   = '';
+        $html   = "<div class='list-group'>";
         for($i = 0; $i < $maxNum; $i++)
         {
+            $title = '';
             foreach(array_keys($itemTags) as $tag)
             {
                 if($tag == 'title')
-                { 
-                    $html .= '<h5>' . html::a($itemTags['link'][$i], $itemTags[$tag][$i], "target='_blank'") . '</h5>';
+                {
+                    $title = $itemTags[$tag][$i];
                 }
                 elseif($tag == 'pubdate')
                 {
-                    $html .= "<div style='font-size:12px'>{$itemTags[$tag][$i]}</div>";
+                    $time = date('n-j H:s',strtotime($itemTags[$tag][$i]));
+                    $html .= "<a class='list-group-item' target='_blank' href='{$itemTags['link'][$i]}'><small class='text-muted pull-right'>{$time}</small><h5 class='list-group-item-heading small text-ellipsis'>{$title}</h5></a>";
                 }
             }
         }
 
-        return $html;
+        return $html . '</div>';
     }
 
     /**

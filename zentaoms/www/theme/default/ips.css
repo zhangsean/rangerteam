@@ -159,13 +159,15 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #home {position: relative;}
 #home [class^='col-'] {height: 266px; overflow: visible;}
 #home .panel {border-radius: 2px; box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);}
-#home .panel-heading {padding: 6px; height: 34px; font-weight: bold}
+#home .panel-heading {padding: 6px; height: 34px; font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
 #home .panel-body {height: 210px; overflow: auto;}
-#home .panels-container {max-width: 1600px; margin: 0 auto; padding: 0 5%; margin-top: 5%;}
+#home .panels-container {max-width: 1600px; margin: 0 auto; padding: 0 5%; margin-top: 75px;}
+#home .panel-body > .article-content {padding: 8px 10px;}
 #home .panel-body > .list-group {margin: 0;}
-#home .panel-body .list-group > .list-group-item {border-left: 0; border-right: 0;}
-#home .panel-body .list-group > .list-group-item:first-child {border-top: none;}
-#home .panel-body .list-group > .list-group-item:last-child {border-bottom: none;}
+#home .panel-body .list-group-item {border-left: 0; border-right: 0; padding: 8px;}
+#home .panel-body .list-group-item h5 {margin: 0}
+#home .panel-body .list-group-item:first-child {border-top: none;}
+#home .panel-body .list-group-item:last-child {border-bottom: none;}
 #home .panel .custom-actions {display: none; float: right; margin-top: -1px;}
 #home [class^='col-'], #home .panel, #home .panel-heading, #home .panel-body, #draggingPanel {transition: all .3s cubic-bezier(0.175,0.885,0.32,1);}
 #home.custom-mode .panel .custom-actions {display: block;}
