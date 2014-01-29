@@ -105,16 +105,17 @@ var entries = new Array(
     desc     : '<?php echo $lang->index->profile?>',
     display  : 'modal',
     size     : 'default',
-    menu     : false,
+    menu     : 'list',
     position : 'center',
-    control  : 'full'
+    control  : 'full',
+
 },
 {
     id       : 'allapps',
     name     : '<?php echo $lang->index->allEntries?>',
     display  : 'fullscreen',
     desc     : '<?php echo $lang->index->allEntries?>',
-    menu     : true,
+    menu     : 'menu',
     icon     : 'icon-th-large'
 },
 {

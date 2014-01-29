@@ -110,7 +110,7 @@
                 position : 'default',
                 icon     : null,
                 cssclass : '',
-                menu     : true // wethear show in left menu bar
+                menu     : 'all' // wethear show in left menu bar
             };
 
             return d;
@@ -169,8 +169,8 @@
             }
             else if(this.size == 'max')
             {
-                this.width  = desktop.width;
-                this.height = desktop.height;
+                this.width     = desktop.width;
+                this.height    = desktop.height;
                 this.position  = desktop.position;
             }
 
@@ -330,7 +330,7 @@
                 this.height = this.size.height;
 
                 /* refresh app menu size */
-                var menu = this.$menu;
+                var menu       = this.$menu;
                 var iconHeight = menu.find('li').height();
                 var menuHeight = this.height - this.$bottombar.height();
                 if(iconHeight > 0)
@@ -1114,8 +1114,8 @@
             for(var index in entries)
             {
                 var et = entries[index];
-                if(et.menu) this.$appsMenu.append(et.toLeftBarShortcutHtml());
-                this.$allAppsList.append(et.toentryListShortcutHtml());
+                if(et.menu == 'menu' || et.menu == 'all') this.$appsMenu.append(et.toLeftBarShortcutHtml());
+                if(et.menu == 'all' || et.menu == 'list') this.$allAppsList.append(et.toentryListShortcutHtml());
             }
         }
 
@@ -1195,7 +1195,7 @@
                 if (event.button == 2 || event.button == 3)
                 {
                     event.cancelBubble = true
-                    event.returnValue = false;
+                    event.returnValue  = false;
                     return false;
                 }
             }
