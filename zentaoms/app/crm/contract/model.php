@@ -12,6 +12,26 @@
 class contractModel extends model
 {
     /**
+     * Get contract by ID.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return object.
+     */
+    public function getByID($contractID)
+    {
+        $contract = $this->dao->select('*')->from(TABLE_CONTRACT)->where('id')->eq($contractID)->fetch();
+        if($contract)
+        {
+            $contract->order = array();
+            $contractOrders = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->fetchAll();
+            foreach($contractOrders as $contractOrder) $contract->order[] = $contractOrder->order;
+        }
+
+        return $contract;
+    }
+
+    /**
      * Get contract list.
      * 
      * @param  string $orderBy 
@@ -66,5 +86,45 @@ class contractModel extends model
         }
 
         return false;
+    }
+
+    /**
+     * Update contract.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return bool
+     */
+    public function update($contractID)
+    {
+        $now      = helper::now();
+        $contract = $this->getByID($contractID);
+        $data     = fixer::input('post')
+            ->add('editedBy', $this->app->user->account)
+            ->add('editedDate', $now)
+            ->setDefault('order', array())
+            ->setDefault('begin', '0000-00-00')
+            ->setDefault('end', '0000-00-00')
+            ->get();
+
+        $this->dao->update(TABLE_CONTRACT)->data($data, 'order,uid')
+            ->where('id')->eq($contractID)
+            ->autoCheck()
+            ->check('order', 'notempty')
+            ->check('code', 'unique', "id!={$contractID}")
+            ->check('code', 'code')
+            ->exec();
+        
+        if(!dao::isError() and $contract->order != $data->order)
+        {
+            $this->dao->delete()->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->exec();
+            foreach($data->order as $orderID)
+            {
+                $contractOrder = new stdclass();
+                $contractOrder->contract = $contractID;
+                $contractOrder->order    = $orderID;
+                $this->dao->insert(TABLE_CONTRACTORDER)->data($contractOrder)->exec();
+            }
+        }
     }
 }

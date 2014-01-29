@@ -57,7 +57,7 @@ class contract extends control
         {
             $createID = $this->contract->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'locate' => inlink('browse')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
         $orderID = explode(',', $orderID);
@@ -69,6 +69,23 @@ class contract extends control
         $this->view->order     = $this->order->getByID($orderID[0]);
         $this->view->amount    = $this->order->getAmount($orderID);
         $this->view->orderID   = $orderID;
+        $this->display();
+    }
+
+    public function edit($contractID)
+    {
+        if($_POST)
+        {
+            $this->contract->update($contractID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->contract = $this->contract->getByID($contractID);
+        $this->view->orders    = $this->loadModel('order')->getPairs();
+        $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->contacts  = $this->loadModel('contact')->getPairs();
+        $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
     }
 }
