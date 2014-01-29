@@ -72,6 +72,13 @@ class contract extends control
         $this->display();
     }
 
+    /**
+     * Edit contract.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return void
+     */
     public function edit($contractID)
     {
         if($_POST)
@@ -87,6 +94,20 @@ class contract extends control
         $this->view->contacts  = $this->loadModel('contact')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
+    }
+
+    /**
+     * Delete contract. 
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return void
+     */
+    public function delete($contractID)
+    {
+        $this->contract->delete($contractID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success'));
     }
 }
 

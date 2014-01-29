@@ -127,4 +127,18 @@ class contractModel extends model
             }
         }
     }
+
+    /**
+     * Delete contract.
+     * 
+     * @param  int    $contractID 
+     * @param  string $table 
+     * @access public
+     * @return void
+     */
+    public function delete($contractID, $table = null)
+    {
+        $this->dao->delete()->from(TABLE_CONTRACT)->where('id')->eq($contractID)->exec();
+        $this->dao->delete()->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->exec();
+    }
 }
