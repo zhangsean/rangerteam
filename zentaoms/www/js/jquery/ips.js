@@ -45,7 +45,7 @@
         orderdBlocksSaved             : '排序已保存',
         blocksEditTip                 : '开始编辑您的区块：拖动区块来排序，点击删除和编辑按钮来操作。',
         windowHtmlTemplate            : "<div id='{idstr}' class='window{cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}' data-url='{url}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
-        frameHtmlTemplate             : "<iframe id='iframe-{id}' name='iframe-{idstr}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
+        frameHtmlTemplate             : "<iframe id='iframe-{id}' name='iframe-{id}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
         leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a data-toggle="tooltip" data-placement="right"  href="javascript:;" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</a></li>',
         taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</button></li>',
         taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu' id='taskMenu'><li><a href='###' class='reload-win'><i class='icon-repeat'></i> &nbsp;{reloadWindowText}</a></li><li><a href='###' class='close-win'><i class='icon-remove'></i> &nbsp;{closeWindowText}</a></li></ul>",
@@ -70,16 +70,6 @@
         defaults.init(); // init default settings
 
         $.extend(settings, defaults, options);
-
-        /* test: print settings */
-        // if(debug)
-        // {
-        //     console.log('> settings | length:' + Object.getOwnPropertyNames(settings).length);
-        //     for (var key in settings)
-        //     {
-        //         console.log('  * ' + key + ': ' + settings[key]);
-        //     }
-        // }
     };
 
     /*
@@ -94,60 +84,33 @@
         for(var i in entriesConfigs)
         {
             var config = entriesConfigs[i];
-            entries[config.id] = new Entry(config);
+            entries[config.id] = new entry(config);
         }
-
-        /* test print entrys config */
-        // if(debug)
-        // {
-        //     console.log('> entries | length:' + Object.getOwnPropertyNames(entries).length);
-        //     for (var key in entries)
-        //     {
-        //         var e = entries[key];
-        //         console.log('  * > ' + key + ':');
-        //         for(var ikey in e)
-        //         {
-        //             if(!$.isFunction(e[ikey]))
-        //             {
-        //                 var value = e[ikey];
-        //                 if(ikey == 'size')
-        //                 {
-        //                     value = '{width: ' + value.width + ', height:' + value.height + '}';
-        //                 }
-        //                 else if(ikey == 'position' && value && value.hasOwnProperty('x'))
-        //                 {
-        //                     value = '{x: ' + value.x + ', y:' + value.y + '}';
-        //                 }
-        //                 console.log('        * ' + ikey + ': ' + value);
-        //             }
-        //         }
-        //     }
-        // }
     };
 
     /* entry 
      *
      * @return void
      */
-    function Entry(options)
+    function entry(options)
     {
         this.getDefaults = function(entryId)
         {
             var d =
             {
-                url           : '',
-                control       : 'simple',
-                id            : entryId || windowIdTeamplate.format(windowIdSeed++),
-                zindex        : windowZIndexSeed++,
-                name          : 'No name entry',
-                open          : 'iframe',
-                desc          : '',
-                display       : 'fixed',
-                size          : 'max',
-                position      : 'default',
-                icon          : null,
-                cssclass      : '',
-                menu          : true // wethear show in left menu bar
+                url      : '',
+                control  : 'simple',
+                id       : entryId || windowIdTeamplate.format(windowIdSeed++),
+                zindex   : windowZIndexSeed++,
+                name     : 'No name entry',
+                open     : 'iframe',
+                desc     : '',
+                display  : 'fixed',
+                size     : 'max',
+                position : 'default',
+                icon     : null,
+                cssclass : '',
+                menu     : true // wethear show in left menu bar
             };
 
             return d;
@@ -234,7 +197,7 @@
             if(this.display != 'modal') return settings.taskBarShortcutHtmlTemplate.format(this);
         };
 
-        this.toEntryListShortcutHtml = function()
+        this.toentryListShortcutHtml = function()
         {
             return settings.entryListShortcutHtmlTemplate.format(this);
         }
@@ -254,7 +217,7 @@
             if(!desktop)
             {
                 var w = $(window);
-                desktop = {x: desktopPos.x, y: desktopPos.y, width: w.width(), height: w.height()};
+                desktop = {x: desktopPos.x, y: desktopPos.y, width: w.width() - desktopPos.x, height: w.height() - desktopPos.y};
             }
 
             /* extend options from params */
@@ -315,7 +278,7 @@
         this.init(options);
     }
 
-    function Desktop()
+    function desktopManager()
     {
         this.cancelFullscreenMode = function()
         {
@@ -340,9 +303,9 @@
 
         this.init = function()
         {
-            this.position       = desktopPos;
-            this.x              = desktopPos.x;
-            this.y              = desktopPos.y;
+            this.position  = desktopPos;
+            this.x         = desktopPos.x;
+            this.y         = desktopPos.y;
 
             this.$          = $('#desktop');
             this.$menu      = $('#apps-menu');
@@ -350,11 +313,11 @@
 
             this.isFullscreenMode = this.$.hasClass('fullscreen-mode');
             
-            this.menu           = new Menu();
-            this.shortcuts      = new Shortcuts();
-            this.startMenu      = new StartMenu();
-            this.fullScreenApps = new FullScreenApps();
-            windows             = new Windows();
+            this.menu           = new menu();
+            this.shortcuts      = new shortcuts();
+            this.startMenu      = new startMenu();
+            this.fullScreenApps = new fullScreenApps();
+            windows             = new windowsManager();
         }
 
         this.bindEvents = function()
@@ -381,6 +344,7 @@
 
                 /* refresh entry window size */
                 windows.afterBrowserResized();
+                this.fullScreenApps.afterBrowserResized();
             }, this)).resize();
 
             $(document).on('click', '[data-toggle-class]', function()
@@ -397,7 +361,7 @@
         this.bindEvents();
     }
 
-    function Windows()
+    function windowsManager()
     {
         this.init = function()
         {
@@ -444,26 +408,26 @@
             if(this.activedWindow) this.activedWindow.reload();
         }
 
-        this.openEntry = function(entry)
+        this.openentry = function(et)
         {
-            if(!entry)
+            if(!et)
             {
                 alert(settings.entryNotFindTip);
                 return;
             }
 
-            var win = this.set[entry.idstr];
+            var win = this.set[et.idstr];
 
             if(!win)
             {
-                if(entry.open == 'blank')
+                if(et.open == 'blank')
                 {
-                    window.open(entry.url);
+                    window.open(et.url);
                     return;
                 }
 
-                win = entry.createWindow();
-                this.set[entry.idstr] = win;
+                win = et.createWindow();
+                this.set[et.idstr] = win;
                 win.reload();
                 win.active();
             }
@@ -475,7 +439,7 @@
             else win.show();
 
 
-            if(entry.display != 'modal') desktop.cancelFullscreenMode();
+            if(et.display != 'modal') desktop.cancelFullscreenMode();
             else desktop.turnOnModalMode();
         }
 
@@ -491,8 +455,8 @@
                 menu    : false,
                 control : 'full'
             }, options);
-            var entry = new Entry(config);
-            this.openEntry(entry);
+            var et = new entry(config);
+            this.openentry(et);
         }
 
         this.beforeActive = function()
@@ -598,18 +562,19 @@
         this.bindEvents();
     }
 
-    function Window(entry)
+    function Window(et)
     {
-        this.init = function(entry)
+        this.init = function(et)
         {
-            this.$ = $('#' + entry.idstr);
+            this.$ = $('#' + et.idstr);
 
-            if(this.$.length < 1) throw new Error('Can not find the window: ' + entry.idstr + ' when init it.');
+            if(this.$.length < 1) throw new Error('Can not find the window: ' + et.idstr + ' when init it.');
 
             this.idstr   = this.$.attr('id');
             this.id      = this.$.attr('data-id');
             this.isModal = this.$.hasClass('window-modal');
-            this.entry   = entry;
+            this.entry   = et;
+            this.indexUrl= et.url;
             this.getUrl();
 
             this.afterResized(true);
@@ -733,6 +698,7 @@
         {
             var fName = 'iframe-' + this.id;
             var frame = $('#' + fName);
+            console.log(fName);
             if(frame.length > 0)
             {
                 try
@@ -753,25 +719,28 @@
             {
                 this.$.removeClass('window-loading').find('.reload-win i').removeClass('icon-spin');
 
-                try
+                var $frame = $(window.frames[fName].document);
+
+                console.log(fName);
+                
+                if($frame)
                 {
-                    var $frame = $(window.frames[fName].document);
-                    
-                    if($frame)
-                    {
-                        this.url = $frame.context.URL;
-                        this.$.attr('data-url', this.url);
-                        if(this.entry) entry.currentUrl = this.url;
-                    }
-
-                    if(this.url == undefined) this.url = indexUrl;
-                    try{window.history.pushState({}, 0, this.url);}catch(e){}
-
-                    // $frame.unbind('keydown', handleWindowKeydown).keydown(handleWindowKeydown).data('data-id', this.idStr);
+                    this.url = $frame.context.URL;
+                    this.$.attr('data-url', this.url);
+                    if(this.entry) this.entry.currentUrl = this.url;
                 }
-                catch(e){}
+
+                this.updateEntryUrl();
+
+                $frame.unbind('keydown', windows.handleWindowKeydown).keydown(windows.handleWindowKeydown).data('data-id', this.idStr);
             }, this));
             return true;
+        }
+
+        this.updateEntryUrl = function()
+        {
+            var url = this.url || this.indexUrl;
+            try{window.history.pushState({}, 0, this.url);}catch(e){}
         }
 
         this.close = function()
@@ -864,18 +833,28 @@
             $('.app-btn.active, .fullscreen-btn.active').removeClass('active');
             $('.app-btn[data-id="' + this.id + '"]').addClass('active');
 
-            if(this.isActive()) return;
+            console.log(this);
+
+            if(this.isActive())
+            {
+                if(this.isHide())
+                {
+                    this.show();
+                }
+                return;
+            }
 
             windows.beforeActive();
             this.$.addClass('window-active').css('z-index',parseInt(this.$.css('z-index')) + 10000);
             windows.activedWindow = this;
-            // updateEntryUlr(win);
+            
+            this.updateEntryUrl();
         }
 
-        this.init(entry);
+        this.init(et);
     }
 
-    function StartMenu()
+    function startMenu()
     {
         this.init = function()
         {
@@ -894,10 +873,12 @@
         this.init();
     }
 
-    function FullScreenApps()
+    function fullScreenApps()
     {
         this.init = function()
         {
+            this.$fullscreens = $('.fullscreen');
+
             this.handleAllApps();
             this.handleHomeBlocks();
         }
@@ -1095,9 +1076,8 @@
 
         this.hide = function(id)
         {
-
             $('.fullscreen-btn[data-id="' + id + '"],.app-btn[data-id="' + id + '"]').removeClass('active');
-
+            desktop.cancelFullscreenMode();
             windows.active();
         }
 
@@ -1107,11 +1087,16 @@
             else this.show(id);
         }
 
+        this.afterBrowserResized = function()
+        {
+            this.$fullscreens.width(desktop.width).height(desktop.height).css({left: desktop.x, top: desktop.y});;
+        }
+
         this.init();
         this.bindEvents();
     }
 
-    function Shortcuts()
+    function shortcuts()
     {
         this.init = function()
         {
@@ -1128,9 +1113,9 @@
         {
             for(var index in entries)
             {
-                var entry = entries[index];
-                if(entry.menu) this.$appsMenu.append(entry.toLeftBarShortcutHtml());
-                this.$allAppsList.append(entry.toEntryListShortcutHtml());
+                var et = entries[index];
+                if(et.menu) this.$appsMenu.append(et.toLeftBarShortcutHtml());
+                this.$allAppsList.append(et.toentryListShortcutHtml());
             }
         }
 
@@ -1150,11 +1135,11 @@
                 return false;
             }).on('click', '.app-btn', function(event)
             {
-                var entry = entries[$(this).attr('data-id')];
-                if(entry)
+                var et = entries[$(this).attr('data-id')];
+                if(et)
                 {
-                    if(entry.display == 'fullscreen') desktop.fullScreenApps.toggle(entry.id);
-                    else windows.openEntry(entry);
+                    if(et.display == 'fullscreen') desktop.fullScreenApps.toggle(et.id);
+                    else windows.openentry(et);
                 }
                 else
                 {
@@ -1219,7 +1204,7 @@
         this.init();
     }
 
-    function Menu()
+    function menu()
     {
         this.init = function()
         {
@@ -1273,15 +1258,15 @@
         initSettings(options);
         initEntries(entriesOptions);
 
-        desktop = new Desktop();
+        desktop = new desktopManager();
     }
 
-    // function closeModal()
-    // {
-    //     closeWindow($('#modalContainer .window').attr('id'));
-    // }
+    function closeModal()
+    {
+        windows.close($('#modalContainer .window').attr('id'));
+    }
 
     /* make jquery object call the ips interface manager */
-    $.extend({ipsStart: start});
+    $.extend({ipsStart: start, closeModal: closeModal});
 
 }(jQuery,window,document,Math);
