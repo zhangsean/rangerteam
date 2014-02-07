@@ -9,16 +9,16 @@
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <th><?php echo $lang->product->action->action;?></th>
+        <th class='w-100px'><?php echo $lang->product->action->action;?></th>
         <th><?php echo $lang->product->action->name;?></th>
         <th style='width: 200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
       <?php foreach($actions as $action):?>
-      <tr class='text-center'>
-        <td class='text-left'><?php echo $action->action;?></td>
-        <td class='text-left'><?php echo $action->name;?></td>
+      <tr>
+        <td><?php echo $action->action;?></td>
+        <td><?php echo $action->name;?></td>
         <td>
           <?php
           echo html::a($this->createLink('product', 'editAction', "actionID=$action->id"), $lang->edit, "class='editr'");

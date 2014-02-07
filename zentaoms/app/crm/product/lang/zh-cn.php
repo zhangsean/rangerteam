@@ -83,6 +83,13 @@ $lang->product->action->admin           = '流程';
 $lang->product->action->create          = '添加动作';
 $lang->product->action->edit            = '编辑动作';
 $lang->product->action->adminConditions = '动作条件';
+$lang->product->action->adminInputs     = '动作输入项';
+$lang->product->action->adminTasks      = '动作触发任务设置';
+
+$lang->product->task = new stdclass();
+$lang->product->task->role = '角色';
+$lang->product->task->date = '时间';
+$lang->product->task->name = '名称';
 
 $lang->product->task = new stdclass();
 $lang->product->task->role = '角色';
