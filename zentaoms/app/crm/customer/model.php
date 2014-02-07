@@ -80,4 +80,43 @@ class customerModel extends model
 
         return true;
     }
+
+    /**
+     * Update a customer.
+     * 
+     * @param  int    $customerID 
+     * @access public
+     * @return void
+     */
+    public function update($customerID)
+    {
+        $customer = fixer::input('post')
+            ->add('editedBy', $this->app->user->account)
+            ->add('editedDate', helper::now())
+            ->get();
+
+        $this->dao->update(TABLE_CUSTOMER)
+            ->data($customer)
+            ->autoCheck()
+            ->where('id')->eq($customerID)
+            ->exec();
+
+        if(dao::isError()) return false;
+
+        return !dao::isError();
+    }
+
+    /**
+     * Delete a customer.
+     *
+     * @param  int    $customerID
+     * @access public 
+     * @return void
+     */
+    public function delete($customerID, $table = null)
+    {
+        $this->dao->delete()->from(TABLE_CUSTOMER)->where('id')->eq($customerID)->exec();
+
+        return !dao::isError();
+    }
 }

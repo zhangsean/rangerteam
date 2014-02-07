@@ -63,4 +63,41 @@ class customer extends control
         $this->view->title = $this->lang->customer->create;
         $this->display();
     }
+
+    /**
+     * Edit a customer.
+     * 
+     * @param  int    $customerID 
+     * @access public
+     * @return void
+     */
+    public function edit($customerID)
+    {
+        if($_POST)
+        {
+            $this->customer->update($customerID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $customer = $this->customer->getByID($customerID);
+
+        $this->view->title    = $this->lang->customer->edit;
+        $this->view->customer = $customer;
+
+        $this->display();
+    }
+
+    /**
+     * Delete a customer.
+     *
+     * @param  int    $customerID
+     * @access public
+     * @return void
+     */
+    public function delete($customerID)
+    {
+        if($this->customer->delete($customerID)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
 }
