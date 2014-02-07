@@ -93,7 +93,7 @@ class contact extends control
     /**
      * Delete a contact.
      *
-     * @param int $contactID
+     * @param  int    $contactID
      * @access public
      * @return void
      */
