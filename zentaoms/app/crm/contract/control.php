@@ -88,7 +88,7 @@ class contract extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $this->view->contract = $this->contract->getByID($contractID);
+        $this->view->contract  = $this->contract->getByID($contractID);
         $this->view->orders    = $this->loadModel('order')->getPairs();
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->contacts  = $this->loadModel('contact')->getPairs();
@@ -110,4 +110,3 @@ class contract extends control
         $this->send(array('result' => 'success'));
     }
 }
-
