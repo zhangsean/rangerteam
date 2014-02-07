@@ -1,11 +1,9 @@
-/* ips lib */
+/* Ips lib */
 +function($, window, document, Math)
 {
     "use strict";
 
-    var debug = true;
-
-    /* global variables */
+    /* Global variables */
     var desktopPos       = {x: 60, y: 0};
     var fullscreenMode   = false;
     var windowIdSeed     = 0;
@@ -18,10 +16,10 @@
     var windows          = null;
     var windowIdPrefix   = 'win-';
 
-    /* record the index url */
+    /* Save the index url */
     var indexUrl         = window.location.href;
 
-    /* the default configs */
+    /* The default global settings */
     var defaults =
     {
         autoHideMenu                  : false,
@@ -58,11 +56,12 @@
         }
     };
 
-    /* global setting */
+    /* Global setting */
     var settings = {};
 
-    /* Ips function: Init Settings
+    /* Initialize the settings
      *
+     * @param  object options
      * @retrun void
      */
     function initSettings(options)
@@ -73,8 +72,9 @@
     };
 
     /*
-     * Ips function: Init Entries objects
+     * Initialize the entries options
      *
+     * @param  array entriesOptions
      * @return void
      */
     function initEntries(entriesOptions)
@@ -88,12 +88,17 @@
         }
     };
 
-    /* entry 
+    /**
+     * The entry object
      *
-     * @return void
+     * Create a entry object, example: 'var et = new entry({});'
+     * A entry object stored the entry options and has a method to create a window object
+     * 
+     * @param object options
      */
     function entry(options)
     {
+        /* Get default options */
         this.getDefaults = function(entryId)
         {
             var d =
@@ -116,9 +121,10 @@
             return d;
         }
 
+        /* Reset the postion and size after initialized */
         this.resetPosSize = function()
         {
-            /* init size setting */
+            /* Init size setting */
             if(this.size == 'default')
             {
                 this.width  = settings.defaultWindowSize.width;
@@ -138,7 +144,7 @@
                 if(this.cssclass.indexOf(' window-max') < 0) this.cssclass += ' window-max';
             }
 
-            /* init position setting */
+            /* Init position setting */
             if(this.position == 'center')
             {
                 this.left = Math.max(desktop.x, desktop.x + (desktop.width - this.width)/2);
@@ -156,10 +162,11 @@
                 this.top  = defaultWindowPos.y;
             }
 
-            /* decide the window can be movable */
+            /* Decide the window can be movable */
             if(this.display != 'fixed' && this.size != 'max' && this.cssclass.indexOf(' window-movable') < 0) this.cssclass += ' window-movable';
         }
 
+        /* Recaculate the postion and size before create window */
         this.reCalPosSize = function()
         {
             if(this.size.width != undefined && this.size.height != undefined)
@@ -181,27 +188,32 @@
             }
         }
 
+        /* Transform the entry to window html tags from template */
         this.toWindowHtml = function()
         {
             this.reCalPosSize();
             return settings.windowHtmlTemplate.format(this);
         };
 
+        /* Transform to shortcut html tag show in left bar from teamplte */
         this.toLeftBarShortcutHtml = function()
         {
             if(this.menu) return settings.leftBarShortcutHtmlTemplate.format(this);
         };
 
+        /* Transform to shortcut html tag show in task bar form template */
         this.toTaskBarShortcutHtml = function()
         {
             if(this.display != 'modal') return settings.taskBarShortcutHtmlTemplate.format(this);
         };
 
+        /* Transform to shortcut html tag in entry list form template */
         this.toentryListShortcutHtml = function()
         {
             return settings.entryListShortcutHtmlTemplate.format(this);
         }
 
+        /* Create a window object */
         this.createWindow = function()
         {
             if(this.display == 'modal') $('#modalContainer').append(this.toWindowHtml());
@@ -209,9 +221,10 @@
             $('#taskbar .bar-menu').append(this.toTaskBarShortcutHtml());
             $('.app-btn[data-id="'+this.id+'"]').addClass('open');
 
-            return new Window(this);
+            return new windowx(this);
         }
 
+        /* Initialize */
         this.init = function(options)
         {
             if(!desktop)
@@ -278,8 +291,14 @@
         this.init(options);
     }
 
+    /**
+     * The desktop Manager Object
+     *
+     * Manage the windows, menu, shortcuts and fullscreen apps
+     */
     function desktopManager()
     {
+        /* Turn off the fullscreen mode */
         this.cancelFullscreenMode = function()
         {
             this.$.removeClass('fullscreen-mode');
@@ -288,6 +307,7 @@
             $('.fullscreen-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class'))});
         }
 
+        /* Turn on the fullscreen mode */
         this.turnOnFullscreenMode = function()
         {
             this.$.addClass('fullscreen-mode');
@@ -296,11 +316,13 @@
             $('.fullscreen-btn, .app-btn').each(function(){$(this).removeClass($(this).attr('data-toggle-class')).removeClass('active')});
         }
 
+        /* Turn on the modal mode */
         this.turnOnModalMode = function()
         {
             this.$.addClass('modal-mode');
         }
 
+        /* Initialize */
         this.init = function()
         {
             this.position  = desktopPos;
@@ -320,6 +342,7 @@
             windows             = new windowsManager();
         }
 
+        /* Bind events */
         this.bindEvents = function()
         {
             $(window).resize($.proxy(function() // handle varables when window size changed
@@ -361,8 +384,14 @@
         this.bindEvents();
     }
 
+    /**
+     * The Windows Manager Object
+     *
+     * Manage alll windows showed on desktop
+     */
     function windowsManager()
     {
+        /* Initialize */
         this.init = function()
         {
             this.movingWindow     = null;
@@ -371,11 +400,13 @@
             this.set              = new Array();
         }
 
+        /* Query window object, the query id can be window id or entry id */
         this.query = function(q)
         {
             return this.set[q] || this.set[settings.windowidstrTemplate.format(q)] || this.activedWindow;
         }
 
+        /* Active a window with query id*/
         this.active = function(q)
         {
             var win = this.query(q);
@@ -384,11 +415,13 @@
             win.active();
         }
 
+        /* Re-active the last actived window */
         this.activeLastWindow = function()
         {
             if(this.lastActiveWindow) this.lastActiveWindow.active();
         }
 
+        /* Close a window */
         this.close = function(q)
         {
             var win = this.query(q);
@@ -403,12 +436,14 @@
             }
         }
 
+        /* Reload the actived window */
         this.reload = function()
         {
             if(this.activedWindow) this.activedWindow.reload();
         }
 
-        this.openentry = function(et)
+        /* Open a entry window */
+        this.openEntry = function(et)
         {
             if(!et)
             {
@@ -443,6 +478,7 @@
             else desktop.turnOnModalMode();
         }
 
+        /* Open a temporary entry window, entry options required */
         this.open = function(options)
         {
             var config = $.extend(
@@ -456,9 +492,10 @@
                 control : 'full'
             }, options);
             var et = new entry(config);
-            this.openentry(et);
+            this.openEntry(et);
         }
 
+        /* Handle status before window active */
         this.beforeActive = function()
         {
             if(this.activedWindow)
@@ -476,6 +513,7 @@
             }
         }
 
+        /* Bind events */
         this.bindEvents = function()
         {
             $(document).on('click', '.window', function() // active by click a non actived window
@@ -541,6 +579,7 @@
             });
         }
 
+        /* Handle window key down event */
         this.handleWindowKeydown = function(event)
         {
             if(event.keyCode == 116)
@@ -550,6 +589,7 @@
             }
         }
 
+        /* Handle the status after browser size changed */
         this.afterBrowserResized = function()
         {
             for(var i in this.set)
@@ -562,8 +602,17 @@
         this.bindEvents();
     }
 
-    function Window(et)
+    /**
+     * The Window Object
+     *
+     * A window object to manage the window behavior and store the window status
+     * Be deleted after closed
+     *
+     * @param object entry
+     */
+    function windowx(et)
     {
+        /* Initialize */
         this.init = function(et)
         {
             this.$ = $('#' + et.idstr);
@@ -580,53 +629,63 @@
             this.afterResized(true);
         }
 
+        /* Determine whether has the given class */
         this.hasClass = function(c)
         {
             return this.$.hasClass(c);
         }
 
+        /* Determine whether the window is hiding(Mminimized) */
         this.isHide = function()
         {
             return this.hasClass('window-min');
         }
 
+        /* Determine whether the window is loading content */
         this.isLoading = function()
         {
             return this.hasClass('window-loading');
         }
 
+        /* Determine whether the window is fullscreen */
         this.isFullscreen = function()
         {
             return this.hasClass('window-fullscreen');
         }
 
+        /* Determine whether the window is maximized */
         this.isMax = function()
         {
             return this.hasClass('window-max');
         }
 
+        /* Determine whether the window is fixed size */
         this.isFixed = function()
         {
             return this.hasClass('window-fixed');
         }
 
+        /* Determine whether the window is actived */
         this.isActive = function()
         {
             return this.hasClass('window-active');
         }
 
+        /* Get the current content url */
         this.getUrl = function()
         {
             this.url = this.$.attr('data-url') || this.entry.url;
             return this.url;
         }
 
+        /* Show or hide the window */
         this.toggle = function()
         {
             if(this.isHide()) this.show();
             else this.hide();
         }
 
+        /* Hide the window by miximized */
         this.hide = function(silence)
         {
             if(!this.isHide())
@@ -637,6 +696,7 @@
             }
         }
 
+        /* Show the window */
         this.show = function()
         {
             if(this.isHide())
@@ -646,6 +706,7 @@
             this.active();
         }
 
+        /* Reload the content */
         this.reload = function()
         {
             if(!this.isLoading())
@@ -671,6 +732,7 @@
             }
         }
 
+        /* Load content with ajax */
         this.loadHtml = function()
         {
             var content = this.$.find('.window-content').html('');
@@ -694,6 +756,7 @@
             });
         }
 
+        /* Load content with iframe */
         this.loadIframe = function()
         {
             var fName = 'iframe-' + this.id;
@@ -737,12 +800,14 @@
             return true;
         }
 
+        /* Update address bar when content url changed */
         this.updateEntryUrl = function()
         {
             var url = this.url || this.indexUrl;
             try{window.history.pushState({}, 0, this.url);}catch(e){}
         }
 
+        /* Close the window */
         this.close = function()
         {
             var win = this.$;
@@ -772,6 +837,7 @@
             if(!this.isModal) windows.activeLastWindow();
         }
 
+        /* Change the window status to maximized or normal */
         this.toggleSize = function()
         {
             var win = this.$;
@@ -808,6 +874,7 @@
             this.afterResized(true);
         }
 
+        /* Handle status after window size changed */
         this.afterResized = function(onlyAppSize)
         {
             if(!onlyAppSize)
@@ -828,6 +895,7 @@
             this.$.find('.window-content').height(this.$.height() - offset);
         }
 
+        /* Active the window */
         this.active = function()
         {
             $('.app-btn.active, .fullscreen-btn.active').removeClass('active');
@@ -854,8 +922,12 @@
         this.init(et);
     }
 
+    /**
+     * The start menu Object
+     */
     function startMenu()
     {
+        /* Initialize */
         this.init = function()
         {
             $(document).click(function()
@@ -873,8 +945,12 @@
         this.init();
     }
 
+    /**
+     * The fullscreen manager
+     */
     function fullScreenApps()
     {
+        /* Initialize */
         this.init = function()
         {
             this.$fullscreens = $('.fullscreen');
@@ -883,6 +959,7 @@
             this.handleHomeBlocks();
         }
 
+        /* Bind events */
         this.bindEvents = function()
         {
             $('.fullscreen-btn').click(function()
@@ -891,6 +968,7 @@
             });
         }
 
+        /* Handle the app: all app list */
         this.handleAllApps = function()
         {
             $('#search').keyup(function(e)
@@ -949,6 +1027,7 @@
             }
         }
 
+        /* Handle the app: home blocks */
         this.handleHomeBlocks = function()
         {
             var msg = null;
@@ -1064,6 +1143,7 @@
             });
         }
 
+        /* Show a fullscreen app window */
         this.show = function(id)
         {
             desktop.turnOnFullscreenMode();
@@ -1074,6 +1154,7 @@
             if(id == 'allapps') $('#search').focus();
         }
 
+        /* Hide a fullscreen app window */
         this.hide = function(id)
         {
             $('.fullscreen-btn[data-id="' + id + '"],.app-btn[data-id="' + id + '"]').removeClass('active');
@@ -1081,12 +1162,14 @@
             windows.active();
         }
 
+        /* Show or hide a fullscreen app window */
         this.toggle = function(id)
         {
             if($('#' + id).hasClass('fullscreen-active')) this.hide(id);
             else this.show(id);
         }
 
+        /* Handle status after browser size changed */
         this.afterBrowserResized = function()
         {
             this.$fullscreens.width(desktop.width).height(desktop.height).css({left: desktop.x, top: desktop.y});;
@@ -1096,8 +1179,12 @@
         this.bindEvents();
     }
 
+    /**
+     * Manager the shortcuts
+     */
     function shortcuts()
     {
+        /* Initialize */
         this.init = function()
         {
             this.$leftBar     = $('#leftBar');
@@ -1105,11 +1192,12 @@
             this.$allAppsList = $("#allAppsList .bar-menu");
             this.$taskMenu    = $('#taskMenu');
 
-            this.showShortcuts();
+            this.showAll();
             this.bindEvents();
         }
 
-        this.showShortcuts = function()
+        /* Show all shortcuts */
+        this.showAll = function()
         {
             for(var index in entries)
             {
@@ -1119,6 +1207,7 @@
             }
         }
 
+        /* Bind events */
         this.bindEvents = function()
         {
             $(document).on('click', '.window-btn', function(event)
@@ -1139,7 +1228,7 @@
                 if(et)
                 {
                     if(et.display == 'fullscreen') desktop.fullScreenApps.toggle(et.id);
-                    else windows.openentry(et);
+                    else windows.openEntry(et);
                 }
                 else
                 {
@@ -1204,8 +1293,12 @@
         this.init();
     }
 
+    /**
+     * The menu object
+     */
     function menu()
     {
+        /* Initialize */
         this.init = function()
         {
             this.$leftBar = $('#leftBar');
@@ -1214,13 +1307,14 @@
             {
                 this.$leftBar.addClass('menu-auto');
                 desktop.position.x = 2;
-                setTimeout(this.hideMenu, 2000);
+                setTimeout(this.hide, 2000);
 
-                this.$leftBar.addClass('menu-auto').mouseover(this.showMenu).mouseout(this.hideMenu);;
+                this.$leftBar.addClass('menu-auto').mouseover(this.show).mouseout(this.hide);;
             }
         }
 
-        this.hideMenu = function()
+        /* Hide the menu */
+        this.hide = function()
         {
             var $leftBar = desktop.menu.$leftBar;
             $leftBar.removeClass('menu-show');
@@ -1234,7 +1328,8 @@
             }, 1000);
         }
 
-        this.showMenu = function()
+        /* Show the menu */
+        this.show = function()
         {
             desktop.menu.$leftBar.removeClass('menu-hide').addClass('menu-show');
             setTimeout(function(){$('#apps-menu .app-btn').attr('data-toggle', 'tooltip');}, 500);
@@ -1243,14 +1338,20 @@
         this.init();
     }
 
+    /**
+     * Stop propagation and prevent default behaviors
+     */
     function stopEvent(event)
     {
         event.preventDefault();
         event.stopPropagation();
     }
 
-    /* start ips
+    /* 
+     * Start ips
      *
+     * @param  array  entiresOptions
+     * @param  object options
      * @return void
      */
     function start(entriesOptions, options)
@@ -1261,6 +1362,11 @@
         desktop = new desktopManager();
     }
 
+    /*
+     * Close modal window opened in desktop
+     *
+     * @return void
+     */
     function closeModal()
     {
         windows.close($('#modalContainer .window').attr('id'));
