@@ -238,7 +238,7 @@ class productModel extends model
 
         if(dao::isError()) return false;
         $alterQuery = "ALTER TABLE crm_order_{$product->code} ADD `{$field->field}` {$this->config->field->controlTypeList[$field->control]} NOT NULL";
-        if($field->default) $alterQuery .= " default '{$field->default}";
+        if($field->default) $alterQuery .= " default '{$field->default}'";
         if(!$this->dbh->query($alterQuery)) return false;
 
         return true;
