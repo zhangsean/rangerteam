@@ -39,7 +39,7 @@ class contact extends control
         
         $contacts = $this->contact->getList($orderBy, $pager);
 
-        $this->view->title    = $this->lang->customer->list;
+        $this->view->title    = $this->lang->contact->list;
         $this->view->contacts = $contacts;
         $this->view->pager    = $pager;
         $this->display();

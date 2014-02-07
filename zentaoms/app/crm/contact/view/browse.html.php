@@ -20,7 +20,7 @@
       <td><?php echo $contact->id;?></td>
       <td><?php echo $contact->realname;?></td>
       <td><?php echo $contact->nickname;?></td>
-      <td><?php echo $lang->contact->genderList[$contact->gender];?></td>
+      <td><?php echo isset($lang->contact->genderList[$contact->gender]) ? $lang->contact->genderList[$contact->gender] : '';?></td>
       <td><?php echo $contact->email;?></td>
       <td class='operate'>
         <?php echo html::a($this->createLink('contact', 'edit', "contactID=$contact->id"), $lang->edit); ?>

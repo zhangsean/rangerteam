@@ -232,6 +232,8 @@ class entry extends control
         $entry  = $this->entry->getById($entryID);
         $blocks = $this->entry->getBlocksByAPI($entry);
 
+        if(empty($blocks)) return false;
+
         $blockPairs = array();
         foreach($blocks as $code => $block)
         {
