@@ -266,7 +266,7 @@ class productModel extends model
         $product    = $this->getByID($field->product);
         $alterQuery = "ALTER TABLE crm_order_{$product->code} CHANGE `{$field->field}` `$data->field` {$this->config->field->controlTypeList[$data->control]} NOT NULL";
 
-        if($field->default) $alterQuery .= " default {$data->default}";
+        if($field->default) $alterQuery .= " default '{$data->default}'";
         if(!$this->dbh->query($alterQuery)) return false;
 
         return true;
@@ -362,9 +362,9 @@ class productModel extends model
     }
 
     /**
-     * Delete a action.
+     * Delete an action.
      * 
-     * @param  int      $actionID 
+     * @param  int    $actionID 
      * @access public
      * @return void
      */
@@ -387,7 +387,7 @@ class productModel extends model
         foreach($_POST['field'] as $key => $field)
         {
             if(empty($field) or empty($_POST['operater'][$key])) continue;
-            $conditions[] = array('field'=>$field, 'operater' => $_POST['operater'][$key], 'param' => $_POST['param'][$key]);
+            $conditions[] = array('field' => $field, 'operater' => $_POST['operater'][$key], 'param' => $_POST['param'][$key]);
         }
 
         $this->dao->update(TABLE_ORDERACTION)->set('conditions')->eq(json_encode($conditions))->where('id')->eq($actionID)->exec();

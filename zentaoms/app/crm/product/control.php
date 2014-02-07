@@ -59,7 +59,7 @@ class product extends control
         if($_POST)
         {
             $productID = $this->product->create();       
-            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
+            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
@@ -129,7 +129,7 @@ class product extends control
     {
         if($_POST)
         {
-            if($this->product->createField($productID)) $this->send(array('result' => 'success', 'locate' => $this->inlink('adminField' , "productID={$productID}")));
+            if($this->product->createField($productID)) $this->send(array('result' => 'success', 'locate' => $this->inlink('adminField', "productID={$productID}")));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
         $this->display();
@@ -148,18 +148,17 @@ class product extends control
 
         if($_POST)
         {
-            if($this->product->updateField($fieldID)) $this->send(array('result' => 'success', 'locate' => $this->inlink('adminField' , "productID={$field->product}")));
+            if($this->product->updateField($fieldID)) $this->send(array('result' => 'success', 'locate' => $this->inlink('adminField', "productID={$field->product}")));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $this->view->field   = $field;
+        $this->view->field = $field;
         $this->display();
     }
 
     /**
      * Delete field.
      * 
-     * @param  int    $productID 
      * @param  int    $fieldID 
      * @access public
      * @return void
@@ -247,7 +246,7 @@ class product extends control
     } 
 
     /**
-     * Delete a action.
+     * Delete an action.
      * 
      * @param  int      $actionID 
      * @access public
@@ -342,7 +341,7 @@ class product extends control
     }
 
     /**
-     * Action tasks 
+     * Action tasks. 
      * 
      * @param  int    $actionID 
      * @access public
