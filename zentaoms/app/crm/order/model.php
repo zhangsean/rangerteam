@@ -211,6 +211,13 @@ class orderModel extends model
             ->fetchAll('account');
     }
 
+    /**
+     * Get roles. 
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return array
+     */
     public function getRoleList($orderID)
     {
         return $this->dao->select('account, role')->from(TABLE_TEAM)
@@ -354,7 +361,7 @@ class orderModel extends model
 
         if(!empty($custom))
         {
-            $this->dao->update('crm_order_' . $product->code)->data($custom);
+            $dao = $this->dao->update('crm_order_' . $product->code)->data($custom);
             foreach($custom as $field => $value)
             {
                 if(empty($action->inputs->{$field}->rules)) continue;
