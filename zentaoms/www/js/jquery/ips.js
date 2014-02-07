@@ -162,7 +162,7 @@
                 this.top  = defaultWindowPos.y;
             }
 
-            /* Decide the window can be movable */
+            /* Determine the window whether be movable */
             if(this.display != 'fixed' && this.size != 'max' && this.cssclass.indexOf(' window-movable') < 0) this.cssclass += ' window-movable';
         }
 
@@ -387,7 +387,7 @@
     /**
      * The Windows Manager Object
      *
-     * Manage alll windows showed on desktop
+     * Manage all windows showed on desktop
      */
     function windowsManager()
     {
@@ -1190,7 +1190,6 @@
             this.$leftBar     = $('#leftBar');
             this.$appsMenu    = $('#apps-menu .bar-menu');
             this.$allAppsList = $("#allAppsList .bar-menu");
-            this.$taskMenu    = $('#taskMenu');
 
             this.showAll();
             this.bindEvents();
@@ -1248,7 +1247,7 @@
             {
                 if(e.which == 3)
                 {
-                    var btn = $(this),menu = desktop.shortcuts.$taskMenu, offset = btn.offset();
+                    var btn = $(this),menu = $('#taskMenu'), offset = btn.offset();
                     if(!menu.length) menu = $(settings.taskBarMenuHtmlTemplate).appendTo('#desktop');
                     menu.toggleClass('show');
 
@@ -1263,7 +1262,7 @@
                 e.stopPropagation();
             });
 
-            $(document).click(function(){desktop.shortcuts.$taskMenu.removeClass('show')});
+            $(document).click(function(){$('#taskMenu').removeClass('show')});
 
             function nocontextmenu()
             {
@@ -1375,4 +1374,4 @@
     /* make jquery object call the ips interface manager */
     $.extend({ipsStart: start, closeModal: closeModal});
 
-}(jQuery,window,document,Math);
+}(jQuery, window, document, Math);
