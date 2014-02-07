@@ -17,7 +17,7 @@ $themeRoot = $webRoot . "theme/";
 <!DOCTYPE html>
 <html>
 <head profile="http://www.w3.org/2005/10/profile">
-  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <?php
