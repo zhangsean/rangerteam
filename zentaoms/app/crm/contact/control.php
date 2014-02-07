@@ -89,4 +89,17 @@ class contact extends control
 
         $this->display();
     }
+
+    /**
+     * Delete a contact.
+     *
+     * @param int $contactID
+     * @access public
+     * @return void
+     */
+    public function delete($contactID)
+    {
+        if($this->contact->delete($contactID)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
 }

@@ -112,6 +112,20 @@ class contactModel extends model
     }
 
     /**
+     * Delete a contact.
+     *
+     * @param  int $contactID
+     * @access public 
+     * @return void
+     */
+    public function delete($contactID, $table = null)
+    {
+        $this->dao->delete()->from(TABLE_CONTACT)->where('id')->eq($contactID)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
      * Update contact avatar. 
      * 
      * @param  int    $contactID 
