@@ -1,6 +1,6 @@
 <?php
 /**
- * The control file of contact category of ZenTaoMS.
+ * The control file of contact module of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
@@ -36,11 +36,9 @@ class contact extends control
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
-        
-        $contacts = $this->contact->getList($orderBy, $pager);
 
         $this->view->title    = $this->lang->contact->list;
-        $this->view->contacts = $contacts;
+        $this->view->contacts = $this->contact->getList($orderBy, $pager);
         $this->view->pager    = $pager;
         $this->display();
     }   
@@ -56,8 +54,7 @@ class contact extends control
         if($_POST)
         {
             $contactID = $this->contact->create();       
-            $this->contact->updateAvatar($contactID);
-            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
+            if(!$contactID)  $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 

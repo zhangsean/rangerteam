@@ -1,6 +1,6 @@
 <?php
 /**
- * The model file of contact category of ZenTaoMS.
+ * The model file of contact module of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
@@ -16,15 +16,11 @@ class contactModel extends model
      * 
      * @param  int    $id 
      * @access public
-     * @return int|bool
+     * @return object
      */
     public function getByID($id)
     {
-       $contact = $this->dao->select('*')->from(TABLE_CONTACT)->where('id')->eq($id)->limit(1)->fetch();
-
-       if(!$contact) return false;
-
-       return $contact;
+        return $this->dao->select('*')->from(TABLE_CONTACT)->where('id')->eq($id)->limit(1)->fetch();
     }
 
     /** 
@@ -37,11 +33,7 @@ class contactModel extends model
      */
     public function getList($orderBy = 'id_desc', $pager = null)
     {
-        $contacts = $this->dao->select('*')->from(TABLE_CONTACT)->orderBy($orderBy)->page($pager)->fetchAll('id');
-
-        if(!$contacts) return array();
-
-        return $contacts;
+        return $this->dao->select('*')->from(TABLE_CONTACT)->orderBy($orderBy)->page($pager)->fetchAll('id');
     }
 
     /**
@@ -78,8 +70,9 @@ class contactModel extends model
         if(dao::isError()) return false;
 
         $contactID = $this->dao->lastInsertID();
+        $result    = $this->updateAvatar($contactID);
 
-        return $contactID;
+        return $result ? $contactID : false;
     }
 
     /**
@@ -114,8 +107,9 @@ class contactModel extends model
     /**
      * Delete a contact.
      *
-     * @param  int $contactID
-     * @access public 
+     * @param  int    $contactID
+     * @param  null   $table 
+     * @access public
      * @return void
      */
     public function delete($contactID, $table = null)
