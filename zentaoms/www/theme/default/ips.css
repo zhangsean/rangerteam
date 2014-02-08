@@ -37,19 +37,19 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 
 .bar-menu > li > a:hover,.bar-menu > li > button:hover,
 .bar-menu > li > a.open:hover,.bar-menu > li > a.active:hover {text-decoration: none; color: #fff; color: rgba(255,255,255,0.9);background-color: #666; background-color: rgba(255,255,255,0.20);}
-.bar-menu > li > a > .icon {font-size: 28px; line-height: 36px;}
+.bar-menu > li > a > .icon, .bar-menu > li > button > .icon {font-size: 28px; line-height: 36px;}
 
 /* left bar. */
-#leftBar {width: 60px; height: 100%; background-color: #0a2e66; background-color: rgba(0,0,0,0.5); z-index: 40010; transition: left .3s;-o-transition: left .3s;-moz-transition: left .3s;-webkit-transition: left .3s;}
+#leftBar {width: 60px; height: 100%; background-color: #0a2e66; background-color: rgba(0,0,0,0.4); z-index: 40010; transition: left .3s;-o-transition: left .3s;-moz-transition: left .3s;-webkit-transition: left .3s;}
 #leftBar.menu-auto.menu-hide {left: -58px;}
 
 #apps-menu {position: absolute; overflow: hidden; bottom: 268px; top: 0; overflow: no-display; transition: height .3s;-o-transition: height .3s;-moz-transition: height .3s;-webkit-transition: height .3s;}
 #apps-menu .bar-menu > li {display: inline-block;}
-#apps-menu .bar-menu > li a {text-align: center; padding:10px; width: 60px;}
+#apps-menu .bar-menu > li button {text-align: center; padding:10px; width: 60px;}
 #apps-menu .bar-menu > li img{width: 36px; height: 36px;}
 
 /* bottom bar. */
-#bottomBar {width: 100%; height: 36px; background-color: #0a2e66; background-color: rgba(0,0,0,0.5); z-index: 50000; padding-left: 62px;}
+#bottomBar {height: 36px; background-color: #0a2e66; background-color: rgba(0,0,0,0.5); z-index: 50000; left: 60px; right: 0}
 #bottomBar .bar-menu li {min-width: 50px; text-align: center; font-size: 16px; height: 36px; margin-right:4px; overflow: hidden; white-space: nowrap; background-color: rgba(0,0,0,0.20); -o-transition: width 1s;-moz-transition: width 1s;-webkit-transition: width 1s;transition: width 1s;}
 #bottomBar .bar-menu li > button {line-height: 28px; font-size: 12px; font-weight: bold; margin-right: 0; width: 100%;}
 #taskbar .bar-menu li {text-align: left; min-width: 90px; max-width: 300px; position: relative;}
@@ -62,13 +62,13 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #bottomBar .bar-menu > li > button > img {width: 20px; height: 20px; margin-right: 5px; margin-top: -2px;}
 #bottomBar .bar-menu > li > button[class*=' icon-'] {font-size: 20px;}
 
-#bottomRightBar {padding-left: 4px; position: absolute; right: 0; top: 0; border-left: 1px solid rgba(255,255,255,0.10);}
-#bottomRightBar .bar-menu li {background: none;}
+#bottomRightBar {position: absolute; right: 0; top: 0; border-left: 1px solid rgba(255,255,255,0.10);}
+#bottomRightBar .bar-menu li {background: none; margin-right: 0;}
 
-#start {width: 60px; height: 36px; text-align: center; padding: 0; background: none}
-#start > img {width: 30px; height: 30px; line-height: 36px; border-radius: 4px}
+#start {width: 60px; height: 56px; text-align: center; padding: 0; background: none}
+#start img {width: 36px; height: 36px; line-height: 36px; border-radius: 4px}
 #start:hover {background-color: rgba(255,255,255,0.2);}
-#startMenu {bottom: 36px; top: inherit;}
+#startMenu {bottom: 36px; top: inherit; left: 0}
 #startMenu .avatar-img {height: 48px; width: 48px; display: inline-block; margin-right: 10px; border-radius: 4px}
 #startMenu .avatar-img + strong {vertical-align: bottom; font-size: 18px; line-height: 30px;}
 #startMenu li {min-width: 200px;}
@@ -102,7 +102,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 .window-control-full .window-head ul li button.close-win:hover {background-color: #dd1111; color: #fff;}
 
 .window-control-simple .window-head {position: absolute; height: 0; background:none; border-bottom: none; overflow: visible; width: 100%;}
-.window-control-simple .window-head > img {position: absolute; left: 10px; top: 8px; height: 32px; width: 32px; z-index: 99999}
+.window-control-simple .window-head > img {display: none;}
 .window-control-simple .window-head > ul {position: absolute; right: 5px; top: 8px; z-index: 99999;}
 .window-control-simple .window-head ul li button {padding: 5px 10px; border-radius: 0; font-size: 16px; border-radius: 4px}
 .window-control-simple .window-head ul li button.close-win {padding:5px 15px}
@@ -117,7 +117,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 
 .window-content {position: relative; height: 100%; overflow: auto;}
 .window-loading .window-content {background: url('images/ips/loading.gif') no-repeat center 30%;}
-.window-loading.window-control-simple .window-head {display: none}
+.window-first.window-control-simple .window-head {display: none}
 .window-content iframe {position: absolute; overflow: auto; width: 100%; height: 100%; left: -9999px; top: 0; background-color: rgba(0, 0, 0, 0);}
 
 .window-cover {position: absolute; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(0,0,0,0.075); z-index: 99999;}

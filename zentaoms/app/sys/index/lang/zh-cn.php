@@ -14,7 +14,7 @@ $lang->index->addEntry     = '添加应用';
 $lang->index->profile      = '个人信息';
 $lang->index->set          = '系统配置';
 $lang->index->theme        = '更换主题';
-$lang->index->showDesk     = '显示桌面';
+$lang->index->showDesk     = '桌面';
 $lang->index->customBlocks = '编辑区块';
 $lang->index->addBlock     = '添加区块';
 

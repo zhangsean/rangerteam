@@ -16,18 +16,18 @@ js::import($jsRoot . 'jquery/ips.js');
   <!-- Desktop -->
   <div id='desktop' class='fullscreen-mode' unselectable="on" style="-moz-user-select:none;-webkit-user-select:none;" onselectstart="return false;">
     <div id='leftBar' class='dock-left'>
-      <div id='apps-menu'>
-        <ul class='bar-menu'></ul>
-      </div>
-    </div>
-    <div id='bottomBar' class='dock-bottom'>
-      <button id='start' class='dock-left radiance'><img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''></button>
+      <button id='start' class='dock-bottom'><img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''></button>
       <ul id='startMenu' class='dropdown-menu'>
         <li><a href='###' class='app-btn' data-id='profile'><img class='avatar-img' src='<?php echo $themeRoot . 'default/images/ips/avatar.jpg'?>' alt=''> <strong><?php echo $app->user->realname?></strong></a></li>
         <li class="divider"></li>
         <li><a href='<?php echo $this->createLink('entry', 'create') ?>' target='_blank' class=><i class='icon icon-plus'></i> <?php echo $lang->index->addEntry?></a></li>
         <li><a href='###' class='fullscreen-btn' data-id='allapps'><i class='icon icon-th-large'></i> <?php echo $lang->index->allEntries?><div class='pull-right'><span class='label label-badge entries-count'></span></div></a></li>
       </ul>
+      <div id='apps-menu'>
+        <ul class='bar-menu'></ul>
+      </div>
+    </div>
+    <div id='bottomBar' class='dock-bottom'>
       <div id='taskbar'>
         <ul class='bar-menu'>
         </ul>
@@ -51,7 +51,7 @@ js::import($jsRoot . 'jquery/ips.js');
         $index = str_replace('b', '', $key);
         $block = json_decode($block);
         ?>
-          <div class='col-sm-6 col-md-4 col-lg-3'>
+          <div class='col-sm-6 col-md-4'>
             <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>'>
               <div class='panel-heading'>
                 <?php echo $block->name?>
@@ -108,7 +108,6 @@ var entries = new Array(
     menu     : 'list',
     position : 'center',
     control  : 'full',
-
 },
 {
     id       : 'allapps',

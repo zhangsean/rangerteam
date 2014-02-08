@@ -34,17 +34,17 @@
         safeCloseTip                  : '确认要关闭　【{0}】 吗？',
         entryNotFindTip               : '应用没有找到！',
         busyTip                       : '应用正忙，请稍候...',
-        reloadWindowText              : '重新载入应用',
-        closeWindowText               : '关闭应用',
-        minWindowText                 : '隐藏窗口',
-        showWindowText                : '显示窗口',
+        reloadWindowText              : '重载',
+        closeWindowText               : '关闭',
+        minWindowText                 : '隐藏',
+        showWindowText                : '显示',
         safeRemoveBlock               : '确定要移除区块 【{0}】 吗？',
         removedBlock                  : '区块已删除',
         orderdBlocksSaved             : '排序已保存',
-        blocksEditTip                 : '开始编辑您的区块：拖动区块来排序，点击删除和编辑按钮来操作。',
+        blocksEditTip                 : '开始编辑您的区块',
         windowHtmlTemplate            : "<div id='{idstr}' class='window{cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}' data-url='{url}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
         frameHtmlTemplate             : "<iframe id='iframe-{id}' name='iframe-{id}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
-        leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><a data-toggle="tooltip" data-placement="right"  href="javascript:;" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</a></li>',
+        leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
         taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</button></li>',
         taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu' id='taskMenu'><li><a href='###' class='reload-win'><i class='icon-repeat'></i> &nbsp;{reloadWindowText}</a></li><li><a href='###' class='close-win'><i class='icon-remove'></i> &nbsp;{closeWindowText}</a></li></ul>",
         entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</a></li>',
@@ -69,7 +69,7 @@
         defaults.init(); // init default settings
 
         $.extend(settings, defaults, options);
-    };
+    }
 
     /*
      * Initialize the entries options
@@ -86,7 +86,7 @@
             var config = entriesConfigs[i];
             entries[config.id] = new entry(config);
         }
-    };
+    }
 
     /**
      * The entry object
@@ -428,12 +428,6 @@
             if(win == undefined) return;
             win.close();
             delete this.set[win.idstr];
-
-            if(this.lastActiveWindow)
-            {
-                this.activedWindow = this.lastActiveWindow;
-                this.lastActiveWindow = null;
-            }
         }
 
         /* Reload the actived window */
@@ -443,7 +437,7 @@
         }
 
         /* Open a entry window */
-        this.openEntry = function(et)
+        this.openEntry = function(et, go2index)
         {
             if(!et)
             {
@@ -464,15 +458,13 @@
                 win = et.createWindow();
                 this.set[et.idstr] = win;
                 win.reload();
-                win.active();
             }
-            else if(win.isActive())
+            else if(go2index && !win.isIndex())
             {
-                if(desktop.isFullscreenMode) win.active();
-                else win.toggle();
+                win.reload(go2index);
             }
-            else win.show();
 
+            win.show();
 
             if(et.display != 'modal') desktop.cancelFullscreenMode();
             else desktop.turnOnModalMode();
@@ -500,7 +492,7 @@
         {
             if(this.activedWindow)
             {
-                if(this.activedWindow.isFullscreen)
+                if(this.activedWindow.isFullscreen())
                 {
                     this.activedWindow.hide(true);
                 }
@@ -619,12 +611,14 @@
 
             if(this.$.length < 1) throw new Error('Can not find the window: ' + et.idstr + ' when init it.');
 
-            this.idstr   = this.$.attr('id');
-            this.id      = this.$.attr('data-id');
-            this.isModal = this.$.hasClass('window-modal');
-            this.entry   = et;
-            this.indexUrl= et.url;
+            this.firstLoad = true;
+            this.idstr     = this.$.attr('id');
+            this.id        = this.$.attr('data-id');
+            this.isModal   = this.$.hasClass('window-modal');
+            this.entry     = et;
+            this.indexUrl  = et.url;
             this.getUrl();
+
 
             this.afterResized(true);
         }
@@ -678,6 +672,17 @@
             return this.url;
         }
 
+        this.setUrl = function(url)
+        {
+            this.url = url || this.indexUrl;
+            this.$.attr('data-url', this.url);
+        }
+
+        this.isIndex = function()
+        {
+            return this.url == this.indexUrl;
+        }
+
         /* Show or hide the window */
         this.toggle = function()
         {
@@ -707,11 +712,15 @@
         }
 
         /* Reload the content */
-        this.reload = function()
+        this.reload = function(go2index)
         {
             if(!this.isLoading())
             {
+                if(go2index) this.setUrl();
+
                 this.$.addClass('window-loading').removeClass('window-error').find('.reload-win i').addClass('icon-spin');
+
+                if(this.firstLoad) this.$.addClass('window-first');
 
                 switch(this.entry.open)
                 {
@@ -751,8 +760,10 @@
             })
             .always(function()
             {
-                this.$.removeClass('window-loading');
+                this.$.removeClass('window-loading').removeClass('window-first');
                 this.$.find('.reload-win i').removeClass('icon-spin');
+
+                this.firstLoad = false;
             });
         }
 
@@ -761,17 +772,9 @@
         {
             var fName = 'iframe-' + this.id;
             var frame = $('#' + fName);
-            console.log(fName);
             if(frame.length > 0)
             {
-                try
-                {
-                    document.getElementById(fName).src = $(window.frames[fName].document).context.URL;
-                }
-                catch(e)
-                {
-                    document.getElementById(fName).src = this.getUrl();
-                }
+                document.getElementById(fName).src = this.getUrl();
             }
             else
             {
@@ -780,18 +783,27 @@
 
             $('#' + fName).load($.proxy(function()
             {
-                this.$.removeClass('window-loading').find('.reload-win i').removeClass('icon-spin');
+                this.$.removeClass('window-loading').removeClass('window-first').find('.reload-win i').removeClass('icon-spin');
 
-                var $frame = $(window.frames[fName].document);
-
-                console.log(fName);
                 
-                if($frame)
+                try
                 {
-                    this.url = $frame.context.URL;
-                    this.$.attr('data-url', this.url);
-                    if(this.entry) this.entry.currentUrl = this.url;
+                    var $frame = $(window.frames[fName].document);
+                    
+                    if($frame.length)
+                    {
+                        var url = $frame.context.URL;
+                        this.setUrl(url);
+                        if(this.entry) this.entry.currentUrl = url;
+
+                        if(this.firstLoad)
+                        {
+                            this.firstLoad = false;
+                            this.indexUrl = url;
+                        }
+                    }
                 }
+                catch(e){}
 
                 this.updateEntryUrl();
 
@@ -848,10 +860,10 @@
                 var orginLoc = win.data('orginLoc');
                 win.removeClass('window-max').css(
                 {
-                    left: orginLoc.left,
-                    top: orginLoc.top,
-                    width: orginLoc.width,
-                    height: orginLoc.height
+                    left   : orginLoc.left,
+                    top    : orginLoc.top,
+                    width  : orginLoc.width,
+                    height : orginLoc.height
                 }).find('.icon-resize-small').removeClass('icon-resize-small').addClass('icon-resize-full');
             }
             else
@@ -859,16 +871,16 @@
                 var dSize = desktop.size;
                 win.data('orginLoc', 
                 {
-                    left:   win.css('left'),
-                    top:    win.css('top'),
-                    width:  win.css('width'),
-                    height: win.css('height')
+                    left   : win.css('left'),
+                    top    : win.css('top'),
+                    width  : win.css('width'),
+                    height : win.css('height')
                 }).addClass('window-max').css(
                 {
-                    left:   desktop.position.x,
-                    top:    desktop.position.y,
-                    width:  dSize.width,
-                    height: dSize.height
+                    left   : desktop.position.x,
+                    top    : desktop.position.y,
+                    width  : dSize.width,
+                    height : dSize.height
                 }).find('.icon-resize-full').removeClass('icon-resize-full').addClass('icon-resize-small');
             }
             this.afterResized(true);
@@ -900,8 +912,6 @@
         {
             $('.app-btn.active, .fullscreen-btn.active').removeClass('active');
             $('.app-btn[data-id="' + this.id + '"]').addClass('active');
-
-            console.log(this);
 
             if(this.isActive())
             {
@@ -964,7 +974,8 @@
         {
             $('.fullscreen-btn').click(function()
             {
-                desktop.fullScreenApps.toggle($(this).attr('data-id'));
+                /* replace function 'show()' with 'toggle()' to change the behavoir */
+                desktop.fullScreenApps.show($(this).attr('data-id'));
             });
         }
 
@@ -1227,7 +1238,7 @@
                 if(et)
                 {
                     if(et.display == 'fullscreen') desktop.fullScreenApps.toggle(et.id);
-                    else windows.openEntry(et);
+                    else windows.openEntry(et, $(this).hasClass('s-menu-btn'));
                 }
                 else
                 {
@@ -1373,5 +1384,4 @@
 
     /* make jquery object call the ips interface manager */
     $.extend({ipsStart: start, closeModal: closeModal});
-
 }(jQuery, window, document, Math);
