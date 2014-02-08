@@ -2,15 +2,16 @@ $(document).ready(function()
 {
     setRequiredFields();
 
+    /* Enable default ajax options. */
     $.setAjaxModal();
     $.setAjaxForm('#ajaxForm');
     $.setAjaxDeleter('.deleter');
-
-    $.setReloadDeleter('.reloadDeleter');
     $.setReload('.reload');
+    $.setReloadDeleter('.reloadDeleter');
 
+    /* Set ping keep online. */
     setInterval('ping()', 1000 * 360);
 
-    /* active tootip */
+    /* Enable tooltip */
     $('body').tooltip({html: true,selector: "[data-toggle='tooltip']",container: "body"}); 
 });

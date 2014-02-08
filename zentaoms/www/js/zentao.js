@@ -410,32 +410,6 @@ $.extend(
 });
 
 /**
- * Resize image's max width and max height to made it center and middle.
- *
- * @param   int   maxWidth
- * @param   int   maxHeight
- * @return void
- */
- 
-(function($) 
-{
-    jQuery.fn.resizeImage = function(maxWidth, maxHeight)
-    { 
-        container = $(this).parent();
-        parentWidth  = parseInt(container.width());
-        parentHeight = parseInt(container.height());
-
-        if(isNaN(maxWidth)) maxWidth   = parentWidth;
-        if(isNaN(maxHeight)) maxHeight = parentHeight;
-        
-        $(this).css('max-width',  maxWidth);
-        $(this).css('max-height', maxHeight);
-
-        return true;
-    };
-})(jQuery);
-
-/**
  * Create link. 
  * 
  * @param  string $moduleName 
