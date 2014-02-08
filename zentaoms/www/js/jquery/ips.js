@@ -728,7 +728,7 @@
             }
             else
             {
-                alert(settings.busyTip);
+                messager.warning(settings.busyTip);
             }
         }
 
