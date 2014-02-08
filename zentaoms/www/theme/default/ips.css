@@ -10,7 +10,6 @@ button {outline: none; border: none; background-color: transparent;}
 .radiance:before {content: ' '; display: block; position: absolute; width: 100%; height: 120%; left: -120%; top: -20%; background:-webkit-linear-gradient(0deg,rgba(255, 255, 255, 0),rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0)); -webkit-transform:skewx(-25deg); -webkit-transition:all .7s; transition:all .7s;}
 .radiance:hover:before {left: 120%; -webkit-transition-delay:0.5s; -moz-transition-delay:0.5s; transition-delay:0.5s}
 
-
 /* pure button to fit dark background */
 .btn-pure {background-color: transparent; background-color: rgba(255,255,255,0.1); color: #f1f1f1; color: rgba(255,255,255,0.9); border-color: #f1f1f1; border-color: rgba(255,255,255,0.3); text-shadow: 0 -1px 0 rgba(0,0,0,0.2);}
 .btn-pure:hover, .btn-pure:active, .btn-pure:focus {background: #999; background: rgba(0,0,0,0.1); color: #fff; border-color: #fff; border-color: rgba(255,255,255,0.6); outline: none;}
