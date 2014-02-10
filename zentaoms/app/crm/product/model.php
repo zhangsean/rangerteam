@@ -16,15 +16,11 @@ class productModel extends model
      * 
      * @param  int    $id 
      * @access public
-     * @return int|bool
+     * @return object 
      */
     public function getByID($id)
     {
-       $product = $this->dao->select('*')->from(TABLE_PRODUCT)->where('id')->eq($id)->limit(1)->fetch();
-
-       if(!$product) return false;
-
-       return $product;
+       return $this->dao->select('*')->from(TABLE_PRODUCT)->where('id')->eq($id)->limit(1)->fetch();
     }
 
     /** 
@@ -37,11 +33,7 @@ class productModel extends model
      */
     public function getList($orderBy = 'id_desc', $pager = null)
     {
-        $products = $this->dao->select('*')->from(TABLE_PRODUCT)->where('deleted')->eq(0)->orderBy($orderBy)->page($pager)->fetchAll('id');
-
-        if(!$products) return array();
-
-        return $products;
+        return $this->dao->select('*')->from(TABLE_PRODUCT)->where('deleted')->eq(0)->orderBy($orderBy)->page($pager)->fetchAll('id');
     }
 
     /** 
