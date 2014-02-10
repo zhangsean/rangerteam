@@ -60,7 +60,7 @@ class block extends control
     }
 
     /**
-     * Print block 
+     * Print block. 
      * 
      * @param  int    $index 
      * @access public

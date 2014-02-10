@@ -282,7 +282,7 @@ class validater
      */
     public static function checkNotEqual($var, $value)
     {
-        return $var == $value;
+        return $var != $value;
     }
 
     /**

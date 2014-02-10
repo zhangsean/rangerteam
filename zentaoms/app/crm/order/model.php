@@ -45,11 +45,7 @@ class orderModel extends model
      */
     public function getList($orderBy = 'id_desc', $pager = null)
     {
-        $orders = $this->dao->select('*')->from(TABLE_ORDER)->orderBy($orderBy)->page($pager)->fetchAll('id');
-
-        if(!$orders) return array();
-
-        return $orders;
+        return $this->dao->select('*')->from(TABLE_ORDER)->orderBy($orderBy)->page($pager)->fetchAll('id');
     }
 
     /**
@@ -292,12 +288,12 @@ class orderModel extends model
     }
 
     /**
-     * Check a condition is 
+     * Check a condition is available.
      * 
      * @param  int    $condition 
      * @param  int    $order 
      * @access public
-     * @return void
+     * @return bool
      */
     public function checkCondition($condition, $order)
     {
@@ -333,6 +329,7 @@ class orderModel extends model
     public function operate($order, $action)
     {
         $product = $this->loadModel('product')->getByID($order->product);
+
         $common = array();
         $custom = array();
         foreach($this->config->order->commonFields as $field)

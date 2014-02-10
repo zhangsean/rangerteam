@@ -42,9 +42,9 @@ class entry extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
         }
         $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->create;
+        $this->view->key        = $this->entry->createKey();
         $this->view->position[] = $this->lang->entry->common;
         $this->view->position[] = $this->lang->entry->create;
-        $this->view->key   = $this->entry->createKey();
         $this->display();
     }
 
@@ -61,6 +61,7 @@ class entry extends control
         $entry = $this->entry->getById($entryID);
         $login = $entry->login;
         $token = $this->loadModel('sso')->createToken(session_id(), $entryID);
+
         if(strpos('&', $login) !== false)
         {
             $location = rtrim($login, '&') . "&token=$token";
@@ -69,8 +70,8 @@ class entry extends control
         {
             $location = rtrim($login, '?') . "?token=$token";
         }
-        if(!empty($referer)) $location .= '&referer=' . $referer;
 
+        if(!empty($referer)) $location .= '&referer=' . $referer;
         $this->locate($location);
     }
 
@@ -86,6 +87,7 @@ class entry extends control
         $entry  = $this->entry->getById($entryID);
         $logout = $entry->logout;
         $token  = $this->loadModel('sso')->createToken(session_id(), $entryID);
+
         if(strpos('&', $logout) !== false)
         {
             $location = rtrim($logout, '&') . "&token=$token";
@@ -94,6 +96,7 @@ class entry extends control
         {
             $location = rtrim($logout, '?') . "?token=$token";
         }
+
         $this->locate($location);
     }
 

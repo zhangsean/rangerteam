@@ -18,7 +18,7 @@ class actionModel extends model
     const BE_HIDDEN     = 2;    // The deleted object has been hidded.
 
     /**
-     * Create a action.
+     * Create an action.
      * 
      * @param  string $objectType 
      * @param  int    $objectID 

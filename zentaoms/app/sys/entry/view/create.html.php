@@ -79,5 +79,4 @@ include '../../common/view/header.admin.html.php';
     </form>
   </div>
 </div>
-<div class="instruction"><?php echo $lang->entry->instruction;?></div>
 <?php include '../../common/view/footer.admin.html.php';?>

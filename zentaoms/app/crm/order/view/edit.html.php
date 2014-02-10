@@ -1,4 +1,4 @@
-<?php include '../../common/view/header.html.php';?>
+<?php include '../../common/view/header.html.php'; ?>
 <div class='panel'>
   <div class='panel-heading'><?php echo $lang->order->edit;?></div>
   <div class='panel-body'>

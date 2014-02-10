@@ -40,10 +40,8 @@ class product extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
         
-        $products = $this->product->getList($orderBy, $pager);
-
         $this->view->title    = $this->lang->product->browse;
-        $this->view->products = $products;
+        $this->view->products = $this->product->getList($orderBy, $pager);
         $this->view->pager    = $pager;
         $this->display();
     }   
@@ -83,11 +81,8 @@ class product extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $product = $this->product->getByID($productID);
-
         $this->view->title   = $this->lang->product->edit;
-        $this->view->product = $product;
-
+        $this->view->product = $this->product->getByID($productID);
         $this->display();
     }
 

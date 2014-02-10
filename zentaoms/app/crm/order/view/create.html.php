@@ -12,13 +12,12 @@
         </tr>
         <tr>
           <th><?php echo $lang->order->product;?></th>
-          <td><?php echo html::select('product', $products, $productID, "class='form-control'");?></td>
+          <td><?php echo html::select('product', $products, '', "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->plan;?></th>
           <td><?php echo html::input('plan', '', "class='form-control'");?></td>
         </tr>
-        <?php echo $productForm;?>
         <tr>
           <th></th>
           <td><?php echo html::submitButton();?></td>

@@ -16,6 +16,12 @@ class index extends control
         parent::__construct();
     }
 
+    /**
+     * Index page.
+     * 
+     * @access public
+     * @return void
+     */
     public function index()
     {
         $entries    = $this->loadModel('entry')->getEntries();

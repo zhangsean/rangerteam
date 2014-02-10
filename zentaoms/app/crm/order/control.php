@@ -1,6 +1,6 @@
 <?php
 /**
- * The control file of order category of ZenTaoMS.
+ * The control file of order module of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
@@ -36,11 +36,9 @@ class order extends control
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
-        
-        $orders = $this->order->getList($orderBy, $pager);
 
         $this->view->title     = $this->lang->order->browse;
-        $this->view->orders    = $orders;
+        $this->view->orders    = $this->order->getList($orderBy, $pager);
         $this->view->products  = $this->loadModel('product')->getPairs();
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->pager     = $pager;
@@ -50,11 +48,10 @@ class order extends control
     /**
      * Create an order.
      * 
-     * @param  int    $productID 
      * @access public
      * @return viod
      */
-    public function create($productID = 0)
+    public function create()
     {
         if($_POST)
         {
@@ -64,15 +61,11 @@ class order extends control
             $this->loadModel('action')->create('order', $orderID, 'Created', '');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
-        $this->view->productForm = '';
-        if($productID) $this->view->productForm = $this->loadModel('product')->buildForm($productID);
-
-        $this->view->productID = $productID;
-        $this->view->title     = $this->lang->order->create;
 
         $products = $this->loadModel('product')->getPairs();
         $this->view->products  = array( 0 => '') + $products;
         $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->title     = $this->lang->order->create;
 
         $this->display();
     }
@@ -98,10 +91,8 @@ class order extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $order = $this->order->getByID($orderID);
-
         $this->view->title     = $this->lang->order->edit;
-        $this->view->order     = $order;
+        $this->view->order     = $this->order->getByID($orderID);
         $this->view->products  = $this->loadModel('product')->getPairs();
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->actions   = $this->loadModel('action')->getList('order', $orderID);
@@ -179,11 +170,11 @@ class order extends control
             $roles = array_merge($roles, $productRoles);
             $roles = array_unique($roles);
         }
+        $this->view->roles       = $roles;
 
         $this->view->title       = $this->lang->order->team;
         $this->view->order       = $this->order->getByID($orderID);
         $this->view->teamMembers = $this->order->getTeamMembers($orderID);
-        $this->view->roles       = $roles;
 
         $this->display();
     }

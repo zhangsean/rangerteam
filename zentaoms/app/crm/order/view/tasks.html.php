@@ -28,13 +28,13 @@
     </form>
     <table class='hide'>
       <tr id='originTR'>
-          <th><?php echo $this->user->printSelect('assignedTo[]', '', "class='form-control'");?></th>
-          <td><?php echo html::input("estStarted[]", '', "class='form-control'"); ?></td>
-          <td><?php echo html::input("name[]", '', "class='form-control'")?></td>
-          <td>
-            <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>
-            <?php echo html::a('javascript:;', $lang->delete, "class='condition-deleter'")?>
-          </td>
+        <th><?php echo $this->user->printSelect('assignedTo[]', '', "class='form-control'");?></th>
+        <td><?php echo html::input("estStarted[]", '', "class='form-control'"); ?></td>
+        <td><?php echo html::input("name[]", '', "class='form-control'")?></td>
+        <td>
+          <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>
+          <?php echo html::a('javascript:;', $lang->delete, "class='condition-deleter'")?>
+        </td>
       </tr>
     </table>
   </div>

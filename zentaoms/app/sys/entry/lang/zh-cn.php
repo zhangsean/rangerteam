@@ -57,6 +57,3 @@ $lang->entry->sizeList['custom'] = '自定义';
 
 $lang->entry->positionList['default'] = '默认';
 $lang->entry->positionList['center']  = '居中';
-
-$lang->entry->instruction = <<<EOT
-EOT;
