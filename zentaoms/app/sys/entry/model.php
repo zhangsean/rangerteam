@@ -63,7 +63,7 @@ class entryModel extends model
      */
     public function create()
     {
-        $entry = fixer::input('post')->setDefault('control', 'full')->get();
+        $entry = fixer::input('post')->get();
         if($entry->size == 'custom') $entry->size = json_encode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
 
         $this->dao->insert(TABLE_ENTRY)

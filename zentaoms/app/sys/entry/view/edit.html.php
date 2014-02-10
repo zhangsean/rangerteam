@@ -58,6 +58,10 @@ include '../../common/view/header.admin.html.php';
           <td><?php echo html::input('ip', $entry->ip, "class='form-control'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->entry->control;?></th>
+          <td><?php echo html::select('control', $lang->entry->controlList, $entry->control, "class='form-control'");?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->entry->size;?></th>
           <td><?php echo html::select('size', $lang->entry->sizeList, $entry->size, "class='form-control'");?></td>
           <td id='custom'>

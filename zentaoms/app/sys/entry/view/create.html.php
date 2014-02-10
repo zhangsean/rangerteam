@@ -53,6 +53,10 @@ include '../../common/view/header.admin.html.php';
           <td><?php echo html::input('ip', '', "class='form-control' placeholder='{$lang->entry->note->ip}'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->entry->control;?></th>
+          <td><?php echo html::select('control', $lang->entry->controlList, 'simple', "class='form-control'");?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->entry->size;?></th>
           <td><?php echo html::select('size', $lang->entry->sizeList, '', "class='form-control'");?></td>
           <td id='custom'>

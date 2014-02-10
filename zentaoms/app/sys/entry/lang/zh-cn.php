@@ -25,6 +25,7 @@ $lang->entry->login     = '登录地址';
 $lang->entry->logout    = '退出地址';
 $lang->entry->nothing   = '暂时没有应用';
 $lang->entry->open      = '打开方式';
+$lang->entry->control   = '窗口控制条';
 $lang->entry->size      = '窗口大小';
 $lang->entry->position  = '显示位置';
 $lang->entry->width     = '宽';
@@ -57,3 +58,7 @@ $lang->entry->sizeList['custom'] = '自定义';
 
 $lang->entry->positionList['default'] = '默认';
 $lang->entry->positionList['center']  = '居中';
+
+$lang->entry->controlList['none']   = '无';
+$lang->entry->controlList['full']   = '完整';
+$lang->entry->controlList['simple'] = '透明';
