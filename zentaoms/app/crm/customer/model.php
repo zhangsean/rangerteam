@@ -1,6 +1,6 @@
 <?php
 /**
- * The model file of customer category of ZenTaoMS.
+ * The model file of customer module of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
@@ -20,11 +20,7 @@ class customerModel extends model
      */
     public function getByID($id)
     {
-       $customer = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('id')->eq($id)->limit(1)->fetch();
-
-       if(!$customer) return false;
-
-       return $customer;
+        return $this->dao->select('*')->from(TABLE_CUSTOMER)->where('id')->eq($id)->limit(1)->fetch();
     }
 
     /** 
@@ -37,11 +33,7 @@ class customerModel extends model
      */
     public function getList($orderBy = 'id_desc', $pager = null)
     {
-        $customers = $this->dao->select('*')->from(TABLE_CUSTOMER)->orderBy($orderBy)->page($pager)->fetchAll('id');
-
-        if(!$customers) return array();
-
-        return $customers;
+        return $this->dao->select('*')->from(TABLE_CUSTOMER)->orderBy($orderBy)->page($pager)->fetchAll('id');
     }
 
     /** 
@@ -101,15 +93,14 @@ class customerModel extends model
             ->where('id')->eq($customerID)
             ->exec();
 
-        if(dao::isError()) return false;
-
         return !dao::isError();
     }
 
     /**
      * Delete a customer.
      *
-     * @param  int    $customerID
+     * @param  int      $customerID
+     * @param  string   $table
      * @access public 
      * @return void
      */
