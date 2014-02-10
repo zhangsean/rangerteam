@@ -108,6 +108,7 @@ class product extends control
      */
     public function adminField($productID)
     {
+        $this->view->title     = $this->lang->product->field->admin;
         $this->view->fields    = $this->product->getFieldList($productID);
         $this->view->productID = $productID;
         $this->display();
@@ -236,6 +237,7 @@ class product extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
+        $this->view->title  = $this->lang->product->action->edit;
         $this->view->action = $action;
         $this->display();
     } 
@@ -267,9 +269,9 @@ class product extends control
         if(empty($action->conditions))
         {
             $action->conditions = array();
-            $defaultCondations  = new stdclass();
-            $defaultCondations->operater = '';
-            $defaultCondations->value    = '';
+            $defaultConditions  = new stdclass();
+            $defaultConditions->operater = '';
+            $defaultConditions->value    = '';
 
             $action->conditions[] = $defaultInput;
         }
@@ -284,11 +286,12 @@ class product extends control
         $this->loadModel('order');
 
         $conditionFields = array('' => '');
-        foreach($this->config->order->conditionFields as $field) $conditionFields[$field] = $this->lang->order->{$field};
+        foreach($this->lang->order->fields as $name => $field) $conditionFields[$name] = $this->lang->order->{$name};
 
         $fields  = $this->product->getFieldList($action->product);
         foreach($fields as $field) $conditionFields[$field->field] = $field->name;
 
+        $this->view->title           = $this->lang->product->action->adminConditions;
         $this->view->action          = $action;
         $this->view->conditionFields = $conditionFields;
         $this->display();
@@ -325,11 +328,12 @@ class product extends control
         $this->loadModel('order');
 
         $inputFields = array('' => '');
-        foreach($this->config->order->conditionFields as $field) $inputFields[$field] = $this->lang->order->{$field};
+        foreach($this->lang->order->fields as $name => $field) $inputFields[$name] = $this->lang->order->{$namname};
 
         $fields  = $this->product->getFieldList($action->product);
         foreach($fields as $field) $inputFields[$field->field] = $field->name;
 
+        $this->view->title   = $this->lang->product->action->adminInputs;
         $this->view->action  = $action;
         $this->view->inputFields  = $inputFields;
         $this->display();
@@ -365,6 +369,7 @@ class product extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
+        $this->view->title  = $this->lang->product->action->adminTasks;
         $this->view->action = $action;
 
         $productRoles = $this->product->getRoleList($action->product);

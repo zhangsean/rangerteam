@@ -258,7 +258,8 @@ class order extends control
         }
         
         $customFields = $this->product->getFieldList($order->product);
-        $this->view->fields = array_merge($this->config->order->commonFields, $customFields);
+
+        $this->view->fields = array_merge($this->lang->order->fields, $customFields);
         $this->view->order  = $order;
         $this->view->action = $action;
         $this->display();
@@ -277,6 +278,7 @@ class order extends control
         $this->loadModel('task');
         $this->loadModel('user', 'sys');
         $action = $this->loadModel('product')->getActionByID($actionID);
+        if(empty($action->tasks)) $this->locate(inlink('browse'));
         $order  = $this->order->getByID($orderID);
 
         if($_POST)
@@ -285,6 +287,7 @@ class order extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
         
+        $this->view->title  = $this->lang->order->createTasks;
         $this->view->team   = $this->order->getRoleList($orderID);
         $this->view->action = $action;
         $this->view->order  = $order;

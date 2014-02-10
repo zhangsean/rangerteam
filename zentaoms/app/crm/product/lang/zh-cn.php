@@ -1,6 +1,6 @@
 <?php
 /**
- * The product category zh-cn file of ZenTaoMS.
+ * The product module zh-cn file of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
@@ -46,7 +46,7 @@ $lang->product->field->rules       = '验证规则';
 $lang->product->field->desc        = '描述';
 $lang->product->field->placeholder = '提示文字';
 
-$lang->product->field->admin  = '属性';
+$lang->product->field->admin  = '属性设置';
 $lang->product->field->create = '添加属性';
 
 $lang->product->field->controlTypeList = array();

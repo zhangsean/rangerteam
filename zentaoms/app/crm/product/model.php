@@ -199,7 +199,6 @@ class productModel extends model
      */
     public function buildControl($field, $value = null)
     {
-        $field->options = isset($field->options) ? array_combine(explode(',', $field->options), explode(',', $field->options)) : array();
         if(!isset($field->default)) $field->default = '';
         switch($field->control)
         {
@@ -304,10 +303,10 @@ class productModel extends model
     {
         $action =  $this->dao->select('*')->from(TABLE_ORDERACTION)->where('id')->eq($actionID)->fetch();
 
-        $action->conditions = json_decode($action->conditions);
-        $action->inputs     = json_decode($action->inputs);
-        $action->results    = json_decode($action->results);
-        $action->tasks      = json_decode($action->tasks);
+        $action->conditions = !empty($action->conditions) ? json_decode($action->conditions) : array();
+        $action->inputs     = !empty($action->inputs)     ? json_decode($action->inputs) : array();
+        $action->results    = !empty($action->results)    ? json_decode($action->results) : array();
+        $action->tasks      = !empty($action->tasks)      ? json_decode($action->tasks) : array();
         return $action;
     }
 

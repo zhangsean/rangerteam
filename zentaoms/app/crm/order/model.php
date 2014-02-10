@@ -332,7 +332,7 @@ class orderModel extends model
 
         $common = array();
         $custom = array();
-        foreach($this->config->order->commonFields as $field)
+        foreach($this->lang->order->fields as $field)
         {
             if(isset($_POST[$field->field])) $common[$field->field] = $_POST[$field->field];
         }
