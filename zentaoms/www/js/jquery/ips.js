@@ -1041,117 +1041,34 @@
         /* Handle the app: home blocks */
         this.handleHomeBlocks = function()
         {
-            var msg = null;
-            $('#customHome').click(function()
+            $('#home .dashboard').dashboard(
             {
-                if(!$('#home').hasClass('custom-mode')) msg = messager.info(settings.blocksEditTip, 'top', 6000); 
-                else if(msg != null) msg.hide();
+                height            : 240,
+                draggable         : true,
+                afterOrdered      : afterOrdered,
+                panelRemovingTip  : settings.safeRemoveBlock,
+                afterPanelRemoved : afterPanelRemoved
             });
 
-            $(document).on('click', '#home.custom-mode .remove-block', function()
+            function afterPanelRemoved(index)
             {
-                var panel = $(this).closest('.panel');
-                var index = panel.attr('data-id');
-                var name = panel.find('.panel-heading').text().replace('\n', '').replace(/(^\s*)|(\s*$)/g, "");
-                if(confirm(settings.safeRemoveBlock.format(name)))
+                if(settings.onDeleteBlock && $.isFunction(settings.onDeleteBlock))
                 {
-                    if(settings.onDeleteBlock && $.isFunction(settings.onDeleteBlock))
-                    {
-                        settings.onDeleteBlock(index);
-                        messager.info(settings.removedBlock);
-                    }
-                    $('#block' + index).parent().remove();
+                    settings.onDeleteBlock(index);
+                    messager.info(settings.removedBlock);
                 }
-            }).on('mouseover', '#home.custom-mode:not(.dragging) .panel:not(#draggingPanel)', function()
-            {
-                $(this).addClass('hover');
-                $('#home.custom-mode').addClass('hover');
-            }).on('mouseout', '#home.custom-mode:not(.dragging) .panel', function()
-            {
-                $(this).removeClass('hover');
-                $('#home.custom-mode').removeClass('hover');
-            }).on('mousedown', '#home.custom-mode .panel.hover:not(#draggingPanel)', function(event)
-            {
-                var panel = $(this);
-                var dPanel = panel.clone().attr('id', 'draggingPanel');
-                var pos   = panel.offset();
+            }
 
-                panel.addClass('dragging');
-                panel.parent().addClass('dragging-col');
-                
-                dPanel.css(
+            function afterOrdered(newOrders)
+            {
+                console.log(newOrders);
+                if(settings.onBlocksOrdered && $.isFunction(settings.onBlocksOrdered))
                 {
-                    left    : pos.left - desktop.position.x,
-                    top     : pos.top,
-                    width   : panel.width(),
-                    height  : panel.height()
-                }).appendTo('#home').data('mouseOffset', {x: event.pageX - pos.left + desktop.position.x, y: event.pageY - pos.top});
-
-                $(document).bind('mousemove',mouseMove).bind('mouseup',mouseUp);
-                event.preventDefault();
-                $('#home').addClass('dragging');
-
-                function mouseMove(event)
-                {
-                    var offset = dPanel.data('mouseOffset');
-                    dPanel.css(
-                    {
-                        left : event.pageX-offset.x,
-                        top  : event.pageY-offset.y
-                    });
-
-                    $('#home.custom-mode .panel:not(#draggingPanel)').each(function()
-                    {
-                        $('.dragging-in').removeClass('dragging-in');
-
-                        var p = $(this);
-                        var pP = p.offset(), pW = p.width(), pH = p.height();
-                        var pX = pP.left - pW / 2, pY = pP.top;
-                        var mX = event.pageX - desktop.position.x, mY = event.pageY;
-
-                        if(mX > pX && mY > pY && mX < (pX + pW) && mY < (pY + pH))
-                        {
-                            p.parent().addClass('dragging-in');
-                            return false;
-                        }
-                    });
-                    event.preventDefault();
+                    settings.onBlocksOrdered(newOrders);
                 }
 
-                function mouseUp(event)
-                {
-                    if(panel.attr('id') != $('.dragging-in').attr('id'))
-                    {
-                        panel.parent().insertBefore('.dragging-in');
-                        var newOrder = 1;
-                        var newOrders = {};
-                        $('#home .panel:not(#draggingPanel)').each(function()
-                        {
-                            $(this).attr('data-order', newOrder++);
-                            newOrders[$(this).attr('id')] = $(this).attr('data-order');
-                        });
-
-                        if(settings.onBlocksOrdered && $.isFunction(settings.onBlocksOrdered))
-                        {
-                            settings.onBlocksOrdered(newOrders);
-                            messager.success(settings.orderdBlocksSaved);
-                        }
-                    }
-                    $('#draggingPanel').remove();
-                    $('.dragging-col').removeClass('dragging-col');
-                    $('.dragging').removeClass('dragging');
-                    $('.dragging-in').removeClass('dragging-in');
-                    $('#home').removeClass('dragging');
-                    $(document).unbind('mousemove', mouseMove).unbind('mouseup', mouseUp);
-                    event.preventDefault();
-                }
-            });
-
-            $('#home .panel .custom-actions').mousedown(function(event)
-            {
-                event.preventDefault();
-                event.stopPropagation();
-            });
+                messager.success(settings.orderdBlocksSaved);
+            }
         }
 
         /* Show a fullscreen app window */

@@ -102,7 +102,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 .window-control-full .window-head ul li button.close-win:hover {background-color: #dd1111; color: #fff;}
 
 .window-control-simple .window-head {position: absolute; height: 0; background:none; border-bottom: none; overflow: visible; width: 100%;}
-.window-control-simple .window-head > img {display: none;}
+.window-control-simple .window-head > img, .window-control-simple .window-head > strong {display: none;}
 .window-control-simple .window-head > ul {position: absolute; right: 5px; top: 8px; z-index: 99999;}
 .window-control-simple .window-head ul li button {padding: 5px 10px; border-radius: 0; font-size: 16px; border-radius: 4px}
 .window-control-simple .window-head ul li button.close-win {padding:5px 15px}
@@ -157,11 +157,9 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #closeAllApps:hover {text-decoration: none; color: #fff; color: rgba(255,255,255,0.9);}
 
 /* home */
-#home {position: relative;}
-#home [class^='col-'] {height: 266px; overflow: visible;}
-#home .panel {border-radius: 2px; box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);}
-#home .panel-heading {padding: 6px; height: 34px; font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
-#home .panel-body {height: 210px; overflow: auto;}
+#home [class^='col-'] {overflow: visible;}
+#home .panel {box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);}
+#home .panel-actions {margin: 0}
 #home .panels-container {max-width: 1600px; margin: 0 auto; padding: 0 5%; margin-top: 75px;}
 #home .panel-body > .article-content {padding: 8px 10px;}
 #home .panel-body > .list-group {margin: 0;}
