@@ -66,17 +66,15 @@ class contactModel extends model
             ->data($contact)
             ->autoCheck()
             ->batchCheck($this->config->contact->require->create, 'notempty')
-            ->check('realname', 'unique')
             ->check('email', 'email')
-            ->check('email', 'unique')
             ->exec();
 
-        if(dao::isError()) return false;
+        if(dao::isError()) return array('result' => false, 'message' => dao::getError());
 
         $contactID = $this->dao->lastInsertID();
-        $return    = $this->updateAvatar($contactID);
+        $this->updateAvatar($contactID);
 
-        return $return['result'] ? $contactID : false;
+        return array('result' => true);
     }
 
     /**
@@ -101,15 +99,13 @@ class contactModel extends model
             ->data($contact)
             ->autoCheck()
             ->batchCheck($this->config->contact->require->edit, 'notempty')
-            ->check('realname', 'unique', "id != '$contactID'")
             ->check('email', 'email')
-            ->check('email', 'unique', "id != '$contactID'")
             ->where('id')->eq($contactID)
             ->exec();
 
-        $return = $this->updateAvatar($contactID);
+        $this->updateAvatar($contactID);
 
-        return $return['result'] ? !dao::isError() : false;
+        if(dao::isError()) return array('result' => false, 'message' => dao::getError());
     }
 
     /**
@@ -147,7 +143,7 @@ class contactModel extends model
         
         /* Upload new avatar. */
         $uploadResult = $fileModel->saveUpload('avatar', $contactID);
-        if(!$uploadResult) return array('result' => 'fail', 'message' => $this->lang->fail);
+        if(!$uploadResult) return array('result' => 'false', 'message' => $this->lang->fail);
         
         $fileIdList = array_keys($uploadResult);
         $file       = $fileModel->getById($fileIdList[0]);
@@ -155,6 +151,6 @@ class contactModel extends model
         $avatarPath = $this->config->webRoot . 'data/upload/' . $file->pathname;
         $this->dao->update(TABLE_CONTACT)->set('avatar')->eq($avatarPath)->where('id')->eq($contactID)->exec();
         if(!dao::isError()) return array('result' => true);
-        return array('return' => false, 'message' => $this->lang->fail);
+        return array('result' => false, 'message' => $this->lang->fail);
     }
 }

@@ -55,9 +55,9 @@ class contact extends control
     {
         if($_POST)
         {
-            $contactID = $this->contact->create();       
-            if(!$contactID)  $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $return = $this->contact->create(); 
+            if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'fail', 'message' => $return['message']));
         }
 
         $this->view->title     = $this->lang->contact->create;
@@ -76,9 +76,9 @@ class contact extends control
     {
         if($_POST)
         {
-            $this->contact->update($contactID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $return = $this->contact->update($contactID);
+            if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'fail', 'message' => $return['message']));
         }
 
         $contact = $this->contact->getByID($contactID);
