@@ -22,6 +22,7 @@ $lang->order->closedReasonList['failed']    = '订单失败';
 $lang->order->closedReasonList['postponed'] = '延期';
 
 $lang->order->id            = '编号';
+$lang->order->name          = '名称';
 $lang->order->product       = '相关产品';
 $lang->order->customer      = '所属客户';
 $lang->order->contact       = '联系人';
