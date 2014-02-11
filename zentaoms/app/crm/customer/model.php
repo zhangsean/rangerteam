@@ -66,6 +66,7 @@ class customerModel extends model
         $this->dao->insert(TABLE_CUSTOMER)
             ->data($customer)
             ->autoCheck()
+            ->batchCheck($this->config->customer->require->create, 'notempty')
             ->exec();
 
         if(dao::isError()) return false;
@@ -90,6 +91,7 @@ class customerModel extends model
         $this->dao->update(TABLE_CUSTOMER)
             ->data($customer)
             ->autoCheck()
+            ->batchCheck($this->config->customer->require->edit, 'notempty')
             ->where('id')->eq($customerID)
             ->exec();
 
