@@ -32,7 +32,7 @@ $lang->product->typeList['real']    = '实体类';
 $lang->product->typeList['service'] = '服务类';
 $lang->product->typeList['virtual'] = '虚拟类';
 
-$lang->product->statusList['wait']    = '制作中';
+$lang->product->statusList['wait']    = '研发中';
 $lang->product->statusList['normal']  = '正常';
 $lang->product->statusList['offline'] = '下线';
 
