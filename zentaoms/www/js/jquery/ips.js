@@ -31,22 +31,20 @@
         defaultWinPosOffset           : 30,
         defaultWindowSize             : {width:700,height:538},
         windowidstrTemplate           : 'win-{0}',
-        safeCloseTip                  : '确认要关闭　【{0}】 吗？',
+        confirmClose                  : '确认要关闭　【{0}】 吗？',
         entryNotFindTip               : '应用没有找到！',
         busyTip                       : '应用正忙，请稍候...',
-        reloadWindowText              : '重载',
-        closeWindowText               : '关闭',
-        minWindowText                 : '隐藏',
+        reloadText                    : '重载',
+        closeText                     : '关闭',
         showWindowText                : '显示',
-        safeRemoveBlock               : '确定要移除区块 【{0}】 吗？',
+        confirmRemoveBlock               : '确定要移除区块 【{0}】 吗？',
         removedBlock                  : '区块已删除',
         orderdBlocksSaved             : '排序已保存',
-        blocksEditTip                 : '开始编辑您的区块',
         windowHtmlTemplate            : "<div id='{idstr}' class='window{cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}' data-url='{url}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
         frameHtmlTemplate             : "<iframe id='iframe-{id}' name='iframe-{id}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
         leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
         taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</button></li>',
-        taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu' id='taskMenu'><li><a href='###' class='reload-win'><i class='icon-repeat'></i> &nbsp;{reloadWindowText}</a></li><li><a href='###' class='close-win'><i class='icon-remove'></i> &nbsp;{closeWindowText}</a></li></ul>",
+        taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu' id='taskMenu'><li><a href='###' class='reload-win'><i class='icon-repeat'></i> &nbsp;{reloadText}</a></li><li><a href='###' class='close-win'><i class='icon-remove'></i> &nbsp;{closeText}</a></li></ul>",
         entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</a></li>',
 
         init                          : function() // init the default
@@ -66,9 +64,8 @@
      */
     function initSettings(options)
     {
-        defaults.init(); // init default settings
-
         $.extend(settings, defaults, options);
+        settings.init();
     }
 
     /*
@@ -235,6 +232,7 @@
 
             /* extend options from params */
             $.extend(this, this.getDefaults(options.id), options);
+
             this.idstr      = settings.windowidstrTemplate.format(this.id);
             this.cssclass   = '';
 
@@ -823,7 +821,7 @@
         this.close = function()
         {
             var win = this.$;
-            if(win.hasClass('window-safeclose') && (!confirm(settings.safeCloseTip.format(win.find('.window-head strong').text()))))
+            if(win.hasClass('window-safeclose') && (!confirm(settings.confirmClose.format(win.find('.window-head strong').text()))))
                 return;
 
             /* save the last position and size */
@@ -1046,7 +1044,7 @@
                 height            : 240,
                 draggable         : true,
                 afterOrdered      : afterOrdered,
-                panelRemovingTip  : settings.safeRemoveBlock,
+                panelRemovingTip  : settings.confirmRemoveBlock,
                 afterPanelRemoved : afterPanelRemoved
             });
 

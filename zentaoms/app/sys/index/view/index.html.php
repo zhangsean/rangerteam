@@ -22,7 +22,7 @@ js::import($jsRoot . 'jquery/ips.js');
     <ul id='startMenu' class='dropdown-menu'>
       <li><?php echo html::a('###', html::image($themeRoot . 'default/images/ips/avatar.jpg', "class='avatar-img'") . "<strong>{$app->user->realname}</strong>", "class='app-btn' data-id='profile'");?></li>
       <li class="divider"></li>
-      <li><?php echo html::a($this->createLink('entry', 'create'), "<i class='icon icon-plus'></i>{ $lang->index->addEntry}", "target='_blank'"  )?></li>
+      <li><?php echo html::a($this->createLink('entry', 'create'), "<i class='icon icon-plus'></i> {$lang->index->addEntry}", "target='_blank'"  )?></li>
       <li><a href='###' class='fullscreen-btn' data-id='allapps'><i class='icon icon-th-large'></i> <?php echo $lang->index->allEntries?><div class='pull-right'><span class='label label-badge entries-count'></span></div></a></li>
     </ul>
     <div id='apps-menu'>
@@ -50,7 +50,7 @@ js::import($jsRoot . 'jquery/ips.js');
         $block = json_decode($block);
         ?>
         <div class='col-sm-6 col-md-4'>
-          <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>'>
+          <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->name?>'>
             <div class='panel-heading'>
               <?php echo $block->name?>
               <div class='panel-actions'>
@@ -131,6 +131,14 @@ var entries = new Array(
     control  : 'full',
     icon     : 'icon-plus'
 });
+
+var ipsLang = {};
+<?php
+foreach ($lang->index->ips as $key => $value)
+{
+    echo 'ipsLang["' . $key . '"] = "' . $value . '";';
+}
+?>
 
 <?php echo $allEntries;?>
 </script>
