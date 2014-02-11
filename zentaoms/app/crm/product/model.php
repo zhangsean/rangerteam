@@ -143,7 +143,9 @@ class productModel extends model
      */
     public function getFieldByID($fieldID)
     {
-        return $this->dao->select('*')->from(TABLE_ORDERFIELD)->where('id')->eq($fieldID)->limit(1)->fetch();
+        $field = $this->dao->select('*')->from(TABLE_ORDERFIELD)->where('id')->eq($fieldID)->limit(1)->fetch();
+        $field->options = json_decode($field->options, true);
+        return $field;
     }
 
     /**
@@ -155,7 +157,12 @@ class productModel extends model
      */
     public function getFieldList($productID)
     {
-        return $this->dao->select('*')->from(TABLE_ORDERFIELD)->where('product')->eq($productID)->orderBy('`order`')->fetchAll('field');
+        $fields = $this->dao->select('*')->from(TABLE_ORDERFIELD)->where('product')->eq($productID)->orderBy('`order`')->fetchAll('field');
+        foreach($fields as $field)
+        {
+            $field->options = json_decode($field->options, true);
+        }
+        return $fields;
     }
 
     /**
@@ -219,6 +226,14 @@ class productModel extends model
     public function createField($productID)
     {
         $field = fixer::input('post')->add('product', $productID)->join('rules', ',')->get();
+
+        $options = array();
+        foreach($field->options['value'] as $key => $value)
+        {
+            $options[$value] = $field->options['text'][$key];   
+        }
+        $field->options = json_encode($options);
+
         $product = $this->getByID($productID);
         if(empty($product)) return false;
 
@@ -246,6 +261,13 @@ class productModel extends model
     {
         $field = $this->getFieldByID($fieldID);
         $data  = fixer::input('post')->join('rules', ',')->get();
+
+        $options = array();
+        foreach($data->options['value'] as $key => $value)
+        {
+            $options[$value] = $data->options['text'][$key];   
+        }
+        $data->options = json_encode($options);
 
         $this->dao->update(TABLE_ORDERFIELD)->data($data)->autoCheck()
             ->batchCheck($this->config->field->require->edit, 'notempty')

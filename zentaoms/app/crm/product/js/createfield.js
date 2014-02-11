@@ -3,13 +3,9 @@ $(document).ready(function()
     /* Toggle options. */
     $('#control').change(function()
     {
-        var checkUrl = createLink('product', 'checkFieldLength', 'fieldID=' + v.fieldID + '&control=' + $(this).val())
-        $.get(checkUrl, function(data){if(data) bootbox.alert(data);});
-
-        var control = $(this).val();
+        control = $(this).val();
         $('#optionTR').toggle(control == 'select' || control == 'radio' || control == 'checkbox');
     });
-
     $('#control').change();
 
     /* Add a option. */
@@ -30,4 +26,5 @@ $(document).ready(function()
             $(this).parents('.input-group').remove();
         }
     });
+
 });

@@ -19,9 +19,21 @@
           <th><?php echo $lang->product->field->control;?></th>
           <td><?php echo html::select("control", $lang->product->field->controlTypeList, $field->control, "class='form-control select-3'");?></td>
         </tr>
-        <tr>
+        <tr id='optionTR'>
           <th><?php echo $lang->product->field->options;?></th>
-          <td><?php echo html::textarea("options", $field->options, "class='form-control' placeholder='{$lang->product->field->optionsPlaceholder}'");?></td>
+          <td>
+            <?php foreach($field->options as $value => $text):?>
+            <div class="input-group">
+              <?php echo html::input('options[value][]', $value, "class='form-control' placeholder={$lang->product->field->optionValue}");?>
+              <span class='input-group-addon'>:</span>
+              <?php echo html::input('options[text][]', $text, "class='form-control' placeholder={$lang->product->field->optionText}");?>
+              <div class='input-group-btn'>
+                <i class='icon-plus-sign'></i>
+                <i class='icon-minus-sign'></i>
+              </div>
+            </div> 
+            <?php endforeach;?>
+          </td>
         </tr>
         <tr>
           <th><?php echo $lang->product->field->default;?></th>
@@ -37,6 +49,21 @@
         </tr>
       </table>
     </form>
+
+    <?php /* Hidden option group for js. */?>
+    <div id='optionGroup' class='hide'>
+      <div class="input-group">
+        <?php echo html::input('options[value][]', '', "class='form-control' placeholder={$lang->product->field->optionValue}");?>
+        <span class='input-group-addon'>:</span>
+        <?php echo html::input('options[text][]', '', "class='form-control' placeholder={$lang->product->field->optionText}");?>
+        <div class='input-group-btn'>
+          <i class='icon-plus-sign'></i>
+          <i class='icon-minus-sign'></i>
+        </div>
+      </div> 
+    </div>
+    <?php /* Hidden option group for js ended. */?>
+
   </div>
 </div>
 <?php js::set('fieldID', $field->id)?>

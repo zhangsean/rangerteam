@@ -39,12 +39,14 @@ $lang->product->statusList['offline'] = '下线';
 $lang->product->field  = new stdclass();
 $lang->product->field->name        = '名称';
 $lang->product->field->field       = '字段名';
-$lang->product->field->options     = '可选值';
+$lang->product->field->options     = '选项';
 $lang->product->field->control     = '控件';
 $lang->product->field->default     = '默认值';
 $lang->product->field->rules       = '验证规则';
 $lang->product->field->desc        = '描述';
 $lang->product->field->placeholder = '提示文字';
+$lang->product->field->optionValue = '选项值的代码，可以使用字母跟数字组合';
+$lang->product->field->optionText  = '选项的文字说明';
 
 $lang->product->field->admin  = '属性设置';
 $lang->product->field->create = '添加属性';
