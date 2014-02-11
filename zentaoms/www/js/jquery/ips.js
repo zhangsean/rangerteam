@@ -816,7 +816,7 @@
         this.updateEntryUrl = function()
         {
             var url = this.url || this.indexUrl;
-            try{window.history.pushState({}, 0, this.url);}catch(e){}
+            try{window.history.replaceState({}, 0, this.url);}catch(e){}
         }
 
         /* Close the window */
