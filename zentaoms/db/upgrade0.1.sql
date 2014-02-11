@@ -14,3 +14,5 @@ ADD `createdBy` char(30) COLLATE 'utf8_general_ci' NOT NULL,
 ADD `createdDate` datetime NOT NULL AFTER `createdBy`,
 ADD `editedBy` char(30) COLLATE 'utf8_general_ci' NOT NULL AFTER `createdDate`,
 ADD `editedDate` datetime NOT NULL AFTER `editedBy`;
+
+ALTER TABLE `crm_contact` ADD `customer` MEDIUMINT( 8 ) NOT NULL AFTER `id`;
