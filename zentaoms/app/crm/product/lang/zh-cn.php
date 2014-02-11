@@ -70,7 +70,7 @@ $lang->product->field->rulesList['phone']   = '电话';
 $lang->product->field->rulesList['ip']      = 'IP';
 
 $lang->product->field->optionsPlaceholder = '多个值之间用空格或逗号隔开';
-$lang->product->field->lengthNotice       = '该类型字段长度比原来小，修改后可能会造成数据错误！';
+$lang->product->field->lengthNotice       = '该类型修改可能会造成数据丢失，请慎重使用！';
 
 $lang->product->action = new stdclass();
 $lang->product->action->action     = '动作';
