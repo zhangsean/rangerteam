@@ -21,12 +21,12 @@
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
-          <th><?php echo $lang->contract->order;?></th>
-          <td><?php echo html::select('order[]', $orders, $orderID, "class='form-control chosen' multiple");?></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->contract->customer;?></th>
           <td><?php echo html::select('customer', $customers, $order ? $order->customer : '', "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->contract->order;?></th>
+          <td><?php echo html::select('order[]', $orders, $orderID, "class='form-control chosen' multiple");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->name;?></th>

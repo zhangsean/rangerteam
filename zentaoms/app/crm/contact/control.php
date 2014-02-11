@@ -41,6 +41,7 @@ class contact extends control
         $this->view->contacts  = $this->contact->getList($orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->pager     = $pager;
+        $this->view->orderBy  = $orderBy;
         $this->display();
     }   
 

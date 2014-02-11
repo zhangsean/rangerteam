@@ -16,20 +16,21 @@ class userModel extends model
     /**
      * Get users List.
      *
-     * @param object  $pager
-     * @param string  $userName
      * @param int|array  $dept
+     * @param string  $userName
+     * @param string  $orderBy
+     * @param object  $pager
      * @access public
      * @return object 
      */
-    public function getList($pager, $userName = '', $dept = 0)
+    public function getList($dept = 0, $userName = '', $orderBy = 'id', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_USER)
             ->where('deleted')->eq('0')
             ->beginIF($userName != '')->andWhere('account')->like("%$userName%")->fi()
             ->beginIF($dept != 0)->andWhere('dept')->in($dept)->fi()
-            ->orderBy('id_asc')    
-            ->page($pager)         
+            ->orderBy($orderBy)
+            ->page($pager)
             ->fetchAll();          
     }
 

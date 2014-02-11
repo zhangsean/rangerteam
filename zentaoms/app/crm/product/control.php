@@ -43,6 +43,7 @@ class product extends control
         $this->view->title    = $this->lang->product->browse;
         $this->view->products = $this->product->getList($orderBy, $pager);
         $this->view->pager    = $pager;
+        $this->view->orderBy  = $orderBy;
         $this->display();
     }   
 

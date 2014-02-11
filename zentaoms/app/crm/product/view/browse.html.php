@@ -7,12 +7,13 @@
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <th style='width: 60px'><?php echo $lang->product->id;?></th>
-        <th><?php echo $lang->product->name;?></th>
-        <th style='width: 160px'><?php echo $lang->product->createdDate;?></th>
-        <th style='width: 60px'><?php echo $lang->product->type;?></th>
-        <th style='width: 60px'><?php echo $lang->product->status;?></th>
-        <th style='width: 200px'><?php echo $lang->actions;?></th>
+        <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+        <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->product->id);?></th>
+        <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->product->name);?></th>
+        <th class='w-160px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->product->createdDate);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->product->type);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->product->status);?></th>
+        <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

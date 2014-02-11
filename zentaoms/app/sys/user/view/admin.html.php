@@ -42,19 +42,20 @@
               </form>
             </div>
           </div>
-          <table class='table table-hover table-striped table-bordered'>
+          <table class='table table-hover table-striped table-bordered tablesorter'>
             <thead>
               <tr class='text-center'>
-                <th><?php echo $lang->user->id;?></th>
-                <th><?php echo $lang->user->realname;?></th>
-                <th><?php echo $lang->user->account;?></th>
-                <th><?php echo $lang->user->gender;?></th>
-                <th><?php echo $lang->user->dept;?></th>
-                <th><?php echo $lang->user->join;?></th>
-                <th><?php echo $lang->user->visits;?></th>
-                <th><?php echo $lang->user->last;?></th>
-                <th><?php echo $lang->user->ip;?></th>
-                <th><?php echo $lang->user->status;?></th>
+                <?php $vars = "deptID=$deptID&query=$query&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+                <th><?php commonModel::printOrderLink('id',       $orderBy, $vars, $lang->user->id);?></th>
+                <th><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->user->realname);?></th>
+                <th><?php commonModel::printOrderLink('account',  $orderBy, $vars, $lang->user->account);?></th>
+                <th><?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->user->gender);?></th>
+                <th><?php commonModel::printOrderLink('dept',     $orderBy, $vars, $lang->user->dept);?></th>
+                <th><?php commonModel::printOrderLink('join',     $orderBy, $vars, $lang->user->join);?></th>
+                <th><?php commonModel::printOrderLink('visits',   $orderBy, $vars, $lang->user->visits);?></th>
+                <th><?php commonModel::printOrderLink('last',     $orderBy, $vars, $lang->user->last);?></th>
+                <th><?php commonModel::printOrderLink('ip',       $orderBy, $vars, $lang->user->ip);?></th>
+                <th><?php commonModel::printOrderLink('status',   $orderBy, $vars, $lang->user->status);?></th>
                 <th><?php echo $lang->actions;?></th>
               </tr>
             </thead>

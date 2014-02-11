@@ -7,14 +7,15 @@
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <th style='width: 60px'><?php echo $lang->customer->id;?></th>
-        <th><?php echo $lang->customer->name;?></th>
-        <th style='width: 160px'><?php echo $lang->customer->createdDate;?></th>
-        <th style='width: 100px'><?php echo $lang->customer->type;?></th>
-        <th style='width: 60px'><?php echo $lang->customer->status;?></th>
-        <th style='width: 60px'><?php echo $lang->customer->size;?></th>
-        <th style='width: 60px'><?php echo $lang->customer->level;?></th>
-        <th style='width: 100px'><?php echo $lang->actions;?></th>
+        <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+        <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->customer->id);?></th>
+        <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->customer->name);?></th>
+        <th class='w-160px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->customer->createdDate);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->customer->type);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->customer->status);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('size',        $orderBy, $vars, $lang->customer->size);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('level',       $orderBy, $vars, $lang->customer->level);?></th>
+        <th class='w-100px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

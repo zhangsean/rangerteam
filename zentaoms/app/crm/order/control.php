@@ -42,6 +42,7 @@ class order extends control
         $this->view->products  = $this->loadModel('product')->getPairs();
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->pager     = $pager;
+        $this->view->orderBy   = $orderBy;
         $this->display();
     }
 

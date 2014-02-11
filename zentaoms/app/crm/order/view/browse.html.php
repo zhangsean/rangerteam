@@ -7,14 +7,15 @@
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <th style='width: 60px'><?php echo $lang->order->id;?></th>
-        <th style='width: 100px'><?php echo $lang->order->customer;?></th>
-        <th><?php echo $lang->order->product;?></th>
-        <th style='width: 160px'><?php echo $lang->order->createdBy;?></th>
-        <th style='width: 160px'><?php echo $lang->order->assignedBy;?></th>
-        <th style='width: 160px'><?php echo $lang->order->assignedTo;?></th>
-        <th style='width: 60px'><?php echo $lang->order->status;?></th>
-        <th><?php echo $lang->actions;?></th>
+        <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+        <th class='w-60px'> <?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->order->customer);?></th>
+        <th>                <?php commonModel::printOrderLink('product', $orderBy, $vars, $lang->order->product);?></th>
+        <th class='w-160px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->order->createdBy);?></th>
+        <th class='w-160px'><?php commonModel::printOrderLink('assignedBy', $orderBy, $vars, $lang->order->assignedBy);?></th>
+        <th class='w-160px'><?php commonModel::printOrderLink('assignedTo', $orderBy, $vars, $lang->order->assignedTo);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->order->status);?></th>
+        <th>                <?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

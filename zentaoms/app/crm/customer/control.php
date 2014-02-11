@@ -42,6 +42,7 @@ class customer extends control
         $this->view->title     = $this->lang->customer->list;
         $this->view->customers = $customers;
         $this->view->pager     = $pager;
+        $this->view->orderBy   = $orderBy;
         $this->display();
     }   
 

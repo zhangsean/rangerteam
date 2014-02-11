@@ -11,6 +11,14 @@
  */
 class taskModel extends model
 {
+    /**
+     * Get task list.
+     * 
+     * @param  string $orderBy 
+     * @param  object $pager 
+     * @access public
+     * @return void
+     */
     public function getList($orderBy = 'id_desc', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_TASK)

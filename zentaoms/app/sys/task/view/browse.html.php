@@ -19,16 +19,17 @@
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <th class='w-50px'><?php echo $lang->task->id;?></th>
-        <th class='w-30px'><?php echo $lang->task->lblPri;?></th>
-        <th><?php echo $lang->task->name;?></th>
-        <th class='w-150px'><?php echo $lang->task->deadline;?></th>
-        <th class='w-80px'><?php echo $lang->task->assignedTo;?></th>
-        <th class='w-150px'><?php echo $lang->task->openedDate;?></th>
-        <th class='w-80px'><?php echo $lang->task->type;?></th>
-        <th class='w-80px'><?php echo $lang->task->status;?></th>
-        <th class='w-80px'><?php echo $lang->task->order;?></th>
-        <th class='w-80px'><?php echo $lang->actions;?></th>
+        <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+        <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->task->id);?></th>
+        <th class='w-40px'> <?php commonModel::printOrderLink('pri',         $orderBy, $vars, $lang->task->lblPri);?></th>
+        <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->task->name);?></th>
+        <th class='w-150px'><?php commonModel::printOrderLink('deadline',    $orderBy, $vars, $lang->task->deadline);?></th>
+        <th class='w-80px'> <?php commonModel::printOrderLink('assignedTo',  $orderBy, $vars, $lang->task->assignedTo);?></th>
+        <th class='w-150px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->task->createdDate);?></th>
+        <th class='w-90px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->task->type);?></th>
+        <th class='w-90px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->task->status);?></th>
+        <th class='w-90px'> <?php commonModel::printOrderLink('order',       $orderBy, $vars, $lang->task->order);?></th>
+        <th class='w-80px'> <?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

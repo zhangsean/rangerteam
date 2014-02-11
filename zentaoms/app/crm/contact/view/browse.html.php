@@ -3,18 +3,19 @@
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->contact->list;?></strong>
   </div>
-  <table class='table table-hover table-striped table-bordered'>
+  <table class='table table-hover table-striped table-bordered tablesorter'>
     <thead>
       <tr class='text-center'>
-        <th class='w-id'><?php echo $lang->contact->id;?></th>
-        <th class='w-150px'><?php echo $lang->contact->customer;?></th>
-        <th class='w-100px'><?php echo $lang->contact->realname;?></th>
-        <th class='w-id'><?php echo $lang->contact->gender;?></th>
-        <th class='w-120px'><?php echo $lang->contact->phone;?></th>
-        <th class='w-120px'><?php echo $lang->contact->mobile;?></th>
-        <th class='w-200px'><?php echo $lang->contact->email;?></th>
-        <th class='w-100px'><?php echo $lang->contact->qq;?></th>
-        <th class='w-100px'><?php echo $lang->contact->weixin;?></th>
+        <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+        <th class='w-60px'> <?php commonModel::printOrderLink('id',       $orderBy, $vars, $lang->contact->id);?></th>
+        <th class='w-150px'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->contact->customer);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->contact->gender);?></th>
+        <th class='w-120px'><?php commonModel::printOrderLink('phone',    $orderBy, $vars, $lang->contact->phone);?></th>
+        <th class='w-120px'><?php commonModel::printOrderLink('mobile',   $orderBy, $vars, $lang->contact->mobile);?></th>
+        <th calss='w-200px'><?php commonModel::printOrderLink('email',    $orderBy, $vars, $lang->contact->email);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('qq',       $orderBy, $vars, $lang->contact->qq);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('weixin',   $orderBy, $vars, $lang->contact->weixin);?></th>
         <th><?php echo $lang->actions;?></th>
       </tr>
     </thead>

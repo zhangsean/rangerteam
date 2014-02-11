@@ -1541,7 +1541,34 @@ class sql
     public function orderBy($order)
     {
         $order = str_replace(array('|', '', '_'), ' ', $order);
-        $order = str_replace('left', '`left`', $order); // process the left to `left`.
+
+        /* Add "`" in order string. */
+        /* When order has limit string. */
+        $pos    = stripos($order, 'limit');
+        $orders = $pos ? substr($order, 0, $pos) : $order;
+        $limit  = $pos ? substr($order, $pos) : '';
+
+        $orders = explode(',', $orders);
+        foreach($orders as $i => $order)
+        {    
+            $orderParse = explode(' ', trim($order));
+            foreach($orderParse as $key => $value)
+            {    
+                $value = trim($value);
+                if(empty($value) or strtolower($value) == 'desc' or strtolower($value) == 'asc') continue;
+                $field = trim($value, '`');
+
+                /* such as t1.id field. */
+                if(strpos($value, '.') !== false) list($table, $field) = explode('.', $field);
+                $field = "`$field`";
+
+                $orderParse[$key] = isset($table) ? $table . '.' . $field :  $field;
+                unset($table);
+            }    
+            $orders[$i] = join(' ', $orderParse);
+        }    
+        $order = join(',', $orders) . ' ' . $limit;
+
         $this->sql .= ' ' . DAO::ORDERBY . " $order";
         return $this;
     }

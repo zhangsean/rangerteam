@@ -315,19 +315,22 @@ class user extends control
      * @access public
      * @return void
      */
-    public function admin($deptID = 0, $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function admin($deptID = 0, $query = '', $orderBy = 'id_asc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $query = $this->post->query ? $this->post->query : '';
+        $query = $this->post->query ? $this->post->query : $query;
+        /* Keep query when change page. */
+        $this->get->set('query', $query);
 
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptAdminLink'));
         $this->view->depts    = $this->tree->getOptionMenu('dept');
-        $this->view->users    = $this->user->getList($pager, $query, $deptID);
+        $this->view->users    = $this->user->getList($deptID, $query, $orderBy, $pager);
         $this->view->query    = $query;
         $this->view->pager    = $pager;
         $this->view->deptID   = $deptID;
+        $this->view->orderBy  = $orderBy;
 
         $this->view->title = $this->lang->user->list;
         $this->display();

@@ -22,14 +22,25 @@ class task extends control
         $this->locate(inlink('browse'));
     }   
 
+    /**
+     * Browse task. 
+     * 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
     public function browse($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title = $this->lang->task->browse;
-        $this->view->tasks = $this->task->getList($orderBy, $pager);
-        $this->view->pager = $pager;
+        $this->view->title   = $this->lang->task->browse;
+        $this->view->tasks   = $this->task->getList($orderBy, $pager);
+        $this->view->pager   = $pager;
+        $this->view->orderBy = $orderBy;
         $this->display();
     }
 }
