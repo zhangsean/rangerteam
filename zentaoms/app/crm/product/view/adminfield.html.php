@@ -21,7 +21,16 @@
         <td class='text-left'><?php echo $field->field;?></td>
         <td class='text-left'><?php echo $field->name;?></td>
         <td><?php echo $lang->product->field->controlTypeList[$field->control];?></td>
-        <td><?php echo $field->options;?></td>
+        <td>
+          <?php
+          $delimiter = '';
+          foreach($field->options as $value => $text)
+          {
+              echo $delimiter . $value . '=>' . $text;
+              $delimiter = ', ';
+          }
+          ?>
+        </td>
         <td><?php echo $field->default;?></td>
         <td>
           <?php
