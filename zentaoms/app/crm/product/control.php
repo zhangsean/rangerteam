@@ -273,8 +273,10 @@ class product extends control
             $defaultConditions  = new stdclass();
             $defaultConditions->operater = '';
             $defaultConditions->value    = '';
+            $defaultConditions->field    = '';
+            $defaultConditions->param    = '';
 
-            $action->conditions[] = $defaultInput;
+            $action->conditions[] = $defaultConditions;
         }
 
         if($_POST)
