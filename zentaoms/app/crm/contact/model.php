@@ -65,14 +65,18 @@ class contactModel extends model
         $this->dao->insert(TABLE_CONTACT)
             ->data($contact)
             ->autoCheck()
+            ->batchCheck($this->config->contact->require->create, 'notempty')
+            ->check('realname', 'unique')
+            ->check('email', 'email')
+            ->check('email', 'unique')
             ->exec();
 
         if(dao::isError()) return false;
 
         $contactID = $this->dao->lastInsertID();
-        $result    = $this->updateAvatar($contactID);
+        $return    = $this->updateAvatar($contactID);
 
-        return $result ? $contactID : false;
+        return $return['result'] ? $contactID : false;
     }
 
     /**
@@ -96,12 +100,16 @@ class contactModel extends model
         $this->dao->update(TABLE_CONTACT)
             ->data($contact)
             ->autoCheck()
+            ->batchCheck($this->config->contact->require->edit, 'notempty')
+            ->check('realname', 'unique', "id != '$contactID'")
+            ->check('email', 'email')
+            ->check('email', 'unique', "id != '$contactID'")
             ->where('id')->eq($contactID)
             ->exec();
 
-        if(dao::isError()) return false;
+        $return = $this->updateAvatar($contactID);
 
-        return !dao::isError();
+        return $return['result'] ? !dao::isError() : false;
     }
 
     /**
@@ -128,30 +136,25 @@ class contactModel extends model
      */
     public function updateAvatar($contactID)
     {
-        //upload avatar img.
-        $file = $this->loadModel('file')->getUpload('avatar');
-        if(isset($file[0]))
-        {
-            $file = $file[0];
-            if(@move_uploaded_file($file['tmpname'], $this->file->savePath . $file['pathname']))
-            {
-                $url = $this->file->webPath . $file['pathname'];
-
-                $file['addedBy']    = $this->app->user->account;
-                $file['addedDate']  = helper::today();
-                $file['objectType'] = 'contactAvatar';
-                $file['objectID']   = $contactID;
-                unset($file['tmpname']);
-                $this->dao->insert(TABLE_FILE)->data($file)->exec();
-
-                $avatarPath = $this->config->webRoot . 'data/upload/' . $file['pathname'];
-                $this->dao->update(TABLE_CONTACT)->set('avatar')->eq($avatarPath)->where('id')->eq($contactID)->exec();
-            }
-            else
-            {
-                $error = strip_tags(sprintf($this->lang->file->errorCanNotWrite, $this->file->savePath, $this->file->savePath));
-                die(js::alert($error));
-            }
-        }
+        $fileModel = $this->loadModel('file');
+        
+        if(!$this->file->checkSavePath()) return array('result' => false, 'message' => $this->lang->file->errorUnwritable);
+        
+        /* Delete old files. */
+        $oldFiles = $this->dao->select('id')->from(TABLE_FILE)->where('objectType')->eq('avatar')->andWhere('objectID')->eq($contactID)->fetchAll('id');
+        foreach($oldFiles as $file) $fileModel->delete($file->id);
+        if(dao::isError()) return array('result' => false, 'message' => $this->lang->fail);
+        
+        /* Upload new avatar. */
+        $uploadResult = $fileModel->saveUpload('avatar', $contactID);
+        if(!$uploadResult) return array('result' => 'fail', 'message' => $this->lang->fail);
+        
+        $fileIdList = array_keys($uploadResult);
+        $file       = $fileModel->getById($fileIdList[0]);
+        
+        $avatarPath = $this->config->webRoot . 'data/upload/' . $file->pathname;
+        $this->dao->update(TABLE_CONTACT)->set('avatar')->eq($avatarPath)->where('id')->eq($contactID)->exec();
+        if(!dao::isError()) return array('result' => true);
+        return array('return' => false, 'message' => $this->lang->fail);
     }
 }

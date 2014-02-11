@@ -37,9 +37,10 @@ class contact extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title    = $this->lang->contact->list;
-        $this->view->contacts = $this->contact->getList($orderBy, $pager);
-        $this->view->pager    = $pager;
+        $this->view->title     = $this->lang->contact->list;
+        $this->view->contacts  = $this->contact->getList($orderBy, $pager);
+        $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->pager     = $pager;
         $this->display();
     }   
 
@@ -58,7 +59,8 @@ class contact extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $this->view->title = $this->lang->contact->create;
+        $this->view->title     = $this->lang->contact->create;
+        $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->display();
     }
 
@@ -74,15 +76,15 @@ class contact extends control
         if($_POST)
         {
             $this->contact->update($contactID);
-            $this->contact->updateAvatar($contactID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
         $contact = $this->contact->getByID($contactID);
 
-        $this->view->title   = $this->lang->contact->edit;
-        $this->view->contact = $contact;
+        $this->view->title     = $this->lang->contact->edit;
+        $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->contact   = $contact;
 
         $this->display();
     }

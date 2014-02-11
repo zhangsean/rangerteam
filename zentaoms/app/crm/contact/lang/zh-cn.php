@@ -11,6 +11,7 @@
  */
 $lang->contact->common        = '联系人维护';
 $lang->contact->id            = '编号';
+$lang->contact->customer      = '所属客户';
 $lang->contact->realname      = '真实姓名';
 $lang->contact->nickname      = '昵称';
 $lang->contact->avatar        = '头像';
