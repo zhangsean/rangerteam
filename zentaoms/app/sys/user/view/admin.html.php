@@ -55,7 +55,7 @@
                 <th><?php commonModel::printOrderLink('visits',   $orderBy, $vars, $lang->user->visits);?></th>
                 <th><?php commonModel::printOrderLink('last',     $orderBy, $vars, $lang->user->last);?></th>
                 <th><?php commonModel::printOrderLink('ip',       $orderBy, $vars, $lang->user->ip);?></th>
-                <th><?php commonModel::printOrderLink('status',   $orderBy, $vars, $lang->user->status);?></th>
+                <th><?php commonModel::printOrderLink('locked',   $orderBy, $vars, $lang->user->status);?></th>
                 <th><?php echo $lang->actions;?></th>
               </tr>
             </thead>
