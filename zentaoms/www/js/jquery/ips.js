@@ -40,6 +40,7 @@
         confirmRemoveBlock               : '确定要移除区块 【{0}】 吗？',
         removedBlock                  : '区块已删除',
         orderdBlocksSaved             : '排序已保存',
+        confirmCloseBrowser           : '提示：当前有打开的应用窗口',
         windowHtmlTemplate            : "<div id='{idstr}' class='window{cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}' data-url='{url}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
         frameHtmlTemplate             : "<iframe id='iframe-{id}' name='iframe-{id}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
         leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
@@ -320,6 +321,12 @@
             this.$.addClass('modal-mode');
         }
 
+        /* Determine wheather has entry window opened*/
+        this.hasTask = function()
+        {
+            return $('#taskbar .bar-menu li').length > 0;
+        }
+
         /* Initialize */
         this.init = function()
         {
@@ -338,6 +345,8 @@
             this.startMenu      = new startMenu();
             this.fullScreenApps = new fullScreenApps();
             windows             = new windowsManager();
+
+            this.updateBrowserUrl(indexUrl, true, 'index', {tag:　'index'});
         }
 
         /* Bind events */
@@ -376,6 +385,29 @@
                 target.toggleClass($e.attr('data-toggle-class'));
                 $e.toggleClass('toggle-on');
             });
+
+
+            window.onbeforeunload = function(e)
+            {
+                console.log(e);
+                console.log(desktop.hasTask());
+                if(desktop.hasTask()) return settings.confirmCloseBrowser;
+            }
+        }
+
+        /* Update browser url in address bar by change browser history */
+        this.updateBrowserUrl = function(url, isForcePush, title, state)
+        {
+            console.log({isForcePush: isForcePush, url: url});
+
+            url = url || indexUrl;
+            state = state || {};
+            try
+            {
+                if(isForcePush) window.history.pushState(state, title, url);
+                else window.history.replaceState(state, title, url);
+            }
+            catch(e){}
         }
 
         this.init();
@@ -567,6 +599,16 @@
 
                 windows.query(q).reload();
             });
+
+            window.addEventListener('popstate', function(e)
+            {
+                if (history.state)
+                {
+                    console.log(history.state);
+                    var state = e.state;
+                    console.log(state);
+                }
+            }, false);
         }
 
         /* Handle window key down event */
@@ -796,25 +838,24 @@
 
                         if(this.firstLoad)
                         {
-                            this.firstLoad = false;
                             this.indexUrl = url;
                         }
                     }
                 }
                 catch(e){}
 
-                this.updateEntryUrl();
+                this.updateEntryUrl(this.firstLoad);
 
-                $frame.unbind('keydown', windows.handleWindowKeydown).keydown(windows.handleWindowKeydown).data('data-id', this.idStr);
+                this.firstLoad = false;
+                try{$frame.unbind('keydown', windows.handleWindowKeydown).keydown(windows.handleWindowKeydown).data('data-id', this.idStr);}catch(e){}
             }, this));
             return true;
         }
 
         /* Update address bar when content url changed */
-        this.updateEntryUrl = function()
+        this.updateEntryUrl = function(isForcePush)
         {
-            var url = this.url || this.indexUrl;
-            try{window.history.replaceState({}, 0, this.url);}catch(e){}
+            desktop.updateBrowserUrl(this.url || this.indexUrl, isForcePush);
         }
 
         /* Close the window */
@@ -840,7 +881,11 @@
                 win.remove();
                 if(this.isModal) $('#desktop').removeClass('modal-mode');
 
-                if((!desktop.$.hasClass('fullscreen-mode')) && $('#taskbar .bar-menu li').length < 1) $('#showDesk').click();
+                if(!desktop.hasTask() && !desktop.isFullscreenMode)
+                {
+                    $('#showDesk').click();
+                    desktop.updateBrowserUrl();
+                }
             }, this));
 
             $('.tooltip').remove();
@@ -1036,7 +1081,7 @@
             }
         }
 
-        /* Handle the app: home blocks */
+        /* Handle the app: home blocks, use dashboard control in zui */
         this.handleHomeBlocks = function()
         {
             $('#home .dashboard').dashboard(
