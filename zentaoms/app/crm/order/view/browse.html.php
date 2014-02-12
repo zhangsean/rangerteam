@@ -9,12 +9,11 @@
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px' ><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
-        <th class='w-200px'><?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->order->name);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->order->customer);?></th>
-        <th class='w-160px'><?php commonModel::printOrderLink('product', $orderBy, $vars, $lang->order->product);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->order->createdBy);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('assignedBy', $orderBy, $vars, $lang->order->assignedBy);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('assignedTo', $orderBy, $vars, $lang->order->assignedTo);?></th>
+        <th class='w-160px'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->order->customer);?></th>
+        <th class='w-200px'><?php commonModel::printOrderLink('product', $orderBy, $vars, $lang->order->product);?></th>
+        <th class='w-120px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->order->createdBy);?></th>
+        <th class='w-120px'><?php commonModel::printOrderLink('assignedBy', $orderBy, $vars, $lang->order->assignedBy);?></th>
+        <th class='w-120px'><?php commonModel::printOrderLink('assignedTo', $orderBy, $vars, $lang->order->assignedTo);?></th>
         <th class='w-60px' ><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->order->status);?></th>
         <th>                <?php echo $lang->actions;?></th>
       </tr>
@@ -23,7 +22,6 @@
       <?php foreach($orders as $order):?>
       <tr class='text-center'>
         <td><?php echo $order->id;?></td>
-        <td><?php echo $order->name;?></td>
         <td><?php echo $customers[$order->customer];?></td>
         <td><?php echo $products[$order->product];?></td>
         <td><?php echo $order->createdBy;?></td>

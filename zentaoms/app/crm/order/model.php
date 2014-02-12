@@ -45,14 +45,7 @@ class orderModel extends model
      */
     public function getList($orderBy = 'id_desc', $pager = null)
     {
-        $orders = $this->dao->select('*')->from(TABLE_ORDER)->orderBy($orderBy)->page($pager)->fetchAll('id');
-
-        foreach($orders as $order)
-        {
-            $order->name = $this->createOrderName($order);
-        }
-
-        return $orders;
+        return $this->dao->select('*')->from(TABLE_ORDER)->orderBy($orderBy)->page($pager)->fetchAll('id');
     }
 
     /**
@@ -63,12 +56,14 @@ class orderModel extends model
      */
     public function getPairs()
     {
-        $orders = $this->dao->select('id, customer, product, createdDate')->from(TABLE_ORDER)->fetchAll('id');
+        $orders    = $this->dao->select('id, customer, product, createdDate')->from(TABLE_ORDER)->fetchAll('id');
+        $customers = $this->loadModel('customer')->getPairs();
+        $products  = $this->loadModel('product')->getPairs();
 
         $orderPairs = array();
         foreach($orders as $key => $order)
         {
-           $orderPairs[$key] = $this->createOrderName($order);
+           $orderPairs[$key] = $order->id .'_' . $customers[$order->customer] . '_' . $products[$order->product] . '_' . substr($order->createdDate, 0, 10); 
         }
 
         return $orderPairs;
@@ -408,19 +403,5 @@ class orderModel extends model
             $this->dao->insert(TABLE_TASK)->data($task)->exec();
         }
         return !dao::isError();
-    }
-
-    /**
-     * Create name of an order.
-     * 
-     * @param  object  $order 
-     * @access public
-     * @return string 
-     */
-    public function createOrderName($order)
-    {
-        $customers = $this->loadModel('customer')->getPairs();
-        $products  = $this->loadModel('product')->getPairs();
-        return $order->id .'_' . $customers[$order->customer] . '_' . $products[$order->product] . '_' . substr($order->createdDate, 0, 10); 
     }
 }
