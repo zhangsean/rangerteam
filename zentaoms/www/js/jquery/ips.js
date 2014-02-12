@@ -15,6 +15,7 @@
     var desktop          = null;
     var windows          = null;
     var windowIdPrefix   = 'win-';
+    var theLoadingFrame  = null;
 
     /* Save the index url */
     var indexUrl         = window.location.href;
@@ -389,8 +390,6 @@
 
             window.onbeforeunload = function(e)
             {
-                console.log(e);
-                console.log(desktop.hasTask());
                 if(desktop.hasTask()) return settings.confirmCloseBrowser;
             }
         }
@@ -398,8 +397,6 @@
         /* Update browser url in address bar by change browser history */
         this.updateBrowserUrl = function(url, isForcePush, title, state)
         {
-            console.log({isForcePush: isForcePush, url: url});
-
             url = url || indexUrl;
             state = state || {};
             try
@@ -600,23 +597,32 @@
                 windows.query(q).reload();
             });
 
-            window.addEventListener('popstate', function(e)
+            try
             {
-                if (history.state)
+                window.addEventListener('popstate', function(e)
                 {
-                    console.log(history.state);
-                    var state = e.state;
-                    console.log(state);
-                }
-            }, false);
+                    if (history.state)
+                    {
+                        var state = e.state;
+                    }
+                }, false);
+            }
+            catch(e){}
         }
 
         /* Handle window key down event */
         this.handleWindowKeydown = function(event)
         {
-            if(event.keyCode == 116)
+            if(event.keyCode == 116 || (event.ctrlKey && event.keyCode==82))
             {
                 windows.reload();
+
+                try{window.event.keyCode = 0;}catch(e){} // for IEs  
+                try{window.frames[theLoadingFrame].event.keyCode = 0;}catch(e){} // for IEs  
+                event.cancelBubble = true;
+                event.returnValue  = false;
+                event.preventDefault();
+                event.stopPropagation();
                 return false;
             }
         }
@@ -772,8 +778,7 @@
                         break;
                 }
 
-                $('#deskContainer').removeClass('hide-windows');
-                $('#showDesk .icon-check-empty').removeClass('icon-sign-blank');
+                if(!this.isActive()) this.active();
             }
             else
             {
@@ -811,21 +816,26 @@
         this.loadIframe = function()
         {
             var fName = 'iframe-' + this.id;
-            var frame = $('#' + fName);
-            if(frame.length > 0)
+            theLoadingFrame = fName;
+            var frame = document.getElementById(fName);
+            var win = this;
+
+            if(frame)
             {
-                document.getElementById(fName).src = this.getUrl();
+                frame.contentWindow.location.reload();
             }
             else
             {
                 this.$.find('.window-content').html(settings.frameHtmlTemplate.format(this));
+                frame = document.getElementById(fName);
             }
 
-            $('#' + fName).load($.proxy(function()
+            frame.onload = frame.onreadystatechange = function()
             {
-                this.$.removeClass('window-loading').removeClass('window-first').find('.reload-win i').removeClass('icon-spin');
+                if (this.readyState && this.readyState != 'complete') return;
 
-                
+                win.$.removeClass('window-loading').removeClass('window-first').find('.reload-win i').removeClass('icon-spin');
+
                 try
                 {
                     var $frame = $(window.frames[fName].document);
@@ -833,23 +843,22 @@
                     if($frame.length)
                     {
                         var url = $frame.context.URL;
-                        this.setUrl(url);
-                        if(this.entry) this.entry.currentUrl = url;
+                        win.setUrl(url);
+                        if(win.entry) win.entry.currentUrl = url;
 
-                        if(this.firstLoad)
+                        if(win.firstLoad)
                         {
-                            this.indexUrl = url;
+                            win.indexUrl = url;
                         }
+
+                        $frame.unbind('keydown', windows.handleWindowKeydown).keydown(windows.handleWindowKeydown).data('data-id', win.idStr);
                     }
                 }
                 catch(e){}
 
-                this.updateEntryUrl(this.firstLoad);
-
-                this.firstLoad = false;
-                try{$frame.unbind('keydown', windows.handleWindowKeydown).keydown(windows.handleWindowKeydown).data('data-id', this.idStr);}catch(e){}
-            }, this));
-            return true;
+                win.updateEntryUrl(win.firstLoad);
+                win.firstLoad = false;
+            }
         }
 
         /* Update address bar when content url changed */
@@ -1104,7 +1113,6 @@
 
             function afterOrdered(newOrders)
             {
-                console.log(newOrders);
                 if(settings.onBlocksOrdered && $.isFunction(settings.onBlocksOrdered))
                 {
                     settings.onBlocksOrdered(newOrders);
@@ -1159,6 +1167,7 @@
         this.init = function()
         {
             this.$leftBar     = $('#leftBar');
+            this.$taskBar     = $('#taskbar');
             this.$appsMenu    = $('#apps-menu .bar-menu');
             this.$allAppsList = $("#allAppsList .bar-menu");
 
@@ -1197,7 +1206,7 @@
                 var et = entries[$(this).attr('data-id')];
                 if(et)
                 {
-                    if(et.display == 'fullscreen') desktop.fullScreenApps.toggle(et.id);
+                    if(et.display == 'fullscreen' && desktop.fullScreenApps) desktop.fullScreenApps.toggle(et.id);
                     else windows.openEntry(et, $(this).hasClass('s-menu-btn'));
                 }
                 else
@@ -1208,11 +1217,8 @@
                 event.preventDefault();
             });
 
-            /* disable the browser's contextmenu */
-            document.oncontextmenu = nocontextmenu;  // for IE5+
-            document.onmousedown = norightclick;  // for all others
-
-            this.$leftBar.bind('oncontextmenu', nocontextmenu);
+            this.$leftBar.bind('contextmenu', nocontextmenu);
+            this.$taskBar.bind('contextmenu', nocontextmenu);
 
             $(document).on('mousedown', '.app-btn.open', function(e)
             {
@@ -1225,17 +1231,23 @@
                     if(menu.hasClass('show'))
                     {
                         menu.attr('data-id', btn.attr('data-id'));
-                        if(btn.hasClass('s-menu-btn')) menu.css({left: 62, top: offset.top, bottom: 'inherit'});
+                        if(btn.hasClass('s-menu-btn'))
+                        {
+                            menu.css({left: 62, top: offset.top, bottom: 'inherit'});
+                            $('.tooltip').remove();
+                        }
                         else if(btn.hasClass('s-task-btn')) menu.css({left: offset.left, top: 'inherit', bottom: 38});
                     }
                 }
-
-                e.stopPropagation();
             });
 
-            $(document).click(function(){$('#taskMenu').removeClass('show')});
+            $(document).click(function(e)
+            {
+                if($(e.target).hasClass('app-btn')) return false;
+                $('#taskMenu').removeClass('show');
+            });
 
-            function nocontextmenu()
+            function nocontextmenu(event)
             {
                 event.cancelBubble = true
                 event.returnValue = false;
@@ -1250,8 +1262,7 @@
                     if (e.which == 2 || e.which == 3)
                     return false;
                 }
-                else
-                if (event.button == 2 || event.button == 3)
+                else if (event.button == 2 || event.button == 3)
                 {
                     event.cancelBubble = true
                     event.returnValue  = false;

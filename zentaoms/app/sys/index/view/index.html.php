@@ -23,7 +23,7 @@ js::import($jsRoot . 'jquery/ips.js');
       <li><?php echo html::a('###', html::image($themeRoot . 'default/images/ips/avatar.jpg', "class='avatar-img'") . "<strong>{$app->user->realname}</strong>", "class='app-btn' data-id='profile'");?></li>
       <li class="divider"></li>
       <li><?php echo html::a($this->createLink('entry', 'create'), "<i class='icon icon-plus'></i> {$lang->index->addEntry}", "target='_blank'"  )?></li>
-      <li><a href='###' class='fullscreen-btn' data-id='allapps'><i class='icon icon-th-large'></i> <?php echo $lang->index->allEntries?><div class='pull-right'><span class='label label-badge entries-count'></span></div></a></li>
+      <li><a href='###' class='fullscreen-btn' data-id='allapps'><div class='pull-right'><span class='label label-badge entries-count'></span></div><i class='icon icon-th-large'></i> <?php echo $lang->index->allEntries?></a></li>
     </ul>
     <div id='apps-menu'>
       <ul class='bar-menu'></ul>
@@ -52,7 +52,6 @@ js::import($jsRoot . 'jquery/ips.js');
         <div class='col-sm-6 col-md-4'>
           <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->name?>'>
             <div class='panel-heading'>
-              <?php echo $block->name?>
               <div class='panel-actions'>
                 <div class='dropdown'>
                   <button role="button" class="btn btn-mini" data-toggle="dropdown"><span class="caret"></span></button>
@@ -62,6 +61,7 @@ js::import($jsRoot . 'jquery/ips.js');
                   </ul>
                 </div>
               </div>
+              <?php echo $block->name?>
             </div>
             <div class='panel-body no-padding'>
               <?php echo html::image("{$themeRoot}default/images/ips/loading.gif", "style='display:block;margin:40px auto;'")?>
