@@ -331,7 +331,7 @@ class product extends control
         $this->loadModel('order');
 
         $inputFields = array('' => '');
-        foreach($this->lang->order->fields as $name => $field) $inputFields[$name] = $this->lang->order->{$namname};
+        foreach($this->lang->order->fields as $name => $field) $inputFields[$name] = $this->lang->order->{$name};
 
         $fields  = $this->product->getFieldList($action->product);
         foreach($fields as $field) $inputFields[$field->field] = $field->name;

@@ -212,7 +212,9 @@ class productModel extends model
             case 'checkbox':
                 return html::checkbox($field->field, ($field->options), !empty($value) ? $value :$field->default, "class='form-control'");
             case 'date':
-                return html::input($field->field, !empty($value) ? $value : $field->default);
+                return html::date($field->field, !empty($value) ? $value : $field->default, "data-format='yyyy-mm-dd'", "class='form-control'");
+            case 'datetime':
+                return html::dateTime($field->field, !empty($value) ? $value : $field->default, '', "class='form-control'");
         }
     }
 
