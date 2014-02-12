@@ -91,49 +91,49 @@ $myConfig   = $configRoot . 'my.php';
 if(file_exists($myConfig)) include $myConfig;
 
 /* Tables for basic system. */
-define('TABLE_CONFIG',    'sys_config');
-define('TABLE_USER',      'sys_user');
-define('TABLE_GROUP',     'sys_group');
-define('TABLE_GROUPPRIV', 'sys_groupPriv');
-define('TABLE_USERGROUP', 'sys_userGroup');
-define('TABLE_USERQUERY', 'sys_userQuery');
-define('TABLE_ACTION',    'sys_action');
-define('TABLE_FILE',      'sys_file');
-define('TABLE_HISTORY',   'sys_history');
-define('TABLE_CATEGORY',  'sys_category');
-define('TABLE_EXTENSION', 'sys_extension`');
-define('TABLE_WEBAPP',    'sys_webapp`');
-define('TABLE_LANG',      'sys_lang`');
-define('TABLE_ENTRY',     'sys_entry');
-define('TABLE_SSO',       'sys_sso');
-define('TABLE_TASK',      'sys_task');
+define('TABLE_CONFIG',    '`sys_config`');
+define('TABLE_USER',      '`sys_user`');
+define('TABLE_GROUP',     '`sys_group`');
+define('TABLE_GROUPPRIV', '`sys_groupPriv`');
+define('TABLE_USERGROUP', '`sys_userGroup`');
+define('TABLE_USERQUERY', '`sys_userQuery`');
+define('TABLE_ACTION',    '`sys_action`');
+define('TABLE_FILE',      '`sys_file`');
+define('TABLE_HISTORY',   '`sys_history`');
+define('TABLE_CATEGORY',  '`sys_category`');
+define('TABLE_EXTENSION', '`sys_extension`');
+define('TABLE_WEBAPP',    '`sys_webapp`');
+define('TABLE_LANG',      '`sys_lang`');
+define('TABLE_ENTRY',     '`sys_entry`');
+define('TABLE_SSO',       '`sys_sso`');
+define('TABLE_TASK',      '`sys_task`');
 
 /* Tables for crm. */
-define('TABLE_PRODUCT',       'sys_product');
-define('TABLE_ORDERFIELD',    'crm_orderField');
-define('TABLE_ORDERACTION',   'crm_orderAction');
-define('TABLE_ORDER',         'crm_order');
-define('TABLE_CUSTOMER',      'crm_customer');
-define('TABLE_TEAM',          'crm_team');
-define('TABLE_CONTACT',       'crm_contact');
-define('TABLE_CONTRACT',      'crm_contract');
-define('TABLE_CONTRACTORDER', 'crm_contractOrder');
+define('TABLE_PRODUCT',       '`sys_product`');
+define('TABLE_ORDERFIELD',    '`crm_orderField`');
+define('TABLE_ORDERACTION',   '`crm_orderAction`');
+define('TABLE_ORDER',         '`crm_order`');
+define('TABLE_CUSTOMER',      '`crm_customer`');
+define('TABLE_TEAM',          '`crm_team`');
+define('TABLE_CONTACT',       '`crm_contact`');
+define('TABLE_CONTRACT',      '`crm_contract`');
+define('TABLE_CONTRACTORDER', '`crm_contractOrder`');
 
 /* Tables for oa. */
-define('TABLE_TODO',     'oa_todo`');
-define('TABLE_PROJECT',  'oa_project`');
-define('TABLE_EFFORT',   'oa_effort`');
-define('TABLE_RELATION', 'oa_relation');
-define('TABLE_ARTICLE',  'oa_article');
-define('TABLE_BLOCK',    'oa_block');
-define('TABLE_BOOK',     'oa_book');
-define('TABLE_LAYOUT',   'oa_layout');
+define('TABLE_TODO',     '`oa_todo`');
+define('TABLE_PROJECT',  '`oa_project`');
+define('TABLE_EFFORT',   '`oa_effort`');
+define('TABLE_RELATION', '`oa_relation`');
+define('TABLE_ARTICLE',  '`oa_article`');
+define('TABLE_BLOCK',    '`oa_block`');
+define('TABLE_BOOK',     '`oa_book`');
+define('TABLE_LAYOUT',   '`oa_layout`');
 
 /* Tables for sns. */
-define('TABLE_TAG',     'sns_tag');
-define('TABLE_THREAD',  'sns_thread');
-define('TABLE_REPLY',   'sns_reply');
-define('TABLE_MESSAGE', 'sns_message');
+define('TABLE_TAG',     '`sns_tag`');
+define('TABLE_THREAD',  '`sns_thread`');
+define('TABLE_REPLY',   '`sns_reply`');
+define('TABLE_MESSAGE', '`sns_message`');
 
 /* The mapping list of object and tables. */
 $config->objectTables['product']     = TABLE_PRODUCT;

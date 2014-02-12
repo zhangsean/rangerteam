@@ -118,6 +118,7 @@ class order extends control
         $this->view->order    = $order;
         $this->view->product  = $product;
         $this->view->customer = $customer;
+        $this->view->efforts  = $this->loadModel('effort')->getByObject('order', $orderID);
     
         $this->display();
     }

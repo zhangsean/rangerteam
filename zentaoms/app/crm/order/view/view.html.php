@@ -74,9 +74,33 @@
     <tbody>
       <tr class='text-center'>
         <td><?php echo $customer->name;?></td>
-        <td><?php echo $customer->contactBy;?></td>
-        <td><?php echo $customer->contactDate;?></td>
+        <td><?php echo $customer->contactedBy;?></td>
+        <td><?php echo $customer->contactedDate;?></td>
       <tr>
+    </tbody>
+  </table>
+</div>
+<div class='panel'>
+  <div class='panel-heading'><strong><?php echo $lang->order->effort;?></strong></div>
+  <table class='table table-hover'>
+    <thead>
+      <tr class='text-center'>
+        <th class='w-id'><?php echo $lang->effort->id;?></th>
+        <th class='w-100px'><?php echo $lang->effort->date;?></th>
+        <th class='w-80px'><?php echo $lang->effort->consumed;?></th>
+        <th><?php echo $lang->effort->work;?></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php unset($efforts['typeList']);?>
+      <?php foreach($efforts as $effort):?>
+      <tr class='text-center'>
+        <td><?php echo $effort->id;?></td>
+        <td><?php echo $effort->date;?></td>
+        <td><?php echo $effort->consumed;?></td>
+        <td class='text-left'><?php echo $effort->work;?></td>
+      <tr>
+      <?php endforeach;?>
     </tbody>
   </table>
 </div>

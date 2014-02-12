@@ -45,6 +45,7 @@
               echo html::a($this->createLink('contact', 'create', "customerID=$order->customer"), $lang->order->contact);
           }
           echo html::a($this->createLink('contract', 'create', "orderID=$order->id"), $lang->order->contract);
+          echo html::a($this->createLink('effort', 'createForObject', "objectType=order&objectID=$order->id"), $lang->order->effort);
           ?>
           <?php 
           $actions = $this->order->getEnabledActions($order);

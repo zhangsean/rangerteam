@@ -64,7 +64,7 @@ class contactModel extends model
             ->get();
 
         $this->dao->insert(TABLE_CONTACT)
-            ->data($contact)
+            ->data($contact, 'files')
             ->autoCheck()
             ->batchCheck($this->config->contact->require->create, 'notempty')
             ->check('email', 'email')
@@ -97,7 +97,7 @@ class contactModel extends model
             ->get();
 
         $this->dao->update(TABLE_CONTACT)
-            ->data($contact)
+            ->data($contact, 'files')
             ->autoCheck()
             ->batchCheck($this->config->contact->require->edit, 'notempty')
             ->check('email', 'email')

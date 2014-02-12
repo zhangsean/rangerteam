@@ -10,6 +10,7 @@
  * @link        http://www.zentao.net
  */
 $lang->order->common = '订单维护';
+$lang->order->effort = '日志';
 
 $lang->order->statusList['normal']     = '正常';
 $lang->order->statusList['assigned']   = '已指派';

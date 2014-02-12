@@ -16,3 +16,17 @@ ADD `editedBy` char(30) COLLATE 'utf8_general_ci' NOT NULL AFTER `createdDate`,
 ADD `editedDate` datetime NOT NULL AFTER `editedBy`;
 
 ALTER TABLE `crm_contact` ADD `customer` MEDIUMINT( 8 ) NOT NULL AFTER `id`;
+CREATE TABLE IF NOT EXISTS `oa_effort` (
+  `id` MEDIUMINT( 8 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  `objectType` VARCHAR( 30 ) NOT NULL ,
+  `objectID` SMALLINT( 8 ) UNSIGNED NOT NULL ,
+  `product` VARCHAR( 255 ) NOT NULL ,
+  `account` VARCHAR( 30 ) NOT NULL ,
+  `work` VARCHAR( 255 ) NOT NULL ,
+  `date` DATE NOT NULL ,
+  `left` float NOT NULL,
+  `consumed` float NOT NULL,
+  `begin` SMALLINT( 4 ) UNSIGNED ZEROFILL NOT NULL ,
+  `end` SMALLINT( 4 ) UNSIGNED ZEROFILL NOT NULL
+) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci ;
+ALTER TABLE `sys_action` ADD `efforted` tinyint(1) NOT NULL DEFAULT '0';
