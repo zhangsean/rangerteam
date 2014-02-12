@@ -45,7 +45,16 @@ class orderModel extends model
      */
     public function getList($orderBy = 'id_desc', $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_ORDER)->orderBy($orderBy)->page($pager)->fetchAll('id');
+        $orders = $this->dao->select('*')->from(TABLE_ORDER)->orderBy($orderBy)->page($pager)->fetchAll('id');
+
+        $contacts = $this->dao->select('t1.id, t2.customer, t2.id AS contact')
+            ->from(TABLE_CONTACT)->alias('t2')
+            ->leftJoin(TABLE_CUSTOMER)->alias('t1')->on('t1.id = t2.customer')
+            ->fetchGroup('customer', 'contact');
+
+        foreach($orders as $order) $order->contact = $contacts[$order->customer];
+
+        return $orders;
     }
 
     /**

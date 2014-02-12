@@ -294,4 +294,30 @@ class order extends control
         $this->view->order  = $order;
         $this->display();
     }
+
+    /**
+     * Get contact of an customer.
+     *
+     * @param  int    $order
+     * @param  string $orderBy     the order by
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function contact($order, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $order = $this->order->getByID($order);
+        $contacts = $this->loadModel('contact')->getList($order->customer, $orderBy, $pager);
+
+        $this->view->title    = $this->lang->order->contact;
+        $this->view->contacts = $contacts;
+        $this->view->pager    = $pager;
+
+        $this->display();
+    }
 }
