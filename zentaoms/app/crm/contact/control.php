@@ -38,7 +38,7 @@ class contact extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->view->title     = $this->lang->contact->list;
-        $this->view->contacts  = $this->contact->getList($orderBy, $pager);
+        $this->view->contacts  = $this->contact->getList($customer = '', $orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->pager     = $pager;
         $this->view->orderBy  = $orderBy;
@@ -51,7 +51,7 @@ class contact extends control
      * @access public
      * @return void
      */
-    public function create()
+    public function create($customer = '')
     {
         if($_POST)
         {
@@ -61,6 +61,7 @@ class contact extends control
         }
 
         $this->view->title     = $this->lang->contact->create;
+        $this->view->customer  = $customer;
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->display();
     }

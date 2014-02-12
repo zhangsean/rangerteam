@@ -31,9 +31,10 @@ class contactModel extends model
      * @access public
      * @return array
      */
-    public function getList($orderBy = 'id_desc', $pager = null)
+    public function getList($customer = '', $orderBy = 'id_desc', $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_CONTACT)->orderBy($orderBy)->page($pager)->fetchAll('id');
+        if($customer != '') return $this->dao->select('*')->from(TABLE_CONTACT)->where('customer')->eq($customer)->orderBy($orderBy)->page($pager)->fetchAll('id');
+        if($customer == '') return $this->dao->select('*')->from(TABLE_CONTACT)->orderBy($orderBy)->page($pager)->fetchAll('id');
     }
 
     /**
