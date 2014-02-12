@@ -143,7 +143,7 @@ class contactModel extends model
         
         /* Upload new avatar. */
         $uploadResult = $fileModel->saveUpload('avatar', $contactID);
-        if(!$uploadResult) return array('result' => 'false', 'message' => $this->lang->fail);
+        if(!$uploadResult) return array('result' => false, 'message' => $this->lang->fail);
         
         $fileIdList = array_keys($uploadResult);
         $file       = $fileModel->getById($fileIdList[0]);
