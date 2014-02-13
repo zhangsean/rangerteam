@@ -52,7 +52,7 @@ class contact extends control
      * @access public
      * @return void
      */
-    public function create($customer = '')
+    public function create($customer = 0)
     {
         if($_POST)
         {
