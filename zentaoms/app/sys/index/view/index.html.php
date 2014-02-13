@@ -33,7 +33,7 @@ js::import($jsRoot . 'jquery/ips.js');
     <div id='taskbar'><ul class='bar-menu'></ul></div>
     <div id='bottomRightBar' class='dock-right'>
       <ul class='bar-menu'>
-        <li><button id='showDesk' class='fullscreen-btn icon-home' data-id='home' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'></button></li>
+        <li><button id='showDesk' class='fullscreen-btn icon-desktop' data-id='home' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'></button></li>
       </ul>
     </div>
   </div>

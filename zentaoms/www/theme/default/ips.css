@@ -46,7 +46,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #apps-menu {position: absolute; overflow: hidden; bottom: 268px; top: 0; overflow: no-display; transition: height .3s;-o-transition: height .3s;-moz-transition: height .3s;-webkit-transition: height .3s;}
 #apps-menu .bar-menu > li {display: inline-block;}
 #apps-menu .bar-menu > li button {text-align: center; padding:10px; width: 60px;}
-#apps-menu .bar-menu > li img{width: 36px; height: 36px;}
+#apps-menu .bar-menu > li img{width: 36px; height: 36px; box-shadow: 0 1px 1px rgba(0,0,0,0.35); border-radius: 5px}
 
 /* bottom bar. */
 #bottomBar {height: 36px; background-color: #0a2e66; background-color: rgba(0,0,0,0.5); z-index: 50000; left: 60px; right: 0}
@@ -66,7 +66,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #bottomRightBar .bar-menu li {background: none; margin-right: 0;}
 
 #start {width: 60px; height: 56px; text-align: center; padding: 0; background: none}
-#start img {width: 36px; height: 36px; line-height: 36px; border-radius: 4px}
+#start img {width: 36px; height: 36px; line-height: 36px; border-radius: 4px; box-shadow: 0 1px 1px rgba(0,0,0,0.35)}
 #start:hover {background-color: rgba(255,255,255,0.2);}
 #startMenu {bottom: 36px; top: inherit; left: 0}
 #startMenu .avatar-img {height: 48px; width: 48px; display: inline-block; margin-right: 10px; border-radius: 4px}
@@ -150,7 +150,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #allAppsList li a:hover, #allAppsList li a.search-selected{background-color: none\0; border:2px solid #ccc\0;}
 #allAppsList li a.open {background-color:rgba(255,255,255,0.1);}
 #allAppsList li a.open:hover,#allAppsList li a.active:hover, #allAppsList li a.search-selected {background-color:rgba(255,255,255,0.24);}
-#allAppsList li img {width: 48px; height: 48px; margin-right: 10px;}
+#allAppsList li img {width: 48px; height: 48px; margin-right: 10px; box-shadow: 0 1px 1px rgba(0,0,0,0.35); border-radius: 8px}
 #allAppsList li a.open:after,#allAppsList li a.active:after {content: ' '; display: block; position: absolute; width: 16px; height: 16px; background-color: #0abb28; right: 15px; top: 28px; -moz-border-radius:50%; -webkit-border-radius:50%; border-radius:50%;}
 #allAppsList li a.active:after {background-color: #ffcf33;}
 

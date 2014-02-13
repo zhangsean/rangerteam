@@ -137,17 +137,6 @@ td>select{padding-left: 0;padding-right: 0}
 .tree > li ul > li:after {position: absolute; display: block; content: ""; width: 15px; left: -1px; top: 20px; height: 20px; border-top: 1px dashed #ccc;}
 .tree > li > ul li:last-child:after {border-left: 1px solid #fff;}
 
-/* set css for tablesorter. */
-table.tablesorter thead tr div{padding:0; margin:0}
-table.tablesorter thead tr .header{cursor:pointer;}
-table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {color:#2973EA;}
-table.tablesorter thead tr .headerSortDown a, table.tablesorter thead tr .headerSortUp a {color:#2973EA}
-table.tablesorter thead tr .header a,table.tablesorter thead tr .headerSortUp a,table.tablesorter thead tr .headerSortDown a{display: inline-block; text-decoration:none}
-table.tablesorter thead tr .header a{color:#707070;}
-table.tablesorter thead tr .header:after {font-family: ZenIcon; font-weight: normal;content: " \f0dc";font-size: 14px;}
-table.tablesorter thead tr .headerSortUp:after {font-family: ZenIcon; font-weight: normal;content: " \f0d8";font-size: 14px;color:#2973EA;}
-table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weight: normal;content: " \f0d7";font-size: 14px;color:#2973EA;}
-
 /* carousel */
 .carousel {border-radius: 4px;overflow: hidden;margin-bottom: 20px;}
 .carousel .item {background-color: transparent;}
