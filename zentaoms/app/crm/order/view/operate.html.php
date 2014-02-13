@@ -7,7 +7,7 @@
       <table class='table table-form'>
         <?php foreach($action->inputs as $field => $input):?>
         <tr>
-          <th><?php echo isset($fields[$field]->name) ? $fields[$field]->name : $lang->order->{$field};?></th>
+          <th class='w-150px'><?php echo isset($fields[$field]->name) ? $fields[$field]->name : $lang->order->{$field};?></th>
           <td><?php echo $this->product->buildControl($fields[$field], isset($order->$field) ? $order->$field : '' );?></td>
         </tr>
         <?php endforeach;?>
