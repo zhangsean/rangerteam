@@ -665,7 +665,6 @@
             this.indexUrl  = et.url;
             this.getUrl();
 
-
             this.afterResized(true);
         }
 

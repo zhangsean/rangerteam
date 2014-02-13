@@ -13,5 +13,7 @@ $(document).ready(function()
     setInterval('ping()', 1000 * 360);
 
     /* Enable tooltip */
-    $('body').tooltip({html: true,selector: "[data-toggle='tooltip']",container: "body"}); 
+    $('body').tooltip({html: true,selector: "[data-toggle='tooltip']",container: "body"});
+
+    fixTableHeader();
 });

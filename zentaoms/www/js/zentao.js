@@ -505,3 +505,55 @@ function ping()
 {
     $.get(createLink('misc', 'ping'));
 }
+
+/**
+ * Fix table header in admin page
+ * 
+ * @access public
+ * @return void
+ */
+function fixTableHeader()
+{
+    var table = $('.col-md-10 > .panel > .table');
+
+    if(!table.length) return;
+
+    var tHead     = table.find('thead');
+    var navHeight = $('#mainNavbar').outerHeight();
+    var gap       = tHead.offset().top - $('#mainNavbar').outerHeight();
+    var col       = table.closest('.col-md-10');
+
+    $(window).scroll(function()
+    {
+        var fixedHeader = $('#fixedHeader');
+        if(!fixedHeader.length)
+        {
+            fixedHeader = $('<table class="table" id="fixedHeader"></table>').attr('class', table.attr('class')).append(tHead.clone()).appendTo(col);
+            resizeHeader();
+        }
+
+        if($(window).scrollTop() > gap)
+        {
+            col.addClass('with-fixed-table');
+            // fixedHeader.fadeIn();
+        }
+        else
+        {
+            col.removeClass('with-fixed-table');
+            // fixedHeader.fadeOut();
+        }
+    }).resize(resizeHeader);
+
+    function resizeHeader()
+    {
+        var headers  = $('#fixedHeader thead th');
+        var tHeaders = tHead.find('th');
+
+        for (var i = headers.length - 1; i >= 0; i--)
+        {
+            $(headers[i]).width($(tHeaders[i]).width());
+        };
+
+        $('#fixedHeader').css({top: navHeight, left: tHead.offset().left, width: table.width()});
+    }
+}
