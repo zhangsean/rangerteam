@@ -39,10 +39,10 @@ $lang->effort->week         = '星期';
 $lang->effort->today        = '今天';
 $lang->effort->weekDateList = '一,二,三,四,五,六,天';
 
-$lang->effort->objectTypeList['custom']      = '';
-$lang->effort->objectTypeList['order']       = '订单';
-$lang->effort->objectTypeList['contract']    = '合同';
-$lang->effort->objectTypeList['task']        = '任务';
+$lang->effort->objectTypeList['custom']   = '';
+$lang->effort->objectTypeList['order']    = '订单';
+$lang->effort->objectTypeList['contract'] = '合同';
+$lang->effort->objectTypeList['task']     = '任务';
 
 $lang->effort->todayEfforts     = '今日';
 $lang->effort->yesterdayEfforts = '昨日';
@@ -56,5 +56,4 @@ $lang->effort->noEmpty    = '不能为空;';
 $lang->effort->isNumber   = '需为数字;';
 $lang->effort->tooLang    = 'ID%s 日志内容过长';
 $lang->effort->nowork     = "ID%s 工作内容不能为空！";
-$lang->effort->confirmDelete  = "您确定要删除这个effort吗？";
-$lang->effort->notice = '(注：1、%s为空视为此行无效；2、若%s不是%s，%s为空也视为此行无效)';
+$lang->effort->notice     = '(注：1、%s为空视为此行无效；2、若%s不是%s，%s为空也视为此行无效)';

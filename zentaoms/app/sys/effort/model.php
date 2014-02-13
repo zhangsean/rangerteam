@@ -4,7 +4,6 @@
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
- * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     effort
  * @version     $Id$
  * @link        http://www.zentao.net
@@ -122,7 +121,7 @@ class effortModel extends model
     }
 
     /**
-     * update a effort.
+     * update an effort.
      * 
      * @param  int    $effortID 
      * @access public
@@ -149,7 +148,7 @@ class effortModel extends model
     }
 
     /**
-     * Get info of a effort.
+     * Get info of an effort.
      * 
      * @param  int    $effortID 
      * @access public
