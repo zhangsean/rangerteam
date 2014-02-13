@@ -273,6 +273,7 @@ class productModel extends model
 
         $this->dao->update(TABLE_ORDERFIELD)->data($data)->autoCheck()
             ->batchCheck($this->config->field->require->edit, 'notempty')
+            ->where('id')->eq($fieldID)
             ->exec();
 
         if(dao::isError()) return false;
