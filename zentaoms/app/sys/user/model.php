@@ -21,7 +21,7 @@ class userModel extends model
      * @param string  $orderBy
      * @param object  $pager
      * @access public
-     * @return object 
+     * @return array 
      */
     public function getList($dept = 0, $userName = '', $orderBy = 'id', $pager = null)
     {

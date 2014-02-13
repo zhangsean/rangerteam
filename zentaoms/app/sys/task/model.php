@@ -17,7 +17,7 @@ class taskModel extends model
      * @param  string $orderBy 
      * @param  object $pager 
      * @access public
-     * @return void
+     * @return array
      */
     public function getList($orderBy = 'id_desc', $pager = null)
     {

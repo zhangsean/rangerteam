@@ -309,6 +309,9 @@ class user extends control
     /**
      *  Admin users list.
      *
+     * @param  int    $deptID
+     * @param  srting $query
+     * @param  srting $orderBy
      * @param  int    $recTotal
      * @param  int    $recPerPage
      * @param  int    $pagerID
