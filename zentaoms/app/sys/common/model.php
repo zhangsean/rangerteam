@@ -23,6 +23,7 @@ class commonModel extends model
         $this->startSession();
         $this->setUser();
         $this->loadConfigFromDB();
+        $this->loadLangFromDB();
     }
 
     /**
@@ -43,6 +44,20 @@ class commonModel extends model
         if(isset($this->config->system->common))   helper::mergeConfig($this->config->system->common,   'common');
         if(isset($this->config->personal->common)) helper::mergeConfig($this->config->personal->common, 'common');
     }
+    /**
+     * Load custom lang from DB.
+     * 
+     * @access public
+     * @return void
+     */
+    public function loadLangFromDB()
+    {   
+        if(!$this->config->db->name) return;
+        $records = $this->loadModel('setting')->getAllLang();
+        if(!$records) return;
+        $this->lang->db = new stdclass();
+        $this->lang->db->custom = $records;
+    }   
 
     /**
      * Start the session.

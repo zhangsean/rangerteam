@@ -19,24 +19,26 @@ class settingModel extends model
      * Get value of an item.
      * 
      * @param  string   $paramString    see parseItemParam();
+     * @param  string   $type
      * @access public
      * @return misc
      */
-    public function getItem($paramString)
+    public function getItem($paramString, $type = 'config')
     {
-        return $this->createDAO($this->parseItemParam($paramString), 'select')->fetch('value');
+        return $this->createDAO($this->parseItemParam($paramString, $type), 'select', $type)->fetch('value');
     }
 
     /**
      * Get some items.
      * 
      * @param  string   $paramString    see parseItemParam();
+     * @param  string   $type
      * @access public
      * @return array
      */
-    public function getItems($paramString)
+    public function getItems($paramString, $type = 'config')
     {
-        return $this->createDAO($this->parseItemParam($paramString), 'select')->fetchAll('id');
+        return $this->createDAO($this->parseItemParam($paramString, $type), 'select', $type)->fetchAll('id');
     }
 
     /**
@@ -44,26 +46,46 @@ class settingModel extends model
      * 
      * @param  string      $path     system.sys.common.global.sn or system.sys.common.sn 
      * @param  string      $value 
+     * @param  string      $type
      * @access public
      * @return void
      */
-    public function setItem($path, $value = '')
+    public function setItem($path, $value = '', $type = 'config')
     {
         $level   = substr_count($path, '.');
         $section = '';
         if($level <= 2) return false;
+        if($type == 'config')
+        {
         if($level == 3) list($owner, $app, $module, $key) = explode('.', $path);
         if($level == 4) list($owner, $app, $module, $section, $key) = explode('.', $path);
+        }
+        elseif($type == 'lang')
+        {
+            if($level == 3) return false;
+            if($level == 4) list($lang, $app, $module, $key, $system) = explode('.', $path);
+            if($level == 5) list($lang, $app, $module, $section, $key, $system) = explode('.', $path);
+        }
 
         $item = new stdclass();
-        $item->owner   = $owner;
+
+        if($type == 'config')
+        {
+            $item->owner = $owner;
+        }
+        elseif($type == 'lang')
+        {
+            $item->lang   = $lang;
+            $item->system = $system;
+        }
         $item->app     = $app;
         $item->module  = $module;
         $item->section = $section;
         $item->key     = $key;
         $item->value   = $value;
 
-        $this->dao->replace(TABLE_CONFIG)->data($item)->exec();
+        $table = $type == 'config' ? TABLE_CONFIG : TABLE_LANG;
+        $this->dao->replace($table)->data($item)->exec();
     }
 
     /**
@@ -75,10 +97,11 @@ class settingModel extends model
      *
      * @param  string         $path   like system.sys.mail 
      * @param  array|object   $items  the items array or object, can be mixed by one level or two levels.
+     * @param  string         $type
      * @access public
      * @return bool
      */
-    public function setItems($path, $items)
+    public function setItems($path, $items, $type = 'config')
     {
         foreach($items as $key => $item)
         {
@@ -87,7 +110,7 @@ class settingModel extends model
                 $section = $key;
                 foreach($item as $subKey => $subItem)
                 {
-                    $this->setItem($path . '.' . $section . '.' . $subKey, $subItem);
+                    $this->setItem($path . '.' . $section . '.' . $subKey, $subItem, $type);
                 }
             }
             else
@@ -104,28 +127,30 @@ class settingModel extends model
      * Delete items.
      * 
      * @param  string   $paramString    see parseItemParam();
+     * @param  string   $type
      * @access public
      * @return void
      */
-    public function deleteItems($paramString)
+    public function deleteItems($paramString, $type = 'config')
     {
-        $this->createDAO($this->parseItemParam($paramString), 'delete')->exec();
+        $this->createDAO($this->parseItemParam($paramString, $type), 'delete', $type)->exec();
     }
 
     /**
      * Parse the param string for select or delete items.
      * 
      * @param  string    $paramString     owner=xxx&app=sys&module=common&key=sn and so on.
+     * @param  string    $type
      * @access public
      * @return array
      */
-    public function parseItemParam($paramString)
+    public function parseItemParam($paramString, $type = 'config')
     {
         /* Parse the param string into array. */
         parse_str($paramString, $params); 
 
         /* Init fields not set in the param string. */
-        $fields = 'owner,app,module,section,key';
+        $fields = 'owner,lang,app,module,section,key,system';
         $fields = explode(',', $fields);
         foreach($fields as $field) if(!isset($params[$field])) $params[$field] = '';
 
@@ -137,17 +162,21 @@ class settingModel extends model
      * 
      * @param  array  $params     the params parsed by parseItemParam() method.
      * @param  string $method     select|delete.
+     * @param  string $type
      * @access public
      * @return object
      */
-    public function createDAO($params, $method = 'select')
+    public function createDAO($params, $method = 'select', $type = 'config')
     {
-        return $this->dao->$method('*')->from(TABLE_CONFIG)->where('1 = 1')
-            ->beginIF($params['owner'])->andWhere('owner')->in($params['owner'])->fi()
+        $table = $type == 'config' ? TABLE_CONFIG : TABLE_LANG;
+        return $this->dao->$method('*')->from($table)->where('1 = 1')
+            ->beginIF($type == 'config' and $params['owner'])->andWhere('owner')->in($params['owner'])->fi()
+            ->beginIF($type == 'lang' and $params['lang'])->andWhere('lang')->in($params['lang'])->fi()
             ->beginIF($params['app'])->andWhere('app')->in($params['app'])->fi()
             ->beginIF($params['module'])->andWhere('module')->in($params['module'])->fi()
             ->beginIF($params['section'])->andWhere('section')->in($params['section'])->fi()
-            ->beginIF($params['key'])->andWhere('`key`')->in($params['key'])->fi();
+            ->beginIF($params['key'])->andWhere('`key`')->in($params['key'])->fi()
+            ->beginIF($type == 'lang' and $params['system'])->andWhere('`system`')->in($params['system'])->fi();
     }
 
     /**
@@ -216,5 +245,29 @@ class settingModel extends model
     public function updateVersion($version)
     {
         return $this->setItem('system.sys.common.global.version', $version);
+    }
+
+    /**
+     * Get all lang.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getAllLang()
+    {
+        $allCustomLang = $this->dao->select('*')->from(TABLE_LANG)->orderBy('app,lang,id')->fetchGroup('app', 'id');
+
+        $currentLang   = $this->app->getClientLang();
+        $processedLang = array();
+        foreach($allCustomLang as $app => $customLang)
+        {
+            foreach($customLang as $id => $lang)
+            {
+                if($lang->lang != $lang and $lang->lang != 'all') continue;
+                $processedLang[$app][$lang->module][$lang->section][$lang->key] = $lang->value;
+            }
+        }
+
+        return $processedLang;
     }
 }
