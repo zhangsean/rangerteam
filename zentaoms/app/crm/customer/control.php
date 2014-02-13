@@ -37,10 +37,8 @@ class customer extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
         
-        $customers = $this->customer->getList($orderBy, $pager);
-
         $this->view->title     = $this->lang->customer->list;
-        $this->view->customers = $customers;
+        $this->view->customers = $this->customer->getList($orderBy, $pager);
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
         $this->display();
@@ -57,7 +55,7 @@ class customer extends control
         if($_POST)
         {
             $this->customer->create();       
-            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
+            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 

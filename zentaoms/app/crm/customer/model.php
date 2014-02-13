@@ -57,7 +57,6 @@ class customerModel extends model
      */
     public function create()
     {
-        $now = helper::now();
         $customer = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', helper::now())
@@ -69,9 +68,7 @@ class customerModel extends model
             ->batchCheck($this->config->customer->require->create, 'notempty')
             ->exec();
 
-        if(dao::isError()) return false;
-
-        return true;
+        return !dao::isError();
     }
 
     /**
