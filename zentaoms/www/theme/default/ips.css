@@ -1,5 +1,5 @@
 /* globe. */
-body {padding-top: 0; background-color: #145ccd; background-position: center center; background-repeat: repeat; background-attachment: fixed;  background-size: auto;}
+body {padding-top: 0; background-color: #145ccd; background-position: center center; background-repeat: repeat; background-attachment: fixed;  background-size: auto; transition: background-color 0.5s;}
 
 a, a:hover,button,button:hover {transition: all .3s;-o-transition: all .3s;-moz-transition: all .3s;-webkit-transition: all .3s;}
 button {outline: none; border: none; background-color: transparent;}

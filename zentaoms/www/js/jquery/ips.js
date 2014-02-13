@@ -17,8 +17,9 @@
     var windowIdPrefix   = 'win-';
     var theLoadingFrame  = null;
 
-    /* Save the index url */
+    /* Save the index configs */
     var indexUrl         = window.location.href;
+    var indexTone        = $('body').css('background-color');
 
     /* The default global settings */
     var defaults =
@@ -754,6 +755,7 @@
                 this.$.fadeIn(settings.animateSpeed).removeClass('window-min');
             }
             this.active();
+            $('body').css('background-color',this.tone ? this.tone : indexTone);
         }
 
         /* Reload the content */
@@ -770,7 +772,7 @@
                 switch(this.entry.open)
                 {
                     case 'iframe':
-                        this.loadIframe();
+                        this.loadIframe(go2index);
                         break;
                     case 'html':
                         this.loadHtml();
@@ -812,7 +814,7 @@
         }
 
         /* Load content with iframe */
-        this.loadIframe = function()
+        this.loadIframe = function(go2index)
         {
             var fName = 'iframe-' + this.id;
             theLoadingFrame = fName;
@@ -821,7 +823,8 @@
 
             if(frame)
             {
-                frame.contentWindow.location.reload();
+                if(go2index) frame.contentWindow.location.replace(this.url);
+                else frame.contentWindow.location.reload();
             }
             else
             {
@@ -838,7 +841,7 @@
                 try
                 {
                     var $frame = $(window.frames[fName].document);
-                    
+
                     if($frame.length)
                     {
                         var url = $frame.context.URL;
@@ -848,6 +851,12 @@
                         if(win.firstLoad)
                         {
                             win.indexUrl = url;
+                            var colorTone = $frame.find('.navbar-inverse');
+                            if(colorTone.length)
+                            {
+                                win.tone = colorTone.css('background-color');
+                                $('body').css('background-color', win.tone);
+                            }
                         }
 
                         $frame.unbind('keydown', windows.handleWindowKeydown).keydown(windows.handleWindowKeydown).data('data-id', win.idStr);
@@ -1130,6 +1139,8 @@
             $('.fullscreen-btn[data-id="' + id + '"],.app-btn[data-id="' + id + '"]').addClass('active');
 
             if(id == 'allapps') $('#search').focus();
+
+            $('body').css('background-color', indexTone);
         }
 
         /* Hide a fullscreen app window */
