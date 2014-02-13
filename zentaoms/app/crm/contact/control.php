@@ -6,7 +6,7 @@
  * @license     商业软件，非开源软件
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     contact
- * @version     $Id$
+ * @version     $Id $
  * @link        http://www.zentao.net
  */
 class contact extends control
@@ -41,13 +41,14 @@ class contact extends control
         $this->view->contacts  = $this->contact->getList($customer = '', $orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->pager     = $pager;
-        $this->view->orderBy  = $orderBy;
+        $this->view->orderBy   = $orderBy;
         $this->display();
     }   
 
     /**
      * Create a contact.
      * 
+     * @param  int    $customer
      * @access public
      * @return void
      */

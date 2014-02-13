@@ -6,7 +6,7 @@
  * @license     商业软件，非开源软件
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     contact
- * @version     $Id$
+ * @version     $Id $
  * @link        http://www.zentao.net
  */
 class contactModel extends model
@@ -26,6 +26,7 @@ class contactModel extends model
     /** 
      * Get contact list.
      * 
+     * @param  int     $customer
      * @param  string  $orderBy 
      * @param  object  $pager 
      * @access public
