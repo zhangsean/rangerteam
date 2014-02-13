@@ -31,6 +31,5 @@ $(function()
         language:'<?php echo $clientLang?>'
     })
 
-
 });
 </script>
