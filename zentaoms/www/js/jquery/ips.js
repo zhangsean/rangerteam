@@ -19,7 +19,7 @@
 
     /* Save the index configs */
     var indexUrl         = window.location.href;
-    var indexTone        = $('body').css('background-color');
+    var indexTone        = '#145ccd';
 
     /* The default global settings */
     var defaults =
@@ -67,6 +67,8 @@
      */
     function initSettings(options)
     {
+        setTimeout(function(){indexTone = $('body').css('background-color')}, 2000);
+
         $.extend(settings, defaults, options);
         settings.init();
     }
@@ -755,7 +757,6 @@
                 this.$.fadeIn(settings.animateSpeed).removeClass('window-min');
             }
             this.active();
-            $('body').css('background-color',this.tone ? this.tone : indexTone);
         }
 
         /* Reload the content */
@@ -972,6 +973,7 @@
         {
             $('.app-btn.active, .fullscreen-btn.active').removeClass('active');
             $('.app-btn[data-id="' + this.id + '"]').addClass('active');
+            $('body').css('background-color',this.tone ? this.tone : indexTone);
 
             if(this.isActive())
             {

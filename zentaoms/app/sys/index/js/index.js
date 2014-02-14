@@ -62,12 +62,13 @@ function sortBlocks(orders)
     {
         if(data.result != 'success') return false;
 
-        $('div[data-order]').each(function()
+        console.log('ordered!');
+        $('.panels-container .panel').each(function()
         {
-            var index = $(this).attr('data-order');
+            var index = $(this).data('order');
             /* Update new index for block id edit and delete. */
             $(this).attr('id', 'block' + index).attr('data-id', index);
-            $(this).find('.custom-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
+            $(this).find('.panel-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
         })
     });
 }
