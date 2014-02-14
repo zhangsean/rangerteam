@@ -97,3 +97,6 @@ $lang->product->task = new stdclass();
 $lang->product->task->role = '角色';
 $lang->product->task->date = '时间';
 $lang->product->task->name = '名称';
+
+$lang->product->roleCode = '角色代码，字母跟数字组合';
+$lang->product->roleName = '角色名称';

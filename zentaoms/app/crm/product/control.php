@@ -398,9 +398,10 @@ class product extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $this->view->title = $this->lang->product->roles;
         $this->view->roles = $this->product->getRoleList($productID);
+        if(empty($this->view->roles)) $this->view->roles = array('' => '');
 
+        $this->view->title = $this->lang->product->roles;
         $this->display(); 
     }
 }

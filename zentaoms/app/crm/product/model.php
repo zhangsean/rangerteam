@@ -476,9 +476,11 @@ class productModel extends model
      */
     public function adminRoles($productID)
     {
-        $roles = array_filter($_POST['roles']);
-        $roles = helper::jsonEncode($roles);
-        $this->dao->update(TABLE_PRODUCT)->set('roles')->eq($roles)->where('id')->eq($productID)->exec();
+        $roles = array();
+        foreach($_POST['code'] as $key => $code) $roles[$code] = $_POST['name'][$key];
+        a($roles);
+
+        $this->dao->update(TABLE_PRODUCT)->set('roles')->eq(json_encode($roles))->where('id')->eq($productID)->exec();
 
         return !dao::isError();
     }
