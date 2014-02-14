@@ -54,8 +54,8 @@ class index extends control
                 size:     $size,
                 icon:     '$logo',
                 control:  '$entry->control',
-                position: '$entry->position'
-                display:  'fixed',
+                position: '$entry->position',
+                display:  'fixed'
             });\n";
         }
 
