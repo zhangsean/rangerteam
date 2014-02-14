@@ -23,12 +23,12 @@
           <th><?php echo $lang->product->field->options;?></th>
           <td>
             <div class="input-group">
-              <?php echo html::input('options[value][]', $value, "class='form-control' placeholder={$lang->product->field->optionValue}");?>
+              <?php echo html::input('options[value][]', '', "class='form-control' placeholder={$lang->product->field->optionValue}");?>
               <span class='input-group-addon'>:</span>
-              <?php echo html::input('options[text][]', $text, "class='form-control' placeholder={$lang->product->field->optionText}");?>
+              <?php echo html::input('options[text][]', '', "class='form-control' placeholder={$lang->product->field->optionText}");?>
               <div class='input-group-btn'>
-                <i class='icon-plus-sign'></i>
-                <i class='icon-minus-sign'></i>
+                <i class='icon-large icon-plus-sign'></i>
+                <i class='icon-large icon-minus-sign'></i>
               </div>
             </div> 
           </td>
@@ -55,8 +55,8 @@
         <span class='input-group-addon'>:</span>
         <?php echo html::input('options[text][]', '', "class='form-control' placeholder={$lang->product->field->optionText}");?>
         <div class='input-group-btn'>
-          <i class='icon-plus-sign'></i>
-          <i class='icon-minus-sign'></i>
+          <i class='icon-large icon-plus-sign'></i>
+          <i class='icon-large icon-minus-sign'></i>
         </div>
       </div> 
     </div>
