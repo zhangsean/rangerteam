@@ -1,6 +1,6 @@
 <?php
 /**
- * The controm file of mail module of ZenTaoMS.
+ * The control file of setting module of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
@@ -60,7 +60,7 @@ class setting extends control
      * @access public
      * @return void
      */
-    public function restore($module, $field)
+    public function reset($module, $field)
     {   
         $appName = $this->app->getAppName(); 
         $this->setting->deleteItems("app=$appName&module=$module&section=$field", $type = 'lang');

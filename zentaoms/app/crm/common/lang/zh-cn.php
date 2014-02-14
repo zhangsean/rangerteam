@@ -60,3 +60,7 @@ $lang->contract->menu->browse = array('link' => '合同列表|contract|browse|',
 $lang->contract->menu->create = '添加合同|contract|create|';
 
 $lang->setting = new stdclass();
+$lang->setting->menu = new stdclass();
+$lang->setting->menu->user     = '员工角色|setting|lang|module=user&field=roleList';
+$lang->setting->menu->product  = '产品状态|setting|lang|module=product&field=statusList';
+$lang->setting->menu->customer = '客户级别|setting|lang|module=customer&field=typeList';

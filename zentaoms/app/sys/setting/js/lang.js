@@ -1,28 +1,14 @@
-
-/**
- * Add lang item.
- * 
- * @param  string $clickedButton 
- * @access public
- * @return void
- */
-function addItem(clickedButton)
-{
-    $(clickedButton).parent().parent().after(v.itemRow);
-}
-
-/**
- * Delete lang item.
- * 
- * @param  string $clickedButton 
- * @access public
- * @return void
- */
-function delItem(clickedButton)
-{
-    $(clickedButton).parent().parent().remove();
-}
 $(function()
 {
-    $('#' + v.module + 'Tab').addClass('active');
+    $('.nav li').removeClass('active');
+    $(".nav li a[href*='" + v.module + "']").parent().addClass('active');
+
+    $(document).on('click', '.add', function()
+    {
+        $(this).parent().parent().after(v.itemRow);
+    })
+    $(document).on('click', '.remove', function()
+    {
+        $(this).parent().parent().remove();
+    })
 })
