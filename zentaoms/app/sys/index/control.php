@@ -39,10 +39,24 @@ class index extends control
             if($entry->visible) $leftEntry .= $entry->id . ',';
 
             $sso  = $this->createLink('entry', 'visit', "entryID=$entry->id");
-            $logo = $entry->logo ? $entry->logo : '';
-            $size = $entry->size ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
-
-            $allEntries .= "entries.push({id: '$entry->id', url: '$sso', name: '$entry->name', open: '$entry->open', desc: '$entry->name', display: 'fixed', size: $size, icon: '$logo', control: '$entry->control', position: '$entry->position'});\n";
+            $logo = !empty($entry->logo) ? $entry->logo : '';
+            $size = !empty($entry->size) ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
+            
+            if(!isset($entry->control))  $entry->control = '';
+            if(!isset($entry->position)) $entry->position = '';
+            $allEntries .= "entries.push(
+            {
+                id:       '$entry->id',
+                name:     '$entry->name',
+                url:      '$sso',
+                open:     '$entry->open', 
+                desc:     '$entry->name',
+                size:     $size,
+                icon:     '$logo',
+                control:  '$entry->control',
+                position: '$entry->position'
+                display:  'fixed',
+            });\n";
         }
 
         $blocks = empty($this->config->index->block) ? array() : (array)$this->config->index->block;
