@@ -11,21 +11,46 @@
  */
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
 $clientLang = $this->app->getClientLang();
-css::import($jsRoot . 'bootstrap/datetimepicker/css/min.css');
-js::import($jsRoot  . 'bootstrap/datetimepicker/js/min.js'); 
-if($clientLang != 'en') js::import($jsRoot . 'bootstrap/datetimepicker/js/locales/' . $clientLang . '.js'); 
+css::import($jsRoot . 'datetimepicker/css/min.css');
+js::import($jsRoot  . 'datetimepicker/js/min.js'); 
 ?>
 <script language='javascript'>
 $(function() {
-    startDate = new Date(1970, 1, 1);
-    $(".date").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
-        startDate:startDate,
-        pickerPosition: "top-left",
-        todayBtn: true,
-        autoclose: true,
-        keyboardNavigation:false,
-        language:'<?php echo $clientLang?>'
-    })
+    $('.form-datetime').datetimepicker(
+    {
+        language: '<?php echo $clientLang; ?>',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        format: 'yyyy-mm-dd hh:ii'
+    });
+    $('.form-date').datetimepicker(
+    {
+        language: '<?php echo $clientLang; ?>',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+        format: 'yyyy-mm-dd'
+    });
+    $('.form-time').datetimepicker({
+        language: '<?php echo $clientLang; ?>',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0,
+        format: 'hh:ii'
+    });
 });
 </script>

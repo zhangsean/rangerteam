@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->contact->create;?></strong>
@@ -36,7 +37,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->contact->birthday;?></th>
-          <td><?php echo html::input('birthday', '', "class='form-control'");?></td>
+          <td><?php echo html::input('birthday', '', "class='form-control form-date'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contact->gender;?></th>

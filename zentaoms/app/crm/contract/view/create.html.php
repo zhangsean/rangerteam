@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <div class='panel'>
@@ -54,15 +55,15 @@
         </tr>
         <tr>
           <th><?php echo $lang->contract->signedDate;?></th>
-          <td><?php echo html::input('signedDate', '', "class='form-control date w-200px'");?></td>
+          <td><?php echo html::input('signedDate', '', "class='form-control w-200px form-date'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->begin;?></th>
-          <td><?php echo html::input('begin', '', "class='form-control date w-200px'");?></td>
+          <td><?php echo html::input('begin', '', "class='form-control w-200px form-date'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->end;?></th>
-          <td><?php echo html::input('end', '', "class='form-control date w-200px'");?></td>
+          <td><?php echo html::input('end', '', "class='form-control w-200px form-date'");?></td>
         </tr>
         <tr>
           <th></th>
