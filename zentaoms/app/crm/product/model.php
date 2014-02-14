@@ -478,7 +478,6 @@ class productModel extends model
     {
         $roles = array();
         foreach($_POST['code'] as $key => $code) $roles[$code] = $_POST['name'][$key];
-        a($roles);
 
         $this->dao->update(TABLE_PRODUCT)->set('roles')->eq(json_encode($roles))->where('id')->eq($productID)->exec();
 
