@@ -122,7 +122,7 @@ $lang->order->edit          = '编辑订单';
 $lang->order->view          = '订单详情';
 $lang->order->close         = '关闭订单';
 $lang->order->manageMembers = '团队管理';
-$lang->order->contract      = '签约';
+$lang->order->sign          = '签约';
 $lang->order->createTasks   = '创建任务';
 
 $lang->team = new stdclass();
