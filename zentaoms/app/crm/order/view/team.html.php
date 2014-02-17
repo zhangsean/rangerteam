@@ -1,3 +1,15 @@
+<?php 
+/**
+ * The team view file of order module of ZenTaoMS.
+ *
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商业软件，非开源软件
+ * @author      Tingting Dai <daitingting@xirangit.com>
+ * @package     order 
+ * @version     $Id $
+ * @link        http://www.zentao.net
+ */
+?>
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
@@ -6,10 +18,10 @@
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <th style='width: 300px'><?php echo $lang->team->account;?></th>
-        <th style='width: 100px'><?php echo $lang->team->role;?></th>
-        <th style='width: 160px'><?php echo $lang->team->join;?></th>
-        <th style='width: 200px'><?php echo $lang->actions;?></th>
+        <th><?php echo $lang->team->account;?></th>
+        <th class='w-100px'><?php echo $lang->team->role;?></th>
+        <th class='w-160px'><?php echo $lang->team->join;?></th>
+        <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

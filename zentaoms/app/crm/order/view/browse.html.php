@@ -1,3 +1,15 @@
+<?php 
+/**
+ * The browse view file of order module of ZenTaoMS.
+ *
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商业软件，非开源软件
+ * @author      Tingting Dai <daitingting@xirangit.com>
+ * @package     order 
+ * @version     $Id $
+ * @link        http://www.zentao.net
+ */
+?>
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
@@ -44,7 +56,7 @@
           {
               echo html::a($this->createLink('contact', 'create', "customerID=$order->customer"), $lang->order->contact);
           }
-          echo html::a($this->createLink('contract', 'create', "orderID=$order->id"), $lang->order->contract);
+          if(empty($order->contract)) echo html::a($this->createLink('contract', 'create', "orderID=$order->id"), $lang->order->sign);
           echo html::a($this->createLink('effort', 'createForObject', "objectType=order&objectID=$order->id"), $lang->order->effort);
           ?>
           <?php 
