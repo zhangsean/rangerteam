@@ -464,7 +464,7 @@ class productModel extends model
     public function getRoleList($productID)
     {
        $roles = $this->dao->select('roles')->from(TABLE_PRODUCT)->where('id')->eq($productID)->fetch('roles');
-       return json_decode($roles);
+       return json_decode($roles, true);
     }
 
     /**
