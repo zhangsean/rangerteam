@@ -31,11 +31,18 @@
 
           $control = $param['control'];
           $attr    = empty($param['attr']) ? '' : $param['attr'];
-          $default = $block ? $block->params->$key : (isset($param['default']) ? $param['default'] : '');
+          $default = $block ? (isset($block->params->$key) ? $block->params->$key : '') : (isset($param['default']) ? $param['default'] : '');
           $values  = isset($param['values']) ? $param['values'] : array();
           if($control == 'select' or $control == 'radio' or $control == 'checkbox')
           {
-              echo html::$control("params[$key]", $values, $default, "class='form-control' $attr");
+              if(strpos($attr, 'multiple') !== false)
+              {
+                  echo html::$control("params[$key][]", $values, $default, "class='form-control' $attr");
+              }
+              else
+              {
+                  echo html::$control("params[$key]", $values, $default, "class='form-control' $attr");
+              }
           }
           else
           {

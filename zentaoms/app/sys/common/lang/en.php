@@ -111,6 +111,7 @@ $lang->admin = new stdclass();
 $lang->tree  = new stdclass();
 $lang->mail  = new stdclass();
 $lang->dept  = new stdclass();
+$lang->block = new stdclass();
 
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = 'Company|company|setbasic|';

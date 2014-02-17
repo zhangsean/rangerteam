@@ -162,6 +162,7 @@ class commonModel extends model
         if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey', $method)) return true;
         if($module == 'api'  and $method == 'getsessionid') return true;
         if($module == 'misc'  and $method == 'ping') return true;
+        if($module == 'block') return true;
         if($module == 'sso'  and strpos(',auth|check', $method)) return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;

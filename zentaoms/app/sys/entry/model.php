@@ -237,15 +237,23 @@ class entryModel extends model
 
         if(empty($entry)) return array();
         $parseUrl   = parse_url($entry->block);
-        $blockQuery = "mode=getblocklist&hash={$entry->key}";
+        $blockQuery = "mode=getblocklist&hash={$entry->key}&lang=" . $this->app->getClientLang();
         $parseUrl['query'] = empty($parseUrl['query']) ? $blockQuery : $parseUrl['query'] . '&' . $blockQuery;
 
         $link = '';
-        if(!isset($parseUrl['scheme'])) return false; 
-        $link .= $parseUrl['scheme'] . '://' . $parseUrl['host'];
-        if(isset($parseUrl['port'])) $link .= ':' . $parseUrl['port']; 
-        if(isset($parseUrl['path'])) $link .= $parseUrl['path']; 
-        $link .= '?' . $parseUrl['query'];
+        if(!isset($parseUrl['scheme'])) 
+        {
+            $link  = commonModel::getSysURL() . $parseUrl['path'];
+            $link .= '?' . $parseUrl['query'];
+        }
+        else
+        {
+            $link .= $parseUrl['scheme'] . '://' . $parseUrl['host'];
+            if(isset($parseUrl['port'])) $link .= ':' . $parseUrl['port']; 
+            if(isset($parseUrl['path'])) $link .= $parseUrl['path']; 
+            $link .= '?' . $parseUrl['query'];
+        }
+
         $blocks = $http->get($link);
 
         return json_decode($blocks);
@@ -265,15 +273,22 @@ class entryModel extends model
 
         if(empty($entry)) return array();
         $parseUrl  = parse_url($entry->block);
-        $formQuery = "mode=getblockform&blockid=$blockID&hash={$entry->key}";
+        $formQuery = "mode=getblockform&blockid=$blockID&hash={$entry->key}&lang=" . $this->app->getClientLang();
         $parseUrl['query'] = empty($parseUrl['query']) ? $formQuery : $parseUrl['query'] . '&' . $formQuery;
 
         $link = '';
-        if(!isset($parseUrl['scheme'])) return false; 
-        $link .= $parseUrl['scheme'] . '://' . $parseUrl['host'];
-        if(isset($parseUrl['port'])) $link .= ':' . $parseUrl['port']; 
-        if(isset($parseUrl['path'])) $link .= $parseUrl['path']; 
-        $link .= '?' . $parseUrl['query'];
+        if(!isset($parseUrl['scheme'])) 
+        {
+            $link  = commonModel::getSysURL() . $parseUrl['path'];
+            $link .= '?' . $parseUrl['query'];
+        }
+        else
+        {
+            $link .= $parseUrl['scheme'] . '://' . $parseUrl['host'];
+            if(isset($parseUrl['port'])) $link .= ':' . $parseUrl['port']; 
+            if(isset($parseUrl['path'])) $link .= $parseUrl['path']; 
+            $link .= '?' . $parseUrl['query'];
+        }
         $params = $http->get($link);
 
         return json_decode($params, true);

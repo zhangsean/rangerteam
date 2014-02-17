@@ -47,15 +47,22 @@ class blockModel extends model
         $params = base64_encode(json_encode($block->params));
 
         $parseUrl = parse_url($entry->block);
-        $query    = "mode=getblockdata&blockid={$block->blockID}&param={$params}&hash=$entry->key&sso=" . base64_encode(commonModel::getSysURL() . helper::createLink('entry', 'visit', "entry=$entry->id"));
+        $query    = "mode=getblockdata&blockid={$block->blockID}&param={$params}&hash=$entry->key&lang=" . $this->app->getClientLang() ."&sso=" . base64_encode(commonModel::getSysURL() . helper::createLink('entry', 'visit', "entry=$entry->id"));
         $parseUrl['query'] = empty($parseUrl['query']) ? $query : $parseUrl['query'] . "&" . $query;
 
         $link = '';
-        if(!isset($parseUrl['scheme'])) return false; 
-        $link .= $parseUrl['scheme'] . '://' . $parseUrl['host'];
-        if(isset($parseUrl['port'])) $link .= ':' . $parseUrl['port']; 
-        if(isset($parseUrl['path'])) $link .= $parseUrl['path']; 
-        $link .= '?' . $parseUrl['query'];
+        if(!isset($parseUrl['scheme'])) 
+        {
+            $link  = commonModel::getSysURL() . $parseUrl['path'];
+            $link .= '?' . $parseUrl['query'];
+        }
+        else
+        {
+            $link .= $parseUrl['scheme'] . '://' . $parseUrl['host'];
+            if(isset($parseUrl['port'])) $link .= ':' . $parseUrl['port']; 
+            if(isset($parseUrl['path'])) $link .= $parseUrl['path']; 
+            $link .= '?' . $parseUrl['query'];
+        }
 
         return $http->get($link);
     }
