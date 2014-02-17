@@ -1,10 +1,10 @@
 <?php
 /**
- * The create view file of contract module of ZenTaoPMS.
+ * The create view file of contract module of ZenTaoMS.
  *
- * @copyright   Copyright 2009-2010 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
- * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商业软件，非开源软件
+ * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     contract
  * @version     $Id$
  * @link        http://www.zentao.net

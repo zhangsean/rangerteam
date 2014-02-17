@@ -53,7 +53,7 @@ $lang->task->menu = new stdclass();
 $lang->task->menu->browse = array('link' => '任务列表|task|browse|', 'alias' => 'edit');
 $lang->task->menu->create = '添加任务|task|create|';
 
-/* Menu of contact module. */
+/* Menu of contract module. */
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
 $lang->contract->menu->browse = array('link' => '合同列表|contract|browse|', 'alias' => 'edit');
