@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->product->action->adminTasks;?></strong>
@@ -28,8 +29,8 @@
         </thead>
         <?php foreach($action->tasks as $task):?>
         <tr>
-          <th><?php echo html::select('role[]', array_combine($roles, $roles), $task->role, "class='form-control'");?></th>
-          <td class='w-150px'><?php echo html::input("date[]", $task->date, "class='form-control'")?></td>
+          <td><?php echo html::select('role[]', array_combine($roles, $roles), $task->role, "class='form-control'");?></td>
+          <td class='w-150px'><?php echo html::input('date[]', $task->date, "class='form-control form-date'");?></td>
           <td><?php echo html::input("name[]", $task->name, "class='form-control'")?></td>
           <td>
             <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>
@@ -42,8 +43,8 @@
     </form>
     <table class='hide'>
       <tr id='originTR'>
-        <th><?php echo html::select('role[]', $roles, '', "class='form-control'");?></th>
-        <td class='w-150px'><?php echo html::input('date[]', '', "class='form-control'")?></td>
+        <td><?php echo html::select('role[]', $roles, '', "class='form-control'");?></td>
+        <td class='w-150px'><?php echo html::input('date[]', '', "class='form-control form-date'");?></td>
         <td><?php echo html::input('name[]', '', "class='form-control'")?></td>
         <td>
           <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>

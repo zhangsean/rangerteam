@@ -440,7 +440,7 @@ class productModel extends model
     public function saveTasks($actionID)
     {
         $tasks = array();
-        foreach($_POST['name'] as $key => $name )
+        foreach($_POST['name'] as $key => $name)
         {
             $task = array();
             $task['name'] = $name;   
