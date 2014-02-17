@@ -15,7 +15,8 @@ css::import($jsRoot . 'datetimepicker/css/min.css');
 js::import($jsRoot  . 'datetimepicker/js/min.js'); 
 ?>
 <script language='javascript'>
-$(function() {
+$(function()
+{
     $('.form-datetime').datetimepicker(
     {
         language: '<?php echo $clientLang; ?>',
