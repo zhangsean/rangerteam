@@ -1,6 +1,6 @@
 <?php
 /**
- * The model file of order category of ZenTaoMS.
+ * The model file of order module of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
@@ -47,15 +47,24 @@ class orderModel extends model
     {
         $orders = $this->dao->select('*')->from(TABLE_ORDER)->orderBy($orderBy)->page($pager)->fetchAll('id');
 
+        $customers = $this->loadModel('customer')->getPairs();
+        $products  = $this->loadModel('product')->getPairs();
+
+        foreach($orders as $order)
+        {
+           $order->name = $order->id .'_' . $customers[$order->customer] . '_' . $products[$order->product] . '_' . substr($order->createdDate, 0, 10); 
+        }
+
         $contacts = $this->dao->select('t1.id, t2.customer, t2.id AS contact')
             ->from(TABLE_CONTACT)->alias('t2')
             ->leftJoin(TABLE_CUSTOMER)->alias('t1')->on('t1.id = t2.customer')
             ->fetchGroup('customer', 'contact');
 
-        foreach($orders as $order) 
-        {
-            if(!empty($contacts[$order->customer])) $order->contact = $contacts[$order->customer];
-        }
+        $contracts = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->fetchPairs('order', 'contract');
+
+        foreach($orders as $order) $order->contact = !empty($contacts[$order->customer]) ? $contacts[$order->customer] : '';
+
+        foreach($orders as $order) $order->contract = !empty($contracts[$order->id]) ? $contracts[$order->id] : '';
 
         return $orders;
     }
@@ -66,9 +75,12 @@ class orderModel extends model
      * @access public
      * @return array
      */
-    public function getPairs()
+    public function getPairs($customerID = 0)
     {
-        $orders    = $this->dao->select('id, customer, product, createdDate')->from(TABLE_ORDER)->fetchAll('id');
+        $orders = $this->dao->select('id, customer, product, createdDate')->from(TABLE_ORDER)
+            ->beginIF($customerID)->where('customer')->eq($customerID)->fi()
+            ->fetchAll('id');
+
         $customers = $this->loadModel('customer')->getPairs();
         $products  = $this->loadModel('product')->getPairs();
 
