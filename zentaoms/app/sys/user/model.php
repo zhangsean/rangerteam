@@ -136,11 +136,7 @@ class userModel extends model
      */
     public function getUserRoles($users)
     {
-        $users = $this->dao->select('account, role')->from(TABLE_USER)->where('account')->in($users)->fetchPairs();
-        if(!$users) return array();
-
-        foreach($users as $account => $role) $users[$account] = zget($this->lang->user->roleList, $role, $role);
-        return $users;
+        return $this->dao->select('account, role')->from(TABLE_USER)->where('account')->in($users)->fetchPairs();
     }
 
     /**

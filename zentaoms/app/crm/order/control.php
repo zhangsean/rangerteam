@@ -166,16 +166,17 @@ class order extends control
     public function team($orderID = 0)
     {
         $roles        = $this->lang->user->roleList;
+        $order        = $this->order->getByID($orderID);
         $productRoles = $this->loadModel('product')->getRoleList($order->product);
         if($productRoles)
         {
             $roles = array_merge($roles, $productRoles);
-            $roles = array_unique($roles);
         }
+
         $this->view->roles       = $roles;
 
         $this->view->title       = $this->lang->order->team;
-        $this->view->order       = $this->order->getByID($orderID);
+        $this->view->order       = $order;
         $this->view->teamMembers = $this->order->getTeamMembers($orderID);
 
         $this->display();
@@ -201,15 +202,14 @@ class order extends control
 
         $order          = $this->order->getById($orderID);
         $users          = $this->user->getPairs('noclosed, nodeleted, devfirst');
-        $userRoles      = $this->user->getUserRoles(array_keys($users));
         $currentMembers = $this->order->getTeamMembers($orderID);
         $roles          = $this->lang->user->roleList;
         $productRoles   = $this->loadModel('product')->getRoleList($order->product);
         if($productRoles)
         {
             $roles = array_merge($roles, $productRoles);
-            $roles = array_unique($roles);
         }
+
 
         /* The deleted members. */
         foreach($currentMembers as $account => $member)
@@ -220,7 +220,7 @@ class order extends control
         $this->view->title          = $this->lang->order->manageMembers;
         $this->view->order          = $order;
         $this->view->users          = $users;
-        $this->view->userRoles      = $userRoles;
+        $this->view->userRoles      = $this->user->getUserRoles(array_keys($users));
         $this->view->roles          = $roles;
         $this->view->currentMembers = $currentMembers;
         $this->display();

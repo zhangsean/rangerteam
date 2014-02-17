@@ -12,11 +12,11 @@
 $lang->order->common = '订单维护';
 $lang->order->effort = '日志';
 
-$lang->order->statusList['normal']     = '正常';
-$lang->order->statusList['assigned']   = '已指派';
-$lang->order->statusList['payed']      = '已付款';
-$lang->order->statusList['contracted'] = '已签约';
-$lang->order->statusList['closed']     = '已关闭';
+$lang->order->statusList['normal']   = '正常';
+$lang->order->statusList['assigned'] = '已指派';
+$lang->order->statusList['signed']   = '已签约';
+$lang->order->statusList['payed']    = '已付款';
+$lang->order->statusList['closed']   = '已关闭';
 
 $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '订单失败';

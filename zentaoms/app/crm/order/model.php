@@ -52,7 +52,10 @@ class orderModel extends model
             ->leftJoin(TABLE_CUSTOMER)->alias('t1')->on('t1.id = t2.customer')
             ->fetchGroup('customer', 'contact');
 
-        foreach($orders as $order) $order->contact = $contacts[$order->customer];
+        foreach($orders as $order) 
+        {
+            if(!empty($contacts[$order->customer])) $order->contact = $contacts[$order->customer];
+        }
 
         return $orders;
     }
@@ -251,27 +254,21 @@ class orderModel extends model
     {
         extract($_POST);
 
-        $accounts = array_unique($accounts);
+        $accounts = fixer::input('post')->get('account');
+        $roles    = fixer::input('post')->get('role');
+        $this->dao->delete()->from(TABLE_TEAM)->where('`order`')->eq($orderID)->exec();
         foreach($accounts as $key => $account)
         {
             if(empty($account)) continue;
 
             $member = new stdclass();
             $member->role = $roles[$key];
-
-            $mode = $modes[$key];
-            if($mode == 'update')
-            {
-                $this->dao->update(TABLE_TEAM)->data($member)->where('`order`')->eq($orderID)->andWhere('account')->eq($account)->exec();
-            }
-            else
-            {
-                $member->order   = $orderID;
-                $member->account = $account;
-                $member->join    = helper::today();
-                $this->dao->insert(TABLE_TEAM)->data($member)->exec();
-            }
-        }        
+            $member->order   = $orderID;
+            $member->account = $account;
+            $member->join    = helper::today();
+            $this->dao->insert(TABLE_TEAM)->data($member)->exec();
+        }
+        return !dao::isError();
     }
 
     /**

@@ -1,3 +1,15 @@
+<?php 
+/**
+ * The managemembers view file of oder module of ZenTaoMS.
+ *
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     商业软件，非开源软件
+ * @author      Tingting Dai <daitingting@xirangit.com>
+ * @package     order 
+ * @version     $Id $
+ * @link        http://www.zentao.net
+ */
+?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('userRoles', $userRoles);?>
 <?php js::set('roles', array_flip($roles));?>
@@ -6,47 +18,53 @@
   <strong><i class="icon-list-ul"></i> <?php echo $lang->order->manageMembers;?></strong>
   </div>
   <form method='post' id='ajaxForm'>
-    <table class='table table-hover table-striped tablesorter'>
+    <table class='table table-hover table-form'>
       <thead>
         <tr class='text-center'>
-          <th style='width: 300px'><?php echo $lang->team->account;?></th>
-          <th style='width: 300px'><?php echo $lang->team->role;?></th>
+          <th class='w-200px'><?php echo $lang->team->account;?></th>
+          <th class='w-400px'><?php echo $lang->team->role;?></th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <?php $i = 1;?>
         <?php foreach($currentMembers as $member):?>
         <?php if(!isset($users[$member->account])) continue; $realname = $users[$member->account];?>
-        <?php unset($users[$member->account]);?>
-        <tr class='text-center'>
-          <td><input type='text' name='realnames[]' id='account<?php echo $i;?>' value='<?php echo $realname;?>' class='form-control' readonly /></td>
-          <td><?php echo html::select('roles[]', $roles, $member->role, "class='form-control'");?></td>
+        <tr>
+          <td><?php echo html::select('account[]', $users, $member->account, "class='form-control account'");?></td>
           <td>
-            <input type='hidden' name='modes[]' value='update' />
-            <input type='hidden' name='accounts[]' value='<?php echo $member->account;?>' />
+            <div class="input-group w-700px">
+              <?php echo html::select('role[]', $roles, $member->role, "class='form-control role'");?>
+              <div class='input-group-btn'>
+                <i class='icon-plus-sign icon-large'></i>
+                <i class='icon-minus-sign icon-large'></i>
+              </div>
+            </div> 
           </td>
         </tr>
-        <?php $i ++;?>
         <?php endforeach;?>
-        
-        <?php
-        $count = count($users) - 1;
-        if($count > ORDERMODEL::LINK_MEMBERS_ONE_TIME) $count = ORDERMODEL::LINK_MEMBERS_ONE_TIME;
-        ?>
-
-        <?php for($j = 0; $j < $count; $j ++):?>
-        <tr class='text-center'>
-          <td><?php echo html::select('accounts[]', $users, '', "class='form-control account'");?></td>
-          <td><?php echo html::select("roles[]", $roles, '', "class='form-control role'");?></td>
-          <td><input type='hidden' name='modes[]' value='create'/></td>
-        </tr>
-        <?php $i ++;?>
-        <?php endfor;?>
       </tbody>
       <tfoot><tr><td colspan='2'><td><?php echo html::submitButton();?></td></td></tr>
       </tfoot>
     </table>
   </form>
+
+  <?php /* Hidden role form tr for js. */ ?>
+  <table class='hide'>
+    <tbody id='roleGroup'>
+      <tr>
+        <td><?php echo html::select('account[]', $users, '', "class='form-control account'");?></td>
+        <td>
+          <div class="input-group">
+            <?php echo html::select('role[]', $roles, '', "class='form-control role'");?>
+            <div class='input-group-btn'>
+              <i class='icon-plus-sign icon-large'></i>
+              <i class='icon-minus-sign icon-large'></i>
+            </div>
+          </div> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>
 <?php include '../../common/view/footer.html.php';?>
