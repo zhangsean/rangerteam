@@ -50,10 +50,11 @@ js::import($jsRoot . 'jquery/ips.js');
         $block = json_decode($block);
         ?>
         <div class='col-sm-6 col-md-4'>
-          <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->name?>'>
+          <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->name?>' data-url='<?php echo $this->createLink('block', 'printBlock', 'index=' . $index) ?>'>
             <div class='panel-heading'>
               <div class='panel-actions'>
                 <div class='dropdown'>
+                  <button class="btn btn-mini refresh-panel"><i class="icon-repeat"></i></button>
                   <button role="button" class="btn btn-mini" data-toggle="dropdown"><span class="caret"></span></button>
                   <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
                     <li><a href="<?php echo $this->createLink("block", "admin", "index=$index"); ?>" class='edit-block window-btn' data-name='<?php echo $block->name; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit; ?></a></li>
@@ -64,7 +65,6 @@ js::import($jsRoot . 'jquery/ips.js');
               <?php echo $block->name?>
             </div>
             <div class='panel-body no-padding'>
-              <?php echo html::image("{$themeRoot}default/images/ips/loading.gif", "style='display:block;margin:40px auto;'")?>
             </div>
           </div>
         </div>

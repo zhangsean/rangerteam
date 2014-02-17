@@ -160,6 +160,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 /* home */
 #home [class^='col-'] {overflow: visible;}
 #home .panel {box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);}
+#home .panel-loading .panel-body {background: url('images/ips/loading.gif') no-repeat center 30%;}
 #home .panel-actions {margin: 0}
 #home .panels-container {max-width: 1600px; margin: 0 auto; padding: 0 5%; margin-top: 75px;}
 #home .panel-body > .article-content {padding: 8px 10px;}

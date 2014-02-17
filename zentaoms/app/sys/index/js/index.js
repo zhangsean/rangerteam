@@ -4,23 +4,8 @@ $(function()
     $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock}, config, ipsLang));
     $('.entries-count').text(entries.length - 3)
 
-    printBlock();
+    // printBlock();
 })
-
-/**
- * Print block.
- * 
- * @access public
- * @return void
- */
-function printBlock()
-{
-    $('.panels-container .row .panel').each(function()
-    {
-        var index = $(this).attr('id').replace('block', '');
-        $('#block' + index).find('.panel-body').load(createLink('block', 'printBlock', 'index=' + index));
-    })
-}
 
 /**
  * Delete block.
@@ -67,7 +52,7 @@ function sortBlocks(orders)
         {
             var index = $(this).data('order');
             /* Update new index for block id edit and delete. */
-            $(this).attr('id', 'block' + index).attr('data-id', index);
+            $(this).attr('id', 'block' + index).attr('data-id', index).data('url', createLink('block', 'printBlock', 'index=' + index));
             $(this).find('.panel-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
         })
     });
