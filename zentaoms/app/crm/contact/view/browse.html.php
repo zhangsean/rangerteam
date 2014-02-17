@@ -20,7 +20,7 @@
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px'> <?php commonModel::printOrderLink('id',       $orderBy, $vars, $lang->contact->id);?></th>
-        <th class='w-150px'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->contact->customer);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->contact->customer);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->contact->gender);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('phone',    $orderBy, $vars, $lang->contact->phone);?></th>
