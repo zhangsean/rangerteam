@@ -52,7 +52,7 @@ class contract extends control
      * @access public
      * @return void
      */
-    public function create($orderID = 0)
+    public function create($orderID = 0, $customerID = 0)
     {
         if($_POST)
         {
@@ -63,13 +63,14 @@ class contract extends control
 
         $orderID = explode(',', $orderID);
 
-        $this->view->orders    = $this->loadModel('order')->getPairs();
-        $this->view->customers = $this->loadModel('customer')->getPairs();
-        $this->view->contacts  = $this->loadModel('contact')->getPairs();
-        $this->view->users     = $this->loadModel('user')->getPairs();
-        $this->view->order     = $this->order->getByID($orderID[0]);
-        $this->view->amount    = $this->order->getAmount($orderID);
-        $this->view->orderID   = $orderID;
+        $this->view->orders     = $this->loadModel('order')->getPairs($customerID);
+        $this->view->customers  = $this->loadModel('customer')->getPairs();
+        $this->view->contacts   = $this->loadModel('contact')->getPairs();
+        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->order      = $this->order->getByID($orderID[0]);
+        $this->view->amount     = $this->order->getAmount($orderID);
+        $this->view->orderID    = $orderID;
+        $this->view->customerID = $customerID;
         $this->display();
     }
 

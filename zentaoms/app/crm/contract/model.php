@@ -70,7 +70,7 @@ class contractModel extends model
             ->check('code', 'unique')
             ->check('code', 'code')
             ->exec();
-        
+
         if(!dao::isError())
         {
             $contractID = $this->dao->lastInsertID();
@@ -80,6 +80,12 @@ class contractModel extends model
                 $data->contract = $contractID;
                 $data->order    = $orderID;
                 $this->dao->insert(TABLE_CONTRACTORDER)->data($data)->exec();
+
+                $order = new stdclass();
+                $order->status     = 'signed';
+                $order->signedBy   = $contract->signedBy;
+                $order->signedDate = $contract->signedDate;
+                $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
             }
 
             return $contractID;

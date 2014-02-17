@@ -23,7 +23,7 @@
       <table class='table table-form'>
         <tr>
           <th><?php echo $lang->contract->customer;?></th>
-          <td><?php echo html::select('customer', $customers, $order ? $order->customer : '', "class='form-control'");?></td>
+          <td><?php echo html::select('customer', $customers, $order ? $order->customer : $customerID, "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->order;?></th>
