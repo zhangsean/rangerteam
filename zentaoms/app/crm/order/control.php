@@ -136,6 +136,7 @@ class order extends control
         {
             $this->order->close($orderID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('order', $orderID, 'Closed', $this->post->closedNote);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
@@ -153,6 +154,7 @@ class order extends control
     {
         $this->order->activate($orderID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->loadModel('action')->create('order', $orderID, 'Activated', '');
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 
