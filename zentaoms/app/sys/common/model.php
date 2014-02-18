@@ -44,6 +44,7 @@ class commonModel extends model
         if(isset($this->config->system->common))   helper::mergeConfig($this->config->system->common,   'common');
         if(isset($this->config->personal->common)) helper::mergeConfig($this->config->personal->common, 'common');
     }
+
     /**
      * Load custom lang from DB.
      * 
