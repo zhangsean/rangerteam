@@ -1,6 +1,6 @@
 <?php
 /**
- * The control file for block of ZenTaoMS.
+ * The control file for block module of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
@@ -12,7 +12,7 @@
 class block extends control
 {
     /**
-     * Block Index Pager.
+     * Block Index Page.
      * 
      * @access public
      * @return void
@@ -61,7 +61,8 @@ class block extends control
         $this->view->code      = $this->get->blockid;
         $this->view->products  = $this->loadModel('product')->getPairs();
         $this->view->customers = $this->loadModel('customer')->getPairs();
-        $this->view->orders    = $this->dao->select('*')->from(TABLE_ORDER)
+
+        $this->view->orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where(("createdBy='$params->account' OR assignedTo = '$params->account'"))
             ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
             ->orderBy($params->orderBy)
@@ -85,8 +86,9 @@ class block extends control
         $params = $this->get->param;
         $params = json_decode(base64_decode($params));
 
-        $this->view->sso   = base64_decode($this->get->sso);
-        $this->view->code  = $this->get->blockid;
+        $this->view->sso  = base64_decode($this->get->sso);
+        $this->view->code = $this->get->blockid;
+
         $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
             ->where(("createdBy='$params->account' OR assignedTo = '$params->account'"))
             ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
@@ -111,8 +113,9 @@ class block extends control
         $params = $this->get->param;
         $params = json_decode(base64_decode($params));
 
-        $this->view->sso       = base64_decode($this->get->sso);
-        $this->view->code      = $this->get->blockid;
+        $this->view->sso  = base64_decode($this->get->sso);
+        $this->view->code = $this->get->blockid;
+
         $this->view->contracts = $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('createdBy')->eq($params->account)
             ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()

@@ -1,6 +1,6 @@
 <?php
 /**
- * The model file for block of ZenTaoMS.
+ * The model file for block module of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
@@ -20,11 +20,13 @@ class blockModel extends model
     public function getBlockList()
     {
         $blocks = new stdclass();
-        $blocks->order = new stdclass();
-        $blocks->order->name = $this->lang->block->order;
-        $blocks->task = new stdclass();
-        $blocks->task->name = $this->lang->block->task;
+
+        $blocks->order    = new stdclass();
+        $blocks->task     = new stdclass();
         $blocks->contract = new stdclass();
+
+        $blocks->order->name    = $this->lang->block->order;
+        $blocks->task->name     = $this->lang->block->task;
         $blocks->contract->name = $this->lang->block->contract;
 
         return json_encode($blocks);

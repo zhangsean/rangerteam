@@ -9,6 +9,5 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-?>
-<?php
 include "{$code}block.html.php";
+?>
