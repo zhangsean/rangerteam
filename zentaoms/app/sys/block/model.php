@@ -36,7 +36,7 @@ class blockModel extends model
      * @access public
      * @return string
      */
-    public function getSystem($block)
+    public function getEntry($block)
     {
         if(empty($block)) return false;
         $entry = $this->loadModel('entry')->getById($block->entryID);
@@ -46,8 +46,15 @@ class blockModel extends model
         $block->params->uid     = $this->app->user->id;
         $params = base64_encode(json_encode($block->params));
 
+        $query['mode']    = 'getblockdata';
+        $query['blockid'] = $block->blockID;
+        $query['param']   = $params;
+        $query['hash']    = $entry->key;
+        $query['lang']    = $this->app->getClientLang();
+        $query['sso']     = base64_encode(commonModel::getSysURL() . helper::createLink('entry', 'visit', "entry=$entry->id"));
+
         $parseUrl = parse_url($entry->block);
-        $query    = "mode=getblockdata&blockid={$block->blockID}&param={$params}&hash=$entry->key&lang=" . $this->app->getClientLang() ."&sso=" . base64_encode(commonModel::getSysURL() . helper::createLink('entry', 'visit', "entry=$entry->id"));
+        $query    = http_build_query($query);
         $parseUrl['query'] = empty($parseUrl['query']) ? $query : $parseUrl['query'] . "&" . $query;
 
         $link = '';

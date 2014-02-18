@@ -73,7 +73,7 @@ class block extends control
         if(empty($block)) return false;
 
         $html = '';
-        if($block->type == 'system') $html = $this->block->getSystem($block);
+        if($block->type == 'system') $html = $this->block->getEntry($block);
         if($block->type == 'rss')    $html = $this->block->getRss($block);
         if($block->type == 'html')   $html = "<div class='article-content'>" . htmlspecialchars_decode($block->html) .'</div>';
 
