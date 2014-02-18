@@ -44,14 +44,6 @@ class orderModel extends model
     {
         $orders = $this->dao->select('*')->from(TABLE_ORDER)->orderBy($orderBy)->page($pager)->fetchAll('id');
 
-        $customers = $this->loadModel('customer')->getPairs();
-        $products  = $this->loadModel('product')->getPairs();
-
-        foreach($orders as $order)
-        {
-           $order->name = $order->id .'_' . $customers[$order->customer] . '_' . $products[$order->product] . '_' . substr($order->createdDate, 0, 10); 
-        }
-
         $contacts = $this->dao->select('t1.id, t2.customer, t2.id AS contact')
             ->from(TABLE_CONTACT)->alias('t2')
             ->leftJoin(TABLE_CUSTOMER)->alias('t1')->on('t1.id = t2.customer')
@@ -69,6 +61,7 @@ class orderModel extends model
     /**
      * Get order pairs.
      * 
+     * @param  int    $customerID 
      * @access public
      * @return array
      */

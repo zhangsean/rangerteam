@@ -48,7 +48,8 @@ class contract extends control
     /**
      * Create contract. 
      * 
-     * @param  string    $orderID 
+     * @param  int    $orderID 
+     * @param  int    $customerID 
      * @access public
      * @return void
      */
