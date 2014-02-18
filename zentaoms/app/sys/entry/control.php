@@ -244,7 +244,7 @@ class entry extends control
         }
         $blockPairs = array('' => '') + $blockPairs;
 
-        $block = $this->loadModel('block')->getSavedBlock($index);
+        $block = $this->loadModel('block')->getBlock($index);
 
         echo "<th>{$this->lang->entry->lblBlock}</th>";
         echo '<td>' . html::select('entryBlock', $blockPairs, ($block and $block->type == 'system') ? $block->blockID : '', "class='form-control' onchange='getBlockParams(this.value, $entryID)'") . '</td>';

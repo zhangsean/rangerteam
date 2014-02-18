@@ -43,7 +43,7 @@ function sortBlocks(orders)
        newOrder.push(orders[i]);
     }
 
-    $.getJSON(createLink('block', 'order', 'oldOrder=' + oldOrder.join(',') + '&newOrder=' + newOrder.join(',')), function(data)
+    $.getJSON(createLink('block', 'sort', 'oldOrder=' + oldOrder.join(',') + '&newOrder=' + newOrder.join(',')), function(data)
     {
         if(data.result != 'success') return false;
 

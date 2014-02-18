@@ -19,7 +19,7 @@ class blockModel extends model
      * @access public
      * @return void
      */
-    public function saveParams($index, $type)
+    public function save($index, $type)
     {
         $account = $this->app->user->account;
         $data    = fixer::input('post')->get();
@@ -136,7 +136,7 @@ class blockModel extends model
      * @access public
      * @return object
      */
-    public function getSavedBlock($index)
+    public function getBlock($index)
     {
         return isset($this->config->personal->index->block->{'b' . $index}->value) ? json_decode($this->config->personal->index->block->{'b' . $index}->value) : array();
     }

@@ -27,7 +27,7 @@ class block extends control
         $allEntries['rss']  = 'RSS';
         $allEntries['html'] = 'HTML';
 
-        $this->view->block      = $this->block->getSavedBlock($index);
+        $this->view->block      = $this->block->getBlock($index);
         $this->view->entries    = $entries;
         $this->view->allEntries = $allEntries;
         $this->view->index      = $index;
@@ -46,12 +46,12 @@ class block extends control
     {
         if($_POST)
         {
-            $this->block->saveParams($index, $type);
+            $this->block->save($index, $type);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
-        $block = $this->block->getSavedBlock($index);
+        $block = $this->block->getBlock($index);
 
         $this->view->type   = $type;
         $this->view->index  = $index;
@@ -68,7 +68,7 @@ class block extends control
      */
     public function printBlock($index)
     {
-        $block = $this->block->getSavedBlock($index);
+        $block = $this->block->getBlock($index);
 
         if(empty($block)) return false;
 
@@ -88,7 +88,7 @@ class block extends control
      * @access public
      * @return void
      */
-    public function order($oldOrder, $newOrder)
+    public function sort($oldOrder, $newOrder)
     {
         $oldOrder = explode(',', $oldOrder);
         $newOrder = explode(',', $newOrder);
