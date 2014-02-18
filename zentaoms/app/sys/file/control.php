@@ -39,6 +39,21 @@ class file extends control
         $this->view->files = $files;
         $this->display();
     }
+    
+    /** 
+     * Print files. 
+     * 
+     * @param  array  $files 
+     * @param  string $fieldset 
+     * @access public
+     * @return void
+     */
+    public function printFiles($files, $fieldset)
+    {   
+        $this->view->files    = $files;
+        $this->view->fieldset = $fieldset;
+        $this->display();
+    }   
 
     /**
      * AJAX: the api to recive the file posted through ajax.
@@ -284,7 +299,7 @@ class file extends control
      */
     public function delete($fileID)
     {
-        $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
+        $this->delete->delete($fileID);
         if(!dao::isError()) $this->send(array('result' => 'success')); 
         $this->send(array('result' => 'fail', 'message' => dao::getError())); 
     }

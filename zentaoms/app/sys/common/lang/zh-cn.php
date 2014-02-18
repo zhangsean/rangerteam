@@ -90,6 +90,7 @@ $lang->noResultsMatch = '没有匹配的选项';
 $lang->alias          = '搜索引擎优化使用，可使用英文、数字';
 $lang->unfold         = '+';
 $lang->fold           = '-';
+$lang->files          = '附件';
 
 /* Items for javascript. */
 $lang->js = new stdclass();

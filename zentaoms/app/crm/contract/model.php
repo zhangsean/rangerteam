@@ -26,6 +26,8 @@ class contractModel extends model
             $contract->order = array();
             $contractOrders = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->fetchAll();
             foreach($contractOrders as $contractOrder) $contract->order[] = $contractOrder->order;
+
+            $contract->files = $this->loadModel('file')->getByObject('contract', $contractID);
         }
 
         return $contract;
@@ -64,7 +66,7 @@ class contractModel extends model
             ->setDefault('end', '0000-00-00')
             ->get();
 
-        $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid')
+        $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid,files,labels')
             ->autoCheck()
             ->check('order', 'notempty')
             ->check('code', 'unique')
@@ -87,6 +89,8 @@ class contractModel extends model
                 $order->signedDate = $contract->signedDate;
                 $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
             }
+
+            $this->loadModel('file')->saveUpload('contract', $contractID);
 
             return $contractID;
         }
@@ -113,7 +117,7 @@ class contractModel extends model
             ->setDefault('end', '0000-00-00')
             ->get();
 
-        $this->dao->update(TABLE_CONTRACT)->data($data, 'order,uid')
+        $this->dao->update(TABLE_CONTRACT)->data($data, 'order,uid,files,labels')
             ->where('id')->eq($contractID)
             ->autoCheck()
             ->check('order', 'notempty')
@@ -121,16 +125,20 @@ class contractModel extends model
             ->check('code', 'code')
             ->exec();
         
-        if(!dao::isError() and $contract->order != $data->order)
+        if(!dao::isError())
         {
-            $this->dao->delete()->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->exec();
-            foreach($data->order as $orderID)
+            if($contract->order != $data->order)
             {
-                $contractOrder = new stdclass();
-                $contractOrder->contract = $contractID;
-                $contractOrder->order    = $orderID;
-                $this->dao->insert(TABLE_CONTRACTORDER)->data($contractOrder)->exec();
+                $this->dao->delete()->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->exec();
+                foreach($data->order as $orderID)
+                {
+                    $contractOrder = new stdclass();
+                    $contractOrder->contract = $contractID;
+                    $contractOrder->order    = $orderID;
+                    $this->dao->insert(TABLE_CONTRACTORDER)->data($contractOrder)->exec();
+                }
             }
+            $this->loadModel('file')->saveUpload('contract', $contractID);
         }
     }
 

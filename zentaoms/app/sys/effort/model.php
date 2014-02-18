@@ -173,7 +173,7 @@ class effortModel extends model
     public function getByObject($objectType, $objectID)
     {
         $objectTypeList['user']        = $this->loadModel('user')->getPairs('noletter');
-        $objectTypeList['order']       = $this->loadModel('order')->getPairs('noletter');
+        $objectTypeList['order']       = $this->loadModel('order')->getPairs();
         $objectTypeList['custom'][0]   = $this->lang->effort->objectTypeList['custom'];
         $objectTypeList['task']        = $this->dao->select('id,name')->from(TABLE_TASK)->fetchPairs('id');
         $efforts  = $this->dao->select('*')->from(TABLE_EFFORT)->where('objectType')->eq($objectType)->andWhere('objectID')->eq($objectID)->orderBy('date_asc, id')->fetchAll('id');

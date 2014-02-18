@@ -35,7 +35,7 @@
       <?php foreach($contracts as $contract):?>
       <tr class='text-center'>
         <td><?php echo $contract->id;?></td>
-        <td class='text-left'><?php echo $contract->name;?></td>
+        <td class='text-left'><?php echo html::a(inlink('view', "contractID=$contract->id"), $contract->name);?></td>
         <td><?php echo $customers[$contract->customer];?></td>
         <td><?php echo $contract->amount;?></td>
         <td><?php echo $contract->createdDate;?></td>

@@ -100,6 +100,26 @@ class contract extends control
     }
 
     /**
+     * View contract. 
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return void
+     */
+    public function view($contractID)
+    {
+        $contract = $this->contract->getByID($contractID);
+
+        $this->view->orders    = $this->loadModel('order')->getPairs($contract->customer);
+        $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->contacts  = $this->loadModel('contact')->getPairs();
+        $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->view->contract  = $contract;
+
+        $this->display();
+    }
+
+    /**
      * Delete contract. 
      * 
      * @param  int    $contractID 

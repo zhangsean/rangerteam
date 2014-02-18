@@ -78,6 +78,10 @@
           <td><?php echo html::input('end', $contract->end, "class='form-control form-date w-200px'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->files;?></th>
+          <td><?php echo $this->fetch('file', 'buildForm');?></td>
+        </tr>
+        <tr>
           <th></th>
           <td><?php echo html::submitButton();?></td>
         </tr>

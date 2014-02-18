@@ -66,6 +66,10 @@
           <td><?php echo html::input('end', '', "class='form-control w-200px form-date'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->files;?></th>
+          <td><?php echo $this->fetch('file', 'buildForm');?></td>
+        </tr>
+        <tr>
           <th></th>
           <td><?php echo html::submitButton();?></td>
         </tr>
