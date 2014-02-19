@@ -39,7 +39,7 @@
         reloadText                    : '重载',
         closeText                     : '关闭',
         showWindowText                : '显示',
-        confirmRemoveBlock               : '确定要移除区块 【{0}】 吗？',
+        confirmRemoveBlock            : '确定要移除区块 【{0}】 吗？',
         removedBlock                  : '区块已删除',
         orderdBlocksSaved             : '排序已保存',
         confirmCloseBrowser           : '提示：当前有打开的应用窗口',
