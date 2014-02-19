@@ -4,6 +4,8 @@ $lang->task->list   = '任务列表';
 
 $lang->task->browse = '浏览任务';
 $lang->task->create = '新建任务';
+$lang->task->edit   = '编辑任务';
+$lang->task->finish = '任务完成';
 
 $lang->task->id             = '编号';
 $lang->task->project        = '所属项目';
