@@ -219,7 +219,7 @@ class commonModel extends model
 
         if(!isset($lang->$currentModule->menu)) return false;
 
-        $string = "<ul class='nav nav-primary nav-stacked leftmenu affix'>\n";
+        $string = "<nav class='menu leftmenu affix'><ul class='nav nav-primary'>\n";
 
         /* Get menus of current module and current method. */
         $moduleMenus   = $lang->$currentModule->menu;  
@@ -241,7 +241,7 @@ class commonModel extends model
 
             /* Split the methodLink to label, module, method, vars. */
             list($label, $module, $method, $vars) = explode('|', $methodLink);
-            $label .= '<i class="icon-chevron-right"></i>';
+            // $label .= '<i class="icon-chevron-right"></i>';
 
             if(commonModel::hasPriv($module, $method))
             {
@@ -252,7 +252,7 @@ class commonModel extends model
             }
         }
 
-        $string .= "</ul>\n";
+        $string .= "</ul></nav>\n";
         return $string;
     }
 

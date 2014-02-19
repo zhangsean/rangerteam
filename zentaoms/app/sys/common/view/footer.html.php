@@ -26,7 +26,6 @@ if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::
       <?php printf($lang->poweredBy, $config->version, $config->version);?>
     </div>
   </footer>
-   
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);

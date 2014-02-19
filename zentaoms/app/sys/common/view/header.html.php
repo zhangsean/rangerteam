@@ -15,8 +15,7 @@
     <?php if(RUN_MODE == 'admin') echo commonModel::createManagerMenu();?>
   </div>
 </nav>
-<div class="clearfix">
-  <?php 
-  $moduleMenu = commonModel::createModuleMenu($this->moduleName);
-  if($moduleMenu) echo "<div class='col-md-2'>$moduleMenu</div>\n<div class='col-md-10'>\n";
-  ?>
+<?php 
+$moduleMenu = commonModel::createModuleMenu($this->moduleName);
+if($moduleMenu) echo "$moduleMenu\n<div class='row with-menu page-content'>\n"; else echo "<div class='row page-content'>";
+?>
