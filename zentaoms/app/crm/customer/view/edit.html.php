@@ -19,8 +19,8 @@
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
-          <th><?php echo $lang->customer->name;?></th>
-          <td><?php echo html::input('name', $customer->name, "class='form-control'");?></td>
+          <th class='w-120px'><?php echo $lang->customer->name;?></th>
+          <td class='w-p45'><?php echo html::input('name', $customer->name, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->customer->type;?></th>
@@ -60,15 +60,15 @@
         </tr>
         <tr>
           <th><?php echo $lang->customer->desc;?></th>
-          <td><?php echo html::textarea('desc', $customer->desc, "rows='2' class='form-control'");?></td>
+          <td colspan='2'><?php echo html::textarea('desc', $customer->desc, "rows='2' class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->customer->referType;?></th>
-          <td><?php echo html::input('referType', $customer->referType, "class='form-control'");?></td>
+          <td colspan='2'><?php echo html::input('referType', $customer->referType, "class='form-control'");?></td>
         </tr>
         <tr>
           <th></th>
-          <td><?php echo html::submitButton();?></td>
+          <td colspan='2'><?php echo html::submitButton();?></td>
         </tr>
       </table>
     </form>

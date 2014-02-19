@@ -20,8 +20,8 @@
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
-          <th><?php echo $lang->contact->customer;?></th>
-          <td><?php echo html::select('customer', $customers, !empty($customer) ? $customer : '', "class='form-control'");?></td>
+          <th class='w-120px'><?php echo $lang->contact->customer;?></th>
+          <td class='w-p45'><?php echo html::select('customer', $customers, !empty($customer) ? $customer : '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->contact->realname;?></th>
@@ -85,15 +85,15 @@
         </tr>
         <tr>
           <th><?php echo $lang->contact->site;?></th>
-          <td><?php echo html::input('site', '', "class='form-control'");?></td>
+          <td colspan='2'><?php echo html::input('site', '', "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contact->desc;?></th>
-          <td><?php echo html::textarea('desc', '', "rows='2' class='form-control'");?></td>
+          <td colspan='2'><?php echo html::textarea('desc', '', "rows='2' class='form-control'");?></td>
         </tr>
         <tr>
           <th></th>
-          <td><?php echo html::submitButton();?></td>
+          <td colspan='2'><?php echo html::submitButton();?></td>
         </tr>
       </table>
     </form>

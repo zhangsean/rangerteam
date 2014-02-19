@@ -20,7 +20,7 @@
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
-          <th><?php echo $lang->order->closedReason;?></th>
+          <th class='w-120px'><?php echo $lang->order->closedReason;?></th>
           <td><?php echo html::select('closedReason', $lang->order->closedReasonList, '', "class='form-control'");?></td>
         </tr>
         <tr>

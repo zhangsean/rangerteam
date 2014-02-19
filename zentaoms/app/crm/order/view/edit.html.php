@@ -15,9 +15,9 @@
   <div class='panel-heading'><?php echo $lang->order->edit;?></div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
-      <table class='table table-form'>
+      <table class='table table-form w-p60'>
         <tr>
-          <th><?php echo $lang->order->customer;?></th>
+          <th class='w-120px'><?php echo $lang->order->customer;?></th>
           <td><?php echo html::select('customer', $customers, $order->customer, "class='form-control'");?></td>
         </tr>
         <tr>

@@ -22,8 +22,9 @@
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
-          <th><?php echo $lang->contract->customer;?></th>
-          <td><?php echo html::select('customer', $customers, $contract->customer, "class='form-control'");?></td>
+          <th class='w-120px'><?php echo $lang->contract->customer;?></th>
+          <td class='w-p45'><?php echo html::select('customer', $customers, $contract->customer, "class='form-control'");?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->order;?></th>
@@ -43,7 +44,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->contract->items;?></th>
-          <td><?php echo html::textarea('items', $contract->items, "class='form-control'");?></td>
+          <td colspan='2'><?php echo html::textarea('items', $contract->items, "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->delivery;?></th>
@@ -79,11 +80,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->files;?></th>
-          <td><?php echo $this->fetch('file', 'buildForm');?></td>
+          <td colspan='2'><?php echo $this->fetch('file', 'buildForm');?></td>
         </tr>
         <tr>
           <th></th>
-          <td><?php echo html::submitButton();?></td>
+          <td colspan='2'><?php echo html::submitButton();?></td>
         </tr>
       </table>
     </form>
