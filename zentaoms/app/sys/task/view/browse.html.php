@@ -29,7 +29,7 @@
         <th class='w-90px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->task->type);?></th>
         <th class='w-90px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->task->status);?></th>
         <th class='w-90px'> <?php commonModel::printOrderLink('order',       $orderBy, $vars, $lang->task->order);?></th>
-        <th class='w-80px'> <?php echo $lang->actions;?></th>
+        <th class='w-120px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -46,6 +46,9 @@
         <td><?php echo $task->order;?></td>
         <td>
           <?php
+          echo html::a($this->createLink('task', 'edit', "taskID=$task->id"), $lang->edit);
+          echo html::a($this->createLink('task', 'assignto', "taskID=$task->id"), $lang->assign);
+          if($task->status != 'done') echo html::a($this->createLink('task', 'finish', "taskID=$task->id"), $lang->finish);
           ?>
         </td>
       </tr>
