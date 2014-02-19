@@ -12,6 +12,9 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <div class='dashboard dashboard-draggable panels-container ' id='dashboard'>
+  <div class='dashboard-actions clearfix'>
+    <div class='pull-right'><a class='btn' href='<?php echo $this->createLink("block", "admin"); ?>' data-toggle='modal'><i class='icon-plus'></i> 添加区块</a></div>
+  </div>
   <div class='row'>
     <div class='col-sm-6 col-md-4'>
       <div class='panel' data-name='' data-url='<?php echo $this->createLink('block', 'index', 'contract') ?>'>
@@ -22,7 +25,7 @@
             <div class='dropdown'>
               <button class='btn btn-mini' data-toggle='dropdown'><span class='caret'></span></button>
               <ul class='dropdown-menu pull-right'>
-                <li><a href="<?php echo $this->createLink("block", "index", 'contract'); ?>" class='edit-block window-btn' data-name='<?php echo 'Contract'; ?>' data-icon='icon-pencil'><i class='icon-pencil'></i> <?php echo $lang->edit; ?></a></li>
+                <li><a data-toggle='modal' href="<?php echo $this->createLink("block", "admin", 'contract'); ?>" class='edit-block window-btn' data-name='<?php echo 'Contract'; ?>' data-icon='icon-pencil'><i class='icon-pencil'></i> <?php echo $lang->edit; ?></a></li>
                 <li><a href='javascript:;' class='remove-panel'><i class='icon-remove'></i> <?php echo $lang->close; ?></a></li>
               </ul>
             </div>
@@ -40,7 +43,7 @@
             <div class='dropdown'>
               <button class='btn btn-mini' data-toggle='dropdown'><span class='caret'></span></button>
               <ul class='dropdown-menu pull-right'>
-                <li><a href='<?php echo $this->createLink("block", "index", 'order'); ?>' class='edit-block window-btn' data-name='<?php echo 'Order'; ?>' data-icon='icon-pencil'><i class='icon-pencil'></i> <?php echo $lang->edit; ?></a></li>
+                <li><a data-toggle='modal' href='<?php echo $this->createLink("block", "admin", 'order'); ?>' class='edit-block window-btn' data-name='<?php echo 'Order'; ?>' data-icon='icon-pencil'><i class='icon-pencil'></i> <?php echo $lang->edit; ?></a></li>
                 <li><a href='javascript:;' class='remove-panel'><i class='icon-remove'></i> <?php echo $lang->close; ?></a></li>
               </ul>
             </div>
@@ -58,7 +61,7 @@
             <div class='dropdown'>
               <button class='btn btn-mini' data-toggle='dropdown'><span class='caret'></span></button>
               <ul class='dropdown-menu pull-right'>
-                <li><a href='<?php echo $this->createLink("block", "index", "task"); ?>' class='edit-block window-btn' data-name='<?php echo 'Task'; ?>' data-icon='icon-pencil'><i class='icon-pencil'></i> <?php echo $lang->edit; ?></a></li>
+                <li><a data-toggle='modal' href='<?php echo $this->createLink("block", "admin", "task"); ?>' class='edit-block window-btn' data-name='<?php echo 'Task'; ?>' data-icon='icon-pencil'><i class='icon-pencil'></i> <?php echo $lang->edit; ?></a></li>
                 <li><a href='javascript:;' class='remove-panel'><i class='icon-remove'></i> <?php echo $lang->close; ?></a></li>
               </ul>
             </div>

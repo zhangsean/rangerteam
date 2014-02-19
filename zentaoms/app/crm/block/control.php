@@ -44,6 +44,17 @@ class block extends control
     }
 
     /**
+     * Block Admin Page.
+     * 
+     * @access public
+     * @return void
+     */
+    public function admin()
+    {
+        $this->display();
+    }
+
+    /**
      * Print order block.
      * 
      * @access public
