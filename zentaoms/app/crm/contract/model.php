@@ -66,6 +66,7 @@ class contractModel extends model
             ->setDefault('end', '0000-00-00')
             ->get();
 
+        $contract->code = $this->parseCode();
         $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid,files,labels')
             ->autoCheck()
             ->check('order', 'notempty')
@@ -173,5 +174,49 @@ class contractModel extends model
 
         $path = 'system.crm.contract.codeFormat';
         return $this->loadModel('setting')->setItem($path, json_encode($unitList));
+    }
+     
+    /**
+     * Build form of code.
+     * 
+     * @access public
+     * @return void
+     */
+    public function buildCodeForm()
+    {
+        $format = $this->config->contract->codeFormat;
+        if(!is_array($format)) $format = json_decode($format, true);
+        
+        $form = "<div class='input-group'>";
+        foreach($format as $key => $unit)
+        {
+            if(in_array($unit, array('Y', 'm', 'd'))) $form .= "<span class='input-group-addon'>" . date($unit) . "</span>";
+            elseif($unit == 'input') $form .= html::input("code[{$key}]", '', "class='form-control'");
+            elseif(!isset($lang->contract->codeUnitList[$unit])) $form .= "<span class='input-group-addon'>{$unit}</span>";
+        }
+
+        return $form . '</div>';
+    }
+   
+    /**
+     * Parse code.
+     * 
+     * @access public
+     * @return void
+     */
+    public function parseCode()
+    {
+        $format = $this->config->contract->codeFormat;
+        if(!is_array($format)) $format = json_decode($format, true);
+
+        $code = '';
+        foreach($format as $key => $unit)
+        {
+            if(in_array($unit, array('Y', 'm', 'd'))) $code .= date($unit);
+            elseif($unit == 'input') $code .= $_POST['code'][$key];
+            elseif(!isset($lang->contract->codeUnitList[$unit])) $code .= $unit;
+        }
+
+        return $code;
     }
 }

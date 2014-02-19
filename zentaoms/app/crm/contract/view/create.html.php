@@ -22,7 +22,7 @@
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
-          <th><?php echo $lang->contract->customer;?></th>
+          <th class='w-100px'><?php echo $lang->contract->customer;?></th>
           <td><?php echo html::select('customer', $customers, $order ? $order->customer : $customerID, "class='form-control'");?></td>
         </tr>
         <tr>
@@ -35,7 +35,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->contract->code;?></th>
-          <td><?php echo html::input('code', '', "class='form-control'");?></td>
+          <td><?php echo $this->contract->buildCodeForm();?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->amount;?></th>
