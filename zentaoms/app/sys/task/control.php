@@ -43,4 +43,68 @@ class task extends control
         $this->view->orderBy = $orderBy;
         $this->display();
     }
+
+    /**
+     * Edit task.
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
+    public function edit($taskID)
+    {
+        if($_POST)
+        {
+            $this->task->update($taskID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->task      = $this->task->getByID($taskID);
+        $this->view->orders    = $this->loadModel('order')->getPairs();
+        $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
+
+    /**
+     * Finish task.
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
+    public function finish($taskID) 
+    {
+        if(!empty($_POST))
+        {
+            $this->task->finish($taskID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->users = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
+
+    /**
+     * Assign to others.
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
+    public function assignTo($taskID)
+    {
+        if(!empty($_POST))
+        {
+            $this->task->assignTo($taskID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->task  = $this->task->getByID($taskID);
+        $this->view->users = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
 }
