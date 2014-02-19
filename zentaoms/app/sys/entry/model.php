@@ -32,15 +32,7 @@ class entryModel extends model
      */
     public function getById($entryID)
     {
-        $webPath = $this->loadModel('file')->webPath;
-        $entry = $this->dao->select('t1.*, t2.pathname as logoPath')->from(TABLE_ENTRY)->alias('t1')
-            ->leftJoin(TABLE_FILE)->alias('t2')
-            ->on('t1.logo = t2.id')
-            ->where('t1.id')->eq($entryID)
-            ->fetch();
-        if($entry and $entry->logoPath) $entry->logoPath = $webPath . $entry->logoPath;
-
-        return $entry;
+        return $this->dao->select('*')->from(TABLE_ENTRY)->where('id')->eq($entryID)->fetch();
     }
 
     /**
@@ -67,7 +59,7 @@ class entryModel extends model
         if($entry->size == 'custom') $entry->size = json_encode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
 
         $this->dao->insert(TABLE_ENTRY)
-            ->data($entry, $skip = 'width,height')
+            ->data($entry, $skip = 'width,height,files')
             ->autoCheck()
             ->batchCheck($this->config->entry->require->create, 'notempty')
             ->check('code', 'unique')
@@ -94,7 +86,11 @@ class entryModel extends model
         if($entry->size == 'custom') $entry->size = json_encode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
         if(!isset($entry->visible)) $entry->visible = 0;
         unset($entry->logo);
-        $this->dao->update(TABLE_ENTRY)->data($entry, $skip = 'width,height')->autoCheck()->batchCheck($this->config->entry->require->edit, 'notempty')->where('code')->eq($code)->exec();
+        $this->dao->update(TABLE_ENTRY)->data($entry, $skip = 'width,height,files')
+            ->autoCheck()
+            ->batchCheck($this->config->entry->require->edit, 'notempty')
+            ->where('code')->eq($code)
+            ->exec();
         return $oldEntry->id;
     }
 
@@ -108,8 +104,10 @@ class entryModel extends model
     public function delete($code, $table = null)
     { 
         $entry = $this->getByCode($code);
-        $this->loadModel('file')->delete($entry->logo);
+
+        $this->deleteLogo($entry->id);
         $this->dao->delete()->from(TABLE_ENTRY)->where('code')->eq($code)->exec();
+
         return !dao::isError();
     }
 
@@ -158,23 +156,6 @@ class entryModel extends model
             ->where('deleted')->eq(0)
             ->fetchAll();
     }
-    /**
-     * Get entry logo. 
-     * 
-     * @param  int    $entryID
-     * @access public
-     * @return bool|object 
-     */
-    public function getLogo($entryID)
-    {
-        $entry = $this->getById($entryID);
-        if($entry->logo) 
-        {
-            $logo = $this->loadModel('file')->getById($entry->logo);
-            return $logo->pathname;
-        }
-        return '';
-    }
 
     /**
      * Update entry logo. 
@@ -185,43 +166,32 @@ class entryModel extends model
      */
     public function updateLogo($entryID)
     {
-        //upload logo img.
-        $file = $this->loadModel('file')->getUpload('logo');
-        if(isset($file[0]))
+        /* Delete logo img. */
+        $this->deleteLogo($entryID);
+
+        /* Save logo img. */
+        $fileTitle = $this->file->saveUpload('entryLogo', $entryID);
+        if(!dao::isError())
         {
-            $file = $file[0];
-            if(@move_uploaded_file($file['tmpname'], $this->file->savePath . $file['pathname']))
-            {
-                $url =  $this->file->webPath . $file['pathname'];
+            $file = $this->file->getByID(key($fileTitle));
 
-                $file['addedBy']    = $this->app->user->account;
-                $file['addedDate']  = helper::today();
-                $file['objectType'] = 'entryLogo';
-                $file['objectID']   = $entryID;
-                unset($file['tmpname']);
-                $this->dao->insert(TABLE_FILE)->data($file)->exec();
-
-                $logoPath = $this->config->webRoot . 'data/upload/' . $file['pathname'];
-                $this->dao->update(TABLE_ENTRY)->set('logo')->eq($logoPath)->where('id')->eq($entryID)->exec();
-            }
-            else
-            {
-                $error = strip_tags(sprintf($this->lang->file->errorCanNotWrite, $this->file->savePath, $this->file->savePath));
-                die(js::alert($error));
-            }
+            $logoPath = $this->file->webPath . $file->pathname;
+            $this->dao->update(TABLE_ENTRY)->set('logo')->eq($logoPath)->where('id')->eq($entryID)->exec();
         }
     }
 
     /**
-     * Reset entry logo. 
+     * Delete entry logo.
      * 
      * @param  int    $entryID 
      * @access public
      * @return void
      */
-    public function resetLogo($entryID)
+    public function deleteLogo($entryID)
     {
-        $this->dao->update(TABLE_ENTRY)->set('logo')->eq(0)->where('id')->eq($entryID)->exec();
+        $files = $this->loadModel('file')->getByObject('entryLogo', $entryID);
+
+        foreach($files as $file) $this->file->delete($file->id);
     }
 
     /**

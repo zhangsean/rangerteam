@@ -53,22 +53,22 @@ class blockModel extends model
         $query['lang']    = $this->app->getClientLang();
         $query['sso']     = base64_encode(commonModel::getSysURL() . helper::createLink('entry', 'visit', "entry=$entry->id"));
 
-        $parseUrl = parse_url($entry->block);
-        $query    = http_build_query($query);
-        $parseUrl['query'] = empty($parseUrl['query']) ? $query : $parseUrl['query'] . "&" . $query;
+        $query     = http_build_query($query);
+        $parsedUrl = parse_url($entry->block);
+        $parsedUrl['query'] = empty($parsedUrl['query']) ? $query : $parsedUrl['query'] . "&" . $query;
 
         $link = '';
-        if(!isset($parseUrl['scheme'])) 
+        if(!isset($parsedUrl['scheme'])) 
         {
-            $link  = commonModel::getSysURL() . $parseUrl['path'];
-            $link .= '?' . $parseUrl['query'];
+            $link  = commonModel::getSysURL() . $parsedUrl['path'];
+            $link .= '?' . $parsedUrl['query'];
         }
         else
         {
-            $link .= $parseUrl['scheme'] . '://' . $parseUrl['host'];
-            if(isset($parseUrl['port'])) $link .= ':' . $parseUrl['port']; 
-            if(isset($parseUrl['path'])) $link .= $parseUrl['path']; 
-            $link .= '?' . $parseUrl['query'];
+            $link .= $parsedUrl['scheme'] . '://' . $parsedUrl['host'];
+            if(isset($parsedUrl['port'])) $link .= ':' . $parsedUrl['port']; 
+            if(isset($parsedUrl['path'])) $link .= $parsedUrl['path']; 
+            $link .= '?' . $parsedUrl['query'];
         }
 
         return $http->get($link);

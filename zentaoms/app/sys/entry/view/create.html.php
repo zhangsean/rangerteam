@@ -74,7 +74,7 @@ include '../../common/view/header.admin.html.php';
         </tr>
         <tr>
           <th><?php echo $lang->entry->logo;?></th>
-          <td><input type='file' name='logo' id='logo' /></td>
+          <td><?php echo html::file('files');?></td>
         </tr>
         <tr>
           <td></td><td><?php echo html::submitButton() . html::backButton();?></td>
