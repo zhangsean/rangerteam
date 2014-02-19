@@ -25,8 +25,9 @@ $lang->contract->createdDate  = '创建时间';
 $lang->contract->editedBy     = '最后修改';
 $lang->contract->editedDate   = '最后修改时间';
 
-$lang->contract->list   = '合同列表';
-$lang->contract->create = '创建合同';
+$lang->contract->list    = '合同列表';
+$lang->contract->create  = '创建合同';
+$lang->contract->setting = '系统设置';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = '等待交付';
@@ -42,3 +43,10 @@ $lang->contract->statusList[]           = '';
 $lang->contract->statusList['normal']   = '正常';
 $lang->contract->statusList['closed']   = '已完成';
 $lang->contract->statusList['canceled'] = '已取消';
+
+$lang->contract->codeUnitList[]        = '';
+$lang->contract->codeUnitList['Y']     = '年';
+$lang->contract->codeUnitList['m']     = '月';
+$lang->contract->codeUnitList['d']     = '日';
+$lang->contract->codeUnitList['fix']   = '固定值';
+$lang->contract->codeUnitList['input'] = '输入值';

@@ -155,4 +155,23 @@ class contractModel extends model
         $this->dao->delete()->from(TABLE_CONTRACT)->where('id')->eq($contractID)->exec();
         $this->dao->delete()->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->exec();
     }
+
+    /**
+     * Set contract code's format. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCodeFormat()
+    {
+        $format = fixer::input('post')->get('unit');
+        $unitList = array();
+        foreach($format as $unit)
+        {
+           if($unit != '' and $unit != 'fix') $unitList[] = $unit; 
+        }
+
+        $path = 'system.crm.contract.codeFormat';
+        return $this->loadModel('setting')->setItem($path, json_encode($unitList));
+    }
 }
