@@ -98,7 +98,6 @@ class block extends control
         foreach($newOrder as $key => $index)
         {
             $orders['b' . $index] = $this->config->personal->index->block->{'b' . $oldOrder[$key]}->value;
-
         }
 
         $this->loadModel('setting')->deleteItems("owner=$account&app=sys&module=index&section=block");
