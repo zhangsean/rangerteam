@@ -45,7 +45,7 @@ class task extends control
     }
 
     /**
-     * Edit task.
+     * Edit a task.
      * 
      * @param  int    $taskID 
      * @access public
@@ -76,29 +76,30 @@ class task extends control
      */
     public function finish($taskID) 
     {
-        if(!empty($_POST))
+        if($_POST)
         {
             $this->task->finish($taskID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
+        $this->view->task  = $this->task->getByID($taskID);
         $this->view->users = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
     /**
-     * Assign to others.
-     * 
-     * @param  int    $taskID 
+     * Update assign of task.
+     *
+     * @param  int    $taskID
      * @access public
      * @return void
      */
     public function assignTo($taskID)
     {
-        if(!empty($_POST))
+        if($_POST)
         {
-            $this->task->assignTo($taskID);
+            $this->task->assign($taskID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }

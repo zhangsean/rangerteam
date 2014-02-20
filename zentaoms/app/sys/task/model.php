@@ -11,6 +11,8 @@
  */
 class taskModel extends model
 {
+    const CUSTOM_STATUS_ORDER = 'wait,doing,done,cancel,closed';
+
     /**
      * Get task by ID.
      * 
@@ -43,22 +45,63 @@ class taskModel extends model
     /**
      * Update a task.
      * 
-     * @param  int   $taskID 
+     * @param  int    $taskID 
      * @access public
      * @return void
      */
     public function update($taskID)
     {
-        $task = fixer::input('post')
-            ->add('lastEditedBy', $this->app->user->account)
-            ->add('lastEditedDate', helper::now())
-            ->setDefault('deleted', 0)
+        $oldTask = $this->getById($taskID);
+        $now     = helper::now();
+        $task    = fixer::input('post')
+            ->setDefault('estimate, left, consumed', 0)
+            ->setDefault('deadline', '0000-00-00')
+
+            ->setIF($this->post->status == 'done', 'left', 0)
+            ->setIF($this->post->status == 'done', 'canceledBy', '')
+            ->setIF($this->post->status == 'done', 'canceledDate', '')
+            ->setIF($this->post->status == 'done'   and !$this->post->finishedBy,   'finishedBy',   $this->app->user->account)
+            ->setIF($this->post->status == 'done'   and !$this->post->finishedDate, 'finishedDate', $now)
+
+            ->setIF($this->post->status == 'cancel' and !$this->post->canceledBy,   'canceledBy',   $this->app->user->account)
+            ->setIF($this->post->status == 'cancel' and !$this->post->canceledDate, 'canceledDate', $now)
+            ->setIF($this->post->status == 'cancel', 'assignedTo',   $oldTask->createdBy)
+            ->setIF($this->post->status == 'cancel', 'assignedDate', $now)
+
+            ->setIF($this->post->status == 'closed', 'finishedBy', '')
+            ->setIF($this->post->status == 'closed', 'finishedDate', '')
+            ->setIF($this->post->status == 'closed' and !$this->post->closedBy,     'closedBy',     $this->app->user->account)
+            ->setIF($this->post->status == 'closed' and !$this->post->closedDate,   'closedDate',   $now)
+            ->setIF($this->post->consumed > 0 and $this->post->left > 0 and $this->post->status == 'wait', 'status', 'doing')
+
+            ->setIF($this->post->assignedTo != $oldTask->assignedTo, 'assignedDate', $now)
+
+            ->setIF($this->post->status == 'wait' and $this->post->left == $oldTask->left and $this->post->consumed == 0, 'left', $this->post->estimate)
+
+            ->add('editedBy',   $this->app->user->account)
+            ->add('editedDate', $now)
             ->get();
 
-        $this->dao->update(TABLE_TASK)
-            ->data($task)
+        $this->setStatus($task);
+
+        $this->dao->update(TABLE_TASK)->data($task)
             ->autoCheck()
-            ->where('id')->eq($taskID)
+            ->batchCheckIF($task->status != 'cancel', 'name', 'notempty')
+
+            ->checkIF($task->estimate != false, 'estimate', 'float')
+            ->checkIF($task->left     != false, 'left',     'float')
+            ->checkIF($task->consumed != false, 'consumed', 'float')
+            ->checkIF($task->status   != 'wait' and $task->left == 0 and $task->status != 'cancel' and $task->status != 'closed', 'status', 'equal', 'done')
+
+            ->batchCheckIF($task->status == 'wait' or $task->status == 'doing', 'finishedBy, finishedDate,canceledBy, canceledDate, closedBy, closedDate, closedReason', 'empty')
+
+            ->checkIF($task->status == 'done', 'consumed', 'notempty')
+            ->checkIF($task->status == 'done' and $task->closedReason, 'closedReason', 'equal', 'done')
+            ->batchCheckIF($task->status == 'done', 'canceledBy, canceledDate', 'empty')
+
+            ->checkIF($task->status == 'closed', 'closedReason', 'notempty')
+            ->batchCheckIF($task->closedReason == 'cancel', 'finishedBy, finishedDate', 'empty')
+            ->where('id')->eq((int)$taskID)
             ->exec();
 
         return !dao::isError();
@@ -73,29 +116,64 @@ class taskModel extends model
      */
     public function finish($taskID)
     {
-        $task = fixer::input('post')
-            ->add('finishedBy', $this->app->user->account)
-            ->add('status', 'done')
+        $oldTask = $this->getById($taskID);
+        $now     = helper::now();
+        $task    = fixer::input('post')
+            ->setDefault('left', 0)
+            ->setDefault('assignedTo',   $oldTask->createdBy)
+            ->setDefault('assignedDate', $now)
+            ->setDefault('status', 'done')
+            ->setDefault('finishedBy, editedBy', $this->app->user->account)
+            ->setDefault('finishedDate, editedDate', $now) 
             ->get();
 
-        $this->dao->update(TABLE_TASK)->data($task)->autoCheck()->where('id')->eq($taskID)->exec();
+        $this->setStatus($task);
+
+        $this->dao->update(TABLE_TASK)->data($task)
+            ->autoCheck()
+            ->check('consumed', 'notempty')
+            ->where('id')->eq((int)$taskID)
+            ->exec();
 
         return !dao::isError();
     }
 
     /**
-     * Assign to others.
+     * Assign a task to a user again.
      * 
      * @param  int    $taskID 
      * @access public
      * @return void
      */
-    public function assignTo($taskID)
+    public function assign($taskID)
     {
-        $task = fixer::input('post')->add('assignedDate', helper::now())->get();
+        $now = helper::now();
+        $oldTask = $this->getById($taskID);
+        $task = fixer::input('post')
+            ->cleanFloat('left')
+            ->setDefault('editedBy', $this->app->user->account)
+            ->setDefault('editedDate', $now)
+            ->get();
 
-        $this->dao->update(TABLE_TASK)->data($task)->autoCheck()->where('id')->eq($taskID)->exec();
+        $this->dao->update(TABLE_TASK)
+            ->data($task)
+            ->autoCheck()
+            ->check('left', 'float')
+            ->where('id')->eq($taskID)
+            ->exec();
 
         return !dao::isError();
+    }
+
+    /**
+     * Set the status field of a task.
+     * 
+     * @param  object $task 
+     * @access private
+     * @return void
+     */
+    public function setStatus($task)
+    {
+        $task->statusCustom = strpos(self::CUSTOM_STATUS_ORDER, $task->status) + 1;
     }
 }
