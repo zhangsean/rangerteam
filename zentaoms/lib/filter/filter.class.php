@@ -240,7 +240,7 @@ class validater
      */
     public static function checkCode($var)
     {
-        return self::checkREG($var, '|^[a-zA-Z0-9_]{1}[a-zA-Z0-9_]{0,}[a-zA-Z0-9_]{1}$|');
+        return self::checkREG($var, '|^[A-Za-z0-9]+$|');
     }
 
     /**
