@@ -30,8 +30,8 @@
             <?php endif; ?>
             <td class='small'>
               <?php if($order->status == 'closed'):?>
-                <strong><?php echo $lang->order->closedReason . ': ' . $lang->order->closedReasonList[$order->closedReason];?></strong>
-                <div class='text-muted'><?php echo $order->closedNote;?></div>
+              <strong><?php echo $lang->order->closedReason . ': ' . $lang->order->closedReasonList[$order->closedReason];?></strong>
+              <div class='text-muted'><?php if($order->closedNote) echo $order->closedNote;?></div>
               <?php endif; ?>
             </td>
           </tr>
@@ -47,21 +47,21 @@
             <td class='small' colspan='2'>
               <ul>
                 <?php if($order->activatedBy):?>
-                <li><span class='timestamp'><?php echo $order->activatedDate;?></span> <?php printf($lang->order->activated, $order->activatedBy) ?></li>
+                <li><strong class='text-muted'><?php echo $order->activatedDate;?></strong> <?php printf($lang->order->activated, $order->activatedBy) ?></li>
                 <?php endif; ?>
-                <li><span class='timestamp'><?php echo $order->createdDate;?></span> <?php printf($lang->order->created, $order->createdBy) ?></li>
+                <li><strong class='text-muted'><?php echo $order->createdDate;?></strong> <?php printf($lang->order->created, $order->createdBy) ?></li>
                 <?php if($order->status == 'assigned'):?>
-                <li><span class='timestamp'><?php echo $order->assignedDate;?></span> <?php printf($lang->order->assigned, $order->assignedBy, $order->assignedTo) ?></li>
+                <li><strong class='text-muted'><?php echo $order->assignedDate;?></strong> <?php printf($lang->order->assigned, $order->assignedBy, $order->assignedTo) ?></li>
                 <?php endif; ?>
                 <?php if($order->status == 'signed'):?>
-                <li><span class='timestamp'><?php echo $order->signedDate;?></span> <?php printf($lang->order->signed, $order->signedBy) ?></li>
+                <li><strong class='text-muted'><?php echo $order->signedDate;?></strong> <?php printf($lang->order->signed, $order->signedBy) ?></li>
                 <?php endif; ?>
               </ul>
             </td>
           </tr>
           <?php if(!empty($actions)): ?>
           <tr>
-            <?php foreach($actions as $action) echo html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name, "class='btn'") . '&nbsp;';?></td>
+            <td><?php foreach($actions as $action) echo html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name, "class='btn'") . '&nbsp;';?></td>
           </tr>
           <?php endif; ?>
         </table>

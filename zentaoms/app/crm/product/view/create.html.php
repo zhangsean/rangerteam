@@ -19,8 +19,8 @@
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
-          <th><?php echo $lang->product->name;?></th>
-          <td><?php echo html::input('name', '', "class='form-control'");?></td>
+          <th class='w-100px'><?php echo $lang->product->name;?></th>
+          <td class='w-p50'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->product->code;?></th>
@@ -36,7 +36,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->product->summary;?></th>
-          <td><?php echo html::textarea('summary', '', "rows='2' class='form-control'");?></td>
+          <td colspan='2'><?php echo html::textarea('summary', '', "rows='2' class='form-control'");?></td>
         </tr>
         <tr>
           <th></th>

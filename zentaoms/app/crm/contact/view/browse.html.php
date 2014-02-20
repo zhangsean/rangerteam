@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->contact->list;?></strong>
   </div>
-  <table class='table table-hover table-striped table-bordered tablesorter'>
+  <table class='table table-hover table-striped table-bordered tablesorter table-data'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>

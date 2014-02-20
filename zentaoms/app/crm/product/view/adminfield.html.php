@@ -14,7 +14,6 @@
 <div class='panel'>
   <div class='panel-heading'>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->product->field->admin;?></strong>
-  <div class='panel-actions'><?php echo html::a($this->inlink('createField', "productID={$productID}"), '<i class="icon-plus"></i> ' . $lang->product->field->create, 'class="btn btn-primary"');?></div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
@@ -54,5 +53,8 @@
       <?php endforeach;?>
     </tbody>
   </table>
+  <div class='panel-footer'>
+    <?php echo html::a($this->inlink('createField', "productID={$productID}"), '<i class="icon-plus"></i> ' . $lang->product->field->create, 'class="btn btn-primary"');?>
+  </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

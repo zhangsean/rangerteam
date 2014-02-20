@@ -12,33 +12,44 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
+  <div class='panel-heading'>
+    <strong><i class='icon-wrench'></i> <?php echo $lang->setting->common; ?></strong>
+  </div>
   <form method='post' id='ajaxForm'>
     <table class='table'>
       <tr>
-        <th class='w-100px'><?php echo $lang->setting->key;?></th>
-        <th><?php echo $lang->setting->value;?></th>
-        <th class='w-100px'></th>
+        <th class='w-150px text-center'><?php echo $lang->setting->key;?></th>
+        <th class='w-300px'><?php echo $lang->setting->value;?></th>
+        <th></th>
       </tr>
       <?php foreach($fieldList as $key => $value):?>
       <tr class='text-center'>
         <?php $system = isset($systemField[$key]) ? $systemField[$key] : 1;?>
-        <td><?php echo $key === '' ? 'NULL' : $key; echo html::hidden('keys[]', $key) . html::hidden('systems[]', $system);?></td>
+        <td class='text-middle'><?php echo $key === '' ? 'NULL' : $key; echo html::hidden('keys[]', $key) . html::hidden('systems[]', $system);?></td>
         <td>
           <?php $readonly = ($module == 'product' and $field == 'statusList' and $system == 1) ? 'readonly' : ''; ?>
           <?php echo html::input("values[]", $value, "class='form-control' $readonly");?>
         </td>
-        <td class='text-left'>
-          <a href='javascript:;' class='link-icon add'><i class='icon-plus'></i></a>
-          <?php if(!$system):?><a href='javascript:;' class='link-icon remove'><i class='icon-remove'></i></a><?php endif;?>
+        <td class='text-left text-middle'>
+          <a href='javascript:;' class='btn btn-mini add'><i class='icon-plus'></i></a>
+          <?php if(!$system):?><a href='javascript:;' class='btn btn-mini remove'><i class='icon-remove'></i></a><?php endif;?>
         </td>
       </tr>
       <?php endforeach;?>
       <tfoot>
         <tr>
-          <td colspan='3' class='text-center'>
+          <td></td>
+          <td colspan='2'>
           <?php 
           $appliedTo = array($clientLang => $lang->setting->currentLang, 'all' => $lang->setting->allLang);
           echo html::radio('lang', $appliedTo, 'all');
+          ?>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+          <?php
           echo html::submitButton();
           echo html::a(inlink('reset', "module=$module&field=$field"), $lang->setting->reset, "class='btn deleter'");
           ?>
@@ -58,9 +69,9 @@ $itemRow = <<<EOT
     <td>
       <input type='text' value="" name="values[]" class='form-control'>
     </td>
-    <td class='text-left'>
-      <a href='javascript:;' class='link-icon add'><i class='icon-plus'></i></a>
-      <a href='javascript:;' class='link-icon remove'><i class='icon-remove'></i></a>
+    <td class='text-left text-middle'>
+      <a href='javascript:;' class='btn btn-mini add'><i class='icon-plus'></i></a>
+      <a href='javascript:;' class='btn btn-mini remove'><i class='icon-remove'></i></a>
     </td>
   </tr>
 EOT;

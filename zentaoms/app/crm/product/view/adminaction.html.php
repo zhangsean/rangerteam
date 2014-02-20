@@ -12,12 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
-  <div class='panel-heading'>
-  <strong><i class="icon-list-ul"></i> <?php echo $lang->product->action->admin;?></strong>
-  <div class='panel-actions'>
-    <?php echo html::a($this->inlink('createAction', "productID={$productID}"), '<i class="icon-plus"></i> ' . $lang->product->action->create, 'class="btn btn-primary"');?>
-  </div>
-  </div>
+  <div class='panel-heading'><strong><i class="icon-list-ul"></i> <?php echo $lang->product->action->admin;?></strong></div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
@@ -44,5 +39,8 @@
       <?php endforeach;?>
     </tbody>
   </table>
+  <div class='panel-footer'>
+    <?php echo html::a($this->inlink('createAction', "productID={$productID}"), '<i class="icon-plus"></i> ' . $lang->product->action->create, 'class="btn btn-primary"');?>
+  </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>
