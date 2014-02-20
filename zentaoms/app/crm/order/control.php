@@ -177,7 +177,6 @@ class order extends control
         }
 
         $this->view->roles       = $roles;
-
         $this->view->title       = $this->lang->order->team;
         $this->view->order       = $order;
         $this->view->teamMembers = $this->order->getTeamMembers($orderID);
