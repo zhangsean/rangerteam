@@ -23,7 +23,7 @@
     </tr>
     <tr>
       <th><?php echo $lang->task->order;?></th>
-      <td><?php echo $orders[$task->order];?></td>
+      <td><?php echo html::a($this->createLink('order', 'view', "orderID=$task->order"), $orders[$task->order]);?></td>
     </tr>
     <tr>
       <th><?php echo $lang->task->assignedTo;?></th>
