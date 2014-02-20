@@ -18,7 +18,7 @@ body {background: #fff;}
 
 /* left menu. */
 .menu {width: 220px; margin-left: 15px;}
-.menu .nav {box-shadow:0px 2px 1px rgba(0,0,0,0.15);}
+.menu .nav {box-shadow:0px 2px 1px rgba(0,0,0,0.15); border-radius: 4px}
 .menu.affix {top:70px;}
 .menu.affix-bottom {position:absolute; top:auto; bottom:270px;}
 

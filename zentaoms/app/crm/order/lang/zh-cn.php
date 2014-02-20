@@ -18,6 +18,12 @@ $lang->order->statusList['signed']   = '已签约';
 $lang->order->statusList['payed']    = '已付款';
 $lang->order->statusList['closed']   = '已关闭';
 
+$lang->order->statusAccents['normal']   = '';
+$lang->order->statusAccents['assigned'] = 'alert-warning';
+$lang->order->statusAccents['signed']   = 'alert-info';
+$lang->order->statusAccents['payed']    = 'alert-success';
+$lang->order->statusAccents['closed']   = '';
+
 $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '订单失败';
 $lang->order->closedReasonList['postponed'] = '延期';
@@ -139,6 +145,8 @@ $lang->order->operaterList['lt']       = '小于';
 $lang->order->operaterList['before']   = '早于';
 $lang->order->operaterList['after']    = '晚于';
 
-$lang->order->created  = "<strong>%s</strong>于%s创建";
-$lang->order->assigned = "<strong>%s</strong>于%s指派给%s";
-$lang->order->signed   = "<strong>%s</strong>于%s签单";
+$lang->order->history  = '历史';
+$lang->order->created  = "<strong>%s</strong> 创建了订单";
+$lang->order->assigned = "由 <strong>%s</strong> 指派给 %s";
+$lang->order->signed   = "由 <strong>%s</strong> 签单";
+$lang->order->activated= "由 <strong>%s</strong> 激活";

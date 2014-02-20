@@ -1,113 +1,115 @@
 <?php include '../../common/view/header.html.php';?>
-<div class='panel'>
-  <div class='panel-heading'><strong><?php echo $lang->order->view;?></strong></div>
-  <table class='table table-hover'>
-    <thead>
-      <tr class='text-center'>
-        <th><?php echo $lang->order->plan;?></th>
-        <?php if($order->status == 'payed'):?>
-        <th><?php echo $lang->order->real;?></th>
-        <?php endif;?>
-        <th><?php echo $lang->order->status;?></th>
-        <?php if($order->activatedBy):?>
-        <th><?php echo $lang->order->activatedBy;?></th>
-        <th><?php echo $lang->order->activatedDate;?></th>
-        <?php endif;?>
-        <?php if($order->status == 'closed'):?>
-        <th><?php echo $lang->order->closedReason;?></th>
-        <th><?php echo $lang->order->closedNote;?></th>
-        <?php endif;?>
-        <?php if(!empty($actions)):?>
-        <th><?php echo $lang->actions;?></th>
-        <?php endif;?>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class='text-center'>
-        <td><?php echo $order->plan;?></td>
-        <?php if($order->status == 'payed'):?>
-        <td><?php echo $lang->order->real;?></td>
-        <?php endif;?>
-        <td><?php echo $lang->order->statusList[$order->status];?></td>
-        <?php if($order->activatedBy):?>
-        <td><?php echo $order->activatedBy;?></td>
-        <td><?php echo $order->activatedDate;?></td>
-        <?php endif;?>
-        <?php if($order->status == 'closed'):?>
-        <td><?php echo $lang->order->closedReasonList[$order->closedReason];?></td>
-        <td><?php echo $order->closedNote;?></td>
-        <?php endif;?>
-        <?php if(!empty($actions)):?>
-        <td><?php foreach($actions as $action) echo html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name) . '&nbsp;';?></td>
-        <?php endif;?>
-      <tr>
-      <tr>
-        <?php ($order->status == 'payed' || $order->status == 'closed') ? $colspan = '4' : $colspan = '2';?>
-        <td colspan="<?php echo $colspan;?>" class='text-left'>
-          <?php printf($lang->order->created, $order->createdBy, $order->createdDate);?><br/>
-          <?php if($order->status == 'assigned') printf($lang->order->assigned, $order->assignedBy, $order->assignedDate, $order->assignedTo);?>
-          <?php if($order->status == 'signed') printf($lang->order->signed, $order->signedBy, $order->signedDate);?>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class='col-lg-6'>
+  <div class='panel'>
+    <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->view;?></strong></div>
+    <div class='panel-body'>
+      <div class='alert <?php echo $lang->order->statusAccents[$order->status]; ?>'>
+        <?php $payed = $order->status == 'payed'; ?>
+        <table class="table table-borderless table-condensed">
+          <tr>
+            <?php if($payed): ?>
+            <th class='small text-muted w-p45'><?php echo $lang->order->real;?></th>
+            <?php else: ?>
+            <th class='small text-muted w-p45'><?php echo $lang->order->plan;?></th>
+            <?php endif; ?>
+            <th class='small text-muted'><?php echo $lang->order->status;?></th>
+          </tr>
+          <tr>
+            <?php if($payed): ?>
+            <td><strong class="label label-success lead text-latin"><?php echo $order->real;?></strong></td>
+            <?php else: ?>
+            <td rowspan='3'><strong class="lead text-danger text-latin"><?php echo $order->plan;?></strong></td>
+            <?php endif; ?>
+            <td>
+              <strong class="lead"><?php echo $lang->order->statusList[$order->status];?></strong>
+            </td>
+          </tr>
+          <tr>
+            <?php if($payed): ?>
+            <th class='small text-muted'><?php echo $lang->order->plan;?></th>
+            <?php endif; ?>
+            <td class='small'>
+              <?php if($order->status == 'closed'):?>
+                <strong><?php echo $lang->order->closedReason . ': ' . $lang->order->closedReasonList[$order->closedReason];?></strong>
+                <div class='text-muted'><?php echo $order->closedNote;?></div>
+              <?php endif; ?>
+            </td>
+          </tr>
+          <tr>
+            <?php if($payed): ?>
+            <td><strong class="lead text-danger text-latin"><?php echo $order->plan;?></strong></td>
+            <?php endif; ?>
+          </tr>
+          <tr>
+            <th class='small text-muted' colspan='2'><?php echo $lang->order->history; ?></th>
+          </tr>
+          <tr>
+            <td class='small' colspan='2'>
+              <ul>
+                <?php if($order->activatedBy):?>
+                <li><span class='timestamp'><?php echo $order->activatedDate;?></span> <?php printf($lang->order->activated, $order->activatedBy) ?></li>
+                <?php endif; ?>
+                <li><span class='timestamp'><?php echo $order->createdDate;?></span> <?php printf($lang->order->created, $order->createdBy) ?></li>
+                <?php if($order->status == 'assigned'):?>
+                <li><span class='timestamp'><?php echo $order->assignedDate;?></span> <?php printf($lang->order->assigned, $order->assignedBy, $order->assignedTo) ?></li>
+                <?php endif; ?>
+                <?php if($order->status == 'signed'):?>
+                <li><span class='timestamp'><?php echo $order->signedDate;?></span> <?php printf($lang->order->signed, $order->signedBy) ?></li>
+                <?php endif; ?>
+              </ul>
+            </td>
+          </tr>
+          <?php if(!empty($actions)): ?>
+          <tr>
+            <?php foreach($actions as $action) echo html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name, "class='btn'") . '&nbsp;';?></td>
+          </tr>
+          <?php endif; ?>
+        </table>
+      </div>
+      <h6 class='header-dividing text-muted'><?php echo $lang->order->product;?></h6>
+      <ul>
+        <li>
+          <strong><?php echo $product->name;?></strong>
+          <div class='small text-muted'><?php echo $product->summary;?></div>
+        </li>
+      </ul>
+      <h6 class='header-dividing text-muted'><?php echo $lang->order->customer;?></h6>
+      <ul>
+        <li>
+          <strong><?php echo $customer->name;?></strong>
+          <?php if($customer->contactedBy): ?>
+          <div class='small text-muted'><i class='icon-user'></i> <?php echo $lang->order->contact . ': ' . $customer->contactedBy;?></div>
+          <?php endif; ?>
+          <div class='small text-muted'><i class='icon-time'></i> <?php echo $lang->customer->contactDate . ': ' . $customer->contactedDate;?></div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
-<div class='panel'>
-  <table class='table table-hover'>
-    <thead>
-      <tr class='text-center'>
-        <th><?php echo $lang->order->product;?></th>
-        <th><?php echo $lang->product->summary;?></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class='text-center'>
-        <td><?php echo $product->name;?></td>
-        <td><?php echo $product->summary;?></td>
-      <tr>
-    </tbody>
-  </table>
-</div>
-<div class='panel'>
-  <table class='table table-hover'>
-    <thead>
-      <tr class='text-center'>
-        <th><?php echo $lang->order->customer;?></th>
-        <th><?php echo $lang->customer->contactBy;?></th>
-        <th><?php echo $lang->customer->contactDate;?></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class='text-center'>
-        <td><?php echo $customer->name;?></td>
-        <td><?php echo $customer->contactedBy;?></td>
-        <td><?php echo $customer->contactedDate;?></td>
-      <tr>
-    </tbody>
-  </table>
-</div>
-<div class='panel'>
-  <div class='panel-heading'><strong><?php echo $lang->order->effort;?></strong></div>
-  <table class='table table-hover'>
-    <thead>
-      <tr class='text-center'>
-        <th class='w-id'><?php echo $lang->effort->id;?></th>
-        <th class='w-100px'><?php echo $lang->effort->date;?></th>
-        <th class='w-80px'><?php echo $lang->effort->consumed;?></th>
-        <th><?php echo $lang->effort->work;?></th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php unset($efforts['typeList']);?>
-      <?php foreach($efforts as $effort):?>
-      <tr class='text-center'>
-        <td><?php echo $effort->id;?></td>
-        <td><?php echo $effort->date;?></td>
-        <td><?php echo $effort->consumed;?></td>
-        <td class='text-left'><?php echo $effort->work;?></td>
-      <tr>
-      <?php endforeach;?>
-    </tbody>
-  </table>
+<div class='col-lg-6'>
+  <div class='panel'>
+    <div class='panel-heading'><strong><i class='icon-time'></i> <?php echo $lang->order->effort;?></strong></div>
+    <table class='table table-hover table-data'>
+      <thead>
+        <tr class='text-center'>
+          <th class='w-id'><?php echo $lang->effort->id;?></th>
+          <th class='w-100px'><?php echo $lang->effort->date;?></th>
+          <th class='w-80px'><?php echo $lang->effort->consumed;?></th>
+          <th><?php echo $lang->effort->work;?></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php unset($efforts['typeList']);?>
+        <?php foreach($efforts as $effort):?>
+        <tr class='text-center'>
+          <td><?php echo $effort->id;?></td>
+          <td><?php echo $effort->date;?></td>
+          <td><?php echo $effort->consumed;?></td>
+          <td class='text-left'><?php echo $effort->work;?></td>
+        <tr>
+        <?php endforeach;?>
+      </tbody>
+    </table>
+  </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>
