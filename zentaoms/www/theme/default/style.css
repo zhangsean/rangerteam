@@ -170,8 +170,10 @@ td>select{padding-left: 0;padding-right: 0}
 .panel > .panel-heading,.nav-stacked.nav-primary>li.nav-heading,.list > header, #navbar {background-color: #f1f1f1; background-image: -moz-linear-gradient(#fafafa, #f1f1f1); background-image: -webkit-linear-gradient(#FAFAFA, #f1f1f1); background-image: linear-gradient(#FAFAFA, #f1f1f1); background-repeat: repeat-x;}
 .panel-pure {box-shadow: none; border: 0; border-radius: 0;}
 .panel-pure .panel-heading {background: transparent;}
-.panel-actions{float: right;margin-top: -10px;margin-right: -10px;}
-.panel-actions .btn{margin-top: 3px;}
+.panel-actions {display: inline-block; margin-left: 8px;}
+.panel-actions .btn-mini {margin-top: -3px;}
+.panel-actions.pull-right{display: block; margin-top: -10px;margin-right: -10px;}
+.panel-actions.pull-right .btn{margin-top: 3px;}
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
 .panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
 
@@ -425,11 +427,15 @@ td #aliasLabel {display: table-row;}
 #crumbs .icon-angle-right{margin-right: 6px;}
 #poweredby {float: right;margin-right: 20px;}
 
-.change-show,.change-hide,.log-desc,.log-asc,.diff-all,.diff-sort{display: inline-block; font-family: ZenIcon; border: 1px solid #555;color: #555; font-size: 13px;font-weight: lighter; width: 14px;height: 13px;line-height: 13px;text-align: center;}
-.change-show:hover,.change-hide:hover,.log-desc:hover,.log-asc:hover,.diff-all:hover,.diff-sort:hover{background-color: #333;color: #fff}
-.change-show:before{content: "\f067";}
-.change-hide:before{content: "\f068";}
-.log-desc:before{content: "\f063";}
-.log-asc:before{content: "\f062";}
-.diff-all:before{content: "\f0b2";}
-.diff-sort:before{content: "\f036";}
+/* Action */
+.change-show, .change-hide, .log-desc, .log-asc, .diff-all, .diff-sort {font-family: ZenIcon;}
+.change-show:before {content: "\f067";}
+.change-hide:before {content: "\f068";}
+.log-desc:before {content: "\f063";}
+.log-asc:before {content: "\f062";}
+.diff-all:before {content: "\f0b2";}
+.diff-sort:before {content: "\f036";}
+
+#historyItem {padding-left: 25px;}
+#historyItem > li {line-height: 23px;}
+#historyItem .changes {border: 1px solid #e5e5e5; background: #f7f7f7; font-size: 12px; padding: 2px 5px; margin-top: 5px;}

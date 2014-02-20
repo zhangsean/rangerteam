@@ -54,9 +54,7 @@ function toggleShow(obj)
         $(obj).find('span').attr('class', 'change-show');
     }
     $('.changes').each(function(){
-        var box = $(this).parent();
-        while($(box).get(0).tagName.toLowerCase() != 'li') box = $(box).parent();
-        var switchButtonID = ($(box).find('span').find("span").attr('id'));
+        var switchButtonID = $(this).closest('li').find('button[id^="switchButton"]').attr('id');
         switchChange(switchButtonID.replace('switchButton', ''));
     })
 }
@@ -99,30 +97,20 @@ $(function(){
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <script src='<?php echo $jsRoot;?>jquery/reverseorder/raw.js' type='text/javascript'></script>
 
-<?php if(!isset($actionTheme)) $actionTheme = 'fieldset';?>
-<?php if($actionTheme == 'fieldset'):?>
-<div id='actionbox'>
-<fieldset>
-  <legend>
-  <?php echo $lang->history?>
-    <span onclick='toggleOrder(this)' class='hand'> <?php echo "<span title='$lang->reverse' class='log-asc'></span>";?></span>
-    <span onclick='toggleShow(this);' class='hand'><?php echo "<span title='$lang->switchDisplay' class='change-show'></span>";?></span>
-  </legend>
-<?php else:?>
-<table class='table-1' id='actionbox'>
-  <caption>
-    <?php echo $lang->history?>
-    <span onclick='$("#historyItem li").reverseOrder();' class='hand'> <?php echo "<span title='$lang->reverse' class='log-asc'></span>";?></span>
-    <span onclick='toggleShow();' class='hand'><?php echo "<span title='$lang->switchDisplay' class='change-show'></span>";?></span>
-  </caption>
-  <tr><td>
-<?php endif;?>
-
-  <ol id='historyItem'>
-    <?php $i = 1; ?>
-    <?php foreach($actions as $action):?>
-    <?php $canEditComment = (end($actions) == $action and $action->comment and $this->methodName == 'view' and $action->actor == $this->app->user->account);?>
-    <li value='<?php echo $i ++;?>'>
+<div id='actionbox' class='panel'>
+  <div class='panel-heading'>
+    <i class='icon-time'></i> <?php echo $lang->history?>
+    <div class='panel-actions'>
+      <button class='btn btn-mini' onclick='toggleOrder(this)' class='hand'> <?php echo "<span title='$lang->reverse' class='log-asc'></span>";?></button>
+      <button class='btn btn-mini' onclick='toggleShow(this);' class='hand'><?php echo "<span title='$lang->switchDisplay' class='change-show'></span>";?></button>
+    </div>
+  </div>
+  <div class='panel-body'>
+    <ol id='historyItem'>
+      <?php $i = 1; ?>
+      <?php foreach($actions as $action):?>
+      <?php $canEditComment = (end($actions) == $action and $action->comment and $this->methodName == 'view' and $action->actor == $this->app->user->account);?>
+      <li value='<?php echo $i ++;?>'>
       <?php
       if(isset($users[$action->actor])) $action->actor = $users[$action->actor];
       if($action->action == 'assigned' and isset($users[$action->extra]) ) $action->extra = $users[$action->extra];
@@ -130,7 +118,7 @@ $(function(){
       ?>
       <span>
         <?php $this->action->printAction($action);?>
-        <?php if(!empty($action->history)) echo "<span id='switchButton$i' class='hand change-show' onclick=switchChange($i)></span>";?>
+        <?php if(!empty($action->history)) echo "<button id='switchButton$i' class='hand change-show btn btn-mini' onclick=switchChange($i)></button>";?>
       </span>
       <?php if(!empty($action->comment) or !empty($action->history)):?>
       <?php if(!empty($action->comment)) echo "<div class='history'>";?>
@@ -161,13 +149,8 @@ $(function(){
 
         <?php if(!empty($action->comment)) echo "</div>";?>
       <?php endif;?>
-    </li>
-    <?php endforeach;?>
-  </ol>
-
-<?php if($actionTheme == 'fieldset'):?>
-</fieldset>
-<?php else:?>
-</td></tr></table>
-<?php endif;?>
+      </li>
+      <?php endforeach;?>
+    </ol>
+  </div>
 </div>
