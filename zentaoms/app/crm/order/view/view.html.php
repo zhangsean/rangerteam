@@ -17,13 +17,16 @@
         <th><?php echo $lang->order->closedReason;?></th>
         <th><?php echo $lang->order->closedNote;?></th>
         <?php endif;?>
+        <?php if(!empty($actions)):?>
+        <th><?php echo $lang->actions;?></th>
+        <?php endif;?>
       </tr>
     </thead>
     <tbody>
       <tr class='text-center'>
         <td><?php echo $order->plan;?></td>
         <?php if($order->status == 'payed'):?>
-        <th><?php echo $lang->order->real;?></th>
+        <td><?php echo $lang->order->real;?></td>
         <?php endif;?>
         <td><?php echo $lang->order->statusList[$order->status];?></td>
         <?php if($order->activatedBy):?>
@@ -33,6 +36,9 @@
         <?php if($order->status == 'closed'):?>
         <td><?php echo $lang->order->closedReasonList[$order->closedReason];?></td>
         <td><?php echo $order->closedNote;?></td>
+        <?php endif;?>
+        <?php if(!empty($actions)):?>
+        <td><?php foreach($actions as $action) echo html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name) . '&nbsp;';?></td>
         <?php endif;?>
       <tr>
       <tr>
