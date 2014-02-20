@@ -42,3 +42,6 @@ CREATE TABLE IF NOT EXISTS `sys_lang` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `lang` (`app`, `lang`,`module`,`section`,`key`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+ALTER TABLE sys_task CHANGE LastEditedBy editedBy varchar(30) NOT NULL;
+ALTER TABLE sys_task CHANGE LastEditedDate editedDate datetime NOT NULL;
