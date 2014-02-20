@@ -35,11 +35,54 @@ class taskModel extends model
      */
     public function getList($orderBy = 'id_desc', $pager = null)
     {
+        $orderBy = str_replace('status', 'statusCustom', $orderBy);
         return $this->dao->select('*')->from(TABLE_TASK)
             ->where('deleted')->eq(0)
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
+    }
+
+    /**
+     * Create a task.
+     * 
+     * @param  int    $customerID
+     * @access public
+     * @return int|bool
+     */
+    public function create($customerID)
+    {
+        $task = fixer::input('post')
+            ->setDefault('estimate, left', 0)
+            ->setDefault('estStarted', '0000-00-00')
+            ->setDefault('deadline', '0000-00-00')
+            ->setDefault('status', 'wait')
+            ->setIF($this->post->estimate != false, 'left', $this->post->estimate)
+            ->setIF($this->post->assignedTo, 'assignedDate', helper::now())
+            ->setForce('assignedTo', $this->post->assignedTo)
+            ->setDefault('createdBy', $this->app->user->account)
+            ->setDefault('createdDate', helper::now())
+            ->get();
+
+        $this->setStatus($task);
+
+        $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels')
+            ->autoCheck()
+            ->batchCheck($this->config->task->require->create, 'notempty')
+            ->checkIF($task->estimate != '', 'estimate', 'float')
+            ->checkIF($task->deadline != '0000-00-00', 'deadline', 'ge', $task->estStarted)
+            ->exec();
+
+        if(!dao::isError())
+        {
+            $taskID = $this->dao->lastInsertID();
+
+            $this->loadModel('file')->saveUpload('task', $taskID);
+
+            return $taskID;
+        }
+
+        return false;
     }
 
     /**
@@ -84,9 +127,9 @@ class taskModel extends model
 
         $this->setStatus($task);
 
-        $this->dao->update(TABLE_TASK)->data($task)
+        $this->dao->update(TABLE_TASK)->data($task, $skip = 'uid,files,labels')
             ->autoCheck()
-            ->batchCheckIF($task->status != 'cancel', 'name', 'notempty')
+            ->batchCheckIF($task->status != 'cancel', $this->config->require->edit, 'notempty')
 
             ->checkIF($task->estimate != false, 'estimate', 'float')
             ->checkIF($task->left     != false, 'left',     'float')
@@ -104,7 +147,7 @@ class taskModel extends model
             ->where('id')->eq((int)$taskID)
             ->exec();
 
-        return !dao::isError();
+        if(!dao::isError()) $this->loadModel('file')->saveUpload('task', $taskID);
     }
 
     /**

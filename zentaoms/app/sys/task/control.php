@@ -45,6 +45,34 @@ class task extends control
     }
 
     /**
+     * Create a task.
+     * 
+     * @param  int    $orderID
+     * @param  int    $customerID
+     * @access public
+     * @return void
+     */
+    public function create($orderID = 0, $customerID = 0)
+    {
+        if($_POST)
+        {
+            $this->task->create();
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $orders = $this->loadModel('order')->getPairs($customerID);
+
+        $this->view->orders     = array('0' => '') + $orders;
+        $this->view->customers  = $this->loadModel('customer')->getPairs();
+        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->orderID    = $orderID;
+        $this->view->order      = $this->order->getByID($orderID);
+        $this->view->customerID = $customerID;
+        $this->display();
+    }
+
+    /**
      * Edit a task.
      * 
      * @param  int    $taskID 
@@ -64,6 +92,25 @@ class task extends control
         $this->view->orders    = $this->loadModel('order')->getPairs();
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
+
+    /**
+     * View task. 
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
+    public function view($taskID)
+    {
+        $task = $this->task->getByID($taskID);
+
+        $this->view->orders    = $this->loadModel('order')->getPairs($task->customer);
+        $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->view->task      = $task;
+
         $this->display();
     }
 

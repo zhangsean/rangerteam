@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
   <div class='panel-heading'><strong><?php echo $lang->task->edit;?></strong></div>
@@ -63,7 +64,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->task->consumed;?></th>
-          <td><?php echo html::input('consumed', $task->consumed, "class='form-control'");?></td>
+          <td><?php echo html::input('consumed', $task->consumed, "class='form-control' autocomplete='off'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->task->left;?></th>
@@ -104,6 +105,10 @@
         <tr>
           <th><?php echo $lang->task->desc;?></th>
           <td><?php echo html::textarea('desc', $task->desc, "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->files;?></th>
+          <td><?php echo $this->fetch('file', 'buildForm');?></td>
         </tr>
         <tr>
           <th></th>
