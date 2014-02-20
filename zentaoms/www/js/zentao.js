@@ -514,14 +514,14 @@ function ping()
  */
 function fixTableHeader()
 {
-    var table = $('.col-md-10 > .panel > .table');
+    var table = $('.page-content > .panel > .table');
 
     if(!table.length) return;
 
     var tHead     = table.find('thead');
     var navHeight = $('#mainNavbar').outerHeight();
     var gap       = tHead.offset().top - $('#mainNavbar').outerHeight();
-    var col       = table.closest('.col-md-10');
+    var col       = table.closest('.page-content');
 
     $(window).scroll(function()
     {
