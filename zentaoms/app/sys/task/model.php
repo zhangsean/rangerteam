@@ -46,11 +46,10 @@ class taskModel extends model
     /**
      * Create a task.
      * 
-     * @param  int    $customerID
      * @access public
      * @return int|bool
      */
-    public function create($customerID)
+    public function create()
     {
         $task = fixer::input('post')
             ->setDefault('estimate, left', 0)
