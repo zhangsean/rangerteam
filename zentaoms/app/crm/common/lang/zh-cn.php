@@ -59,8 +59,14 @@ $lang->contract->menu = new stdclass();
 $lang->contract->menu->browse = array('link' => '<i class="icon-th-list"></i> 合同列表|contract|browse|', 'alias' => 'edit,view');
 $lang->contract->menu->create = '<i class="icon-plus-sign"></i> 添加合同|contract|create|';
 
+$lang->feedback = new stdclass();
+$lang->feedback->menu = new stdclass();
+$lang->feedback->menu->browse = array('link' => '问题列表|feedback|browse|', 'alias' => 'edit,view');
+$lang->feedback->menu->create = '添加问题|feedback|create|';
+
+/* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->user     = '员工角色|setting|lang|module=user&field=roleList';
 $lang->setting->menu->product  = '产品状态|setting|lang|module=product&field=statusList';
-$lang->setting->menu->customer = '客户级别|setting|lang|module=customer&field=typeList';
+$lang->setting->menu->customer = '客户类型|setting|lang|module=customer&field=typeList';

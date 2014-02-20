@@ -17,6 +17,7 @@ $lang->raquo   = '&raquo;';
 $lang->minus   = ' - ';
 $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
+$lang->at      = ' 于 ';
 $lang->submitting   = '稍候...';
 
 /* Lang items for zentaoms. */
@@ -92,6 +93,7 @@ $lang->alias          = '搜索引擎优化使用，可使用英文、数字';
 $lang->unfold         = '+';
 $lang->fold           = '-';
 $lang->files          = '附件';
+$lang->comment        = '备注';
 
 /* Items for javascript. */
 $lang->js = new stdclass();

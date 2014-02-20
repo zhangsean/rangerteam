@@ -20,8 +20,8 @@ class action extends control
      */
     public function editComment($actionID)
     {
-        if(!strip_tags($this->post->lastComment)) die(js::locate($this->server->http_referer, 'parent'));
+        if(!strip_tags($this->post->lastComment)) $this->send(array('result' => 'success', 'locate' => $this->server->http_referer));
         $this->action->updateComment($actionID);
-        die(js::locate($this->server->http_referer, 'parent'));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
     }
 }

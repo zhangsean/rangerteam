@@ -77,7 +77,6 @@ function toggleComment(actionID)
 {
     $('.comment' + actionID).toggle();
     $('#lastCommentBox').toggle();
-    $('.ke-container').css('width', '100%');
 }
 
 $(function(){
@@ -91,7 +90,8 @@ $(function(){
             oldBoxID = newBoxID;
             if($(this).html() != $(this).next().html()) $(this).parent().before(diffButton);
         }
-    })
+    });
+    $.setAjaxForm('#ajaxFormComment');
 })
 </script>
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
@@ -126,7 +126,7 @@ $(function(){
         <?php echo $this->action->printChanges($action->objectType, $action->history);?>
         </div>
         <?php if($canEditComment):?>
-        <span class='link-button f-right comment<?php echo $action->id;?>'><?php echo html::a('#lastCommentBox', '<i class="icon-edit-sign icon-large"></i>', '', "onclick='toggleComment($action->id)'")?></span>
+        <span class='link-button pull-right comment<?php echo $action->id;?>'><?php echo html::a('#lastCommentBox', '<i class="icon-edit-sign icon-large"></i>', "onclick='toggleComment($action->id)'")?></span>
         <?php endif;?>
         <?php 
         if($action->comment) 
@@ -137,12 +137,10 @@ $(function(){
         }
         ?>
         <?php if($canEditComment):?>
-        <div class='hidden' id='lastCommentBox'>
-          <form method='post' action='<?php echo $this->createLink('action', 'editComment', "actionID=$action->id")?>'>
-            <table align='center' class='table-1'>
-              <tr><td><?php echo html::textarea('lastComment', $action->comment,"rows='5' class='w-p100'");?></td></tr>
-              <tr><td><?php echo html::submitButton() . html::commonButton($lang->goback, "onclick='toggleComment($action->id)' class='button-b'");?></td></tr>
-            </table>
+        <div id='lastCommentBox' style='display:none'>
+          <form method='post' id='ajaxFormComment' action='<?php echo $this->createLink('action', 'editComment', "actionID=$action->id")?>'>
+            <p><?php echo html::textarea('lastComment', $action->comment);?></p>
+            <p><?php echo html::submitButton() . html::commonButton($lang->goback, 'btn btn-default', "onclick='toggleComment($action->id)'");?></p>
           </form>
         </div>
         <?php endif;?>

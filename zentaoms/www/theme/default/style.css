@@ -428,6 +428,7 @@ td #aliasLabel {display: table-row;}
 #poweredby {float: right;margin-right: 20px;}
 
 /* Action */
+.history{border: 1px solid #ccc; background: #f2f2f2; padding: 10px; margin-top: 10px; margin-bottom: 10px; color: #333; line-height: 20px;}
 .change-show, .change-hide, .log-desc, .log-asc, .diff-all, .diff-sort {font-family: ZenIcon;}
 .change-show:before {content: "\f067";}
 .change-hide:before {content: "\f068";}

@@ -107,6 +107,7 @@ define('TABLE_LANG',      '`sys_lang`');
 define('TABLE_ENTRY',     '`sys_entry`');
 define('TABLE_SSO',       '`sys_sso`');
 define('TABLE_TASK',      '`sys_task`');
+define('TABLE_ISSUE',     '`sys_issue`');
 
 /* Tables for crm. */
 define('TABLE_PRODUCT',       '`sys_product`');
@@ -118,6 +119,7 @@ define('TABLE_TEAM',          '`crm_team`');
 define('TABLE_CONTACT',       '`crm_contact`');
 define('TABLE_CONTRACT',      '`crm_contract`');
 define('TABLE_CONTRACTORDER', '`crm_contractOrder`');
+define('TABLE_SERVICE',       '`crm_service`');
 
 /* Tables for oa. */
 define('TABLE_TODO',     '`oa_todo`');
