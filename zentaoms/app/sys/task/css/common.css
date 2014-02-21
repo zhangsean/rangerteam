@@ -1,0 +1,12 @@
+form .pri {display: inline-block; width: 48px; height: 20px; text-align: center; cursor: pointer; border: 1px solid #999; background-color: #ccc; color: #fff; margin-right: 5px; border-radius: 4px;}
+form .pri.pri-1 {background-color: #ffe6e5; border-color: #d2322d; color: #d2322d;}
+form .pri.pri-2 {background-color: #ffd98c; border-color: #ea8400; color: #ea8400;}
+form .pri.pri-3 {background-color: #f2d7ff; border-color: #8521bf; color: #8521bf;}
+form .pri.pri-4 {background-color: #cef4ff; border-color: #39b3d7; color: #39b3d7;}
+form .pri.active {background-color: #777}
+form .pri.active:before {font-family: ZenIcon; content: '\f00c'; display: inline-block;}
+form .pri.pri-1.active:before, form .pri.pri-2.active:before, form .pri.pri-3.active:before, form .pri.pri-4.active:before {margin-right: 5px;}
+form .pri.pri-1.active {background-color: #d2322d; color: #fff;}
+form .pri.pri-2.active {background-color: #ea8400; color: #fff;}
+form .pri.pri-3.active {background-color: #8521bf; color: #fff;}
+form .pri.pri-4.active {background-color: #39b3d7; color: #fff;}

@@ -256,7 +256,7 @@ label.checkbox,input[type='radio']+label{font-weight: normal;}
 .form-condensed .table-form {margin-bottom: 0;}
 .form-condensed .table-form td, .form-condensed .table-form th {padding: 5px; font-size: 12px;}
 .form-condensed .table-form td + td, .form-condensed .table-form th + th {padding-left: 5%;}
-.form-condensed fieldset {background-color: #eee; padding: 2px 15px; margin-bottom: 10px; margin-top: 35px; border-radius: 6px; position: relative;}
+.form-condensed fieldset {background-color: #eee; padding: 2px 15px 2px 5px; margin-bottom: 10px; margin-top: 35px; border-radius: 6px; position: relative;}
 .form-condensed fieldset.fieldset-primary {background-color: transparent; padding: 0; margin-top: 0;}
 .form-condensed fieldset .table-form {margin-bottom: 0;}
 .form-condensed fieldset.collapsed {padding: 1px;}
