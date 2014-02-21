@@ -29,7 +29,7 @@
         <th class='w-150px'><?php commonModel::printOrderLink('addedDate',  $orderBy, $vars, $lang->feedback->addedDate);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('assignedTo', $orderBy, $vars, $lang->feedback->assignedTo);?></th>
         <th class='w-80px'> <?php commonModel::printOrderLink('status',     $orderBy, $vars, $lang->feedback->status);?></th>
-        <th class='w-100px'><?php echo $lang->actions;?></th>
+        <th class='w-150px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -47,6 +47,8 @@
         <td>
           <?php
           echo html::a($this->createLink('feedback', 'edit', "issueID=$issue->id"), $lang->edit);
+          echo html::a($this->createLink('feedback', 'assignto', "issueID=$issue->id"), $lang->assign, "data-toggle='modal'");
+          echo html::a($this->createLink('feedback', 'close', "issueID=$issue->id"), $lang->close, "data-toggle='modal'");
           echo html::a($this->createLink('feedback', 'delete', "issueID=$issue->id"), $lang->delete, "class='deleter'");
           ?>
         </td>

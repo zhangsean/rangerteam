@@ -195,7 +195,7 @@ class feedback extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             if($this->post->assignedTo) $this->loadModel('action')->create('feedback', $issueID, 'Assigned', $this->post->comment, $this->post->assignedTo);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "issueID=$issueID")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
         $this->view->users   = $this->loadModel('user')->getPairs();
@@ -218,7 +218,7 @@ class feedback extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->loadModel('action')->create('feedback', $issueID, 'Closed', $this->post->comment);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "issueID=$issueID")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
         $this->view->issueID = $issueID;

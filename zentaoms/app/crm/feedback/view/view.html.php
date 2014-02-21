@@ -20,11 +20,11 @@
   </fieldset>
   <p>
     <?php
-    echo html::a(inlink('assignTo', "issueID=$issue->id"), $lang->assign);
+    echo html::a(inlink('assignTo', "issueID=$issue->id"), $lang->assign, "data-toggle='modal'");
     if($issue->status != 'transfered') echo html::a(inlink('transfer', "issueID=$issue->id"), $lang->feedback->transfer);
     if($issue->status != 'replied')echo html::a('#replyDiv', $lang->feedback->reply, "id='replyLink'");
     if($issue->status == 'replied')echo html::a('#doubtDiv', $lang->feedback->doubt, "id='doubtLink'");
-    echo html::a(inlink('close', "issueID=$issue->id"), $lang->close);
+    echo html::a(inlink('close', "issueID=$issue->id"), $lang->close, "data-toggle='modal'");
     echo html::a(inlink('edit', "issueID=$issue->id"), $lang->edit);
     echo html::a(inlink('delete', "issueID=$issue->id"), $lang->delete, "class='deleter'");
     ?>
