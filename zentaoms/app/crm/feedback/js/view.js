@@ -1,7 +1,7 @@
 $(function()
 {
     /* Show reply area. */
-    $('#replyLink').click(function(){$('#reply').parent().parent().parent().removeClass('hidden')})
+    $('#replyLink').click(function(){$('#replyDiv').removeClass('hide')})
     /* Show doubt area. */
-    $('#doubtLink').click(function(){$('#doubt').parent().parent().parent().removeClass('hidden')})
+    $('#doubtLink').click(function(){$('#doubtDiv').removeClass('hide')})
 })

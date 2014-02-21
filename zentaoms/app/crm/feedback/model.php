@@ -200,7 +200,7 @@ class feedbackModel extends model
      * Delete issue. 
      * 
      * @param  int    $issueID 
-     * @param  int    $table 
+     * @param  null   $table 
      * @access public
      * @return void
      */

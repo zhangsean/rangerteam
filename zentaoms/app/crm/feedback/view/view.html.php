@@ -1,6 +1,6 @@
 <?php
 /**
- * The view method of view file of feedback module of ZenTaoMS.
+ * The view file for view method of feedback module of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
@@ -31,14 +31,14 @@
   </p>
   <?php include '../../../sys/common/view/action.html.php';?>
   <?php if($issue->status != 'replied'):?>
-  <div class='hidden' id='replyDiv'>
+  <div class='hide' id='replyDiv'>
     <form method='post' id='ajaxForm' action='<?php echo inlink('reply', "issueID=$issue->id")?>'>
       <p><?php echo html::textarea('reply');?></p>
       <p><?php echo html::submitButton();?></p>
     </form>
   </div>
   <?php else:?>
-  <div class='hidden' id='doubtDiv'>
+  <div class='hide' id='doubtDiv'>
     <form method='post' id='ajaxForm' action='<?php echo inlink('doubt', "issueID=$issue->id")?>'>
       <p><?php echo html::textarea('doubt');?></p>
       <p><?php echo html::submitButton();?></p>
@@ -81,4 +81,3 @@
   </fieldset>
 </div>
 <?php include '../../common/view/footer.html.php';?>
-
