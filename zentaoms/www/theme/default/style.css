@@ -242,16 +242,29 @@ label.checkbox,input[type='radio']+label{font-weight: normal;}
 .panel-body > form{padding-right: 10px; max-width: 1000px}
 
 /* table form */
-.table-form>tbody>tr>th {text-align:right;vertical-align:middle; border-bottom:none}
-.table-form>tbody>tr>td {vertical-align:middle; border-bottom:none}
-.table-form>tfoot>tr>th,.table-form>tfoot>tr>td {border-bottom:none}
-.table>thead>tr>th.text-middle, .table>tbody>tr>th.text-middle, .table>tfoot>tr>th.text-middle, .table>thead>tr>td.text-middle, .table>tbody>tr>td.text-middle, .table>tfoot>tr>td.text-middle,.text-middle {vertical-align: middle;}
-.table-form td.v-bottom {vertical-align:bottom;}
-.table-form td input {vertical-align:middle;margin:0;}
-.table-form td textarea {vertical-align:middle;margin:0;}
+.table-form th {text-align:right;vertical-align:middle; border-bottom:none}
+.table-form th.text-left, .table-form tr.text-left th {text-align:left;vertical-align:middle; border-bottom:none}
+.table-form td {vertical-align:middle; border-bottom:none}
+.table-form th,.table-form td {border-bottom:none}
+.table th.text-middle, .table td.text-middle, .text-middle {vertical-align: middle;}
+.table-form td.text-bottom {vertical-align:bottom;}
+.table-form td .form-control {vertical-align:middle;margin:0;}
 .table-form .checkbox,.table-form input[type="radio"] + label {margin-right: 10px;}
-.table-form td > .row{margin-right: 0;}
-.table-form td > .row > [class*="col-"]{padding-right: 0;line-height: 34px}
+.table-form td > .row {margin-right: 0;}
+.table-form td > .row > [class*="col-"] {padding-right: 0;line-height: 34px}
+
+.form-condensed .table-form {margin-bottom: 0;}
+.form-condensed .table-form td, .form-condensed .table-form th {padding: 5px; font-size: 12px;}
+.form-condensed .table-form td + td, .form-condensed .table-form th + th {padding-left: 5%;}
+.form-condensed fieldset {background-color: #eee; padding: 2px 15px; margin-bottom: 10px; margin-top: 35px; border-radius: 6px; position: relative;}
+.form-condensed fieldset.fieldset-primary {background-color: transparent; padding: 0; margin-top: 0;}
+.form-condensed fieldset .table-form {margin-bottom: 0;}
+.form-condensed fieldset.collapsed {padding: 1px;}
+.form-condensed fieldset.collapsed .table-form {display: none}
+.form-condensed legend {font-size: 12px; font-weight: bold; border:0px solid red; padding: 5px; position: absolute; top: -25px; left: 0; cursor: pointer; line-height: 14px; vertical-align: top; color: #666}
+.form-condensed legend:before {font-family: ZenIcon; content: '\f0d7'; font-size: 14px; color: #999; display: inline-block; margin-right: 4px; margin-bottom: -3px; -webkit-font-smoothing: antialiased;}
+.form-condensed legend:hover {color: #333;}
+.form-condensed fieldset.collapsed legend:before {content: '\f0da'}
 
 td #aliasLabel {display: table-row;}
 

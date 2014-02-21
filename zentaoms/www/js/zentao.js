@@ -557,3 +557,17 @@ function fixTableHeader()
         $('#fixedHeader').css({top: navHeight, left: tHead.offset().left, width: table.width()});
     }
 }
+
+/**
+ * Make form condensed
+ * 
+ * @access public
+ * @return void
+ */
+function condensedForm()
+{
+    $('.form-condensed legend').click(function()
+    {
+        $(this).closest('fieldset').toggleClass('collapsed');
+    });
+}

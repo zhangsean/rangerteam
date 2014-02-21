@@ -35,6 +35,7 @@ $lang->contact->editedBy      = '由谁编辑';
 $lang->contact->editedDate    = '编辑时间';
 $lang->contact->contactedBy   = '由谁联系';
 $lang->contact->contactedDate = '联系时间';
+$lang->contact->uploadAvatar  = '上传头像';
 
 $lang->contact->genderList['f'] = '女';
 $lang->contact->genderList['m'] = '男';
