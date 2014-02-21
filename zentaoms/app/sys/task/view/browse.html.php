@@ -34,10 +34,10 @@
     </thead>
     <tbody>
       <?php foreach($tasks as $task):?>
-      <tr class='text-center'>
+      <tr class='text-center' data-url='<?php echo $this->createLink('task', 'view', "taskID=$task->id"); ?>'>
         <td><?php echo $task->id;?></td>
         <td><?php echo $lang->task->priList[$task->pri];?></td>
-        <td class='text-left'><?php echo html::a($this->createLink('task', 'view', "taskID=$task->id"), $task->name);?></td>
+        <td class='text-left'><?php echo $task->name;?></td>
         <td><?php echo $task->deadline;?></td>
         <td><?php echo $task->assignedTo;?></td>
         <td><?php echo $task->createdDate;?></td>
