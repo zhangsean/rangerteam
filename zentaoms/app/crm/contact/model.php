@@ -111,6 +111,8 @@ class contactModel extends model
         $this->updateAvatar($contactID);
 
         if(dao::isError()) return array('result' => false, 'message' => dao::getError());
+
+        return array('result' => true);
     }
 
     /**
