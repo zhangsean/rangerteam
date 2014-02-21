@@ -198,7 +198,8 @@ class feedback extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "issueID=$issueID")));
         }
 
-        $this->view->users = $this->loadModel('user')->getPairs();
+        $this->view->users   = $this->loadModel('user')->getPairs();
+        $this->view->issueID = $issueID;
         $this->display();
     }
 
@@ -220,6 +221,7 @@ class feedback extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "issueID=$issueID")));
         }
 
+        $this->view->issueID = $issueID;
         $this->display();
     }
 

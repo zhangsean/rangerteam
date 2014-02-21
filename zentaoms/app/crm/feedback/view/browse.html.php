@@ -13,8 +13,8 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-  <strong><i class="icon-list-ul"></i> <?php echo $lang->feedback->list;?></strong>
-  <div class='panel-actions'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->feedback->create, 'class="btn btn-primary"');?></div>
+    <strong><i class="icon-list-ul"></i> <?php echo $lang->feedback->list;?></strong>
+  <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->feedback->create, 'class="btn btn-primary"');?></div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
