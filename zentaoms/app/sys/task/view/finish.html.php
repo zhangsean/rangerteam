@@ -21,7 +21,7 @@
       <table class='table table-form'>
         <tr>
           <th><?php echo $lang->task->consumed;?></th>
-          <td><?php echo html::input('consumed', $task->consumed, "class='form-control' autocomplete='off'")?></td>
+          <td><?php echo html::input('consumed', $task->consumed ? $task->consumed : '', "class='form-control' autocomplete='off'")?></td>
         </tr>
         <tr>
           <th><?php echo $lang->task->assignedTo;?></th>
