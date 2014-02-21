@@ -35,7 +35,6 @@ class taskModel extends model
      */
     public function getList($orderBy = 'id_desc', $pager = null)
     {
-        $orderBy = str_replace('status', 'statusCustom', $orderBy);
         return $this->dao->select('*')->from(TABLE_TASK)
             ->where('deleted')->eq(0)
             ->orderBy($orderBy)
@@ -62,8 +61,6 @@ class taskModel extends model
             ->setDefault('createdBy', $this->app->user->account)
             ->setDefault('createdDate', helper::now())
             ->get();
-
-        $this->setStatus($task);
 
         $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels')
             ->autoCheck()
@@ -124,8 +121,6 @@ class taskModel extends model
             ->add('editedDate', $now)
             ->get();
 
-        $this->setStatus($task);
-
         $this->dao->update(TABLE_TASK)->data($task, $skip = 'uid,files,labels')
             ->autoCheck()
             ->batchCheckIF($task->status != 'cancel', $this->config->task->require->edit, 'notempty')
@@ -147,6 +142,8 @@ class taskModel extends model
             ->exec();
 
         if(!dao::isError()) $this->loadModel('file')->saveUpload('task', $taskID);
+
+        return false;
     }
 
     /**
@@ -168,8 +165,6 @@ class taskModel extends model
             ->setDefault('finishedBy, editedBy', $this->app->user->account)
             ->setDefault('finishedDate, editedDate', $now) 
             ->get();
-
-        $this->setStatus($task);
 
         $this->dao->update(TABLE_TASK)->data($task)
             ->autoCheck()
@@ -205,17 +200,5 @@ class taskModel extends model
             ->exec();
 
         return !dao::isError();
-    }
-
-    /**
-     * Set the status field of a task.
-     * 
-     * @param  object $task 
-     * @access public
-     * @return void
-     */
-    public function setStatus($task)
-    {
-        $task->statusCustom = strpos(self::CUSTOM_STATUS_ORDER, $task->status) + 1;
     }
 }
