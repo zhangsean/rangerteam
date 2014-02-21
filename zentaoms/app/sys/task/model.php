@@ -128,7 +128,7 @@ class taskModel extends model
 
         $this->dao->update(TABLE_TASK)->data($task, $skip = 'uid,files,labels')
             ->autoCheck()
-            ->batchCheckIF($task->status != 'cancel', $this->config->require->edit, 'notempty')
+            ->batchCheckIF($task->status != 'cancel', $this->config->task->require->edit, 'notempty')
 
             ->checkIF($task->estimate != false, 'estimate', 'float')
             ->checkIF($task->left     != false, 'left',     'float')

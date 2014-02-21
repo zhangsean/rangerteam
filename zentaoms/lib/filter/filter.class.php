@@ -314,6 +314,34 @@ class validater
     }
 
     /**
+     * Must greater than a value or equal a value.
+     * 
+     * @param  mixed    $var 
+     * @param  mixed    $value 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function checkGE($var, $value)
+    {
+        return $var >= $value;
+    }
+
+    /**
+     * Must less than a value or equal a value.
+     * 
+     * @param  mixed    $var 
+     * @param  mixed    $value 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function checkLE($var, $value)
+    {
+        return $var <= $value;
+    }
+
+    /**
      * Must in value list.
      * 
      * @param  mixed  $var 
