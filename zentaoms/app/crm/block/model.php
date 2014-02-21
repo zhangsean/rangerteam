@@ -11,6 +11,23 @@
  */
 class blockModel extends model
 {
+    /** 
+     * Save params 
+     * 
+     * @param  int    $index 
+     * @access public
+     * @return void
+     */
+    public function save($index)
+    {   
+        $account = $this->app->user->account;
+        $data    = fixer::input('post')->get();
+
+        $data->type = 'system';
+
+        $this->loadModel('setting')->setItem($account . '.crm.index.block.b' . $index, json_encode($data));
+    }
+
     /**
      * Get block list.
      * 

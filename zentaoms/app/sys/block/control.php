@@ -85,23 +85,31 @@ class block extends control
      * 
      * @param  string    $oldOrder 
      * @param  string    $newOrder 
+     * @param  string    $app 
      * @access public
      * @return void
      */
-    public function sort($oldOrder, $newOrder)
+    public function sort($oldOrder, $newOrder, $app = 'sys')
     {
         $oldOrder = explode(',', $oldOrder);
         $newOrder = explode(',', $newOrder);
 
         $orders  = array();
         $account = $this->app->user->account;
-        foreach($newOrder as $key => $index)
+        $blocks  = $this->loadModel('setting')->getItems("owner=$account&app=$app&module=index&section=block");
+        foreach($blocks as $id => $block)
         {
-            $orders['b' . $index] = $this->config->personal->index->block->{'b' . $oldOrder[$key]}->value;
+            $blocks[$block->key] = $block->value;
+            unset($blocks[$id]);
         }
 
-        $this->loadModel('setting')->deleteItems("owner=$account&app=sys&module=index&section=block");
-        $this->setting->setItems($account . '.sys.index.block', $orders);
+        foreach($newOrder as $key => $index)
+        {
+            $orders['b' . $index] = $blocks['b' . $oldOrder[$key]];
+        }
+
+        $this->loadModel('setting')->deleteItems("owner=$account&app=$app&module=index&section=block");
+        $this->setting->setItems($account . ".$app.index.block", $orders);
 
         if(dao::isError()) $this->send(array('result' => 'fail'));
         $this->send(array('result' => 'success'));
@@ -111,12 +119,13 @@ class block extends control
      * Delete block 
      * 
      * @param  int    $index 
+     * @param  string $sys 
      * @access public
      * @return void
      */
-    public function delete($index)
+    public function delete($index, $app = 'sys')
     {
-        $this->loadModel('setting')->deleteItems('owner=' . $this->app->user->account . '&app=sys&module=index&section=block&key=b' . $index);
+        $this->loadModel('setting')->deleteItems('owner=' . $this->app->user->account . "&app=$app&module=index&section=block&key=b" . $index);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
     }

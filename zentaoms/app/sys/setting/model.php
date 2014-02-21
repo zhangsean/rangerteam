@@ -193,7 +193,7 @@ class settingModel extends model
         $records = $this->dao->select('*')->from(TABLE_CONFIG)
             ->where('owner')->in($owner)
             ->andWhere('app')->in($app)
-            ->orderBy('id')
+            ->orderBy('app_desc, id')
             ->fetchAll('id');
         if(!$records) return array();
 

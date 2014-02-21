@@ -18,6 +18,6 @@ class index extends control
 
     public function index()
     {
-        $this->display();
+        $this->locate($this->createLink('dashboard', 'index'));
     }
 }
