@@ -39,7 +39,7 @@
             </table>
           </fieldset>
           <fieldset>
-            <legend>基本信息</legend>
+            <legend><?php echo $lang->contact->basicInfo; ?></legend>
             <table class='table table-form'>
               <tr>
                 <th class='w-80px'><?php echo $lang->contact->customer;?></th>
@@ -58,7 +58,7 @@
             </table>
           </fieldset>
           <fieldset>
-            <legend>联系信息</legend>
+            <legend><?php echo $lang->contact->contactInfo; ?></legend>
             <table class='table table-form'>
               <tr>
                 <th class='w-80px'><?php echo $lang->contact->email;?></th>
@@ -91,7 +91,7 @@
                 <td><?php echo html::input('gtalk', $contact->gtalk, "class='form-control'");?></td>
               </tr>
             </table>
-          </fieldset>          
+          </fieldset>
         </div>
         <div class='col-md-4'>
           <table class='table table-form'>

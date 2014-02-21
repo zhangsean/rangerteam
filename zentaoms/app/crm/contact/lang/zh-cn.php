@@ -43,3 +43,6 @@ $lang->contact->genderList['m'] = '男';
 $lang->contact->create = '添加联系人';
 $lang->contact->list   = '联系人列表';
 $lang->contact->edit   = '编辑联系人';
+
+$lang->contact->basicInfo   = '基本信息';
+$lang->contact->contactInfo = '联系信息';
