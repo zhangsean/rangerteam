@@ -55,7 +55,7 @@
           ?>
           </td>
         </tr>
-      <tfoot>
+      </tfoot>
     </table>
   </form>
 </div>

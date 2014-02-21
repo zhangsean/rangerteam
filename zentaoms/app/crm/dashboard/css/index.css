@@ -1,4 +1,7 @@
-body {background: #e5e5e5}
+body {background: #145ccd;}
+
+.page-content {margin-top: -19px; border-top: 1px solid #3280fc; padding-top: 20px;}
+
 .dashboard {margin: 0 auto; padding: 0 20px; max-width: 1600px;}
 .dashboard-actions {margin-bottom: 20px;}
 .dashboard .panel-actions {margin-top: 0; margin-right: 0;}
