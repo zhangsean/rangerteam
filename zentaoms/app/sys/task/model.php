@@ -211,7 +211,7 @@ class taskModel extends model
      * Set the status field of a task.
      * 
      * @param  object $task 
-     * @access private
+     * @access public
      * @return void
      */
     public function setStatus($task)
