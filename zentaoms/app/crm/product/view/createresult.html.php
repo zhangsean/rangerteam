@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class="icon-plus"></i> <?php echo $lang->product->action->createResults;?></strong>
+    <strong><i class="icon-plus"></i> <?php echo $lang->product->action->createResult;?></strong>
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
