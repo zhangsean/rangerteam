@@ -88,3 +88,5 @@ CHANGE `closedBy` `closedBy` char(30) COLLATE 'utf8_general_ci' NOT NULL AFTER `
 
 ALTER TABLE sys_task CHANGE lastEditedBy editedBy varchar(30) NOT NULL;
 ALTER TABLE sys_task CHANGE lastEditedDate editedDate datetime NOT NULL;
+
+ALTER TABLE `crm_contact` CHANGE `avatar` `avatar` char(100) NOT NULL AFTER `nickname`;
