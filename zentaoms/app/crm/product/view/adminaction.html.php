@@ -14,7 +14,7 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-list-ul"></i> <?php echo $lang->product->action->admin;?></strong>
-    <div class='panel-actions pull-right'><?php echo html::a($this->inlink('createAction', "productID={$productID}"), '<i class="icon-plus"></i> ' . $lang->product->action->create, 'class="btn btn-primary"');?></div>
+    <div class='panel-actions pull-right'><?php echo html::a($this->inlink('createAction', "productID={$productID}"), '<i class="icon-plus"></i> ' . $lang->product->action->create, "class='btn btn-primary' data-toggle='modal'");?></div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
@@ -31,7 +31,7 @@
         <td><?php echo $action->name;?></td>
         <td>
           <?php
-          echo html::a($this->createLink('product', 'editAction', "actionID=$action->id"), $lang->edit, "class='editr'");
+          echo html::a($this->createLink('product', 'editAction', "actionID=$action->id"), $lang->edit, "class='editr' data-toggle='modal'");
           echo html::a($this->createLink('product', 'actionConditions', "actionID=$action->id"), $lang->product->action->conditions);
           echo html::a($this->createLink('product', 'actionInputs', "actionID=$action->id"), $lang->product->action->inputs);
           echo html::a($this->createLink('product', 'actionResults', "actionID=$action->id"), $lang->product->action->results);
