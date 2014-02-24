@@ -24,6 +24,8 @@ class taskModel extends model
     {
         $task = $this->dao->select('*')->from(TABLE_TASK)->where('id')->eq($taskID)->limit(1)->fetch();
 
+        foreach($task as $key => $value) if(strpos($key, 'Date') !== false and !(int)substr($value, 0, 4)) $task->$key = '';
+
         if($task) $task->files = $this->loadModel('file')->getByObject('task', $taskID);
 
         return $task;
