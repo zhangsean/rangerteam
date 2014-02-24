@@ -321,7 +321,7 @@ class product extends control
         if($_POST)
         {
             $result = $this->product->saveInputs($actionID);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('adminAction', "actionID={$action->product}")));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('adminAction', "actionID={$action->id}")));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
@@ -338,6 +338,61 @@ class product extends control
         $this->view->inputFields  = $inputFields;
         $this->display();
     }
+        
+    /**
+     * Action results list page.
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function actionResults($actionID)
+    {
+        $action = $this->product->getActionByID($actionID);
+        $this->loadModel('order');
+        
+        $this->view->action  = $action; 
+        $this->view->fields  = $this->product->getFieldList($action->product);
+        $this->display();
+    }
+
+    /**
+     * Create an action result.
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function createResult($actionID)
+    {
+        $action = $this->product->getActionByID($actionID);      
+
+        if($_POST)
+        {
+            $result = $this->product->createResult($action);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('adminresults', "actionID={$actionID}")));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->loadModel('order');
+
+        $inputFields = array('');
+        foreach($this->lang->order->fields as $name => $field) $inputFields[$name] = $this->lang->order->{$name};
+
+        $fields  = $this->product->getFieldList($action->product);
+        foreach($fields as $field) $inputFields[$field->field] = $field->name;
+        
+        $conditionFields = $inputFields;
+        foreach($inputFields as $field => $name)
+        {
+            if(isset($action->inputs->{$field})) unset($inputFields[$field]);
+        }
+
+        $this->view->action          = $action;
+        $this->view->inputFields     = $inputFields;
+        $this->view->conditionFields = $conditionFields;
+        $this->display(); 
+    } 
 
     /**
      * Action tasks. 

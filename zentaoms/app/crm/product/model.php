@@ -431,6 +431,43 @@ class productModel extends model
     }
 
     /**
+     * Create a result of an action.
+     * 
+     * @param  object    $action 
+     * @access public
+     * @return void
+     */
+    public function createResult($action)
+    {
+        $result = fixer::input('post')
+            ->setIf($_POST['result'] == 'input', 'result', $_POST['resultValue'])
+            ->remove('conditions,resultValue')
+            ->get();
+
+        $conditions = array();
+        foreach($_POST['conditions']['field'] as $key =>  $field)
+        {
+            $condition = array();
+            $condition['field'] = $field;
+            $condition['logicalOperater'] = $_POST['conditions']['logicalOperater'][$key];
+            $condition['logicalOperater'] = $_POST['conditions']['logicalOperater'][$key];
+            $condition['operator']        = $_POST['conditions']['operater'][$key];
+            $condition['param']           = $_POST['conditions']['param'][$key];
+
+            $conditions[] = $condition;
+        }
+
+        $result->conditions = $conditions;
+
+        $action->results[] = $result; 
+        $this->dao->update(TABLE_ORDERACTION)
+            ->set('results')->eq(json_encode($action->results))
+            ->autoCheck()
+            ->where('id')->eq($action->id)->exec();
+        return !dao::isError();
+    }
+
+    /**
      * Save tasks of an action.
      * 
      * @param  int    $actionID 
