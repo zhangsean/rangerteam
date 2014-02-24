@@ -142,6 +142,7 @@ class order extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
+        $this->view->orderID = $orderID;
         $this->display();
     }
 
