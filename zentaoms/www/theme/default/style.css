@@ -176,7 +176,7 @@ td>select{padding-left: 0;padding-right: 0}
 .panel-actions.pull-right .btn{margin-top: 3px;}
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
 .panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
-.panel-body .table {margin-bottom: 0;}
+.panel .table {margin-bottom: 0;}
 
 /* panel-block */
 .panel-block .panel-heading h4 {font-size: 14px; font-weight: bold;}
@@ -210,6 +210,7 @@ td>select{padding-left: 0;padding-right: 0}
 
 /* modal */
 .modal-dialog{max-width: 100%;}
+h4.modal-title {font-size: 14px}
 @media (max-width: 991px) {.modal-dialog{padding: 0;}}
 
 /* meta-list */
@@ -458,3 +459,15 @@ td #aliasLabel {display: table-row;}
 /* data table */
 .table-data .dropdown-menu {min-width: 80px;}
 .table-data .dropdown-menu > li > a {font-size: 12px}
+
+/* pri */
+.pri {display: inline-block; width: 20px; height: 20px; text-align: center; cursor: pointer; border: 1px solid #999; background-color: #ccc; color: #fff; margin-right: 5px; border-radius: 4px;}
+.pri.pri-1 {background-color: #ffe6e5; border-color: #d2322d; color: #d2322d;}
+.pri.pri-2 {background-color: #ffd98c; border-color: #ea8400; color: #ea8400;}
+.pri.pri-3 {background-color: #f2d7ff; border-color: #8521bf; color: #8521bf;}
+.pri.pri-4 {background-color: #cef4ff; border-color: #39b3d7; color: #39b3d7;}
+.pri.active {background-color: #777}
+.pri.pri-1.active {background-color: #d2322d; color: #fff;}
+.pri.pri-2.active {background-color: #ea8400; color: #fff;}
+.pri.pri-3.active {background-color: #8521bf; color: #fff;}
+.pri.pri-4.active {background-color: #39b3d7; color: #fff;}

@@ -10,18 +10,19 @@
  * @link        http://www.zentao.net
  */
 ?>
-<table class='table'>
+<table class='table table-data table-hover' id='crmBlockContract'>
   <tr>
-    <th class='w-id'><?php echo $lang->contract->id?></th>
+    <th class='w-id text-center'><?php echo $lang->contract->id?></th>
     <th><?php echo $lang->contract->name?></th>
     <th><?php echo $lang->contract->amount?></th>
   </tr>
   <?php foreach($contracts as $id => $contract):?>
-  <tr>
-    <td><?php echo $id?></td>
-    <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id={$this->get->entry}" : ''?>
-    <td class='nobr'><?php echo html::a($this->createLink('contract', 'view', "id=$id"), $contract->name, "title=$contract->name $appid");?></td>
-    <td><?php echo $contract->amount?></td>
+  <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id={}" : ''?>
+  <tr data-url='<?php echo $this->createLink('contract', 'view', "id=$id"); ?>' class='app-btn' data-id='<?php echo $this->get->entry; ?>'>
+    <td class='text-center'><?php echo $id?></td>
+    <td class='nobr'><strong><?php echo $contract->name;?></strong></td>
+    <td><strong class='text-danger'><?php echo $contract->amount?></strong></td>
   </tr>
   <?php endforeach;?>
 </table>
+<script>if(!$.ipsStart) $('#crmBlockContract').dataTable();</script>

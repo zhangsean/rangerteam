@@ -10,3 +10,4 @@
  * @link        http://www.zentao.net
  */
 $lang->dashboard->createBlock = '添加区块';
+$lang->dashboard->ordersSaved = '排序已保存';

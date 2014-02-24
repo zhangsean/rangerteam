@@ -11,10 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<div class='dashboard dashboard-draggable panels-container ' id='dashboard'>
-  <div class='dashboard-actions clearfix'>
-    <div class='pull-right'><a class='btn' href='<?php echo $this->createLink("block", "admin", "index=$newIndex"); ?>' data-toggle='modal'><i class='icon-plus'></i> <?php echo $lang->dashboard->createBlock?></a></div>
-  </div>
+<div class='dashboard dashboard-draggable' id='dashboard'>
+  <div class='dashboard-actions'><a class='btn btn-primary' href='<?php echo $this->createLink("block", "admin", "index=$newIndex"); ?>' data-toggle='modal'><i class='icon-plus'></i> <?php echo $lang->dashboard->createBlock?></a></div>
   <div class='row'>
     <?php foreach($blocks as $key => $block):?>
     <?php
@@ -42,4 +40,5 @@
     <?php endforeach;?>
   </div>
 </div>
+<script>config.ordersSaved = '<?php echo $lang->dashboard->ordersSaved; ?>';</script>
 <?php include '../../common/view/footer.html.php';?>

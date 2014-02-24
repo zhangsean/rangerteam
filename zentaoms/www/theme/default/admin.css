@@ -22,8 +22,8 @@ body {background: #fff;}
 .menu.affix {top:70px;}
 .menu.affix-bottom {position:absolute; top:auto; bottom:270px;}
 
-.with-menu {margin-left: 240px;}
-.page-content {margin-right: 0;}
+.page-content {margin-right: 0; margin-left: 0;}
+.page-content.with-menu {margin-left: 240px;}
 
 /* panel */
 .panel .table-bordered {border:none; margin-bottom: 0;}

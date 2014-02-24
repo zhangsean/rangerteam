@@ -2,9 +2,9 @@ $(function()
 {
     $('#dashboard').dashboard(
     {
-        height           : 240,
-        draggable        : true,
-        afterOrdered     : sortBlocks,
+        height            : 240,
+        draggable         : true,
+        afterOrdered      : sortBlocks,
         afterPanelRemoved : deleteBlock
     });
 });
@@ -50,12 +50,14 @@ function sortBlocks(orders)
 
         if(data.result != 'success') return false;
 
-        $('.panels-container .panel').each(function()
+        $('#dashboard .panel').each(function()
         {
             var index = $(this).data('order');
             /* Update new index for block id edit and delete. */
             $(this).attr('id', 'panel' + index).attr('data-id', index).data('url', createLink('block', 'printBlock', 'index=' + index));
             $(this).find('.panel-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
-        })
+        });
+
+        messager.success(config.ordersSaved);
     });
 }
