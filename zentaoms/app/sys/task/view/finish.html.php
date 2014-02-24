@@ -10,35 +10,41 @@
  * @link        http://www.zentao.net
  */
 ?>
-<?php include '../../common/view/header.html.php';?>
+<?php include '../../common/view/header.modal.html.php';?>
+<?php include '../../common/view/kindeditor.html.php';?>
+<?php include '../../common/view/chosen.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<div class='panel'>
-  <div class='panel-heading'>
-    <strong><?php echo $task->name;?></strong>
-  </div>
-  <div class='panel-body'>
-    <form method='post' id='ajaxForm'>
-      <table class='table table-form'>
-        <tr>
-          <th><?php echo $lang->task->consumed;?></th>
-          <td><?php echo html::input('consumed', $task->consumed ? $task->consumed : '', "class='form-control' autocomplete='off'")?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->task->assignedTo;?></th>
-          <td><?php echo html::select('assignedTo', $users, $task->createdBy, "class='form-control'");?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->task->finishedDate;?></th>
-          <td><?php echo html::input('finishedDate', helper::now(), "class='form-control form-datetime'");?></td>
-        </tr>
-        <tr>
-          <th></th>
-          <td><?php echo html::submitButton();?></td>
-        </tr>
-      </table>
-    </form>
+<div class='modal-dialog w-700px'>
+  <div class='modal-content'>
+    <div class='modal-header'>
+      <?php echo html::closeButton();?>
+      <h4 class='modal-title'><i class='icon-cog'></i> <?php echo $task->name;?></h4>
+    </div>
+    <div class='modal-body'>
+      <form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('task', 'finish', "taskID=$taskID")?>'>
+        <table class='table table-form'>
+          <tr>
+            <th><?php echo $lang->task->consumed;?></th>
+            <td><?php echo html::input('consumed', $task->consumed ? $task->consumed : '', "class='form-control' autocomplete='off'")?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->task->assignedTo;?></th>
+            <td><?php echo html::select('assignedTo', $users, $task->createdBy, "class='form-control'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->task->finishedDate;?></th>
+            <td><?php echo html::input('finishedDate', helper::now(), "class='form-control form-datetime'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->comment?></th>
+            <td><?php echo html::textarea('comment')?></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><?php echo html::submitButton();?></td>
+          </tr>
+        </table>
+      </form>
+    </div>
   </div>
 </div>
-<?php include '../../common/view/footer.lite.html.php';?>
-</body>
-</html>

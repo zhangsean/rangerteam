@@ -123,9 +123,10 @@ class taskModel extends model
 
             ->add('editedBy',   $this->app->user->account)
             ->add('editedDate', $now)
+            ->remove('uid, files, labels')
             ->get();
 
-        $this->dao->update(TABLE_TASK)->data($task, $skip = 'uid,files,labels')
+        $this->dao->update(TABLE_TASK)->data($task)
             ->autoCheck()
             ->batchCheckIF($task->status != 'cancel', $this->config->task->require->edit, 'notempty')
 
@@ -145,7 +146,11 @@ class taskModel extends model
             ->where('id')->eq((int)$taskID)
             ->exec();
 
-        if(!dao::isError()) $this->loadModel('file')->saveUpload('task', $taskID);
+        if(!dao::isError())
+        {
+            $this->loadModel('file')->saveUpload('task', $taskID);
+            return commonModel::createChanges($oldTask, $task);
+        }
 
         return false;
     }
@@ -170,7 +175,8 @@ class taskModel extends model
             ->setDefault('finishedDate, editedDate', $now) 
             ->get();
 
-        $this->dao->update(TABLE_TASK)->data($task)
+        $this->dao->update(TABLE_TASK)
+            ->data($task, $skip = 'uid, comment')
             ->autoCheck()
             ->check('consumed', 'notempty')
             ->where('id')->eq((int)$taskID)
@@ -188,16 +194,14 @@ class taskModel extends model
      */
     public function assign($taskID)
     {
-        $now = helper::now();
-        $oldTask = $this->getById($taskID);
         $task = fixer::input('post')
             ->cleanFloat('left')
             ->setDefault('editedBy', $this->app->user->account)
-            ->setDefault('editedDate', $now)
+            ->setDefault('editedDate', helper::now())
             ->get();
 
         $this->dao->update(TABLE_TASK)
-            ->data($task)
+            ->data($task, $skip = 'uid, comment')
             ->autoCheck()
             ->check('left', 'float')
             ->where('id')->eq($taskID)

@@ -56,8 +56,10 @@ class task extends control
     {
         if($_POST)
         {
-            $this->task->create();
+            $taskID = $this->task->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            $this->loadModel('action')->create('task', $taskID, 'Created');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
@@ -83,8 +85,13 @@ class task extends control
     {
         if($_POST)
         {
-            $this->task->update($taskID);
+            $changes = $this->task->update($taskID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if(!empty($changes))
+            {   
+                $actionID = $this->loadModel('action')->create('task', $taskID, 'Edited');
+                $this->action->logHistory($actionID, $changes);
+            }   
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
@@ -110,6 +117,7 @@ class task extends control
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->task      = $task;
+        $this->view->actions   = $this->loadModel('action')->getList('task', $taskID);
 
         $this->display();
     }
@@ -127,11 +135,13 @@ class task extends control
         {
             $this->task->finish($taskID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('task', $taskID, 'Finished', $this->post->comment);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $this->view->task  = $this->task->getByID($taskID);
-        $this->view->users = $this->loadModel('user')->getPairs();
+        $this->view->taskID = $taskID;
+        $this->view->task   = $this->task->getByID($taskID);
+        $this->view->users  = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
@@ -148,11 +158,13 @@ class task extends control
         {
             $this->task->assign($taskID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if($this->post->assignedTo) $this->loadModel('action')->create('task', $taskID, 'Assigned', $this->post->comment, $this->post->assignedTo);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $this->view->task  = $this->task->getByID($taskID);
-        $this->view->users = $this->loadModel('user')->getPairs();
+        $this->view->taskID = $taskID;
+        $this->view->task   = $this->task->getByID($taskID);
+        $this->view->users  = $this->loadModel('user')->getPairs();
         $this->display();
     }
 }

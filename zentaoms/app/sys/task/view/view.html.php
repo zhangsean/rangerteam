@@ -105,3 +105,5 @@
     ?>
   </div>
 </div>
+<?php include '../../common/view/action.html.php';?>
+<?php include '../../../crm/common/view/footer.html.php';?>

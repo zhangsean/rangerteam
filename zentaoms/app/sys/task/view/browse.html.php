@@ -47,8 +47,15 @@
         <td>
           <?php
           echo html::a($this->createLink('task', 'edit', "taskID=$task->id"), $lang->edit);
-          echo html::a($this->createLink('task', 'assignto', "taskID=$task->id"), $lang->assign);
-          if($task->status != 'done') echo html::a($this->createLink('task', 'finish', "taskID=$task->id"), $lang->finish);
+          echo html::a($this->createLink('task', 'assignto', "taskID=$task->id"), $lang->assign, "data-toggle='modal'");
+          if($task->status != 'done')
+          {
+              echo html::a($this->createLink('task', 'finish', "taskID=$task->id"), $lang->finish, "data-toggle='modal'");
+          }
+          else
+          {
+              echo $lang->finish;
+          }
           ?>
         </td>
       </tr>
