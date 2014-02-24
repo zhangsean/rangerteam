@@ -91,14 +91,21 @@ $lang->product->action->adminResults    = '动作结果';
 $lang->product->action->adminTasks      = '动作触发任务设置';
 
 $lang->product->task = new stdclass();
-$lang->product->task->role = '角色';
-$lang->product->task->date = '时间';
-$lang->product->task->name = '名称';
+$lang->product->task->role     = '角色';
+$lang->product->task->name     = '名称';
+$lang->product->task->desc     = '任务内容';
+$lang->product->task->days     = '开始时间';
+$lang->product->task->estimate = '预计消耗';
 
-$lang->product->task = new stdclass();
-$lang->product->task->role = '角色';
-$lang->product->task->date = '时间';
-$lang->product->task->name = '名称';
+$lang->product->task->daysOptions = array();
+$lang->product->task->daysOptions[0]  = '当天';
+$lang->product->task->daysOptions[2]  = '两天内';
+$lang->product->task->daysOptions[3]  = '三天内';
+$lang->product->task->daysOptions[4]  = '四天内';
+$lang->product->task->daysOptions[7]  = '一周内';
+$lang->product->task->daysOptions[10] = '十天内';
+$lang->product->task->daysOptions[15] = '半个月';
+$lang->product->task->daysOptions[30] = '一个月';
 
 $lang->product->roleCode = '角色代码，字母跟数字组合';
 $lang->product->roleName = '角色名称';

@@ -22,16 +22,20 @@
         <thead>
           <tr class='text-center'>
             <td><?php echo $lang->product->task->role;?></td>
-            <td><?php echo $lang->product->task->date;?></td>
             <td><?php echo $lang->product->task->name;?></td>
-            <td></td>
+            <td class='w-100px'><?php echo $lang->product->task->days;?></td>
+            <td class='w-100px'><?php  echo $lang->product->task->estimate;?></td>
+            <td><?php echo $lang->product->task->desc;?></td>
+            <td class='w-150px'></td>
           </tr>
         </thead>
         <?php foreach($action->tasks as $task):?>
         <tr>
           <td><?php echo html::select('role[]', array_combine($roles, $roles), $task->role, "class='form-control'");?></td>
-          <td class='w-150px'><?php echo html::input('date[]', $task->date, "class='form-control form-date'");?></td>
           <td><?php echo html::input("name[]", $task->name, "class='form-control'")?></td>
+          <td class='w-150px'><?php echo html::select('days[]', $lang->product->task->daysOptions, $task->days, "class='form-control'");?></td>
+          <td><?php echo html::input("estimate[]", $task->estimate, "class='form-control'")?></td>
+          <td><?php echo html::textarea("desc[]", $task->desc, "class='form-control' placeholder=''")?></td>
           <td>
             <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>
             <?php echo html::a('javascript:;', $lang->delete, "class='condition-deleter'")?>
@@ -44,7 +48,7 @@
     <table class='hide'>
       <tr id='originTR'>
         <td><?php echo html::select('role[]', $roles, '', "class='form-control'");?></td>
-        <td class='w-150px'><?php echo html::input('date[]', '', "class='form-control form-date'");?></td>
+        <td class='w-150px'><?php echo html::select('days[]', '', "class='form-control'");?></td>
         <td><?php echo html::input('name[]', '', "class='form-control'")?></td>
         <td>
           <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>

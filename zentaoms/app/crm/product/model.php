@@ -476,13 +476,16 @@ class productModel extends model
      */
     public function saveTasks($actionID)
     {
+        
         $tasks = array();
-        foreach($_POST['name'] as $key => $name)
+        foreach($this->post->name as $key => $name)
         {
             $task = array();
-            $task['name'] = $name;   
-            $task['role'] = $_POST['role'][$key];
-            $task['date'] = $_POST['date'][$key];
+            $task['name']     = $name;   
+            $task['role']     = $this->post->role[$key];
+            $task['days']     = $this->post->days[$key];
+            $task['estimate'] = $this->post->estimate[$key];
+            $task['desc']     = $this->post->desc[$key];
 
             $tasks[] = $task;
         }
