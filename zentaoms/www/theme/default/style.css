@@ -453,3 +453,7 @@ td #aliasLabel {display: table-row;}
 #historyItem {padding-left: 25px;}
 #historyItem > li {line-height: 23px;}
 #historyItem .changes {border: 1px solid #e5e5e5; background: #f7f7f7; font-size: 12px; padding: 2px 5px; margin-top: 5px;}
+
+/* data table */
+.table-data .dropdown-menu {min-width: 80px;}
+.table-data .dropdown-menu > li > a {font-size: 12px}

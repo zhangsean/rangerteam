@@ -13,7 +13,8 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-  <strong><i class="icon-list-ul"></i> <?php echo $lang->product->field->admin;?></strong>
+    <strong><i class="icon-list-ul"></i> <?php echo $lang->product->field->admin;?></strong>
+    <div class='panel-actions pull-right'><?php echo html::a($this->inlink('createField', "productID={$productID}"), '<i class="icon-plus"></i> ' . $lang->product->field->create, 'class="btn btn-primary"');?></div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
@@ -54,7 +55,7 @@
     </tbody>
   </table>
   <div class='panel-footer'>
-    <?php echo html::a($this->inlink('createField', "productID={$productID}"), '<i class="icon-plus"></i> ' . $lang->product->field->create, 'class="btn btn-primary"');?>
+    
   </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

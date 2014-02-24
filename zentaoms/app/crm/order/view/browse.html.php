@@ -45,7 +45,8 @@
           echo html::a($this->createLink('order', 'edit',   "orderID=$order->id"), $lang->edit);
           echo html::a($this->createLink('order', 'assign', "orderID=$order->id"), $lang->assign);
           if(empty($order->contract)) echo html::a($this->createLink('contract', 'create', "orderID=$order->id"), $lang->order->sign);
-          echo "<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu'>";
+          else echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->order->sign . '</a> ';
+          echo "<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
           if($order->status != 'closed') echo '<li>' . html::a($this->createLink('order', 'close', "orderID=$order->id"), $lang->close) . '</li>';
           if($order->status == 'closed' && $order->closedReason != 'payed') echo '<li>' . html::a($this->createLink('order', 'activate', "orderID=$order->id"), $lang->activate, "class='reload'") . '</li>';
           echo '<li>' . html::a($this->createLink('order', 'team', "orderID=$order->id"), $lang->order->team) . '</li>';
