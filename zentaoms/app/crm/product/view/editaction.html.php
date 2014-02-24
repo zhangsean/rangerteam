@@ -30,5 +30,5 @@
     </table>
   </form>
 </div>
-<?php include '../../common/view/header.modal.html.php'; ?>
+<?php include '../../common/view/footer.modal.html.php'; ?>
 
