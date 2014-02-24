@@ -43,7 +43,7 @@
         </tr>
         <?php endforeach;?>
       </tbody>
-      <tfoot><tr><td colspan='2'><td><?php echo html::submitButton();?></td></td></tr>
+      <tfoot><tr><td colspan='2'><?php echo html::submitButton();?></td></tr>
       </tfoot>
     </table>
   </form>
