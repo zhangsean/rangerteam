@@ -1,6 +1,6 @@
 <?php
 /**
- * The error view file of ZenTaoMS.
+ * The index view file of error module of ZenTaoMS.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商业软件，非开源软件
