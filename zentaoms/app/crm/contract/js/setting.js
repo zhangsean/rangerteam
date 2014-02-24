@@ -1,25 +1,22 @@
 $(document).ready(function()
 {
     /* Toggle options. */
-    $('.unit').change(function()
+    $(document).on('change', '.unit', function()
     {
-        unit = $(this).val();
-        $(this).nextAll('span, :input').toggle(unit == 'fix');
+        console.log($(this).val());
+        $(this).closest('.input-cell').toggleClass('input-group', $(this).val() == 'fix');
     });
 
     /* Add a unit. */
-    $(document).on('click', '.icon-plus-sign', function()
+    $(document).on('click', '.icon-plus', function()
     {
-        $(this).parents('.input-group').after( $('#unitItem').html());
+        $(this).closest('.input-row').after($('#unitItem').html());
     });
 
     /* Delete a option. */
-    $(document).on('click', '.icon-minus-sign', function()
+    $(document).on('click', '.icon-remove', function()
     {
-        if($(this).parents('td').find('.input-group').size() > 1)
-        {
-            $(this).parents('.input-group').remove();
-        }
+        $(this).closest('.input-row').remove();
     });
 
 });

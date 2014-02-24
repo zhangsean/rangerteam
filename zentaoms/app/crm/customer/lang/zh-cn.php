@@ -52,3 +52,6 @@ $lang->customer->sizeList[4] = '微型';
 $lang->customer->create = '添加客户';
 $lang->customer->list   = '客户列表';
 $lang->customer->edit   = '编辑客户';
+
+$lang->customer->basicInfo = '基本信息';
+$lang->customer->moreInfo  = '更多信息';

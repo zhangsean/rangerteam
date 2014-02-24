@@ -32,7 +32,7 @@
     </thead>
     <tbody>
       <?php foreach($customers as $customer):?>
-      <tr class='text-center'>
+      <tr class='text-center' data-url='<?php echo $this->createLink('customer', 'edit', "customerID=$customer->id"); ?>'>
         <td><?php echo $customer->id;?></td>
         <td class='text-left'><strong><?php echo $customer->name;?></strong></td>
         <td><?php echo $customer->createdDate;?></td>
@@ -42,7 +42,6 @@
         <td><?php echo $lang->customer->statusList[$customer->status];?></td>
         <td class='actions'>
           <?php
-          echo html::a($this->createLink('customer', 'edit', "customerID=$customer->id"), $lang->edit);
           echo html::a($this->createLink('customer', 'delete', "customerID=$customer->id"), $lang->delete, "class='deleter'");
           ?>
         </td>

@@ -36,7 +36,7 @@
       <?php foreach($tasks as $task):?>
       <tr class='text-center' data-url='<?php echo $this->createLink('task', 'view', "taskID=$task->id"); ?>'>
         <td><?php echo $task->id;?></td>
-        <td><?php echo $lang->task->priList[$task->pri];?></td>
+        <td><span class='active pri pri-<?php echo $task->pri; ?>'><?php echo $lang->task->priList[$task->pri];?></span></td>
         <td class='text-left'><?php echo $task->name;?></td>
         <td><?php echo $task->deadline;?></td>
         <td><?php echo $task->assignedTo;?></td>

@@ -176,6 +176,7 @@ td>select{padding-left: 0;padding-right: 0}
 .panel-actions.pull-right .btn{margin-top: 3px;}
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
 .panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
+.panel-body .table {margin-bottom: 0;}
 
 /* panel-block */
 .panel-block .panel-heading h4 {font-size: 14px; font-weight: bold;}

@@ -37,6 +37,7 @@ $lang->contract->editedDate   = '最后修改时间';
 
 $lang->contract->list    = '合同列表';
 $lang->contract->create  = '创建合同';
+$lang->contract->edit    = '编辑合同';
 $lang->contract->setting = '系统设置';
 
 $lang->contract->deliveryList[]        = '';
@@ -60,3 +61,5 @@ $lang->contract->codeUnitList['m']     = '月';
 $lang->contract->codeUnitList['d']     = '日';
 $lang->contract->codeUnitList['fix']   = '固定值';
 $lang->contract->codeUnitList['input'] = '输入值';
+
+$lang->contract->info = '签约信息';

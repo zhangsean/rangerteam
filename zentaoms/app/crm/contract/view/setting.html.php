@@ -13,53 +13,57 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-  <strong><i class="icon-list-ul"></i> <?php echo $lang->contract->setting;?></strong>
+  <strong><i class='icon-wrench'></i> <?php echo $lang->contract->setting;?></strong>
   </div>
-  <form method='post' id='ajaxForm'>
-    <table class='table table-hover table-form w-400px'>
-      <tbody>
-        <tr>
-          <td>
+  <div class='panel-body'>
+    <form method='post' id='ajaxForm'>
+      <div class='w-450px'>
+        <?php
+        foreach($config->contract->codeFormat as $unit):
+        $value = '';
+        if(!isset($lang->contract->codeUnitList[$unit]))
+        {
+            $value = $unit; 
+            $unit  = 'fix';
+        }
+        $hideInput = $unit != 'fix';
+        ?>
+        <div class='row input-row'>
+          <div class='col-xs-9'>
+            <div class='input-cell<?php echo $hideInput ? '' : ' input-group'; ?>'>
             <?php
-            foreach($config->contract->codeFormat as $unit):
-            $value = '';
+            echo html::select('unit[]', $lang->contract->codeUnitList, $unit, "class='form-control unit'");
+            echo "<span class='input-group-addon input-cell-addon'>:</span>" . html::input('unit[]', $value, "class='form-control input-cell-addon'");
             ?>
-            <div class="input-group">
-              <?php 
-              if(!isset($lang->contract->codeUnitList[$unit]))
-              {
-                  $value = $unit; 
-                  $unit  = 'fix';
-              }
-              echo html::select('unit[]', $lang->contract->codeUnitList, $unit, "class='form-control unit'");
-              $hideInput = $unit == 'fix' ? '' : "style='display:none'";
-              ?>
-              <?php echo "<span  {$hideInput} class='input-group-addon'>:</span>" . html::input('unit[]', $value, "{$hideInput} class='form-control'");?>
-              <div class='input-group-btn'>
-                <i class='icon-plus-sign icon-large'></i>
-                <i class='icon-minus-sign icon-large'></i>
-              </div>
-            </div> 
-            <?php endforeach;?>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot><tr><td><?php echo html::submitButton();?></td></tr>
-      </tfoot>
-    </table>
-  </form>
-
-  <?php /* Hidden form. */ ?>
-  <div id='unitItem' class='hide'>
-    <div class="input-group">
-      <?php echo html::select('unit[]', $lang->contract->codeUnitList, '', "class='form-control unit'");?>
-      <?php echo "<span class='input-group-addon' style='display:none'>:</span>" . html::input('unit[]', '', "class='form-control' style='display:none'");?>
-      <div class='input-group-btn'>
-        <i class='icon-plus-sign icon-large'></i>
-        <i class='icon-minus-sign icon-large'></i>
+            </div>
+          </div>
+          <div class='col-xs-3'>
+            <a class='btn btn-mini icon-plus'></a>
+            <a class='btn btn-mini icon-remove'></a>
+          </div>
+        </div>
+        <?php endforeach;?>
       </div>
-    </div> 
+      <div><?php echo html::submitButton();?></div>
+    </form>
   </div>
-  <?php /* Hidden form. */ ?>
-
+</div>
+<?php /* Hidden form. */ ?>
+<div id='unitItem' class='hide'>
+  <div class='row input-row'>
+    <div class='col-xs-9'>
+      <div class='input-cell'>
+        <?php
+        echo html::select('unit[]', $lang->contract->codeUnitList, '', "class='form-control unit'");
+        echo "<span class='input-group-addon input-cell-addon'>:</span>" . html::input('unit[]', '', "class='form-control input-cell-addon'");
+        ?>
+      </div>
+    </div>
+    <div class='col-xs-3'>
+      <a class='btn btn-mini icon-plus'></a>
+      <a class='btn btn-mini icon-remove'></a>
+    </div>
+  </div>
+</div>
+<?php /* Hidden form. */ ?>
 <?php include '../../common/view/footer.html.php';?>

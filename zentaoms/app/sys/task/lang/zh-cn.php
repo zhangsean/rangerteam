@@ -13,6 +13,7 @@ $lang->task->common = '任务';
 $lang->task->list   = '任务列表';
 
 $lang->task->browse = '浏览任务';
+$lang->task->view   = '查看任务';
 $lang->task->create = '新建任务';
 $lang->task->edit   = '编辑任务';
 $lang->task->finish = '任务完成';

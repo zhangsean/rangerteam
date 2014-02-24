@@ -9,6 +9,7 @@
  * @version     $Id: chosen.html.php 7417 2013-12-23 07:51:50Z wwccss $
  * @link        http://www.zentao.net
  */
+?>
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php
 include $this->app->getBasePath() . 'app/sys/common/view/datepicker.html.php';
