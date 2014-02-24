@@ -19,16 +19,20 @@
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
-        <tr>
+        <tr class='text-center'>
           <th><?php echo $lang->task->assignedTo;?></th>
-          <th><?php echo $lang->task->estStarted;?></th>
           <th><?php echo $lang->task->name;?></th>
+          <th><?php echo $lang->task->estStarted;?></th>
+          <th class='w-100px'><?php echo $lang->task->estimate;?></th>
+          <th><?php echo $lang->task->desc;?></th>
         </tr>
         <?php foreach($action->tasks as $task):?>
         <tr>
           <th><?php echo $this->user->printSelect('assignedTo[]', isset($team[$task->role]) ? $team[$task->role] : '', "class='form-control'");?></th>
-          <td><?php echo html::input("estStarted[]", date('Y-m-d', strtotime("+{$task->date} days")), "class='form-control'"); ?></td>
           <td><?php echo html::input("name[]", $task->name, "class='form-control'")?></td>
+          <td><?php echo html::input("estStarted[]", date('Y-m-d', strtotime("+{$task->days} days")), "class='form-control'"); ?></td>
+          <td><?php echo html::input("estimate[]", $task->estimate, "class='form-control'")?></td>
+          <td><?php echo html::input("desc[]", $task->desc, "class='form-control'")?></td>
           <td>
             <?php echo html::a('javascript:;', $lang->add, "class='plus'")?>
             <?php echo html::a('javascript:;', $lang->delete, "class='condition-deleter'")?>
