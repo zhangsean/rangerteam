@@ -58,6 +58,7 @@ $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
 $lang->contract->menu->browse = array('link' => '<i class="icon-th-list"></i> 合同列表|contract|browse|', 'alias' => 'edit,view');
 $lang->contract->menu->create = '<i class="icon-plus-sign"></i> 添加合同|contract|create|';
+$lang->contract->menu->setting = '系统设置|contract|setting|';
 
 $lang->feedback = new stdclass();
 $lang->feedback->menu = new stdclass();
