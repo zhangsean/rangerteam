@@ -54,8 +54,5 @@
       <?php endforeach;?>
     </tbody>
   </table>
-  <div class='panel-footer'>
-    
-  </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>
