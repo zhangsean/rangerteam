@@ -16,7 +16,7 @@
     <th><?php echo $lang->order->customer?></th>
     <th><?php echo $lang->order->product?></th>
     <th><?php echo $lang->order->status?></th>
-    <th></th>
+    <th><?php echo $lang->block->actions?></th>
   </tr>
   <?php foreach($orders as $id => $order):?>
   <tr>

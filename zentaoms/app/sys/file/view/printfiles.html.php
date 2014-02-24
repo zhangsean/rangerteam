@@ -14,10 +14,6 @@ $sessionString .= session_name() . '=' . session_id();
 ?>
 <style>.button-c {padding:1px}</style>
 <script language='Javascript'>
-$(function(){
-     $(".edit").colorbox({width:400, height:200, iframe:true, transition:'none', scrolling:true});
-})
-
 /* Delete a file. */
 function deleteFile(fileID)
 {
@@ -43,7 +39,7 @@ function downloadFile(fileID)
   foreach($files as $file)
   {
       echo html::a($this->createLink('file', 'download', "fileID=$file->id") . $sessionString, $file->title .'.' . $file->extension, '_blank', "onclick='return downloadFile($file->id)'");
-      echo html::a($this->createLink('file', 'edit', "fileID=$file->id"), "<i class='icon-edit'></i>");
+      echo html::a($this->createLink('file', 'edit', "fileID=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
       echo html::a($this->createLink('file', 'delete', "fileID=$file->id"), "<i class='icon-remove'></i>", "class='deleter'");
   }
   ?>

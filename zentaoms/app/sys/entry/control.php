@@ -52,6 +52,7 @@ class entry extends control
      * Visit entry.
      * 
      * @param  int    $entryID 
+     * @param  string $referer 
      * @access public
      * @return void
      */

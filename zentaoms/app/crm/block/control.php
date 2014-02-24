@@ -148,8 +148,8 @@ class block extends control
         $params = $this->get->param;
         $params = json_decode(base64_decode($params));
 
-        $this->view->sso  = base64_decode($this->get->sso);
-        $this->view->code = $this->get->blockid;
+        $this->view->sso    = base64_decode($this->get->sso);
+        $this->view->code   = $this->get->blockid;
 
 
         $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
@@ -176,8 +176,8 @@ class block extends control
         $params = $this->get->param;
         $params = json_decode(base64_decode($params));
 
-        $this->view->sso  = base64_decode($this->get->sso);
-        $this->view->code = $this->get->blockid;
+        $this->view->sso    = base64_decode($this->get->sso);
+        $this->view->code   = $this->get->blockid;
 
 
         $this->view->contracts = $this->dao->select('*')->from(TABLE_CONTRACT)

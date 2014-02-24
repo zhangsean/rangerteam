@@ -58,7 +58,7 @@
           {
               echo '<li>' . html::a($this->createLink('contact', 'create', "customerID=$order->customer"), $lang->order->contact) . '</li>';
           }
-          echo '<li>' . html::a($this->createLink('effort', 'createForObject', "objectType=order&objectID=$order->id"), $lang->order->effort) . '</li>';
+          echo '<li>' . html::a($this->createLink('effort', 'createForObject', "objectType=order&objectID=$order->id"), $lang->order->effort, "data-toggle='modal'") . '</li>';
           ?>
           <?php 
           $actions = $this->order->getEnabledActions($order);

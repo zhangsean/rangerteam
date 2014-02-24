@@ -19,7 +19,8 @@
   <?php foreach($contracts as $id => $contract):?>
   <tr>
     <td><?php echo $id?></td>
-    <td class='nobr'><?php echo html::a($this->createLink('contract', 'view', "id=$id"), $contract->name, "title=$contract->name");?></td>
+    <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id={$this->get->entry}" : ''?>
+    <td class='nobr'><?php echo html::a($this->createLink('contract', 'view', "id=$id"), $contract->name, "title=$contract->name $appid");?></td>
     <td><?php echo $contract->amount?></td>
   </tr>
   <?php endforeach;?>

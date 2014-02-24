@@ -43,6 +43,7 @@ class dashboard extends control
                 $query['hash']    = '';
                 $query['lang']    = $this->app->getClientLang();
                 $query['sso']     = '';
+                $query['app']     = 'crm';
 
                 $query = http_build_query($query);
                 $sign  = $this->config->requestType == 'PATH_INFO' ? '?' : '&';

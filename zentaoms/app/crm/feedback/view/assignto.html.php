@@ -10,7 +10,7 @@
  * @link        http://www.zentao.net
  */
 ?>
-<?php include '../../common/view/header.modal.html.php';?>
+<?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <div class="modal-dialog" style="width:700px;">
@@ -39,3 +39,4 @@
     </div>
   </div>
 </div>
+<?php include '../../../sys/common/view/footer.lite.html.php';?>
