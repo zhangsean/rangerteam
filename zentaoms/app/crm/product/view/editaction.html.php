@@ -12,23 +12,20 @@
 ?>
 <?php $title = "<i class='icon-edit'></i> " . $lang->product->action->edit;?>
 <?php include '../../common/view/header.modal.html.php'; ?>
-<div class="modal-body">
-  <form method='post' action="<?php echo inlink('editaction', "actionID={$action->id}");?>" id='ajaxForm'>
-    <table class='table table-form'>
-      <tr>
-        <th class='w-100px'><?php echo $lang->product->action->name;?></th>
-        <td><?php echo html::input('name', $action->name, "class='form-control'");?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->product->action->action;?></th>
-        <td><?php echo html::input('action', $action->action, "class='form-control'");?></td>
-      </tr>
-      <tr>
-        <th></th>
-        <td><?php echo html::submitButton();?></td>
-      </tr>
-    </table>
-  </form>
-</div>
+<form method='post' action="<?php echo inlink('editaction', "actionID={$action->id}");?>" id='ajaxForm'>
+  <table class='table table-form'>
+    <tr>
+      <th class='w-100px'><?php echo $lang->product->action->name;?></th>
+      <td><?php echo html::input('name', $action->name, "class='form-control'");?></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->product->action->action;?></th>
+      <td><?php echo html::input('action', $action->action, "class='form-control'");?></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><?php echo html::submitButton();?></td>
+    </tr>
+  </table>
+</form>
 <?php include '../../common/view/footer.modal.html.php'; ?>
-

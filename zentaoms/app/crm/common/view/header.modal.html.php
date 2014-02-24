@@ -16,3 +16,4 @@
       <?php echo html::closeButton();?>
       <h4 class="modal-title"><?php echo $title; ?></h4>
     </div>
+    <div class="modal-body">

@@ -10,6 +10,7 @@
  * @link        http://www.zentao.net
  */
 ?>
+    </div>
   </div>
 </div>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
