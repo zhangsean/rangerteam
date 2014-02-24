@@ -467,7 +467,7 @@
         }
 
         /* Open a entry window */
-        this.openEntry = function(et, go2index)
+        this.openEntry = function(et, url, go2index)
         {
             if(!et)
             {
@@ -487,11 +487,11 @@
 
                 win = et.createWindow();
                 this.set[et.idstr] = win;
-                win.reload();
+                win.reload(url);
             }
             else if(go2index && !win.isIndex())
             {
-                win.reload(go2index);
+                win.reload(url, go2index);
             }
 
             win.show();
@@ -760,11 +760,12 @@
         }
 
         /* Reload the content */
-        this.reload = function(go2index)
+        this.reload = function(url, go2index)
         {
             if(!this.isLoading())
             {
                 if(go2index) this.setUrl();
+                else this.setUrl(url);
 
                 this.$.addClass('window-loading').removeClass('window-error').find('.reload-win i').addClass('icon-spin');
 
@@ -1215,11 +1216,12 @@
                 return false;
             }).on('click', '.app-btn', function(event)
             {
-                var et = entries[$(this).attr('data-id')];
+                var $this = $(this);
+                var et = entries[$this.attr('data-id')];
                 if(et)
                 {
                     if(et.display == 'fullscreen' && desktop.fullScreenApps) desktop.fullScreenApps.toggle(et.id);
-                    else windows.openEntry(et, $(this).hasClass('s-menu-btn'));
+                    else windows.openEntry(et, $this.attr('href') || $this.data('url'), $this.hasClass('s-menu-btn'));
                 }
                 else
                 {
