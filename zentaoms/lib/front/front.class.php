@@ -330,7 +330,6 @@ class html
         return $html;
     }
 
-
     /**
      * create tags like "<img src='' />".
      *
