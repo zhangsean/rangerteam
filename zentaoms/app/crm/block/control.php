@@ -151,6 +151,7 @@ class block extends control
         $this->view->sso  = base64_decode($this->get->sso);
         $this->view->code = $this->get->blockid;
 
+
         $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
             ->where("(createdBy='$params->account' OR assignedTo = '$params->account')")
             ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
@@ -177,6 +178,7 @@ class block extends control
 
         $this->view->sso  = base64_decode($this->get->sso);
         $this->view->code = $this->get->blockid;
+
 
         $this->view->contracts = $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('createdBy')->eq($params->account)

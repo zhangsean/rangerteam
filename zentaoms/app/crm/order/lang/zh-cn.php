@@ -136,14 +136,27 @@ $lang->team->account = '用户';
 $lang->team->role    = '角色';
 $lang->team->join    = '加盟日';
 
+$lang->order->logicalOperators = array();
+$lang->order->logicalOperators[''] = '';
+$lang->order->logicalOperators['and'] = '并且';
+$lang->order->logicalOperators['or']  = '或者';
+
 $lang->order->operaterList = array();
 $lang->order->operaterList['']       = '';
 $lang->order->operaterList['equal']    = '等于';
 $lang->order->operaterList['notequal'] = '不等于';
 $lang->order->operaterList['gt']       = '大于';
+$lang->order->operaterList['ge']       = '大于等于';
 $lang->order->operaterList['lt']       = '小于';
+$lang->order->operaterList['le']       = '小于等于';
 $lang->order->operaterList['before']   = '早于';
 $lang->order->operaterList['after']    = '晚于';
+
+$lang->order->reaultsOptions = array();
+$lang->order->reaultsOptions['today'] = '操作日期';
+$lang->order->reaultsOptions['now']   = '操作时间';
+$lang->order->reaultsOptions['actor'] = '操作人';
+$lang->order->reaultsOptions['input'] = '输入';
 
 $lang->order->history  = '历史';
 $lang->order->created  = "<strong>%s</strong> 创建了订单";
