@@ -18,6 +18,7 @@ $lang->minus   = ' - ';
 $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->at      = ' 于 ';
+$lang->by      = ' 由 ';
 $lang->submitting   = '稍候...';
 
 /* Lang items for zentaoms. */

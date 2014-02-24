@@ -46,16 +46,30 @@
           <tr>
             <td class='small' colspan='2'>
               <ul>
-                <?php if($order->activatedBy):?>
-                <li><strong class='text-muted'><?php echo $order->activatedDate;?></strong> <?php printf($lang->order->activated, $order->activatedBy) ?></li>
-                <?php endif; ?>
-                <li><strong class='text-muted'><?php echo $order->createdDate;?></strong> <?php printf($lang->order->created, $order->createdBy) ?></li>
-                <?php if($order->status == 'assigned'):?>
-                <li><strong class='text-muted'><?php echo $order->assignedDate;?></strong> <?php printf($lang->order->assigned, $order->assignedBy, $order->assignedTo) ?></li>
-                <?php endif; ?>
-                <?php if($order->status == 'signed'):?>
-                <li><strong class='text-muted'><?php echo $order->signedDate;?></strong> <?php printf($lang->order->signed, $order->signedBy) ?></li>
-                <?php endif; ?>
+                <?php foreach($actionList as $action):?>
+                <li>
+                  <?php
+                  $actionType = strtolower($action->action);
+                  $desc       = $lang->action->desc->common;
+
+                  if(isset($lang->action->desc->$actionType))
+                  {
+                      $desc = $lang->action->desc->$actionType;
+                  }
+                  elseif(!empty($action->extra))
+                  {
+                      $desc = '$date,' . $lang->by . '<strong>$actor</strong> ' . $action->extra . '。' . "\n";
+                  }
+
+                  foreach($action as $key => $value)
+                  {
+                      if($key == 'history') continue;
+                      $desc = str_replace('$' . $key, $value, $desc);          
+                  }
+                  echo $desc;
+                  ?>
+                </li>
+                <?php endforeach;?>
               </ul>
             </td>
           </tr>

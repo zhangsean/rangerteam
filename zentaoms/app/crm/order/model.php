@@ -403,12 +403,14 @@ class orderModel extends model
         $task['createdBy']   = $this->app->user->account;
         $task['createdDate'] = helper::now();
 
+        $this->loadModel('action');
         foreach($_POST['name'] as $key => $name)
         {
             $task['name'] = $name;
             $task['assignedTo'] = $_POST['assignedTo'][$key];
             $task['estStarted'] = $_POST['estStarted'][$key];
             $this->dao->insert(TABLE_TASK)->data($task)->exec();
+            $this->action->create('task', $this->dao->lastInsertID(), 'Created', '', $order->id);
         }
         return !dao::isError();
     }

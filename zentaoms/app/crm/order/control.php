@@ -115,11 +115,12 @@ class order extends control
         $product  = $this->loadModel('product')->getByID($order->product);
         $customer = $this->loadModel('customer')->getByID($order->customer);
     
-        $this->view->order    = $order;
-        $this->view->product  = $product;
-        $this->view->customer = $customer;
-        $this->view->efforts  = $this->loadModel('effort')->getByObject('order', $orderID);
-        $this->view->actions  = $this->order->getEnabledActions($order);
+        $this->view->order      = $order;
+        $this->view->product    = $product;
+        $this->view->customer   = $customer;
+        $this->view->efforts    = $this->loadModel('effort')->getByObject('order', $orderID);
+        $this->view->actions    = $this->order->getEnabledActions($order);
+        $this->view->actionList = $this->loadModel('action')->getList('order', $orderID);
     
         $this->display();
     }
@@ -257,7 +258,11 @@ class order extends control
 
         if($_POST)
         {
-            if($this->order->operate($order, $action))  $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('tasks', "orderID={$orderID}&actionID={$actionID}")));
+            if($this->order->operate($order, $action))
+            {
+                $this->loadModel('action')->create('order', $orderID, $action->action, '', $action->name);
+                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('tasks', "orderID={$orderID}&actionID={$actionID}")));
+            }
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
         
@@ -287,7 +292,7 @@ class order extends control
 
         if($_POST)
         {
-            if($this->order->createTasks($order))  $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('browse')));
+            if($this->order->createTasks($order)) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('browse')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
         
