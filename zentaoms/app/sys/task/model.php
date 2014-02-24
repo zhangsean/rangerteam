@@ -22,7 +22,11 @@ class taskModel extends model
      */
     public function getByID($taskID)
     {
-        return $this->dao->select('*')->from(TABLE_TASK)->where('id')->eq($taskID)->limit(1)->fetch();
+        $task = $this->dao->select('*')->from(TABLE_TASK)->where('id')->eq($taskID)->limit(1)->fetch();
+
+        if($task) $task->files = $this->loadModel('file')->getByObject('task', $taskID);
+
+        return $task;
     }
 
     /**

@@ -89,5 +89,9 @@
       <th><?php echo $lang->task->desc;?></th>
       <td><?php echo $task->desc;?></td>
     </tr>
+    <tr>
+      <th><?php echo $lang->files;?></th>
+      <td><?php echo $this->fetch('file', 'printFiles', array('files' =>$task->files, 'fieldset' => 'false'))?></td>
+    </tr>
   </table>
 </div>
