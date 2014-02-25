@@ -11,8 +11,6 @@
  */
 class taskModel extends model
 {
-    const CUSTOM_STATUS_ORDER = 'wait,doing,done,cancel,closed';
-
     /**
      * Get task by ID.
      * 
