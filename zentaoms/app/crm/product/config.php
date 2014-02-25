@@ -35,10 +35,13 @@ $config->field->controlTypeList['datetime'] = 'datetime';
 $config->field->controlTypeList['select']   = 'varchar(200)';
 $config->field->controlTypeList['radio']    = 'varchar(200)';
 $config->field->controlTypeList['checkbox'] = 'varchar(200)';
+$config->field->controlTypeList['user']     = 'varchar(200)';
+$config->field->controlTypeList['contact']  = 'varchar(200)';
+$config->field->controlTypeList['customer'] = 'varchar(200)';
 
 $config->field->lengthList[10]  = ',date,';
 $config->field->lengthList[19]  = ',datetime,';
-$config->field->lengthList[200] = ',input,select,radio,checkbox,';
+$config->field->lengthList[200] = ',input,select,radio,checkbox,user,contact,customer,';
 
 $config->action = new stdclass();
 $config->action->require = new stdclass();

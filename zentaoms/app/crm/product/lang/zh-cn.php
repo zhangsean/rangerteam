@@ -59,6 +59,9 @@ $lang->product->field->controlTypeList['datetime'] = '时间';
 $lang->product->field->controlTypeList['select']   = '下拉菜单';
 $lang->product->field->controlTypeList['radio']    = '单选按钮';
 $lang->product->field->controlTypeList['checkbox'] = '复选框';
+$lang->product->field->controlTypeList['user']     = '用户';
+$lang->product->field->controlTypeList['contact']  = '联系人';
+$lang->product->field->controlTypeList['customer'] = '客户';
 
 $lang->product->field->rulesList = array();
 $lang->product->field->rulesList['require'] = '必填';
