@@ -62,8 +62,8 @@ $lang->contract->menu->setting = '<i class="icon-wrench"></i> 系统设置|contr
 
 $lang->feedback = new stdclass();
 $lang->feedback->menu = new stdclass();
-$lang->feedback->menu->browse = array('link' => '问题列表|feedback|browse|', 'alias' => 'edit,view');
-$lang->feedback->menu->create = '添加问题|feedback|create|';
+$lang->feedback->menu->browse = array('link' => '<i class="icon-plus"></i> 问题列表|feedback|browse|', 'alias' => 'edit,view');
+$lang->feedback->menu->create = '<i class="icon-wrench"></i> 添加问题|feedback|create|';
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

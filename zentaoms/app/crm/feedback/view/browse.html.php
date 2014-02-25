@@ -16,7 +16,7 @@
     <strong><i class="icon-list-ul"></i> <?php echo $lang->feedback->list;?></strong>
   <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->feedback->create, 'class="btn btn-primary"');?></div>
   </div>
-  <table class='table table-hover table-striped tablesorter'>
+  <table class='table table-hover table-striped tablesorter table-data'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
@@ -34,10 +34,10 @@
     </thead>
     <tbody>
       <?php foreach($issues as $issue):?>
-      <tr class='text-center'>
+      <tr class='text-center' data-url='<?php echo inlink('view', "issueID=$issue->id");?>'>
         <td><?php echo $issue->id;?></td>
         <td><?php echo $lang->feedback->priList[$issue->pri];?></td>
-        <td class='text-left'><?php echo html::a(inlink('view', "issueID=$issue->id"), $issue->title);?></td>
+        <td class='text-left'><?php echo $issue->title;?></td>
         <td><?php echo $products[$issue->product];?></td>
         <td><?php echo $customers[$issue->customer];?></td>
         <td><?php echo $contacts[$issue->contact];?></td>

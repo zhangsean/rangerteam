@@ -12,24 +12,81 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
-<h5><?php echo $lang->feedback->title . ': ' . ' #' . $issue->id . ' ' . $issue->title;?></h5>
 <div class='col-md-8'>
-  <fieldset>
-    <legend><?php echo $lang->feedback->desc?></legend>
-    <?php echo htmlspecialchars_decode($issue->desc)?>
-  </fieldset>
-  <p>
+  <div class="panel">
+    <div class="panel-heading"><strong><i class="icon-question-sign"></i> <?php echo $lang->feedback->title . ': ' . ' #' . $issue->id . ' ' . $issue->title;?></strong></div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-8">
+          <h5 class="header-dividing"><?php echo $lang->feedback->legendBasic?></h5>
+          <table class='table table-borderless table-condensed table-form'>
+            <tr>
+              <th class='w-80px'><?php echo $lang->feedback->status?></th>
+              <td class='w-150px'><?php echo $lang->feedback->statusList[$issue->status]?></td>
+              <th class='w-100px'><?php echo $lang->feedback->product?></th>
+              <td><?php echo $products[$issue->product]?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->feedback->pri?></th>
+              <td><span class='pri pri-<?php echo $issue->pri;?> active'><?php echo $lang->feedback->priList[$issue->pri]?></span></td>
+              <th><?php echo $lang->feedback->customer?></th>
+              <td><?php echo $customers[$issue->customer]?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->feedback->contact?></th>
+              <td><?php echo $contacts[$issue->contact]?></td>
+            </tr>
+          </table>
+          <h5 class="header-dividing"><?php echo $lang->feedback->desc?></h5>
+          <?php echo htmlspecialchars_decode($issue->desc)?>
+        </div>
+        <div class="col-sm-4">
+          <h5 class="header-dividing"><?php echo $lang->feedback->legendEffort?></h5>
+          <table class='table table-borderless table-condensed table-form'>
+            <tr>
+              <th class='w-80px'><?php echo $lang->feedback->addedBy?></th>
+              <td><?php echo $users[$issue->addedBy] . $lang->at . $issue->addedDate;?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->feedback->addedBy?></th>
+              <td><?php echo $users[$issue->addedBy] . $lang->at . $issue->addedDate;?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->feedback->assignedTo?></th>
+              <td><?php if($issue->assignedTo) echo $users[$issue->assignedTo] . $lang->at . $issue->assignedDate;?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->feedback->transferedBy?></th>
+              <td><?php if($issue->transferedBy) echo $users[$issue->transferedBy] . $lang->at . $issue->transferedDate;?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->feedback->closedBy?></th>
+              <td><?php if($issue->closedBy) echo $users[$issue->closedBy] . $lang->at . $issue->closedDate;?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->feedback->closedReason?></th>
+              <td><?php if($issue->closedReason) echo $lang->feedback->closedReasonList[$issue->closedReason]?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->feedback->editedBy?></th>
+              <td><?php if($issue->closedBy) echo $users[$issue->editedBy] . $lang->at . $issue->editedDate;?></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
     <?php
-    echo html::a(inlink('assignTo', "issueID=$issue->id"), $lang->assign, "data-toggle='modal'");
-    if($issue->status != 'transfered') echo html::a(inlink('transfer', "issueID=$issue->id"), $lang->feedback->transfer);
-    if($issue->status != 'replied')echo html::a('#replyDiv', $lang->feedback->reply, "id='replyLink'");
-    if($issue->status == 'replied')echo html::a('#doubtDiv', $lang->feedback->doubt, "id='doubtLink'");
-    echo html::a(inlink('close', "issueID=$issue->id"), $lang->close, "data-toggle='modal'");
-    echo html::a(inlink('edit', "issueID=$issue->id"), $lang->edit);
-    echo html::a(inlink('delete', "issueID=$issue->id"), $lang->delete, "class='deleter'");
-    ?>
-  </p>
-  <?php include '../../../sys/common/view/action.html.php';?>
+    echo html::a(inlink('assignTo', "issueID=$issue->id"), $lang->assign, "data-toggle='modal' class='btn'");
+    if($issue->status != 'transfered') echo html::a(inlink('transfer', "issueID=$issue->id"), $lang->feedback->transfer, "class='btn'");
+    if($issue->status != 'replied')echo html::a('#replyDiv', $lang->feedback->reply, "id='replyLink' class='btn'");
+    if($issue->status == 'replied')echo html::a('#doubtDiv', $lang->feedback->doubt, "id='doubtLink' class='btn'");
+    echo html::a(inlink('close', "issueID=$issue->id"), $lang->close, "data-toggle='modal' class='btn'");
+    echo html::a(inlink('edit', "issueID=$issue->id"), $lang->edit, "class='btn'");
+    echo html::a(inlink('delete', "issueID=$issue->id"), $lang->delete, "class='deleter btn'");
+    ?>      
+    </div>
+  </div>
   <?php if($issue->status != 'replied'):?>
   <div class='hide' id='replyDiv'>
     <form method='post' id='ajaxForm' action='<?php echo inlink('reply', "issueID=$issue->id")?>'>
@@ -47,37 +104,6 @@
   <?php endif;?>
 </div>
 <div class='col-md-4'>
-  <fieldset>
-    <legend><?php echo $lang->feedback->legendBasic?></legend>
-    <dl class='dl-horizontal'>
-      <dt><?php echo $lang->feedback->product?></dt>
-      <dd><?php echo $products[$issue->product]?></dd>
-      <dt><?php echo $lang->feedback->customer?></dt>
-      <dd><?php echo $customers[$issue->customer]?></dd>
-      <dt><?php echo $lang->feedback->contact?></dt>
-      <dd><?php echo $contacts[$issue->contact]?></dd>
-      <dt><?php echo $lang->feedback->pri?></dt>
-      <dd><?php echo $lang->feedback->priList[$issue->pri]?></dd>
-      <dt><?php echo $lang->feedback->status?></dt>
-      <dd><?php echo $lang->feedback->statusList[$issue->status]?></dd>
-    </dl>
-  </fieldset>
-  <fieldset>
-    <legend><?php echo $lang->feedback->legendEffort?></legend>
-    <dl class='dl-horizontal'>
-      <dt><?php echo $lang->feedback->addedBy?></dt>
-      <dd><?php echo $users[$issue->addedBy] . $lang->at . $issue->addedDate;?></dd>
-      <dt><?php echo $lang->feedback->assignedTo?></dt>
-      <dd><?php if($issue->assignedTo) echo $users[$issue->assignedTo] . $lang->at . $issue->assignedDate;?></dd>
-      <dt><?php echo $lang->feedback->transferedBy?></dt>
-      <dd><?php if($issue->transferedBy) echo $users[$issue->transferedBy] . $lang->at . $issue->transferedDate;?></dd>
-      <dt><?php echo $lang->feedback->closedBy?></dt>
-      <dd><?php if($issue->closedBy) echo $users[$issue->closedBy] . $lang->at . $issue->closedDate;?></dd>
-      <dt><?php echo $lang->feedback->closedReason?></dt>
-      <dd><?php if($issue->closedReason) echo $lang->feedback->closedReasonList[$issue->closedReason]?></dd>
-      <dt><?php echo $lang->feedback->editedBy?></dt>
-      <dd><?php if($issue->closedBy) echo $users[$issue->editedBy] . $lang->at . $issue->editedDate;?></dd>
-    </dl>
-  </fieldset>
+<?php include '../../../sys/common/view/action.html.php';?>
 </div>
 <?php include '../../common/view/footer.html.php';?>
