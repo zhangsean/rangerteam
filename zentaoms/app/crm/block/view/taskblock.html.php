@@ -16,16 +16,15 @@
     <th class='w-20px text-center'><?php echo $lang->task->lblPri?></th>
     <th><?php echo $lang->task->name?></th>
     <th><?php echo $lang->task->deadline?></th>
-    <th><?php echo $lang->task->type?></th>
     <th><?php echo $lang->task->status?></th>
   </tr>
   <?php foreach($tasks as $id => $task):?>
-  <tr data-url='<?php echo $this->createLink('task', 'view', "taskID=$id"); ?>'>
+  <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id={$this->get->entry}" : ''?>
+  <tr data-url='<?php echo $this->createLink('task', 'view', "taskID=$id"); ?>' <?php echo $appid?>>
     <td class='text-center'><?php echo $id;?></td>
     <td class='text-center'><span class='active pri pri-<?php echo $task->pri;?>'><?php echo $lang->task->priList[$task->pri];?></span></td>
     <td><strong><?php echo $task->name;?></strong></td>
     <td><?php echo $task->deadline;?></td>
-    <td><?php echo $lang->task->typeList[$task->type];?></td>
     <td><?php echo $lang->task->statusList[$task->status];?></td>
   </tr>
   <?php endforeach;?>

@@ -10,7 +10,13 @@
  * @link        http://www.zentao.net
  */
 ?>
-  <form method='post' id='ajaxForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=$type")?>'>
+<?php
+$webRoot   = $config->webRoot;
+$jsRoot    = $webRoot . "js/";
+$themeRoot = $webRoot . "theme/";
+include "../../common/view/chosen.html.php";
+?>
+<form method='post' id='ajaxForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=$type")?>'>
   <table class='table table-form w-p80'>
     <tbody>
       <tr class='a-left'>
@@ -35,13 +41,14 @@
           $values  = isset($param['values']) ? $param['values'] : array();
           if($control == 'select' or $control == 'radio' or $control == 'checkbox')
           {
+              $chosen = $control == 'select' ? 'chosen' : '';
               if(strpos($attr, 'multiple') !== false)
               {
-                  echo html::$control("params[$key][]", $values, $default, "class='form-control' $attr");
+                  echo html::$control("params[$key][]", $values, $default, "class='form-control " . $chosen . "' $attr");
               }
               else
               {
-                  echo html::$control("params[$key]", $values, $default, "class='form-control' $attr");
+                  echo html::$control("params[$key]", $values, $default, "class='form-control " . $chosen . "' $attr");
               }
           }
           else
@@ -57,7 +64,7 @@
       <tr><td></td><td><?php echo html::submitButton()?></td></tr>
     </tfoot>
   </table>
-  </form>
+</form>
 <?php if(!isset($block->name)):?>
 <script>$(function(){$('#name').val($('#entryBlock').find("option:selected").text());})</script>
 <?php endif;?>

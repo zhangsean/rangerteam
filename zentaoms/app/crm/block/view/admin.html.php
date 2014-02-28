@@ -10,6 +10,8 @@
  * @link        http://www.zentao.net
  */
 ?>
+<?php include "../../../sys/common/view/header.modal.html.php";?>
+<?php include "../../../sys/common/view/chosen.html.php";?>
 <div class="modal-dialog" style="width:700px;">
   <div class="modal-content">
     <div class="modal-header">
@@ -22,7 +24,7 @@
         <td><?php echo html::select('blocks', $blocks, $blockID, "class='form-control'")?></td>
       </table>
       <?php if($params):?>
-      <form method='post' id='ajaxForm' action='<?php echo inlink('admin', "index=$index&blockID=$blockID")?>'>
+      <form method='post' id='ajaxModalForm' action='<?php echo inlink('admin', "index=$index&blockID=$blockID")?>'>
         <table class='table table-form'>
           <tbody>
             <tr>
@@ -48,13 +50,14 @@
                 $values  = isset($param['values']) ? $param['values'] : array();
                 if($control == 'select' or $control == 'radio' or $control == 'checkbox')
                 {
+                    $chosen = $control == 'select' ? 'chosen' : '';
                     if(strpos($attr, 'multiple') !== false)
                     {
-                        echo html::$control("params[$key][]", $values, $default, "class='form-control' $attr");
+                        echo html::$control("params[$key][]", $values, $default, "class='form-control " . $chosen . "' $attr");
                     }
                     else
                     {
-                        echo html::$control("params[$key]", $values, $default, "class='form-control' $attr");
+                        echo html::$control("params[$key]", $values, $default, "class='form-control " . $chosen .  "' $attr");
                     }
                 }
                 else
@@ -78,10 +81,10 @@
 <script>
 $(function()
 {
-    $.setAjaxForm('#ajaxForm');
     $('#blocks').change(function()
     {
         $('#ajaxModal').load(createLink('block', 'admin', "index=<?php echo $index?>&blockID=" + $(this).val()));
     });
 })
 </script>
+<?php include "../../../sys/common/view/header.modal.html.php";?>

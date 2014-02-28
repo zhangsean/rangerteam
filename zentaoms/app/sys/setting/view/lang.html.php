@@ -11,12 +11,12 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<div class='panel'>
-  <div class='panel-heading'>
-    <strong><i class='icon-wrench'></i> <?php echo $lang->setting->common; ?></strong>
-  </div>
-  <form method='post' id='ajaxForm'>
-    <table class='table'>
+<form method='post' id='ajaxForm'>
+  <div class='panel'>
+    <div class='panel-heading'>
+      <strong><i class='icon-wrench'></i> <?php echo $lang->setting->common; ?></strong>
+    </div>
+    <table class='table table-condensed'>
       <tr>
         <th class='w-150px text-center'><?php echo $lang->setting->key;?></th>
         <th class='w-300px'><?php echo $lang->setting->value;?></th>
@@ -54,11 +54,12 @@
           echo html::a(inlink('reset', "module=$module&field=$field"), $lang->setting->reset, "class='btn deleter'");
           ?>
           </td>
+          <td></td>
         </tr>
       </tfoot>
     </table>
-  </form>
-</div>
+  </div>
+</form>
 <?php
 $itemRow = <<<EOT
   <tr class='a-center'>

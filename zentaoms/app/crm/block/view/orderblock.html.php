@@ -18,7 +18,8 @@
     <th><?php echo $lang->order->status?></th>
   </tr>
   <?php foreach($orders as $id => $order):?>
-  <tr data-url='<?php echo $this->createLink('order', 'view', "orderID=$id"); ?>'>
+  <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id='{$this->get->entry}'" : ''?>
+  <tr data-url='<?php echo $this->createLink('order', 'view', "orderID=$id"); ?>' <?php echo $appid?>>
     <td class='text-center'><?php echo $id?></td>
     <td><?php echo $customers[$order->customer]?></td>
     <td><?php echo $products[$order->product]?></td>
