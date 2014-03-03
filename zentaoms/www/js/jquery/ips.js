@@ -825,8 +825,15 @@
 
             if(frame)
             {
-                if(go2index) frame.contentWindow.location.replace(this.url);
-                else frame.contentWindow.location.reload();
+                try
+                {
+                    if(go2index) frame.contentWindow.location.replace(this.url);
+                    else frame.contentWindow.location.reload();
+                }
+                catch(e)
+                {
+                    document.getElementById(fName).src = (go2index ? this.indexUrl : this.getUrl());
+                }
             }
             else
             {
