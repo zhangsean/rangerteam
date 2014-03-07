@@ -17,10 +17,10 @@ js::import($jsRoot . 'jquery/ips.js');
 <div id='desktop' class='fullscreen-mode' unselectable='on' style='-moz-user-select:none;-webkit-user-select:none;' onselectstart='return false;'>
   <div id='leftBar' class='dock-left'>
     <button id='start' class='dock-bottom'>
-      <?php echo html::image($themeRoot . 'default/images/ips/avatar.jpg', "class='avatar-img'");?>
+      <?php echo html::image($themeRoot . 'default/images/ips/avatar.png', "class='avatar-img'");?>
     </button>
     <ul id='startMenu' class='dropdown-menu'>
-      <li><?php echo html::a('###', html::image($themeRoot . 'default/images/ips/avatar.jpg', "class='avatar-img'") . "<strong>{$app->user->realname}</strong>", "class='app-btn' data-id='profile'");?></li>
+      <li><?php echo html::a('###', html::image($themeRoot . 'default/images/ips/avatar.png', "class='avatar-img'") . "<strong>{$app->user->realname}</strong>", "class='app-btn' data-id='profile'");?></li>
       <li class="divider"></li>
       <li><?php echo html::a($this->createLink('entry', 'create'), "<i class='icon icon-plus'></i> {$lang->index->addEntry}", "target='_blank'"  )?></li>
       <li><a href='###' class='fullscreen-btn' data-id='allapps'><div class='pull-right'><span class='label label-badge entries-count'></span></div><i class='icon icon-th-large'></i> <?php echo $lang->index->allEntries?></a></li>
