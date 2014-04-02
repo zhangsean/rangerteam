@@ -148,17 +148,17 @@ $lang->menu->sns->message = '消息|message|index|';
  
 $lang->forum       = new stdclass(); 
 $lang->forum->menu = new stdclass(); 
-$lang->forum->menu->index = '浏览|forum|index'; 
-$lang->forum->menu->admin = '管理|forum|admin'; 
+$lang->forum->menu->index = '浏览|forum|index|'; 
+$lang->forum->menu->admin = '管理|forum|admin|'; 
 
 $lang->message       = new stdclass(); 
 $lang->message->menu = new stdclass(); 
-$lang->message->menu->index = '浏览|message|index'; 
-$lang->message->menu->admin = '管理|message|admin'; 
+$lang->message->menu->index = '浏览|message|index|'; 
+$lang->message->menu->admin = '管理|message|admin|'; 
 
 $lang->blog       = new stdclass(); 
 $lang->blog->menu = new stdclass(); 
-$lang->blog->menu->index = '浏览|blog|index'; 
+$lang->blog->menu->index = '浏览|blog|index|'; 
 
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->article = '文章|article|index|';
@@ -175,6 +175,12 @@ $lang->company->menu->basic   = '公司信息|company|setbasic|';
 $lang->company->menu->contact = '联系方式|company|setcontact|';
 $lang->company->menu->setlogo = 'LOGO设置|company|setlogo|';
 
+/* Menu of user module. */
+$lang->user->menu = new stdclass();
+$lang->user->menu->admin  = '用户列表|user|admin|';
+$lang->user->menu->create = '添加用户|user|create|';
+$lang->user->menu->dept   = '部门管理|tree|browse|type=dept';
+
 /* Menu system. */
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
@@ -185,7 +191,7 @@ $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
 $lang->article->menu->admin  = '浏览|article|admin|';
 $lang->article->menu->tree   = '模块|tree|browse|type=article';
-$lang->article->menu->create = array('link' => '添加文章|article|create|type=article', 'float' => 'right');
+$lang->article->menu->create = array('link' => '添加文章|article|create|type=article', 'alias' => 'edit');
 
 $lang->menuGroups = new stdclass();
 
