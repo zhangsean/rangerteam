@@ -175,12 +175,6 @@ $lang->company->menu->basic   = '公司信息|company|setbasic|';
 $lang->company->menu->contact = '联系方式|company|setcontact|';
 $lang->company->menu->setlogo = 'LOGO设置|company|setlogo|';
 
-/* Menu of user module. */
-$lang->user->menu = new stdclass();
-$lang->user->menu->admin  = '用户列表|user|admin|';
-$lang->user->menu->create = '添加用户|user|create|';
-$lang->user->menu->dept   = '部门管理|tree|browse|type=dept';
-
 /* Menu system. */
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
