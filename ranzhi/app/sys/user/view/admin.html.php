@@ -10,8 +10,18 @@
  * @link        http://www.zentao.net
  */
 ?>
-<?php include '../../common/view/header.admin.html.php';?>
-<?php include '../../common/view/treeview.html.php';?>
+<?php
+if(RUN_MODE == 'front')
+{
+    include $app->getModuleRoot() . 'common/view/header.html.php';
+}
+else
+{
+    include '../../common/view/header.admin.html.php';
+}
+include '../../common/view/treeview.html.php';
+js::set('deptID', $deptID);
+?>
 <div class="col-md-12">
   <div class='col-md-2'>
     <div class='panel'>
@@ -112,9 +122,14 @@
   </div>
 </div>
 
-<?php if($deptID != 0):?>
-<script>
-$('#category<?php echo $deptID?>').addClass('red');
-</script>
-<?php endif;?>
-<?php include '../../common/view/footer.admin.html.php';?>
+<?php
+include '../../common/view/treeview.html.php';
+if(RUN_MODE == 'front')
+{
+    include $app->getModuleRoot() . 'common/view/footer.html.php';
+}
+else
+{
+    include '../../common/view/footer.admin.html.php';
+}
+?>

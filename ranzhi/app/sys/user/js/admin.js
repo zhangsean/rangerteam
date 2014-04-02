@@ -20,4 +20,6 @@ $(document).ready(function()
             return false;
         }
     });
+    
+    if(v.deptID) $('#category' + v.deptID).addClass('red');
 });
