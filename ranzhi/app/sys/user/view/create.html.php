@@ -11,7 +11,7 @@
  */
 ?>
 <?php
-if(RUN_MODE == 'front')
+if(RUN_MODE == 'front' && strpos($app->getModuleRoot(), 'sys') == false)
 {
     include $app->getModuleRoot() . 'common/view/header.html.php';
 }
@@ -99,9 +99,9 @@ include '../../common/view/treeview.html.php';
     </div>
   </div>
 </div>
+
 <?php
-include '../../common/view/treeview.html.php';
-if(RUN_MODE == 'front')
+if(RUN_MODE == 'front' && strpos($app->getModuleRoot(), 'sys') == false)
 {
     include $app->getModuleRoot() . 'common/view/footer.html.php';
 }

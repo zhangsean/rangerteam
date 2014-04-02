@@ -123,7 +123,6 @@ js::set('deptID', $deptID);
 </div>
 
 <?php
-include '../../common/view/treeview.html.php';
 if(RUN_MODE == 'front' && strpos($app->getModuleRoot(), 'sys') == false)
 {
     include $app->getModuleRoot() . 'common/view/footer.html.php';
