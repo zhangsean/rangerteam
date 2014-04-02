@@ -32,7 +32,7 @@
         <table class='table table-form'>
           <tr>
             <th class='w-80px'><?php echo $lang->task->customer;?></th>
-            <td class='w-p40'><?php echo html::select('customer', $customers, $order ? $order->customer : $customerID, "class='form-control'");?></td>
+            <td class='w-p40'><?php echo html::select('customer', $customers, $order ? $order->customer : $customerID, "class='form-control' onchange='getOrder(this.value)'");?></td>
             <th class='w-80px'><?php echo $lang->task->order;?></th>
             <td><?php echo html::select('order', $orders, $orderID, "class='form-control chosen'");?></td>
           </tr>

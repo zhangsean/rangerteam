@@ -1,12 +1,15 @@
-$(document).ready(function()
+function getOrder(customerID)
 {
-    $('#customer').change(function()
-    {
-        location.href = createLink('task', 'create', 'orderID=0&customerID=' + $(this).val());
-    })
+    var order = $('#order').parents('td');
 
-    $('#order').change(function()
+    $('#order').parents('td').empty();
+
+    if(customerID == '') return false;
+
+
+    $.get(createLink('task', 'getOrder', 'customerID=' + customerID), function(data)
     {
-        location.href = createLink('task', 'create', 'orderID=' + $(this).val());
+        $(order).html(data);
+        $(order).show();
     })
-})
+}

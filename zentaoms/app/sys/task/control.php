@@ -167,4 +167,18 @@ class task extends control
         $this->view->users  = $this->loadModel('user')->getPairs();
         $this->display();
     }
+
+    /**
+     * Get order.
+     *
+     * @param  int    $taskID
+     * @access public
+     * @return void
+     */
+    public function getOrder($customerID)
+    {
+        $orders = array('0' => '') + $this->loadModel('order')->getPairs($customerID);
+        
+        echo html::select('order', $orders, '', "class='form-control'");
+    }
 }
