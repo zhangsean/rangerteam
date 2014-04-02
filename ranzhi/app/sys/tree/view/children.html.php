@@ -44,10 +44,11 @@
           echo html::hidden('mode[]', 'new');
       }
 
-      echo "<div class='form-group'><div class='col-xs-8 col-md-offset-2'>" . html::submitButton() . "</div></div>";
+      $button = ($type == 'dept') ? html::submitButton() . html::backButton() : html::submitButton();
+      echo "<div class='form-group'><div class='col-xs-8 col-md-offset-2'>" . $button . "</div></div>";
       echo html::hidden('parent',   $parent);
       echo html::hidden('maxOrder', $maxOrder);
-      ?>      
+      ?>
     </div>
   </div>
 </form>

@@ -49,5 +49,4 @@ else
 {
     include '../../common/view/footer.admin.html.php';
 }
-
 ?>
