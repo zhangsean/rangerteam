@@ -21,5 +21,5 @@ $lang->menu->sns->event     = '活动|event|index|';
 $lang->menu->sns->food      = '订餐|food|index|';
 $lang->menu->sns->share     = '分享|share|index|';
 $lang->menu->sns->message   = '消息|message|index|';
-$lang->menu->sns->workmate  = '通讯录|workmate|index|';
+$lang->menu->sns->workmate  = '通讯录|user|admin|';
 $lang->menu->sns->album     = '相册|album|index|';
