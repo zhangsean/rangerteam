@@ -32,7 +32,7 @@
         <td>
           <?php
           echo html::a($this->createLink('product', 'editAction', "actionID=$action->id"), $lang->edit, "class='editr' data-toggle='modal'");
-          echo html::a($this->createLink('product', 'actionConditions', "actionID=$action->id"), $lang->product->action->conditions);
+          echo html::a($this->createLink('product', 'actionConditions', "actionID=$action->id"), $lang->product->action->conditions, "data-toggle='modal'");
           echo html::a($this->createLink('product', 'actionInputs', "actionID=$action->id"), $lang->product->action->inputs);
           echo html::a($this->createLink('product', 'actionResults', "actionID=$action->id"), $lang->product->action->results);
           echo html::a($this->createLink('product', 'actionTasks', "actionID=$action->id"), $lang->product->action->tasks);

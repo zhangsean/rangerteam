@@ -10,7 +10,7 @@
  * @link        http://www.zentao.net
  */
 ?>
-<?php $title = "<i class='icon-edit'></i> " . $lang->product->action->create;?>
+<?php $title = "<i class='icon-plus'></i> " . $lang->product->action->create;?>
 <?php include '../../common/view/header.modal.html.php'; ?>
 <form method='post' action="<?php echo inlink('createaction', "productID={$productID}");?>" id='ajaxForm'>
   <table class='table table-form'>
@@ -29,4 +29,3 @@
   </table>
 </form>
 <?php include '../../common/view/footer.modal.html.php'; ?>
-

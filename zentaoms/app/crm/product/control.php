@@ -350,9 +350,15 @@ class product extends control
     {
         $action = $this->product->getActionByID($actionID);
         $this->loadModel('order');
-        
+
+        $commonFields = array('');
+        foreach($this->lang->order->fields as $name => $field) $commonFields[$name] = $this->lang->order->{$name};
+        $productFields  = $this->product->getFieldList($action->product);
+        foreach($fields as $field) $commonFields[$field->field] = $field->name;
+       
+
         $this->view->action  = $action; 
-        $this->view->fields  = $this->product->getFieldList($action->product);
+        $this->view->fields  = array_merge($commonFields, $productFields);
         $this->display();
     }
 

@@ -26,7 +26,6 @@
           <th><?php echo $lang->product->action->conditions;?></th>
           <td>
             <div class='input-group'>
-              <?php echo html::hidden("conditions[logicalOperater][]", '');?>
               <?php echo html::select("conditions[field][]", $conditionFields, '', "class='form-control'");?>
               <span class='input-group-addon'></span>
               <?php echo html::select("conditions[operater][]", $lang->order->operaterList, '', "class='form-control'");?>
@@ -60,8 +59,6 @@
 <?php /* Hidden condation group. */ ?>
 <div id='conditionGroup' class='hide'>
   <div class='input-group'>
-    <?php echo html::select("conditions[logicalOperater][]", $lang->order->logicalOperators, '', "class='form-control'");?>
-    <span class='input-group-addon'></span>
     <?php echo html::select("conditions[field][]", $conditionFields, '', "class='form-control'");?>
     <span class='input-group-addon'></span>
     <?php echo html::select("conditions[operater][]", $lang->order->operaterList, '', "class='form-control'");?>
