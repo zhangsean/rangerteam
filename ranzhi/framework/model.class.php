@@ -181,10 +181,10 @@ class model
      * @access  public
      * @return  object|bool  the model object or false if model file not exists.
      */
-    public function loadModel($moduleName)
+    public function loadModel($moduleName, $appName = '')
     {
         if(empty($moduleName)) return false;
-        $modelFile = helper::setModelFile($moduleName);
+        $modelFile = helper::setModelFile($moduleName, $appName);
 
         if(!helper::import($modelFile)) return false;
         $modelClass = class_exists('ext' . $moduleName. 'model') ? 'ext' . $moduleName . 'model' : $moduleName . 'model';
@@ -250,7 +250,7 @@ class model
     public function delete($table, $id)
     {
         $this->dao->update($table)->set('deleted')->eq(1)->where('id')->eq($id)->exec();
-        $object = str_replace($this->config->db->prefix, '', $table);
+        $object = ltrim(strstr($table, '_'), '_');
         $this->loadModel('action')->create($object, $id, 'deleted', '', $extra = ACTIONMODEL::CAN_UNDELETED);
     }
 }    

@@ -21,3 +21,7 @@ $lang->menu->oa->claim     = '报销|claim|index|';
 $lang->menu->oa->checking  = '考勤|checking|index|';
 $lang->menu->oa->doc       = '文档|doc|index|';
 $lang->menu->oa->setting   = '设置|setting|index|';
+
+$lang->doc = new stdclass();
+$lang->doc->menu = new stdclass();
+$lang->doc->menu->create = '添加文档库|doc|createLib|';

@@ -130,6 +130,8 @@ define('TABLE_ARTICLE',  '`oa_article`');
 define('TABLE_BLOCK',    '`oa_block`');
 define('TABLE_BOOK',     '`oa_book`');
 define('TABLE_LAYOUT',   '`oa_layout`');
+define('TABLE_DOC',      '`oa_doc`');
+define('TABLE_DOCLIB',   '`oa_docLib`');
 
 /* Tables for sns. */
 define('TABLE_TAG',     '`sns_tag`');

@@ -17,49 +17,52 @@ class tree extends control
      * Browse the categories and print manage links.
      * 
      * @param  string $type 
+     * @param  int    $startModule 
      * @param  int    $root 
      * @access public
      * @return void
      */
-    public function browse($type = 'article', $root = 0)
+    public function browse($type = 'article', $startModule = 0, $root = 0)
     {
         if($type == 'article')
         {
             $this->lang->tree->menu = $this->lang->article->menu;
             $this->lang->menuGroups->tree = 'article';
         }
-
-        if($type == 'forum')
+        elseif($type == 'forum')
         {
             $this->lang->category   = $this->lang->board;
             $this->lang->tree->menu = $this->lang->forum->menu;
             $this->lang->menuGroups->tree = 'forum';
         }
-
-        if($type == 'blog')
+        elseif($type == 'blog')
         {
             $this->lang->tree->menu = $this->lang->blog->menu;
             $this->lang->menuGroups->tree = 'blog';
         }
-
-        if($type == 'product')
+        elseif($type == 'product' and isset($this->lang->product->menu))
         {
             $this->lang->tree->menu = $this->lang->product->menu;
             $this->lang->menuGroups->tree = 'product';
         }
-
-        if($type == 'dept')
+        elseif($type == 'dept')
         {   
             $this->lang->category   = $this->lang->dept;
             unset($this->lang->tree->menu);
             $this->lang->menuGroups->tree = 'user';
         }
+        elseif(strpos($type, 'doc') !== false)
+        {   
+            $type = 'customdoc';
+            if($root == 'product' or $root == 'project') $type = $root . 'doc';
+        }   
 
         $this->view->title    = $this->lang->category->common;
         $this->view->type     = $type;
         $this->view->root     = $root;
-        $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, array('treeModel', 'createManageLink'));
-        $this->view->children = $this->tree->getChildren($root, $type);
+        $this->view->moduleID = $startModule;
+        $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, array('treeModel', 'createManageLink'), $root);
+        $this->view->children = $this->tree->getChildren($startModule, $type, $root);
 
         $this->display();
     }
@@ -88,8 +91,8 @@ class tree extends control
         }
 
         /* Get option menu and remove the families of current category from it. */
-        $optionMenu = $this->tree->getOptionMenu($category->type);
-        $families   = $this->tree->getFamily($categoryID);
+        $optionMenu = $this->tree->getOptionMenu($category->type, 0, false, $category->root);
+        $families   = $this->tree->getFamily($categoryID, $category->type, $category->root);
         foreach($families as $member) unset($optionMenu[$member]);
 
         /* Assign. */
@@ -125,10 +128,11 @@ class tree extends control
      *
      * @param  string    $type 
      * @param  int       $category    the current category id.
+     * @param  int       $root
      * @access public
      * @return void
      */
-    public function children($type, $category = 0)
+    public function children($type, $category = 0, $root = 0)
     {
         /* If type is forum, assign board to category. */
         if($type == 'forum') $this->lang->category = $this->lang->board;
@@ -140,15 +144,16 @@ class tree extends control
 
         if(!empty($_POST))
         { 
-            $result = $this->tree->manageChildren($type, $this->post->parent, $this->post->children);
-            $locate = $this->inLink('browse', "type=$type&root={$this->post->parent}");
+            $result = $this->tree->manageChildren($type, $this->post->parent, $this->post->children, $root);
+            $locate = $this->inLink('browse', "type=$type&category={$this->post->parent}&root=$root");
             if($result === true) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
             $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
 
         $this->view->title    = $this->lang->tree->manage;
         $this->view->type     = $type;
-        $this->view->children = $this->tree->getChildren($category, $type);
+        $this->view->root     = $root;
+        $this->view->children = $this->tree->getChildren($category, $type, $root);
         $this->view->origins  = $this->tree->getOrigin($category);
         $this->view->parent   = $category;
 

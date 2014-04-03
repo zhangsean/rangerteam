@@ -10,7 +10,7 @@
  * @link        http://www.zentao.net
  */
 ?>
-<form method='post' class='form-horizontal' id='childForm' action="<?php echo inlink('children', "type=$type&category=$parent");?>">
+<form method='post' class='form-horizontal' id='childForm' action="<?php echo inlink('children', "type=$type&category=$parent&root=$root");?>">
   <div class='panel'>
     <div class='panel-heading'>
     <strong><?php echo $parent ? $lang->category->children . ' <i class="icon-double-angle-right"></i> ' : $lang->category->common; ?></strong>

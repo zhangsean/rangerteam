@@ -90,3 +90,32 @@ ALTER TABLE sys_task CHANGE lastEditedBy editedBy varchar(30) NOT NULL;
 ALTER TABLE sys_task CHANGE lastEditedDate editedDate datetime NOT NULL;
 
 ALTER TABLE `crm_contact` CHANGE `avatar` `avatar` char(100) NOT NULL AFTER `nickname`;
+
+CREATE TABLE IF NOT EXISTS `oa_doc` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `product` mediumint(8) unsigned NOT NULL,
+  `project` mediumint(8) unsigned NOT NULL,
+  `lib` varchar(30) NOT NULL,
+  `module` varchar(30) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `digest` varchar(255) NOT NULL,
+  `keywords` varchar(255) NOT NULL,
+  `type` varchar(30) NOT NULL,
+  `content` text NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `views` smallint(5) unsigned NOT NULL,
+  `addedBy` varchar(30) NOT NULL,
+  `addedDate` datetime NOT NULL,
+  `editedBy` varchar(30) NOT NULL,
+  `editedDate` datetime NOT NULL,
+  `deleted` enum('0','1') NOT NULL default '0', 
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `oa_docLib` (
+  `id` smallint(5) unsigned NOT NULL auto_increment,
+  `name` varchar(60) NOT NULL,
+  `deleted` enum('0','1') NOT NULL default '0', 
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `sys_category` ADD `root` mediumint unsigned NOT NULL DEFAULT '0' AFTER `keywords`;

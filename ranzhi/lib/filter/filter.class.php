@@ -552,7 +552,7 @@ class fixer
      * @access public
      * @return object fixer object
      */
-    public function stripTags($fieldName, $allowableTags)
+    public function stripTags($fieldName, $allowableTags = '')
     {
         $this->stripedFields[] = $fieldName;
         $fields = $this->processFields($fieldName);

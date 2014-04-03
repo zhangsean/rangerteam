@@ -230,7 +230,7 @@ class commonModel extends model
         {
             if(is_array($methodMenu)) 
             {
-                $methodAlias = $methodMenu['alias'];
+                $methodAlias = isset($methodMenu['alias']) ? $methodMenu['alias'] : '';
                 $methodLink  = $methodMenu['link'];
             }
             else

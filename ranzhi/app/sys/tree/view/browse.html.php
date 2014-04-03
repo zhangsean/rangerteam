@@ -23,6 +23,7 @@ include '../../common/view/kindeditor.html.php';
 include '../../common/view/chosen.html.php';
 js::set('root', $root);
 js::set('type', $type);
+js::set('moduleID', $moduleID);
 ?>
 <div class='col-md-12'>
 <?php if(strpos($treeMenu, '<li>') !== false):?>
