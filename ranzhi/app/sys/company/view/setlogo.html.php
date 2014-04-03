@@ -1,6 +1,6 @@
 <?php
 /**
- * The logo view file of ui module of ZenTaoMS.
+ * The logo view file of ui module of Ranzhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
@@ -21,10 +21,10 @@
         <?php if(isset($config->company->logo)):?>
         <?php $logo = json_decode($config->company->logo);?>
         <div id='companyLogo'>
-          <?php echo html::a('###', html::image($logo->webPath, "class='logo' title='" . zget($config->company, 'name', $lang->zentaoms) . "'"));?>
+          <?php echo html::a('###', html::image($logo->webPath, "class='logo' title='" . zget($config->company, 'name', $lang->ranzhi) . "'"));?>
         </div>
         <?php else: ?>
-        <div id='companyName'><h2><?php echo zget($config->company, 'name', $lang->zentaoms)?></h2></div>
+        <div id='companyName'><h2><?php echo zget($config->company, 'name', $lang->ranzhi)?></h2></div>
         <?php endif;?>
       </div>
     </div>

@@ -1,6 +1,6 @@
 <?php
 /**
- * The header view of common module of ZenTaoMS.
+ * The header view of common module of Ranzhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
@@ -20,7 +20,7 @@
       <span class='icon-bar'></span>
       <span class='icon-bar'></span>
     </button>
-    <?php echo html::a($this->createLink($this->config->default->module), (RUN_MODE == 'front' and isset($lang->app)) ? $lang->app->name : $lang->zentaoms, "class='navbar-brand'");?>
+    <?php echo html::a($this->createLink($this->config->default->module), (RUN_MODE == 'front' and isset($lang->app)) ? $lang->app->name : $lang->ranzhi, "class='navbar-brand'");?>
   </div>
   <div class='collapse navbar-collapse'>
     <?php echo commonModel::createMainMenu($this->moduleName);?>

@@ -1,11 +1,11 @@
 <?php
 /**
- * The html template file of deny method of user module of ZenTaoMS.
+ * The html template file of deny method of user module of Ranzhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     ZenTaoMS
+ * @package     Ranzhi
  * @version     $Id$
  */
 $moduleName = isset($lang->$module->common)  ? $lang->$module->common:  $module;

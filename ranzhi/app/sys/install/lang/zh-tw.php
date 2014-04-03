@@ -1,6 +1,6 @@
 <?php
 /**
- * The zh-tw file of install module of ZenTaoMS.
+ * The zh-tw file of install module of Ranzhi.
  *
  * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     商業軟件，非開源軟件
@@ -19,10 +19,10 @@ $lang->install->error   = '錯誤 ';
 $lang->install->start            = '開始安裝';
 $lang->install->keepInstalling   = '繼續安裝當前版本';
 $lang->install->seeLatestRelease = '看看最新的版本';
-$lang->install->welcome          = "您睿智地選擇了$lang->zentaoms!";
+$lang->install->welcome          = "您睿智地選擇了$lang->ranzhi!";
 $lang->install->desc             = <<<EOT
 <blockquote>
-  <strong>{$lang->zentaoms}</strong>由<strong><a href='http://www.cnezsoft.com' target='_blank' class='red'>青島易軟天創網絡科技有限公司</a>開發</strong>，
+  <strong>{$lang->ranzhi}</strong>由<strong><a href='http://www.cnezsoft.com' target='_blank' class='red'>青島易軟天創網絡科技有限公司</a>開發</strong>，
   內置項目、客戶、現金流、辦公和溝通共五大核心功能模組，
   專為中小型團隊量身打造，是中小型團隊信息化的首選工具！
 

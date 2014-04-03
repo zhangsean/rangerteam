@@ -1,6 +1,6 @@
 <?php
 /**
- * The zh-cn file of common module of ZenTaoMS.
+ * The zh-cn file of common module of Ranzhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
@@ -21,9 +21,9 @@ $lang->at      = ' 于 ';
 $lang->by      = ' 由 ';
 $lang->submitting   = '稍候...';
 
-/* Lang items for zentaoms. */
-$lang->zentaoms  = '禅道企业管理系统';
-$lang->poweredBy = "<span id='poweredBy'><a href='http://www.zentao.net/?v=%s' target='_blank'>{$lang->zentaoms}%s</a></span>";
+/* Lang items for ranzhi. */
+$lang->ranzhi  = '禅道企业管理系统';
+$lang->poweredBy = "<span id='poweredBy'><a href='http://www.zentao.net/?v=%s' target='_blank'>{$lang->ranzhi}%s</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT

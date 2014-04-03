@@ -1,6 +1,6 @@
 <?php
 /**
- * The model file of common module of ZenTaoMS.
+ * The model file of common module of Ranzhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
@@ -522,7 +522,7 @@ class commonModel extends model
         global $lang;
         $mainMenu = $moduleName;
         if(isset($lang->menuGroups->$moduleName)) $mainMenu = $lang->menuGroups->$moduleName;
-        echo html::a(helper::createLink('my', 'index'), $lang->zentaoms);
+        echo html::a(helper::createLink('my', 'index'), $lang->ranzhi);
         if($moduleName != 'index')
         {
             if(!isset($lang->menu->$mainMenu)) return;

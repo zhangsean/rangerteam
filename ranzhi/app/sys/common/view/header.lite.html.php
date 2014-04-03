@@ -1,6 +1,6 @@
 <?php
 /**
- * The header.lite view of common module of ZenTaoMS.
+ * The header.lite view of common module of Ranzhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
@@ -23,7 +23,7 @@ $themeRoot = $webRoot . "theme/";
   <?php
   if(!isset($title)) $title  = '';
   if(!empty($title)) $title .= $lang->minus;
-  echo html::title($title . $lang->zentaoms);
+  echo html::title($title . $lang->ranzhi);
 
   js::exportConfigVars();
   if($config->debug)

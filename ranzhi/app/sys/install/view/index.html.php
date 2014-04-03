@@ -1,6 +1,6 @@
 <?php
 /**
- * The html template file of index method of install module of ZenTaoMS.
+ * The html template file of index method of install module of Ranzhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
@@ -21,7 +21,7 @@
             <div><?php printf(nl2br(trim($lang->install->desc)), $config->version);?></div>
           </div>
           <div class='col-md-4'>
-            <div id='zentaoms'><?php echo html::image($themeRoot . '/default/images/ips/app-zentaoms.png');?></div>
+            <div id='ranzhi'><?php echo html::image($themeRoot . '/default/images/ips/app-ranzhi.png');?></div>
           </div>
         </div>
       </div>

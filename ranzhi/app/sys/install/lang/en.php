@@ -1,6 +1,6 @@
 <?php
 /**
- * The English file of install module of ZenTaoMS.
+ * The English file of install module of Ranzhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
@@ -19,9 +19,9 @@ $lang->install->error   = 'Error ';
 $lang->install->start            = 'Start install';
 $lang->install->keepInstalling   = 'Keep install this version';
 $lang->install->seeLatestRelease = 'See the latest release.';
-$lang->install->welcome          = 'Welcome to use ZenTaoMS.';
+$lang->install->welcome          = 'Welcome to use Ranzhi.';
 $lang->install->desc             = <<<EOT
-<p>Using ZenTaoMS, you can do</p>
+<p>Using Ranzhi, you can do</p>
 <blockquote>
   <ul>
     <li><strong>Branding</strong>：Build a professional website to advertise your brand.</li>

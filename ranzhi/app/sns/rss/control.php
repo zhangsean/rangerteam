@@ -1,6 +1,6 @@
 <?php
 /**
- * The control file of article category of ZenTaoMS.
+ * The control file of article category of Ranzhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
@@ -29,7 +29,7 @@ class rss extends control
         $articles = $this->article->getList($type, $this->tree->getFamily(0, $type), 'id_desc', $pager);
         $latestArticle = current((array)$articles);
 
-        $this->view->title    = isset($this->config->company->name) ? $this->config->company->name : $this->lang->zentaoms;
+        $this->view->title    = isset($this->config->company->name) ? $this->config->company->name : $this->lang->ranzhi;
         $this->view->desc     = isset($this->config->company->desc) ? $this->config->company->desc : '';
         $this->view->siteLink = $this->inlink('browse', "type={$type}");
         $this->view->siteLink = commonModel::getSysURL();

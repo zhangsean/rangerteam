@@ -1,6 +1,6 @@
 <?php
 /**
- * The config file of ZenTaoMS.
+ * The config file of Ranzhi.
  *
  * Don't modify this file directly, copy the item to my.php and change it.
  *
@@ -17,9 +17,9 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* Basic settings. */
 $config = new config();
-$config->version      = '0.1';             // The version of zentaoms. Don't change it.
+$config->version      = '0.1';             // The version of ranzhi. Don't change it.
 $config->debug        = true;              // Turn debug on or off.
-$config->charset      = 'UTF-8';           // The charset of zentaoms.
+$config->charset      = 'UTF-8';           // The charset of ranzhi.
 $config->cookieLife   = time() + 2592000;  // The cookie life time.
 $config->timezone     = 'Asia/Shanghai';   // The time zone setting, for more see http://www.php.net/manual/en/timezones.php
 $config->cookiePath   = '/';               // The path of cookies.

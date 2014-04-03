@@ -1,6 +1,6 @@
 <?php
 /**
- * The English file of common module of ZenTaoMS.
+ * The English file of common module of Ranzhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
@@ -19,9 +19,9 @@ $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->submitting   = 'Saving...';
 
-/* Lang items for zentaoms. */
-$lang->zentaoms  = 'zentaoms';
-$lang->poweredBy = "<a href='http://www.zentao.net/?v=%s' target='_blank'>{$lang->zentaoms} %s</a>";
+/* Lang items for ranzhi. */
+$lang->ranzhi  = 'ranzhi';
+$lang->poweredBy = "<a href='http://www.zentao.net/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
