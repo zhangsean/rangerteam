@@ -91,6 +91,9 @@ $lang->user->genderList->m = '男';
 $lang->user->genderList->f = '女';
 $lang->user->genderList->u = '';
 
+$lang->user->basicInfo   = '基本信息';
+$lang->user->contactInfo = '联系信息';
+
 $lang->user->statusList = new stdclass();
 $lang->user->statusList->locked    = "<label class='label label-danger'>锁定</label>";
 $lang->user->statusList->forbidden = "<label class='label label-danger'>禁用</label>";
