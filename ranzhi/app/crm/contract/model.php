@@ -70,8 +70,6 @@ class contractModel extends model
         $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid,files,labels')
             ->autoCheck()
             ->check('order', 'notempty')
-            ->check('code', 'unique')
-            ->check('code', 'code')
             ->exec();
 
         if(!dao::isError())
@@ -122,8 +120,6 @@ class contractModel extends model
             ->where('id')->eq($contractID)
             ->autoCheck()
             ->check('order', 'notempty')
-            ->check('code', 'unique', "id!={$contractID}")
-            ->check('code', 'code')
             ->exec();
         
         if(!dao::isError())
