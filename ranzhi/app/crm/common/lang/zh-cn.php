@@ -20,7 +20,6 @@ $lang->menu->crm->customer  = '客户|customer|index|';
 $lang->menu->crm->contract  = '合同|contract|index|';
 $lang->menu->crm->product   = '产品|product|index|';
 $lang->menu->crm->contact   = '联系人|contact|index|';
-$lang->menu->crm->feedback  = '售后|feedback|index|';
 $lang->menu->crm->setting   = '设置|setting|lang|module=user&field=roleList';
 
 /* Menu of customer module. */
@@ -59,11 +58,6 @@ $lang->contract->menu = new stdclass();
 $lang->contract->menu->browse = array('link' => '<i class="icon-th-list"></i> 合同列表|contract|browse|', 'alias' => 'edit,view');
 $lang->contract->menu->create = '<i class="icon-plus"></i> 添加合同|contract|create|';
 $lang->contract->menu->setting = '<i class="icon-wrench"></i> 系统设置|contract|setting|';
-
-$lang->feedback = new stdclass();
-$lang->feedback->menu = new stdclass();
-$lang->feedback->menu->browse = array('link' => '<i class="icon-plus"></i> 问题列表|feedback|browse|', 'alias' => 'edit,view');
-$lang->feedback->menu->create = '<i class="icon-wrench"></i> 添加问题|feedback|create|';
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();
