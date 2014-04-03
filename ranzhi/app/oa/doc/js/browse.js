@@ -18,8 +18,8 @@ function browseBySearch()
 }
 
 $(function(){
-    $('#' + browseType + 'Tab').addClass('active');
-    if(browseType == "bysearch")
+    $('#' + v.browseType + 'Tab').addClass('active');
+    if(v.browseType == "bysearch")
     {
         ajaxGetSearchForm();
         browseBySearch();

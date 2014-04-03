@@ -12,13 +12,8 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
-<script language='javascript'>
-var type = '<?php echo $doc->type;?>';
-$(document).ready(function()
-{
-    setType(type);
-});
-</script>
+<?php js::set('type ',  $doc->type);?>
+<?php js::set('libID ', $doc->lib);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><?php echo html::a($this->createLink('doc', 'view', "docID=$doc->id"), $doc->title);?></strong>

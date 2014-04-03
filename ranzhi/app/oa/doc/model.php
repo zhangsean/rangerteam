@@ -137,7 +137,7 @@ class docModel extends model
         if($doc->lib)     $doc->libName     = $this->dao->findByID($doc->lib)->from(TABLE_DOCLIB)->fetch('name');
         if($doc->product) $doc->productName = $this->dao->findByID($doc->product)->from(TABLE_PRODUCT)->fetch('name');
         if($doc->project) $doc->projectName = $this->dao->findByID($doc->project)->from(TABLE_PROJECT)->fetch('name');
-        if($doc->module)  $doc->moduleName  = $this->dao->findByID($doc->module)->from(TABLE_MODULE)->fetch('name');
+        if($doc->module)  $doc->moduleName  = $this->dao->findByID($doc->module)->from(TABLE_CATEGORY)->fetch('name');
         return $doc;
     }
 
@@ -217,7 +217,7 @@ class docModel extends model
     {
         return $this->dao->select('t1.*, t2.name as module')
             ->from(TABLE_DOC)->alias('t1')
-            ->leftjoin(TABLE_MODULE)->alias('t2')->on('t1.module = t2.id')
+            ->leftjoin(TABLE_CATEGORY)->alias('t2')->on('t1.module = t2.id')
             ->where('t1.product')->eq($productID)
             ->andWhere('t1.deleted')->eq(0)
             ->orderBy('t1.id_desc')
@@ -244,7 +244,7 @@ class docModel extends model
      */
     public function getProductModulePairs()
     {
-        return $this->dao->findByType('productdoc')->from(TABLE_MODULE)->fetchPairs('id', 'name');
+        return $this->dao->findByType('productdoc')->from(TABLE_CATEGORY)->fetchPairs('id', 'name');
     }
 
     /**
@@ -255,7 +255,7 @@ class docModel extends model
      */
     public function getProjectModulePairs()
     {
-        return $this->dao->findByType('projectdoc')->from(TABLE_MODULE)->andWhere('type')->eq('projectdoc')->fetchPairs('id', 'name');
+        return $this->dao->findByType('projectdoc')->from(TABLE_CATEGORY)->andWhere('type')->eq('projectdoc')->fetchPairs('id', 'name');
     }
 
     /**

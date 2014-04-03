@@ -313,6 +313,19 @@ class treeModel extends model
     }
 
     /**
+     * Get projectDoc tree menu.
+     * 
+     * @access public
+     * @return string
+     */
+    public function getProjectDocTreeMenu()
+    {
+        $menu  = "<ul class='tree'>";
+        $menu .= "</ul>";
+        return $menu;
+    }
+
+    /**
      * Create the article browse link.
      * 
      * @param  object      $category 

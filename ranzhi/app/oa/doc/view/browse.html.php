@@ -12,9 +12,8 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/treeview.html.php';?>
-<script language='Javascript'>
-var browseType = '<?php echo $browseType;?>';
-</script>
+<?php js::set('libID ', $libID);?>
+<?php js::set('browseType ', $browseType);?>
 <div class='col-sm-3'>
   <div class='panel' id='treebox'>
     <div class='panel-heading'>

@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php echo css::internal($keTableCSS);?>
+<?php js::set('libID ', $doc->lib);?>
 <div id='titlebar'>
   <div class='heading'>
     <span class='prefix' title='DOC'><?php echo ' #' . $doc->id;?></span>

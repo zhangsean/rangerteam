@@ -31,6 +31,7 @@ function setType(type)
 $(document).ready(function()
 {
     $('.nav li').removeClass('active');
+    if(typeof(v.libID) != undefined) $(".nav li a[href*='" + v.libID + "']").parent().addClass('active');
     $('.nav li:last').find('a').attr('data-toggle', 'modal');
     $.setAjaxModal();
 });

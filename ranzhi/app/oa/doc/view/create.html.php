@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php js::set('holders ', $lang->doc->placeholder);?>
+<?php js::set('libID ', $libID);?>
 <div class='panel'>
   <div class='panel-heading'>
       <strong><small class='text-muted'><i class='icon icon-plus'></i></small> <?php echo $lang->doc->create;?></strong>
