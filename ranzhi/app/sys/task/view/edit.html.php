@@ -60,7 +60,7 @@
             <th><?php echo $lang->task->estStarted;?></th>
             <td><?php echo html::input('estStarted', $task->estStarted, "class='form-control form-date'");?></td>
             <th><?php echo $lang->task->deadline;?></th>
-            <td><?php echo html::input('realStarted', $task->realStarted, "class='form-control form-date'");?></td>
+            <td><?php echo html::input('deadline', $task->deadline, "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->task->realStarted;?></th>
