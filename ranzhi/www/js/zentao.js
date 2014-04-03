@@ -126,7 +126,7 @@ $.extend(
         };
 
         /* Call ajaxSubmit to sumit the form. */
-        form.submit(function()
+        $(document).on('submit', formID, function()
         { 
             $.disableForm(formID);
             $(this).ajaxSubmit(options);
