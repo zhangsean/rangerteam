@@ -5,7 +5,7 @@
  * Don't modify this file directly, copy the item to my.php and change it.
  *
  * @copyright   Copyright 2009-2013 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
- * @license     商业软件，非开源软件
+ * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     config
  * @version     $Id$
