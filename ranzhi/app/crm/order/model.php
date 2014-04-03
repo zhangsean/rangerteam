@@ -134,12 +134,6 @@ class orderModel extends model
 
         $this->dao->insert(TABLE_TEAM)->data($member)->exec();
 
-        if(dao::isError()) return false;
-
-        $product = $this->loadModel('product')->getByID($order->product);
-        $sql = "INSERT INTO `crm_order_{$product->code}` (`order`) VALUES ({$orderID})";
-        if(!$this->dbh->query($sql)) return false;
-
         return $orderID;
     }
 
