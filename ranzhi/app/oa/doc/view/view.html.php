@@ -25,25 +25,25 @@
 <div class='row'>
   <div class='col-md-8 col-lg-9'>
     <div class='main'>
-      <fieldset>
-        <legend><?php echo $lang->doc->digest;?></legend>
-        <div><?php echo htmlspecialchars_decode($doc->digest);?></div>
-      </fieldset>
-      <fieldset>
-        <legend><?php echo $lang->doc->keywords;?></legend>
-        <div><?php echo $doc->keywords;?></div>
-      </fieldset>
+      <dl>
+        <dt><?php echo $lang->doc->digest;?></dt>
+        <dd><?php echo htmlspecialchars_decode($doc->digest);?></dd>
+      </dl>
+      <dl>
+        <dt><?php echo $lang->doc->keywords;?></dt>
+        <dd><?php echo $doc->keywords;?></dd>
+      </dl>
       <?php if($doc->type == 'url'):?>
-      <fieldset>
-        <legend><?php echo $lang->doc->url;?></legend>
-        <div><?php echo html::a(urldecode($doc->url), '', '_blank');?></div>
-      </fieldset>
+      <dl>
+        <dt><?php echo $lang->doc->url;?></dt>
+        <dd><?php echo html::a(urldecode($doc->url), '', '_blank');?></dd>
+      </dl>
       <?php endif;?>
       <?php if($doc->type == 'text'):?>
-      <fieldset>
-        <legend><?php echo $lang->doc->content;?></legend>
-        <div class='content'><?php echo htmlspecialchars_decode($doc->content);?></div>
-      </fieldset>
+      <dl>
+        <dt><?php echo $lang->doc->content;?></dt>
+        <dd class='content'><?php echo htmlspecialchars_decode($doc->content);?></dd>
+      </dl>
       <?php endif;?>
       <?php if($doc->type == 'file'):?>
       <?php echo $this->fetch('file', 'printFiles', array('files' => $doc->files, 'fieldset' => 'true'));?>
@@ -57,8 +57,8 @@
         {
             ob_start();
             echo "<div class='btn-group'>";
-            echo html::a($this->createLink('doc', 'edit', $params), $lang->edit);
-            echo html::a($this->createLink('doc', 'delete', $params), $lang->delete, "class='deleter'");
+            echo html::a($this->createLink('doc', 'edit', $params), $lang->edit, "class='btn'");
+            echo html::a($this->createLink('doc', 'delete', $params), $lang->delete, "class='deleter btn'");
             echo '</div>';
             $actionLinks = ob_get_contents();
             ob_end_clean();
