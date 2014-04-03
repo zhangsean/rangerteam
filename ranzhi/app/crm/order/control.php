@@ -172,11 +172,6 @@ class order extends control
     {
         $roles        = $this->lang->user->roleList;
         $order        = $this->order->getByID($orderID);
-        $productRoles = $this->loadModel('product')->getRoleList($order->product);
-        if($productRoles)
-        {
-            $roles = array_merge($roles, $productRoles);
-        }
 
         $this->view->roles       = $roles;
         $this->view->title       = $this->lang->order->team;
@@ -208,12 +203,6 @@ class order extends control
         $users          = $this->user->getPairs('noclosed, nodeleted, devfirst');
         $currentMembers = $this->order->getTeamMembers($orderID);
         $roles          = $this->lang->user->roleList;
-        $productRoles   = $this->loadModel('product')->getRoleList($order->product);
-        if($productRoles)
-        {
-            $roles = array_merge($roles, $productRoles);
-        }
-
 
         /* The deleted members. */
         foreach($currentMembers as $account => $member)
@@ -242,66 +231,6 @@ class order extends control
     {
         if($this->order->unlinkMember($orderID, $account)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
-    }
-
-    /**
-     * Operate an order.
-     * 
-     * @param  int    $orderID 
-     * @param  int    $actionID 
-     * @access public
-     * @return void
-     */
-    public function operate($orderID, $actionID)
-    {
-        $order  = $this->order->getByID($orderID); 
-        $action = $this->loadModel('product')->getActionByID($actionID);
-
-        if($_POST)
-        {
-            if($this->order->operate($order, $action))
-            {
-                $this->loadModel('action')->create('order', $orderID, $action->action, '', $action->name);
-                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('tasks', "orderID={$orderID}&actionID={$actionID}")));
-            }
-            $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        }
-        
-        $customFields = $this->product->getFieldList($order->product);
-
-        $this->view->fields = array_merge($this->lang->order->fields, $customFields);
-        $this->view->order  = $order;
-        $this->view->action = $action;
-        $this->display();
-    }
-
-    /**
-     * create tasks after order operates.
-     * 
-     * @param  int    $orderID 
-     * @param  int    $actionID 
-     * @access public
-     * @return void
-     */
-    public function tasks($orderID, $actionID)
-    {
-        $this->loadModel('task');
-        $this->loadModel('user', 'sys');
-        $action = $this->loadModel('product')->getActionByID($actionID);
-        if(empty($action->tasks)) $this->locate(inlink('browse'));
-        $order  = $this->order->getByID($orderID);
-
-        if($_POST)
-        {
-            if($this->order->createTasks($order)) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('browse')));
-            $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        }
-        
-        $this->view->title  = $this->lang->order->createTasks;
-        $this->view->team   = $this->order->getRoleList($orderID);
-        $this->view->action = $action;
-        $this->view->order  = $order;
-        $this->display();
     }
 
     /**
