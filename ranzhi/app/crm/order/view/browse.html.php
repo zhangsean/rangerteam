@@ -61,10 +61,12 @@
           echo '<li>' . html::a($this->createLink('effort', 'createForObject', "objectType=order&objectID=$order->id"), $lang->order->effort, "data-toggle='modal'") . '</li>';
           ?>
           <?php 
-          $actions = $this->order->getEnabledActions($order);
-          foreach($actions as $action)
+          if(!empty($order->enabledActions))
           {
-              echo '<li>' . html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name) . '</li>';
+              foreach($order->enabledActions as $action)
+              {
+                  echo '<li>' . html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name) . '</li>';
+              }
           }
           ?>
           <?php echo '</ul></div>'; ?>

@@ -85,9 +85,9 @@
               </ul>
             </td>
           </tr>
-          <?php if(!empty($actions)): ?>
+          <?php if(!empty($order->enabledActions)): ?>
           <tr>
-            <td><?php foreach($actions as $action) echo html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name, "class='btn'") . '&nbsp;';?></td>
+            <td><?php foreach($order->enabledActions as $action) echo html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name, "class='btn'") . '&nbsp;';?></td>
           </tr>
           <?php endif; ?>
         </table>
