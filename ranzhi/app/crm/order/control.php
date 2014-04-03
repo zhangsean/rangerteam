@@ -326,7 +326,31 @@ class order extends control
         $this->view->title    = $this->lang->order->contact;
         $this->view->contacts = $contacts;
         $this->view->pager    = $pager;
+        $this->view->orderBy  = $orderBy;
 
+        $this->display();
+    }
+
+    /**
+     * Update assign of order.
+     *
+     * @param  int    $orderID
+     * @access public
+     * @return void
+     */
+    public function assignTo($orderID)
+    {
+        if($_POST)
+        {
+            $this->order->assign($orderID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if($this->post->assignedTo) $this->loadModel('action')->create('order', $orderID, 'Assigned', $this->post->comment, $this->post->assignedTo);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->orderID = $orderID;
+        $this->view->order   = $this->order->getByID($orderID);
+        $this->view->members = $this->loadModel('user')->getPairs('noclosed, nodeleted, devfirst');
         $this->display();
     }
 }

@@ -43,7 +43,7 @@
         <td class='actions'>
           <?php
           echo html::a($this->createLink('order', 'edit',   "orderID=$order->id"), $lang->edit);
-          echo html::a($this->createLink('order', 'assign', "orderID=$order->id"), $lang->assign, "data-toggle='modal'");
+          echo html::a($this->createLink('order', 'assignTo', "orderID=$order->id"), $lang->assign, "data-toggle='modal'");
           if(empty($order->contract)) echo html::a($this->createLink('contract', 'create', "orderID=$order->id"), $lang->order->sign);
           else echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->order->sign . '</a> ';
           echo "<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";

@@ -269,4 +269,28 @@ class orderModel extends model
         }
         return !dao::isError();
     }
+
+    /**
+     * Assign an order to a member again.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return void
+     */
+    public function assign($orderID)
+    {
+        $now = helper::now();
+        $order = fixer::input('post')
+            ->setDefault('assignedBy', $this->app->user->account)
+            ->setDefault('assignedDate', $now)
+            ->get();
+
+        $this->dao->update(TABLE_ORDER)
+            ->data($order, $skip = 'uid, comment')
+            ->autoCheck()
+            ->where('id')->eq($orderID)
+            ->exec();
+
+        return !dao::isError();
+    }
 }
