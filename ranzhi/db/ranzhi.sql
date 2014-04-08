@@ -735,6 +735,4 @@ CREATE TABLE `sys_userGroup` (
 INSERT INTO `sys_entry` (`id`, `name`, `code`, `open`, `key`, `ip`, `logo`, `login`, `logout`, `block`, `control`, `size`, `position`, `visible`, `order`) VALUES
 (1,     'pms',  'pms',  'iframe',       '119563c21065b09b8388c59752c0bc27',     '*',    '/theme/default/images/ips/app-pms.png',        'http://pms.zentao.net',        '',     '',     'simple',       'max',  'default',      1,      0),
 (2,     'crm',  'crm',  'iframe',       'epet8b8ae1g89rxzquf4ubv37ul5tite',     '*',    '/theme/default/images/ips/app-crm.png',        '../crm/',      '',     '',     'simple',       'max',  'default',      1,      0),
-(3,     'oa',   'oa',   'iframe',       '1a673c4c3c85fadcf0333e0a4596d220',     '*',    '/theme/default/images/ips/app-oa.png', '../oa/',       '',     '',     'simple',       'max',  'default',      1,      1),
-(4,     'cash', 'cash', 'iframe',       '2byct4z7oy8r5hp3s82wuas7n0gonlof',     '*',    '/theme/default/images/ips/app-cash.png',       '../cash/',     '',     '',     'simple',       'max',  'default',      1,      2),
-(5,     'sns',  'sns',  'iframe',       '9ce6ixdutohnbregapp8f123bvyqmyp2',     '*',    '/theme/default/images/ips/app-sns.png',        '../sns/',      '',     '',     'simple',       'max',  'default',      1,      3);
+(3,     'oa',   'oa',   'iframe',       '1a673c4c3c85fadcf0333e0a4596d220',     '*',    '/theme/default/images/ips/app-oa.png', '../oa/',       '',     '',     'simple',       'max',  'default',      1,      1);
