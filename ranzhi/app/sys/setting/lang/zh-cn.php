@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     setting 
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 $lang->setting->common = '自定义';
 $lang->setting->reset  = '恢复默认';

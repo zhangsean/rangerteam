@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     common 
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";

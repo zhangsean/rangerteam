@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     thread
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 include '../../common/view/header.html.php';
 include '../../common/view/kindeditor.html.php';

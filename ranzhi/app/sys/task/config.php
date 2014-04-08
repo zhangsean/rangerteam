@@ -7,7 +7,7 @@
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     task 
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 $config->task->require = new stdclass();
 $config->task->require->create = 'name, customer, order';

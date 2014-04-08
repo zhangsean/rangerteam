@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     tree
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 ?>
 <form method='post' class='form-horizontal' id='childForm' action="<?php echo inlink('children', "type=$type&category=$parent&root=$root");?>">

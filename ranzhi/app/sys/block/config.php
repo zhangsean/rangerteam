@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     block 
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 $config->block->editor = new stdclass();
 $config->block->editor->set = array('id' => 'html', 'tools' => 'simple');

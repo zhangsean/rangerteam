@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     install 
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 $lang->install = new stdclass();
 $lang->install->common  = '安装';
@@ -26,8 +26,8 @@ $lang->install->desc             = <<<EOT
   内置项目、客户、现金流、办公和沟通共五大核心功能模块，
   专为中小型团队量身打造，是中小型团队信息化的首选工具！
 
-  官方网站：<a href='http://www.zentao.net' target='_blank'>http://www.zentao.net</a>
-  技术支持: <a href='http://www.zentao.net/ask/' target='_blank'>http://www.zentao.net/ask/</a>
+  官方网站：<a href='http://www.ranzhi.co' target='_blank'>http://www.ranzhi.co</a>
+  技术支持: <a href='http://www.ranzhi.co/ask/' target='_blank'>http://www.ranzhi.co/ask/</a>
   您现在正在安装的版本是 <strong class='red'>%s</strong>。
 </blockquote>
 EOT;

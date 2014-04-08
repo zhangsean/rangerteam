@@ -9,7 +9,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     config
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 /* Judge class config and function getWebRoot exists or not, make sure php shells can work. */
 if(!class_exists('config')){class config{}}

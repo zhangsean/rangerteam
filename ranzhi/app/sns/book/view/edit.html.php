@@ -7,7 +7,7 @@
  * @author      Tingting Dai<daitingting@xirangit.com>
  * @package     book
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>

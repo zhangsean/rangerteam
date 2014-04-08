@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     file 
  * @version     $Id: buildform.html.php 7417 2013-12-23 07:51:50Z wwccss $
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 $sessionString  = $config->requestType == 'PATH_INFO' ? '?' : '&';
 $sessionString .= session_name() . '=' . session_id();

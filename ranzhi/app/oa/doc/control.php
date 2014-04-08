@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc 
  * @version     $Id $
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 class doc extends control
 {

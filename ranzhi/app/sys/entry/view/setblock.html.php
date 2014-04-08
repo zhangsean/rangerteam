@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
  * @version     $Id: admin.html.php 7488 2013-12-26 07:26:10Z zhujinyong $
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 ?>
 <?php

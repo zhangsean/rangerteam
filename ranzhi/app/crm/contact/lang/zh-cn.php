@@ -7,7 +7,7 @@
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     contact
  * @version     $Id $
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 $lang->contact->common        = '联系人维护';
 $lang->contact->id            = '编号';

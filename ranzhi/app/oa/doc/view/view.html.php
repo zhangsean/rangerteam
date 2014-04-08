@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc
  * @version     $Id: view.html.php 975 2010-07-29 03:30:25Z jajacn@126.com $
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.co
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
