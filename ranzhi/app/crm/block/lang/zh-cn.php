@@ -23,4 +23,3 @@ $lang->block->desc    = '倒序';
 $lang->block->actions = '操作';
 
 $lang->block->admin = '管理区块';
-

@@ -142,4 +142,25 @@ class blockModel extends model
     {
         return isset($this->config->personal->index->block->{'b' . $index}->value) ? json_decode($this->config->personal->index->block->{'b' . $index}->value) : array();
     }
+
+    /**
+     * Init block when account use first. 
+     * 
+     * @param  string    $app 
+     * @access public
+     * @return bool
+     */
+    public function initBlock($app)
+    {
+        $this->app->loadLang('block', 'sys');
+        $blocks  = $this->lang->block->default[$app];
+        $account = $this->app->user->account;
+
+        $this->loadModel('setting');
+        /* Mark this app has init. */
+        $this->setting->setItem("$account.$app.common.init.block", true);
+        foreach($blocks as $key => $block) $this->setting->setItem("$account.$app.index.block.$key", json_encode($block));
+
+        return !dao::isError();
+    }
 }

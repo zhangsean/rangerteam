@@ -20,15 +20,19 @@ class dashboard extends control
     public function index()
     {
         $this->app->loadLang('index', 'sys');
-        $this->app->loadLang('block');
+        $appName  = $this->app->getAppName();
         $personal = isset($this->config->personal->index) ? $this->config->personal->index : array();
         $blocks   = empty($personal->block) ? array() : (array)$personal->block;
-
         foreach($blocks as $key => $block)
         {
-            if($block->app != 'oa') unset($blocks[$key]);
+            if($block->app != $appName) unset($blocks[$key]);
         }
-        if(empty($blocks) and empty($this->config->init->block)) $blocks = $this->lang->block->defaultBlocks;
+
+        /* Init block when vist index first. */
+        if(empty($blocks) and empty($this->config->init->block))
+        {
+            if($this->loadModel('block', 'sys')->initBlock($appName)) $this->locate(inlink('index'));
+        }
 
         foreach($blocks as $key => $block)
         {
@@ -44,7 +48,7 @@ class dashboard extends control
             $query['hash']    = '';
             $query['lang']    = $this->app->getClientLang();
             $query['sso']     = '';
-            $query['app']     = 'oa';
+            $query['app']     = $appName;
 
             $query = http_build_query($query);
             $sign  = $this->config->requestType == 'PATH_INFO' ? '?' : '&';

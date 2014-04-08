@@ -20,36 +20,40 @@ class dashboard extends control
     public function index()
     {
         $this->app->loadLang('index', 'sys');
+        $appName  = $this->app->getAppName();
         $personal = isset($this->config->personal->index) ? $this->config->personal->index : array();
-        $blocks = empty($personal->block) ? array() : (array)$personal->block;
+        $blocks   = empty($personal->block) ? array() : (array)$personal->block;
+        foreach($blocks as $key => $block)
+        {
+            if($block->app != $appName) unset($blocks[$key]);
+        }
+
+        /* Init block when vist index first. */
+        if(empty($blocks) and empty($this->config->init->block))
+        {
+            if($this->loadModel('block', 'sys')->initBlock($appName)) $this->locate(inlink('index'));
+        }
 
         foreach($blocks as $key => $block)
         {
-            if($block->app != 'crm')
-            {
-                unset($blocks[$key]);
-            }
-            else
-            {
-                $block->value = json_decode($block->value);
+            $block->value = json_decode($block->value);
 
-                $block->value->params->account = $this->app->user->account;
-                $block->value->params->uid     = $this->app->user->id;
+            $block->value->params->account = $this->app->user->account;
+            $block->value->params->uid     = $this->app->user->id;
 
-                $query            = array();
-                $query['mode']    = 'getblockdata';
-                $query['blockid'] = $block->value->blockID;
-                $query['param']   = base64_encode(json_encode($block->value->params));
-                $query['hash']    = '';
-                $query['lang']    = $this->app->getClientLang();
-                $query['sso']     = '';
-                $query['app']     = 'crm';
+            $query            = array();
+            $query['mode']    = 'getblockdata';
+            $query['blockid'] = $block->value->blockID;
+            $query['param']   = base64_encode(json_encode($block->value->params));
+            $query['hash']    = '';
+            $query['lang']    = $this->app->getClientLang();
+            $query['sso']     = '';
+            $query['app']     = $appName;
 
-                $query = http_build_query($query);
-                $sign  = $this->config->requestType == 'PATH_INFO' ? '?' : '&';
+            $query = http_build_query($query);
+            $sign  = $this->config->requestType == 'PATH_INFO' ? '?' : '&';
 
-                $block->value->blockLink = $this->createLink('block', 'index') . $sign . $query;
-            }
+            $block->value->blockLink = $this->createLink('block', 'index') . $sign . $query;
         }
 
         ksort($blocks);

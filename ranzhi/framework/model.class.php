@@ -122,14 +122,14 @@ class model
      * @access public
      * @return void
      */
-    public function __construct()
+    public function __construct($appName = '')
     {
         global $app, $config, $lang, $dbh;
         $this->app     = $app;
         $this->config  = $config;
         $this->lang    = $lang;
         $this->dbh     = $dbh;
-        $this->appName = $this->app->getAppName();
+        $this->appName = empty($appName) ? $this->app->getAppName() : $appName;
 
         $moduleName = $this->getModuleName();
         $this->app->loadLang($moduleName, $this->appName);

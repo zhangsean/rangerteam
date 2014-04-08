@@ -21,6 +21,3 @@ $lang->block->desc    = '倒序';
 $lang->block->actions = '操作';
 
 $lang->block->admin = '管理区块';
-
-$lang->block->defaultBlocks['b1'] = new stdclass();
-$lang->block->defaultBlocks['b1']->value = json_encode(array('name' => '系统公告', 'blockID' => 'announce', 'params' => array('num' => 15), 'type' => 'system'));
