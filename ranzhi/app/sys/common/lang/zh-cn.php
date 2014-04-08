@@ -22,8 +22,8 @@ $lang->by      = ' 由 ';
 $lang->submitting   = '稍候...';
 
 /* Lang items for ranzhi. */
-$lang->ranzhi  = '禅道企业管理系统';
-$lang->poweredBy = "<span id='poweredBy'><a href='http://www.zentao.net/?v=%s' target='_blank'>{$lang->ranzhi}%s</a></span>";
+$lang->ranzhi  = '然之协同';
+$lang->poweredBy = "<span id='poweredBy'><a href='http://www.ranzhi.co/?v=%s' target='_blank'>{$lang->ranzhi}%s</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT

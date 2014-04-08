@@ -21,7 +21,7 @@ $lang->submitting   = 'Saving...';
 
 /* Lang items for ranzhi. */
 $lang->ranzhi  = 'ranzhi';
-$lang->poweredBy = "<a href='http://www.zentao.net/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
+$lang->poweredBy = "<a href='http://www.ranzhi.co/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
