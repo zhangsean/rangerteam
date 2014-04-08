@@ -276,7 +276,7 @@ class installModel extends model
      */
     public function createTable($version)
     {
-        $dbFile = $this->app->getBasePath() . 'db' . DS . 'install.sql';
+        $dbFile = $this->app->getBasePath() . 'db' . DS . 'ranzhi.sql';
         $tables = explode(';', file_get_contents($dbFile));
         foreach($tables as $table)
         {
