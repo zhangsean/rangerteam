@@ -27,7 +27,7 @@ $lang->install->desc             = <<<EOT
   专为中小型团队量身打造，是中小型团队信息化的首选工具！
 
   官方网站：<a href='http://www.ranzhi.co' target='_blank'>http://www.ranzhi.co</a>
-  技术支持: <a href='http://www.ranzhi.co/ask/' target='_blank'>http://www.ranzhi.co/ask/</a>
+  技术支持: <a href='http://www.ranzhi.co/forum/' target='_blank'>http://www.ranzhi.co/forum/</a>
   您现在正在安装的版本是 <strong class='red'>%s</strong>。
 </blockquote>
 EOT;

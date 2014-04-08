@@ -21,14 +21,14 @@ $lang->install->keepInstalling   = 'Keep install this version';
 $lang->install->seeLatestRelease = 'See the latest release.';
 $lang->install->welcome          = 'Welcome to use Ranzhi.';
 $lang->install->desc             = <<<EOT
-<p>Using Ranzhi, you can do</p>
 <blockquote>
-  <ul>
-    <li><strong>Branding</strong>：Build a professional website to advertise your brand.</li>
-    <li><strong>Marketing</strong>：Many ways to promot product and service.</li>
-    <li><strong>E-commerce</strong>：Show products and get order online.</li>
-    <li><strong>Service</strong>：Support service to customers online.</li>
-  </ul>
+  <strong>{$lang->ranzhi}</strong>Developed by<strong><a href='http://www.cnezsoft.com' target='_blank' class='red'>QingDao Nature Easy Soft Network Technology Co,LTD</a></strong>，
+  With projects, customers, cash flow, office and communication of the five core functions.
+  Tailored specifically for small and medium sized groups, small and medium sized team of information technology tool of choice!
+
+  Website:<a href='http://www.ranzhi.co' target='_blank'>http://www.ranzhi.co</a>
+  Suport: <a href='http://www.ranzhi.co/forum/' target='_blank'>http://www.ranzhi.co/forum/</a>
+  Current Version: <strong class='red'>%s</strong>。
 </blockquote>
 EOT;
 
