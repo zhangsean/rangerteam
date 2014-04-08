@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     reply
  * @version     $Id$
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 ?>
 <?php if($this->thread->hasManagePriv($this->app->user->account, $board->owners)) $config->thread->editor->editreply['tools'] = 'fullTools'; ?>

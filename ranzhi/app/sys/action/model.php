@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     action
  * @version     $Id: model.php 5028 2013-07-06 02:59:41Z wyd621@gmail.com $
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 ?>
 <?php

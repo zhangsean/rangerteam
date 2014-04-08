@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     company 
  * @version     $Id$
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 class company extends control
 {

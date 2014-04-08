@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common 
  * @version     $Id: chosen.html.php 7417 2013-12-23 07:51:50Z wwccss $
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 ?>
 <script language='Javascript'>

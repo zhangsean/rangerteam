@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     index 
  * @version     $Id$
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 $lang->index->allEntries   = 'All Entries';
 $lang->index->addEntry     = 'Add';

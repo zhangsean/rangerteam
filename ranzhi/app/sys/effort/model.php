@@ -6,7 +6,7 @@
  * @license     LGPL
  * @package     effort
  * @version     $Id$
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 ?>
 <?php

@@ -7,7 +7,7 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     common 
  * @version     $Id: chosen.html.php 7417 2013-12-23 07:51:50Z wwccss $
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 ?>
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>

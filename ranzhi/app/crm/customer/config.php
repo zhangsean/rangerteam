@@ -7,7 +7,7 @@
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     customer
  * @version     $Id $
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 $config->customer->require = new stdclass();
 $config->customer->require->create = 'name, type, status';

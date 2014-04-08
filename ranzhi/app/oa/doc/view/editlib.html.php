@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc
  * @version     $Id: editlib.html.php 975 2010-07-29 03:30:25Z jajacn@126.com $
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php'; ?>

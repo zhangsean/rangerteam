@@ -7,7 +7,7 @@
  * @author      Chunsheng wang <chunsheng@cnezsoft.com>
  * @package     common 
  * @version     $Id$
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 $lang->app = new stdclass();
 $lang->app->name = 'CASH';

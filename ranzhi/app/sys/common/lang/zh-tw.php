@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common 
  * @version     $Id$
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 $lang->colon   = ' : ';
 $lang->prev    = '‹';
@@ -21,7 +21,7 @@ $lang->submitting   = '稍候...';
 
 /* Lang items for ranzhi. */
 $lang->ranzhi  = '禪道企業管理系統';
-$lang->poweredBy = "<span id='poweredBy'><a href='http://www.ranzhi.co/?v=%s' target='_blank'>{$lang->ranzhi}%s</a></span>";
+$lang->poweredBy = "<span id='poweredBy'><a href='http://www.ranzhi.org/?v=%s' target='_blank'>{$lang->ranzhi}%s</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT

@@ -7,7 +7,7 @@
  * @author      Xiying Guan<guanxiying@xirangit.com>
  * @package     tag
  * @version     $Id$
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>

@@ -7,7 +7,7 @@
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     contact
  * @version     $Id $
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 $lang->contact->common        = '联系人维护';
 $lang->contact->id            = '编号';

@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     action
  * @version     $Id: zh-cn.php 4955 2013-07-02 01:47:21Z chencongzhi520@gmail.com $
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 $lang->action->common     = '系统日志';
 $lang->action->product    = '产品';

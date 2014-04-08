@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc
  * @version     $Id: zh-cn.php 824 2010-05-02 15:32:06Z wwccss $
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 /* 字段列表。*/
 $lang->doc->common         = '文档视图';

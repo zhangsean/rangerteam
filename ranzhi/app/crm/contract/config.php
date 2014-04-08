@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     contract 
  * @version     $Id$
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 $config->contract->editor = new stdclass();
 $config->contract->editor->create = array('id' => 'items', 'tools' => 'full');

@@ -7,7 +7,7 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     customer 
  * @version     $Id $
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 class customer extends control
 {

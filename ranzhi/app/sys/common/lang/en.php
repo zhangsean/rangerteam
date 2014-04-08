@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common 
  * @version     $Id$
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 $lang->colon   = ' : ';
 $lang->prev    = '‹';
@@ -21,7 +21,7 @@ $lang->submitting   = 'Saving...';
 
 /* Lang items for ranzhi. */
 $lang->ranzhi  = 'ranzhi';
-$lang->poweredBy = "<a href='http://www.ranzhi.co/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
+$lang->poweredBy = "<a href='http://www.ranzhi.org/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT

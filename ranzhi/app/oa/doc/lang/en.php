@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc
  * @version     $Id: en.php 824 2010-05-02 15:32:06Z wwccss $
- * @link        http://www.ranzhi.co
+ * @link        http://www.ranzhi.org
  */
 /* Fields. */
 $lang->doc->common         = 'Doc';
