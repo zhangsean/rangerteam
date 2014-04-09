@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->index->common       = '首页';
 $lang->index->allEntries   = '所有应用';
 $lang->index->addEntry     = '添加应用';
 $lang->index->profile      = '个人信息';
