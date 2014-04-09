@@ -40,6 +40,11 @@ class tree extends control
             $this->lang->tree->menu = $this->lang->blog->menu;
             $this->lang->menuGroups->tree = 'blog';
         }
+        elseif($type == 'announce')
+        {
+            $this->lang->tree->menu = $this->lang->announce->menu;
+            $this->lang->menuGroups->tree = 'announce';
+        }
         elseif($type == 'product' and isset($this->lang->product->menu))
         {
             $this->lang->tree->menu = $this->lang->product->menu;

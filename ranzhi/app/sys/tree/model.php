@@ -23,8 +23,7 @@ class treeModel extends model
      */
     public function getByID($categoryID, $type = 'article')
     {
-        $category = $this->dao->select('*')->from(TABLE_CATEGORY)->where('alias')->eq($categoryID)->andWhere('type')->eq($type)->fetch();
-        if(!$category) $category = $this->dao->findById((int)$categoryID)->from(TABLE_CATEGORY)->fetch();
+        $category = $this->dao->findById((int)$categoryID)->from(TABLE_CATEGORY)->fetch();
 
         if(!$category) return false;
 
@@ -326,19 +325,6 @@ class treeModel extends model
     }
 
     /**
-     * Create the article browse link.
-     * 
-     * @param  object      $category 
-     * @access public
-     * @return string
-     */
-    public static function createArticleBrowseLink($category)
-    {
-        $linkHtml = html::a(helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
-        return $linkHtml;
-    }
-
-    /**
      * Create doc link.
      * 
      * @param  object    $category 
@@ -396,7 +382,7 @@ class treeModel extends model
 
         $linkHtml  = $category->name;
         $linkHtml .= ' ' . html::a(helper::createLink('tree', 'edit',     "category={$category->id}"), $lang->tree->edit, "class='ajax'");
-        if(strpos($category->type, 'doc') === false) $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}&root=$root"), $lang->category->children, "class='$childrenLinkClass ajax'");
+        if(strpos($category->type, 'doc') === false) $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
         $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
 
         return $linkHtml;
