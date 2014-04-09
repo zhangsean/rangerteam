@@ -18,7 +18,7 @@
       <h4 class="modal-title"><i class="icon-cog"></i> <?php echo $lang->effort->edit; ?></h4>
     </div>
     <div class="modal-body">
-      <form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('effort', 'edit', "effortID=$effort->id")?>'>
+      <form method='post' id='editEffortForm' action='<?php echo $this->createLink('effort', 'edit', "effortID=$effort->id")?>'>
         <table class='table'> 
           <tr>
             <th class='w-100px'><?php echo $lang->effort->date;?></th>

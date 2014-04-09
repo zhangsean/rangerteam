@@ -18,7 +18,7 @@
       <h4 class="modal-title"><i class="icon-cog"></i> <?php echo $lang->effort->create; ?></h4>
     </div>
     <div class="modal-body">
-      <form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('effort', 'createForObject', "objectType=$objectType&objectID=$objectID&account=$account&date=" . str_replace('-', '', $date)) ?>'>
+      <form method='post' id='effortForm' action='<?php echo $this->createLink('effort', 'createForObject', "objectType=$objectType&objectID=$objectID&account=$account&date=" . str_replace('-', '', $date)) ?>'>
         <table class='table' id='objectTable'> 
           <tr class='text-center'>
             <th class='w-id'><?php echo $lang->effort->id;?></th>

@@ -1,8 +1,7 @@
 $(function()
 {
-    $.setAjaxForm('#effortForm', function(data)
+    $.setAjaxForm('#editEffortForm', function(data)
     {
         if(data.result == 'success') $.reloadAjaxModal(1500);
     });
-    $.setAjaxLoader('.edit', '#ajaxModal');
 })

@@ -29,7 +29,7 @@ class effort extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             if(!$result['result']) $this->send($result);
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reloadModal'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
         $date = $date ?  substr($date, 0, 4) . '-' . substr($date, 4, 2) . '-' . substr($date, 6, 2) : date(DT_DATE1);
@@ -76,7 +76,7 @@ class effort extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reloadModal'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
         /* Judge a private effort or not, If private, die. */

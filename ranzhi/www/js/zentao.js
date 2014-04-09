@@ -2,7 +2,9 @@ $.extend(
 {
     setAjaxForm: function(formID, callback)
     {
-        form = $(formID); 
+        if($(document).data('setAjaxForm:' + formID)) return;
+
+        form = $(formID);
 
         var options = 
         {
@@ -42,8 +44,6 @@ $.extend(
 
                     if(response.locate) 
                     {
-                        if(response.locate == 'reload') return setTimeout(function(){location.href = location.href;}, 1200);
-                        if(response.locate == 'reloadModal') return $.reloadAjaxModal();
                         return setTimeout(function(){location.href = response.locate;}, 1200);
                     }
 
@@ -77,19 +77,27 @@ $.extend(
                         var errorLabel =  key + 'Label';
 
                         /* Create the error message. */
-                        var errorMSG = '<span id="'  + errorLabel + '" for="' + key  + '"  class="red">';
+                        var errorMSG = '<span id="'  + errorLabel + '" for="' + key  + '"  class="text-error red">';
                         errorMSG += $.type(value) == 'string' ? value : value.join(';');
                         errorMSG += '</span>';
 
                         /* Append error message, set style and set the focus events. */
                         $('#' + errorLabel).remove(); 
-                        $(errorOBJ).parent().append(errorMSG);
-                        $(errorOBJ).css('margin-bottom', 0);
-                        $(errorOBJ).css('border-color','#953B39')
-                        $(errorOBJ).change(function()
+                        var $errorOBJ = $(errorOBJ);
+                        if($errorOBJ.closest('.input-group').length > 0)
                         {
-                            $(errorOBJ).css('margin-bottom', 0);
-                            $(errorOBJ).css('border-color','')
+                            $errorOBJ.closest('.input-group').after(errorMSG)
+                        }
+                        else
+                        {
+                            $errorOBJ.parent().append(errorMSG);
+                        }
+                        $errorOBJ.css('margin-bottom', 0);
+                        $errorOBJ.css('border-color','#953B39')
+                        $errorOBJ.change(function()
+                        {
+                            $errorOBJ.css('margin-bottom', 0);
+                            $errorOBJ.css('border-color','')
                             $('#' + errorLabel).remove(); 
                         });
                     })
@@ -131,7 +139,7 @@ $.extend(
             $.disableForm(formID);
             $(this).ajaxSubmit(options);
             return false;    // Prevent the submitting event of the browser.
-        });
+        }).data('setAjaxForm:' + formID, true);
     },
 
     /* Switch the label and disabled attribute for the submit button in a form. */
