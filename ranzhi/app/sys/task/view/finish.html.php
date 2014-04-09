@@ -14,13 +14,6 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<div class='modal-dialog w-700px'>
-  <div class='modal-content'>
-    <div class='modal-header'>
-      <?php echo html::closeButton();?>
-      <h4 class='modal-title'><i class='icon-cog'></i> <?php echo $task->name;?></h4>
-    </div>
-    <div class='modal-body'>
       <form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('task', 'finish', "taskID=$taskID")?>'>
         <table class='table table-form'>
           <tr>
@@ -45,6 +38,4 @@
           </tr>
         </table>
       </form>
-    </div>
-  </div>
-</div>
+<?php include '../../common/view/footer.modal.html.php';?>

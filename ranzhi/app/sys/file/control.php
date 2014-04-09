@@ -119,7 +119,10 @@ class file extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'locate' => 'reload'));
         }
-        $this->view->file = $file;
+
+        $this->view->title      = $this->lang->file->edit;
+        $this->view->modalWidth = '450';
+        $this->view->file       = $file;
         $this->display();
     }
 

@@ -70,6 +70,7 @@ class block extends control
         $block          = (isset($personalBlocks->{'b' . $index}) and $personalBlocks->{'b' . $index}->app == 'crm') ? json_decode($personalBlocks->{'b' . $index}->value) : array();
         $blockID        = $blockID ? $blockID : (($block and $personalBlocks->{'b' . $index}->app == 'crm') ? $block->blockID : '');
 
+        $this->view->title   = $this->lang->block->admin;
         $this->view->blocks  = $blockPairs;
         $this->view->params  = $blockID ? json_decode($this->block->{'get' . ucfirst($blockID) . 'Params'}(), true) : array();;
         $this->view->blockID = $blockID;

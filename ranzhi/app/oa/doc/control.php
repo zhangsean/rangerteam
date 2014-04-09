@@ -137,7 +137,9 @@ class doc extends control
             $this->loadModel('action')->create('docLib', $libID, 'Created');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "libID=$libID")));
         }
-        die($this->display());
+
+        $this->view->title = $this->lang->doc->createLib;
+        $this->display();
     }
 
     /**
@@ -165,8 +167,9 @@ class doc extends control
         $lib = $this->doc->getLibByID($libID);
         $this->view->libName = empty($lib) ? $libID : $lib->name;
         $this->view->libID   = $libID;
+        $this->view->title   = $this->lang->doc->editLib;
         
-        die($this->display());
+        $this->display();
     }
 
     /**

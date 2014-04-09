@@ -139,8 +139,11 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
+        $task = $this->task->getByID($taskID);
+
+        $this->view->title  = $task->name;
         $this->view->taskID = $taskID;
-        $this->view->task   = $this->task->getByID($taskID);
+        $this->view->task   = $task;
         $this->view->users  = $this->loadModel('user')->getPairs();
         $this->display();
     }
@@ -162,8 +165,11 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
+        $task = $this->task->getByID($taskID);
+
+        $this->view->title  = $task->name;
         $this->view->taskID = $taskID;
-        $this->view->task   = $this->task->getByID($taskID);
+        $this->view->task   = $task;
         $this->view->users  = $this->loadModel('user')->getPairs();
         $this->display();
     }

@@ -13,33 +13,24 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
-<div class='modal-dialog w-700px'>
-  <div class='modal-content'>
-    <div class='modal-header'>
-      <?php echo html::closeButton();?>
-      <h4 class='modal-title'><i class='icon-cog'></i> <?php echo $task->name;?></h4>
-    </div>
-    <div class='modal-body'>
-      <form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('task', 'assignTo', "taskID=$taskID")?>'>
-        <table class='table table-form'>
-          <tr>
-            <th class='w-100px'><?php echo $lang->task->assignedTo;?></th>
-            <td><?php echo html::select('assignedTo', $users, '', "class='form-control chosen'")?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->task->left;?></th>
-            <td><?php echo html::input('left', $task->left, "class='form-control'");?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->comment?></th>
-            <td><?php echo html::textarea('comment')?></td>
-          </tr>
-          <tr>
-            <th></th>
-            <td><?php echo html::submitButton();?></td>
-          </tr>
-        </table>
-      </form>
-    </div>
-  </div>
-</div>
+<form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('task', 'assignTo', "taskID=$taskID")?>'>
+  <table class='table table-form'>
+    <tr>
+      <th class='w-100px'><?php echo $lang->task->assignedTo;?></th>
+      <td><?php echo html::select('assignedTo', $users, '', "class='form-control chosen'")?></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->task->left;?></th>
+      <td><?php echo html::input('left', $task->left, "class='form-control'");?></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->comment?></th>
+      <td><?php echo html::textarea('comment')?></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><?php echo html::submitButton();?></td>
+    </tr>
+  </table>
+</form>
+<?php include '../../common/view/footer.modal.html.php';?>

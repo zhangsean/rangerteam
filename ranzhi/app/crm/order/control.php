@@ -141,6 +141,7 @@ class order extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
+        $this->view->title   = $this->lang->order->close;
         $this->view->orderID = $orderID;
         $this->display();
     }
@@ -276,6 +277,7 @@ class order extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
+        $this->view->title   = $this->lang->order->assignedTo;
         $this->view->orderID = $orderID;
         $this->view->order   = $this->order->getByID($orderID);
         $this->view->members = $this->loadModel('user')->getPairs('noclosed, nodeleted, devfirst');

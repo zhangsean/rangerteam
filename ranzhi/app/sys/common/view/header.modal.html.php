@@ -19,3 +19,10 @@ $(function()
     $.setAjaxForm('#ajaxModalForm');
 })
 </script>
+<div class="modal-dialog" style="width:<?php echo empty($modalWidth) ? 700 : $modalWidth;?>px;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <?php echo html::closeButton();?>
+      <h4 class="modal-title"><?php if(!empty($title)) echo $title; ?></h4>
+    </div>
+    <div class="modal-body">
