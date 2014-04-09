@@ -22,7 +22,7 @@
     <div class='panel-body'>
       <?php echo $moduleTree;?>
       <div class='text-right'>
-        <ul>
+        <ul class='doclib-action'>
           <?php
           echo '<li>' . html::a($this->createLink('tree', 'browse', "type=doc&moduleID=0&rootID=$libID"), $lang->doc->manageType) . '</li>';
           if(!isset($lang->doc->systemLibs[$libID]))
