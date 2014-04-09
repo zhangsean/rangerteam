@@ -19,7 +19,6 @@
   <div class='panel-body'>
   <form method='post' id='ajaxForm'>
     <table class='table table-form'>
-      <?php if($type != 'page'):?>
       <tr>
         <th style='width: 100px'><?php echo $lang->article->category;?></th>
         <td style='width: 40%'>
@@ -29,49 +28,12 @@
         </td><td></td>
       </tr>
       <tr>
-        <th><?php echo $lang->article->author;?></th>
-        <td><?php echo html::input('author', $article->author, "class='form-control'");?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->article->original;?></th>
-        <td><?php echo html::select('original', $lang->article->originalList, $article->original, "class='form-control chosen'");?></td>
-        <td>
-          <div id='copyBox' class='row'>
-            <div class='col-sm-4'><?php echo html::input('copySite', $article->copySite, "class='form-control' placeholder='{$lang->article->copySite}'"); ?> </div>
-            <div class='col-sm-8'><?php echo html::input('copyURL',  $article->copyURL, "class='form-control' placeholder='{$lang->article->copyURL}'"); ?></div>
-          </div>
-        </td>
-      </tr>
-      <?php endif; ?>
-      <tr>
         <th><?php echo $lang->article->title;?></th>
         <td colspan='2'><?php echo html::input('title', $article->title, "class='form-control'");?></td>
       </tr>
       <tr>
-        <th><?php echo $lang->article->alias;?></th>
-        <td colspan='2'>
-          <div class='input-group'>
-            <?php if($type == 'page'):?>
-            <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>page/</span>
-            <?php else:?>
-            <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot . $type?>/id_</span>
-            <?php endif;?>
-            <?php echo html::input('alias', $article->alias, "class='form-control' placeholder='{$lang->alias}'");?>
-            <span class='input-group-addon'>.html</span>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->article->keywords;?></th>
-        <td colspan='2'> <?php echo html::input('keywords', $article->keywords, "class='form-control'");?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->article->summary;?></th>
-        <td colspan='2'><?php echo html::textarea('summary', $article->summary, "rows='2' class='form-control'");?></td>
-      </tr>
-      <tr>
         <th><?php echo $lang->article->content;?></th>
-        <td colspan='2'><?php echo html::textarea('content', htmlspecialchars($article->content), "rows='10' class='form-control'");?></td>
+        <td colspan='2'><?php echo html::textarea('content', htmlspecialchars($article->content), "rows='20' class='form-control'");?></td>
       </tr>
       <tr>
         <th><?php echo $lang->article->status;?></th>
@@ -79,7 +41,7 @@
       </tr>
       <tr>
         <th></th><td colspan='2'><?php echo html::submitButton();?></td>
-      </div>
+      </tr>
     </table>
   </form>
   </div>

@@ -186,7 +186,7 @@ class articleModel extends model
      */
     public function getPrevAndNext($current, $category)
     {
-       $prev = $this->dao->select('t1.id, title, alias')->from(TABLE_ARTICLE)->alias('t1')
+       $prev = $this->dao->select('t1.id, title')->from(TABLE_ARTICLE)->alias('t1')
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
            ->andWhere('t1.status')->eq('normal')
@@ -195,7 +195,7 @@ class articleModel extends model
            ->limit(1)
            ->fetch();
 
-       $next = $this->dao->select('t1.id, title, alias')->from(TABLE_ARTICLE)->alias('t1')
+       $next = $this->dao->select('t1.id, title')->from(TABLE_ARTICLE)->alias('t1')
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
            ->andWhere('t1.addedDate')->le(helper::now())
@@ -222,6 +222,7 @@ class articleModel extends model
             ->join('categories', ',')
             ->setDefault('addedDate', $now)
             ->add('editedDate', $now)
+            ->add('author', $this->app->user->account)
             ->add('type', $type)
             ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
@@ -329,25 +330,6 @@ class articleModel extends model
            $data->category = $category;
            $this->dao->insert(TABLE_RELATION)->data($data)->exec();
        }
-    }
-
-    /**
-     * Create preview link. 
-     * 
-     * @param  int    $articleID 
-     * @access public
-     * @return string
-     */
-    public function createPreviewLink($articleID)
-    {
-        $article       = $this->getByID($articleID);
-        $categories    = $article->categories;
-        $categoryAlias = current($categories)->alias;
-        $module = $article->type;
-        $param  = "articleID=$articleID";
-        $alias  = "category=$categoryAlias&name=$article->alias";
-
-        return commonModel::createFrontLink($module, 'view', $param, $alias);
     }
 
     /**

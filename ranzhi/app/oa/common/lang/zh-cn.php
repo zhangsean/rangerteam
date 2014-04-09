@@ -16,14 +16,17 @@ $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = '我的地盘|dashboard|index|';
 $lang->menu->oa->task      = '任务|task|index|';
 $lang->menu->oa->announce  = '公告|announce|index|';
-$lang->menu->oa->leave     = '请假|leave|index|';
-$lang->menu->oa->claim     = '报销|claim|index|';
-$lang->menu->oa->checking  = '考勤|checking|index|';
 $lang->menu->oa->doc       = '文档|doc|index|';
 $lang->menu->oa->setting   = '设置|setting|index|';
 
 $lang->dashboard = new stdclass();
 $lang->block     = new stdclass();
+
+$lang->announce = new stdclass();
+$lang->announce->menu = new stdclass();
+$lang->announce->menu->browse   = array('link' => '公告列表|announce|browse|', 'alias' => 'view');
+$lang->announce->menu->create   = '添加公告|article|create|type=announce|';
+$lang->announce->menu->category = '类目管理|tree|browse|type=announce|';
 
 $lang->doc = new stdclass();
 $lang->doc->menu = new stdclass();

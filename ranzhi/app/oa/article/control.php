@@ -113,7 +113,8 @@ class article extends control
         {
             $this->article->create($type);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin', "type=$type")));
+            if($type == 'announce') $locate = $this->createLink('announce');
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
         }
 
         $this->view->title           = $this->lang->$type->create;
