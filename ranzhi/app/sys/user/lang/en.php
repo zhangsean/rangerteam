@@ -91,6 +91,9 @@ $lang->user->genderList->m = 'Male';
 $lang->user->genderList->f = 'Female';
 $lang->user->genderList->u = '';
 
+$lang->user->basicInfo   = 'Basic Info';
+$lang->user->contactInfo = 'Contact Info';
+
 $lang->user->statusList = new stdclass();
 $lang->user->statusList->locked    = "<label class='label label-danger'>Locked</label>";
 $lang->user->statusList->forbidden = "<label class='label label-danger'>Forbidden</label>";
@@ -144,13 +147,8 @@ $lang->user->mailContent = <<<EOT
 <html>
 <head>
 <style type='text/css'>
-body{
-margin:0;
-padding:0;
-}
-div{
-    padding-left:30px;
-}
+body{margin:0; padding:0;}
+div{padding-left:30px;}
 </style>
 </head>
 <body>
@@ -171,5 +169,4 @@ System letter, please do not reply
 </div>
 </body>
 </html>
-
 EOT;
