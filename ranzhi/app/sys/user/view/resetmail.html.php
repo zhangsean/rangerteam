@@ -26,7 +26,7 @@ div{
 <div style='padding-top:20px;height:60px;background:#fafafa;border-bottom:1px solid #ddd;font-size:18px;font-weight:bold'> 密码修改 </div>
 <div style='margin-top:20px;'>
 <p>
-尊敬的用户 $account
+尊敬的成员 $account
 <br>
 您的注册信息：
 <br>

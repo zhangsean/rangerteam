@@ -26,7 +26,7 @@ $lang->action->original       = '原始格式';
 
 $lang->action->objectTypes['product']     = '产品';
 $lang->action->objectTypes['task']        = '任务';
-$lang->action->objectTypes['user']        = '用户';
+$lang->action->objectTypes['user']        = '成员';
 $lang->action->objectTypes['order']       = '订单';
 $lang->action->objectTypes['orderAction'] = '订单动作';
 $lang->action->objectTypes['orderField']  = '属性';
@@ -84,14 +84,14 @@ $lang->action->label->logout              = "退出登录";
 $lang->action->label->product     = '产品|product|view|productID=%s';
 $lang->action->label->order       = '订单|order|view|orderID=%s';
 $lang->action->label->task        = '任务|task|view|taskID=%s';
-$lang->action->label->user        = '用户|user|view|account=%s';
+$lang->action->label->user        = '成员|user|view|account=%s';
 $lang->action->label->space       = '　';
 
 /* Object type. */
 $lang->action->search->objectTypeList['']            = '';    
 $lang->action->search->objectTypeList['product']     = '产品';    
 $lang->action->search->objectTypeList['task']        = '任务'; 
-$lang->action->search->objectTypeList['user']        = '用户'; 
+$lang->action->search->objectTypeList['user']        = '成员'; 
 $lang->action->search->objectTypeList['order']       = '订单'; 
 $lang->action->search->objectTypeList['orderAction'] = '动作'; 
 

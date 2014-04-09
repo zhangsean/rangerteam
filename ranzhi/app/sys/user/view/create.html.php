@@ -24,13 +24,11 @@ include '../../common/view/treeview.html.php';
 <div class="col-md-12">
   <div class='col-md-2'>
     <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $lang->dept->common;?></strong></div>
+      <div class='panel-heading'><strong><i class="icon-building"></i> <?php echo $lang->dept->common;?></strong></div>
       <div class='panel-body'>
-        <div id='treeMenuBox'>
-          <?php echo $treeMenu ?>
-          <div class='text-right'><?php echo html::a($this->inlink('create'), $lang->user->create)?></div>
-          <div class='text-right'><?php echo html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit);?></div>
-        </div>
+        <div id='treeMenuBox'><?php echo $treeMenu ?></div>
+        <?php echo html::a($this->inlink('create'), $lang->user->create, "class='btn btn-primary btn-xs'")?>
+        <?php echo html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit, "class='btn btn-primary btn-xs'");?>
       </div>
     </div>
   </div>
@@ -41,12 +39,10 @@ include '../../common/view/treeview.html.php';
         <form method='post' id='ajaxForm' class='form-condensed'>
           <fieldset class='fieldset-primary'>
             <table class='table table-form'>
-              <tr class='text-left'>
-                <th class='w-p50'><?php echo $lang->user->account;?></th>
-                <th><?php echo $lang->user->realname;?></th>
-              </tr>
               <tr>
+                <th class='w-50px text-left'><?php echo $lang->user->account;?></th>
                 <td><?php echo html::input('account', '', "class='form-control'");?></td>
+                <th><?php echo $lang->user->realname;?></th>
                 <td><?php echo html::input('realname', '', "class='form-control'");?></td>
               </tr>
             </table>
@@ -82,6 +78,8 @@ include '../../common/view/treeview.html.php';
               <tr>
                 <th class='w-80px'><?php echo $lang->user->email;?></th>
                 <td><?php echo html::input('email', '', "class='form-control'");?></td>
+                <th><?php echo $lang->user->zipcode;?></th>
+                <td><?php echo html::input('zipcode', '', "class='form-control'");?></td>
               </tr>
               <tr>
                 <th class='w-80px'><?php echo $lang->user->mobile;?></th>

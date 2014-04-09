@@ -50,7 +50,7 @@ $lang->link           = '友情链接';
 $lang->frontHome      = '前台';
 $lang->forumHome      = '论坛';
 $lang->bookHome       = '手册';
-$lang->dashboard      = '用户中心';
+$lang->dashboard      = '成员中心';
 $lang->register       = '注册';
 $lang->logout         = '退出';
 $lang->login          = '登录';
@@ -136,7 +136,7 @@ $lang->task    = new stdclass();
 
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = '公司|company|setbasic|';
-$lang->menu->sys->user      = '用户|user|admin|';
+$lang->menu->sys->user      = '组织|user|admin|';
 $lang->menu->sys->entry     = '应用|entry|admin|';
 $lang->menu->sys->system    = '系统|mail|admin|';
 //$lang->menu->sys->extension = '扩展|extension|admin|';

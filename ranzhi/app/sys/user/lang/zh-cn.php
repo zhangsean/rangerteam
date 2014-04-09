@@ -9,10 +9,10 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->user->common    = '用户';
+$lang->user->common    = '成员';
 
 $lang->user->id        = '编号';
-$lang->user->account   = '用户名';
+$lang->user->account   = '成员名';
 $lang->user->admin     = '管理员';
 $lang->user->password  = '密码';
 $lang->user->password2 = '请重复密码';
@@ -43,23 +43,23 @@ $lang->user->allowTime = '开放时间';
 $lang->user->status    = '状态';
 $lang->user->alert     = '您的帐号已被禁用';
 
-$lang->user->list            = '用户列表';
-$lang->user->view            = "用户详情";
-$lang->user->create          = "添加用户";
-$lang->user->edit            = "编辑用户";
+$lang->user->list            = '成员列表';
+$lang->user->view            = "成员详情";
+$lang->user->create          = "添加成员";
+$lang->user->edit            = "编辑成员";
 $lang->user->changePassword  = "更改密码";
 $lang->user->recoverPassword = "忘记密码";
 $lang->user->newPassword     = "新密码";
-$lang->user->update          = "编辑用户";
-$lang->user->delete          = "删除用户";
-$lang->user->browse          = "浏览用户";
+$lang->user->update          = "编辑成员";
+$lang->user->delete          = "删除成员";
+$lang->user->browse          = "浏览成员";
 $lang->user->deny            = "访问受限";
-$lang->user->confirmDelete   = "您确认删除该用户吗？";
-$lang->user->confirmActivate = "您确认激活该用户吗？";
+$lang->user->confirmDelete   = "您确认删除该成员吗？";
+$lang->user->confirmActivate = "您确认激活该成员吗？";
 $lang->user->relogin         = "重新登录";
 $lang->user->asGuest         = "游客访问";
 $lang->user->goback          = "返回前一页";
-$lang->user->allUsers        = '全部用户';
+$lang->user->allUsers        = '全部成员';
 $lang->user->submit          = "提交";
 $lang->user->forbid          = '禁用';
 $lang->user->active          = '激活';
@@ -70,15 +70,15 @@ $lang->user->thread      = '我的主题';
 $lang->user->reply       = '我的回贴';
 $lang->user->message     = '我的消息';
 
-$lang->user->inputUserName       = '请输入用户名';
-$lang->user->inputAccountOrEmail = '请输入用户名或Email';
+$lang->user->inputUserName       = '请输入成员名';
+$lang->user->inputAccountOrEmail = '请输入成员名或Email';
 $lang->user->inputPassword       = '请输入密码';
 $lang->user->searchUser          = '搜索';
 
 $lang->user->errorDeny     = "抱歉，您无权访问『<b>%s</b>』模块的『<b>%s</b>』功能。请联系管理员获取权限。点击后退返回上页。<br/> 5秒钟后将自动返回首页...";
-$lang->user->loginFailed   = "登录失败，请检查您的用户名或密码是否填写正确。";
-$lang->user->locked        = "用户已经被锁定，请%s后再重新尝试登录";
-$lang->user->lockedForEver = "用户已经被永久禁用。";
+$lang->user->loginFailed   = "登录失败，请检查您的成员名或密码是否填写正确。";
+$lang->user->locked        = "成员已经被锁定，请%s后再重新尝试登录";
+$lang->user->lockedForEver = "成员已经被永久禁用。";
 $lang->user->lblRegistered = '恭喜您，已经成功注册。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->actionFail    = '操作失败';
@@ -102,7 +102,7 @@ $lang->user->statusList->normal    = "<label class='label label-success'>正常<
 $lang->user->register  = new stdclass();
 $lang->user->register->welcome     = '欢迎注册成为会员';
 $lang->user->register->why         = '欢迎注册成为我们的会员，您可以享受更多的服务。';
-$lang->user->register->lblUserInfo = '用户信息';
+$lang->user->register->lblUserInfo = '成员信息';
 $lang->user->register->lblAccount  = '必须是三位以上的英文字母或数字';
 $lang->user->register->lblPassword = '数字和字母组成，六位以上';
 
@@ -115,7 +115,7 @@ $lang->user->login->welcome = '已有帐号';
 $lang->user->login->why     = '欢迎登陆，享用会员专属服务！';
 
 $lang->user->control = new stdclass();
-$lang->user->control->common      = '用户中心';
+$lang->user->control->common      = '成员中心';
 $lang->user->control->welcome     = '欢迎您，<strong>%s</strong>';
 $lang->user->control->lblPassword = "留空，则保持不变。";
 
@@ -154,7 +154,7 @@ div{padding-left:30px;}
 <body>
 <div style='padding-top:20px;height:60px;background:#fafafa;border-bottom:1px solid #ddd;font-size:18px;font-weight:bold'> 密码修改 </div>
 <div style='margin-top:20px;'>
-<p>尊敬的用户 %s <br />
+<p>尊敬的成员 %s <br />
 请点击下面的链接，进行密码修改: <br >
 <a href='%s' target='_blank'>%s</a>
 </p>
