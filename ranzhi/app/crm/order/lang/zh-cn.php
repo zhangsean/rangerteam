@@ -71,6 +71,6 @@ $lang->order->signed   = "由 <strong>%s</strong> 签单";
 $lang->order->activated= "由 <strong>%s</strong> 激活";
 
 $lang->team = new stdclass();
-$lang->team->account = '用户';
+$lang->team->account = '成员';
 $lang->team->role    = '角色';
 $lang->team->join    = '加盟日';
