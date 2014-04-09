@@ -171,7 +171,7 @@ class control
      * @access public
      * @return void
      */
-    public function __construct($moduleName = '', $methodName = '')
+    public function __construct($moduleName = '', $methodName = '', $appName = '')
     {
         /* Global the globals, and refer them to the class member. */
         global $app, $config, $lang, $dbh;
@@ -180,12 +180,12 @@ class control
         $this->lang     = $lang;
         $this->dbh      = $dbh;
         $this->viewType = $this->app->getViewType();
-        $this->appName  = $this->app->getAppName();
+        $this->appName  = $appName ? $appName : $this->app->getAppName();
 
         /* Load the model file auto. */
         $this->setModuleName($moduleName);
         $this->setMethodName($methodName);
-        $this->loadModel();
+        $this->loadModel($this->moduleName, $appName);
         $this->setViewPrefix();
 
         /* Init the view vars.  */
@@ -535,10 +535,11 @@ class control
      * @access  public
      * @return  string  the parsed html.
      */
-    public function fetch($moduleName = '', $methodName = '', $params = array())
+    public function fetch($moduleName = '', $methodName = '', $params = array(), $appName = '')
     {
         if($moduleName == '') $moduleName = $this->moduleName;
         if($methodName == '') $methodName = $this->methodName;
+        if($appName == '')    $appName    = $this->appName;
         if($moduleName == $this->moduleName and $methodName == $this->methodName) 
         {
             $this->parse($moduleName, $methodName);
@@ -546,9 +547,9 @@ class control
         }
 
         /* Set the pathes and files to included. */
-        $modulePath        = $this->app->getModulePath($this->appName, $moduleName);
+        $modulePath        = $this->app->getModulePath($appName, $moduleName);
         $moduleControlFile = $modulePath . 'control.php';
-        $actionExtFile     = $this->app->getModuleExtPath($this->appName, $moduleName, 'control') . strtolower($methodName) . '.php';
+        $actionExtFile     = $this->app->getModuleExtPath($appName, $moduleName, 'control') . strtolower($methodName) . '.php';
         $file2Included     = file_exists($actionExtFile) ? $actionExtFile : $moduleControlFile;
 
         /* Load the control file. */
@@ -563,7 +564,7 @@ class control
 
         /* Parse the params, create the $module control object. */
         if(!is_array($params)) parse_str($params, $params);
-        $module = new $className($moduleName, $methodName);
+        $module = new $className($moduleName, $methodName, $appName);
 
         /* Call the method and use ob function to get the output. */
         ob_start();

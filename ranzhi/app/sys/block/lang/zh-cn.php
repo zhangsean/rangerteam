@@ -22,6 +22,9 @@ $lang->block->params = new stdclass();
 $lang->block->params->name  = '参数名称';
 $lang->block->params->value = '参数值';
 
+$lang->block->createBlock = '添加区块';
+$lang->block->ordersSaved = '排序已保存';
+
 $lang->block->default['oa']['b1']['name']    = '系统公告';
 $lang->block->default['oa']['b1']['blockID'] = 'announce';
 $lang->block->default['oa']['b1']['type']    = 'system';

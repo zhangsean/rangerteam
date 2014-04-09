@@ -41,7 +41,7 @@ function sortBlocks(orders)
     var newOrder = new Array();
     for(i in orders)
     {   
-        oldOrder.push(i.replace('panel', ''));
+        oldOrder.push(i.replace('block', ''));
         newOrder.push(orders[i]);
     }
 

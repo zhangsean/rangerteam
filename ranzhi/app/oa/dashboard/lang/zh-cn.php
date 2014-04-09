@@ -7,7 +7,5 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     dashboard 
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhi.org
  */
-$lang->dashboard->createBlock = '添加区块';
-$lang->dashboard->ordersSaved = '排序已保存';
