@@ -9,8 +9,6 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->product = new stdclass();
-
 $lang->product->common    = '产品维护';
 
 $lang->product->id          = '编号';
