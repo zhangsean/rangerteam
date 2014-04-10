@@ -17,7 +17,6 @@ $lang->menu->oa->dashboard = '我的地盘|dashboard|index|';
 $lang->menu->oa->task      = '任务|task|index|';
 $lang->menu->oa->announce  = '公告|announce|index|';
 $lang->menu->oa->doc       = '文档|doc|index|';
-$lang->menu->oa->setting   = '设置|setting|index|';
 
 $lang->dashboard = new stdclass();
 $lang->block     = new stdclass();

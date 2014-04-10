@@ -32,6 +32,7 @@ $lang->doc->editedDate     = 'Edited date';
 $lang->doc->basicInfo      = 'Basic Info';
 $lang->doc->deleted        = 'Deleted';
 
+$lang->doc->list           = 'Doc list';
 $lang->doc->moduleDoc      = 'By module';
 $lang->doc->searchDoc      = 'By search';
 //$lang->doc->allDoc         = 'All document';
