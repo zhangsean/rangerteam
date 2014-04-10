@@ -43,11 +43,11 @@ $lang->thread->confirmHideThread   = "您确定隐藏该主题吗？";
 $lang->thread->confirmDeleteReply  = "您确定删除该回帖吗？";
 $lang->thread->confirmDeleteFile   = "您确定删除该附件吗？";
 
-$lang->thread->lblEdited      = '%s 最后编辑, %s';
-$lang->thread->message        = '%s在论坛#%s回复了主题：%s，内容为：%s';
-$lang->thread->readonly       = '只读';
-$lang->thread->successStick   = '成功置顶';
-$lang->thread->successUnstick = '成功取消置顶';
+$lang->thread->lblEdited       = '%s 最后编辑, %s';
+$lang->thread->message         = '%s在论坛#%s回复了主题：%s，内容为：%s';
+$lang->thread->readonly        = '只读';
+$lang->thread->successStick    = '成功置顶';
+$lang->thread->successUnstick  = '成功取消置顶';
 $lang->thread->readonlyMessage = '该帖已被设置为 <strong>只读</strong>，您暂时无法发表新的回复。';
 
 /* Adjust the pager. */

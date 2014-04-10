@@ -43,11 +43,11 @@ $lang->thread->confirmHideThread   = "Are you sure to hide this thread?";
 $lang->thread->confirmDeleteReply  = "Are you sure to delete this reply?";
 $lang->thread->confirmDeleteFile   = "Are you sure to delete this file?";
 
-$lang->thread->lblEdited      = '%s Last edited, %s';
-$lang->thread->message        = '%s reply at #%s in forum, the thread is: %s, the content is: %s';
-$lang->thread->readonly       = 'Read only';
-$lang->thread->successStick   = 'Successfully sticky.';
-$lang->thread->successUnstick = 'Successfully unsticky.';
+$lang->thread->lblEdited       = '%s Last edited, %s';
+$lang->thread->message         = '%s reply at #%s in forum, the thread is: %s, the content is: %s';
+$lang->thread->readonly        = 'Read only';
+$lang->thread->successStick    = 'Successfully sticky.';
+$lang->thread->successUnstick  = 'Successfully unsticky.';
 $lang->thread->readonlyMessage = 'The thread has been setted <strong>READONLY</strong>，you can not post new reply。';
 
 /* Adjust the pager. */
