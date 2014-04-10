@@ -166,6 +166,9 @@ class entryModel extends model
      */
     public function updateLogo($entryID)
     {
+        /* if no files then return. */
+        if(empty($_FILES)) return true;
+
         /* Delete logo img. */
         $this->deleteLogo($entryID);
 

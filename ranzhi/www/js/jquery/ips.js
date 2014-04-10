@@ -350,7 +350,7 @@
             this.fullScreenApps = new fullScreenApps();
             windows             = new windowsManager();
 
-            this.updateBrowserUrl(indexUrl, true, 'index', {tag:　'index'});
+            this.updateBrowserUrl(indexUrl, true, 'index', {tag: 'index'});
         }
 
         /* Bind events */

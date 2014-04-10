@@ -113,6 +113,7 @@ class install extends control
     {
         if(!empty($_POST))
         {
+            $this->install->installEntry();
             $this->install->createAdmin();
             if(dao::isError()) die(js::error(dao::getError()));
             $this->loadModel('setting')->updateVersion($this->config->version);

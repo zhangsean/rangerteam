@@ -537,7 +537,7 @@ CREATE TABLE `sys_entry` (
   `visible` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `order` tinyint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_file`;
 CREATE TABLE `sys_file` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -733,6 +733,5 @@ CREATE TABLE `sys_userGroup` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO `sys_entry` (`id`, `name`, `code`, `open`, `key`, `ip`, `logo`, `login`, `logout`, `block`, `control`, `size`, `position`, `visible`, `order`) VALUES
-(1,     'pms',  'pms',  'iframe',       '119563c21065b09b8388c59752c0bc27',     '*',    '/theme/default/images/ips/app-pms.png',        'http://pms.zentao.net',        '',     '',     'simple',       'max',  'default',      1,      0),
-(2,     'crm',  'crm',  'iframe',       'epet8b8ae1g89rxzquf4ubv37ul5tite',     '*',    '/theme/default/images/ips/app-crm.png',        '../crm/',      '',     '',     'simple',       'max',  'default',      1,      0),
-(3,     'oa',   'oa',   'iframe',       '1a673c4c3c85fadcf0333e0a4596d220',     '*',    '/theme/default/images/ips/app-oa.png', '../oa/',       '',     '',     'simple',       'max',  'default',      1,      1);
+(2, 'crm', 'crm', 'iframe', 'epet8b8ae1g89rxzquf4ubv37ul5tite', '*', '/theme/default/images/ips/app-crm.png', '../crm/', '', '', 'simple', 'max', 'default', 1, 0),
+(3, 'oa', 'oa', 'iframe', '1a673c4c3c85fadcf0333e0a4596d220', '*', '/theme/default/images/ips/app-oa.png', '../oa/', '', '', 'simple', 'max', 'default', 1, 1);

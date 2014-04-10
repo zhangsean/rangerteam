@@ -127,17 +127,6 @@ class installModel extends model
     }
 
     /**
-     * Get the web root.
-     * 
-     * @access public
-     * @return string
-     */
-    public function getWebRoot()
-    {
-        return rtrim(str_replace('\\', '/', pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_DIRNAME)), '/') . '/';
-    }
-
-    /**
      * Check the user config.
      * 
      * @access public
@@ -332,6 +321,49 @@ EOT;
         $return->content = $configContent;
 
         return $return;
+    }
+
+    /**
+     * Install entry.
+     * 
+     * @access public
+     * @return void
+     */
+    public function installEntry()
+    {
+        /* Remove all entries. */
+        $this->dao->delete('*')->from(TABLE_ENTRY)->exec();
+
+        /* Add new entry. */
+        /* Add crm. */
+        $entry = new stdclass();
+        $entry->name     = 'crm';
+        $entry->code     = 'crm';
+        $entry->open     = 'iframe';
+        $entry->key      = 'epet8b8ae1g89rxzquf4ubv37ul5tite';
+        $entry->ip       = '*';
+        $entry->logo     = $this->config->webRoot . 'theme/default/images/ips/app-crm.png';
+        $entry->login    = '../crm';
+        $entry->control  = 'simple';
+        $entry->size     = 'max';
+        $entry->position = 'default';
+
+        $block = $this->config->requestType == 'GET' ? 'crm/index.php?m=block&f=index' : 'crm/block-index.html';
+        $entry->block = $this->config->webRoot . $block;
+
+        $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
+
+        /* Add oa. */
+        $entry->name  = 'oa';
+        $entry->code  = 'oa';
+        $entry->key   = '1a673c4c3c85fadcf0333e0a4596d220';
+        $entry->logo  = $this->config->webRoot . 'theme/default/images/ips/app-oa.png';
+        $entry->login = '../oa';
+
+        $block = $this->config->requestType == 'GET' ? 'oa/index.php?m=block&f=index' : 'oa/block-index.html';
+        $entry->block = $this->config->webRoot . $block;
+
+        $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
     }
 
     /**
