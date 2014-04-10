@@ -46,7 +46,7 @@ $lang->contact->menu = new stdclass();
 $lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> Contacts List|contact|browse|', 'alias' => 'edit');
 $lang->contact->menu->create = '<i class="icon-plus"></i> Add Contact|contact|create|';
 
-/* Menu of product module. */
+/* Menu of task module. */
 $lang->task = new stdclass();
 $lang->task->menu = new stdclass();
 $lang->task->menu->browse = array('link' => '<i class="icon-th-list"></i> Task List|task|browse|', 'alias' => 'edit');
