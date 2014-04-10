@@ -31,7 +31,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
             <div class='dropdown'>
               <button class='btn btn-mini' data-toggle='dropdown'><span class='caret'></span></button>
               <ul class='dropdown-menu pull-right'>
-                <li><a data-toggle='modal' href="<?php echo $this->createLink("block", "admin", "index=$index"); ?>" class='edit-block window-btn' data-name='<?php echo $block->name; ?>' data-icon='icon-pencil'><i class='icon-pencil'></i> <?php echo $lang->edit; ?></a></li>
+                <li><a data-toggle='modal' href="<?php echo $this->createLink("block", "admin", "index=$index"); ?>" class='edit-block' data-name='<?php echo $block->name; ?>' data-icon='icon-pencil'><i class='icon-pencil'></i> <?php echo $lang->edit; ?></a></li>
                 <li><a href='javascript:;' class='remove-panel'><i class='icon-remove'></i> <?php echo $lang->close; ?></a></li>
               </ul>
             </div>
