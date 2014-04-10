@@ -16,7 +16,7 @@ $lang->index->profile      = 'Profile';
 $lang->index->set          = 'Setting';
 $lang->index->theme        = 'Theme';
 $lang->index->showDesk     = 'Show Desk';
-$lang->index->customPanels = 'Custom Panels';
+$lang->index->customBlocks = 'Custom block';
 $lang->index->addBlock     = 'Add Block';
 
 $lang->index->countEntries = "A total of <span class='entries-count'></span> entries";

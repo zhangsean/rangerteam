@@ -17,6 +17,8 @@ $lang->raquo   = '&raquo;';
 $lang->minus   = ' - ';
 $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
+$lang->at      = ' At ';
+$lang->by      = ' By ';
 $lang->submitting   = 'Saving...';
 
 /* Lang items for ranzhi. */
@@ -60,18 +62,28 @@ $lang->categoryMenu   = 'Categories';
 
 /* Global action items. */
 $lang->reset          = 'Reset';
+$lang->add            = 'Add';
 $lang->edit           = 'Edit';
 $lang->copy           = 'Copy';
+$lang->and            = 'And';
+$lang->or             = 'Or';
 $lang->hide           = 'Hide';
 $lang->delete         = 'Delete';
 $lang->close          = 'Close';
+$lang->finish         = 'Finish';
 $lang->save           = 'Save';
 $lang->confirm        = 'Confirm';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
 $lang->search         = 'Search';
+$lang->assign         = 'Assign';
+$lang->activate       = 'Activate';
+$lang->view           = 'View';
 $lang->more           = 'More';
 $lang->actions        = 'Actions';
+$lang->history        = 'History';
+$lang->reverse        = 'Reverse';
+$lang->switchDisplay  = 'Switching Display';
 $lang->feature        = 'Feature';
 $lang->year           = 'Year';
 $lang->loading        = 'Loading...';
@@ -81,6 +93,10 @@ $lang->sendSuccess    = 'Successfully sended.';
 $lang->fail           = 'Fail';
 $lang->noResultsMatch = 'No matched results.';
 $lang->alias          = 'for seo, can use numbers, letters and words';
+$lang->unfold         = '+';
+$lang->fold           = '-';
+$lang->files          = 'Files';
+$lang->comment        = 'Comment';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -104,14 +120,19 @@ $lang->company->wangwang  = 'Wangwang';
 /* The main menus. */
 $lang->menu = new stdclass();
 
-$lang->index = new stdclass();
-$lang->user  = new stdclass();
-$lang->file  = new stdclass();
-$lang->admin = new stdclass();
-$lang->tree  = new stdclass();
-$lang->mail  = new stdclass();
-$lang->dept  = new stdclass();
-$lang->block = new stdclass();
+$lang->index   = new stdclass();
+$lang->user    = new stdclass();
+$lang->file    = new stdclass();
+$lang->admin   = new stdclass();
+$lang->tree    = new stdclass();
+$lang->mail    = new stdclass();
+$lang->dept    = new stdclass();
+$lang->thread  = new stdclass();
+$lang->block   = new stdclass();
+$lang->action  = new stdclass();
+$lang->effort  = new stdclass();
+$lang->setting = new stdclass();
+$lang->task    = new stdclass();
 
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = 'Company|company|setbasic|';
@@ -179,13 +200,19 @@ $lang->error->length          = array("<strong>%s</strong>length should be<stron
 $lang->error->reg             = "<strong>%s</strong>should like<strong>%s</strong>";
 $lang->error->unique          = "<strong>%s</strong>has<strong>%s</strong>already. If you are sure this record has been deleted, you can restore it in admin panel, trash page.";
 $lang->error->notempty        = "<strong>%s</strong>can not be empty.";
+$lang->error->empty           = "<strong>%s</strong> must be empty.";
 $lang->error->equal           = "<strong>%s</strong>must be<strong>%s</strong>.";
+$lang->error->gt              = "<strong>%s</strong> should be geater than <strong>%s</strong>.";
+$lang->error->ge              = "<strong>%s</strong> should be not less than <strong>%s</strong>.";
+$lang->error->lt              = "<strong>%s</strong> should be less than <strong>%s</strong>";
+$lang->error->le              = "<strong>%s</strong> should be no greater than <strong>%s</strong>.";
 $lang->error->in              = '<strong>%s</strong>must in<strong>%s</strong>。';
 $lang->error->int             = array("<strong>%s</strong>should be interger", "<strong>%s</strong>should between<strong>%s-%s</strong>.");
 $lang->error->float           = "<strong>%s</strong>should be a interger or float.";
 $lang->error->email           = "<strong>%s</strong>should be email.";
 $lang->error->URL             = "<strong>%s</strong>should be url.";
 $lang->error->date            = "<strong>%s</strong>should be date";
+$lang->error->code            = '<strong>%s</strong> should be a combination of letters or numbers.';
 $lang->error->account         = "<strong>%s</strong>should be a valid account.";
 $lang->error->passwordsame    = "Two passwords must be the same";
 $lang->error->passwordrule    = "Password should more than six letters.";

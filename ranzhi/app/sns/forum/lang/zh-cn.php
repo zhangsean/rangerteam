@@ -26,6 +26,7 @@ $lang->forum->updateDesc    = '该更新操作会重新计算每个版块的发�
 $lang->forum->successUpdate = '更新数据成功';
 
 /* Adjust the pager. */
+$lang->pager = new stdclass();
 $lang->pager->noRecord      = '';
 $lang->pager->digest        = str_replace('记录', '主题', $lang->pager->digest);
 $lang->pager->settedInForum = true;    // Set this switch thus in thread module can avoid overiding them.

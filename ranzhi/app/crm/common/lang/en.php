@@ -62,7 +62,7 @@ $lang->contract->menu->setting = '<i class="icon-wrench"></i> Configure|contract
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->role     = 'Roles|setting|lang|module=user&field=roleList';
+$lang->setting->menu->user     = 'Roles|setting|lang|module=user&field=roleList';
 $lang->setting->menu->product  = 'Product Status|setting|lang|module=product&field=statusList';
 $lang->setting->menu->customer = 'Customer Status|setting|lang|module=customer&field=typeList';
 
