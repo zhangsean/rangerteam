@@ -84,6 +84,8 @@ $appRoot = '../app/';
 /* checking actions of every module. */
 echo '-------------lang checking-----------------' . "\n";
 include '../app/sys/common/lang/zh-cn.php';
+include '../app/crm/common/lang/zh-cn.php';
+include '../app/oa/common/lang/zh-cn.php';
 include '../config/config.php';
 
 foreach(glob($appRoot . '*') as $appPath)
@@ -108,6 +110,14 @@ foreach(glob($appRoot . '*') as $appPath)
                 if(strpos(trim($line), '$lang') === 0)
                 {
                     list($mainKey, $mainValue) = explode('=', $line);
+                    if(!isset($lines[$lineNO]) or strpos(trim($lines[$lineNO]), '$lang') !== 0)
+                    {
+                        echo "module $moduleName of $appName need checking, command is:";
+                        echo " vim -O +$lineNO ../app/$appName/$moduleName/lang/zh-cn.php +$lineNO ../app/$appName/$moduleName/lang/$langKey.php \n";
+                        break;
+
+                    }
+
                     list($key, $value) = explode('=', $lines[$lineNO]);
                     if(trim($mainKey) != trim($key))
                     {
@@ -157,7 +167,8 @@ $app = new app;
 foreach(glob($appRoot . '*') as $appPath)
 {
     error_reporting(E_WARNING | E_STRICT );
-    $lang = new stdclass();
+    $lang       = new stdclass();
+    $lang->menu = new stdclass();
 
     foreach(glob($appPath . '/*') as $modulePath)
     {
