@@ -37,6 +37,7 @@ $themeRoot  = $baseDir . '/www/theme/';
 /* Common css files. */
 $cssCode  = str_replace('../fonts', '../zui/fonts', file_get_contents($themeRoot . 'zui/css/min.css'));
 $cssCode .= file_get_contents($themeRoot . 'default/style.css');
+$cssCode .= file_get_contents($themeRoot . 'default/admin.css');
 
 /* Combine them. */
 $cssFile = $themeRoot . "default/all.css";
