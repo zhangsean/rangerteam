@@ -16,8 +16,8 @@ $lang->block->lblBlock = 'Block';
 $lang->block->num     = 'Number';
 $lang->block->orderBy = 'Order';
 $lang->block->status  = 'Status';
-$lang->block->asc     = 'Ascending';
-$lang->block->desc    = 'Descending';
-$lang->block->actions = 'Action';
+$lang->block->asc     = 'ASC';
+$lang->block->desc    = 'DESC';
+$lang->block->actions = 'Options';
 
-$lang->block->admin = 'Manage block';
+$lang->block->admin = 'Manage blocks';
