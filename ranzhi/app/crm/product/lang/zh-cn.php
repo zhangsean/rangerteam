@@ -22,8 +22,8 @@ $lang->product->summary     = '简介';
 $lang->product->roles       = '角色';
 $lang->product->createdBy   = '添加者';
 $lang->product->createdDate = '添加时间';
-$lang->product->editedDate  = '编辑时间';
 $lang->product->editedBy    = '编辑者';
+$lang->product->editedDate  = '编辑时间';
 
 $lang->product->list        = '产品列表';
 $lang->product->browse      = '维护产品';

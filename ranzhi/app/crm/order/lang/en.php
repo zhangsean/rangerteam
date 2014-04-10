@@ -73,4 +73,4 @@ $lang->order->activated = "Activated by <strong>%s</strong>";
 $lang->team = new stdclass();
 $lang->team->account = 'Account';
 $lang->team->role    = 'Role';
-$lang->team->join    = 'Join';
+$lang->team->join    = 'Join Date';
