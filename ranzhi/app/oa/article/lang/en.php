@@ -45,6 +45,11 @@ $lang->blog->list   = 'List';
 $lang->blog->create = 'Create';
 $lang->blog->edit   = 'Edit';
 
+$lang->announce->admin  = 'Announce';
+$lang->announce->list   = 'List';
+$lang->announce->create = 'Create';
+$lang->announce->edit   = 'Edit';
+
 $lang->page = new stdclass();
 $lang->page->admin  = 'Admin';
 $lang->page->list   = 'List';
