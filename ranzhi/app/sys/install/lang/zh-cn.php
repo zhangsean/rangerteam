@@ -23,7 +23,7 @@ $lang->install->welcome          = "您睿智地选择了$lang->ranzhi!";
 $lang->install->desc             = <<<EOT
 <blockquote>
   <strong>{$lang->ranzhi}</strong>由<strong><a href='http://www.cnezsoft.com' target='_blank' class='red'>青岛易软天创网络科技有限公司</a>开发</strong>，
-  内置项目、客户、现金流、办公和沟通共五大核心功能模块，
+  <!--内置项目、客户、现金流、办公和沟通共五大核心功能模块，-->
   专为中小型团队量身打造，是中小型团队信息化的首选工具！
 
   官方网站：<a href='http://www.ranzhi.org' target='_blank'>http://www.ranzhi.org</a>

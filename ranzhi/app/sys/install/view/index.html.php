@@ -20,9 +20,7 @@
             <h3><?php echo $lang->install->welcome;?></h3>
             <div><?php printf(nl2br(trim($lang->install->desc)), $config->version);?></div>
           </div>
-          <div class='col-md-4'>
-            <div id='ranzhi'><?php echo html::image($themeRoot . '/default/images/ips/app-ranzhi.png');?></div>
-          </div>
+          <div class='col-md-4'><!--<div id='ranzhi'><?php echo html::image($themeRoot . '/default/images/ips/app-ranzhi.png');?></div>--></div>
         </div>
       </div>
       <?php if(!isset($latestRelease)):?>
