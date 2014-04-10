@@ -113,6 +113,7 @@ class article extends control
         {
             $this->article->create($type);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $locate = $this->inlink('admin', "type={$type}");
             if($type == 'announce') $locate = $this->createLink('announce');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
         }
@@ -140,16 +141,14 @@ class article extends control
 
         $article    = $this->article->getByID($articleID, $replaceTag = false);
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
-        if(empty($categories) && $type != 'page')
-        {
-            die(js::alert($this->lang->tree->noCategories) . js::locate($this->createLink('tree', 'browse', "type=$type")));
-        }
 
         if($_POST)
         {
             $this->article->update($articleID, $type);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=$type")));
+            $locate = $this->inlink('admin', "type={$type}");
+            if($type == 'announce') $locate = $this->createLink('announce');
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
         }
 
         $this->view->title      = $this->lang->article->edit;
