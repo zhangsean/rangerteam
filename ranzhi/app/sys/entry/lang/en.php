@@ -25,8 +25,14 @@ $lang->entry->login     = 'Login url';
 $lang->entry->logout    = 'Logout url';
 $lang->entry->nothing   = 'No record.';
 $lang->entry->open      = 'Open';
+$lang->entry->control   = 'Window Control';
+$lang->entry->size      = 'Window Size';
+$lang->entry->position  = 'Position';
+$lang->entry->width     = 'Width';
+$lang->entry->height    = 'Height';
 
 $lang->entry->confirmDelete = 'Are you sure to delete this App?';
+$lang->entry->lblBlock      = 'Block';
 
 $lang->entry->note = new stdClass();
 $lang->entry->note->name    = 'entry name';
@@ -38,7 +44,7 @@ $lang->entry->note->api     = 'The url of getting blocks';
 $lang->entry->note->ip      = "Use comma between two IPs, and support IP segment, for example 192.168.1.*";
 
 $lang->entry->error = new stdClass();
-$lang->entry->error->name = 'Please input name';
+$lang->entry->error->name  = 'Please input name';
 $lang->entry->error->code  = 'Please input code';
 $lang->entry->error->key   = 'Please input key';
 $lang->entry->error->ip    = 'Please input IP';
@@ -47,5 +53,12 @@ $lang->entry->openList['']       = '';
 $lang->entry->openList['blank']  = 'Blank';
 $lang->entry->openList['iframe'] = 'Iframe';
 
-$lang->entry->instruction = <<<EOT
-EOT;
+$lang->entry->sizeList['max']    = 'Maximize';
+$lang->entry->sizeList['custom'] = 'Custom';
+
+$lang->entry->positionList['default'] = 'Default';
+$lang->entry->positionList['center']  = 'Center';
+
+$lang->entry->controlList['none']   = 'None';
+$lang->entry->controlList['full']   = 'Full';
+$lang->entry->controlList['simple'] = 'Transparent';
