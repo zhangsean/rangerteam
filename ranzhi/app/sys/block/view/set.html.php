@@ -20,7 +20,7 @@ if($type == 'html')
 }
 ?>
 <form method='post' id='ajaxForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=$type")?>'>
-  <table class='table table-form w-p80'>
+  <table class='table table-form'>
   <?php if($type == 'rss'):?>
     <tbody>
       <tr class='a-left'>

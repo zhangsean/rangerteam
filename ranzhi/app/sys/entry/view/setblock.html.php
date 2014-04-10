@@ -17,7 +17,7 @@ $themeRoot = $webRoot . "theme/";
 include "../../common/view/chosen.html.php";
 ?>
 <form method='post' id='ajaxForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=$type")?>'>
-  <table class='table table-form w-p80'>
+  <table class='table table-form'>
     <tbody>
       <tr class='a-left'>
         <th class='w-100px'><?php echo $lang->block->name;?></th>

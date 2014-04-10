@@ -10,8 +10,8 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../common/view/header.lite.html.php';?>
-<table class='table table-form w-p80'>
+<?php include '../../common/view/header.modal.html.php';?>
+<table class='table table-form'>
   <tr>
     <th class='w-100px'><?php echo $lang->block->lblEntry; ?></th>
     <?php
@@ -26,7 +26,5 @@
   <tr></tr>
 </table>
 <div id='blockParam'></div>
-<?php include '../../common/view/footer.lite.html.php';?>
 <?php js::set('index', $index)?>
-</body>
-</html>
+<?php include '../../common/view/footer.modal.html.php';?>
