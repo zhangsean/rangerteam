@@ -23,6 +23,7 @@ class doc extends control
         $this->loadModel('user');
         $this->loadModel('tree');
         $this->loadModel('action');
+        $this->loadModel('common', 'crm');
         $this->loadModel('product', 'crm');
         //$this->loadModel('project');
         $this->libs = $this->doc->getLibs();
@@ -35,7 +36,6 @@ class doc extends control
         }
         $libMenu += (array)$this->lang->doc->menu;
         $this->lang->doc->menu = (object)$libMenu;
-
     }
 
     /**
