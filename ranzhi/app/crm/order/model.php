@@ -129,7 +129,7 @@ class orderModel extends model
         $member = new stdclass();
         $member->order   = $orderID;
         $member->account = $this->app->user->account;
-        $member->role    = $this->lang->user->roleList[$this->app->user->role];
+        $member->role    = $this->app->user->role;
         $member->join    = helper::today();
 
         $this->dao->insert(TABLE_TEAM)->data($member)->exec();
