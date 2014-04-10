@@ -45,6 +45,7 @@ $lang->blog->list   = '博客列表';
 $lang->blog->create = '发布博客';
 $lang->blog->edit   = '编辑博客';
 
+$lang->announce = new stdclass(); 
 $lang->announce->admin  = '维护公告';
 $lang->announce->list   = '公告列表';
 $lang->announce->create = '发布公告';
