@@ -159,7 +159,20 @@ class blockModel extends model
         $this->loadModel('setting');
         /* Mark this app has init. */
         $this->setting->setItem("$account.$app.common.init.block", true);
-        foreach($blocks as $key => $block) $this->setting->setItem("$account.$app.index.block.$key", json_encode($block));
+        $this->loadModel('entry');
+        foreach($blocks as $key => $block)
+        {
+            if(isset($block['entryID']) and (int)$block['entryID'] == 0)
+            {
+                $entry = $this->entry->getByCode($block['entryID']);
+
+                /* If has not this entry then do not add it. */
+                if(!$entry) continue;
+                $block['entryID'] = $entry->id;
+            }
+
+            $this->setting->setItem("$account.$app.index.block.$key", json_encode($block));
+        }
 
         return !dao::isError();
     }
