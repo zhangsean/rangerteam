@@ -36,13 +36,7 @@ class blockModel extends model
      */
     public function getBlockList()
     {
-        $blocks = new stdclass();
-
-        $blocks->order    = $this->lang->block->order;
-        $blocks->task     = $this->lang->block->task;
-        $blocks->contract = $this->lang->block->contract;
-
-        return json_encode($blocks);
+        return json_encode($this->lang->block->availableBlocks);
     }
 
     /**
@@ -55,26 +49,19 @@ class blockModel extends model
     {
         $this->app->loadLang('order');
 
-        $orderByList['id_asc']        = $this->lang->order->id . $this->lang->block->asc;
-        $orderByList['id_desc']       = $this->lang->order->id . $this->lang->block->desc;
-        $orderByList['customer_asc']  = $this->lang->order->customer . $this->lang->block->asc;
-        $orderByList['customer_desc'] = $this->lang->order->customer . $this->lang->block->desc;
-        $orderByList['product_asc']   = $this->lang->order->product . $this->lang->block->asc;
-        $orderByList['product_desc']  = $this->lang->order->product . $this->lang->block->desc;
-
         $params = new stdclass();
         $params->num['name']        = $this->lang->block->num;
         $params->num['default']     = 15; 
         $params->num['control']     = 'input';
 
         $params->orderBy['name']    = $this->lang->block->orderBy;
-        $params->orderBy['default'] = 'id_asc';
-        $params->orderBy['values']  = $orderByList;
+        $params->orderBy['default'] = 'id_desc';
+        $params->orderBy['options']  = $this->lang->block->orderByList->order;
         $params->orderBy['control'] = 'select';
 
         $statusList = array('' => '') + $this->lang->order->statusList;
         $params->status['name']    = $this->lang->order->status;
-        $params->status['values']  = $statusList;
+        $params->status['options']  = $statusList;
         $params->status['control'] = 'select';
         $params->status['attr']    = 'multiple';
 
@@ -91,25 +78,18 @@ class blockModel extends model
     {
         $this->app->loadLang('task');
 
-        $orderByList['id_asc']        = $this->lang->task->id . $this->lang->block->asc;
-        $orderByList['id_desc']       = $this->lang->task->id . $this->lang->block->desc;
-        $orderByList['pri_asc']       = $this->lang->task->pri . $this->lang->block->asc;
-        $orderByList['pri_desc']      = $this->lang->task->pri . $this->lang->block->desc;
-        $orderByList['deadline_asc']  = $this->lang->task->deadline . $this->lang->block->asc;
-        $orderByList['deadline_desc'] = $this->lang->task->deadline . $this->lang->block->desc;
-
         $params = new stdclass();
         $params->num['name']        = $this->lang->block->num;
         $params->num['default']     = 15; 
         $params->num['control']     = 'input';
 
         $params->orderBy['name']    = $this->lang->block->orderBy;
-        $params->orderBy['default'] = 'id_asc';
-        $params->orderBy['values']  = $orderByList;
+        $params->orderBy['default'] = 'id_desc';
+        $params->orderBy['options']  = $this->lang->block->orderByList->task;
         $params->orderBy['control'] = 'select';
 
         $params->status['name']    = $this->lang->task->status;
-        $params->status['values']  = $this->lang->task->statusList;
+        $params->status['options'] = $this->lang->task->statusList;
         $params->status['control'] = 'select';
         $params->status['attr']    = 'multiple';
 
@@ -126,13 +106,6 @@ class blockModel extends model
     {
         $this->app->loadLang('contract');
 
-        $orderByList['id_asc']        = $this->lang->contract->id . $this->lang->block->asc;
-        $orderByList['id_desc']       = $this->lang->contract->id . $this->lang->block->desc;
-        $orderByList['customer_asc']  = $this->lang->contract->customer . $this->lang->block->asc;
-        $orderByList['customer_desc'] = $this->lang->contract->customer . $this->lang->block->desc;
-        $orderByList['amount_asc']    = $this->lang->contract->amount . $this->lang->block->asc;
-        $orderByList['amount_desc']   = $this->lang->contract->amount . $this->lang->block->desc;
-
         $params = new stdclass();
         $params->num['name']        = $this->lang->block->num;
         $params->num['default']     = 15; 
@@ -140,13 +113,13 @@ class blockModel extends model
 
         $params->orderBy['name']    = $this->lang->block->orderBy;
         $params->orderBy['default'] = 'id_asc';
-        $params->orderBy['values']  = $orderByList;
+        $params->orderBy['options']  = $this->lang->block->orderByList->contract;
         $params->orderBy['control'] = 'select';
 
         unset($this->lang->contract->statusList[0]);
         $statusList = array('' => '') + $this->lang->contract->statusList;
         $params->status['name']    = $this->lang->contract->status;
-        $params->status['values']  = $statusList;
+        $params->status['options'] = $statusList;
         $params->status['control'] = 'select';
         $params->status['attr']    = 'multiple';
 

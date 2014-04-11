@@ -40,17 +40,17 @@
           $control = $param['control'];
           $attr    = empty($param['attr']) ? '' : $param['attr'];
           $default = $block ? (isset($block->params->$key) ? $block->params->$key : '') : (isset($param['default']) ? $param['default'] : '');
-          $values  = isset($param['values']) ? $param['values'] : array();
+          $options = isset($param['options']) ? $param['options'] : array();
           if($control == 'select' or $control == 'radio' or $control == 'checkbox')
           {
               $chosen = $control == 'select' ? 'chosen' : '';
               if(strpos($attr, 'multiple') !== false)
               {
-                  echo html::$control("params[$key][]", $values, $default, "class='form-control " . $chosen . "' $attr");
+                  echo html::$control("params[$key][]", $options, $default, "class='form-control " . $chosen . "' $attr");
               }
               else
               {
-                  echo html::$control("params[$key]", $values, $default, "class='form-control " . $chosen .  "' $attr");
+                  echo html::$control("params[$key]", $options, $default, "class='form-control " . $chosen .  "' $attr");
               }
           }
           else
