@@ -30,7 +30,5 @@ $(function()
     </div>
     <div class="modal-body">
 <?php else:?>
-<?php 
-include  $this->app->getAppRoot() . '/common/view/header.html.php';
-?>
+<?php include $this->app->getAppRoot() . '/common/view/header.html.php';?>
 <?php endif;?>

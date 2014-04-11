@@ -10,7 +10,11 @@
  * @link        http://www.ranzhi.org
  */
 ?>
+<?php if(helper::isAjaxRequest()):?>
     </div>
   </div>
 </div>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
+<?php else:?>
+<?php include  $this->app->getAppRoot() . '/common/view/footer.html.php'; ?>
+<?php endif;?>
