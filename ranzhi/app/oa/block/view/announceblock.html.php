@@ -12,11 +12,12 @@
 ?>
 <table class='table table-data table-hover' id='oaBlockAnnounce'>
   <?php foreach($announces as $id => $announce):?>
-  <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id='{$this->get->entry}'" : ''?>
-  <tr data-url='<?php echo $this->createLink('announce', 'view', "announceID=$id"); ?>' <?php echo $appid?>>
-    <td><?php echo $announce->title?></td>
+  <tr>
+    <td><?php echo html::a($this->createLink('announce', 'view', "announceID=$id"), $announce->title, "data-toggle='modal'")?></td>
     <td class='w-100px'><?php echo date('y-m-d H:i', strtotime($announce->addedDate))?></td>
   </tr>
   <?php endforeach;?>
 </table>
-<script>$('#oaBlockAnnounce').dataTable();</script>
+<script>
+$(function(){$.setAjaxModal();})
+</script>

@@ -11,7 +11,7 @@
           <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span>&nbsp; 
           <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span> &nbsp; 
         </div>
-        <h4><?php echo html::a($url, $article->title);?></h4>
+        <h4><?php echo html::a($url, $article->title, "data-toggle='modal'");?></h4>
       </div>
       <div class='item-content'>
         <?php if(!empty($article->image)):?>

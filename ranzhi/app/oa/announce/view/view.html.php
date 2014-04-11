@@ -1,7 +1,7 @@
-<?php include '../../common/view/header.html.php'; ?>
+<?php include '../../../sys/common/view/header.modal.html.php'; ?>
 <div class='article'>
   <header>
-    <h1><?php echo $announce->title;?></h1>
+    <h3 style='margin-top:0px;'><?php echo $announce->title;?></h3>
     <dl class='dl-inline'>
       <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $author->realname);?>'><i class='icon-user icon-large'></i> <?php echo $author->realname; ?></dd>
       <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, $announce->addedDate);?>'><i class='icon-time icon-large'></i> <?php echo $announce->addedDate; ?></dd>
@@ -25,4 +25,4 @@
     </ul>
   </footer>
 </div>
-<?php include '../../common/view/footer.html.php';?>
+<?php include '../../../sys/common/view/footer.modal.html.php'; ?>
