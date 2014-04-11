@@ -9,6 +9,9 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+?>
+<?php if(helper::isAjaxRequest()):?>
+<?php
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
@@ -26,3 +29,8 @@ $(function()
       <h4 class="modal-title"><?php if(!empty($title)) echo $title; ?></h4>
     </div>
     <div class="modal-body">
+<?php else:?>
+<?php 
+include  $this->app->getAppRoot() . '/common/view/header.html.php';
+?>
+<?php endif;?>

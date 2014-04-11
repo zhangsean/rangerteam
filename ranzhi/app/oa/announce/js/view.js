@@ -1,5 +1,5 @@
 $(function()
 {
-    $.setAjaxLoader('.previous a', '#ajaxModal');
-    $.setAjaxLoader('.next a', '#ajaxModal');
+    $.setAjaxLoader('#ajaxModal .previous a', '#ajaxModal');
+    $.setAjaxLoader('#ajaxModal .next a', '#ajaxModal');
 })

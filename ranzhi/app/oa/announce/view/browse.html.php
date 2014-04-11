@@ -1,4 +1,5 @@
 <?php include '../../common/view/header.html.php'; ?>
+<div id="mainContent">
 <div class='panel list list-condensed'>
   <div class='panel-heading'><h4><i class='icon-calendar'></i><?php echo $lang->announce->browse;?></h4></div>
   <section class='items items-hover'>
@@ -11,7 +12,7 @@
           <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span>&nbsp; 
           <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span> &nbsp; 
         </div>
-        <h4><?php echo html::a($url, $article->title, "data-toggle='modal'");?></h4>
+        <h4><?php echo html::a($url, $article->title);?></h4>
       </div>
       <div class='item-content'>
         <?php if(!empty($article->image)):?>
@@ -32,5 +33,6 @@
     <?php endforeach;?>
   </section>
   <footer class='clearfix'><?php $pager->show('right', 'short');?></footer>
+</div>
 </div>
 <?php include '../../common/view/footer.html.php';?>
