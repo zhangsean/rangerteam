@@ -56,12 +56,12 @@ class blockModel extends model
 
         $params->orderBy['name']    = $this->lang->block->orderBy;
         $params->orderBy['default'] = 'id_desc';
-        $params->orderBy['options']  = $this->lang->block->orderByList->order;
+        $params->orderBy['options'] = $this->lang->block->orderByList->order;
         $params->orderBy['control'] = 'select';
 
         $statusList = array('' => '') + $this->lang->order->statusList;
         $params->status['name']    = $this->lang->order->status;
-        $params->status['options']  = $statusList;
+        $params->status['options'] = $statusList;
         $params->status['control'] = 'select';
         $params->status['attr']    = 'multiple';
 
@@ -79,13 +79,13 @@ class blockModel extends model
         $this->app->loadLang('task');
 
         $params = new stdclass();
-        $params->num['name']        = $this->lang->block->num;
-        $params->num['default']     = 15; 
-        $params->num['control']     = 'input';
+        $params->num['name']    = $this->lang->block->num;
+        $params->num['default'] = 15; 
+        $params->num['control'] = 'input';
 
         $params->orderBy['name']    = $this->lang->block->orderBy;
         $params->orderBy['default'] = 'id_desc';
-        $params->orderBy['options']  = $this->lang->block->orderByList->task;
+        $params->orderBy['options'] = $this->lang->block->orderByList->task;
         $params->orderBy['control'] = 'select';
 
         $params->status['name']    = $this->lang->task->status;
@@ -107,13 +107,13 @@ class blockModel extends model
         $this->app->loadLang('contract');
 
         $params = new stdclass();
-        $params->num['name']        = $this->lang->block->num;
-        $params->num['default']     = 15; 
-        $params->num['control']     = 'input';
+        $params->num['name']    = $this->lang->block->num;
+        $params->num['default'] = 15; 
+        $params->num['control'] = 'input';
 
         $params->orderBy['name']    = $this->lang->block->orderBy;
-        $params->orderBy['default'] = 'id_asc';
-        $params->orderBy['options']  = $this->lang->block->orderByList->contract;
+        $params->orderBy['default'] = 'id_desc';
+        $params->orderBy['options'] = $this->lang->block->orderByList->contract;
         $params->orderBy['control'] = 'select';
 
         unset($this->lang->contract->statusList[0]);
