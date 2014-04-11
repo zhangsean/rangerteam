@@ -14,9 +14,9 @@ $lang->app->name = 'CASH';
 
 $lang->menu->cash = new stdclass();
 $lang->menu->cash->dashboard = 'Dashboard|index|index|';
-$lang->menu->cash->trade     = 'Trade|trade|index|';
+$lang->menu->cash->trade     = 'Bookkeeping|trade|index|';
 $lang->menu->cash->invocie   = 'Invocie|invocie|index|';
-$lang->menu->cash->claim     = 'Claim|claim|index|';
+$lang->menu->cash->claim     = 'Expenses Claim|claim|index|';
 $lang->menu->cash->report    = 'Report|report|index|';
 $lang->menu->cash->account   = 'Account|account|index|';
-$lang->menu->cash->setting   = 'Setting|setting|index|';
+$lang->menu->cash->setting   = 'Settings|setting|index|';
