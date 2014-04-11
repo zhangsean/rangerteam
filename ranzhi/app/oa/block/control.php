@@ -40,7 +40,7 @@ class block extends control
             $code = strtolower($this->get->blockid);
             $func = 'print' . ucfirst($code) . 'Block';
             $this->$func();
-        }   
+        }
     }
 
     /**
@@ -62,16 +62,15 @@ class block extends control
 
         $this->app->loadLang('block', 'sys');
 
-        $blocks     = json_decode($this->block->getBlockList());
-        $blockPairs = array('' => '');
-        foreach($blocks as $code => $block) $blockPairs[$code] = $block->name;
 
         $personalBlocks = isset($this->config->personal->index->block) ? $this->config->personal->index->block : new stdclass();
         $block          = (isset($personalBlocks->{'b' . $index}) and $personalBlocks->{'b' . $index}->app == 'oa') ? json_decode($personalBlocks->{'b' . $index}->value) : array();
         $blockID        = $blockID ? $blockID : (($block and $personalBlocks->{'b' . $index}->app == 'oa') ? $block->blockID : '');
 
+        $blocks     = json_decode($this->block->getBlockList(), true);
+        $this->view->blocks  = array_merge(array(''), $blocks);
+
         $this->view->title   = $this->lang->block->admin;
-        $this->view->blocks  = $blockPairs;
         $this->view->params  = $blockID ? json_decode($this->block->{'get' . ucfirst($blockID) . 'Params'}(), true) : array();;
         $this->view->blockID = $blockID;
         $this->view->block   = $block;

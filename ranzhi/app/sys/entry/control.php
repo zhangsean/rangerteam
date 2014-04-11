@@ -238,12 +238,7 @@ class entry extends control
 
         if(empty($blocks)) return false;
 
-        $blockPairs = array();
-        foreach($blocks as $code => $block)
-        {
-            $blockPairs[$code] = $block->name;
-        }
-        $blockPairs = array('' => '') + $blockPairs;
+        $blockPairs = array('' => '') + $blocks;
 
         $block = $this->loadModel('block')->getBlock($index);
 

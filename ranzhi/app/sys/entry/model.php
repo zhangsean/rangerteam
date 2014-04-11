@@ -202,7 +202,7 @@ class entryModel extends model
      * 
      * @param  object    $entry 
      * @access public
-     * @return json
+     * @return array
      */
     public function getBlocksByAPI($entry)
     {
@@ -229,7 +229,7 @@ class entryModel extends model
 
         $blocks = $http->get($link);
 
-        return json_decode($blocks);
+        return json_decode($blocks, true);
     }
 
     /**

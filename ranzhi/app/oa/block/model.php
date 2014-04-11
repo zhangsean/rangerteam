@@ -37,10 +37,7 @@ class blockModel extends model
     public function getBlockList()
     {
         $blocks = new stdclass();
-
-        $blocks->announce = new stdclass();
-
-        $blocks->announce->name = $this->lang->block->announce;
+        $blocks->announce = $this->lang->block->announce;
 
         return json_encode($blocks);
     }

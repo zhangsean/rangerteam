@@ -40,7 +40,7 @@ class block extends control
             $code = strtolower($this->get->blockid);
             $func = 'print' . ucfirst($code) . 'Block';
             $this->$func();
-        }   
+        }
     }
 
     /**
@@ -62,16 +62,12 @@ class block extends control
 
         $this->app->loadLang('block', 'sys');
 
-        $blocks     = json_decode($this->block->getBlockList());
-        $blockPairs = array('' => '');
-        foreach($blocks as $code => $block) $blockPairs[$code] = $block->name;
-
         $personalBlocks = isset($this->config->personal->index->block) ? $this->config->personal->index->block : new stdclass();
         $block          = (isset($personalBlocks->{'b' . $index}) and $personalBlocks->{'b' . $index}->app == 'crm') ? json_decode($personalBlocks->{'b' . $index}->value) : array();
         $blockID        = $blockID ? $blockID : (($block and $personalBlocks->{'b' . $index}->app == 'crm') ? $block->blockID : '');
 
         $this->view->title   = $this->lang->block->admin;
-        $this->view->blocks  = $blockPairs;
+        $this->view->blocks  = array_merge(array(''), json_decode($this->block->getBlockList(), true));
         $this->view->params  = $blockID ? json_decode($this->block->{'get' . ucfirst($blockID) . 'Params'}(), true) : array();;
         $this->view->blockID = $blockID;
         $this->view->block   = $block;
@@ -152,7 +148,6 @@ class block extends control
         $this->view->sso    = base64_decode($this->get->sso);
         $this->view->code   = $this->get->blockid;
 
-
         $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
             ->where("(createdBy='$params->account' OR assignedTo = '$params->account')")
             ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
@@ -179,7 +174,6 @@ class block extends control
 
         $this->view->sso    = base64_decode($this->get->sso);
         $this->view->code   = $this->get->blockid;
-
 
         $this->view->contracts = $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('createdBy')->eq($params->account)

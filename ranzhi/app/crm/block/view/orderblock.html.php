@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<table class='table table-data table-hover' id='crmBlockOrder'>
+<table class='table table-data table-hover block-order'>
   <tr>
     <th class='w-id text-center'><?php echo $lang->order->id?></th>
     <th><?php echo $lang->order->customer?></th>
@@ -27,4 +27,4 @@
   </tr>
   <?php endforeach;?>
 </table>
-<script>$('#crmBlockOrder').dataTable();</script>
+<script>$('.block-order').dataTable();</script>

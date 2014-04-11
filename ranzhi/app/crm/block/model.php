@@ -38,13 +38,9 @@ class blockModel extends model
     {
         $blocks = new stdclass();
 
-        $blocks->order    = new stdclass();
-        $blocks->task     = new stdclass();
-        $blocks->contract = new stdclass();
-
-        $blocks->order->name    = $this->lang->block->order;
-        $blocks->task->name     = $this->lang->block->task;
-        $blocks->contract->name = $this->lang->block->contract;
+        $blocks->order    = $this->lang->block->order;
+        $blocks->task     = $this->lang->block->task;
+        $blocks->contract = $this->lang->block->contract;
 
         return json_encode($blocks);
     }

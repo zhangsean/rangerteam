@@ -17,6 +17,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
 ?>
 <div class='dashboard dashboard-draggable' id='dashboard'>
   <div class='row'>
+    <?php $index = 0;?>
     <?php foreach($blocks as $key => $block):?>
     <?php
     $index = str_replace('b', '', $key);
@@ -42,7 +43,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
     </div>
     <?php endforeach;?>
   </div>
-  <div class='dashboard-actions'><a class='btn btn-primary' href='<?php echo $this->createLink("block", "admin", "index=" . empty($index) ? 1 : ($index + 1)); ?>' data-toggle='modal'><i class='icon-plus'></i> <?php echo $lang->block->createBlock?></a></div>
+  <div class='dashboard-actions'><a class='btn btn-primary' href='<?php echo $this->createLink("block", "admin", "index=" . ($index + 1)); ?>' data-toggle='modal'><i class='icon-plus'></i> <?php echo $lang->block->createBlock?></a></div>
 </div>
 <script>config.ordersSaved = '<?php echo $lang->block->ordersSaved; ?>';</script>
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>

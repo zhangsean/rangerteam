@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<table class='table table-data table-hover' id='crmBlockTask'>
+<table class='table table-data table-hover block-task'>
   <tr>
     <th class='w-50px text-center'><?php echo $lang->task->id?></th>
     <th class='w-20px text-center'><?php echo $lang->task->lblPri?></th>
@@ -29,4 +29,4 @@
   </tr>
   <?php endforeach;?>
 </table>
-<script>$('#crmBlockTask').dataTable();</script>
+<script>$('.block-task').dataTable();</script>
