@@ -16,7 +16,7 @@ $lang->block->contract = 'My Contracts';
 $lang->block->lblBlock = 'Block';
 
 $lang->block->num     = 'Amount';
-$lang->block->orderBy = 'Sort NO.';
+$lang->block->orderBy = 'Order By';
 $lang->block->status  = 'Status';
 $lang->block->asc     = 'ASC';
 $lang->block->desc    = 'DESC';
