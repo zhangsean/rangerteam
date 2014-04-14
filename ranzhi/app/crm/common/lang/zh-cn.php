@@ -62,7 +62,7 @@ $lang->contract->menu->setting = '<i class="icon-wrench"></i> 系统设置|contr
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->user     = '员工角色|setting|lang|module=user&field=roleList';
+$lang->setting->menu->role     = '员工角色|setting|lang|module=user&field=roleList';
 $lang->setting->menu->product  = '产品状态|setting|lang|module=product&field=statusList';
 $lang->setting->menu->customer = '客户类型|setting|lang|module=customer&field=typeList';
 

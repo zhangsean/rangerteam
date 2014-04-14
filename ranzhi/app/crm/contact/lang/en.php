@@ -9,11 +9,10 @@
  * @version     $Id $
  * @link        http://www.ranzhi.org
  */
-$lang->contact->common        = 'Contact';
 $lang->contact->id            = 'ID';
 $lang->contact->customer      = 'Customer';
 $lang->contact->realname      = 'Name';
-$lang->contact->nickname      = 'Nick';
+$lang->contact->nickname      = 'Nickname';
 $lang->contact->avatar        = 'Avatar';
 $lang->contact->birthday      = 'Birthday';
 $lang->contact->gender        = 'Gender';
@@ -22,11 +21,11 @@ $lang->contact->skype         = 'Skype';
 $lang->contact->qq            = 'QQ';
 $lang->contact->yahoo         = 'Y!';
 $lang->contact->gtalk         = 'GTalk';
-$lang->contact->wangwang      = 'Wangwang';
+$lang->contact->wangwang      = 'Trade Manager';
 $lang->contact->site          = 'Site';
 $lang->contact->mobile        = 'Mobile';
 $lang->contact->phone         = 'Phone';
-$lang->contact->weibo         = 'Weibo';
+$lang->contact->weibo         = 'Sina Weibo';
 $lang->contact->weixin        = 'Wechat';
 $lang->contact->desc          = 'Desc';
 $lang->contact->createdBy     = 'Created By';
@@ -42,7 +41,7 @@ $lang->contact->genderList['m'] = 'Male';
 
 $lang->contact->create = 'Create';
 $lang->contact->list   = 'List';
-$lang->contact->edit   = 'Update';
+$lang->contact->edit   = 'Edit';
 
 $lang->contact->basicInfo   = 'Basic Info';
 $lang->contact->contactInfo = 'Contact Info';

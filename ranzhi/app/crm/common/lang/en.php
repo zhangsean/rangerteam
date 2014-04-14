@@ -20,7 +20,7 @@ $lang->menu->crm->customer  = 'Customers|customer|index|';
 $lang->menu->crm->contract  = 'Contracts|contract|index|';
 $lang->menu->crm->product   = 'Products|product|index|';
 $lang->menu->crm->contact   = 'Contact|contact|index|';
-$lang->menu->crm->setting   = 'Setting|setting|lang|module=user&field=roleList';
+$lang->menu->crm->setting   = 'Settings|setting|lang|module=user&field=roleList';
 
 /* Menu of customer module. */
 $lang->customer = new stdclass();
@@ -43,8 +43,8 @@ $lang->order->menu->create = '<i class="icon-plus"></i> Create Order|order|creat
 /* Menu of contact module. */
 $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
-$lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> Contacts List|contact|browse|', 'alias' => 'edit');
-$lang->contact->menu->create = '<i class="icon-plus"></i> Add Contact|contact|create|';
+$lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> Contact List|contact|browse|', 'alias' => 'edit');
+$lang->contact->menu->create = '<i class="icon-plus"></i> Create Contact|contact|create|';
 
 /* Menu of task module. */
 $lang->task = new stdclass();
@@ -57,12 +57,12 @@ $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
 $lang->contract->menu->browse = array('link' => '<i class="icon-th-list"></i> Contract List|contract|browse|', 'alias' => 'edit,view');
 $lang->contract->menu->create = '<i class="icon-plus"></i> Create Contract|contract|create|';
-$lang->contract->menu->setting = '<i class="icon-wrench"></i> Configure|contract|setting|';
+$lang->contract->menu->setting = '<i class="icon-wrench"></i> Settings|contract|setting|';
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->user     = 'Roles|setting|lang|module=user&field=roleList';
+$lang->setting->menu->role     = 'Roles|setting|lang|module=user&field=roleList';
 $lang->setting->menu->product  = 'Product Status|setting|lang|module=product&field=statusList';
 $lang->setting->menu->customer = 'Customer Status|setting|lang|module=customer&field=typeList';
 

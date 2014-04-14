@@ -58,7 +58,7 @@
             </table>
           </fieldset>
           <fieldset>
-            <legend><?php echo $lang->contact->contactInfo; ?></legend>
+            <legend><?php echo $lang->contact->contactInfo;?></legend>
             <table class='table table-form'>
               <tr>
                 <th class='w-80px'><?php echo $lang->contact->email;?></th>

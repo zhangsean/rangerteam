@@ -9,7 +9,6 @@
  * @version     $Id $
  * @link        http://www.ranzhi.org
  */
-$lang->contact->common        = '联系人维护';
 $lang->contact->id            = '编号';
 $lang->contact->customer      = '所属客户';
 $lang->contact->realname      = '真实姓名';
