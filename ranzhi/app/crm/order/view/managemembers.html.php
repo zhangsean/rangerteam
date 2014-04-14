@@ -47,24 +47,21 @@
       </tfoot>
     </table>
   </form>
-
-  <?php /* Hidden role form tr for js. */ ?>
-  <table class='hide'>
-    <tbody id='roleGroup'>
-      <tr>
-        <td><?php echo html::select('account[]', $users, '', "class='form-control account'");?></td>
-        <td>
-          <div class="input-group">
-            <?php echo html::select('role[]', $roles, '', "class='form-control role'");?>
-            <div class='input-group-btn'>
-              <i class='icon-plus-sign icon-large'></i>
-              <i class='icon-minus-sign icon-large'></i>
-            </div>
-          </div> 
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
 </div>
+<table class='hide'>
+  <tbody id='roleGroup'>
+    <tr>
+      <td><?php echo html::select('account[]', $users, '', "class='form-control account'");?></td>
+      <td>
+        <div class="input-group">
+          <?php echo html::select('role[]', $roles, '', "class='form-control role'");?>
+          <div class='input-group-btn'>
+            <i class='icon-plus-sign icon-large'></i>
+            <i class='icon-minus-sign icon-large'></i>
+          </div>
+        </div> 
+      </td>
+    </tr>
+  </tbody>
+</table>
 <?php include '../../common/view/footer.html.php';?>

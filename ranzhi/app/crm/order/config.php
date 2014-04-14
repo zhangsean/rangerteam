@@ -16,3 +16,11 @@ $config->order->require->edit   = 'product,customer';
 $config->order->editor = new stdclass();
 $config->order->editor->close    = array('id' => 'closedNote', 'tools' => 'simple');
 $config->order->editor->assignto = array('id' => 'comment', 'tools' => 'simple');
+
+$config->order->statusClassList['normal']   = '';
+$config->order->statusClassList['assigned'] = 'alert-warning';
+$config->order->statusClassList['signed']   = 'alert-info';
+$config->order->statusClassList['payed']    = 'alert-success';
+$config->order->statusClassList['closed']   = '';
+
+

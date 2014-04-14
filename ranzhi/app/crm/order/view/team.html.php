@@ -6,14 +6,14 @@
  * @license     LGPL
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     order 
- * @version     $Id $
+ * @version     $Id$
  * @link        http://www.ranzhi.org
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-  <strong><i class="icon-list-ul"></i> <?php echo $lang->order->team;?></strong>
+    <strong><i class="icon-list-ul"></i> <?php echo $lang->order->team;?></strong>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>

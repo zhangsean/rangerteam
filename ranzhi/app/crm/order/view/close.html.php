@@ -1,6 +1,6 @@
 <?php 
 /**
- * The close view file of order module of Ranzhi.
+ * The close function view file of order module of Ranzhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
@@ -12,7 +12,6 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
-<?php include '../../../sys/common/view/chosen.html.php';?>
 <form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('order', 'close', "orderID=$orderID")?>'>
   <table class='table table-form'>
     <tr>

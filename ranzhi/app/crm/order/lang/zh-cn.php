@@ -46,19 +46,12 @@ $lang->order->view          = '订单详情';
 $lang->order->close         = '关闭订单';
 $lang->order->manageMembers = '团队管理';
 $lang->order->sign          = '签约';
-$lang->order->createTasks   = '创建任务';
 
 $lang->order->statusList['normal']   = '正常';
 $lang->order->statusList['assigned'] = '已指派';
 $lang->order->statusList['signed']   = '已签约';
 $lang->order->statusList['payed']    = '已付款';
 $lang->order->statusList['closed']   = '已关闭';
-
-$lang->order->statusAccents['normal']   = '';
-$lang->order->statusAccents['assigned'] = 'alert-warning';
-$lang->order->statusAccents['signed']   = 'alert-info';
-$lang->order->statusAccents['payed']    = 'alert-success';
-$lang->order->statusAccents['closed']   = '';
 
 $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '订单失败';

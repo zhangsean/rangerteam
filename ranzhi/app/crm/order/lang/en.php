@@ -38,27 +38,20 @@ $lang->order->activatedDate = 'Activated Date';
 $lang->order->contactedBy   = 'Contacted By';
 $lang->order->contactedDate = 'Contacted Date';
 
-$lang->order->list          = 'List';
-$lang->order->browse        = 'Browse';
+$lang->order->list          = 'Order List';
+$lang->order->browse        = 'Browse Order';
 $lang->order->create        = 'Create';
-$lang->order->edit          = 'Update';
-$lang->order->view          = 'Info';
+$lang->order->edit          = 'Edit';
+$lang->order->view          = 'View';
 $lang->order->close         = 'Close';
 $lang->order->manageMembers = 'Manage Members';
 $lang->order->sign          = 'Sign';
-$lang->order->createTasks   = 'Create Tasks';
 
 $lang->order->statusList['normal']   = 'Normal';
 $lang->order->statusList['assigned'] = 'Assigned';
 $lang->order->statusList['signed']   = 'Signed';
 $lang->order->statusList['payed']    = 'Payed';
 $lang->order->statusList['closed']   = 'Closed';
-
-$lang->order->statusAccents['normal']   = '';
-$lang->order->statusAccents['assigned'] = 'alert-warning';
-$lang->order->statusAccents['signed']   = 'alert-info';
-$lang->order->statusAccents['payed']    = 'alert-success';
-$lang->order->statusAccents['closed']   = '';
 
 $lang->order->closedReasonList['payed']     = 'Payed';
 $lang->order->closedReasonList['failed']    = 'Failed';

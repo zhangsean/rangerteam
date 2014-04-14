@@ -6,7 +6,7 @@
  * @license     LGPL
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     order 
- * @version     $Id $
+ * @version     $Id$
  * @link        http://www.ranzhi.org
  */
 ?>
@@ -24,7 +24,7 @@
         <th class='w-60px'> <?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->contact->gender);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('phone',    $orderBy, $vars, $lang->contact->phone);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('mobile',   $orderBy, $vars, $lang->contact->mobile);?></th>
-        <th calss='w-200px'><?php commonModel::printOrderLink('email',    $orderBy, $vars, $lang->contact->email);?></th>
+        <th class='w-200px'><?php commonModel::printOrderLink('email',    $orderBy, $vars, $lang->contact->email);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('qq',       $orderBy, $vars, $lang->contact->qq);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('weixin',   $orderBy, $vars, $lang->contact->weixin);?></th>
       </tr>
