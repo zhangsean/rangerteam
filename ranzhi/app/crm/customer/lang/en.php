@@ -19,10 +19,10 @@ $lang->customer->area        = 'Area';
 $lang->customer->status      = 'Status';
 $lang->customer->level       = 'Level';
 $lang->customer->site        = 'Site';
-$lang->customer->weibo       = 'Weibo';
+$lang->customer->weibo       = 'Sina Weibo';
 $lang->customer->weixin      = 'Wechat';
 $lang->customer->referType   = 'Source';
-$lang->customer->desc        = 'Desc';
+$lang->customer->desc        = 'Description';
 $lang->customer->createdBy   = 'Created By';
 $lang->customer->createdDate = 'Created Date';
 $lang->customer->editedBy    = 'Edited By';
@@ -49,9 +49,9 @@ $lang->customer->sizeList[2] = 'Medium-scale';
 $lang->customer->sizeList[3] = 'Small-scale';
 $lang->customer->sizeList[4] = 'Mini-scale';
 
-$lang->customer->create = 'Create';
-$lang->customer->list   = 'List';
-$lang->customer->edit   = 'Update';
+$lang->customer->create = 'Create Customer';
+$lang->customer->list   = 'Customer List';
+$lang->customer->edit   = 'Edit';
 
 $lang->customer->basicInfo = 'Basic Info';
 $lang->customer->moreInfo  = 'More Info';

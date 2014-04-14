@@ -79,10 +79,9 @@ class customer extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $customer = $this->customer->getByID($customerID);
 
         $this->view->title    = $this->lang->customer->edit;
-        $this->view->customer = $customer;
+        $this->view->customer = $this->customer->getByID($customerID);
 
         $this->display();
     }

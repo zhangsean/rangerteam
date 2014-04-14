@@ -42,7 +42,8 @@
         <td><?php echo $lang->customer->statusList[$customer->status];?></td>
         <td class='actions'>
           <?php
-          echo html::a($this->createLink('customer', 'delete', "customerID=$customer->id"), $lang->delete, "class='deleter'");
+          echo html::a(inlink('edit', "customerID=$customer->id"), $lang->edit);
+          echo html::a(inlink('delete', "customerID=$customer->id"), $lang->delete, "class='deleter'");
           ?>
         </td>
       </tr>

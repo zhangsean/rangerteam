@@ -76,7 +76,7 @@ class customerModel extends model
      * 
      * @param  int    $customerID 
      * @access public
-     * @return void
+     * @return bool
      */
     public function update($customerID)
     {
@@ -101,12 +101,11 @@ class customerModel extends model
      * @param  int      $customerID
      * @param  string   $table
      * @access public 
-     * @return void
+     * @return bool
      */
     public function delete($customerID, $table = null)
     {
         $this->dao->delete()->from(TABLE_CUSTOMER)->where('id')->eq($customerID)->exec();
-
         return !dao::isError();
     }
 }
