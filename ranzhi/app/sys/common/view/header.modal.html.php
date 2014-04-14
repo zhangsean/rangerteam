@@ -15,6 +15,7 @@
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
+if(isset($pageCSS)) css::internal($pageCSS);
 ?>
 <script>
 $(function()
