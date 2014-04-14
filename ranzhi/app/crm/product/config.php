@@ -19,7 +19,7 @@ global $lang;
 $config->product->action->common = new stdclass();
 $config->product->action->common->createOrder = new stdclass();
 $config->product->action->common->createOrder->condations = array();
-$config->product->action->common->createOrder->inputs = array();
+$config->product->action->common->createOrder->inputs     = array();
 $orderInputs = array('customer' => array('rules' => 'require'));
 
 $config->field = new stdclass();

@@ -61,7 +61,6 @@ class productModel extends model
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
             ->add('editedDate', $now)
-            ->setDefault('deleted', 0)
             ->get();
 
         $this->dao->insert(TABLE_PRODUCT)
@@ -89,7 +88,6 @@ class productModel extends model
         $product = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
-            ->setDefault('deleted', 0)
             ->get();
 
         $this->dao->update(TABLE_PRODUCT)
@@ -114,7 +112,6 @@ class productModel extends model
     public function delete($productID, $table = null)
     {
         $this->dao->update(TABLE_PRODUCT)->set('deleted')->eq(1)->where('id')->eq($productID)->exec();
-
         return !dao::isError();
     }
 }
