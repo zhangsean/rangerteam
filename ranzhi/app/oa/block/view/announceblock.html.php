@@ -18,6 +18,4 @@
   </tr>
   <?php endforeach;?>
 </table>
-<script>
-$(function(){$.setAjaxModal();})
-</script>
+<script>$(function(){$.setAjaxModal();})</script>

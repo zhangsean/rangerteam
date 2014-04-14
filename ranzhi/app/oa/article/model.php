@@ -103,26 +103,6 @@ class articleModel extends model
     }
 
     /**
-     * Get page pairs.
-     * 
-     * @param string $pager 
-     * @access public
-     * @return array
-     */
-    public function getPagePairs($pager = null)
-    {
-        return $this->dao->select('id, title')->from(TABLE_ARTICLE)
-            ->where('type')->eq('page')
-            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
-            ->andWhere('addedDate')->le(helper::now())
-            ->andWhere('status')->eq('normal')
-            ->fi()
-            ->orderBy('id_desc')
-            ->page($pager, false)
-            ->fetchPairs();
-    }
-
-    /**
      * Get article pairs.
      * 
      * @param string $modules 
@@ -224,18 +204,16 @@ class articleModel extends model
             ->add('editedDate', $now)
             ->add('author', $this->app->user->account)
             ->add('type', $type)
+            ->add('order', 0)
             ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
-
-        $order = 0;
-
-        $article->order    = $order;
 
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
             ->batchCheck($this->config->article->require->create, 'notempty')
             ->exec();
+
         $articleID = $this->dao->lastInsertID();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);

@@ -11,6 +11,7 @@
  */
 ?>
 <?php include "../../../sys/common/view/header.modal.html.php";?>
+<?php js::set('index', $index);?>
 <?php include "../../../sys/common/view/chosen.html.php";?>
 <table class='table table-form' style="border:none;">
   <th class='w-100px'><?php echo $lang->block->lblBlock?></th>
@@ -33,7 +34,7 @@
       <tr>
         <th><?php echo $param['name']?></th>
         <td>
-        <?php
+          <?php
           if(!isset($param['control'])) $param['control'] = 'input';
           if(!method_exists('html', $param['control'])) $param['control'] = 'input';
 
@@ -57,7 +58,7 @@
           {
               echo html::$control("params[$key]", $default, "class='form-control' $attr");
           }
-        ?>
+          ?>
         </td>
       </tr>
       <?php endforeach;?>
@@ -68,13 +69,4 @@
   </table>
 </form>
 <?php endif;?>
-<script>
-$(function()
-{
-    $('#blocks').change(function()
-    {
-        $('#ajaxModal').load(createLink('block', 'admin', "index=<?php echo $index?>&blockID=" + $(this).val()));
-    });
-})
-</script>
 <?php include "../../../sys/common/view/footer.modal.html.php";?>

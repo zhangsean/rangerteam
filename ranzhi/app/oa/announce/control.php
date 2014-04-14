@@ -23,7 +23,7 @@ class announce extends control
     }   
 
     /**
-     * Browse article.
+     * Browse announces.
      * 
      * @param string $type        the article type
      * @param int    $categoryID  the category id
@@ -77,13 +77,12 @@ class announce extends control
 
         $category = $this->loadModel('tree')->getByID($category);
 
-        $title    = $announce->title . ' - ' . $category->name;
-        
-        $this->view->title       = $title;
-        $this->view->author      = $this->loadModel('user')->getByAccount($announce->author);
-        $this->view->announce    = $announce;
-        $this->view->prevAndNext = $this->article->getPrevAndNext($announce->id, $category->id);
+        $this->view->title       = $announce->title . ' - ' . $category->name;
         $this->view->category    = $category;
+        $this->view->announce    = $announce;
+        $this->view->author      = $this->loadModel('user')->getByAccount($announce->author);
+        $this->view->prevAndNext = $this->article->getPrevAndNext($announce->id, $category->id);
+        $this->view->modalWidth  = 800;
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($announceID)->exec(false);
 

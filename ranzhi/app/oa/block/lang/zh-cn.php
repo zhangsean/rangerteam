@@ -10,8 +10,8 @@
  * @link        http://www.zentao.net
  */
 $lang->block->announce = '系统公告';
-
 $lang->block->lblBlock = '区块';
+$lang->block->admin    = '管理区块';
 
 $lang->block->num     = '数量';
 $lang->block->orderBy = '排序';
@@ -19,5 +19,3 @@ $lang->block->status  = '状态';
 $lang->block->asc     = '正序';
 $lang->block->desc    = '倒序';
 $lang->block->actions = '操作';
-
-$lang->block->admin = '管理区块';

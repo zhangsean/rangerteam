@@ -10,8 +10,8 @@
  * @link        http://www.zentao.net
  */
 $lang->block->announce = 'Announce';
-
 $lang->block->lblBlock = 'Block';
+$lang->block->admin    = 'Manage blocks';
 
 $lang->block->num     = 'Number';
 $lang->block->orderBy = 'Order';
@@ -19,5 +19,3 @@ $lang->block->status  = 'Status';
 $lang->block->asc     = 'ASC';
 $lang->block->desc    = 'DESC';
 $lang->block->actions = 'Options';
-
-$lang->block->admin = 'Manage blocks';
