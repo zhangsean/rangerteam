@@ -6,7 +6,7 @@
  * @license     LGPL
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc 
- * @version     $Id $
+ * @version     $Id$
  * @link        http://www.ranzhi.org
  */
 ?>

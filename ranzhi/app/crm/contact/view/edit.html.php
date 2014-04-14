@@ -6,7 +6,7 @@
  * @license     LGPL
  * @author      Tingting Dai <daitingting@cnezsoft.com>
  * @package     contact 
- * @version     $Id $
+ * @version     $Id$
  * @link        http://www.ranzhi.org
  */
 ?>

@@ -38,8 +38,8 @@
             </div>
           </div>
           <div class='col-xs-3'>
-            <a class='btn btn-mini icon-plus'></a>
-            <a class='btn btn-mini icon-remove'></a>
+            <i class='btn btn-mini icon-plus'></i>
+            <i class='btn btn-mini icon-remove'></i>
           </div>
         </div>
         <?php endforeach;?>
@@ -48,7 +48,6 @@
     </form>
   </div>
 </div>
-<?php /* Hidden form. */ ?>
 <div id='unitItem' class='hide'>
   <div class='row input-row'>
     <div class='col-xs-9'>
@@ -60,10 +59,9 @@
       </div>
     </div>
     <div class='col-xs-3'>
-      <a class='btn btn-mini icon-plus'></a>
-      <a class='btn btn-mini icon-remove'></a>
+      <i class='btn btn-mini icon-plus'></i>
+      <i class='btn btn-mini icon-remove'></i>
     </div>
   </div>
 </div>
-<?php /* Hidden form. */ ?>
 <?php include '../../common/view/footer.html.php';?>

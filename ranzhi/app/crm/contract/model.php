@@ -39,7 +39,7 @@ class contractModel extends model
      * @param  string $orderBy 
      * @param  object $pager 
      * @access public
-     * @return void
+     * @return array
      */
     public function getList($orderBy = 'id_desc', $pager = null)
     {
@@ -176,7 +176,7 @@ class contractModel extends model
      * Build form of code.
      * 
      * @access public
-     * @return void
+     * @return string
      */
     public function buildCodeForm()
     {
@@ -198,7 +198,7 @@ class contractModel extends model
      * Parse code.
      * 
      * @access public
-     * @return void
+     * @return string
      */
     public function parseCode()
     {

@@ -16,6 +16,12 @@ class index extends control
         parent::__construct();
     }
 
+    /**
+     * Index page of crm.
+     * 
+     * @access public
+     * @return void
+     */
     public function index()
     {
         $this->locate($this->createLink('dashboard', 'index'));

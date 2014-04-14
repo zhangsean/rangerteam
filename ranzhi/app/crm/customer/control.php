@@ -6,7 +6,7 @@
  * @license     LGPL
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     customer 
- * @version     $Id $
+ * @version     $Id$
  * @link        http://www.ranzhi.org
  */
 class customer extends control

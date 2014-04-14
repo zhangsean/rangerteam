@@ -35,10 +35,10 @@ $lang->contract->createdDate  = 'Created Date';
 $lang->contract->editedBy     = 'Edited By';
 $lang->contract->editedDate   = 'Edited Date';
 
-$lang->contract->list    = 'List';
-$lang->contract->create  = 'Create';
-$lang->contract->edit    = 'Update';
-$lang->contract->setting = 'Setting';
+$lang->contract->list    = 'Contract List';
+$lang->contract->create  = 'Create Contract';
+$lang->contract->edit    = 'Edit';
+$lang->contract->setting = 'Settings';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = 'Wait';

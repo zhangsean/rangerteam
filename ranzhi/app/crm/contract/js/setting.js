@@ -3,7 +3,6 @@ $(document).ready(function()
     /* Toggle options. */
     $(document).on('change', '.unit', function()
     {
-        console.log($(this).val());
         $(this).closest('.input-cell').toggleClass('input-group', $(this).val() == 'fix');
     });
 
@@ -18,5 +17,4 @@ $(document).ready(function()
     {
         $(this).closest('.input-row').remove();
     });
-
 });

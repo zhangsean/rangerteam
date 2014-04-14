@@ -39,7 +39,7 @@
         </table>
       </fieldset>
       <fieldset>
-        <legend><?php echo $lang->contract->info; ?></legend>
+        <legend><?php echo $lang->contract->info;?></legend>
         <table class='table table-form'>
           <tr>
             <th class='w-80px'><?php echo $lang->contract->code;?></th>
@@ -78,4 +78,3 @@
   </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>
-
