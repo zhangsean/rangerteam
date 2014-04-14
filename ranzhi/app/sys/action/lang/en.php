@@ -11,9 +11,6 @@
  */
 $lang->action->common     = 'Logs';
 $lang->action->product    = 'Product';
-$lang->action->objectType = 'Project';
-$lang->action->objectID   = 'ID';
-$lang->action->objectName = 'Name';
 $lang->action->actor      = 'Actor';
 $lang->action->action     = 'Action';
 $lang->action->actionID   = 'ActionID';
@@ -23,13 +20,6 @@ $lang->action->editComment = 'Edit Comment';
 
 $lang->action->textDiff  = 'Text Mode';
 $lang->action->original  = 'Original content';
-
-$lang->action->objectTypes['product']     = 'Product';
-$lang->action->objectTypes['task']        = 'Task';
-$lang->action->objectTypes['user']        = 'User';
-$lang->action->objectTypes['order']       = 'Order';
-$lang->action->objectTypes['orderAction'] = 'Order Action';
-$lang->action->objectTypes['orderField']  = 'Order Field';
 
 /* The desc of actions. */
 $lang->action->desc = new stdclass();

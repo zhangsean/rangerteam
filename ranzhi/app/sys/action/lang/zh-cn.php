@@ -11,9 +11,6 @@
  */
 $lang->action->common     = '系统日志';
 $lang->action->product    = '产品';
-$lang->action->objectType = '对象类型';
-$lang->action->objectID   = '对象ID';
-$lang->action->objectName = '对象名称';
 $lang->action->actor      = '操作者';
 $lang->action->action     = '动作';
 $lang->action->actionID   = '记录ID';
@@ -23,13 +20,6 @@ $lang->action->editComment = '修改备注';
 
 $lang->action->textDiff       = '文本格式';
 $lang->action->original       = '原始格式';
-
-$lang->action->objectTypes['product']     = '产品';
-$lang->action->objectTypes['task']        = '任务';
-$lang->action->objectTypes['user']        = '成员';
-$lang->action->objectTypes['order']       = '订单';
-$lang->action->objectTypes['orderAction'] = '订单动作';
-$lang->action->objectTypes['orderField']  = '属性';
 
 /* 用来描述操作历史记录。*/
 $lang->action->desc = new stdclass();
