@@ -23,26 +23,26 @@ if($type == 'html')
   <table class='table table-form'>
   <?php if($type == 'rss'):?>
     <tbody>
-      <tr class='a-left'>
+      <tr class='text-left'>
         <th class='w-100px'><?php echo $lang->block->name?></th>
         <td><?php echo html::input('name', $block ? $block->name : '', "class='form-control'")?></td>
       </tr>
-      <tr class='a-left'>
+      <tr class='text-left'>
         <th><?php echo $lang->block->lblRss?></th>
         <td><?php echo html::input('params[link]', $block ? $block->params->link : '', "class='form-control'")?></td>
       </tr>
-      <tr class='a-left'>
+      <tr class='text-left'>
         <th><?php echo $lang->block->lblNum?></th>
         <td><?php echo html::input('params[num]', $block ? $block->params->num : 0, "class='form-control'")?></td>
       </tr>
     </tbody>
     <?php else:?>
     <tbody>
-      <tr class='a-left'>
+      <tr class='text-left'>
         <th><?php echo $lang->block->name?></th>
         <td><?php echo html::input('name', $block ? $block->name : '', "class='form-control'")?></td>
       </tr>
-      <tr class='a-center'>
+      <tr class='text-center'>
         <th class='w-100px'><?php echo $lang->block->lblHtml;?></th>
         <td><?php echo html::textarea('html', $block ? $block->html : '', "class='form-control' rows='10'")?></td>
       </tr>

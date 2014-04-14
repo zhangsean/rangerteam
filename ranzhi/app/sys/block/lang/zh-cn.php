@@ -28,11 +28,13 @@ $lang->block->ordersSaved = '排序已保存';
 $lang->block->default['oa']['b1']['name']    = '系统公告';
 $lang->block->default['oa']['b1']['blockID'] = 'announce';
 $lang->block->default['oa']['b1']['type']    = 'system';
+
 $lang->block->default['oa']['b1']['params']['num'] = 15;
 
 $lang->block->default['crm']['b1']['name']    = '我的订单';
 $lang->block->default['crm']['b1']['blockID'] = 'order';
 $lang->block->default['crm']['b1']['type']    = 'system';
+
 $lang->block->default['crm']['b1']['params']['num']     = 15;
 $lang->block->default['crm']['b1']['params']['orderBy'] = 'id_asc';
 $lang->block->default['crm']['b1']['params']['status']  = array();
@@ -40,6 +42,7 @@ $lang->block->default['crm']['b1']['params']['status']  = array();
 $lang->block->default['crm']['b2']['name']    = '我的合同';
 $lang->block->default['crm']['b2']['blockID'] = 'contract';
 $lang->block->default['crm']['b2']['type']    = 'system';
+
 $lang->block->default['crm']['b2']['params']['num']     = 15;
 $lang->block->default['crm']['b2']['params']['orderBy'] = 'id_asc';
 $lang->block->default['crm']['b2']['params']['status']  = array();
@@ -47,6 +50,7 @@ $lang->block->default['crm']['b2']['params']['status']  = array();
 $lang->block->default['crm']['b3']['name']    = '我的任务';
 $lang->block->default['crm']['b3']['blockID'] = 'task';
 $lang->block->default['crm']['b3']['type']    = 'system';
+
 $lang->block->default['crm']['b3']['params']['num']     = 15;
 $lang->block->default['crm']['b3']['params']['orderBy'] = 'id_asc';
 $lang->block->default['crm']['b3']['params']['status']  = array();

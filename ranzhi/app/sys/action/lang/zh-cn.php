@@ -18,8 +18,8 @@ $lang->action->date       = '日期';
 
 $lang->action->editComment = '修改备注';
 
-$lang->action->textDiff       = '文本格式';
-$lang->action->original       = '原始格式';
+$lang->action->textDiff = '文本格式';
+$lang->action->original = '原始格式';
 
 /* 用来描述操作历史记录。*/
 $lang->action->desc = new stdclass();
@@ -51,31 +51,31 @@ $lang->action->desc->diff3          = '将文件名 %s 改为 %s 。' . "\n";
 
 /* 用来显示动态信息。*/
 $lang->action->label = new stdclass();
-$lang->action->label->created             = '创建了';
-$lang->action->label->edited              = '编辑了';
-$lang->action->label->assigned            = '指派了';
-$lang->action->label->closed              = '关闭了';
-$lang->action->label->deleted             = '删除了';
-$lang->action->label->deletedfile         = '删除附件';
-$lang->action->label->editfile            = '编辑附件';
-$lang->action->label->commented           = '评论了';
-$lang->action->label->activated           = '激活了';
-$lang->action->label->resolved            = '解决了';
-$lang->action->label->reviewed            = '评审了';
-$lang->action->label->moved               = '移动了';
-$lang->action->label->marked              = '编辑了';
-$lang->action->label->started             = '开始了';
-$lang->action->label->canceled            = '取消了';
-$lang->action->label->finished            = '完成了';
-$lang->action->label->login               = '登录系统';
-$lang->action->label->logout              = "退出登录";
+$lang->action->label->created     = '创建了';
+$lang->action->label->edited      = '编辑了';
+$lang->action->label->assigned    = '指派了';
+$lang->action->label->closed      = '关闭了';
+$lang->action->label->deleted     = '删除了';
+$lang->action->label->deletedfile = '删除附件';
+$lang->action->label->editfile    = '编辑附件';
+$lang->action->label->commented   = '评论了';
+$lang->action->label->activated   = '激活了';
+$lang->action->label->resolved    = '解决了';
+$lang->action->label->reviewed    = '评审了';
+$lang->action->label->moved       = '移动了';
+$lang->action->label->marked      = '编辑了';
+$lang->action->label->started     = '开始了';
+$lang->action->label->canceled    = '取消了';
+$lang->action->label->finished    = '完成了';
+$lang->action->label->login       = '登录系统';
+$lang->action->label->logout      = "退出登录";
 
 /* 用来生成相应对象的链接。*/
-$lang->action->label->product     = '产品|product|view|productID=%s';
-$lang->action->label->order       = '订单|order|view|orderID=%s';
-$lang->action->label->task        = '任务|task|view|taskID=%s';
-$lang->action->label->user        = '成员|user|view|account=%s';
-$lang->action->label->space       = '　';
+$lang->action->label->product = '产品|product|view|productID=%s';
+$lang->action->label->order   = '订单|order|view|orderID=%s';
+$lang->action->label->task    = '任务|task|view|taskID=%s';
+$lang->action->label->user    = '成员|user|view|account=%s';
+$lang->action->label->space   = '　';
 
 /* Object type. */
 $lang->action->search->objectTypeList['']            = '';    
@@ -86,21 +86,21 @@ $lang->action->search->objectTypeList['order']       = '订单';
 $lang->action->search->objectTypeList['orderAction'] = '动作'; 
 
 /* 用来在动态显示中显示动作 */
-$lang->action->search->label['']                    = '';
-$lang->action->search->label['created']             = $lang->action->label->created;            
-$lang->action->search->label['edited']              = $lang->action->label->edited;             
-$lang->action->search->label['assigned']            = $lang->action->label->assigned;           
-$lang->action->search->label['closed']              = $lang->action->label->closed;             
-$lang->action->search->label['deleted']             = $lang->action->label->deleted;            
-$lang->action->search->label['deletedfile']         = $lang->action->label->deletedfile;        
-$lang->action->search->label['editfile']            = $lang->action->label->editfile;           
-$lang->action->search->label['commented']           = $lang->action->label->commented;          
-$lang->action->search->label['activated']           = $lang->action->label->activated;          
-$lang->action->search->label['resolved']            = $lang->action->label->resolved;           
-$lang->action->search->label['reviewed']            = $lang->action->label->reviewed;           
-$lang->action->search->label['moved']               = $lang->action->label->moved;              
-$lang->action->search->label['started']             = $lang->action->label->started;            
-$lang->action->search->label['canceled']            = $lang->action->label->canceled;           
-$lang->action->search->label['finished']            = $lang->action->label->finished;           
-$lang->action->search->label['login']               = $lang->action->label->login;              
-$lang->action->search->label['logout']              = $lang->action->label->logout;             
+$lang->action->search->label['']            = '';
+$lang->action->search->label['created']     = $lang->action->label->created;            
+$lang->action->search->label['edited']      = $lang->action->label->edited;             
+$lang->action->search->label['assigned']    = $lang->action->label->assigned;           
+$lang->action->search->label['closed']      = $lang->action->label->closed;             
+$lang->action->search->label['deleted']     = $lang->action->label->deleted;            
+$lang->action->search->label['deletedfile'] = $lang->action->label->deletedfile;        
+$lang->action->search->label['editfile']    = $lang->action->label->editfile;           
+$lang->action->search->label['commented']   = $lang->action->label->commented;          
+$lang->action->search->label['activated']   = $lang->action->label->activated;          
+$lang->action->search->label['resolved']    = $lang->action->label->resolved;           
+$lang->action->search->label['reviewed']    = $lang->action->label->reviewed;           
+$lang->action->search->label['moved']       = $lang->action->label->moved;              
+$lang->action->search->label['started']     = $lang->action->label->started;            
+$lang->action->search->label['canceled']    = $lang->action->label->canceled;           
+$lang->action->search->label['finished']    = $lang->action->label->finished;           
+$lang->action->search->label['login']       = $lang->action->label->login;              
+$lang->action->search->label['logout']      = $lang->action->label->logout;             

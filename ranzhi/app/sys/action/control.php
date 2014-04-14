@@ -12,7 +12,7 @@
 class action extends control
 {
     /**
-     * Edit comment of a action.
+     * Edit comment of an action.
      * 
      * @param  int    $actionID 
      * @access public

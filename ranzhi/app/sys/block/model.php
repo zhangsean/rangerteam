@@ -26,7 +26,7 @@ class blockModel extends model
 
         $data->type = $type;
 
-        $this->loadModel('setting')->setItem($account . '.sys.index.block.b' . $index, json_encode($data));
+        $this->loadModel('setting')->setItem($account . '.sys.index.block.b' . $index, helper::jsonEncode($data));
     }
 
     /**
@@ -94,9 +94,9 @@ class blockModel extends model
         xml_parse_into_struct($xpc, $xml, $values);
         xml_parser_free($xpc);
 
-        $channelTags   = array();
-        $itemTags      = array();
-        $inItem        = false;
+        $channelTags = array();
+        $itemTags    = array();
+        $inItem      = false;
         foreach($values as $value)
         {
             $tag = strtolower($value['tag']);
@@ -171,7 +171,7 @@ class blockModel extends model
                 $block['entryID'] = $entry->id;
             }
 
-            $this->setting->setItem("$account.$app.index.block.$key", json_encode($block));
+            $this->setting->setItem("$account.$app.index.block.$key", helper::jsonEncode($block));
         }
 
         return !dao::isError();

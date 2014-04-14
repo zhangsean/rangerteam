@@ -42,7 +42,7 @@ class actionModel extends model
         $action->comment    = trim(strip_tags($comment, "<img>")) ? $comment : '';
         $action->extra      = $extra;
 
-        /* Get product and project for this object. */
+        /* Get product for this object. */
         $action->product = $this->getProduct($action->objectType, $objectID);
 
         $this->dao->insert(TABLE_ACTION)->data($action)->autoCheck()->exec();
@@ -87,7 +87,7 @@ class actionModel extends model
      */
     public function getList($objectType, $objectID)
     {
-        $actions   = $this->dao->select('*')->from(TABLE_ACTION)
+        $actions = $this->dao->select('*')->from(TABLE_ACTION)
             ->where('objectType')->eq($objectType)
             ->andWhere('objectID')->eq($objectID)
             ->orderBy('date, id')->fetchAll('id');
@@ -137,6 +137,7 @@ class actionModel extends model
             $object->objectType = str_replace('`', '', $object->objectType);
             $typeTrashes[$object->objectType][] = $object->objectID;
         }
+
         foreach($typeTrashes as $objectType => $objectIds)
         {
             $objectIds   = array_unique($objectIds);
