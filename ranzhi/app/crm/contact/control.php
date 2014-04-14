@@ -83,11 +83,9 @@ class contact extends control
             $this->send(array('result' => 'fail', 'message' => $return['message']));
         }
 
-        $contact = $this->contact->getByID($contactID);
-
         $this->view->title     = $this->lang->contact->edit;
         $this->view->customers = $this->loadModel('customer')->getPairs();
-        $this->view->contact   = $contact;
+        $this->view->contact   = $this->contact->getByID($contactID);
 
         $this->display();
     }

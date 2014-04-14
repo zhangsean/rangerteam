@@ -57,11 +57,10 @@ class contactModel extends model
      * Create a contact.
      * 
      * @access public
-     * @return int|bool
+     * @return array
      */
     public function create()
     {
-        $now = helper::now();
         $contact = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', helper::now())
@@ -71,15 +70,13 @@ class contactModel extends model
             ->data($contact, 'files')
             ->autoCheck()
             ->batchCheck($this->config->contact->require->create, 'notempty')
-            ->check('email', 'email')
+            ->checkIF($contact->email, 'email', 'email')
             ->exec();
 
         if(dao::isError()) return array('result' => false, 'message' => dao::getError());
 
         $contactID = $this->dao->lastInsertID();
-        $this->updateAvatar($contactID);
-
-        return array('result' => true);
+        return $this->updateAvatar($contactID);
     }
 
     /**
@@ -87,7 +84,7 @@ class contactModel extends model
      * 
      * @param  int    $contactID 
      * @access public
-     * @return void
+     * @return array
      */
     public function update($contactID)
     {
@@ -104,15 +101,13 @@ class contactModel extends model
             ->data($contact, 'files')
             ->autoCheck()
             ->batchCheck($this->config->contact->require->edit, 'notempty')
-            ->check('email', 'email')
+            ->checkIF($contact->email, 'email', 'email')
             ->where('id')->eq($contactID)
             ->exec();
 
-        $this->updateAvatar($contactID);
-
         if(dao::isError()) return array('result' => false, 'message' => dao::getError());
 
-        return array('result' => true);
+        return $this->updateAvatar($contactID);
     }
 
     /**
