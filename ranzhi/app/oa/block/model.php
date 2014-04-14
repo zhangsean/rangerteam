@@ -21,9 +21,7 @@ class blockModel extends model
     public function save($index)
     {   
         $account = $this->app->user->account;
-        $data    = fixer::input('post')->get();
-
-        $data->type = 'system';
+        $data    = fixer::input('post')->add('type', 'system')->get();
 
         $this->loadModel('setting')->setItem($account . '.oa.index.block.b' . $index, json_encode($data));
     }

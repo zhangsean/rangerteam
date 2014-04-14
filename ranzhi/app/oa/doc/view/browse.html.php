@@ -18,20 +18,24 @@
   <div class='panel' id='treebox'>
     <div class='panel-heading'>
       <strong><?php echo $libName;?></strong>
+      <?php if(!isset($lang->doc->systemLibs[$libID])):?>
+      <div class="panel-actions pull-right">
+        <div class="dropdown">
+          <button class="btn btn-mini" data-toggle="dropdown"><span class="caret"></span></button>
+          <ul class="dropdown-menu pull-right">
+            <?php
+            echo '<li>' . html::a(inlink('editLib',   "libID=$libID"), "<i class='icon-edit'> {$lang->edit}</i>", "data-toggle='modal'") . '</li>';
+            echo '<li>' . html::a(inlink('deleteLib', "libID=$libID"), "<i class='icon-remove'> {$lang->delete}</i>", "class='deleter'") . '</li>';
+            ?>
+          </ul>
+        </div>
+      </div>
+      <?php endif;?>
     </div>
     <div class='panel-body'>
       <?php echo $moduleTree;?>
       <div class='text-right'>
-        <ul class='doclib-action'>
-          <?php
-          echo '<li>' . html::a($this->createLink('tree', 'browse', "type=doc&moduleID=0&rootID=$libID"), $lang->doc->manageType) . '</li>';
-          if(!isset($lang->doc->systemLibs[$libID]))
-          {
-              echo '<li>' . html::a(inlink('editLib',   "libID=$libID"), $lang->doc->editLib, "data-toggle='modal'") . '</li>';
-              echo '<li>' . html::a(inlink('deleteLib', "libID=$libID"), $lang->doc->deleteLib, "class='deleter'") . '</li>';
-          }
-          ?>
-        </ul>
+        <?php echo html::a($this->createLink('tree', 'browse', "type=doc&moduleID=0&rootID=$libID"), $lang->doc->manageType, "class='btn'");?>
       </div>
     </div>
   </div>

@@ -16,7 +16,7 @@ $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = 'Dashboard|dashboard|index|';
 $lang->menu->oa->task      = 'Task|task|index|';
 $lang->menu->oa->announce  = 'Announce|announce|index|';
-$lang->menu->oa->doc       = 'Doc|doc|index|';
+$lang->menu->oa->doc       = 'Document|doc|index|';
 
 $lang->dashboard = new stdclass();
 $lang->block     = new stdclass();
@@ -29,4 +29,4 @@ $lang->announce->menu->category = 'Category|tree|browse|type=announce|';
 
 $lang->doc = new stdclass();
 $lang->doc->menu = new stdclass();
-$lang->doc->menu->create = 'Create Lib|doc|createLib|';
+$lang->doc->menu->create = 'Create Library|doc|createLib|';

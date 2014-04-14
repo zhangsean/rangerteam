@@ -10,12 +10,12 @@
  * @link        http://www.ranzhi.org
  */
 /* Fields. */
-$lang->doc->common         = 'Doc';
+$lang->doc->common         = 'Document';
 $lang->doc->id             = 'ID';
 $lang->doc->product        = 'Product';
 $lang->doc->project        = 'Project';
 $lang->doc->lib            = 'Library';
-$lang->doc->module         = 'Module';
+$lang->doc->category       = 'Category';
 $lang->doc->title          = 'Title';
 $lang->doc->digest         = 'Digest';
 $lang->doc->comment        = 'Comment';
@@ -32,13 +32,7 @@ $lang->doc->editedDate     = 'Edited date';
 $lang->doc->basicInfo      = 'Basic Info';
 $lang->doc->deleted        = 'Deleted';
 
-$lang->doc->list           = 'Doc list';
-$lang->doc->moduleDoc      = 'By module';
-$lang->doc->searchDoc      = 'By search';
-//$lang->doc->allDoc         = 'All document';
-
-$lang->doc->moduleName     = 'Module name';
-$lang->doc->moduleOrder    = 'Module order';
+$lang->doc->list           = 'Document list';
 
 /* Actions. */
 $lang->doc->index          = 'Index';
@@ -71,3 +65,5 @@ $lang->doc->errorEditSystemDoc = "System doc library needn't edit";
 
 $lang->doc->placeholder = new stdclass();
 $lang->doc->placeholder->url = 'url';
+
+$lang->doc->notFound = 'The document does not exists';

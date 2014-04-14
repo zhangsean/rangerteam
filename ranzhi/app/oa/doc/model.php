@@ -31,7 +31,7 @@ class docModel extends model
      * @access public
      * @return array
      */
-    public function getLibs()
+    public function getLibList()
     {
         $libs = $this->dao->select('id, name')->from(TABLE_DOCLIB)->where('deleted')->eq(0)->fetchPairs();
         return $this->lang->doc->systemLibs + $libs;
@@ -66,7 +66,8 @@ class docModel extends model
     {
         $libID  = (int)$libID;
         $oldLib = $this->getLibById($libID);
-        $lib = fixer::input('post')->stripTags('name')->get();
+        $lib    = fixer::input('post')->stripTags('name')->get();
+
         $this->dao->update(TABLE_DOCLIB)
             ->data($lib)
             ->autoCheck()
@@ -74,6 +75,7 @@ class docModel extends model
             ->check('name', 'unique', "id != $libID")
             ->where('id')->eq($libID)
             ->exec();
+
         if(!dao::isError()) return commonModel::createChanges($oldLib, $lib);
     }
 
@@ -89,11 +91,12 @@ class docModel extends model
      * @access public
      * @return void
      */
-    public function getDocs($libID, $productID, $projectID, $module, $orderBy, $pager)
+    public function getDocList($libID, $productID, $projectID, $module, $orderBy, $pager)
     {
         $products = $this->loadModel('product', 'crm')->getPairs();
         $projects = array();
         //$projects = $this->loadModel('project')->getPairs();
+
         $keysOfProducts = array_keys($products);
         $keysOfProjects = array_keys($projects);
         $allKeysOfProjects = $keysOfProjects;
@@ -159,13 +162,15 @@ class docModel extends model
             ->cleanInt('product, project, module')
             ->remove('files,labels,uid')
             ->get();
+
         $condition = "lib = '$doc->lib' AND module = $doc->module";
         $this->dao->insert(TABLE_DOC)
             ->data($doc)
             ->autoCheck()
-            ->batchCheck($this->config->doc->create->requiredFields, 'notempty')
+            ->batchCheck($this->config->doc->require->create, 'notempty')
             ->check('title', 'unique', $condition)
             ->exec();
+
         if(!dao::isError())
         {
             $docID = $this->dao->lastInsertID();
@@ -185,7 +190,6 @@ class docModel extends model
     public function update($docID)
     {
         $oldDoc = $this->getById($docID);
-        $now = helper::now();
         $doc = fixer::input('post')
             ->cleanInt('module')
             ->setDefault('module', 0)
@@ -193,16 +197,17 @@ class docModel extends model
             ->encodeURL('url')
             ->remove('comment,files,labels,uid')
             ->add('editedBy',   $this->app->user->account)
-            ->add('editedDate', $now)
+            ->add('editedDate', helper::now())
             ->get();
 
-        $condition = "lib = '$doc->lib' AND module = $doc->module AND id != $docID";
+        $uniqueCondition = "lib = '$doc->lib' AND module = $doc->module AND id != $docID";
         $this->dao->update(TABLE_DOC)->data($doc)
             ->autoCheck()
-            ->batchCheck($this->config->doc->edit->requiredFields, 'notempty')
-            ->check('title', 'unique', $condition)
+            ->batchCheck($this->config->doc->require->edit, 'notempty')
+            ->check('title', 'unique', $uniqueCondition)
             ->where('id')->eq((int)$docID)
             ->exec();
+
         if(!dao::isError()) return commonModel::createChanges($oldDoc, $doc);
     }
  
@@ -213,7 +218,7 @@ class docModel extends model
      * @access public
      * @return array
      */
-    public function getProductDocs($productID)
+    public function getProductDocList($productID)
     {
         return $this->dao->select('t1.*, t2.name as module')
             ->from(TABLE_DOC)->alias('t1')
@@ -231,7 +236,7 @@ class docModel extends model
      * @access public
      * @return array
      */
-    public function getProjectDocs($projectID)
+    public function getProjectDocList($projectID)
     {
         return $this->dao->findByProject($projectID)->from(TABLE_DOC)->andWhere('deleted')->eq(0)->orderBy('id_desc')->fetchAll();
     }
@@ -242,7 +247,7 @@ class docModel extends model
      * @access public
      * @return array
      */
-    public function getProductModulePairs()
+    public function getProductCategoryPairs()
     {
         return $this->dao->findByType('productdoc')->from(TABLE_CATEGORY)->fetchPairs('id', 'name');
     }

@@ -15,7 +15,7 @@ $lang->doc->id             = '文档编号';
 $lang->doc->product        = '所属产品';
 $lang->doc->project        = '所属项目';
 $lang->doc->lib            = '所属文档库';
-$lang->doc->module         = '所属分类';
+$lang->doc->category       = '所属分类';
 $lang->doc->title          = '文档标题';
 $lang->doc->digest         = '文档摘要';
 $lang->doc->comment        = '文档备注';
@@ -33,12 +33,6 @@ $lang->doc->basicInfo      = '基本信息';
 $lang->doc->deleted        = '已删除';
 
 $lang->doc->list           = '文档列表';
-$lang->doc->moduleDoc      = '按模块浏览';
-$lang->doc->searchDoc      = '搜索';
-//$lang->doc->allDoc         = '所有文档';
-
-$lang->doc->moduleName     = '模块名称';
-$lang->doc->moduleOrder    = '模块排序';
 
 /* 方法列表。*/
 $lang->doc->index          = '首页';
@@ -71,3 +65,5 @@ $lang->doc->errorEditSystemDoc = "系统文档库无需修改。";
 
 $lang->doc->placeholder = new stdclass();
 $lang->doc->placeholder->url = '相应的链接地址';
+
+$lang->doc->notFound = '该文档不存在';

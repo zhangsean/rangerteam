@@ -12,17 +12,17 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
-<?php js::set('holders ', $lang->doc->placeholder);?>
-<?php js::set('libID ', $libID);?>
+<?php js::set('holders', $lang->doc->placeholder);?>
+<?php js::set('libID', $libID);?>
 <div class='panel'>
   <div class='panel-heading'>
-      <strong><small class='text-muted'><i class='icon icon-plus'></i></small> <?php echo $lang->doc->create;?></strong>
+    <strong><small class='text-muted'><i class='icon icon-plus'></i></small> <?php echo $lang->doc->create;?></strong>
   </div>
   <form class='form-condensed' method='post' enctype='multipart/form-data' id='ajaxForm'>
     <table class='table table-form'> 
       <?php if($libID == 'product'):?>
       <tr>
-        <th class='w-80px'><?php echo $lang->doc->product;?></th>
+        <th><?php echo $lang->doc->product;?></th>
         <td><?php echo html::select('product', $products, $productID, "class='form-control'");?></td>
       </tr>  
       <?php elseif($libID == 'project'):?>
@@ -36,7 +36,7 @@
       </tr>  
       <?php endif;?>
       <tr>
-        <th><?php echo $lang->doc->module;?></th>
+        <th class='w-80px'><?php echo $lang->doc->category;?></th>
         <td><?php echo html::select('module', $moduleOptionMenu, $moduleID, "class='form-control'");?></td>
       </tr>  
       <tr>
@@ -53,7 +53,7 @@
       </tr>  
       <tr id='contentBox' class='hidden'>
         <th><?php echo $lang->doc->content;?></th>
-        <td><?php echo html::textarea('content', '', "class='form-control' style='width:90%; height:200px'");?></td>
+        <td><?php echo html::textarea('content', '', "class='form-control' rows=8");?></td>
       </tr>  
       <tr>
         <th><?php echo $lang->doc->keywords;?></th>

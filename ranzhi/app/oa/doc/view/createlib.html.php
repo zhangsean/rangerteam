@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../../sys/common/view/header.modal.html.php'; ?>
+<?php include '../../../sys/common/view/header.modal.html.php';?>
 <form method='post' id='ajaxModalForm' action='<?php echo inlink('createLib')?>'>
   <div class='form-group'>
     <label for="name"><?php echo $lang->doc->libName;?></label>
@@ -18,4 +18,4 @@
   </div>
   <?php echo html::submitButton();?>
 </form>
-<?php include '../../../sys/common/view/footer.modal.html.php'; ?>
+<?php include '../../../sys/common/view/footer.modal.html.php';?>

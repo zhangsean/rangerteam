@@ -62,12 +62,11 @@ class block extends control
 
         $this->app->loadLang('block', 'sys');
 
-
         $personalBlocks = isset($this->config->personal->index->block) ? $this->config->personal->index->block : new stdclass();
         $block          = (isset($personalBlocks->{'b' . $index}) and $personalBlocks->{'b' . $index}->app == 'oa') ? json_decode($personalBlocks->{'b' . $index}->value) : array();
         $blockID        = $blockID ? $blockID : (($block and $personalBlocks->{'b' . $index}->app == 'oa') ? $block->blockID : '');
 
-        $blocks     = json_decode($this->block->getBlockList(), true);
+        $blocks = json_decode($this->block->getBlockList(), true);
         $this->view->blocks  = array_merge(array(''), $blocks);
 
         $this->view->title   = $this->lang->block->admin;

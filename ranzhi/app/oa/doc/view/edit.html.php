@@ -6,14 +6,14 @@
  * @license     LGPL
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc
- * @version     $Id: edit.html.php 975 2010-07-29 03:30:25Z jajacn@126.com $
+ * @version     $Id$
  * @link        http://www.ranzhi.org
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
-<?php js::set('type ',  $doc->type);?>
-<?php js::set('libID ', $doc->lib);?>
+<?php js::set('type',  $doc->type);?>
+<?php js::set('libID', $doc->lib);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><?php echo html::a($this->createLink('doc', 'view', "docID=$doc->id"), $doc->title);?></strong>
@@ -22,7 +22,7 @@
   <form method='post' enctype='multipart/form-data' id='ajaxForm'>
     <table class='table table-form'> 
       <tr>
-        <th class='w-80px'><?php echo $lang->doc->module;?></th>
+        <th class='w-80px'><?php echo $lang->doc->category;?></th>
         <td><?php echo html::select('module', $moduleOptionMenu, $doc->module, "class='form-control'");?></td>
       </tr>  
       <tr>
@@ -43,7 +43,7 @@
       </tr>  
       <tr id='contentBox' class='hidden'>
         <th><?php echo $lang->doc->content;?></th>
-        <td><?php echo html::textarea('content', $doc->content, "class='form-control' rows='8' style='width:90%; height:200px'");?></td>
+        <td><?php echo html::textarea('content', $doc->content, "class='form-control' rows='8'");?></td>
       </tr>  
       <tr>
         <th><?php echo $lang->doc->digest;?></th>

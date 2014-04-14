@@ -6,7 +6,7 @@
  * @license     LGPL
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc
- * @version     $Id: view.html.php 975 2010-07-29 03:30:25Z jajacn@126.com $
+ * @version     $Id$
  * @link        http://www.ranzhi.org
  */
 ?>
@@ -19,7 +19,7 @@
     <strong><?php echo $doc->title;?></strong>
     <?php if($doc->deleted):?>
     <span class='label label-danger'><?php echo $lang->doc->deleted;?></span>
-    <?php endif; ?>
+    <?php endif;?>
   </div>
 </div>
 <div class='row'>
@@ -64,10 +64,6 @@
             ob_end_clean();
             echo $actionLinks;
         }
-        else
-        {
-            //common::printRPN($browseLink);
-        }
         ?>
       </div>
     </div>
@@ -82,7 +78,7 @@
             <td><?php echo $lib;?></td>
           </tr>
           <tr>
-            <th><?php echo $lang->doc->module;?></th>
+            <th><?php echo $lang->doc->category;?></th>
             <td><?php echo $doc->moduleName ? $doc->moduleName : '/';?></td>
           </tr>
           <tr>
