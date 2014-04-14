@@ -15,45 +15,45 @@
   <div class='panel'>
     <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->view;?></strong></div>
     <div class='panel-body'>
-      <div class='alert <?php echo $lang->order->statusAccents[$order->status]; ?>'>
-        <?php $payed = $order->status == 'payed'; ?>
+      <div class='alert <?php echo $config->order->statusClassList[$order->status];?>'>
+        <?php $payed = $order->status == 'payed';?>
         <table class="table table-borderless table-condensed">
           <tr>
-            <?php if($payed): ?>
+            <?php if($payed):?>
             <th class='small text-muted w-p45'><?php echo $lang->order->real;?></th>
-            <?php else: ?>
+            <?php else:?>
             <th class='small text-muted w-p45'><?php echo $lang->order->plan;?></th>
-            <?php endif; ?>
+            <?php endif;?>
             <th class='small text-muted'><?php echo $lang->order->status;?></th>
           </tr>
           <tr>
-            <?php if($payed): ?>
+            <?php if($payed):?>
             <td><strong class="label label-success lead text-latin"><?php echo $order->real;?></strong></td>
-            <?php else: ?>
+            <?php else:?>
             <td rowspan='3'><strong class="lead text-danger text-latin"><?php echo $order->plan;?></strong></td>
-            <?php endif; ?>
+            <?php endif;?>
             <td>
               <strong class="lead"><?php echo $lang->order->statusList[$order->status];?></strong>
             </td>
           </tr>
           <tr>
-            <?php if($payed): ?>
+            <?php if($payed):?>
             <th class='small text-muted'><?php echo $lang->order->plan;?></th>
-            <?php endif; ?>
+            <?php endif;?>
             <td class='small'>
               <?php if($order->status == 'closed'):?>
               <strong><?php echo $lang->order->closedReason . ': ' . $lang->order->closedReasonList[$order->closedReason];?></strong>
               <div class='text-muted'><?php if($order->closedNote) echo $order->closedNote;?></div>
-              <?php endif; ?>
+              <?php endif;?>
             </td>
           </tr>
           <tr>
-            <?php if($payed): ?>
+            <?php if($payed):?>
             <td><strong class="lead text-danger text-latin"><?php echo $order->plan;?></strong></td>
-            <?php endif; ?>
+            <?php endif;?>
           </tr>
           <tr>
-            <th class='small text-muted' colspan='2'><?php echo $lang->order->history; ?></th>
+            <th class='small text-muted' colspan='2'><?php echo $lang->order->history;?></th>
           </tr>
           <tr>
             <td class='small' colspan='2'>
@@ -85,11 +85,11 @@
               </ul>
             </td>
           </tr>
-          <?php if(!empty($order->enabledActions)): ?>
+          <?php if(!empty($order->enabledActions)):?>
           <tr>
             <td><?php foreach($order->enabledActions as $action) echo html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name, "class='btn'") . '&nbsp;';?></td>
           </tr>
-          <?php endif; ?>
+          <?php endif;?>
         </table>
       </div>
       <h6 class='header-dividing text-muted'><?php echo $lang->order->product;?></h6>
@@ -103,9 +103,9 @@
       <ul>
         <li>
           <strong><?php echo $customer->name;?></strong>
-          <?php if($customer->contactedBy): ?>
+          <?php if($customer->contactedBy):?>
           <div class='small text-muted'><i class='icon-user'></i> <?php echo $lang->order->contact . ': ' . $customer->contactedBy;?></div>
-          <?php endif; ?>
+          <?php endif;?>
           <div class='small text-muted'><i class='icon-time'></i> <?php echo $lang->customer->contactDate . ': ' . $customer->contactedDate;?></div>
         </li>
       </ul>

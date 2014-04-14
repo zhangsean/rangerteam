@@ -22,5 +22,3 @@ $config->order->statusClassList['assigned'] = 'alert-warning';
 $config->order->statusClassList['signed']   = 'alert-info';
 $config->order->statusClassList['payed']    = 'alert-success';
 $config->order->statusClassList['closed']   = '';
-
-
