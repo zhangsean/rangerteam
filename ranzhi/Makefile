@@ -38,4 +38,4 @@ ranzhi:
 	rm -rf ranzhi/www/cash
 	rm -rf ranzhi/www/sns
 	# zip it.
-	zip -rm -9 Ranzhi.$(VERSION).zip ranzhi
+	zip -rm -9 RanZhi.$(VERSION).zip ranzhi

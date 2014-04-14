@@ -1,6 +1,6 @@
 <?php
 /**
- * The English file of install module of Ranzhi.
+ * The English file of install module of RanZhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
@@ -19,7 +19,7 @@ $lang->install->error   = 'Error ';
 $lang->install->start            = 'Start install';
 $lang->install->keepInstalling   = 'Keep install this version';
 $lang->install->seeLatestRelease = 'See the latest release.';
-$lang->install->welcome          = 'Welcome to use Ranzhi.';
+$lang->install->welcome          = 'Welcome to use RanZhi.';
 $lang->install->desc             = <<<EOT
 <blockquote>
   <strong>{$lang->ranzhi}</strong>Developed by<strong><a href='http://www.cnezsoft.com' target='_blank' class='red'>QingDao Nature Easy Soft Network Technology Co,LTD</a></strong>，

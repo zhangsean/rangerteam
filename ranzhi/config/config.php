@@ -1,6 +1,6 @@
 <?php
 /**
- * The config file of Ranzhi.
+ * The config file of RanZhi.
  *
  * Don't modify this file directly, copy the item to my.php and change it.
  *

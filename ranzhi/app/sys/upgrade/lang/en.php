@@ -16,7 +16,7 @@ $lang->upgrade->fail    = 'Fail';
 $lang->upgrade->success = 'Success';
 $lang->upgrade->tohome  = 'Go to index';
 
-$lang->upgrade->index         = 'Upgrad Ranzhi.';
+$lang->upgrade->index         = 'Upgrad RanZhi.';
 $lang->upgrade->backup        = 'Backup';
 $lang->upgrade->selectVersion = 'Select version to upgrade from';
 $lang->upgrade->confirm       = 'Confirm the SQL to excute.';
