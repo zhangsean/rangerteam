@@ -25,7 +25,7 @@ class blockModel extends model
 
         $data->type = 'system';
 
-        $this->loadModel('setting')->setItem($account . '.crm.index.block.b' . $index, json_encode($data));
+        $this->loadModel('setting')->setItem($account . '.crm.index.block.b' . $index, helper::jsonEncode($data));
     }
 
     /**

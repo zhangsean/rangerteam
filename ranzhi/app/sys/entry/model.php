@@ -56,7 +56,7 @@ class entryModel extends model
     public function create()
     {
         $entry = fixer::input('post')->get();
-        if($entry->size == 'custom') $entry->size = json_encode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
+        if($entry->size == 'custom') $entry->size = helper::jsonEncode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
 
         $this->dao->insert(TABLE_ENTRY)
             ->data($entry, $skip = 'width,height,files')
@@ -83,7 +83,7 @@ class entryModel extends model
     {
         $oldEntry = $this->getByCode($code);
         $entry    = fixer::input('post')->get();
-        if($entry->size == 'custom') $entry->size = json_encode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
+        if($entry->size == 'custom') $entry->size = helper::jsonEncode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
         if(!isset($entry->visible)) $entry->visible = 0;
         unset($entry->logo);
         $this->dao->update(TABLE_ENTRY)->data($entry, $skip = 'width,height,files')

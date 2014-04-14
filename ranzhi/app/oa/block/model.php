@@ -23,7 +23,7 @@ class blockModel extends model
         $account = $this->app->user->account;
         $data    = fixer::input('post')->add('type', 'system')->get();
 
-        $this->loadModel('setting')->setItem($account . '.oa.index.block.b' . $index, json_encode($data));
+        $this->loadModel('setting')->setItem($account . '.oa.index.block.b' . $index, helper::jsonEncode($data));
     }
 
     /**

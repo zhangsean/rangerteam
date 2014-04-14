@@ -169,7 +169,7 @@ class contractModel extends model
         }
 
         $path = 'system.crm.contract.codeFormat';
-        return $this->loadModel('setting')->setItem($path, json_encode($unitList));
+        return $this->loadModel('setting')->setItem($path, helper::jsonEncode($unitList));
     }
      
     /**
