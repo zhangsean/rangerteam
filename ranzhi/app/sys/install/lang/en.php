@@ -80,7 +80,7 @@ $lang->install->setConfig  = 'Create config file';
 $lang->install->key        = 'Item';
 $lang->install->value      = 'Value';
 $lang->install->saveConfig = 'Save config';
-$lang->install->save2File  = '<div class="a-center"><span class="fail">Try to save the config auto, but failed.</span></div>Copy the text of the textareaand save to "<strong> %s </strong>".';
+$lang->install->save2File  = '<div class="text-center"><span class="fail">Try to save the config auto, but failed.</span></div>Copy the text of the textareaand save to "<strong> %s </strong>".';
 $lang->install->saved2File = 'The config file has saved to "<strong>%s</strong> ".';
 $lang->install->errorNotSaveConfig = 'Not save config file.';
 

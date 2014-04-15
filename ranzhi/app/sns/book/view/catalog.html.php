@@ -29,7 +29,7 @@
 
     <tbody>
       <?php foreach($children as $child):?>
-      <tr class='v-middle a-center'>
+      <tr class='v-middle text-center'>
         <td><?php echo html::select("type[$child->id]",    $lang->book->typeList, $child->type, "class='form-control'");?></td>
         <td><?php echo html::input("author[$child->id]",   $child->author,   "class='form-control'");?></td>
         <td><?php echo html::input("title[$child->id]",    $child->title,    "class='form-control'");?></td>
@@ -60,7 +60,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <td colspan='5' class='a-center'>
+        <td colspan='5' class='text-center'>
           <?php echo html::submitButton() . html::hidden('referer', $this->server->http_referer);?>
         </td>
       </tr>

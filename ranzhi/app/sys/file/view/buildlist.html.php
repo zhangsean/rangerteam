@@ -24,9 +24,9 @@
   </tr>
   <?php $i = 1;?>
   <?php foreach($files as $file):?>
-  <tr class='a-center'>
+  <tr class='text-center'>
     <td><?php echo $i ++;?></td>
-    <th class='a-left'><?php echo html::a($this->createLink('file', 'download', "id=$file->id"), $file->title, $file->isImage ? "target='_blank'" : '');?></th>
+    <th class='text-left'><?php echo html::a($this->createLink('file', 'download', "id=$file->id"), $file->title, $file->isImage ? "target='_blank'" : '');?></th>
     <td><?php echo $file->extension;?></td>
     <td><?php echo $file->size;?></td>
     <td><?php echo $file->addedDate;?></td>

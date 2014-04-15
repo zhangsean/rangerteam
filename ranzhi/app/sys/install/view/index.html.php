@@ -25,7 +25,7 @@
       </div>
       <?php if(!isset($latestRelease)):?>
       <div class='modal-footer'>
-        <p class='a-center'><?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary'");?></p>
+        <p class='text-center'><?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary'");?></p>
         <?php else:?>
         <?php vprintf($lang->install->newReleased, $latestRelease);?>
         <p>

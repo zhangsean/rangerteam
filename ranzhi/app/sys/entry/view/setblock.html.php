@@ -19,7 +19,7 @@ include "../../common/view/chosen.html.php";
 <form method='post' id='ajaxForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=$type")?>'>
   <table class='table table-form'>
     <tbody>
-      <tr class='a-left'>
+      <tr class='text-left'>
         <th class='w-100px'><?php echo $lang->block->name;?></th>
         <td>
         <?php
@@ -28,7 +28,7 @@ include "../../common/view/chosen.html.php";
         ?>
         </td>
       <?php foreach($params as $key => $param):?>
-      <tr class='a-left'>
+      <tr class='text-left'>
         <th><?php echo $param['name']?></th>
         <td>
         <?php

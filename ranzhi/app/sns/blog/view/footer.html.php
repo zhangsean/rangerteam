@@ -11,7 +11,7 @@
  */
 ?>
   <footer class="footer">
-    <div class='a-center mb-20px'>
+    <div class='text-center mb-20px'>
       <?php 
       echo "&copy; {$config->company->name} -" . date('Y') . '&nbsp;&nbsp;';
       printf($lang->poweredBy, $config->version, $config->version);

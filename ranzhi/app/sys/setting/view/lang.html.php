@@ -62,7 +62,7 @@
 </form>
 <?php
 $itemRow = <<<EOT
-  <tr class='a-center'>
+  <tr class='text-center'>
     <td>
       <input type='text' value="" name="keys[]" class='form-control'>
       <input type='hidden' value="0" name="systems[]">
