@@ -172,15 +172,12 @@ $lang->entry->menu->create = array('link' => 'Create|entry|create|');
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
 $lang->company->menu->basic   = 'Basic|company|setbasic|';
-$lang->company->menu->contact = 'Contact|company|setcontact|';
-$lang->company->menu->setlogo = 'LOGO|company|setlogo|';
 
 /* Menu system. */
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
 $lang->system->menu->main = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
-//$lang->system->menu->backup = 'Backup|admin|backup|';
-//
+
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
 $lang->article->menu->admin  = 'Browse|article|admin|';

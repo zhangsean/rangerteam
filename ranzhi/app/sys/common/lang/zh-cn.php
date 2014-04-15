@@ -172,8 +172,6 @@ $lang->entry->menu->create = '添加应用|entry|create|';
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
 $lang->company->menu->basic   = '公司信息|company|setbasic|';
-$lang->company->menu->contact = '联系方式|company|setcontact|';
-$lang->company->menu->setlogo = 'LOGO设置|company|setlogo|';
 
 /* Menu system. */
 $lang->system       = new stdclass();
