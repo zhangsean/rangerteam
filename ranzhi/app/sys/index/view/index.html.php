@@ -43,7 +43,7 @@ js::import($jsRoot . 'jquery/ips.js');
         <?php $index = 0;?>
         <?php foreach($blocks as $key => $block):?>
         <?php
-        $index = str_replace('b', '', $key);
+        $index = $key;
         $block = json_decode($block);
         ?>
         <div class='col-sm-6 col-md-4'>

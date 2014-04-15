@@ -65,6 +65,13 @@ class index extends control
         {
             if($this->loadModel('block')->initBlock('sys')) die(js::reload());
         }
+
+        foreach($blocks as $key => $block)
+        {
+            unset($blocks[$key]);
+            $key = str_replace('b', '', $key);
+            $blocks[$key] = $block;
+        }
         ksort($blocks);
 
         $this->view->allEntries = $allEntries;

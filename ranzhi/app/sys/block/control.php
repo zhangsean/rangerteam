@@ -173,6 +173,11 @@ class block extends control
             $sign  = $this->config->requestType == 'PATH_INFO' ? '?' : '&';
 
             $block->value->blockLink = $this->createLink('block', 'index') . $sign . $query;
+
+            /* Remove the prefix of block key. */
+            unset($blocks[$key]);
+            $key = str_replace('b', '', $key);
+            $blocks[$key] = $block;
         }
 
         ksort($blocks);

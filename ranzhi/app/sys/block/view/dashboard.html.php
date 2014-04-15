@@ -20,7 +20,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <?php $index = 0;?>
     <?php foreach($blocks as $key => $block):?>
     <?php
-    $index = str_replace('b', '', $key);
+    $index = $key;
     $block = $block->value;
     ?>  
     <div class='col-sm-6 col-md-4'>
