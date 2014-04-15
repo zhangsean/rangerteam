@@ -14,25 +14,25 @@ include '../../common/view/header.admin.html.php';
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-building'></i> <?php echo $lang->entry->admin;?></strong>
-    <span class='pull-right mr-10px'><?php echo html::a($this->inlink('create'), $lang->entry->create);?></span>
+    <span class='pull-right'><?php echo html::a($this->inlink('create'), $lang->entry->create);?></span>
   </div>
   <table class='table table-bordered table-hover table-striped'>
     <thead>
       <tr class='text-center'>
         <th class='w-100px'><?php echo $lang->entry->name;?></th>
         <th class='w-80px'><?php echo $lang->entry->code;?></th>
-        <th width='350'><?php echo $lang->entry->key;?></th>
+        <th class='w-300px'><?php echo $lang->entry->key;?></th>
         <th><?php echo $lang->entry->ip;?></th>
         <th class='w-100px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
       <?php foreach($entries as $entry):?>
-      <tr class='a-left'>
+      <tr class='text-left'>
         <td><?php echo "<img src='$entry->logo' class='small-icon'>" . $entry->name?></td>
         <td><?php echo $entry->code?></td>
         <td><?php echo $entry->key?></td>
-        <td><?php echo $entry->ip?></td>
+        <td class='text-center'><?php echo $entry->ip?></td>
         <td class='text-center'>
           <?php
           echo html::a($this->createLink('entry', 'edit',   "code=$entry->code"), $lang->edit);

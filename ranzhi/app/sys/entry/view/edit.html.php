@@ -19,12 +19,12 @@ include '../../common/view/header.admin.html.php';
     <form method='post' class='form form-horizontal' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
-          <th style='width: 100px'><?php echo $lang->entry->name;?></th>
-          <td style='width: 40%'><?php echo html::input('name', $entry->name, "class='form-control'");?></td>
+          <th class='w-100px'><?php echo $lang->entry->name;?></th>
+          <td class='w-p40'><?php echo html::input('name', $entry->name, "class='form-control'");?></td>
           <td>
             <?php
             $checked = $entry->visible ? 'checked="checked"' : ''; 
-            echo "<span><input type='checkbox' name='visible' value='1' $checked>{$lang->entry->note->visible}</span>";
+            echo "<input type='checkbox' name='visible' value='1' $checked>{$lang->entry->note->visible}";
             ?>
           </td>
         </tr>

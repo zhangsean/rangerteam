@@ -1,3 +1,9 @@
+/**
+ * create key for an entry.
+ * 
+ * @access public
+ * @return void
+ */
 function createKey()
 {
     var chars = '0123456789abcdefghiklmnopqrstuvwxyz'.split('');
@@ -10,5 +16,6 @@ function createKey()
     return false;
 }
 
+/* Toggle size custom form. */
 $('#size').change(function(){$('#custom').toggle($(this).val() == 'custom')});
 $(function(){$('#custom').toggle($('#size').val() == 'custom')})
