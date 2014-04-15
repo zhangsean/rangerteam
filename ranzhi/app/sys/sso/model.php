@@ -60,16 +60,38 @@ class ssoModel extends model
         return false;
     }
 
+    /**
+     * Get app key by code.
+     * 
+     * @param  string    $code 
+     * @access public
+     * @return string
+     */
     public function getAppKey($code)
     {
         return $this->dao->select('`key`')->from(TABLE_ENTRY)->where('code')->eq($code)->fetch('key');
     }
 
+    /**
+     * Get sso info by token.
+     * 
+     * @param  string    $token 
+     * @access public
+     * @return object
+     */
     public function getByToken($token)
     {
         return $this->dao->select('*')->from(TABLE_SSO)->where('token')->eq($token)->fetch();
     }
 
+    /**
+     * Create token.
+     * 
+     * @param  int    $sid 
+     * @param  int    $entryID 
+     * @access public
+     * @return string
+     */
     public function createToken($sid, $entryID)
     {
         $data  = new stdClass();

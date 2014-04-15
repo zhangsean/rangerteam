@@ -17,7 +17,7 @@
   <table class='table table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->task->assignedTo;?></th>
-      <td><?php echo html::select('assignedTo', $users, '', "class='form-control chosen'")?></td>
+      <td><?php echo html::select('assignedTo', $users, '', "class='form-control chosen'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->task->left;?></th>
@@ -25,7 +25,7 @@
     </tr>
     <tr>
       <th><?php echo $lang->comment?></th>
-      <td><?php echo html::textarea('comment')?></td>
+      <td><?php echo html::textarea('comment');?></td>
     </tr>
     <tr>
       <th></th>

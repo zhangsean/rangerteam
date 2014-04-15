@@ -1,6 +1,6 @@
 $(function()
 {
-    /* set style of priority options in form */
+    /* Set style of priority options in form */
     $('form .pri[data-value="' + $('form #pri').val() + '"]').addClass('active');
     $('form .pri').click(function()
     {

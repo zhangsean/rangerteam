@@ -14,28 +14,28 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-      <form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('task', 'finish', "taskID=$taskID")?>'>
-        <table class='table table-form'>
-          <tr>
-            <th><?php echo $lang->task->consumed;?></th>
-            <td><?php echo html::input('consumed', $task->consumed ? $task->consumed : '', "class='form-control' autocomplete='off'")?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->task->assignedTo;?></th>
-            <td><?php echo html::select('assignedTo', $users, $task->createdBy, "class='form-control'");?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->task->finishedDate;?></th>
-            <td><?php echo html::input('finishedDate', helper::now(), "class='form-control form-datetime'");?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->comment?></th>
-            <td><?php echo html::textarea('comment')?></td>
-          </tr>
-          <tr>
-            <th></th>
-            <td><?php echo html::submitButton();?></td>
-          </tr>
-        </table>
-      </form>
+<form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('task', 'finish', "taskID=$taskID")?>'>
+  <table class='table table-form'>
+    <tr>
+      <th><?php echo $lang->task->consumed;?></th>
+      <td><?php echo html::input('consumed', $task->consumed ? $task->consumed : '', "class='form-control' autocomplete='off'")?></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->task->assignedTo;?></th>
+      <td><?php echo html::select('assignedTo', $users, $task->createdBy, "class='form-control'");?></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->task->finishedDate;?></th>
+      <td><?php echo html::input('finishedDate', helper::now(), "class='form-control form-datetime'");?></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->comment?></th>
+      <td><?php echo html::textarea('comment');?></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><?php echo html::submitButton();?></td>
+    </tr>
+  </table>
+</form>
 <?php include '../../common/view/footer.modal.html.php';?>

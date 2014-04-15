@@ -25,17 +25,20 @@ class setting extends control
 
         $clientLang = $this->app->getClientLang();
         $appName    = $this->app->getAppName(); 
+
         if(!empty($_POST))
         {
             $lang = $_POST['lang'];
             $this->setting->deleteItems("lang=$lang&app=$appName&module=$module&section=$field", $type = 'lang');
+
             foreach($_POST['keys'] as $index => $key)
             {   
                 $value  = $_POST['values'][$index];
                 if(!$value or !$key) continue;
                 $system = $_POST['systems'][$index];
                 $this->setting->setItem("{$lang}.{$appName}.{$module}.{$field}.{$key}.{$system}", $value, $type = 'lang');
-            }   
+            }
+
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('lang', "module=$module&field=$field")));
         }   
@@ -67,4 +70,3 @@ class setting extends control
         $this->send(array('result' => 'success'));
     }   
 }
-

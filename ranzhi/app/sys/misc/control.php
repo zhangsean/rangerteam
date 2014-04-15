@@ -11,6 +11,12 @@
  */
 class misc extends control
 {
+    /**
+     * keep logon function.
+     * 
+     * @access public
+     * @return void
+     */
     public function ping()
     {
         die();

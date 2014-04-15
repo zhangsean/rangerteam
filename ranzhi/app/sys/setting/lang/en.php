@@ -20,13 +20,13 @@ $lang->setting->module->product  = 'Product status';
 $lang->setting->module->customer = 'Customer level';
 
 $lang->setting->user = new stdClass();
-$lang->setting->user->fields['roleList'] = 'role list';
+$lang->setting->user->fields['roleList'] = 'Role list';
 
 $lang->setting->product = new stdClass();
-$lang->setting->product->fields['statusList'] = 'product status';
+$lang->setting->product->fields['statusList'] = 'Product status';
 
 $lang->setting->customer = new stdClass();
-$lang->setting->customer->fields['typeList'] = 'customer level';
+$lang->setting->customer->fields['typeList'] = 'Customer levels';
 
 $lang->setting->currentLang = 'For current language';
 $lang->setting->allLang     = 'For all language';

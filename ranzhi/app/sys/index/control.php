@@ -60,6 +60,7 @@ class index extends control
         }
 
         $blocks = empty($this->config->index->block) ? array() : (array)$this->config->index->block;
+
         /* Init block when vist index first. */
         if(empty($blocks) and empty($this->config->init->block))
         {

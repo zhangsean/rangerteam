@@ -184,32 +184,6 @@ class file extends control
     }
 
     /**
-     * Allow a file to public.
-     * 
-     * @param  int  $fileID 
-     * @access public
-     * @return void
-     */
-    public function allow($fileID)
-    {
-        $this->dao->update(TABLE_FILE)->set('public')->eq(1)->where('id')->eq($fileID)->exec(false);
-        $this->send(array( 'result' => 'success', 'message' => $this->lang->setSuccess));
-    }
-
-    /**
-     * Deny a file from public.
-     * 
-     * @param  int  $fileID 
-     * @access public
-     * @return void
-     */
-    public function deny($fileID)
-    {
-        $this->dao->update(TABLE_FILE)->set('public')->eq(0)->where('id')->eq($fileID)->exec(false);
-        $this->send(array( 'result' => 'success', 'message' => $this->lang->setSuccess));
-    }
-
-    /**
      * set a image as primary image.
      * 
      * @param  int  $fileID 

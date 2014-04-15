@@ -11,6 +11,12 @@
  */
 class sso extends control
 {
+    /**
+     * Check privilege.
+     * 
+     * @access public
+     * @return void
+     */
     public function check()
     {
         $token  = $this->get->token;

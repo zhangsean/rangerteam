@@ -16,8 +16,6 @@ $lang->file->download   = 'Download';
 $lang->file->edit       = 'Edit';
 $lang->file->primary    = 'Primary';
 $lang->file->setPrimary = 'Set as primary';
-$lang->file->deny       = 'Deny';
-$lang->file->allow      = 'Allow';
 $lang->file->toggle     = 'Toggle';
 $lang->file->label      = 'Label';
 $lang->file->lblInfo    = '<i>(Type:%s, Size:%s, Added at: %s，Downloads: %s)</i>';
@@ -32,9 +30,6 @@ $lang->file->addedBy   = 'Added by';
 $lang->file->addedDate = 'Added date';
 $lang->file->public    = 'Public';
 $lang->file->downloads = 'Downloads';
-
-$lang->file->publics[0] = 'Needed login';
-$lang->file->publics[1] = 'ok';
 
 $lang->file->edit       = 'Edit';
 $lang->file->editFile   = 'Change file';

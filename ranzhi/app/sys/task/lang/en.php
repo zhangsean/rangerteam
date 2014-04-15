@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 $lang->task->common = 'Task';
-$lang->task->list   = 'List';
+$lang->task->list   = 'Task list';
 
 $lang->task->browse = 'Browse';
 $lang->task->view   = 'Info';
@@ -30,7 +30,7 @@ $lang->task->estimate       = 'Estimate';
 $lang->task->estimateAB     = 'Est';
 $lang->task->consumed       = 'Consumed';
 $lang->task->consumedAB     = 'Use';
-$lang->task->left           = 'Left';
+$lang->task->left           = 'Time Left';
 $lang->task->leftAB         = 'Left';
 $lang->task->deadline       = 'Deadline';
 $lang->task->deadlineAB     = 'Deadline';

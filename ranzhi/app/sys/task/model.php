@@ -54,16 +54,17 @@ class taskModel extends model
      */
     public function create()
     {
+        $now  = helper::now();
         $task = fixer::input('post')
             ->setDefault('estimate, left', 0)
             ->setDefault('estStarted', '0000-00-00')
             ->setDefault('deadline', '0000-00-00')
             ->setDefault('status', 'wait')
             ->setIF($this->post->estimate != false, 'left', $this->post->estimate)
-            ->setIF($this->post->assignedTo, 'assignedDate', helper::now())
+            ->setIF($this->post->assignedTo, 'assignedDate', $now)
             ->setForce('assignedTo', $this->post->assignedTo)
             ->setDefault('createdBy', $this->app->user->account)
-            ->setDefault('createdDate', helper::now())
+            ->setDefault('createdDate', $now)
             ->get();
 
         $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels')
@@ -73,16 +74,11 @@ class taskModel extends model
             ->checkIF($task->deadline != '0000-00-00', 'deadline', 'ge', $task->estStarted)
             ->exec();
 
-        if(!dao::isError())
-        {
-            $taskID = $this->dao->lastInsertID();
+        if(dao::isError()) return false;
 
-            $this->loadModel('file')->saveUpload('task', $taskID);
-
-            return $taskID;
-        }
-
-        return false;
+        $taskID = $this->dao->lastInsertID();
+        $this->loadModel('file')->saveUpload('task', $taskID);
+        return $taskID;
     }
 
     /**
@@ -113,13 +109,13 @@ class taskModel extends model
 
             ->setIF($this->post->status == 'closed', 'finishedBy', '')
             ->setIF($this->post->status == 'closed', 'finishedDate', '')
-            ->setIF($this->post->status == 'closed' and !$this->post->closedBy,     'closedBy',     $this->app->user->account)
-            ->setIF($this->post->status == 'closed' and !$this->post->closedDate,   'closedDate',   $now)
-            ->setIF($this->post->consumed > 0 and $this->post->left > 0 and $this->post->status == 'wait', 'status', 'doing')
-
-            ->setIF($this->post->assignedTo != $oldTask->assignedTo, 'assignedDate', $now)
+            ->setIF($this->post->status == 'closed' and !$this->post->closedBy,   'closedBy',   $this->app->user->account)
+            ->setIF($this->post->status == 'closed' and !$this->post->closedDate, 'closedDate', $now)
 
             ->setIF($this->post->status == 'wait' and $this->post->left == $oldTask->left and $this->post->consumed == 0, 'left', $this->post->estimate)
+
+            ->setIF($this->post->consumed > 0 and $this->post->left > 0 and $this->post->status == 'wait', 'status', 'doing')
+            ->setIF($this->post->assignedTo != $oldTask->assignedTo, 'assignedDate', $now)
 
             ->add('editedBy',   $this->app->user->account)
             ->add('editedDate', $now)
@@ -146,13 +142,10 @@ class taskModel extends model
             ->where('id')->eq((int)$taskID)
             ->exec();
 
-        if(!dao::isError())
-        {
-            $this->loadModel('file')->saveUpload('task', $taskID);
-            return commonModel::createChanges($oldTask, $task);
-        }
+        if(dao::isError()) return false;
 
-        return false;
+        $this->loadModel('file')->saveUpload('task', $taskID);
+        return commonModel::createChanges($oldTask, $task);
     }
 
     /**
@@ -166,7 +159,8 @@ class taskModel extends model
     {
         $oldTask = $this->getById($taskID);
         $now     = helper::now();
-        $task    = fixer::input('post')
+
+        $task = fixer::input('post')
             ->setDefault('left', 0)
             ->setDefault('assignedTo',   $oldTask->createdBy)
             ->setDefault('assignedDate', $now)

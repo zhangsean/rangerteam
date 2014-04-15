@@ -65,14 +65,14 @@
             <td>
               <div class="input-group">
                 <?php echo html::input('estimate', '', "class='form-control'");?>
-                <span class="input-group-addon"><?php echo $lang->task->hour ?></span>
+                <span class="input-group-addon"><?php echo $lang->task->hour;?></span>
               </div>
             </td>
           </tr>
         </table>
       </fieldset>
       <fieldset class='collapsed'>
-        <legend><?php echo $lang->task->moreInfo; ?></legend>
+        <legend><?php echo $lang->task->moreInfo;?></legend>
         <table class='table table-form'>
           <tr>
             <th class='w-80px'><?php echo $lang->task->desc;?></th>
@@ -88,6 +88,4 @@
     </form>
   </div>
 </div>
-<?php include '../../common/view/footer.lite.html.php';?>
-</body>
-</html>
+<?php include $app->getModuleRoot() . 'common/view/footer.html.php';?>
