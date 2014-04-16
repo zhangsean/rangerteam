@@ -16,9 +16,9 @@ $lang->upgrade->fail    = 'Fail';
 $lang->upgrade->success = 'Success';
 $lang->upgrade->tohome  = 'Go to index';
 
-$lang->upgrade->index         = 'Upgrad RanZhi.';
+$lang->upgrade->index         = 'Upgrade RanZhi.';
 $lang->upgrade->backup        = 'Backup';
-$lang->upgrade->selectVersion = 'Select version to upgrade from';
+$lang->upgrade->selectVersion = 'Select current version';
 $lang->upgrade->confirm       = 'Confirm the SQL to excute.';
 $lang->upgrade->execute       = 'Execute the SQL.';
 
@@ -36,6 +36,6 @@ $lang->upgrade->backupData = <<<EOT
 <a href="%s" class='btn btn-primary'>Next</a>
 EOT;
 
-$lang->upgrade->versionNote = "Please the version to upgrade.";
+$lang->upgrade->versionNote = "Please chose the correct version.";
 
 $lang->upgrade->fromVersions['1_1'] = '1.1.stable';

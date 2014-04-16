@@ -387,7 +387,7 @@ $.extend(
         /* Set the data target for modal. */
         $('a[data-toggle=modal]').attr('data-target', '#ajaxModal');
 
-        $('a[data-toggle=modal]').click(function()
+        $(document).on('click', 'a[data-toggle=modal]', function()
         {
             var $e = $(this);
             $('#ajaxModal').load($e.attr('href'),function()

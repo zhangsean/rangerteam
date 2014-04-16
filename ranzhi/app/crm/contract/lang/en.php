@@ -41,12 +41,12 @@ $lang->contract->edit    = 'Edit';
 $lang->contract->setting = 'Settings';
 
 $lang->contract->deliveryList[]        = '';
-$lang->contract->deliveryList['wait']  = 'Wait';
+$lang->contract->deliveryList['wait']  = 'Pending';
 $lang->contract->deliveryList['doing'] = 'Doing';
 $lang->contract->deliveryList['done']  = 'Done';
 
 $lang->contract->returnList[]        = '';
-$lang->contract->returnList['wait']  = 'Wait';
+$lang->contract->returnList['wait']  = 'Pending';
 $lang->contract->returnList['doing'] = 'Doing';
 $lang->contract->returnList['done']  = 'Done';
 

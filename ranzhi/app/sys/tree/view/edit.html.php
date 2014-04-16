@@ -55,5 +55,5 @@ $themeRoot = $webRoot . "theme/";
       </div>
     </div>
   </div>
-  <?php if(isset($pageJS)) js::execute($pageJS);?>
 </form>
+<?php if(isset($pageJS)) js::execute($pageJS);?>

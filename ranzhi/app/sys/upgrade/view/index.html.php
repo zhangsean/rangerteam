@@ -10,7 +10,7 @@
  */
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
-<table align='center' class='table table-bordered table-5'>
+<table align='center' class='table table-bordered'>
   <caption><?php echo $lang->upgrade->index;?></caption>
   <tr><td><?php printf($lang->upgrade->setOkFile, $okFile, $okFile, $okFile);?></td></tr>
 </table>

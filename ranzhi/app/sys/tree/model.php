@@ -297,16 +297,21 @@ class treeModel extends model
                     $menu .= '<li>';
                     $menu .= html::a(helper::createLink('doc', 'browse', "libID=product&module=0&productID=$productID&projectID=int"), $this->lang->tree->projectDoc);       
                     $menu .= '<ul>';
+
                     foreach($projectModules as $module)
                     {
                         $menu .= '<li>' . html::a(helper::createLink('doc', 'browse', "libID=product&module=$module->id&productID=$productID"), $module->name) . '</li>';
                     } 
+
                     $menu .= '</ul></li>';
                 } 
+
                 $menu .= '</ul>';
             } 
+
             $menu .='</li>';
         }
+
         $menu .= '</ul>';
         return $menu;
     }
@@ -347,10 +352,9 @@ class treeModel extends model
      */
     public static function createProductBrowseLink($category)
     {
-        $linkHtml = html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
+        $linkHtml = html::a(helper::createLink('product', 'browse', "categoryID={$category->id}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
     }
-
 
     /**
      * Create the blog browse link.
@@ -361,8 +365,21 @@ class treeModel extends model
      */
     public static function createBlogBrowseLink($category)
     {
-        $linkHtml = html::a(helper::createLink('blog', 'index', "category={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
+        $linkHtml = html::a(helper::createLink('blog', 'index', "category={$category->id}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
+    }
+
+    /**
+     * Create dept admin link 
+     * 
+     * @param  object    $category 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function createDeptAdminLink($category)
+    {
+        return html::a(helper::createLink('user', 'admin', "deptID={$category->id}"), $category->name, "id='category{$category->id}'");
     }
 
     /**
@@ -389,19 +406,6 @@ class treeModel extends model
     }
 
     /**
-     * Create dept admin link 
-     * 
-     * @param  object    $category 
-     * @static
-     * @access public
-     * @return string
-     */
-    public static function createDeptAdminLink($category)
-    {
-        return html::a(helper::createLink('user', 'admin', "deptID={$category->id}"), $category->name, "id='category{$category->id}'");
-    }
-
-    /**
      * Update a category.
      * 
      * @param  int     $categoryID 
@@ -422,9 +426,6 @@ class treeModel extends model
             $category->moderators = trim($category->moderators, ',');
             $category->moderators = empty($category->moderators) ? '' : ',' . $category->moderators . ',';
         }
-
-        /* Add id to check alias. */
-        $category->id = $categoryID; 
 
         $parent = $this->getById($this->post->parent);
         $category->grade = $parent ? $parent->grade + 1 : 1;
@@ -486,17 +487,12 @@ class treeModel extends model
         $i = 1;
         foreach($children as $key => $categoryName)
         {
-            $alias = $this->post->alias[$key];
             if(empty($categoryName)) continue;
 
             /* First, save the child without path field. */
             $category->name  = $categoryName;
-            $category->alias = $alias;
             $category->order = $this->post->maxOrder + $i * 10;
             $mode = $this->post->mode[$key];
-
-            /* Add id to check alias. */
-            $category->id = $mode == 'new' ?  0: $category->id = $key;
 
             if($mode == 'new')
             {
@@ -517,7 +513,6 @@ class treeModel extends model
                 $categoryID = $key;
                 $this->dao->update(TABLE_CATEGORY)
                     ->set('name')->eq($categoryName)
-                    ->set('alias')->eq($alias)
                     ->where('id')->eq($categoryID)
                     ->exec();
             }
