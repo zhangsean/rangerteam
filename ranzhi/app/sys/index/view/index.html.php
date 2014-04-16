@@ -23,7 +23,7 @@ js::import($jsRoot . 'jquery/ips.js');
       <li><?php echo html::a($this->createLink('user', 'profile'), html::image($themeRoot . 'default/images/ips/avatar.png', "class='avatar-img'") . "<strong>{$app->user->realname}</strong>", "class='app-btn' data-id='profile'");?></li>
       <li class="divider"></li>
       <li><?php echo html::a($this->createLink('entry', 'create'), "<i class='icon icon-plus'></i> {$lang->index->addEntry}", "target='_blank'"  )?></li>
-      <li><a href='###' class='fullscreen-btn' data-id='allapps'><div class='pull-right'><span class='label label-badge entries-count'></span></div><i class='icon icon-th-large'></i> <?php echo $lang->index->allEntries?></a></li>
+      <li><a href='###' class='fullscreen-btn' data-id='allapps'><i class='icon icon-th-large'></i> <?php echo $lang->index->allEntries?></a></li>
     </ul>
     <div id='apps-menu'>
       <ul class='bar-menu'></ul>
