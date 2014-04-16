@@ -100,6 +100,8 @@ class ssoModel extends model
         $data->time  = helper::now();
         $data->token = md5($sid . $entryID . helper::now());
         $this->dao->delete()->from(TABLE_SSO)->where('sid')->eq($sid)->andWhere('entry')->eq($entryID)->exec();
+        /* Delete the overdue token. */
+        $this->dao->delete()->from(TABLE_SSO)->where('time')->lt(date('Y-m-d H:i:s', strtotime("-2 hour")))->exec();
         $this->dao->insert(TABLE_SSO)->data($data)->exec();
         return $data->token;
     }
