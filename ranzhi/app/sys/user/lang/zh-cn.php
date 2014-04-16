@@ -12,7 +12,7 @@
 $lang->user->common    = '成员';
 
 $lang->user->id        = '编号';
-$lang->user->account   = '成员名';
+$lang->user->account   = '账户';
 $lang->user->admin     = '管理员';
 $lang->user->password  = '密码';
 $lang->user->password2 = '请重复密码';
