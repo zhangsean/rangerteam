@@ -9,8 +9,9 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->order->common = '订单维护';
-$lang->order->effort = '日志';
+$lang->order->common   = '订单维护';
+$lang->order->effort   = '日志';
+$lang->order->titleLBL = "编号:%s - 客户:%s - 产品:%s [%s]";
 
 $lang->order->id            = '编号';
 $lang->order->name          = '名称';

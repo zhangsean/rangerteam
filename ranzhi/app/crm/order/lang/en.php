@@ -11,6 +11,7 @@
  */
 $lang->order->common = 'Order';
 $lang->order->effort = 'Effort';
+$lang->order->titleLBL = "ID:%s - Customer:%s - Product:%s [%s]";
 
 $lang->order->id            = 'ID';
 $lang->order->name          = 'Name';

@@ -74,7 +74,7 @@ class orderModel extends model
         $orderPairs = array();
         foreach($orders as $key => $order)
         {
-           $orderPairs[$key] = $order->id .'_' . $customers[$order->customer] . '_' . $products[$order->product] . '_' . substr($order->createdDate, 0, 10); 
+           $orderPairs[$key] = sprintf($this->lang->order->titleLBL, $order->id, $customers[$order->customer], $products[$order->product], substr($order->createdDate, 0, 10)); 
         }
 
         return $orderPairs;
