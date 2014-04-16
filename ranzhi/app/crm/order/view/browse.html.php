@@ -21,29 +21,38 @@
       <tr>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px text-center' ><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
-        <th><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->order->customer);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->order->customer);?></th>
+        <th class='w-40px'><?php echo $lang->customer->level;?></th>
         <th><?php commonModel::printOrderLink('product', $orderBy, $vars, $lang->order->product);?></th>
-        <th class='w-120px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->order->createdBy);?></th>
-        <th class='w-120px'><?php commonModel::printOrderLink('assignedBy', $orderBy, $vars, $lang->order->assignedBy);?></th>
+        <th class='w-120px'><?php commonModel::printOrderLink('plan', $orderBy, $vars, $lang->order->plan);?>
+        <th class='w-120px'><?php commonModel::printOrderLink('real', $orderBy, $vars, $lang->order->real);?>
         <th class='w-120px'><?php commonModel::printOrderLink('assignedTo', $orderBy, $vars, $lang->order->assignedTo);?></th>
         <th class='w-60px' ><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->order->status);?></th>
-        <th class='w-150px'><?php echo $lang->actions;?></th>
+        <th class='w-100px' ><?php commonModel::printOrderLink('contactedDate', $orderBy, $vars, $lang->order->contactedDate);?></th>
+        <th class='w-100px' ><?php commonModel::printOrderLink('nextDate', $orderBy, $vars, $lang->order->nextDate);?></th>
+        <th class='w-120px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->order->createdBy);?></th>
+        <th class='w-160px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
       <?php foreach($orders as $order):?>
       <tr data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id"); ?>'>
         <td class='text-center'><?php echo $order->id;?></td>
-        <td><?php echo $customers[$order->customer];?></td>
+        <td><?php echo $customers[$order->customer]->name;?></td>
+        <td class='text-center'><?php echo $customers[$order->customer]->level;?></td>
         <td><?php echo $products[$order->product];?></td>
-        <td><?php echo $order->createdBy;?></td>
-        <td><?php echo $order->assignedBy;?></td>
-        <td><?php echo $order->assignedTo;?></td>
+        <td><?php echo $order->plan;?></td>
+        <td><?php echo $order->real;?></td>
+        <td><?php echo $users[$order->assignedTo];?></td>
         <td><?php echo isset($lang->order->statusList[$order->status]) ? $lang->order->statusList[$order->status] : $order->status;?></td>
+        <td><?php echo substr($order->contactedDate, 0, 10);?></td>
+        <td><?php echo $order->nextDate;?></td>
+        <td><?php echo $users[$order->createdBy];?></td>
         <td class='actions'>
           <?php
           echo html::a($this->createLink('order', 'edit',   "orderID=$order->id"), $lang->edit);
           echo html::a($this->createLink('order', 'assignTo', "orderID=$order->id"), $lang->assign, "data-toggle='modal'");
+          echo html::a($this->createLink('effort', 'createForObject', "objectType=order&objectID=$order->id"), $lang->order->effort, "data-toggle='modal'");
 
           if(empty($order->contract))
           {
@@ -76,7 +85,6 @@
               echo '<li>' . html::a($this->createLink('contact', 'create', "customerID=$order->customer"), $lang->order->contact) . '</li>';
           }
 
-          echo '<li>' . html::a($this->createLink('effort', 'createForObject', "objectType=order&objectID=$order->id"), $lang->order->effort, "data-toggle='modal'") . '</li>';
           ?>
           <?php 
           if(!empty($order->enabledActions))
@@ -92,7 +100,7 @@
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='12'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.html.php';?>

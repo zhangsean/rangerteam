@@ -38,6 +38,7 @@ $lang->order->activatedBy   = 'Activated By';
 $lang->order->activatedDate = 'Activated Date';
 $lang->order->contactedBy   = 'Contacted By';
 $lang->order->contactedDate = 'Contacted Date';
+$lang->order->nextDate      = 'Next contact';
 
 $lang->order->list          = 'Order List';
 $lang->order->browse        = 'Browse Order';

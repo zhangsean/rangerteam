@@ -16,7 +16,7 @@ $lang->order->titleLBL = "编号:%s - 客户:%s - 产品:%s [%s]";
 $lang->order->id            = '编号';
 $lang->order->name          = '名称';
 $lang->order->product       = '相关产品';
-$lang->order->customer      = '所属客户';
+$lang->order->customer      = '客户';
 $lang->order->contact       = '联系人';
 $lang->order->team          = '团队';
 $lang->order->plan          = '计划金额';
@@ -38,6 +38,7 @@ $lang->order->activatedBy   = '由谁激活';
 $lang->order->activatedDate = '激活时间';
 $lang->order->contactedBy   = '由谁联系';
 $lang->order->contactedDate = '联系时间';
+$lang->order->nextDate      = '下次联系';
 
 $lang->order->list          = '订单列表';
 $lang->order->browse        = '维护订单';
