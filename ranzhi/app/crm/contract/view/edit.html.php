@@ -52,6 +52,12 @@
             <td colspan='3'><?php echo html::textarea('items', $contract->items, "class='form-control'");?></td>
           </tr>
           <tr>
+            <th><?php echo $lang->contract->delivery;?></th>
+            <td><?php echo html::select('delivery', $lang->contract->deliveryList, $contract->delivery, "class='form-control'");?></td>
+            <th><?php echo $lang->contract->return;?></th>
+            <td><?php echo html::select('return', $lang->contract->returnList, $contract->return, "class='form-control'");?></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->contract->status;?></th>
             <td><?php echo html::select('status', $lang->contract->statusList, $contract->status, "class='form-control'");?></td>
             <th><?php echo $lang->contract->contact;?></th>
