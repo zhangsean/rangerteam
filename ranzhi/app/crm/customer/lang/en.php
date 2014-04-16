@@ -18,6 +18,7 @@ $lang->customer->industry    = 'Industry';
 $lang->customer->area        = 'Area';
 $lang->customer->status      = 'Status';
 $lang->customer->level       = 'Level';
+$lang->customer->intension   = 'Purchase Intention';
 $lang->customer->site        = 'Site';
 $lang->customer->weibo       = 'Sina Weibo';
 $lang->customer->weixin      = 'Wechat';

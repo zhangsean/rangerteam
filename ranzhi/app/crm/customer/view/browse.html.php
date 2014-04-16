@@ -22,11 +22,13 @@
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->customer->id);?></th>
         <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->customer->name);?></th>
-        <th class='w-160px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->customer->createdDate);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->customer->type);?></th>
+        <th class='w-150px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->customer->createdDate);?></th>
+        <th class='w-60px'><?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->customer->type);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->customer->status);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('size',        $orderBy, $vars, $lang->customer->size);?></th>
-        <th class='w-60px'> <?php commonModel::printOrderLink('level',       $orderBy, $vars, $lang->customer->level);?></th>
+        <th class='w-100px'> <?php commonModel::printOrderLink('level',       $orderBy, $vars, $lang->customer->level);?></th>
+        <th class='w-150px'> <?php commonModel::printOrderLink('contactDate', $orderBy, $vars, $lang->customer->contactDate);?></th>
+        <th class='w-100px'> <?php commonModel::printOrderLink('nextDate',       $orderBy, $vars, $lang->customer->nextDate);?></th>
         <th class='w-100px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
@@ -37,9 +39,11 @@
         <td class='text-left'><strong><?php echo $customer->name;?></strong></td>
         <td><?php echo $customer->createdDate;?></td>
         <td><?php echo $lang->customer->typeList[$customer->type];?></td>
+        <td><?php echo $lang->customer->statusList[$customer->status];?></td>
         <td><?php echo $lang->customer->sizeList[$customer->size];?></td>
         <td><?php echo $customer->level;?></td>
-        <td><?php echo $lang->customer->statusList[$customer->status];?></td>
+        <td><?php echo $customer->contactedDate;?></td>
+        <td><?php echo $customer->nextDate;?></td>
         <td class='actions'>
           <?php
           echo html::a(inlink('edit', "customerID=$customer->id"), $lang->edit);

@@ -92,6 +92,7 @@ CREATE TABLE `crm_customer` (
   `area` mediumint(8) unsigned NOT NULL,
   `status` char(30) NOT NULL,
   `level` tinyint(3) unsigned NOT NULL,
+  `intension` text NOT NULL,
   `site` varchar(100) NOT NULL,
   `weibo` char(50) NOT NULL,
   `weixin` char(50) NOT NULL,
@@ -384,7 +385,7 @@ CREATE TABLE `sys_product` (
   `createdDate` datetime NOT NULL,
   `editedBy` varchar(30) NOT NULL,
   `editedDate` datetime NOT NULL,
-  `deleted` enum('0','1') NOT NULL,
+  `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_sso`;

@@ -50,6 +50,10 @@
                 <th><?php echo $lang->customer->level;?></th>
                 <td><?php echo html::input('level', '', "class='form-control'");?></td>
               </tr>
+              <tr>
+                <th><?php echo $lang->customer->intension;?></th>
+                <td colspan='3'><?php echo html::textarea('intension', '', "class='form-control' rows=2");?></td>
+              </tr>
             </table>
           </fieldset>
           <fieldset class='collapsed'>
