@@ -380,7 +380,7 @@ CREATE TABLE `sys_product` (
   `type` varchar(10) NOT NULL,
   `status` varchar(10) NOT NULL,
   `roles` varchar(255) NOT NULL,
-  `summary` text NOT NULL,
+  `desc` text NOT NULL,
   `createdBy` varchar(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `editedBy` varchar(30) NOT NULL,

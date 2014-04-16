@@ -96,7 +96,7 @@
       <ul>
         <li>
           <strong><?php echo $product->name;?></strong>
-          <div class='small text-muted'><?php echo $product->summary;?></div>
+          <div class='small text-muted'><?php echo $product->desc;?></div>
         </li>
       </ul>
       <h6 class='header-dividing text-muted'><?php echo $lang->order->customer;?></h6>
