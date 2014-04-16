@@ -21,8 +21,8 @@
     <form method='post' role='form' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
-          <th style='width: 100px'><?php echo $lang->article->category;?></th>
-          <td style="width: 40%"><?php echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");?></td><td></td>
+          <th class='w-100px'><?php echo $lang->article->category;?></th>
+          <td class='w-p40'><?php echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->article->title;?></th>
