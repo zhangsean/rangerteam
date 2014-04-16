@@ -15,7 +15,6 @@ $lang->app->name = 'CRM';
 $lang->menu->crm = new stdclass();
 $lang->menu->crm->dashboard = '我的地盘|dashboard|index|';
 $lang->menu->crm->order     = '订单|order|index|';
-$lang->menu->crm->task      = '任务|task|index|';
 $lang->menu->crm->customer  = '客户|customer|index|';
 $lang->menu->crm->contract  = '合同|contract|index|';
 $lang->menu->crm->product   = '产品|product|index|';
@@ -46,12 +45,6 @@ $lang->contact->menu = new stdclass();
 $lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> 联系人列表|contact|browse|', 'alias' => 'edit');
 $lang->contact->menu->create = '<i class="icon-plus"></i> 添加联系人|contact|create|';
 
-/* Menu of task module. */
-$lang->task = new stdclass();
-$lang->task->menu = new stdclass();
-$lang->task->menu->browse = array('link' => '<i class="icon-th-list"></i> 任务列表|task|browse|', 'alias' => 'edit');
-$lang->task->menu->create = '<i class="icon-plus"></i> 添加任务|task|create|';
-
 /* Menu of contract module. */
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
@@ -62,7 +55,6 @@ $lang->contract->menu->setting = '<i class="icon-wrench"></i> 系统设置|contr
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->role     = '员工角色|setting|lang|module=user&field=roleList';
 $lang->setting->menu->product  = '产品状态|setting|lang|module=product&field=statusList';
 $lang->setting->menu->customer = '客户类型|setting|lang|module=customer&field=typeList';
 

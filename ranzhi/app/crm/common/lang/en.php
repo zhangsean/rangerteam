@@ -15,7 +15,6 @@ $lang->app->name = 'CRM';
 $lang->menu->crm = new stdclass();
 $lang->menu->crm->dashboard = 'Dashboard|dashboard|index|';
 $lang->menu->crm->order     = 'Orders|order|index|';
-$lang->menu->crm->task      = 'Tasks|task|index|';
 $lang->menu->crm->customer  = 'Customers|customer|index|';
 $lang->menu->crm->contract  = 'Contracts|contract|index|';
 $lang->menu->crm->product   = 'Products|product|index|';
@@ -46,12 +45,6 @@ $lang->contact->menu = new stdclass();
 $lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> Contact List|contact|browse|', 'alias' => 'edit');
 $lang->contact->menu->create = '<i class="icon-plus"></i> Create Contact|contact|create|';
 
-/* Menu of task module. */
-$lang->task = new stdclass();
-$lang->task->menu = new stdclass();
-$lang->task->menu->browse = array('link' => '<i class="icon-th-list"></i> Task List|task|browse|', 'alias' => 'edit');
-$lang->task->menu->create = '<i class="icon-plus"></i> Create Task|task|create|';
-
 /* Menu of contract module. */
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
@@ -62,7 +55,6 @@ $lang->contract->menu->setting = '<i class="icon-wrench"></i> Settings|contract|
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->role     = 'Roles|setting|lang|module=user&field=roleList';
 $lang->setting->menu->product  = 'Product Status|setting|lang|module=product&field=statusList';
 $lang->setting->menu->customer = 'Customer Status|setting|lang|module=customer&field=typeList';
 
