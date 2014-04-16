@@ -22,7 +22,6 @@ $lang->customer->intension   = 'Purchase Intention';
 $lang->customer->site        = 'Site';
 $lang->customer->weibo       = 'Sina Weibo';
 $lang->customer->weixin      = 'Wechat';
-$lang->customer->referType   = 'Source';
 $lang->customer->desc        = 'Description';
 $lang->customer->createdBy   = 'Created By';
 $lang->customer->createdDate = 'Created Date';

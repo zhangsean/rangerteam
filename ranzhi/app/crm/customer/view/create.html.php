@@ -68,8 +68,6 @@
               <tr>
                 <th><?php echo $lang->customer->weixin;?></th>
                 <td><?php echo html::input('weixin', '', "class='form-control'");?></td>
-                <th><?php echo $lang->customer->referType;?></th>
-                <td><?php echo html::input('referType', '', "class='form-control'");?></td>
               </tr>
             </table>
           </fieldset>

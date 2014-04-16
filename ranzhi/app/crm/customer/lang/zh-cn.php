@@ -22,7 +22,6 @@ $lang->customer->intension   = '购买意向';
 $lang->customer->site        = '网站';
 $lang->customer->weibo       = '微博';
 $lang->customer->weixin      = '微信';
-$lang->customer->referType   = '来源';
 $lang->customer->desc        = '简介';
 $lang->customer->createdBy   = '由谁添加';
 $lang->customer->createdDate = '添加时间';
