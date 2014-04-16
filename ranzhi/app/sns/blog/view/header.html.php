@@ -41,7 +41,7 @@ $navs = $this->tree->getChildren(0, 'blog');
   {
       js::import($jsRoot . 'jquery/min.js');
       js::import($jsRoot . 'bootstrap/min.js');
-      js::import($jsRoot . 'zentao.js');
+      js::import($jsRoot . 'ranzhi.js');
       js::import($jsRoot . 'my.js');
   }
   else

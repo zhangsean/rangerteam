@@ -16,7 +16,7 @@ $jqueryRoot = $jsRoot . 'jquery/';
 $jsFiles[] = $jsRoot . 'jquery/min.js';
 $jsFiles[] = $jsRoot . 'jquery/form/min.js';
 $jsFiles[] = $jsRoot . 'zui/min.js';
-$jsFiles[] = $jsRoot . 'zentao.js';
+$jsFiles[] = $jsRoot . 'ranzhi.js';
 $jsFiles[] = $jsRoot . 'my.js';
 
 /* Combine these js files. */
