@@ -146,19 +146,19 @@ class blockModel extends model
     /**
      * Init block when account use first. 
      * 
-     * @param  string    $app 
+     * @param  string    $appName 
      * @access public
      * @return bool
      */
-    public function initBlock($app)
+    public function initBlock($appName)
     {
         $this->app->loadLang('block', 'sys');
-        $blocks  = $this->lang->block->default[$app];
+        $blocks  = $this->lang->block->default[$appName];
         $account = $this->app->user->account;
 
         $this->loadModel('setting');
         /* Mark this app has init. */
-        $this->setting->setItem("$account.$app.common.init.block", true);
+        $this->setting->setItem("$account.$appName.common.blockInited", true);
         $this->loadModel('entry');
         foreach($blocks as $key => $block)
         {
@@ -171,7 +171,7 @@ class blockModel extends model
                 $block['entryID'] = $entry->id;
             }
 
-            $this->setting->setItem("$account.$app.index.block.$key", helper::jsonEncode($block));
+            $this->setting->setItem("$account.$appName.index.block.$key", helper::jsonEncode($block));
         }
 
         return !dao::isError();

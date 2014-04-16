@@ -142,13 +142,14 @@ class block extends control
         $this->app->loadLang('index', 'sys');
         $personal = isset($this->config->personal->index) ? $this->config->personal->index : array();
         $blocks   = empty($personal->block) ? array() : (array)$personal->block;
+        $inited   = empty($this->config->personal->common->blockInited) ? '' : $this->config->personal->common->blockInited;
         foreach($blocks as $key => $block)
         {
             if($block->app != $appName) unset($blocks[$key]);
         }
 
         /* Init block when vist index first. */
-        if(empty($blocks) and empty($this->config->init->block))
+        if(empty($blocks) and !($inited and $inited->app == $appName and $inited->value))
         {
             if($this->block->initBlock($appName)) die(js::reload());
         }
