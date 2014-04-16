@@ -19,7 +19,7 @@ $lang->menu->crm->customer  = 'Customers|customer|index|';
 $lang->menu->crm->contract  = 'Contracts|contract|index|';
 $lang->menu->crm->product   = 'Products|product|index|';
 $lang->menu->crm->contact   = 'Contact|contact|index|';
-$lang->menu->crm->setting   = 'Settings|setting|lang|module=user&field=roleList';
+$lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=statusList';
 
 /* Menu of customer module. */
 $lang->customer = new stdclass();

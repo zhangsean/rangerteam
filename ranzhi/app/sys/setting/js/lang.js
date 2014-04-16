@@ -1,8 +1,10 @@
 $(function()
 {
     /* Highlight current nav. */
-    $('.nav li').removeClass('active');
-    $(".nav li a[href*='" + v.module + "']").parent().addClass('active');
+    /* eg set the role of user. */
+    var menu =  $('.leftmenu .nav li').size() == 0 ? '.nav li' : '.leftmenu .nav li';
+    $(menu).removeClass('active');
+    $(menu + " a[href*='" + v.module + "']").parent().addClass('active');
 
     /* Add an item. */
     $(document).on('click', '.add', function()
