@@ -37,5 +37,7 @@ ranzhi:
 	rm -rf ranzhi/app/sns
 	rm -rf ranzhi/www/cash
 	rm -rf ranzhi/www/sns
+	rm  ranzhi/www/theme/zui/css/theme.cash.css
+	rm  ranzhi/www/theme/zui/css/theme.sns.css
 	# zip it.
 	zip -rm -9 RanZhi.$(VERSION).zip ranzhi
