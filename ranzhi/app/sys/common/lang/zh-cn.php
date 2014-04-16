@@ -71,6 +71,7 @@ $lang->hide           = '隐藏';
 $lang->delete         = '删除';
 $lang->close          = '关闭';
 $lang->finish         = '完成';
+$lang->cancel         = '取消';
 $lang->save           = '保存';
 $lang->confirm        = '确认';
 $lang->preview        = '预览';

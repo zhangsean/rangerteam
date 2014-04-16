@@ -71,6 +71,7 @@ $lang->hide           = 'Hide';
 $lang->delete         = 'Delete';
 $lang->close          = 'Close';
 $lang->finish         = 'Finish';
+$lang->cancel         = 'Cancel';
 $lang->save           = 'Save';
 $lang->confirm        = 'Confirm';
 $lang->preview        = 'Preview';
