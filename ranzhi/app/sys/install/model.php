@@ -331,6 +331,7 @@ EOT;
      */
     public function installEntry()
     {
+        include $this->app->getConfigRoot() . "my.php";
         /* Remove all entries. */
         $this->dao->delete('*')->from(TABLE_ENTRY)->exec();
 
@@ -348,7 +349,7 @@ EOT;
         $entry->size     = 'max';
         $entry->position = 'default';
 
-        $block = $this->config->requestType == 'GET' ? 'crm/index.php?m=block&f=index' : 'crm/block-index.html';
+        $block = $config->requestType == 'GET' ? 'crm/index.php?m=block&f=index' : 'crm/block-index.html';
         $entry->block = $this->config->webRoot . $block;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
@@ -360,7 +361,7 @@ EOT;
         $entry->logo  = $this->config->webRoot . 'theme/default/images/ips/app-oa.png';
         $entry->login = '../oa';
 
-        $block = $this->config->requestType == 'GET' ? 'oa/index.php?m=block&f=index' : 'oa/block-index.html';
+        $block = $config->requestType == 'GET' ? 'oa/index.php?m=block&f=index' : 'oa/block-index.html';
         $entry->block = $this->config->webRoot . $block;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
