@@ -37,7 +37,7 @@ $lang->customer->typeList['corporate']  = '企业';
 $lang->customer->typeList['limited']    = '有限公司';
 $lang->customer->typeList['privated']   = '民营';
 $lang->customer->typeList['foreign']    = '外企';
-$lang->customer->typeList['personal']   = '个体';
+$lang->customer->typeList['personal']   = '个人';
 
 $lang->customer->statusList['potential'] = '潜在';
 $lang->customer->statusList['intension'] = '意向';
