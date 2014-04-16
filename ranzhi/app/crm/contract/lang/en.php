@@ -52,6 +52,8 @@ $lang->contract->returnList['done']  = 'Done';
 
 $lang->contract->statusList[]           = '';
 $lang->contract->statusList['normal']   = 'Normal';
+$lang->contract->statusList['returned'] = 'Receive payments';
+$lang->contract->statusList['delivery'] = 'Delivery';
 $lang->contract->statusList['closed']   = 'Closed';
 $lang->contract->statusList['canceled'] = 'Canceled';
 

@@ -16,7 +16,7 @@
   <strong><i class="icon-list-ul"></i> <?php echo $lang->contract->list;?></strong>
   <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->contract->create, 'class="btn btn-primary"');?></div>
   </div>
-  <table class='table table-hover table-striped tablesorter table-data'>
+  <table class='table table-hover table-striped tablesorter table-data' id='contractList'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
@@ -25,10 +25,8 @@
         <th class='w-100px'><?php commonModel::printOrderLink('customer',    $orderBy, $vars, $lang->contract->customer);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('amount',      $orderBy, $vars, $lang->contract->amount);?></th>
         <th class='w-160px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->contract->createdDate);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('delivery',    $orderBy, $vars, $lang->contract->delivery);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('return',      $orderBy, $vars, $lang->contract->return);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->contract->status);?></th>
-        <th class='w-100px'><?php echo $lang->actions;?></th>
+        <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -39,12 +37,40 @@
         <td><?php echo $customers[$contract->customer];?></td>
         <td><?php echo $contract->amount;?></td>
         <td><?php echo $contract->createdDate;?></td>
-        <td><?php echo $lang->contract->deliveryList[$contract->delivery];?></td>
-        <td><?php echo $lang->contract->returnList[$contract->return];?></td>
         <td><?php echo $lang->contract->statusList[$contract->status];?></td>
         <td>
           <?php
           echo html::a($this->createLink('contract', 'edit', "contract=$contract->id"), $lang->edit);
+          if($contract->status == 'returned' or $contract->status == 'canceled' or $contract->status == 'closed')
+          {
+              echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->contract->return . '</a> ';
+          }
+          else
+          {
+              echo html::a($this->createLink('contract', 'receive',  "contract=$contract->id"), $lang->contract->return, "class='reload'");
+          }
+
+          if($contract->status == 'delivered' or $contract->status == 'canceled' or $contract->status == 'closed')
+          {
+              echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->contract->delivery . '</a> ';
+          }
+          else
+          {
+              echo html::a($this->createLink('contract', 'delivery', "contract=$contract->id"), $lang->contract->delivery, "class='reload'");
+          }
+
+          if($contract->status == 'canceled' or $contract->status == 'closed')
+          {
+              echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->cancel . '</a> ';
+          }
+          else
+          {
+              echo html::a($this->createLink('contract', 'cancel', "contract=$contract->id"), $lang->cancel, "class='reload'");
+          }
+
+          if($contract->status == 'closed') echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->finish . '</a> ';
+          if($contract->status != 'closed') echo html::a($this->createLink('contract', 'finish', "contract=$contract->id"), $lang->finish, "class='reload'");
+
           echo html::a($this->createLink('contract', 'delete', "contract=$contract->id"), $lang->delete, "class='deleter'");
           ?>
         </td>

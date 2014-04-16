@@ -100,6 +100,58 @@ class contract extends control
     }
 
     /**
+     * The delivery of the contract.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return void
+     */
+    public function delivery($contractID)
+    {
+        if($this->contract->delivery($contractID)) $this->send(array('result' => 'success', 'locate' => inlink('browse')));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
+     * Receive payments of the contract.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return void
+     */
+    public function receive($contractID)
+    {
+        if($this->contract->receive($contractID)) $this->send(array('result' => 'success', 'locate' => inlink('browse')));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
+     * Cancel contract.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return void
+     */
+    public function cancel($contractID)
+    {
+        if($this->contract->cancel($contractID)) $this->send(array('result' => 'success', 'locate' => inlink('browse')));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
+     * Finish contract.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return void
+     */
+    public function finish($contractID)
+    {
+        if($this->contract->finish($contractID)) $this->send(array('result' => 'success', 'locate' => inlink('browse')));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
      * View contract. 
      * 
      * @param  int    $contractID 

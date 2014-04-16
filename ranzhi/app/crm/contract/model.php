@@ -140,6 +140,82 @@ class contractModel extends model
     }
 
     /**
+     * The delivery of the contract.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return bool
+     */
+    public function delivery($contractID)
+    {
+        $contract = new stdclass();
+        $contract->status        = 'delivered';
+        $contract->deliveredBy   = $this->app->user->account;
+        $contract->deliveredDate = helper::now();
+
+        $this->dao->update(TABLE_CONTRACT)->data($contract)->where('id')->eq($contractID)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
+     * Receive payments of the contract.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return bool
+     */
+    public function receive($contractID)
+    {
+        $contract = new stdclass();
+        $contract->status       = 'returned';
+        $contract->returnedBy   = $this->app->user->account;
+        $contract->returnedDate = helper::now();
+
+        $this->dao->update(TABLE_CONTRACT)->data($contract)->where('id')->eq($contractID)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
+     * Cancel contract.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return bool
+     */
+    public function cancel($contractID)
+    {
+        $contract = new stdclass();
+        $contract->status       = 'canceled';
+        $contract->canceledBy   = $this->app->user->account;
+        $contract->canceledDate = helper::now();
+
+        $this->dao->update(TABLE_CONTRACT)->data($contract)->where('id')->eq($contractID)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
+     * Finish contract.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return bool
+     */
+    public function finish($contractID)
+    {
+        $contract = new stdclass();
+        $contract->status       = 'closed';
+        $contract->finishedBy   = $this->app->user->account;
+        $contract->finishedDate = helper::now();
+
+        $this->dao->update(TABLE_CONTRACT)->data($contract)->where('id')->eq($contractID)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
      * Delete contract.
      * 
      * @param  int    $contractID 

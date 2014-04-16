@@ -50,10 +50,12 @@ $lang->contract->returnList['wait']  = '等待回款';
 $lang->contract->returnList['doing'] = '回款中';
 $lang->contract->returnList['done']  = '回款完成';
 
-$lang->contract->statusList[]           = '';
-$lang->contract->statusList['normal']   = '正常';
-$lang->contract->statusList['closed']   = '已完成';
-$lang->contract->statusList['canceled'] = '已取消';
+$lang->contract->statusList[]            = '';
+$lang->contract->statusList['normal']    = '正常';
+$lang->contract->statusList['returned']  = '已回款';
+$lang->contract->statusList['delivered'] = '已交付';
+$lang->contract->statusList['closed']    = '已完成';
+$lang->contract->statusList['canceled']  = '已取消';
 
 $lang->contract->codeUnitList[]        = '';
 $lang->contract->codeUnitList['Y']     = '年';
