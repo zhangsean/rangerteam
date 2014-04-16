@@ -30,3 +30,7 @@ $lang->setting->customer->fields['typeList'] = '客户级别';
 
 $lang->setting->currentLang = '适用当前语言';
 $lang->setting->allLang     = '适用所有语言';
+
+$lang->setting->placeholder = new stdclass();
+$lang->setting->placeholder->key   = '变量名';
+$lang->setting->placeholder->value = '自定义显示值';

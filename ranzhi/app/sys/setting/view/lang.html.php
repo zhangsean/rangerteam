@@ -64,11 +64,11 @@
 $itemRow = <<<EOT
   <tr class='text-center'>
     <td>
-      <input type='text' value="" name="keys[]" class='form-control'>
+      <input type='text' value="" name="keys[]" class='form-control' placeholder='{$lang->setting->placeholder->key}'>
       <input type='hidden' value="0" name="systems[]">
     </td>
     <td>
-      <input type='text' value="" name="values[]" class='form-control'>
+      <input type='text' value="" name="values[]" class='form-control' placeholder='{$lang->setting->placeholder->value}'>
     </td>
     <td class='text-left text-middle'>
       <a href='javascript:;' class='btn btn-mini add'><i class='icon-plus'></i></a>
