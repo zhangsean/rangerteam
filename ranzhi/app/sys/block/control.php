@@ -24,7 +24,7 @@ class block extends control
 
         $allEntries[''] = '';
         foreach($entries as $id => $entry) $allEntries[$id] = $entry->name;
-        $allEntries['rss']  = 'RSS';
+        //$allEntries['rss']  = 'RSS';
         $allEntries['html'] = 'HTML';
 
         $this->view->block      = $this->block->getBlock($index);
