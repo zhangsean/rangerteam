@@ -49,44 +49,7 @@
         <td><?php echo $order->nextDate;?></td>
         <td><?php echo $users[$order->createdBy];?></td>
         <td class='actions'>
-          <?php
-          echo html::a($this->createLink('order', 'edit',   "orderID=$order->id"), $lang->edit);
-          echo html::a($this->createLink('order', 'assignTo', "orderID=$order->id"), $lang->assign, "data-toggle='modal'");
-          echo html::a($this->createLink('effort', 'createForObject', "objectType=order&objectID=$order->id"), $lang->order->effort, "data-toggle='modal'");
-
-          if(empty($order->contract))
-          {
-              echo html::a($this->createLink('contract', 'create', "orderID=$order->id"), $lang->order->sign);
-          }
-          else
-          {
-              echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->order->sign . '</a> ';
-          }
-
-          echo "<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
-
-          if($order->status != 'closed')
-          {
-              echo '<li>' . html::a($this->createLink('order', 'close', "orderID=$order->id"), $lang->close, "data-toggle='modal'") . '</li>';
-          }
-          elseif($order->closedReason != 'payed') 
-          {
-              echo '<li>' . html::a($this->createLink('order', 'activate', "orderID=$order->id"), $lang->activate, "class='reload'") . '</li>';
-          }
-
-          echo '<li>' . html::a($this->createLink('order', 'team', "orderID=$order->id"), $lang->order->team) . '</li>';
-
-          if(!empty($order->contact))
-          {
-              echo '<li>' . html::a($this->createLink('order', 'contact', "orderID=$order->id"), $lang->order->contact) . '</li>';
-          }
-          else
-          {
-              echo '<li>' . html::a($this->createLink('contact', 'create', "customerID=$order->customer"), $lang->order->contact) . '</li>';
-          }
-
-          ?>
-          <?php echo '</ul></div>'; ?>
+          <?php echo $this->order->buildOperateMenu($order); ?>
         </td>
       </tr>
       <?php endforeach;?>

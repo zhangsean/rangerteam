@@ -287,4 +287,53 @@ class orderModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Build operate menu of an order.
+     * 
+     * @param  object    $order 
+     * @access public
+     * @return string
+     */
+    public function buildOperateMenu($order)
+    {
+        $menu = '';
+        $menu .= html::a(inlink('edit',   "orderID=$order->id"), $this->lang->edit);
+        $menu .= html::a(inlink('assignTo', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal'");
+        $menu .= html::a(helper::createLink('effort', 'createForObject', "objectType=order&objectID=$order->id"), $this->lang->order->effort, "data-toggle='modal'");
+
+        if(empty($order->contract))
+        {
+            $menu .=html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign);
+        }
+        else
+        {
+            $menu .="<a href='###' disabled='disabled' class='disabled'>" . $this->lang->order->sign . '</a> ';
+        }
+
+        $menu .="<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
+
+        if($order->status != 'closed')
+        {
+            $menu .='<li>' . html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "data-toggle='modal'") . '</li>';
+        }
+        elseif($order->closedReason != 'payed') 
+        {
+            $menu .='<li>' . html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='reload'") . '</li>';
+        }
+
+        $menu .='<li>' . html::a(inlink('team', "orderID=$order->id"), $this->lang->order->team) . '</li>';
+
+        if(!empty($order->contact))
+        {
+            $menu .='<li>' . html::a(inlink('contact', "orderID=$order->id"), $this->lang->order->contact) . '</li>';
+        }
+        else
+        {
+            $menu .='<li>' . html::a(helper::createLink('contact', 'create', "customerID=$order->customer"), $this->lang->order->contact) . '</li>';
+        }
+
+        $menu .='</ul></div>';
+        return $menu;
+    }
 }
