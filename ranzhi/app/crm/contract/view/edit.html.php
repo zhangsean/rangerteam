@@ -48,10 +48,6 @@
             <td><?php echo html::input('amount', $contract->amount, "class='form-control'");?></td>
           </tr>
           <tr>
-            <th><?php echo $lang->contract->items;?></th>
-            <td colspan='3'><?php echo html::textarea('items', $contract->items, "class='form-control'");?></td>
-          </tr>
-          <tr>
             <th><?php echo $lang->contract->delivery;?></th>
             <td><?php echo html::select('delivery', $lang->contract->deliveryList, $contract->delivery, "class='form-control'");?></td>
             <th><?php echo $lang->contract->return;?></th>
@@ -74,6 +70,14 @@
             <td><?php echo html::input('begin', $contract->begin, "class='form-control form-date'");?></td>
             <th><?php echo $lang->contract->end;?></th>
             <td><?php echo html::input('end', $contract->end, "class='form-control form-date'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->contract->handlers;?></th>
+            <td colspan='3'><?php echo html::select('handlers[]', $users, $contract->handlers, "class='form-control chosen' multiple");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->contract->items;?></th>
+            <td colspan='3'><?php echo html::textarea('items', $contract->items, "class='form-control'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->files;?></th>

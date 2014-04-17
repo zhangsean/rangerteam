@@ -34,6 +34,7 @@ $lang->contract->createdBy    = '创建者';
 $lang->contract->createdDate  = '创建时间';
 $lang->contract->editedBy     = '最后修改';
 $lang->contract->editedDate   = '最后修改时间';
+$lang->contract->handlers     = '经手人';
 
 $lang->contract->list    = '合同列表';
 $lang->contract->create  = '创建合同';

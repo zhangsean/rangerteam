@@ -34,6 +34,7 @@ $lang->contract->createdBy    = 'Created By';
 $lang->contract->createdDate  = 'Created Date';
 $lang->contract->editedBy     = 'Edited By';
 $lang->contract->editedDate   = 'Edited Date';
+$lang->contract->handlers     = 'Handlers';
 
 $lang->contract->list    = 'Contract List';
 $lang->contract->create  = 'Create Contract';

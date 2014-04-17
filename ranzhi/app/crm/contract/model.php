@@ -127,6 +127,7 @@ class contractModel extends model
         $now      = helper::now();
         $contract = $this->getByID($contractID);
         $data     = fixer::input('post')
+            ->join('handlers', ',')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', $now)
             ->setDefault('order', array())
