@@ -133,10 +133,6 @@ class fileModel extends model
         foreach($files as $id => $file)
         {   
             if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
-            if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
-            {
-                $this->compressImage($this->savePath . $file['pathname']);
-            }
 
             $file['objectType'] = $objectType;
             $file['objectID']   = $objectID;
@@ -293,22 +289,12 @@ class fileModel extends model
             {
                 /* Remove old file. */
                 if(file_exists($this->savePath . $fileInfo->pathname)) unlink($this->savePath . $fileInfo->pathname);
-                foreach($this->config->file->thumbs as $size => $configure)
-                {
-                    $thumbPath = $this->savePath . str_replace('f_', $size . '_', $fileInfo->pathname);
-                    if(file_exists($thumbPath)) unlink($thumbPath);
-                }
-
                 $fileInfo->pathname  = str_replace(".{$fileInfo->extension}", ".$extension", $fileInfo->pathname);
                 $fileInfo->extension = $extension;
             }
 
             $realPathName = $this->savePath . $fileInfo->pathname;
             move_uploaded_file($file['tmpname'], $realPathName);
-            if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
-            {
-                $this->compressImage($realPathName);
-            }
 
             $fileInfo->addedBy   = $this->app->user->account;
             $fileInfo->addedDate = helper::now();
@@ -333,14 +319,6 @@ class fileModel extends model
     {
         $file = $this->getByID($fileID);
         if(file_exists($file->realPath)) unlink($file->realPath);
-        if(in_array($file->extension, $this->config->file->imageExtensions))
-        {
-            foreach($this->config->file->thumbs as $size => $configure)
-            {
-                $thumbPath = $this->savePath . str_replace('f_', $size . '_', $file->pathname);
-                if(file_exists($thumbPath)) unlink($thumbPath);
-            }
-        }
         $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($file->id)->exec();
         return !dao::isError();
     }
@@ -374,7 +352,6 @@ class fileModel extends model
             $file['editor']    = 1;
 
             file_put_contents($this->savePath . $file['pathname'], $imageData);
-            $this->compressImage($this->savePath . $file['pathname']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
             $_SESSION['album'][$uid][] = $this->dao->lastInsertID();
 
@@ -382,35 +359,6 @@ class fileModel extends model
         }
 
         return $data;
-    }
-
-    /**
-     * Compress image to config configured size.
-     * 
-     * @param  string    $imagePath 
-     * @access public
-     * @return void
-     */
-    public function compressImage($imagePath)
-    {
-        $this->app->loadClass('phpthumb', true);
-        $imageInfo = pathinfo($imagePath);
-        if(!is_writable($imageInfo['dirname'])) return false;
-
-        foreach($this->config->file->thumbs as $size => $configure)
-        {
-            $thumbPath = str_replace('f_', $size . '_', $imagePath);
-            if(extension_loaded('gd'))
-            {
-                $thumb = phpThumbFactory::create($imagePath);
-                $thumb->resize($configure['width'], $configure['height']);
-                $thumb->save($thumbPath);
-            }
-            else
-            {
-                copy($imagePath, $thumbPath);   
-            }
-        }
     }
 
     /**
