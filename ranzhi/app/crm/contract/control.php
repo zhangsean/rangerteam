@@ -172,6 +172,29 @@ class contract extends control
     }
 
     /**
+     * Create items of contract. 
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return void
+     */
+    public function items($contractID)
+    {
+        if($_POST)
+        {
+            $this->contract->items($contractID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->title      = $this->lang->contract->items;
+        $this->view->contractID = $contractID;
+        $this->view->contract   = $this->contract->getByID($contractID);
+        $this->view->files      = $this->loadModel('file')->getByObject('contract', $contractID);
+        $this->display();
+    }
+
+    /**
      * Delete contract. 
      * 
      * @param  int    $contractID 

@@ -75,7 +75,7 @@
       </tr>
       <tr>
         <th><?php echo $lang->files;?></th>
-        <td><?php echo $this->fetch('file', 'printFiles', array('files' =>$contract->files, 'fieldset' => 'false'))?></td>
+        <td><?php echo $this->fetch('file', 'printFiles', array('files' => $contract->files, 'fieldset' => 'false'))?></td>
       </tr>
     </table>
   </div>

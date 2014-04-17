@@ -72,6 +72,7 @@
           if($contract->status != 'closed') echo html::a($this->createLink('contract', 'finish', "contract=$contract->id"), $lang->finish, "class='reload'");
 
           echo html::a($this->createLink('contract', 'delete', "contract=$contract->id"), $lang->delete, "class='deleter'");
+          echo html::a($this->createLink('contract', 'items', "contract=$contract->id"), $lang->contract->items, "data-toggle='modal'");
           ?>
         </td>
       </tr>

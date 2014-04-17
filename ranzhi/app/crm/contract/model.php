@@ -72,9 +72,10 @@ class contractModel extends model
             ->check('order', 'notempty')
             ->exec();
 
+        $contractID = $this->dao->lastInsertID();
+
         if(!dao::isError())
         {
-            $contractID = $this->dao->lastInsertID();
             foreach($contract->order as $orderID)
             {
                 $data = new stdclass();
@@ -91,6 +92,27 @@ class contractModel extends model
 
             $this->loadModel('file')->saveUpload('contract', $contractID);
 
+            return $contractID;
+        }
+
+        return false;
+    }
+
+    /**
+     * Create items of contract.
+     * 
+     * @access public
+     * @return int|bool
+     */
+    public function items($contractID)
+    {
+        $contract = fixer::input('post')->get();
+
+        $this->dao->update(TABLE_CONTRACT)->data($contract, 'uid,files,labels')->where('id')->eq($contractID)->autoCheck()->exec();
+
+        if(!dao::isError())
+        {
+            $this->loadModel('file')->saveUpload('contract', $contractID);
             return $contractID;
         }
 
