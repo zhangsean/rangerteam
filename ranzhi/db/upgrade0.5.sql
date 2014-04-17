@@ -9,7 +9,7 @@ ALTER TABLE `crm_contract`
 ADD `deliveredBy` char(30) COLLATE 'utf8_general_ci' NOT NULL AFTER `signedDate`,
 ADD `deliveredDate` datetime NOT NULL AFTER `deliveredBy`,
 ADD `returnedBy` char(30) COLLATE 'utf8_general_ci' NOT NULL AFTER `deliveredDate`,
-ADD `returnedDate` datetime NOT NULL AFTER `returnedBy`;
+ADD `returnedDate` datetime NOT NULL AFTER `returnedBy`,
 ADD `handlers` varchar(255) NOT NULL AFTER `contact`;
 
 ALTER TABLE sys_action ADD customer mediumint(8) UNSIGNED AFTER id,
