@@ -85,11 +85,6 @@
               </ul>
             </td>
           </tr>
-          <?php if(!empty($order->enabledActions)):?>
-          <tr>
-            <td><?php foreach($order->enabledActions as $action) echo html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name, "class='btn'") . '&nbsp;';?></td>
-          </tr>
-          <?php endif;?>
         </table>
       </div>
       <h6 class='header-dividing text-muted'><?php echo $lang->order->product;?></h6>
