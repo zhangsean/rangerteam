@@ -375,7 +375,6 @@ CREATE TABLE `sys_lang` (
 CREATE TABLE `sys_product` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
-  `code` varchar(30) NOT NULL,
   `type` varchar(10) NOT NULL,
   `status` varchar(10) NOT NULL,
   `desc` text NOT NULL,

@@ -1,4 +1,5 @@
-ALTER TABLE `sys_product` CHANGE `summary`  `desc` text NOT NULL;
+ALTER TABLE `sys_product` CHANGE `summary`  `desc` text NOT NULL,
+DROP `code`;
 
 ALTER TABLE `crm_customer` ADD `intension` text NOT NULL AFTER `level`, DROP `referType`, DROP `referID`;
 
