@@ -86,15 +86,6 @@
           }
 
           ?>
-          <?php 
-          if(!empty($order->enabledActions))
-          {
-              foreach($order->enabledActions as $action)
-              {
-                  echo '<li>' . html::a($this->inlink('operate', "orderID={$order->id}&action={$action->id}"), $action->name) . '</li>';
-              }
-          }
-          ?>
           <?php echo '</ul></div>'; ?>
         </td>
       </tr>

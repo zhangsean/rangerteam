@@ -46,6 +46,7 @@ class effort extends control
         $this->session->set('effortList', $this->app->getURI());
 
         $this->view->title      = $this->lang->effort->create;
+        $this->view->modalWidth = 800;
 
         $this->view->date       = $date;
         $this->view->efforts    = $efforts;
