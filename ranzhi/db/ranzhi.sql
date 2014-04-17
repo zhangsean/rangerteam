@@ -104,7 +104,6 @@ CREATE TABLE `crm_customer` (
   `contactedBy` char(30) NOT NULL,
   `contactedDate` datetime NOT NULL,
   `nextDate` date NOT NULL,
-  `nextContact` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `industry` (`industry`),
   KEY `size` (`size`),
@@ -142,6 +141,7 @@ CREATE TABLE `crm_order` (
   `activatedDate` datetime NOT NULL,
   `contactedBy` char(30) NOT NULL,
   `contactedDate` datetime NOT NULL,
+  `nextDate` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `product` (`product`),
   KEY `customer` (`customer`),
@@ -151,7 +151,8 @@ CREATE TABLE `crm_order` (
   KEY `closedBy` (`closedBy`),
   KEY `closedReason` (`closedReason`),
   KEY `contactedBy` (`contactedBy`),
-  KEY `contactedDate` (`contactedDate`)
+  KEY `contactedDate` (`contactedDate`),
+  KEY `nextDate` (`nextDate`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `crm_relation`;
 CREATE TABLE `crm_relation` (
@@ -377,7 +378,6 @@ CREATE TABLE `sys_product` (
   `code` varchar(30) NOT NULL,
   `type` varchar(10) NOT NULL,
   `status` varchar(10) NOT NULL,
-  `roles` varchar(255) NOT NULL,
   `desc` text NOT NULL,
   `createdBy` varchar(30) NOT NULL,
   `createdDate` datetime NOT NULL,
