@@ -67,8 +67,6 @@ class productModel extends model
             ->data($product)
             ->autoCheck()
             ->batchCheck($this->config->product->require->create, 'notempty')
-            ->check('code', 'unique')
-            ->check('code', 'code')
             ->exec();
 
         return $this->dao->lastInsertID();
@@ -94,8 +92,6 @@ class productModel extends model
             ->data($product)
             ->autoCheck()
             ->batchCheck($this->config->product->require->edit, 'notempty')
-            ->check('code', 'unique', "id<>{$productID}")
-            ->check('code', 'code')
             ->where('id')->eq($productID)
             ->exec();
 

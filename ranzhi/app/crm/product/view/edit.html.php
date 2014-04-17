@@ -21,10 +21,6 @@
           <td class='w-p50'><?php echo html::input('name', $product->name, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
-          <th><?php echo $lang->product->code;?></th>
-          <td><?php echo html::input('code', $product->code, "class='form-control'");?></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->product->type;?></th>
           <td><?php echo html::select('type', $lang->product->typeList, $product->type, "class='form-control'");?></td>
         </tr>
