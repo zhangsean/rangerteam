@@ -79,6 +79,7 @@ EOT;
 ?>
 <?php js::set('itemRow', $itemRow)?>
 <?php js::set('module', $module)?>
+<?php js::set('field', $field)?>
 <?php include '../../common/view/footer.lite.html.php';?>
 </body>
 </html>

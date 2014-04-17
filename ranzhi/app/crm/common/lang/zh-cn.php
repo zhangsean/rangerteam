@@ -55,7 +55,9 @@ $lang->contract->menu->setting = '<i class="icon-wrench"></i> 系统设置|contr
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->product  = '产品状态|setting|lang|module=product&field=statusList';
-$lang->setting->menu->customer = '客户类型|setting|lang|module=customer&field=typeList';
+$lang->setting->menu->product       = '产品状态|setting|lang|module=product&field=statusList';
+$lang->setting->menu->customerType  = '客户类型|setting|lang|module=customer&field=typeList';
+$lang->setting->menu->customerSize  = '客户规模|setting|lang|module=customer&field=sizeList';
+$lang->setting->menu->customerLevel = '客户等级|setting|lang|module=customer&field=levelList';
 
 $lang->dashboard = new stdclass();

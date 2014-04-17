@@ -48,7 +48,7 @@
                 <th><?php echo $lang->customer->status;?></th>
                 <td><?php echo html::select("status", $lang->customer->statusList, $customer->status, "class='form-control'");?></td>
                 <th><?php echo $lang->customer->level;?></th>
-                <td><?php echo html::input('level', $customer->level, "class='form-control'");?></td>
+                <td><?php echo html::select('level', $lang->customer->levelList, $customer->level, "class='form-control'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->customer->intension;?></th>

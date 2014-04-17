@@ -39,7 +39,7 @@
       <tr data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id"); ?>'>
         <td class='text-center'><?php echo $order->id;?></td>
         <td><?php echo $customers[$order->customer]->name;?></td>
-        <td class='text-center'><?php echo $customers[$order->customer]->level;?></td>
+        <td class='text-center'><?php echo $lang->customer->levelList[$customers[$order->customer]->level];?></td>
         <td><?php echo $products[$order->product];?></td>
         <td><?php echo $order->plan;?></td>
         <td><?php echo $order->real;?></td>

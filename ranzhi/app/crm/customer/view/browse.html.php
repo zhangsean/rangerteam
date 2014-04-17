@@ -37,7 +37,7 @@
       <tr class='text-center' data-url='<?php echo $this->createLink('customer', 'edit', "customerID=$customer->id"); ?>'>
         <td><?php echo $customer->id;?></td>
         <td class='text-left'><strong><?php echo $customer->name;?></strong></td>
-        <td><?php echo $customer->level;?></td>
+        <td><?php echo $lang->customer->levelList[$customer->level];?></td>
         <td><?php echo $lang->customer->statusList[$customer->status];?></td>
         <td><?php echo $lang->customer->sizeList[$customer->size];?></td>
         <td><?php echo $lang->customer->typeList[$customer->type];?></td>

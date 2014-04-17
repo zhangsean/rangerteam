@@ -31,6 +31,7 @@ $lang->customer->contactBy   = '由谁联系';
 $lang->customer->contactDate = '联系时间';
 $lang->customer->nextDate    = '下次联系时间';
 
+$lang->customer->typeList['']           = '';
 $lang->customer->typeList['national']   = '国企';
 $lang->customer->typeList['collective'] = '集团';
 $lang->customer->typeList['corporate']  = '企业';
@@ -39,15 +40,24 @@ $lang->customer->typeList['privated']   = '民营';
 $lang->customer->typeList['foreign']    = '外企';
 $lang->customer->typeList['personal']   = '个人';
 
+$lang->customer->statusList['']          = '';
 $lang->customer->statusList['potential'] = '潜在';
 $lang->customer->statusList['intension'] = '意向';
 $lang->customer->statusList['payed']     = '已付款';
 $lang->customer->statusList['failed']    = '失败';
 
+$lang->customer->sizeList[0] = '';
 $lang->customer->sizeList[1] = '大型';
 $lang->customer->sizeList[2] = '中型';
 $lang->customer->sizeList[3] = '小型';
 $lang->customer->sizeList[4] = '微型';
+
+$lang->customer->levelList[0] = '';
+$lang->customer->levelList[1] = 'A';
+$lang->customer->levelList[2] = 'B';
+$lang->customer->levelList[3] = 'C';
+$lang->customer->levelList[4] = 'D';
+$lang->customer->levelList[5] = 'E';
 
 $lang->customer->create = '添加客户';
 $lang->customer->list   = '客户列表';
