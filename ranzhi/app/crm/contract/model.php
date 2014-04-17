@@ -171,11 +171,14 @@ class contractModel extends model
     public function delivery($contractID)
     {
         $contract = new stdclass();
-        $contract->status        = 'delivered';
+        $contract->delivery      = 'done';
         $contract->deliveredBy   = $this->app->user->account;
         $contract->deliveredDate = helper::now();
 
-        $this->dao->update(TABLE_CONTRACT)->data($contract)->where('id')->eq($contractID)->exec();
+        $this->dao->update(TABLE_CONTRACT)->data($contract, $skip = 'uid, comment')
+            ->autoCheck()
+            ->where('id')->eq($contractID)
+            ->exec();
 
         return !dao::isError();
     }
@@ -190,11 +193,14 @@ class contractModel extends model
     public function receive($contractID)
     {
         $contract = new stdclass();
-        $contract->status       = 'returned';
+        $contract->return       = 'done';
         $contract->returnedBy   = $this->app->user->account;
         $contract->returnedDate = helper::now();
 
-        $this->dao->update(TABLE_CONTRACT)->data($contract)->where('id')->eq($contractID)->exec();
+        $this->dao->update(TABLE_CONTRACT)->data($contract, $skip = 'uid, comment')
+            ->autoCheck()
+            ->where('id')->eq($contractID)
+            ->exec();
 
         return !dao::isError();
     }
@@ -213,7 +219,10 @@ class contractModel extends model
         $contract->canceledBy   = $this->app->user->account;
         $contract->canceledDate = helper::now();
 
-        $this->dao->update(TABLE_CONTRACT)->data($contract)->where('id')->eq($contractID)->exec();
+        $this->dao->update(TABLE_CONTRACT)->data($contract, $skip = 'uid, comment')
+            ->autoCheck()
+            ->where('id')->eq($contractID)
+            ->exec();
 
         return !dao::isError();
     }
@@ -232,7 +241,10 @@ class contractModel extends model
         $contract->finishedBy   = $this->app->user->account;
         $contract->finishedDate = helper::now();
 
-        $this->dao->update(TABLE_CONTRACT)->data($contract)->where('id')->eq($contractID)->exec();
+        $this->dao->update(TABLE_CONTRACT)->data($contract, $skip = 'uid, comment')
+            ->autoCheck()
+            ->where('id')->eq($contractID)
+            ->exec();
 
         return !dao::isError();
     }

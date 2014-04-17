@@ -108,8 +108,17 @@ class contract extends control
      */
     public function delivery($contractID)
     {
-        if($this->contract->delivery($contractID)) $this->send(array('result' => 'success', 'locate' => inlink('browse')));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        if(!empty($_POST))
+        {
+            $this->contract->delivery($contractID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('contract', $contractID, 'Delivered', $this->post->comment);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->title      = $this->lang->contract->delivery;
+        $this->view->contractID = $contractID;
+        $this->display();
     }
 
     /**
@@ -121,8 +130,17 @@ class contract extends control
      */
     public function receive($contractID)
     {
-        if($this->contract->receive($contractID)) $this->send(array('result' => 'success', 'locate' => inlink('browse')));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        if(!empty($_POST))
+        {
+            $this->contract->receive($contractID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('contract', $contractID, 'Returned', $this->post->comment);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->title      = $this->lang->contract->return;
+        $this->view->contractID = $contractID;
+        $this->display();
     }
 
     /**
@@ -134,8 +152,17 @@ class contract extends control
      */
     public function cancel($contractID)
     {
-        if($this->contract->cancel($contractID)) $this->send(array('result' => 'success', 'locate' => inlink('browse')));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        if(!empty($_POST))
+        {
+            $this->contract->cancel($contractID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('contract', $contractID, 'Canceled', $this->post->comment);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->title      = $this->lang->cancel;
+        $this->view->contractID = $contractID;
+        $this->display();
     }
 
     /**
@@ -147,8 +174,17 @@ class contract extends control
      */
     public function finish($contractID)
     {
-        if($this->contract->finish($contractID)) $this->send(array('result' => 'success', 'locate' => inlink('browse')));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        if(!empty($_POST))
+        {
+            $this->contract->finish($contractID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('contract', $contractID, 'Finished', $this->post->comment);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->title      = $this->lang->finish;
+        $this->view->contractID = $contractID;
+        $this->display();
     }
 
     /**
@@ -167,6 +203,7 @@ class contract extends control
         $this->view->contacts  = $this->loadModel('contact')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->contract  = $contract;
+        $this->view->actions   = $this->loadModel('action')->getList('contract', $contractID);
 
         $this->display();
     }

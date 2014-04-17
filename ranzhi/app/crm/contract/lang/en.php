@@ -42,18 +42,14 @@ $lang->contract->setting = 'Settings';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = 'Pending';
-$lang->contract->deliveryList['doing'] = 'Doing';
 $lang->contract->deliveryList['done']  = 'Done';
 
 $lang->contract->returnList[]        = '';
 $lang->contract->returnList['wait']  = 'Pending';
-$lang->contract->returnList['doing'] = 'Doing';
 $lang->contract->returnList['done']  = 'Done';
 
 $lang->contract->statusList[]           = '';
 $lang->contract->statusList['normal']   = 'Normal';
-$lang->contract->statusList['returned'] = 'Receive payments';
-$lang->contract->statusList['delivery'] = 'Delivery';
 $lang->contract->statusList['closed']   = 'Closed';
 $lang->contract->statusList['canceled'] = 'Canceled';
 
