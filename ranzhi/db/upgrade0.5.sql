@@ -10,3 +10,8 @@ ADD `deliveredBy` char(30) COLLATE 'utf8_general_ci' NOT NULL AFTER `signedDate`
 ADD `deliveredDate` datetime NOT NULL AFTER `deliveredBy`,
 ADD `returnedBy` char(30) COLLATE 'utf8_general_ci' NOT NULL AFTER `deliveredDate`,
 ADD `returnedDate` datetime NOT NULL AFTER `returnedBy`;
+
+ALTER TABLE sys_action ADD customer mediumint(8) UNSIGNED AFTER id,
+ADD contact mediumint(8) UNSIGNED AFTER customer,
+ADD contract mediumint(8) UNSIGNED AFTER contact,
+CHANGE `product` `product`  mediumint(8) UNSIGNED AFTER contract;

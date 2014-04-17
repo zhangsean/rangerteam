@@ -266,3 +266,19 @@ CREATE TABLE `sys_userGroup` (
   `group` mediumint(8) unsigned NOT NULL DEFAULT '0',
   UNIQUE KEY `account` (`account`,`group`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- DROP TABLE IF EXISTS `oa_effort`;
+CREATE TABLE `oa_effort` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `objectType` varchar(30) NOT NULL,
+  `objectID` smallint(8) unsigned NOT NULL,
+  `product` varchar(255) NOT NULL,
+  `account` varchar(30) NOT NULL,
+  `work` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `left` float NOT NULL,
+  `consumed` float NOT NULL,
+  `begin` smallint(4) unsigned zerofill NOT NULL,
+  `end` smallint(4) unsigned zerofill NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

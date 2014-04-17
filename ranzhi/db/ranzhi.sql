@@ -234,21 +234,6 @@ CREATE TABLE `oa_docLib` (
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
--- DROP TABLE IF EXISTS `oa_effort`;
-CREATE TABLE `oa_effort` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `objectType` varchar(30) NOT NULL,
-  `objectID` smallint(8) unsigned NOT NULL,
-  `product` varchar(255) NOT NULL,
-  `account` varchar(30) NOT NULL,
-  `work` varchar(255) NOT NULL,
-  `date` date NOT NULL,
-  `left` float NOT NULL,
-  `consumed` float NOT NULL,
-  `begin` smallint(4) unsigned zerofill NOT NULL,
-  `end` smallint(4) unsigned zerofill NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_relation`;
 CREATE TABLE `oa_relation` (
   `type` char(20) NOT NULL,
@@ -259,9 +244,12 @@ CREATE TABLE `oa_relation` (
 -- DROP TABLE IF EXISTS `sys_action`;
 CREATE TABLE `sys_action` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `customer` mediumint(8) unsigned DEFAULT NULL,
+  `contact` mediumint(8) unsigned DEFAULT NULL,
+  `contract` mediumint(8) unsigned DEFAULT NULL,
+  `product` mediumint(8) unsigned DEFAULT NULL,
   `objectType` varchar(30) NOT NULL DEFAULT '',
   `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `product` varchar(255) NOT NULL,
   `actor` varchar(30) NOT NULL DEFAULT '',
   `action` varchar(30) NOT NULL DEFAULT '',
   `date` datetime NOT NULL,
@@ -269,6 +257,10 @@ CREATE TABLE `sys_action` (
   `extra` varchar(255) NOT NULL,
   `efforted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
+  KEY `customer` (`customer`),
+  KEY `contact` (`contact`),
+  KEY `contract` (`contract`),
+  KEY `product` (`product`),
   KEY `date` (`date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_category`;
