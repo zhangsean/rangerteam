@@ -45,6 +45,8 @@ $lang->action->desc->finished    = '$date, finished by <strong>$actor</strong>.'
 $lang->action->desc->replied     = '$date, replied by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->doubted     = '$date, doubted by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->transfered  = '$date, transfered by <strong>$actor</strong>.' . "\n";
+$lang->action->desc->returned    = '$date, received payments by <strong>$actor</strong>.' . "\n";
+$lang->action->desc->delivered   = '$date, delivered by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->diff1       = 'changed <strong><i>%s</i></strong>, old is "%s", new is "%s".<br />';
 $lang->action->desc->diff2       = 'changed <strong><i>%s</i></strong>, the diff is:' . "\n" . "<blockquote>%s</blockquote>" . "\n<div class='hidden'>%s</div>";
 $lang->action->desc->diff3       = "changed file's name %s to %s.";
@@ -71,11 +73,12 @@ $lang->action->label->login       = 'login';
 $lang->action->label->logout      = "logout";
 
 /* Link of every action. */
-$lang->action->label->product = 'product|product|view|productID=%s';
-$lang->action->label->order   = 'order|order|view|orderID=%s';
-$lang->action->label->task    = 'task|task|view|taskID=%s';
-$lang->action->label->user    = 'user|user|view|account=%s';
-$lang->action->label->space   = ' ';
+$lang->action->label->product  = 'product|product|view|productID=%s';
+$lang->action->label->order    = 'order|order|view|orderID=%s';
+$lang->action->label->task     = 'task|task|view|taskID=%s';
+$lang->action->label->contract = 'contract|contract|view|contractID=%s';
+$lang->action->label->user     = 'user|user|view|account=%s';
+$lang->action->label->space    = ' ';
 
 /* Object type. */
 $lang->action->search->objectTypeList['']            = '';    
@@ -83,6 +86,7 @@ $lang->action->search->objectTypeList['product']     = 'product';
 $lang->action->search->objectTypeList['task']        = 'task'; 
 $lang->action->search->objectTypeList['user']        = 'user'; 
 $lang->action->search->objectTypeList['order']       = 'order'; 
+$lang->action->search->objectTypeList['contract']    = 'contract'; 
 $lang->action->search->objectTypeList['orderAction'] = 'order action'; 
 
 /* Display action for search. */
