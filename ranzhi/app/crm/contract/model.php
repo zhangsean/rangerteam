@@ -54,10 +54,9 @@ class contractModel extends model
      */
     public function create()
     {
-        $now      = helper::now();
         $contract = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
-            ->add('createdDate', $now)
+            ->add('createdDate', helper::now())
             ->add('status', 'normal')
             ->add('delivery', 'wait')
             ->add('return', 'wait')
@@ -66,10 +65,9 @@ class contractModel extends model
             ->setDefault('end', '0000-00-00')
             ->get();
 
-        $contract->code = $this->parseCode();
-        $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid,files,labels')
+        $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid')
             ->autoCheck()
-            ->check('order', 'notempty')
+            ->batchCheck($this->config->contract->require->create, 'notempty')
             ->exec();
 
         $contractID = $this->dao->lastInsertID();
@@ -89,8 +87,6 @@ class contractModel extends model
                 $order->signedDate = $contract->signedDate;
                 $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
             }
-
-            $this->loadModel('file')->saveUpload('contract', $contractID);
 
             return $contractID;
         }
@@ -141,7 +137,7 @@ class contractModel extends model
         $this->dao->update(TABLE_CONTRACT)->data($data, 'order,uid,files,labels')
             ->where('id')->eq($contractID)
             ->autoCheck()
-            ->check('order', 'notempty')
+            ->batchCheck($this->config->contract->require->edit, 'notempty')
             ->exec();
         
         if(!dao::isError())
