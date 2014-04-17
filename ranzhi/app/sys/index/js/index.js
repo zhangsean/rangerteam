@@ -2,6 +2,7 @@ $(function()
 {
     /* start ips */
     $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock}, config, ipsLang));
+    $('.entries-count').text(entries.length - 2);
 })
 
 /**
