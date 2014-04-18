@@ -48,7 +48,7 @@ class block extends control
         {
             $this->block->save($index, $type);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('index')));
         }
 
         $block = $this->block->getBlock($index);

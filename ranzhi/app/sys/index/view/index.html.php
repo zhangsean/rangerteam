@@ -55,7 +55,7 @@ js::import($jsRoot . 'jquery/ips.js');
                   <button role="button" class="btn btn-mini" data-toggle="dropdown"><span class="caret"></span></button>
                   <ul class="dropdown-menu pull-right" role="menu">
                     <li><a href="<?php echo $this->createLink("block", "admin", "index=$index"); ?>" data-toggle='modal' class='edit-block' data-name='<?php echo $block->name; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit; ?></a></li>
-                    <li><a href="javascript:;" class="remove-panel"><i class="icon-remove"></i> <?php echo $lang->close; ?></a></li>
+                    <li><a href="javascript:;" class="remove-panel"><i class="icon-remove"></i> <?php echo $lang->delete; ?></a></li>
                   </ul>
                 </div>
               </div>
