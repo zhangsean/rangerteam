@@ -65,6 +65,8 @@ class contract extends control
 
         $orderID = explode(',', $orderID);
 
+        $this->view->title      = $this->lang->contract->create;
+        $this->view->modalWidth = 800;
         $this->view->orders     = $this->loadModel('order')->getPairs($customerID);
         $this->view->customers  = $this->loadModel('customer')->getPairs();
         $this->view->contacts   = $this->loadModel('contact')->getPairs();

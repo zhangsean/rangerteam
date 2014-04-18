@@ -54,6 +54,28 @@ class contactModel extends model
     }
 
     /**
+     * Get common selecter of contact.
+     * 
+     * @param  int    $customer 
+     * @access public
+     * @return void
+     */
+    public function getOptions($customer = 0, $withEmpty = true, $create = true)
+    {
+        $contacts = $this->dao->select('t1.*')
+            ->from(TABLE_CONTACT)->alias('t1')
+            ->leftJoin(TABLE_CRM_RELATION)->alias('t2')
+            ->on('t1.id = t2.contact')
+            ->beginIF($customer)->where('t2.customer')->eq($customer)->FI()
+            ->fetchPairs('t1.*', 'realname');
+
+        if($withEmpty) $contacts = array_merge(array('' => ''), $contacts);
+        if($create)    $contacts = array_merge($contacts, array('create' => $this->lang->contact->create));
+
+        return $contacts;
+    }
+
+    /**
      * Create a contact.
      * 
      * @access public

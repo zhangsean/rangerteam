@@ -22,75 +22,54 @@ class actionModel extends model
      * 
      * @param  string $objectType 
      * @param  int    $objectID 
-     * @param  string $actionType 
+     * @param  string $action
      * @param  string $comment 
-     * @param  string $extra        the extra info of this action, according to different modules and actions, can set different extra.
+     * @param  mix    $extra        the extra info of this action, like customer, contact, order etc.  according to different modules and actions, can set different extra.
      * @param  string $actor
      * @access public
      * @return int
      */
-    public function create($objectType, $objectID, $actionType, $comment = '', $extra = '', $actor = '')
+    public function create($objectType, $objectID, $action, $comment = '', $extra = '', $actor = '')
     {
         $action = new stdclass();
 
-        $objectType = str_replace('`', '', $objectType);
         $action->objectType = strtolower($objectType);
         $action->objectID   = $objectID;
         $action->actor      = $actor ? $actor : $this->app->user->account;
-        $action->action     = strtolower($actionType);
+        $action->action     = strtolower($action);
         $action->date       = helper::now();
         $action->comment    = trim(strip_tags($comment, "<img>")) ? $comment : '';
-        $action->extra      = $extra;
 
-        /* Get product for this object. */
-        $action->product = $this->getProduct($action->objectType, $objectID);
+        if(!is_string($extra))
+        {
+            foreach($extra as $item => $value) $action->$item = $value;
+        }
+        else
+        {
+            $action->extra = $extra;
+        }
 
         $this->dao->insert(TABLE_ACTION)->data($action)->autoCheck()->exec();
         return $this->dbh->lastInsertID();
     }
 
     /**
-     * Get product of an object.
-     * 
-     * @param  string $objectType 
-     * @param  int    $objectID 
-     * @access public
-     * @return array
-     */
-    public function getProduct($objectType, $objectID)
-    {
-        $product = 0;
-
-        /* If objectType is product, return the objectID. */
-        if($objectType == 'product') return $objectID;
-
-        /* Only process these object types. */
-        if(strpos(',order,orderAction,orderField,', ",$objectType,") !== false)
-        {
-            if(!isset($this->config->objectTables[$objectType])) return $product;
-
-            /* Set fields to fetch. */
-            $record = $this->dao->select('product')->from($this->config->objectTables[$objectType])->where('id')->eq($objectID)->fetch();
-
-            if($record) return isset($record->product) ? $record->product : 0;
-        }
-        return $product;
-    }
-
-    /**
      * Get actions of an object.
      * 
-     * @param  int    $objectType 
-     * @param  int    $objectID 
+     * @param  int       $objectType 
+     * @param  int       $objectID 
+     * @param  string    $action 
      * @access public
      * @return array
      */
-    public function getList($objectType, $objectID)
+    public function getList($objectType, $objectID, $action = '')
     {
         $actions = $this->dao->select('*')->from(TABLE_ACTION)
             ->where('objectType')->eq($objectType)
             ->andWhere('objectID')->eq($objectID)
+            ->beginIF($action)->andWhere('action')->eq('action')->fi()
             ->orderBy('date, id')->fetchAll('id');
+
         $histories = $this->getHistory(array_keys($actions));
         $this->loadModel('file');
         foreach($actions as $actionID => $action)

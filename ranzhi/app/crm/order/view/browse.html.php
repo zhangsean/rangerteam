@@ -13,8 +13,8 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-  <strong><i class="icon-list-ul"></i> <?php echo $lang->order->list;?></strong>
-  <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->order->create, 'class="btn btn-primary"');?></div>
+    <strong><i class="icon-list-ul"></i> <?php echo $lang->order->list;?></strong>
+    <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->order->create, 'class="btn btn-primary"');?></div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data'>
     <thead>
@@ -48,9 +48,7 @@
         <td><?php echo substr($order->contactedDate, 0, 10);?></td>
         <td><?php echo $order->nextDate;?></td>
         <td><?php echo $users[$order->createdBy];?></td>
-        <td class='actions'>
-          <?php echo $this->order->buildOperateMenu($order); ?>
-        </td>
+        <td class='actions'><?php echo $this->order->buildOperateMenu($order); ?></td>
       </tr>
       <?php endforeach;?>
     </tbody>

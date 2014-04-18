@@ -208,21 +208,6 @@ class orderModel extends model
     }
 
     /**
-     * Get team members. 
-     * 
-     * @param  int    $orderID 
-     * @access public
-     * @return array
-     */
-    public function getTeamMembers($orderID)
-    {
-        return $this->dao->select('t1.*, t2.realname')->from(TABLE_TEAM)->alias('t1')
-            ->leftJoin(TABLE_USER)->alias('t2')->on('t1.account = t2.account')
-            ->where('t1.order')->eq((int)$orderID)
-            ->fetchAll('account');
-    }
-
-    /**
      * Get roles. 
      * 
      * @param  int    $orderID 
@@ -237,31 +222,20 @@ class orderModel extends model
     }
 
     /**
-     * Manage team members.
+     * Save a record of an order.
      * 
-     * @param  int    $orderID 
+     * @param  object    $order 
      * @access public
      * @return void
      */
-    public function manageMembers($orderID)
+    public function saveRecord($order)
     {
-        extract($_POST);
+        $extra = new stdclass();
+        $extra->customer = $order->customer;
+        $extra->contract = $this->dao->select('contract')->from(TABLE_CONTRACTORDER)->where('`order`')->eq($order->orderID)->fetch('contract');
+        $extra->contact  = $this->post->contact;
 
-        $accounts = fixer::input('post')->get('account');
-        $roles    = fixer::input('post')->get('role');
-        $this->dao->delete()->from(TABLE_TEAM)->where('`order`')->eq($orderID)->exec();
-        foreach($accounts as $key => $account)
-        {
-            if(empty($account)) continue;
-
-            $member = new stdclass();
-            $member->role = $roles[$key];
-            $member->order   = $orderID;
-            $member->account = $account;
-            $member->join    = helper::today();
-            $this->dao->insert(TABLE_TEAM)->data($member)->exec();
-        }
-        return !dao::isError();
+        return $this->loadModel('action')-> create($objectType = 'order', $order->id, $action = 'orderrecord', $this->post->comment, $extra);
     }
 
     /**
@@ -300,7 +274,7 @@ class orderModel extends model
         $menu = '';
         $menu .= html::a(inlink('edit',   "orderID=$order->id"), $this->lang->edit);
         $menu .= html::a(inlink('assignTo', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal'");
-        $menu .= html::a(helper::createLink('effort', 'createForObject', "objectType=order&objectID=$order->id"), $this->lang->order->effort, "data-toggle='modal'");
+        $menu .= html::a(inlink('browserecord', "orderID=$order->id"), $this->lang->order->effort);
 
         if(empty($order->contract))
         {
@@ -321,8 +295,6 @@ class orderModel extends model
         {
             $menu .='<li>' . html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='reload'") . '</li>';
         }
-
-        $menu .='<li>' . html::a(inlink('team', "orderID=$order->id"), $this->lang->order->team) . '</li>';
 
         if(!empty($order->contact))
         {

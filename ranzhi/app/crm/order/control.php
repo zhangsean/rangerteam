@@ -163,75 +163,44 @@ class order extends control
     }
 
     /**
-     * Browse team of an order.
+     * Browse records of and order.
      * 
      * @param  int    $orderID 
      * @access public
      * @return void
      */
-    public function team($orderID = 0)
+    public function browseRecord($orderID)
     {
-        $roles        = $this->lang->user->roleList;
-        $order        = $this->order->getByID($orderID);
+        $order = $this->order->getByID($orderID);
 
-        $this->view->roles       = $roles;
-        $this->view->title       = $this->lang->order->team;
-        $this->view->order       = $order;
-        $this->view->teamMembers = $this->order->getTeamMembers($orderID);
-
+        $this->view->order   = $order;
+        $this->view->records = $this->loadModel('action')->getList('order', $orderID, 'orderrecord');
+        $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
         $this->display();
     }
 
     /**
-     * Manage members of the order.
+     * Manage records of an order.
      * 
      * @param  int    $orderID 
      * @access public
      * @return void
      */
-    public function manageMembers($orderID = 0)
+    public function saveRecord($orderID)
     {
-        if(!empty($_POST))
+        $order = $this->order->getByID($orderID);
+
+        if($_POST)
         {
-            $this->order->manageMembers($orderID);
+            $this->order->saveRecord($order);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'locate' => $this->createLink('order', 'team', "orderID=$orderID")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
-        $this->loadModel('user');
-
-        $order          = $this->order->getById($orderID);
-        $users          = $this->user->getPairs('noclosed, nodeleted, devfirst');
-        $currentMembers = $this->order->getTeamMembers($orderID);
-        $roles          = $this->lang->user->roleList;
-
-        /* The deleted members. */
-        foreach($currentMembers as $account => $member)
-        {
-            if(!isset($users[$member->account])) $member->account .= $this->lang->user->deleted;
-        }
-
-        $this->view->title          = $this->lang->order->manageMembers;
-        $this->view->order          = $order;
-        $this->view->users          = $users;
-        $this->view->userRoles      = $this->user->getUserRoles(array_keys($users));
-        $this->view->roles          = $roles;
-        $this->view->currentMembers = $currentMembers;
+        $this->view->order    = $order;
+        $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
+        $this->view->contacts = $this->loadModel('contact')->getOptions($order->customer);
         $this->display();
-    }
-
-    /**
-     * Unlink a memeber.
-     * 
-     * @param  int    $orderID 
-     * @param  string $account 
-     * @access public
-     * @return void
-     */
-    public function unlinkMember($orderID, $account)
-    {
-        if($this->order->unlinkMember($orderID, $account)) $this->send(array('result' => 'success'));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
     /**

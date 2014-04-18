@@ -64,8 +64,3 @@ $lang->order->created   = 'Created by <strong>%s</strong>.';
 $lang->order->assigned  = "<strong>%s</strong> assigned order to %s";
 $lang->order->signed    = "Signed by <strong>%s</strong>";
 $lang->order->activated = "Activated by <strong>%s</strong>";
-
-$lang->team = new stdclass();
-$lang->team->account = 'Account';
-$lang->team->role    = 'Role';
-$lang->team->join    = 'Join Date';

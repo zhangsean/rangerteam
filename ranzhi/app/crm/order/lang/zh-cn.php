@@ -65,7 +65,8 @@ $lang->order->assigned = "由 <strong>%s</strong> 指派给 %s";
 $lang->order->signed   = "由 <strong>%s</strong> 签单";
 $lang->order->activated= "由 <strong>%s</strong> 激活";
 
-$lang->team = new stdclass();
-$lang->team->account = '成员';
-$lang->team->role    = '角色';
-$lang->team->join    = '加盟日';
+$lang->order->record = new stdclass();
+$lang->order->record->contact = '联系人';
+$lang->order->record->comment = '沟通内容';
+$lang->order->record->date    = '日期';
+$lang->order->record->create  = '添加日志';
