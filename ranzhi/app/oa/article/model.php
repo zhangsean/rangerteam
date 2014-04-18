@@ -29,7 +29,7 @@ class articleModel extends model
         
         /* Get it's categories. */
         $article->categories = $this->dao->select('t2.*')
-            ->from(TABLE_RELATION)->alias('t1')
+            ->from(TABLE_OA_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t1.type')->eq($article->type)
             ->andWhere('t1.id')->eq($articleID)
@@ -59,7 +59,7 @@ class articleModel extends model
     {
         /* Get articles(use groupBy to distinct articles).  */
         $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
-            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+            ->leftJoin(TABLE_OA_RELATION)->alias('t2')->on('t1.id = t2.id')
             ->where('t1.type')->eq($type)
             ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
             ->andWhere('t1.addedDate')->le(helper::now())
@@ -74,7 +74,7 @@ class articleModel extends model
 
         /* Get categories for these articles. */
         $categories = $this->dao->select('t2.id, t2.name, t2.alias, t1.id AS article')
-            ->from(TABLE_RELATION)->alias('t1')
+            ->from(TABLE_OA_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t2.type')->eq($type)
             ->beginIf($categories)->andWhere('t1.category')->in($categories)->fi()
@@ -114,7 +114,7 @@ class articleModel extends model
     public function getPairs($categories, $orderBy, $pager = null)
     {
         return $this->dao->select('t1.id, t1.title, t1.alias')->from(TABLE_ARTICLE)->alias('t1')
-            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+            ->leftJoin(TABLE_OA_RELATION)->alias('t2')->on('t1.id = t2.id')
             ->where('1=1')
             ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
             ->andWhere('t1.addedDate')->le(helper::now())
@@ -167,7 +167,7 @@ class articleModel extends model
     public function getPrevAndNext($current, $category)
     {
        $prev = $this->dao->select('t1.id, title')->from(TABLE_ARTICLE)->alias('t1')
-           ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+           ->leftJoin(TABLE_OA_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
            ->andWhere('t1.status')->eq('normal')
            ->andWhere('t2.id')->lt($current)
@@ -176,7 +176,7 @@ class articleModel extends model
            ->fetch();
 
        $next = $this->dao->select('t1.id, title')->from(TABLE_ARTICLE)->alias('t1')
-           ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+           ->leftJoin(TABLE_OA_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
            ->andWhere('t1.addedDate')->le(helper::now())
            ->andWhere('t1.status')->eq('normal')
@@ -271,7 +271,7 @@ class articleModel extends model
         $article = $this->getByID($articleID);
         if(!$article) return false;
 
-        $this->dao->delete()->from(TABLE_RELATION)->where('id')->eq($articleID)->andWhere('type')->eq($article->type)->exec();
+        $this->dao->delete()->from(TABLE_OA_RELATION)->where('id')->eq($articleID)->andWhere('type')->eq($article->type)->exec();
         $this->dao->delete()->from(TABLE_ARTICLE)->where('id')->eq($articleID)->exec();
 
         return !dao::isError();
@@ -291,7 +291,7 @@ class articleModel extends model
        if(!$articleID) return false;
 
        /* First delete all the records of current article from the releation table.  */
-       $this->dao->delete()->from(TABLE_RELATION)
+       $this->dao->delete()->from(TABLE_OA_RELATION)
            ->where('type')->eq($type)
            ->andWhere('id')->eq($articleID)
            ->autoCheck()
@@ -306,7 +306,7 @@ class articleModel extends model
            $data->type     = $type; 
            $data->id       = $articleID;
            $data->category = $category;
-           $this->dao->insert(TABLE_RELATION)->data($data)->exec();
+           $this->dao->insert(TABLE_OA_RELATION)->data($data)->exec();
        }
     }
 
