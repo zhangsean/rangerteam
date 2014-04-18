@@ -13,6 +13,7 @@ CREATE TABLE `crm_address` (
 CREATE TABLE `crm_contact` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `customer` mediumint(8) NOT NULL,
+  `maker` enum('0','1') COLLATE 'utf8_general_ci' NOT NULL DEFAULT '0',
   `realname` char(30) NOT NULL DEFAULT '',
   `nickname` char(30) NOT NULL,
   `avatar` char(100) NOT NULL,

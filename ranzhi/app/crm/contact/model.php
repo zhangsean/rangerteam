@@ -94,6 +94,7 @@ class contactModel extends model
         $contact = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
+            ->setDefault('maker', 0)
             ->setIF($this->post->avatar == '', 'avatar', $avatar)
             ->get();
 
@@ -134,8 +135,10 @@ class contactModel extends model
      */
     public function updateAvatar($contactID)
     {
+        if(!$_FILES) return array('result' => true);
+
         $fileModel = $this->loadModel('file');
-        
+
         if(!$this->file->checkSavePath()) return array('result' => false, 'message' => $this->lang->file->errorUnwritable);
         
         /* Delete old files. */

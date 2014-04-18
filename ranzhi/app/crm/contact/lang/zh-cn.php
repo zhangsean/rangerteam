@@ -11,6 +11,7 @@
  */
 $lang->contact->id            = '编号';
 $lang->contact->customer      = '所属客户';
+$lang->contact->maker         = '决策人';
 $lang->contact->realname      = '真实姓名';
 $lang->contact->nickname      = '昵称';
 $lang->contact->avatar        = '头像';

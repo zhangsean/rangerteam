@@ -43,7 +43,13 @@
             <table class='table table-form'>
               <tr>
                 <th class='w-80px'><?php echo $lang->contact->customer;?></th>
-                <td class='w-p40'><?php echo html::select('customer', $customers, $contact->customer, "class='form-control'");?></td><td></td><td></td>
+                <td class='w-p40'><?php echo html::select('customer', $customers, $contact->customer, "class='form-control'");?></td>
+                <td>
+                  <?php $checked = $contact->maker ? "checked='checked'" : '';?>
+                  <input type='checkbox' name='maker' id='maker' value='1' <?php echo $checked?>/>
+                  <label for='maker'><?php echo $lang->contact->maker?></label>
+                </td>
+                <td></td>
               </tr>
               <tr>
                 <th><?php echo $lang->contact->birthday;?></th>

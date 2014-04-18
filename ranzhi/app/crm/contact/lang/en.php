@@ -11,6 +11,7 @@
  */
 $lang->contact->id            = 'ID';
 $lang->contact->customer      = 'Customer';
+$lang->contact->maker         = 'Decision Maker';
 $lang->contact->realname      = 'Name';
 $lang->contact->nickname      = 'Nickname';
 $lang->contact->avatar        = 'Avatar';
