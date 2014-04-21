@@ -24,3 +24,6 @@ ALTER TABLE `crm_resume` ADD `createdDate` datetime NOT NULL,
 ADD `createdBy` char(30) COLLATE 'ucs2_general_ci' NOT NULL AFTER `createdDate`;
 ALTER TABLE `crm_resume` ADD `id` mediumint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
 ALTER TABLE `crm_resume` CHANGE `titile` `title` char(100) COLLATE 'utf8_general_ci' NOT NULL AFTER `dept`;
+
+ALTER TABLE `crm_address` ADD `title` varchar(255) COLLATE 'utf8_general_ci' NOT NULL AFTER `objectID`;
+ALTER TABLE `crm_address` CHANGE `id` `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;

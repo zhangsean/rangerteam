@@ -110,6 +110,7 @@ define('TABLE_TASK',      '`sys_task`');
 define('TABLE_ISSUE',     '`sys_issue`');
 
 /* Tables for crm. */
+define('TABLE_ADDRESS',       '`crm_address`');
 define('TABLE_PRODUCT',       '`sys_product`');
 define('TABLE_ORDERFIELD',    '`crm_orderField`');
 define('TABLE_ORDERACTION',   '`crm_orderAction`');

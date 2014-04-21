@@ -17,12 +17,6 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 if(isset($pageCSS)) css::internal($pageCSS);
 ?>
-<script>
-$(function()
-{
-    $.setAjaxForm('#ajaxModalForm');
-})
-</script>
 <div class="modal-dialog" style="width:<?php echo empty($modalWidth) ? 700 : $modalWidth;?>px;">
   <div class="modal-content">
     <div class="modal-header">
@@ -33,3 +27,10 @@ $(function()
 <?php else:?>
 <?php include $this->app->getAppRoot() . '/common/view/header.html.php';?>
 <?php endif;?>
+
+<script>
+$(function()
+{
+    $.setAjaxForm('#ajaxModalForm');
+})
+</script>

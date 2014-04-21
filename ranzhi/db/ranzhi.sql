@@ -1,12 +1,14 @@
 -- DROP TABLE IF EXISTS `crm_address`;
 CREATE TABLE `crm_address` (
-  `id` mediumint(8) unsigned NOT NULL,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `objectType` char(30) NOT NULL,
   `objectID` mediumint(8) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
   `country` char(30) NOT NULL,
   `province` char(50) NOT NULL,
   `city` char(50) NOT NULL,
   `location` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `objectType` (`objectType`,`objectID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `crm_contact`;
