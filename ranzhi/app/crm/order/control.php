@@ -190,7 +190,7 @@ class order extends control
     }
 
     /**
-     * Manage records of an order.
+     * Create one record of an order.
      * 
      * @param  int    $orderID 
      * @access public
@@ -212,6 +212,36 @@ class order extends control
         $this->view->contacts = $this->loadModel('contact')->getOptionMenu($order->customer);
         $this->display();
     }
+
+    /**
+     * Edit one record of an order.
+     * 
+     * @param  int    $recordID
+     * @access public
+     * @return void
+     */
+    public function editRecord($recordID)
+    {
+        $record = $this->loadModel('action')->getByID($recordID);
+        if($record->objectType != 'order' or $record->action != 'orderrecord') exit;
+
+        $order = $this->order->getByID($record->objectID);
+
+        if($_POST)
+        {
+            $action = fixer::input('post')->get();
+            $this->action->update($action, $recordID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browserecord', "orderID={$order->id}")));
+        }
+
+        $this->view->order    = $order;
+        $this->view->record   = $record;
+        $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
+        $this->view->contacts = $this->loadModel('contact')->getOptionMenu($order->customer);
+        $this->display();
+    }
+
 
     /**
      * Get contact of an customer.

@@ -62,12 +62,13 @@ class actionModel extends model
      * @access public
      * @return array
      */
-    public function getList($objectType, $objectID, $action = '')
+    public function getList($objectType, $objectID, $action = '', $pager = null)
     {
         $actions = $this->dao->select('*')->from(TABLE_ACTION)
             ->where('objectType')->eq($objectType)
             ->andWhere('objectID')->eq($objectID)
-            ->beginIF($action)->andWhere('action')->eq('action')->fi()
+            ->beginIF($action)->andWhere('action')->eq($action)->fi()
+            ->page($pager)
             ->orderBy('date, id')->fetchAll('id');
 
         $histories = $this->getHistory(array_keys($actions));
@@ -366,6 +367,20 @@ class actionModel extends model
     }
 
     /**
+     * Update an action.
+     * 
+     * @param  object    $action
+     * @param  int       $actionID 
+     * @access public
+     * @return void
+     */
+    public function update($action, $actionID)
+    {
+        $this->dao->update(TABLE_ACTION)->data($action)->autoCheck()->where('id')->eq($actionID)->exec();
+        return !dao::isError();
+    }
+
+    /**
      * Update comment of a action.
      * 
      * @param  int    $actionID 
@@ -377,6 +392,7 @@ class actionModel extends model
         $this->dao->update(TABLE_ACTION)
             ->set('date')->eq(helper::now())
             ->set('comment')->eq($this->post->lastComment)
+            ->beginIF($this->post->extra)->set('edit')->eq($this->post->extra)->FI()
             ->where('id')->eq($actionID)
             ->exec();
     }

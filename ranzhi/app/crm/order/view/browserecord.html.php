@@ -21,6 +21,7 @@
       <th><?php echo $lang->order->record->comment;?></th>
       <th class='w-120px'><?php echo $lang->order->record->actor;?></th>
       <th class='w-150px'><?php echo $lang->order->record->date;?></th>
+      <th class='w-150px'><?php echo $lang->actions;?></th>
     </thead>
     <tbody>
       <?php foreach($records as $record):?>
@@ -29,6 +30,7 @@
         <td><?php echo $record->comment;?></td>
         <td><?php echo $users[$record->actor];?></td>
         <td><?php echo $record->date;?></td>
+        <td><?php echo html::a(inlink('editRecord', "id={$record->id}"), $lang->edit, "data-toggle='modal'");?></td>
       </tr>
       <?php endforeach;?>
     </tbody>
