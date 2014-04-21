@@ -210,7 +210,7 @@
         };
 
         /* Transform to shortcut html tag in entry list form template */
-        this.toentryListShortcutHtml = function()
+        this.toEntryListShortcutHtml = function()
         {
             return settings.entryListShortcutHtmlTemplate.format(this);
         }
@@ -1200,12 +1200,26 @@
         /* Show all shortcuts */
         this.showAll = function()
         {
+            var allapps = null;
+
             for(var index in entries)
             {
                 var et = entries[index];
-                if(et.menu == 'menu' || et.menu == 'all') this.$appsMenu.append(et.toLeftBarShortcutHtml());
-                if(et.menu == 'all' || et.menu == 'list') this.$allAppsList.append(et.toentryListShortcutHtml());
+                if(et.id != 'allapps')
+                    this.show(et);
+                else
+                    allapps = et;
             }
+
+            if(allapps) this.show(allapps);
+
+        }
+
+        /* show a shortcut */
+        this.show = function(entry)
+        {
+            if(entry.menu == 'menu' || entry.menu == 'all') this.$appsMenu.append(entry.toLeftBarShortcutHtml());
+            if(entry.menu == 'all' || entry.menu == 'list') this.$allAppsList.append(entry.toEntryListShortcutHtml());
         }
 
         /* Bind events */
@@ -1229,7 +1243,6 @@
                 var et = entries[$this.attr('data-id')];
                 if(et)
                 {
-                    console.log(et);
                     if(et.display == 'fullscreen' && desktop.fullScreenApps) desktop.fullScreenApps.toggle(et.id);
                     else windows.openEntry(et, $this.attr('href') || $this.data('url'), $this.hasClass('s-menu-btn'));
                 }
