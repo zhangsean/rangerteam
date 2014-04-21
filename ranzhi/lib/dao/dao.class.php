@@ -1195,6 +1195,7 @@ class sql
 
         foreach($data as $field => $value)
         {
+            $field = str_replace('`', '', $field);
             if(strpos($skipFields, ",$field,") !== false) continue;
             $this->sql .= "`$field` = " . $this->quote($value) . ',';
         }
