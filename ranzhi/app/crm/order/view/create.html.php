@@ -20,7 +20,7 @@
       <table class='table table-form w-p60'>
         <tr>
           <th class='w-120px'><?php echo $lang->order->customer;?></th>
-          <td><?php echo html::select('customer', $customers, '', "class='form-control'");?></td>
+          <td><?php echo html::select('customer', $customers, '', "class='form-control select-customer'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->product;?></th>
