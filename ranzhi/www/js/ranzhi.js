@@ -104,7 +104,7 @@ $.extend(
 
                     /* Focus the first error field thus to nitify the user. */
                     var firstErrorField = $('#' +$('span.red').first().attr('for'));
-                    topOffset = parseInt(firstErrorField.offset().top) - 20;   // 20px offset more for margin.
+                    if(firstErrorField.length) topOffset = parseInt(firstErrorField.offset().top) - 20;   // 20px offset more for margin.
 
                     /* If there's the navbar-fixed-top element, minus it's height. */
                     if($('.navbar-fixed-top').size())
