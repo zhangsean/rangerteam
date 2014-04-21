@@ -24,6 +24,8 @@ js::import($jsRoot . 'jquery/ips.js');
       <li class="divider"></li>
       <li><?php echo html::a($this->createLink('entry', 'create'), "<i class='icon icon-plus'></i> {$lang->index->addEntry}", "target='_blank'"  )?></li>
       <li><a href='###' class='fullscreen-btn' data-id='allapps'><i class='icon icon-th-large'></i> <?php echo $lang->index->allEntries?></a></li>
+      <li class="divider"></li>
+      <li><?php echo html::a($this->createLink('user', 'logout'), "<i class='icon icon-signout'></i> {$lang->logout}")?></li>
     </ul>
     <div id='apps-menu'>
       <ul class='bar-menu'></ul>
