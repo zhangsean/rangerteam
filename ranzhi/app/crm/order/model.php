@@ -81,6 +81,30 @@ class orderModel extends model
     }
 
     /**
+     * Get orders of the customer for create contract.
+     * 
+     * @param  int    $customerID 
+     * @access public
+     * @return array
+     */
+    public function getOrderForCustomer($customerID)
+    {
+        $orders = $this->dao->select('id, `plan`, customer, product, createdDate')->from(TABLE_ORDER)
+            ->beginIF($customerID)->where('customer')->eq($customerID)->fi()
+            ->fetchAll('id');
+
+        $customers = $this->loadModel('customer')->getPairs();
+        $products  = $this->loadModel('product')->getPairs();
+
+        foreach($orders as $order)
+        {
+           $order->title = sprintf($this->lang->order->titleLBL, $order->id, $customers[$order->customer], $products[$order->product], substr($order->createdDate, 0, 10)); 
+        }
+
+        return array('0' => '') + $orders;
+    }
+
+    /**
      * Get amount.
      * 
      * @param  int|string|array    $idList 

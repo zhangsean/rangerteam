@@ -65,7 +65,7 @@ class contractModel extends model
             ->setDefault('end', '0000-00-00')
             ->get();
 
-        $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid')
+        $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid,real')
             ->autoCheck()
             ->batchCheck($this->config->contract->require->create, 'notempty')
             ->exec();
@@ -80,9 +80,13 @@ class contractModel extends model
                 $data->contract = $contractID;
                 $data->order    = $orderID;
                 $this->dao->insert(TABLE_CONTRACTORDER)->data($data)->exec();
+            }
 
+            foreach($contract->real as $real)
+            {
                 $order = new stdclass();
                 $order->status     = 'signed';
+                $order->real       = $real;
                 $order->signedBy   = $contract->signedBy;
                 $order->signedDate = $contract->signedDate;
                 $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();

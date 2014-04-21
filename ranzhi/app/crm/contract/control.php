@@ -48,33 +48,26 @@ class contract extends control
     /**
      * Create contract. 
      * 
-     * @param  int    $orderID 
-     * @param  int    $customerID 
      * @access public
      * @return void
      */
-    public function create($orderID = 0, $customerID = 0)
+    public function create()
     {
         if($_POST)
         {
-            $createID = $this->contract->create();
+            $contractID = $this->contract->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             $this->loadModel('action')->create('contract', $contractID, 'Created');
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $orderID = explode(',', $orderID);
-
         $this->view->title      = $this->lang->contract->create;
         $this->view->modalWidth = 800;
-        $this->view->orders     = $this->loadModel('order')->getPairs($customerID);
         $this->view->customers  = $this->loadModel('customer')->getPairs();
         $this->view->contacts   = $this->loadModel('contact')->getPairs();
         $this->view->users      = $this->loadModel('user')->getPairs();
-        $this->view->order      = $this->order->getByID($orderID[0]);
-        $this->view->amount     = $this->order->getAmount($orderID);
-        $this->view->orderID    = $orderID;
-        $this->view->customerID = $customerID;
         $this->display();
     }
 
@@ -264,5 +257,37 @@ class contract extends control
         }
         if(!is_array($this->config->contract->codeFormat)) $this->config->contract->codeFormat = json_decode($this->config->contract->codeFormat, true);
         $this->display();
+    }
+
+    /**
+     * Get order.
+     *
+     * @param  int    $customerID
+     * @access public
+     * @return void
+     */
+    public function getOrder($customerID)
+    {
+        $orders = $this->loadModel('order')->getOrderForCustomer($customerID);
+
+        $html = "<div class='form-group'><span class='col-sm-7'><select name='order[]' class='select-order form-control'>";
+
+        foreach($orders as $order)
+        {
+            if(!$order)
+            {
+                $html .= "<option value='' data-real=''></option>";
+            }
+            else
+            {
+                $html .= "<option value='{$order->id}' data-real='{$order->plan}'>{$order->title}</option>";
+            }
+        }
+
+        $html .= '</select></span>';
+        $html .= "<span class='col-sm-3'>" . html::input('real[]', '', "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'") . "</span>";
+        $html .= "<span class='col-sm-2'>" . html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='minus'") . "</span></div>";
+
+        echo $html;
     }
 }

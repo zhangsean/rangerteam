@@ -49,7 +49,6 @@ $lang->contact->menu->create = '<i class="icon-plus"></i> 添加联系人|contac
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
 $lang->contract->menu->browse = array('link' => '<i class="icon-th-list"></i> 合同列表|contract|browse|', 'alias' => 'edit,view');
-$lang->contract->menu->create = '<i class="icon-plus"></i> 添加合同|contract|create|';
 $lang->contract->menu->setting = '<i class="icon-wrench"></i> 系统设置|contract|setting|';
 
 /* Menu of setting module. */

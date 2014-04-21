@@ -1,14 +1,48 @@
+/**
+ * Get orders of a customer. 
+ * 
+ * @param  int $customerID 
+ * @access public
+ * @return void
+ */
+function getOrder(customerID)
+{
+    $('#orderTD').empty();
+
+    if(customerID == '') return false;
+
+    $.get(createLink('contract', 'getOrder', 'customerID=' + customerID), function(data)
+    {
+        $('#orderTR').removeClass('hide');
+        $('#orderTD').html(data).show();
+    })
+}
+
 $(document).ready(function()
 {
-    /* Enable customer jump menu.*/
-    $('#customer').change(function()
+    $(document).on('change', 'select.select-order', function()
     {
-        location.href = createLink('contract', 'create', 'orderID=0&customerID=' + $(this).val());
-    })
+        $(this).parent().next('span').find(':input').val($(this).find('option:selected').attr('data-real'));
 
-    /* Enable order jump menu.*/
-    $('#order').change(function()
+        var amount = 0;
+
+        $('.order-real').each(function()
+        {
+            amount += parseFloat($(this).val());
+        });
+
+        $('#amount').val(amount);
+    });
+
+    $(document).on('change', '.order-real', function()
     {
-        location.href = createLink('contract', 'create', 'orderID=' + $(this).val());
-    })
+        var amount = 0;
+
+        $('.order-real').each(function()
+        {
+            amount += parseFloat($(this).val());
+        });
+
+        $('#amount').val(amount);
+    });
 })

@@ -13,15 +13,15 @@
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
-<form method='post' id='ajaxForm'>
+<form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('contract', 'create')?>'>
   <table class='table table-striped table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->contract->customer;?></th>
-      <td><?php echo html::select('customer', $customers, $order ? $order->customer : $customerID, "class='form-control'");?></td><td></td>
+      <td><?php echo html::select('customer', $customers, '', "class='form-control' onchange='getOrder(this.value)'");?></td><td></td>
     </tr>
-    <tr>
+    <tr id= 'orderTR' class='hide'>
       <th><?php echo $lang->contract->order;?></th>
-      <td><?php echo html::select('order[]', $orders, $orderID, "class='form-control chosen' multiple");?></td>
+      <td id='orderTD'></td>
     </tr>
     <tr>
       <th><?php echo $lang->contract->name;?></th>
@@ -29,7 +29,7 @@
     </tr>
     <tr>
       <th><?php echo $lang->contract->amount;?></th>
-      <td><?php echo html::input('amount', $amount, "class='form-control'");?></td>
+      <td><?php echo html::input('amount', '', "class='form-control'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->contract->contact;?></th>

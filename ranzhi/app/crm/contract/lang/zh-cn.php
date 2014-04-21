@@ -62,3 +62,6 @@ $lang->contract->codeUnitList['fix']   = '固定值';
 $lang->contract->codeUnitList['input'] = '输入值';
 
 $lang->contract->info = '签约信息';
+
+$lang->contract->placeholder = new stdclass();
+$lang->contract->placeholder->real = '成交金额';
