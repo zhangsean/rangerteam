@@ -64,3 +64,10 @@ $lang->order->created   = 'Created by <strong>%s</strong>.';
 $lang->order->assigned  = "<strong>%s</strong> assigned order to %s";
 $lang->order->signed    = "Signed by <strong>%s</strong>";
 $lang->order->activated = "Activated by <strong>%s</strong>";
+
+$lang->order->record = new stdclass();
+$lang->order->record->contact = 'Contact';
+$lang->order->record->actor   = 'Actor';
+$lang->order->record->comment = 'Content';
+$lang->order->record->date    = 'Contact time';
+$lang->order->record->create  = 'Create Record';
