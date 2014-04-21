@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../../sys/common/view/kindeditor.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-pencil"></i> <?php echo $lang->customer->edit;?></strong>
@@ -39,16 +40,16 @@
                 <td><?php echo html::select('size', $lang->customer->sizeList, $customer->size, "class='form-control'");?></td>
               </tr>
               <tr>
-                <th><?php echo $lang->customer->industry;?></th>
-                <td><?php echo html::input('industry', $customer->industry, "class='form-control'");?></td>
-                <th><?php echo $lang->customer->area;?></th>
-                <td><?php echo html::input('area', $customer->area, "class='form-control'");?></td>
-              </tr>
-              <tr>
                 <th><?php echo $lang->customer->status;?></th>
                 <td><?php echo html::select("status", $lang->customer->statusList, $customer->status, "class='form-control'");?></td>
                 <th><?php echo $lang->customer->level;?></th>
                 <td><?php echo html::select('level', $lang->customer->levelList, $customer->level, "class='form-control'");?></td>
+              </tr>
+              <tr>
+                <th><?php echo $lang->customer->industry;?></th>
+                <td><?php echo html::input('industry', $customer->industry, "class='form-control'");?></td>
+                <th><?php echo $lang->customer->area;?></th>
+                <td><?php echo html::input('area', $customer->area, "class='form-control'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->customer->intension;?></th>
@@ -56,7 +57,7 @@
               </tr>
             </table>
           </fieldset>
-          <fieldset class='collapsed'>
+          <fieldset>
             <legend><?php echo $lang->customer->moreInfo; ?></legend>
             <table class='table table-form'>
               <tr>

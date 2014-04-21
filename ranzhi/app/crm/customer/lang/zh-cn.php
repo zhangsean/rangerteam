@@ -12,6 +12,7 @@
 $lang->customer->common      = '客户维护';
 $lang->customer->id          = '编号';
 $lang->customer->name        = '名称';
+$lang->customer->contact     = '联系人';
 $lang->customer->type        = '类型';
 $lang->customer->size        = '规模';
 $lang->customer->industry    = '行业';
@@ -19,6 +20,9 @@ $lang->customer->area        = '区域';
 $lang->customer->status      = '状态';
 $lang->customer->level       = '级别';
 $lang->customer->intension   = '购买意向';
+$lang->customer->phone       = '电话';
+$lang->customer->email       = '邮箱';
+$lang->customer->qq          = 'QQ';
 $lang->customer->site        = '网站';
 $lang->customer->weibo       = '微博';
 $lang->customer->weixin      = '微信';
@@ -30,6 +34,10 @@ $lang->customer->editedDate  = '编辑时间';
 $lang->customer->contactBy   = '由谁联系';
 $lang->customer->contactDate = '联系时间';
 $lang->customer->nextDate    = '下次联系时间';
+
+$lang->customer->order    = '订单';
+$lang->customer->contact  = '联系人';
+$lang->customer->contract = '合同';
 
 $lang->customer->typeList['']           = '';
 $lang->customer->typeList['national']   = '国企';

@@ -66,14 +66,25 @@ class customerModel extends model
             ->get();
 
         $this->dao->insert(TABLE_CUSTOMER)
-            ->data($customer)
+            ->data($customer, $skip = 'uid, contact, email, qq, phone')
             ->autoCheck()
             ->batchCheck($this->config->customer->require->create, 'notempty')
             ->exec();
 
+        $customerID = $this->dao->lastInsertID();
+
+        $contact = new stdclass();
+        $contact->customer = $customerID;
+        $contact->realname = $customer->contact;
+        $contact->phone    = $customer->phone;
+        $contact->email    = $customer->email;
+        $contact->qq       = $customer->qq;
+
+        $this->dao->insert(TABLE_CONTACT)->data($contact)->autoCheck()->exec();
+
         if(dao::isError()) return false;
 
-        return $this->dao->lastInsertID();
+        return $customerID;
     }
 
     /**

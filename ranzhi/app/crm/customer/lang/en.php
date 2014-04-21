@@ -12,6 +12,7 @@
 $lang->customer->common      = 'Customer';
 $lang->customer->id          = 'ID';
 $lang->customer->name        = 'Name';
+$lang->customer->contact     = 'Contact';
 $lang->customer->type        = 'Type';
 $lang->customer->size        = 'Size';
 $lang->customer->industry    = 'Industry';
@@ -19,6 +20,9 @@ $lang->customer->area        = 'Area';
 $lang->customer->status      = 'Status';
 $lang->customer->level       = 'Level';
 $lang->customer->intension   = 'Purchase Intention';
+$lang->customer->phone       = 'Phone';
+$lang->customer->email       = 'Email';
+$lang->customer->qq          = 'QQ';
 $lang->customer->site        = 'Site';
 $lang->customer->weibo       = 'Sina Weibo';
 $lang->customer->weixin      = 'Wechat';
@@ -30,6 +34,10 @@ $lang->customer->editedDate  = 'Edited Date';
 $lang->customer->contactBy   = 'Contact By';
 $lang->customer->contactDate = 'Contact Date';
 $lang->customer->nextDate    = 'Next Date';
+
+$lang->customer->order    = 'Order List';
+$lang->customer->contact  = 'Contact List';
+$lang->customer->contract = 'Contract List';
 
 $lang->customer->typeList['']           = '';
 $lang->customer->typeList['national']   = 'National';

@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../../sys/common/view/kindeditor.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->customer->create;?></strong>
@@ -21,53 +22,36 @@
         <div class='col-md-8'>
           <fieldset class='fieldset-primary'>
             <table class='table table-form'>
-              <tr class='text-left'>
-                <th><?php echo $lang->customer->name;?></th>
-              </tr>
-              <tr>
-                <td><?php echo html::input('name', '', "class='form-control'");?></td>
-              </tr>
+              <tr class='text-left'><th><?php echo $lang->customer->name;?></th></tr>
+              <tr><td><?php echo html::input('name', '', "class='form-control'");?></td></tr>
             </table>
           </fieldset>
           <fieldset>
             <legend><?php echo $lang->customer->basicInfo; ?></legend>
             <table class='table table-form'>
               <tr>
-                <th class='w-80px'><?php echo $lang->customer->type;?></th>
-                <td><?php echo html::select("type", $lang->customer->typeList, '', "class='form-control'");?></td>
-                <th class='w-80px'><?php echo $lang->customer->size;?></th>
-                <td><?php echo html::select('size', $lang->customer->sizeList, '', "class='form-control'");?></td>
+                <th class='w-80px'><?php echo $lang->customer->contact;?></th>
+                <td><?php echo html::input('contact', '', "class='form-control'");?></td>
+                <th class='w-80px'><?php echo $lang->customer->phone;?></th>
+                <td><?php echo html::input('phone', '', "class='form-control'");?></td>
               </tr>
               <tr>
-                <th><?php echo $lang->customer->industry;?></th>
-                <td><?php echo html::input('industry', '', "class='form-control'");?></td>
-                <th><?php echo $lang->customer->area;?></th>
-                <td><?php echo html::input('area', '', "class='form-control'");?></td>
+                <th><?php echo $lang->customer->email;?></th>
+                <td><?php echo html::input('email', '', "class='form-control'");?></td>
+                <th><?php echo $lang->customer->qq;?></th>
+                <td><?php echo html::input('qq', '', "class='form-control'");?></td>
+              </tr>
+              <tr>
+                <th><?php echo $lang->customer->type;?></th>
+                <td><?php echo html::select("type", $lang->customer->typeList, '', "class='form-control'");?></td>
+                <th><?php echo $lang->customer->size;?></th>
+                <td><?php echo html::select('size', $lang->customer->sizeList, '', "class='form-control'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->customer->status;?></th>
                 <td><?php echo html::select("status", $lang->customer->statusList, '', "class='form-control'");?></td>
                 <th><?php echo $lang->customer->level;?></th>
                 <td><?php echo html::select('level', $lang->customer->levelList, 0, "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->customer->intension;?></th>
-                <td colspan='3'><?php echo html::textarea('intension', '', "class='form-control' rows=2");?></td>
-              </tr>
-            </table>
-          </fieldset>
-          <fieldset class='collapsed'>
-            <legend><?php echo $lang->customer->moreInfo; ?></legend>
-            <table class='table table-form'>
-              <tr>
-                <th class='w-80px'><?php echo $lang->customer->site;?></th>
-                <td><?php echo html::input('site', '', "class='form-control'");?></td>
-                <th class='w-80px'><?php echo $lang->customer->weibo;?></th>
-                <td><?php echo html::input('weibo', '', "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->customer->weixin;?></th>
-                <td><?php echo html::input('weixin', '', "class='form-control'");?></td>
               </tr>
             </table>
           </fieldset>
