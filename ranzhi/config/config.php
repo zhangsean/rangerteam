@@ -124,16 +124,16 @@ define('TABLE_CONTRACTORDER', '`crm_contractOrder`');
 define('TABLE_SERVICE',       '`crm_service`');
 
 /* Tables for oa. */
-define('TABLE_TODO',     '`oa_todo`');
-define('TABLE_PROJECT',  '`oa_project`');
-define('TABLE_EFFORT',   '`oa_effort`');
+define('TABLE_TODO',        '`oa_todo`');
+define('TABLE_PROJECT',     '`oa_project`');
+define('TABLE_EFFORT',      '`oa_effort`');
+define('TABLE_ARTICLE',     '`oa_article`');
+define('TABLE_BLOCK',       '`oa_block`');
+define('TABLE_BOOK',        '`oa_book`');
+define('TABLE_LAYOUT',      '`oa_layout`');
+define('TABLE_DOC',         '`oa_doc`');
+define('TABLE_DOCLIB',      '`oa_docLib`');
 define('TABLE_RELATION', '`oa_relation`');
-define('TABLE_ARTICLE',  '`oa_article`');
-define('TABLE_BLOCK',    '`oa_block`');
-define('TABLE_BOOK',     '`oa_book`');
-define('TABLE_LAYOUT',   '`oa_layout`');
-define('TABLE_DOC',      '`oa_doc`');
-define('TABLE_DOCLIB',   '`oa_docLib`');
 
 /* Tables for sns. */
 define('TABLE_TAG',     '`sns_tag`');
