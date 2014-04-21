@@ -475,6 +475,8 @@
                 return;
             }
 
+            if(url && url.indexOf('javascript:') >=0 ) url = null;
+
             var win = this.set[et.idstr];
 
             if(!win)
@@ -1227,6 +1229,7 @@
                 var et = entries[$this.attr('data-id')];
                 if(et)
                 {
+                    console.log(et);
                     if(et.display == 'fullscreen' && desktop.fullScreenApps) desktop.fullScreenApps.toggle(et.id);
                     else windows.openEntry(et, $this.attr('href') || $this.data('url'), $this.hasClass('s-menu-btn'));
                 }
