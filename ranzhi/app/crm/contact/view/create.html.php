@@ -57,6 +57,10 @@
                 <td><?php echo html::radio('gender', $lang->contact->genderList, '');?></td>
               </tr>
               <tr>
+                <th><?php echo $lang->contact->createdDate;?></th>
+                <td><?php echo html::input('createdDate', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></td>
+              </tr>
+              <tr>
                 <th><?php echo $lang->contact->site;?></th>
                 <td colspan='3'><?php echo html::input('site', '', "class='form-control'");?></td>
               </tr>
