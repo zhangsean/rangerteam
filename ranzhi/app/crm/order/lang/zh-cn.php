@@ -67,6 +67,7 @@ $lang->order->activated= "由 <strong>%s</strong> 激活";
 
 $lang->order->record = new stdclass();
 $lang->order->record->contact = '联系人';
+$lang->order->record->actor   = '操作人';
 $lang->order->record->comment = '沟通内容';
-$lang->order->record->date    = '日期';
+$lang->order->record->date    = '时间';
 $lang->order->record->create  = '添加日志';

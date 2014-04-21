@@ -60,17 +60,17 @@ class contactModel extends model
      * @access public
      * @return void
      */
-    public function getOptions($customer = 0, $withEmpty = true, $create = true)
+    public function getOptionMenu($customer = 0, $withEmpty = true, $create = true)
     {
         $contacts = $this->dao->select('t1.*')
             ->from(TABLE_CONTACT)->alias('t1')
-            ->leftJoin(TABLE_CRM_RELATION)->alias('t2')
+            ->leftJoin(TABLE_RESUME)->alias('t2')
             ->on('t1.id = t2.contact')
             ->beginIF($customer)->where('t2.customer')->eq($customer)->FI()
-            ->fetchPairs('t1.*', 'realname');
+            ->fetchPairs('id', 'realname');
 
-        if($withEmpty) $contacts = array_merge(array('' => ''), $contacts);
-        if($create)    $contacts = array_merge($contacts, array('create' => $this->lang->contact->create));
+        if($withEmpty) $contacts = array('' => '') + $contacts;
+        if($create)    $contacts = $contacts + array('create' => $this->lang->contact->create);
 
         return $contacts;
     }
@@ -101,8 +101,6 @@ class contactModel extends model
             $resume = new stdclass();
             $resume->contact     = $contactID;
             $resume->customer    = $contact->customer;
-            $resume->createdDate = helper::now();
-            $resume->createdBy   = $this->app->user->account;
             $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
 
             return $contactID;
@@ -181,7 +179,7 @@ class contactModel extends model
      */
     public function updateAvatar($contactID)
     {
-        if(!$_FILES) return array('result' => true);
+        if(!$_FILES) return array('result' => true, 'contactID' => $contactID);
 
         $fileModel = $this->loadModel('file');
 
@@ -204,7 +202,7 @@ class contactModel extends model
         
         $avatarPath = $this->config->webRoot . 'data/upload/' . $file->pathname;
         $this->dao->update(TABLE_CONTACT)->set('avatar')->eq($avatarPath)->where('id')->eq($contactID)->exec();
-        if(!dao::isError()) return array('result' => true);
+        if(!dao::isError()) return array('result' => true, 'contactID' => $contactID);
         return array('result' => false, 'message' => $this->lang->contact->failedAvatar);
     }
 }

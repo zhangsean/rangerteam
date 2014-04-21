@@ -166,16 +166,26 @@ class order extends control
      * Browse records of and order.
      * 
      * @param  int    $orderID 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
      * @access public
      * @return void
      */
-    public function browseRecord($orderID)
+    public function browseRecord($orderID, $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $order = $this->order->getByID($orderID);
 
-        $this->view->order   = $order;
-        $this->view->records = $this->loadModel('action')->getList('order', $orderID, 'orderrecord');
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+
+        $this->view->order    = $order;
+        $this->view->records  = $this->loadModel('action')->getList('order', $orderID, 'orderrecord', $pager);
+        $this->view->contacts = $this->loadModel('contact')->getOptionMenu($order->customer);
         $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
+        $this->view->users    = $this->loadModel('user')->getPairs();
+        $this->view->pager    = $pager;
         $this->display();
     }
 
@@ -186,20 +196,20 @@ class order extends control
      * @access public
      * @return void
      */
-    public function saveRecord($orderID)
+    public function createRecord($orderID)
     {
         $order = $this->order->getByID($orderID);
 
         if($_POST)
         {
-            $this->order->saveRecord($order);
+            $this->order->createRecord($order);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browserecord', "orderID={$orderID}")));
         }
 
         $this->view->order    = $order;
         $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
-        $this->view->contacts = $this->loadModel('contact')->getOptions($order->customer);
+        $this->view->contacts = $this->loadModel('contact')->getOptionMenu($order->customer);
         $this->display();
     }
 

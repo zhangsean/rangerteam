@@ -61,10 +61,10 @@ class contact extends control
 
             $this->loadModel('action')->create('contact', $contactID, 'Created', '');
 
-            $return = $this->contact->updateAvatar($contactID);
+            $result = $this->contact->updateAvatar($contactID);
 
             $message = $result['result'] ? $this->lang->saveSuccess : $result['message'];
-            $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('browse'), 'contactID' => $contactID));
         }
 
         $this->view->title     = $this->lang->contact->create;
@@ -117,5 +117,24 @@ class contact extends control
     {
         if($this->contact->delete($contactID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
+     * Get option menu.
+     * 
+     * @param  int    $customer 
+     * @param  int    $current 
+     * @access public
+     * @return void
+     */
+    public function getOptionMenu($customer, $current = 0)
+    {
+        $options = $this->contact->getOptionMenu($order->customer);
+        foreach($options as $value => $text)
+        {
+            $selected = $value == $current ? 'selected' : '';
+            echo "<option value='{$value}' {$selected}>{$text}</option>";
+        }
+        exit;
     }
 }

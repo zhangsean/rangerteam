@@ -12,12 +12,13 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
+<?php js::set('customer', $customer);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->contact->create;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm' class='form-condensed'>
+    <form method='post' id='contactForm' class='form-condensed'>
       <div class='row'>
         <div class='col-md-8'>
           <fieldset class='fieldset-primary'>

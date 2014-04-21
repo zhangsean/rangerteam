@@ -232,34 +232,20 @@ class orderModel extends model
     }
 
     /**
-     * Get roles. 
-     * 
-     * @param  int    $orderID 
-     * @access public
-     * @return array
-     */
-    public function getRoleList($orderID)
-    {
-        return $this->dao->select('account, role')->from(TABLE_TEAM)
-            ->where('`order`')->eq($orderID)
-            ->fetchPairs('role', 'account');
-    }
-
-    /**
      * Save a record of an order.
      * 
      * @param  object    $order 
      * @access public
      * @return void
      */
-    public function saveRecord($order)
+    public function createRecord($order)
     {
         $extra = new stdclass();
         $extra->customer = $order->customer;
-        $extra->contract = $this->dao->select('contract')->from(TABLE_CONTRACTORDER)->where('`order`')->eq($order->orderID)->fetch('contract');
-        $extra->contact  = $this->post->contact;
+        $extra->contract = $this->dao->select('contract')->from(TABLE_CONTRACTORDER)->where('`order`')->eq($order->id)->fetch('contract');
+        $extra->extra  = $this->post->contact;
 
-        return $this->loadModel('action')-> create($objectType = 'order', $order->id, $action = 'orderrecord', $this->post->comment, $extra);
+        return $this->loadModel('action')->create($objectType = 'order', $order->id, $action = 'orderrecord', $this->post->comment, $extra);
     }
 
     /**
