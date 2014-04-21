@@ -47,6 +47,17 @@ class contractModel extends model
     }
 
     /**
+     * Get contract pairs.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getPairs($customerID)
+    {
+        return $this->dao->select('id, name')->from(TABLE_CONTRACT)->where('customer')->eq($customerID)->fetchPairs('id');
+    }
+
+    /**
      * Create contract.
      * 
      * @access public

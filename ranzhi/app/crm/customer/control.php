@@ -105,6 +105,48 @@ class customer extends control
     }
 
     /**
+     * Browse orders of the customer.
+     * 
+     * @param  int    $customerID 
+     * @access public
+     * @return void
+     */
+    public function order($customerID)
+    {
+        $this->view->title  = $this->lang->customer->order;
+        $this->view->orders = $this->loadModel('order')->getPairs($customerID);
+        $this->display();
+    }
+
+    /**
+     * Browse contacts of the customer.
+     * 
+     * @param  int    $customerID 
+     * @access public
+     * @return void
+     */
+    public function contact($customerID)
+    {
+        $this->view->title    = $this->lang->customer->contact;
+        $this->view->contacts = $this->loadModel('contact')->getList($customerID);
+        $this->display();
+    }
+
+    /**
+     * Browse contracts of the customer.
+     * 
+     * @param  int    $customerID 
+     * @access public
+     * @return void
+     */
+    public function contract($customerID)
+    {
+        $this->view->title     = $this->lang->customer->contact;
+        $this->view->contracts = $this->loadModel('contract')->getPairs($customerID);
+        $this->display();
+    }
+
+    /**
      * Delete a customer.
      *
      * @param  int    $customerID
