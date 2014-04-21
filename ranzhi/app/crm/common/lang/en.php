@@ -61,3 +61,4 @@ $lang->setting->menu->customerSize  = 'Customer Size|setting|lang|module=custome
 $lang->setting->menu->customerLevel = 'Customer Level|setting|lang|module=customer&field=levelList';
 
 $lang->dashboard = new stdclass();
+$lang->resume    = new stdclass();

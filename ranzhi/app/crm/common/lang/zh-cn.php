@@ -61,3 +61,4 @@ $lang->setting->menu->customerSize  = '客户规模|setting|lang|module=customer
 $lang->setting->menu->customerLevel = '客户等级|setting|lang|module=customer&field=levelList';
 
 $lang->dashboard = new stdclass();
+$lang->resume    = new stdclass();

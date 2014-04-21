@@ -44,6 +44,7 @@
       <td><?php echo $contact->qq;?></td>
       <td><?php echo $contact->weixin;?></td>
       <td class='operate'>
+        <?php echo html::a($this->createLink('resume', 'browse', "contactID=$contact->id"), $lang->contact->resume, "data-toggle='modal'"); ?>
         <?php echo html::a($this->createLink('contact', 'edit', "contactID=$contact->id"), $lang->edit); ?>
         <?php echo html::a($this->createLink('contact', 'delete', "contactID=$contact->id"), $lang->delete, "class='deleter'"); ?>
       </td>

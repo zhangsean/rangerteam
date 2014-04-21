@@ -46,3 +46,5 @@ $lang->contact->edit   = 'Edit';
 
 $lang->contact->basicInfo   = 'Basic Info';
 $lang->contact->contactInfo = 'Contact Info';
+
+$lang->contact->failedAvatar = 'Avatar upload failed';
