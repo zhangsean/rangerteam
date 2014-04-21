@@ -10,6 +10,7 @@ function getOrder(customerID)
     $('#orderTD').empty();
 
     if(customerID == '') return false;
+    if(customerID == 'create') return true;
 
     $.get(createLink('contract', 'getOrder', 'customerID=' + customerID), function(data)
     {

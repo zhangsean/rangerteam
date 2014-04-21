@@ -43,10 +43,13 @@ class customerModel extends model
      * @access public
      * @return array
      */
-    public function getPairs($orderBy = 'id_desc')
+    public function getPairs($orderBy = 'id_desc', $emptyOption = true, $createOption = true)
     {
         $customers = $this->dao->select('id, name')->from(TABLE_CUSTOMER)->orderBy($orderBy)->fetchPairs('id');
-        return array(0 => '') + $customers;
+
+        if($emptyOption)  $customers = array('' => '') + $customers;
+        if($createOption) $customers = $customers + array('create' => $this->lang->customer->create);
+        return $customers;
     }
 
     /**
@@ -68,7 +71,9 @@ class customerModel extends model
             ->batchCheck($this->config->customer->require->create, 'notempty')
             ->exec();
 
-        return !dao::isError();
+        if(dao::isError()) return false;
+
+        return $this->dao->lastInsertID();
     }
 
     /**

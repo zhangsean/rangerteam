@@ -182,7 +182,7 @@ class order extends control
 
         $this->view->order    = $order;
         $this->view->records  = $this->loadModel('action')->getList('order', $orderID, 'orderrecord', $pager);
-        $this->view->contacts = $this->loadModel('contact')->getOptionMenu($order->customer);
+        $this->view->contacts = $this->loadModel('contact')->getPairs($order->customer);
         $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
         $this->view->users    = $this->loadModel('user')->getPairs();
         $this->view->pager    = $pager;
@@ -209,7 +209,7 @@ class order extends control
 
         $this->view->order    = $order;
         $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
-        $this->view->contacts = $this->loadModel('contact')->getOptionMenu($order->customer);
+        $this->view->contacts = $this->loadModel('contact')->getPairs($order->customer);
         $this->display();
     }
 
@@ -238,7 +238,7 @@ class order extends control
         $this->view->order    = $order;
         $this->view->record   = $record;
         $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
-        $this->view->contacts = $this->loadModel('contact')->getOptionMenu($order->customer);
+        $this->view->contacts = $this->loadModel('contact')->getPairs($order->customer);
         $this->display();
     }
 

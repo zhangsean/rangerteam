@@ -17,7 +17,7 @@
   <table class='table table-striped table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->contract->customer;?></th>
-      <td><?php echo html::select('customer', $customers, '', "class='form-control' onchange='getOrder(this.value)'");?></td><td></td>
+      <td><?php echo html::select('customer', $customers, '', "class='form-control select-customer' onchange='getOrder(this.value)'");?></td><td></td>
     </tr>
     <tr id= 'orderTR' class='hide'>
       <th><?php echo $lang->contract->order;?></th>
@@ -33,7 +33,7 @@
     </tr>
     <tr>
       <th><?php echo $lang->contract->contact;?></th>
-      <td><?php echo html::select('contact', $contacts, '', "class='form-control'");?></td>
+      <td><?php echo html::select('contact', $contacts, '', "class='form-control select-contact'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->contract->signedBy;?></th>

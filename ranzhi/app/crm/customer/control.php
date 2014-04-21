@@ -45,6 +45,24 @@ class customer extends control
     }   
 
     /**
+     * Get option menu.
+     * 
+     * @param  int    $current 
+     * @access public
+     * @return void
+     */
+    public function getOptionMenu($current = 0)
+    {
+        $options = $this->customer->getPairs();
+        foreach($options as $value => $text)
+        {
+            $selected = $value == $current ? 'selected' : '';
+            echo "<option value='{$value}' {$selected}>{$text}</option>";
+        }
+        exit;
+    }
+
+    /**
      * Create a customer.
      * 
      * @access public
@@ -54,9 +72,9 @@ class customer extends control
     {
         if($_POST)
         {
-            $this->customer->create();       
+            $customerID = $this->customer->create();
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'), 'customerID' => $customerID));
         }
 
         $this->view->title = $this->lang->customer->create;

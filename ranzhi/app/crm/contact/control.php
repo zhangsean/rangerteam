@@ -129,7 +129,7 @@ class contact extends control
      */
     public function getOptionMenu($customer, $current = 0)
     {
-        $options = $this->contact->getOptionMenu($order->customer);
+        $options = $this->contact->getPairs($order->customer);
         foreach($options as $value => $text)
         {
             $selected = $value == $current ? 'selected' : '';

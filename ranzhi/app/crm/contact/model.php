@@ -42,25 +42,15 @@ class contactModel extends model
     }
 
     /**
-     * Get contact pairs.
-     * 
-     * @access public
-     * @return array
-     */
-    public function getPairs()
-    {
-        $contacts = $this->dao->select('*')->from(TABLE_CONTACT)->fetchPairs('id', 'realname');
-        return array(0 => '') + $contacts;
-    }
-
-    /**
      * Get common selecter of contact.
      * 
-     * @param  int    $customer 
+     * @param  int     $customer 
+     * @param  bool    $emptyOption 
+     * @param  bool    $createOption
      * @access public
      * @return void
      */
-    public function getOptionMenu($customer = 0, $withEmpty = true, $create = true)
+    public function getPairs($customer = 0, $emptyOption = true, $createOption = true)
     {
         $contacts = $this->dao->select('t1.*')
             ->from(TABLE_CONTACT)->alias('t1')
@@ -69,8 +59,8 @@ class contactModel extends model
             ->beginIF($customer)->where('t2.customer')->eq($customer)->FI()
             ->fetchPairs('id', 'realname');
 
-        if($withEmpty) $contacts = array('' => '') + $contacts;
-        if($create)    $contacts = $contacts + array('create' => $this->lang->contact->create);
+        if($emptyOption)  $contacts = array('' => '') + $contacts;
+        if($createOption) $contacts = $contacts + array('create' => $this->lang->contact->create);
 
         return $contacts;
     }

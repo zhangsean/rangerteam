@@ -16,7 +16,7 @@
     <strong><i class="icon-plus"></i> <?php echo $lang->customer->create;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm' class='form-condensed'>
+    <form method='post' id='customerForm' class='form-condensed'>
       <div class='row'>
         <div class='col-md-8'>
           <fieldset class='fieldset-primary'>
