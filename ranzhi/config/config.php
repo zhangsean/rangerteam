@@ -116,6 +116,7 @@ define('TABLE_ORDERACTION',   '`crm_orderAction`');
 define('TABLE_ORDER',         '`crm_order`');
 define('TABLE_CUSTOMER',      '`crm_customer`');
 define('TABLE_TEAM',          '`crm_team`');
+define('TABLE_RESUME',        '`crm_resume`');
 define('TABLE_CONTACT',       '`crm_contact`');
 define('TABLE_CONTRACT',      '`crm_contract`');
 define('TABLE_CONTRACTORDER', '`crm_contractOrder`');
