@@ -18,3 +18,9 @@ ADD contract mediumint(8) UNSIGNED AFTER contact,
 CHANGE `product` `product`  mediumint(8) UNSIGNED AFTER contract;
 
 ALTER TABLE `crm_contact` ADD `maker` enum('0','1') COLLATE 'utf8_general_ci' NOT NULL DEFAULT '0' AFTER `customer`;
+ALTER TABLE `crm_relation` RENAME TO `crm_resume`;
+
+ALTER TABLE `crm_resume` ADD `createdDate` datetime NOT NULL,
+ADD `createdBy` char(30) COLLATE 'ucs2_general_ci' NOT NULL AFTER `createdDate`;
+ALTER TABLE `crm_resume` ADD `id` mediumint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+ALTER TABLE `crm_resume` CHANGE `titile` `title` char(100) COLLATE 'utf8_general_ci' NOT NULL AFTER `dept`;

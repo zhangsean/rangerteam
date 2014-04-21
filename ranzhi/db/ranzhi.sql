@@ -155,15 +155,19 @@ CREATE TABLE `crm_order` (
   KEY `contactedDate` (`contactedDate`),
   KEY `nextDate` (`nextDate`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
--- DROP TABLE IF EXISTS `crm_relation`;
-CREATE TABLE `crm_relation` (
+-- DROP TABLE IF EXISTS `crm_resume`;
+CREATE TABLE `crm_resume` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `contact` mediumint(8) unsigned NOT NULL,
   `customer` mediumint(8) unsigned NOT NULL,
   `dept` char(100) NOT NULL,
-  `titile` char(100) NOT NULL,
+  `title` char(100) NOT NULL,
   `address` mediumint(8) unsigned NOT NULL,
   `join` date NOT NULL,
   `left` date NOT NULL,
+  `createdBy` char(30) NOT NULL,
+  `createdDate` datetime NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `contact` (`contact`),
   KEY `customer` (`customer`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
