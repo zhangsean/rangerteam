@@ -61,3 +61,4 @@ $lang->setting->menu->customerLevel = 'Customer Level|setting|lang|module=custom
 
 $lang->dashboard = new stdclass();
 $lang->resume    = new stdclass();
+$lang->address   = new stdclass();

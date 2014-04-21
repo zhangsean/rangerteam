@@ -61,3 +61,4 @@ $lang->setting->menu->customerLevel = '客户等级|setting|lang|module=customer
 
 $lang->dashboard = new stdclass();
 $lang->resume    = new stdclass();
+$lang->address   = new stdclass();

@@ -40,9 +40,11 @@ $lang->contact->uploadAvatar  = 'Upload';
 $lang->contact->genderList['f'] = 'Female';
 $lang->contact->genderList['m'] = 'Male';
 
-$lang->contact->create = 'Create';
-$lang->contact->list   = 'List';
-$lang->contact->edit   = 'Edit';
+$lang->contact->create  = 'Create';
+$lang->contact->list    = 'List';
+$lang->contact->edit    = 'Edit';
+$lang->contact->resume  = 'Company';
+$lang->contact->address = 'Address';
 
 $lang->contact->basicInfo   = 'Basic Info';
 $lang->contact->contactInfo = 'Contact Info';
