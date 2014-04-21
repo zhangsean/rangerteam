@@ -48,8 +48,8 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #apps-menu .bar-menu > li {display: inline-block;}
 #apps-menu .bar-menu > li button {text-align: center; padding:10px; width: 60px;}
 #apps-menu .bar-menu > li img, #apps-menu .bar-menu > li > button > .icon{width: 36px; height: 36px; box-shadow: 0 1px 1px rgba(0,0,0,0.35); border-radius: 5px}
-#apps-menu .bar-menu > li > button > .icon {display: inline-block; background: #666; background: rgba(0,0,0,0.3); color: #f1f1f1; color: rgba(255,255,255,0.8); line-height: 39px}
-#apps-menu .bar-menu > li > button:hover > .icon {background: #808080; background: rgba(0,0,0,0.5); color: rgba(255,255,255,0.9);}
+#apps-menu .bar-menu > li > button > .icon {display: inline-block; background: #666; background: rgba(255,255,255,0.15); color: #f1f1f1; color: rgba(255,255,255,0.8); line-height: 39px}
+#apps-menu .bar-menu > li > button:hover > .icon {background: #808080; background: rgba(255,255,255,0.25); color: #fff;}
 
 /* bottom bar. */
 #bottomBar {height: 36px; background-color: #0a2e66; background-color: rgba(0,0,0,0.5); z-index: 50000; left: 60px; right: 0}
