@@ -254,6 +254,7 @@ label.checkbox,input[type='radio']+label{font-weight: normal;}
 .table-form .checkbox,.table-form input[type="radio"] + label {margin-right: 10px;}
 .table-form td > .row {margin-right: 0;}
 .table-form td > .row > [class*="col-"] {padding-right: 0;line-height: 34px}
+.table-form td .checkbox {margin: 0}
 
 .form-condensed .table-form {margin-bottom: 0;}
 .form-condensed .table-form td, .form-condensed .table-form th {padding: 5px; font-size: 12px;}

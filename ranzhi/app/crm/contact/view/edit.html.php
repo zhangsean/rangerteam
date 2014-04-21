@@ -25,9 +25,9 @@
                 <th><?php echo $lang->contact->realname;?></th>
                 <th class='w-p45'><?php echo $lang->contact->nickname;?></th>
                 <td class='w-80px text-right' rowspan='2' title='<?php echo $lang->contact->avatar;?>'>
-                  <div class="avatar avatar-empty">
+                  <div class="avatar avatar-<?php echo $contact->avatar ? 'avatar' : 'empty';?>">
                     <?php if($contact->avatar) echo html::image($contact->avatar); ?>
-                    <span><?php echo $lang->contact->uploadAvatar ?></span>
+                    <span><?php echo $contact->avatar ? $lang->contact->changeAvatar : $lang->contact->uploadAvatar ?></span>
                     <?php echo html::file('files', "class='form-control'");?>
                   </div>
                 </td>
