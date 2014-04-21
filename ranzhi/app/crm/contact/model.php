@@ -79,13 +79,12 @@ class contactModel extends model
      * Create a contact.
      * 
      * @access public
-     * @return array
+     * @return int
      */
     public function create()
     {
         $contact = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
-            ->add('createdDate', helper::now())
             ->get();
 
         $this->dao->insert(TABLE_CONTACT)
@@ -95,10 +94,21 @@ class contactModel extends model
             ->checkIF($contact->email, 'email', 'email')
             ->exec();
 
-        if(dao::isError()) return array('result' => false, 'message' => dao::getError());
+        if(!dao::isError())
+        {
+            $contactID = $this->dao->lastInsertID();
 
-        $contactID = $this->dao->lastInsertID();
-        return $this->updateAvatar($contactID);
+            $resume = new stdclass();
+            $resume->contact     = $contactID;
+            $resume->customer    = $contact->customer;
+            $resume->createdDate = helper::now();
+            $resume->createdBy   = $this->app->user->account;
+            $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
+
+            return $contactID;
+        }
+
+        return false;
     }
 
     /**
@@ -106,31 +116,45 @@ class contactModel extends model
      * 
      * @param  int    $contactID 
      * @access public
-     * @return array
+     * @return string
      */
     public function update($contactID)
     {
-        $contact = $this->getByID($contactID);
-        $avatar  = $contact->avatar;
+        $oldContact = $this->getByID($contactID);
+        $now        = helper::now();
 
         $contact = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
-            ->add('editedDate', helper::now())
+            ->add('editedDate', $now)
             ->setDefault('maker', 0)
-            ->setIF($this->post->avatar == '', 'avatar', $avatar)
+            ->setIF($this->post->avatar == '', 'avatar', $oldContact->avatar)
+            ->remove('files')
             ->get();
 
         $this->dao->update(TABLE_CONTACT)
-            ->data($contact, 'files')
+            ->data($contact)
             ->autoCheck()
             ->batchCheck($this->config->contact->require->edit, 'notempty')
             ->checkIF($contact->email, 'email', 'email')
             ->where('id')->eq($contactID)
             ->exec();
 
-        if(dao::isError()) return array('result' => false, 'message' => dao::getError());
+        if(!dao::isError())
+        {
+            if($oldContact->customer != $contact->customer)
+            {
+                $resume = new stdclass();
+                $resume->contact     = $contactID;
+                $resume->customer    = $contact->customer;
+                $resume->createdDate = $now;
+                $resume->createdBy   = $this->app->user->account;
+                $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
+            }
 
-        return $this->updateAvatar($contactID);
+            return commonModel::createChanges($oldContact, $contact);
+        }
+
+        return false;
     }
 
     /**
@@ -165,12 +189,15 @@ class contactModel extends model
         
         /* Delete old files. */
         $oldFiles = $this->dao->select('id')->from(TABLE_FILE)->where('objectType')->eq('avatar')->andWhere('objectID')->eq($contactID)->fetchAll('id');
-        foreach($oldFiles as $file) $fileModel->delete($file->id);
-        if(dao::isError()) return array('result' => false, 'message' => $this->lang->fail);
+        if($oldFiles)
+        {
+            foreach($oldFiles as $file) $fileModel->delete($file->id);
+            if(dao::isError()) return array('result' => false, 'message' => $this->lang->contact->failedAvatar);
+        }
         
         /* Upload new avatar. */
         $uploadResult = $fileModel->saveUpload('avatar', $contactID);
-        if(!$uploadResult) return array('result' => false, 'message' => $this->lang->fail);
+        if(!$uploadResult) return array('result' => false, 'message' => $this->lang->contact->failedAvatar);
         
         $fileIdList = array_keys($uploadResult);
         $file       = $fileModel->getById($fileIdList[0]);
@@ -178,6 +205,6 @@ class contactModel extends model
         $avatarPath = $this->config->webRoot . 'data/upload/' . $file->pathname;
         $this->dao->update(TABLE_CONTACT)->set('avatar')->eq($avatarPath)->where('id')->eq($contactID)->exec();
         if(!dao::isError()) return array('result' => true);
-        return array('result' => false, 'message' => $this->lang->fail);
+        return array('result' => false, 'message' => $this->lang->contact->failedAvatar);
     }
 }

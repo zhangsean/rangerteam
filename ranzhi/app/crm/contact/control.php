@@ -56,9 +56,15 @@ class contact extends control
     {
         if($_POST)
         {
-            $return = $this->contact->create(); 
-            if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
-            $this->send(array('result' => 'fail', 'message' => $return['message']));
+            $contactID = $this->contact->create(); 
+            if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            $this->loadModel('action')->create('contact', $contactID, 'Created', '');
+
+            $return = $this->contact->updateAvatar($contactID);
+
+            $message = $result['result'] ? $this->lang->saveSuccess : $result['message'];
+            $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('browse')));
         }
 
         $this->view->title     = $this->lang->contact->create;
@@ -78,9 +84,19 @@ class contact extends control
     {
         if($_POST)
         {
-            $return = $this->contact->update($contactID);
-            if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
-            $this->send(array('result' => 'fail', 'message' => $return['message']));
+            $changes = $this->contact->update($contactID);
+            if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('contact', $contactID, 'Edited', '');
+                $this->action->logHistory($actionID, $changes);
+            }
+            
+            $return = $this->contact->updateAvatar($contactID);
+
+            $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
+            $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('browse')));
         }
 
         $this->view->title     = $this->lang->contact->edit;
