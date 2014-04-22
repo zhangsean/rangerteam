@@ -34,17 +34,15 @@ $lang->category->desc     = '描述';
 $lang->category->keywords = '关键词';
 $lang->category->children = "子类目";
 
-/* Lang items for forum. */
-$lang->board = new stdclass();
-$lang->board->common     = '版块';
-$lang->board->name       = '版块';
-$lang->board->alias      = '别名';
-$lang->board->parent     = '上级版块';
-$lang->board->desc       = '描述';
-$lang->board->keywords   = '关键词';
-$lang->board->children   = "子版块";
-$lang->board->readonly   = '访问权限';
-$lang->board->moderators = '版主';
+/* Lang items for area. */
+$lang->area = new stdclass();
+$lang->area->common   = '区域';
+$lang->area->name     = '名称';
+$lang->area->alias    = '别名';
+$lang->area->parent   = '上级区域';
+$lang->area->desc     = '描述';
+$lang->area->keywords = '关键词';
+$lang->area->children = "子区域";
 
 $lang->board->readonlyList[0] = '开放';
 $lang->board->readonlyList[1] = '只读';

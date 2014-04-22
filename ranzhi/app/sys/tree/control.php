@@ -61,6 +61,12 @@ class tree extends control
             $type = 'customdoc';
             if($root == 'product' or $root == 'project') $type = $root . 'doc';
         }   
+        elseif($type == 'area')
+        {   
+            $this->lang->category = $this->lang->area;
+            $this->lang->tree->menu = $this->lang->setting->menu;
+            $this->lang->menuGroups->tree = 'setting';
+        }
 
         $this->view->title    = $this->lang->category->common;
         $this->view->type     = $type;
