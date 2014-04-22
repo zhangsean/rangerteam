@@ -141,7 +141,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 
 #search {padding: 6px 30px}
 #allapps .search-input {position: relative;}
-#allapps .search-input .icon, #cancelSearch{position: absolute; display: block; left: 9px; top: 6px; color: #f1f1f1; color: rgba(255,255,255,0.4);}
+#allapps .search-input .icon, #cancelSearch{position: absolute; display: block; left: 9px; top: 9px; color: #f1f1f1; color: rgba(255,255,255,0.4);}
 #allapps .search-input:hover .icon, #cancelSearch:hover {color: #fff; color: rgba(255,255,255,0.6);}
 #cancelSearch {display: none; right: 5px; left: inherit; top: 5px; border-color: transparent; color: rgba(255,255,255,0.9);}
 #cancelSearch:hover {border-color: rgba(255,255,255,0.6); color: #fff}
