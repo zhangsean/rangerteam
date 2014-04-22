@@ -20,18 +20,12 @@
   <div class='panel-body'>
     <form method='post' id='contactForm' class='form-condensed'>
       <div class='row'>
-        <div class='col-md-8'>
+        <div class='col-md-9'>
           <fieldset class='fieldset-primary'>
             <table class='table table-form'>
               <tr class='text-left'>
                 <th><?php echo $lang->contact->realname;?></th>
                 <th class='w-p45'><?php echo $lang->contact->nickname;?></th>
-                <td class='w-80px text-right' rowspan='2' title='<?php echo $lang->contact->avatar;?>'>
-                  <div class="avatar avatar-empty">
-                    <span><?php echo $lang->contact->uploadAvatar ?></span>
-                    <?php echo html::file('files', "class='form-control'");?>
-                  </div>
-                </td>
               </tr>
               <tr>
                 <td><?php echo html::input('realname', '', "class='form-control'");?></td>
@@ -44,8 +38,10 @@
             <table class='table table-form'>
               <tr>
                 <th class='w-80px'><?php echo $lang->contact->customer;?></th>
-                <td class='w-p40'><?php echo html::select('customer', $customers, !empty($customer) ? $customer : '', "class='form-control'");?></td>
+                <td class='w-p40'><?php echo html::select('customer', $customers, !empty($customer) ? $customer : '', "class='form-control select-customer'");?></td>
                 <td>
+                  <input type='checkbox' name='newCustomer' id='newCustomer' value='1' />
+                  <label for='newCustomer'><?php echo $lang->contact->newCustomer?></label>
                   <input type='checkbox' name='maker' id='maker' value='1' />
                   <label for='maker'><?php echo $lang->contact->maker?></label>
                 </td>
@@ -54,12 +50,18 @@
               <tr>
                 <th><?php echo $lang->contact->birthday;?></th>
                 <td><?php echo html::input('birthday', '', "class='form-control form-date'");?></td>
+              </tr>
+              <tr>
                 <th><?php echo $lang->contact->gender;?></th>
                 <td><?php echo html::radio('gender', $lang->contact->genderList, '');?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->contact->createdDate;?></th>
                 <td><?php echo html::input('createdDate', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></td>
+              </tr>
+              <tr>
+                <th><?php echo $lang->contact->desc;?></th>
+                <td colspan='3'><?php echo html::textarea('desc', '', "rows='3' class='form-control'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->contact->site;?></th>
@@ -101,17 +103,7 @@
                 <td><?php echo html::input('gtalk', '', "class='form-control'");?></td>
               </tr>
             </table>
-          </fieldset>          
-        </div>
-        <div class='col-md-4'>
-          <table class='table table-form'>
-            <tr>
-              <th class='text-left'><?php echo $lang->contact->desc;?></th>
-            </tr>
-            <tr>
-              <td><?php echo html::textarea('desc', '', "rows='8' class='form-control'");?></td>
-            </tr>
-          </table>
+          </fieldset>
         </div>
       </div>
       <?php echo html::submitButton();?>

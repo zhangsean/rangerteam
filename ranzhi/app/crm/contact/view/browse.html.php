@@ -44,10 +44,11 @@
       <td><?php echo $contact->qq;?></td>
       <td><?php echo $contact->weixin;?></td>
       <td class='operate'>
-        <?php echo html::a($this->createLink('address', 'browse', "objectType=contact&objectID=$contact->id"), $lang->contact->address, "data-toggle='modal'"); ?>
-        <?php echo html::a($this->createLink('resume', 'browse', "contactID=$contact->id"), $lang->contact->resume, "data-toggle='modal'"); ?>
-        <?php echo html::a($this->createLink('contact', 'edit', "contactID=$contact->id"), $lang->edit); ?>
-        <?php echo html::a($this->createLink('contact', 'delete', "contactID=$contact->id"), $lang->delete, "class='deleter'"); ?>
+        <?php echo html::a($this->createLink('address', 'browse', "objectType=contact&objectID=$contact->id"), $lang->contact->address, "data-toggle='modal'");?>
+        <?php echo html::a($this->createLink('resume', 'browse', "contactID=$contact->id"), $lang->contact->resume, "data-toggle='modal'");?>
+        <?php echo html::a($this->createLink('contact', 'view', "contactID=$contact->id"), $lang->view);?>
+        <?php echo html::a($this->createLink('contact', 'edit', "contactID=$contact->id"), $lang->edit);?>
+        <?php echo html::a($this->createLink('contact', 'delete', "contactID=$contact->id"), $lang->delete, "class='deleter'");?>
       </td>
     </tr>
     <?php endforeach;?>

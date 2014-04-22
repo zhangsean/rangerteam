@@ -74,8 +74,26 @@ class contactModel extends model
     public function create()
     {
         $contact = fixer::input('post')
+            ->setDefault('birthday', '0000-00-00')
             ->add('createdBy', $this->app->user->account)
+            ->remove('newCustomer')
             ->get();
+
+        if($this->post->newCustomer)
+        {
+            $customer = new stdclass();
+            $customer->name        = $contact->realname;
+            $customer->site        = $contact->site;
+            $customer->weibo       = $contact->weibo;
+            $customer->weixin      = $contact->weixin;
+            $customer->desc        = $contact->desc;
+            $customer->createdBy   = $this->app->user->account;
+            $customer->createdDate = helper::now();
+            $this->dao->insert(TABLE_CUSTOMER)->data($customer)->autoCheck()->exec();
+
+            if(dao::isError()) return false;
+            $contact->customer = $this->dao->lastInsertID();
+        }
 
         $this->dao->insert(TABLE_CONTACT)
             ->data($contact, 'files')

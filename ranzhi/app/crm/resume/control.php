@@ -81,7 +81,7 @@ class resume extends control
 
             if($changes)
             {
-                $actionID = $this->loadModel('action')->create('contact', $resume->contact, 'changeResume');
+                $actionID = $this->loadModel('action')->create('contact', $resume->contact, 'editResume');
                 $this->action->logHistory($actionID, $changes);
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "contact=$resume->customer")));

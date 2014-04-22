@@ -24,11 +24,11 @@
     </tr>
     <tr>
       <th><?php echo $lang->resume->join;?></th>
-      <td><?php echo html::input('join', $resume->join, "class='form-control form-date'")?></td>
+      <td><?php echo html::input('join', $resume->join == '0000-00-00' ? '' : $resume->join, "class='form-control form-date'")?></td>
     </tr>
     <tr>
       <th><?php echo $lang->resume->left;?></th>
-      <td><?php echo html::input('left', $resume->left, "class='form-control form-date'")?></td>
+      <td><?php echo html::input('left', $resume->left == '0000-00-00' ? '' : $resume->left, "class='form-control form-date'")?></td>
     </tr>
     <tr>
       <th></th>
