@@ -119,6 +119,9 @@ td>select{padding-left: 0;padding-right: 0}
 .page a {color: #666;}
 .page:hover a {color: #506EAF;}
 
+/* dropdown */
+.dropdown-menu {min-width: 80px}
+
 /* tree */
 .tree {padding: 0; margin: 0;}
 .tree li,.tree ul {margin: 0; padding: 0; display: block; position: relative;}
@@ -329,7 +332,6 @@ td #aliasLabel {display: table-row;}
 #historyItem .changes {border: 1px solid #e5e5e5; background: #f7f7f7; font-size: 12px; padding: 2px 5px; margin-top: 5px;}
 
 /* data table */
-.table-data .dropdown-menu {min-width: 80px;}
 .table-data .dropdown-menu > li > a {font-size: 12px}
 
 /* pri */
