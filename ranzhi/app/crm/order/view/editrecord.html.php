@@ -14,7 +14,7 @@
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php js::set('customer', $order->customer);?>
-<form method='post' id='ajaxModalForm' action='<?php echo inlink('editrecord', "recordID=$record->id")?>'>
+<form method='post' id='ajaxForm' action='<?php echo inlink('editrecord', "recordID=$record->id")?>'>
   <table class='table table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->order->record->contact;?></th>

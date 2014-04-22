@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php'; ?>
-<form method='post' id='ajaxModalForm' action='<?php echo inlink('editLib', "libID=$libID")?>'>
+<form method='post' id='ajaxForm' action='<?php echo inlink('editLib', "libID=$libID")?>'>
   <div class='form-group'>
     <label for="name"><?php echo $lang->doc->libName;?></label>
     <?php echo html::input('name', $libName, "class='form-control'");?>

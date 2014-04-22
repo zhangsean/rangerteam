@@ -12,7 +12,7 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
-<form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('order', 'close', "orderID=$orderID")?>'>
+<form method='post' id='ajaxForm' action='<?php echo $this->createLink('order', 'close', "orderID=$orderID")?>'>
   <table class='table table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->order->closedReason?></th>

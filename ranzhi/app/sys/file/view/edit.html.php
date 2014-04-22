@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-<form method='post' enctype='multipart/form-data' id='ajaxModalForm' action='<?php echo $this->createLink('file', 'edit', "fileID=$file->id")?>'>
+<form method='post' enctype='multipart/form-data' id='ajaxForm' action='<?php echo $this->createLink('file', 'edit', "fileID=$file->id")?>'>
   <table class='table table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->file->title;?></th> 

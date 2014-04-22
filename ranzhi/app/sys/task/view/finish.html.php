@@ -14,7 +14,7 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('task', 'finish', "taskID=$taskID")?>'>
+<form method='post' id='ajaxForm' action='<?php echo $this->createLink('task', 'finish', "taskID=$taskID")?>'>
   <table class='table table-form'>
     <tr>
       <th><?php echo $lang->task->consumed;?></th>

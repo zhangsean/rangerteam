@@ -12,7 +12,7 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
-<form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('contract', 'receive', "contractID=$contractID")?>'>
+<form method='post' id='ajaxForm' action='<?php echo $this->createLink('contract', 'receive', "contractID=$contractID")?>'>
   <table class='table table-form'>
     <tr>
       <th><?php echo $lang->comment;?></th>

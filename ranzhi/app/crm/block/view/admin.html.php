@@ -18,7 +18,7 @@
   <td><?php echo html::select('blocks', $blocks, $blockID, "class='form-control'")?></td>
 </table>
 <?php if($params):?>
-<form method='post' id='ajaxModalForm' action='<?php echo inlink('admin', "index=$index&blockID=$blockID")?>'>
+<form method='post' id='ajaxForm' action='<?php echo inlink('admin', "index=$index&blockID=$blockID")?>'>
   <table class='table table-form'>
     <tbody>
       <tr>

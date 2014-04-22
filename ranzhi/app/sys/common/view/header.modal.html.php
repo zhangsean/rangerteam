@@ -27,10 +27,3 @@ if(isset($pageCSS)) css::internal($pageCSS);
 <?php else:?>
 <?php include $this->app->getAppRoot() . '/common/view/header.html.php';?>
 <?php endif;?>
-
-<script>
-$(function()
-{
-    $.setAjaxForm('#ajaxModalForm');
-})
-</script>
