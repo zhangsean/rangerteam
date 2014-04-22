@@ -69,8 +69,8 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #bottomRightBar .bar-menu li {background: none; margin-right: 0;}
 
 /* start menu */
-#start {width: 60px; height: 56px; text-align: center; padding: 0; background: none}
-#start img {width: 36px; height: 36px; line-height: 36px; border-radius: 4px; box-shadow: 0 1px 1px rgba(0,0,0,0.35)}
+#start {width: 60px; height: 36px; text-align: center; padding: 0; background: none}
+#start img {width: 24px; height: 24px; line-height: 24px; border-radius: 4px; box-shadow: 0 1px 1px rgba(0,0,0,0.35)}
 #start:hover {background-color: rgba(255,255,255,0.2);}
 #startMenu {bottom: 36px; top: inherit; left: 0}
 #startMenu .avatar-img {height: 48px; width: 48px; display: inline-block; margin-right: 10px; border-radius: 4px}
@@ -161,7 +161,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #home .panel {box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);}
 #home .panel-loading .panel-body {background: url('images/ips/loading.gif') no-repeat center 30%;}
 #home .panel-actions {margin: 0}
-#home .panels-container {max-width: 1600px; margin: 0 auto; padding: 0 5%; margin-top: 45px;}
+#home .panels-container {max-width: 1600px; margin: 0 auto; padding: 0 5%; margin-top: 40px;}
 #home .panel-body > .article-content {padding: 8px 10px;}
 #home .panel-body > .list-group {margin: 0;}
 #home .panel-body .list-group-item {border-left: 0; border-right: 0; padding: 8px;}
