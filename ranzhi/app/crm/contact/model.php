@@ -46,11 +46,10 @@ class contactModel extends model
      * 
      * @param  int     $customer 
      * @param  bool    $emptyOption 
-     * @param  bool    $createOption
      * @access public
      * @return void
      */
-    public function getPairs($customer = 0, $emptyOption = true, $createOption = true)
+    public function getPairs($customer = 0, $emptyOption = true)
     {
         $contacts = $this->dao->select('t1.*')
             ->from(TABLE_CONTACT)->alias('t1')
@@ -60,7 +59,6 @@ class contactModel extends model
             ->fetchPairs('id', 'realname');
 
         if($emptyOption)  $contacts = array('' => '') + $contacts;
-        if($createOption) $contacts = $contacts + array('create' => $this->lang->contact->create);
 
         return $contacts;
     }

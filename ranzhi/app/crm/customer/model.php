@@ -39,16 +39,16 @@ class customerModel extends model
     /** 
      * Get customer pairs.
      * 
-     * @param  string  $orderBy 
+     * @param  string $orderBy 
+     * @param  int    $emptyOption 
      * @access public
-     * @return array
+     * @return void
      */
-    public function getPairs($orderBy = 'id_desc', $emptyOption = true, $createOption = true)
+    public function getPairs($orderBy = 'id_desc', $emptyOption = true)
     {
         $customers = $this->dao->select('id, name')->from(TABLE_CUSTOMER)->orderBy($orderBy)->fetchPairs('id');
 
         if($emptyOption)  $customers = array('' => '') + $customers;
-        if($createOption) $customers = $customers + array('create' => $this->lang->customer->create);
         return $customers;
     }
 
