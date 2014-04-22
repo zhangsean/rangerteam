@@ -62,9 +62,9 @@
             <table class='table table-form'>
               <tr>
                 <th class='w-80px'><?php echo $lang->customer->site;?></th>
-                <td><?php echo html::input('site', $customer->site, "class='form-control'");?></td>
+                <td><?php echo html::input('site', $customer->site ? $customer->site : 'http://', "class='form-control'");?></td>
                 <th class='w-80px'><?php echo $lang->customer->weibo;?></th>
-                <td><?php echo html::input('weibo', $customer->weibo, "class='form-control'");?></td>
+                <td><?php echo html::input('weibo', $customer->weibo ? $customer->weibo : 'http://', "class='form-control'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->customer->weixin;?></th>

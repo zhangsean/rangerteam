@@ -101,6 +101,10 @@ class customerModel extends model
             ->add('editedDate', helper::now())
             ->get();
 
+        /* Add http:// in head when that has not http:// or https://. */
+        if(strpos($customer->site, '://') === false )  $customer->site  = 'http://' . $customer->site;
+        if(strpos($customer->weibo, '://') === false ) $customer->weibo = 'http://' . $customer->weibo;
+
         $this->dao->update(TABLE_CUSTOMER)
             ->data($customer)
             ->autoCheck()

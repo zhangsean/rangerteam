@@ -61,7 +61,7 @@
               </tr>
               <tr>
                 <th><?php echo $lang->contact->site;?></th>
-                <td colspan='3'><?php echo html::input('site', $contact->site, "class='form-control'");?></td>
+                <td colspan='3'><?php echo html::input('site', $contact->site ? $contact->site : 'http://', "class='form-control'");?></td>
               </tr>
             </table>
           </fieldset>
@@ -88,7 +88,7 @@
               </tr>
               <tr>
                 <th><?php echo $lang->contact->weibo;?></th>
-                <td><?php echo html::input('weibo', $contact->weibo, "class='form-control'");?></td>
+                <td><?php echo html::input('weibo', $contact->weibo ? $contact->weibo : 'http://', "class='form-control'");?></td>
                 <th><?php echo $lang->contact->wangwang;?></th>
                 <td><?php echo html::input('wangwang', $contact->wangwang, "class='form-control'");?></td>
               </tr>

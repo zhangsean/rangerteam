@@ -79,6 +79,9 @@ class contactModel extends model
             ->remove('newCustomer')
             ->get();
 
+        if(strpos($contact->site, '://') === false )  $contact->site  = 'http://' . $contact->site;
+        if(strpos($contact->weibo, '://') === false ) $contact->weibo = 'http://' . $contact->weibo;
+
         if($this->post->newCustomer)
         {
             $customer = new stdclass();
@@ -136,6 +139,9 @@ class contactModel extends model
             ->setIF($this->post->avatar == '', 'avatar', $oldContact->avatar)
             ->remove('files')
             ->get();
+
+        if(strpos($contact->site, '://') === false )  $contact->site  = 'http://' . $contact->site;
+        if(strpos($contact->weibo, '://') === false ) $contact->weibo = 'http://' . $contact->weibo;
 
         $this->dao->update(TABLE_CONTACT)
             ->data($contact)

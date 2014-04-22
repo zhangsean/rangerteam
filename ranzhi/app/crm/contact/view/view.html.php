@@ -58,7 +58,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->contact->site;?></th>
-              <td><?php if($contact->site) echo html::a($contact->site, $contact->site, "target='blank'");?></td>
+              <td><?php if($contact->site and $contact->site != 'http://') echo html::a($contact->site, $contact->site, "target='blank'");?></td>
             </tr>
           </table>
         </fieldset>
