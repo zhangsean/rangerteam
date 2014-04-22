@@ -35,7 +35,9 @@ $lang->contact->editedBy      = 'Edited By';
 $lang->contact->editedDate    = 'Edited Date';
 $lang->contact->contactedBy   = 'Contacted By';
 $lang->contact->contactedDate = 'Contacted Date';
-$lang->contact->uploadAvatar  = 'Upload';
+$lang->contact->newCustomer   = 'New Customer';
+$lang->contact->uploadAvatar  = 'Upload Avatar';
+$lang->contact->changeAvatar  = 'Change Avatar';
 
 $lang->contact->genderList['f'] = 'Female';
 $lang->contact->genderList['m'] = 'Male';
@@ -43,6 +45,7 @@ $lang->contact->genderList['m'] = 'Male';
 $lang->contact->create  = 'Create';
 $lang->contact->list    = 'List';
 $lang->contact->edit    = 'Edit';
+$lang->contact->view    = 'View';
 $lang->contact->resume  = 'Company';
 $lang->contact->address = 'Address';
 

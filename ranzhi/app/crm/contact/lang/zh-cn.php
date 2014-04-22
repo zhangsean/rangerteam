@@ -35,6 +35,7 @@ $lang->contact->editedBy      = '由谁编辑';
 $lang->contact->editedDate    = '编辑时间';
 $lang->contact->contactedBy   = '由谁联系';
 $lang->contact->contactedDate = '联系时间';
+$lang->contact->newCustomer   = '新建客户';
 $lang->contact->uploadAvatar  = '上传头像';
 $lang->contact->changeAvatar  = '更换头像';
 
@@ -44,6 +45,7 @@ $lang->contact->genderList['m'] = '男';
 $lang->contact->create  = '添加联系人';
 $lang->contact->list    = '联系人列表';
 $lang->contact->edit    = '编辑联系人';
+$lang->contact->view    = '联系人详情';
 $lang->contact->resume  = '公司管理';
 $lang->contact->address = '地址管理';
 
