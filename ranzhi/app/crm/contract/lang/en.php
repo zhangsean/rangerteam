@@ -64,4 +64,4 @@ $lang->contract->codeUnitList['input'] = 'Input';
 $lang->contract->info = 'Info';
 
 $lang->contract->placeholder = new stdclass();
-$lang->contract->placeholder->real = 'Real Amount';
+$lang->contract->placeholder->real = 'Turnover';
