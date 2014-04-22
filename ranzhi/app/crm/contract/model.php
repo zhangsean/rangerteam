@@ -54,7 +54,7 @@ class contractModel extends model
      */
     public function getPairs($customerID)
     {
-        return $this->dao->select('id, name')->from(TABLE_CONTRACT)->where('customer')->eq($customerID)->fetchPairs('id');
+        return $this->dao->select('id, name')->from(TABLE_CONTRACT)->where('customer')->eq($customerID)->fetchPairs('id', 'name');
     }
 
     /**

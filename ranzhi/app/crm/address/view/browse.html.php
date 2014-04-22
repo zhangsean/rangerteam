@@ -12,9 +12,9 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <table class='table table-hover table-bordered'>
-<caption>
-<div class='pull-right'><?php echo html::a(inlink('create', "objectType=$objectType&objectID=$objectID"), $lang->address->create, "class='loadInModal'")?></div>
-</caption>
+  <caption>
+    <div class='pull-right'><?php echo html::a(inlink('create', "objectType=$objectType&objectID=$objectID"), $lang->address->create, "class='loadInModal'")?></div>
+  </caption>
   <tr class='text-center'>
     <th class='w-150px'><?php echo $lang->address->title;?></th>
     <th><?php echo $lang->address->location;?></th>

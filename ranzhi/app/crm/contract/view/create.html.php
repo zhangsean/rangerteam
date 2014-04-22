@@ -13,7 +13,7 @@
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
-<form method='post' id='ajaxModalForm' action='<?php echo $this->createLink('contract', 'create')?>'>
+<form method='post' id='ajaxForm' action='<?php echo $this->createLink('contract', 'create')?>'>
   <table class='table table-striped table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->contract->customer;?></th>

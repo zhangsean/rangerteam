@@ -11,7 +11,6 @@
  */
 class address extends control
 {
-
     /**
      * Browse address. 
      * 
@@ -23,11 +22,10 @@ class address extends control
     public function browse($objectType, $objectID)
     {
         $this->view->title      = $this->lang->address->common;
+        $this->view->modalWidth = 800;
         $this->view->addresses  = $this->address->getList($objectType, $objectID);
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
-
-        $this->view->modalWidth = 800;
 
         $this->display();
     }
@@ -79,7 +77,7 @@ class address extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "objectType=$address->objectType&objectID=$address->objectID")));
         }
 
-        $this->view->title  = $this->lang->address->edit;
+        $this->view->title   = $this->lang->address->edit;
         $this->view->address = $address;
         $this->display();
     }

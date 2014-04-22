@@ -19,7 +19,7 @@ CREATE TABLE `crm_contact` (
   `realname` char(30) NOT NULL DEFAULT '',
   `nickname` char(30) NOT NULL,
   `avatar` char(100) NOT NULL,
-  `birthday` date NOT NULL,
+  `birthday` date NOT NULL default '0000-00-00 00:00:00',
   `gender` enum('f','m','u') NOT NULL DEFAULT 'u',
   `email` char(90) NOT NULL DEFAULT '',
   `skype` char(90) NOT NULL,

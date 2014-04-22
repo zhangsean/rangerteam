@@ -11,7 +11,6 @@
  */
 class resume extends control
 {
-
     /**
      * Browse resume. 
      * 
@@ -24,12 +23,11 @@ class resume extends control
         $contact    = $this->loadModel('contact')->getByID($contactID);
         $actionLink = html::a(inlink('create', "contactID=$contactID"), $this->lang->resume->change, "class='loadInModal btn btn-primary btn-mini'");
 
-        $this->view->title     = $contact->realname . $this->lang->minus . $this->lang->resume->common . $actionLink;
-        $this->view->contact   = $this->loadModel('contact')->getByID($contactID);
-        $this->view->resumes   = $this->resume->getList($contactID);
-        $this->view->customers = $this->loadModel('customer')->getPairs();
-
+        $this->view->title      = $contact->realname . $this->lang->minus . $this->lang->resume->common . $actionLink;
         $this->view->modalWidth = 800;
+        $this->view->contact    = $this->loadModel('contact')->getByID($contactID);
+        $this->view->resumes    = $this->resume->getList($contactID);
+        $this->view->customers  = $this->loadModel('customer')->getPairs();
 
         $this->display();
     }

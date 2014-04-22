@@ -277,11 +277,10 @@ class contract extends control
             if(!$order)
             {
                 $html .= "<option value='' data-real=''></option>";
+                continue;
             }
-            else
-            {
-                $html .= "<option value='{$order->id}' data-real='{$order->plan}'>{$order->title}</option>";
-            }
+
+            $html .= "<option value='{$order->id}' data-real='{$order->plan}'>{$order->title}</option>";
         }
 
         $html .= '</select></span>';

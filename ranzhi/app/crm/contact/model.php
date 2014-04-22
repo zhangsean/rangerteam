@@ -132,10 +132,9 @@ class contactModel extends model
             if($oldContact->customer != $contact->customer)
             {
                 $resume = new stdclass();
-                $resume->contact     = $contactID;
-                $resume->customer    = $contact->customer;
-                $resume->createdDate = $now;
-                $resume->createdBy   = $this->app->user->account;
+                $resume->contact  = $contactID;
+                $resume->customer = $contact->customer;
+
                 $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
             }
 
@@ -193,6 +192,7 @@ class contactModel extends model
         $avatarPath = $this->config->webRoot . 'data/upload/' . $file->pathname;
         $this->dao->update(TABLE_CONTACT)->set('avatar')->eq($avatarPath)->where('id')->eq($contactID)->exec();
         if(!dao::isError()) return array('result' => true, 'contactID' => $contactID);
+
         return array('result' => false, 'message' => $this->lang->contact->failedAvatar);
     }
 }

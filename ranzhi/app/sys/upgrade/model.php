@@ -165,4 +165,27 @@ class upgradeModel extends model
         self::$errors = array();
         return $errors;
     }
+
+    /**
+     * Import area data.
+     * 
+     * @access public
+     * @return void
+     */
+    public function importArea()
+    {
+        include $this->app->getDataRoot() . '/area.php';
+        foreach($provinces as $province)
+        {
+            $province['type'] = 'area';
+            $this->dao->replace(TABLE_CATEGORY)->data($province)->exec();
+        }
+
+        foreach($cities as $city)
+        {
+            $city['type'] = 'area';
+            $this->dao->replace(TABLE_CATEGORY)->data($city)->exec();
+        }
+        return true;
+    }
 }

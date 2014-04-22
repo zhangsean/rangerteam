@@ -26,8 +26,8 @@ class addressModel extends model
     /**
      * Get by object.
      * 
-     * @param  strin  $objectType 
-     * @param  int    $objectID 
+     * @param  string  $objectType 
+     * @param  int     $objectID 
      * @access public
      * @return array
      */
@@ -39,7 +39,7 @@ class addressModel extends model
     /**
      * Get list.
      * 
-     * @param  strin  $objectType 
+     * @param  string  $objectType 
      * @param  int    $objectID 
      * @access public
      * @return array
@@ -59,7 +59,7 @@ class addressModel extends model
     /**
      * Create address. 
      * 
-     * @param  strin  $objectType 
+     * @param  string  $objectType 
      * @param  int    $objectID 
      * @access public
      * @return int
@@ -94,7 +94,9 @@ class addressModel extends model
         $address    = fixer::input('post')->get();
 
         $this->dao->update(TABLE_ADDRESS)->data($address)->where('id')->eq($addressID)->exec();
-
+        
+        if(dao::isError()) return false;
+        
         return commonModel::createChanges($oldAddress, $address);
     }
 
