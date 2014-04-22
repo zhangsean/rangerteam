@@ -53,3 +53,4 @@ $lang->contact->basicInfo   = '基本信息';
 $lang->contact->contactInfo = '联系信息';
 
 $lang->contact->failedAvatar = '头像上传失败';
+$lang->contact->autoCustomer = '自动以联系人姓名创建客户';

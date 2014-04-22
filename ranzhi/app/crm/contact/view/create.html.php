@@ -40,10 +40,10 @@
                 <th class='w-80px'><?php echo $lang->contact->customer;?></th>
                 <td class='w-p40'><?php echo html::select('customer', $customers, !empty($customer) ? $customer : '', "class='form-control select-customer'");?></td>
                 <td>
-                  <input type='checkbox' name='newCustomer' id='newCustomer' value='1' />
-                  <label for='newCustomer'><?php echo $lang->contact->newCustomer?></label>
                   <input type='checkbox' name='maker' id='maker' value='1' />
                   <label for='maker'><?php echo $lang->contact->maker?></label>
+                  <input type='checkbox' name='newCustomer' id='newCustomer' value='1' />
+                  <label for='newCustomer'><?php echo $lang->contact->newCustomer?></label>
                 </td>
                 <td></td>
               </tr>
@@ -110,4 +110,5 @@
     </form>
   </div>
 </div>
+<?php js::set('autoCustomer', $lang->contact->autoCustomer);?>
 <?php include '../../common/view/footer.html.php';?>
