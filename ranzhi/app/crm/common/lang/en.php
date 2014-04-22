@@ -49,7 +49,6 @@ $lang->contact->menu->create = '<i class="icon-plus"></i> Create Contact|contact
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
 $lang->contract->menu->browse = array('link' => '<i class="icon-th-list"></i> Contract List|contract|browse|', 'alias' => 'edit,view');
-$lang->contract->menu->setting = '<i class="icon-wrench"></i> Settings|contract|setting|';
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();
