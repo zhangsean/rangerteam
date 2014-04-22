@@ -272,13 +272,13 @@ CREATE TABLE `sys_action` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_category`;
 CREATE TABLE `sys_category` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(30) NOT NULL DEFAULT '',
   `alias` varchar(100) NOT NULL,
   `desc` varchar(150) NOT NULL,
   `keywords` varchar(150) NOT NULL,
   `root` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `parent` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `parent` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `path` char(255) NOT NULL DEFAULT '',
   `grade` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `order` smallint(5) unsigned NOT NULL DEFAULT '0',
