@@ -16,6 +16,7 @@
     <tr class='text-center'>
       <th class='w-60px'><?php echo $lang->customer->id;?></th>
       <th><?php echo $lang->customer->name;?></th>
+      <th><?php echo $lang->actions;?></th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,7 @@
     <tr class='text-center'>
       <td><?php echo $id;?></td>
       <td><?php echo $order;?></td>
+      <td><?php echo html::a($this->createLink('order', 'delete', "orderID={$id}"), $lang->delete, "class='deleter'");?></td>
     </tr>
     <?php endforeach;?>
   </tbody>

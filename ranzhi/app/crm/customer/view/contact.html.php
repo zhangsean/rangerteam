@@ -19,6 +19,7 @@
       <th><?php echo $lang->customer->phone;?></th>
       <th><?php echo $lang->customer->email;?></th>
       <th><?php echo $lang->customer->qq;?></th>
+      <th><?php echo $lang->actions;?></th>
     </tr>
   </thead>
   <tbody>
@@ -29,6 +30,7 @@
       <td><?php echo $contact->phone;?></td>
       <td><?php echo $contact->email;?></td>
       <td><?php echo $contact->qq;?></td>
+      <td><?php echo html::a($this->createLink('contact', 'delete', "contactID={$contact->id}"), $lang->delete, "class='deleter'");?></td>
     </tr>
     <?php endforeach;?>
   </tbody>
