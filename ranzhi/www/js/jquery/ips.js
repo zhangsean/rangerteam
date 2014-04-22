@@ -1122,6 +1122,19 @@
                 afterPanelRemoved : afterPanelRemoved
             });
 
+            $('#home .dashboard .refresh-all-panel').click(function()
+            {
+                var $icon = $(this).find('.icon-repeat').addClass('icon-spin');
+                $('#home .dashboard .refresh-panel').click();
+                setTimeout(checkDone, 500);
+
+                function checkDone()
+                {
+                    if($('#home .dashboard .panel-loading').length) setTimeout(checkDone, 500);
+                    else $icon.removeClass('icon-spin');
+                }
+            });
+
             function afterPanelRemoved(index)
             {
                 if(settings.onDeleteBlock && $.isFunction(settings.onDeleteBlock))

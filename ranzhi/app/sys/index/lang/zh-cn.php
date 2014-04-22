@@ -18,6 +18,7 @@ $lang->index->theme        = '更换主题';
 $lang->index->showDesk     = '桌面';
 $lang->index->customBlocks = '编辑区块';
 $lang->index->addBlock     = '添加区块';
+$lang->index->refresh      = '更新';
 
 $lang->index->countEntries = "共 <span class='entries-count'></span> 款应用";
 

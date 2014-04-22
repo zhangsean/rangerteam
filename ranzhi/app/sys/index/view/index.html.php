@@ -41,6 +41,10 @@ js::import($jsRoot . 'jquery/ips.js');
   </div>
   <div id='home' class='fullscreen fullscreen-active'>
     <div class='panels-container dashboard' id='dashboard'>
+      <div class='btn-toolbar actions'>
+      <button title='<?php echo $lang->index->refresh;?>' class='btn btn-pure refresh-all-panel'><i class='icon-repeat'></i></button>
+        <a data-toggle='modal' href='<?php echo $this->createLink("block", "admin", "index=" . ($index + 1)); ?>' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure'><i class='icon-plus'></i></a>
+      </div>
       <div class='row'>
         <?php $index = 0;?>
         <?php foreach($blocks as $key => $block):?>
@@ -68,9 +72,6 @@ js::import($jsRoot . 'jquery/ips.js');
         </div>
         <?php endforeach;?>
       </div>
-    </div>
-    <div class='btn-toolbar actions'>
-      <a data-toggle='modal' href='<?php echo $this->createLink("block", "admin", "index=" . ($index + 1)); ?>' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure'><i class='icon-plus'></i></a>
     </div>
   </div>
   <div id='allapps' class='fullscreen'>
