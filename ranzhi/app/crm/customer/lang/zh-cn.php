@@ -38,6 +38,7 @@ $lang->customer->nextDate    = '下次联系时间';
 $lang->customer->order    = '订单';
 $lang->customer->contact  = '联系人';
 $lang->customer->contract = '合同';
+$lang->customer->address  = '地址';
 
 $lang->customer->typeList['']           = '';
 $lang->customer->typeList['national']   = '国企';

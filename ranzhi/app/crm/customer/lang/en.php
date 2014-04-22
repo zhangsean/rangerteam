@@ -38,6 +38,7 @@ $lang->customer->nextDate    = 'Next Date';
 $lang->customer->order    = 'Order List';
 $lang->customer->contact  = 'Contact List';
 $lang->customer->contract = 'Contract List';
+$lang->customer->contract = 'Address List';
 
 $lang->customer->typeList['']           = '';
 $lang->customer->typeList['national']   = 'National';

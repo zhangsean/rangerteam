@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<table class='table table-hover table-striped table-data'>
+<table class='table table-bordered table-hover table-striped table-data'>
   <thead>
     <tr class='text-center'>
       <th class='w-60px'><?php echo $lang->customer->id;?></th>

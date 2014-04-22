@@ -29,7 +29,7 @@
         <th class='w-100px'><?php commonModel::printOrderLink('contactDate', $orderBy, $vars, $lang->customer->contactDate);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('nextDate',    $orderBy, $vars, $lang->customer->nextDate);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->customer->createdDate);?></th>
-        <th class='w-160px'><?php echo $lang->actions;?></th>
+        <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -50,7 +50,8 @@
           echo html::a(inlink('order',   "customerID=$customer->id"), $lang->customer->order,    "data-toggle='modal'");
           echo html::a(inlink('contact', "customerID=$customer->id"), $lang->customer->contact,  "data-toggle='modal'");
           echo html::a(inlink('contract',"customerID=$customer->id"), $lang->customer->contract, "data-toggle='modal'");
-          echo html::a(inlink('delete',  "customerID=$customer->id"), $lang->delete, "class='deleter'");
+          echo html::a($this->createLink('address', 'browse', "objectType=customer&objectID=$customer->id"), $lang->customer->address, "data-toggle='modal'");
+          echo html::a(inlink('delete', "customerID=$customer->id"), $lang->delete, "class='deleter'");
           ?>
         </td>
       </tr>
