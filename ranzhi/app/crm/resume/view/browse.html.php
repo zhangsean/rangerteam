@@ -12,6 +12,9 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <table class='table table-hover table-bordered'>
+  <caption>
+    <div class='pull-right'><?php echo html::a(inlink('create', "contactID=$contact->id"), $this->lang->resume->change, "class='loadInModal'");?></div>
+  </caption>
   <tr class='text-center'>
     <th><?php echo $lang->resume->customer;?></th>
     <th class='w-100px'><?php echo $lang->resume->dept;?></th>

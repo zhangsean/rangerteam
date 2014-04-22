@@ -20,10 +20,9 @@ class resume extends control
      */
     public function browse($contactID)
     {
-        $contact    = $this->loadModel('contact')->getByID($contactID);
-        $actionLink = html::a(inlink('create', "contactID=$contactID"), $this->lang->resume->change, "class='loadInModal btn btn-primary btn-mini'");
+        $contact = $this->loadModel('contact')->getByID($contactID);
 
-        $this->view->title      = $contact->realname . $this->lang->minus . $this->lang->resume->common . $actionLink;
+        $this->view->title      = $contact->realname . $this->lang->minus . $this->lang->resume->common;
         $this->view->modalWidth = 800;
         $this->view->contact    = $this->loadModel('contact')->getByID($contactID);
         $this->view->resumes    = $this->resume->getList($contactID);
