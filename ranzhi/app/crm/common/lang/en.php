@@ -58,6 +58,8 @@ $lang->setting->menu->product       = 'Product Status|setting|lang|module=produc
 $lang->setting->menu->customerType  = 'Customer Status|setting|lang|module=customer&field=typeList';
 $lang->setting->menu->customerSize  = 'Customer Size|setting|lang|module=customer&field=sizeList';
 $lang->setting->menu->customerLevel = 'Customer Level|setting|lang|module=customer&field=levelList';
+$lang->setting->menu->area          = 'Area|tree|browse|type=area|';
+$lang->setting->menu->industry      = 'Industry|tree|browse|type=industry|';
 
 $lang->dashboard = new stdclass();
 $lang->resume    = new stdclass();

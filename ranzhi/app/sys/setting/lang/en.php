@@ -30,3 +30,7 @@ $lang->setting->customer->fields['typeList'] = 'Customer levels';
 
 $lang->setting->currentLang = 'For current language';
 $lang->setting->allLang     = 'For all language';
+
+$lang->setting->placeholder = new stdclass();
+$lang->setting->placeholder->key   = 'Key';
+$lang->setting->placeholder->value = 'Translation';

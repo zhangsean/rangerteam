@@ -59,6 +59,7 @@ $lang->setting->menu->customerType  = '客户类型|setting|lang|module=customer
 $lang->setting->menu->customerSize  = '客户规模|setting|lang|module=customer&field=sizeList';
 $lang->setting->menu->customerLevel = '客户等级|setting|lang|module=customer&field=levelList';
 $lang->setting->menu->area          = '区域设置|tree|browse|type=area|';
+$lang->setting->menu->industry      = '行业设置|tree|browse|type=industry|';
 
 $lang->dashboard = new stdclass();
 $lang->resume    = new stdclass();

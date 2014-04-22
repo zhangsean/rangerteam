@@ -178,6 +178,7 @@ $lang->company->menu->basic   = 'Basic|company|setbasic|';
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
 $lang->system->menu->main = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
+//$lang->system->menu->backup = '备份|admin|backup|';
 
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();

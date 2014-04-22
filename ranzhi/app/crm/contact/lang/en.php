@@ -38,6 +38,7 @@ $lang->contact->contactedDate = 'Contacted Date';
 $lang->contact->newCustomer   = 'New Customer';
 $lang->contact->uploadAvatar  = 'Upload Avatar';
 $lang->contact->changeAvatar  = 'Change Avatar';
+$lang->contact->changeAvatar  = 'Change Avatar';
 
 $lang->contact->genderList['f'] = 'Female';
 $lang->contact->genderList['m'] = 'Male';

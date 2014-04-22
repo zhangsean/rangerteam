@@ -242,24 +242,6 @@ class contract extends control
     }
 
     /**
-     * Setting function.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setting()
-    {
-        if($_POST)
-        {
-            $this->contract->setCodeFormat();
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
-        }
-        if(!is_array($this->config->contract->codeFormat)) $this->config->contract->codeFormat = json_decode($this->config->contract->codeFormat, true);
-        $this->display();
-    }
-
-    /**
      * Get order.
      *
      * @param  int    $customerID

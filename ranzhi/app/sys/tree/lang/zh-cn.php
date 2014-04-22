@@ -44,5 +44,15 @@ $lang->area->desc     = '描述';
 $lang->area->keywords = '关键词';
 $lang->area->children = "子区域";
 
+/* Lang items for industry. */
+$lang->industry = new stdclass();
+$lang->industry->common   = '行业';
+$lang->industry->name     = '名称';
+$lang->industry->alias    = '别名';
+$lang->industry->parent   = '上级行业';
+$lang->industry->desc     = '描述';
+$lang->industry->keywords = '关键词';
+$lang->industry->children = "子行业";
+
 $lang->board->readonlyList[0] = '开放';
 $lang->board->readonlyList[1] = '只读';

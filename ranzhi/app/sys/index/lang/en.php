@@ -18,6 +18,7 @@ $lang->index->theme        = 'Theme';
 $lang->index->showDesk     = 'Show Desk';
 $lang->index->customBlocks = 'Custom block';
 $lang->index->addBlock     = 'Add Block';
+$lang->index->refresh      = 'Refresh';
 
 $lang->index->countEntries = "A total of <span class='entries-count'></span> entries";
 

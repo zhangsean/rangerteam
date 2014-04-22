@@ -67,6 +67,12 @@ class tree extends control
             $this->lang->tree->menu = $this->lang->setting->menu;
             $this->lang->menuGroups->tree = 'setting';
         }
+        elseif($type == 'industry')
+        {   
+            $this->lang->category = $this->lang->industry;
+            $this->lang->tree->menu = $this->lang->setting->menu;
+            $this->lang->menuGroups->tree = 'setting';
+        }
 
         $this->view->title    = $this->lang->category->common;
         $this->view->type     = $type;
