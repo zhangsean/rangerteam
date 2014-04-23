@@ -93,8 +93,15 @@ class customer extends control
     {
         if($_POST)
         {
-            $this->customer->update($customerID);
+            $changes = $this->customer->update($customerID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('customer', $customerID, 'Edited');
+                $this->action->logHistory($actionID, $changes);
+            }
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
@@ -200,7 +207,8 @@ class customer extends control
      */
     public function delete($customerID)
     {
-        if($this->customer->delete($customerID)) $this->send(array('result' => 'success'));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->customer->delete(TABLE_CUSTOMER, $customerID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success'));
     }
 }

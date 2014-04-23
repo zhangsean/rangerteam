@@ -250,7 +250,7 @@ class model
     public function delete($table, $id)
     {
         $this->dao->update($table)->set('deleted')->eq(1)->where('id')->eq($id)->exec();
-        $object = ltrim(strstr($table, '_'), '_');
+        $object = ltrim(strstr(trim($table, '`'), '_'), '_');
         $this->loadModel('action')->create($object, $id, 'deleted', '', $extra = ACTIONMODEL::CAN_UNDELETED);
     }
 }    

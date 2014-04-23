@@ -82,8 +82,15 @@ class contract extends control
     {
         if($_POST)
         {
-            $this->contract->update($contractID);
+            $changes = $this->contract->update($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('contract', $contractID, 'Edited');
+                $this->action->logHistory($actionID, $changes);
+            }
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
@@ -238,7 +245,7 @@ class contract extends control
      */
     public function delete($contractID)
     {
-        $this->contract->delete($contractID);
+        $this->contract->delete(TABLE_CONTRACT, $contractID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
     }

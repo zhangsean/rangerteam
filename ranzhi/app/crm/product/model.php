@@ -81,7 +81,7 @@ class productModel extends model
      */
     public function update($productID)
     {
-        $product = $this->getByID($productID);
+        $oldProduct = $this->getByID($productID);
 
         $product = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
@@ -95,19 +95,8 @@ class productModel extends model
             ->where('id')->eq($productID)
             ->exec();
 
-        return !dao::isError();
-    }
+        if(dao::isError()) return false;
 
-    /**
-     * Delete a product.
-     * 
-     * @param  int      $productID 
-     * @access public
-     * @return void
-     */
-    public function delete($productID, $table = null)
-    {
-        $this->dao->update(TABLE_PRODUCT)->set('deleted')->eq(1)->where('id')->eq($productID)->exec();
-        return !dao::isError();
+        return commonModel::createChanges($oldProduct, $product);
     }
 }

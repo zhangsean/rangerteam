@@ -43,7 +43,11 @@ class contractModel extends model
      */
     public function getList($orderBy = 'id_desc', $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_CONTRACT)->orderBy($orderBy)->page($pager)->fetchAll();
+        return $this->dao->select('*')->from(TABLE_CONTRACT)
+            ->where('deleted')->eq(0)
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll();
     }
 
     /**
@@ -54,7 +58,10 @@ class contractModel extends model
      */
     public function getPairs($customerID)
     {
-        return $this->dao->select('id, name')->from(TABLE_CONTRACT)->where('customer')->eq($customerID)->fetchPairs('id', 'name');
+        return $this->dao->select('id, name')->from(TABLE_CONTRACT)
+            ->where('customer')->eq($customerID)
+            ->andWhere('deleted')->eq(0)
+            ->fetchPairs('id', 'name');
     }
 
     /**
@@ -170,7 +177,11 @@ class contractModel extends model
                 }
             }
             $this->loadModel('file')->saveUpload('contract', $contractID);
+
+            return commonModel::createChanges($contract, $data);
         }
+
+        return false;
     }
 
     /**
@@ -259,19 +270,5 @@ class contractModel extends model
             ->exec();
 
         return !dao::isError();
-    }
-
-    /**
-     * Delete contract.
-     * 
-     * @param  int    $contractID 
-     * @param  string $table 
-     * @access public
-     * @return void
-     */
-    public function delete($contractID, $table = null)
-    {
-        $this->dao->delete()->from(TABLE_CONTRACT)->where('id')->eq($contractID)->exec();
-        $this->dao->delete()->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->exec();
     }
 }

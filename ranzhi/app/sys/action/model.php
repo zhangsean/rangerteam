@@ -40,7 +40,7 @@ class actionModel extends model
         $action->date       = helper::now();
         $action->comment    = trim(strip_tags($comment, "<img>")) ? $comment : '';
 
-        if(!is_string($extra))
+        if(is_array($extra) or is_object($extra))
         {
             foreach($extra as $item => $value) $action->$item = $value;
         }

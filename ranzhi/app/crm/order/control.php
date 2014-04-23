@@ -85,11 +85,13 @@ class order extends control
         {
             $changes = $this->order->update($orderID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             if(!empty($changes))
             {   
                 $actionID = $this->loadModel('action')->create('order', $orderID, 'Edited');
                 $this->action->logHistory($actionID, $changes);
-            }   
+            }
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 

@@ -56,6 +56,8 @@ class product extends control
         {
             $productID = $this->product->create();       
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            $this->loadModel('action')->create('product', $productID, 'Created');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
@@ -74,8 +76,15 @@ class product extends control
     {
         if($_POST)
         {
-            $this->product->update($productID);
+            $changes = $this->product->update($productID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('product', $productID, 'Edited');
+                $this->action->logHistory($actionID, $changes);
+            }
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
@@ -93,7 +102,8 @@ class product extends control
      */
     public function delete($productID)
     {
-        if($this->product->delete($productID)) $this->send(array('result' => 'success'));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->product->delete(TABLE_PRODUCT, $productID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success'));
     }
 }

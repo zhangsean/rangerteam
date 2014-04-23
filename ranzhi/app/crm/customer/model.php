@@ -33,7 +33,11 @@ class customerModel extends model
      */
     public function getList($orderBy = 'id_desc', $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_CUSTOMER)->orderBy($orderBy)->page($pager)->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_CUSTOMER)
+            ->where('deleted')->eq(0)
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll('id');
     }
 
     /** 
@@ -46,7 +50,10 @@ class customerModel extends model
      */
     public function getPairs($orderBy = 'id_desc', $emptyOption = true)
     {
-        $customers = $this->dao->select('id, name')->from(TABLE_CUSTOMER)->orderBy($orderBy)->fetchPairs('id');
+        $customers = $this->dao->select('id, name')->from(TABLE_CUSTOMER)
+            ->where('deleted')->eq(0)
+            ->orderBy($orderBy)
+            ->fetchPairs('id');
 
         if($emptyOption)  $customers = array('' => '') + $customers;
         return $customers;
@@ -100,7 +107,8 @@ class customerModel extends model
      */
     public function update($customerID)
     {
-        $customer = fixer::input('post')
+        $oldCustomer = $this->getByID($customerID);
+        $customer    = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->get();
@@ -116,7 +124,8 @@ class customerModel extends model
             ->where('id')->eq($customerID)
             ->exec();
 
-        return !dao::isError();
+        if(dao::isError()) return false;
+        return commonModel::createChanges($oldCustomer, $customer);
     }
 
     /**
@@ -164,19 +173,5 @@ class customerModel extends model
                 return $resumeID;
             }
         }
-    }
-
-    /**
-     * Delete a customer.
-     *
-     * @param  int      $customerID
-     * @param  string   $table
-     * @access public 
-     * @return bool
-     */
-    public function delete($customerID, $table = null)
-    {
-        $this->dao->delete()->from(TABLE_CUSTOMER)->where('id')->eq($customerID)->exec();
-        return !dao::isError();
     }
 }

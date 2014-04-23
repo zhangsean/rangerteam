@@ -28,3 +28,8 @@ ALTER TABLE `crm_address` CHANGE `id` `id` mediumint(8) unsigned NOT NULL AUTO_I
 
 ALTER TABLE sys_category CHANGE id id mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
 ALTER TABLE sys_category CHANGE parent parent mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `crm_contact` ADD `deleted` enum('0','1') COLLATE 'utf8_general_ci' NOT NULL DEFAULT '0';
+ALTER TABLE `crm_contract` ADD `deleted` enum('0','1') COLLATE 'utf8_general_ci' NOT NULL DEFAULT '0';
+ALTER TABLE `crm_customer` ADD `deleted` enum('0','1') COLLATE 'utf8_general_ci' NOT NULL DEFAULT '0';
+ALTER TABLE `crm_order` ADD `deleted` enum('0','1') COLLATE 'utf8_general_ci' NOT NULL DEFAULT '0';

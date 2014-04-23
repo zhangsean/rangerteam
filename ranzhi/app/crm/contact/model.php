@@ -35,7 +35,8 @@ class contactModel extends model
     public function getList($customer = 0, $orderBy = 'id_desc', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_CONTACT)
-            ->beginIF($customer)->where('customer')->eq($customer)->fi()
+            ->where('deleted')->eq(0)
+            ->beginIF($customer)->andWhere('customer')->eq($customer)->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
@@ -51,11 +52,10 @@ class contactModel extends model
      */
     public function getPairs($customer = 0, $emptyOption = true)
     {
-        $contacts = $this->dao->select('t1.*')
-            ->from(TABLE_CONTACT)->alias('t1')
-            ->leftJoin(TABLE_RESUME)->alias('t2')
-            ->on('t1.id = t2.contact')
-            ->beginIF($customer)->where('t2.customer')->eq($customer)->FI()
+        $contacts = $this->dao->select('t1.*')->from(TABLE_CONTACT)->alias('t1')
+            ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.id = t2.contact')
+            ->where('t1.deleted')->eq(0)
+            ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->FI()
             ->fetchPairs('id', 'realname');
 
         if($emptyOption)  $contacts = array('' => '') + $contacts;
@@ -162,21 +162,6 @@ class contactModel extends model
         }
 
         return false;
-    }
-
-    /**
-     * Delete a contact.
-     *
-     * @param  int    $contactID
-     * @param  null   $table 
-     * @access public
-     * @return void
-     */
-    public function delete($contactID, $table = null)
-    {
-        $this->dao->delete()->from(TABLE_CONTACT)->where('id')->eq($contactID)->exec();
-
-        return !dao::isError();
     }
 
     /**
