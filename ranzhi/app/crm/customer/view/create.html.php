@@ -20,15 +20,15 @@
     <form method='post' id='customerForm' class='form-condensed'>
       <table class='table table-form'>
         <tr>
-          <th><?php echo $lang->customer->name;?></th>
-          <td><?php echo html::input('name', '', "class='form-control'");?></td>
+          <th class='w-80px'><?php echo $lang->customer->name;?></th>
+          <td class='w-p40'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
-          <th class='w-80px'><?php echo $lang->customer->contact;?></th>
+          <th><?php echo $lang->customer->contact;?></th>
           <td><?php echo html::input('contact', '', "class='form-control'");?></td>
         </tr>
         <tr>
-          <th class='w-80px'><?php echo $lang->customer->phone;?></th>
+          <th><?php echo $lang->customer->phone;?></th>
           <td><?php echo html::input('phone', '', "class='form-control'");?></td>
         </tr>
         <tr>
@@ -57,7 +57,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->customer->desc;?></th>
-          <td><?php echo html::textarea('desc', '', "rows='6' class='form-control'");?></td>
+          <td colspan='2'><?php echo html::textarea('desc', '', "rows='6' class='form-control'");?></td>
         </tr>
         <tr>
           <th></th>
