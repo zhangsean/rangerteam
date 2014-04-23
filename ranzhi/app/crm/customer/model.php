@@ -71,6 +71,7 @@ class customerModel extends model
             ->batchCheck($this->config->customer->require->create, 'notempty')
             ->exec();
 
+        if(dao::isError()) return false;
         $customerID = $this->dao->lastInsertID();
 
         $contact = new stdclass();
@@ -83,6 +84,9 @@ class customerModel extends model
         $this->dao->insert(TABLE_CONTACT)->data($contact)->autoCheck()->exec();
 
         if(dao::isError()) return false;
+
+        $contactID = $this->dao->lastInsertID();
+        $this->loadModel('action')->create('contact', $contactID, 'Created');
 
         return $customerID;
     }

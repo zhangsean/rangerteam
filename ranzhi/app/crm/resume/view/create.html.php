@@ -18,6 +18,30 @@
     <tr>
       <th class='w-100px'><?php echo $lang->resume->customer;?></th>
       <td><?php echo html::select('customer', $customers, $contact->customer, "class='form-control chosen'")?></td>
+      <td>
+        <input type='checkbox' id='newCustomer' name='newCustomer' value='1' />
+        <label for='newCustomer'><?php echo $lang->contact->newCustomer?></label>
+      </td>
+    </tr>
+    <tr class='customerInfo hidden'>
+      <th><?php echo $lang->customer->name;?></th>
+      <td><?php echo html::input('name', '', "class='form-control'");?></td>
+    </tr>
+    <tr class='customerInfo hidden'>
+      <th><?php echo $lang->customer->type;?></th>
+      <td><?php echo html::select('type', $lang->customer->typeList, '', "class='form-control'");?></td>
+    </tr>
+    <tr class='customerInfo hidden'>
+      <th><?php echo $lang->customer->size;?></th>
+      <td><?php echo html::select('size', $lang->customer->sizeList, '', "class='form-control'");?></td>
+    </tr>
+    <tr class='customerInfo hidden'>
+      <th><?php echo $lang->customer->status;?></th>
+      <td><?php echo html::select('status', $lang->customer->statusList, '', "class='form-control'");?></td>
+    </tr>
+    <tr class='customerInfo hidden'>
+      <th><?php echo $lang->customer->level;?></th>
+      <td><?php echo html::select('level', $lang->customer->levelList, '', "class='form-control'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->resume->dept;?></th>

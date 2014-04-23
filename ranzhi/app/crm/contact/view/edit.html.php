@@ -53,7 +53,7 @@
               </tr>
               <tr>
                 <th><?php echo $lang->contact->createdDate;?></th>
-                <td><?php echo html::input('createdDate', $contact->createdDate, "class='form-control form-datetime'");?></td>
+                <td><?php echo html::input('createdDate', $contact->createdDate == '0000-00-00 00:00:00' ? '' : $contact->createdDate, "class='form-control form-datetime'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->contact->desc;?></th>

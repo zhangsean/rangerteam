@@ -44,7 +44,7 @@ class resume extends control
         if($_POST)
         {
             /* When customer is not change then goto update. */
-            if($contact->customer and $this->post->customer == $contact->customer)
+            if(!$this->post->newCustomer and $contact->customer and $this->post->customer == $contact->customer)
             {
                 $resumeID = $this->dao->select('id')->from(TABLE_RESUME)->where('contact')->eq($contactID)->andWhere('customer')->eq($contact->customer)->orderBy('id_desc')->limit(1)->fetch('id');
                 if($resumeID) return $this->edit($resumeID);
