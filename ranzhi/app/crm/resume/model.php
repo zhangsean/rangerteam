@@ -48,8 +48,6 @@ class resumeModel extends model
 
         $resume = fixer::input('post')
             ->add('contact', $contactID)
-            ->add('createdBy', $this->app->user->account)
-            ->add('createdDate', helper::now())
             ->setDefault('join', '0000-00-00')
             ->setDefault('left', '0000-00-00')
             ->get();

@@ -103,7 +103,7 @@ class customerModel extends model
 
         /* Add http:// in head when that has not http:// or https://. */
         if(strpos($customer->site, '://') === false )  $customer->site  = 'http://' . $customer->site;
-        if(strpos($customer->weibo, '://') === false ) $customer->weibo = 'http://' . $customer->weibo;
+        if(strpos($customer->weibo, 'http://weibo.com/') === false ) $customer->weibo = 'http://weibo.com/' . $customer->weibo;
 
         $this->dao->update(TABLE_CUSTOMER)
             ->data($customer)
@@ -113,6 +113,53 @@ class customerModel extends model
             ->exec();
 
         return !dao::isError();
+    }
+
+    /**
+     * Link contact.
+     * 
+     * @param  int    $customerID 
+     * @access public
+     * @return bool
+     */
+    public function linkContact($customerID)
+    {
+        $this->loadModel('action');
+        $this->loadModel('contact');
+        if($this->post->newContact)
+        {
+            unset($_POST['newContact']);
+            unset($_POST['contact']);
+            $_POST['customer']    = $customerID;
+            $_POST['createdDate'] = helper::now();
+
+            $contactID = $this->contact->create();
+
+            if($contactID) $this->action->create('contact', $contactID, 'Created');
+            return $contactID;
+        }
+
+        if($this->post->contact)
+        {
+            $contactID = $this->post->contact;
+            $contact   = $this->contact->getByID($contactID);
+
+            if($contact->customer != $customerID)
+            {
+
+                $_POST = array();
+                $_POST['customer'] = $customerID;
+                $resumeID = $this->loadModel('resume')->create($contactID);
+
+                if($resumeID)
+                {
+                    $changes[] = array('field' => 'customer', 'old' => $contact->customer, 'new' => $customerID, 'diff' => '');
+                    $actionID  = $this->action->create('contact', $contactID, 'Edited');
+                    $this->action->logHistory($actionID, $changes);
+                }
+                return $resumeID;
+            }
+        }
     }
 
     /**

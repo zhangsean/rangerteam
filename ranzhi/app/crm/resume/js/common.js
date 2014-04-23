@@ -12,7 +12,4 @@ $(function()
 
     /* Reload modal. */
     $('.reloadModal').click(function(){$.reloadAjaxModal()});
-
-    /* Load page in modal. */
-    $.setAjaxLoader('.loadInModal', '#ajaxModal');
 })

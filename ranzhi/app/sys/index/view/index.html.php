@@ -42,11 +42,15 @@ js::import($jsRoot . 'jquery/ips.js');
   <div id='home' class='fullscreen fullscreen-active'>
     <div class='panels-container dashboard' id='dashboard'>
       <div class='btn-toolbar actions'>
-      <button title='<?php echo $lang->index->refresh;?>' class='btn btn-pure refresh-all-panel'><i class='icon-repeat'></i></button>
-        <a data-toggle='modal' href='<?php echo $this->createLink("block", "admin", "index=" . ($index + 1)); ?>' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure'><i class='icon-plus'></i></a>
+        <button title='<?php echo $lang->index->refresh;?>' class='btn btn-pure refresh-all-panel'><i class='icon-repeat'></i></button>
+        <?php end($blocks);?>
+        <a data-toggle='modal' href='<?php echo $this->createLink("block", "admin", "index=" . (key($blocks) + 1)); ?>' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure'><i class='icon-plus'></i></a>
       </div>
       <div class='row'>
-        <?php $index = 0;?>
+        <?php
+        $index = 0;
+        reset($blocks);
+        ?>
         <?php foreach($blocks as $key => $block):?>
         <?php
         $index = $key;

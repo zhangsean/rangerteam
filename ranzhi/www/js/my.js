@@ -8,6 +8,7 @@ $(document).ready(function()
     $.setAjaxDeleter('.deleter');
     $.setReload('.reload');
     $.setReloadDeleter('.reloadDeleter');
+    $.setAjaxLoader('.loadInModal', '#ajaxModal');
 
     /* Set ping keep online. */
     setInterval('ping()', 1000 * 360);

@@ -34,11 +34,13 @@ $lang->customer->editedDate  = '编辑时间';
 $lang->customer->contactBy   = '由谁联系';
 $lang->customer->contactDate = '联系时间';
 $lang->customer->nextDate    = '下次联系时间';
+$lang->customer->newContact  = '新建联系人';
 
-$lang->customer->order    = '订单';
-$lang->customer->contact  = '联系人';
-$lang->customer->contract = '合同';
-$lang->customer->address  = '地址';
+$lang->customer->order       = '订单';
+$lang->customer->contact     = '联系人';
+$lang->customer->contract    = '合同';
+$lang->customer->address     = '地址';
+$lang->customer->linkContact = '添加联系人';
 $lang->customer->basic    = '基本信息';
 $lang->customer->history  = '历史记录';
 

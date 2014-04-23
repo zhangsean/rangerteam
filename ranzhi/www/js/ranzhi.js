@@ -183,7 +183,6 @@ $.extend(
     setAjaxLoader: function(selector, target)
     {
         var target = $(target);
-        if(!target.size()) return false;
 
         $(document).on('click', selector, function()
         {
@@ -191,6 +190,7 @@ $.extend(
             if(!url) url = $(this).data('rel');
             if(!url) return false;
 
+            if(!target.size()) return false;
             target.load(url);
 
             return false;

@@ -152,7 +152,7 @@
             <?php foreach($addresses as $address):?>
             <tr class='text-center'>
               <td><?php echo $address->title?></td>
-              <td class='text-left'><?php echo $address->country . ' ' . $address->country . ' ' . $address->city . ' ' . $address->location;?></td>
+              <td class='text-left'><?php echo $address->country . ' ' . $address->province . ' ' . $address->city . ' ' . $address->location;?></td>
             </tr>
             <?php endforeach;?>
           </tbody>
