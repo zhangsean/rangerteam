@@ -2,7 +2,7 @@ $(document).ready(function()
 {
     $(document).on('click', '.plus', function()
     {
-        $(this).parents('tr').after("<tr id='orderTR'><th></th><td id='orderTD'>" + $('#orderTD').html() + "</td></tr>");
+        $(this).parents('tr').after( $('#orderGroup tbody').html());
     });
   
     $(document).on('click', '.minus', function()

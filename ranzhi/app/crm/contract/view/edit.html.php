@@ -22,19 +22,36 @@
     <form method='post' id='ajaxForm' class='form-condensed'>
       <fieldset class='fieldset-primary'>
         <table class='table table-form'>
-          <tr class='text-left'>
-            <th class='w-p50'><?php echo $lang->contract->customer;?></th>
-            <th><?php echo $lang->contract->order;?></th>
-          </tr>
           <tr>
+            <th><?php echo $lang->contract->customer;?></th>
             <td><?php echo html::select('customer', $customers, $contract->customer, "class='form-control'");?></td>
-            <td><?php echo html::select('order[]', $orders, $contract->order, "class='form-control chosen' multiple");?></td>
           </tr>
-          <tr class='text-left'>
-            <th><?php echo $lang->contract->name;?></th>
-          </tr>
+          <?php foreach($contractOrders as $currentOrder):?>
           <tr>
-            <td colspan='2'><?php echo html::input('name', $contract->name, "class='form-control'");?></td>
+            <th><?php echo $lang->contract->order;?></th>
+            <td>
+              <div class='form-group'>
+                <span class='col-sm-8'>
+                  <select name='order[]' class='select-order form-control'>
+                    <?php foreach($orders as $order):?>
+                    <?php if(!$order):?>
+                    <option value='' data-real=''></option>
+                    <?php else:?>
+                    <?php $selected = $currentOrder->id == $order->id ? "selected='selected'" : '';?>
+                    <option value="<?php echo $order->id;?>" <?php echo $selected;?> data-real="<?php echo $order->plan;?>"><?php echo $order->title;?></option>
+                    <?php endif;?>
+                    <?php endforeach;?>
+                  </select>
+                </span>
+                <span class='col-sm-3'><?php echo html::input('real[]', $currentOrder->real, "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?></span>
+                <span class='col-sm-1'><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='minus'");?></span>
+              </div>
+            </td>
+          </tr>
+          <?php endforeach;?>
+          <tr>
+            <th><?php echo $lang->contract->name;?></th>
+            <td><?php echo html::input('name', $contract->name, "class='form-control'");?></td>
           </tr>
         </table>
       </fieldset>
@@ -87,6 +104,28 @@
       </fieldset>
       <?php echo html::submitButton();?>
     </form>
+    <table id='orderGroup' class='hide'>
+      <tr>
+        <th></th>
+        <td>
+          <div class='form-group'>
+            <span class='col-sm-8'>
+              <select name='order[]' class='select-order form-control'>
+                <?php foreach($orders as $order):?>
+                <?php if(!$order):?>
+                <option value='' data-real=''></option>
+                <?php else:?>
+                <option value="<?php echo $order->id;?>" data-real="<?php echo $order->plan;?>"><?php echo $order->title;?></option>
+                <?php endif;?>
+                <?php endforeach;?>
+              </select>
+            </span>
+            <span class='col-sm-3'><?php echo html::input('real[]', '', "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?></span>
+            <span class='col-sm-1'><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='minus'");?></span>
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

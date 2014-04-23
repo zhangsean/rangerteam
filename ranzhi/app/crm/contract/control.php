@@ -87,11 +87,13 @@ class contract extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $this->view->contract  = $this->contract->getByID($contractID);
-        $this->view->orders    = $this->loadModel('order')->getPairs();
-        $this->view->customers = $this->loadModel('customer')->getPairs();
-        $this->view->contacts  = $this->loadModel('contact')->getPairs();
-        $this->view->users     = $this->loadModel('user')->getPairs();
+        $contract = $this->contract->getByID($contractID);
+        $this->view->contract       = $contract; 
+        $this->view->contractOrders = $this->loadModel('order')->getListByID($contract->order);
+        $this->view->orders         = array('' => '') + $this->order->getList($contract->customer);
+        $this->view->customers      = $this->loadModel('customer')->getPairs();
+        $this->view->contacts       = $this->loadModel('contact')->getPairs();
+        $this->view->users          = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
@@ -252,7 +254,7 @@ class contract extends control
     {
         $orders = $this->loadModel('order')->getOrderForCustomer($customerID);
 
-        $html = "<div class='form-group'><span class='col-sm-7'><select name='order[]' class='select-order form-control'>";
+        $html = "<div class='form-group'><span class='col-sm-8'><select name='order[]' class='select-order form-control'>";
 
         foreach($orders as $order)
         {
@@ -267,7 +269,7 @@ class contract extends control
 
         $html .= '</select></span>';
         $html .= "<span class='col-sm-3'>" . html::input('real[]', '', "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'") . "</span>";
-        $html .= "<span class='col-sm-2'>" . html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='minus'") . "</span></div>";
+        $html .= "<span class='col-sm-1'>" . html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='minus'") . "</span></div>";
 
         echo $html;
     }

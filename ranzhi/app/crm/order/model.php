@@ -32,14 +32,17 @@ class orderModel extends model
     /** 
      * Get order list.
      * 
+     * @param  int     $customerID 
      * @param  string  $orderBy 
      * @param  object  $pager 
      * @access public
      * @return array
      */
-    public function getList($orderBy = 'id_desc', $pager = null)
+    public function getList($customerID = 0, $orderBy = 'id_desc', $pager = null)
     {
-        $orders = $this->dao->select('*')->from(TABLE_ORDER)->orderBy($orderBy)->page($pager)->fetchAll('id');
+        $orders = $this->dao->select('*')->from(TABLE_ORDER)->where(1)
+            ->beginIF($customerID)->andWhere('customer')->eq($customerID)->fi()
+            ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
         $contacts = $this->dao->select('t1.id, t2.customer, t2.id AS contact')
             ->from(TABLE_CONTACT)->alias('t2')
@@ -47,12 +50,28 @@ class orderModel extends model
             ->fetchGroup('customer', 'contact');
 
         $contracts = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->fetchPairs('order', 'contract');
+        $customers = $this->loadModel('customer')->getPairs();
+        $products  = $this->loadModel('product')->getPairs();
 
         foreach($orders as $order) $order->contact = !empty($contacts[$order->customer]) ? $contacts[$order->customer] : '';
 
         foreach($orders as $order) $order->contract = !empty($contracts[$order->id]) ? $contracts[$order->id] : '';
 
+        foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->id, $customers[$order->customer], $products[$order->product], substr($order->createdDate, 0, 10)); 
+
         return $orders;
+    }
+
+    /** 
+     * Get order list By idList.
+     * 
+     * @param  array   $idList 
+     * @access public
+     * @return array
+     */
+    public function getListByID($idList)
+    {
+        return $this->dao->select('*')->from(TABLE_ORDER)->where('id')->in($idList)->fetchAll();
     }
 
     /**
