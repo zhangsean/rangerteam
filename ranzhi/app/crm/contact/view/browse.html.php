@@ -20,23 +20,23 @@
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px'> <?php commonModel::printOrderLink('id',       $orderBy, $vars, $lang->contact->id);?></th>
+        <th><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->contact->customer);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->contact->gender);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('phone',    $orderBy, $vars, $lang->contact->phone);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('mobile',   $orderBy, $vars, $lang->contact->mobile);?></th>
         <th class='w-200px'><?php commonModel::printOrderLink('email',    $orderBy, $vars, $lang->contact->email);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('qq',       $orderBy, $vars, $lang->contact->qq);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('weixin',   $orderBy, $vars, $lang->contact->weixin);?></th>
-        <th><?php echo $lang->actions;?></th>
+        <th class='w-150px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
     <?php foreach($contacts as $contact):?>
     <tr class='text-center'>
       <td><?php echo $contact->id;?></td>
+      <td><?php echo html::a(inlink('view', "contactID=$contact->id"), $contact->realname);?></td>
       <td><?php echo $customers[$contact->customer];?></td>
-      <td><?php echo $contact->realname;?></td>
       <td><?php echo isset($lang->contact->genderList[$contact->gender]) ? $lang->contact->genderList[$contact->gender] : '';?></td>
       <td><?php echo $contact->phone;?></td>
       <td><?php echo $contact->mobile;?></td>
@@ -46,7 +46,6 @@
       <td class='operate'>
         <?php echo html::a($this->createLink('address', 'browse', "objectType=contact&objectID=$contact->id"), $lang->contact->address, "data-toggle='modal'");?>
         <?php echo html::a($this->createLink('resume', 'browse', "contactID=$contact->id"), $lang->contact->resume, "data-toggle='modal'");?>
-        <?php echo html::a($this->createLink('contact', 'view', "contactID=$contact->id"), $lang->view);?>
         <?php echo html::a($this->createLink('contact', 'edit', "contactID=$contact->id"), $lang->edit);?>
         <?php echo html::a($this->createLink('contact', 'delete', "contactID=$contact->id"), $lang->delete, "class='deleter'");?>
       </td>
