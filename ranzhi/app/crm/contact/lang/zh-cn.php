@@ -46,8 +46,8 @@ $lang->contact->create  = '添加联系人';
 $lang->contact->list    = '联系人列表';
 $lang->contact->edit    = '编辑联系人';
 $lang->contact->view    = '联系人详情';
-$lang->contact->resume  = '公司管理';
-$lang->contact->address = '地址管理';
+$lang->contact->resume  = '公司';
+$lang->contact->address = '地址';
 
 $lang->contact->basicInfo   = '基本信息';
 $lang->contact->contactInfo = '联系信息';
