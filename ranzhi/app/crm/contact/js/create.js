@@ -1,13 +1,11 @@
 $(document).ready(function()
 {
     /* Show notice when auto create customer. */
-    var value = ''
     $('#newCustomer').change(function()
     {
         if($(this).attr('checked') == undefined)
         {
-            value = $('#customer').val();
-            $('#customer').val('');
+            $('#customer').attr('disabled', true);
             $(this).attr('checked', true);
 
             var label = $(this).next('label');
@@ -20,15 +18,9 @@ $(document).ready(function()
         }
         else
         {
-            $('#customer').val(value);
             $(this).removeAttr('checked');
+            $('#customer').removeAttr('disabled');
             $('.customerInfo').addClass('hidden');
         }
-    })
-
-    /* Reset newCustomer when customer is not empty. */
-    $('#customer').change(function()
-    {
-        if($(this).val() != '' && $('#newCustomer').attr('checked')) $('#newCustomer').removeAttr('checked');
     })
 })

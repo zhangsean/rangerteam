@@ -5,20 +5,18 @@ $(function()
         if(data.result == 'success') $.reloadAjaxModal(1500);
     })
 
-    var value = '';
     $('#newContact').change(function()
     {
         if($(this).attr('checked') == undefined)
         {
-            value = $('#contact').val();
-            $('#contact').val('');
+            $('#contact').attr('disabled', true);
             $(this).attr('checked', true);
             $('#contactInfo').removeClass('hidden');
         }
         else
         {
-            $('#contact').val(value);
             $(this).removeAttr('checked', true);
+            $('#contact').removeAttr('disabled');
             $('#contactInfo').addClass('hidden');
         }
     })

@@ -36,7 +36,7 @@ $lang->contact->editedBy      = '由谁编辑';
 $lang->contact->editedDate    = '编辑时间';
 $lang->contact->contactedBy   = '由谁联系';
 $lang->contact->contactedDate = '联系时间';
-$lang->contact->newCustomer   = '新建客户';
+$lang->contact->newCustomer   = '新建';
 $lang->contact->uploadAvatar  = '上传头像';
 $lang->contact->changeAvatar  = '更换头像';
 
