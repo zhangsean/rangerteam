@@ -230,6 +230,7 @@ class contract extends control
         }
 
         $this->view->title      = $this->lang->contract->items;
+        $this->view->modalWidth = 800;
         $this->view->contractID = $contractID;
         $this->view->contract   = $this->contract->getByID($contractID);
         $this->view->files      = $this->loadModel('file')->getByObject('contract', $contractID);
