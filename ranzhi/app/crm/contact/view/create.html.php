@@ -12,101 +12,82 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<?php js::set('customer', $customer);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->contact->create;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='contactForm' class='form-condensed'>
+    <form method='post' id='ajaxForm' class='form-condensed'>
       <div class='row'>
         <div class='col-md-9'>
-          <fieldset class='fieldset-primary'>
-            <table class='table table-form'>
-              <tr class='text-left'>
-                <th><?php echo $lang->contact->realname;?></th>
-                <th class='w-p45'><?php echo $lang->contact->nickname;?></th>
-              </tr>
-              <tr>
-                <td><?php echo html::input('realname', '', "class='form-control'");?></td>
-                <td><?php echo html::input('nickname', '', "class='form-control'");?></td>
-              </tr>
+          <table class='table table-form'>
+            <tr>
+              <th class='w-100px'><?php echo $lang->contact->realname;?></th>
+              <td class='w-p40'><?php echo html::input('realname', '', "class='form-control'");?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->contact->customer;?></th>
+              <td><?php echo html::select('customer', $customers, !empty($customer) ? $customer : '', "class='form-control select-customer'");?></td>
+              <td>
+                <input type='checkbox' name='newCustomer' id='newCustomer' value='1' />
+                <label for='newCustomer'><?php echo $lang->contact->newCustomer?></label>
+              </td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->contact->gender;?></th>
+              <td><?php echo html::radio('gender', $lang->contact->genderList, '');?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->contact->email;?></th>
+              <td><?php echo html::input('email', '', "class='form-control'");?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->contact->mobile;?></th>
+              <td><?php echo html::input('mobile', '', "class='form-control'");?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->contact->phone;?></th>
+              <td><?php echo html::input('phone', '', "class='form-control'");?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->contact->qq;?></th>
+              <td><?php echo html::input('qq', '', "class='form-control'");?></td>
+            </tr>
+            <tr class='customerInfo hidden'>
+              <th><?php echo $lang->customer->type;?></th>
+              <td><?php echo html::select('type', $lang->customer->typeList, '', "class='form-control'");?></td>
+            </tr>
+            <tr class='customerInfo hidden'>
+              <th><?php echo $lang->customer->size;?></th>
+              <td><?php echo html::select('size', $lang->customer->sizeList, '', "class='form-control'");?></td>
+            </tr>
+            <tr class='customerInfo hidden'>
+              <th><?php echo $lang->customer->status;?></th>
+              <td><?php echo html::select('status', $lang->customer->statusList, '', "class='form-control'");?></td>
+            </tr>
+            <tr class='customerInfo hidden'>
+              <th><?php echo $lang->customer->level;?></th>
+              <td><?php echo html::select('level', $lang->customer->levelList, '', "class='form-control'");?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->contact->maker?></th>
+              <td><input type='checkbox' name='maker' id='maker' value='1' /></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->contact->createdDate;?></th>
+              <td><?php echo html::input('createdDate', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->contact->desc;?></th>
+              <td colspan='2'><?php echo html::textarea('desc', '', "rows='3' class='form-control'");?></td>
+            </tr>
+            <tr>
+              <th></th>
+              <td><?php echo html::submitButton() . html::backButton();?></td>
+            </tr>
             </table>
-          </fieldset>
-          <fieldset>
-            <legend><?php echo $lang->contact->basicInfo; ?></legend>
-            <table class='table table-form'>
-              <tr>
-                <th class='w-80px'><?php echo $lang->contact->customer;?></th>
-                <td class='w-p40'><?php echo html::select('customer', $customers, !empty($customer) ? $customer : '', "class='form-control select-customer'");?></td>
-                <td>
-                  <input type='checkbox' name='maker' id='maker' value='1' />
-                  <label for='maker'><?php echo $lang->contact->maker?></label>
-                  <input type='checkbox' name='newCustomer' id='newCustomer' value='1' />
-                  <label for='newCustomer'><?php echo $lang->contact->newCustomer?></label>
-                </td>
-                <td></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->contact->birthday;?></th>
-                <td><?php echo html::input('birthday', '', "class='form-control form-date'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->contact->gender;?></th>
-                <td><?php echo html::radio('gender', $lang->contact->genderList, '');?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->contact->createdDate;?></th>
-                <td><?php echo html::input('createdDate', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->contact->desc;?></th>
-                <td colspan='3'><?php echo html::textarea('desc', '', "rows='3' class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->contact->site;?></th>
-                <td colspan='3'><?php echo html::input('site', 'http://', "class='form-control'");?></td>
-              </tr>
-            </table>
-          </fieldset>
-          <fieldset>
-            <legend><?php echo $lang->contact->contactInfo;?></legend>
-            <table class='table table-form'>
-              <tr>
-                <th class='w-80px'><?php echo $lang->contact->email;?></th>
-                <td><?php echo html::input('email', '', "class='form-control'");?></td>
-                <th class='w-80px'><?php echo $lang->contact->mobile;?></th>
-                <td><?php echo html::input('mobile', '', "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->contact->phone;?></th>
-                <td><?php echo html::input('phone', '', "class='form-control'");?></td>
-                <th><?php echo $lang->contact->skype;?></th>
-                <td><?php echo html::input('skype', '', "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->contact->qq;?></th>
-                <td><?php echo html::input('qq', '', "class='form-control'");?></td>
-                <th><?php echo $lang->contact->weixin;?></th>
-                <td><?php echo html::input('weixin', '', "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->contact->weibo;?></th>
-                <td><?php echo html::input('weibo', 'http://', "class='form-control'");?></td>
-                <th><?php echo $lang->contact->wangwang;?></th>
-                <td><?php echo html::input('wangwang', '', "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->contact->yahoo;?></th>
-                <td><?php echo html::input('yahoo', '', "class='form-control'");?></td>
-                <th><?php echo $lang->contact->gtalk;?></th>
-                <td><?php echo html::input('gtalk', '', "class='form-control'");?></td>
-              </tr>
-            </table>
-          </fieldset>
         </div>
       </div>
-      <?php echo html::submitButton();?>
     </form>
   </div>
 </div>

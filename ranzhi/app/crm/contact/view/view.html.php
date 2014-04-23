@@ -85,7 +85,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->contact->weibo;?></th>
-              <td><?php echo $contact->weibo;?></td>
+              <td><?php if($contact->weibo and $contact->weibo != 'http://weibo.com/') echo $contact->weibo;?></td>
               <th><?php echo $lang->contact->wangwang;?></th>
               <td><?php echo $contact->wangwang;?></td>
             </tr>

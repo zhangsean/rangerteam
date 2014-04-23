@@ -54,4 +54,4 @@ $lang->contact->basicInfo   = 'Basic Info';
 $lang->contact->contactInfo = 'Contact Info';
 
 $lang->contact->failedAvatar = 'Avatar upload failed';
-$lang->contact->autoCustomer = 'Automatically create a customer with contact name';
+$lang->contact->autoCustomer = 'Automatically create a customer with related Information of contact.';

@@ -39,8 +39,8 @@ $lang->contact->newCustomer   = '新建客户';
 $lang->contact->uploadAvatar  = '上传头像';
 $lang->contact->changeAvatar  = '更换头像';
 
-$lang->contact->genderList['f'] = '女';
 $lang->contact->genderList['m'] = '男';
+$lang->contact->genderList['f'] = '女';
 
 $lang->contact->create  = '添加联系人';
 $lang->contact->list    = '联系人列表';
@@ -53,4 +53,4 @@ $lang->contact->basicInfo   = '基本信息';
 $lang->contact->contactInfo = '联系信息';
 
 $lang->contact->failedAvatar = '头像上传失败';
-$lang->contact->autoCustomer = '自动以联系人姓名创建客户';
+$lang->contact->autoCustomer = '自动以联系人相关信息创建客户';

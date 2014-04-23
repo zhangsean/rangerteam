@@ -74,23 +74,21 @@ class contactModel extends model
         $contact = fixer::input('post')
             ->setDefault('birthday', '0000-00-00')
             ->add('createdBy', $this->app->user->account)
-            ->remove('newCustomer')
+            ->remove('newCustomer,type,size,status,level')
             ->get();
-
-        if(strpos($contact->site, '://') === false )  $contact->site  = 'http://' . $contact->site;
-        if(strpos($contact->weibo, '://') === false ) $contact->weibo = 'http://' . $contact->weibo;
 
         if($this->post->newCustomer)
         {
             $customer = new stdclass();
             $customer->name        = $contact->realname;
-            $customer->site        = $contact->site;
-            $customer->weibo       = $contact->weibo;
-            $customer->weixin      = $contact->weixin;
+            $customer->type        = $this->post->type;
+            $customer->size        = $this->post->size;
+            $customer->status      = $this->post->status;
+            $customer->level       = $this->post->level;
             $customer->desc        = $contact->desc;
             $customer->createdBy   = $this->app->user->account;
             $customer->createdDate = helper::now();
-            $this->dao->insert(TABLE_CUSTOMER)->data($customer)->autoCheck()->exec();
+            $this->dao->insert(TABLE_CUSTOMER)->data($customer)->autoCheck()->batchCheck('name', 'notempty')->exec();
 
             if(dao::isError()) return false;
             $contact->customer = $this->dao->lastInsertID();
@@ -108,8 +106,8 @@ class contactModel extends model
             $contactID = $this->dao->lastInsertID();
 
             $resume = new stdclass();
-            $resume->contact     = $contactID;
-            $resume->customer    = $contact->customer;
+            $resume->contact  = $contactID;
+            $resume->customer = $contact->customer;
             $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
 
             return $contactID;
@@ -139,7 +137,7 @@ class contactModel extends model
             ->get();
 
         if(strpos($contact->site, '://') === false )  $contact->site  = 'http://' . $contact->site;
-        if(strpos($contact->weibo, '://') === false ) $contact->weibo = 'http://' . $contact->weibo;
+        if(strpos($contact->weibo, 'http://weibo.com/') === false ) $contact->weibo = 'http://weibo.com' . $contact->weibo;
 
         $this->dao->update(TABLE_CONTACT)
             ->data($contact)
