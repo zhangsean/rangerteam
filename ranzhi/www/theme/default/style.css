@@ -105,7 +105,7 @@ td>select{padding-left: 0;padding-right: 0}
 .article-files > li > a > img {max-width: 240px; max-height: 100%;}
 .article-files:empty {display: none;}
 .article-files > li.file > a {line-height: 25px; padding: 40px 15px 5px 15px;max-width: 180px;white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;}
-.article-files > li.file > a:before {display: block; width: 100%; font-size: 30px; position: absolute; top: 10px; text-align: center; left: 0; content: '\f0f6'; font-family: ZenIcon;}
+.article-files > li.file > a:before {display: block; width: 100%; font-size: 30px; position: absolute; top: 10px; text-align: center; left: 0; content: '\e6d4'; font-family: ZenIcon;}
 .article-files > li.article-files-heading {float: none; display: block; color: #999;font-weight: bold;}
 .article-files > li .file-actions {display: block; position: absolute; right: 5px; top: 0;} 
 .article-files > li .file-actions > a {opacity: 0; display: inline-block; background-color: #D9E8F5; color: #666; padding: 3px 7px;}
@@ -127,10 +127,10 @@ td>select{padding-left: 0;padding-right: 0}
 .tree li,.tree ul {margin: 0; padding: 0; display: block; position: relative;}
 .tree > li {margin-right: 20px; font-weight: 400; padding-bottom: 10px;}
 .tree > li > ul li {padding: 10px 15px 0; margin: 0;}
-.tree li:before {display: inline-block; margin-right: 6px; content: '\f111'; font-family: ZenIcon; color: #ddd;}
+.tree li:before {display: inline-block; margin-right: 6px; content: '\e6ec'; font-family: ZenIcon; color: #ddd;}
 .tree > li ul {border-left: 1px dashed #ccc; margin-left: 7px; font-weight: normal;}
-.tree > li ul > li:before {content: '\f10c';}
-.tree > li ul > li:hover:before {content: '\f111';}
+.tree > li ul > li:before {content: '\e6e8';}
+.tree > li ul > li:hover:before {content: '\e6ec';}
 .tree > li ul > li:after {position: absolute; display: block; content: ""; width: 15px; left: -1px; top: 20px; height: 20px; border-top: 1px dashed #ccc;}
 .tree > li > ul li:last-child:after {border-left: 1px solid #fff;}
 
@@ -236,9 +236,9 @@ label.checkbox,input[type='radio']+label{font-weight: normal;}
 .form-condensed fieldset.collapsed {padding: 1px;}
 .form-condensed fieldset.collapsed .table-form {display: none}
 .form-condensed legend {font-size: 12px; font-weight: bold; border:0px solid red; padding: 5px; position: absolute; top: -25px; left: 0; cursor: pointer; line-height: 14px; vertical-align: top; color: #666}
-.form-condensed legend:before {font-family: ZenIcon; content: '\f0d7'; font-size: 14px; color: #999; display: inline-block; margin-right: 4px; margin-bottom: -3px; -webkit-font-smoothing: antialiased;}
+.form-condensed legend:before {font-family: ZenIcon; content: '\e6b8'; font-size: 14px; color: #999; display: inline-block; margin-right: 4px; margin-bottom: -3px; -webkit-font-smoothing: antialiased;}
 .form-condensed legend:hover {color: #333;}
-.form-condensed fieldset.collapsed legend:before {content: '\f0da'}
+.form-condensed fieldset.collapsed legend:before {content: '\e6b9'}
 
 td #aliasLabel {display: table-row;}
 
@@ -267,7 +267,7 @@ td #aliasLabel {display: table-row;}
 /* popovers */
 .popover-success {background-color: #47A447; border-color: #47A447; color: #fff;}
 .popover-success.right .arrow,.popover-success.right .arrow:after {border-right-color: #47A447;}
-.popover-success .popover-content:before {content: '\f058'; font-family: ZenIcon; display: inline-block; margin-right: 6px;}
+.popover-success .popover-content:before {content: '\e653'; font-family: ZenIcon; display: inline-block; margin-right: 6px;}
 
 .popover-danger {background-color: #F8E3E6; border-color: #F8E3E6; color: #D2322D;}
 
@@ -320,12 +320,12 @@ td #aliasLabel {display: table-row;}
 /* Action */
 .history{border: 1px solid #ccc; background: #f2f2f2; padding: 10px; margin-top: 10px; margin-bottom: 10px; color: #333; line-height: 20px;}
 .change-show, .change-hide, .log-desc, .log-asc, .diff-all, .diff-sort {font-family: ZenIcon;}
-.change-show:before {content: "\f067";}
-.change-hide:before {content: "\f068";}
-.log-desc:before {content: "\f063";}
-.log-asc:before {content: "\f062";}
-.diff-all:before {content: "\f0b2";}
-.diff-sort:before {content: "\f036";}
+.change-show:before {content: "\e661";}
+.change-hide:before {content: "\e662";}
+.log-desc:before {content: "\e65d";}
+.log-asc:before {content: "\e65c";}
+.diff-all:before {content: "\e6a3";}
+.diff-sort:before {content: "\e633";}
 
 #historyItem {padding-left: 25px;}
 #historyItem > li {line-height: 23px;}
