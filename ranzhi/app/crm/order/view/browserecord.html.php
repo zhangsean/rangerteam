@@ -10,6 +10,11 @@
  * @link        http://www.zentao.net
  */
 ?>
+<?php
+$objectType = 'order';
+$objectID   = $order->id;
+$customer   = $order->customer;
+?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/action.html.php';?>
 <?php include '../../common/view/footer.html.php';?>
