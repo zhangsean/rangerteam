@@ -28,7 +28,7 @@
           </tr>
           <?php foreach($contractOrders as $currentOrder):?>
           <tr>
-            <th><?php echo $lang->contract->order;?></th>
+            <th class='orderTH'><?php echo $lang->contract->order;?></th>
             <td>
               <div class='form-group'>
                 <span class='col-sm-8'>

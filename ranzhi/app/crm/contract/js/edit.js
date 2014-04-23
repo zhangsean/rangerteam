@@ -1,5 +1,7 @@
 $(document).ready(function()
 {
+    $('.orderTH').not(':first').empty();
+
     $(document).on('click', '.plus', function()
     {
         $(this).parents('tr').after( $('#orderGroup tbody').html());
