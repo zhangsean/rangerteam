@@ -85,7 +85,7 @@
               <td><?php echo $contact->phone;?></td>
               <td><?php echo $contact->email;?></td>
               <td><?php echo $contact->qq;?></td>
-              <td><?php echo html::a($this->createLink('contact', 'delete', "contactID={$contact->id}"), $lang->delete, "class='deleter'");?></td>
+              <td><?php echo html::a($this->createLink('contact', 'edit', "contactID={$contact->id}"), $lang->edit);?></td>
             </tr>
             <?php endforeach;?>
           </tbody>
@@ -105,7 +105,7 @@
             <tr class='text-center'>
               <td><?php echo $id;?></td>
               <td><?php echo $contract;?></td>
-              <td><?php echo html::a($this->createLink('contract', 'delete', "contractID={$id}"), $lang->delete, "class='deleter'");?></td>
+              <td><?php echo html::a($this->createLink('contract', 'edit', "contractID={$id}"), $lang->edit);?></td>
             </tr>
             <?php endforeach;?>
           </tbody>
@@ -125,7 +125,7 @@
             <tr class='text-center'>
               <td><?php echo $id;?></td>
               <td><?php echo $order;?></td>
-              <td><?php echo html::a($this->createLink('order', 'delete', "orderID={$id}"), $lang->delete, "class='deleter'");?></td>
+              <td><?php echo html::a($this->createLink('order', 'edit', "orderID={$id}"), $lang->edit);?></td>
             </tr>
             <?php endforeach;?>
           </tbody>
@@ -145,7 +145,7 @@
             <tr>
               <td><?php echo $address->title?></td>
               <td><?php echo $address->country . ' ' . $address->province . ' ' . $address->city . ' ' . $address->location;?></td>
-              <td><?php echo html::a($this->createLink('address', 'delete', "id=$address->id"), $lang->delete, "class='deleter'");?></td>
+              <td><?php echo html::a($this->createLink('address', 'edit', "id=$address->id"), $lang->edit);?></td>
             </tr>
             <?php endforeach;?>
           </tbody>

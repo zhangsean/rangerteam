@@ -24,7 +24,7 @@
     <tr class='text-center'>
       <td><?php echo $id;?></td>
       <td><?php echo $contract;?></td>
-      <td><?php echo html::a($this->createLink('contract', 'delete', "contractID={$id}"), $lang->delete, "class='deleter'");?></td>
+      <td><?php echo html::a($this->createLink('contract', 'edit', "contractID={$id}"), $lang->edit);?></td>
     </tr>
     <?php endforeach;?>
   </tbody>

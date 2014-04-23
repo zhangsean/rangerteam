@@ -30,7 +30,7 @@
       <td><?php echo $contact->phone;?></td>
       <td><?php echo $contact->email;?></td>
       <td><?php echo $contact->qq;?></td>
-      <td><?php echo html::a($this->createLink('contact', 'delete', "contactID={$contact->id}"), $lang->delete, "class='deleter'");?></td>
+      <td><?php echo html::a($this->createLink('contact', 'edit', "contactID={$contact->id}"), $lang->edit);?></td>
     </tr>
     <?php endforeach;?>
   </tbody>
