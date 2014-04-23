@@ -251,23 +251,6 @@ class orderModel extends model
     }
 
     /**
-     * Save a record of an order.
-     * 
-     * @param  object    $order 
-     * @access public
-     * @return void
-     */
-    public function createRecord($order)
-    {
-        $extra = new stdclass();
-        $extra->customer = $order->customer;
-        $extra->contract = $this->dao->select('contract')->from(TABLE_CONTRACTORDER)->where('`order`')->eq($order->id)->fetch('contract');
-        $extra->extra  = $this->post->contact;
-
-        return $this->loadModel('action')->create($objectType = 'order', $order->id, $action = 'orderrecord', $this->post->comment, $extra);
-    }
-
-    /**
      * Assign an order to a member again.
      * 
      * @param  int    $orderID 
@@ -303,7 +286,7 @@ class orderModel extends model
         $menu = '';
         $menu .= html::a(inlink('edit',   "orderID=$order->id"), $this->lang->edit);
         $menu .= html::a(inlink('assignTo', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal'");
-        $menu .= html::a(inlink('browserecord', "orderID=$order->id"), $this->lang->order->effort);
+        $menu .= html::a(inlink('browserecord', "orderID=$order->id"), $this->lang->order->record);
 
         if(empty($order->contract))
         {

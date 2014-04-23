@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->contact)) $lang->contact = new stdclass();
 $lang->contact->id            = 'ID';
 $lang->contact->customer      = 'Customer';
 $lang->contact->maker         = 'Decision Maker';
@@ -35,13 +36,12 @@ $lang->contact->editedBy      = 'Edited By';
 $lang->contact->editedDate    = 'Edited Date';
 $lang->contact->contactedBy   = 'Contacted By';
 $lang->contact->contactedDate = 'Contacted Date';
-$lang->contact->newCustomer   = 'New Customer';
+$lang->contact->newCustomer   = 'Create Customer';
 $lang->contact->uploadAvatar  = 'Upload Avatar';
 $lang->contact->changeAvatar  = 'Change Avatar';
-$lang->contact->changeAvatar  = 'Change Avatar';
 
-$lang->contact->genderList['f'] = 'Female';
 $lang->contact->genderList['m'] = 'Male';
+$lang->contact->genderList['f'] = 'Female';
 
 $lang->contact->create  = 'Create';
 $lang->contact->list    = 'List';

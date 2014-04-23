@@ -9,6 +9,8 @@
  * @version     $Id: zh-cn.php 4955 2013-07-02 01:47:21Z chencongzhi520@gmail.com $
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->action)) $lang->action = new stdclass();
+
 $lang->action->common   = 'Logs';
 $lang->action->product  = 'Product';
 $lang->action->actor    = 'Actor';
@@ -54,6 +56,7 @@ $lang->action->desc->editaddress   = '$date, edited address by <strong>$actor</s
 $lang->action->desc->diff1         = 'changed <strong><i>%s</i></strong>, old is "%s", new is "%s".<br />';
 $lang->action->desc->diff2         = 'changed <strong><i>%s</i></strong>, the diff is:' . "\n" . "<blockquote>%s</blockquote>" . "\n<div class='hidden'>%s</div>";
 $lang->action->desc->diff3         = "changed file's name %s to %s.";
+$lang->action->desc->record        = '$date, <strong>$actor</strong> communicated with <strong>$contact</strong> ' . "\n";
 
 /* The action labels. */
 $lang->action->label = new stdclass();
@@ -112,3 +115,13 @@ $lang->action->search->label['canceled']    = $lang->action->label->canceled;
 $lang->action->search->label['finished']    = $lang->action->label->finished;
 $lang->action->search->label['login']       = $lang->action->label->login;
 $lang->action->search->label['logout']      = $lang->action->label->logout;
+
+$lang->action->record = new stdclass();
+$lang->action->record->common  = 'Communication';
+$lang->action->record->create  = 'Create Record';
+$lang->action->record->edit    = 'Edit Record';
+$lang->action->record->history = 'Communication Records';
+$lang->action->record->contact = 'Contact';
+$lang->action->record->actor   = 'Actor';
+$lang->action->record->comment = 'Content';
+$lang->action->record->date    = 'Contact time';

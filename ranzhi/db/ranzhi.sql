@@ -13,20 +13,20 @@ CREATE TABLE `crm_address` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `crm_contact`;
 CREATE TABLE `crm_contact` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `customer` mediumint(8) NOT NULL,
-  `maker` enum('0','1') COLLATE 'utf8_general_ci' NOT NULL DEFAULT '0',
+  `maker` enum('0','1') NOT NULL DEFAULT '0',
   `realname` char(30) NOT NULL DEFAULT '',
   `nickname` char(30) NOT NULL,
   `avatar` char(100) NOT NULL,
-  `birthday` date NOT NULL default '0000-00-00 00:00:00',
+  `birthday` date NOT NULL default '0000-00-00',
   `gender` enum('f','m','u') NOT NULL DEFAULT 'u',
-  `email` char(90) NOT NULL DEFAULT '',
-  `skype` char(90) NOT NULL,
+  `email` char(50) NOT NULL DEFAULT '',
+  `skype` char(50) NOT NULL,
   `qq` char(20) NOT NULL DEFAULT '',
-  `yahoo` char(90) NOT NULL DEFAULT '',
-  `gtalk` char(90) NOT NULL DEFAULT '',
-  `wangwang` char(90) NOT NULL DEFAULT '',
+  `yahoo` char(50) NOT NULL DEFAULT '',
+  `gtalk` char(50) NOT NULL DEFAULT '',
+  `wangwang` char(50) NOT NULL DEFAULT '',
   `site` varchar(100) NOT NULL,
   `mobile` char(11) NOT NULL DEFAULT '',
   `phone` char(20) NOT NULL DEFAULT '',
@@ -50,7 +50,7 @@ CREATE TABLE `crm_contact` (
 -- DROP TABLE IF EXISTS `crm_contract`;
 CREATE TABLE `crm_contract` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `customer` smallint(5) unsigned NOT NULL,
+  `customer` mediumint(8) unsigned NOT NULL,
   `name` char(100) NOT NULL,
   `code` char(30) NOT NULL,
   `amount` float(12,2) NOT NULL,

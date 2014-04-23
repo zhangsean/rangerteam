@@ -55,36 +55,7 @@
           <tr>
             <th class='small text-muted' colspan='2'><?php echo $lang->order->history;?></th>
           </tr>
-          <tr>
-            <td class='small' colspan='2'>
-              <ul>
-                <?php foreach($actionList as $action):?>
-                <li>
-                  <?php
-                  $actionType = strtolower($action->action);
-                  $desc       = $lang->action->desc->common;
-
-                  if(isset($lang->action->desc->$actionType))
-                  {
-                      $desc = $lang->action->desc->$actionType;
-                  }
-                  elseif(!empty($action->extra))
-                  {
-                      $desc = '$date,' . $lang->by . '<strong>$actor</strong> ' . $action->extra . '。' . "\n";
-                  }
-
-                  foreach($action as $key => $value)
-                  {
-                      if($key == 'history') continue;
-                      $desc = str_replace('$' . $key, $value, $desc);          
-                  }
-                  echo $desc;
-                  ?>
-                </li>
-                <?php endforeach;?>
-              </ul>
-            </td>
-          </tr>
+          <tr><td class='small' colspan='2'><?php include '../../../sys/common/view/action.html.php'?></td></tr>
         </table>
       </div>
       <h6 class='header-dividing text-muted'><?php echo $lang->order->product;?></h6>

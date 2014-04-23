@@ -120,7 +120,7 @@ class order extends control
         $this->view->product    = $product;
         $this->view->customer   = $customer;
         $this->view->efforts    = $this->loadModel('effort')->getByObject('order', $orderID);
-        $this->view->actionList = $this->loadModel('action')->getList('order', $orderID);
+        $this->view->actions    = $this->loadModel('action')->getList('order', $orderID);
     
         $this->display();
     }
@@ -176,72 +176,12 @@ class order extends control
     {
         $order = $this->order->getByID($orderID);
 
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
-
-
         $this->view->order    = $order;
-        $this->view->records  = $this->loadModel('action')->getList('order', $orderID, 'orderrecord', $pager);
-        $this->view->contacts = $this->loadModel('contact')->getPairs($order->customer);
+        $this->view->actions  = $this->loadModel('action')->getList('order', $orderID);
         $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
         $this->view->users    = $this->loadModel('user')->getPairs();
-        $this->view->pager    = $pager;
         $this->display();
     }
-
-    /**
-     * Create one record of an order.
-     * 
-     * @param  int    $orderID 
-     * @access public
-     * @return void
-     */
-    public function createRecord($orderID)
-    {
-        $order = $this->order->getByID($orderID);
-
-        if($_POST)
-        {
-            $this->order->createRecord($order);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browserecord', "orderID={$orderID}")));
-        }
-
-        $this->view->order    = $order;
-        $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
-        $this->view->contacts = $this->loadModel('contact')->getPairs($order->customer);
-        $this->display();
-    }
-
-    /**
-     * Edit one record of an order.
-     * 
-     * @param  int    $recordID
-     * @access public
-     * @return void
-     */
-    public function editRecord($recordID)
-    {
-        $record = $this->loadModel('action')->getByID($recordID);
-        if($record->objectType != 'order' or $record->action != 'orderrecord') exit;
-
-        $order = $this->order->getByID($record->objectID);
-
-        if($_POST)
-        {
-            $action = fixer::input('post')->get();
-            $this->action->update($action, $recordID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browserecord', "orderID={$order->id}")));
-        }
-
-        $this->view->order    = $order;
-        $this->view->record   = $record;
-        $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
-        $this->view->contacts = $this->loadModel('contact')->getPairs($order->customer);
-        $this->display();
-    }
-
 
     /**
      * Get contact of an customer.

@@ -13,22 +13,22 @@
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
-<?php js::set('customer', $order->customer);?>
-<form method='post' id='ajaxForm' action='<?php echo inlink('createrecord', "orderID=$order->id")?>'>
+<?php js::set('customer', $customer);?>
+<form method='post' id='ajaxForm' action='<?php echo inlink('createrecord', "objectType={$objectType}&objectID={$objectID}&customer={$customer}")?>'>
   <table class='table table-form'>
     <tr>
-      <th class='w-100px'><?php echo $lang->order->record->contact;?></th>
+      <th class='w-100px'><?php echo $lang->action->record->contact;?></th>
       <td>
         <div class='col-sm-5'><?php echo html::select('contact', $contacts, '', "class='form-control'");?></div>
         <div class='col-sm-4'><?php echo html::a('javascrit:;', $lang->contact->create, "class='btn-xs contact-creater'");?></div>
       </td>
     </tr>
     <tr>
-      <th><?php echo $lang->order->record->comment;?></th>
+      <th><?php echo $lang->action->record->comment;?></th>
       <td><div class='col-sm-12'><?php echo html::textarea('comment', '', "class='form-control' rows='5'");?></div></td>
     </tr>
     <tr>
-      <th><?php echo $lang->order->record->date;?></th>
+      <th><?php echo $lang->action->record->date;?></th>
       <td><div class='col-sm-5'><?php echo html::input('date', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></div></td>
     </tr>
     <tr>

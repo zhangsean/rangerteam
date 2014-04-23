@@ -116,12 +116,15 @@ $(function(){
       <button class='btn btn-mini' onclick='toggleOrder(this)' class='hand'> <?php echo "<span title='$lang->reverse' class='log-asc'></span>";?></button>
       <button class='btn btn-mini' onclick='toggleShow(this);' class='hand'><?php echo "<span title='$lang->switchDisplay' class='change-show'></span>";?></button>
     </div>
+    <div class='panel-actions pull-right'>
+      <?php echo html::a($this->createLink('sys.action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), '<i class="icon-plus"></i> ' . $lang->action->record->create, "class='btn btn-primary' data-toggle='modal'");?>
+    </div>
   </div>
   <div class='panel-body'>
     <ol id='historyItem'>
       <?php $i = 1; ?>
       <?php foreach($actions as $action):?>
-      <?php $canEditComment = (end($actions) == $action and $action->comment and $this->methodName == 'view' and $action->actor == $this->app->user->account);?>
+      <?php $canEditComment = ($action->action != 'record' and end($actions) == $action and $action->comment and $this->methodName == 'view' and $action->actor == $this->app->user->account);?>
       <li value='<?php echo $i ++;?>'>
       <?php
       if(isset($users[$action->actor])) $action->actor = $users[$action->actor];
@@ -140,6 +143,10 @@ $(function(){
         <?php if($canEditComment):?>
         <span class='link-button pull-right comment<?php echo $action->id;?>'><?php echo html::a('#lastCommentBox', '<i class="icon-edit-sign icon-large"></i>', "onclick='toggleComment($action->id)'")?></span>
         <?php endif;?>
+        <?php if($action->action == 'record'):?>
+        <span class='link-button pull-right'><?php echo html::a($this->createLink('action', 'editRecord', "id={$action->id}"), '<i class="icon-edit-sign icon-large"></i>', "data-toggle='modal'")?></span>
+        <?php endif;?>
+
         <?php 
         if($action->comment) 
         {

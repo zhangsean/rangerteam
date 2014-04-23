@@ -54,6 +54,22 @@ class actionModel extends model
     }
 
     /**
+     * Save a record of an order.
+     * 
+     * @param  object    $order 
+     * @access public
+     * @return void
+     */
+    public function createRecord($objectType, $objectID, $customer)
+    {
+        $extra = new stdclass();
+        $extra->customer = $order->customer;
+        $extra->extra    = $this->post->contact;
+
+        return $this->create($objectType, $objectID, $action = 'record', $this->post->comment, $extra);
+    }
+
+    /**
      * Get actions of an object.
      * 
      * @param  int       $objectType 
@@ -72,12 +88,17 @@ class actionModel extends model
             ->orderBy('date, id')->fetchAll('id');
 
         $histories = $this->getHistory(array_keys($actions));
+        $contacts  = $this->loadModel('contact')->getPairs();
         $this->loadModel('file');
+
         foreach($actions as $actionID => $action)
         {
             $action->history = isset($histories[$actionID]) ? $histories[$actionID] : array();
             $actions[$actionID] = $action;
+
+            if($action->action == 'record') $action->contact = isset($contacts[$action->extra]) ? $contacts[$action->extra] : '';
         }
+
         return $actions;
     }
 

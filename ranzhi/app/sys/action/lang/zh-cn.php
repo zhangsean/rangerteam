@@ -9,6 +9,8 @@
  * @version     $Id: zh-cn.php 4955 2013-07-02 01:47:21Z chencongzhi520@gmail.com $
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->action)) $lang->action = new stdclass();
+
 $lang->action->common     = '系统日志';
 $lang->action->product    = '产品';
 $lang->action->actor      = '操作者';
@@ -54,6 +56,7 @@ $lang->action->desc->editaddress   = '$date, 由 <strong>$actor</strong> 修改�
 $lang->action->desc->diff1         = '修改了 <strong><i>%s</i></strong>，旧值为 "%s"，新值为 "%s"。<br />' . "\n";
 $lang->action->desc->diff2         = '修改了 <strong><i>%s</i></strong>，区别为：' . "\n" . "<blockquote>%s</blockquote>" . "\n<div class='hidden'>%s</div>";
 $lang->action->desc->diff3         = "将文件名 %s 改为 %s 。\n";
+$lang->action->desc->record        = '$date, <strong>$actor</strong> 与 <strong>$contact</strong> 进行了沟通' . "\n";
 
 /* 用来显示动态信息。*/
 $lang->action->label = new stdclass();
@@ -111,4 +114,14 @@ $lang->action->search->label['started']     = $lang->action->label->started;
 $lang->action->search->label['canceled']    = $lang->action->label->canceled;           
 $lang->action->search->label['finished']    = $lang->action->label->finished;           
 $lang->action->search->label['login']       = $lang->action->label->login;              
-$lang->action->search->label['logout']      = $lang->action->label->logout;             
+$lang->action->search->label['logout']      = $lang->action->label->logout;
+
+$lang->action->record = new stdclass();
+$lang->action->record->common  = '沟通';
+$lang->action->record->create  = '添加记录';
+$lang->action->record->edit    = '编辑记录';
+$lang->action->record->history = '沟通记录';
+$lang->action->record->contact = '联系人';
+$lang->action->record->actor   = '操作人';
+$lang->action->record->comment = '沟通内容';
+$lang->action->record->date    = '时间';

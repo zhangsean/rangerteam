@@ -34,13 +34,15 @@ $lang->customer->editedDate  = 'Edited Date';
 $lang->customer->contactBy   = 'Contact By';
 $lang->customer->contactDate = 'Contact Date';
 $lang->customer->nextDate    = 'Next Date';
+$lang->customer->newContact  = 'Create Contact';
 
-$lang->customer->order    = 'Order List';
-$lang->customer->contact  = 'Contact List';
-$lang->customer->contract = 'Contract List';
-$lang->customer->contract = 'Address List';
-$lang->customer->basic    = 'Basic Information';
-$lang->customer->history  = 'History';
+$lang->customer->order       = 'Order List';
+$lang->customer->contact     = 'Contact List';
+$lang->customer->contract    = 'Contract List';
+$lang->customer->address     = 'Address List';
+$lang->customer->linkContact = 'Create Contact';
+$lang->customer->basic       = 'Basic Information';
+$lang->customer->history     = 'History';
 
 $lang->customer->typeList['']           = '';
 $lang->customer->typeList['national']   = 'National';

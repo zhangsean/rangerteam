@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->contact)) $lang->contact = new stdclass();
 $lang->contact->id            = '编号';
 $lang->contact->customer      = '所属客户';
 $lang->contact->maker         = '决策人';
