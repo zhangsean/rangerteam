@@ -39,6 +39,8 @@ $lang->customer->order    = '订单';
 $lang->customer->contact  = '联系人';
 $lang->customer->contract = '合同';
 $lang->customer->address  = '地址';
+$lang->customer->basic    = '基本信息';
+$lang->customer->history  = '历史记录';
 
 $lang->customer->typeList['']           = '';
 $lang->customer->typeList['national']   = '国企';
@@ -71,6 +73,7 @@ $lang->customer->levelList[5] = 'E';
 $lang->customer->create = '添加客户';
 $lang->customer->list   = '客户列表';
 $lang->customer->edit   = '编辑客户';
+$lang->customer->view   = '客户详情';
 
 $lang->customer->basicInfo = '基本信息';
 $lang->customer->moreInfo  = '更多信息';

@@ -39,6 +39,8 @@ $lang->customer->order    = 'Order List';
 $lang->customer->contact  = 'Contact List';
 $lang->customer->contract = 'Contract List';
 $lang->customer->contract = 'Address List';
+$lang->customer->basic    = 'Basic Information';
+$lang->customer->history  = 'History';
 
 $lang->customer->typeList['']           = '';
 $lang->customer->typeList['national']   = 'National';
@@ -71,6 +73,7 @@ $lang->customer->levelList[5] = 'E';
 $lang->customer->create = 'Create Customer';
 $lang->customer->list   = 'Customer List';
 $lang->customer->edit   = 'Edit';
+$lang->customer->view   = 'View';
 
 $lang->customer->basicInfo = 'Basic Info';
 $lang->customer->moreInfo  = 'More Info';

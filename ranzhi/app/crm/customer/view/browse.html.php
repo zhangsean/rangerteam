@@ -34,7 +34,7 @@
     </thead>
     <tbody>
       <?php foreach($customers as $customer):?>
-      <tr class='text-center' data-url='<?php echo $this->createLink('customer', 'edit', "customerID=$customer->id"); ?>'>
+      <tr class='text-center' data-url='<?php echo $this->createLink('customer', 'view', "customerID=$customer->id"); ?>'>
         <td><?php echo $customer->id;?></td>
         <td class='text-left'><strong><?php echo $customer->name;?></strong></td>
         <td><?php echo $lang->customer->levelList[$customer->level];?></td>
@@ -57,7 +57,7 @@
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='10'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.html.php';?>
