@@ -111,13 +111,13 @@ $(function(){
 
 <div id='actionbox' class='panel'>
   <div class='panel-heading'>
-    <i class='icon-time'></i> <?php echo $lang->history?>
+    <strong><i class='icon-time'></i> <?php echo $lang->history?></strong>
     <div class='panel-actions'>
       <button class='btn btn-mini' onclick='toggleOrder(this)' class='hand'> <?php echo "<span title='$lang->reverse' class='log-asc'></span>";?></button>
       <button class='btn btn-mini' onclick='toggleShow(this);' class='hand'><?php echo "<span title='$lang->switchDisplay' class='change-show'></span>";?></button>
     </div>
     <div class='panel-actions pull-right'>
-      <?php echo html::a($this->createLink('sys.action', 'createRecord', "objectType=order&objectID={$objectID}&customer={$customer}"), '<i class="icon-plus"></i> ' . $lang->action->record->create, "class='btn btn-primary btn-sm' data-toggle='modal'");?>
+      <?php echo html::a($this->createLink('sys.action', 'createRecord', "objectType=order&objectID={$objectID}&customer={$customer}"), '<i class="icon-plus"></i> ' . $lang->action->record->create, "class='btn btn-primary' data-toggle='modal'");?>
     </div>
   </div>
   <div class='panel-body'>

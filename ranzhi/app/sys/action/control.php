@@ -12,6 +12,24 @@
 class action extends control
 {
     /**
+     * browse history actions and records. 
+     * 
+     * @param  string    $objectType
+     * @param  int       $objectID 
+     * @param  int       $customer 
+     * @access public
+     * @return void
+     */
+    public function history($objectType, $objectID, $customer)
+    {
+        $this->view->actions    = $this->loadModel('action')->getList($objectType, $objectID);
+        $this->view->objectType = $objectType;
+        $this->view->objectID   = $objectID;
+        $this->view->customer   = $customer;
+        $this->display();
+    }
+
+    /**
      * Edit comment of an action.
      * 
      * @param  int    $actionID 

@@ -10,13 +10,11 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php
-$objectType = 'order';
-$objectID   = $order->id;
-$customer   = $order->customer;
-include '../../common/view/header.html.php';
-?>
-<div class='col-lg-6'>
+<?php include '../../common/view/header.html.php'; ?>
+<div class='col-lg-7'>
+  <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}&customer={$order->customer}");?>
+</div>
+<div class='col-lg-5'>
   <div class='panel'>
     <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->view;?></strong></div>
     <div class='panel-body'>
@@ -57,56 +55,28 @@ include '../../common/view/header.html.php';
             <td><strong class="lead text-danger text-latin"><?php echo $order->plan;?></strong></td>
             <?php endif;?>
           </tr>
-          <tr>
-            <th class='small text-muted' colspan='2'><?php echo $lang->order->history;?></th>
-          </tr>
-          <tr><td class='small' colspan='2'><?php include '../../../sys/common/view/action.html.php'?></td></tr>
         </table>
       </div>
-      <h6 class='header-dividing text-muted'><?php echo $lang->order->product;?></h6>
-      <ul>
-        <li>
-          <strong><?php echo $product->name;?></strong>
-          <div class='small text-muted'><?php echo $product->desc;?></div>
-        </li>
-      </ul>
       <h6 class='header-dividing text-muted'><?php echo $lang->order->customer;?></h6>
       <ul>
         <li>
-          <strong><?php echo $customer->name;?></strong>
+        <strong><?php echo $customer->name;?><span class="label label-badge pull-right label-info"><?php echo $lang->customer->levelList[$customer->level]?></span></strong>
           <?php if($customer->contactedBy):?>
           <div class='small text-muted'><i class='icon-user'></i> <?php echo $lang->order->contact . ': ' . $customer->contactedBy;?></div>
           <?php endif;?>
           <div class='small text-muted'><i class='icon-time'></i> <?php echo $lang->customer->contactDate . ': ' . $customer->contactedDate;?></div>
         </li>
       </ul>
+      <h6 class='header-dividing text-muted'><?php echo $lang->order->product;?></h6>
+      <ul>
+        <li>
+          <strong><?php echo $product->name;?></strong>
+          <div class='small text-muted'>
+            <?php echo $product->desc;?>
+          </div>
+        </li>
+      </ul>
     </div>
-  </div>
-</div>
-<div class='col-lg-6'>
-  <div class='panel'>
-    <div class='panel-heading'><strong><i class='icon-time'></i> <?php echo $lang->order->effort;?></strong></div>
-    <table class='table table-hover table-data'>
-      <thead>
-        <tr class='text-center'>
-          <th class='w-id'><?php echo $lang->effort->id;?></th>
-          <th class='w-100px'><?php echo $lang->effort->date;?></th>
-          <th class='w-80px'><?php echo $lang->effort->consumed;?></th>
-          <th><?php echo $lang->effort->work;?></th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php unset($efforts['typeList']);?>
-        <?php foreach($efforts as $effort):?>
-        <tr class='text-center'>
-          <td><?php echo $effort->id;?></td>
-          <td><?php echo $effort->date;?></td>
-          <td><?php echo $effort->consumed;?></td>
-          <td class='text-left'><?php echo $effort->work;?></td>
-        <tr>
-        <?php endforeach;?>
-      </tbody>
-    </table>
   </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

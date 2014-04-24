@@ -99,7 +99,6 @@ class order extends control
         $this->view->order     = $this->order->getByID($orderID);
         $this->view->products  = $this->loadModel('product')->getPairs();
         $this->view->customers = $this->loadModel('customer')->getPairs();
-        $this->view->actions   = $this->loadModel('action')->getList('order', $orderID);
 
         $this->display();
     }
@@ -122,7 +121,6 @@ class order extends control
         $this->view->product    = $product;
         $this->view->customer   = $customer;
         $this->view->efforts    = $this->loadModel('effort')->getByObject('order', $orderID);
-        $this->view->actions    = $this->loadModel('action')->getList('order', $orderID);
     
         $this->display();
     }
@@ -179,7 +177,6 @@ class order extends control
         $order = $this->order->getByID($orderID);
 
         $this->view->order    = $order;
-        $this->view->actions  = $this->loadModel('action')->getList('order', $orderID);
         $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
         $this->view->users    = $this->loadModel('user')->getPairs();
         $this->display();
