@@ -141,8 +141,9 @@ class customer extends control
      */
     public function order($customerID)
     {
-        $this->view->title  = $this->lang->customer->order;
-        $this->view->orders = $this->loadModel('order')->getPairs($customerID);
+        $this->view->title    = $this->lang->customer->order;
+        $this->view->orders   = $this->loadModel('order')->getList($customerID);
+        $this->view->products = $this->loadModel('product')->getPairs();
         $this->display();
     }
 
@@ -194,7 +195,7 @@ class customer extends control
     public function contract($customerID)
     {
         $this->view->title     = $this->lang->customer->contact;
-        $this->view->contracts = $this->loadModel('contract')->getPairs($customerID);
+        $this->view->contracts = $this->loadModel('contract')->getList($customerID);
         $this->display();
     }
 

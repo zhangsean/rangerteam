@@ -56,8 +56,8 @@
           <td><?php echo html::select('level', $lang->customer->levelList, 0, "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->desc;?></th>
-          <td colspan='2'><?php echo html::textarea('desc', '', "rows='6' class='form-control'");?></td>
+          <th><?php echo $lang->customer->intension;?></th>
+          <td colspan='2'><?php echo html::textarea('intension', '', "rows='2' class='form-control'");?></td>
         </tr>
         <tr>
           <th></th>

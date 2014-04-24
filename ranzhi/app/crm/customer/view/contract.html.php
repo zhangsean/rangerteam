@@ -14,17 +14,17 @@
 <table class='table table-bordered table-hover table-striped table-data'>
   <thead>
     <tr class='text-center'>
-      <th class='w-60px'><?php echo $lang->customer->id;?></th>
-      <th><?php echo $lang->customer->name;?></th>
-      <th><?php echo $lang->actions;?></th>
+      <th class='w-60px'><?php echo $lang->contract->id;?></th>
+      <th><?php echo $lang->contract->name;?></th>
+      <th><?php echo $lang->contract->status;?></th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach($contracts as $id => $contract):?>
+    <?php foreach($contracts as $contract):?>
     <tr class='text-center'>
-      <td><?php echo $id;?></td>
-      <td><?php echo $contract;?></td>
-      <td><?php echo html::a($this->createLink('contract', 'edit', "contractID={$id}"), $lang->edit);?></td>
+      <td><?php echo $contract->id;?></td>
+      <td><?php echo $contract->name;?></td>
+      <td><?php echo $lang->contract->statusList[$contract->status];?></td>
     </tr>
     <?php endforeach;?>
   </tbody>
