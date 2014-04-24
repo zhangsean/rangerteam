@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 $config->customer->require = new stdclass();
-$config->customer->require->create = 'name, contact';
+$config->customer->require->create = 'contact';
 $config->customer->require->edit   = 'name, type, status';
 
 $config->customer->editor = new stdclass();

@@ -68,6 +68,7 @@ class customerModel extends model
     public function create()
     {
         $customer = fixer::input('post')
+            ->setIF($this->post->name == '', 'name', $this->post->contact)
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', helper::now())
             ->get();
