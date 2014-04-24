@@ -10,11 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php
-include '../../common/view/header.html.php';
-$objectType = 'customer';
-$objectID   = $customer->id;
-?>
+<?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->view;?></strong></div>
   <div class='panel-body'>
@@ -73,11 +69,11 @@ $objectID   = $customer->id;
         <table class='table table-bordered table-hover table-data'>
           <thead>
             <tr class='text-center'>
-              <th class='w-60px'><?php echo $lang->customer->id;?></th>
-              <th><?php echo $lang->customer->contact;?></th>
-              <th><?php echo $lang->customer->phone;?></th>
-              <th><?php echo $lang->customer->email;?></th>
-              <th><?php echo $lang->customer->qq;?></th>
+              <th class='w-60px'><?php echo $lang->contact->id;?></th>
+              <th><?php echo $lang->contact->realname;?></th>
+              <th><?php echo $lang->contact->phone;?></th>
+              <th><?php echo $lang->contact->email;?></th>
+              <th><?php echo $lang->contact->qq;?></th>
               <th><?php echo $lang->actions;?></th>
             </tr>
           </thead>
@@ -99,8 +95,8 @@ $objectID   = $customer->id;
         <table class='table table-hover table-bordered table-data'>
           <thead>
             <tr class='text-center'>
-              <th class='w-60px'><?php echo $lang->customer->id;?></th>
-              <th><?php echo $lang->customer->name;?></th>
+              <th class='w-60px'><?php echo $lang->contract->id;?></th>
+              <th><?php echo $lang->contract->name;?></th>
               <th><?php echo $lang->actions;?></th>
             </tr>
           </thead>
@@ -119,16 +115,20 @@ $objectID   = $customer->id;
         <table class='table table-bordered table-hover table-data'>
           <thead>
             <tr class='text-center'>
-              <th class='w-60px'><?php echo $lang->customer->id;?></th>
-              <th><?php echo $lang->customer->name;?></th>
+              <th class='w-60px'><?php echo $lang->order->id;?></th>
+              <th><?php echo $lang->order->name;?></th>
+              <th><?php echo $lang->order->product;?></th>
+              <th><?php echo $lang->order->status;?></th>
               <th><?php echo $lang->actions;?></th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach($orders as $id => $order):?>
+            <?php foreach($orders as $order):?>
             <tr class='text-center'>
-              <td><?php echo $id;?></td>
-              <td><?php echo $order;?></td>
+              <td><?php echo $order->id;?></td>
+              <td><?php echo $order->title;?></td>
+              <td><?php echo $products[$order->product];?></td>
+              <td><?php echo $lang->order->statusList[$order->status];?></td>
               <td><?php echo html::a($this->createLink('order', 'edit', "orderID={$id}"), $lang->edit);?></td>
             </tr>
             <?php endforeach;?>
@@ -155,7 +155,7 @@ $objectID   = $customer->id;
           </tbody>
         </table>
       </div>
-      <div class="tab-pane fade" id="history"><?php include "../../../sys/common/view/action.html.php";?></div>
+      <div class="tab-pane fade" id="history"><?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}&customer={$customer->id}");?></div>
     </div>
   </div>
 </div>
