@@ -13,7 +13,6 @@
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <div class='alert'>
-  <span class='pull-right items'><?php echo html::a('javascript:toggleComment()', '<i class="icon-pencil"></i>', "class='btn btn-mini'")?></span>
   <table class='table table-form items'>
     <tr>
       <th class='w-80px'><?php echo $lang->contract->items;?></th>
@@ -23,8 +22,11 @@
       <th><?php echo $lang->files;?></th>
       <td><?php echo $this->fetch('file', 'printFiles', array('files' => $files, 'fieldset' => 'false'));?></td>
     </tr>
+    <tr>
+      <th></th>
+      <td class='items'><?php echo html::a('javascript:toggleComment()', '<i class="icon-pencil"></i> ' . $lang->edit, "class='btn'")?></td>
   </table>
-  <div class='hide' id='lastCommentBox'>
+  <div class='hide' id='itemGroup'>
     <form method='post' id='ajaxForm' action='<?php echo $this->createLink('contract', 'items', "contractID=$contract->id")?>'>
       <table align='center' class='table table-form'>
         <tr>
@@ -37,8 +39,14 @@
           <td><?php echo $this->fetch('file', 'printFiles', array('files' => $files, 'fieldset' => 'false'))?></td>
         </tr>
         <?php endif;?>
-        <tr><td colspan='2'><?php echo $this->fetch('file', 'buildForm');?></td></tr>
-        <tr><td colspan='2'><?php echo html::submitButton() . html::a("javascript:toggleComment()", $lang->goback, "class='btn'");?></td></tr>
+        <tr>
+          <th><?php echo $lang->contract->uploadFile;?></th>
+          <td><?php echo $this->fetch('file', 'buildForm');?></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td><?php echo html::submitButton() . html::a("javascript:toggleComment()", $lang->goback, "class='btn'");?></td>
+        </tr>
       </table>
     </form>
   </div>

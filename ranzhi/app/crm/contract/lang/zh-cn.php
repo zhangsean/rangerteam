@@ -36,10 +36,11 @@ $lang->contract->editedBy     = '最后修改';
 $lang->contract->editedDate   = '最后修改时间';
 $lang->contract->handlers     = '经手人';
 
-$lang->contract->list    = '合同列表';
-$lang->contract->create  = '创建合同';
-$lang->contract->edit    = '编辑合同';
-$lang->contract->setting = '系统设置';
+$lang->contract->list       = '合同列表';
+$lang->contract->create     = '创建合同';
+$lang->contract->edit       = '编辑合同';
+$lang->contract->setting    = '系统设置';
+$lang->contract->uploadFile = '上传附件';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = '等待交付';
