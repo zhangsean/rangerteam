@@ -117,7 +117,6 @@ class task extends control
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->task      = $task;
-        $this->view->actions   = $this->loadModel('action')->getList('task', $taskID);
 
         $this->display();
     }

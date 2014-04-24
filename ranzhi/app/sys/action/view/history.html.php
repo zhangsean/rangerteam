@@ -117,7 +117,7 @@ $(function(){
       <button class='btn btn-mini' onclick='toggleShow(this);' class='hand'><?php echo "<span title='$lang->switchDisplay' class='change-show'></span>";?></button>
     </div>
     <div class='panel-actions pull-right'>
-      <?php echo html::a($this->createLink('sys.action', 'createRecord', "objectType=order&objectID={$objectID}&customer={$customer}"), '<i class="icon-plus"></i> ' . $lang->action->record->create, "class='btn btn-primary' data-toggle='modal'");?>
+      <?php echo html::a($this->createLink('sys.action', 'createRecord', "objectType=$objectType&objectID={$objectID}&customer={$customer}"), '<i class="icon-plus"></i> ' . $lang->action->record->create, "class='btn btn-primary' data-toggle='modal'");?>
     </div>
   </div>
   <div class='panel-body'>

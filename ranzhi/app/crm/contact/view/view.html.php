@@ -158,7 +158,7 @@
           </tbody>
         </table>
       </div>
-      <div class="tab-pane fade" id="history"><?php include "../../../sys/common/view/action.html.php";?></div>
+      <div class="tab-pane fade" id="history"><?php echo $this->fetch('action', 'history', "objectType=contact&objectID=$contact->id&customer=$contact->customer");?></div>
     </div>
   </div>
 </div>

@@ -48,7 +48,8 @@
       <?php if($doc->type == 'file'):?>
       <?php echo $this->fetch('file', 'printFiles', array('files' => $doc->files, 'fieldset' => 'true'));?>
       <?php endif;?>
-      <?php include '../../../sys/common/view/action.html.php';?>
+      <?php echo $this->fetch('action', 'history', "objectType=doc&objectID={$doc->id}");?>
+
       <div class='actions'>
         <?php
         $browseLink = $this->session->docList ? $this->session->docList : inlink('browse');

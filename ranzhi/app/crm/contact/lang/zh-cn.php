@@ -49,6 +49,7 @@ $lang->contact->edit    = '编辑联系人';
 $lang->contact->view    = '联系人详情';
 $lang->contact->resume  = '公司';
 $lang->contact->address = '地址';
+$lang->contact->record  = '沟通';
 
 $lang->contact->basicInfo   = '基本信息';
 $lang->contact->contactInfo = '联系信息';

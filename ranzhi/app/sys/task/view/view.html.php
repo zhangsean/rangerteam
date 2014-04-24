@@ -105,5 +105,5 @@
     ?>
   </div>
 </div>
-<?php include '../../common/view/action.html.php';?>
+<?php echo $this->fetch('action', 'history', "objectType=task&objectID={$task->id}");?>
 <?php include '../../../crm/common/view/footer.html.php';?>

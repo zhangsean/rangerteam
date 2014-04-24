@@ -20,7 +20,7 @@ class action extends control
      * @access public
      * @return void
      */
-    public function history($objectType, $objectID, $customer)
+    public function history($objectType, $objectID, $customer = '')
     {
         $this->view->actions    = $this->loadModel('action')->getList($objectType, $objectID);
         $this->view->objectType = $objectType;
@@ -58,7 +58,7 @@ class action extends control
         {
             $this->action->createRecord($objectType, $objectID, $customer);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browserecord', "orderID={$orderID}")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
         $this->view->title      = $this->lang->action->record->create;

@@ -119,8 +119,20 @@ class contact extends control
         $this->view->addresses = $this->loadModel('address')->getList('contact', $contactID);
         $this->view->resumes   = $this->loadModel('resume')->getList($contactID);
         $this->view->customers = $this->loadModel('customer')->getPairs();
-        $this->view->actions   = $this->loadModel('action')->getList('contact', $contactID);
 
+        $this->display();
+    }
+
+    /**
+     * Contact history.
+     * 
+     * @param  int    $contactID 
+     * @access public
+     * @return void
+     */
+    public function history($contactID)
+    {
+        $this->view->contact = $this->contact->getByID($contactID);
         $this->display();
     }
 

@@ -49,6 +49,7 @@ $lang->contact->edit    = 'Edit';
 $lang->contact->view    = 'View';
 $lang->contact->resume  = 'Company';
 $lang->contact->address = 'Address';
+$lang->contact->record  = 'History';
 
 $lang->contact->basicInfo   = 'Basic Info';
 $lang->contact->contactInfo = 'Contact Info';

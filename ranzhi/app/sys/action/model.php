@@ -63,7 +63,7 @@ class actionModel extends model
     public function createRecord($objectType, $objectID, $customer)
     {
         $extra = new stdclass();
-        $extra->customer = $order->customer;
+        $extra->customer = $customer;
         $extra->extra    = $this->post->contact;
 
         return $this->create($objectType, $objectID, $action = 'record', $this->post->comment, $extra);
@@ -88,7 +88,7 @@ class actionModel extends model
             ->orderBy('date, id')->fetchAll('id');
 
         $histories = $this->getHistory(array_keys($actions));
-        $contacts  = $this->loadModel('contact')->getPairs();
+        $contacts  = $this->loadModel('contact', 'crm')->getPairs();
         $this->loadModel('file');
 
         foreach($actions as $actionID => $action)

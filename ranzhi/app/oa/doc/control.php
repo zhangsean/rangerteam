@@ -316,7 +316,6 @@ class doc extends control
         $this->view->title      = "DOC #$doc->id $doc->title - " . $this->libs[$doc->lib];
         $this->view->doc        = $doc;
         $this->view->lib        = $lib;
-        $this->view->actions    = $this->loadModel('action')->getList('doc', $docID);
         $this->view->users      = $this->user->getPairs('noclosed,noletter');
         $this->view->keTableCSS = $this->doc->extractKETableCSS($doc->content);
 
