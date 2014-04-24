@@ -16,6 +16,7 @@
     <div class='pull-right'><?php echo html::a(inlink('create', "contactID=$contact->id"), $this->lang->resume->change, "class='loadInModal'");?></div>
   </caption>
   <tr class='text-center'>
+    <th class='w-50px'><?php echo $lang->resume->id;?></th>
     <th><?php echo $lang->resume->customer;?></th>
     <th class='w-100px'><?php echo $lang->resume->dept;?></th>
     <th><?php echo $lang->resume->title;?></th>
@@ -25,6 +26,7 @@
   </tr>
   <?php foreach($resumes as $resume):?>
   <tr>
+    <td><?php echo $resume->customer?></td>
     <td><?php echo $customers[$resume->customer]?></td>
     <td><?php echo $resume->dept?></td>
     <td><?php echo $resume->title?></td>

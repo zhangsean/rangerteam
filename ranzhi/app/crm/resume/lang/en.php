@@ -13,6 +13,7 @@ $lang->resume->common = 'Company';
 $lang->resume->change = 'Change company';
 $lang->resume->edit   = 'Edit company info';
 
+$lang->resume->id       = 'ID';
 $lang->resume->contact  = 'Contact';
 $lang->resume->customer = 'Customer';
 $lang->resume->dept     = 'Dept';

@@ -13,6 +13,7 @@ $lang->resume->common = '公司管理';
 $lang->resume->change = '修改所属公司';
 $lang->resume->edit   = '修改公司信息';
 
+$lang->resume->id       = '编号';
 $lang->resume->contact  = '联系人';
 $lang->resume->customer = '所属公司';
 $lang->resume->dept     = '所属部门';
