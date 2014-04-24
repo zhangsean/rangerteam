@@ -94,6 +94,12 @@ class customerModel extends model
         if(dao::isError()) return false;
 
         $contactID = $this->dao->lastInsertID();
+
+        $resume = new stdclass();
+        $resume->contact  = $contactID;
+        $resume->customer = $customerID;
+        $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
+
         $this->loadModel('action')->create('contact', $contactID, 'Created');
 
         return $customerID;
