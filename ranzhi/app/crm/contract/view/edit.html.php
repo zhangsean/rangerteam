@@ -56,49 +56,59 @@
         </table>
       </fieldset>
       <fieldset>
-        <legend><?php echo $lang->contract->info; ?></legend>
+        <legend><?php echo $lang->contract->info;?></legend>
         <table class='table table-form'>
           <tr>
             <th class='w-80px'><?php echo $lang->contract->code;?></th>
-            <td class='w-p40'><?php echo html::input('code', $contract->code, "class='form-control'");?></td>
-            <th class='w-80px'><?php echo $lang->contract->amount;?></th>
+            <td class='w-p40'><?php echo html::input('code', $contract->code, "class='form-control'");?></td><td></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->contract->amount;?></th>
             <td><?php echo html::input('amount', $contract->amount, "class='form-control'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->delivery;?></th>
             <td><?php echo html::select('delivery', $lang->contract->deliveryList, $contract->delivery, "class='form-control'");?></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->contract->return;?></th>
             <td><?php echo html::select('return', $lang->contract->returnList, $contract->return, "class='form-control'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->status;?></th>
             <td><?php echo html::select('status', $lang->contract->statusList, $contract->status, "class='form-control'");?></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->contract->contact;?></th>
             <td><?php echo html::select('contact', $contacts, $contract->contact, "class='form-control'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->signedBy;?></th>
             <td><?php echo html::select('signedBy', $users, $contract->signedBy, "class='form-control'");?></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->contract->signedDate;?></th>
             <td><?php echo html::input('signedDate', $contract->signedDate, "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->begin;?></th>
             <td><?php echo html::input('begin', $contract->begin, "class='form-control form-date'");?></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->contract->end;?></th>
             <td><?php echo html::input('end', $contract->end, "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->handlers;?></th>
-            <td colspan='3'><?php echo html::select('handlers[]', $users, $contract->handlers, "class='form-control chosen' multiple");?></td>
+            <td colspan='2'><?php echo html::select('handlers[]', $users, $contract->handlers, "class='form-control chosen' multiple");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->items;?></th>
-            <td colspan='3'><?php echo html::textarea('items', $contract->items, "class='form-control'");?></td>
+            <td colspan='2'><?php echo html::textarea('items', $contract->items, "class='form-control'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->files;?></th>
-            <td colspan='3'><?php echo $this->fetch('file', 'buildForm');?></td>
+            <td colspan='2'><?php echo $this->fetch('file', 'buildForm');?></td>
           </tr>
         </table>
       </fieldset>
