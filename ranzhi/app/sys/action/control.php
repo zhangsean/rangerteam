@@ -92,7 +92,7 @@ class action extends control
 
         $this->view->title    = $this->lang->action->record->edit;
         $this->view->record   = $record;
-        $this->view->contacts = $this->loadModel('contact')->getPairs($object->customer);
+        $this->view->contacts = $this->loadModel('contact')->getPairs($record->objectType == 'customer' ? $object->id : $object->customer);
         $this->display();
     }
 }

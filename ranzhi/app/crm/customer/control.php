@@ -125,7 +125,7 @@ class customer extends control
         $this->view->customer  = $this->customer->getByID($customerID);
         $this->view->orders    = $this->loadModel('order')->getList($customerID);
         $this->view->contacts  = $this->loadModel('contact')->getList($customerID);
-        $this->view->contracts = $this->loadModel('contract')->getPairs($customerID);
+        $this->view->contracts = $this->loadModel('contract')->getList($customerID);
         $this->view->addresses = $this->loadModel('address')->getList('customer', $customerID);
         $this->view->actions   = $this->loadModel('action')->getList('customer', $customerID);
         $this->view->products  = $this->loadModel('product')->getPairs();

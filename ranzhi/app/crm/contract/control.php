@@ -37,7 +37,7 @@ class contract extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->contracts = $this->contract->getList($orderBy, $pager);
+        $this->view->contracts = $this->contract->getList(0, $orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;

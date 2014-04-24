@@ -55,7 +55,7 @@
       </tr>
       <tr>
         <th><?php echo $lang->contract->contact;?></th>
-        <td><?php echo $contacts[$contract->contact];?></td>
+        <td><?php if($contract->contact) echo $contacts[$contract->contact];?></td>
       </tr>
       <tr>
         <th><?php echo $lang->contract->signedBy;?></th>
@@ -87,5 +87,5 @@
     ?>
   </div>
 </div>
-<?php include '../../../sys/common/view/action.html.php';?>
+<?php echo $this->fetch('action', 'history', "objectType=contract&objectID={$contract->id}&customer={$contract->customer}");?>
 <?php include '../../common/view/footer.html.php';?>

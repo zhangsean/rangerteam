@@ -41,10 +41,11 @@ class contractModel extends model
      * @access public
      * @return array
      */
-    public function getList($orderBy = 'id_desc', $pager = null)
+    public function getList($customer = 0, $orderBy = 'id_desc', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('deleted')->eq(0)
+            ->beginIF($customer)->andWhere('customer')->eq($customer)->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll();
