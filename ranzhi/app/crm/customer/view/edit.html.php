@@ -19,7 +19,7 @@
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-condensed'>
       <div class='row'>
-        <div class='col-md-8'>
+        <div class='col-md-9'>
           <fieldset class='fieldset-primary'>
             <table class='table table-form'>
               <tr class='text-left'>
@@ -35,25 +35,31 @@
             <table class='table table-form'>
               <tr>
                 <th class='w-80px'><?php echo $lang->customer->type;?></th>
-                <td><?php echo html::select("type", $lang->customer->typeList, $customer->type, "class='form-control'");?></td>
-                <th class='w-80px'><?php echo $lang->customer->size;?></th>
+                <td class='w-p50'><?php echo html::select("type", $lang->customer->typeList, $customer->type, "class='form-control'");?></td><td></td>
+              </tr>
+              <tr>
+                <th><?php echo $lang->customer->size;?></th>
                 <td><?php echo html::select('size', $lang->customer->sizeList, $customer->size, "class='form-control'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->customer->status;?></th>
                 <td><?php echo html::select("status", $lang->customer->statusList, $customer->status, "class='form-control'");?></td>
+              </tr>
+              <tr>
                 <th><?php echo $lang->customer->level;?></th>
                 <td><?php echo html::select('level', $lang->customer->levelList, $customer->level, "class='form-control'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->customer->industry;?></th>
                 <td><?php echo html::input('industry', $customer->industry, "class='form-control'");?></td>
+              </tr>
+              <tr>
                 <th><?php echo $lang->customer->area;?></th>
                 <td><?php echo html::input('area', $customer->area, "class='form-control'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->customer->intension;?></th>
-                <td colspan='3'><?php echo html::textarea('intension', $customer->intension, "class='form-control' rows=2");?></td>
+                <td colspan='2'><?php echo html::textarea('intension', $customer->intension, "class='form-control' rows=2");?></td>
               </tr>
             </table>
           </fieldset>
@@ -62,26 +68,22 @@
             <table class='table table-form'>
               <tr>
                 <th class='w-80px'><?php echo $lang->customer->site;?></th>
-                <td><?php echo html::input('site', $customer->site ? $customer->site : 'http://', "class='form-control'");?></td>
-                <th class='w-80px'><?php echo $lang->customer->weibo;?></th>
+                <td class='w-p40'><?php echo html::input('site', $customer->site ? $customer->site : 'http://', "class='form-control'");?></td><td></td>
+              </tr>
+              <tr>
+                <th><?php echo $lang->customer->weibo;?></th>
                 <td><?php echo html::input('weibo', $customer->weibo ? $customer->weibo : 'http://weibo.com/', "class='form-control'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->customer->weixin;?></th>
                 <td><?php echo html::input('weixin', $customer->weixin, "class='form-control'");?></td>
               </tr>
+              <tr>
+                <th><?php echo $lang->customer->desc;?></th>
+                <td colspan='2'><?php echo html::textarea('desc', $customer->desc, "rows='2' class='form-control'");?></td>
+              </tr>
             </table>
           </fieldset>
-        </div>
-        <div class='col-md-4'>
-          <table class='table table-form'>
-            <tr>
-              <th class='text-left'><?php echo $lang->customer->desc;?></th>
-            </tr>
-            <tr>
-              <td><?php echo html::textarea('desc', $customer->desc, "rows='2' class='form-control'");?></td>
-            </tr>
-          </table>
         </div>
       </div>
       <?php echo html::submitButton();?>
