@@ -25,13 +25,13 @@
           <fieldset class='fieldset-primary'>
             <table class='table table-form'>
               <tr>
-                <th><?php echo $lang->contract->customer;?></th>
-                <td><?php echo html::select('customer', $customers, $contract->customer, "class='form-control'");?></td>
+                <th class='w-80px'><?php echo $lang->contract->customer;?></th>
+                <td class='w-p40'><?php echo html::select('customer', $customers, $contract->customer, "class='form-control' disabled");?></td><td></td>
               </tr>
               <?php foreach($contractOrders as $currentOrder):?>
               <tr>
                 <th class='orderTH'><?php echo $lang->contract->order;?></th>
-                <td>
+                <td colspan='2'>
                   <div class='form-group'>
                     <span class='col-sm-8'>
                       <select name='order[]' class='select-order form-control'>
@@ -53,7 +53,7 @@
               <?php endforeach;?>
               <tr>
                 <th><?php echo $lang->contract->name;?></th>
-                <td><?php echo html::input('name', $contract->name, "class='form-control'");?></td>
+                <td colspan='2'><?php echo html::input('name', $contract->name, "class='form-control'");?></td>
               </tr>
             </table>
           </fieldset>
