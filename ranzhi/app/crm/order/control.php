@@ -165,7 +165,7 @@ class order extends control
     }
 
     /**
-     * Browse records of and order.
+     * Browse records of an order.
      * 
      * @param  int    $orderID 
      * @param  int    $recTotal 
