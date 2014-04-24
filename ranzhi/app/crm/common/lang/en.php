@@ -42,7 +42,7 @@ $lang->order->menu->create = '<i class="icon-plus"></i> Create Order|order|creat
 /* Menu of contact module. */
 $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
-$lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> Contact List|contact|browse|', 'alias' => 'edit,view');
+$lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> Contact List|contact|browse|', 'alias' => 'edit,view,history');
 $lang->contact->menu->create = '<i class="icon-plus"></i> Create Contact|contact|create|';
 
 /* Menu of contract module. */
