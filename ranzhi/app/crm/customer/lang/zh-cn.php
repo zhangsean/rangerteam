@@ -40,6 +40,7 @@ $lang->customer->order       = '订单';
 $lang->customer->contact     = '联系人';
 $lang->customer->contract    = '合同';
 $lang->customer->address     = '地址';
+$lang->customer->record      = '沟通';
 $lang->customer->linkContact = '添加联系人';
 $lang->customer->basic       = '基本信息';
 

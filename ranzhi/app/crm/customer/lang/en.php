@@ -40,6 +40,7 @@ $lang->customer->order       = 'Order List';
 $lang->customer->contact     = 'Contact List';
 $lang->customer->contract    = 'Contract List';
 $lang->customer->address     = 'Address List';
+$lang->customer->record      = 'Record';
 $lang->customer->linkContact = 'Create Contact';
 $lang->customer->basic       = 'Basic Information';
 
