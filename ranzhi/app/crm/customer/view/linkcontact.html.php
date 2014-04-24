@@ -11,11 +11,12 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <form id='linkContactForm' method='post' action='<?php echo inlink('linkContact', "customerID=$customerID")?>'>
   <table class='table table-form'>
       <tr>
         <th class='w-100px'><?php echo $lang->customer->contact;?></th>
-        <td><?php echo html::select('contact', $contacts, '', "class='form-control'")?> </td>
+        <td><?php echo html::select('contact', $contacts, '', "class='form-control chosen'")?> </td>
         <td class='w-120px'>
           <input type='checkbox' name='newContact' value='1' id='newContact' />
           <label for='newContact'><?php echo $lang->customer->newContact?></label>

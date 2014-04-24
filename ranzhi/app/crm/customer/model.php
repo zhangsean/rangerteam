@@ -46,7 +46,7 @@ class customerModel extends model
      * @param  string $orderBy 
      * @param  int    $emptyOption 
      * @access public
-     * @return void
+     * @return array
      */
     public function getPairs($orderBy = 'id_desc', $emptyOption = true)
     {
@@ -62,19 +62,25 @@ class customerModel extends model
     /**
      * Create a customer.
      * 
+     * @param  object    $customer 
      * @access public
-     * @return int|bool
+     * @return int
      */
-    public function create()
+    public function create($customer = null)
     {
-        $customer = fixer::input('post')
-            ->setIF($this->post->name == '', 'name', $this->post->contact)
-            ->add('createdBy', $this->app->user->account)
-            ->add('createdDate', helper::now())
-            ->get();
+        $now = helper::now();
+        if(empty($customer))
+        {
+            $customer = fixer::input('post')
+                ->setIF($this->post->name == '', 'name', $this->post->contact)
+                ->add('createdBy', $this->app->user->account)
+                ->add('createdDate', $now)
+                ->get();
+        }
 
+        if(!isset($customer->contact)) $this->config->customer->require->create = 'name';
         $this->dao->insert(TABLE_CUSTOMER)
-            ->data($customer, $skip = 'uid, contact, email, qq, phone')
+            ->data($customer, $skip = 'uid,contact,email,qq,phone')
             ->autoCheck()
             ->batchCheck($this->config->customer->require->create, 'notempty')
             ->exec();
@@ -82,25 +88,22 @@ class customerModel extends model
         if(dao::isError()) return false;
         $customerID = $this->dao->lastInsertID();
 
-        $contact = new stdclass();
-        $contact->customer = $customerID;
-        $contact->realname = $customer->contact;
-        $contact->phone    = $customer->phone;
-        $contact->email    = $customer->email;
-        $contact->qq       = $customer->qq;
+        if(isset($customer->contact))
+        {
+            $contact = new stdclass();
+            $contact->customer    = $customerID;
+            $contact->realname    = $customer->contact;
+            $contact->phone       = $customer->phone;
+            $contact->email       = $customer->email;
+            $contact->qq          = $customer->qq;
+            $contact->createdBy   = $this->app->user->account;
+            $contact->createdDate = $now;
 
-        $this->dao->insert(TABLE_CONTACT)->data($contact)->autoCheck()->exec();
+            $contactID = $this->loadModel('contact')->create($contact);
 
-        if(dao::isError()) return false;
-
-        $contactID = $this->dao->lastInsertID();
-
-        $resume = new stdclass();
-        $resume->contact  = $contactID;
-        $resume->customer = $customerID;
-        $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
-
-        $this->loadModel('action')->create('contact', $contactID, 'Created');
+            if(dao::isError()) return false;
+            $this->loadModel('action')->create('contact', $contactID, 'Created');
+        }
 
         return $customerID;
     }
@@ -110,7 +113,7 @@ class customerModel extends model
      * 
      * @param  int    $customerID 
      * @access public
-     * @return bool
+     * @return array
      */
     public function update($customerID)
     {
@@ -123,6 +126,7 @@ class customerModel extends model
         /* Add http:// in head when that has not http:// or https://. */
         if(strpos($customer->site, '://') === false )  $customer->site  = 'http://' . $customer->site;
         if(strpos($customer->weibo, 'http://weibo.com/') === false ) $customer->weibo = 'http://weibo.com/' . $customer->weibo;
+        if($customer->weibo == 'http://weibo.com/') $customer->weibo = '';
 
         $this->dao->update(TABLE_CUSTOMER)
             ->data($customer)
@@ -148,12 +152,14 @@ class customerModel extends model
         $this->loadModel('contact');
         if($this->post->newContact)
         {
-            unset($_POST['newContact']);
-            unset($_POST['contact']);
-            $_POST['customer']    = $customerID;
-            $_POST['createdDate'] = helper::now();
+            $contact = fix::input('post')
+                ->add('customer', $customerID)
+                ->add('createdBy', $this->app->user->account)
+                ->add('createdDate', helper::now())
+                ->remove('newContact,contact')
+                ->get();
 
-            $contactID = $this->contact->create();
+            $contactID = $this->contact->create($contact);
 
             if($contactID) $this->action->create('contact', $contactID, 'Created');
             return $contactID;
@@ -166,9 +172,10 @@ class customerModel extends model
 
             if($contact->customer != $customerID)
             {
-                $_POST = array();
-                $_POST['customer'] = $customerID;
-                $resumeID = $this->loadModel('resume')->create($contactID);
+                $resume = new stdclass();
+                $resume->customer = $customerID;
+                $resume->contact  = $contactID;
+                $resumeID = $this->loadModel('resume')->create($contactID, $resume);
 
                 if($resumeID)
                 {
@@ -176,8 +183,11 @@ class customerModel extends model
                     $actionID  = $this->action->create('contact', $contactID, 'Edited');
                     $this->action->logHistory($actionID, $changes);
                 }
+
                 return $resumeID;
             }
         }
+
+        return false;
     }
 }

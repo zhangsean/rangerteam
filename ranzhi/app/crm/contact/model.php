@@ -66,33 +66,37 @@ class contactModel extends model
     /**
      * Create a contact.
      * 
+     * @param  object $contact   //create with the data of contact.
      * @access public
-     * @return int
+     * @return void
      */
-    public function create()
+    public function create($contact = null)
     {
-        $contact = fixer::input('post')
-            ->setDefault('birthday', '0000-00-00')
-            ->add('createdBy', $this->app->user->account)
-            ->remove('newCustomer,type,size,status,level')
-            ->get();
-
-        if($this->post->newCustomer)
+        if(empty($contact))
         {
-            $customer = new stdclass();
-            $customer->name        = $contact->realname;
-            $customer->type        = $this->post->type;
-            $customer->size        = $this->post->size;
-            $customer->status      = $this->post->status;
-            $customer->level       = $this->post->level;
-            $customer->desc        = $contact->desc;
-            $customer->createdBy   = $this->app->user->account;
-            $customer->createdDate = helper::now();
+            $contact = fixer::input('post')
+                ->add('createdBy', $this->app->user->account)
+                ->remove('newCustomer,type,size,status,level')
+                ->get();
 
-            $this->dao->insert(TABLE_CUSTOMER)->data($customer)->autoCheck()->batchCheck('name', 'notempty')->exec();
+            if($this->post->newCustomer)
+            {
+                $customer = new stdclass();
+                $customer->name        = $contact->realname;
+                $customer->type        = $this->post->type;
+                $customer->size        = $this->post->size;
+                $customer->status      = $this->post->status;
+                $customer->level       = $this->post->level;
+                $customer->desc        = $contact->desc;
+                $customer->createdBy   = $this->app->user->account;
+                $customer->createdDate = helper::now();
 
-            if(dao::isError()) return false;
-            $contact->customer = $this->dao->lastInsertID();
+                $customerID = $this->loadModel('customer')->create($customer);
+
+                if(dao::isError()) return false;
+                $contact->customer = $customerID;
+                $this->loadModel('action')->create('customer', $contact->customer, 'Created');
+            }
         }
 
         $this->dao->insert(TABLE_CONTACT)
@@ -139,6 +143,7 @@ class contactModel extends model
 
         if(strpos($contact->site, '://') === false )  $contact->site  = 'http://' . $contact->site;
         if(strpos($contact->weibo, 'http://weibo.com/') === false ) $contact->weibo = 'http://weibo.com/' . $contact->weibo;
+        if($contact->weibo == 'http://weibo.com/') $contact->weibo = '';
 
         $this->dao->update(TABLE_CONTACT)
             ->data($contact)

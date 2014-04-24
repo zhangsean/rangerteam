@@ -7,17 +7,17 @@ $(function()
 
     $('#newContact').change(function()
     {
-        if($(this).attr('checked') == undefined)
+        if($(this).prop('checked'))
         {
             $('#contact').attr('disabled', true);
-            $(this).attr('checked', true);
+            $('#contact').trigger("chosen:updated");
             $('#contactInfo').removeClass('hidden');
         }
         else
         {
-            $(this).removeAttr('checked', true);
-            $('#contact').removeAttr('disabled');
+            $('#contact').attr('disabled', false);
+            $('#contact').trigger("chosen:updated");
             $('#contactInfo').addClass('hidden');
         }
-    })
+    });
 })

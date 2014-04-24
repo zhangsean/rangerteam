@@ -2,18 +2,18 @@ $(function()
 {
     $('#newCustomer').change(function()
     {
-        if($(this).attr('checked') == undefined)
+        if($(this).prop('checked'))
         {
-            $(this).attr('checked', true);
             $('#customer').attr('disabled', true);
             $('#customer').trigger("chosen:updated");
+
             $('.customerInfo').removeClass('hidden');
         }
         else
         {
-            $(this).removeAttr('checked');
-            $('#customer').removeAttr('disabled', true);
+            $('#customer').attr('disabled', false);
             $('#customer').trigger("chosen:updated");
+
             $('.customerInfo').addClass('hidden');
         }
     })

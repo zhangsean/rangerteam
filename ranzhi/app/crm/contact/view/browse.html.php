@@ -14,14 +14,17 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->contact->list;?></strong>
+    <div class='panel-actions pull-right'>
+      <?php echo html::a(inlink('create'), "<i class='icon-plus'>{$lang->contact->create}</i>", "class='btn btn-primary'")?>
+    </div>
   </div>
   <table class='table table-hover table-striped table-bordered tablesorter table-data'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px'> <?php commonModel::printOrderLink('id',       $orderBy, $vars, $lang->contact->id);?></th>
-        <th><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->contact->customer);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
+        <th><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->contact->customer);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->contact->gender);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('phone',    $orderBy, $vars, $lang->contact->phone);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('mobile',   $orderBy, $vars, $lang->contact->mobile);?></th>
@@ -36,7 +39,7 @@
     <tr class='text-center'>
       <td><?php echo $contact->id;?></td>
       <td><?php echo html::a(inlink('view', "contactID=$contact->id"), $contact->realname);?></td>
-      <td><?php echo $customers[$contact->customer];?></td>
+      <td><?php echo html::a($this->createLink('customer', 'view', "customerID=$contact->customer"), $customers[$contact->customer]);?></td>
       <td><?php echo isset($lang->contact->genderList[$contact->gender]) ? $lang->contact->genderList[$contact->gender] : '';?></td>
       <td><?php echo $contact->phone;?></td>
       <td><?php echo $contact->mobile;?></td>

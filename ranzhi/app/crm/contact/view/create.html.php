@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->contact->create;?></strong>
@@ -27,7 +28,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->contact->customer;?></th>
-              <td><?php echo html::select('customer', $customers, !empty($customer) ? $customer : '', "class='form-control select-customer'");?></td>
+              <td><?php echo html::select('customer', $customers, !empty($customer) ? $customer : '', "class='form-control chosen'");?></td>
               <td>
                 <input type='checkbox' name='newCustomer' id='newCustomer' value='1' />
                 <label for='newCustomer'><?php echo $lang->contact->newCustomer?></label>

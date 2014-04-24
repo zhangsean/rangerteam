@@ -7,6 +7,7 @@ $(document).ready(function()
         if($(this).prop('checked'))
         {
             $('#customer').attr('disabled', true);
+            $('#customer').trigger("chosen:updated");
 
             var label = $(this).next('label');
             label.popover({trigger:'manual', content:v.autoCustomer, placement:'right'}).popover('show');
@@ -19,6 +20,8 @@ $(document).ready(function()
         else
         {
             $('#customer').attr('disabled', false);
+            $('#customer').trigger("chosen:updated");
+
             $('.customerInfo').addClass('hidden');
         }
     })
