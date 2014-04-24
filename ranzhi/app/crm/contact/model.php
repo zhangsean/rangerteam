@@ -32,14 +32,14 @@ class contactModel extends model
      * @access public
      * @return array
      */
-    public function getList($customer = 0, $orderBy = 'id_desc', $pager = null)
+    public function getList($customer = 0, $orderBy = 'maker_desc', $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_CONTACT)
-            ->where('deleted')->eq(0)
-            ->beginIF($customer)->andWhere('customer')->eq($customer)->fi()
+        return $this->dao->select('t1.*,t2.title,t2.contact,t2.dept,t2.address,t2.join,t2.left')->from(TABLE_CONTACT)->alias('t1')
+            ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.id = t2.contact')
+            ->where('t1.deleted')->eq(0)
+            ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->FI()
             ->orderBy($orderBy)
-            ->page($pager)
-            ->fetchAll('id');
+            ->fetchAll('contact');
     }
 
     /**

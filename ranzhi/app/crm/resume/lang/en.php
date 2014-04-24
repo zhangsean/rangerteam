@@ -21,3 +21,4 @@ $lang->resume->title    = 'Post';
 $lang->resume->address  = 'Address';
 $lang->resume->join     = 'Join date';
 $lang->resume->left     = 'Left date';
+$lang->resume->time     = 'Time';

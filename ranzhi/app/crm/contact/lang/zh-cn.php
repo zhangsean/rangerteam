@@ -47,12 +47,12 @@ $lang->contact->create  = '添加联系人';
 $lang->contact->list    = '联系人列表';
 $lang->contact->edit    = '编辑联系人';
 $lang->contact->view    = '联系人详情';
-$lang->contact->resume  = '公司';
+$lang->contact->resume  = '履历';
 $lang->contact->address = '地址';
 $lang->contact->record  = '沟通';
 
 $lang->contact->basicInfo   = '基本信息';
-$lang->contact->contactInfo = '联系信息';
+$lang->contact->contactInfo = '联系方式';
 
 $lang->contact->failedAvatar = '头像上传失败';
 $lang->contact->autoCustomer = '自动以联系人相关信息创建客户';
