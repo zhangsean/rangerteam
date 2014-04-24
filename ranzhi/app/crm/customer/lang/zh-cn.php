@@ -42,7 +42,6 @@ $lang->customer->contract    = '合同';
 $lang->customer->address     = '地址';
 $lang->customer->linkContact = '添加联系人';
 $lang->customer->basic       = '基本信息';
-$lang->customer->history     = '历史记录';
 
 $lang->customer->typeList['']           = '';
 $lang->customer->typeList['national']   = '国企';

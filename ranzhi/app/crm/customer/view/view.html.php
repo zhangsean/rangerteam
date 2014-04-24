@@ -10,7 +10,11 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../common/view/header.html.php';?>
+<?php
+include '../../common/view/header.html.php';
+$objectType = 'customer';
+$objectID   = $customer->id;
+?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->view;?></strong></div>
   <div class='panel-body'>
@@ -20,7 +24,7 @@
       <li><a href="#contract" data-toggle="tab"><?php echo $lang->customer->contract;?></a></li>
       <li><a href="#order" data-toggle="tab"><?php echo $lang->customer->order;?></a></li>
       <li><a href="#address" data-toggle="tab"><?php echo $lang->customer->address;?></a></li>
-      <li><a href="#history" data-toggle="tab"><?php echo $lang->customer->history;?></a></li>
+      <li><a href="#history" data-toggle="tab"><?php echo $lang->history;?></a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane fade active in" id="basic">
