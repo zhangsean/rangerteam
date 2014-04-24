@@ -160,7 +160,6 @@ class customerModel extends model
 
             if($contact->customer != $customerID)
             {
-
                 $_POST = array();
                 $_POST['customer'] = $customerID;
                 $resumeID = $this->loadModel('resume')->create($contactID);

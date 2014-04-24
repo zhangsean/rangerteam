@@ -85,7 +85,7 @@
               <th></th>
               <td><?php echo html::submitButton() . html::backButton();?></td>
             </tr>
-            </table>
+          </table>
         </div>
       </div>
     </form>

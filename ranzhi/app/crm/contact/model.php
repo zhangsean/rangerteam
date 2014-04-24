@@ -88,6 +88,7 @@ class contactModel extends model
             $customer->desc        = $contact->desc;
             $customer->createdBy   = $this->app->user->account;
             $customer->createdDate = helper::now();
+
             $this->dao->insert(TABLE_CUSTOMER)->data($customer)->autoCheck()->batchCheck('name', 'notempty')->exec();
 
             if(dao::isError()) return false;
@@ -137,7 +138,7 @@ class contactModel extends model
             ->get();
 
         if(strpos($contact->site, '://') === false )  $contact->site  = 'http://' . $contact->site;
-        if(strpos($contact->weibo, 'http://weibo.com/') === false ) $contact->weibo = 'http://weibo.com' . $contact->weibo;
+        if(strpos($contact->weibo, 'http://weibo.com/') === false ) $contact->weibo = 'http://weibo.com/' . $contact->weibo;
 
         $this->dao->update(TABLE_CONTACT)
             ->data($contact)

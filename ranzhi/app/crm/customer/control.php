@@ -181,7 +181,6 @@ class customer extends control
         $this->view->contacts   = $this->loadModel('contact')->getPairs();
         $this->view->customerID = $customerID;
         $this->display();
-
     }
 
     /**

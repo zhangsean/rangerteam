@@ -26,9 +26,11 @@ class action extends control
     }
 
     /**
-     * Create one record of an order.
+     * Create one record of an object.
      * 
-     * @param  int    $orderID 
+     * @param  string    $objectType  order|contact|customer
+     * @param  int       $objectID 
+     * @param  int       $customer 
      * @access public
      * @return void
      */
@@ -50,7 +52,7 @@ class action extends control
     }
 
    /**
-     * Edit one record of an order.
+     * Edit one record of an object.
      * 
      * @param  int    $recordID
      * @access public

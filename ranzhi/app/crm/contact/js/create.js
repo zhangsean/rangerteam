@@ -3,10 +3,10 @@ $(document).ready(function()
     /* Show notice when auto create customer. */
     $('#newCustomer').change(function()
     {
-        if($(this).attr('checked') == undefined)
+        $(this).next('label').popover('destroy');
+        if($(this).prop('checked'))
         {
             $('#customer').attr('disabled', true);
-            $(this).attr('checked', true);
 
             var label = $(this).next('label');
             label.popover({trigger:'manual', content:v.autoCustomer, placement:'right'}).popover('show');
@@ -18,8 +18,7 @@ $(document).ready(function()
         }
         else
         {
-            $(this).removeAttr('checked');
-            $('#customer').removeAttr('disabled');
+            $('#customer').attr('disabled', false);
             $('.customerInfo').addClass('hidden');
         }
     })

@@ -10,7 +10,12 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../common/view/header.html.php';?>
+<?php
+$objectType = 'order';
+$objectID   = $order->id;
+$customer   = $order->customer;
+include '../../common/view/header.html.php';
+?>
 <div class='col-lg-6'>
   <div class='panel'>
     <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->view;?></strong></div>
