@@ -12,14 +12,14 @@
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
 <form method='post' enctype='multipart/form-data' id='ajaxForm' action='<?php echo $this->createLink('file', 'edit', "fileID=$file->id")?>'>
-  <table class='table table-form'>
+  <table class='table table-form table-data'>
     <tr>
-      <th class='w-100px'><?php echo $lang->file->title;?></th> 
-      <td><?php echo html::input('title',$file->title, "class='text-1'");?></td>
+      <th class='w-80px'><?php echo $lang->file->title;?></th> 
+      <td><?php echo html::input('title', $file->title, "class='form-control'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->file->editFile;?></th>
-      <td><?php echo html::file('upFile');?></td>
+      <td><?php echo html::file('upFile', "class='form-control'");?></td>
     </tr>
     <tr>
       <th></th>
