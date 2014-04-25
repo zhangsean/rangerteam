@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 $config->product->require = new stdclass();
-$config->product->require->create = 'name, code';
-$config->product->require->edit   = 'name, code';
+$config->product->require->create = 'name';
+$config->product->require->edit   = 'name';
 
 $config->product->action = new stdclass();
