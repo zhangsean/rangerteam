@@ -19,16 +19,24 @@
       <td><?php echo html::input('dept', $resume->dept, "class='form-control'")?></td>
     </tr>
     <tr>
+      <th><?php echo $lang->resume->maker?></th>
+      <td>
+        <?php $checked = $resume->maker ? "checked='checked'" : '';?>
+        <input type='checkbox' name='maker' id='maker' value='1' <?php echo $checked?>/>
+        <label for='maker'><?php echo $lang->resume->maker?></label>
+      </td>
+    </tr>
+    <tr>
       <th><?php echo $lang->resume->title;?></th>
       <td><?php echo html::input('title', $resume->title, "class='form-control'")?></td>
     </tr>
     <tr>
       <th><?php echo $lang->resume->join;?></th>
-      <td><?php echo html::input('join', $resume->join == '0000-00-00' ? '' : $resume->join, "class='form-control form-date'")?></td>
+      <td><?php echo html::input('join', $resume->join, "class='form-control'")?></td>
     </tr>
     <tr>
       <th><?php echo $lang->resume->left;?></th>
-      <td><?php echo html::input('left', $resume->left == '0000-00-00' ? '' : $resume->left, "class='form-control form-date'")?></td>
+      <td><?php echo html::input('left', $resume->left, "class='form-control'")?></td>
     </tr>
     <tr>
       <th></th>

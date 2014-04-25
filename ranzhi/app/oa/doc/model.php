@@ -195,9 +195,9 @@ class docModel extends model
             ->setDefault('module', 0)
             ->specialChars('title, digest, keywords')
             ->encodeURL('url')
-            ->remove('comment,files,labels,uid')
             ->add('editedBy',   $this->app->user->account)
             ->add('editedDate', helper::now())
+            ->remove('comment,files,labels,uid')
             ->get();
 
         $uniqueCondition = "lib = '$doc->lib' AND module = $doc->module AND id != $docID";

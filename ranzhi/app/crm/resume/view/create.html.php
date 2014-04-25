@@ -17,7 +17,7 @@
   <table class='table table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->resume->customer;?></th>
-      <td><?php echo html::select('customer', $customers, $contact->customer, "class='form-control chosen'")?></td>
+      <td><?php echo html::select('customer', $customers, '', "class='form-control chosen'")?></td>
       <td>
         <input type='checkbox' id='newCustomer' name='newCustomer' value='1' />
         <label for='newCustomer'><?php echo $lang->contact->newCustomer?></label>
@@ -44,6 +44,10 @@
       <td><?php echo html::select('level', $lang->customer->levelList, '', "class='form-control'");?></td>
     </tr>
     <tr>
+      <th><?php echo $lang->resume->maker?></th>
+      <td><input type='checkbox' name='maker' id='maker' value='1' /></td>
+    </tr>
+    <tr>
       <th><?php echo $lang->resume->dept;?></th>
       <td><?php echo html::input('dept', '', "class='form-control'")?></td>
     </tr>
@@ -53,11 +57,11 @@
     </tr>
     <tr>
       <th><?php echo $lang->resume->join;?></th>
-      <td><?php echo html::input('join', '', "class='form-control form-date'")?></td>
+      <td><?php echo html::input('join', '', "class='form-control'")?></td>
     </tr>
     <tr>
       <th><?php echo $lang->resume->left;?></th>
-      <td><?php echo html::input('left', '', "class='form-control form-date'")?></td>
+      <td><?php echo html::input('left', '', "class='form-control'")?></td>
     </tr>
     <tr>
       <th></th>

@@ -173,9 +173,6 @@ class contractModel extends model
             }
             $this->loadModel('file')->saveUpload('contract', $contractID);
 
-            unset($data->real);
-            $data->order     = join(',', $data->order);
-            $contract->order = join(',', $contract->order);
             return commonModel::createChanges($contract, $data);
         }
 

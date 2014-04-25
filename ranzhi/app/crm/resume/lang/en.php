@@ -9,13 +9,14 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->resume->common = 'Company';
-$lang->resume->change = 'Change company';
+$lang->resume->common = 'Resume';
+$lang->resume->create = 'Change Resume';
 $lang->resume->edit   = 'Edit company info';
 
 $lang->resume->id       = 'ID';
 $lang->resume->contact  = 'Contact';
 $lang->resume->customer = 'Customer';
+$lang->resume->maker    = 'Maker';
 $lang->resume->dept     = 'Dept';
 $lang->resume->title    = 'Post';
 $lang->resume->address  = 'Address';

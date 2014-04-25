@@ -20,7 +20,13 @@ class contactModel extends model
      */
     public function getByID($id)
     {
-        return $this->dao->select('*')->from(TABLE_CONTACT)->where('id')->eq($id)->limit(1)->fetch();
+        return $this->dao->select('t1.*, t2.customer, t2.maker, t2.join, t2.dept, t2.title, t2.id as resumeID')->from(TABLE_CONTACT)->alias('t1')
+            ->leftJoin(TABLE_RESUME)->alias('t2')->on("t1.id = t2.contact")
+            ->where('t1.id')->eq($id)
+            ->andWhere('t2.left')->eq('')
+            ->orderBy('resumeID desc')
+            ->limit(1)
+            ->fetch();
     }
 
     /** 
@@ -34,12 +40,14 @@ class contactModel extends model
      */
     public function getList($customer = 0, $orderBy = 'maker_desc', $pager = null)
     {
-        return $this->dao->select('t1.*,t2.title,t2.contact,t2.dept,t2.address,t2.join,t2.left')->from(TABLE_CONTACT)->alias('t1')
+        return $this->dao->select('t1.*, t2.id as resumeID, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.id = t2.contact')
             ->where('t1.deleted')->eq(0)
-            ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->FI()
+            ->andWhere('t2.left')->eq('')
+            ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->fi()
             ->orderBy($orderBy)
-            ->fetchAll('contact');
+            ->page($pager)
+            ->fetchAll('id');
     }
 
     /**
@@ -76,13 +84,13 @@ class contactModel extends model
         {
             $contact = fixer::input('post')
                 ->add('createdBy', $this->app->user->account)
-                ->remove('newCustomer,type,size,status,level')
+                ->remove('newCustomer,type,size,status,level,name,files')
                 ->get();
 
             if($this->post->newCustomer)
             {
                 $customer = new stdclass();
-                $customer->name        = $contact->realname;
+                $customer->name        = $this->post->name ? $this->post->name : $contact->realname;
                 $customer->type        = $this->post->type;
                 $customer->size        = $this->post->size;
                 $customer->status      = $this->post->status;
@@ -95,12 +103,12 @@ class contactModel extends model
 
                 if(dao::isError()) return false;
                 $contact->customer = $customerID;
-                $this->loadModel('action')->create('customer', $contact->customer, 'Created');
+                $this->loadModel('action')->create('customer', $customerID, 'Created');
             }
         }
 
         $this->dao->insert(TABLE_CONTACT)
-            ->data($contact, 'files')
+            ->data($contact, 'customer,title,dept,maker,join')
             ->autoCheck()
             ->batchCheck($this->config->contact->require->create, 'notempty')
             ->checkIF($contact->email, 'email', 'email')
@@ -113,6 +121,10 @@ class contactModel extends model
             $resume = new stdclass();
             $resume->contact  = $contactID;
             $resume->customer = $contact->customer;
+            $resume->maker    = isset($contact->maker) ? $contact->maker : 0;
+            $resume->dept     = $contact->dept;
+            $resume->title    = $contact->title;
+            $resume->join     = $contact->join;
             $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
 
             return $contactID;
@@ -136,17 +148,17 @@ class contactModel extends model
         $contact = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', $now)
-            ->setDefault('maker', 0)
             ->setIF($this->post->avatar == '', 'avatar', $oldContact->avatar)
+            ->setIF($this->post->weibo == 'http://weibo.com/', 'weibo', '')
+            ->setIF($this->post->site == 'http://', 'site', '')
             ->remove('files')
             ->get();
 
-        if(strpos($contact->site, '://') === false )  $contact->site  = 'http://' . $contact->site;
-        if(strpos($contact->weibo, 'http://weibo.com/') === false ) $contact->weibo = 'http://weibo.com/' . $contact->weibo;
-        if($contact->weibo == 'http://weibo.com/') $contact->weibo = '';
+        if($contact->site and strpos($contact->site, '://') === false )  $contact->site  = 'http://' . $contact->site;
+        if($contact->weibo and strpos($contact->weibo, 'http://weibo.com/') === false ) $contact->weibo = 'http://weibo.com/' . $contact->weibo;
 
         $this->dao->update(TABLE_CONTACT)
-            ->data($contact)
+            ->data($contact, 'customer,dept,maker,title,join')
             ->autoCheck()
             ->batchCheck($this->config->contact->require->edit, 'notempty')
             ->checkIF($contact->email, 'email', 'email')
@@ -155,13 +167,21 @@ class contactModel extends model
 
         if(!dao::isError())
         {
+            $resume = new stdclass();
+            $resume->contact  = $contactID;
+            $resume->customer = $contact->customer;
+            $resume->dept     = $contact->dept;
+            $resume->maker    = isset($contact->maker) ? $contact->maker : 0;
+            $resume->title    = $contact->title;
+            $resume->join     = $contact->join;
+
             if($oldContact->customer != $contact->customer)
             {
-                $resume = new stdclass();
-                $resume->contact  = $contactID;
-                $resume->customer = $contact->customer;
-
                 $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
+            }
+            else
+            {
+                $this->dao->update(TABLE_RESUME)->data($resume)->where('id')->eq($oldContact->resumeID)->exec();
             }
 
             return commonModel::createChanges($oldContact, $contact);

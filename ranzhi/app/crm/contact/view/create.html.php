@@ -34,9 +34,29 @@
                 <label for='newCustomer'><?php echo $lang->contact->newCustomer?></label>
               </td>
             </tr>
+            <tr class='customerInfo hidden'>
+              <th><?php echo $lang->contact->customerName;?></th>
+              <td><?php echo html::input('name', '', "class='form-control'");?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->resume->maker?></th>
+              <td><input type='checkbox' name='maker' id='maker' value='1' /></td>
+            </tr>
             <tr>
               <th><?php echo $lang->contact->gender;?></th>
               <td><?php echo html::radio('gender', $lang->contact->genderList, '');?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->resume->dept;?></th>
+              <td><?php echo html::input('dept', '', "class='form-control'");?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->resume->title;?></th>
+              <td><?php echo html::input('title', '', "class='form-control'");?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->resume->join;?></th>
+              <td><?php echo html::input('join', '', "class='form-control'");?></td>
             </tr>
             <tr>
               <th><?php echo $lang->contact->email;?></th>
@@ -71,10 +91,6 @@
               <td><?php echo html::select('level', $lang->customer->levelList, '', "class='form-control'");?></td>
             </tr>
             <tr>
-              <th><?php echo $lang->contact->maker?></th>
-              <td><input type='checkbox' name='maker' id='maker' value='1' /></td>
-            </tr>
-            <tr>
               <th><?php echo $lang->contact->createdDate;?></th>
               <td><?php echo html::input('createdDate', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></td>
             </tr>
@@ -92,5 +108,4 @@
     </form>
   </div>
 </div>
-<?php js::set('autoCustomer', $lang->contact->autoCustomer);?>
 <?php include '../../common/view/footer.html.php';?>

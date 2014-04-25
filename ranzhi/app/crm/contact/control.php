@@ -67,6 +67,8 @@ class contact extends control
             $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('browse'), 'contactID' => $contactID));
         }
 
+        $this->app->loadLang('resume');
+
         $this->view->title     = $this->lang->contact->create;
         $this->view->customer  = $customer;
         $this->view->customers = $this->loadModel('customer')->getPairs();
@@ -98,6 +100,8 @@ class contact extends control
             $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
             $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('browse')));
         }
+
+        $this->app->loadLang('resume');
 
         $this->view->title     = $this->lang->contact->edit;
         $this->view->customers = $this->loadModel('customer')->getPairs();

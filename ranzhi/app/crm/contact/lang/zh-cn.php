@@ -12,7 +12,7 @@
 if(!isset($lang->contact)) $lang->contact = new stdclass();
 $lang->contact->id            = '编号';
 $lang->contact->customer      = '所属客户';
-$lang->contact->maker         = '决策人';
+$lang->contact->customerName  = '客户名称';
 $lang->contact->realname      = '真实姓名';
 $lang->contact->nickname      = '昵称';
 $lang->contact->avatar        = '头像';
@@ -55,4 +55,3 @@ $lang->contact->basicInfo   = '基本信息';
 $lang->contact->contactInfo = '联系方式';
 
 $lang->contact->failedAvatar = '头像上传失败';
-$lang->contact->autoCustomer = '自动以联系人相关信息创建客户';

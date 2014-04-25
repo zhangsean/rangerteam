@@ -651,8 +651,11 @@ class commonModel extends model
             if(strtolower($key) == 'editeddate')     continue;
 
             if($magicQuote) $value = stripslashes($value);
-            if($value != stripslashes($old->$key))
+            if(isset($old->$key) and $value != stripslashes($old->$key))
             {
+                if(is_array($value)) $value = join(',', $value);
+                if(is_array($old->$key)) $old->$key = join(',', $old->$key);
+
                 $diff = '';
                 if(substr_count($value, "\n") > 1     or
                    substr_count($old->$key, "\n") > 1 or

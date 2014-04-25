@@ -12,8 +12,8 @@
 if(!isset($lang->contact)) $lang->contact = new stdclass();
 $lang->contact->id            = 'ID';
 $lang->contact->customer      = 'Customer';
-$lang->contact->maker         = 'Decision Maker';
-$lang->contact->realname      = 'Name';
+$lang->contact->customerName  = 'Customer Name';
+$lang->contact->realname      = 'Real Name';
 $lang->contact->nickname      = 'Nickname';
 $lang->contact->avatar        = 'Avatar';
 $lang->contact->birthday      = 'Birthday';
@@ -55,4 +55,3 @@ $lang->contact->basicInfo   = 'Basic Info';
 $lang->contact->contactInfo = 'Contact Info';
 
 $lang->contact->failedAvatar = 'Avatar upload failed';
-$lang->contact->autoCustomer = 'Automatically create a customer with related Information of contact.';

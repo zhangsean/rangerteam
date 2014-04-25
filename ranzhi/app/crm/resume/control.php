@@ -40,25 +40,18 @@ class resume extends control
      */
     public function create($contactID)
     {
-        $contact = $this->loadModel('contact')->getByID($contactID);
         if($_POST)
         {
-            /* When customer is not change then goto update. */
-            if(!$this->post->newCustomer and $contact->customer and $this->post->customer == $contact->customer)
-            {
-                $resumeID = $this->dao->select('id')->from(TABLE_RESUME)->where('contact')->eq($contactID)->andWhere('customer')->eq($contact->customer)->orderBy('id_desc')->limit(1)->fetch('id');
-                if($resumeID) return $this->edit($resumeID);
-            }
-
             $this->resume->create($contactID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->loadModel('action')->create('contact', $contactID, "changeResume");
+            $this->loadModel('action')->create('contact', $contactID, "createResume");
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
-        $this->view->title     = $this->lang->resume->change;
+        $this->app->loadLang('contact');
+
+        $this->view->title     = $this->lang->resume->create;
         $this->view->customers = $this->loadModel('customer')->getPairs();
-        $this->view->contact   = $contact;
         $this->view->contactID = $contactID;
         $this->display();
     }

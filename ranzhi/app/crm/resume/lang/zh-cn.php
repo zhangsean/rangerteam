@@ -10,12 +10,13 @@
  * @link        http://www.ranzhi.org
  */
 $lang->resume->common = '履历';
-$lang->resume->change = '修改所属公司';
+$lang->resume->create = '新增履历';
 $lang->resume->edit   = '修改公司信息';
 
 $lang->resume->id       = '编号';
 $lang->resume->contact  = '联系人';
 $lang->resume->customer = '公司';
+$lang->resume->maker    = '决策人';
 $lang->resume->dept     = '部门';
 $lang->resume->title    = '职位';
 $lang->resume->address  = '公司地址';

@@ -78,11 +78,7 @@ class resumeModel extends model
             ->batchCheck($this->config->resume->require->create, 'notempty')
             ->exec();
 
-        if(!dao::isError())
-        {
-            $this->dao->update(TABLE_CONTACT)->set('customer')->eq($resume->customer)->where('id')->eq($contactID)->exec();
-            return $this->dao->lastInsertID();
-        }
+        if(!dao::isError()) return $this->dao->lastInsertID();
 
         return false;
     }

@@ -30,6 +30,18 @@
           </td>
         </tr>
         <tr>
+          <th><?php echo $lang->resume->dept;?></th>
+          <td><?php echo  $contact->dept;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->resume->title;?></th>
+          <td><?php echo  $contact->title;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->resume->join;?></th>
+          <td><?php echo  $contact->join;?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->contact->birthday;?></th>
           <td><?php echo $contact->birthday;?></td>
         </tr>
@@ -45,18 +57,14 @@
           <th><?php echo $lang->contact->desc;?></th>
           <td><?php echo $contact->desc;?></td>
         </tr>
-        <tr>
-          <th><?php echo $lang->contact->site;?></th>
-          <td><?php if($contact->site and $contact->site != 'http://') echo html::a($contact->site, $contact->site, "target='blank'");?></td>
-        </tr>
       </table>
-      <div class='action text-center'>
-        <?php
-        echo html::a(inlink('edit', "contactID=$contact->id"), $lang->edit, "class='btn'");
-        echo html::a(inlink('delete', "contactID=$contact->id"), $lang->delete, "class='deleter btn'");
-        echo html::a(inlink('browse'), $lang->goback, "class='btn'");
-        ?>
-      </div>
+    </div>
+    <div class='panel-footer'>
+      <?php
+      echo html::a(inlink('edit', "contactID=$contact->id"), $lang->edit, "class='btn'");
+      echo html::a(inlink('delete', "contactID=$contact->id"), $lang->delete, "class='deleter btn'");
+      echo html::a(inlink('browse'), $lang->goback, "class='btn'");
+      ?>
     </div>
   </div>
   <?php echo $this->fetch('action', 'history', "objectType=contact&objectID={$contact->id}&customer=0")?>
