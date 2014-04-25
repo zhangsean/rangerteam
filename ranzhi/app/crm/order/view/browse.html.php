@@ -21,8 +21,8 @@
       <tr>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px text-center' ><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->order->customer);?></th>
         <th class='w-40px'><?php echo $lang->customer->level;?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->order->customer);?></th>
         <th><?php commonModel::printOrderLink('product', $orderBy, $vars, $lang->order->product);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('plan', $orderBy, $vars, $lang->order->plan);?>
         <th class='w-120px'><?php commonModel::printOrderLink('assignedTo', $orderBy, $vars, $lang->order->assignedTo);?></th>
@@ -36,8 +36,8 @@
       <?php foreach($orders as $order):?>
       <tr data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id"); ?>'>
         <td class='text-center'><?php echo $order->id;?></td>
-        <td><?php echo $customers[$order->customer]->name;?></td>
         <td class='text-center'><?php echo $lang->customer->levelList[$customers[$order->customer]->level];?></td>
+        <td><?php echo $customers[$order->customer]->name;?></td>
         <td><?php echo $products[$order->product];?></td>
         <td><?php echo $order->plan;?></td>
         <td><?php echo $users[$order->assignedTo];?></td>

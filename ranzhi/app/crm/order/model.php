@@ -44,16 +44,9 @@ class orderModel extends model
             ->beginIF($customerID)->andWhere('customer')->eq($customerID)->fi()
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
-        $contacts = $this->dao->select('t1.id, t2.customer, t2.id AS contact')
-            ->from(TABLE_CONTACT)->alias('t2')
-            ->leftJoin(TABLE_CUSTOMER)->alias('t1')->on('t1.id = t2.customer')
-            ->fetchGroup('customer', 'contact');
-
         $contracts = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->fetchPairs('order', 'contract');
         $customers = $this->loadModel('customer')->getPairs();
         $products  = $this->loadModel('product')->getPairs();
-
-        foreach($orders as $order) $order->contact = !empty($contacts[$order->customer]) ? $contacts[$order->customer] : '';
 
         foreach($orders as $order) $order->contract = !empty($contracts[$order->id]) ? $contracts[$order->id] : '';
 
@@ -93,7 +86,7 @@ class orderModel extends model
         $orderPairs = array();
         foreach($orders as $key => $order)
         {
-           $orderPairs[$key] = sprintf($this->lang->order->titleLBL, $order->id, $customers[$order->customer], $products[$order->product], substr($order->createdDate, 0, 10)); 
+           $orderPairs[$key] = sprintf($this->lang->order->titleLBL, $customers[$order->customer], $products[$order->product], $order->real);
         }
 
         return $orderPairs;
@@ -117,7 +110,7 @@ class orderModel extends model
 
         foreach($orders as $order)
         {
-           $order->title = sprintf($this->lang->order->titleLBL, $order->id, $customers[$order->customer], $products[$order->product], substr($order->createdDate, 0, 10)); 
+           $order->title = sprintf($this->lang->order->titleLBL, $customers[$order->customer], $products[$order->product], $order->plan); 
         }
 
         return array('0' => '') + $orders;

@@ -31,13 +31,7 @@
           <td>
             <ul>
               <?php foreach($orders as $order):?>
-              <li>
-                <?php
-                echo $lang->order->id . " : " . $order->id . $lang->minus;
-                echo $lang->order->product . " : " . $products[$order->product] . " [$order->createdDate] " . $lang->minus;
-                echo $lang->order->real . " : " . $order->real;
-                ?>
-              </li>
+              <li><?php echo $products[$order->product] . $lang->minus .  $lang->order->real . " : " . $order->real; ?></li>
               <?php endforeach;?>
             </ul>
           </td>
