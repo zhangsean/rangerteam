@@ -17,12 +17,12 @@
   </caption>
   <thead>
     <tr class='text-center'>
-      <th class='w-60px'><?php echo $lang->customer->id;?></th>
-      <th><?php echo $lang->customer->contact;?></th>
-      <th><?php echo $lang->customer->phone;?></th>
-      <th><?php echo $lang->customer->email;?></th>
-      <th><?php echo $lang->customer->qq;?></th>
-      <th><?php echo $lang->actions;?></th>
+      <th class='w-60px'><?php echo $lang->contact->id;?></th>
+      <th><?php echo $lang->contact->realname;?></th>
+      <th><?php echo $lang->contact->qq;?></th>
+      <th><?php echo $lang->contact->phone;?></th>
+      <th><?php echo $lang->contact->email;?></th>
+      <th><?php echo $lang->contact->qq;?></th>
     </tr>
   </thead>
   <tbody>
@@ -33,12 +33,6 @@
       <td><?php echo $contact->phone;?></td>
       <td><?php echo $contact->email;?></td>
       <td><?php echo $contact->qq;?></td>
-      <td>
-        <?php
-        echo html::a($this->createLink('contact', 'view', "contactID={$contact->id}"), $lang->view);
-        echo html::a($this->createLink('contact', 'edit', "contactID={$contact->id}"), $lang->edit);
-        ?>
-      </td>
     </tr>
     <?php endforeach;?>
   </tbody>
