@@ -28,10 +28,12 @@
           <th><?php echo $lang->product->status;?></th>
           <td><?php echo html::select('status', $lang->product->statusList, $product->status, "class='form-control'");?></td>
         </tr>
+        <!--
         <tr>
           <th><?php echo $lang->product->desc;?></th>
           <td colspan='2'><?php echo html::textarea('desc', $product->desc, "rows='2' class='form-control'");?></td>
         </tr>
+        -->
         <tr>
           <th></th>
           <td><?php echo html::submitButton();?></td>
