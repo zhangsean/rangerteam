@@ -24,27 +24,27 @@ $lang->menu->crm->setting   = '设置|setting|lang|module=product&field=statusLi
 /* Menu of customer module. */
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
-$lang->customer->menu->browse = array('link' => '<i class="icon-group"></i> 客户列表|customer|browse|', 'alias' => 'edit');
+$lang->customer->menu->browse = array('link' => '<i class="icon-group"></i> 客户列表|customer|browse|', 'alias' => 'create,edit,view,record');
 
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse = array('link' => '<i class="icon-th"></i> 产品列表|product|browse|', 'alias' => 'edit');
+$lang->product->menu->browse = array('link' => '<i class="icon-th"></i> 产品列表|product|browse|', 'alias' => 'create,edit');
 
 /* Menu of order module. */
 $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
-$lang->order->menu->browse = array('link' => '<i class="icon-th-list"></i> 订单列表|order|browse|', 'alias' => 'edit, view');
+$lang->order->menu->browse = array('link' => '<i class="icon-th-list"></i> 订单列表|order|browse|', 'alias' => 'create,edit,view,browserecord');
 
 /* Menu of contact module. */
 $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
-$lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> 联系人列表|contact|browse|', 'alias' => 'edit,view,history');
+$lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> 联系人列表|contact|browse|', 'alias' => 'create,edit,view,history');
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
-$lang->contract->menu->browse = array('link' => '<i class="icon-th-list"></i> 合同列表|contract|browse|', 'alias' => 'edit,view');
+$lang->contract->menu->browse = array('link' => '<i class="icon-th-list"></i> 合同列表|contract|browse|', 'alias' => 'create,edit,view');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();
