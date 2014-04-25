@@ -15,7 +15,7 @@ $lang->order->titleLBL = "编号:%s - 客户:%s - 产品:%s [%s]";
 
 $lang->order->id            = '编号';
 $lang->order->name          = '名称';
-$lang->order->product       = '相关产品';
+$lang->order->product       = '产品';
 $lang->order->customer      = '客户';
 $lang->order->contact       = '联系人';
 $lang->order->team          = '团队';
