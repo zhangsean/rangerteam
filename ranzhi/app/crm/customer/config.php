@@ -11,7 +11,7 @@
  */
 $config->customer->require = new stdclass();
 $config->customer->require->create = 'contact';
-$config->customer->require->edit   = 'name, type, status';
+$config->customer->require->edit   = 'name';
 
 $config->customer->editor = new stdclass();
 $config->customer->editor->create = array('id' => 'desc', 'tools' => 'simple');

@@ -24,7 +24,7 @@
         <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->customer->name);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('level',       $orderBy, $vars, $lang->customer->level);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->customer->status);?></th>
-        <th class='w-60px'> <?php commonModel::printOrderLink('size',        $orderBy, $vars, $lang->customer->size);?></th>
+        <th class='w-100px'> <?php commonModel::printOrderLink('size',        $orderBy, $vars, $lang->customer->size);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->customer->type);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('contactDate', $orderBy, $vars, $lang->customer->contactDate);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('nextDate',    $orderBy, $vars, $lang->customer->nextDate);?></th>
