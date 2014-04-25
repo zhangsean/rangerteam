@@ -122,6 +122,8 @@ class customer extends control
      */
     public function view($customerID)
     {
+        $this->app->loadLang('resume');
+
         $this->view->title     = $this->lang->customer->view;
         $this->view->customer  = $this->customer->getByID($customerID);
         $this->view->orders    = $this->loadModel('order')->getList($customerID);
