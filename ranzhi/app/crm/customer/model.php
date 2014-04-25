@@ -129,7 +129,7 @@ class customerModel extends model
         if($customer->weibo == 'http://weibo.com/') $customer->weibo = '';
 
         $this->dao->update(TABLE_CUSTOMER)
-            ->data($customer)
+            ->data($customer, $skip = 'uid')
             ->autoCheck()
             ->batchCheck($this->config->customer->require->edit, 'notempty')
             ->where('id')->eq($customerID)
