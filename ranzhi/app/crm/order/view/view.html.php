@@ -94,6 +94,14 @@
       </div>
     </div>
   </div>
+  <?php if($contract):?>
+  <div class='panel'>
+    <div class='panel-heading'><strong><?php echo $lang->contract->common;?></strong></div>
+    <div class='panel-body'>
+      <?php echo html::a($this->createLink('contract', 'view', "contractID={$contract->id}"), $contract->name);?>
+    </div>
+  </div>
+  <?php endif;?>
   <div class='panel'>
     <div class='panel-heading'><h5><?php echo $lang->customer->contact;?></h5></div>
     <div class='panel-body'>

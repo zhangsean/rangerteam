@@ -137,6 +137,22 @@ class orderModel extends model
     }
 
     /**
+     * Get contract of an order.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return object
+     */
+    public function getContract($orderID)
+    {
+        return $this->dao->select('*')
+            ->from(TABLE_CONTRACTORDER)->alias('t1')
+            ->leftJoin(TABLE_CONTRACT)->alias('t2')->on('t1.contract=t2.id')
+            ->where('`order`')->eq($orderID)
+            ->fetch();
+    }
+
+    /**
      * Create an order.
      * 
      * @access public
