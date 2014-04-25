@@ -20,6 +20,7 @@ $lang->contract->amount       = 'Amount';
 $lang->contract->items        = 'Items';
 $lang->contract->begin        = 'Start Date';
 $lang->contract->end          = 'End Date';
+$lang->contract->dateRange    = 'Date Range';
 $lang->contract->delivery     = 'Delivery';
 $lang->contract->return       = 'Received payments';
 $lang->contract->status       = 'Status';
