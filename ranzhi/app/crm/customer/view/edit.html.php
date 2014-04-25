@@ -51,11 +51,11 @@
               </tr>
               <tr>
                 <th><?php echo $lang->customer->industry;?></th>
-                <td><?php echo html::input('industry', $customer->industry, "class='form-control'");?></td>
+                <td><?php echo html::select('industry', $industry, $customer->industry, "class='form-control'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->customer->area;?></th>
-                <td><?php echo html::input('area', $customer->area, "class='form-control'");?></td>
+                <td><?php echo html::select('area', $area,  $customer->area, "class='form-control'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->customer->intension;?></th>

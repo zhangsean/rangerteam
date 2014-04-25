@@ -108,6 +108,8 @@ class customer extends control
 
         $this->view->title    = $this->lang->customer->edit;
         $this->view->customer = $this->customer->getByID($customerID);
+        $this->view->area     = $this->loadModel('tree')->getOptionMenu('area');
+        $this->view->industry = $this->tree->getOptionMenu('industry');
 
         $this->display();
     }
