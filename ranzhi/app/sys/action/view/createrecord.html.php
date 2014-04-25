@@ -16,24 +16,29 @@
 <?php js::set('customer', $customer);?>
 <form method='post' id='ajaxForm' action='<?php echo inlink('createrecord', "objectType={$objectType}&objectID={$objectID}&customer={$customer}")?>'>
   <table class='table table-form'>
+    <?php if($objectType != 'contact'):?>
     <tr>
-      <th class='w-100px'><?php echo $lang->action->record->contact;?></th>
+      <th><?php echo $lang->action->record->contact;?></th>
       <td>
         <div class='col-sm-5'><?php echo html::select('contact', $contacts, '', "class='form-control'");?></div>
         <div class='col-sm-4'><?php echo html::a('javascrit:;', $lang->contact->create, "class='btn-xs contact-creater'");?></div>
       </td>
     </tr>
+    <?php endif;?>
+    <tr>
+      <th class='w-100px'><?php echo $lang->action->record->date;?></th>
+      <td><div class='col-sm-5'><?php echo html::input('date', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></div></td>
+    </tr> 
     <tr>
       <th><?php echo $lang->action->record->comment;?></th>
       <td><div class='col-sm-12'><?php echo html::textarea('comment', '', "class='form-control' rows='5'");?></div></td>
     </tr>
     <tr>
-      <th><?php echo $lang->action->record->date;?></th>
-      <td><div class='col-sm-5'><?php echo html::input('date', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></div></td>
-    </tr>
-    <tr>
       <th></th>
-      <td><?php echo html::submitButton();?></td>
+      <td>
+        <?php if($objectType == 'contact') echo html::hidden('contact', $objectID);?>
+        <?php echo html::submitButton();?>
+      </td>
     </tr>
   </table>
 </form>

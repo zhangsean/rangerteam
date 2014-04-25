@@ -16,17 +16,19 @@
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <form method='post' id='ajaxForm' action='<?php echo inlink('editrecord', "recordID=$record->id")?>'>
   <table class='table table-form'>
+    <?php if($record->objectType != 'contact'):?>
     <tr>
-      <th class='w-100px'><?php echo $lang->action->record->contact;?></th>
+      <th><?php echo $lang->action->record->contact;?></th>
       <td><?php echo html::select('extra', $contacts, $record->extra, "class='form-control chosen select-contact'");?></td>
+    </tr>
+    <?php endif;?>
+    <tr>
+      <th class='w-100px'><?php echo $lang->action->record->date;?></th>
+      <td><?php echo html::input('date', $record->date, "class='form-control form-datetime'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->action->record->comment;?></th>
-      <td><?php echo html::textarea('comment', $record->comment, "class='form-control'");?></td>
-    </tr>
-    <tr>
-      <th><?php echo $lang->action->record->date;?></th>
-      <td><?php echo html::input('date', $record->date, "class='form-control form-datetime'");?></td>
+      <td><?php echo html::textarea('comment', $record->comment, "class='form-control' rows='5'");?></td>
     </tr>
     <tr>
       <th></th>
