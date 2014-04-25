@@ -25,9 +25,9 @@
         <th class='w-100px'><?php commonModel::printOrderLink('customer',    $orderBy, $vars, $lang->contract->customer);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('amount',      $orderBy, $vars, $lang->contract->amount);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->contract->createdDate);?></th>
-        <th class='w-60px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->contract->status);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('return',      $orderBy, $vars, $lang->contract->return);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('delivery',    $orderBy, $vars, $lang->contract->delivery);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->contract->status);?></th>
         <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
@@ -39,9 +39,9 @@
         <td><?php echo $customers[$contract->customer];?></td>
         <td><?php echo $contract->amount;?></td>
         <td><?php echo substr($contract->createdDate, 0, 10);?></td>
-        <td><?php echo $lang->contract->statusList[$contract->status];?></td>
         <td><?php echo $lang->contract->returnList[$contract->return];?></td>
         <td><?php echo $lang->contract->deliveryList[$contract->delivery];?></td>
+        <td><?php echo $lang->contract->statusList[$contract->status];?></td>
         <td>
           <?php
           echo html::a($this->createLink('contract', 'edit', "contract=$contract->id"), $lang->edit);
@@ -64,15 +64,6 @@
               echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->contract->delivery . '</a> ';
           }
 
-          if($contract->status == 'normal')
-          {
-              echo html::a($this->createLink('contract', 'cancel', "contract=$contract->id"), $lang->cancel, "data-toggle='modal'");
-          }
-          else
-          {
-              echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->cancel . '</a> ';
-          }
-
           if($contract->status == 'normal' and $contract->return == 'done' and $contract->delivery == 'done')
           {
               echo html::a($this->createLink('contract', 'finish', "contract=$contract->id"), $lang->finish, "data-toggle='modal'");
@@ -80,6 +71,15 @@
           else
           {
               echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->finish . '</a> ';
+          }
+
+          if($contract->status == 'normal')
+          {
+              echo html::a($this->createLink('contract', 'cancel', "contract=$contract->id"), $lang->cancel, "data-toggle='modal'");
+          }
+          else
+          {
+              echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->cancel . '</a> ';
           }
 
           echo html::a($this->createLink('contract', 'delete', "contract=$contract->id"), $lang->delete, "class='deleter'");
