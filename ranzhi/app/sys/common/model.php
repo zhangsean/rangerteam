@@ -644,18 +644,18 @@ class commonModel extends model
         $magicQuote = get_magic_quotes_gpc();
         foreach($new as $key => $value)
         {   
+            if(!isset($old->$key))                   continue;
             if(strtolower($key) == 'lastediteddate') continue;
             if(strtolower($key) == 'lasteditedby')   continue;
             if(strtolower($key) == 'assigneddate')   continue;
             if(strtolower($key) == 'editedby')       continue;
             if(strtolower($key) == 'editeddate')     continue;
 
+            if(is_array($value)) $value = join(',', $value);
+            if(is_array($old->$key)) $old->$key = join(',', $old->$key);
             if($magicQuote) $value = stripslashes($value);
-            if(isset($old->$key) and $value != stripslashes($old->$key))
+            if($value != stripslashes($old->$key))
             {
-                if(is_array($value)) $value = join(',', $value);
-                if(is_array($old->$key)) $old->$key = join(',', $old->$key);
-
                 $diff = '';
                 if(substr_count($value, "\n") > 1     or
                    substr_count($old->$key, "\n") > 1 or
