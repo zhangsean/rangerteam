@@ -84,7 +84,7 @@ class contractModel extends model
             ->setDefault('end', '0000-00-00')
             ->get();
 
-        $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid,real')
+        $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid,files,labels,real')
             ->autoCheck()
             ->batchCheck($this->config->contract->require->create, 'notempty')
             ->exec();
@@ -110,6 +110,8 @@ class contractModel extends model
                 $order->signedDate = $contract->signedDate;
                 $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
             }
+
+            $this->loadModel('file')->saveUpload('contract', $contractID);
 
             return $contractID;
         }
