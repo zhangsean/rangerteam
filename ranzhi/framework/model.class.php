@@ -184,6 +184,7 @@ class model
     public function loadModel($moduleName, $appName = '')
     {
         if(empty($moduleName)) return false;
+        if(empty($appName)) $appName = $this->appName;
         $modelFile = helper::setModelFile($moduleName, $appName);
 
         if(!helper::import($modelFile)) return false;

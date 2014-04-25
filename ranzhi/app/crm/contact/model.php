@@ -58,7 +58,7 @@ class contactModel extends model
             ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->FI()
             ->fetchPairs('id', 'realname');
 
-        if($emptyOption)  $contacts = array('' => '') + $contacts;
+        if($emptyOption)  $contacts = array(0 => '') + $contacts;
 
         return $contacts;
     }

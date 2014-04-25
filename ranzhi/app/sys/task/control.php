@@ -113,8 +113,8 @@ class task extends control
     {
         $task = $this->task->getByID($taskID);
 
-        $this->view->orders    = $this->loadModel('order')->getPairs($task->customer);
-        $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->orders    = $this->loadModel('order', 'crm')->getPairs($task->customer);
+        $this->view->customers = $this->loadModel('customer', 'crm')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->task      = $task;
 
