@@ -95,13 +95,13 @@ CREATE TABLE `crm_contractOrder` (
 -- DROP TABLE IF EXISTS `crm_customer`;
 CREATE TABLE `crm_customer` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `name` char(30) NOT NULL,
+  `name` char(100) NOT NULL,
   `type` char(30) NOT NULL,
   `size` tinyint(3) unsigned NOT NULL,
   `industry` mediumint(8) unsigned NOT NULL,
   `area` mediumint(8) unsigned NOT NULL,
   `status` char(30) NOT NULL,
-  `level` tinyint(3) unsigned NOT NULL,
+  `level` char(10) unsigned NOT NULL,
   `intension` text NOT NULL,
   `site` varchar(100) NOT NULL,
   `weibo` char(50) NOT NULL,
