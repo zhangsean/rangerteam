@@ -25,25 +25,21 @@ $lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=status
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
 $lang->customer->menu->browse = array('link' => '<i class="icon-group"></i> Customer List|customer|browse|', 'alias' => 'edit');
-$lang->customer->menu->create = '<i class="icon-plus"></i> Create Customer|customer|create|';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
 $lang->product->menu->browse = array('link' => '<i class="icon-th"></i> Product List|product|browse|', 'alias' => 'edit');
-$lang->product->menu->create = '<i class="icon-plus"></i> Create Product|product|create|';
 
 /* Menu of order module. */
 $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
 $lang->order->menu->browse = array('link' => '<i class="icon-th-list"></i> Order List|order|browse|', 'alias' => 'edit, team, managemembers');
-$lang->order->menu->create = '<i class="icon-plus"></i> Create Order|order|create|';
 
 /* Menu of contact module. */
 $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
 $lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> Contact List|contact|browse|', 'alias' => 'edit,view,history');
-$lang->contact->menu->create = '<i class="icon-plus"></i> Create Contact|contact|create|';
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();
