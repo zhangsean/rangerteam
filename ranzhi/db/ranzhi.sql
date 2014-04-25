@@ -14,8 +14,6 @@ CREATE TABLE `crm_address` (
 -- DROP TABLE IF EXISTS `crm_contact`;
 CREATE TABLE `crm_contact` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `customer` mediumint(8) NOT NULL,
-  `maker` enum('0','1') NOT NULL DEFAULT '0',
   `realname` char(30) NOT NULL DEFAULT '',
   `nickname` char(30) NOT NULL,
   `avatar` char(100) NOT NULL,
@@ -171,13 +169,12 @@ CREATE TABLE `crm_resume` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `contact` mediumint(8) unsigned NOT NULL,
   `customer` mediumint(8) unsigned NOT NULL,
+  `maker` enum('0','1') NOT NULL DEFAULT '0',
   `dept` char(100) NOT NULL,
   `title` char(100) NOT NULL,
   `address` mediumint(8) unsigned NOT NULL,
-  `join` date NOT NULL,
-  `left` date NOT NULL,
-  `createdBy` char(30) NOT NULL,
-  `createdDate` datetime NOT NULL,
+  `join` char(10) NOT NULL,
+  `left` char(10) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `contact` (`contact`),
   KEY `customer` (`customer`)

@@ -34,5 +34,10 @@ ALTER TABLE `crm_contract` ADD `deleted` enum('0','1') COLLATE 'utf8_general_ci'
 ALTER TABLE `crm_customer` ADD `deleted` enum('0','1') COLLATE 'utf8_general_ci' NOT NULL DEFAULT '0';
 ALTER TABLE `crm_order` ADD `deleted` enum('0','1') COLLATE 'utf8_general_ci' NOT NULL DEFAULT '0';
 
+ALTER TABLE `crm_contact` DROP `customer`, DROP `maker`;
+ALTER TABLE `crm_resume` ADD `maker` enum('0','1') COLLATE 'utf8_general_ci' NOT NULL DEFAULT '0' AFTER `customer`,
+CHANGE `join` `join` char(10) COLLATE 'utf8_general_ci' NOT NULL AFTER `address`,
+CHANGE `left` `left` char(10) COLLATE 'utf8_general_ci' NOT NULL AFTER `join`;
+
 ALTER TABLE `crm_customer` CHANGE `name` `name` CHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
 ALTER TABLE `crm_customer` CHANGE `size` `size` CHAR( 10 ) NOT NULL;
