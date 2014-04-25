@@ -11,16 +11,23 @@
  */
 ?>
 <?php include '../../common/view/header.html.php'; ?>
-<div class='col-lg-7'>
-  <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}&customer={$order->customer}");?>
-</div>
-<div class='col-lg-5'>
-  <div class='panel'>
+<div class='col-lg-8'>
+   <div class='panel'>
     <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->view;?></strong></div>
     <div class='panel-body'>
       <div class='alert <?php echo $config->order->statusClassList[$order->status];?>'>
         <?php $payed = $order->status == 'payed';?>
         <table class="table table-borderless table-condensed">
+          <tr>
+            <th class='small text-muted w-p45'><?php echo $lang->order->customer;?></th>
+            <th colspan='2'></th>
+          </tr>
+          <tr>
+            <th><?php echo $customer->name;?></th>
+            <th>
+              <span class='small text-muted'><?php echo $lang->customer->level?></span>
+              <span class="label label-badge pull-ledt label-info"><?php echo $lang->customer->levelList[$customer->level]?></span>
+            </th>
           <tr>
             <?php if($payed):?>
             <th class='small text-muted w-p45'><?php echo $lang->order->real;?></th>
@@ -57,15 +64,23 @@
           </tr>
         </table>
       </div>
-      <h6 class='header-dividing text-muted'><?php echo $lang->order->customer;?></h6>
+    </div>
+  </div>
+  <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}&customer={$order->customer}");?>
+</div>
+<div class='col-lg-4'>
+      <h6 class='header-dividing text-muted'><?php echo $lang->customer->contact;?></h6
       <ul>
+        <?php foreach($contacts as $contact):?>
         <li>
-        <strong><?php echo $customer->name;?><span class="label label-badge pull-right label-info"><?php echo $lang->customer->levelList[$customer->level]?></span></strong>
-          <?php if($customer->contactedBy):?>
-          <div class='small text-muted'><i class='icon-user'></i> <?php echo $lang->order->contact . ': ' . $customer->contactedBy;?></div>
+          <strong><?php echo $contact->realname;?></strong>
+          <i><?php echo $contact->dept . ' - ' . $contact->title;?></i>
+          <?php if($contact->maker):?>
+          <span class="label label-badge label-sm label-info"><?php echo $lang->contact->maker;?></span>
           <?php endif;?>
-          <div class='small text-muted'><i class='icon-time'></i> <?php echo $lang->customer->contactDate . ': ' . $customer->contactedDate;?></div>
+          <div class='small'><?php echo $lang->customer->contactDate . ': ' . $customer->contactedDate;?></div>
         </li>
+        <?php endforeach;?>
       </ul>
       <h6 class='header-dividing text-muted'><?php echo $lang->order->product;?></h6>
       <ul>

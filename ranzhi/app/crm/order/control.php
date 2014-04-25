@@ -113,14 +113,12 @@ class order extends control
 
     public function view($orderID)
     {
-        $order    = $this->order->getByID($orderID);
-        $product  = $this->loadModel('product')->getByID($order->product);
-        $customer = $this->loadModel('customer')->getByID($order->customer);
+        $order = $this->order->getByID($orderID);
     
         $this->view->order      = $order;
-        $this->view->product    = $product;
-        $this->view->customer   = $customer;
-        $this->view->efforts    = $this->loadModel('effort')->getByObject('order', $orderID);
+        $this->view->product    = $this->loadModel('product')->getByID($order->product);
+        $this->view->customer   = $this->loadModel('customer')->getByID($order->customer);
+        $this->view->contacts   = $this->loadModel('contact')->getList($order->customer);
     
         $this->display();
     }

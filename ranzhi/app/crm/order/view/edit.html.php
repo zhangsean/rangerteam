@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php'; ?>
-<div class="col-lg-6">
+<div class="col-lg-7">
   <div class='panel'>
     <div class='panel-heading'><i class='icon-pencil'></i> <?php echo $lang->order->edit;?></div>
     <div class='panel-body'>
@@ -44,7 +44,7 @@
     </div>
   </div>
 </div>
-<div class="col-lg-6">
-<?php include '../../../sys/common/view/action.html.php';?>
+<div class="col-lg-5">
+<?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}&customer={$order->customer}");?>
 </div>
 <?php include '../../common/view/footer.html.php';?>
