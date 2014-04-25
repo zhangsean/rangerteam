@@ -61,7 +61,7 @@ $lang->customer->statusList['failed']    = '失败';
 
 $lang->customer->sizeList[0] = '';
 $lang->customer->sizeList[1] = '大型(100人以上)';
-$lang->customer->sizeList[2] = '中型(50-100人）';
+$lang->customer->sizeList[2] = '中型(50-100人)';
 $lang->customer->sizeList[3] = '小型(10人-50人)';
 $lang->customer->sizeList[4] = '微型(10人以下)';
 
