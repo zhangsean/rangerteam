@@ -105,7 +105,6 @@ class customer extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-
         $this->view->title    = $this->lang->customer->edit;
         $this->view->customer = $this->customer->getByID($customerID);
         $this->view->area     = $this->loadModel('tree')->getOptionMenu('area');
