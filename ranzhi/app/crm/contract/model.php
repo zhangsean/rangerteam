@@ -87,6 +87,7 @@ class contractModel extends model
         $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid,files,labels,real')
             ->autoCheck()
             ->batchCheck($this->config->contract->require->create, 'notempty')
+            ->checkIF($contract->end != '0000-00-00', 'end', 'ge', $contract->begin)
             ->exec();
 
         $contractID = $this->dao->lastInsertID();
@@ -145,6 +146,7 @@ class contractModel extends model
             ->where('id')->eq($contractID)
             ->autoCheck()
             ->batchCheck($this->config->contract->require->edit, 'notempty')
+            ->checkIF($contract->end != '0000-00-00', 'end', 'ge', $contract->begin)
             ->exec();
         
         if(!dao::isError())
