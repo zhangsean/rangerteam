@@ -20,6 +20,7 @@ $lang->contract->amount       = '金额';
 $lang->contract->items        = '条款';
 $lang->contract->begin        = '开始日期';
 $lang->contract->end          = '结束日期';
+$lang->contract->dateRange    = '起始日期';
 $lang->contract->delivery     = '交付';
 $lang->contract->return       = '回款';
 $lang->contract->status       = '状态';

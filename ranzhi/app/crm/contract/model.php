@@ -118,27 +118,6 @@ class contractModel extends model
     }
 
     /**
-     * Create items of contract.
-     * 
-     * @access public
-     * @return int|bool
-     */
-    public function items($contractID)
-    {
-        $contract = fixer::input('post')->get();
-
-        $this->dao->update(TABLE_CONTRACT)->data($contract, 'uid,files,labels')->where('id')->eq($contractID)->autoCheck()->exec();
-
-        if(!dao::isError())
-        {
-            $this->loadModel('file')->saveUpload('contract', $contractID);
-            return $contractID;
-        }
-
-        return false;
-    }
-
-    /**
      * Update contract.
      * 
      * @param  int    $contractID 

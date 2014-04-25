@@ -14,7 +14,7 @@
 <div class='panel'>
   <div class='panel-heading'>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->contract->list;?></strong>
-  <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->contract->create, "class='btn btn-primary' data-toggle='modal'");?></div>
+  <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->contract->create, "class='btn btn-primary'");?></div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data'>
     <thead>
@@ -83,7 +83,6 @@
           }
 
           echo html::a($this->createLink('contract', 'delete', "contract=$contract->id"), $lang->delete, "class='deleter'");
-          echo html::a($this->createLink('contract', 'items', "contract=$contract->id"), $lang->contract->items, "data-toggle='modal'");
           ?>
         </td>
       </tr>
