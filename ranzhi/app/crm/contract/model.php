@@ -82,6 +82,7 @@ class contractModel extends model
             ->setDefault('order', array())
             ->setDefault('begin', '0000-00-00')
             ->setDefault('end', '0000-00-00')
+            ->stripTags('items', $this->config->allowedTags->admin)
             ->get();
 
         $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid,files,labels,real')
@@ -140,6 +141,7 @@ class contractModel extends model
             ->setDefault('begin', '0000-00-00')
             ->setDefault('end', '0000-00-00')
             ->remove('uid,files,labels')
+            ->stripTags('items', $this->config->allowedTags->admin)
             ->get();
 
         $this->dao->update(TABLE_CONTRACT)->data($data, 'order,real')

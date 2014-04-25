@@ -121,6 +121,7 @@ class customerModel extends model
         $customer    = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
+            ->stripTags('desc', $this->config->allowedTags->admin)
             ->get();
 
         /* Add http:// in head when that has not http:// or https://. */
