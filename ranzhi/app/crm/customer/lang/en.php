@@ -42,7 +42,6 @@ $lang->customer->contract    = 'Contract List';
 $lang->customer->address     = 'Address List';
 $lang->customer->record      = 'Record';
 $lang->customer->linkContact = 'Create Contact';
-$lang->customer->basic       = 'Basic Information';
 
 $lang->customer->typeList['']           = '';
 $lang->customer->typeList['national']   = 'National';
