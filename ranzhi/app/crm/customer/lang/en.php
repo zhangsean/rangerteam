@@ -19,7 +19,7 @@ $lang->customer->industry    = 'Industry';
 $lang->customer->area        = 'Area';
 $lang->customer->status      = 'Status';
 $lang->customer->level       = 'Level';
-$lang->customer->intension   = 'Purchase Intention';
+$lang->customer->intension   = 'Intention';
 $lang->customer->phone       = 'Phone';
 $lang->customer->email       = 'Email';
 $lang->customer->qq          = 'QQ';
@@ -49,7 +49,7 @@ $lang->customer->typeList['national']   = 'National';
 $lang->customer->typeList['collective'] = 'Collective';
 $lang->customer->typeList['corporate']  = 'Corporate';
 $lang->customer->typeList['limited']    = 'Limited';
-$lang->customer->typeList['privated']   = 'Privated';
+$lang->customer->typeList['partnership']= 'Partnership';
 $lang->customer->typeList['foreign']    = 'Foreign';
 $lang->customer->typeList['personal']   = 'Personal';
 
@@ -60,17 +60,17 @@ $lang->customer->statusList['payed']     = 'Payed';
 $lang->customer->statusList['failed']    = 'Failed';
 
 $lang->customer->sizeList[0] = '';
-$lang->customer->sizeList[1] = 'Large-scale';
-$lang->customer->sizeList[2] = 'Medium-scale';
-$lang->customer->sizeList[3] = 'Small-scale';
-$lang->customer->sizeList[4] = 'Mini-scale';
+$lang->customer->sizeList[1] = 'Large(>100persons)';
+$lang->customer->sizeList[2] = 'Medium(50-100 persons)';
+$lang->customer->sizeList[3] = 'Small(10-50 persons)';
+$lang->customer->sizeList[4] = 'Mini(<10 persons)';
 
-$lang->customer->levelList[0] = '';
-$lang->customer->levelList[1] = 'A';
-$lang->customer->levelList[2] = 'B';
-$lang->customer->levelList[3] = 'C';
-$lang->customer->levelList[4] = 'D';
-$lang->customer->levelList[5] = 'E';
+$lang->customer->levelList[]  = '';
+$lang->customer->levelList['A'] = 'A';
+$lang->customer->levelList['B'] = 'B';
+$lang->customer->levelList['C'] = 'C';
+$lang->customer->levelList['D'] = 'D';
+$lang->customer->levelList['E'] = 'E';
 
 $lang->customer->create = 'Create Customer';
 $lang->customer->list   = 'Customer List';
