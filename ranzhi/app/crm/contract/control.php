@@ -99,7 +99,7 @@ class contract extends control
         $this->view->contractOrders = $this->loadModel('order')->getListByID($contract->order);
         $this->view->orders         = array('' => '') + $this->order->getList($contract->customer);
         $this->view->customers      = $this->loadModel('customer')->getPairs();
-        $this->view->contacts       = $this->loadModel('contact')->getPairs();
+        $this->view->contacts       = $this->loadModel('contact')->getPairs($contract->customer);
         $this->view->users          = $this->loadModel('user')->getPairs();
         $this->display();
     }
@@ -203,9 +203,10 @@ class contract extends control
     {
         $contract = $this->contract->getByID($contractID);
 
-        $this->view->orders    = $this->loadModel('order')->getPairs($contract->customer);
+        $this->view->orders    = $this->loadModel('order')->getListById($contract->order);
         $this->view->customers = $this->loadModel('customer')->getPairs();
-        $this->view->contacts  = $this->loadModel('contact')->getPairs();
+        $this->view->contacts  = $this->loadModel('contact')->getPairs($contract->customer);
+        $this->view->products  = $this->loadModel('product')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->contract  = $contract;
         $this->view->actions   = $this->loadModel('action')->getList('contract', $contractID);

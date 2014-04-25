@@ -154,11 +154,13 @@ class contractModel extends model
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', $now)
             ->setDefault('order', array())
+            ->setDefault('customer', $contract->customer)
             ->setDefault('begin', '0000-00-00')
             ->setDefault('end', '0000-00-00')
+            ->remove('uid,files,labels')
             ->get();
 
-        $this->dao->update(TABLE_CONTRACT)->data($data, 'order,uid,files,labels')
+        $this->dao->update(TABLE_CONTRACT)->data($data, 'order,real')
             ->where('id')->eq($contractID)
             ->autoCheck()
             ->batchCheck($this->config->contract->require->edit, 'notempty')
@@ -177,8 +179,20 @@ class contractModel extends model
                     $this->dao->insert(TABLE_CONTRACTORDER)->data($contractOrder)->exec();
                 }
             }
+
+            foreach($data->real as $key => $real)
+            {
+                $order = new stdclass();
+                $order->real       = $real;
+                $order->signedBy   = $data->signedBy;
+                $order->signedDate = $data->signedDate;
+                $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($data->order[$key])->exec();
+            }
             $this->loadModel('file')->saveUpload('contract', $contractID);
 
+            unset($data->real);
+            $data->order     = join(',', $data->order);
+            $contract->order = join(',', $contract->order);
             return commonModel::createChanges($contract, $data);
         }
 

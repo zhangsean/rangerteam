@@ -12,7 +12,7 @@
 $lang->contract->common = '合同';
 
 $lang->contract->id           = '编号';
-$lang->contract->order        = '所属订单';
+$lang->contract->order        = '签约订单';
 $lang->contract->customer     = '所属客户';
 $lang->contract->name         = '名称';
 $lang->contract->code         = '代号';
