@@ -15,6 +15,7 @@
   <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}&customer={$order->customer}");?>
   <div class='text-center'>
     <?php 
+    echo html::a($this->createLink('sys.action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $lang->order->record, "class='btn' data-toggle='modal'");
     if(empty($order->contract))  echo html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign, "class='btn btn-default'");
     if(!empty($order->contract)) echo html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
 
@@ -35,9 +36,9 @@
     <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->basicInfo;?></strong></div>
     <div class='panel-body'>
       <?php $payed = $order->status == 'payed';?>
-      <table>
+      <table class='table table-info'>
         <tr>
-          <th class='w-50px'><?php echo $lang->order->customer;?></th>
+          <th class='w-80px'><?php echo $lang->order->customer;?></th>
           <td><?php echo $customer->name . $lang->customer->levelList[$customer->level];?></td>
         </tr>
         <tr>
@@ -45,7 +46,7 @@
           <td><?php echo $product->name;?></td>
         </tr>
         <tr>
-          <th class='w-120px'><?php echo $lang->order->plan;?>
+          <th><?php echo $lang->order->plan;?>
           <td><?php echo $order->plan;?></td>
         </tr>
         <tr>
