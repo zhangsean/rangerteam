@@ -99,7 +99,7 @@ CREATE TABLE `crm_customer` (
   `industry` mediumint(8) unsigned NOT NULL,
   `area` mediumint(8) unsigned NOT NULL,
   `status` char(30) NOT NULL,
-  `level` char(10) unsigned NOT NULL,
+  `level` char(10) NOT NULL,
   `intension` text NOT NULL,
   `site` varchar(100) NOT NULL,
   `weibo` char(50) NOT NULL,

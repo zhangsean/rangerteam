@@ -679,3 +679,19 @@ function isonlybody()
 {
     return (isset($_GET['onlybody']) and $_GET['onlybody'] == 'yes');
 }
+
+/**
+ * Format time.
+ * 
+ * @param  int    $time 
+ * @param  string $format 
+ * @access public
+ * @return void
+ */
+function formatTime($time, $format = '')
+{
+    $time = str_replace('0000-00-00', '', $time);
+    $time = str_replace('00:00:00', '', $time);
+    if($format) return date($format, str2time($time));
+    return $time;
+}
