@@ -9,10 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->order->common   = '订单';
-$lang->order->effort   = '日志';
-$lang->order->titleLBL = "%s购买%s, %s";
-
+$lang->order->common        = '订单';
 $lang->order->id            = '编号';
 $lang->order->name          = '名称';
 $lang->order->product       = '产品';
@@ -47,7 +44,6 @@ $lang->order->record        = '沟通';
 $lang->order->edit          = '编辑订单';
 $lang->order->view          = '订单详情';
 $lang->order->close         = '关闭订单';
-$lang->order->manageMembers = '团队管理';
 $lang->order->sign          = '签约';
 
 $lang->order->statusList['normal']   = '正常';
@@ -60,8 +56,12 @@ $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '订单失败';
 $lang->order->closedReasonList['postponed'] = '延期';
 
+$lang->order->titleLBL  = "%s购买%s, %s";
+$lang->order->basicInfo = "基本信息";
+$lang->order->lifetime  = "订单历史";
+
 $lang->order->history  = '历史';
-$lang->order->created  = "<strong>%s</strong> 创建了订单";
-$lang->order->assigned = "由 <strong>%s</strong> 指派给 %s";
-$lang->order->signed   = "由 <strong>%s</strong> 签单";
-$lang->order->activated= "由 <strong>%s</strong> 激活";
+$lang->order->created  = "<strong>%s</strong> 创建了订单。";
+$lang->order->assigned = "由 <strong>%s</strong> 指派给 %s。";
+$lang->order->signed   = "由 <strong>%s</strong> 签单。";
+$lang->order->activated= "由 <strong>%s</strong> 激活。";
