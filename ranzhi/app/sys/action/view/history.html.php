@@ -65,7 +65,9 @@ function toggleShow(obj)
     {
         $(obj).find('span').attr('class', 'change-show');
     }
-    $('.changes').each(function(){
+
+    $('.changes').each(function()
+    {
         var switchButtonID = $(this).closest('li').find('button[id^="switchButton"]').attr('id');
         switchChange(switchButtonID.replace('switchButton', ''));
     })
@@ -91,11 +93,13 @@ function toggleComment(actionID)
     $('#lastCommentBox').toggle();
 }
 
-$(function(){
+$(function()
+{
     var diffButton = "<span onclick='toggleStripTags(this)' class='hidden changeDiff diff-all hand' title='<?php echo $lang->action->original?>'></span>";
     var newBoxID = ''
     var oldBoxID = ''
-    $('blockquote').each(function(){
+    $('blockquote').each(function()
+    {
         newBoxID = $(this).parent().attr('id');
         if(newBoxID != oldBoxID) 
         {
@@ -107,17 +111,14 @@ $(function(){
 })
 </script>
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<script src='<?php echo $jsRoot;?>jquery/reverseorder/raw.js' type='text/javascript'></script>
+<script src='<?php echo $config->webRoot;?>js/jquery/reverseorder/raw.js' type='text/javascript'></script>
 
 <div id='actionbox' class='panel'>
   <div class='panel-heading'>
-    <strong><i class='icon-time'></i> <?php echo $lang->history?></strong>
+    <strong><?php echo $lang->history?></strong>
     <div class='panel-actions'>
       <button class='btn btn-mini' onclick='toggleOrder(this)' class='hand'> <?php echo "<span title='$lang->reverse' class='log-asc'></span>";?></button>
       <button class='btn btn-mini' onclick='toggleShow(this);' class='hand'><?php echo "<span title='$lang->switchDisplay' class='change-show'></span>";?></button>
-    </div>
-    <div class='panel-actions pull-right'>
-      <?php echo html::a($this->createLink('sys.action', 'createRecord', "objectType=$objectType&objectID={$objectID}&customer={$customer}"), '<i class="icon-plus"></i> ' . $lang->action->record->create, "class='btn btn-primary' data-toggle='modal'");?>
     </div>
   </div>
   <div class='panel-body'>
@@ -144,9 +145,8 @@ $(function(){
         <span class='link-button pull-right comment<?php echo $action->id;?>'><?php echo html::a('#lastCommentBox', '<i class="icon-edit-sign icon-large"></i>', "onclick='toggleComment($action->id)'")?></span>
         <?php endif;?>
         <?php if($action->action == 'record'):?>
-        <span class='link-button pull-right'><?php echo html::a($this->createLink('action', 'editRecord', "id={$action->id}"), '<i class="icon-edit-sign icon-large"></i>', "data-toggle='modal'")?></span>
+        <span class='link-button text-muted pull-right'><?php echo html::a($this->createLink('action', 'editRecord', "id={$action->id}"), '<i class="icon-edit icon-large"></i>', "data-toggle='modal'")?></span>
         <?php endif;?>
-
         <?php 
         if($action->comment) 
         {
