@@ -145,7 +145,6 @@ CREATE TABLE `crm_order` (
   `closedBy` char(30) NOT NULL,
   `closedDate` datetime NOT NULL,
   `closedReason` char(10) NOT NULL,
-  `closedNote` text NOT NULL,
   `activatedBy` char(30) NOT NULL,
   `activatedDate` datetime NOT NULL,
   `contactedBy` char(30) NOT NULL,

@@ -41,3 +41,5 @@ CHANGE `left` `left` char(10) COLLATE 'utf8_general_ci' NOT NULL AFTER `join`;
 
 ALTER TABLE `crm_customer` CHANGE `name` `name` CHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
 ALTER TABLE `crm_customer` change `level` `level` char(10) NOT NULL;
+
+ALTER TABLE `crm_order` DROP `closedNote`;
