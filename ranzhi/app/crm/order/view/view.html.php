@@ -59,7 +59,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->order->status;?></th>
-          <td><strong class='<?php echo $config->order->statusClassList[$order->status];?>'><?php echo $lang->order->statusList[$order->status];?></strong></td>
+          <td><?php echo $lang->order->statusList[$order->status];?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->closedReason;?></th>
@@ -76,37 +76,26 @@
     </div>
   </div>
   <?php endif;?>
-  <div class='panel'>
-    <div class='panel-heading'><h5><?php echo $lang->customer->contact;?></h5></div>
-    <div class='panel-body'>
-      <table class='table table-hover table-striped table-data table-contact'>
-        <?php foreach($contacts as $contact):?>
-        <tr>
-          <td>
-            <dl>
-              <dt <?php if($contact->maker) echo "class='text-danger'";?>>
-                <?php echo $contact->realname;?>
-              </dt>
-              <dd>
-                <small class='w-70px'> <?php echo $lang->resume->dept . $lang->colon; ?></small>
-                <strong><?php echo $contact->dept;?></strong>
-                <small> <?php echo $lang->resume->title . $lang->colon; ?></small>
-                <strong><?php echo $contact->title;?></strong>
-              </dd>
-              <?php foreach($config->contact->contactWayList as $item):?>
-              <?php if(!empty($contact->{$item})):?>
-              <dd>
-                <small class='w-70px'><?php echo $lang->contact->{$item} . $lang->colon;?></small>
-                <strong><?php echo $contact->{$item};?></strong>
-              </dd>
-              <?php endif;?>
-              <?php endforeach;?>
-            </dl>
-          </td>
-        </tr>
-        <?php endforeach;?>
-      </table>
-    </div>
+  <?php foreach($contacts as $contact):?>
+  <div class='panel' <?php if($contact->left) echo "title='" . sprintf($lang->contact->leftAt, $contact->left) . "'";?>>
+    <table class='table table-bordered table-contact'>
+      <tr>
+        <th class='w-120px text-center alert v-middle'>
+          <span class="lead <?php if($contact->maker) echo 'text-red'?>"><?php echo $contact->realname;?></span>
+          <?php if($contact->left):?>
+          <span ><i class='icon-lock text-muted'></i></span>
+          <?php endif;?>
+          <div><?php echo $contact->dept . ' ' . $contact->title;?></div>
+        </th>
+        <td>
+          <?php $havePhone = $contact->phone or $contact->mobile;?>
+          <?php if($havePhone) echo "<div><i class='icon-phone-sign'></i> $contact->phone $contact->mobile</div>";?>
+          <?php if($contact->qq) echo "<div class='f-14'><i class='icon-qq'></i>$contact->qq</div>";?>
+          <?php if($contact->email) echo "<div class='f-14'><i class='icon-envelope-alt'></i>$contact->email </div>";?>
+        </td>
+      </tr>
+    </table>
   </div>
+  <?php endforeach;?>
 </div>
 <?php include '../../common/view/footer.html.php';?>

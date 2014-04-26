@@ -54,4 +54,5 @@ $lang->contact->record  = '沟通';
 $lang->contact->basicInfo   = '基本信息';
 $lang->contact->contactInfo = '联系方式';
 
+$lang->contact->leftAt       = '已于%s离职';
 $lang->contact->failedAvatar = '头像上传失败';

@@ -31,7 +31,7 @@ $lang->action->desc->opened        = '$date, opened by <strong>$actor</strong>.'
 $lang->action->desc->created       = '$date, created by <strong>$actor</strong>.';
 $lang->action->desc->edited        = '$date, edited by <strong>$actor</strong>.';
 $lang->action->desc->assigned      = '$date, <strong>$actor</strong> assigned task to <strong>$extra</strong>.' . "\n";
-$lang->action->desc->closed        = '$date, closed by <strong>$actor</strong>.';
+$lang->action->desc->closed        = '$date, closed by <strong>$actor</strong>, close resion: <strong>$extra</strong>.';
 $lang->action->desc->deleted       = '$date, deleted by <strong>$actor</strong>.';
 $lang->action->desc->deletedfile   = '$date, deleted file by <strong>$actor</strong>, the file is <strong><i>$extra</i></strong>.';
 $lang->action->desc->editfile      = '$date, edit file by <strong>$actor</strong>, the file is <strong><i>$extra</i></strong>.';
@@ -56,7 +56,7 @@ $lang->action->desc->editaddress   = '$date, edited address by <strong>$actor</s
 $lang->action->desc->diff1         = 'changed <strong><i>%s</i></strong>, old is "%s", new is "%s".<br />';
 $lang->action->desc->diff2         = 'changed <strong><i>%s</i></strong>, the diff is:' . "\n" . "<blockquote>%s</blockquote>" . "\n<div class='hidden'>%s</div>";
 $lang->action->desc->diff3         = "changed file's name %s to %s.";
-$lang->action->desc->record        = '$date, <strong>$actor</strong> communicated with <strong>$contact</strong> ' . "\n";
+$lang->action->desc->record        = '$date, <strong>$actor</strong> added log, the contact is: <strong>$contact</strong>.' . "\n";
 
 /* The action labels. */
 $lang->action->label = new stdclass();

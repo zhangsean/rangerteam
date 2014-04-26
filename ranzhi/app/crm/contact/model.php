@@ -43,7 +43,6 @@ class contactModel extends model
         return $this->dao->select('t1.*, t2.id as resumeID, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.id = t2.contact')
             ->where('t1.deleted')->eq(0)
-            ->andWhere('t2.left')->eq('')
             ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->fi()
             ->orderBy($orderBy)
             ->page($pager)

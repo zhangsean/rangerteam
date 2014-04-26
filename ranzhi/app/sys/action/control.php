@@ -20,12 +20,11 @@ class action extends control
      * @access public
      * @return void
      */
-    public function history($objectType, $objectID, $customer = '')
+    public function history($objectType, $objectID)
     {
         $this->view->actions    = $this->loadModel('action')->getList($objectType, $objectID);
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
-        $this->view->customer   = $customer;
         $this->display();
     }
 

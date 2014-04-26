@@ -31,7 +31,7 @@ $lang->action->desc->opened        = '$date, 由 <strong>$actor</strong> 创建�
 $lang->action->desc->created       = '$date, 由 <strong>$actor</strong> 创建。' . "\n";
 $lang->action->desc->edited        = '$date, 由 <strong>$actor</strong> 编辑。' . "\n";
 $lang->action->desc->assigned      = '$date, 由 <strong>$actor</strong> 指派给 <strong>$extra</strong>。' . "\n";
-$lang->action->desc->closed        = '$date, 由 <strong>$actor</strong> 关闭。' . "\n";
+$lang->action->desc->closed        = '$date, 由 <strong>$actor</strong> 关闭，关闭原因: <strong>$extra</strong>。' . "\n";
 $lang->action->desc->deleted       = '$date, 由 <strong>$actor</strong> 删除。' . "\n";
 $lang->action->desc->deletedfile   = '$date, 由 <strong>$actor</strong> 删除了附件：<strong><i>$extra</i></strong>。' . "\n";
 $lang->action->desc->editfile      = '$date, 由 <strong>$actor</strong> 编辑了附件：<strong><i>$extra</i></strong>。' . "\n";
@@ -48,15 +48,15 @@ $lang->action->desc->replied       = '$date, 由 <strong>$actor</strong> 回复�
 $lang->action->desc->doubted       = '$date, 由 <strong>$actor</strong> 追问。' . "\n";
 $lang->action->desc->transfered    = '$date, 由 <strong>$actor</strong> 转交。' . "\n";
 $lang->action->desc->returned      = '$date, 由 <strong>$actor</strong> 完成回款。' . "\n";
-$lang->action->desc->delivered     = '$date, 由 <strong>$actor</strong> 完成支付' . "\n";
-$lang->action->desc->changeresume  = '$date, 由 <strong>$actor</strong> 更改所属公司' . "\n";
-$lang->action->desc->editresume    = '$date, 由 <strong>$actor</strong> 修改公司' . "\n";
-$lang->action->desc->createaddress = '$date, 由 <strong>$actor</strong> 添加地址' . "\n";
-$lang->action->desc->editaddress   = '$date, 由 <strong>$actor</strong> 修改地址' . "\n";
+$lang->action->desc->delivered     = '$date, 由 <strong>$actor</strong> 完成支付。' . "\n";
+$lang->action->desc->changeresume  = '$date, 由 <strong>$actor</strong> 更改所属公司。' . "\n";
+$lang->action->desc->editresume    = '$date, 由 <strong>$actor</strong> 修改公司。' . "\n";
+$lang->action->desc->createaddress = '$date, 由 <strong>$actor</strong> 添加地址。' . "\n";
+$lang->action->desc->editaddress   = '$date, 由 <strong>$actor</strong> 修改地址。' . "\n";
 $lang->action->desc->diff1         = '修改了 <strong><i>%s</i></strong>，旧值为 "%s"，新值为 "%s"。<br />' . "\n";
 $lang->action->desc->diff2         = '修改了 <strong><i>%s</i></strong>，区别为：' . "\n" . "<blockquote>%s</blockquote>" . "\n<div class='hidden'>%s</div>";
 $lang->action->desc->diff3         = "将文件名 %s 改为 %s 。\n";
-$lang->action->desc->record        = '$date, <strong>$actor</strong> 与 <strong>$contact</strong> 进行了沟通' . "\n";
+$lang->action->desc->record        = '$date, <strong>$actor</strong> 添加了沟通日志，联系人： <strong>$contact</strong>。' . "\n";
 
 /* 用来显示动态信息。*/
 $lang->action->label = new stdclass();
