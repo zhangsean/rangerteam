@@ -29,15 +29,15 @@
         <th class='w-60px' ><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->order->status);?></th>
         <th class='w-80px' ><?php commonModel::printOrderLink('contactedDate', $orderBy, $vars, $lang->order->contactedDate);?></th>
         <th class='w-80px' ><?php commonModel::printOrderLink('nextDate', $orderBy, $vars, $lang->order->nextDate);?></th>
-        <th class='w-180px text-center'><?php echo $lang->actions;?></th>
+        <th class='w-170px text-center'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
       <?php foreach($orders as $order):?>
       <tr class='text-center' data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id");?>'>
-        <td class='text-center'><?php echo $order->id;?></td>
-        <td class='text-center'><?php echo $lang->customer->levelList[$customers[$order->customer]->level];?></td>
-        <td><?php echo $customers[$order->customer]->name;?></td>
+        <td><?php echo $order->id;?></td>
+        <td><?php echo $lang->customer->levelList[$customers[$order->customer]->level];?></td>
+        <td class='text-left'><?php echo $customers[$order->customer]->name;?></td>
         <td><?php echo $products[$order->product];?></td>
         <td><?php echo $order->plan;?></td>
         <td><?php echo $users[$order->assignedTo];?></td>
