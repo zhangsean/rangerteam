@@ -13,8 +13,8 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-  <strong><i class="icon-list-ul"></i> <?php echo $lang->product->list;?></strong>
-  <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->product->create, 'class="btn btn-primary"');?></div>
+    <strong><i class="icon-list-ul"></i> <?php echo $lang->product->list;?></strong>
+    <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->product->create, "class='btn btn-primary' data-toggle='modal'");?></div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data'>
     <thead>
@@ -38,7 +38,7 @@
         <td><?php echo $lang->product->statusList[$product->status];?></td>
         <td>
           <?php
-          echo html::a($this->createLink('product', 'edit', "productID=$product->id"), $lang->edit);
+          echo html::a($this->createLink('product', 'edit', "productID=$product->id"), $lang->edit, "data-toggle='modal'");
           echo html::a($this->createLink('product', 'delete', "productID=$product->id"), $lang->delete, "class='deleter'");
           ?>
         </td>

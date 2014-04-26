@@ -184,8 +184,6 @@ class orderModel extends model
         $member->role    = $this->app->user->role;
         $member->join    = helper::today();
 
-        $this->dao->insert(TABLE_TEAM)->data($member)->exec();
-
         return $orderID;
     }
 
@@ -293,40 +291,19 @@ class orderModel extends model
     public function buildOperateMenu($order)
     {
         $menu = '';
-        $menu .= html::a(inlink('edit',   "orderID=$order->id"), $this->lang->edit);
+        $menu .= html::a(inlink('view', "orderID=$order->id"), $this->lang->view);
+        $menu .= html::a(helper::createLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $this->lang->order->record, "data-toggle='modal'");
+
+        if(empty($order->contract))  $menu .= html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign);
+        if(!empty($order->contract)) $menu .= html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
+
         $menu .= html::a(inlink('assignTo', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal'");
-        $menu .= html::a(inlink('browserecord', "orderID=$order->id"), $this->lang->order->record);
+        $menu .= html::a(inlink('edit',   "orderID=$order->id"), $this->lang->edit);
 
-        if(empty($order->contract))
-        {
-            $menu .=html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign);
-        }
-        else
-        {
-            $menu .="<a href='###' disabled='disabled' class='disabled'>" . $this->lang->order->sign . '</a> ';
-        }
+        if($order->status != 'closed') $menu .= html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "data-toggle='modal'");
+        if($order->closedReason == 'payed') $menu .= html::a('###', $this->lang->close, "disabled='disabled' class='disabled'");
+        if($order->closedReason != 'payed' and $order->status == 'closed')   $menu .= html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='reload'");
 
-        $menu .="<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
-
-        if($order->status != 'closed')
-        {
-            $menu .='<li>' . html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "data-toggle='modal'") . '</li>';
-        }
-        elseif($order->closedReason != 'payed') 
-        {
-            $menu .='<li>' . html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='reload'") . '</li>';
-        }
-
-        if(!empty($order->contact))
-        {
-            $menu .='<li>' . html::a(inlink('contact', "orderID=$order->id"), $this->lang->order->contact) . '</li>';
-        }
-        else
-        {
-            $menu .='<li>' . html::a(helper::createLink('contact', 'create', "customerID=$order->customer"), $this->lang->order->contact) . '</li>';
-        }
-
-        $menu .='</ul></div>';
         return $menu;
     }
 }

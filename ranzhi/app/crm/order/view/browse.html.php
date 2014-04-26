@@ -22,14 +22,14 @@
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px text-center' ><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
         <th class='w-40px'><?php echo $lang->customer->level;?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->order->customer);?></th>
+        <th><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->order->customer);?></th>
         <th><?php commonModel::printOrderLink('product', $orderBy, $vars, $lang->order->product);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('plan', $orderBy, $vars, $lang->order->plan);?>
         <th class='w-120px'><?php commonModel::printOrderLink('assignedTo', $orderBy, $vars, $lang->order->assignedTo);?></th>
         <th class='w-60px' ><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->order->status);?></th>
         <th class='w-100px' ><?php commonModel::printOrderLink('contactedDate', $orderBy, $vars, $lang->order->contactedDate);?></th>
         <th class='w-100px' ><?php commonModel::printOrderLink('nextDate', $orderBy, $vars, $lang->order->nextDate);?></th>
-        <th class='w-160px'><?php echo $lang->actions;?></th>
+        <th class='w-170px text-center'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

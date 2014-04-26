@@ -46,7 +46,16 @@
     </div>
     <div class='panel-footer'>
       <?php 
-      echo html::a(inlink('edit', "orderID={$order->id}"), $lang->edit, "class='btn btn-default'");
+      if(empty($order->contract))  echo html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign, "class='btn btn-default'");
+      if(!empty($order->contract)) echo html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
+
+      echo html::a(inlink('assignTo', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal' class='btn btn-default'");
+      echo html::a(inlink('edit',   "orderID=$order->id"), $this->lang->edit, "class='btn btn-default'");
+
+      if($order->status != 'closed') echo html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "class='btn btn-default' data-toggle='modal'");
+      if($order->closedReason == 'payed') echo html::a('###', $this->lang->close, "disabled='disabled' class='disabled btn'");
+      if($order->closedReason != 'payed' and $order->status == 'closed') echo html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='btn reload btn-default'");
+
       echo html::a(inlink('delete', "orderID={$order->id}"), $lang->delete, "class='btn btn-default deleter'");
       echo html::backButton();
       ?>
