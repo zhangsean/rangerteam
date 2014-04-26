@@ -9,10 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->order->common = 'Order';
-$lang->order->effort = 'Effort';
-$lang->order->titleLBL = "ID:%s - Customer:%s - Product:%s [%s]";
-
+$lang->order->common        = 'Order';
 $lang->order->id            = 'ID';
 $lang->order->name          = 'Name';
 $lang->order->product       = 'Product';
@@ -60,8 +57,6 @@ $lang->order->closedReasonList['payed']     = 'Payed';
 $lang->order->closedReasonList['failed']    = 'Failed';
 $lang->order->closedReasonList['postponed'] = 'Postponed';
 
-$lang->order->history   = 'History';
-$lang->order->created   = 'Created by <strong>%s</strong>.';
-$lang->order->assigned  = "<strong>%s</strong> assigned order to %s";
-$lang->order->signed    = "Signed by <strong>%s</strong>";
-$lang->order->activated = "Activated by <strong>%s</strong>";
+$lang->order->titleLBL  = "%s buy %s, %s";
+$lang->order->basicInfo = "Basic";
+$lang->order->lifetime  = "Lifetime";

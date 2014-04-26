@@ -52,6 +52,7 @@ $lang->order->statusList['signed']   = '已签约';
 $lang->order->statusList['payed']    = '已付款';
 $lang->order->statusList['closed']   = '已关闭';
 
+$lang->order->closedReasonList['']          = '';
 $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '订单失败';
 $lang->order->closedReasonList['postponed'] = '延期';
@@ -59,9 +60,3 @@ $lang->order->closedReasonList['postponed'] = '延期';
 $lang->order->titleLBL  = "%s购买%s, %s";
 $lang->order->basicInfo = "基本信息";
 $lang->order->lifetime  = "订单历史";
-
-$lang->order->history  = '历史';
-$lang->order->created  = "<strong>%s</strong> 创建了订单。";
-$lang->order->assigned = "由 <strong>%s</strong> 指派给 %s。";
-$lang->order->signed   = "由 <strong>%s</strong> 签单。";
-$lang->order->activated= "由 <strong>%s</strong> 激活。";
