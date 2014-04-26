@@ -12,95 +12,59 @@
 ?>
 <?php include '../../common/view/header.html.php'; ?>
 <div class='col-lg-8'>
-  <div class='panel'>
-    <div class='panel-heading'><strong><?php echo $lang->order->view;?></strong></div>
-    <div class='panel-body'>
-      <div class='panel'>
-        <table class='table table-data'>
-          <thead>
-            <tr>
-              <th><?php echo $lang->order->customer;?></th>
-              <th class='w-60px'><?php echo $lang->customer->level;?></th>
-              <th><?php echo $lang->order->product;?></th>
-              <th class='w-120px'><?php echo $lang->order->plan;?>
-              <th class='w-120px'><?php echo $lang->order->real;?>
-              <th class='w-80px'><?php echo $lang->order->assignedTo;?></th>
-              <th class='w-80px'><?php echo $lang->order->contactedDate;?></th>
-              <th class='w-80px'><?php echo $lang->order->nextDate;?></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><?php echo $customer->name;?></td>
-              <td><?php echo $lang->customer->levelList[$customer->level];?></td>
-              <td><?php echo $product->name;?></td>
-              <td><?php echo $order->plan;?></td>
-              <td><?php echo $order->real;?></td>
-              <td><?php echo $users[$order->assignedTo];?></td>
-              <td><?php echo substr($order->contactedDate, 0, 10);?></td>
-              <td><?php echo $order->nextDate;?></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class='panel-footer'>
-      <?php 
-      if(empty($order->contract))  echo html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign, "class='btn btn-default'");
-      if(!empty($order->contract)) echo html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
-
-      echo html::a(inlink('assignTo', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal' class='btn btn-default'");
-      echo html::a(inlink('edit',   "orderID=$order->id"), $this->lang->edit, "class='btn btn-default'");
-
-      if($order->status != 'closed') echo html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "class='btn btn-default' data-toggle='modal'");
-      if($order->closedReason == 'payed') echo html::a('###', $this->lang->close, "disabled='disabled' class='disabled btn'");
-      if($order->closedReason != 'payed' and $order->status == 'closed') echo html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='btn reload btn-default'");
-
-      echo html::a(inlink('delete', "orderID={$order->id}"), $lang->delete, "class='btn btn-default deleter'");
-      echo html::backButton();
-      ?>
-    </div>
-  </div>
   <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}&customer={$order->customer}");?>
+  <div class='text-center'>
+    <?php 
+    if(empty($order->contract))  echo html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign, "class='btn btn-default'");
+    if(!empty($order->contract)) echo html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
+
+    echo html::a(inlink('assignTo', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal' class='btn btn-default'");
+    echo html::a(inlink('edit',     "orderID=$order->id"), $this->lang->edit,   "class='btn btn-default'");
+
+    if($order->status != 'closed') echo html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "class='btn btn-default' data-toggle='modal'");
+    if($order->closedReason == 'payed') echo html::a('###', $this->lang->close, "disabled='disabled' class='disabled btn'");
+    if($order->closedReason != 'payed' and $order->status == 'closed') echo html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='btn reload btn-default'");
+
+    echo html::a(inlink('delete', "orderID={$order->id}"), $lang->delete, "class='btn btn-default deleter'");
+    echo html::backButton();
+    ?>
+  </div>
 </div>
 <div class='col-lg-4'>
   <div class='panel'>
-    <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->status;?></strong></div>
+    <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->basicInfo;?></strong></div>
     <div class='panel-body'>
-      <div>
-        <?php $payed = $order->status == 'payed';?>
-        <table class="table table-borderless table-condensed">
-         <tr>
-            <th class='small text-muted'><?php echo $lang->order->status;?></th>
-            <th class='small text-muted w-p45'><?php echo $payed ? $lang->order->real : $lang->order->plan;?></th>
-          </tr>
-          <tr>
-            <td><strong class='<?php echo $config->order->statusClassList[$order->status];?>'><?php echo $lang->order->statusList[$order->status];?></strong></td>
-            <?php if($payed):?>
-            <td><strong class="label lead text-latin"><?php echo $order->real;?></strong></td>
-            <?php else:?>
-            <td rowspan='3'><strong class="lead text-latin"><?php echo $order->plan;?></strong></td>
-            <?php endif;?>
-          </tr>
-          <tr>
-            <?php if($payed):?>
-            <th class='small text-muted'><?php echo $lang->order->plan;?></th>
-            <?php endif;?>
-            <td class='small'>
-              <?php if($order->status == 'closed'):?>
-              <strong class='text-muted'><?php echo $lang->order->closedReason . $lang->colon;?></strong>
-              <strong><?php echo $lang->order->closedReasonList[$order->closedReason];?></strong>
-              <?php if($order->closedNote) echo "<p class='text-info'>{$order->closedNote}</p>";?>
-              <?php endif;?>
-            </td>
-          </tr>
-          <tr>
-            <?php if($payed):?>
-            <td><strong class="lead text-danger text-latin"><?php echo $order->plan;?></strong></td>
-            <?php endif;?>
-          </tr>
-        </table>
-      </div>
+      <?php $payed = $order->status == 'payed';?>
+      <table>
+        <tr>
+          <th class='w-50px'><?php echo $lang->order->customer;?></th>
+          <td><?php echo $customer->name . $lang->customer->levelList[$customer->level];?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->order->product;?></th>
+          <td><?php echo $product->name;?></td>
+        </tr>
+        <tr>
+          <th class='w-120px'><?php echo $lang->order->plan;?>
+          <td><?php echo $order->plan;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->order->real;?>
+          <td><?php echo $order->real;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->order->assignedTo;?></th>
+          <td><?php echo $users[$order->assignedTo];?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->order->status;?></th>
+          <td><strong class='<?php echo $config->order->statusClassList[$order->status];?>'><?php echo $lang->order->statusList[$order->status];?></strong></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->order->closedReason;?></th>
+          <td><strong><?php echo $lang->order->closedReasonList[$order->closedReason];?></strong></td>
+        </tr>
+      </table>
     </div>
   </div>
   <?php if($contract):?>
