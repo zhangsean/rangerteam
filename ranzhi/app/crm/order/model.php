@@ -20,13 +20,13 @@ class orderModel extends model
      */
     public function getByID($id)
     {
-       $order   = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($id)->fetch();
-       if(!$order) return false;
+        $order   = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($id)->fetch();
+        if(!$order) return false;
 
-       $product = $this->loadModel('product')->getByID($order->product);
-       if(!$product) return false;
+        $product = $this->loadModel('product')->getByID($order->product);
+        if(!$product) return false;
 
-       return $order;
+        return $order;
     }
 
     /** 
