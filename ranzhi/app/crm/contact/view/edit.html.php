@@ -28,7 +28,7 @@
             <td>
               <?php $checked = $contact->maker ? "checked='checked'" : '';?>
               <input type='checkbox' name='maker' id='maker' value='1' <?php echo $checked?>/>
-              <label for='maker'><?php echo $lang->contact->maker?></label>
+              <label for='maker'><?php echo $lang->resume->maker?></label>
             </td>
           </tr>
           <tr>

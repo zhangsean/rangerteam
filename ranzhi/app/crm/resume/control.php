@@ -44,7 +44,7 @@ class resume extends control
         {
             $this->resume->create($contactID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->loadModel('action')->create('contact', $contactID, "createResume");
+            $this->loadModel('action')->create('contact', $contactID, "createdResume");
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
@@ -73,7 +73,7 @@ class resume extends control
 
             if($changes)
             {
-                $actionID = $this->loadModel('action')->create('contact', $resume->contact, 'editResume');
+                $actionID = $this->loadModel('action')->create('contact', $resume->contact, 'editedResume');
                 $this->action->logHistory($actionID, $changes);
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "contact=$resume->customer")));

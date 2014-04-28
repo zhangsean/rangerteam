@@ -25,7 +25,7 @@
           <td>
             <?php
             echo $customers[$contact->customer];
-            if($contact->maker) echo " ({$lang->contact->maker})";
+            if($contact->maker) echo " ({$lang->resume->maker})";
             ?>
           </td>
         </tr>
