@@ -120,7 +120,6 @@ class order extends control
         $this->view->order    = $order;
         $this->view->product  = $this->loadModel('product')->getByID($order->product);
         $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
-        $this->view->contacts = $this->loadModel('contact')->getList($order->customer);
         $this->view->contract = $this->order->getContract($orderID);
         $this->view->users    = $this->loadModel('user')->getPairs();
     

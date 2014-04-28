@@ -63,7 +63,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->order->closedReason;?></th>
-          <td><strong><?php echo $lang->order->closedReasonList[$order->closedReason];?></strong></td>
+          <td><?php echo $lang->order->closedReasonList[$order->closedReason];?></td>
         </tr>
       </table>
     </div>
@@ -76,26 +76,6 @@
     </div>
   </div>
   <?php endif;?>
-  <?php foreach($contacts as $contact):?>
-  <div class='panel' <?php if($contact->left) echo "title='" . sprintf($lang->contact->leftAt, $contact->left) . "'";?>>
-    <table class='table table-bordered table-contact'>
-      <tr>
-        <th class='w-120px text-center alert v-middle'>
-          <span class="lead <?php if($contact->maker) echo 'text-red'?>"><?php echo $contact->realname;?></span>
-          <?php if($contact->left):?>
-          <span ><i class='icon-lock text-muted'></i></span>
-          <?php endif;?>
-          <div><?php echo $contact->dept . ' ' . $contact->title;?></div>
-        </th>
-        <td>
-          <?php $havePhone = $contact->phone or $contact->mobile;?>
-          <?php if($havePhone) echo "<div><i class='icon-phone-sign'></i> $contact->phone $contact->mobile</div>";?>
-          <?php if($contact->qq) echo "<div class='f-14'><i class='icon-qq'></i>$contact->qq</div>";?>
-          <?php if($contact->email) echo "<div class='f-14'><i class='icon-envelope-alt'></i>$contact->email </div>";?>
-        </td>
-      </tr>
-    </table>
-  </div>
-  <?php endforeach;?>
+  <?php echo $this->fetch('contact', 'block', "customer={$order->customer}");?>
 </div>
 <?php include '../../common/view/footer.html.php';?>

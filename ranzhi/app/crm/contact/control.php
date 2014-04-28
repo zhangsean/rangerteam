@@ -130,13 +130,13 @@ class contact extends control
     /**
      * Contact history.
      * 
-     * @param  int    $contactID 
+     * @param  int    $customer 
      * @access public
      * @return void
      */
-    public function history($contactID)
+    public function block($customer)
     {
-        $this->view->contact = $this->contact->getByID($contactID);
+        $this->view->contacts = $this->contact->getList($customer);
         $this->display();
     }
 
