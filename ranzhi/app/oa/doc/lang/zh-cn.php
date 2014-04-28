@@ -52,8 +52,9 @@ $lang->doc->deleteLib      = '删除文档库';
 $lang->doc->allProduct     = '所有产品';
 $lang->doc->allProject     = '所有项目';
 
-$lang->doc->systemLibs['product'] = '产品文档库';
-$lang->doc->systemLibs['project'] = '项目文档库';
+$lang->doc->systemLibs = array();
+//$lang->doc->systemLibs['product'] = '产品文档库';
+//$lang->doc->systemLibs['project'] = '项目文档库';
 
 $lang->doc->types['file'] = '文件';
 $lang->doc->types['url']  = '链接';

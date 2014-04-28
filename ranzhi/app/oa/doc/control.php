@@ -65,8 +65,11 @@ class doc extends control
      * @access public
      * @return void
      */
-    public function browse($libID = 'product', $moduleID = 0, $productID = 0, $projectID = 0, $browseType = 'byModule', $param = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($libID = '0', $moduleID = 0, $productID = 0, $projectID = 0, $browseType = 'byModule', $param = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {  
+        $libID = $libID ? $libID : key($this->libs);
+        if(!$libID) $this->locate(inlink('createLib'));
+
         /* Set browseType.*/ 
         $browseType = strtolower($browseType);
         $queryID    = ($browseType == 'bysearch') ? (int)$param : 0;
@@ -80,7 +83,7 @@ class doc extends control
  
         /* Get docs. */
         $modules = 0;
-        $docs=array();
+        $docs    = array();
         if($browseType == "bymodule")
         {
             $type = is_numeric($libID) ? 'customerdoc' : $libID . 'doc';

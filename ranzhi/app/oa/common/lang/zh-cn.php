@@ -29,4 +29,4 @@ $lang->announce->menu->category = '类目管理|tree|browse|type=announce|';
 
 $lang->doc = new stdclass();
 $lang->doc->menu = new stdclass();
-$lang->doc->menu->create = '添加文档库|doc|createLib|';
+$lang->doc->menu->create = '添加文档库|doc|createlib|';

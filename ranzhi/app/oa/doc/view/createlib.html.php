@@ -18,4 +18,5 @@
   </div>
   <?php echo html::submitButton();?>
 </form>
+<?php js::set('libID', 'createLib')?>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

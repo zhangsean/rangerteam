@@ -52,8 +52,9 @@ $lang->doc->deleteLib      = 'Delete library';
 $lang->doc->allProduct     = 'All products';
 $lang->doc->allProject     = 'All projects';
 
-$lang->doc->systemLibs['product'] = 'Product doc';
-$lang->doc->systemLibs['project'] = 'Project doc';
+$lang->doc->systemLibs = array();
+//$lang->doc->systemLibs['product'] = 'Product doc';
+//$lang->doc->systemLibs['project'] = 'Project doc';
 
 $lang->doc->types['file'] = 'File';
 $lang->doc->types['url']  = 'Link';

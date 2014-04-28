@@ -29,4 +29,4 @@ $lang->announce->menu->category = 'Category|tree|browse|type=announce|';
 
 $lang->doc = new stdclass();
 $lang->doc->menu = new stdclass();
-$lang->doc->menu->create = 'Create Library|doc|createLib|';
+$lang->doc->menu->create = 'Create Library|doc|createlib|';
