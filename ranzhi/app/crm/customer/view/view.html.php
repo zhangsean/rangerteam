@@ -13,6 +13,21 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='row'>
   <div class='col-md-8'>
+    <div class='panel'>
+      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->view . $lang->colon . $customer->name;?></strong></div>
+      <div class='panel-body'>
+        <table class='table table-form table-data'>
+          <tr>
+            <th class='w-70px'><?php echo $lang->customer->intension;?></th>
+            <td><?php echo $customer->intension;?></td>
+          </tr>
+          <tr>
+            <th class='desc'><?php echo $lang->customer->desc;?></th>
+            <td class='desc'><?php echo $customer->desc;?></td>
+          </tr>
+        </table>
+      </div>
+    </div>
     <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}&customer={$customer->id}")?>
     <div class='text-center'>
       <?php
@@ -25,15 +40,11 @@
   </div>
   <div class='col-md-4'>  
     <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->view;?></strong></div>
+      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->basicInfo;?></strong></div>
       <div class='panel-body'>
         <table class='table table-info'>
           <tr>
-            <th class='w-70px'><?php echo $lang->customer->name;?></th>
-            <td><?php echo $customer->name;?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->customer->level;?></th>
+            <th class='w-70px'><?php echo $lang->customer->level;?></th>
             <td><?php echo $lang->customer->levelList[$customer->level];?></td>
           </tr>
           <tr>
@@ -50,11 +61,11 @@
           </tr>
           <tr>
             <th><?php echo $lang->customer->industry;?></th>
-            <td><?php echo $customer->industry;?></td>
+            <td><?php if($customer->industry) echo $industry[$customer->industry];?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->area;?></th>
-            <td><?php echo $customer->area;?></td>
+            <td><?php if($customer->area) echo $area[$customer->area];?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->weibo;?></th>
@@ -67,14 +78,6 @@
           <tr>
             <th><?php echo $lang->customer->site;?></th>
             <td><?php echo $customer->site;?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->customer->intension;?></th>
-            <td><?php echo $customer->intension;?></td>
-          </tr>
-          <tr>
-            <th class='desc'><?php echo $lang->customer->desc;?></th>
-            <td class='desc'><?php echo $customer->desc;?></td>
           </tr>
         </table>
       </div>

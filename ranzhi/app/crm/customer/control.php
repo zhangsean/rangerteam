@@ -132,6 +132,8 @@ class customer extends control
         $this->view->addresses = $this->loadModel('address')->getList('customer', $customerID);
         $this->view->actions   = $this->loadModel('action')->getList('customer', $customerID);
         $this->view->products  = $this->loadModel('product')->getPairs();
+        $this->view->area      = $this->loadModel('tree')->getPairs('', 'area');
+        $this->view->industry  = $this->tree->getPairs('', 'industry');
         $this->display();
     }
 

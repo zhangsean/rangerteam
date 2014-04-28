@@ -12,82 +12,76 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
-<div class='panel'>
-  <div class='panel-heading'>
-    <strong><i class="icon-pencil"></i> <?php echo $lang->customer->edit;?></strong>
-  </div>
-  <div class='panel-body'>
-    <form method='post' id='ajaxForm' class='form-condensed'>
-      <div class='row'>
-        <div class='col-md-9'>
-          <fieldset class='fieldset-primary'>
-            <table class='table table-form'>
-              <tr class='text-left'>
-                <th><?php echo $lang->customer->name;?></th>
-              </tr>
-              <tr>
-                <td><?php echo html::input('name', $customer->name, "class='form-control'");?></td>
-              </tr>
-            </table>
-          </fieldset>
-          <fieldset>
-            <legend><?php echo $lang->customer->basicInfo; ?></legend>
-            <table class='table table-form'>
-              <tr>
-                <th class='w-80px'><?php echo $lang->customer->type;?></th>
-                <td class='w-p50'><?php echo html::select("type", $lang->customer->typeList, $customer->type, "class='form-control'");?></td><td></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->customer->size;?></th>
-                <td><?php echo html::select('size', $lang->customer->sizeList, $customer->size, "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->customer->status;?></th>
-                <td><?php echo html::select("status", $lang->customer->statusList, $customer->status, "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->customer->level;?></th>
-                <td><?php echo html::select('level', $lang->customer->levelList, $customer->level, "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->customer->industry;?></th>
-                <td><?php echo html::select('industry', $industry, $customer->industry, "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->customer->area;?></th>
-                <td><?php echo html::select('area', $area,  $customer->area, "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->customer->intension;?></th>
-                <td colspan='2'><?php echo html::textarea('intension', $customer->intension, "class='form-control' rows=2");?></td>
-              </tr>
-            </table>
-          </fieldset>
-          <fieldset>
-            <legend><?php echo $lang->customer->moreInfo; ?></legend>
-            <table class='table table-form'>
-              <tr>
-                <th class='w-80px'><?php echo $lang->customer->site;?></th>
-                <td class='w-p40'><?php echo html::input('site', $customer->site ? $customer->site : 'http://', "class='form-control'");?></td><td></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->customer->weibo;?></th>
-                <td><?php echo html::input('weibo', $customer->weibo ? $customer->weibo : 'http://weibo.com/', "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->customer->weixin;?></th>
-                <td><?php echo html::input('weixin', $customer->weixin, "class='form-control'");?></td>
-              </tr>
-              <tr>
-                <th><?php echo $lang->customer->desc;?></th>
-                <td colspan='2'><?php echo html::textarea('desc', $customer->desc, "rows='2' class='form-control'");?></td>
-              </tr>
-            </table>
-          </fieldset>
-        </div>
-      </div>
-      <?php echo html::submitButton();?>
-    </form>
-  </div>
+<div class='row'>
+  <form method='post' id='ajaxForm' class='form-condensed'>
+     <div class='col-md-8'>
+       <div class='panel'>
+         <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->edit;?></strong></div>
+         <div class='panel-body'>
+           <table class='table table-form table-data'>
+             <tr>
+               <th class='w-70px'><?php echo $lang->customer->name;?></th>
+               <td><?php echo html::input('name', $customer->name, "class='form-control'");?></td>
+             </tr>
+             <tr>
+               <th><?php echo $lang->customer->intension;?></th>
+               <td><?php echo html::textarea('intension', $customer->intension, "class='form-control' rows=2");?></td>
+             </tr>
+             <tr>
+               <th><?php echo $lang->customer->desc;?></th>
+               <td><?php echo html::textarea('desc', $customer->desc, "rows='2' class='form-control'");?></td>
+             </tr>
+           </table>
+         </div>
+         <div class='panel-footer'><?php echo html::submitButton() . html::backButton();?></div>
+       </div>
+       <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}&customer={$customer->id}")?>
+     </div>
+     <div class='col-md-4'>  
+       <div class='panel'>
+         <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->basicInfo;?></strong></div>
+         <div class='panel-body'>
+           <table class='table table-info'>
+             <tr>
+               <th class='w-70px'><?php echo $lang->customer->level;?></th>
+               <td><?php echo html::select('level', $lang->customer->levelList, $customer->level, "class='form-control'");?></td>
+             </tr>
+             <tr>
+               <th><?php echo $lang->customer->status;?></th>
+               <td><?php echo html::select("status", $lang->customer->statusList, $customer->status, "class='form-control'");?></td>
+             </tr>
+             <tr>
+               <th><?php echo $lang->customer->size;?></th>
+               <td><?php echo html::select('size', $lang->customer->sizeList, $customer->size, "class='form-control'");?></td>
+             </tr>
+             <tr>
+               <th><?php echo $lang->customer->type;?></th>
+               <td><?php echo html::select("type", $lang->customer->typeList, $customer->type, "class='form-control'");?></td><td></td>
+             </tr>
+             <tr>
+               <th><?php echo $lang->customer->industry;?></th>
+               <td><?php echo html::select('industry', $industry, $customer->industry, "class='form-control'");?></td>
+             </tr>
+             <tr>
+               <th><?php echo $lang->customer->area;?></th>
+               <td><?php echo html::select('area', $area,  $customer->area, "class='form-control'");?></td>
+             </tr>
+             <tr>
+               <th><?php echo $lang->customer->weibo;?></th>
+               <td><?php echo html::input('weibo', $customer->weibo ? $customer->weibo : 'http://weibo.com/', "class='form-control'");?></td>
+             </tr>
+             <tr>
+               <th><?php echo $lang->customer->weixin;?></th>
+               <td><?php echo html::input('weixin', $customer->weixin, "class='form-control'");?></td>
+             </tr>
+             <tr>
+               <th><?php echo $lang->customer->site;?></th>
+               <td><?php echo html::input('site', $customer->site ? $customer->site : 'http://', "class='form-control'");?></td><td></td>
+             </tr>
+           </table>
+         </div>
+       </div>
+     </div>
+  </form>
 </div>
 <?php include '../../common/view/footer.html.php';?>

@@ -68,7 +68,7 @@ function toggleShow(obj)
 
     $('.changes').each(function()
     {
-        var switchButtonID = $(this).closest('li').find('button[id^="switchButton"]').attr('id');
+        var switchButtonID = $(this).closest('li').find('span[id^="switchButton"]').attr('id');
         switchChange(switchButtonID.replace('switchButton', ''));
     })
 }
@@ -117,8 +117,8 @@ $(function()
   <div class='panel-heading'>
     <strong><?php echo $lang->history?></strong>
     <div class='panel-actions'>
-      <button class='btn btn-mini' onclick='toggleOrder(this)' class='hand'> <?php echo "<span title='$lang->reverse' class='log-asc'></span>";?></button>
-      <button class='btn btn-mini' onclick='toggleShow(this);' class='hand'><?php echo "<span title='$lang->switchDisplay' class='change-show'></span>";?></button>
+      <span class='btn btn-mini' onclick='toggleOrder(this)' class='hand'> <?php echo "<span title='$lang->reverse' class='log-asc'></span>";?></span>
+      <span class='btn btn-mini' onclick='toggleShow(this);' class='hand'><?php echo "<span title='$lang->switchDisplay' class='change-show'></span>";?></span>
     </div>
   </div>
   <div class='panel-body'>
@@ -134,7 +134,7 @@ $(function()
       ?>
       <span>
         <?php $this->action->printAction($action);?>
-        <?php if(!empty($action->history)) echo "<button id='switchButton$i' class='hand change-show btn btn-mini' onclick=switchChange($i)></button>";?>
+        <?php if(!empty($action->history)) echo "<span id='switchButton$i' class='hand change-show btn btn-mini' onclick=switchChange($i)></span>";?>
       </span>
       <?php if(!empty($action->comment) or !empty($action->history)):?>
       <?php if(!empty($action->comment)) echo "<div class='history'>";?>
