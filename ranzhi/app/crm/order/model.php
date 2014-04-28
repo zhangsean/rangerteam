@@ -197,6 +197,7 @@ class orderModel extends model
             ->add('closedDate', $now)
             ->add('closedBy', $this->app->user->account)
             ->add('status', 'closed')
+            ->add('assignedTo', 'closed')
             ->get();
 
         $this->dao->update(TABLE_ORDER)->data($order, $skip = 'uid')
@@ -220,8 +221,8 @@ class orderModel extends model
         $order = fixer::input('post')
             ->add('activatedDate', $now)
             ->add('activatedBy', $this->app->user->account)
+            ->add('assignedTo', '')
             ->setDefault('status', 'normal')
-            ->setIF($order->assignedTo != '', 'status', 'assigned')
             ->get();
 
         $this->dao->update(TABLE_ORDER)->data($order)->autoCheck()->where('id')->eq($orderID)->exec();

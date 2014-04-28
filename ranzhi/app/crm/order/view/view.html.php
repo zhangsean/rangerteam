@@ -17,14 +17,14 @@
     <?php 
     echo html::a($this->createLink('sys.action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $lang->order->record, "class='btn' data-toggle='modal'");
     if($order->status == 'normal') echo html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign, "class='btn btn-default'");
-    if($order->status != 'normal') echo html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
+    if($order->status != 'normal') echo html::a('###', $this->lang->order->sign, "class='btn' disabled='disabled' class='disabled'");
 
     echo html::a(inlink('assign', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal' class='btn btn-default'");
     echo html::a(inlink('edit',     "orderID=$order->id"), $this->lang->edit,   "class='btn btn-default'");
 
     if($order->status != 'closed') echo html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "class='btn btn-default' data-toggle='modal'");
     if($order->closedReason == 'payed') echo html::a('###', $this->lang->close, "disabled='disabled' class='disabled btn'");
-    if($order->closedReason != 'payed' and $order->status == 'closed') echo html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='btn reload btn-default'");
+    if($order->closedReason != 'payed' and $order->status == 'closed') echo html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='btn activate'");
 
     echo html::a(inlink('delete', "orderID={$order->id}"), $lang->delete, "class='btn btn-default deleter'");
     echo html::backButton();
@@ -55,7 +55,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->order->assignedTo;?></th>
-          <td><?php echo $users[$order->assignedTo];?></td>
+          <td><?php echo zget($users, $order->assignedTo);?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->status;?></th>
