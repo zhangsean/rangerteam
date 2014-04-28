@@ -71,14 +71,6 @@ class commonModel extends model
         $sessionName = $this->config->sessionVar;
         session_name($sessionName);
         session_start();
-
-        /* Check the user's IP exclude guest. */
-        if(isset($_SESSION['user']) and $this->session->user->account != 'guest')
-        {
-            session_destroy();
-            $referer  = helper::safe64Encode($this->app->getURI(true));
-            die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
-        }
     }
 
     /**
