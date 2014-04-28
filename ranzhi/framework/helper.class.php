@@ -632,7 +632,8 @@ function zget($var, $key, $valueWhenNone = '', $valueWhenExists = '')
         if($valueWhenExists) return $valueWhenExists;
         return $var[$key];
     }
-    return $valueWhenNone;
+    if($valueWhenNone) return $valueWhenNone;
+    return $key;
 }
 
 /**
