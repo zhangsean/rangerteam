@@ -22,15 +22,14 @@
     <thead>
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
-        <th class='w-60px'> <?php commonModel::printOrderLink('id',       $orderBy, $vars, $lang->contact->id);?></th>
+        <th class='w-50px'> <?php commonModel::printOrderLink('id',       $orderBy, $vars, $lang->contact->id);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
         <th><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->contact->customer);?></th>
-        <th class='w-60px'> <?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->contact->gender);?></th>
+        <th class='w-50px'> <?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->contact->gender);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('phone',    $orderBy, $vars, $lang->contact->phone);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('mobile',   $orderBy, $vars, $lang->contact->mobile);?></th>
         <th class='w-200px'><?php commonModel::printOrderLink('email',    $orderBy, $vars, $lang->contact->email);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('qq',       $orderBy, $vars, $lang->contact->qq);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('weixin',   $orderBy, $vars, $lang->contact->weixin);?></th>
         <th class='w-150px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
@@ -45,7 +44,6 @@
       <td><?php echo $contact->mobile;?></td>
       <td><?php echo $contact->email;?></td>
       <td><?php echo $contact->qq;?></td>
-      <td><?php echo $contact->weixin;?></td>
       <td class='operate'>
         <?php echo html::a($this->createLink('contact', 'edit', "contactID=$contact->id"), $lang->edit);?>
         <?php echo html::a($this->createLink('contact', 'history', "contactID=$contact->id"), $lang->contact->record);?>
