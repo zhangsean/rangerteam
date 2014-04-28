@@ -20,11 +20,9 @@ class contactModel extends model
      */
     public function getByID($id)
     {
-        return $this->dao->select('t1.*, t2.customer, t2.maker, t2.join, t2.dept, t2.title, t2.id as resumeID')->from(TABLE_CONTACT)->alias('t1')
-            ->leftJoin(TABLE_RESUME)->alias('t2')->on("t1.id = t2.contact")
+        return $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join')->from(TABLE_CONTACT)->alias('t1')
+            ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.id')->eq($id)
-            ->andWhere('t2.left')->eq('')
-            ->orderBy('resumeID desc')
             ->limit(1)
             ->fetch();
     }
@@ -40,8 +38,8 @@ class contactModel extends model
      */
     public function getList($customer = 0, $orderBy = 'maker_desc', $pager = null)
     {
-        return $this->dao->select('t1.*, t2.id as resumeID, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
-            ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.id = t2.contact')
+        return $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
+            ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
             ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->fi()
             ->orderBy($orderBy)
@@ -60,7 +58,7 @@ class contactModel extends model
     public function getPairs($customer = 0, $emptyOption = true)
     {
         $contacts = $this->dao->select('t1.*')->from(TABLE_CONTACT)->alias('t1')
-            ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.id = t2.contact')
+            ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
             ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->FI()
             ->fetchPairs('id', 'realname');
@@ -124,7 +122,9 @@ class contactModel extends model
             $resume->dept     = $contact->dept;
             $resume->title    = $contact->title;
             $resume->join     = $contact->join;
+
             $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
+            if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->where('id')->eq($contactID)->exec();
 
             return $contactID;
         }
@@ -177,6 +177,7 @@ class contactModel extends model
             if($oldContact->customer != $contact->customer)
             {
                 $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
+                if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->where('id')->eq($contactID)->exec();
             }
             else
             {

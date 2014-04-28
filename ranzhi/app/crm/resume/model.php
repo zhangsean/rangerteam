@@ -32,7 +32,7 @@ class resumeModel extends model
      */
     public function getList($contactID)
     {
-        return $this->dao->select('*')->FROM(TABLE_RESUME)->where('contact')->eq($contactID)->orderBy('id')->fetchAll();
+        return $this->dao->select('*')->FROM(TABLE_RESUME)->where('contact')->eq($contactID)->andWhere('deleted')->eq(0)->orderBy('id')->fetchAll();
     }
 
     /**
@@ -49,8 +49,6 @@ class resumeModel extends model
         {
             $resume = fixer::input('post')
                 ->add('contact', $contactID)
-                ->setDefault('join', '0000-00-00')
-                ->setDefault('left', '0000-00-00')
                 ->remove('newCustomer,type,size,status,level,name')
                 ->get();
 
@@ -78,7 +76,13 @@ class resumeModel extends model
             ->batchCheck($this->config->resume->require->create, 'notempty')
             ->exec();
 
-        if(!dao::isError()) return $this->dao->lastInsertID();
+        if(!dao::isError())
+        {
+            $resumeID = $this->dao->lastInsertID();
+            $this->dao->update(TABLE_CONTACT)->set('resume')->eq($resumeID)->where('id')->eq($contactID)->exec();
+
+            return $resumeID;
+        }
 
         return false;
     }
@@ -93,30 +97,10 @@ class resumeModel extends model
     public function update($resumeID)
     {
         $oldResume = $this->getByID($resumeID);
-        $resume    = fixer::input('post')
-            ->setDefault('dept', $oldResume->dept)
-            ->setDefault('title', $oldResume->title)
-            ->setDefault('join', $oldResume->join)
-            ->setDefault('left', $oldResume->left)
-            ->remove('newCustomer,type,size,status,level,name')
-            ->get();
+        $resume    = fixer::input('post')->get();
 
         $this->dao->update(TABLE_RESUME)->data($resume)->where('id')->eq($resumeID)->exec();
 
         return commonModel::createChanges($oldResume, $resume);
-    }
-
-    /**
-     * Delete resume.
-     * 
-     * @param  int    $resumeID 
-     * @param  string $table 
-     * @access public
-     * @return bool
-     */
-    public function delete($resumeID, $table = null)
-    {
-        $this->dao->delete()->from(TABLE_RESUME)->where('id')->eq($resumeID)->exec();
-        return !dao::isError();
     }
 }

@@ -16,6 +16,7 @@ CREATE TABLE `crm_contact` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `realname` char(30) NOT NULL DEFAULT '',
   `nickname` char(30) NOT NULL,
+  `resume` mediumint(8) unsigned NOT NULL,
   `avatar` char(100) NOT NULL,
   `birthday` date NOT NULL default '0000-00-00',
   `gender` enum('f','m','u') NOT NULL DEFAULT 'u',
@@ -174,6 +175,7 @@ CREATE TABLE `crm_resume` (
   `address` mediumint(8) unsigned NOT NULL,
   `join` char(10) NOT NULL,
   `left` char(10) NOT NULL,
+  `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `contact` (`contact`),
   KEY `customer` (`customer`)

@@ -19,7 +19,6 @@
     <tr class='text-center'>
       <th class='w-60px'><?php echo $lang->contact->id;?></th>
       <th><?php echo $lang->contact->realname;?></th>
-      <th><?php echo $lang->contact->qq;?></th>
       <th><?php echo $lang->contact->phone;?></th>
       <th><?php echo $lang->contact->email;?></th>
       <th><?php echo $lang->contact->qq;?></th>
