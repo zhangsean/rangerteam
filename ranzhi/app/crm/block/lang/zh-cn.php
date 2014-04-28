@@ -19,7 +19,7 @@ $lang->block->lblBlock = '区块';
 $lang->block->availableBlocks = new stdclass();
 
 $lang->block->availableBlocks->order    = '我的订单';
-$lang->block->availableBlocks->task     = '我的任务';
+//$lang->block->availableBlocks->task     = '我的任务';
 $lang->block->availableBlocks->contract = '我的合同';
 
 $lang->block->orderByList = new stdclass();

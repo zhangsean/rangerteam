@@ -19,7 +19,7 @@ $lang->block->lblBlock = 'Block';
 $lang->block->availableBlocks = new stdclass();
 
 $lang->block->availableBlocks->order    = 'My Orders';
-$lang->block->availableBlocks->task     = 'My Tasks';
+//$lang->block->availableBlocks->task     = 'My Tasks';
 $lang->block->availableBlocks->contract = 'My Contracts';
 
 $lang->block->orderByList = new stdclass();
