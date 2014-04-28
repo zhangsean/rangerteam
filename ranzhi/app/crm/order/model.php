@@ -172,7 +172,7 @@ class orderModel extends model
         $order    = fixer::input('post')->get();
 
         $this->dao->update(TABLE_ORDER)
-            ->data($order)
+            ->data($order, $skip = 'referer')
             ->autoCheck()
             ->batchCheck($this->config->order->require->edit, 'notempty')
             ->where('id')->eq($orderID)
