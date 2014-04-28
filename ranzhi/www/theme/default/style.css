@@ -10,6 +10,7 @@
 */
 body {background: #fff;}
 
+
 /*-----------------------WIDTH SETTING--------------------------*/
 .w-p5  {width: 5%}
 .w-p10 {width: 10%}
@@ -243,6 +244,23 @@ label.checkbox,input[type='radio']+label{font-weight: normal;}
 
 td #aliasLabel {display: table-row;}
 
+/* table info */
+.table-info {font-size: 13px;}
+.table-info th {text-align:right;vertical-align:middle; border-bottom:none; font-weight: normal;}
+.table-info th.text-left, .table-info tr.text-left th {text-align:left;vertical-align:middle; border-bottom:none}
+.table-info td {vertical-align:middle; border-bottom:none}
+.table-info th,.table-info td {border-bottom:none; padding:5px;}
+.table-info th.text-middle, .table td.text-middle, .text-middle {vertical-align: middle;}
+.table-info td.text-bottom {vertical-align:bottom;}
+
+/* table contact */
+.table-contact th {vertical-align:middle; border-bottom:none; font-weight: normal;}
+.table-contact th.text-left, .table-contact tr.text-left th {text-align:left;vertical-align:middle; border-bottom:none}
+.table-contact td {vertical-align:middle; border-bottom:none}
+.table-contact th,.table-contact td {border-bottom:none; padding:8px;}
+.table-contact th.text-middle, .table td.text-middle, .text-middle {vertical-align: middle;}
+.table-contact td.text-bottom {vertical-align:bottom;}
+
 /* required */
 .required:after{font-family: arial;font-size: 24px}
 .required[class*='col-'] {position: relative;}
@@ -260,7 +278,7 @@ td #aliasLabel {display: table-row;}
 .form-group .file-form .form-group:last-child {margin-bottom: 0;}
 
 /* colors */
-.red {color: #d2322d}
+.text-red {color: #d2322d}
 
 /* icons */
 .icon-border-circle {padding: 2px 8px;}
