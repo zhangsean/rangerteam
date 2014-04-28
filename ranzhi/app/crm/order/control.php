@@ -38,8 +38,7 @@ class order extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->view->title     = $this->lang->order->browse;
-        $this->view->orders    = $this->order->getList(0, $orderBy, $pager);
-        $this->view->products  = $this->loadModel('product')->getPairs();
+        $this->view->orders    = $this->order->getList('all', '', $orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getList();
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->pager     = $pager;
@@ -211,20 +210,21 @@ class order extends control
     }
 
     /**
-     * Update assign of order.
+     * Assign an order function.
      *
      * @param  int    $orderID
+     * @param  null   $table  
      * @access public
      * @return void
      */
-    public function assignTo($orderID)
+    public function assign($orderID, $table = null)
     {
         if($_POST)
         {
             $this->order->assign($orderID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             if($this->post->assignedTo) $this->loadModel('action')->create('order', $orderID, 'Assigned', $this->post->comment, $this->post->assignedTo);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
         $this->view->title   = $this->lang->order->assignedTo;

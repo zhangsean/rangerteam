@@ -97,7 +97,7 @@ class contract extends control
         $contract = $this->contract->getByID($contractID);
         $this->view->contract       = $contract; 
         $this->view->contractOrders = $this->loadModel('order')->getListByID($contract->order);
-        $this->view->orders         = array('' => '') + $this->order->getList($contract->customer);
+        $this->view->orders         = array('' => '') + $this->order->getList($mode = 'customer', $contract->customer);
         $this->view->customers      = $this->loadModel('customer')->getPairs();
         $this->view->contacts       = $this->loadModel('contact')->getPairs($contract->customer);
         $this->view->users          = $this->loadModel('user')->getPairs();

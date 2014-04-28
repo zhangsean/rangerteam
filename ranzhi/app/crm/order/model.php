@@ -32,25 +32,22 @@ class orderModel extends model
     /** 
      * Get order list.
      * 
-     * @param  int     $customerID 
+     * @param  string  $mode 
+     * @param  mix     $param 
      * @param  string  $orderBy 
      * @param  object  $pager 
      * @access public
      * @return array
      */
-    public function getList($customerID = 0, $orderBy = 'id_desc', $pager = null)
+    public function getList($mode = 'all', $param = null, $orderBy = 'id_desc', $pager = null)
     {
-        $orders = $this->dao->select('*')->from(TABLE_ORDER)->where(1)
-            ->beginIF($customerID)->andWhere('customer')->eq($customerID)->fi()
+        $orders = $this->dao->select('o.*, c.name as customerName, c.level as level, p.name as productName')->from(TABLE_ORDER)->alias('o')
+            ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
+            ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
+            ->beginIF($mode != 'all')->where($mode)->eq($param)->fi()
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
-        $contracts = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->fetchPairs('order', 'contract');
-        $customers = $this->loadModel('customer')->getPairs();
-        $products  = $this->loadModel('product')->getPairs();
-
-        foreach($orders as $order) $order->contract = !empty($contracts[$order->id]) ? $contracts[$order->id] : '';
-
-        foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->id, $customers[$order->customer], $products[$order->product], substr($order->createdDate, 0, 10)); 
+        foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->id, $order->customerName, $order->productName, substr($order->createdDate, 0, 10)); 
 
         return $orders;
     }
@@ -65,31 +62,6 @@ class orderModel extends model
     public function getListByID($idList)
     {
         return $this->dao->select('*')->from(TABLE_ORDER)->where('id')->in($idList)->fetchAll();
-    }
-
-    /**
-     * Get order pairs.
-     * 
-     * @param  int    $customerID 
-     * @access public
-     * @return array
-     */
-    public function getPairs($customerID = 0)
-    {
-        $orders = $this->dao->select('id, customer, product, createdDate')->from(TABLE_ORDER)
-            ->beginIF($customerID)->where('customer')->eq($customerID)->fi()
-            ->fetchAll('id');
-
-        $customers = $this->loadModel('customer')->getPairs();
-        $products  = $this->loadModel('product')->getPairs();
-
-        $orderPairs = array();
-        foreach($orders as $key => $order)
-        {
-           $orderPairs[$key] = sprintf($this->lang->order->titleLBL, $customers[$order->customer], $products[$order->product], $order->real);
-        }
-
-        return $orderPairs;
     }
 
     /**
@@ -164,7 +136,7 @@ class orderModel extends model
         $order = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
-            ->setDefault('status', 'assigned')
+            ->setDefault('status', 'normal')
             ->setDefault('assignedBy', $this->app->user->account)
             ->setDefault('assignedTo', $this->app->user->account)
             ->setDefault('assignedDate', $now)
@@ -294,10 +266,10 @@ class orderModel extends model
         $menu .= html::a(inlink('view', "orderID=$order->id"), $this->lang->view);
         $menu .= html::a(helper::createLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $this->lang->order->record, "data-toggle='modal'");
 
-        if(empty($order->contract))  $menu .= html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign);
-        if(!empty($order->contract)) $menu .= html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
+        if($order->status == 'normal')   $menu .= html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign);
+        if($order->status != 'normal') $menu .= html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
 
-        $menu .= html::a(inlink('assignTo', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal'");
+        $menu .= html::a(inlink('assign', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal'");
         $menu .= html::a(inlink('edit',   "orderID=$order->id"), $this->lang->edit);
 
         if($order->status != 'closed') $menu .= html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "data-toggle='modal'");

@@ -21,7 +21,7 @@
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px text-center' ><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
-        <th class='w-40px'><?php echo $lang->customer->level;?></th>
+        <th class='w-60px text-center' ><?php commonModel::printOrderLink('level', $orderBy, $vars, $lang->customer->level);?></th>
         <th><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->order->customer);?></th>
         <th><?php commonModel::printOrderLink('product', $orderBy, $vars, $lang->order->product);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('plan', $orderBy, $vars, $lang->order->plan);?>
@@ -36,9 +36,9 @@
       <?php foreach($orders as $order):?>
       <tr class='text-center' data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id");?>'>
         <td><?php echo $order->id;?></td>
-        <td><?php echo $lang->customer->levelList[$customers[$order->customer]->level];?></td>
-        <td class='text-left'><?php echo $customers[$order->customer]->name;?></td>
-        <td><?php echo $products[$order->product];?></td>
+        <td><?php echo $lang->customer->levelList[$order->level];?></td>
+        <td class='text-left'><?php echo $order->customerName;?></td>
+        <td><?php echo $order->productName;?></td>
         <td><?php echo $order->plan;?></td>
         <td><?php echo $users[$order->assignedTo];?></td>
         <td><?php echo isset($lang->order->statusList[$order->status]) ? $lang->order->statusList[$order->status] : $order->status;?></td>

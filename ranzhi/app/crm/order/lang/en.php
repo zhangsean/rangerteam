@@ -47,11 +47,9 @@ $lang->order->close         = 'Close';
 $lang->order->manageMembers = 'Manage Members';
 $lang->order->sign          = 'Sign';
 
-$lang->order->statusList['normal']   = 'Normal';
-$lang->order->statusList['assigned'] = 'Assigned';
-$lang->order->statusList['signed']   = 'Signed';
-$lang->order->statusList['payed']    = 'Payed';
-$lang->order->statusList['closed']   = 'Closed';
+$lang->order->statusList['normal'] = 'Normal';
+$lang->order->statusList['signed'] = 'Signed';
+$lang->order->statusList['closed'] = 'Closed';
 
 $lang->order->closedReasonList['payed']     = 'Payed';
 $lang->order->closedReasonList['failed']    = 'Failed';

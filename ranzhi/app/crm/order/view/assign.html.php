@@ -13,7 +13,7 @@
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
-<form method='post' id='ajaxForm' action='<?php echo $this->createLink('order', 'assignTo', "orderID=$orderID")?>'>
+<form method='post' id='ajaxForm' action='<?php echo $this->createLink('order', 'assign', "orderID=$orderID")?>'>
   <table class='table table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->order->assignedTo;?></th>
