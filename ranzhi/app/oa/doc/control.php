@@ -67,7 +67,7 @@ class doc extends control
      */
     public function browse($libID = '0', $moduleID = 0, $productID = 0, $projectID = 0, $browseType = 'byModule', $param = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {  
-        $libID = $libID ? $libID : key($this->libs);
+        $libID = $libID ? $libID : key((array)$this->libs);
         if(!$libID) $this->locate(inlink('createLib'));
 
         /* Set browseType.*/ 
