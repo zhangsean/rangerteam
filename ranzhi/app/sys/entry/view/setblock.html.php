@@ -16,7 +16,7 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 include "../../common/view/chosen.html.php";
 ?>
-<form method='post' id='ajaxForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=$type")?>'>
+<form method='post' id='blockForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=$type")?>'>
   <table class='table table-form'>
     <tbody>
       <tr class='text-left'>

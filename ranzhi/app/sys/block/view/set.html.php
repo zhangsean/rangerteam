@@ -19,7 +19,7 @@ if($type == 'html')
     include '../../common/view/kindeditor.html.php';
 }
 ?>
-<form method='post' id='ajaxForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=$type")?>'>
+<form method='post' id='blockForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=$type")?>'>
   <table class='table table-form'>
   <?php if($type == 'rss'):?>
     <tbody>
