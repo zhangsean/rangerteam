@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->order->create;?></strong>
@@ -20,11 +21,11 @@
       <table class='table table-form w-p60'>
         <tr>
           <th class='w-120px'><?php echo $lang->order->customer;?></th>
-          <td><?php echo html::select('customer', $customers, '', "class='form-control select-customer'");?></td>
+          <td><?php echo html::select('customer', $customers, '', "class='form-control chosen'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->product;?></th>
-          <td><?php echo html::select('product', $products, '', "class='form-control'");?></td>
+          <td><?php echo html::select('product', $products, '', "class='form-control chosen'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->plan;?></th>

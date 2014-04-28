@@ -96,11 +96,11 @@
           </tr>
           <tr>
             <th><?php echo $lang->contract->contact;?></th>
-            <td><?php echo html::select('contact', $contacts, $contract->contact, "class='form-control'");?></td>
+            <td><?php echo html::select('contact', $contacts, $contract->contact, "class='form-control chosen'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->signedBy;?></th>
-            <td><?php echo html::select('signedBy', $users, $contract->signedBy, "class='form-control'");?></td>
+            <td><?php echo html::select('signedBy', $users, $contract->signedBy, "class='form-control chosen'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->signedDate;?></th>

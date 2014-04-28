@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <form method='post' id='ajaxForm' class='form-condensed'>
   <div class='col-md-8'>
     <div class='panel'>
@@ -24,7 +25,7 @@
           </tr>
           <tr>
             <th class='w-80px'><?php echo $lang->contact->customer;?></th>
-            <td class='w-p40'><?php echo html::select('customer', $customers, $contact->customer, "class='form-control select-customer'");?></td>
+            <td class='w-p40'><?php echo html::select('customer', $customers, $contact->customer, "class='form-control chosen'");?></td>
             <td>
               <?php $checked = $contact->maker ? "checked='checked'" : '';?>
               <input type='checkbox' name='maker' id='maker' value='1' <?php echo $checked?>/>

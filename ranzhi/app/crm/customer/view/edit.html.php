@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <div class='row'>
   <form method='post' id='ajaxForm' class='form-condensed'>
      <div class='col-md-8'>
@@ -60,11 +61,11 @@
              </tr>
              <tr>
                <th><?php echo $lang->customer->industry;?></th>
-               <td><?php echo html::select('industry', $industry, $customer->industry, "class='form-control'");?></td>
+               <td><?php echo html::select('industry', $industry, $customer->industry, "class='form-control chosen'");?></td>
              </tr>
              <tr>
                <th><?php echo $lang->customer->area;?></th>
-               <td><?php echo html::select('area', $area,  $customer->area, "class='form-control'");?></td>
+               <td><?php echo html::select('area', $area,  $customer->area, "class='form-control chosen'");?></td>
              </tr>
              <tr>
                <th><?php echo $lang->customer->weibo;?></th>
