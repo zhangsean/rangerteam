@@ -14,9 +14,13 @@
 <table class='table table-bordered table-hover table-striped table-data'>
   <thead>
     <tr class='text-center'>
-      <th class='w-60px'><?php echo $lang->contract->id;?></th>
+      <th class='w-50px'><?php echo $lang->contract->id;?></th>
       <th><?php echo $lang->contract->name;?></th>
-      <th><?php echo $lang->contract->status;?></th>
+      <th><?php echo $lang->contract->amount;?></th>
+      <th class='w-80px'><?php echo $lang->contract->createdDate;?></th>
+      <th class='w-80px'><?php echo $lang->contract->return;?></th>
+      <th class='w-80px'><?php echo $lang->contract->delivery;?></th>
+      <th class='w-80px'><?php echo $lang->contract->status;?></th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +28,10 @@
     <tr class='text-center'>
       <td><?php echo $contract->id;?></td>
       <td><?php echo $contract->name;?></td>
+      <td><?php echo $contract->amount;?></td>
+      <td><?php echo substr($contract->createdDate, 0, 10);?></td>
+      <td><?php echo $lang->contract->returnList[$contract->return];?></td>
+      <td><?php echo $lang->contract->deliveryList[$contract->delivery];?></td>
       <td><?php echo $lang->contract->statusList[$contract->status];?></td>
     </tr>
     <?php endforeach;?>

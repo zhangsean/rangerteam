@@ -53,7 +53,7 @@ body {background: #fff;}
 .w-150px {width:150px}
 .w-160px {width:160px}
 .w-200px {width:200px}
-.w-220px {width:220px}
+.w-240px {width:240px}
 .w-300px {width:300px}
 .w-400px {width:400px}
 .w-500px {width:500px}
@@ -248,7 +248,8 @@ td #aliasLabel {display: table-row;}
 .table-info {font-size: 13px;}
 .table-info th {text-align:right;vertical-align:middle; border-bottom:none; font-weight: normal;}
 .table-info th.text-left, .table-info tr.text-left th {text-align:left;vertical-align:middle; border-bottom:none}
-.table-info td {vertical-align:middle; border-bottom:none}
+.table-info td {vertical-align:middle; border-bottom:none;}
+.table-info th.desc, .table-info td.desc {padding-top: 20px;}
 .table-info th,.table-info td {border-bottom:none; padding:5px;}
 .table-info th.text-middle, .table td.text-middle, .text-middle {vertical-align: middle;}
 .table-info td.text-bottom {vertical-align:bottom;}

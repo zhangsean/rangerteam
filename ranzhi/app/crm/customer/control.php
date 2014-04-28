@@ -160,7 +160,6 @@ class customer extends control
     public function contact($customerID)
     {
         $this->view->title      = $this->lang->customer->contact;
-        $this->view->contacts   = $this->loadModel('contact')->getList($customerID);
         $this->view->customerID = $customerID;
         $this->display();
     }
@@ -197,7 +196,7 @@ class customer extends control
      */
     public function contract($customerID)
     {
-        $this->view->title     = $this->lang->customer->contact;
+        $this->view->title     = $this->lang->customer->contract;
         $this->view->contracts = $this->loadModel('contract')->getList($customerID);
         $this->display();
     }

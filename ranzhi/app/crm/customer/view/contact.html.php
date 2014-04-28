@@ -11,29 +11,5 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<table class='table table-bordered table-hover table-striped table-data'>
-  <caption>
-    <div class='pull-right'><?php echo html::a(inlink('linkContact', "customerID=$customerID"), $lang->customer->linkContact, "class='loadInModal'")?></div>
-  </caption>
-  <thead>
-    <tr class='text-center'>
-      <th class='w-60px'><?php echo $lang->contact->id;?></th>
-      <th><?php echo $lang->contact->realname;?></th>
-      <th><?php echo $lang->contact->phone;?></th>
-      <th><?php echo $lang->contact->email;?></th>
-      <th><?php echo $lang->contact->qq;?></th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach($contacts as $contact):?>
-    <tr class='text-center'>
-      <td><?php echo $contact->id;?></td>
-      <td><?php echo $contact->realname;?></td>
-      <td><?php echo $contact->phone;?></td>
-      <td><?php echo $contact->email;?></td>
-      <td><?php echo $contact->qq;?></td>
-    </tr>
-    <?php endforeach;?>
-  </tbody>
-</table>
+<?php echo $this->fetch('contact', 'block', "customerID={$customerID}");?>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

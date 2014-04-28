@@ -13,95 +13,73 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='row'>
   <div class='col-md-8'>
+    <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}&customer={$customer->id}")?>
+    <div class='text-center'>
+      <?php
+      echo html::a($this->createLink('action', 'createRecord', "objectType=customer&objectID={$customer->id}&customer={$customer->id}"), $lang->customer->record, "class='btn' data-toggle='modal'");
+      echo html::a(inlink('edit', "customerID=$customer->id"), $lang->edit, "class='btn'");
+      echo html::a(inlink('delete', "customerID=$customer->id"), $lang->delete, "class='deleter btn'");
+      echo html::a(inlink('browse'), $lang->goback, "class='btn'");
+      ?>
+    </div>
+  </div>
+  <div class='col-md-4'>  
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->view;?></strong></div>
       <div class='panel-body'>
-        <table class='table table-form table-data'>
+        <table class='table table-info'>
           <tr>
-            <th class='w-80px'><?php echo $lang->customer->name;?></th>
-            <td colspan='3'><?php echo $customer->name;?></td>
+            <th class='w-70px'><?php echo $lang->customer->name;?></th>
+            <td><?php echo $customer->name;?></td>
           </tr>
           <tr>
-            <th class='w-80px'><?php echo $lang->customer->level;?></th>
-            <td class='w-p40'><?php echo $lang->customer->levelList[$customer->level];?></td>
-            <th class='w-80px'><?php echo $lang->customer->status;?></th>
-            <td class='w-p40'><?php echo $lang->customer->statusList[$customer->status];?></td>
+            <th><?php echo $lang->customer->level;?></th>
+            <td><?php echo $lang->customer->levelList[$customer->level];?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->customer->status;?></th>
+            <td><?php echo $lang->customer->statusList[$customer->status];?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->size;?></th>
             <td><?php echo $lang->customer->sizeList[$customer->size];?></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->customer->type;?></th>
             <td><?php echo $lang->customer->typeList[$customer->type];?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->industry;?></th>
             <td><?php echo $customer->industry;?></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->customer->area;?></th>
             <td><?php echo $customer->area;?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->weibo;?></th>
             <td><?php echo $customer->weibo;?></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->customer->weixin;?></th>
             <td><?php echo $customer->weixin;?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->site;?></th>
-            <td colspan='3'><?php echo $customer->site;?></td>
+            <td><?php echo $customer->site;?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->intension;?></th>
-            <td colspan='3'><?php echo $customer->intension;?></td>
+            <td><?php echo $customer->intension;?></td>
           </tr>
           <tr>
-            <th><?php echo $lang->customer->desc;?></th>
-            <td colspan='3'><?php echo $customer->desc;?></td>
+            <th class='desc'><?php echo $lang->customer->desc;?></th>
+            <td class='desc'><?php echo $customer->desc;?></td>
           </tr>
         </table>
       </div>
-      <div class='panel-footer'>
-        <?php
-        echo html::a(inlink('edit', "customerID=$customer->id"), $lang->edit, "class='btn'");
-        echo html::a(inlink('delete', "customerID=$customer->id"), $lang->delete, "class='deleter btn'");
-        echo html::a(inlink('browse'), $lang->goback, "class='btn'");
-        ?>
-      </div>
     </div>
-    <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}&customer={$customer->id}")?>
-  </div>
-  <div class='col-md-4'>  
-    <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->contact;?></strong></div>
-      <div class='panel-body'>
-        <table class='table table-hover table-striped table-data table-contact'>
-          <?php foreach($contacts as $contact):?>
-          <tr>
-            <td>
-              <dl>
-                <dt <?php if($contact->maker) echo "class='text-danger'";?>>
-                  <?php echo $contact->realname;?>
-                </dt>
-                <dd>
-                  <small class='w-70px'> <?php echo $lang->resume->dept . $lang->colon; ?></small>
-                  <strong><?php echo $contact->dept;?></strong>
-                  <small> <?php echo $lang->resume->title . $lang->colon; ?></small>
-                  <strong><?php echo $contact->title;?></strong>
-                </dd>
-                <?php foreach($config->contact->contactWayList as $item):?>
-                <?php if(!empty($contact->{$item})):?>
-                <dd>
-                  <small class='w-70px'><?php echo $lang->contact->{$item} . $lang->colon;?></small>
-                  <strong><?php echo $contact->{$item};?></strong>
-                </dd>
-                <?php endif;?>
-                <?php endforeach;?>
-              </dl>
-            </td>
-          </tr>
-          <?php endforeach;?>
-        </table>
-      </div>
-    </div>
+    <?php echo $this->fetch('contact', 'block', "customer={$customer->id}")?>
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->contract;?></strong></div>
       <div class='panel-body'>
@@ -127,11 +105,15 @@
         <table class='table table-form table-data'>
           <tr class='text-left'>
             <th><?php echo $lang->order->product;?></th>
+            <th><?php echo $lang->order->plan;?></th>
+            <th><?php echo $lang->order->real;?></th>
             <th><?php echo $lang->order->status;?></th>
           </tr>
           <?php foreach($orders as $order):?>
           <tr>
             <td><?php echo $products[$order->product];?></td>
+            <td><?php echo $order->plan;?></td>
+            <td><?php echo $order->real;?></td>
             <td><?php echo $lang->order->statusList[$order->status];?></td>
           </tr>
           <?php endforeach;?>
