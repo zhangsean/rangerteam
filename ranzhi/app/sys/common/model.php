@@ -73,7 +73,7 @@ class commonModel extends model
         session_start();
 
         /* Check the user's IP exclude guest. */
-        if(isset($_SESSION['user']) and $this->session->user->account != 'guest' and $this->session->user->ip != $this->server->remote_addr)
+        if(isset($_SESSION['user']) and $this->session->user->account != 'guest')
         {
             session_destroy();
             $referer  = helper::safe64Encode($this->app->getURI(true));
