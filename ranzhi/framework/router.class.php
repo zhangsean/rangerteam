@@ -976,8 +976,8 @@ class router
     {
         if($full and $this->config->requestType == 'PATH_INFO')
         {
-            if($this->URI) return $this->config->webRoot . $this->URI . '.' . $this->viewType;
-            return $this->config->webRoot;
+            if($this->URI) return '/' . $this->appName . $this->config->webRoot . $this->URI . '.' . $this->viewType;
+            return '/' . $this->appName . $this->config->webRoot;
         }
         return $this->URI;
     }
