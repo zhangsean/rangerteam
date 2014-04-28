@@ -38,13 +38,31 @@ class contactModel extends model
      */
     public function getList($customer = 0, $orderBy = 'maker_desc', $pager = null)
     {
-        return $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
+        $resumes = array();
+        if($customer) $resumes = $this->dao->select('*')->from(TABLE_RESUME)->where('customer')->eq($customer)->andWhere('deleted')->eq(0)->fetchAll('contact');
+
+        $contacts = $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
-            ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->fi()
+            ->beginIF($customer)->andWhere('t1.id')->in(array_keys($resumes))->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
+
+        foreach($resumes as $contactID => $resume)
+        {
+            if(isset($contacts[$contactID]))
+            {
+                $contacts[$contactID]->customer = $resume->customer;
+                $contacts[$contactID]->maker    = $resume->maker;
+                $contacts[$contactID]->title    = $resume->title;
+                $contacts[$contactID]->dept     = $resume->dept;
+                $contacts[$contactID]->join     = $resume->join;
+                $contacts[$contactID]->left     = $resume->left;
+            }
+        }
+
+        return $contacts;
     }
 
     /**
@@ -58,7 +76,7 @@ class contactModel extends model
     public function getPairs($customer = 0, $emptyOption = true)
     {
         $contacts = $this->dao->select('t1.*')->from(TABLE_CONTACT)->alias('t1')
-            ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
+            ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.id = t2.contact')
             ->where('t1.deleted')->eq(0)
             ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->FI()
             ->fetchPairs('id', 'realname');
