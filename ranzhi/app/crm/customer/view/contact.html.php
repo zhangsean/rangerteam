@@ -11,5 +11,31 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<?php echo $this->fetch('contact', 'block', "customerID={$customerID}");?>
+<table class='table table-bordered table-hover table-striped table-data'>
+  <thead>
+    <tr class='text-center'>
+      <th class='w-50px'><?php echo $lang->contact->id;?></th>
+      <th class='w-100px'><?php echo $lang->contact->realname;?></th>
+      <th><?php echo $lang->resume->dept;?></th>
+      <th><?php echo $lang->resume->title;?></th>
+      <th class='w-200px'><?php echo $lang->contact->email;?></th>
+      <th class='w-100px'><?php echo $lang->contact->phone;?></th>
+      <th class='w-100px'><?php echo $lang->contact->qq;?></th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($contacts as $contact):?>
+    <tr class='text-center'>
+      <?php $class=$contact->maker ? "class='lead text-red'" : '';?>
+      <td><?php echo $contact->id;?></td>
+      <td <?php echo $class;?>><?php echo $contact->realname;?></td>
+      <td><?php echo $contact->dept;?></td>
+      <td><?php echo $contact->title;?></td>
+      <td><?php echo $contact->email;?></td>
+      <td><?php echo $contact->phone;?></td>
+      <td><?php echo $contact->qq;?></td>
+    </tr>
+    <?php endforeach;?>
+  </tbody>
+</table>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

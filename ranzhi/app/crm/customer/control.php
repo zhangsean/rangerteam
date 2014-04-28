@@ -159,7 +159,11 @@ class customer extends control
      */
     public function contact($customerID)
     {
+        $this->app->loadLang('resume');
+
         $this->view->title      = $this->lang->customer->contact;
+        $this->view->modalWidth = 800;
+        $this->view->contacts   = $this->loadModel('contact')->getList($customerID);
         $this->view->customerID = $customerID;
         $this->display();
     }
