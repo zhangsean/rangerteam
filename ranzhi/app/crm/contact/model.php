@@ -199,7 +199,7 @@ class contactModel extends model
             }
             else
             {
-                $this->dao->update(TABLE_RESUME)->data($resume)->where('id')->eq($oldContact->resumeID)->exec();
+                $this->dao->update(TABLE_RESUME)->data($resume)->where('id')->eq($oldContact->resume)->exec();
             }
 
             return commonModel::createChanges($oldContact, $contact);
