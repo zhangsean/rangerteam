@@ -252,7 +252,7 @@ CREATE TABLE `oa_docLib` (
 CREATE TABLE `oa_relation` (
   `type` char(20) NOT NULL,
   `id` mediumint(9) NOT NULL,
-  `category` smallint(5) NOT NULL,
+  `category` mediumint(8) NOT NULL,
   UNIQUE KEY `relation` (`type`,`id`,`category`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_action`;

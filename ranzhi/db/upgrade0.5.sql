@@ -46,3 +46,5 @@ ALTER TABLE `crm_order` DROP `closedNote`;
 
 ALTER TABLE `crm_contact` ADD `resume` mediumint unsigned NOT NULL AFTER `nickname`;
 ALTER TABLE `crm_resume` ADD `deleted` enum('0','1') COLLATE 'utf8_general_ci' NOT NULL DEFAULT '0' AFTER `left`;
+
+ALTER TABLE `oa_relation` CHANGE `category` `category` mediumint(9) NOT NULL;
