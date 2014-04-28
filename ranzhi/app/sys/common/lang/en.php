@@ -99,6 +99,15 @@ $lang->fold           = '-';
 $lang->files          = 'Files';
 $lang->comment        = 'Comment';
 
+/* Items for lifetime. */
+$lang->lifetime = new stdclass();
+$lang->lifetime->createdBy    = 'Create By';
+$lang->lifetime->assignedTo   = 'Assigned to';
+$lang->lifetime->signedBy     = 'Signed By';
+$lang->lifetime->closedBy     = 'Closed By';
+$lang->lifetime->closedReason = 'Closed Reason';
+$lang->lifetime->lastEdited   = 'Last Edited';
+
 /* Items for javascript. */
 $lang->js = new stdclass();
 $lang->js->confirmDelete = 'Are sure to delete it?';

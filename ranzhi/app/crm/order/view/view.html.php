@@ -68,6 +68,37 @@
         </tr>
       </table>
     </div>
+  </div> 
+  <div class='panel'>
+    <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->lifetime;?></strong></div>
+    <div class='panel-body'>
+      <?php $payed = $order->status == 'payed';?>
+      <table class='table table-info'>
+        <tr>
+          <th class='w-80px'><?php echo $lang->lifetime->createdBy;?></th>
+          <td><?php echo zget($users, $order->createdBy) . $lang->at . $order->createdDate;?></td>
+        </tr>
+        <tr>
+          <th class='w-80px'><?php echo $lang->lifetime->assignedTo;?></th>
+          <td><?php echo zget($users, $order->assignedTo);?></td>
+        </tr>
+        <tr>
+          <th class='w-80px'><?php echo $lang->lifetime->closedBy;?></th>
+          <td><?php echo zget($users, $order->closedBy);?></td>
+        </tr>
+        <tr>
+          <th class='w-80px'><?php echo $lang->lifetime->closedReason;?></th>
+          <td><?php echo $lang->order->closedReasonList[$order->closedReason];?></td>
+        </tr>
+        <tr>
+          <th class='w-80px'><?php echo $lang->lifetime->signedBy;?></th>
+          <td>
+            <?php if($contract and $contract->signedBy) echo zget($users, $contract->signedBy);?>
+            <?php if($contract and $contract->signedBy) echo $lang->at . $contract->signedDate;?>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
   <?php if($contract):?>
   <div class='panel'>

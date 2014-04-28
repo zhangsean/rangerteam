@@ -109,7 +109,6 @@ class order extends control
      * @access public
      * @return void
      */
-
     public function view($orderID)
     {
         $order = $this->order->getByID($orderID);

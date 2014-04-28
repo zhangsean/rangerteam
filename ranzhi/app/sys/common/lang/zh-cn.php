@@ -99,6 +99,15 @@ $lang->fold           = '-';
 $lang->files          = '附件';
 $lang->comment        = '备注';
 
+/* Items for lifetime. */
+$lang->lifetime = new stdclass();
+$lang->lifetime->createdBy    = '由谁创建';
+$lang->lifetime->assignedTo   = '指派给';
+$lang->lifetime->signedBy     = '由谁签约';
+$lang->lifetime->closedBy     = '由谁关闭';
+$lang->lifetime->closedReason = '关闭原因';
+$lang->lifetime->lastEdited   = '最后修改';
+
 /* Items for javascript. */
 $lang->js = new stdclass();
 $lang->js->confirmDelete = '您确定要执行删除操作吗？';

@@ -222,6 +222,8 @@ class orderModel extends model
             ->add('activatedDate', $now)
             ->add('activatedBy', $this->app->user->account)
             ->add('assignedTo', '')
+            ->add('closedBy', '')
+            ->add('closedReason', '')
             ->setDefault('status', 'normal')
             ->get();
 
