@@ -23,3 +23,6 @@ $lang->resume->address  = '公司地址';
 $lang->resume->join     = '入职时间';
 $lang->resume->left     = '离职时间';
 $lang->resume->time     = '时间';
+
+$lang->resume->showJoin = '入职：%s';
+$lang->resume->showLeft = ' 离职：%s';

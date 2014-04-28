@@ -23,3 +23,6 @@ $lang->resume->address  = 'Address';
 $lang->resume->join     = 'Join date';
 $lang->resume->left     = 'Left date';
 $lang->resume->time     = 'Time';
+
+$lang->resume->showJoin = 'Join : %s';
+$lang->resume->showLeft = ' Left : %s';
