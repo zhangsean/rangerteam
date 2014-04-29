@@ -14,8 +14,9 @@ $lang->block->lblBlock = '区块';
 $lang->block->admin    = '管理区块';
 
 $lang->block->availableBlocks = new stdclass();
-$lang->block->availableBlocks->announce = '系统公告';
-$lang->block->availableBlocks->task     = '我的任务';
+$lang->block->availableBlocks->announce       = '系统公告';
+$lang->block->availableBlocks->myCreatedTask  = '我创建的任务';
+$lang->block->availableBlocks->assignedMeTask = '指派给我的任务';
 
 $lang->block->num     = '数量';
 $lang->block->orderBy = '排序';

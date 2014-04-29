@@ -54,6 +54,28 @@ class blockModel extends model
     }
 
     /**
+     * Get task params for created by me.
+     * 
+     * @access public
+     * @return string
+     */
+    public function getMyCreatedTaskParams()
+    {
+        return $this->getTaskParams();
+    }
+
+    /**
+     * Get task params for assigned to me.
+     * 
+     * @access public
+     * @return string
+     */
+    public function getAssignedMeTaskParams()
+    {
+        return $this->getTaskParams();
+    }
+
+    /**
      * Get task params.
      * 
      * @access public

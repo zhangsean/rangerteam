@@ -131,12 +131,12 @@ class block extends control
     }
 
     /**
-     * Print task block.
+     * Print task block for created by me.
      * 
      * @access public
      * @return void
      */
-    public function printTaskBlock()
+    public function printMyCreatedTaskBlock()
     {
         $this->lang->task = new stdclass();
         $this->app->loadLang('task');
@@ -148,7 +148,34 @@ class block extends control
         $this->view->code   = $this->get->blockid;
 
         $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
-            ->where("(createdBy='$params->account' OR assignedTo = '$params->account')")
+            ->where('createdBy')->eq($params->account)
+            ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
+            ->orderBy($params->orderBy)
+            ->limit($params->num)
+            ->fetchAll('id');
+
+        $this->display();
+    }
+
+    /**
+     * Print task block for assigned to me.
+     * 
+     * @access public
+     * @return void
+     */
+    public function printAssignedMeTaskBlock()
+    {
+        $this->lang->task = new stdclass();
+        $this->app->loadLang('task');
+
+        $params = $this->get->param;
+        $params = json_decode(base64_decode($params));
+
+        $this->view->sso    = base64_decode($this->get->sso);
+        $this->view->code   = $this->get->blockid;
+
+        $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
+            ->where('assignedTo')->eq($params->account)
             ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
             ->orderBy($params->orderBy)
             ->limit($params->num)

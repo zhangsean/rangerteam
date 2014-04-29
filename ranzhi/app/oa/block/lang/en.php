@@ -14,8 +14,9 @@ $lang->block->lblBlock = 'Block';
 $lang->block->admin    = 'Manage blocks';
 
 $lang->block->availableBlocks = new stdclass();
-$lang->block->availableBlocks->announce = 'Announce';
-$lang->block->availableBlocks->task     = 'My Task';
+$lang->block->availableBlocks->announce       = 'Announce';
+$lang->block->availableBlocks->myCreatedTask  = 'The task of created by me';
+$lang->block->availableBlocks->assignedMeTask = 'The task of assigned to me';
 
 $lang->block->num     = 'Number';
 $lang->block->orderBy = 'Order';
