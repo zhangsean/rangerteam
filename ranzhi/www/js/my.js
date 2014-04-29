@@ -19,6 +19,9 @@ $(document).ready(function()
     fixTableHeader();
     condensedForm();    
 
+    /* Reload modal. */
+    $(document).on('click', '.reloadModal', function(){$.reloadAjaxModal()});
+
     /* Enable create customer option of customer selecter. */
     $(document).on('change', '.select-customer', function()
     {

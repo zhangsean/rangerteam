@@ -47,6 +47,6 @@
       </tr>
     </table>
   </div>
-  <p class='text-center'><?php echo html::submitButton()?></p>
+  <p class='text-center'><?php echo html::submitButton() . html::commonButton($lang->goback, 'reloadModal btn')?></p>
 <form>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

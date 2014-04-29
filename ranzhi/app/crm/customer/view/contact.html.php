@@ -12,6 +12,9 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <table class='table table-bordered table-hover table-striped table-data'>
+  <caption class='text-right'>
+    <?php echo html::a(inlink('linkContact', "customerID=$customerID"), $lang->customer->linkContact, "class='loadInModal'")?>
+  </caption>
   <thead>
     <tr class='text-center'>
       <th class='w-50px'><?php echo $lang->contact->id;?></th>

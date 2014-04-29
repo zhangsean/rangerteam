@@ -9,7 +9,4 @@ $(function()
             $.reloadAjaxModal(1500);
         }
     });
-
-    /* Reload modal. */
-    $('.reloadModal').click(function(){$.reloadAjaxModal()});
 })
