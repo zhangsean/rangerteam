@@ -37,8 +37,8 @@ class contract extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        /* Save session for list. */
-        $this->session->set('contractList', $this->app->getURI(true));
+        /* Save session for return link. */
+        $this->session->set('contractLink', $this->app->getURI(true));
 
         $this->view->contracts = $this->contract->getList(0, $orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getPairs();
@@ -130,7 +130,7 @@ class contract extends control
 
             $this->loadModel('action')->create('contract', $contractID, 'Delivered', $this->post->comment);
 
-            $link = $this->session->contractList ? $this->session->contractList : inlink('view', "contractID=$contractID");
+            $link = $this->session->contractLink ? $this->session->contractLink : inlink('view', "contractID=$contractID");
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
         }
 
@@ -155,7 +155,7 @@ class contract extends control
 
             $this->loadModel('action')->create('contract', $contractID, 'Returned', $this->post->comment);
             
-            $link = $this->session->contractList ? $this->session->contractList : inlink('view', "contractID=$contractID");
+            $link = $this->session->contractLink ? $this->session->contractLink : inlink('view', "contractID=$contractID");
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
         }
 
@@ -180,7 +180,7 @@ class contract extends control
 
             $this->loadModel('action')->create('contract', $contractID, 'Canceled', $this->post->comment);
             
-            $link = $this->session->contractList ? $this->session->contractList : inlink('view', "contractID=$contractID");
+            $link = $this->session->contractLink ? $this->session->contractLink : inlink('view', "contractID=$contractID");
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
         }
 
@@ -205,7 +205,7 @@ class contract extends control
 
             $this->loadModel('action')->create('contract', $contractID, 'Finished', $this->post->comment);
 
-            $link = $this->session->contractList ? $this->session->contractList : inlink('view', "contractID=$contractID");
+            $link = $this->session->contractLink ? $this->session->contractLink : inlink('view', "contractID=$contractID");
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
         }
 
@@ -225,8 +225,8 @@ class contract extends control
     {
         $contract = $this->contract->getByID($contractID);
 
-        /* Save session for list. */
-        $this->session->set('contractList', $this->app->getURI(true));
+        /* Save session for return link. */
+        $this->session->set('contractLink', $this->app->getURI(true));
 
         $this->view->orders    = $this->loadModel('order')->getListById($contract->order);
         $this->view->customers = $this->loadModel('customer')->getPairs();
