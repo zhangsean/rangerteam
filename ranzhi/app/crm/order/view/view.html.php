@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php'; ?>
 <div class='col-lg-8'>
-  <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}&customer={$order->customer}");?>
+  <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}");?>
   <div class='text-center'>
     <?php 
     echo html::a($this->createLink('sys.action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $lang->order->record, "class='btn' data-toggle='modal'");
