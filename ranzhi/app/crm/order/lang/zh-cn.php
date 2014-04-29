@@ -18,6 +18,7 @@ $lang->order->contact       = '联系人';
 $lang->order->team          = '团队';
 $lang->order->plan          = '计划金额';
 $lang->order->real          = '成交金额';
+$lang->order->amount        = '金额';
 $lang->order->status        = '状态';
 $lang->order->createdBy     = '由谁创建';
 $lang->order->createdDate   = '创建时间';

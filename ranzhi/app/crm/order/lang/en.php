@@ -18,6 +18,7 @@ $lang->order->contact       = 'Contact';
 $lang->order->team          = 'Team';
 $lang->order->plan          = 'Planned Amount';
 $lang->order->real          = 'Real Amount';
+$lang->order->amount        = 'Amount';
 $lang->order->status        = 'Status';
 $lang->order->createdBy     = 'Created By';
 $lang->order->createdDate   = 'Created Date';
