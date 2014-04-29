@@ -51,6 +51,7 @@ class address extends control
         $this->view->title      = $this->lang->address->create;
         $this->view->objectID   = $objectID;
         $this->view->objectType = $objectType;
+        $this->view->area       = $this->loadModel('tree')->getOptionMenu('area');
         $this->display();
     }
 

@@ -17,4 +17,5 @@ $lang->address->title    = '名称';
 $lang->address->country  = '国家';
 $lang->address->province = '省';
 $lang->address->city     = '市';
+$lang->address->area     = '区域';
 $lang->address->location = '位置';

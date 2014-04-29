@@ -17,4 +17,5 @@ $lang->address->title    = 'Title';
 $lang->address->country  = 'Country';
 $lang->address->province = 'Province';
 $lang->address->city     = 'City';
+$lang->address->area     = 'Area';
 $lang->address->location = 'Location';

@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <form id='addressForm' method='post' action='<?php echo inlink('create', "objectType=$objectType&objectID=$objectID")?>'>
   <table class='table table-form'>
     <tr>
@@ -18,16 +19,8 @@
       <td><?php echo html::input('title', '', "class='form-control'")?></td>
     </tr>
     <tr>
-      <th><?php echo $lang->address->country;?></th>
-      <td><?php echo html::input('country', '', "class='form-control'")?></td>
-    </tr>
-    <tr>
-      <th><?php echo $lang->address->province;?></th>
-      <td><?php echo html::input('province', '', "class='form-control'")?></td>
-    </tr>
-    <tr>
-      <th><?php echo $lang->address->city;?></th>
-      <td><?php echo html::input('city', '', "class='form-control'")?></td>
+      <th><?php echo $lang->address->area;?></th>
+      <td><?php echo html::select('area', $area, '', "class='form-control chosen'")?></td>
     </tr>
     <tr>
       <th><?php echo $lang->address->location;?></th>
