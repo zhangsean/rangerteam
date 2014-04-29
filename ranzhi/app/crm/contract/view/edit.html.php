@@ -65,7 +65,7 @@
       </div>
       <div class='panel-footer'><?php echo html::submitButton() . html::backButton();?></div>
     </div>
-    <?php echo $this->fetch('action', 'history', "objectType=contract&objectID={$contract->id}&customer={$contract->customer}")?>
+    <?php echo $this->fetch('action', 'history', "objectType=contract&objectID={$contract->id}")?>
   </div>
   <div class='col-md-4'>
     <div class='panel'>

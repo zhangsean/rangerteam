@@ -47,7 +47,7 @@
       </table>
     </div>
   </div>
-  <?php echo $this->fetch('action', 'history', "objectType=contract&objectID={$contract->id}&customer={$contract->customer}")?>
+  <?php echo $this->fetch('action', 'history', "objectType=contract&objectID={$contract->id}")?>
   <div class='text-center'>
     <?php
     if($contract->return == 'wait' and $contract->status == 'normal')

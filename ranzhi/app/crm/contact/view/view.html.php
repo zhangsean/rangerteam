@@ -27,7 +27,7 @@
       </table>
     </div>
   </div>
-  <?php echo $this->fetch('action', 'history', "objectType=contact&objectID={$contact->id}&customer=0")?>
+  <?php echo $this->fetch('action', 'history', "objectType=contact&objectID={$contact->id}")?>
   <div class='text-center'>
     <?php
     echo html::a(inlink('edit', "contactID=$contact->id"), $lang->edit, "class='btn'");
