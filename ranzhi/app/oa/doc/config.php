@@ -20,4 +20,4 @@ $config->doc->require->edit      = 'title';
 
 $config->doc->editor = new stdclass();
 $config->doc->editor->create = array('id' => 'content', 'tools' => 'full');
-$config->doc->editor->edit   = array('id' => 'content,digest,comment', 'tools' => 'full');
+$config->doc->editor->edit   = array('id' => 'content,comment', 'tools' => 'full');

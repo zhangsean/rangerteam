@@ -221,7 +221,7 @@ class docModel extends model
             ->remove('comment,files,labels,uid')
             ->get();
 
-        $uniqueCondition = "lib = '$doc->lib' AND module = $doc->module AND id != $docID";
+        $uniqueCondition = "lib = '{$oldDoc->lib}' AND module = {$doc->module} AND id != $docID";
         $this->dao->update(TABLE_DOC)->data($doc)
             ->autoCheck()
             ->batchCheck($this->config->doc->require->edit, 'notempty')

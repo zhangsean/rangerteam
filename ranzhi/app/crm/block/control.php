@@ -176,7 +176,7 @@ class block extends control
         $this->view->code   = $this->get->blockid;
 
         $this->view->contracts = $this->dao->select('*')->from(TABLE_CONTRACT)
-            ->where('createdBy')->eq($params->account)
+            ->where('handlers')->like("%{$params->account}%")
             ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
             ->orderBy($params->orderBy)
             ->limit($params->num)
