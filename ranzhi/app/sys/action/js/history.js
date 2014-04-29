@@ -1,11 +1,5 @@
 $(document).ready(function()
 {
-     /* if in modal hide edit button. */
-     if($('a[data-toggle=modal]').parents('#ajaxModal').size()) 
-     {
-        $('#ajaxModal a[data-toggle=modal]').hide();
-     }
-
      /* Toggle one comment. */
      $('.toggle').click(function()
      {

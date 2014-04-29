@@ -21,23 +21,4 @@ $(document).ready(function()
 
     /* Reload modal. */
     $(document).on('click', '.reloadModal', function(){$.reloadAjaxModal()});
-
-    /* Enable create customer option of customer selecter. */
-    $(document).on('change', '.select-customer', function()
-    {
-        if($(this).val() == 'create')
-        {
-           window.open(createLink('customer', 'create'));
-        }
-        return false;
-    });
-    
-    /* Enable create contact option of contact selecter. */
-    $(document).on('change', '.select-contact', function()
-    {
-        if($(this).val() == 'create')
-        {
-           window.open(createLink('contact', 'create', 'customer=' + v.customer));
-        }
-    });
 });

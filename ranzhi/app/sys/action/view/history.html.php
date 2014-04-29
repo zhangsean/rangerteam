@@ -45,7 +45,12 @@
         <span class='link-button pull-right comment<?php echo $action->id;?>'><?php echo html::a('#lastCommentBox', '<i class="icon-edit-sign icon-large"></i>', "onclick='toggleComment($action->id)'")?></span>
         <?php endif;?>
         <?php if($action->action == 'record'):?>
-        <span class='link-button text-muted pull-right'><?php echo html::a($this->createLink('action', 'editRecord', "id={$action->id}"), '<i class="icon-edit"></i>', "data-toggle='modal'")?></span>
+        <span class='link-button text-muted pull-right'>
+        <?php 
+        $append = helper::isAjaxRequest() ? "class='loadInModal'" : "data-toggle='modal'";
+        echo html::a($this->createLink('action', 'editRecord', "id={$action->id}"), '<i class="icon-edit"></i>', $append)
+        ?>
+        </span>
         <?php endif;?>
         <?php 
         if($action->comment) 

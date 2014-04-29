@@ -8,8 +8,7 @@
 * @version     $Id$
 * @link        http://www.ranzhi.org
 */
-body {background: #fff;}
-
+body {background: #fff;font-size:13px;}
 
 /*-----------------------WIDTH SETTING--------------------------*/
 .w-p5  {width: 5%}
@@ -251,7 +250,7 @@ td #aliasLabel {display: table-row;}
 .table-info th.text-left, .table-info tr.text-left th {text-align:left;vertical-align:middle; border-bottom:none}
 .table-info td {vertical-align:middle; border-bottom:none;}
 .table-info th.desc, .table-info td.desc {padding-top: 20px;}
-.table-info th,.table-info td {border-bottom:none; padding:5px;}
+.table-info th,.table-info td {border-bottom:none; padding: 2px 5px;}
 .table-info th.text-middle, .table td.text-middle, .text-middle {vertical-align: middle;}
 .table-info td.text-bottom {vertical-align:bottom;}
 

@@ -4,9 +4,7 @@ CREATE TABLE `crm_address` (
   `objectType` char(30) NOT NULL,
   `objectID` mediumint(8) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
-  `country` char(30) NOT NULL,
-  `province` char(50) NOT NULL,
-  `city` char(50) NOT NULL,
+  `area` mediumint(8) NOT NULL,
   `location` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `objectType` (`objectType`,`objectID`)
