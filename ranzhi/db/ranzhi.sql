@@ -441,7 +441,7 @@ CREATE TABLE `sys_task` (
 -- DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `dept` smallint(8) unsigned NOT NULL,
+  `dept` mediumint(8) unsigned NOT NULL,
   `account` char(30) NOT NULL DEFAULT '',
   `password` char(32) NOT NULL DEFAULT '',
   `realname` char(30) NOT NULL DEFAULT '',
