@@ -17,7 +17,7 @@
   <div class='panel-heading'>
     <strong><?php echo $lang->history?></strong>
     <div class='panel-actions'>
-      <span class='btn btn-mini' onclick='toggleOrder(this)' class='hand'> <?php echo "<span title='$lang->reverse' class='log-asc'></span>";?></span>
+      <span class='btn btn-mini sorter' class='hand'> <?php echo "<span title='$lang->reverse' class='log-asc'></span>";?></span>
       <span class='btn btn-mini' class='hand'><?php echo "<span title='$lang->switchDisplay' class='toggle-all change-show'></span>";?></span>
     </div>
   </div>
