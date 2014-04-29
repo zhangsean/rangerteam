@@ -83,6 +83,7 @@ class contractModel extends model
             ->setDefault('real', array())
             ->setDefault('begin', '0000-00-00')
             ->setDefault('end', '0000-00-00')
+            ->join('handlers', ',')
             ->stripTags('items', $this->config->allowedTags->admin)
             ->get();
 

@@ -60,6 +60,10 @@
           </td>
         </tr>
         <tr>
+          <th><?php echo $lang->contract->handlers;?></th>
+          <td><?php echo html::select('handlers[]', $users, $this->app->user->account, "class='form-control chosen' multiple");?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->contract->items;?></th>
           <td colspan='2'><?php echo html::textarea('items', '',"rows='5' class='form-control'");?></td>
         </tr>
