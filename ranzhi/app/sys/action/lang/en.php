@@ -57,6 +57,7 @@ $lang->action->desc->diff1         = 'changed <strong><i>%s</i></strong>, old is
 $lang->action->desc->diff2         = 'changed <strong><i>%s</i></strong>, the diff is:' . "\n" . "<blockquote>%s</blockquote>" . "\n<div class='hidden'>%s</div>";
 $lang->action->desc->diff3         = "changed file's name %s to %s.";
 $lang->action->desc->record        = '$date, <strong>$actor</strong> added log, the contact is: <strong>$contact</strong>.' . "\n";
+$lang->action->desc->signed        = '$date, signed by <strong>$actor</strong>，the turnover is： <strong>$extra</strong>。' . "\n";
 
 /* The action labels. */
 $lang->action->label = new stdclass();

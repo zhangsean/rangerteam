@@ -40,7 +40,7 @@
         <td class='text-left'><?php echo $order->customerName;?></td>
         <td><?php echo $order->productName;?></td>
         <td><?php echo $order->plan;?></td>
-        <td><?php echo $users[$order->assignedTo];?></td>
+        <td><?php if(isset($users[$order->assignedTo])) echo $users[$order->assignedTo];?></td>
         <td><?php echo isset($lang->order->statusList[$order->status]) ? $lang->order->statusList[$order->status] : $order->status;?></td>
         <td><?php echo substr($order->contactedDate, 0, 10);?></td>
         <td><?php echo $order->nextDate;?></td>

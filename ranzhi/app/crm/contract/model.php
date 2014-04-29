@@ -97,22 +97,22 @@ class contractModel extends model
 
         if(!dao::isError())
         {
-            foreach($contract->order as $orderID)
+            foreach($contract->order as $key => $orderID)
             {
                 $data = new stdclass();
                 $data->contract = $contractID;
                 $data->order    = $orderID;
                 $this->dao->insert(TABLE_CONTRACTORDER)->data($data)->exec();
-            }
 
-            foreach($contract->real as $real)
-            {
                 $order = new stdclass();
                 $order->status     = 'signed';
-                $order->real       = $real;
+                $order->real       = $contract->real[$key];
                 $order->signedBy   = $contract->signedBy;
                 $order->signedDate = $contract->signedDate;
                 $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
+
+                if(dao::isError()) return false;
+                $this->loadModel('action')->create('order', $orderID, 'Signed', '', $contract->real[$key]);
             }
 
             $this->loadModel('file')->saveUpload('contract', $contractID);
@@ -159,24 +159,34 @@ class contractModel extends model
         
         if(!dao::isError())
         {
-            if($contract->order != $data->order)
+            $oldOrders = $this->loadModel('order')->getListByID($data->order);
+            $real = array();
+            foreach($data->order as $key => $orderID) $real[$key] = $oldOrders[$orderID]->real;
+
+            if($contract->order != $data->order || $real != $data->real)
             {
                 $this->dao->delete()->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->exec();
-                foreach($data->order as $orderID)
+                foreach($data->order as $key => $orderID)
                 {
+                    $oldOrder = $this->loadModel('order')->getByID($orderID);
+
                     $contractOrder = new stdclass();
                     $contractOrder->contract = $contractID;
                     $contractOrder->order    = $orderID;
                     $this->dao->insert(TABLE_CONTRACTORDER)->data($contractOrder)->exec();
-                }
 
-                foreach($data->real as $key => $real)
-                {
                     $order = new stdclass();
-                    $order->real       = $real;
+                    $order->real       = $data->real[$key];
                     $order->signedBy   = $data->signedBy;
                     $order->signedDate = $data->signedDate;
-                    $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($data->order[$key])->exec();
+
+                    $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
+
+                    if(dao::isError()) return false;
+
+                    $changes  = commonModel::createChanges($oldOrder, $order);
+                    $actionID = $this->loadModel('action')->create('order', $orderID, 'Edited');
+                    $this->action->logHistory($actionID, $changes);
                 }
             }
 

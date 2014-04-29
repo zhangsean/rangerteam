@@ -61,7 +61,7 @@ class orderModel extends model
      */
     public function getListByID($idList)
     {
-        return $this->dao->select('*')->from(TABLE_ORDER)->where('id')->in($idList)->fetchAll();
+        return $this->dao->select('*')->from(TABLE_ORDER)->where('id')->in($idList)->fetchAll('id');
     }
 
     /** 
