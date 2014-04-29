@@ -26,10 +26,6 @@
             <th><?php echo $lang->contract->name;?></th>
             <td colspan='2'><?php echo html::input('name', $contract->name, "class='form-control'");?></td>
           </tr>
-          <tr>
-            <th class='w-80px'><?php echo $lang->contract->customer;?></th>
-            <td class='w-p40'><?php echo html::select('customer', $customers, $contract->customer, "class='form-control' disabled");?></td><td></td>
-          </tr>
           <?php foreach($contractOrders as $currentOrder):?>
           <tr>
             <th class='orderTH'><?php echo $lang->contract->order;?></th>
@@ -79,7 +75,11 @@
       <div class='panel-body'>
         <table class='table table-form'>
           <tr>
-            <th class='w-80px'><?php echo $lang->contract->code;?></th>
+            <th class='w-70px'><?php echo $lang->contract->customer;?></th>
+            <td><?php echo html::select('customer', $customers, $contract->customer, "class='form-control' disabled");?></td><td></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->contract->code;?></th>
             <td><?php echo html::input('code', $contract->code, "class='form-control'");?></td>
           </tr>
           <tr>
@@ -99,25 +99,58 @@
             <td><?php echo html::select('contact', $contacts, $contract->contact, "class='form-control chosen'");?></td>
           </tr>
           <tr>
-            <th><?php echo $lang->contract->signedBy;?></th>
-            <td><?php echo html::select('signedBy', $users, $contract->signedBy, "class='form-control chosen'");?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->contract->signedDate;?></th>
-            <td><?php echo html::input('signedDate', $contract->signedDate, "class='form-control form-date'");?></td>
-          </tr>
-          <tr>
             <th><?php echo $lang->contract->begin;?></th>
-            <td><?php echo html::input('begin', $contract->begin, "class='form-control form-date'");?></td>
+            <td><?php echo html::input('begin', formatTime($contract->begin), "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->end;?></th>
-            <td><?php echo html::input('end', $contract->end, "class='form-control form-date'");?></td>
+            <td><?php echo html::input('end', formatTime($contract->end), "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->handlers;?></th>
             <td><?php echo html::select('handlers[]', $users, $contract->handlers, "class='form-control chosen' multiple");?></td>
           </tr>
+        </table>
+      </div>
+    </div>
+    <div class='panel'>
+      <div class='panel-heading'>
+        <strong><?php echo $lang->contract->life;?></strong>
+      </div>
+      <div class='panel-body'>
+        <table class='table table-form table-data' id='contractLife'>
+          <tr>
+            <th class='w-70px'><?php echo $lang->contract->createdBy;?></th>
+            <td><?php echo zget($users, $contract->createdBy);?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->contract->signedBy;?></th>
+            <td><?php echo html::select('signedBy', $users, $contract->signedBy, "class='form-control chosen'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->contract->signedDate;?></th>
+            <td><?php echo html::input('signedDate', formatTime($contract->signedDate), "class='form-control form-datetime'");?></td>
+          </tr>
+          <?php if($contract->finishedBy):?>
+          <tr>
+            <th><?php echo $lang->contract->finishedBy;?></th>
+            <td><?php echo html::select('finishedBy', $users, $contract->finishedBy, "class='form-control chosen'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->contract->finishedDate;?></th>
+            <td><?php echo html::input('finishedDate', formatTime($contract->finishedDate), "class='form-control form-datetime'");?></td>
+          </tr>
+          <?php endif;?>
+          <?php if($contract->canceledBy):?>
+          <tr>
+            <th><?php echo $lang->contract->canceledBy;?></th>
+            <td><?php echo html::select('canceledBy', $users, $contract->canceledBy, "class='form-control chosen'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->contract->canceledDate;?></th>
+            <td><?php echo html::input('canceledDate', formatTime($contract->canceledDate), "class='form-control form-datetime'");?></td>
+          </tr>
+          <?php endif;?>
         </table>
       </div>
     </div>

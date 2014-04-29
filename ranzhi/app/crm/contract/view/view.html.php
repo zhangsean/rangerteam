@@ -23,10 +23,6 @@
           <td><?php echo $contract->name;?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->contract->customer;?></th>
-          <td><?php echo $customers[$contract->customer];?></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->contract->order;?></th>
           <td>
             <ul>
@@ -50,15 +46,34 @@
         </tr>
       </table>
     </div>
-    <div class='panel-footer'>
-      <?php
-      echo html::a(inlink('edit', "contractID=$contract->id"), "<i class='icon-pencil'></i> " . $lang->edit, "class='btn'");
-      echo html::a(inlink('delete', "contractID=$contract->id"), "<i class='icon-remove'></i> " . $lang->delete, "class='deleter btn'");
-      echo html::backButton();
-      ?>
-    </div>
   </div>
   <?php echo $this->fetch('action', 'history', "objectType=contract&objectID={$contract->id}&customer={$contract->customer}")?>
+  <div class='text-center'>
+    <?php
+    if($contract->return == 'wait' and $contract->status == 'normal')
+    {
+        echo html::a($this->createLink('contract', 'receive',  "contract=$contract->id"), $lang->contract->return, "data-toggle='modal' class='btn'");
+    }
+
+    if($contract->delivery == 'wait' and $contract->status == 'normal')
+    {
+        echo html::a($this->createLink('contract', 'delivery', "contract=$contract->id"), $lang->contract->delivery, "data-toggle='modal' class='btn'");
+    }
+
+    if($contract->status == 'normal' and $contract->return == 'done' and $contract->delivery == 'done')
+    {
+        echo html::a($this->createLink('contract', 'finish', "contract=$contract->id"), $lang->finish, "data-toggle='modal' class='btn'");
+    }
+
+    if($contract->status == 'normal')
+    {
+        echo html::a($this->createLink('contract', 'cancel', "contract=$contract->id"), $lang->cancel, "data-toggle='modal' class='btn'");
+    }
+    echo html::a(inlink('edit', "contractID=$contract->id"), $lang->edit, "class='btn'");
+    echo html::a(inlink('delete', "contractID=$contract->id"), $lang->delete, "class='deleter btn'");
+    echo html::backButton();
+    ?>
+  </div>
 </div>
 <div class='col-md-4'>
   <div class='panel'>
@@ -66,8 +81,13 @@
       <strong><?php echo $lang->contract->info;?></strong>
     </div>
     <div class='panel-body'>
-      <table class='table table-form table-data'>
-          <th class='w-80px'><?php echo $lang->contract->code;?></th>
+      <table class='table table-info'>
+        <tr>
+          <th class='w-70px'><?php echo $lang->contract->customer;?></th>
+          <td><?php echo $customers[$contract->customer];?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->contract->code;?></th>
           <td><?php echo $contract->code;?></td>
         </tr>
         <tr>
@@ -87,24 +107,52 @@
           <td><?php if(isset($contacts[$contract->contact])) echo $contacts[$contract->contact];?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->contract->signedBy;?></th>
-          <td><?php echo $users[$contract->signedBy];?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->contract->signedDate;?></th>
-          <td><?php echo $contract->signedDate;?></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->contract->begin;?></th>
-          <td><?php echo $contract->begin;?></td>
+          <td><?php echo formatTime($contract->begin);?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->end;?></th>
-          <td><?php echo $contract->end;?></td>
+          <td><?php echo formatTime($contract->end);?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->handlers;?></th>
-          <td><?php echo $contract->handlers;?></td>
+          <td>
+            <?php
+            foreach(explode(',', $contract->handlers) as $handler)
+            {
+                if($handler and isset($users[$handler])) echo $users[$handler] . ' ';
+            }
+            ?>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class='panel'>
+    <div class='panel-heading'>
+      <strong><?php echo $lang->contract->life;?></strong>
+    </div>
+    <div class='panel-body'>
+      <table class='table table-info' id='contractLife'>
+        <tr>
+          <th class='w-70px'><?php echo $lang->contract->createdBy;?></th>
+          <td><?php echo zget($users, $contract->createdBy, $contract->createdBy) . $lang->at . $contract->createdDate;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->contract->signedBy;?></th>
+          <td><?php if($contract->signedBy) echo zget($users, $contract->signedBy, $contract->signedBy) . $lang->at . $contract->signedDate;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->contract->finishedBy;?></th>
+          <td><?php if($contract->finishedBy) echo zget($users, $contract->finishedBy, $contract->finishedBy) . $lang->at . $contract->finishedDate;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->contract->canceledBy;?></th>
+          <td><?php if($contract->canceledBy) echo zget($users, $contract->canceledBy, $contract->canceledBy) . $lang->at . $contract->canceledDate;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->contract->editedBy;?></th>
+          <td><?php if($contract->editedBy) echo zget($users, $contract->editedBy, $contract->editedBy) . $lang->at . $contract->editedDate;?></td>
         </tr>
       </table>
     </div>

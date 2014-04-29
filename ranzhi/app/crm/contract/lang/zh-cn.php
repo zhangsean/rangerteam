@@ -27,11 +27,11 @@ $lang->contract->status       = '状态';
 $lang->contract->contact      = '联系人';
 $lang->contract->signedBy     = '签署人';
 $lang->contract->signedDate   = '签署日期';
-$lang->contract->finishedBy   = '完成者';
+$lang->contract->finishedBy   = '由谁完成';
 $lang->contract->finishedDate = '完成时间';
-$lang->contract->canceledBy   = '取消者';
+$lang->contract->canceledBy   = '由谁取消';
 $lang->contract->canceledDate = '取消时间';
-$lang->contract->createdBy    = '创建者';
+$lang->contract->createdBy    = '由谁创建';
 $lang->contract->createdDate  = '创建时间';
 $lang->contract->editedBy     = '最后修改';
 $lang->contract->editedDate   = '最后修改时间';
@@ -64,6 +64,7 @@ $lang->contract->codeUnitList['fix']   = '固定值';
 $lang->contract->codeUnitList['input'] = '输入值';
 
 $lang->contract->info = '签约信息';
+$lang->contract->life = '合同的一生';
 
 $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = '成交金额';

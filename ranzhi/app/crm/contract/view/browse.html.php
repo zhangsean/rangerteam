@@ -16,7 +16,7 @@
   <strong><i class="icon-list-ul"></i> <?php echo $lang->contract->list;?></strong>
   <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->contract->create, "class='btn btn-primary'");?></div>
   </div>
-  <table class='table table-hover table-striped tablesorter table-data'>
+  <table class='table table-hover table-striped tablesorter table-data' id='contractList'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
@@ -82,7 +82,7 @@
               echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->cancel . '</a> ';
           }
 
-          echo html::a($this->createLink('contract', 'delete', "contract=$contract->id"), $lang->delete, "class='deleter'");
+          echo html::a($this->createLink('contract', 'delete', "contract=$contract->id"), $lang->delete, "class='reloadDeleter'");
           ?>
         </td>
       </tr>
