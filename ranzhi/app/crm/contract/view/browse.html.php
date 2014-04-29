@@ -42,49 +42,7 @@
         <td><?php echo $lang->contract->returnList[$contract->return];?></td>
         <td><?php echo $lang->contract->deliveryList[$contract->delivery];?></td>
         <td><?php echo $lang->contract->statusList[$contract->status];?></td>
-        <td>
-          <?php
-          echo html::a($this->createLink('contract', 'edit', "contract=$contract->id"), $lang->edit);
-
-          if($contract->return == 'wait' and $contract->status == 'normal')
-          {
-              echo html::a($this->createLink('contract', 'receive',  "contract=$contract->id"), $lang->contract->return, "data-toggle='modal'");
-          }
-          else
-          {
-              echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->contract->return . '</a> ';
-          }
-
-          if($contract->delivery == 'wait' and $contract->status == 'normal')
-          {
-              echo html::a($this->createLink('contract', 'delivery', "contract=$contract->id"), $lang->contract->delivery, "data-toggle='modal'");
-          }
-          else
-          {
-              echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->contract->delivery . '</a> ';
-          }
-
-          if($contract->status == 'normal' and $contract->return == 'done' and $contract->delivery == 'done')
-          {
-              echo html::a($this->createLink('contract', 'finish', "contract=$contract->id"), $lang->finish, "data-toggle='modal'");
-          }
-          else
-          {
-              echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->finish . '</a> ';
-          }
-
-          if($contract->status == 'normal')
-          {
-              echo html::a($this->createLink('contract', 'cancel', "contract=$contract->id"), $lang->cancel, "data-toggle='modal'");
-          }
-          else
-          {
-              echo "<a href='###' disabled='disabled' class='disabled'>" . $lang->cancel . '</a> ';
-          }
-
-          echo html::a($this->createLink('contract', 'delete', "contract=$contract->id"), $lang->delete, "class='reloadDeleter'");
-          ?>
-        </td>
+        <td><?php echo $this->contract->buildOperateMenu($contract) ?></td>
       </tr>
       <?php endforeach;?>
     </tbody>

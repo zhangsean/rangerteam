@@ -50,27 +50,7 @@
   <?php echo $this->fetch('action', 'history', "objectType=contract&objectID={$contract->id}")?>
   <div class='text-center'>
     <?php
-    if($contract->return == 'wait' and $contract->status == 'normal')
-    {
-        echo html::a($this->createLink('contract', 'receive',  "contract=$contract->id"), $lang->contract->return, "data-toggle='modal' class='btn'");
-    }
-
-    if($contract->delivery == 'wait' and $contract->status == 'normal')
-    {
-        echo html::a($this->createLink('contract', 'delivery', "contract=$contract->id"), $lang->contract->delivery, "data-toggle='modal' class='btn'");
-    }
-
-    if($contract->status == 'normal' and $contract->return == 'done' and $contract->delivery == 'done')
-    {
-        echo html::a($this->createLink('contract', 'finish', "contract=$contract->id"), $lang->finish, "data-toggle='modal' class='btn'");
-    }
-
-    if($contract->status == 'normal')
-    {
-        echo html::a($this->createLink('contract', 'cancel', "contract=$contract->id"), $lang->cancel, "data-toggle='modal' class='btn'");
-    }
-    echo html::a(inlink('edit', "contractID=$contract->id"), $lang->edit, "class='btn'");
-    echo html::a(inlink('delete', "contractID=$contract->id"), $lang->delete, "class='deleter btn'");
+    echo $this->contract->buildOperateMenu($contract, 'btn', 'view');
     echo html::backButton();
     ?>
   </div>

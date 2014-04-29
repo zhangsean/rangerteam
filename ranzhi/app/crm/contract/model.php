@@ -274,4 +274,61 @@ class contractModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Build operate menu.
+     * 
+     * @param  object $contract 
+     * @param  string $class 
+     * @param  string $type 
+     * @access public
+     * @return void
+     */
+    public function buildOperateMenu($contract, $class = '', $type = 'browse')
+    {
+        $menu  = '';
+
+        if($contract->return == 'wait' and $contract->status == 'normal')
+        {
+            $menu .= html::a(helper::createLink('contract', 'receive',  "contract=$contract->id"), $this->lang->contract->return, "data-toggle='modal' class='$class'");
+        }
+        else
+        {
+            if($type == 'browse') $menu .= "<a href='###' disabled='disabled' class='disabled  $class'>" . $this->lang->contract->return . '</a> ';
+        }
+
+        if($contract->delivery == 'wait' and $contract->status == 'normal')
+        {
+            $menu .= html::a(helper::createLink('contract', 'delivery', "contract=$contract->id"), $this->lang->contract->delivery, "data-toggle='modal' class='$class'");
+        }
+        else
+        {
+            if($type == 'browse') $menu .= "<a href='###' disabled='disabled' class='disabled $class'>" . $this->lang->contract->delivery . '</a> ';
+        }
+
+        if($contract->status == 'normal' and $contract->return == 'done' and $contract->delivery == 'done')
+        {
+            $menu .= html::a(helper::createLink('contract', 'finish', "contract=$contract->id"), $this->lang->finish, "data-toggle='modal' class='$class'");
+        }
+        else
+        {
+            if($type == 'browse') $menu .= "<a href='###' disabled='disabled' class='disabled $class'>" . $this->lang->finish . '</a> ';
+        }
+
+        if($contract->status == 'normal')
+        {
+            $menu .= html::a(helper::createLink('contract', 'cancel', "contract=$contract->id"), $this->lang->cancel, "data-toggle='modal' class='$class'");
+        }
+        else
+        {
+            if($type == 'browse') $menu .= "<a href='###' disabled='disabled' class='disabled $class'>" . $this->lang->cancel . '</a> ';
+        }
+
+        $menu .= html::a(helper::createLink('contract', 'edit', "contract=$contract->id"), $this->lang->edit, "class='$class'");
+
+        $deleter = $type == 'browse' ? 'reloadDeleter' : 'deleter';
+        $menu   .= html::a(helper::createLink('contract', 'delete', "contract=$contract->id"), $this->lang->delete, "class='$deleter $class'");
+
+        return $menu;
+    }
 }
