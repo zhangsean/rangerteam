@@ -84,7 +84,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->contract->contact;?></th>
-          <td><?php echo $contacts[$contract->contact];?></td>
+          <td><?php if(isset($contacts[$contract->contact])) echo $contacts[$contract->contact];?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->signedBy;?></th>

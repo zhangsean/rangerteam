@@ -80,6 +80,7 @@ class contractModel extends model
             ->add('delivery', 'wait')
             ->add('return', 'wait')
             ->setDefault('order', array())
+            ->setDefault('real', array())
             ->setDefault('begin', '0000-00-00')
             ->setDefault('end', '0000-00-00')
             ->stripTags('items', $this->config->allowedTags->admin)
@@ -137,6 +138,7 @@ class contractModel extends model
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', $now)
             ->setDefault('order', array())
+            ->setDefault('real', array())
             ->setDefault('customer', $contract->customer)
             ->setDefault('begin', '0000-00-00')
             ->setDefault('end', '0000-00-00')
@@ -163,16 +165,17 @@ class contractModel extends model
                     $contractOrder->order    = $orderID;
                     $this->dao->insert(TABLE_CONTRACTORDER)->data($contractOrder)->exec();
                 }
+
+                foreach($data->real as $key => $real)
+                {
+                    $order = new stdclass();
+                    $order->real       = $real;
+                    $order->signedBy   = $data->signedBy;
+                    $order->signedDate = $data->signedDate;
+                    $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($data->order[$key])->exec();
+                }
             }
 
-            foreach($data->real as $key => $real)
-            {
-                $order = new stdclass();
-                $order->real       = $real;
-                $order->signedBy   = $data->signedBy;
-                $order->signedDate = $data->signedDate;
-                $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($data->order[$key])->exec();
-            }
             $this->loadModel('file')->saveUpload('contract', $contractID);
 
             return commonModel::createChanges($contract, $data);
