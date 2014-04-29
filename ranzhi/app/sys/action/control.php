@@ -16,13 +16,13 @@ class action extends control
      * 
      * @param  string    $objectType
      * @param  int       $objectID 
-     * @param  int       $customer 
+     * @param  string    action
      * @access public
      * @return void
      */
-    public function history($objectType, $objectID)
+    public function history($objectType, $objectID, $action = '')
     {
-        $this->view->actions    = $this->loadModel('action')->getList($objectType, $objectID);
+        $this->view->actions    = $this->loadModel('action')->getList($objectType, $objectID, $action);
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
         $this->display();

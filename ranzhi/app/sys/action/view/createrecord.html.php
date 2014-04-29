@@ -41,5 +41,6 @@
       </td>
     </tr>
   </table>
+  <?php echo $this->fetch('action', 'history', "objectType={$objectType}&objectID={$objectID}&action=record");?>
 </form>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

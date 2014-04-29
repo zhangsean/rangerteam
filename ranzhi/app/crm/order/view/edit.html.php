@@ -38,7 +38,11 @@
           <?php endif;?>
           <tr>
             <th></th>
-            <td><?php echo html::submitButton() . html::hidden('referer', $this->server->http_referer);?></div>
+            <td>
+              <?php echo html::submitButton();?>
+              <?php echo html::backButton();?>
+              <?php echo html::hidden('referer', $this->server->http_referer);?>
+            </td>
           </div>
         </table>
       </form>

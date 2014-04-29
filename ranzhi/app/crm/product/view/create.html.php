@@ -12,7 +12,7 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <div class='modal-body'>
-  <form method='post' id='ajaxForm'>
+    <form method='post' action='<?php echo inlink('create');?>' id='ajaxForm'>
     <table class='table table-form'>
       <tr>
         <th class='w-100px'><?php echo $lang->product->name;?></th>
