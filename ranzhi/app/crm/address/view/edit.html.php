@@ -19,16 +19,8 @@
       <td><?php echo html::input('title', $address->title, "class='form-control'")?></td>
     </tr>
     <tr>
-      <th><?php echo $lang->address->country;?></th>
-      <td><?php echo html::input('country', $address->country, "class='form-control'")?></td>
-    </tr>
-    <tr>
-      <th><?php echo $lang->address->province;?></th>
-      <td><?php echo html::input('province', $address->province, "class='form-control'")?></td>
-    </tr>
-    <tr>
-      <th><?php echo $lang->address->city;?></th>
-      <td><?php echo html::input('city', $address->city, "class='form-control'")?></td>
+      <th><?php echo $lang->address->area;?></th>
+      <td><?php echo html::select('area', $area, $address->area, "class='form-control chosen'")?></td>
     </tr>
     <tr>
       <th><?php echo $lang->address->location;?></th>

@@ -23,7 +23,7 @@
   <?php foreach($addresses as $address):?>
   <tr>
     <td><?php echo $address->title?></td>
-    <td><?php echo $address->country . ' ' . $address->province . ' ' . $address->city . ' ' . $address->location;?></td>
+    <td><?php echo zget($areaList, $address->area);?></td>
     <td>
       <?php
       if($address->objectType == $objectType and $address->objectID == $objectID)

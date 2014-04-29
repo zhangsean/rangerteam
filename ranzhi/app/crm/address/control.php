@@ -24,6 +24,7 @@ class address extends control
         $this->view->title      = $this->lang->address->common;
         $this->view->modalWidth = 800;
         $this->view->addresses  = $this->address->getList($objectType, $objectID);
+        $this->view->areaList   = $this->loadModel('tree')->getOptionMenu('area');
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
 
@@ -79,6 +80,7 @@ class address extends control
         }
 
         $this->view->title   = $this->lang->address->edit;
+        $this->view->area    = $this->loadModel('tree')->getOptionMenu('area');
         $this->view->address = $address;
         $this->display();
     }

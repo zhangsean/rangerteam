@@ -69,18 +69,7 @@ class addressModel extends model
         $address = fixer::input('post')
             ->add('objectType', $objectType)
             ->add('objectID', $objectID)
-            ->add('country', '')
-            ->add('province', '')
-            ->add('city', '')
-            ->remove('area')
             ->get();
-
-        $area = $this->loadModel('tree')->getByID($this->post->area);
-        if($area)
-        {
-            $address->city     = array_pop($area->pathNames);
-            $address->province = array_pop($area->pathNames);
-        }
 
         $this->dao->insert(TABLE_ADDRESS)->data($address)
             ->autoCheck()
