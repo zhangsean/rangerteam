@@ -29,7 +29,7 @@
         <th class='w-60px' ><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->order->status);?></th>
         <th class='w-80px' ><?php commonModel::printOrderLink('contactedDate', $orderBy, $vars, $lang->order->contactedDate);?></th>
         <th class='w-80px' ><?php commonModel::printOrderLink('nextDate', $orderBy, $vars, $lang->order->nextDate);?></th>
-        <th class='w-170px text-center'><?php echo $lang->actions;?></th>
+        <th class='w-180px text-center'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
