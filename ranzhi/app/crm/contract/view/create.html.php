@@ -14,6 +14,7 @@
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
+<?php js::set('customer', isset($customer) ? $customer : 0);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-edit"></i> <?php echo $lang->contract->create;?></strong>
@@ -27,19 +28,37 @@
         </tr>
         <tr>
           <th><?php echo $lang->contract->customer;?></th>
-          <td><?php echo html::select('customer', $customers, '', "class='form-control chosen' onchange='getOrder(this.value)'");?></td>
+          <td><?php echo html::select('customer', $customers, isset($customer) ? $customer : '', "class='form-control chosen' onchange='getOrder(this.value)'");?></td>
         </tr>
+        <?php if(isset($currentOrder)):?>
+        <tr>
+          <th><?php echo $lang->contract->order;?></th>
+          <td>
+            <div class='form-group'>
+              <span class='col-sm-8'>
+                <select name='order[]' class='select-order form-control'>
+                <?php foreach($orders as $order):?>
+                <option value="<?php echo $order->id;?>" data-real="<?php echo $order->plan;?>"><?php echo $order->title;?></option>
+                <?php endforeach;?>
+                 </select>
+              </span>
+              <span class='col-sm-3'><?php echo html::input('real[]', $currentOrder->plan, "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?></span>
+              <span class='col-sm-1'><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='minus'");?></span>
+            </div>
+          </td>
+        </tr>
+        <?php endif;?>
         <tr id= 'orderTR' class='hide'>
           <th><?php echo $lang->contract->order;?></th>
           <td id='orderTD'></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->amount;?></th>
-          <td><?php echo html::input('amount', '', "class='form-control'");?></td>
+          <td><?php echo html::input('amount', isset($currentOrder) ? $currentOrder->plan : '', "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->contact;?></th>
-          <td><?php echo html::select('contact', $contacts, '', "class='form-control select-contact chosen'");?></td>
+          <td class='contactTD'><select name='contact' id='contact' class='form-control'></select></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->signedBy;?></th>

@@ -48,10 +48,12 @@ class contract extends control
     /**
      * Create contract. 
      * 
+     * @param  int    $orderID 
+     * @param  int    $customerID
      * @access public
      * @return void
      */
-    public function create()
+    public function create($orderID = 0, $customerID = 0)
     {
         if($_POST)
         {
@@ -63,10 +65,15 @@ class contract extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
+        if($orderID && $customerID)
+        {
+            $this->view->customer     = $customerID;
+            $this->view->currentOrder = $this->loadModel('order')->getByID($orderID);
+            $this->view->orders       = $this->order->getList($mode = 'customer', $customerID);
+        }
+
         $this->view->title      = $this->lang->contract->create;
-        $this->view->modalWidth = 800;
         $this->view->customers  = $this->loadModel('customer')->getPairs();
-        $this->view->contacts   = $this->loadModel('contact')->getPairs();
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->display();
     }

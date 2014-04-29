@@ -64,6 +64,26 @@ class orderModel extends model
         return $this->dao->select('*')->from(TABLE_ORDER)->where('id')->in($idList)->fetchAll();
     }
 
+    /** 
+     * Get order pairs.
+     * 
+     * @param  int   $customer 
+     * @access public
+     * @return array
+     */
+    public function getPairs($customer)
+    {
+        $orders = $this->dao->select('o.id, o.createdDate, c.name as customerName, p.name as productName')->from(TABLE_ORDER)->alias('o')
+            ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
+            ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
+            ->beginIF($customer)->where('customer')->eq($customer)->fi()
+            ->fetchAll('id');
+
+        foreach($orders as $key => $order) $orders[$key] = sprintf($this->lang->order->titleLBL, $order->id, $order->customerName, $order->productName, substr($order->createdDate, 0, 10)); 
+
+        return $orders;
+    }
+
     /**
      * Get orders of the customer for create contract.
      * 
@@ -269,7 +289,7 @@ class orderModel extends model
         $menu .= html::a(inlink('view', "orderID=$order->id"), $this->lang->view);
         $menu .= html::a(helper::createLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $this->lang->order->record, "data-toggle='modal'");
 
-        if($order->status == 'normal')   $menu .= html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign);
+        if($order->status == 'normal')   $menu .= html::a(helper::createLink('contract', 'create', "orderID=$order->id&customerID=$order->customer"), $this->lang->order->sign);
         if($order->status != 'normal') $menu .= html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
 
         $menu .= html::a(inlink('assign', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal'");

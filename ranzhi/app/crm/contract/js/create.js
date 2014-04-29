@@ -7,21 +7,28 @@
  */
 function getOrder(customerID)
 {
-    if($('.select-order').length > 1) $('.select-order').parents('tr').not('#orderTR').remove();
     $('#orderTD').empty();
 
     if(customerID == '') return false;
     if(customerID == 'create') return true;
 
-    $.get(createLink('contract', 'getOrder', 'customerID=' + customerID), function(data)
+    $('.contactTD select').load(createLink('contact', 'getOptionMenu', 'customerID=' + customerID));
+
+    $('#orderTD').load(createLink('contract', 'getOrder', 'customerID=' + customerID), function()
     {
         $('#orderTR').removeClass('hide');
-        $('#orderTD').html(data).show();
+        if($('.select-order').length > 1) $('.select-order').parents('tr').not('#orderTR').remove();
     })
 }
 
 $(document).ready(function()
 {
+    if(v.customer)
+    {
+        $('.contactTD select').load(createLink('contact', 'getOptionMenu', 'customerID=' + v.customer));
+        $('#orderTD').load(createLink('contract', 'getOrder', 'customerID=' + v.customer));
+    }
+
     $(document).on('click', '.plus', function()
     {
         $(this).parents('tr').after("<tr><th></th><td>" + $('#orderTD').html() + "</td></tr>");
@@ -29,7 +36,7 @@ $(document).ready(function()
   
     $(document).on('click', '.minus', function()
     {
-        if($(this).parents('table').find('.order-real').size() == 1)
+        if($(this).parents('table').find('.order-real').not('tr.hide .order-real').size() == 1)
         {
             $(this).parents('td').find('select').val('').change();
             return false;
