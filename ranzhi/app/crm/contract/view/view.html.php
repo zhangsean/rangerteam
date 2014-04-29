@@ -14,37 +14,11 @@
 <div class='col-md-8'>
   <div class='panel'>
     <div class='panel-heading'>
-      <strong><i class='icon-file-text-alt'></i> <?php echo $lang->contract->common . ': #' . $contract->id . $contract->name;?></strong>
+      <strong><i class='icon-file-text-alt'></i> <?php echo $contract->name;?></strong>
     </div>
     <div class='panel-body'>
-      <table class='table table-form table-data'>
-        <tr>
-          <th class='w-80px'><?php echo $lang->contract->name;?></th>
-          <td><?php echo $contract->name;?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->contract->order;?></th>
-          <td>
-            <ul>
-              <?php foreach($orders as $order):?>
-              <li><?php echo $products[$order->product] . $lang->minus .  $lang->order->real . " : " . $order->real; ?></li>
-              <?php endforeach;?>
-            </ul>
-          </td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->contract->amount;?></th>
-          <td><?php echo $contract->amount?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->contract->items;?></th>
-          <td><?php echo $contract->items;?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->files?></th>
-          <td><?php echo $this->fetch('file', 'printFiles', array('files' => $contract->files, 'fieldset' => 'false'))?></td>
-        </tr>
-      </table>
+      <?php echo $contract->items;?>
+      <div><?php echo $this->fetch('file', 'printFiles', array('files' => $contract->files, 'fieldset' => 'false'))?></div>
     </div>
   </div>
   <?php echo $this->fetch('action', 'history', "objectType=contract&objectID={$contract->id}")?>
@@ -58,20 +32,28 @@
 <div class='col-md-4'>
   <div class='panel'>
     <div class='panel-heading'>
-      <strong><?php echo $lang->contract->info;?></strong>
+      <strong><?php echo $lang->basicInfo;?></strong>
     </div>
     <div class='panel-body'>
       <table class='table table-info'>
         <tr>
-          <th class='w-70px'><?php echo $lang->contract->customer;?></th>
-          <td><?php echo $customers[$contract->customer];?></td>
+          <th class='w-80px'><?php echo $lang->contract->customer;?></th>
+          <td><?php echo zget($customers, $contract->customer);?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->contract->code;?></th>
-          <td><?php echo $contract->code;?></td>
+          <th><?php echo $lang->contract->order;?></th>
+          <td>
+            <?php foreach($orders as $order):?>
+            <div><?php echo $products[$order->product] . $lang->minus .  $lang->order->real . " : " . $order->real; ?></div>
+            <?php endforeach;?>
+          </td>
         </tr>
         <tr>
-          <th><?php echo $lang->contract->delivery;?></th>
+          <th><?php echo $lang->contract->amount;?></th>
+          <td><?php echo $contract->amount?></td>
+        </tr>
+        <tr>
+          <th class='w-70px'><?php echo $lang->contract->delivery;?></th>
           <td><?php echo $lang->contract->deliveryList[$contract->delivery];?></td>
         </tr>
         <tr>
