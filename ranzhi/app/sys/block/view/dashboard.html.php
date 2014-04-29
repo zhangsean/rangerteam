@@ -26,7 +26,6 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <div class='col-sm-6 col-md-4'>
       <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->name?>' data-url='<?php echo $block->blockLink?>'>
         <div class='panel-heading'>
-          <?php echo $block->name?>
           <div class='panel-actions'>
             <button class='btn btn-mini refresh-panel'><i class='icon-repeat'></i></button>
             <div class='dropdown'>
@@ -37,6 +36,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
               </ul>
             </div>
           </div>
+          <?php echo $block->name;?>
         </div>
         <div class='panel-body no-padding'></div>
       </div>
