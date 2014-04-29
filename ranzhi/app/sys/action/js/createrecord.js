@@ -1,4 +1,4 @@
 $(document).ready(function()
 {
-    $('.sorter').click();
+   $('#ajaxModal .sorter').click();
 });

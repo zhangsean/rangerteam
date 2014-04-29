@@ -13,7 +13,7 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <script src='<?php echo $config->webRoot;?>js/jquery/reverseorder/raw.js' type='text/javascript'></script>
 
-<div id='actionbox' class='panel'>
+<div class='panel'>
   <div class='panel-heading'>
     <strong><?php echo $lang->history?></strong>
     <div class='panel-actions'>
@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class='panel-body'>
-    <ol id='historyItem'>
+    <ol>
       <?php $i = 1; ?>
       <?php foreach($actions as $action):?>
       <?php $canEditComment = ($action->action != 'record' and end($actions) == $action and $action->comment and $this->methodName == 'view' and $action->actor == $this->app->user->account);?>

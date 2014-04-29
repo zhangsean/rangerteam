@@ -34,6 +34,6 @@ $(document).ready(function()
               $(this).find('span').attr('class', 'log-asc');
           }
 
-          $("#historyItem li").reverseOrder();
+          $(this).parents('.panel').find('.panel-body li').reverseOrder();
      });
 });
