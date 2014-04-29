@@ -99,17 +99,17 @@ class block extends control
         $blocks  = $this->loadModel('setting')->getItems("owner=$account&app=$app&module=index&section=block");
         foreach($blocks as $id => $block)
         {
-            $blocks[$block->key] = $block->value;
+            $blocks[$block->key] = helper::jsonEncode(json_decode($block->value));
             unset($blocks[$id]);
         }
 
         foreach($newOrder as $key => $index)
         {
-            $orders['b' . $index] = $blocks['b' . $oldOrder[$key]];
+            $sortedBlocks['b' . $index] = $blocks['b' . $oldOrder[$key]];
         }
 
         $this->loadModel('setting')->deleteItems("owner=$account&app=$app&module=index&section=block");
-        $this->setting->setItems($account . ".$app.index.block", $orders);
+        $this->setting->setItems($account . ".$app.index.block", $sortedBlocks);
 
         if(dao::isError()) $this->send(array('result' => 'fail'));
         $this->send(array('result' => 'success'));
