@@ -20,22 +20,17 @@ class doc extends control
     public function __construct()
     {
         parent::__construct();
+
+        $this->libs = $this->doc->getLibList();
+
         $this->loadModel('user');
         $this->loadModel('tree');
         $this->loadModel('action');
         $this->loadModel('common', 'crm');
         $this->loadModel('product', 'crm');
         //$this->loadModel('project');
-        $this->libs = $this->doc->getLibList();
 
-        $libMenu = array();
-        foreach($this->libs as $id => $libName)
-        {
-            $libID = isset($this->lang->doc->systemLibs[$id]) ? $id : 'lib' . $id;
-            $libMenu[$libID] = "$libName|doc|browse|libID=$id";
-        }
-        $libMenu += (array)$this->lang->doc->menu;
-        $this->lang->doc->menu = (object)$libMenu;
+        $this->lang->doc->menu = $this->doc->getLeftMenus($this->libs);
     }
 
     /**

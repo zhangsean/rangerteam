@@ -59,6 +59,8 @@ class tree extends control
         elseif(strpos($type, 'doc') !== false)
         {   
             $type = 'customdoc';
+            $this->lang->tree->menu = $this->loadModel('doc')->getLeftMenus();
+            $this->lang->menuGroups->tree = 'doc';
             if($root == 'product' or $root == 'project') $type = $root . 'doc';
         }   
         elseif($type == 'area')

@@ -4,7 +4,11 @@ $(document).ready(function()
     var menu =  $('.leftmenu .nav li').size() == 0 ? '.nav li' : '.leftmenu .nav li';
     $(menu).removeClass('active');
     $(menu + " a[href*='tree'][href*='" + v.type + "']").parent().addClass('active');
-
+   if(v.type == 'customdoc')
+   {
+        link = createLink('doc', 'browse', "libID=" + v.root);
+        $(menu + " a[href*='"+ link +"']").parent().addClass('active');
+   }
 
     /* Load the children of current category when page loaded. */
     var link = createLink('tree', 'children', 'type=' + v.type + '&moduleID=' + v.moduleID + '&root=' + v.root);

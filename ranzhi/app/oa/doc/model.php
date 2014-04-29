@@ -36,6 +36,27 @@ class docModel extends model
         $libs = $this->dao->select('id, name')->from(TABLE_DOCLIB)->where('deleted')->eq(0)->fetchPairs();
         return $this->lang->doc->systemLibs + $libs;
     }
+    
+    /**
+     * Get left menus.
+     * 
+     * @param  mix    $libs 
+     * @access public
+     * @return void
+     */
+    public function getLeftMenus($libs = null)
+    {
+        if(empty($libs)) $libs = $this->getLibList();
+        foreach($libs as $id => $libName)
+        {
+            $libID = isset($this->lang->doc->systemLibs[$id]) ? $id : 'lib' . $id;
+            $libMenu[$libID] = "$libName|doc|browse|libID=$id";
+        }
+
+        $libMenu += (array)$this->lang->doc->menu;
+
+        return (object)$libMenu;
+    }
 
     /**
      * Create a library.
