@@ -137,9 +137,9 @@ class contactModel extends model
             $resume->contact  = $contactID;
             $resume->customer = $contact->customer;
             $resume->maker    = isset($contact->maker) ? $contact->maker : 0;
-            $resume->dept     = $contact->dept;
-            $resume->title    = $contact->title;
-            $resume->join     = $contact->join;
+            $resume->dept     = isset($contact->dept) ? $contact->dept : '';
+            $resume->title    = isset($contact->title) ? $contact->title : '';
+            $resume->join     = isset($contact->join) ? $contact->join : '';
 
             $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
             if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->where('id')->eq($contactID)->exec();

@@ -38,7 +38,7 @@
     <tr class='text-center'>
       <td><?php echo $contact->id;?></td>
       <td><?php echo html::a(inlink('view', "contactID=$contact->id"), $contact->realname);?></td>
-      <td><?php echo html::a($this->createLink('customer', 'view', "customerID=$contact->customer"), $customers[$contact->customer]);?></td>
+      <td><?php if(isset($customers[$contact->customer])) echo html::a($this->createLink('customer', 'view', "customerID=$contact->customer"), $customers[$contact->customer]);?></td>
       <td><?php echo isset($lang->contact->genderList[$contact->gender]) ? $lang->contact->genderList[$contact->gender] : '';?></td>
       <td><?php echo $contact->phone;?></td>
       <td><?php echo $contact->mobile;?></td>
