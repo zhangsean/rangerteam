@@ -49,4 +49,4 @@ ALTER TABLE `crm_resume` ADD `deleted` enum('0','1') COLLATE 'utf8_general_ci' N
 
 ALTER TABLE `oa_relation` CHANGE `category` `category` mediumint(9) NOT NULL;
 
-ALTER TABLE `sys_user` CHANGE `dept` `dept` mediumint(8) unsigned NOT NULL,
+ALTER TABLE `sys_user` CHANGE `dept` `dept` mediumint(8) unsigned NOT NULL;
