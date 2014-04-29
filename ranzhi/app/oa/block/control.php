@@ -129,4 +129,31 @@ class block extends control
 
         $this->display();
     }
+
+    /**
+     * Print task block.
+     * 
+     * @access public
+     * @return void
+     */
+    public function printTaskBlock()
+    {
+        $this->lang->task = new stdclass();
+        $this->app->loadLang('task');
+
+        $params = $this->get->param;
+        $params = json_decode(base64_decode($params));
+
+        $this->view->sso    = base64_decode($this->get->sso);
+        $this->view->code   = $this->get->blockid;
+
+        $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
+            ->where("(createdBy='$params->account' OR assignedTo = '$params->account')")
+            ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
+            ->orderBy($params->orderBy)
+            ->limit($params->num)
+            ->fetchAll('id');
+
+        $this->display();
+    }
 }
