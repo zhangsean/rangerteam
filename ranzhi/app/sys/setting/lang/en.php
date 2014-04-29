@@ -28,8 +28,8 @@ $lang->setting->product->fields['statusList'] = 'Product status';
 $lang->setting->customer = new stdClass();
 $lang->setting->customer->fields['typeList'] = 'Customer levels';
 
-$lang->setting->currentLang = 'For current language';
 $lang->setting->allLang     = 'For all language';
+$lang->setting->currentLang = 'For current language';
 
 $lang->setting->placeholder = new stdclass();
 $lang->setting->placeholder->key   = 'Key';
