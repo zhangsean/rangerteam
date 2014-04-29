@@ -37,6 +37,9 @@ class contract extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        /* Save session for list. */
+        $this->session->set('contractList', $this->app->getURI(true));
+
         $this->view->contracts = $this->contract->getList(0, $orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->pager     = $pager;
@@ -98,7 +101,7 @@ class contract extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "contractID=$contractID")));
         }
 
         $contract = $this->contract->getByID($contractID);
@@ -124,8 +127,11 @@ class contract extends control
         {
             $this->contract->delivery($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             $this->loadModel('action')->create('contract', $contractID, 'Delivered', $this->post->comment);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+
+            $link = $this->session->contractList ? $this->session->contractList : inlink('view', "contractID=$contractID");
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
         }
 
         $this->view->title      = $this->lang->contract->delivery;
@@ -146,8 +152,11 @@ class contract extends control
         {
             $this->contract->receive($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             $this->loadModel('action')->create('contract', $contractID, 'Returned', $this->post->comment);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            
+            $link = $this->session->contractList ? $this->session->contractList : inlink('view', "contractID=$contractID");
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
         }
 
         $this->view->title      = $this->lang->contract->return;
@@ -168,8 +177,11 @@ class contract extends control
         {
             $this->contract->cancel($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             $this->loadModel('action')->create('contract', $contractID, 'Canceled', $this->post->comment);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            
+            $link = $this->session->contractList ? $this->session->contractList : inlink('view', "contractID=$contractID");
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
         }
 
         $this->view->title      = $this->lang->cancel;
@@ -190,8 +202,11 @@ class contract extends control
         {
             $this->contract->finish($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             $this->loadModel('action')->create('contract', $contractID, 'Finished', $this->post->comment);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+
+            $link = $this->session->contractList ? $this->session->contractList : inlink('view', "contractID=$contractID");
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
         }
 
         $this->view->title      = $this->lang->finish;
@@ -209,6 +224,9 @@ class contract extends control
     public function view($contractID)
     {
         $contract = $this->contract->getByID($contractID);
+
+        /* Save session for list. */
+        $this->session->set('contractList', $this->app->getURI(true));
 
         $this->view->orders    = $this->loadModel('order')->getListById($contract->order);
         $this->view->customers = $this->loadModel('customer')->getPairs();
