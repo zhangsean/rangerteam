@@ -26,9 +26,13 @@
   <tbody>
     <?php foreach($contacts as $contact):?>
     <tr class='text-center'>
-      <?php $class=$contact->maker ? "class='lead text-red'" : '';?>
       <td><?php echo $contact->id;?></td>
-      <td <?php echo $class;?>><?php echo $contact->realname;?></td>
+      <td>
+        <?php
+        echo $contact->realname;
+        if($contact->maker) echo " ({$lang->resume->maker})";
+        ?>
+      </td>
       <td><?php echo $contact->dept;?></td>
       <td><?php echo $contact->title;?></td>
       <td><?php echo $contact->email;?></td>

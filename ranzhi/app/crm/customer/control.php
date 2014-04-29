@@ -231,6 +231,6 @@ class customer extends control
     {
         $this->customer->delete(TABLE_CUSTOMER, $customerID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'success', 'locate' => inlink('browse')));
     }
 }

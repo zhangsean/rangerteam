@@ -225,7 +225,7 @@ class contract extends control
     {
         $this->contract->delete(TABLE_CONTRACT, $contractID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'success', 'locate' => inlink('browse')));
     }
 
     /**

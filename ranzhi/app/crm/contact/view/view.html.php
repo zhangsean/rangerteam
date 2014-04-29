@@ -45,7 +45,7 @@
           <th class='w-70px'><?php echo $lang->contact->customer;?></th>
           <td>
             <?php
-            echo $customers[$contact->customer];
+            if(isset($customers[$contact->customer])) echo $customers[$contact->customer];
             if($contact->maker) echo " ({$lang->resume->maker})";
             ?>
           </td>
@@ -105,7 +105,7 @@
         <?php foreach($resumes as $resume):?>
         <tr class='text-center'>
           <td><?php echo $resume->join . $lang->minus . $resume->left;?></td>
-          <td><?php echo $customers[$resume->customer]?></td>
+          <td><?php if(isset($customers[$resume->customer])) echo $customers[$resume->customer]?></td>
           <td><?php echo $resume->dept?></td>
           <td><?php echo $resume->title?></td>
        </tr>
