@@ -18,7 +18,7 @@
       <?php echo html::a(inlink('create'), "<i class='icon-plus'>{$lang->contact->create}</i>", "class='btn btn-primary'")?>
     </div>
   </div>
-  <table class='table table-hover table-striped table-bordered tablesorter table-data'>
+  <table class='table table-hover table-striped table-bordered tablesorter table-data' id='contactList'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
@@ -49,7 +49,7 @@
         <?php echo html::a($this->createLink('contact', 'history', "contactID=$contact->id"), $lang->contact->record);?>
         <?php echo html::a($this->createLink('address', 'browse', "objectType=contact&objectID=$contact->id"), $lang->contact->address, "data-toggle='modal'");?>
         <?php echo html::a($this->createLink('resume', 'browse', "contactID=$contact->id"), $lang->contact->resume, "data-toggle='modal'");?>
-        <?php echo html::a($this->createLink('contact', 'delete', "contactID=$contact->id"), $lang->delete, "class='deleter'");?>
+        <?php echo html::a($this->createLink('contact', 'delete', "contactID=$contact->id"), $lang->delete, "class='reloadDeleter'");?>
       </td>
     </tr>
     <?php endforeach;?>

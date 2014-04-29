@@ -165,6 +165,7 @@ class contactModel extends model
         $contact = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', $now)
+            ->setDefault('birthday', '0000-00-00')
             ->setIF($this->post->avatar == '', 'avatar', $oldContact->avatar)
             ->setIF($this->post->weibo == 'http://weibo.com/', 'weibo', '')
             ->setIF($this->post->site == 'http://', 'site', '')

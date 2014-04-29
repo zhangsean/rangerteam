@@ -313,7 +313,6 @@ $.extend(
                             }   
                             else
                             {   
-                                $('.colored').colorize();
                                 $('tfoot td').css('background', 'white').unbind('click').unbind('hover');
                             }   
                         });
@@ -357,7 +356,6 @@ $.extend(
                         }   
                         else
                         {   
-                            $('.colored').colorize();
                             $('tfoot td').css('background', 'white').unbind('click').unbind('hover');
                         }   
                     });

@@ -21,7 +21,28 @@
           <td><?php echo $contact->realname;?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->contact->customer;?></th>
+          <th><?php echo $lang->contact->desc;?></th>
+          <td><?php echo $contact->desc;?></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <?php echo $this->fetch('action', 'history', "objectType=contact&objectID={$contact->id}&customer=0")?>
+    <div class='text-center'>
+      <?php
+      echo html::a(inlink('edit', "contactID=$contact->id"), $lang->edit, "class='btn'");
+      echo html::a(inlink('delete', "contactID=$contact->id"), $lang->delete, "class='deleter btn'");
+      echo html::a(inlink('browse'), $lang->goback, "class='btn'");
+      ?>
+    </div>
+</div>
+<div class='col-md-4'>
+  <div class='panel'>
+    <div class='panel-heading'><strong><?php echo $lang->contact->basicInfo;?></strong></div>
+    <div class='panel-body'>
+      <table class='table table-form table-data'>
+        <tr>
+          <th class='w-70px'><?php echo $lang->contact->customer;?></th>
           <td>
             <?php
             echo $customers[$contact->customer];
@@ -43,7 +64,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->contact->birthday;?></th>
-          <td><?php echo $contact->birthday;?></td>
+          <td><?php echo formatTime($contact->birthday);?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contact->gender;?></th>
@@ -53,23 +74,9 @@
           <th><?php echo $lang->contact->createdDate;?></th>
           <td><?php echo $contact->createdDate;?></td>
         </tr>
-        <tr>
-          <th><?php echo $lang->contact->desc;?></th>
-          <td><?php echo $contact->desc;?></td>
-        </tr>
       </table>
     </div>
-    <div class='panel-footer'>
-      <?php
-      echo html::a(inlink('edit', "contactID=$contact->id"), $lang->edit, "class='btn'");
-      echo html::a(inlink('delete', "contactID=$contact->id"), $lang->delete, "class='deleter btn'");
-      echo html::a(inlink('browse'), $lang->goback, "class='btn'");
-      ?>
-    </div>
   </div>
-  <?php echo $this->fetch('action', 'history', "objectType=contact&objectID={$contact->id}&customer=0")?>
-</div>
-<div class='col-md-4'>
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $lang->contact->contactInfo;?></strong></div>
     <div class='panel-body'>
@@ -97,7 +104,7 @@
         </tr>
         <?php foreach($resumes as $resume):?>
         <tr class='text-center'>
-          <td><?php echo $resume->join . $lang->minus . $resume->left?></td>
+          <td><?php echo $resume->join . $lang->minus . $resume->left;?></td>
           <td><?php echo $customers[$resume->customer]?></td>
           <td><?php echo $resume->dept?></td>
           <td><?php echo $resume->title?></td>
