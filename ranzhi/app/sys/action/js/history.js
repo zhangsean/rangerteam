@@ -1,5 +1,9 @@
 $(document).ready(function()
 {
+     if($('a[data-toggle=modal]').parents('#ajaxModal').size()) 
+     {
+        $('a[data-toggle=modal]').hide();
+     }
      $('.toggle').click(function()
      {
           $(this).toggleClass('change-show').toggleClass('change-hide');
