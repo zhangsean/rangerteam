@@ -991,6 +991,7 @@
                 {
                     this.show();
                 }
+                this.updateEntryUrl();
                 return;
             }
 
@@ -1162,6 +1163,7 @@
 
             $('#' + id).addClass('fullscreen-active');
             $('.fullscreen-btn[data-id="' + id + '"],.app-btn[data-id="' + id + '"]').addClass('active');
+            desktop.updateBrowserUrl();
 
             if(id == 'allapps') $('#search').focus();
 
