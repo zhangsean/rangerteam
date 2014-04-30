@@ -69,6 +69,7 @@
       </table>
     </div>
   </div> 
+  <?php echo $this->fetch('contact', 'block', "customer={$order->customer}");?>
   <div class='panel'>
     <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->lifetime;?></strong></div>
     <div class='panel-body'>
@@ -108,6 +109,5 @@
     </div>
   </div>
   <?php endif;?>
-  <?php echo $this->fetch('contact', 'block', "customer={$order->customer}");?>
 </div>
 <?php include '../../common/view/footer.html.php';?>

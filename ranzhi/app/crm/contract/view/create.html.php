@@ -21,7 +21,7 @@
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-condensed'>
-      <table class='table table-striped table-form'>
+      <table class='table table-form'>
         <tr>
           <th class='w-80px'><?php echo $lang->contract->name;?></th>
           <td class='w-p40'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
