@@ -136,6 +136,7 @@ class contract extends control
 
         $this->view->title      = $this->lang->contract->delivery;
         $this->view->contractID = $contractID;
+        $this->view->users      = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
@@ -161,6 +162,7 @@ class contract extends control
 
         $this->view->title      = $this->lang->contract->return;
         $this->view->contractID = $contractID;
+        $this->view->users      = $this->loadModel('user')->getPairs();
         $this->display();
     }
 

@@ -213,10 +213,12 @@ class contractModel extends model
      */
     public function delivery($contractID)
     {
-        $contract = new stdclass();
-        $contract->delivery      = 'done';
-        $contract->deliveredBy   = $this->app->user->account;
-        $contract->deliveredDate = helper::now();
+        $contract = fixer::input('post')
+            ->add('delivery', 'done')
+            ->setDefault('deliveredBy', $this->app->user->account)
+            ->setDefault('deliveredDate', helper::now())
+            ->join('handlers', ',')
+            ->get();
 
         $this->dao->update(TABLE_CONTRACT)->data($contract, $skip = 'uid, comment')
             ->autoCheck()
@@ -235,10 +237,12 @@ class contractModel extends model
      */
     public function receive($contractID)
     {
-        $contract = new stdclass();
-        $contract->return       = 'done';
-        $contract->returnedBy   = $this->app->user->account;
-        $contract->returnedDate = helper::now();
+        $contract = fixer::input('post')
+            ->add('return', 'done')
+            ->setDefault('returnedBy', $this->app->user->account)
+            ->setDefault('returnedDate', helper::now())
+            ->join('handlers', ',')
+            ->get();
 
         $this->dao->update(TABLE_CONTRACT)->data($contract, $skip = 'uid, comment')
             ->autoCheck()
