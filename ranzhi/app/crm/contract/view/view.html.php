@@ -105,6 +105,14 @@
           <td><?php if($contract->signedBy) echo zget($users, $contract->signedBy, $contract->signedBy) . $lang->at . $contract->signedDate;?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->contract->deliveredBy;?></th>
+          <td><?php if($contract->deliveredBy) echo zget($users, $contract->deliveredBy, $contract->deliveredBy) . $lang->at . $contract->deliveredDate;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->contract->returnedBy;?></th>
+          <td><?php if($contract->returnedBy) echo zget($users, $contract->returnedBy, $contract->returnedBy) . $lang->at . $contract->returnedDate;?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->contract->finishedBy;?></th>
           <td><?php if($contract->finishedBy) echo zget($users, $contract->finishedBy, $contract->finishedBy) . $lang->at . $contract->finishedDate;?></td>
         </tr>

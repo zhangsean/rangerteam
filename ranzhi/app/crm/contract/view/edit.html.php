@@ -131,6 +131,22 @@
             <th><?php echo $lang->contract->signedDate;?></th>
             <td><?php echo html::input('signedDate', formatTime($contract->signedDate), "class='form-control form-datetime'");?></td>
           </tr>
+          <tr>
+            <th><?php echo $lang->contract->deliveredBy;?></th>
+            <td><?php echo html::select('deliveredBy', $users, $contract->deliveredBy, "class='form-control chosen'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->contract->deliveredDate;?></th>
+            <td><?php echo html::input('deliveredDate', formatTime($contract->deliveredDate), "class='form-control form-datetime'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->contract->returnedBy;?></th>
+            <td><?php echo html::select('returnedBy', $users, $contract->returnedBy, "class='form-control chosen'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->contract->returnedDate;?></th>
+            <td><?php echo html::input('returnedDate', formatTime($contract->returnedDate), "class='form-control form-datetime'");?></td>
+          </tr>
           <?php if($contract->finishedBy):?>
           <tr>
             <th><?php echo $lang->contract->finishedBy;?></th>
