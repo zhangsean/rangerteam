@@ -21,5 +21,5 @@ $(document).ready(function()
         }
     });
     
-    if(v.deptID) $('#category' + v.deptID).addClass('red');
+    if(v.deptID) $('#category' + v.deptID).addClass('text-red');
 });
