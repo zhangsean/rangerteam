@@ -61,9 +61,12 @@
             <th><?php echo $lang->files;?></th>
             <td colspan='2'><?php echo $this->fetch('file', 'buildForm');?></td>
           </tr>
+          <tr>
+            <th></th>
+            <td><?php echo html::submitButton() . html::backButton();?></td>
+          </tr>
         </table>
       </div>
-      <div class='panel-footer'><?php echo html::submitButton() . html::backButton();?></div>
     </div>
     <?php echo $this->fetch('action', 'history', "objectType=contract&objectID={$contract->id}")?>
   </div>
@@ -77,10 +80,6 @@
           <tr>
             <th class='w-70px'><?php echo $lang->contract->customer;?></th>
             <td><?php echo html::select('customer', $customers, $contract->customer, "class='form-control' disabled");?></td><td></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->contract->code;?></th>
-            <td><?php echo html::input('code', $contract->code, "class='form-control'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->delivery;?></th>
