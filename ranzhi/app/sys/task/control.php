@@ -11,6 +11,19 @@
  */
 class task extends control
 {
+    /**
+     * Construct function. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->projects = $this->loadModel('project', 'oa')->getPairs();
+        $this->lang->task->menu = $this->project->getLeftMenus($this->projects);
+    }
     /** 
      * The index page, locate to browse.
      * 
@@ -25,6 +38,7 @@ class task extends control
     /**
      * Browse task. 
      * 
+     * @param  int    $projectID 
      * @param  string $orderBy 
      * @param  int    $recTotal 
      * @param  int    $recPerPage 
@@ -32,15 +46,18 @@ class task extends control
      * @access public
      * @return void
      */
-    public function browse($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($projectID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title   = $this->lang->task->browse;
-        $this->view->tasks   = $this->task->getList($orderBy, $pager);
-        $this->view->pager   = $pager;
-        $this->view->orderBy = $orderBy;
+        $this->session->set('taskList', $this->app->getURI(true));
+
+        $this->view->title     = $this->lang->task->browse;
+        $this->view->tasks     = $this->task->getList($projectID, $orderBy, $pager);
+        $this->view->pager     = $pager;
+        $this->view->orderBy   = $orderBy;
+        $this->view->projectID = $projectID;
         $this->display();
     }
 
@@ -50,7 +67,7 @@ class task extends control
      * @access public
      * @return void
      */
-    public function create()
+    public function create($projectID)
     {
         if($_POST)
         {
@@ -58,14 +75,13 @@ class task extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->loadModel('action')->create('task', $taskID, 'Created');
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "projectID=$projectID")));
         }
 
-        $projects = $this->loadModel('project', 'oa')->getPairs();
-        $this->lang->task->menu = $this->project->getLeftMenus($projects);
-
-        $this->view->projects = $projects;
-        $this->view->users    = $this->loadModel('user')->getPairs();
+        $this->view->projects  = $this->projects;
+        $this->view->projectID = $projectID;
+        $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
@@ -86,14 +102,14 @@ class task extends control
             {   
                 $actionID = $this->loadModel('action')->create('task', $taskID, 'Edited');
                 $this->action->logHistory($actionID, $changes);
-            }   
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            }
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "taskID=$taskID")));
         }
 
-        $this->view->task      = $this->task->getByID($taskID);
-        $this->view->orders    = $this->loadModel('order')->getPairs();
-        $this->view->customers = $this->loadModel('customer')->getPairs();
-        $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->view->projects = $this->projects;
+        $this->view->task     = $this->task->getByID($taskID);
+        $this->view->users    = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
@@ -108,10 +124,9 @@ class task extends control
     {
         $task = $this->task->getByID($taskID);
 
-        $this->view->orders    = $this->loadModel('order', 'crm')->getPairs($task->customer);
-        $this->view->customers = $this->loadModel('customer', 'crm')->getPairs();
-        $this->view->users     = $this->loadModel('user')->getPairs();
-        $this->view->task      = $task;
+        $this->view->projects = $this->projects;
+        $this->view->users    = $this->loadModel('user')->getPairs();
+        $this->view->task     = $task;
 
         $this->display();
     }
@@ -129,8 +144,10 @@ class task extends control
         {
             $this->task->finish($taskID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             $this->loadModel('action')->create('task', $taskID, 'Finished', $this->post->comment);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
         $task = $this->task->getByID($taskID);
@@ -155,8 +172,11 @@ class task extends control
         {
             $this->task->assign($taskID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             if($this->post->assignedTo) $this->loadModel('action')->create('task', $taskID, 'Assigned', $this->post->comment, $this->post->assignedTo);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+
+            $link = $this->session->taskList ? $this->session->taskList : inlink('browse');
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
         $task = $this->task->getByID($taskID);
@@ -166,6 +186,22 @@ class task extends control
         $this->view->task   = $task;
         $this->view->users  = $this->loadModel('user')->getPairs();
         $this->display();
+    }
+
+    /**
+     * Delete task 
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
+    public function delete($taskID)
+    {
+        $this->task->delete(TABLE_TASK, $taskID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'massage' => dao::getError()));
+
+        $link = $this->session->taskList ? $this->session->taskList : inlink('browse');
+        $this->send(array('result' => 'success', 'locate' => $link));
     }
 
     /**

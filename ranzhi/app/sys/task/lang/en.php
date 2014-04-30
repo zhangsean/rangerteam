@@ -76,15 +76,16 @@ $lang->task->typeList['discuss'] = 'Discuss';
 $lang->task->typeList['affair']  = 'Affair';
 $lang->task->typeList['misc']    = 'Misc';
 
+$lang->task->priList[0]  = '';
 $lang->task->priList[1]  = '1';
 $lang->task->priList[2]  = '2';
 $lang->task->priList[3]  = '3';
 $lang->task->priList[4]  = '4';
-$lang->task->priList[0]  = '';
 
 $lang->task->reasonList['']       = '';
 $lang->task->reasonList['done']   = 'Done';
 $lang->task->reasonList['cancel'] = 'Canceled';
 
 $lang->task->basicInfo = 'Basic Info';
-$lang->task->moreInfo  = 'More Info';
+$lang->task->workInfo  = 'Work Info';
+$lang->task->life      = 'Task Life';

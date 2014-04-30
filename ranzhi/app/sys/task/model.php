@@ -30,36 +30,19 @@ class taskModel extends model
     }
 
     /**
-     * Bet tasks by project.
-     * 
-     * @param  int    $projectID 
-     * @param  string $orderBy 
-     * @param  string $pager 
-     * @access public
-     * @return array
-     */
-    public function getByProject($projectID, $orderBy = 'id_desc', $pager = null)
-    {
-        return $this->dao->select('*')->from(TABLE_TASK)
-            ->where('deleted')->eq(0)
-            ->andWhere('project')->eq($projectID)
-            ->orderBy($orderBy)
-            ->page($pager)
-            ->fetchAll();
-    }
-
-    /**
      * Get task list.
      * 
+     * @param  int    $projectID 
      * @param  string $orderBy 
      * @param  object $pager 
      * @access public
      * @return array
      */
-    public function getList($orderBy = 'id_desc', $pager = null)
+    public function getList($projectID = 0, $orderBy = 'id_desc', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_TASK)
             ->where('deleted')->eq(0)
+            ->beginIF($projectID)->andWhere('project')->eq($projectID)->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
@@ -113,7 +96,7 @@ class taskModel extends model
         $now     = helper::now();
         $task    = fixer::input('post')
             ->setDefault('estimate, left, consumed', 0)
-            ->setDefault('deadline', '0000-00-00')
+            ->setDefault('deadline,estStarted,realStarted', '0000-00-00')
 
             ->setIF($this->post->status == 'done', 'left', 0)
             ->setIF($this->post->status == 'done', 'canceledBy', '')

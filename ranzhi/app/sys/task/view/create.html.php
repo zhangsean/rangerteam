@@ -13,46 +13,36 @@
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
+<?php include '../../common/view/chosen.html.php';?>
 <div class='panel'>
   <div class='panel-heading'><strong><?php echo $lang->task->create;?></strong></div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-condensed col-md-10 col-lg-8'>
-      <fieldset class='fieldset-primary'>
-        <table class='table table-form'>
-          <tr class='text-left'>
-            <th><?php echo $lang->task->name;?></th>
-          </tr>
-          <tr>
-            <td><?php echo html::input('name', '', "class='form-control'");?></td>
-          </tr>
-        </table>
-      </fieldset>
-      <fieldset>
-        <legend><?php echo $lang->task->basicInfo; ?></legend>
         <table class='table table-form'>
           <tr>
-            <th><?php echo $lang->task->assignedTo;?></th>
-            <td><?php echo html::select('assignedTo', $users, '', "class='form-control'");?></td>
+            <th><?php echo $lang->task->project;?></th>
+            <td><?php echo html::select('project', $projects, $projectID, "class='form-control chosen'");?></td>
+          </tr>
+          <tr>
+            <th class='w-80px'><?php echo $lang->task->assignedTo;?></th>
+            <td class='w-p30'><?php echo html::select('assignedTo', $users, '', "class='form-control chosen'");?></td>
+            <td></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->task->type;?></th>
             <td><?php echo html::select('type', $lang->task->typeList, '', "class='form-control'");?></td>
           </tr>
           <tr>
-            <th><?php echo $lang->task->pri;?></th>
-            <td colspan='3'>
-              <?php 
-              foreach ($lang->task->priList as $key => $value)
-              {
-                echo "<span data-value='" . $value . "' class='pri pri-" . $key . "'>" . ($value ? $value : '&nbsp;') . "</span>";
-              }
-              echo html::hidden('pri', '');
-              ?>
-            </td>
+            <th><?php echo $lang->task->name;?></th>
+            <td colspan='2'><?php echo html::input('name', '', "class='form-control'");?></td>
           </tr>
           <tr>
-            <th><?php echo $lang->task->estStarted;?></th>
-            <td><?php echo html::input('estStarted', '', "class='form-control form-date'");?></td>
-            <th><?php echo $lang->task->deadline;?></th>
-            <td><?php echo html::input('deadline', '', "class='form-control form-date'");?></td>
+            <th><?php echo $lang->task->desc;?></th>
+            <td colspan='2'><?php echo html::textarea('desc', '', "class='form-control'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->task->pri;?></th>
+            <td><?php echo html::select('pri', $lang->task->priList, 0, "class='form-control'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->task->estimate;?></th>
@@ -63,22 +53,20 @@
               </div>
             </td>
           </tr>
-        </table>
-      </fieldset>
-      <fieldset class='collapsed'>
-        <legend><?php echo $lang->task->moreInfo;?></legend>
-        <table class='table table-form'>
           <tr>
-            <th class='w-80px'><?php echo $lang->task->desc;?></th>
-            <td><?php echo html::textarea('desc', '', "class='form-control'");?></td>
+            <th><?php echo $lang->task->estStarted;?></th>
+            <td><?php echo html::input('estStarted', '', "class='form-control form-date'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->task->deadline;?></th>
+            <td><?php echo html::input('deadline', '', "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->files;?></th>
-            <td><?php echo $this->fetch('file', 'buildForm');?></td>
+            <td colspan='2'><?php echo $this->fetch('file', 'buildForm');?></td>
           </tr>
+          <tr><th></th><td><?php echo html::submitButton() . html::backButton();?></td></tr>
         </table>
-      </fieldset>
-      <?php echo html::submitButton();?>
     </form>
   </div>
 </div>

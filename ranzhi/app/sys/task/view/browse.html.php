@@ -14,7 +14,7 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-list-ul"></i> <?php echo $lang->task->list;?></strong>
-    <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?></div>
+    <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?></div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data'>
     <thead>
@@ -56,6 +56,7 @@
           {
               echo $lang->finish;
           }
+          echo html::a(inlink('delete', "taskID=$task->id"), $lang->delete, "class='reloadDeleter'");
           ?>
         </td>
       </tr>

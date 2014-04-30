@@ -76,15 +76,16 @@ $lang->task->typeList['discuss'] = '讨论';
 $lang->task->typeList['affair']  = '事务';
 $lang->task->typeList['misc']    = '其他';
 
+$lang->task->priList[0]  = '';
 $lang->task->priList[1]  = '1';
 $lang->task->priList[2]  = '2';
 $lang->task->priList[3]  = '3';
 $lang->task->priList[4]  = '4';
-$lang->task->priList[0]  = '';
 
 $lang->task->reasonList['']       = '';
 $lang->task->reasonList['done']   = '已完成';
 $lang->task->reasonList['cancel'] = '已取消';
 
 $lang->task->basicInfo = '基本信息';
-$lang->task->moreInfo  = '更多信息';
+$lang->task->workInfo  = '工时信息';
+$lang->task->life      = '任务的一生';

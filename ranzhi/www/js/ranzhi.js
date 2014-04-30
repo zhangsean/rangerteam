@@ -44,6 +44,7 @@ $.extend(
 
                     if(response.locate) 
                     {
+                        if(response.locate == 'reload') return setTimeout(function(){location.href = location.href;}, 1200);
                         return setTimeout(function(){location.href = response.locate;}, 1200);
                     }
 

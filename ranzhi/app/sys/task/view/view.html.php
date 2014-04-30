@@ -10,100 +10,123 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../common/view/header.html.php';?>
-<div class='panel'>
-  <div class='panel-heading'><strong><i class='icon-file-alt'></i> <?php echo $lang->task->view; ?>: <?php echo $lang->task->name;?></strong></div>
-  <div class='panel-body'>
-    <table class='table table-borderless table-condensed table-form'>
-      <tr>
-        <th class='w-120px'><?php echo $lang->task->name;?></th>
-        <td><?php echo $task->name;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->customer;?></th>
-        <td><?php echo $customers[$task->customer];?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->order;?></th>
-        <td><?php echo html::a($this->createLink('order', 'view', "orderID=$task->order"), $orders[$task->order]);?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->assignedTo;?></th>
-        <td><?php echo $users[$task->assignedTo];?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->type;?></th>
-        <td><?php $lang->task->typeList[$task->type];?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->pri;?></th>
-        <td><?php $lang->task->priList[$task->pri];?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->estStarted;?></th>
-        <td><?php echo $task->estStarted;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->realStarted;?></th>
-        <td><?php echo $task->realStarted;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->deadline;?></th>
-        <td><?php echo $task->deadline;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->estimate;?></th>
-        <td><?php echo $task->estimate;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->consumed;?></th>
-        <td><?php echo $task->consumed;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->left;?></th>
-        <td><?php echo $task->left;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->createdBy;?></th>
-        <td><?php echo $task->createdBy;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->finishedBy;?></th>
-        <td><?php echo $task->finishedBy;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->canceledBy;?></th>
-        <td><?php echo $task->canceledBy;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->closedBy;?></th>
-        <td><?php echo $task->closedBy;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->closedReason;?></th>
-        <td><?php echo $task->closedReason;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->lastEditedBy;?></th>
-        <td><?php echo $task->editedBy;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->task->desc;?></th>
-        <td><?php echo $task->desc;?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->files;?></th>
-        <td><?php echo $this->fetch('file', 'printFiles', array('files' =>$task->files, 'fieldset' => 'false'))?></td>
-      </tr>
-    </table>
+<?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
+<div class='col-md-8'>
+  <div class='panel'>
+    <div class='panel-heading'><strong><?php echo $task->name;?></strong></div>
+    <div class='panel-body'>
+      <table class='table table-form table-data'>
+        <tr>
+          <th class='w-80px'><?php echo $lang->task->desc?></th>
+          <td><?php echo htmlspecialchars_decode($task->desc);?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->files;?></th>
+          <td><?php echo $this->fetch('file', 'printFiles', array('files' =>$task->files, 'fieldset' => 'false'))?></td>
+        </tr>
+      </table>
+    </div>
   </div>
-  <div class='panel-footer'>
+  <?php echo $this->fetch('action', 'history', "objectType=task&objectID={$task->id}");?>
+  <div class='text-center'>
     <?php
-    if($task->status != 'done') echo html::a($this->createLink('task', 'finish', "taskID=$task->id"), "<i class='icon-ok'></i> " . $lang->finish, "class='btn btn-primary'");
+    if($task->status != 'done') echo html::a($this->createLink('task', 'finish', "taskID=$task->id"), "<i class='icon-ok'></i> " . $lang->finish, "class='btn' data-toggle='modal'");
+    echo html::a($this->createLink('task', 'assignto', "taskID=$task->id"), "<i class='icon-hand-right'></i> " . $lang->assign, "class='btn' data-toggle='modal'");
     echo html::a($this->createLink('task', 'edit', "taskID=$task->id"), "<i class='icon-pencil'></i> " . $lang->edit, "class='btn'");
-    echo html::a($this->createLink('task', 'assignto', "taskID=$task->id"), "<i class='icon-hand-right'></i> " . $lang->assign, "class='btn'");
+    echo html::a($this->createLink('task', 'delete', "taskID=$task->id"), "<i class='icon-remove'></i> " . $lang->delete, "class='deleter btn'");
+    echo html::backButton();
     ?>
   </div>
 </div>
-<?php echo $this->fetch('action', 'history', "objectType=task&objectID={$task->id}");?>
-<?php include '../../../crm/common/view/footer.html.php';?>
+<div class='col-md-4'>
+  <div class='panel'>
+    <div class='panel-heading'><strong><?php echo $lang->task->basicInfo?></strong></div>
+    <div class='panel-body'>
+      <table class='table table-info'>
+        <tr>
+          <th class='w-80px'><?php echo $lang->task->project;?></th>
+          <td><?php echo $projects[$task->project];?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->assignedTo;?></th>
+          <td><?php echo $users[$task->assignedTo];?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->type;?></th>
+          <td><?php echo $lang->task->typeList[$task->type];?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->status;?></th>
+          <td><?php echo $lang->task->statusList[$task->status];?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->pri;?></th>
+          <td><?php echo $lang->task->priList[$task->pri];?></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class='panel'>
+    <div class='panel-heading'><strong><?php echo $lang->task->workInfo?></strong></div>
+    <div class='panel-body'>
+      <table class='table table-info'>
+        <tr>
+          <th class='w-80px'><?php echo $lang->task->estStarted;?></th>
+          <td><?php echo formatTime($task->estStarted);?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->realStarted;?></th>
+          <td><?php echo formatTime($task->realStarted);?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->deadline;?></th>
+          <td><?php echo formatTime($task->deadline);?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->estimate;?></th>
+          <td><?php echo $task->estimate;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->consumed;?></th>
+          <td><?php echo $task->consumed;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->left;?></th>
+          <td><?php echo $task->left;?></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class='panel'>
+    <div class='panel-heading'><strong><?php echo $lang->task->life?></strong></div>
+    <div class='panel-body'>
+      <table class='table table-info'>
+        <tr>
+          <th class='w-80px'><?php echo $lang->task->createdBy;?></th>
+          <td><?php echo zget($users, $task->createdBy, $task->createdBy) . $lang->at . $task->createdDate;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->finishedBy;?></th>
+          <td><?php if($task->finishedBy) echo zget($users, $task->finishedBy, $task->finishedBy) . $lang->at . $task->finishedDate;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->canceledBy;?></th>
+          <td><?php if($task->canceledBy) echo zget($users, $task->canceledBy, $task->canceledBy) . $lang->at . $task->canceledDate;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->closedBy;?></th>
+          <td><?php if($task->closedBy) echo zget($users, $task->closedBy, $task->closedBy) . $lang->at . $task->closedDate;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->closedReason;?></th>
+          <td><?php echo $lang->task->reasonList[$task->closedReason];?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->task->lastEditedBy;?></th>
+          <td><?php if($task->editedBy) echo zget($users, $task->editedBy, $task->editedBy) . $lang->at . $task->editedDate;?></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<?php include $app->getModuleRoot() . 'common/view/footer.html.php';?>
