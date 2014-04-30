@@ -4,7 +4,7 @@
     "use strict";
 
     /* Global variables */
-    var desktopPos       = {x: 60, y: 0};
+    var desktopPos       = {x: 40, y: 0};
     var fullscreenMode   = false;
     var windowIdSeed     = 0;
     var windowIdTeamplate= 'WID{0}';
@@ -896,8 +896,8 @@
             /* save the last position and size */
             if(this.entry)
             {
-                this.entry.left   = win.position().left;
-                this.entry.top    = win.position().top;
+                this.entry.left   = Math.max(desktopPos.x, win.position().left);
+                this.entry.top    = Math.max(desktopPos.y, win.position().top);
                 this.entry.width  = win.width();
                 this.entry.height = win.height();
             }
