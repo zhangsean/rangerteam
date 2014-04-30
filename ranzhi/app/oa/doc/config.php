@@ -9,8 +9,6 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-global $lang;
-
 $config->doc = new stdclass();
 $config->doc->require = new stdclass();
 $config->doc->require->createLib = 'name';

@@ -47,12 +47,10 @@ class task extends control
     /**
      * Create a task.
      * 
-     * @param  int    $orderID
-     * @param  int    $customerID
      * @access public
      * @return void
      */
-    public function create($orderID = 0, $customerID = 0)
+    public function create()
     {
         if($_POST)
         {
@@ -63,14 +61,11 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $orders = $this->loadModel('order')->getPairs($customerID);
+        $projects = $this->loadModel('project', 'oa')->getPairs();
+        $this->lang->task->menu = $this->project->getLeftMenus($projects);
 
-        $this->view->orders     = array('0' => '') + $orders;
-        $this->view->customers  = $this->loadModel('customer')->getPairs();
-        $this->view->users      = $this->loadModel('user')->getPairs();
-        $this->view->orderID    = $orderID;
-        $this->view->order      = $this->order->getByID($orderID);
-        $this->view->customerID = $customerID;
+        $this->view->projects = $projects;
+        $this->view->users    = $this->loadModel('user')->getPairs();
         $this->display();
     }
 

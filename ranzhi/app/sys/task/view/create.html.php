@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../common/view/header.html.php';?>
+<?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
@@ -30,12 +30,6 @@
       <fieldset>
         <legend><?php echo $lang->task->basicInfo; ?></legend>
         <table class='table table-form'>
-          <tr>
-            <th class='w-80px'><?php echo $lang->task->customer;?></th>
-            <td class='w-p40'><?php echo html::select('customer', $customers, $order ? $order->customer : $customerID, "class='form-control' onchange='getOrder(this.value)'");?></td>
-            <th class='w-80px'><?php echo $lang->task->order;?></th>
-            <td><?php echo html::select('order', $orders, $orderID, "class='form-control chosen'");?></td>
-          </tr>
           <tr>
             <th><?php echo $lang->task->assignedTo;?></th>
             <td><?php echo html::select('assignedTo', $users, '', "class='form-control'");?></td>

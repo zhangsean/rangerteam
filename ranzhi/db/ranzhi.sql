@@ -246,6 +246,15 @@ CREATE TABLE `oa_docLib` (
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `oa_project`;
+CREATE TABLE `oa_project` (
+  `id` mediumint NOT NULL AUTO_INCREMENT,
+  `name` varchar(90) NOT NULL,
+  `createdBy` char(30) NOT NULL,
+  `createdDate` datetime NOT NULL,
+  `deleted` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE='MyISAM' COLLATE 'utf8_general_ci'; 
 -- DROP TABLE IF EXISTS `oa_relation`;
 CREATE TABLE `oa_relation` (
   `type` char(20) NOT NULL,

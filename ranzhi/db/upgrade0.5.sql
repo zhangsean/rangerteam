@@ -52,3 +52,12 @@ ALTER TABLE `crm_resume` ADD `deleted` enum('0','1') COLLATE 'utf8_general_ci' N
 ALTER TABLE `oa_relation` CHANGE `category` `category` mediumint(9) NOT NULL;
 
 ALTER TABLE `sys_user` CHANGE `dept` `dept` mediumint(8) unsigned NOT NULL;
+
+CREATE TABLE `oa_project` (
+  `id` mediumint NOT NULL AUTO_INCREMENT,
+  `name` varchar(90) NOT NULL,
+  `createdBy` char(30) NOT NULL,
+  `createdDate` datetime NOT NULL,
+  `deleted` enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE='MyISAM' COLLATE 'utf8_general_ci'; 

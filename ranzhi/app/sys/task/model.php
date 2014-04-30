@@ -30,6 +30,25 @@ class taskModel extends model
     }
 
     /**
+     * Bet tasks by project.
+     * 
+     * @param  int    $projectID 
+     * @param  string $orderBy 
+     * @param  string $pager 
+     * @access public
+     * @return array
+     */
+    public function getByProject($projectID, $orderBy = 'id_desc', $pager = null)
+    {
+        return $this->dao->select('*')->from(TABLE_TASK)
+            ->where('deleted')->eq(0)
+            ->andWhere('project')->eq($projectID)
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll();
+    }
+
+    /**
      * Get task list.
      * 
      * @param  string $orderBy 

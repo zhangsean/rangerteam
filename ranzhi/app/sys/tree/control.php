@@ -57,12 +57,12 @@ class tree extends control
             $this->lang->menuGroups->tree = 'user';
         }
         elseif(strpos($type, 'doc') !== false)
-        {   
+        {
             $type = 'customdoc';
             $this->lang->tree->menu = $this->loadModel('doc')->getLeftMenus();
             $this->lang->menuGroups->tree = 'doc';
             if($root == 'product' or $root == 'project') $type = $root . 'doc';
-        }   
+        }
         elseif($type == 'area')
         {   
             $this->lang->category = $this->lang->area;

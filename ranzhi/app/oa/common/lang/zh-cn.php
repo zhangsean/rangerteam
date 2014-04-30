@@ -14,12 +14,16 @@ $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = '我的地盘|dashboard|index|';
-$lang->menu->oa->task      = '任务|task|index|';
+$lang->menu->oa->project   = '项目|project|index|';
 $lang->menu->oa->announce  = '公告|announce|index|';
 $lang->menu->oa->doc       = '文档|doc|index|';
 
 $lang->dashboard = new stdclass();
 $lang->block     = new stdclass();
+
+$lang->project = new stdclass();
+$lang->project->menu = new stdclass();
+$lang->project->menu->create = '添加项目|project|create|';
 
 $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();
