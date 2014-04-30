@@ -48,7 +48,7 @@
           </td>
         </tr>
         <?php endif;?>
-        <tr id= 'orderTR' class='hide'>
+        <tr id='orderTR' class='hide'>
           <th><?php echo $lang->contract->order;?></th>
           <td id='orderTD'></td>
         </tr>
