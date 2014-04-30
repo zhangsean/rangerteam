@@ -14,19 +14,12 @@
 <div class='row'>
   <div class='col-md-8'>
     <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->view . $lang->colon . $customer->name;?></strong></div>
-      <div class='panel-body'>
-        <table class='table table-form table-data'>
-          <tr>
-            <th class='w-70px'><?php echo $lang->customer->intension;?></th>
-            <td><?php echo $customer->intension;?></td>
-          </tr>
-          <tr>
-            <th class='desc'><?php echo $lang->customer->desc;?></th>
-            <td class='desc'><?php echo $customer->desc;?></td>
-          </tr>
-        </table>
-      </div>
+      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $customer->name . $lang->customer->desc;?></strong></div>
+      <div class='panel-body'><?php echo $customer->desc;?></div>
+    </div>
+    <div class='panel'>
+      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->intension;?></strong></div>
+      <div class='panel-body'><?php echo $customer->intension;?></div>
     </div>
     <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}&customer={$customer->id}")?>
     <div class='text-center'>
