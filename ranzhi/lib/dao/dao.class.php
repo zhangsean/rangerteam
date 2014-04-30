@@ -746,7 +746,7 @@ class dao
         $table = str_replace('`', '', $table);
 
         $fieldLabel = isset($lang->$table->$fieldName) ? $lang->$table->$fieldName : $fieldName;
-        $value = $this->sqlobj->data->$fieldName;
+        $value = isset($this->sqlobj->data->$fieldName) ? $this->sqlobj->data->$fieldName : null;
         
         /* Check unique. */
         if($funcName == 'unique')
