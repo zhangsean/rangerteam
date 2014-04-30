@@ -36,6 +36,7 @@ class contractModel extends model
     /**
      * Get contract list.
      * 
+     * @param  int    $customer
      * @param  string $orderBy 
      * @param  object $pager 
      * @access public
@@ -54,6 +55,7 @@ class contractModel extends model
     /**
      * Get contract pairs.
      * 
+     * @param  int    $customerID
      * @access public
      * @return array
      */
@@ -303,7 +305,7 @@ class contractModel extends model
      * @param  string $class 
      * @param  string $type 
      * @access public
-     * @return void
+     * @return string
      */
     public function buildOperateMenu($contract, $class = '', $type = 'browse')
     {

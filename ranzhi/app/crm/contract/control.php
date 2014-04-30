@@ -260,7 +260,7 @@ class contract extends control
      *
      * @param  int    $customerID
      * @access public
-     * @return void
+     * @return string
      */
     public function getOrder($customerID)
     {
