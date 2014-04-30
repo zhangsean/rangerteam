@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<?php include '../../common/view/datepicker.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <form id='addressForm' method='post' action='<?php echo inlink('edit', "addressID=$address->id")?>'>
   <table class='table table-form'>
     <tr>
