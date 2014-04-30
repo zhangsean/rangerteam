@@ -15,7 +15,7 @@
   <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}");?>
   <div class='text-center'>
     <?php 
-    echo html::a($this->createLink('sys.action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $lang->order->record, "class='btn' data-toggle='modal'");
+    echo html::a($this->createLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $lang->order->record, "class='btn' data-toggle='modal'");
     if($order->status == 'normal') echo html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign, "class='btn btn-default'");
     if($order->status != 'normal') echo html::a('###', $this->lang->order->sign, "class='btn' disabled='disabled' class='disabled'");
 
