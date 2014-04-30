@@ -3,7 +3,7 @@
  * The forum module zh-tw file of RanZhi.
  *
  * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     商業軟件，非開源軟件
+ * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     forum
  * @version     $Id$
@@ -26,6 +26,7 @@ $lang->forum->updateDesc    = '該更新操作會重新計算每個版塊的發�
 $lang->forum->successUpdate = '更新數據成功';
 
 /* Adjust the pager. */
+$lang->pager = new stdclass();
 $lang->pager->noRecord      = '';
 $lang->pager->digest        = str_replace('記錄', '主題', $lang->pager->digest);
 $lang->pager->settedInForum = true;    // Set this switch thus in thread module can avoid overiding them.

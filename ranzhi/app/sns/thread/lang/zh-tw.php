@@ -3,7 +3,7 @@
  * The thread module zh-tw file of RanZhi.
  *
  * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     商業軟件，非開源軟件
+ * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     thread
  * @version     $Id$
@@ -43,11 +43,11 @@ $lang->thread->confirmHideThread   = "您確定隱藏該主題嗎？";
 $lang->thread->confirmDeleteReply  = "您確定刪除該回帖嗎？";
 $lang->thread->confirmDeleteFile   = "您確定刪除該附件嗎？";
 
-$lang->thread->lblEdited      = '%s 最後編輯, %s';
-$lang->thread->message        = '%s在論壇#%s回覆了主題：%s，內容為：%s';
-$lang->thread->readonly       = '只讀';
-$lang->thread->successStick   = '成功置頂';
-$lang->thread->successUnstick = '成功取消置頂';
+$lang->thread->lblEdited       = '%s 最後編輯, %s';
+$lang->thread->message         = '%s在論壇#%s回覆了主題：%s，內容為：%s';
+$lang->thread->readonly        = '只讀';
+$lang->thread->successStick    = '成功置頂';
+$lang->thread->successUnstick  = '成功取消置頂';
 $lang->thread->readonlyMessage = '該帖已被設置為 <strong>只讀</strong>，您暫時無法發表新的回覆。';
 
 /* Adjust the pager. */

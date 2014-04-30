@@ -2,7 +2,7 @@
 /**
  * The doc module zh-tw file of RanZhi.
  *
- * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc
@@ -15,7 +15,7 @@ $lang->doc->id             = '文檔編號';
 $lang->doc->product        = '所屬產品';
 $lang->doc->project        = '所屬項目';
 $lang->doc->lib            = '所屬文檔庫';
-$lang->doc->module         = '所屬分類';
+$lang->doc->category       = '所屬分類';
 $lang->doc->title          = '文檔標題';
 $lang->doc->digest         = '文檔摘要';
 $lang->doc->comment        = '文檔備註';
@@ -30,13 +30,9 @@ $lang->doc->addedDate      = '添加時間';
 $lang->doc->editedBy       = '由誰編輯';
 $lang->doc->editedDate     = '編輯時間';
 $lang->doc->basicInfo      = '基本信息';
+$lang->doc->deleted        = '已刪除';
 
-$lang->doc->moduleDoc      = '按模組瀏覽';
-$lang->doc->searchDoc      = '搜索';
-//$lang->doc->allDoc         = '所有文檔';
-
-$lang->doc->moduleName     = '模組名稱';
-$lang->doc->moduleOrder    = '模組排序';
+$lang->doc->list           = '文檔列表';
 
 /* 方法列表。*/
 $lang->doc->index          = '首頁';
@@ -56,8 +52,9 @@ $lang->doc->deleteLib      = '刪除文檔庫';
 $lang->doc->allProduct     = '所有產品';
 $lang->doc->allProject     = '所有項目';
 
-$lang->doc->systemLibs['product'] = '產品文檔庫';
-$lang->doc->systemLibs['project'] = '項目文檔庫';
+$lang->doc->systemLibs = array();
+//$lang->doc->systemLibs['product'] = '產品文檔庫';
+//$lang->doc->systemLibs['project'] = '項目文檔庫';
 
 $lang->doc->types['file'] = '檔案';
 $lang->doc->types['url']  = '連結';
@@ -69,3 +66,5 @@ $lang->doc->errorEditSystemDoc = "系統文檔庫無需修改。";
 
 $lang->doc->placeholder = new stdclass();
 $lang->doc->placeholder->url = '相應的連結地址';
+
+$lang->doc->notFound = '該文檔不存在';

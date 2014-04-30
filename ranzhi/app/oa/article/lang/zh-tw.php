@@ -3,7 +3,7 @@
  * The article category zh-tw file of RanZhi.
  *
  * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     商業軟件，非開源軟件
+ * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     article
  * @version     $Id$
@@ -44,6 +44,11 @@ $lang->blog->admin  = '維護博客';
 $lang->blog->list   = '博客列表';
 $lang->blog->create = '發佈博客';
 $lang->blog->edit   = '編輯博客';
+
+$lang->announce->admin  = '維護公告';
+$lang->announce->list   = '公告列表';
+$lang->announce->create = '發佈公告';
+$lang->announce->edit   = '編輯公告';
 
 $lang->page = new stdclass();
 $lang->page->admin  = '維護單頁';

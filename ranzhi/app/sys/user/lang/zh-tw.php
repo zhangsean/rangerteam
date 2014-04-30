@@ -3,16 +3,16 @@
  * The user module zh-tw file of RanZhi.
  *
  * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     商業軟件，非開源軟件
+ * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->user->common    = '用戶';
+$lang->user->common    = '成員';
 
 $lang->user->id        = '編號';
-$lang->user->account   = '用戶名';
+$lang->user->account   = '賬戶';
 $lang->user->admin     = '管理員';
 $lang->user->password  = '密碼';
 $lang->user->password2 = '請重複密碼';
@@ -43,23 +43,23 @@ $lang->user->allowTime = '開放時間';
 $lang->user->status    = '狀態';
 $lang->user->alert     = '您的帳號已被禁用';
 
-$lang->user->list            = '用戶列表';
-$lang->user->view            = "用戶詳情";
-$lang->user->create          = "添加用戶";
-$lang->user->edit            = "編輯用戶";
+$lang->user->list            = '成員列表';
+$lang->user->view            = "成員詳情";
+$lang->user->create          = "添加成員";
+$lang->user->edit            = "編輯成員";
 $lang->user->changePassword  = "更改密碼";
 $lang->user->recoverPassword = "忘記密碼";
 $lang->user->newPassword     = "新密碼";
-$lang->user->update          = "編輯用戶";
-$lang->user->delete          = "刪除用戶";
-$lang->user->browse          = "瀏覽用戶";
+$lang->user->update          = "編輯成員";
+$lang->user->delete          = "刪除成員";
+$lang->user->browse          = "瀏覽成員";
 $lang->user->deny            = "訪問受限";
-$lang->user->confirmDelete   = "您確認刪除該用戶嗎？";
-$lang->user->confirmActivate = "您確認激活該用戶嗎？";
+$lang->user->confirmDelete   = "您確認刪除該成員嗎？";
+$lang->user->confirmActivate = "您確認激活該成員嗎？";
 $lang->user->relogin         = "重新登錄";
 $lang->user->asGuest         = "遊客訪問";
 $lang->user->goback          = "返回前一頁";
-$lang->user->allUsers        = '全部用戶';
+$lang->user->allUsers        = '全部成員';
 $lang->user->submit          = "提交";
 $lang->user->forbid          = '禁用';
 $lang->user->active          = '激活';
@@ -70,15 +70,15 @@ $lang->user->thread      = '我的主題';
 $lang->user->reply       = '我的回貼';
 $lang->user->message     = '我的消息';
 
-$lang->user->inputUserName       = '請輸入用戶名';
-$lang->user->inputAccountOrEmail = '請輸入用戶名或Email';
+$lang->user->inputUserName       = '請輸入成員名';
+$lang->user->inputAccountOrEmail = '請輸入成員名或Email';
 $lang->user->inputPassword       = '請輸入密碼';
 $lang->user->searchUser          = '搜索';
 
 $lang->user->errorDeny     = "抱歉，您無權訪問『<b>%s</b>』模組的『<b>%s</b>』功能。請聯繫管理員獲取權限。點擊後退返回上頁。<br/> 5秒鐘後將自動返迴首頁...";
-$lang->user->loginFailed   = "登錄失敗，請檢查您的用戶名或密碼是否填寫正確。";
-$lang->user->locked        = "用戶已經被鎖定，請%s後再重新嘗試登錄";
-$lang->user->lockedForEver = "用戶已經被永久禁用。";
+$lang->user->loginFailed   = "登錄失敗，請檢查您的成員名或密碼是否填寫正確。";
+$lang->user->locked        = "成員已經被鎖定，請%s後再重新嘗試登錄";
+$lang->user->lockedForEver = "成員已經被永久禁用。";
 $lang->user->lblRegistered = '恭喜您，已經成功註冊。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->actionFail    = '操作失敗';
@@ -91,6 +91,9 @@ $lang->user->genderList->m = '男';
 $lang->user->genderList->f = '女';
 $lang->user->genderList->u = '';
 
+$lang->user->basicInfo   = '基本信息';
+$lang->user->contactInfo = '聯繫信息';
+
 $lang->user->statusList = new stdclass();
 $lang->user->statusList->locked    = "<label class='label label-danger'>鎖定</label>";
 $lang->user->statusList->forbidden = "<label class='label label-danger'>禁用</label>";
@@ -99,7 +102,7 @@ $lang->user->statusList->normal    = "<label class='label label-success'>正常<
 $lang->user->register  = new stdclass();
 $lang->user->register->welcome     = '歡迎註冊成為會員';
 $lang->user->register->why         = '歡迎註冊成為我們的會員，您可以享受更多的服務。';
-$lang->user->register->lblUserInfo = '用戶信息';
+$lang->user->register->lblUserInfo = '成員信息';
 $lang->user->register->lblAccount  = '必須是三位以上的英文字母或數字';
 $lang->user->register->lblPassword = '數字和字母組成，六位以上';
 
@@ -112,7 +115,7 @@ $lang->user->login->welcome = '已有帳號';
 $lang->user->login->why     = '歡迎登陸，享用會員專屬服務！';
 
 $lang->user->control = new stdclass();
-$lang->user->control->common      = '用戶中心';
+$lang->user->control->common      = '成員中心';
 $lang->user->control->welcome     = '歡迎您，<strong>%s</strong>';
 $lang->user->control->lblPassword = "留空，則保持不變。";
 
@@ -125,7 +128,7 @@ $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i
 $lang->dept = new stdclass();  
 $lang->dept->common     = '部門結構';
 $lang->dept->name       = '部門名稱';
-$lang->dept->edit       = '維護部門結構';
+$lang->dept->edit       = '維護部門';
 $lang->dept->children   = '子部門';
 $lang->dept->moderators = '部門經理';
 
@@ -151,7 +154,7 @@ div{padding-left:30px;}
 <body>
 <div style='padding-top:20px;height:60px;background:#fafafa;border-bottom:1px solid #ddd;font-size:18px;font-weight:bold'> 密碼修改 </div>
 <div style='margin-top:20px;'>
-<p>尊敬的用戶 %s <br />
+<p>尊敬的成員 %s <br />
 請點擊下面的連結，進行密碼修改: <br >
 <a href='%s' target='_blank'>%s</a>
 </p>

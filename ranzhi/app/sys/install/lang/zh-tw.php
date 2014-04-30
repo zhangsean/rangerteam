@@ -3,7 +3,7 @@
  * The zh-tw file of install module of RanZhi.
  *
  * @copyright   Copyright 2013-2014 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     商業軟件，非開源軟件
+ * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     install 
  * @version     $Id$
@@ -23,11 +23,11 @@ $lang->install->welcome          = "您睿智地選擇了$lang->ranzhi!";
 $lang->install->desc             = <<<EOT
 <blockquote>
   <strong>{$lang->ranzhi}</strong>由<strong><a href='http://www.cnezsoft.com' target='_blank' class='red'>青島易軟天創網絡科技有限公司</a>開發</strong>，
-  內置項目、客戶、現金流、辦公和溝通共五大核心功能模組，
+  <!--內置項目、客戶、現金流、辦公和溝通共五大核心功能模組，-->
   專為中小型團隊量身打造，是中小型團隊信息化的首選工具！
 
   官方網站：<a href='http://www.ranzhi.org' target='_blank'>http://www.ranzhi.org</a>
-  技術支持: <a href='http://www.ranzhi.org/ask/' target='_blank'>http://www.ranzhi.org/ask/</a>
+  技術支持: <a href='http://www.ranzhi.org/forum/' target='_blank'>http://www.ranzhi.org/forum/</a>
   您現在正在安裝的版本是 <strong class='red'>%s</strong>。
 </blockquote>
 EOT;
