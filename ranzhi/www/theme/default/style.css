@@ -91,6 +91,9 @@ td>select{padding-left: 0;padding-right: 0}
 .area-4{width: 360px}
 .area-5{width: 480px}
 
+/* icons */
+[class^="icon-"],[class*=" icon-"] {font-size: 14px}
+
 /* --- LAYOUT SETTING --- */
 /* page-header */
 .page-header {border-bottom: 1px solid #E5E5E5;padding: 0 15px;}
@@ -149,7 +152,7 @@ td>select{padding-left: 0;padding-right: 0}
 
 /* panels */
 .panel > .table > thead > tr > th,.panel > form > .table > thead > tr > th {background-color: transparent;}
-.panel > .panel-heading,.nav-stacked.nav-primary>li.nav-heading,.list > header, #navbar {background-color: #f1f1f1; background-image: -moz-linear-gradient(#fafafa, #f1f1f1); background-image: -webkit-linear-gradient(#FAFAFA, #f1f1f1); background-image: linear-gradient(#FAFAFA, #f1f1f1); background-repeat: repeat-x;}
+.panel > .panel-heading,.nav-stacked.nav-primary>li.nav-heading,.list > header {background-color: #f1f1f1; background-image: -moz-linear-gradient(#fafafa, #f1f1f1); background-image: -webkit-linear-gradient(#FAFAFA, #f1f1f1); background-image: linear-gradient(#FAFAFA, #f1f1f1); background-repeat: repeat-x;}
 .panel-pure {box-shadow: none; border: 0; border-radius: 0;}
 .panel-pure .panel-heading {background: transparent;}
 .panel-actions {display: inline-block; margin-left: 8px;}
@@ -274,6 +277,10 @@ td #aliasLabel {display: table-row;}
 /* nav */
 .nav li .icon-chevron-right {float: right; margin-top: 2px; margin-right: -6px; opacity: .25;}
 .nav li.active i.icon-chevron-right,.nav li:hover i.icon-chevron-right{opacity: .9;}
+
+/* navbar */
+.navbar {font-size: 14px; min-height: 36px}
+.navbar-nav > li > a, .navbar-brand {padding-top: 8px; padding-bottom: 8px}
 
 /* file Form */
 .form-group .file-form .form-group:last-child {margin-bottom: 0;}

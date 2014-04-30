@@ -4,18 +4,18 @@
     "use strict";
 
     /* Global variables */
-    var desktopPos       = {x: 40, y: 0};
-    var fullscreenMode   = false;
-    var windowIdSeed     = 0;
-    var windowIdTeamplate= 'WID{0}';
-    var windowZIndexSeed = 100;
-    var defaultWindowPos = {x: 110, y: 20};
-    var entriesConfigs   = null;
-    var entries          = null;
-    var desktop          = null;
-    var windows          = null;
-    var windowIdPrefix   = 'win-';
-    var theLoadingFrame  = null;
+    var desktopPos       = {x: 40, y: 0},
+        fullscreenMode   = false,
+        windowIdSeed     = 0,
+        windowIdTeamplate= 'WID{0}',
+        windowZIndexSeed = 100,
+        defaultWindowPos = {x: 110, y: 20},
+        entriesConfigs   = null,
+        entries          = null,
+        desktop          = null,
+        windows          = null,
+        windowIdPrefix   = 'win-',
+        theLoadingFrame  = null;
 
     /* Save the index configs */
     var indexUrl         = window.location.href;
@@ -417,7 +417,7 @@
     /**
      * The Windows Manager Object
      *
-     * Manage all windows showed on desktop
+     * Manage all windows displayed on desktop
      */
     function windowsManager()
     {
@@ -1196,7 +1196,7 @@
     }
 
     /**
-     * Manager the shortcuts
+     * Manage the shortcuts
      */
     function shortcuts()
     {

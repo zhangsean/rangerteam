@@ -12,7 +12,7 @@
 ?>
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include 'header.lite.html.php';?>
-<style>body {padding-top: 70px}</style>
+<style>body {padding-top: 56px}</style>
 <nav class='navbar navbar-inverse navbar-fixed-top' role='navigation' id='mainNavbar'>
   <div class='navbar-header'>
     <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-ex1-collapse'>
