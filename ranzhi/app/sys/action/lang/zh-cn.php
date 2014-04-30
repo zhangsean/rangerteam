@@ -11,12 +11,14 @@
  */
 if(!isset($lang->action)) $lang->action = new stdclass();
 
-$lang->action->common     = '系统日志';
-$lang->action->product    = '产品';
-$lang->action->actor      = '操作者';
-$lang->action->action     = '动作';
-$lang->action->actionID   = '记录ID';
-$lang->action->date       = '日期';
+$lang->action->common   = '系统日志';
+$lang->action->product  = '产品';
+$lang->action->actor    = '操作者';
+$lang->action->contact  = '联系人';
+$lang->action->comment  = '内容';
+$lang->action->action   = '动作';
+$lang->action->actionID = '记录ID';
+$lang->action->date     = '日期';
 
 $lang->action->editComment = '修改备注';
 

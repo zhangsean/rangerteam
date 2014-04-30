@@ -75,7 +75,7 @@ class action extends control
      * @access public
      * @return void
      */
-    public function editRecord($recordID)
+    public function editRecord($recordID, $from = '')
     {
         $record = $this->loadModel('action')->getByID($recordID);
         if($record->action != 'record') exit;
@@ -90,6 +90,7 @@ class action extends control
         }
 
         $this->view->title    = $this->lang->action->record->edit;
+        $this->view->from     = $from;
         $this->view->record   = $record;
         $this->view->contacts = $this->loadModel('contact')->getPairs($record->objectType == 'customer' ? $object->id : $object->customer);
         $this->display();

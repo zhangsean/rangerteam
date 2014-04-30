@@ -14,7 +14,9 @@
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
-<form method='post' id='ajaxForm' action='<?php echo inlink('editrecord', "recordID=$record->id")?>'>
+<?php js::set('from', $from);?>
+<?php js::set('referer', $this->server->http_referer);?>
+<form method='post' id='editRecord' action='<?php echo inlink('editrecord', "recordID=$record->id")?>'>
   <table class='table table-form'>
     <?php if($record->objectType != 'contact'):?>
     <tr>

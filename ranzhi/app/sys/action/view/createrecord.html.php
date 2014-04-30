@@ -14,7 +14,7 @@
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php js::set('customer', $customer);?>
-<form method='post' id='ajaxForm' action='<?php echo inlink('createrecord', "objectType={$objectType}&objectID={$objectID}&customer={$customer}")?>'>
+<form method='post' id='createRecordForm' action='<?php echo inlink('createrecord', "objectType={$objectType}&objectID={$objectID}&customer={$customer}")?>'>
   <table class='table table-form'>
     <?php if($objectType != 'contact'):?>
     <tr>

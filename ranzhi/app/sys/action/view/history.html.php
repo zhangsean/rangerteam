@@ -48,7 +48,8 @@
         <span class='link-button text-muted pull-right'>
         <?php 
         $append = helper::isAjaxRequest() ? "class='loadInModal'" : "data-toggle='modal'";
-        echo html::a($this->createLink('action', 'editRecord', "id={$action->id}"), '<i class="icon-edit"></i>', $append)
+        $from   = helper::isAjaxRequest() ? '&from=modal' : '';
+        echo html::a($this->createLink('action', 'editRecord', "id={$action->id}{$from}"), '<i class="icon-edit"></i>', $append)
         ?>
         </span>
         <?php endif;?>
@@ -68,9 +69,8 @@
           </form>
         </div>
         <?php endif;?>
-
         <?php if(!empty($action->comment)) echo "</div>";?>
-      <?php endif;?>
+        <?php endif;?>
       </li>
       <?php endforeach;?>
     </ol>

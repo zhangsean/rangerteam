@@ -9,6 +9,9 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$config->action->require = new stdclass();
+$config->action->require->createRecord = 'contact,comment';
+
 $config->action->objectNameFields['product']  = 'name';
 $config->action->objectNameFields['task']     = 'name';
 $config->action->objectNameFields['user']     = 'account';
