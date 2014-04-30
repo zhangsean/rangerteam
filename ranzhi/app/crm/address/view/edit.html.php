@@ -20,7 +20,7 @@
     </tr>
     <tr>
       <th><?php echo $lang->address->area;?></th>
-      <td><?php echo html::select('area', $area, $address->area, "class='form-control chosen'")?></td>
+      <td><?php echo html::select('area', $area, isset($address->area) ? $address->area : '', "class='form-control chosen'")?></td>
     </tr>
     <tr>
       <th><?php echo $lang->address->location;?></th>
