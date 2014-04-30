@@ -157,11 +157,15 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #allAppsList li img {width: 48px; height: 48px; margin-right: 10px; box-shadow: 0 1px 1px rgba(0,0,0,0.35); border-radius: 8px}
 
 /* home */
+/*#home {padding: 0 50px;}*/
 #home [class^='col-'] {overflow: visible;}
+#home > .wrapper {max-width: 1600px; margin: 40px auto 0; padding: 0 4%; }
+#home .panels-container {position: relative; padding: 0 40px}
+#dashboard > .actions {position: absolute; right: -20px; top: 0;}
+#dashboard > .actions > .btn {display: block; margin: 0 0 10px;}
 #home .panel {box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);}
-#home .panel-loading .panel-body {background: url('images/ips/loading.gif') no-repeat center 30%;}
 #home .panel-actions {margin: 0}
-#home .panels-container {max-width: 1600px; margin: 0 auto; padding: 0 5%; margin-top: 40px;}
+#home .panel-loading .panel-body {background: url('images/ips/loading.gif') no-repeat center 30%;}
 #home .panel-body > .article-content {padding: 8px 10px;}
 #home .panel-body > .list-group {margin: 0;}
 #home .panel-body .list-group-item {border-left: 0; border-right: 0; padding: 8px;}
@@ -181,8 +185,6 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 
 #draggingPanel {position: absolute; z-index: 42; border: 2px solid rgba(255,255,255,0.9); box-shadow: 2px 0 25px rgba(0,0,0,0.8)!important; background: rgba(255,255,255,0.5); }
 #draggingPanel > * {filter:alpha(opacity=50)!important; -moz-opacity:0.5!important; opacity: 0.5!important}
-
-#dashboard > .actions {position: relative; top: -20px; text-align: right;}
 
 /* css helper */
 .no-padding {padding: 0}
