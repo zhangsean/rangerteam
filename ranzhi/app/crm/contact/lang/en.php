@@ -54,4 +54,5 @@ $lang->contact->record  = 'History';
 $lang->contact->basicInfo   = 'Basic Info';
 $lang->contact->contactInfo = 'Contact Info';
 
+$lang->contact->leftAt       = 'Left at %s';
 $lang->contact->failedAvatar = 'Avatar upload failed';

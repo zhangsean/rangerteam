@@ -45,13 +45,13 @@ $lang->order->record        = 'History';
 $lang->order->edit          = 'Edit';
 $lang->order->view          = 'View';
 $lang->order->close         = 'Close';
-$lang->order->manageMembers = 'Manage Members';
 $lang->order->sign          = 'Sign';
 
 $lang->order->statusList['normal'] = 'Normal';
 $lang->order->statusList['signed'] = 'Signed';
 $lang->order->statusList['closed'] = 'Closed';
 
+$lang->order->closedReasonList['']          = '';
 $lang->order->closedReasonList['payed']     = 'Payed';
 $lang->order->closedReasonList['failed']    = 'Failed';
 $lang->order->closedReasonList['postponed'] = 'Postponed';
