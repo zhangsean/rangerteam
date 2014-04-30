@@ -25,6 +25,11 @@
             <tr>
               <th class='w-100px'><?php echo $lang->contact->realname;?></th>
               <td class='w-p40'><?php echo html::input('realname', '', "class='form-control'");?></td>
+              <td>
+                <input type='checkbox' name='maker' id='maker' value='1' />
+                <label for='maker'><?php echo $lang->resume->maker;?></label>
+              </td>
+            
             </tr>
             <tr>
               <th><?php echo $lang->contact->customer;?></th>
@@ -37,10 +42,6 @@
             <tr class='customerInfo hidden'>
               <th><?php echo $lang->contact->customerName;?></th>
               <td><?php echo html::input('name', '', "class='form-control'");?></td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->resume->maker?></th>
-              <td><input type='checkbox' name='maker' id='maker' value='1' /></td>
             </tr>
             <tr>
               <th><?php echo $lang->contact->gender;?></th>
