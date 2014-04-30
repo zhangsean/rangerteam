@@ -46,16 +46,16 @@
       <strong><i class="icon-list-ul"></i> <?php echo $lang->doc->list;?></strong>
       <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create', "libID=$libID&moduleID=$moduleID&productID=$productID&projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?></div>
     </div>
-    <table class='table table-condensed table-hover table-striped table-borderless tablesorter table-fixed' id='docList'>
+    <table class='table table-hover table-striped tablesorter table-fixed' id='docList'>
       <thead>
-        <tr>
+        <tr class='text-center'>
           <?php $vars = "libID=$libID&module=$moduleID&productID=$productID&projectID=$projectID&browseType=$browseType&param=$param&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
-          <th class='w-100px'><?php commonModel::printOrderLink('id',        $orderBy, $vars, $lang->doc->id);?></th>
-          <th>                <?php commonModel::printOrderLink('title',     $orderBy, $vars, $lang->doc->title);?></th>
-          <th class='w-100px'><?php commonModel::printOrderLink('type',      $orderBy, $vars, $lang->doc->type);?></th>
-          <th class='w-100px'><?php commonModel::printOrderLink('addedBy',   $orderBy, $vars, $lang->doc->addedBy);?></th>
-          <th class='w-120px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->doc->addedDate);?></th>
-          <th class='w-100px {sorter:false}'><?php echo $lang->actions;?></th>
+          <th class='w-100px'>  <?php commonModel::printOrderLink('id',        $orderBy, $vars, $lang->doc->id);?></th>
+          <th class='text-left'><?php commonModel::printOrderLink('title',     $orderBy, $vars, $lang->doc->title);?></th>
+          <th class='w-100px'>  <?php commonModel::printOrderLink('type',      $orderBy, $vars, $lang->doc->type);?></th>
+          <th class='w-100px'>  <?php commonModel::printOrderLink('addedBy',   $orderBy, $vars, $lang->doc->addedBy);?></th>
+          <th class='w-100px'>  <?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->doc->addedDate);?></th>
+          <th class='w-90px {sorter:false}'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
