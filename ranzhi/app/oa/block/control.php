@@ -87,8 +87,7 @@ class block extends control
      */
     public function sort($oldOrder, $newOrder)
     {
-        $this->app->setAppName('sys');
-        $this->locate(inlink('sort', "oldOrder=$oldOrder&newOrder=$newOrder&app=oa"));
+        $this->locate($this->createLink('sys.block', 'sort', "oldOrder=$oldOrder&newOrder=$newOrder&app=oa"));
     }
 
     /**
@@ -100,8 +99,7 @@ class block extends control
      */
     public function delete($index)
     {
-        $this->app->setAppName('sys');
-        $this->locate(inlink('delete', "index=$index&app=oa"));
+        $this->locate($this->createLink('sys.block', 'delete', "index=$index&app=oa"));
     }
 
     /**

@@ -54,7 +54,7 @@ function sortBlocks(orders)
         {
             var index = $(this).data('order');
             /* Update new index for block id edit and delete. */
-            $(this).attr('id', 'panel' + index).attr('data-id', index).data('url', createLink('block', 'printBlock', 'index=' + index));
+            $(this).attr('id', 'block' + index).attr('data-id', index).data('url', createLink('block', 'printBlock', 'index=' + index));
             $(this).find('.panel-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
         });
 
