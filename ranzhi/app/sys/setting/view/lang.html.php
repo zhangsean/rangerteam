@@ -41,7 +41,7 @@
           <td></td>
           <td colspan='2'>
           <?php 
-          $scope = array($clientLang => $lang->setting->currentLang, 'all' => $lang->setting->allLang);
+          $scope = array('all' => $lang->setting->allLang, $clientLang => $lang->setting->currentLang);
           echo html::radio('lang', $scope, 'all');
           ?>
           </td>
