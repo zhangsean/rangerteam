@@ -47,6 +47,9 @@ class docModel extends model
     public function getLeftMenus($libs = null)
     {
         if(empty($libs)) $libs = $this->getLibList();
+
+        $libMenu = array();
+
         foreach($libs as $id => $libName)
         {
             $libID = isset($this->lang->doc->systemLibs[$id]) ? $id : 'lib' . $id;
