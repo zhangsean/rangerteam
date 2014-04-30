@@ -18,7 +18,7 @@
       <?php echo html::a(inlink('create'), "<i class='icon-plus'>{$lang->contact->create}</i>", "class='btn btn-primary'")?>
     </div>
   </div>
-  <table class='table table-hover table-striped table-bordered tablesorter table-data' id='contactList'>
+  <table class='table table-hover table-striped tablesorter table-data' id='contactList'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
