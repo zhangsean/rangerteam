@@ -34,6 +34,7 @@ class project extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->loadModel('task');
+        $this->session->set('taskList', $this->app->getURI(true));
 
         $this->view->title     = $this->lang->task->browse;
         $this->view->tasks     = $this->task->getByProject($projectID, $orderBy, $pager);
