@@ -199,6 +199,7 @@ class orderModel extends model
         $oldOrder = $this->getByID($orderID);
         $now      = helper::now();
         $order    = fixer::input('post')
+            ->setDefault('nextDate', '0000-00-00')
             ->setDefault('signedDate', '0000-00-00 00:00:00')
             ->setDefault('closedDate', '0000-00-00 00:00:00')
             ->setDefault('activatedDate', '0000-00-00 00:00:00')
@@ -217,10 +218,10 @@ class orderModel extends model
             ->batchCheck($this->config->order->require->edit, 'notempty')
             ->batchCheckIF($order->status != 'closed', 'closedBy, closedReason', 'empty')
             ->checkIF($order->status == 'normal', 'signedBy', 'empty')
-            ->checkIF($order->status == 'closed', 'activatedBy', 'empty')
+            ->checkIF($oldOrder->status != 'closed' or $order->status == 'closed', 'activatedBy', 'empty')
             ->checkIF($order->status != 'closed' and $order->closedDate != '0000-00-00 00:00:00', 'closedDate', 'empty')
             ->checkIF($order->status == 'normal' and $order->signedDate != '0000-00-00 00:00:00', 'signedDate', 'empty')
-            ->checkIF($order->status == 'closed' and $order->activatedDate != '0000-00-00 00:00:00', 'activatedDate', 'empty')
+            ->checkIF(($oldOrder->status != 'closed' or $order->status == 'closed') and $order->activatedDate != '0000-00-00 00:00:00', 'activatedDate', 'empty')
             ->where('id')->eq($orderID)
             ->exec();
 
