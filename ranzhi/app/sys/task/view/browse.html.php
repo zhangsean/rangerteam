@@ -44,21 +44,7 @@
         <td><?php echo $lang->task->typeList[$task->type];?></td>
         <td><?php echo $lang->task->statusList[$task->status];?></td>
         <td><?php echo $task->order;?></td>
-        <td>
-          <?php
-          echo html::a($this->createLink('task', 'edit', "taskID=$task->id"), $lang->edit);
-          echo html::a($this->createLink('task', 'assignto', "taskID=$task->id"), $lang->assign, "data-toggle='modal'");
-          if($task->status != 'done')
-          {
-              echo html::a($this->createLink('task', 'finish', "taskID=$task->id"), $lang->finish, "data-toggle='modal'");
-          }
-          else
-          {
-              echo $lang->finish;
-          }
-          echo html::a(inlink('delete', "taskID=$task->id"), $lang->delete, "class='reloadDeleter'");
-          ?>
-        </td>
+        <td><?php echo $this->task->buildOperateMenu($task);?></td>
       </tr>
       <?php endforeach;?>
     </tbody>

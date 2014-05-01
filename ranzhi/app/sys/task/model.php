@@ -226,7 +226,7 @@ class taskModel extends model
             ->where('id')->eq((int)$taskID)
             ->exec();
 
-        return !dao::isError();
+        if(!dao::isError()) return commonModel::createChanges($oldTask, $task);
     }
 
     /**
@@ -238,7 +238,8 @@ class taskModel extends model
      */
     public function assign($taskID)
     {
-        $task = fixer::input('post')
+        $oldTask = $this->getById($taskID);
+        $task    = fixer::input('post')
             ->cleanFloat('left')
             ->setDefault('editedBy', $this->app->user->account)
             ->setDefault('editedDate', helper::now())
@@ -251,6 +252,161 @@ class taskModel extends model
             ->where('id')->eq($taskID)
             ->exec();
 
-        return !dao::isError();
+        if(!dao::isError()) return commonModel::createChanges($oldTask, $task);
+    }
+
+    /**
+     * Activate task. 
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return array
+     */
+    public function activate($taskID)
+    {
+        $oldTask = $this->getById($taskID);
+        $task    = fixer::input('post')
+            ->cleanFloat('left')
+            ->setDefault('status', 'doing')
+            ->setDefault('finishedBy, canceledBy, closedBy, closedReason', '')
+            ->setDefault('finishedDate, canceledDate, closedDate', '0000-00-00 00:00:00')
+            ->setDefault('editedBy', $this->app->user->account)
+            ->setDefault('editedDate', helper::now())
+            ->get();
+
+        $this->dao->update(TABLE_TASK)
+            ->data($task, $skip = 'uid,comment')
+            ->autoCheck()
+            ->check('left', 'float')
+            ->where('id')->eq($taskID)
+            ->exec();
+
+        if(!dao::isError()) return commonModel::createChanges($oldTask, $task);
+    }
+
+    /**
+     * Cancel task. 
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return array
+     */
+    public function cancel($taskID)
+    {
+        $oldTask = $this->getById($taskID);
+        $now     = helper::now();
+        $task = fixer::input('post')
+            ->setDefault('status', 'cancel')
+            ->setDefault('assignedTo', $oldTask->createdBy)
+            ->setDefault('assignedDate', $now)
+            ->setDefault('finishedBy', '')
+            ->setDefault('finishedDate', '0000-00-00')
+            ->setDefault('canceledBy, editedBy', $this->app->user->account)
+            ->setDefault('canceledDate, editedDate', $now)
+            ->get();
+
+        $this->dao->update(TABLE_TASK)->data($task, 'uid,comment')->autoCheck()->where('id')->eq((int)$taskID)->exec();
+
+        if(!dao::isError()) return commonModel::createChanges($oldTask, $task);
+    }
+
+    /**
+     * Close task. 
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return array
+     */
+    public function close($taskID)
+    {
+        $oldTask = $this->getById($taskID);
+        $now     = helper::now();
+        $task = fixer::input('post')
+            ->setDefault('status', 'closed')
+            ->setDefault('assignedTo', 'closed')
+            ->setDefault('assignedDate', $now)
+            ->setDefault('closedBy, editedBy', $this->app->user->account)
+            ->setDefault('closedDate, editedDate', $now)
+            ->setIF($oldTask->status == 'done',   'closedReason', 'done')
+            ->setIF($oldTask->status == 'cancel', 'closedReason', 'cancel')
+            ->get();
+
+        $this->dao->update(TABLE_TASK)->data($task, 'uid,comment')->autoCheck()->where('id')->eq((int)$taskID)->exec();
+
+        if(!dao::isError()) return commonModel::createChanges($oldTask, $task);
+    }
+
+    /**
+     * Check clickable for action.
+     * 
+     * @param  object    $task 
+     * @param  string    $action 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function isClickable($task, $action)
+    {
+        $action = strtolower($action);  
+
+        if($action == 'assignto') return $task->status != 'closed' and $task->status != 'cancel';
+        if($action == 'start')    return $task->status != 'doing'  and $task->status != 'closed' and $task->status != 'cancel';
+        if($action == 'finish')   return $task->status != 'done'   and $task->status != 'closed' and $task->status != 'cancel';
+        if($action == 'close')    return $task->status == 'done'   or  $task->status == 'cancel';  
+        if($action == 'activate') return $task->status == 'done'   or  $task->status == 'closed'  or $task->status == 'cancel' ;  
+        if($action == 'cancel')   return $task->status != 'done  ' and $task->status != 'closed' and $task->status != 'cancel';
+
+        return true;
+    }
+
+    /**
+     * Build operate menu.
+     * 
+     * @param  object $task 
+     * @param  string $class 
+     * @param  string $type 
+     * @access public
+     * @return string
+     */
+    public function buildOperateMenu($task, $class = '', $type = 'browse')
+    {
+        $menu  = '';
+        $menu .= html::a(helper::createLink('task', 'edit', "taskID=$task->id"), $this->lang->edit, "class='$class'");
+
+        $disabled = self::isClickable($task, 'assignto') ? '' : 'disabled';
+        $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
+        $link     = $disabled ? '###' : helper::createLink('task', 'assignto', "taskID=$task->id");
+        $menu    .= html::a($link, $this->lang->assign, $misc);
+
+        if($type == 'view')
+        {
+            $disabled = self::isClickable($task, 'activate') ? '' : 'disabled';
+            $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
+            $link     = $disabled ? '###' : helper::createLink('task', 'activate', "taskID=$task->id");
+            $menu    .= html::a($link, $this->lang->activate, $misc);
+        }
+
+        $disabled = self::isClickable($task, 'finish') ? '' : 'disabled';
+        $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
+        $link     = $disabled ? '###' : helper::createLink('task', 'finish', "taskID=$task->id");
+        $menu    .= html::a($link, $this->lang->finish, $misc);
+
+        if($type == 'view')
+        {
+            $disabled = self::isClickable($task, 'cancel') ? '' : 'disabled';
+            $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
+            $link     = $disabled ? '###' : helper::createLink('task', 'cancel', "taskID=$task->id");
+            $menu    .= html::a($link, $this->lang->cancel, $misc);
+        }
+
+        $disabled = self::isClickable($task, 'close') ? '' : 'disabled';
+        $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
+        $link     = $disabled ? '###' : helper::createLink('task', 'close', "taskID=$task->id");
+        $menu    .= html::a($link, $this->lang->close, $misc);
+
+        $deleter = $type == 'browse' ? 'reloadDeleter' : 'deleter';
+        $menu   .= html::a(helper::createLink('task', 'delete', "taskID=$task->id"), $this->lang->delete, "class='$deleter $class'");
+
+        return $menu;
     }
 }

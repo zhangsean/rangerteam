@@ -12,11 +12,14 @@
 $lang->task->common = '任务';
 $lang->task->list   = '任务列表';
 
-$lang->task->browse = '浏览任务';
-$lang->task->view   = '查看任务';
-$lang->task->create = '新建任务';
-$lang->task->edit   = '编辑任务';
-$lang->task->finish = '任务完成';
+$lang->task->browse   = '浏览任务';
+$lang->task->view     = '查看任务';
+$lang->task->create   = '新建任务';
+$lang->task->edit     = '编辑任务';
+$lang->task->finish   = '任务完成';
+$lang->task->activate = '激活任务';
+$lang->task->cancel   = '取消任务';
+$lang->task->close    = '关闭任务';
 
 $lang->task->batchCreate = '批量添加';
 
@@ -29,7 +32,7 @@ $lang->task->name           = '名称';
 $lang->task->type           = '任务类型';
 $lang->task->pri            = '优先级';
 $lang->task->estimate       = '最初预计';
-$lang->task->estimateAB     = '预';
+$lang->task->estimateAB     = '预计';
 $lang->task->consumed       = '总消耗';
 $lang->task->consumedAB     = '消耗';
 $lang->task->left           = '预计剩余';

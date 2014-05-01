@@ -54,6 +54,7 @@ class userModel extends model
 
         /* Append empty users. */
         if(strpos($params, 'noempty') === false) $users = array('' => '') + $users;
+        if(strpos($params, 'noclosed') === false) $users = $users + array('closed' => 'Closed');
 
         return $users;
     }

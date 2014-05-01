@@ -43,7 +43,7 @@
         <td><?php echo html::textarea("desc[$i]", '', "rows='1' class='form-control'");?></td>
         <td><?php echo html::input("deadline[$i]", '', "class='form-control form-date'");?></td>
         <td><?php echo html::select("pri[$i]", (array)$lang->task->priList, $pri, "class=form-control");?></td>
-        <td><?php echo html::input("estimate[$i]", '', "class='form-control text-center'");?></td>
+        <td><?php echo html::input("estimate[$i]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'");?></td>
       </tr>
       <?php endfor;?>
       <tr><td colspan='8' class='text-center'><?php echo html::submitButton() . html::backButton();?></td></tr>

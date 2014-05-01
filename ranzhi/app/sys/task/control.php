@@ -169,10 +169,14 @@ class task extends control
     {
         if($_POST)
         {
-            $this->task->finish($taskID);
+            $changes = $this->task->finish($taskID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            $this->loadModel('action')->create('task', $taskID, 'Finished', $this->post->comment);
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('task', $taskID, 'Finished', $this->post->comment);
+                $this->action->logHistory($actionID, $changes);
+            }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
@@ -197,12 +201,14 @@ class task extends control
     {
         if($_POST)
         {
-            $this->task->assign($taskID);
+            $changes = $this->task->assign($taskID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            if($this->post->assignedTo) $this->loadModel('action')->create('task', $taskID, 'Assigned', $this->post->comment, $this->post->assignedTo);
-
-            $link = $this->session->taskList ? $this->session->taskList : inlink('browse');
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('task', $taskID, 'Assigned', $this->post->comment, $this->post->assignedTo);
+                $this->action->logHistory($actionID, $changes);
+            }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
@@ -212,6 +218,86 @@ class task extends control
         $this->view->taskID = $taskID;
         $this->view->task   = $task;
         $this->view->users  = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
+
+    /**
+     * Activate task. 
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
+    public function activate($taskID)
+    {
+        if($_POST)
+        {
+            $changes = $this->task->activate($taskID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('task', $taskID, 'Activated', $this->post->comment);
+                $this->action->logHistory($actionID, $changes);
+            }
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+        $this->view->title = $this->lang->task->activate;
+        $this->view->task  = $this->task->getByID($taskID);
+        $this->view->users = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
+
+    /**
+     * Cancel task. 
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
+    public function cancel($taskID)
+    {
+        if($_POST)
+        {
+            $changes = $this->task->cancel($taskID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('task', $taskID, 'Canceled', $this->post->comment);
+                $this->action->logHistory($actionID, $changes);
+            }
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $this->view->title  = $this->lang->task->cancel;
+        $this->view->taskID = $taskID;
+        $this->display();
+    }
+
+    /**
+     * Close task. 
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
+    public function close($taskID)
+    {
+        if($_POST)
+        {
+            $changes = $this->task->close($taskID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('task', $taskID, 'Closed', $this->post->comment);
+                $this->action->logHistory($actionID, $changes);
+            }
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+        $this->view->title  = $this->lang->task->close;
+        $this->view->taskID = $taskID;
         $this->display();
     }
 

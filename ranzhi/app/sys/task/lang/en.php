@@ -12,11 +12,14 @@
 $lang->task->common = 'Task';
 $lang->task->list   = 'Task list';
 
-$lang->task->browse = 'Browse';
-$lang->task->view   = 'Info';
-$lang->task->create = 'Create';
-$lang->task->edit   = 'Update';
-$lang->task->finish = 'Finish';
+$lang->task->browse   = 'Browse';
+$lang->task->view     = 'Info';
+$lang->task->create   = 'Create';
+$lang->task->edit     = 'Update';
+$lang->task->finish   = 'Finish';
+$lang->task->activate = 'Activate';
+$lang->task->cancel   = 'Cancel';
+$lang->task->close    = 'Close';
 
 $lang->task->batchCreate = 'Batch Create';
 

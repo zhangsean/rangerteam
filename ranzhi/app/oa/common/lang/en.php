@@ -20,6 +20,7 @@ $lang->menu->oa->doc       = 'Document|doc|index|';
 
 $lang->dashboard = new stdclass();
 $lang->block     = new stdclass();
+$lang->project   = new stdclass();
 
 $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();

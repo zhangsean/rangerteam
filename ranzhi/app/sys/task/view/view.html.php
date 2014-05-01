@@ -30,10 +30,7 @@
   <?php echo $this->fetch('action', 'history', "objectType=task&objectID={$task->id}");?>
   <div class='text-center'>
     <?php
-    if($task->status != 'done') echo html::a($this->createLink('task', 'finish', "taskID=$task->id"), "<i class='icon-ok'></i> " . $lang->finish, "class='btn' data-toggle='modal'");
-    echo html::a($this->createLink('task', 'assignto', "taskID=$task->id"), "<i class='icon-hand-right'></i> " . $lang->assign, "class='btn' data-toggle='modal'");
-    echo html::a($this->createLink('task', 'edit', "taskID=$task->id"), "<i class='icon-pencil'></i> " . $lang->edit, "class='btn'");
-    echo html::a($this->createLink('task', 'delete', "taskID=$task->id"), "<i class='icon-remove'></i> " . $lang->delete, "class='deleter btn'");
+    echo $this->task->buildOperateMenu($task, 'btn', 'view');
     echo html::backButton();
     ?>
   </div>
