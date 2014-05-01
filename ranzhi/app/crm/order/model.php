@@ -204,6 +204,9 @@ class orderModel extends model
             ->setDefault('closedDate', '0000-00-00 00:00:00')
             ->setDefault('activatedDate', '0000-00-00 00:00:00')
 
+            ->setIF($this->post->signedBy, 'status', 'signed')
+            ->setIF($this->post->closedBy, 'status', 'closed')
+
             ->setIF($this->post->status == 'closed' and !$this->post->closedBy, 'closedBy', $this->app->user->account)
             ->setIF($this->post->status == 'closed' and !$this->post->closedDate, 'closedDate', $now)
 
@@ -216,11 +219,7 @@ class orderModel extends model
             ->data($order, $skip = 'referer')
             ->autoCheck()
             ->batchCheck($this->config->order->require->edit, 'notempty')
-            ->batchCheckIF($order->status != 'closed', 'closedBy, closedReason', 'empty')
-            ->checkIF($order->status == 'normal', 'signedBy', 'empty')
             ->checkIF($oldOrder->status != 'closed' or $order->status == 'closed', 'activatedBy', 'empty')
-            ->checkIF($order->status != 'closed' and $order->closedDate != '0000-00-00 00:00:00', 'closedDate', 'empty')
-            ->checkIF($order->status == 'normal' and $order->signedDate != '0000-00-00', 'signedDate', 'empty')
             ->checkIF(($oldOrder->status != 'closed' or $order->status == 'closed') and $order->activatedDate != '0000-00-00 00:00:00', 'activatedDate', 'empty')
             ->where('id')->eq($orderID)
             ->exec();
@@ -247,7 +246,7 @@ class orderModel extends model
             ->add('assignedTo', 'closed')
             ->get();
 
-        $this->dao->update(TABLE_ORDER)->data($order, $skip = 'uid')
+        $this->dao->update(TABLE_ORDER)->data($order, $skip = 'uid, closedNote')
             ->autoCheck()
             ->where('id')->eq($orderID)->exec();
 
