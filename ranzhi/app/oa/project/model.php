@@ -11,27 +11,60 @@
  */
 class projectModel extends model
 {
+    /**
+     * getPairs 
+     * 
+     * @access public
+     * @return void
+     */
     public function getPairs()
     {
         return $this->dao->select('id,name')->from(TABLE_PROJECT)->where('deleted')->eq(0)->fetchPairs();
     }
 
-    public function getLeftMenus($projects = null)
+    /**
+     * Get left menu of project module. 
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return void
+     */
+    public function getLeftMenus($projectID = 0)
     {
+        $menu = "<nav class='menu leftmenu affix'><ul class='nav nav-stacked nav-primary'>";
         if(empty($projects)) $projects = $this->getPairs();
 
         $leftMenu = array();
 
         foreach($projects as $id => $project)
         {
-            $leftMenu[$id] = "$project|project|browse|projectID=$id";
+            $class = $id == $projectID ? "class='active'" : '';
+            $menu .= "<li {$class}>" . html::a(helper::createLink('task', "projectID={$id}"), $project);
+            
+            $menu .= "<div class='panel-actions pull-right'>
+                        <div class='dropdown open'>
+                          <button class='btn btn-mini' data-toggle='dropdown'><span class='caret'></span></button>
+                          <ul class='dropdown-menu pull-right'>";
+                     
+            $menu .= "<li>" . html::a(helper::createLink('project', 'edit', "projectID={$id}"), "<i class='icon-edit'> {$this->lang->edit}</i>", "data-toggle='modal'") . '</li>';
+            $menu .= "<li>" . html::a(helper::createLink('project', 'delete', "projectID={$id}"), "<i class='icon-remove'> {$this->lang->delete}</i>", "class='deleter'") . '</li>';
+            $menu .= "</ul></div></div>";
+            
+            $menu .= '</li>';
         }
+        $isCreateMenu = ($this->app->getModuleName() == 'project' and $this->app->getmethodName() == 'create') ? "class='active'" : ''; 
+        $menu .= "<li {$isCreateMenu}>" . html::a(helper::createLink('project', 'create'), $this->lang->project->create);
 
-        $leftMenu += (array)$this->lang->project->menu;
-
-        return (object)$leftMenu;
+        $menu .= '</ul></nav>';
+        return $menu;
     }
 
+    /**
+     * create 
+     * 
+     * @access public
+     * @return void
+     */
     public function create()
     {
         $project = fixer::input('post')
@@ -45,7 +78,6 @@ class projectModel extends model
             ->exec();
 
         if(dao::isError()) return false;
-
         return $this->dao->lastInsertId();
     }
 }

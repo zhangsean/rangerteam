@@ -28,6 +28,6 @@
   </div>
 </nav>
 <?php 
-$moduleMenu = commonModel::createModuleMenu($this->moduleName);
+if(!isset($moduleMenu)) $moduleMenu = commonModel::createModuleMenu($this->moduleName);
 if($moduleMenu) echo "$moduleMenu\n<div class='row with-menu page-content'>\n"; else echo "<div class='row page-content'>";
 ?>

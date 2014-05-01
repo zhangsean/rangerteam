@@ -15,46 +15,53 @@ class project extends control
     {
         parent::__construct();
 
-        $this->projects = $this->project->getPairs();
-
-        $this->lang->project->menu = $this->project->getLeftMenus($this->projects);
+        $this->view->moduleMenu = $this->project->getLeftMenus();
     }
 
+    /**
+     * index page of project module.
+     * 
+     * @access public
+     * @return void
+     */
     public function index()
     {
-        $this->locate(inlink('browse'));
+        $projects = $this->project->getPairs();
+        if(empty($projects)) $this->locate(inlink('create'));
+        $projectID = key($projects);
+        $this->locate($this->createLink('task','browse', "projectID={$projectID}"));
     }
 
-    public function browse($projectID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
-    {
-        $projectID = $projectID ? $projectID : key((array)$this->projects);
-        if(!$projectID) $this->locate(inlink('create'));
-
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
-
-        $this->loadModel('task');
-        $this->session->set('taskList', $this->app->getURI(true));
-
-        $this->view->title     = $this->lang->task->browse;
-        $this->view->tasks     = $this->task->getByProject($projectID, $orderBy, $pager);
-        $this->view->pager     = $pager;
-        $this->view->orderBy   = $orderBy;
-        $this->view->projectID = $projectID;
-        $this->display();
-    }
-
+    /**
+     * create a project.
+     * 
+     * @access public
+     * @return void
+     */
     public function create()
     {
         if($_POST)
         {
             $projectID = $this->project->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "projectID={$projectID}")));
         }
 
         $this->view->title = $this->lang->project->create;
         $this->display();
+    }
+
+    /**
+     * Delete a project.
+     *
+     * @param  int    $projectID
+     * @access public
+     * @return void
+     */
+    public function delete($projectID)
+    {
+        $this->project->delete(TABLE_PROJECT, $projectID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'locate' => $this->server->http_referer));
     }
 }

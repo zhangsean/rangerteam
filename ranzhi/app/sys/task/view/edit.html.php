@@ -22,7 +22,7 @@
         <table class='table table-form table-data'>
           <tr>
             <th class='w-80px'><?php echo $lang->task->name?></th>
-            <td><?php echo html::input('name', $task->desc, "class='form-control'");?></td>
+            <td><?php echo html::input('name', $task->name, "class='form-control'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->task->desc?></th>

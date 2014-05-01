@@ -22,8 +22,6 @@ $lang->dashboard = new stdclass();
 $lang->block     = new stdclass();
 
 $lang->project = new stdclass();
-$lang->project->menu = new stdclass();
-$lang->project->menu->create = '添加项目|project|create|';
 
 $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();

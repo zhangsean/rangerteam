@@ -4,6 +4,5 @@ $(document).ready(function()
     {
         $('.menu .nav li').removeClass('active');
         if(typeof(v.projectID) != undefined) $(".nav li a[href*='" + v.projectID + "']").parent().addClass('active');
-        $('.nav li:last').find('a').attr('data-toggle', 'modal');
     }
 });

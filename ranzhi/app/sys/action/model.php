@@ -52,13 +52,9 @@ class actionModel extends model
         /* Add contact for validate. */
         if($actionType == 'record') $action->contact = $action->extra;
 
-        $this->dao->insert(TABLE_ACTION)
-            ->data($action, $skip = 'contact')
-            ->beginIF($actionType == 'record')
-            ->batchCheck($this->config->action->require->createRecord, 'notempty')
-            ->fi()
-            ->autoCheck()
-            ->exec();
+        $this->dao = $this->dao->insert(TABLE_ACTION)->data($action, $skip = 'contact');
+        if($actionType == 'record') $this->dao = $this->dao->batchCheck($this->config->action->require->createRecord, 'notempty');
+        $this->dao->autoCheck()->exec();
         return $this->dbh->lastInsertID();
     }
 
