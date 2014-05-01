@@ -43,6 +43,8 @@ class projectModel extends model
      */
     public function getLeftMenus($projectID = 0)
     {
+        $this->lang->menuGroups->task = 'project';
+
         $menu = "<nav class='menu leftmenu affix'><ul class='nav nav-stacked nav-primary'>";
         if(empty($projects)) $projects = $this->getPairs();
 
