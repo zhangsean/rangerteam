@@ -84,36 +84,32 @@
   </div>
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $lang->contact->resume;?></strong></div>
-    <div class='panel-body'>
-      <table class='table table-data'>
-        <tr class='text-center'>
-          <th><?php echo $lang->resume->time;?></th>
-          <th><?php echo $lang->resume->customer?></th>
-          <th><?php echo $lang->resume->dept?></th>
-          <th><?php echo $lang->resume->title?></th>
-        </tr>
-        <?php foreach($resumes as $resume):?>
-        <tr class='text-center'>
-          <td><?php echo $resume->join . $lang->minus . $resume->left;?></td>
-          <td><?php if(isset($customers[$resume->customer])) echo $customers[$resume->customer]?></td>
-          <td><?php echo $resume->dept?></td>
-          <td><?php echo $resume->title?></td>
-       </tr>
-        <?php endforeach;?>
-      </table>
-    </div>
+    <table class='table table-data'>
+      <tr class='text-center'>
+        <th><?php echo $lang->resume->time;?></th>
+        <th><?php echo $lang->resume->customer?></th>
+        <th><?php echo $lang->resume->dept?></th>
+        <th><?php echo $lang->resume->title?></th>
+      </tr>
+      <?php foreach($resumes as $resume):?>
+      <tr class='text-center'>
+        <td><?php echo $resume->join . $lang->minus . $resume->left;?></td>
+        <td><?php if(isset($customers[$resume->customer])) echo $customers[$resume->customer]?></td>
+        <td><?php echo $resume->dept?></td>
+        <td><?php echo $resume->title?></td>
+     </tr>
+      <?php endforeach;?>
+    </table>
   </div>
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $lang->contact->address;?></strong></div>
-    <div class='panel-body'>
-      <table class='table table-data'>
-        <?php foreach($addresses as $address):?>
-        <tr>
-          <td><?php echo $address->title . $lang->colon . $address->fullLocation;?></td>
-        </tr>
-        <?php endforeach;?>
-      </table>
-    </div>
+    <table class='table table-data'>
+      <?php foreach($addresses as $address):?>
+      <tr>
+        <td><?php echo $address->title . $lang->colon . $address->fullLocation;?></td>
+      </tr>
+      <?php endforeach;?>
+    </table>
   </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>
