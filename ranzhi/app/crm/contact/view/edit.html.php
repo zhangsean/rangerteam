@@ -20,11 +20,7 @@
       <div class='panel-body'>
         <table class='table table-form'>
           <tr>
-            <th class='w-80px'><?php echo $lang->contact->realname;?></th>
-            <td><?php echo html::input('realname', $contact->realname, "class='form-control'");?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->contact->desc;?></th>
+            <th class='w-50px'><?php echo $lang->contact->desc;?></th>
             <td colspan='2'><?php echo html::textarea('desc', $contact->desc, "rows='3' class='form-control'");?></td>
           </tr>
         </table>
@@ -37,14 +33,20 @@
     <div class='panel'>
       <div class='panel-heading'><strong><?php echo $lang->contact->basicInfo;?></strong></div>
       <div class='panel-body'>
-        <table class='table table-form'>
+        <table class='table table-info'>
           <tr>
-            <th class='w-70px'><?php echo $lang->contact->customer;?></th>
+            <th class='w-70px'><?php echo $lang->contact->realname;?></th>
+            <td><?php echo html::input('realname', $contact->realname, "class='form-control'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->contact->customer;?></th>
             <td><?php echo html::select('customer', $customers, $contact->customer, "class='form-control chosen'");?></td>
-            <td class='w-80px'>
+          </tr>
+          <tr>
+            <th><?php echo $lang->resume->maker?></th>
+            <td>
               <?php $checked = $contact->maker ? "checked='checked'" : '';?>
               <input type='checkbox' name='maker' id='maker' value='1' <?php echo $checked?>/>
-              <label for='maker'><?php echo $lang->resume->maker?></label>
             </td>
           </tr>
           <tr>
@@ -77,7 +79,7 @@
     <div class='panel'>
       <div class='panel-heading'><strong><?php echo $lang->contact->contactInfo;?></strong></div>
       <div class='panel-body'>
-        <table class='table table-form'>
+        <table class='table table-info'>
           <?php foreach($config->contact->contactWayList as $item):?>
           <tr>
             <th class='w-70px'><?php echo $lang->contact->{$item};?></th>

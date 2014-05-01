@@ -13,19 +13,8 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='col-md-8'>
   <div class='panel'>
-    <div class='panel-heading'><strong><?php echo $lang->contact->view;?></strong></div>
-    <div class='panel-body'>
-      <table class='table table-form table-data'>
-        <tr>
-          <th class='w-100px'><?php echo $lang->contact->realname;?></th>
-          <td><?php echo $contact->realname;?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->contact->desc;?></th>
-          <td><?php echo $contact->desc;?></td>
-        </tr>
-      </table>
-    </div>
+    <div class='panel-heading'><strong><?php echo $contact->realname;?></strong></div>
+    <div class='panel-body'><?php echo $contact->desc;?></div>
   </div>
   <?php echo $this->fetch('action', 'history', "objectType=contact&objectID={$contact->id}")?>
   <div class='text-center'>
@@ -41,7 +30,7 @@
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $lang->contact->basicInfo;?></strong></div>
     <div class='panel-body'>
-      <table class='table table-form table-data'>
+      <table class='table table-info'>
         <tr>
           <th class='w-70px'><?php echo $lang->contact->customer;?></th>
           <td>
@@ -81,7 +70,7 @@
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $lang->contact->contactInfo;?></strong></div>
     <div class='panel-body'>
-      <table class='table table-form table-data'>
+      <table class='table table-info'>
         <?php foreach($config->contact->contactWayList as $item):?>
         <?php if(!empty($contact->{$item})):?>
         <tr>

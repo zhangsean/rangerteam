@@ -7,7 +7,7 @@ $(document).ready(function()
 
     if(v.type == 'customdoc')
     {
-         $(menu + " a[href$='libID=" + v.root +"']").parent().addClass('active');
+         $(menu + " a[href*='" + v.root +"']").parent().addClass('active');
     }
 
     /* Load the children of current category when page loaded. */

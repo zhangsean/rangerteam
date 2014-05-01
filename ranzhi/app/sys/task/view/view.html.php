@@ -15,16 +15,8 @@
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $task->name;?></strong></div>
     <div class='panel-body'>
-      <table class='table table-form table-data'>
-        <tr>
-          <th class='w-80px'><?php echo $lang->task->desc?></th>
-          <td><?php echo htmlspecialchars_decode($task->desc);?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->files;?></th>
-          <td><?php echo $this->fetch('file', 'printFiles', array('files' =>$task->files, 'fieldset' => 'false'))?></td>
-        </tr>
-      </table>
+      <?php echo htmlspecialchars_decode($task->desc);?>
+      <div><?php echo $this->fetch('file', 'printFiles', array('files' =>$task->files, 'fieldset' => 'false'))?></div>
     </div>
   </div>
   <?php echo $this->fetch('action', 'history', "objectType=task&objectID={$task->id}");?>
