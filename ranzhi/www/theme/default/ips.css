@@ -157,12 +157,12 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #allAppsList li img {width: 48px; height: 48px; margin-right: 10px; box-shadow: 0 1px 1px rgba(0,0,0,0.35); border-radius: 8px}
 
 /* home */
-/*#home {padding: 0 50px;}*/
+#home {padding: 0;}
 #home [class^='col-'] {overflow: visible;}
-#home > .wrapper {max-width: 1600px; margin: 40px auto 0; padding: 0 4%; }
-#home .panels-container {position: relative; padding: 0 40px}
-#dashboard > .actions {position: absolute; right: -20px; top: 0;}
-#dashboard > .actions > .btn {display: block; margin: 0 0 10px;}
+#home .dashboard {padding: 25px 30px 25px 25px; position: static;}
+#home .dashboard > .row {}
+#dashboard > .actions {position: absolute; right: 0; top: 25px;}
+#dashboard > .actions > .btn {display: block; margin: 0 0 5px; padding: 1px 4px; border-radius: 4px 0 0 4px; border-right: 0}
 #home .panel {box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);}
 #home .panel-actions {margin: 0}
 #home .panel-loading .panel-body {background: url('images/ips/loading.gif') no-repeat center 30%;}

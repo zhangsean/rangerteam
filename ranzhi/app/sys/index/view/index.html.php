@@ -40,43 +40,41 @@ js::import($jsRoot . 'jquery/ips.js');
     </div>
   </div>
   <div id='home' class='fullscreen fullscreen-active'>
-    <div class='wrapper'>
-      <div class='panels-container dashboard' id='dashboard'>
-        <div class='btn-toolbar actions'>
-          <button title='<?php echo $lang->index->refresh;?>' class='btn btn-pure refresh-all-panel'><i class='icon-repeat'></i></button>
-          <?php end($blocks);?>
-          <a data-toggle='modal' href='<?php echo $this->createLink("block", "admin", "index=" . (key($blocks) + 1)); ?>' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure'><i class='icon-plus'></i></a>
-        </div>
-        <div class='row'>
-          <?php
-          $index = 0;
-          reset($blocks);
-          ?>
-          <?php foreach($blocks as $key => $block):?>
-          <?php
-          $index = $key;
-          $block = json_decode($block);
-          ?>
-          <div class='col-sm-6 col-md-4'>
-            <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->name?>' data-url='<?php echo $this->createLink('block', 'printBlock', 'index=' . $index) ?>'>
-              <div class='panel-heading'>
-                <div class='panel-actions'>
-                  <button class="btn btn-mini refresh-panel"><i class="icon-repeat"></i></button>
-                  <div class='dropdown'>
-                    <button role="button" class="btn btn-mini" data-toggle="dropdown"><span class="caret"></span></button>
-                    <ul class="dropdown-menu pull-right" role="menu">
-                      <li><a href="<?php echo $this->createLink("block", "admin", "index=$index"); ?>" data-toggle='modal' class='edit-block' data-name='<?php echo $block->name; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit; ?></a></li>
-                      <li><a href="javascript:;" class="remove-panel"><i class="icon-remove"></i> <?php echo $lang->delete; ?></a></li>
-                    </ul>
-                  </div>
+    <div class='panels-container dashboard' id='dashboard'>
+      <div class='btn-toolbar actions'>
+        <button title='<?php echo $lang->index->refresh;?>' class='btn btn-pure refresh-all-panel'><i class='icon-repeat'></i></button>
+        <?php end($blocks);?>
+        <a data-toggle='modal' href='<?php echo $this->createLink("block", "admin", "index=" . (key($blocks) + 1)); ?>' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure'><i class='icon-plus'></i></a>
+      </div>
+      <div class='row'>
+        <?php
+        $index = 0;
+        reset($blocks);
+        ?>
+        <?php foreach($blocks as $key => $block):?>
+        <?php
+        $index = $key;
+        $block = json_decode($block);
+        ?>
+        <div class='col-sm-6 col-md-4'>
+          <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->name?>' data-url='<?php echo $this->createLink('block', 'printBlock', 'index=' . $index) ?>'>
+            <div class='panel-heading'>
+              <div class='panel-actions'>
+                <button class="btn btn-mini refresh-panel"><i class="icon-repeat"></i></button>
+                <div class='dropdown'>
+                  <button role="button" class="btn btn-mini" data-toggle="dropdown"><span class="caret"></span></button>
+                  <ul class="dropdown-menu pull-right" role="menu">
+                    <li><a href="<?php echo $this->createLink("block", "admin", "index=$index"); ?>" data-toggle='modal' class='edit-block' data-name='<?php echo $block->name; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit; ?></a></li>
+                    <li><a href="javascript:;" class="remove-panel"><i class="icon-remove"></i> <?php echo $lang->delete; ?></a></li>
+                  </ul>
                 </div>
-                <?php echo $block->name?>
               </div>
-              <div class='panel-body no-padding'></div>
+              <?php echo $block->name?>
             </div>
+            <div class='panel-body no-padding'></div>
           </div>
-          <?php endforeach;?>
         </div>
+        <?php endforeach;?>
       </div>
     </div>
   </div>
