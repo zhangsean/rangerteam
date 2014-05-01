@@ -62,10 +62,6 @@
           <th><?php echo $lang->order->status;?></th>
           <td><?php echo $lang->order->statusList[$order->status];?></td>
         </tr>
-        <tr>
-          <th><?php echo $lang->order->closedReason;?></th>
-          <td><?php echo $lang->order->closedReasonList[$order->closedReason];?></td>
-        </tr>
       </table>
     </div>
   </div> 
@@ -81,11 +77,11 @@
         </tr>
         <tr>
           <th class='w-80px'><?php echo $lang->lifetime->assignedTo;?></th>
-          <td><?php echo zget($users, $order->assignedTo);?></td>
+          <td><?php if($order->assignedTo) echo zget($users, $order->assignedTo) . $lang->at . $order->assignedDate;?></td>
         </tr>
         <tr>
           <th class='w-80px'><?php echo $lang->lifetime->closedBy;?></th>
-          <td><?php echo zget($users, $order->closedBy);?></td>
+          <td><?php if($order->closedBy) echo zget($users, $order->closedBy) . $lang->at . $order->closedDate;;?></td>
         </tr>
         <tr>
           <th class='w-80px'><?php echo $lang->lifetime->closedReason;?></th>
@@ -94,8 +90,7 @@
         <tr>
           <th class='w-80px'><?php echo $lang->lifetime->signedBy;?></th>
           <td>
-            <?php if($contract and $contract->signedBy) echo zget($users, $contract->signedBy);?>
-            <?php if($contract and $contract->signedBy) echo $lang->at . $contract->signedDate;?>
+            <?php if($contract and $contract->signedBy) echo zget($users, $contract->signedBy) . $lang->at . $contract->signedDate;?>
           </td>
         </tr>
       </table>
