@@ -39,7 +39,7 @@ class projectModel extends model
         foreach($projects as $id => $project)
         {
             $class = $id == $projectID ? "class='active'" : '';
-            $menu .= "<li {$class}>" . html::a(helper::createLink('task', "projectID={$id}"), $project);
+            $menu .= "<li {$class}>" . html::a(helper::createLink('task', 'browse', "projectID={$id}"), $project);
             
             $menu .= "<div class='panel-actions pull-right'>
                         <div class='dropdown open'>
