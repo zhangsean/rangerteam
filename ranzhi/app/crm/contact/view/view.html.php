@@ -120,7 +120,7 @@
       <table class='table table-data'>
         <?php foreach($addresses as $address):?>
         <tr>
-          <td><?php echo $address->title . $lang->colon . $address->country . ' ' . $address->province . ' ' . $address->city . ' ' . $address->location;?></td>
+          <td><?php echo $address->title . $lang->colon . $address->fullLocation;?></td>
         </tr>
         <?php endforeach;?>
       </table>

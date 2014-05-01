@@ -53,6 +53,16 @@ class addressModel extends model
             $contact   = $this->loadModel('contact')->getByID($objectID);
             $addresses = array_merge($this->getByObject('customer', $contact->customer), $addresses);
         }
+
+        /* Join area and location to fullLocation. */
+        $areaList = $this->loadModel('tree')->getOptionMenu('area');
+        foreach($addresses as $address)
+        {
+            $address->fullLocation = '';
+            if(isset($address->area)) $address->fullLocation .= str_replace('/', ' ', zget($areaList, $address->area));
+            $address->fullLocation .= ' ' . $address->location;
+        }
+
         return $addresses;
     }
 
