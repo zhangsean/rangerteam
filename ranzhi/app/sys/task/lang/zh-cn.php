@@ -35,6 +35,7 @@ $lang->task->leftAB         = '剩';
 $lang->task->deadline       = '截止日期';
 $lang->task->deadlineAB     = '截止';
 $lang->task->status         = '任务状态';
+$lang->task->statusAB       = '状态';
 $lang->task->statusCustom   = '状态排序';
 $lang->task->mailto         = '抄送给';
 $lang->task->desc           = '任务描述';

@@ -113,16 +113,12 @@ class block extends control
         $this->lang->announce = new stdclass();
         $this->app->loadLang('announce');
 
-        $params = $this->get->param;
-        $params = json_decode(base64_decode($params));
-
-        $this->view->sso       = base64_decode($this->get->sso);
-        $this->view->code      = $this->get->blockid;
+        $this->processParams();
 
         $this->view->announces = $this->dao->select('*')->from(TABLE_ARTICLE)
             ->where('type')->eq('announce')
             ->orderBy('addedDate desc')
-            ->limit($params->num)
+            ->limit($this->params->num)
             ->fetchAll('id');
 
         $this->display();
@@ -139,17 +135,14 @@ class block extends control
         $this->lang->task = new stdclass();
         $this->app->loadLang('task');
 
-        $params = $this->get->param;
-        $params = json_decode(base64_decode($params));
-
-        $this->view->sso    = base64_decode($this->get->sso);
-        $this->view->code   = $this->get->blockid;
+        $this->processParams();
 
         $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
-            ->where('createdBy')->eq($params->account)
-            ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
-            ->orderBy($params->orderBy)
-            ->limit($params->num)
+            ->where('createdBy')->eq($this->params->account)
+            ->andWhere('project')->ne(0)
+            ->beginIF(isset($this->params->status) and join($this->params->status) != false)->andWhere('status')->in($this->params->status)->fi()
+            ->orderBy($this->params->orderBy)
+            ->limit($this->params->num)
             ->fetchAll('id');
 
         $this->display();
@@ -166,19 +159,31 @@ class block extends control
         $this->lang->task = new stdclass();
         $this->app->loadLang('task');
 
-        $params = $this->get->param;
-        $params = json_decode(base64_decode($params));
-
-        $this->view->sso    = base64_decode($this->get->sso);
-        $this->view->code   = $this->get->blockid;
+        $this->processParams();
 
         $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
-            ->where('assignedTo')->eq($params->account)
-            ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
-            ->orderBy($params->orderBy)
-            ->limit($params->num)
+            ->where('assignedTo')->eq($this->params->account)
+            ->andWhere('project')->ne(0)
+            ->beginIF(isset($this->params->status) and join($this->params->status) != false)->andWhere('status')->in($this->params->status)->fi()
+            ->orderBy($this->params->orderBy)
+            ->limit($this->params->num)
             ->fetchAll('id');
 
         $this->display();
+    }
+
+    /**
+     * Process params.
+     * 
+     * @access public
+     * @return void
+     */
+    public function processParams()
+    {
+        $params = $this->get->param;
+        $this->params = json_decode(base64_decode($params));
+
+        $this->view->sso  = base64_decode($this->get->sso);
+        $this->view->code = $this->get->blockid;
     }
 }

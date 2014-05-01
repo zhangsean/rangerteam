@@ -35,6 +35,7 @@ $lang->task->leftAB         = 'Left';
 $lang->task->deadline       = 'Deadline';
 $lang->task->deadlineAB     = 'Deadline';
 $lang->task->status         = 'Status';
+$lang->task->statusAB       = 'Status';
 $lang->task->statusCustom   = 'Status Order';
 $lang->task->mailto         = 'Mailto';
 $lang->task->desc           = 'Desc';
