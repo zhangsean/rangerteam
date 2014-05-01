@@ -296,7 +296,7 @@ class orderModel extends model
         $menu .= html::a(inlink('edit',   "orderID=$order->id"), $this->lang->edit);
 
         if($order->status != 'closed') $menu .= html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "data-toggle='modal'");
-        if($order->closedReason == 'payed') $menu .= html::a('###', $this->lang->close, "disabled='disabled' class='disabled'");
+        if($order->closedReason == 'payed' or $order->status == 'closed') $menu .= html::a('###', $this->lang->close, "disabled='disabled' class='disabled'");
         if($order->closedReason != 'payed' and $order->status == 'closed')   $menu .= html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='reload'");
 
         return $menu;
