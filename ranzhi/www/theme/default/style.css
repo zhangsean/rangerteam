@@ -367,8 +367,6 @@ td #aliasLabel {display: table-row;}
 
 /* data table */
 .table-data .dropdown-menu > li > a {font-size: 12px}
-.table-data tr > td:first-child, .table-data tr > th:first-child {padding-left: 15px;}
-.table-data tr > td:last-child, .table-data tr > th:last-child {padding-right: 15px;}
 
 /* pri */
 .pri {display: inline-block; width: 20px; height: 20px; text-align: center; cursor: pointer; border: 1px solid #999; background-color: #ccc; color: #fff; margin-right: 5px; border-radius: 4px;}
