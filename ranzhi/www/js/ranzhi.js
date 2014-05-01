@@ -787,7 +787,7 @@ function setPageActions()
         $(window).scroll(fixPageActions).resize(function()
         {
             var winW = $(window).width();
-            if(wW == winW) return;
+            if(Math.abs(wW - winW) < 100) return;
             wW = winW;
             bar = $('.page-actions');
             bar.removeClass('fixed');
