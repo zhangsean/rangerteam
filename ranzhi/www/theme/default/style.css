@@ -253,6 +253,8 @@ form .chosen-container-single .chosen-single {padding: 5px 10px}
 form .chosen-container-single .chosen-single abbr {top: 5px; right: 18px}
 form .chosen-container-single .chosen-search:before {top: 10px}
 
+.form-condensed .btn-mini {padding: 1px 5px;}
+
 td #aliasLabel {display: table-row;}
 
 /* table info */
