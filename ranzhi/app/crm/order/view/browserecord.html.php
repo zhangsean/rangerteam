@@ -11,5 +11,5 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}&customer={$order->customer}");?>
+<?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}");?>
 <?php include '../../common/view/footer.html.php';?>

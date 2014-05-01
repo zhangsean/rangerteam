@@ -50,6 +50,6 @@
   </div>
 </div>
 <div class="col-lg-5">
-<?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}&customer={$order->customer}");?>
+<?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}");?>
 </div>
 <?php include '../../common/view/footer.html.php';?>
