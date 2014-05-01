@@ -215,18 +215,29 @@ label.checkbox,input[type='radio']+label{font-weight: normal;}
 .table-form td > .row > [class*="col-"] {padding-right: 0;line-height: 34px}
 .table-form td .checkbox {margin: 0}
 
-.form-condensed .table-form {margin-bottom: 0;}
-.form-condensed .table-form td, .form-condensed .table-form th {padding: 5px; font-size: 12px;}
-.form-condensed .table-form td + td, .form-condensed .table-form th + th {padding-left: 5%;}
-.form-condensed fieldset {background-color: #eee; padding: 2px 15px 2px 5px; margin-bottom: 10px; margin-top: 35px; border-radius: 6px; position: relative;}
-.form-condensed fieldset.fieldset-primary {background-color: transparent; padding: 0; margin-top: 0;}
-.form-condensed fieldset .table-form {margin-bottom: 0;}
-.form-condensed fieldset.collapsed {padding: 1px;}
-.form-condensed fieldset.collapsed .table-form {display: none}
-.form-condensed legend {font-size: 12px; font-weight: bold; border:0px solid red; padding: 5px; position: absolute; top: -25px; left: 0; cursor: pointer; line-height: 14px; vertical-align: top; color: #666}
-.form-condensed legend:before {font-family: ZenIcon; content: '\e6b8'; font-size: 14px; color: #999; display: inline-block; margin-right: 4px; margin-bottom: -3px; -webkit-font-smoothing: antialiased;}
-.form-condensed legend:hover {color: #333;}
-.form-condensed fieldset.collapsed legend:before {content: '\e6b9'}
+.form-control {padding: 5px 10px}
+.table-form {margin-bottom: 0;}
+.table-form td, .table-form th {padding: 5px; font-size: 12px;}
+.table-form td + td, .table-form th + th {padding-left: 5%;}
+fieldset {background-color: #eee; padding: 2px 15px 2px 5px; margin-bottom: 10px; margin-top: 35px; border-radius: 6px; position: relative;}
+fieldset.fieldset-primary {background-color: transparent; padding: 0; margin-top: 0;}
+fieldset .table-form {margin-bottom: 0;}
+fieldset.collapsed {padding: 1px;}
+fieldset.collapsed .table-form {display: none}
+legend {font-size: 12px; font-weight: bold; border:0px solid red; padding: 5px; position: absolute; top: -25px; left: 0; cursor: pointer; line-height: 14px; vertical-align: top; color: #666}
+legend:before {font-family: ZenIcon; content: '\e6b8'; font-size: 14px; color: #999; display: inline-block; margin-right: 4px; margin-bottom: -3px; -webkit-font-smoothing: antialiased;}
+legend:hover {color: #333;}
+fieldset.collapsed legend:before {content: '\e6b9'}
+
+form .chosen-container-single .chosen-single {padding: 4px 10px; height: 30px}
+form .chosen-container-single .chosen-single div {padding: 4px 10px}
+form .chosen-container-multi .chosen-choices {min-height: 30px}
+form .chosen-container-multi .chosen-choices li {margin: 4px 0 0 4px}
+form .chosen-container-multi .chosen-choices li.search-field {margin-bottom: 4px;}
+form .chosen-container {font-size: 13px}
+form .chosen-container-single .chosen-single {padding: 5px 10px}
+form .chosen-container-single .chosen-single abbr {top: 5px; right: 18px}
+form .chosen-container-single .chosen-search:before {top: 10px}
 
 td #aliasLabel {display: table-row;}
 

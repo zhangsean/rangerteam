@@ -1267,6 +1267,8 @@
                 }
 
                 event.preventDefault();
+                event.stopPropagation();
+                return false;
             });
 
             this.$leftBar.bind('contextmenu', nocontextmenu);

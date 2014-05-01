@@ -19,7 +19,7 @@ include "../../common/view/chosen.html.php";
 <form method='post' id='blockForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=$type")?>'>
   <table class='table table-form'>
     <tbody>
-      <tr class='text-left'>
+      <tr>
         <th class='w-100px'><?php echo $lang->block->name;?></th>
         <td>
         <?php
@@ -27,8 +27,9 @@ include "../../common/view/chosen.html.php";
         echo html::hidden('blockID', $blockID) . html::hidden('entryID', $entryID);
         ?>
         </td>
+      </tr>
       <?php foreach($params as $key => $param):?>
-      <tr class='text-left'>
+      <tr>
         <th><?php echo $param['name']?></th>
         <td>
         <?php
