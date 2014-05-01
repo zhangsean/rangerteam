@@ -49,7 +49,7 @@ class actionModel extends model
         if($objectType == 'customer') $action->customer = $objectID;
         if($objectType == 'contact')  $action->contact  = $objectID;
 
-        $this->dao = $this->dao->insert(TABLE_ACTION)
+        $this->dao->insert(TABLE_ACTION)
             ->data($action)
             ->batchCheckIF($actionType == 'record', $this->config->action->require->createRecord, 'notempty')
             ->exec();
