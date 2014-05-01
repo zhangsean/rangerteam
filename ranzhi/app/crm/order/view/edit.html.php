@@ -85,7 +85,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->order->signedDate;?></th>
-              <td><?php echo html::input('signedDate', formatTime($order->signedDate), "class='form-control form-datetime'");?></td>
+              <td><?php echo html::input('signedDate', formatTime($order->signedDate), "class='form-control form-date'");?></td>
             </tr>
             <tr>
               <th><?php echo $lang->order->closedBy;?></th>
