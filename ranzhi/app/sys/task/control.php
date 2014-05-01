@@ -48,11 +48,18 @@ class task extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        /* Check project deleted. */
+        if($projectID)
+        {
+            $project = $this->loadModel('project')->getByID($projectID);
+            if($project->deleted) $this->locate($this->createLink('project'));
+        }
+
         $this->session->set('taskList', $this->app->getURI(true));
 
         $this->view->title      = $this->lang->task->browse;
         $this->view->tasks      = $this->task->getList($projectID, $orderBy, $pager);
-        $this->view->moduleMenu = $this->loadModel('project')->getLeftMenus($projectID );
+        $this->view->moduleMenu = $this->project->getLeftMenus($projectID );
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;
         $this->view->projectID  = $projectID;

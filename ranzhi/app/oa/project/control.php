@@ -15,7 +15,8 @@ class project extends control
     {
         parent::__construct();
 
-        $this->view->moduleMenu = $this->project->getLeftMenus();
+        $this->projects = $this->project->getPairs();
+        $this->view->moduleMenu = $this->project->getLeftMenus($this->projects);
     }
 
     /**
@@ -26,9 +27,8 @@ class project extends control
      */
     public function index()
     {
-        $projects = $this->project->getPairs();
-        if(empty($projects)) $this->locate(inlink('create'));
-        $projectID = key($projects);
+        if(empty($this->projects)) $this->locate(inlink('create'));
+        $projectID = key((array)$this->projects);
         $this->locate($this->createLink('task','browse', "projectID={$projectID}"));
     }
 
@@ -44,10 +44,31 @@ class project extends control
         {
             $projectID = $this->project->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "projectID={$projectID}")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('task', 'browse', "projectID={$projectID}")));
         }
 
         $this->view->title = $this->lang->project->create;
+        $this->display();
+    }
+
+    /**
+     * Edit project. 
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return void
+     */
+    public function edit($projectID)
+    {
+        if($_POST)
+        {
+            $this->project->update($projectID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $this->view->title   = $this->lang->project->edit;
+        $this->view->project = $this->project->getByID($projectID);
         $this->display();
     }
 
@@ -62,6 +83,6 @@ class project extends control
     {
         $this->project->delete(TABLE_PROJECT, $projectID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success', 'locate' => $this->server->http_referer));
+        $this->send(array('result' => 'success'));
     }
 }

@@ -12,6 +12,18 @@
 class projectModel extends model
 {
     /**
+     * Get project by id. 
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return object
+     */
+    public function getByID($projectID)
+    {
+        return $this->dao->select('*')->from(TABLE_PROJECT)->where('id')->eq($projectID)->fetch();
+    }
+
+    /**
      * getPairs 
      * 
      * @access public
@@ -53,7 +65,7 @@ class projectModel extends model
             $menu .= '</li>';
         }
         $isCreateMenu = ($this->app->getModuleName() == 'project' and $this->app->getmethodName() == 'create') ? "class='active'" : ''; 
-        $menu .= "<li {$isCreateMenu}>" . html::a(helper::createLink('project', 'create'), $this->lang->project->create);
+        $menu .= "<li {$isCreateMenu}>" . html::a(helper::createLink('project', 'create'), $this->lang->project->create, "data-toggle='modal'");
 
         $menu .= '</ul></nav>';
         return $menu;
@@ -79,5 +91,25 @@ class projectModel extends model
 
         if(dao::isError()) return false;
         return $this->dao->lastInsertId();
+    }
+
+    /**
+     * Update project 
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return bool
+     */
+    public function update($projectID)
+    {
+        $project = fixer::input('post')->get();
+
+        $this->dao->update(TABLE_PROJECT)->data($project)
+            ->autoCheck()
+            ->batchCheck($this->config->project->require->create, 'notempty')
+            ->where('id')->eq($projectID)
+            ->exec();
+
+        return !dao::isError();
     }
 }
