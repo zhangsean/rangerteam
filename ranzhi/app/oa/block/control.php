@@ -139,6 +139,7 @@ class block extends control
 
         $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
             ->where('createdBy')->eq($this->params->account)
+            ->andWhere('deleted')->eq(0)
             ->andWhere('project')->ne(0)
             ->beginIF(isset($this->params->status) and join($this->params->status) != false)->andWhere('status')->in($this->params->status)->fi()
             ->orderBy($this->params->orderBy)
@@ -163,6 +164,7 @@ class block extends control
 
         $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
             ->where('assignedTo')->eq($this->params->account)
+            ->andWhere('deleted')->eq(0)
             ->andWhere('project')->ne(0)
             ->beginIF(isset($this->params->status) and join($this->params->status) != false)->andWhere('status')->in($this->params->status)->fi()
             ->orderBy($this->params->orderBy)

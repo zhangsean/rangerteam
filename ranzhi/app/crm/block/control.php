@@ -120,7 +120,8 @@ class block extends control
         $this->view->customers = $this->loadModel('customer')->getPairs();
 
         $this->view->orders = $this->dao->select('*')->from(TABLE_ORDER)
-            ->where("(createdBy='$params->account' OR assignedTo = '$params->account')")
+            ->where('deleted')->eq(0)
+            ->andWhere("(createdBy='$params->account' OR assignedTo = '$params->account')")
             ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
             ->orderBy($params->orderBy)
             ->limit($params->num)
@@ -147,7 +148,8 @@ class block extends control
         $this->view->code   = $this->get->blockid;
 
         $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
-            ->where("(createdBy='$params->account' OR assignedTo = '$params->account')")
+            ->where('deleted')->eq(0)
+            ->andWhere("(createdBy='$params->account' OR assignedTo = '$params->account')")
             ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
             ->orderBy($params->orderBy)
             ->limit($params->num)
@@ -174,7 +176,8 @@ class block extends control
         $this->view->code   = $this->get->blockid;
 
         $this->view->contracts = $this->dao->select('*')->from(TABLE_CONTRACT)
-            ->where('handlers')->like("%{$params->account}%")
+            ->where('deleted')->eq(0)
+            ->andWhere('handlers')->like("%{$params->account}%")
             ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
             ->orderBy($params->orderBy)
             ->limit($params->num)
