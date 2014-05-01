@@ -3,7 +3,7 @@ $(document).ready(function()
     setRequiredFields();
 
     /* Enable default ajax options. */
-    $.setAjaxModal();
+    $.setModal();
     $.setAjaxForm('#ajaxForm');
     $.setAjaxDeleter('.deleter');
     $.setReload('.reload');
