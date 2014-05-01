@@ -266,8 +266,6 @@ CREATE TABLE `sys_action` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `customer` mediumint(8) unsigned DEFAULT NULL,
   `contact` mediumint(8) unsigned DEFAULT NULL,
-  `contract` mediumint(8) unsigned DEFAULT NULL,
-  `product` mediumint(8) unsigned DEFAULT NULL,
   `objectType` varchar(30) NOT NULL DEFAULT '',
   `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `actor` varchar(30) NOT NULL DEFAULT '',
@@ -279,8 +277,6 @@ CREATE TABLE `sys_action` (
   PRIMARY KEY (`id`),
   KEY `customer` (`customer`),
   KEY `contact` (`contact`),
-  KEY `contract` (`contract`),
-  KEY `product` (`product`),
   KEY `date` (`date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_category`;
