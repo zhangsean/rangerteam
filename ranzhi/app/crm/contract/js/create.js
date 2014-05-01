@@ -14,7 +14,7 @@ function getOrder(customerID)
 
     $('.contactTD select').load(createLink('contact', 'getOptionMenu', 'customerID=' + customerID));
 
-    $('#orderTD').load(createLink('contract', 'getOrder', 'customerID=' + customerID), function()
+    $('#orderTD').load(createLink('contract', 'getOrder', 'customerID=' + customerID + '&status=normal'), function()
     {
         $('#orderTR').removeClass('hide');
         if($('.select-order').length > 1) $('.select-order').parents('tr').not('#orderTR').remove();

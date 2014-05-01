@@ -72,7 +72,7 @@ class contract extends control
         {
             $this->view->customer     = $customerID;
             $this->view->currentOrder = $this->loadModel('order')->getByID($orderID);
-            $this->view->orders       = $this->order->getList($mode = 'customer', $customerID);
+            $this->view->orders       = array('' => '') + $this->order->getList($mode = 'query', "customer={$customerID} and order.status = 'normal'");
         }
 
         $this->view->title      = $this->lang->contract->create;
@@ -258,13 +258,14 @@ class contract extends control
     /**
      * Get order.
      *
-     * @param  int    $customerID
+     * @param  int       $customerID
+     * @param  string    $status
      * @access public
      * @return string
      */
-    public function getOrder($customerID)
+    public function getOrder($customerID, $status = '')
     {
-        $orders = $this->loadModel('order')->getOrderForCustomer($customerID);
+        $orders = $this->loadModel('order')->getOrderForCustomer($customerID, $status);
 
         $html = "<div class='form-group'><span class='col-sm-8'><select name='order[]' class='select-order form-control'>";
 
