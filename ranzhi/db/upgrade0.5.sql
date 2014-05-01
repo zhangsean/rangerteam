@@ -16,6 +16,7 @@ ALTER TABLE sys_action ADD customer mediumint(8) UNSIGNED AFTER id,
 ADD contact mediumint(8) UNSIGNED AFTER customer,
 ADD contract mediumint(8) UNSIGNED AFTER contact,
 CHANGE `product` `product`  mediumint(8) UNSIGNED AFTER contract;
+ALTER TABLE sys_action ADD drop product, drop contract;
 
 ALTER TABLE `crm_contact` ADD `maker` enum('0','1') COLLATE 'utf8_general_ci' NOT NULL DEFAULT '0' AFTER `customer`;
 ALTER TABLE `crm_relation` RENAME TO `crm_resume`;
