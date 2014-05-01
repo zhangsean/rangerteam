@@ -20,7 +20,7 @@ class orderModel extends model
      */
     public function getByID($id)
     {
-        $order   = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($id)->fetch();
+        $order = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($id)->fetch();
         if(!$order) return false;
 
         $product = $this->loadModel('product')->getByID($order->product);
@@ -47,7 +47,7 @@ class orderModel extends model
             ->beginIF($mode != 'all')->where($mode)->eq($param)->fi()
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
-        foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->id, $order->customerName, $order->productName, substr($order->createdDate, 0, 10)); 
+        foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->customerName, $order->productName, $order->plan); 
 
         return $orders;
     }
@@ -79,7 +79,7 @@ class orderModel extends model
             ->beginIF($customer)->where('customer')->eq($customer)->fi()
             ->fetchAll('id');
 
-        foreach($orders as $key => $order) $orders[$key] = sprintf($this->lang->order->titleLBL, $order->id, $order->customerName, $order->productName, substr($order->createdDate, 0, 10)); 
+        foreach($orders as $key => $order) $orders[$key] = sprintf($this->lang->order->titleLBL, $order->customerName, $order->productName, $order->plan); 
 
         return $orders;
     }

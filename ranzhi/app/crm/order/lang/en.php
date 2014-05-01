@@ -56,6 +56,6 @@ $lang->order->closedReasonList['payed']     = 'Payed';
 $lang->order->closedReasonList['failed']    = 'Failed';
 $lang->order->closedReasonList['postponed'] = 'Postponed';
 
-$lang->order->titleLBL  = "%s buy %s, %s";
+$lang->order->titleLBL  = "『%s』buy %s, the planned amount is %s";
 $lang->order->basicInfo = "Basic";
 $lang->order->lifetime  = "Lifetime";

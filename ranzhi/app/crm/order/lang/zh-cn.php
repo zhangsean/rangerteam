@@ -56,6 +56,6 @@ $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '订单失败';
 $lang->order->closedReasonList['postponed'] = '延期';
 
-$lang->order->titleLBL  = "%s购买%s, %s";
+$lang->order->titleLBL  = "『%s』购买%s, 计划金额%s";
 $lang->order->basicInfo = "基本信息";
 $lang->order->lifetime  = "订单的一生";
