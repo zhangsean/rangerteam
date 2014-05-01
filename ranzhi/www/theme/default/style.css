@@ -108,6 +108,11 @@ body.page-actions-affix {padding-bottom: 70px}
 
 
 /* --- COMPONENTS SETTING --- */
+/* menu */
+.menu > .nav > li > .actions {position: absolute; right: 0; top:0;}
+.menu > .nav > li > .actions .dropdown .btn {background: none; padding: 8px 8px; border:none; border-left:1px solid #ddd; border-color: rgba(0,0,0,0.15); border-radius: 0 4px 4px 0}
+.menu > .nav > li.active > .actions .dropdown .btn .caret {border-top-color: #fff;border-bottom-color: #fff}
+
 /* article-files */
 .article-files {display: block; background-color: #f1f1f1; padding: 0 10px;}
 .article-files > li {position: relative; display: block;float: left;padding: 0 5px;margin: 10px 0;position: relative;}

@@ -55,8 +55,8 @@ class projectModel extends model
             $class = $id == $projectID ? "class='active'" : '';
             $menu .= "<li {$class}>" . html::a(helper::createLink('task', 'browse', "projectID={$id}"), $project);
             
-            $menu .= "<div class='panel-actions pull-right'>
-                        <div class='dropdown open'>
+            $menu .= "<div class='actions'>
+                        <div class='dropdown'>
                           <button class='btn btn-mini' data-toggle='dropdown'><span class='caret'></span></button>
                           <ul class='dropdown-menu pull-right'>";
                      
