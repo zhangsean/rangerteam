@@ -98,6 +98,7 @@ class order extends control
         $this->view->order     = $this->order->getByID($orderID);
         $this->view->products  = $this->loadModel('product')->getPairs();
         $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->users     = $this->loadModel('user')->getPairs();
 
         $this->display();
     }

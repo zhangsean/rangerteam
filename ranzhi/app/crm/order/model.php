@@ -61,7 +61,15 @@ class orderModel extends model
      */
     public function getListByID($idList)
     {
-        return $this->dao->select('*')->from(TABLE_ORDER)->where('id')->in($idList)->fetchAll('id');
+        $orders = $this->dao->select('o.*, c.name as customerName, p.name as productName')->from(TABLE_ORDER)->alias('o')
+            ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
+            ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
+            ->where('o.id')->in($idList)
+            ->fetchAll('id');
+
+        foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->id, $order->customerName, $order->productName); 
+
+        return $orders;
     }
 
     /** 
@@ -189,12 +197,30 @@ class orderModel extends model
     public function update($orderID)
     {
         $oldOrder = $this->getByID($orderID);
-        $order    = fixer::input('post')->get();
+        $now      = helper::now();
+        $order    = fixer::input('post')
+            ->setDefault('signedDate', '0000-00-00 00:00:00')
+            ->setDefault('closedDate', '0000-00-00 00:00:00')
+            ->setDefault('activatedDate', '0000-00-00 00:00:00')
+
+            ->setIF($this->post->status == 'closed' and !$this->post->closedBy, 'closedBy', $this->app->user->account)
+            ->setIF($this->post->status == 'closed' and !$this->post->closedDate, 'closedDate', $now)
+
+            ->setIF($this->post->status == 'signed' and !$this->post->signedBy, 'signedBy', $this->app->user->account)
+            ->setIF($this->post->status == 'signed' and !$this->post->signedDate, 'signedDate', $now)
+
+            ->get();
 
         $this->dao->update(TABLE_ORDER)
             ->data($order, $skip = 'referer')
             ->autoCheck()
             ->batchCheck($this->config->order->require->edit, 'notempty')
+            ->batchCheckIF($order->status != 'closed', 'closedBy, closedReason', 'empty')
+            ->checkIF($order->status == 'normal', 'signedBy', 'empty')
+            ->checkIF($order->status == 'closed', 'activatedBy', 'empty')
+            ->checkIF($order->status != 'closed' and $order->closedDate != '0000-00-00 00:00:00', 'closedDate', 'empty')
+            ->checkIF($order->status == 'normal' and $order->signedDate != '0000-00-00 00:00:00', 'signedDate', 'empty')
+            ->checkIF($order->status == 'closed' and $order->activatedDate != '0000-00-00 00:00:00', 'activatedDate', 'empty')
             ->where('id')->eq($orderID)
             ->exec();
 

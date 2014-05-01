@@ -44,7 +44,7 @@
           <th><?php echo $lang->contract->order;?></th>
           <td>
             <?php foreach($orders as $order):?>
-            <div><?php echo $products[$order->product] . $lang->minus .  $lang->order->real . " : " . $order->real; ?></div>
+            <div><?php echo $order->title;?></div>
             <?php endforeach;?>
           </td>
         </tr>

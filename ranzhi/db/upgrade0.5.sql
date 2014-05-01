@@ -61,3 +61,5 @@ CREATE TABLE `oa_project` (
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE='MyISAM' COLLATE 'utf8_general_ci'; 
+
+ALTER TABLE `crm_order` DROP `payedDate`;

@@ -140,7 +140,6 @@ CREATE TABLE `crm_order` (
   `assignedDate` datetime NOT NULL,
   `signedBy` char(30) NOT NULL,
   `signedDate` datetime NOT NULL,
-  `payedDate` datetime NOT NULL,
   `closedBy` char(30) NOT NULL,
   `closedDate` datetime NOT NULL,
   `closedReason` char(10) NOT NULL,
