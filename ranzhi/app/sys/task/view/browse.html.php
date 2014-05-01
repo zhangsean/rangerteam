@@ -28,8 +28,7 @@
         <th class='w-150px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->task->createdDate);?></th>
         <th class='w-90px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->task->type);?></th>
         <th class='w-90px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->task->status);?></th>
-        <th class='w-90px'> <?php commonModel::printOrderLink('order',       $orderBy, $vars, $lang->task->order);?></th>
-        <th class='w-120px'><?php echo $lang->actions;?></th>
+        <th class='w-150px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -43,7 +42,6 @@
         <td><?php echo $task->createdDate;?></td>
         <td><?php echo $lang->task->typeList[$task->type];?></td>
         <td><?php echo $lang->task->statusList[$task->status];?></td>
-        <td><?php echo $task->order;?></td>
         <td><?php echo $this->task->buildOperateMenu($task);?></td>
       </tr>
       <?php endforeach;?>

@@ -298,7 +298,8 @@ class task extends control
 
             if($changes)
             {
-                $actionID = $this->loadModel('action')->create('task', $taskID, 'Closed', $this->post->comment);
+                $task     = $this->task->getByID($taskID);
+                $actionID = $this->loadModel('action')->create('task', $taskID, 'Closed', $this->post->comment, $this->lang->task->reasonList[$task->closedReason]);
                 $this->action->logHistory($actionID, $changes);
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
