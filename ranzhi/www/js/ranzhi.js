@@ -783,10 +783,14 @@ function setPageActions()
     {
         barTop = bar.offset().top + bar.outerHeight();
         barWidth = bar.width();
+        wW = 0;
         $(window).scroll(fixPageActions).resize(function()
         {
+            var winW = $(window).width();
+            if(wW == winW) return;
+            wW = winW;
             bar = $('.page-actions');
-            bar.removeClass('affix');
+            bar.removeClass('fixed');
             bar.css('width', '100%');
             barTop = bar.offset().top + bar.outerHeight();
             barWidth = bar.width();
@@ -804,7 +808,7 @@ function setPageActions()
         {
             bar.css('width', barWidth);
         }
-        $('body').toggleClass('page-actions-affix');
-        bar.toggleClass('affix', fixed);
+        $('body').toggleClass('page-actions-fixed');
+        bar.toggleClass('fixed', fixed);
     }
 }
