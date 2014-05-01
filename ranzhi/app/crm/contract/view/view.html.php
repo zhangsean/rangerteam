@@ -22,9 +22,11 @@
     </div>
   </div>
   <?php echo $this->fetch('action', 'history', "objectType=contract&objectID={$contract->id}")?>
-  <div class='text-center'>
+  <div class='page-actions'>
     <?php
+    echo "<div class='btn-group'>";
     echo $this->contract->buildOperateMenu($contract, 'btn', 'view');
+    echo '</div>';
     echo html::backButton();
     ?>
   </div>

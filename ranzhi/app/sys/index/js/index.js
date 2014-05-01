@@ -45,7 +45,6 @@ function sortBlocks(orders)
     {
         if(data.result != 'success') return false;
 
-        console.log('ordered!');
         $('.panels-container .panel').each(function()
         {
             var index = $(this).data('order');

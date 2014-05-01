@@ -778,11 +778,11 @@ function condensedForm()
  */
 function setPageActions()
 {
-    var bar = $('.page-actions');
-    var barTop = bar.offset().top + bar.outerHeight();
-    var barWidth = bar.width();
+    var bar = $('.page-actions'), barTop, barWidth;
     if(bar.length)
     {
+        barTop = bar.offset().top + bar.outerHeight();
+        barWidth = bar.width();
         $(window).scroll(fixPageActions).resize(function()
         {
             bar = $('.page-actions');
