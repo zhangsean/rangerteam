@@ -63,3 +63,11 @@ CREATE TABLE `oa_project` (
 ) ENGINE='MyISAM' COLLATE 'utf8_general_ci'; 
 
 ALTER TABLE `crm_order` DROP `payedDate`;
+
+ALTER TABLE `crm_contract` CHANGE `signedDate` `signedDate` date NOT NULL,
+CHANGE `deliveredDate` `deliveredDate` date NOT NULL,
+CHANGE `returnedDate` `returnedDate` date NOT NULL,
+CHANGE `finishedDate` `finishedDate` date NOT NULL,
+CHANGE `canceledDate` `canceledDate` date NOT NULL;
+
+ALTER TABLE `crm_order` CHANGE `signedDate` `signedDate` date NOT NULL;
