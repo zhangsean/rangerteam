@@ -26,8 +26,7 @@ class doc extends control
         $this->loadModel('user');
         $this->loadModel('tree');
         $this->loadModel('action');
-        $this->loadModel('common', 'crm');
-        $this->loadModel('product', 'crm');
+        //$this->loadModel('product', 'crm');
         //$this->loadModel('project');
 
         $this->lang->doc->menu = $this->doc->getLeftMenus($this->libs);
