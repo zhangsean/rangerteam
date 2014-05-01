@@ -101,20 +101,23 @@ class contractModel extends model
         {
             foreach($contract->order as $key => $orderID)
             {
-                $data = new stdclass();
-                $data->contract = $contractID;
-                $data->order    = $orderID;
-                $this->dao->insert(TABLE_CONTRACTORDER)->data($data)->exec();
+                if($orderID)
+                {
+                    $data = new stdclass();
+                    $data->contract = $contractID;
+                    $data->order    = $orderID;
+                    $this->dao->insert(TABLE_CONTRACTORDER)->data($data)->exec();
 
-                $order = new stdclass();
-                $order->status     = 'signed';
-                $order->real       = $contract->real[$key];
-                $order->signedBy   = $contract->signedBy;
-                $order->signedDate = $contract->signedDate;
-                $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
+                    $order = new stdclass();
+                    $order->status     = 'signed';
+                    $order->real       = $contract->real[$key];
+                    $order->signedBy   = $contract->signedBy;
+                    $order->signedDate = $contract->signedDate;
+                    $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
 
-                if(dao::isError()) return false;
-                $this->loadModel('action')->create('order', $orderID, 'Signed', '', $contract->real[$key]);
+                    if(dao::isError()) return false;
+                    $this->loadModel('action')->create('order', $orderID, 'Signed', '', $contract->real[$key]);
+                }
             }
 
             $this->loadModel('file')->saveUpload('contract', $contractID);
