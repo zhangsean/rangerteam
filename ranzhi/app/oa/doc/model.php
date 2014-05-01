@@ -183,6 +183,7 @@ class docModel extends model
             ->setDefault('product, project, module', 0)
             ->specialChars('title, digest, keywords')
             ->encodeURL('url')
+            ->stripTags('content', $this->config->allowedTags->admin)
             ->cleanInt('product, project, module')
             ->remove('files,labels,uid')
             ->get();
@@ -219,6 +220,7 @@ class docModel extends model
             ->setDefault('module', 0)
             ->specialChars('title, digest, keywords')
             ->encodeURL('url')
+            ->stripTags('content', $this->config->allowedTags->admin)
             ->add('editedBy',   $this->app->user->account)
             ->add('editedDate', helper::now())
             ->remove('comment,files,labels,uid')

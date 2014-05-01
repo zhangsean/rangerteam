@@ -15,7 +15,7 @@
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $task->name;?></strong></div>
     <div class='panel-body'>
-      <?php echo htmlspecialchars_decode($task->desc);?>
+      <?php echo $task->desc;?>
       <div><?php echo $this->fetch('file', 'printFiles', array('files' =>$task->files, 'fieldset' => 'false'))?></div>
     </div>
   </div>

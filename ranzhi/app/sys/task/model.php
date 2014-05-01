@@ -67,6 +67,8 @@ class taskModel extends model
             ->setForce('assignedTo', $this->post->assignedTo)
             ->setDefault('createdBy', $this->app->user->account)
             ->setDefault('createdDate', $now)
+            ->specialChars('name')
+            ->stripTags('desc', $this->config->allowedTags->admin)
             ->get();
 
         $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels')
@@ -110,7 +112,7 @@ class taskModel extends model
             $task->estimate    = (float)$this->post->estimate[$key];
             $task->left        = $task->estimate;
             $task->deadline    = $this->post->deadline[$key] ? $this->post->deadline[$key] : '0000-00-00';
-            $task->desc        = htmlspecialchars($this->post->desc[$key]);
+            $task->desc        = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags->admin);
             $task->pri         = $this->post->pri[$key];
             $task->status      = 'wait';
             $task->createdBy   = $this->app->user->account;
@@ -169,6 +171,8 @@ class taskModel extends model
 
             ->add('editedBy',   $this->app->user->account)
             ->add('editedDate', $now)
+            ->specialChars('name')
+            ->stripTags('desc', $this->config->allowedTags->admin)
             ->remove('uid, files, labels')
             ->get();
 

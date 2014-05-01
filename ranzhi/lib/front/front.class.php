@@ -186,7 +186,7 @@ class html
         $i = 1;
         foreach($options as $key => $value)
         {
-            $string .= "<label {$attrib}><input type='radio' id='{$name}{$i}' name='$name' value='$key' ";
+            $string .= "<label><input type='radio' id='{$name}{$i}' name='$name' value='$key' ";
             $string .= ($key == $checked) ? " checked ='checked'" : "";
             $string .= $attrib;
             $string .= " /> $value</label>\n";

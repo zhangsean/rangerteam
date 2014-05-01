@@ -234,7 +234,8 @@ class doc extends control
         $this->view->moduleID         = $moduleID;
         $this->view->productID        = $productID;
         $this->view->projectID        = $projectID;
-        $this->view->products         = $projectID == 0 ? $this->product->getPairs() : $this->project->getProducts($projectID);
+        $this->view->products         = array();
+        //$this->view->products         = $projectID == 0 ? $this->product->getPairs() : $this->project->getProducts($projectID);
         $this->view->projects         = array();
         //$this->view->projects         = $this->project->getPairs('all');
 

@@ -15,7 +15,7 @@
 <form id='ajaxForm' method='post'>
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $lang->task->batchCreate;?></strong></div>
-    <table class='table table-form table-data'>
+    <table class='table table-form'>
       <thead>
         <tr class='text-center'>
           <th class='w-60px'><?php echo $lang->task->id;?></th> 
@@ -42,7 +42,7 @@
         <td><?php echo html::select("assignedTo[$i]", $users, $member, "class='form-control'");?></td>
         <td><?php echo html::textarea("desc[$i]", '', "rows='1' class='form-control'");?></td>
         <td><?php echo html::input("deadline[$i]", '', "class='form-control form-date'");?></td>
-        <td><?php echo html::select("pri[$i]", (array)$lang->task->priList, $pri, "class=form-control");?></td>
+        <td><?php echo html::select("pri[$i]", $lang->task->priList, $pri, "class=form-control");?></td>
         <td><?php echo html::input("estimate[$i]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'");?></td>
       </tr>
       <?php endfor;?>

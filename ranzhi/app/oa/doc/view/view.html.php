@@ -29,7 +29,7 @@
         </tr>
         <tr>
           <th class='w-70px'><?php echo $lang->doc->digest;?></th>
-          <td><?php echo htmlspecialchars_decode($doc->digest);?></td>
+          <td><?php echo $doc->digest;?></td>
         </tr>
         <?php if($doc->type == 'url'):?>
         <tr>
@@ -39,8 +39,8 @@
         <?php endif;?>
         <?php if($doc->type == 'text'):?>
         <tr>
-          <th><?php echo $lang->doc->content;?></th>
-          <td class='content'><?php echo htmlspecialchars_decode($doc->content);?></td>
+          <th class='text-top'><?php echo $lang->doc->content;?></th>
+          <td class='content'><?php echo $doc->content;?></td>
         </tr>
         <?php endif;?>
         <?php if($doc->type == 'file'):?>
