@@ -55,9 +55,34 @@ class action extends control
     {
         if($_POST)
         {
-            $this->action->createRecord($objectType, $objectID, $customer);
+            if($this->post->contract)
+            {
+                $objectType = 'contract';
+                $objectID   = $this->post->contract;
+            }
+
+            if($this->post->order)
+            {
+                $objectType = 'order';
+                $objectID   = $this->post->order;
+            }
+
+            if($this->post->customer) $customer = $this->post->customer;
+            $this->action->createRecord($objectType, $objectID, $customer, $this->post->contact);
+
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
+        }
+        
+        if($objectType == 'contact')
+        {
+            $this->view->customers = $this->loadModel('contact')->getCustomerPairs($objectID);
+        }
+
+        if($objectType == 'customer')
+        {
+            $this->view->orders    = array('') + $this->loadModel('order')->getPairs($objectID);
+            $this->view->contracts = array('') + $this->loadModel('contract')->getPairs($objectID);
         }
 
         $this->view->title      = $this->lang->action->record->create;

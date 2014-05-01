@@ -87,6 +87,22 @@ class contactModel extends model
     }
 
     /**
+     * Get customer option menu of a contact.
+     * 
+     * @param  int    $contactID 
+     * @access public
+     * @return array
+     */
+    public function getCustomerPairs($contactID)
+    {
+        return $this->dao->select('customer,name')
+            ->FROM(TABLE_RESUME)->alias('r')
+            ->leftJoin(TABLE_CUSTOMER)->alias('c')->on('r.customer=c.id')
+            ->where('r.contact')->eq($contactID)
+            ->andWhere('c.deleted')->eq(0)->fetchPairs();
+    }
+
+    /**
      * Create a contact.
      * 
      * @param  object $contact   //create with the data of contact.

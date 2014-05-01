@@ -11,16 +11,48 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php js::set('customer', $customer);?>
-<form method='post' id='createRecordForm' action='<?php echo inlink('createrecord', "objectType={$objectType}&objectID={$objectID}&customer={$customer}")?>'>
+<form method='post' id='createRecordForm' action='<?php echo inlink('createrecord', "objectType={$objectType}&objectID={$objectID}")?>' class='form-inline'>
   <table class='table table-form'>
     <?php if($objectType != 'contact'):?>
     <tr>
       <th><?php echo $lang->action->record->contact;?></th>
       <td>
         <div class='col-sm-8'><?php echo html::select('contact', $contacts, '', "class='form-control'");?></div>
+        <?php if($objectType == 'customer'):?>
+        <div class='col-sm-4'>
+        <?php echo html::checkbox('objectType', array('order' =>$lang->action->record->order, 'contract' => $lang->action->record->contract), '', "class='checkbox-inline'");?>
+        </div>
+        <?php endif;?>
+      </td>
+    </tr>
+    <?php elseif($objectType != 'customer'):?>
+    <tr>
+      <th><?php echo $lang->action->record->customer;?></th>
+      <td>
+        <div class='col-sm-8'>
+          <?php echo html::hidden('contact', $objectID);?>
+          <?php echo html::select('customer', $customers, '', "class='form-control'");?>
+        </div>
+      </td>
+    </tr>
+    <?php endif;?>
+    <?php if($objectType == 'customer'):?>
+    <tr style='display:none'>
+      <th><?php echo $lang->action->record->contract;?></th>
+      <td>
+        <div class='col-sm-8'>
+          <?php echo html::select('contract', $contracts, '', "class='form-control chosen'");?>
+        </div>
+      </td>
+    </tr>
+    <tr style='display:none'>
+      <th><?php echo $lang->action->record->order;?></th>
+      <td>
+        <div class='col-sm-8'>
+          <?php echo html::select('order', $orders, '', "class='form-control'");?>
+        </div>
       </td>
     </tr>
     <?php endif;?>
@@ -36,8 +68,7 @@
       <th></th>
       <td>
         <div class='col-sm-12'>
-        <?php if($objectType == 'contact') echo html::hidden('contact', $objectID);?>
-        <?php echo html::submitButton();?>
+          <?php echo html::submitButton() . html::hidden('customer', $customer);?>
         </div>
       </td>
     </tr>

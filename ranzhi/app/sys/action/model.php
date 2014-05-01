@@ -26,35 +26,34 @@ class actionModel extends model
      * @param  string $comment 
      * @param  mix    $extra        the extra info of this action, like customer, contact, order etc.  according to different modules and actions, can set different extra.
      * @param  string $actor
+     * @param  int    $customer 
+     * @param  int    $contact 
      * @access public
      * @return int
      */
-    public function create($objectType, $objectID, $actionType, $comment = '', $extra = '', $actor = '')
+    public function create($objectType, $objectID, $actionType, $comment = '', $extra = '', $actor = '', $customer = 0, $contact = 0)
     {
         $action = new stdclass();
 
         $action->objectType = strtolower($objectType);
         $action->objectID   = $objectID;
+        $action->customer   = $customer;
+        $action->contact    = $contact;
         $action->actor      = $actor ? $actor : $this->app->user->account;
         $action->action     = strtolower($actionType);
         $action->date       = helper::now();
         $action->comment    = trim(strip_tags($comment, "<img>")) ? $comment : '';
+        $action->extra      = $extra;
 
-        if(is_array($extra) or is_object($extra))
-        {
-            foreach($extra as $item => $value) $action->$item = $value;
-        }
-        else
-        {
-            $action->extra = $extra;
-        }
+        /* If objectType is customer or contact, save objectID as customer id or contact id. */
+        if($objectType == 'customer') $action->customer = $objectID;
+        if($objectType == 'contact')  $action->contact  = $objectID;
 
-        /* Add contact for validate. */
-        if($actionType == 'record') $action->contact = $action->extra;
+        $this->dao = $this->dao->insert(TABLE_ACTION)
+            ->data($action)
+            ->batchCheckIF($actionType == 'record', $this->config->action->require->createRecord, 'notempty')
+            ->exec();
 
-        $this->dao = $this->dao->insert(TABLE_ACTION)->data($action, $skip = 'contact');
-        if($actionType == 'record') $this->dao = $this->dao->batchCheck($this->config->action->require->createRecord, 'notempty');
-        $this->dao->autoCheck()->exec();
         return $this->dbh->lastInsertID();
     }
 
@@ -65,13 +64,9 @@ class actionModel extends model
      * @access public
      * @return void
      */
-    public function createRecord($objectType, $objectID, $customer)
+    public function createRecord($objectType, $objectID, $customer, $contact)
     {
-        $extra = new stdclass();
-        $extra->customer = $customer;
-        $extra->extra    = $this->post->contact;
-
-        return $this->create($objectType, $objectID, $action = 'record', $this->post->comment, $extra);
+        return $this->create($objectType, $objectID, $action = 'record', $this->post->comment, $extra = '', $actor = null, $customer, $contact);
     }
 
     /**
@@ -86,8 +81,13 @@ class actionModel extends model
     public function getList($objectType, $objectID, $action = '', $pager = null)
     {
         $actions = $this->dao->select('*')->from(TABLE_ACTION)
-            ->where('objectType')->eq($objectType)
-            ->andWhere('objectID')->eq($objectID)
+            ->where('1 = 1')
+            ->beginIF($objectType == 'customer')->andWhere('customer')->eq($objectID)->fi()
+            ->beginIF($objectType == 'contact')->andWhere('contact')->eq($objectID)->fi()
+            ->beginIF($objectType != 'customer' and $objectType != 'contact')
+              ->andWhere('objectType')->eq($objectType)
+              ->andWhere('objectID')->eq($objectID)
+            ->fi()
             ->beginIF($action)->andWhere('action')->eq($action)->fi()
             ->page($pager)
             ->orderBy('date, id')->fetchAll('id');
@@ -99,9 +99,8 @@ class actionModel extends model
         foreach($actions as $actionID => $action)
         {
             $action->history = isset($histories[$actionID]) ? $histories[$actionID] : array();
+            if($action->action == 'record') $action->contact = isset($contacts[$action->contact]) ? $contacts[$action->contact] : '';
             $actions[$actionID] = $action;
-
-            if($action->action == 'record') $action->contact = isset($contacts[$action->extra]) ? $contacts[$action->extra] : '';
         }
 
         return $actions;
