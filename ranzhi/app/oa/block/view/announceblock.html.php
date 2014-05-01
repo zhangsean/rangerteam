@@ -13,8 +13,8 @@
 <table class='table table-data table-hover' id='oaBlockAnnounce'>
   <?php foreach($announces as $id => $announce):?>
   <tr>
+    <td class='w-50px'><?php echo substr($announce->addedDate, 5, 5)?></td>
     <td><?php echo html::a($this->createLink('announce', 'view', "announceID=$id"), $announce->title, "data-toggle='modal'")?></td>
-    <td class='w-100px'><?php echo date('y-m-d H:i', strtotime($announce->addedDate))?></td>
   </tr>
   <?php endforeach;?>
 </table>
