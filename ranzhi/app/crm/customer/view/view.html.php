@@ -78,55 +78,53 @@
     <?php echo $this->fetch('contact', 'block', "customer={$customer->id}")?>
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->contract;?></strong></div>
-      <div class='panel-body'>
-        <table class='table table-form table-data'>
+      <table class='table table-data table-condensed'>
+        <thead>
           <tr class='text-left'>
             <th><?php echo $lang->contract->name;?></th>
             <th><?php echo $lang->contract->amount;?></th>
             <th><?php echo $lang->contract->status;?></th>
           </tr>
-          <?php foreach($contracts as $contract):?>
-          <tr>
-            <td><?php echo $contract->name;?></td>
-            <td><?php echo $contract->amount;?></td>
-            <td><?php echo $lang->contract->statusList[$contract->status];?></td>
-          </tr>
-          <?php endforeach;?>
-        </table>
-      </div>
+        </thead>
+        <?php foreach($contracts as $contract):?>
+        <tr>
+          <td><?php echo $contract->name;?></td>
+          <td><?php echo $contract->amount;?></td>
+          <td><?php echo $lang->contract->statusList[$contract->status];?></td>
+        </tr>
+        <?php endforeach;?>
+      </table>
     </div>
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->order;?></strong></div>
-      <div class='panel-body'>
-        <table class='table table-form table-data'>
+      <table class='table table-data table-condensed'>
+        <thead>
           <tr class='text-left'>
             <th><?php echo $lang->order->product;?></th>
             <th><?php echo $lang->order->plan;?></th>
             <th><?php echo $lang->order->real;?></th>
             <th><?php echo $lang->order->status;?></th>
           </tr>
-          <?php foreach($orders as $order):?>
-          <tr>
-            <td><?php echo $products[$order->product];?></td>
-            <td><?php echo $order->plan;?></td>
-            <td><?php echo $order->real;?></td>
-            <td><?php echo $lang->order->statusList[$order->status];?></td>
-          </tr>
-          <?php endforeach;?>
-        </table>
-      </div>
+        </thead>
+        <?php foreach($orders as $order):?>
+        <tr>
+          <td><?php echo $products[$order->product];?></td>
+          <td><?php echo $order->plan;?></td>
+          <td><?php echo $order->real;?></td>
+          <td><?php echo $lang->order->statusList[$order->status];?></td>
+        </tr>
+        <?php endforeach;?>
+      </table>
     </div>
     <div class='panel'>
       <div class='panel-heading'><strong><?php echo $lang->customer->address;?></strong></div>
-      <div class='panel-body'>
-        <table class='table table-form table-data'>
-          <?php foreach($addresses as $address):?>
-          <tr>
-            <td><?php echo $address->title . $lang->colon . $address->fullLocation;?></td>
-          </tr>
-          <?php endforeach;?>
-        </table>
-      </div>
+      <table class='table table-data table-condensed'>
+        <?php foreach($addresses as $address):?>
+        <tr>
+          <td><?php echo $address->title . $lang->colon . $address->fullLocation;?></td>
+        </tr>
+        <?php endforeach;?>
+      </table>
     </div>
   </div>
 </div>

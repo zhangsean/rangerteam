@@ -17,7 +17,8 @@ $(document).ready(function()
     $('body').tooltip({html: true,selector: "[data-toggle='tooltip']",container: "body"});
 
     fixTableHeader();
-    condensedForm();    
+    condensedForm();
+    setPageActions();
 
     /* Reload modal. */
     $(document).on('click', '.reloadModal', function(){$.reloadAjaxModal()});

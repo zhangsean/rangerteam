@@ -101,6 +101,12 @@ td>select{padding-left: 0;padding-right: 0}
 /* page-content */
 .page-content {padding: 0 15px;}
 
+.page-actions {text-align: center; padding: 10px 0; margin-bottom: 20px;}
+.page-actions .btn-group {margin-right: 10px}
+.page-actions.affix {background: #fff; border-top: 1px solid #ddd; bottom: 0; margin-bottom: 0; z-index: 999; box-shadow: 0 -2px 10px rgba(0,0,0,0.15)}
+body.page-actions-affix {padding-bottom: 70px}
+
+
 /* --- COMPONENTS SETTING --- */
 /* article-files */
 .article-files {display: block; background-color: #f1f1f1; padding: 0 10px;}
@@ -355,6 +361,8 @@ td #aliasLabel {display: table-row;}
 
 /* data table */
 .table-data .dropdown-menu > li > a {font-size: 12px}
+.table-data tr > td:first-child, .table-data tr > th:first-child {padding-left: 15px;}
+.table-data tr > td:last-child, .table-data tr > th:last-child {padding-right: 15px;}
 
 /* pri */
 .pri {display: inline-block; width: 20px; height: 20px; text-align: center; cursor: pointer; border: 1px solid #999; background-color: #ccc; color: #fff; margin-right: 5px; border-radius: 4px;}

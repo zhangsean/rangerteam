@@ -30,7 +30,7 @@
         <th class='w-120px'><?php commonModel::printOrderLink('mobile',   $orderBy, $vars, $lang->contact->mobile);?></th>
         <th class='w-200px'><?php commonModel::printOrderLink('email',    $orderBy, $vars, $lang->contact->email);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('qq',       $orderBy, $vars, $lang->contact->qq);?></th>
-        <th class='w-150px'><?php echo $lang->actions;?></th>
+        <th class='w-160px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

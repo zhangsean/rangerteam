@@ -13,12 +13,15 @@
 <?php include '../../common/view/header.html.php'; ?>
 <div class='col-lg-8'>
   <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}");?>
-  <div class='text-center'>
-    <?php 
+  <div class='page-actions'>
+    <?php
+    echo "<div class='btn-group'>";
     echo html::a($this->createLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $lang->order->record, "class='btn' data-toggle='modal'");
     if($order->status == 'normal') echo html::a(helper::createLink('contract', 'create', "orderID=$order->id"), $this->lang->order->sign, "class='btn btn-default'");
     if($order->status != 'normal') echo html::a('###', $this->lang->order->sign, "class='btn' disabled='disabled' class='disabled'");
+    echo '</div>';
 
+    echo "<div class='btn-group'>";
     if($order->status != 'closed')  echo html::a(inlink('assign', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal' class='btn btn-default'");
     if($order->status == 'closed')  echo html::a('###', $this->lang->assign, "data-toggle='modal' class='btn btn-default disabled' disabled");
 
@@ -27,6 +30,7 @@
     if($order->status != 'closed') echo html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "class='btn btn-default' data-toggle='modal'");
     if($order->closedReason == 'payed') echo html::a('###', $this->lang->close, "disabled='disabled' class='disabled btn'");
     if($order->closedReason != 'payed' and $order->status == 'closed') echo html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='btn activate'");
+    echo '</div>';
 
     echo html::backButton();
     ?>
@@ -47,11 +51,11 @@
           <td><?php echo $product->name;?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->order->plan;?>
+          <th><?php echo $lang->order->plan;?></th>
           <td><?php echo $order->plan;?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->order->real;?>
+          <th><?php echo $lang->order->real;?></th>
           <td><?php echo $order->real;?></td>
         </tr>
         <tr>

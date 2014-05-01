@@ -769,3 +769,42 @@ function condensedForm()
         $(this).closest('fieldset').toggleClass('collapsed');
     });
 }
+
+/**
+ * Set page actions
+ * 
+ * @access public
+ * @return void
+ */
+function setPageActions()
+{
+    var bar = $('.page-actions');
+    var barTop = bar.offset().top + bar.outerHeight();
+    var barWidth = bar.width();
+    if(bar.length)
+    {
+        $(window).scroll(fixPageActions).resize(function()
+        {
+            bar = $('.page-actions');
+            bar.removeClass('affix');
+            bar.css('width', '100%');
+            barTop = bar.offset().top + bar.outerHeight();
+            barWidth = bar.width();
+            fixPageActions();
+        });
+        fixPageActions();
+    }
+
+    function fixPageActions()
+    {
+        var $win = $(window);
+        var wH = $win.height();
+        var fixed = barTop > wH && $win.scrollTop() < (barTop - wH);
+        if(fixed)
+        {
+            bar.css('width', barWidth);
+        }
+        $('body').toggleClass('page-actions-affix');
+        bar.toggleClass('affix', fixed);
+    }
+}
