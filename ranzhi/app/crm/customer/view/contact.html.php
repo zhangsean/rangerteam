@@ -11,38 +11,34 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<table class='table table-bordered table-hover table-striped table-data'>
-  <caption class='text-right'>
-    <?php echo html::a(inlink('linkContact', "customerID=$customerID"), $lang->customer->linkContact, "class='loadInModal'")?>
-  </caption>
-  <thead>
-    <tr class='text-center'>
-      <th class='w-50px'><?php echo $lang->contact->id;?></th>
-      <th class='w-100px'><?php echo $lang->contact->realname;?></th>
-      <th><?php echo $lang->resume->dept;?></th>
-      <th><?php echo $lang->resume->title;?></th>
-      <th class='w-200px'><?php echo $lang->contact->email;?></th>
-      <th class='w-100px'><?php echo $lang->contact->phone;?></th>
-      <th class='w-100px'><?php echo $lang->contact->qq;?></th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach($contacts as $contact):?>
-    <tr class='text-center'>
-      <td><?php echo $contact->id;?></td>
-      <td>
-        <?php
-        echo $contact->realname;
-        if($contact->maker) echo " ({$lang->resume->maker})";
-        ?>
-      </td>
-      <td><?php echo $contact->dept;?></td>
-      <td><?php echo $contact->title;?></td>
-      <td><?php echo $contact->email;?></td>
-      <td><?php echo $contact->phone;?></td>
-      <td><?php echo $contact->qq;?></td>
-    </tr>
-    <?php endforeach;?>
-  </tbody>
+<table class='table table-bordered table-data'>
+  <tr class='text-center'>
+    <th class='w-50px'><?php echo $lang->contact->id;?></th>
+    <th class='w-100px'><?php echo $lang->contact->realname;?></th>
+    <th><?php echo $lang->resume->dept;?></th>
+    <th><?php echo $lang->resume->title;?></th>
+    <th class='w-200px'><?php echo $lang->contact->email;?></th>
+    <th class='w-100px'><?php echo $lang->contact->phone;?></th>
+    <th class='w-100px'><?php echo $lang->contact->qq;?></th>
+    <th class='w-70px text-middle' rowspan='<?php echo count($contacts) + 1;?>'>
+      <?php echo html::a(inlink('linkContact', "customerID=$customerID"), $lang->create, "class='loadInModal btn btn-primary' title='{$lang->customer->linkContact}'")?>
+    </th>
+  </tr>
+  <?php foreach($contacts as $contact):?>
+  <tr class='text-center'>
+    <td><?php echo $contact->id;?></td>
+    <td>
+      <?php
+      echo $contact->realname;
+      if($contact->maker) echo " ({$lang->resume->maker})";
+      ?>
+    </td>
+    <td><?php echo $contact->dept;?></td>
+    <td><?php echo $contact->title;?></td>
+    <td><?php echo $contact->email;?></td>
+    <td><?php echo $contact->phone;?></td>
+    <td><?php echo $contact->qq;?></td>
+  </tr>
+  <?php endforeach;?>
 </table>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

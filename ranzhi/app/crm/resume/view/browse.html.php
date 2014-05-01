@@ -11,16 +11,16 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<table class='table table-hover table-bordered table-data'>
-  <caption>
-    <div class='pull-right'><?php echo html::a(inlink('create', "contactID=$contact->id"), $this->lang->resume->create, "class='loadInModal'");?></div>
-  </caption>
+<table class='table table-bordered table-data'>
   <tr class='text-center'>
     <th class='w-220px'><?php echo $lang->resume->time;?></th>
     <th><?php echo $lang->resume->customer;?></th>
     <th class='w-100px'><?php echo $lang->resume->dept;?></th>
     <th><?php echo $lang->resume->title;?></th>
     <th class='w-80px'><?php echo $lang->actions;?></th>
+    <th class='w-70px text-middle' rowspan='<?php echo count($resumes) + 1;?>'>
+      <?php echo html::a(inlink('create', "contactID=$contact->id"), $lang->create, "class='loadInModal btn btn-primary' title='{$lang->resume->create}'");?>
+    </th>
   </tr>
   <?php foreach($resumes as $resume):?>
   <tr>

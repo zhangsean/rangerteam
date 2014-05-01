@@ -59,6 +59,7 @@ $lang->password       = 'Password';
 $lang->changePassword = 'Change password';
 $lang->currentPos     = 'Positon';
 $lang->categoryMenu   = 'Categories';
+$lang->basicInfo      = 'Basic Info';
 
 /* Global action items. */
 $lang->reset          = 'Reset';
@@ -78,6 +79,7 @@ $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
 $lang->search         = 'Search';
 $lang->assign         = 'Assign';
+$lang->create         = 'Add';
 $lang->activate       = 'Activate';
 $lang->view           = 'View';
 $lang->more           = 'More';

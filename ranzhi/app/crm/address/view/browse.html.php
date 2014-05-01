@@ -11,14 +11,14 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<table class='table table-hover table-bordered'>
-  <caption>
-    <div class='pull-right'><?php echo html::a(inlink('create', "objectType=$objectType&objectID=$objectID"), $lang->address->create, "class='loadInModal'")?></div>
-  </caption>
+<table class='table table-bordered table-data'>
   <tr class='text-center'>
     <th class='w-150px'><?php echo $lang->address->title;?></th>
     <th><?php echo $lang->address->location;?></th>
     <th class='w-100px'><?php echo $lang->actions;?></th>
+    <th class='w-70px text-middle' rowspan='<?php echo count($addresses) + 1;?>'>
+      <?php echo html::a(inlink('create', "objectType=$objectType&objectID=$objectID"), $lang->create, "class='loadInModal btn btn-primary' title='{$lang->address->create}'");?>
+    </th>
   </tr>
   <?php foreach($addresses as $address):?>
   <tr>
