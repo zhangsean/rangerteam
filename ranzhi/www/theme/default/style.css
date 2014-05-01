@@ -175,7 +175,7 @@ body.page-actions-fixed {padding-bottom: 70px}
 .panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
 .panel .table {margin-bottom: 0;}
 .panel-body {padding:10px;}
-.panel-body > ol {padding-left: 20px}
+.panel-body > ol {padding-left: 20px; margin-bottom: 0}
 
 /* modal */
 .modal-dialog{max-width: 100%; border: 8px solid #666; border-color: rgba(0,0,0,.25)}

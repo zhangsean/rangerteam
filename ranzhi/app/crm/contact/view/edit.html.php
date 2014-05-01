@@ -35,7 +35,7 @@
       <div class='panel-body'>
         <table class='table table-info'>
           <tr>
-            <th class='w-70px'><?php echo $lang->contact->realname;?></th>
+            <th class='w-80px'><?php echo $lang->contact->realname;?></th>
             <td><?php echo html::input('realname', $contact->realname, "class='form-control'");?></td>
           </tr>
           <tr>
