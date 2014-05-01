@@ -15,10 +15,10 @@ $lang->app->name = 'CRM';
 $lang->menu->crm = new stdclass();
 $lang->menu->crm->dashboard = 'Dashboard|dashboard|index|';
 $lang->menu->crm->order     = 'Orders|order|index|';
-$lang->menu->crm->customer  = 'Customers|customer|index|';
 $lang->menu->crm->contract  = 'Contracts|contract|index|';
-$lang->menu->crm->product   = 'Products|product|index|';
+$lang->menu->crm->customer  = 'Customers|customer|index|';
 $lang->menu->crm->contact   = 'Contact|contact|index|';
+$lang->menu->crm->product   = 'Products|product|index|';
 $lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=statusList';
 
 /* Menu of customer module. */
