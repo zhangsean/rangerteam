@@ -226,8 +226,8 @@ class orderModel extends model
             ->data($order, $skip = 'referer')
             ->autoCheck()
             ->batchCheck($this->config->order->require->edit, 'notempty')
-            ->checkIF($oldOrder->status != 'closed' or $order->status == 'closed', 'activatedBy', 'empty')
-            ->checkIF(($oldOrder->status != 'closed' or $order->status == 'closed') and $order->activatedDate != '0000-00-00 00:00:00', 'activatedDate', 'empty')
+            ->checkIF($oldOrder->status != 'closed' and $oldOrder->activatedBy == '', 'activatedBy', 'empty')
+            ->checkIF(($oldOrder->status != 'closed' and $oldOrder->activatedBy == '') and $order->activatedDate != '0000-00-00 00:00:00', 'activatedDate', 'empty')
             ->where('id')->eq($orderID)
             ->exec();
 
