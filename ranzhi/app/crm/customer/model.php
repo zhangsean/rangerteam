@@ -153,7 +153,7 @@ class customerModel extends model
         $this->loadModel('contact');
         if($this->post->newContact)
         {
-            $contact = fix::input('post')
+            $contact = fixer::input('post')
                 ->add('customer', $customerID)
                 ->add('createdBy', $this->app->user->account)
                 ->add('createdDate', helper::now())
