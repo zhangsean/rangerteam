@@ -28,7 +28,7 @@
         <th class='w-150px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->task->createdDate);?></th>
         <th class='w-90px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->task->type);?></th>
         <th class='w-90px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->task->status);?></th>
-        <th class='w-150px'><?php echo $lang->actions;?></th>
+        <th class='w-160px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
