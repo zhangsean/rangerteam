@@ -84,6 +84,54 @@ class taskModel extends model
     }
 
     /**
+     * Batch create.
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return array
+     */
+    public function batchCreate($projectID)
+    {
+        $now        = helper::now();
+        $assignedTo = '';
+        $tasks      = array();
+
+        /* Get data. */
+        foreach($this->post->name as $key => $name)
+        {
+            if(empty($name)) break;
+
+            $assignedTo = $this->post->assignedTo[$key] == 'ditto' ? $assignedTo : $this->post->assignedTo[$key];
+
+            $task = new stdclass();
+            $task->project     = $projectID;
+            $task->name        = htmlspecialchars($name);
+            $task->assignedTo  = $assignedTo;
+            $task->estimate    = (float)$this->post->estimate[$key];
+            $task->left        = $task->estimate;
+            $task->deadline    = $this->post->deadline[$key] ? $this->post->deadline[$key] : '0000-00-00';
+            $task->desc        = htmlspecialchars($this->post->desc[$key]);
+            $task->pri         = $this->post->pri[$key];
+            $task->status      = 'wait';
+            $task->createdBy   = $this->app->user->account;
+            $task->createdDate = $now;
+
+            if($task->assignedTo) $task->assignedDate = $now;
+
+            $tasks[] = $task;
+        }
+
+        $taskIDList = array();
+        foreach($tasks as $task)
+        {
+            $this->dao->insert(TABLE_TASK)->data($task)->autoCheck()->exec();
+            if(!dao::isError()) $taskIDList[] = $this->dao->lastInsertID();
+        }
+
+        return $taskIDList;
+    }
+
+    /**
      * Update a task.
      * 
      * @param  int    $taskID 

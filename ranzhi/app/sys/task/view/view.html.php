@@ -63,21 +63,6 @@
           <th><?php echo $lang->task->pri;?></th>
           <td><?php echo $lang->task->priList[$task->pri];?></td>
         </tr>
-      </table>
-    </div>
-  </div>
-  <div class='panel'>
-    <div class='panel-heading'><strong><?php echo $lang->task->workInfo?></strong></div>
-    <div class='panel-body'>
-      <table class='table table-info'>
-        <tr>
-          <th class='w-80px'><?php echo $lang->task->estStarted;?></th>
-          <td><?php echo formatTime($task->estStarted);?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->task->realStarted;?></th>
-          <td><?php echo formatTime($task->realStarted);?></td>
-        </tr>
         <tr>
           <th><?php echo $lang->task->deadline;?></th>
           <td><?php echo formatTime($task->deadline);?></td>

@@ -18,6 +18,8 @@ $lang->task->create = 'Create';
 $lang->task->edit   = 'Update';
 $lang->task->finish = 'Finish';
 
+$lang->task->batchCreate = 'Batch Create';
+
 $lang->task->id             = 'ID';
 $lang->task->project        = 'Project';
 $lang->task->customer       = 'Customer';
@@ -62,6 +64,7 @@ $lang->task->lastEdited     = 'Last Edited';
 $lang->task->hour           = 'Hour';
 $lang->task->leftThisTime   = 'Left';
 $lang->task->date           = 'Date';
+$lang->task->ditto          = 'Ditto';
 
 $lang->task->lblPri = 'P';
 
@@ -88,5 +91,4 @@ $lang->task->reasonList['done']   = 'Done';
 $lang->task->reasonList['cancel'] = 'Canceled';
 
 $lang->task->basicInfo = 'Basic Info';
-$lang->task->workInfo  = 'Work Info';
 $lang->task->life      = 'Task Life';

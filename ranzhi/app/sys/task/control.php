@@ -86,6 +86,30 @@ class task extends control
     }
 
     /**
+     * Batch create task.
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return void
+     */
+    public function batchCreate($projectID)
+    {
+        if($_POST)
+        {
+            $taskIDList = $this->task->batchCreate($projectID);
+
+            $this->loadModel('action');
+            foreach($taskIDList as $taskID) $this->action->create('task', $taskID, 'Created');
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "projectID=$projectID")));
+        }
+
+        $this->view->moduleMenu = $this->loadModel('project')->getLeftMenus($projectID );
+        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
+
+    /**
      * Edit a task.
      * 
      * @param  int    $taskID 
@@ -126,9 +150,10 @@ class task extends control
     {
         $task = $this->task->getByID($taskID);
 
-        $this->view->projects = $this->projects;
-        $this->view->users    = $this->loadModel('user')->getPairs();
-        $this->view->task     = $task;
+        $this->view->moduleMenu = $this->loadModel('project')->getLeftMenus($task->project);
+        $this->view->projects   = $this->project->getPairs();
+        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->task       = $task;
 
         $this->display();
     }

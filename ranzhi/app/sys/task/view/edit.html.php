@@ -66,21 +66,6 @@
             <th><?php echo $lang->task->pri;?></th>
             <td><?php echo html::select('pri', $lang->task->priList, $task->pri, "class='form-control'")?></td>
           </tr>
-        </table>
-      </div>
-    </div>
-    <div class='panel'>
-      <div class='panel-heading'><strong><?php echo $lang->task->workInfo?></strong></div>
-      <div class='panel-body'>
-        <table class='table table-info'>
-          <tr>
-            <th class='w-80px'><?php echo $lang->task->estStarted;?></th>
-            <td><?php echo html::input('estStarted', formatTime($task->estStarted), "class='form-control form-date'");?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->task->realStarted;?></th>
-            <td><?php echo html::input('realStarted', formatTime($task->realStarted), "class='form-control form-date'");?></td>
-          </tr>
           <tr>
             <th><?php echo $lang->task->deadline;?></th>
             <td><?php echo html::input('deadline', formatTime($task->deadline), "class='form-control form-date'");?></td>

@@ -18,6 +18,8 @@ $lang->task->create = '新建任务';
 $lang->task->edit   = '编辑任务';
 $lang->task->finish = '任务完成';
 
+$lang->task->batchCreate = '批量添加';
+
 $lang->task->id             = '编号';
 $lang->task->project        = '所属项目';
 $lang->task->customer       = '所属客户';
@@ -62,6 +64,7 @@ $lang->task->lastEdited     = '最后编辑';
 $lang->task->hour           = '小时';
 $lang->task->leftThisTime   = '剩余';
 $lang->task->date           = '日期';
+$lang->task->ditto          = '同上';
 
 $lang->task->lblPri = 'P';
 
@@ -88,5 +91,4 @@ $lang->task->reasonList['done']   = '已完成';
 $lang->task->reasonList['cancel'] = '已取消';
 
 $lang->task->basicInfo = '基本信息';
-$lang->task->workInfo  = '工时信息';
 $lang->task->life      = '任务的一生';
