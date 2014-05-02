@@ -10,11 +10,11 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../common/view/header.lite.html.php';?>
+<?php include '../../common/view/header.modal.html.php';?>
 <div class='page-user-control'>
   <div class='panel panel-pure'>
     <div class='panel-body'>
-      <table class='table table-form'>
+      <table class='table table-info'>
         <tr>
           <th style='width:100px;'><?php echo $lang->user->realname;?></th>
           <td><?php echo $user->realname;?></td>
@@ -49,7 +49,7 @@
         </tr>
         <tr>
           <th></th>
-          <td><?php echo html::a(inlink('edit'), "<i class='icon-pencil'></i> " . $lang->user->editProfile, "class='btn btn-primary'");?></td>
+          <td><?php echo html::a(inlink('edit'), "<i class='icon-pencil'></i> " . $lang->user->editProfile, "class='btn btn-primary loadInModal'");?></td>
         </tr>
       </table>
     </div>

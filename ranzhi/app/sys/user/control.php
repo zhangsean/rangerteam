@@ -279,6 +279,7 @@ class user extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
         }
 
+        $this->view->title    = $this->lang->user->edit;
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptAdminLink'));
         $this->view->depts    = $this->tree->getOptionMenu('dept');
         $this->view->user     = $this->user->getByAccount($account);
