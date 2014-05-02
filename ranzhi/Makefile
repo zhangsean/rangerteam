@@ -9,7 +9,8 @@ ranzhi:
 	cp -fr app ranzhi/
 	cp -fr bin ranzhi/
 	cp -fr config ranzhi/ && rm -fr ranzhi/config/my.php
-	cp -fr db ranzhi/
+	mkdir ranzhi/db
+	cp -fr db/ranzhi.sql ranzhi/db/
 	cp -fr doc ranzhi/ && rm -fr ranzhi/doc/phpdoc && rm -fr ranzhi/doc/doxygen
 	cp -fr framework ranzhi/
 	cp -fr lib ranzhi/
@@ -40,4 +41,4 @@ ranzhi:
 	rm  ranzhi/www/theme/zui/css/theme.cash.css
 	rm  ranzhi/www/theme/zui/css/theme.sns.css
 	# zip it.
-	zip -rm -9 RanZhi.$(VERSION).zip ranzhi
+	zip -rm -9 ranzhi.$(VERSION).zip ranzhi
