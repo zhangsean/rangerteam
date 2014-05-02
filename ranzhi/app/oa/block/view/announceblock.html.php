@@ -13,7 +13,7 @@
 <table class='table table-data table-hover' id='oaBlockAnnounce'>
   <?php foreach($announces as $id => $announce):?>
   <tr>
-    <td class='w-50px'><?php echo substr($announce->addedDate, 5, 5)?></td>
+    <td class='w-60px'><?php echo substr($announce->addedDate, 5, 5)?></td>
     <td><?php echo html::a($this->createLink('announce', 'view', "announceID=$id"), $announce->title, "data-toggle='modal'")?></td>
   </tr>
   <?php endforeach;?>
