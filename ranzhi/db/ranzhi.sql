@@ -50,7 +50,6 @@ CREATE TABLE `crm_contract` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `customer` mediumint(8) unsigned NOT NULL,
   `name` char(100) NOT NULL,
-  `code` char(30) NOT NULL,
   `amount` float(12,2) NOT NULL,
   `items` text NOT NULL,
   `begin` date NOT NULL,
@@ -76,12 +75,15 @@ CREATE TABLE `crm_contract` (
   `editedDate` datetime NOT NULL,
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
+  KEY `name` (`name`),
   KEY `customer` (`customer`),
+  KEY `amount` (`amount`),
+  KEY `delivery` (`delivery`),
+  KEY `return` (`return`),
   KEY `begin` (`begin`),
   KEY `end` (`end`),
   KEY `status` (`status`),
-  KEY `finishedBy` (`finishedBy`),
-  KEY `canceledBy` (`canceledBy`)
+  KEY `handlers` (`handlers`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `crm_contractOrder`;
 CREATE TABLE `crm_contractOrder` (
@@ -120,8 +122,6 @@ CREATE TABLE `crm_customer` (
   KEY `area` (`area`),
   KEY `status` (`status`),
   KEY `level` (`level`),
-  KEY `createdBy` (`createdBy`),
-  KEY `contactedBy` (`contactedBy`),
   KEY `contactedDate` (`contactedDate`),
   KEY `nextDate` (`nextDate`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -152,12 +152,13 @@ CREATE TABLE `crm_order` (
   PRIMARY KEY (`id`),
   KEY `product` (`product`),
   KEY `customer` (`customer`),
+  KEY `plan` (`plan`),
+  KEY `real` (`real`),
   KEY `status` (`status`),
   KEY `createdBy` (`createdBy`),
   KEY `assignedTo` (`assignedTo`),
   KEY `closedBy` (`closedBy`),
   KEY `closedReason` (`closedReason`),
-  KEY `contactedBy` (`contactedBy`),
   KEY `contactedDate` (`contactedDate`),
   KEY `nextDate` (`nextDate`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -175,7 +176,9 @@ CREATE TABLE `crm_resume` (
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `contact` (`contact`),
-  KEY `customer` (`customer`)
+  KEY `customer` (`customer`),
+  KEY `left` (`left`),
+  KEY `maker` (`maker`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `crm_service`;
 CREATE TABLE `crm_service` (
@@ -273,7 +276,6 @@ CREATE TABLE `sys_action` (
   `date` datetime NOT NULL,
   `comment` text NOT NULL,
   `extra` varchar(255) NOT NULL,
-  `efforted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `customer` (`customer`),
   KEY `contact` (`contact`),
@@ -335,7 +337,8 @@ CREATE TABLE `sys_entry` (
   `position` varchar(10) NOT NULL DEFAULT 'default',
   `visible` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `order` tinyint(5) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `code` (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_file`;
 CREATE TABLE `sys_file` (
@@ -364,7 +367,8 @@ CREATE TABLE `sys_history` (
   `old` text NOT NULL,
   `new` text NOT NULL,
   `diff` mediumtext NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `action` (`action`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_lang`;
 CREATE TABLE `sys_lang` (
@@ -391,7 +395,10 @@ CREATE TABLE `sys_product` (
   `editedBy` varchar(30) NOT NULL,
   `editedDate` datetime NOT NULL,
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`),
+  KEY `type` (`type`),
+  KEY `status` (`status`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_sso`;
 CREATE TABLE `sys_sso` (
@@ -400,7 +407,8 @@ CREATE TABLE `sys_sso` (
   `entry` mediumint(8) unsigned NOT NULL,
   `token` char(32) NOT NULL,
   `time` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `sid` (`sid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_task`;
 CREATE TABLE `sys_task` (
@@ -438,6 +446,11 @@ CREATE TABLE `sys_task` (
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `statusOrder` (`statusCustom`),
+  KEY `assignedTo` (`assignedTo`),
+  KEY `createdBy` (`createdBy`),
+  KEY `finishedBy` (`finishedBy`),
+  KEY `closedBy` (`closedBy`),
+  KEY `closedReason` (`closedReason`),
   KEY `type` (`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_user`;
