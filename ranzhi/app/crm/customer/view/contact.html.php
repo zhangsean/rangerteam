@@ -36,7 +36,7 @@
     <td><?php echo $contact->dept;?></td>
     <td><?php echo $contact->title;?></td>
     <td><?php echo $contact->email;?></td>
-    <td><?php echo $contact->phone;?></td>
+    <td><?php echo $contact->phone . ' ' . $contact->mobile;?></td>
     <td><?php echo $contact->qq;?></td>
   </tr>
   <?php endforeach;?>
