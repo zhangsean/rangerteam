@@ -37,10 +37,12 @@
             <div class='form-group'>
               <span class='col-sm-8'>
                 <select name='order[]' class='select-order form-control'>
-                <?php foreach($orders as $order):?>
-                <option value="<?php echo $order->id;?>" data-real="<?php echo $order->plan;?>"><?php echo $order->title;?></option>
-                <?php endforeach;?>
-                 </select>
+                  <option value=''></option>
+                  <?php foreach($orders as $order):?>
+                  <?php $selected = $orderID == $order->id ? 'selected' : ''; ?>
+                  <option value="<?php echo $order->id;?>" <?php echo $selected;?>  data-real="<?php echo $order->plan;?>"><?php echo $order->title;?></option>
+                  <?php endforeach;?>
+                </select>
               </span>
               <span class='col-sm-3'><?php echo html::input('real[]', $currentOrder->plan, "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?></span>
               <span class='col-sm-1'><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='minus'");?></span>

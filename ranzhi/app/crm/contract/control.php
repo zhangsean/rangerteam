@@ -51,12 +51,12 @@ class contract extends control
     /**
      * Create contract. 
      * 
-     * @param  int    $orderID 
      * @param  int    $customerID
+     * @param  int    $orderID 
      * @access public
      * @return void
      */
-    public function create($orderID = 0, $customerID = 0)
+    public function create($customerID = 0, $orderID = 0)
     {
         if($_POST)
         {
@@ -72,10 +72,11 @@ class contract extends control
         {
             $this->view->customer     = $customerID;
             $this->view->currentOrder = $this->loadModel('order')->getByID($orderID);
-            $this->view->orders       = array('' => '') + $this->order->getList($mode = 'query', "customer={$customerID} and order.status = 'normal'");
+            $this->view->orders       = $this->order->getList($mode = 'query', "customer={$customerID} and o.status = 'normal'");
         }
 
         $this->view->title      = $this->lang->contract->create;
+        $this->view->orderID    = $orderID;
         $this->view->customers  = $this->loadModel('customer')->getPairs();
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->display();
