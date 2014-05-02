@@ -132,16 +132,23 @@ $lang->dept->edit       = 'Edit Dept';
 $lang->dept->children   = 'Children';
 $lang->dept->moderators = 'Moderator';
   
-$lang->user->roleList['']       = ''; 
-$lang->user->roleList['dev']    = 'Developer';
-$lang->user->roleList['qa']     = 'Tester';
-$lang->user->roleList['pm']     = 'Project manager';
-$lang->user->roleList['po']     = 'Product manager';
-$lang->user->roleList['td']     = 'Technical director';
-$lang->user->roleList['pd']     = 'Product director';
-$lang->user->roleList['qd']     = 'Quality director';
-$lang->user->roleList['top']    = 'Top manager';
-$lang->user->roleList['others'] = 'Others';
+$lang->user->roleList['']           = ''; 
+$lang->user->roleList['dev']        = 'Developer';
+$lang->user->roleList['pm']         = 'Project Manager';
+$lang->user->roleList['market']     = 'Marketing';
+$lang->user->roleList['sale']       = 'Sale';
+$lang->user->roleList['hr']         = 'HR';
+$lang->user->roleList['office']     = 'Office';
+$lang->user->roleList['service']    = 'Service';
+$lang->user->roleList['support']    = 'Support';
+$lang->user->roleList['marketmgr']  = 'Marketing Manager';
+$lang->user->roleList['salemgr']    = 'Sale Manager';
+$lang->user->roleList['hrmgr']      = 'HR Manager';
+$lang->user->roleList['adminmgr']   = 'Office Manager';
+$lang->user->roleList['servicemgr'] = 'Service Manager';
+$lang->user->roleList['supportmgr'] = 'Support Manager';
+$lang->user->roleList['top']        = 'Top manager';
+$lang->user->roleList['others']     = 'Others';
 
 $lang->user->mailContent = <<<EOT
 <html>
