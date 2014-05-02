@@ -22,12 +22,16 @@
       <div class='panel-body'><?php echo $customer->intension;?></div>
     </div>
     <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}")?>
-    <div class='text-center'>
+    <div class='page-actions'>
       <?php
+      echo "<div class='btn-group'>";
       echo html::a($this->createLink('action', 'createRecord', "objectType=customer&objectID={$customer->id}&customer={$customer->id}"), $lang->customer->record, "class='btn' data-toggle='modal'");
       echo html::a(inlink('edit', "customerID=$customer->id"), $lang->edit, "class='btn'");
       echo html::a(inlink('delete', "customerID=$customer->id"), $lang->delete, "class='deleter btn'");
-      echo html::a(inlink('browse'), $lang->goback, "class='btn'");
+      echo '</div>';
+      echo "<div class='btn-group'>";
+      echo html::backButton();
+      echo '</div>';
       ?>
     </div>
   </div>

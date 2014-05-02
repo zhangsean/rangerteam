@@ -34,9 +34,9 @@
              </tr>
            </table>
          </div>
-         <div class='panel-footer'><?php echo html::submitButton() . html::backButton();?></div>
        </div>
        <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}")?>
+       <div class='page-actions'><?php echo html::submitButton() . html::backButton();?></div>
      </div>
      <div class='col-md-4'>  
        <div class='panel'>
