@@ -72,7 +72,7 @@
   <div class='col-md-4'>
     <div class='panel'>
       <div class='panel-heading'>
-        <strong><?php echo $lang->contract->info;?></strong>
+        <strong><?php echo $lang->basicInfo;?></strong>
       </div>
       <div class='panel-body'>
         <table class='table table-form'>
@@ -113,7 +113,7 @@
     </div>
     <div class='panel'>
       <div class='panel-heading'>
-        <strong><?php echo $lang->contract->life;?></strong>
+        <strong><?php echo $lang->contract->lifetime;?></strong>
       </div>
       <div class='panel-body'>
         <table class='table table-form table-data' id='contractLife'>

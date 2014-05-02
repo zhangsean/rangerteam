@@ -46,6 +46,7 @@ $lang->contract->create     = 'Create Contract';
 $lang->contract->edit       = 'Edit';
 $lang->contract->setting    = 'Settings';
 $lang->contract->uploadFile = 'Upload Files';
+$lang->contract->lifetime   = 'Lifetime';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = 'Pending';
@@ -66,8 +67,6 @@ $lang->contract->codeUnitList['m']     = 'Month';
 $lang->contract->codeUnitList['d']     = 'Day';
 $lang->contract->codeUnitList['fix']   = 'Fix';
 $lang->contract->codeUnitList['input'] = 'Input';
-
-$lang->contract->info = 'Info';
 
 $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = 'Turnover';

@@ -47,17 +47,9 @@ $lang->block->default['crm']['b2']['params']['num']     = 15;
 $lang->block->default['crm']['b2']['params']['orderBy'] = 'id_asc';
 $lang->block->default['crm']['b2']['params']['status']  = array();
 
-$lang->block->default['crm']['b3']['name']    = 'My Task';
-$lang->block->default['crm']['b3']['blockID'] = 'task';
-$lang->block->default['crm']['b3']['type']    = 'system';
-
-$lang->block->default['crm']['b3']['params']['num']     = 15;
-$lang->block->default['crm']['b3']['params']['orderBy'] = 'id_asc';
-$lang->block->default['crm']['b3']['params']['status']  = array();
-
 $lang->block->default['sys']['b1'] = $lang->block->default['oa']['b1'];
 $lang->block->default['sys']['b1']['entryID'] = 'oa';
-$lang->block->default['sys']['b2'] = $lang->block->default['crm']['b3'];
+$lang->block->default['sys']['b2'] = $lang->block->default['crm']['b2'];
 $lang->block->default['sys']['b2']['entryID'] = 'crm';
 $lang->block->default['sys']['b3'] = $lang->block->default['crm']['b1'];
 $lang->block->default['sys']['b3']['entryID'] = 'crm';

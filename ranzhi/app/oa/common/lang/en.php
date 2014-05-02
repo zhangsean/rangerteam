@@ -14,7 +14,7 @@ $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = 'Dashboard|dashboard|index|';
-$lang->menu->oa->task      = 'Task|task|index|';
+$lang->menu->oa->project   = 'Project|project|index|';
 $lang->menu->oa->announce  = 'Announce|announce|index|';
 $lang->menu->oa->doc       = 'Document|doc|index|';
 

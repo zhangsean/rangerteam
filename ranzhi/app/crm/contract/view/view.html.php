@@ -94,7 +94,7 @@
   </div>
   <div class='panel'>
     <div class='panel-heading'>
-      <strong><?php echo $lang->contract->life;?></strong>
+      <strong><?php echo $lang->contract->lifetime;?></strong>
     </div>
     <div class='panel-body'>
       <table class='table table-info' id='contractLife'>
