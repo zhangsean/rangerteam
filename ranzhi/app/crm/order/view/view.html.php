@@ -66,6 +66,14 @@
           <th><?php echo $lang->order->status;?></th>
           <td><?php echo $lang->order->statusList[$order->status];?></td>
         </tr>
+        <?php if($order->status == 'signed' and $contract):?>
+        <tr>
+          <th><?php echo $lang->contract->common;?></th>
+          <td>
+            <?php echo html::a($this->createLink('contract', 'view', "contractID={$contract->id}"), $contract->name);?>
+          </td>
+        </tr>
+        <?php endif;?>
       </table>
     </div>
   </div> 
@@ -100,13 +108,5 @@
       </table>
     </div>
   </div>
-  <?php if($contract):?>
-  <div class='panel'>
-    <div class='panel-heading'><strong><?php echo $lang->contract->common;?></strong></div>
-    <div class='panel-body'>
-      <?php echo html::a($this->createLink('contract', 'view', "contractID={$contract->id}"), $contract->name);?>
-    </div>
-  </div>
-  <?php endif;?>
 </div>
 <?php include '../../common/view/footer.html.php';?>
