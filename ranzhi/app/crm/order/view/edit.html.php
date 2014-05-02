@@ -16,14 +16,10 @@
 <form method='post' id='ajaxForm' class='form-condensed'>
   <div class="col-lg-8">
     <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}");?>
-     <div class='page-actions'>
-      <div class="btn-group"> 
-        <?php echo html::submitButton();?>
-      </div>
-      <div class="btn-group"> 
-        <?php echo html::backButton();?>
-        <?php echo html::hidden('referer', $this->server->http_referer);?>
-      </div>
+    <div class='page-actions'>
+      <?php echo html::submitButton();?>
+      <?php echo html::backButton();?>
+      <?php echo html::hidden('referer', $this->server->http_referer);?>
     </div>
   </div>
  <div class="col-lg-4">
