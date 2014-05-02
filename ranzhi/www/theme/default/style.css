@@ -178,7 +178,7 @@ body.page-actions-fixed {padding-bottom: 70px}
 .panel-body > ol {padding-left: 20px; margin-bottom: 0}
 
 /* modal */
-.modal-dialog{max-width: 100%; border: 8px solid #666; border-color: rgba(0,0,0,.25)}
+.modal .modal-dialog{max-width: 100%; border: 8px solid #666; border-color: rgba(0,0,0,.25)}
 h4.modal-title, .modal-title {font-size: 14px}
 
 /* modal with iframe */
