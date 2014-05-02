@@ -46,7 +46,7 @@
         <td><?php echo html::input("estimate[$i]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'");?></td>
       </tr>
       <?php endfor;?>
-      <tr><td colspan='8' class='text-center'><?php echo html::submitButton() . html::backButton();?></td></tr>
+      <tr><td colspan='7' class='text-center'><?php echo html::submitButton() . html::backButton();?></td></tr>
     </table>
   </div>
 </form>
