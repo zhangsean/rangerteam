@@ -178,7 +178,8 @@ body.page-actions-fixed {padding-bottom: 70px}
 .panel-body > ol {padding-left: 20px; margin-bottom: 0}
 
 /* modal */
-.modal .modal-dialog{max-width: 100%; border: 8px solid #666; border-color: rgba(0,0,0,.25)}
+.modal .modal-dialog {max-width: 100%; border: 8px solid #666; border-color: rgba(0,0,0,.25)}
+.modal .modal-header {padding: 10px 15px}
 h4.modal-title, .modal-title {font-size: 14px}
 
 /* modal with iframe */
@@ -189,6 +190,7 @@ h4.modal-title, .modal-title {font-size: 14px}
 .modal-loading .modal-dialog {margin-top: -100%!important;}
 .modal:before {font-family: ZenIcon; content: "\e6eb"; position: absolute; display: none; text-align: center; font-size: 56px; color: #fff; top: 35%; width: 100%; -moz-animation: spin 2s infinite linear; -o-animation: spin 2s infinite linear; -webkit-animation: spin 2s infinite linear; animation: spin 2s infinite linear; transition:none;}
 .modal.modal-loading:before {display: block;}
+.modal-body > .table:last-child {margin: 0}
 @media (max-width: 991px) {.modal-dialog{padding: 0;}}
 
 /* style of text */
