@@ -68,7 +68,7 @@
         <div class='panel-body'>
           <table class='table table-info'>
             <tr>
-              <th><?php echo $lang->order->createdBy;?></th>
+              <th class='w-70px'><?php echo $lang->order->createdBy;?></th>
               <td><?php echo $order->createdBy;?></td>
             </tr>
             <tr>
@@ -98,14 +98,6 @@
             <tr>
               <th><?php echo $lang->order->closedDate;?></th>
               <td><?php echo html::input('closedDate', formatTime($order->closedDate), "class='form-control form-datetime'");?></td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->order->activatedBy;?></th>
-              <td><?php echo html::select('activatedBy', $users, $order->activatedBy, "class='form-control'");?></td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->order->activatedDate;?></th>
-              <td><?php echo html::input('activatedDate', formatTime($order->activatedDate), "class='form-control form-datetime'");?></td>
             </tr>
           </table>
         </div>

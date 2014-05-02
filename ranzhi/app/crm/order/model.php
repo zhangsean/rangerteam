@@ -209,7 +209,6 @@ class orderModel extends model
             ->setDefault('nextDate', '0000-00-00')
             ->setDefault('signedDate', '0000-00-00')
             ->setDefault('closedDate', '0000-00-00 00:00:00')
-            ->setDefault('activatedDate', '0000-00-00 00:00:00')
 
             ->setIF($this->post->signedBy, 'status', 'signed')
             ->setIF($this->post->closedBy, 'status', 'closed')
@@ -226,8 +225,6 @@ class orderModel extends model
             ->data($order, $skip = 'referer')
             ->autoCheck()
             ->batchCheck($this->config->order->require->edit, 'notempty')
-            ->checkIF($oldOrder->status != 'closed' and $oldOrder->activatedBy == '', 'activatedBy', 'empty')
-            ->checkIF(($oldOrder->status != 'closed' and $oldOrder->activatedBy == '') and $order->activatedDate != '0000-00-00 00:00:00', 'activatedDate', 'empty')
             ->where('id')->eq($orderID)
             ->exec();
 
@@ -269,18 +266,15 @@ class orderModel extends model
      */
     public function activate($orderID)
     {
-        $order = $this->getByID($orderID);
-        $now   = helper::now();
         $order = fixer::input('post')
-            ->add('activatedDate', $now)
+            ->add('activatedDate', helper::now())
             ->add('activatedBy', $this->app->user->account)
-            ->add('assignedTo', '')
             ->add('closedBy', '')
             ->add('closedReason', '')
             ->setDefault('status', 'normal')
             ->get();
 
-        $this->dao->update(TABLE_ORDER)->data($order)->autoCheck()->where('id')->eq($orderID)->exec();
+        $this->dao->update(TABLE_ORDER)->data($order, $skip='uid, comment')->autoCheck()->where('id')->eq($orderID)->exec();
 
         return !dao::isError();
     }
@@ -330,7 +324,7 @@ class orderModel extends model
 
         if($order->status != 'closed') $menu .= html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "data-toggle='modal'");
         if($order->closedReason == 'payed' or $order->status == 'closed') $menu .= html::a('###', $this->lang->close, "disabled='disabled' class='disabled'");
-        if($order->closedReason != 'payed' and $order->status == 'closed') $menu .= html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='reload'");
+        if($order->closedReason != 'payed' and $order->status == 'closed') $menu .= html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "data-toggle='modal'");
         if($order->closedReason == 'payed' or $order->status != 'closed') $menu .= html::a('###', $this->lang->activate, "disabled='disabled' class='disabled'");
 
         return $menu;

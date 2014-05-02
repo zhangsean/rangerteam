@@ -46,6 +46,7 @@ $lang->order->edit          = '编辑订单';
 $lang->order->view          = '订单详情';
 $lang->order->close         = '关闭订单';
 $lang->order->sign          = '签约';
+$lang->order->activate      = '激活';
 
 $lang->order->statusList['normal'] = '正常';
 $lang->order->statusList['signed'] = '已签约';
