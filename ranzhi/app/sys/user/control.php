@@ -165,7 +165,8 @@ class user extends control
     public function profile()
     {
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
-        $this->view->user = $this->user->getByAccount($this->app->user->account);
+        $this->view->title = $this->lang->user->profile;
+        $this->view->user  = $this->user->getByAccount($this->app->user->account);
         $this->display();
     }
 

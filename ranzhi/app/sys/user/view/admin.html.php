@@ -11,14 +11,7 @@
  */
 ?>
 <?php
-if(RUN_MODE == 'front' && strpos($app->getModuleRoot(), 'sys') == false)
-{
-    include $app->getModuleRoot() . 'common/view/header.html.php';
-}
-else
-{
-    include '../../common/view/header.admin.html.php';
-}
+include '../../common/view/header.admin.html.php';
 include '../../common/view/treeview.html.php';
 js::set('deptID', $deptID);
 ?>
@@ -110,14 +103,4 @@ js::set('deptID', $deptID);
     </div>
   </div>
 </div>
-
-<?php
-if(RUN_MODE == 'front' && strpos($app->getModuleRoot(), 'sys') == false)
-{
-    include $app->getModuleRoot() . 'common/view/footer.html.php';
-}
-else
-{
-    include '../../common/view/footer.admin.html.php';
-}
-?>
+<?php include '../../common/view/footer.admin.html.php';?>
