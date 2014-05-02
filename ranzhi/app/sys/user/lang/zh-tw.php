@@ -132,16 +132,23 @@ $lang->dept->edit       = '維護部門';
 $lang->dept->children   = '子部門';
 $lang->dept->moderators = '部門經理';
 
-$lang->user->roleList['']       = ''; 
-$lang->user->roleList['dev']    = '研發';
-$lang->user->roleList['qa']     = '測試';
-$lang->user->roleList['pm']     = '項目經理';
-$lang->user->roleList['po']     = '產品經理';
-$lang->user->roleList['td']     = '研發主管';
-$lang->user->roleList['pd']     = '產品主管';
-$lang->user->roleList['qd']     = '測試主管';
-$lang->user->roleList['top']    = '高層管理';
-$lang->user->roleList['others'] = '其他';
+$lang->user->roleList['']           = ''; 
+$lang->user->roleList['dev']        = '研發';
+$lang->user->roleList['pm']         = '項目經理';
+$lang->user->roleList['market']     = '市場';
+$lang->user->roleList['sale']       = '銷售';
+$lang->user->roleList['hr']         = '人事';
+$lang->user->roleList['office']     = '行政';
+$lang->user->roleList['service']    = '客服';
+$lang->user->roleList['support']    = '技術支持';
+$lang->user->roleList['marketmgr']  = '市場主管';
+$lang->user->roleList['salemgr']    = '銷售經理';
+$lang->user->roleList['hrmgr']      = '人事主管';
+$lang->user->roleList['adminmgr']   = '行政主管';
+$lang->user->roleList['servicemgr'] = '客服主管';
+$lang->user->roleList['supportmgr'] = '技術支持主管';
+$lang->user->roleList['top']        = '高層管理';
+$lang->user->roleList['others']     = '其他';
 
 $lang->user->mailContent = <<<EOT
 <html>

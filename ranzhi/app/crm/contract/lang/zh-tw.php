@@ -46,6 +46,7 @@ $lang->contract->create     = '創建合同';
 $lang->contract->edit       = '編輯合同';
 $lang->contract->setting    = '系統設置';
 $lang->contract->uploadFile = '上傳附件';
+$lang->contract->lifetime   = '合同的一生';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = '等待交付';
@@ -66,9 +67,6 @@ $lang->contract->codeUnitList['m']     = '月';
 $lang->contract->codeUnitList['d']     = '日';
 $lang->contract->codeUnitList['fix']   = '固定值';
 $lang->contract->codeUnitList['input'] = '輸入值';
-
-$lang->contract->info = '簽約信息';
-$lang->contract->life = '合同的一生';
 
 $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = '成交金額';

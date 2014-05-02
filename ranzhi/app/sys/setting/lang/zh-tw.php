@@ -34,3 +34,7 @@ $lang->setting->currentLang = '適用當前語言';
 $lang->setting->placeholder = new stdclass();
 $lang->setting->placeholder->key   = '變數名';
 $lang->setting->placeholder->value = '自定義顯示值';
+
+$lang->setting->placeholder->typeList  = '變數名，長度為1~30字元';
+$lang->setting->placeholder->sizeList  = '變數名，必須為0~255的數字';
+$lang->setting->placeholder->levelList = '變數名，長度為1~10字元';
