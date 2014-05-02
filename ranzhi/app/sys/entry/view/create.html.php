@@ -74,7 +74,7 @@ include '../../common/view/header.admin.html.php';
         </tr>
         <tr>
           <th><?php echo $lang->entry->logo;?></th>
-          <td><?php echo html::file('files');?></td>
+          <td><?php echo html::file('files', "class='form-control'");?></td>
         </tr>
         <tr>
           <td></td><td><?php echo html::submitButton() . html::backButton();?></td>
