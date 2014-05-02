@@ -31,12 +31,28 @@ $lang->block->default['oa']['b1']['type']    = 'system';
 
 $lang->block->default['oa']['b1']['params']['num'] = 15;
 
+$lang->block->default['oa']['b2']['name']    = '由我创建的任务';
+$lang->block->default['oa']['b2']['blockID'] = 'myCreatedTask';
+$lang->block->default['oa']['b2']['type']    = 'system';
+
+$lang->block->default['oa']['b2']['params']['num']     = 15;
+$lang->block->default['oa']['b2']['params']['orderBy'] = 'id_desc';
+$lang->block->default['oa']['b2']['params']['status']  = array();
+
+$lang->block->default['oa']['b3']['name']    = '指派给我的任务';
+$lang->block->default['oa']['b3']['blockID'] = 'assignedMeTask';
+$lang->block->default['oa']['b3']['type']    = 'system';
+
+$lang->block->default['oa']['b3']['params']['num']     = 15;
+$lang->block->default['oa']['b3']['params']['orderBy'] = 'id_desc';
+$lang->block->default['oa']['b3']['params']['status']  = array();
+
 $lang->block->default['crm']['b1']['name']    = '我的订单';
 $lang->block->default['crm']['b1']['blockID'] = 'order';
 $lang->block->default['crm']['b1']['type']    = 'system';
 
 $lang->block->default['crm']['b1']['params']['num']     = 15;
-$lang->block->default['crm']['b1']['params']['orderBy'] = 'id_asc';
+$lang->block->default['crm']['b1']['params']['orderBy'] = 'id_desc';
 $lang->block->default['crm']['b1']['params']['status']  = array();
 
 $lang->block->default['crm']['b2']['name']    = '我的合同';
@@ -44,7 +60,7 @@ $lang->block->default['crm']['b2']['blockID'] = 'contract';
 $lang->block->default['crm']['b2']['type']    = 'system';
 
 $lang->block->default['crm']['b2']['params']['num']     = 15;
-$lang->block->default['crm']['b2']['params']['orderBy'] = 'id_asc';
+$lang->block->default['crm']['b2']['params']['orderBy'] = 'id_desc';
 $lang->block->default['crm']['b2']['params']['status']  = array();
 
 $lang->block->default['sys']['b1'] = $lang->block->default['oa']['b1'];
