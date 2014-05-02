@@ -102,7 +102,7 @@ class customer extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "customerID=$customerID")));
         }
 
         $this->view->title    = $this->lang->customer->edit;

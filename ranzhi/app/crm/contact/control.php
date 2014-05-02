@@ -98,7 +98,7 @@ class contact extends control
             $return = $this->contact->updateAvatar($contactID);
 
             $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
-            $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('view', "contactID=$contactID")));
         }
 
         $this->app->loadLang('resume');

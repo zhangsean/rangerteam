@@ -91,7 +91,7 @@ class order extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "orderID=$orderID")));
         }
 
         $this->view->title     = $this->lang->order->edit;
