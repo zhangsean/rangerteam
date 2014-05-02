@@ -15,10 +15,10 @@ $lang->app->name = 'CRM';
 $lang->menu->crm = new stdclass();
 $lang->menu->crm->dashboard = '我的地盤|dashboard|index|';
 $lang->menu->crm->order     = '訂單|order|index|';
-$lang->menu->crm->customer  = '客戶|customer|index|';
 $lang->menu->crm->contract  = '合同|contract|index|';
-$lang->menu->crm->product   = '產品|product|index|';
+$lang->menu->crm->customer  = '客戶|customer|index|';
 $lang->menu->crm->contact   = '聯繫人|contact|index|';
+$lang->menu->crm->product   = '產品|product|index|';
 $lang->menu->crm->setting   = '設置|setting|lang|module=product&field=statusList';
 
 /* Menu of customer module. */

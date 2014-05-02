@@ -60,7 +60,7 @@ $lang->changePassword = '修改密碼';
 $lang->currentPos     = '當前位置';
 $lang->categoryMenu   = '分類導航';
 $lang->basicInfo      = '基本信息';
-   
+
 /* Global action items. */
 $lang->reset          = '重填';
 $lang->add            = '添加';
@@ -79,6 +79,7 @@ $lang->preview        = '預覽';
 $lang->goback         = '返回';
 $lang->search         = '搜索';
 $lang->assign         = '指派';
+$lang->create         = '新建';
 $lang->activate       = '激活';
 $lang->view           = '查看';
 $lang->more           = '更多';

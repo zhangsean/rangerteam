@@ -11,12 +11,14 @@
  */
 if(!isset($lang->action)) $lang->action = new stdclass();
 
-$lang->action->common     = '系統日誌';
-$lang->action->product    = '產品';
-$lang->action->actor      = '操作者';
-$lang->action->action     = '動作';
-$lang->action->actionID   = '記錄ID';
-$lang->action->date       = '日期';
+$lang->action->common   = '系統日誌';
+$lang->action->product  = '產品';
+$lang->action->actor    = '操作者';
+$lang->action->contact  = '聯繫人';
+$lang->action->comment  = '內容';
+$lang->action->action   = '動作';
+$lang->action->actionID = '記錄ID';
+$lang->action->date     = '日期';
 
 $lang->action->editComment = '修改備註';
 
@@ -118,11 +120,14 @@ $lang->action->search->label['login']       = $lang->action->label->login;
 $lang->action->search->label['logout']      = $lang->action->label->logout;
 
 $lang->action->record = new stdclass();
-$lang->action->record->common  = '溝通';
-$lang->action->record->create  = '添加記錄';
-$lang->action->record->edit    = '編輯記錄';
-$lang->action->record->history = '溝通記錄';
-$lang->action->record->contact = '聯繫人';
-$lang->action->record->actor   = '操作人';
-$lang->action->record->comment = '溝通內容';
-$lang->action->record->date    = '時間';
+$lang->action->record->common   = '溝通';
+$lang->action->record->create   = '添加記錄';
+$lang->action->record->edit     = '編輯記錄';
+$lang->action->record->history  = '溝通記錄';
+$lang->action->record->customer = '客戶';
+$lang->action->record->contract = '合同';
+$lang->action->record->order    = '訂單';
+$lang->action->record->contact  = '聯繫人';
+$lang->action->record->actor    = '操作人';
+$lang->action->record->comment  = '溝通內容';
+$lang->action->record->date     = '時間';

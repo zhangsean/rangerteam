@@ -12,11 +12,16 @@
 $lang->task->common = '任務';
 $lang->task->list   = '任務列表';
 
-$lang->task->browse = '瀏覽任務';
-$lang->task->view   = '查看任務';
-$lang->task->create = '新建任務';
-$lang->task->edit   = '編輯任務';
-$lang->task->finish = '任務完成';
+$lang->task->browse   = '瀏覽任務';
+$lang->task->view     = '查看任務';
+$lang->task->create   = '新建任務';
+$lang->task->edit     = '編輯任務';
+$lang->task->finish   = '任務完成';
+$lang->task->activate = '激活任務';
+$lang->task->cancel   = '取消任務';
+$lang->task->close    = '關閉任務';
+
+$lang->task->batchCreate = '批量添加';
 
 $lang->task->id             = '編號';
 $lang->task->project        = '所屬項目';
@@ -27,7 +32,7 @@ $lang->task->name           = '名稱';
 $lang->task->type           = '任務類型';
 $lang->task->pri            = '優先順序';
 $lang->task->estimate       = '最初預計';
-$lang->task->estimateAB     = '預';
+$lang->task->estimateAB     = '預計';
 $lang->task->consumed       = '總消耗';
 $lang->task->consumedAB     = '消耗';
 $lang->task->left           = '預計剩餘';
@@ -35,6 +40,7 @@ $lang->task->leftAB         = '剩';
 $lang->task->deadline       = '截止日期';
 $lang->task->deadlineAB     = '截止';
 $lang->task->status         = '任務狀態';
+$lang->task->statusAB       = '狀態';
 $lang->task->statusCustom   = '狀態排序';
 $lang->task->mailto         = '抄送給';
 $lang->task->desc           = '任務描述';
@@ -61,6 +67,7 @@ $lang->task->lastEdited     = '最後編輯';
 $lang->task->hour           = '小時';
 $lang->task->leftThisTime   = '剩餘';
 $lang->task->date           = '日期';
+$lang->task->ditto          = '同上';
 
 $lang->task->lblPri = 'P';
 
@@ -76,15 +83,15 @@ $lang->task->typeList['discuss'] = '討論';
 $lang->task->typeList['affair']  = '事務';
 $lang->task->typeList['misc']    = '其他';
 
+$lang->task->priList[0]  = '';
 $lang->task->priList[1]  = '1';
 $lang->task->priList[2]  = '2';
 $lang->task->priList[3]  = '3';
 $lang->task->priList[4]  = '4';
-$lang->task->priList[0]  = '';
 
 $lang->task->reasonList['']       = '';
 $lang->task->reasonList['done']   = '已完成';
 $lang->task->reasonList['cancel'] = '已取消';
 
 $lang->task->basicInfo = '基本信息';
-$lang->task->moreInfo  = '更多信息';
+$lang->task->life      = '任務的一生';

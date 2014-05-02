@@ -46,6 +46,7 @@ $lang->order->edit          = '編輯訂單';
 $lang->order->view          = '訂單詳情';
 $lang->order->close         = '關閉訂單';
 $lang->order->sign          = '簽約';
+$lang->order->activate      = '激活';
 
 $lang->order->statusList['normal'] = '正常';
 $lang->order->statusList['signed'] = '已簽約';
@@ -56,6 +57,6 @@ $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '訂單失敗';
 $lang->order->closedReasonList['postponed'] = '延期';
 
-$lang->order->titleLBL  = "%s購買%s, %s";
+$lang->order->titleLBL  = "[%s] %s購買%s";
 $lang->order->basicInfo = "基本信息";
 $lang->order->lifetime  = "訂單的一生";
