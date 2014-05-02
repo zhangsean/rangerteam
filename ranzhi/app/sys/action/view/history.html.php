@@ -38,7 +38,7 @@
       </span>
       <?php if(!empty($action->comment) or !empty($action->history)):?>
       <?php if(!empty($action->comment)) echo "<div class='history'>";?>
-        <div class='changes' id='changeBox<?php echo $i;?>' style='display:none;'>
+        <div class='changes history' style='display:none;'>
         <?php echo $this->action->printChanges($action->objectType, $action->history);?>
         </div>
         <?php if($canEditComment):?>

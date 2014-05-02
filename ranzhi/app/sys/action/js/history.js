@@ -4,7 +4,14 @@ $(document).ready(function()
      $('.toggle').click(function()
      {
           $(this).toggleClass('change-show').toggleClass('change-hide');
-          $(this).parent().next().toggle();
+          if($(this).parent().next().find('.changes').size())
+          {
+              $(this).parent().next().find('.changes').toggle();
+          }
+          else
+          {
+              $(this).parent().next().toggle().find('.changes').show();
+          }
      });
 
      /* Toggle all comment. */
