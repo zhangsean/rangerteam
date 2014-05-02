@@ -34,3 +34,7 @@ $lang->setting->currentLang = '适用当前语言';
 $lang->setting->placeholder = new stdclass();
 $lang->setting->placeholder->key   = '变量名';
 $lang->setting->placeholder->value = '自定义显示值';
+
+$lang->setting->placeholder->typeList  = '变量名，长度为1~30字符';
+$lang->setting->placeholder->sizeList  = '变量名，必须为0~255的数字';
+$lang->setting->placeholder->levelList = '变量名，长度为1~10字符';

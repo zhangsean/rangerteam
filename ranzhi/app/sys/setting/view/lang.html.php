@@ -61,10 +61,11 @@
   </div>
 </form>
 <?php
+$placeholder = isset($lang->setting->placeholder->$field) ? $lang->setting->placeholder->$field : $lang->setting->placeholder->key; 
 $itemRow = <<<EOT
   <tr class='text-center'>
-    <td>
-      <input type='text' value="" name="keys[]" class='form-control' placeholder='{$lang->setting->placeholder->key}'>
+    <td class='w-200px'>
+      <input type='text' value="" name="keys[]" class='form-control' placeholder='{$placeholder}'>
       <input type='hidden' value="0" name="systems[]">
     </td>
     <td>

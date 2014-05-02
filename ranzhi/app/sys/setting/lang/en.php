@@ -34,3 +34,7 @@ $lang->setting->currentLang = 'For current language';
 $lang->setting->placeholder = new stdclass();
 $lang->setting->placeholder->key   = 'Key';
 $lang->setting->placeholder->value = 'Translation';
+
+$lang->setting->placeholder->typeList  = 'Key should be 1~30 letters';
+$lang->setting->placeholder->sizeList  = 'Key should be interger between 0 and 255';
+$lang->setting->placeholder->levelList = 'Key should be 1~10 letters';
