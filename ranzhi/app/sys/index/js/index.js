@@ -21,6 +21,7 @@ function deleteBlock(index)
             alert(data.message);
             return false;
         }
+        messager.info(ipsLang["removedBlock"]);
     })
 }
 
@@ -52,5 +53,6 @@ function sortBlocks(orders)
             $(this).attr('id', 'block' + index).attr('data-id', index).data('url', createLink('block', 'printBlock', 'index=' + index));
             $(this).find('.panel-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
         })
+        messager.success(ipsLang["orderdBlocksSaved"]);
     });
 }

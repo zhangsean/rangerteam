@@ -144,6 +144,38 @@ class blockModel extends model
     }
 
     /**
+     * Get last key.
+     * 
+     * @param  string $appName 
+     * @access public
+     * @return int
+     */
+    public function getLastKey($appName = 'sys')
+    {
+        if(empty($account)) $account = $this->app->user->account;
+
+        $personal = isset($this->config->personal->index) ? $this->config->personal->index : array();
+        $blocks   = empty($personal->block) ? array() : (array)$personal->block;
+
+        foreach($blocks as $key => $block)
+        {
+            if($block->app != $appName) unset($blocks[$key]);
+        }
+
+        foreach($blocks as $key => $block)
+        {
+            /* Remove the prefix of block key. */
+            unset($blocks[$key]);
+            $key = str_replace('b', '', $key);
+            $blocks[$key] = $block;
+        }
+
+        krsort($blocks);
+        
+        return (int)key($blocks);
+    }
+
+    /**
      * Init block when account use first. 
      * 
      * @param  string    $appName 

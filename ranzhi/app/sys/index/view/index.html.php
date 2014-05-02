@@ -44,7 +44,7 @@ js::import($jsRoot . 'jquery/ips.js');
       <div class='btn-toolbar actions'>
         <button title='<?php echo $lang->index->refresh;?>' class='btn btn-pure refresh-all-panel'><i class='icon-repeat'></i></button>
         <?php end($blocks);?>
-        <a data-toggle='modal' href='<?php echo $this->createLink("block", "admin", "index=" . (key($blocks) + 1)); ?>' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure'><i class='icon-plus'></i></a>
+        <a data-toggle='modal' href='<?php echo $this->createLink("block", "admin"); ?>' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure'><i class='icon-plus'></i></a>
       </div>
       <div class='row'>
         <?php

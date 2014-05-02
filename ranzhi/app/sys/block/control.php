@@ -18,9 +18,11 @@ class block extends control
      * @access public
      * @return void
      */
-    public function admin($index)
+    public function admin($index = 0)
     {
         $entries = $this->dao->select('*')->from(TABLE_ENTRY)->where('block')->ne('')->fetchAll('id');
+
+        if(!$index) $index = $this->block->getLastKey('sys') + 1;
 
         $allEntries[''] = '';
         foreach($entries as $id => $entry) $allEntries[$id] = $entry->name;
@@ -105,6 +107,7 @@ class block extends control
 
         foreach($newOrder as $key => $index)
         {
+            if(empty($blocks['b' . $oldOrder[$key]])) $this->send(array('result' => 'fail'));
             $sortedBlocks['b' . $index] = $blocks['b' . $oldOrder[$key]];
         }
 
