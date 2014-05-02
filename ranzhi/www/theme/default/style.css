@@ -233,15 +233,10 @@ label.checkbox,input[type='radio']+label{font-weight: normal;}
 .table-form {margin-bottom: 0;}
 .table-form td, .table-form th {padding: 5px; font-size: 12px;}
 .table-form td + td, .table-form th + th {padding-left: 5%;}
-fieldset {background-color: #eee; padding: 2px 15px 2px 5px; margin-bottom: 10px; margin-top: 35px; border-radius: 6px; position: relative;}
-fieldset.fieldset-primary {background-color: transparent; padding: 0; margin-top: 0;}
-fieldset .table-form {margin-bottom: 0;}
-fieldset.collapsed {padding: 1px;}
-fieldset.collapsed .table-form {display: none}
-legend {font-size: 12px; font-weight: bold; border:0px solid red; padding: 5px; position: absolute; top: -25px; left: 0; cursor: pointer; line-height: 14px; vertical-align: top; color: #666}
-legend:before {font-family: ZenIcon; content: '\e6b8'; font-size: 14px; color: #999; display: inline-block; margin-right: 4px; margin-bottom: -3px; -webkit-font-smoothing: antialiased;}
-legend:hover {color: #333;}
-fieldset.collapsed legend:before {content: '\e6b9'}
+fieldset {margin-bottom: 15px; border: 1px solid #e5e5e5; padding: 10px 15px 15px;}
+fieldset.fieldset-pure {background: none; padding: 0; border: none; padding-top: 5px;}
+fieldset > legend {width: auto; margin: 0 0 0 -5px; font-size: 13px; font-weight: bold; border-bottom: none; padding: 0 5px}
+fieldset > .form-group {margin-bottom: 0;}
 
 form .chosen-container-single .chosen-single {padding: 4px 10px; height: 30px}
 form .chosen-container-single .chosen-single div {padding: 4px 10px}
