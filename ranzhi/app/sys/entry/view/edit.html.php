@@ -20,7 +20,7 @@ include '../../common/view/header.admin.html.php';
       <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->entry->name;?></th>
-          <td class='w-p40'><?php echo html::input('name', $entry->name, "class='form-control'");?></td>
+          <td class='w-p60'><?php echo html::input('name', $entry->name, "class='form-control'");?></td>
           <td>
             <?php
             $checked = $entry->visible ? 'checked="checked"' : ''; 
