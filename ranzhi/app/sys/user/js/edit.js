@@ -2,10 +2,16 @@ $(document).ready(function()
 {
      if(v.from == 'admin')
      {
-          $.setAjaxForm('#editForm', function(){ location.reload()});
+          $.setAjaxForm('#editForm', function(response)
+          { 
+              if(response.result == 'success')location.reload()
+          });
      }
      else
      {
-          $.setAjaxForm('#editForm',function() { $.reloadAjaxModal(0); });
+          $.setAjaxForm('#editForm',function(response) 
+          {
+              if(response.result == 'success') $.reloadAjaxModal(0);
+          });
      }
 });
