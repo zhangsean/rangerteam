@@ -14,6 +14,7 @@
 include '../../common/view/header.admin.html.php';
 include '../../common/view/treeview.html.php';
 js::set('deptID', $deptID);
+js::set('from', 'admin');
 ?>
 <div class="col-md-12">
   <?php include './deptside.html.php';?>
@@ -81,7 +82,7 @@ js::set('deptID', $deptID);
               </td>
               <td class='operate'>
                 <?php
-                echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit);
+                echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit, "data-toggle='modal'");
                 if($status == 'normal')
                 {
                     echo html::a($this->createLink('user', 'forbid', "userID=$user->id"), $lang->user->forbid, "class='forbider'");

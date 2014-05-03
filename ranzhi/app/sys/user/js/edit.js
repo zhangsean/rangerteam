@@ -1,4 +1,11 @@
 $(document).ready(function()
 {
-     $.setAjaxForm('#editForm',function() { $.reloadAjaxModal(0); });
+     if(v.from == 'admin')
+     {
+          $.setAjaxForm('#editForm', function(){ location.reload()});
+     }
+     else
+     {
+          $.setAjaxForm('#editForm',function() { $.reloadAjaxModal(0); });
+     }
 });
