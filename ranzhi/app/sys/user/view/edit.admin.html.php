@@ -13,12 +13,13 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/treeview.html.php';?>
 <div class="col-md-12">
+  <div class='row'> 
   <?php include './deptside.html.php';?>
   <div class='col-md-10'>
     <div class="panel">
       <div class="panel-heading"><strong><i class="icon-edit"></i> <?php echo $lang->user->editProfile;?></strong></div>
-      <div class='panel-body'>
-        <form method='post' id='ajaxForm' class='form-condensed'>
+      <form method='post' id='ajaxForm' class='form-condensed'>
+        <div class='panel-body'>
           <fieldset class='fieldset-primary'>
             <table class='table table-form'>
               <tr>
@@ -85,10 +86,11 @@
               </tr>
             </table>
           </fieldset>          
-          <?php echo html::submitButton();?>
-        </form>
-      </div>
+            <div class='page-actions'><?php echo html::submitButton();?></div>
+        </div>
+      </form>
     </div>
+  </div>
   </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
