@@ -294,7 +294,7 @@ td #aliasLabel {display: table-row;}
 .form-group .file-form .form-group:last-child {margin-bottom: 0;}
 
 /* colors */
-.text-red {color: #d2322d}
+.text-red, .text-error, .red {color: #d2322d}
 
 /* icons */
 .icon-border-circle {padding: 2px 8px;}
