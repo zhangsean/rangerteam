@@ -82,7 +82,7 @@ js::set('from', 'admin');
               </td>
               <td class='operate'>
                 <?php
-                echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit, "data-toggle='modal'");
+                echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit, RUN_MODE == 'front' ? "data-toggle='modal'" : '');
                 if($status == 'normal')
                 {
                     echo html::a($this->createLink('user', 'forbid', "userID=$user->id"), $lang->user->forbid, "class='forbider'");
