@@ -65,7 +65,7 @@ $(function()
             return $this;
         });
     };
-    $('.form-datetime').fixedDate().datetimepicker(
+    var options = 
     {
         language: '<?php echo $clientLang; ?>',
         weekStart: 1,
@@ -76,30 +76,10 @@ $(function()
         forceParse: 0,
         showMeridian: 1,
         format: 'yyyy-mm-dd hh:ii'
-    });
-    $('.form-date').fixedDate().datetimepicker(
-    {
-        language: '<?php echo $clientLang; ?>',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0,
-        format: 'yyyy-mm-dd'
-    });
-    $('.form-time').fixedDate().datetimepicker({
-        language: '<?php echo $clientLang; ?>',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 1,
-        minView: 0,
-        maxView: 1,
-        forceParse: 0,
-        format: 'hh:ii'
-    });
+    }
+
+    $('.form-datetime').fixedDate().datetimepicker(options);
+    $('.form-date').fixedDate().datetimepicker($.extend(options, {minView: 2, format: 'yyyy-mm-dd'}));
+    $('.form-time').fixedDate().datetimepicker($.extend(options, {startView: 1, minView: 0, maxView: 1, format: 'hh:ii'}));
 });
 </script>
