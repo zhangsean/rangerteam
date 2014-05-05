@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<table class='table table-data table-hover block-contract'>
+<table class='table table-data table-hover block-contract table-fixed'>
   <tr>
     <th class='w-id text-center'><?php echo $lang->contract->id?></th>
     <th><?php echo $lang->contract->name?></th>

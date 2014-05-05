@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<table class='table table-data table-hover block-task'>
+<table class='table table-data table-hover block-task table-fixed'>
   <tr>
     <th class='w-50px text-center'><?php echo $lang->task->id?></th>
     <th class='w-20px text-center'><?php echo $lang->task->lblPri?></th>

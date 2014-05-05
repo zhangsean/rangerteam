@@ -109,6 +109,7 @@ body.page-actions-fixed {padding-bottom: 70px}
 
 /* --- COMPONENTS SETTING --- */
 /* menu */
+.menu > .nav > li > a {padding: 0 30px 0 15px; max-height: 36px; overflow: hidden; line-height: 34px;}
 .menu > .nav > li > .actions {position: absolute; right: 0; top:0;}
 .menu > .nav > li > .actions .dropdown .btn {background: none; padding: 8px 8px; border:none; border-left:1px solid #ddd; border-color: rgba(0,0,0,0.15); border-radius: 0 4px 4px 0}
 .menu > .nav > li.active > .actions .dropdown .btn .caret {border-top-color: #fff;border-bottom-color: #fff}
@@ -272,6 +273,11 @@ td #aliasLabel {display: table-row;}
 .table-contact th.text-middle, .table td.text-middle, .text-middle {vertical-align: middle;}
 .table-contact td.text-bottom {vertical-align:bottom;}
 
+/* table fixed */
+.table-fixed {table-layout: fixed;}
+.table-fixed th, .table-fixed td  {overflow:hidden; white-space:nowrap;}
+.table-fixed tfoot > tr > th, .table-fixed tfoot > tr > td, .table-fixed .nofixed{overflow: visible;}
+
 /* required */
 .required:after{font-family: arial;font-size: 24px}
 .required[class*='col-'] {position: relative;}
@@ -282,7 +288,7 @@ td #aliasLabel {display: table-row;}
 .required-wrapper.required:after{right: -13px;top: 4px}
 
 /* nav */
-.nav > li > a {padding: 8px 15px; line-height: 20px}
+.nav > li > a {padding: 7px 15px; line-height: 20px}
 .nav li .icon-chevron-right {float: right; margin-top: 2px; margin-right: -6px; opacity: .25;}
 .nav li.active i.icon-chevron-right,.nav li:hover i.icon-chevron-right{opacity: .9;}
 

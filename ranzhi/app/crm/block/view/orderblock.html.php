@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<table class='table table-data table-hover block-order'>
+<table class='table table-data table-hover block-order table-fixed'>
   <tr>
     <th class='w-id text-center'><?php echo $lang->order->id?></th>
     <th><?php echo $lang->order->customer?></th>

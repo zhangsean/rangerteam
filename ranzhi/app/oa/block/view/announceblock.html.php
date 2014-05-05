@@ -10,7 +10,7 @@
  * @link        http://www.zentao.net
  */
 ?>
-<table class='table table-data table-hover' id='oaBlockAnnounce'>
+<table class='table table-data table-hover table-fixed' id='oaBlockAnnounce'>
   <?php foreach($announces as $id => $announce):?>
   <tr>
     <td class='w-60px'><?php echo substr($announce->addedDate, 5, 5)?></td>
