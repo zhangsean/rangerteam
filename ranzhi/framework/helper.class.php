@@ -68,7 +68,7 @@ class helper
 
         if(strpos($moduleName, '.') !== false) list($appName, $moduleName) = explode('.', $moduleName);
 
-        $link = $config->requestType == 'PATH_INFO' ? $config->webRoot . $appName . '/' : $_SERVER['PHP_SELF'];
+        $link = $config->requestType == 'PATH_INFO' ? $config->webRoot . $appName . '/' : $_SERVER['SCRIPT_NAME'];
 
         /* Set the view type and vars. */
         if(empty($viewType)) $viewType = $app->getViewType();
@@ -667,7 +667,8 @@ function getWebRoot()
     }
 
     $path = dirname(dirname($path));
-    if($path == '/') return $path;
+    $path = str_replace('\\', '/', $path);
+    if($path == '/') return '/';
     return $path . '/';
 }
 

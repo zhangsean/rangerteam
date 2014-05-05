@@ -33,7 +33,7 @@ $config->requestFix  = '-';               // The divider in the url when PATH_IN
 $config->moduleVar   = 'm';               // requestType=GET: the module var name.
 $config->methodVar   = 'f';               // requestType=GET: the method var name.
 $config->viewVar     = 't';               // requestType=GET: the view var name.
-$config->sessionVar  = 'sid';             // requestType=GET: the session var name.
+$config->sessionVar  = 'rid';             // requestType=GET: the session var name.
 
 /* Supported views. */
 $config->views = ',html,json,mhtml,'; 
