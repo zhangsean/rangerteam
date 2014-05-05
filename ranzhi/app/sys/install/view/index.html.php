@@ -23,8 +23,8 @@
           <div class='col-md-4'><!--<div id='ranzhi'><?php echo html::image($themeRoot . '/default/images/ips/app-ranzhi.png');?></div>--></div>
         </div>
       </div>
-      <?php if(!isset($latestRelease)):?>
       <div class='modal-footer'>
+        <?php if(!isset($latestRelease)):?>
         <p class='text-center'><?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary'");?></p>
         <?php else:?>
         <?php vprintf($lang->install->newReleased, $latestRelease);?>
@@ -35,8 +35,8 @@
           echo html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, "class='btn btn-primary'");
           ?>
         </p>
+        <?php endif;?>
       </div>
-      <?php endif;?>
     </div>
   </div>
 </div>

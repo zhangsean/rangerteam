@@ -15,7 +15,7 @@ class entryModel extends model
      * Get all entries. 
      * 
      * @access public
-     * @return object
+     * @return array
      */
     public function getEntries()
     {
