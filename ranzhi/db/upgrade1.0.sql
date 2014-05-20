@@ -3,8 +3,8 @@ ALTER TABLE `oa_article` change `addedDate` `createDate` datetime NOT NULL;
 ALTER TABLE `oa_doc` change `addedBy` `createBy`  varchar(30) NOT NULL;
 ALTER TABLE `oa_doc` change `addedDate` `createDate` datetime NOT NULL;
 
-ALTER TABLE `oa_doc` change `addedBy` `createBy`  varchar(30) NOT NULL;
-ALTER TABLE `oa_doc` change `addedDate` `createDate` datetime NOT NULL;
+ALTER TABLE `sys_file` change `addedBy` `createBy`  varchar(30) NOT NULL;
+ALTER TABLE `sys_file` change `addedDate` `createDate` datetime NOT NULL;
 
 CREATE TABLE `cash_depositor` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
