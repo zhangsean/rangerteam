@@ -133,7 +133,12 @@ define('TABLE_BOOK',        '`oa_book`');
 define('TABLE_LAYOUT',      '`oa_layout`');
 define('TABLE_DOC',         '`oa_doc`');
 define('TABLE_DOCLIB',      '`oa_docLib`');
-define('TABLE_RELATION', '`oa_relation`');
+define('TABLE_RELATION',    '`oa_relation`');
+
+/* Tables for cash. */
+define('TABLE_DEPOSITOR', '`cash_depositor`');
+define('TABLE_BALANCE',   '`cash_balance`');
+define('TABLE_TRADE',     '`cash_trade`');
 
 /* Tables for sns. */
 define('TABLE_TAG',     '`sns_tag`');
