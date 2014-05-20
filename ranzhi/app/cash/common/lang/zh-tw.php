@@ -18,5 +18,5 @@ $lang->menu->cash->trade     = '記賬|trade|index|';
 $lang->menu->cash->invocie   = '發票|invocie|index|';
 $lang->menu->cash->claim     = '報銷|claim|index|';
 $lang->menu->cash->report    = '報表|report|index|';
-$lang->menu->cash->account   = '賬戶|account|index|';
+$lang->menu->cash->depositor = '賬戶|depositor|index|';
 $lang->menu->cash->setting   = '設置|setting|index|';

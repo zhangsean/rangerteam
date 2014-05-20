@@ -18,5 +18,10 @@ $lang->menu->cash->trade     = 'Bookkeeping|trade|index|';
 $lang->menu->cash->invocie   = 'Invocie|invocie|index|';
 $lang->menu->cash->claim     = 'Expenses Claim|claim|index|';
 $lang->menu->cash->report    = 'Report|report|index|';
-$lang->menu->cash->account   = 'Account|account|index|';
+$lang->menu->cash->depositor = 'Depositor|depositor|index|';
 $lang->menu->cash->setting   = 'Settings|setting|index|';
+
+/* Menu of depositor module. */
+$lang->depositor = new stdclass();
+$lang->depositor->menu = new stdclass();
+$lang->depositor->menu->browse = array('link' => '<i class="icon-th-list"></i> Depositor List|depositor|browse|', 'alias' => 'create,edit,view');
