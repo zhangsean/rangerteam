@@ -354,6 +354,18 @@ EOT;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
 
+        /* Add cash. */
+        $entry->name  = 'cash';
+        $entry->code  = 'cash';
+        $entry->key   = '438d85f2c2b04372662c63ebfb1c4c2f';
+        $entry->logo  = $this->config->webRoot . 'theme/default/images/ips/app-cash.png';
+        $entry->login = '../cash';
+
+        $block = $config->requestType == 'GET' ? 'cash/index.php?m=block&f=index' : 'cash/block-index.html';
+        $entry->block = $this->config->webRoot . $block;
+
+        $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
+
         /* Add oa. */
         $entry->name  = 'oa';
         $entry->code  = 'oa';
