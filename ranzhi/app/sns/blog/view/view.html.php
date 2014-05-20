@@ -25,7 +25,7 @@ $common->printPositionBar($category, $article, '', $root);
 <div class='row'>
   <div class='col-md-9'>
     <div class='content-box clearfix radius'>
-      <div class='dater pull-right'><?php echo date('Y/m/d', strtotime($article->addedDate));?></div>
+      <div class='dater pull-right'><?php echo date('Y/m/d', strtotime($article->createdDate));?></div>
       <h1 class='text-center'><?php echo $article->title;?></h1>
       <div class='text-center info'>
         <?php

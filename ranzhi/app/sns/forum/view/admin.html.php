@@ -28,7 +28,7 @@
           ?>
         </td>
         <td><?php echo $thread->author;?></td>
-        <td><?php echo substr($thread->addedDate, 5, -3);?></td>
+        <td><?php echo substr($thread->createdDate, 5, -3);?></td>
         <td><?php echo $thread->views;?></td>
         <td><?php echo $thread->replies;?></td>
         <td class='text-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedBy;?></td>  

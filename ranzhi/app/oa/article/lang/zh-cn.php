@@ -25,7 +25,7 @@ $lang->article->keywords   = '关键字';
 $lang->article->summary    = '摘要';
 $lang->article->author     = '作者';
 $lang->article->editor     = '编辑';
-$lang->article->addedDate  = '添加时间';
+$lang->article->createdDate  = '添加时间';
 $lang->article->editedDate = '编辑时间';
 $lang->article->status     = '状态';
 $lang->article->type       = '类型';
@@ -77,4 +77,4 @@ $lang->article->directory = '返回目录';
 $lang->article->back2Top  = '返回顶部';
 
 $lang->article->note = new stdclass();
-$lang->article->note->addedDate = '可以延迟到选定的时间发布。';
+$lang->article->note->createdDate = '可以延迟到选定的时间发布。';

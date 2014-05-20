@@ -129,7 +129,7 @@ class threadModel extends model
             ->setIF(!$canManage, 'readonly', 0)
             ->setForce('board', $boardID)
             ->setForce('author', $this->app->user->account)
-            ->setForce('addedDate', $now) 
+            ->setForce('createdDate', $now) 
             ->setForce('editedDate', $now) 
             ->setForce('repliedDate', $now)
             ->remove('files, labels, views, replies, hidden, stick')
@@ -319,14 +319,14 @@ class threadModel extends model
         /* Get replyID and repliedBy. */
         $reply = $this->dao->select('*')->from(TABLE_REPLY)
             ->where('hidden')->eq('0')
-            ->orderBy('addedDate desc')
+            ->orderBy('createdDate desc')
             ->limit(1)
             ->fetch();
 
         $data = new stdclass();
         $data->replies     = $replies;
         $data->repliedBy   = $reply->author;
-        $data->repliedDate = $reply->addedDate;
+        $data->repliedDate = $reply->createdDate;
         $data->replyID     = $reply->id;
 
         $this->dao->update(TABLE_THREAD)->data($data)->where('id')->eq($threadID)->exec();

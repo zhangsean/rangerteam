@@ -26,8 +26,8 @@ $lang->file->title     = '名稱';
 $lang->file->pathname  = '存儲路徑';
 $lang->file->extension = '類型';
 $lang->file->size      = '大小';
-$lang->file->addedBy   = '上傳者';
-$lang->file->addedDate = '上傳日期';
+$lang->file->createdBy   = '上傳者';
+$lang->file->createdDate = '上傳日期';
 $lang->file->public    = '匿名下載';
 $lang->file->downloads = '下載次數';
 

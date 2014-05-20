@@ -21,7 +21,7 @@
         <th style='width: 80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->article->status);?></th>
         <th class='text-center'><?php commonModel::printOrderLink('title',     $orderBy, $vars, $lang->article->title);?></th>
         <th style='width: 100px' class='text-center'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->article->category);?></th>
-        <th style='width: 160px' class='text-center'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
+        <th style='width: 160px' class='text-center'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->article->createdDate);?></th>
         <th style='width: 60px' class='text-center'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
         <th style='width: 150px' class='text-center'><?php echo $lang->actions;?></th>
       </tr>
@@ -33,7 +33,7 @@
         <td><?php echo $article->status == 'draft' ? '<span class="text-info"><i class="icon-pencil"></i> ' . $lang->article->statusList[$article->status] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->article->statusList[$article->status] . '</span>';?></td>
         <td><?php echo $article->title;?></td>
         <td class='text-center'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
-        <td class='text-center'><?php echo $article->addedDate;?></td>
+        <td class='text-center'><?php echo $article->createdDate;?></td>
         <td class='text-center'><?php echo $article->views;?></td>
         <td class='text-center'>
           <?php

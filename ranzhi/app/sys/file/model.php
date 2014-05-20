@@ -136,8 +136,8 @@ class fileModel extends model
 
             $file['objectType'] = $objectType;
             $file['objectID']   = $objectID;
-            $file['addedBy']    = $this->app->user->account;
-            $file['addedDate']  = $now;
+            $file['createdBy']    = $this->app->user->account;
+            $file['createdDate']  = $now;
             $file['extra']      = $extra;
             unset($file['tmpname']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
@@ -296,8 +296,8 @@ class fileModel extends model
             $realPathName = $this->savePath . $fileInfo->pathname;
             move_uploaded_file($file['tmpname'], $realPathName);
 
-            $fileInfo->addedBy   = $this->app->user->account;
-            $fileInfo->addedDate = helper::now();
+            $fileInfo->createdBy   = $this->app->user->account;
+            $fileInfo->createdDate = helper::now();
             $fileInfo->size      = $file['size'];
             $this->dao->update(TABLE_FILE)->data($fileInfo)->where('id')->eq($fileID)->exec();
             return true;
@@ -346,8 +346,8 @@ class fileModel extends model
             $file['extension'] = $out[2][$key];
             $file['pathname']  = $this->setPathName($key, $file['extension']);
             $file['size']      = strlen($imageData);
-            $file['addedBy']   = $this->app->user->account;
-            $file['addedDate'] = helper::today();
+            $file['createdBy']   = $this->app->user->account;
+            $file['createdDate'] = helper::today();
             $file['title']     = basename($file['pathname']);
             $file['editor']    = 1;
 

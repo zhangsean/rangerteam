@@ -32,7 +32,7 @@
           <?php echo "<span class='label label-danger'>{$lang->thread->stick}</span> "?>
         </td>
         <td class='text-left'><strong><?php echo $thread->author;?></strong></td>
-        <td><?php echo substr($thread->addedDate, 5, -3);?></td>
+        <td><?php echo substr($thread->createdDate, 5, -3);?></td>
         <td><?php echo $thread->views;?></td>
         <td><?php echo $thread->replies;?></td>
         <td class='text-left'>
@@ -53,7 +53,7 @@
         <td style='width:10px'><?php echo $thread->isNew ? "<span class='text-success'><i class='icon-comment-alt icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment-alt icon-large'></i></span>";?></td>
         <td class='text-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?></td>
         <td style='width:50px' class='text-left'><strong><?php echo $thread->author;?></strong></td>
-        <td style='width:100px'><?php echo substr($thread->addedDate, 5, -3);?></td>
+        <td style='width:100px'><?php echo substr($thread->createdDate, 5, -3);?></td>
         <td style='width:30px'><?php echo $thread->views;?></td>
         <td style='width:30px'><?php echo $thread->replies;?></td>
         <td style='width:150px' class='text-left'>

@@ -16,7 +16,7 @@ $lang->reply->list      = 'Replies';
 $lang->reply->content   = 'Content';
 $lang->reply->author    = 'Author';
 $lang->reply->files     = 'Files:';
-$lang->reply->addedDate = 'Date';
+$lang->reply->createdDate = 'Date';
 $lang->reply->admin     = 'Reply';
 
 $lang->reply->edit = 'Edit';

@@ -3,7 +3,7 @@
 <div id = "<?php echo $reply->id;?>" class="panel panel thread reply <?php echo $i%2!=0?'striped':'';?>">
   <div class='panel-heading'>
     <div class='panel-actions'><strong>#<?php echo $i++;?></strong></div>
-    <span class='muted'><i class='icon-comment-alt'></i> <?php echo $reply->addedDate;?></span>
+    <span class='muted'><i class='icon-comment-alt'></i> <?php echo $reply->createdDate;?></span>
   </div>
   <table class='table'>
     <tr>

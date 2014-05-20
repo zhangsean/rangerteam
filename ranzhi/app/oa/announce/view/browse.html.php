@@ -20,7 +20,7 @@
         <div class='item-heading'>
           <div class="text-muted pull-right">
             <span title="<?php echo $users[$article->author];?>"><i class='icon-user'></i> <?php echo $users[$article->author];?></span> &nbsp; 
-            <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span>&nbsp; 
+            <span title="<?php echo $lang->article->createdDate;?>"><i class='icon-time'></i> <?php echo substr($article->createdDate, 0, 10);?></span>&nbsp; 
           </div>
           <h4><?php echo $article->title;?></h4>
         </div>

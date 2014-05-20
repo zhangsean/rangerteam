@@ -35,7 +35,7 @@ class rss extends control
         $this->view->siteLink = commonModel::getSysURL();
 
         $this->view->articles = $articles;
-        $this->view->lastDate = $latestArticle ? $latestArticle->addedDate : date('Y-m-d H:i:s') . ' +0800';
+        $this->view->lastDate = $latestArticle ? $latestArticle->createdDate : date('Y-m-d H:i:s') . ' +0800';
          
         $this->display();
     }

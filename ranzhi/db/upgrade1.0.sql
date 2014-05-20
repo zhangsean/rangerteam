@@ -1,3 +1,11 @@
+ALTER TABLE `oa_article` change `addedDate` `createDate` datetime NOT NULL;
+
+ALTER TABLE `oa_doc` change `addedBy` `createBy`  varchar(30) NOT NULL;
+ALTER TABLE `oa_doc` change `addedDate` `createDate` datetime NOT NULL;
+
+ALTER TABLE `oa_doc` change `addedBy` `createBy`  varchar(30) NOT NULL;
+ALTER TABLE `oa_doc` change `addedDate` `createDate` datetime NOT NULL;
+
 CREATE TABLE `cash_depositor` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `abbr` char(60) NOT NULL,
@@ -9,8 +17,8 @@ CREATE TABLE `cash_depositor` (
   `type` enum('cash','bank','online') NOT NULL,
   `currency` char(30) NOT NULL,
   `status` enum('normal','disable') NOT NULL DEFAULT 'normal',
-  `addedBy` char(30) NOT NULL DEFAULT '',
-  `addedDate` datetime NOT NULL,
+  `createdBy` char(30) NOT NULL DEFAULT '',
+  `createdDate` datetime NOT NULL,
   `editedBy` char(30) NOT NULL DEFAULT '',
   `editedDate` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -22,8 +30,8 @@ CREATE TABLE `cash_balance` (
   `date` date NOT NULL,
   `money` float(12,2) NOT NULL,
   `currency` char(30) NOT NULL,
-  `addedBy` char(30) NOT NULL DEFAULT '',
-  `addedDate` datetime NOT NULL,
+  `createdBy` char(30) NOT NULL DEFAULT '',
+  `createdDate` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

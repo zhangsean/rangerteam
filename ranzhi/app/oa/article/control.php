@@ -37,7 +37,7 @@ class article extends control
 
         $category   = $this->loadModel('tree')->getByID($categoryID, 'article');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
-        $articles   = $this->article->getList('article', $this->tree->getFamily($categoryID, 'article'), 'addedDate_desc', $pager);
+        $articles   = $this->article->getList('article', $this->tree->getFamily($categoryID, 'article'), 'createdDate_desc', $pager);
 
         if($category)
         {

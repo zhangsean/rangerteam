@@ -18,7 +18,7 @@
     <description><![CDATA[  <?php echo $article->content;?>]]></description>
     <link><![CDATA[<?php echo $siteLink . $this->createLink('article', 'view', "id=$article->id", 'html');?>]]></link>
     <category><?php echo $category->name; ?></category>
-    <pubDate><?php echo $article->addedDate . ' +0800';?></pubDate>
+    <pubDate><?php echo $article->createdDate . ' +0800';?></pubDate>
   </item>
   <?php endforeach;?>
 </channel>

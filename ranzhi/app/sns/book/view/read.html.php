@@ -5,7 +5,7 @@
   <header>
     <h2><?php echo $article->title;?></h2>
     <dl class='dl-inline'>
-      <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, $article->addedDate);?>'><i class='icon-time icon-large'></i> <?php echo $article->addedDate; ?></dd>
+      <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, $article->createdDate);?>'><i class='icon-time icon-large'></i> <?php echo $article->createdDate; ?></dd>
       <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
       <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></dd>
     </dl>

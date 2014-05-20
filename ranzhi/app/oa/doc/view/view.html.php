@@ -92,12 +92,12 @@
           <td><?php echo $doc->keywords;?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->doc->addedBy;?></th>
-          <td><?php echo $users[$doc->addedBy];?></td>
+          <th><?php echo $lang->doc->createdBy;?></th>
+          <td><?php echo $users[$doc->createdBy];?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->doc->addedDate;?></th>
-          <td><?php echo $doc->addedDate;?></td>
+          <th><?php echo $lang->doc->createdDate;?></th>
+          <td><?php echo $doc->createdDate;?></td>
         </tr>
         <tr>
           <th><?php echo $lang->doc->editedBy;?></th>

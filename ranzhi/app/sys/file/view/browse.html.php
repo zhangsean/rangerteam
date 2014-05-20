@@ -24,8 +24,8 @@
             <th><?php echo $lang->file->common;?></th>
             <th><?php echo $lang->file->extension;?></th>
             <th><?php echo $lang->file->size;?></th>
-            <th><?php echo $lang->file->addedBy;?></th>
-            <th><?php echo $lang->file->addedDate;?></th>
+            <th><?php echo $lang->file->createdBy;?></th>
+            <th><?php echo $lang->file->createdDate;?></th>
             <th><?php echo $lang->file->downloads;?></th>
             <th><?php echo $lang->actions;?></th>
           </tr>          
@@ -49,8 +49,8 @@
             </td>
             <td><?php echo $file->extension;?></td>
             <td><?php echo $file->size;?></td>
-            <td><?php echo $file->addedBy;?></td>
-            <td><?php echo $file->addedDate;?></td>
+            <td><?php echo $file->createdBy;?></td>
+            <td><?php echo $file->createdDate;?></td>
             <td><?php echo $file->downloads;?></td>
             <td>
             <?php

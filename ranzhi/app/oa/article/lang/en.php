@@ -25,7 +25,7 @@ $lang->article->keywords   = 'Keywords';
 $lang->article->summary    = 'Summary';
 $lang->article->author     = 'Author';
 $lang->article->editor     = 'Editor';
-$lang->article->addedDate  = 'Added';
+$lang->article->createdDate  = 'Added';
 $lang->article->editedDate = 'Edited';
 $lang->article->status     = 'Status';
 $lang->article->type       = 'Type';
@@ -77,4 +77,4 @@ $lang->article->directory = 'Back';
 $lang->article->back2Top  = 'Back to top';
 
 $lang->article->note = new stdclass();
-$lang->article->note->addedDate = 'Can be delayed until the selected time publish.';
+$lang->article->note->createdDate = 'Can be delayed until the selected time publish.';

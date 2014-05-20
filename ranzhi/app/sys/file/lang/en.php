@@ -26,8 +26,8 @@ $lang->file->title     = 'Title';
 $lang->file->pathname  = 'Path';
 $lang->file->extension = 'Extension';
 $lang->file->size      = 'Size';
-$lang->file->addedBy   = 'Added by';
-$lang->file->addedDate = 'Added date';
+$lang->file->createdBy   = 'Added by';
+$lang->file->createdDate = 'Added date';
 $lang->file->public    = 'Public';
 $lang->file->downloads = 'Downloads';
 

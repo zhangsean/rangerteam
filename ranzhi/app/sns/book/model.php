@@ -396,7 +396,7 @@ class bookModel extends model
             ->add('parent', 0)
             ->add('grade', 1)
             ->add('type', 'book')
-            ->add('addedDate', $now)
+            ->add('createdDate', $now)
             ->add('editedDate', $now)
             ->setForce('alias',    seo::unify($this->post->alias, '-'))
             ->setForce('keywords', seo::unify($this->post->keywords, ','))
@@ -441,7 +441,7 @@ class bookModel extends model
         $node = new stdclass();
         $node->parent     = $parentNode ? $parentNode->id : 0;
         $node->grade      = $parentNode ? $parentNode->grade + 1 : 1;
-        $node->addedDate  = $now;
+        $node->createdDate  = $now;
         $node->editedDate = $now;
 
         foreach($this->post->title as $key => $nodeTitle)
@@ -471,7 +471,7 @@ class bookModel extends model
             else
             {
                 $nodeID = $key;
-                unset($node->addedDate);
+                unset($node->createdDate);
                 $this->dao->update(TABLE_BOOK)->data($node)->autoCheck()->where('id')->eq($nodeID)->exec();
             }
 

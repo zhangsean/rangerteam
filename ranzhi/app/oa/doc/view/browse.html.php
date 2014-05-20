@@ -53,8 +53,8 @@
           <th class='w-100px'>  <?php commonModel::printOrderLink('id',        $orderBy, $vars, $lang->doc->id);?></th>
           <th class='text-left'><?php commonModel::printOrderLink('title',     $orderBy, $vars, $lang->doc->title);?></th>
           <th class='w-100px'>  <?php commonModel::printOrderLink('type',      $orderBy, $vars, $lang->doc->type);?></th>
-          <th class='w-100px'>  <?php commonModel::printOrderLink('addedBy',   $orderBy, $vars, $lang->doc->addedBy);?></th>
-          <th class='w-100px'>  <?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->doc->addedDate);?></th>
+          <th class='w-100px'>  <?php commonModel::printOrderLink('createdBy',   $orderBy, $vars, $lang->doc->createdBy);?></th>
+          <th class='w-100px'>  <?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->doc->createdDate);?></th>
           <th class='w-90px {sorter:false}'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
@@ -68,8 +68,8 @@
           <td><?php if($canView) echo html::a($viewLink, sprintf('%03d', $doc->id)); else printf('%03d', $doc->id);?></td>
           <td class='text-left' title="<?php echo $doc->title?>"><nobr><?php echo html::a($viewLink, $doc->title);?></nobr></td>
           <td><?php echo $lang->doc->types[$doc->type];?></td>
-          <td><?php isset($users[$doc->addedBy]) ? print($users[$doc->addedBy]) : print($doc->addedBy);?></td>
-          <td><?php echo date("m-d H:i", strtotime($doc->addedDate));?></td>
+          <td><?php isset($users[$doc->createdBy]) ? print($users[$doc->createdBy]) : print($doc->createdBy);?></td>
+          <td><?php echo date("m-d H:i", strtotime($doc->createdDate));?></td>
           <td>
             <?php 
             echo html::a($this->createLink('doc', 'edit', "doc={$doc->id}"), $lang->edit);

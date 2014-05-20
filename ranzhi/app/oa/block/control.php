@@ -117,7 +117,7 @@ class block extends control
 
         $this->view->announces = $this->dao->select('*')->from(TABLE_ARTICLE)
             ->where('type')->eq('announce')
-            ->orderBy('addedDate desc')
+            ->orderBy('createdDate desc')
             ->limit($this->params->num)
             ->fetchAll('id');
 

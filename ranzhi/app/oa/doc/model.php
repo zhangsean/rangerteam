@@ -178,8 +178,8 @@ class docModel extends model
     {
         $now = helper::now();
         $doc = fixer::input('post')
-            ->add('addedBy', $this->app->user->account)
-            ->add('addedDate', $now)
+            ->add('createdBy', $this->app->user->account)
+            ->add('createdDate', $now)
             ->setDefault('product, project, module', 0)
             ->specialChars('title, digest, keywords')
             ->encodeURL('url')

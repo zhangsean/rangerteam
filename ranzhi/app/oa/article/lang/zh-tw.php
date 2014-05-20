@@ -25,7 +25,7 @@ $lang->article->keywords   = '關鍵字';
 $lang->article->summary    = '摘要';
 $lang->article->author     = '作者';
 $lang->article->editor     = '編輯';
-$lang->article->addedDate  = '添加時間';
+$lang->article->createdDate  = '添加時間';
 $lang->article->editedDate = '編輯時間';
 $lang->article->status     = '狀態';
 $lang->article->type       = '類型';
@@ -77,4 +77,4 @@ $lang->article->directory = '返回目錄';
 $lang->article->back2Top  = '返回頂部';
 
 $lang->article->note = new stdclass();
-$lang->article->note->addedDate = '可以延遲到選定的時間發佈。';
+$lang->article->note->createdDate = '可以延遲到選定的時間發佈。';

@@ -84,7 +84,7 @@ class replyModel extends model
      * @access public
      * @return object | false
      */
-    public function getList($orderBy = 'addedDate_desc', $pager = null)
+    public function getList($orderBy = 'createdDate_desc', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_REPLY)
             ->orderBy($orderBy)
@@ -125,7 +125,7 @@ class replyModel extends model
 
         $reply = fixer::input('post')
             ->setForce('author', $this->app->user->account)
-            ->setForce('addedDate', helper::now())
+            ->setForce('createdDate', helper::now())
             ->setForce('thread', $threadID)
             ->stripTags('content', $allowedTags)
             ->remove('recTotal, recPerPage, pageID, files, labels, hidden')

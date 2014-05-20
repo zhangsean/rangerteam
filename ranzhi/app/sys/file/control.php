@@ -72,8 +72,8 @@ class file extends control
             move_uploaded_file($file['tmpname'], $this->file->savePath . $file['pathname']);
             $url =  $this->file->webPath . $file['pathname'];
 
-            $file['addedBy']   = $this->app->user->account;
-            $file['addedDate'] = helper::now();
+            $file['createdBy']   = $this->app->user->account;
+            $file['createdDate'] = helper::now();
             $file['editor']    = 1;
             unset($file['tmpname']);
             $this->dao->insert(TABLE_FILE)->data($file, false)->exec();
