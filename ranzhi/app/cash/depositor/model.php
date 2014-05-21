@@ -83,4 +83,32 @@ class depositorModel extends model
 
         return false;
     }
+
+    /**
+     * Forbid a depositor.
+     * 
+     * @param  int    $depositorID 
+     * @access public
+     * @return bool
+     */
+    public function forbid($depositorID)
+    {
+        $this->dao->update(TABLE_DEPOSITOR)->set('status')->eq('disable')->where('id')->eq($depositorID)->exec();
+
+        return dao::isError();
+    }
+
+    /**
+     * Activate a depositor.
+     * 
+     * @param  int    $depositorID 
+     * @access public
+     * @return bool
+     */
+    public function activate($depositorID)
+    {
+        $this->dao->update(TABLE_DEPOSITOR)->set('status')->eq('normal')->where('id')->eq($depositorID)->exec();
+
+        return dao::isError();
+    }
 }

@@ -94,4 +94,48 @@ class depositor extends control
 
         $this->display();
     }
+
+    /**
+     * Forbid a depositor.
+     * 
+     * @param  int    $depositorID 
+     * @access public
+     * @return void
+     */
+    public function forbid($depositorID)
+    {
+        if($_POST)
+        {
+            $this->depositor->forbid($depositorID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('depositor', $depositorID, 'Forbidden', $this->post->comment);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->title       = $this->lang->depositor->forbid;
+        $this->view->depositorID = $depositorID;
+        $this->display();
+    }
+
+    /**
+     * Activate a depositor.
+     * 
+     * @param  int    $depositorID 
+     * @access public
+     * @return void
+     */
+    public function activate($depositorID)
+    {
+        if($_POST)
+        {
+            $this->depositor->activate($depositorID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('depositor', $depositorID, 'Activated', $this->post->comment);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->title       = $this->lang->depositor->activate;
+        $this->view->depositorID = $depositorID;
+        $this->display();
+    }
 }
