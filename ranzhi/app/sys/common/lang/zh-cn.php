@@ -80,6 +80,7 @@ $lang->goback         = '返回';
 $lang->search         = '搜索';
 $lang->assign         = '指派';
 $lang->create         = '新建';
+$lang->forbid         = '禁用';
 $lang->activate       = '激活';
 $lang->view           = '查看';
 $lang->more           = '更多';

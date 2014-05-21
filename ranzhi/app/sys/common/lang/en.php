@@ -80,6 +80,7 @@ $lang->goback         = 'Back';
 $lang->search         = 'Search';
 $lang->assign         = 'Assign';
 $lang->create         = 'Add';
+$lang->forbid         = 'Forbid';
 $lang->activate       = 'Activate';
 $lang->view           = 'View';
 $lang->more           = 'More';
