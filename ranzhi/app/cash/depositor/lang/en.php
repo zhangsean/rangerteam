@@ -25,10 +25,12 @@ $lang->depositor->createdDate     = 'Created Date';
 $lang->depositor->editedBy        = 'Edited By';
 $lang->depositor->editedDate      = 'Edited Date';
 
-$lang->depositor->create  = 'Create';
-$lang->depositor->list    = 'List';
-$lang->depositor->edit    = 'Edit';
-$lang->depositor->view    = 'View';
+$lang->depositor->create   = 'Create';
+$lang->depositor->list     = 'List';
+$lang->depositor->edit     = 'Edit';
+$lang->depositor->view     = 'View';
+$lang->depositor->forbid   = 'Forbid';
+$lang->depositor->activate = 'Activate';
 
 $lang->depositor->typeList['cash']   = 'Cash';
 $lang->depositor->typeList['bank']   = 'Bank';
@@ -40,6 +42,9 @@ $lang->depositor->publicList['0'] = 'Personal';
 $lang->depositor->providerList['alipay'] = 'Alipay';
 $lang->depositor->providerList['paypal'] = 'Paypal';
 $lang->depositor->providerList['tenpay'] = 'Tenpay';
+
+$lang->depositor->currencyList['yuan']   = 'RMB';
+$lang->depositor->currencyList['dollar'] = 'Dollar';
 
 $lang->depositor->statusList['normal']  = 'Normal';
 $lang->depositor->statusList['disable'] = 'Disable';
