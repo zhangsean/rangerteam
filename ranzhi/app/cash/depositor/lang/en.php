@@ -9,20 +9,21 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->depositor->id          = 'ID';
-$lang->depositor->abbr        = 'Abbreviation';
-$lang->depositor->provider    = 'Provider';
-$lang->depositor->title       = 'Title';
-$lang->depositor->account     = 'Account';
-$lang->depositor->bankcode    = 'Bank Code';
-$lang->depositor->public      = 'Public';
-$lang->depositor->type        = 'Type';
-$lang->depositor->currency    = 'Currency';
-$lang->depositor->status      = 'Status';
-$lang->depositor->createdBy   = 'Created By';
-$lang->depositor->createdDate = 'Created Date';
-$lang->depositor->editedBy    = 'Edited By';
-$lang->depositor->editedDate  = 'Edited Date';
+$lang->depositor->id              = 'ID';
+$lang->depositor->abbr            = 'Abbreviation';
+$lang->depositor->serviceProvider = 'Service Provider';
+$lang->depositor->branchProvider  = 'Account Branch';
+$lang->depositor->title           = 'Title';
+$lang->depositor->account         = 'Account';
+$lang->depositor->bankcode        = 'Bank Code';
+$lang->depositor->public          = 'Public';
+$lang->depositor->type            = 'Type';
+$lang->depositor->currency        = 'Currency';
+$lang->depositor->status          = 'Status';
+$lang->depositor->createdBy       = 'Created By';
+$lang->depositor->createdDate     = 'Created Date';
+$lang->depositor->editedBy        = 'Edited By';
+$lang->depositor->editedDate      = 'Edited Date';
 
 $lang->depositor->create  = 'Create';
 $lang->depositor->list    = 'List';
@@ -35,3 +36,10 @@ $lang->depositor->typeList['online'] = 'Online';
 
 $lang->depositor->publicList['1'] = 'Public';
 $lang->depositor->publicList['0'] = 'Personal';
+
+$lang->depositor->providerList['alipay'] = 'Alipay';
+$lang->depositor->providerList['paypal'] = 'Paypal';
+$lang->depositor->providerList['tenpay'] = 'Tenpay';
+
+$lang->depositor->statusList['normal']  = 'Normal';
+$lang->depositor->statusList['disable'] = 'Disable';

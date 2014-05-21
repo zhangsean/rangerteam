@@ -9,20 +9,21 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->depositor->id          = '编号';
-$lang->depositor->abbr        = '简称';
-$lang->depositor->provider    = '服务商';
-$lang->depositor->title       = '账户名称';
-$lang->depositor->account     = '开户帐号';
-$lang->depositor->bankcode    = '联行号';
-$lang->depositor->public      = '对公帐号';
-$lang->depositor->type        = '类型';
-$lang->depositor->currency    = '货币类型';
-$lang->depositor->status      = '状态';
-$lang->depositor->createdBy   = '由谁添加';
-$lang->depositor->createdDate = '添加时间';
-$lang->depositor->editedBy    = '由谁编辑';
-$lang->depositor->editedDate  = '编辑时间';
+$lang->depositor->id              = '编号';
+$lang->depositor->abbr            = '简称';
+$lang->depositor->serviceProvider = '服务商';
+$lang->depositor->branchProvider  = '开户网点';
+$lang->depositor->title           = '账户名称';
+$lang->depositor->account         = '开户帐号';
+$lang->depositor->bankcode        = '联行号';
+$lang->depositor->public          = '对公帐号';
+$lang->depositor->type            = '类型';
+$lang->depositor->currency        = '货币类型';
+$lang->depositor->status          = '状态';
+$lang->depositor->createdBy       = '由谁添加';
+$lang->depositor->createdDate     = '添加时间';
+$lang->depositor->editedBy        = '由谁编辑';
+$lang->depositor->editedDate      = '编辑时间';
 
 $lang->depositor->create  = '添加帐号';
 $lang->depositor->list    = '帐号列表';
@@ -35,3 +36,11 @@ $lang->depositor->typeList['online'] = '在线支付';
 
 $lang->depositor->publicList['1'] = '对公帐号';
 $lang->depositor->publicList['0'] = '个人帐号';
+
+$lang->depositor->providerList['']       = '';
+$lang->depositor->providerList['alipay'] = '支付宝';
+$lang->depositor->providerList['paypal'] = '贝宝';
+$lang->depositor->providerList['tenpay'] = '财付通';
+
+$lang->depositor->statusList['normal']  = '正常';
+$lang->depositor->statusList['disable'] = '停用';

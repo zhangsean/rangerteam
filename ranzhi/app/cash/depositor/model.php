@@ -49,13 +49,10 @@ class depositorModel extends model
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
             ->add('editedDate', $now)
+            ->removeIF($this->post->type == 'cash', 'public')
             ->get();
 
-        $this->dao->insert(TABLE_DEPOSITOR)
-            ->data($depositor)
-            ->autoCheck()
-            ->batchCheck($this->config->depositor->require->create, 'notempty')
-            ->exec();
+        $this->dao->insert(TABLE_DEPOSITOR)->data($depositor)->autoCheck()->exec();
 
         return $this->dao->lastInsertID();
     }
