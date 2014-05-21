@@ -65,4 +65,33 @@ class depositor extends control
         $this->view->title = $this->lang->depositor->create;
         $this->display();
     }
+
+    /**
+     * Edit a depositor.
+     * 
+     * @param  int    $depositorID 
+     * @access public
+     * @return void
+     */
+    public function edit($depositorID)
+    {
+        if($_POST)
+        {
+            $changes = $this->depositor->update($depositorID);
+            if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('depositor', $depositorID, 'Edited', '');
+                $this->action->logHistory($actionID, $changes);
+            }
+            
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->title     = $this->lang->depositor->edit;
+        $this->view->depositor = $this->depositor->getByID($depositorID);
+
+        $this->display();
+    }
 }

@@ -56,4 +56,31 @@ class depositorModel extends model
 
         return $this->dao->lastInsertID();
     }
+
+    /**
+     * Update a depositor.
+     * 
+     * @param  int    $depositorID 
+     * @access public
+     * @return string
+     */
+    public function update($depositorID)
+    {
+        $oldDepositor = $this->getByID($depositorID);
+
+        $depositor = fixer::input('post')
+            ->add('editedBy', $this->app->user->account)
+            ->add('editedDate', helper::now())
+            ->removeIF($this->post->type == 'cash', 'public')
+            ->get();
+
+        $this->dao->update(TABLE_DEPOSITOR)->data($depositor)->autoCheck()->where('id')->eq($depositorID)->exec();
+
+        if(!dao::isError())
+        {
+            return commonModel::createChanges($oldDepositor, $depositor);
+        }
+
+        return false;
+    }
 }
