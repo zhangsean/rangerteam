@@ -32,13 +32,14 @@ class depositor extends control
      * @access public
      * @return void
      */
-    public function browse($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($type = 'cash', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->view->title      = $this->lang->depositor->list;
-        $this->view->depositors = $this->depositor->getList($orderBy, $pager);
+        $this->view->depositors = $this->depositor->getList($type, $orderBy, $pager);
+        $this->view->type       = $type;
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;
         $this->display();
