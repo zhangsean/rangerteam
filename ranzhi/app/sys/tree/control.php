@@ -75,6 +75,18 @@ class tree extends control
             $this->lang->tree->menu = $this->lang->setting->menu;
             $this->lang->menuGroups->tree = 'setting';
         }
+        elseif($type == 'income')
+        {
+            $this->lang->category = $this->lang->income;
+            $this->lang->tree->menu = $this->lang->setting->menu;
+            $this->lang->menuGroups->tree = 'setting';
+        }
+        elseif($type == 'expense')
+        {
+            $this->lang->category = $this->lang->expense;
+            $this->lang->tree->menu = $this->lang->setting->menu;
+            $this->lang->menuGroups->tree = 'setting';
+        }
 
         $this->view->title    = $this->lang->category->common;
         $this->view->type     = $type;

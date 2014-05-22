@@ -36,23 +36,43 @@ $lang->category->children = "Children";
 
 /* Lang items for area. */
 $lang->area = new stdclass();
-$lang->area->common   = '区域';
-$lang->area->name     = '名称';
-$lang->area->alias    = '别名';
-$lang->area->parent   = '上级区域';
-$lang->area->desc     = '描述';
-$lang->area->keywords = '关键词';
-$lang->area->children = "子区域";
+$lang->area->common   = 'Area';
+$lang->area->name     = 'Name';
+$lang->area->alias    = 'Alias';
+$lang->area->parent   = 'Parent';
+$lang->area->desc     = 'Description';
+$lang->area->keywords = 'Keyword';
+$lang->area->children = 'Children';
 
 /* Lang items for industry. */
 $lang->industry = new stdclass();
-$lang->industry->common   = '行业';
-$lang->industry->name     = '名称';
-$lang->industry->alias    = '别名';
-$lang->industry->parent   = '上级行业';
-$lang->industry->desc     = '描述';
-$lang->industry->keywords = '关键词';
-$lang->industry->children = "子行业";
+$lang->industry->common   = 'Industry';
+$lang->industry->name     = 'Name';
+$lang->industry->alias    = 'Alias';
+$lang->industry->parent   = 'Parent';
+$lang->industry->desc     = 'Description';
+$lang->industry->keywords = 'Keyword';
+$lang->industry->children = "Children";
+
+/* Lang items for income. */
+$lang->income = new stdclass();
+$lang->income->common   = 'Income';
+$lang->income->name     = 'Name';
+$lang->income->alias    = 'Alias';
+$lang->income->parent   = 'Parent';
+$lang->income->desc     = 'Description';
+$lang->income->keywords = 'Keyword';
+$lang->income->children = "Children";
+
+/* Lang items for expense. */
+$lang->expense = new stdclass();
+$lang->expense->common   = 'Expense';
+$lang->expense->name     = 'Name';
+$lang->expense->alias    = 'Alias';
+$lang->expense->parent   = 'Parent';
+$lang->expense->desc     = 'Description';
+$lang->expense->keywords = 'Keyword';
+$lang->expense->children = "Children";
 
 $lang->board->readonlyList[0] = 'Pulic';
 $lang->board->readonlyList[1] = 'Readonly';

@@ -19,9 +19,15 @@ $lang->menu->cash->invocie   = 'Invocie|invocie|index|';
 $lang->menu->cash->claim     = 'Expenses Claim|claim|index|';
 $lang->menu->cash->report    = 'Report|report|index|';
 $lang->menu->cash->depositor = 'Depositor|depositor|index|';
-$lang->menu->cash->setting   = 'Settings|setting|index|';
+$lang->menu->cash->setting   = 'Settings|tree|browse|type=income|';
 
 /* Menu of depositor module. */
 $lang->depositor = new stdclass();
 $lang->depositor->menu = new stdclass();
 $lang->depositor->menu->browse = array('link' => '<i class="icon-th-list"></i> Depositor List|depositor|browse|', 'alias' => 'create,edit,view');
+
+/* Menu of setting module. */
+$lang->setting = new stdclass();
+$lang->setting->menu = new stdclass();
+$lang->setting->menu->income  = 'Income|tree|browse|type=income|';
+$lang->setting->menu->expense = 'Expense|tree|browse|type=expense|';

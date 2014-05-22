@@ -54,5 +54,25 @@ $lang->industry->desc     = '描述';
 $lang->industry->keywords = '关键词';
 $lang->industry->children = "子行业";
 
+/* Lang items for income. */
+$lang->income = new stdclass();
+$lang->income->common   = '收入科目';
+$lang->income->name     = '名称';
+$lang->income->alias    = '别名';
+$lang->income->parent   = '上级科目';
+$lang->income->desc     = '描述';
+$lang->income->keywords = '关键词';
+$lang->income->children = '子科目';
+
+/* Lang items for expense. */
+$lang->expense = new stdclass();
+$lang->expense->common   = '支出科目';
+$lang->expense->name     = '名称';
+$lang->expense->alias    = '别名';
+$lang->expense->parent   = '上级科目';
+$lang->expense->desc     = '描述';
+$lang->expense->keywords = '关键词';
+$lang->expense->children = '子科目';
+
 $lang->board->readonlyList[0] = '开放';
 $lang->board->readonlyList[1] = '只读';
