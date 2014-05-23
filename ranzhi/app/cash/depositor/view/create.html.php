@@ -26,26 +26,30 @@
           <th><?php echo $lang->depositor->abbr;?></th>
           <td><?php echo html::input('abbr', '', "class='form-control'");?></td>
         </tr>
-        <tbody id='depositor' class='hide'>
-        <tr class='provider'>
+        <tr class='form-online'>
+          <th><?php echo $lang->depositor->serviceProvider;?></th>
+          <td><?php echo html::select('provider', $lang->depositor->providerList, '', "class='form-control'");?></td>
         </tr>
-        <tr>
+        <tr class='form-bank form-online'>
           <th><?php echo $lang->depositor->title;?></th>
           <td><?php echo html::input('title', '', "class='form-control'");?></td>
         </tr>
-        <tr>
+        <tr class='form-bank'>
+          <th><?php echo $lang->depositor->branchProvider;?></th>
+          <td><?php echo html::input('provider', '', "class='form-control'");?></td>
+        </tr>
+       <tr class='form-bank form-online'>
           <th><?php echo $lang->depositor->account;?></th>
           <td><?php echo html::input('account', '', "class='form-control'");?></td>
         </tr>
-        <tr class='bankcode'>
+        <tr class='form-bank'>
           <th><?php echo $lang->depositor->bankcode;?></th>
           <td><?php echo html::input('bankcode', '', "class='form-control'");?></td>
         </tr>
-        <tr>
+        <tr class='form-bank form-online'>
           <th><?php echo $lang->depositor->public;?></th>
           <td><?php echo html::radio('public', $lang->depositor->publicList, '');?></td>
         </tr>
-        </tbody>
         <tr>
           <th><?php echo $lang->depositor->currency;?></th>
           <td><?php echo html::select('currency', $lang->depositor->currencyList, '', "class='form-control'");?></td>
@@ -56,16 +60,6 @@
         </tr>
       </table>
     </form>
-    <table class='hide'>
-      <tr class='branch'>
-        <th><?php echo $lang->depositor->branchProvider;?></th>
-        <td><?php echo html::input('provider', '', "class='form-control'");?></td>
-      </tr>
-      <tr class='service'>
-        <th><?php echo $lang->depositor->serviceProvider;?></th>
-        <td><?php echo html::select('provider', $lang->depositor->providerList, '', "class='form-control'");?></td>
-      </tr>
-    </table>
   </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

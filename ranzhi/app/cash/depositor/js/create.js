@@ -4,18 +4,21 @@ $(document).ready(function()
     {
         if($(this).find('option:selected').val() == 'bank')
         {
-            $('#depositor').show();
-            $('.bankcode').show();
-            $('.provider').html($('.branch').html());
+            $('.form-online').hide().find('input, select').attr('disabled', true);
+            $('.form-bank').show().find('input, select').attr('disabled', false);
         }
 
         if($(this).find('option:selected').val() == 'online')
         {
-            $('#depositor').show();
-            $('.bankcode').hide();
-            $('.provider').html($('.service').html());
+            $('.form-bank').hide().find('input, select').attr('disabled', true);
+            $('.form-online').show().find('input, select').attr('disabled', false);
         }
 
-        if($(this).find('option:selected').val() == 'cash')   $('#depositor').hide();
+        if($(this).find('option:selected').val() == 'cash')
+        {
+            $('.form-bank, .form-online').hide().find('input, select').attr('disabled', true);
+        }
     })
+
+    $('#type').change();
 })

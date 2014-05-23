@@ -36,6 +36,17 @@ class depositorModel extends model
         return $this->dao->select('*')->from(TABLE_DEPOSITOR)->where('type')->eq($type)->orderBy($orderBy)->page($pager)->fetchAll('id');
     }
 
+    /** 
+     * Get depositor option menu.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getPairs()
+    {
+        return $this->dao->select('id,abbr')->from(TABLE_DEPOSITOR)->fetchPairs('id', 'abbr');
+    }
+
     /**
      * Create a depositor.
      * 

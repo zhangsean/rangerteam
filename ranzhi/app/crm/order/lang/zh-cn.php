@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->order)) $lang->order = new stdclass();
 $lang->order->common        = '订单';
 $lang->order->id            = '编号';
 $lang->order->name          = '名称';
