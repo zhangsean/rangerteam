@@ -62,7 +62,8 @@ class contractModel extends model
     public function getPairs($customerID)
     {
         return $this->dao->select('id, name')->from(TABLE_CONTRACT)
-            ->where('customer')->eq($customerID)
+            ->where(1)
+            ->beginIF($customerID)->where('customer')->eq($customerID)->fi()
             ->andWhere('deleted')->eq(0)
             ->fetchPairs('id', 'name');
     }

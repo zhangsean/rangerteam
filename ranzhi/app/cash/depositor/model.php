@@ -20,7 +20,7 @@ class depositorModel extends model
      */
     public function getByID($id)
     {
-        return $this->dao->select('*')->from(TABLE_DEPOSITOR)->where('id')->eq($id)->limit(1)->fetch();
+        return $this->dao->select('*')->from(TABLE_DEPOSITOR)->where('id')->eq($id)->fetch();
     }
 
     /** 
@@ -73,7 +73,7 @@ class depositorModel extends model
      * 
      * @param  int    $depositorID 
      * @access public
-     * @return string
+     * @return string|bool
      */
     public function update($depositorID)
     {
@@ -87,10 +87,7 @@ class depositorModel extends model
 
         $this->dao->update(TABLE_DEPOSITOR)->data($depositor)->autoCheck()->where('id')->eq($depositorID)->exec();
 
-        if(!dao::isError())
-        {
-            return commonModel::createChanges($oldDepositor, $depositor);
-        }
+        if(!dao::isError()) return commonModel::createChanges($oldDepositor, $depositor);
 
         return false;
     }

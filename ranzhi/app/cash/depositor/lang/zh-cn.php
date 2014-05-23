@@ -44,8 +44,8 @@ $lang->depositor->providerList['alipay'] = '支付宝';
 $lang->depositor->providerList['paypal'] = '贝宝';
 $lang->depositor->providerList['tenpay'] = '财付通';
 
-$lang->depositor->currencyList['yuan']   = '人民币';
-$lang->depositor->currencyList['dollar'] = '美元';
+$lang->depositor->currencyList['RMB'] = '人民币';
+$lang->depositor->currencyList['USD'] = '美元';
 
 $lang->depositor->statusList['normal']  = '正常';
 $lang->depositor->statusList['disable'] = '停用';

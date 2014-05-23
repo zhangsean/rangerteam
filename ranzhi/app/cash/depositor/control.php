@@ -108,6 +108,7 @@ class depositor extends control
         {
             $this->depositor->forbid($depositorID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             $this->loadModel('action')->create('depositor', $depositorID, 'Forbidden', $this->post->comment);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
@@ -130,6 +131,7 @@ class depositor extends control
         {
             $this->depositor->activate($depositorID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             $this->loadModel('action')->create('depositor', $depositorID, 'Activated', $this->post->comment);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
