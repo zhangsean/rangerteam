@@ -31,9 +31,9 @@ class depositorModel extends model
      * @access public
      * @return array
      */
-    public function getList($type, $orderBy = 'id_desc', $pager = null)
+    public function getList($orderBy = 'id_desc', $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_DEPOSITOR)->where('type')->eq($type)->orderBy($orderBy)->page($pager)->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_DEPOSITOR)->orderBy($orderBy)->page($pager)->fetchAll('id');
     }
 
     /** 

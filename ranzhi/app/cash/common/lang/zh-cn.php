@@ -33,5 +33,6 @@ $lang->trade->menu->income  = '收入科目设置|tree|browse|type=income|';
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->income  = '收入科目设置|tree|browse|type=income|';
-$lang->setting->menu->expense = '支出科目设置|tree|browse|type=expense|';
+$lang->setting->menu->income   = '收入科目设置|tree|browse|type=income|';
+$lang->setting->menu->expense  = '支出科目设置|tree|browse|type=expense|';
+$lang->setting->menu->currency = '货币类型设置|setting|lang|module=depositor&field=currencyList';

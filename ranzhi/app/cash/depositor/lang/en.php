@@ -12,7 +12,7 @@
 $lang->depositor->id              = 'ID';
 $lang->depositor->abbr            = 'Abbreviation';
 $lang->depositor->serviceProvider = 'Service Provider';
-$lang->depositor->branchProvider  = 'Account Branch';
+$lang->depositor->bankProvider    = 'Account Branch';
 $lang->depositor->title           = 'Title';
 $lang->depositor->account         = 'Account';
 $lang->depositor->bankcode        = 'Bank Code';
@@ -39,6 +39,7 @@ $lang->depositor->typeList['online'] = 'Online';
 $lang->depositor->publicList['1'] = 'Public';
 $lang->depositor->publicList['0'] = 'Personal';
 
+$lang->depositor->providerList['']       = '';
 $lang->depositor->providerList['alipay'] = 'Alipay';
 $lang->depositor->providerList['paypal'] = 'Paypal';
 $lang->depositor->providerList['tenpay'] = 'Tenpay';

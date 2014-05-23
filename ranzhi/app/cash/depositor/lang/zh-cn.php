@@ -12,7 +12,7 @@
 $lang->depositor->id              = '编号';
 $lang->depositor->abbr            = '简称';
 $lang->depositor->serviceProvider = '服务商';
-$lang->depositor->branchProvider  = '开户网点';
+$lang->depositor->bankProvider    = '开户网点';
 $lang->depositor->title           = '账户名称';
 $lang->depositor->account         = '开户帐号';
 $lang->depositor->bankcode        = '联行号';
