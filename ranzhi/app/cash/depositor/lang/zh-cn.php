@@ -31,6 +31,7 @@ $lang->depositor->edit     = '编辑帐号';
 $lang->depositor->view     = '帐号详情';
 $lang->depositor->forbid   = '禁用';
 $lang->depositor->activate = '激活';
+$lang->depositor->balance  = '快照';
 
 $lang->depositor->typeList['cash']   = '现金帐号';
 $lang->depositor->typeList['bank']   = '借记卡';

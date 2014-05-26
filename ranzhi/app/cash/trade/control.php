@@ -86,6 +86,13 @@ class trade extends control
         $this->display();
     }
 
+    /**
+     * Edit a trade.
+     * 
+     * @param  int    $tradeID 
+     * @access public
+     * @return void
+     */
     public function edit($tradeID)
     {
         $trade = $this->trade->getByID($tradeID);
@@ -104,7 +111,7 @@ class trade extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
        
-        $this->view->title         = $this->lang->trade->create;
+        $this->view->title         = $this->lang->trade->edit;
         $this->view->trade         = $trade;
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
@@ -116,5 +123,18 @@ class trade extends control
 
 
         $this->display();
+    }
+
+    /**
+     * Delete a trade.
+     * 
+     * @param  int      $tradeID 
+     * @access public
+     * @return void
+     */
+    public function delete($tradeID)
+    {
+        if($this->trade->delete($tradeID)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 }

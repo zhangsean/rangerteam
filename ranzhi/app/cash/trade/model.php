@@ -88,4 +88,22 @@ class tradeModel extends model
 
         return false;
     }
+
+    /**
+     * Delete a trade.
+     * 
+     * @param  int      $tradeID 
+     * @access public
+     * @return void
+     */
+    public function delete($tradeID, $null = null)
+    {
+        $trade = $this->getByID($tradeID);
+        if(!$trade) return false;
+
+        $this->dao->delete()->from(TABLE_TRADE)->where('id')->eq($tradeID)->exec();
+
+        return !dao::isError();
+    }
+
 }

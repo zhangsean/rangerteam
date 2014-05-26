@@ -41,7 +41,7 @@
         <td><?php echo $depositorList[$trade->id];?></td>
         <td><?php echo $lang->trade->typeList[$trade->type];?></td>
         <td><?php echo $trade->trader?></td>
-        <td><?php echo zget($lang->depositor->currencyList[$trade->currency], $lang->colon) . $trade->money;?></td>
+        <td><?php echo zget($lang->depositor->currencyList, $trade->currency) . $lang->colon . $trade->money;?></td>
         <td><?php echo zget($categories, $trade->category);?></td>
         <td><?php echo zget($deptList, $trade->dept);?></td>
         <td><?php echo zget($users, $trade->handler);?></td>
