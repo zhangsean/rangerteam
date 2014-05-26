@@ -63,7 +63,11 @@ class depositorModel extends model
             ->removeIF($this->post->type == 'cash', 'public')
             ->get();
 
-        $this->dao->insert(TABLE_DEPOSITOR)->data($depositor)->autoCheck()->exec();
+        $this->dao->insert(TABLE_DEPOSITOR)
+            ->data($depositor)
+            ->autoCheck()
+            ->batchCheck($this->config->depositor->require->create, 'notempty')
+            ->exec();
 
         return $this->dao->lastInsertID();
     }
@@ -85,7 +89,12 @@ class depositorModel extends model
             ->removeIF($this->post->type == 'cash', 'public')
             ->get();
 
-        $this->dao->update(TABLE_DEPOSITOR)->data($depositor)->autoCheck()->where('id')->eq($depositorID)->exec();
+        $this->dao->update(TABLE_DEPOSITOR)
+            ->data($depositor)
+            ->autoCheck()
+            ->batchCheck($this->config->depositor->require->edit, 'notempty')
+            ->where('id')->eq($depositorID)
+            ->exec();
 
         if(!dao::isError()) return commonModel::createChanges($oldDepositor, $depositor);
 

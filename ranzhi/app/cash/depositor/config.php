@@ -9,6 +9,10 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$config->depositor->require = new stdclass();
+$config->depositor->require->create = 'type, abbr, currency';
+$config->depositor->require->edit   = 'type, abbr, currency';
+
 $config->depositor->editor = new stdclass();
 $config->depositor->editor->forbid   = array('id' => 'comment', 'tools' => 'simple');
 $config->depositor->editor->activate = array('id' => 'comment', 'tools' => 'simple');
