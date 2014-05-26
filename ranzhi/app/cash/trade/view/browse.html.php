@@ -38,7 +38,7 @@
     <tbody>
       <?php foreach($trades as $trade):?>
       <tr>
-        <td><?php echo $depositorList[$trade->id];?></td>
+        <td><?php echo $depositorList[$trade->depositor];?></td>
         <td><?php echo $lang->trade->typeList[$trade->type];?></td>
         <td><?php echo $trade->trader?></td>
         <td><?php echo zget($lang->depositor->currencyList, $trade->currency) . $lang->colon . $trade->money;?></td>
