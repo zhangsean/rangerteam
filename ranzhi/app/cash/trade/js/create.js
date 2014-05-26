@@ -4,14 +4,14 @@ $(document).ready(function()
     {
         if($(this).find('option:selected').val() == 'in')
         {
-            $('.income').hide().find('select').attr('disabled', true);
-            $('.expense').show().find('select').attr('disabled', false);
+            $('.income').show().find('select').attr('disabled', false);
+            $('.expense').hide().find('select').attr('disabled', true);
         }
 
         if($(this).find('option:selected').val() == 'out')
         {
-            $('.expense').hide().find('select').attr('disabled', true);
-            $('.income').show().find('select').attr('disabled', false);
+            $('.expense').show().find('select').attr('disabled', false);
+            $('.income').hide().find('select').attr('disabled', true);
         }
     })
 

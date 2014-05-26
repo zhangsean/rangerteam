@@ -80,7 +80,7 @@ class trade extends control
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
         $this->view->expenseTypes  = $this->loadModel('tree')->getOptionMenu('expense', 0, $removeRoot = true);
-        $this->view->incomeTypes   = $this->loadModel('tree')->getOptionMenu('incom', 0, $removeRoot = true);
+        $this->view->incomeTypes   = $this->loadModel('tree')->getOptionMenu('income', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs();
 
         $this->display();
