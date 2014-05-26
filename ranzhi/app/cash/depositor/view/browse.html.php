@@ -42,7 +42,7 @@
             <?php if($depositor->type == 'bank') echo "<div><strong>{$lang->depositor->bankcode} {$lang->colon} </strong>$depositor->bankcode</div>";?>
             <?php if($depositor->type != 'cash') echo "<div><strong>{$lang->depositor->public} {$lang->colon} </strong>{$lang->depositor->publicList[$depositor->public]}</div>";?>
             <?php endif;?>
-            <?php echo "<div><strong>{$lang->depositor->currency} {$lang->colon} </strong>$depositor->currency</div>";?>
+            <?php echo "<div><strong>{$lang->depositor->currency} {$lang->colon} </strong>{$lang->depositor->currencyList[$depositor->currency]}</div>";?>
             <?php echo "<div><strong>{$lang->depositor->status} {$lang->colon} </strong>{$lang->depositor->statusList[$depositor->status]}</div>";?>
           </td>
         </tr>
