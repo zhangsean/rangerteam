@@ -311,6 +311,10 @@ CREATE TABLE `cash_trade` (
   `handler` char(30) NOT NULL,
   `category` mediumint(8) NOT NULL,
   `desc` text NOT NULL,
+  `createdBy` char(30) NOT NULL DEFAULT '',
+  `createdDate` datetime NOT NULL,
+  `editedBy` char(30) NOT NULL DEFAULT '',
+  `editedDate` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_action`;
