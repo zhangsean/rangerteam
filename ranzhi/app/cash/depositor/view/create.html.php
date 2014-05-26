@@ -35,7 +35,7 @@
           <td><?php echo html::input('title', '', "class='form-control'");?></td>
         </tr>
         <tr class='form-bank'>
-          <th><?php echo $lang->depositor->branchProvider;?></th>
+          <th><?php echo $lang->depositor->bankProvider;?></th>
           <td><?php echo html::input('provider', '', "class='form-control'");?></td>
         </tr>
        <tr class='form-bank form-online'>

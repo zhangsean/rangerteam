@@ -29,7 +29,7 @@
         <?php if($depositor->type != 'cash'):?>
         <?php if($depositor->type == 'bank'):?>
         <tr>
-          <th><?php echo $lang->depositor->branchProvider;?></th>
+          <th><?php echo $lang->depositor->bankProvider;?></th>
           <td><?php echo html::input('provider', $depositor->provider, "class='form-control'");?></td>
         </tr>
         <?php else:?>
@@ -59,7 +59,7 @@
         <?php endif;?>
         <tr>
           <th><?php echo $lang->depositor->currency;?></th>
-          <td><?php echo html::input('currency', $depositor->currency, "class='form-control'");?></td>
+          <td><?php echo html::select('currency', $lang->depositor->currencyList, $depositor->currency, "class='form-control'");?></td>
         </tr>
         <tr>
           <th></th>
