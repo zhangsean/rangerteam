@@ -15,22 +15,20 @@ $lang->app->name = 'CASH';
 $lang->menu->cash = new stdclass();
 $lang->menu->cash->dashboard = '概览|index|index|';
 $lang->menu->cash->trade     = '记账|trade|index|';
+$lang->menu->cash->check     = '对账|check|index|';
 $lang->menu->cash->depositor = '账户|depositor|index|';
-$lang->menu->cash->balance   = '快照|balance|index|';
 $lang->menu->cash->setting   = '设置|tree|browse|type=income|';
 
 /* Menu of depositor module. */
 $lang->depositor = new stdclass();
 $lang->depositor->menu = new stdclass();
 $lang->depositor->menu->browse = array('link' => '<i class="icon-th-list"></i> 帐号列表|depositor|browse|', 'alias' => 'create,edit,view');
+$lang->depositor->menu->income = '余额快照|balance|browse|';
 
 /* Menu of trade module. */
 $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
 $lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> 列表|trade|browse|', 'alias' => 'create,edit,view');
-$lang->trade->menu->transfer = '转账|trade|transfer|';
-$lang->trade->menu->expense  = '支出科目设置|tree|browse|type=expense|';
-$lang->trade->menu->income   = '收入科目设置|tree|browse|type=income|';
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

@@ -14,19 +14,8 @@ class balance extends control
     public function __construct()
     {
         parent::__construct();
-        $this->view->moduleMenu = $this->balance->getLeftMenus();
-    }
-
-
-    /** 
-     * The index page, locate to the browse page.
-     * 
-     * @access public
-     * @return void
-     */
-    public function index()
-    {
-        $this->locate(inlink('browse'));
+        $this->lang->balance->menu = $this->lang->depositor->menu;
+        $this->lang->menuGroups->balance = 'depositor';
     }
 
     /**

@@ -67,6 +67,20 @@ class balanceModel extends model
     }
 
     /**
+     * Get date otions of all balances.
+     * 
+     * @param  int    $depositorID 
+     * @access public
+     * @return void
+     */
+    public function getDateOptions($depositorID = 0)
+    {
+        return $this->dao->select('date')->from(TABLE_BALANCE)
+            ->beginIF($depositorID)->where('depositor')->in($depositorID)->fi()
+            ->fetchPairs('date', 'date');
+    }
+
+    /**
      * Create a balance.
      * 
      * @access public
