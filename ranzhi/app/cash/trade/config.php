@@ -11,5 +11,6 @@
  */
 $config->trade->require = new stdclass();
 
-$config->trade->require->create = 'money,trader,desc,type,handler';
-$config->trade->require->edit   = 'money,trader,desc,type,handler';
+$config->trade->require->create   = 'money,trader,desc,type,handler';
+$config->trade->require->edit     = 'money,trader,desc,type,handler';
+$config->trade->require->transfer = 'money,handler,desc';

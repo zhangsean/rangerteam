@@ -121,6 +121,27 @@ class trade extends control
         $this->view->incomeTypes   = $this->loadModel('tree')->getOptionMenu('incom', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs();
 
+        $this->display();
+    }
+
+    /**
+     * Transfer.
+     * 
+     * @access public
+     * @return void
+     */
+    public function transfer()
+    {
+        if($_POST)
+        {
+            $result = $this->trade->transfer(); 
+            if(!$result['result']) $this->send(array('result' => 'fail', 'message' => $result['message']));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->title         = $this->lang->trade->transfer;
+        $this->view->depositorList = $this->loadModel('depositor')->getPairs();
+        $this->view->users         = $this->loadModel('user')->getPairs();
 
         $this->display();
     }

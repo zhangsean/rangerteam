@@ -23,10 +23,16 @@ $lang->trade->category  = '科目';
 $lang->trade->date      = '时间';
 $lang->trade->handler   = '经办人';
 $lang->trade->dept      = '部门';
+$lang->trade->receipt   = '收款账户';
+$lang->trade->payment   = '付款账户';
+$lang->trade->fee       = '手续费';
 
-
-$lang->trade->create  = '记账';
-$lang->trade->browse  = '账目列表';
+$lang->trade->create   = '记账';
+$lang->trade->edit     = '编辑';
+$lang->trade->browse   = '账目列表';
+$lang->trade->transfer = '转账';
 
 $lang->trade->typeList['in']  = '收入';
 $lang->trade->typeList['out'] = '支出';
+
+$lang->trade->notEqual = '付款账号不能与收款账号相同。';

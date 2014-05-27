@@ -90,6 +90,72 @@ class tradeModel extends model
     }
 
     /**
+     * Transfer.
+     * 
+     * @access public
+     * @return int|bool
+     */
+    public function transfer()
+    {
+        if($this->post->receipt == $this->post->payment) return array('result' => false, 'message' => $this->lang->trade->notEqual);
+        $now = helper::now();
+        $receipt = fixer::input('post')
+            ->add('type', 'in')
+            ->add('depositor', $this->post->receipt)
+            ->add('transfer', '1')
+            ->add('createdBy', $this->app->user->account)
+            ->add('createdDate', $now)
+            ->add('editedDate', $now)
+            ->remove('receipt, payment, fee, feeCurrency')
+            ->get();
+
+        $handler = $this->loadModel('user')->getByAccount($receipt->handler);
+        if($handler) $receipt->dept = $handler->dept;
+
+        $this->dao->insert(TABLE_TRADE)
+            ->data($receipt)
+            ->autoCheck()
+            ->batchCheck($this->config->trade->require->transfer, 'notempty')
+            ->exec();
+
+        $receiptID = $this->dao->lastInsertID();
+
+        $this->loadModel('action')->create('trade', $receiptID, 'Created');
+
+        $payment = $receipt;
+        $payment->type      = 'out';
+        $payment->depositor = $this->post->payment;
+
+        $handler = $this->loadModel('user')->getByAccount($payment->handler);
+        if($handler) $payment->dept = $handler->dept;
+
+        $this->dao->insert(TABLE_TRADE)->data($payment)->exec();
+
+        $receiptID = $this->dao->lastInsertID();
+
+        $this->loadModel('action')->create('trade', $receiptID, 'Created');
+
+        if($this->post->fee)
+        {
+            $fee = $payment;
+            $fee->money     = $this->post->fee;
+            $fee->currency  = $this->post->feeCurrency;
+            $fee->desc      = $this->lang->trade->fee;
+
+            $handler = $this->loadModel('user')->getByAccount($fee->handler);
+            if($handler) $fee->dept = $handler->dept;
+
+            $this->dao->insert(TABLE_TRADE)->data($fee)->exec();
+
+            $feeID = $this->dao->lastInsertID();
+
+            $this->loadModel('action')->create('trade', $feeID, 'Created');
+        }
+
+        if(dao::isError()) return array('result' => false, 'message' => dao::getError());
+    }
+
+    /**
      * Delete a trade.
      * 
      * @param  int      $tradeID 
