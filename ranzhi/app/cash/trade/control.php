@@ -47,8 +47,7 @@ class trade extends control
 
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
-        $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
-        $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
+        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->categories    = $expenseTypes + $incomeTypes;
         $this->view->users         = $this->loadModel('user')->getPairs();
@@ -59,14 +58,15 @@ class trade extends control
     /**
      * Create a contact.
      * 
+     * @param  string $type 
      * @access public
      * @return void
      */
-    public function create()
+    public function create($type = '')
     {
         if($_POST)
         {
-            $tradeID = $this->trade->create(); 
+            $tradeID = $this->trade->create($type); 
             if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->loadModel('action')->create('trade', $tradeID, 'Created', '');
@@ -74,10 +74,12 @@ class trade extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $this->view->title         = $this->lang->trade->create;
+        $this->view->title         = $this->lang->trade->{$type};
+        $this->view->type          = $type;
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
+        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
         $this->view->expenseTypes  = $this->loadModel('tree')->getOptionMenu('expense', 0, $removeRoot = true);
         $this->view->incomeTypes   = $this->loadModel('tree')->getOptionMenu('income', 0, $removeRoot = true);

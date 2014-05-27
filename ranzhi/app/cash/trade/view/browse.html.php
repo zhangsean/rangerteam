@@ -16,7 +16,9 @@
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->trade->browse;?></strong>
     <div class='panel-actions pull-right'>
-      <?php echo html::a(inlink('create'), "<i class='icon-plus'>{$lang->trade->create}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('create', 'type=in'),  "<i class='icon-plus'>{$lang->trade->in}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('create', 'type=out'), "<i class='icon-plus'>{$lang->trade->out}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('transfer'), "<i class='icon-plus'>{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>
@@ -24,15 +26,14 @@
       <tr>
         <th class='w-100px'><?php commonModel::printOrderLink('depositor', $orderBy, $vars, $lang->trade->depositor);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->trade->type);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('trader', $orderBy, $vars, $lang->trade->trader);?></th>
+        <th><?php commonModel::printOrderLink('trader', $orderBy, $vars, $lang->trade->trader);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('money', $orderBy, $vars, $lang->trade->money);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->trade->category);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('dept', $orderBy, $vars, $lang->trade->dept);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('handler', $orderBy, $vars, $lang->trade->handler);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->trade->date);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('order', $orderBy, $vars, $lang->trade->order);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('contract', $orderBy, $vars, $lang->trade->contract);?></th>
-        <th><?php echo $lang->actions;?></th>
+        <th><?php commonModel::printOrderLink('product', $orderBy, $vars, $lang->trade->product);?></th>
+        <th class='w-100px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -40,14 +41,13 @@
       <tr>
         <td><?php echo $depositorList[$trade->depositor];?></td>
         <td><?php echo $lang->trade->typeList[$trade->type];?></td>
-        <td><?php echo $trade->trader?></td>
+        <td><?php echo zget($customerList, $trade->trader);?></td>
         <td><?php echo zget($lang->depositor->currencyList, $trade->currency) . $lang->colon . $trade->money;?></td>
-        <td><?php echo zget($categories, $trade->category);?></td>
-        <td><?php echo zget($deptList, $trade->dept);?></td>
+        <td><?php echo str_replace('/', ' ', zget($categories, $trade->category));?></td>
+        <td><?php echo str_replace('/', ' ', zget($deptList, $trade->dept));?></td>
         <td><?php echo zget($users, $trade->handler);?></td>
         <td><?php echo formatTime($trade->date, 'Y-m-d');?></td>
-        <td><?php echo zget($orderList, $trade->order);?></td>
-        <td><?php echo zget($contractList, $trade->contract);?></td>
+        <td><?php echo zget($productList, $trade->product);?></td>
         <td>
           <?php echo html::a(inlink('edit', "tradeID={$trade->id}"), $lang->edit);?>
           <?php echo html::a(inlink('delete', "tradeID={$trade->id}"), $lang->delete, "class='deleter'");?>

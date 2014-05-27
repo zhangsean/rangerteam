@@ -14,6 +14,7 @@ $lang->trade->depositor = '账号';
 $lang->trade->type      = '交易类型';
 $lang->trade->currency  = '货币类型';
 $lang->trade->trader    = '商户';
+$lang->trade->customer  = '客户';
 $lang->trade->money     = '金额';
 $lang->trade->desc      = '说明';
 $lang->trade->product   = '产品';
@@ -27,7 +28,8 @@ $lang->trade->receipt   = '收款账户';
 $lang->trade->payment   = '付款账户';
 $lang->trade->fee       = '手续费';
 
-$lang->trade->create   = '记账';
+$lang->trade->in       = '收入';
+$lang->trade->out      = '支出';
 $lang->trade->edit     = '编辑';
 $lang->trade->browse   = '账目列表';
 $lang->trade->transfer = '转账';

@@ -39,13 +39,15 @@ class tradeModel extends model
     /**
      * Create a trade.
      * 
+     * @param  string    $type   in|out
      * @access public
-     * @return int|bool
+     * @return void
      */
-    public function create()
+    public function create($type)
     {
         $now = helper::now();
         $trade = fixer::input('post')
+            ->add('type', $type)
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
             ->add('editedDate', $now)
@@ -53,6 +55,9 @@ class tradeModel extends model
 
         $handler = $this->loadModel('user')->getByAccount($trade->handler);
         if($handler) $trade->dept = $handler->dept;
+
+        $depositor = $this->loadModel('depositor')->getByID($trade->depositor);
+        $trade->currency = $depositor->currency;
 
         $this->dao->insert(TABLE_TRADE)
             ->data($trade)
@@ -126,9 +131,6 @@ class tradeModel extends model
         $payment->type      = 'out';
         $payment->depositor = $this->post->payment;
 
-        $handler = $this->loadModel('user')->getByAccount($payment->handler);
-        if($handler) $payment->dept = $handler->dept;
-
         $this->dao->insert(TABLE_TRADE)->data($payment)->exec();
 
         $receiptID = $this->dao->lastInsertID();
@@ -138,12 +140,9 @@ class tradeModel extends model
         if($this->post->fee)
         {
             $fee = $payment;
-            $fee->money     = $this->post->fee;
-            $fee->currency  = $this->post->feeCurrency;
-            $fee->desc      = $this->lang->trade->fee;
-
-            $handler = $this->loadModel('user')->getByAccount($fee->handler);
-            if($handler) $fee->dept = $handler->dept;
+            $fee->money    = $this->post->fee;
+            $fee->currency = $this->post->feeCurrency;
+            $fee->desc     = $this->lang->trade->fee;
 
             $this->dao->insert(TABLE_TRADE)->data($fee)->exec();
 

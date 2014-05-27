@@ -4,7 +4,7 @@
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
- * @author      Tingting Dai <daitingting@xirangit.com>
+ * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     trade 
  * @version     $Id$
  * @link        http://www.ranzhi.org
@@ -15,40 +15,43 @@
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class="icon-plus"></i> <?php echo $lang->trade->create;?></strong>
+    <strong><i class="icon-plus"></i> <?php echo $lang->trade->{$type};?></strong>
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
       <table class='table table-form w-p60'>
-       <tr>
+        <tr>
           <th class='w-100px'><?php echo $lang->trade->depositor;?></th>
           <td><?php echo html::select('depositor', $depositorList, '', "class='form-control'");?></td>
         </tr>
-        <tr>
-          <th><?php echo $lang->trade->type;?></th>
-          <td><?php echo html::select('type', $lang->trade->typeList, '', "class='form-control'");?></td>
-        </tr>
+        <?php if($type == 'out'):?>
         <tr>
           <th><?php echo $lang->trade->trader;?></th>
           <td><?php echo html::input('trader', '', "class='form-control'");?></td>
         </tr>
+        <?php endif;?>
+        <?php if($type == 'in'):?>
+        <tr>
+          <th><?php echo $lang->trade->customer;?></th>
+          <td><?php echo html::select('trader', $customerList, '', "class='form-control'");?></td>
+        </tr>
+        <?php endif;?>
         <tr>
           <th><?php echo $lang->trade->money;?></th>
-          <td>
-            <div class='row'>
-              <div class='col-sm-9'><?php echo html::input('money', '', "class='form-control'");?></div>
-              <div class='col-sm-3'><?php echo html::select('currency', $lang->depositor->currencyList, '', "class='form-control'");?></div>
-            </div>
-          </td>
+          <td><?php echo html::input('money', '', "class='form-control'");?></td>
         </tr>
+        <?php if($type == 'in'):?>
         <tr class='income'>
           <th><?php echo $lang->trade->category;?></th>
           <td><?php echo html::select('category', array('') + $incomeTypes, '', "class='form-control'");?></td>
         </tr>
+        <?php endif;?>
+        <?php if($type == 'out'):?>
         <tr class='expense'>
           <th><?php echo $lang->trade->category;?></th>
           <td><?php echo html::select('category', array('') + $expenseTypes, '', "class='form-control'");?></td>
         </tr>
+        <?php endif;?>
         <tr>
           <th><?php echo $lang->trade->product;?></th>
           <td><?php echo html::select('product', array('') + $productList, '', "class='form-control'");?></td>
