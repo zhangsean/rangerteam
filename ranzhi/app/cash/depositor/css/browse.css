@@ -1,2 +1,2 @@
-.panel-heading > a { display: inline-block; margin: -3px 3px; line-height: 26px;padding: 0 10px}
-.panel-heading > a.active { border-radius: 13px; background-color: #f27c25; color: #fff}
+.table{height: 230px;}
+.table .info{height: 150px;}

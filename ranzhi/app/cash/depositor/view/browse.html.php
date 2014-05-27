@@ -20,20 +20,14 @@
   </div>
   <div class='panel-body'>
     <?php foreach($depositors as $depositor):?>
-    <div class='col-md-6'>
+    <div class='col-md-4'>
     <div class='panel'>
-      <table class='table table-bordered table-contact' style='height:170px'>
+      <table class='table'>
         <tr>
-          <th class='w-180px text-center alert v-middle'>
-            <span class='lead'><?php echo $depositor->abbr;?></span>
-            <div>
-              <?php echo html::a(inlink('edit', "depositorID=$depositor->id"), $lang->edit);?>
-              <?php if($depositor->status == 'normal') echo html::a(inlink('forbid', "depositorID=$depositor->id"), $lang->forbid, "data-toggle=modal");?>
-              <?php if($depositor->status == 'disable') echo html::a(inlink('activate', "depositorID=$depositor->id"), $lang->activate, "data-toggle=modal");?>
-            </div>
-          </th>
           <td>
-          <?php echo "<div><strong>{$lang->depositor->type} {$lang->colon} </strong>{$lang->depositor->typeList[$depositor->type]}</div>";?>
+            <div class='lead'><?php echo $depositor->abbr;?></div>
+            <div class='info'>
+            <?php echo "<div><strong>{$lang->depositor->type} {$lang->colon} </strong>{$lang->depositor->typeList[$depositor->type]}</div>";?>
             <?php if($depositor->type != 'cash'):?>
             <?php echo "<div><strong>{$lang->depositor->title} {$lang->colon} </strong>$depositor->title</div>";?>
             <?php if($depositor->type == 'bank') echo "<div><strong>{$lang->depositor->bankProvider} {$lang->colon} </strong>$depositor->provider </div>";?>
@@ -44,6 +38,12 @@
             <?php endif;?>
             <?php echo "<div><strong>{$lang->depositor->currency} {$lang->colon} </strong>{$lang->depositor->currencyList[$depositor->currency]}</div>";?>
             <?php echo "<div><strong>{$lang->depositor->status} {$lang->colon} </strong>{$lang->depositor->statusList[$depositor->status]}</div>";?>
+            </div>
+            <div class='pull-right'>
+              <?php echo html::a(inlink('edit', "depositorID=$depositor->id"), $lang->edit);?>
+              <?php if($depositor->status == 'normal') echo html::a(inlink('forbid', "depositorID=$depositor->id"), $lang->forbid, "data-toggle=modal");?>
+              <?php if($depositor->status == 'disable') echo html::a(inlink('activate', "depositorID=$depositor->id"), $lang->activate, "data-toggle=modal");?>
+            </div>
           </td>
         </tr>
       </table>
