@@ -32,7 +32,8 @@ CREATE TABLE `cash_balance` (
   `currency` char(30) NOT NULL,
   `createdBy` char(30) NOT NULL DEFAULT '',
   `createdDate` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `depositor` (`depositor`,`date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `cash_trade` (
