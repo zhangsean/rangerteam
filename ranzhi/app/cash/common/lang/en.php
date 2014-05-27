@@ -26,6 +26,14 @@ $lang->depositor = new stdclass();
 $lang->depositor->menu = new stdclass();
 $lang->depositor->menu->browse = array('link' => '<i class="icon-th-list"></i> Depositor List|depositor|browse|', 'alias' => 'create,edit,view');
 
+/* Menu of trade module. */
+$lang->trade = new stdclass();
+$lang->trade->menu = new stdclass();
+$lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> Trade List|trade|browse|', 'alias' => 'create,edit,view');
+$lang->trade->menu->transfer = 'Transfer|trade|transfer|';
+$lang->trade->menu->expense  = 'Expense|tree|browse|type=expense|';
+$lang->trade->menu->income   = 'Income|tree|browse|type=income|';
+
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
