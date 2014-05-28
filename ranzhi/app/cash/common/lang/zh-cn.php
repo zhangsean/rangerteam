@@ -15,7 +15,7 @@ $lang->app->name = 'CASH';
 $lang->menu->cash = new stdclass();
 $lang->menu->cash->dashboard = '概览|index|index|';
 $lang->menu->cash->trade     = '记账|trade|index|';
-$lang->menu->cash->check     = '对账|check|index|';
+$lang->menu->cash->check     = '对账|depositor|check|';
 $lang->menu->cash->depositor = '账户|depositor|index|';
 $lang->menu->cash->setting   = '设置|tree|browse|type=income|';
 

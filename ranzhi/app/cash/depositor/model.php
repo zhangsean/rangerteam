@@ -128,4 +128,60 @@ class depositorModel extends model
 
         return dao::isError();
     }
+
+    /**
+     * Check depositors. 
+     * 
+     * @param  array    $depositors 
+     * @access public
+     * @return void
+     */
+    public function check($depositors, $start = '', $end = '')
+    {
+        $balances = $this->dao->select('*')->from(TABLE_BALANCE)
+            ->where('date')->in("{$start}, {$end}")
+            ->beginif(!empty($depositors))->andWhere('depositor')->in($depositors)->fi()
+            ->fetchGroup('depositor', 'date');
+
+        $tradeList = $this->dao->select('*')->from(TABLE_TRADE)
+            ->where('depositor')->in($depositors)
+            ->andWhere('date')->gt($start)
+            ->andWhere('date')->lt($end)
+            ->fetchGroup('depositor', 'id');
+
+        $depositorList = $this->dao->select('*')->from(TABLE_DEPOSITOR)->beginif($depositors)->where('id')->in($depositors)->fi()->fetchAll('id');
+
+        foreach($depositorList as $id => $depositor)
+        {
+            $depositor->origin   = isset($balances[$id][$start]) ? $balances[$id][$start]->money : 0;
+            $depositor->computed = $depositor->origin + $this->computeTrades($tradeList, $id);
+            $depositor->actual   = isset($balances[$id][$end]) ? $balances[$id][$end]->money : 0;
+        }
+
+        return $depositorList;
+    }
+
+    /**
+     * Compute Trades.
+     * 
+     * @param  int    $tradeList 
+     * @param  int    $depositorID 
+     * @access public
+     * @return void
+     */
+    public function computeTrades($tradeList, $depositorID)
+    {
+        $money = 0;
+
+        if(isset($tradeList[$depositorID]))
+        {
+            foreach($tradeList[$depositorID] as $item)
+            {
+                if($item->type == 'in')  $money += $item->money;    
+                if($item->type == 'out') $money -= $item->money;    
+            }
+        }
+
+        return $money;
+    }
 }

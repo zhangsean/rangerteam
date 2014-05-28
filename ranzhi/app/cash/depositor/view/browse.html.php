@@ -41,6 +41,7 @@
             </div>
             <div class='pull-right'>
               <?php echo html::a(inlink('edit', "depositorID=$depositor->id"), $lang->edit);?>
+              <?php echo html::a(inlink('check', "depositorID=$depositor->id"), $lang->depositor->check);?>
               <?php if($depositor->status == 'normal') echo html::a(inlink('forbid', "depositorID=$depositor->id"), $lang->forbid, "data-toggle=modal");?>
               <?php if($depositor->status == 'disable') echo html::a(inlink('activate', "depositorID=$depositor->id"), $lang->activate, "data-toggle=modal");?>
             </div>

@@ -25,6 +25,8 @@ $lang->depositor->createdDate     = '添加时间';
 $lang->depositor->editedBy        = '由谁编辑';
 $lang->depositor->editedDate      = '编辑时间';
 
+$lang->depositor->common   = '账号';
+$lang->depositor->all      = '所有账号';
 $lang->depositor->create   = '添加帐号';
 $lang->depositor->list     = '帐号列表';
 $lang->depositor->edit     = '编辑帐号';
@@ -32,6 +34,17 @@ $lang->depositor->view     = '帐号详情';
 $lang->depositor->forbid   = '禁用';
 $lang->depositor->activate = '激活';
 $lang->depositor->balance  = '快照';
+
+$lang->depositor->check         = '对账';
+$lang->depositor->start         = '开始日期';
+$lang->depositor->end           = '结束日期';
+$lang->depositor->originValue   = '起始余额';
+$lang->depositor->actualValue   = '实际余额';
+$lang->depositor->computedValue = '计算余额';
+$lang->depositor->result        = '结果';
+$lang->depositor->success       = "<span class='text-success'>对账成功</span>";
+$lang->depositor->more          = "<span class='text-danger'>超出实际余额 %s </span>";
+$lang->depositor->less          = "<span class='text-danger'>低于实际余额 %s </span>";
 
 $lang->depositor->typeList['cash']   = '现金帐号';
 $lang->depositor->typeList['bank']   = '借记卡';

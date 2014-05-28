@@ -140,4 +140,35 @@ class depositor extends control
         $this->view->depositorID = $depositorID;
         $this->display();
     }
+
+    /** 
+     * Check depositors.
+     * 
+     * @param  int    $depositorID 
+     * @access public
+     * @return void
+     */
+    public function check($depositorID = 0)
+    {
+        unset($this->lang->depositor->menu);
+        $this->lang->menuGroups->depositor = 'check';
+
+        $selected = array($depositorID);
+        
+        if($_POST)
+        {
+            $selected = (array) $this->post->depositor;
+            if(in_array('all', $selected)) $selected = array();
+            $this->view->results    = $this->depositor->check($selected, $this->post->start, $this->post->end);
+        }
+
+        $this->view->start         = $this->post->start;
+        $this->view->end           = $this->post->end;
+        $this->view->title         = $this->lang->depositor->check;
+        $this->view->selected      = $selected;
+        $this->view->depositorList = $this->depositor->getPairs();
+        $this->view->dateOptions   = $this->loadModel('balance')->getDateOptions();
+
+        $this->display();
+    } 
 }
