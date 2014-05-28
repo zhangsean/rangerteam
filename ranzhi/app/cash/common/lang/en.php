@@ -13,7 +13,7 @@ $lang->app = new stdclass();
 $lang->app->name = 'CASH';
 
 $lang->menu->cash = new stdclass();
-$lang->menu->cash->dashboard = 'Dashboard|index|index|';
+$lang->menu->cash->dashboard = 'Dashboard|dashboard|index|';
 $lang->menu->cash->trade     = 'Bookkeeping|trade|index|';
 $lang->menu->cash->invocie   = 'Invocie|invocie|index|';
 $lang->menu->cash->claim     = 'Expenses Claim|claim|index|';
