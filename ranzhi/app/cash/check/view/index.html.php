@@ -46,12 +46,21 @@
         <tbody>
           <?php foreach($results as $depositorID => $result):?>
           <?php $class = $result->computed == $result->actual ? '' : 'text-error';?>
+          <?php $diff  = $result->computed - $result->actual;?>
           <tr class='<?php echo $class;?>'>
             <td><?php echo zget($depositorList, $depositorID); ?></td>
             <td><?php echo $result->origin;?></td>
             <td><?php echo $result->computed;?></td>
             <td><?php echo $result->actual;?></td>
-            <td><?php echo $result->computed - $result->actual;?></td>
+            <?php if($diff == 0):?>
+            <td><?php echo $lang->check->success;?></td>
+            <?php endif;?>
+            <?php if($diff > 0):?>
+            <td><?php printf($lang->check->overfllow, $diff);?></td>
+            <?php endif;?>
+           <?php if($diff < 0):?>
+            <td><?php printf($lang->check->less, $diff);?></td>
+            <?php endif;?>
           </tr>
           <?php endforeach;?>
         </tbody>

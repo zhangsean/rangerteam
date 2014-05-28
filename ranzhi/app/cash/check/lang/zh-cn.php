@@ -19,6 +19,7 @@ $lang->check->originValue   = '起始余额';
 $lang->check->actualValue   = '实际余额';
 $lang->check->computedValue = '计算余额';
 $lang->check->result        = '结果';
+$lang->check->success       = "<span class='text-success'>对账成功</span>";
 
 $lang->check->validateNoice = new stdclass();
 $lang->check->validateNoice->start = '请选择一个开始日期';

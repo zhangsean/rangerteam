@@ -22,39 +22,29 @@
       <table class='table table-form w-p60'>
        <tr>
           <th class='w-100px'><?php echo $lang->trade->payment;?></th>
-          <td>
-            <select name='payment' id='payment' class='form-control amount'>
-            <?php foreach($depositorList as $depositor):?>
-            <option value="<?php echo $depositor->id;?>" data-currency="<?php echo $depositor->currency;?>"><?php echo $depositor->abbr;?></option>
-            <?php endforeach;?>
-            </select>
-          </td>
+          <td><?php echo html::select('payment', $depositorList, '', "class='form-control'");?></td>
         </tr>
        <tr>
           <th><?php echo $lang->trade->receipt;?></th>
-          <td>
-            <select name='receipt' id='receipt' class='form-control amount'>
-            <?php foreach($depositorList as $depositor):?>
-            <option value="<?php echo $depositor->id;?>" data-currency="<?php echo $depositor->currency;?>"><?php echo $depositor->abbr;?></option>
-            <?php endforeach;?>
-            </select>
-          </td>
+          <td><?php echo html::select('receipt', $depositorList, '', "class='form-control'");?></td>
         </tr>
-        <tr class='money'>
+        <tr>
           <th><?php echo $lang->trade->money;?></th>
-          <td><?php echo html::input('money', '', "class='form-control'");?></td>
-        </tr>
-        <tr class='transferin'>
-          <th><?php echo $lang->trade->transferIn;?></th>
-          <td><?php echo html::input('transferIn', '', "class='form-control'");?></td>
-        </tr>
-        <tr class='transferout'>
-          <th><?php echo $lang->trade->transferOut;?></th>
-          <td><?php echo html::input('transferOut', '', "class='form-control'");?></td>
+          <td>
+            <div class='row'>
+              <div class='col-sm-9'><?php echo html::input('money', '', "class='form-control'");?></div>
+              <div class='col-sm-3'><?php echo html::select('currency', $lang->depositor->currencyList, '', "class='form-control'");?></div>
+            </div>
+          </td>
         </tr>
         <tr>
           <th><?php echo $lang->trade->fee;?></th>
-          <td><?php echo html::input('fee', '', "class='form-control'");?></td>
+          <td>
+            <div class='row'>
+              <div class='col-sm-9'><?php echo html::input('fee', '', "class='form-control'");?></div>
+              <div class='col-sm-3'><?php echo html::select('feeCurrency', $lang->depositor->currencyList, '', "class='form-control'");?></div>
+            </div>
+          </td>
         </tr>
         <tr>
           <th><?php echo $lang->trade->handler;?></th>
