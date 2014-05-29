@@ -45,7 +45,7 @@ class depositor extends control
     }   
 
     /**
-     * Create a contact.
+     * Create a depositor.
      * 
      * @access public
      * @return void
