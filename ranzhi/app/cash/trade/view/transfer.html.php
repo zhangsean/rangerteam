@@ -30,7 +30,7 @@
             </select>
           </td>
         </tr>
-       <tr>
+        <tr>
           <th><?php echo $lang->trade->receipt;?></th>
           <td>
             <select name='receipt' id='receipt' class='form-control amount'>
@@ -44,11 +44,11 @@
           <th><?php echo $lang->trade->money;?></th>
           <td><?php echo html::input('money', '', "class='form-control'");?></td>
         </tr>
-        <tr class='transferin'>
+        <tr class='transfer'>
           <th><?php echo $lang->trade->transferIn;?></th>
           <td><?php echo html::input('transferIn', '', "class='form-control'");?></td>
         </tr>
-        <tr class='transferout'>
+        <tr class='transfer'>
           <th><?php echo $lang->trade->transferOut;?></th>
           <td><?php echo html::input('transferOut', '', "class='form-control'");?></td>
         </tr>
