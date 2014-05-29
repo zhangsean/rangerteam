@@ -15,10 +15,13 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->trade->browse;?></strong>
-    <div class='panel-actions pull-right'>
-      <?php echo html::a(inlink('create', 'type=in'),  "<i class='icon-plus'>{$lang->trade->in}</i>", "class='btn btn-primary'")?>
-      <?php echo html::a(inlink('create', 'type=out'), "<i class='icon-plus'>{$lang->trade->out}</i>", "class='btn btn-primary'")?>
-      <?php echo html::a(inlink('transfer'), "<i class='icon-plus'>{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
+    <div class="panel-actions pull-right">
+      <ul class="nav nav-primary">
+        <li><?php echo html::a('', "<i class='icon icon-plus'> " . $lang->trade->create . $lang->colon . '</i>');?></li>
+        <li><?php echo html::a(inlink('create', 'type=in'),  "{$lang->trade->in}</i>", "class='btn-primary'")?></li>
+        <li><?php echo html::a(inlink('create', 'type=out'), "{$lang->trade->out}</i>", "class='btn-primary'")?></li>
+        <li><?php echo html::a(inlink('transfer'), "{$lang->trade->transfer}</i>", "class='btn-primary'")?></li>
+      </ul>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>
@@ -43,13 +46,14 @@
         <td><?php echo $lang->trade->typeList[$trade->type];?></td>
         <td><?php echo zget($customerList, $trade->trader);?></td>
         <td><?php echo zget($lang->depositor->currencyList, $trade->currency) . $lang->colon . $trade->money;?></td>
-        <td><?php echo str_replace('/', ' ', zget($categories, $trade->category));?></td>
-        <td><?php echo str_replace('/', ' ', zget($deptList, $trade->dept));?></td>
+        <td><?php echo zget($categories, $trade->category);?></td>
+        <td><?php echo zget($deptList, $trade->dept);?></td>
         <td><?php echo zget($users, $trade->handler);?></td>
         <td><?php echo formatTime($trade->date, 'Y-m-d');?></td>
         <td><?php echo zget($productList, $trade->product);?></td>
         <td>
           <?php echo html::a(inlink('edit', "tradeID={$trade->id}"), $lang->edit);?>
+          <?php echo html::a(inlink('detail', "tradeID={$trade->id}"), $lang->trade->detail, "data-toggle='modal'");?>
           <?php echo html::a(inlink('delete', "tradeID={$trade->id}"), $lang->delete, "class='deleter'");?>
         </td>
       </tr>
