@@ -84,9 +84,10 @@ class trade extends control
         $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
-        $this->view->expenseTypes  = $this->loadModel('tree')->getOptionMenu('expense', 0, $removeRoot = true);
-        $this->view->incomeTypes   = $this->loadModel('tree')->getOptionMenu('income', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs();
+
+        if($type == 'out') $this->view->categories = $this->loadModel('tree')->getPairs(0, 'expense');
+        if($type == 'in')  $this->view->categories = $this->loadModel('tree')->getPairs(0, 'income');
 
         $this->display();
     }
@@ -131,8 +132,6 @@ class trade extends control
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
-        $this->view->expenseTypes  = $this->loadModel('tree')->getOptionMenu('expense', 0, $removeRoot = true);
-        $this->view->incomeTypes   = $this->loadModel('tree')->getOptionMenu('income', 0, $removeRoot = true);
        
         if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getPairs(0, 'expense');
         if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getPairs(0, 'income');
@@ -172,10 +171,11 @@ class trade extends control
     public function detail($tradeID)
     {
         $trade = $this->trade->getByID($tradeID);
+
         if($_POST)
         {
             $result = $this->trade->saveDetail($tradeID); 
-            if(!$result['result']) $this->send(array('result' => 'fail', 'message' => $result['message']));
+            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
@@ -185,15 +185,22 @@ class trade extends control
             $detail = $trade;
             $detail->desc = '';
             $detail->money = '';
+            $details[] = $detail;
         }
 
-        $this->view->title = $this->lang->trade->detail;
+        $this->view->title         = $this->lang->trade->detail;
+        $this->view->modalWidth    = 760;
         $this->view->trade         = $trade;
+        $this->view->details       = $details;
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
         $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
+        $this->view->users         = $this->loadModel('user')->getPairs();
+
+        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getPairs(0, 'expense');
+        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getPairs(0, 'income');
 
         $this->display();
     }

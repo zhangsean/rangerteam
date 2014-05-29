@@ -33,7 +33,7 @@ class tradeModel extends model
      */
     public function getList($orderBy, $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_TRADE)->orderBy($orderBy)->page($pager)->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_TRADE)->where('parent')->eq(0)->orderBy($orderBy)->page($pager)->fetchAll('id');
     }
 
     /** 
@@ -61,6 +61,7 @@ class tradeModel extends model
             ->add('type', $type)
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
+            ->add('editedBy', $this->app->user->account)
             ->add('editedDate', $now)
             ->add('handlers', trim(join(',', $this->post->handlers), ','))
             ->setIf($this->post->type == 'in', 'contract', '')
@@ -97,6 +98,8 @@ class tradeModel extends model
             ->setIf(!$this->post->objectType or !in_array('contract', $this->post->objectType), 'contract', 0)
             ->add('handlers', trim(join(',', $this->post->handlers), ','))
             ->removeIF($this->post->type == 'cash', 'public')
+            ->add('editedBy', $this->app->user->account)
+            ->add('editedDate', helper::now())
             ->remove('objectType')
             ->get();
 
@@ -181,6 +184,42 @@ class tradeModel extends model
         }
 
         return array('result' => true);
+    }
+
+    /**
+     * Save details of a trade. 
+     * 
+     * @param  int    $tradeID 
+     * @access public
+     * @return void
+     */
+    public function saveDetail($tradeID)
+    {
+        $trade = $this->getByID($tradeID);
+        $trade->parent = $tradeID;
+
+        $now = helper::now();
+        $trade->createdDate = $now;
+        $trade->createdBy   = $this->app->user->account;
+        $trade->editedDate  = $now;
+        $trade->editedBy    = $this->app->user->account;
+        $trade->category    = 0;
+        $trade->handlers    = '';
+
+        $this->dao->delete()->from(TABLE_TRADE)->where('parent')->eq($tradeID)->exec();
+
+        foreach($this->post->money as $key => $money)
+        {
+            if($money !== '')
+            {
+                $trade->money    = $money;
+                if(isset($this->post->category[$key])) $trade->category = join(',', $this->post->category[$key]);
+                if(isset($this->post->handlers[$key])) $trade->handlers = join(',', $this->post->handlers[$key]);
+                $trade->desc     = $this->post->desc[$key];
+                $this->dao->insert(TABLE_TRADE)->data($trade, 'id')->exec();
+            }
+        }
+        return !dao::isError();
     }
 
     /**

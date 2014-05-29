@@ -27,7 +27,7 @@
         <?php if($trade->type == 'in'):?>
         <tr class='income'>
           <th><?php echo $lang->trade->category;?></th>
-          <td><?php echo html::select('category', array('') + $incomeTypes, $trade->category, "class='form-control'");?></td>
+          <td><?php echo html::select('category', array('') + $categories, $trade->category, "class='form-control'");?></td>
         </tr>
         <?php endif;?>
         <?php if($trade->type == 'out'):?>
@@ -35,7 +35,7 @@
           <th><?php echo $lang->trade->category;?></th>
           <td>
             <div class='input-group'>
-              <?php echo html::select('category', array('') + $expenseTypes, $trade->category, "class='form-control'");?>
+              <?php echo html::select('category', array('') + $categories, $trade->category, "class='form-control'");?>
               <div class='input-group-addon'><?php echo html::checkbox('objectType', $lang->trade->objectTypeList, $objectType);?></div>
             </div>
           </td>
