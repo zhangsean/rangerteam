@@ -62,14 +62,12 @@ class tradeModel extends model
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
             ->add('editedDate', $now)
+            ->add('handlers', trim(join(',', $this->post->handlers), ','))
             ->setIf($this->post->type == 'in', 'contract', '')
             ->setIf($this->post->type == 'in', 'order', '')
-            ->setIf(!in_array('order', $this->post->objectType), 'order', '')
-            ->setIf(!in_array('contract', $this->post->objectType), 'contract', '')
+            ->setIf(!$this->post->objectType or !in_array('order', $this->post->objectType), 'order', 0)
+            ->setIf(!$this->post->objectType or !in_array('contract', $this->post->objectType), 'contract', 0)
             ->get();
-
-        $handler = $this->loadModel('user')->getByAccount($trade->handler);
-        if($handler) $trade->dept = $handler->dept;
 
         $depositor = $this->loadModel('depositor')->getByID($trade->depositor);
         $trade->currency = $depositor->currency;
@@ -95,14 +93,15 @@ class tradeModel extends model
         $oldDepositor = $this->getByID($tradeID);
 
         $trade = fixer::input('post')
-            ->setIf(!in_array('order', $this->post->objectType),    'order', 0)
-            ->setIf(!in_array('contract', $this->post->objectType), 'contract', 0)
+            ->setIf(!$this->post->objectType or !in_array('order', $this->post->objectType),    'order', 0)
+            ->setIf(!$this->post->objectType or !in_array('contract', $this->post->objectType), 'contract', 0)
+            ->add('handlers', trim(join(',', $this->post->handlers), ','))
             ->removeIF($this->post->type == 'cash', 'public')
             ->remove('objectType')
             ->get();
 
-        $handler = $this->loadModel('user')->getByAccount($trade->handler);
-        if($handler) $trade->dept = $handler->dept;
+        $handlers = $this->loadModel('user')->getByAccount($trade->handlers);
+        if($handlers) $trade->dept = $handlers->dept;
 
 
         $this->dao->update(TABLE_TRADE)->data($trade)->autoCheck()->where('id')->eq($tradeID)->exec();
@@ -137,8 +136,8 @@ class tradeModel extends model
         $receiptDepositor = $this->loadModel('depositor')->getByID($receipt->depositor);
         $receipt->currency = $receiptDepositor->currency;
 
-        $handler = $this->loadModel('user')->getByAccount($receipt->handler);
-        if($handler) $receipt->dept = $handler->dept;
+        $handlers = $this->loadModel('user')->getByAccount($receipt->handlers);
+        if($handlers) $receipt->dept = $handlers->dept;
 
         $this->dao->insert(TABLE_TRADE)
             ->data($receipt)

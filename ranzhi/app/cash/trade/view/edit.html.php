@@ -68,8 +68,12 @@
           <td><?php echo html::input('money', $trade->money, "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->trade->handler;?></th>
-          <td><?php echo html::select('handler', $users, $trade->handler, "class='form-control chosen'");?></td>
+          <th><?php echo $lang->trade->dept;?></th>
+          <td><?php echo html::select('dept', $deptList, '', "class='form-control chosen'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->trade->handlers;?></th>
+          <td><?php echo html::select('handlers[]', $users, $trade->handlers, "class='form-control chosen' multiple");?></td>
         </tr>
         <?php if($trade->type == 'in'):?>
         <tr>

@@ -57,8 +57,8 @@
           <td><?php echo html::input('fee', '', "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->trade->handler;?></th>
-          <td><?php echo html::select('handler', $users, '', "class='form-control chosen'");?></td>
+          <th><?php echo $lang->trade->handlers;?></th>
+          <td><?php echo html::select('handlers', $users, '', "class='form-control chosen'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->trade->date;?></th>
