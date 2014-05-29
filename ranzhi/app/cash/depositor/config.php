@@ -11,7 +11,7 @@
  */
 $config->depositor->require = new stdclass();
 $config->depositor->require->create = 'type, abbr, currency';
-$config->depositor->require->edit   = 'abbr, currency';
+$config->depositor->require->edit   = 'abbr';
 
 $config->depositor->editor = new stdclass();
 $config->depositor->editor->forbid   = array('id' => 'comment', 'tools' => 'simple');
