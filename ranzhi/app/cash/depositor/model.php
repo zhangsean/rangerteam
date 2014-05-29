@@ -144,9 +144,9 @@ class depositorModel extends model
             ->fetchGroup('depositor', 'date');
 
         $tradeList = $this->dao->select('*')->from(TABLE_TRADE)
-            ->where('depositor')->in($depositors)
-            ->andWhere('date')->gt($start)
+            ->Where('date')->gt($start)
             ->andWhere('date')->lt($end)
+            ->beginif($depositors)->andWhere('depositor')->in($depositors)->fi()
             ->fetchGroup('depositor', 'id');
 
         $depositorList = $this->dao->select('*')->from(TABLE_DEPOSITOR)->beginif($depositors)->where('id')->in($depositors)->fi()->fetchAll('id');
