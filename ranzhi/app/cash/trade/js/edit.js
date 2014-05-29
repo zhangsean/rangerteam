@@ -1,19 +1,9 @@
 $(document).ready(function()
 {
-    $(document).on('change', '#type', function()
+    $('[name*=objectType]').change(function()
     {
-        if($(this).find('option:selected').val() == 'in')
-        {
-            $('.income').hide().find('select').attr('disabled', true);
-            $('.expense').show().find('select').attr('disabled', false);
-        }
-
-        if($(this).find('option:selected').val() == 'out')
-        {
-            $('.expense').hide().find('select').attr('disabled', true);
-            $('.income').show().find('select').attr('disabled', false);
-        }
+        if($(this).prop('checked'))$('[name*=objectType]').not(this).prop('checked', false).change();
+        $('#' + $(this).val()).parents('tr').toggle($(this).prop('checked'));
     })
-
-    $('#type').change();
+    $('[name*=objectType]').change();
 })

@@ -16,12 +16,9 @@
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->trade->browse;?></strong>
     <div class="panel-actions pull-right">
-      <ul class="nav nav-primary">
-        <li><?php echo html::a('', "<i class='icon icon-plus'> " . $lang->trade->create . $lang->colon . '</i>');?></li>
-        <li><?php echo html::a(inlink('create', 'type=in'),  "{$lang->trade->in}</i>", "class='btn-primary'")?></li>
-        <li><?php echo html::a(inlink('create', 'type=out'), "{$lang->trade->out}</i>", "class='btn-primary'")?></li>
-        <li><?php echo html::a(inlink('transfer'), "{$lang->trade->transfer}</i>", "class='btn-primary'")?></li>
-      </ul>
+      <?php echo html::a(inlink('create', 'type=in'),  "<i class='icon icon-plus'>{$lang->trade->in}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('create', 'type=out'), "<i class='icon icon-plus'>{$lang->trade->out}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('transfer'), "<i class='icon icon-plus'>{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>

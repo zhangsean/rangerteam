@@ -18,12 +18,39 @@
     <strong><i class="icon-plus"></i> <?php echo $lang->trade->{$type};?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm'>
+    <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form w-p60'>
         <tr>
           <th class='w-100px'><?php echo $lang->trade->depositor;?></th>
           <td><?php echo html::select('depositor', $depositorList, '', "class='form-control'");?></td>
         </tr>
+        <?php if($type == 'in'):?>
+        <tr class='income'>
+          <th><?php echo $lang->trade->category;?></th>
+          <td><?php echo html::select('category', array('') + $incomeTypes, '', "class='form-control'");?></td>
+        </tr>
+        <?php endif;?>
+        <?php if($type == 'out'):?>
+        <tr class='expense'>
+          <th><?php echo $lang->trade->category;?></th>
+          <td>
+            <div class='input-group'>
+              <?php echo html::select('category', array('') + $expenseTypes, '', "class='form-control'");?>
+              <div class='input-group-addon'><?php echo html::checkbox('objectType', $lang->trade->objectTypeList);?></div>
+            </div>
+          </td>
+        </tr>
+        <?php endif;?>
+        <?php if($type == 'out'):?>
+        <tr>
+          <th><?php echo $lang->trade->order;?></th>
+          <td><?php echo html::select('order', array('') + $orderList, '', "class='form-control chosen'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->trade->contract;?></th>
+          <td><?php echo html::select('contract', array('') + $contractList, '', "class='form-control chosen'");?></td>
+        </tr>
+        <?php endif;?>
         <?php if($type == 'out'):?>
         <tr>
           <th><?php echo $lang->trade->trader;?></th>
@@ -40,34 +67,16 @@
           <th><?php echo $lang->trade->money;?></th>
           <td><?php echo html::input('money', '', "class='form-control'");?></td>
         </tr>
-        <?php if($type == 'in'):?>
-        <tr class='income'>
-          <th><?php echo $lang->trade->category;?></th>
-          <td><?php echo html::select('category', array('') + $incomeTypes, '', "class='form-control'");?></td>
-        </tr>
-        <?php endif;?>
-        <?php if($type == 'out'):?>
-        <tr class='expense'>
-          <th><?php echo $lang->trade->category;?></th>
-          <td><?php echo html::select('category', array('') + $expenseTypes, '', "class='form-control'");?></td>
-        </tr>
-        <?php endif;?>
-        <tr>
-          <th><?php echo $lang->trade->product;?></th>
-          <td><?php echo html::select('product', array('') + $productList, '', "class='form-control'");?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->trade->order;?></th>
-          <td><?php echo html::select('order', array('') + $orderList, '', "class='form-control chosen'");?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->trade->contract;?></th>
-          <td><?php echo html::select('contract', array('') + $contractList, '', "class='form-control chosen'");?></td>
-        </tr>
         <tr>
           <th><?php echo $lang->trade->handler;?></th>
           <td><?php echo html::select('handler', $users, '', "class='form-control chosen'");?></td>
         </tr>
+        <?php if($type == 'in'):?>
+        <tr>
+          <th><?php echo $lang->trade->product;?></th>
+          <td><?php echo html::select('product', array('') + $productList, '', "class='form-control'");?></td>
+        </tr>
+        <?php endif;?>
         <tr>
           <th><?php echo $lang->trade->date;?></th>
           <td><?php echo html::input('date', date('Y-m-d'), "class='form-control form-date'");?></td>

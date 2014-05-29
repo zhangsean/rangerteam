@@ -36,6 +36,17 @@ class tradeModel extends model
         return $this->dao->select('*')->from(TABLE_TRADE)->orderBy($orderBy)->page($pager)->fetchAll('id');
     }
 
+    /** 
+     * Get trade detail.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getDetail($tradeID)
+    {
+        return $this->dao->select('*')->from(TABLE_TRADE)->where('parent')->eq($tradeID)->fetchAll();
+    }
+
     /**
      * Create a trade.
      * 
@@ -51,6 +62,10 @@ class tradeModel extends model
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
             ->add('editedDate', $now)
+            ->setIf($this->post->type == 'in', 'contract', '')
+            ->setIf($this->post->type == 'in', 'order', '')
+            ->setIf(!in_array('order', $this->post->objectType), 'order', '')
+            ->setIf(!in_array('contract', $this->post->objectType), 'contract', '')
             ->get();
 
         $handler = $this->loadModel('user')->getByAccount($trade->handler);
@@ -80,7 +95,10 @@ class tradeModel extends model
         $oldDepositor = $this->getByID($tradeID);
 
         $trade = fixer::input('post')
+            ->setIf(!in_array('order', $this->post->objectType),    'order', 0)
+            ->setIf(!in_array('contract', $this->post->objectType), 'contract', 0)
             ->removeIF($this->post->type == 'cash', 'public')
+            ->remove('objectType')
             ->get();
 
         $handler = $this->loadModel('user')->getByAccount($trade->handler);
@@ -182,5 +200,4 @@ class tradeModel extends model
 
         return !dao::isError();
     }
-
 }

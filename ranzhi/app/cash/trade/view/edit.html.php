@@ -18,33 +18,30 @@
     <strong><i class="icon-edit"></i> <?php echo $lang->trade->edit;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm'>
+    <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form w-p60'>
-       <tr>
+        <tr>
           <th class='w-100px'><?php echo $lang->trade->depositor;?></th>
           <td><?php echo html::select('depositor', $depositorList, $trade->depositor, "class='form-control'");?></td>
         </tr>
-        <tr>
-          <th><?php echo $lang->trade->trader;?></th>
-          <td><?php echo html::input('trader', $trade->trader, "class='form-control'");?></td>
+        <?php if($trade->type == 'in'):?>
+        <tr class='income'>
+          <th><?php echo $lang->trade->category;?></th>
+          <td><?php echo html::select('category', array('') + $incomeTypes, $trade->category, "class='form-control'");?></td>
         </tr>
-        <tr>
-          <th><?php echo $lang->trade->money;?></th>
+        <?php endif;?>
+        <?php if($trade->type == 'out'):?>
+        <tr class='expense'>
+          <th><?php echo $lang->trade->category;?></th>
           <td>
-            <div class='row'>
-              <div class='col-sm-9'><?php echo html::input('money', $trade->money, "class='form-control'");?></div>
-              <div class='col-sm-3'><?php echo html::select('currency', $lang->depositor->currencyList, $trade->currency, "class='form-control'");?></div>
+            <div class='input-group'>
+              <?php echo html::select('category', array('') + $expenseTypes, $trade->category, "class='form-control'");?>
+              <div class='input-group-addon'><?php echo html::checkbox('objectType', $lang->trade->objectTypeList, $objectType);?></div>
             </div>
           </td>
         </tr>
-        <tr>
-          <th><?php echo $lang->trade->category;?></th>
-          <td><?php echo html::select('category', array('') + $categories, $trade->category, "class='form-control'");?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->trade->product;?></th>
-          <td><?php echo html::select('product', array('') + $productList, $trade->product, "class='form-control'");?></td>
-        </tr>
+        <?php endif;?>
+        <?php if($trade->type == 'out'):?>
         <tr>
           <th><?php echo $lang->trade->order;?></th>
           <td><?php echo html::select('order', array('') + $orderList, $trade->order, "class='form-control chosen'");?></td>
@@ -53,17 +50,40 @@
           <th><?php echo $lang->trade->contract;?></th>
           <td><?php echo html::select('contract', array('') + $contractList, $trade->contract, "class='form-control chosen'");?></td>
         </tr>
+        <?php endif;?>
+        <?php if($trade->type == 'out'):?>
+        <tr>
+          <th><?php echo $lang->trade->trader;?></th>
+          <td><?php echo html::input('trader', $trade->trader, "class='form-control'");?></td>
+        </tr>
+        <?php endif;?>
+        <?php if($trade->type == 'in'):?>
+        <tr>
+          <th><?php echo $lang->trade->customer;?></th>
+          <td><?php echo html::select('trader', $customerList, $trade->trader, "class='form-control'");?></td>
+        </tr>
+        <?php endif;?>
+        <tr>
+          <th><?php echo $lang->trade->money;?></th>
+          <td><?php echo html::input('money', $trade->money, "class='form-control'");?></td>
+        </tr>
         <tr>
           <th><?php echo $lang->trade->handler;?></th>
           <td><?php echo html::select('handler', $users, $trade->handler, "class='form-control chosen'");?></td>
         </tr>
+        <?php if($trade->type == 'in'):?>
+        <tr>
+          <th><?php echo $lang->trade->product;?></th>
+          <td><?php echo html::select('product', array('') + $productList, $trade->product, "class='form-control'");?></td>
+        </tr>
+        <?php endif;?>
         <tr>
           <th><?php echo $lang->trade->date;?></th>
           <td><?php echo html::input('date', $trade->date, "class='form-control form-date'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->trade->desc;?></th>
-          <td><?php echo html::textarea('desc', $trade->desc, "class='form-control' rows='8'");?></td>
+          <td><?php echo html::textarea('desc',$trade->desc, "class='form-control' rows='8'");?></td>
         </tr>
         <tr>
           <th></th>

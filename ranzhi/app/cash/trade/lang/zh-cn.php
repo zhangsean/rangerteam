@@ -30,14 +30,18 @@ $lang->trade->fee         = '手续费';
 $lang->trade->transferIn  = '转入金额';
 $lang->trade->transferOut = '转出金额';
 
-$lang->trade->in       = '收入';
-$lang->trade->out      = '支出';
+$lang->trade->in       = '记收入';
+$lang->trade->out      = '记支出';
+$lang->trade->transfer = '记转账';
 $lang->trade->edit     = '编辑';
+$lang->trade->detail   = '明细';
 $lang->trade->browse   = '账目列表';
-$lang->trade->transfer = '转账';
 
 $lang->trade->typeList['in']  = '收入';
 $lang->trade->typeList['out'] = '支出';
 
+$lang->trade->objectTypeList['order']    = '订单支出';
+$lang->trade->objectTypeList['contract'] = '合同支出';
+
 $lang->trade->notEqual = '付款账号不能与收款账号相同。';
-$lang->trade->feeDesc  = '%s从%s转出%s%s元，转入%s%s%s元';
+$lang->trade->feeDesc  = '%s从%s转出%s%s元，转入%s%s%s元，所用手续费';
