@@ -25,10 +25,6 @@
           <td><?php echo html::select('depositor', $depositorList, $trade->depositor, "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->trade->type;?></th>
-          <td><?php echo html::select('type', $lang->trade->typeList, $trade->type, "class='form-control'");?></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->trade->trader;?></th>
           <td><?php echo html::input('trader', $trade->trader, "class='form-control'");?></td>
         </tr>
@@ -41,13 +37,9 @@
             </div>
           </td>
         </tr>
-        <tr class='income'>
+        <tr>
           <th><?php echo $lang->trade->category;?></th>
-          <td><?php echo html::select('category', array('') + $incomeTypes, $trade->category, "class='form-control'");?></td>
-        </tr>
-        <tr class='expense'>
-          <th><?php echo $lang->trade->category;?></th>
-          <td><?php echo html::select('category', array('') + $expenseTypes, $trade->category, "class='form-control'");?></td>
+          <td><?php echo html::select('category', array('') + $categories, $trade->category, "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->trade->product;?></th>
