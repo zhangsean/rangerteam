@@ -19,5 +19,5 @@ $lang->balance->desc      = '说明';
 $lang->balance->date      = '时间';
 
 $lang->balance->create = '登记余额';
-$lang->balance->browse = '全部快照';
-$lang->balance->edit   = '编辑快照';
+$lang->balance->browse = '账户余额';
+$lang->balance->edit   = '编辑余额';
