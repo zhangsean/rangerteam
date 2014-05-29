@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->depositor->list;?></strong>
     <div class='panel-actions pull-right'>
-      <?php echo html::a(inlink('create'), "<i class='icon-plus'>{$lang->depositor->create}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('create'), "<i class='icon-plus'>{$lang->depositor->create}</i>", "class='btn btn-primary' data-toggle='modal'")?>
     </div>
   </div>
   <div class='panel-body'>
@@ -40,7 +40,7 @@
             <?php echo "<div><strong>{$lang->depositor->status} {$lang->colon} </strong>{$lang->depositor->statusList[$depositor->status]}</div>";?>
             </div>
             <div class='pull-right'>
-              <?php echo html::a(inlink('edit', "depositorID=$depositor->id"), $lang->edit);?>
+              <?php echo html::a(inlink('edit', "depositorID=$depositor->id"), $lang->edit, "data-toggle='modal'");?>
               <?php echo html::a(inlink('check', "depositorID=$depositor->id"), $lang->depositor->check);?>
               <?php if($depositor->status == 'normal') echo html::a(inlink('forbid', "depositorID=$depositor->id"), $lang->forbid, "data-toggle=modal");?>
               <?php if($depositor->status == 'disable') echo html::a(inlink('activate', "depositorID=$depositor->id"), $lang->activate, "data-toggle=modal");?>
