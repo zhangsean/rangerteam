@@ -18,6 +18,6 @@ $lang->balance->money     = '金额';
 $lang->balance->desc      = '说明';
 $lang->balance->date      = '时间';
 
-$lang->balance->create = '添加快照';
+$lang->balance->create = '登记余额';
 $lang->balance->browse = '全部快照';
 $lang->balance->edit   = '编辑快照';

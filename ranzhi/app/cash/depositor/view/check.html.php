@@ -27,7 +27,7 @@
           <td class='w-200px'><?php echo html::select('start', $dateOptions, $start, "class='form-control'");?></td>
           <th class='w-100px'><?php echo $lang->depositor->end;?></th>
           <td class='w-200px'><?php echo html::select('end', $dateOptions, $end, "class='form-control'");?></td>
-          <td class='w-80px'><?php echo html::submitButton($lang->depositor->common);?></td>
+          <td class='w-80px'><?php echo html::submitButton($lang->depositor->check);?></td>
         </tr>
       </table>
     </form>

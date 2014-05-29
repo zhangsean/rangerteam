@@ -11,5 +11,5 @@
  */
 $config->balance->require = new stdclass();
 
-$config->balance->require->create = 'money,depositor,currency';
-$config->balance->require->edit   = 'money,depositor,currency';
+$config->balance->require->create = 'depositor,currency';
+$config->balance->require->edit   = 'depositor,currency';

@@ -22,8 +22,8 @@ $lang->menu->cash->setting   = '设置|tree|browse|type=income|';
 /* Menu of depositor module. */
 $lang->depositor = new stdclass();
 $lang->depositor->menu = new stdclass();
-$lang->depositor->menu->browse = array('link' => '<i class="icon-th-list"></i> 帐号列表|depositor|browse|', 'alias' => 'create,edit,view');
-$lang->depositor->menu->income = '余额快照|balance|browse|';
+$lang->depositor->menu->browse  = array('link' => '<i class="icon-th-list"></i> 帐号列表|depositor|browse|', 'alias' => 'create,edit,view');
+$lang->depositor->menu->balance = '余额快照|balance|browse|';
 
 /* Menu of trade module. */
 $lang->trade = new stdclass();
