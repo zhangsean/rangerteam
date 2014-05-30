@@ -83,6 +83,51 @@ class tradeModel extends model
     }
 
     /**
+     * Batch create.
+     * 
+     * @access public
+     * @return array
+     */
+    public function batchCreate()
+    {
+        $now    = helper::now();
+        $trades = array();
+
+        $depositorList = $this->loadModel('depositor')->getList();
+
+        /* Get data. */
+        foreach($this->post->type as $key => $type)
+        {
+            if(empty($type)) break;
+
+            $trade = new stdclass();
+            $trade->type        = $type;
+            $trade->depositor   = $this->post->depositor[$key];
+            $trade->money       = $this->post->money[$key];
+            $trade->handlers    = $this->post->handlers[$key];
+            $trade->date        = $this->post->date[$key] ? $this->post->date[$key] : '0000-00-00';
+            $trade->desc        = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags->admin);
+            $trade->currency    = $depositorList[$trade->depositor]->currency;
+            $trade->createdBy   = $this->app->user->account;
+            $trade->createdDate = $now;
+
+            $handlers = $this->loadModel('user')->getByAccount($trade->handlers);
+            if($handlers) $trade->dept = $handlers->dept;
+
+            $trades[] = $trade;
+        }
+
+        $tradeIDList = array();
+        foreach($trades as $trade)
+        {
+            $this->dao->insert(TABLE_TRADE)->data($trade)->autoCheck()->exec();
+            if(!dao::isError()) $tradeIDList[] = $this->dao->lastInsertID();
+        }
+
+        return $tradeIDList;
+    }
+
+    /**
      * Update a trade.
      * 
      * @param  int    $tradeID 

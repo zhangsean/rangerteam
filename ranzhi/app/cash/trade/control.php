@@ -93,6 +93,30 @@ class trade extends control
     }
 
     /**
+     * Batch create trade.
+     * 
+     * @access public
+     * @return void
+     */
+    public function batchCreate()
+    {
+        if($_POST)
+        {
+            $tradeIDList = $this->trade->batchCreate();
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            $this->loadModel('action');
+            foreach($tradeIDList as $tradeID) $this->action->create('trade', $tradeID, 'Created');
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        $this->view->depositors = $this->loadModel('depositor')->getPairs();
+        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
+
+    /**
      * Edit a trade.
      * 
      * @param  int    $tradeID 

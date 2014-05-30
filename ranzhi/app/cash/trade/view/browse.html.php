@@ -19,6 +19,7 @@
       <?php echo html::a(inlink('create', 'type=in'),  "<i class='icon icon-plus'>{$lang->trade->in}</i>", "class='btn btn-primary'")?>
       <?php echo html::a(inlink('create', 'type=out'), "<i class='icon icon-plus'>{$lang->trade->out}</i>", "class='btn btn-primary'")?>
       <?php echo html::a(inlink('transfer'), "<i class='icon icon-plus'>{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('batchcreate'), "<i class='icon icon-plus'>{$lang->trade->batchCreate}</i>", "class='btn btn-primary'")?>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>

@@ -30,12 +30,13 @@ $lang->trade->fee         = '手续费';
 $lang->trade->transferIn  = '转入金额';
 $lang->trade->transferOut = '转出金额';
 
-$lang->trade->in       = '记收入';
-$lang->trade->out      = '记支出';
-$lang->trade->transfer = '记转账';
-$lang->trade->edit     = '编辑';
-$lang->trade->detail   = '明细';
-$lang->trade->browse   = '账目列表';
+$lang->trade->in          = '记收入';
+$lang->trade->out         = '记支出';
+$lang->trade->transfer    = '记转账';
+$lang->trade->edit        = '编辑';
+$lang->trade->detail      = '明细';
+$lang->trade->browse      = '账目列表';
+$lang->trade->batchCreate = '批量记账';
 
 $lang->trade->typeList['in']  = '收入';
 $lang->trade->typeList['out'] = '支出';
