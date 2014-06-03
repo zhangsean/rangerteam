@@ -44,8 +44,9 @@ class orderModel extends model
         $orders = $this->dao->select('o.*, c.name as customerName, c.level as level, p.name as productName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
             ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
+            ->where(1)
             ->beginIF($mode != 'all' and $mode != 'query')->andWhere($mode)->eq($param)->fi()
-            ->beginIF($mode == 'query')->where($param)->fi()
+            ->beginIF($mode == 'query')->andWhere($param)->fi()
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
         foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->id, $order->customerName, $order->productName); 
