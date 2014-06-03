@@ -291,6 +291,8 @@ CREATE TABLE `cash_balance` (
   `currency` char(30) NOT NULL,
   `createdBy` char(30) NOT NULL DEFAULT '',
   `createdDate` datetime NOT NULL,
+  `editedBy` char(30) NOT NULL DEFAULT '',
+  `editedDate` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `depositor` (`depositor`,`date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -309,7 +311,7 @@ CREATE TABLE `cash_trade` (
   `money` float(12,2) NOT NULL,
   `currency` varchar(30) NOT NULL,
   `date` datetime NOT NULL,
-  `handler` char(30) NOT NULL,
+  `handlers` varchar(255) NOT NULL,
   `category` mediumint(8) NOT NULL,
   `desc` text NOT NULL,
   `createdBy` char(30) NOT NULL DEFAULT '',
