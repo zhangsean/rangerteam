@@ -26,7 +26,7 @@ class resume extends control
         $this->view->modalWidth = 800;
         $this->view->contact    = $this->loadModel('contact')->getByID($contactID);
         $this->view->resumes    = $this->resume->getList($contactID);
-        $this->view->customers  = $this->loadModel('customer')->getPairs();
+        $this->view->customers  = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
 
         $this->display();
     }
@@ -51,7 +51,7 @@ class resume extends control
         $this->app->loadLang('contact');
 
         $this->view->title     = $this->lang->resume->create;
-        $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
         $this->view->contactID = $contactID;
         $this->display();
     }

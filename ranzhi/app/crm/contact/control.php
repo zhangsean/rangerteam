@@ -39,7 +39,7 @@ class contact extends control
 
         $this->view->title     = $this->lang->contact->list;
         $this->view->contacts  = $this->contact->getList($customer = '', $orderBy, $pager);
-        $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
         $this->display();
@@ -71,7 +71,7 @@ class contact extends control
 
         $this->view->title     = $this->lang->contact->create;
         $this->view->customer  = $customer;
-        $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
         $this->display();
     }
 
@@ -104,7 +104,7 @@ class contact extends control
         $this->app->loadLang('resume');
 
         $this->view->title     = $this->lang->contact->edit;
-        $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
         $this->view->contact   = $this->contact->getByID($contactID);
 
         $this->display();
@@ -122,7 +122,7 @@ class contact extends control
         $this->view->contact   = $this->contact->getByID($contactID);
         $this->view->addresses = $this->loadModel('address')->getList('contact', $contactID);
         $this->view->resumes   = $this->loadModel('resume')->getList($contactID);
-        $this->view->customers = $this->loadModel('customer')->getPairs();
+        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
 
         $this->display();
     }

@@ -38,7 +38,7 @@ class customer extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
         
         $this->view->title     = $this->lang->customer->list;
-        $this->view->customers = $this->customer->getList($orderBy, $pager);
+        $this->view->customers = $this->customer->getList($mode = 'relation', $param = 'client', $orderBy, $pager);
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
         $this->display();
@@ -53,7 +53,7 @@ class customer extends control
      */
     public function getOptionMenu($current = 0)
     {
-        $options = $this->customer->getPairs();
+        $options = $this->customer->getPairs($mode = 'relation', $param = 'client');
         foreach($options as $value => $text)
         {
             $selected = $value == $current ? 'selected' : '';
