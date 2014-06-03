@@ -3,7 +3,7 @@ $(document).ready(function()
     /* set active left menu. */
     var menu =  $('.leftmenu .nav li').size() == 0 ? '.nav li' : '.leftmenu .nav li';
     $(menu).removeClass('active');
-    $(menu + " a[href*='tree'][href*='" + v.type + "']").parent().addClass('active');
+    $(menu + " a[href*='tree'][href$='" + v.type + "']").parent().addClass('active');
 
     if(v.type == 'customdoc')
     {
