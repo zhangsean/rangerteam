@@ -22,7 +22,7 @@
       <table class="table table-form w-p100">
         <tr>
           <th class='w-60px'><?php echo $lang->depositor->common;?></th>
-          <td><?php echo html::select('depositor[]', array('all' => $lang->depositor->all) + $depositorList, empty($selected) ? 'all' : $selected, "class='form-control chosen' multiple");?></td>
+          <td><?php echo html::select('depositor[]', array('all' => $lang->depositor->all) + $depositorList, empty($selected) ? 'all' : $selected, "class='form-control chosen'");?></td>
           <th class='w-100px'><?php echo $lang->depositor->start;?></th>
           <td class='w-200px'><?php echo html::select('start', $dateOptions, $start, "class='form-control'");?></td>
           <th class='w-100px'><?php echo $lang->depositor->end;?></th>
