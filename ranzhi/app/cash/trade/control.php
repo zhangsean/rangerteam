@@ -34,8 +34,6 @@ class trade extends control
      */
     public function browse($orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
-        $this->app->loadLang('common', 'crm');
-
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
