@@ -311,7 +311,7 @@ CREATE TABLE `cash_trade` (
   `currency` varchar(30) NOT NULL,
   `date` date NOT NULL,
   `handlers` varchar(255) NOT NULL,
-  `category` mediumint(8) NOT NULL,
+  `category` char(30) NOT NULL,
   `desc` text NOT NULL,
   `createdBy` char(30) NOT NULL DEFAULT '',
   `createdDate` datetime NOT NULL,
