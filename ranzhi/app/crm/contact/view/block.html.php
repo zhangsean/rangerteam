@@ -22,8 +22,7 @@
         <div><?php echo $contact->dept . ' ' . $contact->title;?></div>
       </th>
       <td>
-        <?php $havePhone = $contact->phone or $contact->mobile;?>
-        <?php if($havePhone) echo "<div><i class='icon-phone-sign'></i> $contact->phone $contact->mobile</div>";?>
+        <?php if($contact->phone or $contact->mobile) echo "<div><i class='icon-phone-sign'></i> $contact->phone $contact->mobile</div>";?>
         <?php if($contact->qq) echo "<div class='f-14'><i class='icon-qq'></i> $contact->qq</div>";?>
         <?php if($contact->email) echo "<div class='f-14'><i class='icon-envelope-alt'></i> $contact->email </div>";?>
       </td>
