@@ -10,7 +10,6 @@ $(document).ready(function()
         if(type == 'ditto')
         {
             var type = $(this).parents('tr').prevAll().find('.type[value!=ditto]:last').val();
-            alert(type)
         }
         $(this).parent().next().find('select').hide();
         $(this).parent().next().find('.' + type).show();
