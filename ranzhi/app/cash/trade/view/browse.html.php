@@ -25,7 +25,7 @@
   <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>
     <thead>
       <tr>
-        <th class='w-80px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->trade->id);?></th>
+        <th class='w-70px text-right'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->trade->id);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('depositor', $orderBy, $vars, $lang->trade->depositor);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->trade->type);?></th>
         <th><?php commonModel::printOrderLink('trader', $orderBy, $vars, $lang->trade->trader);?></th>
@@ -41,7 +41,7 @@
     <tbody>
       <?php foreach($trades as $trade):?>
       <tr>
-        <td><?php echo $trade->id;?></td>
+        <td class='text-right'><?php echo $trade->id;?></td>
         <td><?php echo $depositorList[$trade->depositor];?></td>
         <td><?php echo $lang->trade->typeList[$trade->type];?></td>
         <td><?php echo zget($customerList, $trade->trader);?></td>
