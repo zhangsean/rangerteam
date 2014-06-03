@@ -1,9 +1,10 @@
 <?php
 /**
- * The html template file of select version method of upgrade module of ZenTaoPMS.
+ * The html template file of select version method of upgrade module of RanZhi.
  *
- * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     LGPL
+ * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
+ * @license     http://api.chanzhi.org/goto.php?item=license
+ * @license     http://api.chanzhi.org/goto.php?item=license 
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $Id$
@@ -11,19 +12,23 @@
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
 <form method='post' action='<?php echo inlink('confirm');?>'>
-  <table align='center' class='table table-bordered'>
-    <caption><?php echo $lang->upgrade->selectVersion;?></caption>
-    <tr>
-      <td>
-        <p>
+<div class='container'>
+  <div class='modal-dialog'>
+    <div class='modal-header'>
+      <h3><?php echo $lang->upgrade->selectVersion;?></h3>
+    </div>
+    <div class='modal-body'>
+      <div class='form-group'>
         <?php 
-        echo html::select('fromVersion', $lang->upgrade->fromVersions, $version);
-        echo "<span class='red'>{$lang->upgrade->versionNote}</span>";
+          echo html::select('fromVersion', $lang->upgrade->fromVersions, $version, "class='form-control single-input'");
+          echo "&nbsp;&nbsp;<span class='text-danger help-inline'>{$lang->upgrade->versionNote}</span>";
         ?>
-        </p>
-        <?php echo html::submitButton($lang->upgrade->common);?>
-      </td>
-    </tr>
-  </table>
+      </div>
+    </div>
+    <div class='modal-footer'>
+      <?php echo html::submitButton($lang->upgrade->common);?>
+    </div>
+  </div>
+</div>
 </form>
-<?php include '../../common/view/footer.lite.html.php';?>
+<?php include '../../install/view/footer.html.php';?>

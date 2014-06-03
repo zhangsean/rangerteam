@@ -50,7 +50,9 @@ class upgradeModel extends model
     {
         switch($fromVersion)
         {
-            case '1_0': $this->execSQL($this->getUpgradeFile('1.0'));
+            case '1_0':
+                $this->execSQL($this->getUpgradeFile('1.0'));
+                $this->createCashEntry();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -95,7 +97,7 @@ class upgradeModel extends model
      */
     public function getUpgradeFile($version)
     {
-        return $this->app->getAppRoot() . 'db' . DS . 'upgrade' . $version . '.sql';
+        return $this->app->getBasepath() . 'db' . DS . 'upgrade' . $version . '.sql';
     }
 
     /**
@@ -130,7 +132,6 @@ class upgradeModel extends model
                 $sql = str_replace('CHARACTER SET utf8 COLLATE utf8_general_ci', '', $sql);
             }
 
-            $sql = str_replace(array('eps_', 'xr_'), $this->config->db->prefix, $sql);
             try
             {
                 $this->dbh->exec($sql);
@@ -167,25 +168,31 @@ class upgradeModel extends model
     }
 
     /**
-     * Import area data.
+     * create cash entry.
      * 
      * @access public
      * @return void
      */
-    public function importArea()
+    public function createCashEntry()
     {
-        include $this->app->getDataRoot() . '/area.php';
-        foreach($provinces as $province)
-        {
-            $province['type'] = 'area';
-            $this->dao->replace(TABLE_CATEGORY)->data($province)->exec();
-        }
+        $entry = new stdclass();
 
-        foreach($cities as $city)
-        {
-            $city['type'] = 'area';
-            $this->dao->replace(TABLE_CATEGORY)->data($city)->exec();
-        }
-        return true;
+        $entry->name     = 'cash';
+        $entry->code     = 'cash';
+        $entry->open     = 'iframe';
+        $entry->order    = 2;
+        $entry->ip       = '*';
+        $entry->key      = '438d85f2c2b04372662c63ebfb1c4c2f';
+        $entry->logo     = $this->config->webRoot . 'theme/default/images/ips/app-cash.png';
+        $entry->login    = '../cash';
+        $entry->ip       = '*';
+        $entry->control  = 'simple';
+        $entry->size     = 'max';
+        $entry->position = 'default';
+
+        $block = $this->config->requestType == 'GET' ? 'cash/index.php?m=block&f=index' : 'cash/block-index.html';
+        $entry->block = $this->config->webRoot . $block;
+
+        $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
     }
 }
