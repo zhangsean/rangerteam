@@ -19,7 +19,7 @@ class entryModel extends model
      */
     public function getEntries()
     {
-        $entries = $this->dao->select('*')->from(TABLE_ENTRY)->fetchAll();
+        $entries = $this->dao->select('*')->from(TABLE_ENTRY)->orderBy('`order`')->fetchAll();
         return $entries;
     }
 
