@@ -37,6 +37,7 @@ $lang->trade->edit        = '编辑';
 $lang->trade->detail      = '明细';
 $lang->trade->browse      = '账目列表';
 $lang->trade->batchCreate = '批量记账';
+$lang->trade->newTrader   = '新建';
 
 $lang->trade->typeList['in']          = '收入';
 $lang->trade->typeList['out']         = '支出';

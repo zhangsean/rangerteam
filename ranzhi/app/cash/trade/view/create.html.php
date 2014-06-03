@@ -54,7 +54,10 @@
         <?php if($type == 'out'):?>
         <tr>
           <th><?php echo $lang->trade->trader;?></th>
-          <td><?php echo html::input('trader', '', "class='form-control'");?></td>
+          <td>
+            <?php if(!empty($traderList)) echo html::select('trader', $traderList, '', "class='form-control'");?>
+            <?php if(empty($traderList)) echo html::input('trader', '', "class='form-control'");?>
+          </td>
         </tr>
         <?php endif;?>
         <?php if($type == 'in'):?>

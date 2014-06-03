@@ -37,6 +37,7 @@ $lang->trade->edit        = 'Edit';
 $lang->trade->detail      = 'Detail';
 $lang->trade->browse      = 'Bills';
 $lang->trade->batchCreate = 'Batch';
+$lang->trade->newTrader   = 'Create Trader';
 
 $lang->trade->typeList['in']  = 'Income';
 $lang->trade->typeList['out'] = 'Expend';
