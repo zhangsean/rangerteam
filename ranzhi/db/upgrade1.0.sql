@@ -6,7 +6,7 @@ ALTER TABLE `oa_doc` change `addedDate` `createdDate` datetime NOT NULL;
 ALTER TABLE `sys_file` change `addedBy` `createdBy`  varchar(30) NOT NULL;
 ALTER TABLE `sys_file` change `addedDate` `createdDate` datetime NOT NULL;
 
-ALTER TABLE `crm_customer` add `relation` enum('client', 'provider', 'partner') NOT NULL default 'client';
+ALTER TABLE `crm_customer` add `relation` enum('client', 'provider', 'partner') NOT NULL default 'client' AFTER `type`;
 
 CREATE TABLE `cash_depositor` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
