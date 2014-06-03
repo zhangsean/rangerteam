@@ -64,7 +64,7 @@ $lang->in->desc     = '描述';
 $lang->in->keywords = '关键词';
 $lang->in->children = '子科目';
 
-/* Lang items for expense. */
+/* Lang items for expend. */
 $lang->out = new stdclass();
 $lang->out->common   = '支出科目';
 $lang->out->name     = '名称';

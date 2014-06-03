@@ -64,7 +64,7 @@ $lang->in->desc     = 'Description';
 $lang->in->keywords = 'Keyword';
 $lang->in->children = "Children";
 
-/* Lang items for expense. */
+/* Lang items for expend. */
 $lang->out = new stdclass();
 $lang->out->common   = 'Expense';
 $lang->out->name     = 'Name';

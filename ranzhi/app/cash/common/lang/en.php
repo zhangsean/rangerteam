@@ -17,7 +17,7 @@ $lang->menu->cash->dashboard = 'Dashboard|dashboard|index|';
 $lang->menu->cash->trade     = 'Bills|trade|index|';
 $lang->menu->cash->check     = 'Checking|depositor|check|';
 $lang->menu->cash->depositor = 'Depositor|depositor|index|';
-$lang->menu->cash->setting   = 'Settings|tree|browse|type=income|';
+$lang->menu->cash->setting   = 'Settings|tree|browse|type=in|';
 
 /* Menu of depositor module. */
 $lang->depositor = new stdclass();
@@ -34,5 +34,5 @@ $lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> Bil
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->income   = 'Income|tree|browse|type=in|';
-$lang->setting->menu->expense  = 'Expend|tree|browse|type=out|';
+$lang->setting->menu->expend   = 'Expend|tree|browse|type=out|';
 $lang->setting->menu->currency = 'Currency|setting|lang|module=depositor&field=currencyList';
