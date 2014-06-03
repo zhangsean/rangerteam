@@ -302,7 +302,7 @@ CREATE TABLE `cash_trade` (
   `depositor` mediumint(8) NOT NULL,
   `parent` text NOT NULL,
   `product` mediumint(8) NOT NULL,
-  `trader` char(100) NOT NULL,
+  `trader` smallint(5) unsigned NOT NULL DEFAULT 0,
   `order` mediumint(8) NOT NULL,
   `contract` mediumint(8) NOT NULL,
   `dept` mediumint(8) unsigned NOT NULL,
