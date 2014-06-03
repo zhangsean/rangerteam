@@ -9,6 +9,8 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->customer)) $lang->customer = new stdclass();
+
 $lang->customer->common      = 'Customer';
 $lang->customer->id          = 'ID';
 $lang->customer->name        = 'Name';

@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->contract)) $lang->contract = new stdclass();
 $lang->contract->common = 'Contract';
 
 $lang->contract->id            = 'ID';

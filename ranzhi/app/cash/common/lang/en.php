@@ -14,10 +14,8 @@ $lang->app->name = 'CASH';
 
 $lang->menu->cash = new stdclass();
 $lang->menu->cash->dashboard = 'Dashboard|dashboard|index|';
-$lang->menu->cash->trade     = 'Bookkeeping|trade|index|';
-$lang->menu->cash->invocie   = 'Invocie|invocie|index|';
-$lang->menu->cash->claim     = 'Expenses Claim|claim|index|';
-$lang->menu->cash->report    = 'Report|report|index|';
+$lang->menu->cash->trade     = 'Bills|trade|index|';
+$lang->menu->cash->check     = 'Checking|depositor|check|';
 $lang->menu->cash->depositor = 'Depositor|depositor|index|';
 $lang->menu->cash->setting   = 'Settings|tree|browse|type=income|';
 
@@ -25,18 +23,16 @@ $lang->menu->cash->setting   = 'Settings|tree|browse|type=income|';
 $lang->depositor = new stdclass();
 $lang->depositor->menu = new stdclass();
 $lang->depositor->menu->browse = array('link' => '<i class="icon-th-list"></i> Depositor List|depositor|browse|', 'alias' => 'create,edit,view');
+$lang->depositor->menu->balance = '<i class="icon-th-list"></i> Balance|balance|browse|';
 
 /* Menu of trade module. */
 $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
-$lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> Trade List|trade|browse|', 'alias' => 'create,edit,view');
-$lang->trade->menu->transfer = 'Transfer|trade|transfer|';
-$lang->trade->menu->expense  = 'Expense|tree|browse|type=expense|';
-$lang->trade->menu->income   = 'Income|tree|browse|type=income|';
+$lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> Bills|trade|browse|', 'alias' => 'create,edit,view');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->income   = 'Income|tree|browse|type=income|';
-$lang->setting->menu->expense  = 'Expense|tree|browse|type=expense|';
+$lang->setting->menu->expense  = 'Expend|tree|browse|type=expense|';
 $lang->setting->menu->currency = 'Currency|setting|lang|module=depositor&field=currencyList';

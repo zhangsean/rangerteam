@@ -18,6 +18,7 @@ $lang->minus   = ' - ';
 $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->at      = ' At ';
+$lang->by      = ' By ';
 $lang->ditto   = 'Ditto';
 $lang->submitting   = 'Saving...';
 

@@ -25,12 +25,26 @@ $lang->depositor->createdDate     = 'Created Date';
 $lang->depositor->editedBy        = 'Edited By';
 $lang->depositor->editedDate      = 'Edited Date';
 
+$lang->depositor->common   = 'Depositor';
+$lang->depositor->all      = 'All';
 $lang->depositor->create   = 'Create';
 $lang->depositor->list     = 'List';
 $lang->depositor->edit     = 'Edit';
 $lang->depositor->view     = 'View';
-$lang->depositor->forbid   = 'Forbid';
+$lang->depositor->forbid   = 'Disable';
 $lang->depositor->activate = 'Activate';
+$lang->depositor->balance  = 'Blance';
+
+$lang->depositor->check         = 'Check';
+$lang->depositor->start         = 'Begin';
+$lang->depositor->end           = 'End';
+$lang->depositor->originValue   = 'Initial';
+$lang->depositor->actualValue   = 'Real';
+$lang->depositor->computedValue = 'Computed';
+$lang->depositor->result        = 'Result';
+$lang->depositor->success       = "<span class='text-success'>Ok</span>";
+$lang->depositor->more          = "<span class='text-danger'>%s</span>";
+$lang->depositor->less          = "<span class='text-danger'>%s</span>";
 
 $lang->depositor->typeList['cash']   = 'Cash';
 $lang->depositor->typeList['bank']   = 'Bank';
