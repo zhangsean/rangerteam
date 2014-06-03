@@ -54,7 +54,13 @@
         <?php if($trade->type == 'out'):?>
         <tr>
           <th><?php echo $lang->trade->trader;?></th>
-          <td><?php echo html::input('trader', $trade->trader, "class='form-control'");?></td>
+          <td>
+            <div class='input-group'>
+              <?php  echo html::select('trader', $traderList, $trade->trader, "class='form-control'");?>
+              <?php  echo html::input('traderName', '', "class='form-control' style='display:none'");?>
+              <div class='input-group-addon'><?php echo html::checkbox('createTrader', array( 1 => $lang->trade->newTrader));?></div>
+            </div>
+          </td>
         </tr>
         <?php endif;?>
         <?php if($trade->type == 'in'):?>

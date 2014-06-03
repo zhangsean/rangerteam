@@ -55,15 +55,22 @@
         <tr>
           <th><?php echo $lang->trade->trader;?></th>
           <td>
-            <?php if(!empty($traderList)) echo html::select('trader', $traderList, '', "class='form-control'");?>
-            <?php if(empty($traderList)) echo html::input('trader', '', "class='form-control'");?>
+            <?php if(count($traderList) > 1):?>
+            <div class='input-group'>
+              <?php  echo html::select('trader', $traderList, '', "class='form-control'");?>
+              <?php  echo html::input('traderName', '', "class='form-control' style='display:none'");?>
+              <div class='input-group-addon'><?php echo html::checkbox('createTrader', array( 1 => $lang->trade->newTrader));?></div>
+            </div>
+            <?php else:?>
+            <?php echo html::input('traderName', '', "class='form-control'") . html::hidden('createTrader', 1);?>
+            <?php endif;?>
           </td>
         </tr>
         <?php endif;?>
         <?php if($type == 'in'):?>
         <tr>
           <th><?php echo $lang->trade->customer;?></th>
-          <td><?php echo html::select('trader', $customerList, '', "class='form-control'");?></td>
+          <td><?php  echo html::select('trader', $customerList, '', "class='form-control'");?></td>
         </tr>
         <?php endif;?>
         <tr>

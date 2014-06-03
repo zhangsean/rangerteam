@@ -57,6 +57,7 @@ class tradeModel extends model
     public function create($type)
     {
         $now = helper::now();
+        
         $trade = fixer::input('post')
             ->add('type', $type)
             ->add('createdBy', $this->app->user->account)
@@ -71,16 +72,33 @@ class tradeModel extends model
             ->removeIf($type == 'out', 'objectType')
             ->get();
 
+
         $depositor = $this->loadModel('depositor')->getByID($trade->depositor);
         $trade->currency = $depositor->currency;
 
         $this->dao->insert(TABLE_TRADE)
-            ->data($trade)
+            ->data($trade, $skip = 'createTrader,traderName')
             ->autoCheck()
             ->batchCheck($this->config->trade->require->create, 'notempty')
+            ->checkIF(!$this->post->createTrader, 'trader', 'notempty')
             ->exec();
 
-        return $this->dao->lastInsertID();
+        $tradeID = $this->dao->lastInsertID();
+
+        if($this->post->createTrader and $type == 'out')
+        {
+            $trader = new stdclass();
+            $trader->relation = 'provider';
+            $trader->name     = $this->post->traderName;
+
+            $this->dao->insert(TABLE_CUSTOMER)->data($trader)->check('name', 'notempty')->exec();
+            $trader = $this->dao->lastInsertID();
+
+            $this->dao->update(TABLE_TRADE)->set('trader')->eq($trader)->where('id')->eq($tradeID)->exec();
+        }
+
+        return $tradeID;
+
     }
 
     /**
@@ -153,7 +171,24 @@ class tradeModel extends model
         if($handlers) $trade->dept = $handlers->dept;
 
 
-        $this->dao->update(TABLE_TRADE)->data($trade)->autoCheck()->where('id')->eq($tradeID)->exec();
+        $this->dao->update(TABLE_TRADE)
+            ->data($trade, $skip = 'createTrader,traderName')
+            ->autoCheck()
+            ->batchCheck($this->config->trade->require->edit, 'notempty')
+            ->checkIF(!$this->post->createTrader, 'trader', 'notempty')
+            ->where('id')->eq($tradeID)->exec();
+
+        if($this->post->createTrader and $type == 'out')
+        {
+            $trader = new stdclass();
+            $trader->relation = 'provider';
+            $trader->name     = $this->post->traderName;
+
+            $this->dao->insert(TABLE_CUSTOMER)->data($trader)->check('name', 'notempty')->exec();
+            $trader = $this->dao->lastInsertID();
+
+            $this->dao->update(TABLE_TRADE)->set('trader')->eq($trader)->where('id')->eq($tradeID)->exec();
+        }
 
         if(!dao::isError()) return commonModel::createChanges($oldDepositor, $trade);
 

@@ -79,8 +79,8 @@ class trade extends control
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
-        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs($mode = 'query', "relation in ('client','partner')");
+        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs($mode = 'query', "relation in ('provider','partner')");
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs();
@@ -153,7 +153,8 @@ class trade extends control
         $this->view->title         = $this->lang->trade->edit;
         $this->view->trade         = $trade;
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs($mode = 'query', "relation in ('client','partner')");
+        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs($mode = 'query', "relation in ('provider','partner')");
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
