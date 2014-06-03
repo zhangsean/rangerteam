@@ -124,7 +124,7 @@ class balanceModel extends model
             ->removeIF($this->post->type == 'cash', 'public')
             ->get();
 
-        $this->dao->delete()->from(TABLE_BALANCE)->where('depositor')->eq($balance->depositor)->andWhere('date')->eq($balance->date)->exec();
+        $this->dao->delete()->from(TABLE_BALANCE)->where('depositor')->eq($balance->depositor)->andWhere('date')->eq($balance->date)->andWhere('id')->ne($balanceID)->exec();
 
         $this->dao->update(TABLE_BALANCE)->data($balance)->autoCheck()->where('id')->eq($balanceID)->exec();
 
