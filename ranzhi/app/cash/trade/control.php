@@ -111,8 +111,12 @@ class trade extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $this->view->depositors = $this->loadModel('depositor')->getPairs();
-        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->depositors    = $this->loadModel('depositor')->getPairs();
+        $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->expenseTypes  = $this->loadModel('tree')->getPairs(0, 'expense');
+        $this->view->incomeTypes   = $this->loadModel('tree')->getPairs(0, 'income');
+
         $this->display();
     }
 

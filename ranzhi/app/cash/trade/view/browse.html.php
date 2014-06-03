@@ -16,10 +16,10 @@
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->trade->browse;?></strong>
     <div class="panel-actions pull-right">
-      <?php echo html::a(inlink('create', 'type=in'),  "<i class='icon icon-plus'>{$lang->trade->in}</i>", "class='btn btn-primary'")?>
-      <?php echo html::a(inlink('create', 'type=out'), "<i class='icon icon-plus'>{$lang->trade->out}</i>", "class='btn btn-primary'")?>
-      <?php echo html::a(inlink('transfer'), "<i class='icon icon-plus'>{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
-      <?php echo html::a(inlink('batchcreate'), "<i class='icon icon-plus'>{$lang->trade->batchCreate}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('create', 'type=in'),  "{$lang->trade->in}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('create', 'type=out'), "{$lang->trade->out}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('transfer'), "{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('batchcreate'), "{$lang->trade->batchCreate}</i>", "class='btn btn-primary'")?>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>
@@ -59,6 +59,9 @@
       </tr>
       <?php endforeach;?>
     </tbody>
+    <tfoot>
+      <tr><td colspan='11'><?php echo $pager->get();?></td></tr>
+    </tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.html.php';?>

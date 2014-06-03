@@ -12,33 +12,44 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
+<?php js::set('dittoText', $lang->ditto);?>
 <form id='ajaxForm' method='post'>
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $lang->trade->batchCreate;?></strong></div>
-    <table class='table table-form'>
+    <table class='table'>
       <thead>
         <tr class='text-center'>
-          <th class='w-60px'><?php echo $lang->trade->id;?></th> 
-          <th class='w-150px'><?php echo $lang->trade->type;?></th> 
-          <th><?php echo $lang->trade->depositor;?> <span class='required'></span></th>
-          <th class='w-160px'><?php echo $lang->trade->money;?></th>
-          <th class='w-160px'><?php echo $lang->trade->handlers;?></th>
+          <th class='w-100px'><?php echo $lang->trade->depositor;?></th>
+          <th class='w-100px'><?php echo $lang->trade->type;?></th> 
+          <th class='w-200px'><?php echo $lang->trade->category;?></th> 
+          <th class='w-200px'><?php echo $lang->trade->trader;?></th> 
+          <th class='w-120px'><?php echo $lang->trade->money;?></th>
+          <th class='w-200px'><?php echo $lang->trade->handlers;?></th>
           <th class='w-150px'><?php echo $lang->trade->date;?></th>
-          <th class='w-300px'><?php echo $lang->trade->desc;?></th>
+          <th><?php echo $lang->trade->desc;?></th>
         </tr>
       </thead>
-
-      <?php for($i = 0; $i < $config->trade->batchCreate; $i++):?>
-      <tr>
-        <td class='text-center'><?php echo $i+1;?></td>
-        <td><?php echo html::select("type[$i]", $lang->trade->typeList, '', "class='form-control'");?></td>
-        <td><?php echo html::select("depositor[$i]", $depositors, '', "class='form-control'");?></td>
-        <td><?php echo html::input("money[$i]", '', "class='form-control'");?></td>
-        <td><?php echo html::select("handlers[$i]", $users, '', "class=form-control");?></td>
-        <td><?php echo html::input("date[$i]", '', "class='form-control form-date'");?></td>
-        <td><?php echo html::textarea("desc[$i]", '', "rows='1' class='form-control'");?></td>
-      </tr>
-      <?php endfor;?>
+      <tbody>
+        <?php for($i = 0; $i < $config->trade->batchCreate; $i++):?>
+        <tr>
+          <td><?php echo html::select("depositor[$i]", $depositors, '', "class='form-control'");?></td>
+          <td><?php echo html::select("type[$i]", $lang->trade->typeList, 'out', "class='form-control type'");?></td>
+          <td>
+            <?php echo html::select("incomeType[$i]", $incomeTypes, '', "class='form-control in' style='display:none'");?>
+            <?php echo html::select("expenseType[$i]", $expenseTypes, '', "class='form-control out'");?>
+          </td>
+          <td>
+            <?php echo html::input("trader[$i]", '', "class='form-control out'");?>
+            <?php echo html::select("customer[$i]", $customerList, '', "class='form-control in' style='display:none'");?>
+          </td>
+          <td><?php echo html::input("money[$i]", '', "class='form-control'");?></td>
+          <td><?php echo html::select("handlers[$i]", $users, '', "class='form-control chosen' multiple");?></td>
+          <td><?php echo html::input("date[$i]", '', "class='form-control form-date'");?></td>
+          <td><?php echo html::textarea("desc[$i]", '', "rows='1' class='form-control'");?></td>
+        </tr>
+        <?php endfor;?>
+      </tbody>
       <tr><td colspan='6' class='text-center'><?php echo html::submitButton() . html::backButton();?></td></tr>
     </table>
   </div>
