@@ -19,6 +19,7 @@ $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->at      = ' 于 ';
 $lang->by      = ' 由 ';
+$lang->ditto   = '同上';
 $lang->submitting   = '稍候...';
 
 /* Lang items for ranzhi. */
@@ -80,6 +81,7 @@ $lang->goback         = '返回';
 $lang->search         = '搜索';
 $lang->assign         = '指派';
 $lang->create         = '新建';
+$lang->forbid         = '禁用';
 $lang->activate       = '激活';
 $lang->view           = '查看';
 $lang->more           = '更多';

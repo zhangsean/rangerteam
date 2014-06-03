@@ -13,10 +13,26 @@ $lang->app = new stdclass();
 $lang->app->name = 'CASH';
 
 $lang->menu->cash = new stdclass();
-$lang->menu->cash->dashboard = '概覽|index|index|';
+$lang->menu->cash->dashboard = '我的地盤|dashboard|index|';
 $lang->menu->cash->trade     = '記賬|trade|index|';
-$lang->menu->cash->invocie   = '發票|invocie|index|';
-$lang->menu->cash->claim     = '報銷|claim|index|';
-$lang->menu->cash->report    = '報表|report|index|';
+$lang->menu->cash->check     = '對賬|depositor|check|';
 $lang->menu->cash->depositor = '賬戶|depositor|index|';
-$lang->menu->cash->setting   = '設置|setting|index|';
+$lang->menu->cash->setting   = '設置|tree|browse|type=income|';
+
+/* Menu of depositor module. */
+$lang->depositor = new stdclass();
+$lang->depositor->menu = new stdclass();
+$lang->depositor->menu->browse  = array('link' => '<i class="icon-th-list"></i> 帳號列表|depositor|browse|', 'alias' => 'create,edit,view');
+$lang->depositor->menu->balance = '<i class="icon-th-list"></i> 賬號餘額|balance|browse|';
+
+/* Menu of trade module. */
+$lang->trade = new stdclass();
+$lang->trade->menu = new stdclass();
+$lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> 列表|trade|browse|', 'alias' => 'create,edit,view');
+
+/* Menu of setting module. */
+$lang->setting = new stdclass();
+$lang->setting->menu = new stdclass();
+$lang->setting->menu->income   = '收入科目設置|tree|browse|type=income|';
+$lang->setting->menu->expense  = '支出科目設置|tree|browse|type=expense|';
+$lang->setting->menu->currency = '貨幣類型設置|setting|lang|module=depositor&field=currencyList';

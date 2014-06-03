@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->product)) $lang->product = new stdclass();
 $lang->product->common    = '產品維護';
 
 $lang->product->id          = '編號';
