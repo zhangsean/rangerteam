@@ -35,7 +35,6 @@ ranzhi:
 	#chmod a+rx ranzhi/bin/*
 	#find ranzhi/ -name ext |xargs chmod -R 777
 	# remove the module that is not release.
-	rm -rf ranzhi/app/cash
 	rm -rf ranzhi/app/sns
 	rm -rf ranzhi/www/cash
 	rm -rf ranzhi/www/sns
