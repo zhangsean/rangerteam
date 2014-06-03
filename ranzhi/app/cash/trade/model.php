@@ -33,7 +33,7 @@ class tradeModel extends model
      */
     public function getList($orderBy, $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_TRADE)->where('parent')->eq(0)->orderBy($orderBy)->page($pager)->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_TRADE)->where('parent')->eq('')->orderBy($orderBy)->page($pager)->fetchAll('id');
     }
 
     /** 
@@ -68,6 +68,7 @@ class tradeModel extends model
             ->setIf($this->post->type == 'in', 'order', '')
             ->setIf(!$this->post->objectType or !in_array('order', $this->post->objectType), 'order', 0)
             ->setIf(!$this->post->objectType or !in_array('contract', $this->post->objectType), 'contract', 0)
+            ->removeIf($type == 'out', 'objectType')
             ->get();
 
         $depositor = $this->loadModel('depositor')->getByID($trade->depositor);
