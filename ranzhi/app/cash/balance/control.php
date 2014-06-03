@@ -33,9 +33,6 @@ class balance extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $expenseTypes  = $this->loadModel('tree')->getPairs('expense', 0, $removeRoot = true);
-        $incomeTypes   = $this->loadModel('tree')->getOptionMenu('income', 0, $removeRoot = true);
-
         $this->view->title     = $this->lang->balance->browse;
         $this->view->balances  = $this->balance->getList($orderBy, $pager);
         $this->view->depositor = $depositor;

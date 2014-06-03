@@ -37,8 +37,8 @@ class trade extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $expenseTypes = $this->loadModel('tree')->getPairs(0, 'expense');
-        $incomeTypes  = $this->loadModel('tree')->getPairs(0, 'income');
+        $expenseTypes = $this->loadModel('tree')->getPairs(0, 'out');
+        $incomeTypes  = $this->loadModel('tree')->getPairs(0, 'in');
 
         $this->view->title   = $this->lang->trade->browse;
         $this->view->trades  = $this->trade->getList($orderBy, $pager);
@@ -79,14 +79,14 @@ class trade extends control
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getTraderPairs('provider');
-        $this->view->traderList    = $this->loadModel('customer', 'crm')->getTraderPairs('client', false);
+        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs();
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs();
 
-        if($type == 'out') $this->view->categories = $this->loadModel('tree')->getPairs(0, 'expense');
-        if($type == 'in')  $this->view->categories = $this->loadModel('tree')->getPairs(0, 'income');
+        if($type == 'out') $this->view->categories = $this->loadModel('tree')->getPairs(0, 'out');
+        if($type == 'in')  $this->view->categories = $this->loadModel('tree')->getPairs(0, 'in');
 
         $this->display();
     }
@@ -113,8 +113,8 @@ class trade extends control
         $this->view->depositors    = $this->loadModel('depositor')->getPairs();
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
-        $this->view->expenseTypes  = $this->loadModel('tree')->getPairs(0, 'expense');
-        $this->view->incomeTypes   = $this->loadModel('tree')->getPairs(0, 'income');
+        $this->view->expenseTypes  = $this->loadModel('tree')->getPairs(0, 'out');
+        $this->view->incomeTypes   = $this->loadModel('tree')->getPairs(0, 'in');
 
         $this->display();
     }
@@ -160,8 +160,8 @@ class trade extends control
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
        
-        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getPairs(0, 'expense');
-        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getPairs(0, 'income');
+        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getPairs(0, 'out');
+        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getPairs(0, 'in');
 
         $this->display();
     }
@@ -227,8 +227,8 @@ class trade extends control
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
         $this->view->users         = $this->loadModel('user')->getPairs();
 
-        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getPairs(0, 'expense');
-        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getPairs(0, 'income');
+        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getPairs(0, 'out');
+        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getPairs(0, 'in');
 
         $this->display();
     }

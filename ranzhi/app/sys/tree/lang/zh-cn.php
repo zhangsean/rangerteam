@@ -55,24 +55,24 @@ $lang->industry->keywords = '关键词';
 $lang->industry->children = "子行业";
 
 /* Lang items for income. */
-$lang->income = new stdclass();
-$lang->income->common   = '收入科目';
-$lang->income->name     = '名称';
-$lang->income->alias    = '别名';
-$lang->income->parent   = '上级科目';
-$lang->income->desc     = '描述';
-$lang->income->keywords = '关键词';
-$lang->income->children = '子科目';
+$lang->in = new stdclass();
+$lang->in->common   = '收入科目';
+$lang->in->name     = '名称';
+$lang->in->alias    = '别名';
+$lang->in->parent   = '上级科目';
+$lang->in->desc     = '描述';
+$lang->in->keywords = '关键词';
+$lang->in->children = '子科目';
 
 /* Lang items for expense. */
-$lang->expense = new stdclass();
-$lang->expense->common   = '支出科目';
-$lang->expense->name     = '名称';
-$lang->expense->alias    = '别名';
-$lang->expense->parent   = '上级科目';
-$lang->expense->desc     = '描述';
-$lang->expense->keywords = '关键词';
-$lang->expense->children = '子科目';
+$lang->out = new stdclass();
+$lang->out->common   = '支出科目';
+$lang->out->name     = '名称';
+$lang->out->alias    = '别名';
+$lang->out->parent   = '上级科目';
+$lang->out->desc     = '描述';
+$lang->out->keywords = '关键词';
+$lang->out->children = '子科目';
 
 $lang->board->readonlyList[0] = '开放';
 $lang->board->readonlyList[1] = '只读';

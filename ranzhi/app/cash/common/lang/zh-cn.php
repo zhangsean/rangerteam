@@ -17,7 +17,7 @@ $lang->menu->cash->dashboard = '我的地盘|dashboard|index|';
 $lang->menu->cash->trade     = '记账|trade|index|';
 $lang->menu->cash->check     = '对账|depositor|check|';
 $lang->menu->cash->depositor = '账户|depositor|index|';
-$lang->menu->cash->setting   = '设置|tree|browse|type=income|';
+$lang->menu->cash->setting   = '设置|tree|browse|type=in|';
 
 /* Menu of depositor module. */
 $lang->depositor = new stdclass();

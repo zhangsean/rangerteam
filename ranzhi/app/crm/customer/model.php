@@ -31,7 +31,7 @@ class customerModel extends model
      * @access public
      * @return array
      */
-    public function getList($orderBy = 'id_desc', $pager = null)
+    public function getList($mode, $param, $orderBy = 'id_desc', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
