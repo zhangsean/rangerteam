@@ -26,15 +26,19 @@ class customerModel extends model
     /** 
      * Get customer list.
      * 
+     * @param  string  $mode 
+     * @param  mix     $param 
      * @param  string  $orderBy 
      * @param  object  $pager 
      * @access public
      * @return array
      */
-    public function getList($mode, $param, $orderBy = 'id_desc', $pager = null)
+    public function getList($mode = 'all', $param = null, $orderBy = 'id_desc', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
+            ->beginIF($mode != 'all' and $mode != 'query')->andWhere($mode)->eq($param)->fi()
+            ->beginIF($mode == 'query')->andWhere($param)->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
@@ -43,15 +47,19 @@ class customerModel extends model
     /** 
      * Get customer pairs.
      * 
-     * @param  string $orderBy 
-     * @param  int    $emptyOption 
+     * @param  string  $mode 
+     * @param  mix     $param 
+     * @param  string  $orderBy 
+     * @param  bool    $emptyOption 
      * @access public
      * @return array
      */
-    public function getPairs($orderBy = 'id_desc', $emptyOption = true)
+    public function getPairs($mode = 'all', $param = null, $orderBy = 'id_desc', $emptyOption = true)
     {
         $customers = $this->dao->select('id, name')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
+            ->beginIF($mode != 'all' and $mode != 'query')->andWhere($mode)->eq($param)->fi()
+            ->beginIF($mode == 'query')->andWhere($param)->fi()
             ->orderBy($orderBy)
             ->fetchPairs('id');
 
