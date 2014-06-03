@@ -42,18 +42,21 @@ class blockModel extends model
         $entry = $this->loadModel('entry')->getById($block->entryID);
         $http  = $this->app->loadClass('http');
 
-        $block->params->account = $this->app->user->account;
-        $block->params->uid     = $this->app->user->id;
-        $params = base64_encode(json_encode($block->params));
+        if(isset($block->params))
+        {
+            $block->params->account = $this->app->user->account;
+            $block->params->uid     = $this->app->user->id;
+            $params = base64_encode(json_encode($block->params));
+        }
 
         $query['mode']    = 'getblockdata';
         $query['blockid'] = $block->blockID;
-        $query['param']   = $params;
         $query['hash']    = $entry->key;
         $query['entry']   = $entry->id;
         $query['app']     = 'sys';
         $query['lang']    = $this->app->getClientLang();
         $query['sso']     = base64_encode(commonModel::getSysURL() . helper::createLink('entry', 'visit', "entry=$entry->id"));
+        if(isset($params)) $query['param'] = $params;
 
         $query     = http_build_query($query);
         $parsedUrl = parse_url($entry->block);

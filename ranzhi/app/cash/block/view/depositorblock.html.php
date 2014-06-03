@@ -10,24 +10,22 @@
  * @link        http://www.zentao.net
  */
 ?>
-<table class='table table-form table-data block-depositor table-fixed'>
+<table class='table table-data table-hover block-depositor table-fixed'>
   <tr>
-    <td>
-      <div class='lead'><?php echo $depositor->abbr;?></div>
-      <div class='info'>
-      <?php echo "<div><strong>{$lang->depositor->type} {$lang->colon} </strong>{$lang->depositor->typeList[$depositor->type]}</div>";?>
-      <?php if($depositor->type != 'cash'):?>
-      <?php echo "<div><strong>{$lang->depositor->title} {$lang->colon} </strong>$depositor->title</div>";?>
-      <?php if($depositor->type == 'bank') echo "<div><strong>{$lang->depositor->bankProvider} {$lang->colon} </strong>$depositor->provider </div>";?>
-      <?php if($depositor->type == 'online') echo "<div><strong>{$lang->depositor->serviceProvider} {$lang->colon} </strong>{$lang->depositor->providerList[$depositor->provider]} </div>";?>
-      <?php echo "<div><strong>{$lang->depositor->account} {$lang->colon} </strong>$depositor->account</div>";?>
-      <?php if($depositor->type == 'bank') echo "<div><strong>{$lang->depositor->bankcode} {$lang->colon} </strong>$depositor->bankcode</div>";?>
-      <?php if($depositor->type != 'cash') echo "<div><strong>{$lang->depositor->public} {$lang->colon} </strong>{$lang->depositor->publicList[$depositor->public]}</div>";?>
-      <?php endif;?>
-      <?php echo "<div><strong>{$lang->depositor->currency} {$lang->colon} </strong>{$lang->depositor->currencyList[$depositor->currency]}</div>";?>
-      <?php echo "<div><strong>{$lang->depositor->status} {$lang->colon} </strong>{$lang->depositor->statusList[$depositor->status]}</div>";?>
-      </div>
-    </td>
+    <th class='w-160px'><?php echo $lang->depositor->title;?></th>
+    <th><?php echo $lang->depositor->serviceProvider . '/' . $lang->depositor->bankProvider;?></th>
+    <th class='w-130px'><?php echo $lang->depositor->account;?></th>
   </tr>
+  <?php foreach($depositors as $id => $depositor):?>
+  <tr>
+    <td><?php echo $depositor->title;?></td>
+    <?php if($depositor->type == 'bank'):?>
+    <td><?php echo $depositor->provider;?></td>
+    <?php else:?>
+    <td><?php echo $lang->depositor->providerList[$depositor->provider];?></td>
+    <?php endif;?>
+    <td><?php echo $depositor->account;?></td>
+  </tr>
+  <?php endforeach;?>
 </table>
-<script>$('.block-order').dataTable();</script>
+<script>$('.block-depositor').dataTable();</script>

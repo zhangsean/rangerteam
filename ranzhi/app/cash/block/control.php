@@ -70,7 +70,7 @@ class block extends control
         $this->view->blocks  = array_merge(array(''), $blocks);
 
         $this->view->title   = $this->lang->block->admin;
-        $this->view->params  = $blockID ? json_decode($this->block->{'get' . ucfirst($blockID) . 'Params'}(), true) : array();;
+        $this->view->params  = $blockID ? json_decode($this->block->{'get' . ucfirst($blockID) . 'Params'}(), true) : array();
         $this->view->blockID = $blockID;
         $this->view->block   = $block;
         $this->view->index   = $index;
@@ -115,7 +115,7 @@ class block extends control
 
         $this->processParams();
 
-        $this->view->depositor = $this->dao->select('*')->from(TABLE_DEPOSITOR)->where('id')->eq($this->params->depositor)->fetch();
+        $this->view->depositors = $this->dao->select('*')->from(TABLE_DEPOSITOR)->where('type')->ne('cash')->andWhere('status')->eq('normal')->fetchAll('id');
         $this->display();
     }
 

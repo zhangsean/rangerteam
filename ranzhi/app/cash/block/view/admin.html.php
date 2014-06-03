@@ -17,7 +17,7 @@
   <th class='w-100px'><?php echo $lang->block->lblBlock?></th>
   <td><?php echo html::select('blocks', $blocks, $blockID, "class='form-control'")?></td>
 </table>
-<?php if($params):?>
+<?php if($blockID):?>
 <form method='post' id='ajaxForm' action='<?php echo inlink('admin', "index=$index&blockID=$blockID")?>'>
   <table class='table table-form'>
     <tbody>

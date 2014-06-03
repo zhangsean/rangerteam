@@ -161,17 +161,20 @@ class block extends control
         {
             $block->value = json_decode($block->value);
 
-            $block->value->params->account = $this->app->user->account;
-            $block->value->params->uid     = $this->app->user->id;
+            if(isset($block->value->params))
+            {
+                $block->value->params->account = $this->app->user->account;
+                $block->value->params->uid     = $this->app->user->id;
+            }
 
             $query            = array();
             $query['mode']    = 'getblockdata';
             $query['blockid'] = $block->value->blockID;
-            $query['param']   = base64_encode(json_encode($block->value->params));
             $query['hash']    = '';
             $query['lang']    = $this->app->getClientLang();
             $query['sso']     = '';
             $query['app']     = $appName;
+            if(isset($block->value->params)) $query['param'] = base64_encode(json_encode($block->value->params));
 
             $query = http_build_query($query);
             $sign  = $this->config->requestType == 'PATH_INFO' ? '?' : '&';

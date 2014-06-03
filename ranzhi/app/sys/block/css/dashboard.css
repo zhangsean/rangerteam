@@ -7,6 +7,3 @@ body {background: #145ccd;}
 .dashboard .panel-actions {margin-top: 0; margin-right: 0;}
 .dashboard-actions {position: absolute; top: -34px; right: 80px}
 .dashboard-actions .btn {padding: 3px 12px}
-
-.block-depositor tr td{padding: 10px 15px;}
-.lead{margin-bottom: 10px;}

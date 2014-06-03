@@ -45,12 +45,7 @@ class blockModel extends model
      */
     public function getDepositorParams()
     {
-        $depositorList = $this->loadModel('depositor')->getPairs();
-
         $params = new stdclass();
-        $params->depositor['name']    = $this->lang->block->depositor;
-        $params->depositor['options'] = $depositorList;
-        $params->depositor['control'] = 'select';
 
         return json_encode($params);
     }
