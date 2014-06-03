@@ -28,7 +28,7 @@
         <th class='w-70px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->trade->id);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('depositor', $orderBy, $vars, $lang->trade->depositor);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->trade->type);?></th>
-        <th><?php commonModel::printOrderLink('trader', $orderBy, $vars, $lang->trade->trader);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('trader', $orderBy, $vars, $lang->trade->trader);?></th>
         <th class='w-120px'><?php commonModel::printOrderLink('money', $orderBy, $vars, $lang->trade->money);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('currency', $orderBy, $vars, $lang->trade->currency);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->trade->category);?></th>

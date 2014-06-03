@@ -214,6 +214,7 @@ class tradeModel extends model
 
         $payment = fixer::input('post')
             ->add('type', 'transferout')
+            ->add('category', 'transferout')
             ->add('depositor', $this->post->payment)
             ->add('currency', $paymentDepositor->currency)
             ->add('handlers', trim(join(',', $this->post->handlers), ','))
@@ -241,6 +242,7 @@ class tradeModel extends model
         $this->loadModel('action')->create('trade', $paymentID, 'Created');
 
         $receipt->type      = 'transferin';
+        $receipt->category  = 'transferin';
         $receipt->depositor = $this->post->receipt;
         $receipt->currency  = $receiptDepositor->currency;
         if($diffCurrency) $receipt->money = $this->post->transferIn;
@@ -261,6 +263,7 @@ class tradeModel extends model
         if($this->post->fee)
         {
             $fee->type     = 'fee';
+            $fee->category = 'fee';
             $fee->money    = $this->post->fee;
             $fee->desc     = sprintf($this->lang->trade->feeDesc, $fee->date, $paymentDepositor->abbr, $receiptDepositor->abbr);
             if($diffCurrency) $fee->desc = sprintf($this->lang->trade->feeDesc, $fee->date, $paymentDepositor->abbr, $receiptDepositor->abbr);

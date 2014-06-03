@@ -45,6 +45,10 @@ $lang->trade->typeList['transferout'] = '转出';
 $lang->trade->typeList['transferin']  = '转入';
 $lang->trade->typeList['fee']         = '手续费';
 
+$lang->trade->categoryList['transferin']  = '转入';
+$lang->trade->categoryList['transferout'] = '转出';
+$lang->trade->categoryList['fee']         = '手续费';
+
 $lang->trade->objectTypeList['order']    = '订单支出';
 $lang->trade->objectTypeList['contract'] = '合同支出';
 

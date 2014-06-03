@@ -45,8 +45,12 @@ $lang->trade->typeList['transferout'] = 'Transfer out';
 $lang->trade->typeList['transferin']  = 'Transfer in';
 $lang->trade->typeList['fee']         = 'Fee';
 
-$lang->trade->objectTypeList['order']    = 'Order?';
-$lang->trade->objectTypeList['contract'] = 'Contract?';
+$lang->trade->categoryList['transferin']  = 'Transfer In';
+$lang->trade->categoryList['transferout'] = 'Transfer Out';
+$lang->trade->categoryList['fee']         = 'Fee';
+
+$lang->trade->objectTypeList['order']    = 'Order';
+$lang->trade->objectTypeList['contract'] = 'Contract';
 
 $lang->trade->notEqual = 'The two depositor can not be the same!';
 $lang->trade->feeDesc  = '%s from %s to %s';

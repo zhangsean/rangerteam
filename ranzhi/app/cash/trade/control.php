@@ -49,7 +49,7 @@ class trade extends control
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
         $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getPairs(0, 'dept');
-        $this->view->categories    = $expenseTypes + $incomeTypes;
+        $this->view->categories    = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
         $this->view->users         = $this->loadModel('user')->getPairs();
 
         $this->display();
