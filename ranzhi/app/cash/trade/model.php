@@ -188,7 +188,7 @@ class tradeModel extends model
             ->setIF($diffCurrency, 'money', $this->post->transferOut)
             ->get();
 
-        $receipt = $payment ;
+        $receipt = $payment;
         $fee     = $payment;
 
         $this->dao->insert(TABLE_TRADE)
