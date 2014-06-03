@@ -55,24 +55,24 @@ $lang->industry->keywords = 'Keyword';
 $lang->industry->children = "Children";
 
 /* Lang items for income. */
-$lang->income = new stdclass();
-$lang->income->common   = 'Income';
-$lang->income->name     = 'Name';
-$lang->income->alias    = 'Alias';
-$lang->income->parent   = 'Parent';
-$lang->income->desc     = 'Description';
-$lang->income->keywords = 'Keyword';
-$lang->income->children = "Children";
+$lang->in = new stdclass();
+$lang->in->common   = 'Income';
+$lang->in->name     = 'Name';
+$lang->in->alias    = 'Alias';
+$lang->in->parent   = 'Parent';
+$lang->in->desc     = 'Description';
+$lang->in->keywords = 'Keyword';
+$lang->in->children = "Children";
 
 /* Lang items for expense. */
-$lang->expense = new stdclass();
-$lang->expense->common   = 'Expense';
-$lang->expense->name     = 'Name';
-$lang->expense->alias    = 'Alias';
-$lang->expense->parent   = 'Parent';
-$lang->expense->desc     = 'Description';
-$lang->expense->keywords = 'Keyword';
-$lang->expense->children = "Children";
+$lang->out = new stdclass();
+$lang->out->common   = 'Expense';
+$lang->out->name     = 'Name';
+$lang->out->alias    = 'Alias';
+$lang->out->parent   = 'Parent';
+$lang->out->desc     = 'Description';
+$lang->out->keywords = 'Keyword';
+$lang->out->children = "Children";
 
 $lang->board->readonlyList[0] = 'Pulic';
 $lang->board->readonlyList[1] = 'Readonly';

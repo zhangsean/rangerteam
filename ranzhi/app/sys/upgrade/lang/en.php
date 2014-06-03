@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->upgrade = new stdclass();
 $lang->upgrade->common  = 'Upgrade';
 
 $lang->upgrade->result  = 'Result';

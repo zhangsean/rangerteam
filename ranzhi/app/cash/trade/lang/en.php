@@ -39,8 +39,11 @@ $lang->trade->browse      = 'Bills';
 $lang->trade->batchCreate = 'Batch';
 $lang->trade->newTrader   = 'Create Trader';
 
-$lang->trade->typeList['in']  = 'Income';
-$lang->trade->typeList['out'] = 'Expend';
+$lang->trade->typeList['in']          = 'Income';
+$lang->trade->typeList['out']         = 'Expend';
+$lang->trade->typeList['transferout'] = 'Transfer out';
+$lang->trade->typeList['transferin']  = 'Transfer in';
+$lang->trade->typeList['fee']         = 'Fee';
 
 $lang->trade->objectTypeList['order']    = 'Order?';
 $lang->trade->objectTypeList['contract'] = 'Contract?';
