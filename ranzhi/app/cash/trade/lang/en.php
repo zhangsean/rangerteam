@@ -45,4 +45,4 @@ $lang->trade->objectTypeList['order']    = 'Order?';
 $lang->trade->objectTypeList['contract'] = 'Contract?';
 
 $lang->trade->notEqual = 'The two depositor can not be the same!';
-$lang->trade->feeDesc  = 'The fee of transfer: %s from %s: %s %s， to %s %s %s.';
+$lang->trade->feeDesc  = '%s from %s to %s';

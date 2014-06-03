@@ -170,30 +170,52 @@ class tradeModel extends model
     {
         if($this->post->receipt == $this->post->payment) return array('result' => false, 'message' => $this->lang->trade->notEqual);
 
+        $receiptDepositor = $this->loadModel('depositor')->getByID($this->post->receipt);
+        $paymentDepositor = $this->loadModel('depositor')->getByID($this->post->payment);
+
+        $diffCurrency = $receiptDepositor->currency != $paymentDepositor->currency;
+
         $now = helper::now();
-        $receipt = fixer::input('post')
-            ->add('type', 'in')
-            ->add('depositor', $this->post->receipt)
-            ->add('transfer', '1')
+
+        $payment = fixer::input('post')
+            ->add('type', 'transferout')
+            ->add('depositor', $this->post->payment)
+            ->add('currency', $paymentDepositor->currency)
+            ->add('handlers', trim(join(',', $this->post->handlers), ','))
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
             ->add('editedDate', $now)
-            ->setIF($this->post->transferIn, 'money', $this->post->transferIn)
-            ->remove('receipt, payment, fee, transferIn, transferOut')
+            ->setIF($diffCurrency, 'money', $this->post->transferOut)
             ->get();
 
-        $receiptDepositor = $this->loadModel('depositor')->getByID($receipt->depositor);
-        $receipt->currency = $receiptDepositor->currency;
-
-        $handlers = $this->loadModel('user')->getByAccount($receipt->handlers);
-        if($handlers) $receipt->dept = $handlers->dept;
+        $receipt = $payment ;
+        $fee     = $payment;
 
         $this->dao->insert(TABLE_TRADE)
-            ->data($receipt)
+            ->data($payment, $skip = 'receipt, payment, fee, transferIn, transferOut')
             ->autoCheck()
-            ->batchCheck($this->config->trade->require->transfer, 'notempty')
-            ->checkIF(!$this->post->money && !$this->post->transferIn, 'transferIn', 'notempty')
-            ->checkIF(!$this->post->money && !$this->post->transferOut, 'transferOut', 'notempty')
+            ->check('handlers', 'notempty')
+            ->batchCheckIF($diffCurrency, 'transferOut,transferIn', 'notempty')
+            ->batchCheckIF($diffCurrency, 'transferOut,transferIn', 'float')
+            ->checkIF(!$diffCurrency, 'money', 'notempty')
+            ->exec();
+
+        if(dao::isError()) return array('result' => false, 'message' => dao::getError());
+
+        $paymentID = $this->dao->lastInsertID();
+        $this->loadModel('action')->create('trade', $paymentID, 'Created');
+
+        $receipt->type      = 'transferin';
+        $receipt->depositor = $this->post->receipt;
+        $receipt->currency  = $receiptDepositor->currency;
+        if($diffCurrency) $receipt->money = $this->post->transferIn;
+
+        $this->dao->insert(TABLE_TRADE)
+            ->data($receipt, $skip = 'receipt, payment, fee, transferIn, transferOut')
+            ->autoCheck()
+            ->check('handlers', 'notempty')
+            ->batchCheckIF($diffCurrency, 'transferOut, transferIn', 'notempty')
+            ->checkIF(!$diffCurrency, 'money', 'notempty')
             ->exec();
 
         if(dao::isError()) return array('result' => false, 'message' => dao::getError());
@@ -201,28 +223,14 @@ class tradeModel extends model
         $receiptID = $this->dao->lastInsertID();
         $this->loadModel('action')->create('trade', $receiptID, 'Created');
 
-        $payment = $receipt;
-        $payment->type      = 'out';
-        $payment->depositor = $this->post->payment;
-        $paymentDepositor   = $this->loadModel('depositor')->getByID($payment->depositor);
-        $payment->currency  = $paymentDepositor->currency;
-        if($this->post->transferOut) $payment->money = $this->post->transferOut;
-
-        $this->dao->insert(TABLE_TRADE)->data($payment)->exec();
-        if(dao::isError()) return array('result' => false, 'message' => dao::getError());
-
-        $paymentID = $this->dao->lastInsertID();
-        $this->loadModel('action')->create('trade', $paymentID, 'Created');
-
         if($this->post->fee)
         {
-            $fee = $payment;
+            $fee->type     = 'fee';
             $fee->money    = $this->post->fee;
-            $fee->transfer = 0;
-            $fee->desc     = sprintf($this->lang->trade->feeDesc, $fee->date, $paymentDepositor->abbr, $this->lang->depositor->currencyList[$paymentDepositor->currency], $this->post->money, $receiptDepositor->abbr, $this->lang->depositor->currencyList[$receiptDepositor->currency], $this->post->money);
-            if($this->post->transferIn && $this->post->transferOut) $fee->desc = sprintf($this->lang->trade->feeDesc, $fee->date, $paymentDepositor->abbr, $this->lang->depositor->currencyList[$paymentDepositor->currency], $this->post->transferIn, $receiptDepositor->abbr, $this->lang->depositor->currencyList[$receiptDepositor->currency], $this->post->transferOut);
+            $fee->desc     = sprintf($this->lang->trade->feeDesc, $fee->date, $paymentDepositor->abbr, $receiptDepositor->abbr);
+            if($diffCurrency) $fee->desc = sprintf($this->lang->trade->feeDesc, $fee->date, $paymentDepositor->abbr, $receiptDepositor->abbr);
 
-            $this->dao->insert(TABLE_TRADE)->data($fee)->exec();
+            $this->dao->insert(TABLE_TRADE)->data($fee, $skip = 'receipt, payment, fee, transferIn, transferOut')->exec();
             if(dao::isError()) return array('result' => false, 'message' => dao::getError());
 
             $feeID = $this->dao->lastInsertID();

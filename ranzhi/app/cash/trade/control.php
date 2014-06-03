@@ -182,6 +182,7 @@ class trade extends control
 
         $this->view->title         = $this->lang->trade->transfer;
         $this->view->depositorList = $this->loadModel('depositor')->getList();
+        $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs();
 
         $this->display();

@@ -45,20 +45,24 @@
           <td><?php echo html::input('money', '', "class='form-control'");?></td>
         </tr>
         <tr class='transfer'>
-          <th><?php echo $lang->trade->transferIn;?></th>
-          <td><?php echo html::input('transferIn', '', "class='form-control'");?></td>
-        </tr>
-        <tr class='transfer'>
           <th><?php echo $lang->trade->transferOut;?></th>
           <td><?php echo html::input('transferOut', '', "class='form-control'");?></td>
+        </tr>
+         <tr class='transfer'>
+          <th><?php echo $lang->trade->transferIn;?></th>
+          <td><?php echo html::input('transferIn', '', "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->trade->fee;?></th>
           <td><?php echo html::input('fee', '', "class='form-control'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->trade->dept;?></th>
+          <td><?php echo html::select('dept', $deptList, '', "class='form-control chosen'");?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->trade->handlers;?></th>
-          <td><?php echo html::select('handlers', $users, '', "class='form-control chosen'");?></td>
+          <td><?php echo html::select('handlers[]', $users, '', "class='form-control chosen' multiple");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->trade->date;?></th>

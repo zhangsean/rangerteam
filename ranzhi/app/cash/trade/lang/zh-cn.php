@@ -38,11 +38,14 @@ $lang->trade->detail      = '明细';
 $lang->trade->browse      = '账目列表';
 $lang->trade->batchCreate = '批量记账';
 
-$lang->trade->typeList['in']  = '收入';
-$lang->trade->typeList['out'] = '支出';
+$lang->trade->typeList['in']          = '收入';
+$lang->trade->typeList['out']         = '支出';
+$lang->trade->typeList['transferout'] = '转出';
+$lang->trade->typeList['transferin']  = '转入';
+$lang->trade->typeList['fee']         = '手续费';
 
 $lang->trade->objectTypeList['order']    = '订单支出';
 $lang->trade->objectTypeList['contract'] = '合同支出';
 
 $lang->trade->notEqual = '付款账号不能与收款账号相同。';
-$lang->trade->feeDesc  = '%s从%s转出%s%s元，转入%s%s%s元，所用手续费';
+$lang->trade->feeDesc  = '%s %s 转入 %s';
