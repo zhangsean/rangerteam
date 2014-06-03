@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
+<?php js::set('currencyList', $lang->depositor->currencyList);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->balance->create;?></strong>
@@ -22,7 +23,14 @@
       <table class='table table-form w-p60'>
        <tr>
           <th class='w-100px'><?php echo $lang->balance->depositor;?></th>
-          <td><?php echo html::select('depositor', $depositorList, $balance->depositor, "class='form-control'");?></td>
+          <td>
+            <select name='depositor' id='depositor' class='form-control'>
+            <?php foreach($depositorList as $depositor):?>
+            <?php $selected = $depositor->id == $balance->depositor ? 'selected' : '';?>
+            <option value="<?php echo $depositor->id;?>" <?php echo $selected;?> data-currency="<?php echo $depositor->currency;?>"><?php echo $depositor->abbr;?></option>
+            <?php endforeach;?>
+            </select>
+          </td>
         </tr>
         <tr>
           <th><?php echo $lang->balance->date;?></th>
@@ -33,7 +41,7 @@
           <td>
             <div class='row'>
               <div class='col-sm-9'><?php echo html::input('money', $balance->money, "class='form-control'");?></div>
-              <div class='col-sm-3'><?php echo html::select('currency', $lang->depositor->currencyList, $balance->currency, "class='form-control'");?></div>
+              <div class='col-sm-3 currency'></div>
             </div>
           </td>
         </tr>

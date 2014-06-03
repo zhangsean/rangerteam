@@ -67,7 +67,7 @@ class balance extends control
         }
 
         $this->view->title         = $this->lang->balance->create;
-        $this->view->depositorList = $this->loadModel('depositor')->getPairs();
+        $this->view->depositorList = $this->loadModel('depositor')->getList();
         $this->display();
     }
 
@@ -98,7 +98,7 @@ class balance extends control
        
         $this->view->title         = $this->lang->balance->edit;
         $this->view->balance       = $balance;
-        $this->view->depositorList = $this->loadModel('depositor')->getPairs();
+        $this->view->depositorList = $this->loadModel('depositor')->getList();
 
         $this->display();
     }

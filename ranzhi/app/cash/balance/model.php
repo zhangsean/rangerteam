@@ -89,7 +89,10 @@ class balanceModel extends model
     public function create()
     {
         $now = helper::now();
+        $depositor = $this->loadModel('depositor')->getByID($this->post->depositor);
+
         $balance = fixer::input('post')
+            ->add('currency', $depositor->currency)
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
             ->get();
@@ -114,7 +117,10 @@ class balanceModel extends model
     {
         $oldBalance = $this->getByID($balanceID);
 
+        $depositor = $this->loadModel('depositor')->getByID($this->post->depositor);
+
         $balance = fixer::input('post')
+            ->add('currency', $depositor->currency)
             ->removeIF($this->post->type == 'cash', 'public')
             ->get();
 
