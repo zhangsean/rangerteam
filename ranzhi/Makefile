@@ -10,11 +10,12 @@ ranzhi:
 	cp -fr bin ranzhi/
 	cp -fr config ranzhi/ && rm -fr ranzhi/config/my.php
 	mkdir ranzhi/db
-	cp -fr db/ranzhi.sql ranzhi/db/
+	cp -fr db/*.sql ranzhi/db/
 	cp -fr doc ranzhi/ && rm -fr ranzhi/doc/phpdoc && rm -fr ranzhi/doc/doxygen
 	cp -fr framework ranzhi/
 	cp -fr lib ranzhi/
 	cp -fr tmp ranzhi
+	rm -fr ranzhi/db/temp.sql
 	rm -fr ranzhi/tmp/cache/* 
 	rm -fr ranzhi/tmp/extension/*
 	rm -fr ranzhi/tmp/log/*

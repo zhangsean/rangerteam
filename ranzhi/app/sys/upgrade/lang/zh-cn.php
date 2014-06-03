@@ -40,4 +40,4 @@ EOT;
 
 $lang->upgrade->versionNote = "务必选择正确的版本，否则会造成数据丢失。";
 
-$lang->upgrade->fromVersions['1_0'] = '1.0.beta';
+$lang->upgrade->fromVersions['1_0_beta'] = '1.0.beta';

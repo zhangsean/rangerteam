@@ -50,8 +50,8 @@ class upgradeModel extends model
     {
         switch($fromVersion)
         {
-            case '1_0':
-                $this->execSQL($this->getUpgradeFile('1.0'));
+            case '1_0_beta':
+                $this->execSQL($this->getUpgradeFile('1.0.beta'));
                 $this->createCashEntry();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -71,7 +71,7 @@ class upgradeModel extends model
         $confirmContent = '';
         switch($fromVersion)
         {
-            case '1_0': $confirmContent .= file_get_contents($this->getUpgradeFile('1.0'));
+            case '1_0_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.0.beta'));
         }
         return $confirmContent;
     }
