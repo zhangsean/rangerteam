@@ -140,11 +140,11 @@ define('TABLE_DEPOSITOR', '`cash_depositor`');
 define('TABLE_BALANCE',   '`cash_balance`');
 define('TABLE_TRADE',     '`cash_trade`');
 
-/* Tables for sns. */
-define('TABLE_TAG',     '`sns_tag`');
-define('TABLE_THREAD',  '`sns_thread`');
-define('TABLE_REPLY',   '`sns_reply`');
-define('TABLE_MESSAGE', '`sns_message`');
+/* Tables for team. */
+define('TABLE_TAG',     '`team_tag`');
+define('TABLE_THREAD',  '`team_thread`');
+define('TABLE_REPLY',   '`team_reply`');
+define('TABLE_MESSAGE', '`team_message`');
 
 /* The mapping list of object and tables. */
 $config->objectTables['product']     = TABLE_PRODUCT;
