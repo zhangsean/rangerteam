@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../common/view/header.html.php';?>
+<?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('type', $type);?>
@@ -35,8 +35,9 @@
         <tr>
           <td></td>
           <td colspan='2'><?php echo html::submitButton() . html::commonButton($lang->article->createDraft, "btn btn-default draft") . html::hidden('type', $type);?></td>
-       </tr>
+        </tr>
+      </table>
     </form>
   </div>
 </div>
-<?php include '../../common/view/footer.html.php';?>
+<?php include $app->getModuleRoot() . 'common/view/footer.html.php';?>

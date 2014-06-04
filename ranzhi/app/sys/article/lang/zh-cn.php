@@ -39,12 +39,13 @@ $lang->article->create     = '发布文章';
 $lang->article->edit       = '编辑文章';
 $lang->article->files      = '附件';
 
-$lang->blog = new stdclass();
+if(!isset($lang->blog)) $lang->blog = new stdclass();
 $lang->blog->admin  = '维护博客';
 $lang->blog->list   = '博客列表';
 $lang->blog->create = '发布博客';
 $lang->blog->edit   = '编辑博客';
 
+if(!isset($lang->announce)) $lang->announce = new stdclass();
 $lang->announce->admin  = '维护公告';
 $lang->announce->list   = '公告列表';
 $lang->announce->create = '发布公告';

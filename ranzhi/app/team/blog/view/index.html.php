@@ -21,31 +21,44 @@ if(!empty($category->id)) js::set('categoryID', $category->id );
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>';
 if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
-<div class='row' id="blogBox">
-  <div class='col-md-9'>
-    <ul class="media-list">
-    <?php foreach($articles as $article):?>
-      <li class="media radius">
-        <p class="pull-right"><strong class='dater'><?php echo date('Y/m/d', strtotime($article->createdDate));?></strong></p>
-        <div class='media-body'>
-          <h3 class='media-heading'><?php echo html::a(inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"), $article->title);?></h3>
-          <p>
-            <?php 
-            if(!empty($article->image))
-            {
-                $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-                echo html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'");
-            }
-            ?>
-            <?php echo $article->summary;?>
-          </p>
+<div id="mainContent">
+  <div class='panel list list-condensed'>
+    <div class='panel-heading'>
+      <strong><i class='icon-calendar'></i><?php echo $lang->blog->browse;?></strong>
+      <div class='panel-actions pull-right'>
+        <?php echo html::a($this->createLink('article', 'create', "type=blog"), $lang->blog->create, "class='btn btn-primary'");?>
+      </div>
+    </div>
+    <section class='items items-hover'>
+      <?php foreach($articles as $article):?>
+      <div class='item'>
+        <div class='item-heading'>
+          <div class="text-muted pull-right">
+            <span title="<?php echo $users[$article->author];?>"><i class='icon-user'></i> <?php echo $users[$article->author];?></span> &nbsp; 
+            <span title="<?php echo $lang->article->createdDate;?>"><i class='icon-time'></i> <?php echo substr($article->createdDate, 0, 10);?></span>&nbsp; 
+          </div>
+          <h4><?php echo $article->title;?></h4>
         </div>
-      </li>
-    <?php endforeach;?>
-    </ul>
-    <div class='w-p95 pd-10px clearfix'><?php $pager->show('right', 'short');?></div>
-    <div class='c-both'></div>
+        <div class='item-content'>
+          <?php if(!empty($article->image)):?>
+          <div class='media pull-right'>
+            <?php
+            $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
+            echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
+            ?>
+          </div>
+          <?php endif;?>
+          <div class='text'><?php echo $article->content;?></div>
+          <div class='text pull-right'>
+            <?php echo html::a($this->createLink('article', 'edit', "articleID={$article->id}&type=blog"), $lang->edit);?>
+            <?php echo html::a($this->createLink('article', 'delete', "articleID={$article->id}"), $lang->delete, "class='deleter'");?>
+          </div>
+        </div>
+      </div>
+      <?php endforeach;?>
+    </section>
+    <footer class='clearfix'><?php $pager->show('right', 'short');?></footer>
   </div>
-  <?php include './side.html.php';?>
 </div>
+
 <?php include '../../common/view/footer.html.php';?>

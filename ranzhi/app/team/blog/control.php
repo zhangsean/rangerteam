@@ -37,11 +37,11 @@ class blog extends control
             $this->session->set('articleCategory', $category->id);
         }
 
-        $this->view->title     = $title;
-        $this->view->category  = $category;
-        $this->view->articles  = $articles;
-        $this->view->pager     = $pager;
-        $this->view->contact   = $this->loadModel('company')->getContact();
+        $this->view->title    = $title;
+        $this->view->category = $category;
+        $this->view->articles = $articles;
+        $this->view->users    = $this->loadModel('user')->getPairs();
+        $this->view->pager    = $pager;
 
         $this->display();
     }

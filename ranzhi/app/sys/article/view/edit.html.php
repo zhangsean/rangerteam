@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../common/view/header.html.php';?>
+<?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php js::set('type',$type);?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
@@ -48,4 +48,4 @@
 </div>
 
 <?php include '../../../sys/common/view/treeview.html.php';?>
-<?php include '../../common/view/footer.html.php';?>
+<?php include $app->getModuleRoot() . 'common/view/footer.html.php';?>

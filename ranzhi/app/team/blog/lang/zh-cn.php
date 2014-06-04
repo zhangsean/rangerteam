@@ -9,5 +9,9 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->blog->home     = '博客首页';
-$lang->blog->siteHome = '网站首页';
+$lang->blog = new stdclass();
+$lang->blog->admin  = '维护博客';
+$lang->blog->list   = '博客列表';
+$lang->blog->create = '发布博客';
+$lang->blog->edit   = '编辑博客';
+$lang->blog->browse = '博客列表';
