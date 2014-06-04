@@ -158,10 +158,10 @@ class tradeModel extends model
         $oldDepositor = $this->getByID($tradeID);
 
         $trade = fixer::input('post')
+            ->add('type', $oldDepositor->type)
             ->setIf(!$this->post->objectType or !in_array('order', $this->post->objectType),    'order', 0)
             ->setIf(!$this->post->objectType or !in_array('contract', $this->post->objectType), 'contract', 0)
             ->add('handlers', trim(join(',', $this->post->handlers), ','))
-            ->removeIF($this->post->type == 'cash', 'public')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->remove('objectType')
