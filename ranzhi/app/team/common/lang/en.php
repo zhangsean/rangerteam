@@ -12,14 +12,14 @@
 $lang->app = new stdclass();
 $lang->app->name = 'SNS';
 
-$lang->menu->sns = new stdclass();
-$lang->menu->sns->dashboard = 'Dashboard|dashboard|index|';
-$lang->menu->sns->weibo     = 'Weibo|weibo|index|';
-$lang->menu->sns->blog      = 'Blog|blog|index|';
-$lang->menu->sns->forum     = 'Forum|forum|index|';
-$lang->menu->sns->event     = 'Event|event|index|';
-$lang->menu->sns->food      = 'Food|food|index|';
-$lang->menu->sns->share     = 'Share|share|index|';
-$lang->menu->sns->message   = 'Message|message|index|';
-$lang->menu->sns->user      = 'Contacts|user|admin|';
-$lang->menu->sns->album     = 'Album|album|index|';
+$lang->menu->team = new stdclass();
+$lang->menu->team->dashboard = 'Dashboard|dashboard|index|';
+$lang->menu->team->weibo     = 'Weibo|weibo|index|';
+$lang->menu->team->blog      = 'Blog|blog|index|';
+$lang->menu->team->forum     = 'Forum|forum|index|';
+$lang->menu->team->event     = 'Event|event|index|';
+$lang->menu->team->food      = 'Food|food|index|';
+$lang->menu->team->share     = 'Share|share|index|';
+$lang->menu->team->message   = 'Message|message|index|';
+$lang->menu->team->user      = 'Contacts|user|admin|';
+$lang->menu->team->album     = 'Album|album|index|';

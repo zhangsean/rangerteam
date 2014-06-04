@@ -377,6 +377,18 @@ EOT;
         $entry->block = $this->config->webRoot . $block;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
+
+        /* Add team. */
+        $entry->name  = 'team';
+        $entry->code  = 'team';
+        $entry->key   = '6c46d9fe76a1afa1cd61f946f1072d1e';
+        $entry->logo  = $this->config->webRoot . 'theme/default/images/ips/app-team.png';
+        $entry->login = '../team';
+
+        $block = $config->requestType == 'GET' ? 'team/index.php?m=block&f=index' : 'team/block-index.html';
+        $entry->block = $this->config->webRoot . $block;
+
+
     }
 
     /**
