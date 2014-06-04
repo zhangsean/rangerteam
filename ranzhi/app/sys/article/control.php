@@ -115,6 +115,7 @@ class article extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $locate = $this->inlink('admin', "type={$type}");
             if($type == 'announce') $locate = $this->createLink('announce');
+            if($type == 'blog') $locate = $this->createLink('team.blog');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
         }
 
@@ -148,6 +149,7 @@ class article extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $locate = $this->inlink('admin', "type={$type}");
             if($type == 'announce') $locate = $this->createLink('announce');
+            if($type == 'blog')    $locate = $this->createLink('team.blog');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
         }
 

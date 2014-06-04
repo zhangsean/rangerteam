@@ -9,7 +9,6 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->blog = new stdclass();
 $lang->blog->admin  = '维护博客';
 $lang->blog->list   = '博客列表';
 $lang->blog->create = '发布博客';

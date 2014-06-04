@@ -22,6 +22,12 @@ $lang->menu->team->setting   = '设置|tree|browse|type=forum|';
 /* Menu of forum module. */
 $lang->forum = new stdclass();
 
+/* Menu of forum module. */
+$lang->blog = new stdclass();
+$lang->blog->menu = new stdclass();
+$lang->blog->menu->index   = '博客列表|blog|index|';
+$lang->blog->menu->ategory = '类目设置|tree|browse|type=blog';
+
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();

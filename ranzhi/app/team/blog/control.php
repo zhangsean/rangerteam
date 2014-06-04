@@ -21,6 +21,7 @@ class blog extends control
      */
     public function index($categoryID = 0, $pageID = 1)
     {
+        unset($this->lang->blog->menu);
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, 10, $pageID);
 
