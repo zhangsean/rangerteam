@@ -74,5 +74,21 @@ $lang->out->desc     = 'Description';
 $lang->out->keywords = 'Keyword';
 $lang->out->children = "Children";
 
+/* Lang items for forum. */
+$lang->board = new stdclass();
+$lang->board->common     = 'Board';
+$lang->board->name       = 'Board';
+$lang->board->alias      = 'Alias';
+$lang->board->parent     = 'Parent';
+$lang->board->desc       = 'Description';
+$lang->board->keywords   = 'Keyword';
+$lang->board->children   = "Children";
+$lang->board->readonly   = 'Readonly';
+$lang->board->moderators = 'Moderators';
+
 $lang->board->readonlyList[0] = 'Pulic';
 $lang->board->readonlyList[1] = 'Readonly';
+
+$lang->board->placeholder = new stdclass();
+$lang->board->placeholder->moderators  = "Moderators'account, Separated with" . '","';
+$lang->board->placeholder->setChildren = 'Forum needs tow levels boards.';

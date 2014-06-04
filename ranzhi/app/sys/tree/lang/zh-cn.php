@@ -74,5 +74,21 @@ $lang->out->desc     = '描述';
 $lang->out->keywords = '关键词';
 $lang->out->children = '子科目';
 
+/* Lang items for forum. */
+$lang->board = new stdclass();
+$lang->board->common     = '版块';
+$lang->board->name       = '版块';
+$lang->board->alias      = '别名';
+$lang->board->parent     = '上级版块';
+$lang->board->desc       = '描述';
+$lang->board->keywords   = '关键词';
+$lang->board->children   = "子版块";
+$lang->board->readonly   = '访问权限';
+$lang->board->moderators = '版主';
+
 $lang->board->readonlyList[0] = '开放';
 $lang->board->readonlyList[1] = '只读';
+
+$lang->board->placeholder = new stdclass();
+$lang->board->placeholder->moderators  = '会员用户名, 多个用户名之间用逗号隔开';
+$lang->board->placeholder->setChildren = '论坛功能需要设置二级版块才能使用。';

@@ -10,16 +10,20 @@
  * @link        http://www.ranzhi.org
  */
 $lang->app = new stdclass();
-$lang->app->name = 'SNS';
+$lang->app->name = 'TEAM';
 
 $lang->menu->team = new stdclass();
 $lang->menu->team->dashboard = 'Dashboard|dashboard|index|';
-$lang->menu->team->weibo     = 'Weibo|weibo|index|';
 $lang->menu->team->blog      = 'Blog|blog|index|';
 $lang->menu->team->forum     = 'Forum|forum|index|';
-$lang->menu->team->event     = 'Event|event|index|';
-$lang->menu->team->food      = 'Food|food|index|';
-$lang->menu->team->share     = 'Share|share|index|';
-$lang->menu->team->message   = 'Message|message|index|';
 $lang->menu->team->user      = 'Contacts|user|admin|';
-$lang->menu->team->album     = 'Album|album|index|';
+$lang->menu->team->setting   = 'Setting|tree|browse|type=forum|';
+
+/* Menu of forum module. */
+$lang->forum = new stdclass();
+
+/* Menu of setting module. */
+$lang->setting = new stdclass();
+$lang->setting->menu = new stdclass();
+$lang->setting->menu->board = 'Forum Board|tree|browse|type=forum|';
+$lang->setting->menu->blog  = 'Blog Category|tree|browse|type=blog|';

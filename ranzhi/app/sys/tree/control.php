@@ -31,14 +31,14 @@ class tree extends control
         }
         elseif($type == 'forum')
         {
-            $this->lang->category   = $this->lang->board;
-            $this->lang->tree->menu = $this->lang->forum->menu;
-            $this->lang->menuGroups->tree = 'forum';
+            $this->lang->category = $this->lang->board;
+            $this->lang->tree->menu = $this->lang->setting->menu;
+            $this->lang->menuGroups->tree = 'setting';
         }
         elseif($type == 'blog')
         {
-            $this->lang->tree->menu = $this->lang->blog->menu;
-            $this->lang->menuGroups->tree = 'blog';
+            $this->lang->tree->menu = $this->lang->setting->menu;
+            $this->lang->menuGroups->tree = 'setting';
         }
         elseif($type == 'announce')
         {

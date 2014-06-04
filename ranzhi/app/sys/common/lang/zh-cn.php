@@ -154,17 +154,7 @@ $lang->menu->sys->user      = '组织|user|admin|';
 $lang->menu->sys->entry     = '应用|entry|admin|';
 $lang->menu->sys->system    = '系统|mail|admin|';
 //$lang->menu->sys->extension = '扩展|extension|admin|';
-
-$lang->menu->sns = new stdclass();
-$lang->menu->sns->forum   = '论坛|forum|index|';
-$lang->menu->sns->blog    = '博客|blog|index|';
-$lang->menu->sns->message = '消息|message|index|';
  
-$lang->forum       = new stdclass(); 
-$lang->forum->menu = new stdclass(); 
-$lang->forum->menu->index = '浏览|forum|index|'; 
-$lang->forum->menu->admin = '管理|forum|admin|'; 
-
 $lang->message       = new stdclass(); 
 $lang->message->menu = new stdclass(); 
 $lang->message->menu->index = '浏览|message|index|'; 

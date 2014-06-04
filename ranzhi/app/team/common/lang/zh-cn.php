@@ -10,11 +10,20 @@
  * @link        http://www.ranzhi.org
  */
 $lang->app = new stdclass();
-$lang->app->name = 'SNS';
+$lang->app->name = 'TEAM';
 
 $lang->menu->team = new stdclass();
 $lang->menu->team->dashboard = '我的地盘|dashboard|index|';
 $lang->menu->team->blog      = '博客|blog|index|';
 $lang->menu->team->forum     = '论坛|forum|index|';
 $lang->menu->team->user      = '通讯录|user|admin|';
-$lang->menu->team->setting   = '设置|tree|browse|type=board|';
+$lang->menu->team->setting   = '设置|tree|browse|type=forum|';
+
+/* Menu of forum module. */
+$lang->forum = new stdclass();
+
+/* Menu of setting module. */
+$lang->setting = new stdclass();
+$lang->setting->menu = new stdclass();
+$lang->setting->menu->board = '论坛版块|tree|browse|type=forum|';
+$lang->setting->menu->blog  = '博客类目|tree|browse|type=blog|';
