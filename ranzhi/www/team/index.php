@@ -9,5 +9,5 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$appName = 'sns';
+$appName = 'team';
 include '../../framework/loader.php';
