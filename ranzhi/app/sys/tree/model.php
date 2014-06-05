@@ -330,6 +330,27 @@ class treeModel extends model
     }
 
     /**
+     * Create the forum board link.
+     * 
+     * @param  object      $board 
+     * @access public
+     * @return string
+     */
+    public static function createForumBoardLink($board)
+    {
+        if($board->parent)
+        {
+            $linkHtml = html::a(helper::createLink('forum', 'board', "id={$board->id}"), $board->name, "id='board{$board->id}'");
+        }
+        else
+        {
+            $linkHtml = $board->name;
+        }
+
+        return $linkHtml;
+    }
+
+    /**
      * Create doc link.
      * 
      * @param  object    $category 
