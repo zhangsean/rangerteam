@@ -15,7 +15,7 @@
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->thread->postTo . ' [ ' . $board->name . ' ]'; ?></strong></div>
   <div class='panel-body'>
-    <form method='post' class='form-horizontal' id='threadForm' enctype='multipart/form-data'>
+    <form method='post' class='form-horizontal' id='ajaxForm' enctype='multipart/form-data'>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->title;?></label>
         <div class='col-md-11 col-sm-10'>

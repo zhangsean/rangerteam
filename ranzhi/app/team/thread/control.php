@@ -82,7 +82,7 @@ class thread extends control
         {
             $this->thread->update($threadID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'locate' => inlink('view', "threadID=$threadID")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "threadID=$threadID")));
         }
 
         $board = $this->loadModel('tree')->getById($thread->board);

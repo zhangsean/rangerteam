@@ -53,7 +53,7 @@
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->thread->replies; ?></strong></div>
   <div class='panel-body'>
-    <form method='post' enctype='multipart/form-data' id='replyForm' action='<?php echo $this->createLink('reply', 'post', "thread=$thread->id");?>'>
+    <form method='post' enctype='multipart/form-data' id='ajaxForm' action='<?php echo $this->createLink('reply', 'post', "thread=$thread->id");?>'>
       <div class='form-group' id='reply'>
         <?php echo html::textarea('content', '', "rows='6' class='form-control'"); ?>
       </div>
