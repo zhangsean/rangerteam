@@ -149,10 +149,9 @@ class threadModel extends model
             ->get();
 
         $this->dao->insert(TABLE_THREAD)
-            ->data($thread, $skip = 'captcha, uid')
+            ->data($thread, $skip = 'uid')
             ->autoCheck()
             ->batchCheck('title, content', 'notempty')
-            ->check('captcha', 'captcha')
             ->exec();
 
         $threadID = $this->dao->lastInsertID();
@@ -212,10 +211,9 @@ class threadModel extends model
             ->get();
 
         $this->dao->update(TABLE_THREAD)
-            ->data($thread, $skip = 'captcha, uid')
+            ->data($thread, $skip = 'uid')
             ->autoCheck()
             ->batchCheck('title, content', 'notempty')
-            ->check('captcha', 'captcha')
             ->where('id')->eq($threadID)
             ->exec();
 

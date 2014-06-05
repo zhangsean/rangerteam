@@ -138,10 +138,9 @@ class replyModel extends model
             ->get();
 
         $this->dao->insert(TABLE_REPLY)
-            ->data($reply, $skip = 'captcha, uid')
+            ->data($reply, $skip = 'uid')
             ->autoCheck()
             ->batchCheck('content', 'notempty')
-            ->check('captcha', 'captcha')
             ->exec();
 
         $replyID = $this->dao->lastInsertID();                     // Get reply id.
@@ -183,10 +182,9 @@ class replyModel extends model
             ->get();
 
         $this->dao->update(TABLE_REPLY)
-            ->data($reply, $skip = 'captcha, uid')
+            ->data($reply, $skip = 'uid')
             ->autoCheck()
             ->check('content', 'notempty')
-            ->check('captcha', 'captcha')
             ->where('id')->eq($replyID)
             ->exec();
 
