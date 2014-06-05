@@ -85,7 +85,7 @@ class userModel extends model
      */
     public function getBasicInfo($users)
     {
-        $users = $this->dao->select('account, realname, `join`, last, visits')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account', false);
+        $users = $this->dao->select('account, admin, realname, `join`, last, visits')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account', false);
         if(!$users) return array();
 
         foreach($users as $account => $user)
@@ -126,6 +126,26 @@ class userModel extends model
         if(!$users) return array();     
         foreach($users as $account => $user) if($user->realname == '') $user->realname = $account; 
         return $users;         
+    }
+
+    /**
+     * Get user list with real name.
+     * 
+     * @param  string|array $users 
+     * @access public          
+     * @return array           
+     */
+    public function getRealNamePairs($users)
+    {
+        $userPairs = $this->dao->select('account, realname')->from(TABLE_USER)->where('account')->in($users)->fetchPairs('account');
+
+        foreach($users as $account) if(!isset($userPairs[$account])) $userPairs[$account] = $account;
+
+        if(!$userPairs) return array();     
+
+        foreach($userPairs as $account => $realname) if($realname == '') $userPairs[$account] = $account; 
+
+        return $userPairs;         
     }
 
     /**
