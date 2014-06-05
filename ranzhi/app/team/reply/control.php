@@ -73,7 +73,7 @@ class reply extends control
         {
             $this->reply->update($replyID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'locate' => $this->createLink('thread', 'view', "threaID=$thread->id")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('thread', 'view', "threaID=$thread->id")));
         }
 
         $this->view->title  = $this->lang->reply->edit . $this->lang->colon . $thread->title;
