@@ -7,26 +7,28 @@
     <strong><?php echo $thread->title; ?></strong>
     <div class='text-muted'><?php echo $thread->createdDate;?></div>
   </div>
-  <table class='table'>
-    <tr>
-      <td class='speaker'>
-       <?php
-       if(isset($speakers[$thread->author]))
-       {
-           $this->thread->printSpeaker($speakers[$thread->author]);
-       }
-       else
-       {
-           echo $thread->author;
-       }
-       ?>
-      </td>
-      <td id='<?php echo $thread->id;?>' class='thread-wrapper'>
-        <div class='thread-content ariticle-content'><?php echo $thread->content;?></div>
-        <?php $this->thread->printFiles($thread, $this->thread->canManage($board->id, $thread->author));?>
-      </td>
-    </tr>
-  </table>
+  <div>
+    <table class='table'>
+      <tr>
+        <td class='speaker'>
+         <?php
+         if(isset($speakers[$thread->author]))
+         {
+             $this->thread->printSpeaker($speakers[$thread->author]);
+         }
+         else
+         {
+             echo $thread->author;
+         }
+         ?>
+        </td>
+        <td id='<?php echo $thread->id;?>' class='thread-wrapper'>
+          <div class='thread-content ariticle-content'><?php echo $thread->content;?></div>
+          <?php $this->thread->printFiles($thread, $this->thread->canManage($board->id, $thread->author));?>
+        </td>
+      </tr>
+    </table>
+  </div>
   <div class='thread-foot'>
     <?php if($thread->editor): ?>
     <small class='text-muted'><?php printf($lang->thread->lblEdited, $thread->editorRealname, $thread->editedDate); ?></small>

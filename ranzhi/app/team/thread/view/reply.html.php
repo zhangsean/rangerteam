@@ -5,26 +5,28 @@
     <div class='panel-actions'><strong>#<?php echo $i++;?></strong></div>
     <span class='muted'><i class='icon-comment-alt'></i> <?php echo $reply->createdDate;?></span>
   </div>
-  <table class='table'>
-    <tr>
-      <td class='speaker'>
-        <?php 
-        if(isset($speakers[$reply->author]))
-        {
-            $this->thread->printSpeaker($speakers[$reply->author]);
-        }
-        else
-        {
-            echo $reply->author;
-        }
-        ?>
-      </td>
-      <td id='<?php echo $reply->id;?>' class='thread-wrapper'>
-        <div class='thread-content article-content'><?php echo $reply->content;?></div>
-        <?php $this->reply->printFiles($reply, $this->thread->canManage($board->id, $reply->author));?>
-      </td>
-    </tr>
-  </table>
+  <div>
+    <table class='table'>
+      <tr>
+        <td class='speaker'>
+          <?php 
+          if(isset($speakers[$reply->author]))
+          {
+              $this->thread->printSpeaker($speakers[$reply->author]);
+          }
+          else
+          {
+              echo $reply->author;
+          }
+          ?>
+        </td>
+        <td id='<?php echo $reply->id;?>' class='thread-wrapper'>
+          <div class='thread-content article-content'><?php echo $reply->content;?></div>
+          <?php $this->reply->printFiles($reply, $this->thread->canManage($board->id, $reply->author));?>
+        </td>
+      </tr>
+    </table>
+  </div>
   <div class='thread-foot'>
     <?php if($reply->editor): ?>
     <small class='text-muted'><?php printf($lang->thread->lblEdited, $reply->editorRealname, $reply->editedDate); ?></small>
