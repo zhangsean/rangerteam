@@ -13,6 +13,7 @@ $lang->thread->common    = 'Thread';
 
 $lang->thread->id         = 'Id';
 $lang->thread->title      = 'Title';
+$lang->thread->board      = 'Board';
 $lang->thread->author     = 'Autuor';
 $lang->thread->content    = 'Content ';
 $lang->thread->file       = 'File ';
@@ -29,6 +30,7 @@ $lang->thread->edit       = 'Edit';
 $lang->thread->status     = 'Status';
 $lang->thread->hide       = 'Hide';
 $lang->thread->show       = 'Show';
+$lang->thread->transfer   = 'Transfer';
 
 $lang->thread->sticks[0] = 'Don\'t stick';
 $lang->thread->sticks[1] = 'Stick on board';
@@ -48,7 +50,8 @@ $lang->thread->message         = '%s reply at #%s in forum, the thread is: %s, t
 $lang->thread->readonly        = 'Read only';
 $lang->thread->successStick    = 'Successfully sticky.';
 $lang->thread->successUnstick  = 'Successfully unsticky.';
-$lang->thread->readonlyMessage = 'The thread has been setted <strong>READONLY</strong>，you can not post new reply。';
+$lang->thread->readonlyMessage = 'The thread has been set <strong>READONLY</strong>，you can not post new reply。';
+$lang->thread->successTransfer = 'Successfully Transfered';
 
 /* Adjust the pager. */
 if(!isset($lang->pager->settedInForum))

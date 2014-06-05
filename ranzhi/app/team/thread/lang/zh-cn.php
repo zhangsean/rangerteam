@@ -13,6 +13,7 @@ $lang->thread->common    = '主题';
 
 $lang->thread->id         = '编号';
 $lang->thread->title      = '标题';
+$lang->thread->board      = '板块';
 $lang->thread->author     = '作者';
 $lang->thread->content    = '内容';
 $lang->thread->file       = '附件: ';
@@ -29,6 +30,7 @@ $lang->thread->edit       = '编辑主题';
 $lang->thread->status     = '状态';
 $lang->thread->hide       = '隐藏';
 $lang->thread->show       = '显示';
+$lang->thread->transfer   = '转移';
 
 $lang->thread->sticks[0] = '不置顶';
 $lang->thread->sticks[1] = '版块置顶';
@@ -49,6 +51,7 @@ $lang->thread->readonly        = '只读';
 $lang->thread->successStick    = '成功置顶';
 $lang->thread->successUnstick  = '成功取消置顶';
 $lang->thread->readonlyMessage = '该帖已被设置为 <strong>只读</strong>，您暂时无法发表新的回复。';
+$lang->thread->successTransfer = '转移成功';
 
 /* Adjust the pager. */
 if(!isset($lang->pager->settedInForum))

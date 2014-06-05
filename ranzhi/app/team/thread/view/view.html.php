@@ -10,16 +10,10 @@
  * @link        http://www.ranzhi.org
  */
 include '../../common/view/header.html.php';
-include '../../common/view/kindeditor.html.php';
-
-$this->block->printRegion($layouts, 'thread_view', 'header');
-
-$common->printPositionBar($board, $thread);
+include '../../../sys/common/view/kindeditor.html.php';
 
 if($pager->pageID == 1) include './thread.html.php';
 if(!$thread->readonly)  include './reply.html.php';
 else echo "<div class='alert alert-info'>{$lang->thread->readonlyMessage}</div>";
-
-$this->block->printRegion($layouts, 'thread_view', 'footer');
 
 include '../../common/view/footer.html.php';

@@ -20,13 +20,20 @@ class thread extends control
      */
     public function post($boardID = 0)
     {
-        if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login')));
+        $this->loadModel('forum');
+        if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login', "referer=" . helper::safe64Encode($this->app->getURI()))));
 
         /* Get the board. */
         $board = $this->loadModel('tree')->getById($boardID);
 
+        /* Checking the board exist or not. */
+        if(!$board)
+        {
+            die(js::error($this->lang->forum->notExist) . js::locate('back'));
+        }
+
         /* Checking current user can post to the board or not. */
-        if(!$this->loadModel('forum')->canPost($board))
+        if(!$this->forum->canPost($board))
         {
             die(js::error($this->lang->forum->readonly) . js::locate('back'));
         }
@@ -37,12 +44,6 @@ class thread extends control
         /* User posted a thread, try to save it to database. */
         if($_POST)
         {
-            /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
-            {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Comment()));
-            }
-
             $threadID = $this->thread->post($boardID);
             if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
 
@@ -74,22 +75,21 @@ class thread extends control
         /* Judge current user has priviledge to edit the thread or not. */
         if(!$this->thread->canManage($thread->board, $thread->author)) die(js::locate('back'));
 
+        /* Set editor for current user. */
+        $this->thread->setEditor($thread->board, 'edit');
+
         if($_POST)
         {
-            /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
-            {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Comment()));
-            }
-
             $this->thread->update($threadID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'locate' => inlink('view', "threadID=$threadID")));
         }
 
+        $board = $this->loadModel('tree')->getById($thread->board);
+        
         $this->view->title     = $this->lang->thread->edit . $this->lang->minus . $thread->title;
         $this->view->thread    = $thread;
-        $this->view->board     = $this->loadModel('tree')->getById($thread->board);
+        $this->view->board     = $board;
         $this->view->canManage = $this->thread->canManage($board->id);
 
         $this->display();
@@ -108,6 +108,9 @@ class thread extends control
         $thread = $this->thread->getByID($threadID);
         if(!$thread) die(js::locate('back'));
 
+        /* Set editor for current user. */
+        $this->thread->setEditor($thread->board, 'view');
+
         /* Get thread board. */
         $board = $this->loadModel('tree')->getById($thread->board);
 
@@ -118,6 +121,11 @@ class thread extends control
 
         /* Get all speakers. */
         $speakers = $this->thread->getSpeakers($thread, $replies);
+        $speakers = $this->loadModel('user')->getBasicInfo($speakers);
+        foreach($speakers as $account => $speaker)
+        {
+            $speaker->isModerator = strpos(",{$board->moderators},", ",{$account},") !== false;       
+        }
 
         /* Set the views counter + 1; */
         $this->thread->plusCounter($threadID);
@@ -127,8 +135,36 @@ class thread extends control
         $this->view->thread   = $thread;
         $this->view->replies  = $replies;
         $this->view->pager    = $pager;
-        $this->view->speakers = $this->loadModel('user')->getBasicInfo($speakers);
+        $this->view->speakers = $speakers;
 
+        $this->display();
+    }
+
+    /**
+     * transfer a thread.
+     * 
+     * @param  int    $threadID 
+     * @access public
+     * @return void
+     */
+    public function transfer($threadID)
+    {
+        $thread = $this->thread->getByID($threadID);
+        if(!$thread) exit;
+        if($_POST)
+        {
+            if($this->thread->transfer($threadID, $thread->board, $this->post->targetBoard))
+            {
+                $this->send(array('result' =>'success', 'message' => $this->lang->thread->successTransfer, 'locate' => $this->server->http_referer));
+            }
+            else
+            {
+                $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
+        }
+
+        $this->view->thread = $thread;
+        $this->view->boards = $this->loadModel('tree')->getOptionMenu('forum', 0, $removeRoot = true);
         $this->display();
     }
 

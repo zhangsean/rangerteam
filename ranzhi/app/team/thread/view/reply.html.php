@@ -7,32 +7,43 @@
   </div>
   <table class='table'>
     <tr>
-      <td class='speaker'><?php $this->thread->printSpeaker($speakers[$reply->author]);?></td>
+      <td class='speaker'>
+        <?php 
+        if(isset($speakers[$reply->author]))
+        {
+            $this->thread->printSpeaker($speakers[$reply->author]);
+        }
+        else
+        {
+            echo $reply->author;
+        }
+        ?>
+      </td>
       <td id='<?php echo $reply->id;?>' class='thread-wrapper'>
-        <div class='thread-content'><?php echo $reply->content;?></div>
+        <div class='thread-content article-content'><?php echo $reply->content;?></div>
         <?php $this->reply->printFiles($reply, $this->thread->canManage($board->id, $reply->author));?>
-        <div class='thread-foot'>
-          <?php if($reply->editor): ?>
-          <span class='text-muted'><?php printf($lang->thread->lblEdited, $reply->editor, $reply->editedDate); ?></span>
-          <?php endif; ?>
-          <div class="pull-right reply-actions thread-actions">
-          <?php if($this->app->user->account != 'guest'):?>
-          <span class="thread-more-actions">
-            <?php
-            if($this->thread->canManage($board->id)) echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'");
-            ?>
-            <?php if($this->thread->canManage($board->id, $reply->author)) echo html::a($this->createLink('reply', 'edit',   "replyID=$reply->id"), '<i class="icon-pencil"></i> ' . $lang->edit); ?>
-          </span>
-          <i class="icon-ellipsis-horizontal icon-more-actions"></i>&nbsp;
-          <a href="#reply" class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common; ?></a>
-          <?php else: ?>
-          <a href="<?php echo $this->createLink('user', 'login', 'referer=' . helper::safe64Encode($this->app->getURI(true))); ?>#reply" class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common; ?></a>
-          <?php endif; ?>
-          </div>
-        </div>
       </td>
     </tr>
   </table>
+  <div class='thread-foot'>
+    <?php if($reply->editor): ?>
+    <small class='text-muted'><?php printf($lang->thread->lblEdited, $reply->editorRealname, $reply->editedDate); ?></small>
+    <?php endif; ?>
+    <div class="pull-right reply-actions thread-actions">
+    <?php if($this->app->user->account != 'guest'):?>
+    <span class="thread-more-actions">
+      <?php
+      if($this->thread->canManage($board->id)) echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'");
+      ?>
+      <?php if($this->thread->canManage($board->id, $reply->author)) echo html::a($this->createLink('reply', 'edit',   "replyID=$reply->id"), '<i class="icon-pencil"></i> ' . $lang->edit); ?>
+    </span>
+    <i class="icon-ellipsis-horizontal icon-more-actions"></i>&nbsp;
+    <a href="#reply" class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common; ?></a>
+    <?php else: ?>
+    <a href="<?php echo $this->createLink('user', 'login', 'referer=' . helper::safe64Encode($this->app->getURI(true))); ?>#reply" class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common; ?></a>
+    <?php endif; ?>
+    </div>
+  </div>
 </div>
 <?php endforeach;?>
 
