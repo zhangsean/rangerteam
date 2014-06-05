@@ -1,5 +1,2 @@
-.common-board,.new-board,.sticky-thread{}
-.common-board{color: #aaa;}
-.new-board{color: #0abb28;}
-.sticky-thread{color:#ff3333 }
-.moderators{font-weight: normal;color: #666;}
+@media (max-width: 480px) { .hidden-xxs {display: none} .page {font-size: 12px}}
+@media (max-width: 400px) { .hidden-xxxs {display: none}}

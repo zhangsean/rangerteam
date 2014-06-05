@@ -35,8 +35,28 @@ class forumModel extends model
                 foreach($parentBoard->children as $childBoard) 
                 {
                     $childBoard->lastPostReplies = isset($replies[$childBoard->postID]) ? $replies[$childBoard->postID] : 0;
+                    $childBoard->moderators      = explode(',', trim($childBoard->moderators, ','));
                 }
                 $boards[] = $parentBoard;
+            }
+        }
+
+        $speakers = array();
+        foreach($boards as $parentBoard)
+        {
+            foreach($parentBoard->children as $childBoard)
+            {
+                foreach($childBoard->moderators as $moderators) $speakers[] = $moderators;
+                $speakers[] = $childBoard->postedBy;
+            }
+        }
+        $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
+        foreach($boards as $parentBoard)
+        {
+            foreach($parentBoard->children as $childBoard) 
+            {
+                foreach($childBoard->moderators as $key => $moderators) $childBoard->moderators[$key] = isset($speakers[$moderators]) ? $speakers[$moderators] : '';
+                $childBoard->postedByRealname = !empty($childBoard->postedBy) ? $speakers[$childBoard->postedBy] : '';
             }
         }
 
@@ -72,18 +92,28 @@ class forumModel extends model
 
         /* Get postID and replyID. */
         $post = $this->dao->select('id as postID, replyID, repliedDate as postedDate, repliedBy, author')->from(TABLE_THREAD)
-            ->where('hidden')->eq('0')
+            ->where('board')->eq($boardID)
+            ->andWhere('hidden')->eq('0')
             ->orderBy('repliedDate desc')
             ->limit(1)
             ->fetch();
 
         $data = new stdclass();
-        $data->threads    = $stats->threads;
-        $data->posts      = $stats->threads + $stats->replies;
-        $data->postID     = $post->postID;
-        $data->replyID    = $post->replyID;
-        $data->postedDate = $post->postedDate;
-        $data->postedBy   = $post->repliedBy ? $post->repliedBy : $post->author;
+        $data->threads = $stats->threads;
+        $data->posts   = $stats->threads + $stats->replies;
+        if($post)
+        {
+            $data->postID     = $post->postID;
+            $data->replyID    = $post->replyID;
+            $data->postedDate = $post->postedDate;
+            $data->postedBy   = $post->repliedBy ? $post->repliedBy : $post->author;
+        }
+        else
+        {
+            $data->postID   = 0;
+            $data->replyID  = 0;
+            $data->postedBy = '';
+        } 
 
         $this->dao->update(TABLE_CATEGORY)->data($data)->where('id')->eq($boardID)->exec();
     }
