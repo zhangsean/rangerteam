@@ -11,6 +11,12 @@
  */
 class blog extends control
 {
+    public function __CONSTRUCT()
+    {
+        parent::__CONSTRUCT();
+        unset($this->lang->blog->menu);
+    }
+
     /** 
      * Browse blog in front.
      * 
@@ -21,7 +27,6 @@ class blog extends control
      */
     public function index($categoryID = 0, $pageID = 1)
     {
-        unset($this->lang->blog->menu);
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, 10, $pageID);
 
@@ -33,7 +38,6 @@ class blog extends control
         if($category)
         {
             $title    = $category->name;
-            $keywords = trim($category->keyword);
             $desc     = strip_tags($category->desc);
             $this->session->set('articleCategory', $category->id);
         }
@@ -68,16 +72,11 @@ class blog extends control
         $category = $this->loadModel('tree')->getByID($category);
 
         $title    = $article->title . ' - ' . $category->name;
-        $keywords = $article->keywords . ' ' . $category->keyword;
-        $desc     = strip_tags($article->summary);
         
         $this->view->title       = $title;
-        $this->view->keywords    = $keywords;
-        $this->view->desc        = $desc;
         $this->view->article     = $article;
         $this->view->prevAndNext = $this->loadModel('article')->getPrevAndNext($article->id, $category->id);
         $this->view->category    = $category;
-        $this->view->contact     = $this->loadModel('company')->getContact();
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
         $this->display();

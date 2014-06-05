@@ -386,7 +386,7 @@ class fileModel extends model
         $data = new stdclass();
         $data->objectID   = $objectID;
         $data->objectType = $objectType;
-        if(isset($_SESSION['album']) and $_SESSION['album'][$uid])
+        if(isset($_SESSION['album']) and isset($_SESSION['album'][$uid]))
         {
             $this->dao->update(TABLE_FILE)->data($data)->where('id')->in($_SESSION['album'][$uid])->exec();
             if(dao::isError()) return false;

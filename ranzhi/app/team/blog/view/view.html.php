@@ -10,38 +10,23 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php 
-include './header.html.php';
-$path = array_keys($category->pathNames);
-js::set('path',  json_encode($path));
-js::set('categoryID', $category->id);
-js::set('articleID', $article->id);
-include '../../common/view/treeview.html.php';
-?>
-<?php
-$root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>';
-$common->printPositionBar($category, $article, '', $root);
-?>
-<div class='row'>
+<?php include './header.html.php'; ?>
+<?php $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>'; ?>
+<?php js::set('articleID', $article->id);?>
+<?php js::set('categoryID', $category->id);?>
   <div class='col-md-9'>
-    <div class='content-box clearfix radius'>
-      <div class='dater pull-right'><?php echo date('Y/m/d', strtotime($article->createdDate));?></div>
-      <h1 class='text-center'><?php echo $article->title;?></h1>
-      <div class='text-center info'>
-        <?php
-        printf($lang->article->lblAuthor,    $article->author);
-        if($article->original)
-        {
-            echo "<strong>{$lang->article->originalList[$article->original]}</strong>";
-        }
-        else
-        {
-            printf($lang->article->lblSource);
-            $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); 
-        }
-        printf($lang->article->lblViews, $article->views);
-        ?>
-      </div>
+    <div class='article'>
+      <header>
+        <h1><?php echo $article->title;?></h1>
+        <dl class='dl-inline'>
+          <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, formatTime($article->createdDate));?>'><i class="icon-time icon-large"></i> <?php echo formatTime($article->createdDate);?></dd>
+          <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
+          <?php if(!$article->original):?>
+          <dt><?php echo $lang->article->lblSource; ?></dt>
+          <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
+          <?php endif; ?>
+        </dl>
+      </header>
       <?php if($article->summary) echo "<div class='summary'><strong>{$lang->article->summary}</strong>$lang->colon$article->summary</div>";?>
       <p><?php echo $article->content;?></p>
       <div class='article-file'><?php $this->loadModel('article')->printFiles($article->files);?></div>
@@ -55,6 +40,4 @@ $common->printPositionBar($category, $article, '', $root);
     <div id='commentBox'></div>
     <?php echo html::a('', '', "name='comment'");?>
   </div>
-  <?php include './side.html.php';?>
-</div>
 <?php include './footer.html.php';?>

@@ -14,8 +14,11 @@
 $treeMenu = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));
 ?>
 <div class='col-md-3'>
-  <div class='box widget radius'> 
-    <h4 class='title'><?php echo $lang->categoryMenu;?></h4>
-    <?php echo $treeMenu;?>
+  <div class='panel'> 
+    <?php echo html::a($this->createLink('article', 'create', "type=blog"), $lang->blog->create, "class='btn btn-primary btn-lg btn-block'");?>
+  </div>
+  <div class='panel'> 
+    <div class='panel-heading'> <h4 class='title'><?php echo $lang->categoryMenu;?></h4></div>
+    <div class='panel-body'> <?php echo $treeMenu;?> </div>
   </div>
 </div>
