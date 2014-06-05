@@ -5,7 +5,7 @@
     <div class='panel-heading'>
       <strong><i class='icon-comments icon-large'></i> <?php echo $parentBoard->name;?></strong>
     </div>
-    <table class='table table-hover table-striped'>
+    <table class='table table-striped'>
       <tbody>
         <tr>
           <?php $count = count($parentBoard);?>
