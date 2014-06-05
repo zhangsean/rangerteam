@@ -24,12 +24,6 @@ class reply extends control
 
         if($_POST)
         {
-            /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
-            {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Reply()));
-            }
-
             $replyID = $this->reply->post($threadID);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -49,7 +43,6 @@ class reply extends control
         $pager   = new pager($recTotal, $recPerPage, $pageID);
         $replies = $this->reply->getList($orderBy, $pager);
 
-        $this->lang->reply->menu = $this->lang->forum->menu;
         $this->lang->menuGroups->reply = 'forum';
 
         $this->view->title   = $this->lang->reply->admin;
@@ -78,15 +71,8 @@ class reply extends control
         
         if($_POST)
         {
-            /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
-            {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Comment()));
-            }
-
             $this->reply->update($replyID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-
             $this->send(array('result' => 'success', 'locate' => $this->createLink('thread', 'view', "threaID=$thread->id")));
         }
 

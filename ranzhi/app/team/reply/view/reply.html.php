@@ -1,6 +1,6 @@
 <?php
 /**
- * The edit view file of reply module of RanZhi.
+ * The reply view file of reply module of RanZhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
@@ -10,10 +10,9 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php if($this->thread->hasManagePriv($this->app->user->account, $board->owners)) $config->thread->editor->editreply['tools'] = 'fullTools'; ?>
+<?php if($this->thread->hasManagePriv($this->app->user->account, $board->owners)) $config->thread->editor->editreply['tools'] = 'full'; ?>
 <?php include '../../common/view/header.html.php';?>
-<?php include '../../common/view/kindeditor.html.php';?>
-<?php $common->printPositionBar($board, $thread);?>
+<?php include '../../../sys/common/view/kindeditor.html.php';?>
 <form method='post' id='ajaxForm' enctype='multipart/form-data'>
 <table class='table table-form'>
   <caption><?php echo $lang->thread->editReply;?></caption>

@@ -69,6 +69,8 @@ class replyModel extends model
 
         if(!$replies) return array();
 
+        $this->setRealNames($replies);
+
         /* Get files for these replies. */
         $files = $this->loadModel('file')->getByObject('reply', array_keys($replies));
         
@@ -86,10 +88,14 @@ class replyModel extends model
      */
     public function getList($orderBy = 'createdDate_desc', $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_REPLY)
+        $replies = $this->dao->select('*')->from(TABLE_REPLY)
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
+
+        $this->setRealNames($replies);
+
+        return $replies;
     }
 
     /**
@@ -167,10 +173,12 @@ class replyModel extends model
      */
     public function update($replyID)
     {
+        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
+
         $reply = fixer::input('post')
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
-            ->stripTags('content', $this->config->thread->editor->allowedTags)
+            ->stripTags('content', $allowedTags)
             ->remove('files,labels,hidden')
             ->get();
 
@@ -276,5 +284,30 @@ class replyModel extends model
         $cookie = $this->cookie->r != false ? $this->cookie->r : ',';
         if(strpos($cookie, $reply) === false) $cookie .= $reply;
         setcookie('r', $cookie , time() + 60 * 60 * 24 * 30);
+    }
+
+    /**
+     * Set real name for author and editor of replies.
+     * 
+     * @param  array     $replies 
+     * @access public
+     * @return void
+     */
+    public function setRealNames($replies)
+    {
+        $speakers = array();
+        foreach($replies as $reply)
+        {
+            $speakers[] = $reply->author;
+            $speakers[] = $reply->editor;
+        }
+
+        $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
+
+        foreach($replies as $reply) 
+        {
+           $reply->authorRealname    = !empty($reply->author) ? $speakers[$reply->author] : '';
+           $reply->editorRealname    = !empty($reply->editor) ? $speakers[$reply->editor] : '';
+        }
     }
 }
