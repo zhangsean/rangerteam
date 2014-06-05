@@ -43,10 +43,12 @@ class forum extends control
         $pager   = new pager(0, 10, $pageID);
         $threads = $this->loadModel('thread')->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
 
+        $this->view->boardID  = $boardID;
         $this->view->title    = $board->name;
         $this->view->keywords = $board->keywords;
         $this->view->desc     = strip_tags($board->desc);
         $this->view->board    = $board;
+        $this->view->boards   = $this->loadModel('tree')->getTreeMenu('forum', 0, array('treeModel', 'createForumBoardLink'));
         $this->view->sticks   = $this->thread->getSticks($board->id);
         $this->view->threads  = $threads;
         $this->view->pager    = $pager;
