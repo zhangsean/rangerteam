@@ -1,3 +1,15 @@
+<?php
+/**
+ * The index view file of forum module of RanZhi.
+ *
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     LGPL
+ * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
+ * @package     forum
+ * @version     $Id$
+ * @link        http://www.ranzhi.org
+ */
+?>
 <?php include '../../common/view/header.html.php'; ?>
 <div id='boards'>
 <?php foreach($boards as $parentBoard):?>
@@ -16,23 +28,29 @@
             <table class='board'>
               <tbody>
                 <tr class='board'>
-                  <td class='w-20px'><?php echo $this->forum->isNew($childBoard) ? "<span class='text-success'><i class='icon-comment icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment icon-large'></i></span>"; ?></td>
-                  <td><?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name);?>（<?php echo $lang->forum->threadCount . $lang->colon . $childBoard->threads . ' ' . $lang->forum->postCount . $lang->colon . $childBoard->posts;?>）</td>
+                  <td>
+                    <?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name);?>
+                    <?php if($childBoard->moderators[0]) printf(" &nbsp;<span class='moderators hidden-xxs'>" . $lang->forum->lblOwner . '</span>', trim(implode(',', $childBoard->moderators), ','));?>
+                    <?php echo '(' . $lang->forum->threadCount . $lang->colon . $childBoard->threads . ' ' . $lang->forum->postCount . $lang->colon . $childBoard->posts . ')';?>
+                  </td>
                 </tr>
+                <?php if($childBoard->desc):?>
+                <tr class='board'><td><small class='text-muted'><?php echo $childBoard->desc;?></small></td></tr>
+                <?php endif;?>
                 <tr class='board'>
-                  <td colspan='2'>
-                  <?php 
-                  if($childBoard->postedBy)
-                  {
-                      $postedDate = substr($childBoard->postedDate, 5, -3); 
-                      $postedBy   =  html::a($this->createLink('thread', 'locate', "threadID={$childBoard->postID}&replyID={$childBoard->replyID}"), $childBoard->postedBy);;
-                      echo sprintf($lang->forum->lastPost, $postedDate, $postedBy);
-                  }
-                  else
-                  {
-                      echo $lang->forum->noPost;
-                  }
-                  ?>
+                  <td>
+                    <?php 
+                    if($childBoard->postedBy)
+                    {
+                        $postedDate = substr($childBoard->postedDate, 5, -3); 
+                        $postedBy   =  html::a($this->createLink('thread', 'locate', "threadID={$childBoard->postID}&replyID={$childBoard->replyID}"), $childBoard->postedBy);;
+                        echo sprintf($lang->forum->lastPost, $postedDate, $postedBy);
+                    }
+                    else
+                    {
+                        echo $lang->forum->noPost;
+                    }
+                    ?>
                   </td>
                 </tr>
               </tbody>
