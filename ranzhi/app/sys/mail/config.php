@@ -14,10 +14,10 @@
 $config->mail = new stdclass();
 $config->mail->smtp = new stdclass();
 
-$config->mail->turnon      = false;         // turn on email feature or not. true|false
-$config->mail->fromAddress = '';            // The from address.
-$config->mail->fromName    = 'chanzhi';     // The from name.
-$config->mail->mta         = 'smtp';        // The send mail type.
+$config->mail->turnon         = false;         // turn on email feature or not. true|false
+$config->mail->fromAddress    = '';            // The from address.
+$config->mail->fromName       = 'ranzhi';      // The from name.
+$config->mail->mta            = 'smtp';        // The send mail type.
 $config->mail->smtp->debug    = 0;          // Debug level, 0,1,2.
 $config->mail->smtp->charset  = 'utf-8';    // Charset 
 $config->mail->smtp->auth     = true;       // Need auth or not. true|false

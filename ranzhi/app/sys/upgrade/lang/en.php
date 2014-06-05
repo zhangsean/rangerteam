@@ -17,7 +17,7 @@ $lang->upgrade->fail    = 'Failed';
 $lang->upgrade->success = 'Success';
 $lang->upgrade->tohome  = 'Go to index';
 
-$lang->upgrade->index         = 'Upgrad chanzhiEPS.';
+$lang->upgrade->index         = 'Upgrad Ranzhi.';
 $lang->upgrade->backup        = 'Backup';
 $lang->upgrade->selectVersion = 'Select version to upgrade from';
 $lang->upgrade->confirm       = 'Confirm the SQL to be excuted.';
@@ -34,7 +34,7 @@ EOT;
 $lang->upgrade->backupData = <<<EOT
 <pre>
 <strong>Using phpMyAdmin or mysqldump to backup database.</strong>
-<code class='red'>$ mysqldump -u %s</span> -p%s %s > chanzhi.sql</code>
+<code class='red'>$ mysqldump -u %s</span> -p%s %s > ranzhi.sql</code>
 </pre>
 EOT;
 
