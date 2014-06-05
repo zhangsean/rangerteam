@@ -23,9 +23,20 @@ class treeModel extends model
      */
     public function getByID($categoryID, $type = 'article')
     {
-        $category = $this->dao->findById((int)$categoryID)->from(TABLE_CATEGORY)->fetch();
+        $category = $this->dao->select('*')->from(TABLE_CATEGORY)->where('alias')->eq($categoryID)->andWhere('type')->eq($type)->fetch();
+        if(!$category) $category = $this->dao->findById((int)$categoryID)->from(TABLE_CATEGORY)->fetch();
 
         if(!$category) return false;
+
+        if($type == 'forum') 
+        {
+            $speakers = array();
+            $category->moderators = explode(',', trim($category->moderators, ','));
+            foreach($category->moderators as $moderators) $speakers[] = $moderators;
+            $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
+            foreach($category->moderators as $key => $moderators) $category->moderators[$key] = isset($speakers[$moderators]) ? $speakers[$moderators] : '';
+            $category->moderators = implode(',', $category->moderators);
+        }
 
         $category->pathNames = $this->dao->select('id, name')->from(TABLE_CATEGORY)->where('id')->in($category->path)->orderBy('grade')->fetchPairs();
         return $category;
