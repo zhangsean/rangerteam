@@ -188,8 +188,8 @@ CREATE TABLE `crm_service` (
   `expire` date NOT NULL,
   UNIQUE KEY `customer` (`customer`,`product`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
--- DROP TABLE IF EXISTS `oa_article`;
-CREATE TABLE `oa_article` (
+-- DROP TABLE IF EXISTS `sys_article`;
+CREATE TABLE `sys_article` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(150) NOT NULL,
   `alias` varchar(100) NOT NULL,
@@ -430,6 +430,23 @@ CREATE TABLE `sys_entry` (
   `order` tinyint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `code` (`code`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sys_message`;
+CREATE TABLE IF NOT EXISTS `sys_message` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `type` char(20) NOT NULL,
+  `objectType` varchar(30) NOT NULL DEFAULT '',
+  `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `account` char(30) DEFAULT NULL,
+  `from` char(30) NOT NULL,
+  `to` char(30) NOT NULL,
+  `date` datetime NOT NULL,
+  `content` text NOT NULL,
+  `status` char(20) NOT NULL,
+  `readed` enum('0','1') NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `status` (`status`),
+  KEY `object` (`objectType`,`objectID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_file`;
 CREATE TABLE `sys_file` (

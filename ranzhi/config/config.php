@@ -127,7 +127,6 @@ define('TABLE_SERVICE',       '`crm_service`');
 define('TABLE_TODO',        '`oa_todo`');
 define('TABLE_PROJECT',     '`oa_project`');
 define('TABLE_EFFORT',      '`oa_effort`');
-define('TABLE_ARTICLE',     '`oa_article`');
 define('TABLE_BLOCK',       '`oa_block`');
 define('TABLE_BOOK',        '`oa_book`');
 define('TABLE_LAYOUT',      '`oa_layout`');
@@ -144,7 +143,8 @@ define('TABLE_TRADE',     '`cash_trade`');
 define('TABLE_TAG',     '`team_tag`');
 define('TABLE_THREAD',  '`team_thread`');
 define('TABLE_REPLY',   '`team_reply`');
-define('TABLE_MESSAGE', '`team_message`');
+define('TABLE_ARTICLE', '`sys_article`');
+define('TABLE_MESSAGE', '`sys_message`');
 
 /* The mapping list of object and tables. */
 $config->objectTables['product']     = TABLE_PRODUCT;

@@ -386,3 +386,15 @@ td #aliasLabel {display: table-row;}
 .pri.pri-2.active {background: #ea8400; color: #fff;}
 .pri.pri-3.active {background: #8521bf; color: #fff;}
 .pri.pri-4.active {background: #39b3d7; color: #fff;}
+
+/* article */
+.article {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
+.article > header h1,.article > header h2,.article > header h3{font-size: 22px}
+.article > header > dl {margin: 0 0 10px; background: transparent; border: 0;padding: 5px 2px 0 2px;}
+.article > footer > p {padding: 0 0 10px;} 
+.article > header > .abstract {margin: 0; padding: 10px;}
+.article > footer {position: relative;padding-top: 15px; margin-top: 10px;}
+.article > footer .pager {margin-bottom: 0;}
+.article-content {padding: 10px 0}
+.article-content img {box-shadow: none}
+

@@ -32,3 +32,22 @@ CREATE TABLE `team_reply` (
   KEY `thread` (`thread`),
   KEY `author` (`author`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `sys_message` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `type` char(20) NOT NULL,
+  `objectType` varchar(30) NOT NULL DEFAULT '',
+  `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `account` char(30) DEFAULT NULL,
+  `from` char(30) NOT NULL,
+  `to` char(30) NOT NULL,
+  `date` datetime NOT NULL,
+  `content` text NOT NULL,
+  `status` char(20) NOT NULL,
+  `readed` enum('0','1') NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `status` (`status`),
+  KEY `object` (`objectType`,`objectID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+RENAME TABLE oa_article TO sys_article;
