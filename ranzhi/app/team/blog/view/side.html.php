@@ -21,4 +21,25 @@ $treeMenu = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBr
     <div class='panel-heading'> <h4 class='title'><?php echo $lang->categoryMenu;?></h4></div>
     <div class='panel-body'> <?php echo $treeMenu;?> </div>
   </div>
+  <div class='panel'> 
+    <div class='panel-heading'> <h4 class='title'><?php echo $lang->blog->author;?></h4></div>
+    <div class='panel-body'>
+      <ul>
+        <?php foreach($authors as $author):?>
+        <li><?php echo html::a(inlink('index', "category=0&author={$author->account}"), $author->realname);?>
+        <?php endforeach;?>
+      </ul>
+    </div>
+  </div>
+
+  <div class='panel'> 
+    <div class='panel-heading'> <h4 class='title'><?php echo $lang->blog->latestArticles;?></h4></div>
+    <div class='panel-body'>
+      <ul>
+        <?php foreach($latestArticles as $article):?>
+        <li><?php echo html::a(inlink('view', "id={$article->id}"), $article->title);?>
+        <?php endforeach;?>
+      </ul>
+    </div>
+  </div>
 </div>

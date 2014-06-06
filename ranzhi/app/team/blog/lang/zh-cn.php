@@ -9,8 +9,5 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->blog->admin  = '维护博客';
-$lang->blog->list   = '博客列表';
-$lang->blog->create = '发布博客';
-$lang->blog->edit   = '编辑博客';
-$lang->blog->browse = '博客列表';
+$lang->blog->latestArticles = '最新博文';
+$lang->blog->author         = '作者列表';

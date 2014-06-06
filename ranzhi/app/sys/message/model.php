@@ -84,17 +84,19 @@ class messageModel extends model
     /**
      * Get message list.
      * 
-     * @param string $type      the message type
-     * @param int    $status    the message status
+     * @param string $type          the message type
+     * @param string $objectType
+     * @param int    $status        the message status
      * @param object $pager 
      * @access public
      * @return void
      */
-    public function getList($type, $status, $pager = null)
+    public function getList($type, $objectType = null, $status, $pager = null)
     {
         $messages = $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('type')->eq($type)
             ->andWhere('status')->eq($status)
+            ->beginIF($objectType)->andWhere('objectType')->eq($objectType)->fi()
             ->orderBy('id_desc')
             ->page($pager)
             ->fetchAll('id');

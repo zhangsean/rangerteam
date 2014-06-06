@@ -55,17 +55,14 @@ class articleModel extends model
      * @access public
      * @return array
      */
-    public function getList($type, $categories, $orderBy, $pager = null)
+    public function getList($type, $categories, $author = '', $orderBy, $pager = null)
     {
         /* Get articles(use groupBy to distinct articles).  */
         $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
             ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
             ->where('t1.type')->eq($type)
-            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
-            ->andWhere('t1.createdDate')->le(helper::now())
-            ->andWhere('t1.status')->eq('normal')
-            ->fi()
             ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
+            ->beginIf($author)->andWhere('t1.author')->eq($author)->fi()
             ->groupBy('t2.id')
             ->orderBy($orderBy)
             ->page($pager)
@@ -186,6 +183,21 @@ class articleModel extends model
            ->fetch();
 
         return array('prev' => $prev, 'next' => $next);
+    }
+
+    /**
+     * Get author List 
+     * 
+     * @param  string $type 
+     * @access public
+     * @return void
+     */
+    public function getAuthorList($type = 'article')
+    {
+        return $this->dao->select('u.*')
+            ->from(TABLE_ARTICLE)->alias('a')
+            ->leftJoin(TABLE_USER)->alias('u')->on("a.author=u.account")
+            ->where('a.type')->eq($type)->fetchAll('account');
     }
 
     /**

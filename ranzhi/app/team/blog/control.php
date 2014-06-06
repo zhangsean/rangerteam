@@ -15,24 +15,34 @@ class blog extends control
     {
         parent::__CONSTRUCT();
         unset($this->lang->blog->menu);
+
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager(0, 8, 1);
+        $this->view->latestArticles = $this->loadModel('article', 'sys')->getList('blog', 0, '', 'id_desc');
+
+        $this->view->authors = $this->loadModel('article', 'sys')->getAuthorList('blog');
+
+        $this->view->latestComments = $this->loadModel('message', 'sys')->getList('comment', 'blog', '');
+
     }
 
     /** 
      * Browse blog in front.
      * 
      * @param int    $categoryID   the category id
-     * @param int    $pageID       current page id
+     * @param  string $author 
+     * @param  int    $pageID 
      * @access public
      * @return void
      */
-    public function index($categoryID = 0, $pageID = 1)
+    public function index($categoryID = 0, $author = '', $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, 10, $pageID);
 
         $category   = $this->loadModel('tree')->getByID($categoryID, 'blog');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
-        $articles   = $this->loadModel('article', 'oa')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), $orderBy = 'id_desc', $pager);
+        $articles   = $this->loadModel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), $author, $orderBy = 'id_desc', $pager);
         $title      = '';
 
         if($category)

@@ -37,7 +37,7 @@ class article extends control
 
         $category   = $this->loadModel('tree')->getByID($categoryID, 'article');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
-        $articles   = $this->article->getList('article', $this->tree->getFamily($categoryID, 'article'), 'createdDate_desc', $pager);
+        $articles   = $this->article->getList('article', $this->tree->getFamily($categoryID, 'article'), '', 'createdDate_desc', $pager);
 
         if($category)
         {
@@ -78,7 +78,7 @@ class article extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
-        $articles = $this->article->getList($type, $families, $orderBy, $pager);
+        $articles = $this->article->getList($type, $families, '', $orderBy, $pager);
 
         $this->view->title      = $this->lang->$type->admin;
         $this->view->type       = $type;
