@@ -296,7 +296,7 @@ class pager
     public function get($align = 'right', $type = 'full')
     {
         /* If the RecTotal is zero, return with no record. */
-        if($this->recTotal == 0) { return $type == 'mobile' ? '' : "<div style='float:$align; clear:none;' class='pager'>{$this->lang->pager->noRecord}</div>"; }
+        if($this->recTotal == 0) { return $type == 'mobile' ? '' : "<div style='float:$align; clear:none;' class='page'>{$this->lang->pager->noRecord}</div>"; }
 
         /* Set the params. */
         $this->setParams();
@@ -330,7 +330,7 @@ class pager
             $pager .= $this->createRecPerPageJS();
         }
 
-        return "<div style='float:$align; clear:none;' class='pager'>$pager</div>";
+        return "<div style='float:$align; clear:none;' class='page form-inline'>$pager</div>";
     }
 
     /**
