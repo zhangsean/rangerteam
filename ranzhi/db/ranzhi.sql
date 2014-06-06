@@ -188,31 +188,6 @@ CREATE TABLE `crm_service` (
   `expire` date NOT NULL,
   UNIQUE KEY `customer` (`customer`,`product`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
--- DROP TABLE IF EXISTS `sys_article`;
-CREATE TABLE `sys_article` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(150) NOT NULL,
-  `alias` varchar(100) NOT NULL,
-  `keywords` varchar(150) NOT NULL,
-  `summary` text NOT NULL,
-  `content` text NOT NULL,
-  `original` enum('1','0') NOT NULL,
-  `copySite` varchar(60) NOT NULL,
-  `copyURL` varchar(255) NOT NULL,
-  `author` varchar(60) NOT NULL,
-  `editor` varchar(60) NOT NULL,
-  `createdDate` datetime NOT NULL,
-  `editedDate` datetime NOT NULL,
-  `status` varchar(20) NOT NULL DEFAULT 'normal',
-  `type` varchar(30) NOT NULL,
-  `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
-  `sticky` enum('0','1','2','3') NOT NULL DEFAULT '0',
-  `order` smallint(5) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `order` (`order`),
-  KEY `views` (`views`),
-  KEY `sticky` (`sticky`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_block`;
 CREATE TABLE `oa_block` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
@@ -430,6 +405,40 @@ CREATE TABLE `sys_entry` (
   `order` tinyint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `code` (`code`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sys_article`;
+CREATE TABLE `sys_article` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(150) NOT NULL,
+  `alias` varchar(100) NOT NULL,
+  `keywords` varchar(150) NOT NULL,
+  `summary` text NOT NULL,
+  `content` text NOT NULL,
+  `original` enum('1','0') NOT NULL,
+  `copySite` varchar(60) NOT NULL,
+  `copyURL` varchar(255) NOT NULL,
+  `author` varchar(60) NOT NULL,
+  `editor` varchar(60) NOT NULL,
+  `createdDate` datetime NOT NULL,
+  `editedDate` datetime NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'normal',
+  `type` varchar(30) NOT NULL,
+  `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
+  `sticky` enum('0','1','2','3') NOT NULL DEFAULT '0',
+  `order` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order` (`order`),
+  KEY `views` (`views`),
+  KEY `sticky` (`sticky`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sys_tag`;
+CREATE TABLE `sys_tag` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `tag` varchar(50) NOT NULL,
+  `rank` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tag` (`tag`),
+  KEY `rank` (`rank`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_message`;
 CREATE TABLE IF NOT EXISTS `sys_message` (

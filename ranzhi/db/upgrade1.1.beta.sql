@@ -51,3 +51,12 @@ CREATE TABLE IF NOT EXISTS `sys_message` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 RENAME TABLE oa_article TO sys_article;
+
+CREATE TABLE `sys_tag` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `tag` varchar(50) NOT NULL,
+  `rank` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tag` (`tag`),
+  KEY `rank` (`rank`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
