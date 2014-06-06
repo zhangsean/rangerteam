@@ -295,4 +295,112 @@ class file extends control
             echo $this->file->pasteImage($this->post->editor, $uid);
         }
     }
+
+    /**
+     * Get file from file directory in kindeditor. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function fileManager()
+    {
+        $fileTypes = array('gif', 'jpg', 'jpeg', 'png', 'bmp');
+        $order = $this->get->order ? strtolower($this->get->order) : 'name';
+
+        if(empty($_GET['path']))
+        {
+            $currentPath    = $this->file->savePath;
+            $currentUrl     = $this->file->webPath;
+            $currentDirPath = '';
+            $moveupDirPath  = '';
+        }
+        else
+        {
+            $currentPath    = $this->file->savePath . '/' . $this->get->path;
+            $currentUrl     = $this->file->webPath . $this->get->path;
+            $currentDirPath = $this->get->path;
+            $moveupDirPath  = preg_replace('/(.*?)[^\/]+\/$/', '$1', $currentDirPath);
+        }
+
+        if(preg_match('/\.\./', $currentPath)) die($this->lang->file->noAccess);
+        if(!preg_match('/\/$/', $currentPath)) die($this->lang->file->invalidParameter);
+        if(!file_exists($currentPath) || !is_dir($currentPath)) die($this->lang->file->unWritable);
+
+        $fileList = array();
+        if($fileDir = opendir($currentPath))
+        {
+            $i = 0;
+            while(($filename = readdir($fileDir)) !== false)
+            {
+                if($filename{0} == '.') continue;
+                $file = $currentPath . $filename;
+                $fileList[$i]['filename'] = $filename;
+                if(is_dir($file))
+                {
+                    $fileList[$i]['is_dir']   = true;
+                    $fileList[$i]['has_file'] = (count(scandir($file)) > 2);
+                    $fileList[$i]['filesize'] = 0;
+                    $fileList[$i]['is_photo'] = false;
+                    $fileList[$i]['filetype'] = '';
+                }
+                else
+                {
+                    if(strpos($filename, 'f_') === false) continue;
+                    $fileExtension = $this->file->getExtension($file);
+                    $fileList[$i]['is_dir']    = false;
+                    $fileList[$i]['has_file']  = false;
+                    $fileList[$i]['filesize']  = filesize($file);
+                    $fileList[$i]['dir_path']  = '';
+                    $fileList[$i]['is_photo']  = in_array($fileExtension, $fileTypes);
+                    $fileList[$i]['filetype']  = $fileExtension;
+                    $fileList[$i]['filename']  = $filename . "?fromSpace=y";
+                }
+
+                $fileList[$i]['datetime'] = date('Y-m-d H:i:s', filemtime($file));
+                $fileList[$i]['order']    = $order;
+                $i++;
+            }
+            closedir($fileDir);
+        }
+
+        usort($fileList, "file::sort");
+
+        $result = array();
+        $result['moveup_dir_path']  = $moveupDirPath;
+        $result['current_dir_path'] = $currentDirPath;
+        $result['current_url']      = $currentUrl;
+        $result['total_count']      = count($fileList);
+        $result['file_list']        = $fileList;
+
+        die(json_encode($result));
+    }
+
+    /**
+     * Sort the file. 
+     * 
+     * @access public
+     * @return void
+     */
+    static public function sort($a, $b)
+    {
+        if(isset($a['is_dir']) && !isset($b['is_dir']))
+        {
+            return -1;
+        }
+        elseif(!isset($a['is_dir']) && isset($b['is_dir']))
+        {
+            return 1;
+        }
+        else
+        {
+            if($a['order'] == 'size')
+            {
+                if($a['filesize'] > $b['filesize']) return 1;
+                if($a['filesize'] < $b['filesize']) return -1;
+                if($a['filesize'] = $b['filesize']) return 0;
+            }
+            if($a['order'] == 'type') return strcmp($a['filetype'], $b['filetype']);
+            if($a['order'] == 'name') return strcmp($a['filename'], $b['filename']);
+        }
+    }
 }

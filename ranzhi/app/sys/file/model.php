@@ -393,4 +393,42 @@ class fileModel extends model
             return !dao::isError(); 
         }
     }
+
+    /**
+     * Copy file in content from file space.
+     * 
+     * @param  string $content 
+     * @param  int    $objectID 
+     * @param  string $bojectType 
+     * @access public
+     * @return bool
+     */
+    public function copyFromContent($content, $objectID, $objectType)
+    {
+        preg_match_all('/<img src="(\/data\/upload\/(\S+)\?fromSpace=y)" .+ \/>/U', $content, $images);
+
+        if(empty($images)) return false;
+        foreach($images[2] as $key => $pathname)
+        {
+            $data = $this->dao->select('*')->from(TABLE_FILE)->where('pathname')->eq($pathname)->fetch();
+            if(!$data) $data = new stdclass();
+
+            $data->pathname    = $pathname;
+            $data->extension   = $this->getExtension($pathname);
+            $data->objectID    = $objectID;
+            $data->objectType  = $objectType;
+            $data->createdBy   = $this->app->user->account;
+            $data->createdDate = helper::now();
+
+            $fileExists = $this->dao->select('count(*) as count')->from(TABLE_FILE)
+                ->where('objectType')->eq($objectType)
+                ->andWhere('objectID')->eq($objectID)
+                ->andWhere('pathname')->eq($pathname)
+                ->fetch('count');
+
+            if($fileExists == 0) $this->dao->insert(TABLE_FILE)->data($data, $skip = 'id')->exec();
+        }
+
+        return !dao::isError(); 
+    }
 }
