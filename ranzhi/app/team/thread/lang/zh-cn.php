@@ -13,7 +13,7 @@ $lang->thread->common    = '主题';
 
 $lang->thread->id         = '编号';
 $lang->thread->title      = '标题';
-$lang->thread->board      = '板块';
+$lang->thread->board      = '版块';
 $lang->thread->author     = '作者';
 $lang->thread->content    = '内容';
 $lang->thread->file       = '附件: ';
