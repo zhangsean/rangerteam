@@ -10,13 +10,13 @@
  * @link        http://www.ranzhi.org
  */
 $lang->reply = new stdclass();
-$lang->reply->common    = 'Reply';
-$lang->reply->id        = 'Id';
-$lang->reply->list      = 'Replies';
-$lang->reply->content   = 'Content';
-$lang->reply->author    = 'Author';
-$lang->reply->files     = 'Files:';
+$lang->reply->common      = 'Reply';
+$lang->reply->id          = 'Id';
+$lang->reply->list        = 'Replies';
+$lang->reply->content     = 'Content';
+$lang->reply->author      = 'Author';
+$lang->reply->files       = 'Files:';
 $lang->reply->createdDate = 'Date';
-$lang->reply->admin     = 'Reply';
+$lang->reply->admin       = 'Reply';
 
 $lang->reply->edit = 'Edit';

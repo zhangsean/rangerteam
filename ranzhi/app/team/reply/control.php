@@ -80,6 +80,7 @@ class reply extends control
         $this->view->reply  = $reply;
         $this->view->thread = $thread;
         $this->view->board  = $this->loadModel('tree')->getById($thread->board);
+        $this->view->boards = $this->tree->getTreeMenu('forum', 0, array('treeModel', 'createForumBoardLink'));
 
         $this->display();
     }
