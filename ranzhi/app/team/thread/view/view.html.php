@@ -11,6 +11,7 @@
  */
 include '../../common/view/header.html.php';
 include '../../../sys/common/view/kindeditor.html.php';
+js::set('boardID', $board->id);
 ?>
 <div class='row'>
   <?php include './side.html.php';?>

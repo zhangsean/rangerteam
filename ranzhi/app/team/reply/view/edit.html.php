@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
+<?php js::set('boardID', $board->id);?>
 <div class='row'>
   <div class='col-md-2'>
     <div class='panel'>
