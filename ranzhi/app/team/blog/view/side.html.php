@@ -46,7 +46,7 @@
     <div class='panel-heading'> <h4 class='title'><?php echo $lang->article->keywords;?></h4></div>
     <div class='panel-body'>
       <?php foreach($tags as $tag):?>
-      <?php echo html::a(inlink('index', 'category=0&author=&month=&tag=' . $tag), $tag, "class='label label-info'");?>
+      <?php if($tag) echo html::a(inlink('index', 'category=0&author=&month=&tag=' . $tag), $tag, "class='label label-info'");?>
       <?php endforeach;?>
     </div>
   </div>
