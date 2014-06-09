@@ -16,7 +16,7 @@ $lang->menu->team = new stdclass();
 $lang->menu->team->dashboard = '我的地盘|dashboard|index|';
 $lang->menu->team->blog      = '博客|blog|index|';
 $lang->menu->team->forum     = '论坛|forum|index|';
-$lang->menu->team->user      = '通讯录|user|admin|';
+$lang->menu->team->user      = '同事|user|colleague|';
 $lang->menu->team->setting   = '设置|tree|browse|type=forum|';
 
 /* Menu of forum module. */
@@ -33,3 +33,5 @@ $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->board = '论坛版块|tree|browse|type=forum|';
 $lang->setting->menu->blog  = '博客类目|tree|browse|type=blog|';
+$lang->setting->menu->dept  = '维护部门|tree|browse|type=dept|';
+$lang->setting->menu->role  = '维护角色|setting|lang|module=user&field=roleList|';

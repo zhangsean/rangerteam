@@ -16,7 +16,7 @@ $lang->menu->team = new stdclass();
 $lang->menu->team->dashboard = 'Dashboard|dashboard|index|';
 $lang->menu->team->blog      = 'Blog|blog|index|';
 $lang->menu->team->forum     = 'Forum|forum|index|';
-$lang->menu->team->user      = 'Contacts|user|admin|';
+$lang->menu->team->user      = 'Colleague|user|colleague|';
 $lang->menu->team->setting   = 'Setting|tree|browse|type=forum|';
 
 /* Menu of forum module. */
@@ -27,3 +27,5 @@ $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->board = 'Forum Board|tree|browse|type=forum|';
 $lang->setting->menu->blog  = 'Blog Category|tree|browse|type=blog|';
+$lang->setting->menu->dept  = 'Admin Department|tree|browse|type=dept|';
+$lang->setting->menu->role  = 'Admin Role|setting|lang|module=user&field=roleList|';
