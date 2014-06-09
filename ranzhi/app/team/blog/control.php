@@ -18,14 +18,12 @@ class blog extends control
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, 8, 1);
+        
         $this->view->latestArticles = $this->loadModel('article', 'sys')->getList('blog', 0, null, null, 'id_desc');
-
-        $this->view->authors = $this->loadModel('article', 'sys')->getAuthorList('blog');
-        $this->view->months  = $this->loadModel('article', 'sys')->getMonthList('blog');
-        $this->view->tags    = $this->loadModel('article', 'sys')->getTagList('blog');
-
+        $this->view->authors        = $this->loadModel('article', 'sys')->getAuthorList('blog');
+        $this->view->months         = $this->loadModel('article', 'sys')->getMonthList('blog');
+        $this->view->tags           = $this->loadModel('article', 'sys')->getTagList('blog');
         $this->view->latestComments = $this->loadModel('message', 'sys')->getList('comment', 'blog', '');
-
     }
 
     /** 
