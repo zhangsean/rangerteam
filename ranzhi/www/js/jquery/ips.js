@@ -1287,10 +1287,10 @@
                         menu.attr('data-id', btn.attr('data-id'));
                         if(btn.hasClass('s-menu-btn'))
                         {
-                            menu.css({left: 62, top: offset.top, bottom: 'inherit'});
+                            menu.css({left: desktopPos.x + 2, top: offset.top, bottom: 'inherit'});
                             $('.tooltip').remove();
                         }
-                        else if(btn.hasClass('s-task-btn')) menu.css({left: offset.left, top: 'inherit', bottom: 38});
+                        else if(btn.hasClass('s-task-btn')) menu.css({left: offset.left, top: 'inherit', bottom: bottomBarHeight + 2});
                     }
                 }
             });
