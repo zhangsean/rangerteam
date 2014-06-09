@@ -41,7 +41,7 @@ class articleModel extends model
         $article->path = explode(',', trim($path, ','));
 
         /* Get it's files. */
-        $article->files = $this->loadModel('file')->getByObject('article', $articleID);
+        $article->files = $this->loadModel('file')->getByObject($article->type, $articleID);
 
         return $article;
     }   
@@ -49,20 +49,23 @@ class articleModel extends model
     /** 
      * Get article list.
      * 
-     * @param  array   $categories 
-     * @param  string  $orderBy 
-     * @param  object  $pager 
+     * @param  string    $type 
+     * @param  array     $categories 
+     * @param  string    $mode 
+     * @param  string    $param 
+     * @param  string    $orderBy 
+     * @param  object    $pager 
      * @access public
      * @return array
      */
-    public function getList($type, $categories, $author = '', $orderBy, $pager = null)
+    public function getList($type, $categories, $mode = null, $param = null, $orderBy, $pager = null)
     {
         /* Get articles(use groupBy to distinct articles).  */
         $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
             ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
             ->where('t1.type')->eq($type)
             ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
-            ->beginIf($author)->andWhere('t1.author')->eq($author)->fi()
+            ->beginIf($mode == 'query' and $param)->andWhere($param)->fi()
             ->groupBy('t2.id')
             ->orderBy($orderBy)
             ->page($pager)
@@ -81,7 +84,7 @@ class articleModel extends model
         foreach($articles as $article) $article->categories = isset($categories[$article->id]) ? $categories[$article->id] : array();
 
         /* Get images for these articles. */
-        $images = $this->loadModel('file')->getByObject('article', array_keys($articles), $isImage = true);
+        $images = $this->loadModel('file')->getByObject($type, array_keys($articles), $isImage = true);
 
         /* Assign images to it's article. */
         foreach($articles as $article)
@@ -190,7 +193,7 @@ class articleModel extends model
      * 
      * @param  string $type 
      * @access public
-     * @return void
+     * @return array
      */
     public function getAuthorList($type = 'article')
     {
@@ -198,6 +201,20 @@ class articleModel extends model
             ->from(TABLE_ARTICLE)->alias('a')
             ->leftJoin(TABLE_USER)->alias('u')->on("a.author=u.account")
             ->where('a.type')->eq($type)->fetchAll('account');
+    }
+
+    /**
+     * Get month List.
+     * 
+     * @param  string $type 
+     * @access public
+     * @return array
+     */
+    public function getMonthList($type = 'article')
+    {
+        return $this->dao->select('left(createdDate, 7) as month')
+            ->from(TABLE_ARTICLE)
+            ->where('type')->eq($type)->fetchAll('month');
     }
 
     /**
@@ -217,6 +234,7 @@ class articleModel extends model
             ->add('author', $this->app->user->account)
             ->add('type', $type)
             ->add('order', 0)
+            ->add('keywords', helper::unify($this->post->keywords, ','))
             ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
 
@@ -231,6 +249,8 @@ class articleModel extends model
         $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);
 
         if(dao::isError()) return false;
+
+        $this->loadModel('tag')->save($article->keywords);
 
         $this->processCategories($articleID, $type, $this->post->categories);
         return $articleID;
@@ -252,6 +272,7 @@ class articleModel extends model
             ->stripTags('content', $this->config->allowedTags->admin)
             ->join('categories', ',')
             ->add('editor', $this->app->user->account)
+            ->add('keywords', helper::unify($this->post->keywords, ','))
             ->add('editedDate', helper::now())
             ->get();
 
@@ -266,6 +287,7 @@ class articleModel extends model
 
         if(dao::isError()) return false;
 
+        $this->loadModel('tag')->save($article->keywords);
         $this->processCategories($articleID, $type, $this->post->categories);
 
         return !dao::isError();

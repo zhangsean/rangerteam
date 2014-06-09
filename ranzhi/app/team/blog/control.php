@@ -18,9 +18,10 @@ class blog extends control
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, 8, 1);
-        $this->view->latestArticles = $this->loadModel('article', 'sys')->getList('blog', 0, '', 'id_desc');
+        $this->view->latestArticles = $this->loadModel('article', 'sys')->getList('blog', 0, null, null, 'id_desc');
 
         $this->view->authors = $this->loadModel('article', 'sys')->getAuthorList('blog');
+        $this->view->months  = $this->loadModel('article', 'sys')->getMonthList('blog');
 
         $this->view->latestComments = $this->loadModel('message', 'sys')->getList('comment', 'blog', '');
 
@@ -35,14 +36,19 @@ class blog extends control
      * @access public
      * @return void
      */
-    public function index($categoryID = 0, $author = '', $pageID = 1)
+    public function index($categoryID = 0, $author = '', $month = '', $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, 10, $pageID);
 
         $category   = $this->loadModel('tree')->getByID($categoryID, 'blog');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
-        $articles   = $this->loadModel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), $author, $orderBy = 'id_desc', $pager);
+
+        $where = '';
+        if($author) $where .= "author = '{$author}'";
+        if($month)  $where .= "createdDate like '" . str_replace('_', '-', $month) . "%'";
+
+        $articles   = $this->loadModel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), 'query', $where, $orderBy = 'id_desc', $pager);
         $title      = '';
 
         if($category)

@@ -16,37 +16,35 @@ $path = $category ? array_keys($category->pathNames) : array();
 if(!empty($path))         js::set('path',  $path);
 if(!empty($category->id)) js::set('categoryID', $category->id );
 ?>
-<div class='col-md-9'>
-  <div class='panel list'>
-    <section class='items'>
-      <?php foreach($articles as $article):?>
-      <div class='item'>
-        <div class='item-heading'>
-          <div class="text-muted pull-right">
-            <span title="<?php echo $users[$article->author];?>"><i class='icon-user'></i> <?php echo $users[$article->author];?></span> &nbsp; 
-            <span title="<?php echo $lang->article->createdDate;?>"><i class='icon-time'></i> <?php echo substr($article->createdDate, 0, 10);?></span>&nbsp; 
-          </div>
-          <h4><?php echo html::a(inlink('view', "id={$article->id}"), $article->title);?></h4>
-        </div>
-        <div class='item-content'>
-          <?php if(!empty($article->image)):?>
+<div class='col-md-9' id='articles'>
+  <section>
+    <?php foreach($articles as $article):?>
+    <?php $url = inlink('view', "id=$article->id");?>
+    <div class="card">
+      <h4 class='card-heading'><?php echo html::a($url, $article->title);?></h4>
+      <div class='card-content text-muted'>
+        <?php echo helper::substr(strip_tags($article->content), 200, '...');?>
+        <?php if(!empty($article->image)):?>
           <div class='media pull-right'>
             <?php
             $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
             echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
             ?>
           </div>
-          <?php endif;?>
-          <div class='text'><?php echo helper::subStr(strip_tags($article->content), 250, '...');?></div>
-          <div class='text pull-right'>
-            <?php echo html::a($this->createLink('article', 'edit', "articleID={$article->id}&type=blog"), $lang->edit);?>
-            <?php echo html::a($this->createLink('article', 'delete', "articleID={$article->id}"), $lang->delete, "class='deleter'");?>
-          </div>
-        </div>
+        <?php endif;?>
       </div>
-      <?php endforeach;?>
-    </section>
-    <footer class='clearfix'><?php $pager->show('right');?></footer>
-  </div>
+      <div class="card-actions text-muted">
+        <span data-toggle='tooltip' title='<?php printf($lang->article->lblAddedDate, formatTime($article->createdDate));?>'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($article->createdDate));?></span>
+        &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class="icon-user"></i> <?php echo $article->author;?></span>
+        &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $article->views);?>'><i class="icon-eye-open"></i> <?php echo $article->views;?></span>
+        <span class='pull-right'>
+          <?php echo html::a($this->createLink('article', 'edit', "id={$article->id}&type=blog"), $lang->edit);?>
+          <?php echo html::a($this->createLink('article', 'delete', "id={$article->id}"), $lang->delete, "class='deleter'");?>
+        </span>
+      </div>
+    </div>
+    <?php endforeach;?>
+  </section>
+  <footer class='clearfix'><?php $pager->show('right');?></footer>
 </div>
 <?php include 'footer.html.php';?>

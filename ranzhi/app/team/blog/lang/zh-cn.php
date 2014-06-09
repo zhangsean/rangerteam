@@ -9,5 +9,4 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->blog->latestArticles = '最新博文';
-$lang->blog->author         = '作者列表';
+$lang->blog->latestArticles = "最新博文";

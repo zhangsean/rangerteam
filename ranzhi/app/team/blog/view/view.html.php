@@ -14,30 +14,61 @@
 <?php $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>'; ?>
 <?php js::set('articleID', $article->id);?>
 <?php js::set('categoryID', $category->id);?>
-  <div class='col-md-9'>
-    <div class='article'>
-      <header>
-        <h1><?php echo $article->title;?></h1>
-        <dl class='dl-inline'>
-          <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, formatTime($article->createdDate));?>'><i class="icon-time icon-large"></i> <?php echo formatTime($article->createdDate);?></dd>
-          <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
-          <?php if(!$article->original):?>
-          <dt><?php echo $lang->article->lblSource; ?></dt>
-          <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
-          <?php endif; ?>
-        </dl>
-      </header>
-      <?php if($article->summary) echo "<div class='summary'><strong>{$lang->article->summary}</strong>$lang->colon$article->summary</div>";?>
-      <p><?php echo $article->content;?></p>
-      <div class='article-file'><?php $this->loadModel('article')->printFiles($article->files);?></div>
-      <?php if($article->keywords) echo "<div class='keywords'><strong>{$lang->article->keywords}</strong>$lang->colon$article->keywords</div>";?>
+<div class='col-md-9'>
+  <div class='article'>
+    <header>
+      <h1><?php echo $article->title;?></h1>
+      <dl class='dl-inline'>
+        <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, formatTime($article->createdDate));?>'><i class="icon-time icon-large"></i> <?php echo formatTime($article->createdDate);?></dd>
+        <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
+        <?php if(!$article->original):?>
+        <dt><?php echo $lang->article->lblSource; ?></dt>
+        <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
+        <?php endif; ?>
+        <dd class='pull-right'>
+          <?php
+          if(!empty($this->config->oauth->sina))
+          {
+              $sina = json_decode($this->config->oauth->sina);
+              if($sina->widget) echo "<div class='sina-widget'>" . $sina->widget . '</div>';
+          }
+          ?>
+          <?php if($article->original):?>
+          <span class='label label-success'><?php echo $lang->article->originalList[$article->original]; ?></span>
+          <?php endif;?>
+          <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></span>
+        </dd>
+      </dl>
+      <?php if($article->summary):?>
+      <section class='abstract'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
+      <?php endif; ?>
+    </header>
+    <section class='article-content'>
+      <?php echo $article->content;?>
+    </section>
+    <section>
+      <?php $this->loadModel('file')->printFiles($article->files);?>
+    </section>
+    <footer>
+      <?php if($article->keywords):?>
+      <p class='small'><strong class='text-muted'><?php echo $lang->article->keywords;?></strong><span class='article-keywords'><?php echo $lang->colon . $article->keywords;?></span></p>
+      <?php endif; ?>
       <?php extract($prevAndNext);?>
-      <div class='row f-12px mt-10px'>
-        <div class='col-md-6 text-left'> <?php $prev ? print($lang->article->prev . $lang->colon . html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), $prev->title)) : print($lang->article->none);?></div>
-        <div class='col-md-6 text-right'><?php $next ? print($lang->article->next . $lang->colon . html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $next->title)) : print($lang->article->none);?></div>
-      </div>
-    </div>
-    <div id='commentBox'></div>
-    <?php echo html::a('', '', "name='comment'");?>
+      <ul class='pager pager-justify'>
+        <?php if($prev): ?>
+        <li class='previous'><?php echo html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), '<i class="icon-arrow-left"></i> ' . $prev->title); ?></li>
+        <?php else: ?>
+        <li class='preious disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->article->none); ?></a></li>
+        <?php endif; ?>
+        <?php if($next):?>
+        <li class='next'><?php echo html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $next->title . ' <i class="icon-arrow-right"></i>'); ?></li>
+        <?php else:?>
+        <li class='next disabled'><a href='###'> <?php print($lang->article->none); ?><i class='icon-arrow-right'></i></a></li>
+        <?php endif; ?>
+      </ul>
+    </footer>
   </div>
+  <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=blog&objectID={$article->id}");?></div>
+  <?php echo html::a('', '', "name='comment'");?>
+</div>
 <?php include './footer.html.php';?>

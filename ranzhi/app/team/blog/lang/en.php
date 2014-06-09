@@ -9,5 +9,4 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-$lang->blog->home     = 'Home';
-$lang->blog->siteHome = 'Site';
+$lang->blog->latestArticles = 'Latest Articles';

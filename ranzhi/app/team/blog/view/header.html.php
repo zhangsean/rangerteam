@@ -11,5 +11,6 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php css::import($themeRoot . 'default/blog.css');?>
 <?php include '../../../sys/common/view/treeview.html.php';?>
 <div class='row'>

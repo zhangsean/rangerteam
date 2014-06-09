@@ -101,6 +101,7 @@ define('TABLE_ACTION',    '`sys_action`');
 define('TABLE_FILE',      '`sys_file`');
 define('TABLE_HISTORY',   '`sys_history`');
 define('TABLE_CATEGORY',  '`sys_category`');
+define('TABLE_ARTICLE',   '`sys_article`');
 define('TABLE_EXTENSION', '`sys_extension`');
 define('TABLE_WEBAPP',    '`sys_webapp`');
 define('TABLE_LANG',      '`sys_lang`');
@@ -108,6 +109,7 @@ define('TABLE_ENTRY',     '`sys_entry`');
 define('TABLE_SSO',       '`sys_sso`');
 define('TABLE_TASK',      '`sys_task`');
 define('TABLE_ISSUE',     '`sys_issue`');
+define('TABLE_TAG',       '`sys_tag`');
 
 /* Tables for crm. */
 define('TABLE_ADDRESS',       '`crm_address`');
@@ -140,10 +142,8 @@ define('TABLE_BALANCE',   '`cash_balance`');
 define('TABLE_TRADE',     '`cash_trade`');
 
 /* Tables for team. */
-define('TABLE_TAG',     '`team_tag`');
 define('TABLE_THREAD',  '`team_thread`');
 define('TABLE_REPLY',   '`team_reply`');
-define('TABLE_ARTICLE', '`sys_article`');
 define('TABLE_MESSAGE', '`sys_message`');
 
 /* The mapping list of object and tables. */

@@ -558,6 +558,22 @@ class helper
             }
         }
     }
+
+    /**
+     * Unify string to standard chars.
+     * 
+     * @param  string    $string 
+     * @param  string    $to 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function unify($string, $to = ',')
+    {
+        $labels = array('_', '、', ' ', '-', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '。');
+        $string = str_replace($labels, $to, $string);
+        return preg_replace("/[{$to}]+/", $to, trim($string, $to));
+    }
 }
 
 /**

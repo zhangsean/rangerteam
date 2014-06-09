@@ -149,7 +149,7 @@ class messageModel extends model
         $message = fixer::input('post')
             ->add('date', helper::now())
             ->add('type', $type)
-            ->add('status', '0')
+            ->add('status', 1)
             ->setIF(isset($_POST['secret']) and $_POST['secret'] == 1, 'public', '0')
             ->setIF($type == 'message', 'to', 'admin')
             ->setIF($account != 'guest', 'account', $account)

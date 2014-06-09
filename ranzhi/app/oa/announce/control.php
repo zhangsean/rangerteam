@@ -43,7 +43,7 @@ class announce extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
-        $articles = $this->article->getList($type, $families, $orderBy, $pager);
+        $articles = $this->article->getList($type, $families, $mode = 'all', $param = null, $orderBy, $pager);
 
         $this->view->title      = $this->lang->announce->browse;
         $this->view->type       = $type;

@@ -26,7 +26,7 @@ class rss extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, isset($this->config->rss->items) ? $this->config->rss->items : 10, 1);
 
-        $articles = $this->article->getList($type, $this->tree->getFamily(0, $type), 'id_desc', $pager);
+        $articles = $this->article->getList($type, $this->tree->getFamily(0, $type), 'all', null, 'id_desc', $pager);
         $latestArticle = current((array)$articles);
 
         $this->view->title    = isset($this->config->company->name) ? $this->config->company->name : $this->lang->ranzhi;

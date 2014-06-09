@@ -32,6 +32,35 @@ class fileModel extends model
     }
 
     /**
+     * Print files.
+     * 
+     * @param  object $files 
+     * @access public
+     * @return void
+     * @todo fix style.
+     */
+    public function printFiles($files)
+    {
+        if(empty($files)) return false;
+
+        $imagesHtml = '';
+        $filesHtml  = '';
+        foreach($files as $file)
+        {
+            $file->title = $file->title . ".$file->extension";
+            if($file->isImage)
+            {
+                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($file->smallURL), "target='_blank' data-toggle='lightbox' data-width='{$file->width}' data-height='{$file->height}'") . '</li>';
+            }
+            else
+            {
+                $filesHtml .= "<li class='file file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</li>';
+            }
+        }
+        echo "<ul class='article-files clearfix'>" . $imagesHtml . $filesHtml . '</ul>';
+    }
+
+    /**
      * Get files of an object list.
      * 
      * @param   string  $objectType 

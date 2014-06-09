@@ -32,6 +32,10 @@
         <td colspan='2'><?php echo html::input('title', $article->title, "class='form-control'");?></td>
       </tr>
       <tr>
+        <th><?php echo $lang->article->keywords;?></th>
+        <td colspan='2'><?php echo html::input('keywords', $article->keywords, "class='form-control'");?></td>
+      </tr>
+      <tr>
         <th><?php echo $lang->article->content;?></th>
         <td colspan='2'><?php echo html::textarea('content', htmlspecialchars($article->content), "rows='20' class='form-control'");?></td>
       </tr>
