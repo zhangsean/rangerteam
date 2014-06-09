@@ -340,6 +340,37 @@ class user extends control
     }
 
     /**
+     *  Admin colleague list.
+     *
+     * @param  int    $deptID
+     * @param  srting $query
+     * @param  srting $orderBy
+     * @param  int    $recTotal
+     * @param  int    $recPerPage
+     * @param  int    $pagerID
+     * @access public
+     * @return void
+     */
+    public function colleague($deptID = 0, $query = '', $orderBy = 'id_asc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    {
+        if($this->post->query) die($this->locate(inlink('colleague', "deptID=$deptID&query={$this->post->query}&orderBy=$orderBy&recTotal=0&recPerPage=$recPerPage&pageID=1")));
+
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptColleagueLink'));
+        $this->view->depts    = $this->tree->getOptionMenu('dept');
+        $this->view->users    = $this->user->getList($deptID, $query, $orderBy, $pager);
+        $this->view->query    = $query;
+        $this->view->pager    = $pager;
+        $this->view->deptID   = $deptID;
+        $this->view->orderBy  = $orderBy;
+
+        $this->view->title = $this->lang->user->list;
+        $this->display();
+    }
+
+    /**
      * forbid a user.
      *
      * @param int    $userID
