@@ -21,7 +21,7 @@
   </div>
 
   <div class='panel'> 
-    <div class='panel-heading'> <h4 class='title'><?php echo $lang->blog->author;?></h4></div>
+    <div class='panel-heading'> <h4 class='title'><?php echo $lang->article->author;?></h4></div>
     <div class='panel-body'>
       <ul>
         <?php foreach($authors as $author):?>
