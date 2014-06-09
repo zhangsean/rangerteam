@@ -36,20 +36,30 @@
     <div class='panel-body'>
       <ul>
         <?php foreach(array_keys($months) as $month):?>
-        <li><?php echo html::a(inlink('index', 'category=0&author=&month=' .str_replace('-', '_', $month)), $month);?>
+        <li><?php echo html::a(inlink('index', 'category=0&author=&month=' . str_replace('-', '_', $month)), $month);?></li>
         <?php endforeach;?>
       </ul>
     </div>
   </div>
 
   <div class='panel'> 
+    <div class='panel-heading'> <h4 class='title'><?php echo $lang->article->keywords;?></h4></div>
+    <div class='panel-body'>
+      <?php foreach($tags as $tag):?>
+      <?php echo html::a(inlink('index', 'category=0&author=&month=&tag=' . $tag), $tag, "class='label label-info'");?>
+      <?php endforeach;?>
+    </div>
+  </div>
+
+ <div class='panel'> 
     <div class='panel-heading'> <h4 class='title'><?php echo $lang->blog->latestArticles;?></h4></div>
     <div class='panel-body'>
       <ul>
         <?php foreach($latestArticles as $article):?>
-        <li><?php echo html::a(inlink('view', "id={$article->id}"), $article->title);?>
+        <li><?php echo html::a(inlink('view', "id={$article->id}"), $article->title);?></li>
         <?php endforeach;?>
       </ul>
     </div>
   </div>
+
 </div>

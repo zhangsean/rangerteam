@@ -218,6 +218,21 @@ class articleModel extends model
     }
 
     /**
+     * Get tag List.
+     * 
+     * @param  string $type 
+     * @access public
+     * @return array
+     */
+    public function getTagList($type = 'article')
+    {
+        $articles = $this->dao->select('id,keywords')->from(TABLE_ARTICLE)->where('type')->eq($type)->fetchAll('id');
+        $tags =array();
+        foreach($articles as $article) $tags = array_merge($tags, explode(',', $article->keywords));
+        return $tags;
+    }
+
+    /**
      * Create an article.
      * 
      * @param  string $type 
