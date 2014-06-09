@@ -15,12 +15,20 @@
 <?php js::set('boardID', $board->id);?>
 <div class='row'>
   <div class='col-md-2'>
+    <?php foreach($boards as $parentBoard):?>
     <div class='panel'>
       <div class='panel-heading'>
-        <strong><i class='icon-comments-alt icon-large'></i>&nbsp;<?php echo $lang->thread->board;?></strong>
+        <strong><i class='icon-comments-alt icon-large'></i>&nbsp;<?php echo $parentBoard->name;?></strong>
       </div>
-      <div class='panel-body'><?php echo $boards;?></div>
+      <div class='panel-body'>
+        <ul class='boards'>
+          <?php foreach($parentBoard->children as $childBoard):?>
+          <li><?php echo html::a($this->createLink('forum', 'board', "id=$childBoard->id"), $childBoard->name, "id='board{$childBoard->id}'");?></li>
+          <?php endforeach;?>
+        </ul>
+      </div>
     </div>
+    <?php endforeach;?>
   </div>
   <div class='col-md-10'>
     <div class='panel'>

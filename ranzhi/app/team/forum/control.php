@@ -48,7 +48,7 @@ class forum extends control
         $this->view->keywords = $board->keywords;
         $this->view->desc     = strip_tags($board->desc);
         $this->view->board    = $board;
-        $this->view->boards   = $this->loadModel('tree')->getTreeMenu('forum', 0, array('treeModel', 'createForumBoardLink'));
+        $this->view->boards   = $this->forum->getBoards();
         $this->view->sticks   = $this->thread->getSticks($board->id);
         $this->view->threads  = $threads;
         $this->view->pager    = $pager;

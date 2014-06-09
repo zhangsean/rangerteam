@@ -53,7 +53,7 @@ class thread extends control
 
         $this->view->title     = $board->name . $this->lang->minus . $this->lang->thread->post;
         $this->view->board     = $board;
-        $this->view->boards    = $this->loadModel('tree')->getTreeMenu('forum', 0, array('treeModel', 'createForumBoardLink'));
+        $this->view->boards    = $this->forum->getBoards();
         $this->view->canManage = $this->thread->canManage($boardID);
 
         $this->display();
@@ -91,7 +91,7 @@ class thread extends control
         $this->view->title     = $this->lang->thread->edit . $this->lang->minus . $thread->title;
         $this->view->thread    = $thread;
         $this->view->board     = $board;
-        $this->view->boards    = $this->loadModel('tree')->getTreeMenu('forum', 0, array('treeModel', 'createForumBoardLink'));
+        $this->view->boards    = $this->loadModel('forum')->getBoards();
         $this->view->canManage = $this->thread->canManage($board->id);
 
         $this->display();
@@ -138,7 +138,7 @@ class thread extends control
         $this->view->replies  = $replies;
         $this->view->pager    = $pager;
         $this->view->speakers = $speakers;
-        $this->view->boards   = $this->loadModel('tree')->getTreeMenu('forum', 0, array('treeModel', 'createForumBoardLink'));
+        $this->view->boards   = $this->loadModel('forum')->getBoards();
 
         $this->display();
     }
