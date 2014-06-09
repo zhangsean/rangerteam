@@ -402,6 +402,19 @@ class treeModel extends model
     }
 
     /**
+     * Create dept colleague link.
+     * 
+     * @param  object    $category 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function createDeptColleagueLink($category)
+    {
+        return html::a(helper::createLink('user', 'colleague', "deptID={$category->id}"), $category->name, "id='category{$category->id}'");
+    }
+
+    /**
      * Create dept admin link 
      * 
      * @param  object    $category 

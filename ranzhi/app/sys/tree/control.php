@@ -52,9 +52,17 @@ class tree extends control
         }
         elseif($type == 'dept')
         {   
-            $this->lang->category   = $this->lang->dept;
-            unset($this->lang->tree->menu);
-            $this->lang->menuGroups->tree = 'user';
+            $this->lang->category = $this->lang->dept;
+            if(isset($this->lang->setting->menu))
+            {
+                $this->lang->tree->menu = $this->lang->setting->menu;
+                $this->lang->menuGroups->tree = 'setting';
+            }
+            else
+            {
+                unset($this->lang->tree->menu);
+                $this->lang->menuGroups->tree = 'user';
+            }
         }
         elseif(strpos($type, 'doc') !== false)
         {
