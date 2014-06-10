@@ -51,19 +51,21 @@ js::set('deptID', $deptID);
                 <table class='table table-bordered table-contact'>
                   <tr>
                     <th class='w-100px text-center alert v-middle'>
-                      <?php if($user->admin == 'super'):?>
-                      <span ><i class='icon-user text-muted'></i></span>
-                      <?php endif;?>
                       <span class='lead'><?php echo $user->realname;?></span>
-                      <span><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></span>
-                      <div><?php echo $user->account;?></div>
+                      <small><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></small>
                     </th>
                     <td>
-                      <?php if($user->dept or $user->role) echo "<div><i class='icon-home'></i> {$depts[$user->dept]} {$lang->user->roleList[$user->role]}</div>";?>
-                      <?php if($user->phone or $user->mobile) echo "<div><i class='icon-phone-sign'></i> $user->phone $user->mobile</div>";?>
-                      <?php if($user->qq) echo "<div class='f-14'><i class='icon-qq'></i> $user->qq</div>";?>
-                      <?php if($user->email) echo "<div class='f-14'><i class='icon-envelope-alt'></i> $user->email </div>";?>
-                      <?php if($user->address) echo "<div class='f-14'><i class='icon-address'></i> $user->address </div>";?>
+                      <div class='text-right'>
+                        <i class='btn-vcard icon icon-qrcode icon-large text-info'> </i>
+                      </div>
+                      <dl class='contact-info'>
+                        <?php if($user->dept or $user->role) echo "<dd><i class='icon-group'></i> " . zget($depts, $user->dept, ' ') . zget($lang->user->roleList, $user->role) . "</dd>";?>
+                        <?php if($user->phone or $user->mobile) echo "<dd><i class='icon-phone-sign'></i> $user->phone $user->mobile</dd>";?>
+                        <?php if($user->qq) echo "<dd><i class='icon-qq'></i> $user->qq</dd>";?>
+                        <?php if($user->email) echo "<dd><i class='icon-envelope-alt'></i> $user->email </dd>";?>
+                        <?php if($user->address) echo "<dd><i class='icon-home'></i> $user->address </dd>";?>
+                      </dl>
+                      <p class='vcard text-center'><?php echo html::image(inlink('vcard', "user={$user->account}"), "style='height:120px'");?></p>
                     </td>
                   </tr>
                 </table>

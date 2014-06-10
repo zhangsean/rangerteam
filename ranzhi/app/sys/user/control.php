@@ -33,7 +33,7 @@ class user extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             if(!$this->session->random) $this->session->set('random', md5(time() . mt_rand()));
-            if($this->user->login($this->post->account, md5($this->user->createPassword($this->post->password1, $this->post->account) . $this->session->random)))
+            If($this->user->login($this->post->account, md5($this->user->createPassword($this->post->password1, $this->post->account) . $this->session->random)))
             {
                 $url = $this->post->referer ? urldecode($this->post->referer) : inlink('user', 'control');
                 $this->send( array('result' => 'success', 'locate'=>$url) );
@@ -359,7 +359,7 @@ class user extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptColleagueLink'));
-        $this->view->depts    = $this->tree->getOptionMenu('dept');
+        $this->view->depts    = $this->tree->getPairs(0, 'dept');
         $this->view->users    = $this->user->getList($deptID, $query, $orderBy, $pager);
         $this->view->query    = $query;
         $this->view->pager    = $pager;
@@ -441,5 +441,34 @@ class user extends control
 
         $this->view->user = $this->user->getByAccount($this->app->user->account);
         $this->display();
+    }
+
+    /**
+     * vcard of a user.
+     * 
+     * @param  string    $user 
+     * @access public
+     * @return void
+     */
+    public function vcard($user)
+    {
+        $user = $this->user->getByAccount($user);
+
+        $deptList = $this->loadModel('tree')->getPairs(0, 'dept');
+        $dept = zget($deptList, $user->dept, ' ');
+
+        $role = zget($this->lang->user->roleList, $user->role, ' ');
+
+        $vcard = "BEGIN:VCARD 
+N:{$user->realname}
+TITLE:{$dept} {$role}
+TEL;TYPE=WORK:{$user->phone}
+TEL;TYPE=WORK:{$user->mobile}
+ADR;TYPE=HOME:{$user->address}
+EMAIL;TYPE=PREF,INTERNET:{$user->email}
+END:VCARD";
+
+        $this->app->loadClass('qrcode');
+        QRcode::png($vcard, false, 4, 6); 
     }
 }
