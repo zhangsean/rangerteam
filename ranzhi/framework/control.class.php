@@ -174,7 +174,7 @@ class control
     public function __construct($moduleName = '', $methodName = '', $appName = '')
     {
         /* Global the globals, and refer them to the class member. */
-        global $app, $config, $lang, $dbh;
+        global $app, $config, $lang, $dbh, $common;
         $this->app      = $app;
         $this->config   = $config;
         $this->lang     = $lang;
@@ -193,6 +193,7 @@ class control
         $this->view->app    = $app;
         $this->view->lang   = $lang;
         $this->view->config = $config;
+        $this->view->common = $common;
         $this->view->title  = '';
 
         /* Set super vars. */

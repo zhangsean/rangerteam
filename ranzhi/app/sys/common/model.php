@@ -269,6 +269,34 @@ class commonModel extends model
     }
 
     /**
+     * Print position bar 
+     *
+     * @param   object $module 
+     * @param   object $object 
+     * @param   mixed  $misc    other params. 
+     * @access  public
+     * @return  void
+     */
+    public function printPositionBar($module = '', $object = '', $misc = '', $root = '')
+    {
+        echo '<ul class="breadcrumb">';
+        if($root == '')
+        {
+            echo '<li>' . $this->lang->currentPos . $this->lang->colon . html::a(helper::createLink('index'), strtoupper($this->app->appName)) . '</li>';
+        }
+        else
+        {
+            echo $root;
+        }
+
+        $moduleName = $this->app->getModuleName();
+        $moduleName = $moduleName == 'reply' ? 'thread' : $moduleName;
+        $funcName = "print$moduleName";
+        if(method_exists('commonModel', $funcName)) echo $this->$funcName($module, $object, $misc);
+        echo '</ul>';
+    }
+
+    /**
      * Print the link contains orderBy field.
      *
      * This method will auto set the orderby param according the params. For example, if the order by is desc,
@@ -595,6 +623,40 @@ class commonModel extends model
         }
 
         return $ip;
+    }
+
+    /**
+     * Print the position bar of forum module.
+     * 
+     * @param   object $board 
+     * @access  public
+     * @return  void
+     */
+    public function printForum($board = '')
+    {
+        $divider = $this->lang->divider;
+        echo '<li>' . html::a(helper::createLink('forum', 'index'), $this->lang->forumHome) . '</li>';
+        if(!$board) return false;
+
+        unset($board->pathNames[key($board->pathNames)]);
+        foreach($board->pathNames as $boardID => $boardName)
+        {
+            echo '<li>' . html::a(helper::createLink('forum', 'board', "boardID={$boardID}"), $boardName) . '</li>';
+        }
+    }
+
+    /**
+     * Print the position bar of thread module.
+     * 
+     * @param   object $board 
+     * @param   object $thread 
+     * @access  public
+     * @return  void
+     */
+    public function printThread($board, $thread = '')
+    {
+        $this->printForum($board);
+        if($thread) echo '<li>' . $thread->title . '</li>';
     }
 
     /**

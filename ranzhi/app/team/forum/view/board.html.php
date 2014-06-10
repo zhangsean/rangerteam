@@ -25,6 +25,7 @@
     </ul>
   </div>
   <div class='col-md-10'>
+    <?php $common->printPositionBar($board);?>
     <div class='panel'>
       <div class='panel-heading'>
         <strong><i class='icon-comments-alt icon-large'></i>&nbsp;<?php echo $board->name; ?></strong>

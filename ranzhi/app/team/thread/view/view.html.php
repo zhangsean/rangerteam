@@ -17,6 +17,7 @@ js::set('boardID', $board->id);
   <?php include './side.html.php';?>
   <div class='col-md-10'>
     <?php
+    $common->printPositionBar($board, $thread);
     if($pager->pageID == 1) include './thread.html.php';
     if(!$thread->readonly)  include './reply.html.php';
     else echo "<div class='alert alert-info'>{$lang->thread->readonlyMessage}</div>";
