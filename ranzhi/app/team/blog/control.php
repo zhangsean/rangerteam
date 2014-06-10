@@ -14,7 +14,6 @@ class blog extends control
     public function __CONSTRUCT()
     {
         parent::__CONSTRUCT();
-        unset($this->lang->blog->menu);
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, 8, 1);
@@ -37,6 +36,7 @@ class blog extends control
      */
     public function index($categoryID = 0, $author = '', $month = '', $tag = '', $pageID = 1)
     {
+        unset($this->lang->blog->menu);
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, 10, $pageID);
 
@@ -66,6 +66,62 @@ class blog extends control
 
         $this->display();
     }
+
+    /**
+     * Create a blog.
+     * 
+     * @param  int    $categoryID
+     * @access public
+     * @return void
+     */
+    public function create($categoryID = '')
+    {
+        $categories = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
+        if(empty($categories))
+        {
+            die(js::alert($this->lang->tree->noCategories) . js::locate($this->createLink('tree', 'browse', "type=blog")));
+        }
+
+        if($_POST)
+        {
+            $this->article->create('blog');
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('team.blog')));
+        }
+
+        $this->view->title           = $this->lang->blog->create;
+        $this->view->currentCategory = $categoryID;
+        $this->view->categories      = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
+        $this->view->type            = 'blog';
+
+        $this->display();
+    }
+
+    /**
+     * Edit an article.
+     * 
+     * @param  int    $articleID 
+     * @access public
+     * @return void
+     */
+    public function edit($articleID)
+    {
+        $article    = $this->article->getByID($articleID, $replaceTag = false);
+        $categories = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
+
+        if($_POST)
+        {
+            $this->article->update($articleID, 'blog');
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('team.blog')));
+        }
+
+        $this->view->title      = $this->lang->article->edit;
+        $this->view->article    = $article;
+        $this->view->categories = $categories;
+        $this->view->type       = 'blog';
+        $this->display();
+    }
     
     /**
      * View an article.
@@ -77,6 +133,7 @@ class blog extends control
      */
     public function view($articleID, $currentCategory = 0)
     {
+        unset($this->lang->blog->menu);
         $article  = $this->loadModel('article')->getByID($articleID);
 
         /* fetch category for display. */
@@ -96,5 +153,18 @@ class blog extends control
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
         $this->display();
+    }
+
+    /**
+     * Delete an article.
+     * 
+     * @param  int      $articleID 
+     * @access public
+     * @return void
+     */
+    public function delete($articleID)
+    {
+        if($this->article->delete($articleID)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 }

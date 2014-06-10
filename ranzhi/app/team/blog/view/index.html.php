@@ -38,8 +38,8 @@ if(!empty($category->id)) js::set('categoryID', $category->id );
         &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class="icon-user"></i> <?php echo $article->author;?></span>
         &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $article->views);?>'><i class="icon-eye-open"></i> <?php echo $article->views;?></span>
         <span class='pull-right'>
-          <?php echo html::a($this->createLink('article', 'edit', "id={$article->id}&type=blog"), $lang->edit);?>
-          <?php echo html::a($this->createLink('article', 'delete', "id={$article->id}"), $lang->delete, "class='deleter'");?>
+          <?php echo html::a(inlink('edit', "id={$article->id}&type=blog"), $lang->edit);?>
+          <?php echo html::a(inlink('delete', "id={$article->id}"), $lang->delete, "class='deleter'");?>
         </span>
       </div>
     </div>

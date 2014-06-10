@@ -25,8 +25,8 @@ $lang->forum = new stdclass();
 /* Menu of forum module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->index   = '博客列表|blog|index|';
-$lang->blog->menu->ategory = '类目设置|tree|browse|type=blog';
+$lang->blog->menu->index    = '博客列表|blog|index|';
+$lang->blog->menu->category = '类目设置|tree|browse|type=blog';
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

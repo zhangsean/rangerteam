@@ -13,7 +13,7 @@
 <?php $treeMenu = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));?>
 <div class='col-md-3'>
   <div class='panel'> 
-    <?php echo html::a($this->createLink('article', 'create', "type=blog"), $lang->blog->create, "class='btn btn-primary btn-lg btn-block'");?>
+    <?php echo html::a(inlink('create'), $lang->blog->create, "class='btn btn-primary btn-lg btn-block'");?>
   </div>
   <div class='panel'> 
     <div class='panel-heading'> <h4 class='title'><?php echo $lang->categoryMenu;?></h4></div>
