@@ -58,6 +58,63 @@ class announce extends control
     }   
 
     /**
+     * Create an announce.
+     * 
+     * @param  int    $categoryID
+     * @access public
+     * @return void
+     */
+    public function create($categoryID = '')
+    {
+        $this->loadModel('article');
+        $categories = $this->loadModel('tree')->getOptionMenu('announce', 0, $removeRoot = true);
+        if(empty($categories))
+        {
+            die(js::alert($this->lang->tree->noCategories) . js::locate($this->createLink('tree', 'browse', "type=announce")));
+        }
+
+        if($_POST)
+        {
+            $this->article->create('announce');
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('announce')));
+        }
+
+        $this->view->title           = $this->lang->announce->create;
+        $this->view->currentCategory = $categoryID;
+        $this->view->categories      = $this->loadModel('tree')->getOptionMenu('announce', 0, $removeRoot = true);
+        $this->view->type            = 'announce';
+
+        $this->display();
+    }
+
+    /**
+     * Edit an announce.
+     * 
+     * @param  int    $articleID 
+     * @access public
+     * @return void
+     */
+    public function edit($articleID)
+    {
+        $article    = $this->loadModel('article')->getByID($articleID, $replaceTag = false);
+        $categories = $this->loadModel('tree')->getOptionMenu('announce', 0, $removeRoot = true);
+
+        if($_POST)
+        {
+            $this->article->update($articleID, 'announce');
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('announce')));
+        }
+
+        $this->view->title      = $this->lang->article->edit;
+        $this->view->article    = $article;
+        $this->view->categories = $categories;
+        $this->view->type       = 'announce';
+        $this->display();
+    }
+
+    /**
      * View an announce.
      * 
      * @param int $announceID 
@@ -87,5 +144,18 @@ class announce extends control
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($announceID)->exec(false);
 
         $this->display();
+    }
+
+    /**
+     * Delete an article.
+     * 
+     * @param  int      $articleID 
+     * @access public
+     * @return void
+     */
+    public function delete($articleID)
+    {
+        if($this->loadModel('article')->delete($articleID)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 }

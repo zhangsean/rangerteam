@@ -25,7 +25,7 @@ $lang->project   = new stdclass();
 $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();
 $lang->announce->menu->browse   = array('link' => 'Announce List|announce|browse|', 'alias' => 'view');
-$lang->announce->menu->create   = 'Create Announce|article|create|type=announce|';
+$lang->announce->menu->create   = 'Create Announce|announce|create|';
 $lang->announce->menu->category = 'Category|tree|browse|type=announce|';
 
 $lang->doc = new stdclass();

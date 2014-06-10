@@ -35,8 +35,8 @@
           <?php endif;?>
           <div class='text'><?php echo $article->content;?></div>
           <div class='text pull-right'>
-            <?php echo html::a($this->createLink('article', 'edit', "articleID={$article->id}&type=announce"), $lang->edit);?>
-            <?php echo html::a($this->createLink('article', 'delete', "articleID={$article->id}"), $lang->delete, "class='deleter'");?>
+            <?php echo html::a(inlink('edit', "articleID={$article->id}"), $lang->edit);?>
+            <?php echo html::a(inlink('delete', "articleID={$article->id}"), $lang->delete, "class='deleter'");?>
           </div>
         </div>
       </div>

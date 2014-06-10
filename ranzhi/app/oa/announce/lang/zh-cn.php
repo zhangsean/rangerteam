@@ -10,3 +10,4 @@
  * @link        http://www.ranzhi.org
  */
 $lang->announce->browse = '公告浏览';
+$lang->announce->create = '添加公告';

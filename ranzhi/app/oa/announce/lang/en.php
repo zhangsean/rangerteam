@@ -10,3 +10,4 @@
  * @link        http://www.ranzhi.org
  */
 $lang->announce->browse = 'Browse';
+$lang->announce->create = 'Create';
