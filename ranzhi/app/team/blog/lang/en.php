@@ -10,3 +10,8 @@
  * @link        http://www.ranzhi.org
  */
 $lang->blog->latestArticles = 'Latest Articles';
+
+$lang->blog->create = "Create";
+$lang->blog->edit   = "Edit";
+$lang->blog->view   = "View";
+$lang->blog->delete = "Delete";

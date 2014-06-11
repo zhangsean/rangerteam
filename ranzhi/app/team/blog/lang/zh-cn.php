@@ -10,3 +10,8 @@
  * @link        http://www.ranzhi.org
  */
 $lang->blog->latestArticles = "最新博文";
+
+$lang->blog->create = "添加博客";
+$lang->blog->edit   = "编辑博客";
+$lang->blog->view   = "查看博客";
+$lang->blog->delete = "删除博客";
