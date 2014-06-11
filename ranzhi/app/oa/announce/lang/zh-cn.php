@@ -11,3 +11,6 @@
  */
 $lang->announce->browse = '公告浏览';
 $lang->announce->create = '添加公告';
+$lang->announce->edit   = '编辑公告';
+$lang->announce->view   = '查看公告';
+$lang->announce->delete = '删除公告';

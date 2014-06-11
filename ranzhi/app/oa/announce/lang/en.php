@@ -11,3 +11,6 @@
  */
 $lang->announce->browse = 'Browse';
 $lang->announce->create = 'Create';
+$lang->announce->edit   = 'Edit';
+$lang->announce->view   = 'View';
+$lang->announce->delete = 'Delete';
