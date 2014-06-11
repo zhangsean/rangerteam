@@ -10,6 +10,8 @@
  * @link        http://www.ranzhi.org
  */
 $lang->resume->common = '履历';
+$lang->resume->browse = '浏览履历';
+$lang->resume->delete = '删除履历';
 $lang->resume->create = '新增履历';
 $lang->resume->edit   = '修改公司信息';
 

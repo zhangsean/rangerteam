@@ -10,6 +10,8 @@
  * @link        http://www.ranzhi.org
  */
 $lang->address->common = 'Address';
+$lang->address->browse = 'Browse Address';
+$lang->address->delete = 'Delete Address';
 $lang->address->create = 'Create Address';
 $lang->address->edit   = 'Edit Address';
 

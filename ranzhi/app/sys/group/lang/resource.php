@@ -75,7 +75,6 @@ $lang->resource = new stdclass();
 
 /* Order module. */
 $lang->resource->order = new stdclass();
-$lang->resource->order->index    = 'index';
 $lang->resource->order->browse   = 'browse';
 $lang->resource->order->create   = 'create';
 $lang->resource->order->edit     = 'edit';
@@ -85,7 +84,6 @@ $lang->resource->order->activate = 'activate';
 $lang->resource->order->contact  = 'contact';
 $lang->resource->order->assign   = 'assign';
 
-$lang->order->methodOrder[0]  = 'index';
 $lang->order->methodOrder[5]  = 'browse';
 $lang->order->methodOrder[10] = 'create';
 $lang->order->methodOrder[15] = 'edit';
@@ -97,7 +95,6 @@ $lang->order->methodOrder[45] = 'assign';
 
 /* Contract. */
 $lang->resource->contract = new stdclass();
-$lang->resource->contract->index    = 'index';
 $lang->resource->contract->browse   = 'browse';
 $lang->resource->contract->create   = 'create';
 $lang->resource->contract->edit     = 'edit';
@@ -108,22 +105,19 @@ $lang->resource->contract->cancel   = 'cancel';
 $lang->resource->contract->finish   = 'finish';
 $lang->resource->contract->delete   = 'delete';
 
-$lang->order->methodOrder[0]  = 'index';
-$lang->order->methodOrder[5]  = 'browse';
-$lang->order->methodOrder[10] = 'create';
-$lang->order->methodOrder[15] = 'edit';
-$lang->order->methodOrder[20] = 'view';
-$lang->order->methodOrder[25] = 'delivery';
-$lang->order->methodOrder[30] = 'receive';
-$lang->order->methodOrder[40] = 'cancel';
-$lang->order->methodOrder[45] = 'finish';
-$lang->order->methodOrder[50] = 'delete';
+$lang->contract->methodOrder[5]  = 'browse';
+$lang->contract->methodOrder[10] = 'create';
+$lang->contract->methodOrder[15] = 'edit';
+$lang->contract->methodOrder[20] = 'view';
+$lang->contract->methodOrder[25] = 'delivery';
+$lang->contract->methodOrder[30] = 'receive';
+$lang->contract->methodOrder[40] = 'cancel';
+$lang->contract->methodOrder[45] = 'finish';
+$lang->contract->methodOrder[50] = 'delete';
 
 /* Customer. */
 $lang->resource->customer = new stdclass();
-$lang->resource->customer->index         = 'index';
 $lang->resource->customer->browse        = 'browse';
-$lang->resource->customer->getOptionMenu = 'getOptionMenu';
 $lang->resource->customer->create        = 'create';
 $lang->resource->customer->edit          = 'edit';
 $lang->resource->customer->view          = 'view';
@@ -134,9 +128,7 @@ $lang->resource->customer->contract      = 'contract';
 $lang->resource->customer->record        = 'record';
 $lang->resource->customer->delete        = 'delete';
 
-$lang->customer->methodOrder[0]  = 'index';
 $lang->customer->methodOrder[5]  = 'browse';
-$lang->customer->methodOrder[10] = 'getOptionMenu';
 $lang->customer->methodOrder[15] = 'create';
 $lang->customer->methodOrder[20] = 'edit';
 $lang->customer->methodOrder[25] = 'view';
@@ -149,23 +141,19 @@ $lang->customer->methodOrder[55] = 'delete';
 
 /* Contact. */
 $lang->resource->contact = new stdclass();
-$lang->resource->contact->index         = 'index';
 $lang->resource->contact->browse        = 'browse';
 $lang->resource->contact->create        = 'create';
 $lang->resource->contact->edit          = 'edit';
 $lang->resource->contact->view          = 'view';
 $lang->resource->contact->block         = 'block';
 $lang->resource->contact->delete        = 'delete';
-$lang->resource->contact->getOptionMenu = 'getOptionMenu';
 
-$lang->contact->methodOrder[5]  = 'index';
 $lang->contact->methodOrder[10] = 'browse';
 $lang->contact->methodOrder[15] = 'create';
 $lang->contact->methodOrder[20] = 'edit';
 $lang->contact->methodOrder[25] = 'view';
 $lang->contact->methodOrder[30] = 'block';
 $lang->contact->methodOrder[35] = 'delete';
-$lang->contact->methodOrder[40] = 'getOptionMenu';
 
 /* Product. */
 $lang->resource->product = new stdclass();
@@ -207,7 +195,6 @@ $lang->resume->methodOrder[20] = 'delete';
 
 /* Product plan. */
 $lang->resource->trade = new stdclass();
-$lang->resource->trade->index       = 'index';
 $lang->resource->trade->browse      = 'browse';
 $lang->resource->trade->create      = 'create';
 $lang->resource->trade->batchCreate = 'batchCreate';
@@ -216,7 +203,6 @@ $lang->resource->trade->transfer    = 'transfer';
 $lang->resource->trade->detail      = 'detail';
 $lang->resource->trade->delete      = 'delete';
 
-$lang->trade->methodOrder[5]  = 'index';
 $lang->trade->methodOrder[10] = 'browse';
 $lang->trade->methodOrder[15] = 'create';
 $lang->trade->methodOrder[20] = 'batchCreate';
@@ -232,14 +218,12 @@ $lang->resource->depositor->create = 'create';
 $lang->resource->depositor->edit   = 'edit';
 $lang->resource->depositor->delete = 'delete';
 $lang->resource->depositor->view   = 'view';
-$lang->resource->depositor->export = 'export';
 
 $lang->depositor->methodOrder[5]  = 'browse';
 $lang->depositor->methodOrder[10] = 'create';
 $lang->depositor->methodOrder[15] = 'edit';
 $lang->depositor->methodOrder[20] = 'delete';
 $lang->depositor->methodOrder[25] = 'view';
-$lang->depositor->methodOrder[35] = 'export';
 
 /* Balance. */
 $lang->resource->balance = new stdclass();

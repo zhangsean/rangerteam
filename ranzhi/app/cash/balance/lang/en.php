@@ -11,6 +11,7 @@
  */
 $lang->balance = new stdclass();
 
+$lang->balance->common    = 'Balance';
 $lang->balance->id        = 'ID';
 $lang->balance->depositor = 'Depositor';
 $lang->balance->currency  = 'currency';
@@ -21,3 +22,4 @@ $lang->balance->date      = 'Date';
 $lang->balance->create = 'Create Balance';
 $lang->balance->browse = 'Browse Balances';
 $lang->balance->edit   = 'Edit Balance';
+$lang->balance->delete = 'Delete Balance';

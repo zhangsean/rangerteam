@@ -42,6 +42,12 @@ $lang->contract->editedBy      = 'Edited By';
 $lang->contract->editedDate    = 'Edited Date';
 $lang->contract->handlers      = 'Handlers';
 
+$lang->contract->browse     = 'Browse Contract';
+$lang->contract->receive    = 'Receive';
+$lang->contract->cancel     = 'Cancel Contract';
+$lang->contract->view       = 'View Contract';
+$lang->contract->finish     = 'Finish Contract';
+$lang->contract->delete     = 'Delete Contract';
 $lang->contract->list       = 'Contract List';
 $lang->contract->create     = 'Create Contract';
 $lang->contract->edit       = 'Edit';

@@ -10,6 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 if(!isset($lang->contact)) $lang->contact = new stdclass();
+$lang->contact->common        = 'Contact';
 $lang->contact->id            = 'ID';
 $lang->contact->customer      = 'Customer';
 $lang->contact->customerName  = 'Customer Name';
@@ -43,7 +44,10 @@ $lang->contact->changeAvatar  = 'Change Avatar';
 $lang->contact->genderList['m'] = 'Male';
 $lang->contact->genderList['f'] = 'Female';
 
-$lang->contact->create  = 'Create';
+$lang->contact->browse  = 'Browse Contact';
+$lang->contact->block   = 'Contact Block';
+$lang->contact->delete  = 'Delete Contact';
+$lang->contact->create  = 'Create Contact';
 $lang->contact->list    = 'List';
 $lang->contact->edit    = 'Edit';
 $lang->contact->view    = 'View';

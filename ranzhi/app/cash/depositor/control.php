@@ -37,7 +37,7 @@ class depositor extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title      = $this->lang->depositor->list;
+        $this->view->title      = $this->lang->depositor->browse;
         $this->view->depositors = $this->depositor->getList($orderBy, $pager);
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;

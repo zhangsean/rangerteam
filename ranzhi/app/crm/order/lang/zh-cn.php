@@ -40,13 +40,14 @@ $lang->order->contactedDate = '联系时间';
 $lang->order->nextDate      = '下次联系';
 
 $lang->order->list          = '订单列表';
-$lang->order->browse        = '维护订单';
+$lang->order->browse        = '浏览订单';
 $lang->order->create        = '创建订单';
 $lang->order->record        = '沟通';
 $lang->order->edit          = '编辑订单';
 $lang->order->view          = '订单详情';
 $lang->order->close         = '关闭订单';
 $lang->order->sign          = '签约';
+$lang->order->assign        = '订单指派';
 $lang->order->activate      = '激活';
 
 $lang->order->statusList['normal'] = '正常';

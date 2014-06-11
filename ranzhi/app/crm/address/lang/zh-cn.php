@@ -10,6 +10,8 @@
  * @link        http://www.ranzhi.org
  */
 $lang->address->common = '地址管理';
+$lang->address->browse = '浏览地址';
+$lang->address->delete = '删除地址';
 $lang->address->create = '新建地址';
 $lang->address->edit   = '修改地址';
 

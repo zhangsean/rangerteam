@@ -38,6 +38,8 @@ $lang->customer->contactDate = '最后联系';
 $lang->customer->nextDate    = '下次联系';
 $lang->customer->newContact  = '新建联系人';
 
+$lang->customer->browse      = '浏览客户';
+$lang->customer->delete      = '删除客户';
 $lang->customer->order       = '订单';
 $lang->customer->contact     = '联系人';
 $lang->customer->contract    = '合同';

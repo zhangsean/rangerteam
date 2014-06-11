@@ -10,6 +10,8 @@
  * @link        http://www.ranzhi.org
  */
 $lang->resume->common = 'Resume';
+$lang->resume->browse = 'Browse Resume';
+$lang->resume->delete = 'Delete Resume';
 $lang->resume->create = 'Change Resume';
 $lang->resume->edit   = 'Edit company info';
 

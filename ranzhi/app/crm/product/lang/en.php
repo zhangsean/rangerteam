@@ -24,6 +24,8 @@ $lang->product->createdDate = 'Created Date';
 $lang->product->editedBy    = 'Edited By';
 $lang->product->editedDate  = 'Edited Date';
 
+$lang->product->index       = 'Browse Product';
+$lang->product->delete      = 'Delete Product';
 $lang->product->list        = 'List';
 $lang->product->browse      = 'Browse';
 $lang->product->create      = 'Create';

@@ -47,6 +47,7 @@ $lang->order->edit          = 'Edit';
 $lang->order->view          = 'View';
 $lang->order->close         = 'Close';
 $lang->order->sign          = 'Sign';
+$lang->order->assign        = 'Assign Order';
 $lang->order->activate      = 'Activate';
 
 $lang->order->statusList['normal'] = 'Normal';

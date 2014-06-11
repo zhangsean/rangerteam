@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->trade->common      = 'Trade';
 $lang->trade->id          = 'ID';
 $lang->trade->depositor   = 'Despositor';
 $lang->trade->type        = 'Type';
@@ -30,12 +31,14 @@ $lang->trade->fee         = 'Fee';
 $lang->trade->transferIn  = 'Amount';
 $lang->trade->transferOut = 'Amount';
 
+$lang->trade->create      = 'Create Trade';
 $lang->trade->in          = 'Income';
 $lang->trade->out         = 'Expend';
 $lang->trade->transfer    = 'Transfer';
-$lang->trade->edit        = 'Edit';
+$lang->trade->edit        = 'Edit Trade';
 $lang->trade->detail      = 'Detail';
 $lang->trade->browse      = 'Bills';
+$lang->trade->delete      = 'Delete Trade';
 $lang->trade->batchCreate = 'Batch';
 $lang->trade->newTrader   = 'Create Trader';
 

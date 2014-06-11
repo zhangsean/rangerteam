@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->depositor->common          = 'Depositor';
 $lang->depositor->id              = 'ID';
 $lang->depositor->abbr            = 'Abbreviation';
 $lang->depositor->serviceProvider = 'Service Provider';
@@ -25,11 +26,11 @@ $lang->depositor->createdDate     = 'Created Date';
 $lang->depositor->editedBy        = 'Edited By';
 $lang->depositor->editedDate      = 'Edited Date';
 
-$lang->depositor->common   = 'Depositor';
 $lang->depositor->all      = 'All';
-$lang->depositor->create   = 'Create';
-$lang->depositor->list     = 'List';
-$lang->depositor->edit     = 'Edit';
+$lang->depositor->create   = 'Create Depositor';
+$lang->depositor->browse   = 'Browse Depositor';
+$lang->depositor->edit     = 'Edit Depositor';
+$lang->depositor->delete   = 'Delete Depositor';
 $lang->depositor->view     = 'View';
 $lang->depositor->forbid   = 'Disable';
 $lang->depositor->activate = 'Activate';

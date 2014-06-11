@@ -14,15 +14,19 @@
   <div class='panel-heading'>
     <strong><i class='icon-lock'> </i><?php echo $lang->group->managePriv;?></strong>
   </div>
-  <div class='panel-body'>
-    <form class='form-condensed' id='ajaxForm' method='post'>
+  <form class='form-inline' id='ajaxForm' method='post'>
+    <div class='panel-body'>
       <?php foreach($lang->appModule as $app => $modules):?>
-      <table class='table table-hover table-striped table-bordered table-form'> 
-        <caption><?php echo $lang->apps->$app;?></caption>
+      <table class='table table-hover table-bordered table-form table-priv'> 
         <thead>
           <tr>
-            <th><?php echo $lang->group->module;?></th>
-            <th><?php echo $lang->group->method;?></th>
+            <th class='text-right'>
+              <label class="checkbox">
+                <strong><?php echo $lang->apps->$app;?></strong>
+                <input type="checkbox" class='checkApp' /> 
+              </label>
+            </th>
+            <th> </th>
           </tr>
         </thead>
         <?php foreach($lang->resource as $moduleName => $moduleActions):?>
@@ -45,35 +49,40 @@
             if(!$hasMethod) continue;
         }
         ?>
-        <tr class='<?php echo cycle('even, bg-gray');?>'>
-          <th class='text-right w-100px'><?php echo html::checkbox($moduleName, isset($this->lang->$moduleName->common) ? $this->lang->$moduleName->common : '')?></th>
+        <tr>
+          <th class='text-right w-100px'>
+            <label class="checkbox">
+              <?php echo isset($this->lang->$moduleName->common) ? $this->lang->$moduleName->common : $moduleName;?>
+              <input type="checkbox" class='checkModule' /> 
+            </label>
+          </th>
           <td id='<?php echo $moduleName;?>'>
             <?php $i = 1;?>
-            <?php foreach($moduleActions as $action => $actionLabel):?>
-            <?php if(!empty($version) and strpos($changelogs, ",$moduleName-$actionLabel,") === false) continue;?>
-            <div class='group-item'>
-              <input type='checkbox' name='actions[<?php echo $moduleName;?>][]' value='<?php echo $action;?>' <?php if(isset($groupPrivs[$moduleName][$action])) echo "checked";?> />
-              <span class='priv' id="<?php echo $moduleName . '-' . $actionLabel;?>"><?php echo $lang->$moduleName->$actionLabel;?></span>
-            </div>
-            <?php endforeach;?>
-          </td>
-        </tr>
-        <?php endforeach;?>
-        <tr>
-          <th class='text-right'><?php echo html::checkbox('', 'checkbox')?></th>
-          <td>
-            <?php 
-            echo html::submitButton($lang->save, "onclick='setNoChecked()'");
-            echo html::linkButton($lang->goback, $this->createLink('group', 'browse'));
-            echo html::hidden('foo'); // Just a hidden var, to make sure $_POST is not empty.
-            echo html::hidden('noChecked'); // Save the value of no checked.
+            <?php
+            $options = array();
+            foreach($moduleActions as $action => $actionLabel)
+            {
+                if(!empty($version) and strpos($changelogs, ",$moduleName-$actionLabel,") === false) continue;
+                $options[$action] = $lang->$moduleName->$actionLabel;
+            }
+            echo html::checkbox("actions[$moduleName][]", $options, isset($groupPrivs[$moduleName]) ? $groupPrivs[$moduleName] : '');
             ?>
           </td>
         </tr>
+        <?php endforeach;?>
       </table>
+      <hr>
       <?php endforeach;?>
-    </form>
-  </div>
+    </div>
+    <div class='panel-footer text-center'>
+    <?php 
+    echo html::submitButton($lang->save);
+    echo html::linkButton($lang->goback, $this->createLink('group', 'browse'));
+    echo html::hidden('foo'); // Just a hidden var, to make sure $_POST is not empty.
+    echo html::hidden('noChecked'); // Save the value of no checked.
+    ?>
+    </div>
+  </form>
 </div>
 <script type='text/javascript'>
 var groupID = <?php echo $groupID?>;

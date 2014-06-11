@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class="icon-group"></i> <?php echo $lang->depositor->list;?></strong>
+    <strong><i class="icon-group"></i> <?php echo $lang->depositor->browse;?></strong>
     <div class='panel-actions pull-right'>
       <?php echo html::a(inlink('create'), "<i class='icon-plus'>{$lang->depositor->create}</i>", "class='btn btn-primary' data-toggle='modal'")?>
     </div>

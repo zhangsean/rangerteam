@@ -38,6 +38,8 @@ $lang->customer->contactDate = 'Contact Date';
 $lang->customer->nextDate    = 'Next Date';
 $lang->customer->newContact  = 'Create Contact';
 
+$lang->customer->browse      = 'Browse Customer';
+$lang->customer->delete      = 'Delete Customer';
 $lang->customer->order       = 'Order List';
 $lang->customer->contact     = 'Contact List';
 $lang->customer->contract    = 'Contract List';

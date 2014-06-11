@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->trade->common      = '记账';
 $lang->trade->id          = '编号';
 $lang->trade->depositor   = '账号';
 $lang->trade->type        = '交易类型';
@@ -30,12 +31,14 @@ $lang->trade->fee         = '手续费';
 $lang->trade->transferIn  = '转入金额';
 $lang->trade->transferOut = '转出金额';
 
+$lang->trade->create      = '记账';
 $lang->trade->in          = '记收入';
 $lang->trade->out         = '记支出';
 $lang->trade->transfer    = '记转账';
-$lang->trade->edit        = '编辑';
+$lang->trade->edit        = '编辑账目';
 $lang->trade->detail      = '明细';
 $lang->trade->browse      = '账目列表';
+$lang->trade->delete      = '删除记录';
 $lang->trade->batchCreate = '批量记账';
 $lang->trade->newTrader   = '新建';
 

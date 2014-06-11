@@ -42,6 +42,12 @@ $lang->contract->editedBy      = '最后修改';
 $lang->contract->editedDate    = '最后修改时间';
 $lang->contract->handlers      = '经手人';
 
+$lang->contract->browse     = '浏览合同';
+$lang->contract->receive    = '回款';
+$lang->contract->cancel     = '取消合同';
+$lang->contract->view       = '合同详情';
+$lang->contract->finish     = '完成合同';
+$lang->contract->delete     = '删除合同';
 $lang->contract->list       = '合同列表';
 $lang->contract->create     = '创建合同';
 $lang->contract->edit       = '编辑合同';
