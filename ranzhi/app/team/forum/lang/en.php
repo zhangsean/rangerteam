@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->forum->common      = 'Forum';
 $lang->forum->board       = 'Board';
 $lang->forum->owners      = 'Moderator';
 $lang->forum->threadList  = 'Threads';

@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->announce->common = '公告';
 $lang->announce->browse = '公告浏览';
 $lang->announce->create = '添加公告';
 $lang->announce->edit   = '编辑公告';

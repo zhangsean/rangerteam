@@ -9,6 +9,8 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->blog->common = "Blog";
+
 $lang->blog->latestArticles = 'Latest Articles';
 
 $lang->blog->create = "Create";

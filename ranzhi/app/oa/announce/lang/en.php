@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->announce->common = 'Announce';
 $lang->announce->browse = 'Browse';
 $lang->announce->create = 'Create';
 $lang->announce->edit   = 'Edit';

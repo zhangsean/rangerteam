@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->tree->common      = "类目";
 $lang->tree->add         = "添加";
 $lang->tree->edit        = "编辑";
 $lang->tree->children    = "添加子类目";

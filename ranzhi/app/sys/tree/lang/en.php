@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->tree->common      = "Tree";
 $lang->tree->add         = "Add";
 $lang->tree->edit        = "Edit";
 $lang->tree->children    = "Add child";
