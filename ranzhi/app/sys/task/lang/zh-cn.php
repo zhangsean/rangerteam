@@ -20,6 +20,8 @@ $lang->task->finish   = '任务完成';
 $lang->task->activate = '激活任务';
 $lang->task->cancel   = '取消任务';
 $lang->task->close    = '关闭任务';
+$lang->task->assignTo = '指派任务';
+$lang->task->delete   = '删除任务';
 
 $lang->task->batchCreate = '批量添加';
 

@@ -20,6 +20,8 @@ $lang->task->finish   = 'Finish';
 $lang->task->activate = 'Activate';
 $lang->task->cancel   = 'Cancel';
 $lang->task->close    = 'Close';
+$lang->task->assignTo = 'Assign to';
+$lang->task->delete   = 'Delete';
 
 $lang->task->batchCreate = 'Batch Create';
 
