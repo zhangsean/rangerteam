@@ -1290,7 +1290,7 @@
                             menu.css({left: desktopPos.x + 2, top: offset.top, bottom: 'inherit'});
                             $('.tooltip').remove();
                         }
-                        else if(btn.hasClass('s-task-btn')) menu.css({left: offset.left, top: 'inherit', bottom: bottomBarHeight + 2});
+                        else if(btn.hasClass('s-task-btn')) menu.css({left: offset.left, top: 'inherit', bottom: settings.bottomBarHeight + 2});
                     }
                 }
             });
