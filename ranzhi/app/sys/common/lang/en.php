@@ -22,6 +22,14 @@ $lang->by      = ' By ';
 $lang->ditto   = 'Ditto';
 $lang->submitting   = 'Saving...';
 
+/* Apps lang items.*/
+$lang->apps = new stdclass();
+$lang->apps->crm  = 'CRM';
+$lang->apps->cash = 'CASH';
+$lang->apps->oa   = 'OA';
+$lang->apps->sys  = 'SYSTEM';
+$lang->apps->team = 'TEAM';
+
 /* Lang items for ranzhi. */
 $lang->ranzhi  = 'ranzhi';
 $lang->poweredBy = "<a href='http://www.ranzhi.org/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
