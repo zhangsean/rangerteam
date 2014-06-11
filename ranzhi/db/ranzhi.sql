@@ -606,6 +606,21 @@ CREATE TABLE `sys_user` (
   KEY `account` (`account`,`password`),
   KEY `dept` (`dept`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sys_group`;
+CREATE TABLE IF NOT EXISTS `sys_group` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `name` char(30) NOT NULL,
+  `desc` char(255) NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sys_groupPriv`;
+CREATE TABLE IF NOT EXISTS `sys_groupPriv` (
+  `group` mediumint(8) unsigned NOT NULL default '0',
+  `module` char(30) NOT NULL default '',
+  `method` char(30) NOT NULL default '',
+  UNIQUE KEY `group` (`group`,`module`,`method`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 INSERT INTO `sys_category` VALUES (1,'化工','','','',0,0,',1,',1,0,'industry','0','',0,0,'','0000-00-00 00:00:00',0,0),
 (3,'环保、绿化、公共事业','','','',0,0,',3,',1,0,'industry','0','',0,0,'','0000-00-00 00:00:00',0,0),
 (4,'电子电工及通讯','','','',0,0,',4,',1,0,'industry','0','',0,0,'','0000-00-00 00:00:00',0,0),
