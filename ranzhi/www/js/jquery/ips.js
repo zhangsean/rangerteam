@@ -82,12 +82,13 @@
     function initEntries(entriesOptions)
     {
         entriesConfigs = entriesOptions;
-        entries        = new Array();
+        entries        = {};
         for(var i in entriesConfigs)
         {
             var config = entriesConfigs[i];
             entries[config.id] = new entry(config);
         }
+        console.log(entries);
     }
 
     /**
@@ -115,7 +116,7 @@
                 display  : 'fixed',
                 size     : 'max',
                 position : 'default',
-                icon     : null,
+                icon     : '',
                 cssclass : '',
                 menu     : 'all' // wethear show in left menu bar
             };
@@ -241,12 +242,14 @@
             this.idstr      = settings.windowidstrTemplate.format(this.id);
             this.cssclass   = '';
 
-            /* if no icon setting here, then load icon with the default rule */
-            if(!this.icon) this.icon = settings.entryIconRoot + 'entry-' + this.id + '.png';
-
             /* you can use icon font name or an image url */
             if(this.icon.indexOf('icon-') == 0) this.iconhtml = '<i class="icon ' + this.icon + '"></i>';
-            else this.iconhtml = '<img src="' + this.icon + '" alt="" />';
+            else if(this.icon.length > 0) this.iconhtml = '<img src="' + this.icon + '" alt="" />';
+            else
+            {
+                var nameL = this.name.length;
+                this.iconhtml = '<i class="icon icon-default" style="background-color: hsl(' + (this.id*47%360) + ', 100%, 40%)"><span>' + (nameL > 0 ? this.name.slice(0, 1).toUpperCase() : '') + '</span><span class="text-extra">' + (nameL > 1 ? this.name.slice(1, 2).toUpperCase() : '') + '</span></i>';
+            }
 
             /* mark modal with css class */
             if(this.display == 'modal')

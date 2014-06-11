@@ -39,6 +39,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 .bar-menu > li > a:hover,.bar-menu > li > button:hover,
 .bar-menu > li > a.open:hover,.bar-menu > li > a.active:hover {text-decoration: none; color: #fff; color: rgba(255,255,255,0.9);background-color: #666; background-color: rgba(255,255,255,0.20);}
 .bar-menu > li > a > .icon, .bar-menu > li > button > .icon {font-size: 28px; line-height: 36px;}
+.bar-menu > li > a > .icon.icon-default, .bar-menu > li > button > .icon.icon-default {font-size: 12px; display: inline-block; min-width: 28px; box-shadow: 0 1px 1px rgba(0,0,0,0.35); border-radius: 5px; background-color: #145CCD; font-weight: bold; text-shadow: 0 1px 1px rgba(0,0,0,0.15);}
 
 /* left bar. */
 #leftBar {width: 40px; height: 100%; background-color: #0a2e66; background-color: rgba(0,0,0,0.4); z-index: 40010; transition: left .3s;-o-transition: left .3s;-moz-transition: left .3s;-webkit-transition: left .3s;}
@@ -48,7 +49,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #apps-menu .bar-menu > li {display: inline-block;}
 #apps-menu .bar-menu > li button {text-align: center; padding:6px; width: 40px;}
 #apps-menu .bar-menu > li img {width: 28px; height: 28px; box-shadow: 0 1px 1px rgba(0,0,0,0.35); border-radius: 5px}
-#apps-menu .bar-menu > li > button > .icon {display: inline-block; text-shadow: 0 1px 1px rgba(0,0,0,0.35); color: #f1f1f1; color: rgba(255,255,255,0.8); line-height: 28px}
+#apps-menu .bar-menu > li > button > .icon { text-shadow: 0 1px 1px rgba(0,0,0,0.35); color: #f1f1f1; color: rgba(255,255,255,0.8); line-height: 28px; line-height: 28px; text-align: center;}
 #apps-menu .bar-menu > li > button:hover > .icon {color: #fff; text-shadow: 0 1px 1px rgba(0,0,0,0.15);}
 
 /* bottom bar. */
@@ -64,6 +65,8 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #taskbar .bar-menu li .actions button.close-win:hover{background-color: #dd1111;}
 #bottomBar .bar-menu > li > button > img {width: 20px; height: 20px; margin-right: 5px; margin-top: -2px;}
 #bottomBar .bar-menu > li > button[class*=' icon-'] {font-size: 20px;}
+#bottomBar .bar-menu > li > button > .icon.icon-default {width: 20px; line-height: 20px; text-align: center; margin-right: 5px; min-width: 20px; font-size: 12px; border-radius: 4px}
+#bottomBar .bar-menu > li > button > .icon.icon-default .text-extra {display: none}
 
 #bottomRightBar {position: absolute; right: 0; top: 0; border-left: 1px solid rgba(255,255,255,0.10);}
 #bottomRightBar .bar-menu li {background: none; margin-right: 0;}
@@ -92,6 +95,8 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 .window {position: absolute; background-color: #fff; border:1px solid #e5e6e7; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; -moz-box-shadow:0px 1px 7px rgba(0,0,0,0.3); -webkit-box-shadow:0px 1px 7px rgba(0,0,0,0.3); box-shadow:0px 1px 7px rgba(0,0,0,0.3);}
 .window-head {color: #777; -moz-user-select:none; -webkit-user-select:none;}
 .window-head img {height: 18px; width: 18px; margin-right: 5px;}
+.window-head .icon.icon-default {width: 18px; height: 18px; display: inline-block; text-align: center; font-size: 12px; line-height: 18px;position: relative; top: -1px; color: #fff; border-radius: 3px; font-weight: bold;}
+.window-head .icon.icon-default .text-extra {display: none}
 .window-head  .icon {display: inline-block; margin-right: 5px;}
 .window-head ul {display: block; margin: 0; padding: 0; position: absolute; right: 10px; top: 2px; overflow: hidden;}
 .window-head ul li {display: inline-block;}
@@ -106,10 +111,11 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 .window-control-full .window-head ul li button.close-win:hover {background-color: #dd1111; color: #fff;}
 
 .window-control-simple .window-head {position: absolute; height: 0; background:none; border-bottom: none; overflow: visible; width: 100%;}
-.window-control-simple .window-head > img, .window-control-simple .window-head > strong {display: none;}
+.window-control-simple .window-head > img, .window-control-simple .window-head > strong, .window-control-simple .window-head > .icon.icon-default {display: none;}
 .window-control-simple .window-head > ul {position: absolute; right: 10px; top: 0px; z-index: 99999;}
 .window-control-simple .window-head ul li button {padding: 7px 10px 9px; border-radius: 0; font-size: 16px; line-height: 20px}
 .window-control-simple .window-head ul li button.close-win {padding:7px 10px 9px}
+
 
 .window-active {border-color: #999; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; -moz-box-shadow:0px 1px 11px rgba(0,0,0,0.7); -webkit-box-shadow:0px 1px 11px rgba(0,0,0,0.7); box-shadow:0px 1px 11px rgba(0,0,0,0.7); -o-transition: box-shadow,border-color .3s;-moz-transition: box-shadow,border-color .3s;-webkit-transition: box-shadow,border-color .3s;transition: box-shadow,border-color .3s;}
 .window-active .window-head {background-color: #e5e6e7; color: #333; -o-transition: all .3s;-moz-transition: all .3s;-webkit-transition: all .3s;transition: all .3s;}
@@ -155,6 +161,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #allAppsList li a.open {background-color:rgba(255,255,255,0.1);}
 #allAppsList li a.open:hover,#allAppsList li a.active:hover, #allAppsList li a.search-selected {background-color:rgba(255,255,255,0.24);}
 #allAppsList li img {width: 48px; height: 48px; margin-right: 10px; box-shadow: 0 1px 1px rgba(0,0,0,0.35); border-radius: 8px}
+#allAppsList li .app-btn > .icon.icon-default {width: 48px; height: 48px; line-height: 48px; text-align: center; font-size: 16px; margin-right: 10px; color: #FFF}
 
 /* home */
 #home {padding: 0;}
