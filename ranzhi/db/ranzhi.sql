@@ -613,6 +613,12 @@ CREATE TABLE IF NOT EXISTS `sys_group` (
   `desc` char(255) NOT NULL default '',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sys_userGroup`;
+CREATE TABLE `sys_userGroup` (
+  `account` char(30) NOT NULL DEFAULT '',
+  `group` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  UNIQUE KEY `account` (`account`,`group`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_groupPriv`;
 CREATE TABLE IF NOT EXISTS `sys_groupPriv` (
   `group` mediumint(8) unsigned NOT NULL default '0',

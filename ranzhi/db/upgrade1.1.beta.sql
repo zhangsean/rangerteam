@@ -68,6 +68,12 @@ CREATE TABLE IF NOT EXISTS `sys_group` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
+CREATE TABLE `sys_userGroup` (
+  `account` char(30) NOT NULL DEFAULT '',
+  `group` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  UNIQUE KEY `account` (`account`,`group`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `sys_groupPriv` (
   `group` mediumint(8) unsigned NOT NULL default '0',
   `module` char(30) NOT NULL default '',
