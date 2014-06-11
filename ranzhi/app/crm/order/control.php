@@ -171,26 +171,6 @@ class order extends control
     }
 
     /**
-     * Browse records of an order.
-     * 
-     * @param  int    $orderID 
-     * @param  int    $recTotal 
-     * @param  int    $recPerPage 
-     * @param  int    $pageID 
-     * @access public
-     * @return void
-     */
-    public function browseRecord($orderID, $recTotal = 0, $recPerPage = 20, $pageID = 1)
-    {
-        $order = $this->order->getByID($orderID);
-
-        $this->view->order    = $order;
-        $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
-        $this->view->users    = $this->loadModel('user')->getPairs();
-        $this->display();
-    }
-
-    /**
      * Get contact of an customer.
      *
      * @param  int    $order

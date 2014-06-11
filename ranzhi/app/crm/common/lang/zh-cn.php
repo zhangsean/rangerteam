@@ -34,7 +34,7 @@ $lang->product->menu->browse = array('link' => '<i class="icon-th"></i> 产品�
 /* Menu of order module. */
 $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
-$lang->order->menu->browse = array('link' => '<i class="icon-th-list"></i> 订单列表|order|browse|', 'alias' => 'create,edit,view,browserecord');
+$lang->order->menu->browse = array('link' => '<i class="icon-th-list"></i> 订单列表|order|browse|', 'alias' => 'create,edit,view');
 
 /* Menu of contact module. */
 $lang->contact = new stdclass();
