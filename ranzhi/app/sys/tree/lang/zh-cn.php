@@ -11,7 +11,7 @@
  */
 $lang->tree->add         = "添加";
 $lang->tree->edit        = "编辑";
-$lang->tree->addChild    = "添加子类目";
+$lang->tree->children    = "添加子类目";
 $lang->tree->delete      = "删除类目";
 $lang->tree->browse      = "类目维护";
 $lang->tree->manage      = "维护类目";

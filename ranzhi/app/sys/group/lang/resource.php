@@ -239,19 +239,16 @@ $lang->balance->methodOrder[20] = 'delete';
 
 /* Project. */
 $lang->resource->project = new stdclass();
-$lang->resource->project->index  = 'index';
 $lang->resource->project->create = 'create';
 $lang->resource->project->edit   = 'edit';
 $lang->resource->project->delete = 'delete';
 
-$lang->project->methodOrder[0]  = 'index';
-$lang->project->methodOrder[15] = 'create';
-$lang->project->methodOrder[20] = 'edit';
-$lang->project->methodOrder[60] = 'delete';
+$lang->project->methodOrder[0]  = 'create';
+$lang->project->methodOrder[15] = 'edit';
+$lang->project->methodOrder[20] = 'delete';
 
 /* Task. */
 $lang->resource->task = new stdclass();
-$lang->resource->task->index       = 'index';
 $lang->resource->task->browse      = 'browse';
 $lang->resource->task->create      = 'create';
 $lang->resource->task->batchCreate = 'batchCreate';
@@ -263,7 +260,6 @@ $lang->resource->task->activate    = 'activate';
 $lang->resource->task->cancel      = 'cancel';
 $lang->resource->task->close       = 'close';
 $lang->resource->task->delete      = 'delete';
-$lang->resource->task->getOrder    = 'getOrder';
 
 $lang->task->methodOrder[5]  = 'index';
 $lang->task->methodOrder[10] = 'browse';
@@ -277,23 +273,20 @@ $lang->task->methodOrder[45] = 'activate';
 $lang->task->methodOrder[50] = 'cancel';
 $lang->task->methodOrder[55] = 'close';
 $lang->task->methodOrder[60] = 'delete';
-$lang->task->methodOrder[65] = 'getOrder';
 
 /* Announce. */
 $lang->resource->announce = new stdclass();
-$lang->resource->announce->index  = 'index';
 $lang->resource->announce->browse = 'browse';
 $lang->resource->announce->view   = 'view';
 $lang->resource->announce->create = 'create';
 $lang->resource->announce->edit   = 'edit';
 $lang->resource->announce->delete = 'delete';
 
-$lang->announce->methodOrder[5]  = 'index';
-$lang->announce->methodOrder[10] = 'browse';
-$lang->announce->methodOrder[15] = 'view';
-$lang->announce->methodOrder[20] = 'create';
-$lang->announce->methodOrder[25] = 'edit';
-$lang->announce->methodOrder[30] = 'delete';
+$lang->announce->methodOrder[5]  = 'browse';
+$lang->announce->methodOrder[10] = 'view';
+$lang->announce->methodOrder[15] = 'create';
+$lang->announce->methodOrder[20] = 'edit';
+$lang->announce->methodOrder[25] = 'delete';
 
 /* Doc. */
 $lang->resource->doc = new stdclass();
@@ -320,7 +313,6 @@ $lang->doc->methodOrder[45] = 'delete';
 
 /* Blog. */
 $lang->resource->blog = new stdclass();
-$lang->resource->blog->index  = 'index';
 $lang->resource->blog->create = 'create';
 $lang->resource->blog->edit   = 'edit';
 $lang->resource->blog->view   = 'view';
@@ -334,7 +326,6 @@ $lang->bug->methodOrder[20]  = 'delete';
 
 /* Forum. */
 $lang->resource->forum = new stdclass();
-$lang->resource->forum->index  = 'index';
 $lang->resource->forum->board  = 'board';
 $lang->resource->forum->admin  = 'admin';
 $lang->resource->forum->update = 'update';

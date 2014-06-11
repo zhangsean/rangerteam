@@ -11,7 +11,7 @@
  */
 $lang->tree->add         = "Add";
 $lang->tree->edit        = "Edit";
-$lang->tree->addChild    = "Add child";
+$lang->tree->children    = "Add child";
 $lang->tree->delete      = "Delete";
 $lang->tree->browse      = "Manage";
 $lang->tree->manage      = "Manage";
