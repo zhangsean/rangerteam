@@ -19,12 +19,7 @@ js::set('deptID', $deptID);
   <div class='col-md-2'>
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-building"></i> <?php echo $lang->dept->common;?></strong></div>
-      <div class='panel-body'>
-        <div id='treeMenuBox'><?php echo $treeMenu;?></div>
-        <?php echo html::a($this->inlink('create'), $lang->user->create, "class='btn btn-primary btn-xs'");?>
-        <?php echo html::a($this->createLink('tree', 'browse', "type=dept"), $lang->dept->edit, "class='btn btn-primary btn-xs'");?>
-        <?php echo html::a($this->createLink('setting', 'lang', "module=user&field=roleList"), $lang->user->role, "class='btn btn-primary btn-xs'");?>
-      </div>
+      <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu;?></div></div>
     </div>
   </div>
   <div class='col-md-10'>
@@ -32,11 +27,11 @@ js::set('deptID', $deptID);
       <div class='clearfix'>
         <div class="panel">
           <div class="panel-heading">
-            <strong><i class="icon-group"></i> <?php echo $lang->user->list;?></strong>
+            <strong><i class="icon-group"></i> <?php echo $lang->user->colleague;?></strong>
             <div class="pull-right col-md-3 search">
               <form method='post' class='form-inline form-search'>
                 <div class="input-group">
-                  <?php echo html::input('query', $query, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); ?>
+                  <?php echo html::input('query', $query, "class='form-control search-query' placeholder='{$lang->user->inputColleague}'"); ?>
                   <span class="input-group-btn">
                     <?php echo html::submitButton($lang->user->searchUser,"btn btn-primary"); ?>
                   </span>

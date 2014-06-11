@@ -44,6 +44,7 @@ $lang->user->status    = 'Status';
 $lang->user->alert     = 'Your account has been forbidden';
 
 $lang->user->list            = 'User list';
+$lang->user->colleague       = 'Colleague list';
 $lang->user->view            = "User info";
 $lang->user->create          = "Add a user";
 $lang->user->edit            = "Edit user";
@@ -70,7 +71,8 @@ $lang->user->thread      = 'My threads';
 $lang->user->reply       = 'My replies';
 $lang->user->message     = 'My message';
 
-$lang->user->inputUserName       = 'Please input your username';
+$lang->user->inputUserName       = 'Please input username';
+$lang->user->inputColleague      = "Please input colleauge's name";
 $lang->user->inputAccountOrEmail = 'Please input account or Email';
 $lang->user->inputPassword       = 'Please input password';
 $lang->user->searchUser          = 'Search';

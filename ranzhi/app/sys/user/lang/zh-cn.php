@@ -44,6 +44,7 @@ $lang->user->status    = '状态';
 $lang->user->alert     = '您的帐号已被禁用';
 
 $lang->user->list            = '成员列表';
+$lang->user->colleague       = '同事列表';
 $lang->user->view            = "成员详情";
 $lang->user->create          = "添加成员";
 $lang->user->edit            = "编辑成员";
@@ -71,6 +72,7 @@ $lang->user->reply       = '我的回贴';
 $lang->user->message     = '我的消息';
 
 $lang->user->inputUserName       = '请输入成员名';
+$lang->user->inputColleague      = '请输入同事姓名';
 $lang->user->inputAccountOrEmail = '请输入成员名或Email';
 $lang->user->inputPassword       = '请输入密码';
 $lang->user->searchUser          = '搜索';
