@@ -137,10 +137,15 @@ class block extends control
 
         $this->processParams();
 
-        $this->view->threads = $this->dao->select('*')->from(TABLE_THREAD)
+        $threads = $this->dao->select('*')->from(TABLE_THREAD)
             ->orderBy('createdDate desc')
             ->limit($this->params->num)
             ->fetchAll('id');
+
+        $this->loadModel('thread')->setRealNames($threads);
+        $threads = $this->thread->process($threads);
+
+        $this->view->threads = $threads;
 
         $this->display();
     }
