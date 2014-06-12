@@ -12,7 +12,13 @@
 /* Init the rights. */
 $config->rights = new stdclass();
 
+$config->rights->guest = array();
+
+$config->rights->member['entry']['visit'] = 'visit';
+
 $config->rights->member['index']['index'] = 'index';
+
+$config->rights->member['dashboard']['index'] = 'index';
 
 $config->rights->member['order']['index']    = 'index';
 $config->rights->member['order']['browse']   = 'browse';

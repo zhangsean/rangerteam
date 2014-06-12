@@ -10,25 +10,17 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<div class='panel'>
-  <div class='panel-heading'>
-    <strong><i class='icon-lock'> </i><?php echo $lang->group->managePriv;?></strong>
-  </div>
-  <form class='form-inline' id='ajaxForm' method='post'>
+<form class='form-inline' id='ajaxForm' method='post'>
+  <?php foreach($lang->appModule as $app => $modules):?>
+  <div class='panel'>
+    <div class='panel-heading'>
+      <label class="checkbox">
+        <strong><?php echo $lang->apps->$app;?></strong>
+        <input type="checkbox" class='checkApp' /> 
+      </label>
+    </div>
     <div class='panel-body'>
-      <?php foreach($lang->appModule as $app => $modules):?>
-      <table class='table table-hover table-bordered table-form table-priv'> 
-        <thead>
-          <tr>
-            <th class='text-right'>
-              <label class="checkbox">
-                <strong><?php echo $lang->apps->$app;?></strong>
-                <input type="checkbox" class='checkApp' /> 
-              </label>
-            </th>
-            <th> </th>
-          </tr>
-        </thead>
+    <table class='table table-hover table-bordered table-form table-priv'> 
         <?php foreach($lang->resource as $moduleName => $moduleActions):?>
         <?php if(!in_array($moduleName, $modules)) continue;?>
         <?php if(!$this->group->checkMenuModule($menu, $moduleName)) continue;?>
@@ -65,14 +57,13 @@
                 if(!empty($version) and strpos($changelogs, ",$moduleName-$actionLabel,") === false) continue;
                 $options[$action] = $lang->$moduleName->$actionLabel;
             }
-            echo html::checkbox("actions[$moduleName][]", $options, isset($groupPrivs[$moduleName]) ? $groupPrivs[$moduleName] : '');
+            echo html::checkbox("actions[$moduleName]", $options, isset($groupPrivs[$moduleName]) ? $groupPrivs[$moduleName] : '');
             ?>
           </td>
         </tr>
         <?php endforeach;?>
       </table>
-      <hr>
-      <?php endforeach;?>
+      <p></p>
     </div>
     <div class='panel-footer text-center'>
     <?php 
@@ -82,8 +73,9 @@
     echo html::hidden('noChecked'); // Save the value of no checked.
     ?>
     </div>
-  </form>
-</div>
+  </div>
+  <?php endforeach;?>
+</form>
 <script type='text/javascript'>
 var groupID = <?php echo $groupID?>;
 var menu    = "<?php echo $menu?>";

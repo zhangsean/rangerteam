@@ -89,6 +89,9 @@ $config->slaveDB->checkCentOS= true;
 $configRoot = dirname(__FILE__) . DIRECTORY_SEPARATOR;
 $myConfig   = $configRoot . 'my.php';
 if(file_exists($myConfig)) include $myConfig;
+$rightsConfig = $configRoot . 'rights.php';
+if(file_exists($rightsConfig)) include $rightsConfig;
+
 
 /* Tables for basic system. */
 define('TABLE_CONFIG',    '`sys_config`');

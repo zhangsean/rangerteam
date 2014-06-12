@@ -328,7 +328,7 @@ class userModel extends model
             $dateDiff = (strtotime($user->locked) - time()) / 60;
 
             /* Check the type of lock and show it. */
-            if($dateDiff > 0 && $dateDiff <= 10)
+            if($dateDiff > 0 && $dateDiff <= 0)
             {
                 $this->lang->user->loginFailed = sprintf($this->lang->user->locked, '10' . $this->lang->date->minute);
                 return false;
@@ -382,13 +382,23 @@ class userModel extends model
      */
     public function authorize($user)
     {
-        return array();
-        $rights = $this->config->rights->guest;
+        $rights = isset($this->config->rights->guest) ? $this->config->rights->guest : array();
         if($user->account == 'guest') return $rights;
 
         foreach($this->config->rights->member as $moduleName => $moduleMethods)
         {
             foreach($moduleMethods as $method) $rights[$moduleName][$method] = $method;
+        }
+
+        /* pull from zentao. */
+        $sql = $this->dao->select('module, method')->from(TABLE_USERGROUP)->alias('t1')->leftJoin(TABLE_GROUPPRIV)->alias('t2')
+            ->on('t1.group = t2.group')
+            ->where('t1.account')->eq($user->account);
+        $stmt = $sql->query();
+        if(!$stmt) return $rights;
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+        {
+            $rights[strtolower($row['module'])][strtolower($row['method'])] = true;
         }
 
         return $rights;

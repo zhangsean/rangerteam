@@ -137,8 +137,8 @@ class group extends control
         {
             if($type == 'byGroup')  $result = $this->group->updatePrivByGroup($groupID, $menu, $version);
             if($type == 'byModule') $result = $this->group->updatePrivByModule();
-            print(js::alert($result ? $this->lang->group->successSaved : $this->lang->group->errorNotSaved));
-            exit;
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->group->successSaved, 'locate'=>inlink('browse')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->group->errorNotSaved));
         }
 
         if($type == 'byGroup')
