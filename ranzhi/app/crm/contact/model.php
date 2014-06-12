@@ -27,6 +27,24 @@ class contactModel extends model
             ->fetch();
     }
 
+    /**
+     * Get my contact id list.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getMine()
+    {
+        $contactList = $this->dao->select('*')->from(TABLE_CONTACT)
+            ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
+            ->where('createdBy')->eq($this->app->user->account)
+            ->fi()
+            ->fetchAll('id');
+
+        return array_keys($contactList);
+    }
+
+
     /** 
      * Get contact list.
      * 
@@ -38,6 +56,9 @@ class contactModel extends model
      */
     public function getList($customer = 0, $orderBy = 'maker_desc', $pager = null)
     {
+        $mine = $this->getMine();
+        if(empty($mine)) return array();
+
         $resumes = array();
         if($customer) $resumes = $this->dao->select('*')->from(TABLE_RESUME)->where('customer')->eq($customer)->andWhere('deleted')->eq(0)->fetchAll('contact');
 
@@ -45,6 +66,7 @@ class contactModel extends model
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
             ->beginIF($customer)->andWhere('t1.id')->in(array_keys($resumes))->fi()
+            ->andWhere('t1.id')->in($mine)
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');

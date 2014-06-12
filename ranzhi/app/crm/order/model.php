@@ -29,6 +29,23 @@ class orderModel extends model
         return $order;
     }
 
+    /**
+     * Get my order id list.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getMine()
+    {
+        $orderList = $this->dao->select('*')->from(TABLE_ORDER)
+            ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
+            ->where('createdBy')->eq($this->app->user->account)
+            ->fi()
+            ->fetchAll('id');
+
+        return array_keys($orderList);
+    }
+
     /** 
      * Get order list.
      * 
@@ -41,12 +58,16 @@ class orderModel extends model
      */
     public function getList($mode = 'all', $param = null, $orderBy = 'id_desc', $pager = null)
     {
+        $mine = $this->getMine();
+        if(empty($mine)) return array();
+
         $orders = $this->dao->select('o.*, c.name as customerName, c.level as level, p.name as productName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
             ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
             ->where(1)
             ->beginIF($mode != 'all' and $mode != 'query')->andWhere($mode)->eq($param)->fi()
             ->beginIF($mode == 'query')->andWhere($param)->fi()
+            ->andWhere('o.id')->in($mine)
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
         foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->id, $order->customerName, $order->productName); 
