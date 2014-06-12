@@ -324,4 +324,12 @@ class task extends control
         $link = $this->session->taskList ? $this->session->taskList : inlink('browse');
         $this->send(array('result' => 'success', 'locate' => $link));
     }
+
+    public function kanban($projectID = 0)
+    {
+        $this->view->tasks = $this->task->getList($projectID);
+        $this->view->title      = $this->lang->task->browse;
+        $this->view->projectID  = $projectID;
+        $this->display();
+    }
 }

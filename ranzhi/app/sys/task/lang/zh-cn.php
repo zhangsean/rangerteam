@@ -97,3 +97,5 @@ $lang->task->reasonList['cancel'] = '已取消';
 
 $lang->task->basicInfo = '基本信息';
 $lang->task->life      = '任务的一生';
+
+$lang->task->kanban = '看板';

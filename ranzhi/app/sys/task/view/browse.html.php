@@ -14,6 +14,9 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-list-ul"></i> <?php echo $lang->task->list;?></strong>
+    <div class="panel-actions">
+      <?php echo html::a($this->inlink('kanban', "projectID=$projectID"), $lang->task->kanban); ?>
+    </div>
     <div class='panel-actions pull-right'><?php echo html::a($this->inlink('batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?></div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
