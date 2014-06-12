@@ -13,6 +13,7 @@ $lang->blog->common = "博客";
 
 $lang->blog->latestArticles = "最新博文";
 
+$lang->blog->index  = "博客首页";
 $lang->blog->create = "添加博客";
 $lang->blog->edit   = "编辑博客";
 $lang->blog->view   = "查看博客";

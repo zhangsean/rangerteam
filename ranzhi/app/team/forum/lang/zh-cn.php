@@ -10,6 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 $lang->forum->common      = '论坛';
+$lang->forum->index       = '论坛首页';
 $lang->forum->board       = '版块';
 $lang->forum->owners      = '版主';
 $lang->forum->threadList  = '主题列表';
