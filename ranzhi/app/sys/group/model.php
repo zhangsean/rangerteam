@@ -236,7 +236,9 @@ class groupModel extends model
         }
 
         /* Delete old. */
-        $this->dao->delete()->from(TABLE_GROUPPRIV)->where('`group`')->eq($groupID)->andWhere('module')->in($this->getMenuModules($menu))->exec();
+        $this->dao->delete()->from(TABLE_GROUPPRIV)->where('`group`')->eq($groupID)
+            ->beginIF($menu)->andWhere('module')->in($this->getMenuModules($menu))->fi()
+            ->exec();
 
         /* Insert new. */
         if($this->post->actions)
@@ -249,7 +251,7 @@ class groupModel extends model
                     $data->group  = $groupID;
                     $data->module = $moduleName;
                     $data->method = $actionName;
-                    $this->dao->insert(TABLE_GROUPPRIV)->data($data)->exec();
+                    $this->dao->replace(TABLE_GROUPPRIV)->data($data)->exec();
                 }
             }
         }

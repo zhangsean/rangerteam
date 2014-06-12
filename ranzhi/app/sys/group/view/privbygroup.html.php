@@ -63,6 +63,18 @@
           </td>
         </tr>
         <?php endforeach;?>
+        <?php if($app == 'crm'):?>
+        <tr>
+          <th class='text-right'><?php echo $lang->group->extent;?></th>
+          <td>
+            <label class='checkbox'>
+              <?php $checked = isset($groupPrivs['crm']['manageAll']) ? 'checked' : '';?>
+              <input type='checkbox' name='actions[crm][]' value='manageAll' class='manageAll' <?php echo $checked?> />
+              <?php echo $lang->group->manageAll;?>
+            </label>
+          </td>
+        </tr>
+        <?php endif;?>
       </table>
     </div>
   </div>
