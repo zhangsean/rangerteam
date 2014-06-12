@@ -23,6 +23,22 @@ class customerModel extends model
         return $this->dao->select('*')->from(TABLE_CUSTOMER)->where('id')->eq($id)->limit(1)->fetch();
     }
 
+    /**
+     * Get my customer id list.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getMine()
+    {
+        $customerList = $this->dao->select('*')->from(TABLE_CUSTOMER)
+            ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
+            ->where('createdBy')->eq($this->app->user->account)
+            ->fi()
+            ->fetchAll('id');
+        return array_keys($customerList);
+    }
+
     /** 
      * Get customer list.
      * 
@@ -35,10 +51,14 @@ class customerModel extends model
      */
     public function getList($mode = 'all', $param = null, $orderBy = 'id_desc', $pager = null)
     {
+        $mine = $this->getMine();
+        if(empty($mine)) return array();
+
         return $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
             ->beginIF($mode != 'all' and $mode != 'query')->andWhere($mode)->eq($param)->fi()
             ->beginIF($mode == 'query')->andWhere($param)->fi()
+            ->andWhere('id')->in($mine)
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
