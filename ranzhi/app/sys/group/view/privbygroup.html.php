@@ -10,17 +10,18 @@
  * @link        http://www.ranzhi.org
  */
 ?>
+<div class='list'>
 <form class='form-inline' id='ajaxForm' method='post'>
   <?php foreach($lang->appModule as $app => $modules):?>
-  <div class='panel'>
-    <div class='panel-heading'>
-      <label class="checkbox">
-        <strong><?php echo $lang->apps->$app;?></strong>
-        <input type="checkbox" class='checkApp' /> 
-      </label>
-    </div>
-    <div class='panel-body'>
-    <table class='table table-hover table-bordered table-form table-priv'> 
+  <div class='item'>
+        <div class='item-content'>
+      <table class='table table-hover table-bordered table-priv'> 
+        <caption>
+          <label class="checkbox">
+            <?php echo $lang->apps->$app;?>
+            <input type="checkbox" class='checkApp' /> 
+          </label>
+        </caption>
         <?php foreach($lang->resource as $moduleName => $moduleActions):?>
         <?php if(!in_array($moduleName, $modules)) continue;?>
         <?php if(!$this->group->checkMenuModule($menu, $moduleName)) continue;?>
@@ -63,8 +64,10 @@
         </tr>
         <?php endforeach;?>
       </table>
-      <p></p>
     </div>
+  </div>
+  <?php endforeach;?>
+  <div class='panel'>
     <div class='panel-footer text-center'>
     <?php 
     echo html::submitButton($lang->save);
@@ -74,7 +77,6 @@
     ?>
     </div>
   </div>
-  <?php endforeach;?>
 </form>
 <script type='text/javascript'>
 var groupID = <?php echo $groupID?>;

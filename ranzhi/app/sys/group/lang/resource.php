@@ -369,7 +369,6 @@ $lang->doc->methodOrder[15] = 'delete';
 
 /* user. */
 $lang->resource->user = new stdclass();
-$lang->resource->user->control        = 'control';
 $lang->resource->user->profile        = 'profile';
 $lang->resource->user->thread         = 'thread';
 $lang->resource->user->reply          = 'reply';
@@ -381,11 +380,9 @@ $lang->resource->user->admin          = 'admin';
 $lang->resource->user->colleague      = 'colleague';
 $lang->resource->user->forbid         = 'forbid';
 $lang->resource->user->active         = 'active';
-$lang->resource->user->setReferer     = 'setReferer';
 $lang->resource->user->changePassword = 'changePassword';
 $lang->resource->user->vcard          = 'vcard';
 
-$lang->user->methodOrder[5]  = 'control';
 $lang->user->methodOrder[10] = 'profile';
 $lang->user->methodOrder[15] = 'thread';
 $lang->user->methodOrder[20] = 'reply';
@@ -397,7 +394,6 @@ $lang->user->methodOrder[45] = 'admin';
 $lang->user->methodOrder[50] = 'colleague';
 $lang->user->methodOrder[55] = 'forbid';
 $lang->user->methodOrder[60] = 'active';
-$lang->user->methodOrder[65] = 'setReferer';
 $lang->user->methodOrder[70] = 'changePassword';
 $lang->user->methodOrder[75] = 'vcard';
 

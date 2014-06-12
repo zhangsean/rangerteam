@@ -5,7 +5,7 @@ function showPriv(value)
 
 $('.checkApp').click(function()
 {
-    $(this).parents('table').find('[type=checkbox]').prop('checked', $(this).prop('checked'));
+    $(this).parents('.item').find('[type=checkbox]').prop('checked', $(this).prop('checked'));
 });
 
 $('.checkModule').click(function()
