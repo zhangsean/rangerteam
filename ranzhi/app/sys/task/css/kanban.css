@@ -1,3 +1,9 @@
+.panel-body.boards-container {padding: 0}
+.boards {display: table; border-collapse: separate; position: relative; width: 100%; clear: none;}
+.boards:before, .boards:after {display: none}
+.board.panel, .panel.board-empty {display: table-cell; width: 250px; float: none; border-left: 0; border-top: 0}
+.panel.board-empty {width: auto;}
+
 .board-item.task {border-left: 0px solid #ccc; border-left-width: 4px\0; box-shadow: inset 4px 0 0 #ccc; padding-left: 14px; padding-left: 10px\0;}
 .board-item.task.task-pri-1 {border-left-color: #d2322d; box-shadow:inset 4px 0 0 #d2322d;}
 .board-item.task.task-pri-2 {border-left-color: #ea8400; box-shadow:inset 4px 0 0 #ea8400;}
@@ -5,3 +11,4 @@
 .board-item.task.task-pri-4 {border-left-color: #39b3d7; box-shadow:inset 4px 0 0 #39b3d7;}
 .task-actions {margin: 5px -10px -6px -14px; margin-left: -10px\0; background: #fafafa; border-left: 1px solid #ddd; border-top: 0 solid #ddd; transition: all .5s .5s cubic-bezier(.175, .885, .32, 1); height: 0; overflow: hidden;}
 .task:hover .task-actions {padding: 5px 10px; height: 30px; border-top-width: 1px}
+.board.panel {border-radius: 0; margin: 0}
