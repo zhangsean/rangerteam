@@ -9,13 +9,17 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->forum->common      = '論壇';
+$lang->forum->index       = '論壇首頁';
 $lang->forum->board       = '版塊';
 $lang->forum->owners      = '版主';
 $lang->forum->threadList  = '主題列表';
 $lang->forum->threadCount = '主題數';
 $lang->forum->postCount   = '帖子數';
-$lang->forum->lastPost    = '最後發表';
+$lang->forum->noPost      = '暫無主題';
+$lang->forum->lastPost    = '最後發表: %s by %s';
 $lang->forum->readonly    = '只讀版塊。';
+$lang->forum->notExist    = '版塊不存在。';
 $lang->forum->lblOwner    = " [ 版主：%s ]";
 
 $lang->forum->post   = '發貼';

@@ -40,13 +40,14 @@ $lang->order->contactedDate = '聯繫時間';
 $lang->order->nextDate      = '下次聯繫';
 
 $lang->order->list          = '訂單列表';
-$lang->order->browse        = '維護訂單';
+$lang->order->browse        = '瀏覽訂單';
 $lang->order->create        = '創建訂單';
 $lang->order->record        = '溝通';
 $lang->order->edit          = '編輯訂單';
 $lang->order->view          = '訂單詳情';
 $lang->order->close         = '關閉訂單';
 $lang->order->sign          = '簽約';
+$lang->order->assign        = '訂單指派';
 $lang->order->activate      = '激活';
 
 $lang->order->statusList['normal'] = '正常';

@@ -10,6 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 if(!isset($lang->contact)) $lang->contact = new stdclass();
+$lang->contact->common        = '聯繫人';
 $lang->contact->id            = '編號';
 $lang->contact->customer      = '所屬客戶';
 $lang->contact->customerName  = '客戶名稱';
@@ -43,6 +44,9 @@ $lang->contact->changeAvatar  = '更換頭像';
 $lang->contact->genderList['m'] = '男';
 $lang->contact->genderList['f'] = '女';
 
+$lang->contact->browse  = '瀏覽聯繫人';
+$lang->contact->block   = '聯繫人區塊';
+$lang->contact->delete  = '刪除聯繫人';
 $lang->contact->create  = '添加聯繫人';
 $lang->contact->list    = '聯繫人列表';
 $lang->contact->edit    = '編輯聯繫人';

@@ -13,7 +13,7 @@ $lang->user->common    = '成員';
 
 $lang->user->id        = '編號';
 $lang->user->account   = '賬戶';
-$lang->user->admin     = '管理員';
+$lang->user->admin     = '瀏覽會員';
 $lang->user->password  = '密碼';
 $lang->user->password2 = '請重複密碼';
 $lang->user->realname  = '真實姓名';
@@ -44,6 +44,7 @@ $lang->user->status    = '狀態';
 $lang->user->alert     = '您的帳號已被禁用';
 
 $lang->user->list            = '成員列表';
+$lang->user->colleague       = '同事列表';
 $lang->user->view            = "成員詳情";
 $lang->user->create          = "添加成員";
 $lang->user->edit            = "編輯成員";
@@ -63,6 +64,8 @@ $lang->user->allUsers        = '全部成員';
 $lang->user->submit          = "提交";
 $lang->user->forbid          = '禁用';
 $lang->user->active          = '激活';
+$lang->user->setReferer      = '設置referer';
+$lang->user->vcard           = '獲取二維碼名片';
 
 $lang->user->profile     = '個人信息';
 $lang->user->editProfile = '編輯信息';
@@ -71,6 +74,7 @@ $lang->user->reply       = '我的回貼';
 $lang->user->message     = '我的消息';
 
 $lang->user->inputUserName       = '請輸入成員名';
+$lang->user->inputColleague      = '請輸入同事姓名';
 $lang->user->inputAccountOrEmail = '請輸入成員名或Email';
 $lang->user->inputPassword       = '請輸入密碼';
 $lang->user->searchUser          = '搜索';

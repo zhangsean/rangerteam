@@ -12,5 +12,6 @@
 $lang->project->common = '項目視圖';
 $lang->project->create = '創建項目';
 $lang->project->edit   = '修改項目';
+$lang->project->delete = '刪除項目';
 
 $lang->project->name = '項目名稱';

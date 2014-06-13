@@ -22,6 +22,14 @@ $lang->by      = ' 由 ';
 $lang->ditto   = '同上';
 $lang->submitting   = '稍候...';
 
+/* Apps lang items.*/
+$lang->apps = new stdclass();
+$lang->apps->crm  = '客戶';
+$lang->apps->cash = '財務';
+$lang->apps->oa   = '辦公';
+$lang->apps->sys  = '通用';
+$lang->apps->team = '團隊';
+
 /* Lang items for ranzhi. */
 $lang->ranzhi  = '然之協同';
 $lang->poweredBy = "<span id='poweredBy'><a href='http://www.ranzhi.org/?v=%s' target='_blank'>{$lang->ranzhi}%s</a></span>";
@@ -151,31 +159,14 @@ $lang->task    = new stdclass();
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = '公司|company|setbasic|';
 $lang->menu->sys->user      = '組織|user|admin|';
+$lang->menu->sys->group     = '權限|group|browse|';
 $lang->menu->sys->entry     = '應用|entry|admin|';
 $lang->menu->sys->system    = '系統|mail|admin|';
 //$lang->menu->sys->extension = '擴展|extension|admin|';
-
-$lang->menu->sns = new stdclass();
-$lang->menu->sns->forum   = '論壇|forum|index|';
-$lang->menu->sns->blog    = '博客|blog|index|';
-$lang->menu->sns->message = '消息|message|index|';
  
-$lang->forum       = new stdclass(); 
-$lang->forum->menu = new stdclass(); 
-$lang->forum->menu->index = '瀏覽|forum|index|'; 
-$lang->forum->menu->admin = '管理|forum|admin|'; 
-
-$lang->message       = new stdclass(); 
-$lang->message->menu = new stdclass(); 
-$lang->message->menu->index = '瀏覽|message|index|'; 
-$lang->message->menu->admin = '管理|message|admin|'; 
-
-$lang->blog       = new stdclass(); 
-$lang->blog->menu = new stdclass(); 
-$lang->blog->menu->index = '瀏覽|blog|index|'; 
-
-$lang->menu->oa = new stdclass();
-$lang->menu->oa->article = '文章|article|index|';
+$lang->message = new stdclass(); 
+$lang->blog    = new stdclass(); 
+$lang->group   = new stdclass(); 
 
 /* Menu entry. */
 $lang->entry       = new stdclass();

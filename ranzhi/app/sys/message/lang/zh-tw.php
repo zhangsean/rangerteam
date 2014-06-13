@@ -2,7 +2,7 @@
 /**
  * The message module zh-tw file of chanzhiEPS.
  *
- * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao Nature Easy Soft Network Technology Co,LTD www.xirangit.com)
+ * @copyright   Copyright 2013-2013 青島易軟天創網絡科技有限公司 (QingDao Nature Easy Soft Network Technology Co,LTD www.xirangit.com)
  * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     message

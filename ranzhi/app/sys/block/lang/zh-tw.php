@@ -63,9 +63,31 @@ $lang->block->default['crm']['b2']['params']['num']     = 15;
 $lang->block->default['crm']['b2']['params']['orderBy'] = 'id_desc';
 $lang->block->default['crm']['b2']['params']['status']  = array();
 
+$lang->block->default['cash']['b1']['name']    = '付款賬戶';
+$lang->block->default['cash']['b1']['blockID'] = 'depositor';
+$lang->block->default['cash']['b1']['type']    = 'system';
+
+$lang->block->default['team']['b1']['name']    = '最新博客';
+$lang->block->default['team']['b1']['blockID'] = 'blog';
+$lang->block->default['team']['b1']['type']    = 'system';
+
+$lang->block->default['team']['b1']['params']['num']     = 15;
+
+$lang->block->default['team']['b2']['name']    = '最新帖子';
+$lang->block->default['team']['b2']['blockID'] = 'thread';
+$lang->block->default['team']['b2']['type']    = 'system';
+
+$lang->block->default['team']['b2']['params']['num']     = 15;
+
 $lang->block->default['sys']['b1'] = $lang->block->default['oa']['b1'];
 $lang->block->default['sys']['b1']['entryID'] = 'oa';
 $lang->block->default['sys']['b2'] = $lang->block->default['crm']['b2'];
 $lang->block->default['sys']['b2']['entryID'] = 'crm';
 $lang->block->default['sys']['b3'] = $lang->block->default['crm']['b1'];
 $lang->block->default['sys']['b3']['entryID'] = 'crm';
+$lang->block->default['sys']['b4'] = $lang->block->default['cash']['b1'];
+$lang->block->default['sys']['b4']['entryID'] = 'cash';
+$lang->block->default['sys']['b5'] = $lang->block->default['team']['b1'];
+$lang->block->default['sys']['b5']['entryID'] = 'team';
+$lang->block->default['sys']['b6'] = $lang->block->default['team']['b2'];
+$lang->block->default['sys']['b6']['entryID'] = 'team';

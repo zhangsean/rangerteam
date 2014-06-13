@@ -24,6 +24,8 @@ $lang->product->createdDate = '添加時間';
 $lang->product->editedBy    = '編輯者';
 $lang->product->editedDate  = '編輯時間';
 
+$lang->product->index     = '瀏覽產品';
+$lang->product->delete    = '刪除產品';
 $lang->product->list        = '產品列表';
 $lang->product->browse      = '維護產品';
 $lang->product->create      = '添加產品';

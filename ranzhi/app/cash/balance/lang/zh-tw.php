@@ -11,6 +11,7 @@
  */
 $lang->balance = new stdclass();
 
+$lang->balance->common    = '餘額';
 $lang->balance->id        = '編號';
 $lang->balance->depositor = '賬號';
 $lang->balance->currency  = '貨幣類型';
@@ -21,3 +22,4 @@ $lang->balance->date      = '時間';
 $lang->balance->create = '登記餘額';
 $lang->balance->browse = '賬戶餘額';
 $lang->balance->edit   = '編輯餘額';
+$lang->balance->delete = '刪除餘額';

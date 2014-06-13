@@ -20,6 +20,8 @@ $lang->task->finish   = '任務完成';
 $lang->task->activate = '激活任務';
 $lang->task->cancel   = '取消任務';
 $lang->task->close    = '關閉任務';
+$lang->task->assignTo = '指派任務';
+$lang->task->delete   = '刪除任務';
 
 $lang->task->batchCreate = '批量添加';
 
@@ -95,3 +97,5 @@ $lang->task->reasonList['cancel'] = '已取消';
 
 $lang->task->basicInfo = '基本信息';
 $lang->task->life      = '任務的一生';
+
+$lang->task->kanban = '看板';

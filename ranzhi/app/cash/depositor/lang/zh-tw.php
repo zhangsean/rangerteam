@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->depositor->common          = '賬號';
 $lang->depositor->id              = '編號';
 $lang->depositor->abbr            = '簡稱';
 $lang->depositor->serviceProvider = '服務商';
@@ -25,15 +26,15 @@ $lang->depositor->createdDate     = '添加時間';
 $lang->depositor->editedBy        = '由誰編輯';
 $lang->depositor->editedDate      = '編輯時間';
 
-$lang->depositor->common   = '賬號';
 $lang->depositor->all      = '所有賬號';
 $lang->depositor->create   = '添加帳號';
-$lang->depositor->list     = '帳號列表';
+$lang->depositor->browse   = '瀏覽賬號';
 $lang->depositor->edit     = '編輯帳號';
+$lang->depositor->delete   = '刪除帳號';
 $lang->depositor->view     = '帳號詳情';
 $lang->depositor->forbid   = '禁用';
 $lang->depositor->activate = '激活';
-$lang->depositor->balance  = '快照';
+$lang->depositor->balance  = '餘額';
 
 $lang->depositor->check         = '對賬';
 $lang->depositor->start         = '開始日期';

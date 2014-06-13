@@ -17,7 +17,7 @@ $lang->menu->cash->dashboard = '我的地盤|dashboard|index|';
 $lang->menu->cash->trade     = '記賬|trade|index|';
 $lang->menu->cash->check     = '對賬|depositor|check|';
 $lang->menu->cash->depositor = '賬戶|depositor|index|';
-$lang->menu->cash->setting   = '設置|tree|browse|type=income|';
+$lang->menu->cash->setting   = '設置|tree|browse|type=in|';
 
 /* Menu of depositor module. */
 $lang->depositor = new stdclass();
@@ -33,6 +33,6 @@ $lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> 列
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->income   = '收入科目設置|tree|browse|type=income|';
-$lang->setting->menu->expense  = '支出科目設置|tree|browse|type=expense|';
-$lang->setting->menu->currency = '貨幣類型設置|setting|lang|module=depositor&field=currencyList';
+$lang->setting->menu->income   = '收入科目|tree|browse|type=in|';
+$lang->setting->menu->expend   = '支出科目|tree|browse|type=out|';
+$lang->setting->menu->currency = '貨幣類型|setting|lang|module=depositor&field=currencyList';

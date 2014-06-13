@@ -9,9 +9,10 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+$lang->tree->common      = "類目";
 $lang->tree->add         = "添加";
 $lang->tree->edit        = "編輯";
-$lang->tree->addChild    = "添加子類目";
+$lang->tree->children    = "添加子類目";
 $lang->tree->delete      = "刪除類目";
 $lang->tree->browse      = "類目維護";
 $lang->tree->manage      = "維護類目";
@@ -55,24 +56,40 @@ $lang->industry->keywords = '關鍵詞';
 $lang->industry->children = "子行業";
 
 /* Lang items for income. */
-$lang->income = new stdclass();
-$lang->income->common   = '收入科目';
-$lang->income->name     = '名稱';
-$lang->income->alias    = '別名';
-$lang->income->parent   = '上級科目';
-$lang->income->desc     = '描述';
-$lang->income->keywords = '關鍵詞';
-$lang->income->children = '子科目';
+$lang->in = new stdclass();
+$lang->in->common   = '收入科目';
+$lang->in->name     = '名稱';
+$lang->in->alias    = '別名';
+$lang->in->parent   = '上級科目';
+$lang->in->desc     = '描述';
+$lang->in->keywords = '關鍵詞';
+$lang->in->children = '子科目';
 
-/* Lang items for expense. */
-$lang->expense = new stdclass();
-$lang->expense->common   = '支出科目';
-$lang->expense->name     = '名稱';
-$lang->expense->alias    = '別名';
-$lang->expense->parent   = '上級科目';
-$lang->expense->desc     = '描述';
-$lang->expense->keywords = '關鍵詞';
-$lang->expense->children = '子科目';
+/* Lang items for expend. */
+$lang->out = new stdclass();
+$lang->out->common   = '支出科目';
+$lang->out->name     = '名稱';
+$lang->out->alias    = '別名';
+$lang->out->parent   = '上級科目';
+$lang->out->desc     = '描述';
+$lang->out->keywords = '關鍵詞';
+$lang->out->children = '子科目';
+
+/* Lang items for forum. */
+$lang->board = new stdclass();
+$lang->board->common     = '版塊';
+$lang->board->name       = '版塊';
+$lang->board->alias      = '別名';
+$lang->board->parent     = '上級版塊';
+$lang->board->desc       = '描述';
+$lang->board->keywords   = '關鍵詞';
+$lang->board->children   = "子版塊";
+$lang->board->readonly   = '訪問權限';
+$lang->board->moderators = '版主';
 
 $lang->board->readonlyList[0] = '開放';
 $lang->board->readonlyList[1] = '只讀';
+
+$lang->board->placeholder = new stdclass();
+$lang->board->placeholder->moderators  = '會員用戶名, 多個用戶名之間用逗號隔開';
+$lang->board->placeholder->setChildren = '論壇功能需要設置二級版塊才能使用。';
