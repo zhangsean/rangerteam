@@ -118,7 +118,7 @@ class messageModel extends model
         $articleTitles = $this->dao->select('id, title')->from(TABLE_ARTICLE)->where('id')->in($articles)->fetchPairs('id', 'title');
         $blogTitles    = $this->dao->select('id, title')->from(TABLE_ARTICLE)->where('id')->in($blogs)->fetchPairs('id', 'title');
         $productTitles = $this->dao->select('id, name')->from(TABLE_PRODUCT)->where('id')->in($products)->fetchPairs('id', 'name');
-        $bookTitles    = $this->dao->select('id, title')->from(TABLE_BOOK)->where('id')->in($books)->fetchPairs('id', 'title');
+        //$bookTitles    = $this->dao->select('id, title')->from(TABLE_BOOK)->where('id')->in($books)->fetchPairs('id', 'title');
 
         foreach($messages as $message)
         {
