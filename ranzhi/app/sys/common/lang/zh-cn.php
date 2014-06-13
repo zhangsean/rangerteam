@@ -24,11 +24,11 @@ $lang->submitting   = '稍候...';
 
 /* Apps lang items.*/
 $lang->apps = new stdclass();
-$lang->apps->crm  = 'CRM';
-$lang->apps->cash = 'CASH';
-$lang->apps->oa   = 'OA';
-$lang->apps->sys  = 'SYSTEM';
-$lang->apps->team = 'TEAM';
+$lang->apps->crm  = '客户';
+$lang->apps->cash = '财务';
+$lang->apps->oa   = '办公';
+$lang->apps->sys  = '通用';
+$lang->apps->team = '团队';
 
 /* Lang items for ranzhi. */
 $lang->ranzhi  = '然之协同';

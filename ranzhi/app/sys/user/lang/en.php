@@ -13,7 +13,7 @@ $lang->user->common    = 'User';
 
 $lang->user->id        = 'ID';
 $lang->user->account   = 'Account';
-$lang->user->admin     = 'Admin';
+$lang->user->admin     = 'Browse Users';
 $lang->user->password  = 'Password';
 $lang->user->password2 = 'Repeat it';
 $lang->user->realname  = 'Name';
