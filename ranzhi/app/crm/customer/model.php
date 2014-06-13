@@ -76,10 +76,14 @@ class customerModel extends model
      */
     public function getPairs($mode = 'all', $param = null, $orderBy = 'id_desc', $emptyOption = true)
     {
+        $mine = $this->getMine();
+        if(empty($mine)) return array();
+
         $customers = $this->dao->select('id, name')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
             ->beginIF($mode != 'all' and $mode != 'query')->andWhere($mode)->eq($param)->fi()
             ->beginIF($mode == 'query')->andWhere($param)->fi()
+            ->andWhere('id')->in($mine)
             ->orderBy($orderBy)
             ->fetchPairs('id');
 

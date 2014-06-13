@@ -70,7 +70,7 @@ class commonModel extends model
     {
         $sessionName = $this->config->sessionVar;
         session_name($sessionName);
-        session_start();
+        if(!isset($_SESSION)) session_start();
     }
 
     /**
@@ -132,7 +132,6 @@ class commonModel extends model
      */
     public function checkPrivByCustomer($customerID)
     {
-
         $customers = $this->loadModel('customer', 'crm')->getMine();
         if(!in_array($customerID, $customers))
         {
