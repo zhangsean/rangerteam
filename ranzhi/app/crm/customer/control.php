@@ -91,6 +91,9 @@ class customer extends control
      */
     public function edit($customerID)
     {
+        $customer = $this->customer->getByID($customerID);
+        if(!$customer) $this->loadModel('common', 'sys')->checkPrivByCustomer('0');
+
         if($_POST)
         {
             $changes = $this->customer->update($customerID);
@@ -106,7 +109,7 @@ class customer extends control
         }
 
         $this->view->title    = $this->lang->customer->edit;
-        $this->view->customer = $this->customer->getByID($customerID);
+        $this->view->customer = $customer;
         $this->view->area     = $this->loadModel('tree')->getOptionMenu('area');
         $this->view->industry = $this->tree->getOptionMenu('industry');
 
@@ -122,10 +125,13 @@ class customer extends control
      */
     public function view($customerID)
     {
+        $customer = $this->customer->getByID($customerID);
+        if(!$customer) $this->loadModel('common', 'sys')->checkPrivByCustomer('0');
+
         $this->app->loadLang('resume');
 
         $this->view->title     = $this->lang->customer->view;
-        $this->view->customer  = $this->customer->getByID($customerID);
+        $this->view->customer  = $customer;
         $this->view->orders    = $this->loadModel('order')->getList($mode = 'customer', $customerID);
         $this->view->contacts  = $this->loadModel('contact')->getList($customerID);
         $this->view->contracts = $this->loadModel('contract')->getList($customerID);
@@ -229,6 +235,9 @@ class customer extends control
      */
     public function delete($customerID)
     {
+        $customer = $this->customer->getByID($customerID);
+        if(!$customer) $this->loadModel('common', 'sys')->checkPrivByCustomer('0');
+
         $this->customer->delete(TABLE_CUSTOMER, $customerID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'locate' => inlink('browse')));

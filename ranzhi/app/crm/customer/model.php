@@ -20,6 +20,10 @@ class customerModel extends model
      */
     public function getByID($id)
     {
+        $mine = $this->getMine();
+        if(empty($mine)) return false;
+        if(!in_array($id, $mine)) return false;
+
         return $this->dao->select('*')->from(TABLE_CUSTOMER)->where('id')->eq($id)->limit(1)->fetch();
     }
 
