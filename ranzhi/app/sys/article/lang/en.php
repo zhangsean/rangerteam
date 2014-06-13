@@ -39,12 +39,13 @@ $lang->article->create = 'Create';
 $lang->article->edit   = 'Edit';
 $lang->article->files  = 'Files';
 
-$lang->blog = new stdclass();
+if(!isset($lang->blog)) $lang->blog = new stdclass();
 $lang->blog->admin  = 'Admin';
 $lang->blog->list   = 'List';
 $lang->blog->create = 'Create';
 $lang->blog->edit   = 'Edit';
 
+if(!isset($lang->announce)) $lang->announce = new stdclass();
 $lang->announce->admin  = 'Announce';
 $lang->announce->list   = 'List';
 $lang->announce->create = 'Create';

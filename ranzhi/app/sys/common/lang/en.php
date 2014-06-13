@@ -159,21 +159,14 @@ $lang->task    = new stdclass();
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = 'Company|company|setbasic|';
 $lang->menu->sys->user      = 'User|user|admin|';
+$lang->menu->sys->group     = 'Priviledge|group|browse|';
 $lang->menu->sys->entry     = 'App|entry|admin|';
 $lang->menu->sys->system    = 'System|mail|admin|';
 //$lang->menu->sys->extension = 'Extension|extension|admin|';
 //
-$lang->message       = new stdclass(); 
-$lang->message->menu = new stdclass(); 
-$lang->message->menu->index = 'Browse|message|index'; 
-$lang->message->menu->admin = 'Manage|message|admin'; 
-
-$lang->blog       = new stdclass(); 
-$lang->blog->menu = new stdclass(); 
-$lang->blog->menu->index = 'Browse|blog|index'; 
-
-$lang->menu->oa = new stdclass();
-$lang->menu->oa->article = 'Article|article|index|';
+$lang->message = new stdclass(); 
+$lang->blog    = new stdclass(); 
+$lang->group   = new stdclass(); 
 
 /* Menu entry. */
 $lang->entry       = new stdclass();

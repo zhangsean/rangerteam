@@ -22,7 +22,7 @@ $lang->menu->team->setting   = '设置|tree|browse|type=forum|';
 /* Menu of forum module. */
 $lang->forum = new stdclass();
 
-/* Menu of forum module. */
+/* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
 $lang->blog->menu->index    = '博客列表|blog|index|';

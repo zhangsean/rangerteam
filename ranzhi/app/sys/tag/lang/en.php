@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->tag)) $lang->tag = new stdclass();
 $lang->tag->common = 'keywords';
 $lang->tag->rank   = 'Rank';
 $lang->tag->link   = 'link';

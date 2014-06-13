@@ -97,3 +97,5 @@ $lang->task->reasonList['cancel'] = 'Canceled';
 
 $lang->task->basicInfo = 'Basic Info';
 $lang->task->life      = 'Task Life';
+
+$lang->task->kanban = 'Kanban';
