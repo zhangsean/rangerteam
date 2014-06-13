@@ -88,7 +88,6 @@
             var config = entriesConfigs[i];
             entries[config.id] = new entry(config);
         }
-        console.log(entries);
     }
 
     /**
