@@ -68,9 +68,13 @@ class commonModel extends model
      */
     public function startSession()
     {
-        $sessionName = $this->config->sessionVar;
-        session_name($sessionName);
-        if(!isset($_SESSION)) session_start();
+        if(!defined('SESSION_STARTED'))
+        {
+            $sessionName = $this->config->sessionVar;
+            session_name($sessionName);
+            session_start();
+            define('SESSION_STARTED', true);
+        }
     }
 
     /**

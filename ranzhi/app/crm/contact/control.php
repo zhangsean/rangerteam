@@ -84,6 +84,9 @@ class contact extends control
      */
     public function edit($contactID)
     {
+        $contact = $this->contact->getByID($contactID);
+        if(empty($contact)) $this->loadModel('common', 'sys')->checkPrivByCustomer('0');
+
         if($_POST)
         {
             $changes = $this->contact->update($contactID);
@@ -105,7 +108,7 @@ class contact extends control
 
         $this->view->title     = $this->lang->contact->edit;
         $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
-        $this->view->contact   = $this->contact->getByID($contactID);
+        $this->view->contact   = $contact;
 
         $this->display();
     }
@@ -149,6 +152,9 @@ class contact extends control
      */
     public function delete($contactID)
     {
+        $contact = $this->contact->getByID($contactID);
+        if(empty($contact)) $this->loadModel('common', 'sys')->checkPrivByCustomer('0');
+
         $this->contact->delete(TABLE_CONTACT, $contactID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'locate' => inlink('browse')));

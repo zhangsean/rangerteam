@@ -10,8 +10,8 @@
  * @link        http://www.ranzhi.org
  */
 $lang->error = new stdclass();
-$lang->error->common = '错误';
-$lang->error->jumping = " 3秒钟后页面将自动跳转 <a href='%s' class='btn btn-primary btn-xs'>立即跳转</a> ";
+$lang->error->common = 'Error';
+$lang->error->jumping = "This page will jump to homepage after 5 seconds <a href='%s' class='btn btn-primary btn-xs'>Jump Now</a>";
 
-$lang->error->typeList['notFound']      = '您要访问的内容没有找到，请检查地址是否正确';
-$lang->error->typeList['accessLimited'] = '信息访问受限';
+$lang->error->typeList['notFound']      = '';
+$lang->error->typeList['accessLimited'] = '';

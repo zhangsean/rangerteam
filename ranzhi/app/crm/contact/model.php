@@ -20,9 +20,13 @@ class contactModel extends model
      */
     public function getByID($id)
     {
+        $customerIdList = $this->loadModel('customer')->getMine();
+        if(empty($customerIdList)) return null;
+
         return $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.id')->eq($id)
+            ->andWhere('t2.customer')->in($customerIdList)
             ->limit(1)
             ->fetch();
     }
@@ -56,8 +60,8 @@ class contactModel extends model
      */
     public function getList($customer = 0, $orderBy = 'maker_desc', $pager = null)
     {
-        $mine = $this->getMine();
-        if(empty($mine)) return array();
+        $customerIdList = $this->loadModel('customer')->getMine();
+        if(empty($customerIdList)) return array();
 
         $resumes = array();
         if($customer) $resumes = $this->dao->select('*')->from(TABLE_RESUME)->where('customer')->eq($customer)->andWhere('deleted')->eq(0)->fetchAll('contact');
@@ -65,8 +69,8 @@ class contactModel extends model
         $contacts = $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
+            ->andWhere('t2.customer')->in($customerIdList)
             ->beginIF($customer)->andWhere('t1.id')->in(array_keys($resumes))->fi()
-            ->andWhere('t1.id')->in($mine)
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
@@ -97,10 +101,14 @@ class contactModel extends model
      */
     public function getPairs($customer = 0, $emptyOption = true)
     {
+        $customerIdList = $this->loadModel('customer')->getMine();
+        if(empty($customerIdList)) return array();
+
         $contacts = $this->dao->select('t1.*')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.id = t2.contact')
             ->where('t1.deleted')->eq(0)
             ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->FI()
+            ->andWhere('t2.customer')->in($customerIdList)
             ->fetchPairs('id', 'realname');
 
         if($emptyOption)  $contacts = array(0 => '') + $contacts;
@@ -117,10 +125,14 @@ class contactModel extends model
      */
     public function getCustomerPairs($contactID)
     {
+        $customerIdList = $this->loadModel('customer')->getMine();
+        if(empty($customerIdList)) return array();
+
         return $this->dao->select('customer,name')
             ->FROM(TABLE_RESUME)->alias('r')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on('r.customer=c.id')
             ->where('r.contact')->eq($contactID)
+            ->andWhere('r.customer')->in($customerIdList)
             ->andWhere('c.deleted')->eq(0)->fetchPairs();
     }
 

@@ -11,9 +11,10 @@
 include '../../common/view/header.lite.html.php';
 js::set('locate', $locate);
 ?>
-<div class='page-container w-200px'>
+<div class='page-container' style='margin:50px auto;'>
   <div class='alert alert-danger'>
-    <p><?php echo $message;?></p>
+    <strong><?php echo $message;?></strong>
+    <p><?php printf($lang->error->jumping, $locate);?></p>
   </div>
 </div>
 <?php js::execute($pageJS);?>
