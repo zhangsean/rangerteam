@@ -673,7 +673,6 @@ function isLocalIP()
  */
 function getWebRoot()
 {
-    return '/';
     $path = $_SERVER['SCRIPT_NAME'];
     if(defined('IN_SHELL'))
     {
