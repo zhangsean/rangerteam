@@ -53,6 +53,9 @@ class upgradeModel extends model
             case '1_0_beta':
                 $this->execSQL($this->getUpgradeFile('1.0.beta'));
                 $this->createCashEntry();
+            case '1_1_beta':
+                $this->execSQL($this->getUpgradeFile('1.1.beta'));
+                $this->createTeamEntry();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -72,6 +75,7 @@ class upgradeModel extends model
         switch($fromVersion)
         {
             case '1_0_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.0.beta'));
+            case '1_1_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.1.beta'));
         }
         return $confirmContent;
     }
@@ -191,6 +195,35 @@ class upgradeModel extends model
         $entry->position = 'default';
 
         $block = $this->config->requestType == 'GET' ? 'cash/index.php?m=block&f=index' : 'cash/block-index.html';
+        $entry->block = $this->config->webRoot . $block;
+
+        $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
+    }
+
+    /**
+     * create team entry.
+     * 
+     * @access public
+     * @return void
+     */
+    public function createTeamEntry()
+    {
+        $entry = new stdclass();
+
+        $entry->name     = 'team';
+        $entry->code     = 'team';
+        $entry->open     = 'iframe';
+        $entry->order    = 4;
+        $entry->ip       = '*';
+        $entry->key      = '6c46d9fe76a1afa1cd61f946f1072d1e';
+        $entry->logo     = $this->config->webRoot . 'theme/default/images/ips/app-team.png';
+        $entry->login    = '../team';
+        $entry->ip       = '*';
+        $entry->control  = 'simple';
+        $entry->size     = 'max';
+        $entry->position = 'default';
+
+        $block = $this->config->requestType == 'GET' ? 'team/index.php?m=block&f=index' : 'team/block-index.html';
         $entry->block = $this->config->webRoot . $block;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();

@@ -41,3 +41,4 @@ EOT;
 $lang->upgrade->versionNote = "Please choose the version to upgrade.";
 
 $lang->upgrade->fromVersions['1_0_beta'] = '1.0.beta';
+$lang->upgrade->fromVersions['1_1_beta'] = '1.1.beta';
