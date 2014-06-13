@@ -20,7 +20,10 @@ class orderModel extends model
      */
     public function getByID($id)
     {
-        $order = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($id)->fetch();
+        $customerIdList = $this->loadModel('customer')->getMine();
+        if(empty($customerIdList)) return null;
+
+        $order = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($id)->andWhere('customer')->in($customerIdList)->fetch(); 
         if(!$order) return false;
 
         $product = $this->loadModel('product')->getByID($order->product);
@@ -58,8 +61,8 @@ class orderModel extends model
      */
     public function getList($mode = 'all', $param = null, $orderBy = 'id_desc', $pager = null)
     {
-        $mine = $this->getMine();
-        if(empty($mine)) return array();
+        $customerIdList = $this->loadModel('customer')->getMine();
+        if(empty($customerIdList)) return null;
 
         $orders = $this->dao->select('o.*, c.name as customerName, c.level as level, p.name as productName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
@@ -67,7 +70,7 @@ class orderModel extends model
             ->where(1)
             ->beginIF($mode != 'all' and $mode != 'query')->andWhere($mode)->eq($param)->fi()
             ->beginIF($mode == 'query')->andWhere($param)->fi()
-            ->andWhere('o.id')->in($mine)
+            ->andWhere('o.customer')->in($customerIdList)
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
         foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->id, $order->customerName, $order->productName); 
@@ -105,12 +108,16 @@ class orderModel extends model
      */
     public function getPairs($customer, $status = '')
     {
+        $customerIdList = $this->loadModel('customer')->getMine();
+        if(empty($customerIdList)) return null;
+
         $orders = $this->dao->select('o.id, o.createdDate, c.name as customerName, p.name as productName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
             ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
             ->where(1)
             ->beginIF($customer)->andWhere('customer')->eq($customer)->fi()
             ->beginIF($status)->andWhere('status')->eq($status)->fi()
+            ->andWhere('o.customer')->in($customerIdList)
             ->fetchAll('id');
 
         foreach($orders as $key => $order) $orders[$key] = sprintf($this->lang->order->titleLBL, $order->id, $order->customerName, $order->productName); 

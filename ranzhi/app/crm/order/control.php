@@ -81,8 +81,8 @@ class order extends control
     public function edit($orderID)
     {
         $order = $this->loadModel('order')->getByID($orderID);
-        $this->loadModel('common', 'sys')->checkPrivByCustomer($order->customer);
-        
+        if(empty($order)) $this->loadModel('common', 'sys')->checkPrivByCustomer($order->customer);
+
         if($_POST)
         {
             $changes = $this->order->update($orderID);
@@ -115,8 +115,8 @@ class order extends control
      */
     public function view($orderID)
     {
-        $order = $this->order->getByID($orderID);
-        $this->loadModel('common', 'sys')->checkPrivByCustomer($order->customer);
+        $order = $this->loadModel('order')->getByID($orderID);
+        if(empty($order)) $this->loadModel('common', 'sys')->checkPrivByCustomer($order->customer);
 
         $this->app->loadLang('resume');
         $this->app->loadLang('contract');
