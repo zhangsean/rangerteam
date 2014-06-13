@@ -123,6 +123,26 @@ class commonModel extends model
     }
 
     /**
+     * Check priviledge by customer.
+     * 
+     * @param  int    $customerID 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public function checkPrivByCustomer($customerID)
+    {
+
+        $customers = $this->loadModel('customer', 'crm')->getMine();
+        if(!in_array($customerID, $customers))
+        {
+            $locate = helper::createLink('crm.index');
+            $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
+            die(js::locate($errorLink));
+        }
+    }
+
+    /**
      * Show the deny info.
      * 
      * @param mixed $module     the module
@@ -157,6 +177,7 @@ class commonModel extends model
         if($module == 'api'  and $method == 'getsessionid') return true;
         if($module == 'misc'  and $method == 'ping') return true;
         if($module == 'block') return true;
+        if($module == 'error') return true;
         if($module == 'sso'  and strpos(',auth|check', $method)) return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;

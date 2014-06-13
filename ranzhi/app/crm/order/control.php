@@ -34,6 +34,7 @@ class order extends control
      */
     public function browse($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(99999988);
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
