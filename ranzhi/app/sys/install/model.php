@@ -387,6 +387,8 @@ EOT;
 
         $block = $config->requestType == 'GET' ? 'team/index.php?m=block&f=index' : 'team/block-index.html';
         $entry->block = $this->config->webRoot . $block;
+
+        $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
     }
 
     /**
