@@ -194,7 +194,7 @@ class upgradeModel extends model
         $entry->size     = 'max';
         $entry->position = 'default';
 
-        $block = $this->config->requestType == 'GET' ? 'cash/index.php?m=block&f=index' : 'cash/block-index.html';
+        $block = REQUESTTYPE == 'GET' ? 'cash/index.php?m=block&f=index' : 'cash/block-index.html';
         $entry->block = $this->config->webRoot . $block;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
@@ -223,7 +223,7 @@ class upgradeModel extends model
         $entry->size     = 'max';
         $entry->position = 'default';
 
-        $block = $this->config->requestType == 'GET' ? 'team/index.php?m=block&f=index' : 'team/block-index.html';
+        $block = REQUESTTYPE == 'GET' ? 'team/index.php?m=block&f=index' : 'team/block-index.html';
         $entry->block = $this->config->webRoot . $block;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
