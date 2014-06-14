@@ -10,6 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
+js::import($jsRoot  . 'kityminder/kitygraph.min.js'); 
 js::import($jsRoot  . 'kityminder/kityminder.all.min.js'); 
 css::import($jsRoot . 'kityminder/themes/default/kityminder.min.css');
 ?>
