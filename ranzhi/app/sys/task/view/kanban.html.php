@@ -13,7 +13,13 @@
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <i class='icon-list-alt'></i> <strong><?php echo $lang->task->kanban;?></strong>
+    <div class='panel-actions'>
+      <div class="btn-group">
+        <?php echo html::a($this->inlink('browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $lang->task->list, "class='btn'"); ?>
+        <?php echo html::a($this->inlink('kanban', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $lang->task->kanban, "class='btn active'"); ?>
+        <?php echo html::a($this->inlink('mind', "projectID=$projectID"), "<i class='icon-usecase icon'></i> " . $lang->task->mind, "class='btn'"); ?>
+      </div>
+    </div>
     <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?></div>
   </div>
   <div class='panel-body boards-container'>

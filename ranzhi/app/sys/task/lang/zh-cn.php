@@ -100,3 +100,4 @@ $lang->task->life      = '任务的一生';
 
 $lang->task->kanban = '看板';
 $lang->task->mind   = '脑图';
+$lang->task->list   = '列表';
