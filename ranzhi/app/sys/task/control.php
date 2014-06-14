@@ -325,11 +325,50 @@ class task extends control
         $this->send(array('result' => 'success', 'locate' => $link));
     }
 
+    /**
+     * View task as kanban 
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
     public function kanban($projectID = 0)
     {
-        $this->view->tasks = $this->task->getList($projectID);
+        /* Check project deleted. */
+        if($projectID)
+        {
+            $project = $this->loadModel('project')->getByID($projectID);
+            if($project->deleted) $this->locate($this->createLink('project'));
+        }
+
+        $this->view->moduleMenu = $this->project->getLeftMenus($projectID);
+        $this->view->tasks      = $this->task->getList($projectID);
         $this->view->title      = $this->lang->task->browse;
         $this->view->projectID  = $projectID;
+        $this->display();
+    }
+
+    /**
+     * View task as mind map 
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
+    public function mind($projectID = 0)
+    {
+        /* Check project deleted. */
+        if($projectID)
+        {
+            $project = $this->loadModel('project')->getByID($projectID);
+            if($project->deleted) $this->locate($this->createLink('project'));
+        }
+
+        $this->view->moduleMenu = $this->project->getLeftMenus($projectID );
+        $this->view->tasks       = $this->task->getList($projectID);
+        $this->view->title       = $this->lang->task->browse;
+        $this->view->projectID   = $projectID;
+        $this->view->project     =  $project;
         $this->display();
     }
 }
