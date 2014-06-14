@@ -1,26 +1,21 @@
 $(function()
 {
-    $('.boards').boards();
-    // var showActionsFuc = null;
+    $('.boards').boards(
+    {
+        drop: function(e)
+        {
+            var fromBoard = e.element.closest('.board'),
+                toBoard = e.target.closest('.board');
 
-    // $('.board-item').mouseenter(function(event)
-    // {
-    //     var $this = $(this);
-    //     showActionsFuc = setTimeout(function()
-    //     {
-    //         $this.find('.task-actions').slideDown();
-    //         showActionsFuc = null;
-    //     }, 1000);
-    // }).mouseleave(function(event)
-    // {
-    //     if(showActionsFuc!=null)
-    //     {
-    //         clearTimeout(showActionsFuc);
-    //         showActionsFuc = null;
-    //     }
-    //     else
-    //     {
-    //         $this.find('.task-actions').slideUp();
-    //     }
-    // });
+            if(fromBoard.data('id') != toBoard.data('id'))
+            {
+                messager.show('正在保存...');
+                
+                // get taskID
+                var taskID = e.element.data('id');
+                // get status to change
+                var newStatus = toBoard.data('id');
+            }
+        }
+    });
 });

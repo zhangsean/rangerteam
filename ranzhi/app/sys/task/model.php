@@ -327,7 +327,7 @@ class taskModel extends model
         $now     = helper::now();
         $task = fixer::input('post')
             ->setDefault('status', 'closed')
-            ->setDefault('assignedTo', 'closed')
+            ->setDefault('assignedTo', $oldTask->createdBy)
             ->setDefault('assignedDate', $now)
             ->setDefault('closedBy, editedBy', $this->app->user->account)
             ->setDefault('closedDate, editedDate', $now)

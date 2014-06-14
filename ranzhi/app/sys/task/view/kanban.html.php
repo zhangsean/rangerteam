@@ -12,22 +12,24 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <div class='panel'>
-  <div class='panel-heading'><i class='icon-list-alt'></i> <strong><?php echo $lang->task->kanban;?></strong></div>
+  <div class='panel-heading'>
+    <i class='icon-list-alt'></i> <strong><?php echo $lang->task->kanban;?></strong>
+    <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?></div>
+  </div>
   <div class='panel-body boards-container'>
     <div class='boards task-boards'>
     <?php $colsWidth = 100/(count($lang->task->statusList) - 1); ?>
     <?php foreach ($lang->task->statusList as $key => $value):?>
     <?php if(empty($key)) continue; ?>
-      <div class='board panel task-board' style="width: <?php echo $colsWidth;?>%">
+      <div class='board panel task-board'  data-id='<?php echo $key;?>' style="width: <?php echo $colsWidth;?>%">
         <div class='panel-heading'>
           <strong><?php echo $value?></strong>
-          <div class='panel-actions pull-right'><button class='btn'><i class='icon-plus'></i></button></div>
         </div>
         <div class='panel-body'>
           <div class='board-list'>
             <?php foreach($tasks as $task):?>
             <?php if($task->status != $key) continue;?>
-            <div class='board-item task task-pri-<?php echo $task->pri; ?>'>
+            <div class='board-item task task-pri-<?php echo $task->pri; ?>' data-id='<?php echo $task->id;?>'>
               <div class='task-heading'>
                 <?php if(!empty($task->type)):?>
                 <div class='pull-right text-muted task-type'><?php echo $lang->task->typeList[$task->type];?></div>
