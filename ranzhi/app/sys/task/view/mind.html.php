@@ -22,7 +22,7 @@
       </div>
       
     </div>
-    <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?></div>
+    <div class='panel-actions pull-right'><button id='saveBtn' type='button' class='btn btn-primary disabled' disabled='disabled'><i class="icon-save"></i> <span><?php echo $lang->save;?></span></button></div>
   </div>
   <div class='panel-body minds-container'>
     <div id="kityminder" onselectstart="return false"></div>
@@ -38,20 +38,21 @@ $(function()
             currentstyle : 'default',
             text : '<?php echo $project->name;?>',
             type : 'root',
-            expandState : 'expand'
+            expandState : 'expand',
+            id : '<?php echo $project->id;?>'
         },
         children:
         [
             <?php foreach ($lang->task->statusList as $key => $value):?>
             <?php if(empty($key)) continue;?>
             {
-                data: {text: '<?php echo $value;?>', type: 'main', expandState: 'expand'},
+                data: {text: '<?php echo $value;?>', type: 'main', expandState: 'expand', id: '<?php echo $key;?>'},
                 children:
                 [
                     <?php foreach($tasks as $task):?>
                     <?php if($task->status != $key) continue;?>
                     {
-                        data: {text: '<?php echo $task->name?>', type: 'sub', expandState: 'expand'}
+                        data: {text: '<?php echo $task->name?>', type: 'sub', expandState: 'expand', id: '<?php echo $task->id?>'}
                     },
                     <?php endforeach;?>
                 ]
@@ -60,7 +61,22 @@ $(function()
         ]
     };
 
-   minder.importData(JSON.stringify(data), 'json');
+    minder.importData(JSON.stringify(data), 'json');
+
+    $saveBtn = $('#saveBtn');
+
+    minder.on('contentchange', function()
+    {
+        $saveBtn.removeClass('disabled').removeAttr('disabled').find('span').text('<?php echo $lang->save;?>');
+    });
+
+    $saveBtn.click(function()
+    {
+        $saveBtn.addClass('disabled').attr('disabled', 'disabled');
+        var data = minder.exportData( 'json' );
+        // save json data...
+        $saveBtn.find('span').text('<?php echo $lang->saved?>');
+    });
 });
 </script>
 <?php include $app->getModuleRoot() . 'common/view/footer.html.php';?>

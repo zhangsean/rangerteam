@@ -83,6 +83,7 @@ $lang->close          = 'Close';
 $lang->finish         = 'Finish';
 $lang->cancel         = 'Cancel';
 $lang->save           = 'Save';
+$lang->saved          = 'Saved';
 $lang->confirm        = 'Confirm';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
