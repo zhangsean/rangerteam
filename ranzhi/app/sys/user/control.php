@@ -268,7 +268,7 @@ class user extends control
      */
     public function edit($account = '')
     {
-        if(!$account or RUN_MODE == 'front') $account = $this->app->user->account;
+        if(!$account or RUN_MODE != 'admin') $account = $this->app->user->account;
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
         if(empty($account)) $account = $this->app->user->account;
 
