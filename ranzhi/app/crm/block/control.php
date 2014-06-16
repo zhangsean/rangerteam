@@ -11,6 +11,18 @@
  */
 class block extends control
 {
+    public function __CONSTRUCT()
+    {
+        parent::__CONSTRUCT();
+       
+        /* Set user rights. */
+        $params = json_decode(base64_decode($this->get->param));
+        $user = $this->loadModel('user')->getByAccount($params->account);
+        $user->rights = $this->user->authorize($user);
+        $this->session->set('user', $user);
+        $this->app->user = $this->session->user;
+    }
+
     /**
      * Block Index Page.
      * 
