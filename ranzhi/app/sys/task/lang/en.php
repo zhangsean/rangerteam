@@ -98,4 +98,16 @@ $lang->task->reasonList['cancel'] = 'Canceled';
 $lang->task->basicInfo = 'Basic Info';
 $lang->task->life      = 'Task Life';
 
-$lang->task->kanban = 'Kanban';
+$lang->task->kanban  = 'Boards';
+$lang->task->mind    = 'Mind map';
+$lang->task->list    = 'List';
+$lang->task->outline = 'Outline';
+
+$lang->task->outlineGroup['']           = 'Choose group';
+$lang->task->outlineGroup['status']     = 'Group by status';
+$lang->task->outlineGroup['assignedto'] = 'Assigned To';
+$lang->task->outlineGroup['createdBy']  = 'Created By';
+$lang->task->outlineGroup['finishedby'] = 'Finished By';
+$lang->task->outlineGroup['closedby']   = 'Closed By';
+
+$lang->task->groupinfo = 'Total <strong>%s</strong> - <span class="text-danger">waitin <strong>%s</strong></span> - <span class="text-warning">doing <strong>%s</strong></span> - <span class="text-success">finished <strong>%s</strong></span> - <span class="text-muted">closed <strong>%s</strong></span>';

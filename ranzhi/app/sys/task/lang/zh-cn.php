@@ -98,6 +98,16 @@ $lang->task->reasonList['cancel'] = '已取消';
 $lang->task->basicInfo = '基本信息';
 $lang->task->life      = '任务的一生';
 
-$lang->task->kanban = '看板';
-$lang->task->mind   = '脑图';
-$lang->task->list   = '列表';
+$lang->task->kanban  = '看板';
+$lang->task->mind    = '脑图';
+$lang->task->list    = '列表';
+$lang->task->outline = '大纲';
+
+$lang->task->outlineGroup['']           = '选择分组';
+$lang->task->outlineGroup['status']     = '状态分组';
+$lang->task->outlineGroup['assignedto'] = '指派给分组';
+$lang->task->outlineGroup['createdBy']  = '创建者分组';
+$lang->task->outlineGroup['finishedby'] = '完成者分组';
+$lang->task->outlineGroup['closedby']   = '关闭者分组';
+
+$lang->task->groupinfo = '总计 <strong>%s</strong> 项 - <span class="text-danger">未开始 <strong>%s</strong></span> - <span class="text-warning">进行中 <strong>%s</strong></span> - <span class="text-success">已完成 <strong>%s</strong></span> - <span class="text-muted">已关闭 <strong>%s</strong></span>';

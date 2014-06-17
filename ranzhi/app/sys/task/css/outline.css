@@ -1,0 +1,30 @@
+.panel-body.outline-container {padding: 0;}
+.outline > .item {position: relative;}
+.outline > .item > .heading {cursor: pointer; background: #f1f1f1; border-bottom: 1px solid #ddd; padding: 6px 10px;}
+.outline > .item > .heading .icon-caret-down {display: inline-block; width: 10px;}
+.outline > .item > .heading.collapsed .icon-caret-down:before {content: '\e6bb';}
+.outline > .item > .content {padding: 0; padding-left: 40px; background: #f1f1f1; border-bottom: 1px solid #ddd}
+.outline > .item > .content > .item {border-bottom: 1px solid #ddd; padding: 6px 10px; border-left: 1px solid #ddd; background: #fff; transition: all .5s cubic-bezier(.175, .885, .32, 1); position: relative; max-width: 600px; border-right: 1px solid #ddd}
+.outline > .item > .content > .item:hover {background: #f9f9f9}
+.outline > .item > .content > .item:last-child {border-bottom: 0;}
+.outline > .item > .content > .item > .actions {position: absolute; right: 10px; top: 5px; opacity: 0; transition: all .5s .3s cubic-bezier(.175, .885, .32, 1); background: #f9f9f9; min-height: 24px}
+.outline > .item > .content > .item > .heading > .pull-right {margin-top: -1px;}
+.outline > .item > .content > .item > .heading .label {padding: 3px 6px; border-color: #ddd}
+.label.task-status-doing {color: #D2322D}
+.label.task-status-done {color: #229F24}
+.label.task-status-waiting {color: #E48600}
+.label.task-status-cancel {color: #333}
+
+.outline > .item > .content > .item:hover > .actions {opacity: 1}
+.outline > .item > .info {position: absolute; right: 10px; top: 6px;}
+
+.outline > .item > .content > .item.task {border-left: 0px solid #ccc; border-left-width: 4px\0; box-shadow: inset 4px 0 0 #ccc; padding-left: 14px; padding-left: 10px\0;}
+.outline > .item > .content > .item.task.task-pri-1 {border-left-color: #d2322d; box-shadow:inset 4px 0 0 #d2322d;}
+.outline > .item > .content > .item.task.task-pri-2 {border-left-color: #ea8400; box-shadow:inset 4px 0 0 #ea8400;}
+.outline > .item > .content > .item.task.task-pri-3 {border-left-color: #8521bf; box-shadow:inset 4px 0 0 #8521bf;}
+.outline > .item > .content > .item.task.task-pri-4 {border-left-color: #39b3d7; box-shadow:inset 4px 0 0 #39b3d7;}
+
+.task-infos {display: table;}
+.task-info {display: table-cell; padding-top: 3px;}
+
+.panel-actions.pull-right {margin-top: -2px;}
