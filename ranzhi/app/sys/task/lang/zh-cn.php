@@ -103,10 +103,14 @@ $lang->task->mind    = '脑图';
 $lang->task->list    = '列表';
 $lang->task->outline = '大纲';
 
+$lang->task->kanbanGroup['']           = '选择分组';
+$lang->task->kanbanGroup['status']     = '状态分组';
+$lang->task->kanbanGroup['assignedto'] = '指派给分组';
+
 $lang->task->outlineGroup['']           = '选择分组';
 $lang->task->outlineGroup['status']     = '状态分组';
 $lang->task->outlineGroup['assignedto'] = '指派给分组';
-$lang->task->outlineGroup['createdBy']  = '创建者分组';
+$lang->task->outlineGroup['createdby']  = '创建者分组';
 $lang->task->outlineGroup['finishedby'] = '完成者分组';
 $lang->task->outlineGroup['closedby']   = '关闭者分组';
 

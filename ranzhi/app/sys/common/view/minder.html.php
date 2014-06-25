@@ -17,6 +17,7 @@ css::import($jsRoot . 'kityminder/themes/default/kityminder.min.css');
 <script>
 $(function()
 {
-    window.minder = KM.getKityMinder('kityminder');
+    window.km = KM.getKityMinder('kityminder');
+    window.minder = km;
 });
 </script>

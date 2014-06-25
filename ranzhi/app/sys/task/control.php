@@ -408,7 +408,7 @@ class task extends control
             {
                 $groupTasks[$users[$task->assignedTo]][] = $task;
             }
-            elseif($groupBy == 'createdBy')
+            elseif($groupBy == 'createdby')
             {
                 $groupTasks[$users[$task->createdBy]][] = $task;
             }
