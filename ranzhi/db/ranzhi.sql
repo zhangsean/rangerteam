@@ -188,14 +188,6 @@ CREATE TABLE `crm_service` (
   `expire` date NOT NULL,
   UNIQUE KEY `customer` (`customer`,`product`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
--- DROP TABLE IF EXISTS `oa_block`;
-CREATE TABLE `oa_block` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `type` varchar(20) NOT NULL,
-  `title` varchar(60) NOT NULL,
-  `content` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_doc`;
 CREATE TABLE `oa_doc` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -346,6 +338,20 @@ CREATE TABLE `sys_action` (
   KEY `customer` (`customer`),
   KEY `contact` (`contact`),
   KEY `date` (`date`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sys_block`;
+CREATE TABLE `sys_block` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `account` char(30) NOT NULL,
+  `app` varchar(20) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `source` varchar(20) NOT NULL,
+  `block` varchar(20) NOT NULL,
+  `params` text NOT NULL,
+  `order` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `grid` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY account (`account`, `app`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_category`;
 CREATE TABLE `sys_category` (
