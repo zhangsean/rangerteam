@@ -186,7 +186,7 @@ class pager
      */
     public function setPageID($pageID)
     {
-        if($pageID > 0 and $pageID <= $this->pageTotal)
+        if($pageID > 0 and ($this->pageTotal == 0 or  $pageID <= $this->pageTotal))
         {
             $this->pageID = $pageID;
         }
