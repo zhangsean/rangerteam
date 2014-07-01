@@ -27,6 +27,7 @@ CREATE TABLE `crm_contact` (
   `site` varchar(100) NOT NULL,
   `mobile` char(11) NOT NULL DEFAULT '',
   `phone` char(20) NOT NULL DEFAULT '',
+  `fax` char(20) NOT NULL DEFAULT '',
   `weibo` char(50) NOT NULL,
   `weixin` char(50) NOT NULL,
   `desc` text NOT NULL,

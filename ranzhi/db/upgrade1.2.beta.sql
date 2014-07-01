@@ -12,4 +12,4 @@ CREATE TABLE `sys_block` (
   PRIMARY KEY (`id`),
   KEY account (`account`, `app`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
+ALTER TABEL crm_contact ADD fax char(20) NOT NULL;
