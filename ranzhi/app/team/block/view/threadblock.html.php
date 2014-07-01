@@ -10,7 +10,7 @@
  * @link        http://www.zentao.net
  */
 ?>
-<table class='table table-data table-hover table-fixed'>
+<table class='table table-data table-hover table-fixed block-thread'>
   <thead>
     <tr class='text-center'>
       <th class='w-180px'><?php echo $lang->thread->title;?></th>
@@ -22,8 +22,9 @@
   </thead>
   <tbody>
   <?php foreach($threads as $id => $thread):?>
-    <tr class='text-center'>
-      <td class='text-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?></td>
+    <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id={$this->get->entry}" : ''?>
+    <tr data-url='<?php echo $this->createLink('thread', 'view', "id=$thread->id"); ?>' <?php echo $appid?>>
+      <td class='text-left'><?php echo $thread->title;?></td>
       <td><?php echo $thread->authorRealname;?></td>
       <td><?php echo substr($thread->createdDate, 5, -3);?></td>
       <td><?php echo $thread->views;?></td>
@@ -32,4 +33,4 @@
   <?php endforeach;?>
   </tbody>
 </table>
-<script>$(function(){$.setAjaxModal();})</script>
+<script>$('.block-thread').dataTable();</script>

@@ -10,12 +10,13 @@
  * @link        http://www.zentao.net
  */
 ?>
-<table class='table table-data table-hover table-fixed' id='oaBlockAnnounce'>
+<table class='table table-data table-hover table-fixed block-blog' id='oaBlockAnnounce'>
   <?php foreach($blogs as $id => $blog):?>
-  <tr>
+  <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id={$this->get->entry}" : ''?>
+  <tr data-url='<?php echo $this->createLink('blog', 'view', "blogID=$id"); ?>' <?php echo $appid?>>
     <td class='w-60px'><?php echo substr($blog->createdDate, 5, 5)?></td>
-    <td><?php echo html::a($this->createLink('blog', 'view', "blogID=$id"), $blog->title)?></td>
+    <td><?php echo $blog->title;?></td>
   </tr>
   <?php endforeach;?>
 </table>
-<script>$(function(){$.setAjaxModal();})</script>
+<script>$('.block-blog').dataTable();</script>
