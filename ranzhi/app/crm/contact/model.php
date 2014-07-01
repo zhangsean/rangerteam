@@ -101,7 +101,7 @@ class contactModel extends model
      */
     public function getPairs($customer = 0, $emptyOption = true)
     {
-        $customerIdList = $this->loadModel('customer')->getMine();
+        $customerIdList = $this->loadModel('customer', 'crm')->getMine();
         if(empty($customerIdList)) return array();
 
         $contacts = $this->dao->select('t1.*')->from(TABLE_CONTACT)->alias('t1')
