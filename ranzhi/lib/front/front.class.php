@@ -730,7 +730,7 @@ EOT;
         $js  = self::start(false);
         if(!$viewOBJOut)
         {
-            $js .= 'var v = {};'; 
+            $js .= 'if(typeof(v) != "object") v = {};'; 
             $viewOBJOut = true;
         }
 
