@@ -26,6 +26,8 @@ class setting extends control
         $clientLang = $this->app->getClientLang();
         $appName    = $this->app->getAppName(); 
 
+        if($module == 'user' and $field == 'roleList') $this->lang->menuGroups->setting = 'user';
+
         if(!empty($_POST))
         {
             $lang = $_POST['lang'];

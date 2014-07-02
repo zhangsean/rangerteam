@@ -1,7 +1,8 @@
 $(document).ready(function()
 {
     /* set active left menu. */
-    var menu =  $('.leftmenu .nav li').size() == 0 ? '.nav li' : '.leftmenu .nav li';
+    var menu = $('.leftmenu .nav li').size() == 0 ? '.nav li' : '.leftmenu .nav li';
+    if(v.type == 'dept') menu = '';
     $(menu).removeClass('active');
     $(menu + " a[href*='tree'][href*='" + v.type + "']").parent().addClass('active');
 
