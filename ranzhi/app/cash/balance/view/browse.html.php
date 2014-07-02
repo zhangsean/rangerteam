@@ -33,7 +33,7 @@
       <?php foreach($balances as $balance):?>
       <tr>
         <td><?php echo $depositorList[$balance->depositor];?></td>
-        <td><?php echo formatTime($balance->date, 'Y-m-d');?></td>
+        <td><?php echo formatTime($balance->date, DT_DATE1);?></td>
         <td><?php echo zget($lang->depositor->currencyList, $balance->currency);?></td>
         <td><?php echo $balance->money;?></td>
         <td>

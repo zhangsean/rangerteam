@@ -49,7 +49,7 @@
         <td><?php echo zget($lang->depositor->currencyList, $trade->currency);?></td>
         <td><?php echo zget($categories, $trade->category);?></td>
         <td><?php echo zget($users, $trade->handlers);?></td>
-        <td><?php echo formatTime($trade->date, 'Y-m-d');?></td>
+        <td><?php echo formatTime($trade->date, DT_DATE1);?></td>
         <td class='text-left'><?php echo $trade->desc;?></td>
         <td>
           <?php echo html::a(inlink('edit', "tradeID={$trade->id}"), $lang->edit);?>
