@@ -47,6 +47,7 @@ $lang->contract->receive    = '回款';
 $lang->contract->cancel     = '取消合同';
 $lang->contract->view       = '合同详情';
 $lang->contract->finish     = '完成合同';
+$lang->contract->record     = '沟通';
 $lang->contract->delete     = '删除合同';
 $lang->contract->list       = '合同列表';
 $lang->contract->create     = '创建合同';

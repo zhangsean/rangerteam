@@ -47,6 +47,7 @@ $lang->contract->receive    = 'Receive';
 $lang->contract->cancel     = 'Cancel Contract';
 $lang->contract->view       = 'View Contract';
 $lang->contract->finish     = 'Finish Contract';
+$lang->contract->record     = 'Record';
 $lang->contract->delete     = 'Delete Contract';
 $lang->contract->list       = 'Contract List';
 $lang->contract->create     = 'Create Contract';
