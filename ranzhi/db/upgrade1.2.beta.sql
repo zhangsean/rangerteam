@@ -18,3 +18,12 @@ ADD `integration` tinyint(1) NOT NULL DEFAULT '1' AFTER `buildin`;
 ALTER TABLE `sys_entry` ADD `abbr` char(2) COLLATE 'utf8_general_ci' NOT NULL AFTER `name`;
 
 ALTER TABEL crm_contact ADD fax char(20) NOT NULL;
+
+ALTER TABLE crm_contract CHANGE `amount` `amount` decimal(12,2) NOT NULL;
+ALTER TABLE crm_order    CHANGE `plan``plan` decimal(12,2) NOT NULL;
+ALTER TABLE crm_order    CHNAGE `real` `real` decimal(12,2) NOT NULL;
+ALTER TABLE cash_trade   CHANGE `money` `money` decimal(12,2) NOT NULL;
+ALTER TABLE cash_balance CHANGE `money` `money` decimal(12,2) NOT NULL;
+ALTER TABLE sys_task     CHANGE `estimate` `estimate` decimal(12,2) NOT NULL;
+ALTER TABLE sys_task     CHANGE `consumed` `consumed` decimal(12,2) NOT NULL;
+ALTER TABLE sys_task     CHANGE `left` `left` decimal(12,2) NOT NULL;
