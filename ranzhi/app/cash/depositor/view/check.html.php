@@ -46,8 +46,10 @@
         </thead>
         <tbody>
           <?php foreach($results as $depositorID => $result):?>
-          <?php $class = $result->computed == $result->actual ? '' : 'text-error';?>
-          <?php $diff  = $result->computed - $result->actual;?>
+          <?php $class = bccomp($result->computed, $result->actual, 2) === -1 ? 'text-error' : ''; ?>
+          <?php $diff  = bcsub($result->computed, $result->actual, 2);
+        
+            ?>
           <tr class='<?php echo $class;?>'>
             <td><?php echo zget($depositorList, $depositorID); ?></td>
             <td><?php echo zget($lang->depositor->currencyList, $result->currency); ?></td>
