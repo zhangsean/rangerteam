@@ -12,4 +12,9 @@ CREATE TABLE `sys_block` (
   PRIMARY KEY (`id`),
   KEY account (`account`, `app`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `sys_entry` ADD `buildin` tinyint(1) NOT NULL DEFAULT '0' AFTER `code`,
+ADD `integration` tinyint(1) NOT NULL DEFAULT '1' AFTER `buildin`;
+ALTER TABLE `sys_entry` ADD `abbr` char(2) COLLATE 'utf8_general_ci' NOT NULL AFTER `name`;
+
 ALTER TABEL crm_contact ADD fax char(20) NOT NULL;
