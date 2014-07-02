@@ -298,8 +298,9 @@ class orderModel extends model
         $order = fixer::input('post')
             ->add('activatedDate', helper::now())
             ->add('activatedBy', $this->app->user->account)
-            ->add('closedBy', '')
-            ->add('closedReason', '')
+            ->setDefault('closedBy,closedReason,signedBy', '')
+            ->setDefault('signedDate', '0000-00-00')
+            ->setDefault('closedDate', '0000-00-00 00:00:00')
             ->setDefault('status', 'normal')
             ->get();
 
