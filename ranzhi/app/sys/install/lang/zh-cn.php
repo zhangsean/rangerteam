@@ -92,3 +92,13 @@ $lang->install->errorEmptyPassword = '密码不能为空';
 $lang->install->success    = "安装成功！";
 $lang->install->visitFront = '登录前台';
 $lang->install->visitAdmin = '登录后台';
+
+$lang->install->buildinEntry = new stdclass();
+$lang->install->buildinEntry->crm['name']  = ' 客户管理';
+$lang->install->buildinEntry->crm['abbr']  = ' 客户';
+$lang->install->buildinEntry->cash['name'] = ' 记账管理';
+$lang->install->buildinEntry->cash['abbr'] = ' 记账';
+$lang->install->buildinEntry->oa['name']   = ' 日常办公';
+$lang->install->buildinEntry->oa['abbr']   = ' 办公';
+$lang->install->buildinEntry->team['name'] = ' 团队';
+$lang->install->buildinEntry->team['abbr'] = ' 团队';

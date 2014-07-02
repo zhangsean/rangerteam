@@ -338,7 +338,8 @@ EOT;
         /* Add new entry. */
         /* Add crm. */
         $entry = new stdclass();
-        $entry->name     = 'crm';
+        $entry->name     = $this->lang->install->buildinEntry->crm['name'];
+        $entry->abbr     = $this->lang->install->buildinEntry->crm['abbr'];
         $entry->code     = 'crm';
         $entry->open     = 'iframe';
         $entry->key      = 'epet8b8ae1g89rxzquf4ubv37ul5tite';
@@ -349,44 +350,38 @@ EOT;
         $entry->size     = 'max';
         $entry->position = 'default';
 
-        $block = $config->requestType == 'GET' ? 'crm/index.php?m=block&f=index' : 'crm/block-index.html';
-        $entry->block = $this->config->webRoot . $block;
+        $entry->buildin     = 1;
+        $entry->integration = 1;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
 
         /* Add cash. */
-        $entry->name  = 'cash';
+        $entry->name  = $this->lang->install->buildinEntry->cash['name'];
+        $entry->abbr  = $this->lang->install->buildinEntry->cash['abbr'];
         $entry->code  = 'cash';
         $entry->key   = '438d85f2c2b04372662c63ebfb1c4c2f';
         $entry->logo  = $this->config->webRoot . 'theme/default/images/ips/app-cash.png';
         $entry->login = '../cash';
 
-        $block = $config->requestType == 'GET' ? 'cash/index.php?m=block&f=index' : 'cash/block-index.html';
-        $entry->block = $this->config->webRoot . $block;
-
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
 
         /* Add oa. */
-        $entry->name  = 'oa';
+        $entry->name  = $this->lang->install->buildinEntry->oa['name'];
+        $entry->abbr  = $this->lang->install->buildinEntry->oa['abbr'];
         $entry->code  = 'oa';
         $entry->key   = '1a673c4c3c85fadcf0333e0a4596d220';
         $entry->logo  = $this->config->webRoot . 'theme/default/images/ips/app-oa.png';
         $entry->login = '../oa';
 
-        $block = $config->requestType == 'GET' ? 'oa/index.php?m=block&f=index' : 'oa/block-index.html';
-        $entry->block = $this->config->webRoot . $block;
-
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
 
         /* Add team. */
-        $entry->name  = 'team';
+        $entry->name  = $this->lang->install->buildinEntry->team['name'];
+        $entry->abbr  = $this->lang->install->buildinEntry->team['abbr'];
         $entry->code  = 'team';
         $entry->key   = '6c46d9fe76a1afa1cd61f946f1072d1e';
         $entry->logo  = $this->config->webRoot . 'theme/default/images/ips/app-team.png';
         $entry->login = '../team';
-
-        $block = $config->requestType == 'GET' ? 'team/index.php?m=block&f=index' : 'team/block-index.html';
-        $entry->block = $this->config->webRoot . $block;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
     }

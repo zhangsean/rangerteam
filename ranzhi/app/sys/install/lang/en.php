@@ -92,3 +92,13 @@ $lang->install->errorEmptyPassword = "Can't be empty";
 $lang->install->success    = "Success installed";
 $lang->install->visitFront = 'Visit front';
 $lang->install->visitAdmin = 'Visit admin';
+
+$lang->install->buildinEntry = new stdclass();
+$lang->install->buildinEntry->crm['name']  = 'CRM';
+$lang->install->buildinEntry->crm['abbr']  = '';
+$lang->install->buildinEntry->cash['name'] = 'CASH';
+$lang->install->buildinEntry->cash['abbr'] = '';
+$lang->install->buildinEntry->oa['name']   = 'OA';
+$lang->install->buildinEntry->oa['abbr']   = 'OA';
+$lang->install->buildinEntry->team['name'] = 'TEAM';
+$lang->install->buildinEntry->team['abbr'] = '';
