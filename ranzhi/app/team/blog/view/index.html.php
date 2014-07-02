@@ -34,7 +34,9 @@ if(!empty($category->id)) js::set('categoryID', $category->id );
         <?php endif;?>
       </div>
       <div class="card-actions text-muted">
-        <span data-toggle='tooltip' title='<?php printf($lang->article->lblAddedDate, formatTime($article->createdDate));?>'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($article->createdDate));?></span>
+        <span data-toggle='tooltip' title='<?php printf($lang->article->lblAddedDate, formatTime($article->createdDate));?>'>
+        <i class="icon-time"></i> <?php echo formatTime($article->createdDate, DT_DATE1);?>
+        </span>
         &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class="icon-user"></i> <?php echo $article->author;?></span>
         &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $article->views);?>'><i class="icon-eye-open"></i> <?php echo $article->views;?></span>
         <span class='pull-right'>
