@@ -25,7 +25,6 @@
     </ul>
   </div>
   <div class='col-md-10'>
-    <?php $common->printPositionBar($board, $thread);?>
     <div class='panel'>
       <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->reply->edit;?></strong></div>
       <div class='panel-body'>

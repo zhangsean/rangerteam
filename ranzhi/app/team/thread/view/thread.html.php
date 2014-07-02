@@ -4,7 +4,7 @@
     <div class='panel-actions'>
       <?php if($thread->readonly) echo "<span class='label'><i class='icon-lock'></i> " . $lang->thread->readonly . "</span> &nbsp;"; ?>
     </div>
-    <strong><?php echo $thread->title; ?></strong>
+    <strong><?php $common->printForum($board, $thread);?></strong>
     <div class='text-muted'><?php echo $thread->createdDate;?></div>
   </div>
   <div>

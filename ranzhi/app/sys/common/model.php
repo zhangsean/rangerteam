@@ -650,14 +650,17 @@ class commonModel extends model
     }
 
     /**
-     * Print the position bar of forum module.
+     * Print the position bar of thread module.
      * 
      * @param   object $board 
+     * @param   object $thread 
      * @access  public
      * @return  void
      */
-    public function printForum($board = '')
+    public function printForum($board, $thread = '')
     {
+        echo '<ul class="breadcrumb">';
+        echo '<li>' . html::a(helper::createLink('index'), strtoupper($this->app->appName)) . '</li>';
         $divider = $this->lang->divider;
         echo '<li>' . html::a(helper::createLink('forum', 'index'), $this->lang->forumHome) . '</li>';
         if(!$board) return false;
@@ -667,20 +670,8 @@ class commonModel extends model
         {
             echo '<li>' . html::a(helper::createLink('forum', 'board', "boardID={$boardID}"), $boardName) . '</li>';
         }
-    }
-
-    /**
-     * Print the position bar of thread module.
-     * 
-     * @param   object $board 
-     * @param   object $thread 
-     * @access  public
-     * @return  void
-     */
-    public function printThread($board, $thread = '')
-    {
-        $this->printForum($board);
         if($thread) echo '<li>' . $thread->title . '</li>';
+        echo '</ul>';
     }
 
     /**

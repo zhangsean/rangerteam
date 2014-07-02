@@ -16,9 +16,8 @@
 <div class='row'>
   <?php include './side.html.php';?>
   <div class='col-md-10'>
-    <?php $common->printPositionBar($board, $thread);?>
     <div class="panel">
-      <div class="panel-heading"><strong><i class="icon-edit"></i> <?php echo $lang->thread->edit . $lang->colon . $thread->title;?></strong></div>
+      <div class="panel-heading"><strong><i class="icon-edit"></i> <?php echo $lang->thread->edit . $lang->colon; $common->printForum($board, $thread);?></strong></div>
       <div class="panel-body">
         <form method='post' class='form-horizontal' id='ajaxForm' enctype='multipart/form-data'>
           <div class='form-group'>
