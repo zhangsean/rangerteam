@@ -20,16 +20,20 @@
     <table class='table table-striped'>
       <tbody>
         <tr>
-          <?php $count = count($parentBoard);?>
           <?php $i = 0;?>
           <?php foreach($parentBoard->children as $childBoard):?>
+          <?php $count = count($parentBoard->children);?>
+          <?php if($count == 1) $width = '100%';?> 
+          <?php if($count == 2) $width = '50%';?> 
+          <?php if($count > 2)  $width = '33%';?> 
           <?php $i++;?>
-          <td class='border' width='33%'>
+          <td class='border' width="<?php echo $width;?>">
             <table class='board'>
               <tbody>
                 <tr class='board'>
                   <td>
-                    <?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name);?>
+                    <?php echo $this->forum->isNew($childBoard) ? "<span class='text-success'><i class='icon-comment'></i></span>" : "<span class='text-muted'><i class='icon-comment'></i></span>"; ?>
+                    <?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name, "class='name'");?>
                     <?php if($childBoard->moderators[0]) printf(" &nbsp;<span class='moderators hidden-xxs'>" . $lang->forum->lblOwner . '</span>', trim(implode(',', $childBoard->moderators), ','));?>
                     <?php echo '(' . $lang->forum->threadCount . $lang->colon . $childBoard->threads . ' ' . $lang->forum->postCount . $lang->colon . $childBoard->posts . ')';?>
                   </td>
@@ -56,11 +60,11 @@
               </tbody>
             </table>
           </td>
-          <?php if(($i % 3) == 0) echo $i == $count ? "</tr>" : "</tr><tr>";?>
+          <?php if(($i % 3) == 0) echo $i == $count ? "" : "</tr><tr>";?>
           <?php endforeach;?>
           <?php 
-            if(($i % 3) == 1) echo "<td class='border'></td><td class='border'></td></tr>"; 
-            if(($i % 3) == 2) echo "<td class='border'></td></tr>";
+            if(($i % 3) == 1) echo $count == 1 ? "" : "<td class='border'></td><td class='border'></td>"; 
+            if(($i % 3) == 2) echo $count == 2 ? "" : "<td class='border'></td>";
           ?>
         </tr>
       </tbody>
