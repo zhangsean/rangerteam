@@ -57,7 +57,7 @@ CREATE TABLE `crm_contract` (
   `end` date NOT NULL,
   `delivery` char(30) NOT NULL,
   `return` char(30) NOT NULL,
-  `status` char(30) NOT NULL,
+  `status` enum('normal', 'closed', 'canceled') NOT NULL DEFAULT 'normal';
   `contact` mediumint(8) unsigned NOT NULL,
   `handlers` varchar(255) NOT NULL,
   `signedBy` char(30) NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE `crm_customer` (
   `size` tinyint(3) unsigned NOT NULL,
   `industry` mediumint(8) unsigned NOT NULL,
   `area` mediumint(8) unsigned NOT NULL,
-  `status` char(30) NOT NULL,
+  `status` enum('', 'potential', 'intension', 'payed', 'failed') NOT NULL default '',
   `level` char(10) NOT NULL,
   `intension` text NOT NULL,
   `site` varchar(100) NOT NULL,
@@ -134,7 +134,7 @@ CREATE TABLE `crm_order` (
   `customer` mediumint(8) unsigned NOT NULL,
   `plan` decimal(12,2) NOT NULL,
   `real` decimal(12,2) NOT NULL,
-  `status` char(50) NOT NULL,
+  `status` enum('normal', 'signed', 'closed') NOT NULL DEFAULT 'normal';
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `assignedTo` char(30) NOT NULL,
