@@ -36,7 +36,7 @@
           <th class='w-70px'><?php echo $lang->contact->customer;?></th>
           <td>
             <?php
-            if(isset($customers[$contact->customer])) echo $customers[$contact->customer];
+            if(isset($customers[$contact->customer])) echo html::a($this->createLink('customer', 'view', "customerID={$contact->customer}"), $customers[$contact->customer]);
             if($contact->maker) echo " ({$lang->resume->maker})";
             ?>
           </td>

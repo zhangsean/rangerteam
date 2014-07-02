@@ -91,7 +91,7 @@
           </tr>
         </thead>
         <?php foreach($contracts as $contract):?>
-        <tr>
+        <tr data-url='<?php echo $this->createLink('contract', 'view', "contractID=$contract->id"); ?>'>
           <td><?php echo $contract->name;?></td>
           <td><?php echo $contract->amount;?></td>
           <td><?php echo $lang->contract->statusList[$contract->status];?></td>
@@ -111,7 +111,7 @@
           </tr>
         </thead>
         <?php foreach($orders as $order):?>
-        <tr>
+        <tr data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id"); ?>'>
           <td><?php echo $products[$order->product];?></td>
           <td><?php echo $order->plan;?></td>
           <td><?php echo $order->real;?></td>

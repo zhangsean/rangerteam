@@ -38,13 +38,13 @@
       <table class='table table-info'>
         <tr>
           <th class='w-80px'><?php echo $lang->contract->customer;?></th>
-          <td><?php echo zget($customers, $contract->customer);?></td>
+          <td><?php echo html::a($this->createLink('customer', 'view', "customerID={$contract->customer}"), zget($customers, $contract->customer));?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->order;?></th>
           <td>
             <?php foreach($orders as $order):?>
-            <div><?php echo $order->title;?></div>
+            <div><?php echo html::a($this->createLink('order', 'view', "orderID={$order->id}"), $order->title);?></div>
             <?php endforeach;?>
           </td>
         </tr>
@@ -66,7 +66,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->contract->contact;?></th>
-          <td><?php if(isset($contacts[$contract->contact])) echo $contacts[$contract->contact];?></td>
+          <td><?php if(isset($contacts[$contract->contact])) echo html::a($this->createLink('contact', 'view', "contactID={$contract->contact}"), $contacts[$contract->contact]);?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->begin;?></th>
