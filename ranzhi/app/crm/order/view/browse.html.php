@@ -41,7 +41,10 @@
         <td><?php echo $order->productName;?></td>
         <td><?php echo $order->plan;?></td>
         <td><?php if(isset($users[$order->assignedTo])) echo $users[$order->assignedTo];?></td>
-        <td><?php echo isset($lang->order->statusList[$order->status]) ? $lang->order->statusList[$order->status] : $order->status;?></td>
+        <td>
+          <?php if($order->status != 'closed') echo isset($lang->order->statusList[$order->status]) ? $lang->order->statusList[$order->status] : $order->status;?>
+          <?php if($order->status == 'closed') echo $lang->order->closedReasonList[$order->closedReason];?>
+        </td>
         <td><?php echo substr($order->contactedDate, 0, 10);?></td>
         <td><?php echo $order->nextDate;?></td>
         <td class='actions'><?php echo $this->order->buildOperateMenu($order); ?></td>
