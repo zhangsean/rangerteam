@@ -46,7 +46,7 @@
       <table class='table table-info'>
         <tr>
           <th class='w-80px'><?php echo $lang->order->customer;?></th>
-          <td><?php echo $customer->name . $lang->customer->levelList[$customer->level];?></td>
+          <td><?php echo html::a($this->createLink('customer', 'view', "customerID={$customer->id}"), $customer->name) . $lang->customer->levelList[$customer->level];?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->product;?></th>
