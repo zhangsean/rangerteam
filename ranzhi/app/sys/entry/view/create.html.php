@@ -101,7 +101,7 @@ include '../../common/view/header.admin.html.php';
           <td><?php echo html::select('position', $lang->entry->positionList, '', "class='form-control'");?></td>
         </tr>
         <tr>
-          <td></td><td><?php echo html::submitButton() . html::backButton();?></td>
+          <th></th><td><?php echo html::submitButton() . html::backButton();?></td>
         </tr>
       </table>
     </form>

@@ -68,7 +68,7 @@
         <td><?php echo $this->fetch('file', 'buildform', 'fileCount=2');?></td>
       </tr>  
       <tr>
-        <td></td>
+        <th></th>
         <td><?php echo html::submitButton() . html::backButton() . html::hidden('lib', $libID);?></td>
       </tr>
     </table>

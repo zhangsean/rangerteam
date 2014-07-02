@@ -62,7 +62,7 @@ include "../../common/view/chosen.html.php";
       <?php endforeach;?>
     </tbody>
     <tfoot>
-      <tr><td></td><td><?php echo html::submitButton()?></td></tr>
+      <tr><th></th><td><?php echo html::submitButton()?></td></tr>
     </tfoot>
   </table>
 </form>

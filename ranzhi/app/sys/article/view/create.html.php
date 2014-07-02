@@ -37,7 +37,7 @@
           <td colspan='2'><?php echo html::textarea('content', '', "rows='20' class='form-control'");?></td>
         </tr>
         <tr>
-          <td></td>
+          <th></th>
           <td colspan='2'><?php echo html::submitButton() . html::commonButton($lang->article->createDraft, "btn btn-default draft") . html::hidden('type', $type);?></td>
         </tr>
       </table>

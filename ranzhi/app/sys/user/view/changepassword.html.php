@@ -31,7 +31,7 @@
             <th><?php echo $lang->user->password2;?></th>
             <td><?php echo html::password('password2', '', "class='form-control'");?></td><td></td>
           </tr>  
-          <tr><td></td><td><?php echo html::submitButton();?></td></tr>
+          <tr><th></th><td><?php echo html::submitButton();?></td></tr>
         </table>
       </form>
     </div>
