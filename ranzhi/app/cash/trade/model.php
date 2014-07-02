@@ -66,6 +66,7 @@ class tradeModel extends model
             ->add('editedDate', $now)
             ->add('handlers', trim(join(',', $this->post->handlers), ','))
             ->setIf($this->post->type == 'in', 'contract', '')
+            ->setIf($this->post->createTrader, 'trader', 0)
             ->setIf($this->post->type == 'in', 'order', '')
             ->setIf(!$this->post->objectType or !in_array('order', $this->post->objectType), 'order', 0)
             ->setIf(!$this->post->objectType or !in_array('contract', $this->post->objectType), 'contract', 0)
@@ -155,10 +156,10 @@ class tradeModel extends model
      */
     public function update($tradeID)
     {
-        $oldDepositor = $this->getByID($tradeID);
+        $oldTrade = $this->getByID($tradeID);
 
         $trade = fixer::input('post')
-            ->add('type', $oldDepositor->type)
+            ->add('type', $oldTrade->type)
             ->setIf(!$this->post->objectType or !in_array('order', $this->post->objectType),    'order', 0)
             ->setIf(!$this->post->objectType or !in_array('contract', $this->post->objectType), 'contract', 0)
             ->add('handlers', trim(join(',', $this->post->handlers), ','))
@@ -178,7 +179,7 @@ class tradeModel extends model
             ->checkIF(!$this->post->createTrader, 'trader', 'notempty')
             ->where('id')->eq($tradeID)->exec();
 
-        if($this->post->createTrader and $type == 'out')
+        if($this->post->createTrader and $trade->type == 'out')
         {
             $trader = new stdclass();
             $trader->relation = 'provider';
@@ -190,7 +191,7 @@ class tradeModel extends model
             $this->dao->update(TABLE_TRADE)->set('trader')->eq($trader)->where('id')->eq($tradeID)->exec();
         }
 
-        if(!dao::isError()) return commonModel::createChanges($oldDepositor, $trade);
+        if(!dao::isError()) return commonModel::createChanges($oldTrade, $trade);
 
         return false;
     }
