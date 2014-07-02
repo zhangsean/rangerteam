@@ -20,6 +20,7 @@
   <div class='page-actions'>
     <?php
     echo html::a($this->createLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}"), $lang->contact->record, "data-toggle='modal' class='btn'");
+    echo html::a($this->createLink('address', 'browse', "objectType=contact&objectID=$contact->id"), $lang->contact->address, "data-toggle='modal' class='btn'");
     echo html::a(inlink('edit', "contactID=$contact->id"), $lang->edit, "class='btn'");
     echo html::a(inlink('delete', "contactID=$contact->id"), $lang->delete, "class='deleter btn'");
     echo html::a(inlink('browse'), $lang->goback, "class='btn'");
