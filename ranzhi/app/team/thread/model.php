@@ -450,9 +450,10 @@ EOT;
      */
     public function setEditor($boardID, $page)
     {
+        $moduleName = $this->app->getModuleName();
         if($this->canManage($boardID))
         {
-            $this->config->thread->editor->{$page}['tools'] = 'full';
+            $this->config->{$moduleName}->editor->{$page}['tools'] = 'full';
         }
     }
 

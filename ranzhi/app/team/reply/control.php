@@ -69,6 +69,8 @@ class reply extends control
         $thread = $this->loadModel('thread')->getByID($reply->thread);
         if(!$this->thread->canManage($thread->board, $reply->author)) die(js::locate('back'));
         
+        $this->thread->setEditor($thread->board, 'edit');
+        
         if($_POST)
         {
             $this->reply->update($replyID);
