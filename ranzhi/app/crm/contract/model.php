@@ -63,7 +63,7 @@ class contractModel extends model
     {
         return $this->dao->select('id, name')->from(TABLE_CONTRACT)
             ->where(1)
-            ->beginIF($customerID)->where('customer')->eq($customerID)->fi()
+            ->beginIF($customerID)->andWhere('customer')->eq($customerID)->fi()
             ->andWhere('deleted')->eq(0)
             ->fetchPairs('id', 'name');
     }
