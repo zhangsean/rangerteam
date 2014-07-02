@@ -20,8 +20,29 @@ include '../../common/view/header.admin.html.php';
       <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->entry->name;?></th>
-          <td class='w-p60'><?php echo html::input('name', '', "class='form-control' placeholder='{$lang->entry->note->name}'");?></td>
-          <td><?php echo "<input type='checkbox' name='visible' value='1'>{$lang->entry->note->visible}";?></td>
+          <td colspan='2'>
+            <div class='input-group'>
+              <?php echo html::input('name', '', "class='form-control' placeholder='{$lang->entry->note->name}'");?>
+              <span class="input-group-addon fix-border fix-padding"></span>
+                <?php echo html::input('abbr', '', "class='form-control' size='2' maxlength='2' placeholder='{$lang->entry->note->abbr}'");?>
+              <span class="input-group-addon fix-border fix-padding">
+                <input type='checkbox' id='visible' name='visible' value='1'><label for='visible'><?php echo $lang->entry->note->visible;?></label>
+              </span>
+              <span class="input-group-addon fix-padding"></span>
+              <span class="input-group-addon fix-border fix-padding">
+                <input type='checkbox' id='buildin' name='buildin' value='1'><label for='buildin'><?php echo $lang->entry->buildin;?></label>
+              </span>
+              <span class="input-group-addon fix-padding"></span>
+              <span class="input-group-addon fix-border fix-padding">
+                <input type='checkbox' id='integration' checked name='integration' value='1'><label for='integration'><?php echo $lang->entry->integration;?></label>
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->logo;?></th>
+          <td class='w-p40'><?php echo html::file('files', "class='form-control'");?></td>
+          <td><?php echo $lang->entry->note->logo;?></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->code;?></th>
@@ -50,7 +71,14 @@ include '../../common/view/header.admin.html.php';
         </tr>
         <tr>
           <th><?php echo $lang->entry->ip;?></th>
-          <td><?php echo html::input('ip', '', "class='form-control' placeholder='{$lang->entry->note->ip}'");?></td>
+          <td>
+            <div class='input-group'>
+              <?php echo html::input('ip', '', "class='form-control' placeholder='{$lang->entry->note->ip}'");?>
+              <span class="input-group-addon fix-padding">
+                <?php echo "<input type='checkbox' id='allip' name='allip' value='1'><label for='allip'>{$lang->entry->note->allip}";?></label>
+              </span>
+            </div>
+          </td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->control;?></th>
@@ -71,10 +99,6 @@ include '../../common/view/header.admin.html.php';
         <tr>
           <th><?php echo $lang->entry->position;?></th>
           <td><?php echo html::select('position', $lang->entry->positionList, '', "class='form-control'");?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->entry->logo;?></th>
-          <td><?php echo html::file('files', "class='form-control'");?></td>
         </tr>
         <tr>
           <td></td><td><?php echo html::submitButton() . html::backButton();?></td>

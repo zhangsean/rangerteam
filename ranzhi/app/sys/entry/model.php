@@ -55,7 +55,14 @@ class entryModel extends model
      */
     public function create()
     {
-        $entry = fixer::input('post')->setDefault('ip', '*')->get();
+        $entry = fixer::input('post')
+            ->setDefault('ip', '*')
+            ->setDefault('visible', 0)
+            ->setDefault('buildin', 0)
+            ->setDefault('integration', 0)
+            ->setIF($this->post->allip, 'ip', '*')
+            ->remove('allip')
+            ->get();
         if($entry->size == 'custom') $entry->size = helper::jsonEncode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
 
         $this->dao->insert(TABLE_ENTRY)
@@ -83,7 +90,14 @@ class entryModel extends model
     {
         $oldEntry = $this->getByCode($code);
 
-        $entry = fixer::input('post')->setDefault('ip', '*')->get();
+        $entry = fixer::input('post')
+            ->setDefault('ip', '*')
+            ->setDefault('visible', 0)
+            ->setDefault('buildin', 0)
+            ->setDefault('integration', 0)
+            ->setIF($this->post->allip, 'ip', '*')
+            ->remove('allip')
+            ->get();
         if($entry->size == 'custom') $entry->size = helper::jsonEncode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
         if(!isset($entry->visible)) $entry->visible = 0;
         unset($entry->logo);

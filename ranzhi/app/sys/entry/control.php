@@ -36,6 +36,8 @@ class entry extends control
     {
         if(!empty($_POST))
         {
+            if(!$this->post->buildin and !preg_match('/https?\:\/\//Ui', $this->post->login)) $this->send(array('result' => 'fail', 'message' => $this->lang->entry->error->url));
+
             $entryID = $this->entry->create();
             $this->entry->updateLogo($entryID);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
@@ -112,6 +114,8 @@ class entry extends control
     {
         if(!empty($_POST))
         {
+            if(!$this->post->buildin and !preg_match('/https?\:\/\//Ui', $this->post->login)) $this->send(array('result' => 'fail', 'message' => $this->lang->entry->error->url));
+
             $entryID = $this->entry->update($code);
             $this->entry->updateLogo($entryID);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));

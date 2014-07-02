@@ -31,12 +31,15 @@ include '../../common/view/header.admin.html.php';
       <tr class='text-left'>
         <td><?php echo "<img src='$entry->logo' class='small-icon'>" . $entry->name?></td>
         <td><?php echo $entry->code?></td>
-        <td><?php echo $entry->key?></td>
+        <td><?php if($entry->integration) echo $entry->key?></td>
         <td class='text-center'><?php echo $entry->ip?></td>
         <td class='text-center'>
           <?php
-          echo html::a($this->createLink('entry', 'edit',   "code=$entry->code"), $lang->edit);
-          echo html::a($this->createLink('entry', 'delete', "code=$entry->code"), $lang->delete, 'class="deleter"');
+          if(!$entry->buildin)
+          {
+              echo html::a($this->createLink('entry', 'edit',   "code=$entry->code"), $lang->edit);
+              echo html::a($this->createLink('entry', 'delete', "code=$entry->code"), $lang->delete, 'class="deleter"');
+          }
           ?>
         </td>
       </tr>
