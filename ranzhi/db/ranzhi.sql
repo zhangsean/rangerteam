@@ -101,7 +101,7 @@ CREATE TABLE `crm_customer` (
   `size` tinyint(3) unsigned NOT NULL,
   `industry` mediumint(8) unsigned NOT NULL,
   `area` mediumint(8) unsigned NOT NULL,
-  `status` enum('', 'potential', 'intension', 'payed', 'failed') NOT NULL default '',
+  `status` enum('potential', 'intension', 'payed', 'failed') NOT NULL default 'potential',
   `level` char(10) NOT NULL,
   `intension` text NOT NULL,
   `site` varchar(100) NOT NULL,

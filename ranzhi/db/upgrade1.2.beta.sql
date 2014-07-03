@@ -28,6 +28,8 @@ ALTER TABLE sys_task     CHANGE `estimate` `estimate` decimal(12,2) NOT NULL;
 ALTER TABLE sys_task     CHANGE `consumed` `consumed` decimal(12,2) NOT NULL;
 ALTER TABLE sys_task     CHANGE `left` `left` decimal(12,2) NOT NULL;
 
+ALTER TABLE crm_contact    ADD `nextDate` date NOT NULL AFTER contactedDate;
+
 ALTER TABLE `crm_order` CHANGE `status` `status` enum('normal', 'signed', 'closed') NOT NULL DEFAULT 'normal';
-ALTER TABLE `crm_customer` CHANGE `status` `status` enum('', 'potential', 'intension', 'payed', 'failed') NOT NULL DEFAULT '';
+ALTER TABLE `crm_customer` CHANGE `status` `status` enum('potential', 'intension', 'payed', 'failed') NOT NULL DEFAULT 'potential';
 ALTER TABLE `crm_contract` CHANGE `status` `status` enum('normal', 'closed', 'canceled') NOT NULL DEFAULT 'normal';
