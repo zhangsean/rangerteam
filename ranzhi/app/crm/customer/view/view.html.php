@@ -46,7 +46,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->customer->status;?></th>
-            <td><?php echo $lang->customer->statusList[$customer->status];?></td>
+            <td><?php if($customer->status) echo $lang->customer->statusList[$customer->status];?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->size;?></th>

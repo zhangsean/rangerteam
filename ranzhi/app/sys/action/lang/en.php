@@ -60,6 +60,7 @@ $lang->action->desc->diff2         = 'changed <strong><i>%s</i></strong>, the di
 $lang->action->desc->diff3         = "changed file's name %s to %s.";
 $lang->action->desc->record        = '$date, <strong>$actor</strong> created log, the contact is: <strong>$contact</strong>.' . "\n";
 $lang->action->desc->signed        = '$date, signed by <strong>$actor</strong>，the turnover is： <strong>$extra</strong>。' . "\n";
+$lang->action->desc->linkcontact   = '$date, <strong>$actor</strong> added contacts for customer： <strong>$extra</strong>。' . "\n";
 
 /* The action labels. */
 $lang->action->label = new stdclass();

@@ -185,16 +185,19 @@ class customer extends control
      */
     public function linkContact($customerID)
     {
+        $contacts   = $this->loadModel('contact')->getPairs();
+
         if($_POST)
         {
             $this->customer->linkContact($customerID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('customer', $customerID, 'linkContact', '', $this->post->newcontact ? $this->post->realname : $contacts[$this->post->contact]);
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
         $this->view->title      = $this->lang->customer->linkContact;
-        $this->view->contacts   = $this->loadModel('contact')->getPairs();
+        $this->view->contacts   = $contacts;
         $this->view->customerID = $customerID;
         $this->display();
     }
