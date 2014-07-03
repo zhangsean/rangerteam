@@ -35,7 +35,6 @@
                     <?php echo $this->forum->isNew($childBoard) ? "<span class='text-success'><i class='icon-comment'></i></span>" : "<span class='text-muted'><i class='icon-comment'></i></span>"; ?>
                     <?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name, "class='name'");?>
                     <?php if($childBoard->moderators[0]) printf(" &nbsp;<span class='moderators hidden-xxs'>" . $lang->forum->lblOwner . '</span>', trim(implode(',', $childBoard->moderators), ','));?>
-                    <?php echo '(' . $lang->forum->threadCount . $lang->colon . $childBoard->threads . ' ' . $lang->forum->postCount . $lang->colon . $childBoard->posts . ')';?>
                   </td>
                 </tr>
                 <?php if($childBoard->desc):?>
@@ -46,6 +45,7 @@
                     <?php 
                     if($childBoard->postedBy)
                     {
+                        echo '(' . $lang->forum->threadCount . $lang->colon . $childBoard->threads . ' ' . $lang->forum->postCount . $lang->colon . $childBoard->posts . ') ';
                         $postedDate = substr($childBoard->postedDate, 5, -3); 
                         $postedBy   =  html::a($this->createLink('thread', 'locate', "threadID={$childBoard->postID}&replyID={$childBoard->replyID}"), $childBoard->postedBy);;
                         echo sprintf($lang->forum->lastPost, $postedDate, $postedBy);
