@@ -56,7 +56,7 @@ $lang->order->statusList['closed'] = '已关闭';
 
 $lang->order->closedReasonList['']          = '';
 $lang->order->closedReasonList['payed']     = '已付款';
-$lang->order->closedReasonList['failed']    = '订单失败';
+$lang->order->closedReasonList['failed']    = '失败';
 $lang->order->closedReasonList['postponed'] = '延期';
 
 $lang->order->titleLBL  = "[%s] %s购买%s";

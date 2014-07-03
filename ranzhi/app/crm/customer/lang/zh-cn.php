@@ -56,7 +56,6 @@ $lang->customer->typeList['partnership']= '合伙企业';
 $lang->customer->typeList['foreign']    = '外资企业';
 $lang->customer->typeList['personal']   = '个人个体';
 
-$lang->customer->statusList['']          = '';
 $lang->customer->statusList['potential'] = '潜在';
 $lang->customer->statusList['intension'] = '意向';
 $lang->customer->statusList['payed']     = '已付款';

@@ -56,7 +56,6 @@ $lang->customer->typeList['partnership']= 'Partnership';
 $lang->customer->typeList['foreign']    = 'Foreign';
 $lang->customer->typeList['personal']   = 'Personal';
 
-$lang->customer->statusList['']          = '';
 $lang->customer->statusList['potential'] = 'Potential';
 $lang->customer->statusList['intension'] = 'Intension';
 $lang->customer->statusList['payed']     = 'Payed';
