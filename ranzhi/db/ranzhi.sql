@@ -359,7 +359,7 @@ CREATE TABLE `sys_category` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(30) NOT NULL DEFAULT '',
   `alias` varchar(100) NOT NULL,
-  `desc` varchar(150) NOT NULL,
+  `desc` text NOT NULL,
   `keywords` varchar(150) NOT NULL,
   `root` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `parent` mediumint(8) unsigned NOT NULL DEFAULT '0',

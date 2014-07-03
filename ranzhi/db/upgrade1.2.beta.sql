@@ -34,3 +34,5 @@ ALTER TABLE `crm_order` CHANGE `status` `status` enum('normal', 'signed', 'close
 ALTER TABLE `crm_order` CHANGE `closedReason` `closedReason` enum('', 'payed', 'failed', 'postponed') NOT NULL DEFAULT '';
 ALTER TABLE `crm_customer` CHANGE `status` `status` enum('potential', 'intension', 'payed', 'failed') NOT NULL DEFAULT 'potential';
 ALTER TABLE `crm_contract` CHANGE `status` `status` enum('normal', 'closed', 'canceled') NOT NULL DEFAULT 'normal';
+
+ALTER TABLE `sys_category` CHANGE `desc` `desc` text NOT NULL;
