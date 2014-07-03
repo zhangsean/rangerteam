@@ -51,16 +51,18 @@ $lang->action->desc->doubted       = '$date, doubted by <strong>$actor</strong>.
 $lang->action->desc->transfered    = '$date, transfered by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->returned      = '$date, received payments by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->delivered     = '$date, delivered by <strong>$actor</strong>.' . "\n";
-$lang->action->desc->createdresume = '$date, created resume by <strong>$actor</strong>.' . "\n";
+$lang->action->desc->createdresume = '$date, created resume by <strong>$actor</strong>, the resume is： <strong>$extra</strong>.' . "\n";
 $lang->action->desc->editedresume  = '$date, edited resume by <strong>$actor</strong>.' . "\n";
-$lang->action->desc->createaddress = '$date, created address by <strong>$actor</strong>.' . "\n";
+$lang->action->desc->deleteresume  = '$date, deleted resume by <strong>$actor</strong>, the resume is： <strong>$extra</strong>.' . "\n";
+$lang->action->desc->createaddress = '$date, created address by <strong>$actor</strong>, the address is： <strong>$extra</strong>.' . "\n";
 $lang->action->desc->editaddress   = '$date, edited address by <strong>$actor</strong>.' . "\n";
+$lang->action->desc->deleteaddress = '$date, deleted address by <strong>$actor</strong>, the address is： <strong>$extra</strong>.' . "\n";
 $lang->action->desc->diff1         = 'changed <strong><i>%s</i></strong>, old is "%s", new is "%s".<br />';
 $lang->action->desc->diff2         = 'changed <strong><i>%s</i></strong>, the diff is:' . "\n" . "<blockquote>%s</blockquote>" . "\n<div class='hidden'>%s</div>";
 $lang->action->desc->diff3         = "changed file's name %s to %s.";
 $lang->action->desc->record        = '$date, <strong>$actor</strong> created log, the contact is: <strong>$contact</strong>.' . "\n";
-$lang->action->desc->signed        = '$date, signed by <strong>$actor</strong>，the turnover is： <strong>$extra</strong>。' . "\n";
-$lang->action->desc->linkcontact   = '$date, <strong>$actor</strong> added contacts for customer： <strong>$extra</strong>。' . "\n";
+$lang->action->desc->signed        = '$date, signed by <strong>$actor</strong>，the turnover is： <strong>$extra</strong>.' . "\n";
+$lang->action->desc->linkcontact   = '$date, <strong>$actor</strong> added contacts for customer： <strong>$extra</strong>.' . "\n";
 
 /* The action labels. */
 $lang->action->label = new stdclass();

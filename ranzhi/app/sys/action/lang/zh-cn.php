@@ -51,10 +51,12 @@ $lang->action->desc->doubted       = '$date, 由 <strong>$actor</strong> 追问�
 $lang->action->desc->transfered    = '$date, 由 <strong>$actor</strong> 转交。' . "\n";
 $lang->action->desc->returned      = '$date, 由 <strong>$actor</strong> 完成回款。' . "\n";
 $lang->action->desc->delivered     = '$date, 由 <strong>$actor</strong> 完成支付。' . "\n";
-$lang->action->desc->createdresume = '$date, 由 <strong>$actor</strong> 添加履历。' . "\n";
+$lang->action->desc->createdresume = '$date, 由 <strong>$actor</strong> 添加履历：<strong>$extra</strong>。' . "\n";
 $lang->action->desc->editedresume  = '$date, 由 <strong>$actor</strong> 修改履历。' . "\n";
-$lang->action->desc->createaddress = '$date, 由 <strong>$actor</strong> 添加地址。' . "\n";
+$lang->action->desc->deleteresume  = '$date, 由 <strong>$actor</strong> 删除履历：<strong>$extra</strong>。' . "\n";
+$lang->action->desc->createaddress = '$date, 由 <strong>$actor</strong> 添加地址：<strong>$extra</strong>。' . "\n";
 $lang->action->desc->editaddress   = '$date, 由 <strong>$actor</strong> 修改地址。' . "\n";
+$lang->action->desc->deleteaddress = '$date, 由 <strong>$actor</strong> 删除地址：<strong>$extra</strong>。' . "\n";
 $lang->action->desc->diff1         = '修改了 <strong><i>%s</i></strong>，旧值为 "%s"，新值为 "%s"。<br />' . "\n";
 $lang->action->desc->diff2         = '修改了 <strong><i>%s</i></strong>，区别为：' . "\n" . "<blockquote>%s</blockquote>" . "\n<div class='hidden'>%s</div>";
 $lang->action->desc->diff3         = "将文件名 %s 改为 %s 。\n";

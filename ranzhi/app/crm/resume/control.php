@@ -40,18 +40,20 @@ class resume extends control
      */
     public function create($contactID)
     {
+        $customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+
         if($_POST)
         {
             $this->resume->create($contactID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->loadModel('action')->create('contact', $contactID, "createdResume");
+            $this->loadModel('action')->create('contact', $contactID, "createdResume", '', $this->post->newCustomer ? $this->post->name : $customers[$this->post->customer]);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
         $this->app->loadLang('contact');
 
         $this->view->title     = $this->lang->resume->create;
-        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers = $customers;
         $this->view->contactID = $contactID;
         $this->display();
     }
@@ -93,8 +95,12 @@ class resume extends control
      */
     public function delete($resumeID)
     {
+        $resume = $this->resume->getByID($resumeID);
+        $customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+
         $this->resume->delete(TABLE_RESUME, $resumeID);
         if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->loadModel('action')->create('contact', $resume->contact, "deleteResume", '', $customers[$resume->customer]);
         $this->send(array('result' => 'success'));
     }
 }

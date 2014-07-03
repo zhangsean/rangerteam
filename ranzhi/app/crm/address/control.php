@@ -45,7 +45,7 @@ class address extends control
         {
             $this->address->create($objectType, $objectID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->loadModel('action')->create($objectType, $objectID, "createAddress");
+            $this->loadModel('action')->create($objectType, $objectID, "createAddress", '',  $this->post->title);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "objectType=$objectType&objectID=$objectID")));
         }
 
@@ -94,8 +94,11 @@ class address extends control
      */
     public function delete($addressID)
     {
+        $address = $this->address->getByID($addressID);
+
         $this->address->delete($addressID);
         if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->loadModel('action')->create($address->objectType, $address->objectID, "deleteAddress", '',  $address->title);
         $this->send(array('result' => 'success'));
     }
 }
