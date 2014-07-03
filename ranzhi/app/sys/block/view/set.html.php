@@ -25,7 +25,7 @@ if($type == 'html')
     <tbody>
       <tr>
         <th class='w-100px'><?php echo $lang->block->name?></th>
-        <td><?php echo html::input('name', $block ? $block->name : '', "class='form-control'")?></td>
+        <td><?php echo html::input('title', $block ? $block->title : '', "class='form-control'")?></td>
       </tr>
       <tr>
         <th><?php echo $lang->block->lblRss?></th>
@@ -40,11 +40,11 @@ if($type == 'html')
     <tbody>
       <tr>
         <th><?php echo $lang->block->name?></th>
-        <td><?php echo html::input('name', $block ? $block->name : '', "class='form-control'")?></td>
+        <td><?php echo html::input('title', $block ? $block->title : '', "class='form-control'")?></td>
       </tr>
       <tr>
         <th class='w-100px'><?php echo $lang->block->lblHtml;?></th>
-        <td><?php echo html::textarea('html', $block ? $block->html : '', "class='form-control' rows='10'")?></td>
+        <td><?php echo html::textarea('html', $block ? $block->params->html : '', "class='form-control' rows='10'")?></td>
       </tr>
     </tbody>
     <?php endif;?>

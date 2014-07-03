@@ -25,8 +25,8 @@
         <th class='w-100px'><?php echo $lang->block->name;?></th>
         <td>
           <?php
-          echo html::input('name', $block ? $block->name : $blocks[$blockID], "class='form-control'");
-          echo html::hidden('blockID', $blockID);
+          echo html::input('title', $block ? $block->title : $blocks[$blockID], "class='form-control'");
+          echo html::hidden('block', $blockID);
           ?>
         </td>
       </tr>

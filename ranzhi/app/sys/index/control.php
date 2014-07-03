@@ -59,21 +59,13 @@ class index extends control
             });\n";
         }
 
-        $blocks = empty($this->config->index->block) ? array() : (array)$this->config->index->block;
+        $blocks = $this->loadModel('block')->getBlockList();
 
         /* Init block when vist index first. */
         if(empty($blocks) and empty($this->config->blockInited))
         {
             if($this->loadModel('block')->initBlock('sys')) die(js::reload());
         }
-
-        foreach($blocks as $key => $block)
-        {
-            unset($blocks[$key]);
-            $key = str_replace('b', '', $key);
-            $blocks[$key] = $block;
-        }
-        ksort($blocks);
 
         $this->view->allEntries = $allEntries;
         $this->view->leftEntry  = $leftEntry;

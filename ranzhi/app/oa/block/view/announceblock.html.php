@@ -14,7 +14,7 @@
   <?php foreach($announces as $id => $announce):?>
   <tr>
     <td class='w-60px'><?php echo substr($announce->createdDate, 5, 5)?></td>
-    <td><?php echo html::a($this->createLink('announce', 'view', "announceID=$id"), $announce->title, "data-toggle='modal'")?></td>
+    <td><?php echo html::a($this->createLink('oa.announce', 'view', "announceID=$id"), $announce->title, "data-toggle='modal'")?></td>
   </tr>
   <?php endforeach;?>
 </table>

@@ -21,19 +21,18 @@ class block extends control
     {
         $lang = $this->get->lang;
         $this->app->setClientLang($lang);
-        $this->app->loadLang('common', 'oa');
         $this->app->loadLang('block');
 
         $mode = strtolower($this->get->mode);
         if($mode == 'getblocklist')
         {   
-            die($this->block->getBlockList());
+            echo $this->block->getAvailableBlocks();
         }   
         elseif($mode == 'getblockform')
         {   
             $code = strtolower($this->get->blockid);
             $func = 'get' . ucfirst($code) . 'Params';
-            die($this->block->$func());
+            echo $this->block->$func();
         }   
         elseif($mode == 'getblockdata')
         {   
@@ -51,22 +50,23 @@ class block extends control
      * @access public
      * @return void
      */
-    public function admin($index, $blockID = '')
+    public function admin($index = 0, $blockID = '')
     {
+        if(!$index) $index = $this->block->getLastKey('oa') + 1;
+
         if($_POST)
         {
-            $this->block->save($index);
+            $this->block->save($index, 'system', 'oa');
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror())); 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
         $this->app->loadLang('block', 'sys');
 
-        $personalBlocks = isset($this->config->personal->index->block) ? $this->config->personal->index->block : new stdclass();
-        $block          = (isset($personalBlocks->{'b' . $index}) and $personalBlocks->{'b' . $index}->app == 'oa') ? json_decode($personalBlocks->{'b' . $index}->value) : array();
-        $blockID        = $blockID ? $blockID : (($block and $personalBlocks->{'b' . $index}->app == 'oa') ? $block->blockID : '');
+        $block   = $this->block->getBlock($index, 'oa');
+        $blockID = $blockID ? $blockID : ($block ? $block->block : '');
 
-        $blocks = json_decode($this->block->getBlockList(), true);
+        $blocks = json_decode($this->block->getAvailableBlocks(), true);
         $this->view->blocks  = array_merge(array(''), $blocks);
 
         $this->view->title   = $this->lang->block->admin;
@@ -111,7 +111,7 @@ class block extends control
     public function printAnnounceBlock()
     {
         $this->lang->announce = new stdclass();
-        $this->app->loadLang('announce');
+        $this->app->loadLang('announce', 'oa');
 
         $this->processParams();
 
@@ -133,7 +133,7 @@ class block extends control
     public function printMyCreatedTaskBlock()
     {
         $this->lang->task = new stdclass();
-        $this->app->loadLang('task');
+        $this->app->loadLang('task', 'sys');
 
         $this->processParams();
 
@@ -158,7 +158,7 @@ class block extends control
     public function printAssignedMeTaskBlock()
     {
         $this->lang->task = new stdclass();
-        $this->app->loadLang('task');
+        $this->app->loadLang('task', 'sys');
 
         $this->processParams();
 

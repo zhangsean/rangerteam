@@ -9,30 +9,16 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-class blockModel extends model
+helper::import(realpath('../../sys/block/model.php'));
+class oablockModel extends blockModel
 {
-    /** 
-     * Save params 
-     * 
-     * @param  int    $index 
-     * @access public
-     * @return void
-     */
-    public function save($index)
-    {   
-        $account = $this->app->user->account;
-        $data    = fixer::input('post')->add('type', 'system')->get();
-
-        $this->loadModel('setting')->setItem($account . '.oa.index.block.b' . $index, helper::jsonEncode($data));
-    }
-
     /**
      * Get block list.
      * 
      * @access public
      * @return string
      */
-    public function getBlockList()
+    public function getAvailableBlocks()
     {
         return json_encode($this->lang->block->availableBlocks);
     }
@@ -83,7 +69,7 @@ class blockModel extends model
      */
     public function getTaskParams()
     {
-        $this->app->loadLang('task');
+        $this->app->loadLang('task', 'sys');
 
         $params = new stdclass();
         $params->num['name']    = $this->lang->block->num;

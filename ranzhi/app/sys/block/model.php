@@ -19,14 +19,27 @@ class blockModel extends model
      * @access public
      * @return void
      */
-    public function save($index, $type)
+    public function save($index, $type = 'system', $appName = 'sys')
     {
-        $account = $this->app->user->account;
-        $data    = fixer::input('post')->get();
+        $data = fixer::input('post')
+            ->add('account', $this->app->user->account)
+            ->add('order', $index)
+            ->add('app', $appName)
+            ->setIF($type != 'system', 'block', $type)
+            ->setDefault('grid', '3')
+            ->setDefault('source', $appName)
+            ->setDefault('params', array())
+            ->get();
 
-        $data->type = $type;
+        if($type != 'system') $data->source = '';
+        if($type == 'html')
+        {
+            $data->params['html'] = $data->html;
+            unset($data->html);
+        }
+        $data->params = helper::jsonEncode($data->params);
 
-        $this->loadModel('setting')->setItem($account . '.sys.index.block.b' . $index, helper::jsonEncode($data));
+        $this->dao->replace(TABLE_BLOCK)->data($data, 'uid')->exec();
     }
 
     /**
@@ -39,18 +52,17 @@ class blockModel extends model
     public function getEntry($block)
     {
         if(empty($block)) return false;
-        $entry = $this->loadModel('entry')->getById($block->entryID);
+        $entry = $this->loadModel('entry')->getByCode($block->source);
         $http  = $this->app->loadClass('http');
 
-        if(isset($block->params))
-        {
-            $block->params->account = $this->app->user->account;
-            $block->params->uid     = $this->app->user->id;
-            $params = base64_encode(json_encode($block->params));
-        }
+        if(empty($block->params)) $block->params = new stdclass();
+
+        $block->params->account = $this->app->user->account;
+        $block->params->uid     = $this->app->user->id;
+        $params = base64_encode(json_encode($block->params));
 
         $query['mode']    = 'getblockdata';
-        $query['blockid'] = $block->blockID;
+        $query['blockid'] = $block->block;
         $query['hash']    = $entry->key;
         $query['entry']   = $entry->id;
         $query['app']     = 'sys';
@@ -141,9 +153,13 @@ class blockModel extends model
      * @access public
      * @return object
      */
-    public function getBlock($index)
+    public function getBlock($index, $appName = 'sys')
     {
-        return isset($this->config->personal->index->block->{'b' . $index}->value) ? json_decode($this->config->personal->index->block->{'b' . $index}->value) : array();
+        return $this->dao->select('*')->from(TABLE_BLOCK)
+            ->where('`order`')->eq($index)
+            ->andWhere('account')->eq($this->app->user->account)
+            ->andWhere('app')->eq($appName)
+            ->fetch();
     }
 
     /**
@@ -155,27 +171,28 @@ class blockModel extends model
      */
     public function getLastKey($appName = 'sys')
     {
-        if(empty($account)) $account = $this->app->user->account;
+        $index = $this->dao->select('`order`')->from(TABLE_BLOCK)
+            ->where('app')->eq($appName)
+            ->andWhere('account')->eq($this->app->user->account)
+            ->orderBy('order desc')
+            ->limit(1)
+            ->fetch('order');
+        return $index ? $index : 0;
+    }
 
-        $personal = isset($this->config->personal->index) ? $this->config->personal->index : array();
-        $blocks   = empty($personal->block) ? array() : (array)$personal->block;
-
-        foreach($blocks as $key => $block)
-        {
-            if($block->app != $appName) unset($blocks[$key]);
-        }
-
-        foreach($blocks as $key => $block)
-        {
-            /* Remove the prefix of block key. */
-            unset($blocks[$key]);
-            $key = str_replace('b', '', $key);
-            $blocks[$key] = $block;
-        }
-
-        krsort($blocks);
-        
-        return (int)key($blocks);
+    /**
+     * Get block list for account.
+     * 
+     * @param  string $appName 
+     * @access public
+     * @return void
+     */
+    public function getBlockList($appName = 'sys')
+    {
+        return $this->dao->select('*')->from(TABLE_BLOCK)->where('account')->eq($this->app->user->account)
+            ->andWhere('app')->eq($appName)
+            ->orderBy('`order`')
+            ->fetchAll('order');
     }
 
     /**
@@ -191,22 +208,17 @@ class blockModel extends model
         $blocks  = $this->lang->block->default[$appName];
         $account = $this->app->user->account;
 
-        $this->loadModel('setting');
         /* Mark this app has init. */
-        $this->setting->setItem("$account.$appName.common.blockInited", true);
-        $this->loadModel('entry');
-        foreach($blocks as $key => $block)
+        $this->loadModel('setting')->setItem("$account.$appName.common.blockInited", true);
+        foreach($blocks as $index => $block)
         {
-            if(isset($block['entryID']) and (int)$block['entryID'] == 0)
-            {
-                $entry = $this->entry->getByCode($block['entryID']);
+            $block['order']   = $index;
+            $block['app']     = $appName;
+            $block['account'] = $account;
+            $block['params']  = helper::jsonEncode($block['params']);
+            if(!isset($block->source)) $block['source'] = $appName;
 
-                /* If has not this entry then do not add it. */
-                if(!$entry) continue;
-                $block['entryID'] = $entry->id;
-            }
-
-            $this->setting->setItem("$account.$appName.index.block.$key", helper::jsonEncode($block));
+            $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
         }
 
         return !dao::isError();

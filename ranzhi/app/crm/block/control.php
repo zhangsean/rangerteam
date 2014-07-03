@@ -11,16 +11,19 @@
  */
 class block extends control
 {
-    public function __CONSTRUCT()
+    public function __construct($moduleName = '', $methodName = '', $appName = '')
     {
-        parent::__CONSTRUCT();
+        parent::__construct($moduleName, $methodName, $appName);
        
         /* Set user rights. */
         $params = json_decode(base64_decode($this->get->param));
-        $user = $this->loadModel('user')->getByAccount($params->account);
-        $user->rights = $this->user->authorize($user);
-        $this->session->set('user', $user);
-        $this->app->user = $this->session->user;
+        if(isset($params->account) and $this->app->user->account != $params->account)
+        {
+            $user = $this->loadModel('user')->getByAccount($params->account);
+            $user->rights = $this->user->authorize($user);
+            $this->session->set('user', $user);
+            $this->app->user = $this->session->user;
+        }
     }
 
     /**
@@ -39,13 +42,13 @@ class block extends control
         $mode = strtolower($this->get->mode);
         if($mode == 'getblocklist')
         {   
-            die($this->block->getBlockList());
+            echo $this->block->getAvailableBlocks();
         }   
         elseif($mode == 'getblockform')
         {   
             $code = strtolower($this->get->blockid);
             $func = 'get' . ucfirst($code) . 'Params';
-            die($this->block->$func());
+            echo $this->block->$func();
         }   
         elseif($mode == 'getblockdata')
         {   
@@ -63,23 +66,24 @@ class block extends control
      * @access public
      * @return void
      */
-    public function admin($index, $blockID = '')
+    public function admin($index = 0, $blockID = '')
     {
+        if(!$index) $index = $this->block->getLastKey('crm') + 1;
+
         if($_POST)
         {
-            $this->block->save($index);
+            $this->block->save($index, 'system', 'crm');
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror())); 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
         $this->app->loadLang('block', 'sys');
 
-        $personalBlocks = isset($this->config->personal->index->block) ? $this->config->personal->index->block : new stdclass();
-        $block          = (isset($personalBlocks->{'b' . $index}) and $personalBlocks->{'b' . $index}->app == 'crm') ? json_decode($personalBlocks->{'b' . $index}->value) : array();
-        $blockID        = $blockID ? $blockID : (($block and $personalBlocks->{'b' . $index}->app == 'crm') ? $block->blockID : '');
+        $block   = $this->block->getBlock($index, 'crm');
+        $blockID = $blockID ? $blockID : ($block ? $block->block : '');
 
         $this->view->title   = $this->lang->block->admin;
-        $this->view->blocks  = array_merge(array(''), json_decode($this->block->getBlockList(), true));
+        $this->view->blocks  = array_merge(array(''), json_decode($this->block->getAvailableBlocks(), true));
         $this->view->params  = $blockID ? json_decode($this->block->{'get' . ucfirst($blockID) . 'Params'}(), true) : array();;
         $this->view->blockID = $blockID;
         $this->view->block   = $block;
@@ -121,7 +125,7 @@ class block extends control
     public function printOrderBlock()
     {
         $this->lang->order = new stdclass();
-        $this->app->loadLang('order');
+        $this->app->loadLang('order', 'crm');
 
         $params = $this->get->param;
         $params = json_decode(base64_decode($params));
@@ -151,7 +155,7 @@ class block extends control
     public function printTaskBlock()
     {
         $this->lang->task = new stdclass();
-        $this->app->loadLang('task');
+        $this->app->loadLang('task', 'sys');
 
         $params = $this->get->param;
         $params = json_decode(base64_decode($params));
@@ -179,7 +183,7 @@ class block extends control
     public function printContractBlock()
     {
         $this->lang->contract = new stdclass();
-        $this->app->loadLang('contract');
+        $this->app->loadLang('contract', 'crm');
 
         $params = $this->get->param;
         $params = json_decode(base64_decode($params));

@@ -54,22 +54,22 @@ js::import($jsRoot . 'jquery/ips.js');
         <?php foreach($blocks as $key => $block):?>
         <?php
         $index = $key;
-        $block = json_decode($block);
+        $block->params = json_decode($block->params);
         ?>
         <div class='col-sm-6 col-md-4'>
-          <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->name?>' data-url='<?php echo $this->createLink('block', 'printBlock', 'index=' . $index) ?>'>
+          <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->title?>' data-url='<?php echo $this->createLink('entry', 'printBlock', 'index=' . $index) ?>'>
             <div class='panel-heading'>
               <div class='panel-actions'>
                 <button class="btn btn-mini refresh-panel"><i class="icon-repeat"></i></button>
                 <div class='dropdown'>
                   <button role="button" class="btn btn-mini" data-toggle="dropdown"><span class="caret"></span></button>
                   <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="<?php echo $this->createLink("block", "admin", "index=$index"); ?>" data-toggle='modal' class='edit-block' data-name='<?php echo $block->name; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit; ?></a></li>
+                    <li><a href="<?php echo $this->createLink("block", "admin", "index=$index"); ?>" data-toggle='modal' class='edit-block' data-name='<?php echo $block->title; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit; ?></a></li>
                     <li><a href="javascript:;" class="remove-panel"><i class="icon-remove"></i> <?php echo $lang->delete; ?></a></li>
                   </ul>
                 </div>
               </div>
-              <?php echo $block->name?>
+              <?php echo $block->title?>
             </div>
             <div class='panel-body no-padding'></div>
           </div>

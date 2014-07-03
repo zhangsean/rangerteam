@@ -23,7 +23,7 @@
   <tbody>
   <?php foreach($threads as $id => $thread):?>
     <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id={$this->get->entry}" : ''?>
-    <tr data-url='<?php echo $this->createLink('thread', 'view', "id=$thread->id"); ?>' <?php echo $appid?>>
+    <tr data-url='<?php echo $this->createLink('team.thread', 'view', "id=$thread->id"); ?>' <?php echo $appid?>>
       <td class='text-left'><?php echo $thread->title;?></td>
       <td><?php echo $thread->authorRealname;?></td>
       <td><?php echo substr($thread->createdDate, 5, -3);?></td>

@@ -237,8 +237,19 @@ class entry extends control
      */
     public function blocks($entryID, $index = 0)
     {
-        $entry  = $this->entry->getById($entryID);
-        $blocks = $this->entry->getBlocksByAPI($entry);
+        $entry  = $this->entry->getByCode($entryID);
+        if($entry->buildin)
+        {
+            $this->get->set('mode', 'getblocklist');
+            $this->get->set('hash', $entry->key);
+            $this->get->set('lang', $this->app->getClientLang());
+            $blocks = $this->fetch('block', 'index', array(), $entry->code);
+            $blocks = json_decode($blocks, true);
+        }
+        else
+        {
+            $blocks = $this->entry->getBlocksByAPI($entry);
+        }
 
         if(empty($blocks)) return false;
 
@@ -247,8 +258,8 @@ class entry extends control
         $block = $this->loadModel('block')->getBlock($index);
 
         echo "<th>{$this->lang->entry->lblBlock}</th>";
-        echo '<td>' . html::select('entryBlock', $blockPairs, ($block and $block->type == 'system') ? $block->blockID : '', "class='form-control' onchange='getBlockParams(this.value, $entryID)'") . '</td>';
-        if(isset($block->entryID)) echo "<script>$(function(){getBlockParams($('#entryBlock').val(), {$block->entryID})})</script>";
+        echo '<td>' . html::select('entryBlock', $blockPairs, ($block and $block->source != '') ? $block->block : '', "class='form-control' onchange='getBlockParams(this.value, \"$entryID\")'") . '</td>';
+        if(isset($block->source)) echo "<script>$(function(){getBlockParams($('#entryBlock').val(), '{$block->source}')})</script>";
     }
 
     /**
@@ -262,17 +273,66 @@ class entry extends control
      */
     public function setBlock($index, $entryID, $blockID)
     {
-        $this->app->loadLang('block');
-        $type  = 'system';
-        $block = isset($this->config->personal->index->block->{'b' . $index}->value) ? json_decode($this->config->personal->index->block->{'b' . $index}->value) : array();
+        $block = $this->loadModel('block')->getBlock($index);
+        if($block) $block->params = json_decode($block->params);
 
-        $entry  = $this->entry->getById($entryID);
-        $this->view->params  = $this->entry->getBlockParams($entry, $blockID);
-        $this->view->block   = ($block and $block->type == $type) ? $block : array();
+        $entry  = $this->entry->getByCode($entryID);
+        if($entry->buildin)
+        {
+            $this->get->set('mode', 'getblockform');
+            $this->get->set('blockid', $blockID);
+            $this->get->set('hash', $entry->key);
+            $this->get->set('lang', $this->app->getClientLang());
+            $params = $this->fetch('block', 'index', array(), $entry->code);
+            $params = json_decode($params, true);
+        }
+        else
+        {
+            $params = $this->entry->getBlockParams($entry, $blockID);
+        }
+
+        $this->view->params  = $params;
+        $this->view->block   = $block ? $block : array();
         $this->view->index   = $index;
-        $this->view->type    = $type;
         $this->view->blockID = $blockID;
         $this->view->entryID = $entryID;
         $this->display();
+    }
+
+    /**
+     * Print buildin entry block.
+     * 
+     * @param  int    $index 
+     * @access public
+     * @return void
+     */
+    public function printBlock($index)
+    {
+        $block = $this->loadModel('block')->getBlock($index);
+        if(empty($block)) return false;
+        if($block->source == '') $this->locate($this->createLink('block', 'printBlock', "index=$index"));
+
+        $entry = $this->loadModel('entry')->getByCode($block->source);
+        if(!$entry->buildin) $this->locate($this->createLink('block', 'printBlock', "index=$index"));
+
+        $html = '';
+        $block->params = json_decode($block->params);
+        if(empty($block->params)) $block->params = new stdclass();
+
+        $block->params->account = $this->app->user->account;
+        $block->params->uid     = $this->app->user->id;
+        $params = base64_encode(json_encode($block->params));
+
+        $this->get->set('mode', 'getblockdata');
+        $this->get->set('blockid', $block->block);
+        $this->get->set('hash', $entry->key);
+        $this->get->set('entry', $entry->id);
+        $this->get->set('app', 'sys');
+        $this->get->set('lang', $this->app->getClientLang());
+        $this->get->set('sso', base64_encode(commonModel::getSysURL() . helper::createLink('entry', 'visit', "entry=$entry->id")));
+        $this->get->set('param', $params);
+        $html = $this->fetch('block', 'index', array(), $entry->code);
+
+        die($html);
     }
 }

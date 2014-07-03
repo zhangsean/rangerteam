@@ -16,7 +16,7 @@
     <th class='w-100px'><?php echo $lang->block->lblEntry; ?></th>
     <?php
     $entryID = '';
-    if($block) $entryID = $block->type == 'system' ? $block->entryID : $block->type;
+    if($block) $entryID = $block->source != '' ? $block->source : $block->block;
     ?>
     <td><?php echo html::select('allEntries', $allEntries, $entryID, "class='form-control'")?></td>
   </tr>

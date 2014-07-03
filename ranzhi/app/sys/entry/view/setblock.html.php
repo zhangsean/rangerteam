@@ -16,15 +16,15 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 include "../../common/view/chosen.html.php";
 ?>
-<form method='post' id='blockForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=$type")?>'>
+<form method='post' id='blockForm' class='form form-horizontal' action='<?php echo $this->createLink('block', 'set', "index=$index&type=system")?>'>
   <table class='table table-form'>
     <tbody>
       <tr>
         <th class='w-100px'><?php echo $lang->block->name;?></th>
         <td>
         <?php
-        echo html::input('name', isset($block->name) ? $block->name : '', "class='form-control'");
-        echo html::hidden('blockID', $blockID) . html::hidden('entryID', $entryID);
+        echo html::input('title', isset($block->title) ? $block->title : '', "class='form-control'");
+        echo html::hidden('block', $blockID) . html::hidden('source', $entryID);
         ?>
         </td>
       </tr>
@@ -67,5 +67,5 @@ include "../../common/view/chosen.html.php";
   </table>
 </form>
 <?php if(!isset($block->name)):?>
-<script>$(function(){$('#name').val($('#entryBlock').find("option:selected").text());})</script>
+<script>$(function(){$('#title').val($('#entryBlock').find("option:selected").text());})</script>
 <?php endif;?>

@@ -20,7 +20,7 @@
   </tr>
   <?php foreach($contracts as $id => $contract):?>
   <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id='{$this->get->entry}'" : ''?>
-  <tr data-url='<?php echo $this->createLink('contract', 'view', "id=$id");?>' <?php echo $appid;?>>
+  <tr data-url='<?php echo $this->createLink('crm.contract', 'view', "id=$id");?>' <?php echo $appid;?>>
     <td class='text-center'><?php echo $id;?></td>
     <td class='nobr'><strong><?php echo $contract->name;?></strong></td>
     <td><strong class='text-danger'><?php echo $contract->amount?></strong></td>

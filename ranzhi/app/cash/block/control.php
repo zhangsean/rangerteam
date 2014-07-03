@@ -27,13 +27,13 @@ class block extends control
         $mode = strtolower($this->get->mode);
         if($mode == 'getblocklist')
         {   
-            die($this->block->getBlockList());
+            echo $this->block->getAvailableBlocks();
         }   
         elseif($mode == 'getblockform')
         {   
             $code = strtolower($this->get->blockid);
             $func = 'get' . ucfirst($code) . 'Params';
-            die($this->block->$func());
+            echo $this->block->$func();
         }   
         elseif($mode == 'getblockdata')
         {   
@@ -51,22 +51,23 @@ class block extends control
      * @access public
      * @return void
      */
-    public function admin($index, $blockID = '')
+    public function admin($index = 0, $blockID = '')
     {
+        if(!$index) $index = $this->block->getLastKey('cash') + 1;
+
         if($_POST)
         {
-            $this->block->save($index);
+            $this->block->save($index, 'system', 'cash');
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror())); 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
         $this->app->loadLang('block', 'sys');
 
-        $personalBlocks = isset($this->config->personal->index->block) ? $this->config->personal->index->block : new stdclass();
-        $block          = (isset($personalBlocks->{'b' . $index}) and $personalBlocks->{'b' . $index}->app == 'cash') ? json_decode($personalBlocks->{'b' . $index}->value) : array();
-        $blockID        = $blockID ? $blockID : (($block and $personalBlocks->{'b' . $index}->app == 'cash') ? $block->blockID : '');
+        $block   = $this->block->getBlock($index, 'cash');
+        $blockID = $blockID ? $blockID : ($block ? $block->block : '');
 
-        $blocks = json_decode($this->block->getBlockList(), true);
+        $blocks = json_decode($this->block->getAvailableBlocks(), true);
         $this->view->blocks  = array_merge(array(''), $blocks);
 
         $this->view->title   = $this->lang->block->admin;
@@ -111,7 +112,7 @@ class block extends control
     public function printDepositorBlock()
     {
         $this->lang->depositor = new stdclass();
-        $this->app->loadLang('depositor');
+        $this->app->loadLang('depositor', 'cash');
 
         $this->processParams();
 

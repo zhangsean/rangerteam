@@ -19,7 +19,6 @@ $lang->menu->oa->announce  = '公告|announce|index|';
 $lang->menu->oa->doc       = '文档|doc|index|';
 
 $lang->dashboard = new stdclass();
-$lang->block     = new stdclass();
 $lang->project   = new stdclass();
 
 $lang->announce = new stdclass();

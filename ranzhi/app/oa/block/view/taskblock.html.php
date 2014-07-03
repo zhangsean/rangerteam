@@ -19,7 +19,7 @@
   </tr>
   <?php foreach($tasks as $id => $task):?>
   <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id={$this->get->entry}" : ''?>
-  <tr data-url='<?php echo $this->createLink('task', 'view', "taskID=$id"); ?>' <?php echo $appid?>>
+  <tr data-url='<?php echo $this->createLink('oa.task', 'view', "taskID=$id"); ?>' <?php echo $appid?>>
     <td class='text-center'><?php echo $id;?></td>
     <td class='text-center'><span class='active pri pri-<?php echo $task->pri;?>'><?php echo $lang->task->priList[$task->pri];?></span></td>
     <td><strong><?php echo $task->name;?></strong></td>

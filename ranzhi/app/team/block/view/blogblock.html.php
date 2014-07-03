@@ -13,7 +13,7 @@
 <table class='table table-data table-hover table-fixed block-blog' id='oaBlockAnnounce'>
   <?php foreach($blogs as $id => $blog):?>
   <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id={$this->get->entry}" : ''?>
-  <tr data-url='<?php echo $this->createLink('blog', 'view', "blogID=$id"); ?>' <?php echo $appid?>>
+  <tr data-url='<?php echo $this->createLink('team.blog', 'view', "blogID=$id"); ?>' <?php echo $appid?>>
     <td class='w-60px'><?php echo substr($blog->createdDate, 5, 5)?></td>
     <td><?php echo $blog->title;?></td>
   </tr>
