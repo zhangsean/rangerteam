@@ -459,7 +459,11 @@ class treeModel extends model
      */
     public function update($categoryID)
     {
-        $category = fixer::input('post')->join('moderators', ',')->setDefault('readonly', 0)->get();
+        $category = fixer::input('post')
+            ->stripTags('desc', $this->config->allowedTags->admin)
+            ->join('moderators', ',')
+            ->setDefault('readonly', 0)
+            ->get();
 
         /* Set moderators. */
         if(!isset($category->moderators))
