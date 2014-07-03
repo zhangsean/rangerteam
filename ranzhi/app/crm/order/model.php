@@ -64,6 +64,8 @@ class orderModel extends model
         $customerIdList = $this->loadModel('customer')->getMine();
         if(empty($customerIdList)) return null;
 
+        if(strpos($orderBy, 'status') !== false) $orderBy .= ', closedReason';
+
         $orders = $this->dao->select('o.*, c.name as customerName, c.level as level, p.name as productName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
             ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
