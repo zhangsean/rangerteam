@@ -37,6 +37,7 @@ CREATE TABLE `crm_contact` (
   `editedDate` datetime NOT NULL,
   `contactedBy` char(30) NOT NULL,
   `contactedDate` datetime NOT NULL,
+  `nextDate` date NOT NULL,
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `realname` (`realname`),
@@ -44,7 +45,8 @@ CREATE TABLE `crm_contact` (
   KEY `birthday` (`birthday`),
   KEY `createdBy` (`createdBy`),
   KEY `contactedBy` (`contactedBy`),
-  KEY `contactedDate` (`contactedDate`)
+  KEY `contactedDate` (`contactedDate`),
+  KEY `nextDate` (`nextDate`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `crm_contract`;
 CREATE TABLE `crm_contract` (
@@ -74,6 +76,9 @@ CREATE TABLE `crm_contract` (
   `createdDate` datetime NOT NULL,
   `editedBy` char(30) NOT NULL,
   `editedDate` datetime NOT NULL,
+  `contactedBy` char(30) NOT NULL,
+  `contactedDate` datetime NOT NULL,
+  `nextDate` date NOT NULL,
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `name` (`name`),
@@ -84,7 +89,9 @@ CREATE TABLE `crm_contract` (
   KEY `begin` (`begin`),
   KEY `end` (`end`),
   KEY `status` (`status`),
-  KEY `handlers` (`handlers`)
+  KEY `handlers` (`handlers`),
+  KEY `contactedDate` (`contactedDate`),
+  KEY `nextDate` (`nextDate`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `crm_contractOrder`;
 CREATE TABLE `crm_contractOrder` (
