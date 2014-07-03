@@ -228,4 +228,75 @@ class upgradeModel extends model
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
     }
+
+    /**
+     * Transform block from config to block table.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function transformBlock()
+    {
+        $blocks  = $this->dao->select('*')->from(TABLE_CONFIG)->where('section')->eq('block')->andWhere('module')->eq('index')->fetchAll('id');
+        $entries = $this->dao->select('id,code')->from(TABLE_ENTRY)->fetchPairs('id', 'code');
+
+        foreach($blocks as $block)
+        {
+            if(empty($block->owner)) continue;
+            $block->value = json_decode($block->value);
+
+            $source  = '';
+            $blockID = $block->value->type;
+            if($block->value->type == 'system')
+            {
+                if($block->app == 'sys' and isset($block->value->entryID) and !isset($entries[$block->value->entryID])) continue;
+                $source  = $block->app == 'sys' ? $entries[$block->value->entryID] : $block->app;
+                $blockID = $block->value->blockID;
+            }
+
+            if($blockID == 'html') $block->value->params = $block->value->html;
+            if(!isset($block->value->params)) $block->value->params = array();
+
+            $data = new stdclass();
+            $data->account = $block->owner;
+            $data->app     = $block->app;
+            $data->title   = $block->value->name;
+            $data->source  = $source;
+            $data->block   = $blockID;
+            $data->params  = helper::jsonEncode($block->value->params);
+            $data->order   = str_replace('b', '', $block->key);
+            $data->grid    = 3;
+
+            $this->dao->replace(TABLE_BLOCK)->data($data)->exec();
+        }
+        if(dao::isError()) return false;
+
+        $this->dao->delete()->from(TABLE_CONFIG)->where('section')->eq('block')->andWhere('module')->eq('index')->exec();
+        return true;
+    }
+
+    /**
+     * Change buildin entry name.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function changeBuildinName()
+    {
+        $this->app->loadLang('install', 'sys');
+
+        foreach($this->lang->install->buildinEntry as $code => $name)
+        {
+            $this->dao->update(TABLE_ENTRY)
+                ->set('name')->eq($name['name'])
+                ->set('abbr')->eq($name['abbr'])
+                ->set('buildin')->eq(1)
+                ->set('integration')->eq(1)
+                ->where('code')->eq($code)
+                ->exec();
+        }
+
+        if(dao::isError()) return false;
+        return true;
+    }
 }
