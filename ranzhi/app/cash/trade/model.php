@@ -176,7 +176,7 @@ class tradeModel extends model
             ->data($trade, $skip = 'createTrader,traderName')
             ->autoCheck()
             ->batchCheck($this->config->trade->require->edit, 'notempty')
-            ->checkIF(!$this->post->createTrader, 'trader', 'notempty')
+            ->checkIF($oldTrade->type == 'out' and !$this->post->createTrader, 'trader', 'notempty')
             ->where('id')->eq($tradeID)->exec();
 
         if($this->post->createTrader and $trade->type == 'out')
