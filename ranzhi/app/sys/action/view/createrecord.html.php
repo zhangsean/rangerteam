@@ -19,12 +19,16 @@
     <tr>
       <th><?php echo $lang->action->record->contact;?></th>
       <td>
-        <div class='col-sm-8'><?php echo html::select('contact', $contacts, '', "class='form-control'");?></div>
-        <?php if($objectType == 'customer'):?>
-        <div class='col-sm-4'>
-        <?php echo html::checkbox('objectType', array('order' =>$lang->action->record->order, 'contract' => $lang->action->record->contract), '', "class='checkbox-inline'");?>
+        <div class='col-sm-8'>
+          <div class='input-group'>
+            <?php echo html::select('contact', $contacts, '', "class='form-control'");?>
+            <?php if($objectType == 'customer'):?>
+            <span class='input-group-addon'>
+            <?php echo html::checkbox('objectType', array('order' =>$lang->action->record->order, 'contract' => $lang->action->record->contract), '', "class='checkbox-inline'");?>
+            </span>
+            <?php endif;?>
+          </div>
         </div>
-        <?php endif;?>
       </td>
     </tr>
     <?php elseif($objectType != 'customer'):?>
@@ -60,6 +64,10 @@
       <th class='w-100px'><?php echo $lang->action->record->date;?></th>
       <td><div class='col-sm-8'><?php echo html::input('date', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></div></td>
     </tr> 
+    <tr>
+      <th><?php echo $lang->action->record->nextDate;?></th>
+      <td><div class='col-sm-8'><?php echo html::input('nextDate', '', "class='form-control form-date'");?></div></td>
+    </tr>
     <tr>
       <th><?php echo $lang->action->record->comment;?></th>
       <td><div class='col-sm-12'><?php echo html::textarea('comment', '', "class='form-control' rows='3'");?></div></td>

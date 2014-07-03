@@ -19,6 +19,7 @@ $lang->action->comment  = 'Comment';
 $lang->action->action   = 'Action';
 $lang->action->actionID = 'Action ID';
 $lang->action->date     = 'Date';
+$lang->action->nextDate = 'Next Contact';
 
 $lang->action->editComment = 'Edit Comment';
 
@@ -134,3 +135,4 @@ $lang->action->record->contact  = 'Contact';
 $lang->action->record->actor    = 'Actor';
 $lang->action->record->comment  = 'Content';
 $lang->action->record->date     = 'Contact time';
+$lang->action->record->nextDate = 'Next Contact';

@@ -41,17 +41,19 @@ class actionModel extends model
         $action->contact    = $contact;
         $action->actor      = $actor ? $actor : $this->app->user->account;
         $action->action     = strtolower($actionType);
-        $action->date       = helper::now();
+        $action->date       = $this->post->date ? $this->post->date : helper::now();
         $action->comment    = trim(strip_tags($comment, "<img>")) ? $comment : '';
         $action->extra      = $extra;
+        $action->nextDate   = $this->post->nextDate;
 
         /* If objectType is customer or contact, save objectID as customer id or contact id. */
         if($objectType == 'customer') $action->customer = $objectID;
         if($objectType == 'contact')  $action->contact  = $objectID;
 
         $this->dao->insert(TABLE_ACTION)
-            ->data($action)
+            ->data($action, $skip = 'nextDate')
             ->batchCheckIF($actionType == 'record', $this->config->action->require->createRecord, 'notempty')
+            ->checkIF($this->post->nextDate, 'nextDate', 'gt', helper::today())
             ->exec();
 
         return $this->dbh->lastInsertID();
@@ -66,7 +68,42 @@ class actionModel extends model
      */
     public function createRecord($objectType, $objectID, $customer, $contact)
     {
-        return $this->create($objectType, $objectID, $action = 'record', $this->post->comment, $extra = '', $actor = null, $customer, $contact);
+        $result = $this->create($objectType, $objectID, $action = 'record', $this->post->comment, $extra = '', $actor = null, $customer, $contact);
+
+        if(!$result) return false;
+        return $this->syncContactInfo($objectType, $objectID, $customer, $contact);
+    }
+    
+    /**
+     * Sync contact info.
+     * 
+     * @param  int    $objectType 
+     * @param  int    $objectID 
+     * @param  int    $customer 
+     * @param  int    $contact 
+     * @access public
+     * @return void
+     */
+    public function syncContactInfo($objectType, $objectID, $customer, $contact)
+    {
+        $contactInfo['contactedDate'] = $this->post->date;
+        $contactInfo['contactedBy']   = $this->app->user->account;
+
+        $this->dao->update(TABLE_CUSTOMER)->data($contactInfo)->where('id')->eq($customer)->andWhere('contactedDate')->lt($this->post->date)->exec();
+        $this->dao->update(TABLE_CONTACT)->data($contactInfo)->where('id')->eq($contact)->andWhere('contactedDate')->lt($this->post->date)->exec();
+
+        if($objectType == 'order')    $this->dao->update(TABLE_ORDER)->data($contactInfo)->where('id')->eq($objectID)->andWhere('contactedDate')->lt($this->post->date)->exec();
+        if($objectType == 'contract') $this->dao->update(TABLE_CONTRACT)->data($contactInfo)->where('id')->eq($objectID)->andWhere('contactedDate')->lt($this->post->date)->exec();
+
+        if($this->post->nextDate)
+        {
+            $this->dao->update(TABLE_CUSTOMER)->set('nextDate')->eq($this->post->nextDate)->where('id')->eq($customer)->exec();
+            $this->dao->update(TABLE_CONTRACT)->set('nextDate')->eq($this->post->nextDate)->where('id')->eq($customer)->exec();
+            if($objectType == 'order') $this->dao->update(TABLE_ORDER)->set('nextDate')->eq($this->post->nextDate)->where('id')->eq($objectID)->exec();
+            if($objectType == 'contract') $this->dao->update(TABLE_CONTRACT)->set('nextDate')->eq($this->post->nextDate)->where('id')->eq($objectID)->exec();
+        }
+
+        return !dao::isError();
     }
 
     /**

@@ -19,6 +19,7 @@ $lang->action->comment  = '内容';
 $lang->action->action   = '动作';
 $lang->action->actionID = '记录ID';
 $lang->action->date     = '日期';
+$lang->action->nextDate = '下次联系';
 
 $lang->action->editComment = '修改备注';
 
@@ -134,3 +135,4 @@ $lang->action->record->contact  = '联系人';
 $lang->action->record->actor    = '操作人';
 $lang->action->record->comment  = '沟通内容';
 $lang->action->record->date     = '时间';
+$lang->action->record->nextDate = '下次联系';
