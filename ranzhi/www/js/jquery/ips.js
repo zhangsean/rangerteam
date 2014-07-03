@@ -37,7 +37,7 @@
         confirmClose                  : '确认要关闭　【{0}】 吗？',
         entryNotFindTip               : '应用没有找到！',
         busyTip                       : '应用正忙，请稍候...',
-        reloadText                    : '重载',
+        reloadText                    : '刷新',
         closeText                     : '关闭',
         showWindowText                : '显示',
         confirmRemoveBlock            : '确定要移除区块 【{0}】 吗？',
