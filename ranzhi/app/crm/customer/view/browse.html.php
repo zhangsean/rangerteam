@@ -38,7 +38,7 @@
         <td><?php echo $customer->id;?></td>
         <td class='text-left'><?php echo $customer->name;?></td>
         <td><?php echo $lang->customer->levelList[$customer->level];?></td>
-        <td><?php echo $lang->customer->statusList[$customer->status];?></td>
+        <td><?php if($customer->status) echo $lang->customer->statusList[$customer->status];?></td>
         <td><?php echo $lang->customer->sizeList[$customer->size];?></td>
         <td><?php echo $lang->customer->typeList[$customer->type];?></td>
         <td><?php echo substr($customer->contactedDate, 0, 10);?></td>

@@ -66,7 +66,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->customer->weibo;?></th>
-            <td><?php echo $customer->weibo;?></td>
+            <td><?php echo html::a("$customer->weibo", $customer->weibo, "target='_blank'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->weixin;?></th>
@@ -74,7 +74,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->customer->site;?></th>
-            <td><?php echo $customer->site;?></td>
+            <td><?php echo html::a("$customer->site", $customer->site, "target='_blank'");?></td>
           </tr>
         </table>
       </div>

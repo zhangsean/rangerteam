@@ -163,6 +163,7 @@ class customerModel extends model
         /* Add http:// in head when that has not http:// or https://. */
         if(strpos($customer->site, '://') === false )  $customer->site  = 'http://' . $customer->site;
         if(strpos($customer->weibo, 'http://weibo.com/') === false ) $customer->weibo = 'http://weibo.com/' . $customer->weibo;
+        if($customer->site == 'http://') $customer->site = '';
         if($customer->weibo == 'http://weibo.com/') $customer->weibo = '';
 
         $this->dao->update(TABLE_CUSTOMER)
