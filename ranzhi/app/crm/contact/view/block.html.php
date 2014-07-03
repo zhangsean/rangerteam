@@ -15,7 +15,8 @@
   <table class='table table-bordered table-contact'>
     <tr>
       <th class='w-120px text-center alert v-middle'>
-        <span class="lead <?php if($contact->maker) echo 'text-red'?>"><?php echo $contact->realname;?></span>
+        <?php $class = $contact->maker ? "class='text-red'" : "";?>
+        <span class='lead'><?php echo html::a($this->createLink('contact', 'view', "contactID=$contact->id"), $contact->realname, $class);?></span>
         <?php if($contact->left):?>
         <span ><i class='icon-lock text-muted'></i></span>
         <?php endif;?>
