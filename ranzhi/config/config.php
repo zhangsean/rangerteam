@@ -113,6 +113,7 @@ define('TABLE_SSO',       '`sys_sso`');
 define('TABLE_TASK',      '`sys_task`');
 define('TABLE_ISSUE',     '`sys_issue`');
 define('TABLE_TAG',       '`sys_tag`');
+define('TABLE_BLOCK',     '`sys_block`');
 
 /* Tables for crm. */
 define('TABLE_ADDRESS',       '`crm_address`');
@@ -132,7 +133,6 @@ define('TABLE_SERVICE',       '`crm_service`');
 define('TABLE_TODO',        '`oa_todo`');
 define('TABLE_PROJECT',     '`oa_project`');
 define('TABLE_EFFORT',      '`oa_effort`');
-define('TABLE_BLOCK',       '`oa_block`');
 define('TABLE_BOOK',        '`oa_book`');
 define('TABLE_LAYOUT',      '`oa_layout`');
 define('TABLE_DOC',         '`oa_doc`');

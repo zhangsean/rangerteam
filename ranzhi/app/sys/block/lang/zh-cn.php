@@ -71,13 +71,13 @@ $lang->block->default['team']['1']['title'] = '最新博客';
 $lang->block->default['team']['1']['block'] = 'blog';
 $lang->block->default['team']['1']['grid']  = 3;
 
-$lang->block->default['team']['1']['params']['num']     = 15;
+$lang->block->default['team']['1']['params']['num'] = 15;
 
 $lang->block->default['team']['2']['title'] = '最新帖子';
 $lang->block->default['team']['2']['block'] = 'thread';
 $lang->block->default['team']['2']['grid']  = 3;
 
-$lang->block->default['team']['2']['params']['num']     = 15;
+$lang->block->default['team']['2']['params']['num'] = 15;
 
 $lang->block->default['sys']['1'] = $lang->block->default['oa']['1'];
 $lang->block->default['sys']['1']['source'] = 'oa';

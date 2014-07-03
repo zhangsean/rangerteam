@@ -38,4 +38,7 @@ ALTER TABLE `crm_order` CHANGE `closedReason` `closedReason` enum('', 'payed', '
 ALTER TABLE `crm_customer` CHANGE `status` `status` enum('potential', 'intension', 'payed', 'failed') NOT NULL DEFAULT 'potential';
 ALTER TABLE `crm_contract` CHANGE `status` `status` enum('normal', 'closed', 'canceled') NOT NULL DEFAULT 'normal';
 
+ALTER TABLE `sys_block` ADD UNIQUE `account_app_order` (`account`, `app`, `order`);
+ALTER TABLE `sys_entry` ADD UNIQUE `code` (`code`), DROP INDEX `code`; 
+
 ALTER TABLE `sys_category` CHANGE `desc` `desc` text NOT NULL;
