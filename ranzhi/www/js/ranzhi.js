@@ -465,7 +465,7 @@ $.extend(
                 }
 
                 /* Save the href to rel attribute thus we can save it. */
-                $('#ajaxModal').attr('rel', url);
+                $('#ajaxModal').attr('rel', options.url);
 
                 return false;
             });
@@ -638,163 +638,6 @@ $.extend(
         $.extend({modalTrigger: showIframeModal});
 
         $('[data-toggle=modal], a.iframe').modalTrigger();
-
-        // jQuery.fn.modalTrigger = function(setting)
-        // {
-        //     initModalFrame(setting);
-
-        //     $(this).click(function(event)
-        //     {
-        //         var $e   = $(this);
-        //         if($e.hasClass('disabled') || $e.attr('disabled')) return false;
-
-        //         // Get options
-        //         var options = 
-        //         {
-        //             url:        $e.attr('href') || $e.data('url'),
-        //             width:      $e.data('width') || 800,
-        //             height:     $e.data('height') || 'auto',
-        //             icon:       $e.data('icon') || '?',
-        //             title:      $e.data('title') || $e.attr('title') || $e.text(),
-        //             name:       $e.data('name') || 'modalIframe',
-        //             cssClass:   $e.data('class'),
-        //             headerless: $e.data('headerless') || false,
-        //             center:     $e.data('center') || true,
-        //             type:       $e.hasClass('iframe') ? 'iframe' : ($e.data('type') || 'ajax')
-        //         }
-        //         options = $.extend(options, setting);
-        //         if(isNum(options.height.toString())) options.height += 'px';
-        //         if(isNum(options.width.toString())) options.width += 'px';
-        //         if(options.size == 'fullscreen')
-        //         {
-        //             var $w = $(window);
-        //             options.width = $w.width();
-        //             options.height = $w.height();
-        //             options.cssClass += ' fullscreen';
-        //         }
-        //         if(options.headerless)
-        //         {
-        //             options.cssClass += ' hide-header';
-        //         }
-
-        //         var modal = $('#ajaxModal').addClass('modal-loading').data('options', options);
-
-        //         if(options.type == 'iframe')
-        //         {
-        //             if(options.icon == '?')
-        //             {
-        //                 var i = $e.find("[class^='icon-']");
-        //                 options.icon = i.length ? i.attr('class').substring(5) : 'file-text';
-        //             }
-        //             modal.data('first', true);
-        //             modal.html("<div class='icon-spinner icon-spin loader'></div><div class='modal-dialog modal-iframe' style='width: {width};'><div class='modal-content'><div class='modal-header'><button class='close' data-dismiss='modal'>×</button><h4 class='modal-title'><i class='icon-{icon}'></i> {title}</h4></div><div class='modal-body' style='height:{height}'><iframe id='{name}' name='{name}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe></div></div></div>".format(options));
-
-        //             var modalBody = modal.find('.modal-body'), dialog = modal.find('.modal-dialog');
-        //             if(options.cssClass)
-        //             {
-        //                 dialog.addClass(options.cssClass);
-        //             }
-        //             var frame = document.getElementById(options.name);
-        //             frame.onload = frame.onreadystatechange = function()
-        //             {
-        //                 if (this.readyState && this.readyState != 'complete') return;
-        //                 if(!modal.data('first')) modal.addClass('modal-loading');
-
-        //                 modalBody.css('height', options.height - modal.find('.modal-header').outerHeight());
-
-        //                 try
-        //                 {
-        //                     var $frame = $(window.frames[options.name].document);
-        //                     if($frame.find('#titlebar').length)
-        //                     {
-        //                         modal.addClass('with-titlebar');
-        //                         if(options.size == 'fullscreen')
-        //                         {
-        //                             modalBody.css('height', options.height);
-        //                         }
-        //                     }
-        //                     if(options.height == 'auto')
-        //                     {
-        //                         var $framebody = $frame.find('body');
-        //                         setTimeout(function()
-        //                         {
-        //                             modalBody.css('height', $framebody.addClass('body-modal').outerHeight());
-        //                             if(options.center) dialog.css('margin-top', Math.max(0, (modal.height() - dialog.height())/3));
-        //                             modal.removeClass('modal-loading');
-        //                             if(modal.data('first')) modal.data('first', false);
-        //                         }, 100);
-
-        //                         $framebody.resize(function()
-        //                         {
-        //                             modalBody.css('height', $framebody.outerHeight());
-        //                         });
-        //                     }
-
-        //                     var iframe$ = window.frames[options.name].$;
-        //                     if(iframe$)
-        //                     {
-        //                         iframe$.extend({'closeModal': $.closeModal});
-        //                     }
-        //                 }
-        //                 catch(e){modal.removeClass('modal-loading');}
-        //             }
-        //         }
-        //         else
-        //         {
-        //             modal.load(options.url, function()
-        //             {
-        //                 setTimeout(function()
-        //                 {
-        //                     var modalBody = modal.find('.modal-body'), dialog = modal.find('.modal-dialog');
-        //                     if(options.height != 'auto') modalBody.css('height', options.height);
-        //                     if(options.width) dialog.css('width', options.width);
-        //                     if(options.center) dialog.css('margin-top', Math.max(0, (modal.height() - dialog.height())/3));
-        //                     modal.removeClass('modal-loading');
-        //                 },200);
-        //             });
-        //         }
-        //         modal.modal('show');
-        //         return false;
-        //     });
-        // }
-
-        // function initModalFrame(setting)
-        // {
-        //     if($('#ajaxModal').length)
-        //     {
-        //         /* unbind all events */
-        //         $('#ajaxModal').off('show.bs.modal shown.bs.modal hide.bs.modal hidden.bs.modal');
-        //     }
-        //     else
-        //     {
-        //         /* Addpend modal div. */
-        //         $('<div id="ajaxModal" class="modal fade"></div>').appendTo('body');
-        //     }
-
-        //     $ajaxModal = $('#ajaxModal');
-        //     $.extend({'closeModal':function(callback, location)
-        //     {
-        //         $ajaxModal.on('hidden.bs.modal', function()
-        //         {
-        //             if(location)
-        //             {
-        //                 if(location == 'this') window.location.reload();
-        //                 else window.location = location;
-        //             }
-        //             callback();
-        //         });
-        //         $ajaxModal.modal('hide');
-        //     }});
-
-        //     /* rebind events */
-        //     if(!setting) return;
-        //     if(setting.afterShow && $.isFunction(setting.afterShow)) $ajaxModal.on('show.bs.modal', setting.afterShow);
-        //     if(setting.afterShown && $.isFunction(setting.afterShown)) $ajaxModal.on('shown.bs.modal', setting.afterShown);
-        //     if(setting.afterHide && $.isFunction(setting.afterHide)) $ajaxModal.on('hide.bs.modal', setting.afterHide);
-        //     if(setting.afterHidden && $.isFunction(setting.afterHidden)) $ajaxModal.on('hidden.bs.modal', setting.afterHidden);
-        // }
-
-        // $('[data-toggle=modal], a.iframe').modalTrigger();
     },
 
 
@@ -811,8 +654,7 @@ $.extend(
         setTimeout(function()
         {
             var modal = $('#ajaxModal');
-            var options = modal.data('options');
-            modal.load(options.url, function(){$(this).find('.modal-dialog').css('width', $(this).data('width'))})}, duration);
+            modal.load(modal.attr('rel'), function(){$(this).find('.modal-dialog').css('width', $(this).data('width'))})}, duration);
     }
 });
 
