@@ -10,14 +10,6 @@
  * @link        http://www.ranzhi.org
  */
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
-js::import($jsRoot  . 'kityminder/kitygraph.min.js'); 
-js::import($jsRoot  . 'kityminder/kityminder.all.min.js'); 
-css::import($jsRoot . 'kityminder/themes/default/kityminder.min.css');
+js::import($jsRoot  . 'mindmap/min.js'); 
+css::import($jsRoot . 'mindmap/min.css');
 ?>
-<script>
-$(function()
-{
-    window.km = KM.getKityMinder('kityminder');
-    window.minder = km;
-});
-</script>

@@ -2,15 +2,15 @@ $(function()
 {
     $('#fsBtn').click(function()
     {
-        var mm = $('#mindmap');
+        var mm = $('#mindmapPanel');
         mm.toggleClass('fullscreen');
         ajustMinderSize();
     });
 
     function ajustMinderSize()
     {
-        var $km = $('#kityminder');
-        $('#kity_svg_0').attr('height', $(window).height() - $km.offset().top - ($('#mindmap').hasClass('fullscreen') ? 1 : 21)).attr('width', $km.width());
+        var $mm = $('#mindmap');
+        $mm.css('height', $(window).height() - $mm.offset().top - ($('#mindmapPanel').hasClass('fullscreen') ? 1 : 21));
     }
 
     $(window).resize(ajustMinderSize);

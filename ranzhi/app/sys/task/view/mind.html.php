@@ -11,8 +11,8 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
-<?php include '../../common/view/minder.html.php';?>
-<div class='panel' id='mindmap'>
+<?php include '../../common/view/mindmap.html.php';?>
+<div class='panel' id='mindmapPanel'>
   <div class='panel-heading'>
     <div class='panel-actions'>
       <div class='btn-group'>
@@ -28,7 +28,7 @@
     <div class='panel-actions pull-right'><button id='saveBtn' type='button' class='btn btn-primary disabled' disabled='disabled'><i class="icon-save"></i> <span><?php echo $lang->save;?></span></button></div>
   </div>
   <div class='panel-body minds-container'>
-    <div id="kityminder" onselectstart="return false"></div>
+    <div id="mindmap" class='mindmap'></div>
   </div>
 </div>
 <script>
@@ -36,26 +36,26 @@ $(function()
 {
     var data =
     {
-        data:
-        {
-            currentstyle : 'default',
-            text : '<?php echo $project->name;?>',
-            type : 'root',
-            expandState : 'expand',
-            id : '<?php echo $project->id;?>'
-        },
+        text : '<?php echo $project->name;?>',
+        type : 'root',
+        id : 'project-<?php echo $project->id;?>',
         children:
         [
             <?php foreach ($lang->task->statusList as $key => $value):?>
             <?php if(empty($key)) continue;?>
             {
-                data: {text: '<?php echo $value;?>', type: 'main', expandState: 'expand', id: '<?php echo $key;?>'},
+                text: '<?php echo $value;?>',
+                type: 'sub',
+                id: 'sub-<?php echo $key;?>',
+                readonly: true,
                 children:
                 [
                     <?php foreach($tasks as $task):?>
                     <?php if($task->status != $key) continue;?>
                     {
-                        data: {text: '<?php echo $task->name?>', type: 'sub', expandState: 'expand', id: '<?php echo $task->id?>'}
+                        text: '<?php echo $task->name?>',
+                        type: 'node',
+                        id: '<?php echo $task->id?>'
                     },
                     <?php endforeach;?>
                 ]
@@ -64,19 +64,21 @@ $(function()
         ]
     };
 
-    minder.importData(JSON.stringify(data), 'json');
+    console.log(data);
 
     $saveBtn = $('#saveBtn');
-
-    minder.on('contentchange', function()
+    $('#mindmap').mindmap(
     {
-        $saveBtn.removeClass('disabled').removeAttr('disabled').find('span').text('<?php echo $lang->save;?>');
+        data: data,
+        onChange: function()
+        {
+            $saveBtn.removeClass('disabled').removeAttr('disabled').find('span').text('<?php echo $lang->save;?>');
+        }
     });
 
     $saveBtn.click(function()
     {
         $saveBtn.addClass('disabled').attr('disabled', 'disabled');
-        var data = minder.exportData( 'json' );
         // save json data...
         $saveBtn.find('span').text('<?php echo $lang->saved?>');
     });
