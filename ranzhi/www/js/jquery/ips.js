@@ -332,6 +332,11 @@
         this.$.addClass('modal-mode');
     }
 
+    desktopManager.prototype.toggleDropmenuMode = function(name, on)
+    {
+        this.$.toggleClass('dropdown-mode-' + name, on);
+    }
+
     /* Determine wheather has entry window opened*/
     desktopManager.prototype.hasTask = function()
     {
@@ -1038,14 +1043,18 @@
         /* Initialize */
         this.init = function()
         {
+            var menu = $('#startMenu');
+
             $(document).click(function()
             {
-                $('#startMenu').removeClass('show');
+                menu.removeClass('show');
+                desktop.toggleDropmenuMode('startmenu', false);
             });
 
             $('#start').click(function(e)
             {
-                $('#startMenu').toggleClass('show');
+                menu.toggleClass('show');
+                desktop.toggleDropmenuMode('startmenu', menu.hasClass('show'));
                 e.stopPropagation();
             });
         }
@@ -1307,6 +1316,7 @@
                     var btn = $(this),menu = $('#taskMenu'), offset = btn.offset();
                     if(!menu.length) menu = $(settings.taskBarMenuHtmlTemplate).appendTo('#desktop');
                     menu.toggleClass('show');
+                    desktop.toggleDropmenuMode('taskmenu', menu.hasClass('show'));
 
                     if(menu.hasClass('show'))
                     {
@@ -1325,6 +1335,7 @@
             {
                 if($(e.target).hasClass('app-btn')) return false;
                 $('#taskMenu').removeClass('show');
+                desktop.toggleDropmenuMode('taskmenu', false);
             });
 
             function nocontextmenu(event)
