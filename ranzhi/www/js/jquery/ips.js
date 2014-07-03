@@ -392,7 +392,6 @@
                 $e.toggleClass('toggle-on');
             });
 
-
             window.onbeforeunload = function(e)
             {
                 if(desktop.hasTask()) return settings.confirmCloseBrowser;
@@ -1261,7 +1260,7 @@
                 if(et)
                 {
                     if(et.display == 'fullscreen' && desktop.fullScreenApps) desktop.fullScreenApps.toggle(et.id);
-                    else windows.openEntry(et, $this.attr('href') || $this.data('url'), $this.hasClass('s-menu-btn'));
+                    else windows.openEntry(et, $this.attr('href') || $this.data('url'));
                 }
                 else
                 {
