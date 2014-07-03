@@ -31,5 +31,6 @@ ALTER TABLE sys_task     CHANGE `left` `left` decimal(12,2) NOT NULL;
 ALTER TABLE crm_contact    ADD `nextDate` date NOT NULL AFTER contactedDate;
 
 ALTER TABLE `crm_order` CHANGE `status` `status` enum('normal', 'signed', 'closed') NOT NULL DEFAULT 'normal';
+ALTER TABLE `crm_order` CHANGE `closedReason` `closedReason` enum('', 'payed', 'failed', 'postponed') NOT NULL DEFAULT '';
 ALTER TABLE `crm_customer` CHANGE `status` `status` enum('potential', 'intension', 'payed', 'failed') NOT NULL DEFAULT 'potential';
 ALTER TABLE `crm_contract` CHANGE `status` `status` enum('normal', 'closed', 'canceled') NOT NULL DEFAULT 'normal';

@@ -144,7 +144,7 @@ CREATE TABLE `crm_order` (
   `signedDate` date NOT NULL,
   `closedBy` char(30) NOT NULL,
   `closedDate` datetime NOT NULL,
-  `closedReason` char(10) NOT NULL,
+  `closedReason` enum('', 'payed', 'failed', 'postponed') NOT NULL DEFAULT '';
   `activatedBy` char(30) NOT NULL,
   `activatedDate` datetime NOT NULL,
   `contactedBy` char(30) NOT NULL,
