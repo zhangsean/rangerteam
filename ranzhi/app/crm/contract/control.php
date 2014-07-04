@@ -91,6 +91,8 @@ class contract extends control
      */
     public function edit($contractID)
     {
+        $contract = $this->contract->getByID($contractID);
+
         if($_POST)
         {
             $changes = $this->contract->update($contractID);
@@ -98,14 +100,13 @@ class contract extends control
 
             if($changes)
             {
-                $actionID = $this->loadModel('action')->create('contract', $contractID, 'Edited');
+                $actionID = $this->loadModel('action')->create('contract', $contractID, 'Edited', '', '', '', $contract->customer);
                 $this->action->logHistory($actionID, $changes);
             }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "contractID=$contractID")));
         }
 
-        $contract = $this->contract->getByID($contractID);
         $this->view->contract       = $contract; 
         $this->view->contractOrders = $this->loadModel('order')->getListByID($contract->order);
         $this->view->orders         = array('' => '') + $this->order->getList($mode = 'customer', $contract->customer);

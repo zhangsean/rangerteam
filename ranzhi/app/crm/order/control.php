@@ -90,7 +90,7 @@ class order extends control
 
             if(!empty($changes))
             {   
-                $actionID = $this->loadModel('action')->create('order', $orderID, 'Edited');
+                $actionID = $this->loadModel('action')->create('order', $orderID, 'Edited', '', '', '', $order->customer);
                 $this->action->logHistory($actionID, $changes);
             }
 
