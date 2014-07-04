@@ -21,6 +21,7 @@ $lang->action->actionID = '记录ID';
 $lang->action->date     = '日期';
 $lang->action->nextDate = '下次联系';
 
+$lang->action->newContact  = '新建';
 $lang->action->editComment = '修改备注';
 
 $lang->action->textDiff = '文本格式';

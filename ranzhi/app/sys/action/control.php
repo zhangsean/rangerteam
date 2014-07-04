@@ -69,6 +69,18 @@ class action extends control
             }
 
             if($this->post->customer) $customer = $this->post->customer;
+
+            /* Can create contact when objectType is customer. */
+            if($this->post->createContact and $objectType == 'customer')
+            {
+                $contact = new stdclass();
+                $contact->realname = $this->post->realname;
+                $contact->customer = $objectID;
+                $contact->email    = '';
+                $contactID = $this->loadModel('contact', 'crm')->create($contact);
+                $this->post->set('contact', $contactID);
+            }
+
             $this->action->createRecord($objectType, $objectID, $customer, $this->post->contact);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
