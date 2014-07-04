@@ -243,19 +243,29 @@ class contractModel extends model
      */
     public function receive($contractID)
     {
-        $contract = fixer::input('post')
+        $contract = $this->getByID($contractID);
+
+        $data = fixer::input('post')
             ->add('return', 'done')
             ->setDefault('returnedBy', $this->app->user->account)
             ->setDefault('returnedDate', helper::now())
             ->join('handlers', ',')
             ->get();
 
-        $this->dao->update(TABLE_CONTRACT)->data($contract, $skip = 'uid, comment')
+        $this->dao->update(TABLE_CONTRACT)->data($data, $skip = 'uid, comment')
             ->autoCheck()
             ->where('id')->eq($contractID)
             ->exec();
 
-        return !dao::isError();
+        if(!dao::isError())
+        {
+            $this->dao->update(TABLE_CUSTOMER)->set('status')->eq('payed')->where('id')->eq($contract->customer)->exec();
+            $this->loadModel('action')->create('customer', $contract->customer, 'Returned', $contract->name);
+
+            return !dao::isError();
+        }
+
+        return false;
     }
 
     /**
