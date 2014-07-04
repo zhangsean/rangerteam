@@ -14,7 +14,7 @@ include '../../common/view/header.admin.html.php';
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-building'></i> <?php echo $lang->entry->admin;?></strong>
-    <span class='pull-right'><?php echo html::a($this->inlink('create'), $lang->entry->create);?></span>
+    <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), $lang->entry->create, "class='btn btn-primary'");?></div>
   </div>
   <table class='table table-bordered table-hover table-striped'>
     <thead>

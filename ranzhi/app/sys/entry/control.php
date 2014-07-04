@@ -62,19 +62,22 @@ class entry extends control
     {
         $referer = !empty($_GET['referer']) ? $this->get->referer : $referer;
         $entry = $this->entry->getById($entryID);
-        $login = $entry->login;
-        $token = $this->loadModel('sso')->createToken(session_id(), $entryID);
 
-        if(strpos('&', $login) !== false)
+        $location = $entry->login;
+        if($entry->integration)
         {
-            $location = rtrim($login, '&') . "&token=$token";
-        }
-        else
-        {
-            $location = rtrim($login, '?') . "?token=$token";
+            $token = $this->loadModel('sso')->createToken(session_id(), $entryID);
+            if(strpos('&', $login) !== false)
+            {
+                $location = rtrim($location, '&') . "&token=$token";
+            }
+            else
+            {
+                $location = rtrim($location, '?') . "?token=$token";
+            }
+            if(!empty($referer)) $location .= '&referer=' . $referer;
         }
 
-        if(!empty($referer)) $location .= '&referer=' . $referer;
         $this->locate($location);
     }
 

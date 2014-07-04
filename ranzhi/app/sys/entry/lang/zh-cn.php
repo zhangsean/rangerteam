@@ -17,10 +17,10 @@ $lang->entry->delete    = '删除应用';
 $lang->entry->createKey = '重新生成密钥';
 
 $lang->entry->name        = '名称';
-$lang->entry->abbr        = ' 缩写';
+$lang->entry->abbr        = '缩写';
 $lang->entry->code        = '代号';
-$lang->entry->buildin     = ' 内置应用';
-$lang->entry->integration = ' 应用集成';
+$lang->entry->buildin     = '内置应用';
+$lang->entry->integration = '应用集成';
 $lang->entry->key         = '密钥';
 $lang->entry->block       = '区块地址';
 $lang->entry->ip          = 'IP列表';
@@ -40,15 +40,15 @@ $lang->entry->lblBlock      = '区块';
 
 $lang->entry->note = new stdClass();
 $lang->entry->note->name    = '授权应用名称';
-$lang->entry->note->abbr    = ' 两个字符缩写';
-$lang->entry->note->logo    = ' Logo尺寸64*64，如何上传png格式，务必保持图片透明';
+$lang->entry->note->abbr    = '两个字符缩写';
+$lang->entry->note->logo    = 'Logo尺寸64*64，如何上传png格式，务必保持图片透明';
 $lang->entry->note->code    = '授权应用代号';
 $lang->entry->note->login   = '登录应用的表单提交地址';
 $lang->entry->note->logout  = '退出应用的地址';
-$lang->entry->note->visible = '显示在首页左侧栏';
+$lang->entry->note->visible = '左侧显示';
 $lang->entry->note->api     = '应用获取区块的接口地址';
 $lang->entry->note->ip      = "允许该应用使用这些ip访问，多个ip使用逗号隔开。支持IP段，如192.168.1.*";
-$lang->entry->note->allip   = ' 不限制';
+$lang->entry->note->allip   = '无限制';
 
 $lang->entry->error = new stdClass();
 $lang->entry->error->name  = '名称不能为空';

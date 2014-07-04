@@ -49,3 +49,10 @@ $('#allip').change(function()
         $('#ip').removeAttr('disabled');
     }
 })
+if(!$('#integration').prop('checked'))
+{
+    $('#key').parents('tr').hide();
+    $('#logout').parents('tr').hide();
+    $('#block').parents('tr').hide();
+    $('#ip').parents('tr').hide();
+}

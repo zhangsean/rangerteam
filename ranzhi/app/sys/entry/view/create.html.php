@@ -16,32 +16,25 @@ include '../../common/view/header.admin.html.php';
     <strong><i class='icon-building'></i> <?php echo $lang->entry->create;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' class='form form-horizontal' id='ajaxForm'>
+    <form method='post' class='form-inline' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->entry->name;?></th>
-          <td colspan='2'>
+          <td class='w-p50'>
             <div class='input-group'>
               <?php echo html::input('name', '', "class='form-control' placeholder='{$lang->entry->note->name}'");?>
-              <span class="input-group-addon fix-border fix-padding"></span>
-                <?php echo html::input('abbr', '', "class='form-control' size='2' maxlength='2' placeholder='{$lang->entry->note->abbr}'");?>
-              <span class="input-group-addon fix-border fix-padding">
-                <input type='checkbox' id='visible' name='visible' value='1'><label for='visible'><?php echo $lang->entry->note->visible;?></label>
-              </span>
-              <span class="input-group-addon fix-padding"></span>
-              <span class="input-group-addon fix-border fix-padding">
-                <input type='checkbox' id='buildin' name='buildin' value='1'><label for='buildin'><?php echo $lang->entry->buildin;?></label>
-              </span>
-              <span class="input-group-addon fix-padding"></span>
-              <span class="input-group-addon fix-border fix-padding">
-                <input type='checkbox' id='integration' checked name='integration' value='1'><label for='integration'><?php echo $lang->entry->integration;?></label>
-              </span>
+              <div class="input-group-addon"></div>
+              <?php echo html::input('abbr', '', "class='form-control' size='2' maxlength='2' placeholder='{$lang->entry->note->abbr}'");?>
+              <div class='input-group-addon'>
+                <label class="checkbox"><input type="checkbox" id="visible" name="visible" value="1"> <?php echo $lang->entry->note->visible;?></label>
+              </div>
             </div>
           </td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->logo;?></th>
-          <td class='w-p40'><?php echo html::file('files', "class='form-control'");?></td>
+          <td><?php echo html::file('files', "class='form-control'");?></td>
           <td><?php echo $lang->entry->note->logo;?></td>
         </tr>
         <tr>
@@ -53,13 +46,15 @@ include '../../common/view/header.admin.html.php';
           <td><?php echo html::select('open', $lang->entry->openList, '', 'class="form-control"');?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->entry->key;?></th>
-          <td><?php echo html::input('key', $key, "class='form-control' readonly='readonly'");?></td>
-          <td><span class="help-inline"><?php echo html::a('javascript:void(0)', $lang->entry->createKey, 'onclick="createKey()"')?></span></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->entry->login;?></th>
-          <td><?php echo html::input('login', '', "class='form-control' placeholder='{$lang->entry->note->login}'");?></td>
+          <td>
+            <div class='input-group'>
+              <?php echo html::input('login', '', "class='form-control' placeholder='{$lang->entry->note->login}'");?>
+              <div class='input-group-addon'>
+                <label class="checkbox"><input type="checkbox" id="integration" name="integration" value="1"> <?php echo $lang->entry->integration;?></label>
+              </div>
+            </div>
+          </td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->logout;?></th>
@@ -70,13 +65,18 @@ include '../../common/view/header.admin.html.php';
           <td><?php echo html::input('block', '', "class='form-control' placeholder='{$lang->entry->note->api}'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->entry->key;?></th>
+          <td><?php echo html::input('key', $key, "class='form-control' readonly='readonly'");?></td>
+          <td><span class="help-inline"><?php echo html::a('javascript:void(0)', $lang->entry->createKey, 'onclick="createKey()"')?></span></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->entry->ip;?></th>
           <td>
             <div class='input-group'>
               <?php echo html::input('ip', '', "class='form-control' placeholder='{$lang->entry->note->ip}'");?>
-              <span class="input-group-addon fix-padding">
-                <?php echo "<input type='checkbox' id='allip' name='allip' value='1'><label for='allip'>{$lang->entry->note->allip}";?></label>
-              </span>
+              <div class='input-group-addon'>
+                <label class="checkbox"><input type="checkbox" id="allip" name="allip" value="1"> <?php echo $lang->entry->note->allip;?></label>
+              </div>
             </div>
           </td>
         </tr>
