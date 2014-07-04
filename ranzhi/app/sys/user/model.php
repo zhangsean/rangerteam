@@ -23,11 +23,11 @@ class userModel extends model
      * @access public
      * @return array 
      */
-    public function getList($dept = 0, $userName = '', $orderBy = 'id', $pager = null)
+    public function getList($dept = 0, $field = '', $query = '', $orderBy = 'id', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_USER)
             ->where('deleted')->eq('0')
-            ->beginIF($userName != '')->andWhere('account')->like("%$userName%")->fi()
+            ->beginIF($field != '' and $query != '')->andWhere($field)->like("%$query%")->fi()
             ->beginIF($dept != 0)->andWhere('dept')->in($dept)->fi()
             ->orderBy($orderBy)
             ->page($pager)
