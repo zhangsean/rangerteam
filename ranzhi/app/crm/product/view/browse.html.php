@@ -30,7 +30,7 @@
     </thead>
     <tbody>
       <?php foreach($products as $product):?>
-      <tr class='text-center'>
+      <tr class='text-center' data-url="<?php echo $this->createLink('product', 'view', "productID={$product->id}");?>">
         <td><?php echo $product->id;?></td>
         <td class='text-left'><?php echo $product->name;?></td>
         <td><?php echo $product->createdDate;?></td>

@@ -30,6 +30,7 @@ $lang->product->list        = 'List';
 $lang->product->browse      = 'Browse';
 $lang->product->create      = 'Create';
 $lang->product->edit        = 'Edit';
+$lang->product->view        = 'View';
 
 $lang->product->typeList['real']    = 'Real';
 $lang->product->typeList['service'] = 'Service';
@@ -38,3 +39,5 @@ $lang->product->typeList['virtual'] = 'Virtual';
 $lang->product->statusList['developing'] = 'Developing';
 $lang->product->statusList['normal']     = 'Normal';
 $lang->product->statusList['offline']    = 'Offline';
+
+$lang->product->basicInfo = 'Basic Information';

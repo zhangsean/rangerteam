@@ -94,6 +94,21 @@ class product extends control
     }
 
     /**
+     * View a product.
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function view($productID)
+    {
+        $this->view->title   = $this->lang->product->view;
+        $this->view->product = $this->product->getByID($productID);
+        
+        $this->display();
+    }
+
+    /**
      * Delete a product.
      * 
      * @param  int      $productID 

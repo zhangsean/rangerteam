@@ -24,12 +24,13 @@ $lang->product->createdDate = '添加时间';
 $lang->product->editedBy    = '编辑者';
 $lang->product->editedDate  = '编辑时间';
 
-$lang->product->index     = '浏览产品';
-$lang->product->delete    = '删除产品';
+$lang->product->index       = '浏览产品';
+$lang->product->delete      = '删除产品';
 $lang->product->list        = '产品列表';
 $lang->product->browse      = '维护产品';
 $lang->product->create      = '添加产品';
 $lang->product->edit        = '编辑产品';
+$lang->product->view        = '产品详情';
 
 $lang->product->typeList['real']    = '实体类';
 $lang->product->typeList['service'] = '服务类';
@@ -38,3 +39,5 @@ $lang->product->typeList['virtual'] = '虚拟类';
 $lang->product->statusList['developing'] = '研发中';
 $lang->product->statusList['normal']     = '正常';
 $lang->product->statusList['offline']    = '下线';
+
+$lang->product->basicInfo = '基本信息';
