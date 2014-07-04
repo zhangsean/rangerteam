@@ -63,6 +63,7 @@ class task extends control
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;
         $this->view->projectID  = $projectID;
+        $this->view->users      = $this->loadModel('user')->getPairs();
         $this->display();
     }
 

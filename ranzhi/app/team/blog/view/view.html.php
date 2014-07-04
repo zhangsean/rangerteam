@@ -20,7 +20,7 @@
       <h1><?php echo $article->title;?></h1>
       <dl class='dl-inline'>
         <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, formatTime($article->createdDate));?>'><i class="icon-time icon-large"></i> <?php echo formatTime($article->createdDate);?></dd>
-        <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
+        <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $users[$article->author]);?>'><i class='icon-user icon-large'></i> <?php echo $users[$article->author]; ?></dd>
         <?php if(!$article->original):?>
         <dt><?php echo $lang->article->lblSource; ?></dt>
         <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>

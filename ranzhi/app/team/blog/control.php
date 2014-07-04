@@ -150,6 +150,7 @@ class blog extends control
         $this->view->article     = $article;
         $this->view->prevAndNext = $this->loadModel('article')->getPrevAndNext($article->id, $category->id);
         $this->view->category    = $category;
+        $this->view->users       = $this->loadModel('user')->getPairs();
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
         $this->display();
