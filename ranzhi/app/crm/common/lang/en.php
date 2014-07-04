@@ -59,3 +59,9 @@ $lang->setting->menu->industry      = 'Industry|tree|browse|type=industry|';
 $lang->dashboard = new stdclass();
 $lang->resume    = new stdclass();
 $lang->address   = new stdclass();
+
+$lang->currencyList['rmb'] = 'RMB';
+$lang->currencyList['usd'] = 'USD';
+
+$lang->currencySign['rmb'] = '￥';
+$lang->currencySign['usd'] = '$';

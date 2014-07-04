@@ -27,11 +27,18 @@
         <?php $system = isset($systemField[$key]) ? $systemField[$key] : 1;?>
         <td class='text-middle'><?php echo $key === '' ? 'NULL' : $key; echo html::hidden('keys[]', $key) . html::hidden('systems[]', $system);?></td>
         <td>
-          <?php $readonly = ($module == 'product' and $field == 'statusList' and $system == 1) ? 'readonly' : ''; ?>
-          <?php echo html::input("values[]", $value, "class='form-control' $readonly");?>
+          <div class='input-group'>
+            <?php echo html::input("values[]", $value, "class='form-control'");?>
+            <?php if($module == 'common' and $field == 'currencyList'):?>
+            <span class="input-group-addon fix-border fix-padding"></span>
+            <?php echo html::input("currencySign[]", $lang->currencySign[$key], "class='form-control' size='2'");?>
+            <?php endif;?>
+          </div>
         </td>
         <td class='text-left text-middle'>
+          <?php if(!($module == 'product' and $field == 'statusList' and $system == 1)):?>
           <a href='javascript:;' class='btn btn-mini add'><i class='icon-plus'></i></a>
+          <?php endif;?>
           <?php if(!$system):?><a href='javascript:;' class='btn btn-mini remove'><i class='icon-remove'></i></a><?php endif;?>
         </td>
       </tr>
@@ -64,12 +71,14 @@
 $placeholder = isset($lang->setting->placeholder->$field) ? $lang->setting->placeholder->$field : $lang->setting->placeholder->key; 
 $itemRow = <<<EOT
   <tr class='text-center'>
-    <td class='w-200px'>
+    <td>
       <input type='text' value="" name="keys[]" class='form-control' placeholder='{$placeholder}'>
       <input type='hidden' value="0" name="systems[]">
     </td>
     <td>
-      <input type='text' value="" name="values[]" class='form-control' placeholder='{$lang->setting->placeholder->value}'>
+      <div class='input-group'>
+        <input type='text' value="" name="values[]" class='form-control' placeholder='{$lang->setting->placeholder->value}'>
+      </div>
     </td>
     <td class='text-left text-middle'>
       <a href='javascript:;' class='btn btn-mini add'><i class='icon-plus'></i></a>
@@ -81,6 +90,7 @@ EOT;
 <?php js::set('itemRow', $itemRow)?>
 <?php js::set('module', $module)?>
 <?php js::set('field', $field)?>
+<?php js::set('valueplaceholder', $lang->setting->placeholder->value)?>
 <?php include '../../common/view/footer.lite.html.php';?>
 </body>
 </html>

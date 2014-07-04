@@ -39,6 +39,10 @@ class setting extends control
                 if(!$value or !$key) continue;
                 $system = $_POST['systems'][$index];
                 $this->setting->setItem("{$lang}.{$appName}.{$module}.{$field}.{$key}.{$system}", $value, $type = 'lang');
+                if($module ==  'common' and $field == 'currencyList')
+                {
+                    $this->setting->setItem("{$lang}.{$appName}.{$module}.currencySign.{$key}.{$system}", $_POST['currencySign'][$index], $type = 'lang');
+                }
             }
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -49,7 +53,7 @@ class setting extends control
         $systemField = array();
         foreach($dbFields as $dbField) $systemField[$dbField->key] = $dbField->system;
 
-        $this->view->fieldList   = $this->lang->$module->$field;
+        $this->view->fieldList   = $module == 'common' ? $this->lang->$field : $this->lang->$module->$field;
         $this->view->module      = $module;
         $this->view->field       = $field;
         $this->view->clientLang  = $clientLang;
