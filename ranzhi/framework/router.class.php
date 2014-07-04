@@ -1552,14 +1552,22 @@ class router
 
         /* Merge from the db lang. */
         if(empty($appName)) $appName = $this->appName;
-        if($moduleName != 'common' and isset($lang->db->custom[$appName][$moduleName]))
+        if(isset($lang->db->custom[$appName][$moduleName]))
         {
             foreach($lang->db->custom[$appName][$moduleName] as $section => $fields)
             {
                 foreach($fields as $key => $value)
                 {
-                    unset($lang->{$moduleName}->{$section}[$key]);
-                    $lang->{$moduleName}->{$section}[$key] = $value;
+                    if($moduleName == 'common')
+                    {
+                        unset($lang->{$section}[$key]);
+                        $lang->{$section}[$key] = $value;
+                    }
+                    else
+                    {
+                        unset($lang->{$moduleName}->{$section}[$key]);
+                        $lang->{$moduleName}->{$section}[$key] = $value;
+                    }
                 }
             }
         }
