@@ -13,15 +13,15 @@ CREATE TABLE `sys_block` (
   KEY account (`account`, `app`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-ALTER TABLE `sys_entry` ADD `buildin` tinyint(1) NOT NULL DEFAULT '0' AFTER `code`,
-ADD `integration` tinyint(1) NOT NULL DEFAULT '1' AFTER `buildin`;
-ALTER TABLE `sys_entry` ADD `abbr` char(2) COLLATE 'utf8_general_ci' NOT NULL AFTER `name`;
+ALTER TABLE `sys_entry` ADD `buildin` tinyint(1) unsigned NOT NULL DEFAULT '0' AFTER `code`,
+ADD `integration` tinyint(1) unsigned NOT NULL DEFAULT '0' AFTER `buildin`;
+ALTER TABLE `sys_entry` ADD `abbr` char(6) COLLATE 'utf8_general_ci' NOT NULL AFTER `name`;
 
-ALTER TABEL crm_contact ADD fax char(20) NOT NULL;
+ALTER TABLE crm_contact ADD fax char(20) NOT NULL;
 
 ALTER TABLE crm_contract CHANGE `amount` `amount` decimal(12,2) NOT NULL;
-ALTER TABLE crm_order    CHANGE `plan``plan` decimal(12,2) NOT NULL;
-ALTER TABLE crm_order    CHNAGE `real` `real` decimal(12,2) NOT NULL;
+ALTER TABLE crm_order    CHANGE `plan` `plan` decimal(12,2) NOT NULL;
+ALTER TABLE crm_order    CHANGE `real` `real` decimal(12,2) NOT NULL;
 ALTER TABLE cash_trade   CHANGE `money` `money` decimal(12,2) NOT NULL;
 ALTER TABLE cash_balance CHANGE `money` `money` decimal(12,2) NOT NULL;
 ALTER TABLE sys_task     CHANGE `estimate` `estimate` decimal(12,2) NOT NULL;
@@ -42,3 +42,6 @@ ALTER TABLE `sys_block` ADD UNIQUE `account_app_order` (`account`, `app`, `order
 ALTER TABLE `sys_entry` ADD UNIQUE `code` (`code`), DROP INDEX `code`; 
 
 ALTER TABLE `sys_category` CHANGE `desc` `desc` text NOT NULL;
+
+ALTER TABLE `crm_order` ADD `currency` varchar(20) COLLATE 'utf8_general_ci' NOT NULL AFTER `real`;
+ALTER TABLE `crm_contract` ADD `currency` varchar(20) COLLATE 'utf8_general_ci' NOT NULL AFTER `return`;

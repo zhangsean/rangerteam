@@ -59,6 +59,7 @@ CREATE TABLE `crm_contract` (
   `end` date NOT NULL,
   `delivery` char(30) NOT NULL,
   `return` char(30) NOT NULL,
+  `currency` varchar(20) NOT NULL,
   `status` enum('normal', 'closed', 'canceled') NOT NULL DEFAULT 'normal';
   `contact` mediumint(8) unsigned NOT NULL,
   `handlers` varchar(255) NOT NULL,
@@ -141,6 +142,7 @@ CREATE TABLE `crm_order` (
   `customer` mediumint(8) unsigned NOT NULL,
   `plan` decimal(12,2) NOT NULL,
   `real` decimal(12,2) NOT NULL,
+  `currency` varchar(20) NOT NULL,
   `status` enum('normal', 'signed', 'closed') NOT NULL DEFAULT 'normal';
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
@@ -359,6 +361,7 @@ CREATE TABLE `sys_block` (
   `order` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `grid` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `account_app_order` (`account`,`app`,`order`),
   KEY account (`account`, `app`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_category`;
@@ -404,7 +407,10 @@ CREATE TABLE `sys_config` (
 CREATE TABLE `sys_entry` (
   `id` smallint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `abbr` char(6) NOT NULL,
   `code` varchar(20) NOT NULL,
+  `buildin` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `integration` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `open` varchar(20) NOT NULL,
   `key` char(32) NOT NULL,
   `ip` varchar(100) NOT NULL,
@@ -418,7 +424,7 @@ CREATE TABLE `sys_entry` (
   `visible` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `order` tinyint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `code` (`code`)
+  UNIQUE KEY `code` (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_article`;
 CREATE TABLE `sys_article` (
