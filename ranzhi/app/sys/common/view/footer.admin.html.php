@@ -12,7 +12,6 @@
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
 if($moduleMenu) echo '</div>';
 ?>
-</div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom hidden-sm hidden-xs" role="navigation">
   <div class="collapse navbar-collapse navbar-ex6-collapse">

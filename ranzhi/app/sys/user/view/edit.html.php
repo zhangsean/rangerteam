@@ -77,4 +77,3 @@
   </div>
 </form>
 <?php include $app->getModuleRoot() . '../sys/common/view/footer.modal.html.php'; ?>
-
