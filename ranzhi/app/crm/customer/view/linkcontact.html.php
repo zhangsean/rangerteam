@@ -42,6 +42,10 @@
         <td><?php echo html::input('mobile', '', "class='form-control'");?></td>
       </tr>
       <tr>
+        <th><?php echo $lang->contact->phone;?></th>
+        <td><?php echo html::input('phone', '', "class='form-control'");?></td>
+      </tr>
+      <tr>
         <th><?php echo $lang->contact->qq;?></th>
         <td><?php echo html::input('qq', '', "class='form-control'");?></td>
       </tr>
