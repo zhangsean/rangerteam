@@ -110,4 +110,8 @@ $lang->task->outlineGroup['createdBy']  = 'Created By';
 $lang->task->outlineGroup['finishedby'] = 'Finished By';
 $lang->task->outlineGroup['closedby']   = 'Closed By';
 
+$lang->task->unkown = 'Unkown';
+
+$lang->task->mindMoveTip = 'You should move a task to a sub node.';
+
 $lang->task->groupinfo = 'Total <strong>%s</strong> - <span class="text-danger">waitin <strong>%s</strong></span> - <span class="text-warning">doing <strong>%s</strong></span> - <span class="text-success">finished <strong>%s</strong></span> - <span class="text-muted">closed <strong>%s</strong></span>';

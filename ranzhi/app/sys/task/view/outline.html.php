@@ -22,11 +22,11 @@
       </div>
       <div class="btn-group">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-        <i class='icon-cog'></i> <?php echo $lang->task->outlineGroup[$groupBy];?>
+        <i class='icon-cog'></i> <?php echo $lang->task->groups[$groupBy];?>
           <icon class="icon-caret-down"></icon>
         </button>
         <ul class="dropdown-menu">
-        <?php foreach ($lang->task->outlineGroup as $key => $value):?>
+        <?php foreach ($lang->task->groups as $key => $value):?>
         <?php if(empty($key)) continue;?>
           <?php $class = ($key == $groupBy) ? 'active' : '';?>
           <li class='<?php echo $class;?>'>

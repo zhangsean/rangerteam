@@ -349,14 +349,39 @@ class task extends control
         $this->display();
     }
 
+    // /**
+    //  * View task as mindmap 
+    //  * 
+    //  * @param  int    $taskID 
+    //  * @access public
+    //  * @return void
+    //  */
+    // public function mind($projectID = 0)
+    // {
+    //     /* Check project deleted. */
+    //     if($projectID)
+    //     {
+    //         $project = $this->loadModel('project')->getByID($projectID);
+    //         if($project->deleted) $this->locate($this->createLink('project'));
+    //     }
+
+    //     $this->view->moduleMenu  = $this->project->getLeftMenus($projectID );
+    //     $this->view->tasks       = $this->task->getList($projectID);
+    //     $this->view->title       = $this->lang->task->browse;
+    //     $this->view->projectID   = $projectID;
+    //     $this->view->project     =  $project;
+    //     $this->display();
+    // }
+
     /**
-     * View task as mind map 
+     * Browse tasks with mindmap.
      * 
-     * @param  int    $taskID 
+     * @param  int    $projectID 
+     * @param  string $groupBy    the field to group by
      * @access public
      * @return void
      */
-    public function mind($projectID = 0)
+    public function mind($projectID = 0, $groupBy = 'status')
     {
         /* Check project deleted. */
         if($projectID)
@@ -365,11 +390,51 @@ class task extends control
             if($project->deleted) $this->locate($this->createLink('project'));
         }
 
+        /* Get tasks and group them. */
+        $tasks       = $this->task->getList($projectID);
+        $groupBy     = strtolower(str_replace('`', '', $groupBy));
+        $taskLang    = $this->lang->task;
+        $groupByList = array();
+        $groupTasks  = array();
+
+        /* Get users. */
+        $users = $this->loadModel('user')->getPairs();
+        foreach($tasks as $task)
+        {
+            if($groupBy == '' or $groupBy == 'status')
+            {
+                $groupTasks[$taskLang->statusList[$task->status]][] = $task;
+            }
+            elseif($groupBy == 'assignedto')
+            {
+                $groupTasks[$users[$task->assignedTo]][] = $task;
+            }
+            elseif($groupBy == 'createdby')
+            {
+                $groupTasks[$users[$task->createdBy]][] = $task;
+            }
+            elseif($groupBy == 'finishedby')
+            {
+                $groupTasks[$users[$task->finishedBy]][] = $task;
+            }
+            elseif($groupBy == 'closedby')
+            {
+                $groupTasks[$users[$task->closedBy]][] = $task;
+            }
+            else
+            {
+                $groupTasks[$task->$groupBy][] = $task;
+            }
+        }
+
         $this->view->moduleMenu  = $this->project->getLeftMenus($projectID );
-        $this->view->tasks       = $this->task->getList($projectID);
-        $this->view->title       = $this->lang->task->browse;
+        $this->view->tasks       = $groupTasks;
+        $this->view->groupByList = $groupByList;
+        $this->view->groupBy     = $groupBy;
+        $this->view->orderBy     = $groupBy;
         $this->view->projectID   = $projectID;
-        $this->view->project     =  $project;
+        $this->view->projectName = $project->name;
+        $this->view->users       = $users;
         $this->display();
     }
 

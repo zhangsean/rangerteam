@@ -107,11 +107,15 @@ $lang->task->kanbanGroup['']           = '选择分组';
 $lang->task->kanbanGroup['status']     = '状态分组';
 $lang->task->kanbanGroup['assignedto'] = '指派给分组';
 
-$lang->task->outlineGroup['']           = '选择分组';
-$lang->task->outlineGroup['status']     = '状态分组';
-$lang->task->outlineGroup['assignedto'] = '指派给分组';
-$lang->task->outlineGroup['createdby']  = '创建者分组';
-$lang->task->outlineGroup['finishedby'] = '完成者分组';
-$lang->task->outlineGroup['closedby']   = '关闭者分组';
+$lang->task->groups['']           = '选择分组';
+$lang->task->groups['status']     = '状态分组';
+$lang->task->groups['assignedto'] = '指派给分组';
+$lang->task->groups['createdby']  = '创建者分组';
+$lang->task->groups['finishedby'] = '完成者分组';
+$lang->task->groups['closedby']   = '关闭者分组';
+
+$lang->task->unkown = '未指定';
+
+$lang->task->mindMoveTip = '只能将任务移动至二级节点下。';
 
 $lang->task->groupinfo = '总计 <strong>%s</strong> 项 - <span class="text-danger">未开始 <strong>%s</strong></span> - <span class="text-warning">进行中 <strong>%s</strong></span> - <span class="text-success">已完成 <strong>%s</strong></span> - <span class="text-muted">已关闭 <strong>%s</strong></span>';

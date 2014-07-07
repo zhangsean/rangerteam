@@ -22,6 +22,21 @@
         <?php echo html::a($this->inlink('outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $lang->task->outline, "class='btn'"); ?>
       </div>
       <div class="btn-group">
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+        <i class='icon-cog'></i> <?php echo $lang->task->groups[$groupBy];?>
+          <icon class="icon-caret-down"></icon>
+        </button>
+        <ul class="dropdown-menu">
+        <?php foreach ($lang->task->groups as $key => $value):?>
+        <?php if(empty($key)) continue;?>
+          <?php $class = ($key == $groupBy) ? 'active' : '';?>
+          <li class='<?php echo $class;?>'>
+            <?php echo html::a($this->inlink('mind', "projectID=$projectID&groupBy=$key"), $value); ?>
+          </li>
+        <?php endforeach;?>
+        </ul>
+      </div>
+      <div class="btn-group">
         <button class='btn' id='fsBtn'>全屏</button>
       </div>
     </div>
@@ -36,22 +51,21 @@ $(function()
 {
     var data =
     {
-        text : '<?php echo $project->name;?>',
+        text : '<?php echo $projectName;?>',
         type : 'root',
-        id : 'project-<?php echo $project->id;?>',
+        id : 'project-<?php echo $projectID;?>',
         children:
         [
-            <?php foreach ($lang->task->statusList as $key => $value):?>
-            <?php if(empty($key)) continue;?>
+            <?php $index = 0; ?>
+            <?php foreach($tasks as $groupKey => $groupTasks):?>
             {
-                text: '<?php echo $value;?>',
+                text: '<?php echo empty($groupKey) ? $lang->task->unkown : $groupKey;?>',
                 type: 'sub',
-                id: 'sub-<?php echo $key;?>',
+                id: 'sub-<?php echo $index++;?>',
                 readonly: true,
                 children:
                 [
-                    <?php foreach($tasks as $task):?>
-                    <?php if($task->status != $key) continue;?>
+                    <?php foreach($groupTasks as $task):?>
                     {
                         text: '<?php echo $task->name?>',
                         type: 'node',
@@ -64,22 +78,32 @@ $(function()
         ]
     };
 
-    console.log(data);
-
     $saveBtn = $('#saveBtn');
-    $('#mindmap').mindmap(
+    var mindmap = $('#mindmap').mindmap(
     {
         data: data,
         onChange: function()
         {
             $saveBtn.removeClass('disabled').removeAttr('disabled').find('span').text('<?php echo $lang->save;?>');
+        },
+        beforeMove: function(e)
+        {
+            if(!(e.event.element.data('type') == 'node' && e.event.target.data('type') == 'sub'))
+            {
+                window.messager.warning('<?php echo $lang->task->mindMoveTip;?>');
+                return false;
+            }
         }
-    });
+    }).data('zui.mindmap');
 
     $saveBtn.click(function()
     {
         $saveBtn.addClass('disabled').attr('disabled', 'disabled');
-        // save json data...
+
+        /* Save data with flow methods */
+        // console.log(mindmap.exportJSON());
+        // console.log(mindmap.exportArray());
+        
         $saveBtn.find('span').text('<?php echo $lang->saved?>');
     });
 });
