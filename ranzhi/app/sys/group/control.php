@@ -229,32 +229,19 @@ class group extends control
      * @access public
      * @return void
      */
-    public function delete($groupID, $confirm = 'no')
+    public function delete($groupID)
     {
-        if($confirm == 'no')
+        $this->group->delete($groupID);
+        if(dao::isError())
         {
-            die(js::confirm($this->lang->group->confirmDelete, $this->createLink('group', 'delete', "groupID=$groupID&confirm=yes")));
+            $response['result']  = 'fail';
+            $response['message'] = dao::getError();
         }
         else
         {
-            $this->group->delete($groupID);
-
-            /* if ajax request, send result. */
-            if($this->server->ajax)
-            {
-                if(dao::isError())
-                {
-                    $response['result']  = 'fail';
-                    $response['message'] = dao::getError();
-                }
-                else
-                {
-                    $response['result']  = 'success';
-                    $response['message'] = '';
-                }
-                $this->send($response);
-            }
-            die(js::locate($this->createLink('group', 'browse'), 'parent'));
+            $response['result']  = 'success';
+            $response['message'] = '';
         }
+        $this->send($response);
     }
 }
