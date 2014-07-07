@@ -295,13 +295,12 @@ td #aliasLabel {display: table-row;}
 .required-wrapper.required:after{right: -13px;top: 4px}
 
 /* nav */
-.nav > li > a {padding: 7px 15px; line-height: 20px}
+.nav > li > a {padding: 10px 15px; line-height: 20px}
 .nav li .icon-chevron-right {float: right; margin-top: 2px; margin-right: -6px; opacity: .25;}
 .nav li.active i.icon-chevron-right,.nav li:hover i.icon-chevron-right{opacity: .9;}
 
 /* navbar */
 .navbar {font-size: 14px; min-height: 36px}
-.navbar-nav > li > a, .navbar-brand {padding-top: 9px!important; padding-bottom: 9px!important}
 
 /* file Form */
 .form-group .file-form .form-group:last-child {margin-bottom: 0;}
