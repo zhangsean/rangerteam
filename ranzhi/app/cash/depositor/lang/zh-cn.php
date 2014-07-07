@@ -47,6 +47,8 @@ $lang->depositor->success       = "<span class='text-success'>对账成功</span
 $lang->depositor->more          = "<span class='text-danger'>超出实际余额 %s </span>";
 $lang->depositor->less          = "<span class='text-danger'>低于实际余额 %s </span>";
 
+$lang->depositor->createBalance = '请先录入账号余额。';
+
 $lang->depositor->typeList['cash']   = '现金帐号';
 $lang->depositor->typeList['bank']   = '借记卡';
 $lang->depositor->typeList['online'] = '在线支付';

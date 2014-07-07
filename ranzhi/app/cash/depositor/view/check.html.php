@@ -13,6 +13,8 @@
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
+<?php js::set('dateOptions', !empty($dateOptions));?>
+<?php js::set('createBalance', $lang->depositor->createBalance);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->depositor->check;?></strong>
