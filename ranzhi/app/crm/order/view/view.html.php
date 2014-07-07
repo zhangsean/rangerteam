@@ -53,6 +53,10 @@
           <td><?php echo html::a($this->createLink('product', 'view', "productID={$product->id}"), $product->name);?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->order->currency;?></th>
+          <td><?php echo zget($lang->order->currencyList, $order->currency, '');?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->order->plan;?></th>
           <td><?php echo $order->plan;?></td>
         </tr>

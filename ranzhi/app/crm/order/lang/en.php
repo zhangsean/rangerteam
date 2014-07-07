@@ -17,6 +17,7 @@ $lang->order->product       = 'Product';
 $lang->order->customer      = 'Customer';
 $lang->order->contact       = 'Contact';
 $lang->order->team          = 'Team';
+$lang->order->currency      = 'Currency';
 $lang->order->plan          = 'Planned Amount';
 $lang->order->real          = 'Real Amount';
 $lang->order->amount        = 'Amount';
@@ -58,6 +59,12 @@ $lang->order->closedReasonList['']          = '';
 $lang->order->closedReasonList['payed']     = 'Payed';
 $lang->order->closedReasonList['failed']    = 'Failed';
 $lang->order->closedReasonList['postponed'] = 'Postponed';
+
+$lang->order->currencyList['rmb'] = 'RMB';
+$lang->order->currencyList['usd'] = 'USD';
+
+$lang->order->currencySign['rmb'] = '￥';
+$lang->order->currencySign['usd'] = '$';
 
 $lang->order->titleLBL  = "[%s] %s buy %s";
 $lang->order->basicInfo = "Basic";

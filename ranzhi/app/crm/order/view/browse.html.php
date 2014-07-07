@@ -39,7 +39,12 @@
         <td><?php echo $lang->customer->levelList[$order->level];?></td>
         <td class='text-left'><?php echo $order->customerName;?></td>
         <td><?php echo $order->productName;?></td>
-        <td><?php echo $order->plan;?></td>
+        <td>
+          <?php
+          echo zget($lang->order->currencySign, $order->currency, '');
+          echo $order->plan;
+          ?>
+        </td>
         <td><?php if(isset($users[$order->assignedTo])) echo $users[$order->assignedTo];?></td>
         <td>
           <?php if($order->status != 'closed') echo isset($lang->order->statusList[$order->status]) ? $lang->order->statusList[$order->status] : $order->status;?>

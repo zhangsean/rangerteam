@@ -17,6 +17,7 @@ $lang->order->product       = '产品';
 $lang->order->customer      = '客户';
 $lang->order->contact       = '联系人';
 $lang->order->team          = '团队';
+$lang->order->currency      = '货币类型';
 $lang->order->plan          = '计划金额';
 $lang->order->real          = '成交金额';
 $lang->order->amount        = '金额';
@@ -58,6 +59,12 @@ $lang->order->closedReasonList['']          = '';
 $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '失败';
 $lang->order->closedReasonList['postponed'] = '延期';
+
+$lang->order->currencyList['rmb'] = '人民币';
+$lang->order->currencyList['usd'] = '美元';
+
+$lang->order->currencySign['rmb'] = '￥';
+$lang->order->currencySign['usd'] = '$';
 
 $lang->order->titleLBL  = "[%s] %s购买%s";
 $lang->order->basicInfo = "基本信息";

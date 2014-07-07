@@ -36,6 +36,10 @@
             <td><?php echo html::select('product', $products, $order->product, "class='form-control chosen'");?></td>
           </tr>
           <tr>
+            <th><?php echo $lang->order->currency;?></th>
+            <td><?php echo html::select('currency', $lang->order->currencyList, $order->currency, "class='form-control'");?></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->order->plan;?></th>
             <td><?php echo html::input('plan', $order->plan, "class='form-control'");?></td>
           </tr>

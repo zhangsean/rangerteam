@@ -29,7 +29,13 @@
         </tr>
         <tr>
           <th><?php echo $lang->order->plan;?></th>
-          <td><?php echo html::input('plan', '', "class='form-control'");?></td>
+          <td>
+            <div class='input-group'>
+              <?php echo html::select('currency', $lang->order->currencySign, '', "class='form-control'");?>
+              <span class="input-group-addon fix-border fix-padding"></span>
+              <?php echo html::input('plan', '', "class='form-control'");?>
+            </div>
+          </td>
         </tr>
         <tr>
           <th></th>
