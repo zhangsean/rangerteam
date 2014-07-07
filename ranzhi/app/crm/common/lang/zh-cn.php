@@ -55,14 +55,8 @@ $lang->setting->menu->customerSize  = '客户规模|setting|lang|module=customer
 $lang->setting->menu->customerLevel = '客户等级|setting|lang|module=customer&field=levelList';
 $lang->setting->menu->area          = '区域设置|tree|browse|type=area|';
 $lang->setting->menu->industry      = '行业设置|tree|browse|type=industry|';
-$lang->setting->menu->currency      = '货币设置|setting|lang|module=common&field=currencyList';
+$lang->setting->menu->currency      = '货币设置|setting|lang|module=order&field=currencyList';
 
 $lang->dashboard = new stdclass();
 $lang->resume    = new stdclass();
 $lang->address   = new stdclass();
-
-$lang->currencyList['rmb'] = '人民币';
-$lang->currencyList['usd'] = '美元';
-
-$lang->currencySign['rmb'] = '￥';
-$lang->currencySign['usd'] = '$';

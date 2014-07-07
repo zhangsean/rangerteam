@@ -29,9 +29,9 @@
         <td>
           <div class='input-group'>
             <?php echo html::input("values[]", $value, "class='form-control'");?>
-            <?php if($module == 'common' and $field == 'currencyList'):?>
+            <?php if($module == 'order' and $field == 'currencyList'):?>
             <span class="input-group-addon fix-border fix-padding"></span>
-            <?php echo html::input("currencySign[]", $lang->currencySign[$key], "class='form-control' size='2'");?>
+            <?php echo html::input("currencySign[]", $lang->order->currencySign[$key], "class='form-control' size='2'");?>
             <?php endif;?>
           </div>
         </td>

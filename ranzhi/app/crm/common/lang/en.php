@@ -55,6 +55,7 @@ $lang->setting->menu->customerSize  = 'Customer Size|setting|lang|module=custome
 $lang->setting->menu->customerLevel = 'Customer Level|setting|lang|module=customer&field=levelList';
 $lang->setting->menu->area          = 'Area|tree|browse|type=area|';
 $lang->setting->menu->industry      = 'Industry|tree|browse|type=industry|';
+$lang->setting->menu->currency      = 'Currency|setting|lang|module=order&field=currencyList';
 
 $lang->dashboard = new stdclass();
 $lang->resume    = new stdclass();

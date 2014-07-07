@@ -39,7 +39,9 @@ class setting extends control
                 if(!$value or !$key) continue;
                 $system = $_POST['systems'][$index];
                 $this->setting->setItem("{$lang}.{$appName}.{$module}.{$field}.{$key}.{$system}", $value, $type = 'lang');
-                if($module ==  'common' and $field == 'currencyList')
+
+                /* Save additional item. */
+                if($module == 'order' and $field == 'currencyList')
                 {
                     $this->setting->setItem("{$lang}.{$appName}.{$module}.currencySign.{$key}.{$system}", $_POST['currencySign'][$index], $type = 'lang');
                 }
