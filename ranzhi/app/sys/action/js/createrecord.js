@@ -1,6 +1,7 @@
 $(document).ready(function()
 {
-    $.setAjaxForm('#createRecordForm', function(){$.reloadAjaxModal();});
+    $.setAjaxForm('#createRecordForm', function(response) { if(response.result == 'success') $.reloadAjaxModal(); });
+
     $('[name*=objectType]').change(function()
     {
         $('#order, #contract').attr('disabled', true).parents('tr').hide();
