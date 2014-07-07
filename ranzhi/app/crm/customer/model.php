@@ -38,6 +38,7 @@ class customerModel extends model
         $customerList = $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->where('createdBy')->eq($this->app->user->account)->orWhere('public')->eq('1')
+            ->orWhere('public')->eq('1')
             ->fi()
             ->fetchAll('id');
         return array_keys($customerList);

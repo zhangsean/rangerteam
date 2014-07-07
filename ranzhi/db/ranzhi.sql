@@ -116,6 +116,7 @@ CREATE TABLE `crm_customer` (
   `weibo` char(50) NOT NULL,
   `weixin` char(50) NOT NULL,
   `desc` text NOT NULL,
+  `public` enum('0', '1') NOT NULL DEFAULT '0';
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `editedBy` char(30) NOT NULL,

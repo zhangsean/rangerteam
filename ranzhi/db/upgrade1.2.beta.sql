@@ -43,5 +43,7 @@ ALTER TABLE `sys_entry` ADD UNIQUE `code` (`code`), DROP INDEX `code`;
 
 ALTER TABLE `sys_category` CHANGE `desc` `desc` text NOT NULL;
 
+ALTER TABLE `crm_customer` Add `public` enum('0', '1') NOT NULL DEFAULT '0' AFTER `desc`;
+
 ALTER TABLE `crm_order` ADD `currency` varchar(20) COLLATE 'utf8_general_ci' NOT NULL AFTER `real`;
 ALTER TABLE `crm_contract` ADD `currency` varchar(20) COLLATE 'utf8_general_ci' NOT NULL AFTER `return`;

@@ -29,6 +29,7 @@ $lang->customer->site        = 'Site';
 $lang->customer->weibo       = 'Sina Weibo';
 $lang->customer->weixin      = 'Wechat';
 $lang->customer->desc        = 'Description';
+$lang->customer->public      = 'Public';
 $lang->customer->createdBy   = 'Created By';
 $lang->customer->createdDate = 'Created Date';
 $lang->customer->editedBy    = 'Edited By';

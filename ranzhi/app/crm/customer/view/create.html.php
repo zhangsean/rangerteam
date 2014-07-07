@@ -21,7 +21,14 @@
       <table class='table table-form'>
         <tr>
           <th class='w-80px'><?php echo $lang->customer->name;?></th>
-          <td class='w-p40'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
+          <td class='w-p40'>
+            <div class='input-group'>
+              <?php echo html::input('name', '', "class='form-control'");?>
+              <div class='input-group-addon'>
+                <label class='checkbox'><input type='checkbox' id='public' name='public' value='1'> <?php echo $lang->customer->public;?></label>
+              </div>
+            </div>
+          </td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->customer->contact;?></th>

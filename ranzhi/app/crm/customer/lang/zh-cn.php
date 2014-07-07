@@ -29,6 +29,7 @@ $lang->customer->site        = '网站';
 $lang->customer->weibo       = '微博';
 $lang->customer->weixin      = '微信';
 $lang->customer->desc        = '简介';
+$lang->customer->public      = '共有';
 $lang->customer->createdBy   = '由谁添加';
 $lang->customer->createdDate = '添加时间';
 $lang->customer->editedBy    = '由谁编辑';
