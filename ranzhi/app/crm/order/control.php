@@ -60,6 +60,7 @@ class order extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->loadModel('action')->create('order', $orderID, 'Created', '');
+            $this->loadModel('action')->create('customer', $this->post->customer, 'createOrder', '', html::a($this->createLink('order', 'view', "orderID=$orderID"), $orderID));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
@@ -90,8 +91,11 @@ class order extends control
 
             if(!empty($changes))
             {   
-                $actionID = $this->loadModel('action')->create('order', $orderID, 'Edited', '', '', '', $order->customer);
-                $this->action->logHistory($actionID, $changes);
+                $orderActionID = $this->loadModel('action')->create('order', $orderID, 'Edited');
+                $this->action->logHistory($orderActionID, $changes);
+
+                $customerActionID = $this->loadModel('action')->create('customer', $order->customer, 'editOrder', '', html::a($this->createLink('order', 'view', "orderID=$order->id"), $order->id));
+                $this->action->logHistory($customerActionID, $changes);
             }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "orderID=$orderID")));
@@ -139,11 +143,15 @@ class order extends control
      */
     public function close($orderID) 
     {
+        $order = $this->order->getByID($orderID);
         if(!empty($_POST))
         {
             $this->order->close($orderID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             $this->loadModel('action')->create('order', $orderID, 'Closed', $this->post->closedNote, $this->lang->order->closedReasonList[$this->post->closedReason]);
+            $this->loadModel('action')->create('customer', $order->customer, 'closeOrder', $this->lang->order->closedReason . $this->lang->order->closedReasonList[$this->post->closedReason] . '<br />' . $this->post->closedNote, html::a($this->createLink('order', 'view', "orderID=$orderID"), $orderID));
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
@@ -161,11 +169,13 @@ class order extends control
      */
     public function activate($orderID) 
     {
+        $order = $this->order->getByID($orderID); 
         if(!empty($_POST))
         {
             $this->order->activate($orderID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->loadModel('action')->create('order', $orderID, 'Activated', $this->post->comment);
+            $this->loadModel('action')->create('customer', $order->customer, 'activateOrder', $this->post->comment, html::a($this->createLink('order', 'view', "orderID=$orderID"), $orderID));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
@@ -212,18 +222,24 @@ class order extends control
      */
     public function assign($orderID, $table = null)
     {
+        $order   = $this->order->getByID($orderID);
+        $members = $this->loadModel('user')->getPairs('noclosed, nodeleted, devfirst');
+
         if($_POST)
         {
             $this->order->assign($orderID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             if($this->post->assignedTo) $this->loadModel('action')->create('order', $orderID, 'Assigned', $this->post->comment, $this->post->assignedTo);
+            if($this->post->assignedTo) $this->loadModel('action')->create('customer', $order->customer, 'assignOrder',  $this->lang->order->assignedTo . $members[$this->post->assignedTo] . '<br />' . $this->post->comment, html::a($this->createLink('order', 'view', "orderID=$orderID"), $orderID));
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
         $this->view->title   = $this->lang->order->assignedTo;
         $this->view->orderID = $orderID;
-        $this->view->order   = $this->order->getByID($orderID);
-        $this->view->members = $this->loadModel('user')->getPairs('noclosed, nodeleted, devfirst');
+        $this->view->order   = $order;
+        $this->view->members = $members;
         $this->display();
     }
 }

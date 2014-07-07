@@ -79,6 +79,7 @@ class contract extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->loadModel('action')->create('contract', $contractID, 'Created');
+            $this->loadModel('action')->create('customer', $this->post->customer, 'createContract', '', html::a($this->createLink('contract', 'view', "contractID=$contractID"), $this->post->name));
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
@@ -115,8 +116,11 @@ class contract extends control
 
             if($changes)
             {
-                $actionID = $this->loadModel('action')->create('contract', $contractID, 'Edited', '', '', '', $contract->customer);
-                $this->action->logHistory($actionID, $changes);
+                $contractActionID = $this->loadModel('action')->create('contract', $contractID, 'Edited');
+                $this->action->logHistory($contractActionID, $changes);
+
+                $customerActionID = $this->loadModel('action')->create('customer', $contract->customer, 'editContract', '', html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
+                $this->action->logHistory($customerActionID, $changes);
             }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "contractID=$contractID")));
@@ -140,12 +144,14 @@ class contract extends control
      */
     public function delivery($contractID)
     {
+        $contract = $this->contract->getByID($contractID);
         if(!empty($_POST))
         {
             $this->contract->delivery($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->loadModel('action')->create('contract', $contractID, 'Delivered', $this->post->comment);
+            $this->loadModel('action')->create('customer', $contract->customer, 'deliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
 
             $link = $this->session->contractLink ? $this->session->contractLink : inlink('view', "contractID=$contractID");
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
@@ -166,12 +172,14 @@ class contract extends control
      */
     public function receive($contractID)
     {
+        $contract = $this->contract->getByID($contractID);
         if(!empty($_POST))
         {
             $this->contract->receive($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->loadModel('action')->create('contract', $contractID, 'Returned', $this->post->comment);
+            $this->loadModel('action')->create('customer', $contract->customer, 'receiveContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
             
             $link = $this->session->contractLink ? $this->session->contractLink : inlink('view', "contractID=$contractID");
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
@@ -192,12 +200,14 @@ class contract extends control
      */
     public function cancel($contractID)
     {
+        $contract = $this->contract->getByID($contractID);
         if(!empty($_POST))
         {
             $this->contract->cancel($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->loadModel('action')->create('contract', $contractID, 'Canceled', $this->post->comment);
+            $this->loadModel('action')->create('customer', $contract->customer, 'cancelContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
             
             $link = $this->session->contractLink ? $this->session->contractLink : inlink('view', "contractID=$contractID");
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
@@ -217,12 +227,14 @@ class contract extends control
      */
     public function finish($contractID)
     {
+        $contract = $this->contract->getByID($contractID);
         if(!empty($_POST))
         {
             $this->contract->finish($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->loadModel('action')->create('contract', $contractID, 'Finished', $this->post->comment);
+            $this->loadModel('action')->create('customer', $contract->customer, 'finishContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
 
             $link = $this->session->contractLink ? $this->session->contractLink : inlink('view', "contractID=$contractID");
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));

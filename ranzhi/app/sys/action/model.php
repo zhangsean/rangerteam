@@ -367,10 +367,11 @@ class actionModel extends model
      * 
      * @param  string    $objectType 
      * @param  array     $histories 
+     * @param  string    $action 
      * @access public
      * @return void
      */
-    public function printChanges($objectType, $histories)
+    public function printChanges($objectType, $histories, $action)
     {
         if(empty($histories)) return;
 
@@ -383,6 +384,8 @@ class actionModel extends model
         {
             $fieldName = $history->field;
             $history->fieldLabel = isset($this->lang->$objectType->$fieldName) ? $this->lang->$objectType->$fieldName : $fieldName;
+            if(strpos($action, 'order') !== false) $history->fieldLabel = isset($this->lang->order->$fieldName) ? $this->lang->order->$fieldName : $fieldName;
+            if(strpos($action, 'contract') !== false) $history->fieldLabel = isset($this->lang->contract->$fieldName) ? $this->lang->contract->$fieldName : $fieldName;
             if(($length = strlen($history->fieldLabel)) > $maxLength) $maxLength = $length;
             $history->diff ? $historiesWithDiff[] = $history : $historiesWithoutDiff[] = $history;
         }

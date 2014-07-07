@@ -39,7 +39,7 @@
       <?php if(!empty($action->comment) or !empty($action->history)):?>
       <?php if(!empty($action->comment)) echo "<div class='history'>";?>
         <div class='changes history' style='display:none;'>
-        <?php echo $this->action->printChanges($action->objectType, $action->history);?>
+        <?php echo $this->action->printChanges($action->objectType, $action->history, $action->action);?>
         </div>
         <?php if($canEditComment):?>
         <span class='link-button pull-right comment<?php echo $action->id;?>'><?php echo html::a('#lastCommentBox', '<i class="icon-edit-sign icon-large"></i>', "onclick='toggleComment($action->id)'")?></span>

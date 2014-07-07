@@ -260,7 +260,6 @@ class contractModel extends model
         if(!dao::isError())
         {
             $this->dao->update(TABLE_CUSTOMER)->set('status')->eq('payed')->where('id')->eq($contract->customer)->exec();
-            $this->loadModel('action')->create('customer', $contract->customer, 'Returned', $contract->name);
 
             return !dao::isError();
         }
