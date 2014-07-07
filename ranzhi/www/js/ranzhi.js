@@ -602,7 +602,7 @@ $.extend(
             if($('#ajaxModal').length)
             {
                 /* unbind all events */
-                $('#ajaxModal').off('show.bs.modal shown.bs.modal hide.bs.modal hidden.bs.modal');
+                $('#ajaxModal').off('show.bs.modal shown.bs.modal hide.bs.modal hidden.bs.modal escaping.bs.modal');
             }
             else
             {
@@ -628,11 +628,28 @@ $.extend(
             }, 'cancelReloadCloseModal': function(){$ajaxModal.data('cancel-reload', true);}});
 
             /* rebind events */
-            if(!setting) return;
-            if(setting.afterShow && $.isFunction(setting.afterShow)) $ajaxModal.on('show.bs.modal', setting.afterShow);
-            if(setting.afterShown && $.isFunction(setting.afterShown)) $ajaxModal.on('shown.bs.modal', setting.afterShown);
-            if(setting.afterHide && $.isFunction(setting.afterHide)) $ajaxModal.on('hide.bs.modal', setting.afterHide);
-            if(setting.afterHidden && $.isFunction(setting.afterHidden)) $ajaxModal.on('hidden.bs.modal', setting.afterHidden);
+            if(setting)
+            {
+                if(setting.afterShow && $.isFunction(setting.afterShow)) $ajaxModal.on('show.bs.modal', setting.afterShow);
+                if(setting.afterShown && $.isFunction(setting.afterShown)) $ajaxModal.on('shown.bs.modal', setting.afterShown);
+                if(setting.afterHide && $.isFunction(setting.afterHide)) $ajaxModal.on('hide.bs.modal', setting.afterHide);
+                if(setting.afterHidden && $.isFunction(setting.afterHidden)) $ajaxModal.on('hidden.bs.modal', setting.afterHidden);
+            }
+            
+            /* check form changes when close modal */
+            $ajaxModal.on('shown.bs.modal', function()
+            {
+                $(document).on('keyup.modal.changes paste.modal.changes', '#ajaxModal form input', function()
+                {
+                    $(this).addClass('modal-val-changed');
+                });
+            }).on('escaping.bs.modal', function(event, esc)
+            {
+                if($('#ajaxModal form input.modal-val-changed').length)
+                {
+                    return confirm(v.lang.confirmDiscardChanges);
+                }
+            }).on('hidden.bs.modal', function(){$(document).off('keyup.modal.changes paste.modal.changes');});
         }
 
         $.extend({modalTrigger: showIframeModal});

@@ -123,10 +123,11 @@ $lang->lifetime->lastEdited   = '最后修改';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
-$lang->js->confirmDelete = '您确定要执行删除操作吗？';
-$lang->js->deleteing     = '删除中';
-$lang->js->doing         = '处理中';
-$lang->js->timeout       = '网络超时,请重试';
+$lang->js->confirmDelete         = '您确定要执行删除操作吗？';
+$lang->js->deleteing             = '删除中';
+$lang->js->doing                 = '处理中';
+$lang->js->timeout               = '网络超时,请重试';
+$lang->js->confirmDiscardChanges = '表单已更改，确定关闭？';
 
 /* Contact fields*/
 $lang->company = new stdclass();

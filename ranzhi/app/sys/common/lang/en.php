@@ -123,10 +123,11 @@ $lang->lifetime->lastEdited   = 'Last Edited';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
-$lang->js->confirmDelete = 'Are sure to delete it?';
-$lang->js->deleteing     = 'Deleting...';
-$lang->js->doing         = 'Processing...';
-$lang->js->timeout       = 'Timeout';
+$lang->js->confirmDelete         = 'Are sure to delete it?';
+$lang->js->deleteing             = 'Deleting...';
+$lang->js->doing                 = 'Processing...';
+$lang->js->timeout               = 'Timeout';
+$lang->js->confirmDiscardChanges = 'Discard changes?';
 
 /* Contact fields*/
 $lang->company = new stdclass();
