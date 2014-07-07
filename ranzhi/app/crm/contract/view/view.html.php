@@ -50,7 +50,12 @@
         </tr>
         <tr>
           <th><?php echo $lang->contract->amount;?></th>
-          <td><?php echo $contract->amount?></td>
+          <td>
+            <?php
+            echo zget($lang->order->currencySign, $contract->currency, '');
+            echo $contract->amount;
+            ?>
+          </td>
         </tr>
         <tr>
           <th class='w-70px'><?php echo $lang->contract->delivery;?></th>

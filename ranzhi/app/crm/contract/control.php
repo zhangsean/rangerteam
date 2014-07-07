@@ -12,6 +12,21 @@
 class contract extends control
 {
     /**
+     * Construct method.
+     * 
+     * @param  string $moduleName 
+     * @param  string $methodName 
+     * @param  string $appName 
+     * @access public
+     * @return void
+     */
+    public function __construct($moduleName = '', $methodName = '', $appName = '')
+    {
+        parent::__construct($moduleName, $methodName, $appName);
+        $this->app->loadLang('order', 'crm');
+    }
+
+    /**
      * Contract index page. 
      * 
      * @access public
@@ -269,21 +284,21 @@ class contract extends control
     {
         $orders = $this->loadModel('order')->getOrderForCustomer($customerID, $status);
 
-        $html = "<div class='form-group'><span class='col-sm-8'><select name='order[]' class='select-order form-control'>";
+        $html = "<div class='form-group'><span class='col-sm-7'><select name='order[]' class='select-order form-control'>";
 
         foreach($orders as $order)
         {
             if(!$order)
             {
-                $html .= "<option value='' data-real=''></option>";
+                $html .= "<option value='' data-real='' data-currency=''></option>";
                 continue;
             }
 
-            $html .= "<option value='{$order->id}' data-real='{$order->plan}'>{$order->title}</option>";
+            $html .= "<option value='{$order->id}' data-real='{$order->plan}' data-currency='{$order->currency}'>{$order->title}</option>";
         }
 
         $html .= '</select></span>';
-        $html .= "<span class='col-sm-3'>" . html::input('real[]', '', "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'") . "</span>";
+        $html .= "<span class='col-sm-4'><div class='input-group'><div class='input-group-addon order-currency'></div>" . html::input('real[]', '', "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'") . "</div></span>";
         $html .= "<span class='col-sm-1'>" . html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='minus'") . "</span></div>";
 
         echo $html;

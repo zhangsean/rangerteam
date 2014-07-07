@@ -20,7 +20,7 @@
     <strong><i class="icon-edit"></i> <?php echo $lang->contract->create;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm' class='form-condensed'>
+    <form method='post' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
           <th class='w-80px'><?php echo $lang->contract->name;?></th>
@@ -35,16 +35,23 @@
           <th><?php echo $lang->contract->order;?></th>
           <td>
             <div class='form-group'>
-              <span class='col-sm-8'>
+              <span class='col-sm-7'>
                 <select name='order[]' class='select-order form-control'>
                   <option value=''></option>
                   <?php foreach($orders as $order):?>
                   <?php $selected = $orderID == $order->id ? 'selected' : ''; ?>
-                  <option value="<?php echo $order->id;?>" <?php echo $selected;?>  data-real="<?php echo $order->plan;?>"><?php echo $order->title;?></option>
+                  <option value="<?php echo $order->id;?>" <?php echo $selected;?>  data-real="<?php echo $order->plan;?>" data-currency="<?php echo $order->currency?>"><?php echo $order->title;?></option>
                   <?php endforeach;?>
                 </select>
               </span>
-              <span class='col-sm-3'><?php echo html::input('real[]', $currentOrder->plan, "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?></span>
+              <span class='col-sm-4'>
+                <div class='input-group'>
+                  <div class='input-group-addon order-currency'>
+                    <?php echo zget($lang->order->currencySign, $currentOrder->currency, '');?> 
+                  </div>
+                  <?php echo html::input('real[]', $currentOrder->plan, "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?>
+                </div>
+              </span>
               <span class='col-sm-1'><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='minus'");?></span>
             </div>
           </td>
@@ -56,7 +63,13 @@
         </tr>
         <tr>
           <th><?php echo $lang->contract->amount;?></th>
-          <td><?php echo html::input('amount', isset($currentOrder) ? $currentOrder->plan : '', "class='form-control'");?></td>
+          <td>
+            <div class='input-group'>
+              <?php echo html::select('currency', $lang->order->currencySign, isset($currentOrder) ? $currentOrder->currency : '', "class='form-control'");?>
+              <span class="input-group-addon fix-border fix-padding"></span>
+              <?php echo html::input('amount', isset($currentOrder) ? $currentOrder->plan : '', "class='form-control'");?>
+            </div>
+          </td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->contact;?></th>
@@ -100,4 +113,5 @@
     </form>
   </div>
 </div>
+<?php js::set('currencySign', array('' => '') + $lang->order->currencySign);?>
 <?php include '../../common/view/footer.html.php';?>

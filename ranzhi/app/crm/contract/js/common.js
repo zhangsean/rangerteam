@@ -4,6 +4,7 @@ $(document).ready(function()
     $(document).on('change', 'select.select-order', function()
     {
         $(this).parent().next('span').find(':input').val($(this).find('option:selected').attr('data-real'));
+        $(this).parent().next('span').find('.order-currency').html(v.currencySign[$(this).find('option:selected').attr('data-currency')]);
         $(this).parent().next('span').find(':input').change();
     });
 
@@ -13,5 +14,6 @@ $(document).ready(function()
         var amount = 0;
         $('.order-real').each(function(){if($(this).val()) amount += parseFloat($(this).val()); });
         $('#amount').val(amount);
+        $('#currency').val($('.order-real:first').parent().parent().prev('span').find('select').find('option:selected').attr('data-currency'));
     });
 })

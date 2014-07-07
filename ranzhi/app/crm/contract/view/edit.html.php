@@ -14,7 +14,7 @@
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
-<form method='post' id='ajaxForm' class='form-condensed'>
+<form method='post' id='ajaxForm'>
   <div class='col-md-8'>
     <div class='panel'>
       <div class='panel-heading'>
@@ -23,7 +23,7 @@
       <div class='panel-body'>
         <table class='table table-form'>
           <tr>
-            <th><?php echo $lang->contract->name;?></th>
+            <th class='w-80px'><?php echo $lang->contract->name;?></th>
             <td colspan='2'><?php echo html::input('name', $contract->name, "class='form-control'");?></td>
           </tr>
           <?php foreach($contractOrders as $currentOrder):?>
@@ -31,19 +31,26 @@
             <th class='orderTH'><?php echo $lang->contract->order;?></th>
             <td colspan='2'>
               <div class='form-group'>
-                <span class='col-sm-8'>
+                <span class='col-sm-7'>
                   <select name='order[]' class='select-order form-control'>
                     <?php foreach($orders as $order):?>
                     <?php if(!$order):?>
-                    <option value='' data-real=''></option>
+                    <option value='' data-real='' data-currency=''></option>
                     <?php else:?>
                     <?php $selected = $currentOrder->id == $order->id ? "selected='selected'" : '';?>
-                    <option value="<?php echo $order->id;?>" <?php echo $selected;?> data-real="<?php echo $order->plan;?>"><?php echo $order->title;?></option>
+                    <option value="<?php echo $order->id;?>" <?php echo $selected;?> data-real="<?php echo $order->plan;?>" data-currency="<?php echo $order->currency?>"><?php echo $order->title;?></option>
                     <?php endif;?>
                     <?php endforeach;?>
                   </select>
                 </span>
-                <span class='col-sm-3'><?php echo html::input('real[]', $currentOrder->real, "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?></span>
+                <span class='col-sm-4'>
+                  <div class='input-group'>
+                    <div class='input-group-addon order-currency'>
+                      <?php echo zget($lang->order->currencySign, $currentOrder->currency, '');?> 
+                    </div>
+                    <?php echo html::input('real[]', $currentOrder->real, "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?>
+                  </div>
+                </span>
                 <span class='col-sm-1'><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='minus'");?></span>
               </div>
             </td>
@@ -51,7 +58,13 @@
           <?php endforeach;?>
           <tr>
             <th><?php echo $lang->contract->amount;?></th>
-            <td><?php echo html::input('amount', $contract->amount, "class='form-control'");?></td>
+            <td>
+              <div class='input-group'>
+                <?php echo html::select('currency', $lang->order->currencySign, $contract->currency, "class='form-control'");?>
+                <span class="input-group-addon fix-border fix-padding"></span>
+              <?php echo html::input('amount', $contract->amount, "class='form-control'");?>
+              </div>
+            </td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->items;?></th>
@@ -173,21 +186,27 @@
     <th></th>
     <td colspan='2'>
       <div class='form-group'>
-        <span class='col-sm-8'>
+        <span class='col-sm-7'>
           <select name='order[]' class='select-order form-control'>
             <?php foreach($orders as $order):?>
             <?php if(!$order):?>
-            <option value='' data-real=''></option>
+            <option value='' data-real='' data-currency=''></option>
             <?php else:?>
-            <option value="<?php echo $order->id;?>" data-real="<?php echo $order->plan;?>"><?php echo $order->title;?></option>
+            <option value="<?php echo $order->id;?>" data-real="<?php echo $order->plan;?>" data-currency="<?php echo $order->currency?>"><?php echo $order->title;?></option>
             <?php endif;?>
             <?php endforeach;?>
           </select>
         </span>
-        <span class='col-sm-3'><?php echo html::input('real[]', '', "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?></span>
+        <span class='col-sm-4'>
+          <div class='input-group'>
+            <div class='input-group-addon order-currency'></div>
+            <?php echo html::input('real[]', '', "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?>
+          </div>
+        </span>
         <span class='col-sm-1'><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='minus'");?></span>
       </div>
     </td>
   </tr>
 </table>
+<?php js::set('currencySign', array('' => '') + $lang->order->currencySign);?>
 <?php include '../../common/view/footer.html.php';?>
