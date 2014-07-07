@@ -24,18 +24,35 @@ class sso extends control
         $userIP = $this->get->userIP;
         $sso    = $this->sso->getByToken($token); 
         $entry  = $this->loadModel('entry')->getById($sso->entry);
+
+        if(isset($_GET['callback']))
+        {
+            $callback = urldecode($this->get->callback);
+            $sign     = strpos($callback, '&') === false ? '?' : '&';
+        }
+
         if($this->sso->checkIP($entry->code))
         {
             if($auth == md5($entry->code . $token . $entry->key))
             {
-                session_destroy();
-                session_id($sso->sid);
-                session_start();
                 if($this->session->user->ip == $userIP)
                 {
                     $user = $this->loadModel('user')->getByAccount($this->session->user->account);
+
+                    $data = new stdclass();
+                    $data->id       = $user->id;
+                    $data->dept     = $user->dept;
+                    $data->account  = $user->account;
+                    $data->realname = $user->realname;
+                    $data->role     = $user->role;
+                    $data->gender   = $user->gender;
+                    $data->email    = $user->email;
+
                     $response['status'] = 'success';
-                    $response['data']   = json_encode($user);
+                    $response['data']   = base64_encode(json_encode($data));
+                    $response['md5']    = md5($response['data']);
+
+                    if(isset($callback)) $this->locate($callback . $sign . http_build_query($response));
                     die(json_encode($response));
                 }
             }
@@ -43,6 +60,9 @@ class sso extends control
 
         $response['status'] = 'fail';
         $response['data']   = 'check failed.';
+        $response['md5']    = md5($response['data']);
+
+        if(isset($callback)) $this->locate($callback . $sign . http_build_query($response));
         die(json_encode($response));
     }
 
