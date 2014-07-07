@@ -25,6 +25,13 @@ $lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=status
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
 $lang->customer->menu->browse = array('link' => '<i class="icon-group"></i> Customer List|customer|browse|', 'alias' => 'create,edit,record,view');
+$lang->customer->menu->past      = array('link' => 'Urgently need contacted|customer|browse|mode=past', 'alias' => 'create,edit,view,record');
+$lang->customer->menu->today     = array('link' => 'Contact Today|customer|browse|mode=today', 'alias' => 'create,edit,view,record');
+$lang->customer->menu->tomorrow  = array('link' => 'Contact Tomorrow|customer|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
+$lang->customer->menu->thisweek  = array('link' => 'Contact This Week|customer|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
+$lang->customer->menu->thismonth = array('link' => 'Contact This Month|customer|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
+$lang->customer->menu->public    = array('link' => 'Public Customers|customer|browse|mode=public', 'alias' => 'create,edit,view,record');
+
 
 /* Menu of product module. */
 $lang->product = new stdclass();

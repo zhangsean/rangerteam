@@ -37,7 +37,7 @@ class customerModel extends model
     {
         $customerList = $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
-            ->where('createdBy')->eq($this->app->user->account)
+            ->where('createdBy')->eq($this->app->user->account)->orWhere('public')->eq('1')
             ->fi()
             ->fetchAll('id');
         return array_keys($customerList);
@@ -48,19 +48,30 @@ class customerModel extends model
      * 
      * @param  string  $mode 
      * @param  mix     $param 
+     * @param  string  $relation  client|provider
      * @param  string  $orderBy 
      * @param  object  $pager 
      * @access public
      * @return array
      */
-    public function getList($mode = 'all', $param = null, $orderBy = 'id_desc', $pager = null)
+    public function getList($mode = 'all', $param = null, $relation = 'client', $orderBy = 'id_desc', $pager = null)
     {
         $mine = $this->getMine();
         if(empty($mine)) return array();
+        $this->app->loadClass('date', $static = true);
+        $thisMonth  = date::getThisMonth();
+        $thisWeek   = date::getThisWeek();
 
         return $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
-            ->beginIF($mode != 'all' and $mode != 'query')->andWhere($mode)->eq($param)->fi()
+            ->andWhere('relation')->eq($relation)
+            ->beginIF($mode == 'field')->andWhere('mode')->eq($param)->fi()
+            ->beginIF($mode == 'past')->andWhere('nextDate')->lt(helper::today())->fi()
+            ->beginIF($mode == 'today')->andWhere('nextDate')->eq(helper::today())->fi()
+            ->beginIF($mode == 'tomorrow')->andWhere('nextDate')->eq(formattime(date::tomorrow(), DT_DATE1))->fi()
+            ->beginIF($mode == 'thisweek')->andWhere('nextDate')->between($thisWeek['begin'], $thisWeek['end'])->fi()
+            ->beginIF($mode == 'thismonth')->andWhere('nextDate')->between($thisMonth['begin'], $thisMonth['end'])->fi()
+            ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
             ->beginIF($mode == 'query')->andWhere($param)->fi()
             ->andWhere('id')->in($mine)
             ->orderBy($orderBy)
