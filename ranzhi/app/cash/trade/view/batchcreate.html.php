@@ -17,35 +17,45 @@
 <form id='ajaxForm' method='post'>
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $lang->trade->batchCreate;?></strong></div>
-    <table class='table'>
+    <table class='table table-hover'>
       <thead>
         <tr class='text-center'>
           <th class='w-100px'><?php echo $lang->trade->depositor;?></th>
           <th class='w-100px'><?php echo $lang->trade->type;?></th> 
-          <th class='w-200px'><?php echo $lang->trade->category;?></th> 
-          <th class='w-200px'><?php echo $lang->trade->trader;?></th> 
+          <th class='w-120px'><?php echo $lang->trade->category;?></th> 
+          <th class='w-180px'><?php echo $lang->trade->trader;?></th> 
           <th class='w-120px'><?php echo $lang->trade->money;?></th>
+          <th class='w-80px'><?php echo $lang->trade->dept;?></th>
           <th class='w-200px'><?php echo $lang->trade->handlers;?></th>
-          <th class='w-150px'><?php echo $lang->trade->date;?></th>
+          <th class='w-120px'><?php echo $lang->trade->date;?></th>
           <th><?php echo $lang->trade->desc;?></th>
         </tr>
       </thead>
       <tbody>
         <?php for($i = 0; $i < $config->trade->batchCreate; $i++):?>
         <tr>
-          <td><?php echo html::select("depositor[$i]", $depositors, '', "class='form-control'");?></td>
-          <td><?php echo html::select("type[$i]", $lang->trade->typeList, 'out', "class='form-control type'");?></td>
+          <td><?php echo html::select("depositor[$i]", $depositors, '', "class='form-control' id='depositor{$i}'");?></td>
+          <td><?php echo html::select("type[$i]", $lang->trade->typeList, 'out', "class='form-control type' id='type{$i}'");?></td>
           <td>
-            <?php echo html::select("incomeType[$i]", $incomeTypes, '', "class='form-control in' style='display:none'");?>
-            <?php echo html::select("expenseType[$i]", $expenseTypes, '', "class='form-control out'");?>
+            <?php echo html::select("category[$i]", $incomeTypes, '', "class='form-control in' style='display:none'");?>
+            <?php echo html::select("category[$i]", $expenseTypes, '', "class='form-control out' id='category{$i}'");?>
           </td>
           <td>
-            <?php echo html::input("trader[$i]", '', "class='form-control out'");?>
-            <?php echo html::select("customer[$i]", $customerList, '', "class='form-control in' style='display:none'");?>
+            <div class='input-group out'>
+              <?php echo html::select("trader[$i]", $traderList, '', "class='form-control' id='trader{$i}'");?>
+              <?php  echo html::input("traderName[$i]", '', "class='form-control' id='traderName{$i}' style='display:none'");?>
+              <span class='input-group-addon'>
+                <label class="checkbox">
+                  <input type="checkbox" name="createTrader[<?php echo $i;?>]" value="1"> <?php echo $lang->trade->newTrader;?>
+                </label>
+              </span>
+            </div>
+            <?php echo html::select("trader[$i]", $customerList, '', "class='form-control in' id='trader{$i}' style='display:none'");?>
           </td>
           <td><?php echo html::input("money[$i]", '', "class='form-control'");?></td>
-          <td><?php echo html::select("handlers[$i]", $users, '', "class='form-control chosen' multiple");?></td>
-          <td><?php echo html::input("date[$i]", '', "class='form-control form-date'");?></td>
+          <td><?php echo html::select("dept[$i]", $deptList, '', "class='form-control chosen'");?></td>
+          <td><?php echo html::select("handlers[$i][]", $users, '', "class='form-control chosen' id='handlers{$i}' multiple");?></td>
+          <td><?php echo html::input("date[$i]", '', "class='form-control form-date' id='date{$i}'");?></td>
           <td><?php echo html::textarea("desc[$i]", '', "rows='1' class='form-control'");?></td>
         </tr>
         <?php endfor;?>

@@ -85,8 +85,8 @@ class trade extends control
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs();
 
-        if($type == 'out') $this->view->categories = $this->loadModel('tree')->getPairs(0, 'out');
-        if($type == 'in')  $this->view->categories = $this->loadModel('tree')->getPairs(0, 'in');
+        if($type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0);
+        if($type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0);
 
         $this->display();
     }
@@ -101,8 +101,8 @@ class trade extends control
     {
         if($_POST)
         {
-            $tradeIDList = $this->trade->batchCreate();
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $result = $this->trade->batchCreate();
+            $this->send($result);
 
             $this->loadModel('action');
             foreach($tradeIDList as $tradeID) $this->action->create('trade', $tradeID, 'Created');
@@ -110,12 +110,16 @@ class trade extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
+        unset($this->lang->trade->menu);
+        unset($this->lang->trade->typeList['transferin']);
+        unset($this->lang->trade->typeList['transferout']);
         $this->view->depositors    = $this->loadModel('depositor')->getPairs();
         $this->view->users         = $this->loadModel('user')->getPairs();
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
-        $this->view->expenseTypes  = $this->loadModel('tree')->getPairs(0, 'out');
-        $this->view->incomeTypes   = $this->loadModel('tree')->getPairs(0, 'in');
-
+        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs($mode = 'query', "relation in ('client','partner')");
+        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs($mode = 'query', "relation in ('provider','partner')");
+        $this->view->expenseTypes  = $this->loadModel('tree')->getOptionMenu('out', 0);
+        $this->view->incomeTypes   = $this->loadModel('tree')->getOptionMenu('in', 0);
+        $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->display();
     }
 
@@ -161,8 +165,8 @@ class trade extends control
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
        
-        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getPairs(0, 'out');
-        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getPairs(0, 'in');
+        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0);
+        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0);
 
         $this->display();
     }

@@ -115,7 +115,11 @@ class html
         /* The begin. */
         $id = $name;
         if($pos = strpos($name, '[')) $id = substr($name, 0, $pos);
-        $string = "<select name='$name' id='$id' $attrib>\n";
+        $id = "id='{$id}'";
+
+        if(strpos($attrib, 'id=') !== false) $id = '';
+
+        $string = "<select name='$name' {$id} $attrib>\n";
 
         /* The options. */
         if(is_array($selectedItems)) $selectedItems = implode(',', $selectedItems);
@@ -238,7 +242,9 @@ class html
      */
     static public function input($name, $value = "", $attrib = "")
     {
-        return "<input type='text' name='$name' id='$name' value='$value' $attrib />\n";
+        $id = "id='$name'";
+        if(strpos($attrib, 'id=') !== false) $id = '';
+        return "<input type='text' name='$name' {$id} value='$value' $attrib />\n";
     }
 
     /**

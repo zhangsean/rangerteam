@@ -119,32 +119,81 @@ class tradeModel extends model
         foreach($this->post->type as $key => $type)
         {
             if(empty($type)) break;
-
+            if(!$this->post->money[$key]) continue;
             $trade = new stdclass();
-            $trade->type        = $type;
-            $trade->depositor   = $this->post->depositor[$key];
-            $trade->money       = $this->post->money[$key];
-            $trade->handlers    = $this->post->handlers[$key];
-            $trade->date        = $this->post->date[$key] ? $this->post->date[$key] : '0000-00-00';
-            $trade->desc        = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags->admin);
-            $trade->currency    = $depositorList[$trade->depositor]->currency;
-            $trade->createdBy   = $this->app->user->account;
-            $trade->createdDate = $now;
+            $trade->type         = $type;
+            $trade->depositor    = $this->post->depositor[$key];
+            $trade->money        = $this->post->money[$key];
+            $trade->category     = $this->post->category[$key];
+            $trade->dept         = $this->post->dept[$key];
+            $trade->trader       = $this->post->trader[$key];
+            $trade->createTrader = zget($this->post->createTrader, $key, null);
+            $trade->traderName   = $this->post->traderName[$key];
+            $trade->handlers     = !empty($this->post->handlers[$key]) ? join(',', $this->post->handlers[$key]) : '';
+            $trade->date         = $this->post->date[$key];
+            $trade->desc         = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags->admin);
+            $trade->currency     = $depositorList[$trade->depositor]->currency;
+            $trade->createdBy    = $this->app->user->account;
+            $trade->createdDate  = $now;
 
             $handlers = $this->loadModel('user')->getByAccount($trade->handlers);
             if($handlers) $trade->dept = $handlers->dept;
 
-            $trades[] = $trade;
+            if($trade->createTrader)
+            {
+                $this->dao->insert(TABLE_CUSTOMER)->data(array('relation' => 'provider', 'name' => $trade->traderName))->exec();
+                $trade->trader = $this->dao->lastInsertID();
+            }
+
+
+            $trades[$key] = $trade;
         }
+
+        if(empty($trades)) return array('result' => 'fail');
+
+        $errors = $this->batchCheck($trades);
+        if(!empty($errors)) return array('result' => 'fail', 'message' => $errors);
 
         $tradeIDList = array();
         foreach($trades as $trade)
         {
-            $this->dao->insert(TABLE_TRADE)->data($trade)->autoCheck()->exec();
-            if(!dao::isError()) $tradeIDList[] = $this->dao->lastInsertID();
+            $this->dao->insert(TABLE_TRADE)->data($trade, $skip = 'createTrader,traderName')->autoCheck()->exec();
         }
+        if(!dao::isError()) return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'));
+        return array('result' => 'fail', 'message' => dao::getError());
+    }
 
-        return $tradeIDList;
+    /**
+     * Batch check trades.
+     * 
+     * @param  array    $trades 
+     * @access public
+     * @return void
+     */
+    public function batchCheck($trades)
+    {
+        $errors = array();
+        $this->app->loadClass('filter', true);
+        foreach($trades as $key => $trade)
+        {
+            $item = $this->lang->trade->trader;
+            if(!$trade->createTrader)
+            {
+               if(empty($trade->trader) or !validater::checkInt($trade->trader)) $errors['trader' . $key] = sprintf($this->lang->error->notempty, $item) . sprintf($this->lang->error->int[0], $item);
+            }
+            else
+            {
+                if(empty($trade->traderName)) $errors['traderName' . $key] = sprintf($this->lang->error->notempty, $item);
+            }
+
+            $item =  $this->lang->trade->handlers;
+            if(empty($trade->handlers)) $errors['handlers'. $key] = sprintf($this->lang->error->notempty, $item);
+
+            $item =  $this->lang->trade->date;
+            if(empty($trade->date) or !validater::checkDate($trade->date)) $errors['date' . $key] = sprintf($this->lang->error->date, $item) . sprintf($this->lang->error->notempty, $item);
+
+        }
+        return $errors;
     }
 
     /**
