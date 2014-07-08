@@ -24,7 +24,7 @@ $lang->menu->crm->setting   = '设置|setting|lang|module=product&field=statusLi
 /* Menu of customer module. */
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
-$lang->customer->menu->browse    = array('link' => '客户列表|customer|browse|mode=all', 'alias' => 'create,edit,view,record');
+$lang->customer->menu->browse    = array('link' => '全部客户|customer|browse|mode=all', 'alias' => 'create,edit,view,record');
 $lang->customer->menu->past      = array('link' => '亟需联系|customer|browse|mode=past', 'alias' => 'create,edit,view,record');
 $lang->customer->menu->today     = array('link' => '今天联系|customer|browse|mode=today', 'alias' => 'create,edit,view,record');
 $lang->customer->menu->tomorrow  = array('link' => '明天联系|customer|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
@@ -40,7 +40,13 @@ $lang->product->menu->browse = array('link' => '<i class="icon-th"></i> 产品�
 /* Menu of order module. */
 $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
-$lang->order->menu->browse = array('link' => '<i class="icon-th-list"></i> 订单列表|order|browse|', 'alias' => 'create,edit,view');
+$lang->order->menu->browse    = array('link' => '全部订单|order|browse|mode=all', 'alias' => 'create,edit,view,record');
+$lang->order->menu->past      = array('link' => '亟需联系|order|browse|mode=past', 'alias' => 'create,edit,view,record');
+$lang->order->menu->today     = array('link' => '今天联系|order|browse|mode=today', 'alias' => 'create,edit,view,record');
+$lang->order->menu->tomorrow  = array('link' => '明天联系|order|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
+$lang->order->menu->thisweek  = array('link' => '一周内联系|order|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
+$lang->order->menu->thismonth = array('link' => '一月内联系|order|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
+$lang->order->menu->public    = array('link' => '公共客户|order|browse|mode=public', 'alias' => 'create,edit,view,record');
 
 /* Menu of contact module. */
 $lang->contact = new stdclass();

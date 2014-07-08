@@ -41,7 +41,12 @@ $lang->product->menu->browse = array('link' => '<i class="icon-th"></i> Product 
 /* Menu of order module. */
 $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
-$lang->order->menu->browse = array('link' => '<i class="icon-th-list"></i> Order List|order|browse|', 'alias' => 'create,edit,browseorder,view');
+$lang->order->menu->browse    = array('link' => 'All Orders|order|browse|mode=all', 'alias' => 'create,edit,view,record');
+$lang->order->menu->past      = array('link' => 'Urgently need contacted|order|browse|mode=past', 'alias' => 'create,edit,view,record');
+$lang->order->menu->today     = array('link' => 'Contact Today|order|browse|mode=today', 'alias' => 'create,edit,view,record');
+$lang->order->menu->tomorrow  = array('link' => 'Contact Tomorrow|order|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
+$lang->order->menu->thisweek  = array('link' => 'Contact This Week|order|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
+$lang->order->menu->thismonth = array('link' => 'Contact This Month|order|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
 
 /* Menu of contact module. */
 $lang->contact = new stdclass();

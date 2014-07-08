@@ -64,13 +64,24 @@ class orderModel extends model
         $customerIdList = $this->loadModel('customer')->getMine();
         if(empty($customerIdList)) return null;
 
+        $this->app->loadClass('date', $static = true);
+        $thisMonth  = date::getThisMonth();
+        $thisWeek   = date::getThisWeek();
+
         if(strpos($orderBy, 'status') !== false) $orderBy .= ', closedReason';
 
         $orders = $this->dao->select('o.*, c.name as customerName, c.level as level, p.name as productName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
             ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
             ->where(1)
-            ->beginIF($mode != 'all' and $mode != 'query')->andWhere($mode)->eq($param)->fi()
+            ->beginIF($mode == 'past')->andWhere('o.nextDate')->lt(helper::today())->fi()
+            ->beginIF($mode == 'today')->andWhere('o.nextDate')->eq(helper::today())->fi()
+            ->beginIF($mode == 'tomorrow')->andWhere('o.nextDate')->eq(formattime(date::tomorrow(), DT_DATE1))->fi()
+            ->beginIF($mode == 'thisweek')->andWhere('o.nextDate')->between($thisWeek['begin'], $thisWeek['end'])->fi()
+            ->beginIF($mode == 'thismonth')->andWhere('o.nextDate')->between($thisMonth['begin'], $thisMonth['end'])->fi()
+            ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
+            ->beginIF($mode == 'query')->andWhere($param)->fi()
+            ->beginIF($mode != 'all')->andWhere('o.nextDate')->ne('0000-00-00')->fi()
             ->beginIF($mode == 'query')->andWhere($param)->fi()
             ->andWhere('o.customer')->in($customerIdList)
             ->orderBy($orderBy)->page($pager)->fetchAll('id');

@@ -95,13 +95,11 @@ class actionModel extends model
         if($objectType == 'order')    $this->dao->update(TABLE_ORDER)->data($contactInfo)->where('id')->eq($objectID)->andWhere('contactedDate')->lt($this->post->date)->exec();
         if($objectType == 'contract') $this->dao->update(TABLE_CONTRACT)->data($contactInfo)->where('id')->eq($objectID)->andWhere('contactedDate')->lt($this->post->date)->exec();
 
-        if($this->post->nextDate)
-        {
-            $this->dao->update(TABLE_CUSTOMER)->set('nextDate')->eq($this->post->nextDate)->where('id')->eq($customer)->exec();
-            $this->dao->update(TABLE_CONTRACT)->set('nextDate')->eq($this->post->nextDate)->where('id')->eq($customer)->exec();
-            if($objectType == 'order') $this->dao->update(TABLE_ORDER)->set('nextDate')->eq($this->post->nextDate)->where('id')->eq($objectID)->exec();
-            if($objectType == 'contract') $this->dao->update(TABLE_CONTRACT)->set('nextDate')->eq($this->post->nextDate)->where('id')->eq($objectID)->exec();
-        }
+        $nextDate = $this->post->nextDate ? $this->post->nextDate : ''; 
+        $this->dao->update(TABLE_CUSTOMER)->set('nextDate')->eq($nextDate)->where('id')->eq($customer)->exec();
+        $this->dao->update(TABLE_CONTRACT)->set('nextDate')->eq($nextDate)->where('id')->eq($customer)->exec();
+        if($objectType == 'order') $this->dao->update(TABLE_ORDER)->set('nextDate')->eq($nextDate)->where('id')->eq($objectID)->exec();
+        if($objectType == 'contract') $this->dao->update(TABLE_CONTRACT)->set('nextDate')->eq($nextDate)->where('id')->eq($objectID)->exec();
 
         return !dao::isError();
     }

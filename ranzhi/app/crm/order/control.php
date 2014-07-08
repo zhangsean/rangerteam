@@ -32,7 +32,7 @@ class order extends control
      * @access public
      * @return void
      */
-    public function browse($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'all', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -41,10 +41,11 @@ class order extends control
         $this->session->set('contractList', '');
 
         $this->view->title     = $this->lang->order->browse;
-        $this->view->orders    = $this->order->getList('all', '', $orderBy, $pager);
+        $this->view->orders    = $this->order->getList($mode, '', $orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getList('client');
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->pager     = $pager;
+        $this->view->mode      = $mode;
         $this->view->orderBy   = $orderBy;
         $this->display();
     }
