@@ -75,6 +75,7 @@ body {background: #fff;font-size:13px;}
 /* margins */
 .mgb-20 {margin-bottom: 20px;}
 .mgb-10 {margin-bottom: 10px;}
+.mg-0 {margin: 0 !important;}
 
 /*-----------------------FORM SETTING----------------------------*/
 .text-1 {width: 90%}
@@ -189,6 +190,8 @@ body.page-actions-fixed {padding-bottom: 70px}
 
 .panel-actions > .btn-group {position: relative; margin-top: -8px; margin-bottom: -4px; margin-right: 5px;}
 .panel-actions > .btn-group .btn {padding: 3px 10px}
+
+.panel-body > .cards {margin-left: 0; margin-right: 0;}
 
 /* modal */
 .modal .modal-dialog {max-width: 100%; border: 8px solid #666; border-color: rgba(0,0,0,.25)}

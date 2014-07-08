@@ -379,3 +379,7 @@ table.tablesorter thead tr .headerSortDown:after {
 .comment:hover > .content > .actions > a {
   color: #145d23;
 }
+.card:hover a,
+a.card:hover {
+  color: #071e0b;
+}

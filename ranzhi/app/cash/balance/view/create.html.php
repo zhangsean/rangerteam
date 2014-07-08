@@ -38,9 +38,9 @@
         <tr>
           <th><?php echo $lang->balance->money;?></th>
           <td>
-            <div class='row'>
-              <div class='col-sm-9'><?php echo html::input('money', '', "class='form-control'");?></div>
-              <div class='col-sm-3 currency'></div>
+            <div class='input-group'>
+              <?php echo html::input('money', '', "class='form-control'");?>
+              <span class='input-group-addon'><span class='currency'></span></span>
             </div>
           </td>
         </tr>
