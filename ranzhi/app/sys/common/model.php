@@ -22,6 +22,7 @@ class commonModel extends model
         parent::__construct();
         $this->startSession();
         $this->setUser();
+        $this->setEntry();
         $this->loadConfigFromDB();
         $this->loadLangFromDB();
     }
@@ -386,6 +387,19 @@ class commonModel extends model
 
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
+    }
+
+    /**
+     * Set the entry info.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setEntry()
+    {
+        $entry = $this->dao->select('*')->from(TABLE_ENTRY)->where('code')->eq($this->appName)->fetch();
+        $this->session->set('entry', $entry);
+        $this->app->entry = $this->session->entry;
     }
 
     /**
