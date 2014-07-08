@@ -55,6 +55,6 @@ UPDATE `crm_customer` SET `assignedBy` = `createdBy`;
 ALTER TABLE `crm_order` ADD `currency` varchar(20) COLLATE 'utf8_general_ci' NOT NULL AFTER `real`;
 ALTER TABLE `crm_contract` ADD `currency` varchar(20) COLLATE 'utf8_general_ci' NOT NULL AFTER `return`;
 
-ALTER TABLE `oa_project` ADD `end` datetime NOT NULL AFTER name;
-ALTER TABLE `oa_project` ADD `begin` datetime NOT NULL AFTER name;
+ALTER TABLE `oa_project` ADD `end` date NOT NULL AFTER name;
+ALTER TABLE `oa_project` ADD `begin` date NOT NULL AFTER name;
 ALTER TABLE `oa_project` ADD `desc` text NOT NULL AFTER name;
