@@ -35,6 +35,14 @@ $lang->block->orderByList->task['pri_desc']      = '优先级递减';
 $lang->block->orderByList->task['deadline_asc']  = '截止日期递增';
 $lang->block->orderByList->task['deadline_desc'] = '截止日期递减';
 
+$lang->block->orderByList->project = array();
+$lang->block->orderByList->project['createdDate_asc']  = '创建时间递增';
+$lang->block->orderByList->project['createdDate_desc'] = '创建时间递减';
+$lang->block->orderByList->project['begin_asc']        = '开始时间递增';
+$lang->block->orderByList->project['begin_desc']       = '开始时间递减';
+$lang->block->orderByList->project['end_asc']          = '结束时间递增';
+$lang->block->orderByList->project['end_desc']         = '结束时间递减';
+
 $lang->block->typeList['assignedTo'] = '指派给我';
 $lang->block->typeList['createdBy']  = '由我创建';
 $lang->block->typeList['finishedBy'] = '由我完成';

@@ -218,7 +218,7 @@ class block extends control
         $this->view->users    = $this->loadModel('user')->getPairs();
         $this->view->projects = $this->dao->select('*')->from(TABLE_PROJECT)
             ->where('deleted')->eq(0)
-            ->orderBy('createdDate')
+            ->orderBy($this->params->orderBy)
             ->limit($this->params->num)
             ->fetchAll('id');
 

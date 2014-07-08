@@ -107,6 +107,11 @@ class oablockModel extends blockModel
         $params->num['default'] = 15; 
         $params->num['control'] = 'input';
 
+        $params->orderBy['name']    = $this->lang->block->orderBy;
+        $params->orderBy['default'] = 'createdDate_desc';
+        $params->orderBy['options'] = $this->lang->block->orderByList->project;
+        $params->orderBy['control'] = 'select';
+
         return json_encode($params);
     }
 }
