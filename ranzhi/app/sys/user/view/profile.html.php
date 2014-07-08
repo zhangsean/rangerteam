@@ -14,7 +14,7 @@
 <div class='panel-body'>
   <table class='table table-info'>
     <tr>
-      <th style='width:100px;'><?php echo $lang->user->realname;?></th>
+      <th class='text-right w-100px'><?php echo $lang->user->realname;?></th>
       <td class='w-p45'><?php echo $user->realname;?></td>
       <td rowspan='9' class='text-top'>
         <div class='avatar avatar-lg mgb-10'>

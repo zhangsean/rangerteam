@@ -16,7 +16,7 @@
     <legend><?php echo $lang->user->basicInfo; ?></legend>
     <table class='table table-form'>
       <tr>
-        <th class='w-50px text-left'><?php echo $lang->user->account;?></th>
+        <th class='w-80px text-right'><?php echo $lang->user->account;?></th>
         <td><?php echo html::input('account', $user->account, "class='form-control'");?></td>
       </tr>
       <tr>
