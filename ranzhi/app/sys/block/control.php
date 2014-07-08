@@ -36,6 +36,7 @@ class block extends control
         $this->view->entries    = $entries;
         $this->view->allEntries = $allEntries;
         $this->view->index      = $index;
+        $this->view->title      = $this->lang->block->createBlock;
         $this->display();
     }
 

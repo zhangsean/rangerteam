@@ -488,6 +488,11 @@
     /* Open a entry window */
     windowsManager.prototype.openEntry = function(et, url, go2index)
     {
+        if(typeof et == 'string')
+        {
+            et = entries[et];
+        }
+
         if(!et)
         {
             alert(settings.entryNotFindTip);
@@ -1419,6 +1424,11 @@
         event.stopPropagation();
     }
 
+    function openEntry(id, url)
+    {
+        windows.openEntry(id, url);
+    }
+
     /* 
      * Start ips
      *
@@ -1432,6 +1442,12 @@
         initEntries(entriesOptions);
 
         desktop = new desktopManager();
+
+        var entryId = getQueryString('entryId');
+        if(entryId)
+        {
+            openEntry(entryId, getQueryString('entryUrl'));
+        }
     }
 
     /*
@@ -1444,6 +1460,19 @@
         windows.close($('#modalContainer .window').attr('id'));
     }
 
+    /**
+     * Get query string value
+     * 
+     * @access public
+     * @return string
+     */
+    function getQueryString(name)
+    {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+
     /* make jquery object call the ips interface manager */
-    $.extend({ipsStart: start, closeModal: closeModal});
+    $.extend({ipsStart: start, closeModal: closeModal, openEntry: openEntry, getQueryString: getQueryString});
 }(jQuery, window, document, Math);

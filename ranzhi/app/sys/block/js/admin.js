@@ -21,6 +21,7 @@ function getBlocks(entryID)
     {
         $(entryBlock).html(data);
         $(entryBlock).show();
+        $.ajustModalPosition();
     })
 }
 
@@ -37,6 +38,7 @@ function getRssAndHtmlParams(type)
     {
         $('#blockParam').html(data);
         $.setAjaxForm('#ajaxForm', function(){parent.location.href=config.webRoot + config.appName;});
+        $.ajustModalPosition();
     });
 }
 
@@ -57,6 +59,7 @@ function getBlockParams(blockID, entryID)
     {
         $('#blockParam').html(data);
         $.setAjaxForm('#ajaxForm', function(){parent.location.href=config.webRoot + config.appName;});
+        $.ajustModalPosition();
     });
 }
 
