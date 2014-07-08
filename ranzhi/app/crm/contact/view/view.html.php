@@ -78,15 +78,22 @@
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $lang->contact->contactInfo;?></strong></div>
     <div class='panel-body'>
-      <table class='table table-info'>
-        <?php foreach($config->contact->contactWayList as $item):?>
-        <?php if(!empty($contact->{$item})):?>
+      <table class='table table-info contact-info'>
         <tr>
-          <th class='w-70px'><?php echo $lang->contact->{$item};?></th>
-          <td><?php echo $contact->{$item};?></td>
+          <td>
+            <div class='text-right'> <i class='btn-vcard icon icon-qrcode icon-large text-info'> </i> </div>
+            <dl class='contact-info'>
+            <?php foreach($config->contact->contactWayList as $item):?>
+            <?php if(!empty($contact->{$item})):?>
+              <dd>
+              <span><?php echo $lang->contact->{$item};?></span>
+              <?php echo $contact->{$item};?></dd>
+            <?php endif;?>
+            <?php endforeach;?>
+            </dl>
+            <p class='vcard'><?php echo html::image(inlink('vcard', "contactID={$contact->id}"))?></p>
+          </td>
         </tr>
-        <?php endif;?>
-        <?php endforeach;?>
       </table>
     </div>
   </div>

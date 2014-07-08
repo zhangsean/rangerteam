@@ -54,6 +54,7 @@ $lang->contact->view    = '联系人详情';
 $lang->contact->resume  = '履历';
 $lang->contact->address = '地址';
 $lang->contact->record  = '沟通';
+$lang->contact->qrcode  = '二维码';
 
 $lang->contact->basicInfo   = '基本信息';
 $lang->contact->contactInfo = '联系方式';
