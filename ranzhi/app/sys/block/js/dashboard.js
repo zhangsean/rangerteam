@@ -5,7 +5,8 @@ $(function()
         height            : 240,
         draggable         : true,
         afterOrdered      : sortBlocks,
-        afterPanelRemoved : deleteBlock
+        afterPanelRemoved : deleteBlock,
+        panelRemovingTip  : config.confirmRemoveBlock,
     });
 });
 

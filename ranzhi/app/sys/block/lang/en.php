@@ -22,8 +22,9 @@ $lang->block->params = new stdclass();
 $lang->block->params->name  = 'Name';
 $lang->block->params->value = 'Value';
 
-$lang->block->createBlock = 'Create Block';
-$lang->block->ordersSaved = 'Sort have been saved';
+$lang->block->createBlock        = 'Create Block';
+$lang->block->ordersSaved        = 'Sort have been saved';
+$lang->block->confirmRemoveBlock = 'Are you sure remove block [{0}] ?';
 
 $lang->block->default['oa']['1']['title'] = 'System Announcement';
 $lang->block->default['oa']['1']['block'] = 'announce';

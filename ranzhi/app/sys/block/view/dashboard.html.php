@@ -44,7 +44,10 @@ if(isset($pageCSS)) css::internal($pageCSS);
   </div>
   <div class='dashboard-actions'><a class='btn btn-primary' href='<?php echo $this->createLink("block", "admin"); ?>' data-toggle='modal'><i class='icon-plus'></i> <?php echo $lang->block->createBlock?></a></div>
 </div>
-<script>config.ordersSaved = '<?php echo $lang->block->ordersSaved; ?>';</script>
+<script>
+config.ordersSaved = '<?php echo $lang->block->ordersSaved; ?>';
+config.confirmRemoveBlock = '<?php echo $lang->block->confirmRemoveBlock; ?>';
+</script>
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php 
 if(isset($pageJS)) js::execute($pageJS);
