@@ -39,7 +39,7 @@
         <td><?php echo $lang->customer->levelList[$order->level];?></td>
         <td class='text-left'><?php echo $order->customerName;?></td>
         <td><?php echo $order->productName;?></td>
-        <td>
+        <td class='text-right'>
           <?php
           echo zget($lang->order->currencySign, $order->currency, '');
           echo $order->plan;

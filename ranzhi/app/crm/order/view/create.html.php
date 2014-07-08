@@ -30,10 +30,9 @@
         <tr>
           <th><?php echo $lang->order->plan;?></th>
           <td>
-            <div class='input-group'>
-              <?php echo html::select('currency', $lang->order->currencySign, '', "class='form-control'");?>
-              <span class="input-group-addon fix-border fix-padding"></span>
-              <?php echo html::input('plan', '', "class='form-control'");?>
+            <div class='row'>
+              <div class='col-sm-3'><?php echo html::select('currency', $lang->order->currencySign, '', "class='form-control'");?></div>
+              <div class='col-sm-9'><?php echo html::input('plan', '', "class='form-control'");?></div>
             </div>
           </td>
         </tr>

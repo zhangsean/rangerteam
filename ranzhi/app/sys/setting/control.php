@@ -30,8 +30,11 @@ class setting extends control
 
         if(!empty($_POST))
         {
-            $lang = $_POST['lang'];
+            $lang        = $_POST['lang'];
+            $appendField = isset($this->config->setting->appendLang[$module][$field]) ? $this->config->setting->appendLang[$module][$field] : '';
+
             $this->setting->deleteItems("lang=$lang&app=$appName&module=$module&section=$field", $type = 'lang');
+            if($appendField) $this->setting->deleteItems("lang=$lang&app=$appName&module=$module&section=$appendField", $type = 'lang');
 
             foreach($_POST['keys'] as $index => $key)
             {   
@@ -41,9 +44,9 @@ class setting extends control
                 $this->setting->setItem("{$lang}.{$appName}.{$module}.{$field}.{$key}.{$system}", $value, $type = 'lang');
 
                 /* Save additional item. */
-                if($module == 'order' and $field == 'currencyList')
+                if($appendField)
                 {
-                    $this->setting->setItem("{$lang}.{$appName}.{$module}.currencySign.{$key}.{$system}", $_POST['currencySign'][$index], $type = 'lang');
+                    $this->setting->setItem("{$lang}.{$appName}.{$module}.{$appendField}.{$key}.{$system}", $_POST[$appendField][$index], $type = 'lang');
                 }
             }
 
@@ -75,6 +78,12 @@ class setting extends control
     {   
         $appName = $this->app->getAppName(); 
         $this->setting->deleteItems("app=$appName&module=$module&section=$field", $type = 'lang');
+        if(isset($this->config->setting->appendLang[$module][$field]))
+        {
+            $appendField = $this->config->setting->appendLang[$module][$field];
+            $this->setting->deleteItems("app=$appName&module=$module&section=$appendField", $type = 'lang');
+        }
+
         $this->send(array('result' => 'success'));
     }   
 }

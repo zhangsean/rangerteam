@@ -64,10 +64,9 @@
         <tr>
           <th><?php echo $lang->contract->amount;?></th>
           <td>
-            <div class='input-group'>
-              <?php echo html::select('currency', $lang->order->currencySign, isset($currentOrder) ? $currentOrder->currency : '', "class='form-control'");?>
-              <span class="input-group-addon fix-border fix-padding"></span>
-              <?php echo html::input('amount', isset($currentOrder) ? $currentOrder->plan : '', "class='form-control'");?>
+            <div class='row'>
+              <div class='col-sm-3'><?php echo html::select('currency', $lang->order->currencySign, isset($currentOrder) ? $currentOrder->currency : '', "class='form-control'");?></div>
+              <div class='col-sm-9'><?php echo html::input('amount', isset($currentOrder) ? $currentOrder->plan : '', "class='form-control'");?></div>
             </div>
           </td>
         </tr>

@@ -37,7 +37,7 @@
         <td><?php echo $contract->id;?></td>
         <td class='text-left'><?php echo $contract->name;?></td>
         <td><?php if(isset($customers[$contract->customer])) echo $customers[$contract->customer];?></td>
-        <td>
+        <td class='text-right'>
           <?php
           echo zget($lang->order->currencySign, $contract->currency, '');
           echo $contract->amount;

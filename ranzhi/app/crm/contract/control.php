@@ -154,8 +154,7 @@ class contract extends control
             $this->loadModel('action')->create('contract', $contractID, 'Delivered', $this->post->comment);
             $this->loadModel('action')->create('customer', $contract->customer, 'deliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
 
-            $link = $this->session->contractLink ? $this->session->contractLink : inlink('view', "contractID=$contractID");
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
         $this->view->title      = $this->lang->contract->delivery;
@@ -182,8 +181,7 @@ class contract extends control
             $this->loadModel('action')->create('contract', $contractID, 'Returned', $this->post->comment);
             $this->loadModel('action')->create('customer', $contract->customer, 'receiveContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
             
-            $link = $this->session->contractLink ? $this->session->contractLink : inlink('view', "contractID=$contractID");
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
         $this->view->title      = $this->lang->contract->return;
@@ -210,8 +208,7 @@ class contract extends control
             $this->loadModel('action')->create('contract', $contractID, 'Canceled', $this->post->comment);
             $this->loadModel('action')->create('customer', $contract->customer, 'cancelContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
             
-            $link = $this->session->contractLink ? $this->session->contractLink : inlink('view', "contractID=$contractID");
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
         $this->view->title      = $this->lang->cancel;
@@ -237,8 +234,7 @@ class contract extends control
             $this->loadModel('action')->create('contract', $contractID, 'Finished', $this->post->comment);
             $this->loadModel('action')->create('customer', $contract->customer, 'finishContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
 
-            $link = $this->session->contractLink ? $this->session->contractLink : inlink('view', "contractID=$contractID");
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
         $this->view->title      = $this->lang->finish;
