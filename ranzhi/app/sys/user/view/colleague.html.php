@@ -45,10 +45,7 @@ js::set('deptID', $deptID);
               <div class='panel'>
                 <table class='table table-bordered table-contact'>
                   <tr>
-                    <th class='w-100px text-center alert v-middle'>
-                      <span class='lead'><?php echo $user->realname;?></span>
-                      <small><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></small>
-                    </th>
+                    <th class='w-100px text-center alert v-middle'><span class='lead'><?php echo $user->realname;?></span></th>
                     <td>
                       <div class='text-right'>
                         <i class='btn-vcard icon icon-qrcode icon-large text-info'> </i>
