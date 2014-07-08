@@ -36,6 +36,8 @@ class product extends control
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $this->session->set('productList', $this->app->getURI(true));
         
         $this->view->title    = $this->lang->product->browse;
         $this->view->products = $this->product->getList($orderBy, $pager);

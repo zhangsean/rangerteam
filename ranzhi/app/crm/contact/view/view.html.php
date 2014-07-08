@@ -19,11 +19,18 @@
   <?php echo $this->fetch('action', 'history', "objectType=contact&objectID={$contact->id}")?>
   <div class='page-actions'>
     <?php
+    echo "<div class='btn-group'>";
     echo html::a($this->createLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}"), $lang->contact->record, "data-toggle='modal' class='btn'");
     echo html::a($this->createLink('address', 'browse', "objectType=contact&objectID=$contact->id"), $lang->contact->address, "data-toggle='modal' class='btn'");
+    echo "</div>";
+
+    echo "<div class='btn-group'>";
     echo html::a(inlink('edit', "contactID=$contact->id"), $lang->edit, "class='btn'");
     echo html::a(inlink('delete', "contactID=$contact->id"), $lang->delete, "class='deleter btn'");
-    echo html::backButton();
+    echo "</div>";
+
+    $browseLink = $this->session->contactList ? $this->session->contactList : inlink('browse');
+    echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
     ?>
   </div>
 </div>

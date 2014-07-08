@@ -25,7 +25,9 @@
   <div class='page-actions'>
     <?php
     echo $this->contract->buildOperateMenu($contract, 'btn', 'view');
-    echo html::backButton();
+
+    $browseLink = $this->session->contractList ? $this->session->contractList : inlink('browse');
+    echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
     ?>
   </div>
 </div>

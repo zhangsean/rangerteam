@@ -23,7 +23,9 @@
   <div class='text-center'>
     <?php
     echo $this->task->buildOperateMenu($task, 'btn', 'view');
-    echo html::backButton();
+
+    $browseLink = $this->session->taskList ? $this->session->taskList : inlink('browse', "project=$task->project");
+    echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
     ?>
   </div>
 </div>

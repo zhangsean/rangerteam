@@ -37,6 +37,9 @@ class order extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        $this->session->set('orderList',    $this->app->getURI(true));
+        $this->session->set('contractList', '');
+
         $this->view->title     = $this->lang->order->browse;
         $this->view->orders    = $this->order->getList('all', '', $orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getList($mode = 'relation', $param = 'client');
@@ -124,6 +127,12 @@ class order extends control
 
         $this->app->loadLang('resume');
         $this->app->loadLang('contract');
+
+        $uri = $this->app->getURI(true);
+        $this->session->set('customerList', $uri);
+        $this->session->set('productList',  $uri);
+        $this->session->set('contactList',  $uri);
+        if(!$this->session->contractList) $this->session->set('contractList', $uri);
     
         $this->view->order    = $order;
         $this->view->product  = $this->loadModel('product')->getByID($order->product);

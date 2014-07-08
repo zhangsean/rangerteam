@@ -130,6 +130,8 @@ class block extends control
         $params = $this->get->param;
         $params = json_decode(base64_decode($params));
 
+        $this->session->set('orderList', $this->createLink('dashboard', 'index'));
+
         $this->view->sso       = base64_decode($this->get->sso);
         $this->view->code      = $this->get->blockid;
         $this->view->products  = $this->loadModel('product')->getPairs();
@@ -187,6 +189,8 @@ class block extends control
 
         $params = $this->get->param;
         $params = json_decode(base64_decode($params));
+
+        $this->session->set('contractList', $this->createLink('dashboard', 'index'));
 
         $this->view->sso    = base64_decode($this->get->sso);
         $this->view->code   = $this->get->blockid;

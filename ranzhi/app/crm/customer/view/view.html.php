@@ -30,9 +30,9 @@
       echo html::a(inlink('edit', "customerID=$customer->id"), $lang->edit, "class='btn'");
       echo html::a(inlink('delete', "customerID=$customer->id"), $lang->delete, "class='deleter btn'");
       echo '</div>';
-      echo "<div class='btn-group'>";
-      echo html::backButton();
-      echo '</div>';
+
+      $browseLink = $this->session->customerList ? $this->session->customerList : inlink('browse');
+      echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
       ?>
     </div>
   </div>

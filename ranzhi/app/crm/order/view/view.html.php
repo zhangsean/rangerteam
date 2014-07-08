@@ -17,24 +17,25 @@
     <?php
     echo "<div class='btn-group'>";
     echo html::a($this->createLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $lang->order->record, "class='btn' data-toggle='modal'");
-    if($order->status == 'normal') echo html::a(helper::createLink('contract', 'create', "customer={$order->customer}&orderID={$order->id}"), $this->lang->order->sign, "class='btn btn-default'");
-    if($order->status != 'normal') echo html::a('###', $this->lang->order->sign, "class='btn' disabled='disabled' class='disabled'");
-    if($order->status != 'closed')  echo html::a(inlink('assign', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal' class='btn btn-default'");
-    if($order->status == 'closed')  echo html::a('###', $this->lang->assign, "data-toggle='modal' class='btn btn-default disabled' disabled");
+    if($order->status == 'normal') echo html::a(helper::createLink('contract', 'create', "customer={$order->customer}&orderID={$order->id}"), $lang->order->sign, "class='btn btn-default'");
+    if($order->status != 'normal') echo html::a('###', $lang->order->sign, "class='btn' disabled='disabled' class='disabled'");
+    if($order->status != 'closed')  echo html::a(inlink('assign', "orderID=$order->id"), $lang->assign, "data-toggle='modal' class='btn btn-default'");
+    if($order->status == 'closed')  echo html::a('###', $lang->assign, "data-toggle='modal' class='btn btn-default disabled' disabled");
     echo '</div>';
 
     echo "<div class='btn-group'>";
-    if($order->status != 'closed') echo html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "class='btn btn-default' data-toggle='modal'");
-    if($order->closedReason == 'payed') echo html::a('###', $this->lang->close, "disabled='disabled' class='disabled btn'");
-    if($order->closedReason != 'payed' and $order->status == 'closed') echo html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "class='btn' data-toggle='modal'");
-    if($order->closedReason == 'payed' or  $order->status != 'closed') echo html::a('###', $this->lang->activate, "class='btn disabled' data-toggle='modal'");
+    if($order->status != 'closed') echo html::a(inlink('close', "orderID=$order->id"), $lang->close, "class='btn btn-default' data-toggle='modal'");
+    if($order->closedReason == 'payed') echo html::a('###', $lang->close, "disabled='disabled' class='disabled btn'");
+    if($order->closedReason != 'payed' and $order->status == 'closed') echo html::a(inlink('activate', "orderID=$order->id"), $lang->activate, "class='btn' data-toggle='modal'");
+    if($order->closedReason == 'payed' or  $order->status != 'closed') echo html::a('###', $lang->activate, "class='btn disabled' data-toggle='modal'");
     echo '</div>';
 
     echo "<div class='btn-group'>";
-    echo html::a(inlink('edit',     "orderID=$order->id"), $this->lang->edit,   "class='btn btn-default'");
+    echo html::a(inlink('edit',     "orderID=$order->id"), $lang->edit,   "class='btn btn-default'");
     echo '</div>';
 
-    echo html::backButton();
+    $browseLink = $this->session->orderList ? $this->session->orderList : inlink('browse');
+    echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
     ?>
   </div>
 </div>

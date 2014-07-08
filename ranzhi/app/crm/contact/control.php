@@ -37,6 +37,9 @@ class contact extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        $this->session->set('contactList', $this->app->getURI(true));
+        $this->session->set('customerList', $this->app->getURI(true));
+
         $this->view->title     = $this->lang->contact->list;
         $this->view->contacts  = $this->contact->getList($customer = '', $orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
@@ -122,6 +125,8 @@ class contact extends control
      */
     public function view($contactID)
     {
+        if($this->session->customerList == $this->session->contactList) $this->session->set('customerList', $this->app->getURI(true));
+
         $this->view->contact   = $this->contact->getByID($contactID);
         $this->view->addresses = $this->loadModel('address')->getList('contact', $contactID);
         $this->view->resumes   = $this->loadModel('resume')->getList($contactID);

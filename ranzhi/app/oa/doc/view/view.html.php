@@ -53,20 +53,19 @@
     </div>
   </div>
   <?php echo $this->fetch('action', 'history', "objectType=doc&objectID={$doc->id}");?>
-  <div class='text-center'>
+  <div class='page-actions'>
     <?php
-    $browseLink = $this->session->docList ? $this->session->docList : inlink('browse');
-    $params     = "docID=$doc->id";
+    $params = "docID=$doc->id";
     if(!$doc->deleted)
     {
-        ob_start();
+        echo "<div class='btn-group'>";
         echo html::a($this->createLink('doc', 'edit', $params), $lang->edit, "class='btn'");
         echo html::a($this->createLink('doc', 'delete', $params), $lang->delete, "class='deleter btn'");
-        $actionLinks = ob_get_contents();
-        ob_end_clean();
-        echo $actionLinks;
-        echo html::backButton();
+        echo "</div>";
     }
+
+    $browseLink = $this->session->docList ? $this->session->docList : inlink('browse');
+    echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
     ?>
   </div>
 </div>

@@ -36,6 +36,9 @@ class customer extends control
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $this->session->set('customerList', $this->app->getURI(true));
+        $this->session->set('contactList',  '');
         
         $this->view->title     = $this->lang->customer->list;
         $this->view->mode      = $mode;
@@ -128,6 +131,8 @@ class customer extends control
     {
         $customer = $this->customer->getByID($customerID);
         if(!$customer) $this->loadModel('common', 'sys')->checkPrivByCustomer('0');
+
+        if(!$this->session->contactList or $this->session->customerList == $this->session->contactList) $this->session->set('contactList', $this->app->getURI(true));
 
         $this->app->loadLang('resume');
 

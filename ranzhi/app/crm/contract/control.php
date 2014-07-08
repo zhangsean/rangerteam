@@ -53,7 +53,8 @@ class contract extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         /* Save session for return link. */
-        $this->session->set('contractLink', $this->app->getURI(true));
+        $this->session->set('contractList', $this->app->getURI(true));
+        $this->session->set('orderList',    '');
 
         $this->view->contracts = $this->contract->getList(0, $orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
@@ -257,7 +258,10 @@ class contract extends control
         $contract = $this->contract->getByID($contractID);
 
         /* Save session for return link. */
-        $this->session->set('contractLink', $this->app->getURI(true));
+        $uri = $this->app->getURI(true);
+        $this->session->set('customerList', $uri);
+        $this->session->set('contactList',  $uri);
+        if(!$this->session->orderList) $this->session->set('orderList',    $uri);
 
         $this->view->orders    = $this->loadModel('order')->getListById($contract->order);
         $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
