@@ -117,6 +117,19 @@ class file extends control
             if(!$this->file->checkSavePath()) $this->send(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable));
             $this->file->edit($fileID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($_FILES or $this->post->title != $file->title)
+            {
+                $extension = "." . $file->extension;
+                $actionID = $this->loadModel('action')->create($file->objectType, $file->objectID, 'editfile', '', $this->post->title . $extension);
+
+                if($this->post->title != $file->title)
+                {
+                    $changes[] = array('field' => 'fileName', 'old' => $file->title . $extension, 'new' => $this->post->title . $extension);
+                    $this->action->logHistory($actionID, $changes);
+                }
+            }
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
@@ -276,9 +289,13 @@ class file extends control
      */
     public function delete($fileID)
     {
+        $file = $this->file->getById($fileID);
+
         $this->file->delete($fileID);
-        if(!dao::isError()) $this->send(array('result' => 'success')); 
-        $this->send(array('result' => 'fail', 'message' => dao::getError())); 
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError())); 
+
+        $this->loadModel('action')->create($file->objectType, $file->objectID, 'deletedFile', '', $extra=$file->title);
+        $this->send(array('result' => 'success'));
     }
 
     /**
