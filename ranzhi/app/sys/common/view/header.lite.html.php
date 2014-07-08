@@ -25,6 +25,7 @@ $themeRoot = $webRoot . "theme/";
   echo html::title($title . $lang->ranzhi);
 
   js::exportConfigVars();
+  js::set('entryID', $this->app->entry->id);
   if($config->debug)
   {
       js::import($jsRoot . 'jquery/min.js');
@@ -56,6 +57,5 @@ js::import($jsRoot . 'jquery/placeholder/min.js');
 ?>
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
-<?php js::set('entryID', $this->app->entry->id);?>
 </head>
 <body>

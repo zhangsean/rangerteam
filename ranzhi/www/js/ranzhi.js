@@ -1,3 +1,14 @@
+/**
+ * force load entry content with iframe when view entry
+ * 
+ * @access public
+ * @return void
+ */
+(function()
+{
+    if(config && config.currentModule != 'index' && (!self.frameElement || self.frameElement.tagName != 'IFRAME') && typeof v.entryID != 'undefined') window.location.href = '/sys/index.php?entryID=' + v.entryID + '&entryUrl=' + window.location.pathname;
+}());
+
 $.extend(
 {
     setAjaxForm: function(formID, callback)
