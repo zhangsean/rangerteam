@@ -92,4 +92,20 @@ class oablockModel extends blockModel
 
         return json_encode($params);
     }
+
+    /**
+     * Get project params.
+     * 
+     * @access public
+     * @return string
+     */
+    public function getProjectParams()
+    {
+        $params = new stdclass();
+        $params->num['name']    = $this->lang->block->num;
+        $params->num['default'] = 15; 
+        $params->num['control'] = 'input';
+
+        return json_encode($params);
+    }
 }

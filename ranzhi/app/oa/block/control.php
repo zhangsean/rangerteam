@@ -203,6 +203,29 @@ class block extends control
     }
 
     /**
+     * Print broject block.
+     * 
+     * @access public
+     * @return void
+     */
+    public function printProjectBlock()
+    {
+        $this->lang->project = new stdclass();
+        $this->app->loadLang('project', 'oa');
+
+        $this->processParams();
+
+        $this->view->users    = $this->loadModel('user')->getPairs();
+        $this->view->projects = $this->dao->select('*')->from(TABLE_PROJECT)
+            ->where('deleted')->eq(0)
+            ->orderBy('createdDate')
+            ->limit($this->params->num)
+            ->fetchAll('id');
+
+        $this->display();
+    }
+
+    /**
      * Process params.
      * 
      * @access public

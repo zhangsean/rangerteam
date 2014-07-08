@@ -16,7 +16,8 @@ $lang->block->type     = 'Type';
 
 $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->announce = 'Announce';
-$lang->block->availableBlocks->task     = 'Task';
+$lang->block->availableBlocks->task     = 'Task list';
+$lang->block->availableBlocks->project  = 'Project list';
 
 $lang->block->num     = 'Number';
 $lang->block->orderBy = 'Order';
