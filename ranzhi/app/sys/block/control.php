@@ -57,7 +57,6 @@ class block extends control
         }
 
         $block = $this->block->getBlock($index);
-        $block->params = json_decode($block->params);
 
         $this->view->type   = $type;
         $this->view->index  = $index;
@@ -79,7 +78,6 @@ class block extends control
         if(empty($block)) return false;
 
         $html = '';
-        $block->params = json_decode($block->params);
         if($block->block == 'html')
         {
             $html = "<div class='article-content'>" . htmlspecialchars_decode($block->params->html) .'</div>';

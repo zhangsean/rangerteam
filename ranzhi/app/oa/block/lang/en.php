@@ -12,11 +12,11 @@
 $lang->block->announce = 'Announce';
 $lang->block->lblBlock = 'Block';
 $lang->block->admin    = 'Manage blocks';
+$lang->block->type     = 'Type';
 
 $lang->block->availableBlocks = new stdclass();
-$lang->block->availableBlocks->announce       = 'Announce';
-$lang->block->availableBlocks->myCreatedTask  = 'The task of created by me';
-$lang->block->availableBlocks->assignedMeTask = 'The task of assigned to me';
+$lang->block->availableBlocks->announce = 'Announce';
+$lang->block->availableBlocks->task     = 'Task';
 
 $lang->block->num     = 'Number';
 $lang->block->orderBy = 'Order';
@@ -33,3 +33,9 @@ $lang->block->orderByList->task['pri_asc']       = 'Priority ASC';
 $lang->block->orderByList->task['pri_desc']      = 'Priority DESC';
 $lang->block->orderByList->task['deadline_asc']  = 'Deadline ASC';
 $lang->block->orderByList->task['deadline_desc'] = 'Deadline DESC';
+
+$lang->block->typeList['assignedTo'] = 'Assigned to me';
+$lang->block->typeList['createdBy']  = 'My created';
+$lang->block->typeList['finishedBy'] = 'My finished';
+$lang->block->typeList['closedBy']   = 'My closed';
+$lang->block->typeList['canceledBy'] = 'My canceled';

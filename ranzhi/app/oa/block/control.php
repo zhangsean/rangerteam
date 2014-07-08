@@ -125,6 +125,32 @@ class block extends control
     }
 
     /**
+     * Print task block.
+     * 
+     * @access public
+     * @return void
+     */
+    public function printTaskBlock()
+    {
+        $this->lang->task = new stdclass();
+        $this->app->loadLang('task', 'sys');
+        $this->session->set('taskList', $this->createLink('dashboard', 'index'));
+
+        $this->processParams();
+
+        $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
+            ->where('deleted')->eq(0)
+            ->andWhere('project')->ne(0)
+            ->beginIF(isset($this->params->status) and join($this->params->status) != false)->andWhere('status')->in($this->params->status)->fi()
+            ->beginIF($this->params->type)->andWhere($this->params->type)->eq($this->params->account)->fi()
+            ->orderBy($this->params->orderBy)
+            ->limit($this->params->num)
+            ->fetchAll('id');
+
+        $this->display();
+    }
+
+    /**
      * Print task block for created by me.
      * 
      * @access public
@@ -134,6 +160,7 @@ class block extends control
     {
         $this->lang->task = new stdclass();
         $this->app->loadLang('task', 'sys');
+        $this->session->set('taskList', $this->createLink('dashboard', 'index'));
 
         $this->processParams();
 
@@ -159,6 +186,7 @@ class block extends control
     {
         $this->lang->task = new stdclass();
         $this->app->loadLang('task', 'sys');
+        $this->session->set('taskList', $this->createLink('dashboard', 'index'));
 
         $this->processParams();
 

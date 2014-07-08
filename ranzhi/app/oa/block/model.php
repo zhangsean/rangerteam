@@ -86,6 +86,10 @@ class oablockModel extends blockModel
         $params->status['control'] = 'select';
         $params->status['attr']    = 'multiple';
 
+        $params->type['name']    = $this->lang->block->type;
+        $params->type['options'] = $this->lang->block->typeList;
+        $params->type['control'] = 'select';
+
         return json_encode($params);
     }
 }

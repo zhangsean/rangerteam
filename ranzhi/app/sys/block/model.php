@@ -155,11 +155,16 @@ class blockModel extends model
      */
     public function getBlock($index, $appName = 'sys')
     {
-        return $this->dao->select('*')->from(TABLE_BLOCK)
+        $block = $this->dao->select('*')->from(TABLE_BLOCK)
             ->where('`order`')->eq($index)
             ->andWhere('account')->eq($this->app->user->account)
             ->andWhere('app')->eq($appName)
             ->fetch();
+        if(empty($block)) return false;
+
+        $block->params = json_decode($block->params);
+        if(empty($block->params)) $block->params = new stdclass();
+        return $block;
     }
 
     /**

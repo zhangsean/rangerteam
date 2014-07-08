@@ -32,21 +32,14 @@ $lang->block->default['oa']['1']['grid']  = 3;
 
 $lang->block->default['oa']['1']['params']['num'] = 15;
 
-$lang->block->default['oa']['2']['title'] = 'The task of created by me';
-$lang->block->default['oa']['2']['block'] = 'myCreatedTask';
+$lang->block->default['oa']['2']['title'] = 'The task of assigned to me';
+$lang->block->default['oa']['2']['block'] = 'task';
 $lang->block->default['oa']['2']['grid']  = 3;
 
 $lang->block->default['oa']['2']['params']['num']     = 15;
 $lang->block->default['oa']['2']['params']['orderBy'] = 'id_desc';
 $lang->block->default['oa']['2']['params']['status']  = array();
-
-$lang->block->default['oa']['3']['title'] = 'The task of assigned to me';
-$lang->block->default['oa']['3']['block'] = 'assignedMeTask';
-$lang->block->default['oa']['3']['grid']  = 3;
-
-$lang->block->default['oa']['3']['params']['num']     = 15;
-$lang->block->default['oa']['3']['params']['orderBy'] = 'id_desc';
-$lang->block->default['oa']['3']['params']['status']  = array();
+$lang->block->default['oa']['2']['params']['type']    = 'assignedTo';
 
 $lang->block->default['crm']['1']['title'] = 'My Order';
 $lang->block->default['crm']['1']['block'] = 'order';

@@ -277,7 +277,6 @@ class entry extends control
     public function setBlock($index, $entryID, $blockID)
     {
         $block = $this->loadModel('block')->getBlock($index);
-        if($block) $block->params = json_decode($block->params);
 
         $entry  = $this->entry->getByCode($entryID);
         if($entry->buildin)
@@ -319,9 +318,6 @@ class entry extends control
         if(!$entry->buildin) $this->locate($this->createLink('block', 'printBlock', "index=$index"));
 
         $html = '';
-        $block->params = json_decode($block->params);
-        if(empty($block->params)) $block->params = new stdclass();
-
         $block->params->account = $this->app->user->account;
         $block->params->uid     = $this->app->user->id;
         $params = base64_encode(json_encode($block->params));

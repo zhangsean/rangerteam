@@ -12,11 +12,11 @@
 $lang->block->announce = '系统公告';
 $lang->block->lblBlock = '区块';
 $lang->block->admin    = '管理区块';
+$lang->block->type     = '类型';
 
 $lang->block->availableBlocks = new stdclass();
-$lang->block->availableBlocks->announce       = '系统公告';
-$lang->block->availableBlocks->myCreatedTask  = '我创建的任务';
-$lang->block->availableBlocks->assignedMeTask = '指派给我的任务';
+$lang->block->availableBlocks->announce = '系统公告';
+$lang->block->availableBlocks->task     = '任务';
 
 $lang->block->num     = '数量';
 $lang->block->orderBy = '排序';
@@ -33,3 +33,9 @@ $lang->block->orderByList->task['pri_asc']       = '优先级递增';
 $lang->block->orderByList->task['pri_desc']      = '优先级递减';
 $lang->block->orderByList->task['deadline_asc']  = '截止日期递增';
 $lang->block->orderByList->task['deadline_desc'] = '截止日期递减';
+
+$lang->block->typeList['assignedTo'] = '指派给我';
+$lang->block->typeList['createdBy']  = '由我创建';
+$lang->block->typeList['finishedBy'] = '由我完成';
+$lang->block->typeList['closedBy']   = '由我关闭';
+$lang->block->typeList['canceledBy'] = '由我取消';
