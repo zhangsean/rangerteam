@@ -234,6 +234,9 @@ CREATE TABLE `oa_docLib` (
 CREATE TABLE `oa_project` (
   `id` mediumint NOT NULL AUTO_INCREMENT,
   `name` varchar(90) NOT NULL,
+  `desc` text NOT NULL,
+  `begin` datetime NOT NULL,
+  `end` datetime NOT NULL,
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
