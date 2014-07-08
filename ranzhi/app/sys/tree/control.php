@@ -216,4 +216,20 @@ class tree extends control
         if($this->tree->delete($categoryID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
+
+    /**
+     * Redirect to tree browse when no categories
+     * 
+     * @param  string $message 
+     * @access public
+     * @return void
+     */
+    public function redirect($type = 'article', $message = '')
+    {
+        unset($this->lang->tree->menu);
+        $this->view->message = ($message && $message != '') ? $message : $this->lang->tree->noCategories;
+        $this->view->type    = $type;
+
+        $this->display();
+    }
 }

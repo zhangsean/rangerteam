@@ -70,7 +70,7 @@ class announce extends control
         $categories = $this->loadModel('tree')->getOptionMenu('announce', 0, $removeRoot = true);
         if(empty($categories))
         {
-            die(js::alert($this->lang->tree->noCategories) . js::locate($this->createLink('tree', 'browse', "type=announce")));
+            die(js::locate($this->createLink('tree', 'redirect', "type=announce")));
         }
 
         if($_POST)
