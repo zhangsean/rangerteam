@@ -56,5 +56,6 @@ js::import($jsRoot . 'jquery/placeholder/min.js');
 ?>
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
+<?php js::set('entryID', $this->app->entry->id);?>
 </head>
 <body>
