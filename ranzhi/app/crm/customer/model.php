@@ -73,6 +73,7 @@ class customerModel extends model
             ->beginIF($mode == 'thismonth')->andWhere('nextDate')->between($thisMonth['begin'], $thisMonth['end'])->fi()
             ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
             ->beginIF($mode == 'query')->andWhere($param)->fi()
+            ->beginIF($mode != 'all')->andWhere('nextDate')->ne('0000-00-00')->fi()
             ->andWhere('id')->in($mine)
             ->orderBy($orderBy)
             ->page($pager)
