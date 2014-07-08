@@ -110,6 +110,7 @@ $lang->alias          = 'for seo, can use numbers, letters and words';
 $lang->unfold         = '+';
 $lang->fold           = '-';
 $lang->files          = 'Files';
+$lang->addFiles       = 'Add Files ';
 $lang->comment        = 'Comment';
 
 /* Items for lifetime. */

@@ -20,7 +20,7 @@
     </div>
   </div>
   <?php echo $this->fetch('action', 'history', "objectType=task&objectID={$task->id}");?>
-  <div class='text-center'>
+  <div class='page-actions'>
     <?php
     echo $this->task->buildOperateMenu($task, 'btn', 'view');
 

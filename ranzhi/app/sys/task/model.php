@@ -197,8 +197,6 @@ class taskModel extends model
             ->exec();
 
         if(dao::isError()) return false;
-
-        $this->loadModel('file')->saveUpload('task', $taskID);
         return commonModel::createChanges($oldTask, $task);
     }
 
@@ -374,8 +372,7 @@ class taskModel extends model
      */
     public function buildOperateMenu($task, $class = '', $type = 'browse')
     {
-        $menu  = '';
-        $menu .= html::a(helper::createLink('task', 'edit', "taskID=$task->id"), $this->lang->edit, "class='$class'");
+        $menu  = $type == 'view' ? "<div class='btn-group'>" : '';
 
         $disabled = self::isClickable($task, 'assignto') ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
@@ -408,8 +405,11 @@ class taskModel extends model
         $link     = $disabled ? '###' : helper::createLink('task', 'close', "taskID=$task->id");
         $menu    .= html::a($link, $this->lang->close, $misc);
 
+        if($type == 'view') $menu .= "</div><div class='btn-group'>";
+        $menu .= html::a(helper::createLink('task', 'edit', "taskID=$task->id"), $this->lang->edit, "class='$class'");
         $deleter = $type == 'browse' ? 'reloadDeleter' : 'deleter';
         $menu   .= html::a(helper::createLink('task', 'delete', "taskID=$task->id"), $this->lang->delete, "class='$deleter $class'");
+        if($type == 'view') $menu .= "</div>";
 
         return $menu;
     }

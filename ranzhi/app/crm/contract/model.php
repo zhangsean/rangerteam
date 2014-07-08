@@ -201,9 +201,6 @@ class contractModel extends model
                     $this->action->logHistory($actionID, $changes);
                 }
             }
-
-            $this->loadModel('file')->saveUpload('contract', $contractID);
-
             return commonModel::createChanges($contract, $data);
         }
 

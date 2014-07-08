@@ -110,6 +110,7 @@ $lang->alias          = '搜索引擎优化使用，可使用英文、数字';
 $lang->unfold         = '+';
 $lang->fold           = '-';
 $lang->files          = '附件';
+$lang->addFiles       = '上传了附件 ';
 $lang->comment        = '备注';
 
 /* Items for lifetime. */

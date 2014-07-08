@@ -114,14 +114,18 @@ class contract extends control
         {
             $changes = $this->contract->update($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $files = $this->loadModel('file')->saveUpload('contract', $contractID);
 
-            if($changes)
+            if($changes or $files)
             {
-                $contractActionID = $this->loadModel('action')->create('contract', $contractID, 'Edited');
-                $this->action->logHistory($contractActionID, $changes);
+                $fileAction = '';
+                if($files) $fileAction = $this->lang->addFiles . join(',', $files);
 
-                $customerActionID = $this->loadModel('action')->create('customer', $contract->customer, 'editContract', '', html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
-                $this->action->logHistory($customerActionID, $changes);
+                $contractActionID = $this->loadModel('action')->create('contract', $contractID, 'Edited', $fileAction);
+                if($changes) $this->action->logHistory($contractActionID, $changes);
+
+                $customerActionID = $this->loadModel('action')->create('customer', $contract->customer, 'editContract', $fileAction, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
+                if($changes) $this->action->logHistory($customerActionID, $changes);
             }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "contractID=$contractID")));

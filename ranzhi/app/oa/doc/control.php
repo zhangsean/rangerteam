@@ -262,7 +262,7 @@ class doc extends control
                 $fileAction = '';
                 if(!empty($files)) $fileAction = $this->lang->addFiles . join(',', $files) . "\n" ;
                 $actionID = $this->action->create('doc', $docID, $action, $fileAction . $this->post->comment);
-                $this->action->logHistory($actionID, $changes);
+                if($changes) $this->action->logHistory($actionID, $changes);
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('doc', 'view', "docID=$docID")));
         }
