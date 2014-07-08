@@ -20,4 +20,5 @@ $(function()
             $('#contactInfo').addClass('hidden');
         }
     });
+    $('#newContact').change();
 })

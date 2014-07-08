@@ -18,7 +18,7 @@
         <th class='w-100px'><?php echo $lang->customer->contact;?></th>
         <td><?php echo html::select('contact', $contacts, '', "class='form-control chosen'")?> </td>
         <td class='w-120px'>
-          <input type='checkbox' name='newContact' value='1' id='newContact' />
+          <input type='checkbox' name='newContact' value='1' id='newContact' checked />
           <label for='newContact'><?php echo $lang->customer->newContact?></label>
         </td>
       </tr>
