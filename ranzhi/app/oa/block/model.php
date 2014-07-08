@@ -72,6 +72,11 @@ class oablockModel extends blockModel
         $this->app->loadLang('task', 'sys');
 
         $params = new stdclass();
+
+        $params->type['name']    = $this->lang->block->type;
+        $params->type['options'] = $this->lang->block->typeList;
+        $params->type['control'] = 'select';
+
         $params->num['name']    = $this->lang->block->num;
         $params->num['default'] = 15; 
         $params->num['control'] = 'input';
@@ -85,10 +90,6 @@ class oablockModel extends blockModel
         $params->status['options'] = $this->lang->task->statusList;
         $params->status['control'] = 'select';
         $params->status['attr']    = 'multiple';
-
-        $params->type['name']    = $this->lang->block->type;
-        $params->type['options'] = $this->lang->block->typeList;
-        $params->type['control'] = 'select';
 
         return json_encode($params);
     }
