@@ -204,8 +204,6 @@ h4.modal-title, .modal-title {font-size: 14px}
 .modal-dialog.fullscreen {width: 100% !important; height: 100% !important; margin: 0; border: none !important;}
 .modal-dialog.fullscreen .modal-body iframe {height: 100%}
 .modal-loading .modal-dialog {margin-top: -100%!important;}
-.modal:before {font-family: ZenIcon; content: "\e6eb"; position: absolute; display: none; text-align: center; font-size: 56px; color: #fff; top: 35%; width: 100%; -moz-animation: spin 2s infinite linear; -o-animation: spin 2s infinite linear; -webkit-animation: spin 2s infinite linear; animation: spin 2s infinite linear; transition:none;}
-.modal.modal-loading:before {display: block;}
 .modal-body > .table:last-child {margin: 0}
 @media (max-width: 991px) {.modal-dialog{padding: 0;}}
 
