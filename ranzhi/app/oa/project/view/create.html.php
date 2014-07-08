@@ -11,12 +11,27 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<form method='post' id='ajaxForm' action='<?php echo inlink('create')?>'>
-  <div class='form-group'>
-    <label for="name"><?php echo $lang->project->name;?></label>
-    <?php echo html::input('name', '', "class='form-control'");?>
-  </div>
-  <?php echo html::submitButton();?>
+<?php include '../../../sys/common/view/datepicker.html.php';?>
+<form method='post' id='ajaxForm' action='<?php echo inlink('create')?>' class='form-inline'>
+  <table class='table-form w-p80'>
+    <tr>
+      <th class='w-80px'><?php echo $lang->project->name;?></th>
+      <td><div class='col-xs-6'> <?php echo html::input('name', '', "class='form-control'");?></div></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->project->begin;?></th>
+      <td> <div class='col-xs-6'> <?php echo html::input('begin', '', "class='form-control form-date'");?> </div> </td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->project->end;?></th>
+      <td><div class='col-xs-6'><?php echo html::input('end', '', "class='form-control form-date'");?></div></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->project->desc;?></th>
+      <td><div class='col-xs-12'><?php echo html::textarea('desc', '', "class='form-control' rows='5'");?></div></td>
+    </tr>
+    <tr><th></th><td><?php echo html::submitButton();?></td></tr>
+  </table>
 </form>
 <?php js::set('projectID', '0')?>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

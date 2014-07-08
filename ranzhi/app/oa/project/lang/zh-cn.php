@@ -14,4 +14,7 @@ $lang->project->create = '创建项目';
 $lang->project->edit   = '修改项目';
 $lang->project->delete = '删除项目';
 
-$lang->project->name = '项目名称';
+$lang->project->name  = '项目名称';
+$lang->project->desc  = '项目描述';
+$lang->project->begin = '开始日期';
+$lang->project->end   = '结束日期';

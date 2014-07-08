@@ -14,4 +14,7 @@ $lang->project->create = 'Create';
 $lang->project->edit   = 'Edit';
 $lang->project->delete = 'Delete';
 
-$lang->project->name = 'Name';
+$lang->project->name  = 'Name';
+$lang->project->desc  = 'Description';
+$lang->project->begin = 'Start Date';
+$lang->project->end   = 'End Date';
