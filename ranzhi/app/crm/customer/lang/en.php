@@ -34,6 +34,9 @@ $lang->customer->createdBy   = 'Created By';
 $lang->customer->createdDate = 'Created Date';
 $lang->customer->editedBy    = 'Edited By';
 $lang->customer->editedDate  = 'Edited Date';
+$lang->order->assignedTo     = 'Assigned to';
+$lang->order->assignedBy     = 'Assigned By';
+$lang->order->assignedDate   = 'Assigned Date';
 $lang->customer->contactBy   = 'Contact By';
 $lang->customer->contactDate = 'Contact Date';
 $lang->customer->nextDate    = 'Next Date';
@@ -46,6 +49,7 @@ $lang->customer->contact     = 'Contact List';
 $lang->customer->contract    = 'Contract List';
 $lang->customer->address     = 'Address List';
 $lang->customer->record      = 'Record';
+$lang->customer->assign      = 'Assign Customer';
 $lang->customer->linkContact = 'Create Contact';
 
 $lang->customer->typeList['']           = '';

@@ -30,7 +30,7 @@
         <th class='w-100px'><?php commonModel::printOrderLink('contactDate', $orderBy, $vars, $lang->customer->contactDate);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('nextDate',    $orderBy, $vars, $lang->customer->nextDate);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->customer->createdDate);?></th>
-        <th class='w-200px'><?php echo $lang->actions;?></th>
+        <th class='w-210px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -47,6 +47,7 @@
         <td><?php echo substr($customer->createdDate, 0, 10);?></td>
         <td class='actions'>
           <?php
+          echo html::a(inlink('assign', "customerID=$customer->id"), $lang->customer->assign, "data-toggle='modal'");
           echo html::a($this->createLink('action', 'createRecord', "objectType=customer&objectID=$customer->id&customer=$customer->id"), $lang->customer->record, "data-toggle='modal'");
           echo html::a(inlink('contact', "customerID=$customer->id"), $lang->customer->contact,  "data-toggle='modal'");
           echo html::a(inlink('order', "customerID=$customer->id"), $lang->customer->order,    "data-toggle='modal'");

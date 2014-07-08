@@ -34,6 +34,9 @@ $lang->customer->createdBy   = '由谁添加';
 $lang->customer->createdDate = '添加时间';
 $lang->customer->editedBy    = '由谁编辑';
 $lang->customer->editedDate  = '编辑时间';
+$lang->customer->assignedTo  = '指派给';
+$lang->customer->assignedBy  = '由谁指派';
+$lang->customer->assignedDate= '指派时间';
 $lang->customer->contactBy   = '由谁联系';
 $lang->customer->contactDate = '最后联系';
 $lang->customer->nextDate    = '下次联系';
@@ -46,6 +49,7 @@ $lang->customer->contact     = '联系人';
 $lang->customer->contract    = '合同';
 $lang->customer->address     = '地址';
 $lang->customer->record      = '沟通';
+$lang->customer->assign      = '指派';
 $lang->customer->linkContact = '添加联系人';
 
 $lang->customer->typeList['']           = '';

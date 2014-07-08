@@ -190,6 +190,29 @@ class customerModel extends model
     }
 
     /**
+     * Assign an customer to a member again.
+     * 
+     * @param  int    $customerID 
+     * @access public
+     * @return void
+     */
+    public function assign($customerID)
+    {
+        $customer = fixer::input('post')
+            ->setDefault('assignedBy', $this->app->user->account)
+            ->setDefault('assignedDate', helper::now())
+            ->get();
+
+        $this->dao->update(TABLE_CUSTOMER)
+            ->data($customer, $skip = 'uid, comment')
+            ->autoCheck()
+            ->where('id')->eq($customerID)
+            ->exec();
+
+        return !dao::isError();
+    }
+
+    /**
      * Link contact.
      * 
      * @param  int    $customerID 

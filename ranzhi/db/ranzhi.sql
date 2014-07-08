@@ -119,6 +119,9 @@ CREATE TABLE `crm_customer` (
   `public` enum('0', '1') NOT NULL DEFAULT '0';
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
+  `assignedTo` char(30) NOT NULL,
+  `assignedBy` char(30) NOT NULL,
+  `assignedDate` datetime NOT NULL,
   `editedBy` char(30) NOT NULL,
   `editedDate` datetime NOT NULL,
   `contactedBy` char(30) NOT NULL,

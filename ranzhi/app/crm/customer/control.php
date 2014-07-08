@@ -145,6 +145,33 @@ class customer extends control
     }
 
     /**
+     * Assign an customer function.
+     *
+     * @param  int    $customerID
+     * @param  null   $table  
+     * @access public
+     * @return void
+     */
+    public function assign($customerID, $table = null)
+    {
+
+        if($_POST)
+        {
+            $this->customer->assign($customerID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($this->post->assignedTo) $this->loadModel('action')->create('customer', $customerID, 'Assigned', $this->post->comment, $this->post->assignedTo);
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
+        }
+
+        $this->view->title      = $this->lang->customer->assignedTo;
+        $this->view->customerID = $customerID;
+        $this->view->customer   = $this->customer->getByID($customerID);
+        $this->view->members    = $this->loadModel('user')->getPairs('noclosed, nodeleted, devfirst');
+        $this->display();
+    }
+    /**
      * Browse orders of the customer.
      * 
      * @param  int    $customerID 
