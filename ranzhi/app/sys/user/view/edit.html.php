@@ -73,7 +73,7 @@
     </table>
   </fieldset>
   <div class='text-center'>
-    <?php echo html::submitButton();?>
+    <?php echo html::submitButton();?> <?php echo html::a(inlink('profile'), $lang->goback, "class='btn loadInModal'");?>
   </div>
 </form>
 <?php include $app->getModuleRoot() . '../sys/common/view/footer.modal.html.php'; ?>

@@ -15,7 +15,22 @@
   <table class='table table-info'>
     <tr>
       <th style='width:100px;'><?php echo $lang->user->realname;?></th>
-      <td><?php echo $user->realname;?></td>
+      <td class='w-p45'><?php echo $user->realname;?></td>
+      <td rowspan='9' class='text-top'>
+        <div class='avatar avatar-lg mgb-10'>
+        <?php
+        if(empty($user->avatar))
+        {
+            echo html::image($themeRoot . 'default/images/ips/avatar.png', "class='avatar-img'");
+        }
+        else
+        {
+            echo html::image($user->avatar, "class='avatar-img'");
+        }
+        ?>
+        </div>
+        <?php echo html::a(inlink('uploadAvatar'), $lang->user->uploadAvatar, "class='btn loadInModal'");?>
+      </td>
     </tr>
     <tr>
       <th><?php echo $lang->user->email;?></th>

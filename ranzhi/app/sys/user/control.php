@@ -471,4 +471,39 @@ END:VCARD";
         $this->app->loadClass('qrcode');
         QRcode::png($vcard, false, 4, 6); 
     }
+
+    /**
+     * upload avatar
+     *
+     * @access public
+     * @return void
+     */
+    public function uploadAvatar()
+    {
+        if(!empty($_POST))
+        {
+            // TODO: save avatar file
+        }
+
+        $this->view->user  = $this->user->getByAccount($this->app->user->account);
+        $this->view->title = $this->lang->user->uploadAvatar;
+        $this->display();
+    }
+    /**
+     * crop avatar
+     *
+     * @access public
+     * @return void
+     */
+    public function cropAvatar()
+    {
+        if(!empty($_POST))
+        {
+            // TODO: save avatar file
+        }
+
+        $this->view->user  = $this->user->getByAccount($this->app->user->account);
+        $this->view->title = $this->lang->user->cropAvatar;
+        $this->display();
+    }
 }

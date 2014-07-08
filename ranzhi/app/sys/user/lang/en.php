@@ -66,6 +66,8 @@ $lang->user->forbid          = 'Forbid';
 $lang->user->active          = 'Active';
 $lang->user->setReferer      = 'Set referer';
 $lang->user->vcard           = 'Vcard';
+$lang->user->uploadAvatar    = 'Upload avatar';
+$lang->user->cropAvatar      = 'Crop avatar';
 
 $lang->user->profile     = 'Profile';
 $lang->user->editProfile = 'Edit profile';

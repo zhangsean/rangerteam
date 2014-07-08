@@ -191,7 +191,10 @@ $.extend(
 
             var $target = $(target);
             if(!$target.size()) return false;
-            $target.load(url);
+            $target.load(url, function()
+            {
+                if($target.hasClass('modal') && $.ajustModalPosition) $.ajustModalPosition();
+            });
 
             return false;
         });
@@ -458,7 +461,7 @@ $.extend(
                             var modalBody = modal.find('.modal-body'), dialog = modal.find('.modal-dialog');
                             if(options.height != 'auto') modalBody.css('height', options.height);
                             if(options.width) dialog.css('width', options.width);
-                            if(options.center) dialog.css('margin-top', Math.max(0, (modal.height() - dialog.height())/3));
+                            if(options.center) ajustModalPosition();
                             modal.removeClass('modal-loading');
                         },200);
                     });
@@ -565,7 +568,7 @@ $.extend(
                         var fbH = $framebody.addClass('body-modal').outerHeight();
                         if(typeof fbH == 'object') fbH = $framebody.height();
                         modalBody.css('height', fbH);
-                        if(options.center) dialog.css('margin-top', Math.max(0, (modal.height() - dialog.height())/3));
+                        if(options.center) ajustModalPosition();
                         modal.removeClass('modal-loading');
                         if(modal.data('first')) modal.data('first', false);
                     }, 100);
@@ -652,7 +655,19 @@ $.extend(
             }).on('hidden.bs.modal', function(){$(document).off('keyup.modal.changes paste.modal.changes');});
         }
 
-        $.extend({modalTrigger: showIframeModal});
+        function ajustModalPosition(position)
+        {
+            position = position || 'fit';
+            var dialog = $('#ajaxModal .modal-dialog');
+            if(position)
+            {
+               var half = Math.max(0, ($(window).height() - dialog.outerHeight())/2);
+               var pos = position == 'fit' ? (half*2/3) : (position == 'center' ? half : position);
+               dialog.css('margin-top', pos);
+            }
+        }
+
+        $.extend({modalTrigger: showIframeModal, ajustModalPosition: ajustModalPosition});
 
         $('[data-toggle=modal], a.iframe').modalTrigger();
     },
@@ -671,7 +686,7 @@ $.extend(
         setTimeout(function()
         {
             var modal = $('#ajaxModal');
-            modal.load(modal.attr('rel'), function(){$(this).find('.modal-dialog').css('width', $(this).data('width'))})}, duration);
+            modal.load(modal.attr('rel'), function(){$(this).find('.modal-dialog').css('width', $(this).data('width')); $.ajustModalPosition()})}, duration);
     }
 });
 

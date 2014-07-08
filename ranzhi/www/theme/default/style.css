@@ -72,6 +72,10 @@ body {background: #fff;font-size:13px;}
 .w-type      {width:80px;}
 .w-resolution{width:60px;}
 
+/* margins */
+.mgb-20 {margin-bottom: 20px;}
+.mgb-10 {margin-bottom: 10px;}
+
 /*-----------------------FORM SETTING----------------------------*/
 .text-1 {width: 90%}
 td>.text-1,td>.area-1{padding-left:2px;padding-right: 2px}
@@ -405,3 +409,6 @@ td #aliasLabel {display: table-row;}
 .article-content {padding: 10px 0}
 .article-content img {box-shadow: none}
 
+/* avatar */
+.avatar > img {border-radius: 4px; width: 48px; height: 48px;}
+.avatar.avatar-lg > img {border-radius: 4px; width: 128px; height: 128px;}
