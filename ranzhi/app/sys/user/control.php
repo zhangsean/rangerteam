@@ -463,7 +463,7 @@ class user extends control
 N:{$user->realname}
 TITLE:{$dept} {$role}
 TEL;TYPE=WORK:{$user->phone}
-TEL;TYPE=WORK:{$user->mobile}
+TEL;TYPE=CELL:{$user->mobile}
 ADR;TYPE=HOME:{$user->address}
 EMAIL;TYPE=PREF,INTERNET:{$user->email}
 END:VCARD";

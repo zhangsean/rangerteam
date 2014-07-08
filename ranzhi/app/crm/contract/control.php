@@ -57,7 +57,7 @@ class contract extends control
         $this->session->set('orderList',    '');
 
         $this->view->contracts = $this->contract->getList(0, $orderBy, $pager);
-        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
 
@@ -94,7 +94,7 @@ class contract extends control
 
         $this->view->title      = $this->lang->contract->create;
         $this->view->orderID    = $orderID;
-        $this->view->customers  = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers  = $this->loadModel('customer')->getPairs('client');
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->display();
     }
@@ -130,7 +130,7 @@ class contract extends control
         $this->view->contract       = $contract; 
         $this->view->contractOrders = $this->loadModel('order')->getListByID($contract->order);
         $this->view->orders         = array('' => '') + $this->order->getList($mode = 'customer', $contract->customer);
-        $this->view->customers      = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers      = $this->loadModel('customer')->getPairs('client');
         $this->view->contacts       = $this->loadModel('contact')->getPairs($contract->customer);
         $this->view->users          = $this->loadModel('user')->getPairs();
         $this->display();
@@ -264,7 +264,7 @@ class contract extends control
         if(!$this->session->orderList) $this->session->set('orderList',    $uri);
 
         $this->view->orders    = $this->loadModel('order')->getListById($contract->order);
-        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->view->contacts  = $this->loadModel('contact')->getPairs($contract->customer);
         $this->view->products  = $this->loadModel('product')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();

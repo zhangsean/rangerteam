@@ -135,7 +135,7 @@ class block extends control
         $this->view->sso       = base64_decode($this->get->sso);
         $this->view->code      = $this->get->blockid;
         $this->view->products  = $this->loadModel('product')->getPairs();
-        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
 
         $this->view->orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where('deleted')->eq(0)

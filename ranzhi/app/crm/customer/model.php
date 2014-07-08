@@ -38,7 +38,6 @@ class customerModel extends model
         $customerList = $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->where('createdBy')->eq($this->app->user->account)->orWhere('public')->eq('1')
-            ->orWhere('public')->eq('1')
             ->fi()
             ->fetchAll('id');
         return array_keys($customerList);
@@ -90,17 +89,15 @@ class customerModel extends model
      * @access public
      * @return array
      */
-    public function getPairs($mode = 'all', $param = null, $orderBy = 'id_desc', $emptyOption = true)
+    public function getPairs($relation = 'client', $emptyOption = true)
     {
         $mine = $this->getMine();
         if(empty($mine)) return array();
 
         $customers = $this->dao->select('id, name')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
-            ->beginIF($mode != 'all' and $mode != 'query')->andWhere($mode)->eq($param)->fi()
-            ->beginIF($mode == 'query')->andWhere($param)->fi()
-            ->andWhere('id')->in($mine)
-            ->orderBy($orderBy)
+            ->andWhere('relation')->in($relation)
+            ->orderBy('id_desc')
             ->fetchPairs('id');
 
         if($emptyOption)  $customers = array('' => '') + $customers;

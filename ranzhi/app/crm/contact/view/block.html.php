@@ -23,11 +23,18 @@
         <div><?php echo $contact->dept . ' ' . $contact->title;?></div>
       </th>
       <td>
-        <?php if($contact->phone or $contact->mobile) echo "<div><i class='icon-phone-sign'></i> $contact->phone $contact->mobile</div>";?>
-        <?php if($contact->qq) echo "<div class='f-14'><i class='icon-qq'></i> $contact->qq</div>";?>
-        <?php if($contact->email) echo "<div class='f-14'><i class='icon-envelope-alt'></i> $contact->email </div>";?>
+        <div class='text-right'>
+          <i class='btn-vcard icon icon-qrcode icon-large text-info'> </i>
+        </div>
+        <div class='contact-info'>
+          <?php if($contact->phone or $contact->mobile) echo "<div><i class='icon-phone-sign'></i> $contact->phone $contact->mobile</div>";?>
+          <?php if($contact->qq) echo "<div class='f-14'><i class='icon-qq'></i> $contact->qq</div>";?>
+          <?php if($contact->email) echo "<div class='f-14'><i class='icon-envelope-alt'></i> $contact->email </div>";?>
+        </div>
+        <p class='vcard text-center'><?php echo html::image(helper::createLink('contact', 'vcard', "contactID={$contact->id}"), "style='height:120px'");?></p>
       </td>
     </tr>
   </table>
 </div>
 <?php endforeach;?>
+<?php if(isset($pageJS)) js::execute($pageJS);?>

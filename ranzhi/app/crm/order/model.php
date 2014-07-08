@@ -143,7 +143,7 @@ class orderModel extends model
             ->beginIF($status)->andWhere('status')->eq($status)->fi()
             ->fetchAll('id');
 
-        $customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $customers = $this->loadModel('customer')->getPairs('client');
         $products  = $this->loadModel('product')->getPairs();
 
         foreach($orders as $order)

@@ -57,7 +57,7 @@ class customer extends control
      */
     public function getOptionMenu($current = 0)
     {
-        $options = $this->customer->getPairs($mode = 'relation', $param = 'client');
+        $options = $this->customer->getPairs('client');
         foreach($options as $value => $text)
         {
             $selected = $value == $current ? 'selected' : '';

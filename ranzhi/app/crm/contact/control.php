@@ -42,7 +42,7 @@ class contact extends control
 
         $this->view->title     = $this->lang->contact->list;
         $this->view->contacts  = $this->contact->getList($customer = '', $orderBy, $pager);
-        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
         $this->display();
@@ -74,7 +74,7 @@ class contact extends control
 
         $this->view->title     = $this->lang->contact->create;
         $this->view->customer  = $customer;
-        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->display();
     }
 
@@ -110,7 +110,7 @@ class contact extends control
         $this->app->loadLang('resume');
 
         $this->view->title     = $this->lang->contact->edit;
-        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->view->contact   = $contact;
 
         $this->display();
@@ -130,7 +130,7 @@ class contact extends control
         $this->view->contact   = $this->contact->getByID($contactID);
         $this->view->addresses = $this->loadModel('address')->getList('contact', $contactID);
         $this->view->resumes   = $this->loadModel('resume')->getList($contactID);
-        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
 
         $this->display();
     }
@@ -182,5 +182,35 @@ class contact extends control
             echo "<option value='{$value}' {$selected}>{$text}</option>";
         }
         exit;
+    }
+
+    /**
+     * vcard of a contact.
+     * 
+     * @param  int    $contactID 
+     * @access public
+     * @return void
+     */
+    public function vcard($contactID)
+    {
+        $contact = $this->contact->getByID($contactID);
+        $customer = $this->loadModel('customer')->getByID($contact->customer);
+        $addresses = $this->loadModel('address')->getList('contact', $contactID);
+
+        $fullAddress = '';
+        foreach($addresses as $address) $fullAddress .= $address->fullLocation . ';';
+
+        $vcard = "BEGIN:VCARD 
+N:{$contact->realname}
+ORG:{$customer->name}
+TITLE:{$contact->dept} {$contact->title}
+TEL;TYPE=WORK:{$contact->phone}
+TEL;TYPE=CELL:{$contact->mobile}
+ADR;TYPE=HOME:{$fullAddress}
+EMAIL;TYPE=PREF,INTERNET:{$contact->email}
+END:VCARD";
+
+        $this->app->loadClass('qrcode');
+        QRcode::png($vcard, false, 4, 6); 
     }
 }

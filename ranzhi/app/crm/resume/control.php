@@ -26,7 +26,7 @@ class resume extends control
         $this->view->modalWidth = 800;
         $this->view->contact    = $this->loadModel('contact')->getByID($contactID);
         $this->view->resumes    = $this->resume->getList($contactID);
-        $this->view->customers  = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers  = $this->loadModel('customer')->getPairs('client');
 
         $this->display();
     }
@@ -40,7 +40,7 @@ class resume extends control
      */
     public function create($contactID)
     {
-        $customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $customers = $this->loadModel('customer')->getPairs('client');
 
         if($_POST)
         {
@@ -96,7 +96,7 @@ class resume extends control
     public function delete($resumeID)
     {
         $resume = $this->resume->getByID($resumeID);
-        $customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $customers = $this->loadModel('customer')->getPairs('client');
 
         $this->resume->delete(TABLE_RESUME, $resumeID);
         if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));

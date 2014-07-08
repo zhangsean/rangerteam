@@ -42,7 +42,7 @@ class order extends control
 
         $this->view->title     = $this->lang->order->browse;
         $this->view->orders    = $this->order->getList('all', '', $orderBy, $pager);
-        $this->view->customers = $this->loadModel('customer')->getList($mode = 'relation', $param = 'client');
+        $this->view->customers = $this->loadModel('customer')->getList('client');
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
@@ -69,7 +69,7 @@ class order extends control
 
         $products = $this->loadModel('product')->getPairs();
         $this->view->products  = array( 0 => '') + $products;
-        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->view->title     = $this->lang->order->create;
 
         $this->display();
@@ -107,7 +107,7 @@ class order extends control
         $this->view->title     = $this->lang->order->edit;
         $this->view->order     = $order;
         $this->view->products  = $this->loadModel('product')->getPairs();
-        $this->view->customers = $this->loadModel('customer')->getPairs($mode = 'relation', $param = 'client');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->view->users     = $this->loadModel('user')->getPairs();
 
         $this->display();
