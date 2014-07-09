@@ -25,7 +25,7 @@ $themeRoot = $webRoot . "theme/";
   echo html::title($title . $lang->ranzhi);
 
   js::exportConfigVars();
-  js::set('entryID', $this->app->entry->id);
+  if(isset($this->app->entry->id)) js::set('entryID', $this->app->entry->id);
   if($config->debug)
   {
       js::import($jsRoot . 'jquery/min.js');
