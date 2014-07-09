@@ -32,14 +32,11 @@
             <th><?php echo $lang->files;?></th>
             <td><?php echo $this->fetch('file', 'buildForm')?></td>
           </tr>
-          <tr>
-            <th></th>
-            <td><?php echo html::submitButton() . html::backButton();?></td>
-          </tr>
         </table>
       </div>
     </div>
     <?php echo $this->fetch('action', 'history', "objectType=task&objectID={$task->id}");?>
+    <div class='page-actions'><?php echo html::submitButton() . html::backButton();?></div>
   </div>
   <div class='col-md-4'>
     <div class='panel'>
