@@ -12,6 +12,7 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include '../../common/view/mindmap.html.php';?>
+<?php include '../../common/view/datepicker.html.php';?>
 <div class='panel' id='mindmapPanel'>
   <div class='panel-heading'>
     <div class='panel-actions'>
@@ -44,18 +45,19 @@
   </div>
   <div class='panel-body minds-container'>
     <div id='mindmap' class='mindmap'></div>
-    <div class='popover top fade' id='taskPopover'>
+    <div class='popover scale top fade hover' id='taskPopover'>
       <div class='arrow'></div>
       <div class='popover-title'>
+        <div class='pri-list'><span class='pri pri-0'>0</span><span class='pri pri-1'>1</span><span class='pri pri-2'>2</span><span class='pri pri-3'>3</span><span class='pri pri-4'>4</span></div>
         <table>
           <tr class='task-headings'>
-            <td colspan='2'><span class='active task-pri pri pri-3' title='<?php echo $lang->task->lblPri?>'></span> <strong class='task-name' title='<?php echo $lang->task->name?>'>-</strong></td>
-            <td class='text-right'><small class='text-muted task-type' title='<?php echo $lang->task->type;?>'>-</small> &nbsp; <span class='label label-circle label-badge task-status-wait task-status' title='<?php echo $lang->task->status;?>'>-</span></td>
+            <td colspan='2' class='nobr'><span class='active task-pri pri pri-3' title='<?php echo $lang->task->lblPri?>'></span> <strong class='task-name' title='<?php echo $lang->task->name?>'>-</strong></td>
+            <td class='text-right'><small class='text-muted task-type label' title='<?php echo $lang->task->type;?>'>-</small> <span class='label label-circle label-badge task-status-wait task-status' title='<?php echo $lang->task->status;?>'>-</span><button class='btn btn-success btn-sm btn-finish'><i class='icon-ok'></i> <?php echo $lang->finish;?></button></td>
           </tr>
           <tr class='task-infos'>
             <td><span class='task-assignedTo' title='<?php echo $lang->task->assignedTo?>'><i class='icon-user text-muted'></i> <small>-</small></span></td>
             <td class='text-center'><span class='task-createdDate' title='<?php echo $lang->task->createdDate?>'><i class='icon-time text-muted'></i> <small>-</small></span></td>
-            <td class='text-right'><span class='task-deadline text-warning' title='<?php echo $lang->task->deadline;?>'><i class='icon-time'></i> <small>-</small></span></td>
+            <td class='text-right'><span class='task-deadline text-warning' title='<?php echo $lang->task->deadline;?>'><input type="text" name="taskDeadline" class='form-date form-control input-sm' id='taskDeadline' placeholder='<?php echo $lang->task->deadline;?>' /></span></td>
           </tr>
         </table>
       </div>
@@ -71,15 +73,22 @@ $(function()
         text : '<?php echo $projectName;?>',
         type : 'root',
         id : 'project-<?php echo $projectID;?>',
+        data: {groupBy: '<?php echo $groupBy;?>'},
         children:
         [
             <?php $index = 0; ?>
             <?php foreach($tasks as $groupKey => $groupTasks):?>
             {
-                text: '<?php echo empty($groupKey) ? $lang->task->unkown : $groupKey;?>',
+                text: '<?php echo empty($groupKey) ? $lang->task->unkown : ($groupBy == "status" ? $lang->task->statusList[$groupKey] : $groupKey);?>',
                 type: 'sub',
                 id: 'sub-<?php echo $index++;?>',
                 readonly: true,
+                data:
+                {
+                    key: '<?php echo $groupKey?>'
+                    <?php if($groupBy == 'status') echo ",statusName: '" . $lang->task->statusList[$groupKey] . "'"; ?>
+                },
+                
                 children:
                 [
                     <?php foreach($groupTasks as $task):?>
@@ -89,7 +98,7 @@ $(function()
                         id: '<?php echo $task->id?>',
                         data: 
                         {
-                            deadline: '<?php echo $task->deadline?>',
+                            deadline: '<?php echo $task->deadline == "0000-00-00" ? '' : $task->deadline;?>',
                             createdDate: '<?php echo $task->createdDate?>',
                             assignedTo: '<?php echo $task->assignedTo?>',
                             pri: '<?php echo $task->pri?>',
@@ -106,14 +115,18 @@ $(function()
         ]
     };
 
+    var groupBy = data.data.groupBy;
+        $saveBtn = $('#saveBtn'), 
+        $taskPopover = $('#taskPopover');
+
     var $mindmap = $('#mindmap').mindmap(
     {
         data: data,
-        onChange: function()
+        beforeHotkey: function()
         {
-            hidePopover();
-            $saveBtn.removeClass('disabled').removeAttr('disabled').find('span').text('<?php echo $lang->save;?>');
+            return $taskPopover.find('.task-desc').attr('contenteditable') != 'true';
         },
+        onChange: onChange,
         startDrag: function()
         {
             hidePopover();
@@ -126,6 +139,26 @@ $(function()
                 return false;
             }
         },
+        onTextChanged: function(e)
+        {
+            if(e.node.data('id') == $taskPopover.data('id'))
+            {
+                $taskPopover.find('.task-name').text(e.text);
+            }
+        },
+        afterMove: function(e)
+        {
+            var parent = this.getNodeData(e.node.parent);
+            if(groupBy === 'status')
+            {
+                e.node.data.status = parent.data.key;
+                e.node.data.statusName = parent.data.statusName;
+            }
+            else if(groupBy === 'assignedto')
+            {
+                e.node.data.assignedTo = parent.data.key;
+            }
+        },
         beforeDelete: function(e)
         {
             hidePopover();
@@ -136,9 +169,37 @@ $(function()
             hidePopover();
             return e.node.type == 'sub' && e.newNode.type == 'node';
         },
+        afterAdd: function(e)
+        {
+            e.newNode.data =
+            {
+                deadline: '',
+                createdDate: (new Date()).format('yyyy-MM-dd hh:mm'),
+                assignedTo: '',
+                pri: '0',
+                status: 'wait',
+                desc: '',
+                type: '',
+                statusName: '<?php echo $lang->task->statusList["wait"];?>',
+            };
+
+            if(groupBy === 'status')
+            {
+                e.newNode.data.status = e.node.data.key;
+                e.newNode.data.statusName = e.node.data.statusName;
+            }
+            else if(groupBy === 'assignedto')
+            {
+                e.newNode.data.assignedTo = e.node.data.key;
+            }
+        },
         onBindEvents: function(e)
         {
             var $node = e.node;
+            var node = this.getNodeData($node.data('id'));
+
+            $node.attr('data-key', node.data.key);
+
             $node.hover(function()
             {
                 $node.addClass('hover');
@@ -167,11 +228,9 @@ $(function()
         }
     }).click(function(){hidePopover();});
 
-    var mindmap = $mindmap.data('zui.mindmap'), 
-        $saveBtn = $('#saveBtn'), 
-        $taskPopover = $('#taskPopover'),
+    var mindmap = $mindmap.data('zui.mindmap'),
         $container = $mindmap.find('.mindmap-container');
-    
+
     function showPopover(node)
     {
         if(!$.isPlainObject(node)) return;
@@ -181,13 +240,15 @@ $(function()
 
         /* update data */
         pp.find('.task-pri').attr('class', 'active task-pri pri pri-' + task.pri).text(task.pri);
+        pp.find('.pri-list .pri.active').removeClass('active');
+        pp.find('.pri-list .pri.pri-' + task.pri).addClass('active');
         pp.find('.task-name').text(node.text);
         pp.find('.task-type').text(task.type).toggle(task.type != '');
         pp.find('.task-status').attr('class', 'label label-circle label-badge task-status task-status-' + task.status).text(task.statusName);
         pp.find('.task-assignedTo small').html(task.assignedTo == '' ? '<span class="text-muted">[<?php echo $lang->task->unAssigned;?>]</span>' : task.assignedTo);
         pp.find('.task-createdDate small').text(task.createdDate.substr(0, 10));
-        pp.find('.task-deadline').toggle(task.deadline != '' && task.deadline != '0000-00-00').find('small').text(task.deadline);
-        pp.find('.task-desc').toggle(task.desc != '').html(task.desc);
+        pp.find('.task-deadline').toggleClass('empty', task.deadline == '').find('#taskDeadline').val(task.deadline);
+        pp.find('.task-desc').html(task.desc);
         pp.data('id', node.id);
 
         /* ajust position */
@@ -207,8 +268,73 @@ $(function()
     function hidePopover()
     {
         $taskPopover.removeClass('in');
-        setTimeout(function(){$taskPopover.hide();}, 200);
+        setTimeout(function(){$taskPopover.hide();}, 150);
     }
+
+    function onChange()
+    {
+        $saveBtn.removeClass('disabled').removeAttr('disabled').find('span').text('<?php echo $lang->save;?>');
+    }
+
+    $taskPopover.hover(function()
+    {
+        var pp = $taskPopover;
+        pp.addClass('hover');
+
+        var node = mindmap.getNodeData($taskPopover.data('id'));
+        pp.toggleClass('show-finish', node.data.status != 'done' && node.data.status != 'closed' && node.data.status != 'cancel');
+    }, function()
+    {
+        var pp = $taskPopover;
+        pp.removeClass('hover show-finish');
+
+    }).find('.task-desc')
+      .hover(function(){$(this).attr('contenteditable', true)}, function(){$(this).attr('contenteditable', false)})
+      .on('keyup paste blur', function()
+      {
+          mindmap.getNodeData($taskPopover.data('id')).data.desc = $(this).html();
+          onChange();
+      });
+    $taskPopover.find('#taskDeadline').on('change', function()
+    {
+        var node = mindmap.getNodeData($taskPopover.data('id'));
+        var val = $(this).val();
+        if(val != '') $(this).closest('.task-deadline').removeClass('empty');
+        if(val != node.data.deadline)
+        {
+            node.data.deadline = val;
+            onChange();
+        }
+    });
+    $taskPopover.find('.btn-finish').click(function()
+    {
+        var node = mindmap.getNodeData($taskPopover.data('id'));
+        node.data.status = 'done';
+        node.data.statusName = '<?php echo $lang->task->statusList['done'];?>';
+        node.data.finishedDate = (new Date()).format('yyyy-MM-dd hh:mm');
+        if(groupBy == 'status')
+        {
+            mindmap.update({action: 'move', data: node, newParent: $mindmap.find('[data-key="done"]').data('id')});
+        }
+        hidePopover();
+        onChange();
+    });
+    var $priList = $taskPopover.find('.pri-list');
+    $taskPopover.find('.task-pri').hover(function(){$priList.fadeIn(150)});
+    $priList.hover(null, function(){$priList.fadeOut(150)}).find('.pri').hover(function(){$priList.find('.pri.hover').removeClass('hover'); $(this).addClass('hover')}).click(function()
+    {
+        var pri = $(this).text();
+        var node = mindmap.getNodeData($taskPopover.data('id'));
+        if(node.data.pri != pri)
+        {
+            node.data.pri = pri;
+            $taskPopover.find('.task-pri').attr('class', 'active task-pri pri pri-' + pri).text(pri);
+            $taskPopover.find('.pri-list .pri.active').removeClass('active');
+            $(this).addClass('active');
+            onChange();
+            $priList.fadeOut(150);
+        }
+    });
 
     $saveBtn.click(function()
     {

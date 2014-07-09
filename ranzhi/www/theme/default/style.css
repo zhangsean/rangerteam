@@ -394,11 +394,11 @@ td #aliasLabel {display: table-row;}
 .pri.pri-2 {background: #ffd98c; border-color: #ea8400; color: #ea8400;}
 .pri.pri-3 {background: #f2d7ff; border-color: #8521bf; color: #8521bf;}
 .pri.pri-4 {background: #cef4ff; border-color: #39b3d7; color: #39b3d7;}
-.pri.active {background: #777}
-.pri.pri-1.active {background: #d2322d; color: #fff;}
-.pri.pri-2.active {background: #ea8400; color: #fff;}
-.pri.pri-3.active {background: #8521bf; color: #fff;}
-.pri.pri-4.active {background: #39b3d7; color: #fff;}
+.pri.active, .pri.hover {background: #777}
+.pri.pri-1.active, .pri.pri-1.hover {background: #d2322d; color: #fff;}
+.pri.pri-2.active, .pri.pri-2.hover {background: #ea8400; color: #fff;}
+.pri.pri-3.active, .pri.pri-3.hover {background: #8521bf; color: #fff;}
+.pri.pri-4.active, .pri.pri-4.hover {background: #39b3d7; color: #fff;}
 
 /* article */
 .article {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}

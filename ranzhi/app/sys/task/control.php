@@ -412,7 +412,7 @@ class task extends control
         {
             if($groupBy == '' or $groupBy == 'status')
             {
-                $groupTasks[$taskLang->statusList[$task->status]][] = $task;
+                $groupTasks[$task->status][] = $task;
             }
             elseif($groupBy == 'assignedto')
             {
