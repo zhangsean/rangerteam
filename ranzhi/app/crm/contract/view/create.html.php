@@ -23,10 +23,6 @@
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
-          <th class='w-80px'><?php echo $lang->contract->name;?></th>
-          <td class='w-p40'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->contract->customer;?></th>
           <td><?php echo html::select('customer', $customers, isset($customer) ? $customer : '', "class='form-control chosen' onchange='getOrder(this.value)'");?></td>
         </tr>
@@ -60,6 +56,10 @@
         <tr id='orderTR' class='hide'>
           <th><?php echo $lang->contract->order;?></th>
           <td id='orderTD'></td>
+        </tr>
+        <tr>
+          <th class='w-80px'><?php echo $lang->contract->name;?></th>
+          <td class='w-p40'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->amount;?></th>

@@ -29,6 +29,11 @@ $(document).ready(function()
         $('#orderTD').load(createLink('contract', 'getOrder', 'customerID=' + v.customer));
     }
 
+    $(document).on('change', 'select.select-order:first', function()
+    {
+        $('#name').val($(this).find('option:selected').text());
+    });
+
     $(document).on('click', '.plus', function()
     {
         $(this).parents('tr').after("<tr><th></th><td>" + $('#orderTD').html() + "</td></tr>");
