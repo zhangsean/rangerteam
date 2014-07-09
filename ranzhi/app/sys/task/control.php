@@ -58,6 +58,8 @@ class task extends control
         $this->session->set('taskList', $this->app->getURI(true));
 
         $this->view->title      = $this->lang->task->browse;
+        if($projectID) $this->view->title = $project->name . $this->lang->minus . $this->view->title;
+
         $this->view->tasks      = $this->task->getList($projectID, $orderBy, $pager);
         $this->view->moduleMenu = $this->project->getLeftMenus($projectID );
         $this->view->pager      = $pager;
@@ -162,6 +164,8 @@ class task extends control
     public function view($taskID)
     {
         $task = $this->task->getByID($taskID);
+
+        $this->view->title = $this->lang->task->view . $task->name;
 
         $this->view->moduleMenu = $this->loadModel('project')->getLeftMenus($task->project);
         $this->view->projects   = $this->project->getPairs();
