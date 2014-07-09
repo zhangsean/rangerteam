@@ -17,15 +17,17 @@
   <table class='table table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->resume->customer;?></th>
-      <td><?php echo html::select('customer', $customers, '', "class='form-control chosen'")?></td>
       <td>
-        <input type='checkbox' id='newCustomer' name='newCustomer' value='1' />
-        <label for='newCustomer'><?php echo $lang->contact->newCustomer?></label>
+        <div class='input-group'>
+          <?php echo html::select('customer', $customers, !empty($customer) ? $customer : '', "class='form-control chosen'");?>
+          <?php echo html::input('name', '', "class='form-control' style='display:none'");?>
+          <span class='input-group-addon'>
+            <label class='checkbox'>
+              <input type='checkbox' name='newCustomer' id='newCustomer' value='1' /><?php echo $lang->contact->newCustomer?>
+            </label>
+          </span>
+        </div>
       </td>
-    </tr>
-    <tr class='customerInfo hidden'>
-      <th><?php echo $lang->customer->name;?></th>
-      <td><?php echo html::input('name', '', "class='form-control'");?></td>
     </tr>
     <tr class='customerInfo hidden'>
       <th><?php echo $lang->customer->type;?></th>

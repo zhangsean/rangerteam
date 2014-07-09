@@ -33,21 +33,24 @@
     <div class='panel'>
       <div class='panel-heading'><strong><?php echo $lang->contact->basicInfo;?></strong></div>
       <div class='panel-body'>
-        <table class='table table-info'>
+        <table class='table table-info table-form'>
           <tr>
             <th class='w-80px'><?php echo $lang->contact->realname;?></th>
-            <td><?php echo html::input('realname', $contact->realname, "class='form-control'");?></td>
+            <td>
+              <div class='input-group'>
+                <?php echo html::input('realname', $contact->realname, "class='form-control'");?>
+                <span class='input-group-addon'>
+                  <label class='checkbox'>
+                    <?php $checked = $contact->maker ? "checked='checked'" : '';?>
+                    <input type='checkbox' name='maker' id='maker' value='1' <?php echo $checked?>/><?php echo $lang->resume->maker;?>
+                  </label>
+                </span>
+              </div>
+            </td>
           </tr>
           <tr>
             <th><?php echo $lang->contact->customer;?></th>
             <td><?php echo html::select('customer', $customers, $contact->customer, "class='form-control chosen'");?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->resume->maker?></th>
-            <td>
-              <?php $checked = $contact->maker ? "checked='checked'" : '';?>
-              <input type='checkbox' name='maker' id='maker' value='1' <?php echo $checked?>/>
-            </td>
           </tr>
           <tr>
             <th><?php echo $lang->resume->dept;?></th>

@@ -2,18 +2,17 @@ $(function()
 {
     $('#newCustomer').change(function()
     {
-        if($(this).prop('checked'))
+        if($(this).prop('checked')) 
         {
-            $('#customer').attr('disabled', true);
-            $('#customer').trigger("chosen:updated");
-
+            $(this).parents('.input-group').find('select').hide();
+            $('#customer_chosen').hide();
+            $(this).parents('.input-group').find('input[type=text][id=name]').show().focus();
             $('.customerInfo').removeClass('hidden');
         }
         else
         {
-            $('#customer').attr('disabled', false);
-            $('#customer').trigger("chosen:updated");
-
+            $('#customer_chosen').show();
+            $(this).parents('.input-group').find('input[type=text][id=name]').hide();
             $('.customerInfo').addClass('hidden');
         }
     })

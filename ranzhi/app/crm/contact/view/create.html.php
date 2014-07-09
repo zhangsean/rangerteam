@@ -24,24 +24,30 @@
           <table class='table table-form'>
             <tr>
               <th class='w-100px'><?php echo $lang->contact->realname;?></th>
-              <td class='w-p40'><?php echo html::input('realname', '', "class='form-control'");?></td>
+              <td class='w-p40'>
+                <div class='input-group'>
+                  <?php echo html::input('realname', '', "class='form-control'");?>
+                  <span class='input-group-addon'>
+                    <label class='checkbox'>
+                      <input type='checkbox' name='maker' id='maker' value='1' /><?php echo $lang->resume->maker;?>
+                    </label>
+                  </span>
+                </div>
               <td>
-                <input type='checkbox' name='maker' id='maker' value='1' />
-                <label for='maker'><?php echo $lang->resume->maker;?></label>
-              </td>
-            
             </tr>
             <tr>
               <th><?php echo $lang->contact->customer;?></th>
-              <td><?php echo html::select('customer', $customers, !empty($customer) ? $customer : '', "class='form-control chosen'");?></td>
               <td>
-                <input type='checkbox' name='newCustomer' id='newCustomer' value='1' />
-                <label for='newCustomer'><?php echo $lang->contact->newCustomer?></label>
+                <div class='input-group'>
+                  <?php echo html::select('customer', $customers, !empty($customer) ? $customer : '', "class='form-control chosen'");?>
+                  <?php echo html::input('name', '', "class='form-control' style='display:none'");?>
+                  <span class='input-group-addon'>
+                    <label class='checkbox'>
+                      <input type='checkbox' name='newCustomer' id='newCustomer' value='1' /><?php echo $lang->contact->newCustomer?>
+                    </label>
+                  </span>
+                </div>
               </td>
-            </tr>
-            <tr class='customerInfo hidden'>
-              <th><?php echo $lang->contact->customerName;?></th>
-              <td><?php echo html::input('name', '', "class='form-control'");?></td>
             </tr>
             <tr>
               <th><?php echo $lang->contact->gender;?></th>

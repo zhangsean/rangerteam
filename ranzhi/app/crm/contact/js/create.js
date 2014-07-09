@@ -3,19 +3,16 @@ $(document).ready(function()
     /* Show notice when auto create customer. */
     $('#newCustomer').change(function()
     {
-        if($(this).prop('checked'))
+        if($(this).prop('checked')) 
         {
-            $('#customer').attr('disabled', true);
-            $('#customer').trigger("chosen:updated");
-
-            $('.customerInfo').removeClass('hidden');
+            $(this).parents('.input-group').find('select').hide();
+            $('#customer_chosen').hide();
+            $(this).parents('.input-group').find('input[type=text][id=name]').show().focus();
         }
         else
         {
-            $('#customer').attr('disabled', false);
-            $('#customer').trigger("chosen:updated");
-
-            $('.customerInfo').addClass('hidden');
+            $('#customer_chosen').show();
+            $(this).parents('.input-group').find('input[type=text][id=name]').hide();
         }
     })
 })
