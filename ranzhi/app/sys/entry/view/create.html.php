@@ -31,11 +31,12 @@ include '../../common/view/header.admin.html.php';
             </div>
           </td>
           <td></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->logo;?></th>
           <td><?php echo html::file('files', "class='form-control'");?></td>
-          <td><?php echo $lang->entry->note->logo;?></td>
+          <td colspan='2'><?php echo $lang->entry->note->logo;?></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->code;?></th>
@@ -87,13 +88,13 @@ include '../../common/view/header.admin.html.php';
         <tr>
           <th><?php echo $lang->entry->size;?></th>
           <td><?php echo html::select('size', $lang->entry->sizeList, '', "class='form-control'");?></td>
-          <td id='custom'>
-            <?php
-            echo $lang->entry->width;
-            echo html::input('width', '700', "class='form-control' style='display:inline-block;width:80px;'");
-            echo $lang->entry->height;
-            echo html::input('height', '538', "class='form-control' style='display:inline-block;width:80px;'");
-            ?>
+          <td id='custom' class='w-200px'>
+            <div class='input-group'>
+              <div class='input-group-addon'><?php echo $lang->entry->width;?></div>
+              <?php echo html::input('width', '700', "class='form-control'");?>
+              <div class='input-group-addon'><?php echo $lang->entry->height;?></div>
+              <?php echo html::input('height', '538', "class='form-control'");?>
+            </div>
           </td>
         </tr>
         <tr>
