@@ -126,6 +126,15 @@ class contract extends control
 
                 $customerActionID = $this->loadModel('action')->create('customer', $contract->customer, 'editContract', $fileAction, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
                 if($changes) $this->action->logHistory($customerActionID, $changes);
+
+                if($contract->order)
+                {
+                    foreach($contract->order as $orderID)
+                    {
+                        $orderActionID = $this->loadModel('action')->create('order', $orderID, 'editContract', $fileAction, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
+                        if($changes) $this->action->logHistory($orderActionID, $changes);
+                    }
+                }
             }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "contractID=$contractID")));
@@ -211,6 +220,14 @@ class contract extends control
 
             $this->loadModel('action')->create('contract', $contractID, 'Canceled', $this->post->comment);
             $this->loadModel('action')->create('customer', $contract->customer, 'cancelContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
+
+            if($contract->order)
+            {
+                foreach($contract->order as $orderID)
+                {
+                    $this->loadModel('action')->create('order', $orderID, 'cancelContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
+                }
+            }
             
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }

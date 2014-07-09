@@ -109,7 +109,7 @@
         <tr>
           <th class='w-80px'><?php echo $lang->lifetime->signedBy;?></th>
           <td>
-            <?php if($contract and $contract->signedBy) echo zget($users, $contract->signedBy) . $lang->at . $contract->signedDate;?>
+            <?php if($contract and $contract->signedBy and $contract->status != 'canceled') echo zget($users, $contract->signedBy) . $lang->at . $contract->signedDate;?>
           </td>
         </tr>
       </table>

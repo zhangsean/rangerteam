@@ -158,6 +158,14 @@ class contractModel extends model
             ->setIF(($this->post->deliveredBy and !$this->post->deliveredDate), 'deliveredDate', substr($now, 0, 10))
             ->setIF($this->post->returnedBy, 'return', 'done')
             ->setIF(($this->post->returnedBy and !$this->post->returnedDate), 'returnedDate', substr($now, 0, 10))
+            ->setIF($this->post->status == 'normal', 'canceledBy', '')
+            ->setIF($this->post->status == 'normal', 'canceledDate', '0000-00-00')
+            ->setIF($this->post->status == 'normal', 'finishedBy', '')
+            ->setIF($this->post->status == 'normal', 'finishedDate', '0000-00-00')
+            ->setIF($this->post->status == 'cancel' and $this->post->canceledBy == '', 'canceledBy', $this->app->user->account)
+            ->setIF($this->post->status == 'cancel' and $this->post->canceledDate == '0000-00-00', 'canceledDate', $now)
+            ->setIF($this->post->status == 'finished' and $this->post->finishedBy == '', 'finishedBy', $this->app->user->account)
+            ->setIF($this->post->status == 'finished' and $this->post->finishedDate == '0000-00-00', 'finishedDate', $now)
             ->remove('uid,files,labels')
             ->stripTags('items', $this->config->allowedTags->admin)
             ->get();
@@ -171,36 +179,70 @@ class contractModel extends model
         
         if(!dao::isError())
         {
-            $oldOrders = $this->loadModel('order')->getListByID($data->order);
-            $real = array();
-            foreach($data->order as $key => $orderID) $real[$key] = $oldOrders[$orderID]->real;
-
-            if($contract->order != $data->order || $real != $data->real)
+            if($data->order)
             {
-                $this->dao->delete()->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->exec();
+                $oldOrders = $this->loadModel('order')->getListByID($data->order);
+                $real = array();
+                foreach($data->order as $key => $orderID) $real[$key] = $oldOrders[$orderID]->real;
+
+                if($contract->order != $data->order || $real != $data->real)
+                {
+                    $this->dao->delete()->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->exec();
+                    foreach($data->order as $key => $orderID)
+                    {
+                        $oldOrder = $this->loadModel('order')->getByID($orderID);
+
+                        $contractOrder = new stdclass();
+                        $contractOrder->contract = $contractID;
+                        $contractOrder->order    = $orderID;
+                        $this->dao->insert(TABLE_CONTRACTORDER)->data($contractOrder)->exec();
+
+                        $order = new stdclass();
+                        $order->real       = $data->real[$key];
+                        $order->signedBy   = $data->signedBy;
+                        $order->signedDate = $data->signedDate;
+
+                        $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
+
+                        if(dao::isError()) return false;
+
+                        $changes  = commonModel::createChanges($oldOrder, $order);
+                        $actionID = $this->loadModel('action')->create('order', $orderID, 'Edited');
+                        $this->action->logHistory($actionID, $changes);
+                    }
+                }
+            }
+
+            if($contract->status == 'canceled' and $data->status == 'normal')
+            {
                 foreach($data->order as $key => $orderID)
                 {
-                    $oldOrder = $this->loadModel('order')->getByID($orderID);
-
-                    $contractOrder = new stdclass();
-                    $contractOrder->contract = $contractID;
-                    $contractOrder->order    = $orderID;
-                    $this->dao->insert(TABLE_CONTRACTORDER)->data($contractOrder)->exec();
-
                     $order = new stdclass();
+                    $order->status     = 'signed';
                     $order->real       = $data->real[$key];
                     $order->signedBy   = $data->signedBy;
                     $order->signedDate = $data->signedDate;
 
                     $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
-
                     if(dao::isError()) return false;
-
-                    $changes  = commonModel::createChanges($oldOrder, $order);
-                    $actionID = $this->loadModel('action')->create('order', $orderID, 'Edited');
-                    $this->action->logHistory($actionID, $changes);
                 }
             }
+
+            if($contract->status == 'normal' and $data->status == 'canceled')
+            {
+                foreach($data->order as $orderID)
+                {
+                    $order = new stdclass();
+                    $order->status     = 'normal';
+                    $order->real       = 0;
+                    $order->signedBy   = '';
+                    $order->signedDate = '0000-00-00';
+
+                    $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
+                    if(dao::isError()) return false;
+                }
+            }
+            
             return commonModel::createChanges($contract, $data);
         }
 
@@ -283,7 +325,28 @@ class contractModel extends model
             ->where('id')->eq($contractID)
             ->exec();
 
-        return !dao::isError();
+        if(!dao::isError()) 
+        {
+            $contract = $this->getByID($contractID);
+            if($contract->order)
+            {
+                foreach($contract->order as $orderID)
+                {
+                    $order = new stdclass(); 
+                    $order->status     = 'normal';
+                    $order->signedDate = '0000-00-00';
+                    $order->real       = 0;
+                    $order->signedBy   = '';
+
+                    $this->dao->update(TABLE_ORDER)->data($order)->autoCheck()->where('id')->eq($orderID)->exec();
+                }
+
+                return !dao::isError();
+            }
+            return true;
+        }
+
+        return false;
     }
 
     /**
