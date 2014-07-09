@@ -45,7 +45,7 @@
   </div>
   <div class='panel-body minds-container'>
     <div id='mindmap' class='mindmap'></div>
-    <div class='popover scale top fade hover' id='taskPopover'>
+    <div class='popover scale top fade' id='taskPopover'>
       <div class='arrow'></div>
       <div class='popover-title'>
         <div class='pri-list'><span class='pri pri-0'>0</span><span class='pri pri-1'>1</span><span class='pri pri-2'>2</span><span class='pri pri-3'>3</span><span class='pri pri-4'>4</span></div>
@@ -61,7 +61,7 @@
           </tr>
         </table>
       </div>
-      <div class="popover-content task-desc" title='<?php echo $lang->task->desc;?>'></div>
+      <div class="popover-content task-desc" title='<?php echo $lang->task->desc;?>' placeholder='<?php echo $lang->task->desc;?>'></div>
     </div>
   </div>
 </div>
