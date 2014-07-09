@@ -6,7 +6,7 @@
  */
 (function()
 {
-    if(config && config.currentModule != 'index' && config.currentModule != 'user' && (!self.frameElement || self.frameElement.tagName != 'IFRAME') && typeof v.entryID != 'undefined') window.location.href = '/sys/index.php?entryID=' + v.entryID + '&entryUrl=' + window.location.pathname;
+    if(config && config.currentModule != 'index' && config.currentModule != 'user' &&  && config.currentModule != 'entry' && (!self.frameElement || self.frameElement.tagName != 'IFRAME') && typeof v.entryID != 'undefined' && v.entryID != '') window.location.href = '/sys/index.php?entryID=' + v.entryID + '&entryUrl=' + window.location.pathname;
 }());
 
 $.extend(
