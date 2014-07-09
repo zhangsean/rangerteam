@@ -27,3 +27,34 @@ $(document).ready(function()
         }   
     })  
 });
+
+/**
+ * Compute the next contact date for action.
+ * 
+ * @param  int    $delta 
+ * @access public
+ * @return void
+ */
+function computeNextDate(delta)
+{
+    today = new Date();
+    today = today.toString('yyyy-M-dd');
+    if(!today) return;
+
+    nextDate = convertStringToDate(today).addDays(parseInt(delta));
+    nextDate = nextDate.toString('yyyy-M-dd');
+    $('#nextDate').val(nextDate);
+}
+
+/**
+ * Convert a date string like 2011-11-11 to date object in js.
+ * 
+ * @param  string $date 
+ * @access public
+ * @return date
+ */
+function convertStringToDate(dateString)
+{
+    dateString = dateString.split('-');
+    return new Date(dateString[0], dateString[1] - 1, dateString[2]);
+}

@@ -12,6 +12,7 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
+<?php js::import($jsRoot . 'date.js');?>
 <?php js::set('customer', $customer);?>
 <form method='post' id='createRecordForm' action='<?php echo inlink('createrecord', "objectType={$objectType}&objectID={$objectID}")?>' class='form-inline'>
   <table class='table table-form'>
@@ -19,7 +20,7 @@
     <tr>
       <th><?php echo $lang->action->record->contact;?></th>
       <td>
-        <div class='col-sm-8'>
+        <div class='col-sm-5'>
           <div class='input-group'>
             <?php echo html::select('contact', $contacts, '', "class='form-control'");?>
             <?php echo html::input('realname', '', "class='form-control' style='display:none'");?>
@@ -37,7 +38,7 @@
     <tr>
       <th><?php echo $lang->action->record->customer;?></th>
       <td>
-        <div class='col-sm-8'>
+        <div class='col-sm-5'>
           <?php echo html::hidden('contact', $objectID);?>
           <?php echo html::select('customer', $customers, '', "class='form-control'");?>
         </div>
@@ -48,7 +49,7 @@
     <tr style='display:none'>
       <th><?php echo $lang->action->record->contract;?></th>
       <td>
-        <div class='col-sm-8'>
+        <div class='col-sm-5'>
           <?php echo html::select('contract', $contracts, '', "class='form-control chosen'");?>
         </div>
       </td>
@@ -56,7 +57,7 @@
     <tr style='display:none'>
       <th><?php echo $lang->action->record->order;?></th>
       <td>
-        <div class='col-sm-8'>
+        <div class='col-sm-5'>
           <?php echo html::select('order', $orders, '', "class='form-control'");?>
         </div>
       </td>
@@ -64,11 +65,14 @@
     <?php endif;?>
     <tr>
       <th class='w-100px'><?php echo $lang->action->record->date;?></th>
-      <td><div class='col-sm-8'><?php echo html::input('date', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></div></td>
+      <td><div class='col-sm-5'><?php echo html::input('date', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></div></td>
     </tr> 
     <tr>
       <th><?php echo $lang->action->record->nextDate;?></th>
-      <td><div class='col-sm-8'><?php echo html::input('nextDate', '', "class='form-control form-date'");?></div></td>
+      <td>
+        <div class='col-sm-5'><?php echo html::input('nextDate', '', "class='form-control form-date'");?></div>
+        <div class='col-sm-7'>&nbsp;&nbsp;<?php echo html::radio('delta', $lang->action->nextContactList , '', "onclick='computeNextDate(this.value)'");?></div>
+      </td>
     </tr>
     <tr>
       <th><?php echo $lang->action->record->comment;?></th>
