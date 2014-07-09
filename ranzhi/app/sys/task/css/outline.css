@@ -10,10 +10,6 @@
 .outline > .item > .content > .item > .actions {position: absolute; right: 10px; top: 5px; opacity: 0; transition: all .5s .3s cubic-bezier(.175, .885, .32, 1); background: #f9f9f9; min-height: 24px}
 .outline > .item > .content > .item > .heading > .pull-right {margin-top: -1px;}
 .outline > .item > .content > .item > .heading .label {padding: 3px 6px; border-color: #ddd}
-.label.task-status-doing {color: #D2322D}
-.label.task-status-done {color: #229F24}
-.label.task-status-waiting {color: #E48600}
-.label.task-status-cancel {color: #333}
 
 .outline > .item > .content > .item:hover > .actions {opacity: 1}
 .outline > .item > .info {position: absolute; right: 10px; top: 6px;}

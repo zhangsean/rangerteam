@@ -110,7 +110,8 @@ $lang->task->outlineGroup['createdBy']  = 'Created By';
 $lang->task->outlineGroup['finishedby'] = 'Finished By';
 $lang->task->outlineGroup['closedby']   = 'Closed By';
 
-$lang->task->unkown = 'Unkown';
+$lang->task->unkown     = 'Unkown';
+$lang->task->unAssigned = 'Un assigned'
 
 $lang->task->mindMoveTip = 'You should move a task to a sub node.';
 

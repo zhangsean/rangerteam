@@ -114,7 +114,8 @@ $lang->task->groups['createdby']  = '创建者分组';
 $lang->task->groups['finishedby'] = '完成者分组';
 $lang->task->groups['closedby']   = '关闭者分组';
 
-$lang->task->unkown = '未指定';
+$lang->task->unkown     = '未指定';
+$lang->task->unAssigned = '未指派';
 
 $lang->task->mindMoveTip = '只能将任务移动至二级节点下。';
 
