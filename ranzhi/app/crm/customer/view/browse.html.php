@@ -47,8 +47,8 @@
         <td><?php echo substr($customer->createdDate, 0, 10);?></td>
         <td class='actions'>
           <?php
-          echo html::a(inlink('assign', "customerID=$customer->id"), $lang->customer->assign, "data-toggle='modal'");
           echo html::a($this->createLink('action', 'createRecord', "objectType=customer&objectID=$customer->id&customer=$customer->id"), $lang->customer->record, "data-toggle='modal'");
+          echo html::a(inlink('assign', "customerID=$customer->id"), $lang->customer->assign, "data-toggle='modal'");
           echo html::a(inlink('contact', "customerID=$customer->id"), $lang->customer->contact,  "data-toggle='modal'");
           echo html::a(inlink('order', "customerID=$customer->id"), $lang->customer->order,    "data-toggle='modal'");
           echo html::a(inlink('contract', "customerID=$customer->id"), $lang->customer->contract, "data-toggle='modal'");

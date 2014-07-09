@@ -25,8 +25,10 @@
     <div class='page-actions'>
       <?php
       echo "<div class='btn-group'>";
-      echo html::a(inlink('assign', "customerID=$customer->id"), $lang->customer->assign, "class='btn' data-toggle='modal'");
       echo html::a($this->createLink('action', 'createRecord', "objectType=customer&objectID={$customer->id}&customer={$customer->id}"), $lang->customer->record, "class='btn' data-toggle='modal'");
+      echo html::a(inlink('assign', "customerID=$customer->id"), $lang->customer->assign, "class='btn' data-toggle='modal'");
+      echo '</div>';
+      echo "<div class='btn-group'>";
       echo html::a(inlink('edit', "customerID=$customer->id"), $lang->edit, "class='btn'");
       echo html::a(inlink('delete', "customerID=$customer->id"), $lang->delete, "class='deleter btn'");
       echo '</div>';
