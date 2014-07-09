@@ -48,7 +48,7 @@
                     <div class='input-group-addon order-currency'>
                       <?php echo zget($lang->order->currencySign, $currentOrder->currency, '');?> 
                     </div>
-                    <?php echo html::input('real[]', $currentOrder->real, "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?>
+                    <?php echo html::input('real[]', ($currentOrder->real and $currentOrder->real != '0.00') ? $currentOrder->real : $currentOrder->plan, "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?>
                   </div>
                 </span>
                 <span class='col-sm-1'><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='minus'");?></span>
