@@ -52,7 +52,7 @@
         <table>
           <tr class='task-headings'>
             <td colspan='2' class='nobr'><span class='active task-pri pri pri-3' title='<?php echo $lang->task->lblPri?>'></span> <strong class='task-name' title='<?php echo $lang->task->name?>'>-</strong></td>
-            <td class='text-right'><small class='text-muted task-type label' title='<?php echo $lang->task->type;?>'>-</small> <span class='label label-circle label-badge task-status-wait task-status' title='<?php echo $lang->task->status;?>'>-</span><button class='btn btn-success btn-sm btn-finish'><i class='icon-ok'></i> <?php echo $lang->finish;?></button></td>
+            <td class='text-right'><small class='text-muted task-type label' title='<?php echo $lang->task->type;?>'>-</small> <span class='label label-circle label-badge task-status-wait task-status' title='<?php echo $lang->task->status;?>'>-</span><button class='btn btn-success btn-sm btn-finish'><i class='icon-ok'></i> <?php echo $lang->finish;?></button><button class='btn btn-primary btn-sm btn-close'><i class='icon-off'></i> <?php echo $lang->close;?></button></td>
           </tr>
           <tr class='task-infos'>
             <td><span class='task-assignedTo' title='<?php echo $lang->task->assignedTo?>'><i class='icon-user text-muted'></i> <small>-</small></span></td>
@@ -121,6 +121,8 @@ $(function()
 
     var $mindmap = $('#mindmap').mindmap(
     {
+        defaultSubName: '<?php echo $lang->task->unkown;?>',
+        defaultNodeName: '<?php echo $lang->task->create?>',
         data: data,
         beforeHotkey: function()
         {
@@ -133,6 +135,8 @@ $(function()
         },
         beforeMove: function(e)
         {
+            if(groupBy == 'createdby' || groupBy == 'finishedby' || groupBy == 'closedby') return false;
+
             if(!(e.event.element.data('type') == 'node' && e.event.target.data('type') == 'sub'))
             {
                 window.messager.warning('<?php echo $lang->task->mindMoveTip;?>');
@@ -282,11 +286,14 @@ $(function()
         pp.addClass('hover');
 
         var node = mindmap.getNodeData($taskPopover.data('id'));
+
         pp.toggleClass('show-finish', node.data.status != 'done' && node.data.status != 'closed' && node.data.status != 'cancel');
+        
+        pp.toggleClass('show-close', node.data.status == 'done' || node.data.status == 'cancel');
     }, function()
     {
         var pp = $taskPopover;
-        pp.removeClass('hover show-finish');
+        pp.removeClass('hover show-finish show-close');
 
     }).find('.task-desc')
       .hover(function(){$(this).attr('contenteditable', true)}, function(){$(this).attr('contenteditable', false)})
@@ -295,6 +302,7 @@ $(function()
           mindmap.getNodeData($taskPopover.data('id')).data.desc = $(this).html();
           onChange();
       });
+
     $taskPopover.find('#taskDeadline').on('change', function()
     {
         var node = mindmap.getNodeData($taskPopover.data('id'));
@@ -306,6 +314,7 @@ $(function()
             onChange();
         }
     });
+
     $taskPopover.find('.btn-finish').click(function()
     {
         var node = mindmap.getNodeData($taskPopover.data('id'));
@@ -319,6 +328,21 @@ $(function()
         hidePopover();
         onChange();
     });
+
+    $taskPopover.find('.btn-close').click(function()
+    {
+        var node = mindmap.getNodeData($taskPopover.data('id'));
+        node.data.status = 'closed';
+        node.data.statusName = '<?php echo $lang->task->statusList['closed'];?>';
+        node.data.closeDate = (new Date()).format('yyyy-MM-dd hh:mm');
+        if(groupBy == 'status')
+        {
+            mindmap.update({action: 'move', data: node, newParent: $mindmap.find('[data-key="closed"]').data('id')});
+        }
+        hidePopover();
+        onChange();
+    });
+
     var $priList = $taskPopover.find('.pri-list');
     $taskPopover.find('.task-pri').hover(function(){$priList.fadeIn(150)});
     $priList.hover(null, function(){$priList.fadeOut(150)}).find('.pri').hover(function(){$priList.find('.pri.hover').removeClass('hover'); $(this).addClass('hover')}).click(function()

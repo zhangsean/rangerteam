@@ -9,9 +9,9 @@
 #taskPopover .popover-title tr td {width: 33.333333333333%; max-width: 160px;}
 #taskPopover .popover-title tr.task-headings td[colspan='2'] {width: 66.66666666666666%}
 #taskPopover .popover-content {padding: 8px;}
-#taskPopover .btn-finish {display: none; line-height: 15px; border-radius: 12px; min-width: 52px; padding: 3px 8px 4px}
+#taskPopover .btn-finish, #taskPopover .btn-close {display: none; line-height: 15px; border-radius: 12px; min-width: 52px; padding: 3px 8px 4px}
 #taskPopover .task-assignedTo {border: 1px solid transparent; padding: 3px 1px; cursor: pointer; transition: all 0.2s; display: inline-block; margin-right: 10px;}
-#taskDeadline.form-control {padding: 0px 6px; display: inline-block; width: 85px; height: 26px; color: #E48600}
+#taskDeadline.form-control {padding: 0px 6px; display: inline-block; width: 85px; height: 26px; color: #E48600; background: #f7f7f7}
 #taskPopover:not(.hover) #taskDeadline.form-control {border-color: transparent;}
 #taskPopover .task-deadline.empty {visibility: hidden;}
 #taskPopover .task-desc {min-height: 36px; position: relative; cursor: text; border: 1px solid transparent; line-height: 18px}
@@ -24,7 +24,7 @@
 #taskPopover.hover .task-desc[contenteditable='true']:before {opacity: 0}
 
 #taskPopover.hover .task-pri {border: 1px solid #000}
-#taskPopover.show-finish.hover .btn-finish {display: inline-block;}
-#taskPopover.show-finish.hover .task-status {display: none;}
+#taskPopover.show-finish.hover .btn-finish, #taskPopover.show-close.hover .btn-close {display: inline-block;}
+#taskPopover.show-finish.hover .task-status, #taskPopover.show-close.hover .task-status {display: none;}
 /*#taskPopover.hover .task-assignedTo {border: 1px solid #ddd; padding: 3px 6px; border-radius: 4px; margin-right: 0; background: #fff}*/
 #taskPopover.hover .task-deadline.empty {visibility: visible;}
