@@ -114,6 +114,7 @@ define('TABLE_TASK',      '`sys_task`');
 define('TABLE_ISSUE',     '`sys_issue`');
 define('TABLE_TAG',       '`sys_tag`');
 define('TABLE_BLOCK',     '`sys_block`');
+define('TABLE_SCHEMA',    '`sys_schema`');
 
 /* Tables for crm. */
 define('TABLE_ADDRESS',       '`crm_address`');

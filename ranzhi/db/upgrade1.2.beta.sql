@@ -61,3 +61,16 @@ UPDATE `crm_contract` SET `currency` = 'rmb' where `currency` = '';
 ALTER TABLE `oa_project` ADD `end` date NOT NULL AFTER name;
 ALTER TABLE `oa_project` ADD `begin` date NOT NULL AFTER name;
 ALTER TABLE `oa_project` ADD `desc` text NOT NULL AFTER name;
+
+CREATE TABLE `sys_schema` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `category` varchar(10) NOT NULL,
+  `customer` varchar(10) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `money` varchar(10) NOT NULL,
+  `desc` varchar(10) NOT NULL,
+  `date` varchar(10) NOT NULL,
+  `fee` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
