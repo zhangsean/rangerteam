@@ -308,6 +308,8 @@ td #aliasLabel {display: table-row;}
 
 /* navbar */
 .navbar {font-size: 14px; min-height: 36px}
+.navbar-fixed-bottom{border-top: 1px solid #e1e1e1; background: #eef4fe;}
+.navbar-fixed-bottom .navbar-text{font-size: 13px; margin: 9px 0;}
 
 /* file Form */
 .form-group .file-form .form-group:last-child {margin-bottom: 0;}
