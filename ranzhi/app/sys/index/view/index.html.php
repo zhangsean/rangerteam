@@ -19,7 +19,7 @@ js::import($jsRoot . 'jquery/ips.js');
     <button id='start' class='dock-bottom'>
       <?php echo html::image($themeRoot . 'default/images/ips/avatar.png', "class='avatar-img'");?>
     </button>
-    <ul id='startMenu' class='dropdown-menu'>
+    <ul id='startMenu' class='dropdown-menu fade scale'>
       <li><?php echo html::a($this->createLink('user', 'profile'), html::image($themeRoot . 'default/images/ips/avatar.png', "class='avatar-img'") . "<strong>{$app->user->realname}</strong>", "class='app-btn' data-toggle='modal' data-id='profile'");?></li>
       <li class="divider"></li>
       <li><?php echo html::a($this->createLink('entry', 'create'), "<i class='icon icon-plus'></i> {$lang->index->addEntry}", "target='_blank'"  )?></li>

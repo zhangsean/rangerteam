@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.html.php'; ?>
 <div id="mainContent">
   <div class='panel list list-condensed'>
-    <div class='panel-heading'><h4><i class='icon-calendar'></i><?php echo $lang->announce->browse;?></h4></div>
+    <div class='panel-heading'><strong><i class='icon-calendar'></i> <?php echo $lang->announce->browse;?></strong></div>
     <section class='items items-hover'>
       <?php foreach($articles as $article):?>
       <div class='item'>

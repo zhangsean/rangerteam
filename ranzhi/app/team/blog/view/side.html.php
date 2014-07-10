@@ -16,12 +16,12 @@
     <?php echo html::a(inlink('create'), $lang->blog->create, "class='btn btn-primary btn-lg btn-block'");?>
   </div>
   <div class='panel'> 
-    <div class='panel-heading'> <h4 class='title'><?php echo $lang->categoryMenu;?></h4></div>
+    <div class='panel-heading'> <span class='title'><?php echo $lang->categoryMenu;?></span></div>
     <div class='panel-body'> <?php echo $treeMenu;?> </div>
   </div>
 
   <div class='panel'> 
-    <div class='panel-heading'> <h4 class='title'><?php echo $lang->article->author;?></h4></div>
+    <div class='panel-heading'> <span class='title'><?php echo $lang->article->author;?></span></div>
     <div class='panel-body'>
       <ul>
         <?php foreach($authors as $author):?>
@@ -32,7 +32,7 @@
   </div>
 
   <div class='panel'> 
-    <div class='panel-heading'> <h4 class='title'><?php echo $lang->article->createdDate;?></h4></div>
+    <div class='panel-heading'> <span class='title'><?php echo $lang->article->createdDate;?></span></div>
     <div class='panel-body'>
       <ul>
         <?php foreach(array_keys($months) as $month):?>
@@ -43,7 +43,7 @@
   </div>
 
   <div class='panel'> 
-    <div class='panel-heading'> <h4 class='title'><?php echo $lang->article->keywords;?></h4></div>
+    <div class='panel-heading'> <span class='title'><?php echo $lang->article->keywords;?></span></div>
     <div class='panel-body'>
       <?php foreach($tags as $tag):?>
       <?php if($tag) echo html::a(inlink('index', 'category=0&author=&month=&tag=' . $tag), $tag, "class='label label-info'");?>
@@ -52,7 +52,7 @@
   </div>
 
  <div class='panel'> 
-    <div class='panel-heading'> <h4 class='title'><?php echo $lang->blog->latestArticles;?></h4></div>
+    <div class='panel-heading'> <span class='title'><?php echo $lang->blog->latestArticles;?></span></div>
     <div class='panel-body'>
       <ul>
         <?php foreach($latestArticles as $article):?>

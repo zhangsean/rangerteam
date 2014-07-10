@@ -37,6 +37,6 @@
   </tr>
 </table>
 <script>
-$("#imgCutter").imgCutter({fixedRatio: true, url: '<?php echo inlink('cropavatar')?>'});
+$("#imgCutter").imgCutter({fixedRatio: true, post: '<?php echo inlink('cropavatar')?>', done: function(e){alert(e);}});
 </script>
 <?php include '../../common/view/footer.modal.html.php';?>

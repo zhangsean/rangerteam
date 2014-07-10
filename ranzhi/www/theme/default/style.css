@@ -179,6 +179,9 @@ body.page-actions-fixed {padding-bottom: 70px}
 .panel-actions .btn-mini {margin-top: -3px;}
 .panel-actions.pull-right {display: block; margin-top: -9px;margin-right: -7px;}
 .panel-actions.pull-right .btn{margin-top: 5px; padding: 2px 10px}
+.panel-actions.pull-right  .input-group {margin-top: 4px;}
+.panel-actions.pull-right  .input-group .form-control {margin-top: 0; padding: 2px 10px; height: 28px}
+.panel-actions.pull-right  .input-group .btn {margin-top: 0; padding: 4px 10px;}
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
 .panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
 .panel .table {margin-bottom: 0;}

@@ -24,8 +24,8 @@ js::set('from', 'admin');
         <div class="panel">
           <div class="panel-heading">
             <strong><i class="icon-group"></i> <?php echo $lang->user->list;?></strong>
-            <div class="pull-right col-md-3 search">
-              <form method='post' class='form-inline form-search'>
+            <div class="pull-right panel-actions search">
+              <form method='post' class='form-inline form-search w-300px'>
                 <div class="input-group">
                   <?php echo html::input('query', $query, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); ?>
                   <span class="input-group-btn">

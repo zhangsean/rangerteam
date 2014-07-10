@@ -13,7 +13,7 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <script src='<?php echo $config->webRoot;?>js/jquery/reverseorder/raw.js' type='text/javascript'></script>
 
-<div class='panel'>
+<div class='panel panel-history'>
   <div class='panel-heading'>
     <strong><?php echo $lang->history?></strong>
     <div class='panel-actions'>
