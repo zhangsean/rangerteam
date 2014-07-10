@@ -480,9 +480,10 @@ END:VCARD";
      */
     public function uploadAvatar()
     {
-        if(!empty($_POST))
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            // TODO: save avatar file
+            $result = $this->user->uploadAvatar();
+            $this->send($result); 
         }
 
         $this->view->user  = $this->user->getByAccount($this->app->user->account);
@@ -495,15 +496,17 @@ END:VCARD";
      * @access public
      * @return void
      */
-    public function cropAvatar()
+    public function cropAvatar($image)
     {
         if(!empty($_POST))
         {
-            // TODO: save avatar file
+            a($_POST);
+            exit;
         }
 
         $this->view->user  = $this->user->getByAccount($this->app->user->account);
         $this->view->title = $this->lang->user->cropAvatar;
+        $this->view->image = $image;
         $this->display();
     }
 }

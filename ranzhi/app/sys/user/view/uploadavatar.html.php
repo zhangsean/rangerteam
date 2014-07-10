@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-<form method='post' id='editForm' action="<?php echo inlink('uploadAvatar', "account={$user->account}");?>" class='form-condensed'>
+<form method='post' action="<?php echo inlink('uploadAvatar', "account={$user->account}");?>" class='form-condensed' id='avatarForm' enctype='multipart/form-data'>
   <table class='table table-form'>
     <tr>
       <td><?php echo html::file('files', "class='form-control'");?></td>

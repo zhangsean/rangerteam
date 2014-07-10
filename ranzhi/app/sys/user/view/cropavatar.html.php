@@ -20,7 +20,7 @@
           <?php
           if(empty($user->avatar))
           {
-              echo html::image($themeRoot . 'default/images/ips/avatar.png', "class='avatar-img'");
+              echo html::image($image);
           }
           else
           {

@@ -484,4 +484,15 @@ class userModel extends model
     {
         return $password == md5($user->password . $this->session->random);
     }
+
+    public function uploadAvatar()
+    {
+        $fileModel = $this->loadModel('file');
+        $uploadResult = $fileModel->saveUpload('files');
+        if(!$uploadResult) return array('result' => false, 'message' => $this->lang->fail);
+
+        $fileIdList = array_keys($uploadResult);
+        $file       = $fileModel->getById($fileIdList[0]); 
+        return array('result' => 'success', 'locate' => inlink('cropavatar', "image={$file->fullURL}"));
+    }
 }
