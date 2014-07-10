@@ -18,6 +18,8 @@ $(document).ready(function()
         {
             $('.form-bank, .form-online').hide().find('input, select').attr('disabled', true);
         }
+
+        $.ajustModalPosition();
     })
 
     $('#type').change();

@@ -11,34 +11,32 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-<form method='post' id='editForm' action="<?php echo inlink('cropAvatar', "account={$user->account}");?>" class='form-condensed'>
-  <table class='table table-form'>
-    <tr>
-      <td>
-        <div class="img-cutter fixed-ratio" id="imgCutter">
-          <div class="canvas">
-          <?php
-          if(empty($user->avatar))
-          {
-              echo html::image($image);
-          }
-          else
-          {
-              echo html::image($user->avatar, "class='avatar-img'");
-          }
-          ?>
-          </div>
-          <div class="actions">
-            <h5><?php echo $lang->user->cropAvatarTip;?></h5>
-            <div class="img-cutter-preview"></div>
-            <?php echo html::submitButton('', 'btn btn-primary img-cutter-submit');?> <?php echo html::a(inlink('profile'), $lang->goback, "class='btn loadInModal'");?>
-          </div>
+<table class='table table-form'>
+  <tr>
+    <td>
+      <div class="img-cutter fixed-ratio" id="imgCutter">
+        <div class="canvas">
+        <?php
+        if(empty($user->avatar))
+        {
+            echo html::image($image);
+        }
+        else
+        {
+            echo html::image($user->avatar, "class='avatar-img'");
+        }
+        ?>
         </div>
-      </td>
-    </tr>
-  </table>
-</form>
+        <div class="actions">
+          <h5><?php echo $lang->user->cropAvatarTip;?></h5>
+          <div class="img-cutter-preview"></div>
+          <button type="button" class="btn btn-primary img-cutter-submit"><?php echo $lang->save;?></button> <?php echo html::a(inlink('profile'), $lang->goback, "class='btn loadInModal'");?>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
 <script>
-$("#imgCutter").imgCutter({fixedRatio: true});
+$("#imgCutter").imgCutter({fixedRatio: true, url: '<?php echo inlink('cropavatar')?>'});
 </script>
 <?php include '../../common/view/footer.modal.html.php';?>
