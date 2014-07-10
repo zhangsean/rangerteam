@@ -18,4 +18,12 @@ $(function()
             }
         }
     });
+
+    $('.reloadDeleter').data('afterDelete', function(data)
+    {
+        if(data.result == 'success')
+        {
+            $(this).closest('.task').remove();
+        }
+    });
 });

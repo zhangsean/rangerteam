@@ -312,8 +312,15 @@ $.extend(
 
                 $.getJSON(deleter.attr('href'), function(data) 
                 {
+                    if($.isFunction(deleter.data('afterDelete')))
+                    {
+                        $.proxy(deleter.data('afterDelete'), deleter)(data);
+                    }
+
                     if(data.result == 'success')
                     {
+
+
                         var table     = $(deleter).closest('table');
                         var replaceID = table.attr('id');
 

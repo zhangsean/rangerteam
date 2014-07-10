@@ -76,7 +76,7 @@
             }
             $groupSum = count($groupTasks);
             ?>
-            <div class='item task task-pri-<?php echo $task->pri; ?>' data-id='<?php echo $task->id;?>'>
+            <div class='item task task-pri-<?php echo $task->pri; ?>' data-id='<?php echo $task->id;?>' data-status='<?php echo $task->status;?>'>
               <div class="heading">
                 <?php if($groupBy != 'status'):?>
                 <div class="pull-right">
