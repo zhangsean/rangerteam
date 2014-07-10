@@ -29,5 +29,6 @@ $extHookRule  = $extPath . 'footer.admin.*.hook.php';
 $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 ?>
+<style>body{padding-bottom: 40px;}</style>
 </body>
 </html>
