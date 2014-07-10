@@ -20,6 +20,7 @@
       <?php echo html::a(inlink('create', 'type=out'), "{$lang->trade->out}</i>", "class='btn btn-primary'")?>
       <?php echo html::a(inlink('transfer'), "{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
       <?php echo html::a(inlink('batchcreate'), "{$lang->trade->batchCreate}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('import'), "{$lang->trade->import}</i>", "class='btn btn-primary' data-toggle='modal'")?>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>

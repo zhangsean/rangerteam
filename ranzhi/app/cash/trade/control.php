@@ -239,6 +239,171 @@ class trade extends control
     }
 
     /**
+     * Import csv. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function import()
+    {
+        if($_POST)
+        {
+            $file = $this->loadModel('file')->getUpload('files');
+            $file = $file[0];
+
+            $fc = file_get_contents($file['tmpname']);
+            if( $this->post->encode != "utf8") 
+            {
+                if(function_exists('mb_convert_encoding'))
+                {
+                    $fc = @mb_convert_encoding($fc, 'utf-8', $this->post->encode);
+                }              
+                elseif(function_exists('iconv'))
+                {
+                    $fc = @iconv($this->post->encode, 'utf-8', $fc);
+                }
+                else
+                {              
+                    $this->send(array('result' => 'fail', 'success' => $this->lang->testcase->noFunction));
+                }              
+            }                  
+            file_put_contents($this->file->savePath . $file['pathname'], $fc);
+
+            $file = $this->file->savePath . $file['pathname'];
+            $this->session->set('importFile', $file);
+            $this->send(array('result' => 'success', 'locate' => inlink('showImport', "depositorID={$this->post->depositor}&schemaID={$this->post->schema}")));
+        }
+
+        $this->view->title      = $this->lang->trade->import;
+        $this->view->schemas    = $this->loadModel('schema')->getPairs();
+        $this->view->depositors = $this->loadModel('depositor')->getPairs();
+        $this->display();
+    }
+
+    /**
+     * Show import data.
+     * 
+     * @param  int    $depositorID 
+     * @param  int    $schemaID 
+     * @access public
+     * @return void
+     */
+    public function showImport($depositorID, $schemaID)
+    {
+        if($_POST)
+        {
+            $return = $this->trade->saveImport($depositorID);
+
+            if($return['result'] == 'success') $this->session->set('importFile', '');
+            $this->send($return);
+        }
+
+        $schema = $this->loadModel('schema')->getByID($schemaID);
+
+        /* Parse field to col. */
+        $fields = explode(',', $this->config->trade->importField);
+        $fields = array_flip($fields);
+        foreach($fields as $field => $col)
+        {
+            $col = $schema->$field;
+
+            if($field == 'desc' and $col)
+            {
+                $cols = explode(',', str_replace(' ', '', $col));
+                $fields[$field] = array();
+                foreach($cols as $col)
+                {
+                    if(empty($col)) continue;
+                    $order = ord(strtoupper($col)) - ord('A');
+                    $fields[$field][$order] = $order;
+                }
+                continue;
+            }
+
+            $fields[$field] = empty($col) ? '' : ord(strtoupper($col)) - ord('A');
+        }
+
+        $rows = $this->schema->parseCSV($this->session->importFile);
+
+        unset($this->lang->trade->menu);
+        unset($this->lang->trade->typeList['transferin']);
+        unset($this->lang->trade->typeList['transferout']);
+
+        $customerList  = $this->loadModel('customer', 'crm')->getPairs('client,partner');
+        $traderList    = $this->customer->getPairs('provider,partner');
+        $expenseTypes  = $this->loadModel('tree')->getOptionMenu('out', 0);
+        $incomeTypes   = $this->tree->getOptionMenu('in', 0);
+        $flipCustomers = array_flip($customerList);
+        $flipTraders   = array_flip($traderList);
+        $flipTypeList  = array_flip($this->lang->trade->typeList);
+
+        $dataList = array();
+        foreach($rows as $row)
+        {
+            if(!isset($row[$fields['money']]) or !is_numeric($row[$fields['money']])) continue;
+            $data = array();
+            foreach($fields as $field => $col)
+            {
+                if($field == 'desc' and !empty($col))
+                {
+                    $data[$field] = '';
+                    foreach($fields[$field] as $col) $data[$field] .= isset($row[$col]) ? trim($row[$col]) . "\n" : '';
+                    $data[$field] = trim($data[$field]);
+                    continue;
+                }
+                $data[$field] = (!empty($col) and isset($row[$col])) ? trim($row[$col]) : '';
+            }
+
+            if(isset($flipTypeList[$data['type']])) $data['type'] = $flipTypeList[$data['type']];
+            if($data['type'] == 'out' and isset($flipTraders[$data['customer']]))
+            {
+                $data['customer'] = $flipTraders[$data['customer']];
+            }
+            elseif($data['type'] == 'in' and isset($flipCustomers[$data['customer']]))
+            {
+                $data['customer'] = $flipCustomers[$data['customer']];
+            }
+
+            if($data['category'] and in_array($data['type'], array('in', 'out')))
+            {
+                $categories = $data['type'] == 'out' ? $expenseTypes : $incomeTypes;
+                foreach($categories as $id => $category)
+                {
+                    if(strpos($category, $data['category']) !== false)
+                    {
+                        $data['category'] = $id;
+                        break;
+                    }
+                }
+            }
+
+            unset($data['fee']);
+            $dataList[] = $data;
+
+            $fee = trim($row[$fields['fee']]);
+            if($schema->fee and $fee)
+            {
+                $data['source'] = $data['type'];
+                $data['type']   = 'fee';
+                $data['money']  = $fee;
+                $data['desc']   = '';
+                $dataList[]    = $data;
+            }
+        }
+
+        $this->view->trades        = $dataList;
+        $this->view->depositor     = $this->loadModel('depositor')->getByID($depositorID);
+        $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->customerList  = $customerList;
+        $this->view->traderList    = $traderList;
+        $this->view->expenseTypes  = $expenseTypes;
+        $this->view->incomeTypes   = $incomeTypes;
+        $this->view->deptList      = $this->tree->getOptionMenu('dept', 0, $removeRoot = true);
+
+        $this->display();
+    }
+
+    /**
      * Delete a trade.
      * 
      * @param  int      $tradeID 

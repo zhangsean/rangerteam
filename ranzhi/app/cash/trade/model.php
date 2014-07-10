@@ -245,6 +245,101 @@ class tradeModel extends model
         return false;
     }
 
+    public function saveImport($depositorID)
+    {
+        $now       = helper::now();
+        $trades    = array();
+        $depositor = $this->getByID($depositorID);
+
+        $this->loadModel('action');
+
+        $newCustomer = array();
+        $newTrader   = array();
+        /* Get data. */
+        foreach($this->post->type as $key => $type)
+        {
+            if(empty($type)) break;
+            if(!$this->post->money[$key]) continue;
+            $trade = new stdclass();
+            $trade->type           = $type;
+            $trade->depositor      = $depositorID;
+            $trade->money          = $this->post->money[$key];
+            $trade->category       = $this->post->category[$key];
+            $trade->dept           = $this->post->dept[$key];
+            $trade->trader         = $this->post->trader[$key];
+            $trade->createTrader   = isset($this->post->createTrader[$key])   ? $this->post->createTrader[$key] : '';
+            $trade->traderName     = isset($this->post->traderName[$key])     ? $this->post->traderName[$key] : '';
+            $trade->createCustomer = isset($this->post->createCustomer[$key]) ? $this->post->createCustomer[$key] : '';
+            $trade->customerName   = isset($this->post->customerName[$key])   ? $this->post->customerName[$key] : '';
+            $trade->handlers       = !empty($this->post->handlers[$key]) ? join(',', $this->post->handlers[$key]) : '';
+            $trade->date           = $this->post->date[$key];
+            $trade->desc           = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags->admin);
+            $trade->currency       = $depositor->currency;
+            $trade->createdBy      = $this->app->user->account;
+            $trade->createdDate    = $now;
+
+            $handlers = $this->loadModel('user')->getByAccount($trade->handlers);
+            if($handlers) $trade->dept = $handlers->dept;
+
+            if($trade->createTrader)
+            {
+                if(isset($newTrader[$trade->traderName]))
+                {
+                    $trade->trader = $newTrader[$trade->traderName];
+                }
+                else
+                {
+                    $data = new stdclass();
+                    $data->relation    = 'provider';
+                    $data->name        = $trade->traderName;
+                    $data->level       = 0;
+                    $data->createdBy   = $this->app->user->account;
+                    $data->createdDate = $now;
+                    $this->dao->insert(TABLE_CUSTOMER)->data($data)->exec();
+                    $trade->trader = $this->dao->lastInsertID();
+                    $newTrader[$data->name] = $trade->trader;
+                }
+            }
+
+            if($trade->createCustomer)
+            {
+                if(isset($newCustomer[$trade->customerName]))
+                {
+                    $trade->trader = $newCustomer[$trade->customerName];
+                }
+                else
+                {
+                    $data = new stdclass();
+                    $data->relation    = 'client';
+                    $data->name        = $trade->customerName;
+                    $data->level       = 0;
+                    $data->createdBy   = $this->app->user->account;
+                    $data->createdDate = $now;
+                    $this->dao->insert(TABLE_CUSTOMER)->data($data)->exec();
+                    $trade->trader = $this->dao->lastInsertID();
+                    $this->action->create('customer', $trade->trader, 'Created');
+
+                    $newCustomer[$data->name] = $trade->trader;
+                }
+            }
+
+            $trades[$key] = $trade;
+        }
+
+        if(empty($trades)) return array('result' => 'fail');
+
+        $errors = $this->batchCheck($trades);
+        if(!empty($errors)) return array('result' => 'fail', 'message' => $errors);
+
+        $tradeIDList = array();
+        foreach($trades as $trade)
+        {
+            $this->dao->insert(TABLE_TRADE)->data($trade, $skip = 'createTrader,traderName,createCustomer,customerName')->autoCheck()->exec();
+        }
+        if(!dao::isError()) return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'));
+        return array('result' => 'fail', 'message' => dao::getError());
+    }
+
     /**
      * Transfer.
      * 

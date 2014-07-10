@@ -15,3 +15,5 @@ $config->trade->require->create   = 'money,type,handlers';
 $config->trade->require->edit     = 'money,type,handlers';
 
 $config->trade->batchCreate = 10;
+
+$config->trade->importField = 'category,customer,type,money,desc,date,fee';

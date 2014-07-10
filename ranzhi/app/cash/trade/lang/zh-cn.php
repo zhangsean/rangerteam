@@ -30,6 +30,9 @@ $lang->trade->payment     = '付款账户';
 $lang->trade->fee         = '手续费';
 $lang->trade->transferIn  = '转入金额';
 $lang->trade->transferOut = '转出金额';
+$lang->trade->schema      = '模板';
+$lang->trade->importFile  = '导入文件';
+$lang->trade->encode      = '编码';
 
 $lang->trade->create      = '记账';
 $lang->trade->in          = '记收入';
@@ -41,6 +44,8 @@ $lang->trade->browse      = '账目列表';
 $lang->trade->delete      = '删除记录';
 $lang->trade->batchCreate = '批量记账';
 $lang->trade->newTrader   = '新建';
+$lang->trade->import      = '导入';
+$lang->trade->showImport  = '导入确认';
 
 $lang->trade->typeList['in']          = '收入';
 $lang->trade->typeList['out']         = '支出';
@@ -55,5 +60,9 @@ $lang->trade->categoryList['fee']         = '手续费';
 $lang->trade->objectTypeList['order']    = '订单支出';
 $lang->trade->objectTypeList['contract'] = '合同支出';
 
+$lang->trade->encodeList['gbk']  = 'GBK';
+$lang->trade->encodeList['utf8'] = 'UTF-8';
+
 $lang->trade->notEqual = '付款账号不能与收款账号相同。';
 $lang->trade->feeDesc  = '%s %s 转入 %s';
+$lang->trade->fileNode = '文件格式为csv';

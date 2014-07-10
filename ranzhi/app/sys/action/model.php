@@ -41,7 +41,7 @@ class actionModel extends model
         $action->contact    = $contact;
         $action->actor      = $actor ? $actor : $this->app->user->account;
         $action->action     = strtolower($actionType);
-        $action->date       = $this->post->date ? $this->post->date : helper::now();
+        $action->date       = ($this->post->date and is_string($this->post->date)) ? $this->post->date : helper::now();
         $action->comment    = trim(strip_tags($comment, "<img>")) ? $comment : '';
         $action->extra      = $extra;
         $action->nextDate   = $this->post->nextDate;
