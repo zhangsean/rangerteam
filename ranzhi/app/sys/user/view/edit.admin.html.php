@@ -86,7 +86,7 @@
               </tr>
             </table>
           </fieldset>          
-            <div class='page-actions'><?php echo html::submitButton();?></div>
+          <?php echo html::submitButton();?>
         </div>
       </form>
     </div>
