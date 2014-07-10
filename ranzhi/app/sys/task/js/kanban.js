@@ -23,7 +23,7 @@ $(function()
     {
         if(data.result == 'success')
         {
-            $(this).closest('.task').remove();
+            $(this).closest('.task').slideUp('fast', function(){$(this).remove()});
         }
     });
 });

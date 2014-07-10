@@ -406,11 +406,21 @@ class task extends control
         $groupByList = array();
         $groupTasks  = array();
 
+        if(empty($groupBy)) $groupBy = 'status';
+        if($groupBy == 'status')
+        {
+            foreach ($taskLang->statusList as $key => $value) 
+            {
+                if(empty($key)) continue;
+                $groupTasks[$key] = array();
+            }
+        }
+
         /* Get users. */
         $users = $this->loadModel('user')->getPairs();
         foreach($tasks as $task)
         {
-            if($groupBy == '' or $groupBy == 'status')
+            if($groupBy == 'status')
             {
                 $groupTasks[$task->status][] = $task;
             }

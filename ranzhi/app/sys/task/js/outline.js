@@ -11,7 +11,7 @@ $(function()
             var statusTotal = info.find('.group-' + task.data('status'));
             statusTotal.text(parseInt(statusTotal.text()) - 1);
 
-            task.remove();
+            task.slideUp('fast', function(){$(this).remove()});
         }
     });
 });
