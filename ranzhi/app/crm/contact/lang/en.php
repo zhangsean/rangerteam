@@ -28,6 +28,7 @@ $lang->contact->wangwang      = 'Trade Manager';
 $lang->contact->site          = 'Site';
 $lang->contact->mobile        = 'Mobile';
 $lang->contact->phone         = 'Phone';
+$lang->contact->fax           = 'Fax';
 $lang->contact->weibo         = 'Sina Weibo';
 $lang->contact->weixin        = 'Wechat';
 $lang->contact->desc          = 'Desc';

@@ -78,6 +78,10 @@
               <td><?php echo html::input('phone', '', "class='form-control'");?></td>
             </tr>
             <tr>
+              <th><?php echo $lang->contact->fax;?></th>
+              <td><?php echo html::input('fax', '', "class='form-control'");?></td>
+            </tr>
+            <tr>
               <th><?php echo $lang->contact->qq;?></th>
               <td><?php echo html::input('qq', '', "class='form-control'");?></td>
             </tr>

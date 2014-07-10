@@ -28,6 +28,7 @@ $lang->contact->wangwang      = '旺旺';
 $lang->contact->site          = '网址';
 $lang->contact->mobile        = '手机';
 $lang->contact->phone         = '电话';
+$lang->contact->fax           = '传真';
 $lang->contact->weibo         = '微博';
 $lang->contact->weixin        = '微信';
 $lang->contact->desc          = '简介';
