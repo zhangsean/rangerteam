@@ -11,6 +11,7 @@
  */
 $lang->block->admin    = 'Manage Blocks';
 $lang->block->num      = 'Amount';
+$lang->block->type     = 'Type';
 $lang->block->orderBy  = 'Order By';
 $lang->block->status   = 'Status';
 $lang->block->actions  = 'Options';
@@ -18,9 +19,9 @@ $lang->block->lblBlock = 'Block';
 
 $lang->block->availableBlocks = new stdclass();
 
-$lang->block->availableBlocks->order    = 'My Orders';
+$lang->block->availableBlocks->order    = 'Order List';
 //$lang->block->availableBlocks->task     = 'My Tasks';
-$lang->block->availableBlocks->contract = 'My Contracts';
+$lang->block->availableBlocks->contract = 'Contract List';
 
 $lang->block->orderByList = new stdclass();
 
@@ -44,3 +45,22 @@ $lang->block->orderByList->contract['id_desc']      = 'ID DESC';
 $lang->block->orderByList->contract['customer_asc'] = 'Customer';
 $lang->block->orderByList->contract['amount_asc']   = 'Amount ASC';
 $lang->block->orderByList->contract['amount_desc']  = 'Amount DESC';
+
+$lang->block->typeList = new stdclass();
+
+$lang->block->typeList->order['assignedTo']   = 'To me';
+$lang->block->typeList->order['createdBy']    = 'My created';
+$lang->block->typeList->order['signedBy']     = 'My signed';
+$lang->block->typeList->order['closedBy']     = 'My closed';
+$lang->block->typeList->order['activatedBy']  = 'My activated';
+$lang->block->typeList->order['normalstatus'] = 'Normal';
+$lang->block->typeList->order['signedstatus'] = 'Signed';
+$lang->block->typeList->order['closedstatus'] = 'Closed';
+
+$lang->block->typeList->contract['returnedBy']     = 'My recieved';
+$lang->block->typeList->contract['deliveredBy']    = 'My delivered';
+$lang->block->typeList->contract['closedBy']       = 'My closed';
+$lang->block->typeList->contract['canceled']       = 'My canceled';
+$lang->block->typeList->contract['normalstatus']   = 'Normal';
+$lang->block->typeList->contract['closedstatus']   = 'Closed';
+$lang->block->typeList->contract['canceledstatus'] = 'Canceled';

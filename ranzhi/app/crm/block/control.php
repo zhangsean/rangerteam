@@ -139,8 +139,8 @@ class block extends control
 
         $this->view->orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where('deleted')->eq(0)
-            ->andWhere("(createdBy='$params->account' OR assignedTo = '$params->account')")
-            ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
+            ->beginIF($params->type and strpos($params->type, 'status') === false)->andWhere($params->type)->eq($params->account)->fi()
+            ->beginIF($params->type and strpos($params->type, 'status') !== false)->andWhere('status')->eq(str_replace('status' , '', $params->type))->fi()
             ->orderBy($params->orderBy)
             ->limit($params->num)
             ->fetchAll('id');
@@ -197,8 +197,8 @@ class block extends control
 
         $this->view->contracts = $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('deleted')->eq(0)
-            ->andWhere('handlers')->like("%{$params->account}%")
-            ->beginIF(isset($params->status) and join($params->status) != false)->andWhere('status')->in($params->status)->fi()
+            ->beginIF($params->type and strpos($params->type, 'status') === false)->andWhere($params->type)->eq($params->account)->fi()
+            ->beginIF($params->type and strpos($params->type, 'status') !== false)->andWhere('status')->eq(str_replace('status' , '', $params->type))->fi()
             ->orderBy($params->orderBy)
             ->limit($params->num)
             ->fetchAll('id');

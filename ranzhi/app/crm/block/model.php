@@ -34,6 +34,11 @@ class crmblockModel extends blockModel
         $this->app->loadLang('order', 'crm');
 
         $params = new stdclass();
+
+        $params->type['name']    = $this->lang->block->type;
+        $params->type['options'] = $this->lang->block->typeList->order;
+        $params->type['control'] = 'select';
+
         $params->num['name']        = $this->lang->block->num;
         $params->num['default']     = 15; 
         $params->num['control']     = 'input';
@@ -42,12 +47,6 @@ class crmblockModel extends blockModel
         $params->orderBy['default'] = 'id_desc';
         $params->orderBy['options'] = $this->lang->block->orderByList->order;
         $params->orderBy['control'] = 'select';
-
-        $statusList = array('' => '') + $this->lang->order->statusList;
-        $params->status['name']    = $this->lang->order->status;
-        $params->status['options'] = $statusList;
-        $params->status['control'] = 'select';
-        $params->status['attr']    = 'multiple';
 
         return json_encode($params);
     }
@@ -91,6 +90,11 @@ class crmblockModel extends blockModel
         $this->app->loadLang('contract', 'crm');
 
         $params = new stdclass();
+
+        $params->type['name']    = $this->lang->block->type;
+        $params->type['options'] = $this->lang->block->typeList->contract;
+        $params->type['control'] = 'select';
+
         $params->num['name']    = $this->lang->block->num;
         $params->num['default'] = 15; 
         $params->num['control'] = 'input';
@@ -99,13 +103,6 @@ class crmblockModel extends blockModel
         $params->orderBy['default'] = 'id_desc';
         $params->orderBy['options'] = $this->lang->block->orderByList->contract;
         $params->orderBy['control'] = 'select';
-
-        unset($this->lang->contract->statusList[0]);
-        $statusList = array('' => '') + $this->lang->contract->statusList;
-        $params->status['name']    = $this->lang->contract->status;
-        $params->status['options'] = $statusList;
-        $params->status['control'] = 'select';
-        $params->status['attr']    = 'multiple';
 
         return json_encode($params);
     }
