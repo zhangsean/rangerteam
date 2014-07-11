@@ -15,9 +15,12 @@ $lang->schema->edit     = '编辑模板';
 
 $lang->schema->name     = '模板名称';
 $lang->schema->feeRow   = '手续费为一条记录';
+$lang->schema->diffCol  = '收支金额分列';
 
 $lang->schema->placeholder = new stdclass();
 $lang->schema->placeholder->common = '填写对账单对应到该字段的列，如：A';
 $lang->schema->placeholder->type   = '填写“收入/支出”所对应的列';
 $lang->schema->placeholder->date   = '填写“付款时间”所对应的列';
 $lang->schema->placeholder->desc   = '账目备注，可以填写多列，用,隔开，如：I,O';
+$lang->schema->placeholder->in     = '收款所在的列，如：E';
+$lang->schema->placeholder->out    = '付款所在的列，如：D';

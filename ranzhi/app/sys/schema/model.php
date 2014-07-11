@@ -55,10 +55,12 @@ class schemaModel extends model
     {
         $schema = fixer::input('post')
             ->setIF($this->post->feeRow, 'fee', '')
-            ->remove('feeRow')
+            ->setIF($this->post->diffCol, 'money', "{$this->post->in},{$this->post->out}")
+            ->remove('feeRow,diffCol')
             ->get();
 
-        $this->dao->insert(TABLE_SCHEMA)->data($schema)
+        if($this->post->diffCol)$this->config->schema->require->create = str_replace(',type,', ',in,out,', $this->config->schema->require->create);
+        $this->dao->insert(TABLE_SCHEMA)->data($schema, 'in,out')
             ->autoCheck()
             ->batchCheck($this->config->schema->require->create, 'notempty')
             ->exec();
@@ -79,10 +81,12 @@ class schemaModel extends model
         $oldSchema = $this->getByID($schemaID);
         $schema    = fixer::input('post')
             ->setIF($this->post->feeRow, 'fee', '')
-            ->remove('feeRow')
+            ->setIF($this->post->diffCol, 'money', "{$this->post->in},{$this->post->out}")
+            ->remove('feeRow,diffCol')
             ->get();
 
-        $this->dao->update(TABLE_SCHEMA)->data($schema)
+        if($this->post->diffCol)$this->config->schema->require->edit = str_replace(',type,', ',in,out,', $this->config->schema->require->edit);
+        $this->dao->update(TABLE_SCHEMA)->data($schema, 'in,out')
             ->autoCheck()
             ->batchCheck($this->config->schema->require->edit, 'notempty')
             ->where('id')->eq($schemaID)

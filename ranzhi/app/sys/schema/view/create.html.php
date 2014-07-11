@@ -31,12 +31,25 @@
           <td><?php  echo html::input('customer', '', "class='form-control' placeholder='{$lang->schema->placeholder->common}'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->trade->type;?></th>
-          <td><?php  echo html::input('type', '', "class='form-control' placeholder='{$lang->schema->placeholder->type}'");?></td>
+          <th><?php echo $lang->trade->money;?></th>
+          <td>
+            <div class='input-group'>
+              <?php echo html::input('money', '', "class='form-control' placeholder='{$lang->schema->placeholder->common}'");?>
+              <div class='input-group-addon'><?php echo html::checkbox('diffCol', array(1 => $lang->schema->diffCol))?></div>
+            </div>
+          </td>
+        </tr>
+        <tr class='out'>
+          <th><?php echo $lang->trade->typeList['out'];?></th>
+          <td><?php  echo html::input('out', '', "class='form-control' placeholder='{$lang->schema->placeholder->out}'");?></td>
+        </tr>
+        <tr class='in'>
+          <th><?php echo $lang->trade->typeList['in'];?></th>
+          <td><?php  echo html::input('in', '', "class='form-control' placeholder='{$lang->schema->placeholder->in}'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->trade->money;?></th>
-          <td><?php echo html::input('money', '', "class='form-control' placeholder='{$lang->schema->placeholder->common}'");?></td>
+          <th><?php echo $lang->trade->type;?></th>
+          <td><?php  echo html::input('type', '', "class='form-control' placeholder='{$lang->schema->placeholder->type}'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->trade->date;?></th>

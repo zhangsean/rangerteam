@@ -319,6 +319,14 @@ class trade extends control
                 }
                 continue;
             }
+            if($field == 'money' and strpos($schema->money, ',') !== false)
+            {
+                list($in, $out) = explode(',', str_replace(' ', '', $col));
+                $fields[$field] = array();
+                $fields[$field]['in']  = ord(strtoupper($in)) - ord('A');
+                $fields[$field]['out'] = ord(strtoupper($out)) - ord('A');
+                continue;
+            }
 
             $fields[$field] = empty($col) ? '' : ord(strtoupper($col)) - ord('A');
         }
@@ -326,8 +334,6 @@ class trade extends control
         $rows = $this->schema->parseCSV($this->session->importFile);
 
         unset($this->lang->trade->menu);
-        unset($this->lang->trade->typeList['transferin']);
-        unset($this->lang->trade->typeList['transferout']);
 
         $customerList  = $this->loadModel('customer', 'crm')->getPairs('client,partner');
         $traderList    = $this->customer->getPairs('provider,partner');
@@ -340,7 +346,22 @@ class trade extends control
         $dataList = array();
         foreach($rows as $row)
         {
-            if(!isset($row[$fields['money']]) or !is_numeric($row[$fields['money']])) continue;
+            if(is_array($fields['money']))
+            {
+                if(!isset($row[$fields['money']['in']]) or !isset($row[$fields['money']['out']])) continue;
+
+                $row[$fields['money']['in']]  = str_replace(array(',', ' '), '', $row[$fields['money']['in']]);
+                $row[$fields['money']['out']] = str_replace(array(',', ' '), '', $row[$fields['money']['out']]);
+                if(!is_numeric($row[$fields['money']['in']]) and !is_numeric($row[$fields['money']['out']])) continue;
+            }
+            else
+            {
+                if(!isset($row[$fields['money']])) continue;
+
+                $row[$fields['money']] = str_replace(array(',', ' '), '', $row[$fields['money']]);
+                if(!is_numeric($row[$fields['money']])) continue;
+            }
+ 
             $data = array();
             foreach($fields as $field => $col)
             {
@@ -351,20 +372,33 @@ class trade extends control
                     $data[$field] = trim($data[$field]);
                     continue;
                 }
-                $data[$field] = (!empty($col) and isset($row[$col])) ? trim($row[$col]) : '';
+
+                if($field == 'type' and is_array($col)) continue;
+                if($field == 'money' and is_array($col))
+                {
+                    $data[$field] = is_numeric($row[$col['in']]) ? trim($row[$col['in']]) : trim($row[$col['out']]);
+                    $data['type'] = is_numeric($row[$col['in']]) ? 'in' : 'out';
+                    continue;
+                }
+
+                $data[$field] = (is_int($col) and isset($row[$col])) ? trim($row[$col]) : '';
+                if($field == 'date') $data[$field] = date('Y-m-d', strtotime($data[$field]));
             }
 
             if(isset($flipTypeList[$data['type']])) $data['type'] = $flipTypeList[$data['type']];
-            if($data['type'] == 'out' and isset($flipTraders[$data['customer']]))
+            if(!$schema->fee and !$data['customer'])
             {
-                $data['customer'] = $flipTraders[$data['customer']];
-            }
-            elseif($data['type'] == 'in' and isset($flipCustomers[$data['customer']]))
-            {
-                $data['customer'] = $flipCustomers[$data['customer']];
+                $data['source'] = $data['type'];
+                $data['type']   = 'fee';
             }
 
-            if($data['category'] and in_array($data['type'], array('in', 'out')))
+            $matchs = $data['type'] == 'out' ? $flipTraders : ($data['type'] == 'in' ? $flipCustomers : '');
+            if($matchs and isset($matchs[$data['customer']]))
+            {
+                $data['customer'] = $matchs[$data['customer']];
+            }
+
+            if(!empty($data['category']) and in_array($data['type'], array('in', 'out')))
             {
                 $categories = $data['type'] == 'out' ? $expenseTypes : $incomeTypes;
                 foreach($categories as $id => $category)
@@ -377,10 +411,10 @@ class trade extends control
                 }
             }
 
+            $fee = $data['fee'];
             unset($data['fee']);
             $dataList[] = $data;
 
-            $fee = trim($row[$fields['fee']]);
             if($schema->fee and $fee)
             {
                 $data['source'] = $data['type'];

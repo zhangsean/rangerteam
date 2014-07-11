@@ -145,7 +145,6 @@ class tradeModel extends model
                 $trade->trader = $this->dao->lastInsertID();
             }
 
-
             $trades[$key] = $trade;
         }
 
@@ -177,13 +176,17 @@ class tradeModel extends model
         foreach($trades as $key => $trade)
         {
             $item = $this->lang->trade->trader;
-            if(!$trade->createTrader)
-            {
-               if(empty($trade->trader) or !validater::checkInt($trade->trader)) $errors['trader' . $key] = sprintf($this->lang->error->notempty, $item) . sprintf($this->lang->error->int[0], $item);
-            }
-            else
+            if($trade->createTrader)
             {
                 if(empty($trade->traderName)) $errors['traderName' . $key] = sprintf($this->lang->error->notempty, $item);
+            }
+            elseif($trade->createCustomer)
+            {
+                if(empty($trade->customerName)) $errors['customerName' . $key] = sprintf($this->lang->error->notempty, $item);
+            }
+            elseif(in_array($trade->type, array('in', 'out')))
+            {
+               if(empty($trade->trader) or !validater::checkInt($trade->trader)) $errors['trader' . $key] = sprintf($this->lang->error->notempty, $item) . sprintf($this->lang->error->int[0], $item);
             }
 
             $item =  $this->lang->trade->handlers;
@@ -322,6 +325,8 @@ class tradeModel extends model
                     $newCustomer[$data->name] = $trade->trader;
                 }
             }
+
+            if(empty($trade->trader)) $trade->trader = 0; 
 
             $trades[$key] = $trade;
         }
