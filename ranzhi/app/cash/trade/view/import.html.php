@@ -24,7 +24,7 @@
         <th><?php echo $lang->trade->importFile?></th>
         <td><?php echo html::file('files', "class='form-control'")?></td>
         <th><?php echo $lang->trade->encode?></th>
-        <td><?php echo html::select('encode', $lang->trade->encodeList, 'utf8', "class='form-control'")?></td>
+        <td><?php echo html::select('encode', $lang->trade->encodeList, '', "class='form-control'")?></td>
       </tr>
       <tr>
         <th></th>

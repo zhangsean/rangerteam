@@ -125,6 +125,9 @@ class schemaModel extends model
         while(($line = fgets($handle)) !== false)
         {
             $line = trim($line);
+            $line = preg_replace_callback('/(\"{2,})(\,+)/', array($this, 'removeInterference'), $line);
+            $line = str_replace('""', '"', $line);
+
             /* if only one column then line is the data. */
             if(strpos($line, ',') === false and $col == -1)
             {
@@ -144,7 +147,7 @@ class schemaModel extends model
                     else
                     {
                         $data[$row][$col] .= "\n" . substr($line, 0, $pos + 1);
-                        $data[$row][$col] = trim($data[$row][$col], '"');
+                        $data[$row][$col] = str_replace('&comma;', ',', trim($data[$row][$col], '"'));
                         $line = substr($line, $pos + 2);
                         $col++;
                     }
@@ -188,6 +191,8 @@ class schemaModel extends model
                             $line = substr($line, $pos + 1);
                         }
                     }
+
+                    $data[$row][$col] = str_replace('&comma;', ',', trim($data[$row][$col], '"'));
                     $col++;
                 }
             }
@@ -197,5 +202,17 @@ class schemaModel extends model
         fclose ($handle);
 
         return $data;
+    }
+
+    /**
+     * Remove interference for parse csv.
+     * 
+     * @param  array    $matchs 
+     * @access private
+     * @return string
+     */
+    private function removeInterference($matchs)
+    {
+        return $matchs[1] . str_replace(',', '&comma;', $matchs[2]);
     }
 }
