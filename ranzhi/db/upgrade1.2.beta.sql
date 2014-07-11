@@ -74,3 +74,5 @@ CREATE TABLE `sys_schema` (
   `fee` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE sys_user CHANGE avatar avatar varchar(255) NOT NULL;
