@@ -23,7 +23,7 @@
         }
         else
         {
-            echo html::image($user->avatar, "class='avatar-img'");
+            echo html::image($user->avatar);
         }
         ?>
         </div>
@@ -41,10 +41,11 @@ $("#imgCutter").imgCutter(
 {
     fixedRatio: true,
     post: '<?php echo inlink('cropavatar', "image={$image->id}")?>',
-    ready: function() {$.ajustModalPosition();}
+    ready: function() {$.ajustModalPosition();},
     done: function(response)
     {
-        $('#ajaxModal').load(createLink('user', 'profile'));
+        $('#start .avatar, #startMenu .avatar').html('<img src="<?php echo $user->avatar?>" />');
+        $('#ajaxModal').load(createLink('user', 'profile'), function(){$.ajustModalPosition()});
     },
 });
 </script>

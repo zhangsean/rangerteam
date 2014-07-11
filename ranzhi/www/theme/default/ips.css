@@ -73,11 +73,12 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 
 /* start menu */
 #start {width: 40px; height: 36px; text-align: center; padding: 0; background: none}
-#start img {width: 28px; height: 28px; line-height: 28px; border-radius: 4px; box-shadow: 0 1px 1px rgba(0,0,0,0.35)}
+#start .avatar {width: 28px; height: 28px; line-height: 28px; border-radius: 4px; box-shadow: 0 1px 1px rgba(0,0,0,0.35); vertical-align: middle;}
 #start:hover {background-color: rgba(255,255,255,0.2);}
 #startMenu {bottom: 36px; top: inherit; left: 0}
-#startMenu .avatar-img {height: 48px; width: 48px; display: inline-block; margin-right: 10px; border-radius: 4px}
-#startMenu .avatar-img + strong {vertical-align: bottom; font-size: 18px; line-height: 30px;}
+#startMenu .avatar {margin-right: 10px;}
+#startMenu .avatar img {height: 48px; width: 48px; display: inline-block; margin-right: 10px; border-radius: 4px}
+#startMenu .avatar + strong {vertical-align: bottom; font-size: 18px; line-height: 30px;}
 #startMenu li {min-width: 200px;}
 #startMenu li a .label {font-weight: bold;}
 #startMenu li .pull-right {margin-left: 20px;}

@@ -396,8 +396,6 @@ $(function()
             }
         }
 
-        console.log(result);
-
         result = JSON.stringify(result);
 
         var postData = 

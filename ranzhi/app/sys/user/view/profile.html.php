@@ -19,11 +19,7 @@
       <td rowspan='9' class='text-top'>
         <div class='avatar avatar-lg mgb-10'>
         <?php
-        if(empty($user->avatar))
-        {
-            echo html::image($themeRoot . 'default/images/ips/avatar.png', "class='avatar-img'");
-        }
-        else
+        if(!empty($user->avatar))
         {
             echo html::image($user->avatar, "class='avatar-img'");
         }

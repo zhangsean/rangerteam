@@ -1446,6 +1446,7 @@
         event.stopPropagation();
     }
 
+    /* Open an entry by given id and url */
     function openEntry(id, url)
     {
         windows.openEntry(id, url);

@@ -17,10 +17,10 @@ js::import($jsRoot . 'jquery/ips.js');
 <div id='desktop' class='fullscreen-mode' unselectable='on' style='-moz-user-select:none;-webkit-user-select:none;' onselectstart='return false;'>
   <div id='leftBar' class='dock-left'>
     <button id='start' class='dock-bottom'>
-      <?php echo html::image($themeRoot . 'default/images/ips/avatar.png', "class='avatar-img'");?>
+      <div class='avatar avatar-md'><?php if(!empty($app->user->avatar)) echo html::image($app->user->avatar);?></div>
     </button>
     <ul id='startMenu' class='dropdown-menu fade scale'>
-      <li><?php echo html::a($this->createLink('user', 'profile'), html::image($themeRoot . 'default/images/ips/avatar.png', "class='avatar-img'") . "<strong>{$app->user->realname}</strong>", "class='app-btn' data-toggle='modal' data-id='profile'");?></li>
+      <li><?php echo html::a($this->createLink('user', 'profile'), "<div class='avatar'>" . (empty($app->user->avatar) ? '' : html::image($app->user->avatar)) . "</div><strong>{$app->user->realname}</strong>", "class='app-btn' data-toggle='modal' data-id='profile'");?></li>
       <li class="divider"></li>
       <li><?php echo html::a($this->createLink('entry', 'create'), "<i class='icon icon-plus'></i> {$lang->index->addEntry}", "target='_blank'"  )?></li>
       <li><a href='###' class='fullscreen-btn' data-id='allapps'><i class='icon icon-th-large'></i> <?php echo $lang->index->allEntries?></a></li>

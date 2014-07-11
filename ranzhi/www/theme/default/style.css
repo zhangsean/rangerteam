@@ -417,8 +417,14 @@ td #aliasLabel {display: table-row;}
 .article-content img {box-shadow: none}
 
 /* avatar */
-.avatar > img {border-radius: 4px; width: 48px; height: 48px;}
-.avatar.avatar-lg > img {border-radius: 4px; width: 128px; height: 128px;}
+.avatar {display: inline-block; width: 48px; height: 48px; max-width: 100%; max-height: 100%; border-radius: 4px; position: relative; overflow: hidden;}
+.avatar:before {content: '\e608'; font-family: ZenIcon; color: #fff; position: absolute; z-index: 1; font-size: 36px; width: 100%; height: 100%; left: 0; top: 0; line-height: 48px; text-align: center; background: #00b7ef; display: block;}
+.avatar:not(:empty):before {display: none} 
+.avatar > img {border-radius: 4px; width: 100%; height: 100%; z-index: 2; position: absolute; left: 0; top: 0;}
+.avatar.avatar-lg {border-radius: 6px; width: 128px; height: 128px;}
+.avatar.avatar-md {border-radius: 4px; width: 28px; height: 28px;}
+.avatar.avatar-md:before {font-size: 28px; line-height: 32px}
+.avatar.avatar-lg:before {font-size: 98px; line-height: 128px}
 
 /* status */
 .contract-normal    {color:inherit;}
