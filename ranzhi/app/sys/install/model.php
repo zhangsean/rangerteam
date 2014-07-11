@@ -352,6 +352,7 @@ EOT;
 
         $entry->buildin     = 1;
         $entry->integration = 1;
+        $entry->visible     = 1;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
 

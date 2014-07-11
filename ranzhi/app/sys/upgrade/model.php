@@ -191,6 +191,7 @@ class upgradeModel extends model
         $entry->login    = '../cash';
         $entry->ip       = '*';
         $entry->control  = 'simple';
+        $entry->visible  = 1;
         $entry->size     = 'max';
         $entry->position = 'default';
 
@@ -292,6 +293,7 @@ class upgradeModel extends model
                 ->set('abbr')->eq($name['abbr'])
                 ->set('buildin')->eq(1)
                 ->set('integration')->eq(1)
+                ->set('visible')->eq(1)
                 ->where('code')->eq($code)
                 ->exec();
         }

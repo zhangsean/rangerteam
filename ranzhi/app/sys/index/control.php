@@ -31,16 +31,15 @@ class index extends control
     public function index()
     {
         $entries    = $this->loadModel('entry')->getEntries();
-        $leftEntry  = ',';
         $allEntries = '';
 
         foreach($entries as $entry)
         {
-            if($entry->visible) $leftEntry .= $entry->id . ',';
 
             $sso  = $this->createLink('entry', 'visit', "entryID=$entry->id");
             $logo = !empty($entry->logo) ? $entry->logo : '';
             $size = !empty($entry->size) ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
+            $menu = $entry->visible ? 'all' : 'list';
             
             if(!isset($entry->control))  $entry->control = '';
             if(!isset($entry->position)) $entry->position = '';
@@ -55,6 +54,7 @@ class index extends control
                 icon:     '$logo',
                 control:  '$entry->control',
                 position: '$entry->position',
+                menu:     '$menu',
                 display:  'fixed'
             });\n";
         }
@@ -68,7 +68,6 @@ class index extends control
         }
 
         $this->view->allEntries = $allEntries;
-        $this->view->leftEntry  = $leftEntry;
         $this->view->blocks     = $blocks;
         $this->display();
     }
