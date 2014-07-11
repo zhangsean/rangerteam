@@ -121,6 +121,8 @@ $(function()
 
     var $mindmap = $('#mindmap').mindmap(
     {
+        hSpace: 70,
+        lineCurvature: 50,
         defaultSubName: '<?php echo $lang->task->unkown;?>',
         defaultNodeName: '<?php echo $lang->task->create?>',
         data: data,
@@ -382,7 +384,7 @@ $(function()
             var d = arrayData[i];
             if(d.type == 'node' && d.changed)
             {
-                result.push(d);
+                result.push($.extend({id: d.id, order: d.index, change: d.changed}, d.data));
             }
             else if(d.type == 'sub' && d.changed == 'delete children')
             {
@@ -391,7 +393,7 @@ $(function()
                     var dd = d.deletions[j];
                     if(dd.type == 'node' && dd.changed)
                     {
-                        result.push(dd);
+                        result.push($.extend({id: dd.id, order: dd.index, change: 'delete'}, dd.data));
                     }
                 }
             }
@@ -404,7 +406,8 @@ $(function()
         var postData = 
         {
             changes: result, 
-            projectName: data.text
+            projectName: data.text,
+            projectID: '<?php echo $projectID;?>'
         };
 
         printLog('POST 数据', postData);
