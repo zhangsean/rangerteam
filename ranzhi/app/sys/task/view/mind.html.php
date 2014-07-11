@@ -179,7 +179,6 @@ $(function()
         {
             e.newNode.data =
             {
-                newItem: true,
                 deadline: '',
                 createdDate: (new Date()).format('yyyy-MM-dd hh:mm'),
                 assignedTo: '',
@@ -374,8 +373,6 @@ $(function()
 
         /* Save data with flow methods */
         var data = mindmap.data;
-        printLog('脑图数据',data);
-
         var arrayData = mindmap.exportArray();
         var result = [];
 
@@ -384,7 +381,7 @@ $(function()
             var d = arrayData[i];
             if(d.type == 'node' && d.changed)
             {
-                result.push($.extend({id: d.id, order: d.index, change: d.changed}, d.data));
+                result.push(fixChange($.extend({id: d.id, order: d.index, change: d.changed}, d.data)));
             }
             else if(d.type == 'sub' && d.changed == 'delete children')
             {
@@ -393,15 +390,15 @@ $(function()
                     var dd = d.deletions[j];
                     if(dd.type == 'node' && dd.changed)
                     {
-                        result.push($.extend({id: dd.id, order: dd.index, change: 'delete'}, dd.data));
+                        result.push(fixChange($.extend({id: dd.id, order: dd.index, change: 'delete'}, dd.data)));
                     }
                 }
             }
         }
 
-        printLog('脑图变更数据', result);
+        console.log(result);
+
         result = JSON.stringify(result);
-        printLog('脑图变更数据 JSON', result);
 
         var postData = 
         {
@@ -410,22 +407,21 @@ $(function()
             projectID: '<?php echo $projectID;?>'
         };
 
-        printLog('POST 数据', postData);
-
         $.ajax({type: 'POST', url: createLink('task', 'mind', 'projectID=<?php echo $projectID?>'), data: postData})
          .done(function(response)
         {
-            // console.log('RESPONSE= ' + response);
-            mindmap.clearChangeFlag();
+            // if resones success then call this:
+            // mindmap.clearChangeFlag();
         });
 
         $saveBtn.find('span').text('<?php echo $lang->saved?>');
     });
 
-    function printLog(name, data)
+    function fixChange(task)
     {
-        console.log('============ ' + name + ' ============');
-        console.log(data);
+        delete task.statusName;
+        if(task.change != 'add' && task.change != 'delete') task.change = 'edit';
+        return task;
     }
 });
 </script>
