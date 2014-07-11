@@ -88,6 +88,7 @@ $lang->user->lockedForEver = "User has been forbidden for ever.";
 $lang->user->lblRegistered = 'Congratulations, register successfully!';
 $lang->user->forbidSuccess = 'Successfully forbid.';
 $lang->user->actionFail    = 'Failed action';
+$lang->user->uploadSuccess = 'Successfully uploaded';
 
 $lang->user->forbidUser = 'Manage user';
 $lang->user->operate    = 'Operate';

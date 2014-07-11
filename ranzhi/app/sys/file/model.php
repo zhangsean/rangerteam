@@ -460,4 +460,48 @@ class fileModel extends model
 
         return !dao::isError(); 
     }
+
+    /**
+     * Compress image to config configured size.
+     * 
+     * @param  string  $rawImage 
+     * @param  string  $target 
+     * @param  int     $x
+     * @param  int     $y 
+     * @param  int     $width 
+     * @param  int     $height 
+     * @access public
+     * @return void
+     */
+    public function cropImage($rawImage, $target, $x, $y, $width, $height)
+    {
+        $this->app->loadClass('phpthumb', true);
+
+        if(!extension_loaded('gd')) return false;
+
+        $croper = phpThumbFactory::create($rawImage);
+        $croper->crop($x, $y, $width, $height);
+        $croper->save($target);
+    }
+
+    /**
+     * Resize an image.
+     * 
+     * @param  int    $rawImage 
+     * @param  int    $target 
+     * @param  int    $width 
+     * @param  int    $height 
+     * @access public
+     * @return void
+     */
+    public function resizeImage($rawImage, $target, $width, $height)
+    {
+        $this->app->loadClass('phpthumb', true);
+
+        if(!extension_loaded('gd')) return false;
+
+        $thumber = phpThumbFactory::create($rawImage);
+        $thumber->resize($width, $height);
+        $thumber->save($target);
+    }
 }

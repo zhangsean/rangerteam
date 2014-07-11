@@ -19,7 +19,7 @@
         <?php
         if(empty($user->avatar))
         {
-            echo html::image($image);
+            echo html::image($image->fullURL);
         }
         else
         {
@@ -37,6 +37,11 @@
   </tr>
 </table>
 <script>
-$("#imgCutter").imgCutter({fixedRatio: true, post: '<?php echo inlink('cropavatar')?>', done: function(e){alert(e);}});
+$("#imgCutter").imgCutter(
+{
+    fixedRatio: true,
+    post: '<?php echo inlink('cropavatar', "image={$image->id}")?>',
+    done: function(response) { $('#ajaxModal').load(createLink('user', 'profile')); }
+});
 </script>
 <?php include '../../common/view/footer.modal.html.php';?>

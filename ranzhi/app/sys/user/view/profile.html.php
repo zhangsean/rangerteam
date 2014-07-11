@@ -29,7 +29,10 @@
         }
         ?>
         </div>
-        <?php echo html::a(inlink('uploadAvatar'), $lang->user->uploadAvatar, "class='btn loadInModal'");?>
+        <form method='post' action="<?php echo inlink('uploadAvatar', "account={$user->account}");?>" class='form-condensed' id='avatarForm' enctype='multipart/form-data' class='hide'>
+        <?php echo html::file('files', "class='form-control hidden'");?>
+        <?php echo html::a('javascript:;', $lang->user->uploadAvatar, "class='btn btn-avatar submit'");?>
+        </form>
       </td>
     </tr>
     <tr>

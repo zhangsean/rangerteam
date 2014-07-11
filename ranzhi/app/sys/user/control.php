@@ -493,15 +493,20 @@ END:VCARD";
     /**
      * crop avatar
      *
+     * @param  int    $image 
      * @access public
      * @return void
      */
     public function cropAvatar($image)
     {
+        $image = $this->loadModel('file')->getByID($image);
+
         if(!empty($_POST))
         {
-            a($_POST);
-            exit;
+            $size = fixer::input('post')->get();
+            $this->loadModel('file')->resizeImage($image->realPath, $image->realPath, $size->width, $size->height);
+            $this->loadModel('file')->cropImage($image->realPath, $image->realPath, $size->left, $size->top, $size->right - $size->left, $size->bottom - $size->top);
+            exit('success');
         }
 
         $this->view->user  = $this->user->getByAccount($this->app->user->account);

@@ -89,6 +89,7 @@ $lang->user->lockedForEver = "成员已经被永久禁用。";
 $lang->user->lblRegistered = '恭喜您，已经成功注册。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->actionFail    = '操作失败';
+$lang->user->uploadSuccess = '上传成功';
 
 $lang->user->forbidUser = '禁用管理';
 $lang->user->operate    = '操作';

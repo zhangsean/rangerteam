@@ -485,14 +485,21 @@ class userModel extends model
         return $password == md5($user->password . $this->session->random);
     }
 
+    /**
+     * Upload avatar.
+     * 
+     * @access public
+     * @return void
+     */
     public function uploadAvatar()
     {
         $fileModel = $this->loadModel('file');
         $uploadResult = $fileModel->saveUpload('files');
-        if(!$uploadResult) return array('result' => false, 'message' => $this->lang->fail);
+        if(!$uploadResult) return array('result' => 'fail', 'message' => $this->lang->fail);
 
         $fileIdList = array_keys($uploadResult);
-        $file       = $fileModel->getById($fileIdList[0]); 
-        return array('result' => 'success', 'locate' => inlink('cropavatar', "image={$file->fullURL}"));
+        $file = $this->file->getByID($fileIdList[0]);
+        $this->dao->update(TABLE_USER)->set('avatar')->eq($file->fullURL)->where('account')->eq($this->app->user->account)->exec();
+        return array('result' => 'success', 'message' => $this->lang->user->uploadSuccess, 'locate' => inlink('cropavatar', "image={$file->id}"));
     }
 }
