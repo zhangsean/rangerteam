@@ -588,6 +588,7 @@ CREATE TABLE `sys_task` (
   `editedBy` varchar(30) NOT NULL,
   `editedDate` datetime NOT NULL,
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
+  `key` smallint(5) unsigned NOT NULL default 0,
   PRIMARY KEY (`id`),
   KEY `statusOrder` (`statusCustom`),
   KEY `assignedTo` (`assignedTo`),

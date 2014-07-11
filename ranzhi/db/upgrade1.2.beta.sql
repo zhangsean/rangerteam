@@ -27,6 +27,7 @@ ALTER TABLE cash_balance CHANGE `money` `money` decimal(12,2) NOT NULL;
 ALTER TABLE sys_task     CHANGE `estimate` `estimate` decimal(12,2) NOT NULL;
 ALTER TABLE sys_task     CHANGE `consumed` `consumed` decimal(12,2) NOT NULL;
 ALTER TABLE sys_task     CHANGE `left` `left` decimal(12,2) NOT NULL;
+ALTER TABLE sys_task     ADD `key` smallint(5) unsigned NOT NULL default 0;
 
 ALTER TABLE crm_contact  ADD `nextDate` date NOT NULL AFTER contactedDate;
 ALTER TABLE crm_contract ADD `contactedBy` date NOT NULL AFTER editedDate;
