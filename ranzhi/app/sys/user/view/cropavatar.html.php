@@ -41,7 +41,11 @@ $("#imgCutter").imgCutter(
 {
     fixedRatio: true,
     post: '<?php echo inlink('cropavatar', "image={$image->id}")?>',
-    done: function(response) { $('#ajaxModal').load(createLink('user', 'profile')); }
+    ready: function() {$.ajustModalPosition();}
+    done: function(response)
+    {
+        $('#ajaxModal').load(createLink('user', 'profile'));
+    },
 });
 </script>
 <?php include '../../common/view/footer.modal.html.php';?>

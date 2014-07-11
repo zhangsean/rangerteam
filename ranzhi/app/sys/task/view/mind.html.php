@@ -177,6 +177,7 @@ $(function()
         {
             e.newNode.data =
             {
+                newItem: true,
                 deadline: '',
                 createdDate: (new Date()).format('yyyy-MM-dd hh:mm'),
                 assignedTo: '',
@@ -277,7 +278,6 @@ $(function()
 
     function onChange()
     {
-        console.log(mindmap.data);
         $saveBtn.removeClass('disabled').removeAttr('disabled').find('span').text('<?php echo $lang->save;?>');
     }
 
@@ -371,13 +371,59 @@ $(function()
         $saveBtn.addClass('disabled').attr('disabled', 'disabled');
 
         /* Save data with flow methods */
-        // console.log(mindmap.exportJSON());
-        // console.log(mindmap.exportArray());
+        var data = mindmap.data;
+        printLog('脑图数据',data);
 
-        mindmap.clearChangeFlag();
-        
+        var arrayData = mindmap.exportArray();
+        var result = [];
+
+        for(var i in arrayData)
+        {
+            var d = arrayData[i];
+            if(d.type == 'node' && d.changed)
+            {
+                result.push(d);
+            }
+            else if(d.type == 'sub' && d.changed == 'delete children')
+            {
+                for(var j in d.deletions)
+                {
+                    var dd = d.deletions[j];
+                    if(dd.type == 'node' && dd.changed)
+                    {
+                        result.push(dd);
+                    }
+                }
+            }
+        }
+
+        printLog('脑图变更数据', result);
+        result = JSON.stringify(result);
+        printLog('脑图变更数据 JSON', result);
+
+        var postData = 
+        {
+            changes: result, 
+            projectName: data.text
+        };
+
+        printLog('POST 数据', postData);
+
+        $.ajax({type: 'POST', url: createLink('task', 'mind', 'projectID=<?php echo $projectID?>'), data: postData})
+         .done(function(response)
+        {
+            // console.log('RESPONSE= ' + response);
+            mindmap.clearChangeFlag();
+        });
+
         $saveBtn.find('span').text('<?php echo $lang->saved?>');
     });
+
+    function printLog(name, data)
+    {
+        console.log('============ ' + name + ' ============');
+        console.log(data);
+    }
 });
 </script>
 <?php include $app->getModuleRoot() . 'common/view/footer.html.php';?>
