@@ -319,6 +319,8 @@ class trade extends control
                 }
                 continue;
             }
+            
+            /* When the money of in and out is different then parse them. */
             if($field == 'money' and strpos($schema->money, ',') !== false)
             {
                 list($in, $out) = explode(',', str_replace(' ', '', $col));
@@ -346,10 +348,12 @@ class trade extends control
         $dataList = array();
         foreach($rows as $row)
         {
+            /* Exclude invalid column. */
             if(is_array($fields['money']))
             {
                 if(!isset($row[$fields['money']['in']]) or !isset($row[$fields['money']['out']])) continue;
 
+                /* if money is 1,600 or 1 600 then replace them. */
                 $row[$fields['money']['in']]  = str_replace(array(',', ' '), '', $row[$fields['money']['in']]);
                 $row[$fields['money']['out']] = str_replace(array(',', ' '), '', $row[$fields['money']['out']]);
                 if(!is_numeric($row[$fields['money']['in']]) and !is_numeric($row[$fields['money']['out']])) continue;
@@ -365,6 +369,7 @@ class trade extends control
             $data = array();
             foreach($fields as $field => $col)
             {
+                /* Desc can multiseriate. */
                 if($field == 'desc' and !empty($col))
                 {
                     $data[$field] = '';
@@ -373,6 +378,7 @@ class trade extends control
                     continue;
                 }
 
+                /* if money has in and out items, then type can judging by their. */
                 if($field == 'type' and is_array($col)) continue;
                 if($field == 'money' and is_array($col))
                 {
@@ -386,6 +392,7 @@ class trade extends control
             }
 
             if(isset($flipTypeList[$data['type']])) $data['type'] = $flipTypeList[$data['type']];
+            /* if fee is a record and customer is empty then this type of data is fee. */
             if(!$schema->fee and !$data['customer'])
             {
                 $data['source'] = $data['type'];
@@ -393,10 +400,7 @@ class trade extends control
             }
 
             $matchs = $data['type'] == 'out' ? $flipTraders : ($data['type'] == 'in' ? $flipCustomers : '');
-            if($matchs and isset($matchs[$data['customer']]))
-            {
-                $data['customer'] = $matchs[$data['customer']];
-            }
+            if($matchs and isset($matchs[$data['customer']])) $data['customer'] = $matchs[$data['customer']];
 
             if(!empty($data['category']) and in_array($data['type'], array('in', 'out')))
             {
