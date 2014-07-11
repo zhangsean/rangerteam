@@ -26,6 +26,27 @@ function deleteBlock(index)
 }
 
 /**
+ * Hidden block;
+ * 
+ * @param  index $index 
+ * @access public
+ * @return void
+ */
+function hiddenBlock(index)
+{
+    $.getJSON(createLink('block', 'delete', 'index=' + index + '&app=sys&type=hidden'), function(data)
+    {
+        if(data.result != 'success')
+        {
+            alert(data.message);
+            return false;
+        }
+        reloadHome();
+        messager.info(ipsLang["hiddenBlock"]);
+    })
+}
+
+/**
  * Sort blocks.
  * 
  * @param  object $orders  format is {'block2' : 1, 'block1' : 2, oldOrder : newOrder} 

@@ -32,6 +32,9 @@ class block extends control
         //$allEntries['rss']  = 'RSS';
         $allEntries['html'] = 'HTML';
 
+        $hiddenBlocks = $this->block->getHiddenBlocks();
+        foreach($hiddenBlocks as $block) $allEntries['hiddenBlock' . $block->id] = $block->title;
+
         $this->view->block      = $this->block->getBlock($index);
         $this->view->entries    = $entries;
         $this->view->allEntries = $allEntries;
@@ -45,23 +48,26 @@ class block extends control
      * 
      * @param  int    $index 
      * @param  string $type 
+     * @param  int    $blockID 
      * @access public
      * @return void
      */
-    public function set($index, $type)
+    public function set($index, $type, $blockID = 0)
     {
         if($_POST)
         {
-            $this->block->save($index, $type);
+            $this->block->save($index, $type, 'sys', $blockID);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('index')));
         }
 
-        $block = $this->block->getBlock($index);
+        $block = $blockID ? $this->block->getByID($blockID) : $this->block->getBlock($index);
+        if($block) $type = $block->block;
 
-        $this->view->type   = $type;
-        $this->view->index  = $index;
-        $this->view->block  = ($block) ? $block : array();
+        $this->view->type    = $type;
+        $this->view->index   = $index;
+        $this->view->blockID = $blockID;
+        $this->view->block   = ($block) ? $block : array();
         $this->display();
     }
 
@@ -127,12 +133,20 @@ class block extends control
      * 
      * @param  int    $index 
      * @param  string $sys 
+     * @param  string $type 
      * @access public
      * @return void
      */
-    public function delete($index, $app = 'sys')
+    public function delete($index, $app = 'sys', $type = 'delete')
     {
-        $this->dao->delete()->from(TABLE_BLOCK)->where('`order`')->eq($index)->andWhere('account')->eq($this->app->user->account)->andWhere('app')->eq($app)->exec();
+        if($type == 'hidden')
+        {
+            $this->dao->update(TABLE_BLOCK)->set('hidden')->eq(1)->where('`order`')->eq($index)->andWhere('account')->eq($this->app->user->account)->andWhere('app')->eq($app)->exec();
+        }
+        else
+        {
+            $this->dao->delete()->from(TABLE_BLOCK)->where('`order`')->eq($index)->andWhere('account')->eq($this->app->user->account)->andWhere('app')->eq($app)->exec();
+        }
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
     }

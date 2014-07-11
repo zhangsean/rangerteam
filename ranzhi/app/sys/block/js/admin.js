@@ -11,6 +11,11 @@ function getBlocks(entryID)
     $(entryBlock).hide();
     $('#blockParam').empty();
     if(entryID == '') return false;
+    if(entryID.indexOf('hiddenBlock') != -1)
+    {
+        getRssAndHtmlParams('html', entryID.replace('hiddenBlock', ''));
+        return true;
+    }
     if(entryID == 'rss' || entryID == 'html')
     {
         getRssAndHtmlParams(entryID);
@@ -29,12 +34,14 @@ function getBlocks(entryID)
  * Get rss and html params.
  * 
  * @param  string $type 
+ * @param  int    $blockID 
  * @access public
  * @return void
  */
-function getRssAndHtmlParams(type)
+function getRssAndHtmlParams(type, blockID)
 {
-    $.get(createLink('block', 'set', 'index=' + v.index + '&type=' + type), function(data)
+    blockID = typeof(blockID) == 'undefined' ? 0 : blockID;
+    $.get(createLink('block', 'set', 'index=' + v.index + '&type=' + type + '&blockID=' + blockID), function(data)
     {
         $('#blockParam').html(data);
         $.setAjaxForm('#ajaxForm', function(){parent.location.href=config.webRoot + config.appName;});
@@ -68,38 +75,5 @@ $(function()
     $('#allEntries').change(function(){getBlocks($(this).val())});
     getBlocks($('#allEntries').val());
 
-    $.setAjaxForm('#blockForm', function()
-    {
-        $('#home').load(createLink('index', 'index') + ' #dashboard', function()
-        {
-            $('#home #dashboard').dashboard(
-            {
-                height            : 240,
-                draggable         : true,
-                afterOrdered      : sortBlocks,
-                afterPanelRemoved : deleteBlock
-            });
-
-            $('#home .dashboard .refresh-all-panel').click(function()
-            {    
-                var $icon = $(this).find('.icon-repeat').addClass('icon-spin');
-                $('#home .dashboard .refresh-panel').click();
-                setTimeout(checkDone, 500);
-
-                function checkDone()
-                {    
-                    if($('#home .dashboard .panel-loading').length)
-                    {
-                        setTimeout(checkDone, 500);
-                    }
-                    else
-                    {
-                        $icon.removeClass('icon-spin');
-                    }
-                }    
-            });  
-        });
-        $('#ajaxModal').remove();
-        $('.modal-backdrop').remove();
-    });
+    $.setAjaxForm('#blockForm', reloadHome);
 })

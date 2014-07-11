@@ -19,6 +19,7 @@ $lang->index->showDesk     = '桌面';
 $lang->index->customBlocks = '编辑区块';
 $lang->index->addBlock     = '添加区块';
 $lang->index->refresh      = '更新';
+$lang->index->hidden       = '隐藏';
 
 $lang->index->countEntries = "共 <span class='entries-count'></span> 款应用";
 
@@ -30,5 +31,6 @@ $lang->index->ips['closeText']          = '关闭';
 $lang->index->ips['showWindowText']     = '显示';
 $lang->index->ips['confirmRemoveBlock'] = '确定要删除区块 【{0}】 吗？';
 $lang->index->ips['removedBlock']       = '区块已删除';
+$lang->index->ips['hiddenBlock']        = '区块已隐藏';
 $lang->index->ips['orderdBlocksSaved']  = '排序已保存';
 $lang->index->ips['confirmCloseBrowser']= '提示：当前有打开的应用窗口';

@@ -16,16 +16,20 @@ class blockModel extends model
      * 
      * @param  int    $index 
      * @param  string $type 
+     * @param  string $appName 
+     * @param  int    $blockID 
      * @access public
      * @return void
      */
-    public function save($index, $type = 'system', $appName = 'sys')
+    public function save($index, $type = 'system', $appName = 'sys', $blockID = 0)
     {
         $data = fixer::input('post')
             ->add('account', $this->app->user->account)
             ->add('order', $index)
             ->add('app', $appName)
+            ->add('hidden', 0)
             ->setIF($type != 'system', 'block', $type)
+            ->setIF($blockID, 'id', $blockID)
             ->setDefault('grid', '3')
             ->setDefault('source', $appName)
             ->setDefault('params', array())
@@ -147,6 +151,25 @@ class blockModel extends model
     }
 
     /**
+     * Get block by ID.
+     * 
+     * @param  int    $blockID 
+     * @access public
+     * @return object
+     */
+    public function getByID($blockID)
+    {
+        $block = $this->dao->select('*')->from(TABLE_BLOCK)
+            ->where('id')->eq($blockID)
+            ->fetch();
+        if(empty($block)) return false;
+
+        $block->params = json_decode($block->params);
+        if(empty($block->params)) $block->params = new stdclass();
+        return $block;
+    }
+
+    /**
      * Get saved block config.
      * 
      * @param  int    $index 
@@ -196,6 +219,22 @@ class blockModel extends model
     {
         return $this->dao->select('*')->from(TABLE_BLOCK)->where('account')->eq($this->app->user->account)
             ->andWhere('app')->eq($appName)
+            ->andWhere('hidden')->eq(0)
+            ->orderBy('`order`')
+            ->fetchAll('order');
+    }
+
+    /**
+     * Get hidden blocks
+     * 
+     * @access public
+     * @return array
+     */
+    public function getHiddenBlocks()
+    {
+        return $this->dao->select('*')->from(TABLE_BLOCK)->where('account')->eq($this->app->user->account)
+            ->andWhere('app')->eq('sys')
+            ->andWhere('hidden')->eq(1)
             ->orderBy('`order`')
             ->fetchAll('order');
     }

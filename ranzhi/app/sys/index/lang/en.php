@@ -19,6 +19,7 @@ $lang->index->showDesk     = 'Show Desk';
 $lang->index->customBlocks = 'Custom block';
 $lang->index->addBlock     = 'Add Block';
 $lang->index->refresh      = 'Refresh';
+$lang->index->hidden       = 'Hidden';
 
 $lang->index->countEntries = "A total of <span class='entries-count'></span> entries";
 
@@ -30,5 +31,6 @@ $lang->index->ips['closeText']           = 'Remove';
 $lang->index->ips['showWindowText']      = 'Show';
 $lang->index->ips['confirmRemoveBlock']  = 'Be sure to remove block [{0}]?';
 $lang->index->ips['removedBlock']        = 'Block has been removed';
+$lang->index->ips['hiddenBlock']         = 'Block has been hidden';
 $lang->index->ips['orderdBlocksSaved']   = 'Order has been saved';
 $lang->index->ips['confirmCloseBrowser'] = 'Notice:This app has been opened already';

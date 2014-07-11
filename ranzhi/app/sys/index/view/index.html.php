@@ -66,6 +66,9 @@ js::import($jsRoot . 'jquery/ips.js');
                   <ul class="dropdown-menu pull-right" role="menu">
                     <li><a href="<?php echo $this->createLink("block", "admin", "index=$index"); ?>" data-toggle='modal' class='edit-block' data-name='<?php echo $block->title; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit; ?></a></li>
                     <li><a href="javascript:;" class="remove-panel"><i class="icon-remove"></i> <?php echo $lang->delete; ?></a></li>
+                    <?php if(!$block->source and $block->block == 'html'):?>
+                    <li><a href="javascript:hiddenBlock(<?php echo $index;?>)" class="hidden-panel"> <?php echo $lang->index->hidden; ?></a></li>
+                    <?php endif;?>
                   </ul>
                 </div>
               </div>

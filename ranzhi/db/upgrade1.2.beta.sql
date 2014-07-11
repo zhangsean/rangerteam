@@ -76,4 +76,6 @@ CREATE TABLE `sys_schema` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+ALTER TABLE `sys_block` ADD `hidden` tinyint(1) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE sys_user CHANGE avatar avatar varchar(255) NOT NULL;

@@ -931,3 +931,44 @@ function setPageActions()
         bar.toggleClass('fixed', fixed);
     }
 }
+
+/**
+ * Reload home.
+ * 
+ * @access public
+ * @return void
+ */
+function reloadHome()
+{
+    $('#home').load(createLink('index', 'index') + ' #dashboard', function()
+    {
+        $('#home #dashboard').dashboard(
+        {
+            height            : 240,
+            draggable         : true,
+            afterOrdered      : sortBlocks,
+            afterPanelRemoved : deleteBlock
+        });
+
+        $('#home .dashboard .refresh-all-panel').click(function()
+        {    
+            var $icon = $(this).find('.icon-repeat').addClass('icon-spin');
+            $('#home .dashboard .refresh-panel').click();
+            setTimeout(checkDone, 500);
+
+            function checkDone()
+            {    
+                if($('#home .dashboard .panel-loading').length)
+                {
+                    setTimeout(checkDone, 500);
+                }
+                else
+                {
+                    $icon.removeClass('icon-spin');
+                }
+            }    
+        });  
+    });
+    $('#ajaxModal').remove();
+    $('.modal-backdrop').remove();
+}
