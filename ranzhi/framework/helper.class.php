@@ -68,7 +68,7 @@ class helper
 
         if(strpos($moduleName, '.') !== false) list($appName, $moduleName) = explode('.', $moduleName);
 
-        $link = $config->requestType == 'PATH_INFO' ? $config->webRoot . $appName . '/' : $_SERVER['SCRIPT_NAME'];
+        $link = $config->requestType == 'PATH_INFO' ? $config->webRoot . $appName . '/' : $config->webRoot . $appName . '/' . basename($_SERVER['SCRIPT_NAME']);
 
         /* Set the view type and vars. */
         if(empty($viewType)) $viewType = $app->getViewType();
