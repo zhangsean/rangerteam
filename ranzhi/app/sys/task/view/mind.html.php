@@ -277,6 +277,7 @@ $(function()
 
     function onChange()
     {
+        console.log(mindmap.data);
         $saveBtn.removeClass('disabled').removeAttr('disabled').find('span').text('<?php echo $lang->save;?>');
     }
 
@@ -300,6 +301,7 @@ $(function()
       .on('keyup paste blur', function()
       {
           mindmap.getNodeData($taskPopover.data('id')).data.desc = $(this).html();
+          node.changed = 'edit data';
           onChange();
       });
 
@@ -311,6 +313,7 @@ $(function()
         if(val != node.data.deadline)
         {
             node.data.deadline = val;
+            node.changed = 'edit data';
             onChange();
         }
     });
@@ -326,6 +329,7 @@ $(function()
             mindmap.update({action: 'move', data: node, newParent: $mindmap.find('[data-key="done"]').data('id')});
         }
         hidePopover();
+        node.changed = 'edit data';
         onChange();
     });
 
@@ -340,6 +344,7 @@ $(function()
             mindmap.update({action: 'move', data: node, newParent: $mindmap.find('[data-key="closed"]').data('id')});
         }
         hidePopover();
+        node.changed = 'edit data';
         onChange();
     });
 
@@ -355,6 +360,7 @@ $(function()
             $taskPopover.find('.task-pri').attr('class', 'active task-pri pri pri-' + pri).text(pri);
             $taskPopover.find('.pri-list .pri.active').removeClass('active');
             $(this).addClass('active');
+            node.changed = 'edit data';
             onChange();
             $priList.fadeOut(150);
         }
@@ -367,6 +373,8 @@ $(function()
         /* Save data with flow methods */
         // console.log(mindmap.exportJSON());
         // console.log(mindmap.exportArray());
+
+        mindmap.clearChangeFlag();
         
         $saveBtn.find('span').text('<?php echo $lang->saved?>');
     });
