@@ -35,7 +35,8 @@
     </thead>
     <tbody>
       <?php foreach($orders as $order):?>
-      <tr class='text-center' data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id");?>'>
+      <?php $status = $order->status != 'closed' ? "order-{$order->status}" : "order-{$order->closedReason}"?>
+      <tr class='text-center <?php echo $status;?>' data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id");?>'>
         <td><?php echo $order->id;?></td>
         <td><?php echo $lang->customer->levelList[$order->level];?></td>
         <td class='text-left'><?php echo $order->customerName;?></td>

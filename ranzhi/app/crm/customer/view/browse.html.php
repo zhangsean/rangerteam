@@ -35,7 +35,7 @@
     </thead>
     <tbody>
       <?php foreach($customers as $customer):?>
-      <tr class='text-center' data-url='<?php echo $this->createLink('customer', 'view', "customerID=$customer->id"); ?>'>
+      <tr class='text-center <?php echo "customer-{$customer->status}";?>' data-url='<?php echo $this->createLink('customer', 'view', "customerID=$customer->id"); ?>'>
         <td><?php echo $customer->id;?></td>
         <td class='text-left'><?php echo $customer->name;?></td>
         <td><?php echo $lang->customer->levelList[$customer->level];?></td>

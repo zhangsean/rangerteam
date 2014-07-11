@@ -33,7 +33,7 @@
     </thead>
     <tbody>
       <?php foreach($contracts as $contract):?>
-      <tr class='text-center' data-url='<?php echo inlink('view', "contractID=$contract->id"); ?>'>
+      <tr class='text-center <?php echo "contract-{$contract->status}";?>' data-url='<?php echo inlink('view', "contractID=$contract->id"); ?>'>
         <td><?php echo $contract->id;?></td>
         <td class='text-left'><?php echo $contract->name;?></td>
         <td><?php if(isset($customers[$contract->customer])) echo $customers[$contract->customer];?></td>

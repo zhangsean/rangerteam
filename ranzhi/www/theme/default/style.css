@@ -419,3 +419,26 @@ td #aliasLabel {display: table-row;}
 /* avatar */
 .avatar > img {border-radius: 4px; width: 48px; height: 48px;}
 .avatar.avatar-lg > img {border-radius: 4px; width: 128px; height: 128px;}
+
+/* status */
+.contract-normal    {color:inherit;}
+.contract-canceled  {color:#808080;}
+.contract-closed    {color:#229f24;}
+
+.customer-potential {color:inherit;}
+.customer-intension {color:#81511c;}
+.customer-payed     {color:#229f24;}
+.customer-failed    {color:#d2322d}
+
+.order-normal{color:inherit;}
+.order-signed{color:#229f24;}
+.order-payed{color:#229f24;}
+.order-closed{color:#d2322d;}
+.order-failed{color:#d2322d;}
+.order-postponed{color:#d2322d;}
+
+.task-wait  {color:inherit;}
+.task-doing {color:#81511c;}
+.task-done  {color:#229f24;}
+.task-cancel{color:#808080;}
+.task-closed{color:#808080;}
