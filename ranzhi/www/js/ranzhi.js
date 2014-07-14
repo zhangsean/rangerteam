@@ -824,6 +824,19 @@ function ping()
 }
 
 /**
+ * Select lang.
+ * 
+ * @param  string $lang 
+ * @access public
+ * @return void
+ */
+function selectLang(lang)                                                                                                
+{                                                                                                                        
+    $.cookie('lang', lang, {expires:config.cookieLife, path:config.webRoot});                                            
+    location.href = removeAnchor(location.href);                                                                         
+}                                                                                                                        
+
+/**
  * Fix table header in admin page
  * 
  * @access public
