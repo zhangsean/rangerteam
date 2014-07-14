@@ -1,4 +1,37 @@
-.table-contact{height:170px;}
-.table-contact th{vertical-align:middle;}
-.table-contact td{vertical-align:top;}
-.btn-vcard {cursor:pointer;}
+.cards.cards-user {margin: 0; padding: 10px; position: relative;}
+.col-card {width: 360px; float: left; margin: 10px}
+
+.card-user > .card-heading {border-bottom: 1px solid #e5e5e5; text-shadow: 1px 1px 20px rgba(255,255,255,0.85); background: #b2d9e4}
+.card-user.gender-f > .card-heading {background: #f6b9b2}
+.card-user.gender-f > .card-heading > .avatar:before {background: #fe6553}
+.card-user > .card-heading {position: relative; padding: 0; height: 100px;}
+.card-user > .card-heading > img.bg
+{
+  position: absolute; left: -20%; top: -220%; width: 150%; max-width: inherit; z-index: 1;
+  -webkit-filter: blur(20px); /* Chrome, Opera */
+  -moz-filter: blur(20px);
+  -ms-filter: blur(20px);    
+  filter: blur(20px);
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=20, MakeShadow=false); /* IE6~IE9 */
+}
+.card-user > .card-heading > .cover {position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 2; background: #fff; opacity: 0.4; filter: alpha(opacity=40) }
+.card-user > .card-heading > .avatar {position: absolute; left: 30px; top: 25px; display: block; border-radius: 50%; z-index: 3; border: 1px solid #ddd; border-color: rgba(255,255,255,0.25); box-shadow: 1px 1px 20px rgba(255,255,255,0.25)}
+.card-user > .card-heading > .title {position: absolute; z-index: 4; left: 100px; padding: 15px 0; color: #000}
+.card-user > .card-heading > .title > h4.user-realname {font-size: 18px; margin: 12px 0 7px}
+.card-user > .card-heading > .title > .user-info {color: #444;}
+.card-user > .card-heading > .action {position: absolute; z-index: 4; right: 25px; top: 30px;}
+.card-user > .card-heading > .action > .btn-vcard {padding: 0; display: block; border-radius: 5px; color: #666; width: 40px; height: 40px; line-height: 40px; text-align: center; border: 0px solid #fff; border-color: rgba(255,255,255,0.65); background: transparent;}
+.card-user > .card-heading > .action > .btn-vcard:hover {background: rgba(255,255,255,0.4); color: #333; text-decoration: none}
+.card-user > .card-heading > .action > .btn-vcard > .icon-qrcode:before {font-size: 28px; line-height: 40px;}
+
+.card-user > .card-content {height: 115px}
+
+.contact-info {padding-left: 20px;}
+.contact-info > dd {line-height: 22px;}
+.contact-info > dd > .icon {margin-right: 5px; color: #555}
+
+.card-user > .vcard {position: absolute; height: 100%; width: 100%; left: 100%; top: -100%; z-index: 10; transform: scale(.5); opacity: 0; transition: all 0.2s;}
+.card-user > .vcard > img {max-width: 200px; max-height: 200px; margin-top: 10px;}
+.card-user > .vcard > .icon-remove {width: 20px; height: 20px; cursor: pointer; position: absolute; display: block; line-height: 20px; right: 10px; top: 10px; color: #eee}
+.card-user.show {text-shadow: 0 0 10px #000; color: #ccc}
+.card-user.show > .vcard {left: 0; top: 0; transform: scale(1); opacity: 1; background-color: rgba(0,0,0,0.35);}

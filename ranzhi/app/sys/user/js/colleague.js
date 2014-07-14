@@ -1,18 +1,5 @@
 $(document).ready(function()
 {
-    $('.btn-vcard').hover(function()
-    {
-        $(this).parents('td').find('.contact-info, p.vcard').toggle();
-        $(this).toggleClass('icon-qrcode');
-        $(this).toggleClass('icon-list');
-    });
-    $('.btn-vcard').blur(function()
-    {
-        $(this).parents('td').find('.contact-info, p.vcard').toggle();
-        $(this).toggleClass('icon-qrcode');
-        $(this).toggleClass('icon-list');
-    });
-
-    $('p.vcard').hide();
-    return false;
+    $('.btn-vcard').click(function(e){$(this).closest('.card-user').addClass('show'); e.stopPropagation()});
+    $(document).click(function(){$('.card-user.show').removeClass('show')});
 });

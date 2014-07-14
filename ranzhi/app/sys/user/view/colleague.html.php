@@ -39,28 +39,43 @@ js::set('deptID', $deptID);
               </form>
             </div>
           </div>
-          <div class='panel-body'>
+          <div class='cards cards-user'>
             <?php foreach($users as $user):?>
-            <div class='col-md-4'>
-              <div class='panel'>
-                <table class='table table-bordered table-contact'>
-                  <tr>
-                    <th class='w-100px text-center alert v-middle'><span class='lead'><?php echo $user->realname;?></span></th>
-                    <td>
-                      <div class='text-right'>
-                        <i class='btn-vcard icon icon-qrcode icon-large text-info'> </i>
-                      </div>
-                      <dl class='contact-info'>
-                        <?php if($user->dept or $user->role) echo "<dd><i class='icon-group'></i> " . zget($depts, $user->dept, ' ') . zget($lang->user->roleList, $user->role) . "</dd>";?>
-                        <?php if($user->phone or $user->mobile) echo "<dd><i class='icon-phone-sign'></i> $user->phone $user->mobile</dd>";?>
-                        <?php if($user->qq) echo "<dd><i class='icon-qq'></i> $user->qq</dd>";?>
-                        <?php if($user->email) echo "<dd><i class='icon-envelope-alt'></i> $user->email </dd>";?>
-                        <?php if($user->address) echo "<dd><i class='icon-home'></i> $user->address </dd>";?>
-                      </dl>
-                      <p class='vcard text-center'><?php echo html::image(inlink('vcard', "user={$user->account}"), "style='height:120px'");?></p>
-                    </td>
-                  </tr>
-                </table>
+            <div class='col-card'>
+              <div class='card card-user gender-<?php echo $user->gender?>'>
+                <div class='card-heading'>
+                  <?php if($user->avatar) echo html::image($user->avatar, "class='bg'");?>
+                  <div class='cover'></div>
+                  <div class='avatar'><?php if($user->avatar) echo html::image($user->avatar);?></div>
+                  <div class='title'>
+                    <h4 class='user-realname'><?php echo $user->realname;?></h4>
+                    <?php if($user->dept or $user->role):?>
+                    <div class='user-info'>
+                      <i class='icon-group'></i>
+                      <?php
+                      if($user->dept) echo zget($depts, $user->dept, ' ');
+                      if($user->role and $user->dept) echo '&nbsp;·&nbsp;';
+                      if($user->role) echo zget($lang->user->roleList, $user->role);
+                      ?>
+                    </div>
+                    <?php endif;?>
+                  </div>
+                  <div class='action'>
+                    <a href='javascript:;' class='btn-vcard'><i class='icon-qrcode'></i></a>
+                  </div>
+                </div>
+                <div class='card-content'>
+                  <dl class='contact-info'>
+                    <?php if($user->phone or $user->mobile) echo "<dd><i class='icon icon-phone-sign'></i> $user->phone $user->mobile</dd>";?>
+                    <?php if($user->qq) echo "<dd><i class='icon icon-qq'></i> $user->qq</dd>";?>
+                    <?php if($user->email) echo "<dd><i class='icon icon-envelope-alt'></i> $user->email </dd>";?>
+                    <?php if($user->address) echo "<dd><i class='icon icon-home'></i> $user->address </dd>";?>
+                  </dl>
+                </div>
+                <div class='vcard text-center'>
+                  <?php echo html::image(inlink('vcard', "user={$user->account}"));?>
+                  <i class='icon-remove'></i>
+                </div>
               </div>
             </div>
             <?php endforeach;?>
