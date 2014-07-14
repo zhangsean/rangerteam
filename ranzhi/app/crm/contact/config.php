@@ -13,4 +13,4 @@ $config->contact->require = new stdclass();
 $config->contact->require->create = 'customer, realname';
 $config->contact->require->edit   = 'customer, realname';
 
-$config->contact->contactWayList  = array( 'email', 'skype', 'qq', 'yahoo', 'gtalk', 'wangwang', 'site', 'mobile', 'phone', 'weibo', 'weixin');
+$config->contact->contactWayList  = array( 'email', 'skype', 'qq', 'yahoo', 'gtalk', 'wangwang', 'site', 'mobile', 'phone', 'fax', 'weibo', 'weixin');
