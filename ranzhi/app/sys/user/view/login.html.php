@@ -25,6 +25,7 @@ css::internal('body{background-color:#f6f5f5}');
       <div id='responser' class='text-center'></div>
       <?php echo html::input('account','',"class='form-control' placeholder='{$lang->user->inputAccountOrEmail}'");?>
       <?php echo html::password('password','',"class='form-control' placeholder='{$lang->user->inputPassword}'");?>
+      <?php echo html::select('language', $config->langs, zget($_COOKIE, 'lang', 'zh-cn'), "class='form-control' onchange='selectLang(this.value)'");?>
       <?php echo html::hidden('referer', $referer);?>
       <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-block');?>
     </form>
