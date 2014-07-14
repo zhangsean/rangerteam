@@ -15,6 +15,7 @@ $lang->entry->create    = 'Create App';
 $lang->entry->edit      = 'Edit App';
 $lang->entry->delete    = 'Delete App';
 $lang->entry->createKey = 'New one';
+$lang->entry->order     = 'Order';
 
 $lang->entry->name        = 'Name';
 $lang->entry->abbr        = 'Abbreviation';

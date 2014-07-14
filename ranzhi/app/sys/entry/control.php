@@ -143,6 +143,25 @@ class entry extends control
     }
 
     /**
+     * Order entry. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function order()
+    {
+        if($_POST)
+        {
+            foreach($this->post->order as $id => $order)
+            {
+                $this->dao->update(TABLE_ENTRY)->set('`order`')->eq($order)->where('id')->eq($id)->exec();
+            }
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+        }
+    }
+
+    /**
      * Sort entries.
      * 
      * @access public

@@ -15,6 +15,7 @@ $lang->entry->create    = '添加应用';
 $lang->entry->edit      = '编辑应用';
 $lang->entry->delete    = '删除应用';
 $lang->entry->createKey = '重新生成密钥';
+$lang->entry->order     = '排序';
 
 $lang->entry->name        = '名称';
 $lang->entry->abbr        = '缩写';

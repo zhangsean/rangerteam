@@ -16,9 +16,11 @@ include '../../common/view/header.admin.html.php';
     <strong><i class='icon-building'></i> <?php echo $lang->entry->admin;?></strong>
     <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), $lang->entry->create, "class='btn btn-primary'");?></div>
   </div>
+  <form action='<?php echo inlink('order')?>' method='post' id='ajaxForm'>
   <table class='table table-bordered table-hover table-striped'>
     <thead>
       <tr class='text-center'>
+        <th class='w-70px'></th>
         <th class='w-100px'><?php echo $lang->entry->name;?></th>
         <th class='w-80px'><?php echo $lang->entry->code;?></th>
         <th class='w-300px'><?php echo $lang->entry->key;?></th>
@@ -29,6 +31,7 @@ include '../../common/view/header.admin.html.php';
     <tbody>
       <?php foreach($entries as $entry):?>
       <tr class='text-left'>
+        <td><?php echo html::input("order[$entry->id]", $entry->order, "class='form-control text-center'")?></td>
         <td><?php echo "<img src='$entry->logo' class='small-icon'>" . $entry->name?></td>
         <td><?php echo $entry->code?></td>
         <td><?php if($entry->integration) echo $entry->key?></td>
@@ -45,11 +48,15 @@ include '../../common/view/header.admin.html.php';
       </tr>
       <?php endforeach;?>
     </tbody>
+    <tfoot>
+      <tr><td colspan="5"><?php echo html::submitButton($lang->entry->order);?></td></tr>
+    </tfoot>
     <?php if(empty($entries)):?>
     <tfoot>
       <tr><td colspan="5"><div style="float:right; clear:none;" class="page"><?php echo $lang->entry->nothing?></div></td></tr>
     </tfoot>
     <?php endif;?>
   </table>
+  </form>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
