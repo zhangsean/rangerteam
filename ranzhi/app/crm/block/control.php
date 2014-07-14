@@ -129,6 +129,7 @@ class block extends control
 
         $params = $this->get->param;
         $params = json_decode(base64_decode($params));
+        if(!isset($params->type)) $params->type = '';
 
         $this->session->set('orderList', $this->createLink('dashboard', 'index'));
 
@@ -189,6 +190,7 @@ class block extends control
 
         $params = $this->get->param;
         $params = json_decode(base64_decode($params));
+        if(!isset($params->type)) $params->type = '';
 
         $this->session->set('contractList', $this->createLink('dashboard', 'index'));
 
