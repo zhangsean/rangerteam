@@ -13,3 +13,6 @@ $config->project = new stdclass();
 $config->project->require = new stdclass();
 $config->project->require->create = 'name';
 $config->project->require->edit   = 'name';
+
+$config->project->editor = new stdclass();
+$config->project->editor->finish = array('id' => 'comment', 'tools' => 'simple');

@@ -10,9 +10,11 @@
  * @link        http://www.ranzhi.org
  */
 $lang->project->common = '项目视图';
+$lang->project->browse = '项目列表';
 $lang->project->create = '创建项目';
 $lang->project->edit   = '修改项目';
 $lang->project->delete = '删除项目';
+$lang->project->tasks  = '任务';
 
 $lang->project->id          = '编号';
 $lang->project->name        = '项目名称';

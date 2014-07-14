@@ -10,9 +10,11 @@
  * @link        http://www.ranzhi.org
  */
 $lang->project->common = 'Project';
+$lang->project->browse = 'Projects List';
 $lang->project->create = 'Create';
 $lang->project->edit   = 'Edit';
 $lang->project->delete = 'Delete';
+$lang->project->tasks  = 'Tasks';
 
 $lang->project->id          = 'ID';
 $lang->project->name        = 'Name';

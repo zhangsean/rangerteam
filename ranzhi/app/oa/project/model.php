@@ -23,8 +23,15 @@ class projectModel extends model
         return $this->dao->select('*')->from(TABLE_PROJECT)->where('id')->eq($projectID)->fetch();
     }
 
+    public function getList($status = null)
+    {
+        return $this->dao->select('*')->from(TABLE_PROJECT)
+            ->beginIF($status)->where('status')->eq($status)->fi()
+            ->fetchAll('id');
+    }
+
     /**
-     * getPairs 
+     * Get  project pairs.
      * 
      * @access public
      * @return void
@@ -99,12 +106,14 @@ class projectModel extends model
      * Update project 
      * 
      * @param  int    $projectID 
+     * @param  mix    $project
      * @access public
      * @return bool
      */
-    public function update($projectID)
+    public function update($projectID, $project = null)
     {
-        $project = fixer::input('post')->get();
+        $oldProject = $this->getByID($projectID);
+        if(empty($project))$project = fixer::input('post')->get();
 
         $this->dao->update(TABLE_PROJECT)->data($project)
             ->autoCheck()
@@ -112,6 +121,33 @@ class projectModel extends model
             ->where('id')->eq($projectID)
             ->exec();
 
+        if(dao::isError()) return false;
+        return commonModel::createChanges($oldProject, $project);
+    }
+
+    /**
+     * Active project.
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return bool
+     */
+    public function activate($projectID)
+    {
+        $this->dao->update(TABLE_PROJECT)->set('status')->eq('doing')->where('id')->eq((int)$projectID)->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Finish project.
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return bool
+     */
+    public function finish($projectID)
+    {
+        $this->dao->update(TABLE_PROJECT)->set('status')->eq('finished')->where('id')->eq((int)$projectID)->exec();
         return !dao::isError();
     }
 }

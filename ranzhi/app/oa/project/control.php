@@ -16,20 +16,21 @@ class project extends control
         parent::__construct();
 
         $this->projects = $this->project->getPairs();
-        $this->view->moduleMenu = $this->project->getLeftMenus($this->projects);
     }
 
     /**
      * index page of project module.
      * 
+     * @param  string $status 
      * @access public
      * @return void
      */
-    public function index()
+    public function index($status = 'doing')
     {
         if(empty($this->projects)) $this->locate(inlink('create'));
-        $projectID = key((array)$this->projects);
-        $this->locate($this->createLink('task','browse', "projectID={$projectID}"));
+        $this->view->status   = $status;
+        $this->view->projects = $this->project->getList($status);
+        $this->display();
     }
 
     /**
@@ -62,7 +63,10 @@ class project extends control
     {
         if($_POST)
         {
-            $this->project->update($projectID);
+            $changes  = $this->project->update($projectID);
+            $actionID = $this->loadModel('action')->create('project', $projectID, 'Edited');
+            if($changes) $this->action->logHistory($actionID, $changes);
+
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
@@ -70,6 +74,50 @@ class project extends control
         $this->view->title   = $this->lang->project->edit;
         $this->view->project = $this->project->getByID($projectID);
         $this->display();
+    }
+
+    /**
+     * Finish project.
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return void
+     */
+    public function finish($projectID) 
+    {
+        if($_POST)
+        {
+            $changes = $this->project->finish($projectID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('project', $projectID, 'Finished', $this->post->comment);
+            }
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $project = $this->project->getByID($projectID);
+
+        $this->view->title     = $project->name;
+        $this->view->projectID = $projectID;
+        $this->view->project   = $project;
+        $this->display();
+    }
+
+    /**
+     * Active project.
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return void
+     */
+    public function activate($projectID)
+    {
+        $result = $this->project->activate($projectID);
+        if($result) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
     /**
