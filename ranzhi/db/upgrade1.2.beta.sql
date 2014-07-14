@@ -79,6 +79,7 @@ CREATE TABLE `sys_schema` (
 ALTER TABLE `sys_block` ADD `hidden` tinyint(1) unsigned NOT NULL DEFAULT '0';
 
 ALTER TABLE sys_user CHANGE avatar avatar varchar(255) NOT NULL;
+ALTER TABLE oa_project ADD status enum('doing', 'finished') NOT NULL DEFAULT 'doing';
 
 INSERT INTO `sys_schema` (`name`, `category`, `customer`, `type`, `money`, `desc`, `date`, `fee`) VALUES
 ('支付宝',       '', 'H', 'K', 'J',   'I,O', 'D', 'M'),
