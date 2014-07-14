@@ -83,15 +83,25 @@
     function initEntries(entriesOptions)
     {
         entriesConfigs = entriesOptions;
-        entries        = {};
+        entries        = [];
 
-        entriesConfigs.sort(function(a, b){return a.order - b.order;});
 
         for(var i in entriesConfigs)
         {
-            var config = entriesConfigs[i];
-            entries[config.id] = new entry(config);
+            entries.push(new entry(entriesConfigs[i]));
         }
+
+        entries.sort(function(a, b){return a.order - b.order;});
+    }
+
+    function getEntry(id)
+    {
+        for(var i in entries)
+        {
+            var et = entries[i];
+            if(id === et.id) return et;
+        }
+        return null;
     }
 
     /**
@@ -494,7 +504,7 @@
     {
         if(typeof et == 'string')
         {
-            et = entries[et];
+            et = getEntry(et);
         }
 
         if(!et)
@@ -1130,7 +1140,7 @@
                     $('#allAppsList .app-btn').each(function()
                     {
                         var btn = $(this);
-                        var r = true, et = entries[btn.attr('data-id')];
+                        var r = true, et = getEntry(btn.attr('data-id'));
                         for(var ki in keys)
                         {
                             var k = keys[ki];
@@ -1300,7 +1310,7 @@
             }).on('click', '.app-btn', function(event)
             {
                 var $this = $(this);
-                var et = entries[$this.attr('data-id')];
+                var et = getEntry($this.attr('data-id'));
                 if(et)
                 {
                     if(et.display == 'fullscreen' && desktop.fullScreenApps) desktop.fullScreenApps.toggle(et.id);
