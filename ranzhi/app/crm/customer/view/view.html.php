@@ -45,7 +45,7 @@
         <table class='table table-info'>
           <tr>
             <th class='w-70px'><?php echo $lang->customer->level;?></th>
-            <td><?php echo $lang->customer->levelList[$customer->level];?></td>
+            <td><?php if($customer->level) echo $lang->customer->levelList[$customer->level];?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->status;?></th>

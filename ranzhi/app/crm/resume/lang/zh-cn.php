@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->resume)) $lang->resume = new stdclass();
 $lang->resume->common = '履历';
 $lang->resume->browse = '浏览履历';
 $lang->resume->delete = '删除履历';

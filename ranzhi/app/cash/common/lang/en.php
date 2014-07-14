@@ -17,6 +17,7 @@ $lang->menu->cash->dashboard = 'Dashboard|dashboard|index|';
 $lang->menu->cash->trade     = 'Bills|trade|index|';
 $lang->menu->cash->check     = 'Checking|depositor|check|';
 $lang->menu->cash->depositor = 'Depositor|depositor|index|';
+$lang->menu->cash->provider  = 'Provider|provider|index|';
 $lang->menu->cash->setting   = 'Settings|tree|browse|type=in|';
 
 /* Menu of depositor module. */
@@ -30,6 +31,11 @@ $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
 $lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> Bills|trade|browse|', 'alias' => 'create,edit,view');
 $lang->trade->menu->schema   = array('link' => '<i class="icon-th-list"></i> Schema|schema|browse|', 'alias' => 'create,edit');
+
+/* Menu of trade module. */
+$lang->provider = new stdclass();
+$lang->provider->menu = new stdclass();
+$lang->provider->menu->browse = array('link' => '<i class="icon-th-list"></i> Provider List|provider|browse|', 'alias' => 'create,edit,view');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

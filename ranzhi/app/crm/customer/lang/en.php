@@ -30,6 +30,7 @@ $lang->customer->weibo       = 'Sina Weibo';
 $lang->customer->weixin      = 'Wechat';
 $lang->customer->desc        = 'Description';
 $lang->customer->public      = 'Public';
+$lang->customer->relation    = 'Relation';
 $lang->customer->createdBy   = 'Created By';
 $lang->customer->createdDate = 'Created Date';
 $lang->customer->editedBy    = 'Edited By';
@@ -78,6 +79,10 @@ $lang->customer->levelList['B'] = 'B';
 $lang->customer->levelList['C'] = 'C';
 $lang->customer->levelList['D'] = 'D';
 $lang->customer->levelList['E'] = 'E';
+
+$lang->customer->relationList['client']   = 'Client';
+$lang->customer->relationList['provider'] = 'Provider';
+$lang->customer->relationList['partner']  = 'Partner';
 
 $lang->customer->create = 'Create Customer';
 $lang->customer->list   = 'Customer List';

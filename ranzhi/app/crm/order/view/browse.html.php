@@ -20,7 +20,7 @@
   <table class='table table-hover table-striped tablesorter table-data'>
     <thead>
       <tr class='text-center'>
-        <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+        <?php $vars = "mode=all&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px text-center' ><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
         <th class='w-60px text-center' ><?php commonModel::printOrderLink('level', $orderBy, $vars, $lang->customer->level);?></th>
         <th><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->order->customer);?></th>

@@ -64,7 +64,8 @@ class customerModel extends model
 
         return $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
-            ->andWhere('relation')->eq($relation)
+            ->beginIF($relation == 'client')->andWhere('relation')->ne('provider')
+            ->beginIF($relation == 'provider')->andWhere('relation')->ne('client')
             ->beginIF($mode == 'field')->andWhere('mode')->eq($param)->fi()
             ->beginIF($mode == 'past')->andWhere('nextDate')->lt(helper::today())->fi()
             ->beginIF($mode == 'today')->andWhere('nextDate')->eq(helper::today())->fi()
@@ -97,7 +98,8 @@ class customerModel extends model
 
         $customers = $this->dao->select('id, name')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
-            ->andWhere('relation')->in($relation)
+            ->beginIF($relation == 'client')->andWhere('relation')->ne('provider')
+            ->beginIF($relation == 'provider')->andWhere('relation')->ne('client')
             ->orderBy('id_desc')
             ->fetchPairs('id');
 
@@ -112,13 +114,14 @@ class customerModel extends model
      * @access public
      * @return int
      */
-    public function create($customer = null)
+    public function create($customer = null, $relation = 'client')
     {
         $now = helper::now();
         if(empty($customer))
         {
             $customer = fixer::input('post')
                 ->setIF($this->post->name == '', 'name', $this->post->contact)
+                ->add('relation', $relation)
                 ->add('createdBy', $this->app->user->account)
                 ->add('createdDate', $now)
                 ->get();

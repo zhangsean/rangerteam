@@ -30,6 +30,7 @@ $lang->customer->weibo       = '微博';
 $lang->customer->weixin      = '微信';
 $lang->customer->desc        = '简介';
 $lang->customer->public      = '共有';
+$lang->customer->relation    = '关系';
 $lang->customer->createdBy   = '由谁添加';
 $lang->customer->createdDate = '添加时间';
 $lang->customer->editedBy    = '由谁编辑';
@@ -78,6 +79,10 @@ $lang->customer->levelList['B'] = 'B';
 $lang->customer->levelList['C'] = 'C';
 $lang->customer->levelList['D'] = 'D';
 $lang->customer->levelList['E'] = 'E';
+
+$lang->customer->relationList['client']   = '客户';
+$lang->customer->relationList['provider'] = '供应商';
+$lang->customer->relationList['partner']  = '合作伙伴';
 
 $lang->customer->create = '添加客户';
 $lang->customer->list   = '客户列表';

@@ -1,0 +1,82 @@
+<?php 
+/**
+ * The create view file of provider module of RanZhi.
+ *
+ * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     LGPL
+ * @author      Tingting Dai <daitingting@xirangit.com>
+ * @package     provider 
+ * @version     $Id$
+ * @link        http://www.ranzhi.org
+ */
+?>
+<?php include '../../common/view/header.html.php';?>
+<?php include '../../../sys/common/view/kindeditor.html.php';?>
+<div class='panel'>
+  <div class='panel-heading'>
+    <strong><i class="icon-plus"></i> <?php echo $lang->customer->create;?></strong>
+  </div>
+  <div class='panel-body'>
+    <form method='post' id='ajaxForm' class='form-condensed'>
+      <table class='table table-form'>
+        <tr>
+          <th class='w-80px'><?php echo $lang->customer->name;?></th>
+          <td class='w-p40'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->contact;?></th>
+          <td><?php echo html::input('contact', '', "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->phone;?></th>
+          <td><?php echo html::input('phone', '', "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->email;?></th>
+          <td><?php echo html::input('email', '', "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->qq;?></th>
+          <td><?php echo html::input('qq', '', "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->type;?></th>
+          <td><?php echo html::select("type", $lang->customer->typeList, '', "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->size;?></th>
+          <td><?php echo html::select('size', $lang->customer->sizeList, '', "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->industry;?></th>
+          <td><?php echo html::select('industry', $industry, '', "class='form-control chosen'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->area;?></th>
+          <td><?php echo html::select('area', $area, '', "class='form-control chosen'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->weibo;?></th>
+          <td><?php echo html::input('weibo', 'http://weibo.com/', "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->weixin;?></th>
+          <td><?php echo html::input('weixin', '', "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->site;?></th>
+          <td><?php echo html::input('site', 'http://', "class='form-control'");?></td><td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->desc;?></th>
+          <td colspan='2'><?php echo html::textarea('desc', '', "rows='2' class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td><?php echo html::submitButton();?></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+<?php include '../../common/view/footer.html.php';?>

@@ -17,6 +17,7 @@ $lang->menu->cash->dashboard = '我的地盘|dashboard|index|';
 $lang->menu->cash->trade     = '记账|trade|index|';
 $lang->menu->cash->check     = '对账|depositor|check|';
 $lang->menu->cash->depositor = '账户|depositor|index|';
+$lang->menu->cash->provider  = '供应商|provider|index|';
 $lang->menu->cash->setting   = '设置|tree|browse|type=in|';
 
 /* Menu of depositor module. */
@@ -30,6 +31,11 @@ $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
 $lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> 列表|trade|browse|', 'alias' => 'create,edit,view');
 $lang->trade->menu->schema   = array('link' => '<i class="icon-th-list"></i> 模板|schema|browse|', 'alias' => 'create,edit');
+
+/* Menu of trade module. */
+$lang->provider = new stdclass();
+$lang->provider->menu = new stdclass();
+$lang->provider->menu->browse = array('link' => '<i class="icon-th-list"></i> 列表|provider|browse|', 'alias' => 'create,edit,view');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

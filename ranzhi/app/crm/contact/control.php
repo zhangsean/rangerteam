@@ -41,8 +41,8 @@ class contact extends control
         $this->session->set('customerList', $this->app->getURI(true));
 
         $this->view->title     = $this->lang->contact->list;
-        $this->view->contacts  = $this->contact->getList($customer = '', $orderBy, $pager);
-        $this->view->customers = $this->loadModel('customer')->getPairs('client');
+        $this->view->contacts  = $this->contact->getList($customer = '', $relation = 'client',  $orderBy, $pager);
+        $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
         $this->display();

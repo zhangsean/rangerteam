@@ -20,7 +20,7 @@
   <table class='table table-hover table-striped tablesorter table-data'>
     <thead>
       <tr class='text-center'>
-        <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+        <?php $vars = "mode=all&param=&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->customer->id);?></th>
         <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->customer->name);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('level',       $orderBy, $vars, $lang->customer->level);?></th>
@@ -38,7 +38,7 @@
       <tr class='text-center <?php echo "customer-{$customer->status}";?>' data-url='<?php echo $this->createLink('customer', 'view', "customerID=$customer->id"); ?>'>
         <td><?php echo $customer->id;?></td>
         <td class='text-left'><?php echo $customer->name;?></td>
-        <td><?php echo $lang->customer->levelList[$customer->level];?></td>
+        <td><?php echo isset($lang->customer->levelList[$customer->level]) ? $lang->customer->levelList[$customer->level] : '';?></td>
         <td><?php if($customer->status) echo $lang->customer->statusList[$customer->status];?></td>
         <td><?php echo $lang->customer->sizeList[$customer->size];?></td>
         <td><?php echo $lang->customer->typeList[$customer->type];?></td>

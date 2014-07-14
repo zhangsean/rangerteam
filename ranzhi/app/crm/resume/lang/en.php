@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->resume)) $lang->resume = new stdclass();
 $lang->resume->common = 'Resume';
 $lang->resume->browse = 'Browse Resume';
 $lang->resume->delete = 'Delete Resume';
