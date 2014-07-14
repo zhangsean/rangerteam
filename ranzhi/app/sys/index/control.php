@@ -55,7 +55,8 @@ class index extends control
                 control:  '$entry->control',
                 position: '$entry->position',
                 menu:     '$menu',
-                display:  'fixed'
+                display:  'fixed',
+                order:    '$entry->order'
             });\n";
         }
 

@@ -115,7 +115,8 @@ var entries = new Array(
     display  : 'fullscreen',
     desc     : '<?php echo $lang->index->allEntries?>',
     menu     : 'menu',
-    icon     : 'icon-th-large'
+    icon     : 'icon-th-large',
+    order    : 9999999
 });
 
 var ipsLang = {};

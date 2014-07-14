@@ -84,6 +84,9 @@
     {
         entriesConfigs = entriesOptions;
         entries        = {};
+
+        entriesConfigs.sort(function(a, b){return a.order - b.order;});
+
         for(var i in entriesConfigs)
         {
             var config = entriesConfigs[i];
@@ -116,6 +119,7 @@
             name     : 'No name entry',
             open     : 'iframe',
             desc     : '',
+            order    : 0,
             display  : 'fixed',
             size     : 'max',
             position : 'default',
@@ -1265,19 +1269,10 @@
         /* Show all shortcuts */
         this.showAll = function()
         {
-            var allapps = null;
-
             for(var index in entries)
             {
-                var et = entries[index];
-                if(et.id != 'allapps')
-                    this.show(et);
-                else
-                    allapps = et;
+                this.show(entries[index]);
             }
-
-            if(allapps) this.show(allapps);
-
         }
 
         /* show a shortcut */
