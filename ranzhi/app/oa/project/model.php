@@ -113,7 +113,13 @@ class projectModel extends model
     public function update($projectID, $project = null)
     {
         $oldProject = $this->getByID($projectID);
-        if(empty($project))$project = fixer::input('post')->get();
+        if(empty($project))
+        {
+            $project = fixer::input('post')
+                ->add('editedBy', $this->app->user->account)
+                ->add('editedDate', helper::now())
+                ->get();
+        }
 
         $this->dao->update(TABLE_PROJECT)->data($project)
             ->autoCheck()
@@ -134,7 +140,12 @@ class projectModel extends model
      */
     public function activate($projectID)
     {
-        $this->dao->update(TABLE_PROJECT)->set('status')->eq('doing')->where('id')->eq((int)$projectID)->exec();
+        $project = new stdclass();
+        $project->status     = 'doing';
+        $project->editedBy   = $this->app->user->account;
+        $project->editedDate = helper::now();
+
+        $this->dao->update(TABLE_PROJECT)->data($project)->where('id')->eq((int)$projectID)->exec();
         return !dao::isError();
     }
 
@@ -147,7 +158,12 @@ class projectModel extends model
      */
     public function finish($projectID)
     {
-        $this->dao->update(TABLE_PROJECT)->set('status')->eq('finished')->where('id')->eq((int)$projectID)->exec();
+        $project = new stdclass();
+        $project->status     = 'finished';
+        $project->editedBy   = $this->app->user->account;
+        $project->editedDate = helper::now();
+
+        $this->dao->update(TABLE_PROJECT)->data($project)->where('id')->eq((int)$projectID)->exec();
         return !dao::isError();
     }
 }
