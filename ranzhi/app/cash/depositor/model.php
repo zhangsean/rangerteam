@@ -110,7 +110,12 @@ class depositorModel extends model
      */
     public function forbid($depositorID)
     {
-        $this->dao->update(TABLE_DEPOSITOR)->set('status')->eq('disable')->where('id')->eq($depositorID)->exec();
+        $depositor = new stdclass();
+        $depositor->status     = 'disable';
+        $depositor->editedBy   = $this->app->user->account;
+        $depositor->editedDate = helper::now();
+
+        $this->dao->update(TABLE_DEPOSITOR)->data($depositor)->where('id')->eq($depositorID)->exec();
 
         return dao::isError();
     }
@@ -124,7 +129,12 @@ class depositorModel extends model
      */
     public function activate($depositorID)
     {
-        $this->dao->update(TABLE_DEPOSITOR)->set('status')->eq('normal')->where('id')->eq($depositorID)->exec();
+        $depositor = new stdclass();
+        $depositor->status     = 'normal';
+        $depositor->editedBy   = $this->app->user->account;
+        $depositor->editedDate = helper::now();
+
+        $this->dao->update(TABLE_DEPOSITOR)->data($depositor)->where('id')->eq($depositorID)->exec();
 
         return dao::isError();
     }

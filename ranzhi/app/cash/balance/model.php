@@ -121,6 +121,8 @@ class balanceModel extends model
 
         $balance = fixer::input('post')
             ->add('currency', $depositor->currency)
+            ->add('editedBy', $this->app->user->account)
+            ->add('editedDate', helper::now())
             ->removeIF($this->post->type == 'cash', 'public')
             ->get();
 
