@@ -150,6 +150,8 @@ CREATE TABLE `crm_order` (
   `status` enum('normal', 'signed', 'closed') NOT NULL DEFAULT 'normal';
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
+  `editedBy` char(30) NOT NULL,
+  `editedDate` datetime NOT NULL,
   `assignedTo` char(30) NOT NULL,
   `assignedBy` char(30) NOT NULL,
   `assignedDate` datetime NOT NULL,
@@ -239,6 +241,8 @@ CREATE TABLE `oa_project` (
   `end` datetime NOT NULL,
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
+  `editedBy` char(30) NOT NULL,
+  `editedDate` datetime NOT NULL,
   `status` enum('doing','finishedd') NOT NULL DEFAULT 'doing',
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)

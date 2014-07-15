@@ -85,5 +85,8 @@ INSERT INTO `sys_schema` (`name`, `category`, `customer`, `type`, `money`, `desc
 ('支付宝',       '', 'H', 'K', 'J',   'I,O', 'D', 'M'),
 ('中信银行简版', '', 'C', '',  'E,D', 'G,H', 'A', '');
 
-ALTER TABLE `crm_order` ADD `editedBy` varchar(30) NOT NULL default '';
+ALTER TABLE `crm_order` ADD `editedBy` char(30) NOT NULL;
 ALTER TABLE `crm_order` ADD `editedDate` datetime NOT NULL;
+
+ALTER TABLE `oa_project` ADD `editedBy` char(30) NOT NULL;
+ALTER TABLE `oa_project` ADD `editedDate` datetime NOT NULL;
