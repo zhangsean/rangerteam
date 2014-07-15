@@ -74,7 +74,6 @@ js::set('deptID', $deptID);
                 </div>
                 <div class='vcard text-center'>
                   <?php echo html::image(inlink('vcard', "user={$user->account}"));?>
-                  <i class='icon-remove'></i>
                 </div>
               </div>
             </div>
