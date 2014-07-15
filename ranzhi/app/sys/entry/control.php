@@ -67,7 +67,7 @@ class entry extends control
         if($entry->integration)
         {
             $token = $this->loadModel('sso')->createToken(session_id(), $entryID);
-            if(strpos('&', $login) !== false)
+            if(strpos('&', $location) !== false)
             {
                 $location = rtrim($location, '&') . "&token=$token";
             }

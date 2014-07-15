@@ -61,6 +61,8 @@ $lang->block->default['cash']['1']['title'] = '付款账户';
 $lang->block->default['cash']['1']['block'] = 'depositor';
 $lang->block->default['cash']['1']['grid']  = 3;
 
+$lang->block->default['cash']['1']['params'] = array();
+
 $lang->block->default['team']['1']['title'] = '最新博客';
 $lang->block->default['team']['1']['block'] = 'blog';
 $lang->block->default['team']['1']['grid']  = 3;

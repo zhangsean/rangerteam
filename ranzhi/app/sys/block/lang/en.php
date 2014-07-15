@@ -61,6 +61,8 @@ $lang->block->default['cash']['1']['title'] = 'Payment Depositor';
 $lang->block->default['cash']['1']['block'] = 'depositor';
 $lang->block->default['cash']['1']['grid']  = 3;
 
+$lang->block->default['cash']['1']['params'] = array();
+
 $lang->block->default['team']['1']['title'] = 'Latest Blog';
 $lang->block->default['team']['1']['block'] = 'blog';
 $lang->block->default['team']['1']['grid']  = 3;
