@@ -259,6 +259,9 @@ class orderModel extends model
             ->setIF($this->post->status == 'signed' and !$this->post->signedBy, 'signedBy', $this->app->user->account)
             ->setIF($this->post->status == 'signed' and !$this->post->signedDate, 'signedDate', substr($now, 0, 10))
 
+            ->add('lastEditedBy',   $this->app->user->account)
+            ->add('lastEditedDate', $now)
+
             ->get();
 
         $this->dao->update(TABLE_ORDER)
@@ -288,6 +291,8 @@ class orderModel extends model
             ->add('closedBy', $this->app->user->account)
             ->add('status', 'closed')
             ->add('assignedTo', 'closed')
+            ->add('lastEditedBy', $this->app->user->account)
+            ->add('lastEditedDate', $now)
             ->get();
 
         $this->dao->update(TABLE_ORDER)->data($order, $skip = 'uid, closedNote')
@@ -306,13 +311,16 @@ class orderModel extends model
      */
     public function activate($orderID)
     {
+        $now = helper::now();
         $order = fixer::input('post')
-            ->add('activatedDate', helper::now())
+            ->add('activatedDate', $now)
             ->add('activatedBy', $this->app->user->account)
             ->setDefault('closedBy,closedReason,signedBy', '')
             ->setDefault('signedDate', '0000-00-00')
             ->setDefault('closedDate', '0000-00-00 00:00:00')
             ->setDefault('status', 'normal')
+            ->add('lastEditedBy', $this->app->user->account)
+            ->add('lastEditedDate', $now)
             ->get();
 
         $this->dao->update(TABLE_ORDER)->data($order, $skip='uid, comment')->autoCheck()->where('id')->eq($orderID)->exec();
@@ -333,6 +341,8 @@ class orderModel extends model
         $order = fixer::input('post')
             ->setDefault('assignedBy', $this->app->user->account)
             ->setDefault('assignedDate', $now)
+            ->add('lastEditedBy', $this->app->user->account)
+            ->add('lastEditedDate', $now)
             ->get();
 
         $this->dao->update(TABLE_ORDER)

@@ -100,7 +100,7 @@
         </tr>
         <tr>
           <th class='w-80px'><?php echo $lang->lifetime->closedBy;?></th>
-          <td><?php if($order->closedBy) echo zget($users, $order->closedBy) . $lang->at . $order->closedDate;;?></td>
+          <td><?php if($order->closedBy) echo zget($users, $order->closedBy) . $lang->at . $order->closedDate;?></td>
         </tr>
         <tr>
           <th class='w-80px'><?php echo $lang->lifetime->closedReason;?></th>
@@ -110,6 +110,12 @@
           <th class='w-80px'><?php echo $lang->lifetime->signedBy;?></th>
           <td>
             <?php if($contract and $contract->signedBy and $contract->status != 'canceled') echo zget($users, $contract->signedBy) . $lang->at . $contract->signedDate;?>
+          </td>
+        </tr>
+        <tr>
+          <th class='w-80px'><?php echo $lang->order->lastEditedBy;?></th>
+          <td><?php if($order->lastEditedBy) echo zget($users, $order->lastEditedBy) . $lang->at . $order->lastEditedDate;?></td>
+          <td>
           </td>
         </tr>
       </table>

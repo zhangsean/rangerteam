@@ -84,3 +84,6 @@ ALTER TABLE oa_project ADD status enum('doing', 'finished') NOT NULL DEFAULT 'do
 INSERT INTO `sys_schema` (`name`, `category`, `customer`, `type`, `money`, `desc`, `date`, `fee`) VALUES
 ('支付宝',       '', 'H', 'K', 'J',   'I,O', 'D', 'M'),
 ('中信银行简版', '', 'C', '',  'E,D', 'G,H', 'A', '');
+
+ALTER TABLE `crm_order` ADD `lastEditedBy` varchar(30) NOT NULL default '';
+ALTER TABLE `crm_order` ADD `lastEditedDate` datetime NOT NULL;
