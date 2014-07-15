@@ -113,8 +113,8 @@
           </td>
         </tr>
         <tr>
-          <th class='w-80px'><?php echo $lang->order->lastEditedBy;?></th>
-          <td><?php if($order->lastEditedBy) echo zget($users, $order->lastEditedBy) . $lang->at . $order->lastEditedDate;?></td>
+          <th class='w-80px'><?php echo $lang->order->editedBy;?></th>
+          <td><?php if($order->editedBy) echo zget($users, $order->editedBy) . $lang->at . $order->editedDate;?></td>
           <td>
           </td>
         </tr>

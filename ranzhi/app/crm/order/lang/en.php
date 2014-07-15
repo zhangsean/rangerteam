@@ -39,8 +39,8 @@ $lang->order->activatedDate  = 'Activated Date';
 $lang->order->contactedBy    = 'Contacted By';
 $lang->order->contactedDate  = 'Contacted Date';
 $lang->order->nextDate       = 'Next contact';
-$lang->order->lastEditedBy   = 'Last Edited By';
-$lang->order->lastEditedDate = 'Last Edited Date';
+$lang->order->editedBy       = 'Last Edited By';
+$lang->order->editedDate     = 'Last Edited Date';
 
 $lang->order->list          = 'Order List';
 $lang->order->browse        = 'Browse Order';

@@ -39,8 +39,8 @@ $lang->order->activatedDate  = '激活时间';
 $lang->order->contactedBy    = '由谁联系';
 $lang->order->contactedDate  = '联系时间';
 $lang->order->nextDate       = '下次联系';
-$lang->order->lastEditedBy   = '最后修改';
-$lang->order->lastEditedDate = '最后修改日期';
+$lang->order->editedBy       = '最后修改';
+$lang->order->editedDate     = '最后修改日期';
 
 $lang->order->list          = '订单列表';
 $lang->order->browse        = '浏览订单';
