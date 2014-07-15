@@ -260,7 +260,7 @@ class blockModel extends model
             $block['app']     = $appName;
             $block['account'] = $account;
             $block['params']  = helper::jsonEncode($block['params']);
-            if(!isset($block->source)) $block['source'] = $appName;
+            if(!isset($block['source'])) $block['source'] = $appName;
 
             $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
         }
