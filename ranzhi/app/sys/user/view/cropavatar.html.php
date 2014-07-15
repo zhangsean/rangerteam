@@ -14,7 +14,7 @@
 <table class='table table-form'>
   <tr>
     <td>
-      <div class="img-cutter fixed-ratio" id="imgCutter">
+      <div class="img-cutter fixed-ratio" id="imgCutter" style="max-width: 100%">
         <div class="canvas">
         <?php
         if(empty($user->avatar))
@@ -37,14 +37,15 @@
   </tr>
 </table>
 <script>
-$("#imgCutter").imgCutter(
+var $imgCutter = $("#imgCutter");
+$imgCutter.imgCutter(
 {
     fixedRatio: true,
     post: '<?php echo inlink('cropavatar', "image={$image->id}")?>',
-    ready: function() {$.ajustModalPosition();},
+    ready: function() {$.ajustModalPosition(); $imgCutter.css('width', $imgCutter.closest('.modal-dialog').width() - 50);},
     done: function(response)
     {
-        $('#start .avatar, #startMenu .avatar').html('<img src="<?php echo $user->avatar?>" />');
+        $('#start .avatar, #startMenu .avatar').html('<img src="<?php echo $user->avatar?>?rid=' + $.uuid() + '" />');
         $('#ajaxModal').load(createLink('user', 'profile'), function(){$.ajustModalPosition()});
     },
 });

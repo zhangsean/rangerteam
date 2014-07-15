@@ -1,6 +1,5 @@
 $(document).ready(function()
 {
-    $('.btn-avatar').click(function(){$('#files').click();});
     $('#files').change(function(){$('#avatarForm').submit();});
 
     $.setAjaxForm('#avatarForm', function(response)

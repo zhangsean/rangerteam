@@ -21,12 +21,12 @@
         <?php
         if(!empty($user->avatar))
         {
-            echo html::image($user->avatar, "class='avatar-img'");
+            echo html::image($user->avatar . '?rid=' . rand(), "class='avatar-img'");
         }
         ?>
         </div>
         <form method='post' action="<?php echo inlink('uploadAvatar', "account={$user->account}");?>" class='form-condensed' id='avatarForm' enctype='multipart/form-data' class='hide'>
-        <?php echo html::file('files', "class='form-control hidden'");?>
+        <?php echo html::file('files', "class='form-control file-control'");?>
         <?php echo html::a('javascript:;', $lang->user->uploadAvatar, "class='btn btn-avatar submit'");?>
         </form>
       </td>
