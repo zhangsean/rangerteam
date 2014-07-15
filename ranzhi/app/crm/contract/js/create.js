@@ -49,4 +49,5 @@ $(document).ready(function()
         $(this).parents('tr').remove();
         $('.order-real').change();
     });
+    $('select.select-order:first').change();
 })
