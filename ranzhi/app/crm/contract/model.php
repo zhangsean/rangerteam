@@ -258,10 +258,13 @@ class contractModel extends model
      */
     public function delivery($contractID)
     {
+        $now = helper::now();
         $contract = fixer::input('post')
             ->add('delivery', 'done')
+            ->add('editedBy', $this->app->user->account)
+            ->add('editedDate', $now)
             ->setDefault('deliveredBy', $this->app->user->account)
-            ->setDefault('deliveredDate', helper::now())
+            ->setDefault('deliveredDate', $now)
             ->join('handlers', ',')
             ->get();
 
@@ -284,10 +287,13 @@ class contractModel extends model
     {
         $contract = $this->getByID($contractID);
 
+        $now = helper::now();
         $data = fixer::input('post')
             ->add('return', 'done')
+            ->add('editedBy', $this->app->user->account)
+            ->add('editedDate', $now)
             ->setDefault('returnedBy', $this->app->user->account)
-            ->setDefault('returnedDate', helper::now())
+            ->setDefault('returnedDate', $now)
             ->join('handlers', ',')
             ->get();
 
@@ -319,6 +325,8 @@ class contractModel extends model
         $contract->status       = 'canceled';
         $contract->canceledBy   = $this->app->user->account;
         $contract->canceledDate = helper::now();
+        $contract->editedBy     = $this->app->user->account;
+        $contract->editedDate   = helper::now();
 
         $this->dao->update(TABLE_CONTRACT)->data($contract, $skip = 'uid, comment')
             ->autoCheck()
@@ -362,6 +370,8 @@ class contractModel extends model
         $contract->status       = 'closed';
         $contract->finishedBy   = $this->app->user->account;
         $contract->finishedDate = helper::now();
+        $contract->editedBy     = $this->app->user->account;
+        $contract->editedDate   = helper::now();
 
         $this->dao->update(TABLE_CONTRACT)->data($contract, $skip = 'uid, comment')
             ->autoCheck()
