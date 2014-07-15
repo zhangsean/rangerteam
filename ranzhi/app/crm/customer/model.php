@@ -202,6 +202,8 @@ class customerModel extends model
         $customer = fixer::input('post')
             ->setDefault('assignedBy', $this->app->user->account)
             ->setDefault('assignedDate', helper::now())
+            ->add('editedBy', $this->app->user->account)
+            ->add('editedDate', helper::now())
             ->get();
 
         $this->dao->update(TABLE_CUSTOMER)
