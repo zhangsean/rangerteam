@@ -60,15 +60,18 @@ class contactModel extends model
      */
     public function getList($customer = 0, $relation = 'client',  $orderBy = 'maker_desc', $pager = null)
     {
-        $customerIdList = $this->loadModel('customer')->getMine();
-        if(empty($customerIdList)) return array();
+        if($relation != 'provider')
+        {
+            $customerIdList = $this->loadModel('customer')->getMine();
+            if(empty($customerIdList)) return array();
+        }
 
         $resumes = array();
         if($customer) $resumes = $this->dao->select('*')->from(TABLE_RESUME)->where('customer')->eq($customer)->andWhere('deleted')->eq(0)->fetchAll('contact');
         if($relation == 'client') $customers = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('relation')->ne('provider')->fetchAll('id');
         if($relation == 'provider') $customers = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('relation')->ne('client')->fetchAll('id');
 
-        if(!empty($customers)) $customerIdList = array_intersect($customerIdList, array_keys($customers));
+        $customerIdList = $relation == 'provider' ? array_keys($customers) : ($customers ? array_intersect($customerIdList, array_keys($customers)) : $customerIdList);
 
         $contacts = $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')

@@ -12,7 +12,7 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
-<form id='linkContactForm' method='post' action='<?php echo inlink('linkContact', "customerID=$customerID")?>'>
+<form id='linkContactForm' method='post' action='<?php echo inlink('linkContact', "customerID=$providerID")?>'>
   <table class='table table-form'>
       <tr>
         <th class='w-100px'><?php echo $lang->customer->contact;?></th>
