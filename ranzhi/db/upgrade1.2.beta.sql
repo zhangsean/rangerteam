@@ -17,13 +17,14 @@ ALTER TABLE `sys_entry` ADD `buildin` tinyint(1) unsigned NOT NULL DEFAULT '0' A
 ADD `integration` tinyint(1) unsigned NOT NULL DEFAULT '0' AFTER `buildin`;
 ALTER TABLE `sys_entry` ADD `abbr` char(6) COLLATE 'utf8_general_ci' NOT NULL AFTER `name`;
 
-ALTER TABLE crm_contact ADD fax char(20) NOT NULL;
+ALTER TABLE crm_contact ADD fax char(20) NOT NULL AFTER `phone`;
 
 ALTER TABLE crm_contract CHANGE `amount` `amount` decimal(12,2) NOT NULL;
 ALTER TABLE crm_order    CHANGE `plan` `plan` decimal(12,2) NOT NULL;
 ALTER TABLE crm_order    CHANGE `real` `real` decimal(12,2) NOT NULL;
 ALTER TABLE cash_trade   CHANGE `money` `money` decimal(12,2) NOT NULL;
 ALTER TABLE cash_balance CHANGE `money` `money` decimal(12,2) NOT NULL;
+
 ALTER TABLE sys_task     CHANGE `estimate` `estimate` decimal(12,2) NOT NULL;
 ALTER TABLE sys_task     CHANGE `consumed` `consumed` decimal(12,2) NOT NULL;
 ALTER TABLE sys_task     CHANGE `left` `left` decimal(12,2) NOT NULL;
@@ -39,7 +40,7 @@ ALTER TABLE `crm_order` CHANGE `closedReason` `closedReason` enum('', 'payed', '
 ALTER TABLE `crm_customer` CHANGE `status` `status` enum('potential', 'intension', 'payed', 'failed') NOT NULL DEFAULT 'potential';
 ALTER TABLE `crm_contract` CHANGE `status` `status` enum('normal', 'closed', 'canceled') NOT NULL DEFAULT 'normal';
 
-ALTER TABLE `sys_block` ADD UNIQUE `account_app_order` (`account`, `app`, `order`);
+ALTER TABLE `sys_block` ADD UNIQUE `accountAppOrder` (`account`, `app`, `order`);
 ALTER TABLE `sys_entry` ADD UNIQUE `code` (`code`), DROP INDEX `code`; 
 
 ALTER TABLE `sys_category` CHANGE `desc` `desc` text NOT NULL;

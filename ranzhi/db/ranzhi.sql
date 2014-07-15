@@ -60,7 +60,7 @@ CREATE TABLE `crm_contract` (
   `delivery` char(30) NOT NULL,
   `return` char(30) NOT NULL,
   `currency` varchar(20) NOT NULL,
-  `status` enum('normal', 'closed', 'canceled') NOT NULL DEFAULT 'normal';
+  `status` enum('normal', 'closed', 'canceled') NOT NULL DEFAULT 'normal',
   `contact` mediumint(8) unsigned NOT NULL,
   `handlers` varchar(255) NOT NULL,
   `signedBy` char(30) NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE `crm_customer` (
   `weibo` char(50) NOT NULL,
   `weixin` char(50) NOT NULL,
   `desc` text NOT NULL,
-  `public` enum('0', '1') NOT NULL DEFAULT '0';
+  `public` enum('0', '1') NOT NULL DEFAULT '0',
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `assignedTo` char(30) NOT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE `crm_order` (
   `plan` decimal(12,2) NOT NULL,
   `real` decimal(12,2) NOT NULL,
   `currency` varchar(20) NOT NULL,
-  `status` enum('normal', 'signed', 'closed') NOT NULL DEFAULT 'normal';
+  `status` enum('normal', 'signed', 'closed') NOT NULL DEFAULT 'normal',
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `editedBy` char(30) NOT NULL,
@@ -159,7 +159,7 @@ CREATE TABLE `crm_order` (
   `signedDate` date NOT NULL,
   `closedBy` char(30) NOT NULL,
   `closedDate` datetime NOT NULL,
-  `closedReason` enum('', 'payed', 'failed', 'postponed') NOT NULL DEFAULT '';
+  `closedReason` enum('', 'payed', 'failed', 'postponed') NOT NULL DEFAULT '',
   `activatedBy` char(30) NOT NULL,
   `activatedDate` datetime NOT NULL,
   `contactedBy` char(30) NOT NULL,
@@ -374,8 +374,8 @@ CREATE TABLE `sys_block` (
   `grid` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `hidden` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `account_app_order` (`account`,`app`,`order`),
-  KEY account (`account`, `app`)
+  UNIQUE KEY `accountAppOrder` (`account`, `app`, `order`),
+  KEY `account` (`account`, `app`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_category`;
 CREATE TABLE `sys_category` (
