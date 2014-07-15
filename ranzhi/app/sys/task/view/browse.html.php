@@ -13,7 +13,8 @@
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <div class='panel-actions'>
+    <strong><i class='icon-list-ul icon'> </i><?php echo $lang->task->browse;?></strong>
+    <div class='panel-actions hidden'>
       <div class="btn-group">
       <?php echo html::a($this->inlink('browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $lang->task->list, "class='btn active'"); ?>
       <?php echo html::a($this->inlink('kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $lang->task->kanban, "class='btn'"); ?>

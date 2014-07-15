@@ -358,30 +358,6 @@ class task extends control
         $this->display();
     }
 
-    // /**
-    //  * View task as mindmap 
-    //  * 
-    //  * @param  int    $taskID 
-    //  * @access public
-    //  * @return void
-    //  */
-    // public function mind($projectID = 0)
-    // {
-    //     /* Check project deleted. */
-    //     if($projectID)
-    //     {
-    //         $project = $this->loadModel('project')->getByID($projectID);
-    //         if($project->deleted) $this->locate($this->createLink('project'));
-    //     }
-
-    //     $this->view->moduleMenu  = $this->project->getLeftMenus($projectID );
-    //     $this->view->tasks       = $this->task->getList($projectID);
-    //     $this->view->title       = $this->lang->task->browse;
-    //     $this->view->projectID   = $projectID;
-    //     $this->view->project     =  $project;
-    //     $this->display();
-    // }
-
     /**
      * Browse tasks with mindmap.
      * 
@@ -392,6 +368,22 @@ class task extends control
      */
     public function mind($projectID = 0, $groupBy = 'status')
     {
+        if($_POST)
+        {
+            if($this->post->changes)
+            {
+                $changes = json_decode($this->post->changes);
+                if(!empty($changes)) $this->task->saveMind($changes);
+            }
+
+            if($this->post->projectName)
+            {
+                $project = array('projectName' => $this->post->projectName);
+                $this->loadModel('project', 'oa')->update($this->post->projectID, $project);
+            }
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
         /* Check project deleted. */
         if($projectID)
         {

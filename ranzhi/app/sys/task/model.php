@@ -51,25 +51,29 @@ class taskModel extends model
     /**
      * Create a task.
      * 
+     * @param  object    $task 
      * @access public
-     * @return int|bool
+     * @return void
      */
-    public function create()
+    public function create($task = null)
     {
         $now  = helper::now();
-        $task = fixer::input('post')
-            ->setDefault('estimate, left', 0)
-            ->setDefault('estStarted', '0000-00-00')
-            ->setDefault('deadline', '0000-00-00')
-            ->setDefault('status', 'wait')
-            ->setIF($this->post->estimate != false, 'left', $this->post->estimate)
-            ->setIF($this->post->assignedTo, 'assignedDate', $now)
-            ->setForce('assignedTo', $this->post->assignedTo)
-            ->setDefault('createdBy', $this->app->user->account)
-            ->setDefault('createdDate', $now)
-            ->specialChars('name')
-            ->stripTags('desc', $this->config->allowedTags->admin)
-            ->get();
+        if(empty($task))
+        {
+            $task = fixer::input('post')
+                ->setDefault('estimate, left', 0)
+                ->setDefault('estStarted', '0000-00-00')
+                ->setDefault('deadline', '0000-00-00')
+                ->setDefault('status', 'wait')
+                ->setIF($this->post->estimate != false, 'left', $this->post->estimate)
+                ->setIF($this->post->assignedTo, 'assignedDate', $now)
+                ->setForce('assignedTo', $this->post->assignedTo)
+                ->setDefault('createdBy', $this->app->user->account)
+                ->setDefault('createdDate', $now)
+                ->specialChars('name')
+                ->stripTags('desc', $this->config->allowedTags->admin)
+                ->get();
+        }
 
         $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels')
             ->autoCheck()
@@ -136,46 +140,49 @@ class taskModel extends model
     /**
      * Update a task.
      * 
-     * @param  int    $taskID 
+     * @param  int       $taskID 
+     * @param  object    $task
      * @access public
      * @return void
      */
-    public function update($taskID)
+    public function update($taskID, $task = null)
     {
         $oldTask = $this->getById($taskID);
         $now     = helper::now();
-        $task    = fixer::input('post')
-            ->setDefault('estimate, left, consumed', 0)
-            ->setDefault('deadline,estStarted,realStarted', '0000-00-00')
+        if(!$task)
+        {
+            $task = fixer::input('post')
+                ->setDefault('estimate, left, consumed', 0)
+                ->setDefault('deadline,estStarted,realStarted', '0000-00-00')
 
-            ->setIF($this->post->status == 'done', 'left', 0)
-            ->setIF($this->post->status == 'done', 'canceledBy', '')
-            ->setIF($this->post->status == 'done', 'canceledDate', '')
-            ->setIF($this->post->status == 'done'   and !$this->post->finishedBy,   'finishedBy',   $this->app->user->account)
-            ->setIF($this->post->status == 'done'   and !$this->post->finishedDate, 'finishedDate', $now)
+                ->setIF($this->post->status == 'done', 'left', 0)
+                ->setIF($this->post->status == 'done', 'canceledBy', '')
+                ->setIF($this->post->status == 'done', 'canceledDate', '')
+                ->setIF($this->post->status == 'done'   and !$this->post->finishedBy,   'finishedBy',   $this->app->user->account)
+                ->setIF($this->post->status == 'done'   and !$this->post->finishedDate, 'finishedDate', $now)
 
-            ->setIF($this->post->status == 'cancel' and !$this->post->canceledBy,   'canceledBy',   $this->app->user->account)
-            ->setIF($this->post->status == 'cancel' and !$this->post->canceledDate, 'canceledDate', $now)
-            ->setIF($this->post->status == 'cancel', 'assignedTo',   $oldTask->createdBy)
-            ->setIF($this->post->status == 'cancel', 'assignedDate', $now)
+                ->setIF($this->post->status == 'cancel' and !$this->post->canceledBy,   'canceledBy',   $this->app->user->account)
+                ->setIF($this->post->status == 'cancel' and !$this->post->canceledDate, 'canceledDate', $now)
+                ->setIF($this->post->status == 'cancel', 'assignedTo',   $oldTask->createdBy)
+                ->setIF($this->post->status == 'cancel', 'assignedDate', $now)
 
-            ->setIF($this->post->status == 'closed', 'finishedBy', '')
-            ->setIF($this->post->status == 'closed', 'finishedDate', '')
-            ->setIF($this->post->status == 'closed' and !$this->post->closedBy,   'closedBy',   $this->app->user->account)
-            ->setIF($this->post->status == 'closed' and !$this->post->closedDate, 'closedDate', $now)
+                ->setIF($this->post->status == 'closed', 'finishedBy', '')
+                ->setIF($this->post->status == 'closed', 'finishedDate', '')
+                ->setIF($this->post->status == 'closed' and !$this->post->closedBy,   'closedBy',   $this->app->user->account)
+                ->setIF($this->post->status == 'closed' and !$this->post->closedDate, 'closedDate', $now)
 
-            ->setIF($this->post->status == 'wait' and $this->post->left == $oldTask->left and $this->post->consumed == 0, 'left', $this->post->estimate)
+                ->setIF($this->post->status == 'wait' and $this->post->left == $oldTask->left and $this->post->consumed == 0, 'left', $this->post->estimate)
 
-            ->setIF($this->post->consumed > 0 and $this->post->left > 0 and $this->post->status == 'wait', 'status', 'doing')
-            ->setIF($this->post->assignedTo != $oldTask->assignedTo, 'assignedDate', $now)
+                ->setIF($this->post->consumed > 0 and $this->post->left > 0 and $this->post->status == 'wait', 'status', 'doing')
+                ->setIF($this->post->assignedTo != $oldTask->assignedTo, 'assignedDate', $now)
 
-            ->add('editedBy',   $this->app->user->account)
-            ->add('editedDate', $now)
-            ->specialChars('name')
-            ->stripTags('desc', $this->config->allowedTags->admin)
-            ->remove('uid, files, labels')
-            ->get();
-
+                ->add('editedBy',   $this->app->user->account)
+                ->add('editedDate', $now)
+                ->specialChars('name')
+                ->stripTags('desc', $this->config->allowedTags->admin)
+                ->remove('uid, files, labels')
+                ->get();
+        }
         $this->dao->update(TABLE_TASK)->data($task)
             ->autoCheck()
             ->batchCheckIF($task->status != 'cancel', $this->config->task->require->edit, 'notempty')
@@ -195,7 +202,6 @@ class taskModel extends model
             ->batchCheckIF($task->closedReason == 'cancel', 'finishedBy, finishedDate', 'empty')
             ->where('id')->eq((int)$taskID)
             ->exec();
-
         if(dao::isError()) return false;
         return commonModel::createChanges($oldTask, $task);
     }
@@ -413,4 +419,48 @@ class taskModel extends model
 
         return $menu;
     }
+
+    /**
+     * Save data from mind.
+     * 
+     * @param  int    $changes 
+     * @access public
+     * @return void
+     */
+    public function saveMind($changes)
+    {
+        $newTasks     = array();
+        $updatedTasks = array();
+        foreach($changes as $task)
+        {
+            $task->estimate     = false;
+            $task->left         = false;
+            $task->closedReason = false;
+            if(empty($task->deadline)) $task->deadline = '0000-00-00';
+            if(empty($task->consumed)) $task->consumed = '0';
+
+            if($task->change == 'add')  $newTasks[] = $task;
+            if($task->change == 'edit') $updatedTasks[] = $task;
+        }
+        a($newTasks);
+
+        foreach($newTasks as $task)
+        {
+            unset($task->id);
+            unset($task->change);
+            $task->createdBy   = $this->app->user->account;
+            $task->createdDate = helper::now();
+            $this->create($task);
+        }
+        
+        foreach($updatedTasks as $task)
+        {
+            unset($task->change);
+            $task->editedBy   = $this->app->user->account;
+            $task->editedDate = helper::now();
+            $this->update($task->id, $task);
+        }
+        return !dao::isError();
+    }
+
 }

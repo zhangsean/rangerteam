@@ -369,7 +369,7 @@ $(function()
 
     $saveBtn.click(function()
     {
-        $saveBtn.addClass('disabled').attr('disabled', 'disabled');
+        //$saveBtn.addClass('disabled').attr('disabled', 'disabled');
 
         /* Save data with flow methods */
         var data = mindmap.data;
@@ -381,7 +381,7 @@ $(function()
             var d = arrayData[i];
             if(d.type == 'node' && d.changed)
             {
-                result.push(fixChange($.extend({id: d.id, order: d.index, change: d.changed}, d.data)));
+                result.push(fixChange($.extend({id: d.id, name:d.text, key: d.index, change: d.changed}, d.data)));
             }
             else if(d.type == 'sub' && d.changed == 'delete children')
             {
@@ -390,7 +390,7 @@ $(function()
                     var dd = d.deletions[j];
                     if(dd.type == 'node' && dd.changed)
                     {
-                        result.push(fixChange($.extend({id: dd.id, order: dd.index, change: 'delete'}, dd.data)));
+                        result.push(fixChange($.extend({id: dd.id, name:dd.text, key: dd.index, change: 'delete'}, dd.data)));
                     }
                 }
             }
@@ -405,11 +405,20 @@ $(function()
             projectID: '<?php echo $projectID;?>'
         };
 
-        $.ajax({type: 'POST', url: createLink('task', 'mind', 'projectID=<?php echo $projectID?>'), data: postData})
+        $.ajax({type: 'POST', url: createLink('task', 'mind', 'projectID=<?php echo $projectID?>'), data: postData, dataType:'json'})
          .done(function(response)
         {
-            // if resones success then call this:
-            // mindmap.clearChangeFlag();
+            // if response success then call this:
+            if(response.result == 'success')
+            {
+                messager.success(response.message);
+                mindmap.clearChangeFlag();
+            }
+            else
+            {
+                messager.danger(response.message);
+            }
+
         });
 
         $saveBtn.find('span').text('<?php echo $lang->saved?>');
