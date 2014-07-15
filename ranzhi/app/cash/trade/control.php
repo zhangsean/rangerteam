@@ -282,6 +282,35 @@ class trade extends control
     }
 
     /**
+     * Batch edit trades.
+     * 
+     * @param  string $step  form|save
+     * @access public
+     * @return void
+     */
+    public function batchEdit($step = 'form')
+    {
+        if($step == 'save')
+        {
+            $result =  $this->trade->batchUpdate();
+            $this->send($result);
+        }
+
+        unset($this->lang->trade->menu);
+
+        $this->view->trades = $this->trade->getListByIdList($this->post->tradeIDList);
+        $this->view->title         = $this->lang->trade->batchCreate;
+        $this->view->depositors    = $this->loadModel('depositor')->getPairs();
+        $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client,partner');
+        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider,partner');
+        $this->view->expenseTypes  = $this->loadModel('tree')->getOptionMenu('out', 0);
+        $this->view->incomeTypes   = $this->loadModel('tree')->getOptionMenu('in', 0);
+        $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
+        $this->display();
+    }
+
+    /**
      * Show import data.
      * 
      * @param  int    $depositorID 

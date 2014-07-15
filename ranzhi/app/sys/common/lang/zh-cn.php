@@ -112,6 +112,8 @@ $lang->fold           = '-';
 $lang->files          = '附件';
 $lang->addFiles       = '上传了附件 ';
 $lang->comment        = '备注';
+$lang->selectAll      = '全选';
+$lang->selectReverse  = '反选';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();

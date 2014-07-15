@@ -112,6 +112,8 @@ $lang->fold           = '-';
 $lang->files          = 'Files';
 $lang->addFiles       = 'Add Files ';
 $lang->comment        = 'Comment';
+$lang->selectAll      = 'All';
+$lang->selectReverse  = 'Inverse';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();

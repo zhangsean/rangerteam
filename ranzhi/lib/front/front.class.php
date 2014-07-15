@@ -438,6 +438,112 @@ class html
     {
         return "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>";
     }
+
+    /**
+     * Create tags like "<input type='$type' onclick='selectAll()'/>"
+     * 
+     * @param  string  $scope  the scope of select all.
+     * @param  string  $type   the type of input tag.
+     * @param  boolean $checked if the type is checkbox, set the checked attribute.
+     * @return string
+     */
+    static public function selectAll($scope = "", $type = "button", $checked = false)
+    {
+        $string = <<<EOT
+<script type="text/javascript">
+function selectAll(checker, scope, type)
+{ 
+    if(scope)
+    {
+        if(type == 'button')
+        {
+            $('#' + scope + ' input').each(function() 
+            {
+                $(this).attr("checked", true)
+            });
+        }
+        else if(type == 'checkbox')
+        {
+            $('#' + scope + ' input').each(function() 
+            {
+                $(this).attr("checked", checker.checked)
+            });
+         }
+    }
+    else
+    {
+        if(type == 'button')
+        {
+            $('input').each(function() 
+            {
+                $(this).prop("checked", true)
+            });
+        }
+        else if(type == 'checkbox')
+        { 
+            $('input').each(function() 
+            {
+                $(this).prop("checked", checker.checked)
+            });
+        }
+    }
+}
+</script>
+EOT;
+        global $lang;
+        if($type == 'checkbox')
+        {
+            if($checked)
+            {
+                $string .= " <input type='checkbox' name='allchecker[]' checked=$checked onclick='selectAll(this, \"$scope\", \"$type\")' />";
+            }
+            else
+            {
+                $string .= " <input type='checkbox' name='allchecker[]' onclick='selectAll(this, \"$scope\", \"$type\")' />";
+            }
+        }
+        elseif($type == 'button')
+        {
+            $string .= "<input type='button' name='allchecker' id='allchecker' value='{$lang->selectAll}' onclick='selectAll(this, \"$scope\", \"$type\")' class='btn btn-default' />";
+        }
+
+        return  $string;
+    }
+
+    /**
+     * Create tags like "<input type='button' onclick='selectReverse()'/>"
+     * 
+     * @param  string $scope  the scope of select reverse.
+     * @return string
+     */
+    static public function selectReverse($scope = "")
+    {
+        $string = <<<EOT
+<script type="text/javascript">
+function selectReverse(scope)
+{ 
+    if(scope)
+    {
+        $('#' + scope + ' input').each(function() 
+        {
+            $(this).prop("checked", !$(this).prop("checked"))
+        });
+    }
+    else
+    {
+        $('input').each(function() 
+        {
+            $(this).prop("checked", !$(this).prop("checked"))
+        });
+    }
+}
+</script>
+EOT;
+        global $lang;
+        $string .= "<input type='button' name='reversechecker' id='reversechecker' value='{$lang->selectReverse}' class='btn btn-default' onclick='selectReverse(\"$scope\")'/>";
+
+        return  $string;
+    }
 }
 
 /**
