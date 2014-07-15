@@ -91,9 +91,11 @@ class tradeModel extends model
             $trader = new stdclass();
             $trader->relation = 'provider';
             $trader->name     = $this->post->traderName;
+            $trader->public   = 1;
 
             $this->dao->insert(TABLE_CUSTOMER)->data($trader)->check('name', 'notempty')->exec();
             $trader = $this->dao->lastInsertID();
+            $this->loadModel('action')->create('customer', $trader, 'Created');
 
             $this->dao->update(TABLE_TRADE)->set('trader')->eq($trader)->where('id')->eq($tradeID)->exec();
         }
@@ -115,6 +117,7 @@ class tradeModel extends model
 
         $depositorList = $this->loadModel('depositor')->getList();
 
+        $this->loadModel('action');
         /* Get data. */
         foreach($this->post->type as $key => $type)
         {
@@ -141,8 +144,9 @@ class tradeModel extends model
 
             if($trade->createTrader)
             {
-                $this->dao->insert(TABLE_CUSTOMER)->data(array('relation' => 'provider', 'name' => $trade->traderName))->exec();
+                $this->dao->insert(TABLE_CUSTOMER)->data(array('relation' => 'provider', 'name' => $trade->traderName, 'public' => 1))->exec();
                 $trade->trader = $this->dao->lastInsertID();
+                $this->action->create('customer', $trade->trader, 'Created');
             }
 
             $trades[$key] = $trade;
@@ -236,9 +240,11 @@ class tradeModel extends model
             $trader = new stdclass();
             $trader->relation = 'provider';
             $trader->name     = $this->post->traderName;
+            $trader->public   = 1;
 
             $this->dao->insert(TABLE_CUSTOMER)->data($trader)->check('name', 'notempty')->exec();
             $trader = $this->dao->lastInsertID();
+            $this->loadModel('action')->create('customer', $trader, 'Created');
 
             $this->dao->update(TABLE_TRADE)->set('trader')->eq($trader)->where('id')->eq($tradeID)->exec();
         }
@@ -299,8 +305,11 @@ class tradeModel extends model
                     $data->public      = 1;
                     $data->createdBy   = $this->app->user->account;
                     $data->createdDate = $now;
+
                     $this->dao->insert(TABLE_CUSTOMER)->data($data)->exec();
                     $trade->trader = $this->dao->lastInsertID();
+                    $this->action->create('customer', $trade->trader, 'Created');
+
                     $newTrader[$data->name] = $trade->trader;
                 }
             }
@@ -317,9 +326,9 @@ class tradeModel extends model
                     $data->relation    = 'client';
                     $data->name        = $trade->customerName;
                     $data->level       = 0;
-                    $data->public      = 1;
                     $data->createdBy   = $this->app->user->account;
                     $data->createdDate = $now;
+
                     $this->dao->insert(TABLE_CUSTOMER)->data($data)->exec();
                     $trade->trader = $this->dao->lastInsertID();
                     $this->action->create('customer', $trade->trader, 'Created');

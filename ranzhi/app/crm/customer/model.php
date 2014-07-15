@@ -122,6 +122,7 @@ class customerModel extends model
             $customer = fixer::input('post')
                 ->setIF($this->post->name == '', 'name', $this->post->contact)
                 ->add('relation', $relation)
+                ->setIF($relation == 'provider', 'public', 1)
                 ->add('createdBy', $this->app->user->account)
                 ->add('createdDate', $now)
                 ->get();

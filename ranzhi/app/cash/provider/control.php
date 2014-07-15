@@ -168,7 +168,7 @@ class provider extends control
         {
             $this->customer->linkContact($providerID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->loadModel('action')->create('customer', $providerID, 'linkContact', '', $this->post->newcontact ? $this->post->realname : $contacts[$this->post->contact]);
+            $this->loadModel('action')->create('customer', $providerID, 'linkContact', '', $this->post->newContact ? $this->post->realname : $contacts[$this->post->contact]);
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
