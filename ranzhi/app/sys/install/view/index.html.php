@@ -14,6 +14,7 @@
 <div class='container'>
   <div class='modal-dialog'>
     <div class='modal-content'>
+      <div class="modal-header text-right"><div class='btn dropdown'><?php include '../../common/view/selectlang.html.php';?></div></div>
       <div class='modal-body'>
         <div class='row'>
           <div class='col-md-8'>
