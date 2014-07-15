@@ -28,11 +28,11 @@
             <h4 class='title'><?php echo $depositor->abbr;?></h4>
             <div class='subtitle'>
               <?php if($depositor->type != 'cash' && !empty($depositor->title) && $depositor->title != $depositor->abbr):?>
-              <small class='cell text-muted' title='<?php echo $lang->depositor->title;?>'><?php echo $depositor->title;?></small>
+              <span class='cell text-muted' title='<?php echo $lang->depositor->title;?>'><?php echo $depositor->title;?></span>
               <?php endif;?>
-              <small class='cell text-special' title='<?php echo $lang->depositor->currency?>'><?php echo $lang->depositor->currencyList[$depositor->currency]?></small>
+              <span class='cell text-special' title='<?php echo $lang->depositor->currency?>'><?php echo $lang->depositor->currencyList[$depositor->currency]?></span>
               <?php if($depositor->type != 'cash'):?>
-              <small class='cell text-<?php echo ($depositor->public == '0' ? 'important' : 'sucess') ?>' title='<?php echo $lang->depositor->public;?>'><?php echo $lang->depositor->publicList[$depositor->public];?></small>
+              <span class='cell text-<?php echo ($depositor->public == '0' ? 'important' : 'sucess') ?>' title='<?php echo $lang->depositor->public;?>'><?php echo $lang->depositor->publicList[$depositor->public];?></span>
               <?php endif;?>
             </div>
           </div>
