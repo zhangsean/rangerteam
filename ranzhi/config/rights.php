@@ -39,7 +39,9 @@ $config->rights->member['error']['index']            = 'index';
 
 $config->rights->member['misc']['qrcode']            = 'qrcode';
 $config->rights->member['user']['setreferer']        = 'setreferer';
-$config->rights->member['user']['profile']           = 'setreferer';
+$config->rights->member['user']['profile']           = 'profile';
+$config->rights->member['user']['uploadavatar']      = 'uploadavatar';
+$config->rights->member['user']['cropavatar']        = 'cropavatar';
 $config->rights->member['user']['edit']              = 'edit';
 $config->rights->member['contract']['getorder']      = 'getorder';
 $config->rights->member['customer']['getoptionmenu'] = 'getoptionmenu';
