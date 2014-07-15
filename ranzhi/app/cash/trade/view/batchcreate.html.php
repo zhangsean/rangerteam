@@ -60,7 +60,7 @@
         </tr>
         <?php endfor;?>
       </tbody>
-      <tr><td colspan='6' class='text-center'><?php echo html::submitButton() . html::backButton();?></td></tr>
+      <tr><td colspan=9 class='text-center'><?php echo html::submitButton() . html::backButton();?></td></tr>
     </table>
   </div>
 </form>

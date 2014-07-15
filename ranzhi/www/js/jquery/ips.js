@@ -439,7 +439,7 @@
     desktopManager.prototype.updateBrowserTitle = function(title)
     {
         title = title || indexTitle;
-        $('head > title').text(title);
+        document.title = title;
     }
 
     /**
