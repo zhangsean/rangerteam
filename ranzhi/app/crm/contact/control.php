@@ -127,6 +127,7 @@ class contact extends control
     {
         if($this->session->customerList == $this->session->contactList) $this->session->set('customerList', $this->app->getURI(true));
 
+        $this->view->title     = $this->lang->contact->view;
         $this->view->contact   = $this->contact->getByID($contactID);
         $this->view->addresses = $this->loadModel('address')->getList('contact', $contactID);
         $this->view->resumes   = $this->loadModel('resume')->getList($contactID);

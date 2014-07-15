@@ -28,6 +28,7 @@ class project extends control
     public function index($status = 'doing')
     {
         if(empty($this->projects)) $this->locate(inlink('create'));
+        $this->view->title    = $this->lang->project->common;
         $this->view->status   = $status;
         $this->view->projects = $this->project->getList($status);
         $this->display();

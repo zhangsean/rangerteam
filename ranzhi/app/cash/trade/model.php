@@ -296,6 +296,7 @@ class tradeModel extends model
                     $data->relation    = 'provider';
                     $data->name        = $trade->traderName;
                     $data->level       = 0;
+                    $data->public      = 1;
                     $data->createdBy   = $this->app->user->account;
                     $data->createdDate = $now;
                     $this->dao->insert(TABLE_CUSTOMER)->data($data)->exec();
@@ -316,6 +317,7 @@ class tradeModel extends model
                     $data->relation    = 'client';
                     $data->name        = $trade->customerName;
                     $data->level       = 0;
+                    $data->public      = 1;
                     $data->createdBy   = $this->app->user->account;
                     $data->createdDate = $now;
                     $this->dao->insert(TABLE_CUSTOMER)->data($data)->exec();

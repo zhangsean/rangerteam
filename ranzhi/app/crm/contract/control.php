@@ -56,6 +56,7 @@ class contract extends control
         $this->session->set('contractList', $this->app->getURI(true));
         $this->session->set('orderList',    '');
 
+        $this->view->title     = $this->lang->contract->browse;
         $this->view->contracts = $this->contract->getList(0, $orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->view->pager     = $pager;
@@ -140,6 +141,7 @@ class contract extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "contractID=$contractID")));
         }
 
+        $this->view->title          = $this->lang->contract->edit;
         $this->view->contract       = $contract; 
         $this->view->contractOrders = $this->loadModel('order')->getListByID($contract->order);
         $this->view->orders         = array('' => '') + $this->order->getList($mode = 'customer', $contract->customer);
@@ -280,6 +282,7 @@ class contract extends control
         $this->session->set('contactList',  $uri);
         if(!$this->session->orderList) $this->session->set('orderList',    $uri);
 
+        $this->view->title     = $this->lang->contract->view;
         $this->view->orders    = $this->loadModel('order')->getListById($contract->order);
         $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->view->contacts  = $this->loadModel('contact')->getPairs($contract->customer);

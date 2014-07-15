@@ -113,6 +113,7 @@ class trade extends control
         unset($this->lang->trade->menu);
         unset($this->lang->trade->typeList['transferin']);
         unset($this->lang->trade->typeList['transferout']);
+        $this->view->title         = $this->lang->trade->batchCreate;
         $this->view->depositors    = $this->loadModel('depositor')->getPairs();
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client,partner');
@@ -429,6 +430,7 @@ class trade extends control
             }
         }
 
+        $this->view->title         = $this->lang->trade->showImport;
         $this->view->trades        = $dataList;
         $this->view->depositor     = $this->loadModel('depositor')->getByID($depositorID);
         $this->view->users         = $this->loadModel('user')->getPairs();

@@ -136,6 +136,7 @@ class order extends control
         if(!$this->session->contractList) $this->session->set('contractList', $uri);
     
         $this->view->order    = $order;
+        $this->view->title    = $this->lang->order->view;
         $this->view->product  = $this->loadModel('product')->getByID($order->product);
         $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
         $this->view->contract = $this->order->getContract($orderID);
