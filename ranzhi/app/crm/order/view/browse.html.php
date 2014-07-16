@@ -34,7 +34,7 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach($orders as $order):?>
+      <?php if(!empty($orders)) foreach($orders as $order):?>
       <?php $status = $order->status != 'closed' ? "order-{$order->status}" : "order-{$order->closedReason}"?>
       <tr class='text-center <?php echo $status;?>' data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id");?>'>
         <td><?php echo $order->id;?></td>
