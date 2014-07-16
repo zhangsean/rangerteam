@@ -26,6 +26,7 @@ $config->rights->member['address']['index']          = 'index';
 $config->rights->member['resume']['index']           = 'index';
 $config->rights->member['trade']['index']            = 'index';
 $config->rights->member['depositor']['index']        = 'index';
+$config->rights->member['provider']['index']         = 'index';
 $config->rights->member['project']['index']          = 'index';
 $config->rights->member['task']['index']             = 'index';
 $config->rights->member['announce']['index']         = 'index';

@@ -26,6 +26,7 @@ $lang->appModule->cash = array();
 $lang->appModule->cash[] = 'trade';
 $lang->appModule->cash[] = 'depositor';
 $lang->appModule->cash[] = 'balance';
+$lang->appModule->cash[] = 'provider';
 
 $lang->appModule->oa = array();
 $lang->appModule->oa[] = 'project';
@@ -55,6 +56,7 @@ $lang->moduleOrder[27]  = 'setting';
 $lang->moduleOrder[30]  = 'trade';
 $lang->moduleOrder[35]  = 'depositor';
 $lang->moduleOrder[40]  = 'balance';
+$lang->moduleOrder[41]  = 'provider';
 
 $lang->moduleOrder[45]  = 'project';
 $lang->moduleOrder[50]  = 'announce';
@@ -119,6 +121,7 @@ $lang->resource->customer->browse        = 'browse';
 $lang->resource->customer->create        = 'create';
 $lang->resource->customer->edit          = 'edit';
 $lang->resource->customer->view          = 'view';
+$lang->resource->customer->assign        = 'assign';
 $lang->resource->customer->order         = 'order';
 $lang->resource->customer->contact       = 'contact';
 $lang->resource->customer->linkContact   = 'linkContact';
@@ -242,6 +245,24 @@ $lang->balance->methodOrder[5]  = 'browse';
 $lang->balance->methodOrder[10] = 'create';
 $lang->balance->methodOrder[15] = 'edit';
 $lang->balance->methodOrder[20] = 'delete';
+
+/* Provider. */
+$lang->resource->provider = new stdclass();
+$lang->resource->provider->browse      = 'browse';
+$lang->resource->provider->create      = 'create';
+$lang->resource->provider->edit        = 'edit';
+$lang->resource->provider->view        = 'view';
+$lang->resource->provider->delete      = 'delete';
+$lang->resource->provider->contact     = 'contact';
+$lang->resource->provider->linkContact = 'linkContact';
+
+$lang->provider->methodOrder[5]  = 'browse';
+$lang->provider->methodOrder[10] = 'create';
+$lang->provider->methodOrder[15] = 'edit';
+$lang->provider->methodOrder[20] = 'view';
+$lang->provider->methodOrder[25] = 'delete';
+$lang->provider->methodOrder[30] = 'contact';
+$lang->provider->methodOrder[35] = 'linkContact';
 
 /* Project. */
 $lang->resource->project = new stdclass();
