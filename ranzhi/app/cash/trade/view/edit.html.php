@@ -75,7 +75,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->trade->dept;?></th>
-          <td><?php echo html::select('dept', $deptList, '', "class='form-control chosen'");?></td>
+          <td><?php echo html::select('dept', $deptList, $trade->dept, "class='form-control chosen'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->trade->handlers;?></th>
