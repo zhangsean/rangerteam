@@ -11,8 +11,10 @@
  */
 $lang->project->common = '项目视图';
 $lang->project->browse = '项目列表';
+$lang->project->index  = '项目首页';
 $lang->project->create = '创建项目';
 $lang->project->edit   = '修改项目';
+$lang->project->finish = '完成项目';
 $lang->project->delete = '删除项目';
 $lang->project->tasks  = '任务';
 

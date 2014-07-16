@@ -56,6 +56,7 @@ $lang->contact->resume  = 'Company';
 $lang->contact->address = 'Address';
 $lang->contact->record  = 'History';
 $lang->contact->qrcode  = 'Qrcode';
+$lang->contact->vcard   = 'Vcard';
 
 $lang->contact->basicInfo   = 'Basic Info';
 $lang->contact->contactInfo = 'Contact Info';

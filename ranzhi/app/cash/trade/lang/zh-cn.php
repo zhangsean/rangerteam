@@ -43,6 +43,7 @@ $lang->trade->detail      = '明细';
 $lang->trade->browse      = '账目列表';
 $lang->trade->delete      = '删除记录';
 $lang->trade->batchCreate = '批量记账';
+$lang->trade->batchEdit   = '批量编辑';
 $lang->trade->newTrader   = '新建';
 $lang->trade->import      = '导入';
 $lang->trade->showImport  = '导入确认';

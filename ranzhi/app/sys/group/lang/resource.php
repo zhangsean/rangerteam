@@ -145,6 +145,7 @@ $lang->resource->contact->edit          = 'edit';
 $lang->resource->contact->view          = 'view';
 $lang->resource->contact->block         = 'block';
 $lang->resource->contact->delete        = 'delete';
+$lang->resource->contact->vcard         = 'vcard';
 
 $lang->contact->methodOrder[10] = 'browse';
 $lang->contact->methodOrder[15] = 'create';
@@ -152,6 +153,7 @@ $lang->contact->methodOrder[20] = 'edit';
 $lang->contact->methodOrder[25] = 'view';
 $lang->contact->methodOrder[30] = 'block';
 $lang->contact->methodOrder[35] = 'delete';
+$lang->contact->methodOrder[40] = 'vcard';
 
 /* Product. */
 $lang->resource->product = new stdclass();
@@ -194,18 +196,24 @@ $lang->resource->trade = new stdclass();
 $lang->resource->trade->browse      = 'browse';
 $lang->resource->trade->create      = 'create';
 $lang->resource->trade->batchCreate = 'batchCreate';
+$lang->resource->trade->batchEdit   = 'batchEdit';
 $lang->resource->trade->edit        = 'edit';
 $lang->resource->trade->transfer    = 'transfer';
 $lang->resource->trade->detail      = 'detail';
 $lang->resource->trade->delete      = 'delete';
+$lang->resource->trade->import      = 'import';
+$lang->resource->trade->showimport  = 'showImport';
 
 $lang->trade->methodOrder[10] = 'browse';
 $lang->trade->methodOrder[15] = 'create';
 $lang->trade->methodOrder[20] = 'batchCreate';
+$lang->trade->methodOrder[21] = 'batchEdit';
 $lang->trade->methodOrder[25] = 'edit';
 $lang->trade->methodOrder[30] = 'transfer';
 $lang->trade->methodOrder[35] = 'detail';
 $lang->trade->methodOrder[40] = 'delete';
+$lang->trade->methodOrder[45] = 'import';
+$lang->trade->methodOrder[50] = 'showImport';
 
 /* Depositor. */
 $lang->resource->depositor = new stdclass();
@@ -237,12 +245,16 @@ $lang->balance->methodOrder[20] = 'delete';
 
 /* Project. */
 $lang->resource->project = new stdclass();
+$lang->resource->project->index  = 'index';
 $lang->resource->project->create = 'create';
 $lang->resource->project->edit   = 'edit';
+$lang->resource->project->finish = 'finish';
 $lang->resource->project->delete = 'delete';
 
-$lang->project->methodOrder[0]  = 'create';
-$lang->project->methodOrder[15] = 'edit';
+$lang->project->methodOrder[0]  = 'index';
+$lang->project->methodOrder[5]  = 'create';
+$lang->project->methodOrder[10] = 'edit';
+$lang->project->methodOrder[15] = 'finish';
 $lang->project->methodOrder[20] = 'delete';
 
 /* Task. */
