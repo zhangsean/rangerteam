@@ -121,6 +121,6 @@ class product extends control
     {
         $this->product->delete(TABLE_PRODUCT, $productID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'success', 'locate' => inlink('browse')));
     }
 }

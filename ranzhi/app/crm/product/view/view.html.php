@@ -16,8 +16,8 @@
   <div class='page-actions'>
     <?php
     echo "<div class='btn-group'>";
-    echo html::a(inlink('edit',  "productID=$product->id"), $this->lang->edit,   "class='btn btn-default'");
-    echo html::a(inlink('delete',"productID=$product->id"), $this->lang->delete, "class='btn btn-default'");
+    echo html::a(inlink('edit',  "productID=$product->id"), $this->lang->edit,   "class='btn btn-default' data-toggle='modal'");
+    echo html::a(inlink('delete',"productID=$product->id"), $this->lang->delete, "class='deleter btn btn-default'");
     echo '</div>';
 
     $browseLink = $this->session->productList ? $app->session->productList : inlink('browse');
