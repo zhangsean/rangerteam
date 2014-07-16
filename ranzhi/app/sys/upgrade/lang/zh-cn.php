@@ -42,3 +42,4 @@ $lang->upgrade->versionNote = "务必选择正确的版本，否则会造成数�
 
 $lang->upgrade->fromVersions['1_0_beta'] = '1.0.beta';
 $lang->upgrade->fromVersions['1_1_beta'] = '1.1.beta';
+$lang->upgrade->fromVersions['1_2_beta'] = '1.2.beta';
