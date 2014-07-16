@@ -19,8 +19,8 @@
     <table class='table table-hover'>
       <thead>
         <tr class='text-center'>
-          <th class='w-100px'><?php echo $lang->trade->depositor;?></th>
           <th class='w-100px'><?php echo $lang->trade->type;?></th> 
+          <th class='w-100px'><?php echo $lang->trade->depositor;?></th>
           <th class='w-120px'><?php echo $lang->trade->category;?></th> 
           <th class='w-180px'><?php echo $lang->trade->trader;?></th> 
           <th class='w-120px'><?php echo $lang->trade->money;?></th>
@@ -33,18 +33,24 @@
       <tbody>
         <?php foreach($trades as $id => $trade):?>
         <tr>
+          <td>
+            <?php echo html::input("", zget($lang->trade->typeList, $trade->type), "class='form-control' readonly");?>
+            <?php echo html::hidden("type[{$id}]", $trade->type);?>
+          </td>
           <td class='text-middle'><?php echo html::select("depositor[{$id}]", $depositors, $trade->depositor, "class='form-control' id='depositor{$id}'");?></td>
-          <td><?php echo html::select("type[{$id}]", $lang->trade->typeList, $trade->type, "class='form-control' readonly");?></td>
           <td>
             <?php if($trade->type == 'in') echo html::select("category[$id]", $incomeTypes, $trade->category, "class='form-control in' id='category{$id}'");?>
             <?php if($trade->type == 'out') echo html::select("category[$id]", $expenseTypes, $trade->category, "class='form-control in' id='category{$id}'");?>
+            <?php if(in_array($trade->type, array('transferin', 'transferout', 'fee'))) echo html::input("", $lang->trade->typeList[$trade->category], "class='form-control' readonly");?>
+            <?php if(in_array($trade->type, array('transferin', 'transferout', 'fee'))) echo html::hidden("category[$id]", $trade->category, "class='form-control' readonly");?>
           </td>
           <td>
             <?php if($trade->type == 'in') echo html::select("trader[{$id}]", $customerList, $trade->trader, "class='form-control'");?>
             <?php if($trade->type == 'out') echo html::select("trader[{$id}]", $traderList, $trade->trader, "class='form-control'");?>
+            <?php if(in_array($trade->type, array('transferin', 'transferout', 'fee'))) echo html::hidden("trader[$id]", 0);?>
           </td>
           <td><?php echo html::input("money[$id]", $trade->money, "class='form-control' id='money{$id}'");?></td>
-          <td><?php echo html::select("dept[$id]", $deptList, '', "class='form-control chosen' id='dept{$id}'");?></td>
+          <td><?php echo html::select("dept[$id]", $deptList, $trade->dept, "class='form-control chosen' id='dept{$id}'");?></td>
           <td><?php echo html::select("handlers[$id][]", $users, $this->app->user->account, "class='form-control chosen' id='handlers{$id}' multiple");?></td>
           <td><?php echo html::input("date[$id]", $trade->date, "class='form-control form-date' id='date{$id}'");?></td>
           <td><?php echo html::textarea("desc[$id]", $trade->desc, "rows='1' class='form-control'");?></td>
