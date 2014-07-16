@@ -23,23 +23,6 @@ class upgradeModel extends model
     static $errors = array();
 
     /**
-     * Security: can execute upgrade or not.
-     * 
-     * @access public
-     * @return array  array('result' => success|fail, 'okFile');
-     */
-    public function canUpgrade()
-    {
-        $okFile = dirname($this->app->getDataRoot()) . DS . 'ok';
-        if(!file_exists($okFile) or time() - filemtime($okFile) > 600)
-        {
-            return array('result' => 'fail', 'okFile' => $okFile);
-        }
-
-        return array('result' => 'success');
-    }
-
-    /**
      * The execute method. According to the $fromVersion call related methods.
      * 
      * @param  string $fromVersion 
@@ -56,6 +39,7 @@ class upgradeModel extends model
             case '1_1_beta':
                 $this->execSQL($this->getUpgradeFile('1.1.beta'));
                 $this->createTeamEntry();
+                $this->computeContactInfo();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -300,5 +284,68 @@ class upgradeModel extends model
 
         if(dao::isError()) return false;
         return true;
+    }
+
+    /**
+     * Compute contacteddate and contactedby fields.
+     * 
+     * @access public
+     * @return void
+     */
+    public function computeContactInfo()
+    {
+        $orders    = $this->dao->select('id')->from(TABLE_ORDER)->fetchAll();
+        $customers = $this->dao->select('id')->from(TABLE_CUSTOMER)->fetchAll();
+        $contracts = $this->dao->select('id')->from(TABLE_CONTRACT)->fetchAll();
+        $contacts  = $this->dao->select('id')->from(TABLE_CONTACT)->fetchAll();
+
+        foreach($orders as $order)
+        {
+            $lastContact = $this->dao->select('actor as contactedBy, date as contactedDate')->from(TABLE_ACTION)
+                ->where('action')->eq('record')
+                ->andWhere('objectType')->eq('order')
+                ->andWhere('objectID')->eq($order->id)
+                ->orderBY('date_desc')
+                ->limit(1)
+                ->fetch();
+            if($lastContact) $this->dao->update(TABLE_ORDER)->data($lastContact)->where('id')->eq($order->id)->exec();
+        }
+
+        foreach($customers as $customer)
+        {
+            $lastContact = $this->dao->select('actor as contactedBy, date as contactedDate')->from(TABLE_ACTION)
+                ->where('action')->eq('record')
+                ->andWhere('customer')->eq($customer->id)
+                ->orderBY('date_desc')
+                ->limit(1)
+                ->fetch();
+            if($lastContact) $this->dao->update(TABLE_CUSTOMER)->data($lastContact)->where('id')->eq($customer->id)->exec();
+        }
+
+        foreach($contacts as $contact)
+        {
+            $lastContact = $this->dao->select('actor as contactedBy, date as contactedDate')->from(TABLE_ACTION)
+                ->where('action')->eq('record')
+                ->andWhere('contact')->eq($contact->id)
+                ->orderBY('date_desc')
+                ->limit(1)
+                ->fetch();
+            if($lastContact) $this->dao->update(TABLE_CONTACT)->data($lastContact)->where('id')->eq($contact->id)->exec();
+        }
+
+        foreach($contracts as $contract)
+        {
+            $lastContact = $this->dao->select('actor as contactedBy, date as contactedDate')->from(TABLE_ACTION)
+                ->where('action')->eq('record')
+                ->andWhere('objectType')->eq('contract')
+                ->andWhere('objectID')->eq($contract->id)
+                ->orderBY('date_desc')
+                ->limit(1)
+                ->fetch();
+            if($lastContact) $this->dao->update(TABLE_CONTRACT)->data($lastContact)->where('id')->eq($contract->id)->exec();
+        }
+
+        return !dao::isError();
+
     }
 }

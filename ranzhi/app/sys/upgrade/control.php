@@ -20,8 +20,6 @@ class upgrade extends control
     public function __construct()
     {
         parent::__construct();
-        $return = $this->upgrade->canUpgrade();
-        if($return['result'] != 'success' && $this->app->getMethodName() != 'index') $this->locate(inlink('index'));
     }
     
     /**
@@ -32,12 +30,7 @@ class upgrade extends control
      */
     public function index()
     {
-        $return = $this->upgrade->canUpgrade();
-        if($return['result'] == 'success') $this->locate(inlink('backup'));
-
-        $this->view->title  = $this->lang->upgrade->index;
-        $this->view->okFile = $return['okFile'];
-        $this->display();
+        $this->locate(inlink('backup'));
     }
 
     /**
