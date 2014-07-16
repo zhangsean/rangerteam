@@ -72,9 +72,3 @@ $lang->setting->menu->currency      = 'Currency|setting|lang|module=order&field=
 $lang->dashboard = new stdclass();
 $lang->resume    = new stdclass();
 $lang->address   = new stdclass();
-
-$lang->currencyList['rmb'] = 'RMB';
-$lang->currencyList['usd'] = 'USD';
-
-$lang->currencySign['rmb'] = '￥';
-$lang->currencySign['usd'] = '$';

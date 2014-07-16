@@ -41,7 +41,7 @@
           <td>
             <?php if($trade->type == 'in') echo html::select("category[$id]", $incomeTypes, $trade->category, "class='form-control in' id='category{$id}'");?>
             <?php if($trade->type == 'out') echo html::select("category[$id]", $expenseTypes, $trade->category, "class='form-control in' id='category{$id}'");?>
-            <?php if(in_array($trade->type, array('transferin', 'transferout', 'fee'))) echo html::input("", $lang->trade->typeList[$trade->category], "class='form-control' readonly");?>
+            <?php if(in_array($trade->type, array('transferin', 'transferout', 'fee'))) echo html::input("", $lang->trade->typeList[$trade->type], "class='form-control' readonly");?>
             <?php if(in_array($trade->type, array('transferin', 'transferout', 'fee'))) echo html::hidden("category[$id]", $trade->category, "class='form-control' readonly");?>
           </td>
           <td>
