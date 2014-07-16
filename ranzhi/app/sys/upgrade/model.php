@@ -244,7 +244,7 @@ class upgradeModel extends model
                 $blockID = $block->value->blockID;
             }
 
-            if($blockID == 'html') $block->value->params = $block->value->html;
+            if($blockID == 'html') $block->value->params = helper::jsonEncode(array('html' => $block->value->html));
             if(!isset($block->value->params)) $block->value->params = array();
 
             $data = new stdclass();
