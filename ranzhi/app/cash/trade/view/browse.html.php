@@ -50,7 +50,7 @@
           <td><?php echo $lang->trade->typeList[$trade->type];?></td>
           <td><?php echo zget($customerList, $trade->trader);?></td>
           <td><?php echo $trade->money;?></td>
-          <td><?php echo zget($lang->depositor->currencyList, $trade->currency);?></td>
+          <td><?php echo zget($lang->order->currencyList, $trade->currency);?></td>
           <td><?php echo zget($categories, $trade->category, ' ');?></td>
           <td><?php echo zget($users, $trade->handlers);?></td>
           <td><?php echo formatTime($trade->date, DT_DATE1);?></td>

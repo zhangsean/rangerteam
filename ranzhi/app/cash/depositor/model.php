@@ -12,6 +12,18 @@
 class depositorModel extends model
 {
     /**
+     * Construct function.
+     * 
+     * @param  string $appName 
+     * @access public
+     * @return void
+     */
+    public function __construct($appName = '')
+    {
+        parent::__construct($appName);
+        $this->app->loadLang('order', 'crm');
+    }
+    /**
      * Get depositor by id.
      * 
      * @param  int    $id 

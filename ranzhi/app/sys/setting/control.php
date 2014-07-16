@@ -19,12 +19,12 @@ class setting extends control
      * @access public
      * @return void
      */
-    public function lang($module, $field)
+    public function lang($module, $field, $appName = '')
     {
-        $this->app->loadLang($module);
-
         $clientLang = $this->app->getClientLang();
-        $appName    = $this->app->getAppName(); 
+
+        if(empty($appName)) $appName = $this->app->getAppName();
+        $this->app->loadLang($module, $appName);
 
         if($module == 'user' and $field == 'roleList') $this->lang->menuGroups->setting = 'user';
 
@@ -51,7 +51,7 @@ class setting extends control
             }
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('lang', "module=$module&field=$field")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('lang', "module=$module&field=$field&appName=$appName")));
         }   
 
         $dbFields    = $this->setting->getItems("lang=$clientLang,all&app=$appName&module=$module&section=$field", 'lang');
@@ -63,6 +63,7 @@ class setting extends control
         $this->view->field       = $field;
         $this->view->clientLang  = $clientLang;
         $this->view->systemField = $systemField;
+        $this->view->appName     = $appName;
         $this->display();
     }
 
@@ -74,9 +75,9 @@ class setting extends control
      * @access public
      * @return void
      */
-    public function reset($module, $field)
+    public function reset($module, $field, $appName = '')
     {   
-        $appName = $this->app->getAppName(); 
+        if(empty($appName)) $appName = $this->app->getAppName();
         $this->setting->deleteItems("app=$appName&module=$module&section=$field", $type = 'lang');
         if(isset($this->config->setting->appendLang[$module][$field]))
         {

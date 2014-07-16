@@ -30,7 +30,7 @@
               <?php if($depositor->type != 'cash' && !empty($depositor->title) && $depositor->title != $depositor->abbr):?>
               <span class='cell text-muted' title='<?php echo $lang->depositor->title;?>'><?php echo $depositor->title;?></span>
               <?php endif;?>
-              <span class='cell text-special' title='<?php echo $lang->depositor->currency?>'><?php echo $lang->depositor->currencyList[$depositor->currency]?></span>
+              <span class='cell text-special' title='<?php echo $lang->depositor->currency?>'><?php echo $lang->order->currencyList[$depositor->currency]?></span>
               <?php if($depositor->type != 'cash'):?>
               <span class='cell text-<?php echo ($depositor->public == '0' ? 'important' : 'sucess') ?>' title='<?php echo $lang->depositor->public;?>'><?php echo $lang->depositor->publicList[$depositor->public];?></span>
               <?php endif;?>
