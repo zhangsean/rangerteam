@@ -660,13 +660,13 @@ $.extend(
             /* check form changes when close modal */
             $ajaxModal.on('shown.bs.modal', function()
             {
-                $(document).on('keyup.modal.changes paste.modal.changes', '#ajaxModal form input', function()
+                $(document).on('keyup.modal.changes paste.modal.changes', '#ajaxModal form input, #ajaxModal form textarea', function()
                 {
                     $(this).addClass('modal-val-changed');
                 });
             }).on('escaping.bs.modal', function(event, esc)
             {
-                if($('#ajaxModal form input.modal-val-changed').length)
+                if($('#ajaxModal form .modal-val-changed').length)
                 {
                     return confirm(v.lang.confirmDiscardChanges);
                 }
