@@ -68,7 +68,7 @@ $lang->user->setReferer      = 'Set referer';
 $lang->user->vcard           = 'Vcard';
 $lang->user->uploadAvatar    = 'Upload avatar';
 $lang->user->cropAvatar      = 'Crop avatar';
-$lang->user->cropAvatarTip   = 'Drag the box to select avatar';
+$lang->user->cropAvatarTip   = 'Drag border to crop avatar';
 
 $lang->user->profile     = 'Profile';
 $lang->user->editProfile = 'Edit profile';
