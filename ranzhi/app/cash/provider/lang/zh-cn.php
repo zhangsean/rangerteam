@@ -12,6 +12,7 @@
 $lang->provider->browse      = '浏览供应商';
 $lang->provider->create      = '添加供应商';
 $lang->provider->edit        = '编辑供应商';
+$lang->provider->view        = '查看供应商';
 $lang->provider->delete      = '删除供应商';
 $lang->provider->contact     = '联系人';
 $lang->provider->linkContact = '添加联系人';

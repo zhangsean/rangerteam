@@ -12,6 +12,7 @@
 $lang->provider->browse      = 'Browse';
 $lang->provider->create      = 'Create';
 $lang->provider->edit        = 'Edit';
+$lang->provider->view        = 'View';
 $lang->provider->delete      = 'Delete';
 $lang->provider->contact     = 'Contact'
 $lang->provider->linkContact = 'Link Contact';
