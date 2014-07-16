@@ -27,7 +27,7 @@
     <?php foreach($orders as $order):?>
     <tr class='text-center'>
       <td><?php echo $order->id;?></td>
-      <td><?php echo $products[$order->product];?></td>
+      <td><?php if(isset($products[$order->product])) echo $products[$order->product];?></td>
       <td><?php echo $order->plan;?></td>
       <td><?php echo $order->assignedTo;?></td>
       <td><?php echo $lang->order->statusList[$order->status];?></td>
