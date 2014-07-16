@@ -223,6 +223,7 @@ class userModel extends model
         $user = fixer::input('post')->cleanInt('imobile, qq, zipcode')->remove('ip, account, join, visits');
         if(RUN_MODE != 'admin')
         {
+            if($this->app->user->account != $account) return false;
             $user = $user->remove('admin');
             /* Remove check for role in front. */
             $this->config->user->require->edit = str_replace(',role', '', $this->config->user->require->edit);
