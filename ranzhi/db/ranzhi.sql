@@ -627,7 +627,7 @@ CREATE TABLE `sys_user` (
   `role` char(20) NOT NULL,
   `nickname` char(60) NOT NULL DEFAULT '',
   `admin` enum('no','common','super') NOT NULL DEFAULT 'no',
-  `avatar` char(30) NOT NULL DEFAULT '',
+  `avatar` varchar(255) NOT NULL DEFAULT '',
   `birthday` date NOT NULL,
   `gender` enum('f','m','u') NOT NULL DEFAULT 'u',
   `email` char(90) NOT NULL DEFAULT '',
