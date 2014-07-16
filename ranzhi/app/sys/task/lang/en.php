@@ -106,7 +106,7 @@ $lang->task->outline = 'Outline';
 $lang->task->outlineGroup['']           = 'Choose group';
 $lang->task->outlineGroup['status']     = 'Group by status';
 $lang->task->outlineGroup['assignedto'] = 'Assigned To';
-$lang->task->outlineGroup['createdBy']  = 'Created By';
+$lang->task->outlineGroup['createdby']  = 'Created By';
 $lang->task->outlineGroup['finishedby'] = 'Finished By';
 $lang->task->outlineGroup['closedby']   = 'Closed By';
 
