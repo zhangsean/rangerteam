@@ -39,6 +39,10 @@ class upgradeModel extends model
             case '1_1_beta':
                 $this->execSQL($this->getUpgradeFile('1.1.beta'));
                 $this->createTeamEntry();
+            case '1_2_beta':
+                $this->execSQL($this->getUpgradeFile('1.2.beta'));
+                $this->transformBlock();
+                $this->changeBuildinName();
                 $this->computeContactInfo();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
