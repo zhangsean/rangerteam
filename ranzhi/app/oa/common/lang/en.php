@@ -19,7 +19,9 @@ $lang->menu->oa->announce  = 'Announce|announce|index|';
 $lang->menu->oa->doc       = 'Document|doc|index|';
 
 $lang->dashboard = new stdclass();
+
 $lang->project   = new stdclass();
+$lang->project->menu = new stdclass();
 $lang->project->menu->doing    = 'Projects|project|index|status=doing';
 $lang->project->menu->finished = 'Finished|project|index|ststus=finished';
 

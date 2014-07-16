@@ -47,6 +47,8 @@ $lang->depositor->success       = "<span class='text-success'>Ok</span>";
 $lang->depositor->more          = "<span class='text-danger'>%s</span>";
 $lang->depositor->less          = "<span class='text-danger'>%s</span>";
 
+$lang->depositor->createBalance = 'Please add balance first.';
+
 $lang->depositor->typeList['cash']   = 'Cash';
 $lang->depositor->typeList['bank']   = 'Bank';
 $lang->depositor->typeList['online'] = 'Online';

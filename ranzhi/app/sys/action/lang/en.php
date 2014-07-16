@@ -65,8 +65,6 @@ $lang->action->desc->diff3           = "changed file's name %s to %s.";
 $lang->action->desc->record          = '$date, <strong>$actor</strong> created log, the contact is: <strong>$contact</strong>.' . "\n";
 $lang->action->desc->signed          = '$date, signed by <strong>$actor</strong>，the turnover is： <strong>$extra</strong>.' . "\n";
 $lang->action->desc->linkcontact     = '$date, <strong>$actor</strong> added contacts for customer： <strong>$extra</strong>.' . "\n";
-
-$lang->action->desc->created         = '$date, created by <strong>$actor</strong>.';
 $lang->action->desc->createorder     = '$date, <strong>$actor</strong> created order: <strong>$extra</strong>.' . "\n";
 $lang->action->desc->editorder       = '$date, <strong>$actor</strong> edited order: <strong>$extra</strong>.' . "\n";
 $lang->action->desc->assignorder     = '$date, <strong>$actor</strong> assigned order: <strong>$extra</strong>.' . "\n";

@@ -103,6 +103,10 @@ $lang->task->mind    = 'Mind map';
 $lang->task->list    = 'List';
 $lang->task->outline = 'Outline';
 
+$lang->task->kanbanGroup['']           = 'Groups';
+$lang->task->kanbanGroup['status']     = 'By Status';
+$lang->task->kanbanGroup['assignedto'] = 'By Assigned';
+
 $lang->task->outlineGroup['']           = 'Choose group';
 $lang->task->outlineGroup['status']     = 'Group by status';
 $lang->task->outlineGroup['assignedto'] = 'Assigned To';

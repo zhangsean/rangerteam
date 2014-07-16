@@ -14,7 +14,7 @@ $lang->project->browse = 'Projects List';
 $lang->project->index  = 'Projects';
 $lang->project->create = 'Create';
 $lang->project->edit   = 'Edit';
-$lang->project->finih  = 'Finish';
+$lang->project->finish = 'Finish';
 $lang->project->delete = 'Delete';
 $lang->project->tasks  = 'Tasks';
 
