@@ -91,3 +91,19 @@ ALTER TABLE `crm_order` ADD `editedDate` datetime NOT NULL;
 
 ALTER TABLE `oa_project` ADD `editedBy` char(30) NOT NULL;
 ALTER TABLE `oa_project` ADD `editedDate` datetime NOT NULL;
+
+INSERT INTO `sys_groupPriv` VALUES
+(1,'project','index'),
+(1,'project','finish'),
+(1,'provider','browse'),
+(1,'provider','create'),
+(1,'provider','edit'),
+(1,'provider','delete'),
+(1,'provider','contact'),
+(1,'provider','linkContact'),
+(1,'provider','view'),
+(1,'customer','assign'),
+(1,'contact','vcard'),
+(2,'trade','batchEdit'),
+(2,'trade','import'),
+(2,'trade','showImport');
