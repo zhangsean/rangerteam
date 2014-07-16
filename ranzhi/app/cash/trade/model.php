@@ -142,9 +142,9 @@ class tradeModel extends model
             $trade->category       = $this->post->category[$key];
             $trade->dept           = $this->post->dept[$key];
             $trade->trader         = $this->post->trader[$key];
-            $trade->createTrader   = zget($this->post->createTrader, $key, null);
+            $trade->createTrader   = isset($this->post->createTrader[$key]) ? $this->post->createTrader[$key] : false;
             $trade->createCustomer = false;
-            $trade->traderName     = $this->post->traderName[$key];
+            $trade->traderName     = isset($this->post->traderName[$key]) ? $this->post->traderName[$key] : '';
             $trade->handlers       = !empty($this->post->handlers[$key]) ? join(',', $this->post->handlers[$key]) : '';
             $trade->date           = $this->post->date[$key];
             $trade->desc           = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags->admin);
