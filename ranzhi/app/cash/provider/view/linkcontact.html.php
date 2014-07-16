@@ -15,11 +15,11 @@
 <form id='linkContactForm' method='post' action='<?php echo inlink('linkContact', "customerID=$providerID")?>'>
   <table class='table table-form'>
       <tr>
-        <th class='w-100px'><?php echo $lang->customer->contact;?></th>
+        <th class='w-100px'><?php echo $lang->provider->contact;?></th>
         <td><?php echo html::select('contact', $contacts, '', "class='form-control chosen'")?> </td>
         <td class='w-120px'>
           <input type='checkbox' name='newContact' value='1' id='newContact' checked />
-          <label for='newContact'><?php echo $lang->customer->newContact?></label>
+          <label for='newContact'><?php echo $lang->provider->newContact?></label>
         </td>
       </tr>
   </table>

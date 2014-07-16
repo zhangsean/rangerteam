@@ -14,7 +14,7 @@
 <div class='row'>
   <div class='col-md-8'>
     <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $provider->name . $lang->customer->desc;?></strong></div>
+      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $provider->name . $lang->provider->desc;?></strong></div>
       <div class='panel-body'><?php echo $provider->desc;?></div>
     </div>
     <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$provider->id}")?>
@@ -32,34 +32,34 @@
   </div>
   <div class='col-md-4'>  
     <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->basicInfo;?></strong></div>
+      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->provider->basicInfo;?></strong></div>
       <table class='table table-info'>
         <tr>
-          <th class='w-50px'><?php echo $lang->customer->size;?></th>
-          <td><?php echo $lang->customer->sizeList[$provider->size];?></td>
+          <th class='w-50px'><?php echo $lang->provider->size;?></th>
+          <td><?php echo $lang->provider->sizeList[$provider->size];?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->type;?></th>
-          <td><?php echo $lang->customer->typeList[$provider->type];?></td>
+          <th><?php echo $lang->provider->type;?></th>
+          <td><?php echo $lang->provider->typeList[$provider->type];?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->industry;?></th>
+          <th><?php echo $lang->provider->industry;?></th>
           <td><?php if($provider->industry) echo $industry[$provider->industry];?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->area;?></th>
+          <th><?php echo $lang->provider->area;?></th>
           <td><?php if($provider->area) echo $area[$provider->area];?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->weibo;?></th>
+          <th><?php echo $lang->provider->weibo;?></th>
           <td><?php echo html::a("$provider->weibo", $provider->weibo, "target='_blank'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->weixin;?></th>
+          <th><?php echo $lang->provider->weixin;?></th>
           <td><?php echo $provider->weixin;?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->site;?></th>
+          <th><?php echo $lang->provider->site;?></th>
           <td><?php echo html::a("$provider->site", $provider->site, "target='_blank'");?></td>
         </tr>
       </table>

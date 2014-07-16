@@ -46,7 +46,7 @@ class provider extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title     = $this->lang->customer->list;
+        $this->view->title     = $this->lang->provider->list;
         $this->view->mode      = $mode;
         $this->view->providers = $this->customer->getList($mode = $mode, $param = $param, $relation = 'provider', $orderBy, $pager);
         $this->view->area      = $this->loadModel('tree')->getOptionMenu('area');
@@ -72,7 +72,7 @@ class provider extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'), 'providerID' => $providerID));
         }
 
-        $this->view->title    = $this->lang->customer->create;
+        $this->view->title    = $this->lang->provider->create;
         $this->view->area     = $this->loadModel('tree')->getOptionMenu('area');
         $this->view->industry = $this->tree->getOptionMenu('industry');
         $this->display();
@@ -104,7 +104,7 @@ class provider extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "providerID=$providerID")));
         }
 
-        $this->view->title    = $this->lang->customer->edit;
+        $this->view->title    = $this->lang->provider->edit;
         $this->view->provider = $provider;
         $this->view->area     = $this->loadModel('tree')->getOptionMenu('area');
         $this->view->industry = $this->tree->getOptionMenu('industry');
@@ -128,7 +128,7 @@ class provider extends control
 
         $this->app->loadLang('resume');
 
-        $this->view->title     = $this->lang->customer->view;
+        $this->view->title     = $this->lang->provider->view;
         $this->view->provider  = $provider;
         $this->view->contacts  = $this->contact->getList($providerID);
         $this->view->actions   = $this->loadModel('action')->getList('customer', $providerID);
@@ -146,7 +146,7 @@ class provider extends control
      */
     public function contact($providerID)
     {
-        $this->view->title      = $this->lang->customer->contact;
+        $this->view->title      = $this->lang->provider->contact;
         $this->view->modalWidth = 800;
         $this->view->contacts   = $this->contact->getList($providerID, 'provider');
         $this->view->providerID = $providerID;
@@ -173,7 +173,7 @@ class provider extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
-        $this->view->title      = $this->lang->customer->linkContact;
+        $this->view->title      = $this->lang->provider->linkContact;
         $this->view->contacts   = $contacts;
         $this->view->providerID = $providerID;
         $this->display();

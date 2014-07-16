@@ -15,49 +15,49 @@
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class="icon-edit"></i> <?php echo $lang->customer->edit;?></strong>
+    <strong><i class="icon-edit"></i> <?php echo $lang->provider->edit;?></strong>
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form w-p60'>
         <tr>
-          <th class='w-80px'><?php echo $lang->customer->name;?></th>
+          <th class='w-80px'><?php echo $lang->provider->name;?></th>
           <td class='w-p40'><?php echo html::input('name', $provider->name, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
-          <th class='w-80px'><?php echo $lang->customer->relation;?></th>
-          <td class='w-p40'><?php echo html::select('relation', $lang->customer->relationList, $provider->relation, "class='form-control'");?></td><td></td>
+          <th class='w-80px'><?php echo $lang->provider->relation;?></th>
+          <td class='w-p40'><?php echo html::select('relation', $lang->provider->relationList, $provider->relation, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->type;?></th>
-          <td><?php echo html::select("type", $lang->customer->typeList, $provider->type, "class='form-control'");?></td>
+          <th><?php echo $lang->provider->type;?></th>
+          <td><?php echo html::select("type", $lang->provider->typeList, $provider->type, "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->size;?></th>
-          <td><?php echo html::select('size', $lang->customer->sizeList, $provider->size, "class='form-control'");?></td>
+          <th><?php echo $lang->provider->size;?></th>
+          <td><?php echo html::select('size', $lang->provider->sizeList, $provider->size, "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->industry;?></th>
+          <th><?php echo $lang->provider->industry;?></th>
           <td><?php echo html::select('industry', $industry, $provider->industry, "class='form-control chosen'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->area;?></th>
+          <th><?php echo $lang->provider->area;?></th>
           <td><?php echo html::select('area', $area,  $provider->area, "class='form-control chosen'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->weibo;?></th>
+          <th><?php echo $lang->provider->weibo;?></th>
           <td><?php echo html::input('weibo', $provider->weibo ? $provider->weibo : 'http://weibo.com/', "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->weixin;?></th>
+          <th><?php echo $lang->provider->weixin;?></th>
           <td><?php echo html::input('weixin', $provider->weixin, "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->site;?></th>
+          <th><?php echo $lang->provider->site;?></th>
           <td><?php echo html::input('site', $provider->site ? $provider->site : 'http://', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
-          <th><?php echo $lang->customer->desc;?></th>
+          <th><?php echo $lang->provider->desc;?></th>
           <td colspan='2'><?php echo html::textarea('desc', $provider->desc, "rows='2' class='form-control'");?></td>
         </tr>
         <tr>
