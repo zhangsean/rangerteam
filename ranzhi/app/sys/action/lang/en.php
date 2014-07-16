@@ -117,11 +117,11 @@ $lang->action->search->objectTypeList['order']       = 'order';
 $lang->action->search->objectTypeList['contract']    = 'contract'; 
 $lang->action->search->objectTypeList['orderAction'] = 'order action'; 
 
-$lang->action->nextContactList[1]  = 'a day';
-$lang->action->nextContactList[2]  = 'tow days';
-$lang->action->nextContactList[3]  = 'three days';
-$lang->action->nextContactList[7]  = 'a week';
-$lang->action->nextContactList[14] = 'two weeks';
+$lang->action->nextContactList[1]  = 'tomorrow';
+$lang->action->nextContactList[2]  = 'the day after tomorrow';
+$lang->action->nextContactList[3]  = 'three days later';
+$lang->action->nextContactList[7]  = 'a week later';
+$lang->action->nextContactList[14] = 'two weeks later';
 
 /* Display action for search. */
 $lang->action->search->label['']            = '';
