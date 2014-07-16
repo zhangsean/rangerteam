@@ -264,8 +264,9 @@
         else if(this.icon.length > 0) this.iconhtml = '<img src="' + this.icon + '" alt="" />';
         else
         {
-            var nameL = this.name.length;
-            this.iconhtml = '<i class="icon icon-default" style="background-color: hsl(' + (this.id*47%360) + ', 100%, 40%)"><span>' + (nameL > 0 ? this.name.slice(0, 1).toUpperCase() : '') + '</span><span class="text-extra">' + (nameL > 1 ? this.name.slice(1, 2).toUpperCase() : '') + '</span></i>';
+            var name = this.abbr || this.name;
+            var nameL = name.length;
+            this.iconhtml = '<i class="icon icon-default" style="background-color: hsl(' + (this.id*47%360) + ', 100%, 40%)"><span>' + (nameL > 0 ? name.slice(0, 1).toUpperCase() : '') + '</span><span class="text-extra">' + (nameL > 1 ? name.slice(1, 2).toUpperCase() : '') + '</span></i>';
         }
 
         /* mark modal with css class */

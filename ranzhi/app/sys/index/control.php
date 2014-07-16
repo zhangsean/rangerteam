@@ -56,6 +56,7 @@ class index extends control
                 position: '$entry->position',
                 menu:     '$menu',
                 display:  'fixed',
+                abbr:     '$entry->abbr',
                 order:    '$entry->order'
             });\n";
         }
