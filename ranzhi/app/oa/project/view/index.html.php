@@ -38,7 +38,7 @@
           </div>
           <div class='panel-body'>
             <div class='text-important'><?php echo $lang->project->begin . $lang->colon . formatTime($project->begin);?> </div>
-            <div class='text-important'><?php echo $lang->project->begin . $lang->colon . formatTime($project->end);?> </div>
+            <div class='text-important'><?php echo $lang->project->end   . $lang->colon . formatTime($project->end);?> </div>
             <div class='info'><?php echo $project->desc;?></div>
           </div>
         </div>
