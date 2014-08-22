@@ -29,7 +29,7 @@
       <?php foreach($details as $key => $detail):?>
       <tr>
         <td><?php echo html::input("money[{$key}]", $detail->money, "class='form-control'")?></td>
-        <td><?php echo html::select("category[{$key}][]", array('') + $categories, $detail->category, "class='form-control chosen'")?></td>
+        <td><?php if(isset($categories)) echo html::select("category[{$key}][]", array('') + $categories, $detail->category, "class='form-control chosen'")?></td>
         <td><?php echo html::select("handlers[{$key}][]", $users, $detail->handlers, "class='form-control chosen' multiple")?></td>
         <td><?php echo html::textarea("desc[{$key}]", $detail->desc, "class='form-control'")?></td>
         <td>
