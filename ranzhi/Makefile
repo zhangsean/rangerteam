@@ -28,6 +28,7 @@ ranzhi:
 	# delete the useless files.
 	find ranzhi -name .svn |xargs rm -fr
 	find ranzhi -name tests |xargs rm -fr
+	for path in `find ranzhi/ -type d`; do touch "$$path/index.php"; done	
 	# change mode.
 	chmod 777 -R ranzhi/tmp/
 	chmod 777 -R ranzhi/www/data
