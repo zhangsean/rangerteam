@@ -32,7 +32,6 @@
           <th class='w-100px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->trade->type);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('trader', $orderBy, $vars, $lang->trade->trader);?></th>
           <th class='w-120px'><?php commonModel::printOrderLink('money', $orderBy, $vars, $lang->trade->money);?></th>
-          <th class='w-80px'><?php commonModel::printOrderLink('currency', $orderBy, $vars, $lang->trade->currency);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->trade->category);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('handlers', $orderBy, $vars, $lang->trade->handlers);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->trade->date);?></th>
@@ -48,9 +47,8 @@
           </td>
           <td><?php echo $depositorList[$trade->depositor];?></td>
           <td><?php echo $lang->trade->typeList[$trade->type];?></td>
-          <td><?php echo zget($customerList, $trade->trader);?></td>
-          <td><?php echo $trade->money;?></td>
-          <td><?php echo zget($lang->order->currencyList, $trade->currency);?></td>
+          <td><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
+          <td><?php echo zget($lang->order->currencySign, $trade->currency) . $trade->money;?></td>
           <td><?php echo zget($categories, $trade->category, ' ');?></td>
           <td><?php echo zget($users, $trade->handlers);?></td>
           <td><?php echo formatTime($trade->date, DT_DATE1);?></td>
