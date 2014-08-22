@@ -91,7 +91,7 @@ class customerModel extends model
      * @access public
      * @return array
      */
-    public function getPairs($relation = 'client', $emptyOption = true)
+    public function getPairs($relation = '', $emptyOption = true)
     {
         $mine = $this->getMine();
         if(empty($mine)) return array();
