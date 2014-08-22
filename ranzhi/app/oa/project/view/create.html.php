@@ -11,25 +11,25 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
+<?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <form method='post' id='ajaxForm' action='<?php echo inlink('create')?>' class='form-inline'>
-  <table class='table-form w-p80'>
+  <table class='table-form w-p90'>
     <tr>
       <th class='w-80px'><?php echo $lang->project->name;?></th>
-      <td class='w-p45'><?php echo html::input('name', '', "class='form-control'");?></td>
-      <td></td>
+      <td><div class='col-xs-7'> <?php echo html::input('name', '', "class='form-control'");?></div></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->begin;?></th>
-      <td><?php echo html::input('begin', '', "class='form-control form-date'");?></td>
+      <td><div class='col-xs-7'> <?php echo html::input('begin', '', "class='form-control form-date'");?> </div> </td>
     </tr>
     <tr>
       <th><?php echo $lang->project->end;?></th>
-      <td><?php echo html::input('end', '', "class='form-control form-date'");?></td>
+      <td><div class='col-xs-7'><?php echo html::input('end', '', "class='form-control form-date'");?></div></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->desc;?></th>
-      <td colspan='2'><?php echo html::textarea('desc', '', "class='form-control' rows='5'");?></td>
+      <td><div class='col-xs-12'><?php echo html::textarea('desc', '', "class='form-control w-p100' rows='5'");?></div></td>
     </tr>
     <tr><th></th><td><?php echo html::submitButton();?></td></tr>
   </table>

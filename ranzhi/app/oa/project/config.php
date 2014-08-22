@@ -15,4 +15,6 @@ $config->project->require->create = 'name';
 $config->project->require->edit   = 'name';
 
 $config->project->editor = new stdclass();
+$config->project->editor->create = array('id' => 'desc', 'tools' => 'simple');
+$config->project->editor->edit   = array('id' => 'desc', 'tools' => 'simple');
 $config->project->editor->finish = array('id' => 'comment', 'tools' => 'simple');
