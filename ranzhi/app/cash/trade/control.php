@@ -158,8 +158,8 @@ class trade extends control
         $this->view->title         = $this->lang->trade->edit;
         $this->view->trade         = $trade;
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client,partner');
-        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider,partner');
+        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider');
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
