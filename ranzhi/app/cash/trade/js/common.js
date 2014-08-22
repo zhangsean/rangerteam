@@ -12,11 +12,13 @@ $(document).ready(function()
         if($(this).prop('checked')) 
         {
             $(this).parents('.input-group').find('select').hide();
+            $('#trader_chosen').hide();
             $(this).parents('.input-group').find('input[type=text]').show().focus();
         }
         else
         {
             $(this).parents('.input-group').find('select').show();
+            $('#trader_chosen').show();
             $(this).parents('.input-group').find('input[type=text]').hide();
         }
     })
