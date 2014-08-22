@@ -24,13 +24,6 @@ $lang->upgrade->confirm       = '确认要执行的SQL语句';
 $lang->upgrade->execute       = '确认执行';
 $lang->upgrade->next          = '下一步';
 
-$lang->upgrade->setOkFile = <<<EOT
-<div class='alert'>
-<h5>请按照下面的步骤操作以确认您的管理员身份。</h5>
-<p>创建 "<code>%s</code>" 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。</p>
-</div>
-EOT;
-
 $lang->upgrade->backupData = <<<EOT
 <pre>
 <strong>使用phpMyAdmin或者mysqldump命令备份数据库。</strong>

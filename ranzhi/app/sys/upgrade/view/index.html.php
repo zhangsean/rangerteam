@@ -15,9 +15,6 @@
     <div class='modal-header'>
       <h3><?php echo $lang->upgrade->index;?></h3>
     </div>
-    <div class='modal-body'>
-      <?php printf($lang->upgrade->setOkFile, $okFile, $okFile, $okFile);?>
-    </div>
     <div class='modal-footer'>
       <?php echo html::a(inlink('backup'), $lang->upgrade->next, "class='btn btn-primary'");?>
     </div>
