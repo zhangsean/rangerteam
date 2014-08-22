@@ -1194,15 +1194,21 @@ class sql
      */
     public function data($data, $skipFields = '')
     {
-        $this->data = $data;
+        $data = (object) $data;
         if($skipFields) $skipFields = ',' . str_replace(' ', '', $skipFields) . ',';
 
         foreach($data as $field => $value)
         {
-            $field = str_replace('`', '', $field);
+            if(!preg_match('|^\w+$|', $field)) 
+            {
+                unset($data->$field);
+                continue;
+            }
             if(strpos($skipFields, ",$field,") !== false) continue;
             $this->sql .= "`$field` = " . $this->quote($value) . ',';
         }
+        $this->data = $data;
+
         $this->sql = rtrim($this->sql, ',');    // Remove the last ','.
         return $this;
     }
