@@ -115,11 +115,12 @@ $lang->action->search->objectTypeList['order']       = '订单';
 $lang->action->search->objectTypeList['contract']    = '合同'; 
 $lang->action->search->objectTypeList['orderAction'] = '动作'; 
 
-$lang->action->nextContactList[1]  = '明天';
-$lang->action->nextContactList[2]  = '后天';
-$lang->action->nextContactList[3]  = '三天后';
-$lang->action->nextContactList[7]  = '一周后';
-$lang->action->nextContactList[14] = '两周后';
+$lang->action->nextContactList[1]      = '明天';
+$lang->action->nextContactList[2]      = '后天';
+$lang->action->nextContactList[3]      = '三天后';
+$lang->action->nextContactList[7]      = '一周后';
+$lang->action->nextContactList[14]     = '两周后';
+$lang->action->nextContactList[365000] = '无需联系';
 
 /* 用来在动态显示中显示动作 */
 $lang->action->search->label['']            = '';

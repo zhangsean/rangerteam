@@ -99,6 +99,7 @@ class action extends control
         }
 
         $this->view->title      = $this->lang->action->record->create;
+        $this->view->modalWidth = 900;
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
         $this->view->customer   = $customer;
