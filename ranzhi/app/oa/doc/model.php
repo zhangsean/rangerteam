@@ -104,6 +104,19 @@ class docModel extends model
     }
 
     /**
+     * Delete a lib.
+     * 
+     * @param  int      $tradeID 
+     * @access public
+     * @return void
+     */
+    public function deleteLib($libID)
+    {
+        $this->dao->delete()->from(TABLE_DOCLIB)->where('id')->eq($libID)->exec();
+        return !dao::isError();
+    }
+
+    /**
      * Get docs.
      * 
      * @param  int|string   $libID 

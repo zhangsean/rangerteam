@@ -179,10 +179,8 @@ class doc extends control
     {
         if($libID == 'product' or $libID == 'project') die();
 
-        $this->doc->delete(TABLE_DOCLIB, $libID);
-        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-
-        $this->send(array('result' => 'success', 'locate' => inlink('browse')));
+        if($this->doc->deleteLib($libID)) $this->send(array('result' => 'success', 'locate' => inlink('browse')));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
     
     /**
