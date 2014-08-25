@@ -179,10 +179,6 @@ $lang->entry->menu = new stdclass();
 $lang->entry->menu->admin  = array('link' => '应用列表|entry|admin|', 'alias' => 'edit');
 $lang->entry->menu->create = '添加应用|entry|create|';
 
-/* Menu of company module. */
-$lang->company->menu = new stdclass();
-$lang->company->menu->basic   = '公司信息|company|setbasic|';
-
 /* Menu system. */
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();

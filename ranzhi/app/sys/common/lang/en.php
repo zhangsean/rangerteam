@@ -179,10 +179,6 @@ $lang->entry->menu = new stdclass();
 $lang->entry->menu->admin  = array('link' => 'Entries|entry|admin|', 'alias' => 'edit');
 $lang->entry->menu->create = array('link' => 'Create|entry|create|');
 
-/* Menu of company module. */
-$lang->company->menu = new stdclass();
-$lang->company->menu->basic   = 'Basic|company|setbasic|';
-
 /* Menu system. */
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
