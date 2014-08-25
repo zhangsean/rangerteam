@@ -22,10 +22,6 @@
           <td style='width:50%'><?php echo html::input('name', isset($this->config->company->name) ? $this->config->company->name : '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
-          <th><?php echo $lang->company->desc;?></th> 
-          <td colspan='2'><?php echo html::textarea('desc',  isset($this->config->company->desc) ? $this->config->company->desc : '', "class='form-control' rows='5'");?></td> 
-        </tr>
-        <tr>
           <th><?php echo $lang->company->content;?></th> 
           <td colspan='2'><?php echo html::textarea('content',  isset($this->config->company->content) ? $this->config->company->content : '', "class='form-control' rows='15'");?></td> 
         </tr>

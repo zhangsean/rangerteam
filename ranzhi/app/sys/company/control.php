@@ -22,10 +22,7 @@ class company extends control
         if(!empty($_POST))
         {
             $now = helper::now();
-            $company = fixer::input('post')
-            ->stripTags('desc', $this->config->allowedTags->admin)
-            ->stripTags('content', $this->config->allowedTags->admin)
-            ->get();
+            $company = fixer::input('post')->stripTags('content', $this->config->allowedTags->admin)->get();
 
             $result = $this->loadModel('setting')->setItems('system.sys.common.company', $company);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
