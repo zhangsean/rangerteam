@@ -53,6 +53,7 @@ CREATE TABLE `crm_contract` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `customer` mediumint(8) unsigned NOT NULL,
   `name` char(100) NOT NULL,
+  `code` char(30) NOT NULL,
   `amount` decimal(12,2) NOT NULL,
   `items` text NOT NULL,
   `begin` date NOT NULL,

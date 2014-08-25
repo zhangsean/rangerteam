@@ -26,6 +26,10 @@
             <th class='w-80px'><?php echo $lang->contract->name;?></th>
             <td colspan='2'><?php echo html::input('name', $contract->name, "class='form-control'");?></td>
           </tr>
+          <tr>
+            <th><?php echo $lang->contract->code;?></th>
+            <td colspan='2'><?php echo html::input('code', $contract->code, "class='form-control'");?></td>
+          </tr>
           <?php foreach($contractOrders as $currentOrder):?>
           <tr>
             <th class='orderTH'><?php echo $lang->contract->order;?></th>

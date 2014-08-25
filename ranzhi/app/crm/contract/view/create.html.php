@@ -62,6 +62,10 @@
           <td class='w-p40'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
+          <th><?php echo $lang->contract->code;?></th>
+          <td><?php echo html::input('code', '', "class='form-control'");?></td><td></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->contract->amount;?></th>
           <td>
             <div class='row'>
