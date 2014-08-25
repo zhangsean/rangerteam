@@ -496,7 +496,7 @@ $.extend(
         {
             var options = 
             {
-                width:      800,
+                width:      null,
                 height:     'auto',
                 icon:       '?',
                 title:      '',
