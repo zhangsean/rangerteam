@@ -31,9 +31,9 @@
         <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->task->id);?></th>
         <th class='w-40px'> <?php commonModel::printOrderLink('pri',         $orderBy, $vars, $lang->task->lblPri);?></th>
         <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->task->name);?></th>
-        <th class='w-150px'><?php commonModel::printOrderLink('deadline',    $orderBy, $vars, $lang->task->deadline);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('deadline',    $orderBy, $vars, $lang->task->deadline);?></th>
         <th class='w-80px'> <?php commonModel::printOrderLink('assignedTo',  $orderBy, $vars, $lang->task->assignedTo);?></th>
-        <th class='w-150px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->task->createdDate);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->task->createdDate);?></th>
         <th class='w-90px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->task->type);?></th>
         <th class='w-90px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->task->status);?></th>
         <th class='w-160px'><?php echo $lang->actions;?></th>
@@ -47,7 +47,7 @@
         <td class='text-left'><?php echo $task->name;?></td>
         <td><?php echo $task->deadline;?></td>
         <td><?php if(isset($users[$task->assignedTo])) echo $users[$task->assignedTo];?></td>
-        <td><?php echo $task->createdDate;?></td>
+        <td><?php echo substr($task->createdDate, 0, 10);?></td>
         <td><?php echo $lang->task->typeList[$task->type];?></td>
         <td><?php echo $lang->task->statusList[$task->status];?></td>
         <td><?php echo $this->task->buildOperateMenu($task);?></td>
