@@ -446,7 +446,7 @@ $.extend(
                 var options = 
                 {
                     url:        url,
-                    width:      $e.data('width') || 800,
+                    width:      $e.data('width') || null,
                     height:     $e.data('height') || 'auto',
                     icon:       $e.data('icon') || '?',
                     title:      $e.data('title') || $e.attr('title') || $e.text(),
