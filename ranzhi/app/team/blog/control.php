@@ -34,11 +34,11 @@ class blog extends control
      * @access public
      * @return void
      */
-    public function index($categoryID = 0, $author = '', $month = '', $tag = '', $pageID = 1)
+    public function index($categoryID = 0, $author = '', $month = '', $tag = '', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         unset($this->lang->blog->menu);
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager(0, 10, $pageID);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $category   = $this->loadModel('tree')->getByID($categoryID, 'blog');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
