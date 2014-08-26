@@ -268,7 +268,7 @@ class user extends control
      */
     public function edit($account = '')
     {
-        if(!$account or RUN_MODE != 'admin') $account = $this->app->user->account;
+        if(!$account or (RUN_MODE != 'admin' and strpos($this->app->getModuleRoot(), 'sys') == false)) $account = $this->app->user->account;
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
         if(empty($account)) $account = $this->app->user->account;
 
@@ -276,7 +276,7 @@ class user extends control
         {
             $this->user->update($account);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $locate = RUN_MODE == 'front' ? inlink('profile') : inlink('admin');
+            $locate = (RUN_MODE == 'front' and strpos($this->app->getModuleRoot(), 'sys') == false) ? inlink('profile') : inlink('admin');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
         }
 
@@ -284,7 +284,7 @@ class user extends control
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptAdminLink'));
         $this->view->depts    = $this->tree->getOptionMenu('dept');
         $this->view->user     = $this->user->getByAccount($account);
-        if(RUN_MODE == 'admin') 
+        if(RUN_MODE == 'admin' or strpos($this->app->getModuleRoot(), 'sys') != false) 
         { 
             $this->display('user', 'edit.admin');
         }
