@@ -55,11 +55,14 @@ class entryModel extends model
      */
     public function create()
     {
+        $maxOrder = $this->dao->select('`order`')->from(TABLE_ENTRY)->orderBy('order_desc')->limit(1)->fetch('order');
+
         $entry = fixer::input('post')
             ->setDefault('ip', '*')
             ->setDefault('visible', 0)
             ->setDefault('buildin', 0)
             ->setDefault('integration', 0)
+            ->setDefault('order', $maxOrder + 10)
             ->setIF($this->post->allip, 'ip', '*')
             ->remove('allip')
             ->get();
