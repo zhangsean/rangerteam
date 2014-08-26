@@ -119,6 +119,20 @@ var entries = new Array(
     order    : 9999999
 });
 
+<?php if($this->app->user->admin == 'super'):?>
+entries.push(
+{
+    id       : 'superadmin',
+    name     : '<?php echo $lang->index->superAdmin;?>',
+    open     : 'blank',
+    desc     : '<?php echo $lang->index->superAdmin?>',
+    menu     : 'all',
+    icon     : 'icon-cog',
+    url      : "<?php echo $this->createLink('admin')?>",
+    order    : 9999998
+});
+<?php endif;?>
+
 var ipsLang = {};
 <?php
 foreach ($lang->index->ips as $key => $value)

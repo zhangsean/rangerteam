@@ -15,6 +15,7 @@ $lang->index->addEntry     = 'Add';
 $lang->index->profile      = 'Profile';
 $lang->index->set          = 'Settings';
 $lang->index->theme        = 'Theme';
+$lang->index->superAdmin   = 'Super admin';
 $lang->index->showDesk     = 'Show Desk';
 $lang->index->customBlocks = 'Custom block';
 $lang->index->addBlock     = 'Add Block';

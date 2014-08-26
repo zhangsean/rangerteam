@@ -163,7 +163,9 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #allAppsList li a.open {background-color:rgba(255,255,255,0.1);}
 #allAppsList li a.open:hover,#allAppsList li a.active:hover, #allAppsList li a.search-selected {background-color:rgba(255,255,255,0.24);}
 #allAppsList li img {width: 48px; height: 48px; margin-right: 10px; box-shadow: 0 1px 1px rgba(0,0,0,0.35); border-radius: 8px}
-#allAppsList li .app-btn > .icon.icon-default {width: 48px; height: 48px; line-height: 48px; text-align: center; font-size: 16px; margin-right: 10px; color: #FFF}
+#allAppsList li .app-btn > .icon {display: inline-block; width: 48px; height: 48px; line-height: 48px; text-align: center; margin-right: 10px; background-color: #555; background-color: rgba(255,255,255,.2); border-radius: 8px}
+#allAppsList li .app-btn:hover > .icon {background-color: rgba(255,255,255,.3);}
+#allAppsList li .app-btn > .icon.icon-default {font-size: 16px; margin-right: 10px; color: #FFF}
 
 /* home */
 #home {padding: 0;}
