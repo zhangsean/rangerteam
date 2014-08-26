@@ -43,7 +43,7 @@
         <?php foreach($trades as $trade):?>
         <tr class='text-center'>
           <td class='text-center'>
-            <label class='checkbox'><input type='checkbox' name='tradeIDList[]' value='<?php echo $trade->id;?>' class='checkbox'/><?php echo $trade->id;?></label>
+          <label class='checkbox-inline'><input type='checkbox' name='tradeIDList[]' value='<?php echo $trade->id;?>'/><?php echo $trade->id;?></label>
           </td>
           <td><?php echo $depositorList[$trade->depositor];?></td>
           <td><?php echo $lang->trade->typeList[$trade->type];?></td>

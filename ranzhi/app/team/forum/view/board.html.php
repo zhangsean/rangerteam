@@ -15,14 +15,14 @@
 <?php js::set('boardID', $boardID);?>
 <div class='row'>
   <div class='col-md-2'>
+    <?php foreach($boards as $parentBoard):?>
     <ul class="nav nav-primary nav-stacked">
-      <?php foreach($boards as $parentBoard):?>
       <li class="nav-heading"><?php echo $parentBoard->name;?></li>
       <?php foreach($parentBoard->children as $childBoard):?>
       <li><?php echo html::a(inlink('board', "id=$childBoard->id"), $childBoard->name, "id='board{$childBoard->id}'");?></li>
       <?php endforeach;?>
-      <?php endforeach;?>
     </ul>
+    <?php endforeach;?>
   </div>
   <div class='col-md-10'>
     <div class='panel'>

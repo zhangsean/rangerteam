@@ -47,6 +47,7 @@ body {background: #fff;font-size:13px;}
 .w-80px {width:80px}
 .w-90px {width:90px}
 .w-100px {width:100px}
+.w-110px {width:110px}
 .w-120px {width:120px}
 .w-130px {width:130px}
 .w-140px {width:140px}
@@ -151,6 +152,7 @@ body.page-actions-fixed {padding-bottom: 70px}
 .dropdown-menu > .active > a:before {content: '\e60d'; font-family: ZenIcon; font-size: 14px; position: absolute; right: 8px; top: 4px; display: block; color: #808080; font-weight: normal;}
 .dropdown-menu .divider {margin: 4px 0}
 .dropdown-submenu.left > .dropdown-menu{left: -100%;}
+.dropdown-menu .divider {margin: 5px 0;}
 
 /* tree */
 .tree {padding: 0; margin: 0;}
@@ -238,7 +240,8 @@ body > form {margin-top: 20px;} /* form behind body */
 .borderless.form-control{border-color: transparent;box-shadow: none;}
 .borderless.form-control:hover,.borderless.form-control:active,.borderless.form-control:focus {border-color: #506EAF; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);}
 
-label.checkbox,input[type='radio']+label{font-weight: normal;}
+label.checkbox, input[type='radio']+label{font-weight: normal;}
+label.checkbox-inline input[type='checkbox'] {position: relative; top: -2px}
 
 .panel-body > form{padding-right: 10px; max-width: 1000px}
 

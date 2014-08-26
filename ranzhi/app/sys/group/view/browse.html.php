@@ -16,21 +16,21 @@
     <strong><i class='icon-group'></i> <?php echo $lang->group->browse;?></strong>
     <span class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), $lang->group->create, "class='btn btn-primary' data-toggle='modal'");?></span>
   </div>
-  <table class='table table-condensed table-hover table-striped'>
+  <table class='table table-hover table-striped'>
     <thead>
       <tr>
        <th class='w-50px'><?php echo $lang->group->id;?></th>
        <th class='w-100px'><?php echo $lang->group->name;?></th>
        <th><?php echo $lang->group->desc;?></th>
        <th class='w-p60'><?php echo $lang->group->users;?></th>
-       <th class='w-180px text-center'><?php echo $lang->actions;?></th>
+       <th class='w-200px text-center'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
     <?php foreach($groups as $group):?>
     <?php $users = implode(' ', $groupUsers[$group->id]);?>
     <tr>
-      <td class='text-right'><?php echo $group->id;?></td>
+      <td class='text-center'><?php echo $group->id;?></td>
       <td><?php echo $group->name;?></td>
       <td><?php echo $group->desc;?></td>
       <td title='<?php echo $users;?>'><?php echo $users;?></td>
