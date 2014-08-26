@@ -218,7 +218,7 @@ class customer extends control
      */
     public function linkContact($customerID)
     {
-        $contacts   = $this->loadModel('contact')->getPairs();
+        $contacts = $this->loadModel('contact')->getPairs();
 
         if($_POST)
         {
