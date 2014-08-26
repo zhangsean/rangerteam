@@ -14,21 +14,21 @@
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <form id='linkContactForm' method='post' action='<?php echo inlink('linkContact', "customerID=$customerID")?>'>
   <table class='table table-form'>
-      <tr>
-        <th class='w-100px'><?php echo $lang->customer->contact;?></th>
-        <td><?php echo html::select('contact', $contacts, '', "class='form-control chosen'")?> </td>
-        <td class='w-120px'>
-          <input type='checkbox' name='newContact' value='1' id='newContact' checked />
-          <label for='newContact'><?php echo $lang->customer->newContact?></label>
-        </td>
-      </tr>
-  </table>
-  <div id='contactInfo' class='hidden'>
-    <table class='table table-form'>
-      <tr>
-        <th class='w-100px'><?php echo $lang->contact->realname;?></th>
-        <td><?php echo html::input('realname', '', "class='form-control'");?></td>
-      </tr>
+    <tr>
+      <th class='w-100px'><?php echo $lang->customer->contact;?></th>
+      <td>
+        <div class='input-group'>
+          <?php echo html::input('realname', '', "class='form-control'");?>
+          <?php echo html::select('contact', $contacts, '', "class='form-control chosen' style='display:none'");?>
+          <span class='input-group-addon'>
+            <label class='checkbox'>
+              <input type='checkbox' name='selectContact' id='selectContact' value='1'/><?php echo $lang->customer->selectContact;?>
+            </label>
+          </span>
+        </div>
+      </td>
+    </tr>
+    <tbody id='contactInfo' class='hidden'>
       <tr>
         <th><?php echo $lang->contact->gender;?></th>
         <td><?php echo html::radio('gender', $lang->contact->genderList, '');?></td>
@@ -49,8 +49,8 @@
         <th><?php echo $lang->contact->qq;?></th>
         <td><?php echo html::input('qq', '', "class='form-control'");?></td>
       </tr>
-    </table>
-  </div>
+    </tbody>
+  </table>
   <p class='text-center'><?php echo html::submitButton() . html::commonButton($lang->goback, 'reloadModal btn')?></p>
 <form>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>
