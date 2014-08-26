@@ -14,7 +14,7 @@
 <?php $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>'; ?>
 <?php js::set('articleID', $article->id);?>
 <?php js::set('categoryID', $category->id);?>
-<div class='col-md-9'>
+<div class='col-md-10'>
   <div class='article'>
     <header>
       <h1><?php echo $article->title;?></h1>

@@ -14,3 +14,4 @@
 <?php css::import($themeRoot . 'default/blog.css');?>
 <?php include '../../../sys/common/view/treeview.html.php';?>
 <div class='row'>
+<?php include 'side.html.php';?>

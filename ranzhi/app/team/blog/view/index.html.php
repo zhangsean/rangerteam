@@ -16,7 +16,7 @@ $path = $category ? array_keys($category->pathNames) : array();
 if(!empty($path))         js::set('path',  $path);
 if(!empty($category->id)) js::set('categoryID', $category->id );
 ?>
-<div class='col-md-9' id='articles'>
+<div class='col-md-10' id='articles'>
   <section>
     <?php foreach($articles as $article):?>
     <?php $url = inlink('view', "id=$article->id");?>
