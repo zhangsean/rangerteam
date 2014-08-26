@@ -53,6 +53,7 @@ $lang->home           = 'Home';
 $lang->welcome        = 'Welcome, <strong>%s</strong>!';
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = 'Today is %s, ';
+$lang->today          = 'Today';
 $lang->aboutUs        = 'About';
 $lang->about          = 'About';
 $lang->link           = 'Links';

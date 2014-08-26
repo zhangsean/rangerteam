@@ -53,6 +53,7 @@ $lang->home           = '首页';
 $lang->welcome        = '欢迎您，<strong>%s</strong>！';
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = '今天是%s，';
+$lang->today          = '今天';
 $lang->aboutUs        = '关于我们';
 $lang->about          = '关于';
 $lang->link           = '友情链接';
