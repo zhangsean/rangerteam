@@ -83,19 +83,23 @@ class balanceModel extends model
     /**
      * Create a balance.
      * 
+     * @param  object    $balance 
      * @access public
      * @return int|bool
      */
-    public function create()
+    public function create($balance = null)
     {
-        $now = helper::now();
-        $depositor = $this->loadModel('depositor')->getByID($this->post->depositor);
+        if(empty($balance))
+        {
+            $now = helper::now();
+            $depositor = $this->loadModel('depositor')->getByID($this->post->depositor);
 
-        $balance = fixer::input('post')
-            ->add('currency', $depositor->currency)
-            ->add('createdBy', $this->app->user->account)
-            ->add('createdDate', $now)
-            ->get();
+            $balance = fixer::input('post')
+                ->add('currency', $depositor->currency)
+                ->add('createdBy', $this->app->user->account)
+                ->add('createdDate', $now)
+                ->get();
+        }
 
         $this->dao->replace(TABLE_BALANCE)
             ->data($balance)

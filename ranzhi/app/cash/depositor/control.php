@@ -167,8 +167,36 @@ class depositor extends control
         $this->view->title         = $this->lang->depositor->check;
         $this->view->selected      = $selected;
         $this->view->depositorList = $this->depositor->getPairs();
-        $this->view->dateOptions   = $this->loadModel('balance')->getDateOptions();
+        $this->view->dateOptions   = (array) $this->loadModel('balance')->getDateOptions();
 
         $this->display();
     } 
+
+    /**
+     * Save checked result as balance.
+     * 
+     * @param  int      $depositor 
+     * @param  float    $money 
+     * @param  int      $date 
+     * @access public
+     * @return void
+     */
+    public function saveResult($depositor, $money, $date)
+    {
+        $depositor = $this->loadModel('depositor')->getByID($depositor);
+        $balance = new stdclass();
+        $balance->depositor   = $depositor->id;
+        $balance->currency    = $depositor->currency;
+        $balance->createdBy   = $this->app->user->account;
+        $balance->createdDate = helper::now();
+        $balance->money       = $money;
+        $balance->date        = date(DT_DATE1, $date);
+
+        $this->loadModel('balance')->create($balance);
+        if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+        $this->loadModel('action')->create('depositor', $this->post->depositor, 'CreatedBalance', $this->post->date . ':'  . $this->post->money . $this->post->currency);
+
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+    }
 }

@@ -26,15 +26,16 @@ $lang->depositor->createdDate     = '添加时间';
 $lang->depositor->editedBy        = '由谁编辑';
 $lang->depositor->editedDate      = '编辑时间';
 
-$lang->depositor->all      = '所有账号';
-$lang->depositor->create   = '添加帐号';
-$lang->depositor->browse   = '浏览账号';
-$lang->depositor->edit     = '编辑帐号';
-$lang->depositor->delete   = '删除帐号';
-$lang->depositor->view     = '帐号详情';
-$lang->depositor->forbid   = '禁用';
-$lang->depositor->activate = '激活';
-$lang->depositor->balance  = '余额';
+$lang->depositor->all         = '所有账号';
+$lang->depositor->create      = '添加帐号';
+$lang->depositor->browse      = '浏览账号';
+$lang->depositor->edit        = '编辑帐号';
+$lang->depositor->delete      = '删除帐号';
+$lang->depositor->view        = '帐号详情';
+$lang->depositor->forbid      = '禁用';
+$lang->depositor->activate    = '激活';
+$lang->depositor->balance     = '余额';
+$lang->depositor->saveBalance = '保存余额';
 
 $lang->depositor->check         = '对账';
 $lang->depositor->start         = '开始日期';
