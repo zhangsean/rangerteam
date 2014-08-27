@@ -66,7 +66,7 @@
         <?php if($diff < 0):?>
         <td><?php printf($lang->depositor->less, $diff);?></td>
         <?php endif;?>
-        <td><?php echo html::a(inlink('saveResult', "depositor={$depositorID}&mony={$result->computed}&date=" . strtotime($this->post->end)), $lang->depositor->saveBalance, "class='btn-save-result'");?></td>
+        <td><?php echo html::a(inlink('saveBalance', "depositor={$depositorID}&mony={$result->computed}&date=" . strtotime($this->post->end)), $lang->depositor->saveBalance, "class='btn-save-result'");?></td>
       </tr>
       <?php endforeach;?>
     </tbody>

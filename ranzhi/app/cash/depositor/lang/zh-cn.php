@@ -35,7 +35,7 @@ $lang->depositor->view        = '帐号详情';
 $lang->depositor->forbid      = '禁用';
 $lang->depositor->activate    = '激活';
 $lang->depositor->balance     = '余额';
-$lang->depositor->saveBalance = '保存余额';
+$lang->depositor->saveBalance = '登记余额';
 
 $lang->depositor->check         = '对账';
 $lang->depositor->start         = '开始日期';

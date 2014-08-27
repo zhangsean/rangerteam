@@ -181,7 +181,7 @@ class depositor extends control
      * @access public
      * @return void
      */
-    public function saveResult($depositor, $money, $date)
+    public function saveBalance($depositor, $money, $date)
     {
         $depositor = $this->loadModel('depositor')->getByID($depositor);
         $balance = new stdclass();
