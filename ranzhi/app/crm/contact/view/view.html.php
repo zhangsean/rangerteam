@@ -86,8 +86,11 @@
             <?php foreach($config->contact->contactWayList as $item):?>
             <?php if(!empty($contact->{$item})):?>
               <dd>
-              <span><?php echo $lang->contact->{$item};?></span>
-              <?php echo $contact->{$item};?></dd>
+                <span><?php echo $lang->contact->{$item};?></span>
+                <?php if($item == 'qq') echo html::a("http://wpa.qq.com/msgrd?v=3&uin={$contact->$item}&site={$config->company->name}&menu=yes", $contact->$item);?>
+                <?php if($item == 'email') echo html::mailto($contact->{$item}, $contact->{$item});?>
+                <?php if($item != 'qq' and $item != 'email') echo $contact->{$item};?>
+              </dd>
             <?php endif;?>
             <?php endforeach;?>
             </dl>

@@ -28,8 +28,8 @@
         </div>
         <div class='contact-info'>
           <?php if($contact->phone or $contact->mobile) echo "<div><i class='icon-phone-sign'></i> $contact->phone $contact->mobile</div>";?>
-          <?php if($contact->qq) echo "<div class='f-14'><i class='icon-qq'></i> $contact->qq</div>";?>
-          <?php if($contact->email) echo "<div class='f-14'><i class='icon-envelope-alt'></i> $contact->email </div>";?>
+          <?php if($contact->qq) echo "<div class='f-14'><i class='icon-qq'></i> " . html::a("http://wpa.qq.com/msgrd?v=3&uin={$contact->qq}&site={$config->company->name}&menu=yes", $contact->qq) . "</div>";?>
+          <?php if($contact->email) echo "<div class='f-14'><i class='icon-envelope-alt'></i> " . html::mailto($contact->email, $contact->email) . "</div>";?>
         </div>
         <p class='vcard text-center'><?php echo html::image(helper::createLink('contact', 'vcard', "contactID={$contact->id}"), "style='height:120px'");?></p>
       </td>
