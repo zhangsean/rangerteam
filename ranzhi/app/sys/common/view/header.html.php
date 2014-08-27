@@ -20,11 +20,19 @@
       <span class='icon-bar'></span>
       <span class='icon-bar'></span>
     </button>
-    <?php echo html::a($this->createLink($this->config->default->module), (RUN_MODE == 'front' and isset($lang->app)) ? $lang->app->name : $lang->ranzhi, "class='navbar-brand'");?>
+    <?php
+    if(isset($lang->app))
+    {
+        echo html::a($this->createLink($this->config->default->module), $lang->app->name, "class='navbar-brand'");
+    }
+    else
+    {
+        echo html::a('', $lang->ranzhi, "class='navbar-brand'");
+    }
+    ?>
   </div>
   <div class='collapse navbar-collapse'>
     <?php echo commonModel::createMainMenu($this->moduleName);?>
-    <?php if(RUN_MODE == 'admin') echo commonModel::createManagerMenu();?>
   </div>
 </nav>
 <?php 
