@@ -124,7 +124,7 @@ entries.push(
 {
     id       : 'superadmin',
     name     : '<?php echo $lang->index->superAdmin;?>',
-    open     : 'blank',
+    open     : 'iframe',
     desc     : '<?php echo $lang->index->superAdmin?>',
     menu     : 'all',
     icon     : 'icon-cog',
