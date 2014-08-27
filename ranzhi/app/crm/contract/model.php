@@ -42,11 +42,16 @@ class contractModel extends model
      * @access public
      * @return array
      */
-    public function getList($customer = 0, $orderBy = 'id_desc', $pager = null)
+    public function getList($customer = 0, $mode = 'all', $orderBy = 'id_desc', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('deleted')->eq(0)
             ->beginIF($customer)->andWhere('customer')->eq($customer)->fi()
+            ->beginIF($mode == 'unreceived')->andWhere('`return`')->ne('done')->fi()
+            ->beginIF($mode == 'undeliveried')->andWhere('`delivery`')->ne('done')->fi()
+            ->beginIF($mode == 'canceled')->andWhere('`status`')->eq('canceled')->fi()
+            ->beginIF($mode == 'finished')->andWhere('`status`')->eq('closed')->fi()
+            ->beginIF($mode == 'expired')->andWhere('`end`')->lt(date(DT_DATE1))->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll();

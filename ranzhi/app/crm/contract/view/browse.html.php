@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php js::set('mode', $mode);?>
 <div class='panel'>
   <div class='panel-heading'>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->contract->list;?></strong>

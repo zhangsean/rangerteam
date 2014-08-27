@@ -16,4 +16,7 @@ $(document).ready(function()
         $('#amount').val(amount);
         $('#currency').val($('.order-real:first').parent().parent().prev('span').find('select').find('option:selected').attr('data-currency'));
     });
+
+    $('.leftmenu li').removeClass('active').find('[href*=' + v.mode + ']').parent().addClass('active');
+    $('.leftmenu li').find('[href*=' + v.mode + ']').parent().addClass('active');
 })

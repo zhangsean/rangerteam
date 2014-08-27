@@ -47,19 +47,20 @@ class contract extends control
      * @access public
      * @return void
      */
-    public function browse($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'all', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         /* Save session for return link. */
         $this->session->set('contractList', $this->app->getURI(true));
-        $this->session->set('orderList',    '');
+        $this->session->set('orderList', '');
 
         $this->view->title     = $this->lang->contract->browse;
-        $this->view->contracts = $this->contract->getList(0, $orderBy, $pager);
+        $this->view->contracts = $this->contract->getList(0, $mode, $orderBy, $pager);
         $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->view->pager     = $pager;
+        $this->view->mode      = $mode;
         $this->view->orderBy   = $orderBy;
 
         $this->display();

@@ -56,7 +56,12 @@ $lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> 联
 /* Menu of contract module. */
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
-$lang->contract->menu->browse = array('link' => '<i class="icon-th-list"></i> 合同列表|contract|browse|', 'alias' => 'create,edit,view');
+$lang->contract->menu->browse       = array('link' => '合同列表|contract|browse|mode=all', 'alias' => 'create,edit,view');
+$lang->contract->menu->unreceived   = array('link' => '未回款|contract|browse|mode=unreceived',   'alias' => 'create,edit,view,history');
+$lang->contract->menu->undeliveried = array('link' => '未交付|contract|browse|mode=undeliveried', 'alias' => 'create,edit,view,history');
+$lang->contract->menu->finished     = array('link' => '已完成|contract|browse|mode=finished',   'alias' => 'create,edit,view,history');
+$lang->contract->menu->canceled     = array('link' => '已取消|contract|browse|mode=canceled',   'alias' => 'create,edit,view,history');
+$lang->contract->menu->expired      = array('link' => '已过期|contract|browse|mode=expired',   'alias' => 'create,edit,view,history');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();
