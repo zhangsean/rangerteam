@@ -315,6 +315,13 @@ class tradeModel extends model
         return false;
     }
 
+    /**
+     * Save imported trades. 
+     * 
+     * @param  int    $depositorID 
+     * @access public
+     * @return void
+     */
     public function saveImport($depositorID)
     {
         $now       = helper::now();
@@ -383,18 +390,20 @@ class tradeModel extends model
                 }
                 else
                 {
-                    $data = new stdclass();
-                    $data->relation    = 'client';
-                    $data->name        = $trade->customerName;
-                    $data->level       = 0;
-                    $data->createdBy   = $this->app->user->account;
-                    $data->createdDate = $now;
+                    $customer = new stdclass();
+                    $customer->relation    = 'client';
+                    $customer->name        = $trade->customerName;
+                    $customer->level       = 0;
+                    $customer->status      = 'payed';
+                    $customer->intension   = $trade->desc;
+                    $customer->createdBy   = $this->app->user->account;
+                    $customer->createdDate = $now;
 
-                    $this->dao->insert(TABLE_CUSTOMER)->data($data)->exec();
+                    $this->dao->insert(TABLE_CUSTOMER)->data($customer)->exec();
                     $trade->trader = $this->dao->lastInsertID();
                     $this->action->create('customer', $trade->trader, 'Created');
 
-                    $newCustomer[$data->name] = $trade->trader;
+                    $newCustomer[$customer->name] = $trade->trader;
                 }
             }
 
