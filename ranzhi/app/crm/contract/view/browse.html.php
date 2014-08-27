@@ -33,7 +33,7 @@
     </thead>
     <tbody>
       <?php foreach($contracts as $contract):?>
-      <tr class='text-center <?php echo "contract-{$contract->status}";?>' data-url='<?php echo inlink('view', "contractID=$contract->id"); ?>'>
+      <tr class='text-center' data-url='<?php echo inlink('view', "contractID=$contract->id"); ?>'>
         <td><?php echo $contract->id;?></td>
         <td class='text-left'><?php echo $contract->name;?></td>
         <td><?php if(isset($customers[$contract->customer])) echo $customers[$contract->customer];?></td>
@@ -46,7 +46,7 @@
         <td><?php echo substr($contract->createdDate, 0, 10);?></td>
         <td><?php echo $lang->contract->returnList[$contract->return];?></td>
         <td><?php echo $lang->contract->deliveryList[$contract->delivery];?></td>
-        <td><?php echo $lang->contract->statusList[$contract->status];?></td>
+        <td class='<?php echo "contract-{$contract->status}";?>'><?php echo $lang->contract->statusList[$contract->status];?></td>
         <td><?php echo $this->contract->buildOperateMenu($contract) ?></td>
       </tr>
       <?php endforeach;?>

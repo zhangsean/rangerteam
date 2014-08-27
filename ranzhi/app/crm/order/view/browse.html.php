@@ -36,7 +36,7 @@
     <tbody>
       <?php if(!empty($orders)) foreach($orders as $order):?>
       <?php $status = $order->status != 'closed' ? "order-{$order->status}" : "order-{$order->closedReason}"?>
-      <tr class='text-center <?php echo $status;?>' data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id");?>'>
+      <tr class='text-center' data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id");?>'>
         <td><?php echo $order->id;?></td>
         <td><?php echo $lang->customer->levelNameList[$order->level];?></td>
         <td class='text-left'><?php echo $order->customerName;?></td>
@@ -48,7 +48,7 @@
           ?>
         </td>
         <td><?php if(isset($users[$order->assignedTo])) echo $users[$order->assignedTo];?></td>
-        <td>
+        <td class="<?php echo $status;?>">
           <?php if($order->status != 'closed') echo isset($lang->order->statusList[$order->status]) ? $lang->order->statusList[$order->status] : $order->status;?>
           <?php if($order->status == 'closed') echo $lang->order->closedReasonList[$order->closedReason];?>
         </td>

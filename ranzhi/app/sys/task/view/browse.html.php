@@ -41,7 +41,7 @@
     </thead>
     <tbody>
       <?php foreach($tasks as $task):?>
-      <tr class='text-center <?php echo "task-{$task->status}";?>' data-url='<?php echo $this->createLink('task', 'view', "taskID=$task->id"); ?>'>
+      <tr class='text-center' data-url='<?php echo $this->createLink('task', 'view', "taskID=$task->id"); ?>'>
         <td><?php echo $task->id;?></td>
         <td><span class='active pri pri-<?php echo $task->pri; ?>'><?php echo $lang->task->priList[$task->pri];?></span></td>
         <td class='text-left'><?php echo $task->name;?></td>
@@ -49,7 +49,7 @@
         <td><?php if(isset($users[$task->assignedTo])) echo $users[$task->assignedTo];?></td>
         <td><?php echo substr($task->createdDate, 0, 10);?></td>
         <td><?php echo $lang->task->typeList[$task->type];?></td>
-        <td><?php echo $lang->task->statusList[$task->status];?></td>
+        <td class='<?php echo "task-{$task->status}";?>'><?php echo $lang->task->statusList[$task->status];?></td>
         <td><?php echo $this->task->buildOperateMenu($task);?></td>
       </tr>
       <?php endforeach;?>
