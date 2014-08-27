@@ -26,6 +26,7 @@ $themeRoot = $webRoot . "theme/";
 
   js::exportConfigVars();
   if(isset($this->app->entry->id)) js::set('entryID', $this->app->entry->id);
+  if(!isset($this->app->entry->id) and ($this->app->user->admin == 'super')) js::set('entryID', 'superadmin');
   if($config->debug)
   {
       js::import($jsRoot . 'jquery/min.js');
