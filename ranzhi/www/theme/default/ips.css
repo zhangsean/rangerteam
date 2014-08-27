@@ -65,6 +65,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #taskbar .bar-menu li .actions button.close-win:hover{background-color: #dd1111;}
 #bottomBar .bar-menu > li > button > img {width: 20px; height: 20px; margin-right: 5px; margin-top: -2px;}
 #bottomBar .bar-menu > li > button[class*=' icon-'] {font-size: 20px;}
+#bottomBar .bar-menu > li > button > .icon {width: 20px; line-height: 20px; text-align: center; margin-right: 5px; min-width: 20px; font-size: 14px; border-radius: 4px; font-weight: normal;}
 #bottomBar .bar-menu > li > button > .icon.icon-default {width: 20px; line-height: 20px; text-align: center; margin-right: 5px; min-width: 20px; font-size: 12px; border-radius: 4px}
 #bottomBar .bar-menu > li > button > .icon.icon-default .text-extra {display: none}
 

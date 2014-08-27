@@ -6,7 +6,13 @@
  */
 (function()
 {
-    if(config && config.currentModule != 'index' && !(config.currentModule == 'user' && config.appName == 'sys') && config.currentModule != 'entry' && (!self.frameElement || self.frameElement.tagName != 'IFRAME') && typeof v != 'undefined' && typeof v.entryID != 'undefined' && v.entryID != '') window.location.href = '/sys/index.php?entryID=' + v.entryID + '&entryUrl=' + window.location.pathname;
+    var redirect = function()
+    {
+        if(config && config.currentModule != 'index' && !(config.currentModule == 'user' && config.appName == 'sys') && config.currentModule != 'entry' && (!self.frameElement || self.frameElement.tagName != 'IFRAME') && typeof v != 'undefined' && typeof v.entryID != 'undefined' && v.entryID != '') window.location.href = '/sys/index.php?entryID=' + v.entryID + '&entryUrl=' + window.location.pathname;
+    };
+
+    redirect();
+    $(redirect);
 }());
 
 $.extend(
