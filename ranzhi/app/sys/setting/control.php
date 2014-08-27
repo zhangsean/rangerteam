@@ -30,7 +30,7 @@ class setting extends control
 
         if(!empty($_POST))
         {
-            $lang        = $_POST['lang'];
+            $lang = $_POST['lang'];
             $appendField = isset($this->config->setting->appendLang[$module][$field]) ? $this->config->setting->appendLang[$module][$field] : '';
 
             $this->setting->deleteItems("lang=$lang&app=$appName&module=$module&section=$field", $type = 'lang');
@@ -38,7 +38,7 @@ class setting extends control
 
             foreach($_POST['keys'] as $index => $key)
             {   
-                $value  = $_POST['values'][$index];
+                $value = $_POST['values'][$index];
                 if(!$value or !$key) continue;
                 $system = $_POST['systems'][$index];
                 $this->setting->setItem("{$lang}.{$appName}.{$module}.{$field}.{$key}.{$system}", $value, $type = 'lang');

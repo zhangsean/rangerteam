@@ -52,7 +52,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->customer->size;?></th>
-          <td><?php echo html::select('size', $lang->customer->sizeList, '', "class='form-control'");?></td>
+          <td><?php echo html::select('size', $sizeList, '', "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->customer->status;?></th>
@@ -60,7 +60,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->customer->level;?></th>
-          <td><?php echo html::select('level', $lang->customer->levelList, 0, "class='form-control'");?></td>
+          <td><?php echo html::select('level', $levelList, 0, "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->customer->intension;?></th>

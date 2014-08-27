@@ -75,6 +75,8 @@ class contact extends control
         $this->view->title     = $this->lang->contact->create;
         $this->view->customer  = $customer;
         $this->view->customers = $this->loadModel('customer')->getPairs('client');
+        $this->view->sizeList  = $this->customer->combineSizeList();
+        $this->view->levelList = $this->customer->combineLevelList();
         $this->display();
     }
 

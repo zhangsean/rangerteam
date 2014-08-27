@@ -55,6 +55,8 @@ class resume extends control
         $this->view->title     = $this->lang->resume->create;
         $this->view->customers = $customers;
         $this->view->contactID = $contactID;
+        $this->view->sizeList  = $this->customer->combineSizeList();
+        $this->view->levelList = $this->customer->combineLevelList();
         $this->display();
     }
 

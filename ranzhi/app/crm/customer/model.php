@@ -267,4 +267,38 @@ class customerModel extends model
 
         return false;
     }
+
+    /**
+     * Combine sizeList for customer.
+     * 
+     * @access public
+     * @return array
+     */
+    public function combineSizeList()
+    {
+        $sizeList = array();
+        foreach($this->lang->customer->sizeNameList as $key => $sizeName)
+        {
+            $sizeList[$key] = $sizeName . '(' . $this->lang->customer->sizeNoteList[$key] . ')';
+            if(empty($sizeName)) $sizeList[$key] = '';
+        }
+        return $sizeList;
+    }
+
+    /**
+     * Combine levelList for customer.
+     * 
+     * @access public
+     * @return array
+     */
+    public function combineLevelList()
+    {
+        $levelList = array();
+        foreach($this->lang->customer->levelNameList as $key => $levelName)
+        {
+            $levelList[$key] = $levelName . '(' . $this->lang->customer->levelNoteList[$key] . ')';
+            if(empty($levelName)) $levelList[$key] = '';
+        }
+        return $levelList;
+    }
 }

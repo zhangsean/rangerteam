@@ -19,7 +19,7 @@
     <table class='table table-condensed'>
       <tr>
         <th class='w-150px text-center'><?php echo $lang->setting->key;?></th>
-        <th class='w-300px'><?php echo $lang->setting->value;?></th>
+        <th class='w-400px'><?php echo $lang->setting->value;?></th>
         <th></th>
       </tr>
       <?php foreach($fieldList as $key => $value):?>
@@ -32,6 +32,12 @@
             <?php if($module == 'order' and $field == 'currencyList'):?>
             <span class="input-group-addon fix-border fix-padding"></span>
             <?php echo html::input("currencySign[]", $lang->order->currencySign[$key], "class='form-control' size='2'");?>
+            <?php elseif($module == 'customer' and $field == 'sizeNameList'):?>
+            <span class="input-group-addon fix-border fix-padding"></span>
+            <?php echo html::input("sizeNoteList[]", $lang->customer->sizeNoteList[$key], "class='form-control' size='75'");?>
+            <?php elseif($module == 'customer' and $field == 'levelNameList'):?>
+            <span class="input-group-addon fix-border fix-padding"></span>
+            <?php echo html::input("levelNoteList[]", $lang->customer->levelNoteList[$key], "class='form-control' size='75'");?>
             <?php endif;?>
           </div>
         </td>

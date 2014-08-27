@@ -45,7 +45,7 @@
         <table class='table table-info'>
           <tr>
             <th class='w-70px'><?php echo $lang->customer->level;?></th>
-            <td><?php if($customer->level) echo $lang->customer->levelList[$customer->level];?></td>
+            <td><?php if($customer->level) echo $lang->customer->levelNameList[$customer->level];?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->status;?></th>
@@ -53,7 +53,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->customer->size;?></th>
-            <td><?php echo $lang->customer->sizeList[$customer->size];?></td>
+            <td><?php echo $lang->customer->sizeNameList[$customer->size];?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->type;?></th>

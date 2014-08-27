@@ -52,7 +52,7 @@
            <table class='table table-info'>
              <tr>
                <th class='w-70px'><?php echo $lang->customer->level;?></th>
-               <td><?php echo html::select('level', $lang->customer->levelList, $customer->level, "class='form-control'");?></td>
+               <td><?php echo html::select('level', $levelList, $customer->level, "class='form-control'");?></td>
              </tr>
              <tr>
                <th><?php echo $lang->customer->status;?></th>
@@ -60,7 +60,7 @@
              </tr>
              <tr>
                <th><?php echo $lang->customer->size;?></th>
-               <td><?php echo html::select('size', $lang->customer->sizeList, $customer->size, "class='form-control'");?></td>
+               <td><?php echo html::select('size', $sizeList, $customer->size, "class='form-control'");?></td>
              </tr>
              <tr>
                <th><?php echo $lang->customer->type;?></th>

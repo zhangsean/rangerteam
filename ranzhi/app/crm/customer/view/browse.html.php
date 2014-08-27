@@ -25,7 +25,7 @@
         <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->customer->name);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('level',       $orderBy, $vars, $lang->customer->level);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->customer->status);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('size',        $orderBy, $vars, $lang->customer->size);?></th>
+        <th class='w-60px'><?php commonModel::printOrderLink('size',         $orderBy, $vars, $lang->customer->size);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->customer->type);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('contactDate', $orderBy, $vars, $lang->customer->contactDate);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('nextDate',    $orderBy, $vars, $lang->customer->nextDate);?></th>
@@ -38,9 +38,9 @@
       <tr class='text-center <?php echo "customer-{$customer->status}";?>' data-url='<?php echo $this->createLink('customer', 'view', "customerID=$customer->id"); ?>'>
         <td><?php echo $customer->id;?></td>
         <td class='text-left'><?php echo $customer->name;?></td>
-        <td><?php echo isset($lang->customer->levelList[$customer->level]) ? $lang->customer->levelList[$customer->level] : '';?></td>
+        <td><?php echo isset($lang->customer->levelNameList[$customer->level]) ? $lang->customer->levelNameList[$customer->level] : '';?></td>
         <td><?php if($customer->status) echo $lang->customer->statusList[$customer->status];?></td>
-        <td><?php echo $lang->customer->sizeList[$customer->size];?></td>
+        <td><?php echo $lang->customer->sizeNameList[$customer->size];?></td>
         <td><?php echo $lang->customer->typeList[$customer->type];?></td>
         <td><?php echo formatTime($customer->contactedDate, DT_DATE1);?></td>
         <td><?php echo formatTime($customer->nextDate);?></td>

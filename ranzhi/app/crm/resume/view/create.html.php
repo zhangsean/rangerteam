@@ -35,7 +35,7 @@
     </tr>
     <tr class='customerInfo hidden'>
       <th><?php echo $lang->customer->size;?></th>
-      <td><?php echo html::select('size', $lang->customer->sizeList, '', "class='form-control'");?></td>
+      <td><?php echo html::select('size', $sizeList, '', "class='form-control'");?></td>
     </tr>
     <tr class='customerInfo hidden'>
       <th><?php echo $lang->customer->status;?></th>
@@ -43,7 +43,7 @@
     </tr>
     <tr class='customerInfo hidden'>
       <th><?php echo $lang->customer->level;?></th>
-      <td><?php echo html::select('level', $lang->customer->levelList, '', "class='form-control'");?></td>
+      <td><?php echo html::select('level', $levelList, '', "class='form-control'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->resume->maker?></th>

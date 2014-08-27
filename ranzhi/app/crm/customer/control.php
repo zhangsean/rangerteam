@@ -82,7 +82,9 @@ class customer extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'), 'customerID' => $customerID));
         }
 
-        $this->view->title = $this->lang->customer->create;
+        $this->view->title     = $this->lang->customer->create;
+        $this->view->sizeList  = $this->customer->combineSizeList();
+        $this->view->levelList = $this->customer->combineLevelList();
         $this->display();
     }
 
@@ -112,10 +114,12 @@ class customer extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "customerID=$customerID")));
         }
 
-        $this->view->title    = $this->lang->customer->edit;
-        $this->view->customer = $customer;
-        $this->view->area     = $this->loadModel('tree')->getOptionMenu('area');
-        $this->view->industry = $this->tree->getOptionMenu('industry');
+        $this->view->title     = $this->lang->customer->edit;
+        $this->view->customer  = $customer;
+        $this->view->area      = $this->loadModel('tree')->getOptionMenu('area');
+        $this->view->industry  = $this->tree->getOptionMenu('industry');
+        $this->view->sizeList  = $this->customer->combineSizeList();
+        $this->view->levelList = $this->customer->combineLevelList();
 
         $this->display();
     }
