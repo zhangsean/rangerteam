@@ -28,7 +28,11 @@ js::set('moduleID', $moduleID);
 <div class='col-md-12'>
 <?php if(strpos($treeMenu, '<li>') !== false):?>
 <div class='row'>
+  <?php if($moduleMenu):?>
   <div class='col-md-4'>
+  <?php else:?>
+  <div class='col-md-3'>
+  <?php endif;?>
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $lang->category->common;?></strong></div>
       <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu;?></div></div>
