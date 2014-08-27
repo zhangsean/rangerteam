@@ -395,15 +395,15 @@ EOT;
      */
     public function createAdmin()
     {
-        if($this->post->password == '') die(js::error($this->lang->install->errorEmptyPassword));
-
         $join  = helper::now();
         $admin = new stdclass();
-        $admin->account  = $this->post->account;
-        $admin->realname = $this->post->account;
-        $admin->password = $this->loadModel('user')->createPassword($this->post->password, $admin->account);
-        $admin->admin    = 'super';
-        $admin->join     = $join;
-        $this->dao->insert(TABLE_USER)->data($admin)->autoCheck()->check('account', 'notempty')->exec();
+        $admin->account   = $this->post->account;
+        $admin->realname  = $this->post->account;
+        $admin->password  = $this->loadModel('user')->createPassword($this->post->password, $admin->account);
+        $admin->password1 = $this->post->password; 
+        $admin->admin     = 'super';
+        $admin->join      = $join;
+        $this->lang->user->password1 = $this->lang->user->password;
+        $this->dao->insert(TABLE_USER)->data($admin, $skip = 'password1')->autoCheck()->batchCheck('account,password1', 'notempty')->check('account', 'account')->exec();
     }
 }

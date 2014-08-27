@@ -13,7 +13,7 @@ include '../../common/view/header.lite.html.php';
 ?>
 <div class='container'>
   <div class='modal-dialog' style='width: 450px'>
-    <form method='post' class='form-horizontal'>
+    <form method='post' class='form-horizontal' id='adminForm'>
       <div class='modal-content'>
       <?php if(isset($error)):?>
         <div class='modal-header'><strong><?php echo $lang->install->error;?></strong></div>
@@ -30,7 +30,7 @@ include '../../common/view/header.lite.html.php';
           </div>
           <div class='form-group'>
             <label for='password' class='col-xs-2 control-label'><?php echo $lang->install->password;?></label>
-            <div class='col-xs-8'><?php echo html::input('password', '', "class='form-control'");?></div>
+            <div class='col-xs-8'><?php echo html::input('password', '', "class='form-control' id='password1'");?></div>
           </div>
         </div>
         <div class='modal-footer'><?php echo html::submitButton();?></div>

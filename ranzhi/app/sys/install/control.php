@@ -115,9 +115,11 @@ class install extends control
         {
             $this->install->installEntry();
             $this->install->createAdmin();
-            if(dao::isError()) die(js::error(dao::getError()));
+
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError() ));
             $this->loadModel('setting')->updateVersion($this->config->version);
-            die(js::locate(inlink('step5', "admin={$this->post->account}"), 'parent'));
+            
+            $this->send(array('result' => 'success', 'locate' => inlink('step5', "admin={$this->post->account}")));
         }
 
         if(!isset($this->config->installed) or !$this->config->installed)
