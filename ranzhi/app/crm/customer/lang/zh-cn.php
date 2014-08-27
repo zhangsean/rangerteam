@@ -67,18 +67,31 @@ $lang->customer->statusList['intension'] = '意向';
 $lang->customer->statusList['payed']     = '已付款';
 $lang->customer->statusList['failed']    = '失败';
 
-$lang->customer->sizeList[0] = '';
-$lang->customer->sizeList[1] = '大型(100人以上)';
-$lang->customer->sizeList[2] = '中型(50-100人)';
-$lang->customer->sizeList[3] = '小型(10人-50人)';
-$lang->customer->sizeList[4] = '微型(10人以下)';
+$lang->customer->sizeNameList[0] = '';
+$lang->customer->sizeNameList[1] = '大型';
+$lang->customer->sizeNameList[2] = '中型';
+$lang->customer->sizeNameList[3] = '小型';
+$lang->customer->sizeNameList[4] = '微型';
 
-$lang->customer->levelList[]    = '';
-$lang->customer->levelList['A'] = 'A';
-$lang->customer->levelList['B'] = 'B';
-$lang->customer->levelList['C'] = 'C';
-$lang->customer->levelList['D'] = 'D';
-$lang->customer->levelList['E'] = 'E';
+$lang->customer->sizeNoteList[0] = '';
+$lang->customer->sizeNoteList[1] = '100人以上';
+$lang->customer->sizeNoteList[2] = '50-100人';
+$lang->customer->sizeNoteList[3] = '10-50人';
+$lang->customer->sizeNoteList[4] = '10人以下';
+
+$lang->customer->levelNameList[]    = '';
+$lang->customer->levelNameList['A'] = 'A';
+$lang->customer->levelNameList['B'] = 'B';
+$lang->customer->levelNameList['C'] = 'C';
+$lang->customer->levelNameList['D'] = 'D';
+$lang->customer->levelNameList['E'] = 'E';
+
+$lang->customer->levelNoteList[]    = '';
+$lang->customer->levelNoteList['A'] = '有明显的业务需求，预计一个月内成交';
+$lang->customer->levelNoteList['B'] = '有明显的业务需求，预计三个月内成交';
+$lang->customer->levelNoteList['C'] = '有明显的业务需求，预计半年内成交';
+$lang->customer->levelNoteList['D'] = '有潜在的业务需求或者至少半年后才能成交';
+$lang->customer->levelNoteList['E'] = '没有需求或者没有任何成交机会';
 
 $lang->customer->relationList['client']   = '客户';
 $lang->customer->relationList['provider'] = '供应商';

@@ -67,18 +67,31 @@ $lang->customer->statusList['intension'] = 'Intension';
 $lang->customer->statusList['payed']     = 'Payed';
 $lang->customer->statusList['failed']    = 'Failed';
 
-$lang->customer->sizeList[0] = '';
-$lang->customer->sizeList[1] = 'Large(>100persons)';
-$lang->customer->sizeList[2] = 'Medium(50-100 persons)';
-$lang->customer->sizeList[3] = 'Small(10-50 persons)';
-$lang->customer->sizeList[4] = 'Mini(<10 persons)';
+$lang->customer->sizeNameList[0] = '';
+$lang->customer->sizeNameList[1] = 'Large';
+$lang->customer->sizeNameList[2] = 'Medium';
+$lang->customer->sizeNameList[3] = 'Small';
+$lang->customer->sizeNameList[4] = 'Mini';
 
-$lang->customer->levelList[]  = '';
-$lang->customer->levelList['A'] = 'A';
-$lang->customer->levelList['B'] = 'B';
-$lang->customer->levelList['C'] = 'C';
-$lang->customer->levelList['D'] = 'D';
-$lang->customer->levelList['E'] = 'E';
+$lang->customer->sizeNoteList[0] = '';
+$lang->customer->sizeNoteList[1] = '> 100 persons';
+$lang->customer->sizeNoteList[2] = '50-100 persons';
+$lang->customer->sizeNoteList[3] = '10-50 persons';
+$lang->customer->sizeNoteList[4] = '< 10 persons';
+
+$lang->customer->levelNameList[]    = '';
+$lang->customer->levelNameList['A'] = 'A';
+$lang->customer->levelNameList['B'] = 'B';
+$lang->customer->levelNameList['C'] = 'C';
+$lang->customer->levelNameList['D'] = 'D';
+$lang->customer->levelNameList['E'] = 'E';
+
+$lang->customer->levelNoteList[]    = '';
+$lang->customer->levelNoteList['A'] = 'Make a deal in one month.';
+$lang->customer->levelNoteList['B'] = 'Make a deal in three months';
+$lang->customer->levelNoteList['C'] = 'Make a deal in six months.';
+$lang->customer->levelNoteList['D'] = 'Make a deal in six months at least.';
+$lang->customer->levelNoteList['E'] = 'No deal';
 
 $lang->customer->relationList['client']   = 'Client';
 $lang->customer->relationList['provider'] = 'Provider';
