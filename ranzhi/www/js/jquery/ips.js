@@ -530,7 +530,7 @@
             this.set[et.idstr] = win;
             win.reload(url);
         }
-        else if(go2index && !win.isIndex())
+        else if((go2index && !win.isIndex()) || (url != null && url != '' && url != win.url))
         {
             win.reload(url, go2index);
         }
@@ -879,8 +879,8 @@
         {
             try
             {
-                if(go2index) frame.contentWindow.location.replace(this.url);
-                else frame.contentWindow.location.reload();
+                if(go2index) frame.contentWindow.location.replace(this.indexUrl);
+                else frame.contentWindow.location.replace(this.getUrl());
             }
             catch(e)
             {
@@ -1323,8 +1323,11 @@
                 }
 
                 event.preventDefault();
-                event.stopPropagation();
-                return false;
+                if(et.id != 'superadmin')
+                {
+                    event.stopPropagation();
+                    return false;
+                }
             });
 
             this.$leftBar.bind('contextmenu', nocontextmenu);
