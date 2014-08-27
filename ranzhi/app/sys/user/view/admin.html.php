@@ -11,7 +11,7 @@
  */
 ?>
 <?php
-include '../../common/view/header.admin.html.php';
+include '../../common/view/header.html.php';
 include '../../common/view/treeview.html.php';
 js::set('deptID', $deptID);
 js::set('from', 'admin');
@@ -104,4 +104,4 @@ js::set('from', 'admin');
     </div>
   </div>
 </div>
-<?php include '../../common/view/footer.admin.html.php';?>
+<?php include '../../common/view/footer.html.php';?>

@@ -11,21 +11,6 @@
  */
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
 ?>
-  <footer id="footer" class="clearfix">
-    <div id="footNav">
-      <?php
-      if(empty($this->config->links->index) && !empty($this->config->links->all)) echo "&nbsp;" . html::a($this->createLink('links', 'index'), '<i class="icon-heart"></i>' . $this->lang->link);
-      ?>
-    </div>
-    <?php if(isset($config->company)):?>
-    <span id="copyrightInfo">
-    <?php echo "&copy; {$config->company->name} -" . date('Y') . '&nbsp;&nbsp;';?>
-    </span>
-    <?php endif;?>
-    <div id="powerby">
-      <?php printf($lang->poweredBy, $config->version, $config->version);?>
-    </div>
-  </footer>
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);

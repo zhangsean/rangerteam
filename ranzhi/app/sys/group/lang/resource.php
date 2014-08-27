@@ -160,15 +160,17 @@ $lang->contact->methodOrder[40] = 'vcard';
 
 /* Product. */
 $lang->resource->product = new stdclass();
-$lang->resource->product->browse    = 'browse';
-$lang->resource->product->create    = 'create';
-$lang->resource->product->edit      = 'edit';
-$lang->resource->product->delete    = 'delete';
+$lang->resource->product->browse = 'browse';
+$lang->resource->product->create = 'create';
+$lang->resource->product->edit   = 'edit';
+$lang->resource->product->delete = 'delete';
+$lang->resource->product->view   = 'view';
 
 $lang->product->methodOrder[5]  = 'browse';
 $lang->product->methodOrder[10] = 'create';
 $lang->product->methodOrder[20] = 'edit';
 $lang->product->methodOrder[35] = 'delete';
+$lang->product->methodOrder[40] = 'view';
 
 /* Address. */
 $lang->resource->address = new stdclass();
@@ -220,12 +222,13 @@ $lang->trade->methodOrder[50] = 'showImport';
 
 /* Depositor. */
 $lang->resource->depositor = new stdclass();
-$lang->resource->depositor->browse   = 'browse';
-$lang->resource->depositor->create   = 'create';
-$lang->resource->depositor->edit     = 'edit';
-$lang->resource->depositor->forbid   = 'forbid';
-$lang->resource->depositor->activate = 'activate';
-$lang->resource->depositor->check    = 'check';
+$lang->resource->depositor->browse     = 'browse';
+$lang->resource->depositor->create     = 'create';
+$lang->resource->depositor->edit       = 'edit';
+$lang->resource->depositor->forbid     = 'forbid';
+$lang->resource->depositor->activate   = 'activate';
+$lang->resource->depositor->check      = 'check';
+$lang->resource->depositor->savebalance = 'saveBalance';
 
 $lang->depositor->methodOrder[5]  = 'browse';
 $lang->depositor->methodOrder[10] = 'create';

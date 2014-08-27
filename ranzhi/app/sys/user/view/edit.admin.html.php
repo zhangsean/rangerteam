@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/header.html.php';?>
 <?php include '../../common/view/treeview.html.php';?>
 <div class="col-md-12">
   <div class='row'> 
@@ -93,4 +93,4 @@
   </div>
   </div>
 </div>
-<?php include '../../common/view/footer.admin.html.php';?>
+<?php include '../../common/view/footer.html.php';?>

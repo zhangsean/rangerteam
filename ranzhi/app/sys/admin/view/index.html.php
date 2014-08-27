@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/header.html.php';?>
 <div class='container' id='shortcutBox'>
   <div class='row'>
     <div class='col-md-4 col-sm-6'>
@@ -30,4 +30,4 @@
     </div>
   </div>
 </div>
-<?php include '../../common/view/footer.admin.html.php';?>
+<?php include '../../common/view/footer.html.php';?>

@@ -17,7 +17,7 @@ if(RUN_MODE == 'front' && strpos($app->getModuleRoot(), 'sys') == false)
 }
 else
 {
-    include '../../common/view/header.admin.html.php';
+    include '../../common/view/header.html.php';
 }
 include '../../common/view/treeview.html.php';
 ?>
@@ -80,6 +80,6 @@ if(RUN_MODE == 'front' && strpos($app->getModuleRoot(), 'sys') == false)
 }
 else
 {
-    include '../../common/view/footer.admin.html.php';
+    include '../../common/view/footer.html.php';
 }
 ?>

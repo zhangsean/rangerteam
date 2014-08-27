@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/header.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <div class='panel'>
   <form method='post' class='form-inline form-search '>
@@ -46,4 +46,4 @@
     <tfoot><tr><td colspan='4'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
-<?php include '../../common/view/footer.admin.html.php';?>
+<?php include '../../common/view/footer.html.php';?>

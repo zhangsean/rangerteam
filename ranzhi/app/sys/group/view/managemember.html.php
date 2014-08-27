@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><?php echo $lang->group->manageMember;?></strong>
@@ -47,4 +47,4 @@
     </div>
   </form>
 </div>
-<?php include '../../common/view/footer.admin.html.php';?>
+<?php include '../../common/view/footer.html.php';?>

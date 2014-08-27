@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/header.html.php';?>
 <?php js::set('type', $type);?>
 <div class="panel">
   <div class="panel-heading">
@@ -97,4 +97,4 @@ EOT;
 </table>
 </div>
 
-<?php include '../../common/view/footer.admin.html.php';?>
+<?php include '../../common/view/footer.html.php';?>

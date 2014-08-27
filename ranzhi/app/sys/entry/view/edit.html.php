@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-include '../../common/view/header.admin.html.php';
+include '../../common/view/header.html.php';
 ?>
 <div class='panel'>
   <div class='panel-heading'>
@@ -104,4 +104,4 @@ include '../../common/view/header.admin.html.php';
     </form>
   </div>
 </div>
-<?php include '../../common/view/footer.admin.html.php';?>
+<?php include '../../common/view/footer.html.php';?>
