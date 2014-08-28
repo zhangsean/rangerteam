@@ -41,8 +41,10 @@
                     <?php if(!$order):?>
                     <option value='' data-real='' data-currency=''></option>
                     <?php else:?>
+                    <?php if($order->id == $currentOrder->id or $order->status == 'normal'):?>
                     <?php $selected = $currentOrder->id == $order->id ? "selected='selected'" : '';?>
                     <option value="<?php echo $order->id;?>" <?php echo $selected;?> data-real="<?php echo $order->plan;?>" data-currency="<?php echo $order->currency?>"><?php echo $order->title;?></option>
+                    <?php endif;?>
                     <?php endif;?>
                     <?php endforeach;?>
                   </select>
