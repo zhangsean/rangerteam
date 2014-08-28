@@ -58,13 +58,18 @@ class contactModel extends model
      * @access public
      * @return array
      */
-    public function getList($customer = 0, $relation = 'client',  $orderBy = 'maker_desc', $pager = null)
+    public function getList($customer = 0, $relation = 'client', $mode,  $orderBy = 'maker_desc', $pager = null)
     {
         if($relation != 'provider')
         {
             $customerIdList = $this->loadModel('customer')->getMine();
             if(empty($customerIdList)) return array();
         }
+
+        $this->app->loadClass('date', $static = true);
+        $thisMonth  = date::getThisMonth();
+        $thisWeek   = date::getThisWeek();
+
 
         $resumes = array();
         if($customer) $resumes = $this->dao->select('*')->from(TABLE_RESUME)->where('customer')->eq($customer)->andWhere('deleted')->eq(0)->fetchAll('contact');
@@ -78,6 +83,12 @@ class contactModel extends model
             ->where('t1.deleted')->eq(0)
             ->andWhere('t2.customer')->in($customerIdList)
             ->beginIF($customer)->andWhere('t1.id')->in(array_keys($resumes))->fi()
+            ->beginIF($mode == 'past')->andWhere('t1.nextDate')->lt(helper::today())->fi()
+            ->beginIF($mode == 'today')->andWhere('t1.nextDate')->eq(helper::today())->fi()
+            ->beginIF($mode == 'tomorrow')->andWhere('t1.nextDate')->eq(formattime(date::tomorrow(), DT_DATE1))->fi()
+            ->beginIF($mode == 'thisweek')->andWhere('t1.nextDate')->between($thisWeek['begin'], $thisWeek['end'])->fi()
+            ->beginIF($mode == 'thismonth')->andWhere('t1.nextDate')->between($thisMonth['begin'], $thisMonth['end'])->fi()
+            ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');

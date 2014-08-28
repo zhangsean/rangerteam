@@ -74,7 +74,7 @@ class orderModel extends model
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
             ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
             ->where(1)
-            ->beginIF($mode == 'past')->andWhere('o.nextDate')->between('0000-00-00', helper::today())->fi()
+            ->beginIF($mode == 'past')->andWhere('o.nextDate')->lt(helper::today())->fi()
             ->beginIF($mode == 'today')->andWhere('o.nextDate')->eq(helper::today())->fi()
             ->beginIF($mode == 'tomorrow')->andWhere('o.nextDate')->eq(formattime(date::tomorrow(), DT_DATE1))->fi()
             ->beginIF($mode == 'thisweek')->andWhere('o.nextDate')->between($thisWeek['begin'], $thisWeek['end'])->fi()
