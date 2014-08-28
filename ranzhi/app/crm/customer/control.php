@@ -190,7 +190,7 @@ class customer extends control
     public function order($customerID)
     {
         $this->view->title    = $this->lang->customer->order;
-        $this->view->orders   = $this->loadModel('order')->getList($mode = 'customer', $customerID);
+        $this->view->orders   = $this->loadModel('order')->getList($mode = 'query', "customer=$customerID");
         $this->view->products = $this->loadModel('product')->getPairs();
         $this->display();
     }
