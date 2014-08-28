@@ -67,7 +67,7 @@ js::set('deptID', $deptID);
                 <div class='card-content'>
                   <dl class='contact-info'>
                     <?php if($user->phone or $user->mobile) echo "<dd><i class='icon icon-phone-sign'></i> $user->phone $user->mobile</dd>";?>
-                    <?php if($user->qq) echo "<dd><i class='icon icon-qq'></i> " . html::a("http://wpa.qq.com/msgrd?v=3&uin={$user->qq}&site={$config->company->name}&menu=yes", $user->qq) . "</dd>";?>
+                    <?php if($user->qq) echo "<dd><i class='icon icon-qq'></i> " . html::a("http://wpa.qq.com/msgrd?v=3&uin={$user->qq}&site={$config->company->name}&menu=yes", $user->qq, "target='_blank'") . "</dd>";?>
                     <?php if($user->email) echo "<dd><i class='icon icon-envelope-alt'></i> " . html::mailto($user->email, $user->email) . "</dd>";?>
                     <?php if($user->address) echo "<dd><i class='icon icon-home'></i> $user->address </dd>";?>
                   </dl>
