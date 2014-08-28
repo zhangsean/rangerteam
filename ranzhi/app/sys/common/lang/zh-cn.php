@@ -90,6 +90,7 @@ $lang->preview        = '预览';
 $lang->goback         = '返回';
 $lang->search         = '搜索';
 $lang->assign         = '指派';
+$lang->start          = '开始';
 $lang->create         = '新建';
 $lang->forbid         = '禁用';
 $lang->activate       = '激活';
