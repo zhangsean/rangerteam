@@ -380,6 +380,13 @@ class actionModel extends model
         /* Diff histories by hasing diff info or not. Thus we can to make sure the field with diff show at last. */
         foreach($histories as $history)
         {
+            if($history->field == 'assignedTo')
+            {
+                $users = $this->loadModel('user')->getPairs();
+                $history->old = $users[$history->old];
+                $history->new = $users[$history->new];
+            }
+
             $fieldName = $history->field;
             $history->fieldLabel = isset($this->lang->$objectType->$fieldName) ? $this->lang->$objectType->$fieldName : $fieldName;
             if(strpos($action, 'order') !== false) $history->fieldLabel = isset($this->lang->order->$fieldName) ? $this->lang->order->$fieldName : $fieldName;
