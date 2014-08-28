@@ -238,6 +238,45 @@ class taskModel extends model
     }
 
     /**
+     * Start a task.
+     * 
+     * @param  int      $taskID 
+     * @access public
+     * @return void
+     */
+    public function start($taskID)
+    {
+        $oldTask = $this->getById($taskID);
+        $now  = helper::now();
+        $task = fixer::input('post')
+            ->setDefault('assignedTo', $this->app->user->account)
+            ->setDefault('editedBy', $this->app->user->account)
+            ->setDefault('editedDate', $now) 
+            ->setIF($oldTask->assignedTo != $this->app->user->account, 'assignedDate', $now)
+            ->get();
+
+        if($this->post->left == 0)
+        {
+            $task->status       = 'done'; 
+            $task->finishedBy   = $this->app->user->account;
+            $task->finishedDate = helper::now();
+        }
+        else
+        {
+            $task->status = 'doing';
+        }
+
+        $this->dao->update(TABLE_TASK)->data($task, $skip = 'uid,comment,doStart')
+            ->autoCheck()
+            ->check('consumed,left', 'float')
+            ->checkIF($this->post->consumed < $oldTask->consumed, 'consumed', 'ge', $this->lang->task->consumedBefore)
+            ->where('id')->eq((int)$taskID)
+            ->exec();
+
+        if(!dao::isError()) return commonModel::createChanges($oldTask, $task);
+    }
+
+    /**
      * Assign a task to a user again.
      * 
      * @param  int    $taskID 
@@ -384,6 +423,11 @@ class taskModel extends model
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'assignto', "taskID=$task->id");
         $menu    .= html::a($link, $this->lang->assign, $misc);
+
+        $disabled = self::isClickable($task, 'start') ? '' : 'disabled';
+        $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
+        $link     = $disabled ? '###' : helper::createLink('task', 'start', "taskID=$task->id");
+        $menu    .= html::a($link, $this->lang->start, $misc);
 
         if($type == 'view')
         {

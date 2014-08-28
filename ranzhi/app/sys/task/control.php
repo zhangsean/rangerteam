@@ -208,6 +208,42 @@ class task extends control
     }
 
     /**
+     * Start a task.
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
+    public function start($taskID)
+    {
+        if(!empty($_POST))
+        {
+            if($this->post->doStart != 'yes')
+            {
+                if((int) $this->post->left == '0') $this->send(array('result' => 'fail', 'confirm' => $this->lang->task->confirmFinish));
+            }
+
+            $this->loadModel('action');
+            $changes = $this->task->start($taskID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($this->post->comment != '' or !empty($changes))
+            {
+                $act = $this->post->left == 0 ? 'Finished' : 'Started';
+                $actionID = $this->action->create('task', $taskID, $act, $this->post->comment);
+                $this->action->logHistory($actionID, $changes);
+            }
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $this->view->taskID = $taskID; 
+        $this->view->task   = $this->loadModel('task')->getByID($taskID);
+        $this->view->title  = $this->view->task->name . $this->lang->minus . $this->lang->start;
+        $this->display();
+    }
+    
+    /**
      * Update assign of task.
      *
      * @param  int    $taskID
