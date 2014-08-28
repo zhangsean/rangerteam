@@ -223,7 +223,7 @@ class trade extends control
         }
 
         $this->view->title         = $this->lang->trade->detail;
-        $this->view->modalWidth    = 760;
+        $this->view->modalWidth    = 900;
         $this->view->trade         = $trade;
         $this->view->details       = $details;
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
@@ -233,8 +233,8 @@ class trade extends control
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
         $this->view->users         = $this->loadModel('user')->getPairs();
 
-        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getPairs(0, 'out');
-        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getPairs(0, 'in');
+        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0);
+        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0);
 
         $this->display();
     }

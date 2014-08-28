@@ -19,7 +19,7 @@
     <thead>
       <tr class='text-center'>
         <th class='w-100px'><?php echo $lang->trade->money;?></th>
-        <th class='w-120px'><?php echo $lang->trade->category;?></th>
+        <th class='w-200px'><?php echo $lang->trade->category;?></th>
         <th class='w-200px'><?php echo $lang->trade->handlers;?></th>
         <th><?php echo $lang->trade->desc;?></th>
         <th class='w-100px'></th>
