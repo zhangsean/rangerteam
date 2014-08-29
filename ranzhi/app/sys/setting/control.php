@@ -30,6 +30,14 @@ class setting extends control
 
         if(!empty($_POST))
         {
+            if($module == 'order' and $field == 'currencyList')
+            {
+                $setting = fixer::input('post')->join('currency', ',')->setDefault('currency', '')->get();
+                $this->setting->setItems('system.sys.setting', $setting);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('lang', "module=$module&field=$field&appName=$appName")));
+            }
+
             $lang = $_POST['lang'];
             $appendField = isset($this->config->setting->appendLang[$module][$field]) ? $this->config->setting->appendLang[$module][$field] : '';
 

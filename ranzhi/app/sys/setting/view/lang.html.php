@@ -11,11 +11,21 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
-<form method='post' id='ajaxForm'>
+<form method='post' id='ajaxForm' class='form-inline'>
   <div class='panel'>
     <div class='panel-heading'>
       <strong><i class='icon-wrench'></i> <?php echo $lang->setting->common; ?></strong>
     </div>
+    <?php if($module == 'order' and $field == 'currencyList'):?>
+    <div class='panel-body'>
+      <table class='table table-form table-condensed table-currency'>
+      <tr>
+        <td><?php echo html::checkbox('currency', $lang->order->currencyList, isset($this->config->setting->currency) ? $this->config->setting->currency : '');?></td>
+      </tr>
+      <tr><td><?php echo html::submitButton();?></td></tr>
+      </table>
+    </div>
+    <?php else:?>
     <table class='table table-condensed'>
       <tr>
         <th class='w-150px text-center'><?php echo $lang->setting->key;?></th>
@@ -29,10 +39,7 @@
         <td>
           <div class='input-group'>
             <?php echo html::input("values[]", $value, "class='form-control'");?>
-            <?php if($module == 'order' and $field == 'currencyList'):?>
-            <span class="input-group-addon fix-border fix-padding"></span>
-            <?php echo html::input("currencySign[]", $lang->order->currencySign[$key], "class='form-control' size='2'");?>
-            <?php elseif($module == 'customer' and $field == 'sizeNameList'):?>
+            <?php if($module == 'customer' and $field == 'sizeNameList'):?>
             <span class="input-group-addon fix-border fix-padding"></span>
             <?php echo html::input("sizeNoteList[]", $lang->customer->sizeNoteList[$key], "class='form-control' size='75'");?>
             <?php elseif($module == 'customer' and $field == 'levelNameList'):?>
@@ -71,6 +78,7 @@
         </tr>
       </tfoot>
     </table>
+   <?php endif;?>
   </div>
 </form>
 <?php
