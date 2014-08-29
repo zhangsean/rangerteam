@@ -12,7 +12,6 @@
 ?>
 <table class='table table-data table-hover block-order table-fixed'>
   <tr>
-    <th class='w-id text-center'><?php echo $lang->order->id?></th>
     <th><?php echo $lang->order->customer?></th>
     <th class='w-100px'><?php echo $lang->order->amount?></th>
     <th class='w-70px'><?php echo $lang->order->status?></th>
@@ -20,7 +19,6 @@
   <?php foreach($orders as $id => $order):?>
   <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id='{$this->get->entry}'" : ''?>
   <tr data-url='<?php echo $this->createLink('crm.order', 'view', "orderID=$id"); ?>' <?php echo $appid?>>
-    <td class='text-center'><?php echo $id?></td>
     <td><?php if(isset($customers[$order->customer])) echo $customers[$order->customer]?></td>
     <td><?php echo $order->real == '0.00' ? $order->plan : $order->real;?></td>
     <td><?php echo $lang->order->statusList[$order->status]?></td>
