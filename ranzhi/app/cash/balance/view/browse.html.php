@@ -34,7 +34,7 @@
       <tr>
         <td><?php echo $depositorList[$balance->depositor];?></td>
         <td><?php echo formatTime($balance->date, DT_DATE1);?></td>
-        <td><?php echo zget($lang->order->currencyList, $balance->currency);?></td>
+        <td><?php echo zget($currencyList, $balance->currency);?></td>
         <td><?php echo $balance->money;?></td>
         <td>
           <?php echo html::a(inlink('edit', "balanceID={$balance->id}"), $lang->edit);?>

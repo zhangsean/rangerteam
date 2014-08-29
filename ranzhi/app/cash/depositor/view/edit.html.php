@@ -55,7 +55,7 @@
     <?php endif;?>
     <tr>
       <th><?php echo $lang->depositor->currency;?></th>
-      <td><?php echo html::select('currency', $lang->order->currencyList, $depositor->currency, "class='form-control' disabled");?></td>
+      <td><?php echo html::select('currency', $currencyList, $depositor->currency, "class='form-control' disabled");?></td>
     </tr>
     <tr>
       <th></th>

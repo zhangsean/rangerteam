@@ -48,7 +48,7 @@
     </tr>
     <tr>
       <th><?php echo $lang->depositor->currency;?></th>
-      <td><?php echo html::select('currency', $lang->order->currencyList, '', "class='form-control'");?></td>
+      <td><?php echo html::select('currency', $currencyList, '', "class='form-control'");?></td>
     </tr>
     <tr>
       <th></th>

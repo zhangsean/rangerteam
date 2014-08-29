@@ -37,10 +37,11 @@ class depositor extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title      = $this->lang->depositor->browse;
-        $this->view->depositors = $this->depositor->getList($orderBy, $pager);
-        $this->view->pager      = $pager;
-        $this->view->orderBy    = $orderBy;
+        $this->view->title        = $this->lang->depositor->browse;
+        $this->view->depositors   = $this->depositor->getList($orderBy, $pager);
+        $this->view->pager        = $pager;
+        $this->view->orderBy      = $orderBy;
+        $this->view->currencyList = $this->loadModel('order', 'crm')->setCurrencyList();
         $this->display();
     }   
 
@@ -62,7 +63,8 @@ class depositor extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $this->view->title = $this->lang->depositor->create;
+        $this->view->title        = $this->lang->depositor->create;
+        $this->view->currencyList = $this->loadModel('order', 'crm')->setCurrencyList();
         $this->display();
     }
 
@@ -89,8 +91,9 @@ class depositor extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $this->view->title     = $this->lang->depositor->edit;
-        $this->view->depositor = $this->depositor->getByID($depositorID);
+        $this->view->title        = $this->lang->depositor->edit;
+        $this->view->depositor    = $this->depositor->getByID($depositorID);
+        $this->view->currencyList = $this->loadModel('order', 'crm')->setCurrencyList();
 
         $this->display();
     }
@@ -168,6 +171,7 @@ class depositor extends control
         $this->view->selected      = $selected;
         $this->view->depositorList = $this->depositor->getPairs();
         $this->view->dateOptions   = (array) $this->loadModel('balance')->getDateOptions();
+        $this->view->currencyList  = $this->loadModel('order', 'crm')->setCurrencyList();
 
         $this->display();
     } 

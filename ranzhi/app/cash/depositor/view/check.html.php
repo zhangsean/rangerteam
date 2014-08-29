@@ -53,7 +53,7 @@
       <?php $diff  = bcsub($result->computed, $result->actual, 2);?>
       <tr class='<?php echo $class;?>'>
         <td><?php echo zget($depositorList, $depositorID); ?></td>
-        <td><?php echo zget($lang->order->currencyList, $result->currency); ?></td>
+        <td><?php echo zget($currencyList, $result->currency); ?></td>
         <td><?php echo $result->origin;?></td>
         <td><?php echo $result->computed;?></td>
         <td><?php echo $result->actual;?></td>

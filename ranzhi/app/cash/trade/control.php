@@ -51,6 +51,7 @@ class trade extends control
         $this->view->deptList      = $this->loadModel('tree')->getPairs(0, 'dept');
         $this->view->categories    = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
         $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->currencySign  = $this->loadModel('order', 'crm')->setCurrencySign();
 
         $this->display();
     }   
