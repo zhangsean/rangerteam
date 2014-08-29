@@ -56,12 +56,13 @@ class contract extends control
         $this->session->set('contractList', $this->app->getURI(true));
         $this->session->set('orderList', '');
 
-        $this->view->title     = $this->lang->contract->browse;
-        $this->view->contracts = $this->contract->getList(0, $mode, $orderBy, $pager);
-        $this->view->customers = $this->loadModel('customer')->getPairs('client');
-        $this->view->pager     = $pager;
-        $this->view->mode      = $mode;
-        $this->view->orderBy   = $orderBy;
+        $this->view->title        = $this->lang->contract->browse;
+        $this->view->contracts    = $this->contract->getList(0, $mode, $orderBy, $pager);
+        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
+        $this->view->pager        = $pager;
+        $this->view->mode         = $mode;
+        $this->view->orderBy      = $orderBy;
+        $this->view->currencySign = $this->loadModel('order')->setCurrencySign();
 
         $this->display();
     }
@@ -94,10 +95,11 @@ class contract extends control
             $this->view->orders       = $this->order->getList($mode = 'query', "customer={$customerID} and o.status = 'normal'");
         }
 
-        $this->view->title      = $this->lang->contract->create;
-        $this->view->orderID    = $orderID;
-        $this->view->customers  = $this->loadModel('customer')->getPairs('client');
-        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->title        = $this->lang->contract->create;
+        $this->view->orderID      = $orderID;
+        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->currencyList = $this->loadModel('order')->setCurrencyList();
         $this->display();
     }
 
@@ -149,6 +151,7 @@ class contract extends control
         $this->view->customers      = $this->loadModel('customer')->getPairs('client');
         $this->view->contacts       = $this->loadModel('contact')->getPairs($contract->customer);
         $this->view->users          = $this->loadModel('user')->getPairs();
+        $this->view->currencyList   = $this->loadModel('order')->setCurrencyList();
         $this->display();
     }
 
@@ -283,14 +286,15 @@ class contract extends control
         $this->session->set('contactList',  $uri);
         if(!$this->session->orderList) $this->session->set('orderList',    $uri);
 
-        $this->view->title     = $this->lang->contract->view;
-        $this->view->orders    = $this->loadModel('order')->getListById($contract->order);
-        $this->view->customers = $this->loadModel('customer')->getPairs('client');
-        $this->view->contacts  = $this->loadModel('contact')->getPairs($contract->customer);
-        $this->view->products  = $this->loadModel('product')->getPairs();
-        $this->view->users     = $this->loadModel('user')->getPairs();
-        $this->view->contract  = $contract;
-        $this->view->actions   = $this->loadModel('action')->getList('contract', $contractID);
+        $this->view->title        = $this->lang->contract->view;
+        $this->view->orders       = $this->loadModel('order')->getListById($contract->order);
+        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
+        $this->view->contacts     = $this->loadModel('contact')->getPairs($contract->customer);
+        $this->view->products     = $this->loadModel('product')->getPairs();
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->contract     = $contract;
+        $this->view->actions      = $this->loadModel('action')->getList('contract', $contractID);
+        $this->view->currencySign = $this->loadModel('order')->setCurrencySign();
 
         $this->display();
     }
