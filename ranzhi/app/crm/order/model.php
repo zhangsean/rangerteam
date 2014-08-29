@@ -387,4 +387,38 @@ class orderModel extends model
 
         return $menu;
     }
+
+    /**
+     * Set currency list.
+     * 
+     * @access public
+     * @return array
+     */
+    public function SetCurrencyList()
+    {
+        $currencyList = array();
+        foreach($this->lang->order->currencyList as $key => $currency)
+        {
+            if(strpos($this->config->setting->currency, $key) === false) continue;
+            $currencyList[$key] = $currency;
+        }
+        return $currencyList;
+    }
+
+    /**
+     * Set currency sign.
+     * 
+     * @access public
+     * @return array
+     */
+    public function setCurrencySign()
+    {
+        $currencySign = array();
+        foreach($this->lang->order->currencySign as $key => $sign)
+        {
+            if(strpos($this->config->setting->currency, $key) === false) continue;
+            $currencySign[$key] = $sign;
+        }
+        return $currencySign;
+    }  
 }
