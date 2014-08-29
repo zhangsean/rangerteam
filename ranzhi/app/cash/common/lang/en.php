@@ -30,7 +30,6 @@ $lang->depositor->menu->balance = '<i class="icon-th-list"></i> Balance|balance|
 $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
 $lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> Bills|trade|browse|', 'alias' => 'create,edit,view');
-$lang->trade->menu->schema   = array('link' => '<i class="icon-th-list"></i> Schema|schema|browse|', 'alias' => 'create,edit');
 
 /* Menu of trade module. */
 $lang->provider = new stdclass();
@@ -43,7 +42,4 @@ $lang->setting->menu = new stdclass();
 $lang->setting->menu->income   = 'Income|tree|browse|type=in|';
 $lang->setting->menu->expend   = 'Expend|tree|browse|type=out|';
 $lang->setting->menu->currency = 'Currency|setting|lang|module=order&field=currencyList&appName=crm';
-
-$lang->schema = new stdclass();
-$lang->schema->menu = new stdclass();
-$lang->schema->menu = $lang->trade->menu;
+$lang->setting->menu->schema   = 'Schema|schema|browse|';

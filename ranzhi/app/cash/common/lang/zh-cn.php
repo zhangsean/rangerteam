@@ -30,7 +30,6 @@ $lang->depositor->menu->balance = '<i class="icon-th-list"></i> 账号余额|bal
 $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
 $lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> 列表|trade|browse|', 'alias' => 'create,edit,view');
-$lang->trade->menu->schema   = array('link' => '<i class="icon-th-list"></i> 模板|schema|browse|', 'alias' => 'create,edit');
 
 /* Menu of trade module. */
 $lang->provider = new stdclass();
@@ -43,7 +42,4 @@ $lang->setting->menu = new stdclass();
 $lang->setting->menu->income   = '收入科目|tree|browse|type=in|';
 $lang->setting->menu->expend   = '支出科目|tree|browse|type=out|';
 $lang->setting->menu->currency = '货币类型|setting|lang|module=order&field=currencyList&appName=crm';
-
-$lang->schema = new stdclass();
-$lang->schema->menu = new stdclass();
-$lang->schema->menu = $lang->trade->menu;
+$lang->setting->menu->schema   = '导入模板设置|schema|browse|';

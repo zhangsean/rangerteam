@@ -162,6 +162,7 @@ $lang->action  = new stdclass();
 $lang->effort  = new stdclass();
 $lang->setting = new stdclass();
 $lang->task    = new stdclass();
+$lang->schema  = new stdclass();
 
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = '公司|company|setbasic|';

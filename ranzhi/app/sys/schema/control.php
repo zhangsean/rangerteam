@@ -11,6 +11,14 @@
  */
 class schema extends control
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->lang->schema->menu = $this->lang->setting->menu;
+        $this->lang->menuGroups->schema = 'setting';
+    }
+
     /** 
      * The index page, locate to the browse page.
      * 

@@ -20,4 +20,8 @@ $(document).ready(function()
     });
     $('#diffCol1').change();
     $('#feeRow1').change();
+
+
+    var menu =  $('.leftmenu .nav li').size() == 0 ? '.nav li' : '.leftmenu .nav li';
+    $(menu + " a[href*='schema']").parent().addClass('active');
 })
