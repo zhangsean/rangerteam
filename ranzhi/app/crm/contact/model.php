@@ -58,7 +58,7 @@ class contactModel extends model
      * @access public
      * @return array
      */
-    public function getList($customer = 0, $relation = 'client', $mode,  $orderBy = 'maker_desc', $pager = null)
+    public function getList($customer = 0, $relation = 'client', $mode = '',  $orderBy = 'maker_desc', $pager = null)
     {
         if($relation != 'provider')
         {
