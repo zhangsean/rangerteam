@@ -23,7 +23,7 @@ js::set('wholeResult', $wholeResult);
         <table class='table table-bordered table-form'>
           <tr>
             <th class='w-p20'><?php echo $lang->install->checkItem;?></th>
-            <th class='w-p40 text-left'><?php echo $lang->install->current?></th>
+            <th class='w-p20 text-left'><?php echo $lang->install->current?></th>
             <th class='w-100px text-left'><?php echo $lang->install->result?></th>
             <th class='text-center'><?php echo $lang->install->action?></th>
           </tr>

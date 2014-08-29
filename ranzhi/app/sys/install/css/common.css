@@ -11,4 +11,6 @@ body{background-color: #f1f1f1}
 .table td.fail{color:red;}
 .table-form .text-center{text-align:center}
 
+.table-form td + td, .table-form th + th {padding: 8px;}
+
 @media (max-width: 700px){.modal-dialog{padding: 0;} .modal-content{box-shadow: none;border-width: 1px 0;border-radius: 0}}
