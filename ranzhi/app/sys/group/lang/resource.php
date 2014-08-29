@@ -289,6 +289,7 @@ $lang->resource->task->batchCreate = 'batchCreate';
 $lang->resource->task->edit        = 'edit';
 $lang->resource->task->view        = 'view';
 $lang->resource->task->finish      = 'finish';
+$lang->resource->task->start       = 'start';
 $lang->resource->task->assignTo    = 'assignTo';
 $lang->resource->task->activate    = 'activate';
 $lang->resource->task->cancel      = 'cancel';
@@ -301,11 +302,12 @@ $lang->task->methodOrder[20] = 'batchCreate';
 $lang->task->methodOrder[25] = 'edit';
 $lang->task->methodOrder[30] = 'view';
 $lang->task->methodOrder[35] = 'finish';
-$lang->task->methodOrder[40] = 'assignTo';
-$lang->task->methodOrder[45] = 'activate';
-$lang->task->methodOrder[50] = 'cancel';
-$lang->task->methodOrder[55] = 'close';
-$lang->task->methodOrder[60] = 'delete';
+$lang->task->methodOrder[40] = 'start';
+$lang->task->methodOrder[45] = 'assignTo';
+$lang->task->methodOrder[50] = 'activate';
+$lang->task->methodOrder[55] = 'cancel';
+$lang->task->methodOrder[60] = 'close';
+$lang->task->methodOrder[65] = 'delete';
 
 /* Announce. */
 $lang->resource->announce = new stdclass();

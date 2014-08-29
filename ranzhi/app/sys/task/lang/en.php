@@ -17,6 +17,7 @@ $lang->task->view     = 'Info';
 $lang->task->create   = 'Create';
 $lang->task->edit     = 'Update';
 $lang->task->finish   = 'Finish';
+$lang->task->start    = 'Start';
 $lang->task->activate = 'Activate';
 $lang->task->cancel   = 'Cancel';
 $lang->task->close    = 'Close';

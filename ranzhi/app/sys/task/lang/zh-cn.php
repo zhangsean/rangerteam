@@ -17,6 +17,7 @@ $lang->task->view     = '查看任务';
 $lang->task->create   = '新建任务';
 $lang->task->edit     = '编辑任务';
 $lang->task->finish   = '任务完成';
+$lang->task->start    = '开始任务';
 $lang->task->activate = '激活任务';
 $lang->task->cancel   = '取消任务';
 $lang->task->close    = '关闭任务';
