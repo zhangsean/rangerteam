@@ -108,7 +108,7 @@ class schema extends control
      */
     public function delete($schemaID)
     {
-        if($this->schema->delete($schemaID)) $this->send(array('result' => 'success', 'locate' => inlink('schema')));
+        if($this->schema->delete($schemaID)) $this->send(array('result' => 'success', 'locate' => inlink('browse')));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 }
