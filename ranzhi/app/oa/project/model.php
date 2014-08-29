@@ -20,14 +20,40 @@ class projectModel extends model
      */
     public function getByID($projectID)
     {
-        return $this->dao->select('*')->from(TABLE_PROJECT)->where('id')->eq($projectID)->fetch();
+        $project = $this->dao->select('*')->from(TABLE_PROJECT)->where('id')->eq($projectID)->fetch();
+        $project->members = $this->getMembers($projectID); 
+        return $project;
+        
     }
 
+    /**
+     * Get members of a project.
+     * 
+     * @param  int    $project 
+     * @access public
+     * @return void
+     */
+    public function getMembers($project)
+    {
+        return $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($project)->fetchGroup('role');
+    }
+
+    /**
+     * Get project list.
+     * 
+     * @param  int    $status 
+     * @access public
+     * @return void
+     */
     public function getList($status = null)
     {
-        return $this->dao->select('*')->from(TABLE_PROJECT)
+        $projects = $this->dao->select('*')->from(TABLE_PROJECT)
             ->beginIF($status)->where('status')->eq($status)->fi()
             ->fetchAll('id');
+        $members =  $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id');
+        foreach($projects as $project) $project->members = isset($members[$project->id]) ? $members[$project->id] : array();
+        return $projects;
+
     }
 
     /**
@@ -90,16 +116,34 @@ class projectModel extends model
     {
         $project = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
+            ->remove('member,manager,master')
             ->add('createdDate', helper::now())
             ->get();
 
-        $this->dao->insert(TABLE_PROJECT)->data($project)
+        $this->dao->insert(TABLE_PROJECT)
+            ->data($project, $skip = 'uid')
             ->autoCheck()
             ->batchCheck($this->config->project->require->create, 'notempty')
             ->exec();
 
         if(dao::isError()) return false;
-        return $this->dao->lastInsertId();
+        $projectID = $this->dao->lastInsertId();
+
+        $members = array_merge(array($this->post->manager), (array)$this->post->member);
+
+        $user = new stdclass();
+        $user->type = 'project';
+        $user->id   = $projectID;
+        foreach($members as $member)
+        {
+            $user->account = $member;
+            $user->role    = $member == $this->post->manager ? 'manager' : 'member';
+
+            $this->dao->insert(TABLE_TEAM)->data($user)->autoCheck()->exec();
+            if(dao::isError()) return false;
+        }
+        return $projectID;
+
     }
 
     /**
@@ -121,13 +165,30 @@ class projectModel extends model
                 ->get();
         }
 
-        $this->dao->update(TABLE_PROJECT)->data($project)
+        $this->dao->update(TABLE_PROJECT)
+            ->data($project, $skip = 'uid,member,manager')
             ->autoCheck()
             ->batchCheck($this->config->project->require->create, 'notempty')
             ->where('id')->eq($projectID)
             ->exec();
 
         if(dao::isError()) return false;
+
+        $members = array_merge(array($this->post->manager), (array)$this->post->member);
+        $this->dao->delete()->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($projectID)->exec();
+
+        $user = new stdclass();
+        $user->type = 'project';
+        $user->id   = $projectID;
+        foreach($members as $member)
+        {
+            $user->account = $member;
+            $user->role    = $member == $this->post->manager ? 'manager' : 'member';
+
+            $this->dao->insert(TABLE_TEAM)->data($user)->autoCheck()->exec();
+            if(dao::isError()) return false;
+        }
+
         return commonModel::createChanges($oldProject, $project);
     }
 

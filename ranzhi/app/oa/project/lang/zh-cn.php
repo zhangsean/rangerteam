@@ -16,12 +16,14 @@ $lang->project->create = '创建项目';
 $lang->project->edit   = '修改项目';
 $lang->project->finish = '完成项目';
 $lang->project->delete = '删除项目';
-$lang->project->tasks  = '任务';
+$lang->project->enter  = '进入';
 
 $lang->project->id          = '编号';
 $lang->project->name        = '项目名称';
 $lang->project->desc        = '项目描述';
 $lang->project->begin       = '开始日期';
+$lang->project->manager     = '负责人';
+$lang->project->member      = '团队';
 $lang->project->end         = '结束日期';
 $lang->project->createdBy   = '由谁创建';
 $lang->project->createdDate = '创建时间';

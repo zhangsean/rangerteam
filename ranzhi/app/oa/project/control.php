@@ -31,6 +31,7 @@ class project extends control
         $this->view->title    = $this->lang->project->common;
         $this->view->status   = $status;
         $this->view->projects = $this->project->getList($status);
+        $this->view->users    = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
@@ -49,6 +50,7 @@ class project extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('task', 'browse', "projectID={$projectID}")));
         }
 
+        $this->view->users = $this->loadModel('user')->getPairs();
         $this->view->title = $this->lang->project->create;
         $this->display();
     }
@@ -73,6 +75,7 @@ class project extends control
         }
 
         $this->view->title   = $this->lang->project->edit;
+        $this->view->users   = $this->loadModel('user')->getPairs();
         $this->view->project = $this->project->getByID($projectID);
         $this->display();
     }

@@ -8,5 +8,7 @@ $(document).ready(function()
         $('.leftmenu li').find('[href*=' + v.status + ']').parent().addClass('active');
 
     }
+
+    $(".leftmenu a[href*=create]").modalTrigger({width:800});
     $.setAjaxJSONER('.activater', function(){location.reload()});
-});
+})

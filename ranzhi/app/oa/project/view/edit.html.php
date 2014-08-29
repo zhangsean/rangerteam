@@ -13,11 +13,20 @@
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <form method='post' id='ajaxForm' action='<?php echo inlink('edit', "projectID={$project->id}")?>'>
   <table class='table-form w-p90'>
     <tr>
       <th class='w-80px'><?php echo $lang->project->name;?></th>
       <td><div class='col-xs-7'> <?php echo html::input('name', $project->name, "class='form-control'");?></div></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->project->manager;?></th>
+      <td><div class='col-xs-7'><?php echo html::select('manager', $users, $this->app->user->account, "class='form-control user-chosen'");?></div></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->project->member;?></th>
+      <td><div class='col-xs-7'><?php echo html::select('member[]', $users, $this->app->user->account, "class='form-control user-chosen' multiple");?></div></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->begin;?></th>
