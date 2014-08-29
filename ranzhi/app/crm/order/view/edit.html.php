@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->order->currency;?></th>
-            <td><?php echo html::select('currency', $lang->order->currencyList, $order->currency, "class='form-control'");?></td>
+            <td><?php echo html::select('currency', $currencyList, $order->currency, "class='form-control' disabled");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->order->plan;?></th>

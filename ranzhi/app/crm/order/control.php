@@ -40,13 +40,14 @@ class order extends control
         $this->session->set('orderList',    $this->app->getURI(true));
         $this->session->set('contractList', '');
 
-        $this->view->title     = $this->lang->order->browse;
-        $this->view->orders    = $this->order->getList($mode, '', $orderBy, $pager);
-        $this->view->customers = $this->loadModel('customer')->getList('client');
-        $this->view->users     = $this->loadModel('user')->getPairs();
-        $this->view->pager     = $pager;
-        $this->view->mode      = $mode;
-        $this->view->orderBy   = $orderBy;
+        $this->view->title        = $this->lang->order->browse;
+        $this->view->orders       = $this->order->getList($mode, '', $orderBy, $pager);
+        $this->view->customers    = $this->loadModel('customer')->getList('client');
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->pager        = $pager;
+        $this->view->mode         = $mode;
+        $this->view->orderBy      = $orderBy;
+        $this->view->currencySign = $this->order->setCurrencySign();
         $this->display();
     }
 
@@ -69,9 +70,10 @@ class order extends control
         }
 
         $products = $this->loadModel('product')->getPairs();
-        $this->view->products  = array( 0 => '') + $products;
-        $this->view->customers = $this->loadModel('customer')->getPairs('client');
-        $this->view->title     = $this->lang->order->create;
+        $this->view->products     = array( 0 => '') + $products;
+        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
+        $this->view->title        = $this->lang->order->create;
+        $this->view->currencyList = $this->order->setCurrencyList();
 
         $this->display();
     }
@@ -85,7 +87,7 @@ class order extends control
      */
     public function edit($orderID)
     {
-        $order = $this->loadModel('order')->getByID($orderID);
+        $order = $this->order->getByID($orderID);
         if(empty($order)) $this->loadModel('common', 'sys')->checkPrivByCustomer($order->customer);
 
         if($_POST)
@@ -105,11 +107,12 @@ class order extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "orderID=$orderID")));
         }
 
-        $this->view->title     = $this->lang->order->edit;
-        $this->view->order     = $order;
-        $this->view->products  = $this->loadModel('product')->getPairs();
-        $this->view->customers = $this->loadModel('customer')->getPairs('client');
-        $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->view->title        = $this->lang->order->edit;
+        $this->view->order        = $order;
+        $this->view->products     = $this->loadModel('product')->getPairs();
+        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->currencyList = $this->order->setCurrencyList();
 
         $this->display();
     }
@@ -123,7 +126,7 @@ class order extends control
      */
     public function view($orderID)
     {
-        $order = $this->loadModel('order')->getByID($orderID);
+        $order = $this->order->getByID($orderID);
         if(empty($order)) $this->loadModel('common', 'sys')->checkPrivByCustomer($order->customer);
 
         $this->app->loadLang('resume');
@@ -135,12 +138,13 @@ class order extends control
         $this->session->set('contactList',  $uri);
         if(!$this->session->contractList) $this->session->set('contractList', $uri);
     
-        $this->view->order    = $order;
-        $this->view->title    = $this->lang->order->view;
-        $this->view->product  = $this->loadModel('product')->getByID($order->product);
-        $this->view->customer = $this->loadModel('customer')->getByID($order->customer);
-        $this->view->contract = $this->order->getContract($orderID);
-        $this->view->users    = $this->loadModel('user')->getPairs();
+        $this->view->order        = $order;
+        $this->view->title        = $this->lang->order->view;
+        $this->view->product      = $this->loadModel('product')->getByID($order->product);
+        $this->view->customer     = $this->loadModel('customer')->getByID($order->customer);
+        $this->view->contract     = $this->order->getContract($orderID);
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->currencyList = $this->order->setCurrencyList();
     
         $this->display();
     }

@@ -55,7 +55,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->order->currency;?></th>
-          <td><?php echo zget($lang->order->currencyList, $order->currency, '');?></td>
+          <td><?php echo zget($currencyList, $order->currency, '');?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->plan;?></th>
