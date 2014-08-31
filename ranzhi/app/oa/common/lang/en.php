@@ -24,6 +24,7 @@ $lang->project   = new stdclass();
 $lang->project->menu = new stdclass();
 $lang->project->menu->doing    = 'Projects|project|index|status=doing';
 $lang->project->menu->finished = 'Finished|project|index|ststus=finished';
+$lang->project->menu->suspend  = 'Suspended|project|index|ststus=suspend';
 
 $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();

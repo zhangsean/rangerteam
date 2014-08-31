@@ -24,6 +24,7 @@ $lang->project   = new stdclass();
 $lang->project->menu = new stdclass();
 $lang->project->menu->doing    = '进行中|project|index|status=doing';
 $lang->project->menu->finished = '已完成|project|index|ststus=finished';
+$lang->project->menu->suspend  = '已挂起|project|index|ststus=suspend';
 $lang->project->menu->create   = '创建项目|project|create|';
 
 $lang->announce = new stdclass();

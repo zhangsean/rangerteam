@@ -211,6 +211,24 @@ class projectModel extends model
     }
 
     /**
+     * Suspend project.
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return bool
+     */
+    public function suspend($projectID)
+    {
+        $project = new stdclass();
+        $project->status     = 'suspend';
+        $project->editedBy   = $this->app->user->account;
+        $project->editedDate = helper::now();
+
+        $this->dao->update(TABLE_PROJECT)->data($project)->where('id')->eq((int)$projectID)->exec();
+        return !dao::isError();
+    }
+
+    /**
      * Finish project.
      * 
      * @param  int    $projectID 

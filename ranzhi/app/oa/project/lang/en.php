@@ -9,14 +9,16 @@
  * @version     $Id: zh-cn.php 824 2010-05-02 15:32:06Z wwccss $
  * @link        http://www.ranzhi.org
  */
-$lang->project->common = 'Project';
-$lang->project->browse = 'Projects List';
-$lang->project->index  = 'Projects';
-$lang->project->create = 'Create';
-$lang->project->edit   = 'Edit';
-$lang->project->finish = 'Finish';
-$lang->project->delete = 'Delete';
-$lang->project->tasks  = 'Tasks';
+$lang->project->common  = 'Project';
+$lang->project->browse  = 'Projects List';
+$lang->project->index   = 'Projects';
+$lang->project->create  = 'Create';
+$lang->project->edit    = 'Edit';
+$lang->project->finish  = 'Finish';
+$lang->project->delete  = 'Delete';
+$lang->project->tasks   = 'Tasks';
+$lang->project->enter   = 'Enter';
+$lang->project->suspend = 'Suspend';
 
 $lang->project->id          = 'ID';
 $lang->project->name        = 'Name';

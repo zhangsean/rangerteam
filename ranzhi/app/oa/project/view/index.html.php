@@ -38,11 +38,9 @@
     <div class='text-right'>
       <div class='panel-actions'>
         <?php echo html::a(inlink('edit', "projectID=$project->id"), $lang->edit, "class='btn btn-xs' data-toggle='modal'");?>
-        <?php if($project->status == 'doing'):?>
-        <?php echo html::a(inlink('finish', "projectID=$project->id"), $lang->finish, "class='btn btn-xs' data-toggle='modal'");?>
-        <?php else:?>
-        <?php echo html::a(inlink('activate', "projectID=$project->id"), $lang->activate, "class='btn btn-xs' class='activater'");?>
-        <?php endif?>
+        <?php if($project->status != 'finished') echo html::a(inlink('finish', "projectID=$project->id"), $lang->finish, "class='btn btn-xs' data-toggle='modal'");?>
+        <?php if($project->status != 'doing') echo html::a(inlink('activate', "projectID=$project->id"), $lang->activate, "class='btn btn-xs swticher'");?>
+        <?php if($project->status != 'suspend') echo html::a(inlink('suspend', "projectID=$project->id"), $lang->project->suspend, "class='btn btn-xs swticher'");?>
         <?php echo html::a(helper::createLink('task', 'browse', "projectID=$project->id"), $lang->project->enter, "class='btn btn-primary btn-xs'");?>
       </div>
     </div>

@@ -125,6 +125,20 @@ class project extends control
     }
 
     /**
+     * Suspend project.
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return void
+     */
+    public function suspend($projectID)
+    {
+        $result = $this->project->suspend($projectID);
+        if($result) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
      * Delete a project.
      *
      * @param  int    $projectID
