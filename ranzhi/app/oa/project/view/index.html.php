@@ -23,15 +23,6 @@
     <div class='panel-body'>
       <div class='text-important'>
         <?php echo $lang->project->begin . $lang->colon . formatTime($project->begin);?> 
-        <div class='pull-right'>
-          <?php echo html::a(inlink('edit', "projectID=$project->id"), $lang->edit, "class='btn btn-xs' data-toggle='modal'");?>
-          <?php if($project->status == 'doing'):?>
-          <?php echo html::a(inlink('finish', "projectID=$project->id"), $lang->finish, "class='btn btn-xs' data-toggle='modal'");?>
-          <?php else:?>
-          <?php echo html::a(inlink('activate', "projectID=$project->id"), $lang->activate, "class='btn btn-xs' class='activater'");?>
-          <?php endif?>
-          <?php echo html::a(helper::createLink('task', 'browse', "projectID=$project->id"), $lang->project->enter, "class='btn btn-primary btn-xs'");?>
-        </div>
       </div>
       <div class='text-important'><?php echo $lang->project->end   . $lang->colon . formatTime($project->end);?> </div>
       <div class='info'><?php echo $project->desc;?></div>
@@ -42,6 +33,17 @@
           <?php echo "<span class='{$member->role}'>{$users[$member->account]}</span>";?>
         <?php endforeach;?>
         <?php endif;?>
+      </div>
+    </div>
+    <div class='text-right'>
+      <div class='panel-actions'>
+        <?php echo html::a(inlink('edit', "projectID=$project->id"), $lang->edit, "class='btn btn-xs' data-toggle='modal'");?>
+        <?php if($project->status == 'doing'):?>
+        <?php echo html::a(inlink('finish', "projectID=$project->id"), $lang->finish, "class='btn btn-xs' data-toggle='modal'");?>
+        <?php else:?>
+        <?php echo html::a(inlink('activate', "projectID=$project->id"), $lang->activate, "class='btn btn-xs' class='activater'");?>
+        <?php endif?>
+        <?php echo html::a(helper::createLink('task', 'browse', "projectID=$project->id"), $lang->project->enter, "class='btn btn-primary btn-xs'");?>
       </div>
     </div>
   </div>

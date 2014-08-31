@@ -174,7 +174,7 @@ class projectModel extends model
 
         if(dao::isError()) return false;
 
-        $members = array_merge(array($this->post->manager), (array)$this->post->member);
+        $members = array_unique(array_merge(array($this->post->manager), (array)$this->post->member));
         $this->dao->delete()->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($projectID)->exec();
 
         $user = new stdclass();
