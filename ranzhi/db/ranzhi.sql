@@ -238,13 +238,15 @@ CREATE TABLE `oa_project` (
   `id` mediumint NOT NULL AUTO_INCREMENT,
   `name` varchar(90) NOT NULL,
   `desc` text NOT NULL,
+  `master` char(30) NOT NULL,
+  `member` varchar(255) NOT NULL,
   `begin` date NOT NULL,
   `end` date NOT NULL,
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `editedBy` char(30) NOT NULL,
   `editedDate` datetime NOT NULL,
-  `status` enum('doing','finishedd') NOT NULL DEFAULT 'doing',
+  `status` enum('doing','finishedd','suspend') NOT NULL DEFAULT 'doing',
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE='MyISAM' COLLATE 'utf8_general_ci'; 
@@ -617,6 +619,17 @@ CREATE TABLE `sys_task` (
   KEY `closedBy` (`closedBy`),
   KEY `closedReason` (`closedReason`),
   KEY `type` (`type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sys_team`;
+CREATE TABLE `sys_team` (
+  `type` char(30) NOT NULL,
+  `id` mediumint(8) NOT NULL DEFAULT '0',
+  `account` char(30) NOT NULL DEFAULT '',
+  `role` char(30) NOT NULL DEFAULT '',
+  `join` date NOT NULL DEFAULT '0000-00-00',
+  `days` smallint(5) unsigned NOT NULL,
+  `hours` float(2,1) unsigned NOT NULL DEFAULT '0.0',
+  PRIMARY KEY (`type`,`id`,`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
