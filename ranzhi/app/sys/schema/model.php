@@ -120,9 +120,9 @@ class schemaModel extends model
      * @access public
      * @return array
      */
-    public function parseCSV($fileName)
+    public function parseCSV($fileName = '')
     {
-        $handle = fopen($this->session->importFile, 'r');
+        $handle = fopen($fileName, 'r');
         $col    = -1;
         $row    = 0;
         $data   = array();

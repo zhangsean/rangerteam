@@ -67,3 +67,12 @@ $lang->trade->encodeList['utf8'] = 'UTF-8';
 $lang->trade->notEqual = '付款账号不能与收款账号相同。';
 $lang->trade->feeDesc  = '%s %s 转入 %s';
 $lang->trade->fileNode = '文件格式为csv';
+
+$lang->trade->importedFields = array();
+$lang->trade->importedFields['']         = '';
+$lang->trade->importedFields['category'] = '项目';
+$lang->trade->importedFields['type']     = '交易类型';
+$lang->trade->importedFields['trader']   = '客户';
+$lang->trade->importedFields['money']    = '金额';
+$lang->trade->importedFields['date']     = '付款时间';
+$lang->trade->importedFields['desc']     = '备注';

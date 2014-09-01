@@ -51,7 +51,37 @@ class schema extends control
      */
     public function create()
     {
-        if($_POST)
+        $this->app->loadLang('trade', 'cash');
+        if(!empty($_FILES))
+        {
+            $file = $this->loadModel('file')->getUpload('files');
+            $file = $file[0];
+
+            $fc = file_get_contents($file['tmpname']);
+            if( $this->post->encode != "utf8") 
+            {
+                if(function_exists('mb_convert_encoding'))
+                {
+                    $fc = @mb_convert_encoding($fc, 'utf-8', $this->post->encode);
+                }              
+                elseif(function_exists('iconv'))
+                {
+                    $fc = @iconv($this->post->encode, 'utf-8', $fc);
+                }
+                else
+                {              
+                    $this->send(array('result' => 'fail', 'success' => $this->lang->testcase->noFunction));
+                }              
+            }
+
+            $tmpFile = $this->file->savePath . $file['pathname'];
+            file_put_contents($tmpFile, $fc);
+            $this->view->records = $this->schema->parseCSV($tmpFile);
+            @unlink($tmpFile);
+            unset($this->lang->schema->menu);
+            $this->display();
+        }
+        elseif($_POST)
         {
             $schemaID = $this->schema->create();
             if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -59,10 +89,10 @@ class schema extends control
             $this->loadModel('action')->create('schema', $schemaID, 'Created');
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
-
         }
 
         $this->app->loadLang('trade', 'cash');
+        $this->view->title = $this->lang->schema->create;
         $this->display();
     }
 
