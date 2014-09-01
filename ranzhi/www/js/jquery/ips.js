@@ -817,7 +817,7 @@
         if(!this.isLoading())
         {
             if(go2index) this.setUrl();
-            else this.setUrl(url);
+            else if(url) this.setUrl(url);
 
             this.$.addClass('window-loading').removeClass('window-error').find('.reload-win i').addClass('icon-spin');
 
