@@ -203,6 +203,20 @@ body.page-actions-fixed {padding-bottom: 70px}
 .panel-actions > .btn-group .btn {padding: 3px 10px}
 
 .panel-body > .cards {margin-left: 0; margin-right: 0;}
+.panel-success {border-color: #229f24;}
+.panel-success > .panel-heading {background: #229f24; color: #fff}
+.panel-warning {border-color: #E48600;}
+.panel-warning > .panel-heading {background: #E48600; color: #fff}
+.panel-primary {border-color: #3280FC;}
+.panel-primary > .panel-heading {background: #3280FC; color: #fff}
+.panel-info {border-color: #39B3D7;}
+.panel-info > .panel-heading {background: #39B3D7; color: #fff}
+.panel-danger {border-color: #D2322D;}
+.panel-danger > .panel-heading {background: #D2322D; color: #fff}
+.panel-important {border-color: #81511C;}
+.panel-important > .panel-heading {background: #81511C; color: #fff}
+.panel-special {border-color: #8957A1;}
+.panel-special > .panel-heading {background: #8957A1; color: #fff}
 
 /* modal */
 .modal .modal-dialog {max-width: 100%; border: 8px solid #666; border-color: rgba(0,0,0,.25)}
