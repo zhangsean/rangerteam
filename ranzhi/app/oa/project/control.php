@@ -133,8 +133,7 @@ class project extends control
      */
     public function suspend($projectID)
     {
-        $result = $this->project->suspend($projectID);
-        if($result) $this->send(array('result' => 'success'));
+        if($this->project->suspend($projectID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
@@ -150,5 +149,59 @@ class project extends control
         $this->project->delete(TABLE_PROJECT, $projectID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
+    }
+
+    /**
+     * Drop menu page.
+     * 
+     * @param  int    $projectID 
+     * @param  int    $module 
+     * @param  int    $method 
+     * @param  int    $extra 
+     * @access public
+     * @return void
+     */
+    public function ajaxGetDropMenu($projectID, $module, $method, $extra)
+    {
+        $projects = $this->dao->select('*')->from(TABLE_PROJECT)->where('id')->in(array_keys($this->projects))->fetchAll();
+        $members  =  $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id');
+
+        foreach($projects as $project)
+        {
+            $project->members = isset($members[$project->id]) ? $members[$project->id] : array();
+            foreach($project->members as $member)
+            {
+                if($member->role != 'manager') continue;
+                if($member->role == 'manager') $project->PM = $member->account;
+            }
+        }
+
+        $this->view->link      = $this->project->getProjectLink($module, $method, $extra);
+        $this->view->projectID = $projectID;
+        $this->view->module    = $module;
+        $this->view->method    = $method;
+        $this->view->extra     = $extra;
+        $this->view->projects  = $projects;
+        $this->display();
+    }
+
+    /**
+     * The results page of search.
+     * 
+     * @param  string  $keywords 
+     * @param  string  $module 
+     * @param  string  $method 
+     * @param  mix     $extra 
+     * @access public
+     * @return void
+     */
+    public function ajaxGetMatchedItems($keywords, $module, $method, $extra)
+    {
+        $projects = $this->dao->select('*')->from(TABLE_PROJECT)->where('deleted')->eq(0)->andWhere('name')->like("%$keywords%")->fetchAll();
+
+        $this->view->link     = $this->project->getProjectLink($module, $method, $extra);
+        $this->view->projects = $projects;
+        $this->view->keywords = $keywords;
+        $this->display();
     }
 }

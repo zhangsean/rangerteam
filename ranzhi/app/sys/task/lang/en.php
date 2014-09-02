@@ -99,6 +99,12 @@ $lang->task->reasonList['']       = '';
 $lang->task->reasonList['done']   = 'Done';
 $lang->task->reasonList['cancel'] = 'Canceled';
 
+$lang->task->createdByMe  = 'MyCreate';
+$lang->task->assignedToMe = 'MyTasks';
+$lang->task->closedByMe   = 'MyClose';
+$lang->task->untilToday   = 'UntilToday';
+$lang->task->expired      = 'Expired';
+
 $lang->task->basicInfo = 'Basic Info';
 $lang->task->life      = 'Task Life';
 

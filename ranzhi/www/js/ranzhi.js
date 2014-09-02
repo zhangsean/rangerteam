@@ -991,3 +991,86 @@ function reloadHome()
     $('#ajaxModal').remove();
     $('.modal-backdrop').remove();
 }
+
+/**
+ * Show drop menu. 
+ * 
+ * @param  string $objectType product|project
+ * @param  int    $objectID 
+ * @param  string $module 
+ * @param  string $method 
+ * @param  string $extra 
+ * @access public
+ * @return void
+ */
+function showDropMenu(objectType, objectID, module, method, extra)
+{
+    var li = $('#currentItem').closest('li');
+    if(li.hasClass('show')) {li.removeClass('show'); return;}
+
+    if(!li.data('showagain'))
+    {
+        li.data('showagain', true);
+        $(document).click(function() {li.removeClass('show');});
+        $('#dropMenu, #currentItem').click(function(e){e.stopPropagation();});
+    }
+    $.get(createLink(objectType, 'ajaxGetDropMenu', "objectID=" + objectID + "&module=" + module + "&method=" + method + "&extra=" + extra), function(data){ $('#dropMenu').html(data).find('#search').focus();});
+
+    li.addClass('show');
+}
+
+/**
+ * Search items. 
+ * 
+ * @param  string $keywords 
+ * @param  string $objectType 
+ * @param  int    $objectID 
+ * @param  string $module 
+ * @param  string $method 
+ * @param  string $extra 
+ * @access public
+ * @return void
+ */
+function searchItems(keywords, objectType, objectID, module, method, extra)
+{
+    if(keywords == '')
+    {
+        showMenu = 0;
+        showDropResult(objectType, objectID, module, method, extra);
+    }
+    else
+    {
+        keywords = encodeURI(keywords);
+        if(keywords != '-') $.get(createLink(objectType, 'ajaxGetMatchedItems', "keywords=" + keywords + "&module=" + module + "&method=" + method + "&extra=" + extra), function(data){$('#searchResult').html(data);});
+    }
+}
+
+/**
+ * Show or hide more items. 
+ * 
+ * @access public
+ * @return void
+ */
+function switchFinished()
+{
+    $('#search').width($('#search').width()).focus();
+    $('#finishedMenu').width($('#defaultMenu').outerWidth());
+    $('#searchResult').removeClass('show-suspend');
+    $('#searchResult').toggleClass('show-finished');
+
+}
+
+/**
+ * Show or hide more items. 
+ * 
+ * @access public
+ * @return void
+ */
+function switchSuspend()
+{
+    $('#search').width($('#search').width()).focus();
+    $('#suspendMenu').width($('#defaultMenu').outerWidth());
+    $('#searchResult').removeClass('show-finished');
+    $('#searchResult').toggleClass('show-suspend');
+
+}

@@ -7,3 +7,5 @@ form .pri {width: 48px;}
 .label.task-status-done {color: #229F24}
 .label.task-status-waiting {color: #E48600}
 .label.task-status-cancel {color: #333}
+
+.taskMenu{width: 180px;}

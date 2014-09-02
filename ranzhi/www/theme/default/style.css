@@ -484,3 +484,28 @@ td #aliasLabel {display: table-row;}
 .page .dropdown-menu {margin-top: 0; width: 212px; margin-left: -5px; padding: 0;}
 .page .dropdown-menu > li {display: block; float: left; width: 70px; border-right: 1px dotted #ddd; border-bottom: 1px dotted #ddd}
 #_pageID, #goto {display: none}
+
+/* Drop menu. */
+#dropMenu {background: #fff; position:absolute; display:none; font-size:12px; z-index:9999; -moz-box-shadow: 0 6px 12px rgba(0,0,0,0.175); -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);border: 1px solid #CBCBCB; border: 1px solid rgba(0, 0, 0, 0.15); top: 36px; border-top: none; min-width: 250px; min-width: 218px\0; padding: 10px 15px;}
+#currentItem {}
+.show > #dropMenu {display: block;}
+.show > #currentItem, .show > #currentItem:hover, #modulemenu .nav > li > .dropdown.open > a {background: #fff; border: 1px solid #CBCBCB; -moz-box-shadow: 0 6px 12px rgba(0,0,0,0.175); -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);}
+#search {padding: 2px 8px; height: 28px}
+#searchResult {display: table; line-height: 20px; color: #808080}
+#defaultMenu, #finishedMenu, #suspendMenu {display: table-cell; vertical-align: top; min-width: 218px}
+#finishedMenu, #suspendMenu {display: none;}
+#searchResult.show-finished #finishedMenu {display: table-cell;}
+#searchResult.show-suspend #suspendMenu {display: table-cell;}
+#defaultMenu > ul, #finishedMenu > ul, #suspendMenu > ul {display: block; position: relative; padding: 0; margin: 10px -15px 0 -15px; max-height: 360px; overflow-x: hidden; overflow-y: auto}
+#finishedMenu > ul, #suspendMenu > ul {margin-left: 15px;}
+#defaultMenu > ul > li:first-child, #finishedMenu > ul > li:first-child, #suspendMenu > ul > li:first-child, #searchResult > ul > li:first-child {border-top: 1px dashed #ddd}
+#defaultMenu > ul > li, #finishedMenu > ul > li, #suspendMenu > ul > li, #searchResult > ul > li {display: block; float: none; padding: 2px 15px; border-bottom: 1px dashed #ddd;}
+#defaultMenu > ul > li:hover, #defaultMenu > .actions > a:hover, #finishedMenu > ul > li:hover, #suspendMenu > ul > li:hover, #searchResult > ul > li:hover {background: #f1f1f1}
+#defaultMenu > ul > li > a, #finishedMenu > ul > li > a, #suspendMenu > ul > li > a, #searchResult > ul > li > a {line-height: 24px; display: block;}
+#finishedMenu > ul > li > a, #suspendMenu > ul > li > a {color: #808080}
+#defaultMenu > ul > li > a:hover, #finishedMenu > ul > li > a:hover, #suspendMenu > ul > li > a:hover, #searchResult > ul > li > a:hover, #defaultMenu > ul > li.heading:hover {background: none}
+#defaultMenu > .actions > a {display: block; text-align: right; margin: 0 -15px; padding-right: 15px; line-height: 30px}
+#searchResult.show-finished #defaultMenu > ul > li, #defaultMenu > .actions > a {border-right: 1px solid #ddd}
+#searchResult.show-suspend #defaultMenu > ul > li, #defaultMenu > .actions > a {border-right: 1px solid #ddd}
+#defaultMenu > .actions > a > i, #defaultMenu > ul > li > a > i, #finishedMenu > ul > li > a > i, #suspendMenu > ul > li > a > i {font-size: 14px; display: inline-block; margin-right: 5px;}
+#searchResult > ul {display: block; position: relative; padding: 0; min-width: 218px}

@@ -43,7 +43,7 @@ class task extends control
      * @access public
      * @return void
      */
-    public function browse($projectID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($projectID = 0, $mode = null, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -60,12 +60,12 @@ class task extends control
         $this->view->title      = $this->lang->task->browse;
         if($projectID) $this->view->title = $project->name . $this->lang->minus . $this->view->title;
 
-        $this->view->tasks      = $this->task->getList($projectID, $orderBy, $pager);
-        $this->view->moduleMenu = $this->project->getLeftMenus($projectID );
-        $this->view->pager      = $pager;
-        $this->view->orderBy    = $orderBy;
-        $this->view->projectID  = $projectID;
-        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->tasks     = $this->task->getList($projectID, $mode, $orderBy, $pager);
+        $this->view->pager     = $pager;
+        $this->view->orderBy   = $orderBy;
+        $this->view->projectID = $projectID;
+        $this->view->projects  = $this->loadModel('project')->getPairs();
+        $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
@@ -87,11 +87,10 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "projectID=$projectID")));
         }
 
-        $this->view->title      = $this->lang->task->create;
-        $this->view->moduleMenu = $this->loadModel('project')->getLeftMenus($projectID );
-        $this->view->projectID  = $projectID;
-        $this->view->projects   = $this->project->getPairs();
-        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->title     = $this->lang->task->create;
+        $this->view->projectID = $projectID;
+        $this->view->projects  = $this->project->getPairs();
+        $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
@@ -114,8 +113,9 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "projectID=$projectID")));
         }
 
-        $this->view->moduleMenu = $this->loadModel('project')->getLeftMenus($projectID );
-        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->projectID = $projectID;
+        $this->view->projects  = $this->loadModel('project')->getPairs();
+        $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
@@ -148,8 +148,8 @@ class task extends control
 
         $this->view->title      = $this->lang->task->edit;
         $this->view->task       = $this->task->getByID($taskID);
-        $this->view->moduleMenu = $this->loadModel('project')->getLeftMenus($this->view->task->project);
-        $this->view->projects   = $this->project->getPairs();
+        $this->view->projectID  = $this->view->task->project;
+        $this->view->projects   = $this->loadModel('project')->getPairs();
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->display();
     }
@@ -165,12 +165,11 @@ class task extends control
     {
         $task = $this->task->getByID($taskID);
 
-        $this->view->title = $this->lang->task->view . $task->name;
-
-        $this->view->moduleMenu = $this->loadModel('project')->getLeftMenus($task->project);
-        $this->view->projects   = $this->project->getPairs();
-        $this->view->users      = $this->loadModel('user')->getPairs();
-        $this->view->task       = $task;
+        $this->view->title     = $this->lang->task->view . $task->name;
+        $this->view->task      = $task;
+        $this->view->projectID = $task->project;
+        $this->view->projects  = $this->loadModel('project')->getPairs();
+        $this->view->users     = $this->loadModel('user')->getPairs();
 
         $this->display();
     }
@@ -387,10 +386,10 @@ class task extends control
             if($project->deleted) $this->locate($this->createLink('project'));
         }
 
-        $this->view->moduleMenu = $this->project->getLeftMenus($projectID);
-        $this->view->tasks      = $this->task->getList($projectID);
-        $this->view->title      = $this->lang->task->browse;
-        $this->view->projectID  = $projectID;
+        $this->view->tasks     = $this->task->getList($projectID);
+        $this->view->title     = $this->lang->task->browse;
+        $this->view->projectID = $projectID;
+        $this->view->projects  = $this->project->getPairs();
         $this->display();
     }
 
@@ -474,12 +473,12 @@ class task extends control
             }
         }
 
-        $this->view->moduleMenu  = $this->project->getLeftMenus($projectID );
         $this->view->tasks       = $groupTasks;
         $this->view->groupByList = $groupByList;
         $this->view->groupBy     = $groupBy;
         $this->view->orderBy     = $groupBy;
         $this->view->projectID   = $projectID;
+        $this->view->projects    = $this->project->getPairs();
         $this->view->projectName = $project->name;
         $this->view->users       = $users;
         $this->display();
@@ -539,12 +538,12 @@ class task extends control
             }
         }
 
-        $this->view->moduleMenu  = $this->project->getLeftMenus($projectID );
         $this->view->tasks       = $groupTasks;
         $this->view->groupByList = $groupByList;
         $this->view->groupBy     = $groupBy;
         $this->view->orderBy     = $groupBy;
         $this->view->projectID   = $projectID;
+        $this->view->projects    = $this->project->getPairs();
         $this->view->users       = $users;
         $this->display();
     }

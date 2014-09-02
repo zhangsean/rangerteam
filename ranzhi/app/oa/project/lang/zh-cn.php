@@ -9,15 +9,21 @@
  * @version     $Id: zh-cn.php 824 2010-05-02 15:32:06Z wwccss $
  * @link        http://www.ranzhi.org
  */
-$lang->project->common  = '项目视图';
-$lang->project->browse  = '项目列表';
-$lang->project->index   = '项目首页';
-$lang->project->create  = '创建项目';
-$lang->project->edit    = '修改项目';
-$lang->project->finish  = '完成项目';
-$lang->project->delete  = '删除项目';
-$lang->project->enter   = '进入';
-$lang->project->suspend = '挂起';
+$lang->project->common     = '项目视图';
+$lang->project->browse     = '项目列表';
+$lang->project->index      = '项目首页';
+$lang->project->create     = '创建项目';
+$lang->project->edit       = '修改项目';
+$lang->project->finish     = '完成项目';
+$lang->project->delete     = '删除项目';
+$lang->project->enter      = '进入';
+$lang->project->suspend    = '挂起';
+$lang->project->mine       = '我负责:';
+$lang->project->other      = '其他：';
+$lang->project->deleted    = '已删除';
+$lang->project->finished   = '已结束';
+$lang->project->noMatched  = '找不到包含"%s"的项目';
+$lang->project->allProject = '所有项目';
 
 $lang->project->id          = '编号';
 $lang->project->name        = '项目名称';

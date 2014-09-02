@@ -38,11 +38,16 @@ class taskModel extends model
      * @access public
      * @return array
      */
-    public function getList($projectID = 0, $orderBy = 'id_desc', $pager = null)
+    public function getList($projectID = 0, $mode = null, $orderBy = 'id_desc', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_TASK)
             ->where('deleted')->eq(0)
             ->beginIF($projectID)->andWhere('project')->eq($projectID)->fi()
+            ->beginIF($mode == 'createdBy')->andWhere('createdBy')->eq($this->app->user->account)->fi()
+            ->beginIF($mode == 'assignedTo')->andWhere('assignedTo')->eq($this->app->user->account)->fi()
+            ->beginIF($mode == 'closedBy')->andWhere('closedBy')->eq($this->app->user->account)->fi()
+            ->beginIF($mode == 'untilToday')->andWhere('deadline')->eq(helper::today())->fi()
+            ->beginIF($mode == 'expired')->andWhere('deadline')->lt(helper::today())->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');

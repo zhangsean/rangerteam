@@ -13,55 +13,62 @@
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include '../../common/view/mindmap.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<div class='panel' id='mindmapPanel'>
-  <div class='panel-heading'>
-    <div class='panel-actions'>
-      <div class='btn-group'>
-        <?php echo html::a($this->inlink('browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $lang->task->list, "class='btn'"); ?>
-        <?php echo html::a($this->inlink('kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $lang->task->kanban, "class='btn'"); ?>
-        <?php echo html::a($this->inlink('mind', "projectID=$projectID"), "<i class='icon-usecase icon'></i> " . $lang->task->mind, "class='btn active'"); ?>
-        <?php echo html::a($this->inlink('outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $lang->task->outline, "class='btn'"); ?>
-      </div>
-      <div class="btn-group">
-        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-        <i class='icon-cog'></i> <?php echo $lang->task->groups[$groupBy];?>
-          <icon class="icon-caret-down"></icon>
-        </button>
-        <ul class="dropdown-menu">
-        <?php foreach ($lang->task->groups as $key => $value):?>
-        <?php if(empty($key)) continue;?>
-          <?php $class = ($key == $groupBy) ? 'active' : '';?>
-          <li class='<?php echo $class;?>'>
-            <?php echo html::a($this->inlink('mind', "projectID=$projectID&groupBy=$key"), $value); ?>
-          </li>
-        <?php endforeach;?>
-        </ul>
-      </div>
-      <div class="btn-group">
-        <button class='btn' id='fsBtn'>全屏</button>
-      </div>
-    </div>
-    <div class='panel-actions pull-right'><button id='saveBtn' type='button' class='btn btn-primary disabled' disabled='disabled'><i class="icon-save"></i> <span><?php echo $lang->save;?></span></button></div>
+<div class='row'>
+  <div class='col-md-2'>
+    <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
   </div>
-  <div class='panel-body minds-container'>
-    <div id='mindmap' class='mindmap'></div>
-    <div class='popover scale top fade' id='taskPopover'>
-      <div class='arrow'></div>
-      <div class='popover-title'>
-        <div class='pri-list'><span class='pri pri-0'>0</span><span class='pri pri-1'>1</span><span class='pri pri-2'>2</span><span class='pri pri-3'>3</span><span class='pri pri-4'>4</span></div>
-        <table>
-          <tr class='task-headings'>
-            <td colspan='2' class='nobr'><span class='active task-pri pri pri-3' title='<?php echo $lang->task->lblPri?>'></span> <strong class='task-name' title='<?php echo $lang->task->name?>'>-</strong></td>
-            <td class='text-right'><small class='text-muted task-type label' title='<?php echo $lang->task->type;?>'>-</small> <span class='label label-circle label-badge task-status-wait task-status' title='<?php echo $lang->task->status;?>'>-</span><button class='btn btn-success btn-sm btn-finish'><i class='icon-ok'></i> <?php echo $lang->finish;?></button><button class='btn btn-primary btn-sm btn-close'><i class='icon-off'></i> <?php echo $lang->close;?></button></td>
-          </tr>
-          <tr class='task-infos'>
-            <td><span class='task-assignedTo' title='<?php echo $lang->task->assignedTo?>'><i class='icon-user text-muted'></i> <small>-</small></span></td>
-            <td class='text-center'><span class='task-createdDate' title='<?php echo $lang->task->createdDate?>'><i class='icon-time text-muted'></i> <small>-</small></span></td>
-            <td class='text-right'><span class='task-deadline text-warning' title='<?php echo $lang->task->deadline;?>'><input type="text" name="taskDeadline" class='form-date form-control input-sm' id='taskDeadline' placeholder='<?php echo $lang->task->deadline;?>' /></span></td>
-          </tr>
-        </table>
+  <div class='col-md-10'>
+    <div class='panel' id='mindmapPanel'>
+      <div class='panel-heading'>
+        <div class='panel-actions'>
+          <div class='btn-group'>
+            <?php echo html::a($this->inlink('browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $lang->task->list, "class='btn'"); ?>
+            <?php echo html::a($this->inlink('kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $lang->task->kanban, "class='btn'"); ?>
+            <?php echo html::a($this->inlink('mind', "projectID=$projectID"), "<i class='icon-usecase icon'></i> " . $lang->task->mind, "class='btn active'"); ?>
+            <?php echo html::a($this->inlink('outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $lang->task->outline, "class='btn'"); ?>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+            <i class='icon-cog'></i> <?php echo $lang->task->groups[$groupBy];?>
+              <icon class="icon-caret-down"></icon>
+            </button>
+            <ul class="dropdown-menu">
+            <?php foreach ($lang->task->groups as $key => $value):?>
+            <?php if(empty($key)) continue;?>
+              <?php $class = ($key == $groupBy) ? 'active' : '';?>
+              <li class='<?php echo $class;?>'>
+                <?php echo html::a($this->inlink('mind', "projectID=$projectID&groupBy=$key"), $value); ?>
+              </li>
+            <?php endforeach;?>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <button class='btn' id='fsBtn'>全屏</button>
+          </div>
+        </div>
+        <div class='panel-actions pull-right'><button id='saveBtn' type='button' class='btn btn-primary disabled' disabled='disabled'><i class="icon-save"></i> <span><?php echo $lang->save;?></span></button></div>
       </div>
-      <div class="popover-content task-desc" title='<?php echo $lang->task->desc;?>' placeholder='<?php echo $lang->task->desc;?>'></div>
+      <div class='panel-body minds-container'>
+        <div id='mindmap' class='mindmap'></div>
+        <div class='popover scale top fade' id='taskPopover'>
+          <div class='arrow'></div>
+          <div class='popover-title'>
+            <div class='pri-list'><span class='pri pri-0'>0</span><span class='pri pri-1'>1</span><span class='pri pri-2'>2</span><span class='pri pri-3'>3</span><span class='pri pri-4'>4</span></div>
+            <table>
+              <tr class='task-headings'>
+                <td colspan='2' class='nobr'><span class='active task-pri pri pri-3' title='<?php echo $lang->task->lblPri?>'></span> <strong class='task-name' title='<?php echo $lang->task->name?>'>-</strong></td>
+                <td class='text-right'><small class='text-muted task-type label' title='<?php echo $lang->task->type;?>'>-</small> <span class='label label-circle label-badge task-status-wait task-status' title='<?php echo $lang->task->status;?>'>-</span><button class='btn btn-success btn-sm btn-finish'><i class='icon-ok'></i> <?php echo $lang->finish;?></button><button class='btn btn-primary btn-sm btn-close'><i class='icon-off'></i> <?php echo $lang->close;?></button></td>
+              </tr>
+              <tr class='task-infos'>
+                <td><span class='task-assignedTo' title='<?php echo $lang->task->assignedTo?>'><i class='icon-user text-muted'></i> <small>-</small></span></td>
+                <td class='text-center'><span class='task-createdDate' title='<?php echo $lang->task->createdDate?>'><i class='icon-time text-muted'></i> <small>-</small></span></td>
+                <td class='text-right'><span class='task-deadline text-warning' title='<?php echo $lang->task->deadline;?>'><input type="text" name="taskDeadline" class='form-date form-control input-sm' id='taskDeadline' placeholder='<?php echo $lang->task->deadline;?>' /></span></td>
+              </tr>
+            </table>
+          </div>
+          <div class="popover-content task-desc" title='<?php echo $lang->task->desc;?>' placeholder='<?php echo $lang->task->desc;?>'></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
