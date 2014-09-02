@@ -9,5 +9,5 @@ $(document).ready(function()
     }
 
     $(".leftmenu a[href*=create]").modalTrigger({width:800});
-    $.setAjaxJSONER('.swticher', function(){location.reload()});
+    $.setAjaxJSONER('.switcher', function(){location.reload()});
 })
