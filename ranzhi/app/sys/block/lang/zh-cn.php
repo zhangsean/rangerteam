@@ -11,6 +11,7 @@
  */
 $lang->block->common = '区块';
 $lang->block->name   = '区块名称';
+$lang->block->color  = '颜色设置';
 
 $lang->block->lblEntry = '应用';
 $lang->block->lblBlock = '区块';

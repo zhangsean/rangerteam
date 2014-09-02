@@ -11,6 +11,7 @@
  */
 $lang->block->common = 'Block';
 $lang->block->name   = 'Name';
+$lang->block->color  = 'Color';
 
 $lang->block->lblEntry = 'Entry';
 $lang->block->lblBlock = 'Block';

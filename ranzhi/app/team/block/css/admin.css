@@ -1,0 +1,5 @@
+.input-group-btn .dropdown-toggle {border-radius: 4px;}
+.dropdown-menu {min-width: 160px;}
+.dropdown-menu.colors {padding: 5px; width: 205px}
+.dropdown-menu.buttons {padding: 5px; padding-bottom: 0;}
+.dropdown-menu.buttons > li {margin-bottom: 5px;}

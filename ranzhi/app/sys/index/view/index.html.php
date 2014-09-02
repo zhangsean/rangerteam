@@ -57,7 +57,7 @@ js::import($jsRoot . 'jquery/ips.js');
         $block->params = json_decode($block->params);
         ?>
         <div class='col-sm-6 col-md-4'>
-          <div class='panel' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->title?>' data-url='<?php echo $this->createLink('entry', 'printBlock', 'index=' . $index) ?>'>
+          <div class='panel <?php if(isset($block->params->color)) echo 'panel-' . $block->params->color;?>' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->title?>' data-url='<?php echo $this->createLink('entry', 'printBlock', 'index=' . $index) ?>'>
             <div class='panel-heading'>
               <div class='panel-actions'>
                 <button class="btn btn-mini refresh-panel"><i class="icon-repeat"></i></button>

@@ -28,6 +28,25 @@ include "../../common/view/chosen.html.php";
         ?>
         </td>
       </tr>
+      <tr>
+        <th><?php echo $lang->block->color;?></th>
+        <td>
+          <div class='input-group-btn'>
+            <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>
+              <?php echo $lang->block->color;?> <span class='caret'></span>
+            </button>
+            <?php echo html::hidden('params[color]', 'default');?>
+            <div class='dropdown-menu buttons'>
+              <li><button type='button' data-id='default' class='btn btn-block btn-default'><?php echo $lang->block->color;?></button></li>
+              <li><button type='button' data-id='primary' class='btn btn-block btn-primary'><?php echo $lang->block->color;?></button></li>
+              <li><button type='button' data-id='warning' class='btn btn-block btn-warning'><?php echo $lang->block->color;?></button></li>
+              <li><button type='button' data-id='danger' class='btn btn-block btn-danger'><?php echo $lang->block->color;?></button></li>
+              <li><button type='button' data-id='success' class='btn btn-block btn-success'><?php echo $lang->block->color;?></button></li>
+              <li><button type='button' data-id='info' class='btn btn-block btn-info'><?php echo $lang->block->color;?></button></li>
+            </div>
+          </div>
+        </td>
+      </tr>
       <?php foreach($params as $key => $param):?>
       <tr>
         <th><?php echo $param['name']?></th>
