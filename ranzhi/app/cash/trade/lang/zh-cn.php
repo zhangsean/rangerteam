@@ -69,7 +69,6 @@ $lang->trade->feeDesc  = '%s %s 转入 %s';
 $lang->trade->fileNode = '文件格式为csv';
 
 $lang->trade->importedFields = array();
-$lang->trade->importedFields['']         = '';
 $lang->trade->importedFields['category'] = '项目';
 $lang->trade->importedFields['type']     = '交易类型';
 $lang->trade->importedFields['trader']   = '商户';
