@@ -31,10 +31,11 @@ if($type == 'html')
         <th><?php echo $lang->block->color;?></th>
         <td>
           <div class='input-group-btn'>
-            <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>
+            <?php $btn = isset($block->params->color) ? 'btn-' . $block->params->color : 'btn-default'?>
+            <button type='button' class="btn <?php echo $btn;?> dropdown-toggle" data-toggle='dropdown'>
               <?php echo $lang->block->color;?> <span class='caret'></span>
             </button>
-            <?php echo html::hidden('params[color]', 'default');?>
+            <?php echo html::hidden('params[color]', isset($block->params->color) ? $block->params->color : 'default');?>
             <div class='dropdown-menu buttons'>
               <li><button type='button' data-id='default' class='btn btn-block btn-default'><?php echo $lang->block->color;?></button></li>
               <li><button type='button' data-id='primary' class='btn btn-block btn-primary'><?php echo $lang->block->color;?></button></li>
@@ -65,10 +66,11 @@ if($type == 'html')
         <th><?php echo $lang->block->color;?></th>
         <td>
           <div class='input-group-btn'>
-            <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>
+            <?php $btn = isset($block->params->color) ? 'btn-' . $block->params->color : 'btn-default'?>
+            <button type='button' class="btn <?php echo $btn;?> dropdown-toggle" data-toggle='dropdown'>
               <?php echo $lang->block->color;?> <span class='caret'></span>
             </button>
-            <?php echo html::hidden('params[color]', 'default');?>
+            <?php echo html::hidden('params[color]', isset($block->params->color) ? $block->params->color : 'default');?>
             <div class='dropdown-menu buttons'>
               <li><button type='button' data-id='default' class='btn btn-block btn-default'><?php echo $lang->block->color;?></button></li>
               <li><button type='button' data-id='primary' class='btn btn-block btn-primary'><?php echo $lang->block->color;?></button></li>
