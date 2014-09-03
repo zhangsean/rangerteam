@@ -17,32 +17,40 @@
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->schema->create;?></strong>
   </div>
-  <table class='table table-data'>
-    <thead>
+  <div class='panel-body'>
+    <table class="table table-form">
       <tr>
-        <th class='text-center'><?php echo $lang->schema->name;?></th>
-        <td colspan='<?php echo count($records[0]) - 1;?>'>
+        <td class='w-300px'>
           <div class='input-group'>
-            <div class='col-xs-4'><?php echo html::input('name', $file['title'], "class='form-control'");?></div>
-            <?php echo html::submitButton()?>
+            <span class='input-group-addon'><?php echo $lang->schema->name;?></span>
+            <?php echo html::input('name', $file['title'], "class='form-control'");?>
           </div>
         </td>
+        <td><?php echo html::submitButton()?></td>
       </tr>
-      <tr>
-        <?php for($i = 0; $i < count($records[0]); $i ++):?>
-        <td class='w-200px'><?php echo html::select('schema[' . chr($i + 65) . '][]', $lang->trade->importedFields, '', "class='form-control chosen' multiple data-placeholder='{$lang->schema->placeholder->selectField}'");?></td>
-        <?php endfor;?>
-      </tr>
-    </thead>
-    <?php foreach($records as $row => $values):?>
-      <?php if($row > 10) break;?>
-    <tr>
-      <?php foreach($values as $key => $value):?>
-      <td><nobr><?php echo $value;?></nobr></td>
-      <?php endforeach;?>
-    </tr>
-    <?php endforeach;?>
-  </table>
+    </table>
+    <div id='recordTable'>
+      <table class='table table-data'>
+        <thead>
+          <tr>
+            <?php for($i = 0; $i < count($records[0]); $i ++):?>
+            <th><?php echo html::select('schema[' . chr($i + 65) . '][]', $lang->trade->importedFields, '', "class='form-control chosen' multiple data-placeholder='{$lang->schema->placeholder->selectField}'");?></th>
+            <?php endfor;?>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach($records as $row => $values):?>
+          <?php if($row > 10) break;?>
+          <tr>
+            <?php foreach($values as $key => $value):?>
+            <td><nobr><?php echo $value;?></nobr></td>
+            <?php endforeach;?>
+          </tr>
+          <?php endforeach;?>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 </form>
 <?php include '../../common/view/footer.html.php';?>
