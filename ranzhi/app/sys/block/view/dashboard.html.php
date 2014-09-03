@@ -15,7 +15,7 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 if(isset($pageCSS)) css::internal($pageCSS);
 ?>
-<div class='dashboard dashboard-draggable' id='dashboard'>
+<div class='dashboard dashboard-draggable' id='dashboard' data-confirm-remove-block='<?php  echo $lang->block->confirmRemoveBlock;?>'>
   <div class='row'>
     <?php $index = 0;?>
     <?php foreach($blocks as $key => $block):?>

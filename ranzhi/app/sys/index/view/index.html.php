@@ -40,7 +40,7 @@ js::import($jsRoot . 'jquery/ips.js');
     </div>
   </div>
   <div id='home' class='fullscreen fullscreen-active'>
-    <div class='panels-container dashboard' id='dashboard'>
+    <div class='panels-container dashboard' id='dashboard' data-confirm-remove-block='<?php  echo $lang->block->confirmRemoveBlock;?>'>
       <div class='btn-toolbar actions'>
         <button title='<?php echo $lang->index->refresh;?>' class='btn btn-pure refresh-all-panel'><i class='icon-repeat'></i></button>
         <?php end($blocks);?>

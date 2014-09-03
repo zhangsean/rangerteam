@@ -6,7 +6,7 @@ $(function()
         draggable         : true,
         afterOrdered      : sortBlocks,
         afterPanelRemoved : deleteBlock,
-        panelRemovingTip  : config.confirmRemoveBlock,
+        panelRemovingTip  : config.confirmRemoveBlock
     });
 });
 

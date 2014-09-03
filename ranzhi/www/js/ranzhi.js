@@ -961,12 +961,13 @@ function reloadHome()
 {
     $('#home').load(createLink('index', 'index') + ' #dashboard', function()
     {
-        $('#home #dashboard').dashboard(
+        $('#dashboard').dashboard(
         {
             height            : 240,
             draggable         : true,
             afterOrdered      : sortBlocks,
-            afterPanelRemoved : deleteBlock
+            afterPanelRemoved : deleteBlock,
+            panelRemovingTip  : $('#dashboard').attr('data-confirm-remove-block')
         });
 
         $('#home .dashboard .refresh-all-panel').click(function()
@@ -986,7 +987,9 @@ function reloadHome()
                     $icon.removeClass('icon-spin');
                 }
             }    
-        });  
+        });
+
+        $('#dashboard [data-toggle="modal"]').modalTrigger();
     });
     $('#ajaxModal').remove();
     $('.modal-backdrop').remove();
