@@ -17,32 +17,28 @@
   <div class='panel project-block'>
     <div class='panel-heading'>
       <strong><?php echo $project->name;?></strong>
-      <div class='panel-action pull-right'>
+      <div class="panel-actions pull-right">
+        <div class="dropdown">
+          <button class="btn btn-mini" data-toggle="dropdown"><span class="caret"></span></button>
+          <ul class="dropdown-menu pull-right">
+            <?php echo '<li>' . html::a(inlink('edit', "projectID=$project->id"), $lang->edit, "data-toggle='modal'") . '</li>';?>
+            <?php if($project->status != 'finished') echo '<li>' . html::a(inlink('finish', "projectID=$project->id"), $lang->finish, "data-toggle='modal'") . '</li>';?>
+            <?php if($project->status != 'doing') echo '<li>' . html::a(inlink('activate', "projectID=$project->id"), $lang->activate, "class='switcher'") . '</li>';?>
+            <?php if($project->status != 'suspend') echo '<li>' . html::a(inlink('suspend', "projectID=$project->id"), $lang->project->suspend, "class='switcher'") . '</li>';?>
+          </ul>
+        </div>
       </div>
     </div>
     <div class='panel-body'>
-      <div class='text-important'>
-        <?php echo $lang->project->begin . $lang->colon . formatTime($project->begin);?> 
-      </div>
-      <div class='text-important'><?php echo $lang->project->end   . $lang->colon . formatTime($project->end);?> </div>
-      <div class='info'><?php echo $project->desc;?></div>
-      <div class='text-important'>
+      <p class='info'><?php echo $project->desc;?></p>
+      <p class='text-important'> <i class='icon icon-time'> </i><?php echo formatTime($project->begin) . ' ~ ' .  formatTime($project->end);?> </p>
+      <p class='text-important'>
         <?php if(!empty($project->members)):?>
-        <?php echo $lang->project->member . $lang->colon;?>
-        <?php foreach($project->members as $member):?>
-          <?php echo "<span class='{$member->role}'>{$users[$member->account]}</span>";?>
-        <?php endforeach;?>
+        <i class='icon icon-group'> </i>
+        <?php foreach($project->members as $member) echo "<span class='{$member->role}'>{$users[$member->account]}</span>";?>
         <?php endif;?>
-      </div>
-    </div>
-    <div class='text-right'>
-      <div class='panel-actions'>
-        <?php echo html::a(inlink('edit', "projectID=$project->id"), $lang->edit, "class='btn btn-xs' data-toggle='modal'");?>
-        <?php if($project->status != 'finished') echo html::a(inlink('finish', "projectID=$project->id"), $lang->finish, "class='btn btn-xs' data-toggle='modal'");?>
-        <?php if($project->status != 'doing') echo html::a(inlink('activate', "projectID=$project->id"), $lang->activate, "class='btn btn-xs switcher'");?>
-        <?php if($project->status != 'suspend') echo html::a(inlink('suspend', "projectID=$project->id"), $lang->project->suspend, "class='btn btn-xs switcher'");?>
-        <?php echo html::a(helper::createLink('task', 'browse', "projectID=$project->id"), $lang->project->enter, "class='btn btn-primary btn-xs'");?>
-      </div>
+      </p>
+      <?php echo html::a(helper::createLink('task', 'browse', "projectID=$project->id"), $lang->project->enter, "class='btn btn-primary btn-xs entry'");?>
     </div>
   </div>
 </div>
