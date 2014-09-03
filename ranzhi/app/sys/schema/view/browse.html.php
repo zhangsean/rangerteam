@@ -24,7 +24,7 @@
         <th class='w-70px'><?php  echo $lang->trade->id;?></th>
         <th class='text-left'><?php echo $lang->schema->name;?></th>
         <th class='w-100px'><?php echo $lang->trade->category;?></th>
-        <th class='w-100px'><?php echo $lang->trade->customer;?></th>
+        <th class='w-100px'><?php echo $lang->trade->trader;?></th>
         <th class='w-100px'><?php echo $lang->trade->money;?></th>
         <th class='w-120px'><?php echo $lang->trade->desc;?></th>
         <th class='w-100px'><?php echo $lang->trade->date;?></th>
@@ -38,7 +38,7 @@
         <td><?php echo $schema->id;?></td>
         <td class='text-left'><?php echo $schema->name;?></td>
         <td><?php echo $schema->category;?></td>
-        <td><?php echo $schema->customer;?></td>
+        <td><?php echo $schema->trader;?></td>
         <td><?php echo $schema->money;?></td>
         <td><?php echo $schema->desc;?></td>
         <td><?php echo $schema->date;?></td>

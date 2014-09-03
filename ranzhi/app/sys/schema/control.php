@@ -77,6 +77,7 @@ class schema extends control
             $tmpFile = $this->file->savePath . $file['pathname'];
             file_put_contents($tmpFile, $fc);
             $this->view->records = $this->schema->parseCSV($tmpFile);
+            $this->view->file    = $file;
             @unlink($tmpFile);
             unset($this->lang->schema->menu);
             $this->display();
@@ -84,7 +85,22 @@ class schema extends control
         elseif($_POST)
         {
             $schemaID = $this->schema->create();
-            if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $errors  = dao::getError();
+            $message = '';
+            if(is_array($errors))
+            {
+                foreach(array_keys($errors) as $field)
+                {
+                    if($field == 'name')
+                    {
+                        $message .= strip_tags(join(',', $errors['name']));
+                        continue;
+                    }
+                    $message .= (isset($this->lang->trade->{$field}) ? $this->lang->trade->{$field} : '') . ' ';
+                }
+                $message = sprintf($this->lang->schema->fieldRequired, $message);
+            }
+            if(!empty($errors)) $this->send(array('result' => 'fail', 'message' => $message));
 
             $this->loadModel('action')->create('schema', $schemaID, 'Created');
 

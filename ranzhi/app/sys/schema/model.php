@@ -53,14 +53,20 @@ class schemaModel extends model
      */
     public function create()
     {
-        $schema = fixer::input('post')
-            ->setIF($this->post->feeRow, 'fee', '')
-            ->setIF($this->post->diffCol, 'money', "{$this->post->in},{$this->post->out}")
-            ->remove('feeRow,diffCol')
-            ->get();
-
-        if($this->post->diffCol)$this->config->schema->require->create = str_replace(',type,', ',in,out,', $this->config->schema->require->create);
-        $this->dao->insert(TABLE_SCHEMA)->data($schema, 'in,out')
+        $this->app->loadLang('trade', 'cash');
+        $schema = array();
+        foreach($this->post->schema as $column => $fields)
+        {
+            foreach($fields as $field)
+            {
+                if(empty($field)) continue;
+                if(isset($this->lang->trade->importedFields[$field])) $schema[$field][] = $column;
+            }
+        }
+        foreach($schema as $field => $columns) $schema[$field] = join(',', $columns);
+        $schema['name'] = $this->post->name;
+        
+        $this->dao->insert(TABLE_SCHEMA)->data($schema)
             ->autoCheck()
             ->batchCheck($this->config->schema->require->create, 'notempty')
             ->exec();

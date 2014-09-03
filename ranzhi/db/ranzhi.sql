@@ -557,13 +557,13 @@ CREATE TABLE `sys_product` (
 CREATE TABLE `sys_schema` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `category` varchar(10) NOT NULL,
-  `customer` varchar(10) NOT NULL,
-  `type` varchar(10) NOT NULL,
-  `money` varchar(10) NOT NULL,
-  `desc` varchar(10) NOT NULL,
-  `date` varchar(10) NOT NULL,
-  `fee` varchar(10) NOT NULL,
+  `category` char(10) NOT NULL,
+  `trader`   char(10) NOT NULL,
+  `type`     char(10) NOT NULL,
+  `money`    char(10) NOT NULL,
+  `desc`     char(10) NOT NULL,
+  `date`     char(10) NOT NULL,
+  `fee`      char(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_sso`;

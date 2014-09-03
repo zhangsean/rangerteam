@@ -27,8 +27,8 @@
           <td><?php echo html::input('category', $schema->category, "class='form-control' placeholder='{$lang->schema->placeholder->common}'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->trade->customer;?></th>
-          <td><?php  echo html::input('customer', $schema->customer, "class='form-control' placeholder='{$lang->schema->placeholder->common}'");?></td>
+          <th><?php echo $lang->trade->trader;?></th>
+          <td><?php  echo html::input('trader', $schema->trader, "class='form-control' placeholder='{$lang->schema->placeholder->common}'");?></td>
         </tr>
 <?php
 $diffCol = strpos($schema->money, ',') !== false ? true : false;

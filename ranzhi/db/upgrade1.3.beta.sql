@@ -1,5 +1,6 @@
 ALTER TABLE `crm_contract` ADD `code` char(30) NOT NULL AFTER `name`;
 ALTER TABLE `oa_project` CHANGE status status enum('doing','finished','suspend') NOT NULL DEFAULT 'doing';
+ALTER TABLE `sys_schema` CHANGE `customer` `trader` char(10) not null;
 CREATE TABLE `sys_team` (
   `type` char(30) NOT NULL,
   `id` mediumint(8) NOT NULL DEFAULT '0',

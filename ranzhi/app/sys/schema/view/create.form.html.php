@@ -12,15 +12,25 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include dirname($app->getAppRoot()) . '/sys/common/view/chosen.html.php';?>
+<form method='post' id='ajaxForm'>
 <div id='recordBox' class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->schema->create;?></strong>
   </div>
-  <table class='table table-list'>
+  <table class='table table-data'>
     <thead>
       <tr>
+        <th class='text-center'><?php echo $lang->schema->name;?></th>
+        <td colspan='<?php echo count($records[0]) - 1;?>'>
+          <div class='input-group'>
+            <div class='col-xs-4'><?php echo html::input('name', $file['title'], "class='form-control'");?></div>
+            <?php echo html::submitButton()?>
+          </div>
+        </td>
+      </tr>
+      <tr>
         <?php for($i = 0; $i < count($records[0]); $i ++):?>
-        <td><?php echo html::select('settings[' . chr($i + 65) . ']', $lang->trade->importedFields, '', "class='form-control chosen' multiple data-placeholder='{$lang->schema->placeholder->selectField}'");?></td>
+        <td class='w-200px'><?php echo html::select('schema[' . chr($i + 65) . '][]', $lang->trade->importedFields, '', "class='form-control chosen' multiple data-placeholder='{$lang->schema->placeholder->selectField}'");?></td>
         <?php endfor;?>
       </tr>
     </thead>
@@ -34,4 +44,5 @@
     <?php endforeach;?>
   </table>
 </div>
+</form>
 <?php include '../../common/view/footer.html.php';?>
