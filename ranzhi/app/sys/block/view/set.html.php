@@ -30,7 +30,7 @@ if($type == 'html')
       <tr>
         <th><?php echo $lang->block->color;?></th>
         <td>
-          <div class='input-group-btn'>
+          <div class='input-group-btn block'>
             <?php $btn = isset($block->params->color) ? 'btn-' . $block->params->color : 'btn-default'?>
             <button type='button' class="btn <?php echo $btn;?> dropdown-toggle" data-toggle='dropdown'>
               <?php echo $lang->block->color;?> <span class='caret'></span>
@@ -65,7 +65,7 @@ if($type == 'html')
       <tr>
         <th><?php echo $lang->block->color;?></th>
         <td>
-          <div class='input-group-btn'>
+          <div class='input-group-btn block'>
             <?php $btn = isset($block->params->color) ? 'btn-' . $block->params->color : 'btn-default'?>
             <button type='button' class="btn <?php echo $btn;?> dropdown-toggle" data-toggle='dropdown'>
               <?php echo $lang->block->color;?> <span class='caret'></span>

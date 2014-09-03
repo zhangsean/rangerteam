@@ -257,6 +257,12 @@ body.page-actions-fixed {padding-bottom: 70px}
 .panel-info .table.table-hover tr:hover > td,
 .panel-danger .table.table-hover tr:hover > td {background: rgba(255,255,255,.4);}
 
+.block .btn-success {background: #d1fecb; color: #000; text-shadow: none; border-color: #c5f7c1;}
+.block .btn-warning {background: #fdfdc7; color: #000; text-shadow: none; border-color: #f8f7b6;}
+.block .btn-primary {background: #d8f2fa; color: #000; text-shadow: none; border-color: #c9ecf8;}
+.block .btn-info    {background: #dcd8fe; color: #000; text-shadow: none; border-color: #d4cdf3;}
+.block .btn-danger  {background: #f5d0f5; color: #000; text-shadow: none; border-color: #f1c3f1;}
+
 /* modal */
 .modal .modal-dialog {max-width: 100%; border: 8px solid #666; border-color: rgba(0,0,0,.25)}
 .modal .modal-header {padding: 10px 15px}
