@@ -203,20 +203,59 @@ body.page-actions-fixed {padding-bottom: 70px}
 .panel-actions > .btn-group .btn {padding: 3px 10px}
 
 .panel-body > .cards {margin-left: 0; margin-right: 0;}
-.panel-success {border-color: #229f24;}
-.panel-success > .panel-heading {background: #229f24; color: #fff}
-.panel-warning {border-color: #E48600;}
-.panel-warning > .panel-heading {background: #E48600; color: #fff}
-.panel-primary {border-color: #3280FC;}
-.panel-primary > .panel-heading {background: #3280FC; color: #fff}
-.panel-info {border-color: #39B3D7;}
-.panel-info > .panel-heading {background: #39B3D7; color: #fff}
-.panel-danger {border-color: #D2322D;}
-.panel-danger > .panel-heading {background: #D2322D; color: #fff}
-.panel-important {border-color: #81511C;}
-.panel-important > .panel-heading {background: #81511C; color: #fff}
-.panel-special {border-color: #8957A1;}
-.panel-special > .panel-heading {background: #8957A1; color: #fff}
+
+/* panel colors */
+.panel-success > .panel-heading,
+.panel-warning > .panel-heading,
+.panel-primary > .panel-heading,
+.panel-info > .panel-heading,
+.panel-danger > .panel-heading
+{
+  box-shadow: 0 1px 100px rgba(255,255,255,.8);
+  color: #333;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,.04);
+}
+.panel-success {background: #d1fecb}
+.panel-success > .panel-heading {background: #c5f7c1; }
+.panel-warning {background: #fdfdc7;}
+.panel-warning > .panel-heading {background: #f8f7b6;}
+.panel-primary {background: #d8f2fa;}
+.panel-primary > .panel-heading {background: #c9ecf8;}
+.panel-info {background: #dcd8fe;}
+.panel-info > .panel-heading {background: #d4cdf3;}
+.panel-danger {background: #f5d0f5;}
+.panel-danger > .panel-heading {background: #f1c3f1;}
+.panel-success .table td, .panel-success .table th,
+.panel-warning .table td, .panel-warning .table th,
+.panel-primary .table td, .panel-primary .table th,
+.panel-info .table td, .panel-info .table th,
+.panel-danger .table td, .panel-danger .table th {border: none;},
+.panel-success .table tr:nth-child(odd) > td, .panel-success .table th,
+.panel-warning .table tr:nth-child(odd) > td, .panel-warning .table th,
+.panel-primary .table tr:nth-child(odd) > td, .panel-primary .table th,
+.panel-info .table tr:nth-child(odd) > td, .panel-info .table th,
+.panel-danger .table tr:nth-child(odd) > td, .panel-danger .table th {background: rgba(255,255,255,.25);}
+.panel-success .table tr:nth-child(even) > td,
+.panel-warning .table tr:nth-child(even) > td,
+.panel-primary .table tr:nth-child(even) > td,
+.panel-info .table tr:nth-child(even) > td,
+.panel-danger .table tr:nth-child(even) > td {background: rgba(0,0,0,.02);}
+.panel-success .table tr:last-child > td,
+.panel-warning .table tr:last-child > td,
+.panel-primary .table tr:last-child > td,
+.panel-info .table tr:last-child > td
+.panel-danger .table tr:last-child > td {border-bottom: 1px solid rgba(0,0,0,0.05)}
+.panel-success .table tr:hover > th,
+.panel-warning .table tr:hover > th,
+.panel-primary .table tr:hover > th,
+.panel-info .table tr:hover > th,
+.panel-danger .table tr:hover > th {background: none;}
+.panel-success .table.table-hover tr:hover > td,
+.panel-warning .table.table-hover tr:hover > td,
+.panel-primary .table.table-hover tr:hover > td,
+.panel-info .table.table-hover tr:hover > td,
+.panel-danger .table.table-hover tr:hover > td {background: rgba(255,255,255,.4);}
 
 /* modal */
 .modal .modal-dialog {max-width: 100%; border: 8px solid #666; border-color: rgba(0,0,0,.25)}
