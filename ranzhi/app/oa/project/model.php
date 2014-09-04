@@ -331,6 +331,7 @@ class projectModel extends model
 
         $menu  = "<nav class='menu leftmenu affix taskMenu'><ul class='nav nav-stacked nav-primary'>";
         $menu .= "<li><a id='currentItem' href=\"javascript:showDropMenu('project', '$projectID', '$currentModule', '$currentMethod', '$extra')\">{$currentProject->name} <span class='icon-caret-down'></span></a><div id='dropMenu'></div></li>";
+        $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), $this->lang->task->all);
         $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=createdBy"), $this->lang->task->createdByMe);
         $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=assignedTo"), $this->lang->task->assignedToMe);
         $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=closedBy"), $this->lang->task->closedByMe);

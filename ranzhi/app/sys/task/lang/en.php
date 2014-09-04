@@ -104,6 +104,7 @@ $lang->task->assignedToMe = 'MyTasks';
 $lang->task->closedByMe   = 'MyClose';
 $lang->task->untilToday   = 'UntilToday';
 $lang->task->expired      = 'Expired';
+$lang->task->all          = 'All';
 
 $lang->task->basicInfo = 'Basic Info';
 $lang->task->life      = 'Task Life';

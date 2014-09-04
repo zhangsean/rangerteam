@@ -104,6 +104,7 @@ $lang->task->assignedToMe = '指派给我';
 $lang->task->closedByMe   = '由我完成';
 $lang->task->untilToday   = '今天到期';
 $lang->task->expired      = '已过期';
+$lang->task->all          = '所有任务';
 
 $lang->task->basicInfo = '基本信息';
 $lang->task->life      = '任务的一生';
