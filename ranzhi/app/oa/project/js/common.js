@@ -10,4 +10,7 @@ $(document).ready(function()
 
     $(".leftmenu a[href*=create]").modalTrigger({width:800});
     $.setAjaxJSONER('.switcher', function(){location.reload()});
+
+    var $leftmenu = $('.menu.leftmenu');
+    $leftmenu .next('a').prependTo($leftmenu);
 })
