@@ -159,7 +159,7 @@ class projectModel extends model
         if(dao::isError()) return false;
         $projectID = $this->dao->lastInsertId();
 
-        $members = array_merge(array($this->post->manager), (array)$this->post->member);
+        $members = array_unique(array_merge(array($this->post->manager), (array)$this->post->member));
 
         $user = new stdclass();
         $user->type = 'project';
