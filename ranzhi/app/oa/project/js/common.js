@@ -8,9 +8,9 @@ $(document).ready(function()
 
     }
 
-    $(".leftmenu a[href*=create]").modalTrigger({width:800});
+    $("#createButton").modalTrigger({width:800});
     $.setAjaxJSONER('.switcher', function(){location.reload()});
 
     var $leftmenu = $('.menu.leftmenu');
-    $leftmenu .next('a').prependTo($leftmenu);
+    $leftmenu .next('a').css('margin-top', '10px').appendTo($leftmenu);
 })
