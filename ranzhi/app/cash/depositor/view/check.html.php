@@ -23,13 +23,13 @@
     <form method='post' id='checkForm' class='form-inline'>
       <table class="table table-form w-p100">
         <tr>
-          <th class='w-60px'><?php echo $lang->depositor->common;?></th>
+          <th class='w-40px'><?php echo $lang->depositor->common;?></th>
           <td><?php echo html::select('depositor[]', array('all' => $lang->depositor->all) + $depositorList, empty($selected) ? 'all' : $selected, "class='form-control chosen'");?></td>
-          <th class='w-100px'><?php echo $lang->depositor->start;?></th>
+          <th class='w-70px'><?php echo $lang->depositor->start;?></th>
           <td class='w-200px'><?php echo html::select('start', $dateOptions, $start, "class='form-control'");?></td>
-          <th class='w-100px'><?php echo $lang->depositor->end;?></th>
+          <th class='w-70px'><?php echo $lang->depositor->end;?></th>
           <td class='w-200px'><?php echo html::select('end', array_merge(array(date(DT_DATE1) => $lang->today), $dateOptions), $end, "class='form-control'");?></td>
-          <td class='w-80px'><?php echo html::submitButton($lang->depositor->check);?></td>
+          <th class='w-80px'><?php echo html::submitButton($lang->depositor->check);?></th>
         </tr>
       </table>
     </form>
