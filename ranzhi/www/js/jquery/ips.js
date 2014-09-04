@@ -416,11 +416,6 @@
             target.toggleClass($e.attr('data-toggle-class'));
             $e.toggleClass('toggle-on');
         });
-
-        window.onbeforeunload = function(e)
-        {
-            if(desktop.hasTask()) return settings.confirmCloseBrowser;
-        }
     }
 
     /* Update browser url in address bar by change browser history */
