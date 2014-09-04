@@ -20,6 +20,7 @@ class task extends control
     public function __construct()
     {
         parent::__construct();
+        $this->lang->menuGroups->task = 'project';
     }
     /** 
      * The index page, locate to browse.
