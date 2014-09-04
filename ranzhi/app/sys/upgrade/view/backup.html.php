@@ -10,6 +10,7 @@
  */
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
+<?php if(version_compare($this->config->installedVersion, '1.4.beta', '<')) js::set('redeployApp', $lang->upgrade->redeployApp);?>
 <div class='container'>
   <div class='modal-dialog'>
     <div class='modal-header'>

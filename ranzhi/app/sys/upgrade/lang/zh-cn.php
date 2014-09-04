@@ -23,6 +23,7 @@ $lang->upgrade->selectVersion = '确认升级之前的版本';
 $lang->upgrade->confirm       = '确认要执行的SQL语句';
 $lang->upgrade->execute       = '确认执行';
 $lang->upgrade->next          = '下一步';
+$lang->upgrade->redeployApp   = "<h3>请重新部署app文件夹后继续</h3><pre class='text-danger'>方法:<br>删除旧的app目录，再从新的安装包里面复制app文件夹。</pre>";
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
@@ -36,3 +37,4 @@ $lang->upgrade->versionNote = "务必选择正确的版本，否则会造成数�
 $lang->upgrade->fromVersions['1_0_beta'] = '1.0.beta';
 $lang->upgrade->fromVersions['1_1_beta'] = '1.1.beta';
 $lang->upgrade->fromVersions['1_2_beta'] = '1.2.beta';
+$lang->upgrade->fromVersions['1_3_beta'] = '1.3.beta';
