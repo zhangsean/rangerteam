@@ -11,17 +11,11 @@
  */
 ?>
 <table class='table table-data table-hover table-fixed block-thread'>
-  <tr class='text-center'>
-    <th><?php echo $lang->thread->title;?></th>
-    <th class='w-80px'><?php echo $lang->thread->author;?></th>
-    <th class='w-80px'><?php echo $lang->thread->postedDate;?></th>
-  </tr>  
   <?php foreach($threads as $id => $thread):?>
   <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id={$this->get->entry}" : ''?>
   <tr data-url='<?php echo $this->createLink('team.thread', 'view', "id=$thread->id"); ?>' <?php echo $appid?>>
-    <td class='text-left'><?php echo $thread->title;?></td>
-    <td class='text-center'><?php echo $thread->authorRealname;?></td>
-    <td><?php echo substr($thread->createdDate, 0, 10);?></td>
+    <td><?php echo $thread->title;?></td>
+    <td class='w-50px'><?php echo substr($thread->createdDate, 5, 5);?></td>
   </tr>  
   <?php endforeach;?>
 </table>

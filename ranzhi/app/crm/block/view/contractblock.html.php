@@ -11,19 +11,12 @@
  */
 ?>
 <table class='table table-data table-hover block-contract table-fixed'>
-  <tr>
-    <th><?php echo $lang->contract->name?></th>
-    <th class='w-70px'><?php echo $lang->contract->amount?></th>
-    <th class='w-60px'><?php echo $lang->contract->delivery?></th>
-    <th class='w-60px'><?php echo $lang->contract->return?></th>
-  </tr>
   <?php foreach($contracts as $id => $contract):?>
   <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id='{$this->get->entry}'" : ''?>
   <tr data-url='<?php echo $this->createLink('crm.contract', 'view', "id=$id");?>' <?php echo $appid;?>>
     <td class='nobr'><?php echo $contract->name;?></td>
-    <td class='text-danger'><?php echo $contract->amount?></td>
-    <td><?php echo $lang->contract->deliveryList[$contract->delivery]?></td>
-    <td><?php echo $lang->contract->returnList[$contract->return]?></td>
+    <td class='w-80px text-center text-danger'><?php echo $contract->amount?></td>
+    <td class='w-110px'><?php echo $lang->contract->deliveryList[$contract->delivery] . ' ' . $lang->contract->returnList[$contract->return];?></td>
   </tr>
   <?php endforeach;?>
 </table>

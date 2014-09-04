@@ -10,16 +10,12 @@
  * @link        http://www.zentao.net
  */
 ?>
-<div class='article-content'>
-    <?php foreach($depositors as $id => $depositor):?>
-    <dl>
-      <?php if($depositor->type == 'bank'):?>
-      <dt><?php echo $depositor->title;?></dt>
-      <dd><?php echo $depositor->provider . ' ' . $depositor->account;?></dd>
-      <?php else:?>
-      <dt><?php echo $depositor->title;?></dt>
-      <dd><?php echo $lang->depositor->providerList[$depositor->provider] . ' ' . $depositor->account;?></dd>
-      <?php endif;?>
-    </dl>
-    <?php endforeach;?>
-</div>
+<table class='table table-data table-hover table-fixed'>
+  <?php foreach($depositors as $id => $depositor):?>
+  <?php $provider = $depositor->type == 'bank' ? $depositor->provider : $lang->depositor->providerList[$depositor->provider] ?>
+  <tr>
+     <td> <?php echo $depositor->account;?></td>
+     <td class='w-160px text-muted'><?php echo $provider;?> </td>
+  </tr>
+  <?php endforeach;?>
+</table>
