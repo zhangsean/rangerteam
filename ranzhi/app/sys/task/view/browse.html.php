@@ -12,10 +12,8 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <div class='row'>
-  <div class='col-md-2'>
-    <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
-  </div>
-  <div class='col-md-10'>
+  <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
+  <div class='with-menu page-content'>
     <div class='panel'>
       <div class='panel-heading'>
         <strong><i class='icon-list-ul icon'> </i><?php echo $lang->task->browse;?></strong>
