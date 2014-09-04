@@ -246,7 +246,7 @@ CREATE TABLE `oa_project` (
   `createdDate` datetime NOT NULL,
   `editedBy` char(30) NOT NULL,
   `editedDate` datetime NOT NULL,
-  `status` enum('doing','finishedd','suspend') NOT NULL DEFAULT 'doing',
+  `status` enum('doing','finished','suspend') NOT NULL DEFAULT 'doing',
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE='MyISAM' COLLATE 'utf8_general_ci'; 
