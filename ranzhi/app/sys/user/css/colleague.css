@@ -39,8 +39,7 @@ noindex:-o-prefocus, .card-user > .card-heading > img.bg{display: none}
 
 .card-user > .vcard {position: absolute; height: 100%; width: 265px; left: 120px; top: -100%; top: -100%\0; z-index: 10; opacity: 0; box-shadow: 1px 0 5px rgba(0,0,0,0.24)}
 @media not screen and (1){.card-user > .vcard {top: -100%;}}
-.card-user > .vcard:before {display: block; content: ' '; display: block; width: 0; height: 0; border: 11px solid transparent; border-left-color: #999999; border-left-color: rgba(0,0,0,0.35); position: absolute; right: -22px; top: 40px}
+.card-user > .vcard:before {display: block; content: ' '; display: block; width: 0; height: 0; border: 11px solid transparent; position: absolute; right: -22px; top: 40px; border-left-color: #ddd;}
 .card-user > .vcard > img {max-width: 200px; max-height: 200px; margin-top: 7px; border-radius: 10px; cursor: pointer;}
 .card-user > .vcard > .icon-remove {width: 20px; height: 20px; cursor: pointer; position: absolute; display: block; line-height: 20px; right: 10px; top: 10px; color: #eee}
-.card-user.show {text-shadow: 0 0 10px #000; color: #ccc}
-.card-user.show > .vcard {left: 0; top: 0; -webkit-transform: scale(1); -ms-transform: scale(1); transform: scale(1); opacity: 1; background: #999999; background-color: rgba(0,0,0,0.35);}
+.card-user.show > .vcard {left: 0; top: 0; -webkit-transform: scale(1); -ms-transform: scale(1); transform: scale(1); opacity: 1;background: #fff}
