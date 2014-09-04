@@ -42,6 +42,14 @@
         <?php echo html::a(helper::createLink('task', 'browse', "projectID=$project->id"), $lang->project->enter, "class='btn btn-primary btn-xs entry'");?>
       </div>
     </div>
+    <div class='panel-body'>
+      <p class='info'><?php echo $project->desc;?></p>
+      <div class='footerbar text-important'>
+        <span><?php foreach($project->members as $member) if($member->role == 'manager') echo "<i class='icon icon-user'> </i>" . $users[$member->account];?></span>
+        <span class=''><i class='icon icon-time'> </i><?php echo formatTime($project->begin, 'm-d') . ' ~ ' .  formatTime($project->end, 'm-d');?></span>
+        <?php echo html::a(helper::createLink('task', 'browse', "projectID=$project->id"), $lang->project->enter, "class='btn btn-primary btn-xs entry'");?>
+      </div>
+    </div>
   </div>
 <?php endforeach;?>
 </div>

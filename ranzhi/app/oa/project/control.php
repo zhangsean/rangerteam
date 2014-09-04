@@ -14,7 +14,6 @@ class project extends control
     public function __construct()
     {
         parent::__construct();
-
         $this->projects = $this->project->getPairs();
     }
 
@@ -28,10 +27,16 @@ class project extends control
     public function index($status = 'doing')
     {
         if(empty($this->projects)) $this->locate(inlink('create'));
-        $this->view->title    = $this->lang->project->common;
-        $this->view->status   = $status;
-        $this->view->projects = $this->project->getList($status);
-        $this->view->users    = $this->loadModel('user')->getPairs('noclosed');
+
+        $moduleMenu   = commonModel::createModuleMenu('project');
+        $createButton = html::a(inlink('create'), $this->lang->project->create, "class='btn btn-primary'");
+
+        
+        $this->view->title      = $this->lang->project->common;
+        $this->view->moduleMenu = $moduleMenu . $createButton;
+        $this->view->status     = $status;
+        $this->view->projects   = $this->project->getList($status);
+        $this->view->users      = $this->loadModel('user')->getPairs('noclosed');
         $this->display();
     }
 
