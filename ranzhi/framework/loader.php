@@ -31,6 +31,14 @@ $startTime = getTime();
 /* Run the app. */
 $app = router::createApp($appName);
 $common = $app->loadCommon();
+
+/* Check for need upgrade. */
+if(RUN_MODE != 'upgrade')
+{
+    $config->installedVersion = $common->loadModel('setting')->getVersion();
+    if(!(!is_numeric($config->version{0}) and $config->version{0} != $config->installedVersion{0}) and version_compare($config->version, $config->installedVersion, '>')) die(header('location: upgrade.php'));
+}
+
 $app->parseRequest();
 $common->checkPriv();
 $app->loadModule();
