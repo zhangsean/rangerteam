@@ -66,7 +66,7 @@ class task extends control
         $this->view->orderBy   = $orderBy;
         $this->view->projectID = $projectID;
         $this->view->projects  = $this->loadModel('project')->getPairs();
-        $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->view->users     = $this->loadModel('project')->getMemberPairs($projectID);
         $this->display();
     }
 
@@ -116,7 +116,7 @@ class task extends control
 
         $this->view->projectID = $projectID;
         $this->view->projects  = $this->loadModel('project')->getPairs();
-        $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->view->users     = $this->loadModel('project')->getMemberPairs($projectID);
         $this->display();
     }
 
@@ -151,7 +151,7 @@ class task extends control
         $this->view->task       = $this->task->getByID($taskID);
         $this->view->projectID  = $this->view->task->project;
         $this->view->projects   = $this->loadModel('project')->getPairs();
-        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->users      = $this->loadModel('project')->getMemberPairs($this->view->task->project);
         $this->display();
     }
 
@@ -170,7 +170,7 @@ class task extends control
         $this->view->task      = $task;
         $this->view->projectID = $task->project;
         $this->view->projects  = $this->loadModel('project')->getPairs();
-        $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->view->users      = $this->loadModel('project')->getMemberPairs($this->view->task->project);
 
         $this->display();
     }
@@ -270,7 +270,7 @@ class task extends control
         $this->view->title  = $task->name;
         $this->view->taskID = $taskID;
         $this->view->task   = $task;
-        $this->view->users  = $this->loadModel('user')->getPairs();
+        $this->view->users  = $this->loadModel('project')->getMemberPairs($task->project);
         $this->display();
     }
 

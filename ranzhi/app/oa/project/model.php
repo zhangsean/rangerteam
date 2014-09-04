@@ -46,6 +46,18 @@ class projectModel extends model
     }
 
     /**
+     * Get member pairs.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getMemberPairs($projectID)
+    {
+        $members = $this->dao->select('account')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($projectID)->fetchPairs('account');
+        return $this->dao->select('account, realname')->from(TABLE_USER)->where('account')->in($members)->orderBy('id_asc')->fetchPairs();
+    }
+
+    /**
      * Get project list.
      * 
      * @param  int    $status 
@@ -59,7 +71,7 @@ class projectModel extends model
             ->beginIF($status)->andWhere('status')->eq($status)->fi()
             ->fetchAll('id');
 
-        $members =  $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id');
+        $members = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id');
 
         foreach($projects as $project)
         {
