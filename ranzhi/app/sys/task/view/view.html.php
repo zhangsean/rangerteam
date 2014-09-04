@@ -43,7 +43,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->task->assignedTo;?></th>
-              <td><?php echo $users[$task->assignedTo];?></td>
+              <td><?php echo $members[$task->assignedTo];?></td>
             </tr>
             <tr>
               <th><?php echo $lang->task->type;?></th>
