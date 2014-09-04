@@ -300,7 +300,7 @@ class task extends control
         }
         $this->view->title = $this->lang->task->activate;
         $this->view->task  = $this->task->getByID($taskID);
-        $this->view->users = $this->loadModel('user')->getPairs();
+        $this->view->users = $this->loadModel('user')->getPairs('noclosed');
         $this->display();
     }
 
