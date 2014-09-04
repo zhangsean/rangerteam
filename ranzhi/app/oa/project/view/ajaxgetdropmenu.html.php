@@ -52,13 +52,9 @@
       }
       ?>
     </ul>
- 
-    <div>
-      <?php echo html::a($this->createLink('project', 'index'), "<i class='icon-th-large mgr-5px'></i> " . $lang->project->allProject)?>
-      <div class='pull-right actions'>
-        <div><?php if($finisheds):?><a id='finishedMore' href='javascript:switchFinished()'><?php echo $lang->project->finished . ' <i class="icon-angle-right"></i>';?></a><?php endif;?></div>
-        <div><?php if($suspends):?><a id='suspendMore' href='javascript:switchSuspend()'><?php echo $lang->project->suspend . ' <i class="icon-angle-right"></i>';?></a><?php endif;?></div>
-      </div>
+    <div class='pull-right actions'>
+      <div><?php if($finisheds):?><a id='finishedMore' href='javascript:switchFinished()'><?php echo $lang->project->finished . ' <i class="icon-angle-right"></i>';?></a><?php endif;?></div>
+      <div><?php if($suspends):?><a id='suspendMore' href='javascript:switchSuspend()'><?php echo $lang->project->suspended . ' <i class="icon-angle-right"></i>';?></a><?php endif;?></div>
     </div>
   </div>
 

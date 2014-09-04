@@ -22,8 +22,8 @@ $lang->project->mine       = 'I charge : ';
 $lang->project->other      = 'Other : ';
 $lang->project->deleted    = 'Deleted';
 $lang->project->finished   = 'Finished';
+$lang->project->suspended  = 'Suspended';
 $lang->project->noMatched  = 'No matched project including "%s"';
-$lang->project->allProject = 'All projects';
 
 $lang->project->id          = 'ID';
 $lang->project->name        = 'Name';
