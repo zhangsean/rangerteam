@@ -23,7 +23,8 @@ $lang->upgrade->selectVersion = 'Select version to upgrade from';
 $lang->upgrade->confirm       = 'Confirm the SQL to be excuted.';
 $lang->upgrade->execute       = 'Execute';
 $lang->upgrade->next          = 'Next';
-$lang->upgrade->redeployApp   = "<h3>Please redeploy app</h3><pre class='text-danger'>Be sure to delete old app directory before copy new package files.</pre>";
+$lang->upgrade->redeploy      = 'Please redeploy app directory before upgrade.';
+$lang->upgrade->redeployDesc  = "<h5>For reaseon of code adjustment app directory need to redeploy.</h5><div class='text-important'>operating steps : delete app directory before copy new package.</div>";
 
 $lang->upgrade->backupData = <<<EOT
 <pre>

@@ -13,8 +13,9 @@
 <div class='container'>
   <div class='modal-dialog'>
     <div class='modal-header'>
-      <h3><?php echo $lang->upgrade->index;?></h3>
+      <h3><?php echo $lang->upgrade->redeploy;?></h3>
     </div>
+    <div class='panel-body'><?php echo $lang->upgrade->redeployDesc?></div>
     <div class='modal-footer'>
       <?php echo html::a(inlink('backup'), $lang->upgrade->next, "class='btn btn-primary'");?>
     </div>

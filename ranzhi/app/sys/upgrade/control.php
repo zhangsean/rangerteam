@@ -30,7 +30,8 @@ class upgrade extends control
      */
     public function index()
     {
-        $this->locate(inlink('backup'));
+        if(version_compare($this->config->installedVersion, '1.3.beta', '>')) $this->locate(inlink('backup'));
+        $this->display();
     }
 
     /**
