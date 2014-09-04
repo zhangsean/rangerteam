@@ -35,7 +35,7 @@
           <th class='w-100px'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->trade->category);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('handlers', $orderBy, $vars, $lang->trade->handlers);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->trade->date);?></th>
-          <th><?php commonModel::printOrderLink('desc', $orderBy, $vars, $lang->trade->desc);?></th>
+          <th><?php echo $lang->trade->desc;?></th>
           <th class='w-120px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
