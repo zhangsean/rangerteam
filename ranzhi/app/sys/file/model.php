@@ -235,7 +235,7 @@ class fileModel extends model
      */
     public function getExtension($filename)
     {
-        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
         if(empty($extension)) return 'txt';
         if(strpos($this->config->file->dangers, $extension) !== false) return 'txt';
         return $extension;
