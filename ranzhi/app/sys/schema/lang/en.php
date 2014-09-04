@@ -12,6 +12,7 @@
 $lang->schema->common   = 'Schema';
 $lang->schema->create   = 'Create schema';
 $lang->schema->edit     = 'Edit schema';
+$lang->schema->csvFile  = 'Schema file';
 
 $lang->schema->name     = 'Name';
 $lang->schema->feeRow   = 'Fee is a record';

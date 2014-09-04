@@ -14,7 +14,7 @@
 <form method='post' id='sjaxForm' enctype='multipart/form-data' action='<?php echo inlink('create')?>'>
   <table class='table table-form'>
     <tr>
-      <th><?php echo $lang->trade->importFile?></th>
+      <th><?php echo $lang->schema->csvFile?></th>
       <td><?php echo html::file('files', "class='form-control'")?></td>
     </tr>
     <tr>

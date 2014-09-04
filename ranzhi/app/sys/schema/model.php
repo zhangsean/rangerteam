@@ -55,15 +55,18 @@ class schemaModel extends model
     {
         $this->app->loadLang('trade', 'cash');
         $schema = array();
-        foreach($this->post->schema as $column => $fields)
+        if(!empty($_POST['scchema']))
         {
-            foreach($fields as $field)
+            foreach($this->post->schema as $column => $fields)
             {
-                if(empty($field)) continue;
-                if(isset($this->lang->trade->importedFields[$field])) $schema[$field][] = $column;
+                foreach($fields as $field)
+                {
+                    if(empty($field)) continue;
+                    if(isset($this->lang->trade->importedFields[$field])) $schema[$field][] = $column;
+                }
             }
+            foreach($schema as $field => $columns) $schema[$field] = join(',', $columns);
         }
-        foreach($schema as $field => $columns) $schema[$field] = join(',', $columns);
         $schema['name'] = $this->post->name;
         
         $this->dao->insert(TABLE_SCHEMA)->data($schema)

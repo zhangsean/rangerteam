@@ -12,6 +12,7 @@
 $lang->schema->common   = '导入模板';
 $lang->schema->create   = '创建模板';
 $lang->schema->edit     = '编辑模板';
+$lang->schema->csvFile  = '模板文件';
 
 $lang->schema->name     = '模板名称';
 $lang->schema->feeRow   = '手续费为一条记录';
