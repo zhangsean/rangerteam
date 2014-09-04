@@ -46,7 +46,6 @@ class upgradeModel extends model
                 $this->computeContactInfo();
             case '1_3_beta':
                 $this->execSQL($this->getUpgradeFile('1.3.beta'));
-                $this->deleteLib();
                 $this->setCompanyContent();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -357,18 +356,6 @@ class upgradeModel extends model
 
         return !dao::isError();
 
-    }
-
-    /**
-     * Delete deleted doclibs when upgrade fron 1.3.beta.
-     * 
-     * @access public
-     * @return void
-     */
-    public function deleteLib()
-    {
-        $this->dao->delete()->from(TABLE_DOCLIB)->where('deleted')->eq(1)->exec();
-        return !dao::isError();
     }
 
     /**

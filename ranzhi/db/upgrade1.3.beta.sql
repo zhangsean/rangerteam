@@ -13,3 +13,4 @@ CREATE TABLE `sys_team` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 UPDATE `sys_entry` SET `name` = '现金记账' WHERE `code` = 'cash';
+DELETE FROM `oa_docLib` WHERE `deleted` = 1;
