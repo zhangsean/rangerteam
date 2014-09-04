@@ -32,22 +32,11 @@
       </div>
       <div class='panel-body'>
         <p class='info'><?php echo $project->desc;?></p>
-        <p class='text-important'> <i class='icon icon-time'> </i><?php echo formatTime($project->begin) . ' ~ ' .  formatTime($project->end);?> </p>
-        <p class='text-important'>
-          <?php if(!empty($project->members)):?>
-          <i class='icon icon-group'> </i>
-          <?php foreach($project->members as $member) echo "<span class='{$member->role}'>{$users[$member->account]}</span>";?>
-          <?php endif;?>
-        </p>
-        <?php echo html::a(helper::createLink('task', 'browse', "projectID=$project->id"), $lang->project->enter, "class='btn btn-primary btn-xs entry'");?>
-      </div>
-    </div>
-    <div class='panel-body'>
-      <p class='info'><?php echo $project->desc;?></p>
-      <div class='footerbar text-important'>
-        <span><?php foreach($project->members as $member) if($member->role == 'manager') echo "<i class='icon icon-user'> </i>" . $users[$member->account];?></span>
-        <span class=''><i class='icon icon-time'> </i><?php echo formatTime($project->begin, 'm-d') . ' ~ ' .  formatTime($project->end, 'm-d');?></span>
-        <?php echo html::a(helper::createLink('task', 'browse', "projectID=$project->id"), $lang->project->enter, "class='btn btn-primary btn-xs entry'");?>
+        <div class='footerbar text-important'>
+          <span><?php foreach($project->members as $member) if($member->role == 'manager') echo "<i class='icon icon-user'> </i>" . $users[$member->account];?></span>
+          <span class=''><i class='icon icon-time'> </i><?php echo formatTime($project->begin, 'm-d') . ' ~ ' .  formatTime($project->end, 'm-d');?></span>
+          <?php echo html::a(helper::createLink('task', 'browse', "projectID=$project->id"), $lang->project->enter, "class='btn btn-primary btn-xs entry'");?>
+        </div>
       </div>
     </div>
   </div>
