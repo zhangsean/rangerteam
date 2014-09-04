@@ -11,3 +11,5 @@ CREATE TABLE `sys_team` (
   `hours` float(2,1) unsigned NOT NULL DEFAULT '0.0',
   PRIMARY KEY (`type`,`id`,`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+UPDATE `sys_entry` SET `name` = '现金记账' WHERE `code` = 'cash';
