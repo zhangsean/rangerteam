@@ -47,7 +47,7 @@ class taskModel extends model
             ->beginIF($mode == 'assignedTo')->andWhere('assignedTo')->eq($this->app->user->account)->fi()
             ->beginIF($mode == 'closedBy')->andWhere('closedBy')->eq($this->app->user->account)->fi()
             ->beginIF($mode == 'untilToday')->andWhere('deadline')->eq(helper::today())->fi()
-            ->beginIF($mode == 'expired')->andWhere('deadline')->lt(helper::today())->fi()
+            ->beginIF($mode == 'expired')->andWhere('deadline')->ne('0000-00-00')->andWhere('deadline')->lt(helper::today())->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
