@@ -323,8 +323,6 @@ class projectModel extends model
         $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=closedBy"), $this->lang->task->closedByMe);
         $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=untilToday"), $this->lang->task->untilToday);
         $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=expired"), $this->lang->task->expired);
-        $isCreateMenu = ($this->app->getModuleName() == 'project' and $this->app->getmethodName() == 'create') ? "class='active'" : ''; 
-        $menu .= "<li {$isCreateMenu}>" . html::a(helper::createLink('project', 'create'), $this->lang->project->create, "data-toggle='modal'");
         $menu .= "</ul></nav>";
 
         return $menu;
