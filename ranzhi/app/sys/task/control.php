@@ -63,6 +63,7 @@ class task extends control
 
         $this->view->tasks     = $this->task->getList($projectID, $mode, $orderBy, $pager);
         $this->view->pager     = $pager;
+        $this->view->mode      = $mode;
         $this->view->orderBy   = $orderBy;
         $this->view->projectID = $projectID;
         $this->view->projects  = $this->loadModel('project')->getPairs();
