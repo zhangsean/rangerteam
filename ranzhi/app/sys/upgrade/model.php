@@ -368,8 +368,9 @@ class upgradeModel extends model
     {
         if(empty($this->config->company->content) and $this->config->company->desc)
         {
-            $this->config->company->content = $this->config->company->desc;
-            unset($this->config->company->desc);
+            $this->dao->update(TABLE_CONFIG)->set('value')->eq($this->config->company->desc)->where('`key`')->eq('content')->andWhere('section')->eq('company')->exec();
+            $this->dao->delete()->from(TABLE_CONFIG)->where('`key`')->eq('desc')->andWhere('section')->eq('company')->exec();
         }
+        return !dao::isError();
     }
 }
