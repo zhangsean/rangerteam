@@ -7,6 +7,4 @@ $(function()
         $('form .pri.active').removeClass('active');
         $('form #pri').val($(this).addClass('active').data('value'));
     });
-    
-    $('.taskMenu').find('[href*=' + v.mode + ']').parent().addClass('active');
 })

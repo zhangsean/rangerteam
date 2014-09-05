@@ -11,7 +11,7 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
-<?php js::set('mode', $mode);?>
+<?php if($mode) js::set('mode', $mode);?>
 <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
 <div class='with-menu page-content'>
   <div class='panel'>
