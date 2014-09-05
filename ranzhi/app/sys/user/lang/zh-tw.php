@@ -38,7 +38,7 @@ $lang->user->zipcode   = '郵編';
 $lang->user->join      = '加入日期';
 $lang->user->visits    = '訪問次數';
 $lang->user->ip        = '最後IP';
-$lang->user->last      = '最後登錄時間';
+$lang->user->last      = '最後登錄';
 $lang->user->allowTime = '開放時間';
 $lang->user->status    = '狀態';
 $lang->user->alert     = '您的帳號已被禁用';
@@ -66,6 +66,9 @@ $lang->user->forbid          = '禁用';
 $lang->user->active          = '激活';
 $lang->user->setReferer      = '設置referer';
 $lang->user->vcard           = '獲取二維碼名片';
+$lang->user->uploadAvatar    = '上傳頭像';
+$lang->user->cropAvatar      = '裁剪頭像';
+$lang->user->cropAvatarTip   = '拖拽選框來選擇頭像裁剪範圍';
 
 $lang->user->profile     = '個人信息';
 $lang->user->editProfile = '編輯信息';
@@ -86,6 +89,7 @@ $lang->user->lockedForEver = "成員已經被永久禁用。";
 $lang->user->lblRegistered = '恭喜您，已經成功註冊。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->actionFail    = '操作失敗';
+$lang->user->uploadSuccess = '上傳成功';
 
 $lang->user->forbidUser = '禁用管理';
 $lang->user->operate    = '操作';

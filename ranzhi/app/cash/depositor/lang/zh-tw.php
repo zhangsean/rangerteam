@@ -26,15 +26,16 @@ $lang->depositor->createdDate     = '添加時間';
 $lang->depositor->editedBy        = '由誰編輯';
 $lang->depositor->editedDate      = '編輯時間';
 
-$lang->depositor->all      = '所有賬號';
-$lang->depositor->create   = '添加帳號';
-$lang->depositor->browse   = '瀏覽賬號';
-$lang->depositor->edit     = '編輯帳號';
-$lang->depositor->delete   = '刪除帳號';
-$lang->depositor->view     = '帳號詳情';
-$lang->depositor->forbid   = '禁用';
-$lang->depositor->activate = '激活';
-$lang->depositor->balance  = '餘額';
+$lang->depositor->all         = '所有賬號';
+$lang->depositor->create      = '添加帳號';
+$lang->depositor->browse      = '瀏覽賬號';
+$lang->depositor->edit        = '編輯帳號';
+$lang->depositor->delete      = '刪除帳號';
+$lang->depositor->view        = '帳號詳情';
+$lang->depositor->forbid      = '禁用';
+$lang->depositor->activate    = '激活';
+$lang->depositor->balance     = '餘額';
+$lang->depositor->saveBalance = '登記餘額';
 
 $lang->depositor->check         = '對賬';
 $lang->depositor->start         = '開始日期';
@@ -46,6 +47,8 @@ $lang->depositor->result        = '結果';
 $lang->depositor->success       = "<span class='text-success'>對賬成功</span>";
 $lang->depositor->more          = "<span class='text-danger'>超出實際餘額 %s </span>";
 $lang->depositor->less          = "<span class='text-danger'>低於實際餘額 %s </span>";
+
+$lang->depositor->createBalance = '請先錄入賬號餘額。';
 
 $lang->depositor->typeList['cash']   = '現金帳號';
 $lang->depositor->typeList['bank']   = '借記卡';

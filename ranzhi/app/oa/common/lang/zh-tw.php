@@ -19,8 +19,12 @@ $lang->menu->oa->announce  = '公告|announce|index|';
 $lang->menu->oa->doc       = '文檔|doc|index|';
 
 $lang->dashboard = new stdclass();
-$lang->block     = new stdclass();
+
 $lang->project   = new stdclass();
+$lang->project->menu = new stdclass();
+$lang->project->menu->doing    = '進行中|project|index|status=doing';
+$lang->project->menu->finished = '已完成|project|index|ststus=finished';
+$lang->project->menu->suspend  = '已掛起|project|index|ststus=suspend';
 
 $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();

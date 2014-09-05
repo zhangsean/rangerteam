@@ -28,6 +28,7 @@ $lang->contact->wangwang      = '旺旺';
 $lang->contact->site          = '網址';
 $lang->contact->mobile        = '手機';
 $lang->contact->phone         = '電話';
+$lang->contact->fax           = '傳真';
 $lang->contact->weibo         = '微博';
 $lang->contact->weixin        = '微信';
 $lang->contact->desc          = '簡介';
@@ -54,6 +55,8 @@ $lang->contact->view    = '聯繫人詳情';
 $lang->contact->resume  = '履歷';
 $lang->contact->address = '地址';
 $lang->contact->record  = '溝通';
+$lang->contact->qrcode  = '二維碼';
+$lang->contact->vcard   = '二維碼名片';
 
 $lang->contact->basicInfo   = '基本信息';
 $lang->contact->contactInfo = '聯繫方式';

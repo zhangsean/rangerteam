@@ -11,6 +11,7 @@
  */
 $lang->block->admin    = '管理區塊';
 $lang->block->num      = '數量';
+$lang->block->type     = '類型';
 $lang->block->orderBy  = '排序';
 $lang->block->status   = '狀態';
 $lang->block->actions  = '操作';
@@ -18,9 +19,9 @@ $lang->block->lblBlock = '區塊';
 
 $lang->block->availableBlocks = new stdclass();
 
-$lang->block->availableBlocks->order    = '我的訂單';
+$lang->block->availableBlocks->order    = '訂單列表';
 //$lang->block->availableBlocks->task     = '我的任務';
-$lang->block->availableBlocks->contract = '我的合同';
+$lang->block->availableBlocks->contract = '合同列表';
 
 $lang->block->orderByList = new stdclass();
 
@@ -44,3 +45,22 @@ $lang->block->orderByList->contract['id_desc']      = 'ID 遞減';
 $lang->block->orderByList->contract['customer_asc'] = '客戶';
 $lang->block->orderByList->contract['amount_asc']   = '金額遞增';
 $lang->block->orderByList->contract['amount_desc']  = '金額遞減';
+
+$lang->block->typeList = new stdclass();
+
+$lang->block->typeList->order['assignedTo']   = '指派給我';
+$lang->block->typeList->order['createdBy']    = '由我創建';
+$lang->block->typeList->order['signedBy']     = '由我簽約';
+$lang->block->typeList->order['closedBy']     = '由我關閉';
+$lang->block->typeList->order['activatedBy']  = '由我激活';
+$lang->block->typeList->order['normalstatus'] = '正常';
+$lang->block->typeList->order['signedstatus'] = '已簽約';
+$lang->block->typeList->order['closedstatus'] = '已關閉';
+
+$lang->block->typeList->contract['returnedBy']     = '由我回款';
+$lang->block->typeList->contract['deliveredBy']    = '由我交付';
+$lang->block->typeList->contract['closedBy']       = '由我關閉';
+$lang->block->typeList->contract['canceled']       = '由我取消';
+$lang->block->typeList->contract['normalstatus']   = '正常';
+$lang->block->typeList->contract['closedstatus']   = '已完成';
+$lang->block->typeList->contract['canceledstatus'] = '已取消';

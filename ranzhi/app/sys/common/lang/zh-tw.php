@@ -53,6 +53,7 @@ $lang->home           = '首頁';
 $lang->welcome        = '歡迎您，<strong>%s</strong>！';
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = '今天是%s，';
+$lang->today          = '今天';
 $lang->aboutUs        = '關於我們';
 $lang->about          = '關於';
 $lang->link           = '友情連結';
@@ -83,11 +84,13 @@ $lang->close          = '關閉';
 $lang->finish         = '完成';
 $lang->cancel         = '取消';
 $lang->save           = '保存';
+$lang->saved          = '已保存';
 $lang->confirm        = '確認';
 $lang->preview        = '預覽';
 $lang->goback         = '返回';
 $lang->search         = '搜索';
 $lang->assign         = '指派';
+$lang->start          = '開始';
 $lang->create         = '新建';
 $lang->forbid         = '禁用';
 $lang->activate       = '激活';
@@ -109,7 +112,10 @@ $lang->alias          = '搜索引擎優化使用，可使用英文、數字';
 $lang->unfold         = '+';
 $lang->fold           = '-';
 $lang->files          = '附件';
+$lang->addFiles       = '上傳了附件 ';
 $lang->comment        = '備註';
+$lang->selectAll      = '全選';
+$lang->selectReverse  = '反選';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();
@@ -122,10 +128,11 @@ $lang->lifetime->lastEdited   = '最後修改';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
-$lang->js->confirmDelete = '您確定要執行刪除操作嗎？';
-$lang->js->deleteing     = '刪除中';
-$lang->js->doing         = '處理中';
-$lang->js->timeout       = '網絡超時,請重試';
+$lang->js->confirmDelete         = '您確定要執行刪除操作嗎？';
+$lang->js->deleteing             = '刪除中';
+$lang->js->doing                 = '處理中';
+$lang->js->timeout               = '網絡超時,請重試';
+$lang->js->confirmDiscardChanges = '表單已更改，確定關閉？';
 
 /* Contact fields*/
 $lang->company = new stdclass();
@@ -155,6 +162,7 @@ $lang->action  = new stdclass();
 $lang->effort  = new stdclass();
 $lang->setting = new stdclass();
 $lang->task    = new stdclass();
+$lang->schema  = new stdclass();
 
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = '公司|company|setbasic|';
@@ -173,10 +181,6 @@ $lang->entry       = new stdclass();
 $lang->entry->menu = new stdclass();
 $lang->entry->menu->admin  = array('link' => '應用列表|entry|admin|', 'alias' => 'edit');
 $lang->entry->menu->create = '添加應用|entry|create|';
-
-/* Menu of company module. */
-$lang->company->menu = new stdclass();
-$lang->company->menu->basic   = '公司信息|company|setbasic|';
 
 /* Menu system. */
 $lang->system       = new stdclass();
@@ -203,12 +207,12 @@ $lang->error->length       = array('<strong>%s</strong>長度錯誤，應當為<
 $lang->error->reg          = '<strong>%s</strong>不符合格式，應當為:<strong>%s</strong>。';
 $lang->error->unique       = '<strong>%s</strong>已經有<strong>%s</strong>這條記錄了。';
 $lang->error->notempty     = '<strong>%s</strong>不能為空。';
-$lang->error->empty        = "『%s』必須為空。";
+$lang->error->empty        = "<strong>%s</strong>必須為空。";
 $lang->error->equal        = '<strong>%s</strong>必須為<strong>%s</strong>。';
-$lang->error->gt           = "『%s』應當大於『%s』。";
-$lang->error->ge           = "『%s』應當不小於『%s』。";
-$lang->error->lt           = "『%s』應當小於『%s』。";
-$lang->error->le           = "『%s』應當不大於『%s』。";
+$lang->error->gt           = "<strong>%s</strong>應當大於<strong>%s</strong>。";
+$lang->error->ge           = "<strong>%s</strong>應當不小於<strong>%s</strong>。";
+$lang->error->lt           = "<strong>%s</strong>應當小於<strong>%s</strong>。";
+$lang->error->le           = "<strong>%s</strong>應當不大於<strong>%s</strong>。";
 $lang->error->in           = '<strong>%s</strong>必須為<strong>%s</strong>。';
 $lang->error->int          = array('<strong>%s</strong>應當是數字。', '<strong>%s</strong>最小值為%s',  '<strong>%s</strong>應當介於<strong>%s-%s</strong>之間。');
 $lang->error->float        = '<strong>%s</strong>應當是數字，可以是小數。';
@@ -224,13 +228,14 @@ $lang->error->noWritable   = '%s 可能不可寫，請修改權限！';
 
 /* The pager items. */
 $lang->pager = new stdclass();
-$lang->pager->noRecord  = '暫時沒有記錄。';
-$lang->pager->digest    = '共 <strong>%s</strong> 條記錄，每頁 <strong>%s</strong> 條，頁面：<strong>%s/%s</strong> ';
-$lang->pager->first     = '首頁';
-$lang->pager->pre       = '上頁';
-$lang->pager->next      = '下頁';
-$lang->pager->last      = '末頁';
-$lang->pager->locate    = 'Go!';
+$lang->pager->noRecord   = '暫時沒有記錄。';
+$lang->pager->digest     = "共 <strong>%s</strong> 條記錄，%s <strong>%s/%s</strong> &nbsp; ";
+$lang->pager->recPerPage = "每頁 <strong>%s</strong> 條";
+$lang->pager->first      = '首頁';
+$lang->pager->pre        = '上頁';
+$lang->pager->next       = '下頁';
+$lang->pager->last       = '末頁';
+$lang->pager->locate     = 'Go!';
 
 $lang->date = new stdclass();
 $lang->date->minute = '分鐘';

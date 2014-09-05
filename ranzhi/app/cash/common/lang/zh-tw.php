@@ -17,6 +17,7 @@ $lang->menu->cash->dashboard = '我的地盤|dashboard|index|';
 $lang->menu->cash->trade     = '記賬|trade|index|';
 $lang->menu->cash->check     = '對賬|depositor|check|';
 $lang->menu->cash->depositor = '賬戶|depositor|index|';
+$lang->menu->cash->provider  = '供應商|provider|index|';
 $lang->menu->cash->setting   = '設置|tree|browse|type=in|';
 
 /* Menu of depositor module. */
@@ -30,9 +31,15 @@ $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
 $lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> 列表|trade|browse|', 'alias' => 'create,edit,view');
 
+/* Menu of trade module. */
+$lang->provider = new stdclass();
+$lang->provider->menu = new stdclass();
+$lang->provider->menu->browse = array('link' => '<i class="icon-th-list"></i> 列表|provider|browse|', 'alias' => 'create,edit,view');
+
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->income   = '收入科目|tree|browse|type=in|';
 $lang->setting->menu->expend   = '支出科目|tree|browse|type=out|';
 $lang->setting->menu->currency = '貨幣類型|setting|lang|module=order&field=currencyList&appName=crm';
+$lang->setting->menu->schema   = '導入模板設置|schema|browse|';

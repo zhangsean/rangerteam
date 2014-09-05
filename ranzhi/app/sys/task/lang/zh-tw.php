@@ -17,6 +17,7 @@ $lang->task->view     = '查看任務';
 $lang->task->create   = '新建任務';
 $lang->task->edit     = '編輯任務';
 $lang->task->finish   = '任務完成';
+$lang->task->start    = '開始任務';
 $lang->task->activate = '激活任務';
 $lang->task->cancel   = '取消任務';
 $lang->task->close    = '關閉任務';
@@ -71,6 +72,9 @@ $lang->task->leftThisTime   = '剩餘';
 $lang->task->date           = '日期';
 $lang->task->ditto          = '同上';
 
+$lang->task->confirmFinish  = '"預計剩餘"為0，確認將任務狀態改為"已完成"嗎？';
+$lang->task->consumedBefore = '之前消耗';
+
 $lang->task->lblPri = 'P';
 
 $lang->task->statusList['']       = ''; 
@@ -95,7 +99,35 @@ $lang->task->reasonList['']       = '';
 $lang->task->reasonList['done']   = '已完成';
 $lang->task->reasonList['cancel'] = '已取消';
 
+$lang->task->createdByMe  = '由我創建';
+$lang->task->assignedToMe = '指派給我';
+$lang->task->closedByMe   = '由我完成';
+$lang->task->untilToday   = '今天到期';
+$lang->task->expired      = '已過期';
+$lang->task->all          = '所有任務';
+
 $lang->task->basicInfo = '基本信息';
 $lang->task->life      = '任務的一生';
 
-$lang->task->kanban = '看板';
+$lang->task->kanban  = '看板';
+$lang->task->mind    = '腦圖';
+$lang->task->list    = '列表';
+$lang->task->outline = '大綱';
+
+$lang->task->kanbanGroup['']           = '選擇分組';
+$lang->task->kanbanGroup['status']     = '狀態分組';
+$lang->task->kanbanGroup['assignedto'] = '指派給分組';
+
+$lang->task->groups['']           = '選擇分組';
+$lang->task->groups['status']     = '狀態分組';
+$lang->task->groups['assignedto'] = '指派給分組';
+$lang->task->groups['createdby']  = '創建者分組';
+$lang->task->groups['finishedby'] = '完成者分組';
+$lang->task->groups['closedby']   = '關閉者分組';
+
+$lang->task->unkown     = '未指定';
+$lang->task->unAssigned = '未指派';
+
+$lang->task->mindMoveTip = '只能將任務移動至二級節點下。';
+
+$lang->task->groupinfo = '總計 <strong class="group-total">%s</strong> 項 - <span class="text-danger">未開始 <strong class="group-wait">%s</strong></span> - <span class="text-warning">進行中 <strong class="group-doing">%s</strong></span> - <span class="text-success">已完成 <strong class="group-done">%s</strong></span> - <span class="text-muted">已關閉 <strong class="group-closed">%s</strong></span>';

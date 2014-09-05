@@ -19,6 +19,8 @@ $lang->tree->manage      = "維護類目";
 $lang->tree->fix         = "修復數據";
 
 $lang->tree->noCategories  = '您還沒有添加類目，請添加類目。';
+$lang->tree->timeCountDown = "<strong id='countDown'>3</strong> 秒後轉向類目管理頁面。";
+$lang->tree->redirect      = '立即轉向';
 $lang->tree->aliasRepeat   = '別名: %s 已經存在,不能重複添加。';
 $lang->tree->aliasConflict = '別名: %s 與系統模組衝突，不能添加。';
 $lang->tree->hasChildren   = '該板塊存在子版塊，不能刪除。';
