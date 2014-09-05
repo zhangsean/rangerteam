@@ -118,12 +118,12 @@ $lang->task->kanbanGroup['']           = 'Groups';
 $lang->task->kanbanGroup['status']     = 'By Status';
 $lang->task->kanbanGroup['assignedto'] = 'By Assigned';
 
-$lang->task->outlineGroup['']           = 'Choose group';
-$lang->task->outlineGroup['status']     = 'Group by status';
-$lang->task->outlineGroup['assignedto'] = 'Assigned To';
-$lang->task->outlineGroup['createdby']  = 'Created By';
-$lang->task->outlineGroup['finishedby'] = 'Finished By';
-$lang->task->outlineGroup['closedby']   = 'Closed By';
+$lang->task->groups['']           = 'Choose group';
+$lang->task->groups['status']     = 'Group by status';
+$lang->task->groups['assignedto'] = 'Assigned To';
+$lang->task->groups['createdby']  = 'Created By';
+$lang->task->groups['finishedby'] = 'Finished By';
+$lang->task->groups['closedby']   = 'Closed By';
 
 $lang->task->unkown     = 'Unkown';
 $lang->task->unAssigned = 'Un assigned';

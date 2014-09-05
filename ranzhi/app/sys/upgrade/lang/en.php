@@ -38,3 +38,4 @@ $lang->upgrade->versionNote = "Please choose the version to upgrade.";
 $lang->upgrade->fromVersions['1_0_beta'] = '1.0.beta';
 $lang->upgrade->fromVersions['1_1_beta'] = '1.1.beta';
 $lang->upgrade->fromVersions['1_2_beta'] = '1.2.beta';
+$lang->upgrade->fromVersions['1_3_beta'] = '1.3.beta';

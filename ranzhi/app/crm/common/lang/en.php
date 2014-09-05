@@ -51,12 +51,22 @@ $lang->order->menu->public    = array('link' => 'Public|order|browse|mode=public
 /* Menu of contact module. */
 $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
-$lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> Contact List|contact|browse|', 'alias' => 'create,edit,view,history');
+$lang->contact->menu->browse    = array('link' => '<i class="icon-th-list"></i> Contact List|contact|browse|', 'alias' => 'create,edit,view,history');
+$lang->contact->menu->past      = array('link' => 'Urgently need contacted|contact|browse|mode=past', 'alias' => 'create,edit,view,record');
+$lang->contact->menu->today     = array('link' => 'Contact Today|contact|browse|mode=today', 'alias' => 'create,edit,view,record');
+$lang->contact->menu->tomorrow  = array('link' => 'Contact Tomorrow|contact|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
+$lang->contact->menu->thisweek  = array('link' => 'Contact This Week|contact|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
+$lang->contact->menu->thismonth = array('link' => 'Contact This Month|contact|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
-$lang->contract->menu->browse = array('link' => '<i class="icon-th-list"></i> Contract List|contract|browse|', 'alias' => 'create,edit,view');
+$lang->contract->menu->browse       = array('link' => '<i class="icon-th-list"></i> Contract List|contract|browse|', 'alias' => 'create,edit,view');
+$lang->contract->menu->unreceived   = array('link' => 'Wait for receiving|contract|browse|mode=unreceived',   'alias' => 'create,edit,view,history');
+$lang->contract->menu->undeliveried = array('link' => 'Wait for delivering|contract|browse|mode=undeliveried', 'alias' => 'create,edit,view,history');
+$lang->contract->menu->finished     = array('link' => 'Finished|contract|browse|mode=finished',   'alias' => 'create,edit,view,history');
+$lang->contract->menu->canceled     = array('link' => 'Canceled|contract|browse|mode=canceled',   'alias' => 'create,edit,view,history');
+$lang->contract->menu->expired      = array('link' => 'Expired|contract|browse|mode=expired',   'alias' => 'create,edit,view,history');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

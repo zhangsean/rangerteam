@@ -26,15 +26,16 @@ $lang->depositor->createdDate     = 'Created Date';
 $lang->depositor->editedBy        = 'Edited By';
 $lang->depositor->editedDate      = 'Edited Date';
 
-$lang->depositor->all      = 'All';
-$lang->depositor->create   = 'Create Depositor';
-$lang->depositor->browse   = 'Browse Depositor';
-$lang->depositor->edit     = 'Edit Depositor';
-$lang->depositor->delete   = 'Delete Depositor';
-$lang->depositor->view     = 'View';
-$lang->depositor->forbid   = 'Disable';
-$lang->depositor->activate = 'Activate';
-$lang->depositor->balance  = 'Blance';
+$lang->depositor->all         = 'All';
+$lang->depositor->create      = 'Create Depositor';
+$lang->depositor->browse      = 'Browse Depositor';
+$lang->depositor->edit        = 'Edit Depositor';
+$lang->depositor->delete      = 'Delete Depositor';
+$lang->depositor->view        = 'View';
+$lang->depositor->forbid      = 'Disable';
+$lang->depositor->activate    = 'Activate';
+$lang->depositor->balance     = 'Blance';
+$lang->depositor->saveBalance = 'Save balance';
 
 $lang->depositor->check         = 'Check';
 $lang->depositor->start         = 'Begin';

@@ -228,13 +228,14 @@ $lang->error->noWritable      = '%s maybe not write, please modify permissions!'
 
 /* The pager items. */
 $lang->pager = new stdclass();
-$lang->pager->noRecord  = "No records yet.";
-$lang->pager->digest    = "<strong>%s</strong> records, <strong>%s</strong> per page, <strong>%s/%s</strong> ";
-$lang->pager->first     = "First";
-$lang->pager->pre       = "Previous";
-$lang->pager->next      = "Next";
-$lang->pager->last      = "Last";
-$lang->pager->locate    = "GO!";
+$lang->pager->noRecord   = "No records yet.";
+$lang->pager->digest     = "<strong>%s</strong> records, <strong>%s</strong> per page, <strong>%s/%s</strong> ";
+$lang->pager->recPerPage = "<strong>%s</strong> per page";
+$lang->pager->first      = " First";
+$lang->pager->pre        = " Previous";
+$lang->pager->next       = " Next";
+$lang->pager->last       = " Last";
+$lang->pager->locate     = "GO!";
 
 $lang->date = new stdclass();
 $lang->date->minute = 'minute';

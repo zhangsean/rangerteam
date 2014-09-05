@@ -51,7 +51,7 @@ $lang->order->menu->public    = array('link' => '公共客户|order|browse|mode=
 /* Menu of contact module. */
 $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
-$lang->contact->menu->browse = array('link' => '<i class="icon-th-list"></i> 联系人列表|contact|browse|mode=all', 'alias' => 'create,edit,view,history');
+$lang->contact->menu->browse    = array('link' => '<i class="icon-th-list"></i> 联系人列表|contact|browse|mode=all', 'alias' => 'create,edit,view,history');
 $lang->contact->menu->past      = array('link' => '亟需联系|contact|browse|mode=past', 'alias' => 'create,edit,view,record');
 $lang->contact->menu->today     = array('link' => '今天联系|contact|browse|mode=today', 'alias' => 'create,edit,view,record');
 $lang->contact->menu->tomorrow  = array('link' => '明天联系|contact|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
