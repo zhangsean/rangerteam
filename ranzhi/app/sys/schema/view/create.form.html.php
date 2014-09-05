@@ -33,7 +33,7 @@
       <table class='table table-data'>
         <thead>
           <tr>
-            <?php for($i = 0; $i < count($records[0]); $i ++):?>
+            <?php for($i = 0; $i < $columns; $i ++):?>
             <th><?php echo html::select('schema[' . chr($i + 65) . '][]', $lang->trade->importedFields, '', "class='form-control chosen' multiple data-placeholder='{$lang->schema->placeholder->selectField}'");?></th>
             <?php endfor;?>
           </tr>

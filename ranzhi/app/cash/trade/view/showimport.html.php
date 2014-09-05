@@ -43,17 +43,17 @@
             <?php echo html::select("category[$i]", $expenseTypes, $trade['category'], "class='form-control out'");?>
           </td>
           <td>
-            <?php $hasCustomer = (is_numeric($trade['customer']) or empty($trade['customer']));?>
+            <?php $hasCustomer = (is_numeric($trade['trader']) or empty($trade['trader']));?>
             <div class='input-group out' <?php if($trade['type'] == 'in') echo "style='display:none'"?>>
-              <?php echo html::select("trader[$i]", $traderList, ($hasCustomer ? $trade['customer'] : 0), "class='form-control' id='trader{$i}'" . ($hasCustomer ? '' : " style='display:none'"));?>
-              <?php echo html::input("traderName[$i]", $hasCustomer ? '' : $trade['customer'], "class='form-control' id='traderName{$i}'" . ($hasCustomer ? " style='display:none'" : ''));?>
+              <?php echo html::select("trader[$i]", $traderList, ($hasCustomer ? $trade['trader'] : 0), "class='form-control' id='trader{$i}'" . ($hasCustomer ? '' : " style='display:none'"));?>
+              <?php echo html::input("traderName[$i]", $hasCustomer ? '' : $trade['trader'], "class='form-control' id='traderName{$i}'" . ($hasCustomer ? " style='display:none'" : ''));?>
               <div class='input-group-addon'>
                 <label class="checkbox"><input type="checkbox" name="createTrader[<?php echo $i;?>]" value="1" <?php echo $hasCustomer ? '' : 'checked'?>><?php echo $lang->trade->newTrader;?></label>
               </div>
             </div>
             <div class='input-group in' <?php if($trade['type'] == 'out') echo "style='display:none'"?>>
-              <?php echo html::select("trader[$i]", $customerList, ($hasCustomer ? $trade['customer'] : 0), "class='form-control' id='trader{$i}'" . ($hasCustomer ? '' : " style='display:none'"));?>
-              <?php echo html::input("customerName[$i]", ($hasCustomer ? '' : $trade['customer']), "class='form-control' id='customerName{$i}'" . ($hasCustomer ? " style='display:none'" : ''));?>
+              <?php echo html::select("trader[$i]", $customerList, ($hasCustomer ? $trade['trader'] : 0), "class='form-control' id='trader{$i}'" . ($hasCustomer ? '' : " style='display:none'"));?>
+              <?php echo html::input("customerName[$i]", ($hasCustomer ? '' : $trade['trader']), "class='form-control' id='customerName{$i}'" . ($hasCustomer ? " style='display:none'" : ''));?>
               <div class='input-group-addon'>
                 <label class="checkbox"><input type="checkbox" name="createCustomer[<?php echo $i;?>]" value="1" <?php echo $hasCustomer ? '' : 'checked'?>><?php echo $lang->trade->newTrader;?></label>
               </div>

@@ -76,7 +76,15 @@ class schema extends control
 
             $tmpFile = $this->file->savePath . $file['pathname'];
             file_put_contents($tmpFile, $fc);
-            $this->view->records = $this->schema->parseCSV($tmpFile);
+            $records = $this->schema->parseCSV($tmpFile);
+            $columns = 0;
+            foreach($records as $row)
+            {
+                $columns = (count($row) > $columns) ? count($row) : $columns;
+            }
+
+            $this->view->records = $records;
+            $this->view->columns = $columns;
             $this->view->file    = $file;
             @unlink($tmpFile);
             unset($this->lang->schema->menu);

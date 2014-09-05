@@ -423,15 +423,15 @@ class trade extends control
             }
 
             if(isset($flipTypeList[$data['type']])) $data['type'] = $flipTypeList[$data['type']];
-            /* if fee is a record and customer is empty then this type of data is fee. */
-            if(!$schema->fee and !$data['customer'])
+            /* if fee is a record and trader is empty then this type of data is fee. */
+            if(!$schema->fee and !$data['trader'])
             {
                 $data['source'] = $data['type'];
                 $data['type']   = 'fee';
             }
 
             $matchs = $data['type'] == 'out' ? $flipTraders : ($data['type'] == 'in' ? $flipCustomers : '');
-            if($matchs and isset($matchs[$data['customer']])) $data['customer'] = $matchs[$data['customer']];
+            if($matchs and isset($matchs[$data['trader']])) $data['trader'] = $matchs[$data['trader']];
 
             if(!empty($data['category']) and in_array($data['type'], array('in', 'out')))
             {

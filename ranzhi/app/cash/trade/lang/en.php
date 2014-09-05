@@ -67,3 +67,13 @@ $lang->trade->encodeList['utf8'] = 'UTF-8';
 $lang->trade->notEqual = 'The two depositor can not be the same!';
 $lang->trade->feeDesc  = '%s from %s to %s';
 $lang->trade->fileNode = 'The format of file is csv';
+
+$lang->trade->importedFields = array();
+$lang->trade->importedFields['category'] = 'Category';
+$lang->trade->importedFields['type']     = 'Type';
+$lang->trade->importedFields['trader']   = 'Trader';
+$lang->trade->importedFields['in']       = 'Income';
+$lang->trade->importedFields['out']      = 'Expend';
+$lang->trade->importedFields['date']     = 'Date';
+$lang->trade->importedFields['desc']     = 'Desc';
+$lang->trade->importedFields['fee']      = 'Fee';

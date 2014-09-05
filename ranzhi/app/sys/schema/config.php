@@ -10,5 +10,5 @@
  * @link        http://www.ranzhi.org
  */
 $config->schema->require = new stdclass();
-$config->schema->require->create = 'name,money,date,trader';
+$config->schema->require->create = 'name,in,out,date,trader';
 $config->schema->require->edit   = 'name,money,type,date,trader';

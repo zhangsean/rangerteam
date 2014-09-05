@@ -55,7 +55,7 @@ class schemaModel extends model
     {
         $this->app->loadLang('trade', 'cash');
         $schema = array();
-        if(!empty($_POST['scchema']))
+        if(!empty($_POST['schema']))
         {
             foreach($this->post->schema as $column => $fields)
             {
@@ -65,11 +65,13 @@ class schemaModel extends model
                     if(isset($this->lang->trade->importedFields[$field])) $schema[$field][] = $column;
                 }
             }
+            $schema['money'] = array_unique(array_merge($schema['in'], $schema['out']));
             foreach($schema as $field => $columns) $schema[$field] = join(',', $columns);
         }
         $schema['name'] = $this->post->name;
         
-        $this->dao->insert(TABLE_SCHEMA)->data($schema)
+        $this->dao->insert(TABLE_SCHEMA)
+            ->data($schema, 'in,out')
             ->autoCheck()
             ->batchCheck($this->config->schema->require->create, 'notempty')
             ->exec();
