@@ -13,8 +13,8 @@ $sessionString  = $config->requestType == 'PATH_INFO' ? '?' : '&';
 $sessionString .= session_name() . '=' . session_id();
 ?>
 <style>
-  ul.files-list {margin-bottom: 0;}
-  .files-list > li {margin-top: 5px; border: 1px solid #ddd; background: #fafafa; padding: 5px 10px; width: 450px;}
+  ul.files-list {margin-bottom: 0; margin-top: 10px;}
+  .files-list > li {margin-top: -1px; border: 1px solid #ddd; background: #fafafa; padding: 5px 10px; width: 350px;}
   .files-list > li > i {display: inline-block; margin-right: 5px;}
   .files-list > li > .link-btn {float: right; margin-left: 10px;}
   .files-list > li > a:hover {text-decoration: none}
@@ -47,7 +47,7 @@ function downloadFile(fileID)
     {
         echo "<li><i class='icon-file-alt text-muted'></i> ";
         echo html::a($this->createLink('file', 'download', "fileID=$file->id") . $sessionString, $file->title .'.' . $file->extension, '_blank', "onclick='return downloadFile($file->id)'");
-        echo html::a($this->createLink('file', 'edit', "fileID=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal' class='link-edit link-btn'");
+        echo html::a($this->createLink('file', 'edit', "fileID=$file->id"), "<i class='icon-pencil'></i>", "data-toggle='modal' class='link-edit link-btn'");
         echo html::a($this->createLink('file', 'delete', "fileID=$file->id"), "<i class='icon-remove'></i>", "class='deleter link-btn'");
         echo '</li>';
     }
