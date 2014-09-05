@@ -97,7 +97,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->trade->desc;?></th>
-          <td><?php echo html::textarea('desc','', "class='form-control' rows='8'");?></td>
+          <td><?php echo html::textarea('desc','', "class='form-control' rows='3'");?></td>
         </tr>
         <tr>
           <th></th>
