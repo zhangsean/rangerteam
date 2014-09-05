@@ -16,8 +16,8 @@
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->trade->browse;?></strong>
     <div class="panel-actions pull-right">
-      <?php echo html::a(inlink('create', 'type=in'),  "{$lang->trade->in}</i>", "class='btn btn-primary'")?>
-      <?php echo html::a(inlink('create', 'type=out'), "{$lang->trade->out}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('create', 'type=in'),  "{$lang->trade->createIn}</i>", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('create', 'type=out'), "{$lang->trade->createOut}</i>", "class='btn btn-primary'")?>
       <?php echo html::a(inlink('transfer'), "{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
       <?php echo html::a(inlink('batchcreate'), "{$lang->trade->batchCreate}</i>", "class='btn btn-primary'")?>
       <?php echo html::a(inlink('import'), "{$lang->trade->import}</i>", "class='btn btn-primary' data-toggle='modal'")?>

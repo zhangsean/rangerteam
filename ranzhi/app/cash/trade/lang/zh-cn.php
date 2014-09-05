@@ -35,8 +35,10 @@ $lang->trade->importFile  = '导入文件';
 $lang->trade->encode      = '编码';
 
 $lang->trade->create      = '记账';
-$lang->trade->in          = '记收入';
-$lang->trade->out         = '记支出';
+$lang->trade->in          = '收入';
+$lang->trade->out         = '支出';
+$lang->trade->createIn    = '记收入';
+$lang->trade->createOut   = '记支出';
 $lang->trade->transfer    = '记转账';
 $lang->trade->edit        = '编辑账目';
 $lang->trade->detail      = '明细';
