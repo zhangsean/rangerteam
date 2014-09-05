@@ -77,6 +77,7 @@ class tradeModel extends model
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', $now)
             ->add('handlers', trim(join(',', $this->post->handlers), ','))
+            ->setIf($this->post->trader == '', 'trader', 0)
             ->setIf($this->post->type == 'in', 'contract', '')
             ->setIf($this->post->createTrader, 'trader', 0)
             ->setIf($this->post->type == 'in', 'order', '')
@@ -85,7 +86,6 @@ class tradeModel extends model
             ->removeIf($type == 'out', 'objectType')
             ->get();
 
-
         $depositor = $this->loadModel('depositor')->getByID($trade->depositor);
         $trade->currency = $depositor->currency;
 
@@ -93,7 +93,6 @@ class tradeModel extends model
             ->data($trade, $skip = 'createTrader,traderName')
             ->autoCheck()
             ->batchCheck($this->config->trade->require->create, 'notempty')
-            ->checkIF(!$this->post->createTrader, 'trader', 'notempty')
             ->exec();
 
         $tradeID = $this->dao->lastInsertID();
@@ -141,7 +140,7 @@ class tradeModel extends model
             $trade->money          = $this->post->money[$key];
             $trade->category       = $this->post->category[$key];
             $trade->dept           = $this->post->dept[$key];
-            $trade->trader         = $this->post->trader[$key];
+            $trade->trader         = $this->post->trader[$key] ? $this->post->trader[$key] : 0;
             $trade->createTrader   = isset($this->post->createTrader[$key]) ? $this->post->createTrader[$key] : false;
             $trade->createCustomer = false;
             $trade->traderName     = isset($this->post->traderName[$key]) ? $this->post->traderName[$key] : '';
@@ -198,7 +197,7 @@ class tradeModel extends model
             $trade->type           = $type;
             $trade->category       = $this->post->category[$key];
             $trade->dept           = $this->post->dept[$key];
-            $trade->trader         = $this->post->trader[$key];
+            $trade->trader         = $this->post->trader[$key] ? $this->post->trader[$key] : 0;
             $trade->createTrader   = false;
             $trade->createCustomer = false;
             $trade->traderName     = $this->post->traderName[$key];
@@ -237,20 +236,6 @@ class tradeModel extends model
         $this->app->loadClass('filter', true);
         foreach($trades as $key => $trade)
         {
-            $item = $this->lang->trade->trader;
-            if($trade->createTrader)
-            {
-                if(empty($trade->traderName)) $errors['traderName' . $key] = sprintf($this->lang->error->notempty, $item);
-            }
-            elseif($trade->createCustomer)
-            {
-                if(empty($trade->customerName)) $errors['customerName' . $key] = sprintf($this->lang->error->notempty, $item);
-            }
-            elseif(in_array($trade->type, array('in', 'out')))
-            {
-               if(empty($trade->trader) or !validater::checkInt($trade->trader)) $errors['trader' . $key] = sprintf($this->lang->error->notempty, $item) . sprintf($this->lang->error->int[0], $item);
-            }
-
             $item = $this->lang->trade->money; 
             if(empty($trade->money) or !validater::checkFloat($trade->money)) $errors["money" . $key] = sprintf($this->lang->error->notempty, $item) . sprintf($this->lang->error->float, $item);
 
@@ -279,6 +264,7 @@ class tradeModel extends model
             ->add('type', $oldTrade->type)
             ->setIf(!$this->post->objectType or !in_array('order', $this->post->objectType),    'order', 0)
             ->setIf(!$this->post->objectType or !in_array('contract', $this->post->objectType), 'contract', 0)
+            ->setIf(!$this->post->trader, 'trader', 0)
             ->add('handlers', trim(join(',', $this->post->handlers), ','))
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
@@ -293,7 +279,6 @@ class tradeModel extends model
             ->data($trade, $skip = 'createTrader,traderName')
             ->autoCheck()
             ->batchCheck($this->config->trade->require->edit, 'notempty')
-            ->checkIF($oldTrade->type == 'out' and !$this->post->createTrader, 'trader', 'notempty')
             ->where('id')->eq($tradeID)->exec();
 
         if($this->post->createTrader and $trade->type == 'out')
