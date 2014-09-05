@@ -1093,7 +1093,7 @@ INSERT INTO `sys_category` VALUES (1,'化工','','','',0,0,',1,',1,0,'industry',
 
 INSERT INTO `sys_group` VALUES (1,'管理员','管理员拥有前台所有权限'),(2,'财务专员','财务专员拥有现金流所有权限'),(3,'普通用户','默认的普通账号权限');
 INSERT INTO `sys_userGroup` (account,`group`) SELECT account,3 FROM `sys_user`;
-INSERT INTO `sys_schema` (`name`, `category`, `customer`, `type`, `money`, `desc`, `date`, `fee`) VALUES
+INSERT INTO `sys_schema` (`name`, `category`, `trader`, `type`, `money`, `desc`, `date`, `fee`) VALUES
 ('支付宝',       '', 'H', 'K', 'J',   'I,O', 'D', 'M'),
 ('中信银行简版', '', 'C', '',  'E,D', 'G,H', 'A', '');
 INSERT INTO `sys_groupPriv` VALUES (1,'address','browse'),

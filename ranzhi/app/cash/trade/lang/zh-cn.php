@@ -12,8 +12,8 @@
 $lang->trade->common      = '记账';
 $lang->trade->id          = '编号';
 $lang->trade->depositor   = '账号';
-$lang->trade->type        = '交易类型';
-$lang->trade->currency    = '货币类型';
+$lang->trade->type        = '交易';
+$lang->trade->currency    = '货币';
 $lang->trade->trader      = '商户';
 $lang->trade->customer    = '客户';
 $lang->trade->money       = '金额';
