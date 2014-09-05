@@ -50,7 +50,7 @@
           <td><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
           <td><?php echo zget($currencySign, $trade->currency) . $trade->money;?></td>
           <td><?php echo zget($categories, $trade->category, ' ');?></td>
-          <td><?php echo zget($users, $trade->handlers);?></td>
+          <td><?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?></td>
           <td><?php echo formatTime($trade->date, DT_DATE1);?></td>
           <td class='text-left'><?php echo $trade->desc;?></td>
           <td>
