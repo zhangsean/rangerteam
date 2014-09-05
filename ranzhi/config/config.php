@@ -17,7 +17,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* Basic settings. */
 $config = new config();
-$config->version      = '1.4.beta';        // The version of ranzhi. Don't change it.
+$config->version      = '1.5.beta';        // The version of ranzhi. Don't change it.
 $config->debug        = true;              // Turn debug on or off.
 $config->charset      = 'UTF-8';           // The charset of ranzhi.
 $config->cookieLife   = time() + 2592000;  // The cookie life time.
@@ -58,10 +58,10 @@ $config->default->theme  = 'default';     // Default theme.
 $config->default->module = 'index';       // Default module.
 $config->default->method = 'index';       // Default method.
 
-/* Upload settings. */
+/* Upload settings: danger files and max upload size. */
 $config->file = new stdclass();
-$config->file->dangers = 'php,php3,php4,phtml,php5,jsp,py,rb,asp,aspx,ashx,asa,cer,cdx,aspl,shtm,shtml,html,htm'; // Dangerous file types,
-$config->file->maxSize = 1024 * 1024;          // Max size.
+$config->file->dangers = 'php,php3,php4,phtml,php5,jsp,py,rb,asp,aspx,ashx,asa,cer,cdx,aspl,shtm,shtml,html,htm';
+$config->file->maxSize = 1024 * 1024;
 
 /* Set the allowed tags.  */
 $config->allowedTags = new stdclass();
@@ -75,7 +75,7 @@ $config->db->driver         = 'mysql';   // Must be MySQL. Don't support other d
 $config->db->encoding       = 'UTF8';    // Encoding of database.
 $config->db->strictMode     = false;     // Turn off the strict mode of MySQL.
 //$config->db->emulatePrepare = true;    // PDO::ATTR_EMULATE_PREPARES
-//$config->db->bufferQuery    = true;     // PDO::MYSQL_ATTR_USE_BUFFERED_QUERY
+//$config->db->bufferQuery    = true;    // PDO::MYSQL_ATTR_USE_BUFFERED_QUERY
 
 /* Slave database settings. */
 $config->slaveDB = new stdclass();
