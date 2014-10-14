@@ -21,7 +21,7 @@
     <?php if($record->objectType != 'contact'):?>
     <tr>
       <th><?php echo $lang->action->record->contact;?></th>
-      <td><?php echo html::select('extra', $contacts, $record->extra, "class='form-control chosen select-contact'");?></td>
+      <td><?php echo html::select('contact', $contacts, $record->contact, "class='form-control chosen select-contact'");?></td>
     </tr>
     <?php endif;?>
     <tr>
