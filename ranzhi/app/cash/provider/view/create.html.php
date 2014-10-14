@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->provider->create;?></strong>
