@@ -13,7 +13,3 @@ $config->user->require = new stdclass();
 $config->user->require->register = 'account,realname,email,password1,role';
 $config->user->require->edit     = 'realname,email,role';
 $config->user->require->create   = $config->user->require->register;
-
-$config->user->default = new stdclass();
-$config->user->default->module = RUN_MODE == 'front' ? 'index' : 'admin';
-$config->user->default->method = RUN_MODE == 'front' ? 'index' : 'index';

@@ -11,14 +11,7 @@
  */
 ?>
 <?php
-if(RUN_MODE == 'front' && strpos($app->getModuleRoot(), 'sys') == false)
-{
-    include $app->getModuleRoot() . 'common/view/header.html.php';
-}
-else
-{
-    include '../../common/view/header.html.php';
-}
+include '../../common/view/header.html.php';
 include '../../common/view/treeview.html.php';
 ?>
 <div class="col-md-12">
@@ -73,13 +66,4 @@ include '../../common/view/treeview.html.php';
     </div>
   </div>
 </div>
-<?php
-if(RUN_MODE == 'front' && strpos($app->getModuleRoot(), 'sys') == false)
-{
-    include $app->getModuleRoot() . 'common/view/footer.html.php';
-}
-else
-{
-    include '../../common/view/footer.html.php';
-}
-?>
+<?php include '../../common/view/footer.html.php';?>
