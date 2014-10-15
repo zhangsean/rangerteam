@@ -274,7 +274,6 @@ class tradeModel extends model
         $handlers = $this->loadModel('user')->getByAccount($trade->handlers);
         if($handlers) $trade->dept = $handlers->dept;
 
-
         $this->dao->update(TABLE_TRADE)
             ->data($trade, $skip = 'createTrader,traderName')
             ->autoCheck()
