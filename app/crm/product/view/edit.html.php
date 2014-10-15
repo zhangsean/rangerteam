@@ -15,7 +15,7 @@
   <form method='post' action='<?php echo inlink('edit', "productID=$product->id");?>' id='ajaxForm'>
     <table class='table table-form'>
       <tr>
-        <th class='w-100px'><?php echo $lang->product->name;?></th>
+        <th class='w-50px'><?php echo $lang->product->name;?></th>
         <td><?php echo html::input('name', $product->name, "class='form-control'");?></td><td></td>
       </tr>
       <tr>

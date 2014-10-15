@@ -16,7 +16,7 @@
 <form method='post' id='ajaxForm' action='<?php echo $this->createLink('order', 'assign', "orderID=$orderID")?>'>
   <table class='table table-form'>
     <tr>
-      <th class='w-100px'><?php echo $lang->order->assignedTo;?></th>
+      <th class='w-50px'><?php echo $lang->order->assignedTo;?></th>
       <td><?php echo html::select('assignedTo', $members, '', "class='form-control chosen'")?></td>
     </tr>
     <tr>
