@@ -67,7 +67,7 @@ class customerModel extends model
             ->beginIF($relation == 'client')->andWhere('relation')->ne('provider')
             ->beginIF($relation == 'provider')->andWhere('relation')->ne('client')
             ->beginIF($mode == 'field')->andWhere('mode')->eq($param)->fi()
-            ->beginIF($mode == 'past')->andWhere('nextDate')->lt(helper::today())->fi()
+            ->beginIF($mode == 'past')->andWhere('nextDate')->andWhere('nextDate')->lt(helper::today())->fi()
             ->beginIF($mode == 'today')->andWhere('nextDate')->eq(helper::today())->fi()
             ->beginIF($mode == 'tomorrow')->andWhere('nextDate')->eq(formattime(date::tomorrow(), DT_DATE1))->fi()
             ->beginIF($mode == 'thisweek')->andWhere('nextDate')->between($thisWeek['begin'], $thisWeek['end'])->fi()
