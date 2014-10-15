@@ -38,8 +38,8 @@
           <th class='w-80px'> <?php commonModel::printOrderLink('assignedTo',  $orderBy, $vars, $lang->task->assignedTo);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->task->createdDate);?></th>
           <th class='w-90px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->task->type);?></th>
-          <th class='w-90px'> <?php commonModel::printOrderLink('consumed',    $orderBy, $vars, $lang->task->consumedAB);?></th>
-          <th class='w-90px'> <?php commonModel::printOrderLink('left',        $orderBy, $vars, $lang->task->left);?></th>
+          <th class='w-90px'> <?php commonModel::printOrderLink('consumed',    $orderBy, $vars, $lang->task->consumedAB . $lang->task->lblHour);?></th>
+          <th class='w-90px'> <?php commonModel::printOrderLink('left',        $orderBy, $vars, $lang->task->left . $lang->task->lblHour);?></th>
           <th class='w-180px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>

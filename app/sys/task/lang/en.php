@@ -75,7 +75,8 @@ $lang->task->ditto          = 'Ditto';
 $lang->task->confirmFinish  = '"Left" is zero, this task will be done. Are you sure?';
 $lang->task->consumedBefore = 'consumed before';
 
-$lang->task->lblPri = 'P';
+$lang->task->lblPri  = 'P';
+$lang->task->lblHour = '(h)';
 
 $lang->task->statusList['']        = '';
 $lang->task->statusList['wait']    = 'Pending';
