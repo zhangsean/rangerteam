@@ -81,6 +81,14 @@
           </td>
         </tr>
         <?php endif;?>
+        <tr>
+          <th><?php echo $lang->order->contactedDate;?></th>
+          <td><?php echo $customer->contactedDate;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->order->nextDate;?></th>
+          <td><?php echo $customer->nextDate;?></td>
+        </tr>
       </table>
     </div>
   </div> 
