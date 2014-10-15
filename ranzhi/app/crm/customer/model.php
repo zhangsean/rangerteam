@@ -124,6 +124,7 @@ class customerModel extends model
                 ->add('relation', $relation)
                 ->setIF($relation == 'provider', 'public', 1)
                 ->add('createdBy', $this->app->user->account)
+                ->add('assignedTo', $this->app->user->account)
                 ->add('createdDate', $now)
                 ->get();
         }
