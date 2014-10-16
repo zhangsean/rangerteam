@@ -43,7 +43,15 @@ function computeNextDate(delta)
 
     nextDate = convertStringToDate(today).addDays(parseInt(delta));
     nextDate = nextDate.toString('yyyy-M-dd');
-    $('#nextDate').val(nextDate);
+
+    if(delta == 365000)
+    {
+      $('#nextDate').val('').attr('disabled', true);
+    }
+    else
+    {
+        $('#nextDate').val(nextDate);
+    }
 }
 
 /**
