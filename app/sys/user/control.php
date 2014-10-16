@@ -92,8 +92,7 @@ class user extends control
             }
             else
             {
-                $default = $this->config->user->default;
-                $this->send(array('result'=>'success', 'locate' => $this->createLink($default->module, $default->method)));
+                $this->send(array('result'=>'success', 'locate' => $this->createLink('index', 'index')));
             }
         }
 
