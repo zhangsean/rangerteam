@@ -370,20 +370,22 @@ class orderModel extends model
         if($order->status == 'normal')   $menu .= html::a(helper::createLink('contract', 'create', "customerID={$order->customer}&orderID={$order->id}"), $this->lang->order->sign);
         if($order->status != 'normal') $menu .= html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
 
-        $menu .= html::a(inlink('assign', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal'");
         $menu .= html::a(inlink('edit',   "orderID=$order->id"), $this->lang->edit);
+        $menu .="<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
+        $menu .= "<li>" . html::a(inlink('assign', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal'") . "</li>";
 
         if($order->status != 'closed')
         {
-            $menu .= html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "data-toggle='modal'");
-            $menu .= html::a('###', $this->lang->activate, "disabled='disabled' class='disabled'");
+            $menu .= "<li>" . html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "data-toggle='modal'") . "</li>";
+            $menu .= "<li>" . html::a('###', $this->lang->activate, "disabled='disabled' class='disabled'") . "</li>";
         }
         else
         {
-            if($order->closedReason == 'payed') $menu .= html::a('###', $this->lang->close, "disabled='disabled' class='disabled'");
-            if($order->closedReason == 'payed') $menu .= html::a('###', $this->lang->activate, "disabled='disabled' class='disabled'");
-            if($order->closedReason != 'payed') $menu .= html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "data-toggle='modal'");
+            if($order->closedReason == 'payed') $menu .= "<li>" . html::a('###', $this->lang->close, "disabled='disabled' class='disabled'") . "</li>";
+            if($order->closedReason == 'payed') $menu .= "<li>" . html::a('###', $this->lang->activate, "disabled='disabled' class='disabled'") . "</li>";
+            if($order->closedReason != 'payed') $menu .= "<li>" . html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "data-toggle='modal'") . "</li>";
         }
+        $menu .= '</ul></div>';
 
         return $menu;
     }
