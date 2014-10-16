@@ -23,13 +23,12 @@
         <?php $vars = "mode={$mode}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->contract->id);?></th>
         <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->contract->name);?></th>
-        <th>                <?php commonModel::printOrderLink('customer',    $orderBy, $vars, $lang->contract->customer);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('amount',      $orderBy, $vars, $lang->contract->amount);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->contract->createdDate);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('return',      $orderBy, $vars, $lang->contract->return);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('delivery',    $orderBy, $vars, $lang->contract->delivery);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->contract->status);?></th>
-        <th class='w-200px'><?php echo $lang->actions;?></th>
+        <th class='w-180px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -37,7 +36,6 @@
       <tr class='text-center' data-url='<?php echo inlink('view', "contractID=$contract->id"); ?>'>
         <td><?php echo $contract->id;?></td>
         <td class='text-left'><?php echo $contract->name;?></td>
-        <td><?php if(isset($customers[$contract->customer])) echo $customers[$contract->customer];?></td>
         <td class='text-right'><?php echo zget($currencySign, $contract->currency, '') . $contract->amount;?></td>
         <td><?php echo substr($contract->createdDate, 0, 10);?></td>
         <td><?php echo $lang->contract->returnList[$contract->return];?></td>
