@@ -31,7 +31,7 @@
         <th class='w-120px'><?php commonModel::printOrderLink('mobile',   $orderBy, $vars, $lang->contact->mobile);?></th>
         <th class='w-200px'><?php commonModel::printOrderLink('email',    $orderBy, $vars, $lang->contact->email);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('qq',       $orderBy, $vars, $lang->contact->qq);?></th>
-        <th class='w-200px'><?php echo $lang->actions;?></th>
+        <th class='w-180px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -48,10 +48,12 @@
       <td class='operate'>
         <?php echo html::a($this->createLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}"), $lang->contact->record, "data-toggle='modal'");?>
         <?php echo html::a($this->createLink('address', 'browse', "objectType=contact&objectID=$contact->id"), $lang->contact->address, "data-toggle='modal'");?>
-        <?php echo html::a($this->createLink('resume', 'browse', "contactID=$contact->id"), $lang->contact->resume, "data-toggle='modal'");?>
         <?php echo html::a($this->createLink('contact', 'edit', "contactID=$contact->id"), $lang->edit);?>
-        <?php echo html::a($this->createLink('contact', 'delete', "contactID=$contact->id"), $lang->delete, "class='reloadDeleter'");?>
         <?php echo html::a($this->createLink('contact', 'vcard', "contactID=$contact->id"), $lang->contact->qrcode, "class='iframe' data-width='390' data-icon='qrcode'");?>
+        <?php echo "<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";?>
+        <?php echo '<li>' . html::a($this->createLink('resume', 'browse', "contactID=$contact->id"), $lang->contact->resume, "data-toggle='modal'") . '</li>';?>
+        <?php echo '<li>' . html::a($this->createLink('contact', 'delete', "contactID=$contact->id"), $lang->delete, "class='reloadDeleter'") . '</li>';?>
+        <?php echo '</ul></div>';?>
       </td>
     </tr>
     <?php endforeach;?>
