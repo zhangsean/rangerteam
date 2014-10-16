@@ -84,7 +84,7 @@ class orderModel extends model
             ->andWhere('o.customer')->in($customerIdList)
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
-        foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->id, $order->customerName, $order->productName); 
+        foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->customerName, $order->productName); 
 
         return $orders;
     }
@@ -104,7 +104,7 @@ class orderModel extends model
             ->where('o.id')->in($idList)
             ->fetchAll('id');
 
-        foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->id, $order->customerName, $order->productName); 
+        foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->customerName, $order->productName); 
 
         return $orders;
     }
@@ -131,7 +131,7 @@ class orderModel extends model
             ->andWhere('o.customer')->in($customerIdList)
             ->fetchAll('id');
 
-        foreach($orders as $key => $order) $orders[$key] = sprintf($this->lang->order->titleLBL, $order->id, $order->customerName, $order->productName); 
+        foreach($orders as $key => $order) $orders[$key] = sprintf($this->lang->order->titleLBL, $order->customerName, $order->productName); 
 
         return $orders;
     }
@@ -157,7 +157,7 @@ class orderModel extends model
 
         foreach($orders as $order)
         {
-           $order->title = sprintf($this->lang->order->titleLBL, $order->id, $customers[$order->customer], $products[$order->product]); 
+           $order->title = sprintf($this->lang->order->titleLBL, $customers[$order->customer], $products[$order->product]); 
         }
 
         return array('0' => '') + $orders;

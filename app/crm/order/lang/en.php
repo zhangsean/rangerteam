@@ -98,6 +98,6 @@ $lang->order->currencySign['nzd']  = 'NZ$';
 $lang->order->currencySign['thb']  = 'B';
 $lang->order->currencySign['sgd']  = 'S$';
 
-$lang->order->titleLBL  = "[%s] %s buy %s";
+$lang->order->titleLBL  = "%s buy %s";
 $lang->order->basicInfo = "Basic";
 $lang->order->lifetime  = "Lifetime";
