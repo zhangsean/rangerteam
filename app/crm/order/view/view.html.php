@@ -83,11 +83,11 @@
         <?php endif;?>
         <tr>
           <th><?php echo $lang->order->contactedDate;?></th>
-          <td><?php echo $customer->contactedDate;?></td>
+          <td><?php echo $order->contactedDate;?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->nextDate;?></th>
-          <td><?php echo $customer->nextDate;?></td>
+          <td><?php echo $order->nextDate;?></td>
         </tr>
       </table>
     </div>
