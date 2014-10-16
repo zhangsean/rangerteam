@@ -30,7 +30,7 @@
         <th class='w-100px'><?php commonModel::printOrderLink('contactDate', $orderBy, $vars, $lang->customer->contactDate);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('nextDate',    $orderBy, $vars, $lang->customer->nextDate);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->customer->createdDate);?></th>
-        <th class='w-210px'><?php echo $lang->actions;?></th>
+        <th class='w-180px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -50,10 +50,12 @@
           echo html::a($this->createLink('action', 'createRecord', "objectType=customer&objectID=$customer->id&customer=$customer->id"), $lang->customer->record, "data-toggle='modal'");
           echo html::a(inlink('assign', "customerID=$customer->id"), $lang->customer->assign, "data-toggle='modal'");
           echo html::a(inlink('contact', "customerID=$customer->id"), $lang->customer->contact,  "data-toggle='modal'");
-          echo html::a(inlink('order', "customerID=$customer->id"), $lang->customer->order,    "data-toggle='modal'");
-          echo html::a(inlink('contract', "customerID=$customer->id"), $lang->customer->contract, "data-toggle='modal'");
-          echo html::a($this->createLink('address', 'browse', "objectType=customer&objectID=$customer->id"), $lang->customer->address, "data-toggle='modal'");
           echo html::a(inlink('edit', "customerID=$customer->id"), $lang->edit);
+          echo "<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
+          echo "<li>" . html::a(inlink('order', "customerID=$customer->id"), $lang->customer->order,    "data-toggle='modal'") . "</li>";
+          echo "<li>" . html::a(inlink('contract', "customerID=$customer->id"), $lang->customer->contract, "data-toggle='modal'") . "</li>";
+          echo "<li>" . html::a($this->createLink('address', 'browse', "objectType=customer&objectID=$customer->id"), $lang->customer->address, "data-toggle='modal'") . "</li>";
+          echo "</ul></div>";
           ?>
         </td>
       </tr>
