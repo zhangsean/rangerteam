@@ -23,18 +23,21 @@ $lang->menu->cash->setting   = '设置|tree|browse|type=in|';
 /* Menu of depositor module. */
 $lang->depositor = new stdclass();
 $lang->depositor->menu = new stdclass();
-$lang->depositor->menu->browse  = array('link' => '<i class="icon-th-list"></i> 帐号列表|depositor|browse|', 'alias' => 'create,edit,view');
-$lang->depositor->menu->balance = '<i class="icon-th-list"></i> 账号余额|balance|browse|';
+$lang->depositor->menu->browse  = array('link' => '帐号列表|depositor|browse|', 'alias' => 'create,edit,view');
+$lang->depositor->menu->balance = '账号余额|balance|browse|';
 
 /* Menu of trade module. */
 $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
-$lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> 列表|trade|browse|', 'alias' => 'create,edit,view');
+$lang->trade->menu->browse   = array('link' => '所有账目|trade|browse|mode=all');
+$lang->trade->menu->in       = array('link' => '收入|trade|browse|mode=in');
+$lang->trade->menu->out      = array('link' => '支出|trade|browse|mode=out');
+$lang->trade->menu->transfer = array('link' => '转账|trade|browse|mode=transfer');
 
 /* Menu of trade module. */
 $lang->provider = new stdclass();
 $lang->provider->menu = new stdclass();
-$lang->provider->menu->browse = array('link' => '<i class="icon-th-list"></i> 列表|provider|browse|', 'alias' => 'create,edit,view');
+$lang->provider->menu->browse = array('link' => '供应商列表|provider|browse|', 'alias' => 'create,edit,view');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

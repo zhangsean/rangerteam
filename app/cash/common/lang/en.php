@@ -23,18 +23,21 @@ $lang->menu->cash->setting   = 'Settings|tree|browse|type=in|';
 /* Menu of depositor module. */
 $lang->depositor = new stdclass();
 $lang->depositor->menu = new stdclass();
-$lang->depositor->menu->browse = array('link' => '<i class="icon-th-list"></i> Depositor List|depositor|browse|', 'alias' => 'create,edit,view');
-$lang->depositor->menu->balance = '<i class="icon-th-list"></i> Balance|balance|browse|';
+$lang->depositor->menu->browse = array('link' => 'Depositor List|depositor|browse|', 'alias' => 'create,edit,view');
+$lang->depositor->menu->balance = 'Balance|balance|browse|';
 
 /* Menu of trade module. */
 $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
-$lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> Bills|trade|browse|', 'alias' => 'create,edit,view');
+$lang->trade->menu->browse   = array('link' => 'Bills|trade|browse|mode=all');
+$lang->trade->menu->in       = array('link' => 'Income|trade|browse|mode=in');
+$lang->trade->menu->out      = array('link' => 'Expenditure|trade|browse|mode=out');
+$lang->trade->menu->transfer = array('link' => 'Transfer|trade|browse|mode=transfer');
 
 /* Menu of trade module. */
 $lang->provider = new stdclass();
 $lang->provider->menu = new stdclass();
-$lang->provider->menu->browse = array('link' => '<i class="icon-th-list"></i> Provider List|provider|browse|', 'alias' => 'create,edit,view');
+$lang->provider->menu->browse = array('link' => 'Provider List|provider|browse|', 'alias' => 'create,edit,view');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

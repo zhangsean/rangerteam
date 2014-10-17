@@ -32,7 +32,7 @@ class trade extends control
      * @access public
      * @return void
      */
-    public function browse($orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'all', $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -41,7 +41,8 @@ class trade extends control
         $incomeTypes  = $this->loadModel('tree')->getPairs(0, 'in');
 
         $this->view->title   = $this->lang->trade->browse;
-        $this->view->trades  = $this->trade->getList($orderBy, $pager);
+        $this->view->trades  = $this->trade->getList($mode, $orderBy, $pager);
+        $this->view->mode    = $mode;
         $this->view->pager   = $pager;
         $this->view->orderBy = $orderBy;
 

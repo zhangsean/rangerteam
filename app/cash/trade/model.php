@@ -31,9 +31,16 @@ class tradeModel extends model
      * @access public
      * @return array
      */
-    public function getList($orderBy, $pager = null)
+    public function getList($mode, $orderBy, $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_TRADE)->where('parent')->eq('')->orderBy($orderBy)->page($pager)->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_TRADE)
+            ->where('parent')->eq('')
+            ->beginIF($mode == 'in')->andWhere('type')->eq('in')
+            ->beginIF($mode == 'out')->andWhere('type')->eq('out')
+            ->beginIF($mode == 'transfer')->andWhere('type')->eq('transfer')
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll('id');
     }
 
     /** 

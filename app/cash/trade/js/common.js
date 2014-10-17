@@ -21,4 +21,7 @@ $(document).ready(function()
             $(this).parents('.input-group').find('input[type=text][id=traderName]').hide();
         }
     })
+
+    $('.leftmenu li').removeClass('active').find('[href*=' + v.mode + ']').parent().addClass('active');
+    $('.leftmenu li').find('[href*=' + v.mode + ']').parent().addClass('active');
 })
