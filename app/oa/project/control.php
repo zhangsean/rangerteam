@@ -124,7 +124,7 @@ class project extends control
     public function activate($projectID)
     {
         $result = $this->project->activate($projectID);
-        if($result) $this->send(array('result' => 'success'));
+        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->project->activateSuccess));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
@@ -137,7 +137,7 @@ class project extends control
      */
     public function suspend($projectID)
     {
-        if($this->project->suspend($projectID)) $this->send(array('result' => 'success'));
+        if($this->project->suspend($projectID)) $this->send(array('result' => 'success', 'message' => $this->lang->project->suspendSuccess));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 

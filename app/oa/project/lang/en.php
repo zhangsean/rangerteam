@@ -34,3 +34,10 @@ $lang->project->member      = 'Team';
 $lang->project->end         = 'End Date';
 $lang->project->createdBy   = 'Created by';
 $lang->project->createdDate = 'Created date';
+
+$lang->project->confirm = new stdclass();
+$lang->project->confirm->activate = 'Are you sure to activate this projcet?';
+$lang->project->confirm->suspend  = 'Are you sure to suspend this projcet?';
+
+$lang->project->activateSuccess = 'Successfully activtated';
+$lang->project->suspendSuccess  = 'Successfully suspended';

@@ -9,7 +9,29 @@ $(document).ready(function()
     }
 
     $("#createButton").modalTrigger({width:800});
-    $.setAjaxJSONER('.switcher', function(){location.reload()});
+
+    $('.switcher').click(function()
+    {
+        var url = $(this).attr('href');
+        bootbox.confirm($(this).data('confirm'),  function(result)
+        {
+            if(result)
+            {
+                $.getJSON(url, function(response)
+                {
+                    if(response.result == 'success')
+                    {
+                        bootbox.alert(response.message, function(){location.reload()});
+                    }
+                    else
+                    {
+                        bootbox.alert(response.message);
+                    }
+                })
+            }
+        })
+        return false;
+    });
 
     var $leftmenu = $('.menu.leftmenu');
     $leftmenu .next('a').css('margin-top', '10px').appendTo($leftmenu);

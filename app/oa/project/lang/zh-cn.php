@@ -34,3 +34,10 @@ $lang->project->member      = '团队';
 $lang->project->end         = '结束日期';
 $lang->project->createdBy   = '由谁创建';
 $lang->project->createdDate = '创建时间';
+
+$lang->project->confirm = new stdclass();
+$lang->project->confirm->activate = '确认激活此项目？';
+$lang->project->confirm->suspend  = '确认挂起此项目？';
+
+$lang->project->suspendSuccess  = '挂起操作成功';
+$lang->project->activateSuccess = '激活操作成功';
