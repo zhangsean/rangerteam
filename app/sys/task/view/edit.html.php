@@ -75,15 +75,15 @@
                 </tr>
                 <tr>
                   <th><?php echo $lang->task->estimate;?></th>
-                  <td><?php echo html::input('estimate', $task->estimate, "class='form-control'");?></td>
+                  <td><?php echo html::input('estimate', formatHours($task->estimate), "class='form-control'");?></td>
                 </tr>
                 <tr>
                   <th><?php echo $lang->task->consumed;?></th>
-                  <td><?php echo html::input('consumed', $task->consumed, "class='form-control'");?></td>
+                  <td><?php echo html::input('consumed', formatHours($task->consumed), "class='form-control'");?></td>
                 </tr>
                 <tr>
                   <th><?php echo $lang->task->left;?></th>
-                  <td><?php echo html::input('left', $task->left, "class='form-control'");?></td>
+                  <td><?php echo html::input('left', formatHours($task->left), "class='form-control'");?></td>
                 </tr>
               </table>
             </div>

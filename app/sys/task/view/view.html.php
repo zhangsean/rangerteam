@@ -63,15 +63,15 @@
             </tr>
             <tr>
               <th><?php echo $lang->task->estimate;?></th>
-              <td><?php echo $task->estimate;?></td>
+              <td><?php echo formatHours($task->estimate);?></td>
             </tr>
             <tr>
               <th><?php echo $lang->task->consumed;?></th>
-              <td><?php echo $task->consumed;?></td>
+              <td><?php echo formatHours($task->consumed);?></td>
             </tr>
             <tr>
               <th><?php echo $lang->task->left;?></th>
-              <td><?php echo $task->left;?></td>
+              <td><?php echo formatHours($task->left);?></td>
             </tr>
           </table>
         </div>
