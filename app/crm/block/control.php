@@ -69,7 +69,7 @@ class block extends control
 
         $this->view->title   = $this->lang->block->admin;
         $this->view->blocks  = array_merge(array(''), json_decode($this->block->getAvailableBlocks(), true));
-        $this->view->params  = $blockID ? json_decode($this->block->{'get' . ucfirst($blockID) . 'Params'}(), true) : array();;
+        $this->view->params  = $blockID ? json_decode($this->block->{'get' . ucfirst($blockID) . 'Params'}(), true) : array();
         $this->view->blockID = $blockID;
         $this->view->block   = $block;
         $this->view->index   = $index;
