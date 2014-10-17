@@ -47,6 +47,8 @@ class upgradeModel extends model
             case '1_3_beta':
                 $this->execSQL($this->getUpgradeFile('1.3.beta'));
                 $this->setCompanyContent();
+            case '1_4_beta':
+                $this->upgradeContractName();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -371,6 +373,25 @@ class upgradeModel extends model
             $this->dao->update(TABLE_CONFIG)->set('value')->eq($this->config->company->desc)->where('`key`')->eq('content')->andWhere('section')->eq('company')->exec();
             $this->dao->delete()->from(TABLE_CONFIG)->where('`key`')->eq('desc')->andWhere('section')->eq('company')->exec();
         }
+        return !dao::isError();
+    }
+
+    /**
+     * Set name of contract when upgrade from 1.4.beta.
+     * 
+     * @access public
+     * @return void
+     */
+    public function upgradeContractName()
+    {
+        $contracts = $this->dao->select('*')->from(TABLE_CONTRACT)->fetchAll();
+
+        foreach($contracts as $contract)
+        {
+            $name = preg_replace('/\[(\d+)\]/', '', $contract->name);
+            $this->dao->update(TABLE_CONTRACT)->set('name')->eq($name)->where('id')->eq($contract->id)->exec();
+        }
+
         return !dao::isError();
     }
 }
