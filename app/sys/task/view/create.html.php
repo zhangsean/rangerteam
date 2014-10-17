@@ -34,10 +34,6 @@
                 <td></td>
               </tr>
               <tr>
-                <th><?php echo $lang->task->type;?></th>
-                <td><?php echo html::select('type', $lang->task->typeList, '', "class='form-control'");?></td>
-              </tr>
-              <tr>
                 <th><?php echo $lang->task->name;?></th>
                 <td colspan='2'><?php echo html::input('name', '', "class='form-control'");?></td>
               </tr>

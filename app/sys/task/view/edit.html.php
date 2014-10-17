@@ -58,10 +58,6 @@
                   <td><?php echo html::select('assignedTo', $members, $task->assignedTo, "class='form-control chosen'");?></td>
                 </tr>
                 <tr>
-                  <th><?php echo $lang->task->type;?></th>
-                  <td><?php echo html::select('type', $lang->task->typeList, $task->type, "class='form-control'");?></td>
-                </tr>
-                <tr>
                   <th><?php echo $lang->task->status;?></th>
                   <td><?php echo html::select('status', $lang->task->statusList, $task->status, "class='form-control'");?></td>
                 </tr>

@@ -46,10 +46,6 @@
               <td><?php echo $members[$task->assignedTo];?></td>
             </tr>
             <tr>
-              <th><?php echo $lang->task->type;?></th>
-              <td><?php echo $lang->task->typeList[$task->type];?></td>
-            </tr>
-            <tr>
               <th><?php echo $lang->task->status;?></th>
               <td><?php echo $lang->task->statusList[$task->status];?></td>
             </tr>
