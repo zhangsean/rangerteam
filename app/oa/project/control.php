@@ -29,7 +29,7 @@ class project extends control
         if(empty($this->projects)) $this->locate(inlink('create'));
 
         $moduleMenu   = commonModel::createModuleMenu('project');
-        $createButton = html::a(inlink('create'), $this->lang->project->create, "id='createButton' class='btn btn-primary'");
+        $createButton = html::a(inlink('create'), $this->lang->project->create, "id='createButton' class='btn'");
         
         $this->view->title      = $this->lang->project->common;
         $this->view->moduleMenu = $moduleMenu . $createButton;
