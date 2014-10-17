@@ -89,9 +89,6 @@
                     </div>
                     <?php endif;?>
                     <strong><?php echo $task->name?></strong>
-                    <?php if(!empty($task->type)):?>
-                    &nbsp; <span class='text-muted task-type'><?php echo $lang->task->typeList[$task->type];?></span>
-                    <?php endif;?>
                   </div>
                   <div class="content">
                     <div class='task-infos'>

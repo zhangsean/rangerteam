@@ -43,9 +43,6 @@
                 <?php if($task->status != $key) continue;?>
                 <div class='board-item task task-pri-<?php echo $task->pri; ?>' data-id='<?php echo $task->id;?>'>
                   <div class='task-heading'>
-                    <?php if(!empty($task->type)):?>
-                    <div class='pull-right text-muted task-type'><?php echo $lang->task->typeList[$task->type];?></div>
-                    <?php endif;?>
                     <strong class='task-name'><?php echo $task->name;?></strong>
                   </div>
                   <div class='task-info clearfix'>
