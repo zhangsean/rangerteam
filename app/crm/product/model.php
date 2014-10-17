@@ -31,9 +31,16 @@ class productModel extends model
      * @access public
      * @return array
      */
-    public function getList($orderBy = 'id_desc', $pager = null)
+    public function getList($mode, $orderBy = 'id_desc', $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_PRODUCT)->where('deleted')->eq(0)->orderBy($orderBy)->page($pager)->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_PRODUCT)
+            ->where('deleted')->eq(0)
+            ->beginIF($mode == 'developing')->andWhere('status')->eq('developing')
+            ->beginIF($mode == 'normal')->andWhere('status')->eq('normal')
+            ->beginIF($mode == 'offline')->andWhere('status')->eq('offline')
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll('id');
     }
 
     /** 
