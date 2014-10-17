@@ -35,7 +35,10 @@ $lang->customer->menu->public    = array('link' => 'Public Customers|customer|br
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse = array('link' => 'Product List|product|browse|', 'alias' => 'create,edit');
+$lang->product->menu->browse     = array('link' => 'Product List|product|browse|mode=all');
+$lang->product->menu->normal     = array('link' => 'Normal|product|browse|mode=normal');
+$lang->product->menu->developing = array('link' => 'Developing|product|browse|mode=developing');
+$lang->product->menu->offline    = array('link' => 'Offline|product|browse|mode=offline');
 
 /* Menu of order module. */
 $lang->order = new stdclass();

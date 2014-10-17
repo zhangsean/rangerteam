@@ -25,17 +25,20 @@ $lang->menu->crm->setting   = '设置|setting|lang|module=product&field=statusLi
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
 $lang->customer->menu->browse    = array('link' => '全部客户|customer|browse|mode=all', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->past      = array('link' => '亟需联系|customer|browse|mode=past', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->today     = array('link' => '今天联系|customer|browse|mode=today', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->tomorrow  = array('link' => '明天联系|customer|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->thisweek  = array('link' => '一周内联系|customer|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->thismonth = array('link' => '一月内联系|customer|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->public    = array('link' => '公共客户|customer|browse|mode=public', 'alias' => 'create,edit,view,record');
+$lang->customer->menu->past      = array('link' => '亟需联系|customer|browse|mode=past');
+$lang->customer->menu->today     = array('link' => '今天联系|customer|browse|mode=today');
+$lang->customer->menu->tomorrow  = array('link' => '明天联系|customer|browse|mode=tomorrow');
+$lang->customer->menu->thisweek  = array('link' => '一周内联系|customer|browse|mode=thisweek');
+$lang->customer->menu->thismonth = array('link' => '一月内联系|customer|browse|mode=thismonth');
+$lang->customer->menu->public    = array('link' => '公共客户|customer|browse|mode=public');
 
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse = array('link' => '产品列表|product|browse|', 'alias' => 'create,edit');
+$lang->product->menu->browse     = array('link' => '产品列表|product|browse|mode=all');
+$lang->product->menu->normal     = array('link' => '正常|product|browse|mode=normal');
+$lang->product->menu->developing = array('link' => '研发中|product|browse|mode=developing');
+$lang->product->menu->offline    = array('link' => '下线|product|browse|mode=offline');
 
 /* Menu of order module. */
 $lang->order = new stdclass();
