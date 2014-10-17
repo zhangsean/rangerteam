@@ -90,8 +90,6 @@ $lang->install->password = 'Password';
 $lang->install->errorEmptyPassword = "Can't be empty";
 
 $lang->install->success    = "Success installed";
-$lang->install->visitFront = 'Visit front';
-$lang->install->visitAdmin = 'Visit admin';
 
 $lang->install->buildinEntry = new stdclass();
 $lang->install->buildinEntry->crm['name']  = 'CRM';

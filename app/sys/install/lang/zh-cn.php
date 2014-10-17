@@ -90,8 +90,6 @@ $lang->install->password = '密码';
 $lang->install->errorEmptyPassword = '密码不能为空';
 
 $lang->install->success    = "安装成功！";
-$lang->install->visitFront = '登录前台';
-$lang->install->visitAdmin = '登录后台';
 
 $lang->install->buildinEntry = new stdclass();
 $lang->install->buildinEntry->crm['name']  = '客户管理';

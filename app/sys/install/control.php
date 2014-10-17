@@ -118,8 +118,8 @@ class install extends control
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError() ));
             $this->loadModel('setting')->updateVersion($this->config->version);
-            
-            $this->send(array('result' => 'success', 'locate' => inlink('step5', "admin={$this->post->account}")));
+            session_destroy();
+            $this->send(array('result' => 'success', 'message' => $this->lang->install->success, 'locate' => 'index.php'));
         }
 
         if(!isset($this->config->installed) or !$this->config->installed)
@@ -133,18 +133,5 @@ class install extends control
             $this->view->title = $this->lang->install->setAdmin;
             $this->display();
         }
-    }
-
-    /**
-     * Step5: save the admin user to the database.
-     * 
-     * @access public
-     * @return void
-     */
-    public function step5()
-    {
-        session_destroy();
-        $this->view->title = $this->lang->install->success;
-        $this->display();
     }
 }
