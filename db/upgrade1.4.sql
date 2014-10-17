@@ -1,1 +1,1 @@
-UPDATE sys_block SET grid = '3';
+UPDATE sys_block SET grid = '4';
