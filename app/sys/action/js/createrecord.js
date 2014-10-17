@@ -50,7 +50,7 @@ function computeNextDate(delta)
     }
     else
     {
-        $('#nextDate').val(nextDate);
+        $('#nextDate').val(nextDate).attr('disabled', false);
     }
 }
 
