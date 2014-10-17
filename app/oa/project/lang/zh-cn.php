@@ -39,5 +39,5 @@ $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = '确认激活此项目？';
 $lang->project->confirm->suspend  = '确认挂起此项目？';
 
-$lang->project->suspendSuccess  = '挂起操作成功';
 $lang->project->activateSuccess = '激活操作成功';
+$lang->project->suspendSuccess  = '挂起操作成功';
