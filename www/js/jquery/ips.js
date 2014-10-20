@@ -28,7 +28,7 @@
         autoHideMenu                  : false,
         webRoot                       : '/',
         animateSpeed                  : 200,
-        entryIconRoot                 : 'theme/default/images/ips/',
+        entryIconRoot                 : config.webRoot + 'theme/default/images/ips/',
         windowHeadheight              : 30, // the height of window head bar
         bottomBarHeight               : 36, // the height of desk bottom bar
         defaultWinPosOffset           : 30,
