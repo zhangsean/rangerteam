@@ -84,41 +84,39 @@
     </div>
     <?php echo $this->fetch('contact', 'block', "customer={$customer->id}")?>
     <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->contract;?></strong></div>
+      <div class='panel-heading'>
+        <div class='row'>      
+          <div class='col-sm-8'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->contract;?></strong></div>
+          <div class='col-sm-2'><strong><?php echo $lang->order->amount;?></strong></div> 
+          <div class='col-sm-2'><strong><?php echo $lang->order->status;?></strong></div> 
+        </div>
+      </div>
       <table class='table table-data table-condensed'>
-        <thead>
-          <tr class='text-left'>
-            <th><?php echo $lang->contract->name;?></th>
-            <th><?php echo $lang->contract->amount;?></th>
-            <th><?php echo $lang->contract->status;?></th>
-          </tr>
-        </thead>
         <?php foreach($contracts as $contract):?>
         <tr class='<?php echo "contract-{$contract->status}";?>' data-url='<?php echo $this->createLink('contract', 'view', "contractID=$contract->id"); ?>'>
-          <td><?php echo $contract->name;?></td>
-          <td><?php echo $contract->amount;?></td>
-          <td><?php echo $lang->contract->statusList[$contract->status];?></td>
+          <td class='w-p70'><?php echo $contract->name;?></td>
+          <td class='w-p15'><?php echo $contract->amount;?></td>
+          <td class='w-p15'><?php echo $lang->contract->statusList[$contract->status];?></td>
         </tr>
         <?php endforeach;?>
       </table>
     </div>
     <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->order;?></strong></div>
+      <div class='panel-heading'>
+        <div class='row'>      
+          <div class='col-sm-4'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->order;?></strong></div>
+          <div class='col-sm-3'><strong><?php echo $lang->order->plan;?></strong></div>
+          <div class='col-sm-3'><strong><?php echo $lang->order->real;?></strong></div>
+          <div class='col-sm-2'><strong><?php echo $lang->order->status;?></strong></div>
+        </div>
+      </div>
       <table class='table table-data table-condensed'>
-        <thead>
-          <tr class='text-left'>
-            <th><?php echo $lang->order->product;?></th>
-            <th><?php echo $lang->order->plan;?></th>
-            <th><?php echo $lang->order->real;?></th>
-            <th><?php echo $lang->order->status;?></th>
-          </tr>
-        </thead>
         <?php foreach($orders as $order):?>
         <tr class='<?php echo "order-{$order->status}";?>' data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id"); ?>'>
-          <td><?php echo $products[$order->product];?></td>
-          <td><?php echo $order->plan;?></td>
-          <td><?php echo $order->real;?></td>
-          <td><?php echo $lang->order->statusList[$order->status];?></td>
+          <td class='w-p35'><?php echo $products[$order->product];?></td>
+          <td class='25'><?php echo $order->plan;?></td>
+          <td class='25'><?php echo $order->real;?></td>
+          <td class='15'><?php echo $lang->order->statusList[$order->status];?></td>
         </tr>
         <?php endforeach;?>
       </table>
