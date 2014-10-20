@@ -107,9 +107,11 @@ class tradeModel extends model
         if($this->post->createTrader and $type == 'out')
         {
             $trader = new stdclass();
-            $trader->relation = 'provider';
-            $trader->name     = $this->post->traderName;
-            $trader->public   = 1;
+            $trader->relation    = 'provider';
+            $trader->name        = $this->post->traderName;
+            $trader->createdBy   = $this->app->user->account;
+            $trader->createdDate = helper::now();
+            $trader->public      = 1;
 
             $this->dao->insert(TABLE_CUSTOMER)->data($trader)->check('name', 'notempty')->exec();
             $trader = $this->dao->lastInsertID();
