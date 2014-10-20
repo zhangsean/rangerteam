@@ -52,17 +52,21 @@ class contract extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        $contracts = $this->contract->getList(0, $mode, $orderBy, $pager);
+
         /* Save session for return link. */
         $this->session->set('contractList', $this->app->getURI(true));
         $this->session->set('orderList', '');
 
         $this->view->title        = $this->lang->contract->browse;
-        $this->view->contracts    = $this->contract->getList(0, $mode, $orderBy, $pager);
+        $this->view->contracts    = $contracts;
         $this->view->customers    = $this->loadModel('customer')->getPairs('client');
         $this->view->pager        = $pager;
         $this->view->mode         = $mode;
         $this->view->orderBy      = $orderBy;
         $this->view->currencySign = $this->loadModel('order')->setCurrencySign();
+        $this->view->currencyList = $this->loadModel('order')->setCurrencyList();
+        $this->view->totalAmount  = $this->contract->countAmount($contracts);
 
         $this->display();
     }

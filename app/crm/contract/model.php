@@ -482,4 +482,31 @@ class contractModel extends model
 
         return $menu;
     }
+
+    /**
+     * Count amount.
+     * 
+     * @param  array  $contracts 
+     * @access public
+     * @return array
+     */
+    public function countAmount($contracts)
+    {
+        $totalAmount  = array();
+        $currencyList = $this->loadModel('order')->setCurrencyList();
+        foreach($currencyList as $key => $currency)
+        {
+            $totalAmount[$key]['contract'] = 0;
+            $totalAmount[$key]['return']   = 0;
+            foreach($contracts as $contract)
+            {
+                if($contract->currency == $key)
+                {
+                        $totalAmount[$key]['contract'] += $contract->amount;
+                        if($contract->return == 'done') $totalAmount[$key]['return'] += $contract->amount;
+                }
+            } 
+        }
+        return $totalAmount;
+    }
 }
