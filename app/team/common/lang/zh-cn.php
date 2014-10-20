@@ -14,8 +14,8 @@ $lang->app->name = 'TEAM';
 
 $lang->menu->team = new stdclass();
 $lang->menu->team->dashboard = '我的地盘|dashboard|index|';
-$lang->menu->team->forum     = '论坛|forum|index|';
-$lang->menu->team->blog      = '博客|blog|index|';
+$lang->menu->team->forum     = '论坛|forum|browse|';
+$lang->menu->team->blog      = '博客|blog|browse|';
 $lang->menu->team->user      = '同事|user|colleague|';
 $lang->menu->team->company   = '公司|company|index|';
 $lang->menu->team->setting   = '设置|tree|browse|type=forum|';

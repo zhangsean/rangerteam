@@ -14,11 +14,11 @@ $lang->app->name = 'CRM';
 
 $lang->menu->crm = new stdclass();
 $lang->menu->crm->dashboard = '我的地盘|dashboard|index|';
-$lang->menu->crm->order     = '订单|order|index|';
-$lang->menu->crm->contract  = '合同|contract|index|';
-$lang->menu->crm->customer  = '客户|customer|index|';
-$lang->menu->crm->contact   = '联系人|contact|index|';
-$lang->menu->crm->product   = '产品|product|index|';
+$lang->menu->crm->order     = '订单|order|browse|';
+$lang->menu->crm->contract  = '合同|contract|browse|';
+$lang->menu->crm->customer  = '客户|customer|browse|';
+$lang->menu->crm->contact   = '联系人|contact|browse|';
+$lang->menu->crm->product   = '产品|product|browse|';
 $lang->menu->crm->setting   = '设置|setting|lang|module=product&field=statusList';
 
 /* Menu of customer module. */
