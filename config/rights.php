@@ -19,7 +19,6 @@ $config->rights->member['entry']['visit']            = 'visit';
 $config->rights->member['entry']['blocks']           = 'blocks';
 $config->rights->member['entry']['setBlock']         = 'setblock';
 $config->rights->member['dashboard']['index']        = 'index';
-$config->rights->member['order']['index']            = 'index';
 $config->rights->member['contract']['index']         = 'index';
 $config->rights->member['customer']['index']         = 'index';
 $config->rights->member['contact']['index']          = 'index';
