@@ -40,14 +40,18 @@ class order extends control
         $this->session->set('orderList',    $this->app->getURI(true));
         $this->session->set('contractList', '');
 
+        $orders = $this->order->getList($mode, '', $orderBy, $pager);
+
         $this->view->title        = $this->lang->order->browse;
-        $this->view->orders       = $this->order->getList($mode, '', $orderBy, $pager);
+        $this->view->orders       = $orders;
         $this->view->customers    = $this->loadModel('customer')->getList('client');
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->pager        = $pager;
         $this->view->mode         = $mode;
         $this->view->orderBy      = $orderBy;
         $this->view->currencySign = $this->order->setCurrencySign();
+        $this->view->currencyList = $this->order->setCurrencyList();
+        $this->view->totalAmount  = $this->order->countAmount($orders);
         $this->display();
     }
 

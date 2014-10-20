@@ -53,7 +53,22 @@
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='12'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot>
+      <tr>
+        <td class='text-middle' colspan='4'>
+          <div class='text-danger'>
+            <?php
+            foreach($totalAmount as $currency => $amount)
+            {
+                if($amount['plan'] == 0 and $amount['real'] == 0) continue;
+                printf($lang->order->totalAmount, $currencyList[$currency], $amount['plan'], $amount['real']);
+            }
+            ?>
+          </div>
+        </td>
+        <td colspan='8'><?php $pager->show();?></td>
+      </tr>
+    </tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.html.php';?>

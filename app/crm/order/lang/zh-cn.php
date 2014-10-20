@@ -101,3 +101,5 @@ $lang->order->currencySign['sgd']  = 'S$';
 $lang->order->titleLBL  = "%s购买%s";
 $lang->order->basicInfo = "基本信息";
 $lang->order->lifetime  = "订单的一生";
+
+$lang->order->totalAmount = '本页%s订单计划金额%s，成交金额%s；';

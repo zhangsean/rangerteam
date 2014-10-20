@@ -423,4 +423,32 @@ class orderModel extends model
         }
         return $currencySign;
     }  
+
+    /**
+     * Count amount.
+     * 
+     * @param  array  $orders 
+     * @param  string $type 
+     * @access public
+     * @return array
+     */
+    public function countAmount($orders)
+    {
+        $totalAmount  = array();
+        $currencyList = $this->loadModel('order')->setCurrencyList();
+        foreach($currencyList as $key => $currency)
+        {
+            $totalAmount[$key]['plan']  = 0;
+            $totalAmount[$key]['real'] = 0;
+            foreach($orders as $order)
+            {
+                if($order->currency == $key)
+                {
+                        $totalAmount[$key]['plan'] += $order->plan;
+                        $totalAmount[$key]['real'] += $order->real;
+                }
+            } 
+        }
+        return $totalAmount;
+    }
 }
