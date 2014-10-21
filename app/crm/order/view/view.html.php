@@ -12,34 +12,6 @@
 ?>
 <?php include '../../common/view/header.html.php'; ?>
 <div class='col-lg-8'>
-  <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}");?>
-  <div class='page-actions'>
-    <?php
-    echo "<div class='btn-group'>";
-    echo html::a($this->createLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $lang->order->record, "class='btn' data-toggle='modal'");
-    if($order->status == 'normal') echo html::a(helper::createLink('contract', 'create', "customer={$order->customer}&orderID={$order->id}"), $lang->order->sign, "class='btn btn-default'");
-    if($order->status != 'normal') echo html::a('###', $lang->order->sign, "class='btn' disabled='disabled' class='disabled'");
-    if($order->status != 'closed')  echo html::a(inlink('assign', "orderID=$order->id"), $lang->assign, "data-toggle='modal' class='btn btn-default'");
-    if($order->status == 'closed')  echo html::a('###', $lang->assign, "data-toggle='modal' class='btn btn-default disabled' disabled");
-    echo '</div>';
-
-    echo "<div class='btn-group'>";
-    if($order->status != 'closed') echo html::a(inlink('close', "orderID=$order->id"), $lang->close, "class='btn btn-default' data-toggle='modal'");
-    if($order->closedReason == 'payed') echo html::a('###', $lang->close, "disabled='disabled' class='disabled btn'");
-    if($order->closedReason != 'payed' and $order->status == 'closed') echo html::a(inlink('activate', "orderID=$order->id"), $lang->activate, "class='btn' data-toggle='modal'");
-    if($order->closedReason == 'payed' or  $order->status != 'closed') echo html::a('###', $lang->activate, "class='btn disabled' data-toggle='modal'");
-    echo '</div>';
-
-    echo "<div class='btn-group'>";
-    echo html::a(inlink('edit',     "orderID=$order->id"), $lang->edit,   "class='btn btn-default'");
-    echo '</div>';
-
-    $browseLink = $this->session->orderList ? $this->session->orderList : inlink('browse');
-    echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
-    ?>
-  </div>
-</div>
-<div class='col-lg-4'>
   <div class='panel'>
     <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->basicInfo;?></strong></div>
     <div class='panel-body'>
@@ -92,7 +64,34 @@
       </table>
     </div>
   </div> 
-  <?php echo $this->fetch('contact', 'block', "customer={$order->customer}");?>
+  <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}");?>
+  <div class='page-actions'>
+    <?php
+    echo "<div class='btn-group'>";
+    echo html::a($this->createLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $lang->order->record, "class='btn' data-toggle='modal'");
+    if($order->status == 'normal') echo html::a(helper::createLink('contract', 'create', "customer={$order->customer}&orderID={$order->id}"), $lang->order->sign, "class='btn btn-default'");
+    if($order->status != 'normal') echo html::a('###', $lang->order->sign, "class='btn' disabled='disabled' class='disabled'");
+    if($order->status != 'closed') echo html::a(inlink('assign', "orderID=$order->id"), $lang->assign, "data-toggle='modal' class='btn btn-default'");
+    if($order->status == 'closed') echo html::a('###', $lang->assign, "data-toggle='modal' class='btn btn-default disabled' disabled");
+    echo '</div>';
+
+    echo "<div class='btn-group'>";
+    if($order->status != 'closed') echo html::a(inlink('close', "orderID=$order->id"), $lang->close, "class='btn btn-default' data-toggle='modal'");
+    if($order->closedReason == 'payed') echo html::a('###', $lang->close, "disabled='disabled' class='disabled btn'");
+    if($order->closedReason != 'payed' and $order->status == 'closed') echo html::a(inlink('activate', "orderID=$order->id"), $lang->activate, "class='btn' data-toggle='modal'");
+    if($order->closedReason == 'payed' or  $order->status != 'closed') echo html::a('###', $lang->activate, "class='btn disabled' data-toggle='modal'");
+    echo '</div>';
+
+    echo "<div class='btn-group'>";
+    echo html::a(inlink('edit',     "orderID=$order->id"), $lang->edit,   "class='btn btn-default'");
+    echo '</div>';
+
+    $browseLink = $this->session->orderList ? $this->session->orderList : inlink('browse');
+    echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
+    ?>
+  </div>
+</div>
+<div class='col-lg-4'>
   <div class='panel'>
     <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->lifetime;?></strong></div>
     <div class='panel-body'>
@@ -129,5 +128,6 @@
       </table>
     </div>
   </div>
+  <?php echo $this->fetch('contact', 'block', "customer={$order->customer}");?>
 </div>
 <?php include '../../common/view/footer.html.php';?>
