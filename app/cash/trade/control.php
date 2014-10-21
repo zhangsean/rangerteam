@@ -283,7 +283,7 @@ class trade extends control
         }
 
         $this->view->title      = $this->lang->trade->import;
-        $this->view->modalWidth = 1100;
+        $this->view->modalWidth = 600;
         $this->view->schemas    = $this->loadModel('schema')->getPairs();
         $this->view->depositors = $this->loadModel('depositor')->getPairs();
         $this->display();
