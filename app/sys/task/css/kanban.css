@@ -1,14 +1,21 @@
-.panel-body.boards-container {padding: 0}
-.boards {display: table; border-collapse: separate; position: relative; width: 100%; clear: none;}
-.boards:before, .boards:after {display: none}
-.board.panel, .panel.board-empty {display: table-cell; width: 250px; float: none; border-left: 0; border-top: 0}
-.panel.board-empty {width: auto;}
+.panel-body.boards-container {padding: 5px}
+.board, .board-empty { margin: 0; padding: 5px; border: none; float: left; width: 20%}
+.board > .panel {margin-bottom: 0;}
+.board > .panel > .panel-body {padding: 0;}
 
-.board-item.task {border-left: 0px solid #ccc; border-left-width: 4px\0; box-shadow: inset 4px 0 0 #ccc; padding-left: 14px; padding-left: 10px\0;}
-.board-item.task.task-pri-1 {border-left-color: #d2322d; box-shadow:inset 4px 0 0 #d2322d;}
-.board-item.task.task-pri-2 {border-left-color: #ea8400; box-shadow:inset 4px 0 0 #ea8400;}
-.board-item.task.task-pri-3 {border-left-color: #8521bf; box-shadow:inset 4px 0 0 #8521bf;}
-.board-item.task.task-pri-4 {border-left-color: #39b3d7; box-shadow:inset 4px 0 0 #39b3d7;}
-.task-actions {margin: 5px -10px -6px -14px; margin-left: -10px\0; background: #fafafa; border-left: 1px solid #ddd; border-top: 0 solid #ddd; transition: all .5s .5s cubic-bezier(.175, .885, .32, 1); height: 0; overflow: hidden;}
-.task:hover .task-actions {padding: 5px 10px; height: 30px; border-top-width: 1px}
-.board.panel {border-radius: 0; margin: 0}
+.board-item .pri {line-height: 18px; height: 18px; width: auto; border: none; background: none}
+.board-item {padding: 6px; border-top: 1px solid #ddd; margin: -1px -1px 0;}
+.board-item-shadow {margin: 0;}
+
+.board-item.board-item-empty {border-style: solid; background: #f1f1f1; padding: 15px 6px;}
+.boards.dragging .board.drop-in {box-shadow: none}
+.boards.dragging .board.drop-in > .panel {box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);}
+
+.task {position: relative;}
+.task-heading {padding-right: 15px; padding-bottom: 5px;}
+.task-actions {position: absolute; right: 3px; top: 3px}
+.task-info .btn-mini {line-height: 1}
+.dropdown .caret {border-top-color: #999}
+.dropdown-menu > a {display: block; padding: 3px 15px; color: #333}
+.dropdown-menu > a:hover {background: #f1f1f1; color: #a30e21; text-decoration: none}
+.dropdown-menu > a.disabled, .dropdown-menu > a.disabled:hover, .dropdown-menu > a.active {color: #aaa; background: none}

@@ -378,10 +378,11 @@ class task extends control
      * View task as kanban 
      * 
      * @param  int    $taskID 
+     * @param  string $groupBy    the field to group by
      * @access public
      * @return void
      */
-    public function kanban($projectID = 0)
+    public function kanban($projectID = 0, $groupBy = 'status')
     {
         /* Check project deleted. */
         if($projectID)
@@ -390,10 +391,51 @@ class task extends control
             if($project->deleted) $this->locate($this->createLink('project'));
         }
 
-        $this->view->tasks     = $this->task->getList($projectID);
-        $this->view->title     = $this->lang->task->browse;
-        $this->view->projectID = $projectID;
-        $this->view->projects  = $this->project->getPairs();
+        /* Get tasks and group them. */
+        $tasks       = $this->task->getList($projectID);
+        $groupBy     = strtolower(str_replace('`', '', $groupBy));
+        $taskLang    = $this->lang->task;
+        $groupByList = array();
+        $groupTasks  = array();
+
+        /* Get users. */
+        $users = $this->loadModel('user')->getPairs();
+        foreach($tasks as $task)
+        {
+            if($groupBy == '' or $groupBy == 'status')
+            {
+                $groupTasks[$taskLang->statusList[$task->status]][] = $task;
+            }
+            elseif($groupBy == 'assignedto')
+            {
+                $groupTasks[$users[$task->assignedTo]][] = $task;
+            }
+            elseif($groupBy == 'createdby')
+            {
+                $groupTasks[$users[$task->createdBy]][] = $task;
+            }
+            elseif($groupBy == 'finishedby')
+            {
+                $groupTasks[$users[$task->finishedBy]][] = $task;
+            }
+            elseif($groupBy == 'closedby')
+            {
+                $groupTasks[$users[$task->closedBy]][] = $task;
+            }
+            else
+            {
+                $groupTasks[$task->$groupBy][] = $task;
+            }
+        }
+
+        $this->view->tasks       = $groupTasks;
+        $this->view->groupByList = $groupByList;
+        $this->view->groupBy     = $groupBy;
+        $this->view->orderBy     = $groupBy;
+        $this->view->projectID   = $projectID;
+        $this->view->projects    = $this->project->getPairs();
+        $this->view->users       = $users;
+        $this->view->colWidth    = 100/min(5, max(2, count($groupTasks)));
         $this->display();
     }
 

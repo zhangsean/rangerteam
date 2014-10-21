@@ -16,12 +16,11 @@
 <div class='with-menu page-content'>
   <div class='panel'>
     <div class='panel-heading'>
-      <strong><i class='icon-list-ul icon'> </i><?php echo $lang->task->browse;?></strong>
-      <div class='panel-actions hidden'>
+      <!-- <strong><i class='icon-list-ul icon'> </i><?php echo $lang->task->browse;?></strong> -->
+      <div class='panel-actions'>
         <div class="btn-group">
         <?php echo html::a($this->inlink('browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $lang->task->list, "class='btn active'"); ?>
         <?php echo html::a($this->inlink('kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $lang->task->kanban, "class='btn'"); ?>
-        <?php echo html::a($this->inlink('mind', "projectID=$projectID"), "<i class='icon-usecase icon'></i> " . $lang->task->mind, "class='btn'"); ?>
         <?php echo html::a($this->inlink('outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $lang->task->outline, "class='btn'"); ?>
         </div>
       </div>

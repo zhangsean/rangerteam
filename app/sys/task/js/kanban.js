@@ -26,4 +26,6 @@ $(function()
             $(this).closest('.task').slideUp('fast', function(){$(this).remove()});
         }
     });
+
+    $('[data-toggle="popover"]').popover();
 });
