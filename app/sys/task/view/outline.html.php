@@ -11,122 +11,125 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
-<div class='row'>
-  <div class='col-md-2'>
-    <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
-  </div>
-  <div class='col-md-10'>
-    <div class='panel'>
-      <div class='panel-heading'>
-        <div class='panel-actions'>
-          <div class='btn-group'>
-            <?php echo html::a($this->inlink('browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $lang->task->list, "class='btn'"); ?>
-            <?php echo html::a($this->inlink('kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $lang->task->kanban, "class='btn'"); ?>
-            <?php echo html::a($this->inlink('mind', "projectID=$projectID"), "<i class='icon-usecase icon'></i> " . $lang->task->mind, "class='btn'"); ?>
-            <?php echo html::a($this->inlink('outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $lang->task->outline, "class='btn active'"); ?>
-          </div>
-          <div class="btn-group">
-            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-            <i class='icon-cog'></i> <?php echo $lang->task->groups[$groupBy];?>
-              <icon class="icon-caret-down"></icon>
-            </button>
-            <ul class="dropdown-menu">
-            <?php foreach ($lang->task->groups as $key => $value):?>
-            <?php if(empty($key)) continue;?>
-              <?php $class = ($key == $groupBy) ? 'active' : '';?>
-              <li class='<?php echo $class;?>'>
-                <?php echo html::a($this->inlink('outline', "projectID=$projectID&groupBy=$key"), $value); ?>
-              </li>
-            <?php endforeach;?>
-            </ul>
-          </div>
+<?php $this->loadModel('project')->setMenu($projects, $projectID);?>
+<div class='with-menu page-content'>
+  <div class='panel'>
+    <div class='panel-heading'>
+      <div class='panel-actions'>
+        <div class='btn-group'>
+          <?php echo html::a($this->inlink('browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $lang->task->list, "class='btn'"); ?>
+          <?php echo html::a($this->inlink('kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $lang->task->kanban, "class='btn'"); ?>
+          <?php echo html::a($this->inlink('outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $lang->task->outline, "class='btn active'"); ?>
         </div>
-        <div class="panel-actions pull-right">
-          <div class="btn-group">
-            <button class="btn" type="button" id="expandAll"><i class="icon-align-left"></i></button>
-            <button class="btn" type="button" id="collapseAll"><i class="icon-align-justify"></i></button>
-          </div>
+        <div class="btn-group">
+          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class='icon-cog'></i> <?php echo $lang->task->groups[$groupBy];?>
+            <icon class="icon-caret-down"></icon>
+          </button>
+          <ul class="dropdown-menu">
+          <?php foreach ($lang->task->groups as $key => $value):?>
+          <?php if(empty($key)) continue;?>
+            <?php $class = ($key == $groupBy) ? 'active' : '';?>
+            <li class='<?php echo $class;?>'>
+              <?php echo html::a($this->inlink('outline', "projectID=$projectID&groupBy=$key"), $value); ?>
+            </li>
+          <?php endforeach;?>
+          </ul>
         </div>
       </div>
-      <div class='panel-body outline-container'>
-        <div id='taskList' class='outline'>
-        <?php $i = 0; ?>
-        <?php foreach($tasks as $groupKey => $groupTasks):?>
-          <?php
-            $groupWait     = 0;
-            $groupDone     = 0;
-            $groupDoing    = 0;
-            $groupClosed   = 0;
-          ?>
-          <div class="item">
-            <div class="heading collapsed" data-toggle="collapse" data-target='#taskList<?php echo ++$i;?>'><i class='text-muted icon-caret-down'></i> <strong><?php echo $groupKey;?></strong></div>
-            <div class="content list task-list collapse" id='taskList<?php echo $i;?>'>
-              <?php foreach($groupTasks as $task):?>
-                <?php
-                if($task->status == 'wait')
-                {
-                    $groupWait++;
-                }
-                elseif($task->status == 'doing')
-                {
-                    $groupDoing++;
-                }
-                elseif($task->status == 'done')
-                {
-                    $groupDone++;
-                }
-                elseif($task->status == 'closed')
-                {
-                    $groupClosed++;
-                }
-                $groupSum = count($groupTasks);
-                ?>
-                <div class='item task task-pri-<?php echo $task->pri; ?>' data-id='<?php echo $task->id;?>' data-status='<?php echo $task->status;?>'>
-                  <div class="heading">
-                    <?php if($groupBy != 'status'):?>
-                    <div class="pull-right">
-                      <span class="label label-circle label-badge task-status-<?php echo $task->status?>"><?php echo $lang->task->statusList[$task->status]?></span>
-                    </div>
-                    <?php endif;?>
-                    <strong><?php echo $task->name?></strong>
-                  </div>
-                  <div class="content">
-                    <div class='task-infos'>
-                    <?php if(!empty($task->assignedTo)):?>
-                      <div class='task-assignedTo text-muted w-80px task-info'><i class='icon-user'></i> <small><?php echo $task->assignedTo;?></small></div>
-                    <?php endif;?>
-                    <?php if(!empty($task->deadline) and $task->deadline != '0000-00-00'):?>
-                      <div class='task-deadline text-warning w-100px task-info'><i class='icon-time'></i> <small><?php echo $task->deadline;?></small></div>
-                    <?php endif;?>
-                    </div>
-                  </div>
-                  <div class='actions'>
-                    <?php echo $this->task->buildOperateMenu($task);?>
-                  </div>
-                </div>
-              <?php endforeach;?>
-            </div>
-            <div class="info">
-              <?php printf($lang->task->groupinfo, $groupSum, $groupWait, $groupDoing, $groupDone, $groupClosed) ?>
-            </div>
-          </div>
-        <?php endforeach;?>
+      <div class="panel-actions pull-right">
+        <div class="btn-group">
+          <button class="btn" type="button" id="expandAll"><i class="icon-align-left"></i></button>
+          <button class="btn" type="button" id="collapseAll"><i class="icon-align-justify"></i></button>
         </div>
       </div>
     </div>
+    <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
+      <thead>
+        <tr class='text-center'>
+          <?php $vars = "projectID=$projectID&mode={$mode}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+          <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->task->id);?></th>
+          <th class='w-40px'> <?php commonModel::printOrderLink('pri',         $orderBy, $vars, $lang->task->lblPri);?></th>
+          <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->task->name);?></th>
+          <th class='w-100px'><?php commonModel::printOrderLink('deadline',    $orderBy, $vars, $lang->task->deadline);?></th>
+          <th class='w-80px'> <?php commonModel::printOrderLink('assignedTo',  $orderBy, $vars, $lang->task->assignedTo);?></th>
+          <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->task->createdDate);?></th>
+          <th class='w-90px'> <?php commonModel::printOrderLink('consumed',    $orderBy, $vars, $lang->task->consumedAB . $lang->task->lblHour);?></th>
+          <th class='w-90px'> <?php commonModel::printOrderLink('left',        $orderBy, $vars, $lang->task->left . $lang->task->lblHour);?></th>
+          <th class='w-180px'><?php echo $lang->actions;?></th>
+        </tr>
+      </thead>
+      <?php $i = 0; ?>
+      <?php foreach($tasks as $groupKey => $groupTasks):?>
+      <?php
+        $groupWait     = 0;
+        $groupDone     = 0;
+        $groupDoing    = 0;
+        $groupClosed   = 0;
+      ?>
+        <tr class="heading toggle-handle" data-target='#taskList<?php echo ++$i;?>'>
+          <td colspan='4'>&nbsp;<i class='text-muted icon-caret-down toggle-icon'></i> &nbsp;<?php echo $groupKey;?></td>
+          <td colspan='5' class='text-right'></td>
+        </tr>
+        <tbody id='taskList<?php echo $i;?>'>
+          <?php foreach($groupTasks as $task):?>
+            <?php
+            if($task->status == 'wait')
+            {
+                $groupWait++;
+            }
+            elseif($task->status == 'doing')
+            {
+                $groupDoing++;
+            }
+            elseif($task->status == 'done')
+            {
+                $groupDone++;
+            }
+            elseif($task->status == 'closed')
+            {
+                $groupClosed++;
+            }
+            $groupSum = count($groupTasks);
+            ?>
+            <tr class='text-center' data-url='<?php echo $this->createLink('task', 'view', "taskID=$task->id"); ?>'>
+              <td><?php echo $task->id;?></td>
+              <td><span class='active pri pri-<?php echo $task->pri; ?>'><?php echo $lang->task->priList[$task->pri];?></span></td>
+              <td class='text-left'><?php echo $task->name;?></td>
+              <td><?php echo $task->deadline;?></td>
+              <td><?php if(isset($users[$task->assignedTo])) echo $users[$task->assignedTo];?></td>
+              <td><?php echo substr($task->createdDate, 0, 10);?></td>
+              <td><?php echo formatHours($task->consumed);?></td>
+              <td><?php echo formatHours($task->left);?></td>
+              <td><?php echo $this->task->buildOperateMenu($task);?></td>
+            </tr>
+          <?php endforeach;?>
+          <td></td><td colspan='8'><?php printf($lang->task->groupinfo, $groupSum, $groupWait, $groupDoing, $groupDone, $groupClosed) ?></td>
+        </tbody>
+      <?php endforeach;?>
+    </table>
   </div>
 </div>
 <script>
 $(function()
 {
+    $('#taskList').on('click', '.toggle-handle', function()
+    {
+        var $this = $(this);
+        $this.toggleClass('collapsed');
+        var collapsed = $this.hasClass('collapsed');
+        $this.find('.toggle-icon').toggleClass('icon-caret-down', !collapsed).toggleClass('icon-caret-right', collapsed);;
+        $($this.data('target')).toggleClass('collapse', collapsed).toggleClass('in', !collapsed);
+    });
+
     $('#expandAll').click(function()
     {
-        $('.outline > .item > .heading.collapsed').click();
+        $('#taskList .toggle-handle.collapsed').click();
     });
 
     $('#collapseAll').click(function()
     {
-        $('.outline > .item > .heading:not(.collapsed)').click();
+        $('#taskList .toggle-handle:not(.collapsed)').click();
     });
 });
 </script>

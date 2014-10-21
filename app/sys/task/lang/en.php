@@ -131,4 +131,4 @@ $lang->task->unAssigned = 'Un assigned';
 
 $lang->task->mindMoveTip = 'You should move a task to a sub node.';
 
-$lang->task->groupinfo = 'Total <strong>%s</strong> - <span class="text-danger">waitin <strong>%s</strong></span> - <span class="text-warning">doing <strong>%s</strong></span> - <span class="text-success">finished <strong>%s</strong></span> - <span class="text-muted">closed <strong>%s</strong></span>';
+$lang->task->groupinfo = 'Total <strong>%s</strong> - <span class="text-warning">waitin <strong>%s</strong></span> - <span class="text-danger">doing <strong>%s</strong></span> - <span class="text-success">finished <strong>%s</strong></span> - <span class="text-muted">closed <strong>%s</strong></span>';

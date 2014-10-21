@@ -382,7 +382,7 @@ class task extends control
      * @access public
      * @return void
      */
-    public function kanban($projectID = 0, $groupBy = 'status')
+    public function kanban($projectID = 0, $mode = null, $groupBy = 'status')
     {
         /* Check project deleted. */
         if($projectID)
@@ -392,7 +392,7 @@ class task extends control
         }
 
         /* Get tasks and group them. */
-        $tasks       = $this->task->getList($projectID);
+        $tasks       = $this->task->getList($projectID, $mode);
         $groupBy     = strtolower(str_replace('`', '', $groupBy));
         $taskLang    = $this->lang->task;
         $groupByList = array();
@@ -538,7 +538,7 @@ class task extends control
      * @access public
      * @return void
      */
-    public function outline($projectID = 0, $groupBy = 'status')
+    public function outline($projectID = 0, $mode = null, $orderBy = 'id_desc', $groupBy = 'status')
     {
         /* Check project deleted. */
         if($projectID)
@@ -548,7 +548,7 @@ class task extends control
         }
 
         /* Get tasks and group them. */
-        $tasks       = $this->task->getList($projectID);
+        $tasks       = $this->task->getList($projectID, $mode, $orderBy);
         $groupBy     = strtolower(str_replace('`', '', $groupBy));
         $taskLang    = $this->lang->task;
         $groupByList = array();
