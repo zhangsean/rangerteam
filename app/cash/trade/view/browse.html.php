@@ -64,12 +64,24 @@
       </tbody>
       <tfoot>
         <tr>
-          <td colspan='3'>
-            <?php echo html::selectAll() . html::selectReverse() . html::submitButton($lang->edit);?>
+          <td colspan='2'><?php echo html::selectAll() . html::selectReverse() . html::submitButton($lang->edit);?></td>
+          <td class='text-middle' colspan='3'>
+            <div class='text-danger'>
+              <?php
+              foreach($totalMoney as $currency => $money)
+              {
+                  if($money['in'] == 0 and $money['out'] == 0) continue;
+                  
+                  if($money['in'] - $money['out'] > 0)  $profits = $lang->trade->profit . ($money['in'] - $money['out']);
+                  if($money['in'] - $money['out'] < 0)  $profits = $lang->trade->loss . ($money['out'] - $money['in']);
+                  if($money['in'] - $money['out'] == 0) $profits = $lang->trade->balance;
+
+                  printf($lang->trade->totalAmount, $currencyList[$currency], $money['in'], $money['out'], $profits);
+              }
+              ?>
+            </div>
           </td>
-          <td colspan='8'>
-            <?php echo $pager->get();?>
-          </td>
+          <td colspan='6'><?php echo $pager->get();?></td>
         </tr>
       </tfoot>
     </table>

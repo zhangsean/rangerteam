@@ -34,14 +34,17 @@ class trade extends control
      */
     public function browse($mode = 'all', $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
+        $this->loadModel('order', 'crm');
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $expenseTypes = $this->loadModel('tree')->getPairs(0, 'out');
         $incomeTypes  = $this->loadModel('tree')->getPairs(0, 'in');
 
+        $trades = $this->trade->getList($mode, $orderBy, $pager);
+
         $this->view->title   = $this->lang->trade->browse;
-        $this->view->trades  = $this->trade->getList($mode, $orderBy, $pager);
+        $this->view->trades  = $trades;
         $this->view->mode    = $mode;
         $this->view->pager   = $pager;
         $this->view->orderBy = $orderBy;
@@ -53,6 +56,8 @@ class trade extends control
         $this->view->categories    = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->currencySign  = $this->loadModel('order', 'crm')->setCurrencySign();
+        $this->view->currencyList  = $this->loadModel('order', 'crm')->setCurrencyList();
+        $this->view->totalMoney    = $this->trade->countMoney($trades);
 
         $this->display();
     }   
@@ -278,6 +283,7 @@ class trade extends control
         }
 
         $this->view->title      = $this->lang->trade->import;
+        $this->view->modalWidth = 1100;
         $this->view->schemas    = $this->loadModel('schema')->getPairs();
         $this->view->depositors = $this->loadModel('depositor')->getPairs();
         $this->display();

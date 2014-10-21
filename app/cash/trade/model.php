@@ -37,7 +37,7 @@ class tradeModel extends model
             ->where('parent')->eq('')
             ->beginIF($mode == 'in')->andWhere('type')->eq('in')
             ->beginIF($mode == 'out')->andWhere('type')->eq('out')
-            ->beginIF($mode == 'transfer')->andWhere('type')->eq('transfer')
+            ->beginIF($mode == 'transfer')->andWhere('type')->like('transfer%')->orWhere('type')->eq('fee')
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
@@ -553,5 +553,31 @@ class tradeModel extends model
         $this->dao->delete()->from(TABLE_TRADE)->where('id')->eq($tradeID)->exec();
 
         return !dao::isError();
+    }
+
+    /**
+     *  Count money.
+     * 
+     * @param  array   $trades 
+     * @access public
+     * @return array
+     */
+    public function countMoney($trades)
+    {
+        $totalMoney  = array();
+        $currencyList = $this->loadModel('order', 'crm')->setCurrencyList();
+        foreach($currencyList as $key => $currency)
+        {
+            $totalMoney[$key]['in']  = 0;
+            $totalMoney[$key]['out'] = 0;
+            foreach($trades as $trade)
+            {
+                if($trade->currency == $key)
+                {
+                    if($trade->type == 'in' or $trade->type == 'out') $totalMoney[$key][$trade->type] += $trade->money;
+                }
+            } 
+        }
+        return $totalMoney;
     }
 }
