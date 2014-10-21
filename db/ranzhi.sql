@@ -238,8 +238,6 @@ CREATE TABLE `oa_project` (
   `id` mediumint NOT NULL AUTO_INCREMENT,
   `name` varchar(90) NOT NULL,
   `desc` text NOT NULL,
-  `master` char(30) NOT NULL,
-  `member` varchar(255) NOT NULL,
   `begin` date NOT NULL,
   `end` date NOT NULL,
   `createdBy` char(30) NOT NULL,

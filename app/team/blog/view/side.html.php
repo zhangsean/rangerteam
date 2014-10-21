@@ -17,26 +17,31 @@
   </div>
   <div class='panel'> 
     <div class='panel-body'> <?php echo $treeMenu;?> </div>
-    <div class='panel-body'>
+    <?php if(!empty($tags)):?>
+    <div class='panel-body div-tags'>
       <?php foreach($tags as $tag):?>
       <?php if($tag) echo html::a(inlink('index', 'category=0&author=&month=&tag=' . $tag), $tag, "class='label label-info'");?>
       <?php endforeach;?>
     </div>
+    <?php endif;?>
 
+    <?php if(!empty($authors)):?>
     <div class='panel-body'>
-      <ul>
-        <?php foreach($authors as $author):?>
-        <li><?php echo html::a(inlink('index', "category=0&author={$author->account}"), $author->realname);?>
-        <?php endforeach;?>
-      </ul>
+      <?php foreach($authors as $author):?>
+      <?php echo html::a(inlink('index', "category=0&author={$author->account}"), $author->realname, "class='label label-success'");?>
+      <?php endforeach;?>
     </div>
+    <?php endif;?>
+
+    <?php if(!empty($months)):?>
     <div class='panel-body'>
-      <ul>
+      <ul class="nav nav-stacked ul-months">
         <?php foreach(array_keys($months) as $month):?>
         <li><?php echo html::a(inlink('index', 'category=0&author=&month=' . str_replace('-', '_', $month)), $month);?></li>
         <?php endforeach;?>
       </ul>
     </div>
-  </div>
+    <?php endif;?>
 
+  </div>
 </div>

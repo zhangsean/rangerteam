@@ -191,13 +191,14 @@ class projectModel extends model
         if(empty($project))
         {
             $project = fixer::input('post')
+                ->remove('member,manager,master')
                 ->add('editedBy', $this->app->user->account)
                 ->add('editedDate', helper::now())
                 ->get();
         }
 
         $this->dao->update(TABLE_PROJECT)
-            ->data($project, $skip = 'uid,member,manager')
+            ->data($project, $skip = 'uid,member,master,manager')
             ->autoCheck()
             ->batchCheck($this->config->project->require->create, 'notempty')
             ->where('id')->eq($projectID)

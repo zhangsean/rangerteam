@@ -49,6 +49,11 @@ class upgradeModel extends model
                 $this->setCompanyContent();
             case '1_4_beta':
                 $this->upgradeContractName();
+                $this->upgradeProjectMember();
+
+                /* Exec sqls must after fix data. */
+                $this->execSQL($this->getUpgradeFile('1.4.beta'));
+
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -393,5 +398,47 @@ class upgradeModel extends model
         }
 
         return !dao::isError();
+    }
+
+    /**
+     * Update project member.
+     * 
+     * @access public
+     * @return void
+     */
+    public function upgradeProjectMember()
+    {
+        $projects = $this->loadModel('project')->getList();
+        foreach($projects as $project)
+        {
+            $member = new stdclass();
+            $member->type = 'project';
+            $member->id   = $project->id;
+ 
+            /* Move master to team table. */
+            if(!empty($project->master))
+            {
+                $member->account = $project->master;
+                $member->role    = 'role';
+                $this->dao->replace(TABLE_TEAM)->data($member)->exec();
+            }
+
+            /* Move members to team table. */
+            if(!empty($project->member))
+            {
+                $members = explode(',', $project->member);
+                $member->role = 'member';
+                foreach($members as $account)
+                {
+                    if($account == $project->master) continue;
+                    if(!validater::checkAccount($account)) continue;
+
+                    $member->account = $account;
+                    $this->dao->replace(TABLE_TEAM)->data($member)->exec();
+                }
+            }
+
+            return true;
+        }
     }
 }
