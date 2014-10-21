@@ -538,7 +538,7 @@ class task extends control
      * @access public
      * @return void
      */
-    public function outline($projectID = 0, $mode = null, $orderBy = 'id_desc', $groupBy = 'status')
+    public function outline($projectID = 0, $mode = null, $groupBy = 'status', $orderBy = 'id_desc')
     {
         /* Check project deleted. */
         if($projectID)

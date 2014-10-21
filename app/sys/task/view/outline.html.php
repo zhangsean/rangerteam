@@ -31,7 +31,7 @@
           <?php if(empty($key)) continue;?>
             <?php $class = ($key == $groupBy) ? 'active' : '';?>
             <li class='<?php echo $class;?>'>
-              <?php echo html::a($this->inlink('outline', "projectID=$projectID&groupBy=$key"), $value); ?>
+              <?php echo html::a($this->inlink('outline', "projectID=$projectID&mode=&groupBy=$key"), $value); ?>
             </li>
           <?php endforeach;?>
           </ul>
@@ -47,7 +47,7 @@
     <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
       <thead>
         <tr class='text-center'>
-          <?php $vars = "projectID=$projectID&mode={$mode}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+          <?php $vars = "projectID=$projectID&mode={$mode}&groupBy={$groupBy}&orderBy=%s";?>
           <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->task->id);?></th>
           <th class='w-40px'> <?php commonModel::printOrderLink('pri',         $orderBy, $vars, $lang->task->lblPri);?></th>
           <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->task->name);?></th>
