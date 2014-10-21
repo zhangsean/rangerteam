@@ -393,7 +393,7 @@ class upgradeModel extends model
 
         foreach($contracts as $contract)
         {
-            $name = preg_replace('/\[(\d+)\]/', '', $contract->name);
+            $name = preg_replace('/^\[(\d+)\]/', '', $contract->name);
             $this->dao->update(TABLE_CONTRACT)->set('name')->eq($name)->where('id')->eq($contract->id)->exec();
         }
 
