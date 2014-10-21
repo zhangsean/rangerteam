@@ -6,3 +6,5 @@ form .avatar-avatar span {opacity: 0.5}
 form .avatar-avatar:hover span {opacity: 1; background: rgba(255,255,255,0.85);}
 form .avatar input {position: absolute; width: 60px; height: 60px; top: 0; left: 0; opacity: 0; filter:alpha(opacity=0); z-index: 15; cursor: pointer;}
 form #desc {margin-bottom: 0; transition : all 0.5s;}
+.vcard{width: 300px;}
+dl.contact-info{margin:0;}

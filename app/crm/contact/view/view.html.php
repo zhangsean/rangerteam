@@ -22,6 +22,7 @@
     echo "<div class='btn-group'>";
     echo html::a($this->createLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}"), $lang->contact->record, "data-toggle='modal' class='btn'");
     echo html::a($this->createLink('address', 'browse', "objectType=contact&objectID=$contact->id"), $lang->contact->address, "data-toggle='modal' class='btn'");
+    echo html::a($this->createLink('resume', 'browse', "contactID=$contact->id"), $lang->contact->resume, "data-toggle='modal' class='btn'");
     echo "</div>";
 
     echo "<div class='btn-group'>";
@@ -66,7 +67,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->contact->gender;?></th>
-          <td><?php echo zget($lang->contact->genderList, $contact->gender, '');?></td>
+          <td><?php if(isset($lang->contact->genderList[$contact->gender])) echo zget($lang->contact->genderList, $contact->gender, '');?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contact->createdDate;?></th>
@@ -81,40 +82,45 @@
       <table class='table table-info contact-info'>
         <tr>
           <td>
-            <div class='text-right'> <i class='btn-vcard icon icon-qrcode icon-large text-info'> </i> </div>
-            <dl class='contact-info'>
-            <?php foreach($config->contact->contactWayList as $item):?>
-            <?php if(!empty($contact->{$item})):?>
-              <dd>
-                <span><?php echo $lang->contact->{$item};?></span>
-                <?php if($item == 'qq') echo html::a("http://wpa.qq.com/msgrd?v=3&uin={$contact->$item}&site={$config->company->name}&menu=yes", $contact->$item, "target='_blank'");?>
-                <?php if($item == 'email') echo html::mailto($contact->{$item}, $contact->{$item});?>
-                <?php if($item != 'qq' and $item != 'email') echo $contact->{$item};?>
-              </dd>
-            <?php endif;?>
-            <?php endforeach;?>
-            </dl>
-            <p class='vcard'><?php echo html::image(inlink('vcard', "contactID={$contact->id}"))?></p>
+            <div class='row'>
+              <div class='col-sm-11'>
+                <dl class='contact-info'>
+                <?php foreach($config->contact->contactWayList as $item):?>
+                <?php if(!empty($contact->{$item})):?>
+                  <dd>
+                    <span><?php echo $lang->contact->{$item};?></span>
+                    <?php if($item == 'qq') echo html::a("http://wpa.qq.com/msgrd?v=3&uin={$contact->$item}&site={$config->company->name}&menu=yes", $contact->$item, "target='_blank'");?>
+                    <?php if($item == 'email') echo html::mailto($contact->{$item}, $contact->{$item});?>
+                    <?php if($item != 'qq' and $item != 'email') echo $contact->{$item};?>
+                  </dd>
+                <?php endif;?>
+                <?php endforeach;?>
+                </dl>
+                <p class='vcard'><?php echo html::image(inlink('vcard', "contactID={$contact->id}"))?></p>
+              </div>
+              <div class='col-sm-1'><i class='btn-vcard icon icon-qrcode icon-large'> </i></div>
+            </div>
           </td>
         </tr>
       </table>
     </div>
   </div>
   <div class='panel'>
-    <div class='panel-heading'><strong><?php echo $lang->contact->resume;?></strong></div>
+    <div class='panel-heading'>
+      <div class='row'>
+      <div class='col-sm-3'><strong><?php echo $lang->contact->resume;?></strong></div>
+      <div class='col-sm-4'><strong><?php echo $lang->resume->customer;?></strong></div>
+      <div class='col-sm-2'><strong><?php echo $lang->resume->dept;?></strong></div>
+      <div class='col-sm-3 text-center'><strong><?php echo $lang->resume->title;?></strong></div>
+      </div>
+    </div>
     <table class='table table-data'>
-      <tr class='text-center'>
-        <th><?php echo $lang->resume->time;?></th>
-        <th><?php echo $lang->resume->customer?></th>
-        <th><?php echo $lang->resume->dept?></th>
-        <th><?php echo $lang->resume->title?></th>
-      </tr>
       <?php foreach($resumes as $resume):?>
       <tr class='text-center'>
-        <td><?php echo $resume->join . $lang->minus . $resume->left;?></td>
-        <td><?php if(isset($customers[$resume->customer])) echo $customers[$resume->customer]?></td>
+        <td class='w-p30'><?php echo $resume->join . $lang->minus . $resume->left;?></td>
+        <td class='w-p35'><?php if(isset($customers[$resume->customer])) echo $customers[$resume->customer]?></td>
         <td><?php echo $resume->dept?></td>
-        <td><?php echo $resume->title?></td>
+        <td class='w-p20'><?php echo $resume->title?></td>
      </tr>
       <?php endforeach;?>
     </table>
