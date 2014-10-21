@@ -42,6 +42,7 @@
           <button class="btn" type="button" id="expandAll"><i class="icon-align-left"></i></button>
           <button class="btn" type="button" id="collapseAll"><i class="icon-align-justify"></i></button>
         </div>
+        <?php echo html::a($this->inlink('batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?>
       </div>
     </div>
     <table class='table table-hover table-striped tablesorter table-data' id='taskList'>

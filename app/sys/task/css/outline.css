@@ -1,3 +1,4 @@
 .panel-actions.pull-right {margin-top: -2px;}
+.panel-actions.pull-right > .btn {position: relative; top: -1px; margin-top: 0;}
 
 #taskList tr.heading td, #taskList tr.heading:hover td {background: #eee; cursor: pointer;}
