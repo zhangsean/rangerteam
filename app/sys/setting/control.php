@@ -26,7 +26,7 @@ class setting extends control
         if(empty($appName)) $appName = $this->app->getAppName();
         $this->app->loadLang($module, $appName);
 
-        if($module == 'user' and $field == 'roleList') $this->lang->menuGroups->setting = 'user';
+        if($module == 'user' and $field == 'roleList' and $appName == 'sys') $this->lang->menuGroups->setting = 'user';
 
         if(!empty($_POST))
         {

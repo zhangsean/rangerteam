@@ -26,7 +26,13 @@ $lang->setting->product = new stdClass();
 $lang->setting->product->fields['statusList'] = '产品状态';
 
 $lang->setting->customer = new stdClass();
-$lang->setting->customer->fields['typeList'] = '客户级别';
+$lang->setting->customer->fields['typeList']      = '客户类型';
+$lang->setting->customer->fields['sizeNameList']  = '客户规模';
+$lang->setting->customer->fields['levelNameList'] = '客户等级';
+
+$lang->setting->order = new stdclass();
+$lang->setting->order->setCurrency            = '使用的货币';
+$lang->setting->order->fields['currencyList'] = '货币设置';
 
 $lang->setting->allLang     = '适用所有语言';
 $lang->setting->currentLang = '适用当前语言';
@@ -35,6 +41,6 @@ $lang->setting->placeholder = new stdclass();
 $lang->setting->placeholder->key   = '变量名';
 $lang->setting->placeholder->value = '自定义显示值';
 
-$lang->setting->placeholder->typeList  = '变量名，长度为1~30字符';
-$lang->setting->placeholder->sizeList  = '变量名，必须为0~255的数字';
-$lang->setting->placeholder->levelList = '变量名，长度为1~10字符';
+$lang->setting->placeholder->typeList      = '变量名，长度为1~30字符';
+$lang->setting->placeholder->sizeNameList  = '变量名，必须为0~255的数字';
+$lang->setting->placeholder->levelNameList = '变量名，长度为1~10字符';

@@ -136,8 +136,12 @@ $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i
 $lang->dept = new stdclass();  
 $lang->dept->common     = '部门结构';
 $lang->dept->name       = '部门名称';
+$lang->dept->alias      = '部门别名';
 $lang->dept->edit       = '维护部门';
+$lang->dept->parent     = '上级部门';
 $lang->dept->children   = '子部门';
+$lang->dept->desc       = '描述';
+$lang->dept->keywords   = '关键词';
 $lang->dept->moderators = '部门经理';
 
 $lang->user->roleList['']           = ''; 
