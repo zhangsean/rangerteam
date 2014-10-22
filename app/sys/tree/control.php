@@ -34,7 +34,7 @@ class tree extends control
             if($type != 'blog')  $this->lang->category = $this->lang->$type;
             if($type == 'forum') $this->lang->category = $this->lang->board;
 
-            $this->lang->tree->menu = $this->lang->setting->menu;
+            $this->lang->tree->menu = isset($this->lang->setting->menu) ? $this->lang->setting->menu : '';
             $this->lang->menuGroups->tree = 'setting';
 
             if($type == 'dept' and !isset($this->lang->setting->menu))
