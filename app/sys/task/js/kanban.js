@@ -12,12 +12,13 @@ $(function()
                 if(fromBoard.data('id') != toBoard.data('id'))
                 {
                     messager.show('正在保存...');
-                    
-                    var groupBy = toBoard.data('groupBy');
-                    // get taskID
-                    var taskID = e.element.data('id');
-                    // get status to change
-                    var newGroup = toBoard.data('id');
+                    var change = 
+                    {
+                        name: toBoard.data('groupBy'),  // 要更改的字段，例如status或者assignedTo
+                        id: e.element.data('id'),       // 任务id
+                        oldValue: fromBoard.data('id'), // 变更之前的值
+                        value: toBoard.data('id')       // 变更之后的值
+                    }
                 }
             }
         });
