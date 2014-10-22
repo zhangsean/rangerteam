@@ -210,20 +210,12 @@ body.page-actions-fixed {padding-bottom: 70px}
 .panel-warning > .panel-heading,
 .panel-primary > .panel-heading,
 .panel-info > .panel-heading,
-.panel-danger > .panel-heading
-{
-  color: #333;
-  border: none;
-  border-bottom: 1px solid rgba(0,0,0,.04);
-}
+.panel-danger > .panel-heading {color: #333; border: none; border-bottom: 1px solid rgba(0,0,0,.04);}
 .panel-success > .panel-body,
 .panel-warning > .panel-body,
 .panel-primary > .panel-body,
 .panel-info > .panel-body,
-.panel-danger > .panel-body
-{
-  box-shadow: inset 0 1px 100px rgba(255,255,255,.8);
-}
+.panel-danger > .panel-body {box-shadow: inset 0 1px 100px rgba(255,255,255,.6);}
 .panel-success {background: #d1fecb}
 .panel-success > .panel-heading {background: #c5f7c1; }
 .panel-warning {background: #fdfdc7;}
@@ -265,17 +257,17 @@ body.page-actions-fixed {padding-bottom: 70px}
 .panel-info .table.table-hover tr:hover > td,
 .panel-danger .table.table-hover tr:hover > td {background: rgba(255,255,255,.4);}
 
-.block .btn-success {background: #d1fecb; color: #000; text-shadow: none; border-color: #c5f7c1;}
-.block .btn-warning {background: #fdfdc7; color: #000; text-shadow: none; border-color: #f8f7b6;}
-.block .btn-primary {background: #d8f2fa; color: #000; text-shadow: none; border-color: #c9ecf8;}
-.block .btn-info    {background: #dcd8fe; color: #000; text-shadow: none; border-color: #d4cdf3;}
-.block .btn-danger  {background: #f5d0f5; color: #000; text-shadow: none; border-color: #f1c3f1;}
-
-.block.open .dropdown-toggle.btn-success {background: #d1fecb; color: #000; text-shadow: none; border-color: #c5f7c1;}
-.block.open .dropdown-toggle.btn-warning {background: #fdfdc7; color: #000; text-shadow: none; border-color: #f8f7b6;}
-.block.open .dropdown-toggle.btn-primary {background: #d8f2fa; color: #000; text-shadow: none; border-color: #c9ecf8;}
-.block.open .dropdown-toggle.btn-info    {background: #dcd8fe; color: #000; text-shadow: none; border-color: #d4cdf3;}
-.block.open .dropdown-toggle.btn-danger  {background: #f5d0f5; color: #000; text-shadow: none; border-color: #f1c3f1;}
+.block.input-group-btn .btn-success {background: #d1fecb; color: #333; text-shadow: none; border-color: #ccc}
+.block.input-group-btn .btn-warning {background: #fdfdc7; color: #333; text-shadow: none; border-color: #ccc}
+.block.input-group-btn .btn-info    {background: #dcd8fe; color: #333; text-shadow: none; border-color: #ccc}
+.block.input-group-btn .btn-danger  {background: #f5d0f5; color: #333; text-shadow: none; border-color: #ccc}
+.block.input-group-btn .btn-primary, .block.input-group-btn .btn-primary:focus {background: #d8f2fa; color: #333; text-shadow: none; border-color: #ccc}
+.block.input-group-btn .btn-success:hover {border-color: #aaa}
+.block.input-group-btn .btn-warning:hover {border-color: #aaa}
+.block.input-group-btn .btn-primary:hover {border-color: #aaa}
+.block.input-group-btn .btn-info:hover    {border-color: #aaa}
+.block.input-group-btn .btn-danger:hover  {border-color: #aaa}
+.block.input-group-btn .btn-primary .caret, .block.input-group-btn .btn-success .caret, .block.input-group-btn .btn-warning .caret, .block.input-group-btn .btn-danger .caret, .block.input-group-btn .btn-info .caret {border-top-color: #333}
 
 /* modal */
 .modal .modal-dialog {max-width: 100%; border: 8px solid #666; border-color: rgba(0,0,0,.25)}
