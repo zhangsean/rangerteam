@@ -17,7 +17,7 @@
   </div>
   <div class='panel'> 
     <div class='panel-body'> <?php echo $treeMenu;?> </div>
-    <?php if(!empty($tags)):?>
+    <?php if(count($tags) > 1):?>
     <div class='panel-body div-tags'>
       <?php foreach($tags as $tag):?>
       <?php if($tag) echo html::a(inlink('index', 'category=0&author=&month=&tag=' . $tag), $tag, "class='label label-info'");?>
@@ -25,7 +25,7 @@
     </div>
     <?php endif;?>
 
-    <?php if(!empty($authors)):?>
+    <?php if(count($authors) > 1):?>
     <div class='panel-body'>
       <?php foreach($authors as $author):?>
       <?php echo html::a(inlink('index', "category=0&author={$author->account}"), $author->realname, "class='label label-success'");?>
@@ -33,7 +33,7 @@
     </div>
     <?php endif;?>
 
-    <?php if(!empty($months)):?>
+    <?php if(count($months) > 1):?>
     <div class='panel-body'>
       <ul class="nav nav-stacked ul-months">
         <?php foreach(array_keys($months) as $month):?>
