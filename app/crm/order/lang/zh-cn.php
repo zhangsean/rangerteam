@@ -80,24 +80,6 @@ $lang->order->currencyList['nzd']  = '新西兰元';
 $lang->order->currencyList['thb']  = '泰国铢';
 $lang->order->currencyList['sgd']  = '新加坡元';
 
-$lang->order->currencySign['rmb']  = '￥';
-$lang->order->currencySign['usd']  = '$';
-$lang->order->currencySign['hkd']  = 'HK$';
-$lang->order->currencySign['twd']  = 'NT$';
-$lang->order->currencySign['euro'] = 'ECU';
-$lang->order->currencySign['dem']  = 'DM';
-$lang->order->currencySign['chf']  = 'SF';
-$lang->order->currencySign['frf']  = 'FF';
-$lang->order->currencySign['gbp']  = '￡';
-$lang->order->currencySign['nlg']  = 'F';
-$lang->order->currencySign['cad']  = 'CAN$';
-$lang->order->currencySign['sur']  = 'Rbs';
-$lang->order->currencySign['inr']  = 'Rs';
-$lang->order->currencySign['aud']  = 'A$';
-$lang->order->currencySign['nzd']  = 'NZ$';
-$lang->order->currencySign['thb']  = 'B';
-$lang->order->currencySign['sgd']  = 'S$';
-
 $lang->order->titleLBL  = "%s购买%s";
 $lang->order->basicInfo = "基本信息";
 $lang->order->lifetime  = "订单的一生";

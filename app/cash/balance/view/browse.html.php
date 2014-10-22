@@ -15,8 +15,11 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->balance->browse;?></strong>
+    <?php if($depositor):?>
+    <label class='text-important'><?php echo $depositorList[$depositor];?></label>
+    <?php endif;?>
     <div class='panel-actions pull-right'>
-      <?php echo html::a(inlink('create'), "<i class='icon-plus'></i> {$lang->balance->create}", "class='btn btn-primary'")?>
+      <?php echo html::a(inlink('create'), "<i class='icon-plus'></i> {$lang->balance->create}", "class='btn btn-primary' data-toggle='modal'")?>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data' id='balanceList'>

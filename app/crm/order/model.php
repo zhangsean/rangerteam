@@ -416,7 +416,7 @@ class orderModel extends model
     public function setCurrencySign()
     {
         $currencySign = array();
-        foreach($this->lang->order->currencySign as $key => $sign)
+        foreach($this->lang->currencySymbols as $key => $sign)
         {
             if(strpos($this->config->setting->currency, $key) === false) continue;
             $currencySign[$key] = $sign;

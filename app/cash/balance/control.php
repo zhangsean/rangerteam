@@ -14,7 +14,6 @@ class balance extends control
     public function __construct()
     {
         parent::__construct();
-        $this->lang->balance->menu = $this->lang->depositor->menu;
         $this->lang->menuGroups->balance = 'depositor';
     }
 
@@ -34,7 +33,7 @@ class balance extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->view->title     = $this->lang->balance->browse;
-        $this->view->balances  = $this->balance->getList($orderBy, $pager);
+        $this->view->balances  = $this->balance->getList($depositor, $orderBy, $pager);
         $this->view->depositor = $depositor;
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
@@ -49,24 +48,27 @@ class balance extends control
     /**
      * Create a contact.
      * 
+     * @param  int    $depositor 
      * @access public
      * @return void
      */
-    public function create()
+    public function create($depositor = 0)
     {
         if($_POST)
         {
             $balanceID = $this->balance->create(); 
             if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            $this->loadModel('action')->create('depositor', $this->post->depositor, 'CreatedBalance', $this->post->date . ':'  . $this->post->money . $this->post->currency);
+            $this->loadModel('action')->create('depositor', $this->post->depositor, 'createdBalance', $this->post->date . ':'  . $this->post->money . $this->post->currency);
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
-        $this->view->title         = $this->lang->balance->create;
-        $this->view->depositorList = $this->loadModel('depositor')->getList();
-        $this->view->currencyList  = $this->loadModel('order', 'crm')->setCurrencyList();
+        $this->view->title            = $this->lang->balance->create;
+        $this->view->currentDepositor = $depositor;
+        $this->view->depositorList    = $this->loadModel('depositor')->getList();
+        $this->view->subtitle         = $this->view->depositorList[$depositor]->title;
+        $this->view->currencyList     = $this->loadModel('order', 'crm')->setCurrencyList();
         $this->display();
     }
 

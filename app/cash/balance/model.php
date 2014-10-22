@@ -26,14 +26,24 @@ class balanceModel extends model
     /** 
      * Get balance list.
      * 
+     * @param  int    $depositor 
      * @param  string  $orderBy 
      * @param  object  $pager 
      * @access public
      * @return array
      */
-    public function getList($orderBy, $pager = null)
+    public function getList($depositor, $orderBy, $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_BALANCE)->orderBy($orderBy)->page($pager)->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_BALANCE)
+            ->beginIf($depositor)->where('depositor')->eq($depositor)->fi()
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll('id');
+    }
+
+    public function getLatest()
+    {
+       return $this->dao->select('depositor, max(date) as date, money, currency')->from(TABLE_BALANCE)->groupBy('depositor')->fetchGroup('currency', 'depositor');
     }
 
     /**

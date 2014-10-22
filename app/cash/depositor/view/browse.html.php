@@ -14,6 +14,11 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->depositor->browse;?></strong>
+    <?php foreach($balances as $currency => $balanceList):?>
+    <?php $sum = 0;?>
+    <?php foreach($balanceList as $balance) $sum += $balance->money;?>
+    <strong class='text-danger'><?php echo $currencyList[$currency] . $lang->colon . $sum;?></strong>
+    <?php endforeach;?>
     <div class='panel-actions pull-right'>
       <?php echo html::a(inlink('create'), "<i class='icon-plus'></i> {$lang->depositor->create}", "class='btn btn-primary' data-toggle='modal'")?>
     </div>
@@ -25,7 +30,9 @@
         <div class='card card-depositor'>
           <div class='card-heading <?php echo $depositor->type;?>'>
             <div class='info'><span class='label' title='<?php echo $lang->depositor->type?>'><i class='icon'></i> <?php echo $lang->depositor->typeList[$depositor->type]?></span></div>
-            <h4 class='title'><?php echo $depositor->abbr;?></h4>
+            <h4 class='title'>
+              <?php echo $depositor->abbr;?>
+           </h4>
             <div class='subtitle'>
               <?php if($depositor->type != 'cash' && !empty($depositor->title) && $depositor->title != $depositor->abbr):?>
               <span class='cell text-muted' title='<?php echo $lang->depositor->title;?>'><?php echo $depositor->title;?></span>
@@ -36,20 +43,32 @@
               <?php endif;?>
             </div>
           </div>
+          <div class='card-caption row'>
           <?php if($depositor->type != 'cash'):?>
-          <div class='card-caption'>
+            <div class='col-md-7'>
             <?php if($depositor->type == 'bank') echo "<dl class='dl-horizontal'><dt>{$lang->depositor->bankProvider} {$lang->colon} </dt><dd>$depositor->provider </dd></dl>";?>
             <?php if($depositor->type == 'online') echo "<dl class='dl-horizontal'><dt>{$lang->depositor->serviceProvider} {$lang->colon} </dt><dd>{$lang->depositor->providerList[$depositor->provider]} </dd></dl>";?>
             <?php echo "<dl class='dl-horizontal'><dt>{$lang->depositor->account} {$lang->colon} </dt><dd>$depositor->account</dd></dl>";?>
             <?php if($depositor->type == 'bank') echo "<dl class='dl-horizontal'><dt>{$lang->depositor->bankcode} {$lang->colon} </dt><dd>$depositor->bankcode</dd></dl>";?>
-          </div>
+            </div>
           <?php endif;?>
+            <div class='col-md-5 text-middle text-center balanceBox'>
+              <?php if(isset($balances[$depositor->currency][$depositor->id])):?>
+              <span class='text-danger'>
+                <?php echo zget($lang->currencySymbols, $depositor->currency)?>
+                <?php echo formatMoney($balances[$depositor->currency][$depositor->id]->money);?>
+              </span>
+              <?php endif;?>
+              <?php echo html::a($this->createLink('balance', 'create', "depositor={$depositor->id}"), "<i class='icon icon-edit'> </i>", "title='{$lang->edit}' data-toggle='modal'");?>
+            </div>
+          </div>
           <div class='card-actions'>
             <div class='pull-right'>
               <?php echo html::a(inlink('edit', "depositorID=$depositor->id"), $lang->edit, "data-toggle='modal'");?>
               <?php echo html::a(inlink('check', "depositorID=$depositor->id"), $lang->depositor->check);?>
               <?php if($depositor->status == 'normal') echo html::a(inlink('forbid', "depositorID=$depositor->id"), $lang->depositor->forbid, "data-toggle=modal");?>
               <?php if($depositor->status == 'disable') echo html::a(inlink('activate', "depositorID=$depositor->id"), $lang->depositor->activate, "data-toggle=modal");?>
+              <?php echo html::a($this->createLink('balance', 'browse', "depositorID=$depositor->id"), $lang->depositor->balance);?>
             </div>
             <?php echo "<small class='text-muted'>{$lang->depositor->status}{$lang->colon} </small><span class='text-" . ($depositor->status == 'normal' ? 'success': 'danger') . "'>{$lang->depositor->statusList[$depositor->status]}</span>";?>
           </div>

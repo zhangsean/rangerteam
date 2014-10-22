@@ -241,6 +241,25 @@ $lang->date = new stdclass();
 $lang->date->minute = 'minute';
 $lang->date->day    = 'day';
 
+/* Currency symbols setting. */
+$lang->currencySymbols['rmb']  = '￥';
+$lang->currencySymbols['usd']  = '$';
+$lang->currencySymbols['hkd']  = 'HK$';
+$lang->currencySymbols['twd']  = 'NT$';
+$lang->currencySymbols['euro'] = 'ECU';
+$lang->currencySymbols['dem']  = 'DM';
+$lang->currencySymbols['chf']  = 'SF';
+$lang->currencySymbols['frf']  = 'FF';
+$lang->currencySymbols['gbp']  = '￡';
+$lang->currencySymbols['nlg']  = 'F';
+$lang->currencySymbols['cad']  = 'CAN$';
+$lang->currencySymbols['sur']  = 'Rbs';
+$lang->currencySymbols['inr']  = 'Rs';
+$lang->currencySymbols['aud']  = 'A$';
+$lang->currencySymbols['nzd']  = 'NZ$';
+$lang->currencySymbols['thb']  = 'B';
+$lang->currencySymbols['sgd']  = 'S$';
+
 /* Date times. */
 define('DT_DATETIME1',  'Y-m-d H:i:s');
 define('DT_DATETIME2',  'y-m-d H:i');

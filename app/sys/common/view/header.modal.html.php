@@ -21,7 +21,8 @@ if(isset($pageCSS)) css::internal($pageCSS);
   <div class="modal-content">
     <div class="modal-header">
       <?php echo html::closeButton();?>
-      <h4 class="modal-title"><?php if(!empty($title)) echo $title; ?></h4>
+      <strong class="modal-title"><?php if(!empty($title)) echo $title; ?></strong>
+      <?php if(!empty($subtitle)) echo "<label class='text-important'>" . $subtitle . '</label>'; ?>
     </div>
     <div class="modal-body">
 <?php else:?>
