@@ -59,10 +59,40 @@ $.extend(
                         $('#responser').html(response.message).addClass('red f-12px').show().delay(3000).fadeOut(100);
                     }
 
+                    if(response.closeModal)
+                    {
+                        setTimeout($.closeModal, 1200);
+                    }
+
+                    if(response.callback)
+                    {
+                        var rcall = window[response.callback];
+                        if($.isFunction(rcall))
+                        {
+                            if(rcall() === false)
+                            {
+                                return;
+                            }
+                        }
+                    }
+
                     if(response.locate) 
                     {
-                        if(response.locate == 'reload') return setTimeout(function(){location.href = location.href;}, 1200);
-                        return setTimeout(function(){location.href = response.locate;}, 1200);
+                        var reloadUrl = response.locate == 'reload' ? location.href : response.locate;
+                        setTimeout(function(){location.href = reloadUrl;}, 1200);
+                    }
+
+                    if(response.ajaxReload)
+                    {
+                        var $target = $(response.ajaxReload);
+                        if($target.length === 1)
+                        {
+                            $target.load(document.location.href + ' ' + response.ajaxReload, function()
+                            {
+                                $target.dataTable();
+                                $target.find('[data-toggle="modal"]').modalTrigger();
+                            });
+                        }
                     }
 
                     return true;
@@ -318,22 +348,29 @@ $.extend(
 
                 $.getJSON(deleter.attr('href'), function(data) 
                 {
-                    if($.isFunction(deleter.data('afterDelete')))
+                    var afterDelete = deleter.data('afterDelete');
+                    if($.isFunction(afterDelete))
                     {
-                        $.proxy(deleter.data('afterDelete'), deleter)(data);
+                        $.proxy(afterDelete, deleter)(data);
                     }
 
                     if(data.result == 'success')
                     {
-
-
                         var table     = $(deleter).closest('table');
                         var replaceID = table.attr('id');
 
                         table.wrap("<div id='tmpDiv'></div>");
-                        $('#tmpDiv').load(document.location.href + ' #' + replaceID, function()
-                        {   
-                            $('#tmpDiv').replaceWith($('#tmpDiv').html());
+                        var $tmpDiv = $('#tmpDiv');
+                        $tmpDiv.load(document.location.href + ' #' + replaceID, function()
+                        {
+                            $tmpDiv.replaceWith($tmpDiv.html());
+                            var $target = $('#' + replaceID);
+                            $target.find('.reloadDeleter').data('afterDelete', afterDelete);
+                            $target.find('[data-toggle="modal"]').modalTrigger();
+                            if($target.hasClass('table-data'))
+                            {
+                                $target.dataTable();
+                            }
                             if(typeof sortTable == 'function')
                             {   
                                 sortTable(); 
@@ -341,7 +378,7 @@ $.extend(
                             else
                             {   
                                 $('tfoot td').css('background', 'white').unbind('click').unbind('hover');
-                            }   
+                            }
                         });
                     }
                     else
@@ -440,63 +477,69 @@ $.extend(
     {
         jQuery.fn.modalTrigger = function(setting)
         {
-            $(this).click(function(event)
+            return $(this).each(function()
             {
-                var $e   = $(this);
-                if($e.closest('.body-modal').length) return;
+                var $this = $(this);
+                $this.off('click.modalTrigger.zui');
 
-                if($e.hasClass('disabled')) return false;
-
-                var url  = (setting ? setting.url : false) || $e.attr('href') || $e.data('url');
-                var type = (setting ? setting.type : false) || $e.hasClass('iframe') ? 'iframe' : ($e.data('type') || 'ajax');
-                var options = 
+                $this.on('click.modalTrigger.zui', function(event)
                 {
-                    url:        url,
-                    width:      $e.data('width') || null,
-                    height:     $e.data('height') || 'auto',
-                    icon:       $e.data('icon') || '?',
-                    title:      $e.data('title') || $e.attr('title') || $e.text(),
-                    name:       $e.data('name') || 'modalIframe',
-                    cssClass:   $e.data('class'),
-                    headerless: $e.data('headerless') || false,
-                    center:     $e.data('center') || true
-                };
+                    var $e   = $(this);
+                    if($e.closest('.body-modal').length) return;
 
-                if(options.icon == '?')
-                {
-                    var i = $e.find("[class^='icon-']");
-                    options.icon = i.length ? i.attr('class').substring(5) : 'file-text';
-                }
+                    if($e.hasClass('disabled')) return false;
 
-                options = $.extend(options, setting);
-
-                if(type == 'iframe')
-                {
-                    showIframeModal(options);
-                }
-                else
-                {
-                    initModalFrame(options);
-                    var modal = $('#ajaxModal').addClass('modal-loading').modal('show');
-                    modal.load(options.url, function()
+                    var url  = (setting ? setting.url : false) || $e.attr('href') || $e.data('url');
+                    var type = (setting ? setting.type : false) || $e.hasClass('iframe') ? 'iframe' : ($e.data('type') || 'ajax');
+                    var options = 
                     {
-                        setTimeout(function()
+                        url:        url,
+                        width:      $e.data('width') || null,
+                        height:     $e.data('height') || 'auto',
+                        icon:       $e.data('icon') || '?',
+                        title:      $e.data('title') || $e.attr('title') || $e.text(),
+                        name:       $e.data('name') || 'modalIframe',
+                        cssClass:   $e.data('class'),
+                        headerless: $e.data('headerless') || false,
+                        center:     $e.data('center') || true
+                    };
+
+                    if(options.icon == '?')
+                    {
+                        var i = $e.find("[class^='icon-']");
+                        options.icon = i.length ? i.attr('class').substring(5) : 'file-text';
+                    }
+
+                    options = $.extend(options, setting);
+
+                    if(type == 'iframe')
+                    {
+                        showIframeModal(options);
+                    }
+                    else
+                    {
+                        initModalFrame(options);
+                        var modal = $('#ajaxModal').addClass('modal-loading').modal('show');
+                        modal.load(options.url, function()
                         {
-                            var modalBody = modal.find('.modal-body'), dialog = modal.find('.modal-dialog');
-                            if(options.height != 'auto') modalBody.css('height', options.height);
-                            if(options.width) dialog.css('width', options.width);
-                            if(options.center) ajustModalPosition();
-                            modal.removeClass('modal-loading');
-                        },200);
-                    });
-                }
+                            setTimeout(function()
+                            {
+                                var modalBody = modal.find('.modal-body'), dialog = modal.find('.modal-dialog');
+                                if(options.height != 'auto') modalBody.css('height', options.height);
+                                if(options.width) dialog.css('width', options.width);
+                                if(options.center) ajustModalPosition();
+                                modal.removeClass('modal-loading');
+                            },200);
+                        });
+                    }
 
-                /* Save the href to rel attribute thus we can save it. */
-                $('#ajaxModal').attr('rel', options.url);
+                    /* Save the href to rel attribute thus we can save it. */
+                    $('#ajaxModal').attr('rel', options.url);
 
-                return false;
+                    return false;
+                });
             });
-        }
+        };
 
         function showIframeModal(settings)
         {

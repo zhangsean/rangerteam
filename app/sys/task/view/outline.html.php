@@ -114,7 +114,7 @@
 <script>
 $(function()
 {
-    $('#taskList').on('click', '.toggle-handle', function()
+    $(document).on('click', '.toggle-handle', function()
     {
         var $this = $(this);
         $this.toggleClass('collapsed');

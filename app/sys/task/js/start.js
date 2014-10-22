@@ -10,13 +10,26 @@ $(document).ready(function()
                 $('#startForm').submit();
             }
         }
-        else
+        else(response.result == 'success')
         {
-            if(response.result == 'success')
+            if(response.closeModal)
             {
-                if(response.locate == 'reload') return location.href = location.href;
-                $.reloadAjaxModal(1500);
+                setTimeout($.closeModal, 1200);
             }
+
+            if(response.callback)
+            {
+                var rcall = window[response.callback];
+                if($.isFunction(rcall))
+                {
+                    if(rcall() === false)
+                    {
+                        return;
+                    }
+                }
+            }
+            if(response.locate == 'reload') return location.href = location.href;
+            $.reloadAjaxModal(1500);
         }
     })
 })

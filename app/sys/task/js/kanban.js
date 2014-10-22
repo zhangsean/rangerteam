@@ -1,31 +1,40 @@
 $(function()
 {
-    $('.boards').boards(
+    var resetBoards = function()
     {
-        drop: function(e)
+        $('.boards').boards(
         {
-            var fromBoard = e.element.closest('.board'),
-                toBoard = e.target.closest('.board');
-
-            if(fromBoard.data('id') != toBoard.data('id'))
+            drop: function(e)
             {
-                messager.show('正在保存...');
-                
-                // get taskID
-                var taskID = e.element.data('id');
-                // get status to change
-                var newStatus = toBoard.data('id');
+                var fromBoard = e.element.closest('.board'),
+                    toBoard = e.target.closest('.board');
+
+                if(fromBoard.data('id') != toBoard.data('id'))
+                {
+                    messager.show('正在保存...');
+                    
+                    var groupBy = toBoard.data('groupBy');
+                    // get taskID
+                    var taskID = e.element.data('id');
+                    // get status to change
+                    var newGroup = toBoard.data('id');
+                }
             }
-        }
-    });
+        });
 
-    $('.reloadDeleter').data('afterDelete', function(data)
+        $('[data-toggle="popover"]').popover();
+    }
+
+    window.reloadDataTable = function()
     {
-        if(data.result == 'success')
+        var $list = $('#taskKanban');
+        $list.load(document.location.href + ' #taskKanban', function()
         {
-            $(this).closest('.task').slideUp('fast', function(){$(this).remove()});
-        }
-    });
+            $list.find('[data-toggle="modal"]').modalTrigger();
+            resetBoards();
+        });
+        return false;
+    };
 
-    $('[data-toggle="popover"]').popover();
+    resetBoards();
 });

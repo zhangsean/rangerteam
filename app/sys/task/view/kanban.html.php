@@ -40,12 +40,12 @@
       <div class='panel-actions pull-right'><?php echo html::a($this->inlink('batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?></div>
     </div>
     <div class='panel-body boards-container'>
-      <div class='boards task-boards clearfix'>
+      <div class='boards task-boards clearfix' id='taskKanban'>
       <?php foreach($tasks as $groupKey => $groupTasks):?>
-        <div class='board task-board'  data-id='<?php echo $key;?>' data-col='<?php echo $colCount ?>' style='width: <?php echo $colWidth?>%'>
+        <div class='board task-board' data-groupBy='<?php echo $groupBy?>' data-id='<?php echo $groupKey;?>' data-col='<?php echo $colCount ?>' style='width: <?php echo $colWidth?>%'>
           <div class='panel'>
             <div class='panel-heading'>
-              <?php echo empty($groupKey) ? $lang->task->unkown : $groupKey?>
+              <?php echo empty($groupKey) ? $lang->task->unkown : ($groupBy == 'status' ? $lang->task->statusList[$groupKey] : $groupKey)?>
             </div>
             <div class='panel-body'>
               <div class='board-list'>

@@ -1,17 +1,13 @@
 $(function()
 {
-    $('.reloadDeleter').data('afterDelete', function(data)
+    window.reloadDataTable = function()
     {
-        if(data.result == 'success')
+        var $list = $('#taskList');
+        $list.load(document.location.href + ' #taskList', function()
         {
-            var task = $(this).closest('.task');
-            var info = task.closest('.task-list').closest('.item').children('.info');
-            var total = info.find('.group-total');
-            total.text(parseInt(total.text()) - 1);
-            var statusTotal = info.find('.group-' + task.data('status'));
-            statusTotal.text(parseInt(statusTotal.text()) - 1);
-
-            task.slideUp('fast', function(){$(this).remove()});
-        }
-    });
+            $list.dataTable();
+            $list.find('[data-toggle="modal"]').modalTrigger();
+        });
+        return false;
+    };
 });

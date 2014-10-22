@@ -198,7 +198,7 @@ class task extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
         }
 
         $task = $this->task->getByID($taskID);
@@ -237,7 +237,7 @@ class task extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
         }
 
         $this->view->taskID = $taskID; 
@@ -265,7 +265,7 @@ class task extends control
                 $actionID = $this->loadModel('action')->create('task', $taskID, 'Assigned', $this->post->comment, $this->post->assignedTo);
                 $this->action->logHistory($actionID, $changes);
             }
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
         }
 
         $task = $this->task->getByID($taskID);
@@ -296,7 +296,7 @@ class task extends control
                 $actionID = $this->loadModel('action')->create('task', $taskID, 'Activated', $this->post->comment);
                 $this->action->logHistory($actionID, $changes);
             }
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
         }
         $this->view->title = $this->lang->task->activate;
         $this->view->task  = $this->task->getByID($taskID);
@@ -323,7 +323,7 @@ class task extends control
                 $actionID = $this->loadModel('action')->create('task', $taskID, 'Canceled', $this->post->comment);
                 $this->action->logHistory($actionID, $changes);
             }
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
         }
 
         $this->view->title  = $this->lang->task->cancel;
@@ -351,7 +351,7 @@ class task extends control
                 $actionID = $this->loadModel('action')->create('task', $taskID, 'Closed', $this->post->comment, $this->lang->task->reasonList[$task->closedReason]);
                 $this->action->logHistory($actionID, $changes);
             }
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
         }
         $this->view->title  = $this->lang->task->close;
         $this->view->taskID = $taskID;
@@ -395,7 +395,6 @@ class task extends control
         $tasks       = $this->task->getList($projectID);
         $groupBy     = strtolower(str_replace('`', '', $groupBy));
         $taskLang    = $this->lang->task;
-        $groupByList = array();
         $groupTasks  = array();
 
         /* Get users. */
@@ -404,7 +403,7 @@ class task extends control
         {
             if($groupBy == '' or $groupBy == 'status')
             {
-                $groupTasks[$taskLang->statusList[$task->status]][] = $task;
+                $groupTasks[$task->status][] = $task;
             }
             elseif($groupBy == 'assignedto')
             {
@@ -429,7 +428,6 @@ class task extends control
         }
 
         $this->view->tasks       = $groupTasks;
-        $this->view->groupByList = $groupByList;
         $this->view->groupBy     = $groupBy;
         $this->view->orderBy     = $groupBy;
         $this->view->projectID   = $projectID;
@@ -477,7 +475,6 @@ class task extends control
         $tasks       = $this->task->getList($projectID);
         $groupBy     = strtolower(str_replace('`', '', $groupBy));
         $taskLang    = $this->lang->task;
-        $groupByList = array();
         $groupTasks  = array();
 
         if(empty($groupBy)) $groupBy = 'status';
@@ -521,7 +518,6 @@ class task extends control
         }
 
         $this->view->tasks       = $groupTasks;
-        $this->view->groupByList = $groupByList;
         $this->view->groupBy     = $groupBy;
         $this->view->orderBy     = $groupBy;
         $this->view->projectID   = $projectID;
@@ -552,7 +548,6 @@ class task extends control
         $tasks       = $this->task->getList($projectID, null, $orderBy);
         $groupBy     = strtolower(str_replace('`', '', $groupBy));
         $taskLang    = $this->lang->task;
-        $groupByList = array();
         $groupTasks  = array();
 
         /* Get users. */
@@ -586,7 +581,6 @@ class task extends control
         }
 
         $this->view->tasks       = $groupTasks;
-        $this->view->groupByList = $groupByList;
         $this->view->groupBy     = $groupBy;
         $this->view->orderBy     = $groupBy;
         $this->view->projectID   = $projectID;
