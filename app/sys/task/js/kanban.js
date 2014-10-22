@@ -11,7 +11,7 @@ $(function()
 
                 if(fromBoard.data('id') != toBoard.data('id'))
                 {
-                    messager.show('正在保存...');
+                    // messager.show('正在保存...');
                     var change = 
                     {
                         name: toBoard.data('group'),  // 要更改的字段，例如status或者assignedTo
@@ -19,7 +19,8 @@ $(function()
                         oldValue: fromBoard.data('key'), // 变更之前的值
                         value: toBoard.data('key')       // 变更之后的值
                     }
-                    console.log(change);
+                    
+                    // 保存数据到服务器
                 }
             }
         });
