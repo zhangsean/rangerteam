@@ -24,41 +24,20 @@ class tree extends control
      */
     public function browse($type = 'article', $startModule = 0, $root = 0)
     {
-        if($type == 'article')
+        if(strpos($this->config->tree->menuGroup->category, ',' . $type . ',') !== false and isset($this->lang->$type->menu))
         {
-            $this->lang->tree->menu = $this->lang->article->menu;
-            $this->lang->menuGroups->tree = 'article';
+            $this->lang->tree->menu = $this->lang->$type->menu;
+            $this->lang->menuGroups->tree = $type;
         }
-        elseif($type == 'forum')
+        elseif(strpos($this->config->tree->menuGroup->setting, ',' . $type . ',') !== false)
         {
-            $this->lang->category = $this->lang->board;
+            if($type != 'blog')  $this->lang->category = $this->lang->$type;
+            if($type == 'forum') $this->lang->category = $this->lang->board;
+
             $this->lang->tree->menu = $this->lang->setting->menu;
             $this->lang->menuGroups->tree = 'setting';
-        }
-        elseif($type == 'blog')
-        {
-            $this->lang->tree->menu = $this->lang->setting->menu;
-            $this->lang->menuGroups->tree = 'setting';
-        }
-        elseif($type == 'announce')
-        {
-            $this->lang->tree->menu = $this->lang->announce->menu;
-            $this->lang->menuGroups->tree = 'announce';
-        }
-        elseif($type == 'product' and isset($this->lang->product->menu))
-        {
-            $this->lang->tree->menu = $this->lang->product->menu;
-            $this->lang->menuGroups->tree = 'product';
-        }
-        elseif($type == 'dept')
-        {   
-            $this->lang->category = $this->lang->dept;
-            if(isset($this->lang->setting->menu))
-            {
-                $this->lang->tree->menu = $this->lang->setting->menu;
-                $this->lang->menuGroups->tree = 'setting';
-            }
-            else
+
+            if($type == 'dept' and !isset($this->lang->setting->menu))
             {
                 unset($this->lang->tree->menu);
                 $this->lang->menuGroups->tree = 'user';
@@ -70,30 +49,6 @@ class tree extends control
             $this->lang->tree->menu = $this->loadModel('doc')->getLeftMenus();
             $this->lang->menuGroups->tree = 'doc';
             if($root == 'product' or $root == 'project') $type = $root . 'doc';
-        }
-        elseif($type == 'area')
-        {   
-            $this->lang->category = $this->lang->area;
-            $this->lang->tree->menu = $this->lang->setting->menu;
-            $this->lang->menuGroups->tree = 'setting';
-        }
-        elseif($type == 'industry')
-        {   
-            $this->lang->category = $this->lang->industry;
-            $this->lang->tree->menu = $this->lang->setting->menu;
-            $this->lang->menuGroups->tree = 'setting';
-        }
-        elseif($type == 'in')
-        {
-            $this->lang->category = $this->lang->in;
-            $this->lang->tree->menu = $this->lang->setting->menu;
-            $this->lang->menuGroups->tree = 'setting';
-        }
-        elseif($type == 'out')
-        {
-            $this->lang->category = $this->lang->out;
-            $this->lang->tree->menu = $this->lang->setting->menu;
-            $this->lang->menuGroups->tree = 'setting';
         }
 
         $this->view->title    = $this->lang->category->common;
@@ -119,7 +74,13 @@ class tree extends control
         $category = $this->tree->getById($categoryID);
 
         /* If type is forum, assign board to category. */
+        if($category->type != 'blog' and strpos($this->config->tree->menuGroup->setting, ',' . $category->type . ',') !== false) $this->lang->category = $this->lang->{$category->type};
         if($category->type == 'forum') $this->lang->category = $this->lang->board;
+        if($category->type == 'dept')
+        {
+            $this->app->loadLang('user');
+            $this->lang->category = $this->lang->dept;
+        }
 
         if(!empty($_POST))
         {
@@ -141,20 +102,8 @@ class tree extends control
 
         if(strpos('forum,blog', $category->type) !== false) $this->view->aliasAddon .=  $category->type . '/';
 
-        if($category->type == 'forum') 
-        {
-            $this->lang->menuGroups->tree = 'forum';
-            $this->view->users = $this->loadModel('user')->getPairs('admin');
-        }
-        else if($category->type == 'blog')
-        {
-            $this->lang->menuGroups->tree = 'blog';
-        }
-        else if($category->type == 'dept')
-        {
-            $this->lang->menuGroups->tree = 'user';
-            $this->view->users = $this->loadModel('user')->getPairs(null, $category->id);
-        }
+        if($category->type == 'forum') $this->view->users = $this->loadModel('user')->getPairs('admin');
+        if($category->type == 'dept')  $this->view->users = $this->loadModel('user')->getPairs(null, $category->id);
 
         /* remove left menu. */
         unset($this->lang->tree->menu);
@@ -174,6 +123,7 @@ class tree extends control
     public function children($type, $category = 0, $root = 0)
     {
         /* If type is forum, assign board to category. */
+        if($type != 'blog' and strpos($this->config->tree->menuGroup->setting, ',' . $type . ',') !== false) $this->lang->category = $this->lang->$type;
         if($type == 'forum') $this->lang->category = $this->lang->board;
         if($type == 'dept')
         {

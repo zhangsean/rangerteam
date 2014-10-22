@@ -37,7 +37,7 @@
       for($i = 0; $i < TREE::NEW_CHILD_COUNT ; $i ++)
       {
           echo "<div class='form-group'>";
-          echo "<div class='col-xs-6 col-md-4 col-md-offset-2'>" . html::input("children[]", '', "class='form-control' placeholder='{$this->lang->category->name}'") . "</div>";
+          echo "<div class='col-xs-6 col-md-4 col-md-offset-2'>" . html::input("children[]", '', "class='form-control' placeholder='{$this->lang->category->common}'") . "</div>";
           echo "</div>";
           echo html::hidden('mode[]', 'new');
       }

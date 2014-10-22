@@ -14,3 +14,7 @@ $config->tree->require->edit = 'name';
 
 $config->tree->editor = new stdclass();
 $config->tree->editor->edit = array('id' => 'desc', 'tools' => 'simple');
+
+$config->tree->menuGroup = new stdclass();
+$config->tree->menuGroup->setting  = ',forum,blog,area,industry,in,out,dept,';
+$config->tree->menuGroup->category = ',article,announce,product,';
