@@ -7,3 +7,4 @@ body {background: #145ccd;}
 .dashboard .panel-actions {margin-top: 0; margin-right: 0;}
 .dashboard-actions {position: absolute; top: -31px; right: 80px}
 .dashboard-actions .btn {padding: 3px 12px}
+.dashboard .table tr[data-url] td {cursor: pointer;}
