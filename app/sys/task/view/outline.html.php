@@ -11,10 +11,10 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
-<?php $this->loadModel('project')->setMenu($projects, $projectID);?>
-<div class='with-menu page-content'>
+<div class='page-content'>
   <div class='panel'>
     <div class='panel-heading'>
+      <strong><?php echo $project->name; ?></strong>
       <div class='panel-actions'>
         <div class='btn-group'>
           <?php echo html::a($this->inlink('browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $lang->task->list, "class='btn'"); ?>
@@ -31,7 +31,7 @@
           <?php if(empty($key)) continue;?>
             <?php $class = ($key == $groupBy) ? 'active' : '';?>
             <li class='<?php echo $class;?>'>
-              <?php echo html::a($this->inlink('outline', "projectID=$projectID&mode=&groupBy=$key"), $value); ?>
+              <?php echo html::a($this->inlink('outline', "projectID=$projectID&groupBy=$key"), $value); ?>
             </li>
           <?php endforeach;?>
           </ul>
@@ -48,7 +48,7 @@
     <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
       <thead>
         <tr class='text-center'>
-          <?php $vars = "projectID=$projectID&mode={$mode}&groupBy={$groupBy}&orderBy=%s";?>
+          <?php $vars = "projectID=$projectID&groupBy={$groupBy}&orderBy=%s";?>
           <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->task->id);?></th>
           <th class='w-40px'> <?php commonModel::printOrderLink('pri',         $orderBy, $vars, $lang->task->lblPri);?></th>
           <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->task->name);?></th>
@@ -67,9 +67,10 @@
         $groupDone     = 0;
         $groupDoing    = 0;
         $groupClosed   = 0;
+        $groupSum      = count($groupTasks);
       ?>
         <tr class="heading toggle-handle" data-target='#taskList<?php echo ++$i;?>'>
-          <td colspan='4'>&nbsp;<i class='text-muted icon-caret-down toggle-icon'></i> &nbsp;<?php echo $groupKey;?></td>
+          <td colspan='4'>&nbsp;<i class='text-muted icon-caret-down toggle-icon'></i> &nbsp;<?php echo $groupKey;?> <?php echo ($groupSum > 0 ? ('(' . $groupSum . ')') : ''); ?></td>
           <td colspan='5' class='text-right'></td>
         </tr>
         <tbody id='taskList<?php echo $i;?>'>
@@ -91,7 +92,6 @@
             {
                 $groupClosed++;
             }
-            $groupSum = count($groupTasks);
             ?>
             <tr class='text-center' data-url='<?php echo $this->createLink('task', 'view', "taskID=$task->id"); ?>'>
               <td><?php echo $task->id;?></td>

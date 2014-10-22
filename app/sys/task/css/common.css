@@ -1,7 +1,6 @@
 form .pri.active:before {font-family: ZenIcon; content: '\e60d'; display: inline-block;}
 form .pri.pri-1.active:before, form .pri.pri-2.active:before, form .pri.pri-3.active:before, form .pri.pri-4.active:before {margin-right: 5px;}
 form .pri {width: 48px;}
-.page-content > .panel > .panel-heading > .panel-actions {margin-left: -5px;}
 
 .label.task-status-doing {color: #D2322D}
 .label.task-status-done {color: #229F24}

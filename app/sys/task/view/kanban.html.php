@@ -11,10 +11,10 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
-<?php $this->loadModel('project')->setMenu($projects, $projectID);?>
-<div class='with-menu page-content'>
+<div class='page-content'>
   <div class='panel'>
     <div class='panel-heading'>
+      <strong> <?php echo $project->name; ?></strong>
       <div class='panel-actions'>
         <div class="btn-group">
           <?php echo html::a($this->inlink('browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $lang->task->list, "class='btn'"); ?>
@@ -31,7 +31,7 @@
           <?php if(empty($key)) continue;?>
             <?php $class = ($key == $groupBy) ? 'active' : '';?>
             <li class='<?php echo $class;?>'>
-              <?php echo html::a($this->inlink('kanban', "projectID=$projectID&mode=&groupBy=$key"), $value); ?>
+              <?php echo html::a($this->inlink('kanban', "projectID=$projectID&groupBy=$key"), $value); ?>
             </li>
           <?php endforeach;?>
           </ul>
@@ -56,7 +56,7 @@
                   </div>
                   <div class='task-info clearfix'>
                     <div class='pull-left'>
-                    <span class='pri pri-<?php echo $task->pri; ?>'>P<?php echo $task->pri;?></span>
+                    <span class='pri pri-<?php echo $task->pri; ?>'>P<?php echo ($task->pri == 0 ? '?' : $task->pri);?></span>
                     <?php if(!empty($task->desc)): ?>
                       <button type='button' class='btn btn-link btn-mini' data-toggle='popover' data-original-title='<?php echo $lang->task->desc?>' data-trigger='hover' data-html='true' data-placement='bottom' data-content='<?php echo $task->desc?>'><i class='icon-file-alt'></i></button>&nbsp;&nbsp;
                     <?php endif; ?>

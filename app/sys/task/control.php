@@ -382,7 +382,7 @@ class task extends control
      * @access public
      * @return void
      */
-    public function kanban($projectID = 0, $mode = null, $groupBy = 'status')
+    public function kanban($projectID = 0, $groupBy = 'status')
     {
         /* Check project deleted. */
         if($projectID)
@@ -392,7 +392,7 @@ class task extends control
         }
 
         /* Get tasks and group them. */
-        $tasks       = $this->task->getList($projectID, $mode);
+        $tasks       = $this->task->getList($projectID);
         $groupBy     = strtolower(str_replace('`', '', $groupBy));
         $taskLang    = $this->lang->task;
         $groupByList = array();
@@ -434,8 +434,9 @@ class task extends control
         $this->view->orderBy     = $groupBy;
         $this->view->projectID   = $projectID;
         $this->view->projects    = $this->project->getPairs();
+        $this->view->project     = $project;
         $this->view->users       = $users;
-        $this->view->colWidth    = 100/min(5, max(2, count($groupTasks)));
+        $this->view->colWidth    = 100/min(6, max(2, count($groupTasks)));
         $this->display();
     }
 
@@ -538,7 +539,7 @@ class task extends control
      * @access public
      * @return void
      */
-    public function outline($projectID = 0, $mode = null, $groupBy = 'status', $orderBy = 'id_desc')
+    public function outline($projectID = 0, $groupBy = 'status', $orderBy = 'id_desc')
     {
         /* Check project deleted. */
         if($projectID)
@@ -548,7 +549,7 @@ class task extends control
         }
 
         /* Get tasks and group them. */
-        $tasks       = $this->task->getList($projectID, $mode, $orderBy);
+        $tasks       = $this->task->getList($projectID, null, $orderBy);
         $groupBy     = strtolower(str_replace('`', '', $groupBy));
         $taskLang    = $this->lang->task;
         $groupByList = array();
@@ -590,6 +591,7 @@ class task extends control
         $this->view->orderBy     = $groupBy;
         $this->view->projectID   = $projectID;
         $this->view->projects    = $this->project->getPairs();
+        $this->view->project     = $project;
         $this->view->users       = $users;
         $this->display();
     }

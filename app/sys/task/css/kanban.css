@@ -4,6 +4,7 @@
 .board > .panel > .panel-body {padding: 0;}
 
 .board-item .pri {line-height: 18px; height: 18px; width: auto; border: none; background: none}
+.board-item .pri.pri-0 {color: #aaa}
 .board-item {padding: 6px; border-top: 1px solid #ddd; margin: -1px -1px 0;}
 .board-item-shadow {margin: 0;}
 
