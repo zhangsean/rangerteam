@@ -42,7 +42,7 @@
     <div class='panel-body boards-container'>
       <div class='boards task-boards clearfix' id='taskKanban'>
       <?php foreach($tasks as $groupKey => $groupTasks):?>
-        <div class='board task-board' data-groupBy='<?php echo $groupBy?>' data-id='<?php echo $groupKey;?>' data-col='<?php echo $colCount ?>' style='width: <?php echo $colWidth?>%'>
+        <div class='board task-board' data-group='<?php echo $groupBy?>' data-key='<?php echo $groupKey;?>' data-col='<?php echo $colCount ?>' style='width: <?php echo $colWidth?>%'>
           <div class='panel'>
             <div class='panel-heading'>
               <?php echo empty($groupKey) ? $lang->task->unkown : ($groupBy == 'status' ? $lang->task->statusList[$groupKey] : $groupKey)?>

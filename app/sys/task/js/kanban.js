@@ -14,11 +14,12 @@ $(function()
                     messager.show('正在保存...');
                     var change = 
                     {
-                        name: toBoard.data('groupBy'),  // 要更改的字段，例如status或者assignedTo
+                        name: toBoard.data('group'),  // 要更改的字段，例如status或者assignedTo
                         id: e.element.data('id'),       // 任务id
-                        oldValue: fromBoard.data('id'), // 变更之前的值
-                        value: toBoard.data('id')       // 变更之后的值
+                        oldValue: fromBoard.data('key'), // 变更之前的值
+                        value: toBoard.data('key')       // 变更之后的值
                     }
+                    console.log(change);
                 }
             }
         });
