@@ -23,12 +23,16 @@ class contactModel extends model
         $customerIdList = $this->loadModel('customer')->getMine();
         if(empty($customerIdList)) return null;
 
-        return $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join')->from(TABLE_CONTACT)->alias('t1')
+        $contact = $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.id')->eq($id)
             ->andWhere('t2.customer')->in($customerIdList)
             ->limit(1)
             ->fetch();
+
+        $this->formatContact($contact);
+
+        return $contact;
     }
 
     /**
@@ -106,24 +110,7 @@ class contactModel extends model
             }
         }
 
-        foreach($contacts as $contact)
-        {
-            if($contact->phone)
-            {
-                $phone = trim(trim($contact->phone, '-'));
-                if(strpos($this->config->contact->areaCode, ',' . substr($phone, 0, 3) . ',') !== false)
-                {
-                    $contact->phone = substr($phone, 0, 3) . '-' . substr($phone, 3);
-                }
-                else
-                {
-                    if((strlen($phone) == 12 or strlen($phone) == 11) and substr($phone, 0, 1) == 0) $contact->phone = substr($phone, 0, 4) . '-' . substr($phone, 4);
-                    if((strlen($phone) == 11 or strlen($phone) == 10) and substr($phone, 0, 1) != 0 and substr($phone, 0, 1) > 2) $contact->phone = substr($phone, 0, 3) . '-' . substr($phone, 3);
-                }
-            }
-
-            if($contact->mobile and strlen($contact->mobile) == 11) $contact->mobile = substr($contact->mobile, 0, 3) . ' ' . substr($contact->mobile, 3, 4) . ' ' . substr($contact->mobile, 7, 4);
-        }
+        foreach($contacts as $contact) $this->formatContact($contact);
 
         return $contacts;
     }
@@ -331,5 +318,33 @@ class contactModel extends model
         if(!dao::isError()) return array('result' => true, 'contactID' => $contactID);
 
         return array('result' => false, 'message' => $this->lang->contact->failedAvatar);
+    }
+
+    /**
+     * Format contact. 
+     * 
+     * @param  object $contact 
+     * @access public
+     * @return void
+     */
+    public function formatContact($contact)
+    {
+        if($contact->phone)
+        {
+            $phone = trim(trim($contact->phone, '-'));
+            if(strpos($this->config->contact->areaCode, ',' . substr($phone, 0, 3) . ',') !== false)
+            {
+                $contact->phone = substr($phone, 0, 3) . $this->lang->minus . substr($phone, 3);
+            }
+            else
+            {
+                if((strlen($phone) == 12 or strlen($phone) == 11) and substr($phone, 0, 1) == 0) $contact->phone = substr($phone, 0, 4) . $this->lang->minus . substr($phone, 4);
+                if((strlen($phone) == 11 or strlen($phone) == 10) and (substr($phone, 0, 1) != 0 and substr($phone, 0, 1) > 2)) $contact->phone = substr($phone, 0, 3) . $this->lang->minus . substr($phone, 3);
+                if(substr($phone, 0, 4) == '4008') $contact->phone = substr($phone, 0, 4) . $this->lang->minus . substr($phone, 4);
+                if(strlen($phone) == 11 and substr($phone, 0, 1) == '1') $contact->phone = substr($contact->phone, 0, 3) . ' ' . substr($contact->phone, 3, 4) . ' ' . substr($contact->phone, 7, 4);
+            }
+        }
+
+        if($contact->mobile and strlen($contact->mobile) == 11) $contact->mobile = substr($contact->mobile, 0, 3) . ' ' . substr($contact->mobile, 3, 4) . ' ' . substr($contact->mobile, 7, 4);
     }
 }

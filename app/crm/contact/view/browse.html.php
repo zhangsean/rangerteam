@@ -27,7 +27,7 @@
         <th class='w-100px'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
         <th><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->contact->customer);?></th>
         <th class='w-50px'> <?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->contact->gender);?></th>
-        <th class='w-200px'><?php commonModel::printOrderLink('phone',    $orderBy, $vars, $lang->contact->phone . '/' . $lang->contact->mobile);?></th>
+        <th class='w-200px'><?php commonModel::printOrderLink('phone',    $orderBy, $vars, $lang->contact->phone . $lang->slash . $lang->contact->mobile);?></th>
         <th class='w-200px'><?php commonModel::printOrderLink('email',    $orderBy, $vars, $lang->contact->email);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('qq',       $orderBy, $vars, $lang->contact->qq);?></th>
         <th class='w-180px'><?php echo $lang->actions;?></th>
