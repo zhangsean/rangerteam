@@ -567,8 +567,8 @@ $.extend(
 
             initModalFrame(options);
 
-            if(isNum(options.height.toString())) options.height += 'px';
-            if(isNum(options.width.toString())) options.width += 'px';
+            if(isNum(options.height + '')) options.height += 'px';
+            if(isNum(options.width + '')) options.width += 'px';
             if(options.size == 'fullscreen')
             {
                 var $w = $(window);
@@ -599,10 +599,9 @@ $.extend(
             var frame = document.getElementById(options.name);
             frame.onload = frame.onreadystatechange = function()
             {
-
                 if(this.readyState && this.readyState != 'complete') return;
-                if(!modal.hasClass('modal-loading')) return;
-                if(!modal.data('first')) modal.addClass('modal-loading');
+                if(!modal.hasClass('modal-loading') && !modal.hasClass('modal-reloading')) return;
+                // if(!modal.data('first')) modal.addClass('modal-loading');
 
                 if(options.waittime > 0)
                 {
@@ -629,14 +628,14 @@ $.extend(
                 }
                 if(options.height == 'auto')
                 {
-                    var $framebody = $frame.find('body');
+                    var $framebody = $frame.find('body').addClass('body-modal');
                     setTimeout(function()
                     {
                         var fbH = $framebody.addClass('body-modal').outerHeight();
                         if(typeof fbH == 'object') fbH = $framebody.height();
                         modalBody.css('height', fbH);
                         if(options.center) ajustModalPosition();
-                        modal.removeClass('modal-loading');
+                        modal.removeClass('modal-loading modal-reloading');
                         if(modal.data('first')) modal.data('first', false);
                     }, 100);
 
@@ -646,13 +645,13 @@ $.extend(
                         {
                             var fbH = $framebody.addClass('body-modal').outerHeight();
                             if(typeof fbH == 'object') fbH = $framebody.height();
-                            modalBody.css('height', fbH);
+                            if(fbH > 0) modalBody.css('height', fbH);
                         });
                     }
                 }
                 else
                 {
-                    modal.removeClass('modal-loading');
+                    modal.removeClass('modal-loading modal-reloading');
                 }
 
                 var iframe$ = window.frames[options.name].$;
@@ -663,7 +662,7 @@ $.extend(
             }
             catch(e)
             {
-                modal.removeClass('modal-loading');
+                modal.removeClass('modal-loading modal-reloading');
             }
         }
 
@@ -722,6 +721,24 @@ $.extend(
             }).on('hidden.bs.modal', function(){$(document).off('keyup.modal.changes paste.modal.changes');});
         }
 
+        function reloadIframeModal(duration)
+        {
+            if(typeof(duration) == 'undefined') duration = 1000;
+
+            if($('body').hasClass('body-modal'))
+            {
+                window.parent.$.reloadIframeModal(duration);
+            }
+            else
+            {
+                setTimeout(function()
+                {
+                    $('#ajaxModal').addClass('modal-reloading');
+                    document.getElementById('modalIframe').contentWindow.location.reload(true);
+                }, duration);
+            }
+        }
+
         function ajustModalPosition(position)
         {
             position = position || 'fit';
@@ -734,7 +751,7 @@ $.extend(
             }
         }
 
-        $.extend({modalTrigger: showIframeModal, ajustModalPosition: ajustModalPosition});
+        $.extend({modalTrigger: showIframeModal, ajustModalPosition: ajustModalPosition, reloadIframeModal: reloadIframeModal});
 
         $('[data-toggle=modal], a.iframe').modalTrigger();
     },

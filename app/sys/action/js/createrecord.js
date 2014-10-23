@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $.setAjaxForm('#createRecordForm', function(response) { if(response.result == 'success') $.reloadAjaxModal(); });
+    $.setAjaxForm('#createRecordForm', function(response) { if(response.result == 'success') $.reloadIframeModal(); });
 
     $('[name*=objectType]').change(function()
     {
@@ -25,7 +25,7 @@ $(document).ready(function()
             $(this).parents('.input-group').find('select').show();
             $(this).parents('.input-group').find('input[type=text]').hide();
         }   
-    })  
+    });
 });
 
 /**

@@ -282,6 +282,8 @@ h4.modal-title, .modal-title {font-size: 14px}
 .modal-loading .modal-dialog {margin-top: -100%!important;}
 .modal-body > .table:last-child {margin: 0}
 @media (max-width: 991px) {.modal-dialog{padding: 0;}}
+body.body-modal {padding-top: 10px;}
+.body-modal #mainNavbar {display: none}
 
 /* style of text */
 .text-latin {font-family: Arial;}
