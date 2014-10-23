@@ -118,11 +118,11 @@ class contactModel extends model
                 else
                 {
                     if((strlen($phone) == 12 or strlen($phone) == 11) and substr($phone, 0, 1) == 0) $contact->phone = substr($phone, 0, 4) . '-' . substr($phone, 4);
-                    if((strlen($phone) == 11 or strlen($phone) == 10) and substr($phone, 0, 1) != 0) $contact->phone = substr($phone, 0, 3) . '-' . substr($phone, 3);
+                    if((strlen($phone) == 11 or strlen($phone) == 10) and substr($phone, 0, 1) != 0 and substr($phone, 0, 1) > 2) $contact->phone = substr($phone, 0, 3) . '-' . substr($phone, 3);
                 }
             }
 
-            if($contact->mobile and strlen($contact->mobile) == 11) $contact->mobile = strrev(chunk_split(strrev($contact->mobile), 4, ' '));
+            if($contact->mobile and strlen($contact->mobile) == 11) $contact->mobile = substr($contact->mobile, 0, 3) . ' ' . substr($contact->mobile, 3, 4) . ' ' . substr($contact->mobile, 7, 4);
         }
 
         return $contacts;
