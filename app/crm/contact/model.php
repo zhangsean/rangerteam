@@ -106,6 +106,25 @@ class contactModel extends model
             }
         }
 
+        foreach($contacts as $contact)
+        {
+            if($contact->phone)
+            {
+                $phone = trim(trim($contact->phone, '-'));
+                if(strpos($this->config->contact->areaCode, ',' . substr($phone, 0, 3) . ',') !== false)
+                {
+                    $contact->phone = substr($phone, 0, 3) . '-' . substr($phone, 3);
+                }
+                else
+                {
+                    if((strlen($phone) == 12 or strlen($phone) == 11) and substr($phone, 0, 1) == 0) $contact->phone = substr($phone, 0, 4) . '-' . substr($phone, 4);
+                    if((strlen($phone) == 11 or strlen($phone) == 10) and substr($phone, 0, 1) != 0) $contact->phone = substr($phone, 0, 3) . '-' . substr($phone, 3);
+                }
+            }
+
+            if($contact->mobile and strlen($contact->mobile) == 11) $contact->mobile = strrev(chunk_split(strrev($contact->mobile), 4, ' '));
+        }
+
         return $contacts;
     }
 

@@ -14,3 +14,4 @@ $config->contact->require->create = 'customer, realname';
 $config->contact->require->edit   = 'customer, realname';
 
 $config->contact->contactWayList  = array('mobile', 'phone', 'email', 'qq', 'weixin', 'weibo', 'site', 'fax', 'wangwang', 'skype', 'yahoo', 'gtalk');
+$config->contact->areaCode = ',010,020,021,022,023,024,025,027,028,029,';

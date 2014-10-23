@@ -27,8 +27,7 @@
         <th class='w-100px'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
         <th><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->contact->customer);?></th>
         <th class='w-50px'> <?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->contact->gender);?></th>
-        <th class='w-120px'><?php commonModel::printOrderLink('phone',    $orderBy, $vars, $lang->contact->phone);?></th>
-        <th class='w-120px'><?php commonModel::printOrderLink('mobile',   $orderBy, $vars, $lang->contact->mobile);?></th>
+        <th class='w-200px'><?php commonModel::printOrderLink('phone',    $orderBy, $vars, $lang->contact->phone . '/' . $lang->contact->mobile);?></th>
         <th class='w-200px'><?php commonModel::printOrderLink('email',    $orderBy, $vars, $lang->contact->email);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('qq',       $orderBy, $vars, $lang->contact->qq);?></th>
         <th class='w-180px'><?php echo $lang->actions;?></th>
@@ -41,8 +40,7 @@
       <td><?php echo html::a(inlink('view', "contactID=$contact->id"), $contact->realname);?></td>
       <td><?php if(isset($customers[$contact->customer])) echo html::a($this->createLink('customer', 'view', "customerID=$contact->customer"), $customers[$contact->customer]);?></td>
       <td><?php echo isset($lang->contact->genderList[$contact->gender]) ? $lang->contact->genderList[$contact->gender] : '';?></td>
-      <td><?php echo $contact->phone;?></td>
-      <td><?php echo $contact->mobile;?></td>
+      <td class='text-left'><?php echo $contact->phone . ' ' . $contact->mobile;?></td>
       <td><?php echo $contact->email;?></td>
       <td><?php echo $contact->qq;?></td>
       <td class='operate'>
