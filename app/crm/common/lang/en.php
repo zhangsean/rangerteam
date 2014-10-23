@@ -24,7 +24,7 @@ $lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=status
 /* Menu of customer module. */
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
-$lang->customer->menu->browse = array('link' => 'Customer List|customer|browse|', 'alias' => 'create,edit,record,view');
+$lang->customer->menu->browse = array('link' => 'All Customers|customer|browse|', 'alias' => 'create,edit,record,view');
 $lang->customer->menu->past      = array('link' => 'Urgently need contacted|customer|browse|mode=past', 'alias' => 'create,edit,view,record');
 $lang->customer->menu->today     = array('link' => 'Contact Today|customer|browse|mode=today', 'alias' => 'create,edit,view,record');
 $lang->customer->menu->tomorrow  = array('link' => 'Contact Tomorrow|customer|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
@@ -35,7 +35,7 @@ $lang->customer->menu->public    = array('link' => 'Public Customers|customer|br
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse     = array('link' => 'Product List|product|browse|mode=all');
+$lang->product->menu->browse     = array('link' => 'All Products|product|browse|mode=all');
 $lang->product->menu->normal     = array('link' => 'Normal|product|browse|mode=normal');
 $lang->product->menu->developing = array('link' => 'Developing|product|browse|mode=developing');
 $lang->product->menu->offline    = array('link' => 'Offline|product|browse|mode=offline');
@@ -54,7 +54,7 @@ $lang->order->menu->public    = array('link' => 'Public|order|browse|mode=public
 /* Menu of contact module. */
 $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
-$lang->contact->menu->browse    = array('link' => 'Contact List|contact|browse|', 'alias' => 'create,edit,view,history');
+$lang->contact->menu->browse    = array('link' => 'All Contacts|contact|browse|', 'alias' => 'create,edit,view,history');
 $lang->contact->menu->past      = array('link' => 'Urgently need contacted|contact|browse|mode=past', 'alias' => 'create,edit,view,record');
 $lang->contact->menu->today     = array('link' => 'Contact Today|contact|browse|mode=today', 'alias' => 'create,edit,view,record');
 $lang->contact->menu->tomorrow  = array('link' => 'Contact Tomorrow|contact|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
@@ -64,7 +64,7 @@ $lang->contact->menu->thismonth = array('link' => 'Contact This Month|contact|br
 /* Menu of contract module. */
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
-$lang->contract->menu->browse       = array('link' => 'Contract List|contract|browse|', 'alias' => 'create,edit,view');
+$lang->contract->menu->browse       = array('link' => 'All Contracts|contract|browse|', 'alias' => 'create,edit,view');
 $lang->contract->menu->unreceived   = array('link' => 'Wait for receiving|contract|browse|mode=unreceived',   'alias' => 'create,edit,view,history');
 $lang->contract->menu->undeliveried = array('link' => 'Wait for delivering|contract|browse|mode=undeliveried', 'alias' => 'create,edit,view,history');
 $lang->contract->menu->finished     = array('link' => 'Finished|contract|browse|mode=finished',   'alias' => 'create,edit,view,history');
