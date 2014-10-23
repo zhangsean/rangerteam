@@ -25,7 +25,7 @@
     <div class='page-actions'>
       <?php
       echo "<div class='btn-group'>";
-      echo html::a($this->createLink('action', 'createRecord', "objectType=customer&objectID={$customer->id}&customer={$customer->id}"), $lang->customer->record, "class='btn' data-toggle='modal'");
+      echo html::a($this->createLink('action', 'createRecord', "objectType=customer&objectID={$customer->id}&customer={$customer->id}"), $lang->customer->record, "class='btn' data-toggle='modal' data-type='iframe' data-icon='comment-alt'");
       echo html::a(inlink('assign', "customerID=$customer->id"), $lang->customer->assign, "class='btn' data-toggle='modal'");
       echo '</div>';
       echo "<div class='btn-group'>";
