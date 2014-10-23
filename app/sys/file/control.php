@@ -267,7 +267,8 @@ class file extends control
         if(strpos($fileName, $extension) === false) $fileName .= $extension;
 
         /* urlencode the filename for ie. */
-        if(strpos($this->server->http_user_agent, 'MSIE') !== false) $fileName = urlencode($fileName);
+        $isIE = preg_match("/rv:([\d\.]+)/", $this->server->http_user_agent) or (strpos($this->server->http_user_agent, 'MSIE') !== false) ;
+        if($isIE) $fileName = urlencode($fileName);
 
         /* Judge the content type. */
         $mimes = $this->config->file->mimes;

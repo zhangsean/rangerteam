@@ -699,6 +699,18 @@ function isonlybody()
 }
 
 /**
+ * Format money.
+ * 
+ * @param  float    $money 
+ * @access public
+ * @return string
+ */
+function formatMoney($money)
+{
+    return trim(preg_replace('/\.0*$/', '', $money));
+}
+
+/**
  * Format Hours.
  * 
  * @param  int    $hours 

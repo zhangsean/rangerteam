@@ -10,3 +10,5 @@
  * @link        http://www.ranzhi.org
  */
 $config->file->imageExtensions = array('jpeg', 'jpg', 'gif', 'png');
+
+$config->file->mimes['default'] = 'application/octet-stream';
