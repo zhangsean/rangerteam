@@ -397,11 +397,21 @@ class task extends control
         $taskLang    = $this->lang->task;
         $groupTasks  = array();
 
+        /* Init status group */
+        if(empty($groupBy)) $groupBy = 'status';
+        if($groupBy == 'status')
+        {
+            foreach ($taskLang->statusList as $status => $statusName)
+            {
+                $groupTasks[$status] = array();
+            }
+        }
+
         /* Get users. */
         $users = $this->loadModel('user')->getPairs();
         foreach($tasks as $task)
         {
-            if($groupBy == '' or $groupBy == 'status')
+            if($groupBy == 'status')
             {
                 $groupTasks[$task->status][] = $task;
             }
