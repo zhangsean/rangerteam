@@ -117,18 +117,19 @@ $lang->task->outline = 'Outline';
 
 $lang->task->kanbanGroup['']           = 'Groups';
 $lang->task->kanbanGroup['status']     = 'By Status';
-$lang->task->kanbanGroup['assignedto'] = 'By Assigned';
+$lang->task->kanbanGroup['assignedTo'] = 'By Assigned';
 
 $lang->task->groups['']           = 'Choose group';
 $lang->task->groups['status']     = 'Group by status';
-$lang->task->groups['assignedto'] = 'Assigned To';
-$lang->task->groups['createdby']  = 'Created By';
-$lang->task->groups['finishedby'] = 'Finished By';
-$lang->task->groups['closedby']   = 'Closed By';
+$lang->task->groups['assignedTo'] = 'Assigned To';
+$lang->task->groups['createdBy']  = 'Created By';
+$lang->task->groups['finishedBy'] = 'Finished By';
+$lang->task->groups['closedBy']   = 'Closed By';
 
 $lang->task->unkown     = 'Unkown';
 $lang->task->unAssigned = 'Un assigned';
 
 $lang->task->mindMoveTip = 'You should move a task to a sub node.';
+$lang->task->notAllowed  = 'Can not move like this.';
 
 $lang->task->groupinfo = 'Total <strong>%s</strong> - <span class="text-warning">waitin <strong>%s</strong></span> - <span class="text-danger">doing <strong>%s</strong></span> - <span class="text-success">finished <strong>%s</strong></span> - <span class="text-muted">closed <strong>%s</strong></span>';

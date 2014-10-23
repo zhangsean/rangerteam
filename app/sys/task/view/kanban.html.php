@@ -11,6 +11,7 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
+<?php js::set('notAllowed', $lang->task->notAllowed);?>
 <div class='page-content'>
   <div class='panel'>
     <div class='panel-heading'>
@@ -42,10 +43,16 @@
     <div class='panel-body boards-container'>
       <div class='boards task-boards clearfix' id='taskKanban'>
       <?php foreach($tasks as $groupKey => $groupTasks):?>
-        <div class='board task-board' data-group='<?php echo $groupBy?>' data-key='<?php echo $groupKey;?>' data-col='<?php echo $colCount ?>' style='width: <?php echo $colWidth?>%'>
+        <div class='board task-board' data-group='<?php echo $groupBy?>' data-key='<?php echo $groupKey;?>' style='width: <?php echo $colWidth?>%'>
           <div class='panel'>
             <div class='panel-heading'>
-              <?php echo empty($groupKey) ? $lang->task->unkown : ($groupBy == 'status' ? $lang->task->statusList[$groupKey] : $groupKey)?>
+              <?php if(empty($groupKey)):?>
+              <?php echo $lang->task->unkown;?>
+              <?php elseif($groupBy == 'status'):?>
+              <?php echo $lang->task->statusList[$groupKey];?>
+              <?php else:?>
+              <?php echo zget($users, $groupKey);?>
+              <?php endif;?>
             </div>
             <div class='panel-body'>
               <div class='board-list'>

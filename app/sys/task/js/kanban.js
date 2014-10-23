@@ -9,18 +9,40 @@ $(function()
                 var fromBoard = e.element.closest('.board'),
                     toBoard = e.target.closest('.board');
 
-                if(fromBoard.data('id') != toBoard.data('id'))
+                if(toBoard.data('group') == 'status')
                 {
-                    // messager.show('正在保存...');
+                    if(toBoard.data('key') == 'done')   button = e.element.find('a[href*=finish]');
+                    if(toBoard.data('key') == 'closed') button = e.element.find('a[href*=close]');
+                    if(toBoard.data('key') == 'doing')  button = e.element.find('a[href*=start]');
+                    if(typeof(button) == 'undefined' || button.prop('disabled')) 
+                    {
+                        messager.danger(v.notAllowed);
+                        reloadDataTable();
+                    }
+
+                    return button.click();
+                }
+
+                if(toBoard.data('group') != 'status' && fromBoard.data('id') != toBoard.data('id'))
+                {
+                    // messager.show('Sending...');
                     var change = 
                     {
-                        name: toBoard.data('group'),  // 要更改的字段，例如status或者assignedTo
-                        id: e.element.data('id'),       // 任务id
-                        oldValue: fromBoard.data('key'), // 变更之前的值
-                        value: toBoard.data('key')       // 变更之后的值
+                        field: toBoard.data('group'),
+                        id: e.element.data('id'),
+                        oldValue: fromBoard.data('key'),
+                        value: toBoard.data('key')
                     }
                     
-                    // 保存数据到服务器
+                    $.post(
+                        createLink('task', 'kanban'),
+                        change,
+                        function(response)
+                        {
+                            if(response.result == 'success') messager.success(response.message);
+                        },
+                        'json'
+                    )
                 }
             }
         });

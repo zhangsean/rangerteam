@@ -117,18 +117,19 @@ $lang->task->outline = '大纲';
 
 $lang->task->kanbanGroup['']           = '选择分组';
 $lang->task->kanbanGroup['status']     = '状态分组';
-$lang->task->kanbanGroup['assignedto'] = '指派给分组';
+$lang->task->kanbanGroup['assignedTo'] = '指派给分组';
 
 $lang->task->groups['']           = '选择分组';
 $lang->task->groups['status']     = '状态分组';
-$lang->task->groups['assignedto'] = '指派给分组';
-$lang->task->groups['createdby']  = '创建者分组';
-$lang->task->groups['finishedby'] = '完成者分组';
-$lang->task->groups['closedby']   = '关闭者分组';
+$lang->task->groups['assignedTo'] = '指派给分组';
+$lang->task->groups['createdBy']  = '创建者分组';
+$lang->task->groups['finishedBy'] = '完成者分组';
+$lang->task->groups['closedBy']   = '关闭者分组';
 
 $lang->task->unkown     = '未指定';
 $lang->task->unAssigned = '未指派';
 
 $lang->task->mindMoveTip = '只能将任务移动至二级节点下。';
+$lang->task->notAllowed  = '不允许这样操作。';
 
 $lang->task->groupinfo = '总计 <strong class="group-total">%s</strong> 项 - <span class="text-warning">未开始 <strong class="group-wait">%s</strong></span> - <span class="text-danger">进行中 <strong class="group-doing">%s</strong></span> - <span class="text-success">已完成 <strong class="group-done">%s</strong></span> - <span class="text-muted">已关闭 <strong class="group-closed">%s</strong></span>';

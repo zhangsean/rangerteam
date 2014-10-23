@@ -148,12 +148,12 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "taskID=$taskID")));
         }
 
-        $this->view->title      = $this->lang->task->edit;
-        $this->view->task       = $this->task->getByID($taskID);
-        $this->view->projectID  = $this->view->task->project;
-        $this->view->projects   = $this->loadModel('project')->getPairs();
-        $this->view->members    = $this->loadModel('project')->getMemberPairs($this->view->task->project);
-        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->title     = $this->lang->task->edit;
+        $this->view->task      = $this->task->getByID($taskID);
+        $this->view->projectID = $this->view->task->project;
+        $this->view->projects  = $this->loadModel('project')->getPairs();
+        $this->view->members   = $this->loadModel('project')->getMemberPairs($this->view->task->project);
+        $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
@@ -384,6 +384,31 @@ class task extends control
      */
     public function kanban($projectID = 0, $groupBy = 'status')
     {
+        if($_POST)
+        {
+            $task = $this->dao->select('*')->from(TABLE_TASK)->where('id')->eq($this->post->id)->fetch();
+            unset($task->canceledDate);
+            unset($task->canceledBy);
+            unset($task->finishedDate);
+            unset($task->finishedBy);
+            unset($task->closedDate);
+            unset($task->closedBy);
+            $task->{$this->post->field} = $this->post->value;
+
+            $changes = $this->task->update($this->post->id, $task);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if(!empty($changes))
+            {
+                $actionID = $this->loadModel('action')->create('task', $task->id, 'Edited');
+                if($changes) $this->action->logHistory($actionID, $changes);
+            }
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        /* Init status group */
+        if(empty($groupBy)) $groupBy = 'status';
         /* Check project deleted. */
         if($projectID)
         {
@@ -392,16 +417,21 @@ class task extends control
         }
 
         /* Get tasks and group them. */
-        $tasks       = $this->task->getList($projectID);
-        $groupBy     = strtolower(str_replace('`', '', $groupBy));
-        $taskLang    = $this->lang->task;
-        $groupTasks  = array();
+        $tasks      = $this->task->getList($projectID);
+        $groupBy    = str_replace('`', '', $groupBy);
+        $groupTasks = array();
 
-        /* Init status group */
-        if(empty($groupBy)) $groupBy = 'status';
+        if($groupBy != 'status' and !empty($project->members))
+        {
+            foreach($project->members as $role => $memberList)
+            {
+                foreach($memberList as $member) $groupTasks[$member->account] = array();
+            }
+        }
+
         if($groupBy == 'status')
         {
-            foreach ($taskLang->statusList as $status => $statusName)
+            foreach ($this->lang->task->statusList as $status => $statusName)
             {
                 $groupTasks[$status] = array();
             }
@@ -409,27 +439,28 @@ class task extends control
 
         /* Get users. */
         $users = $this->loadModel('user')->getPairs();
+    
         foreach($tasks as $task)
         {
-            if($groupBy == 'status')
+            if($groupBy == '' or $groupBy == 'status')
             {
                 $groupTasks[$task->status][] = $task;
             }
-            elseif($groupBy == 'assignedto')
+            elseif($groupBy == 'assignedTo')
             {
-                $groupTasks[$users[$task->assignedTo]][] = $task;
+                $groupTasks[$task->assignedTo][] = $task;
             }
-            elseif($groupBy == 'createdby')
+            elseif($groupBy == 'createdBy')
             {
-                $groupTasks[$users[$task->createdBy]][] = $task;
+                $groupTasks[$task->createdBy][] = $task;
             }
-            elseif($groupBy == 'finishedby')
+            elseif($groupBy == 'finishedBy')
             {
-                $groupTasks[$users[$task->finishedBy]][] = $task;
+                $groupTasks[$task->finishedBy][] = $task;
             }
-            elseif($groupBy == 'closedby')
+            elseif($groupBy == 'closedBy')
             {
-                $groupTasks[$users[$task->closedBy]][] = $task;
+                $groupTasks[$task->closedBy][] = $task;
             }
             else
             {
@@ -445,95 +476,6 @@ class task extends control
         $this->view->project     = $project;
         $this->view->users       = $users;
         $this->view->colWidth    = 100/min(6, max(2, count($groupTasks)));
-        $this->display();
-    }
-
-    /**
-     * Browse tasks with mindmap.
-     * 
-     * @param  int    $projectID 
-     * @param  string $groupBy    the field to group by
-     * @access public
-     * @return void
-     */
-    public function mind($projectID = 0, $groupBy = 'status')
-    {
-        if($_POST)
-        {
-            if($this->post->changes)
-            {
-                $changes = json_decode($this->post->changes);
-                if(!empty($changes)) $this->task->saveMind($changes);
-            }
-
-            if($this->post->projectName)
-            {
-                $project = array('projectName' => $this->post->projectName);
-                $this->loadModel('project', 'oa')->update($this->post->projectID, $project);
-            }
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
-        }
-
-        /* Check project deleted. */
-        if($projectID)
-        {
-            $project = $this->loadModel('project')->getByID($projectID);
-            if($project->deleted) $this->locate($this->createLink('project'));
-        }
-
-        /* Get tasks and group them. */
-        $tasks       = $this->task->getList($projectID);
-        $groupBy     = strtolower(str_replace('`', '', $groupBy));
-        $taskLang    = $this->lang->task;
-        $groupTasks  = array();
-
-        if(empty($groupBy)) $groupBy = 'status';
-        if($groupBy == 'status')
-        {
-            foreach ($taskLang->statusList as $key => $value) 
-            {
-                if(empty($key)) continue;
-                $groupTasks[$key] = array();
-            }
-        }
-
-        /* Get users. */
-        $users = $this->loadModel('user')->getPairs();
-        foreach($tasks as $task)
-        {
-            if($groupBy == 'status')
-            {
-                $groupTasks[$task->status][] = $task;
-            }
-            elseif($groupBy == 'assignedto')
-            {
-                $groupTasks[$users[$task->assignedTo]][] = $task;
-            }
-            elseif($groupBy == 'createdby')
-            {
-                $groupTasks[$users[$task->createdBy]][] = $task;
-            }
-            elseif($groupBy == 'finishedby')
-            {
-                $groupTasks[$users[$task->finishedBy]][] = $task;
-            }
-            elseif($groupBy == 'closedby')
-            {
-                $groupTasks[$users[$task->closedBy]][] = $task;
-            }
-            else
-            {
-                $groupTasks[$task->$groupBy][] = $task;
-            }
-        }
-
-        $this->view->tasks       = $groupTasks;
-        $this->view->groupBy     = $groupBy;
-        $this->view->orderBy     = $groupBy;
-        $this->view->projectID   = $projectID;
-        $this->view->projects    = $this->project->getPairs();
-        $this->view->projectName = $project->name;
-        $this->view->users       = $users;
         $this->display();
     }
 
@@ -556,7 +498,7 @@ class task extends control
 
         /* Get tasks and group them. */
         $tasks       = $this->task->getList($projectID, null, $orderBy);
-        $groupBy     = strtolower(str_replace('`', '', $groupBy));
+        $groupBy     = str_replace('`', '', $groupBy);
         $taskLang    = $this->lang->task;
         $groupTasks  = array();
 
@@ -568,19 +510,19 @@ class task extends control
             {
                 $groupTasks[$taskLang->statusList[$task->status]][] = $task;
             }
-            elseif($groupBy == 'assignedto')
+            elseif($groupBy == 'assignedTo')
             {
                 $groupTasks[$users[$task->assignedTo]][] = $task;
             }
-            elseif($groupBy == 'createdby')
+            elseif($groupBy == 'createdBy')
             {
                 $groupTasks[$users[$task->createdBy]][] = $task;
             }
-            elseif($groupBy == 'finishedby')
+            elseif($groupBy == 'finishedBy')
             {
                 $groupTasks[$users[$task->finishedBy]][] = $task;
             }
-            elseif($groupBy == 'closedby')
+            elseif($groupBy == 'closedBy')
             {
                 $groupTasks[$users[$task->closedBy]][] = $task;
             }
