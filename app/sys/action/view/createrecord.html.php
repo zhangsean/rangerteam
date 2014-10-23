@@ -18,7 +18,7 @@
   <table class='table table-form'>
     <?php if($objectType != 'contact'):?>
     <tr>
-      <th><?php echo $lang->action->record->contact;?>0</th>
+      <th><?php echo $lang->action->record->contact;?></th>
       <td>
         <div class='col-sm-5'>
           <div class='input-group'>
