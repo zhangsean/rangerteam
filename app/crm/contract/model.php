@@ -502,8 +502,8 @@ class contractModel extends model
             {
                 if($contract->currency == $key)
                 {
-                        $totalAmount[$key]['contract'] += $contract->amount;
-                        if($contract->return == 'done') $totalAmount[$key]['return'] += $contract->amount;
+                    $totalAmount[$key]['contract'] += $contract->amount;
+                    if($contract->return == 'done') $totalAmount[$key]['return'] += $contract->amount;
                 }
             } 
         }
