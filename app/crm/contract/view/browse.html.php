@@ -49,13 +49,7 @@
       <tr>
         <td class='text-middle' colspan='2'>
           <div class='text-danger'>
-            <?php
-            foreach($totalAmount as $currency => $amount)
-            {
-                if($amount['contract'] == 0 and $amount['return'] == 0) continue;
-                printf($lang->contract->totalAmount, $currencyList[$currency], $amount['contract'], $amount['return']);
-            }
-            ?>
+            <?php printf($lang->contract->totalAmount, implode('，', $totalAmount['contract']), implode('，', $totalAmount['return']));?>
           </div>
         </td>
         <td colspan='7'><?php $pager->show();?></td>

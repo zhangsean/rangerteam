@@ -79,4 +79,4 @@ $lang->contract->codeUnitList['input'] = '输入值';
 $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = '成交金额';
 
-$lang->contract->totalAmount = '本页%s合同总金额%s，回款金额%s；';
+$lang->contract->totalAmount = '本页合同总金额：%s，已回款：%s；';

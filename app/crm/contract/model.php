@@ -494,19 +494,25 @@ class contractModel extends model
     {
         $totalAmount  = array();
         $currencyList = $this->loadModel('order')->setCurrencyList();
-        foreach($currencyList as $key => $currency)
+        $currencySign = $this->loadModel('order')->setCurrencySign();
+
+        foreach($contracts as $contract)
         {
-            $totalAmount[$key]['contract'] = 0;
-            $totalAmount[$key]['return']   = 0;
-            foreach($contracts as $contract)
+            foreach($currencyList as $key => $currency)
             {
                 if($contract->currency == $key)
                 {
-                    $totalAmount[$key]['contract'] += $contract->amount;
-                    if($contract->return == 'done') $totalAmount[$key]['return'] += $contract->amount;
+                    if(!isset($totalAmount['contract'][$key])) $totalAmount['contract'][$key] = 0;
+                    if(!isset($totalAmount['return'][$key]))   $totalAmount['return'][$key] = 0;
+
+                    $totalAmount['contract'][$key] += $contract->amount;
+                    if($contract->return == 'done') $totalAmount['return'][$key] += $contract->amount;
                 }
-            } 
+            }
         }
+
+        foreach($totalAmount as $type => $currencyAmount) foreach($currencyAmount as $currency => $amount) $totalAmount[$type][$currency] = $currencySign[$currency] . $amount;
+
         return $totalAmount;
     }
 }
