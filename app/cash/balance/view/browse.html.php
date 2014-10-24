@@ -15,10 +15,10 @@
   <?php echo html::a(inlink('create'), "<i class='icon-plus'></i> {$lang->balance->create}", "class='btn btn-primary btn-create loadInModal'")?>
   <table class='table table-hover table-striped tablesorter table-data' id='balanceList'>
     <tr>
-      <th><?php commonModel::printOrderLink('depositor', $orderBy, $vars, $lang->balance->depositor);?></th>
-      <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->balance->date);?></th>
-      <th><?php commonModel::printOrderLink('currency', $orderBy, $vars, $lang->balance->currency);?></th>
-      <th><?php commonModel::printOrderLink('money', $orderBy, $vars, $lang->balance->money);?></th>
+      <th><?php echo $lang->balance->depositor;?></th>
+      <th class='w-100px'><?php echo $lang->balance->date;?></th>
+      <th><?php echo $lang->balance->currency;?></th>
+      <th><?php echo $lang->balance->money;?></th>
       <th class='text-center'><?php echo $lang->actions;?></th>
     </tr>
     <tbody>

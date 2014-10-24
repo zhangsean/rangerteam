@@ -68,7 +68,7 @@
               <?php echo html::a(inlink('check', "depositorID=$depositor->id"), $lang->depositor->check);?>
               <?php if($depositor->status == 'normal') echo html::a(inlink('forbid', "depositorID=$depositor->id"), $lang->depositor->forbid, "data-toggle=modal");?>
               <?php if($depositor->status == 'disable') echo html::a(inlink('activate', "depositorID=$depositor->id"), $lang->depositor->activate, "data-toggle=modal");?>
-              <?php echo html::a($this->createLink('balance', 'browse', "depositorID=$depositor->id"), $lang->depositor->balance);?>
+              <?php echo html::a($this->createLink('balance', 'browse', "depositorID=$depositor->id"), $lang->depositor->balance, "data-toggle='modal'");?>
             </div>
             <?php echo "<small class='text-muted'>{$lang->depositor->status}{$lang->colon} </small><span class='text-" . ($depositor->status == 'normal' ? 'success': 'danger') . "'>{$lang->depositor->statusList[$depositor->status]}</span>";?>
           </div>
