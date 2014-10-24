@@ -66,7 +66,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->contact->birthday;?></th>
-            <td colspan='2'><?php echo html::input('birthday', formatTime($contact->birthday), "class='form-control form-date'");?></td>
+            <td colspan='2'><?php echo html::input('birthday', $contact->birthday, "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contact->gender;?></th>
@@ -74,7 +74,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->contact->createdDate;?></th>
-            <td colspan='2'><?php echo html::input('createdDate', formatTime($contact->createdDate), "class='form-control form-datetime'");?></td>
+            <td colspan='2'><?php echo html::input('createdDate', $contact->createdDate, "class='form-control form-datetime'");?></td>
           </tr>
         </table>
       </div>

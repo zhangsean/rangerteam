@@ -43,7 +43,10 @@ class balanceModel extends model
 
     public function getLatest()
     {
-       return $this->dao->select('depositor, max(date) as date, money, currency')->from(TABLE_BALANCE)->groupBy('depositor')->fetchGroup('currency', 'depositor');
+        return $this->dao->select('depositor, max(date) as date, money, currency')
+            ->from(TABLE_BALANCE)
+            ->groupBy('id')
+            ->fetchGroup('currency', 'depositor');
     }
 
     /**

@@ -52,8 +52,8 @@
           <td><?php if(isset($users[$task->assignedTo])) echo $users[$task->assignedTo];?></td>
           <td><?php echo $task->deadline;?></td>
           <td><?php echo zget($lang->task->statusList, $task->status);?></td>
-          <td><?php echo formatHours($task->consumed);?></td>
-          <td><?php echo formatHours($task->left);?></td>
+          <td><?php echo $task->consumed;?></td>
+          <td><?php echo $task->left;?></td>
           <td><?php echo $this->task->buildOperateMenu($task);?></td>
         </tr>
         <?php endforeach;?>

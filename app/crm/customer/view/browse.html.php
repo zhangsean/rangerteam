@@ -43,7 +43,7 @@
         <td><?php echo $lang->customer->sizeNameList[$customer->size];?></td>
         <td><?php echo $lang->customer->typeList[$customer->type];?></td>
         <td><?php echo formatTime($customer->contactedDate, DT_DATE1);?></td>
-        <td><?php echo formatTime($customer->nextDate);?></td>
+        <td><?php echo $customer->nextDate;?></td>
         <td><?php echo substr($customer->createdDate, 0, 10);?></td>
         <td class='actions'>
           <?php

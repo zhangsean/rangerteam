@@ -63,7 +63,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->contact->birthday;?></th>
-          <td><?php echo formatTime($contact->birthday);?></td>
+          <td><?php echo $contact->birthday;?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contact->gender;?></th>

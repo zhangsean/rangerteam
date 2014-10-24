@@ -100,8 +100,8 @@
               <td><?php echo $task->deadline;?></td>
               <td><?php if(isset($users[$task->assignedTo])) echo $users[$task->assignedTo];?></td>
               <td><?php echo substr($task->createdDate, 0, 10);?></td>
-              <td><?php echo formatHours($task->consumed);?></td>
-              <td><?php echo formatHours($task->left);?></td>
+              <td><?php echo $task->consumed;?></td>
+              <td><?php echo $task->left;?></td>
               <td><?php echo $this->task->buildOperateMenu($task);?></td>
             </tr>
           <?php endforeach;?>

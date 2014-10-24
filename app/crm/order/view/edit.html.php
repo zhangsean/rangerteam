@@ -57,7 +57,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->order->assignedDate;?></th>
-            <td><?php echo html::input('assignedDate', formatTime($order->assignedDate), "class='form-control form-datetime'");?></td>
+            <td><?php echo html::input('assignedDate', $order->assignedDate, "class='form-control form-datetime'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->order->status;?></th>
@@ -76,11 +76,11 @@
           </tr>
           <tr>
             <th><?php echo $lang->order->contactedDate;?></th>
-            <td><?php echo formatTime($order->contactedDate);?></td>
+            <td><?php echo $order->contactedDate;?></td>
           </tr>
           <tr>
             <th><?php echo $lang->order->nextDate;?></th>
-            <td><?php echo html::input('nextDate', formatTime($order->nextDate), "class='form-control form-date'");?></td>
+            <td><?php echo html::input('nextDate', $order->nextDate, "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->order->signedBy;?></th>
@@ -88,7 +88,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->order->signedDate;?></th>
-            <td><?php echo html::input('signedDate', formatTime($order->signedDate), "class='form-control form-date'");?></td>
+            <td><?php echo html::input('signedDate', $order->signedDate, "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->order->closedBy;?></th>
@@ -100,7 +100,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->order->closedDate;?></th>
-            <td><?php echo html::input('closedDate', formatTime($order->closedDate), "class='form-control form-datetime'");?></td>
+            <td><?php echo html::input('closedDate', $order->closedDate, "class='form-control form-datetime'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->order->activatedBy;?></th>
@@ -108,7 +108,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->order->activatedDate;?></th>
-            <td><?php echo html::input('activatedDate', formatTime($order->activatedDate), "class='form-control form-datetime'");?></td>
+            <td><?php echo html::input('activatedDate', $order->activatedDate, "class='form-control form-datetime'");?></td>
           </tr>
         </table>
       </div>

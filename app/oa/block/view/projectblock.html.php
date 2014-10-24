@@ -15,7 +15,7 @@
   <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn text-center' data-id={$this->get->entry}" : "class='text-center'"?>
   <tr data-url='<?php echo $this->createLink('oa.task', 'browse', "projectID=$id"); ?>' <?php echo $appid?>>
     <td class='text-left'><?php echo $project->name;?></td>
-    <td class='w-160px'><?php echo formatTime($project->begin) . ' ~ ' . formatTime($project->end);?></td>
+    <td class='w-160px'><?php echo $project->begin . ' ~ ' . $project->end;?></td>
   </tr>
   <?php endforeach;?>
 </table>

@@ -17,5 +17,4 @@
 .card-depositor > .card-heading.bank {background: #E5F9FF;}
 .card-depositor > .card-heading.bank > .info > .label {background: #39B3D7;}
 
-.balanceBox{ font-size:16px; padding-top:20px; font-weight:600;}
-.balanceBox a:hover{text-decoration: none;} 
+.label-balance{ position:absolute; right:20px; bottom:60px; font-size:16px; font-weight:600;}

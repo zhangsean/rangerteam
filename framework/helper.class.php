@@ -711,18 +711,6 @@ function formatMoney($money)
 }
 
 /**
- * Format Hours.
- * 
- * @param  int    $hours 
- * @access public
- * @return string
- */
-function formatHours($hours)
-{
-    return trim(preg_replace('/\.0*$/', '', $hours));
-}
-
-/**
  * Format time.
  * 
  * @param  int    $time 

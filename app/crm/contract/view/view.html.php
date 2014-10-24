@@ -72,11 +72,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->contract->begin;?></th>
-          <td><?php echo formatTime($contract->begin);?></td>
+          <td><?php echo $contract->begin;?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->end;?></th>
-          <td><?php echo formatTime($contract->end);?></td>
+          <td><?php echo $contract->end;?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->handlers;?></th>
