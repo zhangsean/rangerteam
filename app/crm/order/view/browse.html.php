@@ -57,13 +57,7 @@
       <tr>
         <td class='text-middle' colspan='4'>
           <div class='text-danger'>
-            <?php
-            foreach($totalAmount as $currency => $amount)
-            {
-                if($amount['plan'] == 0 and $amount['real'] == 0) continue;
-                printf($lang->order->totalAmount, $currencyList[$currency], $amount['plan'], $amount['real']);
-            }
-            ?>
+            <?php printf($lang->order->totalAmount, implode('，', $totalAmount['plan']), implode('，', $totalAmount['real']));?>
           </div>
         </td>
         <td colspan='8'><?php $pager->show();?></td>

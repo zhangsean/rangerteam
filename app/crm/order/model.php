@@ -436,19 +436,25 @@ class orderModel extends model
     {
         $totalAmount  = array();
         $currencyList = $this->loadModel('order')->setCurrencyList();
-        foreach($currencyList as $key => $currency)
+        $currencySign = $this->loadModel('order')->setCurrencySign();
+
+        foreach($orders as $order)
         {
-            $totalAmount[$key]['plan']  = 0;
-            $totalAmount[$key]['real'] = 0;
-            foreach($orders as $order)
+            foreach($currencyList as $key => $currency)
             {
                 if($order->currency == $key)
                 {
-                        $totalAmount[$key]['plan'] += $order->plan;
-                        $totalAmount[$key]['real'] += $order->real;
+                   if(!isset($totalAmount['plan'][$key])) $totalAmount['plan'][$key] = 0;
+                   if(!isset($totalAmount['real'][$key])) $totalAmount['real'][$key] = 0;
+
+                    $totalAmount['plan'][$key] += $order->plan;
+                    $totalAmount['real'][$key] += $order->real;
                 }
-            } 
+            }
         }
+
+        foreach($totalAmount as $type => $currencyAmount) foreach($currencyAmount as $currency => $amount) $totalAmount[$type][$currency] = $currencySign[$currency] . $amount;
+
         return $totalAmount;
     }
 }
