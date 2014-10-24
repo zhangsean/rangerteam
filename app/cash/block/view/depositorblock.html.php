@@ -14,8 +14,9 @@
   <?php foreach($depositors as $id => $depositor):?>
   <?php $provider = $depositor->type == 'bank' ? $depositor->provider : $lang->depositor->providerList[$depositor->provider] ?>
   <tr>
+     <td> <?php echo $depositor->title;?></td>
      <td> <?php echo $depositor->account;?></td>
-     <td class='w-160px text-muted'><?php echo $provider;?> </td>
+     <td class='w-160px'><?php echo $provider;?> </td>
   </tr>
   <?php endforeach;?>
 </table>
