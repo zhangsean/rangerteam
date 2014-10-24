@@ -23,16 +23,12 @@ class contactModel extends model
         $customerIdList = $this->loadModel('customer')->getMine();
         if(empty($customerIdList)) return null;
 
-        $contact = $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join')->from(TABLE_CONTACT)->alias('t1')
+        return $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.id')->eq($id)
             ->andWhere('t2.customer')->in($customerIdList)
             ->limit(1)
             ->fetch();
-
-        $this->formatContact($contact);
-
-        return $contact;
     }
 
     /**
