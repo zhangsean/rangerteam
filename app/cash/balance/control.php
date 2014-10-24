@@ -42,6 +42,8 @@ class balance extends control
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->currencyList  = $this->loadModel('order', 'crm')->setCurrencyList();
 
+        if($depositor) $this->view->subtitle      = $this->view->depositorList[$depositor];
+
         $this->display();
     }   
 
@@ -67,8 +69,8 @@ class balance extends control
         $this->view->title            = $this->lang->balance->create;
         $this->view->currentDepositor = $depositor;
         $this->view->depositorList    = $this->loadModel('depositor')->getList();
-        $this->view->subtitle         = $this->view->depositorList[$depositor]->title;
         $this->view->currencyList     = $this->loadModel('order', 'crm')->setCurrencyList();
+
         $this->display();
     }
 

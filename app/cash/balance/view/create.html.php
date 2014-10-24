@@ -14,7 +14,7 @@
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('currencyList', $currencyList);?>
-<form method='post' action='<?php echo $this->createLink('balance', 'create')?>' id='ajaxForm'>
+<form method='post' action='<?php echo $this->createLink('balance', 'create')?>' id='balanceForm'>
   <table class='table table-form w-p60'>
    <tr>
       <th class='w-70px'><?php echo $lang->balance->depositor;?></th>
