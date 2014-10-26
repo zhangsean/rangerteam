@@ -65,6 +65,7 @@ class task extends control
         $this->view->pager     = $pager;
         $this->view->mode      = $mode;
         $this->view->orderBy   = $orderBy;
+        $this->view->project   = $project;
         $this->view->projectID = $projectID;
         $this->view->projects  = $this->loadModel('project')->getPairs();
         $this->view->users     = $this->loadModel('project')->getMemberPairs($projectID);
@@ -145,7 +146,7 @@ class task extends control
                 if($changes) $this->action->logHistory($actionID, $changes);
             }
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "taskID=$taskID")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
         $this->view->title     = $this->lang->task->edit;

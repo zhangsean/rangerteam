@@ -7,4 +7,6 @@ $(function()
         $('form .pri.active').removeClass('active');
         $('form #pri').val($(this).addClass('active').data('value'));
     });
+
+    $('#groupButton').html($('#groupButton').next().find('.active a').html())
 })

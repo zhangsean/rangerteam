@@ -24,7 +24,8 @@ $lang->task->close    = '关闭任务';
 $lang->task->assignTo = '指派任务';
 $lang->task->delete   = '删除任务';
 
-$lang->task->batchCreate = '批量添加';
+$lang->task->batchCreate    = '批量添加';
+$lang->task->backToProjects = '返回项目列表'; 
 
 $lang->task->id             = '编号';
 $lang->task->project        = '所属项目';

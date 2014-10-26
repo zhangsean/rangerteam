@@ -16,14 +16,8 @@
 <div class='with-menu page-content'>
   <div class='panel'>
     <div class='panel-heading'>
-      <!-- <strong><i class='icon-list-ul icon'> </i><?php echo $lang->task->browse;?></strong> -->
-      <div class='panel-actions'>
-        <div class="btn-group">
-        <?php echo html::a($this->inlink('browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $lang->task->list, "class='btn active'"); ?>
-        <?php echo html::a($this->inlink('kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $lang->task->kanban, "class='btn'"); ?>
-        <?php echo html::a($this->inlink('outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $lang->task->outline, "class='btn'"); ?>
-        </div>
-      </div>
+      <strong><?php echo $project->name;?></strong>
+      <?php include 'headernav.html.php';?>
       <div class='panel-actions pull-right'><?php echo html::a($this->inlink('batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?></div>
     </div>
     <table class='table table-hover table-striped tablesorter table-data' id='taskList'>

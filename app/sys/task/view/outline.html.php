@@ -15,32 +15,11 @@
   <div class='panel'>
     <div class='panel-heading'>
       <strong><?php echo $project->name; ?></strong>
-      <div class='panel-actions'>
-        <div class='btn-group'>
-          <?php echo html::a($this->inlink('browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $lang->task->list, "class='btn'"); ?>
-          <?php echo html::a($this->inlink('kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $lang->task->kanban, "class='btn'"); ?>
-          <?php echo html::a($this->inlink('outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $lang->task->outline, "class='btn active'"); ?>
-        </div>
-        <div class="btn-group">
-          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-          <i class='icon-cog'></i> <?php echo $lang->task->groups[$groupBy];?>
-            <icon class="icon-caret-down"></icon>
-          </button>
-          <ul class="dropdown-menu">
-          <?php foreach ($lang->task->groups as $key => $value):?>
-          <?php if(empty($key)) continue;?>
-            <?php $class = ($key == $groupBy) ? 'active' : '';?>
-            <li class='<?php echo $class;?>'>
-              <?php echo html::a($this->inlink('outline', "projectID=$projectID&groupBy=$key"), $value); ?>
-            </li>
-          <?php endforeach;?>
-          </ul>
-        </div>
-      </div>
+      <?php include 'headernav.html.php';?>
       <div class="panel-actions pull-right">
         <div class="btn-group">
-          <button class="btn" type="button" id="expandAll"><i class="icon-align-left"></i></button>
-          <button class="btn" type="button" id="collapseAll"><i class="icon-align-justify"></i></button>
+          <button class="btn" type="button" id="expandAll"><i class="icon-minus"></i></button>
+          <button class="btn" type="button" id="collapseAll"><i class="icon-plus"></i></button>
         </div>
         <?php echo html::a($this->inlink('batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?>
       </div>

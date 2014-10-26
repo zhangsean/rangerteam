@@ -15,3 +15,4 @@ form .pri {width: 48px;}
 
 #dropMenu {min-width: 200px;}
 #defaultMenu, #finishedMenu, #suspendMenu {min-width: 168px;}
+#groupBar{ margin:0 20px; }
