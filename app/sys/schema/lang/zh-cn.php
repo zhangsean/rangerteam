@@ -10,9 +10,11 @@
  * @link        http://www.ranzhi.org
  */
 $lang->schema->common   = '导入模板';
+$lang->schema->browse   = '模板列表';
 $lang->schema->view     = '查看模板';
 $lang->schema->create   = '创建模板';
 $lang->schema->edit     = '编辑模板';
+$lang->schema->delete   = '删除模板';
 $lang->schema->csvFile  = '模板文件';
 
 $lang->schema->name     = '模板名称';

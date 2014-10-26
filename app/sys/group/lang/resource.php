@@ -27,6 +27,7 @@ $lang->appModule->cash[] = 'trade';
 $lang->appModule->cash[] = 'depositor';
 $lang->appModule->cash[] = 'balance';
 $lang->appModule->cash[] = 'provider';
+$lang->appModule->cash[] = 'schema';
 
 $lang->appModule->oa = array();
 $lang->appModule->oa[] = 'project';
@@ -57,6 +58,7 @@ $lang->moduleOrder[30]  = 'trade';
 $lang->moduleOrder[35]  = 'depositor';
 $lang->moduleOrder[40]  = 'balance';
 $lang->moduleOrder[41]  = 'provider';
+$lang->moduleOrder[42]  = 'schema';
 
 $lang->moduleOrder[45]  = 'project';
 $lang->moduleOrder[50]  = 'announce';
@@ -266,6 +268,21 @@ $lang->provider->methodOrder[20] = 'view';
 $lang->provider->methodOrder[25] = 'delete';
 $lang->provider->methodOrder[30] = 'contact';
 $lang->provider->methodOrder[35] = 'linkContact';
+
+/* Schema. */
+$lang->resource->schema = new stdclass();
+$lang->resource->schema->browse = 'browse';
+$lang->resource->schema->view   = 'view';
+$lang->resource->schema->create = 'create';
+$lang->resource->schema->edit   = 'edit';
+$lang->resource->schema->delete = 'delete';
+
+$lang->schema->methodOrder[5]  = 'browse';
+$lang->schema->methodOrder[10] = 'create';
+$lang->schema->methodOrder[15] = 'edit';
+$lang->schema->methodOrder[20] = 'view';
+$lang->schema->methodOrder[25] = 'delete';
+
 
 /* Project. */
 $lang->resource->project = new stdclass();

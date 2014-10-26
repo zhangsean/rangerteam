@@ -10,9 +10,12 @@
  * @link        http://www.ranzhi.org
  */
 $lang->schema->common   = 'Schema';
-$lang->schema->create   = 'Create schema';
-$lang->schema->edit     = 'Edit schema';
-$lang->schema->csvFile  = 'Schema file';
+$lang->schema->browse   = 'Browse Schema';
+$lang->schema->view     = 'View Schema';
+$lang->schema->create   = 'Create Schema';
+$lang->schema->edit     = 'Edit Schema';
+$lang->schema->delete   = 'Delete Schema';
+$lang->schema->csvFile  = 'Schema File';
 
 $lang->schema->name     = 'Name';
 $lang->schema->feeRow   = 'Fee is a record';
