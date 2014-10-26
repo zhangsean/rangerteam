@@ -185,7 +185,7 @@ class taskModel extends model
                 ->add('editedDate', $now)
                 ->specialChars('name')
                 ->stripTags('desc', $this->config->allowedTags->admin)
-                ->remove('uid, files, labels')
+                ->remove('referer, uid, files, labels')
                 ->get();
         }
         $this->dao->update(TABLE_TASK)->data($task)

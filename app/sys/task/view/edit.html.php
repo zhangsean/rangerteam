@@ -42,6 +42,7 @@
             </div>
           </div>
           <?php echo $this->fetch('action', 'history', "objectType=task&objectID={$task->id}");?>
+          <?php echo html::hidden('referer', $this->server->http_referer);?>
           <div class='page-actions'><?php echo html::submitButton() . html::backButton();?></div>
         </div>
         <div class='col-md-4'>
