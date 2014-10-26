@@ -10,6 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 $lang->schema->common   = '导入模板';
+$lang->schema->view     = '查看模板';
 $lang->schema->create   = '创建模板';
 $lang->schema->edit     = '编辑模板';
 $lang->schema->csvFile  = '模板文件';

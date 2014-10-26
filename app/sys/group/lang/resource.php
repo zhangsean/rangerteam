@@ -284,6 +284,8 @@ $lang->project->methodOrder[20] = 'delete';
 /* Task. */
 $lang->resource->task = new stdclass();
 $lang->resource->task->browse      = 'browse';
+$lang->resource->task->kanban      = 'kanban';
+$lang->resource->task->outline     = 'outline';
 $lang->resource->task->create      = 'create';
 $lang->resource->task->batchCreate = 'batchCreate';
 $lang->resource->task->edit        = 'edit';

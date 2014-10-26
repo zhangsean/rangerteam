@@ -44,6 +44,43 @@ class schema extends control
     }
 
     /**
+     * View a schema.
+     * 
+     * @param  int    $schema 
+     * @access public
+     * @return void
+     */
+    public function view($schema)
+    {
+        $this->app->loadLang('trade', 'cash');
+        $schema = $this->schema->getByID($schema);
+        $reversedSchema = array();
+
+        /* Reverse schema to arrary with key like A,B,C,D...  */
+        foreach($schema as $field => $columns)
+        {
+            if(strpos('id,name', $field) !== false) continue;
+            if(strpos($columns, ',') !== false)
+            {
+                $columns = explode(',', $columns);
+                foreach($columns as $column) $reversedSchema[$column] = $field;
+            }
+            else
+            {
+               $reversedSchema[$columns] = $field; 
+            }
+        }
+
+        $this->view->title      = $this->lang->schema->view;
+        $this->view->subtitle   = $schema->name;
+        $this->view->modalWidth = 900;
+        $this->view->schema     = $reversedSchema;
+        $this->view->maxColumn  = max(array_keys($reversedSchema));
+
+        $this->display();
+    }
+
+    /**
      * create a schema. 
      * 
      * @access public

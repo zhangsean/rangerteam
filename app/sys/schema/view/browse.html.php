@@ -23,13 +23,7 @@
       <tr class='text-center'>
         <th class='w-70px'><?php  echo $lang->trade->id;?></th>
         <th class='text-left'><?php echo $lang->schema->name;?></th>
-        <th class='w-100px'><?php echo $lang->trade->category;?></th>
-        <th class='w-100px'><?php echo $lang->trade->trader;?></th>
-        <th class='w-100px'><?php echo $lang->trade->money;?></th>
-        <th class='w-120px'><?php echo $lang->trade->desc;?></th>
-        <th class='w-100px'><?php echo $lang->trade->date;?></th>
-        <th class='w-100px'><?php echo $lang->trade->fee;?></th>
-        <th class='w-120px'><?php echo $lang->actions;?></th>
+        <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody class='text-center'>
@@ -37,13 +31,8 @@
       <tr>
         <td><?php echo $schema->id;?></td>
         <td class='text-left'><?php echo $schema->name;?></td>
-        <td><?php echo $schema->category;?></td>
-        <td><?php echo $schema->trader;?></td>
-        <td><?php echo $schema->money;?></td>
-        <td><?php echo $schema->desc;?></td>
-        <td><?php echo $schema->date;?></td>
-        <td><?php echo $schema->fee;?></td>
         <td>
+          <?php echo html::a(inlink('view', "schema={$schema->id}"), $lang->schema->view, "data-toggle='modal'");?>
           <?php echo html::a(inlink('edit', "schemaID={$schema->id}"), $lang->edit);?>
           <?php echo html::a(inlink('delete', "schemaID={$schema->id}"), $lang->delete, "class='deleter'");?>
         </td>

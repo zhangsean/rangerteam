@@ -330,7 +330,8 @@ class projectModel extends model
         setCookie("lastProject", $projectID, $this->config->cookieLife, $this->config->webRoot);
         $currentProject = $this->getById($projectID);
 
-        $menu  = "<nav class='menu leftmenu affix taskMenu'><ul class='nav nav-stacked nav-primary'>";
+        $backButton = html::a(helper::createLink('project', 'index', "status={$currentProject->status}"), $this->lang->task->backToProjects, "class='btn' id='backButton'");
+        $menu  = "<nav class='menu leftmenu affix taskMenu'>" . $backButton . "<ul class='nav nav-stacked nav-primary'>";
         $menu .= "<li><a id='currentItem' href=\"javascript:showDropMenu('project', '$projectID', '$currentModule', '$currentMethod', '$extra')\">{$currentProject->name} <span class='icon-caret-down'></span></a><div id='dropMenu'></div></li>";
         $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), $this->lang->task->all);
         $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=createdBy"), $this->lang->task->createdByMe);
