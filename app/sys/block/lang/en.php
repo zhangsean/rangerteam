@@ -31,13 +31,13 @@ $lang->block->confirmRemoveBlock = 'Are you sure remove block [{0}] ?';
 
 $lang->block->default['oa']['1']['title'] = 'System Announcement';
 $lang->block->default['oa']['1']['block'] = 'announce';
-$lang->block->default['oa']['1']['grid']  = 3;
+$lang->block->default['oa']['1']['grid']  = 4;
 
 $lang->block->default['oa']['1']['params']['num'] = 15;
 
 $lang->block->default['oa']['2']['title'] = 'The task of assigned to me';
 $lang->block->default['oa']['2']['block'] = 'task';
-$lang->block->default['oa']['2']['grid']  = 3;
+$lang->block->default['oa']['2']['grid']  = 4;
 
 $lang->block->default['oa']['2']['params']['num']     = 15;
 $lang->block->default['oa']['2']['params']['orderBy'] = 'id_desc';
@@ -46,7 +46,7 @@ $lang->block->default['oa']['2']['params']['type']    = 'assignedTo';
 
 $lang->block->default['crm']['1']['title'] = 'My Order';
 $lang->block->default['crm']['1']['block'] = 'order';
-$lang->block->default['crm']['1']['grid']  = 3;
+$lang->block->default['crm']['1']['grid']  = 4;
 
 $lang->block->default['crm']['1']['params']['num']     = 15;
 $lang->block->default['crm']['1']['params']['orderBy'] = 'id_desc';
@@ -54,7 +54,7 @@ $lang->block->default['crm']['1']['params']['status']  = array();
 
 $lang->block->default['crm']['2']['title'] = 'My Contract';
 $lang->block->default['crm']['2']['block'] = 'contract';
-$lang->block->default['crm']['2']['grid']  = 3;
+$lang->block->default['crm']['2']['grid']  = 4;
 
 $lang->block->default['crm']['2']['params']['num']     = 15;
 $lang->block->default['crm']['2']['params']['orderBy'] = 'id_desc';
@@ -62,19 +62,19 @@ $lang->block->default['crm']['2']['params']['status']  = array();
 
 $lang->block->default['cash']['1']['title'] = 'Payment Depositor';
 $lang->block->default['cash']['1']['block'] = 'depositor';
-$lang->block->default['cash']['1']['grid']  = 3;
+$lang->block->default['cash']['1']['grid']  = 4;
 
 $lang->block->default['cash']['1']['params'] = array();
 
 $lang->block->default['team']['1']['title'] = 'Latest Blog';
 $lang->block->default['team']['1']['block'] = 'blog';
-$lang->block->default['team']['1']['grid']  = 3;
+$lang->block->default['team']['1']['grid']  = 4;
 
 $lang->block->default['team']['1']['params']['num'] = 15;
 
 $lang->block->default['team']['2']['title'] = 'Latest Thread';
 $lang->block->default['team']['2']['block'] = 'thread';
-$lang->block->default['team']['2']['grid']  = 3;
+$lang->block->default['team']['2']['grid']  = 4;
 
 $lang->block->default['team']['2']['params']['num'] = 15;
 

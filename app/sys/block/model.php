@@ -30,7 +30,7 @@ class blockModel extends model
             ->add('hidden', 0)
             ->setIF($type != 'system', 'block', $type)
             ->setIF($blockID, 'id', $blockID)
-            ->setDefault('grid', '3')
+            ->setDefault('grid', '4')
             ->setDefault('source', $appName)
             ->setDefault('params', array())
             ->get();
