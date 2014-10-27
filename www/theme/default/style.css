@@ -397,6 +397,7 @@ td #aliasLabel {display: table-row;}
 
 /* colors */
 .text-red, .text-error, .red {color: #d2322d}
+.text-strike, .text-strike:visited, .text-strike:hover {color: #999;text-decoration:line-through;}
 
 /* icons */
 .icon-border-circle {padding: 2px 8px;}

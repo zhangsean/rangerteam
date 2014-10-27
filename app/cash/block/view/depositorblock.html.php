@@ -10,13 +10,15 @@
  * @link        http://www.zentao.net
  */
 ?>
-<table class='table table-data table-hover table-fixed'>
+<div class='list items'>
   <?php foreach($depositors as $id => $depositor):?>
   <?php $provider = $depositor->type == 'bank' ? $depositor->provider : $lang->depositor->providerList[$depositor->provider] ?>
-  <tr>
-     <td> <?php echo $depositor->title;?></td>
-     <td> <?php echo $depositor->account;?></td>
-     <td class='w-160px'><?php echo $provider;?> </td>
-  </tr>
+  <div class='item'>
+     <strong class='item-heading'><?php echo $depositor->title;?></strong>
+     <div class='item-content'> 
+       <span><?php echo $depositor->account;?></span>
+       <span><?php echo $provider;?> </span>
+     </div>
+  </div>
   <?php endforeach;?>
-</table>
+</div>

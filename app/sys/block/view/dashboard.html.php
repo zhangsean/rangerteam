@@ -37,7 +37,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
           </div>
           <?php echo $block->title;?>
         </div>
-        <div class='panel-body no-padding'></div>
+        <div class='panel-body'></div>
       </div>
     </div>
     <?php endforeach;?>
