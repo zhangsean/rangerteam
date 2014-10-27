@@ -401,7 +401,7 @@ class contractModel extends model
 
         if($type == 'view') $menu .= "<div class='btn-group'>";
 
-        $menu .= html::a(helper::createLink('action', 'createRecord', "objectType=contract&objectID={$contract->id}&customer={$contract->customer}"), $this->lang->contract->record, "class='$class' data-toggle='modal'");
+        $menu .= html::a(helper::createLink('action', 'createRecord', "objectType=contract&objectID={$contract->id}&customer={$contract->customer}"), $this->lang->contract->record, "class='$class' data-toggle='modal' data-type='iframe'");
         if($contract->return == 'wait' and $contract->status == 'normal')
         {
             $menu .= html::a(helper::createLink('contract', 'receive',  "contract=$contract->id"), $this->lang->contract->return, "data-toggle='modal' class='$class'");
