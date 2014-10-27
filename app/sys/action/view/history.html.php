@@ -47,7 +47,7 @@
         <?php if($action->action == 'record'):?>
         <span class='link-button text-muted pull-right'>
         <?php 
-        $append = helper::isAjaxRequest() ? "class='loadInModal'" : "data-toggle='modal'";
+        $append = helper::isAjaxRequest() ? "class='loadInModal'" : "data-toggle='modal' data-type='ajax'";
         $from   = helper::isAjaxRequest() ? '&from=modal' : '';
         echo html::a($this->createLink('action', 'editRecord', "id={$action->id}{$from}"), '<i class="icon-edit"></i>', $append)
         ?>

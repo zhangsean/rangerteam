@@ -485,7 +485,7 @@ $.extend(
                 $this.on('click.modalTrigger.zui', function(event)
                 {
                     var $e   = $(this);
-                    if($e.closest('.body-modal').length) return;
+                    // if($e.closest('.body-modal').length) return; // disable modal open in a modal
 
                     if($e.hasClass('disabled')) return false;
 
@@ -745,7 +745,14 @@ $.extend(
             var dialog = $('#ajaxModal .modal-dialog');
             if(position)
             {
-               var half = Math.max(0, ($(window).height() - dialog.outerHeight())/2);
+               var $parent = dialog.closest('body.body-modal');
+               var parentHeight = null;
+               if($parent.length)
+               {
+                    var $parent = window.parent.$(window.parent);
+                    parentHeight = $parent.height();
+               }
+               var half = Math.max(0, (parentHeight || $(window).height() - dialog.outerHeight())/2);
                var pos = position == 'fit' ? (half*2/3) : (position == 'center' ? half : position);
                dialog.css('margin-top', pos);
             }

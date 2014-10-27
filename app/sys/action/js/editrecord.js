@@ -1,8 +1,8 @@
 $(document).ready(function()
 {
-    if(v.from == 'modal')
+    if($('body.body-modal').length) // if(v.from == 'modal')
     {
-        $.setAjaxForm('#editRecord',function() { $.reloadAjaxModal(0); });
+        $.setAjaxForm('#editRecord',function() { $.reloadIframeModal(); });
     }
     else
     {
