@@ -63,4 +63,9 @@ $(function()
     };
 
     resetBoards();
+
+    $(document).on('hidden.bs.modal', '#ajaxModal', function()
+    {
+        reloadDataTable();
+    });
 });
