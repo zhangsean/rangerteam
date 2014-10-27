@@ -16,22 +16,24 @@
     <tr>
       <th class='w-120px text-center alert v-middle'>
         <?php $class = $contact->maker ? "class='text-red'" : "";?>
+        <?php $class = $contact->left ? "class='text-muted'" : "";?>
         <span class='lead'><?php echo html::a($this->createLink('contact', 'view', "contactID=$contact->id"), $contact->realname, $class);?></span>
-        <?php if($contact->left):?>
-        <span ><i class='icon-lock text-muted'></i></span>
-        <?php endif;?>
         <div><?php echo $contact->dept . ' ' . $contact->title;?></div>
       </th>
       <td>
-        <div class='text-right'>
-          <i class='btn-vcard icon icon-qrcode icon-large text-info'> </i>
-        </div>
+        <div class='row'>
+        <div class='col-sm-10'>
         <div class='contact-info'>
           <?php if($contact->phone or $contact->mobile) echo "<div><i class='icon-phone-sign'></i> $contact->phone $contact->mobile</div>";?>
           <?php if($contact->qq) echo "<div class='f-14'><i class='icon-qq'></i> " . html::a("http://wpa.qq.com/msgrd?v=3&uin={$contact->qq}&site={$config->company->name}&menu=yes", $contact->qq, "target='_blank'") . "</div>";?>
           <?php if($contact->email) echo "<div class='f-14'><i class='icon-envelope-alt'></i> " . html::mailto($contact->email, $contact->email) . "</div>";?>
         </div>
         <p class='vcard text-center'><?php echo html::image(helper::createLink('contact', 'vcard', "contactID={$contact->id}"), "style='height:120px'");?></p>
+        </div>
+        <div class='col-sm-2'>
+        <div class='text-right'><i class='btn-vcard icon icon-qrcode icon-large'> </i></div>
+        </div>
+        </div>
       </td>
     </tr>
   </table>
