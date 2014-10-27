@@ -578,6 +578,15 @@ class tradeModel extends model
                 }
             } 
         }
-        return $totalMoney;
+
+        foreach($totalMoney as $currency => $money)
+        {
+            if($money['in'] == 0 and $money['out'] == 0) continue;
+            
+            if($money['in'] - $money['out'] > 0)  $profits = $this->lang->trade->profit . ($money['in'] - $money['out']);
+            if($money['in'] - $money['out'] < 0)  $profits = $this->lang->trade->loss . ($money['out'] - $money['in']);
+            if($money['in'] - $money['out'] == 0) $profits = $this->lang->trade->balance;
+            printf($this->lang->trade->totalAmount, $currencyList[$currency], $money['in'], $money['out'], $profits);
+        }
     }
 }

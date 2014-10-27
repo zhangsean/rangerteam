@@ -57,7 +57,6 @@ class trade extends control
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->currencySign  = $this->loadModel('order', 'crm')->setCurrencySign();
         $this->view->currencyList  = $this->loadModel('order', 'crm')->setCurrencyList();
-        $this->view->totalMoney    = $this->trade->countMoney($trades);
 
         $this->display();
     }   
