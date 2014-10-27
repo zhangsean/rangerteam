@@ -18,10 +18,9 @@
       <?php include 'headernav.html.php';?>
       <div class="panel-actions pull-right">
         <div class="btn-group">
-          <button class="btn" type="button" id="expandAll"><i class="icon-minus"></i></button>
-          <button class="btn" type="button" id="collapseAll"><i class="icon-plus"></i></button>
+          <button class="btn" type="button" id="toggleAll"><i class="icon-plus"></i></button>
         </div>
-        <?php echo html::a($this->inlink('batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?>
+        <?php echo html::a($this->inlink('batchCreate', "projectID=$projectID"), "<i class='icon-plus'></i> " . $lang->task->create, "class='btn btn-primary'");?>
       </div>
     </div>
     <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
@@ -106,15 +105,21 @@ $(function()
         $($this.data('target')).toggleClass('collapse', collapsed).toggleClass('in', !collapsed);
     });
 
-    $('#expandAll').click(function()
+    $('#toggleAll').click(function()
     {
-        $('#taskList .toggle-handle.collapsed').click();
+        $(this).find('i').toggleClass('icon-plus').toggleClass('icon-minus');
+
+        if($(this).find('i.icon-minus').size()) 
+        {
+            $('#taskList .toggle-handle.collapsed').click();
+        }
+        else
+        {
+            $('#taskList .toggle-handle').not('.collapsed').click();
+        }
     });
 
-    $('#collapseAll').click(function()
-    {
-        $('#taskList .toggle-handle:not(.collapsed)').click();
-    });
+    $('#toggleAll').click();
 });
 </script>
 <?php include $app->getModuleRoot() . 'common/view/footer.html.php';?>
