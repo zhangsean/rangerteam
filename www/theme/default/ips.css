@@ -99,7 +99,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 .window-head img {height: 18px; width: 18px; margin-right: 5px;}
 .window-head .icon.icon-default {width: 18px; height: 18px; display: inline-block; text-align: center; font-size: 12px; line-height: 18px;position: relative; top: -1px; color: #fff; border-radius: 3px; font-weight: normal;}
 .window-head .icon.icon-default .text-extra {display: none}
-.window-head  .icon {display: inline-block; margin-right: 5px;}
+.window-head .icon {display: inline-block; margin-right: 5px;}
 .window-head ul {display: block; margin: 0; padding: 0; position: absolute; right: 10px; top: 2px; overflow: hidden;}
 .window-head ul li {display: inline-block;}
 .window-head ul li button {display: block; color: #ccc; border-radius: 2px; padding: 2px 10px;}
@@ -113,7 +113,9 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 .window-control-full .window-head ul li button.close-win:hover {background-color: #dd1111; color: #fff;}
 
 .window-control-simple .window-head {position: absolute; height: 0; background:none; border-bottom: none; overflow: visible; width: 100%;}
-.window-control-simple .window-head > img, .window-control-simple .window-head > strong, .window-control-simple .window-head > .icon {display: none;}
+.window-control-simple .window-head > img,
+.window-control-simple .window-head > strong,
+.window-control-simple .window-head > .icon {display: none;}
 .window-control-simple .window-head > ul {position: absolute; right: 10px; top: 0px; z-index: 99999;}
 .window-control-simple .window-head ul li button {padding: 9px 10px 11px; border-radius: 0; font-size: 16px; line-height: 20px}
 .window-control-simple .window-head ul li button.close-win {padding:9px 10px 11px}
