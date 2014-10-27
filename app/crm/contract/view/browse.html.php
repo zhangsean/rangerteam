@@ -48,9 +48,11 @@
     <tfoot>
       <tr>
         <td class='text-middle' colspan='2'>
+          <?php if(isset($totalAmount)):?>
           <div class='text-danger'>
             <?php printf($lang->contract->totalAmount, implode('，', $totalAmount['contract']), implode('，', $totalAmount['return']));?>
           </div>
+          <?php endif;?>
         </td>
         <td colspan='7'><?php $pager->show();?></td>
       </tr>

@@ -66,7 +66,7 @@ class contract extends control
         $this->view->orderBy      = $orderBy;
         $this->view->currencySign = $this->loadModel('order')->setCurrencySign();
         $this->view->currencyList = $this->loadModel('order')->setCurrencyList();
-        $this->view->totalAmount  = $this->contract->countAmount($contracts);
+        if($contracts) $this->view->totalAmount  = $this->contract->countAmount($contracts);
 
         $this->display();
     }
