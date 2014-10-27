@@ -59,7 +59,7 @@ class task extends control
 
         $this->session->set('taskList', $this->app->getURI(true));
 
-        $this->view->title      = $this->lang->task->browse;
+        $this->view->title = $this->lang->task->browse;
         if($projectID) $this->view->title = $project->name . $this->lang->minus . $this->view->title;
 
         $this->view->tasks     = $this->task->getList($projectID, $mode, $orderBy, $pager);
@@ -416,67 +416,17 @@ class task extends control
             if($project->deleted) $this->locate($this->createLink('project'));
         }
 
-        /* Get tasks and group them. */
-        $tasks      = $this->task->getList($projectID);
-        $groupBy    = str_replace('`', '', $groupBy);
-        $groupTasks = array();
+        $tasks = $this->task->getList($projectID, $mode = null, $orderBy = 'id_desc', $pager = null, $groupBy);
+        $tasks = $this->task->fixTaskGroups($tasks, $groupBy); 
 
-        if($groupBy != 'status' and !empty($project->members))
-        {
-            foreach($project->members as $role => $memberList)
-            {
-                foreach($memberList as $member) $groupTasks[$member->account] = array();
-            }
-        }
-
-        if($groupBy == 'status')
-        {
-            foreach ($this->lang->task->statusList as $status => $statusName)
-            {
-                if(empty($status)) continue;
-                $groupTasks[$status] = array();
-            }
-        }
-
-        /* Get users. */
-        $users = $this->loadModel('user')->getPairs();
-    
-        foreach($tasks as $task)
-        {
-            if($groupBy == '' or $groupBy == 'status')
-            {
-                $groupTasks[$task->status][] = $task;
-            }
-            elseif($groupBy == 'assignedTo')
-            {
-                $groupTasks[$task->assignedTo][] = $task;
-            }
-            elseif($groupBy == 'createdBy')
-            {
-                $groupTasks[$task->createdBy][] = $task;
-            }
-            elseif($groupBy == 'finishedBy')
-            {
-                $groupTasks[$task->finishedBy][] = $task;
-            }
-            elseif($groupBy == 'closedBy')
-            {
-                $groupTasks[$task->closedBy][] = $task;
-            }
-            else
-            {
-                $groupTasks[$task->$groupBy][] = $task;
-            }
-        }
-
-        $this->view->tasks       = $groupTasks;
+        $this->view->tasks       = $tasks;
         $this->view->groupBy     = $groupBy;
         $this->view->orderBy     = $groupBy;
         $this->view->projectID   = $projectID;
         $this->view->projects    = $this->project->getPairs();
         $this->view->project     = $project;
-        $this->view->users       = $users;
-        $this->view->colWidth    = 100/min(6, max(2, count($groupTasks)));
+        $this->view->users       = $this->loadModel('user')->getPairs();
+        $this->view->colWidth    = 100/min(6, max(2, count($tasks)));
         $this->display();
     }
 
@@ -498,48 +448,16 @@ class task extends control
         }
 
         /* Get tasks and group them. */
-        $tasks       = $this->task->getList($projectID, null, $orderBy);
-        $groupBy     = str_replace('`', '', $groupBy);
-        $taskLang    = $this->lang->task;
-        $groupTasks  = array();
+        $tasks = $this->task->getList($projectID, $mode = null, $orderBy = 'id_desc', $pager = null, $groupBy);
+        $tasks = $this->task->fixTaskGroups($tasks, $groupBy); 
 
-        /* Get users. */
-        $users = $this->loadModel('user')->getPairs();
-        foreach($tasks as $task)
-        {
-            if($groupBy == '' or $groupBy == 'status')
-            {
-                $groupTasks[$taskLang->statusList[$task->status]][] = $task;
-            }
-            elseif($groupBy == 'assignedTo')
-            {
-                $groupTasks[$users[$task->assignedTo]][] = $task;
-            }
-            elseif($groupBy == 'createdBy')
-            {
-                $groupTasks[$users[$task->createdBy]][] = $task;
-            }
-            elseif($groupBy == 'finishedBy')
-            {
-                $groupTasks[$users[$task->finishedBy]][] = $task;
-            }
-            elseif($groupBy == 'closedBy')
-            {
-                $groupTasks[$users[$task->closedBy]][] = $task;
-            }
-            else
-            {
-                $groupTasks[$task->$groupBy][] = $task;
-            }
-        }
-
-        $this->view->tasks       = $groupTasks;
+        $this->view->tasks       = $tasks;
         $this->view->groupBy     = $groupBy;
         $this->view->orderBy     = $groupBy;
         $this->view->projectID   = $projectID;
         $this->view->projects    = $this->project->getPairs();
         $this->view->project     = $project;
-        $this->view->users       = $users;
+        $this->view->users       = $this->loadModel('user')->getPairs();
         $this->display();
     }
 }

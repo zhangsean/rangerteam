@@ -79,3 +79,8 @@ $lang->trade->importedFields['out']      = 'Expend';
 $lang->trade->importedFields['date']     = 'Date';
 $lang->trade->importedFields['desc']     = 'Desc';
 $lang->trade->importedFields['fee']      = 'Fee';
+
+$lang->trade->totalAmount = '%s: income %s, expend %s，%s；';
+$lang->trade->profit  = 'profit';
+$lang->trade->loss    = 'loss';
+$lang->trade->balance = 'Income is equal to expenditure';

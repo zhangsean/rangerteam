@@ -32,15 +32,17 @@ class taskModel extends model
     /**
      * Get task list.
      * 
-     * @param  int    $projectID 
-     * @param  string $orderBy 
-     * @param  object $pager 
+     * @param  int       $projectID 
+     * @param  string    $mode
+     * @param  string    $orderBy 
+     * @param  object    $pager 
+     * @param  string    $groupBy
      * @access public
      * @return array
      */
-    public function getList($projectID = 0, $mode = null, $orderBy = 'id_desc', $pager = null)
+    public function getList($projectID = 0, $mode = null, $orderBy = 'id_desc', $pager = null, $groupBy = 'id')
     {
-        return $this->dao->select('*')->from(TABLE_TASK)
+        $this->dao->select('*')->from(TABLE_TASK)
             ->where('deleted')->eq(0)
             ->beginIF($projectID)->andWhere('project')->eq($projectID)->fi()
             ->beginIF($mode == 'createdBy')->andWhere('createdBy')->eq($this->app->user->account)->fi()
@@ -48,9 +50,39 @@ class taskModel extends model
             ->beginIF($mode == 'closedBy')->andWhere('closedBy')->eq($this->app->user->account)->fi()
             ->beginIF($mode == 'untilToday')->andWhere('deadline')->eq(helper::today())->fi()
             ->beginIF($mode == 'expired')->andWhere('deadline')->ne('0000-00-00')->andWhere('deadline')->lt(helper::today())->fi()
+            ->beginIF($groupBy == 'closedBy')->andWhere('status')->eq('closed')->fi()
+            ->beginIF($groupBy == 'finishedBy')->andWhere('finishedBy')->ne('')->fi()
             ->orderBy($orderBy)
-            ->page($pager)
-            ->fetchAll('id');
+            ->page($pager);
+        
+        if($groupBy == 'id') return $this->dao->fetchAll('id');
+        if($groupBy != 'id') return $this->dao->fetchGroup($groupBy);
+    }
+
+    /**
+     * Fix task groups.
+     * 
+     * @param  array    $tasks 
+     * @param  string   $groupBy 
+     * @access public
+     * @return void
+     */
+    public function fixTaskGroups($tasks, $groupBy)
+    {
+        if($groupBy == 'status')
+        {
+            foreach($this->lang->task->statusList as $status => $statusName) if(!empty($status) and !isset($tasks[$status])) $tasks[$status] = array();
+        }
+
+        if($groupBy != 'status' and !empty($project->members))
+        {
+            foreach($project->members as $role => $memberList)
+            {
+                foreach($memberList as $member) if(!isset($tasks[$member->account])) $tasks[$member->account] = array();
+            }
+        }
+
+        return $tasks;
     }
 
     /**

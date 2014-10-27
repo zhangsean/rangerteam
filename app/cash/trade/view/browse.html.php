@@ -28,10 +28,10 @@
     <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>
       <thead>
         <tr class='text-center'>
-          <th class='w-80px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->trade->id);?></th>
+          <th class='w-70px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->trade->id);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('depositor', $orderBy, $vars, $lang->trade->depositor);?></th>
           <th class='w-60px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->trade->type);?></th>
-          <th class='w-140px'><?php commonModel::printOrderLink('trader', $orderBy, $vars, $lang->trade->trader);?></th>
+          <th><?php commonModel::printOrderLink('trader', $orderBy, $vars, $lang->trade->trader);?></th>
           <th class='w-120px'><?php commonModel::printOrderLink('money', $orderBy, $vars, $lang->trade->money);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->trade->category);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('handlers', $orderBy, $vars, $lang->trade->handlers);?></th>
@@ -43,7 +43,7 @@
       <tbody>
         <?php foreach($trades as $trade):?>
         <tr class='text-center'>
-          <td class='text-center'>
+          <td class='text-left'>
           <label class='checkbox-inline'><input type='checkbox' name='tradeIDList[]' value='<?php echo $trade->id;?>'/><?php echo $trade->id;?></label>
           </td>
           <td><?php echo $depositorList[$trade->depositor];?></td>
@@ -65,7 +65,7 @@
       <tfoot>
         <tr>
           <td colspan='2'><?php echo html::selectAll() . html::selectReverse() . html::submitButton($lang->edit);?></td>
-          <td class='text-middle' colspan='3'>
+          <td class='text-middle' colspan='5'>
             <div class='text-danger'>
               <?php
               foreach($totalMoney as $currency => $money)
@@ -81,7 +81,7 @@
               ?>
             </div>
           </td>
-          <td colspan='6'><?php echo $pager->get();?></td>
+          <td colspan='4'><?php echo $pager->get();?></td>
         </tr>
       </tfoot>
     </table>

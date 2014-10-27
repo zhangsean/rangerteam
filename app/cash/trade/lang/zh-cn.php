@@ -80,7 +80,7 @@ $lang->trade->importedFields['date']     = '时间';
 $lang->trade->importedFields['desc']     = '备注';
 $lang->trade->importedFields['fee']      = '手续费';
 
-$lang->trade->totalAmount = '本页%s收入%s，支出%s，%s；';
+$lang->trade->totalAmount = '%s收入%s，支出%s，%s；';
 $lang->trade->profit  = '盈';
 $lang->trade->loss    = '亏';
 $lang->trade->balance = '收支平衡';

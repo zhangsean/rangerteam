@@ -49,7 +49,11 @@
         $groupSum      = count($groupTasks);
       ?>
         <tr class="heading toggle-handle" data-target='#taskList<?php echo ++$i;?>'>
-          <td colspan='4'>&nbsp;<i class='text-muted icon-caret-down toggle-icon'></i> &nbsp;<?php echo $groupKey;?> <?php echo ($groupSum > 0 ? ('(' . $groupSum . ')') : ''); ?></td>
+          <td colspan='4'>
+            &nbsp;<i class='text-muted icon-caret-down toggle-icon'></i> &nbsp;
+            <?php echo $groupBy == 'status' ? zget($lang->task->statusList, $groupKey) : zget($users, $groupKey) ;?>
+            <?php echo ($groupSum > 0 ? ('(' . $groupSum . ')') : ''); ?>
+          </td>
           <td colspan='5' class='text-right'></td>
         </tr>
         <tbody id='taskList<?php echo $i;?>'>
