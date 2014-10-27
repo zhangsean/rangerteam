@@ -433,6 +433,7 @@ class task extends control
         {
             foreach ($this->lang->task->statusList as $status => $statusName)
             {
+                if(empty($status)) continue;
                 $groupTasks[$status] = array();
             }
         }
