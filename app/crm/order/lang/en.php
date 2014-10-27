@@ -83,3 +83,5 @@ $lang->order->currencyList['sgd']  = 'Ssingapore Dollar';
 $lang->order->titleLBL  = "%s buy %s";
 $lang->order->basicInfo = "Basic";
 $lang->order->lifetime  = "Lifetime";
+
+$lang->order->totalAmount = 'The plan amount:%s,real amount:%s in this page;';

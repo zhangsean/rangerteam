@@ -24,7 +24,8 @@ $lang->task->close    = 'Close';
 $lang->task->assignTo = 'Assign to';
 $lang->task->delete   = 'Delete';
 
-$lang->task->batchCreate = 'Batch Create';
+$lang->task->batchCreate    = 'Batch Create';
+$lang->task->backToProjects = 'Back to project list'; 
 
 $lang->task->id             = 'ID';
 $lang->task->project        = 'Project';

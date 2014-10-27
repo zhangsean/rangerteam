@@ -26,7 +26,13 @@ $lang->setting->product = new stdClass();
 $lang->setting->product->fields['statusList'] = 'Product status';
 
 $lang->setting->customer = new stdClass();
-$lang->setting->customer->fields['typeList'] = 'Customer levels';
+$lang->setting->customer->fields['typeList']      = 'Customer type';
+$lang->setting->customer->fields['sizeNameList']  = 'Customer Size';
+$lang->setting->customer->fields['levelNameList'] = 'Customer Level';
+
+$lang->setting->order = new stdclass();
+$lang->setting->order->setCurrency            = 'Set used currency';
+$lang->setting->order->fields['currencyList'] = 'Currency list';
 
 $lang->setting->allLang     = 'For all language';
 $lang->setting->currentLang = 'For current language';
@@ -35,6 +41,6 @@ $lang->setting->placeholder = new stdclass();
 $lang->setting->placeholder->key   = 'Key';
 $lang->setting->placeholder->value = 'Translation';
 
-$lang->setting->placeholder->typeList  = 'Key should be 1~30 letters';
-$lang->setting->placeholder->sizeList  = 'Key should be interger between 0 and 255';
-$lang->setting->placeholder->levelList = 'Key should be 1~10 letters';
+$lang->setting->placeholder->typeList      = 'Key should be 1~30 letters';
+$lang->setting->placeholder->sizeNameList  = 'Key should be interger between 0 and 255';
+$lang->setting->placeholder->levelNameList = 'Key should be 1~10 letters';

@@ -78,3 +78,5 @@ $lang->contract->codeUnitList['input'] = 'Input';
 
 $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = 'Turnover';
+
+$lang->contract->totalAmount = 'The total amount:%s,returned amount:%s in this page;';

@@ -22,9 +22,6 @@ $lang->menu->cash->setting   = 'Settings|tree|browse|type=in|';
 
 /* Menu of depositor module. */
 $lang->depositor = new stdclass();
-$lang->depositor->menu = new stdclass();
-$lang->depositor->menu->browse = array('link' => 'Depositor List|depositor|browse|', 'alias' => 'create,edit,view');
-$lang->depositor->menu->balance = 'Balance|balance|browse|';
 
 /* Menu of trade module. */
 $lang->trade = new stdclass();

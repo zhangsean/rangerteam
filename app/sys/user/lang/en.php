@@ -136,8 +136,12 @@ $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i
 $lang->dept = new stdclass();  
 $lang->dept->common     = 'Dept';
 $lang->dept->name       = 'Dept Name';
+$lang->dept->alias      = 'Dept Alias';
 $lang->dept->edit       = 'Edit Dept';
+$lang->dept->parent     = 'Parent';
 $lang->dept->children   = 'Children';
+$lang->dept->desc       = 'Description';
+$lang->dept->keywords   = 'Keywords';
 $lang->dept->moderators = 'Moderator';
   
 $lang->user->roleList['']           = ''; 
