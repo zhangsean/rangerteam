@@ -32,7 +32,7 @@
     <?php if(empty($key)) continue;?>
       <?php $class = ($key == $groupBy) ? 'active' : '';?>
       <li class='<?php echo $class;?>'>
-        <?php echo html::a($this->inlink('kanban', "projectID=$projectID&groupBy=$key"), $value); ?>
+        <?php echo html::a($this->inlink($methodName, "projectID=$projectID&groupBy=$key"), $value); ?>
       </li>
     <?php endforeach;?>
     </ul>
