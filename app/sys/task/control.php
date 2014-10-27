@@ -114,7 +114,7 @@ class task extends control
             $this->loadModel('action');
             foreach($taskIDList as $taskID) $this->action->create('task', $taskID, 'Created');
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "projectID=$projectID")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer));
         }
 
         $this->view->projectID = $projectID;

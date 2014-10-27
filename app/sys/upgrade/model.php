@@ -76,6 +76,7 @@ class upgradeModel extends model
             case '1_1_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.1.beta'));
             case '1_2_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.2.beta'));
             case '1_3_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.3.beta'));
+            case '1_4_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.4.beta'));
         }
         return $confirmContent;
     }
@@ -408,7 +409,7 @@ class upgradeModel extends model
      */
     public function upgradeProjectMember()
     {
-        $projects = $this->loadModel('project')->getList();
+        $projects = $this->loadModel('project', 'oa')->getList();
         foreach($projects as $project)
         {
             $member = new stdclass();
