@@ -133,6 +133,7 @@ class customerModel extends model
         $this->dao->insert(TABLE_CUSTOMER)
             ->data($customer, $skip = 'uid,contact,email,qq,phone')
             ->autoCheck()
+            ->check('phone', 'length', 20, 7)
             ->batchCheck($this->config->customer->require->create, 'notempty')
             ->exec();
 
