@@ -12,7 +12,7 @@
 $lang->project->common     = 'Project';
 $lang->project->browse     = 'Projects List';
 $lang->project->index      = 'Projects';
-$lang->project->create     = "<i class='icon icon-plus'></i> Create Project";
+$lang->project->create     = "Create Project";
 $lang->project->edit       = 'Edit';
 $lang->project->finish     = 'Finish';
 $lang->project->delete     = 'Delete';
