@@ -746,13 +746,12 @@ $.extend(
             if(position)
             {
                var $parent = dialog.closest('body.body-modal');
-               var parentHeight = null;
+               var winHeight = $(window).height();
                if($parent.length)
                {
-                    var $parent = window.parent.$(window.parent);
-                    parentHeight = $parent.height();
+                    winHeight = Math.min(winHeight, window.parent.$(window.parent).height());
                }
-               var half = Math.max(0, (parentHeight || $(window).height() - dialog.outerHeight())/2);
+               var half = Math.max(0, (winHeight - dialog.outerHeight())/2);
                var pos = position == 'fit' ? (half*2/3) : (position == 'center' ? half : position);
                dialog.css('margin-top', pos);
             }
