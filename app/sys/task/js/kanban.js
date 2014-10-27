@@ -9,13 +9,15 @@ $(function()
                 var fromBoard = e.element.closest('.board'),
                     toBoard = e.target.closest('.board');
 
+                if(fromBoard.data('id') === toBoard.data('id')) return;
+
                 if(toBoard.data('group') == 'status')
                 {
-                    var button;
+                    var button = null;
                     if(toBoard.data('key') == 'done')   button = e.element.find('a[href*=finish]');
                     if(toBoard.data('key') == 'closed') button = e.element.find('a[href*=close]');
                     if(toBoard.data('key') == 'doing')  button = e.element.find('a[href*=start]');
-                    if(typeof(button) == 'undefined' || button.prop('disabled')) 
+                    if(!button || !button.length || button.prop('disabled')) 
                     {
                         messager.danger(v.notAllowed);
                         reloadDataTable();
