@@ -113,7 +113,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 .window-control-full .window-head ul li button.close-win:hover {background-color: #dd1111; color: #fff;}
 
 .window-control-simple .window-head {position: absolute; height: 0; background:none; border-bottom: none; overflow: visible; width: 100%;}
-.window-control-simple .window-head > img, .window-control-simple .window-head > strong, .window-control-simple .window-head > .icon.icon-default {display: none;}
+.window-control-simple .window-head > img, .window-control-simple .window-head > strong, .window-control-simple .window-head > .icon {display: none;}
 .window-control-simple .window-head > ul {position: absolute; right: 10px; top: 0px; z-index: 99999;}
 .window-control-simple .window-head ul li button {padding: 9px 10px 11px; border-radius: 0; font-size: 16px; line-height: 20px}
 .window-control-simple .window-head ul li button.close-win {padding:9px 10px 11px}
