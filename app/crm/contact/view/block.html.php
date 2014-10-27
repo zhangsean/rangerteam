@@ -16,7 +16,7 @@
     <tr>
       <th class='w-120px text-center alert v-middle'>
         <?php $class = $contact->maker ? "class='text-red'" : "";?>
-        <?php $class = $contact->left ? "class='text-muted'" : "";?>
+        <?php $class = $contact->left ? "class='text-strike'" : "";?>
         <span class='lead'><?php echo html::a($this->createLink('contact', 'view', "contactID=$contact->id"), $contact->realname, $class);?></span>
         <div><?php echo $contact->dept . ' ' . $contact->title;?></div>
       </th>

@@ -13,38 +13,10 @@
 <?php include '../../common/view/header.html.php'; ?>
 <div class='col-lg-8'>
   <div class='panel'>
-    <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php echo $lang->order->basicInfo;?></strong></div>
+    <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php printf($lang->order->titleLBL, $customer->name, $product->name); echo '(' . $lang->order->statusList[$order->status] . ')';?></strong></div>
     <div class='panel-body'>
       <?php $payed = $order->status == 'payed';?>
-      <table class='table table-info'>
-        <tr>
-          <th class='w-80px'><?php echo $lang->order->customer;?></th>
-          <td><?php echo html::a($this->createLink('customer', 'view', "customerID={$customer->id}"), $customer->name) . $lang->customer->levelNameList[$customer->level];?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->order->product;?></th>
-          <td><?php echo html::a($this->createLink('product', 'view', "productID={$product->id}"), $product->name);?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->order->currency;?></th>
-          <td><?php echo zget($currencyList, $order->currency, '');?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->order->plan;?></th>
-          <td><?php echo $order->plan;?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->order->real;?></th>
-          <td><?php echo $order->real;?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->order->assignedTo;?></th>
-          <td><?php echo zget($users, $order->assignedTo);?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->order->status;?></th>
-          <td><?php echo $lang->order->statusList[$order->status];?></td>
-        </tr>
+      <table class='table table-info w-p70'>
         <?php if($order->status == 'signed' and $contract):?>
         <tr>
           <th><?php echo $lang->contract->common;?></th>
@@ -54,10 +26,20 @@
         </tr>
         <?php endif;?>
         <tr>
-          <th><?php echo $lang->order->contactedDate;?></th>
-          <td><?php echo $order->contactedDate;?></td>
+          <th class='w-80px'><?php echo $lang->order->customer;?></th>
+          <td><?php echo html::a($this->createLink('customer', 'view', "customerID={$customer->id}"), $customer->name) . $lang->customer->levelNameList[$customer->level];?></td>
+          <th><?php echo $lang->order->product;?></th>
+          <td><?php echo html::a($this->createLink('product', 'view', "productID={$product->id}"), $product->name);?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->order->plan;?></th>
+          <td><?php echo zget($currencySign, $order->currency, '') . $order->plan;?></td>
+          <th><?php echo $lang->order->real;?></th>
+          <td><?php echo zget($currencySign, $order->currency, '') . $order->real;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->order->contactedDate;?></th>
+          <td><?php echo $order->contactedDate;?></td>
           <th><?php echo $lang->order->nextDate;?></th>
           <td><?php echo $order->nextDate;?></td>
         </tr>

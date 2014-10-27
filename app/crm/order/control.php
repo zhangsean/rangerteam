@@ -51,7 +51,7 @@ class order extends control
         $this->view->orderBy      = $orderBy;
         $this->view->currencySign = $this->order->setCurrencySign();
         $this->view->currencyList = $this->order->setCurrencyList();
-        $this->view->totalAmount  = $this->order->countAmount($orders);
+        if($orders) $this->view->totalAmount  = $this->order->countAmount($orders);
         $this->display();
     }
 
@@ -149,6 +149,7 @@ class order extends control
         $this->view->contract     = $this->order->getContract($orderID);
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->currencyList = $this->order->setCurrencyList();
+        $this->view->currencySign = $this->order->setCurrencySign();
     
         $this->display();
     }
