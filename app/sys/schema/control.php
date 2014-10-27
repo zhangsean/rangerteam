@@ -54,6 +54,12 @@ class schema extends control
     {
         $this->app->loadLang('trade', 'cash');
         $schema = $this->schema->getByID($schema);
+        if(strpos($schema->money, ',') !== false)
+        {
+           list($schema->in, $schema->out) = explode(',', $schema->money);
+           unset($schema->money);
+        }
+
         $reversedSchema = array();
 
         /* Reverse schema to arrary with key like A,B,C,D...  */
