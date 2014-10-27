@@ -525,7 +525,7 @@ class control
         $this->output .= ob_get_contents();
         ob_end_clean();
 
-        $this->output =  preg_replace('/\.(0)+(?!\d)/', '', $this->output);
+        $this->output =  preg_replace('/\.(0){1,}(?![.1-9])/', '', $this->output);
         $this->output =  str_replace('0000-00-00', '', $this->output);
         $this->output =  str_replace('00:00:00',   '', $this->output);
 
