@@ -15,6 +15,7 @@ $lang->next    = '›';
 $lang->laquo   = '&laquo;';
 $lang->raquo   = '&raquo;';
 $lang->minus   = ' - ';
+$lang->slash   = ' / ';
 $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->at      = ' 于 ';
@@ -240,6 +241,26 @@ $lang->pager->locate     = 'Go!';
 $lang->date = new stdclass();
 $lang->date->minute = '分鐘';
 $lang->date->day    = '天';
+
+/* Currency symbols setting. */
+$lang->currencySymbols['rmb']  = '￥';
+$lang->currencySymbols['usd']  = '$';
+$lang->currencySymbols['hkd']  = 'HK$';
+$lang->currencySymbols['twd']  = 'NT$';
+$lang->currencySymbols['euro'] = 'ECU';
+$lang->currencySymbols['dem']  = 'DM';
+$lang->currencySymbols['chf']  = 'SF';
+$lang->currencySymbols['frf']  = 'FF';
+$lang->currencySymbols['gbp']  = '￡';
+$lang->currencySymbols['nlg']  = 'F';
+$lang->currencySymbols['cad']  = 'CAN$';
+$lang->currencySymbols['sur']  = 'Rbs';
+$lang->currencySymbols['inr']  = 'Rs';
+$lang->currencySymbols['aud']  = 'A$';
+$lang->currencySymbols['nzd']  = 'NZ$';
+$lang->currencySymbols['thb']  = 'B';
+$lang->currencySymbols['sgd']  = 'S$';
+
 
 /* The datetime settings. */
 define('DT_DATETIME1',  'Y-m-d H:i:s');

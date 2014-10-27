@@ -24,7 +24,8 @@ $lang->task->close    = '關閉任務';
 $lang->task->assignTo = '指派任務';
 $lang->task->delete   = '刪除任務';
 
-$lang->task->batchCreate = '批量添加';
+$lang->task->batchCreate    = '批量添加';
+$lang->task->backToProjects = '返回項目列表'; 
 
 $lang->task->id             = '編號';
 $lang->task->project        = '所屬項目';
@@ -75,7 +76,8 @@ $lang->task->ditto          = '同上';
 $lang->task->confirmFinish  = '"預計剩餘"為0，確認將任務狀態改為"已完成"嗎？';
 $lang->task->consumedBefore = '之前消耗';
 
-$lang->task->lblPri = 'P';
+$lang->task->lblPri  = 'P';
+$lang->task->lblHour = '(h)';
 
 $lang->task->statusList['']       = ''; 
 $lang->task->statusList['wait']   = '未開始';
@@ -116,18 +118,19 @@ $lang->task->outline = '大綱';
 
 $lang->task->kanbanGroup['']           = '選擇分組';
 $lang->task->kanbanGroup['status']     = '狀態分組';
-$lang->task->kanbanGroup['assignedto'] = '指派給分組';
+$lang->task->kanbanGroup['assignedTo'] = '指派給分組';
 
 $lang->task->groups['']           = '選擇分組';
 $lang->task->groups['status']     = '狀態分組';
-$lang->task->groups['assignedto'] = '指派給分組';
-$lang->task->groups['createdby']  = '創建者分組';
-$lang->task->groups['finishedby'] = '完成者分組';
-$lang->task->groups['closedby']   = '關閉者分組';
+$lang->task->groups['assignedTo'] = '指派給分組';
+$lang->task->groups['createdBy']  = '創建者分組';
+$lang->task->groups['finishedBy'] = '完成者分組';
+$lang->task->groups['closedBy']   = '關閉者分組';
 
 $lang->task->unkown     = '未指定';
 $lang->task->unAssigned = '未指派';
 
 $lang->task->mindMoveTip = '只能將任務移動至二級節點下。';
+$lang->task->notAllowed  = '不允許這樣操作。';
 
-$lang->task->groupinfo = '總計 <strong class="group-total">%s</strong> 項 - <span class="text-danger">未開始 <strong class="group-wait">%s</strong></span> - <span class="text-warning">進行中 <strong class="group-doing">%s</strong></span> - <span class="text-success">已完成 <strong class="group-done">%s</strong></span> - <span class="text-muted">已關閉 <strong class="group-closed">%s</strong></span>';
+$lang->task->groupinfo = '總計 <strong class="group-total">%s</strong> 項 - <span class="text-warning">未開始 <strong class="group-wait">%s</strong></span> - <span class="text-danger">進行中 <strong class="group-doing">%s</strong></span> - <span class="text-success">已完成 <strong class="group-done">%s</strong></span> - <span class="text-muted">已關閉 <strong class="group-closed">%s</strong></span>';

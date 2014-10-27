@@ -14,27 +14,27 @@ $lang->app->name = 'CASH';
 
 $lang->menu->cash = new stdclass();
 $lang->menu->cash->dashboard = '我的地盤|dashboard|index|';
-$lang->menu->cash->trade     = '記賬|trade|index|';
+$lang->menu->cash->trade     = '記賬|trade|browse|';
 $lang->menu->cash->check     = '對賬|depositor|check|';
-$lang->menu->cash->depositor = '賬戶|depositor|index|';
-$lang->menu->cash->provider  = '供應商|provider|index|';
+$lang->menu->cash->depositor = '賬戶|depositor|browse|';
+$lang->menu->cash->provider  = '供應商|provider|browse|';
 $lang->menu->cash->setting   = '設置|tree|browse|type=in|';
 
 /* Menu of depositor module. */
 $lang->depositor = new stdclass();
-$lang->depositor->menu = new stdclass();
-$lang->depositor->menu->browse  = array('link' => '<i class="icon-th-list"></i> 帳號列表|depositor|browse|', 'alias' => 'create,edit,view');
-$lang->depositor->menu->balance = '<i class="icon-th-list"></i> 賬號餘額|balance|browse|';
 
 /* Menu of trade module. */
 $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
-$lang->trade->menu->browse   = array('link' => '<i class="icon-th-list"></i> 列表|trade|browse|', 'alias' => 'create,edit,view');
+$lang->trade->menu->browse   = array('link' => '所有賬目|trade|browse|mode=all');
+$lang->trade->menu->in       = array('link' => '收入|trade|browse|mode=in');
+$lang->trade->menu->out      = array('link' => '支出|trade|browse|mode=out');
+$lang->trade->menu->transfer = array('link' => '轉賬|trade|browse|mode=transfer');
 
 /* Menu of trade module. */
 $lang->provider = new stdclass();
 $lang->provider->menu = new stdclass();
-$lang->provider->menu->browse = array('link' => '<i class="icon-th-list"></i> 列表|provider|browse|', 'alias' => 'create,edit,view');
+$lang->provider->menu->browse = array('link' => '供應商列表|provider|browse|', 'alias' => 'create,edit,view');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

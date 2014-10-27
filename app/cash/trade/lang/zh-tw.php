@@ -12,8 +12,8 @@
 $lang->trade->common      = '記賬';
 $lang->trade->id          = '編號';
 $lang->trade->depositor   = '賬號';
-$lang->trade->type        = '交易類型';
-$lang->trade->currency    = '貨幣類型';
+$lang->trade->type        = '交易';
+$lang->trade->currency    = '貨幣';
 $lang->trade->trader      = '商戶';
 $lang->trade->customer    = '客戶';
 $lang->trade->money       = '金額';
@@ -79,3 +79,8 @@ $lang->trade->importedFields['out']      = '支出';
 $lang->trade->importedFields['date']     = '時間';
 $lang->trade->importedFields['desc']     = '備註';
 $lang->trade->importedFields['fee']      = '手續費';
+
+$lang->trade->totalAmount = '%s收入%s，支出%s，%s；';
+$lang->trade->profit  = '盈';
+$lang->trade->loss    = '虧';
+$lang->trade->balance = '收支平衡';

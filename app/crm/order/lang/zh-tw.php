@@ -37,7 +37,7 @@ $lang->order->closedNote     = '備註';
 $lang->order->activatedBy    = '由誰激活';
 $lang->order->activatedDate  = '激活時間';
 $lang->order->contactedBy    = '由誰聯繫';
-$lang->order->contactedDate  = '聯繫時間';
+$lang->order->contactedDate  = '最後聯繫';
 $lang->order->nextDate       = '下次聯繫';
 $lang->order->editedBy       = '最後修改';
 $lang->order->editedDate     = '最後修改日期';
@@ -80,24 +80,8 @@ $lang->order->currencyList['nzd']  = '新西蘭元';
 $lang->order->currencyList['thb']  = '泰國銖';
 $lang->order->currencyList['sgd']  = '新加坡元';
 
-$lang->order->currencySign['rmb']  = '￥';
-$lang->order->currencySign['usd']  = '$';
-$lang->order->currencySign['hkd']  = 'HK$';
-$lang->order->currencySign['twd']  = 'NT$';
-$lang->order->currencySign['euro'] = 'ECU';
-$lang->order->currencySign['dem']  = 'DM';
-$lang->order->currencySign['chf']  = 'SF';
-$lang->order->currencySign['frf']  = 'FF';
-$lang->order->currencySign['gbp']  = '￡';
-$lang->order->currencySign['nlg']  = 'F';
-$lang->order->currencySign['cad']  = 'CAN$';
-$lang->order->currencySign['sur']  = 'Rbs';
-$lang->order->currencySign['inr']  = 'Rs';
-$lang->order->currencySign['aud']  = 'A$';
-$lang->order->currencySign['nzd']  = 'NZ$';
-$lang->order->currencySign['thb']  = 'B';
-$lang->order->currencySign['sgd']  = 'S$';
-
-$lang->order->titleLBL  = "[%s] %s購買%s";
+$lang->order->titleLBL  = "%s購買%s";
 $lang->order->basicInfo = "基本信息";
 $lang->order->lifetime  = "訂單的一生";
+
+$lang->order->totalAmount = '本頁訂單計劃金額：%s，成交金額：%s；';

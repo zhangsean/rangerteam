@@ -15,8 +15,8 @@ $lang->app->name = 'OA';
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = '我的地盤|dashboard|index|';
 $lang->menu->oa->project   = '項目|project|index|';
-$lang->menu->oa->announce  = '公告|announce|index|';
-$lang->menu->oa->doc       = '文檔|doc|index|';
+$lang->menu->oa->announce  = '公告|announce|browse|';
+$lang->menu->oa->doc       = '文檔|doc|browse|';
 
 $lang->dashboard = new stdclass();
 
