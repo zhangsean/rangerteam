@@ -22,6 +22,7 @@ class task extends control
         parent::__construct();
         $this->lang->menuGroups->task = 'project';
     }
+
     /** 
      * The index page, locate to browse.
      * 
@@ -408,8 +409,6 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
-        /* Init status group */
-        if(empty($groupBy)) $groupBy = 'status';
         /* Check project deleted. */
         if($projectID)
         {

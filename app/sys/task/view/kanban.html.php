@@ -22,6 +22,7 @@
     <div class='panel-body boards-container'>
       <div class='boards task-boards clearfix' id='taskKanban'>
       <?php foreach($tasks as $groupKey => $groupTasks):?>
+        <?php if(empty($groupKey) and $groupBy == 'status') continue;?>
         <div class='board task-board' data-group='<?php echo $groupBy?>' data-key='<?php echo $groupKey;?>' style='width: <?php echo $colWidth?>%'>
           <div class='panel'>
             <div class='panel-heading'>
