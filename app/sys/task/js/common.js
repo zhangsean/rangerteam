@@ -8,5 +8,5 @@ $(function()
         $('form #pri').val($(this).addClass('active').data('value'));
     });
 
-    $('#groupButton').html($('#groupButton').next().find('.active a').html())
+    $('#groupButton').html($('#groupButton').next().find('.active a').html()).append(' <icon class="icon-caret-down"></icon>');
 })
