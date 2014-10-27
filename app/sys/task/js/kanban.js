@@ -11,6 +11,7 @@ $(function()
 
                 if(toBoard.data('group') == 'status')
                 {
+                    var button;
                     if(toBoard.data('key') == 'done')   button = e.element.find('a[href*=finish]');
                     if(toBoard.data('key') == 'closed') button = e.element.find('a[href*=close]');
                     if(toBoard.data('key') == 'doing')  button = e.element.find('a[href*=start]');
@@ -20,18 +21,18 @@ $(function()
                         reloadDataTable();
                     }
 
-                    return button.click();
+                    if(button) button.click();
+                    return;
                 }
 
                 if(toBoard.data('group') != 'status' && fromBoard.data('id') != toBoard.data('id'))
                 {
-                    // messager.show('Sending...');
                     var change = 
                     {
-                        field: toBoard.data('group'),
-                        id: e.element.data('id'),
-                        oldValue: fromBoard.data('key'),
-                        value: toBoard.data('key')
+                        field    : toBoard.data('group'),
+                        id       : e.element.data('id'),
+                        oldValue : fromBoard.data('key'),
+                        value    : toBoard.data('key')
                     }
                     
                     $.post(
