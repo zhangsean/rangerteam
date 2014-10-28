@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $.setAjaxForm('#createRecordForm', function(response) { if(response.result == 'success') $.reloadIframeModal(); });
+    $.setAjaxForm('#createRecordForm', function(response) { if(response.result == 'success') location.reload(); });
 
     $('[name*=objectType]').change(function()
     {

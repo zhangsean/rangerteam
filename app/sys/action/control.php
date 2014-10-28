@@ -16,16 +16,17 @@ class action extends control
      * 
      * @param  string    $objectType
      * @param  int       $objectID 
-     * @param  string    action
+     * @param  string    $action
      * @access public
      * @return void
      */
-    public function history($objectType, $objectID, $action = '')
+    public function history($objectType, $objectID, $action = '', $from = 'view')
     {
         $this->view->actions    = $this->loadModel('action')->getList($objectType, $objectID, $action);
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
         $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->from       = $from;
         $this->display();
     }
 
@@ -125,7 +126,7 @@ class action extends control
             $action = fixer::input('post')->get();
             $this->action->update($action, $recordID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer));
         }
 
         $this->view->title    = $this->lang->action->record->edit;

@@ -10,10 +10,11 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../../sys/common/view/header.modal.html.php';?>
+<?php include '../../../sys/common/view/header.lite.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php js::import($jsRoot . 'date.js');?>
 <?php js::set('customer', $customer);?>
+<div class='panel-body'>
 <form method='post' id='createRecordForm' action='<?php echo inlink('createrecord', "objectType={$objectType}&objectID={$objectID}")?>' class='form-inline'>
   <table class='table table-form'>
     <?php if($objectType != 'contact'):?>
@@ -87,6 +88,7 @@
       </td>
     </tr>
   </table>
-  <?php echo $this->fetch('action', 'history', "objectType={$objectType}&objectID={$objectID}&action=record");?>
+  <?php echo $this->fetch('action', 'history', "objectType={$objectType}&objectID={$objectID}&action=record&from=createRecord");?>
 </form>
+</div>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

@@ -10,7 +10,11 @@
  * @link        http://www.ranzhi.org
  */
 ?>
+<?php if(helper::isAjaxRequest()):?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
+<?php else:?>
+<?php include '../../../sys/common/view/header.lite.html.php';?>
+<?php endif;?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
@@ -34,7 +38,7 @@
     </tr>
     <tr>
       <th></th>
-      <td><?php echo html::submitButton();?></td>
+      <td><?php echo html::submitButton() . html::hidden('referer', $this->server->http_referer);?></td>
     </tr>
   </table>
 </form>

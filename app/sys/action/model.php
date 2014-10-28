@@ -446,7 +446,7 @@ class actionModel extends model
      */
     public function update($action, $actionID)
     {
-        $this->dao->update(TABLE_ACTION)->data($action)->autoCheck()->where('id')->eq($actionID)->exec();
+        $this->dao->update(TABLE_ACTION)->data($action, $skip = 'referer')->autoCheck()->where('id')->eq($actionID)->exec();
         return !dao::isError();
     }
 
