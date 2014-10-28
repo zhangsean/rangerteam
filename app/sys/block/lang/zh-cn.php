@@ -26,6 +26,7 @@ $lang->block->params->name  = '参数名称';
 $lang->block->params->value = '参数值';
 
 $lang->block->createBlock        = '添加区块';
+$lang->block->editBlock          = '编辑区块';
 $lang->block->ordersSaved        = '排序已保存';
 $lang->block->confirmRemoveBlock = '确定移除区块【{0}】吗？';
 

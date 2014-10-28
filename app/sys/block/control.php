@@ -20,6 +20,8 @@ class block extends control
      */
     public function admin($index = 0)
     {
+        $title = $index == 0 ? $this->lang->block->createBlock : $this->lang->block->editBlock;
+
         $entries = $this->dao->select('*')->from(TABLE_ENTRY)
             ->where('block')->ne('')
             ->orWhere('buildin')->eq(1)
@@ -39,7 +41,7 @@ class block extends control
         $this->view->entries    = $entries;
         $this->view->allEntries = $allEntries;
         $this->view->index      = $index;
-        $this->view->title      = $this->lang->block->createBlock;
+        $this->view->title      = $title;
         $this->display();
     }
 

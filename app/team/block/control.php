@@ -53,6 +53,9 @@ class block extends control
      */
     public function admin($index = 0, $blockID = '')
     {
+        $this->app->loadLang('block', 'sys');
+        $title = $index == 0 ? $this->lang->block->createBlock : $this->lang->block->editBlock;
+
         if(!$index) $index = $this->block->getLastKey('team') + 1;
 
         if($_POST)
@@ -62,15 +65,13 @@ class block extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
-        $this->app->loadLang('block', 'sys');
-
         $block   = $this->block->getBlock($index, 'team');
         $blockID = $blockID ? $blockID : ($block ? $block->block : '');
 
         $blocks = json_decode($this->block->getAvailableBlocks(), true);
         $this->view->blocks  = array_merge(array(''), $blocks);
 
-        $this->view->title   = $this->lang->block->admin;
+        $this->view->title   = $title;
         $this->view->params  = $blockID ? json_decode($this->block->{'get' . ucfirst($blockID) . 'Params'}(), true) : array();
         $this->view->blockID = $blockID;
         $this->view->block   = $block;

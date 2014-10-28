@@ -26,6 +26,7 @@ $lang->block->params->name  = 'Name';
 $lang->block->params->value = 'Value';
 
 $lang->block->createBlock        = 'Create Block';
+$lang->block->editBlock          = 'Edit Block';
 $lang->block->ordersSaved        = 'Sort have been saved';
 $lang->block->confirmRemoveBlock = 'Are you sure remove block [{0}] ?';
 
