@@ -17,28 +17,28 @@
 <form method='post' id='ajaxForm' action='<?php echo inlink('create')?>' class='form-inline'>
   <table class='table-form w-p90'>
     <tr>
-      <th class='w-80px'><?php echo $lang->project->name;?></th>
-      <td><div class='col-xs-7'><?php echo html::input('name', '', "class='form-control'");?></div></td>
+      <th class='w-70px'><?php echo $lang->project->name;?></th>
+      <td class='w-p60'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->manager;?></th>
-      <td><div class='col-xs-7'><?php echo html::select('manager', $users, $this->app->user->account, "class='form-control user-chosen'");?></div></td>
+      <td><?php echo html::select('manager', $users, $this->app->user->account, "class='form-control user-chosen'");?></td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->member;?></th>
-      <td><div class='col-xs-7'><?php echo html::select('member[]', $users, $this->app->user->account, "class='form-control user-chosen' multiple");?></div></td>
+      <td><?php echo html::select('member[]', $users, $this->app->user->account, "class='form-control user-chosen' multiple");?></td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->begin;?></th>
-      <td><div class='col-xs-7'><?php echo html::input('begin', '', "class='form-control form-date'");?> </div> </td>
+      <td><?php echo html::input('begin', '', "class='form-control form-date'");?></td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->end;?></th>
-      <td><div class='col-xs-7'><?php echo html::input('end', '', "class='form-control form-date'");?></div></td>
+      <td><?php echo html::input('end', '', "class='form-control form-date'");?></td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->desc;?></th>
-      <td><div class='col-xs-12'><?php echo html::textarea('desc', '', "class='form-control w-p100' rows='5'");?></div></td>
+      <td colspan='2'><?php echo html::textarea('desc', '', "class='form-control' rows='5'");?></td>
     </tr>
     <tr><th></th><td><?php echo html::submitButton();?></td></tr>
   </table>
