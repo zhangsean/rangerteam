@@ -1,5 +1,2 @@
 label{font-weight: normal; margin-right: 8px; vertical-align: middle;}
 label input[type='radio']{margin: 6px 2px 0 0;}
-
-body {opacity: 0; transition: opacity 0.3s;}
-body.body-modal {opacity: 1}
