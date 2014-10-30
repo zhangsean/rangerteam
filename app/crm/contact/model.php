@@ -181,6 +181,7 @@ class contactModel extends model
                 $customer->status      = $this->post->status;
                 $customer->level       = $this->post->level;
                 $customer->desc        = $contact->desc;
+                $customer->assignedTo  = $this->app->user->account;
                 $customer->createdBy   = $this->app->user->account;
                 $customer->createdDate = helper::now();
 
