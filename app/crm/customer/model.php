@@ -229,13 +229,13 @@ class customerModel extends model
     {
         $this->loadModel('action');
         $this->loadModel('contact');
-        if($this->post->newContact)
+        if(!$this->post->selectContact)
         {
             $contact = fixer::input('post')
                 ->add('customer', $customerID)
                 ->add('createdBy', $this->app->user->account)
                 ->add('createdDate', helper::now())
-                ->remove('newContact,contact')
+                ->remove('contact')
                 ->get();
 
             $contactID = $this->contact->create($contact);
