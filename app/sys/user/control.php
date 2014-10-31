@@ -406,10 +406,10 @@ class user extends control
      * set the referer 
      * 
      * @param  string $referer 
-     * @access private
+     * @access public
      * @return void
      */
-    private function setReferer($referer = '')
+    public function setReferer($referer = '')
     {
         if(!empty($referer))
         {
