@@ -232,7 +232,7 @@ class settingModel extends model
     //-------------------------------- methods for version and sn. ----------------------------//
    
     /**
-     * Get the version of current zentaopms.
+     * Get the version of current ranzhi.
      * 
      * Since the version field not saved in db. So if empty, return 1.1.
      *
@@ -279,5 +279,32 @@ class settingModel extends model
         }
 
         return $processedLang;
+    }
+
+    /**
+     * Set the sn of current ranzhi.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setSN()
+    {
+        $sn = $this->getItem('owner=system&module=common&section=global&key=sn');
+        if($this->snNeededUpdate($sn)) $this->setItem('system.common.global.sn', $this->computeSN());
+    }
+
+    /**
+     * Compute a SN. Use the server ip, and server software string as seed, and an rand number, two micro time
+     * 
+     * Note: this sn just to unique this ranzhi. No any private info. 
+     *
+     * @access public
+     * @return string
+     */
+    public function computeSN()
+    {
+        $seed = $this->server->SERVER_ADDR . $this->server->SERVER_SOFTWARE;
+        $sn   = md5(str_shuffle(md5($seed . mt_rand(0, 99999999) . microtime())) . microtime());
+        return $sn;
     }
 }
