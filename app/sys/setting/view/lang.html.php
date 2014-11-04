@@ -105,6 +105,4 @@ EOT;
 <?php js::set('module', $module)?>
 <?php js::set('field', $field)?>
 <?php js::set('valueplaceholder', $lang->setting->placeholder->value)?>
-<?php include '../../common/view/footer.lite.html.php';?>
-</body>
-</html>
+<?php include '../../common/view/footer.html.php';?>

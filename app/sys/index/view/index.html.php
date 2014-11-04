@@ -143,8 +143,4 @@ foreach ($lang->index->ips as $key => $value)
 
 <?php echo $allEntries;?>
 </script>
-<?php
-include "../../common/view/footer.lite.html.php";
-?>
-</body>
-</html>
+<?php include "../../common/view/footer.html.php"; ?>

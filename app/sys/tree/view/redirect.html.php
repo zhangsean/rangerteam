@@ -21,4 +21,4 @@
   </div>
 </div>
 </div>
-<?php include '../../common/view/footer.lite.html.php';?>
+<?php include '../../common/view/footer.html.php';?>

@@ -84,6 +84,4 @@ if($diffCol)
     </form>
   </div>
 </div>
-<?php include '../../common/view/footer.lite.html.php';?>
-</body>
-</html>
+<?php include '../../common/view/footer.html.php';?>
