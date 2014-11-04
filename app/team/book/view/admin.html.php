@@ -24,4 +24,4 @@ js::set('path', json_encode($path));
   </div>
   <div class='panel-body'><div class='books'><?php echo $catalog;?></div></div>
 </div>
-<?php include '../../common/view/footer.admin.html.php';?>
+<?php include '../../common/view/footer.html.php';?>
