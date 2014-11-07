@@ -21,12 +21,13 @@ class projectModel extends model
     public function getByID($projectID)
     {
         $project = $this->dao->select('*')->from(TABLE_PROJECT)->where('id')->eq($projectID)->fetch();
-        $project->members = $this->getMembers($projectID); 
+        $members = $this->getMembers($projectID); 
 
-        foreach($project->members as $role => $member)
+        if(isset($members['manager'])) $project->PM = $members['manager'][0]->account;
+        $project->members = array($project->PM);
+        foreach($members['member'] as $member)
         {
-            if($role != 'manager') continue;
-            if($role == 'manager') $project->PM = $member[0]->account;
+            $project->members[] = $member->account;   
         }
 
         return $project;

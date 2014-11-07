@@ -22,11 +22,11 @@
     </tr>
     <tr>
       <th><?php echo $lang->project->manager;?></th>
-      <td><?php echo html::select('manager', $users, $this->app->user->account, "class='form-control user-chosen'");?></td><td></td>
+      <td><?php echo html::select('manager', $users, $project->PM, "class='form-control user-chosen'");?></td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->member;?></th>
-      <td><?php echo html::select('member[]', $users, $this->app->user->account, "class='form-control user-chosen' multiple");?></td><td></td>
+      <td><?php echo html::select('member[]', $users, $project->members, "class='form-control user-chosen' multiple");?></td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->begin;?></th>
