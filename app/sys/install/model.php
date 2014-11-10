@@ -335,7 +335,6 @@ EOT;
         /* Remove all entries. */
         $this->dao->delete('*')->from(TABLE_ENTRY)->exec();
 
-        /* Add new entry. */
         /* Add crm. */
         $entry = new stdclass();
         $entry->name     = $this->lang->install->buildinEntry->crm['name'];

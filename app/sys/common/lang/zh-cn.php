@@ -186,7 +186,7 @@ $lang->entry->menu->create = '添加应用|entry|create|';
 /* Menu system. */
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
-$lang->system->menu->main = array('link' => '发信|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->system->menu->mail = array('link' => '发信|mail|admin|', 'alias' => 'detect,edit,save,test');
 //$lang->system->menu->backup = '备份|admin|backup|';
 
 $lang->article = new stdclass();

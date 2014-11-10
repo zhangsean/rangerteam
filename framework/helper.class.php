@@ -173,7 +173,7 @@ class helper
             if(is_dir($modelExtPath ) and filemtime($modelExtPath)  > $lastTime) break;
             if(is_dir($modelHookPath) and filemtime($modelHookPath) > $lastTime) break;
 
-            if(filemtime($mainModelFile) > $lastTime) break;
+            if(file_exists($mainModelFile)) if(filemtime($mainModelFile) > $lastTime) break;
 
             return $mergedModelFile;
         }
