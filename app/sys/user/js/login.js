@@ -8,7 +8,7 @@ $('#submit').click(function()
     {
         type: "POST",
         data:"account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()),
-        url:loginURL,
+        url:$('#ajaxForm').attr('action'),
         dataType:'json',
         success:function(data)
         {
