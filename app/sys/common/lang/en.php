@@ -186,7 +186,7 @@ $lang->entry->menu->create = array('link' => 'Create|entry|create|');
 /* Menu system. */
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
-$lang->system->menu->main = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->system->menu->mail = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
 //$lang->system->menu->backup = '备份|admin|backup|';
 
 $lang->article = new stdclass();
