@@ -13,12 +13,12 @@ $(document).ready(function()
         {
             $(this).parents('.input-group').find('select').hide();
             $('#trader_chosen').hide();
-            $(this).parents('.input-group').find('input[type=text][id=traderName]').show().focus();
+            $(this).parents('.input-group').find('input[type=text][id*=traderName]').show().focus();
         }
         else
         {
             $('#trader_chosen').show();
-            $(this).parents('.input-group').find('input[type=text][id=traderName]').hide();
+            $(this).parents('.input-group').find('input[type=text][id*=traderName]').hide();
         }
     })
 
