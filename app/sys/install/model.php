@@ -343,7 +343,7 @@ EOT;
         $entry->open     = 'iframe';
         $entry->key      = 'epet8b8ae1g89rxzquf4ubv37ul5tite';
         $entry->ip       = '*';
-        $entry->logo     = $this->config->webRoot . 'theme/default/images/ips/app-crm.png';
+        $entry->logo     = 'theme/default/images/ips/app-crm.png';
         $entry->login    = '../crm';
         $entry->control  = 'simple';
         $entry->size     = 'max';
@@ -360,7 +360,7 @@ EOT;
         $entry->abbr  = $this->lang->install->buildinEntry->cash['abbr'];
         $entry->code  = 'cash';
         $entry->key   = '438d85f2c2b04372662c63ebfb1c4c2f';
-        $entry->logo  = $this->config->webRoot . 'theme/default/images/ips/app-cash.png';
+        $entry->logo  = 'theme/default/images/ips/app-cash.png';
         $entry->login = '../cash';
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
@@ -370,7 +370,7 @@ EOT;
         $entry->abbr  = $this->lang->install->buildinEntry->oa['abbr'];
         $entry->code  = 'oa';
         $entry->key   = '1a673c4c3c85fadcf0333e0a4596d220';
-        $entry->logo  = $this->config->webRoot . 'theme/default/images/ips/app-oa.png';
+        $entry->logo  = 'theme/default/images/ips/app-oa.png';
         $entry->login = '../oa';
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
@@ -380,7 +380,7 @@ EOT;
         $entry->abbr  = $this->lang->install->buildinEntry->team['abbr'];
         $entry->code  = 'team';
         $entry->key   = '6c46d9fe76a1afa1cd61f946f1072d1e';
-        $entry->logo  = $this->config->webRoot . 'theme/default/images/ips/app-team.png';
+        $entry->logo  = 'theme/default/images/ips/app-team.png';
         $entry->login = '../team';
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();

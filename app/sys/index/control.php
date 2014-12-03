@@ -51,7 +51,7 @@ class index extends control
                 open:     '$entry->open', 
                 desc:     '$entry->name',
                 size:     $size,
-                icon:     '$logo',
+                icon:     '{$this->config->webRoot}{$logo}',
                 control:  '$entry->control',
                 position: '$entry->position',
                 menu:     '$menu',

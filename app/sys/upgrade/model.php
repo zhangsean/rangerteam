@@ -53,6 +53,8 @@ class upgradeModel extends model
 
                 /* Exec sqls must after fix data. */
                 $this->execSQL($this->getUpgradeFile('1.4.beta'));
+            case '1_5_beta':
+                $this->upgradeEntryLogo();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -440,6 +442,18 @@ class upgradeModel extends model
             }
 
             return true;
+        }
+    }
+
+    /* change logo path to relative path. */
+    public function upgradeEntryLogo()
+    {
+        $entryList = array('crm', 'cash', 'oa', 'team');
+        foreach($entryList as $entry)
+        {
+            $entryObj = $this->dao->select('*')->from(TABLE_ENTRY)->where('code')->eq($entry)->fetch();
+            $path     = substr($entryObj->logo, strpos($entryObj->logo, 'theme'));
+            $this->dao->update(TABLE_ENTRY)->set('logo')->eq($path)->where('code')->eq($entry)->exec();
         }
     }
 }

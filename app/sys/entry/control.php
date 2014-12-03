@@ -19,10 +19,14 @@ class entry extends control
      */
     public function admin()
     {
+        /* process entry logo path. */
+        $entries = $this->entry->getEntries();
+        foreach($entries as $entry) $entry->logo = $this->config->webRoot . $entry->logo;
+        
         $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->admin;
         $this->view->position[] = $this->lang->entry->common;
         $this->view->position[] = $this->lang->entry->admin;
-        $this->view->entries    = $this->entry->getEntries();
+        $this->view->entries    = $entries;
         $this->display();
     }
 
