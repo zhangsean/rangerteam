@@ -10,4 +10,34 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../../sys/article/view/create.html.php';?>
+<?php include '../../../sys/common/view/header.html.php';?>
+<?php include '../../../sys/common/view/kindeditor.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
+<?php js::set('type', $type);?>
+<?php js::set('categoryID', $currentCategory);?>
+<div class='panel'>
+  <div class='panel-heading'><strong><i class='icon-plus'></i>&nbsp;<?php echo $lang->{$type}->create;?></strong></div>
+  <div class='panel-body'>
+    <form method='post' role='form' id='ajaxForm'>
+      <table class='table table-form'>
+        <tr>
+          <th class='w-100px'><?php echo $lang->article->category;?></th>
+          <td class='w-p40'><?php echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");?></td><td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->article->title;?></th>
+          <td colspan='2'><?php echo html::input('title', '', "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->article->content;?></th>
+          <td colspan='2'><?php echo html::textarea('content', '', "rows='20' class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td colspan='2'><?php echo html::submitButton() . html::commonButton($lang->article->createDraft, "btn btn-default draft") . html::hidden('type', $type);?></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+<?php include '../../../sys/common/view/footer.html.php';?>
