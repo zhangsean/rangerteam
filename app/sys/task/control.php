@@ -421,7 +421,7 @@ class task extends control
 
         $this->view->tasks       = $tasks;
         $this->view->groupBy     = $groupBy;
-        $this->view->orderBy     = $groupBy;
+        $this->view->orderBy     = $orderBy;
         $this->view->projectID   = $projectID;
         $this->view->projects    = $this->project->getPairs();
         $this->view->project     = $project;
