@@ -25,9 +25,12 @@ class projectModel extends model
 
         if(isset($members['manager'])) $project->PM = $members['manager'][0]->account;
         $project->members = array($project->PM);
-        foreach($members['member'] as $member)
+        if(isset($members['member']))
         {
-            $project->members[] = $member->account;   
+            foreach($members['member'] as $member)
+            {
+                $project->members[] = $member->account;   
+            }
         }
 
         return $project;
