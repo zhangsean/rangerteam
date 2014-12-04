@@ -13,8 +13,8 @@
 <?php $lang->task->browse = $lang->task->list;?>
 <div id='groupBar' class='panel-actions'>
   <div class="btn-group">
-    <a href='javascript:;' class='w-100px btn dropdown-toggle' id='groupButton' data-toggle='dropdown'></a>
-    <ul class="dropdown-menu w-100px">
+    <a href='javascript:;' class='dropdown-toggle' id='groupButton' data-toggle='dropdown'></a>
+    <ul class="dropdown-menu">
       <li <?php if($methodName == 'browse') echo "class='active'";?>><?php echo html::a($this->inlink('browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $lang->task->list); ?></li>
       <li <?php if($methodName == 'kanban') echo "class='active'";?>><?php echo html::a($this->inlink('kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $lang->task->kanban); ?></li>
       <li <?php if($methodName == 'outline') echo "class='active'";?>><?php echo html::a($this->inlink('outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $lang->task->outline); ?></li>
@@ -22,7 +22,7 @@
   </div>
   <?php if($methodName != 'browse'):?>
   <div class="btn-group">
-    <a class="dropdown-toggle btn" data-toggle="dropdown">
+    <a href='javascript:;' class="dropdown-toggle" data-toggle="dropdown">
     <i class='icon-flag'></i>
  <?php echo $lang->task->groups[$groupBy];?>
       <icon class="icon-caret-down"></icon>
@@ -36,6 +36,11 @@
       </li>
     <?php endforeach;?>
     </ul>
+  </div>
+  <?php endif;?>
+  <?php if($methodName == 'outline'):?>
+  <div class="btn-group">
+    <a href='javascript:;' id="toggleAll"><i class="icon-plus"></i></a>
   </div>
   <?php endif;?>
 </div>

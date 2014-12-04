@@ -17,9 +17,6 @@
       <strong><?php echo $project->name; ?></strong>
       <?php include 'headernav.html.php';?>
       <div class="panel-actions pull-right">
-        <div class="btn-group">
-          <button class="btn" type="button" id="toggleAll"><i class="icon-plus"></i></button>
-        </div>
         <?php echo html::a($this->inlink('batchCreate', "projectID=$projectID"), "<i class='icon-plus'></i> " . $lang->task->create, "class='btn btn-primary'");?>
       </div>
     </div>
