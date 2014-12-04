@@ -34,7 +34,6 @@ class projectModel extends model
         }
 
         return $project;
-        
     }
 
     /**
