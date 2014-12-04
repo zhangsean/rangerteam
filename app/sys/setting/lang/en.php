@@ -46,7 +46,9 @@ $lang->setting->placeholder->typeList = new stdclass();
 $lang->setting->placeholder->typeList->key = 'Key should be 1~30 letters';
 
 $lang->setting->placeholder->sizeNameList = new stdclass();
-$lang->setting->placeholder->sizeNameList->key = 'Key should be interger between 0 and 255';
+$lang->setting->placeholder->sizeNameList->key   = 'Key should be interger or letters';
+$lang->setting->placeholder->sizeNameList->value = 'Brief description';
+$lang->setting->placeholder->sizeNameList->info  = 'Detailed description';
 
 $lang->setting->placeholder->levelNameList = new stdclass();
 $lang->setting->placeholder->levelNameList->key   = 'Key should be interger or letters';

@@ -46,7 +46,9 @@ $lang->setting->placeholder->typeList = new stdclass();
 $lang->setting->placeholder->typeList->key = '变量名，长度为1~30字符';
 
 $lang->setting->placeholder->sizeNameList = new stdclass();
-$lang->setting->placeholder->sizeNameList->key = '变量名，必须为0~255的数字';
+$lang->setting->placeholder->sizeNameList->key   = '数字和字母组合';
+$lang->setting->placeholder->sizeNameList->value = '简短描述';
+$lang->setting->placeholder->sizeNameList->info  = '详细描述';
 
 $lang->setting->placeholder->levelNameList = new stdclass();
 $lang->setting->placeholder->levelNameList->key   = '数字和字母组合';
