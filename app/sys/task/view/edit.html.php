@@ -40,7 +40,12 @@
         </div>
         <?php echo $this->fetch('action', 'history', "objectType=task&objectID={$task->id}");?>
         <?php echo html::hidden('referer', $this->server->http_referer);?>
-        <div class='page-actions'><?php echo html::submitButton() . html::backButton();?></div>
+        <div class='page-actions'>
+          <?php
+          $browseLink = $this->session->taskList ? $this->session->taskList : inlink('browse', "project=$task->project");
+          echo html::submitButton() . html::a($browseLink, $lang->goback, "class='btn btn-default'");
+          ?>
+        </div>
       </div>
       <div class='col-md-4'>
         <div class='panel'>

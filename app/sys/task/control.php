@@ -416,6 +416,8 @@ class task extends control
             if($project->deleted) $this->locate($this->createLink('project'));
         }
 
+        $this->session->set('taskList', $this->app->getURI(true));
+
         $tasks = $this->task->getList($projectID, $mode = null, $orderBy = 'id_desc', $pager = null, $groupBy);
         $tasks = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
 
@@ -446,6 +448,8 @@ class task extends control
             $project = $this->loadModel('project')->getByID($projectID);
             if($project->deleted) $this->locate($this->createLink('project'));
         }
+
+        $this->session->set('taskList', $this->app->getURI(true));
 
         /* Get tasks and group them. */
         $tasks = $this->task->getList($projectID, $mode = null, $orderBy = 'id_desc', $pager = null, $groupBy);
