@@ -19,5 +19,4 @@ $(document).ready(function()
             $(this).parents('tr').find('input,select').val('');
         }
     })
-
 });
