@@ -82,11 +82,13 @@
   </div>
 </form>
 <?php
-$placeholder = isset($lang->setting->placeholder->$field) ? $lang->setting->placeholder->$field : $lang->setting->placeholder->key; 
+$placeholderK = (isset($lang->setting->placeholder->$field) and isset($lang->setting->placeholder->{$field}->key))   ? $lang->setting->placeholder->{$field}->key   : $lang->setting->placeholder->key; 
+$placeholderV = (isset($lang->setting->placeholder->$field) and isset($lang->setting->placeholder->{$field}->value)) ? $lang->setting->placeholder->{$field}->value : $lang->setting->placeholder->value; 
+$placeholderI = (isset($lang->setting->placeholder->$field) and isset($lang->setting->placeholder->{$field}->info))  ? $lang->setting->placeholder->{$field}->info  : $lang->setting->placeholder->info; 
 $itemRow = <<<EOT
   <tr class='text-center'>
     <td>
-      <input type='text' value="" name="keys[]" class='form-control' placeholder='{$placeholder}'>
+      <input type='text' value="" name="keys[]" class='form-control' placeholder='{$placeholderK}'>
       <input type='hidden' value="0" name="systems[]">
     </td>
     <td>
@@ -104,5 +106,6 @@ EOT;
 <?php js::set('itemRow', $itemRow)?>
 <?php js::set('module', $module)?>
 <?php js::set('field', $field)?>
-<?php js::set('valueplaceholder', $lang->setting->placeholder->value)?>
+<?php js::set('valueplaceholder', $placeholderV)?>
+<?php js::set('infoplaceholder', $placeholderI)?>
 <?php include '../../common/view/footer.html.php';?>

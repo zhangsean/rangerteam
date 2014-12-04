@@ -15,6 +15,7 @@ $(function()
         $(this).parent().parent().next().find('.input-group').html(value);
         $(this).parent().parent().next().find('.input-group input').val('');
         $(this).parent().parent().next().find('.input-group input').eq(0).attr('placeholder', v.valueplaceholder);
+        $(this).parent().parent().next().find('.input-group input').eq(1).attr('placeholder', v.infoplaceholder);
     })
 
     /* Remove an item. */

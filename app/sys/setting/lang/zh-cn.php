@@ -40,7 +40,15 @@ $lang->setting->currentLang = '适用当前语言';
 $lang->setting->placeholder = new stdclass();
 $lang->setting->placeholder->key   = '变量名';
 $lang->setting->placeholder->value = '自定义显示值';
+$lang->setting->placeholder->info  = '详细描述';
 
-$lang->setting->placeholder->typeList      = '变量名，长度为1~30字符';
-$lang->setting->placeholder->sizeNameList  = '变量名，必须为0~255的数字';
-$lang->setting->placeholder->levelNameList = '变量名，长度为1~10字符';
+$lang->setting->placeholder->typeList = new stdclass();
+$lang->setting->placeholder->typeList->key = '变量名，长度为1~30字符';
+
+$lang->setting->placeholder->sizeNameList = new stdclass();
+$lang->setting->placeholder->sizeNameList->key = '变量名，必须为0~255的数字';
+
+$lang->setting->placeholder->levelNameList = new stdclass();
+$lang->setting->placeholder->levelNameList->key   = '数字和字母组合';
+$lang->setting->placeholder->levelNameList->value = '简短描述';
+$lang->setting->placeholder->levelNameList->info  = '详细描述';

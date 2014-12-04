@@ -40,7 +40,15 @@ $lang->setting->currentLang = 'For current language';
 $lang->setting->placeholder = new stdclass();
 $lang->setting->placeholder->key   = 'Key';
 $lang->setting->placeholder->value = 'Translation';
+$lang->setting->placeholder->info  = 'Description';
 
-$lang->setting->placeholder->typeList      = 'Key should be 1~30 letters';
-$lang->setting->placeholder->sizeNameList  = 'Key should be interger between 0 and 255';
-$lang->setting->placeholder->levelNameList = 'Key should be 1~10 letters';
+$lang->setting->placeholder->typeList = new stdclass();
+$lang->setting->placeholder->typeList->key = 'Key should be 1~30 letters';
+
+$lang->setting->placeholder->sizeNameList = new stdclass();
+$lang->setting->placeholder->sizeNameList->key = 'Key should be interger between 0 and 255';
+
+$lang->setting->placeholder->levelNameList = new stdclass();
+$lang->setting->placeholder->levelNameList->key   = 'Key should be interger or letters';
+$lang->setting->placeholder->levelNameList->value = 'Brief description';
+$lang->setting->placeholder->levelNameList->info  = 'Detailed description';
