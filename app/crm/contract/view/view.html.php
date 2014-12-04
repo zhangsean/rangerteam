@@ -68,7 +68,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->contract->contact;?></th>
-          <td><?php if(isset($contacts[$contract->contact])) echo html::a($this->createLink('contact', 'view', "contactID={$contract->contact}"), $contacts[$contract->contact]);?></td>
+          <td><?php if(isset($contacts[$contract->contact]) and trim($contacts[$contract->contact]) != "") echo html::a($this->createLink('contact', 'view', "contactID={$contract->contact}"), $contacts[$contract->contact]);?></td>
         </tr>
         <tr>
           <th><?php echo $lang->contract->begin;?></th>
