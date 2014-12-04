@@ -211,4 +211,21 @@ class depositorModel extends model
 
         return $money;
     }
+
+    /**
+     * Delete a depositor.
+     * 
+     * @param  int      $depositorID 
+     * @access public
+     * @return void
+     */
+    public function delete($depositorID, $null = null)
+    {
+        $depositor = $this->getByID($depositorID);
+        if(!$depositor) return false;
+
+        $this->dao->delete()->from(TABLE_DEPOSITOR)->where('id')->eq($depositorID)->exec();
+
+        return !dao::isError();
+    }
 }

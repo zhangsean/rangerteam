@@ -58,6 +58,7 @@
               <?php if($depositor->status == 'normal') echo html::a(inlink('forbid', "depositorID=$depositor->id"), $lang->depositor->forbid, "data-toggle=modal");?>
               <?php if($depositor->status == 'disable') echo html::a(inlink('activate', "depositorID=$depositor->id"), $lang->depositor->activate, "data-toggle=modal");?>
               <?php echo html::a($this->createLink('balance', 'browse', "depositorID=$depositor->id"), $lang->depositor->balance, "data-toggle='modal'");?>
+              <?php if(!isset($trades[$depositor->id])) echo html::a(inlink('delete', "depositorID=$depositor->id"), $lang->delete, "class='deleter'");?>
             </div>
             <?php echo "<span class='text-" . ($depositor->status == 'normal' ? 'success': 'danger') . "'>{$lang->depositor->statusList[$depositor->status]}</span>";?>
           </div>

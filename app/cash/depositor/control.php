@@ -37,6 +37,7 @@ class depositor extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        $this->view->trades       = $this->loadModel('trade')->getByDepositor();
         $this->view->balances     = $this->loadModel('balance')->getLatest();
         $this->view->title        = $this->lang->depositor->browse;
         $this->view->depositors   = $this->depositor->getList($orderBy, $pager);
@@ -203,5 +204,18 @@ class depositor extends control
         $this->loadModel('action')->create('depositor', $this->post->depositor, 'CreatedBalance', $this->post->date . ':'  . $this->post->money . $this->post->currency);
 
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+    }
+
+    /**
+     * Delete a depositor.
+     * 
+     * @param  int      $depositorID 
+     * @access public
+     * @return void
+     */
+    public function delete($depositorID)
+    {
+        if($this->depositor->delete($depositorID)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 }
