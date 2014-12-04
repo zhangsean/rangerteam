@@ -41,8 +41,8 @@
       <td class='text-left'><?php if(isset($customers[$contact->customer])) echo html::a($this->createLink('customer', 'view', "customerID=$contact->customer"), $customers[$contact->customer]);?></td>
       <td><?php echo isset($lang->contact->genderList[$contact->gender]) ? $lang->contact->genderList[$contact->gender] : '';?></td>
       <td class='text-left'><?php echo $contact->phone . ' ' . $contact->mobile;?></td>
-      <td><?php echo $contact->email;?></td>
-      <td><?php echo $contact->qq;?></td>
+      <td><a href="mailto:<?php echo $contact->email;?>"><?php echo $contact->email;?></a></td>
+      <td><a href="tencent://Message/?Uin=<?php echo $contact->qq;?>&websiteName=<?php echo $this->config->company->name?>&Menu=yes" target="_blank"><?php echo $contact->qq;?></a></td>
       <td class='operate'>
         <?php echo html::a($this->createLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}"), $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt'");?>
         <?php echo html::a($this->createLink('address', 'browse', "objectType=contact&objectID=$contact->id"), $lang->contact->address, "data-toggle='modal'");?>
