@@ -38,6 +38,7 @@ $lang->entry->height      = '高';
 
 $lang->entry->confirmDelete = '您确定删除该应用吗？';
 $lang->entry->lblBlock      = '区块';
+$lang->entry->editWarnning  = '系统内置应用，请谨慎修改。';
 
 $lang->entry->note = new stdClass();
 $lang->entry->note->name    = '授权应用名称';

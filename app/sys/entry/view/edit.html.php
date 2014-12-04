@@ -18,6 +18,14 @@ include '../../common/view/header.html.php';
   <div class='panel-body'>
     <form method='post' class='form form-inline' id='ajaxForm'>
       <table class='table table-form'>
+        <?php if($entry->buildin):?>
+        <tr>
+          <th></th>
+          <td><span class='text-info'><?php echo $this->lang->entry->editWarnning;?></span></td>
+          <td><?php echo html::input('buildin', $entry->buildin, 'class="hidden"')?></td>
+          <td></td>
+        </tr>
+        <?php endif?>
         <tr>
           <th class='w-100px'><?php echo $lang->entry->name;?></th>
           <td class='w-p50'>

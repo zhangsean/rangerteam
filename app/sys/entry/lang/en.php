@@ -38,6 +38,7 @@ $lang->entry->height      = 'Height';
 
 $lang->entry->confirmDelete = 'Are you sure to delete this App?';
 $lang->entry->lblBlock      = 'Block';
+$lang->entry->editWarnning  = 'The system application, careful edit.';
 
 $lang->entry->note = new stdClass();
 $lang->entry->note->name    = 'Entry name';

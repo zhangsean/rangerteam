@@ -38,9 +38,9 @@ include '../../common/view/header.html.php';
         <td class='text-center'><?php echo $entry->ip?></td>
         <td class='text-center'>
           <?php
+          echo html::a($this->createLink('entry', 'edit',   "code=$entry->code"), $lang->edit);
           if(!$entry->buildin)
           {
-              echo html::a($this->createLink('entry', 'edit',   "code=$entry->code"), $lang->edit);
               echo html::a($this->createLink('entry', 'delete', "code=$entry->code"), $lang->delete, 'class="deleter"');
           }
           ?>
