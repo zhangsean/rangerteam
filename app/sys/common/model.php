@@ -266,7 +266,14 @@ class commonModel extends model
                 $class = '';
                 if($module == $currentModule && $method == $currentMethod) $class = " class='active'";
                 if($module == $currentModule && strpos($methodAlias, $currentMethod) !== false) $class = " class='active'";
-                $string .= "<li{$class}>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
+                if(strpos($string, "class='active'") != false)
+                {
+                    $string .= "<li>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
+                }
+                else
+                {
+                    $string .= "<li{$class}>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
+                }
             }
         }
 
