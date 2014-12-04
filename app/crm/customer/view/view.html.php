@@ -116,11 +116,11 @@
       </div>
       <table class='table table-data table-condensed'>
         <?php foreach($orders as $order):?>
-        <tr class='<?php echo "order-{$order->status}";?>' data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id"); ?>'>
+        <tr data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id"); ?>'>
           <td class='w-p35'><?php echo $products[$order->product];?></td>
-          <td class='25'><?php echo $order->plan;?></td>
-          <td class='25'><?php echo $order->real;?></td>
-          <td class='15'><?php echo $lang->order->statusList[$order->status];?></td>
+          <td class='w-p25'><?php echo $order->plan;?></td>
+          <td class='w-p25'><?php echo $order->real;?></td>
+          <td class='w-p15 <?php echo "order-{$order->status}";?>'><?php echo $lang->order->statusList[$order->status];?></td>
         </tr>
         <?php endforeach;?>
       </table>
