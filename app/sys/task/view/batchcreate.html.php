@@ -48,7 +48,14 @@
           <td><?php echo html::input("estimate[$i]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'");?></td>
         </tr>
         <?php endfor;?>
-        <tr><td colspan='7' class='text-center'><?php echo html::submitButton() . html::backButton() . html::hidden('referer', $this->server->http_referer);?></td></tr>
+        <tr>
+          <td colspan='7' class='text-center'>
+            <?php
+            $browseLink = $this->session->taskList ? $this->session->taskList : inlink('browse', "project=$task->project");
+            echo html::submitButton() . html::a($browseLink, $lang->goback, "class='btn btn-default'") . html::hidden('referer', $this->server->http_referer);
+            ?>
+          </td>
+        </tr>
       </table>
     </div>
   </form>
