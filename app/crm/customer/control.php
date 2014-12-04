@@ -140,17 +140,18 @@ class customer extends control
 
         $this->app->loadLang('resume');
 
-        $this->view->title     = $this->lang->customer->view;
-        $this->view->customer  = $customer;
-        $this->view->orders    = $this->loadModel('order')->getList($mode = 'query', "customer=$customerID");
-        $this->view->contacts  = $this->loadModel('contact')->getList($customerID);
-        $this->view->contracts = $this->loadModel('contract')->getList($customerID);
-        $this->view->addresses = $this->loadModel('address')->getList('customer', $customerID);
-        $this->view->actions   = $this->loadModel('action')->getList('customer', $customerID);
-        $this->view->products  = $this->loadModel('product')->getPairs();
-        $this->view->users     = $this->loadModel('user')->getPairs();
-        $this->view->area      = $this->loadModel('tree')->getPairs('', 'area');
-        $this->view->industry  = $this->tree->getPairs('', 'industry');
+        $this->view->title        = $this->lang->customer->view;
+        $this->view->customer     = $customer;
+        $this->view->orders       = $this->loadModel('order')->getList($mode = 'query', "customer=$customerID");
+        $this->view->contacts     = $this->loadModel('contact')->getList($customerID);
+        $this->view->contracts    = $this->loadModel('contract')->getList($customerID);
+        $this->view->addresses    = $this->loadModel('address')->getList('customer', $customerID);
+        $this->view->actions      = $this->loadModel('action')->getList('customer', $customerID);
+        $this->view->products     = $this->loadModel('product')->getPairs();
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->area         = $this->loadModel('tree')->getPairs('', 'area');
+        $this->view->industry     = $this->tree->getPairs('', 'industry');
+        $this->view->currencySign = $this->loadModel('order')->setCurrencySign();
         $this->display();
     }
 

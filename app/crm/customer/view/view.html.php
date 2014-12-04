@@ -99,7 +99,7 @@
         <?php foreach($contracts as $contract):?>
         <tr class='<?php echo "contract-{$contract->status}";?>' data-url='<?php echo $this->createLink('contract', 'view', "contractID=$contract->id"); ?>'>
           <td class='w-p70'><?php echo $contract->name;?></td>
-          <td class='w-p15'><?php echo $contract->amount;?></td>
+          <td class='w-p15'><?php echo zget($currencySign, $contract->currency, '') . $contract->amount;?></td>
           <td class='w-p15'><?php echo $lang->contract->statusList[$contract->status];?></td>
         </tr>
         <?php endforeach;?>
@@ -119,7 +119,7 @@
         <tr data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id"); ?>'>
           <td class='w-p35'><?php echo $products[$order->product];?></td>
           <td class='w-p25'><?php echo $order->plan;?></td>
-          <td class='w-p25'><?php echo $order->real;?></td>
+          <td class='w-p25'><?php echo zget($currencySign, $order->currency, '') . $order->real;?></td>
           <td class='w-p15 <?php echo "order-{$order->status}";?>'><?php echo $lang->order->statusList[$order->status];?></td>
         </tr>
         <?php endforeach;?>
