@@ -67,21 +67,22 @@ class taskModel extends model
      * @access public
      * @return void
      */
-    public function fixTaskGroups($tasks, $groupBy)
+    public function fixTaskGroups($project, $tasks, $groupBy)
     {
+        $taskGroups = array();
         if($groupBy == 'status')
         {
             foreach($this->lang->task->statusList as $status => $statusName) if(!empty($status) and !isset($tasks[$status])) $tasks[$status] = array();
+            foreach($this->lang->task->statusList as $status => $statusName) if(!empty($status)) $taskGroups[$status] = $tasks[$status];
         }
 
         if($groupBy != 'status' and !empty($project->members))
         {
-            foreach($project->members as $role => $memberList)
-            {
-                foreach($memberList as $member) if(!isset($tasks[$member->account])) $tasks[$member->account] = array();
-            }
+            foreach($project->members as $member) if(!isset($tasks[$member]) and !empty($member)) $tasks[$member] = array();
+            foreach($project->members as $member) if(!empty($member)) $taskGroups[$member] = $tasks[$member];
         }
 
+        if(!empty($taskGroups)) return $taskGroups;
         return $tasks;
     }
 

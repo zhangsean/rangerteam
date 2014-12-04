@@ -417,7 +417,7 @@ class task extends control
         }
 
         $tasks = $this->task->getList($projectID, $mode = null, $orderBy = 'id_desc', $pager = null, $groupBy);
-        $tasks = $this->task->fixTaskGroups($tasks, $groupBy); 
+        $tasks = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
 
         $this->view->tasks       = $tasks;
         $this->view->groupBy     = $groupBy;
@@ -449,7 +449,7 @@ class task extends control
 
         /* Get tasks and group them. */
         $tasks = $this->task->getList($projectID, $mode = null, $orderBy = 'id_desc', $pager = null, $groupBy);
-        $tasks = $this->task->fixTaskGroups($tasks, $groupBy); 
+        $tasks = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
 
         $this->view->tasks       = $tasks;
         $this->view->groupBy     = $groupBy;
