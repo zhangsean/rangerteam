@@ -20,14 +20,14 @@
     <table class='table table-hover'>
       <thead>
         <tr class='text-center'>
-          <th class='w-100px'><?php echo $lang->trade->depositor;?></th>
+          <th class='w-160px'><?php echo $lang->trade->depositor;?></th>
           <th class='w-100px'><?php echo $lang->trade->type;?></th> 
-          <th class='w-120px'><?php echo $lang->trade->category;?></th> 
-          <th class='w-180px'><?php echo $lang->trade->trader;?></th> 
-          <th class='w-120px'><?php echo $lang->trade->money;?></th>
+          <th class='w-160px'><?php echo $lang->trade->category;?></th> 
+          <th class='w-260px'><?php echo $lang->trade->trader;?></th> 
+          <th class='w-100px'><?php echo $lang->trade->money;?></th>
           <th class='w-80px'><?php echo $lang->trade->dept;?></th>
-          <th class='w-200px'><?php echo $lang->trade->handlers;?></th>
-          <th class='w-120px'><?php echo $lang->trade->date;?></th>
+          <th class='w-110px'><?php echo $lang->trade->handlers;?></th>
+          <th class='w-110px'><?php echo $lang->trade->date;?></th>
           <th><?php echo $lang->trade->desc;?></th>
         </tr>
       </thead>
