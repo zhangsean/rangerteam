@@ -136,6 +136,10 @@ class customer extends control
         $customer = $this->customer->getByID($customerID);
         if(!$customer) $this->loadModel('common', 'sys')->checkPrivByCustomer('0');
 
+        $uri = $this->app->getURI(true);
+        $this->session->set('orderList',    $uri);
+        $this->session->set('contractList', $uri);
+        $this->session->set('contactList',  $uri);
         if(!$this->session->contactList or $this->session->customerList == $this->session->contactList) $this->session->set('contactList', $this->app->getURI(true));
 
         $this->app->loadLang('resume');
