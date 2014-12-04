@@ -87,7 +87,7 @@
               <td><?php echo $this->task->buildOperateMenu($task);?></td>
             </tr>
           <?php endforeach;?>
-          <td></td><td colspan='8'><?php printf($lang->task->groupinfo, $groupSum, $groupWait, $groupDoing, $groupDone, $groupClosed) ?></td>
+          <tr><td colspan='9'><?php printf($lang->task->groupinfo, $groupSum, $groupWait, $groupDoing, $groupDone, $groupClosed) ?></td></tr>
         </tbody>
       <?php endforeach;?>
     </table>
