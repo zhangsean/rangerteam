@@ -62,7 +62,10 @@ class task extends control
         $this->view->title = $this->lang->task->browse;
         if($projectID) $this->view->title = $project->name . $this->lang->minus . $this->view->title;
 
-        $this->view->tasks     = $this->task->getList($projectID, $mode, $orderBy, $pager);
+        $tasks = $this->task->getList($projectID, $mode, $orderBy, $pager);
+        $this->session->set('taskQueryCondition', $this->dao->get());
+
+        $this->view->tasks     = $tasks;
         $this->view->pager     = $pager;
         $this->view->mode      = $mode;
         $this->view->orderBy   = $orderBy;
@@ -170,12 +173,13 @@ class task extends control
     {
         $task = $this->task->getByID($taskID);
 
-        $this->view->title     = $this->lang->task->view . $task->name;
-        $this->view->task      = $task;
-        $this->view->projectID = $task->project;
-        $this->view->projects  = $this->loadModel('project')->getPairs();
-        $this->view->members   = $this->loadModel('project')->getMemberPairs($task->project);
-        $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->view->title      = $this->lang->task->view . $task->name;
+        $this->view->task       = $task;
+        $this->view->projectID  = $task->project;
+        $this->view->projects   = $this->loadModel('project')->getPairs();
+        $this->view->members    = $this->loadModel('project')->getMemberPairs($task->project);
+        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->preAndNext = $this->loadModel('common', 'sys')->getPreAndNextObject('task', $taskID);
 
         $this->display();
     }

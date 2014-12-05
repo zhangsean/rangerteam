@@ -45,6 +45,9 @@ class customer extends control
         $this->view->customers = $this->customer->getList($mode = $mode, $param = $param, $relation = 'client', $orderBy, $pager);
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
+
+        $this->session->set('customerQueryCondition', $this->dao->get());
+
         $this->display();
     }   
 

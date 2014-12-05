@@ -34,7 +34,6 @@
       echo '</div>';
 
       $browseLink = $this->session->customerList ? $this->session->customerList : inlink('browse');
-      echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
       commonModel::printRPN($browseLink, $preAndNext);
       ?>
     </div>

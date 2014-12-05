@@ -28,7 +28,7 @@
         echo $this->task->buildOperateMenu($task, 'btn', 'view');
 
         $browseLink = $this->session->taskList ? $this->session->taskList : inlink('browse', "project=$task->project");
-        echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
+        commonModel::printRPN($browseLink, $preAndNext);
         ?>
       </div>
     </div>

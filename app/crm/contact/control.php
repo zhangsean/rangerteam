@@ -40,9 +40,12 @@ class contact extends control
         $this->session->set('contactList', $this->app->getURI(true));
         $this->session->set('customerList', $this->app->getURI(true));
 
+        $contacts = $this->contact->getList($customer = '', $relation = 'client',  $mode, $orderBy, $pager);
+        $this->session->set('contactQueryCondition', $this->dao->get());
+
         $this->view->title     = $this->lang->contact->list;
         $this->view->mode      = $mode;
-        $this->view->contacts  = $this->contact->getList($customer = '', $relation = 'client',  $mode, $orderBy, $pager);
+        $this->view->contacts  = $contacts;
         $this->view->customers = $this->loadModel('customer')->getPairs();
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;

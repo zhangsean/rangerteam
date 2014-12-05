@@ -56,12 +56,12 @@
       <?php extract($prevAndNext);?>
       <ul class='pager pager-justify'>
         <?php if($prev): ?>
-        <li class='previous'><?php echo html::a(inlink('view', "id=$prev->id"), '<i class="icon-arrow-left"></i> ' . $prev->title); ?></li>
+        <li class='previous'><?php echo html::a(inlink('view', "id=$prev->id"), '<i class="icon-arrow-left"></i> ' . $prev->title, 'id="pre"'); ?></li>
         <?php else: ?>
         <li class='preious disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->article->none); ?></a></li>
         <?php endif; ?>
         <?php if($next):?>
-        <li class='next'><?php echo html::a(inlink('view', "id=$next->id"), $next->title . ' <i class="icon-arrow-right"></i>'); ?></li>
+        <li class='next'><?php echo html::a(inlink('view', "id=$next->id"), $next->title . ' <i class="icon-arrow-right"></i>', 'id="next"'); ?></li>
         <?php else:?>
         <li class='next disabled'><a href='###'> <?php print($lang->article->none); ?><i class='icon-arrow-right'></i></a></li>
         <?php endif; ?>

@@ -44,7 +44,7 @@ class contractModel extends model
      */
     public function getList($customer = 0, $mode = 'all', $orderBy = 'id_desc', $pager = null)
     {
-        $contract = $this->dao->select('*')->from(TABLE_CONTRACT)
+        return $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('deleted')->eq(0)
             ->beginIF($customer)->andWhere('customer')->eq($customer)->fi()
             ->beginIF($mode == 'unreceived')->andWhere('`return`')->ne('done')->fi()
@@ -55,11 +55,6 @@ class contractModel extends model
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll();
-
-        /* Set preAndNext condition. */
-        $this->session->set('contractQueryCondition', $this->dao->get());
-
-        return $contract;
     }
 
     /**

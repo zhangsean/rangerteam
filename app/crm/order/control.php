@@ -42,6 +42,9 @@ class order extends control
 
         $orders = $this->order->getList($mode, '', $orderBy, $pager);
 
+        /* Set pre and next condition. */
+        $this->session->set('orderQueryCondition', $this->dao->get());
+
         $this->view->title        = $this->lang->order->browse;
         $this->view->orders       = $orders;
         $this->view->customers    = $this->loadModel('customer')->getList('client');

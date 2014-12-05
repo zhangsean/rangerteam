@@ -93,8 +93,6 @@ class contactModel extends model
             ->page($pager)
             ->fetchAll('id');
 
-        $this->session->set('contactQueryCondition', $this->dao->get());
-
         foreach($resumes as $contactID => $resume)
         {
             if(isset($contacts[$contactID]))
