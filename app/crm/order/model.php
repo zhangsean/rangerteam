@@ -84,6 +84,9 @@ class orderModel extends model
             ->andWhere('o.customer')->in($customerIdList)
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
+        /* Set pre and next condition. */
+        $this->session->set('queryCondition', $this->dao->get());
+
         foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->customerName, $order->productName); 
 
         return $orders;

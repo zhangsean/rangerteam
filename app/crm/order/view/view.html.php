@@ -69,7 +69,7 @@
     echo '</div>';
 
     $browseLink = $this->session->orderList ? $this->session->orderList : inlink('browse');
-    echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
+    commonModel::printRPN($browseLink, $preAndNext);
     ?>
   </div>
 </div>

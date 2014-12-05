@@ -150,6 +150,7 @@ class order extends control
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->currencyList = $this->order->setCurrencyList();
         $this->view->currencySign = $this->order->setCurrencySign();
+        $this->view->preAndNext   = $this->loadModel('common', 'sys')->getPreAndNextObject('order', $orderID);
     
         $this->display();
     }

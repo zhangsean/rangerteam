@@ -784,4 +784,82 @@ class commonModel extends model
         ksort($diff);
         return implode("\n", $diff);
     }
+
+    /**
+     * Print backLink and preLink and nextLink.
+     * 
+     * @param  string $backLink 
+     * @param  object $preAndNext 
+     * @access public
+     * @return void
+     */
+    static public function printRPN($backLink, $preAndNext = '', $linkTemplate = '')
+    {
+        global $lang, $app;
+        if(isonlybody()) return false;
+
+        echo html::a($backLink, $lang->goback, "class='btn btn-default'");
+
+        if(isset($preAndNext->pre) and $preAndNext->pre) 
+        {
+            $id = 'id';
+            $title = isset($preAndNext->pre->title) ? $preAndNext->pre->title : (isset($preAndNext->pre->name) ? $preAndNext->pre->name : '');
+            $title = '#' . $preAndNext->pre->$id . ' ' . $title;
+            $link  = $linkTemplate ? sprintf($linkTemplate, $preAndNext->pre->$id) : inLink('view', "ID={$preAndNext->pre->$id}");
+            echo html::a($link, '<i class="icon-pre icon-chevron-left"></i>', "id='pre' class='btn' title='{$title}'");
+        }
+        if(isset($preAndNext->next) and $preAndNext->next) 
+        {
+            $id = 'id';
+            $title = isset($preAndNext->next->title) ? $preAndNext->next->title : (isset($preAndNext->next->name) ? $preAndNext->next->name : '');
+            $title = '#' . $preAndNext->next->$id . ' ' . $title;
+            $link  = $linkTemplate ? sprintf($linkTemplate, $preAndNext->next->$id) : inLink('view', "ID={$preAndNext->next->$id}");
+            echo html::a($link, '<i class="icon-pre icon-chevron-right"></i>', "id='next' class='btn' title='$title'");
+        }
+    }
+
+    /**
+     * Get the previous and next object.
+     * 
+     * @param  string $type story|task|bug|case
+     * @param  string $objectIDs 
+     * @param  string $objectID 
+     * @access public
+     * @return void
+     */
+    public function getPreAndNextObject($type, $objectID)
+    {
+        $preAndNextObject = new stdClass();
+
+        if(strpos('order, contract', $type) === false) return $preAndNextObject;
+        $table = $this->config->objectTables[$type];
+
+        $queryCondition = $this->session->queryCondition;
+        $queryObjects = $this->dao->query($queryCondition);
+
+        $preOBJ  = false;
+        $preAndNextObject->pre  = '';
+        $preAndNextObject->next = '';
+        while($object = $queryObjects->fetch())
+        {
+            $id  = $object->id;
+
+            /* Get next object. */
+            if($preOBJ === true)
+            {
+                $preAndNextObject->next = $object;
+                break;
+            }
+
+            /* Get pre object. */
+            if($id == $objectID)
+            {
+                if($preOBJ) $preAndNextObject->pre = $preOBJ;
+                $preOBJ = true;
+            }
+            if($preOBJ !== true) $preOBJ = $object;
+        }
+
+        return $preAndNextObject;
+    }
 }

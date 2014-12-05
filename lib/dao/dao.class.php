@@ -472,11 +472,13 @@ class dao
      * @access public
      * @return object   the PDOStatement object.
      */
-    public function query()
+    public function query($sql = '')
     {
         if(!empty(dao::$errors)) return new PDOStatement();   // If any error, return an empty statement object to make sure the remain method to execute.
 
+        if($sql) $this->sqlobj->sql = $sql;
         $sql = $this->processSQL();
+
         try
         {
             $method = $this->method;
@@ -1029,9 +1031,9 @@ class sql
      * The sql string.
      * 
      * @var string
-     * @access private
+     * @access public
      */
-    private $sql = '';
+    public $sql = '';
 
     /**
      * The global $dbh.
