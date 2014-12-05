@@ -78,8 +78,14 @@ class taskModel extends model
 
         if($groupBy != 'status' and !empty($project->members))
         {
-            foreach($project->members as $member) if(!isset($tasks[$member]) and !empty($member)) $tasks[$member] = array();
-            foreach($project->members as $member) if(!empty($member)) $taskGroups[$member] = $tasks[$member];
+            foreach($project->members as $member) if(!isset($tasks[$member])) $tasks[$member] = array();
+
+            foreach($tasks as $groupKey => $task)
+            {
+                if($groupKey == '') $taskGroups[''] = $tasks[''];
+                foreach($project->members as $member) $taskGroups[$member] = $tasks[$member];
+                if(!in_array($groupKey, $project->members)) $taskGroups[$groupKey] = $tasks[$groupKey];
+            }
         }
 
         if(!empty($taskGroups)) return $taskGroups;

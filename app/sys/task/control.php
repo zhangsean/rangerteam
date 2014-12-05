@@ -418,7 +418,11 @@ class task extends control
 
         $this->session->set('taskList', $this->app->getURI(true));
 
-        $tasks = $this->task->getList($projectID, $mode = null, $orderBy = 'id_desc', $pager = null, $groupBy);
+        $orderBy = 'id_desc';
+        if($groupBy == 'status') $orderBy = 'pri';
+        if($groupBy == 'assignedTo' or $groupBy == 'createdBy') $orderBy = 'status';
+
+        $tasks = $this->task->getList($projectID, $mode = null, $orderBy, $pager = null, $groupBy);
         $tasks = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
 
         $this->view->tasks       = $tasks;
@@ -451,8 +455,12 @@ class task extends control
 
         $this->session->set('taskList', $this->app->getURI(true));
 
+        $orderBy = 'id_desc';
+        if($groupBy == 'status') $orderBy = 'pri';
+        if($groupBy == 'assignedTo' or $groupBy == 'createdBy') $orderBy = 'status';
+
         /* Get tasks and group them. */
-        $tasks = $this->task->getList($projectID, $mode = null, $orderBy = 'id_desc', $pager = null, $groupBy);
+        $tasks = $this->task->getList($projectID, $mode = null, $orderBy, $pager = null, $groupBy);
         $tasks = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
 
         $this->view->tasks       = $tasks;
