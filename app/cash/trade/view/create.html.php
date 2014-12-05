@@ -70,7 +70,11 @@
         <?php if($type == 'in'):?>
         <tr>
           <th><?php echo $lang->trade->customer;?></th>
-          <td><?php  echo html::select('trader', $customerList, '', "class='form-control chosen'");?></td>
+          <td><?php echo html::select('trader', $customerList, '', "class='form-control chosen' onchange='getContract(this.value)'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->trade->contract;?></th>
+          <td class='contractTD'><select name='contract' id='contract' class='form-control'></select></td>
         </tr>
         <?php endif;?>
         <tr>

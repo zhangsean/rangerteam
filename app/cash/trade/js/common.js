@@ -24,3 +24,16 @@ $(document).ready(function()
 
     $('.leftmenu li').find('[href*=' + v.mode + ']').parent().addClass('active');
 })
+
+/**
+ * Get contract of a trader. 
+ * 
+ * @param  int    $traderID 
+ * @access public
+ * @return void
+ */
+function getContract(traderID)
+{
+    if(traderID == '') return false;
+    $('.contractTD select').empty().load(createLink('crm.contract', 'getOptionMenu', 'traderID=' + traderID));
+}

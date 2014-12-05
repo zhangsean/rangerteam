@@ -816,9 +816,21 @@ function createLink(moduleName, methodName, vars, viewType)
         vars = vars.split('&');
         for(i = 0; i < vars.length; i ++) vars[i] = vars[i].split('=');
     }
+
+    appName = config.appName;
+    router  = config.router;
+
+    if(moduleName.indexOf('.') >= 0)
+    {
+        moduleNames = moduleName.split('.');
+        appName     = moduleNames[0];
+        moduleName  = moduleNames[1];
+        router      = router.replace(config.appName, appName);
+    }
+
     if(config.requestType == 'PATH_INFO')
     {
-        link = config.webRoot + config.appName + '/' + moduleName + config.requestFix + methodName;
+        link = config.webRoot + appName + '/' + moduleName + config.requestFix + methodName;
         if(vars)
         {
             if(config.pathType == "full")
@@ -834,7 +846,7 @@ function createLink(moduleName, methodName, vars, viewType)
     }
     else
     {
-        link = config.router + '?' + config.moduleVar + '=' + moduleName + '&' + config.methodVar + '=' + methodName + '&' + config.viewVar + '=' + viewType;
+        link = router + '?' + config.moduleVar + '=' + moduleName + '&' + config.methodVar + '=' + methodName + '&' + config.viewVar + '=' + viewType;
         if(vars) for(i = 0; i < vars.length; i ++) link += '&' + vars[i][0] + '=' + vars[i][1];
     }
     return link;

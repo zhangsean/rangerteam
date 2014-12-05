@@ -348,4 +348,19 @@ class contract extends control
 
         echo $html;
     }
+
+    /**
+     * Get option menu.
+     * 
+     * @param  int    $customer 
+     * @access public
+     * @return void
+     */
+    public function getOptionMenu($customer)
+    {
+        $options = $this->contract->getPairs($customer);
+        echo "<option value=''></option>";
+        foreach($options as $value => $text) echo "<option value='{$value}'>{$text}</option>";
+        exit;
+    }
 }
