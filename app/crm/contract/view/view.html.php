@@ -27,7 +27,7 @@
     echo $this->contract->buildOperateMenu($contract, 'btn', 'view');
 
     $browseLink = $this->session->contractList ? $this->session->contractList : inlink('browse');
-    echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
+    commonModel::printRPN($browseLink, $preAndNext);
     ?>
   </div>
 </div>

@@ -31,7 +31,7 @@
     echo "</div>";
 
     $browseLink = $this->session->contactList ? $this->session->contactList : inlink('browse');
-    echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
+    commonModel::printRPN($browseLink, $preAndNext);
     ?>
   </div>
 </div>

@@ -299,6 +299,7 @@ class contract extends control
         $this->view->contract     = $contract;
         $this->view->actions      = $this->loadModel('action')->getList('contract', $contractID);
         $this->view->currencySign = $this->loadModel('order')->setCurrencySign();
+        $this->view->preAndNext   = $this->loadModel('common', 'sys')->getPreAndNextObject('contract', $contractID);
 
         $this->display();
     }

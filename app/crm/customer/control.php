@@ -156,6 +156,7 @@ class customer extends control
         $this->view->area         = $this->loadModel('tree')->getPairs('', 'area');
         $this->view->industry     = $this->tree->getPairs('', 'industry');
         $this->view->currencySign = $this->loadModel('order')->setCurrencySign();
+        $this->view->preAndNext   = $this->loadModel('common', 'sys')->getPreAndNextObject('customer', $customerID);
         $this->display();
     }
 

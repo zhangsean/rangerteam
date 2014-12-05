@@ -831,10 +831,12 @@ class commonModel extends model
     {
         $preAndNextObject = new stdClass();
 
-        if(strpos('order, contract', $type) === false) return $preAndNextObject;
+        if(strpos('order, contract, customer, contact, task, thread, blog', $type) === false) return $preAndNextObject;
         $table = $this->config->objectTables[$type];
 
-        $queryCondition = $this->session->queryCondition;
+        $queryCondition = "{$type}QueryCondition";
+        $queryCondition = $this->session->$queryCondition;
+        if(!$queryCondition) return $preAndNextObject;
         $queryObjects = $this->dao->query($queryCondition);
 
         $preOBJ  = false;

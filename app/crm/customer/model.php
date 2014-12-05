@@ -62,7 +62,7 @@ class customerModel extends model
         $thisMonth  = date::getThisMonth();
         $thisWeek   = date::getThisWeek();
 
-        return $this->dao->select('*')->from(TABLE_CUSTOMER)
+        $customers = $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
             ->beginIF($relation == 'client')->andWhere('relation')->ne('provider')
             ->beginIF($relation == 'provider')->andWhere('relation')->ne('client')
@@ -79,6 +79,9 @@ class customerModel extends model
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
+
+        $this->session->set('customerQueryCondition', $this->dao->get());
+        return $customers;
     }
 
     /** 
