@@ -65,13 +65,14 @@ class entry extends control
     public function visit($entryID, $referer = '')
     {
         $referer = !empty($_GET['referer']) ? $this->get->referer : $referer;
-        $entry = $this->entry->getById($entryID);
+        $entry   = $this->entry->getById($entryID);
 
         $location = $entry->login;
+        $pathinfo = parse_url($location);
         if($entry->integration)
         {
             $token = $this->loadModel('sso')->createToken(session_id(), $entryID);
-            if(strpos('&', $location) !== false)
+            if(!empty($pathinfo['query']))
             {
                 $location = rtrim($location, '&') . "&token=$token";
             }
