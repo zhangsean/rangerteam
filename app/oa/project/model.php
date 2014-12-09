@@ -217,6 +217,7 @@ class projectModel extends model
         $user->id   = $projectID;
         foreach($members as $member)
         {
+            if($member == '') continue;
             $user->account = $member;
             $user->role    = $member == $this->post->manager ? 'manager' : 'member';
 
