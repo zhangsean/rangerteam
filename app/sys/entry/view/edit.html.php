@@ -95,9 +95,9 @@ include '../../common/view/header.html.php';
           <td id='custom' class='w-200px'>
             <div class='input-group'>
               <div class='input-group-addon'><?php echo $lang->entry->width;?></div>
-              <?php echo html::input('width', '700', "class='form-control'");?>
+              <?php echo html::input('width', isset($entry->width) ? $entry->width : '700', "class='form-control'");?>
               <div class='input-group-addon'><?php echo $lang->entry->height;?></div>
-              <?php echo html::input('height', '538', "class='form-control'");?>
+              <?php echo html::input('height', isset($entry->height) ? $entry->height : '538', "class='form-control'");?>
             </div>
           </td>
         </tr>

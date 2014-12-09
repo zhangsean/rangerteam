@@ -867,4 +867,27 @@ class commonModel extends model
 
         return $preAndNextObject;
     }
+
+    /**
+     * Print link to an modules' methd.
+     *
+     * Before printing, check the privilege first. If no privilege, return fasle. Else, print the link, return true.
+     * 
+     * @param  string $module   the module name
+     * @param  string $method   the method
+     * @param  string $vars     vars to be passed
+     * @param  string $label    the label of the link
+     * @param  string $target   the target of the link
+     * @param  string $misc     others
+     * @param  bool   $newline 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function printLink($module, $method, $vars = '', $label, $target = '', $misc = '', $newline = true, $onlyBody = false)
+    {
+        if(!commonModel::hasPriv($module, $method)) return false;
+        echo html::a(helper::createLink($module, $method, $vars, '', $onlyBody), $label, $misc);
+        return true;
+    }
 }

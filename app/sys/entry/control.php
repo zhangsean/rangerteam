@@ -21,7 +21,7 @@ class entry extends control
     {
         /* process entry logo path. */
         $entries = $this->entry->getEntries();
-        foreach($entries as $entry) $entry->logo = $this->config->webRoot . $entry->logo;
+        foreach($entries as $entry) if(!empty($entry->logo)) $entry->logo = $this->config->webRoot . $entry->logo;
         
         $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->admin;
         $this->view->position[] = $this->lang->entry->common;
@@ -133,6 +133,7 @@ class entry extends control
         $entry = $this->entry->getByCode($code);
         if($entry->size != 'max')
         {
+            $size = json_decode($entry->size);
             $entry->size   = 'custom';
             $entry->width  = $size->width;
             $entry->height = $size->height;

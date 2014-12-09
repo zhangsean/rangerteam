@@ -182,6 +182,7 @@ $lang->entry       = new stdclass();
 $lang->entry->menu = new stdclass();
 $lang->entry->menu->admin  = array('link' => 'Entries|entry|admin|', 'alias' => 'edit');
 $lang->entry->menu->create = array('link' => 'Create|entry|create|');
+$lang->entry->menu->webapp = 'WEB Application|webapp|obtain|';
 
 /* Menu system. */
 $lang->system       = new stdclass();
