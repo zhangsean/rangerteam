@@ -19,9 +19,9 @@ class entry extends control
      */
     public function admin()
     {
-        /* process entry logo path. */
         $entries = $this->entry->getEntries();
-        foreach($entries as $entry) if(!empty($entry->logo)) $entry->logo = $this->config->webRoot . $entry->logo;
+        /* add web root if logo not start with /  */
+        foreach($entries as $entry) if(!empty($entry->logo) && substr($entry->logo, 0, 1) != '/') $entry->logo = $this->config->webRoot . $entry->logo;
         
         $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->admin;
         $this->view->position[] = $this->lang->entry->common;

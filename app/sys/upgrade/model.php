@@ -445,7 +445,12 @@ class upgradeModel extends model
         }
     }
 
-    /* change logo path to relative path. */
+    /**
+     * Change system application logo path to relative path.
+     * 
+     * @access public
+     * @return void
+     */
     public function upgradeEntryLogo()
     {
         $entryList = array('crm', 'cash', 'oa', 'team');

@@ -37,9 +37,11 @@ class index extends control
         {
 
             $sso  = $this->createLink('entry', 'visit', "entryID=$entry->id");
-            $logo = !empty($entry->logo) ? $this->config->webRoot . $entry->logo : '';
+            $logo = !empty($entry->logo) ? $entry->logo : '';
             $size = !empty($entry->size) ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
             $menu = $entry->visible ? 'all' : 'list';
+            /* add web root if logo not start with /  */
+            if($logo != '' && substr($logo, 0, 1) != '/') $logo = $this->config->webRoot . $logo;
             
             if(!isset($entry->control))  $entry->control = '';
             if(!isset($entry->position)) $entry->position = '';
