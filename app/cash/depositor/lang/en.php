@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->depositor)) $lang->depositor = new stdclass();
 $lang->depositor->common          = 'Depositor';
 $lang->depositor->id              = 'ID';
 $lang->depositor->abbr            = 'Abbreviation';

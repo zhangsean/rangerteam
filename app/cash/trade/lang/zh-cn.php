@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->trade)) $lang->trade = new stdclass();
 $lang->trade->common      = '记账';
 $lang->trade->id          = '编号';
 $lang->trade->depositor   = '账号';

@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->trade)) $lang->trade = new stdclass();
 $lang->trade->common      = 'Trade';
 $lang->trade->id          = 'ID';
 $lang->trade->depositor   = 'Despositor';

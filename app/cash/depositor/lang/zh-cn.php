@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+if(!isset($lang->depositor)) $lang->depositor = new stdclass();
 $lang->depositor->common          = '账号';
 $lang->depositor->id              = '编号';
 $lang->depositor->abbr            = '简称';
