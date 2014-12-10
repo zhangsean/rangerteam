@@ -17,7 +17,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* Basic settings. */
 $config = new config();
-$config->version      = '1.5.beta';        // The version of ranzhi. Don't change it.
+$config->version      = '1.6.beta';        // The version of ranzhi. Don't change it.
 $config->debug        = true;              // Turn debug on or off.
 $config->charset      = 'UTF-8';           // The charset of ranzhi.
 $config->cookieLife   = time() + 2592000;  // The cookie life time.
@@ -128,6 +128,7 @@ define('TABLE_RESUME',        '`crm_resume`');
 define('TABLE_CONTACT',       '`crm_contact`');
 define('TABLE_CONTRACT',      '`crm_contract`');
 define('TABLE_CONTRACTORDER', '`crm_contractOrder`');
+define('TABLE_PLAN',          '`crm_plan`');
 define('TABLE_SERVICE',       '`crm_service`');
 
 /* Tables for oa. */

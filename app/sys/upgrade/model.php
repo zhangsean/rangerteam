@@ -54,7 +54,9 @@ class upgradeModel extends model
                 /* Exec sqls must after fix data. */
                 $this->execSQL($this->getUpgradeFile('1.4.beta'));
             case '1_5_beta':
+                $this->execSQL($this->getUpgradeFile('1.5.beta'));
                 $this->upgradeEntryLogo();
+                $this->upgradeReturnRecords();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -79,6 +81,7 @@ class upgradeModel extends model
             case '1_2_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.2.beta'));
             case '1_3_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.3.beta'));
             case '1_4_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.4.beta'));
+            case '1_5_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.5.beta'));
         }
         return $confirmContent;
     }
@@ -460,5 +463,30 @@ class upgradeModel extends model
             $path     = substr($entryObj->logo, strpos($entryObj->logo, 'theme'));
             $this->dao->update(TABLE_ENTRY)->set('logo')->eq($path)->where('code')->eq($entry)->exec();
         }
+    }
+
+    /**
+     * Update return records.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function upgradeReturnRecords()
+    {
+        $contracts = $this->dao->select('*')->from(TABLE_CONTRACT)->where('`return`')->eq('done')->fetchAll();
+        if(empty($contracts)) return false;
+
+        foreach($contracts as $contract)
+        {
+            $data = new stdclass();
+            $data->contract     = $contract->id;
+            $data->amount       = $contract->amount;
+            $data->returnedBy   = $contract->returnedBy;
+            $data->returnedDate = $contract->returnedDate;
+
+            $this->dao->insert(TABLE_PLAN)->data($data)->autoCheck()->exec();
+        }
+
+        return !dao::isError();
     }
 }
