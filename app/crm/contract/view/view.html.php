@@ -92,6 +92,16 @@
       </table>
     </div>
   </div>
+  <?php if(!empty($contract->returnList)):?>
+  <div class='panel'>
+    <div class='panel-heading'>
+      <strong><i class='icon-file-text-alt'></i> <?php echo $lang->contract->returnRecords;?></strong>
+    </div>
+    <div class='panel-body'>
+      <?php foreach($contract->returnList as $return) printf($lang->contract->returnInfo, $return->returnedDate, zget($users, $return->returnedBy, $return->returnedBy), zget($currencySign, $contract->currency, '') . $return->amount);?>
+    </div>
+  </div>
+  <?php endif;?>
   <div class='panel'>
     <div class='panel-heading'>
       <strong><?php echo $lang->contract->lifetime;?></strong>
