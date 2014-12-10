@@ -85,7 +85,7 @@ class action extends control
             $this->action->createRecord($objectType, $objectID, $customer, $this->post->contact);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'parent.reload'));
         }
         
         if($objectType == 'contact')

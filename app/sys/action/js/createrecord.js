@@ -1,6 +1,23 @@
 $(document).ready(function()
 {
-    $.setAjaxForm('#createRecordForm', function(response) { if(response.result == 'success') location.reload(); });
+    $.setAjaxForm('#createRecordForm', function(response)
+    {
+        if(response.result == 'success')
+        {
+            if(response.locate == '' || response.locate == 'reload')
+            {
+                location.reload(); 
+            }
+            else if(response.locate == 'parent.reload')
+            {
+                parent.location.reload();
+            }
+            else
+            {
+                location = response.locate;
+            }
+        }
+    });
 
     $('[name*=objectType]').change(function()
     {
