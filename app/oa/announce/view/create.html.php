@@ -10,7 +10,7 @@
  * @link        http://www.ranzhi.org
  */
 ?>
-<?php include '../../../sys/common/view/header.html.php';?>
+<?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('type', $type);?>
@@ -40,4 +40,4 @@
     </form>
   </div>
 </div>
-<?php include '../../../sys/common/view/footer.html.php';?>
+<?php include '../../common/view/footer.html.php';?>

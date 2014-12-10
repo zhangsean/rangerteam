@@ -70,7 +70,7 @@ $lang->contract->menu->undeliveried = array('link' => 'Wait for delivering|contr
 $lang->contract->menu->finished     = array('link' => 'Finished|contract|browse|mode=finished',   'alias' => 'create,edit,view,history');
 $lang->contract->menu->canceled     = array('link' => 'Canceled|contract|browse|mode=canceled',   'alias' => 'create,edit,view,history');
 $lang->contract->menu->expired      = array('link' => 'Expired|contract|browse|mode=expired',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->willExpire   = array('link' => 'Will Expire|contract|browse|mode=willExpire', 'alias' => 'create,edit,view,history');
+$lang->contract->menu->expire       = array('link' => 'Will Expire|contract|browse|mode=expire', 'alias' => 'create,edit,view,history');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

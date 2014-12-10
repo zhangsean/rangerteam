@@ -18,5 +18,6 @@ $(document).ready(function()
     });
 
     $('.leftmenu li').removeClass('active').find('[href*=' + v.mode + ']').parent().addClass('active');
-    $('.leftmenu li').find('[href*=' + v.mode + ']').parent().addClass('active');
+    /* fix leftmenu active class if v.mode equal expire. */
+    if(v.mode == 'expire') $('.leftmenu li').find('[href*=expired]').parent().removeClass('active');
 })
