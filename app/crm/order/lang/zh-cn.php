@@ -84,4 +84,9 @@ $lang->order->titleLBL  = "%s购买%s";
 $lang->order->basicInfo = "基本信息";
 $lang->order->lifetime  = "订单的一生";
 
-$lang->order->totalAmount = '本页订单计划金额：%s，成交金额：%s；';
+$lang->order->totalAmount   = '本页订单计划金额：%s，成交金额：%s；';
+$lang->order->infoBuy       = "%s 购买 %s。";
+$lang->order->infoContract  = '签署合同：%s。';
+$lang->order->infoAmount    = '计划金额：%s，成交金额：%s。';
+$lang->order->infoContacted = '最后联系：%s。';
+$lang->order->infoNextDate  = '下次联系：%s。';

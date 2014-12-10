@@ -13,37 +13,23 @@
 <?php include '../../common/view/header.html.php'; ?>
 <div class='col-lg-8'>
   <div class='panel'>
-    <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php printf($lang->order->titleLBL, $customer->name, $product->name); echo '(' . $lang->order->statusList[$order->status] . ')';?></strong></div>
+    <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php printf($lang->order->titleLBL, $customer->name, $product->name);?> <span class='label-primary label'><?php echo $customer->level != '0' ? $customer->level : '';?></span> <span class='label-info label order-<?php echo $order->status?>'><?php echo $lang->order->statusList[$order->status];?></span></strong></div>
     <div class='panel-body'>
-      <?php $payed = $order->status == 'payed';?>
-      <table class='table table-info w-p70'>
-        <?php if($order->status == 'signed' and $contract):?>
-        <tr>
-          <th><?php echo $lang->contract->common;?></th>
-          <td>
-            <?php echo html::a($this->createLink('contract', 'view', "contractID={$contract->id}"), $contract->name);?>
-          </td>
-        </tr>
-        <?php endif;?>
-        <tr>
-          <th class='w-80px'><?php echo $lang->order->customer;?></th>
-          <td><?php echo html::a($this->createLink('customer', 'view', "customerID={$customer->id}"), $customer->name) . $lang->customer->levelNameList[$customer->level];?></td>
-          <th><?php echo $lang->order->product;?></th>
-          <td><?php echo html::a($this->createLink('product', 'view', "productID={$product->id}"), $product->name);?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->order->plan;?></th>
-          <td><?php echo zget($currencySign, $order->currency, '') . $order->plan;?></td>
-          <th><?php echo $lang->order->real;?></th>
-          <td><?php echo zget($currencySign, $order->currency, '') . $order->real;?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->order->contactedDate;?></th>
-          <td><?php echo $order->contactedDate;?></td>
-          <th><?php echo $lang->order->nextDate;?></th>
-          <td><?php echo $order->nextDate;?></td>
-        </tr>
-      </table>
+      <?php 
+      $payed = $order->status == 'payed';
+      $customerLink = html::a($this->createLink('customer', 'view', "customerID={$customer->id}"), $customer->name);
+      $productLink  = html::a($this->createLink('product', 'view', "productID={$product->id}"), $product->name);
+      if($contract) $contractLink = html::a($this->createLink('contract', 'view', "contractID={$contract->id}"), $contract->name);
+      ?>
+      <p><?php printf($lang->order->infoBuy, $customerLink, $productLink);?></p>
+      <?php if($order->status == 'signed' and $contract):?>
+      <p><?php printf($lang->order->infoContract, $contractLink);?></p>
+      <?php endif;?>
+      <p><?php printf($lang->order->infoAmount, zget($currencySign, $order->currency, '') . $order->plan, zget($currencySign, $order->currency, '') . $order->real)?></p>
+      <p>
+        <?php if($order->contactedDate != '0000-00-00 00:00:00') printf($lang->order->infoContacted, $order->contactedDate)?>
+        <?php if($order->nextDate != '0000-00-00') printf($lang->order->infoNextDate, $order->nextDate)?>
+      </p>
     </div>
   </div> 
   <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}");?>

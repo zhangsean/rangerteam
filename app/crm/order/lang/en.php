@@ -84,4 +84,9 @@ $lang->order->titleLBL  = "%s buy %s";
 $lang->order->basicInfo = "Basic";
 $lang->order->lifetime  = "Lifetime";
 
-$lang->order->totalAmount = 'The plan amount:%s,real amount:%s in this page;';
+$lang->order->totalAmount   = 'The plan amount:%s,real amount:%s in this page;';
+$lang->order->infoBuy       = "%s buy %s.";
+$lang->order->infoContract  = 'Signed Contract: %s.';
+$lang->order->infoAmount    = 'Planned Amount: %s, Real Amount: %s.';
+$lang->order->infoContacted = 'Contacted Date: %s. ';
+$lang->order->infoNextDate  = 'Next Contact: %s.';
