@@ -42,26 +42,30 @@ $lang->contract->editedBy      = '最后修改';
 $lang->contract->editedDate    = '最后修改时间';
 $lang->contract->handlers      = '经手人';
 
-$lang->contract->browse     = '浏览合同';
-$lang->contract->receive    = '回款';
-$lang->contract->cancel     = '取消合同';
-$lang->contract->view       = '合同详情';
-$lang->contract->finish     = '完成合同';
-$lang->contract->record     = '沟通';
-$lang->contract->delete     = '删除合同';
-$lang->contract->list       = '合同列表';
-$lang->contract->create     = '创建合同';
-$lang->contract->edit       = '编辑合同';
-$lang->contract->setting    = '系统设置';
-$lang->contract->uploadFile = '上传附件';
-$lang->contract->lifetime   = '合同的一生';
+$lang->contract->browse         = '浏览合同';
+$lang->contract->receive        = '回款';
+$lang->contract->cancel         = '取消合同';
+$lang->contract->view           = '合同详情';
+$lang->contract->finish         = '完成合同';
+$lang->contract->record         = '沟通';
+$lang->contract->delete         = '删除合同';
+$lang->contract->list           = '合同列表';
+$lang->contract->create         = '创建合同';
+$lang->contract->edit           = '编辑合同';
+$lang->contract->setting        = '系统设置';
+$lang->contract->uploadFile     = '上传附件';
+$lang->contract->lifetime       = '合同的一生';
+$lang->contract->returnRecords  = '回款记录';
+$lang->contract->completeReturn = '完成回款';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = '等待交付';
+$lang->contract->deliveryList['doing'] = '交付中';
 $lang->contract->deliveryList['done']  = '交付完成';
 
 $lang->contract->returnList[]        = '';
 $lang->contract->returnList['wait']  = '等待回款';
+$lang->contract->returnList['doing'] = '回款中';
 $lang->contract->returnList['done']  = '回款完成';
 
 $lang->contract->statusList[]           = '';
@@ -80,3 +84,4 @@ $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = '成交金额';
 
 $lang->contract->totalAmount = '本页合同总金额：%s，已回款：%s；';
+$lang->contract->returnInfo  = "<p>%s由%s回款%s。</p>";

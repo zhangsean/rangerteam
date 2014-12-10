@@ -10,8 +10,9 @@
  * @link        http://www.ranzhi.org
  */
 $config->contract->require = new stdclass();
-$config->contract->require->create = 'customer, name';
-$config->contract->require->edit   = 'customer, name';
+$config->contract->require->create  = 'customer, name';
+$config->contract->require->edit    = 'customer, name';
+$config->contract->require->receive = 'amount';
 
 $config->contract->editor = new stdclass();
 $config->contract->editor->create   = array('id' => 'items', 'tools' => 'full');

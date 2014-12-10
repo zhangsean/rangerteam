@@ -42,26 +42,30 @@ $lang->contract->editedBy      = 'Edited By';
 $lang->contract->editedDate    = 'Edited Date';
 $lang->contract->handlers      = 'Handlers';
 
-$lang->contract->browse     = 'Browse Contract';
-$lang->contract->receive    = 'Receive';
-$lang->contract->cancel     = 'Cancel Contract';
-$lang->contract->view       = 'View Contract';
-$lang->contract->finish     = 'Finish Contract';
-$lang->contract->record     = 'Record';
-$lang->contract->delete     = 'Delete Contract';
-$lang->contract->list       = 'Contract List';
-$lang->contract->create     = 'Create Contract';
-$lang->contract->edit       = 'Edit';
-$lang->contract->setting    = 'Settings';
-$lang->contract->uploadFile = 'Upload Files';
-$lang->contract->lifetime   = 'Lifetime';
+$lang->contract->browse         = 'Browse Contract';
+$lang->contract->receive        = 'Receive';
+$lang->contract->cancel         = 'Cancel Contract';
+$lang->contract->view           = 'View Contract';
+$lang->contract->finish         = 'Finish Contract';
+$lang->contract->record         = 'Record';
+$lang->contract->delete         = 'Delete Contract';
+$lang->contract->list           = 'Contract List';
+$lang->contract->create         = 'Create Contract';
+$lang->contract->edit           = 'Edit';
+$lang->contract->setting        = 'Settings';
+$lang->contract->uploadFile     = 'Upload Files';
+$lang->contract->lifetime       = 'Lifetime';
+$lang->contract->returnRecords  = 'Payments records';
+$lang->contract->completeReturn = 'Complete payments';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = 'Pending';
+$lang->contract->deliveryList['doing'] = 'Doing';
 $lang->contract->deliveryList['done']  = 'Done';
 
 $lang->contract->returnList[]        = '';
 $lang->contract->returnList['wait']  = 'Pending';
+$lang->contract->returnList['doing'] = 'Doing';
 $lang->contract->returnList['done']  = 'Done';
 
 $lang->contract->statusList[]           = '';
@@ -80,3 +84,4 @@ $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = 'Turnover';
 
 $lang->contract->totalAmount = 'The total amount:%s,returned amount:%s in this page;';
+$lang->contract->returnInfo  = "<p>%s, received payments by %s, %s.</p>";

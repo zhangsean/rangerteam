@@ -26,8 +26,11 @@ class contractModel extends model
             $contract->order = array();
             $contractOrders = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->fetchAll();
             foreach($contractOrders as $contractOrder) $contract->order[] = $contractOrder->order;
-
             $contract->files = $this->loadModel('file')->getByObject('contract', $contractID);
+
+            $contract->returnList = array();
+            $returnList = $this->dao->select('*')->from(TABLE_PLAN)->where('contract')->eq($contractID)->fetchAll();
+            foreach($returnList as $return) $contract->returnList[] = $return;
         }
 
         return $contract;
@@ -298,22 +301,54 @@ class contractModel extends model
 
         $now = helper::now();
         $data = fixer::input('post')
-            ->add('return', 'done')
-            ->add('editedBy', $this->app->user->account)
-            ->add('editedDate', $now)
+            ->add('contract', $contractID)
             ->setDefault('returnedBy', $this->app->user->account)
             ->setDefault('returnedDate', $now)
-            ->join('handlers', ',')
+            ->remove('finish,handlers,depositor,category,dept')
             ->get();
 
-        $this->dao->update(TABLE_CONTRACT)->data($data, $skip = 'uid, comment')
+        $this->dao->insert(TABLE_PLAN)
+            ->data($data, $skip = 'uid, comment')
             ->autoCheck()
-            ->where('id')->eq($contractID)
+            ->batchCheck($this->config->contract->require->receive, 'notempty')
             ->exec();
 
         if(!dao::isError())
         {
-            $this->dao->update(TABLE_CUSTOMER)->set('status')->eq('payed')->where('id')->eq($contract->customer)->exec();
+            $contractData = new stdclass();
+            $contractData->return     = 'doing';
+            $contractData->editedBy   = $this->app->user->account;
+            $contractData->editedDate = $now;
+            $contractData->handlers   = implode(',', $this->post->handlers);
+            if($this->post->finish)
+            {
+                $contractData->return       = 'done';
+                $contractData->returnedBy   = $this->app->user->account;
+                $contractData->returnedDate = $now;
+            }
+
+            $this->dao->update(TABLE_CONTRACT)->data($contractData, $skip = 'uid, comment')->where('id')->eq($contractID)->exec();
+
+            if(!dao::isError() and $this->post->finish) $this->dao->update(TABLE_CUSTOMER)->set('status')->eq('payed')->where('id')->eq($contract->customer)->exec();
+
+            $trade = fixer::input('post')
+                ->add('money', $this->post->amount)
+                ->add('type', 'in')
+                ->add('date', substr($now, 0, 10))
+                ->add('createdBy', $this->app->user->account)
+                ->add('createdDate', $now)
+                ->add('editedBy', $this->app->user->account)
+                ->add('editedDate', $now)
+                ->join('handlers', ',')
+                ->add('trader', $contract->customer)
+                ->add('contract', $contractID)
+                ->remove('finish,amount,returnedBy,returnedDate')
+                ->get();
+
+            $depositor = $this->loadModel('depositor', 'cash')->getByID($trade->depositor);
+            $trade->currency = $depositor->currency;
+
+            $this->dao->insert(TABLE_TRADE)->data($trade, $skip = 'uid,comment')->autoCheck()->exec();
 
             return !dao::isError();
         }
@@ -406,7 +441,8 @@ class contractModel extends model
         if($type == 'view') $menu .= "<div class='btn-group'>";
 
         $menu .= html::a(helper::createLink('action', 'createRecord', "objectType=contract&objectID={$contract->id}&customer={$contract->customer}"), $this->lang->contract->record, "class='$class' data-toggle='modal' data-type='iframe'");
-        if($contract->return == 'wait' and $contract->status == 'normal')
+
+        if($contract->return != 'done' and $contract->status == 'normal')
         {
             $menu .= html::a(helper::createLink('contract', 'receive',  "contract=$contract->id"), $this->lang->contract->return, "data-toggle='modal' class='$class'");
         }
@@ -462,6 +498,7 @@ class contractModel extends model
         if($type == 'browse')
         {
             $menu .="<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
+
             if($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done'))
             {
                 $menu .= "<li>" . html::a(helper::createLink('contract', 'cancel', "contract=$contract->id"), $this->lang->cancel, "data-toggle='modal' class='$class'") . "</li>";
@@ -499,6 +536,7 @@ class contractModel extends model
         $totalAmount  = array();
         $currencyList = $this->loadModel('order')->setCurrencyList();
         $currencySign = $this->loadModel('order')->setCurrencySign();
+        $totalReturn  = $this->dao->select('*')->from(TABLE_PLAN)->fetchGroup('contract');
 
         foreach($contracts as $contract)
         {
@@ -510,7 +548,8 @@ class contractModel extends model
                     if(!isset($totalAmount['return'][$key]))   $totalAmount['return'][$key] = 0;
 
                     $totalAmount['contract'][$key] += $contract->amount;
-                    if($contract->return == 'done') $totalAmount['return'][$key] += $contract->amount;
+                    
+                    if(isset($totalReturn[$contract->id])) foreach($totalReturn[$contract->id] as $return) $totalAmount['return'][$key] += $return->amount;
                 }
             }
         }

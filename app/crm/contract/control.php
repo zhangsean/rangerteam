@@ -69,7 +69,7 @@ class contract extends control
         $this->view->orderBy      = $orderBy;
         $this->view->currencySign = $this->loadModel('order')->setCurrencySign();
         $this->view->currencyList = $this->loadModel('order')->setCurrencyList();
-        if($contracts) $this->view->totalAmount  = $this->contract->countAmount($contracts);
+        if($contracts) $this->view->totalAmount = $this->contract->countAmount($contracts);
 
         $this->display();
     }
@@ -198,21 +198,36 @@ class contract extends control
      */
     public function receive($contractID)
     {
-        $contract = $this->contract->getByID($contractID);
+        $this->loadModel('trade', 'cash');
+        $contract     = $this->contract->getByID($contractID);
+        $currencySign = $this->loadModel('order')->setCurrencySign();
         if(!empty($_POST))
         {
             $this->contract->receive($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            $this->loadModel('action')->create('contract', $contractID, 'Returned', $this->post->comment);
-            $this->loadModel('action')->create('customer', $contract->customer, 'receiveContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
+            $actionExtra = html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name) . $this->lang->contract->return . zget($currencySign, $contract->currency, '') . $this->post->amount;
+
+            if($this->post->finish)
+            {
+                $this->loadModel('action')->create('contract', $contractID, 'finishReturned', $this->post->comment, zget($currencySign, $contract->currency, '') . $this->post->amount, $this->post->returnedBy);
+                $this->loadModel('action')->create('customer', $contract->customer, 'finishReceiveContract', $this->post->comment, $actionExtra, $this->post->returnedBy);
+            }
+            else
+            {
+                $this->loadModel('action')->create('contract', $contractID, 'returned', $this->post->comment, zget($currencySign, $contract->currency, '') . $this->post->amount, $this->post->returnedBy);
+                $this->loadModel('action')->create('customer', $contract->customer, 'receiveContract', $this->post->comment, $actionExtra, $this->post->returnedBy);
+            }
             
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
-        $this->view->title      = $this->lang->contract->return;
-        $this->view->contractID = $contractID;
-        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->title         = $this->lang->contract->return;
+        $this->view->contractID    = $contractID;
+        $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
+        $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
+        $this->view->categories    = $this->loadModel('tree')->getOptionMenu('in', 0);
         $this->display();
     }
 
