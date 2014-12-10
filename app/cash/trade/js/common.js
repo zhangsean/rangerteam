@@ -22,7 +22,14 @@ $(document).ready(function()
         }
     })
 
-    $('.leftmenu li').find('[href*=' + v.mode + ']').parent().addClass('active');
+    if(config.requestType == 'GET')
+    {
+        $('.leftmenu li').removeClass('active').find("[href*='=" + v.mode + "']").parent().addClass('active');
+    }
+    else
+    {
+        $('.leftmenu li').removeClass('active').find('[href*=' + v.mode + ']').parent().addClass('active');
+    }
 })
 
 /**
