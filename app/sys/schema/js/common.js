@@ -22,6 +22,6 @@ $(document).ready(function()
     $('#feeRow1').change();
 
 
-    var menu =  $('.leftmenu .nav li').size() == 0 ? '.nav li' : '.leftmenu .nav li';
+    var menu =  $('#menu .nav li').size() == 0 ? '.nav li' : '#menu .nav li';
     $(menu + " a[href*='schema']").parent().addClass('active');
 })

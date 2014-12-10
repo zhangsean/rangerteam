@@ -3,9 +3,7 @@ $(document).ready(function()
     if(typeof(v.projectID) != undefined && v.projectID != 0)
     {
         $('.menu .nav li').removeClass('active');
-        $('.leftmenu li').removeClass('active').find('[href*=' + v.status + ']').parent().addClass('active');
-        $('.leftmenu li').find('[href*=' + v.status + ']').parent().addClass('active');
-
+        $('#menu li').removeClass('active').find('[href*=' + v.status + ']').parent().addClass('active');
     }
 
     $("#createButton").modalTrigger({width:800});
@@ -33,6 +31,6 @@ $(document).ready(function()
         return false;
     });
 
-    var $leftmenu = $('.menu.leftmenu');
+    var $leftmenu = $('#menu');
     $leftmenu .next('a').css('margin-top', '10px').appendTo($leftmenu);
 })

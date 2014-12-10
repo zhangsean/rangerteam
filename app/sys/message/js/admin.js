@@ -1,8 +1,8 @@
 $(document).ready(function()
 {
     /* Set active menu. */
-    $('.leftmenu li.active').removeClass('active');
-    $(".leftmenu a[href*='type=" + v.type  + "']").parent().addClass('active');
+    $('#menu li.active').removeClass('active');
+    $("#menu a[href*='type=" + v.type  + "']").parent().addClass('active');
 
     $('.pre').click(function()
     {

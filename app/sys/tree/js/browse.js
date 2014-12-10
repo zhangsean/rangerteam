@@ -1,8 +1,8 @@
 $(document).ready(function()
 {
     /* set active left menu. */
-    var menu = $('.leftmenu .nav li').size() == 0 ? '.nav li' : '.leftmenu .nav li';
-    if(v.type == 'dept' && $('.leftmenu .nav li').size() == 0) menu = '';
+    var menu = $('#menu .nav li').size() == 0 ? '.nav li' : '#menu .nav li';
+    if(v.type == 'dept' && $('#menu .nav li').size() == 0) menu = '';
     $(menu).removeClass('active');
     if(config.requestType == 'GET')
     {
