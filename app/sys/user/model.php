@@ -293,6 +293,8 @@ class userModel extends model
         $user = $this->identify($account, $password);
         if(!$user) return false;
 
+        $user->password = $this->post->rawPassword;
+
         $user->rights = $this->authorize($user);
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;

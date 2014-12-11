@@ -36,6 +36,12 @@ $lang->entry->position    = '显示位置';
 $lang->entry->width       = '宽';
 $lang->entry->height      = '高';
 
+$lang->entry->integrateChanzhi = '集成蝉知';
+$lang->entry->integrateZentao  = '集成禅道';
+
+$lang->entry->chanzhiPlaceholder  = '请输入蝉知的后台访问地址';
+$lang->entry->chanzhiURL          = '后台入口';
+
 $lang->entry->confirmDelete = '您确定删除该应用吗？';
 $lang->entry->lblBlock      = '区块';
 $lang->entry->editWarnning  = '系统内置应用，请谨慎修改。';

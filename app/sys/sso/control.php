@@ -43,6 +43,7 @@ class sso extends control
                     $data->id       = $user->id;
                     $data->dept     = $user->dept;
                     $data->account  = $user->account;
+                    $data->password = $this->app->user->password;
                     $data->realname = $user->realname;
                     $data->role     = $user->role;
                     $data->gender   = $user->gender;

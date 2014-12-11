@@ -1,13 +1,14 @@
 /* Keep session random valid. */
 $('#submit').click(function()
 {
-    var password = md5(md5(md5($('#password').val()) + $('#account').val()) + v.random);
+    var password    = md5(md5(md5($('#password').val()) + $('#account').val()) + v.random);
+    var rawPassword = md5($('#password').val());
 
     loginURL = createLink('user', 'login');
     $.ajax(
     {
         type: "POST",
-        data:"account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()),
+        data:"account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()) + '&rawPassword=' + rawPassword,
         url:$('#ajaxForm').attr('action'),
         dataType:'json',
         success:function(data)

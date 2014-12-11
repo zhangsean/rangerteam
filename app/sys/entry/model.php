@@ -67,10 +67,17 @@ class entryModel extends model
             ->remove('allip')
             ->stripTags('login,logout,block', $this->config->allowedTags->admin)
             ->get();
+        if($this->post->chanzhi) 
+        {
+            $entry->logout = $entry->login . "?m=ranzhi&f=logout";
+            $entry->block  = $entry->login . "?m=ranzhi&f=block";
+            $entry->login .= "?m=ranzhi&f=login";
+        }
+
         if($entry->size == 'custom') $entry->size = helper::jsonEncode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
 
         $this->dao->insert(TABLE_ENTRY)
-            ->data($entry, $skip = 'width,height,files')
+            ->data($entry, $skip = 'width,height,files,chanzhi')
             ->autoCheck()
             ->batchCheck($this->config->entry->require->create, 'notempty')
             ->check('code', 'unique')

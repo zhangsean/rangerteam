@@ -9,6 +9,8 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
+js::set('chanzhiPlaceholder', $lang->entry->chanzhiPlaceholder);
+js::set('chanzhiURL', $lang->entry->chanzhiURL);
 include '../../common/view/header.html.php';
 ?>
 <div class='panel'>
@@ -27,6 +29,9 @@ include '../../common/view/header.html.php';
               <?php echo html::input('abbr', '', "class='form-control' maxlength='2' placeholder='{$lang->entry->note->abbr}'");?>
               <div class='input-group-addon'>
                 <label class="checkbox"><input type="checkbox" id="visible" name="visible" value="1"> <?php echo $lang->entry->note->visible;?></label>
+              </div>
+              <div class='input-group-addon'>
+                <label class="checkbox"><input type="checkbox" id="chanzhi" name="chanzhi" value="1"> <?php echo $lang->entry->integrateChanzhi;?></label>
               </div>
             </div>
           </td>
@@ -67,7 +72,7 @@ include '../../common/view/header.html.php';
         </tr>
         <tr>
           <th><?php echo $lang->entry->key;?></th>
-          <td><?php echo html::input('key', $key, "class='form-control' readonly='readonly'");?></td>
+          <td><?php echo html::input('key', $key, "class='form-control'");?></td>
           <td><span class="help-inline"><?php echo html::a('javascript:void(0)', $lang->entry->createKey, 'onclick="createKey()"')?></span></td>
         </tr>
         <tr>
