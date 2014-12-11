@@ -544,6 +544,38 @@ EOT;
 
         return  $string;
     }
+
+        /**
+     * Create select buttons include 'selectAll' and 'selectAll'.
+     * 
+     * @param  string $scope  the scope of select reverse.
+     * @return string
+     */
+     static public function selectButton($scope = "", $asGroup = true)
+    {
+                $string = <<<EOT
+<script>
+$(function()
+{
+    $('#allchecker, #reversechecker').click(function()
+    {
+        var e = $(this);
+        if(e.closest('.datatable').length) return;
+        scope = e.data('scope');
+        scope = scope ? $('#' + scope) : e.closest('.table');
+        if(!scope.length) scope = e.closest('form');
+        scope.find('input:checkbox').each(e.hasClass('check-inverse') ? function() { $(this).prop("checked", !$(this).prop("checked"));} : function() { $(this).prop("checked", true);});
+    });
+});
+</script>
+EOT;
+        global $lang;
+        if($asGroup) $string .= "<div class='btn-group'>";
+        $string .= "<a id='allchecker' class='btn btn-select-all check-all' data-scope='$scope' href='javascript:;' >{$lang->selectAll}</a>";
+        $string .= "<a id='reversechecker' class='btn btn-select-reverse check-inverse' data-scope='$scope' href='javascript:;'>{$lang->selectReverse}</a>";
+        if($asGroup) $string .= "</div>";
+        return  $string;
+    }
 }
 
 /**
