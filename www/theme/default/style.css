@@ -271,8 +271,7 @@ body.page-actions-fixed {padding-bottom: 70px}
 .block.input-group-btn .btn-primary .caret, .block.input-group-btn .btn-success .caret, .block.input-group-btn .btn-warning .caret, .block.input-group-btn .btn-danger .caret, .block.input-group-btn .btn-info .caret {border-top-color: #333}
 
 /* panels in block */
-.panel-dragging-shadow {width: 100px!important; height: 100px!important; overflow: hidden; border-radius: 50px; transition: all 0.3s;}
-.panel-dragging-shadow .panel-actions {display: none}
+.panel-dragging-shadow.circle {border-radius: 4px!important;}
 
 /* modal */
 .modal .modal-dialog {max-width: 100%; border: 8px solid #666; border-color: rgba(0,0,0,.25)}
