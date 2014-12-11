@@ -33,7 +33,7 @@ class sso extends control
 
         if($this->sso->checkIP($entry->code))
         {
-            if($auth == md5($entry->code . $token . $entry->key))
+            if($auth == md5($entry->code . $userIP . $token . $entry->key))
             {
                 if($this->session->user->ip == $userIP)
                 {
@@ -48,6 +48,12 @@ class sso extends control
                     $data->role     = $user->role;
                     $data->gender   = $user->gender;
                     $data->email    = $user->email;
+                    $data->birthday = $user->birthday;
+                    $data->mobile   = $user->mobile;
+                    $data->phone    = $user->phone;
+                    $data->address  = $user->address;
+                    $data->skype    = $user->skype;
+                    $data->qq       = $user->qq;
 
                     $response['status'] = 'success';
                     $response['data']   = base64_encode(json_encode($data));
