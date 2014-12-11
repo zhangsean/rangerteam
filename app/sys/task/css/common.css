@@ -10,10 +10,6 @@ form .pri {width: 48px;}
 .taskMenu {width: 200px}
 .taskMenu + .page-content {margin-left: 220px;}
 
-#currentItem .icon-caret-down {position: absolute; right: 10px; top: 10px}
-#currentItem {font-weight: bold; background-color: #F1F1F1; background-image: -moz-linear-gradient(#fafafa, #f1f1f1); background-image: -webkit-linear-gradient(#FAFAFA, #F1F1F1); background-image: linear-gradient(#FAFAFA, #F1F1F1); background-repeat: repeat-x;}
-
 #dropMenu {min-width: 200px;}
 #defaultMenu, #finishedMenu, #suspendMenu {min-width: 168px;}
-#groupBar{ margin:0 20px; }
 #groupBar .btn-group{margin-right: 15px;}

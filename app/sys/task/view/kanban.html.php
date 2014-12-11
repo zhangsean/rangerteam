@@ -12,12 +12,12 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php js::set('notAllowed', $lang->task->notAllowed);?>
-<div class='page-content'>
+<?php js::set('groupBy', $groupBy);?>
+<?php $this->loadModel('project')->setMenu($projects, $projectID);?>
+<div class='with-menu page-content'>
   <div class='panel'>
     <div class='panel-heading'>
       <strong><?php echo $project->name;?></strong>
-      <?php include 'headernav.html.php';?>
-      <div class='panel-actions pull-right'><?php echo html::a($this->inlink('batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?></div>
     </div>
     <div class='panel-body boards-container'>
       <div class='boards task-boards clearfix' id='taskKanban'>

@@ -28,11 +28,7 @@ class project extends control
     {
         if(empty($this->projects)) $this->locate(inlink('create'));
 
-        $moduleMenu   = commonModel::createModuleMenu('project');
-        $createButton = html::a(inlink('create'), $this->lang->project->create, "id='createButton' class='btn'");
-        
         $this->view->title      = $this->lang->project->common;
-        $this->view->moduleMenu = $moduleMenu . $createButton;
         $this->view->status     = $status;
         $this->view->projects   = $this->project->getList($status);
         $this->view->users      = $this->loadModel('user')->getPairs('noclosed');

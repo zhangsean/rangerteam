@@ -334,16 +334,56 @@ class projectModel extends model
         setCookie("lastProject", $projectID, $this->config->cookieLife, $this->config->webRoot);
         $currentProject = $this->getById($projectID);
 
-        $backButton = html::a(helper::createLink('project', 'index', "status={$currentProject->status}"), $this->lang->task->backToProjects, "class='btn' id='backButton'");
-        $menu  = "<nav class='menu leftmenu affix taskMenu'>" . $backButton . "<ul class='nav nav-stacked nav-primary'>";
-        $menu .= "<li><a id='currentItem' href=\"javascript:showDropMenu('project', '$projectID', '$currentModule', '$currentMethod', '$extra')\">{$currentProject->name} <span class='icon-caret-down'></span></a><div id='dropMenu'></div></li>";
-        $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), $this->lang->task->all);
-        $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=createdBy"), $this->lang->task->createdByMe);
-        $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=assignedTo"), $this->lang->task->assignedToMe);
-        $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=closedBy"), $this->lang->task->closedByMe);
-        $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=untilToday"), $this->lang->task->untilToday);
-        $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=expired"), $this->lang->task->expired);
-        $menu .= "</ul></nav>";
+        $methodName = $this->app->getMethodName();
+        $backButton = html::a(helper::createLink('project', 'index', "status={$currentProject->status}"), "<i class='icon-th'></i> " . $this->lang->task->backToProjects, "id='backButton'");
+        $menu  = "<nav id='menu'><ul class='nav'>";
+        $menu .= '<li>' . $backButton . '</li>';
+
+        $menu .= '<li class="divider"></li>';
+        $menu .= "<li><a id='currentItem' href=\"javascript:showDropMenu('project', '$projectID', '$currentModule', '$currentMethod', '$extra')\"><i class='icon-folder-open-alt'></i> <strong>{$currentProject->name}</strong> <span class='icon-caret-down'></span></a><div id='dropMenu'></div></li>";
+
+        if($methodName == 'browse' || $methodName == 'kanban' || $methodName == 'outline')
+        {
+            $this->lang->task->browse = $this->lang->task->list;
+            $viewName = $this->lang->task->{$methodName};
+            $viewIcons = array('browse' => 'list-ul', 'kanban' => 'columns', 'outline' => 'list-alt');
+            $menu .= '<li class="divider"></li>';
+            $menu .= "<li id='viewBar' class='dropdown'><a href='javascript:;' id='groupButton' data-toggle='dropdown' class='dropdown-toggle'><icon class='icon-" . $viewIcons[$methodName] . "'></icon> {$viewName} <icon class='icon-caret-down'></icon></a><ul class='dropdown-menu'>";
+            $menu .= "<li" . ($methodName == 'browse' ? " class='active'" : '') . ">" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $this->lang->task->list) . "</li>";
+            $menu .= "<li" . ($methodName == 'kanban' ? " class='active'" : '') . ">" . html::a(helper::createLink('task', 'kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $this->lang->task->kanban) . "</li>";
+            $menu .= "<li" . ($methodName == 'outline' ? " class='active'" : '') . ">" . html::a(helper::createLink('task', 'outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $this->lang->task->outline) . "</li>";
+            $menu .= '</ul></li>';
+        }
+
+        if($methodName == 'kanban' || $methodName == 'outline')
+        {
+            $menu .= '<li class="divider"></li>';
+            $menu .= "<li id='groupBar' class='dropdown'><a href='javascript:;' id='groupButton' data-toggle='dropdown' class='dropdown-toggle'><icon class='icon-flag'></icon> <span id='groupByName'></span> <icon class='icon-caret-down'></icon></a><ul class='dropdown-menu'>";
+            foreach ($this->lang->task->groups as $key => $value)
+            {
+                if(empty($key)) continue;
+                $menu .= "<li data-group='{$key}'>" . html::a(helper::createLink('task', $methodName, "projectID=$projectID&groupBy=$key"), $value) . "</li>";
+            }
+            $menu .= '</ul></li>';
+
+            if($methodName == 'outline')
+            {
+                $menu .= '<li class="divider"></li><li><a href="javascript:;" id="toggleAll"><i class="icon-plus"></i></a></li>';
+            }
+        }
+        else
+        {
+            $menu .= '<li class="divider"></li>';
+            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), $this->lang->task->all);
+            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=createdBy"), $this->lang->task->createdByMe);
+            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=assignedTo"), $this->lang->task->assignedToMe);
+            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=closedBy"), $this->lang->task->closedByMe);
+            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=untilToday"), $this->lang->task->untilToday);
+            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=expired"), $this->lang->task->expired);
+        }
+        $menu .= "</ul>";
+
+        $menu .= "<div class='pull-right'>" . html::a(helper::createLink('batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $this->lang->task->create, 'class="btn btn-primary"') . "</div></nav>";
 
         return $menu;
     }

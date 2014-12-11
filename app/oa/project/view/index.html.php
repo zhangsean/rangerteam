@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('status', $status);?>
+<div id='menuActions'><?php echo html::a(inlink('create'), $this->lang->project->create, "id='createButton' class='btn btn-primary'");?></div>
 <div class='row'>
 <?php foreach($projects as $project):?>
   <div class='col-md-4 col-sm-6'>

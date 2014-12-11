@@ -8,5 +8,8 @@ $(function()
         $('form #pri').val($(this).addClass('active').data('value'));
     });
 
-    $('#groupButton').html($('#groupButton').next().find('.active a').html()).append(' <icon class="icon-caret-down"></icon>');
-})
+    if($('#groupBar').length)
+    {
+        $('#groupByName').text($('#groupBar .dropdown-menu > li[data-group="' + v.groupBy + '"]').addClass('active').text());
+    }
+});

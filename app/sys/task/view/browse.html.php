@@ -17,8 +17,6 @@
   <div class='panel'>
     <div class='panel-heading'>
       <strong><?php echo $project->name;?></strong>
-      <?php include 'headernav.html.php';?>
-      <div class='panel-actions pull-right'><?php echo html::a($this->inlink('batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->task->create, 'class="btn btn-primary"');?></div>
     </div>
     <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
       <thead>
@@ -29,11 +27,11 @@
           <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->task->name);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('deadline',    $orderBy, $vars, $lang->task->deadline);?></th>
           <th class='w-80px'> <?php commonModel::printOrderLink('assignedTo',  $orderBy, $vars, $lang->task->assignedTo);?></th>
-          <th class='w-80px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->task->status);?></th>
+          <th class='w-90px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->task->status);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->task->createdDate);?></th>
           <th class='w-90px'> <?php commonModel::printOrderLink('consumed',    $orderBy, $vars, $lang->task->consumedAB . $lang->task->lblHour);?></th>
-          <th class='w-90px'> <?php commonModel::printOrderLink('left',        $orderBy, $vars, $lang->task->left . $lang->task->lblHour);?></th>
-          <th class='w-180px'><?php echo $lang->actions;?></th>
+          <th class='w-100px'> <?php commonModel::printOrderLink('left',        $orderBy, $vars, $lang->task->left . $lang->task->lblHour);?></th>
+          <th class='w-200px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
