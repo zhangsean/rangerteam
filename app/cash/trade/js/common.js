@@ -24,11 +24,11 @@ $(document).ready(function()
 
     if(config.requestType == 'GET')
     {
-        $('.leftmenu li').removeClass('active').find("[href*='=" + v.mode + "']").parent().addClass('active');
+        $('#menu li').removeClass('active').find("[href*='=" + v.mode + "']").parent().addClass('active');
     }
     else
     {
-        $('.leftmenu li').removeClass('active').find('[href*=' + v.mode + ']').parent().addClass('active');
+        $('#menu li').removeClass('active').find('[href*=' + v.mode + ']').parent().addClass('active');
     }
 })
 

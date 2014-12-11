@@ -13,16 +13,16 @@
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('mode', $mode);?>
 <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+<div id='menuActions'>
+  <?php echo html::a(inlink('create', 'type=in'),  "{$lang->trade->createIn}</i>", "class='btn btn-primary'")?>
+  <?php echo html::a(inlink('create', 'type=out'), "{$lang->trade->createOut}</i>", "class='btn btn-primary'")?>
+  <?php echo html::a(inlink('transfer'), "{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
+  <?php echo html::a(inlink('batchcreate'), "{$lang->trade->batchCreate}</i>", "class='btn btn-primary'")?>
+  <?php echo html::a(inlink('import'), "{$lang->trade->import}</i>", "class='btn btn-primary' data-toggle='modal'")?>
+</div>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->trade->browse;?></strong>
-    <div class="panel-actions pull-right">
-      <?php echo html::a(inlink('create', 'type=in'),  "{$lang->trade->createIn}</i>", "class='btn btn-primary'")?>
-      <?php echo html::a(inlink('create', 'type=out'), "{$lang->trade->createOut}</i>", "class='btn btn-primary'")?>
-      <?php echo html::a(inlink('transfer'), "{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
-      <?php echo html::a(inlink('batchcreate'), "{$lang->trade->batchCreate}</i>", "class='btn btn-primary'")?>
-      <?php echo html::a(inlink('import'), "{$lang->trade->import}</i>", "class='btn btn-primary' data-toggle='modal'")?>
-    </div>
   </div>
   <form method='post' action='<?php echo inlink('batchedit', 'step=form')?>'>
     <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>
@@ -64,11 +64,11 @@
       </tbody>
       <tfoot>
         <tr>
-          <td colspan='2'><?php echo html::selectAll() . html::selectReverse() . html::submitButton($lang->edit);?></td>
+          <td colspan='3'><?php echo html::selectButton() . html::submitButton($lang->edit);?></td>
           <td class='text-middle' colspan='5'>
             <div class='text-danger'><?php $this->trade->countMoney($trades);?></div>
           </td>
-          <td colspan='4'><?php echo $pager->get();?></td>
+          <td colspan='3'><?php echo $pager->get();?></td>
         </tr>
       </tfoot>
     </table>

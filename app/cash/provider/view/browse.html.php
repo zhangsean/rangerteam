@@ -12,10 +12,12 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('mode', $mode);?>
+<div id='menuActions'>
+  <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->provider->create, 'class="btn btn-primary"');?>
+</div>
 <div class='panel'>
   <div class='panel-heading'>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->provider->list;?></strong>
-  <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->provider->create, 'class="btn btn-primary"');?></div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data'>
     <thead>
@@ -23,12 +25,12 @@
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->provider->id);?></th>
         <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->provider->name);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('size',        $orderBy, $vars, $lang->provider->size);?></th>
-        <th class='w-60px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->provider->type);?></th>
+        <th class='w-110px'><?php commonModel::printOrderLink('size',        $orderBy, $vars, $lang->provider->size);?></th>
+        <th class='w-70px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->provider->type);?></th>
         <th class='w-160px'> <?php commonModel::printOrderLink('area',        $orderBy, $vars, $lang->provider->area);?></th>
         <th class='w-150px'> <?php commonModel::printOrderLink('industry',    $orderBy, $vars, $lang->provider->industry);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->provider->createdDate);?></th>
-        <th class='w-110px'><?php echo $lang->actions;?></th>
+        <th class='w-120px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
