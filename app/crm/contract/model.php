@@ -31,6 +31,10 @@ class contractModel extends model
             $contract->returnList = array();
             $returnList = $this->dao->select('*')->from(TABLE_PLAN)->where('contract')->eq($contractID)->fetchAll();
             foreach($returnList as $return) $contract->returnList[] = $return;
+
+            $contract->deliveryList = array();
+            $deliveryList = $this->dao->select('*')->from(TABLE_DELIVERY)->where('contract')->eq($contractID)->fetchAll();
+            foreach($deliveryList as $delivery) $contract->deliveryList[] = $delivery;
         }
 
         return $contract;
@@ -166,10 +170,6 @@ class contractModel extends model
             ->setDefault('returnedDate', '0000-00-00')
             ->setDefault('begin', '0000-00-00')
             ->setDefault('end', '0000-00-00')
-            ->setIF($this->post->deliveredBy, 'delivery', 'done')
-            ->setIF(($this->post->deliveredBy and !$this->post->deliveredDate), 'deliveredDate', substr($now, 0, 10))
-            ->setIF($this->post->returnedBy, 'return', 'done')
-            ->setIF(($this->post->returnedBy and !$this->post->returnedDate), 'returnedDate', substr($now, 0, 10))
             ->setIF($this->post->status == 'normal', 'canceledBy', '')
             ->setIF($this->post->status == 'normal', 'canceledDate', '0000-00-00')
             ->setIF($this->post->status == 'normal', 'finishedBy', '')
@@ -271,21 +271,36 @@ class contractModel extends model
     public function delivery($contractID)
     {
         $now = helper::now();
-        $contract = fixer::input('post')
-            ->add('delivery', 'done')
-            ->add('editedBy', $this->app->user->account)
-            ->add('editedDate', $now)
+        $data = fixer::input('post')
+            ->add('contract', $contractID)
             ->setDefault('deliveredBy', $this->app->user->account)
             ->setDefault('deliveredDate', $now)
-            ->join('handlers', ',')
             ->get();
 
-        $this->dao->update(TABLE_CONTRACT)->data($contract, $skip = 'uid, comment')
-            ->autoCheck()
-            ->where('id')->eq($contractID)
-            ->exec();
+        $this->dao->insert(TABLE_DELIVERY)->data($data, $skip = 'uid, comment, handlers, finish')->autoCheck()->exec();
 
-        return !dao::isError();
+        if(!dao::isError())
+        {
+            $contract = fixer::input('post')
+                ->add('delivery', 'doing')
+                ->add('editedBy', $this->app->user->account)
+                ->add('editedDate', $now)
+                ->setDefault('deliveredBy', $this->app->user->account)
+                ->setDefault('deliveredDate', $now)
+                ->setIF($this->post->finish, 'delivery', 'done')
+                ->join('handlers', ',')
+                ->remove('finish')
+                ->get();
+
+            $this->dao->update(TABLE_CONTRACT)->data($contract, $skip = 'uid, comment')
+                ->autoCheck()
+                ->where('id')->eq($contractID)
+                ->exec();
+
+            return !dao::isError();
+        }
+
+        return false;
     }
 
     /**
@@ -316,16 +331,13 @@ class contractModel extends model
         if(!dao::isError())
         {
             $contractData = new stdclass();
-            $contractData->return     = 'doing';
-            $contractData->editedBy   = $this->app->user->account;
-            $contractData->editedDate = $now;
-            $contractData->handlers   = implode(',', $this->post->handlers);
-            if($this->post->finish)
-            {
-                $contractData->return       = 'done';
-                $contractData->returnedBy   = $this->app->user->account;
-                $contractData->returnedDate = $now;
-            }
+            $contractData->return       = 'doing';
+            $contractData->editedBy     = $this->app->user->account;
+            $contractData->editedDate   = $now;
+            $contractData->handlers     = implode(',', $this->post->handlers);
+            $contractData->returnedBy   = $this->post->returnedBy ? $this->post->returnedBy : $this->app->user->account;
+            $contractData->returnedDate = $now;
+            if($this->post->finish) $contractData->return = 'done';
 
             $this->dao->update(TABLE_CONTRACT)->data($contractData, $skip = 'uid, comment')->where('id')->eq($contractID)->exec();
 
@@ -451,7 +463,7 @@ class contractModel extends model
             $menu .= "<a href='###' disabled='disabled' class='disabled  $class'>" . $this->lang->contract->return . '</a> ';
         }
 
-        if($contract->delivery == 'wait' and $contract->status == 'normal')
+        if($contract->delivery != 'done' and $contract->status == 'normal')
         {
             $menu .= html::a(helper::createLink('contract', 'delivery', "contract=$contract->id"), $this->lang->contract->delivery, "data-toggle='modal' class='$class'");
         }

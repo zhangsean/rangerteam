@@ -6,3 +6,11 @@ CREATE TABLE `crm_plan` (
   `returnedDate` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `crm_delivery` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `contract` mediumint(8) unsigned NOT NULL,
+  `deliveredBy` char(30) COLLATE 'utf8_general_ci' NOT NULL,
+  `deliveredDate` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

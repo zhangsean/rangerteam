@@ -102,6 +102,16 @@
     </div>
   </div>
   <?php endif;?>
+  <?php if(!empty($contract->deliveryList)):?>
+  <div class='panel'>
+    <div class='panel-heading'>
+      <strong><i class='icon-file-text-alt'></i> <?php echo $lang->contract->deliveryRecords;?></strong>
+    </div>
+    <div class='panel-body'>
+      <?php foreach($contract->deliveryList as $delivery) printf($lang->contract->deliveryInfo, $delivery->deliveredDate, zget($users, $delivery->deliveredBy, $delivery->deliveredBy));?>
+    </div>
+  </div>
+  <?php endif;?>
   <div class='panel'>
     <div class='panel-heading'>
       <strong><?php echo $lang->contract->lifetime;?></strong>

@@ -130,6 +130,7 @@ define('TABLE_CONTRACT',      '`crm_contract`');
 define('TABLE_CONTRACTORDER', '`crm_contractOrder`');
 define('TABLE_PLAN',          '`crm_plan`');
 define('TABLE_SERVICE',       '`crm_service`');
+define('TABLE_DELIVERY',      '`crm_delivery`');
 
 /* Tables for oa. */
 define('TABLE_TODO',        '`oa_todo`');
