@@ -78,6 +78,8 @@ $lang->trade->importedFields['trader']   = 'Trader';
 $lang->trade->importedFields['in']       = 'Income';
 $lang->trade->importedFields['out']      = 'Expend';
 $lang->trade->importedFields['date']     = 'Date';
+$lang->trade->importedFields['category'] = 'Category';
+$lang->trade->importedFields['dept']     = 'Department';
 $lang->trade->importedFields['desc']     = 'Desc';
 $lang->trade->importedFields['fee']      = 'Fee';
 

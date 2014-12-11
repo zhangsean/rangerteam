@@ -60,7 +60,7 @@
             </div>
           </td>
           <td><?php echo html::input("money[$i]", $trade['money'], "class='form-control'");?></td>
-          <td><?php echo html::select("dept[$i]", $deptList, '', "class='form-control chosen'");?></td>
+          <td><?php echo html::select("dept[$i]", $deptList, $trade['dept'], "class='form-control chosen'");?></td>
           <td><?php echo html::select("handlers[$i][]", $users, $this->app->user->account, "class='form-control chosen' id='handlers{$i}' multiple");?></td>
           <td><?php echo html::input("date[$i]", $trade['date'], "class='form-control form-date' id='date{$i}'");?></td>
           <td><?php echo html::textarea("desc[$i]", $trade['desc'], "rows='1' class='form-control'");?></td>

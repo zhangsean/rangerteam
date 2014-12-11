@@ -78,6 +78,8 @@ $lang->trade->importedFields['trader']   = '商户';
 $lang->trade->importedFields['in']       = '收入';
 $lang->trade->importedFields['out']      = '支出';
 $lang->trade->importedFields['date']     = '时间';
+$lang->trade->importedFields['category'] = '科目';
+$lang->trade->importedFields['dept']     = '部门';
 $lang->trade->importedFields['desc']     = '备注';
 $lang->trade->importedFields['fee']      = '手续费';
 

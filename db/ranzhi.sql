@@ -579,6 +579,7 @@ CREATE TABLE `sys_schema` (
   `desc`     char(10) NOT NULL,
   `date`     char(10) NOT NULL,
   `fee`      char(10) NOT NULL,
+  `dept`     char(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_sso`;

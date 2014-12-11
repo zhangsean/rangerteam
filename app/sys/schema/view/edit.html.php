@@ -27,6 +27,10 @@
           <td><?php echo html::input('category', $schema->category, "class='form-control' placeholder='{$lang->schema->placeholder->common}'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->trade->dept;?></th>
+          <td><?php echo html::input('dept', $schema->dept, "class='form-control' placeholder='{$lang->schema->placeholder->common}'");?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->trade->trader;?></th>
           <td><?php  echo html::input('trader', $schema->trader, "class='form-control' placeholder='{$lang->schema->placeholder->common}'");?></td>
         </tr>

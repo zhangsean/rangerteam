@@ -378,9 +378,11 @@ class trade extends control
         $traderList    = $this->customer->getPairs('provider,partner');
         $expenseTypes  = $this->loadModel('tree')->getOptionMenu('out', 0);
         $incomeTypes   = $this->tree->getOptionMenu('in', 0);
+        $deptList      = $this->loadModel('tree')->getPairs(0, 'dept');
         $flipCustomers = array_flip($customerList);
         $flipTraders   = array_flip($traderList);
         $flipTypeList  = array_flip($this->lang->trade->typeList);
+        $flipDeptList  = array_flip($deptList);
 
         $dataList = array();
         foreach($rows as $row)
@@ -424,11 +426,15 @@ class trade extends control
                     continue;
                 }
 
+                if($field == 'category') a($col);
                 $data[$field] = (is_int($col) and isset($row[$col])) ? trim($row[$col]) : '';
                 if($field == 'date') $data[$field] = date('Y-m-d', strtotime($data[$field]));
             }
 
+            if(isset($flipDeptList[$data['dept']])) $data['dept'] = $flipDeptList[$data['dept']];
+
             if(isset($flipTypeList[$data['type']])) $data['type'] = $flipTypeList[$data['type']];
+
             /* if fee is a record and trader is empty then this type of data is fee. */
             if(!$schema->fee and !$data['trader'])
             {

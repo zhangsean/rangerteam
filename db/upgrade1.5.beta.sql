@@ -14,3 +14,5 @@ CREATE TABLE `crm_delivery` (
   `deliveredDate` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `sys_schema` ADD `dept` char(10) NOT NULL AFTER `fee`;
