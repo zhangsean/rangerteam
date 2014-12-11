@@ -56,6 +56,7 @@ $lang->contract->setting          = 'Settings';
 $lang->contract->uploadFile       = 'Upload Files';
 $lang->contract->lifetime         = 'Lifetime';
 $lang->contract->returnRecords    = 'Payments records';
+$lang->contract->deliveryRecords  = 'Delivery records';
 $lang->contract->completeReturn   = 'Complete payments';
 $lang->contract->completeDelivery = 'Complete delivery';
 
@@ -84,5 +85,6 @@ $lang->contract->codeUnitList['input'] = 'Input';
 $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = 'Turnover';
 
-$lang->contract->totalAmount = 'The total amount:%s,returned amount:%s in this page;';
-$lang->contract->returnInfo  = "<p>%s, received payments by %s, %s.</p>";
+$lang->contract->totalAmount  = 'The total amount:%s,returned amount:%s in this page;';
+$lang->contract->returnInfo   = "<p>%s, received payments by %s, %s.</p>";
+$lang->contract->deliveryInfo = "<p>%s, delivered by %s.</p>";
