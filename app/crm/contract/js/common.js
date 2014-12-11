@@ -17,7 +17,7 @@ $(document).ready(function()
         $('#currency').val($('.order-real:first').parent().parent().prev('span').find('select').find('option:selected').attr('data-currency'));
     });
 
-    $('.leftmenu li').removeClass('active').find('[href*=' + v.mode + ']').parent().addClass('active');
+    $('#menu li').removeClass('active').find('[href*=' + v.mode + ']').parent().addClass('active');
     /* fix leftmenu active class if v.mode equal expire. */
-    if(v.mode == 'expire') $('.leftmenu li').find('[href*=expired]').parent().removeClass('active');
+    if(v.mode == 'expire') $('#menu li').find('[href*=expired]').parent().removeClass('active');
 })

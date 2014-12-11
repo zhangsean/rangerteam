@@ -12,10 +12,12 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('mode', $mode);?>
+<div id='menuActions'>
+  <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->order->create, 'class="btn btn-primary"');?>
+</div>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-list-ul"></i> <?php echo $lang->order->list;?></strong>
-    <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->order->create, 'class="btn btn-primary"');?></div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data'>
     <thead>
@@ -28,9 +30,9 @@
         <th class='w-120px'><?php commonModel::printOrderLink('plan', $orderBy, $vars, $lang->order->plan);?>
         <th class='w-70px'><?php commonModel::printOrderLink('assignedTo', $orderBy, $vars, $lang->order->assignedTo);?></th>
         <th class='w-60px' ><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->order->status);?></th>
-        <th class='w-80px' ><?php commonModel::printOrderLink('contactedDate', $orderBy, $vars, $lang->order->contactedDate);?></th>
-        <th class='w-80px' ><?php commonModel::printOrderLink('nextDate', $orderBy, $vars, $lang->order->nextDate);?></th>
-        <th class='w-160px text-center'><?php echo $lang->actions;?></th>
+        <th class='w-90px' ><?php commonModel::printOrderLink('contactedDate', $orderBy, $vars, $lang->order->contactedDate);?></th>
+        <th class='w-90px' ><?php commonModel::printOrderLink('nextDate', $orderBy, $vars, $lang->order->nextDate);?></th>
+        <th class='w-180px text-center'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

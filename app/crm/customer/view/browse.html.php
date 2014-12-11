@@ -12,11 +12,11 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('mode', $mode);?>
+<div id='menuActions'>
+  <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->customer->create, 'class="btn btn-primary"');?>
+</div>
 <div class='panel'>
-  <div class='panel-heading'>
-  <strong><i class="icon-list-ul"></i> <?php echo $lang->customer->list;?></strong>
-  <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->customer->create, 'class="btn btn-primary"');?></div>
-  </div>
+  <div class='panel-heading'><strong><i class="icon-list-ul"></i> <?php echo $lang->customer->list;?></strong></div>
   <table class='table table-hover table-striped tablesorter table-data'>
     <thead>
       <tr class='text-center'>
@@ -30,7 +30,7 @@
         <th class='w-100px'><?php commonModel::printOrderLink('contactDate', $orderBy, $vars, $lang->customer->contactDate);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('nextDate',    $orderBy, $vars, $lang->customer->nextDate);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->customer->createdDate);?></th>
-        <th class='w-180px'><?php echo $lang->actions;?></th>
+        <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

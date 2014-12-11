@@ -12,10 +12,12 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('mode', $mode);?>
+<div id='menuActions'>
+  <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->product->create, "class='btn btn-primary' data-toggle='modal'");?>
+</div>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-list-ul"></i> <?php echo $lang->product->list;?></strong>
-    <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->product->create, "class='btn btn-primary' data-toggle='modal'");?></div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data' id='productList'>
     <thead>

@@ -88,8 +88,10 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 .with-fixed-table #fixedHeader {display: block;}
 
 /* menu */
-#menu {position: fixed; top: 41px; left: 0; right: 0; border-bottom: 1px solid #ddd; background: #fafafa; padding: 0 5px;}
+#menu {position: fixed; top: 41px; left: 0; right: 0; border-bottom: 1px solid #ddd; background: #f1f1f1; padding: 0 5px; z-index: 1030}
 #menu > .nav {float: left; padding: 5px}
 #menu > .nav > li {float: left;}
 #menu > .nav > li > a {padding: 5px 8px;}
 #menu > .nav > li.active > a, #menu > .nav > li.active > a:hover, #menu > .nav > li.active > a:active {font-weight: bold;}
+
+#menuActions {position: fixed; right: 15px; top: 45px; z-index: 1040}

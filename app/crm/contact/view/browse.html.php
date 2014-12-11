@@ -12,25 +12,25 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('mode', $mode);?>
+<div id='menuActions'>
+  <?php echo html::a(inlink('create'), "<i class='icon-plus'></i> {$lang->contact->create}", "class='btn btn-primary'")?>
+</div>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->contact->list;?></strong>
-    <div class='panel-actions pull-right'>
-      <?php echo html::a(inlink('create'), "<i class='icon-plus'>{$lang->contact->create}</i>", "class='btn btn-primary'")?>
-    </div>
   </div>
   <table class='table table-hover table-striped tablesorter table-data' id='contactList'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "mode={$mode}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
-        <th class='w-50px'> <?php commonModel::printOrderLink('id',       $orderBy, $vars, $lang->contact->id);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('id',       $orderBy, $vars, $lang->contact->id);?></th>
         <th class='w-100px text-left'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
         <th class="text-left"><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->contact->customer);?></th>
-        <th class='w-50px'> <?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->contact->gender);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->contact->gender);?></th>
         <th class='w-200px text-left'><?php commonModel::printOrderLink('phone',    $orderBy, $vars, $lang->contact->phone . $lang->slash . $lang->contact->mobile);?></th>
         <th class='w-200px'><?php commonModel::printOrderLink('email',    $orderBy, $vars, $lang->contact->email);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('qq',       $orderBy, $vars, $lang->contact->qq);?></th>
-        <th class='w-180px'><?php echo $lang->actions;?></th>
+        <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

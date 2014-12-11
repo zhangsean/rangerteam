@@ -354,6 +354,9 @@ form .chosen-container-single .chosen-search:before {top: 10px}
 
 td #aliasLabel {display: table-row;}
 
+/* dropdown in table */
+.table td .dropdown {display: inline-block;}
+
 /* table info */
 .table-info {font-size: 13px;}
 .table-info th {text-align:right;vertical-align:middle; border-bottom:none; font-weight: normal;}
