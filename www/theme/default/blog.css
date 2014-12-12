@@ -1,5 +1,5 @@
 /* global style */
-body{padding-bottom: 20px; background-color: #fafafa; background-image: -webkit-gradient(linear,0% 0%, 0% 100%, from(#FFFFFF), to(#F1F1F1), color-stop(0.2,#FFFFFF));background-repeat: repeat-x;}
+body{padding-bottom: 20px;}
 h1{font-size: 22px;}
 h3{font-size: 18px;}
 h3{font-size: 16px;}
