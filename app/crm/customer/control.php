@@ -39,6 +39,11 @@ class customer extends control
 
         $this->session->set('customerList', $this->app->getURI(true));
         $this->session->set('contactList',  '');
+
+        /* build search form. */
+        $this->loadModel('search', 'sys');
+        $this->config->customer->search['actionURL'] = $this->createLink('customer', 'browse', 'mode=bysearch');
+        $this->search->setSearchParams($this->config->customer->search);
         
         $this->view->title     = $this->lang->customer->list;
         $this->view->mode      = $mode;

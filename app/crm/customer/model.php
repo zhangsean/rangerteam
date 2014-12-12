@@ -62,6 +62,9 @@ class customerModel extends model
         $thisMonth  = date::getThisMonth();
         $thisWeek   = date::getThisWeek();
 
+        if($this->session->customerQuery == false) $this->session->set('customerQuery', ' 1 = 1');
+        $customerQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->customerQuery);
+
         return $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
             ->beginIF($relation == 'client')->andWhere('relation')->ne('provider')
@@ -74,7 +77,8 @@ class customerModel extends model
             ->beginIF($mode == 'thismonth')->andWhere('nextDate')->between($thisMonth['begin'], $thisMonth['end'])->fi()
             ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
             ->beginIF($mode == 'query')->andWhere($param)->fi()
-            ->beginIF($mode != 'all')->andWhere('nextDate')->ne('0000-00-00')->fi()
+            ->beginIF($mode == 'bysearch')->andWhere($customerQuery)->fi()
+            ->beginIF($mode != 'all' and $mode != 'bysearch')->andWhere('nextDate')->ne('0000-00-00')->fi()
             ->andWhere('id')->in($mine)
             ->orderBy($orderBy)
             ->page($pager)

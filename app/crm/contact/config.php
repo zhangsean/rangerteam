@@ -15,3 +15,27 @@ $config->contact->require->edit   = 'customer, realname';
 
 $config->contact->contactWayList  = array('mobile', 'phone', 'email', 'qq', 'weixin', 'weibo', 'site', 'fax', 'wangwang', 'skype', 'yahoo', 'gtalk');
 $config->contact->areaCode = ',010,020,021,022,023,024,025,027,028,029,';
+
+global $lang, $app;
+$app->loadLang('customer', 'crm');
+$config->contact->search['module'] = 'contact';
+
+$config->contact->search['fields']['t1.id']            = $lang->contact->id;
+$config->contact->search['fields']['t1.realname']      = $lang->contact->realname;
+$config->contact->search['fields']['t1.customer']      = $lang->contact->customer;
+$config->contact->search['fields']['t1.phone']         = $lang->contact->phone;
+$config->contact->search['fields']['t1.mobile']        = $lang->contact->mobile;
+$config->contact->search['fields']['t1.email']         = $lang->contact->email;
+$config->contact->search['fields']['t1.qq']            = $lang->contact->qq;
+$config->contact->search['fields']['t1.contactedDate'] = $lang->contact->contactedDate;
+$config->contact->search['fields']['t1.nextDate']      = $lang->customer->nextDate;
+
+$config->contact->search['params']['t1.id']            = array('operator' => '=',  'control' => 'input',  'values' => '');
+$config->contact->search['params']['t1.realname']      = array('operator' => '=',  'control' => 'input',  'values' => '');
+$config->contact->search['params']['t1.customer']      = array('operator' => '=',  'control' => 'select', 'values' => 'set in control');
+$config->contact->search['params']['t1.phone']         = array('operator' => 'include',  'control' => 'input',  'values' => '');
+$config->contact->search['params']['t1.mobile']        = array('operator' => 'include',  'control' => 'input',  'values' => '');
+$config->contact->search['params']['t1.email']         = array('operator' => 'include',  'control' => 'input',  'values' => '');
+$config->contact->search['params']['t1.qq']            = array('operator' => 'include',  'control' => 'input',  'values' => '');
+$config->contact->search['params']['t1.contactedDate'] = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
+$config->contact->search['params']['t1.nextDate']      = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');

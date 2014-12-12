@@ -70,6 +70,8 @@ class contactModel extends model
         $thisMonth  = date::getThisMonth();
         $thisWeek   = date::getThisWeek();
 
+        if($this->session->contactQuery == false) $this->session->set('contactQuery', ' 1 = 1');
+        $contactQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->contactQuery);
 
         $resumes = array();
         if($customer) $resumes = $this->dao->select('*')->from(TABLE_RESUME)->where('customer')->eq($customer)->andWhere('deleted')->eq(0)->fetchAll('contact');
@@ -89,6 +91,7 @@ class contactModel extends model
             ->beginIF($mode == 'thisweek')->andWhere('t1.nextDate')->between($thisWeek['begin'], $thisWeek['end'])->fi()
             ->beginIF($mode == 'thismonth')->andWhere('t1.nextDate')->between($thisMonth['begin'], $thisMonth['end'])->fi()
             ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
+            ->beginIF($mode == 'bysearch')->andWhere($contactQuery)->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
