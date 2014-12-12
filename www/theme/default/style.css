@@ -100,6 +100,9 @@ td>select{padding-left: 0;padding-right: 0}
 .area-4{width: 360px}
 .area-5{width: 480px}
 
+/* display helpers */
+.show {display: block!important;}
+
 /* icons */
 [class^="icon-"],[class*=" icon-"] {font-size: 14px}
 
