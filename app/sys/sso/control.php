@@ -59,6 +59,7 @@ class sso extends control
                     $response['data']   = base64_encode(json_encode($data));
                     $response['md5']    = md5($response['data']);
 
+                    if(!empty($_GET['referer'])) $response['referer'] = $this->get->referer;
                     if(isset($callback)) $this->locate($callback . $sign . http_build_query($response));
                     die(json_encode($response));
                 }
@@ -69,7 +70,8 @@ class sso extends control
         $response['data']   = 'check failed.';
         $response['md5']    = md5($response['data']);
 
-        if(isset($callback)) a($callback . $sign . http_build_query($response));
+        if(!empty($_GET['referer'])) $response['referer'] = $this->get->referer;
+        if(isset($callback)) $this->locate($callback . $sign . http_build_query($response));
         die(json_encode($response));
     }
 
