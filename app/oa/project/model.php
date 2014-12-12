@@ -342,17 +342,25 @@ class projectModel extends model
         $menu .= '<li class="divider"></li>';
         $menu .= "<li><a id='currentItem' href=\"javascript:showDropMenu('project', '$projectID', '$currentModule', '$currentMethod', '$extra')\"><i class='icon-folder-open-alt'></i> <strong>{$currentProject->name}</strong> <span class='icon-caret-down'></span></a><div id='dropMenu'></div></li>";
 
+        $viewIcons = array('browse' => 'list-ul', 'kanban' => 'columns', 'outline' => 'list-alt');
+        $this->lang->task->browse = $this->lang->task->list;
         if($methodName == 'browse' || $methodName == 'kanban' || $methodName == 'outline')
         {
-            $this->lang->task->browse = $this->lang->task->list;
+            $taskListType = $methodName;
             $viewName = $this->lang->task->{$methodName};
-            $viewIcons = array('browse' => 'list-ul', 'kanban' => 'columns', 'outline' => 'list-alt');
             $menu .= '<li class="divider"></li>';
             $menu .= "<li id='viewBar' class='dropdown'><a href='javascript:;' id='groupButton' data-toggle='dropdown' class='dropdown-toggle'><icon class='icon-" . $viewIcons[$methodName] . "'></icon> {$viewName} <icon class='icon-caret-down'></icon></a><ul class='dropdown-menu'>";
             $menu .= "<li" . ($methodName == 'browse' ? " class='active'" : '') . ">" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $this->lang->task->list) . "</li>";
             $menu .= "<li" . ($methodName == 'kanban' ? " class='active'" : '') . ">" . html::a(helper::createLink('task', 'kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $this->lang->task->kanban) . "</li>";
             $menu .= "<li" . ($methodName == 'outline' ? " class='active'" : '') . ">" . html::a(helper::createLink('task', 'outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $this->lang->task->outline) . "</li>";
             $menu .= '</ul></li>';
+        }
+        else
+        {
+            $taskList = $this->session->taskList;
+            $taskListType = stripos($taskList, 'kanban') === false ? (stripos($taskList, 'outline') === false ? 'browse' : 'outline') : 'kanban';
+            $menu .= '<li class="divider"></li>';
+            $menu .= '<li>' . html::a($taskList, "<icon class='icon-" . $viewIcons[$taskListType] . "'></icon> " . $this->lang->task->{$taskListType}) . '</li>';
         }
 
         if($methodName == 'kanban' || $methodName == 'outline')
@@ -371,7 +379,7 @@ class projectModel extends model
                 $menu .= '<li class="divider"></li><li><a href="javascript:;" id="toggleAll"><i class="icon-plus"></i></a></li>';
             }
         }
-        else
+        else if($taskListType ==  'browse')
         {
             $menu .= '<li class="divider"></li>';
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), $this->lang->task->all);
