@@ -27,15 +27,11 @@ class balance extends control
      * @access public
      * @return void
      */
-    public function browse($depositor= 0, $orderBy = 'date', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($depositor= 0, $orderBy = 'date_desc')
     {   
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
-
         $this->view->title     = $this->lang->balance->browse;
-        $this->view->balances  = $this->balance->getList($depositor, $orderBy, $pager);
+        $this->view->balances  = $this->balance->getList($depositor, $orderBy);
         $this->view->depositor = $depositor;
-        $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
 
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
