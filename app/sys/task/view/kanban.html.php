@@ -55,9 +55,10 @@
                     <?php endif;?>
                   </div>
                   <div class='task-actions'>
+                    <button type='button' class='btn btn-mini btn-link btn-info-toggle'><i class='icon-plus'></i></button>
                     <div class='dropdown'>
-                      <button type='button' class='btn btn-mini btn-link dropdown-toggle' type='button' data-toggle='dropdown'>
-                        <span class='caret'></span>
+                      <button type='button' class='btn btn-mini btn-link dropdown-toggle' data-toggle='dropdown'>
+                        <span class='icon-caret-down'></span>
                       </button>
                       <div class='dropdown-menu pull-right'>
                         <?php echo $this->task->buildOperateMenu($task);?>

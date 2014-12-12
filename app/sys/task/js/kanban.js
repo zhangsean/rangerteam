@@ -70,4 +70,11 @@ $(function()
     {
         reloadDataTable();
     });
+
+    $('#taskKanban').on('click', '.btn-info-toggle', function()
+    {
+        $btn = $(this);
+        $btn.find('i').toggleClass('icon-plus').toggleClass('icon-minus');
+        $btn.closest('.task').toggleClass('show-info');
+    });
 });
