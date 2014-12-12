@@ -72,6 +72,7 @@ class blockModel extends model
         $query['app']     = 'sys';
         $query['lang']    = $this->app->getClientLang();
         $query['sso']     = base64_encode(commonModel::getSysURL() . helper::createLink('entry', 'visit', "entry=$entry->id"));
+        $query['user']    = $this->app->user->account;
         if(isset($params)) $query['param'] = $params;
 
         $query     = http_build_query($query);
@@ -92,7 +93,9 @@ class blockModel extends model
             $link .= '?' . $parsedUrl['query'];
         }
 
-        return $http->get($link);
+        /* Send login request. */
+        $loginObj = "<iframe src=" . helper::createLink('sys.entry', 'visit', "entryID={$entry->id}") . "' class='hidden' />";
+        return $loginObj . $http->get($link);
     }
 
     /**

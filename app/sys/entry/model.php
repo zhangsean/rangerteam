@@ -257,7 +257,6 @@ class entryModel extends model
         }
 
         $blocks = $http->get($link);
-
         return json_decode($blocks, true);
     }
 

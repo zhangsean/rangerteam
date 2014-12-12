@@ -99,7 +99,7 @@ class block extends control
         {
             $html = $this->block->getEntry($block);
         }
-
+        
         die($html);
     }
 
