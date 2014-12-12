@@ -61,6 +61,11 @@ class contract extends control
         $this->session->set('contractList', $this->app->getURI(true));
         $this->session->set('orderList', '');
 
+        /* build search form. */
+        $this->loadModel('search', 'sys');
+        $this->config->contract->search['actionURL'] = $this->createLink('contract', 'browse', 'mode=bysearch');
+        $this->search->setSearchParams($this->config->contract->search);
+
         $this->view->title        = $this->lang->contract->browse;
         $this->view->contracts    = $contracts;
         $this->view->customers    = $this->loadModel('customer')->getPairs('client');

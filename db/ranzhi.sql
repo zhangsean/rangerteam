@@ -703,6 +703,18 @@ CREATE TABLE IF NOT EXISTS `sys_groupPriv` (
   `method` char(30) NOT NULL default '',
   UNIQUE KEY `group` (`group`,`module`,`method`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sys_userQuery`;
+CREATE TABLE IF NOT EXISTS `sys_userQuery` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `account` char(30) NOT NULL,
+  `module` varchar(30) NOT NULL,
+  `title` varchar(90) NOT NULL,
+  `form` text NOT NULL,
+  `sql` text NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `account` (`account`),
+  KEY `module` (`module`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO `sys_category` VALUES (1,'化工','','','',0,0,',1,',1,0,'industry','0','',0,0,'','0000-00-00 00:00:00',0,0),
 (3,'环保、绿化、公共事业','','','',0,0,',3,',1,0,'industry','0','',0,0,'','0000-00-00 00:00:00',0,0),

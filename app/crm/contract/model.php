@@ -51,6 +51,10 @@ class contractModel extends model
      */
     public function getList($customer = 0, $mode = 'all', $orderBy = 'id_desc', $pager = null)
     {
+        /* process search condition. */
+        if($this->session->contractQuery == false) $this->session->set('contractQuery', ' 1 = 1');
+        $contractQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->contractQuery);
+
         return $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('deleted')->eq(0)
             ->beginIF($customer)->andWhere('customer')->eq($customer)->fi()
@@ -63,6 +67,7 @@ class contractModel extends model
             ->andWhere('`end`')->lt(date(DT_DATE1, strtotime('+1 month')))
             ->andWhere('`end`')->gt(date(DT_DATE1))
             ->fi()
+            ->beginIF($mode == 'bysearch')->andWhere($contractQuery)->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll();

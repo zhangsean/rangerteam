@@ -68,6 +68,10 @@ class orderModel extends model
         $thisMonth  = date::getThisMonth();
         $thisWeek   = date::getThisWeek();
 
+        /* process search condition. */
+        if($this->session->orderQuery == false) $this->session->set('orderQuery', ' 1 = 1');
+        $orderQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->orderQuery);
+
         if(strpos($orderBy, 'status') !== false) $orderBy .= ', closedReason';
 
         $orders = $this->dao->select('o.*, c.name as customerName, c.level as level, p.name as productName')->from(TABLE_ORDER)->alias('o')
@@ -81,6 +85,7 @@ class orderModel extends model
             ->beginIF($mode == 'thismonth')->andWhere('o.nextDate')->between($thisMonth['begin'], $thisMonth['end'])->fi()
             ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
             ->beginIF($mode == 'query')->andWhere($param)->fi()
+            ->beginIF($mode == 'bysearch')->andWhere($orderQuery)->fi()
             ->andWhere('o.customer')->in($customerIdList)
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 

@@ -36,3 +36,56 @@ $(document).bind('keydown', 'right', function(evt)
     nextLink = ($('#next').attr("href"));
     if(typeof(nextLink) != 'undefined') location.href = nextLink;
 });
+
+/**
+ * Show or hide more items. 
+ * 
+ * @access public
+ * @return void
+ */
+function switchMore()
+{
+    $('#search').width($('#search').width()).focus();
+    $('#moreMenu').width($('#defaultMenu').outerWidth());
+    $('#searchResult').toggleClass('show-more');
+}
+ 
+/**
+ * Toogle the search form.
+ * 
+ * @access public
+ * @return void
+ */
+function toggleSearch()
+{
+    $("#bysearchTab").click (function(){
+        if($('#bysearchTab').hasClass('active'))
+        {
+            $('#bysearchTab').removeClass('active');
+            $('#querybox').removeClass('show').addClass('hidden');
+        }
+        else
+        {
+            $('#bysearchTab').addClass('active');
+            ajaxGetSearchForm();
+            $('#querybox').removeClass('hidden').addClass('show');
+        }
+    });
+}
+
+/**
+ * Ajax get search form 
+ * 
+ * @access public
+ * @return void
+ */
+function ajaxGetSearchForm()
+{
+    if($('#querybox').html() == '')
+    {
+        $.get(createLink('search', 'buildForm'), function(data)
+        {
+            $('#querybox').html(data);
+        });
+    }
+}

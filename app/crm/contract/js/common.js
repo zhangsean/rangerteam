@@ -21,3 +21,16 @@ $(document).ready(function()
     /* fix leftmenu active class if v.mode equal expire. */
     if(v.mode == 'expire') $('#menu li').find('[href*=expired]').parent().removeClass('active');
 })
+
+$(function()
+{
+    /* move search button to left menu. */
+    $('#bysearchTab').appendTo($('#menu').find('ul'));
+    
+    if(v.mode == 'bysearch')
+    {
+        $('#bysearchTab').addClass('active');
+        ajaxGetSearchForm();
+    }
+    toggleSearch();
+});
