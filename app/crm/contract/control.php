@@ -177,8 +177,16 @@ class contract extends control
             $this->contract->delivery($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            $this->loadModel('action')->create('contract', $contractID, 'Delivered', $this->post->comment);
-            $this->loadModel('action')->create('customer', $contract->customer, 'deliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
+            if($this->post->finish)
+            {
+                $this->loadModel('action')->create('contract', $contractID, 'finishDelivered', $this->post->comment, '', $this->post->deliveredBy);
+                $this->loadModel('action')->create('customer', $contract->customer, 'finishDeliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
+            }
+            else
+            {
+                $this->loadModel('action')->create('contract', $contractID, 'Delivered', $this->post->comment, '', $this->post->deliveredBy);
+                $this->loadModel('action')->create('customer', $contract->customer, 'deliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
+            }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
