@@ -54,6 +54,11 @@ $(function()
         return $(this).each(function()
         {
             var $this = $(this);
+            if($this.offset().top + 200 > $(document.body).height())
+            {
+                $this.attr('data-picker-position', 'top-right');
+            }
+
             if($this.val() != '' && !$this.hasClass('form-time'))
             {
                 var date = new Date($this.val());
