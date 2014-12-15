@@ -42,6 +42,9 @@ class taskModel extends model
      */
     public function getList($projectID = 0, $mode = null, $orderBy = 'id_desc', $pager = null, $groupBy = 'id')
     {
+        if($this->session->taskQuery == false) $this->session->set('taskQuery', ' 1 = 1');
+        $taskQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->taskQuery);
+
         $this->dao->select('*')->from(TABLE_TASK)
             ->where('deleted')->eq(0)
             ->beginIF($projectID)->andWhere('project')->eq($projectID)->fi()
@@ -50,6 +53,7 @@ class taskModel extends model
             ->beginIF($mode == 'closedBy')->andWhere('closedBy')->eq($this->app->user->account)->fi()
             ->beginIF($mode == 'untilToday')->andWhere('deadline')->eq(helper::today())->fi()
             ->beginIF($mode == 'expired')->andWhere('deadline')->ne('0000-00-00')->andWhere('deadline')->lt(helper::today())->fi()
+            ->beginIF($mode == 'bysearch')->andWhere($taskQuery)->fi()
             ->beginIF($groupBy == 'closedBy')->andWhere('status')->eq('closed')->fi()
             ->beginIF($groupBy == 'finishedBy')->andWhere('finishedBy')->ne('')->fi()
             ->orderBy($orderBy)

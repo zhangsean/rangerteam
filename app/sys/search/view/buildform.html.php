@@ -16,7 +16,7 @@ include '../../common/view/datepicker.html.php';
 ?>
 <style>
 #bysearchTab {transition: all .3s cubic-bezier(.175, .885, .32, 1);}
-#bysearchTab.active {background: #fff; padding: 2px 10px 3px; padding-bottom: 2px\0; border: 1px solid #ddd;}
+#bysearchTab.active {background: #fff; padding: 2px 10px 3px; padding-bottom: 2px\0; border: 1px solid #ddd; border-bottom: 0px;}
 #bysearchTab.active:hover {background: #ddd}
 #bysearchTab.active > a:hover {background: #ddd}
 #bysearchTab.active > a:after {font-size: 14px; font-family: ZenIcon; content: ' \e6e2'; color: #808080}
@@ -381,7 +381,7 @@ foreach($fieldParams as $fieldName => $param)
       <div class='input-group'>
       <?php
       echo html::select('queryID', $queries, $queryID, 'onchange=executeQuery(this.value) class=form-control');
-      if(commonModel::hasPriv('search', 'deleteQuery')) echo "<span class='input-group-btn btn'>" . html::a('javascript:deleteQuery()', '<i class="icon-remove"></i>', '', 'class=btn') . '</span>';
+      if(commonModel::hasPriv('search', 'deleteQuery')) echo "<span class='input-group-btn'>" . html::a('javascript:deleteQuery()', '<i class="icon-remove"></i>', 'class=btn') . '</span>';
       ?>
       </div>
     </td>

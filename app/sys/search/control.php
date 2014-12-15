@@ -28,7 +28,7 @@ class search extends control
         if($queryID == 0 and $this->session->queryID != false)
         {
             $queryID = $this->session->queryID;
-            $this->session->queryID = false;
+            $this->session->set('queryID', false);
         }
 
         $queryID      = (empty($module) and empty($queryID)) ? $this->session->searchParams['queryID'] : $queryID;
