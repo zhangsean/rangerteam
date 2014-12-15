@@ -334,6 +334,7 @@ label.checkbox-inline input[type='checkbox'] {position: relative; top: -2px}
 .table-form td .checkbox {margin: 0}
 
 .form-control {padding: 5px 10px}
+.form-control.input-sm {padding: 3px 5px; height: 20px}
 .table-form {margin-bottom: 0;}
 .table-form td, .table-form th {padding: 5px; font-size: 12px;}
 .table-form td + td, .table-form th + th {padding-left: 5%;}

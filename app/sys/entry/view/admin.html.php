@@ -31,7 +31,7 @@ include '../../common/view/header.html.php';
     <tbody>
       <?php foreach($entries as $entry):?>
       <tr class='text-left'>
-        <td><?php echo html::input("order[$entry->id]", $entry->order, "class='form-control text-center'")?></td>
+        <td><?php echo html::input("order[$entry->id]", $entry->order, "class='form-control input-sm text-center'")?></td>
         <td><?php echo "<img src='$entry->logo' class='small-icon'>" . $entry->name?></td>
         <td><?php echo $entry->code?></td>
         <td><?php if($entry->integration) echo $entry->key?></td>
