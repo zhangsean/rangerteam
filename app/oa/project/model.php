@@ -391,7 +391,7 @@ class projectModel extends model
         }
         $menu .= "</ul>";
 
-        $menu .= "<div class='pull-right'>" . html::a(helper::createLink('batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $this->lang->task->create, 'class="btn btn-primary"') . "</div></nav>";
+        $menu .= "<div class='pull-right'>" . html::a(helper::createLink('task', 'batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $this->lang->task->create, 'class="btn btn-primary"') . "</div></nav>";
 
         return $menu;
     }
