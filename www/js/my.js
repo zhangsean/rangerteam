@@ -52,31 +52,13 @@ function switchMore()
     $('#moreMenu').width($('#defaultMenu').outerWidth());
     $('#searchResult').toggleClass('show-more');
 }
- 
+
 /**
- * Toogle the search form.
+ * Init search form 
  * 
  * @access public
  * @return void
  */
-function toggleSearch()
-{
-    $("#bysearchTab").click (function(){
-        if($('#bysearchTab').hasClass('active'))
-        {
-            $('#bysearchTab').removeClass('active');
-            $('#querybox').removeClass('show').addClass('hidden');
-        }
-        else
-        {
-            $('#bysearchTab').addClass('active');
-            ajaxGetSearchForm();
-            $('#querybox').removeClass('hidden').addClass('show');
-        }
-    });
-}
-
-
 function initSearch()
 {
     $searchTab = $('#bysearchTab');
@@ -97,7 +79,7 @@ function initSearch()
     {
         $('#menu > ul > li.active').removeClass('active');
         ajaxGetSearchForm($queryBox);
-        $searchTab.addClass('active');
+        $searchTab.addClass('active').find('a').attr('href', '##bysearch');
         $queryBox.removeClass('hidden');
     }
 
