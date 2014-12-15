@@ -382,7 +382,7 @@ class projectModel extends model
         else if($taskListType ==  'browse')
         {
             $menu .= '<li class="divider"></li>';
-            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), $this->lang->task->all);
+            $menu .= "<li class='all'>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), $this->lang->task->all);
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=createdBy"), $this->lang->task->createdByMe);
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=assignedTo"), $this->lang->task->assignedToMe);
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=closedBy"), $this->lang->task->closedByMe);
