@@ -41,6 +41,15 @@ class trade extends control
         $expenseTypes = $this->loadModel('tree')->getPairs(0, 'out');
         $incomeTypes  = $this->loadModel('tree')->getPairs(0, 'in');
 
+        /* build search form. */
+        $this->loadModel('search', 'sys');
+        $this->config->trade->search['actionURL'] = $this->createLink('trade', 'browse', 'mode=bysearch');
+        $this->config->trade->search['params']['depositor']['values'] = $this->loadModel('depositor')->getPairs();
+        $this->config->trade->search['params']['trader']['values']    = $this->loadModel('customer', 'crm')->getPairs();
+        $this->config->trade->search['params']['category']['values']  = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
+        $this->config->trade->search['params']['handlers']['values']  = $this->loadModel('user')->getPairs();
+        $this->search->setSearchParams($this->config->trade->search);
+
         $trades = $this->trade->getList($mode, $orderBy, $pager);
 
         $this->view->title   = $this->lang->trade->browse;

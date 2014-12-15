@@ -154,6 +154,27 @@ class docModel extends model
     }
 
     /**
+     * get doc list by search.
+     * 
+     * @param  string $orderBy 
+     * @param  string $pager 
+     * @access public
+     * @return array
+     */
+    public function getDocListBySearch($orderBy, $pager)
+    {
+        if($this->session->docQuery == false) $this->session->set('docQuery', ' 1 = 1');
+        $docQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->docQuery);
+
+        return $this->dao->select('*')->from(TABLE_DOC)
+            ->where('deleted')->eq(0)
+            ->andWhere($docQuery)
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll();
+    }
+
+    /**
      * Get doc info by id.
      * 
      * @param  int    $docID 

@@ -14,6 +14,9 @@
 <?php include '../../../sys/common/view/treeview.html.php';?>
 <?php js::set('libID ', $libID);?>
 <?php js::set('browseType ', $browseType);?>
+<?php js::set('mode', $mode)?>
+<li id='bysearchTab'><a href='#'><i class='icon-search icon'></i>&nbsp;<?php echo $lang->search->common;?></a></li>
+<div id='querybox' class='<?php if($mode == 'bysearch') echo 'show';?>'></div>
 <div class='col-sm-3'>
   <div class='panel' id='treebox'>
     <div class='panel-heading'>

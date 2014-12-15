@@ -60,12 +60,17 @@ class articleModel extends model
      */
     public function getList($type, $categories, $mode = null, $param = null, $orderBy, $pager = null)
     {
+        $moduleQuery = $type . 'Query';
+        if($this->session->$moduleQuery == false) $this->session->set($moduleQuery, ' 1 = 1');
+        $$moduleQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->$moduleQuery);
+
         /* Get articles(use groupBy to distinct articles).  */
         $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
             ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
             ->where('t1.type')->eq($type)
             ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
             ->beginIf($mode == 'query' and $param)->andWhere($param)->fi()
+            ->beginIf($mode == 'bysearch')->andWhere($$moduleQuery)->fi()
             ->groupBy('t2.id')
             ->orderBy($orderBy)
             ->page($pager)

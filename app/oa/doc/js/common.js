@@ -28,13 +28,25 @@ function setType(type)
     }
 }
 
+$(function()
+{
+    /* move search button to left menu. */
+    $('#bysearchTab').appendTo($('#menu').children('ul'));
+    
+    if(v.mode == 'bysearch')
+    {
+        $('#bysearchTab').addClass('active');
+        ajaxGetSearchForm();
+    }
+    toggleSearch();
+});
+
 $(document).ready(function()
 {
     if(typeof(v.libID) != undefined && v.libID != 'createLib')
     {
-        $('.menu .nav li').removeClass('active');
+        $('#menu .nav li').removeClass('active');
         if(typeof(v.libID) != undefined) $(".nav li a[href*='" + v.libID + "']").parent().addClass('active');
-        $('.nav li:last').find('a').attr('data-toggle', 'modal');
+        $(".nav li a[href*='createlib']").attr('data-toggle', 'modal');
     }
-    $.setAjaxModal();
 });

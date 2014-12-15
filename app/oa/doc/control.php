@@ -84,6 +84,10 @@ class doc extends control
             if($moduleID) $modules = $this->tree->getFamily($moduleID, $type, (int)$libID);
             $docs = $this->doc->getDocList($libID, $productID, $projectID, $modules, $orderBy, $pager);
         }
+        elseif($browseType == 'bysearch')
+        {
+            $docs = $this->doc->getDocListBySearch($orderBy, $pager);
+        }
 
         /* Get the tree menu. */
         if($libID == 'product')
@@ -98,6 +102,14 @@ class doc extends control
         {
             $moduleTree = $this->tree->getTreeMenu($type = 'customdoc', $startModuleID = 0, array('treeModel', 'createDocLink'), $libID);
         }
+
+        /* Build the search form. */
+        $this->loadModel('search', 'sys');
+        $this->config->doc->search['actionURL'] = $this->createLink('doc', 'browse', "libID=$libID&moduleID=$moduleID&procuctID=$productID&projectID=$projectID&browseType=bySearch");
+        $this->config->doc->search['params']['lib']['values']     = array(''=>'') + $this->libs;
+        $this->config->doc->search['params']['type']['values']    = array(''=>'') + $this->config->doc->search['params']['type']['values'];
+        $this->config->doc->search['params']['module']['values'] = $this->tree->getOptionMenu('customdoc', $startModuleID = 0, false, $libID);;
+        $this->search->setSearchParams($this->config->doc->search);
        
         $this->view->title         = $this->lang->doc->common . $this->lang->colon . $this->libs[$libID];
         $this->view->libID         = $libID;
@@ -113,6 +125,7 @@ class doc extends control
         $this->view->projectID     = $projectID;
         $this->view->browseType    = $browseType;
         $this->view->param         = $param;
+        $this->view->mode          = $browseType;
 
         $this->display();
     }

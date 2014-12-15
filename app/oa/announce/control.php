@@ -33,7 +33,7 @@ class announce extends control
      * @access public
      * @return void
      */
-    public function browse($type = 'announce', $categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($type = 'announce', $categoryID = 0, $mode = 'all', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->loadModel('article');
         $this->lang->article->menu = $this->lang->$type->menu;
@@ -42,11 +42,17 @@ class announce extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        /* build search form. */
+        $this->loadModel('search', 'sys');
+        $this->config->announce->search['actionURL'] = $this->createLink('announce', 'browse', "type=announce&categoryID=$categoryID&mode=bysearch");
+        $this->search->setSearchParams($this->config->announce->search);
+
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
-        $articles = $this->article->getList($type, $families, $mode = 'all', $param = null, $orderBy, $pager);
+        $articles = $this->article->getList($type, $families, $mode, $param = null, $orderBy, $pager);
 
         $this->view->title      = $this->lang->announce->browse;
         $this->view->type       = $type;
+        $this->view->mode       = $mode;
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->category   = $this->loadModel('tree')->getByID($categoryID);
         $this->view->categoryID = $categoryID;
