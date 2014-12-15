@@ -1,5 +1,9 @@
 $(document).ready(function()
 {
+    /* Prevent duplicate bindings */
+    if($('body').data('commonjs')) return;
+    $('body').data('commonjs', true);
+
     if(typeof(v.projectID) != undefined && v.projectID != 0)
     {
         $('.menu .nav li').removeClass('active');
@@ -8,7 +12,7 @@ $(document).ready(function()
 
     $("#createButton").modalTrigger({width:800});
 
-    $('.switcher').click(function()
+    $('.switcher').on('click', function()
     {
         var url = $(this).attr('href');
         bootbox.confirm($(this).data('confirm'),  function(result)
