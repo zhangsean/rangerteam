@@ -15,13 +15,11 @@ $jsRoot = $this->app->getWebRoot() . "js/";
 include '../../common/view/datepicker.html.php';
 ?>
 <style>
-#bysearchTab {transition: all .3s cubic-bezier(.175, .885, .32, 1);}
-#bysearchTab.active {background: #fff; padding: 2px 10px 3px; padding-bottom: 2px\0; border: 1px solid #ddd; border-bottom: 0px;}
-#bysearchTab.active:hover {background: #ddd}
-#bysearchTab.active > a:hover {background: #ddd}
+#bysearchTab {transition: all .3s cubic-bezier(.175, .885, .32, 1); position: relative;}
+#bysearchTab.active > a {background: #fff; border: 1px solid #ddd; border-bottom: 0px; padding: 7px 10px!important; margin-bottom: -6px;}
 #bysearchTab.active > a:after {font-size: 14px; font-family: ZenIcon; content: ' \e6e2'; color: #808080}
 #featurebar .nav {z-index: 999; position: relative;}
-#querybox {position: relative; overflow: hidden;}
+#querybox {position: relative; overflow: hidden; margin-top: 40px; margin: 25px auto -40px}
 #querybox form{padding: 10px; padding-right: 40px;}
 #querybox .form-control {padding: 2px; padding: 6px 2px\0;}
 @-moz-document url-prefix() {#querybox .form-control {padding: 6px 2px;}}
@@ -40,12 +38,12 @@ include '../../common/view/datepicker.html.php';
 #selectPeriod li > a {padding: 4px 15px; border-radius: 2px}
 
 #moreOrLite {position: absolute; right: 0; top: 0; bottom: 0}
-#searchlite, #searchmore {color: #4d90fe; width: 50px; padding: 0 5px; line-height: 70px; text-align: center;}
+#searchlite, #searchmore {width: 50px; padding: 0 5px; line-height: 70px; text-align: center; opacity: 0.7}
 #searchlite {line-height: 127px}
 #searchform.showmore #searchmore, #searchform #searchlite {display: none;}
 #searchform.showmore #searchlite, #searchform #searchmore {display: inline-block;}
 #searchmore > i, #searchlite > i {font-size: 28px;}
-#searchmore:hover, #searchlite:hover {color: #145CCD; background: #e5e5e5}
+#searchmore:hover, #searchlite:hover {background: #e5e5e5; opacity: 1}
 
 .bootbox-prompt .modal-dialog {width: 500px; margin-top: 10%;}
 #groupAndOr {display: inline-block;}
@@ -370,7 +368,7 @@ foreach($fieldParams as $fieldName => $param)
       echo html::hidden('module',     $module);
       echo html::hidden('actionURL',  $actionURL);
       echo html::hidden('groupItems', $groupItems);
-      echo "<div class='input-group'>";
+      echo "<div class='btn-group'>";
       echo html::submitButton($lang->search->common, 'btn-primary btn', '');
       echo html::commonButton($lang->search->reset, 'btn', 'onclick=resetForm();');
       echo html::commonButton($lang->save, 'btn', 'onclick=saveQuery()');

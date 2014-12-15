@@ -21,6 +21,9 @@ $(document).ready(function()
 
     /* Reload modal. */
     $(document).on('click', '.reloadModal', function(){$.reloadAjaxModal()});
+
+    /* Init search tab on menu */
+    initSearch();
 });
 
 /* left, go to pre object. */
@@ -73,19 +76,63 @@ function toggleSearch()
     });
 }
 
+
+function initSearch()
+{
+    $searchTab = $('#bysearchTab');
+    if($searchTab.data('initSearch')) return;
+
+    if(!$searchTab.closest('#menu').length)
+    {
+        $('#menu > ul:first').append($searchTab);
+    }
+
+    var $queryBox = $('#querybox');
+    if(!$queryBox.length)
+    {
+        $queryBox = $("<div id='querybox' class='hidden'/>").insertAfter($('#menu'));
+    }
+
+    if(v && v.mode == 'bysearch')
+    {
+        $('#menu > ul > li.active').removeClass('active');
+        ajaxGetSearchForm($queryBox);
+        $searchTab.addClass('active');
+        $queryBox.removeClass('hidden');
+    }
+
+    $searchTab.on('click', function()
+    {
+        if($searchTab.hasClass('active'))
+        {
+            $searchTab.removeClass('active').data('oldTab').addClass('active');
+            $queryBox.addClass('hidden');
+        }
+        else
+        {
+            $searchTab.data('oldTab', $('#menu > ul > li.active').removeClass('active')).addClass('active');
+            ajaxGetSearchForm($queryBox);
+            $queryBox.removeClass('hidden');
+        }
+    });
+
+    $searchTab.data('initSearch', true);
+}
+
 /**
  * Ajax get search form 
  * 
  * @access public
  * @return void
  */
-function ajaxGetSearchForm()
+function ajaxGetSearchForm($queryBox)
 {
-    if($('#querybox').html() == '')
+    if(!$queryBox) $queryBox = $('#querybox');
+    if($queryBox.html() == '')
     {
         $.get(createLink('search', 'buildForm'), function(data)
         {
-            $('#querybox').html(data);
+            $queryBox.html(data);
         });
     }
 }

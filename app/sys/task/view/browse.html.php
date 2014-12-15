@@ -15,7 +15,6 @@
 <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
 <li id='bysearchTab'><a href='#'><i class='icon-search icon'></i>&nbsp;<?php echo $lang->search->common;?></a></li>
 <div class='with-menu page-content'>
-  <div id='querybox' class='<?php if($mode == 'bysearch') echo 'show';?>'></div>
   <div class='panel'>
     <div class='panel-heading'>
       <strong><?php echo $project->name;?></strong>
