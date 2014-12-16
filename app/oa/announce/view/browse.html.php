@@ -14,7 +14,6 @@
 <?php js::set('mode', $mode)?>
 <li id='bysearchTab'><a href='#'><i class='icon-search icon'></i>&nbsp;<?php echo $lang->search->common;?></a></li>
 <div id="mainContent">
-  <div id='querybox' class='<?php if($mode == 'bysearch') echo 'show';?>'></div>
   <div class='panel list list-condensed'>
     <div class='panel-heading'><strong><i class='icon-calendar'></i> <?php echo $lang->announce->browse;?></strong></div>
     <section class='items items-hover'>

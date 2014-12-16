@@ -28,19 +28,6 @@ function setType(type)
     }
 }
 
-$(function()
-{
-    /* move search button to left menu. */
-    $('#bysearchTab').appendTo($('#menu').children('ul'));
-    
-    if(v.mode == 'bysearch')
-    {
-        $('#bysearchTab').addClass('active');
-        ajaxGetSearchForm();
-    }
-    toggleSearch();
-});
-
 $(document).ready(function()
 {
     if(typeof(v.libID) != undefined && v.libID != 'createLib')
