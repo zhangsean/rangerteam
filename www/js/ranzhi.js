@@ -233,9 +233,16 @@ $.extend(
      */
     setAjaxLoader: function(selector, target)
     {
+        /* Avoid duplication of binding */
+        var data = $('body').data('ajaxLoader');
+        if(data && data[selector]) return;
+        if(!data) data = {};
+        data[selector] = true;
+        $('body').data('ajaxLoader', data);
+
         $(document).on('click', selector, function()
         {
-            url = $(this).attr('href');
+            var url = $(this).attr('href');
             if(!url) url = $(this).data('rel');
             if(!url) return false;
 
