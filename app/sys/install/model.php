@@ -331,7 +331,6 @@ EOT;
      */
     public function installEntry()
     {
-        include $this->app->getConfigRoot() . "my.php";
         /* Remove all entries. */
         $this->dao->delete('*')->from(TABLE_ENTRY)->exec();
 
