@@ -5,3 +5,4 @@
 #recordTable > .table > tbody > tr:first-child > td {font-weight: bold;}
 #recordBox .panel-body {padding-bottom: 0;}
 #recordBox .panel-body > .table-form {margin-bottom: 10px;}
+#recordTable > .table-data-col > tbody > tr:first-child > td {font-weight: normal;}

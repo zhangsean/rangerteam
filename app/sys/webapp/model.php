@@ -182,7 +182,7 @@ class webappModel extends model
         $entry->size        = 'custom';
         $entry->width       = $size[0];
         $entry->height      = $size[1];
-        $entry->position    = 'default';
+        $entry->position    = 'center';
         $entry->ip          = '*';
         $entry->visible     = 0;
         $entry->buildin     = 0;

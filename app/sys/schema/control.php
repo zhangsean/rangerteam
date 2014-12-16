@@ -129,6 +129,7 @@ class schema extends control
             $this->view->records = $records;
             $this->view->columns = $columns;
             $this->view->file    = $file;
+            $this->view->mode    = "row";
             @unlink($tmpFile);
             unset($this->lang->schema->menu);
             $this->display();

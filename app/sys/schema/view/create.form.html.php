@@ -30,6 +30,7 @@
       </tr>
     </table>
     <div id='recordTable'>
+      <?php if($mode == 'row'):?>
       <table class='table table-data'>
         <thead>
           <tr>
@@ -49,8 +50,41 @@
           <?php endforeach;?>
         </tbody>
       </table>
+      <?php endif?>
+      <?php if($mode == 'col'):?>
+      <table class='table table-data table-data-col'>
+        <?php for($i = 0; $i < $columns; $i ++):?>
+        <tr id="data-tr-<?php echo $i;?>"><th class='w-200px'><?php echo html::select('schema[' . chr($i + 65) . '][]', $lang->trade->importedFields, '', "class='form-control chosen' multiple data-placeholder='{$lang->schema->placeholder->selectField}'");?></th></tr>
+        <?php endfor;?>
+      </table>
+      <?php endif?>
     </div>
   </div>
 </div>
 </form>
+<?php if($mode == 'col'):?>
+<?php js::set('records', $records)?>
+<?php js::set('columns', $columns)?>
+<script>
+$(document).ready(function(){
+    for(row in v.records){
+        if(row > 5) break;
+        for(i = 0; i < v.columns; i++)
+        {
+            addContent = v.records[row][i];
+            if(typeof(v.records[row][i]) == "undefined") addContent = "";
+            if(row == 0)
+            {
+                addContent = "<th>" + addContent + "</th>";
+            }
+            else
+            {
+                addContent = "<td>" + addContent + "</td>";
+            }
+            $('#data-tr-' + i).append(addContent);
+        }
+    }
+});
+</script>
+<?php endif?>
 <?php include '../../common/view/footer.html.php';?>
