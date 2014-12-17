@@ -1,13 +1,13 @@
 <?php
 /**
- * The webapp module en file of ZenTaoPMS.
+ * The webapp module en file of ranzhi.
  *
  * @copyright   Copyright 2009-2013 青岛易软天创网络科技有限公司 (QingDao Nature Easy Soft Network Technology Co,LTD www.cnezsoft.com)
  * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     webapp
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhico.com
  */
 if(!isset($lang->webapp)) $lang->webapp = new stdclass();
 $lang->webapp->common = 'App';
@@ -59,7 +59,6 @@ $lang->webapp->noModule     = 'Uncategorized';
 $lang->webapp->targetList['']       = '';
 $lang->webapp->targetList['popup']  = 'Popup';
 $lang->webapp->targetList['iframe']  = 'Iframe';
-$lang->webapp->targetList['blank']  = 'New Window';
 
 $lang->webapp->width  = 'Width';
 $lang->webapp->height = 'Height';
@@ -75,8 +74,8 @@ $lang->webapp->addTypeList['system'] = 'System App';
 $lang->webapp->addTypeList['custom'] = 'Custom App';
 
 $lang->webapp->errorOccurs        = 'Error:';
-$lang->webapp->errorGetModules    = "Get extensions' categories data from the www.zentao.net failed. ";
-$lang->webapp->errorGetExtensions = 'Get extensions from www.zentao.net failed. You can visit "Create webapp" create it.';
+$lang->webapp->errorGetModules    = "Get extensions' categories data from the www.ranzhico.com failed. ";
+$lang->webapp->errorGetExtensions = 'Get extensions from www.ranzhico.com failed. ';
 $lang->webapp->successInstall     = 'Success Install App.';
 $lang->webapp->confirmDelete      = 'Are you sure delete this app?';
 $lang->webapp->noticeAbstract     = 'Sentence describes the application, not more than 30 words';

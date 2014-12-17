@@ -1,4 +1,4 @@
 <?php
 $config->webapp = new stdClass();
-$config->webapp->url       = 'http://api.zentao.net';
+$config->webapp->url       = 'http://api.ranzhico.cn';
 $config->webapp->apiRoot   = $config->webapp->url . '/webapp-';
