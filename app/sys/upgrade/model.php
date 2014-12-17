@@ -57,6 +57,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('1.5.beta'));
                 $this->upgradeEntryLogo();
                 $this->upgradeReturnRecords();
+                $this->upgradeDeliveryRecords();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -485,6 +486,30 @@ class upgradeModel extends model
             $data->returnedDate = $contract->returnedDate;
 
             $this->dao->insert(TABLE_PLAN)->data($data)->autoCheck()->exec();
+        }
+
+        return !dao::isError();
+    }
+
+    /**
+     * Update delivery records.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function upgradeDeliveryRecords()
+    {
+        $contracts = $this->dao->select('*')->from(TABLE_CONTRACT)->where('`delivery`')->eq('done')->fetchAll();
+        if(empty($contracts)) return false;
+
+        foreach($contracts as $contract)
+        {
+            $data = new stdclass();
+            $data->contract      = $contract->id;
+            $data->deliveredBy   = $contract->deliveredBy;
+            $data->deliveredDate = $contract->deliveredDate;
+
+            $this->dao->insert(TABLE_DELIVERY)->data($data)->autoCheck()->exec();
         }
 
         return !dao::isError();
