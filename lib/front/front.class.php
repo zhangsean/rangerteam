@@ -576,6 +576,31 @@ EOT;
         if($asGroup) $string .= "</div>";
         return  $string;
     }
+
+    /**
+     * Print the star images.
+     * 
+     * @param  float    $stars 0 1 1.5 2 2.5 3 3.5 4 4.5 5
+     * @access public
+     * @return void
+     */
+    public static function printStars($stars)
+    {
+        $redStars   = 0;
+        $halfStars  = 0;
+        $whiteStars = 5; 
+        if($stars)
+        {
+            $redStars  = floor($stars);
+            $halfStars = $stars - $redStars ? 1 : 0;
+            $whiteStars = 5 - ceil($stars);
+        }
+        echo "<span class='stars-list'>";
+        for($i = 1; $i <= $redStars;   $i ++) echo "<i class='icon-star'></i>";
+        for($i = 1; $i <= $halfStars;  $i ++) echo "<i class='icon-star-half-full'></i>";
+        for($i = 1; $i <= $whiteStars; $i ++) echo "<i class='icon-star-empty'></i>";
+        echo '</span>';
+    }
 }
 
 /**
