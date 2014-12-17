@@ -89,7 +89,7 @@ class package extends control
 
         $this->view->title      = $this->lang->package->obtain;
         $this->view->position[] = $this->lang->package->obtain;
-        $this->view->moduleTree = str_replace('/index.php', $this->server->script_name, $this->package->getModulesByAPI());
+        $this->view->moduleTree = $this->package->getModulesByAPI();
         $this->view->packages   = $packages;
         $this->view->installeds = $this->package->getLocalPackages('installed');
         $this->view->pager      = $pager;
