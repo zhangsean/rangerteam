@@ -422,6 +422,28 @@ CREATE TABLE `sys_category` (
   KEY `parent` (`parent`),
   KEY `path` (`path`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sys_package`;
+CREATE TABLE IF NOT EXISTS `sys_package` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `name` varchar(150) NOT NULL,
+  `code` varchar(30) NOT NULL,
+  `version` varchar(50) NOT NULL,
+  `author` varchar(100) NOT NULL,
+  `desc` text NOT NULL,
+  `license` text NOT NULL,
+  `type` varchar(20) NOT NULL default 'extension',
+  `site` varchar(150) NOT NULL,
+  `ranzhiCompatible` varchar(100) NOT NULL,
+  `installedTime` datetime NOT NULL,
+  `depends` varchar(100) NOT NULL,
+  `dirs` text NOT NULL,
+  `files` text NOT NULL,
+  `status` varchar(20) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `code` (`code`),
+  KEY `name` (`name`),
+  KEY `addedTime` (`installedTime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_config`;
 CREATE TABLE `sys_config` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,

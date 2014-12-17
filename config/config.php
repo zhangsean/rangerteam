@@ -95,6 +95,7 @@ if(file_exists($rightsConfig)) include $rightsConfig;
 
 /* Tables for basic system. */
 define('TABLE_CONFIG',    '`sys_config`');
+define('TABLE_PACKAGE',   '`sys_package`');
 define('TABLE_USER',      '`sys_user`');
 define('TABLE_GROUP',     '`sys_group`');
 define('TABLE_GROUPPRIV', '`sys_groupPriv`');

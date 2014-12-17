@@ -127,6 +127,11 @@ $lang->lifetime->closedBy     = 'Closed By';
 $lang->lifetime->closedReason = 'Closed Reason';
 $lang->lifetime->lastEdited   = 'Last Edited';
 
+$lang->setOkFile = <<<EOT
+<h5>For security reason, please do these steps. </h5>
+<p>Create %s file. If this file exists already, reopen it and save again.</p>
+EOT;
+
 /* Items for javascript. */
 $lang->js = new stdclass();
 $lang->js->confirmDelete         = 'Are sure to delete it?';
@@ -164,6 +169,7 @@ $lang->effort  = new stdclass();
 $lang->setting = new stdclass();
 $lang->task    = new stdclass();
 $lang->schema  = new stdclass();
+$lang->package = new stdclass();
 
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = 'Company|company|setbasic|';
@@ -171,8 +177,8 @@ $lang->menu->sys->user      = 'User|user|admin|';
 $lang->menu->sys->group     = 'Priviledge|group|browse|';
 $lang->menu->sys->entry     = 'App|entry|admin|';
 $lang->menu->sys->system    = 'System|mail|admin|';
-//$lang->menu->sys->extension = 'Extension|extension|admin|';
-//
+$lang->menu->sys->package   = 'Extension|package|browse|';
+
 $lang->message = new stdclass(); 
 $lang->blog    = new stdclass(); 
 $lang->group   = new stdclass(); 

@@ -717,6 +717,23 @@ class commonModel extends model
 
         return $link;
     }
+ 
+    /**
+     * Verfy administrator through ok file.
+     * 
+     * @access public
+     * @return array
+     */
+    public function verfyAdmin()
+    {
+        $okFile = $this->app->getWwwRoot() . 'ok';
+        if(!file_exists($okFile) or time() - filemtime($okFile) > 3600)
+        {
+            return array('result' => 'fail', 'okFile' => $okFile);
+        }
+
+        return array('result' => 'success');
+    }
 
     /**
      * Create changes of one object.

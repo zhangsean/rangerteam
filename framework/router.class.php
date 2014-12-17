@@ -317,6 +317,7 @@ class router
         $this->setConfigRoot();
         $this->setModuleRoot();
         $this->setStaticRoot();
+        $this->setWwwRoot();
         $this->setDataRoot();
         $this->setThemeRoot();
 
@@ -518,6 +519,17 @@ class router
     protected function setStaticRoot()
     {
         $this->staticRoot = $this->basePath . 'www' . DS;
+    }
+
+    /**
+     * Set the www root.
+     * 
+     * @access protected
+     * @return void
+     */
+    protected function setWwwRoot()
+    {
+        $this->wwwRoot = rtrim(dirname(dirname($_SERVER['SCRIPT_FILENAME'])), DS) . DS;
     }
 
     /**
@@ -724,6 +736,17 @@ class router
     public function getStaticRoot()
     {
         return $this->staticRoot;
+    }
+
+    /**
+     * Get the $wwwRoot var
+     * 
+     * @access public
+     * @return string
+     */
+    public function getWwwRoot()
+    {
+        return $this->wwwRoot;
     }
 
     /**

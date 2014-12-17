@@ -127,6 +127,11 @@ $lang->lifetime->closedBy     = '由谁关闭';
 $lang->lifetime->closedReason = '关闭原因';
 $lang->lifetime->lastEdited   = '最后修改';
 
+$lang->setOkFile = <<<EOT
+<h5>请按照下面的步骤操作以确认您的管理员身份。</h5>
+<p>创建 %s 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。</p>
+EOT;
+
 /* Items for javascript. */
 $lang->js = new stdclass();
 $lang->js->confirmDelete         = '您确定要执行删除操作吗？';
@@ -164,6 +169,7 @@ $lang->effort  = new stdclass();
 $lang->setting = new stdclass();
 $lang->task    = new stdclass();
 $lang->schema  = new stdclass();
+$lang->package = new stdclass();
 
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = '公司|company|setbasic|';
@@ -171,7 +177,7 @@ $lang->menu->sys->user      = '组织|user|admin|';
 $lang->menu->sys->group     = '权限|group|browse|';
 $lang->menu->sys->entry     = '应用|entry|admin|';
 $lang->menu->sys->system    = '系统|mail|admin|';
-//$lang->menu->sys->extension = '扩展|extension|admin|';
+$lang->menu->sys->package   = '扩展|package|browse|';
  
 $lang->message = new stdclass(); 
 $lang->blog    = new stdclass(); 

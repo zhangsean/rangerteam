@@ -17,6 +17,28 @@ CREATE TABLE `crm_delivery` (
 
 ALTER TABLE `sys_schema` ADD `dept` char(10) NOT NULL AFTER `fee`;
 
+CREATE TABLE IF NOT EXISTS `sys_package` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `name` varchar(150) NOT NULL,
+  `code` varchar(30) NOT NULL,
+  `version` varchar(50) NOT NULL,
+  `author` varchar(100) NOT NULL,
+  `desc` text NOT NULL,
+  `license` text NOT NULL,
+  `type` varchar(20) NOT NULL default 'extension',
+  `site` varchar(150) NOT NULL,
+  `ranzhiCompatible` varchar(100) NOT NULL,
+  `installedTime` datetime NOT NULL,
+  `depends` varchar(100) NOT NULL,
+  `dirs` text NOT NULL,
+  `files` text NOT NULL,
+  `status` varchar(20) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `code` (`code`),
+  KEY `name` (`name`),
+  KEY `addedTime` (`installedTime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `sys_userQuery` (
   `id` mediumint(8) unsigned NOT NULL auto_increment,
   `account` char(30) NOT NULL,
