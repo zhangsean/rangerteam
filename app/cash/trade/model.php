@@ -334,7 +334,7 @@ class tradeModel extends model
     {
         $now       = helper::now();
         $trades    = array();
-        $depositor = $this->getByID($depositorID);
+        $depositor = $this->loadModel('depositor')->getByID($depositorID);
 
         $this->loadModel('action');
 
