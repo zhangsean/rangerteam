@@ -26,18 +26,19 @@ $(document).ready(function()
     initSearch();
 });
 
-/* left, go to pre object. */
-$(document).bind('keydown', 'left', function(evt)
-{
-    preLink = ($('#pre').attr("href"));
-    if(typeof(preLink) != 'undefined') location.href = preLink;
-});
-
-/* right, go to next object. */
-$(document).bind('keydown', 'right', function(evt)
-{
-    nextLink = ($('#next').attr("href"));
-    if(typeof(nextLink) != 'undefined') location.href = nextLink;
+$(document).on('keyup', function(e){
+    if(e.keyCode == '37')
+    {
+        /* left, go to pre object. */
+        preLink = ($('#pre').attr("href"));
+        if(typeof(preLink) != 'undefined') location.href = preLink;
+    }
+    if(e.keyCode == '39')
+    {
+        /* right, go to next object. */
+        nextLink = ($('#next').attr("href"));
+        if(typeof(nextLink) != 'undefined') location.href = nextLink;
+    }
 });
 
 /**

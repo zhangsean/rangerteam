@@ -22,7 +22,7 @@ $config->contact->search['module'] = 'contact';
 
 $config->contact->search['fields']['t1.id']            = $lang->contact->id;
 $config->contact->search['fields']['t1.realname']      = $lang->contact->realname;
-$config->contact->search['fields']['t1.customer']      = $lang->contact->customer;
+$config->contact->search['fields']['t2.customer']      = $lang->contact->customer;
 $config->contact->search['fields']['t1.phone']         = $lang->contact->phone;
 $config->contact->search['fields']['t1.mobile']        = $lang->contact->mobile;
 $config->contact->search['fields']['t1.email']         = $lang->contact->email;
@@ -32,7 +32,7 @@ $config->contact->search['fields']['t1.nextDate']      = $lang->customer->nextDa
 
 $config->contact->search['params']['t1.id']            = array('operator' => '=',  'control' => 'input',  'values' => '');
 $config->contact->search['params']['t1.realname']      = array('operator' => '=',  'control' => 'input',  'values' => '');
-$config->contact->search['params']['t1.customer']      = array('operator' => '=',  'control' => 'select', 'values' => 'set in control');
+$config->contact->search['params']['t2.customer']      = array('operator' => '=',  'control' => 'select', 'values' => 'set in control');
 $config->contact->search['params']['t1.phone']         = array('operator' => 'include',  'control' => 'input',  'values' => '');
 $config->contact->search['params']['t1.mobile']        = array('operator' => 'include',  'control' => 'input',  'values' => '');
 $config->contact->search['params']['t1.email']         = array('operator' => 'include',  'control' => 'input',  'values' => '');
