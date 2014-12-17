@@ -435,7 +435,6 @@ class trade extends control
                     continue;
                 }
 
-                if($field == 'category') a($col);
                 $data[$field] = (is_int($col) and isset($row[$col])) ? trim($row[$col]) : '';
                 if($field == 'date') $data[$field] = date('Y-m-d', strtotime($data[$field]));
             }
