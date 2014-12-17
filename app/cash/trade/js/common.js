@@ -17,6 +17,7 @@ $(document).ready(function()
         }
         else
         {
+            $(this).parents('.input-group').find('select').show();
             $('#trader_chosen').show();
             $(this).parents('.input-group').find('input[type=text][id*=traderName]').hide();
         }
