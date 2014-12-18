@@ -150,14 +150,15 @@ class projectModel extends model
     {
         $project = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
-            ->remove('member,manager,master')
             ->add('createdDate', helper::now())
+            ->remove('member,manager,master')
             ->get();
 
         $this->dao->insert(TABLE_PROJECT)
             ->data($project, $skip = 'uid')
             ->autoCheck()
             ->batchCheck($this->config->project->require->create, 'notempty')
+            ->checkIF($project->end, 'end', 'ge', $project->begin)
             ->exec();
 
         if(dao::isError()) return false;
@@ -194,16 +195,17 @@ class projectModel extends model
         if(empty($project))
         {
             $project = fixer::input('post')
-                ->remove('member,manager,master')
                 ->add('editedBy', $this->app->user->account)
                 ->add('editedDate', helper::now())
+                ->remove('member,manager,master')
                 ->get();
         }
 
         $this->dao->update(TABLE_PROJECT)
-            ->data($project, $skip = 'uid,member,master,manager')
+            ->data($project, $skip = 'uid')
             ->autoCheck()
             ->batchCheck($this->config->project->require->create, 'notempty')
+            ->checkIF($project->end, 'end', 'ge', $project->begin)
             ->where('id')->eq($projectID)
             ->exec();
 

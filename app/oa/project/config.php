@@ -11,8 +11,8 @@
  */
 $config->project = new stdclass();
 $config->project->require = new stdclass();
-$config->project->require->create = 'name';
-$config->project->require->edit   = 'name';
+$config->project->require->create = 'name, begin, end';
+$config->project->require->edit   = 'name, begin, end';
 
 $config->project->editor = new stdclass();
 $config->project->editor->create = array('id' => 'desc', 'tools' => 'simple');

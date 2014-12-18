@@ -18,7 +18,10 @@
   <table class='table-form w-p90'>
     <tr>
       <th class='w-70px'><?php echo $lang->project->name;?></th>
-      <td class='w-p60'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
+      <td class='w-p60'>
+        <div class='required required-wrapper'></div>
+        <?php echo html::input('name', '', "class='form-control'");?>
+      </td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->manager;?></th>
@@ -30,11 +33,17 @@
     </tr>
     <tr>
       <th><?php echo $lang->project->begin;?></th>
-      <td><?php echo html::input('begin', '', "class='form-control form-date'");?></td><td></td>
+      <td>
+        <div class='required required-wrapper'></div>
+        <?php echo html::input('begin', '', "class='form-control form-date'");?>
+      </td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->end;?></th>
-      <td><?php echo html::input('end', '', "class='form-control form-date'");?></td><td></td>
+      <td>
+        <div class='required required-wrapper'></div>
+        <?php echo html::input('end', '', "class='form-control form-date'");?>
+      </td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->project->desc;?></th>
