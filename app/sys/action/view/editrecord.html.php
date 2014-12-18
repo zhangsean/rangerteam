@@ -29,7 +29,7 @@
     </tr>
     <?php endif;?>
     <tr>
-      <th class='w-100px'><?php echo $lang->action->record->date;?></th>
+      <th class='w-70px'><?php echo $lang->action->record->date;?></th>
       <td><?php echo html::input('date', $record->date, "class='form-control form-datetime'");?></td>
     </tr>
     <tr>
