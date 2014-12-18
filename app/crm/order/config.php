@@ -37,6 +37,13 @@ $config->order->search['fields']['o.assignedTo']    = $lang->order->assignedTo;
 $config->order->search['fields']['o.status']        = $lang->order->status;
 $config->order->search['fields']['o.contactedDate'] = $lang->order->contactedDate;
 $config->order->search['fields']['o.nextDate']      = $lang->order->nextDate;
+$config->order->search['fields']['o.createdBy']     = $lang->order->createdBy;
+$config->order->search['fields']['o.createdDate']   = $lang->order->createdDate;
+$config->order->search['fields']['o.closedBy']      = $lang->order->closedBy;
+$config->order->search['fields']['o.closedDate']    = $lang->order->closedDate;
+$config->order->search['fields']['o.closedReason']  = $lang->order->closedReason;
+$config->order->search['fields']['o.editedBy']      = $lang->order->editedBy;
+$config->order->search['fields']['o.editedDate']    = $lang->order->editedDate;
 
 $config->order->search['params']['o.id']            = array('operator' => '=',  'control' => 'input',  'values' => '');
 $config->order->search['params']['c.level']         = array('operator' => '=',  'control' => 'select', 'values' => $lang->customer->levelNameList);
@@ -47,3 +54,10 @@ $config->order->search['params']['o.assignedTo']    = array('operator' => '=',  
 $config->order->search['params']['o.status']        = array('operator' => '=',  'control' => 'select', 'values' => $lang->order->statusList);
 $config->order->search['params']['o.contactedDate'] = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->order->search['params']['o.nextDate']      = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
+$config->order->search['params']['o.createdBy']     = array('operator' => '=',  'control' => 'select', 'values' => 'users');
+$config->order->search['params']['o.createdDate']   = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
+$config->order->search['params']['o.closedBy']      = array('operator' => '=',  'control' => 'select', 'values' => 'users');
+$config->order->search['params']['o.closedDate']    = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
+$config->order->search['params']['o.closedReason']  = array('operator' => '=',  'control' => 'select', 'values' => $lang->order->closedReasonList);
+$config->order->search['params']['o.editedBy']      = array('operator' => '=',  'control' => 'select', 'values' => 'users');
+$config->order->search['params']['o.editedDate']    = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');

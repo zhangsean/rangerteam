@@ -43,7 +43,7 @@ include '../../common/view/datepicker.html.php';
 #searchform.showmore #searchmore, #searchform #searchlite {display: none;}
 #searchform.showmore #searchlite, #searchform #searchmore {display: inline-block;}
 #searchmore > i, #searchlite > i {font-size: 28px;}
-#searchmore:hover, #searchlite:hover {background: #e5e5e5; opacity: 1}
+#searchmore:hover, #searchlite:hover {background: #f0f0f0; opacity: 1}
 
 .bootbox-prompt .modal-dialog {width: 500px; margin-top: 10%;}
 #groupAndOr {display: inline-block;}
