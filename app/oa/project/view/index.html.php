@@ -24,10 +24,10 @@
             <button class="btn btn-mini" data-toggle="dropdown"><span class="caret"></span></button>
             <ul class="dropdown-menu pull-right">
               <?php echo '<li>' . html::a(inlink('edit', "projectID=$project->id"), $lang->edit, "data-toggle='modal'") . '</li>';?>
-              <?php echo '<li>' . html::a(inlink('delete', "projectID=$project->id"), $lang->delete, "class='deleter'") . '</li>';?>
               <?php if($project->status != 'finished') echo '<li>' . html::a(inlink('finish', "projectID=$project->id"), $lang->finish, "data-toggle='modal'") . '</li>';?>
               <?php if($project->status != 'doing') echo '<li>' . html::a(inlink('activate', "projectID=$project->id"), $lang->activate, "class='switcher' data-confirm='{$lang->project->confirm->activate}'") . '</li>';?>
               <?php if($project->status != 'suspend') echo '<li>' . html::a(inlink('suspend', "projectID=$project->id"), $lang->project->suspend, "class='switcher' data-confirm='{$lang->project->confirm->suspend}'") . '</li>';?>
+              <?php echo '<li>' . html::a(inlink('delete', "projectID=$project->id"), $lang->delete, "class='deleter'") . '</li>';?>
             </ul>
           </div>
         </div>
