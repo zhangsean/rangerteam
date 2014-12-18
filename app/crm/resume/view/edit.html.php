@@ -15,6 +15,10 @@
 <form id='resumeForm' method='post' action='<?php echo inlink('edit', "resumeID=$resume->id")?>'>
   <table class='table table-form'>
     <tr>
+      <th><?php echo $lang->resume->customer;?></th>
+      <td colspan='2'><?php echo $customer->name;?></td>
+    </tr>
+    <tr>
       <th class='w-70px'><?php echo $lang->resume->dept;?></th>
       <td><?php echo html::input('dept', $resume->dept, "class='form-control'")?></td>
     </tr>

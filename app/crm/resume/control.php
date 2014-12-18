@@ -83,8 +83,9 @@ class resume extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "contact=$resume->customer")));
         }
 
-        $this->view->title  = $this->lang->resume->edit;
-        $this->view->resume = $resume;
+        $this->view->title    = $this->lang->resume->edit;
+        $this->view->resume   = $resume;
+        $this->view->customer = $this->loadModel('customer')->getByID($resume->customer);
         $this->display();
     }
 
