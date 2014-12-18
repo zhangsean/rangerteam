@@ -204,9 +204,10 @@ class customer extends control
      */
     public function order($customerID)
     {
-        $this->view->title    = $this->lang->customer->order;
-        $this->view->orders   = $this->loadModel('order')->getList($mode = 'query', "customer=$customerID");
-        $this->view->products = $this->loadModel('product')->getPairs();
+        $this->view->title          = $this->lang->customer->order;
+        $this->view->orders         = $this->loadModel('order')->getList($mode = 'query', "customer=$customerID");
+        $this->view->products       = $this->loadModel('product')->getPairs();
+        $this->view->modalWidth     = 'lg';
         $this->display();
     }
 
@@ -222,9 +223,9 @@ class customer extends control
         $this->app->loadLang('resume');
 
         $this->view->title      = $this->lang->customer->contact;
-        $this->view->modalWidth = 800;
         $this->view->contacts   = $this->loadModel('contact')->getList($customerID);
         $this->view->customerID = $customerID;
+        $this->view->modalWidth = 'lg';
         $this->display();
     }
 
@@ -265,6 +266,7 @@ class customer extends control
     {
         $this->view->title     = $this->lang->customer->contract;
         $this->view->contracts = $this->loadModel('contract')->getList($customerID);
+        $this->modalWidth = 'lg';
         $this->display();
     }
 
