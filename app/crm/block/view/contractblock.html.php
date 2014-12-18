@@ -16,7 +16,7 @@
   <tr data-url='<?php echo $this->createLink('crm.contract', 'view', "id=$id");?>' <?php echo $appid;?>>
     <td class='nobr'><?php echo $contract->name;?></td>
     <td class='w-80px text-center text-danger'><?php echo $contract->amount?></td>
-    <td class='w-110px'><?php echo $lang->contract->deliveryList[$contract->delivery] . ' ' . $lang->contract->returnList[$contract->return];?></td>
+    <td class='w-120px'><?php echo $lang->contract->deliveryList[$contract->delivery] . ' ' . $lang->contract->returnList[$contract->return];?></td>
   </tr>
   <?php endforeach;?>
 </table>
