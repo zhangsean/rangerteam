@@ -7,7 +7,7 @@
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     block 
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhico.com
  */
 $lang->block->depositor = '付款帳號';
 $lang->block->lblBlock  = '區塊';

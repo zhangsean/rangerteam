@@ -7,7 +7,7 @@
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     block 
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhico.com
  */
 $lang->block->blog     = '最新博客';
 $lang->block->lblBlock = '区块';

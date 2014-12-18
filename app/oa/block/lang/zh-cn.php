@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     block 
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhico.com
  */
 $lang->block->announce = '系统公告';
 $lang->block->lblBlock = '区块';

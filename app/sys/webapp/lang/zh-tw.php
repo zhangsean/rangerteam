@@ -1,13 +1,13 @@
 <?php
 /**
- * The webapp module zh-tw file of ZenTaoPMS.
+ * The webapp module zh-tw file of RanZhi.
  *
  * @copyright   Copyright 2009-2013 青島易軟天創網絡科技有限公司 (QingDao Nature Easy Soft Network Technology Co,LTD www.cnezsoft.com)
  * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     webapp
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhico.com
  */
 $lang->webapp->common = 'WEB應用';
 $lang->webapp->index  = '已加應用';

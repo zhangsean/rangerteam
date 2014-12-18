@@ -1,13 +1,13 @@
 <?php
 /**
- * The view view file of webapp module of ZenTaoPMS.
+ * The view view file of webapp module of RanZhi.
  *
  * @copyright   Copyright 2009-2013 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
  * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     webapp
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhico.com
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
