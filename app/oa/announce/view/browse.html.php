@@ -27,14 +27,6 @@
           <h4><?php echo $article->title;?></h4>
         </div>
         <div class='item-content'>
-          <?php if(!empty($article->image)):?>
-          <div class='media pull-right'>
-            <?php
-            $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-            echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
-            ?>
-          </div>
-          <?php endif;?>
           <div class='text'><?php echo $article->content;?></div>
           <div class='text pull-right'>
             <?php echo html::a(inlink('edit', "articleID={$article->id}"), $lang->edit);?>

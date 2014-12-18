@@ -129,7 +129,7 @@ class announce extends control
      */
     public function view($announceID)
     {
-        $announce  = $this->loadModel('article')->getByID($announceID);
+        $announce = $this->loadModel('article')->getByID($announceID);
 
         /* fetch category for display. */
         $category = array_slice($announce->categories, 0, 1);
