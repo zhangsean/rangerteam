@@ -17,9 +17,6 @@
   <?php echo html::a(inlink('create'), "<i class='icon-plus'></i> {$lang->contact->create}", "class='btn btn-primary'")?>
 </div>
 <div class='panel'>
-  <div class='panel-heading'>
-    <strong><i class="icon-group"></i> <?php echo $lang->contact->list;?></strong>
-  </div>
   <table class='table table-hover table-striped tablesorter table-data' id='contactList'>
     <thead>
       <tr class='text-center'>

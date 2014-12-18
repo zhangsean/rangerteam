@@ -22,9 +22,6 @@
   <?php echo html::a(inlink('import'), "{$lang->trade->import}</i>", "class='btn btn-primary' data-toggle='modal'")?>
 </div>
 <div class='panel'>
-  <div class='panel-heading'>
-    <strong><i class="icon-group"></i> <?php echo $lang->trade->browse;?></strong>
-  </div>
   <form method='post' action='<?php echo inlink('batchedit', 'step=form')?>'>
     <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>
       <thead>

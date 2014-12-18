@@ -92,9 +92,9 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 #menu > .nav {float: left; padding: 0 5px}
 #menu > .nav > li {float: left; padding: 5px 0}
 #menu > .nav > li.divider {height: 40px; width: 1px; background: #ddd; margin: 0 5px;}
-#menu > .nav > li > a {padding: 5px 8px;}
+#menu > .nav > li > a {padding: 5px 6px; font-size: 13px;}
 #menu > .nav > li > a:hover {background: #ddd}
-#menu > .nav > li.active > a, #menu > .nav > li.active > a:hover, #menu > .nav > li.active > a:active {font-weight: bold;}
+#menu > .nav > li.selected > a, #menu > .nav > li.active > a, #menu > .nav > li.active > a:hover, #menu > .nav > li.active > a:active {font-weight: bold;}
 
 #menu > .pull-right {margin-right: 15px;}
 #menu > .pull-right .btn {position: relative; top: 3px;}

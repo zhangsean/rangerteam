@@ -381,7 +381,7 @@ class projectModel extends model
                 $menu .= '<li class="divider"></li><li><a href="javascript:;" id="toggleAll"><i class="icon-plus"></i></a></li>';
             }
         }
-        else if($taskListType ==  'browse')
+        else if($methodName ==  'browse')
         {
             $menu .= '<li class="divider"></li>';
             $menu .= "<li class='all'>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), $this->lang->task->all);

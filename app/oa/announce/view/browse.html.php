@@ -15,7 +15,6 @@
 <li id='bysearchTab'><a href='#'><i class='icon-search icon'></i>&nbsp;<?php echo $lang->search->common;?></a></li>
 <div id="mainContent">
   <div class='panel list list-condensed'>
-    <div class='panel-heading'><strong><i class='icon-calendar'></i> <?php echo $lang->announce->browse;?></strong></div>
     <section class='items items-hover'>
       <?php foreach($articles as $article):?>
       <div class='item'>

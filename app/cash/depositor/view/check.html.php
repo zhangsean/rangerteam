@@ -17,9 +17,6 @@
 <?php js::set('createBalance', $lang->depositor->createBalance);?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class="icon-group"></i> <?php echo $lang->depositor->check;?></strong>
-  </div>
-  <div class='panel-heading'>
     <form method='post' id='checkForm' class='form-inline'>
       <table class="table table-form w-p100">
         <tr>

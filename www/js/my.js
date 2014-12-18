@@ -88,7 +88,16 @@ function initSearch()
     {
         if($searchTab.hasClass('active'))
         {
-            $searchTab.removeClass('active').data('oldTab').addClass('active');
+            var $oldTab = $searchTab.data('oldTab');
+            $searchTab.removeClass('active');
+            if($oldTab)
+            {
+                $oldTab.addClass('active');
+            }
+            else
+            {
+                $searchTab.addClass('selected');
+            }
             $queryBox.addClass('hidden');
         }
         else

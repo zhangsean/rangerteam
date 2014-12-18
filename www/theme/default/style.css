@@ -184,7 +184,6 @@ body.page-actions-fixed {padding-bottom: 70px}
 
 /* panels */
 .panel-heading {padding: 8px 10px}
-.panel > .table > thead > tr > th,.panel > form > .table > thead > tr > th {background-color: transparent;}
 .panel > .panel-heading,.nav-stacked.nav-primary>li.nav-heading,.list > header {background-color: #f1f1f1; background-image: -moz-linear-gradient(#fafafa, #f1f1f1); background-image: -webkit-linear-gradient(#FAFAFA, #f1f1f1); background-image: linear-gradient(#FAFAFA, #f1f1f1); background-repeat: repeat-x;}
 .panel-pure {box-shadow: none; border: 0; border-radius: 0;}
 .panel-pure .panel-heading {background: transparent;}
