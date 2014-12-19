@@ -13,8 +13,16 @@
 <?php include '../../common/view/header.html.php'; ?>
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php'; ?>
+<ul id='menuTitle'>
+  <li><?php echo html::a($this->createLink('order', 'browse'), "<i class='icon-list-ul'></i> " . $lang->order->list);?></li>
+  <li class='divider angle'></li>
+  <li><?php echo html::a($this->createLink('order', 'view', "orderID={$order->id}"), $lang->order->view);?></li>
+  <li class='divider angle'></li>
+  <li class='title'><?php echo $lang->order->edit?></li>
+</ul>
 <form method='post' id='ajaxForm' class='form-condensed'>
-  <div class="col-lg-8">
+<div class='row-table'>
+  <div class='col-main'>
     <?php echo $this->fetch('action', 'history', "objectType=order&objectID={$order->id}");?>
     <div class='page-actions'>
       <?php echo html::submitButton();?>
@@ -22,7 +30,7 @@
       <?php echo html::hidden('referer', $this->server->http_referer);?>
     </div>
   </div>
- <div class="col-lg-4">
+  <div class="col-side">
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->order->basicInfo;?></strong></div>
       <div class='panel-body'>
@@ -114,5 +122,6 @@
       </div>
     </div>
   </div>
+</div>
 </form>
 <?php include '../../common/view/footer.html.php';?>

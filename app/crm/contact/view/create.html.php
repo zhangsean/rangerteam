@@ -13,6 +13,10 @@
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
+<ul id='menuTitle'>
+  <li><?php echo html::a($this->createLink('contact', 'browse'), $lang->contact->list);?></li>
+  <li class='divider angle'></li>
+</ul>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->contact->create;?></strong>

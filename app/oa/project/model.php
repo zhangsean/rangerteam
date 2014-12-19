@@ -337,11 +337,12 @@ class projectModel extends model
         $currentProject = $this->getById($projectID);
 
         $methodName = $this->app->getMethodName();
-        $backButton = html::a(helper::createLink('project', 'index', "status={$currentProject->status}"), "<i class='icon-th'></i> " . $this->lang->task->backToProjects, "id='backButton'");
+        $moduleName = $this->app->getModuleName();
+        $backButton = html::a(helper::createLink('project', 'index', "status={$currentProject->status}"), "<i class='icon-th'></i> " . $this->lang->project->browse, "id='backButton'");
         $menu  = "<nav id='menu'><ul class='nav'>";
         $menu .= '<li>' . $backButton . '</li>';
 
-        $menu .= '<li class="divider"></li>';
+        $menu .= '<li class="divider angle"></li>';
         $menu .= "<li><a id='currentItem' href=\"javascript:showDropMenu('project', '$projectID', '$currentModule', '$currentMethod', '$extra')\"><i class='icon-folder-open-alt'></i> <strong>{$currentProject->name}</strong> <span class='icon-caret-down'></span></a><div id='dropMenu'></div></li>";
 
         $viewIcons = array('browse' => 'list-ul', 'kanban' => 'columns', 'outline' => 'list-alt');
@@ -350,7 +351,7 @@ class projectModel extends model
         {
             $taskListType = $methodName;
             $viewName = $this->lang->task->{$methodName};
-            $menu .= '<li class="divider"></li>';
+            $menu .= '<li class="divider angle"></li>';
             $menu .= "<li id='viewBar' class='dropdown'><a href='javascript:;' id='groupButton' data-toggle='dropdown' class='dropdown-toggle'><icon class='icon-" . $viewIcons[$methodName] . "'></icon> {$viewName} <icon class='icon-caret-down'></icon></a><ul class='dropdown-menu'>";
             $menu .= "<li" . ($methodName == 'browse' ? " class='active'" : '') . ">" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $this->lang->task->list) . "</li>";
             $menu .= "<li" . ($methodName == 'kanban' ? " class='active'" : '') . ">" . html::a(helper::createLink('task', 'kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $this->lang->task->kanban) . "</li>";
@@ -361,13 +362,13 @@ class projectModel extends model
         {
             $taskList = $this->session->taskList;
             $taskListType = stripos($taskList, 'kanban') === false ? (stripos($taskList, 'outline') === false ? 'browse' : 'outline') : 'kanban';
-            $menu .= '<li class="divider"></li>';
+            $menu .= '<li class="divider angle"></li>';
             $menu .= '<li>' . html::a($taskList, "<icon class='icon-" . $viewIcons[$taskListType] . "'></icon> " . $this->lang->task->{$taskListType}) . '</li>';
         }
 
         if($methodName == 'kanban' || $methodName == 'outline')
         {
-            $menu .= '<li class="divider"></li>';
+            $menu .= '<li class="divider angle"></li>';
             $menu .= "<li id='groupBar' class='dropdown'><a href='javascript:;' id='groupButton' data-toggle='dropdown' class='dropdown-toggle'><icon class='icon-flag'></icon> <span id='groupByName'></span> <icon class='icon-caret-down'></icon></a><ul class='dropdown-menu'>";
             foreach ($this->lang->task->groups as $key => $value)
             {
@@ -383,7 +384,7 @@ class projectModel extends model
         }
         else if($methodName ==  'browse')
         {
-            $menu .= '<li class="divider"></li>';
+            $menu .= '<li class="divider angle"></li>';
             $menu .= "<li class='all'>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), $this->lang->task->all);
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=createdBy"), $this->lang->task->createdByMe);
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=assignedTo"), $this->lang->task->assignedToMe);
@@ -391,6 +392,12 @@ class projectModel extends model
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=untilToday"), $this->lang->task->untilToday);
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=expired"), $this->lang->task->expired);
         }
+        else if($methodName == 'view')
+        {
+            $menu .= '<li class="divider angle"></li>';
+            $menu .= '<li class="title">' . $this->lang->{$moduleName}->view . '</li>';
+        }
+
         $menu .= "</ul>";
 
         $menu .= "<div class='pull-right'>" . html::a(helper::createLink('task', 'batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $this->lang->task->create, 'class="btn btn-primary"') . "</div></nav>";

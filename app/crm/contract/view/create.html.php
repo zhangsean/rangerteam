@@ -15,6 +15,10 @@
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('customer', isset($customer) ? $customer : 0);?>
+<ul id='menuTitle'>
+  <li><?php echo html::a($this->createLink('contract', 'browse'), "<i class='icon-list-ul'></i> " . $lang->contract->list);?></li>
+  <li class='divider angle'></li>
+</ul>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-edit"></i> <?php echo $lang->contract->create;?></strong>

@@ -14,11 +14,8 @@
 <?php if($mode) js::set('mode', $mode);?>
 <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
 <li id='bysearchTab'><a href='#'><i class='icon-search icon'></i>&nbsp;<?php echo $lang->search->common;?></a></li>
-<div class='with-menu page-content'>
+<div class='row with-menu page-content'>
   <div class='panel'>
-    <div class='panel-heading'>
-      <strong><?php echo $project->name;?></strong>
-    </div>
     <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
       <thead>
         <tr class='text-center'>

@@ -92,9 +92,13 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 #menu > .nav {float: left; padding: 0 5px}
 #menu > .nav > li {float: left; padding: 5px 0}
 #menu > .nav > li.divider {height: 40px; width: 1px; background: #ddd; margin: 0 5px;}
+#menu > .nav > li.divider.angle {position: relative; width: 10px; background: none; margin: 0;}
+#menu > .nav > li.divider.angle:before, #menu > .nav > li.divider.angle:after {position: absolute; content: ' '; display: block; width: 0; height: 0; top: 0; left: 0; border-style: solid; border-width: 20px 0 20px 10px; border-color: transparent transparent transparent #cdcdcd; z-index: 1}
+#menu > .nav > li.divider.angle:after {z-index: 2; left: -1px; border-color: transparent transparent transparent #f1f1f1;}
 #menu > .nav > li > a {padding: 5px 6px; font-size: 13px;}
 #menu > .nav > li > a:hover {background: #ddd}
 #menu > .nav > li.selected > a, #menu > .nav > li.active > a, #menu > .nav > li.active > a:hover, #menu > .nav > li.active > a:active {font-weight: bold;}
+#menu > .nav > li.title {font-weight: bold; padding: 11px 10px;}
 
 #menu > .pull-right {margin-right: 15px;}
 #menu > .pull-right .btn {position: relative; top: 3px;}
@@ -102,3 +106,8 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 #menu .dropdown-menu {margin-top: -3px; left: -5px}
 
 #menuActions {position: fixed; right: 15px; top: 45px; z-index: 1040}
+
+.row-table {display: table; width: 100%;}
+.col-side, .col-main { padding: 0; display: table-cell; vertical-align: top;}
+.col-side {width: 350px; padding-left: 10px;}
+.col-main {padding-right: 10px;}

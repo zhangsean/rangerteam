@@ -11,8 +11,13 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<div class='row'>
-  <div class='col-md-8'>
+<ul id='menuTitle'>
+  <li><?php echo html::a($this->createLink('customer', 'browse'), "<i class='icon-list-ul'></i> " . $lang->customer->list);?></li>
+  <li class='divider angle'></li>
+  <li class='title'><?php echo $lang->customer->view?></li>
+</ul>
+<div class='row-table'>
+  <div class='col-main'>
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $customer->name . $lang->customer->desc;?></strong></div>
       <div class='panel-body'><?php echo $customer->desc;?></div>
@@ -38,7 +43,7 @@
       ?>
     </div>
   </div>
-  <div class='col-md-4'>  
+  <div class='col-side'>  
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->basicInfo;?></strong></div>
       <div class='panel-body'>

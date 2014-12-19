@@ -12,6 +12,10 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
+<ul id='menuTitle'>
+  <li><?php echo html::a($this->createLink('customer', 'browse'), $lang->customer->list);?></li>
+  <li class='divider angle'></li>
+</ul>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->customer->create;?></strong>

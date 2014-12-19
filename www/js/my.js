@@ -22,7 +22,7 @@ $(document).ready(function()
     /* Reload modal. */
     $(document).on('click', '.reloadModal', function(){$.reloadAjaxModal()});
 
-    /* Init search tab on menu */
+    setMenu();
     initSearch();
 });
 
@@ -126,5 +126,22 @@ function ajaxGetSearchForm($queryBox)
         {
             $queryBox.html(data);
         });
+    }
+}
+
+/**
+ * Set menu
+ * 
+ * @access public
+ * @return void
+ */
+function setMenu()
+{
+    $menuTitle = $('#menuTitle');
+    $menu = $('#menu');
+    if($menu.length && $menuTitle.length)
+    {
+        $menu.children('ul.nav:not(.pull-right)').hide();
+        $menu.prepend($menuTitle.addClass('nav'));
     }
 }

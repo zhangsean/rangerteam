@@ -13,8 +13,8 @@
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
 <div class='with-menu page-content'>
-  <div class='row'>
-    <div class='col-md-8'>
+  <div class='row-table'>
+    <div class='col-main'>
       <div class='panel'>
         <div class='panel-heading'><strong><?php echo $task->name;?></strong></div>
         <div class='panel-body'>
@@ -32,7 +32,7 @@
         ?>
       </div>
     </div>
-    <div class='col-md-4'>
+    <div class='col-side'>
       <div class='panel'>
         <div class='panel-heading'><strong><?php echo $lang->task->basicInfo?></strong></div>
         <div class='panel-body'>

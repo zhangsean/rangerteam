@@ -15,9 +15,6 @@
 <?php js::set('groupBy', $groupBy);?>
 <div class='with-menu page-content'>
   <div class='panel'>
-    <div class='panel-heading'>
-      <strong><?php echo $project->name; ?></strong>
-    </div>
     <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
       <thead>
         <tr class='text-center'>

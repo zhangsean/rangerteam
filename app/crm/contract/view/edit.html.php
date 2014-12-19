@@ -14,12 +14,17 @@
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
+<ul id='menuTitle'>
+  <li><?php echo html::a($this->createLink('contract', 'browse'), $lang->contract->list);?></li>
+  <li class='divider angle'></li>
+  <li><?php echo html::a($this->createLink('contract', 'view', "contractID={$contract->id}"), $lang->contract->view);?></li>
+  <li class='divider angle'></li>
+  <li class='title'><?php echo $lang->contract->edit?></li>
+</ul>
 <form method='post' id='ajaxForm'>
-  <div class='col-md-8'>
+<div class='row-table'>
+  <div class='col-main'>
     <div class='panel'>
-      <div class='panel-heading'>
-        <strong><i class="icon-edit"></i> <?php echo $lang->contract->edit;?></strong>
-      </div>
       <div class='panel-body'>
         <table class='table table-form'>
           <tr>
@@ -85,7 +90,7 @@
     <?php echo $this->fetch('action', 'history', "objectType=contract&objectID={$contract->id}")?>
     <div class='page-actions'><?php echo html::submitButton() . html::backButton();?></div>
   </div>
-  <div class='col-md-4'>
+  <div class='col-side'>
     <div class='panel'>
       <div class='panel-heading'>
         <strong><?php echo $lang->basicInfo;?></strong>
@@ -185,6 +190,7 @@
       </div>
     </div>
   </div>
+</div>
 </form>
 <table id='orderGroup' class='hide'>
   <tr>
