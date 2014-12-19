@@ -114,7 +114,12 @@
         <strong><i class='icon-file-text-alt'></i> <?php echo $lang->contract->deliveryRecords;?></strong>
       </div>
       <div class='panel-body'>
-        <?php foreach($contract->deliveryList as $delivery) printf($lang->contract->deliveryInfo, $delivery->deliveredDate, zget($users, $delivery->deliveredBy, $delivery->deliveredBy));?>
+        <?php foreach($contract->deliveryList as $delivery):?>
+        <?php printf($lang->contract->deliveryInfo, $delivery->deliveredDate, zget($users, $delivery->deliveredBy, $delivery->deliveredBy));?>
+        <?php if($delivery->comment):?>
+        <div class='alert'><?php echo $delivery->comment;?></div>
+        <?php endif;?>
+        <?php endforeach;?>
       </div>
     </div>
     <?php endif;?>

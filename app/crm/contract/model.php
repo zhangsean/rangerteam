@@ -282,7 +282,7 @@ class contractModel extends model
             ->setDefault('deliveredDate', $now)
             ->get();
 
-        $this->dao->insert(TABLE_DELIVERY)->data($data, $skip = 'uid, comment, handlers, finish')->autoCheck()->exec();
+        $this->dao->insert(TABLE_DELIVERY)->data($data, $skip = 'uid, handlers, finish')->autoCheck()->exec();
 
         if(!dao::isError())
         {
