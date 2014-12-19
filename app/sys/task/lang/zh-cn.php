@@ -133,4 +133,4 @@ $lang->task->unAssigned = '未指派';
 $lang->task->mindMoveTip = '只能将任务移动至二级节点下。';
 $lang->task->notAllowed  = '不允许这样操作。';
 
-$lang->task->groupinfo = '总计 <strong class="group-total">%s</strong> 项，<span class="text-warning">未开始 <strong class="group-wait">%s</strong></span>，<span class="text-danger">进行中 <strong class="group-doing">%s</strong></span>，<span class="text-success">已完成 <strong class="group-done">%s</strong></span>，<span class="text-muted">已关闭 <strong class="group-closed">%s</strong></span>';
+$lang->task->groupinfo = "<div class='text-muted'>总计 <strong>%s</strong> 项，未开始 <strong>%s</strong>，进行中 <strong>%s</strong>，已完成 <strong>%s</strong>，已关闭 <strong>%s</strong></div>";

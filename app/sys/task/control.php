@@ -473,13 +473,13 @@ class task extends control
         $tasks = $this->task->getList($projectID, $mode = null, $orderBy, $pager = null, $groupBy);
         $tasks = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
 
-        $this->view->tasks       = $tasks;
-        $this->view->groupBy     = $groupBy;
-        $this->view->orderBy     = $groupBy;
-        $this->view->projectID   = $projectID;
-        $this->view->projects    = $this->project->getPairs();
-        $this->view->project     = $project;
-        $this->view->users       = $this->loadModel('user')->getPairs();
+        $this->view->tasks     = $tasks;
+        $this->view->groupBy   = $groupBy;
+        $this->view->orderBy   = $groupBy;
+        $this->view->projectID = $projectID;
+        $this->view->projects  = $this->project->getPairs();
+        $this->view->project   = $project;
+        $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
     }
 }

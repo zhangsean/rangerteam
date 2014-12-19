@@ -79,7 +79,9 @@
               <td><?php echo $this->task->buildOperateMenu($task);?></td>
             </tr>
           <?php endforeach;?>
+          <?php if($groupBy != 'status'):?>
           <tr><td colspan='9'><?php printf($lang->task->groupinfo, $groupSum, $groupWait, $groupDoing, $groupDone, $groupClosed) ?></td></tr>
+          <?php endif;?>
         </tbody>
       <?php endforeach;?>
     </table>
