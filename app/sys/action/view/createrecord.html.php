@@ -65,7 +65,7 @@
     </tr>
     <?php endif;?>
     <tr>
-      <th class='w-100px'><?php echo $lang->action->record->date;?></th>
+      <th class='w-70px'><?php echo $lang->action->record->date;?></th>
       <td><div class='col-sm-5'><?php echo html::input('date', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></div></td>
     </tr> 
     <tr>
