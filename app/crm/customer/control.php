@@ -264,9 +264,9 @@ class customer extends control
      */
     public function contract($customerID)
     {
-        $this->view->title     = $this->lang->customer->contract;
-        $this->view->contracts = $this->loadModel('contract')->getList($customerID);
-        $this->modalWidth = 'lg';
+        $this->view->title      = $this->lang->customer->contract;
+        $this->view->contracts  = $this->loadModel('contract')->getList($customerID);
+        $this->view->modalWidth = 'lg';
         $this->display();
     }
 

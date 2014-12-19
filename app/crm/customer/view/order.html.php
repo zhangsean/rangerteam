@@ -18,7 +18,7 @@
       <th><?php echo $lang->order->product;?></th>
       <th><?php echo $lang->order->plan;?></th>
       <th><?php echo $lang->order->assignedTo;?></th>
-      <th class='w-50px'><?php echo $lang->order->status;?></th>
+      <th class='w-60px'><?php echo $lang->order->status;?></th>
       <th class='w-90px'><?php echo $lang->order->contactedDate;?></th>
       <th class='w-90px'><?php echo $lang->order->nextDate;?></th>
     </tr>

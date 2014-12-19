@@ -17,7 +17,7 @@
       <th class='w-50px'><?php echo $lang->contract->id;?></th>
       <th><?php echo $lang->contract->name;?></th>
       <th><?php echo $lang->contract->amount;?></th>
-      <th class='w-80px'><?php echo $lang->contract->createdDate;?></th>
+      <th class='w-90px'><?php echo $lang->contract->createdDate;?></th>
       <th class='w-80px'><?php echo $lang->contract->return;?></th>
       <th class='w-80px'><?php echo $lang->contract->delivery;?></th>
       <th class='w-80px'><?php echo $lang->contract->status;?></th>
