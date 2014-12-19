@@ -34,7 +34,7 @@
               <?php foreach($groupTasks as $task):?>
               <div class='board-item task' data-id="<?php echo $task->id;?>">
                 <div class='task-heading'>
-                  <a class='task-name' href="<?php echo $this->createLink('task', 'view', "taskID=$task->id"); ?>"><strong><?php echo $task->name;?></strong></a>
+                  <a class='task-name' href="<?php echo $this->createLink('task', 'view', "taskID=$task->id"); ?>"><?php echo $task->name;?></a>
                 </div>
                 <div class='task-info clearfix'>
                   <div class='pull-left'>
