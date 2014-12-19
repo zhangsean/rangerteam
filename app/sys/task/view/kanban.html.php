@@ -39,6 +39,9 @@
                 <div class='task-info clearfix'>
                   <div class='pull-left'>
                   <span class="pri pri-<?php echo $task->pri; ?>">P<?php echo ($task->pri == 0 ? '?' : $task->pri);?></span>
+                  <?php if($groupBy != 'status'):?>
+                    <span class="task-status text-<?php echo $task->status;?>"><small><?php echo $lang->task->statusList[$task->status];?></small></span>
+                  <?php endif;?>
                   <?php if(!empty($task->desc)): ?>
                     <button type='button' class='btn btn-link btn-mini' data-toggle='popover' data-original-title="<?php echo $lang->task->desc?>" data-trigger='hover' data-html='true' data-placement='bottom' data-content="<?php echo $task->desc?>"><i class='icon-file-text-alt'></i></button>&nbsp;&nbsp;
                   <?php endif; ?>
