@@ -43,7 +43,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->task->assignedTo;?></th>
-              <td><?php echo $members[$task->assignedTo];?></td>
+              <td><?php echo zget($members, $task->assignedTo, $task->assignedTo);?></td>
             </tr>
             <tr>
               <th><?php echo $lang->task->status;?></th>
