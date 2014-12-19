@@ -16,6 +16,7 @@ $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 $modalSizeList = array('lg' => '900px', 'sm' => '300px');
+if(!isset($modalWidth)) $modalWidth = 700;
 if(is_numeric($modalWidth))
 {
     $modalWidth .= 'px';
@@ -26,7 +27,7 @@ else if(isset($modalSizeList[$modalWidth]))
 }
 if(isset($pageCSS)) css::internal($pageCSS);
 ?>
-<div class="modal-dialog" style="width:<?php echo empty($modalWidth) ? '700px' : $modalWidth;?>;">
+<div class="modal-dialog" style="width:<?php echo $modalWidth;?>;">
   <div class="modal-content">
     <div class="modal-header">
       <?php echo html::closeButton();?>
