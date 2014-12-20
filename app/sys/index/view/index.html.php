@@ -108,7 +108,7 @@ js::import($jsRoot . 'jquery/ips.js');
   <div id='modalContainer'></div>
 </div>
 <script>
-var entries = new Array(
+var entries = [
 {
     id       : 'allapps',
     name     : '<?php echo $lang->index->allEntries?>',
@@ -117,7 +117,7 @@ var entries = new Array(
     menu     : 'menu',
     icon     : 'icon-th-large',
     order    : 9999999
-});
+}];
 
 <?php if($this->app->user->admin == 'super'):?>
 entries.push(

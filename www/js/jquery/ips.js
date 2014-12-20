@@ -10,7 +10,6 @@
         windowIdTeamplate= 'WID{0}',
         windowZIndexSeed = 100,
         defaultWindowPos = {x: 110, y: 20},
-        entriesConfigs   = null,
         entries          = null,
         desktop          = null,
         windows          = null,
@@ -82,13 +81,54 @@
      */
     function initEntries(entriesOptions)
     {
-        entriesConfigs = entriesOptions;
         entries        = [];
-
-
-        for(var i in entriesConfigs)
+        $.each(entriesOptions, function(idx, option)
         {
-            entries.push(new entry(entriesConfigs[i]));
+            entries.push(new entry(option));
+        });
+
+        entries.sort(function(a, b){return a.order - b.order;});
+    }
+
+    /**
+     * Refresh entries
+     * @param  {array} entriesOptions
+     * @param  {bool}  reset
+     * @return {void}
+     */
+    function refreshEntries(entriesOptions, reset)
+    {
+        if(reset)
+        {
+            $.each(entries, function(idx, et)
+            {
+                if(et.id != 'allapps' && et.id != 'superadmin') et.delete = true;
+            });
+        }
+        var et;
+        $.each(entriesOptions, function(idx, option)
+        {
+            et = getEntry(option.id);
+            if(et)
+            {
+                if(reset) et.delete = false;
+                et.init(option);
+            }
+            else
+            {
+                entries.push(new entry(option));
+            }
+        });
+
+        if(reset)
+        {
+            for(var i = entries.length - 1; i >= 0; --i)
+            {
+                if(entries[i].delete)
+                {
+                    entries.splice(i, 1);
+                }
+            }
         }
 
         entries.sort(function(a, b){return a.order - b.order;});
@@ -96,10 +136,14 @@
 
     function getEntry(id)
     {
-        for(var i in entries)
+        if(id && entries)
         {
-            var et = entries[i];
-            if(id === et.id) return et;
+            var et;
+            for(var i = entries.length - 1; i >= 0; --i)
+            {
+                et = entries[i];
+                if(id == et.id) return et;
+            }
         }
         return null;
     }
@@ -380,6 +424,12 @@
         this.updateBrowserUrl(indexUrl, true, 'index', {tag: 'index'});
     }
 
+    /* Refresh the desktop */
+    desktopManager.prototype.refreshShortcuts = function()
+    {
+        this.shortcuts.render();
+    };
+
     /* Bind events */
     desktopManager.prototype.bindEvents = function()
     {
@@ -416,7 +466,7 @@
             target.toggleClass($e.attr('data-toggle-class'));
             $e.toggleClass('toggle-on');
         });
-    }
+    };
 
     /* Update browser url in address bar by change browser history */
     desktopManager.prototype.updateBrowserUrl = function(url, isForcePush, title, state)
@@ -429,14 +479,14 @@
             else window.history.replaceState(state, title, url);
         }
         catch(e){}
-    }
+    };
 
     /* Update browser title */
     desktopManager.prototype.updateBrowserTitle = function(title)
     {
         title = title || indexTitle;
         document.title = title;
-    }
+    };
 
     /**
      * The Windows Manager Object
@@ -448,7 +498,7 @@
 
         this.init();
         this.bindEvents();
-    }
+    };
 
     /* Initialize */
     windowsManager.prototype.init = function()
@@ -457,13 +507,13 @@
         this.activedWindow    = null;
         this.lastActiveWindow = null;
         this.set              = new Array();
-    }
+    };
 
     /* Query window object, the query id can be window id or entry id */
     windowsManager.prototype.query = function(q)
     {
         return this.set[q] || this.set[settings.windowidstrTemplate.format(q)] || this.activedWindow;
-    }
+    };
 
     /* Active a window with query id*/
     windowsManager.prototype.active = function(q)
@@ -472,13 +522,13 @@
         if(win == undefined) return;
 
         win.active();
-    }
+    };
 
     /* Re-active the last actived window */
     windowsManager.prototype.activeLastWindow = function()
     {
         if(this.lastActiveWindow) this.lastActiveWindow.active();
-    }
+    };
 
     /* Close a window */
     windowsManager.prototype.close = function(q)
@@ -487,13 +537,13 @@
         if(win == undefined) return;
         win.close();
         delete this.set[win.idstr];
-    }
+    };
 
     /* Reload the actived window */
     windowsManager.prototype.reload = function()
     {
         if(this.activedWindow) this.activedWindow.reload();
-    }
+    };
 
     /* Open a entry window */
     windowsManager.prototype.openEntry = function(et, url, go2index)
@@ -534,7 +584,7 @@
 
         if(et.display != 'modal') desktop.cancelFullscreenMode();
         else desktop.turnOnModalMode();
-    }
+    };
 
     /* Open a temporary entry window, entry options required */
     windowsManager.prototype.open = function(options)
@@ -551,7 +601,7 @@
         }, options);
         var et = new entry(config);
         this.openEntry(et);
-    }
+    };
 
     /* Handle status before window active */
     windowsManager.prototype.beforeActive = function()
@@ -569,7 +619,7 @@
 
             this.activedWindow.$.removeClass('window-active').css('z-index', parseInt(this.activedWindow.$.css('z-index')) % 10000);
         }
-    }
+    };
 
     /* Bind events */
     windowsManager.prototype.bindEvents = function()
@@ -647,7 +697,7 @@
             }, false);
         }
         catch(e){}
-    }
+    };
 
     /* Handle window key down event */
     windowsManager.prototype.handleWindowKeydown = function(event)
@@ -664,7 +714,7 @@
             event.stopPropagation();
             return false;
         }
-    }
+    };
 
     /* Handle the status after browser size changed */
     windowsManager.prototype.afterBrowserResized = function()
@@ -673,7 +723,7 @@
         {
             this.set[i].afterResized();
         }
-    }
+    };
 
     /**
      * The Window Object
@@ -686,7 +736,7 @@
     var windowx = function(et)
     {
         this.init(et);
-    }
+    };
 
     /* Initialize */
     windowx.prototype.init = function(et)
@@ -704,86 +754,86 @@
         this.getUrl();
 
         this.afterResized(true);
-    }
+    };
 
     /* Determine whether has the given class */
     windowx.prototype.hasClass = function(c)
     {
         return this.$.hasClass(c);
-    }
+    };
 
     /* Determine whether the window is hiding(Mminimized) */
     windowx.prototype.isHide = function()
     {
         return this.hasClass('window-min');
-    }
+    };
 
     /* Determine whether the window is loading content */
     windowx.prototype.isLoading = function()
     {
         return this.hasClass('window-loading');
-    }
+    };
 
     /* Determine whether the window is fullscreen */
     windowx.prototype.isFullscreen = function()
     {
         return this.hasClass('window-fullscreen');
-    }
+    };
 
     /* Determine whether the window is maximized */
     windowx.prototype.isMax = function()
     {
         return this.hasClass('window-max');
-    }
+    };
 
     /* Determine whether the window is fixed size */
     windowx.prototype.isFixed = function()
     {
         return this.hasClass('window-fixed');
-    }
+    };
 
     /* Determine whether the window is actived */
     windowx.prototype.isActive = function()
     {
         return this.hasClass('window-active');
-    }
+    };
 
     /* Get the current content url */
     windowx.prototype.getUrl = function()
     {
         this.url = this.$.attr('data-url') || this.entry.url;
         return this.url;
-    }
+    };
 
     windowx.prototype.getTitle = function()
     {
         this.title = this.title || this.$.attr('data-title') || this.entry.name;
         return this.title;
-    }
+    };
 
     windowx.prototype.setTitle = function(title)
     {
         this.title = title || this.entry.name;
         this.$.attr('data-title', this.title);
-    }
+    };
 
     windowx.prototype.setUrl = function(url)
     {
         this.url = url || this.indexUrl;
         this.$.attr('data-url', this.url);
-    }
+    };
 
     windowx.prototype.isIndex = function()
     {
         return this.url == this.indexUrl;
-    }
+    };
 
     /* Show or hide the window */
     windowx.prototype.toggle = function()
     {
         if(this.isHide()) this.show();
         else this.hide();
-    }
+    };
 
     /* Hide the window by miximized */
     windowx.prototype.hide = function(silence)
@@ -794,7 +844,7 @@
             if(!silence)
                 windows.activeLastWindow();
         }
-    }
+    };
 
     /* Show the window */
     windowx.prototype.show = function()
@@ -804,7 +854,7 @@
             this.$.fadeIn(settings.animateSpeed).removeClass('window-min');
         }
         this.active();
-    }
+    };
 
     /* Reload the content */
     windowx.prototype.reload = function(url, go2index)
@@ -834,7 +884,7 @@
         {
             messager.warning(settings.busyTip);
         }
-    }
+    };
 
     /* Load content with ajax */
     windowx.prototype.loadHtml = function()
@@ -860,7 +910,7 @@
 
             this.firstLoad = false;
         });
-    }
+    };
 
     /* Load content with iframe */
     windowx.prototype.loadIframe = function(go2index)
@@ -918,20 +968,26 @@
 
                     $frame.unbind('keydown', windows.handleWindowKeydown).keydown(windows.handleWindowKeydown).data('data-id', win.idStr);
                 }
+
+                var iframe$ = window.frames[fName].$;
+                if(iframe$)
+                {
+                    iframe$.extend({refreshDesktop: $.refreshDesktop});
+                }
             }
             catch(e){}
 
             win.updateEntryUrl(win.firstLoad);
             win.firstLoad = false;
         }
-    }
+    };
 
     /* Update address bar when content url changed */
     windowx.prototype.updateEntryUrl = function(isForcePush)
     {
         desktop.updateBrowserUrl(this.url || this.indexUrl, isForcePush);
         desktop.updateBrowserTitle(this.getTitle());
-    }
+    };
 
     /* Close the window */
     windowx.prototype.close = function()
@@ -966,7 +1022,7 @@
 
         $('.tooltip').remove();
         if(!this.isModal) windows.activeLastWindow();
-    }
+    };
 
     /* Change the window status to maximized or normal */
     windowx.prototype.toggleSize = function()
@@ -1003,7 +1059,7 @@
             }).find('.icon-resize-full').removeClass('icon-resize-full').addClass('icon-resize-small');
         }
         this.afterResized(true);
-    }
+    };
 
     /* Handle status after window size changed */
     windowx.prototype.afterResized = function(onlyAppSize)
@@ -1024,7 +1080,7 @@
 
         var offset = this.$.hasClass('window-control-full') ? settings.windowHeadheight : 0;
         this.$.find('.window-content').height(this.$.height() - offset);
-    }
+    };
 
     /* Active the window */
     windowx.prototype.active = function()
@@ -1048,7 +1104,7 @@
         windows.activedWindow = this;
         
         this.updateEntryUrl();
-    }
+    };
 
     /**
      * The start menu Object
@@ -1085,7 +1141,7 @@
         }
 
         this.init();
-    }
+    };
 
     /**
      * The fullscreen manager
@@ -1253,7 +1309,7 @@
 
         this.init();
         this.bindEvents();
-    }
+    };
 
     /**
      * Manage the shortcuts
@@ -1268,9 +1324,17 @@
             this.$appsMenu    = $('#apps-menu .bar-menu');
             this.$allAppsList = $("#allAppsList .bar-menu");
 
-            this.showAll();
+            this.render();
             this.bindEvents();
-        }
+        };
+
+        /* Render the shortcuts */
+        this.render = function()
+        {
+            this.$appsMenu.empty();
+            this.$allAppsList.empty();
+            this.showAll();
+        };
 
         /* Show all shortcuts */
         this.showAll = function()
@@ -1279,14 +1343,14 @@
             {
                 this.show(entries[index]);
             }
-        }
+        };
 
         /* show a shortcut */
         this.show = function(entry)
         {
             if(entry.menu == 'menu' || entry.menu == 'all') this.$appsMenu.append(entry.toLeftBarShortcutHtml());
             if(entry.menu == 'all' || entry.menu == 'list') this.$allAppsList.append(entry.toEntryListShortcutHtml());
-        }
+        };
 
         /* Bind events */
         this.bindEvents = function()
@@ -1318,7 +1382,7 @@
                 }
 
                 event.preventDefault();
-                if(et.id != 'superadmin')
+                if(et && et.id != 'superadmin')
                 {
                     event.stopPropagation();
                     return false;
@@ -1391,10 +1455,10 @@
                     return false;
                 }
             }
-        }
+        };
 
         this.init();
-    }
+    };
 
     /**
      * The menu object
@@ -1414,7 +1478,7 @@
 
                 this.$leftBar.addClass('menu-auto').mouseover(this.show).mouseout(this.hide);;
             }
-        }
+        };
 
         /* Hide the menu */
         this.hide = function()
@@ -1429,17 +1493,17 @@
                     $('#apps-menu .app-btn[data-toggle="tooltip"]').removeAttr('data-toggle');
                 }
             }, 1000);
-        }
+        };
 
         /* Show the menu */
         this.show = function()
         {
             desktop.menu.$leftBar.removeClass('menu-hide').addClass('menu-show');
             setTimeout(function(){$('#apps-menu .app-btn').attr('data-toggle', 'tooltip');}, 500);
-        }
+        };
 
         this.init();
-    }
+    };
 
     /**
      * Stop propagation and prevent default behaviors
@@ -1477,6 +1541,12 @@
         }
     }
 
+    function refreshDesktop(entriesOptions, reset)
+    {
+        refreshEntries(entriesOptions, reset);
+        desktop.refreshShortcuts();
+    }
+
     /*
      * Close modal window opened in desktop
      *
@@ -1501,5 +1571,5 @@
     }
 
     /* make jquery object call the ips interface manager */
-    $.extend({ipsStart: start, closeModal: closeModal, openEntry: openEntry, getQueryString: getQueryString});
+    $.extend({ipsStart: start, closeModal: closeModal, openEntry: openEntry, getQueryString: getQueryString, refreshDesktop: refreshDesktop});
 }(jQuery, window, document, Math);
