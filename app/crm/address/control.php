@@ -52,7 +52,7 @@ class address extends control
         $this->view->title      = $this->lang->address->create;
         $this->view->objectID   = $objectID;
         $this->view->objectType = $objectType;
-        $this->view->area       = $this->loadModel('tree')->getOptionMenu('area');
+        $this->view->areas      = $this->loadModel('tree')->getOptionMenu('area');
         $this->display();
     }
 
@@ -80,7 +80,7 @@ class address extends control
         }
 
         $this->view->title   = $this->lang->address->edit;
-        $this->view->area    = $this->loadModel('tree')->getOptionMenu('area');
+        $this->view->areas   = $this->loadModel('tree')->getOptionMenu('area');
         $this->view->address = $address;
         $this->display();
     }
@@ -97,7 +97,7 @@ class address extends control
         $address = $this->address->getByID($addressID);
 
         $this->address->delete($addressID);
-        if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->loadModel('action')->create($address->objectType, $address->objectID, "deleteAddress", '',  $address->title);
         $this->send(array('result' => 'success'));
     }

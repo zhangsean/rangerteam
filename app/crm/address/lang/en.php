@@ -9,15 +9,15 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->address->common = 'Address';
-$lang->address->browse = 'Browse Address';
-$lang->address->delete = 'Delete Address';
-$lang->address->create = 'Create Address';
-$lang->address->edit   = 'Edit Address';
-
+$lang->address->common   = 'Address';
 $lang->address->title    = 'Title';
 $lang->address->country  = 'Country';
 $lang->address->province = 'Province';
 $lang->address->city     = 'City';
 $lang->address->area     = 'Area';
 $lang->address->location = 'Location';
+
+$lang->address->browse = 'Browse Address';
+$lang->address->delete = 'Delete Address';
+$lang->address->create = 'Create Address';
+$lang->address->edit   = 'Edit Address';
