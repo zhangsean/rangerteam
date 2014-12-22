@@ -9,13 +9,15 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->block->admin    = 'Manage Blocks';
+$lang->block->common   = 'Blocks';
 $lang->block->num      = 'Amount';
 $lang->block->type     = 'Type';
 $lang->block->orderBy  = 'Order By';
 $lang->block->status   = 'Status';
 $lang->block->actions  = 'Options';
 $lang->block->lblBlock = 'Block';
+
+$lang->block->admin    = 'Manage Blocks';
 
 $lang->block->availableBlocks = new stdclass();
 
@@ -26,10 +28,10 @@ $lang->block->availableBlocks->contract = 'Contract List';
 $lang->block->orderByList = new stdclass();
 
 $lang->block->orderByList->order = array();
-$lang->block->orderByList->order['id_asc']        = 'ID ASC ';
-$lang->block->orderByList->order['id_desc']       = 'ID DESC';
-$lang->block->orderByList->order['customer_asc']  = 'Customer';
-$lang->block->orderByList->order['product_asc']   = 'Product';
+$lang->block->orderByList->order['id_asc']       = 'ID ASC ';
+$lang->block->orderByList->order['id_desc']      = 'ID DESC';
+$lang->block->orderByList->order['customer_asc'] = 'Customer';
+$lang->block->orderByList->order['product_asc']  = 'Product';
 
 $lang->block->orderByList->task = array();
 $lang->block->orderByList->task['id_asc']        = 'ID ASC';

@@ -89,19 +89,19 @@
               <th><?php echo $lang->contact->qq;?></th>
               <td><?php echo html::input('qq', '', "class='form-control'");?></td>
             </tr>
-            <tr class='customerInfo hidden'>
+            <tr class='customerInfo hide'>
               <th><?php echo $lang->customer->type;?></th>
               <td><?php echo html::select('type', $lang->customer->typeList, '', "class='form-control'");?></td>
             </tr>
-            <tr class='customerInfo hidden'>
+            <tr class='customerInfo hide'>
               <th><?php echo $lang->customer->size;?></th>
               <td><?php echo html::select('size', $sizeList, '', "class='form-control'");?></td>
             </tr>
-            <tr class='customerInfo hidden'>
+            <tr class='customerInfo hide'>
               <th><?php echo $lang->customer->status;?></th>
               <td><?php echo html::select('status', $lang->customer->statusList, '', "class='form-control'");?></td>
             </tr>
-            <tr class='customerInfo hidden'>
+            <tr class='customerInfo hide'>
               <th><?php echo $lang->customer->level;?></th>
               <td><?php echo html::select('level', $levelList, '', "class='form-control'");?></td>
             </tr>

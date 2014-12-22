@@ -36,13 +36,13 @@ class contact extends control
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
-        $customers = $this->loadModel('customer')->getPairs();
-
-        $this->session->set('contactList', $this->app->getURI(true));
-        $this->session->set('customerList', $this->app->getURI(true));
 
         $contacts = $this->contact->getList($customer = '', $relation = 'client',  $mode, $orderBy, $pager);
         $this->session->set('contactQueryCondition', $this->dao->get());
+        $this->session->set('contactList', $this->app->getURI(true));
+        $this->session->set('customerList', $this->app->getURI(true));
+
+        $customers = $this->loadModel('customer')->getPairs();
 
         /* build search form. */
         $this->loadModel('search', 'sys');

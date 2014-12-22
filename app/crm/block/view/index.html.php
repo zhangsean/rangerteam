@@ -9,5 +9,5 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-include "{$code}block.html.php";
 ?>
+<?php include "{$code}block.html.php";?>

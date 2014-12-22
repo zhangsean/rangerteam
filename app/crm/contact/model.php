@@ -27,7 +27,6 @@ class contactModel extends model
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.id')->eq($id)
             ->andWhere('t2.customer')->in($customerIdList)
-            ->limit(1)
             ->fetch();
     }
 
@@ -156,7 +155,8 @@ class contactModel extends model
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on('r.customer=c.id')
             ->where('r.contact')->eq($contactID)
             ->andWhere('r.customer')->in($customerIdList)
-            ->andWhere('c.deleted')->eq(0)->fetchPairs();
+            ->andWhere('c.deleted')->eq(0)
+            ->fetchPairs();
     }
 
     /**

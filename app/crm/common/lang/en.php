@@ -24,7 +24,7 @@ $lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=status
 /* Menu of customer module. */
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
-$lang->customer->menu->browse = array('link' => 'All Customers|customer|browse|', 'alias' => 'create,edit,record,view');
+$lang->customer->menu->browse    = array('link' => 'All Customers|customer|browse|', 'alias' => 'create,edit,record,view');
 $lang->customer->menu->past      = array('link' => 'Urgently need contacted|customer|browse|mode=past', 'alias' => 'create,edit,view,record');
 $lang->customer->menu->today     = array('link' => 'Contact Today|customer|browse|mode=today', 'alias' => 'create,edit,view,record');
 $lang->customer->menu->tomorrow  = array('link' => 'Contact Tomorrow|customer|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');

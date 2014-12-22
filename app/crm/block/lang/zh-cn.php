@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->block->admin    = '管理区块';
+$lang->block->common   = '区块';
 $lang->block->num      = '数量';
 $lang->block->type     = '类型';
 $lang->block->orderBy  = '排序';
@@ -17,19 +17,20 @@ $lang->block->status   = '状态';
 $lang->block->actions  = '操作';
 $lang->block->lblBlock = '区块';
 
+$lang->block->admin    = '管理区块';
 $lang->block->availableBlocks = new stdclass();
 
 $lang->block->availableBlocks->order    = '订单列表';
-//$lang->block->availableBlocks->task     = '我的任务';
+//$lang->block->availableBlocks->task    = '我的任务';
 $lang->block->availableBlocks->contract = '合同列表';
 
 $lang->block->orderByList = new stdclass();
 
 $lang->block->orderByList->order = array();
-$lang->block->orderByList->order['id_asc']        = 'ID 递增 ';
-$lang->block->orderByList->order['id_desc']       = 'ID 递减';
-$lang->block->orderByList->order['customer_asc']  = '客户';
-$lang->block->orderByList->order['product_asc']   = '产品';
+$lang->block->orderByList->order['id_asc']       = 'ID 递增 ';
+$lang->block->orderByList->order['id_desc']      = 'ID 递减';
+$lang->block->orderByList->order['customer_asc'] = '客户';
+$lang->block->orderByList->order['product_asc']  = '产品';
 
 $lang->block->orderByList->task = array();
 $lang->block->orderByList->task['id_asc']        = 'ID 递增';
