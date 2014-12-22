@@ -111,8 +111,11 @@
             et = getEntry(option.id);
             if(et)
             {
-                if(reset) et.delete = false;
-                et.init(option);
+                if(!option.delete)
+                {
+                    if(reset) et.delete = false;
+                    et.init(option);
+                }
             }
             else
             {
