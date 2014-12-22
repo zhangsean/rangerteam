@@ -54,11 +54,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->provider->industry;?></th>
-          <td><?php echo html::select('industry', $industry, '', "class='form-control chosen'");?></td>
+          <td><?php echo html::select('industry', $industries, '', "class='form-control chosen'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->area;?></th>
-          <td><?php echo html::select('area', $area, '', "class='form-control chosen'");?></td>
+          <td><?php echo html::select('area', $areas, '', "class='form-control chosen'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->weibo;?></th>

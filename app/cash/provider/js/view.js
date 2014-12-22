@@ -6,6 +6,7 @@ $(function()
         $(this).toggleClass('icon-qrcode');
         $(this).toggleClass('icon-list');
     });
+
     $('.btn-vcard').blur(function()
     {
         $(this).parents('td').find('.contact-info, p.vcard').toggle();

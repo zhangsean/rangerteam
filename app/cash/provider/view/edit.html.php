@@ -29,32 +29,32 @@
           <td class='w-p40'><?php echo html::input('name', $provider->name, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
-          <th class='w-80px'><?php echo $lang->provider->relation;?></th>
-          <td class='w-p40'><?php echo html::select('relation', $lang->provider->relationList, $provider->relation, "class='form-control'");?></td><td></td>
+          <th><?php echo $lang->provider->relation;?></th>
+          <td><?php echo html::select('relation', $lang->provider->relationList, $provider->relation, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->type;?></th>
-          <td><?php echo html::select("type", $lang->provider->typeList, $provider->type, "class='form-control'");?></td>
+          <td><?php echo html::select("type", $lang->provider->typeList, $provider->type, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->size;?></th>
-          <td><?php echo html::select('size', $lang->provider->sizeList, $provider->size, "class='form-control'");?></td>
+          <td><?php echo html::select('size', $lang->provider->sizeList, $provider->size, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->industry;?></th>
-          <td><?php echo html::select('industry', $industry, $provider->industry, "class='form-control chosen'");?></td>
+          <td><?php echo html::select('industry', $industries, $provider->industry, "class='form-control chosen'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->area;?></th>
-          <td><?php echo html::select('area', $area,  $provider->area, "class='form-control chosen'");?></td>
+          <td><?php echo html::select('area', $areas,  $provider->area, "class='form-control chosen'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->weibo;?></th>
-          <td><?php echo html::input('weibo', $provider->weibo ? $provider->weibo : 'http://weibo.com/', "class='form-control'");?></td>
+          <td><?php echo html::input('weibo', $provider->weibo ? $provider->weibo : 'http://weibo.com/', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->weixin;?></th>
-          <td><?php echo html::input('weixin', $provider->weixin, "class='form-control'");?></td>
+          <td><?php echo html::input('weixin', $provider->weixin, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->site;?></th>
@@ -66,7 +66,7 @@
         </tr>
         <tr>
           <th></th>
-          <td><?php echo html::submitButton();?></td>
+          <td><?php echo html::submitButton();?></td><td></td>
         </tr>
       </table>
     </form>

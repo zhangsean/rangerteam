@@ -39,6 +39,8 @@ $lang->provider->delete      = 'Delete Provider';
 $lang->provider->list        = 'Provider List';
 $lang->provider->contact     = 'Contacts';
 $lang->provider->linkContact = 'Create Contact';
+$lang->provider->basicInfo   = 'Basic Info';
+$lang->provider->moreInfo    = 'More Info';
 
 $lang->provider->typeList['']           = '';
 $lang->provider->typeList['national']   = 'National';
@@ -59,5 +61,3 @@ $lang->provider->relationList['client']   = 'Client';
 $lang->provider->relationList['provider'] = 'Provider';
 $lang->provider->relationList['partner']  = 'Partner';
 
-$lang->provider->basicInfo = 'Basic Info';
-$lang->provider->moreInfo  = 'More Info';

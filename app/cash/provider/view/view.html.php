@@ -1,11 +1,11 @@
 <?php 
 /**
- * The info file of customer module of RanZhi.
+ * The view file of view method in provider module of RanZhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
  * @author      Tingting Dai <daitingting@xirangit.com>
- * @package     customer 
+ * @package     provider 
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
@@ -14,7 +14,9 @@
 <div class='row'>
   <div class='col-md-8'>
     <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $provider->name . $lang->provider->desc;?></strong></div>
+      <div class='panel-heading'>
+        <strong><i class="icon-list-info"></i> <?php echo $provider->name . $lang->provider->desc;?></strong>
+      </div>
       <div class='panel-body'><?php echo $provider->desc;?></div>
     </div>
     <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$provider->id}")?>
@@ -44,11 +46,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->provider->industry;?></th>
-          <td><?php if($provider->industry) echo $industry[$provider->industry];?></td>
+          <td><?php echo zget($industries, $provider->industry);?></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->area;?></th>
-          <td><?php if($provider->area) echo $area[$provider->area];?></td>
+          <td><?php echo zget($areas, $provider->area);?></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->weibo;?></th>

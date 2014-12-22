@@ -39,6 +39,8 @@ $lang->provider->delete      = '删除供应商';
 $lang->provider->list        = '供应商列表';
 $lang->provider->contact     = '联系人';
 $lang->provider->linkContact = '添加联系人';
+$lang->provider->basicInfo   = '基本信息';
+$lang->provider->moreInfo    = '更多信息';
 
 $lang->provider->typeList['']           = '';
 $lang->provider->typeList['national']   = '国有企业';
@@ -58,6 +60,3 @@ $lang->provider->sizeList[4] = '微型(10人以下)';
 $lang->provider->relationList['client']   = '客户';
 $lang->provider->relationList['provider'] = '供应商';
 $lang->provider->relationList['partner']  = '合作伙伴';
-
-$lang->provider->basicInfo = '基本信息';
-$lang->provider->moreInfo  = '更多信息';
