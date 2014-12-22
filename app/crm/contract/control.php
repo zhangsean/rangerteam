@@ -40,6 +40,7 @@ class contract extends control
     /**
      * Browse all contracts; 
      * 
+     * @param  string $mode 
      * @param  string $orderBy 
      * @param  int    $recTotal 
      * @param  int    $recPerPage 
@@ -59,7 +60,6 @@ class contract extends control
 
         /* Save session for return link. */
         $this->session->set('contractList', $this->app->getURI(true));
-        $this->session->set('orderList', '');
 
         /* build search form. */
         $this->loadModel('search', 'sys');
@@ -72,8 +72,8 @@ class contract extends control
         $this->view->pager        = $pager;
         $this->view->mode         = $mode;
         $this->view->orderBy      = $orderBy;
-        $this->view->currencySign = $this->loadModel('order')->setCurrencySign();
-        $this->view->currencyList = $this->loadModel('order')->setCurrencyList();
+        $this->view->currencySign = $this->order->setCurrencySign();
+        $this->view->currencyList = $this->order->setCurrencyList();
         if($contracts) $this->view->totalAmount = $this->contract->countAmount($contracts);
 
         $this->display();

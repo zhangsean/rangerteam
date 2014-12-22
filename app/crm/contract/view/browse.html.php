@@ -54,7 +54,7 @@
           </div>
           <?php endif;?>
         </td>
-        <td colspan='7'><?php $pager->show();?></td>
+        <td colspan='6'><?php $pager->show();?></td>
       </tr>
     </tfoot>
   </table>
