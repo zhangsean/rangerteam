@@ -26,6 +26,7 @@
         <th class='text-left'><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->order->customer);?></th>
         <th><?php commonModel::printOrderLink('product', $orderBy, $vars, $lang->order->product);?></th>
         <th class='w-90px'><?php commonModel::printOrderLink('plan', $orderBy, $vars, $lang->order->plan);?>
+        <th class='w-90px'><?php commonModel::printOrderLink('real', $orderBy, $vars, $lang->order->real);?>
         <th class='w-80px'><?php commonModel::printOrderLink('assignedTo', $orderBy, $vars, $lang->order->assignedTo);?></th>
         <th class='w-60px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->order->status);?></th>
         <th class='w-90px'><?php commonModel::printOrderLink('contactedDate', $orderBy, $vars, $lang->order->contactedDate);?></th>
@@ -42,6 +43,7 @@
         <td class='text-left'><?php echo $order->customerName;?></td>
         <td><?php echo $order->productName;?></td>
         <td class='text-right'><?php echo zget($currencySign, $order->currency, '') . $order->plan;?></td>
+        <td class='text-right'><?php echo zget($currencySign, $order->currency, '') . $order->real;?></td>
         <td><?php if(isset($users[$order->assignedTo])) echo $users[$order->assignedTo];?></td>
         <td class="<?php echo $status;?>">
           <?php if($order->status != 'closed') echo isset($lang->order->statusList[$order->status]) ? $lang->order->statusList[$order->status] : $order->status;?>
@@ -55,7 +57,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <td class='text-middle' colspan='4'>
+        <td class='text-middle' colspan='5'>
           <?php if(isset($totalAmount)):?>
           <div class='text-danger'>
             <?php printf($lang->order->totalAmount, implode('，', $totalAmount['plan']), implode('，', $totalAmount['real']));?>

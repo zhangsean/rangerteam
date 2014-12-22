@@ -19,7 +19,7 @@
 <div class='row-table'>
   <div class='col-main'>
     <div class='panel'>
-      <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php printf($lang->order->titleLBL, $customer->name, $product->name);?> <span class='label-primary label'><?php echo $customer->level != '0' ? $customer->level : '';?></span> <span class='label-info label order-<?php echo $order->status?>'><?php echo $lang->order->statusList[$order->status];?></span></strong></div>
+      <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php printf($lang->order->titleLBL, $customer->name, $product->name);?> <span class='label-primary label'><?php echo $customer->level != '0' ? $customer->level : '';?></span> <span class='label-success label'><?php echo $lang->order->statusList[$order->status];?></span></strong></div>
       <div class='panel-body'>
         <?php 
         $payed = $order->status == 'payed';

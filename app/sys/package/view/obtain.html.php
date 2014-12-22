@@ -58,7 +58,7 @@
           <?php 
           if($latestRelease and $latestRelease->releaseVersion != $currentRelease->releaseVersion) 
           {
-              printf($lang->package->latest, $latestRelease->viewLink, $latestRelease->releaseVersion, $latestRelease->zentaoCompatible);
+              printf($lang->package->latest, $latestRelease->viewLink, $latestRelease->releaseVersion, $latestRelease->ranzhiCompatible);
           }?>
         </small>
         <h5 class='mg-0'><?php echo $package->name . "($currentRelease->releaseVersion)";?></h5>

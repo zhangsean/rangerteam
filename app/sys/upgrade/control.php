@@ -48,7 +48,7 @@ class upgrade extends control
     }
 
     /**
-     * Select the version of old zentao.
+     * Select the version of old ranzhi.
      * 
      * @access public
      * @return void

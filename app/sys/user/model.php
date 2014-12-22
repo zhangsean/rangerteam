@@ -392,7 +392,7 @@ class userModel extends model
             foreach($moduleMethods as $method) $rights[$moduleName][$method] = $method;
         }
 
-        /* pull from zentao. */
+        /* pull from ranzhi. */
         $sql = $this->dao->select('module, method')->from(TABLE_USERGROUP)->alias('t1')->leftJoin(TABLE_GROUPPRIV)->alias('t2')
             ->on('t1.group = t2.group')
             ->where('t1.account')->eq($user->account);
