@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     tree
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 $lang->tree->common      = "类目";
 $lang->tree->add         = "添加";

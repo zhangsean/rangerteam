@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     index
  * @version     $Id: control.php 7417 2013-12-23 07:51:50Z wwccss $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 class index extends control
 {

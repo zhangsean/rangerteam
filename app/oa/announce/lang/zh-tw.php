@@ -7,7 +7,7 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     announce 
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 $lang->announce->common = '公告';
 $lang->announce->browse = '公告瀏覽';

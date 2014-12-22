@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     task 
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 $lang->task->common = '任務';
 $lang->task->list   = '任務列表';

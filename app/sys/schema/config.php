@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     schema 
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 $config->schema->require = new stdclass();
 $config->schema->require->create = 'name,in,out,date,trader';

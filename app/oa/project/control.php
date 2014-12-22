@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     project
  * @version     $Id: control.php 7417 2013-12-23 07:51:50Z wwccss $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 class project extends control
 {

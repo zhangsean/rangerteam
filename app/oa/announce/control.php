@@ -7,7 +7,7 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     announce
  * @version     $Id: control.php 8180 2014-04-08 07:22:52Z guanxiying $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 class announce extends control
 {

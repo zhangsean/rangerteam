@@ -7,7 +7,7 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     common 
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 <?php foreach($contacts as $contact):?>

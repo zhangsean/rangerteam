@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user 
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 <?php include $app->getModuleRoot() . '../sys/common/view/header.modal.html.php'; ?>

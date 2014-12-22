@@ -7,7 +7,7 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     group
  * @version     $Id: control.php 4648 2013-04-15 02:45:49Z chencongzhi520@gmail.com $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 class group extends control
 {

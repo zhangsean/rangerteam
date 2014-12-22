@@ -7,7 +7,7 @@
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     trade 
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 $config->trade->require = new stdclass();
 

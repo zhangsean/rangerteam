@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common 
  * @version     $Id: header.lite.html.php 8236 2014-04-10 08:24:39Z wangyidong $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 </div>

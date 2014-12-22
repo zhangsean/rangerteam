@@ -7,7 +7,7 @@
  * @author      Hao Sun <catouse@me.com>
  * @package     block
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 <?php include "../../../sys/common/view/header.modal.html.php";?>

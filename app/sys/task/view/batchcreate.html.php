@@ -7,7 +7,7 @@
  * @author      Yidong Wang <Yidong@cnezsoft.com>
  * @package     task
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>

@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     project
  * @version     $Id: zh-cn.php 824 2010-05-02 15:32:06Z wwccss $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 $lang->project->common     = '项目视图';
 $lang->project->browse     = '项目列表';

@@ -7,7 +7,7 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     group
  * @version     $Id: managepriv.html.php 1517 2011-03-07 10:02:57Z wwccss $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 <div id='titlebar'>

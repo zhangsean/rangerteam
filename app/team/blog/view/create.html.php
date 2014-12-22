@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     blog
  * @version     $Id: create.html.php 9828 2014-06-09 05:27:02Z guanxiying $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 <?php include '../../../sys/article/view/create.html.php';?>

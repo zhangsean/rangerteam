@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     tag
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 if(!isset($lang->tag)) $lang->tag = new stdclass();
 $lang->tag->common = 'keywords';

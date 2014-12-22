@@ -7,7 +7,7 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     group
  * @version     $Id: browse.html.php 4769 2013-05-05 07:24:21Z wwccss $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 <?php include '../../common/view/header.html.php';?>

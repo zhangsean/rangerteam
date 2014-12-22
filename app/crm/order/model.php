@@ -7,7 +7,7 @@
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     order
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 class orderModel extends model
 {

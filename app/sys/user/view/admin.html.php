@@ -7,7 +7,7 @@
  * @author      Yangyang Shi <shiyangyangwork@yahoo.cn>
  * @package     User
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 <?php

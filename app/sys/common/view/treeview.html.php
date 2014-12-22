@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common 
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 css::import($jsRoot . 'jquery/treeview/min.css');
 js::import($jsRoot . 'jquery/treeview/min.js');

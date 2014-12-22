@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     install 
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);

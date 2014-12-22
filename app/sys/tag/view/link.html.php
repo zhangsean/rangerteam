@@ -7,7 +7,7 @@
  * @author      Xiying Guan<guanxiying@xirangit.com>
  * @package     tag
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 <div class='modal-dialog' style='width:600px;'>

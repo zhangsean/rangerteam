@@ -7,7 +7,7 @@
  * @author      guanxiying <guanxiying@xirangit.com>
  * @package     block
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 <?php $this->loadModel('block', 'sys');?>

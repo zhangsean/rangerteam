@@ -7,7 +7,7 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     trade
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 if(!isset($lang->trade)) $lang->trade = new stdclass();
 $lang->trade->common      = 'Trade';

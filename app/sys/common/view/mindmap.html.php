@@ -7,7 +7,7 @@
  * @author      Hao Sun <sunhao@cnezsoft.com>
  * @package     common 
  * @version     $Id: minder.html.php 8679 2014-05-03 00:44:12Z sunhao $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
 js::import($jsRoot  . 'mindmap/min.js'); 

@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     forum
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 if(!isset($lang->forum)) $lang->forum = new stdclass();
 $lang->forum->common      = 'Forum';

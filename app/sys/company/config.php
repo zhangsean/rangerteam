@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     company 
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 $config->company->editor = new stdclass();
 $config->company->editor->setbasic = array('id' => 'desc,content', 'tools' => 'full');

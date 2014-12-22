@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user 
  * @version     $Id: profile.html.php 8669 2014-05-02 07:58:48Z guanxiying $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>

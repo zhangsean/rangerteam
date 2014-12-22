@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
  * @version     $Id: zh-tw.php 1692 2014-08-25 02:13:11Z daitingting $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 $lang->entry->common    = '應用';
 $lang->entry->admin     = '應用列表';

@@ -7,7 +7,7 @@
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     block
  * @version     $Id$
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
 $webRoot   = $config->webRoot;

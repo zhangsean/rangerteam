@@ -7,7 +7,7 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     announce
  * @version     $Id: edit.html.php 9828 2014-06-09 05:27:02Z guanxiying $
- * @link        http://www.ranzhi.org
+ * @link        http://www.ranzhico.com
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
