@@ -106,7 +106,7 @@
             });
         }
         var et;
-        $.each(entriesOptions, function(idx, option)
+        $.each(entriesOptions || [], function(idx, option)
         {
             et = getEntry(option.id);
             if(et)
