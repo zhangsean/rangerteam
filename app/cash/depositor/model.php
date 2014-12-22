@@ -233,11 +233,10 @@ class depositorModel extends model
      */
     public function delete($depositorID, $null = null)
     {
-        $depositor = $this->getByID($depositorID);
-        if(!$depositor) return false;
+        $trades = $this->getTradesAmount();
+        if(!empty($trades[$depositorID])) return false;
 
         $this->dao->delete()->from(TABLE_DEPOSITOR)->where('id')->eq($depositorID)->exec();
-
         return !dao::isError();
     }
 }
