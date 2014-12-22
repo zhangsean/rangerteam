@@ -11,7 +11,6 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<?php include '../../../sys/common/view/kindeditor.html.php';?>
 <form method='post' id='ajaxForm' action='<?php echo $this->createLink('depositor', 'edit', "depositorID=$depositor->id")?>'>
   <table class='table table-form w-p60'>
     <tr>

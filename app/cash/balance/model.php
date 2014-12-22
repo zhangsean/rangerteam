@@ -41,42 +41,18 @@ class balanceModel extends model
             ->fetchAll('id');
     }
 
+    /**
+     * Get latest balances.
+     * 
+     * @access public
+     * @return void
+     */
     public function getLatest()
     {
         return $this->dao->select('depositor, max(date) as date, money, currency')
             ->from(TABLE_BALANCE)
             ->groupBy('id')
             ->fetchGroup('currency', 'depositor');
-    }
-
-    /**
-     * Get left menu of balance module. 
-     * 
-     * @param  int    $depositorID 
-     * @access public
-     * @return string
-     */
-    public function getLeftMenus($depositorID = 0)
-    {
-        $depositors = $this->loadModel('depositor')->getPairs();
-
-        $menu = "<nav class='menu leftmenu affix'><ul class='nav nav-stacked nav-primary'>";
-
-        $leftMenu = array();
-
-        $allmenuClass = $depositorID == 0 ? "class='active'" : ''; 
-        $menu .= "<li {$allmenuClass}>" . html::a(inlink('browse'), $this->lang->balance->browse);
-
-       foreach($depositors as $id => $depositor)
-        {
-            $class = $id == $depositorID ? "class='active'" : '';
-            $menu .= "<li {$class}>" . html::a(inlink('browse', "depositorID={$id}"), $depositor);
-           
-            $menu .= '</li>';
-        }
-
-        $menu .= '</ul></nav>';
-        return $menu;
     }
 
     /**

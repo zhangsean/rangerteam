@@ -37,7 +37,7 @@ class depositor extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->trades       = $this->loadModel('trade')->getByDepositor();
+        $this->view->trades       = $this->depositor->getTradesAmount();
         $this->view->balances     = $this->loadModel('balance')->getLatest();
         $this->view->title        = $this->lang->depositor->browse;
         $this->view->depositors   = $this->depositor->getList($orderBy, $pager);

@@ -15,8 +15,3 @@ $lang->block->admin     = 'Manage Block';
 
 $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->depositor = 'Payment Depositor';
-
-$lang->block->orderByList = new stdclass();;
-$lang->block->orderByList->depositor = array();
-$lang->block->orderByList->depositor['id_asc']  = 'ID 递增';
-$lang->block->orderByList->depositor['id_desc'] = 'ID 递减';

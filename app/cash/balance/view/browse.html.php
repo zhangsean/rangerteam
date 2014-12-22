@@ -12,7 +12,7 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php echo html::a(inlink('create', "depositor={$depositor}"), "<i class='icon-plus'></i> {$lang->balance->create}", "class='btn btn-primary btn-create loadInModal'")?>
-<table class='table table-hover table-striped tablesorter table-data' id='balanceList'>
+<table class='table table-hover table-striped table-data' id='balanceList'>
   <tr>
     <th><?php echo $lang->balance->depositor;?></th>
     <th class='w-100px'><?php echo $lang->balance->date;?></th>

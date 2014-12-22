@@ -91,6 +91,7 @@ class blockModel extends model
             if(isset($parsedUrl['port'])) $link .= ':' . $parsedUrl['port']; 
             if(isset($parsedUrl['path'])) $link .= $parsedUrl['path']; 
             $link .= '?' . $parsedUrl['query'];
+            a($link);exit;
         }
 
         /* Send login request. */

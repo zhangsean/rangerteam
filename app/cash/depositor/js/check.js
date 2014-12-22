@@ -1,9 +1,6 @@
 $(document).ready(function()
 {
-    if(!v.dateOptions)
-    {
-        bootbox.alert(v.createBalance, function(){ location.href = createLink('balance', 'create')});
-    }
+    if(!v.dateOptions) bootbox.alert(v.createBalance, function(){ location.href = createLink('balance', 'create')});
 
     $('.btn-save-result').click(function()
     {
@@ -12,7 +9,7 @@ $(document).ready(function()
         {
             messager.success(response.message);
             $('#submit').click(); 
-        });    
+        });
         return false;
     })
 });

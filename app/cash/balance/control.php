@@ -11,12 +11,6 @@
  */
 class balance extends control
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->lang->menuGroups->balance = 'depositor';
-    }
-
     /**
      * Browse balance.
      * 
@@ -38,7 +32,7 @@ class balance extends control
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->currencyList  = $this->loadModel('order', 'crm')->setCurrencyList();
 
-        if($depositor) $this->view->subtitle      = $this->view->depositorList[$depositor];
+        if($depositor) $this->view->subtitle = $this->view->depositorList[$depositor];
 
         $this->display();
     }   

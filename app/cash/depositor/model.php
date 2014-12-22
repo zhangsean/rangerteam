@@ -59,6 +59,18 @@ class depositorModel extends model
         return $this->dao->select('id,abbr')->from(TABLE_DEPOSITOR)->fetchPairs('id', 'abbr');
     }
 
+    /** 
+     * Get trade list.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getTradesAmount()
+    {
+        return $this->dao->select('depositor, count(*) as amount')->from(TABLE_TRADE)->fetchPairs();
+    }
+
+
     /**
      * Create a depositor.
      * 

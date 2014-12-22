@@ -12,12 +12,12 @@
 ?>
 <div class='list items'>
   <?php foreach($depositors as $id => $depositor):?>
-  <?php $provider = $depositor->type == 'bank' ? $depositor->provider : $lang->depositor->providerList[$depositor->provider] ?>
+  <?php $provider = $depositor->type == 'bank' ? $depositor->provider : $lang->depositor->providerList[$depositor->provider]; ?>
   <div class='item'>
      <strong class='item-heading'><?php echo $depositor->title;?></strong>
      <div class='item-content'> 
        <span><?php echo $depositor->account;?></span>
-       <span><?php echo $provider;?> </span>
+       <span><?php echo $provider;?></span>
      </div>
   </div>
   <?php endforeach;?>

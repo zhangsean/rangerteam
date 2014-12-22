@@ -20,10 +20,10 @@
       <th class='w-70px'><?php echo $lang->balance->depositor;?></th>
       <td>
         <select name='depositor' id='depositor' class='form-control'>
-        <?php foreach($depositorList as $depositor):?>
-        <?php $selected = $depositor->id == $balance->depositor ? 'selected' : '';?>
-        <option value="<?php echo $depositor->id;?>" <?php echo $selected;?> data-currency="<?php echo $depositor->currency;?>"><?php echo $depositor->abbr;?></option>
-        <?php endforeach;?>
+          <?php foreach($depositorList as $depositor):?>
+          <?php $selected = $depositor->id == $balance->depositor ? 'selected' : '';?>
+          <option value="<?php echo $depositor->id;?>" <?php echo $selected;?> data-currency="<?php echo $depositor->currency;?>"><?php echo $depositor->abbr;?></option>
+          <?php endforeach;?>
         </select>
       </td>
     </tr>

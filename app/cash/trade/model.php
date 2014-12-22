@@ -48,17 +48,6 @@ class tradeModel extends model
     }
 
     /** 
-     * Get trade list.
-     * 
-     * @access public
-     * @return array
-     */
-    public function getByDepositor()
-    {
-        return $this->dao->select('*')->from(TABLE_TRADE)->where('parent')->eq('')->fetchGroup('depositor');
-    }
-
-    /** 
      * Get trade list by trade's id list.
      * 
      * @param  array    $idList 
