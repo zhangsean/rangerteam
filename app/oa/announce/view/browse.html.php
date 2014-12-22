@@ -13,6 +13,9 @@
 <?php include '../../common/view/header.html.php'; ?>
 <?php js::set('mode', $mode)?>
 <li id='bysearchTab'><a href='#'><i class='icon-search icon'></i>&nbsp;<?php echo $lang->search->common;?></a></li>
+<div id='menuActions'>
+  <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->announce->create, 'class="btn btn-primary"');?>
+</div>
 <div id="mainContent">
   <div class='panel list list-condensed'>
     <section class='items items-hover'>
