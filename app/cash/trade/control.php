@@ -34,7 +34,6 @@ class trade extends control
      */
     public function browse($mode = 'all', $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
-        $this->loadModel('order', 'crm');
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
@@ -65,7 +64,7 @@ class trade extends control
         $this->view->categories    = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->currencySign  = $this->loadModel('order', 'crm')->setCurrencySign();
-        $this->view->currencyList  = $this->loadModel('order', 'crm')->setCurrencyList();
+        $this->view->currencyList  = $this->order->setCurrencyList();
 
         $this->display();
     }   
@@ -117,7 +116,7 @@ class trade extends control
         if($_POST)
         {
             $result = $this->trade->batchCreate();
-            $this->send($result);
+            if($result['result'] != 'success') $this->send($result);
 
             $this->loadModel('action');
             foreach($tradeIDList as $tradeID) $this->action->create('trade', $tradeID, 'Created');
@@ -128,14 +127,16 @@ class trade extends control
         unset($this->lang->trade->menu);
         unset($this->lang->trade->typeList['transferin']);
         unset($this->lang->trade->typeList['transferout']);
-        $this->view->title         = $this->lang->trade->batchCreate;
-        $this->view->depositors    = $this->loadModel('depositor')->getPairs();
-        $this->view->users         = $this->loadModel('user')->getPairs();
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
-        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider');
-        $this->view->expenseTypes  = $this->loadModel('tree')->getOptionMenu('out', 0);
-        $this->view->incomeTypes   = $this->loadModel('tree')->getOptionMenu('in', 0);
-        $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
+
+        $this->view->title        = $this->lang->trade->batchCreate;
+        $this->view->depositors   = $this->loadModel('depositor')->getPairs();
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->customerList = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->traderList   = $this->loadModel('customer', 'crm')->getPairs('provider');
+        $this->view->expenseTypes = $this->loadModel('tree')->getOptionMenu('out', 0);
+        $this->view->incomeTypes  = $this->loadModel('tree')->getOptionMenu('in', 0);
+        $this->view->deptList     = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
+
         $this->display();
     }
 
@@ -154,7 +155,7 @@ class trade extends control
         if($_POST)
         {
             $changes = $this->trade->update($tradeID);
-            if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             if($changes)
             {
@@ -198,14 +199,13 @@ class trade extends control
         if($_POST)
         {
             $result = $this->trade->transfer(); 
-            if(!$result['result']) $this->send(array('result' => 'fail', 'message' => $result['message']));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send($result);
         }
 
         $this->view->title         = $this->lang->trade->transfer;
-        $this->view->depositorList = $this->loadModel('depositor')->getList();
-        $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
+        $this->view->depositorList = $this->loadModel('depositor')->getList();
 
         $this->display();
     }
@@ -224,8 +224,8 @@ class trade extends control
         if($_POST)
         {
             $result = $this->trade->saveDetail($tradeID); 
-            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
         $details = $this->trade->getDetail($tradeID);
@@ -314,15 +314,16 @@ class trade extends control
 
         unset($this->lang->trade->menu);
 
-        $this->view->trades = $this->trade->getListByIdList($this->post->tradeIDList);
-        $this->view->title         = $this->lang->trade->batchCreate;
-        $this->view->depositors    = $this->loadModel('depositor')->getPairs();
-        $this->view->users         = $this->loadModel('user')->getPairs();
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
-        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider');
-        $this->view->expenseTypes  = $this->loadModel('tree')->getOptionMenu('out', 0);
-        $this->view->incomeTypes   = $this->loadModel('tree')->getOptionMenu('in', 0);
-        $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
+        $this->view->title        = $this->lang->trade->batchCreate;
+        $this->view->trades       = $this->trade->getByIdList($this->post->tradeIDList);
+        $this->view->depositors   = $this->loadModel('depositor')->getPairs();
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->customerList = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->traderList   = $this->loadModel('customer', 'crm')->getPairs('provider');
+        $this->view->expenseTypes = $this->loadModel('tree')->getOptionMenu('out', 0);
+        $this->view->incomeTypes  = $this->loadModel('tree')->getOptionMenu('in', 0);
+        $this->view->deptList     = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
+
         $this->display();
     }
 

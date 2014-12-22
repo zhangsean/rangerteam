@@ -20,7 +20,7 @@ class tradeModel extends model
      */
     public function getByID($id)
     {
-        return $this->dao->select('*')->from(TABLE_TRADE)->where('id')->eq($id)->limit(1)->fetch();
+        return $this->dao->select('*')->from(TABLE_TRADE)->where('id')->eq($id)->fetch();
     }
 
     /** 
@@ -33,7 +33,7 @@ class tradeModel extends model
      */
     public function getList($mode, $orderBy, $pager = null)
     {
-        if($this->session->tradeQuery == false) $this->session->set('tradeQuery', ' 1 = 1');
+        if(empty($this->session->tradeQuery)) $this->session->set('tradeQuery', ' 1 = 1');
         $tradeQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->tradeQuery);
 
         return $this->dao->select('*')->from(TABLE_TRADE)
@@ -54,14 +54,15 @@ class tradeModel extends model
      * @access public
      * @return void
      */
-    public function getListByIdList($idList)
+    public function getByIdList($idList)
     {
         return $this->dao->select('*')->from(TABLE_TRADE)->where('id')->in($idList)->fetchAll('id');
     }
 
     /** 
-     * Get trade detail.
+     * Get details of a trade.
      * 
+     * @param  int    $tradeID 
      * @access public
      * @return array
      */
@@ -245,8 +246,9 @@ class tradeModel extends model
      */
     public function batchCheck($trades)
     {
-        $errors = array();
         $this->app->loadClass('filter', true);
+
+        $errors = array();
         foreach($trades as $key => $trade)
         {
             $item = $this->lang->trade->money; 
@@ -259,6 +261,7 @@ class tradeModel extends model
             if(empty($trade->date) or !validater::checkDate($trade->date)) $errors['date' . $key] = sprintf($this->lang->error->date, $item) . sprintf($this->lang->error->notempty, $item);
 
         }
+
         return $errors;
     }
 
@@ -301,10 +304,11 @@ class tradeModel extends model
             $trader->public   = 1;
 
             $this->dao->insert(TABLE_CUSTOMER)->data($trader)->check('name', 'notempty')->exec();
-            $trader = $this->dao->lastInsertID();
-            $this->loadModel('action')->create('customer', $trader, 'Created');
+            $traderID = $this->dao->lastInsertID();
 
-            $this->dao->update(TABLE_TRADE)->set('trader')->eq($trader)->where('id')->eq($tradeID)->exec();
+            $this->loadModel('action')->create('customer', $traderID, 'Created');
+
+            $this->dao->update(TABLE_TRADE)->set('trader')->eq($traderID)->where('id')->eq($tradeID)->exec();
         }
 
         if(!dao::isError()) return commonModel::createChanges($oldTrade, $trade);
@@ -334,6 +338,7 @@ class tradeModel extends model
         {
             if(empty($type)) break;
             if(!$this->post->money[$key]) continue;
+
             $trade = new stdclass();
             $trade->type           = $type;
             $trade->depositor      = $depositorID;
@@ -419,6 +424,7 @@ class tradeModel extends model
         {
             $this->dao->insert(TABLE_TRADE)->data($trade, $skip = 'createTrader,traderName,createCustomer,customerName')->autoCheck()->exec();
         }
+
         if(!dao::isError()) return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'));
         return array('result' => 'fail', 'message' => dao::getError());
     }
@@ -431,7 +437,7 @@ class tradeModel extends model
      */
     public function transfer()
     {
-        if($this->post->receipt == $this->post->payment) return array('result' => false, 'message' => $this->lang->trade->notEqual);
+        if($this->post->receipt == $this->post->payment) return array('result' => 'fail', 'message' => $this->lang->trade->notEqual);
 
         $receiptDepositor = $this->loadModel('depositor')->getByID($this->post->receipt);
         $paymentDepositor = $this->loadModel('depositor')->getByID($this->post->payment);
@@ -464,7 +470,7 @@ class tradeModel extends model
             ->checkIF(!$diffCurrency, 'money', 'notempty')
             ->exec();
 
-        if(dao::isError()) return array('result' => false, 'message' => dao::getError());
+        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
 
         $paymentID = $this->dao->lastInsertID();
         $this->loadModel('action')->create('trade', $paymentID, 'Created');
@@ -483,7 +489,7 @@ class tradeModel extends model
             ->checkIF(!$diffCurrency, 'money', 'notempty')
             ->exec();
 
-        if(dao::isError()) return array('result' => false, 'message' => dao::getError());
+        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
 
         $receiptID = $this->dao->lastInsertID();
         $this->loadModel('action')->create('trade', $receiptID, 'Created');
@@ -497,13 +503,13 @@ class tradeModel extends model
             if($diffCurrency) $fee->desc = sprintf($this->lang->trade->feeDesc, $fee->date, $paymentDepositor->abbr, $receiptDepositor->abbr);
 
             $this->dao->insert(TABLE_TRADE)->data($fee, $skip = 'receipt, payment, fee, transferIn, transferOut')->exec();
-            if(dao::isError()) return array('result' => false, 'message' => dao::getError());
+            if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
 
             $feeID = $this->dao->lastInsertID();
             $this->loadModel('action')->create('trade', $feeID, 'Created');
         }
 
-        return array('result' => true);
+        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'));
     }
 
     /**
@@ -530,15 +536,16 @@ class tradeModel extends model
 
         foreach($this->post->money as $key => $money)
         {
-            if($money !== '')
-            {
-                $trade->money    = $money;
-                if(isset($this->post->category[$key])) $trade->category = join(',', $this->post->category[$key]);
-                if(isset($this->post->handlers[$key])) $trade->handlers = join(',', $this->post->handlers[$key]);
-                $trade->desc     = $this->post->desc[$key];
-                $this->dao->insert(TABLE_TRADE)->data($trade, 'id')->exec();
-            }
+            if($money === '') continue;
+
+            $trade->money = $money;
+            $trade->desc  = $this->post->desc[$key];
+            if(isset($this->post->category[$key])) $trade->category = join(',', $this->post->category[$key]);
+            if(isset($this->post->handlers[$key])) $trade->handlers = join(',', $this->post->handlers[$key]);
+
+            $this->dao->insert(TABLE_TRADE)->data($trade, 'id')->exec();
         }
+
         return !dao::isError();
     }
 
@@ -551,11 +558,7 @@ class tradeModel extends model
      */
     public function delete($tradeID, $null = null)
     {
-        $trade = $this->getByID($tradeID);
-        if(!$trade) return false;
-
         $this->dao->delete()->from(TABLE_TRADE)->where('id')->eq($tradeID)->exec();
-
         return !dao::isError();
     }
 
@@ -576,11 +579,9 @@ class tradeModel extends model
             $totalMoney[$key]['out'] = 0;
             foreach($trades as $trade)
             {
-                if($trade->currency == $key)
-                {
-                    if($trade->type == 'in' or $trade->type == 'out') $totalMoney[$key][$trade->type] += $trade->money;
-                }
-            } 
+                if($trade->currency != $key) continue;
+                if($trade->type == 'in' or $trade->type == 'out') $totalMoney[$key][$trade->type] += $trade->money;
+            }
         }
 
         foreach($totalMoney as $currency => $money)

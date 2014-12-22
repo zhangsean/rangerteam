@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('mode', $mode);?>
-<?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+<?php $vars = "mode={$mode}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
 <li id='bysearchTab'><a href='#'><i class='icon-search icon'></i>&nbsp;<?php echo $lang->search->common;?></a></li>
 <div id='menuActions'>
   <?php echo html::a(inlink('create', 'type=in'),  "{$lang->trade->createIn}</i>", "class='btn btn-primary'")?>
@@ -62,9 +62,9 @@
       </tbody>
       <tfoot>
         <tr>
-          <td colspan='3'><?php echo html::selectButton() . html::submitButton($lang->edit);?></td>
-          <td class='text-middle' colspan='5'>
-            <div class='text-danger'><?php $this->trade->countMoney($trades);?></div>
+          <td colspan='7'>
+            <?php echo html::selectButton() . html::submitButton($lang->edit);?>
+            <span class='text-danger'><?php $this->trade->countMoney($trades);?></span>
           </td>
           <td colspan='3'><?php echo $pager->get();?></td>
         </tr>

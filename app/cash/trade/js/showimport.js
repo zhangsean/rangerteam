@@ -8,6 +8,7 @@ $(document).ready(function()
         $(this).parents('tr').find('.' + type).show().attr('disabled', false).find('*').attr('disabled', false);
     })
     $('.type').change();
+
     $('[name*=createCustomer]').change(function()
     {
         if($(this).prop('checked')) 

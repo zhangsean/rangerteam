@@ -25,14 +25,14 @@
           <th class='w-160px'><?php echo $lang->trade->category;?></th> 
           <th class='w-260px'><?php echo $lang->trade->trader;?></th> 
           <th class='w-100px'><?php echo $lang->trade->money;?></th>
-          <th class='w-80px'><?php echo $lang->trade->dept;?></th>
+          <th class='w-80px'> <?php echo $lang->trade->dept;?></th>
           <th class='w-110px'><?php echo $lang->trade->handlers;?></th>
           <th class='w-110px'><?php echo $lang->trade->date;?></th>
           <th><?php echo $lang->trade->desc;?></th>
         </tr>
       </thead>
       <tbody>
-        <?php for($i = 0; $i < $config->trade->batchCreate; $i++):?>
+        <?php for($i = 0; $i < $config->trade->batchCreateCount; $i++):?>
         <tr>
           <td><?php echo html::select("depositor[$i]", $depositors, '', "class='form-control' id='depositor{$i}'");?></td>
           <td><?php echo html::select("type[$i]", $lang->trade->typeList, 'out', "class='form-control type' id='type{$i}'");?></td>
@@ -60,7 +60,7 @@
         </tr>
         <?php endfor;?>
       </tbody>
-      <tr><td colspan=9 class='text-center'><?php echo html::submitButton() . html::backButton();?></td></tr>
+      <tr><td colspan='9' class='text-center'><?php echo html::submitButton() . html::backButton();?></td></tr>
     </table>
   </div>
 </form>

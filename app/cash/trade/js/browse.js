@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+    /* Add a trade detail item. */
     $(document).on('click', '.icon-plus', function()
     {
         $(this).parents('tr').after($('#hiddenDetail').html().replace(/key/g, v.key));
@@ -8,6 +9,7 @@ $(document).ready(function()
         v.key ++;
     })
 
+    /* Remove a trade detail item. */
     $(document).on('click', '.icon-minus', function()
     {
         if($('#ajaxForm table tbody tr').size() > 1)

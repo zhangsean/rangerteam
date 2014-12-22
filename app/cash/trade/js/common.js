@@ -7,6 +7,7 @@ $(document).ready(function()
     })
     $('[name*=objectType]').change();
 
+    /* Toggle create trader items. */
     $('[name*=createTrader]').change(function()
     {
         if($(this).prop('checked')) 
@@ -23,6 +24,7 @@ $(document).ready(function()
         }
     })
 
+    /* Highlight submenu. */
     if(config.requestType == 'GET')
     {
         $('#menu li').removeClass('active').find("[href*='=" + v.mode + "']").parent().addClass('active');
