@@ -124,7 +124,7 @@ class provider extends control
 
         $this->view->title      = $this->lang->provider->view;
         $this->view->provider   = $this->customer->getByID($providerID);
-        $this->view->contacts   = $this->contact->getList($providerID);
+        $this->view->contacts   = $this->contact->getList($providerID, 'provider');
         $this->view->actions    = $this->loadModel('action')->getList('customer', $providerID);
         $this->view->areas      = $this->loadModel('tree')->getPairs('', 'area');
         $this->view->industries = $this->tree->getPairs('', 'industry');

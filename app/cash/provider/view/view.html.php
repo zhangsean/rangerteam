@@ -72,7 +72,7 @@
         <tr>
           <th class='w-120px text-center alert v-middle'>
             <?php $class = $contact->maker ? "class='text-red'" : "";?>
-            <span class='lead'><?php echo html::a($this->createLink('contact', 'view', "contactID=$contact->id"), $contact->realname, $class);?></span>
+            <span class='lead'><?php echo html::a($this->createLink('crm.contact', 'view', "contactID=$contact->id"), $contact->realname, $class);?></span>
             <?php if($contact->left):?>
             <span ><i class='icon-lock text-muted'></i></span>
             <?php endif;?>
