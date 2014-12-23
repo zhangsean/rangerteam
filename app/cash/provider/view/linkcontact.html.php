@@ -16,19 +16,21 @@
   <table class='table table-form'>
       <tr>
         <th class='w-100px'><?php echo $lang->provider->contact;?></th>
-        <td><?php echo html::select('contact', $contacts, '', "class='form-control chosen'")?> </td>
-        <td class='w-120px'>
-          <input type='checkbox' name='createContact' value='1' id='createContact' checked />
-          <label for='createContact'><?php echo $lang->provider->createContact?></label>
+        <td>
+          <div class='input-group'>
+            <?php echo html::input('realname', '', "class='form-control'");?>
+            <?php echo html::select('contact', $contacts, '', "class='form-control chosen' style='display:none'");?>
+            <span class='input-group-addon'>
+              <label class='checkbox'>
+                <input type='checkbox' name='selectContact' id='selectContact' value='1'/><?php echo $lang->customer->selectContact;?>
+              </label>
+            </span>
+          </div>
         </td>
       </tr>
   </table>
   <div id='contactInfo' class='hidden'>
     <table class='table table-form'>
-      <tr>
-        <th class='w-100px'><?php echo $lang->contact->realname;?></th>
-        <td><?php echo html::input('realname', '', "class='form-control'");?></td>
-      </tr>
       <tr>
         <th><?php echo $lang->contact->gender;?></th>
         <td><?php echo html::radio('gender', $lang->contact->genderList, '');?></td>

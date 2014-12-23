@@ -141,9 +141,9 @@ class provider extends control
     public function contact($providerID)
     {
         $this->view->title      = $this->lang->provider->contact;
-        $this->view->modalWidth = 800;
         $this->view->contacts   = $this->contact->getList($providerID, 'provider');
         $this->view->providerID = $providerID;
+        $this->view->modalWidth = 'lg';
         $this->display();
     }
 

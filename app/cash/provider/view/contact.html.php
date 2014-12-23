@@ -14,12 +14,12 @@
 <table class='table table-bordered table-data'>
   <tr class='text-center'>
     <th class='w-50px'><?php echo $lang->contact->id;?></th>
-    <th class='w-100px'><?php echo $lang->contact->realname;?></th>
-    <th><?php echo $lang->resume->dept;?></th>
+    <th class='w-80px'><?php echo $lang->contact->realname;?></th>
+    <th class='w-100px'><?php echo $lang->resume->dept;?></th>
     <th><?php echo $lang->resume->title;?></th>
     <th class='w-200px'><?php echo $lang->contact->email;?></th>
-    <th class='w-100px'><?php echo $lang->contact->phone;?></th>
-    <th class='w-100px'><?php echo $lang->contact->qq;?></th>
+    <th class='w-110px'><?php echo $lang->contact->phone;?></th>
+    <th class='w-80px'><?php echo $lang->contact->qq;?></th>
     <th class='w-70px text-middle' rowspan='<?php echo count($contacts) + 1;?>'>
       <?php echo html::a(inlink('linkContact', "providerID=$providerID"), $lang->create, "class='loadInModal btn btn-primary' title='{$lang->provider->linkContact}'")?>
     </th>
