@@ -89,7 +89,6 @@ class announce extends control
         $this->view->title           = $this->lang->announce->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $this->loadModel('tree')->getOptionMenu('announce', 0, $removeRoot = true);
-        $this->view->type            = 'announce';
 
         $this->display();
     }
@@ -116,7 +115,6 @@ class announce extends control
         $this->view->title      = $this->lang->article->edit;
         $this->view->article    = $article;
         $this->view->categories = $categories;
-        $this->view->type       = 'announce';
         $this->display();
     }
 

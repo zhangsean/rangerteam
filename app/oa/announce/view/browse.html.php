@@ -12,17 +12,17 @@
 ?>
 <?php include '../../common/view/header.html.php'; ?>
 <?php js::set('mode', $mode)?>
-<li id='bysearchTab'><a href='#'><i class='icon-search icon'></i>&nbsp;<?php echo $lang->search->common;?></a></li>
+<li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
-  <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->announce->create, 'class="btn btn-primary"');?>
+  <?php echo html::a($this->inlink('create'), "<i class='icon-plus'></i> " . $lang->announce->create, "class='btn btn-primary'");?>
 </div>
-<div id="mainContent">
+<div id='mainContent'>
   <div class='panel list list-condensed'>
     <section class='items items-hover'>
       <?php foreach($articles as $article):?>
       <div class='item'>
         <div class='item-heading'>
-          <div class="text-muted pull-right">
+          <div class='text-muted pull-right'>
             <span title="<?php echo $users[$article->author];?>"><i class='icon-user'></i> <?php echo $users[$article->author];?></span> &nbsp; 
             <span title="<?php echo $lang->article->createdDate;?>"><i class='icon-time'></i> <?php echo substr($article->createdDate, 0, 10);?></span>&nbsp; 
           </div>

@@ -13,10 +13,8 @@
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
-<?php js::set('type', $type);?>
-<?php js::set('categoryID', $currentCategory);?>
 <div class='panel'>
-  <div class='panel-heading'><strong><i class='icon-plus'></i>&nbsp;<?php echo $lang->{$type}->create;?></strong></div>
+  <div class='panel-heading'><strong><i class='icon-plus'></i>&nbsp;<?php echo $lang->announce->create;?></strong></div>
   <div class='panel-body'>
     <form method='post' role='form' id='ajaxForm'>
       <table class='table table-form'>
@@ -34,7 +32,7 @@
         </tr>
         <tr>
           <th></th>
-          <td colspan='2'><?php echo html::submitButton() . html::commonButton($lang->article->createDraft, "btn btn-default draft") . html::hidden('type', $type);?></td>
+          <td colspan='2'><?php echo html::submitButton() . html::commonButton($lang->article->createDraft, "btn btn-default draft") . html::hidden('type', 'announce');?></td>
         </tr>
       </table>
     </form>
