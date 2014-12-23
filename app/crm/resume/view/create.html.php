@@ -59,11 +59,11 @@
     </tr>
     <tr>
       <th><?php echo $lang->resume->join;?></th>
-      <td><?php echo html::input('join', '', "class='form-control'")?></td>
+      <td><?php echo html::input('join', '', "class='form-control form-date'")?></td>
     </tr>
     <tr>
       <th><?php echo $lang->resume->left;?></th>
-      <td><?php echo html::input('left', '', "class='form-control'")?></td>
+      <td><?php echo html::input('left', '', "class='form-control form-date'")?></td>
     </tr>
     <tr>
       <th></th>

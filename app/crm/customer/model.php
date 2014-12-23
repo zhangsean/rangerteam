@@ -116,7 +116,7 @@ class customerModel extends model
      * 
      * @param  object    $customer 
      * @access public
-     * @return int
+     * @return int|bool
      */
     public function create($customer = null, $relation = 'client')
     {
@@ -137,7 +137,6 @@ class customerModel extends model
         $this->dao->insert(TABLE_CUSTOMER)
             ->data($customer, $skip = 'uid,contact,email,qq,phone')
             ->autoCheck()
-            ->checkIF($customer->phone, 'phone', 'length', 20, 7)
             ->batchCheck($this->config->customer->require->create, 'notempty')
             ->exec();
 

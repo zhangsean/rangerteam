@@ -178,7 +178,6 @@ class customer extends control
      */
     public function assign($customerID, $table = null)
     {
-
         if($_POST)
         {
             $this->customer->assign($customerID);
@@ -195,6 +194,7 @@ class customer extends control
         $this->view->members    = $this->loadModel('user')->getPairs('noclosed, nodeleted, devfirst');
         $this->display();
     }
+
     /**
      * Browse orders of the customer.
      * 
@@ -204,10 +204,10 @@ class customer extends control
      */
     public function order($customerID)
     {
-        $this->view->title          = $this->lang->customer->order;
-        $this->view->orders         = $this->loadModel('order')->getList($mode = 'query', "customer=$customerID");
-        $this->view->products       = $this->loadModel('product')->getPairs();
-        $this->view->modalWidth     = 'lg';
+        $this->view->title      = $this->lang->customer->order;
+        $this->view->modalWidth = 'lg';
+        $this->view->orders     = $this->loadModel('order')->getList($mode = 'query', "customer=$customerID");
+        $this->view->products   = $this->loadModel('product')->getPairs();
         $this->display();
     }
 
@@ -223,9 +223,9 @@ class customer extends control
         $this->app->loadLang('resume');
 
         $this->view->title      = $this->lang->customer->contact;
+        $this->view->modalWidth = 'lg';
         $this->view->contacts   = $this->loadModel('contact')->getList($customerID);
         $this->view->customerID = $customerID;
-        $this->view->modalWidth = 'lg';
         $this->display();
     }
 

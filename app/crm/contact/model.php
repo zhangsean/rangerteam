@@ -201,6 +201,7 @@ class contactModel extends model
             ->autoCheck()
             ->batchCheck($this->config->contact->require->create, 'notempty')
             ->checkIF($contact->email, 'email', 'email')
+            ->checkIF($contact->phone, 'phone', 'length', 20, 7)
             ->exec();
 
         if(!dao::isError())
