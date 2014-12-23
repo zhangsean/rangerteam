@@ -12,5 +12,3 @@
 $config->product->require = new stdclass();
 $config->product->require->create = 'name';
 $config->product->require->edit   = 'name';
-
-$config->product->action = new stdclass();
