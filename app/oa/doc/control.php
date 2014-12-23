@@ -29,7 +29,7 @@ class doc extends control
         //$this->loadModel('product', 'crm');
         //$this->loadModel('project');
 
-        $this->lang->doc->menu = $this->doc->getLeftMenus($this->libs);
+        $this->lang->doc->menu = $this->doc->getSubMenus($this->libs);
     }
 
     /**

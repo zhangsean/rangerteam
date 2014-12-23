@@ -44,7 +44,7 @@ class docModel extends model
      * @access public
      * @return void
      */
-    public function getLeftMenus($libs = null)
+    public function getSubMenus($libs = null)
     {
         if(empty($libs)) $libs = $this->getLibList();
 
