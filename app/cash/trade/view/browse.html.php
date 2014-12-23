@@ -44,7 +44,7 @@
           <td class='text-left'>
           <label class='checkbox-inline'><input type='checkbox' name='tradeIDList[]' value='<?php echo $trade->id;?>'/><?php echo $trade->id;?></label>
           </td>
-          <td><?php echo $depositorList[$trade->depositor];?></td>
+          <td><?php echo zget($depositorList, $trade->depositor, ' ');?></td>
           <td><?php echo $lang->trade->typeList[$trade->type];?></td>
           <td><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
           <td><?php echo zget($currencySign, $trade->currency) . $trade->money;?></td>
