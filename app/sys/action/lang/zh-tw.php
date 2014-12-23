@@ -21,8 +21,8 @@ $lang->action->actionID = '記錄ID';
 $lang->action->date     = '日期';
 $lang->action->nextDate = '下次聯繫';
 
-$lang->action->newContact  = '新建';
-$lang->action->editComment = '修改備註';
+$lang->action->createContact = '新建';
+$lang->action->editComment   = '修改備註';
 
 $lang->action->textDiff = '文本格式';
 $lang->action->original = '原始格式';

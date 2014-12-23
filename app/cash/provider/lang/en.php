@@ -9,27 +9,27 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->provider->common      = 'Provider';
-$lang->provider->id          = 'ID';
-$lang->provider->name        = 'Name';
-$lang->provider->contact     = 'Contact';
-$lang->provider->type        = 'Type';
-$lang->provider->size        = 'Size';
-$lang->provider->industry    = 'Industry';
-$lang->provider->area        = 'Area';
-$lang->provider->phone       = 'Phone';
-$lang->provider->email       = 'Email';
-$lang->provider->qq          = 'QQ';
-$lang->provider->site        = 'Site';
-$lang->provider->weibo       = 'Sina Weibo';
-$lang->provider->weixin      = 'Wechat';
-$lang->provider->desc        = 'Description';
-$lang->provider->relation    = 'Relation';
-$lang->provider->createdBy   = 'Created By';
-$lang->provider->createdDate = 'Created Date';
-$lang->provider->editedBy    = 'Edited By';
-$lang->provider->editedDate  = 'Edited Date';
-$lang->provider->newContact  = 'Create Contact';
+$lang->provider->common        = 'Provider';
+$lang->provider->id            = 'ID';
+$lang->provider->name          = 'Name';
+$lang->provider->contact       = 'Contact';
+$lang->provider->type          = 'Type';
+$lang->provider->size          = 'Size';
+$lang->provider->industry      = 'Industry';
+$lang->provider->area          = 'Area';
+$lang->provider->phone         = 'Phone';
+$lang->provider->email         = 'Email';
+$lang->provider->qq            = 'QQ';
+$lang->provider->site          = 'Site';
+$lang->provider->weibo         = 'Sina Weibo';
+$lang->provider->weixin        = 'Wechat';
+$lang->provider->desc          = 'Description';
+$lang->provider->relation      = 'Relation';
+$lang->provider->createdBy     = 'Created By';
+$lang->provider->createdDate   = 'Created Date';
+$lang->provider->editedBy      = 'Edited By';
+$lang->provider->editedDate    = 'Edited Date';
+$lang->provider->createContact = 'Create Contact';
 
 $lang->provider->browse      = 'Browse Provider';
 $lang->provider->create      = 'Create Provider';

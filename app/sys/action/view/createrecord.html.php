@@ -27,7 +27,7 @@
             <?php echo html::input('realname', '', "class='form-control' style='display:none'");?>
             <?php if($objectType == 'customer'):?>
             <span class='input-group-addon'>
-              <?php echo html::checkbox('createContact', array(1 => $lang->action->newContact), '', "class='checkbox-inline'");?>
+              <?php echo html::checkbox('createContact', array(1 => $lang->action->createContact), '', "class='checkbox-inline'");?>
               <?php echo html::checkbox('objectType', array('order' => $lang->action->record->order, 'contract' => $lang->action->record->contract), '', "class='checkbox-inline'");?>
             </span>
             <?php endif;?>

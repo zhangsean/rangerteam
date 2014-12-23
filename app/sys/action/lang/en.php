@@ -21,8 +21,8 @@ $lang->action->actionID = 'Action ID';
 $lang->action->date     = 'Date';
 $lang->action->nextDate = 'Next Contact';
 
-$lang->action->newContact  = 'Create Contact';
-$lang->action->editComment = 'Edit Comment';
+$lang->action->createContact = 'Create Contact';
+$lang->action->editComment   = 'Edit Comment';
 
 $lang->action->textDiff = 'Text Mode';
 $lang->action->original = 'Original content';

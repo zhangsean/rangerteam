@@ -5,7 +5,7 @@ $(function()
         if(data.result == 'success') $.reloadAjaxModal(1500);
     })
 
-    $('#newContact').change(function()
+    $('#createContact').change(function()
     {
         if($(this).prop('checked'))
         {
@@ -20,5 +20,5 @@ $(function()
             $('#contactInfo').addClass('hidden');
         }
     });
-    $('#newContact').change();
+    $('#createContact').change();
 })
