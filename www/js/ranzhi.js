@@ -313,7 +313,7 @@ $.extend(
      * @access public
      * @return void
      */
-    setAjaxDeleter: function (selector)
+    setAjaxDeleter: function (selector, callback)
     {
         $(document).on('click', selector, function()
         {
@@ -324,6 +324,7 @@ $.extend(
 
                 $.getJSON(deleter.attr('href'), function(data) 
                 {
+                    callback && callback();
                     if(data.result == 'success')
                     {
                         if(deleter.parents('#ajaxModal').size()) return $.reloadAjaxModal(1200);
