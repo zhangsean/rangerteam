@@ -102,45 +102,6 @@ class projectModel extends model
     }
 
     /**
-     * Get left menu of project module. 
-     * 
-     * @param  int    $projectID 
-     * @access public
-     * @return void
-     */
-    public function getLeftMenus($projectID = 0)
-    {
-        $this->lang->menuGroups->task = 'project';
-
-        $menu = "<nav class='menu leftmenu affix'><ul class='nav nav-stacked nav-primary'>";
-        if(empty($projects)) $projects = $this->getPairs();
-
-        $leftMenu = array();
-
-        foreach($projects as $id => $project)
-        {
-            $class = $id == $projectID ? "class='active'" : '';
-            $menu .= "<li {$class}>" . html::a(helper::createLink('task', 'browse', "projectID={$id}"), $project);
-            
-            $menu .= "<div class='actions'>
-                        <div class='dropdown'>
-                          <button class='btn btn-mini' data-toggle='dropdown'><span class='caret'></span></button>
-                          <ul class='dropdown-menu pull-right'>";
-                     
-            $menu .= "<li>" . html::a(helper::createLink('project', 'edit', "projectID={$id}"), "<i class='icon-edit'> {$this->lang->edit}</i>", "data-toggle='modal'") . '</li>';
-            $menu .= "<li>" . html::a(helper::createLink('project', 'delete', "projectID={$id}"), "<i class='icon-remove'> {$this->lang->delete}</i>", "class='deleter'") . '</li>';
-            $menu .= "</ul></div></div>";
-            
-            $menu .= '</li>';
-        }
-        $isCreateMenu = ($this->app->getModuleName() == 'project' and $this->app->getmethodName() == 'create') ? "class='active'" : ''; 
-        $menu .= "<li {$isCreateMenu}>" . html::a(helper::createLink('project', 'create'), $this->lang->project->create, "data-toggle='modal'");
-
-        $menu .= '</ul></nav>';
-        return $menu;
-    }
-
-    /**
      * create 
      * 
      * @access public
