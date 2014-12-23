@@ -271,19 +271,6 @@ class customer extends control
     }
 
     /**
-     * Browse record of customer.
-     * 
-     * @param  int    $customerID 
-     * @access public
-     * @return void
-     */
-    public function record($customerID)
-    {
-        $this->view->customer = $this->customer->getByID($customerID);
-        $this->display();
-    }
-
-    /**
      * Delete a customer.
      *
      * @param  int    $customerID

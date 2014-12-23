@@ -28,10 +28,8 @@
   <tr class='text-center'>
     <td><?php echo $contact->id;?></td>
     <td>
-      <?php
-      echo $contact->realname;
-      if($contact->maker) echo " ({$lang->resume->maker})";
-      ?>
+      <?php echo $contact->realname;?>
+      <?php if($contact->maker) echo " ({$lang->resume->maker})"; ?>
     </td>
     <td><?php echo $contact->dept;?></td>
     <td><?php echo $contact->title;?></td>
