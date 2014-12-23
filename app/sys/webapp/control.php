@@ -69,13 +69,8 @@ class webapp extends control
     public function install($webappID)
     {
         $result = $this->webapp->install($webappID);
-        if(dao::isError())
-        {
-            echo js::error(dao::getError());
-            die(js::locate($this->createLink('webapp', 'obtain')));
-        }
-        echo js::alert($this->lang->webapp->successInstall);
-        die(js::locate($this->createLink('entry', 'admin')));
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError(), 'locate' => $this->createLink('webapp', 'obtain')));
+        $this->send(array('result' => 'success', 'message' => $this->lang->webapp->successInstall, 'locate' => $this->createLink('entry', 'admin'), 'entries' => $this->loadModel('entry')->getJSONEntries()));
     }
 
     /**

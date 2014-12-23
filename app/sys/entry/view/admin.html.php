@@ -16,7 +16,7 @@ include '../../common/view/header.html.php';
     <strong><i class='icon-building'></i> <?php echo $lang->entry->admin;?></strong>
     <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create'), $lang->entry->create, "class='btn btn-primary'");?></div>
   </div>
-  <form action='<?php echo inlink('order')?>' method='post' id='ajaxForm'>
+  <form action='<?php echo inlink('order')?>' method='post' id='entryForm'>
   <table class='table table-bordered table-hover table-striped'>
     <thead>
       <tr class='text-center'>
@@ -41,7 +41,7 @@ include '../../common/view/header.html.php';
           echo html::a($this->createLink('entry', 'edit',   "code=$entry->code"), $lang->edit);
           if(!$entry->buildin)
           {
-              echo html::a($this->createLink('entry', 'delete', "code=$entry->code"), $lang->delete, 'class="deleter"');
+              echo html::a($this->createLink('entry', 'delete', "code=$entry->code"), $lang->delete, 'class="entry-deleter"');
           }
           ?>
         </td>

@@ -164,7 +164,7 @@ class entry extends control
                 $this->dao->update(TABLE_ENTRY)->set('`order`')->eq($order)->where('id')->eq($id)->exec();
             }
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
         }
     }
 
@@ -204,7 +204,7 @@ class entry extends control
      */
     public function delete($code)
     {
-        if($this->entry->delete($code)) $this->send(array('result' => 'success'));
+        if($this->entry->delete($code)) $this->send(array('result' => 'success', 'entries' => $this->entry->getJSONEntries()));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 

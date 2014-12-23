@@ -75,3 +75,24 @@ $(function()
     $('#modulemenu ul li').removeClass('active');
     if(typeof(module) == "string") $('#modulemenu ul li #submenu' + module).parent().addClass('active');
 })
+
+/* Refresh desktop. */
+$(document).ready(function()
+{
+    $(document).on('click', '.webapp-install', function()
+    {
+        $.getJSON($(this).attr('href'), function(data) 
+        {
+            if(data.result == 'success')
+            {
+                if(data.entries) 
+                {
+                    v.entries = JSON.parse(data.entries);
+                    $.refreshDesktop(v.entries, true);
+                }
+                location.href = data.locate;
+                return false;
+            }
+        });
+    });
+})

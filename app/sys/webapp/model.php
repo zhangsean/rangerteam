@@ -155,7 +155,17 @@ class webappModel extends model
         $webapps = $this->dao->select('*')->from(TABLE_ENTRY)
             ->where('integration')->eq(0)
             ->fetchAll($key);
-        return $webapps;
+
+        $newWebapps = array();
+        foreach($webapps as $webapp)
+        {
+            if(strpos($webapp->code, $this->config->webapp->codePrefix) === 0)
+            {
+                $webapp->code = substr($webapp->code, strlen($this->config->webapp->codePrefix));
+            }
+            $newWebapps[$webapp->code] = $webapp;
+        }
+        return $newWebapps;
     }
 
     /**
@@ -174,7 +184,7 @@ class webappModel extends model
         $maxOrder = $this->dao->select('`order`')->from(TABLE_ENTRY)->orderBy('order_desc')->limit(1)->fetch('order');
 
         $entry = new stdclass();
-        $entry->code        = $webapp->id;
+        $entry->code        = $this->config->webapp->codePrefix . $webapp->id;
         $entry->name        = $webapp->name;
         $entry->open        = $open;
         $entry->login       = $webapp->url;

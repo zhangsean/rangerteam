@@ -324,7 +324,7 @@ $.extend(
 
                 $.getJSON(deleter.attr('href'), function(data) 
                 {
-                    callback && callback(data.result);
+                    callback && callback(data);
                     if(data.result == 'success')
                     {
                         if(deleter.parents('#ajaxModal').size()) return $.reloadAjaxModal(1200);
