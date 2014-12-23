@@ -65,8 +65,8 @@ class orderModel extends model
         if(empty($customerIdList)) return null;
 
         $this->app->loadClass('date', $static = true);
-        $thisMonth  = date::getThisMonth();
-        $thisWeek   = date::getThisWeek();
+        $thisMonth = date::getThisMonth();
+        $thisWeek  = date::getThisWeek();
 
         /* process search condition. */
         if($this->session->orderQuery == false) $this->session->set('orderQuery', ' 1 = 1');
@@ -228,14 +228,9 @@ class orderModel extends model
             ->batchCheck($this->config->order->require->create, 'notempty')
             ->exec();
 
+        if(dao::isError()) return false;
+
         $orderID = $this->dao->lastInsertID();
-
-        $member = new stdclass();
-        $member->order   = $orderID;
-        $member->account = $this->app->user->account;
-        $member->role    = $this->app->user->role;
-        $member->join    = helper::today();
-
         return $orderID;
     }
 
@@ -250,7 +245,8 @@ class orderModel extends model
     {
         $oldOrder = $this->getByID($orderID);
         $now      = helper::now();
-        $order    = fixer::input('post')
+
+        $order = fixer::input('post')
             ->setDefault('nextDate', '0000-00-00')
             ->setDefault('signedDate', '0000-00-00')
             ->setDefault('closedDate', '0000-00-00 00:00:00')
@@ -302,7 +298,8 @@ class orderModel extends model
 
         $this->dao->update(TABLE_ORDER)->data($order, $skip = 'uid, closedNote')
             ->autoCheck()
-            ->where('id')->eq($orderID)->exec();
+            ->where('id')->eq($orderID)
+            ->exec();
 
         return !dao::isError();
     }
@@ -372,7 +369,7 @@ class orderModel extends model
         $menu .= html::a(inlink('view', "orderID=$order->id"), $this->lang->view);
         $menu .= html::a(helper::createLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $this->lang->order->record, "data-toggle='modal' data-type='iframe'");
 
-        if($order->status == 'normal')   $menu .= html::a(helper::createLink('contract', 'create', "customerID={$order->customer}&orderID={$order->id}"), $this->lang->order->sign);
+        if($order->status == 'normal') $menu .= html::a(helper::createLink('contract', 'create', "customerID={$order->customer}&orderID={$order->id}"), $this->lang->order->sign);
         if($order->status != 'normal') $menu .= html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
 
         $menu .= html::a(inlink('edit',   "orderID=$order->id"), $this->lang->edit);

@@ -37,13 +37,11 @@ class order extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->session->set('orderList',    $this->app->getURI(true));
-        $this->session->set('contractList', '');
-
         $orders = $this->order->getList($mode, '', $orderBy, $pager);
 
         /* Set pre and next condition. */
         $this->session->set('orderQueryCondition', $this->dao->get());
+        $this->session->set('orderList', $this->app->getURI(true));
 
         /* build search form. */
         $this->loadModel('search', 'sys');
