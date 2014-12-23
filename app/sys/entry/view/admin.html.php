@@ -21,7 +21,7 @@ include '../../common/view/header.html.php';
     <thead>
       <tr class='text-center'>
         <th class='w-70px'></th>
-        <th class='w-100px'><?php echo $lang->entry->name;?></th>
+        <th class='w-180px'><?php echo $lang->entry->name;?></th>
         <th class='w-80px'><?php echo $lang->entry->code;?></th>
         <th class='w-300px'><?php echo $lang->entry->key;?></th>
         <th><?php echo $lang->entry->ip;?></th>
