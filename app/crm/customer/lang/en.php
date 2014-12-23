@@ -53,14 +53,14 @@ $lang->customer->record      = 'Record';
 $lang->customer->assign      = 'Assign Customer';
 $lang->customer->linkContact = 'Create Contact';
 
-$lang->customer->typeList['']           = '';
-$lang->customer->typeList['national']   = 'National';
-$lang->customer->typeList['collective'] = 'Collective';
-$lang->customer->typeList['corporate']  = 'Corporate';
-$lang->customer->typeList['limited']    = 'Limited';
-$lang->customer->typeList['partnership']= 'Partnership';
-$lang->customer->typeList['foreign']    = 'Foreign';
-$lang->customer->typeList['personal']   = 'Personal';
+$lang->customer->typeList['']            = '';
+$lang->customer->typeList['national']    = 'National';
+$lang->customer->typeList['collective']  = 'Collective';
+$lang->customer->typeList['corporate']   = 'Corporate';
+$lang->customer->typeList['limited']     = 'Limited';
+$lang->customer->typeList['partnership'] = 'Partnership';
+$lang->customer->typeList['foreign']     = 'Foreign';
+$lang->customer->typeList['personal']    = 'Personal';
 
 $lang->customer->statusList['potential'] = 'Potential';
 $lang->customer->statusList['intension'] = 'Intension';

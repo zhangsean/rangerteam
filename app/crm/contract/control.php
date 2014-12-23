@@ -259,14 +259,15 @@ class contract extends control
             $this->contract->cancel($contractID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            $this->loadModel('action')->create('contract', $contractID, 'Canceled', $this->post->comment);
-            $this->loadModel('action')->create('customer', $contract->customer, 'cancelContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
+            $this->loadModel('action');
+            $this->action->create('contract', $contractID, 'Canceled', $this->post->comment);
+            $this->action->create('customer', $contract->customer, 'cancelContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
 
             if($contract->order)
             {
                 foreach($contract->order as $orderID)
                 {
-                    $this->loadModel('action')->create('order', $orderID, 'cancelContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
+                    $this->action->create('order', $orderID, 'cancelContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
                 }
             }
             
@@ -319,7 +320,7 @@ class contract extends control
         $uri = $this->app->getURI(true);
         $this->session->set('customerList', $uri);
         $this->session->set('contactList',  $uri);
-        if(!$this->session->orderList) $this->session->set('orderList',    $uri);
+        if(!$this->session->orderList) $this->session->set('orderList', $uri);
 
         $this->view->title        = $this->lang->contract->view;
         $this->view->orders       = $this->loadModel('order')->getListById($contract->order);
@@ -365,13 +366,14 @@ class contract extends control
 
         foreach($orders as $order)
         {
-            if(!$order)
+            if(empty($order))
             {
                 $html .= "<option value='' data-real='' data-currency=''></option>";
-                continue;
             }
-
-            $html .= "<option value='{$order->id}' data-real='{$order->plan}' data-currency='{$order->currency}'>{$order->title}</option>";
+            else
+            {
+                $html .= "<option value='{$order->id}' data-real='{$order->plan}' data-currency='{$order->currency}'>{$order->title}</option>";
+            }
         }
 
         $html .= '</select></span>';

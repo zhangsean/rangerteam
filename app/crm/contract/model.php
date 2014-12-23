@@ -21,20 +21,16 @@ class contractModel extends model
     public function getByID($contractID)
     {
         $contract = $this->dao->select('*')->from(TABLE_CONTRACT)->where('id')->eq($contractID)->fetch();
+
         if($contract)
         {
             $contract->order = array();
-            $contractOrders = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->fetchAll();
+            $contractOrders  = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->fetchAll();
             foreach($contractOrders as $contractOrder) $contract->order[] = $contractOrder->order;
-            $contract->files = $this->loadModel('file')->getByObject('contract', $contractID);
 
-            $contract->returnList = array();
-            $returnList = $this->dao->select('*')->from(TABLE_PLAN)->where('contract')->eq($contractID)->fetchAll();
-            foreach($returnList as $return) $contract->returnList[] = $return;
-
-            $contract->deliveryList = array();
-            $deliveryList = $this->dao->select('*')->from(TABLE_DELIVERY)->where('contract')->eq($contractID)->fetchAll();
-            foreach($deliveryList as $delivery) $contract->deliveryList[] = $delivery;
+            $contract->files        = $this->loadModel('file')->getByObject('contract', $contractID);
+            $contract->returnList   = $this->dao->select('*')->from(TABLE_PLAN)->where('contract')->eq($contractID)->fetchAll();
+            $contract->deliveryList = $this->dao->select('*')->from(TABLE_DELIVERY)->where('contract')->eq($contractID)->fetchAll();
         }
 
         return $contract;
@@ -409,12 +405,10 @@ class contractModel extends model
 
                     $this->dao->update(TABLE_ORDER)->data($order)->autoCheck()->where('id')->eq($orderID)->exec();
                 }
-
                 return !dao::isError();
             }
             return true;
         }
-
         return false;
     }
 

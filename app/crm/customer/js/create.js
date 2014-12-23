@@ -6,7 +6,8 @@ $(document).ready(function()
        {
           if(response.result == 'success')
           {
-               $('.select-customer', window.opener.document).load(createLink('customer', 'getoptionmenu', 'current=' + response.customerID), function(){ window.close(); });
+               url = createLink('customer', 'getoptionmenu', 'current=' + response.customerID);
+               $('.select-customer', window.opener.document).load(url, function(){ window.close(); });
           }
        });
    }
@@ -14,5 +15,4 @@ $(document).ready(function()
    {
        $.setAjaxForm('#customerForm');
    }
-
 })
