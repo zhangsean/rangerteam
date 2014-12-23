@@ -59,4 +59,7 @@ include '../../common/view/header.html.php';
   </table>
   </form>
 </div>
+<?php 
+    echo js::set('entries', json_decode($jsonEntries));
+?>
 <?php include '../../common/view/footer.html.php';?>

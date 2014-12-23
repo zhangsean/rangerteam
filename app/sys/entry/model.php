@@ -294,4 +294,46 @@ class entryModel extends model
 
         return json_decode($params, true);
     }
+
+    /**
+     * Get entries of json.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getJSONEntries()
+    {
+        $entries    = $this->getEntries();
+        $allEntries = array();
+
+        foreach($entries as $entry)
+        {
+
+            $sso  = helper::createLink('entry', 'visit', "entryID=$entry->id");
+            $logo = !empty($entry->logo) ? $entry->logo : '';
+            $size = !empty($entry->size) ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
+            $menu = $entry->visible ? 'all' : 'list';
+            /* add web root if logo not start with /  */
+            if($logo != '' && substr($logo, 0, 1) != '/') $logo = $this->config->webRoot . $logo;
+            
+            if(!isset($entry->control))  $entry->control = '';
+            if(!isset($entry->position)) $entry->position = '';
+            unset($tmpEntry);
+            $tmpEntry['id']       = $entry->id;
+            $tmpEntry['name']     = $entry->name;
+            $tmpEntry['url']      = $sso;
+            $tmpEntry['open']     = $entry->open;
+            $tmpEntry['desc']     = $entry->name;
+            $tmpEntry['size']     = $size;
+            $tmpEntry['icon']     = $logo;
+            $tmpEntry['control']  = $entry->control;
+            $tmpEntry['position'] = $entry->position;
+            $tmpEntry['menu']     = $menu;
+            $tmpEntry['display']  = 'fixed';
+            $tmpEntry['abbr']     = $entry->abbr;
+            $tmpEntry['order']    = $entry->order;
+            $allEntries[] = $tmpEntry;
+        }
+        return json_encode($allEntries);
+    }
 }

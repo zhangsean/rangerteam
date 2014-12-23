@@ -16,7 +16,7 @@ include '../../common/view/header.html.php';
     <strong><i class='icon-edit'></i> <?php echo $lang->entry->edit;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' class='form form-inline' id='ajaxForm'>
+    <form method='post' class='form form-inline' id='entryForm'>
       <table class='table table-form'>
         <?php if($entry->buildin):?>
         <tr>

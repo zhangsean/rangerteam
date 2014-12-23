@@ -72,7 +72,7 @@ class contract extends control
         $this->view->pager        = $pager;
         $this->view->mode         = $mode;
         $this->view->orderBy      = $orderBy;
-        $this->view->currencySign = $this->order->setCurrencySign();
+        $this->view->currencySign = $this->loadModel('order', 'crm')->setCurrencySign();
         $this->view->currencyList = $this->order->setCurrencyList();
         if($contracts) $this->view->totalAmount = $this->contract->countAmount($contracts);
 

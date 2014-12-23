@@ -56,3 +56,20 @@ if(!$('#integration').prop('checked'))
     $('#block').parents('tr').hide();
     $('#ip').parents('tr').hide();
 }
+
+/* refresh entries. */
+$(document).ready(function()
+{
+    $.setAjaxForm('#entryForm', function(response)
+    {
+        if(response.result == 'success')
+        {
+            if(response.entries) 
+            {
+                v.entries = JSON.parse(response.entries);
+                $.refreshDesktop(v.entries, true);
+            }
+            location.href = response.locate;
+        }
+    });
+})

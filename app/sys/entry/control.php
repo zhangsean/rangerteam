@@ -23,10 +23,11 @@ class entry extends control
         /* add web root if logo not start with /  */
         foreach($entries as $entry) if(!empty($entry->logo) && substr($entry->logo, 0, 1) != '/') $entry->logo = $this->config->webRoot . $entry->logo;
         
-        $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->admin;
-        $this->view->position[] = $this->lang->entry->common;
-        $this->view->position[] = $this->lang->entry->admin;
-        $this->view->entries    = $entries;
+        $this->view->title       = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->admin;
+        $this->view->position[]  = $this->lang->entry->common;
+        $this->view->position[]  = $this->lang->entry->admin;
+        $this->view->entries     = $entries;
+        $this->view->jsonEntries = $this->entry->getJSONEntries();
         $this->display();
     }
 
@@ -45,7 +46,7 @@ class entry extends control
             $entryID = $this->entry->create();
             $this->entry->updateLogo($entryID);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
         }
         $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->create;
         $this->view->key        = $this->entry->createKey();
@@ -127,7 +128,7 @@ class entry extends control
             $entryID = $this->entry->update($code);
             $this->entry->updateLogo($entryID);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
-            $this->send(array('result' => 'success', 'locate'=>inlink('admin')));
+            $this->send(array('result' => 'success', 'locate' => inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
         }
 
         $entry = $this->entry->getByCode($code);
