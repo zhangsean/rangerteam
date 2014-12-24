@@ -90,7 +90,6 @@ $lang->saved          = '已保存';
 $lang->confirm        = '确认';
 $lang->preview        = '预览';
 $lang->goback         = '返回';
-$lang->search         = '搜索';
 $lang->assign         = '指派';
 $lang->start          = '开始';
 $lang->create         = '新建';

@@ -43,6 +43,7 @@ $lang->appModule->sys = array();
 $lang->appModule->sys[] = 'task';
 $lang->appModule->sys[] = 'tree';
 $lang->appModule->sys[] = 'user';
+$lang->appModule->sys[] = 'search';
 
 /* Module order. */
 $lang->moduleOrder[0]   = 'order';
@@ -72,6 +73,7 @@ $lang->moduleOrder[75]  = 'task';
 $lang->moduleOrder[80]  = 'tree';
 $lang->moduleOrder[85]  = 'setting';
 $lang->moduleOrder[90]  = 'user';
+$lang->moduleOrder[95]  = 'search';
 
 $lang->resource = new stdclass();
 
@@ -452,6 +454,13 @@ $lang->user->methodOrder[75] = 'vcard';
 
 /* Setting. */
 $lang->resource->setting = new stdclass();
+
+/* Search. */
+$lang->resource->search = new stdclass();
+
+$lang->resource->search->buildForm = 'buildForm';
+
+$lang->search->methodOrder[10] = 'buildForm';
 
 /* Every version of new privilege. */
 $lang->changelog = array();

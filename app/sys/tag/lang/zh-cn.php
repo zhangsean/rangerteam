@@ -13,6 +13,7 @@ if(!isset($lang->tag)) $lang->tag = new stdclass();
 $lang->tag->common = '关键词';
 $lang->tag->rank   = '权重';
 $lang->tag->link   = '链接';
+$lang->tag->search = '搜索';
 
 $lang->tag->admin     = '关键词管理';
 $lang->tag->editLink  = '编辑链接';

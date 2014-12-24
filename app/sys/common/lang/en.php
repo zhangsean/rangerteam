@@ -90,7 +90,6 @@ $lang->saved          = 'Saved';
 $lang->confirm        = 'Confirm';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
-$lang->search         = 'Search';
 $lang->assign         = 'Assign';
 $lang->start          = 'Start';
 $lang->create         = 'Add';

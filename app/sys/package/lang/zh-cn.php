@@ -26,6 +26,7 @@ $lang->package->erase         = '清除';
 $lang->package->upgrade       = '升级插件';
 $lang->package->agreeLicense  = '我同意该授权';
 $lang->package->settemplate   = '设置模板';
+$lang->package->search        = '搜索';
 
 $lang->package->structure   = '目录结构';
 $lang->package->installed   = '已安装';

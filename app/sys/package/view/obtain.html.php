@@ -38,7 +38,7 @@
           <div class="input-group">
             <?php echo html::input('key', $this->post->key, "class='form-control' placeholder='{$lang->package->bySearch}'");?>
             <span class="input-group-btn">
-              <?php echo html::submitButton($lang->search,"btn btn-primary"); ?>
+              <?php echo html::submitButton($lang->package->search, "btn btn-primary"); ?>
             </span>
           </div>
         </form>

@@ -13,6 +13,7 @@ if(!isset($lang->tag)) $lang->tag = new stdclass();
 $lang->tag->common = 'keywords';
 $lang->tag->rank   = 'Rank';
 $lang->tag->link   = 'link';
+$lang->tag->search = 'Search';
 
 $lang->tag->admin     = 'Manage keywords';
 $lang->tag->editLink  = 'Edit Link';

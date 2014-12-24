@@ -16,7 +16,7 @@
   <form method='post' class='form-inline form-search '>
     <div class='input-group'>
       <?php echo html::select('tags[]', $tagOptions, $this->post->tags, "multiple='multiple' class='form-control chosen  search-query' placeholder='{$lang->tag->inputTag}'"); ?>
-      <span class="input-group-btn"> <?php echo html::submitButton($lang->search, 'btn btn-primary'); ?> </span>
+      <span class="input-group-btn"> <?php echo html::submitButton($lang->tag->search, 'btn btn-primary'); ?> </span>
     </div>
   </form>
 </div>

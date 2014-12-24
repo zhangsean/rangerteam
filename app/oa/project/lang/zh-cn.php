@@ -24,6 +24,7 @@ $lang->project->deleted    = '已删除';
 $lang->project->finished   = '已结束';
 $lang->project->suspended  = '已挂起';
 $lang->project->noMatched  = '找不到包含"%s"的项目';
+$lang->project->search     = '搜索';
 
 $lang->project->id          = '编号';
 $lang->project->name        = '项目名称';

@@ -14,7 +14,7 @@
 <?php js::set('module', $module);?>
 <?php js::set('method', $method);?>
 <?php js::set('extra', $extra);?>
-<input type='text' class='form-control' id='search' value='' onkeyup='searchItems(this.value, "project", v.projectID, v.module, v.method, v.extra)' placeholder='<?php echo $this->lang->search;?>'/>
+<input type='text' class='form-control' id='search' value='' onkeyup='searchItems(this.value, "project", v.projectID, v.module, v.method, v.extra)' placeholder='<?php echo $this->lang->project->search;?>'/>
 
 <div id='searchResult'>
   <div id='defaultMenu'>

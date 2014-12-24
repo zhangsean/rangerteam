@@ -26,6 +26,7 @@ $lang->package->erase         = 'Erase';
 $lang->package->upgrade       = 'Upgrade Package';
 $lang->package->agreeLicense  = 'I agree the license';
 $lang->package->settemplate   = 'Set template';
+$lang->package->search        = 'Search';
 
 $lang->package->structure   = 'Structure';
 $lang->package->installed   = 'Installed';
