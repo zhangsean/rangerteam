@@ -94,10 +94,7 @@ $lang->user->uploadSuccess = 'Successfully uploaded';
 $lang->user->forbidUser = 'Manage user';
 $lang->user->operate    = 'Operate';
 
-$lang->user->genderList = new stdclass();
-$lang->user->genderList->m = 'Male';
-$lang->user->genderList->f = 'Female';
-$lang->user->genderList->u = '';
+$lang->user->genderList = $lang->genderList;
 
 $lang->user->basicInfo   = 'Basic Info';
 $lang->user->contactInfo = 'Contact Info';

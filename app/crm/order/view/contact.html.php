@@ -34,7 +34,7 @@
     <tr class='text-center'>
       <td><?php echo $contact->id;?></td>
       <td><?php echo $contact->realname;?></td>
-      <td><?php echo isset($lang->contact->genderList[$contact->gender]) ? $lang->contact->genderList[$contact->gender] : '';?></td>
+      <td><?php echo isset($lang->genderList->{$contact->gender}) ? $lang->genderList->{$contact->gender} : '';?></td>
       <td><?php echo $contact->phone;?></td>
       <td><?php echo $contact->mobile;?></td>
       <td><?php echo $contact->email;?></td>

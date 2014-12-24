@@ -77,7 +77,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->contact->gender;?></th>
-              <td colspan='2'><?php echo html::radio('gender', $lang->contact->genderList, $contact->gender);?></td>
+              <td colspan='2'><?php unset($lang->genderList->u); echo html::radio('gender', $lang->genderList, $contact->gender);?></td>
             </tr>
             <tr>
               <th><?php echo $lang->contact->createdDate;?></th>

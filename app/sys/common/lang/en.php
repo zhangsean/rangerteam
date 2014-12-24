@@ -250,6 +250,11 @@ $lang->date = new stdclass();
 $lang->date->minute = 'minute';
 $lang->date->day    = 'day';
 
+$lang->genderList = new stdclass();
+$lang->genderList->m = 'Male';
+$lang->genderList->f = 'Female';
+$lang->genderList->u = '';
+
 /* datepicker 时间*/
 $lang->datepicker = new stdclass();
 

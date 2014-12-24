@@ -42,9 +42,6 @@ $lang->contact->newCustomer   = 'Create Customer';
 $lang->contact->uploadAvatar  = 'Upload Avatar';
 $lang->contact->changeAvatar  = 'Change Avatar';
 
-$lang->contact->genderList['m'] = 'Male';
-$lang->contact->genderList['f'] = 'Female';
-
 $lang->contact->browse  = 'Browse Contact';
 $lang->contact->block   = 'Contact Block';
 $lang->contact->delete  = 'Delete Contact';

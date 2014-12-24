@@ -31,7 +31,7 @@
     <tbody id='contactInfo' class='hidden'>
       <tr>
         <th><?php echo $lang->contact->gender;?></th>
-        <td><?php echo html::radio('gender', $lang->contact->genderList, '');?></td>
+        <td><?php unset($lang->genderList->u); echo html::radio('gender', $lang->genderList, '');?></td>
       </tr>
       <tr>
         <th><?php echo $lang->contact->email;?></th>

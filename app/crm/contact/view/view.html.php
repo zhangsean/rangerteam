@@ -73,7 +73,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->contact->gender;?></th>
-            <td><?php echo zget($lang->contact->genderList, $contact->gender, '');?></td>
+            <td><?php echo zget($lang->genderList, $contact->gender, '');?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contact->createdDate;?></th>

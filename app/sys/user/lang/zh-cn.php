@@ -94,10 +94,7 @@ $lang->user->uploadSuccess = '上传成功';
 $lang->user->forbidUser = '禁用管理';
 $lang->user->operate    = '操作';
 
-$lang->user->genderList = new stdclass();
-$lang->user->genderList->m = '男';
-$lang->user->genderList->f = '女';
-$lang->user->genderList->u = '';
+$lang->user->genderList = $lang->genderList;
 
 $lang->user->basicInfo   = '基本信息';
 $lang->user->contactInfo = '联系信息';
