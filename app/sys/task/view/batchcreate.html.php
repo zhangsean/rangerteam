@@ -16,7 +16,6 @@
 <div class='with-menu page-content'>
   <form id='ajaxForm' method='post'>
     <div class='panel'>
-      <div class='panel-heading'><strong><?php echo $lang->task->batchCreate;?></strong></div>
       <table class='table table-form'>
         <thead>
           <tr class='text-center'>

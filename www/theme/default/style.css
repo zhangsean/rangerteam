@@ -577,3 +577,4 @@ td #aliasLabel {display: table-row;}
 #searchResult.show-suspend #defaultMenu > ul > li, #defaultMenu > .actions > a {border-right: 1px solid #ddd}
 #defaultMenu > .actions > a > i, #defaultMenu > ul > li > a > i, #finishedMenu > ul > li > a > i, #suspendMenu > ul > li > a > i {font-size: 14px; display: inline-block; margin-right: 5px;}
 #searchResult > ul {display: block; position: relative; padding: 0; min-width: 218px}
+#defaultMenu > div {padding-top: 6px;}

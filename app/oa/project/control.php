@@ -174,14 +174,19 @@ class project extends control
                 if($member->role != 'manager') continue;
                 if($member->role == 'manager') $project->PM = $member->account;
             }
+            if($project->id == $projectID)
+            {
+                $currentProject = $project;
+            }
         }
 
-        $this->view->link      = $this->project->getProjectLink($module, $method, $extra);
-        $this->view->projectID = $projectID;
-        $this->view->module    = $module;
-        $this->view->method    = $method;
-        $this->view->extra     = $extra;
-        $this->view->projects  = $projects;
+        $this->view->link            = $this->project->getProjectLink($module, $method, $extra);
+        $this->view->projectID       = $projectID;
+        $this->view->$currentProject = $currentProject;
+        $this->view->module          = $module;
+        $this->view->method          = $method;
+        $this->view->extra           = $extra;
+        $this->view->projects        = $projects;
         $this->display();
     }
 
