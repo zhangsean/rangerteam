@@ -316,6 +316,15 @@ class projectModel extends model
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=untilToday"), $this->lang->task->untilToday);
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=expired"), $this->lang->task->expired);
         }
+        else if($methodName == 'kanban' || $methodName == 'outline')
+        {
+            $menu .= '<li class="divider angle"></li>';
+            foreach($this->lang->task->groups as $key => $value)
+            {
+                if(empty($key)) continue;
+                $menu .= "<li data-group='{$key}'>" . html::a(helper::createLink('task', $methodName, "projectID=$projectID&groupBy=$key"), $value) . "</li>";
+            }
+        }
         else if($methodName == 'view')
         {
             $menu .= '<li class="divider angle"></li>';
@@ -341,20 +350,9 @@ class projectModel extends model
             $menu .= "<li" . ($methodName == 'outline' ? " class='active'" : '') . ">" . html::a(helper::createLink('task', 'outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $this->lang->task->outline) . "</li>";
             $menu .= '</ul></li>';
 
-            if($methodName == 'kanban' || $methodName == 'outline')
+            if($methodName == 'outline')
             {
-                $menu .= "<li id='groupBar' class='dropdown'><a href='javascript:;' id='groupButton' data-toggle='dropdown' class='dropdown-toggle'><icon class='icon-flag'></icon> <span id='groupByName'></span> <icon class='icon-caret-down'></icon></a><ul class='dropdown-menu'>";
-                foreach ($this->lang->task->groups as $key => $value)
-                {
-                    if(empty($key)) continue;
-                    $menu .= "<li data-group='{$key}'>" . html::a(helper::createLink('task', $methodName, "projectID=$projectID&groupBy=$key"), $value) . "</li>";
-                }
-                $menu .= '</ul></li>';
-
-                if($methodName == 'outline')
-                {
-                    $menu .= '<li><a href="javascript:;" id="toggleAll"><i class="icon-plus"></i></a></li>';
-                }
+                $menu .= '<li><a href="javascript:;" id="toggleAll"><i class="icon-plus"></i></a></li>';
             }
 
             $menu .= "</ul>";
