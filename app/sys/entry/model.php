@@ -321,6 +321,7 @@ class entryModel extends model
             unset($tmpEntry);
             $tmpEntry['id']       = $entry->id;
             $tmpEntry['name']     = $entry->name;
+            $tmpEntry['code']     = $entry->code;
             $tmpEntry['url']      = $sso;
             $tmpEntry['open']     = $entry->open;
             $tmpEntry['desc']     = $entry->name;
