@@ -50,8 +50,8 @@ $config->order->search['params']['c.level']         = array('operator' => '=',  
 $config->order->search['params']['o.customer']      = array('operator' => '=',  'control' => 'select', 'values' => 'set in control');
 $config->order->search['params']['o.product']       = array('operator' => '=',  'control' => 'select', 'values' => 'set in control');
 $config->order->search['params']['o.plan']          = array('operator' => '>',  'control' => 'input',  'values' => '');
-$config->order->search['params']['o.assignedTo']    = array('operator' => '=',  'control' => 'select', 'values' => 'set in control');
-$config->order->search['params']['o.status']        = array('operator' => '=',  'control' => 'select', 'values' => $lang->order->statusList);
+$config->order->search['params']['o.assignedTo']    = array('operator' => '=',  'control' => 'select', 'values' => 'users');
+$config->order->search['params']['o.status']        = array('operator' => '=',  'control' => 'select', 'values' => array('' => '') + $lang->order->statusList);
 $config->order->search['params']['o.contactedDate'] = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->order->search['params']['o.nextDate']      = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->order->search['params']['o.createdBy']     = array('operator' => '=',  'control' => 'select', 'values' => 'users');

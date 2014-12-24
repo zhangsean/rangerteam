@@ -38,7 +38,7 @@ $config->customer->search['params']['name']          = array('operator' => 'incl
 $config->customer->search['params']['level']         = array('operator' => '=',  'control' => 'select', 'values' => $lang->customer->levelNameList);
 $config->customer->search['params']['contactedDate'] = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->customer->search['params']['nextDate']      = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
-$config->customer->search['params']['status']        = array('operator' => '=',  'control' => 'select', 'values' => $lang->customer->statusList);
+$config->customer->search['params']['status']        = array('operator' => '=',  'control' => 'select', 'values' => array('' => '') + $lang->customer->statusList);
 $config->customer->search['params']['size']          = array('operator' => '=',  'control' => 'select', 'values' => $lang->customer->sizeNameList);
 $config->customer->search['params']['type']          = array('operator' => '=',  'control' => 'select', 'values' => $lang->customer->typeList);
 $config->customer->search['params']['createdBy']     = array('operator' => '=',  'control' => 'select', 'values' => 'users');

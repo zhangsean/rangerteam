@@ -47,8 +47,7 @@ class order extends control
         $this->loadModel('search', 'sys');
         $this->config->order->search['actionURL'] = $this->createLink('order', 'browse', 'mode=bysearch');
         $this->config->order->search['params']['o.customer']['values']   = $this->loadModel('customer')->getPairs('client', true);
-        $this->config->order->search['params']['o.product']['values']    = $this->loadModel('product')->getPairs();
-        $this->config->order->search['params']['o.assignedTo']['values'] = $this->loadModel('user')->getPairs();
+        $this->config->order->search['params']['o.product']['values']    = array('' => '') + $this->loadModel('product')->getPairs();
         $this->search->setSearchParams($this->config->order->search);
 
         $this->view->title        = $this->lang->order->browse;
