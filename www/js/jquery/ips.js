@@ -145,7 +145,7 @@
             for(var i = entries.length - 1; i >= 0; --i)
             {
                 et = entries[i];
-                if(id == et.id) return et;
+                if(id == et.id || id == et.code) return et;
             }
         }
         return null;
