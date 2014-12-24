@@ -39,10 +39,12 @@
         <th><?php echo $lang->article->content;?></th>
         <td colspan='2'><?php echo html::textarea('content', htmlspecialchars($article->content), "rows='20' class='form-control'");?></td>
       </tr>
+      <?php if($type != 'blog'):?>
       <tr>
         <th><?php echo $lang->article->status;?></th>
         <td><?php echo html::select('status', $lang->article->statusList, $article->status, "class='form-control chosen'");?></td>
       </tr>
+      <?php endif;?>
       <tr>
         <th></th><td colspan='2'><?php echo html::submitButton();?></td>
       </tr>

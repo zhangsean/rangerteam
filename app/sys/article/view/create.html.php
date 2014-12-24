@@ -38,7 +38,10 @@
         </tr>
         <tr>
           <th></th>
-          <td colspan='2'><?php echo html::submitButton() . html::commonButton($lang->article->createDraft, "btn btn-default draft") . html::hidden('type', $type);?></td>
+          <td colspan='2'>
+            <?php echo html::submitButton() . html::hidden('type', $type);?> 
+            <?php if($type != 'blog') echo html::commonButton($lang->article->createDraft, "btn btn-default draft");?>
+          </td>
         </tr>
       </table>
     </form>
