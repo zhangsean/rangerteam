@@ -13,7 +13,7 @@
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php if($mode) js::set('mode', $mode);?>
 <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
-<li id='bysearchTab'><a href='#'><i class='icon-search icon'></i>&nbsp;<?php echo $lang->search->common;?></a></li>
+<li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div class='row with-menu page-content'>
   <div class='panel'>
     <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
