@@ -44,7 +44,7 @@ class contact extends control
 
         $customers = $this->loadModel('customer')->getPairs();
 
-        /* build search form. */
+        /* Build search form. */
         $this->loadModel('search', 'sys');
         $this->config->contact->search['actionURL'] = $this->createLink('contact', 'browse', 'mode=bysearch');
         $this->config->contact->search['params']['t2.customer']['values'] = $customers;

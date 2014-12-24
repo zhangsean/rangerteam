@@ -102,4 +102,3 @@ $lang->customer->levelNoteList['E'] = '没有需求或者没有任何成交机�
 $lang->customer->relationList['client']   = '客户';
 $lang->customer->relationList['provider'] = '供应商';
 $lang->customer->relationList['partner']  = '合作伙伴';
-

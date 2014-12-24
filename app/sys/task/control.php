@@ -59,7 +59,7 @@ class task extends control
 
         $this->session->set('taskList', $this->app->getURI(true));
 
-        /* build search form. */
+        /* Build search form. */
         $this->loadModel('search', 'sys');
         $this->config->task->search['actionURL'] = $this->createLink('task', 'browse', "projectID=$projectID&mode=bysearch");
         $this->config->task->search['params']['assignedTo']['values'] = $this->loadModel('project')->getMemberPairs($projectID);

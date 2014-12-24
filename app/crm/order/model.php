@@ -68,7 +68,7 @@ class orderModel extends model
         $thisMonth = date::getThisMonth();
         $thisWeek  = date::getThisWeek();
 
-        /* process search condition. */
+        /* Process search condition. */
         if($this->session->orderQuery == false) $this->session->set('orderQuery', ' 1 = 1');
         $orderQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->orderQuery);
 

@@ -44,6 +44,8 @@ $lang->customer->nextDate      = 'Next Date';
 $lang->customer->selectContact = 'Select Contact';
 
 $lang->customer->browse      = 'Browse Customer';
+$lang->customer->view        = 'View';
+$lang->customer->create      = 'Create Customer';
 $lang->customer->delete      = 'Delete Customer';
 $lang->customer->order       = 'Order List';
 $lang->customer->contact     = 'Contact List';
@@ -52,6 +54,10 @@ $lang->customer->address     = 'Address List';
 $lang->customer->record      = 'Record';
 $lang->customer->assign      = 'Assign Customer';
 $lang->customer->linkContact = 'Create Contact';
+$lang->customer->list        = 'Customer List';
+$lang->customer->edit        = 'Edit';
+$lang->customer->basicInfo   = 'Basic Info';
+$lang->customer->moreInfo    = 'More Info';
 
 $lang->customer->typeList['']            = '';
 $lang->customer->typeList['national']    = 'National';
@@ -96,11 +102,3 @@ $lang->customer->levelNoteList['E'] = 'No deal';
 $lang->customer->relationList['client']   = 'Client';
 $lang->customer->relationList['provider'] = 'Provider';
 $lang->customer->relationList['partner']  = 'Partner';
-
-$lang->customer->create = 'Create Customer';
-$lang->customer->list   = 'Customer List';
-$lang->customer->edit   = 'Edit';
-$lang->customer->view   = 'View';
-
-$lang->customer->basicInfo = 'Basic Info';
-$lang->customer->moreInfo  = 'More Info';

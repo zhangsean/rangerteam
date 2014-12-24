@@ -42,7 +42,7 @@ class announce extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        /* build search form. */
+        /* Build search form. */
         $this->loadModel('search', 'sys');
         $this->config->announce->search['actionURL'] = $this->createLink('announce', 'browse', "type=announce&categoryID=$categoryID&mode=bysearch");
         $this->search->setSearchParams($this->config->announce->search);
