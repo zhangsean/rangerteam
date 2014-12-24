@@ -74,7 +74,7 @@ $(function()
     $('#taskKanban').on('click', '.btn-info-toggle', function()
     {
         $btn = $(this);
-        $btn.find('i').toggleClass('icon-plus').toggleClass('icon-minus');
+        $btn.find('i').toggleClass('icon-angle-down').toggleClass('icon-angle-up');
         $btn.closest('.task').toggleClass('show-info');
     });
 });

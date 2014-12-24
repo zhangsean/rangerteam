@@ -36,15 +36,15 @@
                 <div class='task-heading'>
                   <?php echo html::a($this->createLink('task', 'view', "taskID={$task->id}"), $task->name)?>
                 </div>
+                <?php if(!empty($task->desc)): ?>
+                <div class='text-muted'><?php echo $task->desc?></div>
+                <?php endif; ?>
                 <div class='task-info clearfix'>
                   <div class='pull-left'>
                   <span class="pri pri-<?php echo $task->pri; ?>">P<?php echo ($task->pri == 0 ? '?' : $task->pri);?></span>
                   <?php if($groupBy != 'status'):?>
-                    <span class="task-status text-<?php echo $task->status;?>"><small><?php echo $lang->task->statusList[$task->status];?></small></span>
+                    <span class="task-status text-<?php echo $task->status;?>"><small><?php echo $lang->task->statusList[$task->status];?></small></span>&nbsp;
                   <?php endif;?>
-                  <?php if(!empty($task->desc)): ?>
-                    <button type='button' class='btn btn-link btn-mini' data-toggle='popover' data-original-title="<?php echo $lang->task->desc?>" data-trigger='hover' data-html='true' data-placement='bottom' data-content="<?php echo $task->desc?>"><i class='icon-file-text-alt'></i></button>&nbsp;&nbsp;
-                  <?php endif; ?>
                   <?php if(!empty($task->assignedTo)):?>
                     <span class='task-assignedTo text-muted'><i class='icon-hand-right'></i> <small><?php echo $task->assignedTo;?></small></span>
                   <?php endif;?>
@@ -54,10 +54,10 @@
                   <?php endif;?>
                 </div>
                 <div class='task-actions'>
-                  <button type='button' class='btn btn-mini btn-link btn-info-toggle'><i class='icon-plus'></i></button>
+                  <button type='button' class='btn btn-mini btn-link btn-info-toggle'><i class='icon-angle-down'></i></button>
                   <div class='dropdown'>
                     <button type='button' class='btn btn-mini btn-link dropdown-toggle' data-toggle='dropdown'>
-                      <span class='icon-caret-down'></span>
+                      <span class='icon-ellipsis-vertical'></span>
                     </button>
                     <div class='dropdown-menu pull-right'>
                       <?php echo $this->task->buildOperateMenu($task);?>

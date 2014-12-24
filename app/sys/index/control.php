@@ -48,6 +48,7 @@ class index extends control
             $allEntries .= "entries.push(
             {
                 id:       '$entry->id',
+                code:     '$entry->code',
                 name:     '$entry->name',
                 url:      '$sso',
                 open:     '$entry->open', 
