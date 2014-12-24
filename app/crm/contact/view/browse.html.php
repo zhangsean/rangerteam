@@ -40,7 +40,7 @@
       <td><?php echo isset($lang->contact->genderList[$contact->gender]) ? $lang->contact->genderList[$contact->gender] : '';?></td>
       <td class='text-left'><?php echo $contact->phone . ' ' . $contact->mobile;?></td>
       <td><?php echo html::mailto($contact->email, $contact->email)?></td>
-      <td><a href="tencent://Message/?Uin=<?php echo $contact->qq;?>&websiteName=<?php echo $this->config->company->name?>&Menu=yes" target="_blank"><?php echo $contact->qq;?></a></td>
+      <td><?php echo empty($contact->qq) ? '' : html::a("tencent://Message/?Uin={$contact->qq}&websiteName=RanZhi&Menu=yes", $contact->qq, "target='_blank'")?></td>
       <td class='operate'>
         <?php echo html::a($this->createLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}"), $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt'");?>
         <?php echo html::a($this->createLink('address', 'browse', "objectType=contact&objectID=$contact->id"), $lang->contact->address, "data-toggle='modal'");?>
