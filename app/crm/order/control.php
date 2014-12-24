@@ -46,8 +46,8 @@ class order extends control
         /* Build search form. */
         $this->loadModel('search', 'sys');
         $this->config->order->search['actionURL'] = $this->createLink('order', 'browse', 'mode=bysearch');
-        $this->config->order->search['params']['o.customer']['values']   = $this->loadModel('customer')->getPairs('client', true);
-        $this->config->order->search['params']['o.product']['values']    = array('' => '') + $this->loadModel('product')->getPairs();
+        $this->config->order->search['params']['o.customer']['values'] = $this->loadModel('customer')->getPairs('client', true);
+        $this->config->order->search['params']['o.product']['values']  = array('' => '') + $this->loadModel('product')->getPairs();
         $this->search->setSearchParams($this->config->order->search);
 
         $this->view->title        = $this->lang->order->browse;
@@ -57,8 +57,8 @@ class order extends control
         $this->view->pager        = $pager;
         $this->view->mode         = $mode;
         $this->view->orderBy      = $orderBy;
-        $this->view->currencySign = $this->order->setCurrencySign();
-        $this->view->currencyList = $this->order->setCurrencyList();
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->view->currencyList = $this->common->getCurrencyList();
         if($orders) $this->view->totalAmount  = $this->order->countAmount($orders);
         $this->display();
     }
@@ -85,7 +85,7 @@ class order extends control
         $this->view->products     = array( 0 => '') + $products;
         $this->view->customers    = $this->loadModel('customer')->getPairs('client');
         $this->view->title        = $this->lang->order->create;
-        $this->view->currencyList = $this->order->setCurrencyList();
+        $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
 
         $this->display();
     }
@@ -124,7 +124,7 @@ class order extends control
         $this->view->products     = $this->loadModel('product')->getPairs();
         $this->view->customers    = $this->loadModel('customer')->getPairs('client');
         $this->view->users        = $this->loadModel('user')->getPairs();
-        $this->view->currencyList = $this->order->setCurrencyList();
+        $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
 
         $this->display();
     }
@@ -156,9 +156,9 @@ class order extends control
         $this->view->customer     = $this->loadModel('customer')->getByID($order->customer);
         $this->view->contract     = $this->order->getContract($orderID);
         $this->view->users        = $this->loadModel('user')->getPairs();
-        $this->view->currencyList = $this->order->setCurrencyList();
-        $this->view->currencySign = $this->order->setCurrencySign();
-        $this->view->preAndNext   = $this->loadModel('common', 'sys')->getPreAndNextObject('order', $orderID);
+        $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
+        $this->view->currencySign = $this->common->getCurrencySign();
+        $this->view->preAndNext   = $this->common->getPreAndNextObject('order', $orderID);
     
         $this->display();
     }

@@ -163,8 +163,8 @@ class customer extends control
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->areaList     = $this->loadModel('tree')->getPairs('', 'area');
         $this->view->industryList = $this->tree->getPairs('', 'industry');
-        $this->view->currencySign = $this->loadModel('order')->setCurrencySign();
-        $this->view->preAndNext   = $this->loadModel('common', 'sys')->getPreAndNextObject('customer', $customerID);
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->view->preAndNext   = $this->common->getPreAndNextObject('customer', $customerID);
         $this->display();
     }
 

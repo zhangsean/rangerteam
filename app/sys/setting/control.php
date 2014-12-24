@@ -30,7 +30,7 @@ class setting extends control
 
         if(!empty($_POST))
         {
-            if($module == 'order' and $field == 'currencyList')
+            if($module == 'common' and $field == 'currencyList')
             {
                 $setting = fixer::input('post')->join('currency', ',')->setDefault('currency', '')->get();
                 $this->setting->setItems('system.sys.setting', $setting);

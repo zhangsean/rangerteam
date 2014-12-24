@@ -572,7 +572,7 @@ class tradeModel extends model
     public function countMoney($trades)
     {
         $totalMoney  = array();
-        $currencyList = $this->loadModel('order', 'crm')->setCurrencyList();
+        $currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
         foreach($currencyList as $key => $currency)
         {
             $totalMoney[$key]['in']  = 0;

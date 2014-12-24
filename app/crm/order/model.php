@@ -393,40 +393,6 @@ class orderModel extends model
     }
 
     /**
-     * Set currency list.
-     * 
-     * @access public
-     * @return array
-     */
-    public function SetCurrencyList()
-    {
-        $currencyList = array();
-        foreach($this->lang->order->currencyList as $key => $currency)
-        {
-            if(strpos($this->config->setting->currency, $key) === false) continue;
-            $currencyList[$key] = $currency;
-        }
-        return $currencyList;
-    }
-
-    /**
-     * Set currency sign.
-     * 
-     * @access public
-     * @return array
-     */
-    public function setCurrencySign()
-    {
-        $currencySign = array();
-        foreach($this->lang->currencySymbols as $key => $sign)
-        {
-            if(strpos($this->config->setting->currency, $key) === false) continue;
-            $currencySign[$key] = $sign;
-        }
-        return $currencySign;
-    }  
-
-    /**
      * Count amount.
      * 
      * @param  array  $orders 
@@ -437,8 +403,8 @@ class orderModel extends model
     public function countAmount($orders)
     {
         $totalAmount  = array();
-        $currencyList = $this->loadModel('order')->setCurrencyList();
-        $currencySign = $this->loadModel('order')->setCurrencySign();
+        $currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
+        $currencySign = $this->common->getCurrencySign();
 
         foreach($orders as $order)
         {

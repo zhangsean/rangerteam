@@ -13,11 +13,11 @@
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <form method='post' id='ajaxForm' class='form-inline'>
   <div class='panel'>
-    <?php if($module == 'order' and $field == 'currencyList'):?>
+    <?php if($module == 'common' and $field == 'currencyList'):?>
     <div class='panel-body'>
       <table class='table table-form table-condensed table-currency'>
       <tr>
-        <td><?php echo html::checkbox('currency', $lang->order->currencyList, isset($this->config->setting->currency) ? $this->config->setting->currency : '');?></td>
+        <td><?php echo html::checkbox('currency', $lang->currencyList, isset($this->config->setting->currency) ? $this->config->setting->currency : '');?></td>
       </tr>
       <tr><td><?php echo html::submitButton();?></td></tr>
       </table>

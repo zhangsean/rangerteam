@@ -277,6 +277,25 @@ $lang->datepicker->dayNames     = array('日', '一', '二', '三', '四', '五'
 $lang->datepicker->abbrDayNames = array('日', '一', '二', '三', '四', '五', '六');
 $lang->datepicker->monthNames   = array('一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月');
 
+/* Set currency items. */
+$lang->currencyList['rmb']  = '人民币';
+$lang->currencyList['usd']  = '美元';
+$lang->currencyList['hkd']  = '港元';
+$lang->currencyList['twd']  = '台元';
+$lang->currencyList['euro'] = '欧元';
+$lang->currencyList['dem']  = '马克';
+$lang->currencyList['chf']  = '瑞士法郎';
+$lang->currencyList['frf']  = '法国法郎';
+$lang->currencyList['gbp']  = '英镑';
+$lang->currencyList['nlg']  = '荷兰盾';
+$lang->currencyList['cad']  = '加拿大元';
+$lang->currencyList['sur']  = '卢布';
+$lang->currencyList['inr']  = '卢比';
+$lang->currencyList['aud']  = '澳大利亚元';
+$lang->currencyList['nzd']  = '新西兰元';
+$lang->currencyList['thb']  = '泰国铢';
+$lang->currencyList['sgd']  = '新加坡元';
+
 /* Currency symbols setting. */
 $lang->currencySymbols['rmb']  = '￥';
 $lang->currencySymbols['usd']  = '$';

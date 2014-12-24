@@ -62,24 +62,6 @@ $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '失败';
 $lang->order->closedReasonList['postponed'] = '延期';
 
-$lang->order->currencyList['rmb']  = '人民币';
-$lang->order->currencyList['usd']  = '美元';
-$lang->order->currencyList['hkd']  = '港元';
-$lang->order->currencyList['twd']  = '台元';
-$lang->order->currencyList['euro'] = '欧元';
-$lang->order->currencyList['dem']  = '马克';
-$lang->order->currencyList['chf']  = '瑞士法郎';
-$lang->order->currencyList['frf']  = '法国法郎';
-$lang->order->currencyList['gbp']  = '英镑';
-$lang->order->currencyList['nlg']  = '荷兰盾';
-$lang->order->currencyList['cad']  = '加拿大元';
-$lang->order->currencyList['sur']  = '卢布';
-$lang->order->currencyList['inr']  = '卢比';
-$lang->order->currencyList['aud']  = '澳大利亚元';
-$lang->order->currencyList['nzd']  = '新西兰元';
-$lang->order->currencyList['thb']  = '泰国铢';
-$lang->order->currencyList['sgd']  = '新加坡元';
-
 $lang->order->titleLBL    = "%s购买%s";
 $lang->order->basicInfo   = "基本信息";
 $lang->order->lifetime    = "订单的一生";

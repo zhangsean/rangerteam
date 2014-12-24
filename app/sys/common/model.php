@@ -907,4 +907,38 @@ class commonModel extends model
         echo html::a(helper::createLink($module, $method, $vars, '', $onlyBody), $label, $misc);
         return true;
     }
+
+    /**
+     * Get currency list.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getCurrencyList()
+    {
+        $currencyList = array();
+        foreach($this->lang->currencyList as $key => $currency)
+        {
+            if(strpos($this->config->setting->currency, $key) === false) continue;
+            $currencyList[$key] = $currency;
+        }
+        return $currencyList;
+    }
+
+    /**
+     * Get currency sign.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getCurrencySign()
+    {
+        $currencySign = array();
+        foreach($this->lang->currencySymbols as $key => $sign)
+        {
+            if(strpos($this->config->setting->currency, $key) === false) continue;
+            $currencySign[$key] = $sign;
+        }
+        return $currencySign;
+    }  
 }

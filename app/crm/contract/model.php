@@ -546,8 +546,8 @@ class contractModel extends model
     public function countAmount($contracts)
     {
         $totalAmount  = array();
-        $currencyList = $this->loadModel('order')->setCurrencyList();
-        $currencySign = $this->loadModel('order')->setCurrencySign();
+        $currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
+        $currencySign = $this->common->getCurrencySign();
         $totalReturn  = $this->dao->select('*')->from(TABLE_PLAN)->fetchGroup('contract');
 
         foreach($contracts as $contract)

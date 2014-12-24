@@ -43,7 +43,7 @@ class depositor extends control
         $this->view->depositors   = $this->depositor->getList($orderBy, $pager);
         $this->view->pager        = $pager;
         $this->view->orderBy      = $orderBy;
-        $this->view->currencyList = $this->loadModel('order', 'crm')->setCurrencyList();
+        $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->display();
     }   
 
@@ -66,7 +66,7 @@ class depositor extends control
         }
 
         $this->view->title        = $this->lang->depositor->create;
-        $this->view->currencyList = $this->loadModel('order', 'crm')->setCurrencyList();
+        $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->display();
     }
 
@@ -95,7 +95,7 @@ class depositor extends control
 
         $this->view->title        = $this->lang->depositor->edit;
         $this->view->depositor    = $this->depositor->getByID($depositorID);
-        $this->view->currencyList = $this->loadModel('order', 'crm')->setCurrencyList();
+        $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
 
         $this->display();
     }
@@ -173,7 +173,7 @@ class depositor extends control
         $this->view->selected      = $selected;
         $this->view->depositorList = $this->depositor->getPairs();
         $this->view->dateOptions   = (array) $this->loadModel('balance')->getDateOptions();
-        $this->view->currencyList  = $this->loadModel('order', 'crm')->setCurrencyList();
+        $this->view->currencyList  = $this->loadModel('common', 'sys')->getCurrencyList();
 
         $this->display();
     } 

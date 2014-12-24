@@ -62,24 +62,6 @@ $lang->order->closedReasonList['payed']     = 'Payed';
 $lang->order->closedReasonList['failed']    = 'Failed';
 $lang->order->closedReasonList['postponed'] = 'Postponed';
 
-$lang->order->currencyList['rmb']  = 'Renminbi Yuan';
-$lang->order->currencyList['usd']  = 'U.S.Dollar';
-$lang->order->currencyList['hkd']  = 'HongKong Dollars';
-$lang->order->currencyList['twd']  = 'New Taiwan Dollar';
-$lang->order->currencyList['euro'] = 'Euro';
-$lang->order->currencyList['dem']  = 'Deutsche Mark';
-$lang->order->currencyList['chf']  = 'Swiss Franc';
-$lang->order->currencyList['frf']  = 'French Franc';
-$lang->order->currencyList['gbp']  = 'Pound';
-$lang->order->currencyList['nlg']  = 'Florin';
-$lang->order->currencyList['cad']  = 'Canadian Dollar';
-$lang->order->currencyList['sur']  = 'Rouble';
-$lang->order->currencyList['inr']  = 'Indian Rupee';
-$lang->order->currencyList['aud']  = 'Australian Dollar';
-$lang->order->currencyList['nzd']  = 'New Zealand Dollar';
-$lang->order->currencyList['thb']  = 'Thai Baht';
-$lang->order->currencyList['sgd']  = 'Ssingapore Dollar';
-
 $lang->order->titleLBL    = "%s buy %s";
 $lang->order->basicInfo   = "Basic";
 $lang->order->lifetime    = "Lifetime";

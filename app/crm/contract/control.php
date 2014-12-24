@@ -72,8 +72,8 @@ class contract extends control
         $this->view->pager        = $pager;
         $this->view->mode         = $mode;
         $this->view->orderBy      = $orderBy;
-        $this->view->currencySign = $this->loadModel('order', 'crm')->setCurrencySign();
-        $this->view->currencyList = $this->order->setCurrencyList();
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->view->currencyList = $this->common->getCurrencyList();
         if($contracts) $this->view->totalAmount = $this->contract->countAmount($contracts);
 
         $this->display();
@@ -111,7 +111,7 @@ class contract extends control
         $this->view->orderID      = $orderID;
         $this->view->customers    = $this->loadModel('customer')->getPairs('client');
         $this->view->users        = $this->loadModel('user')->getPairs();
-        $this->view->currencyList = $this->loadModel('order')->setCurrencyList();
+        $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->display();
     }
 
@@ -163,7 +163,7 @@ class contract extends control
         $this->view->customers      = $this->loadModel('customer')->getPairs('client');
         $this->view->contacts       = $this->loadModel('contact')->getPairs($contract->customer);
         $this->view->users          = $this->loadModel('user')->getPairs();
-        $this->view->currencyList   = $this->loadModel('order')->setCurrencyList();
+        $this->view->currencyList   = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->display();
     }
 
@@ -213,7 +213,7 @@ class contract extends control
     {
         $this->loadModel('trade', 'cash');
         $contract     = $this->contract->getByID($contractID);
-        $currencySign = $this->loadModel('order')->setCurrencySign();
+        $currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         if(!empty($_POST))
         {
             $this->contract->receive($contractID);
@@ -330,8 +330,8 @@ class contract extends control
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->contract     = $contract;
         $this->view->actions      = $this->loadModel('action')->getList('contract', $contractID);
-        $this->view->currencySign = $this->loadModel('order')->setCurrencySign();
-        $this->view->preAndNext   = $this->loadModel('common', 'sys')->getPreAndNextObject('contract', $contractID);
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->view->preAndNext   = $this->common->getPreAndNextObject('contract', $contractID);
 
         $this->display();
     }
