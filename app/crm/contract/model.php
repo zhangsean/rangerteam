@@ -276,6 +276,7 @@ class contractModel extends model
             ->add('contract', $contractID)
             ->setDefault('deliveredBy', $this->app->user->account)
             ->setDefault('deliveredDate', $now)
+            ->stripTags('comment', $this->config->allowedTags->admin)
             ->get();
 
         $this->dao->insert(TABLE_DELIVERY)->data($data, $skip = 'uid, handlers, finish')->autoCheck()->exec();

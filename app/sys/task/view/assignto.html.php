@@ -17,7 +17,7 @@
   <table class='table table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->task->assignedTo;?></th>
-      <td><?php echo html::select('assignedTo', $users, $task->assignedTo ? $task->assignedTo : '', "class='form-control chosen'");?></td>
+      <td><?php echo html::select('assignedTo', $users, $task->assignedTo, "class='form-control chosen'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->task->left;?></th>
