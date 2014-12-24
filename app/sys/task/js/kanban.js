@@ -66,7 +66,7 @@ $(function()
 
     resetBoards();
 
-    $(document).on('hidden.bs.modal', '#ajaxModal', function()
+    $(document).on('hidden.zui.modal', '#ajaxModal', function()
     {
         reloadDataTable();
     });
