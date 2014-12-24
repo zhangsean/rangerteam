@@ -22,6 +22,24 @@ $(document).ready(function()
     /* Reload modal. */
     $(document).on('click', '.reloadModal', function(){$.reloadAjaxModal()});
 
+    /* Support iframe modal shortcut */
+    $(document).on('click', 'a.iframe', function(e)
+    {
+        var $this = $(this);
+        if (!$this.data('zui.modaltrigger'))
+        {
+            $this.modalTrigger(
+            {
+                show: true
+            });
+        }
+        else
+        {
+            $this.trigger('.toggle.' + 'zui.modaltrigger');
+        }
+        e.preventDefault();
+    });
+
     setMenu();
     initSearch();
 });
