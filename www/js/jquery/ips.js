@@ -137,7 +137,7 @@
         entries.sort(function(a, b){return a.order - b.order;});
     }
 
-    function getEntry(id)
+    function getEntry(id, exactMatch)
     {
         if(id && entries)
         {
@@ -145,7 +145,7 @@
             for(var i = entries.length - 1; i >= 0; --i)
             {
                 et = entries[i];
-                if(id == et.id || id == et.code) return et;
+                if(id == et.id || (!exactMatch && id == et.code)) return et;
             }
         }
         return null;
@@ -549,11 +549,11 @@
     };
 
     /* Open a entry window */
-    windowsManager.prototype.openEntry = function(et, url, go2index)
+    windowsManager.prototype.openEntry = function(et, url, go2index, exactMatch)
     {
         if(typeof et == 'string')
         {
-            et = getEntry(et);
+            et = getEntry(et, exactMatch);
         }
 
         if(!et)
@@ -1518,9 +1518,9 @@
     }
 
     /* Open an entry by given id and url */
-    function openEntry(id, url)
+    function openEntry(id, url, exactMatch)
     {
-        windows.openEntry(id, url);
+        windows.openEntry(id, url, null, exactMatch);
     }
 
     /* 
