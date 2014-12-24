@@ -84,17 +84,17 @@ js::import($jsRoot . 'jquery/ips.js');
   <div id='allapps' class='fullscreen'>
     <header>
       <div class='row'>
-        <div class='col-md-4'>
+        <div class='col-xs-4'>
           <h4><i class='icon-th-large'></i> <?php echo $lang->index->allEntries?> &nbsp;<small class='muted'><?php echo $lang->index->countEntries?></small></h4>
         </div>
-        <div class='col-md-4'>
+        <div class='col-xs-4'>
           <div class='search-input'>
             <i class='icon-search icon'></i>
             <input id='search' type='text' class='form-control-pure form-control'>
             <button id='cancelSearch' class='btn btn-pure btn-mini'><i class='icon-remove'></i></button>
           </div>
         </div>
-        <div class='col-md-4 text-right'>
+        <div class='col-xs-4 text-right'>
           <?php echo html::a($this->createLink('entry', 'create'), "<i class='icon-plus'></i> {$lang->index->addEntry}", "data-id='superadmin' class='app-btn btn btn-pure'")?>
         </div>
       </div>
