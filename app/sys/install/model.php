@@ -347,6 +347,7 @@ EOT;
         $entry->control  = 'simple';
         $entry->size     = 'max';
         $entry->position = 'default';
+        $entry->order    = 10;
 
         $entry->buildin     = 1;
         $entry->integration = 1;
@@ -361,6 +362,7 @@ EOT;
         $entry->key   = '438d85f2c2b04372662c63ebfb1c4c2f';
         $entry->logo  = 'theme/default/images/ips/app-cash.png';
         $entry->login = '../cash';
+        $entry->order = 20;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
 
@@ -371,6 +373,7 @@ EOT;
         $entry->key   = '1a673c4c3c85fadcf0333e0a4596d220';
         $entry->logo  = 'theme/default/images/ips/app-oa.png';
         $entry->login = '../oa';
+        $entry->order = 30;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
 
@@ -381,6 +384,7 @@ EOT;
         $entry->key   = '6c46d9fe76a1afa1cd61f946f1072d1e';
         $entry->logo  = 'theme/default/images/ips/app-team.png';
         $entry->login = '../team';
+        $entry->order = 40;
 
         $this->dao->insert(TABLE_ENTRY)->data($entry)->exec();
     }

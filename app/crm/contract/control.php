@@ -107,6 +107,7 @@ class contract extends control
             $this->view->orders       = $this->order->getList($mode = 'query', "customer={$customerID} and o.status = 'normal'");
         }
 
+        unset($this->lang->contract->menu);
         $this->view->title        = $this->lang->contract->create;
         $this->view->orderID      = $orderID;
         $this->view->customers    = $this->loadModel('customer')->getPairs('client');

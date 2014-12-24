@@ -90,6 +90,7 @@ class customer extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'), 'customerID' => $customerID));
         }
 
+        unset($this->lang->customer->menu);
         $this->view->title     = $this->lang->customer->create;
         $this->view->sizeList  = $this->customer->combineSizeList();
         $this->view->levelList = $this->customer->combineLevelList();

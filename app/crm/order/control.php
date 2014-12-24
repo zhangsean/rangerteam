@@ -81,6 +81,7 @@ class order extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
+        unset($this->lang->order->menu);
         $products = $this->loadModel('product')->getPairs();
         $this->view->products     = array( 0 => '') + $products;
         $this->view->customers    = $this->loadModel('customer')->getPairs('client');

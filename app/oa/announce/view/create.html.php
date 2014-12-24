@@ -32,7 +32,7 @@
         </tr>
         <tr>
           <th></th>
-          <td colspan='2'><?php echo html::submitButton() . html::hidden('type', 'announce');?></td>
+          <td colspan='2'><?php echo html::submitButton() . html::hidden('type', 'announce') . '&nbsp;&nbsp;' . html::backButton();?></td>
         </tr>
       </table>
     </form>

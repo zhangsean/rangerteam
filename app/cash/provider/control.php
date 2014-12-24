@@ -71,6 +71,7 @@ class provider extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'), 'providerID' => $providerID));
         }
 
+        unset($this->lang->provider->menu);
         $this->view->title      = $this->lang->provider->create;
         $this->view->areas      = $this->loadModel('tree')->getOptionMenu('area');
         $this->view->industries = $this->tree->getOptionMenu('industry');

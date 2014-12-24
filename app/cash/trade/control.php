@@ -87,6 +87,7 @@ class trade extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
+        unset($this->lang->trade->menu);
         $this->view->title         = $this->lang->trade->{$type};
         $this->view->type          = $type;
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
@@ -201,6 +202,7 @@ class trade extends control
             $this->send($result);
         }
 
+        unset($this->lang->trade->menu);
         $this->view->title         = $this->lang->trade->transfer;
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);

@@ -86,6 +86,7 @@ class announce extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('announce')));
         }
 
+        unset($this->lang->announce->menu);
         $this->view->title           = $this->lang->announce->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $this->loadModel('tree')->getOptionMenu('announce', 0, $removeRoot = true);

@@ -83,6 +83,7 @@ class contact extends control
 
         $this->app->loadLang('resume');
 
+        unset($this->lang->contact->menu);
         $this->view->title     = $this->lang->contact->create;
         $this->view->customer  = $customer;
         $this->view->customers = $this->loadModel('customer')->getPairs('client');
