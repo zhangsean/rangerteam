@@ -80,9 +80,10 @@ $lang->order->currencyList['nzd']  = '新西兰元';
 $lang->order->currencyList['thb']  = '泰国铢';
 $lang->order->currencyList['sgd']  = '新加坡元';
 
-$lang->order->titleLBL  = "%s购买%s";
-$lang->order->basicInfo = "基本信息";
-$lang->order->lifetime  = "订单的一生";
+$lang->order->titleLBL    = "%s购买%s";
+$lang->order->basicInfo   = "基本信息";
+$lang->order->lifetime    = "订单的一生";
+$lang->order->selectTitle = "%s购买%s (%s)";
 
 $lang->order->totalAmount   = '本页订单计划金额：%s，成交金额：%s；';
 $lang->order->infoBuy       = "%s 购买 %s。";

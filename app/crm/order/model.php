@@ -101,7 +101,7 @@ class orderModel extends model
      * @access public
      * @return array
      */
-    public function getListByID($idList)
+    public function getByIdList($idList)
     {
         $orders = $this->dao->select('o.*, c.name as customerName, p.name as productName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
@@ -162,7 +162,7 @@ class orderModel extends model
 
         foreach($orders as $order)
         {
-           $order->title = sprintf($this->lang->order->titleLBL, $customers[$order->customer], $products[$order->product]); 
+           $order->title = sprintf($this->lang->order->selectTitle, $customers[$order->customer], $products[$order->product], date('Y-m-d', strtotime($order->createdDate))); 
         }
 
         return array('0' => '') + $orders;

@@ -32,7 +32,7 @@
         </tr>
         <tr>
           <th></th>
-          <td colspan='2'><?php echo html::submitButton() . html::commonButton($lang->article->createDraft, "btn btn-default draft") . html::hidden('type', 'announce');?></td>
+          <td colspan='2'><?php echo html::submitButton() . html::hidden('type', 'announce');?></td>
         </tr>
       </table>
     </form>

@@ -158,7 +158,7 @@ class contract extends control
 
         $this->view->title          = $this->lang->contract->edit;
         $this->view->contract       = $contract; 
-        $this->view->contractOrders = $this->loadModel('order')->getListByID($contract->order);
+        $this->view->contractOrders = $this->loadModel('order')->getByIdList($contract->order);
         $this->view->orders         = array('' => '') + $this->order->getList($mode = 'query', "customer={$contract->customer}");
         $this->view->customers      = $this->loadModel('customer')->getPairs('client');
         $this->view->contacts       = $this->loadModel('contact')->getPairs($contract->customer);
@@ -323,7 +323,7 @@ class contract extends control
         if(!$this->session->orderList) $this->session->set('orderList', $uri);
 
         $this->view->title        = $this->lang->contract->view;
-        $this->view->orders       = $this->loadModel('order')->getListById($contract->order);
+        $this->view->orders       = $this->loadModel('order')->getByIdList($contract->order);
         $this->view->customers    = $this->loadModel('customer')->getPairs('client');
         $this->view->contacts     = $this->loadModel('contact')->getPairs($contract->customer);
         $this->view->products     = $this->loadModel('product')->getPairs();

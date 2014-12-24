@@ -194,7 +194,7 @@ class contractModel extends model
         {
             if($data->order)
             {
-                $oldOrders = $this->loadModel('order')->getListByID($data->order);
+                $oldOrders = $this->loadModel('order')->getByIdList($data->order);
                 $real = array();
                 foreach($data->order as $key => $orderID) $real[$key] = $oldOrders[$orderID]->real;
 

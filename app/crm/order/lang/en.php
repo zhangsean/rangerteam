@@ -80,9 +80,10 @@ $lang->order->currencyList['nzd']  = 'New Zealand Dollar';
 $lang->order->currencyList['thb']  = 'Thai Baht';
 $lang->order->currencyList['sgd']  = 'Ssingapore Dollar';
 
-$lang->order->titleLBL  = "%s buy %s";
-$lang->order->basicInfo = "Basic";
-$lang->order->lifetime  = "Lifetime";
+$lang->order->titleLBL    = "%s buy %s";
+$lang->order->basicInfo   = "Basic";
+$lang->order->lifetime    = "Lifetime";
+$lang->order->selectTitle = "%s buy %s (%s)";
 
 $lang->order->totalAmount   = 'The plan amount:%s,real amount:%s in this page;';
 $lang->order->infoBuy       = "%s buy %s.";
