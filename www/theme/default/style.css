@@ -81,6 +81,8 @@ body {background: #fff;font-size:13px;}
 .mgb-10 {margin-bottom: 10px;}
 .mg-0 {margin: 0 !important;}
 
+.pd-0{padding: 0 !important;}
+
 /*-----------------------FORM SETTING----------------------------*/
 .text-1 {width: 90%}
 td>.text-1,td>.area-1{padding-left:2px;padding-right: 2px}

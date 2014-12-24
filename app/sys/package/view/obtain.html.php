@@ -14,6 +14,19 @@
 <?php include '../../common/view/treeview.html.php';?>
 <div class='row'>
 <div class='col-md-2'>
+  <form id='searchForm' class='side-search mgb-20' method='post' action='<?php echo inlink('obtain', 'type=bySearch');?>'>
+    <div class="input-group">
+      <?php echo html::input('key', $this->post->key, "class='form-control' placeholder='{$lang->package->bySearch}'");?>
+      <span class="input-group-btn">
+        <button class='btn btn-submit' id='submit' type='submit'><i class='icon-search'></i></button>
+      </span>
+    </div>
+  </form>
+  <div class="list-group">
+    <?php echo html::a(inlink('obtain', 'type=byUpdatedTime'), $lang->package->byUpdatedTime, "id='byupdatedtime' class='list-group-item'");?>
+    <?php echo html::a(inlink('obtain', 'type=byAddedTime'),   $lang->package->byAddedTime,   "id='byaddedtime' class='list-group-item'");?>
+    <?php echo html::a(inlink('obtain', 'type=byDownloads'),   $lang->package->byDownloads,   "id='bydownloads' class='list-group-item'");?>
+  </div>
   <div class='panel panel-sm'>
     <div class='panel-heading'><?php echo $lang->package->byCategory;?></div>
     <div class='panel-body'>
@@ -22,29 +35,6 @@
   </div>
 </div>
 <div class='col-md-10'>
-  <table class='table table-borderless mg-0'>
-    <tr>
-      <td>
-        <ul class="nav nav-pills">
-          <?php
-          echo '<li>' . html::a(inlink('obtain', 'type=byUpdatedTime'), $lang->package->byUpdatedTime, "id='byupdatedtime'") . '</li>';
-          echo '<li>' . html::a(inlink('obtain', 'type=byAddedTime'),   $lang->package->byAddedTime,   "id='byaddedtime'") . '</li>';
-          echo '<li>' . html::a(inlink('obtain', 'type=byDownloads'),   $lang->package->byDownloads,   "id='bydownloads'") . '</li>';
-          ?>
-        </ul>
-      </td>
-      <td>
-        <form id='searchForm' class='side-search mgb-20' method='post' action='<?php echo inlink('obtain', 'type=bySearch');?>'>
-          <div class="input-group">
-            <?php echo html::input('key', $this->post->key, "class='form-control' placeholder='{$lang->package->bySearch}'");?>
-            <span class="input-group-btn">
-              <?php echo html::submitButton($lang->package->search, "btn btn-primary"); ?>
-            </span>
-          </div>
-        </form>
-      </td>
-    </tr>
-  </table>
   <?php if($packages):?>
   <div class='cards pd-0 mg-0'>
   <?php foreach($packages as $package):?>
