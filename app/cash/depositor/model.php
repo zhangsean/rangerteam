@@ -67,9 +67,8 @@ class depositorModel extends model
      */
     public function getTradesAmount()
     {
-        return $this->dao->select('depositor, count(*) as amount')->from(TABLE_TRADE)->fetchPairs();
+        return $this->dao->select('depositor, count(*) as amount')->from(TABLE_TRADE)->groupBy('depositor')->fetchPairs();
     }
-
 
     /**
      * Create a depositor.
