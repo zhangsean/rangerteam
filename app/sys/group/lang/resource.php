@@ -458,9 +458,15 @@ $lang->resource->setting = new stdclass();
 /* Search. */
 $lang->resource->search = new stdclass();
 
-$lang->resource->search->buildForm = 'buildForm';
+$lang->resource->search->buildForm  = 'buildForm';
+$lang->resource->search->buildQuery = 'buildQuery';
+$lang->resource->search->saveQuery  = 'saveQuery';
+$lang->resource->search->deleteQuery  = 'deleteQuery';
 
 $lang->search->methodOrder[10] = 'buildForm';
+$lang->search->methodOrder[15] = 'buildQuery';
+$lang->search->methodOrder[20] = 'saveQuery';
+$lang->search->methodOrder[25] = 'deleteQuery';
 
 /* Every version of new privilege. */
 $lang->changelog = array();

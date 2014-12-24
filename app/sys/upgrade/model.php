@@ -58,6 +58,7 @@ class upgradeModel extends model
                 $this->upgradeEntryLogo();
                 $this->upgradeReturnRecords();
                 $this->upgradeDeliveryRecords();
+                $this->addSearchPriv();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -510,6 +511,36 @@ class upgradeModel extends model
             $data->deliveredDate = $contract->deliveredDate;
 
             $this->dao->insert(TABLE_DELIVERY)->data($data)->autoCheck()->exec();
+        }
+
+        return !dao::isError();
+    }
+
+    /**
+     * Add search priv when upgrade 1.5.beta.
+     * 
+     * @access public
+     * @return void
+     */
+    public function addSearchPriv()
+    {
+        $groups = $this->dao->select('id')->from(TABLE_GROUP)->fetchAll('id');
+        foreach($groups as $group)
+        {
+            $priv = new stdclass();
+            $priv->group  = $group->id;
+            $priv->module = 'search';
+            $priv->method = 'buildForm';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+
+            $priv->method = 'buildQuery';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+
+            $priv->method = 'saveQuery';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+
+            $priv->method = 'deleteQuery';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
         }
 
         return !dao::isError();
