@@ -122,12 +122,12 @@ class customer extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "customerID=$customerID")));
         }
 
-        $this->view->title     = $this->lang->customer->edit;
-        $this->view->customer  = $customer;
-        $this->view->area      = $this->loadModel('tree')->getOptionMenu('area');
-        $this->view->industry  = $this->tree->getOptionMenu('industry');
-        $this->view->sizeList  = $this->customer->combineSizeList();
-        $this->view->levelList = $this->customer->combineLevelList();
+        $this->view->title        = $this->lang->customer->edit;
+        $this->view->customer     = $customer;
+        $this->view->areaList     = $this->loadModel('tree')->getOptionMenu('area');
+        $this->view->industryList = $this->tree->getOptionMenu('industry');
+        $this->view->sizeList     = $this->customer->combineSizeList();
+        $this->view->levelList    = $this->customer->combineLevelList();
 
         $this->display();
     }
@@ -161,8 +161,8 @@ class customer extends control
         $this->view->actions      = $this->loadModel('action')->getList('customer', $customerID);
         $this->view->products     = $this->loadModel('product')->getPairs();
         $this->view->users        = $this->loadModel('user')->getPairs();
-        $this->view->area         = $this->loadModel('tree')->getPairs('', 'area');
-        $this->view->industry     = $this->tree->getPairs('', 'industry');
+        $this->view->areaList     = $this->loadModel('tree')->getPairs('', 'area');
+        $this->view->industryList = $this->tree->getPairs('', 'industry');
         $this->view->currencySign = $this->loadModel('order')->setCurrencySign();
         $this->view->preAndNext   = $this->loadModel('common', 'sys')->getPreAndNextObject('customer', $customerID);
         $this->display();

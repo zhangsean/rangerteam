@@ -70,11 +70,11 @@
           </tr>
           <tr>
             <th><?php echo $lang->customer->industry;?></th>
-            <td><?php if($customer->industry) echo $industry[$customer->industry];?></td>
+            <td><?php if($customer->industry) echo $industryList[$customer->industry];?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->area;?></th>
-            <td><?php if($customer->area) echo $area[$customer->area];?></td>
+            <td><?php if($customer->area) echo $areaList[$customer->area];?></td>
           </tr>
           <tr>
             <th><?php echo $lang->customer->weibo;?></th>

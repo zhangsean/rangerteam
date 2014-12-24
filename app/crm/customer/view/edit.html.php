@@ -74,11 +74,11 @@
          </tr>
          <tr>
            <th><?php echo $lang->customer->industry;?></th>
-           <td><?php echo html::select('industry', $industry, $customer->industry, "class='form-control chosen'");?></td>
+           <td><?php echo html::select('industry', $industryList, $customer->industry, "class='form-control chosen'");?></td>
          </tr>
          <tr>
            <th><?php echo $lang->customer->area;?></th>
-           <td><?php echo html::select('area', $area,  $customer->area, "class='form-control chosen'");?></td>
+           <td><?php echo html::select('area', $areaList,  $customer->area, "class='form-control chosen'");?></td>
          </tr>
          <tr>
            <th><?php echo $lang->customer->weibo;?></th>
