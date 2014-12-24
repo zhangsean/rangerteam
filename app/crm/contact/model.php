@@ -20,7 +20,7 @@ class contactModel extends model
      */
     public function getByID($id)
     {
-        $customerIdList = $this->loadModel('customer')->getMine();
+        $customerIdList = $this->loadModel('customer', 'crm')->getMine();
         if(empty($customerIdList)) return null;
 
         return $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join')->from(TABLE_CONTACT)->alias('t1')
