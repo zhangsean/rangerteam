@@ -36,9 +36,9 @@ $config->contract->search['fields']['return']     = $lang->contract->return;
 $config->contract->search['fields']['delivery']   = $lang->contract->delivery;
 
 $config->contract->search['params']['id']         = array('operator' => '=', 'control' => 'input', 'values' => '');
-$config->contract->search['params']['name']       = array('operator' => 'include',  'control' => 'input',  'values' => '');
+$config->contract->search['params']['name']       = array('operator' => 'include', 'control' => 'input', 'values' => '');
 $config->contract->search['params']['amount']     = array('operator' => '>=', 'control' => 'input',  'values' => '');
-$config->contract->search['params']['signedDate'] = array('operator' => '=',  'control' => 'input',  'values' => '', 'class' => 'date');
+$config->contract->search['params']['signedDate'] = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->contract->search['params']['status']     = array('operator' => '=',  'control' => 'select', 'values' => $lang->contract->statusList);
 $config->contract->search['params']['return']     = array('operator' => '=',  'control' => 'select', 'values' => $lang->contract->returnList);
 $config->contract->search['params']['delivery']   = array('operator' => '=',  'control' => 'select', 'values' => $lang->contract->deliveryList);
