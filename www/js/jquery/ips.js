@@ -975,7 +975,7 @@
                 var iframe$ = window.frames[fName].$;
                 if(iframe$)
                 {
-                    iframe$.extend({refreshDesktop: $.refreshDesktop});
+                    iframe$.extend({refreshDesktop: $.refreshDesktop, openEntry: $.openEntry});
                 }
             }
             catch(e){}
