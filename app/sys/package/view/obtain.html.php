@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../common/view/treeview.html.php';?>
 <div class='row'>
-<div class='col-md-3'>
+<div class='col-md-2'>
   <div class='panel panel-sm'>
     <div class='panel-heading'><?php echo $lang->package->byCategory;?></div>
     <div class='panel-body'>
@@ -21,19 +21,9 @@
     </div>
   </div>
 </div>
-<div class='col-md-9'>
-  <table class='table table-borderless'>
+<div class='col-md-10'>
+  <table class='table table-borderless mg-0'>
     <tr>
-      <td class='w-p60'>
-        <form id='searchForm' class='side-search mgb-20' method='post' action='<?php echo inlink('obtain', 'type=bySearch');?>'>
-          <div class="input-group">
-            <?php echo html::input('key', $this->post->key, "class='form-control' placeholder='{$lang->package->bySearch}'");?>
-            <span class="input-group-btn">
-              <?php echo html::submitButton($lang->search,"btn btn-primary"); ?>
-            </span>
-          </div>
-        </form>
-      </td>
       <td>
         <ul class="nav nav-pills">
           <?php
@@ -42,6 +32,16 @@
           echo '<li>' . html::a(inlink('obtain', 'type=byDownloads'),   $lang->package->byDownloads,   "id='bydownloads'") . '</li>';
           ?>
         </ul>
+      </td>
+      <td>
+        <form id='searchForm' class='side-search mgb-20' method='post' action='<?php echo inlink('obtain', 'type=bySearch');?>'>
+          <div class="input-group">
+            <?php echo html::input('key', $this->post->key, "class='form-control' placeholder='{$lang->package->bySearch}'");?>
+            <span class="input-group-btn">
+              <?php echo html::submitButton($lang->search,"btn btn-primary"); ?>
+            </span>
+          </div>
+        </form>
       </td>
     </tr>
   </table>
