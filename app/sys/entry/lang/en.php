@@ -36,6 +36,12 @@ $lang->entry->position    = 'Position';
 $lang->entry->width       = 'Width';
 $lang->entry->height      = 'Height';
 
+$lang->entry->integrateChanzhi = 'Integrate ChanZhi';
+$lang->entry->integrateZentao  = 'Integrate ZenTao';
+
+$lang->entry->chanzhiPlaceholder  = 'Please input url of admin';
+$lang->entry->chanzhiURL          = 'Url of admin';
+
 $lang->entry->confirmDelete = 'Are you sure to delete this App?';
 $lang->entry->lblBlock      = 'Block';
 $lang->entry->editWarnning  = 'The system application, careful edit.';
