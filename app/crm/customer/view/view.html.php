@@ -102,10 +102,10 @@
       </div>
       <table class='table table-data table-condensed'>
         <?php foreach($contracts as $contract):?>
-        <tr class='<?php echo "contract-{$contract->status}";?>' data-url='<?php echo $this->createLink('contract', 'view', "contractID=$contract->id"); ?>'>
+        <tr data-url='<?php echo $this->createLink('contract', 'view', "contractID=$contract->id"); ?>'>
           <td class='w-p70'><?php echo $contract->name;?></td>
           <td class='w-p15'><?php echo zget($currencySign, $contract->currency, '') . $contract->amount;?></td>
-          <td class='w-p15'><?php echo $lang->contract->statusList[$contract->status];?></td>
+          <td class='w-p15 <?php echo "contract-{$contract->status}";?>'><?php echo $lang->contract->statusList[$contract->status];?></td>
         </tr>
         <?php endforeach;?>
       </table>

@@ -815,7 +815,7 @@ class commonModel extends model
         global $lang, $app;
         if(isonlybody()) return false;
 
-        echo html::a($backLink, $lang->goback, "class='btn btn-default'");
+        echo html::a($backLink, $lang->goback, "class='btn btn-default' id='backButton'");
 
         if(isset($preAndNext->pre) and $preAndNext->pre) 
         {
