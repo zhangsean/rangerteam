@@ -101,26 +101,41 @@
     <?php if(!empty($contract->returnList)):?>
     <div class='panel'>
       <div class='panel-heading'>
-        <strong><i class='icon-file-text-alt'></i> <?php echo $lang->contract->returnRecords;?></strong>
+        <div class='row'>      
+          <div class='col-sm-4'><strong><i class="icon-list-info"></i> <?php echo $lang->contract->returnedDate;?></strong></div>
+          <div class='col-sm-4'><strong><?php echo $lang->contract->returnedBy;?></strong></div> 
+          <div class='col-sm-4'><strong><?php echo $lang->contract->amount;?></strong></div> 
+        </div>
       </div>
-      <div class='panel-body'>
-        <?php foreach($contract->returnList as $return) printf($lang->contract->returnInfo, $return->returnedDate, zget($users, $return->returnedBy, $return->returnedBy), zget($currencySign, $contract->currency, '') . $return->amount);?>
-      </div>
+      <table class='table table-data table-condensed'>
+        <?php foreach($contract->returnList as $return):?>
+        <tr>
+          <td class='w-p30'><?php echo $return->returnedDate;?></td>
+          <td class='w-p30'><?php echo zget($users, $return->returnedBy, $return->returnedBy);?></td>
+          <td class='w-p30'><?php echo zget($currencySign, $contract->currency, '') . $return->amount;?></td>
+        </tr>
+        <?php endforeach;?>
+      </table>
     </div>
     <?php endif;?>
     <?php if(!empty($contract->deliveryList)):?>
     <div class='panel'>
       <div class='panel-heading'>
-        <strong><i class='icon-file-text-alt'></i> <?php echo $lang->contract->deliveryRecords;?></strong>
+        <div class='row'>      
+          <div class='col-sm-3'><strong><i class="icon-list-info"></i> <?php echo $lang->contract->deliveredDate;?></strong></div>
+          <div class='col-sm-3'><strong><?php echo $lang->contract->deliveredBy;?></strong></div> 
+          <div class='col-sm-6'><strong><?php echo $lang->comment;?></strong></div> 
+        </div>
       </div>
-      <div class='panel-body'>
+      <table class='table table-data table-condensed'>
         <?php foreach($contract->deliveryList as $delivery):?>
-        <?php printf($lang->contract->deliveryInfo, $delivery->deliveredDate, zget($users, $delivery->deliveredBy, $delivery->deliveredBy));?>
-        <?php if($delivery->comment):?>
-        <div class='alert'><?php echo $delivery->comment;?></div>
-        <?php endif;?>
+        <tr>
+          <td class='w-p25'><?php echo $delivery->deliveredDate;?></td>
+          <td class='w-p25'><?php echo zget($users, $delivery->deliveredBy, $delivery->deliveredBy);?></td>
+          <td class='w-p50'><?php echo $delivery->comment;?></td>
+        </tr>
         <?php endforeach;?>
-      </div>
+      </table>
     </div>
     <?php endif;?>
     <div class='panel'>
