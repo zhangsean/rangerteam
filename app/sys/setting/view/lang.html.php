@@ -13,6 +13,9 @@
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <form method='post' id='ajaxForm' class='form-inline'>
   <div class='panel'>
+    <div class="panel-heading">
+    <strong><i class="icon-wrench"></i> <?php echo $lang->setting->{$module}->fields[$field];?></strong>
+    </div>
     <?php if($module == 'common' and $field == 'currencyList'):?>
     <div class='panel-body'>
       <table class='table table-form table-condensed table-currency'>
@@ -24,13 +27,11 @@
     </div>
     <?php else:?>
     <table class='table table-condensed'>
-      <thead>
-        <tr>
-          <th class='w-150px text-center'><?php echo $lang->setting->key;?></th>
-          <th class='w-400px'><?php echo $lang->setting->value;?></th>
-          <th></th>
-        </tr>
-      </thead>
+      <tr>
+        <th class='w-150px text-center'><?php echo $lang->setting->key;?></th>
+        <th class='w-400px'><?php echo $lang->setting->value;?></th>
+        <th></th>
+      </tr>
       <?php foreach($fieldList as $key => $value):?>
       <tr class='text-center'>
         <?php $system = isset($systemField[$key]) ? $systemField[$key] : 1;?>

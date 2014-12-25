@@ -30,9 +30,9 @@ $lang->setting->customer->fields['typeList']      = 'Customer type';
 $lang->setting->customer->fields['sizeNameList']  = 'Customer Size';
 $lang->setting->customer->fields['levelNameList'] = 'Customer Level';
 
-$lang->setting->order = new stdclass();
-$lang->setting->order->setCurrency            = 'Set used currency';
-$lang->setting->order->fields['currencyList'] = 'Currency list';
+$lang->setting->common = new stdclass();
+$lang->setting->common->setCurrency            = 'Set used currency';
+$lang->setting->common->fields['currencyList'] = 'Currency list';
 
 $lang->setting->allLang     = 'For all language';
 $lang->setting->currentLang = 'For current language';

@@ -11,19 +11,20 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
-<div id='menuActions'>
-  <?php echo html::a(inlink('create'),  "{$lang->schema->create}</i>", "data-toggle='modal' class='btn btn-primary'")?>
-</div>
 <div class='panel'>
+  <div class="panel-heading">
+    <strong><i class="icon-group"></i> <?php echo $lang->schema->common;?></strong>
+    <div class="panel-actions pull-right">
+      <?php echo html::a(inlink('create'),  "{$lang->schema->create}</i>", "data-toggle='modal' class='btn btn-primary'")?>
+    </div>
+  </div>
   <table class='table table-hover table-striped tablesorter table-data' id='schemaList'>
-    <thead>
+    <tbody class='text-center'>
       <tr class='text-center'>
         <th class='w-70px'><?php  echo $lang->trade->id;?></th>
         <th class='text-left'><?php echo $lang->schema->name;?></th>
         <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
-    </thead>
-    <tbody class='text-center'>
       <?php foreach($schemas as $schema):?>
       <tr>
         <td><?php echo $schema->id;?></td>

@@ -30,9 +30,9 @@ $lang->setting->customer->fields['typeList']      = '客户类型';
 $lang->setting->customer->fields['sizeNameList']  = '客户规模';
 $lang->setting->customer->fields['levelNameList'] = '客户等级';
 
-$lang->setting->order = new stdclass();
-$lang->setting->order->setCurrency            = '使用的货币';
-$lang->setting->order->fields['currencyList'] = '货币设置';
+$lang->setting->common = new stdclass();
+$lang->setting->common->setCurrency            = '使用的货币';
+$lang->setting->common->fields['currencyList'] = '货币设置';
 
 $lang->setting->allLang     = '适用所有语言';
 $lang->setting->currentLang = '适用当前语言';
