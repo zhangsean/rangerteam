@@ -30,9 +30,6 @@ include '../../common/view/header.html.php';
               <div class='input-group-addon'>
                 <label class="checkbox"><input type="checkbox" id="visible" name="visible" value="1"> <?php echo $lang->entry->note->visible;?></label>
               </div>
-              <div class='input-group-addon'>
-                <label class="checkbox"><input type="checkbox" id="chanzhi" name="chanzhi" value="1"> <?php echo $lang->entry->integrateChanzhi;?></label>
-              </div>
             </div>
           </td>
           <td></td>
