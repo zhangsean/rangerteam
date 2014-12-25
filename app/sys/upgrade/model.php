@@ -50,6 +50,7 @@ class upgradeModel extends model
             case '1_4_beta':
                 $this->upgradeContractName();
                 $this->upgradeProjectMember();
+                $this->safeDropColumns(TABLE_PROJECT, 'master,member');
 
                 /* Exec sqls must after fix data. */
                 $this->execSQL($this->getUpgradeFile('1.4.beta'));
@@ -544,5 +545,36 @@ class upgradeModel extends model
         }
 
         return !dao::isError();
+    }
+
+    /**
+     * Safe drop columns.
+     * 
+     * @param string $table 
+     * @param string $columns 
+     * @access public
+     * @return bool
+     */
+    public function safeDropColumns($table, $columns)
+    {
+        if($columns == '') return false;
+
+        $fieldsOBJ = $this->dao->query('desc ' . TABLE_PROJECT);
+        while($field = $fieldsOBJ->fetch())
+        {
+            $fields[$field->Field] = $field->Field;
+        }
+
+        $columns = explode(',', $columns);
+        foreach($columns as $column)
+        {
+            if($column == '') continue;
+            if(isset($fields[$column]))
+            {
+                $this->dao->query("ALTER TABLE $table DROP $column;");
+            }
+        }
+
+        return true;
     }
 }
