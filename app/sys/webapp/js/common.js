@@ -76,12 +76,11 @@ $(function()
     if(typeof(module) == "string") $('#modulemenu ul li #submenu' + module).parent().addClass('active');
 })
 
-/* Refresh desktop. */
 $(document).ready(function()
 {
     $(document).on('click', '.webapp-install', function()
     {
-        $.getJSON($(this).attr('href'), function(data) 
+        $.getJSON($(this).attr('data-url'), function(data) 
         {
             if(data.result == 'success')
             {

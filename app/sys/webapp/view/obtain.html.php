@@ -67,7 +67,7 @@
               $misc = "data-width='1024' data-height='600'";
               $popup  = 'popup';
           }
-          echo isset($installeds[$webapp->id]) ? html::a('',"<i class='icon-ok icon'></i> " . $lang->webapp->installed, 'disabled="disabled" class="btn"') : html::a(inLink('install', "webappID={$webapp->id}"), $lang->webapp->install, "class='btn btn-primary webapp-install'");
+          echo isset($installeds[$webapp->id]) ? html::a('',"<i class='icon-ok icon'></i> " . $lang->webapp->installed, 'disabled="disabled" class="btn"') : html::a('###', $lang->webapp->install, "class='btn btn-primary webapp-install' data-url='" . inLink('install', "webappID={$webapp->id}") . "'");
 
           echo html::a($url, $lang->webapp->preview, "id='useapp$webapp->id' class='btn runapp $popup' data-title='$webapp->name' $misc");
           ?>
