@@ -25,6 +25,8 @@
         <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->contract->name);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('amount',      $orderBy, $vars, $lang->contract->amount);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->contract->createdDate);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('begin',       $orderBy, $vars, $lang->contract->begin);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('end',         $orderBy, $vars, $lang->contract->end);?></th>
         <th class='w-80px'> <?php commonModel::printOrderLink('return',      $orderBy, $vars, $lang->contract->return);?></th>
         <th class='w-80px'> <?php commonModel::printOrderLink('delivery',    $orderBy, $vars, $lang->contract->delivery);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->contract->status);?></th>
@@ -38,6 +40,8 @@
         <td class='text-left'><?php echo $contract->name;?></td>
         <td class='text-right'><?php echo zget($currencySign, $contract->currency, '') . $contract->amount;?></td>
         <td><?php echo substr($contract->createdDate, 0, 10);?></td>
+        <td><?php echo substr($contract->begin, 0, 10);?></td>
+        <td><?php echo substr($contract->end, 0, 10);?></td>
         <td><?php echo $lang->contract->returnList[$contract->return];?></td>
         <td><?php echo $lang->contract->deliveryList[$contract->delivery];?></td>
         <td class='<?php echo "contract-{$contract->status}";?>'><?php echo $lang->contract->statusList[$contract->status];?></td>
