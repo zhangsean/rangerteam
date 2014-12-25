@@ -41,5 +41,5 @@ $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->income   = '收入科目|tree|browse|type=in|';
 $lang->setting->menu->expend   = '支出科目|tree|browse|type=out|';
-$lang->setting->menu->currency = '貨幣類型|setting|lang|module=order&field=currencyList&appName=crm';
+$lang->setting->menu->currency = '貨幣類型|setting|lang|module=common&field=currencyList';
 $lang->setting->menu->schema   = '導入模板設置|schema|browse|';

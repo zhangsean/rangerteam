@@ -41,5 +41,5 @@ $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->income   = 'Income|tree|browse|type=in|';
 $lang->setting->menu->expend   = 'Expend|tree|browse|type=out|';
-$lang->setting->menu->currency = 'Currency|setting|lang|module=order&field=currencyList&appName=crm';
+$lang->setting->menu->currency = 'Currency|setting|lang|module=common&field=currencyList';
 $lang->setting->menu->schema   = 'Schema|schema|browse|';
