@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
+if(!isset($lang->forum)) $lang->forum = new stdclass();
 $lang->forum->common      = '論壇';
 $lang->forum->index       = '論壇首頁';
 $lang->forum->board       = '版塊';

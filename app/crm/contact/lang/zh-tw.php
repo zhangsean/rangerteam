@@ -42,9 +42,6 @@ $lang->contact->newCustomer   = '新建';
 $lang->contact->uploadAvatar  = '上傳頭像';
 $lang->contact->changeAvatar  = '更換頭像';
 
-$lang->contact->genderList['m'] = '男';
-$lang->contact->genderList['f'] = '女';
-
 $lang->contact->browse  = '瀏覽聯繫人';
 $lang->contact->block   = '聯繫人區塊';
 $lang->contact->delete  = '刪除聯繫人';

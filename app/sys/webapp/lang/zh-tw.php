@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
+if(!isset($lang->webapp)) $lang->webapp = new stdclass();
 $lang->webapp->common = 'WEB應用';
 $lang->webapp->index  = '已加應用';
 $lang->webapp->obtain = '獲得應用';
@@ -58,7 +59,6 @@ $lang->webapp->noModule     = '所有';
 $lang->webapp->targetList['']       = '';
 $lang->webapp->targetList['popup']  = '彈窗';
 $lang->webapp->targetList['iframe'] = '內嵌';
-$lang->webapp->targetList['blank']  = '新窗口';
 
 $lang->webapp->width  = '寬度';
 $lang->webapp->height = '高度';
@@ -74,8 +74,8 @@ $lang->webapp->addTypeList['system'] = '系統應用';
 $lang->webapp->addTypeList['custom'] = '自定義應用';
 
 $lang->webapp->errorOccurs        = '錯誤：';
-$lang->webapp->errorGetModules    = '從www.zentao.net獲得插件分類失敗。可能是因為網絡方面的原因，請檢查後重新刷新頁面。';
-$lang->webapp->errorGetExtensions = '從www.zentao.net獲得插件失敗。可能是因為網絡方面的原因，你可以到 “<a href="' . inlink('create') . '">創建應用</a>” 中自行創建。';
+$lang->webapp->errorGetModules    = '從www.ranzhico.com獲得插件分類失敗。可能是因為網絡方面的原因，請檢查後重新刷新頁面。';
+$lang->webapp->errorGetExtensions = '從www.ranzhico.com獲得插件失敗。可能是因為網絡方面的原因，請檢查後重新刷新頁面。';
 $lang->webapp->successInstall     = '成功安裝應用！';
 $lang->webapp->confirmDelete      = '是否刪除該應用？';
 $lang->webapp->noticeAbstract     = '用一句話介紹應用，不多於30個字';

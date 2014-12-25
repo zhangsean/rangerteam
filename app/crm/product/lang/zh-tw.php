@@ -10,8 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 if(!isset($lang->product)) $lang->product = new stdclass();
-$lang->product->common    = '產品維護';
-
+$lang->product->common      = '產品維護';
 $lang->product->id          = '編號';
 $lang->product->name        = '名稱';
 $lang->product->code        = '代號';
@@ -31,6 +30,7 @@ $lang->product->browse      = '維護產品';
 $lang->product->create      = '添加產品';
 $lang->product->edit        = '編輯產品';
 $lang->product->view        = '產品詳情';
+$lang->product->basicInfo   = '基本信息';
 
 $lang->product->typeList['real']    = '實體類';
 $lang->product->typeList['service'] = '服務類';
@@ -39,5 +39,3 @@ $lang->product->typeList['virtual'] = '虛擬類';
 $lang->product->statusList['developing'] = '研發中';
 $lang->product->statusList['normal']     = '正常';
 $lang->product->statusList['offline']    = '下線';
-
-$lang->product->basicInfo = '基本信息';

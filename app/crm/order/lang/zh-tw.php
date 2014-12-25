@@ -62,8 +62,14 @@ $lang->order->closedReasonList['payed']     = '已付款';
 $lang->order->closedReasonList['failed']    = '失敗';
 $lang->order->closedReasonList['postponed'] = '延期';
 
-$lang->order->titleLBL  = "%s購買%s";
-$lang->order->basicInfo = "基本信息";
-$lang->order->lifetime  = "訂單的一生";
+$lang->order->titleLBL    = "%s購買%s";
+$lang->order->basicInfo   = "基本信息";
+$lang->order->lifetime    = "訂單的一生";
+$lang->order->selectTitle = "%s購買%s (%s)";
 
-$lang->order->totalAmount = '本頁訂單計劃金額：%s，成交金額：%s；';
+$lang->order->totalAmount   = '本頁訂單計劃金額：%s，成交金額：%s；';
+$lang->order->infoBuy       = "%s 購買 %s。";
+$lang->order->infoContract  = '簽署合同：%s。';
+$lang->order->infoAmount    = '計劃金額：%s，成交金額：%s。';
+$lang->order->infoContacted = '最後聯繫：%s。';
+$lang->order->infoNextDate  = '下次聯繫：%s。';

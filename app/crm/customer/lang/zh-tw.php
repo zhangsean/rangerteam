@@ -44,6 +44,8 @@ $lang->customer->nextDate      = '下次聯繫';
 $lang->customer->selectContact = '選擇已有聯繫人';
 
 $lang->customer->browse      = '瀏覽客戶';
+$lang->customer->view        = '客戶詳情';
+$lang->customer->create      = '添加客戶';
 $lang->customer->delete      = '刪除客戶';
 $lang->customer->order       = '訂單';
 $lang->customer->contact     = '聯繫人';
@@ -52,15 +54,19 @@ $lang->customer->address     = '地址';
 $lang->customer->record      = '溝通';
 $lang->customer->assign      = '指派';
 $lang->customer->linkContact = '添加聯繫人';
+$lang->customer->list        = '客戶列表';
+$lang->customer->edit        = '編輯客戶';
+$lang->customer->basicInfo   = '基本信息';
+$lang->customer->moreInfo    = '更多信息';
 
-$lang->customer->typeList['']           = '';
-$lang->customer->typeList['national']   = '國有企業';
-$lang->customer->typeList['collective'] = '集體企業';
-$lang->customer->typeList['corporate']  = '股份企業';
-$lang->customer->typeList['limited']    = '有限公司';
-$lang->customer->typeList['partnership']= '合夥企業';
-$lang->customer->typeList['foreign']    = '外資企業';
-$lang->customer->typeList['personal']   = '個人個體';
+$lang->customer->typeList['']            = '';
+$lang->customer->typeList['national']    = '國有企業';
+$lang->customer->typeList['collective']  = '集體企業';
+$lang->customer->typeList['corporate']   = '股份企業';
+$lang->customer->typeList['limited']     = '有限公司';
+$lang->customer->typeList['partnership'] = '合夥企業';
+$lang->customer->typeList['foreign']     = '外資企業';
+$lang->customer->typeList['personal']    = '個人個體';
 
 $lang->customer->statusList['potential'] = '潛在';
 $lang->customer->statusList['intension'] = '意向';
@@ -96,11 +102,3 @@ $lang->customer->levelNoteList['E'] = '沒有需求或者沒有任何成交機�
 $lang->customer->relationList['client']   = '客戶';
 $lang->customer->relationList['provider'] = '供應商';
 $lang->customer->relationList['partner']  = '合作夥伴';
-
-$lang->customer->create = '添加客戶';
-$lang->customer->list   = '客戶列表';
-$lang->customer->edit   = '編輯客戶';
-$lang->customer->view   = '客戶詳情';
-
-$lang->customer->basicInfo = '基本信息';
-$lang->customer->moreInfo  = '更多信息';

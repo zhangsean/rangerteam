@@ -6,7 +6,7 @@
  * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id: zh-tw.php 1692 2014-08-25 02:13:11Z daitingting $
+ * @version     $Id: zh-tw.php 2164 2014-12-22 01:32:10Z chujilu $
  * @link        http://www.ranzhico.com
  */
 $lang->entry->common    = '應用';
@@ -36,8 +36,15 @@ $lang->entry->position    = '顯示位置';
 $lang->entry->width       = '寬';
 $lang->entry->height      = '高';
 
+$lang->entry->integrateChanzhi = '整合蟬知';
+$lang->entry->integrateZentao  = '整合禪道';
+
+$lang->entry->chanzhiPlaceholder  = '請輸入蟬知的後台訪問地址';
+$lang->entry->chanzhiURL          = '後台入口';
+
 $lang->entry->confirmDelete = '您確定刪除該應用嗎？';
 $lang->entry->lblBlock      = '區塊';
+$lang->entry->editWarnning  = '系統內置應用，請謹慎修改。';
 
 $lang->entry->note = new stdClass();
 $lang->entry->note->name    = '授權應用名稱';

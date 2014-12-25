@@ -15,6 +15,7 @@ $lang->next    = '›';
 $lang->laquo   = '&laquo;';
 $lang->raquo   = '&raquo;';
 $lang->minus   = ' - ';
+$lang->hyphen  = '-';
 $lang->slash   = ' / ';
 $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
@@ -89,7 +90,6 @@ $lang->saved          = '已保存';
 $lang->confirm        = '確認';
 $lang->preview        = '預覽';
 $lang->goback         = '返回';
-$lang->search         = '搜索';
 $lang->assign         = '指派';
 $lang->start          = '開始';
 $lang->create         = '新建';
@@ -126,6 +126,11 @@ $lang->lifetime->signedBy     = '由誰簽約';
 $lang->lifetime->closedBy     = '由誰關閉';
 $lang->lifetime->closedReason = '關閉原因';
 $lang->lifetime->lastEdited   = '最後修改';
+
+$lang->setOkFile = <<<EOT
+<h5>請按照下面的步驟操作以確認您的管理員身份。</h5>
+<p>創建 %s 檔案。如果存在該檔案，使用編輯軟件打開，重新保存一遍。</p>
+EOT;
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -164,6 +169,7 @@ $lang->effort  = new stdclass();
 $lang->setting = new stdclass();
 $lang->task    = new stdclass();
 $lang->schema  = new stdclass();
+$lang->package = new stdclass();
 
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = '公司|company|setbasic|';
@@ -171,7 +177,7 @@ $lang->menu->sys->user      = '組織|user|admin|';
 $lang->menu->sys->group     = '權限|group|browse|';
 $lang->menu->sys->entry     = '應用|entry|admin|';
 $lang->menu->sys->system    = '系統|mail|admin|';
-//$lang->menu->sys->extension = '擴展|extension|admin|';
+$lang->menu->sys->package   = '擴展|package|browse|';
  
 $lang->message = new stdclass(); 
 $lang->blog    = new stdclass(); 
@@ -182,6 +188,7 @@ $lang->entry       = new stdclass();
 $lang->entry->menu = new stdclass();
 $lang->entry->menu->admin  = array('link' => '應用列表|entry|admin|', 'alias' => 'edit');
 $lang->entry->menu->create = '添加應用|entry|create|';
+$lang->entry->menu->webapp = 'WEB應用|webapp|obtain|';
 
 /* Menu system. */
 $lang->system       = new stdclass();
@@ -242,24 +249,51 @@ $lang->date = new stdclass();
 $lang->date->minute = '分鐘';
 $lang->date->day    = '天';
 
+$lang->genderList = new stdclass();
+$lang->genderList->m = '男';
+$lang->genderList->f = '女';
+$lang->genderList->u = '';
+
+/* datepicker 時間*/
+$lang->datepicker = new stdclass();
+
+$lang->datepicker->dpText = new stdclass();
+$lang->datepicker->dpText->TEXT_OR          = '或 ';
+$lang->datepicker->dpText->TEXT_PREV_YEAR   = '去年';
+$lang->datepicker->dpText->TEXT_PREV_MONTH  = '上月';
+$lang->datepicker->dpText->TEXT_PREV_WEEK   = '上周';
+$lang->datepicker->dpText->TEXT_YESTERDAY   = '昨天';
+$lang->datepicker->dpText->TEXT_THIS_MONTH  = '本月';
+$lang->datepicker->dpText->TEXT_THIS_WEEK   = '本週';
+$lang->datepicker->dpText->TEXT_TODAY       = '今天';
+$lang->datepicker->dpText->TEXT_NEXT_YEAR   = '明年';
+$lang->datepicker->dpText->TEXT_NEXT_MONTH  = '下月';
+$lang->datepicker->dpText->TEXT_CLOSE       = '關閉';
+$lang->datepicker->dpText->TEXT_DATE        = '選擇時間段';
+$lang->datepicker->dpText->TEXT_CHOOSE_DATE = '選擇日期';
+
+$lang->datepicker->dayNames     = array('日', '一', '二', '三', '四', '五', '六');
+$lang->datepicker->abbrDayNames = array('日', '一', '二', '三', '四', '五', '六');
+$lang->datepicker->monthNames   = array('一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月');
+
 /* Set currency items. */
-$lang->order->currencyList['rmb']  = '人民幣';
-$lang->order->currencyList['usd']  = '美元';
-$lang->order->currencyList['hkd']  = '港元';
-$lang->order->currencyList['twd']  = '台元';
-$lang->order->currencyList['euro'] = '歐元';
-$lang->order->currencyList['dem']  = '馬克';
-$lang->order->currencyList['chf']  = '瑞士法郎';
-$lang->order->currencyList['frf']  = '法國法郎';
-$lang->order->currencyList['gbp']  = '英鎊';
-$lang->order->currencyList['nlg']  = '荷蘭盾';
-$lang->order->currencyList['cad']  = '加拿大元';
-$lang->order->currencyList['sur']  = '盧布';
-$lang->order->currencyList['inr']  = '盧比';
-$lang->order->currencyList['aud']  = '澳大利亞元';
-$lang->order->currencyList['nzd']  = '新西蘭元';
-$lang->order->currencyList['thb']  = '泰國銖';
-$lang->order->currencyList['sgd']  = '新加坡元';
+$lang->currencyList['rmb']  = '人民幣';
+$lang->currencyList['usd']  = '美元';
+$lang->currencyList['hkd']  = '港元';
+$lang->currencyList['twd']  = '台元';
+$lang->currencyList['euro'] = '歐元';
+$lang->currencyList['dem']  = '馬克';
+$lang->currencyList['chf']  = '瑞士法郎';
+$lang->currencyList['frf']  = '法國法郎';
+$lang->currencyList['gbp']  = '英鎊';
+$lang->currencyList['nlg']  = '荷蘭盾';
+$lang->currencyList['cad']  = '加拿大元';
+$lang->currencyList['sur']  = '盧布';
+$lang->currencyList['inr']  = '盧比';
+$lang->currencyList['aud']  = '澳大利亞元';
+$lang->currencyList['nzd']  = '新西蘭元';
+$lang->currencyList['thb']  = '泰國銖';
+$lang->currencyList['sgd']  = '新加坡元';
 
 /* Currency symbols setting. */
 $lang->currencySymbols['rmb']  = '￥';

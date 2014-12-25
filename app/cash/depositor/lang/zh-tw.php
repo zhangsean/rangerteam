@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
+if(!isset($lang->depositor)) $lang->depositor = new stdclass();
 $lang->depositor->common          = '賬號';
 $lang->depositor->id              = '編號';
 $lang->depositor->abbr            = '簡稱';

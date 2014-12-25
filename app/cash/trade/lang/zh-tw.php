@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
+if(!isset($lang->trade)) $lang->trade = new stdclass();
 $lang->trade->common      = '記賬';
 $lang->trade->id          = '編號';
 $lang->trade->depositor   = '賬號';
@@ -77,10 +78,12 @@ $lang->trade->importedFields['trader']   = '商戶';
 $lang->trade->importedFields['in']       = '收入';
 $lang->trade->importedFields['out']      = '支出';
 $lang->trade->importedFields['date']     = '時間';
+$lang->trade->importedFields['category'] = '科目';
+$lang->trade->importedFields['dept']     = '部門';
 $lang->trade->importedFields['desc']     = '備註';
 $lang->trade->importedFields['fee']      = '手續費';
 
 $lang->trade->totalAmount = '%s收入%s，支出%s，%s；';
-$lang->trade->profit  = '盈';
-$lang->trade->loss    = '虧';
-$lang->trade->balance = '收支平衡';
+$lang->trade->profit      = '盈';
+$lang->trade->loss        = '虧';
+$lang->trade->balance     = '收支平衡';

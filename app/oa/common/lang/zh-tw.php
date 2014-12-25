@@ -29,7 +29,6 @@ $lang->project->menu->suspend  = '已掛起|project|index|ststus=suspend';
 $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();
 $lang->announce->menu->browse   = array('link' => '公告列表|announce|browse|', 'alias' => 'view');
-$lang->announce->menu->create   = '添加公告|announce|create|';
 $lang->announce->menu->category = '類目管理|tree|browse|type=announce|';
 
 $lang->doc = new stdclass();

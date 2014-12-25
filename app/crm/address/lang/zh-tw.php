@@ -9,15 +9,15 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->address->common = '地址管理';
-$lang->address->browse = '瀏覽地址';
-$lang->address->delete = '刪除地址';
-$lang->address->create = '新建地址';
-$lang->address->edit   = '修改地址';
-
+$lang->address->common   = '地址管理';
 $lang->address->title    = '名稱';
 $lang->address->country  = '國家';
 $lang->address->province = '省';
 $lang->address->city     = '市';
 $lang->address->area     = '區域';
 $lang->address->location = '位置';
+
+$lang->address->browse = '瀏覽地址';
+$lang->address->delete = '刪除地址';
+$lang->address->create = '新建地址';
+$lang->address->edit   = '修改地址';
