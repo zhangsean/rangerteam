@@ -277,23 +277,23 @@ $lang->datepicker->abbrDayNames = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'
 $lang->datepicker->monthNames   = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
 /* Set currency items. */
-$lang->order->currencyList['rmb']  = 'Renminbi Yuan';
-$lang->order->currencyList['usd']  = 'U.S.Dollar';
-$lang->order->currencyList['hkd']  = 'HongKong Dollars';
-$lang->order->currencyList['twd']  = 'New Taiwan Dollar';
-$lang->order->currencyList['euro'] = 'Euro';
-$lang->order->currencyList['dem']  = 'Deutsche Mark';
-$lang->order->currencyList['chf']  = 'Swiss Franc';
-$lang->order->currencyList['frf']  = 'French Franc';
-$lang->order->currencyList['gbp']  = 'Pound';
-$lang->order->currencyList['nlg']  = 'Florin';
-$lang->order->currencyList['cad']  = 'Canadian Dollar';
-$lang->order->currencyList['sur']  = 'Rouble';
-$lang->order->currencyList['inr']  = 'Indian Rupee';
-$lang->order->currencyList['aud']  = 'Australian Dollar';
-$lang->order->currencyList['nzd']  = 'New Zealand Dollar';
-$lang->order->currencyList['thb']  = 'Thai Baht';
-$lang->order->currencyList['sgd']  = 'Ssingapore Dollar';
+$lang->currencyList['rmb']  = 'Renminbi Yuan';
+$lang->currencyList['usd']  = 'U.S.Dollar';
+$lang->currencyList['hkd']  = 'HongKong Dollars';
+$lang->currencyList['twd']  = 'New Taiwan Dollar';
+$lang->currencyList['euro'] = 'Euro';
+$lang->currencyList['dem']  = 'Deutsche Mark';
+$lang->currencyList['chf']  = 'Swiss Franc';
+$lang->currencyList['frf']  = 'French Franc';
+$lang->currencyList['gbp']  = 'Pound';
+$lang->currencyList['nlg']  = 'Florin';
+$lang->currencyList['cad']  = 'Canadian Dollar';
+$lang->currencyList['sur']  = 'Rouble';
+$lang->currencyList['inr']  = 'Indian Rupee';
+$lang->currencyList['aud']  = 'Australian Dollar';
+$lang->currencyList['nzd']  = 'New Zealand Dollar';
+$lang->currencyList['thb']  = 'Thai Baht';
+$lang->currencyList['sgd']  = 'Ssingapore Dollar';
 
 /* Currency symbols setting. */
 $lang->currencySymbols['rmb']  = '￥';

@@ -18,7 +18,6 @@ $lang->block->actions  = 'Options';
 $lang->block->lblBlock = 'Block';
 
 $lang->block->admin    = 'Manage Blocks';
-
 $lang->block->availableBlocks = new stdclass();
 
 $lang->block->availableBlocks->order    = 'Order List';
