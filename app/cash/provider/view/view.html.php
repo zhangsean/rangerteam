@@ -74,20 +74,22 @@
             <?php $class = $contact->maker ? "class='text-red'" : "";?>
             <span class='lead'><?php echo html::a('###', $contact->realname, "id={$contact->id} {$class}");?></span>
             <?php if($contact->left):?>
-            <span ><i class='icon-lock text-muted'></i></span>
+            <span><i class='icon-lock text-muted'></i></span>
             <?php endif;?>
             <div><?php echo $contact->dept . ' ' . $contact->title;?></div>
           </th>
           <td>
-            <div class='text-right'>
-              <i class='btn-vcard icon icon-qrcode icon-large text-info'> </i>
+            <div class='col-sm-10'>
+              <div class='contact-info'>
+                <?php if($contact->phone or $contact->mobile) echo "<div><i class='icon-phone-sign'></i> $contact->phone $contact->mobile</div>";?>
+                <?php if($contact->qq) echo "<div class='f-14'><i class='icon-qq'></i> $contact->qq</div>";?>
+                <?php if($contact->email) echo "<div class='f-14'><i class='icon-envelope-alt'></i> $contact->email </div>";?>
+              </div>
+              <p class='vcard text-center'><?php echo html::image(helper::createLink('crm.contact', 'vcard', "contactID={$contact->id}"), "style='height:120px'");?></p>
             </div>
-            <div class='contact-info'>
-              <?php if($contact->phone or $contact->mobile) echo "<div><i class='icon-phone-sign'></i> $contact->phone $contact->mobile</div>";?>
-              <?php if($contact->qq) echo "<div class='f-14'><i class='icon-qq'></i> $contact->qq</div>";?>
-              <?php if($contact->email) echo "<div class='f-14'><i class='icon-envelope-alt'></i> $contact->email </div>";?>
+            <div class='text-right col-sm-2'>
+              <i class='btn-vcard icon icon-qrcode icon-2x text-info'> </i>
             </div>
-            <p class='vcard text-center'><?php echo html::image(helper::createLink('contact', 'vcard', "contactID={$contact->id}"), "style='height:120px'");?></p>
           </td>
         </tr>
       </table>
