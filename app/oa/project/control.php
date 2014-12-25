@@ -182,7 +182,7 @@ class project extends control
 
         $this->view->link            = $this->project->getProjectLink($module, $method, $extra);
         $this->view->projectID       = $projectID;
-        $this->view->$currentProject = $currentProject;
+        $this->view->currentProject  = $currentProject;
         $this->view->module          = $module;
         $this->view->method          = $method;
         $this->view->extra           = $extra;
