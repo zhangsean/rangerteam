@@ -16,7 +16,7 @@
 <?php include '../../common/view/chosen.html.php';?>
 <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
 <div class='with-menu page-content'>
-  <form method='post' id='ajaxForm'>
+  <form method='post' id='ajaxForm' enctype='multipart/form-data'>
     <div class='row'>
       <div class='col-md-8'>
         <div class='panel'>
