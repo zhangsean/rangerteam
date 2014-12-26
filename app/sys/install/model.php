@@ -209,6 +209,7 @@ class installModel extends model
             $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dbh->exec("SET NAMES {$this->config->db->encoding}");
+            $dbh->exec("SET @@sql_mode= ''");
             return $dbh;
         }
         catch (PDOException $exception)
