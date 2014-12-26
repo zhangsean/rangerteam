@@ -102,7 +102,7 @@
         {
             $.each(entries, function(idx, et)
             {
-                if(et.id != 'allapps' && et.id != 'superadmin') et.delete = true;
+                if(et.id != 'allapps' && et.id != 'superadmin') et['delete'] = true;
             });
         }
         var et;
@@ -111,9 +111,9 @@
             et = getEntry(option.id);
             if(et)
             {
-                if(!option.delete)
+                if(!option['delete'])
                 {
-                    if(reset) et.delete = false;
+                    if(reset) et['delete'] = false;
                     et.init(option);
                 }
             }
@@ -127,7 +127,7 @@
         {
             for(var i = entries.length - 1; i >= 0; --i)
             {
-                if(entries[i].delete)
+                if(entries[i]['delete'])
                 {
                     entries.splice(i, 1);
                 }
