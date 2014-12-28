@@ -40,7 +40,7 @@
   <div id='webapps' class='cards webstore webapps pd-0 mg-0'>
     <?php foreach($webapps as $webapp):?>
     <div class='col-md-6 col-sm-6'><div class='card' id='webapp<?php echo $webapp->id?>'>
-      <div class='media webapp-icon'><img src='<?php echo empty($webapp->icon) ? '/theme/default/images/main/webapp-default.png' : $config->webapp->url . $webapp->icon?>' width='72' height='72' /></div>
+      <div class='media webapp-icon'><img src='<?php echo empty($webapp->icon) ? $this->config->webRoot . 'theme/default/images/main/webapp-default.png' : $config->webapp->url . $webapp->icon?>' width='72' height='72' /></div>
       <div class='card-heading' class='webapp-name' title='<?php echo $webapp->name?>'>
         <strong><?php commonModel::printLink('webapp', 'view', "webappID=$webapp->id&type=api", $webapp->name, '',  "class='apiapp'");?></strong> <small class='text-muted'><?php echo $webapp->author;?></small>
       </div>
