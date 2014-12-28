@@ -33,7 +33,7 @@ class tradeModel extends model
      */
     public function getList($mode, $orderBy, $pager = null)
     {
-        if(empty($this->session->tradeQuery)) $this->session->set('tradeQuery', ' 1 = 1');
+        if($this->session->tradeQuery === false) $this->session->set('tradeQuery', ' 1 = 1');
         $tradeQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->tradeQuery);
 
         return $this->dao->select('*')->from(TABLE_TRADE)
