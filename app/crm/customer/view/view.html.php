@@ -14,12 +14,12 @@
 <ul id='menuTitle'>
   <li><?php echo html::a($this->createLink('customer', 'browse'), "<i class='icon-list-ul'></i> " . $lang->customer->list);?></li>
   <li class='divider angle'></li>
-  <li class='title'><?php echo $lang->customer->view?></li>
+  <li class='title'><?php echo $customer->name . $lang->customer->desc;?></li>
 </ul>
 <div class='row-table'>
   <div class='col-main'>
     <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $customer->name . $lang->customer->desc;?></strong></div>
+      <div class='panel-heading'><strong><?php echo $lang->customer->desc;?></strong></div>
       <div class='panel-body'><?php echo $customer->desc;?></div>
     </div>
     <div class='panel'>
@@ -88,6 +88,12 @@
             <th><?php echo $lang->customer->site;?></th>
             <td><?php echo html::a("$customer->site", $customer->site, "target='_blank'");?></td>
           </tr>
+          <?php if(formatTime($customer->nextDate)):?>
+          <tr>
+            <th><?php echo $lang->customer->nextDate;?></th>
+            <td><?php echo $customer->nextDate;?></td>
+          </tr>
+          <?php endif;?>
         </table>
       </div>
     </div>

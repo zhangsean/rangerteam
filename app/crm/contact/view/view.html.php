@@ -14,12 +14,12 @@
 <ul id='menuTitle'>
   <li><?php echo html::a($this->createLink('contact', 'browse'), "<i class='icon-list-ul'></i> " . $lang->contact->list);?></li>
   <li class='divider angle'></li>
-  <li class='title'><?php echo $lang->contact->view?></li>
+  <li class='title'><?php echo $contact->realname;?></li>
 </ul>
 <div class='row-table'>
   <div class='col-main'>
     <div class='panel'>
-      <div class='panel-heading'><strong><?php echo $contact->realname;?></strong></div>
+      <div class='panel-heading'><strong><?php echo $lang->contact->desc;?></strong></div>
       <div class='panel-body'><?php echo $contact->desc;?></div>
     </div>
     <?php echo $this->fetch('action', 'history', "objectType=contact&objectID={$contact->id}")?>

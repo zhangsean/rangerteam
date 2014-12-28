@@ -14,14 +14,12 @@
 <ul id='menuTitle'>
   <li><?php echo html::a($this->createLink('contract', 'browse'), $lang->contract->list);?></li>
   <li class='divider angle'></li>
-  <li class='title'><?php echo $lang->contract->view?></li>
+  <li class='title'><?php echo $contract->name;?></li>
 </ul>
 <div class="row-table">
   <div class='col-main'>
     <div class='panel'>
-      <div class='panel-heading'>
-        <strong><i class='icon-file-text-alt'></i> <?php echo $contract->name;?></strong>
-      </div>
+      <div class='panel-heading'><strong><?php echo $lang->contract->items;?></strong></div>
       <div class='panel-body'>
         <?php echo $contract->items;?>
         <div><?php echo $this->fetch('file', 'printFiles', array('files' => $contract->files, 'fieldset' => 'false'))?></div>

@@ -14,12 +14,12 @@
 <ul id='menuTitle'>
   <li><?php echo html::a($this->createLink('order', 'browse'), "<i class='icon-list-ul'></i> " . $lang->order->list);?></li>
   <li class='divider angle'></li>
-  <li class='title'><?php echo $lang->order->view?></li>
+  <li class='title'><?php printf($lang->order->titleLBL, $customer->name, $product->name);?> <span class='label-primary label'><?php echo $customer->level != '0' ? $customer->level : '';?></span> <span class='label-success label'><?php echo $lang->order->statusList[$order->status];?></span></li>
 </ul>
 <div class='row-table'>
   <div class='col-main'>
     <div class='panel'>
-      <div class='panel-heading'><strong><i class='icon-file-text-alt'></i> <?php printf($lang->order->titleLBL, $customer->name, $product->name);?> <span class='label-primary label'><?php echo $customer->level != '0' ? $customer->level : '';?></span> <span class='label-success label'><?php echo $lang->order->statusList[$order->status];?></span></strong></div>
+      <div class='panel-heading'><strong><?php echo $lang->order->view?></strong></div>
       <div class='panel-body'>
         <?php 
         $payed = $order->status == 'payed';
@@ -33,8 +33,8 @@
         <?php endif;?>
         <p><?php printf($lang->order->infoAmount, zget($currencySign, $order->currency, '') . $order->plan, zget($currencySign, $order->currency, '') . $order->real)?></p>
         <p>
-          <?php if($order->contactedDate != '0000-00-00 00:00:00') printf($lang->order->infoContacted, $order->contactedDate)?>
-          <?php if($order->nextDate != '0000-00-00') printf($lang->order->infoNextDate, $order->nextDate)?>
+          <?php if(formatTime($order->contactedDate)) printf($lang->order->infoContacted, $order->contactedDate)?>
+          <?php if(formatTime($order->nextDate)) printf($lang->order->infoNextDate, $order->nextDate)?>
         </p>
       </div>
     </div> 

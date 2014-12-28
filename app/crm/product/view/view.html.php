@@ -14,7 +14,7 @@
 <ul id='menuTitle'>
   <li><?php echo html::a($this->createLink('product', 'browse'), $lang->product->list);?></li>
   <li class='divider angle'></li>
-  <li class='title'><?php echo $lang->product->view?></li>
+  <li class='title'><?php echo $product->name;?></li>
 </ul>
 <div class='row-table'>
   <div class='col-main'>
