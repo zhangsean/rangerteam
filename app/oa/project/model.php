@@ -312,7 +312,7 @@ class projectModel extends model
             $menu .= "<li class='all'>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), $this->lang->task->all);
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=createdBy"), $this->lang->task->createdByMe);
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=assignedTo"), $this->lang->task->assignedToMe);
-            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=closedBy"), $this->lang->task->closedByMe);
+            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=finishedBy"), $this->lang->task->finishedByMe);
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=untilToday"), $this->lang->task->untilToday);
             $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=expired"), $this->lang->task->expired);
         }

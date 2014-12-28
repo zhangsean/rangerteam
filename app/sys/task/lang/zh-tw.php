@@ -103,7 +103,7 @@ $lang->task->reasonList['cancel'] = '已取消';
 
 $lang->task->createdByMe  = '由我創建';
 $lang->task->assignedToMe = '指派給我';
-$lang->task->closedByMe   = '由我完成';
+$lang->task->finishedByMe = '由我完成';
 $lang->task->untilToday   = '今天到期';
 $lang->task->expired      = '已過期';
 $lang->task->all          = '所有任務';

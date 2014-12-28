@@ -103,7 +103,7 @@ $lang->task->reasonList['cancel'] = 'Canceled';
 
 $lang->task->createdByMe  = 'MyCreate';
 $lang->task->assignedToMe = 'MyTasks';
-$lang->task->closedByMe   = 'MyClose';
+$lang->task->finishedByMe = 'MyFinish';
 $lang->task->untilToday   = 'UntilToday';
 $lang->task->expired      = 'Expired';
 $lang->task->all          = 'All';

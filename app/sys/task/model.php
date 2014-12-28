@@ -50,7 +50,7 @@ class taskModel extends model
             ->beginIF($projectID)->andWhere('project')->eq($projectID)->fi()
             ->beginIF($mode == 'createdBy')->andWhere('createdBy')->eq($this->app->user->account)->fi()
             ->beginIF($mode == 'assignedTo')->andWhere('assignedTo')->eq($this->app->user->account)->fi()
-            ->beginIF($mode == 'closedBy')->andWhere('closedBy')->eq($this->app->user->account)->fi()
+            ->beginIF($mode == 'finishedBy')->andWhere('finishedBy')->eq($this->app->user->account)->fi()
             ->beginIF($mode == 'untilToday')->andWhere('deadline')->eq(helper::today())->fi()
             ->beginIF($mode == 'expired')->andWhere('deadline')->ne('0000-00-00')->andWhere('deadline')->lt(helper::today())->fi()
             ->beginIF($mode == 'bysearch')->andWhere($taskQuery)->fi()
