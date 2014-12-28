@@ -220,7 +220,11 @@ class userModel extends model
             $this->post->set('password', $password);
         }
 
-        $user = fixer::input('post')->cleanInt('imobile, qq, zipcode')->remove('ip, account, join, visits');
+        $user = fixer::input('post')
+            ->cleanInt('imobile, qq, zipcode')
+            ->remove('ip, account, join, visits')
+            ->setDefault('admin', 'no');
+
         if($this->app->user->admin != 'super')
         {
             if($this->app->user->account != $account) return false;
