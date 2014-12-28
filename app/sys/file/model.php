@@ -163,11 +163,11 @@ class fileModel extends model
         {   
             if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
 
-            $file['objectType'] = $objectType;
-            $file['objectID']   = $objectID;
-            $file['createdBy']    = $this->app->user->account;
-            $file['createdDate']  = $now;
-            $file['extra']      = $extra;
+            $file['objectType']  = $objectType;
+            $file['objectID']    = $objectID;
+            $file['createdBy']   = $this->app->user->account;
+            $file['createdDate'] = $now;
+            $file['extra']       = $extra;
             unset($file['tmpname']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
             $fileTitles[$this->dao->lastInsertId()] = $file['title'];
