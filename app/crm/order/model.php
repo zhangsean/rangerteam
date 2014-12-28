@@ -212,14 +212,32 @@ class orderModel extends model
      */
     public function create()
     {
+        if($this->post->createCustomer)
+        {
+            $customer = new stdclass();
+            $customer->name        = $this->post->name ? $this->post->name : $this->post->contact;
+            $customer->contact     = $this->post->contact; 
+            $customer->phone       = $this->post->phone; 
+            $customer->email       = $this->post->email; 
+            $customer->qq          = $this->post->qq; 
+            $customer->relation    = 'client'; 
+            $customer->assignedTo  = $this->app->user->account;
+            $customer->createdBy   = $this->app->user->account;
+            $customer->createdDate = helper::now();
+
+            $customerID = $this->loadModel('customer')->create($customer);
+        }
+
         $now = helper::now();
         $order = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
+            ->setIF($customerID, 'customer', $customerID)
             ->setDefault('status', 'normal')
             ->setDefault('assignedBy', $this->app->user->account)
             ->setDefault('assignedTo', $this->app->user->account)
             ->setDefault('assignedDate', $now)
+            ->remove('createCustomer, name, contact, phone, email, qq')
             ->get();
 
         $this->dao->insert(TABLE_ORDER)

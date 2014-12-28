@@ -41,6 +41,7 @@ $lang->order->contactedDate  = '最后联系';
 $lang->order->nextDate       = '下次联系';
 $lang->order->editedBy       = '最后修改';
 $lang->order->editedDate     = '最后修改日期';
+$lang->order->createCustomer = '新建';
 
 $lang->order->list          = '订单列表';
 $lang->order->browse        = '浏览订单';

@@ -21,7 +21,36 @@
       <table class='table table-form w-p60'>
         <tr>
           <th class='w-120px'><?php echo $lang->order->customer;?></th>
-          <td><?php echo html::select('customer', $customers, '', "class='form-control chosen'");?></td>
+          <td>
+            <div class='input-group'>
+              <?php echo html::select('customer', $customers, '', "class='form-control chosen'");?>
+              <?php echo html::input('name', '', "class='form-control' style='display:none'");?>
+              <span class='input-group-addon'>
+                <label class='checkbox'>
+                  <input type='checkbox' name='createCustomer' id='createCustomer' value='1' /><?php echo $lang->order->createCustomer?>
+                </label>
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr class='customerInfo hide'>
+          <th><?php echo $lang->customer->contact;?></th>
+          <td>
+            <div class='required required-wrapper'></div>
+            <?php echo html::input('contact', '', "class='form-control'");?>
+          </td>
+        </tr>
+        <tr class='customerInfo hide'>
+          <th><?php echo $lang->customer->phone;?></th>
+          <td><?php echo html::input('phone', '', "class='form-control'");?></td>
+        </tr>
+        <tr class='customerInfo hide'>
+          <th><?php echo $lang->customer->email;?></th>
+          <td><?php echo html::input('email', '', "class='form-control'");?></td>
+        </tr>
+        <tr class='customerInfo hide'>
+          <th><?php echo $lang->customer->qq;?></th>
+          <td><?php echo html::input('qq', '', "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->product;?></th>
