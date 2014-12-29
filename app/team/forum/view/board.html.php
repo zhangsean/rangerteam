@@ -1,11 +1,11 @@
 <?php 
 /**
- * The browse view file of contact module of RanZhi.
+ * The board file of forum module of RanZhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     LGPL
  * @author      Tingting Dai <daitingting@xirangit.com>
- * @package     contact 
+ * @package     forum 
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
@@ -46,11 +46,13 @@
         </thead>
         <tbody>
           <?php foreach($sticks as $thread):?>
+          <?php if($thread->hidden and !$this->loadModel('thread')->canManage($board->id)) continue;?>
           <tr class='text-center'>
             <td class='w-10px'><span class='sticky-thread text-danger'><i class="icon-comment-alt icon-large"></i></span></td>
             <td class='text-left'>
               <?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?>
               <?php echo "<span class='label label-danger'>{$lang->thread->stick}</span> "?>
+              <?php if($thread->hidden) echo "<span class='text-warning'>[" . $lang->thread->statusList['hidden'] . "]</span>";?>
             </td>
             <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
             <td class='hidden-xs'><?php echo substr($thread->createdDate, 5, -3);?></td>
@@ -70,9 +72,13 @@
           <?php endforeach;?>
 
           <?php foreach($threads as $thread):?>
+          <?php if($thread->hidden and !$this->loadModel('thread')->canManage($board->id)) continue;?>
           <tr class='text-center'>
             <td class='w-10px'><?php echo $thread->isNew ? "<span class='text-success'><i class='icon-comment-alt icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment-alt icon-large'></i></span>";?></td>
-            <td class='text-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?></td>
+            <td class='text-left'>
+              <?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?>
+              <?php if($thread->hidden) echo '<span class="text-warning">[' . $lang->thread->statusList['hidden'] .']</span>';?>
+            </td>
             <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
             <td class='hidden-xs'><?php echo substr($thread->createdDate, 5, -3);?></td>
             <td class='hidden-xs'><?php echo $thread->views;?></td>

@@ -147,7 +147,7 @@ class forumModel extends model
 
         /* Then check the user is a moderator or not. */
         $user = ",{$this->app->user->account},";
-        $moderators = ',' . str_replace(' ', '', $board->moderators) . ',';
+        $moderators = ',' . str_replace(' ', '', implode($board->moderators, ',')) . ',';
         if(strpos($moderators, $user) !== false) return true;
 
         return false;

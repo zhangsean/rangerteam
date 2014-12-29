@@ -55,7 +55,14 @@
           </ul>
         </span>
         <?php
-        echo html::a(inlink('switchStatus', "threadID=$thread->id"), '<i class="icon-eye-close"></i> ' . $lang->thread->hide, "class='switcher'");
+        if($thread->hidden)
+        {
+            echo html::a(inlink('switchStatus', "threadID=$thread->id"), '<i class="icon-eye-open"></i> ' . $lang->thread->show, "class='switcher'");
+        }
+        else
+        {
+            echo html::a(inlink('switchStatus', "threadID=$thread->id"), '<i class="icon-eye-close"></i> ' . $lang->thread->hide, "class='switcher'");
+        }
         echo html::a(inlink('delete', "threadID=$thread->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'");
         ?>
         <?php endif; ?>

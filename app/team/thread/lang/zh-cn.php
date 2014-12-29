@@ -54,6 +54,8 @@ $lang->thread->message         = '%s在论坛#%s回复了主题：%s，内容为
 $lang->thread->readonly        = '只读';
 $lang->thread->successStick    = '成功置顶';
 $lang->thread->successUnstick  = '成功取消置顶';
+$lang->thread->successHide     = '成功隐藏帖子';
+$lang->thread->successShow     = '显示成功';
 $lang->thread->readonlyMessage = '该帖已被设置为 <strong>只读</strong>，您暂时无法发表新的回复。';
 $lang->thread->successTransfer = '转移成功';
 

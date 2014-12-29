@@ -433,7 +433,8 @@ EOT;
         /* Then check the user is a moderator or not. */
         $user = ",{$this->app->user->account},";
         $board = $this->loadModel('tree')->getByID($boardID);
-        $moderators = ',' . str_replace(' ', '', $board->moderators) . ',';
+        $moderators = implode($board->moderators, ',');
+        $moderators = ',' . str_replace(' ', '', $moderators) . ',';
         $users = $moderators . str_replace(' ', '', $users) . ',';
         if(strpos($users, $user) !== false) return true;
 
