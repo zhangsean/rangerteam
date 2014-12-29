@@ -13,7 +13,7 @@ $lang->user->common    = '成員';
 
 $lang->user->id        = '編號';
 $lang->user->account   = '賬戶';
-$lang->user->admin     = '瀏覽會員';
+$lang->user->admin     = '管理員';
 $lang->user->password  = '密碼';
 $lang->user->password2 = '請重複密碼';
 $lang->user->realname  = '真實姓名';
