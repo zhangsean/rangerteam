@@ -114,7 +114,7 @@ class thread extends control
         $this->thread->setEditor($thread->board, 'view');
 
         /* Get thread board. */
-        $board = $this->loadModel('tree')->getById($thread->board);
+        $board = $this->loadModel('tree')->getById($thread->board, 'forum');
 
         /* Get replies. */
         $this->app->loadClass('pager', $static = true);
@@ -126,7 +126,8 @@ class thread extends control
         $speakers = $this->loadModel('user')->getBasicInfo($speakers);
         foreach($speakers as $account => $speaker)
         {
-            $speaker->isModerator = strpos(",{$board->moderators},", ",{$account},") !== false;       
+            $moderators = implode($board->moderators, ',');
+            $speaker->isModerator = strpos(",{$moderators},", ",{$account},") !== false;       
         }
 
         /* Set the views counter + 1; */
@@ -231,7 +232,7 @@ class thread extends control
             {
                 $locate = helper::createLink('forum', 'board', "board=$thread->board");
             }
-            $this->send(array('result' => 'success', 'locate' => $locate));
+            $this->send(array('result' => 'success', 'message' => $this->lang->thread->successHide,  'locate' => $locate));
         }
 
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -254,7 +255,7 @@ class thread extends control
         if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
 
         $message = $stick == 0 ? $this->lang->thread->successUnstick : $this->lang->thread->successStick;
-        $this->send(array('message' => $message, 'target' => '#manageBox', 'source' => inlink('view', "threaID=$threadID") . ' #manageMenu'));
+        $this->send(array('message' => $message, 'locate' => inlink('view', "threaID=$threadID")));
     }
 
     /**

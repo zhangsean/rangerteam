@@ -28,7 +28,7 @@
     <div class='panel'>
       <div class='panel-heading'>
         <strong><i class='icon-comments-alt icon-large'></i>&nbsp;<?php $common->printForum($board);?></strong>
-        <?php if($board->moderators) printf(" &nbsp;<span class='moderators hidden-xxs'>" . $lang->forum->lblOwner . '</span>', trim($board->moderators, ',')); ?>
+        <?php if($board->moderators) printf(" &nbsp;<span class='moderators hidden-xxs'>" . $lang->forum->lblOwner . '</span>', trim(implode($board->moderators, ','), ',')); ?>
         <div class='panel-actions pull-right'>
           <?php if($this->forum->canPost($board)) echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil icon-large"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn btn-primary'");?>
         </div>
