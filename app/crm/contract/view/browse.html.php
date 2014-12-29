@@ -58,7 +58,7 @@
           </div>
           <?php endif;?>
         </td>
-        <td colspan='6'><?php $pager->show();?></td>
+        <td colspan='8'><?php $pager->show();?></td>
       </tr>
     </tfoot>
   </table>
