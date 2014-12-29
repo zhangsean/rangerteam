@@ -167,6 +167,7 @@ $config->objectTables['customer']    = TABLE_CUSTOMER;
 $config->objectTables['contact']     = TABLE_CONTACT;
 $config->objectTables['thread']      = TABLE_THREAD;
 $config->objectTables['article']     = TABLE_ARTICLE;
+$config->objectTables['doc']         = TABLE_DOC;
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext/*.php');

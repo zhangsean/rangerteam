@@ -55,6 +55,7 @@
           echo "<li>" . html::a(inlink('order', "customerID=$customer->id"), $lang->customer->order,    "data-toggle='modal'") . "</li>";
           echo "<li>" . html::a(inlink('contract', "customerID=$customer->id"), $lang->customer->contract, "data-toggle='modal'") . "</li>";
           echo "<li>" . html::a($this->createLink('address', 'browse', "objectType=customer&objectID=$customer->id"), $lang->customer->address, "data-toggle='modal'") . "</li>";
+          echo "<li>" . html::a(inlink('delete', "customerID=$customer->id"), $lang->delete, "class='deleter'") . "</li>";
           echo "</ul></div>";
           ?>
         </td>

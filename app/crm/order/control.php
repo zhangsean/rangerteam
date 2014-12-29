@@ -272,4 +272,18 @@ class order extends control
         $this->view->members = $members;
         $this->display();
     }
+
+    /**
+     * delete 
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return void
+     */
+    public function delete($orderID)
+    {
+        $this->order->delete(TABLE_ORDER, $orderID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'locate' => inlink('browse')));
+    }
 }

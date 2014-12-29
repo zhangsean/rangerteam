@@ -18,3 +18,6 @@ $config->action->objectNameFields['user']     = 'account';
 $config->action->objectNameFields['customer'] = 'name';
 $config->action->objectNameFields['contract'] = 'name';
 $config->action->objectNameFields['article']  = 'title';
+$config->action->objectNameFields['order']    = 'id';
+$config->action->objectNameFields['doc']      = 'title';
+$config->action->objectNameFields['contact']  = 'realname';

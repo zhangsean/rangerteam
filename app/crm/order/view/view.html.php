@@ -57,7 +57,8 @@
       echo '</div>';
 
       echo "<div class='btn-group'>";
-      echo html::a(inlink('edit',     "orderID=$order->id"), $lang->edit,   "class='btn btn-default'");
+      echo html::a(inlink('edit', "orderID=$order->id"), $lang->edit,   "class='btn btn-default'");
+      if($order->status == 'normal' or $order->closedReason == 'failed') echo html::a(inlink('delete', "orderID=$order->id"), $lang->delete, "class='btn btn-default deleter'");
       echo '</div>';
 
       $browseLink = $this->session->orderList ? $this->session->orderList : inlink('browse');

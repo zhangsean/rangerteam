@@ -21,8 +21,19 @@ $lang->action->actionID = 'Action ID';
 $lang->action->date     = 'Date';
 $lang->action->nextDate = 'Next Contact';
 
+$lang->action->trash      = 'Trash';
+$lang->action->objectType = 'Object type';
+$lang->action->objectID   = 'Object ID';
+$lang->action->objectName = 'Object name';
+
 $lang->action->createContact = 'Create Contact';
 $lang->action->editComment   = 'Edit Comment';
+$lang->action->hide          = 'Hide';       
+$lang->action->hideOne       = 'Hide';
+$lang->action->hideAll       = 'Hide all';
+$lang->action->hidden        = 'Hidden';
+$lang->action->undelete      = 'Undelete';
+$lang->action->trashTips     = 'Tips:The deleting actions in ranzhi are all logic';
 
 $lang->action->textDiff = 'Text Mode';
 $lang->action->original = 'Original content';
@@ -159,3 +170,11 @@ $lang->action->record->actor    = 'Actor';
 $lang->action->record->comment  = 'Content';
 $lang->action->record->date     = 'Contact time';
 $lang->action->record->nextDate = 'Next Contact';
+
+$lang->action->objectTypes['order']    = 'Order';
+$lang->action->objectTypes['customer'] = 'Customer';
+$lang->action->objectTypes['doc']      = 'Doc';
+$lang->action->objectTypes['task']     = 'Task';
+$lang->action->objectTypes['product']  = 'Product';
+$lang->action->objectTypes['contact']  = 'Contact';
+$lang->action->objectTypes['contract'] = 'Contract';

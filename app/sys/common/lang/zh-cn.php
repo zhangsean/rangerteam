@@ -193,7 +193,8 @@ $lang->entry->menu->webapp = 'WEB应用|webapp|obtain|';
 /* Menu system. */
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
-$lang->system->menu->mail = array('link' => '发信|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->system->menu->mail  = array('link' => '发信|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->system->menu->trash = array('link' => '回收站|action|trash|');
 //$lang->system->menu->backup = '备份|admin|backup|';
 
 $lang->article = new stdclass();
@@ -208,6 +209,11 @@ $lang->menuGroups = new stdclass();
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->system->menu;
 $lang->menuGroups->mail = 'system';
+
+/* Menu of action module. */
+$lang->action = new stdclass();
+$lang->action->menu = $lang->system->menu;
+$lang->menuGroups->action = 'system';
 
 /* The error messages. */
 $lang->error = new stdclass();

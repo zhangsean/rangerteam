@@ -135,4 +135,78 @@ class action extends control
         $this->view->contacts = $this->loadModel('contact')->getPairs($record->objectType == 'customer' ? $object->id : $object->customer);
         $this->display();
     }
+
+    /**
+     * Trash 
+     * 
+     * @param  string $type all|hidden 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function trash($type = 'all', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        /* Save session. */
+        $uri = $this->app->getURI(true);
+        $this->session->set('projectList',     $uri);
+        $this->session->set('taskList',        $uri);
+        $this->session->set('docList',         $uri);
+
+        /* Get deleted objects. */
+        $this->app->loadClass('pager', $static = true);
+        $pager = pager::init($recTotal, $recPerPage, $pageID);
+
+        $trashes = $this->action->getTrashes($type, $orderBy, $pager);
+
+        /* Title and position. */
+        $this->view->title   = $this->lang->action->trash;
+        $this->view->trashes = $trashes;
+        $this->view->type    = $type;
+        $this->view->orderBy = $orderBy;
+        $this->view->pager   = $pager;
+        $this->view->users   = $this->loadModel('user')->getPairs('noletter');
+        $this->display();
+    }
+
+    /**
+     * Hide an deleted object. 
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function hideOne($actionID)
+    {
+        $this->action->hideOne($actionID);
+        $this->send(array('result' => 'success', 'locate' => inlink('trash')));
+    }
+
+    /**
+     * Hide all deleted objects.
+     * 
+     * @param  string $confirm 
+     * @access public
+     * @return void
+     */
+    public function hideAll($confirm = 'no')
+    {
+        $this->action->hideAll();
+        $this->send(array('result' => 'success', 'locate' => inlink('trash', "type=hidden")));
+    }
+
+    /**
+     * Undelete an object.
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function undelete($actionID)
+    {
+        $this->action->undelete($actionID);
+        $this->send(array('result' => 'success', 'locate' => $this->server->http_referer));
+    }
 }

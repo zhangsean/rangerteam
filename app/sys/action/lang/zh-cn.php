@@ -21,8 +21,19 @@ $lang->action->actionID = '记录ID';
 $lang->action->date     = '日期';
 $lang->action->nextDate = '下次联系';
 
-$lang->action->createContact  = '新建';
-$lang->action->editComment = '修改备注';
+$lang->action->trash      = '回收站';
+$lang->action->objectType = '对象类型';
+$lang->action->objectID   = '对象ID';
+$lang->action->objectName = '对象名称';
+
+$lang->action->createContact = '新建';
+$lang->action->editComment   = '修改备注';
+$lang->action->hide          = '隐藏';       
+$lang->action->hideOne       = '隐藏';
+$lang->action->hideAll       = '隐藏全部';
+$lang->action->hidden        = '已隐藏';
+$lang->action->undelete      = '还原';
+$lang->action->trashTips     = '提示：为了保证系统的完整性，然之系统的删除都是标记删除。';
 
 $lang->action->textDiff = '文本格式';
 $lang->action->original = '原始格式';
@@ -159,3 +170,11 @@ $lang->action->record->actor    = '操作人';
 $lang->action->record->comment  = '沟通内容';
 $lang->action->record->date     = '时间';
 $lang->action->record->nextDate = '下次联系';
+
+$lang->action->objectTypes['order']    = '订单';
+$lang->action->objectTypes['customer'] = '客户';
+$lang->action->objectTypes['doc']      = '文档';
+$lang->action->objectTypes['task']     = '任务';
+$lang->action->objectTypes['product']  = '产品';
+$lang->action->objectTypes['contact']  = '联系人';
+$lang->action->objectTypes['contract'] = '合同';

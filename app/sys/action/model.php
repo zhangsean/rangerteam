@@ -186,6 +186,14 @@ class actionModel extends model
 
             if(!$table) continue;
             $objectNames[$objectType] = $this->dao->select("id, $field AS name")->from($table)->where('id')->in($objectIds)->fetchPairs();
+
+            /* Get titles if objectType is order. */
+            if($objectType == 'order')
+            {
+                $this->app->loadLang('order', 'crm');
+                $orders = $this->loadModel('order', 'crm')->getByIdList($objectIds);
+                foreach($orders as $order) $objectNames['order'][$order->id] = $order->title;
+            }
         }
 
         /* Add name field to the trashes. */
@@ -464,6 +472,37 @@ class actionModel extends model
             ->set('comment')->eq($this->post->lastComment)
             ->beginIF($this->post->extra)->set('edit')->eq($this->post->extra)->FI()
             ->where('id')->eq($actionID)
+            ->exec();
+    }
+
+    /**
+     * Hide an object. 
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function hideOne($actionID)
+    {
+        $action = $this->getById($actionID);
+        if($action->action != 'deleted') return;
+
+        $this->dao->update(TABLE_ACTION)->set('extra')->eq(self::BE_HIDDEN)->where('id')->eq($actionID)->exec();
+        $this->create($action->objectType, $action->objectID, 'hidden');
+    }
+
+    /**
+     * Hide all deleted objects.
+     * 
+     * @access public
+     * @return void
+     */
+    public function hideAll()
+    {
+        $this->dao->update(TABLE_ACTION)
+            ->set('extra')->eq(self::BE_HIDDEN)
+            ->where('action')->eq('deleted')
+            ->andWhere('extra')->eq(self::CAN_UNDELETED)
             ->exec();
     }
 }

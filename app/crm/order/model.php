@@ -77,7 +77,7 @@ class orderModel extends model
         $orders = $this->dao->select('o.*, c.name as customerName, c.level as level, p.name as productName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
             ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
-            ->where(1)
+            ->where('o.deleted')->eq(0)
             ->beginIF($mode == 'past')->andWhere('o.nextDate')->andWhere('o.nextDate')->lt(helper::today())->fi()
             ->beginIF($mode == 'today')->andWhere('o.nextDate')->eq(helper::today())->fi()
             ->beginIF($mode == 'tomorrow')->andWhere('o.nextDate')->eq(formattime(date::tomorrow(), DT_DATE1))->fi()
@@ -404,6 +404,10 @@ class orderModel extends model
             if($order->closedReason == 'payed') $menu .= "<li>" . html::a('###', $this->lang->close, "disabled='disabled' class='disabled'") . "</li>";
             if($order->closedReason == 'payed') $menu .= "<li>" . html::a('###', $this->lang->activate, "disabled='disabled' class='disabled'") . "</li>";
             if($order->closedReason != 'payed') $menu .= "<li>" . html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "data-toggle='modal'") . "</li>";
+        }
+        if($order->status == 'normal' or $order->closedReason == 'failed')
+        {
+            $menu .= "<li>" . html::a(inlink('delete', "orderID=$order->id"), $this->lang->delete, "class='deleter'") . "</li>";
         }
         $menu .= '</ul></div>';
 
