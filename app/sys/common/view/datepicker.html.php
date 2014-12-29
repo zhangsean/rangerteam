@@ -64,7 +64,7 @@ $(function()
                 var date = new Date($this.val().replace(/-/g, '/'));
                 if(!date.valueOf()) date = new Date();
 
-                if($this.hasClass('form-datetime')) $this.val(date.format('yyyy-MM-dd hh:mm'));
+                if($this.hasClass('form-datetime')) $this.val(date.format('yyyy-MM-dd hh:mm:ss'));
                 else $this.val(date.format('yyyy-MM-dd'));
             }
             return $this;
