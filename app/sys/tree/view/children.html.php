@@ -42,6 +42,11 @@
           echo html::hidden('mode[]', 'new');
       }
 
+      if(($type == 'forum') and ($boardChildrenCount == 0))
+      {
+          echo "<div class='form-group'><div class='col-xs-8 col-md-offset-2'><div class='alert alert-warning'>{$this->lang->board->placeholder->setChildren}</div></div></div>";
+      }
+
       $button = ($type == 'dept') ? html::submitButton() . html::backButton() : html::submitButton();
       echo "<div class='form-group'><div class='col-xs-8 col-md-offset-2'>" . $button . "</div></div>";
       echo html::hidden('parent',   $parent);

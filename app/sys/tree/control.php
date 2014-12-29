@@ -102,7 +102,7 @@ class tree extends control
 
         if(strpos('forum,blog', $category->type) !== false) $this->view->aliasAddon .=  $category->type . '/';
 
-        if($category->type == 'forum') $this->view->users = $this->loadModel('user')->getPairs('admin');
+        if($category->type == 'forum') $this->view->users = $this->loadModel('user')->getPairs('admin, noclosed');
         if($category->type == 'dept')  $this->view->users = $this->loadModel('user')->getPairs(null, $category->id);
 
         /* remove left menu. */
@@ -124,7 +124,11 @@ class tree extends control
     {
         /* If type is forum, assign board to category. */
         if($type != 'blog' and strpos($this->config->tree->menuGroup->setting, ',' . $type . ',') !== false) $this->lang->category = $this->lang->$type;
-        if($type == 'forum') $this->lang->category = $this->lang->board;
+        if($type == 'forum')
+        {
+            $this->lang->category = $this->lang->board;
+            $this->view->boardChildrenCount = $this->dao->select('count(*) as count')->from(TABLE_CATEGORY)->where('grade')->eq(2)->andWhere('type')->eq('forum')->fetch('count');
+        }
         if($type == 'dept')
         {
             $this->app->loadLang('user');
