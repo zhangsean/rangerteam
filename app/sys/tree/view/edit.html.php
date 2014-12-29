@@ -42,7 +42,7 @@ $themeRoot = $webRoot . "theme/";
       <?php if($category->type == 'forum'):?>
       <div class='form-group'>
         <label class='col-md-2 control-label'><?php echo $lang->category->moderators;?></label>
-        <div class='col-md-9'><?php echo html::input('moderators', $category->moderators, "class='form-control'");?></div>
+        <div class='col-md-9'><?php echo html::select('moderators[]', $users, array_keys($category->moderators), "class='form-control chosen' multiple='multiple'");?></div>
       </div>  
       <div class='form-group'>
         <label class='col-md-2 control-label'><?php echo $lang->category->readonly;?></label>

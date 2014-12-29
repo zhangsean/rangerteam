@@ -34,8 +34,11 @@ class treeModel extends model
             $category->moderators = explode(',', trim($category->moderators, ','));
             foreach($category->moderators as $moderators) $speakers[] = $moderators;
             $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
-            foreach($category->moderators as $key => $moderators) $category->moderators[$key] = isset($speakers[$moderators]) ? $speakers[$moderators] : '';
-            $category->moderators = implode(',', $category->moderators);
+            foreach($category->moderators as $key => $moderators) 
+            {
+                unset($category->moderators[$key]);
+                $category->moderators[$moderators] = isset($speakers[$moderators]) ? $speakers[$moderators] : '';
+            }
         }
 
         $category->pathNames = $this->dao->select('id, name')->from(TABLE_CATEGORY)->where('id')->in($category->path)->orderBy('grade')->fetchPairs();
