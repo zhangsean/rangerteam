@@ -91,6 +91,8 @@ $lang->action->desc->finishdelivercontract = '$date, <strong>$actor</strong> com
 $lang->action->desc->finishreceivecontract = '$date, $extra by <strong>$actor</strong>, complete payments.' . "\n";
 $lang->action->desc->finishcontract        = '$date, <strong>$actor</strong> finished contract:<strong>$extra</strong>.' . "\n";
 $lang->action->desc->cancelcontract        = '$date, <strong>$actor</strong> canceled contract:<strong>$extra</strong>.' . "\n";
+$lang->action->desc->hidden                = '$date, hidden by <strong>$actor</strong> .' . "\n";
+$lang->action->desc->undeleted             = '$date, restored by <strong>$actor</strong> .' . "\n";
 
 /* The action labels. */
 $lang->action->label = new stdclass();

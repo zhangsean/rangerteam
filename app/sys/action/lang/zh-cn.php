@@ -91,6 +91,8 @@ $lang->action->desc->finishdelivercontract = '$date, 由 <strong>$actor</strong>
 $lang->action->desc->finishreceivecontract = '$date, 由 <strong>$actor</strong> 对合同<strong>$extra</strong>，完成回款。' . "\n";
 $lang->action->desc->finishcontract        = '$date, 由 <strong>$actor</strong> 完成合同：<strong>$extra</strong>。' . "\n";
 $lang->action->desc->cancelcontract        = '$date, 由 <strong>$actor</strong> 取消合同：<strong>$extra</strong>。' . "\n";
+$lang->action->desc->hidden                = '$date, 由 <strong>$actor</strong> 隐藏。' . "\n";
+$lang->action->desc->undeleted             = '$date, 由 <strong>$actor</strong> 还原。' . "\n";
 
 /* 用来显示动态信息。*/
 $lang->action->label = new stdclass();
