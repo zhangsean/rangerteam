@@ -232,11 +232,11 @@ class orderModel extends model
         $order = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
-            ->setIF($customerID, 'customer', $customerID)
             ->setDefault('status', 'normal')
             ->setDefault('assignedBy', $this->app->user->account)
             ->setDefault('assignedTo', $this->app->user->account)
             ->setDefault('assignedDate', $now)
+            ->setIF($this->post->createCustomer, 'customer', isset($customerID) ? $customerID : '')
             ->remove('createCustomer, name, contact, phone, email, qq')
             ->get();
 
