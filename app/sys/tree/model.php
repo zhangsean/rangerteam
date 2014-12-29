@@ -28,7 +28,7 @@ class treeModel extends model
 
         if(!$category) return false;
 
-        if($type == 'forum') 
+        if($category->type == 'forum') 
         {
             $speakers = array();
             $category->moderators = explode(',', trim($category->moderators, ','));
