@@ -84,6 +84,10 @@
                 <th><?php echo $lang->task->left;?></th>
                 <td><?php echo html::input('left', $task->left, "class='form-control'");?></td>
               </tr>
+              <tr>
+                <th><?php echo $lang->task->mailto;?></th>
+                <td><?php echo html::select('mailto[]', $users, $task->mailto, "class='form-control chosen' multiple data-placeholder='{$lang->task->mailtoPlaceholder}'");?></td>
+              </tr>
             </table>
           </div>
         </div>

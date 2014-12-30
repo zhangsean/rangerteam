@@ -229,6 +229,7 @@ class taskModel extends model
                 ->specialChars('name')
                 ->stripTags('desc', $this->config->allowedTags->admin)
                 ->remove('referer, uid, files, labels')
+                ->join('mailto', ',')
                 ->get();
         }
         $this->dao->update(TABLE_TASK)->data($task)

@@ -232,16 +232,18 @@ class mailModel extends model
      * @param  array   $toList 
      * @param  string  $subject 
      * @param  string  $body 
+     * @param  string  $ccList 
      * @param  bool    $includeMe 
      * @access public
      * @return void
      */
-    public function send($toList, $subject, $body = '', $includeMe = false)
+    public function send($toList, $subject, $body = '', $ccList = '', $includeMe = false)
     {
         if(!$this->config->mail->turnon) return;
 
         ob_start();
         $toList  = $toList ? explode(',', str_replace(' ', '', $toList)) : array();
+        $ccList  = $ccList ? explode(',', str_replace(' ', '', $ccList)) : array();
 
         /* Process toList and ccList, remove current user from them. If toList is empty, use the first cc as to. */
         if($includeMe == false)
@@ -249,40 +251,49 @@ class mailModel extends model
             $account = isset($this->app->user->account) ? $this->app->user->account : '';
 
             foreach($toList as $key => $to) if(trim($to) == $account or !trim($to)) unset($toList[$key]);
+            foreach($ccList as $key => $cc) if(trim($cc) == $account or !trim($cc)) unset($ccList[$key]);
         }
 
         /* Remove deleted users. */
         $users = $this->loadModel('user')->getPairs('nodeleted');
-        foreach($toList as $key => $to)
-        {
-            if(!isset($users[trim($to)]) and strpos($to, '@') === false) unset($toList[$key]);
-        }
+        foreach($toList as $key => $to) if(!isset($users[trim($to)])) unset($toList[$key]);
+        foreach($ccList as $key => $cc) if(!isset($users[trim($cc)])) unset($ccList[$key]);
 
+        if(!$toList and !$ccList) return;
+        if(!$toList and $ccList) $toList = array(array_shift($ccList));
         $toList = join(',', $toList);
+        $ccList = join(',', $ccList);
 
         /* Get realname and email of users. */
         $this->loadModel('user');
-        $emails = $this->user->getRealNameAndEmails(str_replace(' ', '', $toList));
+        $emails = $this->user->getRealNameAndEmails(str_replace(' ', '', $toList . ',' . $ccList));
         
         $this->clear();
 
+        /* Replace full webPath image for mail. */
+        if(strpos($body, 'src="data/upload')) $body = preg_replace('/<img (.*)src="data\/upload/', '<img $1 src="http://' . $this->server->http_host . $this->config->webRoot . 'data/upload', $body);
+
         try 
         {
-            $this->mta->setFrom($this->config->mail->fromAddress, $this->config->mail->fromName);
-            $this->setSubject($subject);
+            $this->mta->setFrom($this->config->mail->fromAddress, $this->convertCharset($this->config->mail->fromName));
+            $this->setSubject($this->convertCharset($subject));
             $this->setTO($toList, $emails);
-            $this->setBody($body);
+            $this->setCC($ccList, $emails);
+            $this->setBody($this->convertCharset($body));
             $this->setErrorLang();
             $this->mta->send();
         }
         catch (phpmailerException $e) 
         {
-            $this->errors[] = trim(strip_tags($e->errorMessage()));
+            $this->errors[] = nl2br(trim(strip_tags($e->errorMessage()))) . '<br />' . ob_get_contents();
         } 
         catch (Exception $e) 
         {
             $this->errors[] = trim(strip_tags($e->getMessage()));
         }
+
+        /* save errors. */
+        if($this->isError()) $this->app->saveError('E_MAIL', join(' ', $this->errors), __FILE__, __LINE__, true);
 
         $message = ob_get_contents();
         ob_clean();
@@ -399,5 +410,38 @@ class mailModel extends model
         $errors = $this->errors;
         $this->errors = array();
         return $errors;
+    }
+
+    /**
+     * Convert charset.
+     * 
+     * @param  string    $string 
+     * @access public
+     * @return string
+     */
+    public function convertCharset($string)
+    {
+        if($this->config->mail->smtp->charset != strtolower($this->config->charset)) return iconv($this->config->charset, $this->config->mail->smtp->charset . '//IGNORE', $string);
+        return $string;
+    }
+
+    /**
+     * Set cc.
+     * 
+     * @param  array    $ccList 
+     * @param  array    $emails 
+     * @access public
+     * @return void
+     */
+    public function setCC($ccList, $emails)
+    {
+        $ccList = explode(',', str_replace(' ', '', $ccList));
+        if(!is_array($ccList)) return;
+        foreach($ccList as $account)
+        {
+            if(!isset($emails[$account]) or isset($emails[$account]->sended) or strpos($emails[$account]->email, '@') == false) continue;
+            $this->mta->addCC($emails[$account]->email, $this->convertCharset($emails[$account]->realname));
+            $emails[$account]->sended = true;
+        }
     }
 }

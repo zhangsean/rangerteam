@@ -73,8 +73,9 @@ $lang->task->leftThisTime   = '剩余';
 $lang->task->date           = '日期';
 $lang->task->ditto          = '同上';
 
-$lang->task->confirmFinish  = '"预计剩余"为0，确认将任务状态改为"已完成"吗？';
-$lang->task->consumedBefore = '之前消耗';
+$lang->task->confirmFinish     = '"预计剩余"为0，确认将任务状态改为"已完成"吗？';
+$lang->task->consumedBefore    = '之前消耗';
+$lang->task->mailtoPlaceholder = '选择要发信通知的用户...';
 
 $lang->task->lblPri  = 'P';
 $lang->task->lblHour = '(h)';

@@ -73,8 +73,9 @@ $lang->task->leftThisTime   = 'Left';
 $lang->task->date           = 'Date';
 $lang->task->ditto          = 'Ditto';
 
-$lang->task->confirmFinish  = '"Left" is zero, this task will be done. Are you sure?';
-$lang->task->consumedBefore = 'consumed before';
+$lang->task->confirmFinish     = '"Left" is zero, this task will be done. Are you sure?';
+$lang->task->consumedBefore    = 'consumed before';
+$lang->task->mailtoPlaceholder = 'Choose users to mail...';
 
 $lang->task->lblPri  = 'P';
 $lang->task->lblHour = '(h)';

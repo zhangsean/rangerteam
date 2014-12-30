@@ -276,7 +276,9 @@ class task extends control
             {
                 $actionID = $this->loadModel('action')->create('task', $taskID, 'Assigned', $this->post->comment, $this->post->assignedTo);
                 $this->action->logHistory($actionID, $changes);
+                $this->sendmail($taskID, $actionID);
             }
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
         }
 
@@ -481,5 +483,62 @@ class task extends control
         $this->view->project   = $project;
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
+    }
+
+    /**
+     * Send email.
+     * 
+     * @param  int    $taskID 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function sendmail($taskID, $actionID)
+    {
+        /* Reset $this->output. */
+        $this->clear();
+
+        /* Set toList and ccList. */
+        $task        = $this->task->getById($taskID);
+        $projectName = $this->loadModel('project', 'oa')->getById($task->project)->name;
+        $users       = $this->loadModel('user')->getPairs('noletter');
+        $toList      = $task->assignedTo;
+        $ccList      = trim($task->mailto, ',');
+
+        if($toList == '')
+        {
+            if($ccList == '') return;
+            if(strpos($ccList, ',') === false)
+            {
+                $toList = $ccList;
+                $ccList = '';
+            }
+            else
+            {
+                $commaPos = strpos($ccList, ',');
+                $toList = substr($ccList, 0, $commaPos);
+                $ccList = substr($ccList, $commaPos + 1);
+            }
+        }
+        elseif(strtolower($toList) == 'closed')
+        {
+            $toList = $task->finishedBy;
+        }
+
+        /* Get action info. */
+        $action          = $this->loadModel('action')->getById($actionID);
+        $history         = $this->action->getHistory($actionID);
+        $action->history = isset($history[$actionID]) ? $history[$actionID] : array();
+
+        /* Create the email content. */
+        $this->view->task   = $task;
+        $this->view->action = $action;
+        $this->view->users  = $users;
+
+        $mailContent = $this->parse($this->moduleName, 'sendmail');
+
+        /* Send emails. */
+        $this->loadModel('mail')->send($toList, $projectName . ':' . 'TASK#' . $task->id . $this->lang->colon . $task->name, $mailContent, $ccList);
+        if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
 }
