@@ -14,7 +14,7 @@
 <?php include '../../../sys/common/view/treeview.html.php'; ?>
 <?php js::set('boardID', $boardID);?>
 <div class='row'>
-  <div class='col-md-2'>
+  <div class='col-xs-2'>
     <?php foreach($boards as $parentBoard):?>
     <ul class="nav nav-primary nav-stacked">
       <li class="nav-heading"><?php echo $parentBoard->name;?></li>
@@ -24,7 +24,7 @@
     </ul>
     <?php endforeach;?>
   </div>
-  <div class='col-md-10'>
+  <div class='col-xs-10'>
     <div class='panel'>
       <div class='panel-heading'>
         <strong><i class='icon-comments-alt icon-large'></i>&nbsp;<?php $common->printForum($board);?></strong>

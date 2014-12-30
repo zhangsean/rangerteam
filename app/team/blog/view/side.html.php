@@ -11,7 +11,7 @@
  */
 ?>
 <?php $treeMenu = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));?>
-<div class='col-md-2'>
+<div class='col-xs-2'>
   <div class='panel'> 
     <?php echo html::a(inlink('create'), $lang->blog->create, "class='btn btn-primary btn-lg btn-block'");?>
   </div>
