@@ -21,7 +21,7 @@ input.form-control-pure:active,
 input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.2); border-color: #fff; border-color: rgba(255,255,255,0.6); color: #fff; color: rgba(255,255,255,0.9);}
 
 /* desktop */
-#desktop {position: absolute; width: 100%; height: 100%; z-index: 0; overflow: hidden; zoom: 1; min-width: 900px;}
+#desktop {position: absolute; width: 100%; height: 100%; z-index: 0; overflow: hidden; zoom: 1; min-width: 1050px;}
 
 /* dock position. */
 .dock-left,.dock-right,.dock-top,.dock-bottom {position: absolute;}
@@ -170,6 +170,9 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #allAppsList li .app-btn > .icon {display: inline-block; width: 48px; height: 48px; line-height: 48px; text-align: center; margin-right: 10px; background-color: #555; background-color: rgba(255,255,255,.2); border-radius: 8px}
 #allAppsList li .app-btn:hover > .icon {background-color: rgba(255,255,255,.3);}
 #allAppsList li .app-btn > .icon.icon-default {font-size: 16px; margin-right: 10px; color: #FFF}
+
+@media (max-width: 1200px) {#allAppsList li {width: 24%}}
+@media (max-width: 1000px) {#allAppsList li {width: 32%}}
 
 /* home */
 #home {padding: 0;}
