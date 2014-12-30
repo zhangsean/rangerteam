@@ -4,6 +4,7 @@ $(function()
     {
         height            : 240,
         draggable         : true,
+        shadowType        : false,
         afterOrdered      : sortBlocks,
         afterPanelRemoved : deleteBlock,
         panelRemovingTip  : config.confirmRemoveBlock

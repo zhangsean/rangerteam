@@ -7,7 +7,7 @@
     var desktopPos       = {x: 40, y: 0},
         fullscreenMode   = false,
         windowIdSeed     = 0,
-        windowIdTeamplate= 'WID{0}',
+        windowIdTeamplate= 'wid-{0}',
         windowZIndexSeed = 100,
         defaultWindowPos = {x: 110, y: 20},
         entries          = null,
@@ -48,7 +48,7 @@
         leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
         taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</button></li>',
         taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu fade' id='taskMenu'><li><a href='###' class='reload-win'><i class='icon-repeat'></i> &nbsp;{reloadText}</a></li><li><a href='###' class='close-win'><i class='icon-remove'></i> &nbsp;{closeText}</a></li></ul>",
-        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</a></li>',
+        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{desc}" data-id="{id}" data-code={code}>{iconhtml}{name}</a></li>',
 
         init                          : function() // init the default
         {
@@ -81,7 +81,7 @@
      */
     function initEntries(entriesOptions)
     {
-        entries        = [];
+        entries = [];
         $.each(entriesOptions, function(idx, option)
         {
             entries.push(new entry(option));
@@ -98,11 +98,12 @@
      */
     function refreshEntries(entriesOptions, reset)
     {
+        var DEL = 'delete';
         if(reset)
         {
             $.each(entries, function(idx, et)
             {
-                if(et.id != 'allapps' && et.id != 'superadmin') et['delete'] = true;
+                if(et.id != 'allapps' && et.id != 'superadmin') et[DEL] = true;
             });
         }
         var et;
@@ -111,9 +112,9 @@
             et = getEntry(option.id);
             if(et)
             {
-                if(!option['delete'])
+                if(!option[DEL])
                 {
-                    if(reset) et['delete'] = false;
+                    if(reset) et[DEL] = false;
                     et.init(option);
                 }
             }
@@ -127,7 +128,7 @@
         {
             for(var i = entries.length - 1; i >= 0; --i)
             {
-                if(entries[i]['delete'])
+                if(entries[i][DEL])
                 {
                     entries.splice(i, 1);
                 }
@@ -325,14 +326,9 @@
         }
 
         /* window open type */
-        switch(this.open)
+        if(this.open == 'iframe' || this.open == 'json')
         {
-            case 'iframe':
-                this.cssclass += ' window-iframe';
-                break;
-            case 'json':
-                this.cssclass += ' window-json';
-                break;
+            this.cssclass += ' window-' + this.open;
         }
 
         /* init display setting */
@@ -498,7 +494,6 @@
      */
     var windowsManager = function()
     {
-
         this.init();
         this.bindEvents();
     };
@@ -509,13 +504,14 @@
         this.movingWindow     = null;
         this.activedWindow    = null;
         this.lastActiveWindow = null;
-        this.set              = new Array();
+        this.opens            = {};
+        this.shows            = [];
     };
 
     /* Query window object, the query id can be window id or entry id */
     windowsManager.prototype.query = function(q)
     {
-        return this.set[q] || this.set[settings.windowidstrTemplate.format(q)] || this.activedWindow;
+        return this.opens[q] || this.opens[settings.windowidstrTemplate.format(q)] || this.activedWindow;
     };
 
     /* Active a window with query id*/
@@ -539,7 +535,7 @@
         var win = this.query(q);
         if(win == undefined) return;
         win.close();
-        delete this.set[win.idstr];
+        delete this.opens[win.idstr];
     };
 
     /* Reload the actived window */
@@ -558,13 +554,13 @@
 
         if(!et)
         {
-            alert(settings.entryNotFindTip);
+            bootbox.alert(settings.entryNotFindTip);
             return;
         }
 
-        if(url && url.indexOf('javascript:') >=0 ) url = null;
+        if(url && url.indexOf('javascript:') >= 0 ) url = null;
 
-        var win = this.set[et.idstr];
+        var win = this.opens[et.idstr];
 
         if(!win)
         {
@@ -575,7 +571,7 @@
             }
 
             win = et.createWindow();
-            this.set[et.idstr] = win;
+            this.opens[et.idstr] = win;
             win.reload(url);
         }
         else if((go2index && !win.isIndex()) || (url != null && url != '' && url != win.url))
@@ -722,9 +718,9 @@
     /* Handle the status after browser size changed */
     windowsManager.prototype.afterBrowserResized = function()
     {
-        for(var i in this.set)
+        for(var i in this.opens)
         {
-            this.set[i].afterResized();
+            this.opens[i].afterResized();
         }
     };
 
@@ -1166,14 +1162,14 @@
             $('.fullscreen-btn').click(function()
             {
                 /* replace function 'show()' with 'toggle()' to change the behavoir */
-                desktop.fullScreenApps.show($(this).attr('data-id'));
+                desktop.fullScreenApps.toggle($(this).attr('data-id'));
             });
         }
 
         /* Handle the app: all app list */
         this.handleAllApps = function()
         {
-            $('#search').keyup(function(e)
+            $('#search').on('keyup paste input change', function(e)
             {
                 if(e.which == 27) // pressed esc
                 {
@@ -1184,10 +1180,13 @@
                     $('#allAppsList .app-btn.search-selected').click();
                 }
 
+                var $search = $(this);
+                var val = $search.val().toLowerCase();
+
+                if(val == $search.data('search')) return;
+                $search.data('search', val);
+
                 $('.search-selected').removeClass('search-selected');
-
-                var val = $(this).val().toLowerCase();
-
                 if(val.length > 0)
                 {
                     var keys = val.split(' ');
@@ -1199,7 +1198,7 @@
                         for(var ki in keys)
                         {
                             var k = keys[ki];
-                            r = r && (k=='' || (et.name.toLowerCase().indexOf(k) > -1) || (et.desc.toLowerCase().indexOf(k) > -1) || et.id.toLowerCase() == k);
+                            r = r && (k=='' || (et.name.toLowerCase().indexOf(k) > -1) || (et.code && et.code.toLowerCase().indexOf(k) > -1) || et.id.toLowerCase() == k);
                             if(!r) break;
                         }
 
@@ -1225,7 +1224,7 @@
 
             function clearInput()
             {
-                $('#search').val('').keyup();
+                $('#search').val('').change();
             }
         }
 
@@ -1237,6 +1236,7 @@
                 height            : 240,
                 draggable         : true,
                 afterOrdered      : afterOrdered,
+                shadowType        : false,
                 panelRemovingTip  : settings.confirmRemoveBlock,
                 afterPanelRemoved : afterPanelRemoved
             });
@@ -1381,7 +1381,7 @@
                 }
                 else
                 {
-                    alert(settings.entryNotFindTip);
+                    bootbox.alert(settings.entryNotFindTip);
                 }
 
                 event.preventDefault();
