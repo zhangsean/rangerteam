@@ -1171,13 +1171,25 @@
         {
             $('#search').on('keyup paste input change', function(e)
             {
+                var $selected = $('#allAppsList .app-btn.search-selected');
                 if(e.which == 27) // pressed esc
                 {
                     clearInput();
+                    return;
                 }
                 else if(e.which == 13) // pressed enter
                 {
-                    $('#allAppsList .app-btn.search-selected').click();
+                    $selected.click();
+                }
+                else if(e.which == 37 || e.which == 38 || e.which == 39 || e.which == 40) // pressed left, up, down, right
+                {
+                    var $next = $selected.closest('li')[e.which > 38 ? 'nextAll' : 'prevAll']().not('.search-hide');
+                    if($next.length)
+                    {
+                        $selected.removeClass('search-selected');
+                        $next.first().find('.app-btn').addClass('search-selected');
+                    }
+                    return;
                 }
 
                 var $search = $(this);
@@ -1186,7 +1198,7 @@
                 if(val == $search.data('search')) return;
                 $search.data('search', val);
 
-                $('.search-selected').removeClass('search-selected');
+                $selected.removeClass('search-selected');
                 if(val.length > 0)
                 {
                     var keys = val.split(' ');
