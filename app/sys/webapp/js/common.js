@@ -80,6 +80,7 @@ $(document).ready(function()
 {
     $(document).on('click', '.webapp-install', function()
     {
+        $(this).text(v.lang.doing);
         $.getJSON($(this).attr('data-url'), function(data) 
         {
             if(data.result == 'success')
