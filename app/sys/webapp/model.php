@@ -184,11 +184,24 @@ class webappModel extends model
         $maxOrder = $this->dao->select('`order`')->from(TABLE_ENTRY)->orderBy('order_desc')->limit(1)->fetch('order');
 
         $entry = new stdclass();
+        /* Save webapp's icon. */
+        if(!empty($webapp->icon))
+        {
+            $ext      = explode('.', $webapp->icon);
+            $extend   = $ext[count($ext) - 1];
+            $fileName = md5(mt_rand(0, 10000) . str_shuffle(md5($webapp->icon)) . mt_rand(0, 10000)) . '.' . $extend;
+            $dateInfo = date('Ym/', time());
+            $savePath = $this->app->getDataRoot() . "upload/" . $dateInfo . $fileName;
+            $webPath  = $this->app->getWebRoot() . 'data/upload/' . $dateInfo . $fileName;
+            $icon = file_get_contents($this->config->webapp->url . $webapp->icon);
+            file_put_contents($savePath, $icon);
+            $entry->logo = $webPath;
+        }
         $entry->code        = $this->config->webapp->codePrefix . $webapp->id;
         $entry->name        = $webapp->name;
         $entry->open        = $open;
         $entry->login       = $webapp->url;
-        $entry->control     = 'simple';
+        $entry->control     = 'full';
         $entry->size        = 'custom';
         $entry->width       = $size[0];
         $entry->height      = $size[1];
