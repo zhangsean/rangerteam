@@ -67,7 +67,7 @@
      */
     function initSettings(options)
     {
-        setTimeout(function(){indexTone = $('body').css('background-color')}, 2000);
+        indexTone = $('body').css('background-color');
 
         $.extend(settings, defaults, options);
         settings.init();
