@@ -179,7 +179,6 @@ class webappModel extends model
     {
         $webapp   = $this->getAppInfoByAPI($webappID);
         $webapp   = $webapp->webapp;
-        $size     = explode('x', $webapp->size);
         $open     = $webapp->target == 'blank' ? 'blank' : 'iframe';
         $maxOrder = $this->dao->select('`order`')->from(TABLE_ENTRY)->orderBy('order_desc')->limit(1)->fetch('order');
 
@@ -193,7 +192,7 @@ class webappModel extends model
             $dateInfo = date('Ym/', time());
             $savePath = $this->app->getDataRoot() . "upload/" . $dateInfo . $fileName;
             $webPath  = $this->app->getWebRoot() . 'data/upload/' . $dateInfo . $fileName;
-            $icon = file_get_contents($this->config->webapp->url . $webapp->icon);
+            $icon     = file_get_contents($this->config->webapp->url . $webapp->icon);
             file_put_contents($savePath, $icon);
             $entry->logo = $webPath;
         }
@@ -201,22 +200,25 @@ class webappModel extends model
         $entry->name        = $webapp->name;
         $entry->open        = $open;
         $entry->login       = $webapp->url;
-        $entry->control     = 'full';
-        $entry->size        = 'custom';
-        $entry->width       = $size[0];
-        $entry->height      = $size[1];
-        $entry->position    = 'center';
+        $entry->control     = isset($webapp->control) ? $webapp->control : 'full';
+        $entry->position    = isset($webapp->position) ? $webapp->position : 'center';
         $entry->ip          = '*';
         $entry->visible     = 0;
         $entry->buildin     = 0;
         $entry->integration = 0;
         $entry->key         = md5(time());
         $entry->order       = $maxOrder + 10;
-        if($entry->size == 'custom') $entry->size = helper::jsonEncode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
+        /* process size */
+        if($open != 'blank')
+        {
+            $entry->size = $webapp->size == '0x0' ? 'max' : 'custom';
+            $size = explode('x', $webapp->size);
+            if($entry->size == 'custom') $entry->size = helper::jsonEncode(array('width' => (int)$size[0], 'height' => (int)$size[1]));
+        }
 
         $this->app->loadConfig('entry');
         $this->dao->insert(TABLE_ENTRY)
-            ->data($entry, $skip = 'width,height,files')
+            ->data($entry, $skip = 'files')
             ->autoCheck()
             ->batchCheck($this->config->entry->require->create, 'notempty')
             ->check('code', 'unique')
