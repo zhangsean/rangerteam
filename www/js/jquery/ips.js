@@ -48,7 +48,7 @@
         leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
         taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</button></li>',
         taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu fade' id='taskMenu'><li><a href='###' class='reload-win'><i class='icon-repeat'></i> &nbsp;{reloadText}</a></li><li><a href='###' class='close-win'><i class='icon-remove'></i> &nbsp;{closeText}</a></li></ul>",
-        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn" title="{desc}" data-id="{id}" data-code={code}>{iconhtml}{name}</a></li>',
+        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn menu-{hasMenu}" data-menu={hasMenu} title="{desc}" data-id="{id}" data-code={code}>{iconhtml}{name}<i class="icon-pushpin"></i></a></li>',
 
         init                          : function() // init the default
         {
@@ -304,6 +304,7 @@
         /* extend options from params */
         $.extend(this, this.getDefaults(options.id), options);
 
+        this.hasMenu    = this.menu == 'menu' || this.menu == 'all';
         this.idstr      = settings.windowidstrTemplate.format(this.id);
         this.cssclass   = '';
 
@@ -555,6 +556,11 @@
         if(!et)
         {
             bootbox.alert(settings.entryNotFindTip);
+            return;
+        }
+        else if(et.display == 'fullscreen' && desktop.fullScreenApps)
+        {
+            desktop.fullScreenApps.toggle(et.id);
             return;
         }
 
@@ -1151,6 +1157,7 @@
         this.init = function()
         {
             this.$fullscreens = $('.fullscreen');
+            this.$search = $('#search');
 
             this.handleAllApps();
             this.handleHomeBlocks();
@@ -1169,12 +1176,25 @@
         /* Handle the app: all app list */
         this.handleAllApps = function()
         {
-            $('#search').on('keyup paste input change', function(e)
+            var that = this;
+            $('#appSearchNav').on('click', '.app-search', function()
+            {
+                var $btn = $(this);
+                var $li = $btn.closest('li');
+                if(!$li.hasClass('active'))
+                {
+                    $('#appSearchNav > li.active').removeClass('active');
+                    $li.addClass('active');
+                    that.searchApps($btn.data('key'));
+                }
+            });
+
+            that.$search.on('keyup paste input change', function(e)
             {
                 var $selected = $('#allAppsList .app-btn.search-selected');
                 if(e.which == 27) // pressed esc
                 {
-                    clearInput();
+                    that.searchApps();
                     return;
                 }
                 else if(e.which == 13) // pressed enter
@@ -1192,13 +1212,14 @@
                     return;
                 }
 
-                var $search = $(this);
+                var $search = that.$search;
                 var val = $search.val().toLowerCase();
 
-                if(val == $search.data('search')) return;
+                if(val === $search.data('search')) return;
                 $search.data('search', val);
 
                 $selected.removeClass('search-selected');
+                var searchCount = 0;
                 if(val.length > 0)
                 {
                     var keys = val.split(' ');
@@ -1210,10 +1231,11 @@
                         for(var ki in keys)
                         {
                             var k = keys[ki];
-                            r = r && (k=='' || (et.name.toLowerCase().indexOf(k) > -1) || (et.code && et.code.toLowerCase().indexOf(k) > -1) || et.id.toLowerCase() == k);
+                            r = r && (k=='' || (k == ':open' && btn.hasClass('open')) || ((k == ':menu' && et.hasMenu)) || (et.name.toLowerCase().indexOf(k) > -1) || (et.code && et.code.toLowerCase().indexOf(k) > -1) || et.id.toLowerCase() == k);
                             if(!r) break;
                         }
 
+                        if(r) searchCount++;
                         btn.closest('li').toggleClass('search-hide', !r);
 
                         if(r && first)
@@ -1230,14 +1252,19 @@
                     $('.search-hide').removeClass('search-hide');
                     $('#cancelSearch').fadeOut('fast');
                 }
+
+                $('#appSearchNav > li.active').removeClass('active');
+                $('#appSearchNav .app-search[data-key="' + val + '"]').closest('li').addClass('active').find('.search-count').text(searchCount || '');
             });
 
-            $('#cancelSearch').click(clearInput);
+            $('#cancelSearch').click(function(){that.searchApps('');});
+        };
 
-            function clearInput()
-            {
-                $('#search').val('').change();
-            }
+        this.searchApps = function(key, focus)
+        {
+            if(key === undefined || key === false) key = this.$search.val();
+            this.$search.data('search', false).val(key).change();
+            if(focus) this.$search.focus();
         }
 
         /* Handle the app: home blocks, use dashboard control in zui */
@@ -1296,7 +1323,7 @@
             desktop.updateBrowserUrl();
             desktop.updateBrowserTitle();
 
-            if(id == 'allapps') $('#search').focus();
+            if(id == 'allapps') this.searchApps(false, true);
 
             $('body').css('background-color', indexTone);
         }
@@ -1358,12 +1385,14 @@
             {
                 this.show(entries[index]);
             }
+
+            $('.entries-count').text(entries.length - 1);
         };
 
         /* show a shortcut */
         this.show = function(entry)
         {
-            if(entry.menu == 'menu' || entry.menu == 'all') this.$appsMenu.append(entry.toLeftBarShortcutHtml());
+            if(entry.hasMenu) this.$appsMenu.append(entry.toLeftBarShortcutHtml());
             if(entry.menu == 'all' || entry.menu == 'list') this.$allAppsList.append(entry.toEntryListShortcutHtml());
         };
 

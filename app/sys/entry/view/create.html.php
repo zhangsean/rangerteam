@@ -25,7 +25,7 @@ include '../../common/view/header.html.php';
           <td class='w-p50'>
             <div class='input-group'>
               <?php echo html::input('name', '', "class='form-control' placeholder='{$lang->entry->note->name}'");?>
-              <label class="input-group-addon"><?php echo $lang->entry->abbr;?></label>
+              <label class='input-group-addon fix-border'><?php echo $lang->entry->abbr;?></label>
               <?php echo html::input('abbr', '', "class='form-control' maxlength='2' placeholder='{$lang->entry->note->abbr}'");?>
               <div class='input-group-addon'>
                 <label class="checkbox"><input type="checkbox" id="visible" name="visible" value="1"> <?php echo $lang->entry->note->visible;?></label>

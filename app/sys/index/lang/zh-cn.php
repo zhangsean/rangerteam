@@ -11,6 +11,7 @@
  */
 $lang->index->common       = '首页';
 $lang->index->allEntries   = '所有应用';
+$lang->index->opened       = '已打开';
 $lang->index->addEntry     = '添加应用';
 $lang->index->profile      = '个人信息';
 $lang->index->set          = '系统配置';
@@ -21,8 +22,6 @@ $lang->index->customBlocks = '编辑区块';
 $lang->index->addBlock     = '添加区块';
 $lang->index->refresh      = '更新';
 $lang->index->hidden       = '隐藏';
-
-$lang->index->countEntries = "共 <span class='entries-count'></span> 款应用";
 
 $lang->index->ips['confirmClose']       = '确认要关闭　【{0}】 吗？';
 $lang->index->ips['entryNotFindTip']    = '应用没有找到！';

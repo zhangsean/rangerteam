@@ -148,8 +148,15 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 
 /* allapps */
 #allapps {background-color: rgba(0,0,0,0.25); color: #fff;}
-#allapps > header {padding: 20px 40px; border-bottom: 1px solid rgba(255,255,255,0.2)}
-#allapps .muted {color: #aaa; color:rgba(255,255,255,0.6);}
+#allapps > header {padding: 20px 40px 10px; border-bottom: 1px solid rgba(255,255,255,0.2)}
+#allapps > header .nav {margin-bottom: -9px; bottom: -1px; border: none; position: relative;}
+#allapps > header .nav > li > a {padding: 12px 15px; background: none; border-color: transparent; color: #fff; color: rgba(255,255,255,0.6);}
+#allapps > header .nav > li > a > small {display: none}
+#allapps > header .nav > li > a:hover {border-color: #fff; border-color: rgba(255,255,255,0.2); border-bottom-color: transparent; background-color:rgba(255,255,255,0.24);}
+#allapps > header .nav > li.active > a, #allapps > header .nav > li.active > a:hover {color: #fff; border-color: #fff; border-color: rgba(255,255,255,0.2); border-bottom-color: #0f4599; background: none}
+#allapps > header .nav > li.active > a > small {display: inline;}
+#allapps > header .nav > li.active > a > span {font-weight: bold;}
+#allapps .muted {color:rgba(255,255,255,0.6);}
 
 #search {padding: 6px 30px}
 #allapps .search-input {position: relative;}
@@ -164,8 +171,9 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #allAppsList li.search-hide {width: 0; margin-right: 0;}
 #allAppsList li a {overflow: hidden; white-space: nowrap; padding: 15px 20px; font-size: 16px; text-overflow:ellipsis; border:2px solid transparent\0;}
 #allAppsList li a:hover, #allAppsList li a.search-selected{background-color: none\0; border:2px solid #ccc\0;}
-#allAppsList li a.open {background-color:rgba(255,255,255,0.1);}
-#allAppsList li a.open:hover,#allAppsList li a.active:hover, #allAppsList li a.search-selected {background-color:rgba(255,255,255,0.24);}
+#allAppsList li a .icon-pushpin {display: none}
+#allAppsList li a.menu-true .icon-pushpin {display: block; position: absolute; left: 12px; top: 48px; width: 20px; height: 20px;border: 1px solid #fff; border: 1px solid rgba(255,255,255,0.5); border-radius: 50%; text-align: center; line-height: 18px; background: #000; background: rgba(0,0,0,0.4); color: #fff;}
+#allAppsList li a.active:hover, #allAppsList li a.search-selected {background-color:rgba(255,255,255,0.24);}
 #allAppsList li img {width: 48px; height: 48px; margin-right: 10px; box-shadow: 0 1px 1px rgba(0,0,0,0.35); border-radius: 8px}
 #allAppsList li .app-btn > .icon {display: inline-block; width: 48px; height: 48px; line-height: 48px; text-align: center; margin-right: 10px; background-color: #555; background-color: rgba(255,255,255,.2); border-radius: 8px}
 #allAppsList li .app-btn:hover > .icon {background-color: rgba(255,255,255,.3);}

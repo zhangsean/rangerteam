@@ -12,6 +12,7 @@
 $lang->index->common       = 'Index';
 $lang->index->allEntries   = 'All Entries';
 $lang->index->addEntry     = 'Add';
+$lang->index->opened       = 'opened';
 $lang->index->profile      = 'Profile';
 $lang->index->set          = 'Settings';
 $lang->index->theme        = 'Theme';
@@ -21,8 +22,6 @@ $lang->index->customBlocks = 'Custom block';
 $lang->index->addBlock     = 'Add Block';
 $lang->index->refresh      = 'Refresh';
 $lang->index->hidden       = 'Hidden';
-
-$lang->index->countEntries = "A total of <span class='entries-count'></span> entries";
 
 $lang->index->ips['confirmClose']        = 'Be sure to delete [{0}]?';
 $lang->index->ips['entryNotFindTip']     = 'Entry is not found!';
