@@ -9,13 +9,13 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$clientLang = $this->app->getClientLang();
 ?>
-<a href='###' class='dropdown-toggle' data-toggle='dropdown'><i class='icon-globe icon-large'></i> &nbsp;<?php echo $config->langs[$clientLang]?><span class='caret'></span></a>
+<?php $clientLang = $this->app->getClientLang();?>
+<a href='###' tabindex='-1'><?php echo $config->langs[$clientLang]?></a>
 <ul class='dropdown-menu'>
   <?php
   $langs = $config->langs;
   unset($langs[$clientLang]);
-  foreach($langs as $langKey => $currentLang) echo "<li><a rel='nofollow' href='javascript:selectLang(\"$langKey\")'>$currentLang</a></li>";
+  foreach($langs as $langKey => $currentLang) echo "<li><a href='javascript:selectLang(\"$langKey\")'>$currentLang</a></li>";
   ?>
 </ul>
