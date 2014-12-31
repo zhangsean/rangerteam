@@ -58,6 +58,7 @@ class task extends control
         }
 
         $this->session->set('taskList', $this->app->getURI(true));
+        $this->session->set('taskListLink' . $projectID, $this->app->getURI(true));
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
@@ -429,6 +430,7 @@ class task extends control
         }
 
         $this->session->set('taskList', $this->app->getURI(true));
+        $this->session->set('taskListLink' . $projectID, $this->app->getURI(true));
 
         $orderBy = 'id_desc';
         if($groupBy == 'status') $orderBy = 'pri';
@@ -466,6 +468,7 @@ class task extends control
         }
 
         $this->session->set('taskList', $this->app->getURI(true));
+        $this->session->set('taskListLink' . $projectID, $this->app->getURI(true));
 
         $orderBy = 'id_desc';
         if($groupBy == 'status') $orderBy = 'pri';
