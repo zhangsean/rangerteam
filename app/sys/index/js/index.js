@@ -1,8 +1,63 @@
 $(function()
 {
     /* start ips */
-    $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock}, config, ipsLang));
-})
+    $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock, onDeleteEntry: deleteEntry, onFixEntry: fixEntryToMenu, onRemoveEntry: removeEntryFromMenu, onSortEntry: sortEntry}, config, ipsLang));
+});
+
+/**
+ * Sort entry
+ * 
+ * @param  object      orders
+ * @param  function    callback after success
+ * @access public
+ * @return void
+ */
+function sortEntry(orders, callback)
+{
+    callback && callback(true);
+}
+
+/**
+ * Remove entry icon from menu.
+ * 
+ * @param  int         entry id 
+ * @param  function    callback after success
+ * @access public
+ * @return void
+ */
+function removeEntryFromMenu(id, callback)
+{
+    callback && callback(true);
+}
+
+/**
+ * Fix entry icon to menu
+ * 
+ * @param  int         entry id 
+ * @param  function    callback after success
+ * @access public
+ * @return void
+ */
+function fixEntryToMenu(id, callback)
+{
+    callback && callback(true);
+}
+
+/**
+ * Delete entry.
+ * 
+ * @param  object      entry 
+ * @param  function    callback after delete success
+ * @access public7
+ * @return void
+ */
+function deleteEntry(et, callback)
+{
+    $.getJSON(createLink('entry', 'delete', 'code=' + et.code), function(data)
+    {
+        callback && callback(data.result == 'success');
+    });
+}
 
 /**
  * Delete block.

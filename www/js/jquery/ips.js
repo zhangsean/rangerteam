@@ -45,10 +45,10 @@
         confirmCloseBrowser           : '提示：当前有打开的应用窗口',
         windowHtmlTemplate            : "<div id='{idstr}' class='window{cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}' data-url='{url}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
         frameHtmlTemplate             : "<iframe id='iframe-{id}' name='iframe-{id}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
-        leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
-        taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-id="{id}">{iconhtml}{name}</button></li>',
-        taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu fade' id='taskMenu'><li><a href='###' class='reload-win'><i class='icon-repeat'></i> &nbsp;{reloadText}</a></li><li><a href='###' class='close-win'><i class='icon-remove'></i> &nbsp;{closeText}</a></li></ul>",
-        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn menu-{hasMenu}" data-menu={hasMenu} title="{desc}" data-id="{id}" data-code={code}>{iconhtml}{name}<i class="icon-pushpin"></i></a></li>',
+        leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" data-btn-type="menu" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
+        taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-btn-type="task" data-id="{id}">{iconhtml}{name}</button></li>',
+        taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu fade' id='taskMenu'><li><a href='javascript:;' class='open-win'><i class='icon-bolt'></i> &nbsp;{openText}</a></li><li><a href='javascript:;' class='reload-win'><i class='icon-repeat'></i> &nbsp;{reloadText}</a></li><li><a href='javascript:;' class='fix-entry'><i class='icon-pushpin'></i> &nbsp;{fixToMenuText}</a></li><li><a href='javascript:;' class='remove-entry'><i class='icon-pushpin icon-rotate-90'></i> &nbsp;{removeFromMenuText}</a></li><li><a href='javascript:;' class='close-win'><i class='icon-remove'></i> &nbsp;{closeText}</a></li><li><a href='javascript:;' class='delete-entry'><i class='icon-trash'></i> &nbsp;{deleteEntryText}</a></li></ul>",
+        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn menu-{hasMenu} s-list-btn" data-menu={hasMenu} data-btn-type="list" title="{desc}" data-id="{id}" data-code={code}>{iconhtml}{name}<i class="icon-pushpin"></i></a></li>',
 
         init                          : function() // init the default
         {
@@ -106,7 +106,7 @@
                 if(et.id != 'allapps' && et.id != 'superadmin') et[DEL] = true;
             });
         }
-        var et;
+        var et, deleted;
         $.each(entriesOptions || [], function(idx, option)
         {
             et = getEntry(option.id);
@@ -115,7 +115,13 @@
                 if(!option[DEL])
                 {
                     if(reset) et[DEL] = false;
-                    et.init(option);
+                    if(et.uuid === option.uuid) et = option;
+                    else et.init(option);
+                }
+                else
+                {
+                    et[DEL] = true;
+                    deleted = true;
                 }
             }
             else
@@ -124,7 +130,7 @@
             }
         });
 
-        if(reset)
+        if(deleted || reset)
         {
             for(var i = entries.length - 1; i >= 0; --i)
             {
@@ -162,6 +168,7 @@
      */
     var entry = function(options)
     {
+        this.uuid = $.uuid();
         this.init(options);
     }
 
@@ -183,6 +190,7 @@
             position : 'default',
             icon     : '',
             cssclass : '',
+            opened   : false,
             menu     : 'all' // wethear show in left menu bar
         };
 
@@ -266,7 +274,7 @@
     /* Transform to shortcut html tag show in left bar from teamplte */
     entry.prototype.toLeftBarShortcutHtml = function()
     {
-        if(this.menu) return settings.leftBarShortcutHtmlTemplate.format(this);
+        return settings.leftBarShortcutHtmlTemplate.format(this);
     };
 
     /* Transform to shortcut html tag show in task bar form template */
@@ -289,6 +297,7 @@
         $('#taskbar .bar-menu').append(this.toTaskBarShortcutHtml());
         $('.app-btn[data-id="'+this.id+'"]').addClass('open');
 
+        this.opened = true;
         return new windowx(this);
     };
 
@@ -620,6 +629,7 @@
             else
             {
                 this.lastActiveWindow = this.activedWindow;
+                desktop.cancelFullscreenMode();
             }
 
             this.activedWindow.$.removeClass('window-active').css('z-index', parseInt(this.activedWindow.$.css('z-index')) % 10000);
@@ -629,7 +639,7 @@
     /* Bind events */
     windowsManager.prototype.bindEvents = function()
     {
-        $(document).on('click', '.window', function() // active by click a non actived window
+        $('#desktop').on('click', '.window', function() // active by click a non actived window
         {
             windows.active($(this).attr('id'));
         }).on('mousedown', '.movable,.window-movable .window-head', function(e) // make the window movable with class '.movable' or '.window-movable'
@@ -637,7 +647,7 @@
             var win = $(this).closest('.window:not(.window-max)');
             if(win.length < 1) return;
 
-            windows.movingWindow = windows.set[win.attr('id')];
+            windows.movingWindow = windows.opens[win.attr('id')];
 
             var mwPos = win.position();
             win.data('mouseOffset', {x: e.pageX - mwPos.left, y: e.pageY - mwPos.top}).addClass('window-moving');
@@ -666,29 +676,87 @@
         }).keydown(this.handleWindowKeydown) // listen the keydown events
         .on('click', '.max-win', function(event) // max-win
         {
-            windows.set[$(this).closest('.window').attr('id')].toggle();
+            windows.opens[$(this).closest('.window').attr('id')].toggle();
             stopEvent(event);
         }).on('dblclick', '.window-head', function(event) // double click for max-win
         {
-            windows.set[$(this).closest('.window').attr('id')].toggleSize();
+            windows.opens[$(this).closest('.window').attr('id')].toggleSize();
             stopEvent(event);
         }).on('click', '.close-win', function(event) // close-win
         {
             var q = $(this).closest('.window').attr('data-id');
             if(!q) q = $(this).closest('.app-btn').attr('data-id');
-            if(!q) q = $('#taskMenu.show').attr('data-id');
+            if(!q) q = $('#taskMenu.show').data('id');
             windows.close(q);
         }).on('click', '.min-win', function(event) // min-win
         {
-            windows.set[$(this).closest('.window').attr('id')].hide();
+            windows.opens[$(this).closest('.window').attr('id')].hide();
             stopEvent(event);
-        }).on('click', '.reload-win', function(event) // reload window content
+        }).on('click', '.reload-win', function() // reload window content
         {
             var q = $(this).closest('.window').attr('data-id');
             if(!q) q = $(this).closest('.app-btn').attr('data-id');
-            if(!q) q = $('#taskMenu.show').attr('data-id');
+            if(!q) q = $('#taskMenu.show').data('id');
 
             windows.query(q).reload();
+        }).on('click', '.open-win', function()
+        {
+            var id = $(this).closest('.dropdown-menu').data('id');
+            windows.openEntry(id);
+        }).on('click', '.delete-entry', function()
+        {
+            if(!$.isFunction(settings.onDeleteEntry)) return;
+            var id = $(this).closest('.dropdown-menu').data('id');
+            var et = getEntry(id);
+            if(et)
+            {
+                settings.onDeleteEntry(et, function(result)
+                {
+                    if(result)
+                    {
+                        $.messager.info(settings.removedEntry.format(et.name));
+                        var option = {id: et.id};
+                        option['delete'] = true;
+                        $.refreshDesktop([option]);
+                    }
+                });
+            }
+        }).on('click', '.remove-entry', function()
+        {
+            if(!$.isFunction(settings.onRemoveEntry)) return;
+            var id = $(this).closest('.dropdown-menu').data('id');
+            var et = getEntry(id);
+            if(et && (et.menu == 'all' || et.menu == 'menu'))
+            {
+                settings.onRemoveEntry(id, function(result)
+                {
+                    if(result)
+                    {
+                        if(et.menu == 'all') et.menu = 'list';
+                        else if(et.menu == 'menu') et.menu = 'none';
+                        et.hasMenu = false;
+                        $.refreshDesktop([et]);
+                    }
+                });
+            }
+        }).on('click', '.fix-entry', function()
+        {
+            if(!$.isFunction(settings.onFixEntry)) return;
+            var id = $(this).closest('.dropdown-menu').data('id');
+            var et = getEntry(id);
+            if(et && et.menu != 'menu' && et.menu != 'all')
+            {
+                settings.onFixEntry(id, function(result)
+                {
+                    if(result)
+                    {
+                        if(et.menu == 'list') et.menu = 'all';
+                        else et.menu = 'menu';
+                        et.hasMenu = true;
+                        $.refreshDesktop([et]);
+                    }
+                });
+            }
         });
 
         try
@@ -1008,6 +1076,7 @@
             this.entry.top    = Math.max(desktopPos.y, win.position().top);
             this.entry.width  = win.width();
             this.entry.height = win.height();
+            this.entry.opened = false;
         }
 
         win.fadeOut(settings.animateSpeed, $.proxy(function()
@@ -1298,7 +1367,7 @@
                 if(settings.onDeleteBlock && $.isFunction(settings.onDeleteBlock))
                 {
                     settings.onDeleteBlock(index);
-                    messager.info(settings.removedBlock);
+                    $.messager.info(settings.removedBlock);
                 }
             }
 
@@ -1365,6 +1434,7 @@
             this.$taskBar     = $('#taskbar');
             this.$appsMenu    = $('#apps-menu .bar-menu');
             this.$allAppsList = $("#allAppsList .bar-menu");
+            this.firstRender = true;
 
             this.render();
             this.bindEvents();
@@ -1376,6 +1446,49 @@
             this.$appsMenu.empty();
             this.$allAppsList.empty();
             this.showAll();
+
+            if(this.firstRender)
+            {
+                this.firstRender = false;
+                this.$appsMenu.sortable({trigger: '.app-btn', selector: 'li', finish: function(data)
+                {
+                    $('.tooltip').remove();
+
+                    if(!$.isFunction(settings.onSortEntry)) return;
+
+                    var orders = {};
+                    var orderNext = 1;
+                    data.list.each(function()
+                    {
+                        orders[$(this).find('.app-btn').data('id') + ''] = orderNext++;
+                    });
+
+                    $.each(entries, function(idx, et)
+                    {
+                        if(orders[et.id])
+                        {
+                            et.order = orders[et.id];
+                        }
+                        else
+                        {
+                            et.order = orderNext++;
+                            orders[et.id] = et.order;
+                        }
+                    });
+
+                    settings.onSortEntry(orders, function(result)
+                    {
+                        if(result)
+                        {
+                            $.refreshDesktop();
+                        }
+                    });
+                }});
+            }
+            else
+            {
+                this.$appsMenu.sortable('reset');
+            }
         };
 
         /* Show all shortcuts */
@@ -1392,8 +1505,25 @@
         /* show a shortcut */
         this.show = function(entry)
         {
-            if(entry.hasMenu) this.$appsMenu.append(entry.toLeftBarShortcutHtml());
-            if(entry.menu == 'all' || entry.menu == 'list') this.$allAppsList.append(entry.toEntryListShortcutHtml());
+            var $shortcut;
+            if(entry.hasMenu)
+            {
+                $shortcut = $(entry.toLeftBarShortcutHtml());
+                if(entry.opened)
+                {
+                    $shortcut.find('.app-btn').addClass('active');
+                }
+                this.$appsMenu.append($shortcut);
+            }
+            if(entry.menu == 'all' || entry.menu == 'list')
+            {
+                $shortcut = $(entry.toEntryListShortcutHtml());
+                if(entry.opened)
+                {
+                    $shortcut.find('.app-btn').addClass('open');
+                }
+                this.$allAppsList.append($shortcut);
+            }
         };
 
         /* Bind events */
@@ -1435,42 +1565,52 @@
 
             this.$leftBar.bind('contextmenu', nocontextmenu);
             this.$taskBar.bind('contextmenu', nocontextmenu);
+            this.$allAppsList.bind('contextmenu', nocontextmenu);
 
-            $(document).on('mousedown', '.app-btn.open', function(e)
+            $(document).on('mousedown', '.app-btn', function(e)
             {
                 if(e.which == 3)
                 {
-                    var btn = $(this),menu = $('#taskMenu'), offset = btn.offset();
+                    var btn = $(this),
+                        menu = $('#taskMenu');
                     if(!menu.length) menu = $(settings.taskBarMenuHtmlTemplate).appendTo('#desktop');
-                    if(menu.hasClass('show'))
+                    if(menu.hasClass('show') && menu.data('id') == btn.data('id'))
                     {
                         menu.removeClass('in');
                         setTimeout(function(){menu.removeClass('show');}, 100);
+                        return;
                     }
-                    else
-                    {
-                        menu.addClass('show');
-                        setTimeout(function(){menu.addClass('in')}, 0);
-                    }
-                    // menu.toggleClass('show');
-                    desktop.toggleDropmenuMode('taskmenu', menu.hasClass('show'));
+                    var et = getEntry(btn.data('id'));
+                    var btnType = btn.data('btnType');
+                    var offset = btn.offset();
+                    var isListBtn = btnType === 'list';
 
-                    if(menu.hasClass('show'))
+                    menu.find('.reload-win').toggle(!isListBtn && et.opened);
+                    menu.find('.fix-entry').toggle(!et.hasMenu);
+                    menu.find('.remove-entry').toggle(et.hasMenu && !et.forceMenu);
+                    menu.find('.close-win').toggle(!isListBtn && et.opened);
+                    menu.find('.delete-entry').toggle(!et.sys && isListBtn);
+
+                    if(btnType == 'menu')
                     {
-                        menu.attr('data-id', btn.attr('data-id'));
-                        if(btn.hasClass('s-menu-btn'))
-                        {
-                            menu.css({left: desktopPos.x + 2, top: offset.top, bottom: 'inherit'});
-                            $('.tooltip').remove();
-                        }
-                        else if(btn.hasClass('s-task-btn')) menu.css({left: offset.left, top: 'inherit', bottom: settings.bottomBarHeight + 2});
+                        menu.css({left: desktopPos.x + 2, top: offset.top, bottom: 'inherit'});
+                        $('.tooltip').remove();
                     }
+                    else if(isListBtn)
+                    {
+                        var menuHeight = menu.outerHeight();
+                        menu.css({left: e.clientX, top: (menuHeight + e.clientY > desktop.height) ? (e.clientY - menuHeight - 1) : e.clientY, bottom: 'inherit'});
+                    }
+                    else if(btnType == 'task') menu.css({left: offset.left, top: 'inherit', bottom: settings.bottomBarHeight + 2});
+
+                    desktop.toggleDropmenuMode('taskmenu', true);
+                    menu.addClass('show in').data('id', et.id);
                 }
             });
 
             $(document).click(function(e)
             {
-                if($(e.target).hasClass('app-btn')) return false;
+                // if($(e.target).hasClass('app-btn')) return false;
                 var menu = $('#taskMenu');
                 menu.removeClass('in');
                 setTimeout(function(){menu.removeClass('show');}, 100);

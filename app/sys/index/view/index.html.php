@@ -122,6 +122,8 @@ var entries = [
     desc     : '<?php echo $lang->index->allEntries?>',
     menu     : 'menu',
     icon     : 'icon-th-large',
+    sys      : true,
+    forceMenu: true,
     order    : 9999999
 }];
 
@@ -133,6 +135,7 @@ entries.push(
     open     : 'iframe',
     desc     : '<?php echo $lang->index->superAdmin?>',
     menu     : 'all',
+    sys      : true,
     icon     : 'icon-cog',
     url      : "<?php echo $this->createLink('admin')?>",
     order    : 9999998
