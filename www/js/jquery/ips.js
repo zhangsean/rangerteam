@@ -708,7 +708,7 @@
             if(!$.isFunction(settings.onDeleteEntry)) return;
             var id = $(this).closest('.dropdown-menu').data('id');
             var et = getEntry(id);
-            if(et)
+            if(et && confirm(settings.confirmRemoveEntry.format(et.name)))
             {
                 settings.onDeleteEntry(et, function(result)
                 {

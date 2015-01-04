@@ -33,6 +33,7 @@ $lang->index->ips['fixToMenuText']      = '固定到菜单';
 $lang->index->ips['removeFromMenuText'] = '从菜单取消固定';
 $lang->index->ips['deleteEntryText']    = '删除应用';
 $lang->index->ips['removedEntry']       = '应用【{0}】已删除';
+$lang->index->ips['confirmRemoveEntry'] = '确定移除应用【{0}】吗？';
 $lang->index->ips['showWindowText']     = '显示';
 $lang->index->ips['confirmRemoveBlock'] = '确定要删除区块 【{0}】 吗？';
 $lang->index->ips['removedBlock']       = '区块已删除';

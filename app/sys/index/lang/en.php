@@ -33,6 +33,7 @@ $lang->index->ips['fixToMenuText']       = 'Add to menu';
 $lang->index->ips['removeFromMenuText']  = 'Remove from menu';
 $lang->index->ips['deleteEntryText']     = 'Delete entry';
 $lang->index->ips['removedEntry']        = 'Entry 【{0}】 removed.';
+$lang->index->ips['confirmRemoveEntry']  = 'Be sure to remove entry [{0}]?';
 $lang->index->ips['showWindowText']      = 'Show';
 $lang->index->ips['confirmRemoveBlock']  = 'Be sure to remove block [{0}]?';
 $lang->index->ips['removedBlock']        = 'Block has been removed';
