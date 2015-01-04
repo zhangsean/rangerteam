@@ -52,7 +52,7 @@ EOT;
 
 /* Global lang items. */
 $lang->home           = '首页';
-$lang->welcome        = '欢迎您，<strong>%s</strong>！';
+$lang->welcome        = "%s协同管理系统";
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = '今天是%s，';
 $lang->today          = '今天';

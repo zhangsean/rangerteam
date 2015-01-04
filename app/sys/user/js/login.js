@@ -1,3 +1,13 @@
+$(document).ready(function()
+{
+    $('#account').focus();
+
+    $("#langs li > a").click(function() 
+    {
+        selectLang($(this).data('value'));
+    });
+})
+
 /* Keep session random valid. */
 $('#submit').click(function()
 {

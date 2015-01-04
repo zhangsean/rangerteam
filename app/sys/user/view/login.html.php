@@ -17,18 +17,40 @@ js::set('scriptName', $_SERVER['SCRIPT_NAME']);
 js::set('random', $this->session->random);
 css::internal('body{background-color:#f6f5f5}');
 ?> 
-<style>body{padding-top:70px;}</style>
 <div class='container'>
-  <div id='adminLogin'>
-    <form method='post' id='ajaxForm'>
-      <div id='logo' class='text-center'><?php echo html::image("$themeRoot/default/images/main/logo.login.png");?></div>
-      <div id='responser' class='text-center'></div>
-      <?php echo html::input('account','',"class='form-control' placeholder='{$lang->user->inputAccountOrEmail}'");?>
-      <?php echo html::password('password','',"class='form-control' placeholder='{$lang->user->inputPassword}'");?>
-      <?php echo html::select('language', $config->langs, zget($_COOKIE, 'lang', 'zh-cn'), "class='form-control' onchange='selectLang(this.value)'");?>
-      <?php echo html::hidden('referer', $referer);?>
-      <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-block');?>
-    </form>
+  <div id='login-panel'>
+    <div class='panel-head'>
+      <h4><?php printf($lang->welcome, $config->company->name);?></h4>
+      <div class='panel-actions'>
+        <div class='dropdown' id='langs'>
+          <button class='btn' data-toggle='dropdown' title='Change Language/更换语言/更換語言'><?php echo $config->langs[$this->app->getClientLang()]; ?> <span class="caret"></span></button>
+          <ul class='dropdown-menu'>
+            <?php foreach($config->langs as $key => $value):?>
+            <li class="<?php echo $key==$this->app->getClientLang()?'active':''; ?>"><a href="###" data-value="<?php echo $key; ?>"><?php echo $value; ?></a></li>
+            <?php endforeach;?>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel-content" id="login-form">
+      <form method='post' target='hiddenwin' class='form-condensed'>
+        <div id='responser' class='text-center'></div>
+        <table class='table table-form'>
+          <tr>
+            <th><?php echo $lang->user->account;?></th>
+            <td><?php echo html::input('account','',"class='form-control' placeholder='{$lang->user->inputAccountOrEmail}'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->user->password;?></th>
+            <td><?php echo html::password('password','',"class='form-control' placeholder='{$lang->user->inputPassword}'");?></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><?php echo html::submitButton($lang->login) . html::hidden('referer', $referer);?></td>
+          </tr>
+        </table>
+      </form>
+    </div>
   </div>
 </div>
 <?php
