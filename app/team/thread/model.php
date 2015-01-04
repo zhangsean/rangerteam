@@ -63,6 +63,41 @@ class threadModel extends model
     }
 
     /**
+     * Get threads list by search.
+     * 
+     * @param string $board      the boards
+     * @param string $mode 
+     * @param string $orderBy    the order by 
+     * @param string $pager      the pager object
+     * @access public
+     * @return array
+     */
+    public function getBySearch($board, $mode, $orderBy, $pager = null)
+    {
+        if($this->session->forumQuery == false) $this->session->set('forumQuery', ' 1 = 1');
+        $forumQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->forumQuery);
+
+        if(!is_array($board))
+        {
+            $board = $this->loadModel('tree')->getByID($board, 'forum');
+            $board = $board->id;
+        }
+        $threads = $this->dao->select('*')->from(TABLE_THREAD)
+            ->where('1')
+            ->beginIf($board)->andWhere('board')->in($board)->fi()
+            ->andWhere($forumQuery)
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll('id');
+
+        if(!$threads) return array();
+
+        $this->setRealNames($threads);
+
+        return $this->process($threads);
+    }
+
+    /**
      * Get stick threads.
      * 
      * @param  int    $board 

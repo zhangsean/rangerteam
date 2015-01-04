@@ -10,10 +10,18 @@
  * @link        http://www.ranzhico.com
  */
 ?>
+<?php if(isset($mode)) js::set('mode', $mode);?>
 <?php $treeMenu = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));?>
 <div class='col-xs-2'>
   <div class='panel'> 
     <?php echo html::a(inlink('create'), $lang->blog->create, "class='btn btn-primary btn-lg btn-block'");?>
+  </div>
+  <div class="panel input-group">
+    <?php echo html::input('searchInput', isset($searchText) ? $searchText : '', "class='form-control search-query' placeholder=''"); ?>
+    <span class="input-group-btn">
+      <?php echo html::a('###', "<li class='icon icon-search'></li>", "class='btn btn-primary' id='searchButton'"); ?>
+    </span>
+    <div id='querybox' class='hide'></div>
   </div>
   <div class='panel'> 
     <div class='panel-body'> <?php echo $treeMenu;?> </div>

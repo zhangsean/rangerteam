@@ -143,6 +143,8 @@ function ajaxGetSearchForm($queryBox)
         $.get(createLink('search', 'buildForm'), function(data)
         {
             $queryBox.html(data);
+            /* Set search input value in blog and forum module. */
+            if(v && v.mode == 'bysearch') $('#searchInput').val($queryBox.find('#value1').val());
         });
     }
 }

@@ -13,8 +13,16 @@
 <?php include '../../common/view/header.html.php'; ?>
 <?php include '../../../sys/common/view/treeview.html.php'; ?>
 <?php js::set('boardID', $boardID);?>
+<?php js::set('mode', $mode);?>
 <div class='row'>
   <div class='col-xs-2'>
+    <div class="panel input-group">
+      <?php echo html::input('searchInput', isset($searchText) ? $searchText : '', "class='form-control search-query' placeholder=''"); ?>
+      <span class="input-group-btn">
+        <?php echo html::a('###', "<li class='icon icon-search'></li>", "class='btn btn-primary' id='searchButton'"); ?>
+      </span>
+      <div id='querybox' class='hide'></div>
+    </div>
     <?php foreach($boards as $parentBoard):?>
     <ul class="nav nav-primary nav-stacked">
       <li class="nav-heading"><?php echo $parentBoard->name;?></li>

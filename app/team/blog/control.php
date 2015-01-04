@@ -29,16 +29,24 @@ class blog extends control
      * Browse blog in front.
      * 
      * @param int    $categoryID   the category id
-     * @param  string $author 
+     * @param string $author 
+     * @param string $month
+     * @param string tag
+     * @param string mode
      * @param  int    $pageID 
      * @access public
      * @return void
      */
-    public function index($categoryID = 0, $author = '', $month = '', $tag = '', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function index($categoryID = 0, $author = '', $month = '', $tag = '', $mode = 'query',$recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         unset($this->lang->blog->menu);
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        /* Build search form. */
+        $this->loadModel('search', 'sys');
+        $this->config->blog->search['actionURL'] = $this->createLink('blog', 'index', "categoryID={$categoryID}&author=&month=&tag=&mode=bysearch");
+        $this->search->setSearchParams($this->config->blog->search);
 
         $category   = $this->loadModel('tree')->getByID($categoryID, 'blog');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
@@ -48,18 +56,19 @@ class blog extends control
         if($tag)    $where .= "concat(',', keywords, ',') like ',%{$tag}%,'";
         if($month)  $where .= "createdDate like '" . str_replace('_', '-', $month) . "%'";
 
-        $articles   = $this->loadModel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), 'query', $where, $orderBy = 'id_desc', $pager);
-        $title      = '';
+        $articles = $this->loadModel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), $mode, $where, $orderBy = 'id_desc', $pager);
+        $title    = '';
 
         if($category)
         {
-            $title    = $category->name;
-            $desc     = strip_tags($category->desc);
+            $title = $category->name;
+            $desc  = strip_tags($category->desc);
             $this->session->set('articleCategory', $category->id);
         }
 
         $this->view->title    = $title;
         $this->view->category = $category;
+        $this->view->mode     = $mode;
         $this->view->articles = $articles;
         $this->view->users    = $this->loadModel('user')->getPairs();
         $this->view->pager    = $pager;

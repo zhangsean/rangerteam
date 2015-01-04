@@ -29,22 +29,30 @@ class forum extends control
      * The board page.
      * 
      * @param int    $boardID       the board id
+     * @param string $mode
      * @param int    $pageID        the current page id
      * @access public
      * @return void
      */
-    public function board($boardID = 0, $pageID = 1)
+    public function board($boardID = 0, $mode = '', $pageID = 1)
     {
         $board = $this->loadModel('tree')->getByID($boardID, 'forum');
         if(!$board) die(js::locate('back'));
+
+        /* Build search form. */
+        $this->loadModel('search', 'sys');
+        $this->config->forum->search['actionURL'] = $this->createLink('forum', 'board', "boardID={$boardID}&mode=bysearch");
+        $this->search->setSearchParams($this->config->forum->search);
  
         /* Get common threads. */
         $this->app->loadClass('pager', $static = true);
         $pager   = new pager(0, 10, $pageID);
-        $threads = $this->loadModel('thread')->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
+        if($mode != 'bysearch') $threads = $this->loadModel('thread')->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
+        if($mode == 'bysearch') $threads = $this->loadModel('thread')->getBySearch($board->id, 'bysearch', $orderBy = 'repliedDate_desc', $pager);
 
         $this->view->boardID  = $boardID;
         $this->view->title    = $board->name;
+        $this->view->mode     = $mode;
         $this->view->keywords = $board->keywords;
         $this->view->desc     = strip_tags($board->desc);
         $this->view->board    = $board;
