@@ -6,7 +6,7 @@
 #login-panel .panel-actions{float: right;position: absolute;right: 15px;top: 18px;padding: 0}
 #login-panel .panel-actions .dropdown {display: inline-block; margin-right: 2px}
 
-#login-panel .panel-content{padding-left: 100px;background:url('/theme/default/images/main/ranzhi.png') 30px -10px no-repeat; min-height: 147px}
+#login-panel .panel-content{padding-left: 100px;background:url('/theme/default/images/main/logo.login.png') 30px -10px no-repeat; min-height: 147px}
 #login-panel .panel-content table{border: none;width: 260px;margin: 20px auto}
 #login-panel .panel-content .button-s{width: 80px}
 #login-panel .panel-content .button-c{width: 88px;margin-right: 0}
