@@ -360,4 +360,32 @@ class entry extends control
 
         die($html);
     }
+
+    /**
+     * custom application settings.
+     * 
+     * @access public
+     * @return void
+     */
+    public function customApp()
+    {
+        $entries = new stdclass();
+        $tmpEntry = new stdclass();
+        $tmpEntry->id      = 1;
+        $tmpEntry->order   = 10;
+        $tmpEntry->visible = 'all';
+        $entries->{$tmpEntry->id} = $tmpEntry;
+        $tmpEntry->id      = 56;
+        $tmpEntry->order   = 0;
+        $tmpEntry->visible = 'all';
+        $entries->{$tmpEntry->id} = $tmpEntry;
+        
+        /* Merge entries settings. */
+        $allEntries = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
+        foreach($entries as $key => $value)
+        {
+            $allEntries->$key = $value;
+        }
+        $this->loadModel('setting')->setItem("{$this->app->user->account}.sys.common.customApp", json_encode($entries));
+    }
 }

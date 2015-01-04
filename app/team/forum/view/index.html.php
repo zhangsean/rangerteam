@@ -33,7 +33,7 @@
                 <tr class='board'>
                   <td>
                     <?php echo $this->forum->isNew($childBoard) ? "<span class='text-success'><i class='icon-comment'></i></span>" : "<span class='text-muted'><i class='icon-comment'></i></span>"; ?>
-                    <?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name, "class='name'");?>
+                    <?php echo html::a(inlink('board', "id=$childBoard->id"), $childBoard->name, "class='name'");?>
                     <?php if($childBoard->moderators[0]) printf(" &nbsp;<span class='moderators hidden-xxs'>" . $lang->forum->lblOwner . '</span>', trim(implode(',', $childBoard->moderators), ','));?>
                   </td>
                 </tr>

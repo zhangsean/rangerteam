@@ -35,7 +35,6 @@ class index extends control
 
         foreach($entries as $entry)
         {
-
             $sso  = $this->createLink('entry', 'visit', "entryID=$entry->id");
             $logo = !empty($entry->logo) ? $entry->logo : '';
             $size = !empty($entry->size) ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";

@@ -20,6 +20,18 @@ class entryModel extends model
     public function getEntries()
     {
         $entries = $this->dao->select('*')->from(TABLE_ENTRY)->orderBy('`order`')->fetchAll();
+
+        /* Add custom settings. */
+        $customApp = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
+        foreach($entries as $entry)
+        {
+            if(isset($customApp->{$entry->id}))
+            {
+                $entry->order = $customApp->{$entry->id}->order;
+                $entry->visible = $customApp->{$entry->id}->visible;
+            }
+        }
+
         return $entries;
     }
 
