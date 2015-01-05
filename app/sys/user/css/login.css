@@ -1,16 +1,10 @@
-.container{margin: 10% auto 0 auto}
+.container {margin: 10% auto 0 auto}
 
-#login-panel{margin: 0 auto;width: 460px;min-height: 260px;background-color: #fff;border: 1px solid #dfdfdf;-moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; -moz-box-shadow: 0px 1px 15px rgba(0,0,0,0.15); -webkit-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15); box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);}
-#login-panel .panel-head{min-height: 70px;background-color: #edf3fe;border-bottom: 1px solid #dfdfdf;position: relative}
-#login-panel .panel-head h4{margin: 0 0 0 20px;padding: 0;line-height: 70px; font-size: 14px}
-#login-panel .panel-actions{float: right;position: absolute;right: 15px;top: 18px;padding: 0}
-#login-panel .panel-actions .dropdown {display: inline-block; margin-right: 2px}
-
-#login-panel .panel-content{padding-left: 100px;background:url('/theme/default/images/main/logo.login.png') 30px -10px no-repeat; min-height: 147px}
-#login-panel .panel-content table{border: none;width: 260px;margin: 20px auto}
-#login-panel .panel-content .button-s{width: 80px}
-#login-panel .panel-content .button-c{width: 88px;margin-right: 0}
-
-.table-form th, .table-form td{padding: 8px 5px;}
-
-@media (max-width: 700px){ #adminLogin{border: none;margin: 0 auto;box-shadow: none;padding: 20px 15px;background-color: #f6f5f5}}
+#login {margin: 0 auto; width: 500px; min-height: 260px; background-color: #fff; border: 1px solid #dfdfdf; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; -moz-box-shadow: 0px 1px 15px rgba(0,0,0,0.15); -webkit-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15); box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15)}
+#login .panel-head {min-height: 70px; background-color: #fafafa; border-bottom: 1px solid #dfdfdf; position: relative}
+#login .panel-head h4 {margin: 0 0 0 20px; padding: 0; line-height: 70px; font-size: 14px}
+#login .panel-actions {float: right; position: absolute; right: 15px; top: 18px; padding: 0}
+#login .panel-actions .dropdown {display: inline-block; margin-right: 2px}
+#login #submit {min-width: 100px;}
+#loginForm {padding: 20px 20px;}
+.table-form th, .table-form td {padding: 8px 5px}
