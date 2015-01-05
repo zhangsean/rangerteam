@@ -163,6 +163,8 @@ body.page-actions-fixed {padding-bottom: 70px}
 .dropdown-submenu.left > .dropdown-menu{left: -100%;}
 .dropdown-menu .divider {margin: 5px 0;}
 
+.dropdown-menu > li > a > .icon {display: inline-block; width: 18px; text-align: center; opacity: .9}
+
 /* tree */
 .tree {padding: 0; margin: 0;}
 .tree li,.tree ul {margin: 0; padding: 0; display: block; position: relative;}

@@ -11,7 +11,7 @@
  */
 ?>
 <?php $clientLang = $this->app->getClientLang();?>
-<a href='###' tabindex='-1'><?php echo $config->langs[$clientLang]?></a>
+<a href='###' tabindex='-1'><i class='icon icon-globe'></i> <?php echo $config->langs[$clientLang]?></a>
 <ul class='dropdown-menu'>
   <?php
   $langs = $config->langs;
