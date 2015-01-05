@@ -1,7 +1,7 @@
 $(function()
 {
     /* start ips */
-    $.ipsStart(entries, $.extend({autoHideMenu: true, onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock, onDeleteEntry: deleteEntry, onUpdateEntryMenu: updateEntryMenu, onSortEntries: sortEntries}, config, ipsLang));
+    $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock, onDeleteEntry: deleteEntry, onUpdateEntryMenu: updateEntryMenu, onSortEntries: sortEntries}, config, ipsLang));
 });
 
 /**

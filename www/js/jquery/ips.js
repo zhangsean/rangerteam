@@ -172,7 +172,6 @@
             url      : '',
             control  : 'simple',
             id       : entryId || windowIdTeamplate.format(windowIdSeed++),
-            zindex   : windowZIndexSeed++,
             name     : 'No name entry',
             open     : 'iframe',
             desc     : '',
@@ -326,7 +325,6 @@
         if(this.display == 'modal')
         {
             this.cssclass += ' window-modal';
-            this.zindex   += 50000;
             this.position  = 'center';
         }
 
@@ -409,12 +407,12 @@
     /* Initialize */
     desktopManager.prototype.init = function()
     {
-        this.$          = $('#desktop');
-        this.$menu      = $('#apps-menu');
-        this.$bottombar = $('#bottomBar');
+        this.$                = $('#desktop');
+        this.$menu            = $('#apps-menu');
+        this.$bottombar       = $('#bottomBar');
         this.isFullscreenMode = this.$.hasClass('fullscreen-mode');
         
-        this.menu           = new menu();
+        this.menu      = new menu();
         this.position  = desktopPos;
         this.x         = desktopPos.x;
         this.y         = desktopPos.y;
@@ -509,7 +507,7 @@
         this.activedWindow    = null;
         this.lastActiveWindow = null;
         this.opens            = {};
-        this.shows            = [];
+        this.shows            = []; // work as stack
     };
 
     /* Query window object, the query id can be window id or entry id */
@@ -522,15 +520,28 @@
     windowsManager.prototype.active = function(q)
     {
         var win = this.query(q);
-        if(win == undefined) return;
-
-        win.active();
+        if(win == undefined)
+        {
+            this.activeLastWindow();
+        }
+        else
+        {
+            win.active();
+        }
     };
 
     /* Re-active the last actived window */
-    windowsManager.prototype.activeLastWindow = function()
+    windowsManager.prototype.activeLastWindow = function(toUnActive)
     {
-        if(this.lastActiveWindow) this.lastActiveWindow.active();
+        if(toUnActive) this.unActiveWindow(toUnActive);
+        if(this.shows.length)
+        {
+            this.query(this.shows[this.shows.length - 1]).active();
+        }
+        else
+        {
+            desktop.fullScreenApps.toggle('home');
+        }
     };
 
     /* Close a window */
@@ -611,23 +622,27 @@
         this.openEntry(et);
     };
 
-    /* Handle status before window active */
-    windowsManager.prototype.beforeActive = function()
+    /* Unactive a window */
+    windowsManager.prototype.unActiveWindow = function(win)
     {
-        if(this.activedWindow)
+        for(var i = this.shows.length - 1; i >= 0; i--)
         {
-            if(this.activedWindow.isFullscreen())
+            if(this.shows[i] == win.id)
             {
-                this.activedWindow.hide(true);
+                this.shows.splice(i, 1);
+                win.$.removeClass('window-active');
+                return true;
             }
-            else
-            {
-                this.lastActiveWindow = this.activedWindow;
-                desktop.cancelFullscreenMode();
-            }
-
-            this.activedWindow.$.removeClass('window-active').css('z-index', parseInt(this.activedWindow.$.css('z-index')) % 10000);
         }
+        return false;
+    };
+
+    /* active a window */
+    windowsManager.prototype.activeWindow = function(win)
+    {
+        this.unActiveWindow(win);
+        win.$.css('z-index', windowZIndexSeed++).addClass('window-active');
+        this.shows.push(win.id);
     };
 
     /* Bind events */
@@ -769,7 +784,7 @@
     /* Handle window key down event */
     windowsManager.prototype.handleWindowKeydown = function(event)
     {
-        if(event.keyCode == 116 || (event.ctrlKey && event.keyCode==82))
+        if(event.keyCode == 116 || (event.ctrlKey && event.keyCode == 82)) // F5 or Ctrl+R
         {
             windows.reload();
 
@@ -909,7 +924,7 @@
         {
             this.$.fadeOut(settings.animateSpeed).addClass('window-min');
             if(!silence)
-                windows.activeLastWindow();
+                windows.activeLastWindow(this);
         }
     };
 
@@ -1089,7 +1104,7 @@
         }, this));
 
         $('.tooltip').remove();
-        if(!this.isModal) windows.activeLastWindow();
+        if(!this.isModal) windows.activeLastWindow(this);
     };
 
     /* Change the window status to maximized or normal */
@@ -1157,6 +1172,7 @@
         $('.app-btn[data-id="' + this.id + '"]').addClass('active');
         $('body').css('background-color',this.tone ? this.tone : indexTone);
 
+        windows.activeWindow(this);
         if(this.isActive())
         {
             if(this.isHide())
@@ -1167,9 +1183,6 @@
             return;
         }
 
-        windows.beforeActive();
-        this.$.addClass('window-active').css('z-index',parseInt(this.$.css('z-index')) + 10000);
-        windows.activedWindow = this;
         
         this.updateEntryUrl();
     };
