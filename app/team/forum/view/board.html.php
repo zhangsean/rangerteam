@@ -36,20 +36,20 @@
     <div class='panel'>
       <div class='panel-heading'>
         <strong><i class='icon-comments-alt icon-large'></i>&nbsp;<?php $common->printForum($board);?></strong>
-        <?php if($board->moderators) printf(" &nbsp;<span class='moderators hidden-xxs'>" . $lang->forum->lblOwner . '</span>', trim(implode($board->moderators, ','), ',')); ?>
+        <?php if($board->moderators) printf(" &nbsp;<span class='moderators'>" . $lang->forum->lblOwner . '</span>', trim(implode($board->moderators, ','), ',')); ?>
         <div class='panel-actions pull-right'>
           <?php if($this->forum->canPost($board)) echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil icon-large"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn btn-primary'");?>
         </div>
       </div>
       <table class='table table-hover table-striped'>
         <thead>
-          <tr class='text-center hidden-xxxs'>
+          <tr class='text-center'>
             <th colspan='2'><?php echo $lang->thread->title;?></th>
-            <th class='w-150px hidden-xxs'><?php echo $lang->thread->author;?></th>
-            <th class='w-100px hidden-xs'><?php echo $lang->thread->postedDate;?></th>
-            <th class='w-50px hidden-xs'><?php echo $lang->thread->views;?></th>
+            <th class='w-150px'><?php echo $lang->thread->author;?></th>
+            <th class='w-100px'><?php echo $lang->thread->postedDate;?></th>
+            <th class='w-50px'><?php echo $lang->thread->views;?></th>
             <th class='w-50px'><?php echo $lang->thread->replies;?></th>
-            <th class='w-200px hidden-sm hidden-xs'><?php echo $lang->thread->lastReply;?></th>
+            <th class='w-200px visible-lg'><?php echo $lang->thread->lastReply;?></th>
           </tr>  
         </thead>
         <tbody>
@@ -62,11 +62,11 @@
               <?php echo "<span class='label label-danger'>{$lang->thread->stick}</span> "?>
               <?php if($thread->hidden) echo "<span class='text-warning'>[" . $lang->thread->statusList['hidden'] . "]</span>";?>
             </td>
-            <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
-            <td class='hidden-xs'><?php echo substr($thread->createdDate, 5, -3);?></td>
-            <td class='hidden-xs'><?php echo $thread->views;?></td>
-            <td class='hidden-xxxs'><?php echo $thread->replies;?></td>
-            <td class='hidden-sm hidden-xs'>
+            <td><strong><?php echo $thread->authorRealname;?></strong></td>
+            <td><?php echo substr($thread->createdDate, 5, -3);?></td>
+            <td><?php echo $thread->views;?></td>
+            <td><?php echo $thread->replies;?></td>
+            <td class='visible-lg'>
               <?php 
               if($thread->replies)
               {
@@ -87,11 +87,11 @@
               <?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?>
               <?php if($thread->hidden) echo '<span class="text-warning">[' . $lang->thread->statusList['hidden'] .']</span>';?>
             </td>
-            <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
-            <td class='hidden-xs'><?php echo substr($thread->createdDate, 5, -3);?></td>
-            <td class='hidden-xs'><?php echo $thread->views;?></td>
-            <td class='hidden-xxxs'><?php echo $thread->replies;?></td>
-            <td class='hidden-sm hidden-xs'>
+            <td><strong><?php echo $thread->authorRealname;?></strong></td>
+            <td><?php echo substr($thread->createdDate, 5, -3);?></td>
+            <td><?php echo $thread->views;?></td>
+            <td><?php echo $thread->replies;?></td>
+            <td class='visible-lg'>
               <?php 
               if($thread->replies)
               {

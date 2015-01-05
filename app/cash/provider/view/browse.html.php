@@ -25,7 +25,7 @@
         <th class='w-70px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->provider->type);?></th>
         <th class='w-160px'><?php commonModel::printOrderLink('area',        $orderBy, $vars, $lang->provider->area);?></th>
         <th class='w-150px'><?php commonModel::printOrderLink('industry',    $orderBy, $vars, $lang->provider->industry);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->provider->createdDate);?></th>
+        <th class='w-100px visible-lg'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->provider->createdDate);?></th>
         <th class='w-120px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
@@ -38,7 +38,7 @@
         <td><?php echo $lang->provider->typeList[$provider->type];?></td>
         <td><?php echo zget($areas, $provider->area);?></td>
         <td><?php echo zget($industries, $provider->industry);?></td>
-        <td><?php echo substr($provider->createdDate, 0, 10);?></td>
+        <td class='visible-lg'><?php echo substr($provider->createdDate, 0, 10);?></td>
         <td class='actions'>
           <?php echo html::a(inlink('contact', "providerID=$provider->id"), $lang->provider->contact, "data-toggle='modal'");?>
           <?php echo html::a(inlink('edit',    "providerID=$provider->id"), $lang->edit);?>

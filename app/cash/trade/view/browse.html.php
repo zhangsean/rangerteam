@@ -34,7 +34,7 @@
           <th class='w-100px'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->trade->category);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('handlers', $orderBy, $vars, $lang->trade->handlers);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->trade->date);?></th>
-          <th><?php echo $lang->trade->desc;?></th>
+          <th class='visible-lg'><?php echo $lang->trade->desc;?></th>
           <th class='w-120px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
@@ -51,7 +51,7 @@
           <td><?php echo zget($categories, $trade->category, ' ');?></td>
           <td><?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?></td>
           <td><?php echo formatTime($trade->date, DT_DATE1);?></td>
-          <td class='text-left'><?php echo $trade->desc;?></td>
+          <td class='text-left visible-lg'><?php echo $trade->desc;?></td>
           <td>
             <?php echo html::a(inlink('edit', "tradeID={$trade->id}"), $lang->edit);?>
             <?php echo html::a(inlink('detail', "tradeID={$trade->id}"), $lang->trade->detail, "data-toggle='modal'");?>
@@ -63,13 +63,18 @@
       <tfoot>
         <tr>
           <td colspan='7'>
-            <?php echo html::selectButton() . html::submitButton($lang->edit);?>
-            <span class='text-danger'><?php $this->trade->countMoney($trades);?></span>
           </td>
-          <td colspan='3'><?php echo $pager->get();?></td>
+          <td colspan='3'></td>
         </tr>
       </tfoot>
     </table>
+    <div class='table-footer'>
+      <div class='pull-left'>
+        <?php echo html::selectButton() . html::submitButton($lang->edit);?>
+        <span class='text-danger'><?php $this->trade->countMoney($trades);?></span>
+      </div>
+      <?php echo $pager->get();?>
+    </div>
   </from>
 </div>
 <?php include '../../common/view/footer.html.php';?>

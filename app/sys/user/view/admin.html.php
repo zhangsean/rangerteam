@@ -35,7 +35,7 @@ js::set('from', 'admin');
               </form>
             </div>
           </div>
-          <table class='table table-hover table-striped table-bordered tablesorter'>
+          <table class='table table-hover table-striped table-bordered tablesorter table-fixed'>
             <thead>
               <tr class='text-center'>
                 <?php $vars = "deptID=$deptID&query=$query&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
@@ -44,8 +44,8 @@ js::set('from', 'admin');
                 <th><?php commonModel::printOrderLink('account',  $orderBy, $vars, $lang->user->account);?></th>
                 <th><?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->user->gender);?></th>
                 <th><?php commonModel::printOrderLink('dept',     $orderBy, $vars, $lang->user->dept);?></th>
-                <th><?php commonModel::printOrderLink('join',     $orderBy, $vars, $lang->user->join);?></th>
-                <th><?php commonModel::printOrderLink('visits',   $orderBy, $vars, $lang->user->visits);?></th>
+                <th class='visible-lg'><?php commonModel::printOrderLink('join',     $orderBy, $vars, $lang->user->join);?></th>
+                <th class='visible-lg'><?php commonModel::printOrderLink('visits',   $orderBy, $vars, $lang->user->visits);?></th>
                 <th><?php commonModel::printOrderLink('last',     $orderBy, $vars, $lang->user->last);?></th>
                 <th><?php commonModel::printOrderLink('ip',       $orderBy, $vars, $lang->user->ip);?></th>
                 <th><?php commonModel::printOrderLink('locked',   $orderBy, $vars, $lang->user->status);?></th>
@@ -60,8 +60,8 @@ js::set('from', 'admin');
               <td><?php echo $user->account;?></td>
               <td><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></td>
               <td><?php echo $depts[$user->dept];?></td>
-              <td><?php echo $user->join;?></td>
-              <td><?php echo $user->visits;?></td>
+              <td class='visible-lg'><?php echo $user->join;?></td>
+              <td class='visible-lg'><?php echo $user->visits;?></td>
               <td><?php echo $user->last;?></td>
               <td><?php echo $user->ip;?></td>
               <td>
@@ -97,8 +97,8 @@ js::set('from', 'admin');
             </tr>
             <?php endforeach;?>
             </tbody>
-            <tfoot><tr><td colspan='12'><?php $pager->show();?></td></tr></tfoot>
           </table>
+          <div class='table-footer'><?php $pager->show();?></div>
         </div>
       </div>
     </div>

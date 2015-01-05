@@ -21,8 +21,8 @@
       <tr>
        <th class='w-50px'><?php echo $lang->group->id;?></th>
        <th class='w-100px'><?php echo $lang->group->name;?></th>
-       <th><?php echo $lang->group->desc;?></th>
-       <th class='w-p60'><?php echo $lang->group->users;?></th>
+       <th class='w-150px visible-lg'><?php echo $lang->group->desc;?></th>
+       <th><?php echo $lang->group->users;?></th>
        <th class='w-200px text-center'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
@@ -32,7 +32,7 @@
     <tr>
       <td class='text-center'><?php echo $group->id;?></td>
       <td><?php echo $group->name;?></td>
-      <td><?php echo $group->desc;?></td>
+      <td class='visible-lg'><?php echo $group->desc;?></td>
       <td title='<?php echo $users;?>'><?php echo $users;?></td>
       <td class='text-center'>
         <?php echo html::a(inlink('manageMember', "groupID={$group->id}"), $lang->group->manageMember);?>
