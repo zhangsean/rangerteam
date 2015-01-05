@@ -72,6 +72,10 @@ class index extends control
             if($this->loadModel('block')->initBlock('sys')) die(js::reload());
         }
 
+        /* Get custom setting about superadmin */
+        $customApp = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
+        if(isset($customApp->superadmin)) $this->view->superadmin = $customApp->superadmin;
+
         $this->view->allEntries = $allEntries;
         $this->view->blocks     = $blocks;
         $this->display();

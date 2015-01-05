@@ -365,30 +365,55 @@ class entry extends control
     }
 
     /**
-     * custom application settings.
+     * custom sort apps. 
      * 
      * @access public
      * @return void
      */
-    public function customApp()
+    public function customSort()
     {
-        $entries = new stdclass();
-        $tmpEntry = new stdclass();
-        $tmpEntry->id      = 1;
-        $tmpEntry->order   = 10;
-        $tmpEntry->visible = 'all';
-        $entries->{$tmpEntry->id} = $tmpEntry;
-        $tmpEntry->id      = 56;
-        $tmpEntry->order   = 0;
-        $tmpEntry->visible = 'all';
-        $entries->{$tmpEntry->id} = $tmpEntry;
-        
-        /* Merge entries settings. */
-        $allEntries = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
-        foreach($entries as $key => $value)
+        if($_POST)
         {
-            $allEntries->$key = $value;
+            $orders = $_POST;
+            $allEntries = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
+            /* Merge entries settings. */
+            foreach($orders as $id => $order)
+            {
+                if(!isset($allEntries->$id))
+                {
+                    $allEntries->$id = new stdclass();
+                    $allEntries->{$id}->id = $id;
+                }
+                $allEntries->{$id}->order = $order * 10;
+            }
+            $this->loadModel('setting')->setItem("{$this->app->user->account}.sys.common.customApp", json_encode($allEntries));
+            if(dao::isError()) $this->send(array('result' => 'fael', 'message' => dao::getError()));
         }
-        $this->loadModel('setting')->setItem("{$this->app->user->account}.sys.common.customApp", json_encode($entries));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+    }
+
+    /**
+     * update entry menu. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function updateEntryMenu()
+    {
+        if($_POST)
+        {
+            $id      = $this->post->id;
+            $visible = $this->post->menu == 'all' ? 1 : 0;
+            $allEntries = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
+            if(!isset($allEntries->$id))
+            {
+                $allEntries->$id = new stdclass();
+                $allEntries->{$id}->id = $id;
+            }
+            $allEntries->{$id}->visible = $visible;
+            $this->loadModel('setting')->setItem("{$this->app->user->account}.sys.common.customApp", json_encode($allEntries));
+            if(dao::isError()) $this->send(array('result' => 'fael', 'message' => dao::getError()));
+        }
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 }

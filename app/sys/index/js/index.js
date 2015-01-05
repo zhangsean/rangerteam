@@ -14,7 +14,10 @@ $(function()
  */
 function sortEntries(orders, callback)
 {
-    callback && callback(true);
+    $.post(createLink('entry', 'customSort'), orders, function(data)
+    {
+        callback && callback(data.result == 'success');
+    }, 'json');
 }
 
 /**
@@ -27,7 +30,10 @@ function sortEntries(orders, callback)
  */
 function updateEntryMenu(et, callback)
 {
-    callback && callback(true);
+    $.post(createLink('entry', 'updateEntryMenu'), et, function(data)
+    {
+        callback && callback(data.result == 'success');
+    }, 'json');
 }
 
 /**

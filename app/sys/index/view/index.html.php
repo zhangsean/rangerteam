@@ -129,6 +129,10 @@ var entries = [
 }];
 
 <?php if($this->app->user->admin == 'super'):?>
+<?php 
+    $superadminMenu  = (isset($superadmin) and isset($superadmin->visible) and $superadmin->visible == 0) ? 'list' : 'all';
+    $superadminOrder = (isset($superadmin) and isset($superadmin->order)) ? $superadmin->order : 9999998;
+?>
 entries.push(
 {
     id       : 'superadmin',
@@ -136,11 +140,11 @@ entries.push(
     name     : '<?php echo $lang->index->superAdmin;?>',
     open     : 'iframe',
     desc     : '<?php echo $lang->index->superAdmin?>',
-    menu     : 'all',
+    menu     : '<?php echo $superadminMenu;?>',
     sys      : true,
     icon     : 'icon-cog',
     url      : "<?php echo $this->createLink('admin')?>",
-    order    : 9999998
+    order    : <?php echo $superadminOrder;?>
 });
 <?php endif;?>
 
