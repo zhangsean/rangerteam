@@ -345,6 +345,7 @@ class entryModel extends model
             $tmpEntry['display']  = 'fixed';
             $tmpEntry['abbr']     = $entry->abbr;
             $tmpEntry['order']    = $entry->order;
+            $tmpEntry['sys']      = $entry->buildin;
             $allEntries[] = $tmpEntry;
         }
         return json_encode($allEntries);

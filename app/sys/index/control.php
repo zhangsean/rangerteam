@@ -52,14 +52,15 @@ class index extends control
                 url:      '$sso',
                 open:     '$entry->open', 
                 desc:     '$entry->name',
-                size:     $size,
+                size:      $size,
                 icon:     '$logo',
                 control:  '$entry->control',
                 position: '$entry->position',
                 menu:     '$menu',
                 display:  'fixed',
                 abbr:     '$entry->abbr',
-                order:    '$entry->order'
+                order:    '$entry->order',
+                sys:      '$entry->buildin'
             });\n";
         }
 

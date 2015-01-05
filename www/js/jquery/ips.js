@@ -12,6 +12,7 @@
         defaultWindowPos = {x: 110, y: 20},
         entries          = null,
         desktop          = null,
+        superadmin       = false,
         windows          = null,
         windowIdPrefix   = 'win-',
         theLoadingFrame  = null;
@@ -75,6 +76,7 @@
         $.each(entriesOptions, function(idx, option)
         {
             entries.push(new entry(option));
+            if(!superadmin && option.id == 'superadmin') superadmin = true;
         });
 
         entries.sort(function(a, b){return a.order - b.order;});
@@ -303,6 +305,7 @@
         /* extend options from params */
         $.extend(this, this.getDefaults(options.id), options);
 
+        this.sys        = this.sys && this.sys !== '0';
         this.hasMenu    = this.menu == 'menu' || this.menu == 'all';
         this.idstr      = settings.windowidstrTemplate.format(this.id);
         this.cssclass   = '';
@@ -1586,7 +1589,7 @@
                     menu.find('.fix-entry').toggle(!et.hasMenu);
                     menu.find('.remove-entry').toggle(et.hasMenu && !et.forceMenu);
                     menu.find('.close-win').toggle(!isListBtn && et.opened);
-                    menu.find('.delete-entry').toggle(!et.sys && isListBtn);
+                    menu.find('.delete-entry').toggle(superadmin && !et.sys && isListBtn);
 
                     if(btnType == 'menu')
                     {
