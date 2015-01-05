@@ -70,15 +70,8 @@ class contact extends control
     {
         if($_POST)
         {
-            $contactID = $this->contact->create(); 
-            if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
-
-            $this->loadModel('action')->create('contact', $contactID, 'Created', '');
-
-            $result = $this->contact->updateAvatar($contactID);
-
-            $message = $result['result'] ? $this->lang->saveSuccess : $result['message'];
-            $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('browse'), 'contactID' => $contactID));
+            $return = $this->contact->create(); 
+            $this->send($return);
         }
 
         $this->app->loadLang('resume');
@@ -106,19 +99,8 @@ class contact extends control
 
         if($_POST)
         {
-            $changes = $this->contact->update($contactID);
-            if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
-
-            if($changes)
-            {
-                $actionID = $this->loadModel('action')->create('contact', $contactID, 'Edited', '');
-                $this->action->logHistory($actionID, $changes);
-            }
-            
-            $return = $this->contact->updateAvatar($contactID);
-
-            $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
-            $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('view', "contactID=$contactID")));
+            $return = $this->contact->update($contactID);
+            $this->send($return);
         }
 
         $this->app->loadLang('resume');

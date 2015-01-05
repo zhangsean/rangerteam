@@ -20,7 +20,7 @@
   <li class='divider angle'></li>
   <li class='title'><?php echo $lang->customer->edit?></li>
 </ul>
-<form method='post' id='ajaxForm' class='form-condensed'>
+<form method='post' id='customerForm' class='form-condensed'>
 <div class='row-table'>
   <div class='col-main'>
    <div class='panel'>
@@ -48,8 +48,11 @@
        </table>
      </div>
    </div>
-   <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}")?>
-   <div class='page-actions'><?php echo html::submitButton() . html::backButton();?></div>
+    <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}")?>
+    <div class='page-actions'>
+      <?php echo html::submitButton() . html::backButton();?>
+      <div class='popover'></div>
+    </div>
   </div>
   <div class='col-side'>  
    <div class='panel'>

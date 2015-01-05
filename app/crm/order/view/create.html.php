@@ -17,7 +17,7 @@
     <strong><i class="icon-plus"></i> <?php echo $lang->order->create;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm'>
+    <form method='post' id='orderForm'>
       <table class='table table-form w-p60'>
         <tr>
           <th class='w-120px'><?php echo $lang->order->customer;?></th>
@@ -67,7 +67,10 @@
         </tr>
         <tr>
           <th></th>
-          <td><?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?></td>
+          <td>
+            <?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?>
+            <div class='popover'></div> 
+          </td>
         </tr>
       </table>
     </form>

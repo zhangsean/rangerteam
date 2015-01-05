@@ -18,7 +18,7 @@
     <strong><i class="icon-plus"></i> <?php echo $lang->contact->create;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm' class='form-condensed'>
+    <form method='post' id='contactForm' class='form-condensed'>
       <div class='row'>
         <div class='col-md-9'>
           <table class='table table-form'>
@@ -111,7 +111,10 @@
             </tr>
             <tr>
               <th></th>
-              <td><?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?></td>
+              <td>
+                <?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?>
+                <div class='popover'></div>
+              </td>
             </tr>
           </table>
         </div>

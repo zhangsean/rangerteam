@@ -133,6 +133,13 @@ class customerModel extends model
                 ->get();
         }
 
+        if($customer->name) $data = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('name')->eq($customer->name)->fetch();
+        if(!empty($data))
+        {
+            $message = sprintf($this->lang->error->unique, $this->lang->customer->name, html::a(helper::createLink('customer', 'view', "customerID={$data->id}"), $data->name, "target='_blank'"));
+            return array('result' => 'fail', 'message' => $message);
+        }
+
         if(!isset($customer->contact)) $this->config->customer->require->create = 'name';
         $this->dao->insert(TABLE_CUSTOMER)
             ->data($customer, $skip = 'uid,contact,email,qq,phone')
@@ -140,8 +147,9 @@ class customerModel extends model
             ->batchCheck($this->config->customer->require->create, 'notempty')
             ->exec();
 
-        if(dao::isError()) return false;
+        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
         $customerID = $this->dao->lastInsertID();
+        $this->loadModel('action')->create('customer', $customerID, 'Created');
 
         if(isset($customer->contact))
         {
@@ -154,13 +162,12 @@ class customerModel extends model
             $contact->createdBy   = $this->app->user->account;
             $contact->createdDate = $now;
 
-            $contactID = $this->loadModel('contact')->create($contact);
-
-            if(dao::isError()) return false;
-            $this->loadModel('action')->create('contact', $contactID, 'Created');
+            $return = $this->loadModel('contact')->create($contact);
+            if($return['result'] == 'fail') return $return;
         }
 
-        return $customerID;
+        $locate = $relation == 'provider' ? helper::createLink('provider', 'browse') : helper::createLink('customer', 'browse');
+        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate, 'customerID' => $customerID);
     }
 
     /**
@@ -185,6 +192,13 @@ class customerModel extends model
         if($customer->site == 'http://') $customer->site = '';
         if($customer->weibo == 'http://weibo.com/') $customer->weibo = '';
 
+        $data = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('name')->eq($customer->name)->andWhere('id')->ne($customerID)->fetch();
+        if(!empty($data))
+        {
+            $message = sprintf($this->lang->error->unique, $this->lang->customer->name, html::a(helper::createLink('customer', 'view', "customerID={$data->id}"), $data->name, "target='_blank'"));
+            return array('result' => 'fail', 'message' => $message);
+        }
+
         $this->dao->update(TABLE_CUSTOMER)
             ->data($customer, $skip = 'uid')
             ->autoCheck()
@@ -192,8 +206,17 @@ class customerModel extends model
             ->where('id')->eq($customerID)
             ->exec();
 
-        if(dao::isError()) return false;
-        return commonModel::createChanges($oldCustomer, $customer);
+        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+
+        $changes = commonModel::createChanges($oldCustomer, $customer);
+        if($changes)
+        {
+            $actionID = $this->loadModel('action')->create('customer', $customerID, 'Edited');
+            $this->action->logHistory($actionID, $changes);
+        }
+
+        $locate = strpos($this->server->http_referer, 'provider') ? helper::createLink('provider', 'view', "customerID=$customerID") :helper::createLink('customer', 'view', "customerID=$customerID");
+        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate);
     }
 
     /**
@@ -241,16 +264,14 @@ class customerModel extends model
                 ->remove('contact')
                 ->get();
 
-            $contactID = $this->contact->create($contact);
-
-            if($contactID) $this->action->create('contact', $contactID, 'Created');
-            return $contactID;
+            return $this->contact->create($contact);
         }
 
         if($this->post->contact)
         {
             $contactID = $this->post->contact;
             $contact   = $this->contact->getByID($contactID);
+            $contacts  = $this->contact->getPairs();
 
             if($contact->customer != $customerID)
             {
@@ -266,11 +287,13 @@ class customerModel extends model
                     $this->action->logHistory($actionID, $changes);
                 }
 
-                return $resumeID;
+                $this->loadModel('action')->create('customer', $customerID, 'linkContact', '', $this->post->newcontact ? $this->post->realname : $contacts[$this->post->contact]);
+
+                return array('result' => 'success', 'message' => $this->lang->saveSuccess);
             }
         }
 
-        return false;
+        return array('result' => 'fail', 'message' => dao::getError());
     }
 
     /**

@@ -2,7 +2,17 @@ $(function()
 {
     $.setAjaxForm('#linkContactForm', function(data)
     {
-        if(data.result == 'success') $.reloadAjaxModal(1500);
+        if(data.result == 'success')
+        {
+            $.reloadAjaxModal(1500);
+        }
+        else
+        {
+            $('.popover').html(data.message);
+            $('#submit').popover({trigger:'manual', placement:'right'}).popover('show');
+            $('#submit').next('.popover').addClass('popover-content');
+            return false;
+        }
     })
 
     $('#selectContact').change(function()

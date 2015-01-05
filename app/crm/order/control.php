@@ -73,12 +73,8 @@ class order extends control
     {
         if($_POST)
         {
-            $orderID = $this->order->create();
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-
-            $this->loadModel('action')->create('order', $orderID, 'Created', '');
-            $this->loadModel('action')->create('customer', $this->post->customer, 'createOrder', '', html::a($this->createLink('order', 'view', "orderID=$orderID"), $orderID));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $return = $this->order->create();
+            $this->send($return);
         }
 
         unset($this->lang->order->menu);

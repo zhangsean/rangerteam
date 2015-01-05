@@ -85,10 +85,8 @@ class customer extends control
     {
         if($_POST)
         {
-            $customerID = $this->customer->create();
-            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->loadModel('action')->create('customer', $customerID, 'Created');
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'), 'customerID' => $customerID));
+            $result = $this->customer->create();
+            return $this->send($result);
         }
 
         unset($this->lang->customer->menu);
@@ -112,16 +110,8 @@ class customer extends control
 
         if($_POST)
         {
-            $changes = $this->customer->update($customerID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-
-            if($changes)
-            {
-                $actionID = $this->loadModel('action')->create('customer', $customerID, 'Edited');
-                $this->action->logHistory($actionID, $changes);
-            }
-
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "customerID=$customerID")));
+            $return = $this->customer->update($customerID);
+            $this->send($return);
         }
 
         $this->view->title        = $this->lang->customer->edit;
@@ -240,19 +230,14 @@ class customer extends control
      */
     public function linkContact($customerID)
     {
-        $contacts = $this->loadModel('contact')->getPairs();
-
         if($_POST)
         {
-            $this->customer->linkContact($customerID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->loadModel('action')->create('customer', $customerID, 'linkContact', '', $this->post->newcontact ? $this->post->realname : $contacts[$this->post->contact]);
-
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $return = $this->customer->linkContact($customerID);
+            $this->send($return);
         }
 
         $this->view->title      = $this->lang->customer->linkContact;
-        $this->view->contacts   = $contacts;
+        $this->view->contacts   = $this->loadModel('contact')->getPairs();
         $this->view->customerID = $customerID;
         $this->display();
     }

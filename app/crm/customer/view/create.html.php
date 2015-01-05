@@ -68,7 +68,10 @@
         </tr>
         <tr>
           <th></th>
-          <td><?php echo html::submitButton() . '&nbsp;&nbsp' . html::backButton();?></td>
+          <td>
+            <?php echo html::submitButton() . '&nbsp;&nbsp' . html::backButton();?>
+            <div class='popover'></div>
+          </td>
         </tr>
       </table>
     </form>

@@ -51,6 +51,9 @@
       </tr>
     </tbody>
   </table>
-  <p class='text-center'><?php echo html::submitButton() . html::commonButton($lang->goback, 'reloadModal btn')?></p>
+  <p class='text-center'>
+    <?php echo html::submitButton() . html::commonButton($lang->goback, 'reloadModal btn')?>
+    <div class='popover'></div>
+  </p>
 <form>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

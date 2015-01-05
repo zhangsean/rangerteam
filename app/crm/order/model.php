@@ -225,7 +225,9 @@ class orderModel extends model
             $customer->createdBy   = $this->app->user->account;
             $customer->createdDate = helper::now();
 
-            $customerID = $this->loadModel('customer')->create($customer);
+            $return = $this->loadModel('customer')->create($customer);
+            if($return['result'] == 'fail') return $return;
+            $customerID = $return['customerID'];
         }
 
         $now = helper::now();
@@ -246,10 +248,13 @@ class orderModel extends model
             ->batchCheck($this->config->order->require->create, 'notempty')
             ->exec();
 
-        if(dao::isError()) return false;
+        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
 
         $orderID = $this->dao->lastInsertID();
-        return $orderID;
+        $this->loadModel('action')->create('order', $orderID, 'Created', '');
+        $this->loadModel('action')->create('customer', $this->post->customer, 'createOrder', '', html::a(helper::createLink('order', 'view', "orderID=$orderID"), $orderID));
+
+        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('order', 'browse'));
     }
 
     /**

@@ -65,10 +65,8 @@ class provider extends control
     {
         if($_POST)
         {
-            $providerID = $this->customer->create($provider = null, $relation = 'provider');
-            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->loadModel('action')->create('customer', $providerID, 'Created');
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'), 'providerID' => $providerID));
+            $return = $this->customer->create($provider = null, $relation = 'provider');
+            $this->send($return);
         }
 
         unset($this->lang->provider->menu);
@@ -89,16 +87,8 @@ class provider extends control
     {
         if($_POST)
         {
-            $changes = $this->customer->update($providerID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-
-            if($changes)
-            {
-                $actionID = $this->loadModel('action')->create('customer', $providerID, 'Edited');
-                $this->action->logHistory($actionID, $changes);
-            }
-
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "providerID=$providerID")));
+            $return = $this->customer->update($providerID);
+            $this->send($return);
         }
 
         $this->view->title      = $this->lang->provider->edit;
@@ -157,19 +147,14 @@ class provider extends control
      */
     public function linkContact($providerID)
     {
-        $contacts = $this->contact->getPairs();
-
         if($_POST)
         {
-            $this->customer->linkContact($providerID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->loadModel('action')->create('customer', $providerID, 'linkContact', '', $this->post->createContact ? $this->post->realname : $contacts[$this->post->contact]);
-
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $return = $this->customer->linkContact($providerID);
+            $this->send($return);
         }
 
         $this->view->title      = $this->lang->provider->linkContact;
-        $this->view->contacts   = $contacts;
+        $this->view->contacts   = $this->contact->getPairs();
         $this->view->providerID = $providerID;
         $this->display();
     }

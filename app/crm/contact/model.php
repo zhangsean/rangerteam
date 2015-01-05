@@ -188,11 +188,35 @@ class contactModel extends model
                 $customer->createdBy   = $this->app->user->account;
                 $customer->createdDate = helper::now();
 
-                $customerID = $this->loadModel('customer')->create($customer);
+                $return = $this->loadModel('customer')->create($customer);
+                if($return['result'] == 'fail') return $return;
+                $contact->customer = $return['customerID'];
+            }
+        }
 
-                if(dao::isError()) return false;
-                $contact->customer = $customerID;
-                $this->loadModel('action')->create('customer', $customerID, 'Created');
+        $contactList = $this->dao->select('*')->from(TABLE_CONTACT)->where('realname')->eq($contact->realname)->fetchAll('id');
+
+        if(!empty($contactList))
+        {
+            $customerContactList = $this->dao->select('contact')->from(TABLE_RESUME)->where('customer')->eq($contact->customer)->fetchAll('contact');
+
+            foreach($contactList as $id => $data)
+            {
+                if(isset($customerContactList[$id]))
+                {
+                    $message = sprintf($this->lang->error->unique, $this->lang->customer->contact, html::a(helper::createLink('contact', 'view', "contactID={$data->id}"), $data->realname, "target='_blank'"));
+                    return array('result' => 'fail', 'message' => $message);
+                }
+            }
+        }
+
+        foreach($this->config->contact->contactWayList as $item)
+        {
+            if(!empty($contact->$item)) $existContact = $this->dao->select('*')->from(TABLE_CONTACT)->where($item)->eq($contact->$item)->fetch();
+            if(!empty($existContact))
+            {
+                $message = sprintf($this->lang->error->unique, $this->lang->customer->{$item}, html::a(helper::createLink('contact', 'view', "contactID={$existContact->id}"), $existContact->$item, "target='_blank'"));
+                return array('result' => 'fail', 'message' => $message);
             }
         }
 
@@ -207,6 +231,7 @@ class contactModel extends model
         if(!dao::isError())
         {
             $contactID = $this->dao->lastInsertID();
+            $this->loadModel('action')->create('contact', $contactID, 'Created', '');
 
             $resume = new stdclass();
             $resume->contact  = $contactID;
@@ -219,10 +244,12 @@ class contactModel extends model
             $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
             if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->where('id')->eq($contactID)->exec();
 
-            return $contactID;
+            $result = $this->updateAvatar($contactID);
+            $message = $result['result'] ? $this->lang->saveSuccess : $result['message'];
+            return array('result' => 'success', 'message' => $message, 'locate' => helper::createLink('contact', 'browse'));
         }
 
-        return false;
+        return array('result' => 'fail', 'message' => dao::getError());
     }
 
     /**
@@ -249,6 +276,32 @@ class contactModel extends model
 
         if($contact->site and strpos($contact->site, '://') === false )  $contact->site  = 'http://' . $contact->site;
         if($contact->weibo and strpos($contact->weibo, 'http://weibo.com/') === false ) $contact->weibo = 'http://weibo.com/' . $contact->weibo;
+
+        $contactList = $this->dao->select('*')->from(TABLE_CONTACT)->where('realname')->eq($contact->realname)->andWhere('id')->ne($contactID)->fetchAll('id');
+
+        if(!empty($contactList))
+        {
+            $customerContactList = $this->dao->select('contact')->from(TABLE_RESUME)->where('customer')->eq($contact->customer)->fetchAll('contact');
+
+            foreach($contactList as $id => $data)
+            {
+                if(isset($customerContactList[$id]))
+                {
+                    $message = sprintf($this->lang->error->unique, $this->lang->customer->contact, html::a(helper::createLink('contact', 'view', "contactID={$data->id}"), $data->realname, "target='_blank'"));
+                    return array('result' => 'fail', 'message' => $message);
+                }
+            }
+        }
+
+        foreach($this->config->contact->contactWayList as $item)
+        {
+            if($contact->$item) $existContact = $this->dao->select('*')->from(TABLE_CONTACT)->where($item)->eq($contact->$item)->andWhere('id')->ne($contactID)->fetch();
+            if(!empty($existContact))
+            {
+                $message = sprintf($this->lang->error->unique, $this->lang->customer->{$item}, html::a(helper::createLink('contact', 'view', "contactID={$existContact->id}"), $existContact->$item, "target='_blank'"));
+                return array('result' => 'fail', 'message' => $message);
+            }
+        }
 
         $this->dao->update(TABLE_CONTACT)
             ->data($contact, 'customer,dept,maker,title,join')
@@ -278,10 +331,20 @@ class contactModel extends model
                 $this->dao->update(TABLE_RESUME)->data($resume)->where('id')->eq($oldContact->resume)->exec();
             }
 
-            return commonModel::createChanges($oldContact, $contact);
+            $changes = commonModel::createChanges($oldContact, $contact);
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('contact', $contactID, 'Edited', '');
+                $this->action->logHistory($actionID, $changes);
+            }
+
+            $return = $this->updateAvatar($contactID);
+
+            $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
+            return array('result' => 'success', 'message' => $message, 'locate' => helper::createLink('contact', 'view', "contactID=$contactID"));
         }
 
-        return false;
+        return array('result' => 'fail', 'message' => dao::getError());
     }
 
     /**

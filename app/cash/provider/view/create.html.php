@@ -18,7 +18,7 @@
     <strong><i class="icon-plus"></i> <?php echo $lang->provider->create;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm' class='form-condensed'>
+    <form method='post' id='providerForm' class='form-condensed'>
       <table class='table table-form'>
         <tr>
           <th class='w-80px'><?php echo $lang->provider->name;?></th>
@@ -74,7 +74,10 @@
         </tr>
         <tr>
           <th></th>
-          <td><?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?></td>
+          <td>
+            <?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?>
+            <div class='popover'></div>
+          </td>
         </tr>
       </table>
     </form>
