@@ -5,7 +5,7 @@ $(function()
 });
 
 /**
- * Sort entry
+ * Update orders of entries
  * 
  * @param  object      orders
  * @param  function    callback after success
@@ -18,7 +18,7 @@ function sortEntries(orders, callback)
 }
 
 /**
- * Remove entry icon from menu.
+ * Update menu attribute of entry
  * 
  * @param  int         entry id 
  * @param  function    callback after success
