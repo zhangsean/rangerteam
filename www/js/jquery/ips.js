@@ -723,17 +723,17 @@
             }
         }).on('click', '.remove-entry', function()
         {
-            if(!$.isFunction(settings.onRemoveEntry)) return;
+            if(!$.isFunction(settings.onUpdateEntryMenu)) return;
             var id = $(this).closest('.dropdown-menu').data('id');
             var et = getEntry(id);
             if(et && (et.menu == 'all' || et.menu == 'menu'))
             {
-                settings.onRemoveEntry(id, function(result)
+                var menu = (et.menu == 'menu') ? 'none' : 'list';
+                settings.onUpdateEntryMenu({id: id, menu: menu}, function(result)
                 {
                     if(result)
                     {
-                        if(et.menu == 'all') et.menu = 'list';
-                        else if(et.menu == 'menu') et.menu = 'none';
+                        et.menu = menu;
                         et.hasMenu = false;
                         $.refreshDesktop([et]);
                     }
@@ -741,17 +741,17 @@
             }
         }).on('click', '.fix-entry', function()
         {
-            if(!$.isFunction(settings.onFixEntry)) return;
+            if(!$.isFunction(settings.onUpdateEntryMenu)) return;
             var id = $(this).closest('.dropdown-menu').data('id');
             var et = getEntry(id);
             if(et && et.menu != 'menu' && et.menu != 'all')
             {
-                settings.onFixEntry(id, function(result)
+                var menu = (et.menu != 'list') ? 'menu' : 'all';
+                settings.onUpdateEntryMenu({id: id, menu: menu}, function(result)
                 {
                     if(result)
                     {
-                        if(et.menu == 'list') et.menu = 'all';
-                        else et.menu = 'menu';
+                        et.menu = menu;
                         et.hasMenu = true;
                         $.refreshDesktop([et]);
                     }
@@ -1457,7 +1457,7 @@
                 {
                     $('.tooltip').remove();
 
-                    if(!$.isFunction(settings.onSortEntry)) return;
+                    if(!$.isFunction(settings.onSortEntries)) return;
 
                     var orders = {};
                     var orderNext = 1;
@@ -1483,7 +1483,7 @@
                         }
                     });
 
-                    settings.onSortEntry(orders, function(result)
+                    settings.onSortEntries(orders, function(result)
                     {
                         if(result)
                         {

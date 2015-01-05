@@ -1,7 +1,7 @@
 $(function()
 {
     /* start ips */
-    $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock, onDeleteEntry: deleteEntry, onFixEntry: fixEntryToMenu, onRemoveEntry: removeEntryFromMenu, onSortEntry: sortEntry}, config, ipsLang));
+    $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock, onDeleteEntry: deleteEntry, onUpdateEntryMenu: updateEntryMenu, onSortEntries: sortEntries}, config, ipsLang));
 });
 
 /**
@@ -12,7 +12,7 @@ $(function()
  * @access public
  * @return void
  */
-function sortEntry(orders, callback)
+function sortEntries(orders, callback)
 {
     callback && callback(true);
 }
@@ -25,20 +25,7 @@ function sortEntry(orders, callback)
  * @access public
  * @return void
  */
-function removeEntryFromMenu(id, callback)
-{
-    callback && callback(true);
-}
-
-/**
- * Fix entry icon to menu
- * 
- * @param  int         entry id 
- * @param  function    callback after success
- * @access public
- * @return void
- */
-function fixEntryToMenu(id, callback)
+function updateEntryMenu(et, callback)
 {
     callback && callback(true);
 }
