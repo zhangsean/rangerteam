@@ -47,7 +47,7 @@
         frameHtmlTemplate             : "<iframe id='iframe-{id}' name='iframe-{id}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
         leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" data-btn-type="menu" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
         taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-btn-type="task" data-id="{id}">{iconhtml}{name}</button></li>',
-        taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu fade' id='taskMenu'><li><a href='javascript:;' class='open-win'><i class='icon-bolt'></i> &nbsp;{openText}</a></li><li><a href='javascript:;' class='reload-win'><i class='icon-repeat'></i> &nbsp;{reloadText}</a></li><li><a href='javascript:;' class='fix-entry'><i class='icon-pushpin'></i> &nbsp;{fixToMenuText}</a></li><li><a href='javascript:;' class='remove-entry'><i class='icon-pushpin icon-rotate-90'></i> &nbsp;{removeFromMenuText}</a></li><li><a href='javascript:;' class='close-win'><i class='icon-remove'></i> &nbsp;{closeText}</a></li><li><a href='javascript:;' class='delete-entry'><i class='icon-trash'></i> &nbsp;{deleteEntryText}</a></li></ul>",
+        taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu fade' id='taskMenu'><li><a href='javascript:;' class='open-win'><i class='icon-bolt icon'></i> &nbsp;{openText}</a></li><li><a href='javascript:;' class='reload-win'><i class='icon-repeat icon'></i> &nbsp;{reloadText}</a></li><li><a href='javascript:;' class='fix-entry'><i class='icon-pushpin icon'></i> &nbsp;{fixToMenuText}</a></li><li><a href='javascript:;' class='remove-entry'><i class='icon-pushpin icon-rotate-90 icon'></i> &nbsp;{removeFromMenuText}</a></li><li><a href='javascript:;' class='close-win'><i class='icon-remove icon'></i> &nbsp;{closeText}</a></li><li><a href='javascript:;' class='delete-entry'><i class='icon-trash icon'></i> &nbsp;{deleteEntryText}</a></li></ul>",
         entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn menu-{hasMenu} s-list-btn" data-menu={hasMenu} data-btn-type="list" title="{desc}" data-id="{id}" data-code={code}>{iconhtml}{name}<i class="icon-pushpin"></i></a></li>',
 
         init                          : function() // init the default
@@ -1297,10 +1297,13 @@
                     {
                         var btn = $(this);
                         var r = true, et = getEntry(btn.attr('data-id'));
+                        var idkey = '#' + et.id.toLowerCase(),
+                            codeKey = et.code ? et.code.toLowerCase() : false,
+                            nameKey = et.name.toLowerCase();
                         for(var ki in keys)
                         {
                             var k = keys[ki];
-                            r = r && (k=='' || (k == ':open' && btn.hasClass('open')) || ((k == ':menu' && et.hasMenu)) || (et.name.toLowerCase().indexOf(k) > -1) || (et.code && et.code.toLowerCase().indexOf(k) > -1) || et.id.toLowerCase() == k);
+                            r = r && (k=='' || (k == ':open' && btn.hasClass('open')) || ((k == ':menu' && et.hasMenu)) || (nameKey.indexOf(k) > -1) || (codeKey && codeKey.indexOf(k) > -1) || idkey == k);
                             if(!r) break;
                         }
 
@@ -1465,7 +1468,11 @@
 
                     $.each(entries, function(idx, et)
                     {
-                        if(orders[et.id])
+                        if(et.id == 'allapps')
+                        {
+                            orders[et.id] = et.order;
+                        }
+                        else if(orders[et.id])
                         {
                             et.order = orders[et.id];
                         }

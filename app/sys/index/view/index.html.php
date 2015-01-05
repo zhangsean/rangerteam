@@ -117,6 +117,7 @@ js::import($jsRoot . 'jquery/ips.js');
 var entries = [
 {
     id       : 'allapps',
+    code     : 'allapps',
     name     : '<?php echo $lang->index->allEntries?>',
     display  : 'fullscreen',
     desc     : '<?php echo $lang->index->allEntries?>',
@@ -131,6 +132,7 @@ var entries = [
 entries.push(
 {
     id       : 'superadmin',
+    code     : 'superadmin',
     name     : '<?php echo $lang->index->superAdmin;?>',
     open     : 'iframe',
     desc     : '<?php echo $lang->index->superAdmin?>',
