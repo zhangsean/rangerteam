@@ -111,3 +111,10 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 .col-side, .col-main { padding: 0; display: table-cell; vertical-align: top;}
 .col-side {width: 350px; padding-left: 10px;}
 .col-main {padding-right: 10px;}
+
+.table-footer {padding: 5px; line-height: 30px}
+.table-footer:before, .table-footer:after {content: ' '; display: table}
+.table-footer:after {clear: both}
+.table-footer .page {padding: 0 3px; width: auto;}
+
+@media (max-width: 1200px) {.table th, .table td {padding: 8px 5px}}
