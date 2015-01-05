@@ -8,3 +8,4 @@ body {background: #145ccd;}
 .dashboard-actions {position: absolute; top: -35px; right: 80px}
 .dashboard-actions .btn {padding: 5px 12px}
 .dashboard .table tr[data-url] td {cursor: pointer;}
+.dashboard .panel-heading {height: 30px}

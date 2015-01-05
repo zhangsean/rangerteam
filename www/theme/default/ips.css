@@ -193,6 +193,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #dashboard > .actions {position: absolute; right: 25px; top: 0;}
 #dashboard > .actions > .btn {padding: 3px 7px; border-radius: 0 0 4px 4px; border-top: 0}
 #dashboard .table tr[data-url] td {cursor: pointer;}
+.dashboard .panel-heading {height: 30px}
 #home .panel {box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);}
 #home .panel-actions {margin: 0}
 #home .panel-loading .panel-body {background: url('images/ips/loading.gif') no-repeat center 30%;}
