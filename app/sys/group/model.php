@@ -392,4 +392,29 @@ class groupModel extends model
         }
         return $modules;
     }
+
+    /**
+     * Update app priv by groupID. 
+     * 
+     * @param  int   $groupID 
+     * @param  array $apps 
+     * @access public
+     * @return void
+     */
+    public function updateAppPrivByGroup($groupID, $apps)
+    {
+        /* Delete old priv. */
+        $this->dao->delete()->from(TABLE_GROUPPRIV)->where('`module`')->eq('apppriv')->andWhere('`group`')->eq($groupID)->exec();
+
+        if(empty($apps)) return true;
+        $priv = new stdclass();
+        $priv->group = $groupID;
+        $priv->module = 'apppriv';
+        foreach($apps as $app)
+        {
+            $priv->method = $app;
+            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+        }
+        return true;
+    }
 }

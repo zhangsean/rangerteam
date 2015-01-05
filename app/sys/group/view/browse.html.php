@@ -23,7 +23,7 @@
        <th class='w-100px'><?php echo $lang->group->name;?></th>
        <th class='w-150px visible-lg'><?php echo $lang->group->desc;?></th>
        <th><?php echo $lang->group->users;?></th>
-       <th class='w-200px text-center'><?php echo $lang->actions;?></th>
+       <th class='w-240px text-center'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -36,6 +36,7 @@
       <td title='<?php echo $users;?>'><?php echo $users;?></td>
       <td class='text-center'>
         <?php echo html::a(inlink('manageMember', "groupID={$group->id}"), $lang->group->manageMember);?>
+        <?php echo html::a(inlink('manageAppPriv', "type=byGroup&param={$group->id}"), $lang->group->manageAppPriv);?>
         <?php echo html::a(inlink('managePriv', "type=byGroup&param={$group->id}"), $lang->group->managePriv);?>
         <?php echo html::a(inlink('edit', "groupID={$group->id}"), $lang->edit, "data-toggle='modal'");?>
         <?php echo html::a(inlink('delete', "groupID={$group->id}"), $lang->delete, "class='deleter'");?>

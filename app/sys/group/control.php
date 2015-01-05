@@ -189,6 +189,40 @@ class group extends control
     }
 
     /**
+     * Manage app privleges of a group. 
+     * 
+     * @param  string $type 
+     * @param  mix    $param 
+     * @access public
+     * @return void
+     */
+    public function manageAppPriv($type = 'byGroup', $param = 0)
+    {
+        if($type == 'byGroup')
+        {
+            $groupID = $param;
+            if($_POST)
+            {
+                $this->group->updateAppPrivByGroup($groupID, $this->post->apps);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            }
+
+            $apps = $this->loadModel('entry')->getEntries();
+            $privs = $this->group->getPrivs($groupID);
+            foreach($apps as $app)
+            {
+                $rights[$app->code]['right'] = isset($privs['apppriv'][$app->code]) ? 1 : 0;
+                $rights[$app->code]['name'] = $app->name;
+            }
+            $this->view->rights = $rights;
+        }
+
+        $this->view->type = $type;
+        $this->display();
+    }
+
+    /**
      * Manage members of a group.
      * 
      * @param  int    $groupID 

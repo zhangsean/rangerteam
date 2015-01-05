@@ -458,10 +458,10 @@ $lang->resource->setting = new stdclass();
 /* Search. */
 $lang->resource->search = new stdclass();
 
-$lang->resource->search->buildForm  = 'buildForm';
-$lang->resource->search->buildQuery = 'buildQuery';
-$lang->resource->search->saveQuery  = 'saveQuery';
-$lang->resource->search->deleteQuery  = 'deleteQuery';
+$lang->resource->search->buildForm   = 'buildForm';
+$lang->resource->search->buildQuery  = 'buildQuery';
+$lang->resource->search->saveQuery   = 'saveQuery';
+$lang->resource->search->deleteQuery = 'deleteQuery';
 
 $lang->search->methodOrder[10] = 'buildForm';
 $lang->search->methodOrder[15] = 'buildQuery';

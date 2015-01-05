@@ -122,7 +122,37 @@ class commonModel extends model
         }
 
         $rights  = $app->user->rights;
+        /* Check app priv. */
+        if(!commonModel::hasAppPriv()) return false;
         if(isset($rights[strtolower($module)][strtolower($method)])) return true;
+
+        return false;
+    }
+
+    /**
+     * Check current user has priviledge to the app or not.
+     * 
+     * @param  string $appname 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function hasAppPriv($appname = '')
+    { 
+        global $app;
+        if(empty($appname)) $appname = $app->getAppName();
+
+        if($appname == 'sys') return true;
+
+        if($app->user->admin == 'super') return true;
+        if(RUN_MODE == 'admin')
+        {
+            if($app->user->admin != 'super') return false;
+        }
+
+        $rights  = $app->user->rights;
+        /* Check app priv. */
+        if(isset($rights['apppriv'][strtolower($appname)])) return true;
 
         return false;
     }

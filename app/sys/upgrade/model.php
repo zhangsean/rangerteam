@@ -60,6 +60,9 @@ class upgradeModel extends model
                 $this->upgradeReturnRecords();
                 $this->upgradeDeliveryRecords();
                 $this->addSearchPriv();
+            case '1_6':
+                $this->execSQL($this->getUpgradeFile('1.6'));
+                $this->addAppPriv();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -576,5 +579,35 @@ class upgradeModel extends model
         }
 
         return true;
+    }
+
+    /**
+     * Add app priv when upgrade from 1.6.
+     * 
+     * @access public
+     * @return void
+     */
+    public function addAppPriv()
+    {
+        $groups = $this->dao->select('id')->from(TABLE_GROUP)->fetchAll('id');
+        foreach($groups as $group)
+        {
+            $priv = new stdclass();
+            $priv->group  = $group->id;
+            $priv->module = 'apppriv';
+            $priv->method = 'crm';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+
+            $priv->method = 'cash';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+
+            $priv->method = 'oa';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+
+            $priv->method = 'team';
+            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+        }
+
+        return !dao::isError();
     }
 }

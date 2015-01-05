@@ -68,6 +68,9 @@ class entry extends control
         $referer = !empty($_GET['referer']) ? $this->get->referer : $referer;
         $entry   = $this->entry->getById($entryID);
 
+        /* deny if no this app rights. */
+        if(!commonModel::hasAppPriv($entry->code)) $this->loadModel('common', 'sys')->deny($this->app->getModuleName(), $this->app->getMethodName());
+
         $location = $entry->login;
         $pathinfo = parse_url($location);
         if($entry->integration)

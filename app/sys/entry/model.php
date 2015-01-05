@@ -21,14 +21,22 @@ class entryModel extends model
     {
         $entries = $this->dao->select('*')->from(TABLE_ENTRY)->orderBy('`order`')->fetchAll();
 
+        /* Remove entry if no rights. */
+        $newEntries = array();
+        foreach($entries as $entry)
+        {
+            if(commonModel::hasAppPriv($entry->code)) $newEntries[] = $entry; 
+        }
+        $entries = $newEntries;
+
         /* Add custom settings. */
         $customApp = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
         foreach($entries as $entry)
         {
             if(isset($customApp->{$entry->id}))
             {
-                $entry->order = $customApp->{$entry->id}->order;
-                $entry->visible = $customApp->{$entry->id}->visible;
+                if(isset($customApp->{$entry->id}->order))   $entry->order = $customApp->{$entry->id}->order;
+                if(isset($customApp->{$entry->id}->visible)) $entry->visible = $customApp->{$entry->id}->visible;
             }
         }
 
