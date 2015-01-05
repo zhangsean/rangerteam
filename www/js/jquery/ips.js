@@ -1223,7 +1223,7 @@
 
             this.handleAllApps();
             this.handleHomeBlocks();
-        }
+        };
 
         /* Bind events */
         this.bindEvents = function()
@@ -1233,7 +1233,7 @@
                 /* replace function 'show()' with 'toggle()' to change the behavoir */
                 desktop.fullScreenApps.toggle($(this).attr('data-id'));
             });
-        }
+        };
 
         /* Handle the app: all app list */
         this.handleAllApps = function()
@@ -1330,7 +1330,7 @@
             if(key === undefined || key === false) key = this.$search.val();
             this.$search.data('search', false).val(key).change();
             if(focus) this.$search.focus();
-        }
+        };
 
         /* Handle the app: home blocks, use dashboard control in zui */
         this.handleHomeBlocks = function()
@@ -1376,7 +1376,7 @@
 
                 messager.success(settings.orderdBlocksSaved);
             }
-        }
+        };
 
         /* Show a fullscreen app window */
         this.show = function(id)
@@ -1391,7 +1391,7 @@
             if(id == 'allapps') this.searchApps(false, true);
 
             $('body').css('background-color', indexTone);
-        }
+        };
 
         /* Hide a fullscreen app window */
         this.hide = function(id)
@@ -1399,20 +1399,20 @@
             $('.fullscreen-btn[data-id="' + id + '"],.app-btn[data-id="' + id + '"]').removeClass('active');
             desktop.cancelFullscreenMode();
             windows.active();
-        }
+        };
 
         /* Show or hide a fullscreen app window */
         this.toggle = function(id)
         {
             if($('#' + id).hasClass('fullscreen-active')) this.hide(id);
             else this.show(id);
-        }
+        };
 
         /* Handle status after browser size changed */
         this.afterBrowserResized = function()
         {
             this.$fullscreens.width(desktop.width).height(desktop.height).css({left: desktop.x, top: desktop.y});;
-        }
+        };
 
         this.init();
         this.bindEvents();
@@ -1698,7 +1698,7 @@
         event.stopPropagation();
     }
 
-    /* Open an entry by given id and url */
+    /* Open an entry by given id and url(optional) */
     function openEntry(id, url, exactMatch)
     {
         windows.openEntry(id, url, null, exactMatch);
@@ -1725,6 +1725,13 @@
         }
     }
 
+    /* 
+     * Refresh desktop shortcuts
+     *
+     * @param  array  entiresOptions
+     * @param  bool   reset
+     * @return void
+     */
     function refreshDesktop(entriesOptions, reset)
     {
         refreshEntries(entriesOptions, reset);
