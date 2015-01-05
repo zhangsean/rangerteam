@@ -198,7 +198,7 @@
             this.width  = settings.defaultWindowSize.width;
             this.height = settings.defaultWindowSize.height;
         }
-        else if(this.size.width != undefined && this.size.height != undefined)
+        else if(this.size.width !== undefined && this.size.height !== undefined)
         {
             this.width  = Math.min(this.size.width, desktop.width);
             this.height = Math.min(this.size.height, desktop.height);
@@ -218,7 +218,7 @@
             this.left = Math.max(desktop.x, desktop.x + (desktop.width - this.width)/2);
             this.top  = Math.max(desktop.y, desktop.y + (desktop.height - this.height)/2);
         }
-        else if(this.position.x != undefined && this.position.y != undefined)
+        else if(this.position.x !== undefined && this.position.y !== undefined)
         {
             this.left = Math.max(desktop.x, this.position.x);
             this.top  = Math.max(desktop.y, this.position.y);
@@ -237,7 +237,7 @@
     /* Recaculate the postion and size before create window */
     entry.prototype.reCalPosSize = function()
     {
-        if(this.size.width != undefined && this.size.height != undefined)
+        if(this.size.width !== undefined && this.size.height !== undefined)
         {
             this.width  = Math.min(this.size.width, desktop.width);
             this.height = Math.min(this.size.height, desktop.height);
@@ -246,6 +246,8 @@
         {
             this.width     = desktop.width;
             this.height    = desktop.height;
+            this.left      = desktop.x;
+            this.top       = desktop.y;
             this.position  = desktop.position;
         }
 
@@ -407,17 +409,16 @@
     /* Initialize */
     desktopManager.prototype.init = function()
     {
+        this.$          = $('#desktop');
+        this.$menu      = $('#apps-menu');
+        this.$bottombar = $('#bottomBar');
+        this.isFullscreenMode = this.$.hasClass('fullscreen-mode');
+        
+        this.menu           = new menu();
         this.position  = desktopPos;
         this.x         = desktopPos.x;
         this.y         = desktopPos.y;
 
-        this.$          = $('#desktop');
-        this.$menu      = $('#apps-menu');
-        this.$bottombar = $('#bottomBar');
-
-        this.isFullscreenMode = this.$.hasClass('fullscreen-mode');
-        
-        this.menu           = new menu();
         this.shortcuts      = new shortcuts();
         this.startMenu      = new startMenu();
         this.fullScreenApps = new fullScreenApps();
@@ -464,7 +465,7 @@
         {
             var $e = $(this);
             var target = $e.attr('data-target');
-            if(target != undefined) target = $(target); else target = $e;
+            if(target !== undefined) target = $(target); else target = $e;
             target.toggleClass($e.attr('data-toggle-class'));
             $e.toggleClass('toggle-on');
         });
@@ -1548,7 +1549,7 @@
                 if(et)
                 {
                     if(et.display == 'fullscreen' && desktop.fullScreenApps) desktop.fullScreenApps.toggle(et.id);
-                    else windows.openEntry(et, $this.attr('href') || $this.data('url'));
+                    else windows.openEntry(et, $this.data('url') || $this.attr('href'));
                 }
                 else
                 {
@@ -1656,11 +1657,12 @@
 
             if(settings.autoHideMenu)
             {
-                this.$leftBar.addClass('menu-auto');
-                desktop.position.x = 2;
+                var $desktop = $('#desktop');
+                $desktop.addClass('menu-auto');
+                desktopPos.x = 2;
                 setTimeout(this.hide, 2000);
 
-                this.$leftBar.addClass('menu-auto').mouseover(this.show).mouseout(this.hide);;
+                this.$leftBar.mouseover(this.show).mouseout(this.hide);;
             }
         };
 
