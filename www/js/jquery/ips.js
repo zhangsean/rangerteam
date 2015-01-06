@@ -39,7 +39,7 @@
         leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" data-btn-type="menu" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
         taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-btn-type="task" data-id="{id}">{iconhtml}{name}</button></li>',
         taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu fade' id='taskMenu'><li><a href='javascript:;' class='open-win'><i class='icon-bolt icon'></i> &nbsp;{openText}</a></li><li><a href='javascript:;' class='reload-win'><i class='icon-repeat icon'></i> &nbsp;{reloadText}</a></li><li><a href='javascript:;' class='fix-entry'><i class='icon-pushpin icon'></i> &nbsp;{fixToMenuText}</a></li><li><a href='javascript:;' class='remove-entry'><i class='icon-pushpin icon-rotate-90 icon'></i> &nbsp;{removeFromMenuText}</a></li><li><a href='javascript:;' class='close-win'><i class='icon-remove icon'></i> &nbsp;{closeText}</a></li><li><a href='javascript:;' class='delete-entry'><i class='icon-trash icon'></i> &nbsp;{deleteEntryText}</a></li></ul>",
-        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn menu-{hasMenu} s-list-btn" data-menu={hasMenu} data-btn-type="list" title="{desc}" data-id="{id}" data-code={code}>{iconhtml}{name}<i class="icon-pushpin"></i></a></li>',
+        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn menu-{hasMenu} s-list-btn" data-menu={hasMenu} data-btn-type="list" title="{desc}" data-id="{id}" data-code={code}>{iconhtml}{name}</a></li>',
 
         init                          : function() // init the default
         {
@@ -1355,6 +1355,7 @@
                 draggable         : true,
                 afterOrdered      : afterOrdered,
                 shadowType        : false,
+                sensitive         : true,
                 panelRemovingTip  : settings.confirmRemoveBlock,
                 afterPanelRemoved : afterPanelRemoved
             }).find('.refresh-all-panel').click(function()
@@ -1547,10 +1548,10 @@
                 var btn = $(this);
                 windows.open(
                 {
-                    url : btn.attr('href') || btn.attr('data-url'),
-                    open: btn.attr('data-open') || 'iframe', 
-                    icon: btn.attr('data-icon'), 
-                    name: btn.attr('data-name')
+                    url  : btn.attr('href') || btn.attr('data-url'),
+                    open : btn.attr('data-open') || 'iframe', 
+                    icon : btn.attr('data-icon'), 
+                    name : btn.attr('data-name')
                 });
                 stopEvent(event);
                 return false;

@@ -7,6 +7,7 @@ $(function()
         shadowType        : false,
         afterOrdered      : sortBlocks,
         afterPanelRemoved : deleteBlock,
+        sensitive         : true,
         panelRemovingTip  : config.confirmRemoveBlock
     });
 });
