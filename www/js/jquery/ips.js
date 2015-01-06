@@ -1357,9 +1357,7 @@
                 shadowType        : false,
                 panelRemovingTip  : settings.confirmRemoveBlock,
                 afterPanelRemoved : afterPanelRemoved
-            });
-
-            $('#home .dashboard .refresh-all-panel').click(function()
+            }).find('.refresh-all-panel').click(function()
             {
                 var $icon = $(this).find('.icon-repeat').addClass('icon-spin');
                 $('#home .dashboard .refresh-panel').click();
@@ -1520,10 +1518,11 @@
         this.show = function(entry)
         {
             var $shortcut;
+            var activedId = (windows && windows.shows.length) ? windows.shows[windows.shows.length - 1] : null;
             if(entry.hasMenu)
             {
                 $shortcut = $(entry.toLeftBarShortcutHtml());
-                if(entry.opened)
+                if(activedId && entry.id === activedId)
                 {
                     $shortcut.find('.app-btn').addClass('active');
                 }
@@ -1532,7 +1531,7 @@
             if(entry.menu == 'all' || entry.menu == 'list')
             {
                 $shortcut = $(entry.toEntryListShortcutHtml());
-                if(entry.opened)
+                if(activedId && entry.id === activedId)
                 {
                     $shortcut.find('.app-btn').addClass('open');
                 }
