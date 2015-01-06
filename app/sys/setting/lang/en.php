@@ -14,6 +14,8 @@ $lang->setting->reset  = 'Reset';
 $lang->setting->key    = 'Key';
 $lang->setting->value  = 'Value';
 
+$lang->setting->lang   = 'Setting';
+
 $lang->setting->module = new stdClass();
 $lang->setting->module->user     = 'User role';
 $lang->setting->module->product  = 'Product status';
@@ -30,9 +32,9 @@ $lang->setting->customer->fields['typeList']      = 'Customer type';
 $lang->setting->customer->fields['sizeNameList']  = 'Customer Size';
 $lang->setting->customer->fields['levelNameList'] = 'Customer Level';
 
-$lang->setting->common = new stdclass();
-$lang->setting->common->setCurrency            = 'Set used currency';
-$lang->setting->common->fields['currencyList'] = 'Currency list';
+$lang->setting->system = new stdclass();
+$lang->setting->system->setCurrency            = 'Set used currency';
+$lang->setting->system->fields['currencyList'] = 'Currency list';
 
 $lang->setting->allLang     = 'For all language';
 $lang->setting->currentLang = 'For current language';

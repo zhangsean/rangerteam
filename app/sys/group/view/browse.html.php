@@ -21,7 +21,7 @@
       <tr>
        <th class='w-50px'><?php echo $lang->group->id;?></th>
        <th class='w-100px'><?php echo $lang->group->name;?></th>
-       <th class='w-150px visible-lg'><?php echo $lang->group->desc;?></th>
+       <th class='w-200px visible-lg'><?php echo $lang->group->desc;?></th>
        <th><?php echo $lang->group->users;?></th>
        <th class='w-240px text-center'><?php echo $lang->actions;?></th>
       </tr>

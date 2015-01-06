@@ -14,6 +14,8 @@ $lang->setting->reset  = '恢復預設';
 $lang->setting->key    = '鍵';
 $lang->setting->value  = '值';
 
+$lang->setting->lang   = '自定義';
+
 $lang->setting->module = new stdClass();
 $lang->setting->module->user     = '員工角色';
 $lang->setting->module->product  = '產品狀態';
@@ -30,9 +32,9 @@ $lang->setting->customer->fields['typeList']      = '客戶類型';
 $lang->setting->customer->fields['sizeNameList']  = '客戶規模';
 $lang->setting->customer->fields['levelNameList'] = '客戶等級';
 
-$lang->setting->common = new stdclass();
-$lang->setting->common->setCurrency            = '使用的貨幣';
-$lang->setting->common->fields['currencyList'] = '貨幣設置';
+$lang->setting->system = new stdclass();
+$lang->setting->system->setCurrency            = '使用的貨幣';
+$lang->setting->system->fields['currencyList'] = '貨幣設置';
 
 $lang->setting->allLang     = '適用所有語言';
 $lang->setting->currentLang = '適用當前語言';

@@ -18,6 +18,7 @@ $lang->project->finish     = 'Finish';
 $lang->project->delete     = 'Delete';
 $lang->project->enter      = 'Enter';
 $lang->project->suspend    = 'Suspend';
+$lang->project->active     = 'Active';
 $lang->project->mine       = 'I charge : ';
 $lang->project->other      = 'Other : ';
 $lang->project->deleted    = 'Deleted';

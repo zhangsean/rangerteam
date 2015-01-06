@@ -194,7 +194,7 @@ class userModel extends model
             ->data($user, $skip = 'password1,password2')
             ->autoCheck()
             ->batchCheck($this->config->user->require->register, 'notempty')
-            ->check('account', 'unique')
+            ->check('account', 'unique', "deleted = 0")
             ->check('account', 'account')
             ->check('email', 'email')
             ->check('email', 'unique')

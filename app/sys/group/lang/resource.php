@@ -27,7 +27,6 @@ $lang->appModule->cash[] = 'trade';
 $lang->appModule->cash[] = 'depositor';
 $lang->appModule->cash[] = 'balance';
 $lang->appModule->cash[] = 'provider';
-$lang->appModule->cash[] = 'schema';
 
 $lang->appModule->oa = array();
 $lang->appModule->oa[] = 'project';
@@ -44,6 +43,8 @@ $lang->appModule->sys[] = 'task';
 $lang->appModule->sys[] = 'tree';
 $lang->appModule->sys[] = 'user';
 $lang->appModule->sys[] = 'search';
+$lang->appModule->sys[] = 'schema';
+$lang->appModule->sys[] = 'setting';
 
 /* Module order. */
 $lang->moduleOrder[0]   = 'order';
@@ -53,13 +54,11 @@ $lang->moduleOrder[15]  = 'contact';
 $lang->moduleOrder[20]  = 'product';
 $lang->moduleOrder[25]  = 'address';
 $lang->moduleOrder[26]  = 'resume';
-$lang->moduleOrder[27]  = 'setting';
 
 $lang->moduleOrder[30]  = 'trade';
 $lang->moduleOrder[35]  = 'depositor';
 $lang->moduleOrder[40]  = 'balance';
 $lang->moduleOrder[41]  = 'provider';
-$lang->moduleOrder[42]  = 'schema';
 
 $lang->moduleOrder[45]  = 'project';
 $lang->moduleOrder[50]  = 'announce';
@@ -71,9 +70,10 @@ $lang->moduleOrder[70]  = 'thread';
 
 $lang->moduleOrder[75]  = 'task';
 $lang->moduleOrder[80]  = 'tree';
-$lang->moduleOrder[85]  = 'setting';
 $lang->moduleOrder[90]  = 'user';
 $lang->moduleOrder[95]  = 'search';
+$lang->moduleOrder[100] = 'schema';
+$lang->moduleOrder[105] = 'setting';
 
 $lang->resource = new stdclass();
 
@@ -130,7 +130,6 @@ $lang->resource->customer->order         = 'order';
 $lang->resource->customer->contact       = 'contact';
 $lang->resource->customer->linkContact   = 'linkContact';
 $lang->resource->customer->contract      = 'contract';
-$lang->resource->customer->record        = 'record';
 $lang->resource->customer->delete        = 'delete';
 
 $lang->customer->methodOrder[5]  = 'browse';
@@ -141,7 +140,6 @@ $lang->customer->methodOrder[30] = 'order';
 $lang->customer->methodOrder[35] = 'contact';
 $lang->customer->methodOrder[40] = 'linkContact';
 $lang->customer->methodOrder[45] = 'contract';
-$lang->customer->methodOrder[50] = 'record';
 $lang->customer->methodOrder[55] = 'delete';
 
 /* Contact. */
@@ -226,13 +224,14 @@ $lang->trade->methodOrder[50] = 'showImport';
 
 /* Depositor. */
 $lang->resource->depositor = new stdclass();
-$lang->resource->depositor->browse     = 'browse';
-$lang->resource->depositor->create     = 'create';
-$lang->resource->depositor->edit       = 'edit';
-$lang->resource->depositor->forbid     = 'forbid';
-$lang->resource->depositor->activate   = 'activate';
-$lang->resource->depositor->check      = 'check';
+$lang->resource->depositor->browse      = 'browse';
+$lang->resource->depositor->create      = 'create';
+$lang->resource->depositor->edit        = 'edit';
+$lang->resource->depositor->forbid      = 'forbid';
+$lang->resource->depositor->activate    = 'activate';
+$lang->resource->depositor->check       = 'check';
 $lang->resource->depositor->savebalance = 'saveBalance';
+$lang->resource->depositor->delete      = 'delete';
 
 $lang->depositor->methodOrder[5]  = 'browse';
 $lang->depositor->methodOrder[10] = 'create';
@@ -240,6 +239,8 @@ $lang->depositor->methodOrder[15] = 'edit';
 $lang->depositor->methodOrder[20] = 'forbid';
 $lang->depositor->methodOrder[25] = 'activate';
 $lang->depositor->methodOrder[30] = 'check';
+$lang->depositor->methodOrder[35] = 'saveBalance';
+$lang->depositor->methodOrder[40] = 'delete';
 
 /* Balance. */
 $lang->resource->balance = new stdclass();
@@ -288,17 +289,21 @@ $lang->schema->methodOrder[25] = 'delete';
 
 /* Project. */
 $lang->resource->project = new stdclass();
-$lang->resource->project->index  = 'index';
-$lang->resource->project->create = 'create';
-$lang->resource->project->edit   = 'edit';
-$lang->resource->project->finish = 'finish';
-$lang->resource->project->delete = 'delete';
+$lang->resource->project->index   = 'index';
+$lang->resource->project->create  = 'create';
+$lang->resource->project->edit    = 'edit';
+$lang->resource->project->finish  = 'finish';
+$lang->resource->project->active  = 'active';
+$lang->resource->project->suspend = 'suspend';
+$lang->resource->project->delete  = 'delete';
 
 $lang->project->methodOrder[0]  = 'index';
 $lang->project->methodOrder[5]  = 'create';
 $lang->project->methodOrder[10] = 'edit';
 $lang->project->methodOrder[15] = 'finish';
-$lang->project->methodOrder[20] = 'delete';
+$lang->project->methodOrder[20] = 'active';
+$lang->project->methodOrder[25] = 'suspend';
+$lang->project->methodOrder[35] = 'delete';
 
 /* Task. */
 $lang->resource->task = new stdclass();
@@ -454,10 +459,12 @@ $lang->user->methodOrder[75] = 'vcard';
 
 /* Setting. */
 $lang->resource->setting = new stdclass();
+$lang->resource->setting->lang = 'lang';
+
+$lang->search->setting[5] = 'lang';
 
 /* Search. */
 $lang->resource->search = new stdclass();
-
 $lang->resource->search->buildForm   = 'buildForm';
 $lang->resource->search->buildQuery  = 'buildQuery';
 $lang->resource->search->saveQuery   = 'saveQuery';

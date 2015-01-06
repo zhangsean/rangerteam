@@ -209,7 +209,7 @@ class commonModel extends model
     {   
         if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey', $method)) return true;
         if($module == 'api'  and $method == 'getsessionid') return true;
-        if($module == 'misc'  and $method == 'ping') return true;
+        if($module == 'misc' and $method == 'ping') return true;
         if($module == 'block') return true;
         if($module == 'error') return true;
         if($module == 'sso'  and strpos(',auth|check', $method)) return true;
@@ -242,10 +242,31 @@ class commonModel extends model
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
-            if(commonModel::hasPriv($module, $method))
+            if(strpos(',tree,setting,schema,', $module) != false) 
             {
-                $link  = helper::createLink($module, $method, $vars);
-                $string .= "<li$class><a href='$link'>$label</a></li>\n";
+                if(isset($lang->setting->menu)) 
+                {
+                    foreach($lang->setting->menu as $settingMenu)
+                    {
+                        $class = $currentModule == 'setting' ? " class='active'" : '';
+                        list($settingLabel, $moduleName, $methodName, $settingVars) = explode('|', $settingMenu);
+
+                        if(commonModel::hasPriv($moduleName, $methodName))
+                        {
+                            $link  = helper::createLink($moduleName, $methodName, $settingVars);
+                            $string .= "<li$class><a href='$link'>$label</a></li>\n";
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if(commonModel::hasPriv($module, $method))
+                {
+                    $link  = helper::createLink($module, $method, $vars);
+                    $string .= "<li$class><a href='$link'>$label</a></li>\n";
+                }
             }
         }
 

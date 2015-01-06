@@ -44,7 +44,7 @@
         }
         ?>
         <tr>
-          <th class='text-right w-100px'>
+          <th class='text-right w-120px'>
             <label class="checkbox">
               <?php echo isset($this->lang->$moduleName->common) ? $this->lang->$moduleName->common : $moduleName;?>
               <input type="checkbox" class='checkModule' /> 

@@ -14,7 +14,7 @@
 <form method='post' id='ajaxForm' class='form-inline'>
   <div class='panel'>
     <div class="panel-heading">
-    <strong><i class="icon-wrench"></i> <?php echo $lang->setting->{$module}->fields[$field];?></strong>
+    <strong><i class="icon-wrench"></i> <?php echo ($module == 'common' and $field == 'currencyList') ? $lang->setting->system->fields['currencyList'] : $lang->setting->{$module}->fields[$field];?></strong>
     </div>
     <?php if($module == 'common' and $field == 'currencyList'):?>
     <div class='panel-body'>

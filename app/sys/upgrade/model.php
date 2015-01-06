@@ -62,7 +62,7 @@ class upgradeModel extends model
                 $this->addSearchPriv();
             case '1_6':
                 $this->execSQL($this->getUpgradeFile('1.6'));
-                $this->addAppPriv();
+                $this->addPrivs();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -587,11 +587,65 @@ class upgradeModel extends model
      * @access public
      * @return void
      */
-    public function addAppPriv()
+    public function addPrivs()
     {
         $groups = $this->dao->select('id')->from(TABLE_GROUP)->fetchAll('id');
+
         foreach($groups as $group)
         {
+            if($group->id == 1)
+            {
+                $privs = array('balance', 'depositor', 'product', 'schema', 'setting', 'task', 'trade');
+
+                $modules['balance']   = array('browse', 'create', 'delete', 'edit');
+                $modules['depositor'] = array('activate', 'browse', 'check', 'create', 'delete', 'edit', 'forbid', 'savebalance');
+                $modules['product']   = array('view');
+                $modules['project']   = array('active', 'suspend');
+                $modules['schema']    = array('browse', 'create', 'delete', 'edit', 'view');
+                $modules['setting']   = array('lang');
+                $modules['task']      = array('kanban', 'outline', 'start');
+                $modules['trade']     = array('batchEdit', 'browse', 'create', 'delete', 'detail', 'edit', 'import', 'showimport', 'transfer');
+
+                foreach($privs as $module)
+                {
+                    $priv = new stdclass();
+                    $priv->group  = 1;
+                    $priv->module = $module;
+
+                    foreach($modules[$module] as $method)
+                    {
+                        $priv->method = $method;
+                        $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+                    }
+                }
+            }
+
+            if($group->id == 2)
+            {
+                $priv = new stdclass();
+                $priv->group  = 2;
+                $priv->module = 'depositor';
+                $priv->method = 'delete';
+                $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+
+                $priv->method = 'savabalance';
+                $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+            }
+
+            if($group->id == 3)
+            {
+                $priv = new stdclass();
+                $priv->group  = 3;
+                $priv->module = 'project';
+
+                $methods = array('active', 'finish', 'index', 'suspend');
+                foreach($methods as $method)
+                {
+                    $priv->method = $method;
+                    $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+                }
+            }
+
             $priv = new stdclass();
             $priv->group  = $group->id;
             $priv->module = 'apppriv';

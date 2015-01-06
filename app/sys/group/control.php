@@ -32,13 +32,11 @@ class group extends control
      */
     public function browse($companyID = 0)
     {
-        $title      = $this->lang->group->browse;
-
         $groups = $this->group->getList($companyID);
         $groupUsers = array();
         foreach($groups as $group) $groupUsers[$group->id] = $this->group->getUserPairs($group->id);
 
-        $this->view->title      = $title;
+        $this->view->title      = $this->lang->group->browse;
         $this->view->groups     = $groups;
         $this->view->groupUsers = $groupUsers;
 
@@ -81,11 +79,9 @@ class group extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $title      = $this->lang->group->edit;
-        $position[] = $this->lang->group->edit;
-        $this->view->title    = $title;
-        $this->view->position = $position;
-        $this->view->group    = $this->group->getById($groupID);
+        $this->view->title      = $this->lang->group->edit;
+        $this->view->position[] = $this->lang->group->edit;
+        $this->view->group      = $this->group->getById($groupID);
 
         $this->display();
     }
@@ -145,7 +141,6 @@ class group extends control
         {
             $this->group->sortResource();
             $group      = $this->group->getById($groupID);
-
             $groupPrivs = $this->group->getPrivs($groupID);
 
             $this->view->title      = $group->name . $this->lang->group->managePriv;
@@ -286,16 +281,7 @@ class group extends control
     public function delete($groupID)
     {
         $this->group->delete($groupID);
-        if(dao::isError())
-        {
-            $response['result']  = 'fail';
-            $response['message'] = dao::getError();
-        }
-        else
-        {
-            $response['result']  = 'success';
-            $response['message'] = '';
-        }
-        $this->send($response);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success'));
     }
 }
