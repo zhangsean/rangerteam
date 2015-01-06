@@ -15,14 +15,9 @@
   <?php foreach($lang->appModule as $app => $modules):?>
   <?php if($app != 'sys' and !isset($groupPrivs['apppriv'][$app])) continue;?>
   <div class='item'>
-        <div class='item-content'>
+    <div class='item-content'>
       <table class='table table-hover table-bordered table-priv'> 
-        <caption>
-          <label class="checkbox">
-            <?php echo $lang->apps->$app;?>
-            <input type="checkbox" class='checkApp' /> 
-          </label>
-        </caption>
+        <?php $i = 1;?>
         <?php foreach($lang->resource as $moduleName => $moduleActions):?>
         <?php if(!in_array($moduleName, $modules)) continue;?>
         <?php if(!$this->group->checkMenuModule($menu, $moduleName)) continue;?>
@@ -44,6 +39,15 @@
         }
         ?>
         <tr>
+          <?php if($i == 1):?>
+          <?php $rowspan = $app == 'crm' ? count($lang->appModule->$app) + 1 : count($lang->appModule->$app);?>
+          <th rowspan="<?php echo $rowspan;?>" class='w-70px'>
+            <label class="checkbox">
+              <?php echo $lang->apps->$app;?>
+              <input type="checkbox" class='checkApp' /> 
+            </label>
+          </th>
+          <?php endif;?>
           <th class='text-right w-120px'>
             <label class="checkbox">
               <?php echo isset($this->lang->$moduleName->common) ? $this->lang->$moduleName->common : $moduleName;?>
@@ -51,7 +55,6 @@
             </label>
           </th>
           <td id='<?php echo $moduleName;?>'>
-            <?php $i = 1;?>
             <?php
             $options = array();
             foreach($moduleActions as $action => $actionLabel)
@@ -63,6 +66,7 @@
             ?>
           </td>
         </tr>
+        <?php $i++;?>
         <?php endforeach;?>
         <?php if($app == 'crm'):?>
         <tr>
