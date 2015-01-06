@@ -28,16 +28,16 @@ class blog extends control
     /** 
      * Browse blog in front.
      * 
-     * @param int    $categoryID   the category id
-     * @param string $author 
-     * @param string $month
-     * @param string tag
-     * @param string mode
+     * @param  int    $categoryID   the category id
+     * @param  string $author 
+     * @param  string $month
+     * @param  string tag
+     * @param  string mode query|bysearch
      * @param  int    $pageID 
      * @access public
      * @return void
      */
-    public function index($categoryID = 0, $author = '', $month = '', $tag = '', $mode = 'query',$recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function index($categoryID = 0, $author = '', $month = '', $tag = '', $mode = 'query', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         unset($this->lang->blog->menu);
         $this->app->loadClass('pager', $static = true);

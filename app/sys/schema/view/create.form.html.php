@@ -66,7 +66,8 @@
 <?php js::set('records', $records)?>
 <?php js::set('columns', $columns)?>
 <script>
-$(document).ready(function(){
+$(document).ready(function()
+{
     for(row in v.records){
         if(row > 5) break;
         for(i = 0; i < v.columns; i++)

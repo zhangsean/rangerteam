@@ -4,21 +4,28 @@ $(document).ready(function()
 })
 
 /* Init search form. */
-$(document).ready(function(){
-    $('#searchInput').focus(function(){
+$(document).ready(function()
+{
+    $('#searchInput').focus(function()
+    {
         if($('#querybox').html() != '') return false;
         ajaxGetSearchForm();
     });
     /* init search form if mode is bysearch. */
     if(v.mode == 'bysearch')
     {
-        ajaxGetSearchForm();
+        ajaxGetSearchForm('', function()
+        {
+            $('#searchInput').val($('#querybox').find('#value1').val());
+        });
     }
 });
 
 /* set search form fields. */
-$(document).ready(function(){
-    $('#searchButton').click(function(){
+$(document).ready(function()
+{
+    $('#searchButton').click(function()
+    {
         if($('#querybox').html() == '' || $('#searchInput').val() == '')
         {
             $('#searchInput').focus();

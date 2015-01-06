@@ -209,7 +209,7 @@ class group extends control
             {
                 $rights[$app->code]['right'] = isset($privs['apppriv'][$app->code]) ? 1 : 0;
                 $rights[$app->code]['name']  = $app->name;
-                $rights[$app->code]['icon']  = $app->logo;
+                $rights[$app->code]['icon']  = $app->logo == '' ? $this->config->webRoot . 'theme/default/images/main/webapp-default.png' : $app->logo;
             }
         }
 
