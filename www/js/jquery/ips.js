@@ -1624,7 +1624,7 @@
 
             $(document).click(function(e)
             {
-                // if($(e.target).hasClass('app-btn')) return false;
+                if($(e.target).hasClass('app-btn')) return false;
                 var menu = $('#taskMenu');
                 menu.removeClass('in');
                 setTimeout(function(){menu.removeClass('show');}, 100);
