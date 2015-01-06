@@ -35,6 +35,7 @@ $lang->entry->size        = '窗口大小';
 $lang->entry->position    = '显示位置';
 $lang->entry->width       = '宽';
 $lang->entry->height      = '高';
+$lang->entry->priv        = '权限';
 
 $lang->entry->integrateChanzhi = '集成蝉知';
 $lang->entry->integrateZentao  = '集成禅道';

@@ -399,7 +399,7 @@ class groupModel extends model
      * @param  int   $groupID 
      * @param  array $apps 
      * @access public
-     * @return void
+     * @return bool
      */
     public function updateAppPrivByGroup($groupID, $apps)
     {
@@ -416,5 +416,42 @@ class groupModel extends model
             $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
         }
         return true;
+    }
+
+    /**
+     * Update app priv by appCode. 
+     * 
+     * @param  string $appCode 
+     * @param  array  $groups 
+     * @access public
+     * @return bool
+     */
+    public function updateAppPrivByApp($appCode, $groups)
+    {
+        /* Delete old priv. */
+        $this->dao->delete()->from(TABLE_GROUPPRIV)->where('`module`')->eq('apppriv')->andWhere('`method`')->eq($appCode)->exec();
+
+        if(empty($groups)) return true;
+        $priv = new stdclass();
+        $priv->module = 'apppriv';
+        $priv->method = $appCode;
+        foreach($groups as $group)
+        {
+            $priv->group = $group;
+            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+        }
+        return true;
+    }
+
+    /**
+     * get privilege by app code. 
+     * 
+     * @param  string $appCode 
+     * @access public
+     * @return array
+     */
+    public function getAppPriv($appCode)
+    {
+        return $this->dao->select('*')->from(TABLE_GROUPPRIV)->where('`module`')->eq('apppriv')->andWhere('`method`')->eq($appCode)->fetchAll('group');
     }
 }

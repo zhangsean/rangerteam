@@ -208,17 +208,37 @@ class group extends control
                 $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
             }
 
-            $apps = $this->loadModel('entry')->getEntries();
+            $apps  = $this->loadModel('entry')->getEntries();
             $privs = $this->group->getPrivs($groupID);
             foreach($apps as $app)
             {
                 $rights[$app->code]['right'] = isset($privs['apppriv'][$app->code]) ? 1 : 0;
-                $rights[$app->code]['name'] = $app->name;
+                $rights[$app->code]['name']  = $app->name;
+                $rights[$app->code]['icon']  = $app->logo;
             }
-            $this->view->rights = $rights;
         }
 
-        $this->view->type = $type;
+        if($type == 'byApp')
+        {
+            $appCode = $param;
+            if($_POST)
+            {
+                $this->group->updateAppPrivByApp($appCode, $this->post->groups);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('entry', 'admin')));
+            }
+
+            $groups = $this->group->getPairs();
+            $privs  = $this->group->getAppPriv($appCode);
+            foreach($groups as $code => $name)
+            {
+                $rights[$code]['right'] = isset($privs[$code]) ? 1 : 0;
+                $rights[$code]['name']  = $name;
+            }
+        }
+
+        $this->view->type   = $type;
+        $this->view->rights = $rights;
         $this->display();
     }
 

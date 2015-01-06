@@ -21,10 +21,11 @@ class entryModel extends model
     {
         $entries = $this->dao->select('*')->from(TABLE_ENTRY)->orderBy('`order`')->fetchAll();
 
-        /* Remove entry if no rights. */
+        /* Remove entry if no rights and fix logo path. */
         $newEntries = array();
         foreach($entries as $entry)
         {
+            if($entry->logo != '' && substr($entry->logo, 0, 1) != '/') $entry->logo = $this->config->webRoot . $entry->logo;
             if(commonModel::hasAppPriv($entry->code)) $newEntries[] = $entry; 
         }
         $entries = $newEntries;

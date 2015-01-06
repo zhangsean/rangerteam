@@ -11,22 +11,38 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<?php if($type == 'byGroup'):?>
 <form class='form-inline' id='ajaxForm' method='post'>
   <div class='panel'>
     <div class='panel-heading'>
-      <strong><?php echo $lang->group->manageAppPriv?></strong>
+      <strong><?php echo $lang->group->priv?></strong>
     </div>
     <div class='panel-body'>
       <table>
+        <?php if($type == 'byGroup'):?>
         <tr>
           <th class='w-80px text-center'><?php echo $lang->entry->common?></th>
           <td>
             <?php foreach($rights as $code => $right):?>
-            <div class='group-item'><?php echo html::checkbox('apps', array($code => $right['name']), $right['right'] == '1' ? $code : '');?></div>
+            <div class='group-item'>
+              <label>
+                <?php echo html::image($right['icon'], "class='app-icon'");?>
+                <?php echo html::checkbox('apps', array($code => $right['name']), $right['right'] == '1' ? $code : '');?>
+              </label>
+            </div>
             <?php endforeach?>
           </td>
         </tr>
+        <?php endif?>
+        <?php if($type == 'byApp'):?>
+        <tr>
+          <th class='w-80px text-center'><?php echo $lang->group->common?></th>
+          <td>
+            <?php foreach($rights as $code => $right):?>
+            <div class='group-item'><?php echo html::checkbox('groups', array($code => $right['name']), $right['right'] == '1' ? $code : '');?></div>
+            <?php endforeach?>
+          </td>
+        </tr>
+        <?php endif?>
       </table>
     </div>
     <div class='panel-footer text-center'>
@@ -38,5 +54,4 @@
     </div>
   </div>
 </form>
-<?php endif?>
 <?php include '../../common/view/footer.html.php';?>

@@ -13,6 +13,7 @@
 <div class='list'>
 <form class='form-inline' id='ajaxForm' method='post'>
   <?php foreach($lang->appModule as $app => $modules):?>
+  <?php if($app != 'sys' and !isset($groupPrivs['apppriv'][$app])) continue;?>
   <div class='item'>
         <div class='item-content'>
       <table class='table table-hover table-bordered table-priv'> 
