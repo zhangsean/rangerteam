@@ -237,6 +237,7 @@ class groupModel extends model
 
         /* Delete old. */
         $this->dao->delete()->from(TABLE_GROUPPRIV)->where('`group`')->eq($groupID)
+            ->andWhere('module')->ne('apppriv')
             ->beginIF($menu)->andWhere('module')->in($this->getMenuModules($menu))->fi()
             ->exec();
 
