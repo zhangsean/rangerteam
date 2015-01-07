@@ -9,5 +9,5 @@
 .comment>.comments-list>.comment:hover {background-color: #fff}
 
 .pager { margin: 0; display: block; }
-.pager > .page { margin-bottom: -15px; font-size: 12px; text-align: right; color: #999;}
+.pager > .page { margin: 5px 0 -5px; font-size: 12px; text-align: right; color: #999;}
 .signed-user-info{padding: 6px 2px}

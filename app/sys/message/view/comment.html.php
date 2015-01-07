@@ -13,7 +13,6 @@ css::internal($pageCSS);
     <div class='comments-list'>
       <?php foreach($comments as $number => $comment):?>
       <div class='comment' id="comment<?php echo $comment->id?>">
-        <div class='avatar'><div class='avatar-empty icon-user'></div></div>
         <div class='content'>
           <div class='text'><span class='author'><strong><?php echo $comment->from . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($comment->content);?></div>
           <div class='actions text-muted small'>
@@ -25,7 +24,6 @@ css::internal($pageCSS);
           <div class='comments-list'>
             <?php foreach($replies[$comment->id] as $reply):?>
             <div class='comment'>
-              <div class='avatar'><div class='avatar-empty icon-user'></div></div>
               <div class='content'>
                 <div class='text'><span class='author'><strong><?php echo $reply->from . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($reply->content);?></div>
                 <div class='actions text-muted small'><?php echo $lang->comment->replyAt . ' ' . $reply->date;?></div>
