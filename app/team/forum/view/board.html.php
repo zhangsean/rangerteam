@@ -19,7 +19,7 @@
     <div class="panel input-group">
       <?php echo html::input('searchInput', isset($searchText) ? $searchText : '', "class='form-control search-query' placeholder=''"); ?>
       <span class="input-group-btn">
-        <?php echo html::a('###', "<li class='icon icon-search'></li>", "class='btn btn-primary' id='searchButton'"); ?>
+        <?php echo html::a('###', "<i class='icon icon-search'></i>", "class='btn btn-primary' id='searchButton'"); ?>
       </span>
       <div id='querybox' class='hide'></div>
     </div>
