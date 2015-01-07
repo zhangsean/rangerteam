@@ -113,6 +113,7 @@ class projectModel extends model
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', helper::now())
             ->remove('member,manager,master')
+            ->stripTags('desc', $this->config->allowedTags->admin)
             ->get();
 
         $this->dao->insert(TABLE_PROJECT)
@@ -158,6 +159,7 @@ class projectModel extends model
             $project = fixer::input('post')
                 ->add('editedBy', $this->app->user->account)
                 ->add('editedDate', helper::now())
+                ->stripTags('desc', $this->config->allowedTags->admin)
                 ->remove('member,manager,master')
                 ->get();
         }
