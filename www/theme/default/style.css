@@ -149,7 +149,7 @@ body.page-actions-fixed {padding-bottom: 70px}
 .placeholder {color: #999}
 
 /* page */
-.page {width: 100%; padding: 8px 0; color: #999; text-align: right;}
+.page {padding: 8px 0; color: #999;}
 .page a {color: #666;}
 .page:hover a {color: #506EAF;}
 
