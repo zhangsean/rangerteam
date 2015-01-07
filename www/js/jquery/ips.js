@@ -14,7 +14,6 @@
         desktop          = null,
         superadmin       = false,
         windows          = null,
-        windowIdPrefix   = 'win-',
         theLoadingFrame  = null;
 
     /* Save the index configs */
@@ -25,26 +24,26 @@
     /* The default global settings */
     var defaults =
     {
-        autoHideMenu                  : false,
-        webRoot                       : '/',
-        animateSpeed                  : 200,
-        entryIconRoot                 : config.webRoot + 'theme/default/images/ips/',
-        windowHeadheight              : 30, // the height of window head bar
-        bottomBarHeight               : 36, // the height of desk bottom bar
-        defaultWinPosOffset           : 30,
-        defaultWindowSize             : {width:700,height:538},
-        windowidstrTemplate           : 'win-{0}',
-        windowHtmlTemplate            : "<div id='{idstr}' class='window{cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}' data-url='{url}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
-        frameHtmlTemplate             : "<iframe id='iframe-{id}' name='iframe-{id}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
-        leftBarShortcutHtmlTemplate   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" data-btn-type="menu" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
-        taskBarShortcutHtmlTemplate   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-btn-type="task" data-id="{id}">{iconhtml}{name}</button></li>',
-        taskBarMenuHtmlTemplate       : "<ul class='dropdown-menu fade' id='taskMenu'><li><a href='javascript:;' class='open-win'><i class='icon-bolt icon'></i> &nbsp;{openText}</a></li><li><a href='javascript:;' class='reload-win'><i class='icon-repeat icon'></i> &nbsp;{reloadText}</a></li><li><a href='javascript:;' class='fix-entry'><i class='icon-pushpin icon'></i> &nbsp;{fixToMenuText}</a></li><li><a href='javascript:;' class='remove-entry'><i class='icon-pushpin icon-rotate-90 icon'></i> &nbsp;{removeFromMenuText}</a></li><li><a href='javascript:;' class='close-win'><i class='icon-remove icon'></i> &nbsp;{closeText}</a></li><li><a href='javascript:;' class='delete-entry'><i class='icon-trash icon'></i> &nbsp;{deleteEntryText}</a></li></ul>",
-        entryListShortcutHtmlTemplate : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn menu-{hasMenu} s-list-btn" data-menu={hasMenu} data-btn-type="list" title="{desc}" data-id="{id}" data-code={code}>{iconhtml}{name}</a></li>',
+        autoHideMenu          : false,
+        webRoot               : '/',
+        animateSpeed          : 200,
+        entryIconRoot         : config.webRoot + 'theme/default/images/ips/',
+        windowHeadheight      : 30, // the height of window head bar
+        bottomBarHeight       : 36, // the height of desk bottom bar
+        defaultWinPosOffset   : 30,
+        defaultWindowSize     : {width:700,height:538},
+        windowidstrTemplate   : 'win-{0}',
+        windowTplt            : "<div id='{idstr}' class='window{cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}' data-url='{url}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
+        frameTplt             : "<iframe id='iframe-{id}' name='iframe-{id}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
+        leftBarShortcutTplt   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" data-btn-type="menu" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
+        taskBarShortcutTplt   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-btn-type="task" data-id="{id}">{iconhtml}{name}</button></li>',
+        taskBarMenuTplt       : "<ul class='dropdown-menu fade' id='taskMenu'><li><a href='javascript:;' class='open-win'><i class='icon-bolt icon'></i> &nbsp;{openText}</a></li><li><a href='javascript:;' class='reload-win'><i class='icon-repeat icon'></i> &nbsp;{reloadText}</a></li><li><a href='javascript:;' class='fix-entry'><i class='icon-pushpin icon'></i> &nbsp;{fixToMenuText}</a></li><li><a href='javascript:;' class='remove-entry'><i class='icon-pushpin icon-rotate-90 icon'></i> &nbsp;{removeFromMenuText}</a></li><li><a href='javascript:;' class='close-win'><i class='icon-remove icon'></i> &nbsp;{closeText}</a></li><li><a href='javascript:;' class='delete-entry'><i class='icon-trash icon'></i> &nbsp;{deleteEntryText}</a></li></ul>",
+        entryListShortcutTplt : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn menu-{hasMenu} s-list-btn" data-menu={hasMenu} data-btn-type="list" title="{desc}" data-id="{id}" data-code={code}>{iconhtml}{name}</a></li>',
 
-        init                          : function() // init the default
+        init: function() // init the default
         {
             this.entryIconRoot = this.webRoot + this.entryIconRoot;
-            this.taskBarMenuHtmlTemplate = this.taskBarMenuHtmlTemplate.format(this);
+            this.taskBarMenuTplt = this.taskBarMenuTplt.format(this);
         }
     };
 
@@ -80,6 +79,8 @@
         });
 
         entries.sort(function(a, b){return a.order - b.order;});
+
+        console.log('initEntries', entries);
     }
 
     /**
@@ -134,8 +135,15 @@
         }
 
         entries.sort(function(a, b){return a.order - b.order;});
+        console.log('initEntries', entries);
     }
 
+    /**
+     * Get entry by id or code
+     * @param  {string} id
+     * @param  {bool}   exactMatch
+     * @return {object}
+     */
     function getEntry(id, exactMatch)
     {
         if(id && entries)
@@ -196,11 +204,13 @@
         {
             this.width  = settings.defaultWindowSize.width;
             this.height = settings.defaultWindowSize.height;
+            if(this.cssclass.indexOf(' window-movable') < 0) this.cssclass += ' window-movable';
         }
         else if(this.size.width !== undefined && this.size.height !== undefined)
         {
             this.width  = Math.min(this.size.width, desktop.width);
             this.height = Math.min(this.size.height, desktop.height);
+            if(this.cssclass.indexOf(' window-movable') < 0) this.cssclass += ' window-movable';
         }
         else
         {
@@ -261,25 +271,25 @@
     entry.prototype.toWindowHtml = function()
     {
         this.reCalPosSize();
-        return settings.windowHtmlTemplate.format(this);
+        return settings.windowTplt.format(this);
     };
 
     /* Transform to shortcut html tag show in left bar from teamplte */
     entry.prototype.toLeftBarShortcutHtml = function()
     {
-        return settings.leftBarShortcutHtmlTemplate.format(this);
+        return settings.leftBarShortcutTplt.format(this);
     };
 
     /* Transform to shortcut html tag show in task bar form template */
     entry.prototype.toTaskBarShortcutHtml = function()
     {
-        if(this.display != 'modal') return settings.taskBarShortcutHtmlTemplate.format(this);
+        if(this.display != 'modal') return settings.taskBarShortcutTplt.format(this);
     };
 
     /* Transform to shortcut html tag in entry list form template */
     entry.prototype.toEntryListShortcutHtml = function()
     {
-        return settings.entryListShortcutHtmlTemplate.format(this);
+        return settings.entryListShortcutTplt.format(this);
     };
 
     /* Create a window object */
@@ -640,6 +650,7 @@
     /* active a window */
     windowsManager.prototype.activeWindow = function(win)
     {
+        if(this.shows.length) this.opens[settings.windowidstrTemplate.format(this.shows[this.shows.length - 1])].$.removeClass('window-active');
         this.unActiveWindow(win);
         win.$.css('z-index', windowZIndexSeed++).addClass('window-active');
         this.shows.push(win.id);
@@ -1016,7 +1027,7 @@
         }
         else
         {
-            this.$.find('.window-content').html(settings.frameHtmlTemplate.format(this));
+            this.$.find('.window-content').html(settings.frameTplt.format(this));
             frame = document.getElementById(fName);
         }
 
@@ -1183,7 +1194,6 @@
             return;
         }
 
-        
         this.updateEntryUrl();
     };
 
@@ -1346,7 +1356,7 @@
             if(focus) this.$search.focus();
         };
 
-        /* Handle the app: home blocks, use dashboard control in zui */
+        /* Handle the app: home blocks, usex  dashboard control in zui */
         this.handleHomeBlocks = function()
         {
             $('#home .dashboard').dashboard(
@@ -1587,7 +1597,7 @@
                 {
                     var btn = $(this),
                         menu = $('#taskMenu');
-                    if(!menu.length) menu = $(settings.taskBarMenuHtmlTemplate).appendTo('#desktop');
+                    if(!menu.length) menu = $(settings.taskBarMenuTplt).appendTo('#desktop');
                     if(menu.hasClass('show') && menu.data('id') == btn.data('id'))
                     {
                         menu.removeClass('in');
