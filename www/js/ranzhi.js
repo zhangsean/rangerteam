@@ -1054,6 +1054,8 @@ function reloadHome()
         {
             height            : 240,
             draggable         : true,
+            shadowType        : false,
+            sensitive         : true,
             afterOrdered      : sortBlocks,
             afterPanelRemoved : deleteBlock,
             panelRemovingTip  : $('#dashboard').attr('data-confirm-remove-block')
