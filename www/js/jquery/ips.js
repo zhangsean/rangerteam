@@ -79,8 +79,6 @@
         });
 
         entries.sort(function(a, b){return a.order - b.order;});
-
-        console.log('initEntries', entries);
     }
 
     /**
@@ -135,7 +133,6 @@
         }
 
         entries.sort(function(a, b){return a.order - b.order;});
-        console.log('initEntries', entries);
     }
 
     /**
