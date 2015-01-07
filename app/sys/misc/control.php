@@ -21,5 +21,16 @@ class misc extends control
     {
         die();
     }
+
+    /**
+     * Show about info of zentao.
+     * 
+     * @access public
+     * @return void
+     */
+    public function about()
+    {
+        die($this->display());
+    }
 }
 

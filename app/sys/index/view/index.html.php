@@ -23,6 +23,7 @@ js::import($jsRoot . 'jquery/ips.js');
       <li class='with-avatar'><?php echo html::a($this->createLink('user', 'profile'), "<div class='avatar avatar-md'>" . (empty($app->user->avatar) ? '' : html::image($app->user->avatar)) . "</div><strong>{$app->user->realname}</strong>", "data-toggle='modal' data-id='profile'");?></li>
       <li class="divider"></li>
       <li class='dropdown-submenu'><?php include '../../common/view/selectlang.html.php';?></li>
+      <li><a href='<?php echo $this->createLink('misc', 'about');?>' data-id='about' data-toggle='modal'><i class='icon icon-info-sign'></i> <?php echo $lang->index->about?></a></li>
       <li class="divider"></li>
       <li><?php echo html::a($this->createLink('entry', 'create'), "<i class='icon icon-plus'></i> {$lang->index->addEntry}", "data-id='superadmin' class='app-btn'"  )?></li>
       <li><a href='javascript:;' class='fullscreen-btn' data-id='allapps'><i class='icon icon-th-large'></i> <?php echo $lang->index->allEntries?></a></li>
@@ -37,7 +38,6 @@ js::import($jsRoot . 'jquery/ips.js');
     <div id='taskbar'><ul class='bar-menu'></ul></div>
     <div id='bottomRightBar' class='dock-right'>
       <ul class='bar-menu'>
-        <li><button id='version' type='button'><?php echo html::a('http://www.ranzhico.com', $lang->ranzhi . $this->config->version, "target='_blank'")?></button></li>
         <li><button id='showDesk' type='button' class='fullscreen-btn icon-desktop' data-id='home' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'></button></li>
       </ul>
     </div>

@@ -10,6 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 $lang->index->common       = '首页';
+$lang->index->about        = '关于';
 $lang->index->allEntries   = '所有应用';
 $lang->index->opened       = '已打开';
 $lang->index->addEntry     = '添加应用';

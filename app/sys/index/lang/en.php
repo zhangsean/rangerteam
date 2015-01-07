@@ -10,6 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 $lang->index->common       = 'Index';
+$lang->index->about        = 'Abbout';
 $lang->index->allEntries   = 'All Entries';
 $lang->index->addEntry     = 'Add';
 $lang->index->opened       = 'opened';
