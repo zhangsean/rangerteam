@@ -48,6 +48,7 @@ $lang->order->browse        = 'Browse Order';
 $lang->order->create        = 'Create';
 $lang->order->record        = 'History';
 $lang->order->edit          = 'Edit';
+$lang->order->delete        = 'Delete';
 $lang->order->view          = 'View';
 $lang->order->close         = 'Close';
 $lang->order->sign          = 'Sign';

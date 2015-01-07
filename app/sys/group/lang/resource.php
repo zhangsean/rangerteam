@@ -87,6 +87,7 @@ $lang->resource->order->close    = 'close';
 $lang->resource->order->activate = 'activate';
 $lang->resource->order->contact  = 'contact';
 $lang->resource->order->assign   = 'assign';
+$lang->resource->order->assign   = 'delete';
 
 $lang->order->methodOrder[5]  = 'browse';
 $lang->order->methodOrder[10] = 'create';
@@ -96,6 +97,7 @@ $lang->order->methodOrder[25] = 'close';
 $lang->order->methodOrder[30] = 'activate';
 $lang->order->methodOrder[40] = 'contact';
 $lang->order->methodOrder[45] = 'assign';
+$lang->order->methodOrder[50] = 'delete';
 
 /* Contract. */
 $lang->resource->contract = new stdclass();

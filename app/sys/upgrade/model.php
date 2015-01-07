@@ -595,10 +595,11 @@ class upgradeModel extends model
         {
             if($group->id == 1)
             {
-                $privs = array('balance', 'depositor', 'product', 'schema', 'setting', 'task', 'trade');
+                $privs = array('balance', 'depositor', 'order', 'product', 'schema', 'setting', 'task', 'trade');
 
                 $modules['balance']   = array('browse', 'create', 'delete', 'edit');
                 $modules['depositor'] = array('activate', 'browse', 'check', 'create', 'delete', 'edit', 'forbid', 'savebalance');
+                $modules['order']     = array('delete');
                 $modules['product']   = array('view');
                 $modules['project']   = array('active', 'suspend');
                 $modules['schema']    = array('browse', 'create', 'delete', 'edit', 'view');
