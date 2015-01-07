@@ -8,13 +8,13 @@
   <h4><?php printf($lang->misc->version, $config->version);?></h4>
   <div id='aboutNav' class='clearfix'>
     <ul class='nav nav-pills pull-left'>
-      <li><?php echo html::a('http://www.ranzhico.com', $lang->misc->offcialSite, "target='_blank'")?></li>
-      <li><?php echo html::a('https://www.ranzhico.com/page/support.html', $lang->misc->support, "target='_blank'")?></li>
-      <li><?php echo html::a('https://www.ranzhico.com/book/', $lang->misc->userbook, "target='_blank'")?></li>
-      <li><?php echo html::a('https://www.ranzhico.com/forum/', $lang->misc->forum, "target='_blank'")?></li>
+      <li><?php echo html::a('http://www.ranzhico.com', "<i class='icon-globe'></i> " . $lang->misc->offcialSite, "target='_blank'")?></li>
+      <li><?php echo html::a('https://www.ranzhico.com/page/support.html', "<i class='icon-question-sign'></i> " . $lang->misc->support, "target='_blank'")?></li>
+      <li><?php echo html::a('https://www.ranzhico.com/book/', "<i class='icon-book'></i> " . $lang->misc->userbook, "target='_blank'")?></li>
+      <li><?php echo html::a('https://www.ranzhico.com/forum/', "<i class='icon-comments-alt'></i> " . $lang->misc->forum, "target='_blank'")?></li>
     </ul>
     <ul class='nav nav-pills pull-right'>
-      <li><?php echo html::a('http://www.ranzhico.com/ranzhisaas-plans.html', $lang->misc->yunranzhi, "target='_blank' class='text-important'")?></li>
+      <li><?php echo html::a('http://www.ranzhico.com/ranzhisaas-plans.html', "<i class='icon-cloud'></i> " . $lang->misc->yunranzhi, "target='_blank' class='text-important'")?></li>
     </ul>
   </div>
 </div>
