@@ -139,9 +139,15 @@ class block extends control
 
         $this->processParams();
 
+        /* Get project ids. */
+        $projects = $this->loadMOdel('project')->getPairs();
+        $ids = '';
+        foreach($projects as $key => $project) $ids .= ',' . $key;
+
         $this->view->tasks = $this->dao->select('*')->from(TABLE_TASK)
             ->where('deleted')->eq(0)
             ->andWhere('project')->ne(0)
+            ->andWhere('project')->in($ids)
             ->beginIF(isset($this->params->status) and join($this->params->status) != false)->andWhere('status')->in($this->params->status)->fi()
             ->beginIF($this->params->type)->andWhere($this->params->type)->eq($this->params->account)->fi()
             ->orderBy($this->params->orderBy)

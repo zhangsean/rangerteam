@@ -497,7 +497,7 @@ class contractModel extends model
                 $menu .= "<a href='###' disabled='disabled' class='disabled $class'>" . $this->lang->cancel . '</a> ';
             }
 
-            if($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done'))
+            if($contract->status == 'canceled' or ($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done')))
             {
                 $menu .= html::a(helper::createLink('contract', 'delete', "contract=$contract->id"), $this->lang->delete, "class='deleter $class'");
             }
@@ -520,7 +520,7 @@ class contractModel extends model
                 $menu .= "<li><a href='###' disabled='disabled' class='disabled $class'>" . $this->lang->cancel . '</a></li> ';
             }
 
-            if($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done'))
+            if($contract->status == 'canceled' or ($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done')))
             {
                 $menu .= "<li>" . html::a(helper::createLink('contract', 'delete', "contract=$contract->id"), $this->lang->delete, "class='reloadDeleter $class'") . "</li>";
             }
