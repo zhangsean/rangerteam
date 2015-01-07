@@ -8,7 +8,7 @@
 .speaker{width: 180px; border-right:1px solid #ddd; padding: 10px 15px !important;}
 .thread-author{display: block; padding: 5px 0; border-bottom: 1px dashed #ddd;margin-bottom: 10px;}
 .thread-content{padding: 5px;}
-.thread .article-files{margin: 10px 0 0 0;border-top:1px dashed #ddd;padding: 0 0 10px}
+.thread .article-files{margin: 10px -6px -5px -5px;border-top:1px dashed #ddd;padding: 0 0 10px}
 .thread .article-files-heading{margin-bottom: 0;}
 
 .table > tbody > tr > td.thread-wrapper{padding-bottom: 37px;}
