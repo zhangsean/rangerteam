@@ -188,37 +188,24 @@ class contactModel extends model
                 $customer->createdBy   = $this->app->user->account;
                 $customer->createdDate = helper::now();
 
+                $this->dao->insert(TABLE_CONTACT)->data($contact)
+                    ->autoCheck()
+                    ->checkIF($contact->email, 'email', 'email')
+                    ->checkIF($contact->phone, 'phone', 'length', 20, 7);
+
+                if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+
+                $return = $this->checkContact($contact);
+                if($return['result'] == 'fail') return $return;
+
                 $return = $this->loadModel('customer')->create($customer);
                 if($return['result'] == 'fail') return $return;
                 $contact->customer = $return['customerID'];
             }
         }
 
-        $contactList = $this->dao->select('*')->from(TABLE_CONTACT)->where('realname')->eq($contact->realname)->fetchAll('id');
-
-        if(!empty($contactList))
-        {
-            $customerContactList = $this->dao->select('contact')->from(TABLE_RESUME)->where('customer')->eq($contact->customer)->fetchAll('contact');
-
-            foreach($contactList as $id => $data)
-            {
-                if(isset($customerContactList[$id]))
-                {
-                    $message = sprintf($this->lang->error->unique, $this->lang->customer->contact, html::a(helper::createLink('contact', 'view', "contactID={$data->id}"), $data->realname, "target='_blank'"));
-                    return array('result' => 'fail', 'message' => $message);
-                }
-            }
-        }
-
-        foreach($this->config->contact->contactWayList as $item)
-        {
-            if(!empty($contact->$item)) $existContact = $this->dao->select('*')->from(TABLE_CONTACT)->where($item)->eq($contact->$item)->fetch();
-            if(!empty($existContact))
-            {
-                $message = sprintf($this->lang->error->unique, $this->lang->customer->{$item}, html::a(helper::createLink('contact', 'view', "contactID={$existContact->id}"), $existContact->$item, "target='_blank'"));
-                return array('result' => 'fail', 'message' => $message);
-            }
-        }
+        $return = $this->checkContact($contact);
+        if($return['result'] == 'fail') return $return;
 
         $this->dao->insert(TABLE_CONTACT)
             ->data($contact, 'customer,title,dept,maker,join')
@@ -277,31 +264,9 @@ class contactModel extends model
         if($contact->site and strpos($contact->site, '://') === false )  $contact->site  = 'http://' . $contact->site;
         if($contact->weibo and strpos($contact->weibo, 'http://weibo.com/') === false ) $contact->weibo = 'http://weibo.com/' . $contact->weibo;
 
-        $contactList = $this->dao->select('*')->from(TABLE_CONTACT)->where('realname')->eq($contact->realname)->andWhere('id')->ne($contactID)->fetchAll('id');
+        $return = $this->checkContact($contact);
+        if($return['result'] == 'fail') return $return;
 
-        if(!empty($contactList))
-        {
-            $customerContactList = $this->dao->select('contact')->from(TABLE_RESUME)->where('customer')->eq($contact->customer)->fetchAll('contact');
-
-            foreach($contactList as $id => $data)
-            {
-                if(isset($customerContactList[$id]))
-                {
-                    $message = sprintf($this->lang->error->unique, $this->lang->customer->contact, html::a(helper::createLink('contact', 'view', "contactID={$data->id}"), $data->realname, "target='_blank'"));
-                    return array('result' => 'fail', 'message' => $message);
-                }
-            }
-        }
-
-        foreach($this->config->contact->contactWayList as $item)
-        {
-            if($contact->$item) $existContact = $this->dao->select('*')->from(TABLE_CONTACT)->where($item)->eq($contact->$item)->andWhere('id')->ne($contactID)->fetch();
-            if(!empty($existContact))
-            {
-                $message = sprintf($this->lang->error->unique, $this->lang->customer->{$item}, html::a(helper::createLink('contact', 'view', "contactID={$existContact->id}"), $existContact->$item, "target='_blank'"));
-                return array('result' => 'fail', 'message' => $message);
-            }
-        }
 
         $this->dao->update(TABLE_CONTACT)
             ->data($contact, 'customer,dept,maker,title,join')
@@ -410,5 +375,41 @@ class contactModel extends model
         }
 
         if($contact->mobile and strlen($contact->mobile) == 11) $contact->mobile = substr($contact->mobile, 0, 3) . ' ' . substr($contact->mobile, 3, 4) . ' ' . substr($contact->mobile, 7, 4);
+    }
+
+    /**
+     * Check contact when insert table. 
+     * 
+     * @param  object $contact 
+     * @access public
+     * @return void
+     */
+    public function checkContact($contact)
+    {
+        $contactList = $this->dao->select('*')->from(TABLE_CONTACT)->where('realname')->eq($contact->realname)->fetchAll('id');
+
+        if(!empty($contactList))
+        {
+            $customerContactList = $this->dao->select('contact')->from(TABLE_RESUME)->where('customer')->eq($contact->customer)->fetchAll('contact');
+
+            foreach($contactList as $id => $data)
+            {
+                if(isset($customerContactList[$id]))
+                {
+                    $message = sprintf($this->lang->error->unique, $this->lang->customer->contact, html::a(helper::createLink('contact', 'view', "contactID={$data->id}"), $data->realname, "target='_blank'"));
+                    return array('result' => 'fail', 'message' => $message);
+                }
+            }
+        }
+
+        foreach($this->config->contact->contactWayList as $item)
+        {
+            if(!empty($contact->$item)) $existContact = $this->dao->select('*')->from(TABLE_CONTACT)->where($item)->eq($contact->$item)->fetch();
+            if(!empty($existContact))
+            {
+                $message = sprintf($this->lang->error->unique, $this->lang->contact->{$item}, html::a(helper::createLink('contact', 'view', "contactID={$existContact->id}"), $existContact->$item, "target='_blank'"));
+                return array('result' => 'fail', 'message' => $message);
+            }
+        }
     }
 }

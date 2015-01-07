@@ -140,6 +140,29 @@ class customerModel extends model
             return array('result' => 'fail', 'message' => $message);
         }
 
+        $this->loadModel('contact');
+        if(!empty($customer->contact))
+        {
+            $contact = new stdclass();
+            $contact->realname    = $customer->contact;
+            $contact->customer    = '';
+            $contact->phone       = $customer->phone;
+            $contact->email       = $customer->email;
+            $contact->qq          = $customer->qq;
+            $contact->createdBy   = $this->app->user->account;
+            $contact->createdDate = $now;
+
+            $this->dao->insert(TABLE_CONTACT)->data($contact)
+                ->autoCheck()
+                ->checkIF($contact->email, 'email', 'email')
+                ->checkIF($contact->phone, 'phone', 'length', 20, 7);
+
+            if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+
+            $return = $this->contact->checkContact($contact);
+            if($return['result'] == 'fail') return $return;
+        }
+
         if(!isset($customer->contact)) $this->config->customer->require->create = 'name';
         $this->dao->insert(TABLE_CUSTOMER)
             ->data($customer, $skip = 'uid,contact,email,qq,phone')
@@ -151,18 +174,10 @@ class customerModel extends model
         $customerID = $this->dao->lastInsertID();
         $this->loadModel('action')->create('customer', $customerID, 'Created');
 
-        if(isset($customer->contact))
+        if(isset($contact))
         {
-            $contact = new stdclass();
-            $contact->customer    = $customerID;
-            $contact->realname    = $customer->contact;
-            $contact->phone       = $customer->phone;
-            $contact->email       = $customer->email;
-            $contact->qq          = $customer->qq;
-            $contact->createdBy   = $this->app->user->account;
-            $contact->createdDate = $now;
-
-            $return = $this->loadModel('contact')->create($contact);
+            $contact->customer = $customerID;
+            $return = $this->contact->create($contact);
             if($return['result'] == 'fail') return $return;
         }
 
