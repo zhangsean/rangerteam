@@ -65,7 +65,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->order->assignedDate;?></th>
-              <td><?php echo html::input('assignedDate', $order->assignedDate, "class='form-control form-datetime'");?></td>
+              <td><?php echo html::input('assignedDate', formatTime($order->assignedDate), "class='form-control form-datetime'");?></td>
             </tr>
             <tr>
               <th><?php echo $lang->order->status;?></th>
@@ -108,7 +108,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->order->closedDate;?></th>
-              <td><?php echo html::input('closedDate', $order->closedDate, "class='form-control form-datetime'");?></td>
+              <td><?php echo html::input('closedDate', formatTime($order->closedDate), "class='form-control form-datetime'");?></td>
             </tr>
             <tr>
               <th><?php echo $lang->order->activatedBy;?></th>
@@ -116,7 +116,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->order->activatedDate;?></th>
-              <td><?php echo html::input('activatedDate', $order->activatedDate, "class='form-control form-datetime'");?></td>
+              <td><?php echo html::input('activatedDate', formatTime($order->activatedDate), "class='form-control form-datetime'");?></td>
             </tr>
           </table>
         </div>
