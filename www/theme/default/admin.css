@@ -88,7 +88,7 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 .with-fixed-table #fixedHeader {display: block;}
 
 /* menu */
-#menu {position: absolute; top: 41px; left: 0; right: 0; border-bottom: 1px solid #ddd; background: #f1f1f1; padding: 0 5px; z-index: 1020}
+#menu {position: absolute; top: 41px; left: 0; right: 0; border-bottom: 1px solid #ddd; background: #f1f1f1; padding: 0 5px; z-index: 900}
 #menu > .nav {float: left; padding: 0 5px}
 #menu > .nav > li {float: left; padding: 5px 0}
 #menu > .nav > li.divider {height: 40px; width: 1px; background: #ddd; margin: 0 5px;}
@@ -105,7 +105,7 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 
 #menu .dropdown-menu {margin-top: -3px; left: -5px}
 
-#menuActions {position: fixed; right: 15px; top: 45px; z-index: 1040}
+#menuActions {position: fixed; right: 15px; top: 45px; z-index: 940}
 
 .row-table {display: table; width: 100%;}
 .col-side, .col-main { padding: 0; display: table-cell; vertical-align: top;}
