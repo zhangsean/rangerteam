@@ -73,7 +73,7 @@
             <td><?php echo $lang->doc->types[$doc->type];?></td>
             <td><?php isset($users[$doc->createdBy]) ? print($users[$doc->createdBy]) : print($doc->createdBy);?></td>
             <td class='visible-lg'><?php echo date("m-d H:i", strtotime($doc->createdDate));?></td>
-            <td>
+            <td class='actions'>
               <?php 
               echo html::a($this->createLink('doc', 'edit', "doc={$doc->id}"), $lang->edit);
               if(commonModel::hasPriv('doc', 'delete'))

@@ -20,7 +20,6 @@ js::set('from', 'admin');
   <div class='row'> 
     <?php include './deptside.html.php';?>
     <div class='col-md-10'>
-      <div class="row">
         <div class='clearfix'>
           <div class="panel">
             <div class="panel-heading">
@@ -102,7 +101,6 @@ js::set('from', 'admin');
             <div class='table-footer'><?php $pager->show();?></div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>

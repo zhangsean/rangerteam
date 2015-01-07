@@ -45,7 +45,7 @@
         <td><?php echo $lang->contract->returnList[$contract->return];?></td>
         <td><?php echo $lang->contract->deliveryList[$contract->delivery];?></td>
         <td class='<?php echo "contract-{$contract->status}";?>'><?php echo $lang->contract->statusList[$contract->status];?></td>
-        <td><?php echo $this->contract->buildOperateMenu($contract) ?></td>
+        <td class='operate'><?php echo $this->contract->buildOperateMenu($contract) ?></td>
       </tr>
       <?php endforeach;?>
     </tbody>
