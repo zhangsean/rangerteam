@@ -37,7 +37,7 @@ css::internal('body{background-color:#f6f5f5}');
         <div id='responser' class='text-center'></div>
         <div class='row'>
           <div class='col-xs-4 text-center'>
-          <?php echo html::image($this->config->webRoot . 'theme/default/images/main/logo.login.png'); ?>
+          <?php echo html::image($this->config->webRoot . 'theme/default/images/main/logo.png'); ?>
           </div>
           <div class='col-xs-8'>
             <table class='table table-form'>
