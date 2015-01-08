@@ -71,14 +71,11 @@ class upgrade extends control
      */
     public function confirm()
     {
+        $confirmContent = $this->upgrade->getConfirm($this->post->fromVersion);
+        if(empty($confirmContent)) $this->locate(inlink('execute', "fromVersion={$this->post->fromVersion}"));
+
         $this->view->title       = $this->lang->upgrade->confirm;
-        $this->view->confirm     = $this->upgrade->getConfirm($this->post->fromVersion);
-        if($this->view->confirm == '')
-        {
-            $this->view->result = 'success';
-            $this->display('upgrade', 'execute');
-            exit;
-        }
+        $this->view->confirm     = $confirmContent;
         $this->view->fromVersion = $this->post->fromVersion;
 
         $this->display();
@@ -87,12 +84,14 @@ class upgrade extends control
     /**
      * Execute the upgrading.
      * 
+     * @param  string  $fromVersion
      * @access public
      * @return void
      */
-    public function execute()
+    public function execute($fromVersion)
     {
-        $this->upgrade->execute($this->post->fromVersion);
+        $fromVersion = isset($_POST['fromVersion']) ? $this->post->fromVersion : $fromVersion;
+        $this->upgrade->execute($fromVersion);
 
         $this->view->title = $this->lang->upgrade->result;
 

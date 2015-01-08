@@ -61,7 +61,6 @@ class upgradeModel extends model
                 $this->upgradeDeliveryRecords();
                 $this->addSearchPriv();
             case '1_6':
-                $this->execSQL($this->getUpgradeFile('1.6'));
                 $this->addPrivs();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
@@ -605,7 +604,7 @@ class upgradeModel extends model
                 $modules['schema']    = array('browse', 'create', 'delete', 'edit', 'view');
                 $modules['setting']   = array('lang');
                 $modules['task']      = array('kanban', 'outline', 'start');
-                $modules['trade']     = array('batchEdit', 'browse', 'create', 'delete', 'detail', 'edit', 'import', 'showimport', 'transfer');
+                $modules['trade']     = array('batchCreate', 'batchEdit', 'browse', 'create', 'delete', 'detail', 'edit', 'import', 'showimport', 'transfer');
 
                 foreach($privs as $module)
                 {
