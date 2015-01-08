@@ -16,9 +16,9 @@
   <div class='panel'> 
     <?php echo html::a(inlink('create'), $lang->blog->create, "class='btn btn-primary btn-lg btn-block'");?>
   </div>
-  <div class="panel input-group">
+  <div class='input-group'>
     <?php echo html::input('searchInput', isset($searchText) ? $searchText : '', "class='form-control search-query' placeholder=''"); ?>
-    <span class="input-group-btn">
+    <span class='input-group-btn'>
       <?php echo html::a('###', "<i class='icon icon-search'></i>", "class='btn btn-primary' id='searchButton'"); ?>
     </span>
     <div id='querybox' class='hide'></div>

@@ -16,7 +16,7 @@
 <?php js::set('mode', $mode);?>
 <div class='row'>
   <div class='col-xs-2'>
-    <div class="panel input-group">
+    <div class="input-group">
       <?php echo html::input('searchInput', isset($searchText) ? $searchText : '', "class='form-control search-query' placeholder=''"); ?>
       <span class="input-group-btn">
         <?php echo html::a('###', "<i class='icon icon-search'></i>", "class='btn btn-primary' id='searchButton'"); ?>
