@@ -12,6 +12,7 @@
 include "../../common/view/header.lite.html.php";
 css::import($themeRoot . 'default/ips.css');
 js::import($jsRoot . 'jquery/ips.js');
+$isSuperAdmin = $this->app->user->admin == 'super';
 ?>
 <!-- Desktop -->
 <div id='desktop' class='fullscreen-mode' unselectable='on' style='-moz-user-select:none;-webkit-user-select:none;' onselectstart='return false;'>
@@ -25,7 +26,9 @@ js::import($jsRoot . 'jquery/ips.js');
       <li class='dropdown-submenu'><?php include '../../common/view/selectlang.html.php';?></li>
       <li><a href='<?php echo $this->createLink('misc', 'about');?>' data-id='about' data-toggle='modal' data-width='400'><i class='icon icon-info-sign'></i> <?php echo $lang->index->about?></a></li>
       <li class="divider"></li>
+      <?php if($isSuperAdmin):?>
       <li><?php echo html::a($this->createLink('entry', 'create'), "<i class='icon icon-plus'></i> {$lang->index->addEntry}", "data-id='superadmin' class='app-btn'"  )?></li>
+      <?php endif;?>
       <li><a href='javascript:;' class='fullscreen-btn' data-id='allapps'><i class='icon icon-th-large'></i> <?php echo $lang->index->allEntries?></a></li>
       <li class="divider"></li>
       <li><?php echo html::a($this->createLink('user', 'logout'), "<i class='icon icon-signout'></i> {$lang->logout}")?></li>
@@ -113,7 +116,9 @@ js::import($jsRoot . 'jquery/ips.js');
           </div>
         </div>
         <div class='col-xs-4 text-right'>
+          <?php if($isSuperAdmin):?>
           <?php echo html::a($this->createLink('entry', 'create'), "<i class='icon-plus'></i> {$lang->index->addEntry}", "data-id='superadmin' class='app-btn btn btn-pure'")?>
+          <?php endif;?>
         </div>
       </div>
     </header>
@@ -140,7 +145,7 @@ var entries = [
     order    : 9999999
 }];
 
-<?php if($this->app->user->admin == 'super'):?>
+<?php if($isSuperAdmin):?>
 <?php 
     $superadminMenu  = (isset($superadmin) and isset($superadmin->visible) and $superadmin->visible == 0) ? 'list' : 'all';
     $superadminOrder = (isset($superadmin) and isset($superadmin->order)) ? $superadmin->order : 9999998;
