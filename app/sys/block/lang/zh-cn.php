@@ -51,6 +51,7 @@ $lang->block->default['crm']['1']['grid']  = 4;
 
 $lang->block->default['crm']['1']['params']['num']     = 15;
 $lang->block->default['crm']['1']['params']['orderBy'] = 'id_desc';
+$lang->block->default['crm']['1']['params']['type']    = 'createdBy';
 $lang->block->default['crm']['1']['params']['status']  = array();
 
 $lang->block->default['crm']['2']['title'] = '我的合同';
@@ -59,6 +60,7 @@ $lang->block->default['crm']['2']['grid']  = 4;
 
 $lang->block->default['crm']['2']['params']['num']     = 15;
 $lang->block->default['crm']['2']['params']['orderBy'] = 'id_desc';
+$lang->block->default['crm']['2']['params']['type']    = 'returnedBy';
 $lang->block->default['crm']['2']['params']['status']  = array();
 
 $lang->block->default['cash']['1']['title'] = '付款账户';
