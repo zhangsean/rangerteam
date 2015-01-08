@@ -140,7 +140,6 @@ class mail extends control
             die(js::alert($this->lang->mail->needConfigure) . js::locate('back'));
         }
 
-
         if($_POST)
         {
             $this->mail->send($this->post->to, $this->lang->mail->subject, $this->lang->mail->content, '', true);
@@ -152,9 +151,8 @@ class mail extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->mail->successSended));
         }
 
-        $this->view->title      = $this->lang->mail->common . $this->lang->colon . $this->lang->mail->test;
-        $this->view->position[] = html::a(inlink('index'), $this->lang->mail->common);
-        $this->view->position[] = $this->lang->mail->test;
+        $this->view->title = $this->lang->mail->common . $this->lang->colon . $this->lang->mail->test;
+        $this->view->users = $this->loadModel('user')->getPairs('nodeleted');
         $this->display();
     }
 
