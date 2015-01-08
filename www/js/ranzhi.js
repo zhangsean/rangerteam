@@ -1048,7 +1048,7 @@ function setPageActions()
  */
 function reloadHome()
 {
-    $('#home').load(createLink('index', 'index') + ' #dashboard', function()
+    $('#dashboardWrapper').load(createLink('index', 'index') + ' #dashboard', function()
     {
         $('#dashboard').dashboard(
         {
@@ -1061,25 +1061,7 @@ function reloadHome()
             panelRemovingTip  : $('#dashboard').attr('data-confirm-remove-block')
         });
 
-        $('#home .dashboard .refresh-all-panel').click(function()
-        {    
-            var $icon = $(this).find('.icon-repeat').addClass('icon-spin');
-            $('#home .dashboard .refresh-panel').click();
-            setTimeout(checkDone, 500);
-
-            function checkDone()
-            {    
-                if($('#home .dashboard .panel-loading').length)
-                {
-                    setTimeout(checkDone, 500);
-                }
-                else
-                {
-                    $icon.removeClass('icon-spin');
-                }
-            }    
-        });
-
+        $('#home .refresh-all-panel').first().click();
         $('#dashboard [data-toggle="modal"]').modalTrigger();
     });
     $('#ajaxModal').remove();

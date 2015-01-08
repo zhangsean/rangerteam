@@ -193,7 +193,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #home > .navbar .nav > li.with-avatar > a {padding-left: 45px; position: relative;}
 #home > .navbar .nav > li.with-avatar > a > .avatar {position: absolute; left: 10px; top: 5px}
 #home [class^='col-'] {overflow: visible;}
-#home .dashboard {padding: 60px 25px 25px; position: static;}
+#home .dashboard {padding: 65px 25px 25px; position: static;}
 #home .dashboard > .row {}
 #dashboard > .actions {position: absolute; right: 25px; top: 0;}
 #dashboard > .actions > .btn {padding: 3px 7px; border-radius: 0 0 4px 4px; border-top: 0}

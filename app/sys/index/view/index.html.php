@@ -45,7 +45,7 @@ js::import($jsRoot . 'jquery/ips.js');
   <div id='home' class='fullscreen fullscreen-active'>
     <nav class='navbar navbar-inverse navbar-fixed-top'>
       <div class='navbar-header'>
-        <a class='navbar-brand' href='<?php echo $this->createLink('sys', 'index')?>'><?php echo $company . $lang->ranzhi ?></a>
+        <a class='navbar-brand' href='<?php $this->createLink('index', 'index') ?>'><?php echo $company . $lang->ranzhi ?></a>
       </div>
       <div class='collapse navbar-collapse'>
         <ul class='nav navbar-nav navbar-right'>
@@ -58,39 +58,41 @@ js::import($jsRoot . 'jquery/ips.js');
         </ul>
       </div>
     </nav>
-    <div class='panels-container dashboard' id='dashboard' data-confirm-remove-block='<?php  echo $lang->block->confirmRemoveBlock;?>'>
-      <div class='row'>
-        <?php
-        $index = 0;
-        reset($blocks);
-        ?>
-        <?php foreach($blocks as $key => $block):?>
-        <?php
-        $index = $key;
-        $block->params = json_decode($block->params);
-        ?>
-        <div class='col-sm-6 col-md-<?php echo $block->grid;?>'>
-          <div class='panel <?php if(isset($block->params->color)) echo 'panel-' . $block->params->color;?>' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->title?>' data-url='<?php echo $this->createLink('entry', 'printBlock', 'index=' . $index) ?>'>
-            <div class='panel-heading'>
-              <div class='panel-actions'>
-                <button class="btn btn-mini refresh-panel" type='button'><i class="icon-repeat"></i></button>
-                <div class='dropdown'>
-                  <button role="button" class="btn btn-mini" data-toggle="dropdown" type='button'><span class="caret"></span></button>
-                  <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="<?php echo $this->createLink("block", "admin", "index=$index"); ?>" data-toggle='modal' class='edit-block' data-title='<?php echo $block->title; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit; ?></a></li>
-                    <li><a href="javascript:;" class="remove-panel"><i class="icon-remove"></i> <?php echo $lang->delete; ?></a></li>
-                    <?php if(!$block->source and $block->block == 'html'):?>
-                      <li><a href="javascript:hiddenBlock(<?php echo $index;?>)" class="hidden-panel"><i class='icon-eye-close'></i> <?php echo $lang->index->hidden; ?></a></li>
-                    <?php endif;?>
-                  </ul>
+    <div id='dashboardWrapper'>
+      <div class='panels-container dashboard' id='dashboard' data-confirm-remove-block='<?php  echo $lang->block->confirmRemoveBlock;?>'>
+        <div class='row'>
+          <?php
+          $index = 0;
+          reset($blocks);
+          ?>
+          <?php foreach($blocks as $key => $block):?>
+          <?php
+          $index = $key;
+          $block->params = json_decode($block->params);
+          ?>
+          <div class='col-xs-<?php echo $block->grid;?>'>
+            <div class='panel <?php if(isset($block->params->color)) echo 'panel-' . $block->params->color;?>' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->title?>' data-url='<?php echo $this->createLink('entry', 'printBlock', 'index=' . $index) ?>'>
+              <div class='panel-heading'>
+                <div class='panel-actions'>
+                  <button class="btn btn-mini refresh-panel" type='button'><i class="icon-repeat"></i></button>
+                  <div class='dropdown'>
+                    <button role="button" class="btn btn-mini" data-toggle="dropdown" type='button'><span class="caret"></span></button>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                      <li><a href="<?php echo $this->createLink("block", "admin", "index=$index"); ?>" data-toggle='modal' class='edit-block' data-title='<?php echo $block->title; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit; ?></a></li>
+                      <li><a href="javascript:;" class="remove-panel"><i class="icon-remove"></i> <?php echo $lang->delete; ?></a></li>
+                      <?php if(!$block->source and $block->block == 'html'):?>
+                        <li><a href="javascript:hiddenBlock(<?php echo $index;?>)" class="hidden-panel"><i class='icon-eye-close'></i> <?php echo $lang->index->hidden; ?></a></li>
+                      <?php endif;?>
+                    </ul>
+                  </div>
                 </div>
+                <?php echo $block->title?>
               </div>
-              <?php echo $block->title?>
+              <div class='panel-body no-padding'></div>
             </div>
-            <div class='panel-body no-padding'></div>
           </div>
+          <?php endforeach;?>
         </div>
-        <?php endforeach;?>
       </div>
     </div>
   </div>
