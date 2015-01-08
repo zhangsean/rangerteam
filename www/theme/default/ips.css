@@ -152,8 +152,8 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 
 /* allapps */
 #allapps {background-color: rgba(0,0,0,0.25); color: #fff;}
-#allapps > header {padding: 20px 40px 10px; border-bottom: 1px solid rgba(255,255,255,0.2)}
-#allapps > header .nav {margin-bottom: -9px; bottom: -1px; border: none; position: relative;}
+#allapps > header {padding: 20px 40px 0; border-bottom: 1px solid rgba(255,255,255,0.2)}
+#allapps > header .nav {border: none; position: relative;}
 #allapps > header .nav > li > a {padding: 12px 15px; background: none; border-color: transparent; color: #fff; color: rgba(255,255,255,0.6);}
 #allapps > header .nav > li > a > small {display: none}
 #allapps > header .nav > li > a:hover {border-color: #fff; border-color: rgba(255,255,255,0.2); border-bottom-color: transparent; background-color:rgba(255,255,255,0.24);}
