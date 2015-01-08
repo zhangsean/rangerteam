@@ -469,7 +469,7 @@ class userModel extends model
         $user = $this->getByAccount($account);
         if(!$user) return false;
 
-        $this->dao->update(TABLE_USER)->set('deleted')->eq('1')->where('account')->eq($account)->exec();
+        parent::delete(TABLE_USER, $user->id);
 
         return !dao::isError();
     }
