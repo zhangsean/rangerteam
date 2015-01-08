@@ -197,6 +197,11 @@
     entry.prototype.resetPosSize = function()
     {
         /* Init size setting */
+        if(typeof this.size === 'string' && this.size.indexOf('}') > 0) // convert size data like "{"width":1024,"height":600}"
+        {
+            this.size = $.parseJSON(this.size);
+        }
+
         if(this.size == 'default')
         {
             this.width  = settings.defaultWindowSize.width;
