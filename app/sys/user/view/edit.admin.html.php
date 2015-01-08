@@ -24,7 +24,7 @@
               <table class='table table-form'>
                 <tr>
                   <th class='w-50px text-left'><?php echo $lang->user->account;?></th>
-                  <td><?php echo html::input('account', $user->account, "class='form-control'");?></td>
+                  <td><?php echo html::input('account', $user->account, "class='form-control disabled' disabled='disabled'");?></td>
                   <th><?php echo $lang->user->realname;?></th>
                   <td><?php echo html::input('realname', $user->realname, "class='form-control'");?></td>
                 </tr>
