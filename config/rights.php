@@ -24,6 +24,7 @@ $config->rights->member['entry']['updateentrymenu'] = 'updateentrymenu';
 $config->rights->member['dashboard']['index']       = 'index';
 
 $config->rights->member['misc']['qrcode']                 = 'qrcode';
+$config->rights->member['misc']['about']                  = 'about';
 $config->rights->member['user']['setreferer']             = 'setreferer';
 $config->rights->member['user']['profile']                = 'profile';
 $config->rights->member['user']['uploadavatar']           = 'uploadavatar';
