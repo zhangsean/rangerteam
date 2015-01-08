@@ -10,6 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 
+if(!isset($lang->misc)) $lang->misc = new stdclass();
 $lang->misc->version           = 'Version %s';
 $lang->misc->offcialSite       = 'Official';
 $lang->misc->support           = 'Support';
