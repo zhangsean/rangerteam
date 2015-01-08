@@ -21,6 +21,7 @@ $config->action->objectNameFields['article']  = 'title';
 $config->action->objectNameFields['order']    = 'id';
 $config->action->objectNameFields['doc']      = 'title';
 $config->action->objectNameFields['contact']  = 'realname';
+$config->action->objectNameFields['project']  = 'name';
 
 $config->action->objectAppNames['task']     = 'oa';
 $config->action->objectAppNames['doc']      = 'oa';
@@ -31,3 +32,4 @@ $config->action->objectAppNames['contract'] = 'crm';
 $config->action->objectAppNames['order']    = 'crm';
 $config->action->objectAppNames['contact']  = 'crm';
 $config->action->objectAppNames['product']  = 'crm';
+$config->action->objectAppNames['project']  = 'oa';
