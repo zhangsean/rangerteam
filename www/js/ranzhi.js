@@ -1062,10 +1062,8 @@ function reloadHome()
         });
 
         $('#home .refresh-all-panel').first().click();
-        $('#dashboard [data-toggle="modal"]').modalTrigger();
     });
-    $('#ajaxModal').remove();
-    $('.modal-backdrop').remove();
+    window.closeModal();
 }
 
 /**

@@ -68,7 +68,6 @@ function deleteBlock(index)
             alert(data.message);
             return false;
         }
-        messager.info(ipsLang["removedBlock"]);
     })
 }
 
@@ -114,13 +113,13 @@ function sortBlocks(orders)
     {
         if(data.result != 'success') return false;
 
-        $('.panels-container .panel').each(function()
+        $('#home .panels-container .panel:not(.panel-dragging-holder)').each(function()
         {
-            var index = $(this).data('order');
+            var $this = $(this);
+            var index = $this.data('order');
             /* Update new index for block id edit and delete. */
-            $(this).attr('id', 'block' + index).attr('data-id', index).data('url', createLink('block', 'printBlock', 'index=' + index));
-            $(this).find('.panel-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
-        })
-        messager.success(ipsLang["orderdBlocksSaved"]);
+            $this.attr('id', 'block' + index).attr('data-id', index).attr('data-url', createLink('block', 'printBlock', 'index=' + index));
+            $this.find('.panel-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
+        });
     });
 }

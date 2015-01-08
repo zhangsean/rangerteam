@@ -188,7 +188,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 
 /* home */
 #home {padding: 0;}
-#home > .navbar {left: 40px; background-color: rgba(0,0,0,0.25);}
+#home > .navbar {left: 40px; background-color: rgba(0,0,0,.5);}
 #home > .navbar .nav > li.divider {width: 1px; background-color: rgba(255,255,255,0.25); height: 40px}
 #home > .navbar .nav > li.with-avatar > a {padding-left: 45px; position: relative;}
 #home > .navbar .nav > li.with-avatar > a > .avatar {position: absolute; left: 10px; top: 5px}
