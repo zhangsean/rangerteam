@@ -1,3 +1,5 @@
+.page {clear: left!important; padding: 0}
+
 .cards.cards-user {margin: 0; padding: 10px; position: relative;}
 .col-card {width: 350px; float: left; margin: 10px}
 
