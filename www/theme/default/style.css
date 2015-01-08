@@ -226,15 +226,15 @@ body.page-actions-fixed {padding-bottom: 70px}
 .panel-primary > .panel-body,
 .panel-info > .panel-body,
 .panel-danger > .panel-body {box-shadow: inset 0 1px 100px rgba(255,255,255,.6);}
-.panel-success {background: #d1fecb}
+.panel-success {background: #d1fecb; border-color: #b0e4ac}
 .panel-success > .panel-heading {background: #c5f7c1; }
-.panel-warning {background: #fdfdc7;}
+.panel-warning {background: #fdfdc7; border-color: #e1e09a}
 .panel-warning > .panel-heading {background: #f8f7b6;}
-.panel-primary {background: #d8f2fa;}
+.panel-primary {background: #d8f2fa; border-color: #badfeb!important}
 .panel-primary > .panel-heading {background: #c9ecf8!important; color: #333!important; border:none!important;}
-.panel-info {background: #dcd8fe;}
+.panel-info {background: #dcd8fe; border-color: #d0c9ee}
 .panel-info > .panel-heading {background: #d4cdf3;}
-.panel-danger {background: #f5d0f5;}
+.panel-danger {background: #f5d0f5; border-color: #e9b9e9}
 .panel-danger > .panel-heading {background: #f1c3f1;}
 .panel-success .table td, .panel-success .table th,
 .panel-warning .table td, .panel-warning .table th,

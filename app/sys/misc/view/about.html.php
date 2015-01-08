@@ -17,6 +17,5 @@
       <li><?php echo html::a('https://www.ranzhico.com/book/', "<i class='icon-book'></i> " . $lang->misc->userbook, "target='_blank'")?></li>
       <li><?php echo html::a('https://www.ranzhico.com/forum/', "<i class='icon-comments-alt'></i> " . $lang->misc->forum, "target='_blank'")?></li>
     </ul>
-    
   </div>
 </div>

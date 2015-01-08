@@ -59,7 +59,7 @@ js::import($jsRoot . 'jquery/ips.js');
       </div>
     </nav>
     <div id='dashboardWrapper'>
-      <div class='panels-container dashboard' id='dashboard' data-confirm-remove-block='<?php  echo $lang->block->confirmRemoveBlock;?>'>
+      <div class='panels-container dashboard dashboard-inverse' id='dashboard' data-confirm-remove-block='<?php  echo $lang->block->confirmRemoveBlock;?>'>
         <div class='row'>
           <?php
           $index = 0;
