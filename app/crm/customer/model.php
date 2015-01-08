@@ -102,8 +102,9 @@ class customerModel extends model
 
         $customers = $this->dao->select('id, name')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
-            ->beginIF($relation == 'client')->andWhere('relation')->ne('provider')
-            ->beginIF($relation == 'provider')->andWhere('relation')->ne('client')
+            ->beginIF($relation == 'client')->andWhere('relation')->ne('provider')->fi()
+            ->beginIF($relation == 'provider')->andWhere('relation')->ne('client')->fi()
+            ->andWhere('id')->in($mine)
             ->orderBy('id_desc')
             ->fetchPairs('id');
 
