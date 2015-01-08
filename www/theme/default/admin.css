@@ -105,7 +105,7 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 
 #menu .dropdown-menu {margin-top: -3px; left: -5px}
 
-#menuActions {position: fixed; right: 15px; top: 45px; z-index: 940}
+#menuActions {position: absolute; right: 15px; top: 45px; z-index: 940}
 
 .row-table {display: table; width: 100%;}
 .col-side, .col-main { padding: 0; display: table-cell; vertical-align: top;}
