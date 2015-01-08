@@ -15,13 +15,13 @@ $config->rights = new stdclass();
 $config->rights->guest = array();
 
 $config->rights->member['index']['index']           = 'index';
+$config->rights->member['dashboard']['index']       = 'index';
 $config->rights->member['entry']['visit']           = 'visit';
 $config->rights->member['entry']['blocks']          = 'blocks';
 $config->rights->member['entry']['setblock']        = 'setblock';
 $config->rights->member['entry']['printblock']      = 'printblock';
 $config->rights->member['entry']['customsort']      = 'customsort';
 $config->rights->member['entry']['updateentrymenu'] = 'updateentrymenu';
-$config->rights->member['dashboard']['index']       = 'index';
 
 $config->rights->member['misc']['qrcode']                 = 'qrcode';
 $config->rights->member['misc']['about']                  = 'about';
@@ -38,11 +38,15 @@ $config->rights->member['order']['sendmail']              = 'sendmail';
 $config->rights->member['thread']['locate']               = 'locate';
 $config->rights->member['project']['ajaxgetdropmenu']     = 'ajaxgetdropmenu';
 $config->rights->member['project']['ajaxgetmatcheditems'] = 'ajaxgetmatcheditems';
+$config->rights->member['tree']['redirect']               = 'redirect';
 
 $config->rights->member['reply']['post']          = 'post';
 $config->rights->member['reply']['edit']          = 'edit';
 $config->rights->member['reply']['delete']        = 'delete';
 $config->rights->member['reply']['deletefile']    = 'deletefile';
+
+$config->rights->member['message']['comment'] = 'comment';
+$config->rights->member['message']['post']    = 'post';
 
 $config->rights->member['action']['createrecord'] = 'createrecord';
 $config->rights->member['action']['editrecord']   = 'editrecord';
