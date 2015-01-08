@@ -1365,7 +1365,8 @@
                 sensitive         : true,
                 panelRemovingTip  : settings.confirmRemoveBlock,
                 afterPanelRemoved : afterPanelRemoved
-            }).find('.refresh-all-panel').click(function()
+            });
+            $('#home .refresh-all-panel').click(function()
             {
                 var $icon = $(this).find('.icon-repeat').addClass('icon-spin');
                 $('#home .dashboard .refresh-panel').click();

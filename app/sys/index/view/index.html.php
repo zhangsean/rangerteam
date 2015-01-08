@@ -43,12 +43,22 @@ js::import($jsRoot . 'jquery/ips.js');
     </div>
   </div>
   <div id='home' class='fullscreen fullscreen-active'>
-    <div class='panels-container dashboard' id='dashboard' data-confirm-remove-block='<?php  echo $lang->block->confirmRemoveBlock;?>'>
-      <div class='btn-toolbar actions'>
-        <button title='<?php echo $lang->index->refresh;?>' class='btn btn-pure refresh-all-panel' type='button'><i class='icon-repeat'></i></button>
-        <?php end($blocks);?>
-        <a data-toggle='modal' href='<?php echo $this->createLink("block", "admin"); ?>' title='<?php echo $lang->index->addBlock; ?>' class='btn btn-pure'><i class='icon-plus'></i></a>
+    <nav class='navbar navbar-inverse navbar-fixed-top'>
+      <div class='navbar-header'>
+        <a class='navbar-brand' href='<?php echo $this->createLink('sys', 'index')?>'><?php echo $company . $lang->ranzhi ?></a>
       </div>
+      <div class='collapse navbar-collapse'>
+        <ul class='nav navbar-nav navbar-right'>
+          <li><a href='javascript:;' class='refresh-all-panel'><i class='icon-repeat'></i></a></li>
+          <li><a data-toggle='modal' href='<?php echo $this->createLink("block", "admin"); ?>' title='<?php echo $lang->index->addBlock; ?>'><i class='icon-plus'></i></a></li>
+          <li class='divider'></li>
+          <li>
+            <li class='with-avatar'><?php echo html::a($this->createLink('user', 'profile'), "<div class='avatar avatar-md'>" . (empty($app->user->avatar) ? '' : html::image($app->user->avatar)) . "</div><strong>{$app->user->realname}</strong>", "data-toggle='modal' data-id='profile'");?></li>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class='panels-container dashboard' id='dashboard' data-confirm-remove-block='<?php  echo $lang->block->confirmRemoveBlock;?>'>
       <div class='row'>
         <?php
         $index = 0;
