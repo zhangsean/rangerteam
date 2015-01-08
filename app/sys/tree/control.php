@@ -166,6 +166,12 @@ class tree extends control
         $category = $this->tree->getByID($categoryID);
         $children = $this->tree->getChildren($categoryID, $category->type); 
         if($children) $this->send(array('result' => 'fail', 'message' => $this->lang->tree->hasChildren));
+
+        if($category->type = 'forum') 
+        {
+            $threads = $this->loadModel('thread')->getList($category->id);
+            if($threads) $this->send(array('result' => 'fail', 'message' => $this->lang->tree->hasThreads));
+        }
  
         if($this->tree->delete($categoryID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));

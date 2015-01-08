@@ -334,6 +334,7 @@ $.extend(
                     else
                     {
                         alert(data.message);
+                        return location.reload();
                     }
                 });
             }

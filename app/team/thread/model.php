@@ -42,7 +42,7 @@ class threadModel extends model
      * @access public
      * @return array
      */
-    public function getList($board, $orderBy, $pager = null)
+    public function getList($board, $orderBy = 'id_desc', $pager = null)
     {
         if(!is_array($board))
         {

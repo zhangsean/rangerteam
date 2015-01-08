@@ -24,6 +24,7 @@ $lang->tree->redirect      = 'Manage now';
 $lang->tree->aliasRepeat   = 'Alias: %s already exists。';
 $lang->tree->aliasConflict = 'Alias: %s  conflicts with system modules';
 $lang->tree->hasChildren   = "The board has children, can't be deleted.";
+$lang->tree->hasThreads    = "The board has threads, can't be deleted.";
 $lang->tree->confirmDelete = "Are you sure to delete it?";
 $lang->tree->successFixed  = "Successfully fixed.";
 
