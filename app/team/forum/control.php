@@ -21,6 +21,7 @@ class forum extends control
     {
         $this->view->title  = $this->lang->forumHome;
         $this->view->boards = $this->forum->getBoards();
+        if(empty($this->view->boards)) die(js::alert($this->lang->forum->noBoard) . js::locate($this->createLink('tree', 'browse', "type=forum")));
 
         $this->display();
     }
