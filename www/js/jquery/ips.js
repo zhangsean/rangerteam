@@ -1521,6 +1521,11 @@
             }
 
             $('.entries-count').text(entries.length - 1);
+
+            if(desktop && desktop.isFullscreenMode && $('#search').val() !== '')
+            {
+                desktop.fullScreenApps.searchApps(false);
+            }
         };
 
         /* show a shortcut */
@@ -1540,7 +1545,7 @@
             if(entry.menu == 'all' || entry.menu == 'list')
             {
                 $shortcut = $(entry.toEntryListShortcutHtml());
-                if(activedId && entry.id === activedId)
+                if(entry.opened)
                 {
                     $shortcut.find('.app-btn').addClass('open');
                 }
