@@ -93,5 +93,11 @@ include "../../common/view/chosen.html.php";
   </table>
 </form>
 <?php if(!isset($block->name)):?>
-<script>$(function(){$('#title').val($('#entryBlock').find("option:selected").text());})</script>
+<script>
+$(function()
+{
+    options = $('#entryBlock').find("option").text();
+    if(options.indexOf($('#title').val()) >= 0) $('#title').val($('#entryBlock').find("option:selected").text());
+})
+</script>
 <?php endif;?>
