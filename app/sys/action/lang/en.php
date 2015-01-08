@@ -180,3 +180,4 @@ $lang->action->objectTypes['task']     = 'Task';
 $lang->action->objectTypes['product']  = 'Product';
 $lang->action->objectTypes['contact']  = 'Contact';
 $lang->action->objectTypes['contract'] = 'Contract';
+$lang->action->objectTypes['project']  = 'Project';

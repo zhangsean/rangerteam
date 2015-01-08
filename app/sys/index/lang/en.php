@@ -10,10 +10,10 @@
  * @link        http://www.ranzhico.com
  */
 $lang->index->common       = 'Index';
-$lang->index->about        = 'Abbout';
+$lang->index->about        = 'About';
 $lang->index->allEntries   = 'All Entries';
-$lang->index->addEntry     = 'Add';
 $lang->index->opened       = 'opened';
+$lang->index->addEntry     = 'Add';
 $lang->index->profile      = 'Profile';
 $lang->index->set          = 'Settings';
 $lang->index->theme        = 'Theme';
