@@ -24,7 +24,7 @@ $isSuperAdmin = $this->app->user->admin == 'super';
       <li class='with-avatar'><?php echo html::a($this->createLink('user', 'profile'), "<div class='avatar avatar-md'>" . (empty($app->user->avatar) ? '' : html::image($app->user->avatar)) . "</div><strong>{$app->user->realname}</strong>", "data-toggle='modal' data-id='profile'");?></li>
       <li class="divider"></li>
       <li class='dropdown-submenu'><?php include '../../common/view/selectlang.html.php';?></li>
-      <li><a href='<?php echo $this->createLink('misc', 'about');?>' data-id='about' data-toggle='modal' data-width='400'><i class='icon icon-info-sign'></i> <?php echo $lang->index->about?></a></li>
+      <li><a href='<?php echo $this->createLink('misc', 'about');?>' data-id='about' data-toggle='modal' data-width='500'><i class='icon icon-info-sign'></i> <?php echo $lang->index->about?></a></li>
       <li class="divider"></li>
       <?php if($isSuperAdmin):?>
       <li><?php echo html::a($this->createLink('entry', 'create'), "<i class='icon icon-plus'></i> {$lang->index->addEntry}", "data-id='superadmin' class='app-btn'"  )?></li>
