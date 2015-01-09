@@ -25,7 +25,7 @@
     <a href='javascript:;' class="dropdown-toggle" data-toggle="dropdown">
     <i class='icon-flag'></i>
  <?php echo $lang->task->groups[$groupBy];?>
-      <icon class="icon-caret-down"></icon>
+      <i class="icon-caret-down"></i>
     </a>
     <ul class="dropdown-menu">
     <?php foreach ($lang->task->groups as $key => $value):?>
