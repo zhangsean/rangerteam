@@ -86,7 +86,7 @@
           <div class='btn-group'>
           <?php
           $installLink = inlink('install',  "package=$package->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5={$currentRelease->md5}&type=$package->type&overridePackage=no&ignoreCompitable=yes");
-          echo html::a($package->viewLink, $lang->package->view, 'class="btn package" target="_blank"');
+          echo html::a($package->viewLink, $lang->package->view, 'class="btn" data-toggle="modal" data-type="iframe" data-width="800" data-height="600"');
           if($currentRelease->public)
           {
               if($package->type != 'computer' and $package->type != 'mobile')
