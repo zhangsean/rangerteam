@@ -50,6 +50,7 @@ class entry extends control
         }
         $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->create;
         $this->view->key        = $this->entry->createKey();
+        $this->view->groups     = $this->loadModel('group')->getPairs();
         $this->view->position[] = $this->lang->entry->common;
         $this->view->position[] = $this->lang->entry->create;
         $this->display();

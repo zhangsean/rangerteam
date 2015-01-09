@@ -98,7 +98,7 @@ class entryModel extends model
         if($entry->size == 'custom') $entry->size = helper::jsonEncode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
 
         $this->dao->insert(TABLE_ENTRY)
-            ->data($entry, $skip = 'width,height,files,chanzhi')
+            ->data($entry, $skip = 'width,height,files,chanzhi,groups')
             ->autoCheck()
             ->batchCheck($this->config->entry->require->create, 'notempty')
             ->check('code', 'unique')
@@ -108,6 +108,21 @@ class entryModel extends model
         if(dao::isError()) return false;
 
         $entryID = $this->dao->lastInsertID();
+
+        /* Insert app privilage. */
+        $groups = $this->post->groups;
+        if($groups != false && !empty($groups))
+        {
+            $priv = new stdclass();
+            $priv->module = 'apppriv';
+            $priv->method = $this->post->code;
+            foreach($this->post->groups as $group)
+            {
+                $priv->group = $group;
+                $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+            }
+        }
+
         return $entryID;
     }
 

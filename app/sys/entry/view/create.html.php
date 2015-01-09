@@ -104,6 +104,16 @@ include '../../common/view/header.html.php';
           <td><?php echo html::select('position', $lang->entry->positionList, '', "class='form-control'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->entry->priv;?></th>
+          <td>
+            <div class='input-group'>
+              <?php foreach($groups as $id => $name):?>
+                <span class='checkbox-group'><?php echo html::checkbox('groups', array($id => $name), '');?></span>
+              <?php endforeach?>
+            </div>
+          </td>
+        </tr>
+        <tr>
           <th></th><td><?php echo html::submitButton() . html::backButton();?></td>
         </tr>
       </table>
