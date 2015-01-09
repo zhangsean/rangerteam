@@ -52,7 +52,7 @@ EOT;
 
 /* Global lang items. */
 $lang->home           = 'Home';
-$lang->welcome        = '%s CMS';
+$lang->welcome        = '%s RanZhi';
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = 'Today is %s, ';
 $lang->today          = 'Today';
