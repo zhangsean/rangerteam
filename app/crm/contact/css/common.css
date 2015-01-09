@@ -8,3 +8,6 @@ form .avatar input {position: absolute; width: 60px; height: 60px; top: 0; left:
 form #desc {margin-bottom: 0; transition : all 0.5s;}
 .vcard{width: 200px; margin: 0 auto;}
 dl.contact-info{margin:0;}
+#duplicateError {display: inline-block; width: 520px;}
+#duplicateError .alert{padding: 3px 10px; margin-bottom: 0; text-align: left;}
+#duplicateError .close{right: 0; top: 5px;} 

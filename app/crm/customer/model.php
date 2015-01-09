@@ -134,11 +134,10 @@ class customerModel extends model
                 ->get();
         }
 
-        if($customer->name) $data = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('name')->eq($customer->name)->fetch();
-        if(!empty($data))
+        if(!$this->post->continue)
         {
-            $message = sprintf($this->lang->error->unique, $this->lang->customer->name, html::a(helper::createLink('customer', 'view', "customerID={$data->id}"), $data->name, "target='_blank'"));
-            return array('result' => 'fail', 'message' => $message);
+            $return = $this->checkUnique($customer);
+            if($return['result'] == 'fail') return $return;
         }
 
         $this->loadModel('contact');
@@ -160,13 +159,16 @@ class customerModel extends model
 
             if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
 
-            $return = $this->contact->checkContact($contact);
-            if($return['result'] == 'fail') return $return;
+            if(!$this->post->continue)
+            {
+                $return = $this->contact->checkContact($contact);
+                if($return['result'] == 'fail') return $return;
+            }
         }
 
         if(!isset($customer->contact)) $this->config->customer->require->create = 'name';
         $this->dao->insert(TABLE_CUSTOMER)
-            ->data($customer, $skip = 'uid,contact,email,qq,phone')
+            ->data($customer, $skip = 'uid,contact,email,qq,phone,continue')
             ->autoCheck()
             ->batchCheck($this->config->customer->require->create, 'notempty')
             ->exec();
@@ -209,13 +211,6 @@ class customerModel extends model
         if(strpos($customer->weibo, 'http://weibo.com/') === false ) $customer->weibo = 'http://weibo.com/' . $customer->weibo;
         if($customer->site == 'http://') $customer->site = '';
         if($customer->weibo == 'http://weibo.com/') $customer->weibo = '';
-
-        $data = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('name')->eq($customer->name)->andWhere('id')->ne($customerID)->fetch();
-        if(!empty($data))
-        {
-            $message = sprintf($this->lang->error->unique, $this->lang->customer->name, html::a(helper::createLink('customer', 'view', "customerID={$data->id}"), $data->name, "target='_blank'"));
-            return array('result' => 'fail', 'message' => $message);
-        }
 
         $this->dao->update(TABLE_CUSTOMER)
             ->data($customer, $skip = 'uid')
@@ -346,5 +341,23 @@ class customerModel extends model
             if(empty($levelName)) $levelList[$key] = '';
         }
         return $levelList;
+    }
+
+
+    /**
+     * Check customer is unique.
+     * 
+     * @param  object  $customer
+     * @access public
+     * @return array
+     */
+    public function checkUnique($customer)
+    {
+        if($customer->name) $data = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('name')->eq($customer->name)->fetch();
+        if(!empty($data))
+        {
+            $error = sprintf($this->lang->error->unique, $this->lang->customer->name, html::a(helper::createLink('customer', 'view', "customerID={$data->id}"), $data->name, "target='_blank'"));
+            return array('result' => 'fail', 'error' => $error);
+        }
     }
 }

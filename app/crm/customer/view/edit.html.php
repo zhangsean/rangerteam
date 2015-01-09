@@ -51,6 +51,7 @@
     <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}")?>
     <div class='page-actions'>
       <?php echo html::submitButton() . html::backButton();?>
+      <div id='duplicateError' class='hide'></div>
       <div class='popover'></div>
     </div>
   </div>
@@ -101,4 +102,10 @@
   </div>
 </div>
 </form>
+<div class='errorMessage hide'>
+  <div class='alert alert-danger alert-dismissable'>
+    <button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
+    <button type='submit' class='btn btn-primary' id='continueSubmit'><?php echo $lang->continueAdd;?></button>
+  </div>
+</div>
 <?php include '../../common/view/footer.html.php';?>

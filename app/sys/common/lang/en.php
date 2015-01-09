@@ -117,6 +117,7 @@ $lang->addFiles       = 'Add Files ';
 $lang->comment        = 'Comment';
 $lang->selectAll      = 'All';
 $lang->selectReverse  = 'Inverse';
+$lang->continueSave   = 'Continue To Save';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();

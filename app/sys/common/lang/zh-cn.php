@@ -117,6 +117,7 @@ $lang->addFiles       = '上传了附件 ';
 $lang->comment        = '备注';
 $lang->selectAll      = '全选';
 $lang->selectReverse  = '反选';
+$lang->continueSave   = '继续保存';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();
