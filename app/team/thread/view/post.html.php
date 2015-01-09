@@ -27,7 +27,7 @@
               <div class='input-group'>
                 <?php echo html::input('title', '', "class='form-control'");?>
                 <span class='input-group-addon'>
-                  <label class='checkbox'>
+                  <label class='checkbox checkbox-inline'>
                     <?php echo "<input type='checkbox' name='readonly' value='1'/><span>{$lang->thread->readonly}</span>" ?>
                   </label>
                 </span>

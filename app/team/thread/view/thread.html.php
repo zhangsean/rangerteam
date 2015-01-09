@@ -1,7 +1,7 @@
 <div class='panel thread'>
   <div class='panel-heading'>
     <i class='icon-comment-alt pull-left'></i>
-    <div class='panel-actions'>
+    <div class='panel-actions pull-right'>
       <?php if($thread->readonly) echo "<span class='label'><i class='icon-lock'></i> " . $lang->thread->readonly . "</span> &nbsp;"; ?>
     </div>
     <strong><?php $common->printForum($board, $thread);?></strong>
@@ -67,7 +67,7 @@
         ?>
         <?php endif; ?>
       <?php if($this->thread->canManage($board->id, $thread->author)) echo html::a(inlink('edit', "threadID=$thread->id"), '<i class="icon-pencil"></i> ' . $lang->edit); ?>
-      <a href='#reply' class='thread-reply-btn'><i class='icon-reply'></i> <?php echo $lang->reply->common; ?></a>
+      <a href='#reply' class='thread-reply-btn<?php echo ($thread->readonly ? ' disabled' : '');?>'><i class='icon-reply'></i> <?php echo $lang->reply->common; ?></a>
       <?php else: ?>
       <a href="<?php echo $this->createLink('user', 'login', 'referer=' . helper::safe64Encode($this->app->getURI(true))); ?>#reply" class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common; ?></a>
       <?php endif; ?>
