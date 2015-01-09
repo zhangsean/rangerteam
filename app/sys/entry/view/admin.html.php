@@ -36,7 +36,7 @@ include '../../common/view/header.html.php';
         <td><?php echo $entry->code?></td>
         <td><?php if($entry->integration) echo $entry->key?></td>
         <td class='text-center'><?php echo $entry->ip?></td>
-        <td class='text-center'>
+        <td>
           <?php
           echo html::a($this->createLink('group', 'manageAppPriv', "type=byApp&appCode=$entry->code"), $lang->entry->priv);
           echo html::a($this->createLink('entry', 'edit', "code=$entry->code"), $lang->edit);

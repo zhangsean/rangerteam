@@ -17,18 +17,33 @@
       <strong><?php echo $lang->group->priv?></strong>
     </div>
     <div class='panel-body'>
-      <table>
+      <table class='data'>
         <?php if($type == 'byGroup'):?>
         <tr>
-          <th class='w-80px text-center'><?php echo $lang->entry->common?></th>
           <td>
             <?php foreach($rights as $code => $right):?>
+            <?php if($right['right'] == 1):?>
             <div class='group-item'>
               <label>
                 <?php echo html::image($right['icon'], "class='app-icon'");?>
                 <?php echo html::checkbox('apps', array($code => $right['name']), $right['right'] == '1' ? $code : '');?>
               </label>
             </div>
+            <?php endif?>
+            <?php endforeach?>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <?php foreach($rights as $code => $right):?>
+            <?php if($right['right'] != 1):?>
+            <div class='group-item'>
+              <label>
+                <?php echo html::image($right['icon'], "class='app-icon'");?>
+                <?php echo html::checkbox('apps', array($code => $right['name']), $right['right'] == '1' ? $code : '');?>
+              </label>
+            </div>
+            <?php endif?>
             <?php endforeach?>
           </td>
         </tr>
