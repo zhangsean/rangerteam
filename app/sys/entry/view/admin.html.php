@@ -50,11 +50,11 @@ include '../../common/view/header.html.php';
       <?php endforeach;?>
     </tbody>
     <tfoot>
-      <tr><td colspan="5"><?php echo html::submitButton($lang->entry->order);?></td></tr>
+      <tr><td colspan="6"><?php echo html::submitButton($lang->entry->order);?></td></tr>
     </tfoot>
     <?php if(empty($entries)):?>
     <tfoot>
-      <tr><td colspan="5"><div style="float:right; clear:none;" class="page"><?php echo $lang->entry->nothing?></div></td></tr>
+      <tr><td colspan="6"><div style="float:right; clear:none;" class="page"><?php echo $lang->entry->nothing?></div></td></tr>
     </tfoot>
     <?php endif;?>
   </table>
