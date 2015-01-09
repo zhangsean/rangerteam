@@ -964,12 +964,10 @@ function fixTableHeader()
         if($(window).scrollTop() > gap)
         {
             col.addClass('with-fixed-table');
-            // fixedHeader.fadeIn();
         }
         else
         {
             col.removeClass('with-fixed-table');
-            // fixedHeader.fadeOut();
         }
     }).resize(resizeHeader);
 

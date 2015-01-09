@@ -44,7 +44,8 @@ $(document).ready(function()
     initSearch();
 });
 
-$(document).on('keyup', function(e){
+$(document).on('keyup', function(e)
+{
     if(e.keyCode == '37')
     {
         /* left, go to pre object. */
