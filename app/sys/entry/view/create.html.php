@@ -9,9 +9,9 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
+include '../../common/view/header.html.php';
 js::set('chanzhiPlaceholder', $lang->entry->chanzhiPlaceholder);
 js::set('chanzhiURL', $lang->entry->chanzhiURL);
-include '../../common/view/header.html.php';
 ?>
 <div class='panel'>
   <div class='panel-heading'>
