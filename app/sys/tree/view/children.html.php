@@ -44,7 +44,7 @@
 
       if(($type == 'forum') and ($boardChildrenCount == 0))
       {
-          echo "<div class='form-group'><div class='col-xs-6 col-md-4 col-md-offset-2'><div class='alert alert-warning'>{$this->lang->board->placeholder->setChildren}</div></div></div>";
+          echo "<div class='form-group'><div class='col-xs-6 col-md-4 col-md-offset-2'><div class='alert alert-warning mg-0'>{$this->lang->board->placeholder->setChildren}</div></div></div>";
       }
 
       $button = ($type == 'dept') ? html::submitButton() . html::backButton() : html::submitButton();
