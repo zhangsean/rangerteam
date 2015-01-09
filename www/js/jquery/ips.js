@@ -38,7 +38,7 @@
         leftBarShortcutTplt   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" data-btn-type="menu" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
         taskBarShortcutTplt   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-btn-type="task" data-id="{id}">{iconhtml}{name}</button></li>',
         taskBarMenuTplt       : "<ul class='dropdown-menu fade' id='taskMenu'><li><a href='javascript:;' class='open-win'><i class='icon-bolt icon'></i> &nbsp;{openText}</a></li><li><a href='javascript:;' class='reload-win'><i class='icon-repeat icon'></i> &nbsp;{reloadText}</a></li><li><a href='javascript:;' class='fix-entry'><i class='icon-pushpin icon'></i> &nbsp;{fixToMenuText}</a></li><li><a href='javascript:;' class='remove-entry'><i class='icon-pushpin icon-rotate-90 icon'></i> &nbsp;{removeFromMenuText}</a></li><li><a href='javascript:;' class='close-win'><i class='icon-remove icon'></i> &nbsp;{closeText}</a></li><li><a href='javascript:;' class='delete-entry'><i class='icon-trash icon'></i> &nbsp;{deleteEntryText}</a></li></ul>",
-        entryListShortcutTplt : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn menu-{hasMenu} s-list-btn" data-menu={hasMenu} data-btn-type="list" title="{desc}" data-id="{id}" data-code={code}>{iconhtml}{name}</a></li>',
+        entryListShortcutTplt : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn menu-{hasMenu} s-list-btn" data-menu={hasMenu} data-btn-type="list" data-id="{id}" data-code={code}>{iconhtml}{name}</a></li>',
 
         init: function() // init the default
         {
