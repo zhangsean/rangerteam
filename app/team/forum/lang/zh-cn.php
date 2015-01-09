@@ -29,7 +29,7 @@ $lang->forum->update = '更新数据';
 
 $lang->forum->updateDesc    = '该更新操作会重新计算每个版块的发贴数据。';
 $lang->forum->successUpdate = '更新数据成功';
-$lang->forum->noBoard       = '您还没有设置版块，请设置版块。';
+$lang->forum->noBoards      = '您还没有设置版块，请设置版块。';
 
 /* Adjust the pager. */
 $lang->pager->noRecord      = '';

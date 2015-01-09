@@ -19,7 +19,7 @@ $lang->tree->manage      = "维护类目";
 $lang->tree->fix         = "修复数据";
 
 $lang->tree->noCategories  = '您还没有添加类目，请添加类目。';
-$lang->tree->timeCountDown = "<strong id='countDown'>3</strong> 秒后转向类目管理页面。";
+$lang->tree->timeCountDown = "<strong id='countDown'>3</strong> 秒后转向%s管理页面。";
 $lang->tree->redirect      = '立即转向';
 $lang->tree->aliasRepeat   = '别名: %s 已经存在,不能重复添加。';
 $lang->tree->aliasConflict = '别名: %s 与系统模块冲突，不能添加。';
