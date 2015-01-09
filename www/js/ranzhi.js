@@ -1007,7 +1007,7 @@ function condensedForm()
  */
 function setPageActions()
 {
-    var bar = $('.page-actions'), barTop, barWidth;
+    var bar = $('.page-actions'), barTop, barWidth, timeoutFn;
     if(bar.length)
     {
         barTop = bar.offset().top + bar.outerHeight();
@@ -1030,15 +1030,23 @@ function setPageActions()
 
     function fixPageActions()
     {
-        var $win = $(window);
-        var wH = $win.height();
-        var fixed = barTop > wH && $win.scrollTop() < (barTop - wH);
-        if(fixed)
+        if(timeoutFn)
         {
-            bar.css('width', barWidth);
+            clearTimeout(timeoutFn);
+            timeoutFn = null;
         }
-        $('body').toggleClass('page-actions-fixed');
-        bar.toggleClass('fixed', fixed);
+        timeoutFn = setTimeout(function()
+        {
+            var $win = $(window);
+            var wH = $win.height();
+            var fixed = barTop > wH && $win.scrollTop() < (barTop - wH);
+            if(fixed)
+            {
+                bar.css('width', barWidth);
+            }
+            $('body').toggleClass('page-actions-fixed', fixed);
+            bar.toggleClass('fixed', fixed);
+        }, 50);
     }
 }
 

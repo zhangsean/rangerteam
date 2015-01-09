@@ -132,16 +132,16 @@ $isSuperAdmin = $this->app->user->admin == 'super';
 <script>
 var entries = [
 {
-    id       : 'allapps',
-    code     : 'allapps',
-    name     : '<?php echo $lang->index->allEntries?>',
-    display  : 'fullscreen',
-    desc     : '<?php echo $lang->index->allEntries?>',
-    menu     : 'menu',
-    icon     : 'icon-th-large',
-    sys      : true,
-    forceMenu: true,
-    order    : 9999999
+    id        : 'allapps',
+    code      : 'allapps',
+    name      : '<?php echo $lang->index->allEntries?>',
+    display   : 'fullscreen',
+    desc      : '<?php echo $lang->index->allEntries?>',
+    menu      : 'menu',
+    icon      : 'icon-th-large',
+    sys       : true,
+    forceMenu : true,
+    order     : 9999999
 }];
 
 <?php if($isSuperAdmin):?>
@@ -151,16 +151,16 @@ var entries = [
 ?>
 entries.push(
 {
-    id       : 'superadmin',
-    code     : 'superadmin',
-    name     : '<?php echo $lang->index->superAdmin;?>',
-    open     : 'iframe',
-    desc     : '<?php echo $lang->index->superAdmin?>',
-    menu     : '<?php echo $superadminMenu;?>',
-    sys      : true,
-    icon     : 'icon-cog',
-    url      : "<?php echo $this->createLink('admin')?>",
-    order    : <?php echo $superadminOrder;?>
+    id    : 'superadmin',
+    code  : 'superadmin',
+    name  : '<?php echo $lang->index->superAdmin;?>',
+    open  : 'iframe',
+    desc  : '<?php echo $lang->index->superAdmin?>',
+    menu  : '<?php echo $superadminMenu;?>',
+    sys   : true,
+    icon  : 'icon-cog',
+    url   : "<?php echo $this->createLink('admin')?>",
+    order : <?php echo $superadminOrder;?>
 });
 <?php endif;?>
 
