@@ -58,7 +58,7 @@ class task extends control
         }
 
         $this->session->set('taskList', $this->app->getURI(true));
-        $this->session->set('taskListLink' . $projectID, $this->app->getURI(true));
+        setCookie('taskListType', 'browse', time() + 60 * 60 * 24 * 10);
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
@@ -430,7 +430,7 @@ class task extends control
         }
 
         $this->session->set('taskList', $this->app->getURI(true));
-        $this->session->set('taskListLink' . $projectID, $this->app->getURI(true));
+        setCookie('taskListType', 'kanban', time() + 60 * 60 * 24 * 10);
 
         $orderBy = 'id_desc';
         if($groupBy == 'status') $orderBy = 'pri';
@@ -468,7 +468,7 @@ class task extends control
         }
 
         $this->session->set('taskList', $this->app->getURI(true));
-        $this->session->set('taskListLink' . $projectID, $this->app->getURI(true));
+        setCookie('taskListType', 'outline', time() + 60 * 60 * 24 * 10);
 
         $orderBy = 'id_desc';
         if($groupBy == 'status') $orderBy = 'pri';

@@ -37,7 +37,7 @@
         <div class='footerbar text-important'>
           <span><?php foreach($project->members as $member) if($member->role == 'manager') echo "<i class='icon icon-user'> </i>" . $users[$member->account];?></span>
           <span class=''><i class='icon icon-time'> </i><?php echo formatTime($project->begin, 'm-d') . ' ~ ' .  formatTime($project->end, 'm-d');?></span>
-          <?php $browseLink = $this->session->{'taskListLink' . $project->id} === false ? helper::createLink('task', 'browse', "projectID=$project->id") : $this->session->{'taskListLink' . $project->id};?>
+          <?php $browseLink = helper::createLink('task', $this->cookie->taskListType == false ? 'browse' : $this->cookie->taskListType, "projectID=$project->id");?>
           <?php echo html::a($browseLink, $lang->project->enter, "class='btn btn-primary entry'");?>
         </div>
       </div>
