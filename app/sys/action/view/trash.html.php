@@ -11,15 +11,12 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<div id='menuActions'>
+  <?php if($type == 'hidden') echo html::a(inLink('trash', "type=all"),    $lang->goback, "class='btn'");?>
+  <?php if($type == 'all')    echo html::a(inLink('trash', "type=hidden"), "<i class='icon-eye-close'></i> " . $lang->action->hidden, "class='btn btn-primary'");?>
+</div>
 <div class='panel'>
-  <div class='panel-heading'>
-    <strong><?php echo $lang->action->trash;?></strong>
-    <span class='panel-actions pull-right'>
-      <?php if($type == 'hidden') echo html::a(inLink('trash', "type=all"),    $lang->goback, "class='btn'");?>
-      <?php if($type == 'all')    echo html::a(inLink('trash', "type=hidden"), "<i class='icon-eye-close'></i> " . $lang->action->hidden, "class='btn btn-primary'");?>
-    </span>
-  </div>
-  <table class='table table-hover tablesorter'>
+  <table class='table table-hover tablesorter table-border'>
     <?php $vars = "type=$type&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}"; ?>
     <thead>
       <tr class='class-center'>
