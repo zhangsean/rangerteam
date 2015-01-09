@@ -17,8 +17,8 @@
         if(config && config.currentModule != 'index' && (!self.frameElement || self.frameElement.tagName != 'IFRAME') && typeof v != 'undefined' && typeof v.entryID != 'undefined' && v.entryID != '') location.href = config.webRoot + 'sys/index.php?entryID=' + v.entryID + '&entryUrl=' + encodeURIComponent(window.location.pathname + window.location.search);
     };
 
-    redirect();
-    $(redirect);
+    // redirect();
+    // $(redirect);
 }());
 
 $.extend(

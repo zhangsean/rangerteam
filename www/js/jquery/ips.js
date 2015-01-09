@@ -497,8 +497,7 @@
     /* Update browser title */
     desktopManager.prototype.updateBrowserTitle = function(title)
     {
-        title = title || indexTitle;
-        document.title = title;
+        document.title = title || indexTitle;
     };
 
     /**
@@ -1110,9 +1109,9 @@
 
             if(!desktop.hasTask() && !desktop.isFullscreenMode)
             {
-                $('#showDesk').click();
                 desktop.updateBrowserUrl();
                 desktop.updateBrowserTitle();
+                $('#showDesk').click();
             }
         }, this));
 
@@ -1412,7 +1411,8 @@
             $('#' + id).addClass('fullscreen-active');
             $('.fullscreen-btn[data-id="' + id + '"],.app-btn[data-id="' + id + '"]').addClass('active');
             desktop.updateBrowserUrl();
-            desktop.updateBrowserTitle();
+            var et = getEntry(id);
+            desktop.updateBrowserTitle(et ? et.name : null);
 
             if(id == 'allapps') this.searchApps(false, true);
 
@@ -1615,11 +1615,12 @@
                     var et = getEntry(btn.data('id'));
                     var btnType = btn.data('btnType');
                     var offset = btn.offset();
-                    var isListBtn = btnType === 'list';
+                    var isListBtn = btnType === 'list', 
+                        isTaskBtn = btnType === 'task';
 
                     menu.find('.reload-win').toggle(!isListBtn && et.opened);
-                    menu.find('.fix-entry').toggle(!et.hasMenu);
-                    menu.find('.remove-entry').toggle(et.hasMenu && !et.forceMenu);
+                    menu.find('.fix-entry').toggle(!isTaskBtn && !et.hasMenu);
+                    menu.find('.remove-entry').toggle(!isTaskBtn && et.hasMenu && !et.forceMenu);
                     menu.find('.close-win').toggle(!isListBtn && et.opened);
                     menu.find('.delete-entry').toggle(superadmin && !et.sys && isListBtn);
 
@@ -1653,13 +1654,12 @@
             {
                 event.cancelBubble = true
                 event.returnValue = false;
-
                 return false;
             }
 
             function norightclick(e) 
             {
-                if (window.Event) 
+                if (window.Event)
                 {
                     if (e.which == 2 || e.which == 3)
                     return false;
