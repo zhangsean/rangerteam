@@ -11,11 +11,11 @@ button {outline: none; border: none; background-color: transparent;}
 .radiance:hover:before {left: 120%; -webkit-transition-delay:0.5s; -moz-transition-delay:0.5s; transition-delay:0.5s}
 
 /* pure button to fit dark background */
-.btn-pure {background-color: transparent; background-color: rgba(255,255,255,0.1); color: #f1f1f1; color: rgba(255,255,255,0.9); border-color: #f1f1f1; border-color: rgba(255,255,255,0.3); text-shadow: 0 -1px 0 rgba(0,0,0,0.2);}
-.btn-pure:hover, .btn-pure:active, .btn-pure:focus {background: #999; background: rgba(0,0,0,0.1); color: #fff; border-color: #fff; border-color: rgba(255,255,255,0.6); outline: none;}
+.btn-pure {background-color: transparent; background-color: rgba(255,255,255,0.1); color: #f1f1f1; color: rgba(255,255,255,0.9); border-color: #aaa; border-color: rgba(255,255,255,0.3); text-shadow: 0 -1px 0 rgba(0,0,0,0.2);}
+.btn-pure:hover, .btn-pure:active, .btn-pure:focus {background: #999; background: rgba(0,0,0,0.1); color: #fff; border-color: #aaa; border-color: rgba(255,255,255,0.6); outline: none;}
 
 /* pure form control to fit dark background */
-input.form-control-pure {color: #bbb; color: rgba(255,255,255,0.7); background: none; border-color: #f1f1f1; border-color: rgba(255,255,255,0.4);}
+input.form-control-pure {color: #bbb; color: rgba(255,255,255,0.7); background: none; border-color: #aaa; border-color: rgba(255,255,255,0.4);}
 input.form-control-pure:hover,
 input.form-control-pure:active,
 input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.2); border-color: #fff; border-color: rgba(255,255,255,0.6); color: #fff; color: rgba(255,255,255,0.9);}
@@ -152,18 +152,19 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 
 /* allapps */
 #allapps {background-color: rgba(0,0,0,0.25); color: #fff;}
-#allapps > header {padding: 20px 40px 0; border-bottom: 1px solid #fff; border-bottom: 1px solid rgba(255,255,255,0.2);}
+#allapps > header {padding: 20px 40px 0; border-bottom: 1px solid #aaa; border-bottom: 1px solid rgba(255,255,255,0.2);}
 #allapps > header .nav {border: none; position: relative;}
 #allapps > header .nav > li > a {padding: 12px 15px; background: none; border-color: transparent; color: #fff; color: rgba(255,255,255,0.6);}
 #allapps > header .nav > li > a > small {display: none}
-#allapps > header .nav > li > a:hover {border-color: #fff; border-color: rgba(255,255,255,0.2); border-bottom-color: transparent; background-color:rgba(255,255,255,0.24);}
-#allapps > header .nav > li.active > a, #allapps > header .nav > li.active > a:hover {color: #fff; border-color: #fff; border-color: rgba(255,255,255,0.2); border-bottom-color: #0f4599; background: none}
+#allapps > header .nav > li > a:hover {border-color: #aaa; border-color: rgba(255,255,255,0.2); border-bottom-color: transparent; background-color:rgba(255,255,255,0.24);}
+#allapps > header .nav > li.active > a, #allapps > header .nav > li.active > a:hover {color: #fff; border-color: #aaa; border-color: rgba(255,255,255,0.2); border-bottom-color: #0f4599; background: none}
 .ie-8 #allapps > header .nav > li.active > a, .ie-8 #allapps > header .nav > li.active > a:hover{border-bottom-color: #145ccd}
 #allapps > header .nav > li.active > a > small {display: inline;}
 #allapps > header .nav > li.active > a > span {font-weight: bold;}
 #allapps .muted {color:rgba(255,255,255,0.6);}
 
 #search {padding: 6px 30px}
+.ie-8 #search {padding-top: 3px;}
 #allapps .search-input {position: relative;}
 #allapps .search-input .icon, #cancelSearch{position: absolute; display: block; left: 9px; top: 7px; color: #f1f1f1; color: rgba(255,255,255,0.4);}
 #allapps .search-input:hover .icon, #cancelSearch:hover {color: #fff; color: rgba(255,255,255,0.6);}
@@ -174,8 +175,9 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #allAppsList ul {margin: 0; padding: 0;}
 #allAppsList li {width: 18%; margin-right: 1%;  position: relative; transition: all 0.3s; overflow: hidden;}
 #allAppsList li.search-hide {width: 0; margin-right: 0;}
-#allAppsList li a {overflow: hidden; white-space: nowrap; padding: 15px 20px; font-size: 16px; text-overflow:ellipsis; border:2px solid transparent\0;}
-#allAppsList li a:hover, #allAppsList li a.search-selected{background-color: none\0; border:2px solid #ccc\0;}
+#allAppsList li a {overflow: hidden; white-space: nowrap; padding: 15px 20px; font-size: 16px; text-overflow:ellipsis;}
+.ie-8 #allAppsList li a {border: 2px solid transparent;}
+.ie-8 #allAppsList li a:hover, .ie-8 #allAppsList li a.search-selected{background-color: none; border:2px solid #ccc;}
 #allAppsList li a .icon-pushpin {display: none}
 #allAppsList li a.menu-true .icon-pushpin {display: block; position: absolute; left: 12px; top: 48px; width: 20px; height: 20px;border: 1px solid #fff; border: 1px solid rgba(255,255,255,0.5); border-radius: 50%; text-align: center; line-height: 18px; background: #000; background: rgba(0,0,0,0.4); color: #fff;}
 #allAppsList li a.active:hover, #allAppsList li a.search-selected {background-color:rgba(255,255,255,0.24);}
