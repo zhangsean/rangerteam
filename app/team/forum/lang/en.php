@@ -29,7 +29,6 @@ $lang->forum->update = 'Update';
 
 $lang->forum->updateDesc    = 'This action will re-compute the stats(threads, replies) of every board again.';
 $lang->forum->successUpdate = 'Update sucessfully';
-$lang->forum->noBoards      = 'No board yet, add one first.';
 
 /* Adjust the pager. */
 $lang->pager->noRecord      = '';

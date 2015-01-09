@@ -184,10 +184,11 @@ class tree extends control
      * @access public
      * @return void
      */
-    public function redirect($type = 'article', $message = '')
+    public function redirect($type = 'article')
     {
         unset($this->lang->tree->menu);
-        $this->view->message = ($message && $message != '') ? $message : $this->lang->tree->noCategories;
+        if($type == 'forum') $message = $this->lang->tree->noBoards;
+        $this->view->message = !empty($message) ? $message : $this->lang->tree->noCategories;
         $this->view->type    = $type;
 
         $this->display();
