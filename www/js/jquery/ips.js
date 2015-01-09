@@ -1437,7 +1437,7 @@
         /* Handle status after browser size changed */
         this.afterBrowserResized = function()
         {
-            this.$fullscreens.width(desktop.width).height(desktop.height).css({left: desktop.x, top: desktop.y});;
+            this.$fullscreens.width(desktop.width).css({left: desktop.x, top: desktop.y, bottom: settings.bottomBarHeight});;
         };
 
         this.init();

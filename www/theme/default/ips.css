@@ -144,7 +144,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #desktop[class*='dropdown-mode-'] .window-active .window-cover {display: block;}
 
 /* fullscreen */
-.fullscreen {position: absolute; top: 0; left: 60px; width: 100%; height: 100%; z-index: 10; overflow: auto; display: none;}
+.fullscreen {position: absolute; top: 0; left: 60px; right: 0; bottom: 36px; z-index: 10; overflow: auto; display: none;}
 .fullscreen .page-header {margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.5)}
 .fullscreen > .actions {position: fixed; right: 40px;top: 20px;}
 .fullscreen-mode .fullscreen.fullscreen-active {display: block;}
@@ -188,8 +188,11 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 @media (max-width: 1100px) {#allAppsList li {width: 32%}}
 
 /* home */
-#home {padding: 0;}
-#home > .navbar {left: 40px; background-color: #1151b7; background-color: rgba(0,0,0,.5);}
+#home {padding: 0; background: #fafafa}
+#home > .navbar {left: 40px;}
+#home > .navbar .navbar-brand {font-weight: normal;}
+#home .navbar-right {margin-right: 5px;}
+#home .navbar-right > li > a {padding-left: 10px; padding-right: 10px;}
 #home > .navbar .nav > li.divider {width: 1px; background-color: rgba(255,255,255,0.25); height: 40px}
 #home > .navbar .nav > li.with-avatar > a {padding-left: 45px; position: relative;}
 #home > .navbar .nav > li.with-avatar > a > .avatar {position: absolute; left: 10px; top: 5px}
@@ -200,7 +203,6 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 #dashboard > .actions > .btn {padding: 3px 7px; border-radius: 0 0 4px 4px; border-top: 0}
 #dashboard .table tr[data-url] td {cursor: pointer;}
 .dashboard .panel-heading {height: 30px}
-#home .panel {box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);}
 #home .panel-actions {margin: 0}
 #home .panel-loading .panel-body {background: url('images/ips/loading.gif') no-repeat center 30%;}
 #home .panel-body > .article-content {padding: 8px 10px;}

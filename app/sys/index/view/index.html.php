@@ -51,18 +51,17 @@ $isSuperAdmin = $this->app->user->admin == 'super';
         <a class='navbar-brand' href='<?php $this->createLink('index', 'index') ?>'><?php echo $company . $lang->ranzhi ?></a>
       </div>
       <div class='collapse navbar-collapse'>
+        <ul class='nav navbar-nav'>
+          <li><?php echo html::a($this->createLink('user', 'profile'), "<i class='icon-user'></i> " . $app->user->realname, "data-toggle='modal' data-id='profile'");?></li>
+        </ul>
         <ul class='nav navbar-nav navbar-right'>
           <li><a href='javascript:;' class='refresh-all-panel'><i class='icon-repeat'></i></a></li>
           <li><a data-toggle='modal' href='<?php echo $this->createLink("block", "admin"); ?>' title='<?php echo $lang->index->addBlock; ?>'><i class='icon-plus'></i></a></li>
-          <li class='divider'></li>
-          <li>
-            <li class='with-avatar'><?php echo html::a($this->createLink('user', 'profile'), "<div class='avatar avatar-md'>" . (empty($app->user->avatar) ? '' : html::image($app->user->avatar)) . "</div><strong>{$app->user->realname}</strong>", "data-toggle='modal' data-id='profile'");?></li>
-          </li>
         </ul>
       </div>
     </nav>
     <div id='dashboardWrapper'>
-      <div class='panels-container dashboard dashboard-inverse' id='dashboard' data-confirm-remove-block='<?php  echo $lang->block->confirmRemoveBlock;?>'>
+      <div class='panels-container dashboard' id='dashboard' data-confirm-remove-block='<?php  echo $lang->block->confirmRemoveBlock;?>'>
         <div class='row'>
           <?php
           $index = 0;
