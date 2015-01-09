@@ -35,7 +35,7 @@
         windowidstrTemplate   : 'win-{0}',
         windowTplt            : "<div id='{idstr}' class='window{cssclass}' style='width:{width}px;height:{height}px;left:{left}px;top:{top}px;z-index:{zindex};' data-id='{id}' data-url='{url}'><div class='window-head'>{iconhtml}<strong title='{desc}'>{name}</strong><ul><li><button class='reload-win'><i class='icon-repeat'></i></button></li><li><button class='min-win'><i class='icon-minus'></i></button></li><li><button class='max-win'><i class='icon-resize-full'></i></button></li><li><button class='close-win'><i class='icon-remove'></i></button></li></ul></div><div class='window-cover'></div><div class='window-content'></div></div>",
         frameTplt             : "<iframe id='iframe-{id}' name='iframe-{id}' src='{url}' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0px;'></iframe>",
-        leftBarShortcutTplt   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-placement="right" data-btn-type="menu" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
+        leftBarShortcutTplt   : '<li id="s-menu-{id}"><button data-toggle="tooltip" data-css-class="s-menu-tooltip" data-placement="right" data-btn-type="menu" class="app-btn s-menu-btn" title="{name}" data-id="{id}">{iconhtml}</button></li>',
         taskBarShortcutTplt   : '<li id="s-task-{id}"><button class="app-btn s-task-btn" title="{desc}" data-btn-type="task" data-id="{id}">{iconhtml}{name}</button></li>',
         taskBarMenuTplt       : "<ul class='dropdown-menu fade' id='taskMenu'><li><a href='javascript:;' class='open-win'><i class='icon-bolt icon'></i> &nbsp;{openText}</a></li><li><a href='javascript:;' class='reload-win'><i class='icon-repeat icon'></i> &nbsp;{reloadText}</a></li><li><a href='javascript:;' class='fix-entry'><i class='icon-pushpin icon'></i> &nbsp;{fixToMenuText}</a></li><li><a href='javascript:;' class='remove-entry'><i class='icon-pushpin icon-rotate-90 icon'></i> &nbsp;{removeFromMenuText}</a></li><li><a href='javascript:;' class='close-win'><i class='icon-remove icon'></i> &nbsp;{closeText}</a></li><li><a href='javascript:;' class='delete-entry'><i class='icon-trash icon'></i> &nbsp;{deleteEntryText}</a></li></ul>",
         entryListShortcutTplt : '<li id="s-applist-{id}"><a href="javascript:;" class="app-btn menu-{hasMenu} s-list-btn" data-menu={hasMenu} data-btn-type="list" data-id="{id}" data-code={code}>{iconhtml}{name}</a></li>',
@@ -407,7 +407,7 @@
 
     desktopManager.prototype.toggleDropmenuMode = function(name, on)
     {
-        this.$.toggleClass('dropdown-mode-' + name, on);
+        $('body').toggleClass('dropdown-mode-' + name, on);
     }
 
     /* Determine wheather has entry window opened*/
@@ -1615,7 +1615,7 @@
                     var et = getEntry(btn.data('id'));
                     var btnType = btn.data('btnType');
                     var offset = btn.offset();
-                    var isListBtn = btnType === 'list', 
+                    var isListBtn = btnType === 'list',
                         isTaskBtn = btnType === 'task';
 
                     menu.find('.reload-win').toggle(!isListBtn && et.opened);

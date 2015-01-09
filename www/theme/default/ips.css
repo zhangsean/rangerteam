@@ -20,6 +20,9 @@ input.form-control-pure:hover,
 input.form-control-pure:active,
 input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.2); border-color: #fff; border-color: rgba(255,255,255,0.6); color: #fff; color: rgba(255,255,255,0.9);}
 
+/* Hide tooltip on dropdown menu show */
+body[class*='dropdown-mode-'] .s-menu-tooltip {display: none!important}
+
 /* desktop */
 #desktop {position: absolute; width: 100%; height: 100%; z-index: 0; overflow: hidden; zoom: 1; min-width: 1050px;}
 
@@ -141,7 +144,7 @@ input.form-control-pure:focus {background: none; background: rgba(255,255,255,0.
 
 .window-cover {position: absolute; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(0,0,0,0.075); z-index: 99999;}
 .window-active .window-cover {display: none;}
-#desktop[class*='dropdown-mode-'] .window-active .window-cover {display: block;}
+body[class*='dropdown-mode-'] .window-active .window-cover {display: block;}
 
 /* fullscreen */
 .fullscreen {position: absolute; top: 0; left: 60px; right: 0; bottom: 36px; z-index: 10; overflow: auto; display: none;}
