@@ -20,7 +20,7 @@ css::internal('body{background-color:#f6f5f5}');
 <div class='container'>
   <div id='login'>
     <div class='panel-head'>
-      <h4><?php printf($lang->welcome, $config->company->name);?></h4>
+      <h4><?php printf($lang->welcome, isset($config->company->name) ? $config->company->name : '');?></h4>
       <div class='panel-actions'>
         <div class='dropdown' id='langs'>
           <button class='btn' data-toggle='dropdown' title='Change Language/更换语言/更換語言'><?php echo $config->langs[$this->app->getClientLang()]; ?> <span class="caret"></span></button>
