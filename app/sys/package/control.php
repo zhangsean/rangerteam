@@ -149,7 +149,8 @@ class package extends control
             }
 
             /* Download the package file. */
-            $this->package->downloadPackage($package, helper::safe64Decode($downLink));
+            if(!file_exists($packageFile)) $this->package->downloadPackage($package, helper::safe64Decode($downLink));
+
             if(!file_exists($packageFile))
             {
                 $this->view->error = sprintf($this->lang->package->errorDownloadFailed, $packageFile);
