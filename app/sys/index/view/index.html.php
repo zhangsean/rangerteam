@@ -104,7 +104,6 @@ $isSuperAdmin = $this->app->user->admin == 'super';
         <div class='col-xs-4'>
           <ul class='nav nav-tabs' id='appSearchNav'>
             <li class='active'><a href="javascript:;" class='app-search' data-key=''><i class='icon-th-large'></i> <span><?php echo $lang->index->allEntries?></span> &nbsp;<small class='muted entries-count'></small></a></li>
-            <li><a href="javascript:;" class='app-search' data-key=':open'><i class='icon-bolt'></i> <span><?php echo $lang->index->opened;?></span> &nbsp;<small class='muted search-count'></small></a></li>
           </ul>
         </div>
         <div class='col-xs-4'>
