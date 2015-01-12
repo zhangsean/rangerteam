@@ -27,7 +27,6 @@ class entry extends control
         $this->view->position[]  = $this->lang->entry->common;
         $this->view->position[]  = $this->lang->entry->admin;
         $this->view->entries     = $entries;
-        $this->view->jsonEntries = $this->entry->getJSONEntries();
         $this->display();
     }
 
@@ -168,6 +167,15 @@ class entry extends control
                 $this->dao->update(TABLE_ENTRY)->set('`order`')->eq($order)->where('id')->eq($id)->exec();
             }
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            /* delete custome sort data. */
+            $allEntries = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
+            foreach($allEntries as $entry)
+            {
+                unset($entry->order);
+            }
+            $this->loadModel('setting')->setItem("{$this->app->user->account}.sys.common.customApp", json_encode($allEntries));
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
         }
     }

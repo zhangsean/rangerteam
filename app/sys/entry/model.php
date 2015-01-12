@@ -41,6 +41,8 @@ class entryModel extends model
             }
         }
 
+        usort($entries, 'commonModel::sortEntryByOrder');
+
         return $entries;
     }
 

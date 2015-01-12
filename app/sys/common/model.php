@@ -993,4 +993,18 @@ class commonModel extends model
         }
         return $currencySign;
     }  
+
+    /**
+     * Sort entry by order. 
+     * 
+     * @param  object $a 
+     * @param  object $b 
+     * @access private
+     * @return bool
+     */
+    public static function sortEntryByOrder($a, $b)
+    {
+        if($a->order == $b->order) return 0;
+        return $a->order > $b->order ? 1 : -1;
+    }
 }
