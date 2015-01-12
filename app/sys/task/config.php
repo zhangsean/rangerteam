@@ -28,20 +28,20 @@ $config->task->batchCreate =  10;
 global $lang;
 $config->task->search['module'] = 'task';
 
-$config->task->search['fields']['id']          = $lang->task->id;
-$config->task->search['fields']['pri']         = $lang->task->pri;
 $config->task->search['fields']['name']        = $lang->task->name;
+$config->task->search['fields']['pri']         = $lang->task->pri;
 $config->task->search['fields']['deadline']    = $lang->task->deadline;
 $config->task->search['fields']['assignedTo']  = $lang->task->assignedTo;
 $config->task->search['fields']['status']      = $lang->task->status;
 $config->task->search['fields']['createdDate'] = $lang->task->createdDate;
 $config->task->search['fields']['consumed']    = $lang->task->consumed;
+$config->task->search['fields']['id']          = $lang->task->id;
 
-$config->task->search['params']['id']          = array('operator' => '=',  'control' => 'input',  'values' => '');
-$config->task->search['params']['pri']         = array('operator' => '=',  'control' => 'select', 'values' => $lang->task->priList);
 $config->task->search['params']['name']        = array('operator' => 'include',  'control' => 'input',  'values' => '');
+$config->task->search['params']['pri']         = array('operator' => '=',  'control' => 'select', 'values' => $lang->task->priList);
 $config->task->search['params']['deadline']    = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->task->search['params']['assignedTo']  = array('operator' => '=',  'control' => 'select', 'values' => 'set in control');
 $config->task->search['params']['status']      = array('operator' => '=',  'control' => 'select', 'values' => $lang->task->statusList);
 $config->task->search['params']['createdDate'] = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->task->search['params']['consumed']    = array('operator' => '>=', 'control' => 'input',  'values' => '');
+$config->task->search['params']['id']          = array('operator' => '=',  'control' => 'input',  'values' => '');

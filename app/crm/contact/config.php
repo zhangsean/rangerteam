@@ -20,7 +20,6 @@ global $lang, $app;
 $app->loadLang('customer', 'crm');
 $config->contact->search['module'] = 'contact';
 
-$config->contact->search['fields']['t1.id']            = $lang->contact->id;
 $config->contact->search['fields']['t1.realname']      = $lang->contact->realname;
 $config->contact->search['fields']['t2.customer']      = $lang->contact->customer;
 $config->contact->search['fields']['t1.phone']         = $lang->contact->phone;
@@ -29,8 +28,8 @@ $config->contact->search['fields']['t1.email']         = $lang->contact->email;
 $config->contact->search['fields']['t1.qq']            = $lang->contact->qq;
 $config->contact->search['fields']['t1.contactedDate'] = $lang->contact->contactedDate;
 $config->contact->search['fields']['t1.nextDate']      = $lang->customer->nextDate;
+$config->contact->search['fields']['t1.id']            = $lang->contact->id;
 
-$config->contact->search['params']['t1.id']            = array('operator' => '=', 'control' => 'input',  'values' => '');
 $config->contact->search['params']['t1.realname']      = array('operator' => 'include', 'control' => 'input',  'values' => '');
 $config->contact->search['params']['t2.customer']      = array('operator' => '=', 'control' => 'select', 'values' => 'set in control');
 $config->contact->search['params']['t1.phone']         = array('operator' => 'include', 'control' => 'input',  'values' => '');
@@ -39,3 +38,4 @@ $config->contact->search['params']['t1.email']         = array('operator' => 'in
 $config->contact->search['params']['t1.qq']            = array('operator' => 'include', 'control' => 'input',  'values' => '');
 $config->contact->search['params']['t1.contactedDate'] = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->contact->search['params']['t1.nextDate']      = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
+$config->contact->search['params']['t1.id']            = array('operator' => '=', 'control' => 'input',  'values' => '');
