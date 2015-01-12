@@ -200,7 +200,7 @@ class group extends control
             {
                 $this->group->updateAppPrivByGroup($groupID, $this->post->apps);
                 if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
             }
 
             $apps  = $this->loadModel('entry')->getEntries();
