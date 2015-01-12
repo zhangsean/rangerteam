@@ -26,8 +26,8 @@ $lang->install->desc             = <<<EOT
   With projects, customers, cash flow, office and communication of the five core functions.
   Tailored specifically for small and medium sized groups, small and medium sized team of information technology tool of choice!
 
-  Website:<a href='http://www.ranzhi.org' target='_blank'>http://www.ranzhi.org</a>
-  Suport: <a href='http://www.ranzhi.org/forum/' target='_blank'>http://www.ranzhi.org/forum/</a>
+  Website:<a href='http://www.ranzhico.com' target='_blank'>http://www.ranzhico.com</a>
+  Suport: <a href='http://www.ranzhico.com/forum/' target='_blank'>http://www.ranzhico.com/forum/</a>
   Current Version: <strong class='red'>%s</strong>。
 </blockquote>
 EOT;
