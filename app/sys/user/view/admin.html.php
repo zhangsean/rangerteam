@@ -39,17 +39,17 @@ js::set('from', 'admin');
               <thead>
                 <tr class='text-center'>
                   <?php $vars = "deptID=$deptID&query=$query&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
-                  <th><?php commonModel::printOrderLink('id',       $orderBy, $vars, $lang->user->id);?></th>
-                  <th><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->user->realname);?></th>
-                  <th><?php commonModel::printOrderLink('account',  $orderBy, $vars, $lang->user->account);?></th>
-                  <th><?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->user->gender);?></th>
-                  <th><?php commonModel::printOrderLink('dept',     $orderBy, $vars, $lang->user->dept);?></th>
-                  <th class='visible-lg'><?php commonModel::printOrderLink('join',     $orderBy, $vars, $lang->user->join);?></th>
-                  <th class='visible-lg'><?php commonModel::printOrderLink('visits',   $orderBy, $vars, $lang->user->visits);?></th>
-                  <th><?php commonModel::printOrderLink('last',     $orderBy, $vars, $lang->user->last);?></th>
-                  <th><?php commonModel::printOrderLink('ip',       $orderBy, $vars, $lang->user->ip);?></th>
-                  <th><?php commonModel::printOrderLink('locked',   $orderBy, $vars, $lang->user->status);?></th>
-                  <th><?php echo $lang->actions;?></th>
+                  <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->user->id);?></th>
+                  <th class='w-120px'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->user->realname);?></th>
+                  <th><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->user->account);?></th>
+                  <th class='w-60px'><?php commonModel::printOrderLink('gender', $orderBy, $vars, $lang->user->gender);?></th>
+                  <th class='w-130px'><?php commonModel::printOrderLink('dept', $orderBy, $vars, $lang->user->dept);?></th>
+                  <th class='w-130px visible-lg'><?php commonModel::printOrderLink('join', $orderBy, $vars, $lang->user->join);?></th>
+                  <th class='w-80px visible-lg'><?php commonModel::printOrderLink('visits', $orderBy, $vars, $lang->user->visits);?></th>
+                  <th class='w-130px'><?php commonModel::printOrderLink('last', $orderBy, $vars, $lang->user->last);?></th>
+                  <th class='w-70px'><?php commonModel::printOrderLink('ip', $orderBy, $vars, $lang->user->ip);?></th>
+                  <th class='w-60px'><?php commonModel::printOrderLink('locked', $orderBy, $vars, $lang->user->status);?></th>
+                  <th class='w-100px'><?php echo $lang->actions;?></th>
                 </tr>
               </thead>
               <tbody>
