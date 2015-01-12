@@ -37,7 +37,7 @@ body[class*='dropdown-mode-'] .s-menu-tooltip, body.mute-tooltip .s-menu-tooltip
 .bar-menu {margin: 0; padding: 0;}
 .bar-menu > li {display: inline-block;}
 .bar-menu > li > a,.bar-menu > li > button {display: block; padding: 4px 10px; color: #ccc; color: rgba(255,255,255,0.5);}
-.bar-menu > li.active > a,.bar-menu > li.active > button,.bar-menu > li > a.active,.bar-menu > li > button.active {color: #a1a1a1; color: rgba(255,255,255,0.85); background-color: rgba(255,255,255,0.20)}
+.bar-menu > li.active > a,.bar-menu > li.active > button,.bar-menu > li > a.active,.bar-menu > li > button.active {color: #a1a1a1; color: rgba(255,255,255,0.85); background-color: #555; background-color: rgba(255,255,255,0.20)}
 
 .bar-menu > li > a:hover,.bar-menu > li > button:hover,
 .bar-menu > li > a.open:hover,.bar-menu > li > a.active:hover {text-decoration: none; color: #fff; color: rgba(255,255,255,0.9);background-color: #666; background-color: rgba(255,255,255,0.20);}
