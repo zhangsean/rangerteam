@@ -110,7 +110,7 @@
                   }
               }
           }
-          echo html::a($currentRelease->downLink, $lang->package->downloadAB, 'class="manual btn"');
+          echo html::a($currentRelease->downLink, $lang->package->downloadAB, 'class="manual btn" target="_blank"');
           echo html::a($package->site, $lang->package->site, "class='btn' target='_blank'");
           ?>
           </div>
