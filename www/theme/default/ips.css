@@ -196,6 +196,7 @@ body[class*='dropdown-mode-'] .window-active .window-cover {display: block;}
 #home {padding: 0; background: #fafafa}
 #home > .navbar {left: 40px;}
 #home > .navbar .navbar-brand {font-weight: normal;}
+.ie-8 #home > .navbar .navbar-brand {position: relative; top: 2px}
 #home .navbar-right {margin-right: 5px;}
 #home .navbar-right > li > a {padding-left: 10px; padding-right: 10px;}
 #home > .navbar .nav > li.divider {width: 1px; background-color: rgba(255,255,255,0.25); height: 40px}
