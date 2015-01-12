@@ -18,7 +18,7 @@
 
     /* Save the index configs */
     var indexUrl         = window.location.href;
-    var indexTitle       = $('head > title').text();
+    var indexTitle       = document.title;
     var indexTone        = '#145ccd';
 
     /* The default global settings */
