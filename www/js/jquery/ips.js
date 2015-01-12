@@ -107,7 +107,7 @@
                 {
                     if(reset) et[DEL] = false;
                     if(et.uuid === option.uuid) et = option;
-                    else et.init(option);
+                    else et.init(option, true);
                 }
                 else
                 {
@@ -307,7 +307,7 @@
     };
 
     /* Initialize */
-    entry.prototype.init = function(options)
+    entry.prototype.init = function(options, ignoreDefault)
     {
         if(!desktop)
         {
@@ -316,7 +316,7 @@
         }
 
         /* extend options from params */
-        $.extend(this, this.getDefaults(options.id), options);
+        $.extend(this, ignoreDefault ? null : this.getDefaults(options.id), this, options);
 
         this.sys        = this.sys && this.sys !== '0';
         this.hasMenu    = this.menu == 'menu' || this.menu == 'all';
@@ -1475,10 +1475,11 @@
                 this.$appsMenu.sortable({trigger: '.app-btn', selector: 'li', start: function()
                 {
                     $('body').addClass('mute-tooltip');
-                }, finish: function(data)
+                }, always: function()
                 {
                     setTimeout(function(){$('.tooltip').remove(); $('body').removeClass('mute-tooltip');}, 500);
-
+                }, finish: function(data)
+                {
                     if(!$.isFunction(settings.onSortEntries)) return;
 
                     var orders = {};
