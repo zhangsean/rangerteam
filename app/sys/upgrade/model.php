@@ -594,15 +594,17 @@ class upgradeModel extends model
         {
             if($group->id == 1)
             {
-                $privs = array('balance', 'depositor', 'order', 'product', 'schema', 'setting', 'task', 'trade');
+                $this->dao->delete()->from(TABLE_GROUPPRIV)->where('module')->eq('user')->andWhere('method')->in('profile,edit')->exec();
+
+                $privs = array('balance', 'depositor', 'order', 'product', 'project', 'schema', 'setting', 'task', 'trade');
 
                 $modules['balance']   = array('browse', 'create', 'delete', 'edit');
                 $modules['depositor'] = array('activate', 'browse', 'check', 'create', 'delete', 'edit', 'forbid', 'savebalance');
                 $modules['order']     = array('delete');
                 $modules['product']   = array('view');
-                $modules['project']   = array('active', 'suspend');
+                $modules['project']   = array('activate', 'suspend');
                 $modules['schema']    = array('browse', 'create', 'delete', 'edit', 'view');
-                $modules['setting']   = array('lang');
+                $modules['setting']   = array('lang', 'reset');
                 $modules['task']      = array('kanban', 'outline', 'start');
                 $modules['trade']     = array('batchCreate', 'batchEdit', 'browse', 'create', 'delete', 'detail', 'edit', 'import', 'showimport', 'transfer');
 
@@ -634,11 +636,13 @@ class upgradeModel extends model
 
             if($group->id == 3)
             {
+                $this->dao->delete()->from(TABLE_GROUPPRIV)->where('module')->eq('user')->andWhere('method')->eq('profile')->exec();
+
                 $priv = new stdclass();
                 $priv->group  = 3;
                 $priv->module = 'project';
 
-                $methods = array('active', 'finish', 'index', 'suspend');
+                $methods = array('activate', 'finish', 'index', 'suspend');
                 foreach($methods as $method)
                 {
                     $priv->method = $method;
