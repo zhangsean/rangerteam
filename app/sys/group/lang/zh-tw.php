@@ -15,6 +15,7 @@ $lang->group->create             = '新增分組';
 $lang->group->edit               = '編輯分組';
 $lang->group->copy               = '複製分組';
 $lang->group->delete             = '刪除分組';
+$lang->group->manageAppPriv      = '應用';
 $lang->group->managePriv         = '權限維護';
 $lang->group->managePrivByGroup  = '權限維護';
 $lang->group->managePrivByModule = '按模組分配權限';

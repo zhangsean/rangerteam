@@ -18,6 +18,7 @@ $lang->project->finish     = '完成項目';
 $lang->project->delete     = '刪除項目';
 $lang->project->enter      = '進入';
 $lang->project->suspend    = '掛起';
+$lang->project->active     = '激活';
 $lang->project->mine       = '我負責:';
 $lang->project->other      = '其他：';
 $lang->project->deleted    = '已刪除';

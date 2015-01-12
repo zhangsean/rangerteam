@@ -21,8 +21,19 @@ $lang->action->actionID = '記錄ID';
 $lang->action->date     = '日期';
 $lang->action->nextDate = '下次聯繫';
 
-$lang->action->createContact  = '新建';
-$lang->action->editComment = '修改備註';
+$lang->action->trash      = '資源回收筒';
+$lang->action->objectType = '對象類型';
+$lang->action->objectID   = '對象ID';
+$lang->action->objectName = '對象名稱';
+
+$lang->action->createContact = '新建';
+$lang->action->editComment   = '修改備註';
+$lang->action->hide          = '隱藏';       
+$lang->action->hideOne       = '隱藏';
+$lang->action->hideAll       = '隱藏全部';
+$lang->action->hidden        = '已隱藏';
+$lang->action->undelete      = '還原';
+$lang->action->trashTips     = '提示：為了保證系統的完整性，然之系統的刪除都是標記刪除。';
 
 $lang->action->textDiff = '文本格式';
 $lang->action->original = '原始格式';
@@ -80,6 +91,8 @@ $lang->action->desc->finishdelivercontract = '$date, 由 <strong>$actor</strong>
 $lang->action->desc->finishreceivecontract = '$date, 由 <strong>$actor</strong> 對合同<strong>$extra</strong>，完成回款。' . "\n";
 $lang->action->desc->finishcontract        = '$date, 由 <strong>$actor</strong> 完成合同：<strong>$extra</strong>。' . "\n";
 $lang->action->desc->cancelcontract        = '$date, 由 <strong>$actor</strong> 取消合同：<strong>$extra</strong>。' . "\n";
+$lang->action->desc->hidden                = '$date, 由 <strong>$actor</strong> 隱藏。' . "\n";
+$lang->action->desc->undeleted             = '$date, 由 <strong>$actor</strong> 還原。' . "\n";
 
 /* 用來顯示動態信息。*/
 $lang->action->label = new stdclass();
@@ -159,3 +172,13 @@ $lang->action->record->actor    = '操作人';
 $lang->action->record->comment  = '溝通內容';
 $lang->action->record->date     = '時間';
 $lang->action->record->nextDate = '下次聯繫';
+
+$lang->action->objectTypes['order']    = '訂單';
+$lang->action->objectTypes['customer'] = '客戶';
+$lang->action->objectTypes['doc']      = '文檔';
+$lang->action->objectTypes['task']     = '任務';
+$lang->action->objectTypes['product']  = '產品';
+$lang->action->objectTypes['contact']  = '聯繫人';
+$lang->action->objectTypes['contract'] = '合同';
+$lang->action->objectTypes['project']  = '項目';
+$lang->action->objectTypes['user']     = '用戶';

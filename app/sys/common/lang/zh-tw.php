@@ -52,7 +52,7 @@ EOT;
 
 /* Global lang items. */
 $lang->home           = '首頁';
-$lang->welcome        = '歡迎您，<strong>%s</strong>！';
+$lang->welcome        = "%s協同管理系統";
 $lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = '今天是%s，';
 $lang->today          = '今天';
@@ -117,6 +117,7 @@ $lang->addFiles       = '上傳了附件 ';
 $lang->comment        = '備註';
 $lang->selectAll      = '全選';
 $lang->selectReverse  = '反選';
+$lang->continueSave   = '繼續保存';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();
@@ -193,7 +194,8 @@ $lang->entry->menu->webapp = 'WEB應用|webapp|obtain|';
 /* Menu system. */
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
-$lang->system->menu->mail = array('link' => '發信|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->system->menu->mail  = array('link' => '發信|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->system->menu->trash = array('link' => '資源回收筒|action|trash|');
 //$lang->system->menu->backup = '備份|admin|backup|';
 
 $lang->article = new stdclass();
@@ -208,6 +210,11 @@ $lang->menuGroups = new stdclass();
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->system->menu;
 $lang->menuGroups->mail = 'system';
+
+/* Menu of action module. */
+$lang->action = new stdclass();
+$lang->action->menu = $lang->system->menu;
+$lang->menuGroups->action = 'system';
 
 /* The error messages. */
 $lang->error = new stdclass();

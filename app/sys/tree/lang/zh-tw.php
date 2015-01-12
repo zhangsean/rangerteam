@@ -19,11 +19,13 @@ $lang->tree->manage      = "維護類目";
 $lang->tree->fix         = "修復數據";
 
 $lang->tree->noCategories  = '您還沒有添加類目，請添加類目。';
-$lang->tree->timeCountDown = "<strong id='countDown'>3</strong> 秒後轉向類目管理頁面。";
+$lang->tree->noBoards      = '您還沒有設置版塊，請設置版塊。';
+$lang->tree->timeCountDown = "<strong id='countDown'>3</strong> 秒後轉向%s管理頁面。";
 $lang->tree->redirect      = '立即轉向';
 $lang->tree->aliasRepeat   = '別名: %s 已經存在,不能重複添加。';
 $lang->tree->aliasConflict = '別名: %s 與系統模組衝突，不能添加。';
-$lang->tree->hasChildren   = '該板塊存在子版塊，不能刪除。';
+$lang->tree->hasChildren   = '該版塊存在子版塊，不能刪除。';
+$lang->tree->hasThreads    = '該版塊存在帖子，不能刪除。';
 $lang->tree->confirmDelete = "您確定刪除該類目嗎？";
 $lang->tree->successFixed  = "成功修復";
 
@@ -94,4 +96,4 @@ $lang->board->readonlyList[1] = '只讀';
 
 $lang->board->placeholder = new stdclass();
 $lang->board->placeholder->moderators  = '會員用戶名, 多個用戶名之間用逗號隔開';
-$lang->board->placeholder->setChildren = '論壇功能需要設置二級版塊才能使用。';
+$lang->board->placeholder->setChildren = '論壇功能需要設置二級版塊。';

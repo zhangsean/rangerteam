@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->schema->common   = '導入模板';
+$lang->schema->common   = '導入記賬模板';
 $lang->schema->browse   = '模板列表';
 $lang->schema->view     = '查看模板';
 $lang->schema->create   = '創建模板';

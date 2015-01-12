@@ -6,7 +6,7 @@
  * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id: zh-tw.php 2164 2014-12-22 01:32:10Z chujilu $
+ * @version     $Id: zh-tw.php 2312 2015-01-06 03:35:22Z chujilu $
  * @link        http://www.ranzhico.com
  */
 $lang->entry->common    = '應用';
@@ -35,6 +35,7 @@ $lang->entry->size        = '窗口大小';
 $lang->entry->position    = '顯示位置';
 $lang->entry->width       = '寬';
 $lang->entry->height      = '高';
+$lang->entry->priv        = '權限';
 
 $lang->entry->integrateChanzhi = '整合蟬知';
 $lang->entry->integrateZentao  = '整合禪道';

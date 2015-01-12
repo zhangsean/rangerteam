@@ -41,12 +41,14 @@ $lang->order->contactedDate  = '最後聯繫';
 $lang->order->nextDate       = '下次聯繫';
 $lang->order->editedBy       = '最後修改';
 $lang->order->editedDate     = '最後修改日期';
+$lang->order->createCustomer = '新建';
 
 $lang->order->list          = '訂單列表';
 $lang->order->browse        = '瀏覽訂單';
 $lang->order->create        = '創建訂單';
 $lang->order->record        = '溝通';
 $lang->order->edit          = '編輯訂單';
+$lang->order->delete        = '刪除訂單';
 $lang->order->view          = '訂單詳情';
 $lang->order->close         = '關閉訂單';
 $lang->order->sign          = '簽約';

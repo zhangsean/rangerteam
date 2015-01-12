@@ -54,6 +54,8 @@ $lang->thread->message         = '%s在論壇#%s回覆了主題：%s，內容為
 $lang->thread->readonly        = '只讀';
 $lang->thread->successStick    = '成功置頂';
 $lang->thread->successUnstick  = '成功取消置頂';
+$lang->thread->successHide     = '成功隱藏帖子';
+$lang->thread->successShow     = '顯示成功';
 $lang->thread->readonlyMessage = '該帖已被設置為 <strong>只讀</strong>，您暫時無法發表新的回覆。';
 $lang->thread->successTransfer = '轉移成功';
 
