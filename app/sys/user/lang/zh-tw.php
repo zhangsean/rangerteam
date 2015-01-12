@@ -13,7 +13,7 @@ $lang->user->common    = '成員';
 
 $lang->user->id        = '編號';
 $lang->user->account   = '用戶名';
-$lang->user->admin     = '管理員';
+$lang->user->super     = '管理員';
 $lang->user->password  = '密碼';
 $lang->user->password2 = '請重複密碼';
 $lang->user->realname  = '真實姓名';
@@ -43,6 +43,7 @@ $lang->user->allowTime = '開放時間';
 $lang->user->status    = '狀態';
 $lang->user->alert     = '您的帳號已被禁用';
 
+$lang->user->admin           = '瀏覽成員';
 $lang->user->list            = '成員列表';
 $lang->user->colleague       = '同事列表';
 $lang->user->view            = "成員詳情";
