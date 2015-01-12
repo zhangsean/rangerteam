@@ -50,7 +50,16 @@
           <?php endif;?>
           <th class='text-right w-120px'>
             <label class="checkbox">
-              <?php echo isset($this->lang->$moduleName->common) ? $this->lang->$moduleName->common : $moduleName;?>
+              <?php
+              if($moduleName == 'user')
+              {
+                  echo $this->lang->user->colleagueMenu;
+              }
+              else
+              {
+                  echo isset($this->lang->$moduleName->common) ? $this->lang->$moduleName->common : $moduleName;
+              }
+              ?>
               <input type="checkbox" class='checkModule' /> 
             </label>
           </th>

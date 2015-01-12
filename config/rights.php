@@ -23,13 +23,24 @@ $config->rights->member['entry']['printblock']      = 'printblock';
 $config->rights->member['entry']['customsort']      = 'customsort';
 $config->rights->member['entry']['updateentrymenu'] = 'updateentrymenu';
 
-$config->rights->member['misc']['qrcode']                 = 'qrcode';
-$config->rights->member['misc']['about']                  = 'about';
-$config->rights->member['user']['setreferer']             = 'setreferer';
 $config->rights->member['user']['profile']                = 'profile';
+$config->rights->member['user']['thread']                 = 'thread';
+$config->rights->member['user']['reply']                  = 'reply';
+$config->rights->member['user']['message']                = 'message';
+$config->rights->member['user']['setreferer']             = 'setreferer';
+$config->rights->member['user']['changepassword']         = 'changepassword';
+$config->rights->member['user']['vcard']                  = 'vcard';
 $config->rights->member['user']['uploadavatar']           = 'uploadavatar';
 $config->rights->member['user']['cropavatar']             = 'cropavatar';
 $config->rights->member['user']['edit']                   = 'edit';
+
+$config->rights->member['search']['buildform']            = 'buildform';
+$config->rights->member['search']['buildquery']           = 'buildquery';
+$config->rights->member['search']['savequery']            = 'savequery';
+$config->rights->member['search']['deletequery']          = 'deletequery';
+
+$config->rights->member['misc']['qrcode']                 = 'qrcode';
+$config->rights->member['misc']['about']                  = 'about';
 $config->rights->member['contract']['getorder']           = 'getorder';
 $config->rights->member['contract']['getoptionmenu']      = 'getoptionmenu';
 $config->rights->member['customer']['getoptionmenu']      = 'getoptionmenu';

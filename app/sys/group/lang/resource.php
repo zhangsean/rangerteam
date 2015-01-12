@@ -37,12 +37,11 @@ $lang->appModule->team = array();
 $lang->appModule->team[] = 'blog';
 $lang->appModule->team[] = 'forum';
 $lang->appModule->team[] = 'thread';
+$lang->appModule->team[] = 'user';
 
 $lang->appModule->sys = array();
 $lang->appModule->sys[] = 'task';
 $lang->appModule->sys[] = 'tree';
-$lang->appModule->sys[] = 'user';
-$lang->appModule->sys[] = 'search';
 $lang->appModule->sys[] = 'schema';
 $lang->appModule->sys[] = 'setting';
 
@@ -67,11 +66,10 @@ $lang->moduleOrder[55]  = 'doc';
 $lang->moduleOrder[60]  = 'blog';
 $lang->moduleOrder[65]  = 'forum';
 $lang->moduleOrder[70]  = 'thread';
+$lang->moduleOrder[72]  = 'user';
 
 $lang->moduleOrder[75]  = 'task';
 $lang->moduleOrder[80]  = 'tree';
-$lang->moduleOrder[90]  = 'user';
-$lang->moduleOrder[95]  = 'search';
 $lang->moduleOrder[100] = 'schema';
 $lang->moduleOrder[105] = 'setting';
 
@@ -417,6 +415,11 @@ $lang->thread->methodOrder[25] = 'switchStatus';
 $lang->thread->methodOrder[30] = 'stick';
 $lang->thread->methodOrder[35] = 'deleteFile';
 
+$lang->resource->user = new stdclass();
+$lang->resource->user->colleague      = 'colleague';
+
+$lang->user->methodOrder[10] = 'colleague';
+
 /* Tree. */
 $lang->resource->tree = new stdclass();
 $lang->resource->tree->browse   = 'browse';
@@ -429,51 +432,14 @@ $lang->tree->methodOrder[5]  = 'edit';
 $lang->tree->methodOrder[10] = 'children';
 $lang->tree->methodOrder[15] = 'delete';
 
-/* user. */
-$lang->resource->user = new stdclass();
-$lang->resource->user->thread         = 'thread';
-$lang->resource->user->reply          = 'reply';
-$lang->resource->user->message        = 'message';
-$lang->resource->user->create         = 'create';
-$lang->resource->user->delete         = 'delete';
-$lang->resource->user->admin          = 'admin';
-$lang->resource->user->colleague      = 'colleague';
-$lang->resource->user->forbid         = 'forbid';
-$lang->resource->user->active         = 'active';
-$lang->resource->user->changePassword = 'changePassword';
-$lang->resource->user->vcard          = 'vcard';
-
-$lang->user->methodOrder[15] = 'thread';
-$lang->user->methodOrder[20] = 'reply';
-$lang->user->methodOrder[25] = 'message';
-$lang->user->methodOrder[30] = 'create';
-$lang->user->methodOrder[40] = 'delete';
-$lang->user->methodOrder[45] = 'admin';
-$lang->user->methodOrder[50] = 'colleague';
-$lang->user->methodOrder[55] = 'forbid';
-$lang->user->methodOrder[60] = 'active';
-$lang->user->methodOrder[70] = 'changePassword';
-$lang->user->methodOrder[75] = 'vcard';
 
 /* Setting. */
 $lang->resource->setting = new stdclass();
 $lang->resource->setting->lang  = 'lang';
 $lang->resource->setting->reset = 'reset';
 
-$lang->search->setting[5]  = 'lang';
-$lang->search->setting[10] = 'reset';
-
-/* Search. */
-$lang->resource->search = new stdclass();
-$lang->resource->search->buildForm   = 'buildForm';
-$lang->resource->search->buildQuery  = 'buildQuery';
-$lang->resource->search->saveQuery   = 'saveQuery';
-$lang->resource->search->deleteQuery = 'deleteQuery';
-
-$lang->search->methodOrder[10] = 'buildForm';
-$lang->search->methodOrder[15] = 'buildQuery';
-$lang->search->methodOrder[20] = 'saveQuery';
-$lang->search->methodOrder[25] = 'deleteQuery';
+$lang->setting->methodOrder[5]  = 'lang';
+$lang->setting->methodOrder[10] = 'reset';
 
 /* Every version of new privilege. */
 $lang->changelog = array();

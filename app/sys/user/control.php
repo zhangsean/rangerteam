@@ -231,6 +231,8 @@ class user extends control
      */
     public function edit($account = '', $from = '')
     {
+        if($account != $this->app->user->account and $this->app->user->admin != 'super') die(js::locate($this->createLink('user', 'deny', "module=user&method=edit")));
+
         if(!$account) $account = $this->app->user->account;
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
         if(empty($account)) $account = $this->app->user->account;

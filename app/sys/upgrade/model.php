@@ -594,8 +594,6 @@ class upgradeModel extends model
         {
             if($group->id == 1)
             {
-                $this->dao->delete()->from(TABLE_GROUPPRIV)->where('module')->eq('user')->andWhere('method')->in('profile,edit')->exec();
-
                 $privs = array('balance', 'depositor', 'order', 'product', 'project', 'schema', 'setting', 'task', 'trade');
 
                 $modules['balance']   = array('browse', 'create', 'delete', 'edit');
@@ -636,8 +634,6 @@ class upgradeModel extends model
 
             if($group->id == 3)
             {
-                $this->dao->delete()->from(TABLE_GROUPPRIV)->where('module')->eq('user')->andWhere('method')->eq('profile')->exec();
-
                 $priv = new stdclass();
                 $priv->group  = 3;
                 $priv->module = 'project';

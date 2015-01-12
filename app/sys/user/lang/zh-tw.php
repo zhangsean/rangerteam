@@ -123,6 +123,8 @@ $lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> 編輯�
 $lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
 
+$lang->user->colleagueMenu = '同事';
+
 $lang->dept = new stdclass();  
 $lang->dept->common     = '部門結構';
 $lang->dept->name       = '部門名稱';

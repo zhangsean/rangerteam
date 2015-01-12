@@ -123,6 +123,8 @@ $lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> Edit <i 
 $lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> Threads <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i> Replies <i class="icon-chevron-right"></i>|user|reply';
 
+$lang->user->colleagueMenu = 'Colleague';
+
 $lang->dept = new stdclass();  
 $lang->dept->common     = 'Dept';
 $lang->dept->name       = 'Dept Name';
