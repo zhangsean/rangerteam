@@ -13,7 +13,7 @@ $lang->user->common    = 'User';
 
 $lang->user->id        = 'ID';
 $lang->user->account   = 'Account';
-$lang->user->admin     = 'Admin';
+$lang->user->super     = 'Admin';
 $lang->user->password  = 'Password';
 $lang->user->password2 = 'Repeat it';
 $lang->user->realname  = 'Name';
@@ -43,6 +43,7 @@ $lang->user->allowTime = 'Allow time';
 $lang->user->status    = 'Status';
 $lang->user->alert     = 'Your account has been forbidden';
 
+$lang->user->admin           = 'Admin';
 $lang->user->list            = 'User list';
 $lang->user->colleague       = 'Colleague list';
 $lang->user->view            = "User info";
@@ -86,7 +87,6 @@ $lang->user->errorDeny     = "Sorry, you don't have the permission to access <b>
 $lang->user->loginFailed   = "Login failed, please check you account and password.";
 $lang->user->locked        = "Failed too much, please login again after ten minutes";
 $lang->user->lockedForEver = "User has been forbidden for ever.";
-$lang->user->lblRegistered = 'Congratulations, register successfully!';
 $lang->user->forbidSuccess = 'Successfully forbid.';
 $lang->user->actionFail    = 'Failed action';
 $lang->user->uploadSuccess = 'Successfully uploaded';
@@ -103,13 +103,6 @@ $lang->user->statusList = new stdclass();
 $lang->user->statusList->locked    = "<label class='label label-danger'>Locked</label>";
 $lang->user->statusList->forbidden = "<label class='label label-danger'>Forbidden</label>";
 $lang->user->statusList->normal    = "<label class='label label-success'>Normal</label>";
-
-$lang->user->register  = new stdclass();
-$lang->user->register->welcome    = 'Welcome to register as a member.';
-$lang->user->register->why        = 'After register, you can achieve mor features and services.';
-$lang->user->register->lblUserInfo= 'User info';
-$lang->user->register->lblAccount = 'The account must be a series of letters and/or numbers';
-$lang->user->register->lblPassword= 'Please set you password, at lest six letters or numbers.';
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = 'Numbers and letters, at least six';

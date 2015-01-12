@@ -193,7 +193,7 @@ class userModel extends model
         $this->dao->insert(TABLE_USER)
             ->data($user, $skip = 'password1,password2')
             ->autoCheck()
-            ->batchCheck($this->config->user->require->register, 'notempty')
+            ->batchCheck($this->config->user->require->create, 'notempty')
             ->check('account', 'unique')
             ->check('account', 'account')
             ->check('email', 'email')

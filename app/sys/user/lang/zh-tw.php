@@ -86,7 +86,6 @@ $lang->user->errorDeny     = "抱歉，您無權訪問『<b>%s</b>』模組的�
 $lang->user->loginFailed   = "登錄失敗，請檢查您的成員名或密碼是否填寫正確。";
 $lang->user->locked        = "成員已經被鎖定，請%s後再重新嘗試登錄";
 $lang->user->lockedForEver = "成員已經被永久禁用。";
-$lang->user->lblRegistered = '恭喜您，已經成功註冊。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->actionFail    = '操作失敗';
 $lang->user->uploadSuccess = '上傳成功';
@@ -103,13 +102,6 @@ $lang->user->statusList = new stdclass();
 $lang->user->statusList->locked    = "<label class='label label-danger'>鎖定</label>";
 $lang->user->statusList->forbidden = "<label class='label label-danger'>禁用</label>";
 $lang->user->statusList->normal    = "<label class='label label-success'>正常</label>";
-
-$lang->user->register  = new stdclass();
-$lang->user->register->welcome     = '歡迎註冊成為會員';
-$lang->user->register->why         = '歡迎註冊成為我們的會員，您可以享受更多的服務。';
-$lang->user->register->lblUserInfo = '成員信息';
-$lang->user->register->lblAccount  = '必須是三位以上的英文字母或數字';
-$lang->user->register->lblPassword = '數字和字母組成，六位以上';
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = '字母和數字組合，最少六位';

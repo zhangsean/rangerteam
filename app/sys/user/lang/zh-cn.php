@@ -13,7 +13,7 @@ $lang->user->common    = '成员';
 
 $lang->user->id        = '编号';
 $lang->user->account   = '用户名';
-$lang->user->admin     = '管理员';
+$lang->user->super     = '管理员';
 $lang->user->password  = '密码';
 $lang->user->password2 = '请重复密码';
 $lang->user->realname  = '真实姓名';
@@ -43,6 +43,7 @@ $lang->user->allowTime = '开放时间';
 $lang->user->status    = '状态';
 $lang->user->alert     = '您的帐号已被禁用';
 
+$lang->user->admin           = '浏览成员';
 $lang->user->list            = '成员列表';
 $lang->user->colleague       = '同事列表';
 $lang->user->view            = "成员详情";
@@ -86,7 +87,6 @@ $lang->user->errorDeny     = "抱歉，您无权访问『<b>%s</b>』模块的�
 $lang->user->loginFailed   = "登录失败，请检查您的成员名或密码是否填写正确。";
 $lang->user->locked        = "成员已经被锁定，请%s后再重新尝试登录";
 $lang->user->lockedForEver = "成员已经被永久禁用。";
-$lang->user->lblRegistered = '恭喜您，已经成功注册。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->actionFail    = '操作失败';
 $lang->user->uploadSuccess = '上传成功';
@@ -103,13 +103,6 @@ $lang->user->statusList = new stdclass();
 $lang->user->statusList->locked    = "<label class='label label-danger'>锁定</label>";
 $lang->user->statusList->forbidden = "<label class='label label-danger'>禁用</label>";
 $lang->user->statusList->normal    = "<label class='label label-success'>正常</label>";
-
-$lang->user->register  = new stdclass();
-$lang->user->register->welcome     = '欢迎注册成为会员';
-$lang->user->register->why         = '欢迎注册成为我们的会员，您可以享受更多的服务。';
-$lang->user->register->lblUserInfo = '成员信息';
-$lang->user->register->lblAccount  = '必须是三位以上的英文字母或数字';
-$lang->user->register->lblPassword = '数字和字母组成，六位以上';
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = '字母和数字组合，最少六位';

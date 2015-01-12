@@ -20,41 +20,6 @@ class user extends control
     private $referer;
 
     /**
-     * Register a user. 
-     * 
-     * @access public
-     * @return void
-     */
-    public function register()
-    {
-        if(!empty($_POST))
-        {
-            $this->user->create();
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-
-            if(!$this->session->random) $this->session->set('random', md5(time() . mt_rand()));
-            If($this->user->login($this->post->account, md5($this->user->createPassword($this->post->password1, $this->post->account) . $this->session->random)))
-            {
-                $url = $this->post->referer ? urldecode($this->post->referer) : inlink('user', 'control');
-                $this->send( array('result' => 'success', 'locate'=>$url) );
-            }
-        }
-
-        /* Set the referer. */
-        if(!isset($_SERVER['HTTP_REFERER']) or strpos($_SERVER['HTTP_REFERER'], 'login.php') != false)
-        {
-            $referer = urlencode($this->config->webRoot);
-        }
-        else
-        {
-            $referer = urlencode($_SERVER['HTTP_REFERER']);
-        }
-
-        $this->view->referer = $referer;
-        $this->display();
-    }
-
-    /**
      * Login.
      * 
      * @param string $referer 
@@ -70,12 +35,11 @@ class user extends control
 
         $loginLink = $this->createLink('user', 'login');
         $denyLink  = $this->createLink('user', 'deny');
-        $regLink   = $this->createLink('user', 'register');
 
         /* If the user logon already, goto the pre page. */
         if($this->user->isLogon())
         {
-            if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) !== false) $this->locate($this->referer);
+            if($this->referer and strpos($loginLink . $denyLink, $this->referer) !== false) $this->locate($this->referer);
             $this->locate($this->createLink($this->config->default->module));
             exit;
         }
@@ -86,7 +50,7 @@ class user extends control
             if(!$this->user->login($this->post->account, $this->post->password)) $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
 
             /* Goto the referer or to the default module */
-            if($this->post->referer != false and strpos($loginLink . $denyLink . $regLink, $this->post->referer) === false)
+            if($this->post->referer != false and strpos($loginLink . $denyLink, $this->post->referer) === false)
             {
                 $this->send(array('result'=>'success', 'locate'=> urldecode($this->post->referer)));
             }

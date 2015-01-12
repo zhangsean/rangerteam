@@ -34,7 +34,7 @@
               <legend><?php echo $lang->user->basicInfo; ?></legend>
               <table class='table table-form'>
                 <tr>
-                  <th><?php echo $lang->user->admin;?></th>
+                  <th><?php echo $lang->user->super;?></th>
                   <td><input name='admin' type='checkbox' value='super' <?php if($user->admin == 'super') echo 'checked';?>></td><td></td>
                 </tr>  
                 <tr>
