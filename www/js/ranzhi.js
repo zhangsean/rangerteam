@@ -118,7 +118,7 @@ $.extend(
                         function distroy(){submitButton.popover('destroy')}
                         setTimeout(distroy,2000);
                     }
-                    $('#responser').html(response.message).addClass('red f-12px').show().delay(5000).fadeOut(100);
+                    $('#responser').html(response.message).addClass('red small text-danger').show().delay(5000).fadeOut(100);
                 }
 
                 /* The result.message is just a object. */
