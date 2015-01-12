@@ -39,6 +39,7 @@ $config->rights->member['thread']['locate']               = 'locate';
 $config->rights->member['project']['ajaxgetdropmenu']     = 'ajaxgetdropmenu';
 $config->rights->member['project']['ajaxgetmatcheditems'] = 'ajaxgetmatcheditems';
 $config->rights->member['tree']['redirect']               = 'redirect';
+$config->rights->member['task']['sendmail']               = 'sendmail';
 
 $config->rights->member['reply']['post']          = 'post';
 $config->rights->member['reply']['edit']          = 'edit';

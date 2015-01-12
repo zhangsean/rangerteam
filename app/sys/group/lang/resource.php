@@ -87,7 +87,7 @@ $lang->resource->order->close    = 'close';
 $lang->resource->order->activate = 'activate';
 $lang->resource->order->contact  = 'contact';
 $lang->resource->order->assign   = 'assign';
-$lang->resource->order->assign   = 'delete';
+$lang->resource->order->delete   = 'delete';
 
 $lang->order->methodOrder[5]  = 'browse';
 $lang->order->methodOrder[10] = 'create';
@@ -291,19 +291,19 @@ $lang->schema->methodOrder[25] = 'delete';
 
 /* Project. */
 $lang->resource->project = new stdclass();
-$lang->resource->project->index   = 'index';
-$lang->resource->project->create  = 'create';
-$lang->resource->project->edit    = 'edit';
-$lang->resource->project->finish  = 'finish';
-$lang->resource->project->active  = 'active';
-$lang->resource->project->suspend = 'suspend';
-$lang->resource->project->delete  = 'delete';
+$lang->resource->project->index    = 'index';
+$lang->resource->project->create   = 'create';
+$lang->resource->project->edit     = 'edit';
+$lang->resource->project->finish   = 'finish';
+$lang->resource->project->activate = 'activate';
+$lang->resource->project->suspend  = 'suspend';
+$lang->resource->project->delete   = 'delete';
 
 $lang->project->methodOrder[0]  = 'index';
 $lang->project->methodOrder[5]  = 'create';
 $lang->project->methodOrder[10] = 'edit';
 $lang->project->methodOrder[15] = 'finish';
-$lang->project->methodOrder[20] = 'active';
+$lang->project->methodOrder[20] = 'activate';
 $lang->project->methodOrder[25] = 'suspend';
 $lang->project->methodOrder[35] = 'delete';
 
@@ -431,12 +431,10 @@ $lang->tree->methodOrder[15] = 'delete';
 
 /* user. */
 $lang->resource->user = new stdclass();
-$lang->resource->user->profile        = 'profile';
 $lang->resource->user->thread         = 'thread';
 $lang->resource->user->reply          = 'reply';
 $lang->resource->user->message        = 'message';
 $lang->resource->user->create         = 'create';
-$lang->resource->user->edit           = 'edit';
 $lang->resource->user->delete         = 'delete';
 $lang->resource->user->admin          = 'admin';
 $lang->resource->user->colleague      = 'colleague';
@@ -445,12 +443,10 @@ $lang->resource->user->active         = 'active';
 $lang->resource->user->changePassword = 'changePassword';
 $lang->resource->user->vcard          = 'vcard';
 
-$lang->user->methodOrder[10] = 'profile';
 $lang->user->methodOrder[15] = 'thread';
 $lang->user->methodOrder[20] = 'reply';
 $lang->user->methodOrder[25] = 'message';
 $lang->user->methodOrder[30] = 'create';
-$lang->user->methodOrder[35] = 'edit';
 $lang->user->methodOrder[40] = 'delete';
 $lang->user->methodOrder[45] = 'admin';
 $lang->user->methodOrder[50] = 'colleague';
@@ -461,9 +457,11 @@ $lang->user->methodOrder[75] = 'vcard';
 
 /* Setting. */
 $lang->resource->setting = new stdclass();
-$lang->resource->setting->lang = 'lang';
+$lang->resource->setting->lang  = 'lang';
+$lang->resource->setting->reset = 'reset';
 
-$lang->search->setting[5] = 'lang';
+$lang->search->setting[5]  = 'lang';
+$lang->search->setting[10] = 'reset';
 
 /* Search. */
 $lang->resource->search = new stdclass();

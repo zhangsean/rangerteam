@@ -207,7 +207,7 @@ class commonModel extends model
      */
     public function isOpenMethod($module, $method)
     {   
-        if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey', $method)) return true;
+        if($module == 'user' and strpos(',login|logout|deny|control', $method)) return true;
         if($module == 'api'  and $method == 'getsessionid') return true;
         if($module == 'misc' and $method == 'ping') return true;
         if($module == 'block') return true;
