@@ -190,7 +190,12 @@ class webappModel extends model
             $extend   = $ext[count($ext) - 1];
             $fileName = md5(mt_rand(0, 10000) . str_shuffle(md5($webapp->icon)) . mt_rand(0, 10000)) . '.' . $extend;
             $dateInfo = date('Ym/', time());
-            $savePath = $this->app->getDataRoot() . "upload/" . $dateInfo . $fileName;
+
+            /* mkdir if not exist. */
+            $savePath = $this->app->getDataRoot() . "upload/" . $dateInfo;
+            if(!file_exists($savePath)) @mkdir($savePath, 0777, true);
+
+            $savePath = $savePath . $fileName;
             $webPath  = $this->app->getWebRoot() . 'data/upload/' . $dateInfo . $fileName;
             $icon     = file_get_contents($this->config->webapp->url . $webapp->icon);
             file_put_contents($savePath, $icon);
