@@ -1360,4 +1360,4 @@ INSERT INTO `sys_groupPriv` VALUES (1,'address','browse'),
 (3,'thread','switchStatus'),
 (3,'thread','transfer'),
 (3,'thread','view'),
-(3,'user','colleague'),
+(3,'user','colleague');
