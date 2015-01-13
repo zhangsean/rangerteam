@@ -61,6 +61,7 @@ class upgradeModel extends model
                 $this->upgradeDeliveryRecords();
                 $this->addSearchPriv();
             case '1_6':
+                $this->execSQL($this->getUpgradeFile('1.6'));
                 $this->addPrivs();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
@@ -87,6 +88,7 @@ class upgradeModel extends model
             case '1_3_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.3.beta'));
             case '1_4_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.4.beta'));
             case '1_5_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.5.beta'));
+            case '1_6'     : $confirmContent .= file_get_contents($this->getUpgradeFile('1.6'));
         }
         return $confirmContent;
     }
