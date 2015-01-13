@@ -83,7 +83,7 @@ class announce extends control
         {
             $this->article->create('announce');
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('announce')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('announce', 'browse')));
         }
 
         unset($this->lang->announce->menu);
@@ -110,7 +110,7 @@ class announce extends control
         {
             $this->article->update($articleID, 'announce');
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('announce')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('announce', 'browse')));
         }
 
         $this->view->title      = $this->lang->article->edit;
