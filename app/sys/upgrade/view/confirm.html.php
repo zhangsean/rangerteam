@@ -10,7 +10,7 @@
  */
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
-<form method='post' action='<?php echo inlink('execute');?>'>
+<form method='post' action='<?php echo inlink('execute', "fromVersion={$fromVersion}");?>'>
 <div class='container'>
   <div class='modal-dialog'>
     <div class='modal-header'>
