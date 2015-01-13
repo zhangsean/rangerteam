@@ -7,27 +7,34 @@
 class control {}
 $lang = new stdclass();
 
-if( 1 == 0)
+/* set module root path and included the resource of group module. */
+$appRoot = '../app/';
+
+/* set module root path and included the resource of group module. */
+include '../app/sys/group/lang/resource.php';
+foreach(glob('../app/sys/group/ext/lang/zh-cn/*.php') as $resourceFile)
 {
-    /* set module root path and included the resource of group module. */
-    $moduleRoot = '../module/';
-    include $moduleRoot . '/group/lang/resource.php';
-    foreach(glob($moduleRoot . '/group/ext/lang/zh-cn/*.php') as $resourceFile)
-    {
-        include $resourceFile;
-    }
+    include $resourceFile;
+}
 
-    $whiteList[] = 'api-getsessionid';
-    $whiteList[] = 'sso-auth';
-    $whiteList[] = 'sso-depts';
-    $whiteList[] = 'sso-users';
+$whiteList[] = 'api-getsessionid';
+$whiteList[] = 'sso-auth';
+$whiteList[] = 'sso-check';
+$whiteList[] = 'misc-ping';
+$whiteList[] = 'user-login';
+$whiteList[] = 'user-logout';
+$whiteList[] = 'user-deny';
+$whiteList[] = 'user-control';
 
-    /* checking actions of every module. */
-    echo '-------------action checking-----------------' . "\n";
-    foreach(glob($moduleRoot . '*') as $modulePath)
+/* checking actions of every module. */
+echo '-------------action checking-----------------' . "\n";
+foreach(glob($appRoot . '*') as $appPath)
+{
+    $appName = basename($appPath);
+    foreach(glob($appPath . '/*') as $modulePath)
     {
         $moduleName = basename($modulePath);
-        if(strpos('install|upgrade|convert|common|misc|editor', $moduleName) !== false) continue;
+        if(strpos('install|upgrade|index|block|dashboard|error', $moduleName) !== false) continue;
         $controlFile = $modulePath . '/control.php';
         if(file_exists($controlFile))
         {
@@ -46,6 +53,7 @@ if( 1 == 0)
                         if(strpos($methodName, 'ajax') !== false) continue;
 
                         $exits = false;
+                        if(empty($lang->resource->$moduleName)) continue;
                         foreach($lang->resource->$moduleName as $key => $label)
                         {
                             if(strtolower($methodName) == strtolower($key)) $exits = true;
@@ -77,9 +85,6 @@ if( 1 == 0)
         }
     }
 }
-
-/* set module root path and included the resource of group module. */
-$appRoot = '../app/';
 
 /* checking actions of every module. */
 echo '-------------lang checking-----------------' . "\n";
