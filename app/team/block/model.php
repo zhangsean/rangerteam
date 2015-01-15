@@ -52,6 +52,11 @@ class teamblockModel extends blockmodel
         $params->num['default'] = 15; 
         $params->num['control'] = 'input';
 
+        $params->type['name']    = $this->lang->block->type;
+        $params->type['default'] = 15; 
+        $params->type['options'] = $this->lang->block->typeList->thread; 
+        $params->type['control'] = 'select';
+
         return json_encode($params);
     }
 }

@@ -12,9 +12,12 @@
 $lang->block->blog     = 'Latest Blog';
 $lang->block->lblBlock = 'Block';
 $lang->block->admin    = 'Manage Block';
+$lang->block->num      = 'Number';
+$lang->block->type     = 'Type';
 
 $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->blog   = 'Latest Blog';
-$lang->block->availableBlocks->thread = 'latest Thread';
+$lang->block->availableBlocks->thread = 'Thread List';
 
-$lang->block->num = 'number';
+$lang->block->typeList->thread['new']   = 'latest Thread';
+$lang->block->typeList->thread['stick'] = 'Sticked Thread';

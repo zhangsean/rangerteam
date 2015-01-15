@@ -109,6 +109,14 @@ $lang->block->default['team']['2']['block'] = 'thread';
 $lang->block->default['team']['2']['grid']  = 4;
 
 $lang->block->default['team']['2']['params']['num'] = 15;
+$lang->block->default['team']['2']['params']['type'] = 'new';
+
+$lang->block->default['team']['3']['title'] = '置顶帖子';
+$lang->block->default['team']['3']['block'] = 'thread';
+$lang->block->default['team']['3']['grid']  = 4;
+
+$lang->block->default['team']['3']['params']['num']  = 15;
+$lang->block->default['team']['3']['params']['type'] = 'stick';
 
 $lang->block->default['sys']['1'] = $lang->block->default['oa']['1'];
 $lang->block->default['sys']['1']['source'] = 'oa';

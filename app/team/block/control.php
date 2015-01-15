@@ -140,6 +140,9 @@ class block extends control
         $this->processParams();
 
         $threads = $this->dao->select('*')->from(TABLE_THREAD)
+            ->beginIF(isset($this->params->type) and $this->params->type == 'stick')
+            ->where('stick')->in('1,2')
+            ->fi()
             ->orderBy('createdDate desc')
             ->limit($this->params->num)
             ->fetchAll('id');
