@@ -45,6 +45,13 @@ $lang->block->default['oa']['2']['params']['orderBy'] = 'id_desc';
 $lang->block->default['oa']['2']['params']['status']  = array();
 $lang->block->default['oa']['2']['params']['type']    = 'assignedTo';
 
+$lang->block->default['oa']['3']['title'] = '项目列表';
+$lang->block->default['oa']['3']['block'] = 'project';
+$lang->block->default['oa']['3']['grid']  = 4;
+
+$lang->block->default['oa']['3']['params']['num']     = 15;
+$lang->block->default['oa']['3']['params']['orderBy'] = 'id_desc';
+
 $lang->block->default['crm']['1']['title'] = '我的订单';
 $lang->block->default['crm']['1']['block'] = 'order';
 $lang->block->default['crm']['1']['grid']  = 4;
