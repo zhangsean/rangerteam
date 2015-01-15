@@ -435,6 +435,7 @@ class orderModel extends model
 
         foreach($orders as $order)
         {
+            if($order->status == 'closed' and $order->closedReason != 'payed') continue;
             foreach($currencyList as $key => $currency)
             {
                 if($order->currency == $key)

@@ -553,6 +553,7 @@ class contractModel extends model
 
         foreach($contracts as $contract)
         {
+            if($contract->status == 'canceled') continue;
             foreach($currencyList as $key => $currency)
             {
                 if($contract->currency == $key)

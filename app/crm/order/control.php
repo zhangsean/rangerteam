@@ -59,7 +59,7 @@ class order extends control
         $this->view->orderBy      = $orderBy;
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->currencyList = $this->common->getCurrencyList();
-        if($orders) $this->view->totalAmount  = $this->order->countAmount($orders);
+        if($orders) $this->view->totalAmount = $this->order->countAmount($orders);
         $this->display();
     }
 
