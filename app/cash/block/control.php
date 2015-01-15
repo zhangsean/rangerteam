@@ -122,6 +122,53 @@ class block extends control
     }
 
     /**
+     * Print trade block.
+     * 
+     * @access public
+     * @return void
+     */
+    public function printTradeBlock()
+    {
+        $this->app->loadLang('trade', 'cash');
+
+        $this->processParams();
+
+        $this->view->trades = $this->dao->select('*')->from(TABLE_TRADE)
+            ->orderBy($this->params->orderBy)
+            ->limit($this->params->num)
+            ->fetchAll('id');
+
+        $this->view->currencySign  = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->view->depositorList = $this->loadModel('depositor')->getPairs();
+        $this->display();
+    }
+
+    /**
+     * Print provider block.
+     * 
+     * @access public
+     * @return void
+     */
+    public function printProviderBlock()
+    {
+        $this->app->loadLang('provider', 'cash');
+
+        $this->session->set('providerList', $this->createLink('dashboard', 'index'));
+
+        $this->processParams();
+
+        $this->view->providers = $this->dao->select('*')->from(TABLE_CUSTOMER)
+            ->where('relation')->eq('provider')
+            ->orderBy($this->params->orderBy)
+            ->limit($this->params->num)
+            ->fetchAll('id');
+
+        $this->view->areas      = $this->loadModel('tree')->getOptionMenu('area');
+        $this->view->industries = $this->tree->getOptionMenu('industry');
+        $this->display();
+    }
+
+    /**
      * Process params.
      * 
      * @access public

@@ -77,6 +77,20 @@ $lang->block->default['cash']['1']['grid']  = 4;
 
 $lang->block->default['cash']['1']['params'] = array();
 
+$lang->block->default['cash']['2']['title'] = '帐目';
+$lang->block->default['cash']['2']['block'] = 'trade';
+$lang->block->default['cash']['2']['grid']  = 4;
+
+$lang->block->default['cash']['2']['params']['num']     = 15;
+$lang->block->default['cash']['2']['params']['orderBy'] = 'id_desc';
+
+$lang->block->default['cash']['3']['title'] = '供应商';
+$lang->block->default['cash']['3']['block'] = 'provider';
+$lang->block->default['cash']['3']['grid']  = 4;
+
+$lang->block->default['cash']['3']['params']['num']     = 15;
+$lang->block->default['cash']['3']['params']['orderBy'] = 'id_desc';
+
 $lang->block->default['team']['1']['title'] = '最新博客';
 $lang->block->default['team']['1']['block'] = 'blog';
 $lang->block->default['team']['1']['grid']  = 4;

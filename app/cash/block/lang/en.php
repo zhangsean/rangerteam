@@ -12,6 +12,16 @@
 $lang->block->depositor = 'Payment Depositor';
 $lang->block->lblBlock  = 'Block';
 $lang->block->admin     = 'Manage Block';
+$lang->block->num       = 'Number';
+$lang->block->orderBy   = 'Order';
 
 $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->depositor = 'Payment Depositor';
+$lang->block->availableBlocks->trade     = 'Trade';
+$lang->block->availableBlocks->provider  = 'Provider';
+
+$this->lang->block->orderByList->trade['id_asc']  = 'ID ASC';
+$this->lang->block->orderByList->trade['id_desc'] = 'ID DESC';
+
+$this->lang->block->orderByList->provider['id_asc']  = 'ID ASC';
+$this->lang->block->orderByList->provider['id_desc'] = 'ID DESC';

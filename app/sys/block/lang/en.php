@@ -77,6 +77,21 @@ $lang->block->default['cash']['1']['grid']  = 4;
 
 $lang->block->default['cash']['1']['params'] = array();
 
+$lang->block->default['cash']['2']['title'] = 'Trade';
+$lang->block->default['cash']['2']['block'] = 'depositor';
+$lang->block->default['cash']['2']['grid']  = 4;
+
+$lang->block->default['cash']['2']['params']['num']     = 15;
+$lang->block->default['cash']['2']['params']['orderBy'] = 'id_desc';
+
+$lang->block->default['cash']['3']['title'] = 'Provider';
+$lang->block->default['cash']['3']['block'] = 'depositor';
+$lang->block->default['cash']['3']['grid']  = 4;
+
+$lang->block->default['cash']['3']['params']['num']     = 15;
+$lang->block->default['cash']['3']['params']['orderBy'] = 'id_desc';
+
+
 $lang->block->default['team']['1']['title'] = 'Latest Blog';
 $lang->block->default['team']['1']['block'] = 'blog';
 $lang->block->default['team']['1']['grid']  = 4;
