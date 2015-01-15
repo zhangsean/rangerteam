@@ -113,8 +113,8 @@ CREATE TABLE `crm_contract` (
   KEY `contactedDate` (`contactedDate`),
   KEY `nextDate` (`nextDate`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
--- DROP TABLE IF EXISTS `crm_contractOrder`;
-CREATE TABLE `crm_contractOrder` (
+-- DROP TABLE IF EXISTS `crm_contractorder`;
+CREATE TABLE `crm_contractorder` (
   `contract` mediumint(8) unsigned NOT NULL,
   `order` mediumint(8) unsigned NOT NULL,
   UNIQUE KEY `contract` (`contract`,`order`)
@@ -244,8 +244,8 @@ CREATE TABLE `oa_doc` (
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
--- DROP TABLE IF EXISTS `oa_docLib`;
-CREATE TABLE `oa_docLib` (
+-- DROP TABLE IF EXISTS `oa_doclib`;
+CREATE TABLE `oa_doclib` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
@@ -713,21 +713,21 @@ CREATE TABLE IF NOT EXISTS `sys_group` (
   `desc` char(255) NOT NULL default '',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
--- DROP TABLE IF EXISTS `sys_userGroup`;
-CREATE TABLE `sys_userGroup` (
+-- DROP TABLE IF EXISTS `sys_usergroup`;
+CREATE TABLE `sys_usergroup` (
   `account` char(30) NOT NULL DEFAULT '',
   `group` mediumint(8) unsigned NOT NULL DEFAULT '0',
   UNIQUE KEY `account` (`account`,`group`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
--- DROP TABLE IF EXISTS `sys_groupPriv`;
-CREATE TABLE IF NOT EXISTS `sys_groupPriv` (
+-- DROP TABLE IF EXISTS `sys_grouppriv`;
+CREATE TABLE IF NOT EXISTS `sys_grouppriv` (
   `group` mediumint(8) unsigned NOT NULL default '0',
   `module` char(30) NOT NULL default '',
   `method` char(30) NOT NULL default '',
   UNIQUE KEY `group` (`group`,`module`,`method`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
--- DROP TABLE IF EXISTS `sys_userQuery`;
-CREATE TABLE IF NOT EXISTS `sys_userQuery` (
+-- DROP TABLE IF EXISTS `sys_userquery`;
+CREATE TABLE IF NOT EXISTS `sys_userquery` (
   `id` mediumint(8) unsigned NOT NULL auto_increment,
   `account` char(30) NOT NULL,
   `module` varchar(30) NOT NULL,
@@ -1143,11 +1143,11 @@ INSERT INTO `sys_category` VALUES (1,'化工','','','',0,0,',1,',1,0,'industry',
 (659000,'自治区直辖县级行政区划','','','',0,650000,',650000,659000,',2,0,'area','0','',0,0,'','0000-00-00 00:00:00',0,0);
 
 INSERT INTO `sys_group` VALUES (1,'管理员','管理员拥有前台所有权限'),(2,'财务专员','财务专员拥有现金流所有权限'),(3,'普通用户','默认的普通账号权限');
-INSERT INTO `sys_userGroup` (account,`group`) SELECT account,3 FROM `sys_user`;
+INSERT INTO `sys_usergroup` (account,`group`) SELECT account,3 FROM `sys_user`;
 INSERT INTO `sys_schema` (`name`, `category`, `trader`, `type`, `money`, `desc`, `date`, `fee`) VALUES
 ('支付宝',       '', 'H', 'K', 'J',   'I,O', 'D', 'M'),
 ('中信银行简版', '', 'C', '',  'E,D', 'G,H', 'A', '');
-INSERT INTO `sys_groupPriv` VALUES (1,'address','browse'),
+INSERT INTO `sys_grouppriv` VALUES (1,'address','browse'),
 (1,'apppriv','cash'),
 (1,'apppriv','crm'),
 (1,'apppriv','oa'),
