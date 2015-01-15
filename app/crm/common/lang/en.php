@@ -15,7 +15,7 @@ $lang->app->name = 'CRM';
 $lang->menu->crm = new stdclass();
 $lang->menu->crm->dashboard = 'Dashboard|dashboard|index|';
 $lang->menu->crm->order     = 'Orders|order|index|';
-$lang->menu->crm->contract  = 'Contracts|contract|index|';
+$lang->menu->crm->contract  = 'Contracts|contract|browse|mode=unfinished';
 $lang->menu->crm->customer  = 'Customers|customer|index|';
 $lang->menu->crm->contact   = 'Contact|contact|index|';
 $lang->menu->crm->product   = 'Products|product|index|';
@@ -65,6 +65,7 @@ $lang->contact->menu->thismonth = array('link' => 'Contact This Month|contact|br
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
 $lang->contract->menu->browse       = array('link' => 'All Contracts|contract|browse|', 'alias' => 'create,edit,view');
+$lang->contract->menu->unfinished   = array('link' => 'Unfinished|contract|browse|mode=unfinished',   'alias' => 'create,edit,view,history');
 $lang->contract->menu->unreceived   = array('link' => 'Wait for receiving|contract|browse|mode=unreceived',   'alias' => 'create,edit,view,history');
 $lang->contract->menu->undeliveried = array('link' => 'Wait for delivering|contract|browse|mode=undeliveried', 'alias' => 'create,edit,view,history');
 $lang->contract->menu->finished     = array('link' => 'Finished|contract|browse|mode=finished',   'alias' => 'create,edit,view,history');

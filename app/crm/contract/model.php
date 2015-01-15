@@ -54,6 +54,7 @@ class contractModel extends model
         return $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('deleted')->eq(0)
             ->beginIF($customer)->andWhere('customer')->eq($customer)->fi()
+            ->beginIF($mode == 'unfinished')->andWhere('`status`')->ne('closed')->fi()
             ->beginIF($mode == 'unreceived')->andWhere('`return`')->ne('done')->fi()
             ->beginIF($mode == 'undeliveried')->andWhere('`delivery`')->ne('done')->fi()
             ->beginIF($mode == 'canceled')->andWhere('`status`')->eq('canceled')->fi()
