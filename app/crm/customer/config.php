@@ -22,6 +22,7 @@ global $lang;
 $config->customer->search['module'] = 'customer';
 
 $config->customer->search['fields']['name']          = $lang->customer->name;
+$config->customer->search['fields']['intension']     = $lang->customer->intension;
 $config->customer->search['fields']['level']         = $lang->customer->level;
 $config->customer->search['fields']['contactedDate'] = $lang->customer->contactDate;
 $config->customer->search['fields']['nextDate']      = $lang->customer->nextDate;
@@ -35,6 +36,7 @@ $config->customer->search['fields']['industry']      = $lang->customer->industry
 $config->customer->search['fields']['id']            = $lang->customer->id;
 
 $config->customer->search['params']['name']          = array('operator' => 'include', 'control' => 'input', 'values' => '');
+$config->customer->search['params']['intension']     = array('operator' => 'include', 'control' => 'input', 'values' => '');
 $config->customer->search['params']['level']         = array('operator' => '=',  'control' => 'select', 'values' => $lang->customer->levelNameList);
 $config->customer->search['params']['contactedDate'] = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->customer->search['params']['nextDate']      = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
