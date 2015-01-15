@@ -63,6 +63,14 @@ $lang->block->default['crm']['2']['params']['orderBy'] = 'id_desc';
 $lang->block->default['crm']['2']['params']['type']    = 'returnedBy';
 $lang->block->default['crm']['2']['params']['status']  = array();
 
+$lang->block->default['crm']['3']['title'] = '本周联系';
+$lang->block->default['crm']['3']['block'] = 'customer';
+$lang->block->default['crm']['3']['grid']  = 4;
+
+$lang->block->default['crm']['3']['params']['num']     = 15;
+$lang->block->default['crm']['3']['params']['orderBy'] = 'id_desc';
+$lang->block->default['crm']['3']['params']['type']    = 'thisweek';
+
 $lang->block->default['cash']['1']['title'] = '付款账户';
 $lang->block->default['cash']['1']['block'] = 'depositor';
 $lang->block->default['cash']['1']['grid']  = 4;

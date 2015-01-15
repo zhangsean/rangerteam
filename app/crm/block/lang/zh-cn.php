@@ -23,6 +23,7 @@ $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->order    = '订单列表';
 //$lang->block->availableBlocks->task    = '我的任务';
 $lang->block->availableBlocks->contract = '合同列表';
+$lang->block->availableBlocks->customer = '客户列表';
 
 $lang->block->orderByList = new stdclass();
 
@@ -47,6 +48,9 @@ $lang->block->orderByList->contract['customer_asc'] = '客户';
 $lang->block->orderByList->contract['amount_asc']   = '金额递增';
 $lang->block->orderByList->contract['amount_desc']  = '金额递减';
 
+$lang->block->orderByList->customer['id_asc']       = 'ID 递增';
+$lang->block->orderByList->customer['id_desc']      = 'ID 递减';
+
 $lang->block->typeList = new stdclass();
 
 $lang->block->typeList->order['assignedTo']   = '指派给我';
@@ -65,3 +69,6 @@ $lang->block->typeList->contract['canceled']       = '由我取消';
 $lang->block->typeList->contract['normalstatus']   = '正常';
 $lang->block->typeList->contract['closedstatus']   = '已完成';
 $lang->block->typeList->contract['canceledstatus'] = '已取消';
+
+$lang->block->typeList->customer['today']    = '今天联系';
+$lang->block->typeList->customer['thisweek'] = '本周联系';

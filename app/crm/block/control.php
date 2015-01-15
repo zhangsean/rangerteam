@@ -193,4 +193,36 @@ class block extends control
 
         $this->display();
     }
+
+    /**
+     * Print customer block.
+     * 
+     * @access public
+     * @return void
+     */
+    public function printCustomerBlock()
+    {
+        $this->app->loadLang('customer', 'crm');
+
+        $params = $this->get->param;
+        $params = json_decode(base64_decode($params));
+        if(!isset($params->type)) $params->type = '';
+        $this->app->loadClass('date');
+        $thisWeek = date::getThisWeek();
+
+        $this->session->set('customerList', $this->createLink('dashboard', 'index'));
+
+        $this->view->sso    = base64_decode($this->get->sso);
+        $this->view->code   = $this->get->blockid;
+
+        $this->view->customers = $this->dao->select('*')->from(TABLE_CUSTOMER)
+            ->where('deleted')->eq(0)
+            ->beginIF($params->type and $params->type == 'today')->andWhere('nextDate')->eq(helper::today())->fi()
+            ->beginIF($params->type and $params->type == 'thisweek')->andWhere('nextDate')->between($thisWeek['begin'], $thisWeek['end'])->fi()
+            ->orderBy($params->orderBy)
+            ->limit($params->num)
+            ->fetchAll('id');
+
+        $this->display();
+    }
 }

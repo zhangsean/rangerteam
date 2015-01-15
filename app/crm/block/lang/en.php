@@ -23,6 +23,7 @@ $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->order    = 'Order List';
 //$lang->block->availableBlocks->task     = 'My Tasks';
 $lang->block->availableBlocks->contract = 'Contract List';
+$lang->block->availableBlocks->customer = 'Customer List';
 
 $lang->block->orderByList = new stdclass();
 
@@ -47,6 +48,9 @@ $lang->block->orderByList->contract['customer_asc'] = 'Customer';
 $lang->block->orderByList->contract['amount_asc']   = 'Amount ASC';
 $lang->block->orderByList->contract['amount_desc']  = 'Amount DESC';
 
+$lang->block->orderByList->customer['id_asc']       = 'ID ASC';
+$lang->block->orderByList->customer['id_desc']      = 'ID DESC';
+
 $lang->block->typeList = new stdclass();
 
 $lang->block->typeList->order['assignedTo']   = 'To me';
@@ -65,3 +69,6 @@ $lang->block->typeList->contract['canceled']       = 'My canceled';
 $lang->block->typeList->contract['normalstatus']   = 'Normal';
 $lang->block->typeList->contract['closedstatus']   = 'Closed';
 $lang->block->typeList->contract['canceledstatus'] = 'Canceled';
+
+$lang->block->typeList->customer['today']    = 'Today';
+$lang->block->typeList->customer['thisweek'] = 'This week';

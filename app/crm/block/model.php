@@ -106,4 +106,32 @@ class crmblockModel extends blockModel
 
         return json_encode($params);
     }
+
+    /**
+     * Get customer params.
+     * 
+     * @access public
+     * @return string
+     */
+    public function getCustomerParams()
+    {
+        $this->app->loadLang('customer', 'crm');
+
+        $params = new stdclass();
+
+        $params->type['name']    = $this->lang->block->type;
+        $params->type['options'] = $this->lang->block->typeList->customer;
+        $params->type['control'] = 'select';
+
+        $params->num['name']    = $this->lang->block->num;
+        $params->num['default'] = 15; 
+        $params->num['control'] = 'input';
+
+        $params->orderBy['name']    = $this->lang->block->orderBy;
+        $params->orderBy['default'] = 'id_desc';
+        $params->orderBy['options'] = $this->lang->block->orderByList->customer;
+        $params->orderBy['control'] = 'select';
+
+        return json_encode($params);
+    }
 }
