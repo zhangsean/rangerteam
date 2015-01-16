@@ -57,6 +57,7 @@
           <th><?php echo $lang->contract->order;?></th>
           <td id='orderTD'></td>
         </tr>
+        <tr class='hide' id='tmpData'><td></td></tr>
         <tr>
           <th class='w-80px'><?php echo $lang->contract->name;?></th>
           <td class='w-p40'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
@@ -116,5 +117,6 @@
     </form>
   </div>
 </div>
+<table id='order' class='hide'><tr><td></td></tr></table>
 <?php js::set('currencyList', array('' => '') + $currencyList);?>
 <?php include '../../common/view/footer.html.php';?>

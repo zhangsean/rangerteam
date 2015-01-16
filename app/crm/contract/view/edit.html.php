@@ -67,6 +67,7 @@
             </td>
           </tr>
           <?php endforeach;?>
+          <tbody id='tmpData' class='hide'></tbody>
           <tr>
             <th><?php echo $lang->contract->amount;?></th>
             <td>

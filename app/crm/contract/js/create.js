@@ -14,10 +14,12 @@ function getOrder(customerID)
 
     $('.contactTD select').load(createLink('contact', 'getOptionMenu', 'customerID=' + customerID));
 
+    $('#order tr td').load(createLink('contract', 'getOrder', 'customerID=' + customerID + '&status=normal'));
+
     $('#orderTD').load(createLink('contract', 'getOrder', 'customerID=' + customerID + '&status=normal'), function()
     {
         $('#orderTR').removeClass('hide');
-        if($('.select-order').length > 1) $('.select-order').parents('tr').not('#orderTR').remove();
+        if($('.select-order').length > 1) $('.select-order').parents('tr').not('#orderTR, #tmpData').remove();
     })
 }
 
@@ -36,14 +38,30 @@ $(document).ready(function()
 
     $(document).on('click', '.plus', function()
     {
-        $(this).parents('tr').after("<tr><th></th><td>" + $('#orderTD').html() + "</td></tr>");
+        if($(this).parents('tr').find('option:selected').val() == '') return false;
+
+        $('#tmpData td').html($('#order td').html());
+
+        $('select.select-order').each(function()
+        {
+            selectedValue = $(this).find('option:selected').val();
+
+            if(selectedValue)
+            {
+                $('#tmpData').find("option[value='" + selectedValue + "']").remove();
+            }
+        });
+
+        $(this).parents('tr').after("<tr><th></th><td>" + $('#tmpData td').html() + "</td></tr>");
     });
   
     $(document).on('click', '.minus', function()
     {
         if($(this).parents('table').find('.order-real').not('tr.hide .order-real').size() == 1)
         {
+            $(this).parents('td').html($('#order td').html());
             $(this).parents('td').find('select').val('').change();
+            $('.order-real').change();
             return false;
         }
         $(this).parents('tr').remove();
