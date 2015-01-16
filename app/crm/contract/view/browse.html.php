@@ -53,7 +53,7 @@
   <div class='table-footer'>
     <?php if(isset($totalAmount)):?>
     <div class='pull-left text-danger'>
-      <?php printf($lang->contract->totalAmount, implode('，', $totalAmount['contract']), implode('，', $totalAmount['return']));?>
+      <?php if(!empty($totalAmount)) printf($lang->contract->totalAmount, implode('，', $totalAmount['contract']), implode('，', $totalAmount['return']));?>
     </div>
     <?php endif;?>
     <?php $pager->show();?>
