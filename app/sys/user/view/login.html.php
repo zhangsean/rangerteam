@@ -51,7 +51,10 @@ css::internal('body{background-color:#f6f5f5}');
               </tr>
               <tr>
                 <th></th>
-                <td><?php echo html::submitButton($lang->login) . html::hidden('referer', $referer);?></td>
+                <td>
+                  <?php echo html::submitButton($lang->login) . html::hidden('referer', $referer);?>
+                  <?php echo html::checkbox('keepLogin', array('on' => $lang->user->keepLogin));?>
+                </td>
               </tr>
             </table>
           </div>

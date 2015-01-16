@@ -78,6 +78,7 @@ class user extends control
     public function logout($referer = 0)
     {
         session_destroy();
+        setcookie('keepLogin', 'false', $this->config->cookieLife, $this->config->webRoot);
         $vars = !empty($referer) ? "referer=$referer" : '';
         $this->locate($this->createLink('user', 'login', $vars));
     }

@@ -306,6 +306,12 @@ class userModel extends model
         $user = $this->identify($account, $password);
         if(!$user) return false;
 
+        /* Set keep login cookie info if keep login. */
+        if($this->post->keepLogin == 'true')
+        {
+            $this->keepLogin($user);
+        }
+
         $user->password = $this->post->rawPassword;
 
         $user->rights = $this->authorize($user);
@@ -389,6 +395,28 @@ class userModel extends model
     }
 
     /**
+     * Identify user by cookie.
+     * 
+     * @access public
+     * @return void
+     */
+    public function identifyByCookie()
+    {
+        $account  = $this->cookie->ra;
+        $authHash = $this->cookie->rp;
+        $user     = $this->identify($account, $authHash);
+        if(!$user) return false;
+        
+        /* Update keep login cookie info. */
+        $this->keepLogin($user);
+
+        $user->rights = $this->authorize($user);
+        $this->session->set('user', $user);
+        $this->app->user = $this->session->user;
+
+    }
+
+    /**
      * Authorize a user.
      * 
      * @param   object    $user   the user object.
@@ -417,6 +445,21 @@ class userModel extends model
         }
 
         return $rights;
+    }
+
+    /**
+     * Keep the user in login state.
+     * 
+     * @param  string    $account 
+     * @param  string    $password 
+     * @access public
+     * @return void
+     */
+    public function keepLogin($user)
+    {
+        setcookie('keepLogin', 'on', $this->config->cookieLife, $this->config->webRoot);
+        setcookie('ra', $user->account, $this->config->cookieLife, $this->config->webRoot);
+        setcookie('rp', sha1($user->account . $user->password . $this->server->request_time), $this->config->cookieLife, $this->config->webRoot);
     }
 
     /**
@@ -497,6 +540,14 @@ class userModel extends model
      */
     public function compareHashPassword($password, $user)
     {
+        /* Check Hash if password leng is 40. */
+        $passwordLength = strlen($password);
+        if($passwordLength == 40)
+        {
+            $hash = sha1($user->account . $user->password . strtotime($user->last));
+            if($password == $hash) return true;
+        }
+
         return $password == md5($user->password . $this->session->random);
     }
 

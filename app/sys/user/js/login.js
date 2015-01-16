@@ -18,7 +18,7 @@ $('#submit').click(function()
     $.ajax(
     {
         type: "POST",
-        data:"account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()) + '&rawPassword=' + rawPassword,
+        data:"account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()) + '&rawPassword=' + rawPassword + '&keepLogin=' + $('#keepLogin1').is(':checked'),
         url:$('#ajaxForm').attr('action'),
         dataType:'json',
         success:function(data)

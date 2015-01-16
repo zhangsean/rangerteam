@@ -91,6 +91,9 @@ class commonModel extends model
 
         if($this->isOpenMethod($module, $method)) return true;
 
+        /* Try to identify by cookie if not login. */
+        if(!$this->loadModel('user')->isLogon() and $this->cookie->keepLogin == 'on') $this->user->identifyByCookie();
+
         /* If no $app->user yet, go to the login pae. */
         if($this->app->user->account == 'guest')
         {
