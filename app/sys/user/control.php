@@ -237,7 +237,7 @@ class user extends control
 
         if(!empty($_POST))
         {
-            $this->user->update($account);
+            $this->user->update($account, $from);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $locate = $from == 'admin' ? inlink('admin') : inlink('profile');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));

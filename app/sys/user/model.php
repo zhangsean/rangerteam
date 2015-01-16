@@ -217,7 +217,7 @@ class userModel extends model
      * @access public
      * @return void
      */
-    public function update($account)
+    public function update($account, $from)
     {
         /* If the user want to change his password. */
         if($this->post->password1 != false)
@@ -232,7 +232,7 @@ class userModel extends model
         $user = fixer::input('post')
             ->cleanInt('imobile, qq, zipcode')
             ->remove('ip, account, join, visits')
-            ->setDefault('admin', 'no');
+            ->setIF($from == 'admin' and !$this->post->admin, 'admin', 'no');
 
         if($this->app->user->admin != 'super')
         {
