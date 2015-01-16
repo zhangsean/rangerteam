@@ -78,6 +78,7 @@ class contactModel extends model
         if($relation == 'provider') $customers = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('relation')->ne('client')->fetchAll('id');
 
         $customerIdList = $relation == 'provider' ? array_keys($customers) : ($customers ? array_intersect($customerIdList, array_keys($customers)) : $customerIdList);
+        if(strpos($orderBy, 'id') === false) $orderBy .= ', id';
 
         $contacts = $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')

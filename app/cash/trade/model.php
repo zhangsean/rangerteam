@@ -36,6 +36,8 @@ class tradeModel extends model
         if($this->session->tradeQuery === false) $this->session->set('tradeQuery', ' 1 = 1');
         $tradeQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->tradeQuery);
 
+        if(strpos($orderBy, 'id') === false) $orderBy .= ', id';
+
         return $this->dao->select('*')->from(TABLE_TRADE)
             ->where('parent')->eq('')
             ->beginIF($mode == 'in')->andWhere('type')->eq('in')

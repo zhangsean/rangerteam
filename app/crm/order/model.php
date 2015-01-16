@@ -73,6 +73,7 @@ class orderModel extends model
         $orderQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->orderQuery);
 
         if(strpos($orderBy, 'status') !== false) $orderBy .= ', closedReason';
+        if(strpos($orderBy, 'id') === false) $orderBy .= ', id';
 
         $orders = $this->dao->select('o.*, c.name as customerName, c.level as level, p.name as productName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")

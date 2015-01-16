@@ -15,7 +15,7 @@
   <div class='panel-heading'><strong><i class='icon-group'></i> <?php echo $lang->aboutUs; ?></strong></div>
   <div class="panel-body">
     <div class='article-content'>
-      <?php echo $company->content;?>
+      <?php echo isset($company->content) ? $company->content : '';?>
     </div>
   </div>
 </div>

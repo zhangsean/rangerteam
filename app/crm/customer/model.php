@@ -65,6 +65,8 @@ class customerModel extends model
         if($this->session->customerQuery == false) $this->session->set('customerQuery', ' 1 = 1');
         $customerQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->customerQuery);
 
+        if(strpos($orderBy, 'id') === false) $orderBy .= ', id';
+
         return $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
             ->beginIF($relation == 'client')->andWhere('relation')->ne('provider')

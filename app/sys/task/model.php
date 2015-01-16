@@ -45,6 +45,8 @@ class taskModel extends model
         if($this->session->taskQuery == false) $this->session->set('taskQuery', ' 1 = 1');
         $taskQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->taskQuery);
 
+        if(strpos($orderBy, 'id') === false) $orderBy .= ', id';
+
         $this->dao->select('*')->from(TABLE_TASK)
             ->where('deleted')->eq(0)
             ->beginIF($projectID)->andWhere('project')->eq($projectID)->fi()

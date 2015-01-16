@@ -139,6 +139,8 @@ class docModel extends model
         $allKeysOfProjects = $keysOfProjects;
         $allKeysOfProjects[] = 0;
 
+        if(strpos($orderBy, 'id') === false) $orderBy .= ', id';
+
         return $this->dao->select('*')->from(TABLE_DOC)
             ->where('deleted')->eq(0)
             ->beginIF(is_numeric($libID))->andWhere('lib')->eq($libID)->fi()
