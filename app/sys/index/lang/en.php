@@ -12,6 +12,8 @@
 $lang->index->common       = 'Index';
 $lang->index->about        = 'About';
 $lang->index->allEntries   = 'All Entries';
+$lang->index->showOnLeft   = 'On left';
+$lang->index->notOnLeft    = 'Not on left';
 $lang->index->opened       = 'opened';
 $lang->index->addEntry     = 'Add';
 $lang->index->profile      = 'Profile';

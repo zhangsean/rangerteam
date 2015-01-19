@@ -1321,7 +1321,7 @@
                         for(var ki in keys)
                         {
                             var k = keys[ki];
-                            r = r && (k=='' || (k == ':open' && btn.hasClass('open')) || ((k == ':menu' && et.hasMenu)) || (nameKey.indexOf(k) > -1) || (codeKey && codeKey.indexOf(k) > -1) || idkey == k);
+                            r = r && (k=='' || (k == ':open' && btn.hasClass('open')) || ((k == ':menu' && et.hasMenu)) || ((k == ':!menu' && !et.hasMenu)) || (nameKey.indexOf(k) > -1) || (codeKey && codeKey.indexOf(k) > -1) || idkey == k);
                             if(!r) break;
                         }
 

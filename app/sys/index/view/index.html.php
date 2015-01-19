@@ -101,19 +101,21 @@ $isSuperAdmin = $this->app->user->admin == 'super';
   <div id='allapps' class='fullscreen'>
     <header>
       <div class='row'>
-        <div class='col-xs-4'>
+        <div class='col-xs-4 col-left'>
           <ul class='nav nav-tabs' id='appSearchNav'>
             <li class='active'><a href="javascript:;" class='app-search' data-key=''><i class='icon-th-large'></i> <span><?php echo $lang->index->allEntries?></span> &nbsp;<small class='muted entries-count'></small></a></li>
+            <li class='active'><a href="javascript:;" class='app-search' data-key=':menu'><i class=''></i> <span><?php echo $lang->index->showOnLeft?></span> &nbsp;<small class='muted entries-count'></small></a></li>
+            <li class='active'><a href="javascript:;" class='app-search' data-key=':!menu'><i class=''></i> <span><?php echo $lang->index->notOnLeft?></span> &nbsp;<small class='muted entries-count'></small></a></li>
           </ul>
         </div>
-        <div class='col-xs-4'>
+        <div class='col-xs-4 col-middle'>
           <div class='search-input'>
             <i class='icon-search icon'></i>
             <input id='search' type='text' class='form-control-pure form-control'>
             <button id='cancelSearch' class='btn btn-pure btn-mini' type='button'><i class='icon-remove'></i></button>
           </div>
         </div>
-        <div class='col-xs-4 text-right'>
+        <div class='col-xs-4 text-right col-right'>
           <?php if($isSuperAdmin):?>
           <?php echo html::a($this->createLink('entry', 'create'), "<i class='icon-plus'></i> {$lang->index->addEntry}", "data-id='superadmin' class='app-btn btn btn-pure'")?>
           <?php endif;?>
