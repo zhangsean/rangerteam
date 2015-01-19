@@ -42,3 +42,4 @@ $lang->upgrade->fromVersions['1_3_beta'] = '1.3.beta';
 $lang->upgrade->fromVersions['1_4_beta'] = '1.4.beta';
 $lang->upgrade->fromVersions['1_5_beta'] = '1.5.beta';
 $lang->upgrade->fromVersions['1_6']      = '1.6';
+$lang->upgrade->fromVersions['1_7']      = '1.7';

@@ -39,6 +39,24 @@ $app->setDebug();
 
 /* Check the installed version is the latest or not. */
 $config->installedVersion = $common->loadModel('setting')->getVersion();
+
+if(version_compare(1.7, $config->installedVersion) > 0)
+{
+    define('TABLE_CONTRACTORDER', '`crm_contractOrder`');
+    define('TABLE_DOCLIB',        '`oa_docLib`');
+    define('TABLE_USERGROUP',     '`sys_userGroup`');
+    define('TABLE_GROUPPRIV',     '`sys_groupPriv`');
+    define('TABLE_USERQUERY',     '`sys_userQuery`');
+}
+else
+{
+    define('TABLE_CONTRACTORDER', '`crm_contractorder`');
+    define('TABLE_DOCLIB',        '`oa_doclib`');
+    define('TABLE_USERGROUP',     '`sys_usergroup`');
+    define('TABLE_GROUPPRIV',     '`sys_grouppriv`');
+    define('TABLE_USERQUERY',     '`sys_userquery`');
+}
+
 if(version_compare($config->version, $config->installedVersion) <= 0) die(header('location: ../index.php'));
 
 /* Run it. */
