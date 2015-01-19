@@ -585,7 +585,7 @@
         }
         else if(et.display == 'fullscreen' && desktop.fullScreenApps)
         {
-            desktop.fullScreenApps.toggle(et.id);
+            desktop.fullScreenApps.show(et.id);
             return;
         }
 

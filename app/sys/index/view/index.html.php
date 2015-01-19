@@ -143,6 +143,17 @@ var entries = [
     sys       : true,
     forceMenu : true,
     order     : 9999999
+},
+{
+    id        : 'home',
+    code      : 'home',
+    name      : 'home',
+    display   : 'fullscreen',
+    menu      : 'none',
+    icon      : 'icon-desktop',
+    sys       : true,
+    forceMenu : true,
+    order     : 9999998
 }];
 
 <?php if($isSuperAdmin):?>
