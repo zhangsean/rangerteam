@@ -117,7 +117,8 @@ class block extends control
         $params = json_decode(base64_decode($params));
         if(!isset($params->type)) $params->type = '';
 
-        $this->session->set('orderList', $this->createLink('dashboard', 'index'));
+        $this->session->set('orderList', $this->createLink('crm.dashboard', 'index'));
+        if($this->get->app == 'sys') $this->session->set('orderList', 'javascript:$.openEntry("home")');
 
         $this->view->sso       = base64_decode($this->get->sso);
         $this->view->code      = $this->get->blockid;
@@ -178,7 +179,8 @@ class block extends control
         $params = json_decode(base64_decode($params));
         if(!isset($params->type)) $params->type = '';
 
-        $this->session->set('contractList', $this->createLink('dashboard', 'index'));
+        $this->session->set('contractList', $this->createLink('crm.dashboard', 'index'));
+        if($this->get->app == 'sys') $this->session->set('contractList', 'javascript:$.openEntry("home")');
 
         $this->view->sso    = base64_decode($this->get->sso);
         $this->view->code   = $this->get->blockid;
@@ -210,7 +212,8 @@ class block extends control
         $this->app->loadClass('date');
         $thisWeek = date::getThisWeek();
 
-        $this->session->set('customerList', $this->createLink('dashboard', 'index'));
+        $this->session->set('customerList', $this->createLink('crm.dashboard', 'index'));
+        if($this->get->app == 'sys') $this->session->set('customerList', 'javascript:$.openEntry("home")');
 
         $this->view->sso    = base64_decode($this->get->sso);
         $this->view->code   = $this->get->blockid;

@@ -153,7 +153,8 @@ class block extends control
     {
         $this->app->loadLang('provider', 'cash');
 
-        $this->session->set('providerList', $this->createLink('dashboard', 'index'));
+        $this->session->set('providerList', $this->createLink('cash.dashboard', 'index'));
+        if($this->get->app == 'sys') $this->session->set('providerList', 'javascript:$.openEntry("home")');
 
         $this->processParams();
 

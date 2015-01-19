@@ -136,6 +136,7 @@ class block extends control
         $this->lang->task = new stdclass();
         $this->app->loadLang('task', 'sys');
         $this->session->set('taskList', $this->createLink('dashboard', 'index'));
+        if($this->get->app == 'sys') $this->session->set('taskList', 'javascript:$.openEntry("home")');
 
         $this->processParams();
 
@@ -168,6 +169,7 @@ class block extends control
         $this->lang->task = new stdclass();
         $this->app->loadLang('task', 'sys');
         $this->session->set('taskList', $this->createLink('dashboard', 'index'));
+        if($this->get->app == 'sys') $this->session->set('taskList', 'javascript:$.openEntry("home")');
 
         $this->processParams();
 
@@ -194,6 +196,7 @@ class block extends control
         $this->lang->task = new stdclass();
         $this->app->loadLang('task', 'sys');
         $this->session->set('taskList', $this->createLink('dashboard', 'index'));
+        if($this->get->app == 'sys') $this->session->set('taskList', 'javascript:$.openEntry("home")');
 
         $this->processParams();
 
