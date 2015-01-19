@@ -139,6 +139,14 @@ class installModel extends model
 
         /* Connect db. */
         $this->setDBParam();
+
+        if(strpos($this->config->db->name, '.') !== false)
+        {
+            $return->result = 'fail';
+            $return->error  = $this->lang->install->errorDBName;
+            return $return;
+        }
+
         $this->dbh = $this->connectDB();
         if(!is_object($this->dbh))
         {

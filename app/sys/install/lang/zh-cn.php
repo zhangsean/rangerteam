@@ -71,6 +71,7 @@ $lang->install->dbPrefix   = '建表使用的前缀';
 $lang->install->createDB   = '自动创建数据库';
 $lang->install->clearDB    = '清空现有数据';
 
+$lang->install->errorDBName        = "数据库名不能带'.'";
 $lang->install->errorConnectDB     = '数据库连接失败。 ';
 $lang->install->errorCreateDB      = '数据库创建失败。';
 $lang->install->errorDBExists      = '数据库已经存在，继续安装返回上步并选中“清空数据”选项。';

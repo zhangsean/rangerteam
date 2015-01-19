@@ -71,6 +71,7 @@ $lang->install->dbPrefix   = 'Table prefix';
 $lang->install->createDB   = 'Auto create database';
 $lang->install->clearDB    = 'Clear data if database exists.';
 
+$lang->install->errorDBName        = "'.' are not allowed in database name";
 $lang->install->errorConnectDB     = 'Database connect failed.';
 $lang->install->errorCreateDB      = 'Database create failed.';
 $lang->install->errorDBExists      = 'Database alread exists, to continue install, check the clear db box.';
