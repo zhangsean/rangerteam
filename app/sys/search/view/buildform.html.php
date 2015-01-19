@@ -13,13 +13,14 @@
 <?php
 $jsRoot = $this->app->getWebRoot() . "js/";
 include '../../common/view/datepicker.html.php';
+include '../../common/view/chosen.html.php';
 ?>
 <style>
 #bysearchTab {transition: all .3s cubic-bezier(.175, .885, .32, 1); position: relative;}
 #bysearchTab.active > a {background: #fff; border: 1px solid #ddd; border-bottom: 0px; padding: 7px 10px!important; margin-bottom: -6px;}
 #bysearchTab.active > a:after {font-size: 14px; font-family: ZenIcon; content: ' \e6e2'; color: #808080}
 #featurebar .nav {z-index: 999; position: relative;}
-#querybox {position: relative; overflow: hidden; margin-top: 40px; margin: 25px auto -40px}
+#querybox {position: relative; margin-top: 40px; margin: 25px auto -40px}
 #querybox form{padding: 10px; padding-right: 40px;}
 #querybox .form-control {padding: 2px; padding: 6px 2px\0;}
 @-moz-document url-prefix() {#querybox .form-control {padding: 6px 2px;}}
@@ -156,6 +157,12 @@ function setField(fieldName, fieldNO)
             setDateField("#value" + nextNO, nextNO);
             $("#value" + nextNO).addClass('date');
         }
+    }
+
+    if(params[fieldName]['control'] == 'select' && (typeof(params[fieldName]['class']) == 'undefined' || params[fieldName]['class'] == 'chosen'))
+    {
+        $("#value" + fieldNO).addClass('chosen');
+        $('.chosen').chosen();
     }
 }
 
@@ -304,7 +311,11 @@ foreach($fieldParams as $fieldName => $param)
 
           /* Print value. */
           echo "<td id='valueBox$fieldNO'>";
-          if($param['control'] == 'select') echo html::select("value$fieldNO", $param['values'], $formSession["value$fieldNO"], "class='form-control searchSelect'");
+          if($param['control'] == 'select')
+          {
+              $extraClass = isset($param['class']) ? $param['class'] : 'chosen';
+              echo html::select("value$fieldNO", $param['values'], $formSession["value$fieldNO"], "class='form-control searchSelect $extraClass'");
+          }
           if($param['control'] == 'input') 
           {
               $fieldName  = $formSession["field$fieldNO"];
@@ -346,7 +357,11 @@ foreach($fieldParams as $fieldName => $param)
 
           /* Print value. */
           echo "<td id='valueBox$fieldNO'>";
-          if($param['control'] == 'select') echo html::select("value$fieldNO", $param['values'], $formSession["value$fieldNO"], "class='form-control searchSelect'");
+          if($param['control'] == 'select')
+          {
+              $extraClass = isset($param['class']) ? $param['class'] : 'chosen';
+              echo html::select("value$fieldNO", $param['values'], $formSession["value$fieldNO"], "class='form-control searchSelect $extraClass'");
+          }
 
           if($param['control'] == 'input')
           {
