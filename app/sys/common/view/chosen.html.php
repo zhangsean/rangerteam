@@ -14,9 +14,10 @@ css::import($jsRoot . 'jquery/chosen/min.css');
 js::import($jsRoot . 'jquery/chosen/min.js');
 ?>
 
-<script> 
+<script>
+window.chosenDefaultOptions = {no_results_text: '<?php echo $lang->noResultsMatch;?>', disable_search_threshold: 1, search_contains: true, width: '100%'};
 $(document).ready(function()
 {
-    $(".chosen").chosen({no_results_text: '<?php echo $lang->noResultsMatch;?>', disable_search_threshold: 1, search_contains: true, width: '100%'});
+    $(".chosen").chosen(chosenDefaultOptions);
 });
 </script>

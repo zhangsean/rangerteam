@@ -161,8 +161,7 @@ function setField(fieldName, fieldNO)
 
     if(params[fieldName]['control'] == 'select' && (typeof(params[fieldName]['class']) == 'undefined' || params[fieldName]['class'] == 'chosen'))
     {
-        $("#value" + fieldNO).addClass('chosen');
-        $('.chosen').chosen();
+        $("#value" + fieldNO).addClass('chosen').chosen(chosenDefaultOptions);
     }
 }
 
