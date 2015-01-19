@@ -135,7 +135,7 @@ body[class*='dropdown-mode-'] .s-menu-tooltip, body.mute-tooltip .s-menu-tooltip
 .window-max {border:none; -moz-border-radius:0; -webkit-border-radius:0; border-radius:0; -moz-box-shadow:none; -webkit-box-shadow:none; box-shadow:none;}
 .movable,.window-movable .window-head {cursor: move;}
 .window-max .movable,.window-movable.window-max .window-head {cursor: default;}
-.window-fixed .window-head .max-win, .window-maxfixed .window-head .max-win, .window-max .window-head .min-win {display: none;}
+.window-fixed .window-head .max-win, .window-maxfixed .window-head .max-win {display: none;}
 
 .window-content {position: relative; height: 100%; overflow: auto;}
 .window-loading .window-content {background: url('images/ips/loading.gif') no-repeat center 30%;}

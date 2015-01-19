@@ -181,7 +181,7 @@
             open     : 'iframe',
             desc     : '',
             order    : 0,
-            display  : 'fixed',
+            display  : 'fixed', // "sizeable" | "fixed" | "fullscreen" | "modal"
             size     : 'max',
             position : 'default',
             icon     : '',
@@ -697,7 +697,7 @@
         }).keydown(this.handleWindowKeydown) // listen the keydown events
         .on('click', '.max-win', function(event) // max-win
         {
-            windows.opens[$(this).closest('.window').attr('id')].toggle();
+            windows.opens[$(this).closest('.window').attr('id')].toggleSize();
             stopEvent(event);
         }).on('dblclick', '.window-head', function(event) // double click for max-win
         {
@@ -1120,23 +1120,14 @@
     };
 
     /* Change the window status to maximized or normal */
-    windowx.prototype.toggleSize = function()
+    windowx.prototype.toggleSize = function(forceMax)
     {
         var win = this.$;
-        if(this.isFixed) return;
+        if(this.isFixed()) return;
 
-        if(this.isMax)
-        {
-            var orginLoc = win.data('orginLoc');
-            win.removeClass('window-max').css(
-            {
-                left   : orginLoc.left,
-                top    : orginLoc.top,
-                width  : orginLoc.width,
-                height : orginLoc.height
-            }).find('.icon-resize-small').removeClass('icon-resize-small').addClass('icon-resize-full');
-        }
-        else
+        if(forceMax === undefined) forceMax = !this.isMax();
+
+        if(forceMax)
         {
             var dSize = desktop.size;
             win.data('orginLoc', 
@@ -1152,6 +1143,17 @@
                 width  : dSize.width,
                 height : dSize.height
             }).find('.icon-resize-full').removeClass('icon-resize-full').addClass('icon-resize-small');
+        }
+        else
+        {
+            var orginLoc = win.data('orginLoc');
+            win.removeClass('window-max').css(
+            {
+                left   : orginLoc.left,
+                top    : orginLoc.top,
+                width  : orginLoc.width,
+                height : orginLoc.height
+            }).find('.icon-resize-small').removeClass('icon-resize-small').addClass('icon-resize-full');
         }
         this.afterResized(true);
     };

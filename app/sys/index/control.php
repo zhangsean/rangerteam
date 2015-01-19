@@ -35,10 +35,12 @@ class index extends control
 
         foreach($entries as $entry)
         {
-            $sso  = $this->createLink('entry', 'visit', "entryID=$entry->id");
-            $logo = !empty($entry->logo) ? $entry->logo : '';
-            $size = !empty($entry->size) ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
-            $menu = $entry->visible ? 'all' : 'list';
+            $sso     = $this->createLink('entry', 'visit', "entryID=$entry->id");
+            $logo    = !empty($entry->logo) ? $entry->logo : '';
+            $size    = !empty($entry->size) ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
+            $display = $entry->buildin ? 'fixed' : 'sizeable';
+            $menu    = $entry->visible ? 'all' : 'list';
+            
             /* add web root if logo not start with /  */
             if($logo != '' && substr($logo, 0, 1) != '/') $logo = $this->config->webRoot . $logo;
             
@@ -57,7 +59,7 @@ class index extends control
                 control:  '$entry->control',
                 position: '$entry->position',
                 menu:     '$menu',
-                display:  'fixed',
+                display:  '$display',
                 abbr:     '$entry->abbr',
                 order:    '$entry->order',
                 sys:      '$entry->buildin'

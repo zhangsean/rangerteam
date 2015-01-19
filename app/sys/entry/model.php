@@ -347,10 +347,12 @@ class entryModel extends model
         foreach($entries as $entry)
         {
 
-            $sso  = helper::createLink('entry', 'visit', "entryID=$entry->id");
-            $logo = !empty($entry->logo) ? $entry->logo : '';
-            $size = !empty($entry->size) ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
-            $menu = $entry->visible ? 'all' : 'list';
+            $sso     = helper::createLink('entry', 'visit', "entryID=$entry->id");
+            $logo    = !empty($entry->logo) ? $entry->logo : '';
+            $size    = !empty($entry->size) ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
+            $menu    = $entry->visible ? 'all' : 'list';
+            $display = $entry->buildin ? 'fixed' : 'sizeable';
+            
             /* add web root if logo not start with /  */
             if($logo != '' && substr($logo, 0, 1) != '/') $logo = $this->config->webRoot . $logo;
             
@@ -368,7 +370,7 @@ class entryModel extends model
             $tmpEntry['control']  = $entry->control;
             $tmpEntry['position'] = $entry->position;
             $tmpEntry['menu']     = $menu;
-            $tmpEntry['display']  = 'fixed';
+            $tmpEntry['display']  = $display;
             $tmpEntry['abbr']     = $entry->abbr;
             $tmpEntry['order']    = $entry->order;
             $tmpEntry['sys']      = $entry->buildin;
