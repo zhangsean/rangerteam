@@ -236,12 +236,13 @@ class contract extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
-        $this->view->title         = $this->lang->contract->return;
-        $this->view->contractID    = $contractID;
+        $this->view->title         = $contract->name . $this->lang->minus . zget($currencySign, $contract->currency) . $contract->amount;
+        $this->view->contract      = $contract;
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->categories    = $this->loadModel('tree')->getOptionMenu('in', 0);
+        $this->view->currencySign  = $currencySign;
         $this->display();
     }
 

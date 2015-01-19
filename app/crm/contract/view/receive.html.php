@@ -14,7 +14,7 @@
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<form method='post' id='ajaxForm' class='form-inline' action='<?php echo $this->createLink('contract', 'receive', "contractID=$contractID")?>'>
+<form method='post' id='ajaxForm' class='form-inline' action='<?php echo $this->createLink('contract', 'receive', "contractID={$contract->id}")?>'>
   <table class='table table-form'>
     <tr>
       <th class='w-80px'><?php echo $lang->contract->amount;?></th>
@@ -61,4 +61,14 @@
     </tr>
   </table>
 </form>
+<?php if(!empty($contract->returnList)):?>
+<div class='panel'>
+  <div class='panel-heading'><?php echo $lang->contract->returnRecords;?></div>
+  <div class='panel-body'>
+    <?php foreach($contract->returnList as $return):?>
+    <?php printf($lang->contract->returnInfo, $return->returnedDate, zget($users, $return->returnedBy, $return->returnedBy), zget($currencySign, $contract->currency, '') . $return->amount);?>
+    <?php endforeach;?>
+  </div>
+</div>
+<?php endif;?>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>
