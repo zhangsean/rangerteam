@@ -21,4 +21,16 @@ $(document).ready(function()
             $(this).parents('tr').find('input,select').val('');
         }
     })
+
+    $('#submit').click(function()
+    {
+        var tradeChecked = false;
+
+        $('[name*=tradeIDList]').each(function()
+        {
+            if($(this).prop('checked')) tradeChecked = true;
+        })
+
+        return tradeChecked;
+    })
 });

@@ -204,6 +204,8 @@ class tradeModel extends model
         $depositorList = $this->loadModel('depositor')->getList();
 
         /* Get data. */
+        if($this->post->type === false) return array('result' => 'fail');
+
         foreach($this->post->type as $key => $type)
         {
             if(empty($type)) break;
