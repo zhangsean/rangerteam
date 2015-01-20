@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<form method='post' id='sjaxForm' enctype='multipart/form-data' action='<?php echo inlink('create')?>'>
+<form method='post' id='uploadForm' enctype='multipart/form-data' action='<?php echo inlink('create')?>'>
   <table class='table table-form'>
     <tr>
       <th><?php echo $lang->schema->csvFile?></th>

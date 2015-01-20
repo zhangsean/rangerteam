@@ -21,17 +21,18 @@ $lang->file->label      = '标题：';
 $lang->file->lblInfo    = '<i>(类型：%s, 大小：%s, 添加于：%s，下载%s次)</i>';
 $lang->file->limit      = "(<span class='text-danger'>2M以内</span>)";
 
-$lang->file->id        = '编号';
-$lang->file->title     = '名称';
-$lang->file->pathname  = '存储路径';
-$lang->file->extension = '类型';
-$lang->file->size      = '大小';
+$lang->file->id          = '编号';
+$lang->file->title       = '名称';
+$lang->file->pathname    = '存储路径';
+$lang->file->extension   = '类型';
+$lang->file->size        = '大小';
 $lang->file->createdBy   = '上传者';
 $lang->file->createdDate = '上传日期';
-$lang->file->public    = '匿名下载';
-$lang->file->downloads = '下载次数';
+$lang->file->public      = '匿名下载';
+$lang->file->downloads   = '下载次数';
 
 $lang->file->edit       = '编辑';
 $lang->file->editFile   = '更改附件';
 
 $lang->file->errorUnwritable = '上传目录不可写，无法上传附件。';
+$lang->file->errorNoFile     = '未选择任何文件。';

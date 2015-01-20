@@ -281,7 +281,7 @@ class trade extends control
                 }
                 else
                 {              
-                    $this->send(array('result' => 'fail', 'success' => $this->lang->testcase->noFunction));
+                    $this->send(array('result' => 'fail', 'message' => $this->lang->noConvertFun));
                 }              
             }                  
             file_put_contents($this->file->savePath . $file['pathname'], $fc);

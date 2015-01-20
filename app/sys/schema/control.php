@@ -94,14 +94,19 @@ class schema extends control
      */
     public function create()
     {
+        $this->loadModel('file');
         $this->app->loadLang('trade', 'cash');
-        if(!empty($_FILES))
+
+        if($this->post->encode)
         {
-            $file = $this->loadModel('file')->getUpload('files');
+            $file = $this->file->getUpload('files');
+
+            if(empty($file)) die(js::error($this->lang->file->errorNoFile) . js::locate('back'));
+
             $file = $file[0];
 
             $fc = file_get_contents($file['tmpname']);
-            if( $this->post->encode != "utf8") 
+            if($this->post->encode != "utf8") 
             {
                 if(function_exists('mb_convert_encoding'))
                 {
@@ -113,7 +118,7 @@ class schema extends control
                 }
                 else
                 {              
-                    $this->send(array('result' => 'fail', 'success' => $this->lang->testcase->noFunction));
+                    die(js::error($this->lang->noConvertFun) . js::locate('back'));
                 }              
             }
 
@@ -134,7 +139,7 @@ class schema extends control
             unset($this->lang->schema->menu);
             $this->display();
         }
-        elseif($_POST)
+        elseif($_POST and !$this->post->encode)
         {
             $schemaID = $this->schema->create();
             $errors  = dao::getError();
