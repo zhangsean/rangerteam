@@ -167,6 +167,8 @@ class file extends control
     {
         $file = $this->file->getById($fileID);
 
+        if(!file_exists($file->realPath)) die('file not found!');
+
         /* Judge the mode, down or open. */
         $mode  = 'down';
         $fileTypes = 'txt|jpg|jpeg|gif|png|bmp|xml|html';
@@ -178,7 +180,7 @@ class file extends control
         if($mode == 'open')
         {
             if(file_exists($file->realPath))$this->locate($file->webPath);
-            $this->app->error("The file you visit $fileID not found.", __FILE__, __LINE__, true);
+            $this->app->triggerError("The file you visit $fileID not found.", __FILE__, __LINE__, true);
         }
         else
         {
@@ -191,7 +193,7 @@ class file extends control
             }
             else
             {
-                $this->app->error("The file you visit $fileID not found.", __FILE__, __LINE__, true);
+                $this->app->triggerError("The file you visit $fileID not found.", __FILE__, __LINE__, true);
             }
         }
     }
