@@ -167,7 +167,7 @@ class tree extends control
         $children = $this->tree->getChildren($categoryID, $category->type); 
         if($children) $this->send(array('result' => 'fail', 'message' => $this->lang->tree->hasChildren));
 
-        if($category->type = 'forum') 
+        if($category->type == 'forum') 
         {
             $threads = $this->loadModel('thread')->getList($category->id);
             if($threads) $this->send(array('result' => 'fail', 'message' => $this->lang->tree->hasThreads));

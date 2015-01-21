@@ -101,7 +101,7 @@ class tradeModel extends model
             ->get();
 
         $depositor = $this->loadModel('depositor')->getByID($trade->depositor);
-        $trade->currency = $depositor->currency;
+        if(!empty($depositor)) $trade->currency = $depositor->currency;
 
         $this->dao->insert(TABLE_TRADE)
             ->data($trade, $skip = 'createTrader,traderName')
@@ -163,7 +163,7 @@ class tradeModel extends model
             $trade->handlers       = !empty($this->post->handlers[$key]) ? join(',', $this->post->handlers[$key]) : '';
             $trade->date           = $this->post->date[$key];
             $trade->desc           = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags->admin);
-            $trade->currency       = $depositorList[$trade->depositor]->currency;
+            $trade->currency       = isset($depositorList[$trade->depositor]) ? $depositorList[$trade->depositor]->currency : '';
             $trade->createdBy      = $this->app->user->account;
             $trade->createdDate    = $now;
 

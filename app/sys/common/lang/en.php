@@ -33,11 +33,11 @@ $lang->apps->sys  = 'SYSTEM';
 $lang->apps->team = 'TEAM';
 
 /* Lang items for ranzhi. */
-$lang->ranzhi  = 'ranzhi';
+$lang->ranzhi    = 'ranzhi';
 $lang->poweredBy = "<a href='http://www.ranzhi.org/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
 
 /* IE6 alert.  */
-$lang->IE6Alert= <<<EOT
+$lang->IE6Alert = <<<EOT
     <div class='alert alert-danger' style='margin-top:100px;'>
       <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
       <h2>Please use IE(>8), firefox, chrome, safari, opera to visit this site.</h2>

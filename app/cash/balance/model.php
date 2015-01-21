@@ -84,7 +84,7 @@ class balanceModel extends model
             $depositor = $this->loadModel('depositor')->getByID($this->post->depositor);
 
             $balance = fixer::input('post')
-                ->add('currency', $depositor->currency)
+                ->add('currency', !empty($depositor) ? "{$depositor->currency}" : '')
                 ->add('createdBy', $this->app->user->account)
                 ->add('createdDate', $now)
                 ->get();

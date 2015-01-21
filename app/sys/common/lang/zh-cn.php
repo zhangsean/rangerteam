@@ -33,11 +33,11 @@ $lang->apps->sys  = '通用';
 $lang->apps->team = '团队';
 
 /* Lang items for ranzhi. */
-$lang->ranzhi  = '然之协同';
+$lang->ranzhi    = '然之协同';
 $lang->poweredBy = "<span id='poweredBy'><a href='http://www.ranzhi.org/?v=%s' target='_blank'>{$lang->ranzhi}%s</a></span>";
 
 /* IE6 alert.  */
-$lang->IE6Alert= <<<EOT
+$lang->IE6Alert = <<<EOT
     <div class='alert alert-danger' style='margin-top:100px;'>
       <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
       <h2>请使用其他浏览器访问本站。</h2>
