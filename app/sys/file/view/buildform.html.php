@@ -72,22 +72,6 @@ function checkSize(obj)
 function maxFilesize(){return "(<?php printf($lang->file->maxUploadSize, $this->config->file->maxSize / 1024 /1024 . 'M');?>)";}
 
 /**
- * Set the width of the file form.
- * 
- * @param  float  $percent 
- * @access public
- * @return void
- */
-function setFileFormWidth(percent)
-{
-    totalWidth = Math.round($('#fileform').parent().width() * percent);
-    titleWidth = totalWidth - $('.fileControl').width() - $('.fileLabel').width() - $('.icon').width();
-    if($.browser.mozilla) titleWidth  -= 8;
-    if(!$.browser.mozilla) titleWidth -= 12;
-    $('#fileform .text-3').css('width', titleWidth + 'px');
-}
-
-/**
  * Add a file input control.
  * 
  * @param  object $clickedButton 
@@ -100,7 +84,6 @@ function addFile(clickedButton)
     fileRow = fileRow.replace('$i', $('.fileID').size() + 1);
     $(clickedButton).closest('.fileBox').after(fileRow);
 
-    setFileFormWidth(<?php echo $percent;?>);
     updateID();
 }
 
@@ -130,5 +113,4 @@ function updateID()
     $('.fileID').each(function(){$(this).html(i ++)});
 }
 
-$(function(){setFileFormWidth(<?php echo $percent;?>)});
 </script>
