@@ -83,7 +83,7 @@ function checkSize(obj)
 /**
  * Show the upload max filesize of config.  
  */
-function maxFilesize(){return "(<?php printf($lang->file->maxUploadSize, ini_get('upload_max_filesize'));?>)";}
+function maxFilesize(){return "(<?php printf($lang->file->maxUploadSize, $this->config->file->maxSize / 1024 /1024 . 'M');?>)";}
 
 /**
  * Set the width of the file form.

@@ -31,9 +31,10 @@ $lang->file->createdDate = '上传日期';
 $lang->file->public      = '匿名下载';
 $lang->file->downloads   = '下载次数';
 
-$lang->file->edit       = '编辑';
-$lang->file->editFile   = '更改附件';
-$lang->file->sizeLimit  = "<p class='text-danger'>附件大小不能大于%sM</p>";
+$lang->file->edit          = '编辑';
+$lang->file->editFile      = '更改附件';
+$lang->file->sizeLimit     = "<p class='text-danger'>附件大小不能大于%sM</p>";
+$lang->file->maxUploadSize = "<span class='red'>%s</span>"
 
 $lang->file->errorUnwritable = '上传目录不可写，无法上传附件。';
 $lang->file->errorNoFile     = '未选择任何文件。';
