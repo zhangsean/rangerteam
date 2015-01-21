@@ -46,9 +46,6 @@
     <section class='article-content'>
       <?php echo $article->content;?>
     </section>
-    <section>
-      <?php $this->loadModel('file')->printFiles($article->files);?>
-    </section>
     <footer>
       <?php if($article->keywords):?>
       <p class='small'><strong class='text-muted'><?php echo $lang->article->keywords;?></strong><span class='article-keywords'><?php echo $lang->colon . $article->keywords;?></span></p>
