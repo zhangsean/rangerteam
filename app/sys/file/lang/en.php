@@ -33,6 +33,8 @@ $lang->file->downloads   = 'Downloads';
 
 $lang->file->edit       = 'Edit';
 $lang->file->editFile   = 'Change file';
+$lang->file->sizeLimit  = "<p class='text-danger'>The size of file must be less than %sM</p>";
 
 $lang->file->errorUnwritable = 'Upload directory is not writable.';
 $lang->file->errorNoFile     = 'No file selected';
+$lang->file->errorFileSize   = 'The file size exceeds the limit, might not be able to upload!';
