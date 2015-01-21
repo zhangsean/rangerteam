@@ -42,20 +42,6 @@ EOT;
 <?php endif;?>
 
 <script language='javascript'>
-$(function()
-{
-    var maxUploadInfo = maxFilesize();
-    parentTag = $('#fileform').parent();
-    if(parentTag.get(0).tagName == 'TD')
-    {
-        parentTag.parent().find('th').append(maxUploadInfo); 
-    }
-    if(parentTag.get(0).tagName == 'FIELDSET')
-    {
-        parentTag.find('legend').append(maxUploadInfo);
-    }
-});
-
 /**
  * Check file size.
  * 
