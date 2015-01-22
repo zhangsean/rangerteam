@@ -413,7 +413,6 @@ class userModel extends model
         $user->rights = $this->authorize($user);
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
-
     }
 
     /**
