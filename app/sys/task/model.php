@@ -537,7 +537,6 @@ class taskModel extends model
             if($task->change == 'add')  $newTasks[] = $task;
             if($task->change == 'edit') $updatedTasks[] = $task;
         }
-        a($newTasks);
 
         foreach($newTasks as $task)
         {
