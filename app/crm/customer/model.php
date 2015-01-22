@@ -100,15 +100,21 @@ class customerModel extends model
     public function getPairs($relation = '', $emptyOption = true)
     {
         $mine = $this->getMine();
-        if(empty($mine)) return array();
 
-        $customers = $this->dao->select('id, name')->from(TABLE_CUSTOMER)
-            ->where('deleted')->eq(0)
-            ->beginIF($relation == 'client')->andWhere('relation')->ne('provider')->fi()
-            ->beginIF($relation == 'provider')->andWhere('relation')->ne('client')->fi()
-            ->andWhere('id')->in($mine)
-            ->orderBy('id_desc')
-            ->fetchPairs('id');
+        if(empty($mine))
+        {
+           $customers = array();
+        }
+        else
+        {
+            $customers = $this->dao->select('id, name')->from(TABLE_CUSTOMER)
+                ->where('deleted')->eq(0)
+                ->beginIF($relation == 'client')->andWhere('relation')->ne('provider')->fi()
+                ->beginIF($relation == 'provider')->andWhere('relation')->ne('client')->fi()
+                ->andWhere('id')->in($mine)
+                ->orderBy('id_desc')
+                ->fetchPairs('id');
+        }
 
         if($emptyOption)  $customers = array('' => '') + $customers;
         return $customers;

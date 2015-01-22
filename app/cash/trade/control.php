@@ -129,7 +129,7 @@ class trade extends control
         unset($this->lang->trade->typeList['transferout']);
 
         $this->view->title        = $this->lang->trade->batchCreate;
-        $this->view->depositors   = $this->loadModel('depositor')->getPairs();
+        $this->view->depositors   = array('' => '') + $this->loadModel('depositor')->getPairs();
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->customerList = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->view->traderList   = $this->loadModel('customer', 'crm')->getPairs('provider');
@@ -238,16 +238,11 @@ class trade extends control
             $details[] = $detail;
         }
 
-        $this->view->title         = $this->lang->trade->detail;
-        $this->view->modalWidth    = 900;
-        $this->view->trade         = $trade;
-        $this->view->details       = $details;
-        $this->view->depositorList = $this->loadModel('depositor')->getPairs();
-        $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
-        $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
-        $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
-        $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->title      = $this->lang->trade->detail;
+        $this->view->modalWidth = 900;
+        $this->view->trade      = $trade;
+        $this->view->details    = $details;
+        $this->view->users      = $this->loadModel('user')->getPairs();
 
         if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0);
         if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0);
@@ -294,7 +289,7 @@ class trade extends control
         $this->view->title      = $this->lang->trade->import;
         $this->view->modalWidth = 600;
         $this->view->schemas    = $this->loadModel('schema')->getPairs();
-        $this->view->depositors = $this->loadModel('depositor')->getPairs();
+        $this->view->depositors = array('' => '') + $this->loadModel('depositor')->getPairs();
         $this->display();
     }
 
