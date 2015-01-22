@@ -1007,7 +1007,10 @@ class commonModel extends model
      */
     public static function sortEntryByOrder($a, $b)
     {
-        if($a->order == $b->order) return 0;
+        if($a->order == $b->order)
+        {
+            return $a->id > $b->id ? 1 : -1;
+        }
         return $a->order > $b->order ? 1 : -1;
     }
 }

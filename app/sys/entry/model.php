@@ -14,12 +14,13 @@ class entryModel extends model
     /**
      * Get all entries. 
      * 
+     * @param  string $type custom|system
      * @access public
      * @return array
      */
-    public function getEntries()
+    public function getEntries($type = 'custom')
     {
-        $entries = $this->dao->select('*')->from(TABLE_ENTRY)->orderBy('`order`')->fetchAll();
+        $entries = $this->dao->select('*')->from(TABLE_ENTRY)->orderBy('`order, id`')->fetchAll();
 
         /* Remove entry if no rights and fix logo path. */
         $newEntries = array();
@@ -30,17 +31,18 @@ class entryModel extends model
         }
         $entries = $newEntries;
 
+        if($type != 'custom') return $entries;
+
         /* Add custom settings. */
         $customApp = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
         foreach($entries as $entry)
         {
             if(isset($customApp->{$entry->id}))
             {
-                if(isset($customApp->{$entry->id}->order))   $entry->order = $customApp->{$entry->id}->order;
+                if(isset($customApp->{$entry->id}->order))   $entry->order   = $customApp->{$entry->id}->order;
                 if(isset($customApp->{$entry->id}->visible)) $entry->visible = $customApp->{$entry->id}->visible;
             }
         }
-
         usort($entries, 'commonModel::sortEntryByOrder');
 
         return $entries;

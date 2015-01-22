@@ -65,6 +65,7 @@ class upgradeModel extends model
                 $this->addPrivs();
             case '1_7':
                 $this->execSQL($this->getUpgradeFile('1.7'));
+                $this->updateAppOrder();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -668,5 +669,22 @@ class upgradeModel extends model
         }
 
         return !dao::isError();
+    }
+
+    /**
+     * Update app orders.
+     * 
+     * @access public
+     * @return void
+     */
+    public function updateAppOrder()
+    {
+        $entries = $this->loadModel('entry')->getEntries('system');
+        $order   = 10;
+        foreach($entries as $entry)
+        {
+            $this->dao->update(TABLE_ENTRY)->set('`order`')->eq($order)->where('id')->eq($entry->id)->exec();
+            $order += 10;
+        }
     }
 }

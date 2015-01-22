@@ -162,9 +162,23 @@ class entry extends control
     {
         if($_POST)
         {
+            /* Sort entries by order and id. */
+            $entries = array();
             foreach($this->post->order as $id => $order)
             {
-                $this->dao->update(TABLE_ENTRY)->set('`order`')->eq($order)->where('id')->eq($id)->exec();
+                $entry        = new stdclass();
+                $entry->id    = $id;
+                $entry->order = $order;
+                $entries[]    = $entry;
+            }
+            usort($entries, 'commonModel::sortEntryByOrder');
+
+            /* Update order. */
+            $order = 10;
+            foreach($entries as $entry)
+            {
+                $this->dao->update(TABLE_ENTRY)->set('`order`')->eq($order)->where('id')->eq($entry->id)->exec();
+                $order += 10;
             }
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
