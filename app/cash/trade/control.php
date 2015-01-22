@@ -90,7 +90,7 @@ class trade extends control
         unset($this->lang->trade->menu);
         $this->view->title         = $this->lang->trade->{$type};
         $this->view->type          = $type;
-        $this->view->depositorList = $this->loadModel('depositor')->getPairs();
+        $this->view->depositorList = array('' => '') + $this->loadModel('depositor')->getPairs();
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
         $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
