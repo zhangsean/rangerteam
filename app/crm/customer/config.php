@@ -33,6 +33,7 @@ $config->customer->search['fields']['createdBy']     = $lang->customer->createdB
 $config->customer->search['fields']['createdDate']   = $lang->customer->createdDate;
 $config->customer->search['fields']['assignedTo']    = $lang->customer->assignedTo;
 $config->customer->search['fields']['industry']      = $lang->customer->industry;
+$config->customer->search['fields']['area']          = $lang->customer->area;
 $config->customer->search['fields']['id']            = $lang->customer->id;
 
 $config->customer->search['params']['name']          = array('operator' => 'include', 'control' => 'input', 'values' => '');
@@ -47,4 +48,5 @@ $config->customer->search['params']['createdBy']     = array('operator' => '=', 
 $config->customer->search['params']['createdDate']   = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->customer->search['params']['assignedTo']    = array('operator' => '=',  'control' => 'select', 'values' => 'users');
 $config->customer->search['params']['industry']      = array('operator' => 'include', 'control' => 'select', 'values' => 'set in control');
+$config->customer->search['params']['area']          = array('operator' => 'include', 'control' => 'select', 'values' => 'set in control');
 $config->customer->search['params']['id']            = array('operator' => '=',  'control' => 'input',  'values' => '');
