@@ -6,7 +6,7 @@
  * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id: zh-tw.php 2312 2015-01-06 03:35:22Z chujilu $
+ * @version     $Id: zh-tw.php 2496 2015-01-23 01:51:45Z chujilu $
  * @link        http://www.ranzhico.com
  */
 $lang->entry->common    = '應用';

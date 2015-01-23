@@ -42,6 +42,7 @@ $lang->user->last      = '最後登錄';
 $lang->user->allowTime = '開放時間';
 $lang->user->status    = '狀態';
 $lang->user->alert     = '您的帳號已被禁用';
+$lang->user->keepLogin = '保持登錄';
 
 $lang->user->admin           = '瀏覽成員';
 $lang->user->list            = '成員列表';

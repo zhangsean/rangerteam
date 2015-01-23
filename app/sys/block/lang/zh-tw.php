@@ -45,6 +45,13 @@ $lang->block->default['oa']['2']['params']['orderBy'] = 'id_desc';
 $lang->block->default['oa']['2']['params']['status']  = array();
 $lang->block->default['oa']['2']['params']['type']    = 'assignedTo';
 
+$lang->block->default['oa']['3']['title'] = '項目列表';
+$lang->block->default['oa']['3']['block'] = 'project';
+$lang->block->default['oa']['3']['grid']  = 4;
+
+$lang->block->default['oa']['3']['params']['num']     = 15;
+$lang->block->default['oa']['3']['params']['orderBy'] = 'id_desc';
+
 $lang->block->default['crm']['1']['title'] = '我的訂單';
 $lang->block->default['crm']['1']['block'] = 'order';
 $lang->block->default['crm']['1']['grid']  = 4;
@@ -63,11 +70,33 @@ $lang->block->default['crm']['2']['params']['orderBy'] = 'id_desc';
 $lang->block->default['crm']['2']['params']['type']    = 'returnedBy';
 $lang->block->default['crm']['2']['params']['status']  = array();
 
+$lang->block->default['crm']['3']['title'] = '本週聯繫';
+$lang->block->default['crm']['3']['block'] = 'customer';
+$lang->block->default['crm']['3']['grid']  = 4;
+
+$lang->block->default['crm']['3']['params']['num']     = 15;
+$lang->block->default['crm']['3']['params']['orderBy'] = 'id_desc';
+$lang->block->default['crm']['3']['params']['type']    = 'thisweek';
+
 $lang->block->default['cash']['1']['title'] = '付款賬戶';
 $lang->block->default['cash']['1']['block'] = 'depositor';
 $lang->block->default['cash']['1']['grid']  = 4;
 
 $lang->block->default['cash']['1']['params'] = array();
+
+$lang->block->default['cash']['2']['title'] = '帳目';
+$lang->block->default['cash']['2']['block'] = 'trade';
+$lang->block->default['cash']['2']['grid']  = 4;
+
+$lang->block->default['cash']['2']['params']['num']     = 15;
+$lang->block->default['cash']['2']['params']['orderBy'] = 'id_desc';
+
+$lang->block->default['cash']['3']['title'] = '供應商';
+$lang->block->default['cash']['3']['block'] = 'provider';
+$lang->block->default['cash']['3']['grid']  = 4;
+
+$lang->block->default['cash']['3']['params']['num']     = 15;
+$lang->block->default['cash']['3']['params']['orderBy'] = 'id_desc';
 
 $lang->block->default['team']['1']['title'] = '最新博客';
 $lang->block->default['team']['1']['block'] = 'blog';
@@ -80,6 +109,14 @@ $lang->block->default['team']['2']['block'] = 'thread';
 $lang->block->default['team']['2']['grid']  = 4;
 
 $lang->block->default['team']['2']['params']['num'] = 15;
+$lang->block->default['team']['2']['params']['type'] = 'new';
+
+$lang->block->default['team']['3']['title'] = '置頂帖子';
+$lang->block->default['team']['3']['block'] = 'thread';
+$lang->block->default['team']['3']['grid']  = 4;
+
+$lang->block->default['team']['3']['params']['num']  = 15;
+$lang->block->default['team']['3']['params']['type'] = 'stick';
 
 $lang->block->default['sys']['1'] = $lang->block->default['oa']['1'];
 $lang->block->default['sys']['1']['source'] = 'oa';

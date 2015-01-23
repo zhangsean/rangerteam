@@ -15,7 +15,7 @@ $lang->app->name = 'CRM';
 $lang->menu->crm = new stdclass();
 $lang->menu->crm->dashboard = '我的地盤|dashboard|index|';
 $lang->menu->crm->order     = '訂單|order|browse|';
-$lang->menu->crm->contract  = '合同|contract|browse|';
+$lang->menu->crm->contract  = '合同|contract|browse|mode=unfinished';
 $lang->menu->crm->customer  = '客戶|customer|browse|';
 $lang->menu->crm->contact   = '聯繫人|contact|browse|';
 $lang->menu->crm->product   = '產品|product|browse|';
@@ -65,6 +65,7 @@ $lang->contact->menu->thismonth = array('link' => '一月內聯繫|contact|brows
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
 $lang->contract->menu->browse       = array('link' => '所有合同|contract|browse|mode=all', 'alias' => 'create,edit,view');
+$lang->contract->menu->unfinished   = array('link' => '未完成|contract|browse|mode=unfinished',   'alias' => 'create,edit,view,history');
 $lang->contract->menu->unreceived   = array('link' => '未回款|contract|browse|mode=unreceived',   'alias' => 'create,edit,view,history');
 $lang->contract->menu->undeliveried = array('link' => '未交付|contract|browse|mode=undeliveried', 'alias' => 'create,edit,view,history');
 $lang->contract->menu->finished     = array('link' => '已完成|contract|browse|mode=finished',   'alias' => 'create,edit,view,history');

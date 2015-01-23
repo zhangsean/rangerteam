@@ -25,6 +25,7 @@ $lang->upgrade->execute       = '確認執行';
 $lang->upgrade->next          = '下一步';
 $lang->upgrade->redeploy      = '請重新部署app檔案夾後繼續';
 $lang->upgrade->redeployDesc  = "<h5>因為代碼結構調整,需要重新部署app目錄。</h5><div class='text-important'>操作方法:刪除舊的app目錄，再從新的安裝包裡面複製app檔案夾。</div>";
+$lang->upgrade->updateLicense = '然之協同 2. 0 已更換授權協議至 ZPL1.1。';
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
@@ -42,3 +43,4 @@ $lang->upgrade->fromVersions['1_3_beta'] = '1.3.beta';
 $lang->upgrade->fromVersions['1_4_beta'] = '1.4.beta';
 $lang->upgrade->fromVersions['1_5_beta'] = '1.5.beta';
 $lang->upgrade->fromVersions['1_6']      = '1.6';
+$lang->upgrade->fromVersions['1_7']      = '1.7';

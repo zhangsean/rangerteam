@@ -12,6 +12,8 @@
 $lang->index->common       = '首頁';
 $lang->index->about        = '關於';
 $lang->index->allEntries   = '所有應用';
+$lang->index->showOnLeft   = '左側顯示';
+$lang->index->notOnLeft    = '非左側顯示';
 $lang->index->opened       = '已打開';
 $lang->index->addEntry     = '添加應用';
 $lang->index->profile      = '個人信息';

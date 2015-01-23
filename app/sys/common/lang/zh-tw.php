@@ -33,11 +33,12 @@ $lang->apps->sys  = '通用';
 $lang->apps->team = '團隊';
 
 /* Lang items for ranzhi. */
-$lang->ranzhi  = '然之協同';
+$lang->ranzhi    = '然之協同';
+$lang->agreement = "已閲讀並同意<a href='http://zpl.pub/page/zplv11.html' target='_blank'>《Z PUBLIC LICENSE授權協議1.1》</a>。<span class='text-danger'>未經許可，不得去除然之系統的任何標誌及連結。</span>";
 $lang->poweredBy = "<span id='poweredBy'><a href='http://www.ranzhi.org/?v=%s' target='_blank'>{$lang->ranzhi}%s</a></span>";
 
 /* IE6 alert.  */
-$lang->IE6Alert= <<<EOT
+$lang->IE6Alert = <<<EOT
     <div class='alert alert-danger' style='margin-top:100px;'>
       <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
       <h2>請使用其他瀏覽器訪問本站。</h2>
@@ -240,6 +241,7 @@ $lang->error->passwordsame = '兩次密碼應當相等。';
 $lang->error->passwordrule = '密碼應該符合規則，長度至少為六位。';
 $lang->error->captcha      = '請輸入正確的驗證碼。';
 $lang->error->noWritable   = '%s 可能不可寫，請修改權限！';
+$lang->error->noConvertFun = '不存在iconv和mb_convert_encoding轉碼方法，不能將數據轉成想要的編碼！';
 
 /* The pager items. */
 $lang->pager = new stdclass();

@@ -9,6 +9,7 @@
  * @version     $Id: zh-tw.php 824 2010-05-02 15:32:06Z wwccss $
  * @link        http://www.ranzhico.com
  */
+if(!isset($lang->project)) $lang->project = new stdclass();
 $lang->project->common     = '項目視圖';
 $lang->project->browse     = '項目列表';
 $lang->project->index      = '項目首頁';

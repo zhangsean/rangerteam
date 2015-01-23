@@ -12,6 +12,16 @@
 $lang->block->depositor = '付款帳號';
 $lang->block->lblBlock  = '區塊';
 $lang->block->admin     = '管理區塊';
+$lang->block->num       = '數量';
+$lang->block->orderBy   = '排序';
 
 $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->depositor = '付款帳號';
+$lang->block->availableBlocks->trade     = '帳目';
+$lang->block->availableBlocks->provider  = '供應商';
+
+$this->lang->block->orderByList->trade['id_asc']  = 'ID 遞增';
+$this->lang->block->orderByList->trade['id_desc'] = 'ID 遞減';
+
+$this->lang->block->orderByList->provider['id_asc']  = 'ID 遞增';
+$this->lang->block->orderByList->provider['id_desc'] = 'ID 遞減';
