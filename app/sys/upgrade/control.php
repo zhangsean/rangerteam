@@ -30,7 +30,12 @@ class upgrade extends control
      */
     public function index()
     {
-        if(version_compare($this->config->installedVersion, '1.3.beta', '>')) $this->locate(inlink('backup'));
+        if(version_compare($this->config->installedVersion, '1.3.beta', '>'))
+        {
+            if(version_compare($this->config->installedVersion, '2.0', '<')) $this->locate(inlink('upgradeLicense'));
+            $this->locate(inlink('backup'));
+        }
+
         $this->display();
     }
 
@@ -44,6 +49,14 @@ class upgrade extends control
     {
         $this->view->title = $this->lang->upgrade->backup;
         $this->view->db    = $this->config->db;
+        $this->display();
+    }
+
+    public function upgradeLicense()
+    {
+        if($this->get->agree == true) $this->locate(inlink('backup'));
+
+        $this->view->license = file_get_contents($this->app->getBasePath() . 'LICENSE');
         $this->display();
     }
 

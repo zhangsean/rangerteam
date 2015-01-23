@@ -25,6 +25,7 @@ $lang->upgrade->execute       = '确认执行';
 $lang->upgrade->next          = '下一步';
 $lang->upgrade->redeploy      = '请重新部署app文件夹后继续';
 $lang->upgrade->redeployDesc  = "<h5>因为代码结构调整,需要重新部署app目录。</h5><div class='text-important'>操作方法:删除旧的app目录，再从新的安装包里面复制app文件夹。</div>";
+$lang->upgrade->updateLicense = '然之协同 2. 0 已更换授权协议至 ZPL1.1。';
 
 $lang->upgrade->backupData = <<<EOT
 <pre>

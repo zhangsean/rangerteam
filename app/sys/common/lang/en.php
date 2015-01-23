@@ -34,6 +34,7 @@ $lang->apps->team = 'TEAM';
 
 /* Lang items for ranzhi. */
 $lang->ranzhi    = 'ranzhi';
+$lang->agreement = "I Agree to the <a href='http://zpl.pub/page/zplv11.html' target='_blank'>Z PUBLIC LICENSE 1.1</a>, <span class='text-danger'>and promise to keep the logo, link of RanZhi.</span>";
 $lang->poweredBy = "<a href='http://www.ranzhi.org/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
 
 /* IE6 alert.  */

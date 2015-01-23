@@ -25,15 +25,18 @@
         </div>
       </div>
       <div class='modal-footer'>
+        <div class='text-center mgb-10'>
+          <label class='checkbox-inline'><input type='checkbox' id='agree' checked='checked' /><?php echo $lang->agreement;?></label>
+        </div>
         <?php if(!isset($latestRelease)):?>
-        <p class='text-center'><?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary'");?></p>
+        <p class='text-center'><?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary btn-install'");?></p>
         <?php else:?>
         <?php vprintf($lang->install->newReleased, $latestRelease);?>
         <p>
           <?php 
           echo $lang->install->choice;
           echo html::a($latestRelease->url, $lang->install->seeLatestRelease, "target='_blank'");
-          echo html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, "class='btn btn-primary'");
+          echo html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, "class='btn btn-primary btn-install'");
           ?>
         </p>
         <?php endif;?>
