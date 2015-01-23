@@ -40,6 +40,8 @@ class trade extends control
         $expenseTypes = $this->loadModel('tree')->getPairs(0, 'out');
         $incomeTypes  = $this->loadModel('tree')->getPairs(0, 'in');
 
+        $this->session->set('tradeList', $this->app->getURI(true));
+
         /* Build search form. */
         $this->loadModel('search', 'sys');
         $this->config->trade->search['actionURL'] = $this->createLink('trade', 'browse', 'mode=bysearch');
@@ -163,7 +165,8 @@ class trade extends control
                 $this->action->logHistory($actionID, $changes);
             }
             
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $backURL = $this->session->tradeList == false ? inlink('browse') : $this->session->tradeList;
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $backURL));
         }
         
         $objectType = array();
