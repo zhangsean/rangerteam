@@ -64,7 +64,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('1.6'));
                 $this->addPrivs();
             case '1_7':
-                $this->execSQL($this->getUpgradeFile('1.7'));
+                $this->toLowerTable();
                 $this->updateAppOrder();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
@@ -92,7 +92,6 @@ class upgradeModel extends model
             case '1_4_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.4.beta'));
             case '1_5_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.5.beta'));
             case '1_6'     : $confirmContent .= file_get_contents($this->getUpgradeFile('1.6'));
-            case '1_7'     : $confirmContent .= file_get_contents($this->getUpgradeFile('1.7'));
         }
         return $confirmContent;
     }
@@ -669,6 +668,49 @@ class upgradeModel extends model
         }
 
         return !dao::isError();
+    }
+
+    /**
+     * To lower table.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function toLowerTable()
+    {
+        $results    = $this->dbh->query("show Variables like '%table_names'")->fetchAll();
+        $hasLowered = false;
+        foreach($results as $result)
+        {
+            if(strtolower($result->Variable_name) == 'lower_case_table_names' and $result->Value == 1)
+            {
+                $hasLowered = true;
+                break;
+            }
+        }
+        if($hasLowered) return true;
+
+        $tables2Rename = $this->config->upgrade->lowerTables;
+        if(!isset($tables2Rename)) return false;
+
+        $tablesExists = $this->dbh->query('SHOW TABLES')->fetchAll();
+        foreach($tablesExists as $key => $table) $tablesExists[$key] = current((array)$table);
+        $tablesExists = array_flip($tablesExists);
+
+        foreach($tables2Rename as $oldTable => $newTable)
+        {
+            if(!isset($tablesExists[$oldTable])) continue;
+            
+            $upgradebak = $newTable . '_othertablebak';
+            if(isset($tablesExists[$upgradebak])) $this->dbh->query("DROP TABLE `$upgradebak`");
+            if(isset($tablesExists[$newTable])) $this->dbh->query("RENAME TABLE `$newTable` TO `$upgradebak`");
+
+            $tempTable = $oldTable . '_ranzhitmp';
+            $this->dbh->query("RENAME TABLE `$oldTable` TO `$tempTable`");
+            $this->dbh->query("RENAME TABLE `$tempTable` TO `$newTable`");
+        }
+
+        return true;
     }
 
     /**
