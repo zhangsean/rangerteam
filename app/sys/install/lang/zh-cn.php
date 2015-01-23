@@ -20,6 +20,7 @@ $lang->install->start            = '开始安装';
 $lang->install->keepInstalling   = '继续安装当前版本';
 $lang->install->seeLatestRelease = '看看最新的版本';
 $lang->install->welcome          = "您睿智地选择了$lang->ranzhi!";
+$lang->install->license          = '然之协同使用 Z PUBLIC LICENSE(ZPL) 1.1 授权协议。';
 $lang->install->desc             = <<<EOT
 <blockquote>
   <strong>{$lang->ranzhi}</strong>由<strong><a href='http://www.cnezsoft.com' target='_blank' class='red'>青岛易软天创网络科技有限公司</a>开发</strong>，

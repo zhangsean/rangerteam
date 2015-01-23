@@ -1,6 +1,6 @@
 <?php
 /**
- * The html template file of upgrade license method of upgrade module of RanZhi.
+ * The html template file of step0 method of upgrade module of RanZhi.
  *
  * @copyright   Copyright 2013-2013 青岛易软天创网络科技有限公司 (QingDao Nature Easy Soft Network Technology Co,LTD www.xirangit.com)
  * @license     ZPL (http://zpl.pub/page/zplv11.html)
@@ -14,7 +14,7 @@
 <div class='container'>
   <div class='modal-dialog modal-lg'>
     <div class='modal-header'>
-      <h3><?php echo $lang->upgrade->updateLicense;?></h3>
+      <h3><?php echo $lang->install->license;?></h3>
     </div>
     <div class='modal-body'>
       <?php echo html::textarea('license', $license, "class='form-control mgb-10' rows='12'")?>
@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class='modal-footer'>
-      <?php echo html::a(inlink('upgradelicense', 'agree=true'), $lang->upgrade->next, "class='btn btn-primary btn-install'");?>
+      <?php echo html::a(inlink('step1'), $lang->install->next, "class='btn btn-primary btn-install'");?>
     </div>
   </div>
 </div>

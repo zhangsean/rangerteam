@@ -25,7 +25,7 @@ $lang->upgrade->execute       = 'Execute';
 $lang->upgrade->next          = 'Next';
 $lang->upgrade->redeploy      = 'Please redeploy app directory before upgrade.';
 $lang->upgrade->redeployDesc  = "<h5>For reaseon of code adjustment app directory need to redeploy.</h5><div class='text-important'>operating steps : delete app directory before copy new package.</div>";
-$lang->upgrade->updateLicense = 'The license of RanZhi 2. 0 has changed to ZPL1.1.';
+$lang->upgrade->updateLicense = 'The license of RanZhi 2. 0 has changed to Z PUBLIC LICENSE(ZPL) 1.1.';
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
