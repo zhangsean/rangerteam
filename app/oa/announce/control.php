@@ -3,7 +3,7 @@
  * The control file of announce module of RanZhi.
  *
  * @copyright   Copyright 2013-2014 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     LGPL
+ * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     announce
  * @version     $Id: control.php 8180 2014-04-08 07:22:52Z guanxiying $

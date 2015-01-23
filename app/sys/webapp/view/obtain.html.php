@@ -3,7 +3,7 @@
  * The obtain view file of ranzhi module of RanZhi.
  *
  * @copyright   Copyright 2009-2013 青岛易软天创网络科技有限公司 (QingDao Nature Easy Soft Network Technology Co,LTD www.cnezsoft.com)
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
+ * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Yidong Wang <Yidong@cnezsoft.com>
  * @package     webapp
  * @version     $Id$

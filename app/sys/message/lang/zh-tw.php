@@ -3,7 +3,7 @@
  * The message module zh-tw file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青島易軟天創網絡科技有限公司 (QingDao Nature Easy Soft Network Technology Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     message
  * @version     $Id$
