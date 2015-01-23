@@ -74,7 +74,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->trade->contract;?></th>
-          <td class='contractTD'><?php echo html::select('contract', $contractList, $trade->contract, "class='form-control'");?></td>
+          <td class='contractTD'><?php echo html::select('contract', $tradeContract, $trade->contract, "class='form-control'");?></td>
         </tr>
         <?php endif;?>
         <tr>
