@@ -9,7 +9,6 @@
  * @version     $Id: en.php 824 2010-05-02 15:32:06Z wwccss $
  * @link        http://www.ranzhico.com
  */
-/* Fields. */
 $lang->doc->common         = 'Document';
 $lang->doc->id             = 'ID';
 $lang->doc->product        = 'Product';
@@ -25,16 +24,13 @@ $lang->doc->keywords       = 'Keywords';
 $lang->doc->url            = 'URL';
 $lang->doc->files          = 'File';
 $lang->doc->views          = 'Views';
-$lang->doc->createdBy      = 'Added by';
-$lang->doc->createdDate    = 'Added date';
+$lang->doc->createdBy      = 'Created by';
+$lang->doc->createdDate    = 'Created date';
 $lang->doc->editedBy       = 'Edited by';
 $lang->doc->editedDate     = 'Edited date';
 $lang->doc->basicInfo      = 'Basic Info';
 $lang->doc->deleted        = 'Deleted';
 
-$lang->doc->list           = 'Document list';
-
-/* Actions. */
 $lang->doc->index          = 'Index';
 $lang->doc->create         = 'Create doc';
 $lang->doc->edit           = 'Edit doc';
@@ -48,7 +44,6 @@ $lang->doc->createLib      = 'Create library';
 $lang->doc->editLib        = 'Edit library';
 $lang->doc->deleteLib      = 'Delete library';
 
-/* Browse tabs. */
 $lang->doc->allProduct     = 'All products';
 $lang->doc->allProject     = 'All projects';
 
@@ -62,9 +57,9 @@ $lang->doc->types['text'] = 'Html';
 
 $lang->doc->confirmDelete      = "Are you sure to delete this doc?";
 $lang->doc->confirmDeleteLib   = "Are you sure to delete this doc library?";
-$lang->doc->errorEditSystemDoc = "System doc library needn't edit";
+$lang->doc->errorEditSystemDoc = "System doc library needn't edit.";
 
 $lang->doc->placeholder = new stdclass();
 $lang->doc->placeholder->url = 'url';
 
-$lang->doc->notFound = 'The document does not exists';
+$lang->doc->notFound = 'The document does not exist';

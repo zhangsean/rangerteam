@@ -22,10 +22,10 @@
       <div class='panel-heading'>
         <strong><?php echo $libName;?></strong>
         <?php if(!isset($lang->doc->systemLibs[$libID])):?>
-        <div class="panel-actions pull-right">
-          <div class="dropdown">
-            <button class="btn btn-mini" data-toggle="dropdown"><span class="caret"></span></button>
-            <ul class="dropdown-menu pull-right">
+        <div class='panel-actions pull-right'>
+          <div class='dropdown'>
+            <button class='btn btn-mini' data-toggle='dropdown'><span class='caret'></span></button>
+            <ul class='dropdown-menu pull-right'>
               <?php
               echo '<li>' . html::a(inlink('editLib',   "libID=$libID"), "<i class='icon-edit'> {$lang->edit}</i>", "data-toggle='modal'") . '</li>';
               echo '<li>' . html::a(inlink('deleteLib', "libID=$libID"), "<i class='icon-remove'> {$lang->delete}</i>", "class='deleter'") . '</li>';
@@ -46,7 +46,7 @@
   <div class='col-sm-9'>
     <div class='panel'>
       <div class='panel-heading'>
-        <strong><i class="icon-list-ul"></i> <?php echo $lang->doc->list;?></strong>
+        <strong><i class='icon-list-ul'></i> <?php echo $lang->doc->browse;?></strong>
         <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create', "libID=$libID&moduleID=$moduleID&productID=$productID&projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?></div>
       </div>
       <table class='table table-hover table-striped tablesorter table-fixed' id='docList'>
@@ -56,8 +56,8 @@
             <th class='w-100px'>  <?php commonModel::printOrderLink('id',        $orderBy, $vars, $lang->doc->id);?></th>
             <th class='text-left'><?php commonModel::printOrderLink('title',     $orderBy, $vars, $lang->doc->title);?></th>
             <th class='w-100px'>  <?php commonModel::printOrderLink('type',      $orderBy, $vars, $lang->doc->type);?></th>
-            <th class='w-100px'>  <?php commonModel::printOrderLink('createdBy',   $orderBy, $vars, $lang->doc->createdBy);?></th>
-            <th class='w-100px visible-lg'>  <?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->doc->createdDate);?></th>
+            <th class='w-100px'>  <?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->doc->createdBy);?></th>
+            <th class='w-100px visible-lg'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->doc->createdDate);?></th>
             <th class='w-90px {sorter:false}'><?php echo $lang->actions;?></th>
           </tr>
         </thead>
