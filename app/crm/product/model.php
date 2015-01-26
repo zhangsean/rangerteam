@@ -33,7 +33,7 @@ class productModel extends model
      */
     public function getList($mode, $orderBy = 'id_desc', $pager = null)
     {
-        if(strpos($orderBy, 'id') === false) $orderBy .= ', id';
+        if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
         return $this->dao->select('*')->from(TABLE_PRODUCT)
             ->where('deleted')->eq(0)

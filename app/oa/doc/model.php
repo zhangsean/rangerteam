@@ -139,7 +139,7 @@ class docModel extends model
         $allKeysOfProjects = $keysOfProjects;
         $allKeysOfProjects[] = 0;
 
-        if(strpos($orderBy, 'id') === false) $orderBy .= ', id';
+        if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
         return $this->dao->select('*')->from(TABLE_DOC)
             ->where('deleted')->eq(0)

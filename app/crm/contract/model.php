@@ -51,7 +51,7 @@ class contractModel extends model
         if($this->session->contractQuery == false) $this->session->set('contractQuery', ' 1 = 1');
         $contractQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->contractQuery);
 
-        if(strpos($orderBy, 'id') === false) $orderBy .= ', id';
+        if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
         return $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('deleted')->eq(0)
