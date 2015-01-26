@@ -117,6 +117,6 @@
     </form>
   </div>
 </div>
-<table id='order' class='hide'><tr><td></td></tr></table>
+<table class='hide'><tr class='orderInfo'><td></td></tr></table>
 <?php js::set('currencyList', array('' => '') + $currencyList);?>
 <?php include '../../common/view/footer.html.php';?>

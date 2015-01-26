@@ -14,12 +14,12 @@ function getOrder(customerID)
 
     $('.contactTD select').load(createLink('contact', 'getOptionMenu', 'customerID=' + customerID));
 
-    $('#order tr td').load(createLink('contract', 'getOrder', 'customerID=' + customerID + '&status=normal'));
+    $('.orderInfo td').load(createLink('contract', 'getOrder', 'customerID=' + customerID + '&status=normal'));
 
     $('#orderTD').load(createLink('contract', 'getOrder', 'customerID=' + customerID + '&status=normal'), function()
     {
         $('#orderTR').removeClass('hide');
-        if($('.select-order').length > 1) $('.select-order').parents('tr').not('#orderTR, #tmpData').remove();
+        if($('.select-order').length > 1) $('.select-order').parents('tr').not('#orderTR, #tmpData, .orderInfo').remove();
     })
 }
 
@@ -40,7 +40,7 @@ $(document).ready(function()
     {
         if($(this).parents('tr').find('option:selected').val() == '') return false;
 
-        $('#tmpData td').html($('#order td').html());
+        $('#tmpData td').html($('.orderInfo td').html());
 
         $('select.select-order').each(function()
         {
