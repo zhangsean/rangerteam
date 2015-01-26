@@ -113,6 +113,7 @@ class contract extends control
         $this->view->customers    = $this->loadModel('customer')->getPairs('client');
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->display();
     }
 
@@ -165,6 +166,7 @@ class contract extends control
         $this->view->contacts       = $this->loadModel('contact')->getPairs($contract->customer);
         $this->view->users          = $this->loadModel('user')->getPairs();
         $this->view->currencyList   = $this->loadModel('common', 'sys')->getCurrencyList();
+        $this->view->currencySign   = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->display();
     }
 

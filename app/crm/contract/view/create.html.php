@@ -43,7 +43,7 @@
               <span class='col-sm-4'>
                 <div class='input-group'>
                   <div class='input-group-addon order-currency'>
-                    <?php echo zget($currencyList, $currentOrder->currency, '');?> 
+                    <?php echo zget($currencySign, $currentOrder->currency, '');?> 
                   </div>
                   <?php echo html::input('real[]', $currentOrder->plan, "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?>
                 </div>
@@ -118,5 +118,5 @@
   </div>
 </div>
 <table class='hide'><tr class='orderInfo'><td></td></tr></table>
-<?php js::set('currencyList', array('' => '') + $currencyList);?>
+<?php js::set('currencySign', array('' => '') + $currencySign);?>
 <?php include '../../common/view/footer.html.php';?>

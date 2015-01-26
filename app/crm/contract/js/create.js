@@ -29,6 +29,7 @@ $(document).ready(function()
     {
         $('.contactTD select').load(createLink('contact', 'getOptionMenu', 'customerID=' + v.customer));
         $('#orderTD').load(createLink('contract', 'getOrder', 'customerID=' + v.customer));
+        $('.orderInfo td').load(createLink('contract', 'getOrder', 'customerID=' + v.customer + '&status=normal'));
     }
 
     $(document).on('change', 'select.select-order:first', function()
@@ -42,7 +43,7 @@ $(document).ready(function()
 
         $('#tmpData td').html($('.orderInfo td').html());
 
-        $('select.select-order').each(function()
+        $('select.select-order').not('#tmpData select, .orderInfo select').each(function()
         {
             selectedValue = $(this).find('option:selected').val();
 
@@ -50,7 +51,14 @@ $(document).ready(function()
             {
                 $('#tmpData').find("option[value='" + selectedValue + "']").remove();
             }
+            else
+            {
+                $('#tmpData td').empty();
+                return false;
+            }
         });
+
+        if($('#tmpData td').html() == '') return false;
 
         $(this).parents('tr').after("<tr><th></th><td>" + $('#tmpData td').html() + "</td></tr>");
     });

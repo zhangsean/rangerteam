@@ -57,7 +57,7 @@
                 <span class='col-sm-4'>
                   <div class='input-group'>
                     <div class='input-group-addon order-currency'>
-                      <?php echo zget($currencyList, $currentOrder->currency, '');?> 
+                      <?php echo zget($currencySign, $currentOrder->currency, '');?> 
                     </div>
                     <?php echo html::input('real[]', ($currentOrder->real and $currentOrder->real != '0.00') ? $currentOrder->real : $currentOrder->plan, "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?>
                   </div>
@@ -211,7 +211,7 @@
         </span>
         <span class='col-sm-4'>
           <div class='input-group'>
-            <div class='input-group-addon order-currency'></div>
+            <div class='input-group-addon order-currency'><?php echo zget($currencySign, $contract->currency, $contract->currency)?></div>
             <?php echo html::input('real[]', '', "class='order-real form-control' placeholder='{$this->lang->contract->placeholder->real}'");?>
           </div>
         </span>
@@ -220,5 +220,5 @@
     </td>
   </tr>
 </table>
-<?php js::set('currencyList', array('' => '') + $currencyList);?>
+<?php js::set('currencySign', array('' => '') + $currencySign);?>
 <?php include '../../common/view/footer.html.php';?>

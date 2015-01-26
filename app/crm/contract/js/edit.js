@@ -8,7 +8,7 @@ $(document).ready(function()
 
         $('#tmpData').html($('#orderGroup tbody').html());
 
-        $('select.select-order').each(function()
+        $('select.select-order').not('#orderGroup select, #tmpData select').each(function()
         {
             selectedValue = $(this).find('option:selected').val();
 
@@ -16,7 +16,14 @@ $(document).ready(function()
             {
                 $('#tmpData').find("option[value='" + selectedValue + "']").remove();
             }
+            else
+            {
+                $('#tmpData').empty();
+                return false;
+            }
         });
+
+        if($('#tmpData').html() == '') return false;
 
         $(this).parents('tr').after( $('#tmpData').html());
     });
