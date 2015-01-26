@@ -11,21 +11,21 @@
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
 <form method='post' action='<?php echo inlink('confirm');?>'>
-<div class='container'>
-  <div class='modal-dialog modal-lg'>
-    <div class='modal-header'>
-      <h3><?php echo $lang->upgrade->updateLicense;?></h3>
-    </div>
-    <div class='modal-body'>
-      <?php echo html::textarea('license', $license, "class='form-control mgb-10' rows='12'")?>
-      <div class='text-left mgb-10'>
-        <label class='checkbox-inline'><input type='checkbox' id='agree' checked='checked' /><?php echo $lang->agreement;?></label>
+  <div class='container'>
+    <div class='modal-dialog modal-lg'>
+      <div class='modal-header'>
+        <h3><?php echo $lang->upgrade->updateLicense;?></h3>
+      </div>
+      <div class='modal-body'>
+        <?php echo html::textarea('license', $license, "class='form-control mgb-10' rows='12'")?>
+        <div class='text-left mgb-10'>
+          <label class='checkbox-inline'><input type='checkbox' id='agree' checked='checked' /><?php echo $lang->agreement;?></label>
+        </div>
+      </div>
+      <div class='modal-footer'>
+        <?php echo html::a(inlink('upgradelicense', 'agree=true'), $lang->upgrade->next, "class='btn btn-primary btn-install'");?>
       </div>
     </div>
-    <div class='modal-footer'>
-      <?php echo html::a(inlink('upgradelicense', 'agree=true'), $lang->upgrade->next, "class='btn btn-primary btn-install'");?>
-    </div>
   </div>
-</div>
 </form>
 <?php include '../../install/view/footer.html.php';?>

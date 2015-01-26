@@ -19,8 +19,8 @@ class company extends control
      */
     public function index()
     {
-        $this->view->title      = isset($this->config->company->name) ? $this->config->company->name : '';
-        $this->view->company    = $this->config->company;
+        $this->view->title   = isset($this->config->company->name) ? $this->config->company->name : '';
+        $this->view->company = $this->config->company;
         $this->display();
     }
 

@@ -84,7 +84,7 @@ $lang->block->default['cash']['1']['grid']  = 4;
 
 $lang->block->default['cash']['1']['params'] = array();
 
-$lang->block->default['cash']['2']['title'] = '帐目';
+$lang->block->default['cash']['2']['title'] = '账目';
 $lang->block->default['cash']['2']['block'] = 'trade';
 $lang->block->default['cash']['2']['grid']  = 4;
 

@@ -112,5 +112,4 @@ function updateID()
     i = 1;
     $('.fileID').each(function(){$(this).html(i ++)});
 }
-
 </script>

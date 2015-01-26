@@ -17,7 +17,7 @@ $lang->block->orderBy   = '排序';
 
 $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->depositor = '付款帐号';
-$lang->block->availableBlocks->trade     = '帐目';
+$lang->block->availableBlocks->trade     = '账目';
 $lang->block->availableBlocks->provider  = '供应商';
 
 $this->lang->block->orderByList->trade['id_asc']  = 'ID 递增';
