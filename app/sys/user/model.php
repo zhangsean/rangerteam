@@ -199,15 +199,6 @@ class userModel extends model
             ->check('email', 'email')
             ->check('email', 'unique')
             ->exec();
-
-        /* Add user to normal(3) group if exist. */
-        if($this->loadModel('group')->getByID(3))
-        {
-            $data          = new stdclass();
-            $data->account = $this->post->account;
-            $data->group   = 3;
-            $this->dao->insert(TABLE_USERGROUP)->data($data)->exec();
-        }
     }
 
     /**
