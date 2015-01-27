@@ -2,7 +2,7 @@
 /**
  * The zh-tw file of install module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2015 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     install 
@@ -20,6 +20,7 @@ $lang->install->start            = '開始安裝';
 $lang->install->keepInstalling   = '繼續安裝當前版本';
 $lang->install->seeLatestRelease = '看看最新的版本';
 $lang->install->welcome          = "您睿智地選擇了$lang->ranzhi!";
+$lang->install->license          = '然之協同使用 Z PUBLIC LICENSE(ZPL) 1.1 授權協議。';
 $lang->install->desc             = <<<EOT
 <blockquote>
   <strong>{$lang->ranzhi}</strong>由<strong><a href='http://www.cnezsoft.com' target='_blank' class='red'>青島易軟天創網絡科技有限公司</a>開發</strong>，

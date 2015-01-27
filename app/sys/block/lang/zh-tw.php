@@ -2,7 +2,7 @@
 /**
  * The zh-tw file of block module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2015 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     block 
@@ -84,7 +84,7 @@ $lang->block->default['cash']['1']['grid']  = 4;
 
 $lang->block->default['cash']['1']['params'] = array();
 
-$lang->block->default['cash']['2']['title'] = '帳目';
+$lang->block->default['cash']['2']['title'] = '賬目';
 $lang->block->default['cash']['2']['block'] = 'trade';
 $lang->block->default['cash']['2']['grid']  = 4;
 

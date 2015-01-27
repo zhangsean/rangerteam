@@ -2,7 +2,7 @@
 /**
  * The zh-tw file of block module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2015 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     block 
@@ -17,7 +17,7 @@ $lang->block->orderBy   = '排序';
 
 $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->depositor = '付款帳號';
-$lang->block->availableBlocks->trade     = '帳目';
+$lang->block->availableBlocks->trade     = '賬目';
 $lang->block->availableBlocks->provider  = '供應商';
 
 $this->lang->block->orderByList->trade['id_asc']  = 'ID 遞增';

@@ -2,7 +2,7 @@
 /**
  * The upgrade module zh-tw file of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2015 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
@@ -25,7 +25,7 @@ $lang->upgrade->execute       = '確認執行';
 $lang->upgrade->next          = '下一步';
 $lang->upgrade->redeploy      = '請重新部署app檔案夾後繼續';
 $lang->upgrade->redeployDesc  = "<h5>因為代碼結構調整,需要重新部署app目錄。</h5><div class='text-important'>操作方法:刪除舊的app目錄，再從新的安裝包裡面複製app檔案夾。</div>";
-$lang->upgrade->updateLicense = '然之協同 2. 0 已更換授權協議至 ZPL1.1。';
+$lang->upgrade->updateLicense = '然之協同 2. 0 已更換授權協議至 Z PUBLIC LICENSE(ZPL) 1.1。';
 
 $lang->upgrade->backupData = <<<EOT
 <pre>

@@ -2,14 +2,13 @@
 /**
  * The doc module zh-tw file of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2015 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc
  * @version     $Id: zh-tw.php 824 2010-05-02 15:32:06Z wwccss $
  * @link        http://www.ranzhico.com
  */
-/* 欄位列表。*/
 $lang->doc->common         = '文檔視圖';
 $lang->doc->id             = '文檔編號';
 $lang->doc->product        = '所屬產品';
@@ -32,9 +31,6 @@ $lang->doc->editedDate     = '編輯時間';
 $lang->doc->basicInfo      = '基本信息';
 $lang->doc->deleted        = '已刪除';
 
-$lang->doc->list           = '文檔列表';
-
-/* 方法列表。*/
 $lang->doc->index          = '首頁';
 $lang->doc->create         = '創建文檔';
 $lang->doc->edit           = '編輯文檔';
@@ -48,7 +44,6 @@ $lang->doc->createLib      = '創建文檔庫';
 $lang->doc->editLib        = '編輯文檔庫';
 $lang->doc->deleteLib      = '刪除文檔庫';
 
-/* 查詢條件列表 */
 $lang->doc->allProduct     = '所有產品';
 $lang->doc->allProject     = '所有項目';
 
@@ -61,7 +56,7 @@ $lang->doc->types['url']  = '連結';
 $lang->doc->types['text'] = '網頁';
 
 $lang->doc->confirmDelete      = "您確定刪除該文檔嗎？";
-$lang->doc->confirmDeleteLib   = " 您確定刪除該文檔庫嗎？";
+$lang->doc->confirmDeleteLib   = "您確定刪除該文檔庫嗎？";
 $lang->doc->errorEditSystemDoc = "系統文檔庫無需修改。";
 
 $lang->doc->placeholder = new stdclass();

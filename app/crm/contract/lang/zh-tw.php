@@ -2,7 +2,7 @@
 /**
  * The zh-tw file of crm contract module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2015 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     contract 
@@ -18,6 +18,8 @@ $lang->contract->customer      = '所屬客戶';
 $lang->contract->name          = '名稱';
 $lang->contract->code          = '編號';
 $lang->contract->amount        = '金額';
+$lang->contract->all           = '合同總額';
+$lang->contract->thisAmount    = '本次回款';
 $lang->contract->items         = '主要條款';
 $lang->contract->begin         = '開始日期';
 $lang->contract->end           = '結束日期';
@@ -86,5 +88,5 @@ $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = '成交金額';
 
 $lang->contract->totalAmount  = '本頁合同總金額：%s，已回款：%s；';
-$lang->contract->returnInfo   = "<p>%s由%s回款%s。</p>";
+$lang->contract->returnInfo   = "<p>%s, 由 <strong>%s</strong> 回款%s。</p>";
 $lang->contract->deliveryInfo = "<p>%s由%s交付。</p>";

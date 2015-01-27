@@ -98,7 +98,6 @@ $lang->block->default['cash']['3']['grid']  = 4;
 $lang->block->default['cash']['3']['params']['num']     = 15;
 $lang->block->default['cash']['3']['params']['orderBy'] = 'id_desc';
 
-
 $lang->block->default['team']['1']['title'] = 'Latest Blog';
 $lang->block->default['team']['1']['block'] = 'blog';
 $lang->block->default['team']['1']['grid']  = 4;
