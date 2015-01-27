@@ -24,7 +24,7 @@ include '../../common/view/chosen.html.php';
 #querybox form{padding: 10px; padding-right: 40px;}
 #querybox .form-control {padding: 2px; padding: 6px 2px\0;}
 @-moz-document url-prefix() {#querybox .form-control {padding: 6px 2px;}}
-#querybox .table {border: none}
+#querybox .table {border: none; table-layout: fixed;}
 #querybox .table-form td {border: none}
 #querybox .btn {padding: 5px 8px;}
 #querybox .table-form td td {padding: 2px;}
