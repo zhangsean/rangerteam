@@ -176,6 +176,7 @@ function resetForm()
     for(i = 1; i <= groupItems * 2; i ++)
     {
         $('#value' + i).val('');
+        $('#value' + i).trigger("chosen:updated");
     }
 }
 

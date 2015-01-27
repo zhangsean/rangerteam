@@ -43,8 +43,8 @@ class customer extends control
         /* Build search form. */
         $this->loadModel('search', 'sys');
         $this->config->customer->search['actionURL'] = $this->createLink('customer', 'browse', 'mode=bysearch');
-        $this->config->customer->search['params']['industry']['values'] = $this->loadModel('tree')->getOptionMenu('industry');
-        $this->config->customer->search['params']['area']['values']     = $this->loadModel('tree')->getOptionMenu('area');
+        $this->config->customer->search['params']['industry']['values'] = array('' => '') + $this->loadModel('tree')->getOptionMenu('industry');
+        $this->config->customer->search['params']['area']['values']     = array('' => '') + $this->loadModel('tree')->getOptionMenu('area');
         $this->search->setSearchParams($this->config->customer->search);
         
         $this->view->title     = $this->lang->customer->list;

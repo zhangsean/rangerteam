@@ -47,6 +47,6 @@ $config->customer->search['params']['type']          = array('operator' => '=', 
 $config->customer->search['params']['createdBy']     = array('operator' => '=',  'control' => 'select', 'values' => 'users');
 $config->customer->search['params']['createdDate']   = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->customer->search['params']['assignedTo']    = array('operator' => '=',  'control' => 'select', 'values' => 'users');
-$config->customer->search['params']['industry']      = array('operator' => 'include', 'control' => 'select', 'values' => 'set in control');
-$config->customer->search['params']['area']          = array('operator' => 'include', 'control' => 'select', 'values' => 'set in control');
-$config->customer->search['params']['id']            = array('operator' => '=',  'control' => 'input',  'values' => '');
+$config->customer->search['params']['industry']      = array('operator' => 'belong', 'control' => 'select', 'values' => 'set in control');
+$config->customer->search['params']['area']          = array('operator' => 'belong', 'control' => 'select', 'values' => 'set in control');
+$config->customer->search['params']['id']            = array('operator' => '=', 'control' => 'input',  'values' => '');

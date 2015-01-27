@@ -40,7 +40,7 @@ $config->doc->search['params']['title']         = array('operator' => 'include',
 $config->doc->search['params']['id']            = array('operator' => '=',       'control' => 'input',  'values' => '');
 $config->doc->search['params']['keywords']      = array('operator' => 'include', 'control' => 'input',  'values' => '');
 $config->doc->search['params']['type']          = array('operator' => '=',       'control' => 'select', 'values' => $lang->doc->types);
-$config->doc->search['params']['module']        = array('operator' => 'include', 'control' => 'select', 'values' => 'set in control');
+$config->doc->search['params']['module']        = array('operator' => 'belong',  'control' => 'select', 'values' => 'set in control');
 $config->doc->search['params']['lib']           = array('operator' => '=',       'control' => 'select', 'values' => 'set in control');
 $config->doc->search['params']['digest']        = array('operator' => 'include', 'control' => 'input',  'values' => '');
 $config->doc->search['params']['content']       = array('operator' => 'include', 'control' => 'input',  'values' => '');

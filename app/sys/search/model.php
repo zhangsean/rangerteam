@@ -97,8 +97,9 @@ class searchModel extends model
             }
             elseif($operator == 'belong')
             {
-                if($this->post->$fieldName == 'module')
+                if($this->post->$fieldName == 'module' or $this->post->$fieldName == 'area' or $this->post->$fieldName == 'industry')
                 {
+                    if($value == 0) $where .= ' RLIKE ' . $this->dbh->quote("[0-9]*");
                     $allModules = $this->loadModel('tree')->getAllChildId($value);
                     if($allModules) $where .= helper::dbIN($allModules);
                 }

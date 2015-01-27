@@ -15,7 +15,7 @@ js::import($jsRoot . 'jquery/chosen/min.js');
 ?>
 
 <script>
-window.chosenDefaultOptions = {no_results_text: '<?php echo $lang->noResultsMatch;?>', disable_search_threshold: 1, search_contains: true, width: '100%'};
+window.chosenDefaultOptions = {no_results_text: '<?php echo $lang->noResultsMatch;?>', disable_search_threshold: 1, search_contains: true, width: '100%', allow_single_deselect: true};
 $(document).ready(function()
 {
     $(".chosen").chosen(chosenDefaultOptions);

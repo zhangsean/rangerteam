@@ -139,6 +139,23 @@ class treeModel extends model
     }
 
     /**
+     * Get id list of a module's childs.
+     * 
+     * @param  int     $moduleID 
+     * @access public
+     * @return array
+     */
+    public function getAllChildId($moduleID)
+    {
+        if($moduleID == 0) return array();
+
+        $module = $this->getById((int)$moduleID);
+        if(empty($module)) return array();
+
+        return $this->dao->select('id')->from(TABLE_CATEGORY)->where('path')->like($module->path . '%')->fetchPairs();
+    }
+
+    /**
      * Build the sql to execute.
      * 
      * @param string $type              the tree type, for example, article|forum
