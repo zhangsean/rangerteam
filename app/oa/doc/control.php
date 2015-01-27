@@ -108,7 +108,7 @@ class doc extends control
         $this->config->doc->search['actionURL'] = $this->createLink('doc', 'browse', "libID=$libID&moduleID=$moduleID&procuctID=$productID&projectID=$projectID&browseType=bySearch");
         $this->config->doc->search['params']['lib']['values']    = array('' => '') + $this->libs;
         $this->config->doc->search['params']['type']['values']   = array('' => '') + $this->config->doc->search['params']['type']['values'];
-        $this->config->doc->search['params']['module']['values'] = array('' => '') + $this->tree->getOptionMenu('customdoc', $startModuleID = 0, false, $libID);;
+        $this->config->doc->search['params']['module']['values'] = array('' => '') + $this->tree->getOptionMenu('customdoc', $startModuleID = 0, false, $libID);
         $this->search->setSearchParams($this->config->doc->search);
        
         $this->view->title         = $this->lang->doc->common . $this->lang->colon . $this->libs[$libID];
