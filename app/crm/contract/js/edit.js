@@ -2,30 +2,29 @@ $(document).ready(function()
 {
     $('.orderTH').not(':first').empty();
 
-    $(document).on('click', '.plus', function()
+    $(document).on('focus', '.select-order', function()
     {
-        if($(this).parents('tr').find('option:selected').val() == '') return false;
-
         $('#tmpData').html($('#orderGroup tbody').html());
 
-        $('select.select-order').not('#orderGroup select, #tmpData select').each(function()
+        indexValue = $(this).find('option:selected').val();
+
+        $('.select-order').not('#tmpData select, .orderGroup select').each(function()
         {
             selectedValue = $(this).find('option:selected').val();
 
-            if(selectedValue)
+            if(selectedValue && selectedValue != indexValue)
             {
                 $('#tmpData').find("option[value='" + selectedValue + "']").remove();
             }
-            else
-            {
-                $('#tmpData').empty();
-                return false;
-            }
         });
 
-        if($('#tmpData').html() == '') return false;
+        $(this).html($('#tmpData select').html());
+    })
 
-        $(this).parents('tr').after( $('#tmpData').html());
+
+    $(document).on('click', '.plus', function()
+    {
+        $(this).parents('tr').after( $('#orderGroup tbody').html());
     });
   
     $(document).on('click', '.minus', function()

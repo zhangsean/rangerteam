@@ -37,30 +37,28 @@ $(document).ready(function()
         $('#name').val($(this).find('option:selected').text());
     });
 
-    $(document).on('click', '.plus', function()
+    $(document).on('focus', '.select-order', function()
     {
-        if($(this).parents('tr').find('option:selected').val() == '') return false;
-
         $('#tmpData td').html($('.orderInfo td').html());
+
+        indexValue = $(this).find('option:selected').val();
 
         $('select.select-order').not('#tmpData select, .orderInfo select').each(function()
         {
             selectedValue = $(this).find('option:selected').val();
 
-            if(selectedValue)
+            if(selectedValue && selectedValue != indexValue)
             {
                 $('#tmpData').find("option[value='" + selectedValue + "']").remove();
             }
-            else
-            {
-                $('#tmpData td').empty();
-                return false;
-            }
         });
 
-        if($('#tmpData td').html() == '') return false;
+        $(this).html($('#tmpData select').html());
+    })
 
-        $(this).parents('tr').after("<tr><th></th><td>" + $('#tmpData td').html() + "</td></tr>");
+    $(document).on('click', '.plus', function()
+    {
+        $(this).parents('tr').after("<tr><th></th><td>" + $('#orderTD').html() + "</td></tr>");
     });
   
     $(document).on('click', '.minus', function()
