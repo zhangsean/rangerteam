@@ -18,6 +18,8 @@ $lang->contract->customer      = 'Customer';
 $lang->contract->name          = 'Name';
 $lang->contract->code          = 'Code';
 $lang->contract->amount        = 'Amount';
+$lang->contract->all           = 'Total amount';
+$lang->contract->thisAmount    = 'This amount';
 $lang->contract->items         = 'Main items';
 $lang->contract->begin         = 'Start Date';
 $lang->contract->end           = 'End Date';
@@ -86,5 +88,5 @@ $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = 'Turnover';
 
 $lang->contract->totalAmount  = 'The total amount:%s,returned amount:%s in this page;';
-$lang->contract->returnInfo   = "<p>%s, received payments by %s, %s.</p>";
+$lang->contract->returnInfo   = "<p>%s, received payments by <strong>%s</strong>, %s.</p>";
 $lang->contract->deliveryInfo = "<p>%s, delivered by %s.</p>";

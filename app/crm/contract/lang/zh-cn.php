@@ -18,6 +18,8 @@ $lang->contract->customer      = '所属客户';
 $lang->contract->name          = '名称';
 $lang->contract->code          = '编号';
 $lang->contract->amount        = '金额';
+$lang->contract->all           = '合同总额';
+$lang->contract->thisAmount    = '本次回款';
 $lang->contract->items         = '主要条款';
 $lang->contract->begin         = '开始日期';
 $lang->contract->end           = '结束日期';
@@ -86,5 +88,5 @@ $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = '成交金额';
 
 $lang->contract->totalAmount  = '本页合同总金额：%s，已回款：%s；';
-$lang->contract->returnInfo   = "<p>%s由%s回款%s。</p>";
+$lang->contract->returnInfo   = "<p>%s, 由 <strong>%s</strong> 回款%s。</p>";
 $lang->contract->deliveryInfo = "<p>%s由%s交付。</p>";

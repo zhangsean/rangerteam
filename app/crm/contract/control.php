@@ -238,7 +238,7 @@ class contract extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
-        $this->view->title         = $contract->name . $this->lang->minus . zget($currencySign, $contract->currency) . $contract->amount;
+        $this->view->title         = $contract->name;
         $this->view->contract      = $contract;
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
