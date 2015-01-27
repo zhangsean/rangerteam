@@ -45,6 +45,7 @@ $config->rights->member['contract']['getorder']           = 'getorder';
 $config->rights->member['contract']['getoptionmenu']      = 'getoptionmenu';
 $config->rights->member['customer']['getoptionmenu']      = 'getoptionmenu';
 $config->rights->member['contact']['getoptionmenu']       = 'getoptionmenu';
+$config->rights->member['contact']['block']               = 'block';
 $config->rights->member['order']['sendmail']              = 'sendmail';
 $config->rights->member['thread']['locate']               = 'locate';
 $config->rights->member['project']['ajaxgetdropmenu']     = 'ajaxgetdropmenu';

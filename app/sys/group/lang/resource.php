@@ -148,7 +148,6 @@ $lang->resource->contact->browse        = 'browse';
 $lang->resource->contact->create        = 'create';
 $lang->resource->contact->edit          = 'edit';
 $lang->resource->contact->view          = 'view';
-$lang->resource->contact->block         = 'block';
 $lang->resource->contact->delete        = 'delete';
 $lang->resource->contact->vcard         = 'vcard';
 
@@ -156,7 +155,6 @@ $lang->contact->methodOrder[10] = 'browse';
 $lang->contact->methodOrder[15] = 'create';
 $lang->contact->methodOrder[20] = 'edit';
 $lang->contact->methodOrder[25] = 'view';
-$lang->contact->methodOrder[30] = 'block';
 $lang->contact->methodOrder[35] = 'delete';
 $lang->contact->methodOrder[40] = 'vcard';
 
