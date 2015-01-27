@@ -12,25 +12,33 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <form class='form-inline' id='ajaxForm' method='post'>
-  <div class='panel'>
-    <div class='panel-heading'>
-      <strong><?php echo $lang->group->priv?></strong>
-    </div>
-    <div class='panel-body'>
-      <?php if($type == 'byGroup'):?>
-        <div class='col-md-6 app-panel'>
+  <?php if($type == 'byGroup'):?>
+  <div class='row'>
+    <div class='col-md-6'>
+      <div class='panel panel-app'>
+        <div class='panel-heading'>
+          <strong><?php echo $lang->group->noPriv?></strong>
+        </div>
+        <div class='panel-body'>
           <?php foreach($rights as $code => $right):?>
           <?php if($right['right'] != 1):?>
           <div class='group-item'>
             <label>
               <?php echo html::image($right['icon'], "class='app-icon'");?>
-              <?php echo html::checkbox('apps', array($code => $right['name']), $right['right'] == '1' ? $code : '');?>
+              <?php echo html::checkbox('apps', array($code => $right['name']), ($right['right'] == '1' ? $code : '') . "onchange='submitForm()'");?>
             </label>
           </div>
           <?php endif?>
           <?php endforeach?>
         </div>
-        <div class='col-md-6 app-panel'>
+      </div>
+    </div>
+    <div class='col-md-6'>
+      <div class='panel panel-app'>
+        <div class='panel-heading'>
+          <strong><?php echo $lang->group->havePriv?></strong>
+        </div>
+        <div class='panel-body'>
           <?php foreach($rights as $code => $right):?>
           <?php if($right['right'] == 1):?>
           <div class='group-item'>
@@ -42,13 +50,21 @@
           <?php endif?>
           <?php endforeach?>
         </div>
-      <?php endif?>
-      <?php if($type == 'byApp'):?>
-          <?php foreach($rights as $code => $right):?>
-          <div class='group-item'><?php echo html::checkbox('groups', array($code => $right['name']), $right['right'] == '1' ? $code : '');?></div>
-          <?php endforeach?>
-      <?php endif?>
+      </div>
     </div>
+  </div>
+  <?php endif?>
+  <div class='panel'>
+    <?php if($type == 'byApp'):?>
+    <div class='panel-heading'>
+      <strong><?php echo $lang->group->priv?></strong>
+    </div>
+    <div class='panel-body'>
+      <?php foreach($rights as $code => $right):?>
+      <div class='group-item'><?php echo html::checkbox('groups', array($code => $right['name']), $right['right'] == '1' ? $code : '');?></div>
+      <?php endforeach?>
+    </div>
+    <?php endif?>
     <div class='panel-footer text-center'>
       <?php 
       echo html::submitButton();

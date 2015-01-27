@@ -1,2 +1,3 @@
 .group-item {display:block; width:140px; float:left; text-align:center;}
 .app-icon {width:140px; height:60px; padding:0 40px 0 40px;}
+.panel-app .panel-body {height:300px; overflow: scroll}

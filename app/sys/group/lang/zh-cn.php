@@ -40,6 +40,8 @@ $lang->group->outside  = '组外用户';
 $lang->group->other    = '其他模块';
 $lang->group->all      = '所有权限';
 $lang->group->extent   = '权限范围';
+$lang->group->havePriv = '已授权';
+$lang->group->noPriv   = '未授权';
 
 $lang->group->manageAll   = '可管理他人信息';
 

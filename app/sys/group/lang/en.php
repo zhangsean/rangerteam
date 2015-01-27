@@ -40,6 +40,8 @@ $lang->group->outside  = 'Other users';
 $lang->group->other    = 'Others';
 $lang->group->all      = 'All';
 $lang->group->extent   = 'extent';
+$lang->group->havePriv = 'Have Privilege';
+$lang->group->noPriv   = 'No Privilege';
 
 $lang->group->manageAll = 'Manage information of others';
 
