@@ -46,7 +46,7 @@ class install extends control
     public function step0()
     {
         $this->view->title   = $this->lang->install->welcome;
-        $this->view->license = file_get_contents($this->app->getBasePath() . 'LICENSE');
+        $this->view->license = file_get_contents($this->app->getBasePath() . 'doc/LICENSE');
         $this->display();
     }
 

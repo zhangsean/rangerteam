@@ -56,7 +56,7 @@ class upgrade extends control
     {
         if($this->get->agree == true) $this->locate(inlink('backup'));
 
-        $this->view->license = file_get_contents($this->app->getBasePath() . 'LICENSE');
+        $this->view->license = file_get_contents($this->app->getBasePath() . 'doc/LICENSE');
         $this->display();
     }
 
