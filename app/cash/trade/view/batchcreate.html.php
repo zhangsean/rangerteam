@@ -42,7 +42,7 @@
           </td>
           <td>
             <div class='input-group out'>
-              <?php echo html::select("trader[$i]", $traderList, '', "class='form-control' id='trader{$i}'");?>
+              <?php echo html::select("trader[$i]", $traderList, '', "class='form-control chosen' id='trader{$i}'");?>
               <?php  echo html::input("traderName[$i]", '', "class='form-control' id='traderName{$i}' style='display:none'");?>
               <span class='input-group-addon'>
                 <label class="checkbox">

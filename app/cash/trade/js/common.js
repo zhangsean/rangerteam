@@ -13,11 +13,12 @@ $(document).ready(function()
         if($(this).prop('checked')) 
         {
             $(this).parents('.input-group').find('select').hide();
+            $(this).parents('.input-group').find('[id*=trader][id*=_chosen]').hide();
             $(this).parents('.input-group').find('input[type=text][id*=traderName]').show().focus();
         }
         else
         {
-            $(this).parents('.input-group').find('select').show();
+            $(this).parents('.input-group').find('[id*=trader][id*=_chosen]').show();
             $(this).parents('.input-group').find('input[type=text][id*=traderName]').hide();
         }
     })
