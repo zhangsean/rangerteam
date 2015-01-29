@@ -58,14 +58,6 @@ class router
     private $appRoot;
 
     /**
-     * The root directory of the app library($this->appRoot/lib).
-     * 
-     * @var string
-     * @access private
-     */
-    private $appLibRoot;
-
-    /**
      * The root directory of temp.
      * 
      * @var string
@@ -445,17 +437,6 @@ class router
     }
 
     /**
-     * Set the app lib root.
-     * 
-     * @access protected
-     * @return void
-     */
-    protected function setAppLibRoot()
-    {
-        $this->appLibRoot = $this->appRoot . 'lib' . DS;
-    }
-
-    /**
      * Set the tmp root.
      * 
      * @access protected
@@ -660,17 +641,6 @@ class router
     }
     
     /**
-     * Get the $appLibRoot var
-     * 
-     * @access public
-     * @return string
-     */
-    public function getAppLibRoot()
-    {
-        return $this->appLibRoot;
-    }
-
-    /**
      * Get the $tmpRoot var
      * 
      * @access public
@@ -832,7 +802,7 @@ class router
     }
 
     /**
-     * Set the them the client user usering. The logic is same as the clientLang.
+     * Set the them the client user using. The logic is same as the clientLang.
      *
      * The css and images files of an theme should saved at www/theme/$themeName
      *
@@ -1419,8 +1389,6 @@ class router
     /**
      * Load a class file.
      * 
-     * First search in $appLibRoot, then $coreLibRoot.
-     *
      * @param   string $className  the class name
      * @param   bool   $static     statis class or not
      * @access  public
@@ -1430,19 +1398,11 @@ class router
     {
         $className = strtolower($className);
 
-        /* Search in $appLibRoot. */
+        /* Search in $coreLibRoot. */
         $classFile = $this->coreLibRoot . $className;
         if(is_dir($classFile)) $classFile .= DS . $className;
         $classFile .= '.class.php';
-
-        if(!helper::import($classFile))
-        {
-            /* Search in $coreLibRoot. */
-            $classFile = $this->coreLibRoot . $className;
-            if(is_dir($classFile)) $classFile .= DS . $className;
-            $classFile .= '.class.php';
-            if(!helper::import($classFile)) $this->triggerError("class file $classFile not found", __FILE__, __LINE__, $exit = true);
-        }
+        if(!helper::import($classFile)) $this->triggerError("class file $classFile not found", __FILE__, __LINE__, $exit = true);
 
         /* If staitc, return. */
         if($static) return true;
