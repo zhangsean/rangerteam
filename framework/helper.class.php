@@ -53,7 +53,7 @@ class helper
      * helper::createLink('hello', 'index', array('var1' => 'value1', 'var2' => 'value2');
      * ?>
      * </code>
-     * @param string       $moduleName     module name
+     * @param string       $moduleName     module name, if link to another app, add appname, like crm.order
      * @param string       $methodName     method name
      * @param string|array $vars           the params passed to the method, can be array('key' => 'value') or key1=value1&key2=value2) or key1=value1&key2=value2
      * @param string       $viewType       the view type
