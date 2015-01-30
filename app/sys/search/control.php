@@ -68,7 +68,6 @@ class search extends control
             }
             else
             {
-                $this->session->set($query->module . 'Query', ' 1 = 1');
                 die(js::locate('back'));
             }
         }
