@@ -9,17 +9,28 @@ $(document).ready(function()
     })
     $('.type').change();
 
+    $('[name*=createTrader]').each(function()
+    {
+        if($(this).prop('checked')) $(this).parents('.out').find('[id*=trader][id*=_chosen]').hide();
+    })
+
+    $('[name*=createCustomer]').each(function()
+    {
+        if($(this).prop('checked')) $(this).parents('.in').find('[id*=trader][id*=_chosen]').hide();
+    })
+
     $('[name*=createCustomer]').change(function()
     {
         if($(this).prop('checked')) 
         {
             $(this).parents('.input-group').find('select').hide();
-            $(this).parents('.input-group').find('input[type=text]').show().focus();
+            $(this).parents('.input-group').find('[id*=trader][id*=_chosen]').hide();
+            $(this).parents('.input-group').find('input[type=text][id*=customerName]').show().focus();
         }
         else
         {
-            $(this).parents('.input-group').find('select').show();
-            $(this).parents('.input-group').find('input[type=text]').hide();
+            $(this).parents('.input-group').find('[id*=trader][id*=_chosen]').show();
+            $(this).parents('.input-group').find('input[type=text][id*=customerName]').hide();
         }
     })
 });
