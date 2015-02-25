@@ -15,6 +15,7 @@ class package extends control
     {
         parent::__construct();
     }
+
     /**
      * Browse packages.
      *
@@ -31,9 +32,9 @@ class package extends control
             /* Get latest release from remote. */
             $extCodes = helper::safe64Encode(join(',', array_keys($packages)));
             $results = $this->package->getPackagesByAPI('bycode', $extCodes, $recTotal = 0, $recPerPage = 1000, $pageID = 1);
-            if(isset($results->packages))
+            if(isset($results->extensions))
             {
-                $remoteReleases = $results->packages;
+                $remoteReleases = $results->extensions;
                 foreach($remoteReleases as $release)
                 {
                     if(!isset($packages[$release->code])) continue;
