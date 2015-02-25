@@ -228,8 +228,8 @@ CREATE TABLE `oa_doc` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `product` mediumint(8) unsigned NOT NULL,
   `project` mediumint(8) unsigned NOT NULL,
-  `lib` varchar(30) NOT NULL,
-  `module` varchar(30) NOT NULL,
+  `lib` mediumint(8) unsigned NOT NULL,
+  `module` mediumint(8) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
   `digest` varchar(255) NOT NULL,
   `keywords` varchar(255) NOT NULL,
@@ -266,8 +266,8 @@ CREATE TABLE `oa_project` (
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE='MyISAM' COLLATE 'utf8_general_ci'; 
--- DROP TABLE IF EXISTS `oa_relation`;
-CREATE TABLE `oa_relation` (
+-- DROP TABLE IF EXISTS `sys_relation`;
+CREATE TABLE `sys_relation` (
   `type` char(20) NOT NULL,
   `id` mediumint(9) NOT NULL,
   `category` mediumint(8) NOT NULL,

@@ -114,6 +114,7 @@ define('TABLE_ISSUE',     '`sys_issue`');
 define('TABLE_TAG',       '`sys_tag`');
 define('TABLE_BLOCK',     '`sys_block`');
 define('TABLE_SCHEMA',    '`sys_schema`');
+define('TABLE_RELATION',  '`sys_relation`');
 
 /* Tables for crm. */
 define('TABLE_ADDRESS',       '`crm_address`');
@@ -134,7 +135,6 @@ define('TABLE_EFFORT',      '`oa_effort`');
 define('TABLE_BOOK',        '`oa_book`');
 define('TABLE_LAYOUT',      '`oa_layout`');
 define('TABLE_DOC',         '`oa_doc`');
-define('TABLE_RELATION',    '`oa_relation`');
 
 /* Tables for cash. */
 define('TABLE_DEPOSITOR', '`cash_depositor`');
