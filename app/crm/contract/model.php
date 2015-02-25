@@ -341,7 +341,7 @@ class contractModel extends model
             $contractData->editedDate   = $now;
             $contractData->handlers     = implode(',', $this->post->handlers);
             $contractData->returnedBy   = $this->post->returnedBy ? $this->post->returnedBy : $this->app->user->account;
-            $contractData->returnedDate = $now;
+            $contractData->returnedDate = $this->post->returnedDate ? $this->post->returnedDate : $now;
             if($this->post->finish) $contractData->return = 'done';
 
             $this->dao->update(TABLE_CONTRACT)->data($contractData, $skip = 'uid, comment')->where('id')->eq($contractID)->exec();
@@ -351,7 +351,7 @@ class contractModel extends model
             $trade = fixer::input('post')
                 ->add('money', $this->post->amount)
                 ->add('type', 'in')
-                ->add('date', substr($now, 0, 10))
+                ->add('date', substr($data->returnedDate, 0, 10))
                 ->add('createdBy', $this->app->user->account)
                 ->add('createdDate', $now)
                 ->add('editedBy', $this->app->user->account)
