@@ -62,7 +62,7 @@ class orderModel extends model
     public function getList($mode = 'all', $param = null, $orderBy = 'id_desc', $pager = null)
     {
         $customerIdList = $this->loadModel('customer')->getMine();
-        if(empty($customerIdList)) return null;
+        if(empty($customerIdList)) return array();
 
         $this->app->loadClass('date', $static = true);
         $thisMonth = date::getThisMonth();
@@ -126,7 +126,7 @@ class orderModel extends model
     public function getPairs($customer, $status = '')
     {
         $customerIdList = $this->loadModel('customer')->getMine();
-        if(empty($customerIdList)) return null;
+        if(empty($customerIdList)) return array();
 
         $orders = $this->dao->select('o.id, o.createdDate, c.name as customerName, p.name as productName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
