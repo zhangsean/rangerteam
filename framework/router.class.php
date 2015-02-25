@@ -302,7 +302,6 @@ class router
         $this->setFrameRoot();
         $this->setCoreLibRoot();
         $this->setAppRoot($appName, $appRoot);
-        $this->setAppLibRoot();
         $this->setTmpRoot();
         $this->setCacheRoot();
         $this->setLogRoot();
