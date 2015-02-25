@@ -52,6 +52,8 @@ class userModel extends model
             ->orderBy('id_asc')    
             ->fetchPairs();
 
+        foreach($users as $account => $realname) if($realname == '') $users[$account] = $account; 
+
         /* Append empty users. */
         if(strpos($params, 'noempty') === false) $users = array('' => '') + $users;
         if(strpos($params, 'noclosed') === false) $users = $users + array('closed' => 'Closed');
