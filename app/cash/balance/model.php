@@ -66,6 +66,7 @@ class balanceModel extends model
     {
         return $this->dao->select('date')->from(TABLE_BALANCE)
             ->beginIF($depositorID)->where('depositor')->in($depositorID)->fi()
+            ->orderBy('date_desc')
             ->fetchPairs('date', 'date');
     }
 
