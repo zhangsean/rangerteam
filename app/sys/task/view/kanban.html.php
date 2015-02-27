@@ -37,7 +37,7 @@
                   <?php echo html::a($this->createLink('task', 'view', "taskID={$task->id}"), $task->name)?>
                 </div>
                 <?php if(!empty($task->desc)): ?>
-                <div class='text-muted'><?php echo $task->desc?></div>
+                <div class='text-muted'><?php echo $task->name == $task->desc ? '' : $task->desc;?></div>
                 <?php endif; ?>
                 <div class='task-info clearfix'>
                   <div class='pull-left'>
