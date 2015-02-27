@@ -66,6 +66,9 @@ class upgradeModel extends model
             case '1_7':
                 $this->toLowerTable();
                 $this->updateAppOrder();
+            case '2_0':
+                $this->execSQL($this->getUpgradeFile('2.0'));
+                $this->fixClosedTask();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -92,6 +95,7 @@ class upgradeModel extends model
             case '1_4_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.4.beta'));
             case '1_5_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.5.beta'));
             case '1_6'     : $confirmContent .= file_get_contents($this->getUpgradeFile('1.6'));
+            case '2_0'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.0'));
         }
         return $confirmContent;
     }
@@ -728,5 +732,19 @@ class upgradeModel extends model
             $this->dao->update(TABLE_ENTRY)->set('`order`')->eq($order)->where('id')->eq($entry->id)->exec();
             $order += 10;
         }
+    }
+
+
+    /**
+     * Set assignedTo is closed if the task is closed.
+     * 
+     * @access public
+     * @return int
+     */
+    public function fixClosedTask()
+    {
+        $this->dao->update(TABLE_TASK)->set('assignedTo')->eq('closed')->where('status')->eq('closed')->exec();
+
+        return dao::isError();
     }
 }
