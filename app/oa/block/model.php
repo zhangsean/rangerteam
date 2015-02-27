@@ -74,7 +74,7 @@ class oablockModel extends blockModel
         $params = new stdclass();
 
         $params->type['name']    = $this->lang->block->type;
-        $params->type['options'] = $this->lang->block->typeList;
+        $params->type['options'] = $this->lang->block->typeList->task;
         $params->type['control'] = 'select';
 
         $params->num['name']    = $this->lang->block->num;
@@ -103,6 +103,11 @@ class oablockModel extends blockModel
     public function getProjectParams()
     {
         $params = new stdclass();
+
+        $params->status['name']    = $this->lang->block->status;
+        $params->status['options'] = $this->lang->block->statusList->project;
+        $params->status['control'] = 'select';
+
         $params->num['name']    = $this->lang->block->num;
         $params->num['default'] = 15; 
         $params->num['control'] = 'input';

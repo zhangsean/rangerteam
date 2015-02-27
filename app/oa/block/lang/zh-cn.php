@@ -43,8 +43,12 @@ $lang->block->orderByList->project['begin_desc']       = '开始时间递减';
 $lang->block->orderByList->project['end_asc']          = '结束时间递增';
 $lang->block->orderByList->project['end_desc']         = '结束时间递减';
 
-$lang->block->typeList['assignedTo'] = '指派给我';
-$lang->block->typeList['createdBy']  = '由我创建';
-$lang->block->typeList['finishedBy'] = '由我完成';
-$lang->block->typeList['closedBy']   = '由我关闭';
-$lang->block->typeList['canceledBy'] = '由我取消';
+$lang->block->typeList->task['assignedTo'] = '指派给我';
+$lang->block->typeList->task['createdBy']  = '由我创建';
+$lang->block->typeList->task['finishedBy'] = '由我完成';
+$lang->block->typeList->task['closedBy']   = '由我关闭';
+$lang->block->typeList->task['canceledBy'] = '由我取消';
+
+$lang->block->statusList->project['doing']    = '进行中';
+$lang->block->statusList->project['finished'] = '已完成';
+$lang->block->statusList->project['suspend']  = '已挂起';

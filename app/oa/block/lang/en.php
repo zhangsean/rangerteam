@@ -43,8 +43,12 @@ $lang->block->orderByList->project['begin_desc']       = 'Begin DESC';
 $lang->block->orderByList->project['end_asc']          = 'End ASC';
 $lang->block->orderByList->project['end_desc']         = 'End DESC';
 
-$lang->block->typeList['assignedTo'] = 'Assigned to me';
-$lang->block->typeList['createdBy']  = 'My created';
-$lang->block->typeList['finishedBy'] = 'My finished';
-$lang->block->typeList['closedBy']   = 'My closed';
-$lang->block->typeList['canceledBy'] = 'My canceled';
+$lang->block->typeList->task['assignedTo'] = 'Assigned to me';
+$lang->block->typeList->task['createdBy']  = 'My created';
+$lang->block->typeList->task['finishedBy'] = 'My finished';
+$lang->block->typeList->task['closedBy']   = 'My closed';
+$lang->block->typeList->task['canceledBy'] = 'My canceled';
+
+$lang->block->statusList->project['doing']    = 'Doing';
+$lang->block->statusList->project['finished'] = 'Finished';
+$lang->block->statusList->project['suspend']  = 'Suspend';

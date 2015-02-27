@@ -228,6 +228,7 @@ class block extends control
         $this->view->users    = $this->loadModel('user')->getPairs();
         $this->view->projects = $this->dao->select('*')->from(TABLE_PROJECT)
             ->where('deleted')->eq(0)
+            ->andWhere('status')->eq(isset($this->params->status) ? $this->params->status : 'doing')
             ->orderBy($this->params->orderBy)
             ->limit($this->params->num)
             ->fetchAll('id');
