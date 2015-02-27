@@ -1024,19 +1024,27 @@ class commonModel extends model
      */
     public static function tidyMoney($money)
     {
-        global $lang;
+        global $lang, $app;
 
-        if($money > pow(10, 8))
+        $clientLang = $app->getClientLang();
+        if($clientLang == 'zh-cn' or $clientLang == 'zh-tw')
         {
-            return ((int)($money / pow(10, 6)) / 100) . $lang->currencyTip['y'];
-        }
-        else if($money > pow(10, 4))
-        {
-            return ((int)($money / pow(10, 2)) / 100) . $lang->currencyTip['w'];
+            if($money > pow(10, 8))
+            {
+                return ((int)($money / pow(10, 6)) / 100) . $lang->currencyTip['y'];
+            }
+            else if($money > pow(10, 4))
+            {
+                return ((int)($money / pow(10, 2)) / 100) . $lang->currencyTip['w'];
+            }
+            else
+            {
+                return $money;
+            }
         }
         else
         {
-            return $money;
+            return number_format($money, 2);
         }
     } 
 }
