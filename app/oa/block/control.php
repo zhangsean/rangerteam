@@ -222,16 +222,40 @@ class block extends control
     {
         $this->lang->project = new stdclass();
         $this->app->loadLang('project', 'oa');
+        $this->loadModel('task', 'sys');
 
         $this->processParams();
 
-        $this->view->users    = $this->loadModel('user')->getPairs();
-        $this->view->projects = $this->dao->select('*')->from(TABLE_PROJECT)
+        $projects = $this->dao->select('*')->from(TABLE_PROJECT)
             ->where('deleted')->eq(0)
             ->andWhere('status')->eq(isset($this->params->status) ? $this->params->status : 'doing')
             ->orderBy($this->params->orderBy)
             ->limit($this->params->num)
             ->fetchAll('id');
+
+        /* Get task info of project. */
+        foreach($projects as $project)
+        {
+            $tasks = $this->task->getList($project->id, null, 'id_desc', null, 'status');
+
+            $left     = 0;
+            $consumed = 0;
+            foreach($tasks as $group)
+            {
+                foreach($group as $task)
+                {
+                    $left     += $task->left;
+                    $consumed += $task->consumed;
+                }
+            }
+
+            $project->wait = isset($tasks['wait']) ? count($tasks['wait']) : 0;
+            $project->done = isset($tasks['done']) ? count($tasks['done']) : 0;
+            $project->rate = round(($consumed / ($left + $consumed)) * 10000) / 100 . '%';
+        }
+
+        $this->view->users    = $this->loadModel('user')->getPairs();
+        $this->view->projects = $projects;
 
         $this->display();
     }

@@ -13,6 +13,9 @@ $lang->block->announce = '系统公告';
 $lang->block->lblBlock = '区块';
 $lang->block->admin    = '管理区块';
 $lang->block->type     = '类型';
+$lang->block->waitTask = '未完成';
+$lang->block->doneTask = '已完成';
+$lang->block->rate     = '进度';
 
 $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->announce = '系统公告';

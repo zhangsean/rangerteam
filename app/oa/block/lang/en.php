@@ -13,6 +13,9 @@ $lang->block->announce = 'Announce';
 $lang->block->lblBlock = 'Block';
 $lang->block->admin    = 'Manage blocks';
 $lang->block->type     = 'Type';
+$lang->block->waitTask = 'Wait';
+$lang->block->doneTask = 'Done';
+$lang->block->rate     = 'Rate';
 
 $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->announce = 'Announce';

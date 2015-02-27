@@ -11,11 +11,19 @@
  */
 ?>
 <table class='table table-data table-hover block-project'>
+  <tr>
+    <th class='text-left'><?php echo $lang->project->name;?></th>
+    <th class='text-center w-80px'><?php echo $lang->block->doneTask;?></th>
+    <th class='text-center w-80px'><?php echo $lang->block->waitTask;?></th>
+    <th class='text-center w-80px'><?php echo $lang->block->rate;?></th>
+  </tr>
   <?php foreach($projects as $id => $project):?>
   <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn text-center' data-id={$this->get->entry}" : "class='text-center'"?>
   <tr data-url='<?php echo $this->createLink('oa.task', 'browse', "projectID=$id"); ?>' <?php echo $appid?>>
     <td class='text-left'><?php echo $project->name;?></td>
-    <td class='w-160px'><?php echo $project->begin . ' ~ ' . $project->end;?></td>
+    <td><?php echo $project->done;?></td>
+    <td><?php echo $project->wait;?></td>
+    <td><?php echo $project->rate;?></td>
   </tr>
   <?php endforeach;?>
 </table>
