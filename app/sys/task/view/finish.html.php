@@ -33,6 +33,10 @@
       <td><?php echo html::textarea('comment');?></td>
     </tr>
     <tr>
+      <th><?php echo $lang->files;?></th>
+      <td><?php echo $this->fetch('file', 'buildForm')?></td>
+    </tr>
+    <tr>
       <th></th>
       <td><?php echo html::submitButton();?></td>
     </tr>

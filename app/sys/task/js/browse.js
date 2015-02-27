@@ -10,7 +10,6 @@ $(function()
         {
             $list.dataTable();
             $list.find('[data-toggle="modal"]').modalTrigger();
-            resetBoards();
         });
         return false;
     };

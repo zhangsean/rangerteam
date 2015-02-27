@@ -204,10 +204,14 @@ class task extends control
         {
             $changes = $this->task->finish($taskID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $files = $this->loadModel('file')->saveUpload('task', $taskID);
 
-            if($changes)
+            if(!empty($changes) or !empty($files))
             {
-                $actionID = $this->loadModel('action')->create('task', $taskID, 'Finished', $this->post->comment);
+                $fileAction = '';
+                if($files) $fileAction = $this->lang->addFiles . join(',', $files);
+
+                $actionID = $this->loadModel('action')->create('task', $taskID, 'Finished', $fileAction .  ' ' . $this->post->comment);
                 $this->action->logHistory($actionID, $changes);
             }
 

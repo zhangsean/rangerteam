@@ -276,6 +276,7 @@ class taskModel extends model
             ->setDefault('status', 'done')
             ->setDefault('finishedBy, editedBy', $this->app->user->account)
             ->setDefault('finishedDate, editedDate', $now) 
+            ->remove('files,labels')
             ->get();
 
         $this->dao->update(TABLE_TASK)
