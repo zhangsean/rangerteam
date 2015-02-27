@@ -1013,4 +1013,30 @@ class commonModel extends model
         }
         return $a->order > $b->order ? 1 : -1;
     }
+
+    /**
+     * Format money.
+     * 
+     * @param  float $money 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function tidyMoney($money)
+    {
+        global $lang;
+
+        if($money > pow(10, 8))
+        {
+            return ((int)($money / pow(10, 6)) / 100) . $lang->currencyTip['y'];
+        }
+        else if($money > pow(10, 4))
+        {
+            return ((int)($money / pow(10, 2)) / 100) . $lang->currencyTip['w'];
+        }
+        else
+        {
+            return $money;
+        }
+    } 
 }

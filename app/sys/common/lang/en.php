@@ -22,7 +22,6 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->at      = ' At ';
 $lang->by      = ' By ';
 $lang->ditto   = 'Ditto';
-$lang->submitting   = 'Saving...';
 
 /* Apps lang items.*/
 $lang->apps = new stdclass();
@@ -119,6 +118,7 @@ $lang->comment        = 'Comment';
 $lang->selectAll      = 'All';
 $lang->selectReverse  = 'Inverse';
 $lang->continueSave   = 'Continue To Save';
+$lang->submitting     = 'Saving...';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();
@@ -322,6 +322,9 @@ $lang->currencySymbols['aud']  = 'A$';
 $lang->currencySymbols['nzd']  = 'NZ$';
 $lang->currencySymbols['thb']  = 'B';
 $lang->currencySymbols['sgd']  = 'S$';
+
+$lang->currencyTip['w'] = '';
+$lang->currencyTip['y'] = '';
 
 /* Date times. */
 define('DT_DATETIME1',  'Y-m-d H:i:s');

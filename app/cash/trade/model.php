@@ -592,16 +592,16 @@ class tradeModel extends model
         {
             if($money['in'] == 0 and $money['out'] == 0) continue;
             
-            if($mode == 'in')  printf($this->lang->trade->totalIn, $currencyList[$currency], $money['in']);
-            if($mode == 'out') printf($this->lang->trade->totalOut, $currencyList[$currency], $money['out']);
+            if($mode == 'in')  printf($this->lang->trade->totalIn, $currencyList[$currency], commonModel::tidyMoney($money['in']));
+            if($mode == 'out') printf($this->lang->trade->totalOut, $currencyList[$currency], commonModel::tidyMoney($money['out']));
 
             if($mode == 'all') 
             {
-                if($money['in'] - $money['out'] > 0)  $profits = $this->lang->trade->profit . ($money['in'] - $money['out']);
-                if($money['in'] - $money['out'] < 0)  $profits = $this->lang->trade->loss . ($money['out'] - $money['in']);
+                if($money['in'] - $money['out'] > 0)  $profits = $this->lang->trade->profit . commonModel::tidyMoney($money['in'] - $money['out']);
+                if($money['in'] - $money['out'] < 0)  $profits = $this->lang->trade->loss . commonModel::tidyMoney($money['out'] - $money['in']);
                 if($money['in'] - $money['out'] == 0) $profits = $this->lang->trade->balance;
 
-                printf($this->lang->trade->totalAmount, $currencyList[$currency], $money['in'], $money['out'], $profits);
+                printf($this->lang->trade->totalAmount, $currencyList[$currency], commonModel::tidyMoney($money['in']), commonModel::tidyMoney($money['out']), $profits);
             }
         }
     }

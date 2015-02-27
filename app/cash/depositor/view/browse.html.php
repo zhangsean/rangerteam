@@ -17,7 +17,7 @@
     <?php foreach($balances as $currency => $balanceList):?>
     <?php $sum = 0;?>
     <?php foreach($balanceList as $balance) $sum += $balance->money;?>
-    <strong class='text-danger'><?php echo $currencyList[$currency] . $lang->colon . $sum;?></strong>
+    <strong class='text-danger'><?php echo $currencyList[$currency] . $lang->colon . commonModel::tidyMoney($sum);?></strong>
     <?php endforeach;?>
     <div class='panel-actions pull-right'>
       <?php echo html::a(inlink('create'), "<i class='icon-plus'></i> {$lang->depositor->create}", "class='btn btn-primary' data-toggle='modal'")?>
@@ -47,7 +47,7 @@
            <?php if(isset($balances[$depositor->currency][$depositor->id])):?>
              <span  class='label-balance text-danger'>
              <?php echo zget($lang->currencySymbols, $depositor->currency)?>
-             <?php echo $balances[$depositor->currency][$depositor->id]->money;?>
+             <?php echo number_format($balances[$depositor->currency][$depositor->id]->money, 2);?>
              </span>
            <?php endif;?>
           </div>

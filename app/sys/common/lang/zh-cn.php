@@ -22,7 +22,6 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->at      = ' 于 ';
 $lang->by      = ' 由 ';
 $lang->ditto   = '同上';
-$lang->submitting   = '稍候...';
 
 /* Apps lang items.*/
 $lang->apps = new stdclass();
@@ -119,6 +118,7 @@ $lang->comment        = '备注';
 $lang->selectAll      = '全选';
 $lang->selectReverse  = '反选';
 $lang->continueSave   = '继续保存';
+$lang->submitting     = '稍候...';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();
@@ -323,6 +323,8 @@ $lang->currencySymbols['nzd']  = 'NZ$';
 $lang->currencySymbols['thb']  = 'B';
 $lang->currencySymbols['sgd']  = 'S$';
 
+$lang->currencyTip['w'] = '万';
+$lang->currencyTip['y'] = '亿';
 
 /* The datetime settings. */
 define('DT_DATETIME1',  'Y-m-d H:i:s');
