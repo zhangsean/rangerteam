@@ -71,7 +71,7 @@
     <div class='table-footer'>
       <div class='pull-left'>
         <?php echo html::selectButton() . html::submitButton($lang->edit);?>
-        <span class='text-danger'><?php $this->trade->countMoney($trades);?></span>
+        <span class='text-danger'><?php $this->trade->countMoney($trades, $mode);?></span>
       </div>
       <?php echo $pager->get();?>
     </div>

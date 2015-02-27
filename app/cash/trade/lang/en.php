@@ -83,6 +83,8 @@ $lang->trade->importedFields['dept']     = 'Department';
 $lang->trade->importedFields['desc']     = 'Desc';
 $lang->trade->importedFields['fee']      = 'Fee';
 
+$lang->trade->totalIn     = '%s: income %s；';
+$lang->trade->totalOut    = '%s: expend %s；';
 $lang->trade->totalAmount = '%s: income %s, expend %s，%s；';
 $lang->trade->profit      = 'profit';
 $lang->trade->loss        = 'loss';

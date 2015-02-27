@@ -83,6 +83,8 @@ $lang->trade->importedFields['dept']     = '部门';
 $lang->trade->importedFields['desc']     = '备注';
 $lang->trade->importedFields['fee']      = '手续费';
 
+$lang->trade->totalIn     = '%s收入%s；';
+$lang->trade->totalOut    = '%s支出%s；';
 $lang->trade->totalAmount = '%s收入%s，支出%s，%s；';
 $lang->trade->profit      = '盈';
 $lang->trade->loss        = '亏';

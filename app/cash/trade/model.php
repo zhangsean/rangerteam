@@ -573,7 +573,7 @@ class tradeModel extends model
      * @access public
      * @return array
      */
-    public function countMoney($trades)
+    public function countMoney($trades, $mode)
     {
         $totalMoney  = array();
         $currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
@@ -592,10 +592,17 @@ class tradeModel extends model
         {
             if($money['in'] == 0 and $money['out'] == 0) continue;
             
-            if($money['in'] - $money['out'] > 0)  $profits = $this->lang->trade->profit . ($money['in'] - $money['out']);
-            if($money['in'] - $money['out'] < 0)  $profits = $this->lang->trade->loss . ($money['out'] - $money['in']);
-            if($money['in'] - $money['out'] == 0) $profits = $this->lang->trade->balance;
-            printf($this->lang->trade->totalAmount, $currencyList[$currency], $money['in'], $money['out'], $profits);
+            if($mode == 'in')  printf($this->lang->trade->totalIn, $currencyList[$currency], $money['in']);
+            if($mode == 'out') printf($this->lang->trade->totalOut, $currencyList[$currency], $money['out']);
+
+            if($mode == 'all') 
+            {
+                if($money['in'] - $money['out'] > 0)  $profits = $this->lang->trade->profit . ($money['in'] - $money['out']);
+                if($money['in'] - $money['out'] < 0)  $profits = $this->lang->trade->loss . ($money['out'] - $money['in']);
+                if($money['in'] - $money['out'] == 0) $profits = $this->lang->trade->balance;
+
+                printf($this->lang->trade->totalAmount, $currencyList[$currency], $money['in'], $money['out'], $profits);
+            }
         }
     }
 }
