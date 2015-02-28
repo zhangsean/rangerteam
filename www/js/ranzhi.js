@@ -615,6 +615,8 @@ function fixTableHeader()
 {
     var table = $('.page-content > .panel > .table');
 
+    if($('#tradeList').length) table = $('#tradeList');
+
     if(!table.length) return;
 
     var tHead     = table.find('thead');
