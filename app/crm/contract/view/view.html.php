@@ -100,9 +100,9 @@
     <div class='panel'>
       <div class='panel-heading'>
         <div class='row'>      
-          <div class='col-sm-4'><strong><i class="icon-list-info"></i> <?php echo $lang->contract->returnedDate;?></strong></div>
+          <div class='col-sm-3'><strong><i class="icon-list-info"></i> <?php echo $lang->contract->returnedDate;?></strong></div>
           <div class='col-sm-4'><strong><?php echo $lang->contract->returnedBy;?></strong></div> 
-          <div class='col-sm-4'><strong><?php echo $lang->contract->amount;?></strong></div> 
+          <div class='col-sm-3'><strong><?php echo $lang->contract->amount;?></strong></div> 
         </div>
       </div>
       <table class='table table-data table-condensed'>
@@ -110,7 +110,11 @@
         <tr>
           <td class='w-p30'><?php echo $return->returnedDate;?></td>
           <td class='w-p30'><?php echo zget($users, $return->returnedBy, $return->returnedBy);?></td>
-          <td class='w-p30'><?php echo zget($currencySign, $contract->currency, '') . $return->amount;?></td>
+          <td class='w-p20'><?php echo zget($currencySign, $contract->currency, '') . $return->amount;?></td>
+          <td class='w-p20'>
+            <?php echo html::a(inlink('editReturn', "id=$return->id"), $lang->edit, "data-toggle='modal'");?>
+            <?php echo html::a(inlink('deleteReturn', "id=$return->id"), $lang->delete, "class='deleter'");?>
+         </td>
         </tr>
         <?php endforeach;?>
       </table>

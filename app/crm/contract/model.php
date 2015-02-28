@@ -324,7 +324,7 @@ class contractModel extends model
             ->add('contract', $contractID)
             ->setDefault('returnedBy', $this->app->user->account)
             ->setDefault('returnedDate', $now)
-            ->remove('finish,handlers,depositor,category,dept')
+            ->remove('finish,handlers')
             ->get();
 
         $this->dao->insert(TABLE_PLAN)
@@ -348,29 +348,98 @@ class contractModel extends model
 
             if(!dao::isError() and $this->post->finish) $this->dao->update(TABLE_CUSTOMER)->set('status')->eq('payed')->where('id')->eq($contract->customer)->exec();
 
-            $trade = fixer::input('post')
-                ->add('money', $this->post->amount)
-                ->add('type', 'in')
-                ->add('date', substr($data->returnedDate, 0, 10))
-                ->add('createdBy', $this->app->user->account)
-                ->add('createdDate', $now)
-                ->add('editedBy', $this->app->user->account)
-                ->add('editedDate', $now)
-                ->join('handlers', ',')
-                ->add('trader', $contract->customer)
-                ->add('contract', $contractID)
-                ->remove('finish,amount,returnedBy,returnedDate')
-                ->get();
-
-            $depositor = $this->loadModel('depositor', 'cash')->getByID($trade->depositor);
-            $trade->currency = $depositor->currency;
-
-            $this->dao->insert(TABLE_TRADE)->data($trade, $skip = 'uid,comment')->autoCheck()->exec();
-
             return !dao::isError();
         }
 
         return false;
+    }
+
+    /**
+     * Get return by ID.
+     * 
+     * @param  int    $returnID 
+     * @access public
+     * @return object
+     */
+    public function getReturnByID($returnID)
+    {
+        return $this->dao->select('*')->from(TABLE_PLAN)->where('id')->eq($returnID)->fetch();
+    }
+
+    /**
+     * Edit return.
+     * 
+     * @param  object    $return 
+     * @access public
+     * @return bool
+     */
+    public function editReturn($return, $contract)
+    {
+        $now = helper::now();
+        $data = fixer::input('post')
+            ->add('contract', $contract->id)
+            ->setDefault('returnedBy', $this->app->user->account)
+            ->setDefault('returnedDate', $now)
+            ->remove('finish,handlers')
+            ->get();
+
+        $this->dao->update(TABLE_PLAN)
+            ->data($data, $skip = 'uid, comment')
+            ->where('id')->eq($return->id)
+            ->autoCheck()
+            ->batchCheck($this->config->contract->require->receive, 'notempty')
+            ->exec();
+
+        if(!dao::isError())
+        {
+            $changes = commonModel::createChanges($return, $data);
+            if($changes)
+            {
+                $contractActionID = $this->loadModel('action')->create('contract', $contract->id, 'editReturned');
+                $customerActionID = $this->loadModel('action')->create('customer', $contract->customer, 'editReturned');
+                $this->action->logHistory($contractActionID, $changes);
+                $this->action->logHistory($customerActionID, $changes);
+            }
+
+            $contractData = new stdclass();
+            $contractData->return       = 'doing';
+            $contractData->editedBy     = $this->app->user->account;
+            $contractData->editedDate   = $now;
+            $contractData->handlers     = implode(',', $this->post->handlers);
+            $contractData->returnedBy   = $this->post->returnedBy ? $this->post->returnedBy : $this->app->user->account;
+            $contractData->returnedDate = $this->post->returnedDate ? $this->post->returnedDate : $now;
+            if($this->post->finish) $contractData->return = 'done';
+
+            $this->dao->update(TABLE_CONTRACT)->data($contractData, $skip = 'uid, comment')->where('id')->eq($contract->id)->exec();
+
+            if(dao::isError()) return false;
+
+            $changes = commonModel::createChanges($contract, $contractData);
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('contract', $contract->id, 'Edited');
+                $this->action->logHistory($actionID, $changes);
+            }
+
+            if(!dao::isError() and $this->post->finish) $this->dao->update(TABLE_CUSTOMER)->set('status')->eq('payed')->where('id')->eq($contract->customer)->exec();
+
+            return dao::isError();
+        }
+
+        return false;
+    }
+
+    /**
+     * Delete return.
+     * 
+     * @param  int   $returnID
+     * @access public
+     * @return bool
+     */
+    public function deleteReturn($returnID)
+    {
+        $this->dao->delete()->from(TABLE_PLAN)->where('id')->eq($returnID)->exec();
+        return !dao::isError();
     }
 
     /**

@@ -214,7 +214,6 @@ class contract extends control
      */
     public function receive($contractID)
     {
-        $this->loadModel('trade', 'cash');
         $contract     = $this->contract->getByID($contractID);
         $currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         if(!empty($_POST))
@@ -238,14 +237,64 @@ class contract extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
-        $this->view->title         = $contract->name;
-        $this->view->contract      = $contract;
-        $this->view->users         = $this->loadModel('user')->getPairs();
-        $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
-        $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
-        $this->view->categories    = $this->loadModel('tree')->getOptionMenu('in', 0);
-        $this->view->currencySign  = $currencySign;
+        $this->view->title        = $contract->name;
+        $this->view->contract     = $contract;
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->currencySign = $currencySign;
         $this->display();
+    }
+
+    /**
+     * Edit return.
+     * 
+     * @param  int    $returnID 
+     * @access public
+     * @return void
+     */
+    public function editReturn($returnID)
+    {
+        $return       = $this->contract->getReturnByID($returnID);
+        $contract     = $this->contract->getByID($return->contract);
+        $currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        if(!empty($_POST))
+        {
+            $this->contract->editReturn($return, $contract);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $this->view->title        = $this->lang->contract->editReturn;
+        $this->view->return       = $return;
+        $this->view->contract     = $contract;
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->currencySign = $currencySign;
+        $this->display();
+    }
+
+    /**
+     * Delete return.
+     * 
+     * @param  int    $returnID 
+     * @access public
+     * @return void
+     */
+    public function deleteReturn($returnID)
+    {
+        $return   = $this->contract->getReturnByID($returnID);
+        $contract = $this->contract->getByID($return->contract);
+        $currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+
+        $this->contract->deleteReturn($returnID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+        $deleteInfo = sprintf($this->lang->contract->deleteReturnInfo, $return->returnedDate, zget($currencySign, $contract->currency, '') . $return->amount);
+        $this->loadModel('action')->create('contract', $contract->id, 'deletereturned', '', $deleteInfo);
+
+        $actionExtra = html::a($this->createLink('contract', 'view', "contractID=$contract->id"), $contract->name) . $deleteInfo; 
+        $this->loadModel('action')->create('customer', $contract->customer, 'deletereturned', $this->post->comment, $actionExtra, $this->post->returnedBy);
+
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 
     /**

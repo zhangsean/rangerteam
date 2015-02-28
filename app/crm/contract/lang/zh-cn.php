@@ -61,6 +61,7 @@ $lang->contract->returnRecords    = '回款记录';
 $lang->contract->deliveryRecords  = '交付记录';
 $lang->contract->completeReturn   = '完成回款';
 $lang->contract->completeDelivery = '完成交付';
+$lang->contract->editReturn       = '编辑回款';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = '等待交付';
@@ -87,6 +88,7 @@ $lang->contract->codeUnitList['input'] = '输入值';
 $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = '成交金额';
 
-$lang->contract->totalAmount  = '本页合同总金额：%s，已回款：%s；';
-$lang->contract->returnInfo   = "<p>%s, 由 <strong>%s</strong> 回款%s。</p>";
-$lang->contract->deliveryInfo = "<p>%s由%s交付。</p>";
+$lang->contract->totalAmount      = '本页合同总金额：%s，已回款：%s；';
+$lang->contract->returnInfo       = "<p>%s, 由 <strong>%s</strong> 回款%s。</p>";
+$lang->contract->deliveryInfo     = "<p>%s由%s交付。</p>";
+$lang->contract->deleteReturnInfo = "%s的回款%s";

@@ -14,7 +14,7 @@
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<form method='post' id='ajaxForm' class='form-inline' action='<?php echo $this->createLink('contract', 'receive', "contractID={$contract->id}")?>'>
+<form method='post' id='ajaxForm' class='form-inline' action='<?php echo $this->createLink('contract', 'editReturn', "returnID={$return->id}")?>'>
   <table class='table table-form table-condensed'>
     <tr>
       <th><?php echo $lang->contract->all;?></th>
@@ -24,24 +24,25 @@
       <th class='w-80px'><?php echo $lang->contract->thisAmount;?></th>
       <td class='w-p40'>
         <div class='input-group'>
-          <?php echo html::input('amount', '', "class='form-control'");?>
+          <?php echo html::input('amount', $return->amount, "class='form-control'");?>
+          <?php $checked = $contract->return == 'done' ? 'checked' : '';?>
           <div class='input-group-addon'>
-            <label class='checkbox'><input type='checkbox' id='finish' name='finish' value='1'> <?php echo $lang->contract->completeReturn;?></label>
+            <label class='checkbox'><input type='checkbox' id='finish' name='finish' value='1' <?php echo $checked;?>> <?php echo $lang->contract->completeReturn;?></label>
           </div>
         </div>
       </td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->contract->returnedBy;?></th>
-      <td><?php echo html::select('returnedBy', $users, $this->app->user->account, "class='form-control chosen'");?></td><td></td>
+      <td><?php echo html::select('returnedBy', $users, $return->returnedBy, "class='form-control chosen'");?></td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->contract->returnedDate;?></th>
-      <td><?php echo html::input('returnedDate', '', "class='form-control form-date'");?></td>
+      <td><?php echo html::input('returnedDate', $return->returnedDate, "class='form-control form-date'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->contract->handlers;?></th>
-      <td colspan='2'><?php echo html::select('handlers[]', $users, $this->app->user->account, "class='form-control chosen' multiple");?></td>
+      <td colspan='2'><?php echo html::select('handlers[]', $users, $contract->handlers, "class='form-control chosen' multiple");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->comment;?></th>
@@ -53,14 +54,4 @@
     </tr>
   </table>
 </form>
-<?php if(!empty($contract->returnList)):?>
-<div class='panel'>
-  <div class='panel-heading'><strong><?php echo $lang->contract->returnRecords;?></strong></div>
-  <div class='panel-body'>
-    <?php foreach($contract->returnList as $return):?>
-    <?php printf($lang->contract->returnInfo, $return->returnedDate, zget($users, $return->returnedBy, $return->returnedBy), zget($currencySign, $contract->currency, '') . $return->amount);?>
-    <?php endforeach;?>
-  </div>
-</div>
-<?php endif;?>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>
