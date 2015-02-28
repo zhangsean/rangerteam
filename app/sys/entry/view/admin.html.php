@@ -10,6 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 include '../../common/view/header.html.php';
+$defaultImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQI12NgYGBgAAAABQABXvMqOgAAAABJRU5ErkJggg==';
 ?>
 <div class='panel'>
   <div class='panel-heading'>
@@ -32,7 +33,7 @@ include '../../common/view/header.html.php';
       <?php foreach($entries as $entry):?>
       <tr class='text-left'>
         <td><?php echo html::input("order[$entry->id]", $entry->order, "class='form-control input-sm text-center'")?></td>
-        <td><?php echo "<img src='$entry->logo' class='small-icon'>" . $entry->name?></td>
+        <td><?php echo "<img src='" . (empty($entry->logo) ? $defaultImg : $entry->logo) . "' class='small-icon'>" . $entry->name?></td>
         <td><?php echo $entry->code?></td>
         <td><?php if($entry->integration) echo $entry->key?></td>
         <td class='text-center'><?php echo $entry->ip?></td>
