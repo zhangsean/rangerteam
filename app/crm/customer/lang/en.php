@@ -39,7 +39,7 @@ $lang->customer->assignedTo    = 'Assigned to';
 $lang->customer->assignedBy    = 'Assigned By';
 $lang->customer->assignedDate  = 'Assigned Date';
 $lang->customer->contactBy     = 'Contact By';
-$lang->customer->contactDate   = 'Contact Date';
+$lang->customer->contactedDate = 'Contact Date';
 $lang->customer->nextDate      = 'Next Date';
 $lang->customer->selectContact = 'Select Contact';
 
