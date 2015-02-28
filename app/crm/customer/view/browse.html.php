@@ -21,14 +21,14 @@
     <thead>
       <tr class='text-center'>
         <?php $vars = "mode={$mode}&param=&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
-        <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->customer->id);?></th>
-        <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->customer->name);?></th>
-        <th class='w-60px'> <?php commonModel::printOrderLink('level',       $orderBy, $vars, $lang->customer->level);?></th>
-        <th class='w-60px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->customer->status);?></th>
-        <th class='w-80px visible-lg'><?php commonModel::printOrderLink('size',         $orderBy, $vars, $lang->customer->size);?></th>
-        <th class='w-80px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->customer->type);?></th>
-        <th class='w-100px visible-lg'><?php commonModel::printOrderLink('contactDate', $orderBy, $vars, $lang->customer->contactDate);?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('nextDate',    $orderBy, $vars, $lang->customer->nextDate);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->customer->id);?></th>
+        <th>                <?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->customer->name);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('level', $orderBy, $vars, $lang->customer->level);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->customer->status);?></th>
+        <th class='w-80px visible-lg'><?php commonModel::printOrderLink('size', $orderBy, $vars, $lang->customer->size);?></th>
+        <th class='w-80px'> <?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->customer->type);?></th>
+        <th class='w-100px visible-lg'><?php commonModel::printOrderLink('contactedDate', $orderBy, $vars, $lang->customer->contactedDate);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('nextDate', $orderBy, $vars, $lang->customer->nextDate);?></th>
         <th class='w-100px visible-lg'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->customer->createdDate);?></th>
         <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
