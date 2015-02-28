@@ -42,8 +42,8 @@
         <td><?php echo $action->date;?></td>
         <td>
           <?php
-          commonModel::printLink('action', 'undelete', "actionid=$action->id", $lang->action->undelete, '', "class='ajax'");
-          if($type == 'all') commonModel::printLink('action', 'hideOne',  "actionid=$action->id", $lang->action->hideOne, '', "class='ajax'");
+          commonModel::printLink('action', 'undelete', "actionid=$action->id", $lang->action->undelete, "class='ajax'");
+          if($type == 'all') commonModel::printLink('action', 'hideOne',  "actionid=$action->id", $lang->action->hideOne, "class='ajax'");
           ?>
         </td>
       </tr>

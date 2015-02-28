@@ -522,11 +522,19 @@ class contractModel extends model
     {
         $menu  = '';
 
+        $canCreateRecord = commonModel::hasPriv('action', 'createRecord');
+        $canReceive      = commonModel::hasPriv('contract', 'receive');
+        $canDelivery     = commonModel::hasPriv('contract', 'delivery');
+        $canFinish       = commonModel::hasPriv('contract', 'finish');
+        $canEdit         = commonModel::hasPriv('contract', 'edit');
+        $canCancel       = commonModel::hasPriv('contract', 'cancel');
+        $canDelete       = commonModel::hasPriv('contract', 'delete');
+
         if($type == 'view') $menu .= "<div class='btn-group'>";
 
-        $menu .= html::a(helper::createLink('action', 'createRecord', "objectType=contract&objectID={$contract->id}&customer={$contract->customer}"), $this->lang->contract->record, "class='$class' data-toggle='modal' data-type='iframe'");
+        if($canCreateRecord) $menu .= html::a(helper::createLink('action', 'createRecord', "objectType=contract&objectID={$contract->id}&customer={$contract->customer}"), $this->lang->contract->record, "class='$class' data-toggle='modal' data-type='iframe'");
 
-        if($contract->return != 'done' and $contract->status == 'normal')
+        if($contract->return != 'done' and $contract->status == 'normal' and $canReceive)
         {
             $menu .= html::a(helper::createLink('contract', 'receive',  "contract=$contract->id"), $this->lang->contract->return, "data-toggle='modal' class='$class'");
         }
@@ -535,7 +543,7 @@ class contractModel extends model
             $menu .= "<a href='###' disabled='disabled' class='disabled  $class'>" . $this->lang->contract->return . '</a> ';
         }
 
-        if($contract->delivery != 'done' and $contract->status == 'normal')
+        if($contract->delivery != 'done' and $contract->status == 'normal' and $canDelivery)
         {
             $menu .= html::a(helper::createLink('contract', 'delivery', "contract=$contract->id"), $this->lang->contract->delivery, "data-toggle='modal' class='$class'");
         }
@@ -546,7 +554,7 @@ class contractModel extends model
 
         if($type == 'view') $menu .= "</div><div class='btn-group'>";
 
-        if($contract->status == 'normal' and $contract->return == 'done' and $contract->delivery == 'done')
+        if($contract->status == 'normal' and $contract->return == 'done' and $contract->delivery == 'done' and $canFinish)
         {
             $menu .= html::a(helper::createLink('contract', 'finish', "contract=$contract->id"), $this->lang->finish, "data-toggle='modal' class='$class'");
         }
@@ -555,12 +563,12 @@ class contractModel extends model
             $menu .= "<a href='###' disabled='disabled' class='disabled $class'>" . $this->lang->finish . '</a> ';
         }
 
-        $menu .= html::a(helper::createLink('contract', 'edit', "contract=$contract->id"), $this->lang->edit, "class='$class'");
+        if($canEdit) $menu .= html::a(helper::createLink('contract', 'edit', "contract=$contract->id"), $this->lang->edit, "class='$class'");
 
         if($type == 'view')
         {
             $menu .= "</div><div class='btn-group'>";
-            if($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done'))
+            if($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done') and $canCancel)
             {
                 $menu .= html::a(helper::createLink('contract', 'cancel', "contract=$contract->id"), $this->lang->cancel, "data-toggle='modal' class='$class'");
             }
@@ -569,7 +577,7 @@ class contractModel extends model
                 $menu .= "<a href='###' disabled='disabled' class='disabled $class'>" . $this->lang->cancel . '</a> ';
             }
 
-            if($contract->status == 'canceled' or ($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done')))
+            if($contract->status == 'canceled' or ($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done')) and $canDelete)
             {
                 $menu .= html::a(helper::createLink('contract', 'delete', "contract=$contract->id"), $this->lang->delete, "class='deleter $class'");
             }
@@ -583,7 +591,7 @@ class contractModel extends model
         {
             $menu .="<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
 
-            if($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done'))
+            if($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done') and $canCancel)
             {
                 $menu .= "<li>" . html::a(helper::createLink('contract', 'cancel', "contract=$contract->id"), $this->lang->cancel, "data-toggle='modal' class='$class'") . "</li>";
             }
@@ -592,7 +600,7 @@ class contractModel extends model
                 $menu .= "<li><a href='###' disabled='disabled' class='disabled $class'>" . $this->lang->cancel . '</a></li> ';
             }
 
-            if($contract->status == 'canceled' or ($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done')))
+            if($contract->status == 'canceled' or ($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done')) and $canDelete)
             {
                 $menu .= "<li>" . html::a(helper::createLink('contract', 'delete', "contract=$contract->id"), $this->lang->delete, "class='reloadDeleter $class'") . "</li>";
             }

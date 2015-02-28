@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <ul id='menuTitle'>
-  <li><?php echo html::a($this->createLink('contract', 'browse'), $lang->contract->list);?></li>
+  <li><?php commonModel::printLink('contract', 'browse', '', $lang->contract->list);?></li>
   <li class='divider angle'></li>
   <li class='title'><?php echo $contract->name;?></li>
 </ul>

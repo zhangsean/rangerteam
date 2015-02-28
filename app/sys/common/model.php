@@ -949,17 +949,20 @@ class commonModel extends model
      * @param  string $method   the method
      * @param  string $vars     vars to be passed
      * @param  string $label    the label of the link
-     * @param  string $target   the target of the link
      * @param  string $misc     others
      * @param  bool   $newline 
+     * @param  bool   $onlyBody 
+     * @param  string $type     li
      * @static
      * @access public
      * @return bool
      */
-    public static function printLink($module, $method, $vars = '', $label, $target = '', $misc = '', $newline = true, $onlyBody = false)
+    public static function printLink($module, $method, $vars = '', $label, $misc = '', $newline = true, $onlyBody = false, $type = '')
     {
         if(!commonModel::hasPriv($module, $method)) return false;
+        if($type == 'li') echo '<li>';
         echo html::a(helper::createLink($module, $method, $vars, '', $onlyBody), $label, $misc);
+        if($type == 'li') echo '</li>';
         return true;
     }
 

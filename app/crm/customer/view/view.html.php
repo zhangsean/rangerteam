@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <ul id='menuTitle'>
-  <li><?php echo html::a($this->createLink('customer', 'browse'), "<i class='icon-list-ul'></i> " . $lang->customer->list);?></li>
+  <li><?php commonModel::printLink('customer', 'browse', '', "<i class='icon-list-ul'></i> " . $lang->customer->list);?></li>
   <li class='divider angle'></li>
   <li class='title'><?php echo $customer->name . $lang->customer->desc;?></li>
 </ul>
@@ -30,12 +30,12 @@
     <div class='page-actions'>
       <?php
       echo "<div class='btn-group'>";
-      echo html::a($this->createLink('action', 'createRecord', "objectType=customer&objectID={$customer->id}&customer={$customer->id}"), $lang->customer->record, "class='btn' data-toggle='modal' data-type='iframe' data-icon='comment-alt'");
-      echo html::a(inlink('assign', "customerID=$customer->id"), $lang->customer->assign, "class='btn' data-toggle='modal'");
+      commonModel::printLink('action', 'createRecord', "objectType=customer&objectID={$customer->id}&customer={$customer->id}", $lang->customer->record, "class='btn' data-toggle='modal' data-type='iframe' data-icon='comment-alt'");
+      commonModel::printLink('customer', 'assign', "customerID=$customer->id", $lang->customer->assign, "class='btn' data-toggle='modal'");
       echo '</div>';
       echo "<div class='btn-group'>";
-      echo html::a(inlink('edit', "customerID=$customer->id"), $lang->edit, "class='btn'");
-      echo html::a(inlink('delete', "customerID=$customer->id"), $lang->delete, "class='deleter btn'");
+      commonModel::printLink('customer', 'edit', "customerID=$customer->id", $lang->edit, "class='btn'");
+      commonModel::printLink('customer', 'delete', "customerID=$customer->id", $lang->delete, "class='deleter btn'");
       echo '</div>';
 
       $browseLink = $this->session->customerList ? $this->session->customerList : inlink('browse');

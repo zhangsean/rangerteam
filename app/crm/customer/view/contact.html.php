@@ -21,7 +21,7 @@
     <th class='w-110px'><?php echo $lang->contact->phone;?></th>
     <th class='w-80px'><?php echo $lang->contact->qq;?></th>
     <th class='w-70px text-middle' rowspan='<?php echo count($contacts) + 1;?>'>
-      <?php echo html::a(inlink('linkContact', "customerID=$customerID"), $lang->create, "class='loadInModal btn btn-primary' title='{$lang->customer->linkContact}'")?>
+      <?php commonModel::printLink('customer', 'linkContact', "customerID=$customerID", $lang->create, "class='loadInModal btn btn-primary' title='{$lang->customer->linkContact}'")?>
     </th>
   </tr>
   <?php foreach($contacts as $contact):?>

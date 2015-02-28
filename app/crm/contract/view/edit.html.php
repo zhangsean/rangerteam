@@ -15,9 +15,9 @@
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <ul id='menuTitle'>
-  <li><?php echo html::a($this->createLink('contract', 'browse'), $lang->contract->list);?></li>
+  <li><?php commonModel::printLink('contract', 'browse', '', $lang->contract->list);?></li>
   <li class='divider angle'></li>
-  <li><?php echo html::a($this->createLink('contract', 'view', "contractID={$contract->id}"), $lang->contract->view);?></li>
+  <li><?php commonModel::printLink('contract', 'view', "contractID={$contract->id}", $lang->contract->view);?></li>
   <li class='divider angle'></li>
   <li class='title'><?php echo $lang->contract->edit?></li>
 </ul>

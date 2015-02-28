@@ -14,7 +14,7 @@
 <?php js::set('mode', $mode);?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
-  <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->customer->create, 'class="btn btn-primary"');?>
+  <?php commonModel::printLink('customer', 'create', '', '<i class="icon-plus"></i> ' . $lang->customer->create, 'class="btn btn-primary"');?>
 </div>
 <div class='panel'>
   <table class='table table-hover table-striped tablesorter table-data table-fixed'>
@@ -47,15 +47,15 @@
         <td class='visible-lg'><?php echo substr($customer->createdDate, 0, 10);?></td>
         <td class='actions'>
           <?php
-          echo html::a($this->createLink('action', 'createRecord', "objectType=customer&objectID=$customer->id&customer=$customer->id"), $lang->customer->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt'");
-          echo html::a(inlink('assign', "customerID=$customer->id"), $lang->customer->assign, "data-toggle='modal'");
-          echo html::a(inlink('contact', "customerID=$customer->id"), $lang->customer->contact,  "data-toggle='modal'");
-          echo html::a(inlink('edit', "customerID=$customer->id"), $lang->edit);
+          commonModel::printLink('action',   'createRecord', "objectType=customer&objectID=$customer->id&customer=$customer->id", $lang->customer->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt'");
+          commonModel::printLink('customer', 'assign', "customerID=$customer->id", $lang->customer->assign, "data-toggle='modal'");
+          commonModel::printLink('customer', 'contact', "customerID=$customer->id", $lang->customer->contact,  "data-toggle='modal'");
+          commonModel::printLink('customer', 'edit', "customerID=$customer->id", $lang->edit);
           echo "<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
-          echo "<li>" . html::a(inlink('order', "customerID=$customer->id"), $lang->customer->order,    "data-toggle='modal'") . "</li>";
-          echo "<li>" . html::a(inlink('contract', "customerID=$customer->id"), $lang->customer->contract, "data-toggle='modal'") . "</li>";
-          echo "<li>" . html::a($this->createLink('address', 'browse', "objectType=customer&objectID=$customer->id"), $lang->customer->address, "data-toggle='modal'") . "</li>";
-          echo "<li>" . html::a(inlink('delete', "customerID=$customer->id"), $lang->delete, "class='deleter'") . "</li>";
+          commonModel::printLink('customer', 'order', "customerID=$customer->id", $lang->customer->order, "data-toggle='modal'", '', '', 'li');
+          commonModel::printLink('customer', 'contract', "customerID=$customer->id", $lang->customer->contract, "data-toggle='modal'", '', '', 'li');
+          commonModel::printLink('address',  'browse', "objectType=customer&objectID=$customer->id", $lang->customer->address, "data-toggle='modal'", '', '', 'li');
+          commonModel::printLink('customer', 'delete', "customerID=$customer->id", $lang->delete, "class='deleter'", '', '', 'li');
           echo "</ul></div>";
           ?>
         </td>

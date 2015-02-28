@@ -17,7 +17,7 @@
     <th><?php echo $lang->address->location;?></th>
     <th class='w-100px'><?php echo $lang->actions;?></th>
     <th class='w-70px text-middle' rowspan='<?php echo count($addresses) + 1;?>'>
-      <?php echo html::a(inlink('create', "objectType=$objectType&objectID=$objectID"), $lang->create, "class='loadInModal btn btn-primary' title='{$lang->address->create}'");?>
+      <?php commonModel::printLink('address', 'create', "objectType=$objectType&objectID=$objectID", $lang->create, "class='loadInModal btn btn-primary' title='{$lang->address->create}'");?>
     </th>
   </tr>
   <?php foreach($addresses as $address):?>
@@ -28,8 +28,8 @@
       <?php
       if($address->objectType == $objectType and $address->objectID == $objectID)
       {
-          echo html::a(inlink('edit', "id=$address->id"), $lang->edit, "class='loadInModal'");
-          echo html::a(inlink('delete', "id=$address->id"), $lang->delete, "class='deleter'");
+          commonModel::printLink('address', 'edit', "id=$address->id", $lang->edit, "class='loadInModal'");
+          commonModel::printLink('address', 'delete', "id=$address->id", $lang->delete, "class='deleter'");
       }
       ?>
     </td>

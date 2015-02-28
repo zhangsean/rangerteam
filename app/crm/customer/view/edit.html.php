@@ -14,9 +14,9 @@
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <ul id='menuTitle'>
-  <li><?php echo html::a($this->createLink('customer', 'browse'), $lang->customer->list);?></li>
+  <li><?php commonModel::printLink('customer', 'browse', '', $lang->customer->list);?></li>
   <li class='divider angle'></li>
-  <li><?php echo html::a($this->createLink('customer', 'view', "customerID={$customer->id}"), $lang->customer->view);?></li>
+  <li><?php commonModel::printLink('customer', 'view', "customerID={$customer->id}", $lang->customer->view);?></li>
   <li class='divider angle'></li>
   <li class='title'><?php echo $lang->customer->edit?></li>
 </ul>
