@@ -27,11 +27,13 @@ $lang->appModule->cash[] = 'trade';
 $lang->appModule->cash[] = 'depositor';
 $lang->appModule->cash[] = 'balance';
 $lang->appModule->cash[] = 'provider';
+$lang->appModule->cash[] = 'schema';
 
 $lang->appModule->oa = array();
 $lang->appModule->oa[] = 'project';
 $lang->appModule->oa[] = 'announce';
 $lang->appModule->oa[] = 'doc';
+$lang->appModule->oa[] = 'task';
 
 $lang->appModule->team = array();
 $lang->appModule->team[] = 'blog';
@@ -40,9 +42,7 @@ $lang->appModule->team[] = 'thread';
 $lang->appModule->team[] = 'user';
 
 $lang->appModule->sys = array();
-$lang->appModule->sys[] = 'task';
 $lang->appModule->sys[] = 'tree';
-$lang->appModule->sys[] = 'schema';
 $lang->appModule->sys[] = 'setting';
 
 /* Module order. */
