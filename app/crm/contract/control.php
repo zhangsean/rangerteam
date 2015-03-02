@@ -206,6 +206,56 @@ class contract extends control
     }
 
     /**
+     * Edit delivery.
+     * 
+     * @param  int    $deliveryID 
+     * @access public
+     * @return void
+     */
+    public function editDelivery($deliveryID)
+    {
+        $delivery = $this->contract->getDeliveryByID($deliveryID);
+        $contract = $this->contract->getByID($delivery->contract);
+        if(!empty($_POST))
+        {
+            $this->contract->editDelivery($delivery, $contract);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $this->view->title    = $this->lang->contract->editDelivery;
+        $this->view->delivery = $delivery;
+        $this->view->contract = $contract;
+        $this->view->users    = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
+
+    /**
+     * Delete delivery.
+     * 
+     * @param  int    $deliveryID 
+     * @access public
+     * @return void
+     */
+    public function deleteDelivery($deliveryID)
+    {
+        $delivery = $this->contract->getDeliveryByID($deliveryID);
+        $contract = $this->contract->getByID($delivery->contract);
+
+        $this->contract->deleteDelivery($deliveryID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+        $deleteInfo = sprintf($this->lang->contract->deleteDeliveryInfo, $delivery->deliveredDate);
+        $this->loadModel('action')->create('contract', $contract->id, 'deletedelivered', '', $deleteInfo);
+
+        $actionExtra = html::a($this->createLink('contract', 'view', "contractID=$contract->id"), $contract->name) . $deleteInfo; 
+        $this->loadModel('action')->create('customer', $contract->customer, 'deletedelivered', $this->post->comment, $actionExtra, $this->post->returnedBy);
+
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+    }
+
+    /**
      * Receive payments of the contract.
      * 
      * @param  int    $contractID 

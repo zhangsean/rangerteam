@@ -309,6 +309,77 @@ class contractModel extends model
     }
 
     /**
+     * Edit delivery of the contract.
+     * 
+     * @param  object $delivery 
+     * @param  object $contract 
+     * @access public
+     * @return bool
+     */
+    public function editDelivery($delivery, $contract)
+    {
+        $now = helper::now();
+        $data = fixer::input('post')
+            ->add('contract', $contract->id)
+            ->setDefault('deliveredBy', $this->app->user->account)
+            ->setDefault('deliveredDate', $now)
+            ->stripTags('comment', $this->config->allowedTags->admin)
+            ->get();
+
+        $this->dao->update(TABLE_DELIVERY)->data($data, $skip = 'uid, handlers, finish')->autoCheck()->exec();
+
+        if(!dao::isError())
+        {
+            $changes = commonModel::createChanges($delivery, $data);
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('contract', $contract->id, 'editDelivered');
+                $this->action->logHistory($actionID, $changes);
+            }
+
+            $contractData = fixer::input('post')
+                ->add('delivery', 'doing')
+                ->add('editedBy', $this->app->user->account)
+                ->add('editedDate', $now)
+                ->setDefault('deliveredBy', $this->app->user->account)
+                ->setDefault('deliveredDate', $now)
+                ->setIF($this->post->finish, 'delivery', 'done')
+                ->join('handlers', ',')
+                ->remove('finish')
+                ->get();
+
+            $this->dao->update(TABLE_CONTRACT)->data($contractData, $skip = 'uid, comment')
+                ->autoCheck()
+                ->where('id')->eq($contract->id)
+                ->exec();
+            
+            if(dao::isError()) return false;
+
+            $changes = commonModel::createChanges($contract, $contractData);
+            if($changes)
+            {
+                $actionID = $this->loadModel('action')->create('contract', $contract->id, 'Edited');
+                $this->action->logHistory($actionID, $changes);
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Delete return.
+     * 
+     * @param  int   $returnID
+     * @access public
+     * @return bool
+     */
+    public function deleteDelivery($deliveryID)
+    {
+        $this->dao->delete()->from(TABLE_DELIVERY)->where('id')->eq($deliveryID)->exec();
+        return !dao::isError();
+    }
+
+    /**
      * Receive payments of the contract.
      * 
      * @param  int    $contractID 
@@ -367,6 +438,18 @@ class contractModel extends model
     }
 
     /**
+     * Get delivery by ID.
+     * 
+     * @param  int    $deliveryID 
+     * @access public
+     * @return object
+     */
+    public function getDeliveryByID($deliveryID)
+    {
+        return $this->dao->select('*')->from(TABLE_DELIVERY)->where('id')->eq($deliveryID)->fetch();
+    }
+
+    /**
      * Edit return.
      * 
      * @param  object    $return 
@@ -395,10 +478,8 @@ class contractModel extends model
             $changes = commonModel::createChanges($return, $data);
             if($changes)
             {
-                $contractActionID = $this->loadModel('action')->create('contract', $contract->id, 'editReturned');
-                $customerActionID = $this->loadModel('action')->create('customer', $contract->customer, 'editReturned');
-                $this->action->logHistory($contractActionID, $changes);
-                $this->action->logHistory($customerActionID, $changes);
+                $actionID = $this->loadModel('action')->create('contract', $contract->id, 'editReturned');
+                $this->action->logHistory($actionID, $changes);
             }
 
             $contractData = new stdclass();
@@ -422,8 +503,6 @@ class contractModel extends model
             }
 
             if(!dao::isError() and $this->post->finish) $this->dao->update(TABLE_CUSTOMER)->set('status')->eq('payed')->where('id')->eq($contract->customer)->exec();
-
-            return dao::isError();
         }
 
         return false;

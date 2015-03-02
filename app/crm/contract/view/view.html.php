@@ -133,8 +133,12 @@
         <?php foreach($contract->deliveryList as $delivery):?>
         <tr>
           <td class='w-p25'><?php echo $delivery->deliveredDate;?></td>
-          <td class='w-p25'><?php echo zget($users, $delivery->deliveredBy, $delivery->deliveredBy);?></td>
-          <td class='w-p50'><?php echo $delivery->comment;?></td>
+          <td class='w-p20'><?php echo zget($users, $delivery->deliveredBy, $delivery->deliveredBy);?></td>
+          <td class='w-p35'><?php echo $delivery->comment;?></td>
+          <td class='w-p20'>
+            <?php echo html::a(inlink('editDelivery', "id=$delivery->id"), $lang->edit, "data-toggle='modal'");?>
+            <?php echo html::a(inlink('deleteDelivery', "id=$delivery->id"), $lang->delete, "class='deleter'");?>
+         </td>
         </tr>
         <?php endforeach;?>
       </table>
