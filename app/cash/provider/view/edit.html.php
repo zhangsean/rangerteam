@@ -14,7 +14,7 @@
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <ul id='menuTitle'>
-  <li><?php echo html::a($this->createLink('provider', 'browse'), $lang->provider->browse);?></li>
+  <li><?php commonModel::printLink('provider', 'browse', '', $lang->provider->browse);?></li>
   <li class='divider angle'></li>
 </ul>
 <div class='panel'>

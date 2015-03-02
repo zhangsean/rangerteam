@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<?php echo html::a(inlink('create', "depositor={$depositor}"), "<i class='icon-plus'></i> {$lang->balance->create}", "class='btn btn-primary btn-create loadInModal'")?>
+<?php commonModel::printLink('balance', 'create', "depositor={$depositor}", "<i class='icon-plus'></i> {$lang->balance->create}", "class='btn btn-primary btn-create loadInModal'")?>
 <table class='table table-hover table-striped table-data' id='balanceList'>
   <tr>
     <th><?php echo $lang->balance->depositor;?></th>
@@ -28,8 +28,8 @@
       <td><?php echo zget($currencyList, $balance->currency);?></td>
       <td><?php echo $balance->money;?></td>
       <td class='text-center'>
-        <?php echo html::a(inlink('edit', "balanceID={$balance->id}"), $lang->edit, "class='loadInModal'");?>
-        <?php echo html::a(inlink('delete', "balanceID={$balance->id}"), $lang->delete, "class='deleter'");?>
+        <?php commonModel::printLink('balance', 'edit', "balanceID={$balance->id}", $lang->edit, "class='loadInModal'");?>
+        <?php commonModel::printLink('balance', 'delete', "balanceID={$balance->id}", $lang->delete, "class='deleter'");?>
       </td>
     </tr>
     <?php endforeach;?>

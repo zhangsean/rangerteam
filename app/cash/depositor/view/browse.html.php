@@ -20,7 +20,7 @@
     <strong class='text-danger' title='<?php echo $sum?>'><?php echo $currencyList[$currency] . $lang->colon . commonModel::tidyMoney($sum);?></strong>
     <?php endforeach;?>
     <div class='panel-actions pull-right'>
-      <?php echo html::a(inlink('create'), "<i class='icon-plus'></i> {$lang->depositor->create}", "class='btn btn-primary' data-toggle='modal'")?>
+      <?php commonModel::printLink('depositor', 'create', '', "<i class='icon-plus'></i> {$lang->depositor->create}", "class='btn btn-primary' data-toggle='modal'")?>
     </div>
   </div>
   <div class='panel-body'>
@@ -53,12 +53,12 @@
           </div>
           <div class='card-actions'>
             <div class='pull-right'>
-              <?php echo html::a(inlink('edit', "depositorID=$depositor->id"), $lang->edit, "data-toggle='modal'");?>
-              <?php echo html::a(inlink('check', "depositorID=$depositor->id"), $lang->depositor->check);?>
-              <?php if($depositor->status == 'normal') echo html::a(inlink('forbid', "depositorID=$depositor->id"), $lang->depositor->forbid, "data-toggle=modal");?>
-              <?php if($depositor->status == 'disable') echo html::a(inlink('activate', "depositorID=$depositor->id"), $lang->depositor->activate, "data-toggle=modal");?>
-              <?php echo html::a($this->createLink('balance', 'browse', "depositorID=$depositor->id"), $lang->depositor->balance, "data-toggle='modal'");?>
-              <?php if(empty($trades[$depositor->id])) echo html::a(inlink('delete', "depositorID=$depositor->id"), $lang->delete, "class='deleter'");?>
+              <?php commonModel::printLink('depositor', 'edit', "depositorID=$depositor->id", $lang->edit, "data-toggle='modal'");?>
+              <?php commonModel::printLink('depositor', 'check', "depositorID=$depositor->id", $lang->depositor->check);?>
+              <?php if($depositor->status == 'normal') commonModel::printLink('depositor', 'forbid', "depositorID=$depositor->id", $lang->depositor->forbid, "data-toggle=modal");?>
+              <?php if($depositor->status == 'disable') commonModel::printLink('depositor', 'activate', "depositorID=$depositor->id", $lang->depositor->activate, "data-toggle=modal");?>
+              <?php commonModel::printLink('balance', 'browse', "depositorID=$depositor->id", $lang->depositor->balance, "data-toggle='modal'");?>
+              <?php if(empty($trades[$depositor->id])) commonModel::printLink('depositor', 'delete', "depositorID=$depositor->id", $lang->delete, "class='deleter'");?>
             </div>
             <?php echo "<span class='text-" . ($depositor->status == 'normal' ? 'success': 'danger') . "'>{$lang->depositor->statusList[$depositor->status]}</span>";?>
           </div>

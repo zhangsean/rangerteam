@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <div id='menuActions'>
-  <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->provider->create, 'class="btn btn-primary"');?>
+  <?php commonModel::printLink('provider', 'create', '', '<i class="icon-plus"></i> ' . $lang->provider->create, 'class="btn btn-primary"');?>
 </div>
 <div class='panel'>
   <table class='table table-hover table-striped tablesorter table-data'>
@@ -40,9 +40,9 @@
         <td><?php echo zget($industries, $provider->industry);?></td>
         <td class='visible-lg'><?php echo substr($provider->createdDate, 0, 10);?></td>
         <td class='actions'>
-          <?php echo html::a(inlink('contact', "providerID=$provider->id"), $lang->provider->contact, "data-toggle='modal'");?>
-          <?php echo html::a(inlink('edit',    "providerID=$provider->id"), $lang->edit);?>
-          <?php echo html::a(inlink('delete',  "providerID=$provider->id"), $lang->delete, "class='deleter'");?>
+          <?php commonModel::printLink('provider', 'contact', "providerID=$provider->id", $lang->provider->contact, "data-toggle='modal'");?>
+          <?php commonModel::printLink('provider', 'edit',    "providerID=$provider->id", $lang->edit);?>
+          <?php commonModel::printLink('provider', 'delete',  "providerID=$provider->id", $lang->delete, "class='deleter'");?>
         </td>
       </tr>
       <?php endforeach;?>

@@ -23,8 +23,8 @@
     <div class='page-actions'>
       <?php
       echo "<div class='btn-group'>";
-      echo html::a(inlink('edit', "providerID=$provider->id"), $lang->edit, "class='btn'");
-      echo html::a(inlink('delete', "providerID=$provider->id"), $lang->delete, "class='deleter btn'");
+      commonModel::printLink('provider', 'edit', "providerID=$provider->id", $lang->edit, "class='btn'");
+      commonModel::printLink('provider', 'delete', "providerID=$provider->id", $lang->delete, "class='deleter btn'");
       echo '</div>';
 
       $browseLink = $this->session->providerList ? $this->session->providerList : inlink('browse');

@@ -15,11 +15,11 @@
 <?php $vars = "mode={$mode}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
-  <?php echo html::a(inlink('create', 'type=in'),  "{$lang->trade->createIn}</i>", "class='btn btn-primary'")?>
-  <?php echo html::a(inlink('create', 'type=out'), "{$lang->trade->createOut}</i>", "class='btn btn-primary'")?>
-  <?php echo html::a(inlink('transfer'), "{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
-  <?php echo html::a(inlink('batchcreate'), "{$lang->trade->batchCreate}</i>", "class='btn btn-primary'")?>
-  <?php echo html::a(inlink('import'), "{$lang->trade->import}</i>", "class='btn btn-primary' data-toggle='modal'")?>
+  <?php commonModel::printLink('trade', 'create', 'type=in',  "{$lang->trade->createIn}</i>", "class='btn btn-primary'")?>
+  <?php commonModel::printLink('trade', 'create', 'type=out', "{$lang->trade->createOut}</i>", "class='btn btn-primary'")?>
+  <?php commonModel::printLink('trade', 'transfer', '', "{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
+  <?php commonModel::printLink('trade', 'batchcreate', '', "{$lang->trade->batchCreate}</i>", "class='btn btn-primary'")?>
+  <?php commonModel::printLink('trade', 'import', '', "{$lang->trade->import}</i>", "class='btn btn-primary' data-toggle='modal'")?>
 </div>
 <div class='panel'>
   <form method='post' action='<?php echo inlink('batchedit', 'step=form')?>'>
@@ -53,9 +53,9 @@
           <td><?php echo formatTime($trade->date, DT_DATE1);?></td>
           <td class='text-left visible-lg'><?php echo $trade->desc;?></td>
           <td>
-            <?php echo html::a(inlink('edit', "tradeID={$trade->id}"), $lang->edit);?>
-            <?php echo html::a(inlink('detail', "tradeID={$trade->id}"), $lang->trade->detail, "data-toggle='modal'");?>
-            <?php echo html::a(inlink('delete', "tradeID={$trade->id}"), $lang->delete, "class='deleter'");?>
+            <?php commonModel::printLink('trade', 'edit', "tradeID={$trade->id}", $lang->edit);?>
+            <?php commonModel::printLink('trade', 'detail', "tradeID={$trade->id}", $lang->trade->detail, "data-toggle='modal'");?>
+            <?php commonModel::printLink('trade', 'delete', "tradeID={$trade->id}", $lang->delete, "class='deleter'");?>
           </td>
         </tr>
         <?php endforeach;?>
