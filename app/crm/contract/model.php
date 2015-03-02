@@ -353,14 +353,7 @@ class contractModel extends model
                 ->where('id')->eq($contract->id)
                 ->exec();
             
-            if(dao::isError()) return false;
-
-            $changes = commonModel::createChanges($contract, $contractData);
-            if($changes)
-            {
-                $actionID = $this->loadModel('action')->create('contract', $contract->id, 'Edited');
-                $this->action->logHistory($actionID, $changes);
-            }
+            return !dao::isError();
         }
 
         return false;
@@ -493,16 +486,9 @@ class contractModel extends model
 
             $this->dao->update(TABLE_CONTRACT)->data($contractData, $skip = 'uid, comment')->where('id')->eq($contract->id)->exec();
 
-            if(dao::isError()) return false;
-
-            $changes = commonModel::createChanges($contract, $contractData);
-            if($changes)
-            {
-                $actionID = $this->loadModel('action')->create('contract', $contract->id, 'Edited');
-                $this->action->logHistory($actionID, $changes);
-            }
-
             if(!dao::isError() and $this->post->finish) $this->dao->update(TABLE_CUSTOMER)->set('status')->eq('payed')->where('id')->eq($contract->customer)->exec();
+
+            return !dao::isError();
         }
 
         return false;
