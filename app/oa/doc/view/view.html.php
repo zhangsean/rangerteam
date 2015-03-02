@@ -59,8 +59,8 @@
     if(!$doc->deleted)
     {
         echo "<div class='btn-group'>";
-        echo html::a($this->createLink('doc', 'edit', $params), $lang->edit, "class='btn'");
-        echo html::a($this->createLink('doc', 'delete', $params), $lang->delete, "class='deleter btn'");
+        commonModel::printLink('doc', 'edit', $params, $lang->edit, "class='btn'");
+        commonModel::printLink('doc', 'delete', $params, $lang->delete, "class='deleter btn'");
         echo "</div>";
     }
 

@@ -14,7 +14,7 @@
 <?php js::set('mode', $mode)?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
-  <?php echo html::a($this->inlink('create'), "<i class='icon-plus'></i> " . $lang->announce->create, "class='btn btn-primary'");?>
+  <?php commonModel::printLink('announce', 'create', '', "<i class='icon-plus'></i> " . $lang->announce->create, "class='btn btn-primary'");?>
 </div>
 <div id='mainContent'>
   <div class='panel list list-condensed'>
@@ -31,8 +31,8 @@
         <div class='item-content'>
           <div class='text'><?php echo $article->content;?></div>
           <div class='text pull-right'>
-            <?php echo html::a(inlink('edit', "articleID={$article->id}"), $lang->edit);?>
-            <?php echo html::a(inlink('delete', "articleID={$article->id}"), $lang->delete, "class='deleter'");?>
+            <?php commonModel::printLink('announce', 'edit', "articleID={$article->id}", $lang->edit);?>
+            <?php commonModel::printLink('announce', 'delete', "articleID={$article->id}", $lang->delete, "class='deleter'");?>
           </div>
         </div>
       </div>

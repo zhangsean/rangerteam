@@ -27,8 +27,8 @@
             <button class='btn btn-mini' data-toggle='dropdown'><span class='caret'></span></button>
             <ul class='dropdown-menu pull-right'>
               <?php
-              echo '<li>' . html::a(inlink('editLib',   "libID=$libID"), "<i class='icon-edit'> {$lang->edit}</i>", "data-toggle='modal'") . '</li>';
-              echo '<li>' . html::a(inlink('deleteLib', "libID=$libID"), "<i class='icon-remove'> {$lang->delete}</i>", "class='deleter'") . '</li>';
+              commonModel::printLink('doc', 'editLib',   "libID=$libID", "<i class='icon-edit'> {$lang->edit}</i>", "data-toggle='modal'", '', '', 'li');
+              commonModel::printLink('doc', 'deleteLib', "libID=$libID", "<i class='icon-remove'> {$lang->delete}</i>", "class='deleter'", '', '', 'li');
               ?>
             </ul>
           </div>
@@ -38,7 +38,7 @@
       <div class='panel-body'>
         <?php echo $moduleTree;?>
         <div class='text-right'>
-          <?php echo html::a($this->createLink('tree', 'browse', "type=doc&moduleID=0&rootID=$libID"), $lang->doc->manageType, "class='btn'");?>
+          <?php commonModel::printLink('tree', 'browse', "type=doc&moduleID=0&rootID=$libID", $lang->doc->manageType, "class='btn'");?>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
     <div class='panel'>
       <div class='panel-heading'>
         <strong><i class='icon-list-ul'></i> <?php echo $lang->doc->browse;?></strong>
-        <div class='panel-actions pull-right'><?php echo html::a($this->inlink('create', "libID=$libID&moduleID=$moduleID&productID=$productID&projectID=$projectID"), '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?></div>
+        <div class='panel-actions pull-right'><?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&productID=$productID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?></div>
       </div>
       <table class='table table-hover table-striped tablesorter table-fixed' id='docList'>
         <thead>
@@ -69,18 +69,14 @@
           ?>
           <tr class='text-center'>
             <td><?php if($canView) echo html::a($viewLink, sprintf('%03d', $doc->id)); else printf('%03d', $doc->id);?></td>
-            <td class='text-left' title="<?php echo $doc->title?>"><nobr><?php echo html::a($viewLink, $doc->title);?></nobr></td>
+            <td class='text-left' title="<?php echo $doc->title?>"><nobr><?php echo $canView ? html::a($viewLink, $doc->title) : $doc->title;?></nobr></td>
             <td><?php echo $lang->doc->types[$doc->type];?></td>
             <td><?php isset($users[$doc->createdBy]) ? print($users[$doc->createdBy]) : print($doc->createdBy);?></td>
             <td class='visible-lg'><?php echo date("m-d H:i", strtotime($doc->createdDate));?></td>
             <td class='actions'>
               <?php 
-              echo html::a($this->createLink('doc', 'edit', "doc={$doc->id}"), $lang->edit);
-              if(commonModel::hasPriv('doc', 'delete'))
-              {
-                  $deleteURL = $this->createLink('doc', 'delete', "docID=$doc->id&confirm=yes");
-                  echo html::a($deleteURL, $lang->delete, "class='reloadDeleter'");
-              }
+              commonMOdel::printLink('doc', 'edit', "doc={$doc->id}", $lang->edit);
+              commonModel::printLink('doc', 'delete', "docID=$doc->id&confirm=yes", $lang->delete, "class='reloadDeleter'");
               ?>
             </td>
           </tr>
