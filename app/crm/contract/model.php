@@ -726,7 +726,7 @@ class contractModel extends model
             }
         }
 
-        foreach($totalAmount as $type => $currencyAmount) foreach($currencyAmount as $currency => $amount) $totalAmount[$type][$currency] = $currencySign[$currency] . $amount;
+        foreach($totalAmount as $type => $currencyAmount) foreach($currencyAmount as $currency => $amount) $totalAmount[$type][$currency] = "<span title='$amount'>" . $currencySign[$currency] . commonModel::tidyMoney($amount) . "</span>";
 
         return $totalAmount;
     }

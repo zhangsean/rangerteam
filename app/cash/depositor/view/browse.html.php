@@ -17,7 +17,7 @@
     <?php foreach($balances as $currency => $balanceList):?>
     <?php $sum = 0;?>
     <?php foreach($balanceList as $balance) $sum += $balance->money;?>
-    <strong class='text-danger'><?php echo $currencyList[$currency] . $lang->colon . commonModel::tidyMoney($sum);?></strong>
+    <strong class='text-danger' title='<?php echo $sum?>'><?php echo $currencyList[$currency] . $lang->colon . commonModel::tidyMoney($sum);?></strong>
     <?php endforeach;?>
     <div class='panel-actions pull-right'>
       <?php echo html::a(inlink('create'), "<i class='icon-plus'></i> {$lang->depositor->create}", "class='btn btn-primary' data-toggle='modal'")?>

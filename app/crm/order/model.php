@@ -450,7 +450,7 @@ class orderModel extends model
             }
         }
 
-        foreach($totalAmount as $type => $currencyAmount) foreach($currencyAmount as $currency => $amount) $totalAmount[$type][$currency] = $currencySign[$currency] . $amount;
+        foreach($totalAmount as $type => $currencyAmount) foreach($currencyAmount as $currency => $amount) $totalAmount[$type][$currency] = "<span title='$amount'>" . $currencySign[$currency] . commonModel::tidyMOney($amount) . "</span>";
 
         return $totalAmount;
     }
