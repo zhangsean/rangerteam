@@ -27,7 +27,7 @@
     <ul class="nav nav-primary nav-stacked">
       <li class="nav-heading"><?php echo $parentBoard->name;?></li>
       <?php foreach($parentBoard->children as $childBoard):?>
-      <li><?php echo html::a(inlink('board', "id=$childBoard->id"), $childBoard->name, "id='board{$childBoard->id}'");?></li>
+      <li><?php commonModel::printLink('forum', 'board', "id=$childBoard->id", $childBoard->name, "id='board{$childBoard->id}'");?></li>
       <?php endforeach;?>
     </ul>
     <?php endforeach;?>
@@ -38,7 +38,7 @@
         <strong><i class='icon-comments-alt icon-large'></i>&nbsp;<?php $common->printForum($board);?></strong>
         <?php if($board->moderators) printf(" &nbsp;<span class='moderators'>" . $lang->forum->lblOwner . '</span>', trim(implode($board->moderators, ','), ',')); ?>
         <div class='panel-actions pull-right'>
-          <?php if($this->forum->canPost($board)) echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil icon-large"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn btn-primary'");?>
+          <?php if($this->forum->canPost($board)) commonModel::printLink('thread', 'post', "boardID=$board->id", '<i class="icon-pencil icon-large"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn btn-primary'");?>
         </div>
       </div>
       <table class='table table-hover table-striped'>
@@ -71,7 +71,7 @@
               if($thread->replies)
               {
                   echo substr($thread->repliedDate, 5, -3) . ' ';
-                  echo html::a($this->createLink('thread', 'locate', "threadID={$thread->id}&replyID={$thread->replyID}"), $thread->repliedByRealname);
+                  commonModel::printLink('thread', 'locate', "threadID={$thread->id}&replyID={$thread->replyID}", $thread->repliedByRealname);
               }
               ?>
             </td>  
@@ -96,7 +96,7 @@
               if($thread->replies)
               {
                   echo substr($thread->repliedDate, 5, -3) . ' ';
-                  echo html::a($this->createLink('thread', 'locate', "threadID={$thread->id}&replyID={$thread->replyID}"), $thread->repliedByRealname);
+                  commonModel::printLink('thread', 'locate', "threadID={$thread->id}&replyID={$thread->replyID}", $thread->repliedByRealname);
               }
               ?>
             </td>  

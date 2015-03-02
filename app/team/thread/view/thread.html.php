@@ -44,7 +44,7 @@
           {
               if($thread->stick != $stick)
               {
-                  echo '<li>' . html::a(inlink('stick', "thread=$thread->id&stick=$stick"), $label, "class='jsoner'") . '</li>';
+                  commonModel::printLink('thread', 'stick', "thread=$thread->id&stick=$stick", $label, "class='jsoner'", '', '', 'li');
               }
               else
               {
@@ -57,16 +57,16 @@
         <?php
         if($thread->hidden)
         {
-            echo html::a(inlink('switchStatus', "threadID=$thread->id"), '<i class="icon-eye-open"></i> ' . $lang->thread->show, "class='switcher'");
+            commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", '<i class="icon-eye-open"></i> ' . $lang->thread->show, "class='switcher'");
         }
         else
         {
-            echo html::a(inlink('switchStatus', "threadID=$thread->id"), '<i class="icon-eye-close"></i> ' . $lang->thread->hide, "class='switcher'");
+            commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", '<i class="icon-eye-close"></i> ' . $lang->thread->hide, "class='switcher'");
         }
-        echo html::a(inlink('delete', "threadID=$thread->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'");
+        commonModel::printLink('thread', 'delete', "threadID=$thread->id", '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'");
         ?>
         <?php endif; ?>
-      <?php if($this->thread->canManage($board->id, $thread->author)) echo html::a(inlink('edit', "threadID=$thread->id"), '<i class="icon-pencil"></i> ' . $lang->edit); ?>
+      <?php if($this->thread->canManage($board->id, $thread->author)) commonModel::printLink('thread', 'edit', "threadID=$thread->id", '<i class="icon-pencil"></i> ' . $lang->edit); ?>
       <a href='#reply' class='thread-reply-btn<?php echo ($thread->readonly ? ' disabled' : '');?>'><i class='icon-reply'></i> <?php echo $lang->reply->common; ?></a>
       <?php else: ?>
       <a href="<?php echo $this->createLink('user', 'login', 'referer=' . helper::safe64Encode($this->app->getURI(true))); ?>#reply" class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common; ?></a>
