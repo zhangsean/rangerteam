@@ -138,10 +138,9 @@
     /**
      * Get entry by id or code
      * @param  {string} id
-     * @param  {bool}   exactMatch
      * @return {object}
      */
-    function getEntry(id, exactMatch)
+    function getEntry(id)
     {
         if(id && entries)
         {
@@ -149,7 +148,7 @@
             for(var i = entries.length - 1; i >= 0; --i)
             {
                 et = entries[i];
-                if(id == et.id || (!exactMatch && id == et.code)) return et;
+                if(id == et.id || id == et.code) return et;
             }
         }
         return null;
@@ -571,11 +570,11 @@
     };
 
     /* Open a entry window */
-    windowsManager.prototype.openEntry = function(et, url, go2index, exactMatch)
+    windowsManager.prototype.openEntry = function(et, url, go2index)
     {
         if(typeof et == 'string')
         {
-            et = getEntry(et, exactMatch);
+            et = getEntry(et);
         }
 
         if(!et)
@@ -1738,9 +1737,9 @@
     }
 
     /* Open an entry by given id and url(optional) */
-    function openEntry(id, url, exactMatch)
+    function openEntry(id, url)
     {
-        windows.openEntry(id, url, null, exactMatch);
+        windows.openEntry(id, url, null);
     }
 
     /* 
