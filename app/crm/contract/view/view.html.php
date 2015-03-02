@@ -112,8 +112,8 @@
           <td class='w-p30'><?php echo zget($users, $return->returnedBy, $return->returnedBy);?></td>
           <td class='w-p20'><?php echo zget($currencySign, $contract->currency, '') . $return->amount;?></td>
           <td class='w-p20'>
-            <?php echo html::a(inlink('editReturn', "id=$return->id"), $lang->edit, "data-toggle='modal'");?>
-            <?php echo html::a(inlink('deleteReturn', "id=$return->id"), $lang->delete, "class='deleter'");?>
+            <?php commonModel::printLink('contract', 'editReturn', "id=$return->id", $lang->edit, "data-toggle='modal'");?>
+            <?php commonModel::printLink('contract', 'deleteReturn', "id=$return->id", $lang->delete, "class='deleter'");?>
          </td>
         </tr>
         <?php endforeach;?>
@@ -136,8 +136,8 @@
           <td class='w-p20'><?php echo zget($users, $delivery->deliveredBy, $delivery->deliveredBy);?></td>
           <td class='w-p35'><?php echo $delivery->comment;?></td>
           <td class='w-p20'>
-            <?php echo html::a(inlink('editDelivery', "id=$delivery->id"), $lang->edit, "data-toggle='modal'");?>
-            <?php echo html::a(inlink('deleteDelivery', "id=$delivery->id"), $lang->delete, "class='deleter'");?>
+            <?php commonModel::printLink('contract', 'editDelivery', "id=$delivery->id", $lang->edit, "data-toggle='modal'");?>
+            <?php commonModel::printLink('contract', 'deleteDelivery', "id=$delivery->id", $lang->delete, "class='deleter'");?>
          </td>
         </tr>
         <?php endforeach;?>

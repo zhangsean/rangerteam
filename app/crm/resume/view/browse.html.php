@@ -19,7 +19,7 @@
     <th><?php echo $lang->resume->title;?></th>
     <th class='w-80px'><?php echo $lang->actions;?></th>
     <th class='w-70px text-middle' rowspan='<?php echo count($resumes) + 1;?>'>
-      <?php echo html::a(inlink('create', "contactID=$contact->id"), $lang->create, "class='loadInModal btn btn-primary' title='{$lang->resume->create}'");?>
+      <?php commonModel::printLink('resume', 'create', "contactID=$contact->id", $lang->create, "class='loadInModal btn btn-primary' title='{$lang->resume->create}'");?>
     </th>
   </tr>
   <?php foreach($resumes as $resume):?>
@@ -35,8 +35,8 @@
     <td><?php echo $resume->title?></td>
     <td>
       <?php
-      echo html::a(inlink('edit', "id=$resume->id"), $lang->edit, "class='loadInModal'");
-      echo html::a(inlink('delete', "id=$resume->id"), $lang->delete, "class='deleter'");
+      commonModel::printLink('resume', 'edit', "id=$resume->id", $lang->edit, "class='loadInModal'");
+      commonModel::printLink('resume', 'delete', "id=$resume->id", $lang->delete, "class='deleter'");
       ?>
     </td>
   </tr>

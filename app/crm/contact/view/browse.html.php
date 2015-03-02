@@ -14,7 +14,7 @@
 <?php js::set('mode', $mode);?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
-  <?php echo html::a(inlink('create'), "<i class='icon-plus'></i> {$lang->contact->create}", "class='btn btn-primary'")?>
+  <?php commonModel::printLink('contact', 'create', '', "<i class='icon-plus'></i> {$lang->contact->create}", "class='btn btn-primary'")?>
 </div>
 <div class='panel'>
   <table class='table table-hover table-striped tablesorter table-data table-fixed' id='contactList'>

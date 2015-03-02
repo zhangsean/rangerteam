@@ -32,8 +32,8 @@
       echo "</div>";
 
       echo "<div class='btn-group'>";
-      echo html::a(inlink('edit', "contactID=$contact->id"), $lang->edit, "class='btn'");
-      echo html::a(inlink('delete', "contactID=$contact->id"), $lang->delete, "class='deleter btn'");
+      commonModel::printLink('contact', 'edit', "contactID=$contact->id", $lang->edit, "class='btn'");
+      commonModel::printLink('contact', 'delete', "contactID=$contact->id", $lang->delete, "class='deleter btn'");
       echo "</div>";
 
       $browseLink = $this->session->contactList ? $this->session->contactList : inlink('browse');
