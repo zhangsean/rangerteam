@@ -42,7 +42,8 @@ class tradeModel extends model
             ->where('parent')->eq('')
             ->beginIF($mode == 'in')->andWhere('type')->eq('in')
             ->beginIF($mode == 'out')->andWhere('type')->eq('out')
-            ->beginIF($mode == 'transfer')->andWhere('type')->like('transfer%')->orWhere('type')->eq('fee')
+            ->beginIF($mode == 'transfer')->andWhere('type')->like('transfer%')->orWhere('category')->eq('fee')
+            ->beginIF($mode == 'inveset')->andWhere('type')->in('inveset,redeem')->orWhere('category')->in('profit,loss')
             ->beginIF($mode == 'bysearch')->andWhere($tradeQuery)->fi()
             ->orderBy($orderBy)
             ->page($pager)
@@ -500,7 +501,7 @@ class tradeModel extends model
 
         if($this->post->fee)
         {
-            $fee->type     = 'fee';
+            $fee->type     = 'out';
             $fee->category = 'fee';
             $fee->money    = $this->post->fee;
             $fee->desc     = sprintf($this->lang->trade->feeDesc, $fee->date, $paymentDepositor->abbr, $receiptDepositor->abbr);
@@ -514,6 +515,64 @@ class tradeModel extends model
         }
 
         return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'));
+    }
+
+    /**
+     * Inveset.
+     * 
+     * @access public
+     * @return int|bool
+     */
+    public function inveset()
+    {
+        $depositor = $this->loadModel('depositor')->getByID($this->post->depositor);
+        $now = helper::now();
+
+        $data = fixer::input('post')
+            ->add('category', $this->post->type)
+            ->add('currency', !empty($depositor) ? $depositor->currency : '')
+            ->add('handlers', trim(join(',', $this->post->handlers), ','))
+            ->add('createdBy', $this->app->user->account)
+            ->add('createdDate', $now)
+            ->add('editedDate', $now)
+            ->get();
+
+        $this->dao->insert(TABLE_TRADE)
+            ->data($data, $skip = 'invesetCategory, invesetMoney')
+            ->autoCheck()
+            ->batchCheck($this->config->trade->require->inveset, 'notempty')
+            ->exec();
+
+        if(dao::isError()) return false;
+
+        $tradeID = $this->dao->lastInsertID();
+        $this->loadModel('action')->create('trade', $tradeID, 'Created');
+
+        if($this->post->type == 'redeem' and $this->post->invesetMoney)
+        {
+            $inveset = fixer::input('post') 
+                ->setIF($this->post->invesetCategory == 'profit', 'type', 'in')
+                ->setIF($this->post->invesetCategory == 'loss', 'type', 'out')
+                ->add('category', $this->post->invesetCategory)
+                ->add('money', $this->post->invesetMoney)
+                ->add('currency', !empty($depositor) ? $depositor->currency : '')
+                ->add('handlers', trim(join(',', $this->post->handlers), ','))
+                ->add('createdBy', $this->app->user->account)
+                ->add('createdDate', $now)
+                ->add('editedDate', $now)
+                ->get();
+
+            $this->dao->insert(TABLE_TRADE)
+                ->data($inveset, $skip = 'invesetMoney, invesetCategory')
+                ->autoCheck()
+                ->batchCheck($this->config->trade->require->inveset, 'notempty')
+                ->exec();
+
+            if(dao::isError()) return false;
+
+            $revesetID = $this->dao->lastInsertID();
+            $this->loadModel('action')->create('trade', $revesetID, 'Created');
+        }
     }
 
     /**

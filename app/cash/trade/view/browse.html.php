@@ -18,6 +18,7 @@
   <?php commonModel::printLink('trade', 'create', 'type=in',  "{$lang->trade->createIn}</i>", "class='btn btn-primary'")?>
   <?php commonModel::printLink('trade', 'create', 'type=out', "{$lang->trade->createOut}</i>", "class='btn btn-primary'")?>
   <?php commonModel::printLink('trade', 'transfer', '', "{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
+  <?php commonModel::printLink('trade', 'inveset', '', "{$lang->trade->inveset}</i>", "class='btn btn-primary'")?>
   <?php commonModel::printLink('trade', 'batchcreate', '', "{$lang->trade->batchCreate}</i>", "class='btn btn-primary'")?>
   <?php commonModel::printLink('trade', 'import', '', "{$lang->trade->import}</i>", "class='btn btn-primary' data-toggle='modal'")?>
 </div>

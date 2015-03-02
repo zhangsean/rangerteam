@@ -34,10 +34,13 @@ $lang->trade->transferOut = '转出金额';
 $lang->trade->schema      = '模板';
 $lang->trade->importFile  = '导入文件';
 $lang->trade->encode      = '编码';
+$lang->trade->ditto       = '同上';
 
 $lang->trade->create      = '记账';
 $lang->trade->in          = '收入';
 $lang->trade->out         = '支出';
+$lang->trade->inveset     = '投资';
+$lang->trade->redeem      = '赎回';
 $lang->trade->createIn    = '记收入';
 $lang->trade->createOut   = '记支出';
 $lang->trade->transfer    = '记转账';
@@ -55,14 +58,29 @@ $lang->trade->typeList['in']          = '收入';
 $lang->trade->typeList['out']         = '支出';
 $lang->trade->typeList['transferout'] = '转出';
 $lang->trade->typeList['transferin']  = '转入';
-$lang->trade->typeList['fee']         = '手续费';
+$lang->trade->typeList['inveset']     = '投资';
+$lang->trade->typeList['redeem']      = '赎回';
 
 $lang->trade->categoryList['transferin']  = '转入';
 $lang->trade->categoryList['transferout'] = '转出';
-$lang->trade->categoryList['fee']         = '手续费';
+$lang->trade->categoryList['inveset']     = '投资';
+$lang->trade->categoryList['redeem']      = '赎回';
+
+$lang->trade->expenseCategoryList['fee']  = '手续费';
+$lang->trade->expenseCategoryList['loss'] = '理财亏损';
+
+$lang->trade->incomeCategoryList['profit'] = '理财盈利';
+
+$lang->trade->categoryList = $lang->trade->categoryList + $lang->trade->expenseCategoryList + $lang->trade->incomeCategoryList;
+
+$lang->trade->invesetCategoryList['profit'] = '盈利';
+$lang->trade->invesetCategoryList['loss']   = '亏损';
 
 $lang->trade->objectTypeList['order']    = '订单支出';
 $lang->trade->objectTypeList['contract'] = '合同支出';
+
+$lang->trade->invesetTypeList['inveset'] = '投资';
+$lang->trade->invesetTypeList['redeem']  = '赎回';
 
 $lang->trade->encodeList['gbk']  = 'GBK';
 $lang->trade->encodeList['utf8'] = 'UTF-8';

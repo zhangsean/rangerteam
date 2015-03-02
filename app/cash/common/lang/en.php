@@ -30,6 +30,7 @@ $lang->trade->menu->browse   = array('link' => 'Bills|trade|browse|mode=all');
 $lang->trade->menu->in       = array('link' => 'Income|trade|browse|mode=in');
 $lang->trade->menu->out      = array('link' => 'Expenditure|trade|browse|mode=out');
 $lang->trade->menu->transfer = array('link' => 'Transfer|trade|browse|mode=transfer');
+$lang->trade->menu->inveset  = array('link' => 'Inveset|trade|browse|mode=inveset&orderBy=depositor');
 
 /* Menu of trade module. */
 $lang->provider = new stdclass();

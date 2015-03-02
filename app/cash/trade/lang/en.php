@@ -34,10 +34,13 @@ $lang->trade->transferOut = 'Amount';
 $lang->trade->schema      = 'Schema';
 $lang->trade->importFile  = 'Import file';
 $lang->trade->encode      = 'Encode';
+$lang->trade->ditto       = 'Ditto';
 
 $lang->trade->create      = 'Create Trade';
 $lang->trade->in          = 'Income';
 $lang->trade->out         = 'Expend';
+$lang->trade->inveset     = 'Inveset';
+$lang->trade->redeem      = 'Redeem';
 $lang->trade->createIn    = 'Income';
 $lang->trade->createOut   = 'Expend';
 $lang->trade->transfer    = 'Transfer';
@@ -55,14 +58,29 @@ $lang->trade->typeList['in']          = 'Income';
 $lang->trade->typeList['out']         = 'Expend';
 $lang->trade->typeList['transferout'] = 'Transfer out';
 $lang->trade->typeList['transferin']  = 'Transfer in';
-$lang->trade->typeList['fee']         = 'Fee';
+$lang->trade->typeList['inveset']     = 'Inveset';
+$lang->trade->typeList['redeem']      = 'Redeem';
 
 $lang->trade->categoryList['transferin']  = 'Transfer In';
 $lang->trade->categoryList['transferout'] = 'Transfer Out';
-$lang->trade->categoryList['fee']         = 'Fee';
+$lang->trade->categoryList['inveset']     = 'Inveset';
+$lang->trade->categoryList['redeem']      = 'Redeem';
+
+$lang->trade->expenseCategoryList['fee']  = 'Fee';
+$lang->trade->expenseCategoryList['loss'] = 'Loss';
+
+$lang->trade->incomeCategoryList['profit'] = 'Profit';
+
+$lang->trade->categoryList = $lang->trade->categoryList + $lang->trade->expenseCategoryList + $lang->trade->incomeCategoryList;
+
+$lang->trade->invesetCategoryList['profit'] = 'Profit';
+$lang->trade->invesetCategoryList['loss']   = 'Loss';
 
 $lang->trade->objectTypeList['order']    = 'Order';
 $lang->trade->objectTypeList['contract'] = 'Contract';
+
+$lang->trade->invesetTypeList['inveset'] = 'Inveset';
+$lang->trade->invesetTypeList['redeem']  = 'Redeem';
 
 $lang->trade->encodeList['gbk']  = 'GBK';
 $lang->trade->encodeList['utf8'] = 'UTF-8';

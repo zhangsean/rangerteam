@@ -101,8 +101,8 @@ class trade extends control
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs();
 
-        if($type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0);
-        if($type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0);
+        if($type == 'out') $this->view->categories = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
+        if($type == 'in')  $this->view->categories = $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
 
         $this->display();
     }
@@ -129,14 +129,16 @@ class trade extends control
         unset($this->lang->trade->menu);
         unset($this->lang->trade->typeList['transferin']);
         unset($this->lang->trade->typeList['transferout']);
+        unset($this->lang->trade->typeList['inveset']);
+        unset($this->lang->trade->typeList['redeem']);
 
         $this->view->title        = $this->lang->trade->batchCreate;
         $this->view->depositors   = array('' => '') + $this->loadModel('depositor')->getPairs();
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->customerList = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->view->traderList   = $this->loadModel('customer', 'crm')->getPairs('provider');
-        $this->view->expenseTypes = $this->loadModel('tree')->getOptionMenu('out', 0);
-        $this->view->incomeTypes  = $this->loadModel('tree')->getOptionMenu('in', 0);
+        $this->view->expenseTypes = array('' => '') + $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
+        $this->view->incomeTypes  = array('' => '') + $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
         $this->view->deptList     = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
 
         $this->display();
@@ -186,8 +188,8 @@ class trade extends control
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
        
-        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0);
-        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0);
+        if($trade->type == 'out') $this->view->categories = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0);
+        if($trade->type == 'in')  $this->view->categories = $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0);
 
         $this->display();
     }
@@ -211,6 +213,30 @@ class trade extends control
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->depositorList = $this->loadModel('depositor')->getList();
+
+        $this->display();
+    }
+
+    /**
+     * Inveset.
+     * 
+     * @access public
+     * @return void
+     */
+    public function inveset()
+    {
+        if($_POST)
+        {
+            $this->trade->inveset(); 
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        }
+
+        unset($this->lang->trade->menu);
+        $this->view->title         = $this->lang->trade->inveset;
+        $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
+        $this->view->depositorList = array('' => '') + $this->loadModel('depositor')->getPairs();
 
         $this->display();
     }
@@ -248,8 +274,8 @@ class trade extends control
         $this->view->details    = $details;
         $this->view->users      = $this->loadModel('user')->getPairs();
 
-        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0);
-        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0);
+        if($trade->type == 'out') $this->view->categories = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
+        if($trade->type == 'in')  $this->view->categories = $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
 
         $this->display();
     }
@@ -320,8 +346,8 @@ class trade extends control
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->customerList = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->view->traderList   = $this->loadModel('customer', 'crm')->getPairs('provider');
-        $this->view->expenseTypes = $this->loadModel('tree')->getOptionMenu('out', 0);
-        $this->view->incomeTypes  = $this->loadModel('tree')->getOptionMenu('in', 0);
+        $this->view->expenseTypes = array('' => '') + $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
+        $this->view->incomeTypes  = array('' => '') + $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
         $this->view->deptList     = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
 
         $this->display();
@@ -386,8 +412,8 @@ class trade extends control
 
         $customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
         $traderList    = $this->customer->getPairs('provider,partner');
-        $expenseTypes  = $this->loadModel('tree')->getOptionMenu('out', 0);
-        $incomeTypes   = $this->tree->getOptionMenu('in', 0);
+        $expenseTypes  = array('' => '') + $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
+        $incomeTypes   = array('' => '') + $this->lang->trade->incomeCategoryList + $this->tree->getOptionMenu('in', 0, $removeRoot = true);
         $deptList      = $this->loadModel('tree')->getPairs(0, 'dept');
         $flipCustomers = array_flip($customerList);
         $flipTraders   = array_flip($traderList);
