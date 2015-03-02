@@ -107,6 +107,7 @@ class entryModel extends model
             ->batchCheck($this->config->entry->require->create, 'notempty')
             ->check('code', 'unique')
             ->check('code', 'code')
+            ->check('code', 'notInt')
             ->exec();
 
         if(dao::isError()) return false;

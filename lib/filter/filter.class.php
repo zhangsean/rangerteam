@@ -70,6 +70,19 @@ class validater
     }
 
     /**
+     * Not int checking. 
+     * 
+     * @param  int    $var 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function checkNotInt($var)
+    {
+        return !self::checkInt($var);
+    }
+
+    /**
      * Float checking.
      * 
      * @param  float  $var 

@@ -242,6 +242,7 @@ $lang->error->passwordrule = "Password should more than six letters.";
 $lang->error->captcha      = 'Captcah wrong.';
 $lang->error->noWritable   = '%s maybe not write, please modify permissions!';
 $lang->error->noConvertFun = 'Iconv and mb_convert_encoding does not exist, you can not turn the data into the desired coding!';
+$lang->error->notInt       = '<strong>%s</strong> should be not a interger.';
 
 /* The pager items. */
 $lang->pager = new stdclass();
