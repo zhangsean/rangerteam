@@ -14,9 +14,9 @@
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php'; ?>
 <ul id='menuTitle'>
-  <li><?php echo html::a($this->createLink('order', 'browse'), "<i class='icon-list-ul'></i> " . $lang->order->list);?></li>
+  <li><?php commonModel::printLink('order', 'browse', '', "<i class='icon-list-ul'></i> " . $lang->order->list);?></li>
   <li class='divider angle'></li>
-  <li><?php echo html::a($this->createLink('order', 'view', "orderID={$order->id}"), $lang->order->view);?></li>
+  <li><?php commonModel::printLink('order', 'view', "orderID={$order->id}", $lang->order->view);?></li>
   <li class='divider angle'></li>
   <li class='title'><?php echo $lang->order->edit?></li>
 </ul>

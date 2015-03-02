@@ -38,8 +38,8 @@
         <td><?php echo $lang->product->statusList[$product->status];?></td>
         <td>
           <?php
-          echo html::a($this->createLink('product', 'edit', "productID=$product->id"), $lang->edit, "data-toggle='modal'");
-          echo html::a($this->createLink('product', 'delete', "productID=$product->id"), $lang->delete, "class='reloadDeleter'");
+          commonModel::printLink('product', 'edit', "productID=$product->id", $lang->edit, "data-toggle='modal'");
+          commonModel::printLink('product', 'delete', "productID=$product->id", $lang->delete, "class='reloadDeleter'");
           ?>
         </td>
       </tr>

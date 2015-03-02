@@ -14,9 +14,9 @@
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <ul id='menuTitle'>
-  <li><?php echo html::a($this->createLink('contact', 'browse'), $lang->contact->list);?></li>
+  <li><?php commonModel::printLink('contact', 'browse', '', $lang->contact->list);?></li>
   <li class='divider angle'></li>
-  <li><?php echo html::a($this->createLink('contact', 'view', "contactID={$contact->id}"), $lang->contact->view);?></li>
+  <li><?php commonModel::printLink('contact', 'view', "contactID={$contact->id}", $lang->contact->view);?></li>
   <li class='divider angle'></li>
   <li class='title'><?php echo $lang->contact->edit?></li>
 </ul>

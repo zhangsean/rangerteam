@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <ul id='menuTitle'>
-  <li><?php echo html::a($this->createLink('contact', 'browse'), "<i class='icon-list-ul'></i> " . $lang->contact->list);?></li>
+  <li><?php commonModel::printLink('contact', 'browse', '', "<i class='icon-list-ul'></i> " . $lang->contact->list);?></li>
   <li class='divider angle'></li>
   <li class='title'><?php echo $contact->realname;?></li>
 </ul>
@@ -26,9 +26,9 @@
     <div class='page-actions'>
       <?php
       echo "<div class='btn-group'>";
-      echo html::a($this->createLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}"), $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt' class='btn'");
-      echo html::a($this->createLink('address', 'browse', "objectType=contact&objectID=$contact->id"), $lang->contact->address, "data-toggle='modal' class='btn'");
-      echo html::a($this->createLink('resume', 'browse', "contactID=$contact->id"), $lang->contact->resume, "data-toggle='modal' class='btn'");
+      commonModel::printLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt' class='btn'");
+      commonModel::printLink('address', 'browse', "objectType=contact&objectID=$contact->id", $lang->contact->address, "data-toggle='modal' class='btn'");
+      commonModel::printLink('resume', 'browse', "contactID=$contact->id", $lang->contact->resume, "data-toggle='modal' class='btn'");
       echo "</div>";
 
       echo "<div class='btn-group'>";
