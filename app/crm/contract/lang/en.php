@@ -61,6 +61,8 @@ $lang->contract->returnRecords    = 'Payments records';
 $lang->contract->deliveryRecords  = 'Delivery records';
 $lang->contract->completeReturn   = 'Complete payments';
 $lang->contract->completeDelivery = 'Complete delivery';
+$lang->contract->editReturn       = 'Edit payment';
+$lang->contract->editDelivery     = 'Edit delivery';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = 'Pending';
@@ -87,6 +89,8 @@ $lang->contract->codeUnitList['input'] = 'Input';
 $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = 'Turnover';
 
-$lang->contract->totalAmount  = 'The total amount:%s,returned amount:%s in this page;';
-$lang->contract->returnInfo   = "<p>%s, received payments by <strong>%s</strong>, %s.</p>";
-$lang->contract->deliveryInfo = "<p>%s, delivered by %s.</p>";
+$lang->contract->totalAmount        = 'The total amount:%s,returned amount:%s in this page;';
+$lang->contract->returnInfo         = "<p>%s, received payments by <strong>%s</strong>, %s.</p>";
+$lang->contract->deliveryInfo       = "<p>%s, delivered by %s.</p>";
+$lang->contract->deleteReturnInfo   = "%s in %s";
+$lang->contract->deleteDeliveryInfo = "in %s";
