@@ -338,18 +338,24 @@ class tradeModel extends model
 
         $newCustomer = array();
         $newTrader   = array();
+        $category    = '';
+        $dept        = '';
+
         /* Get data. */
         foreach($this->post->type as $key => $type)
         {
             if(empty($type)) break;
             if(!$this->post->money[$key]) continue;
 
+            $category = $this->post->category[$key] == 'ditto' ? $category : $this->post->category[$key];
+            $dept     = $this->post->dept[$key]     == 'ditto' ? $dept : $this->post->dept[$key];
+
             $trade = new stdclass();
             $trade->type           = $type;
             $trade->depositor      = $depositorID;
             $trade->money          = $this->post->money[$key];
-            $trade->category       = $this->post->category[$key];
-            $trade->dept           = $this->post->dept[$key];
+            $trade->category       = $category;
+            $trade->dept           = $dept;
             $trade->trader         = $this->post->trader[$key];
             $trade->createTrader   = isset($this->post->createTrader[$key])   ? $this->post->createTrader[$key] : '';
             $trade->traderName     = isset($this->post->traderName[$key])     ? $this->post->traderName[$key] : '';

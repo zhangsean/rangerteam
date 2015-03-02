@@ -31,12 +31,28 @@
         </tr>
       </thead>
       <tbody>
+        <?php
+        $incomeTypes['ditto']           = $lang->trade->ditto;
+        $expenseTypes['ditto']          = $lang->trade->ditto;
+        $deptList['ditto']              = $lang->trade->ditto;
+        ?>
         <?php foreach($trades as $i => $trade):?>
+        <?php
+        if($i == 0)
+        {
+            $trade['category'] = $trade['category'] ? $trade['category'] : '';
+            $trade['dept']     = $trade['dept'] ? $trade['dept'] : '';
+        }
+        else
+        {
+            $trade['category'] = $trade['category'] ? $trade['category'] : 'ditto';
+            $trade['dept']     = $trade['dept'] ? $trade['dept'] : 'ditto';
+        }
+        ?>
         <tr>
           <td class='text-middle'><?php echo $depositor->abbr;?></td>
           <td>
             <?php echo html::select("type[$i]", $lang->trade->typeList, $trade['type'], "class='form-control type' id='type{$i}'");?>
-            <?php if($trade['type'] == 'fee') echo html::hidden("", $trade['source'])?>
           </td>
           <td>
             <?php echo html::select("category[$i]", $incomeTypes, $trade['category'], "class='form-control in' style='display:none'");?>
