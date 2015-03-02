@@ -440,7 +440,7 @@ class trade extends control
                 $row[$fields['money']] = str_replace(array(',', ' '), '', $row[$fields['money']]);
                 if(!is_numeric($row[$fields['money']])) continue;
             }
- 
+
             $data = array();
             foreach($fields as $field => $col)
             {
@@ -470,12 +470,6 @@ class trade extends control
 
             if(isset($flipTypeList[$data['type']])) $data['type'] = $flipTypeList[$data['type']];
 
-            /* if fee is a record and trader is empty then this type of data is fee. */
-            if(!$schema->fee and !$data['trader'])
-            {
-                $data['source'] = $data['type'];
-                $data['type']   = 'fee';
-            }
 
             $matchs = $data['type'] == 'out' ? $flipTraders : ($data['type'] == 'in' ? $flipCustomers : '');
             if($matchs and isset($matchs[$data['trader']])) $data['trader'] = $matchs[$data['trader']];
@@ -493,14 +487,15 @@ class trade extends control
                 }
             }
 
+            if(!$fields['fee'] and in_array($data['category'], array('fee', 'profit', 'loss')) and $data['trader']) continue;
+ 
             $fee = $data['fee'];
             unset($data['fee']);
             $dataList[] = $data;
 
             if($schema->fee and $fee)
             {
-                $data['source'] = $data['type'];
-                $data['type']   = 'fee';
+                $data['type']   = 'out';
                 $data['money']  = $fee;
                 $data['desc']   = '';
                 $dataList[]    = $data;
