@@ -58,6 +58,7 @@ class projectModel extends model
     {
         $members = $this->dao->select('account')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($projectID)->fetchPairs('account');
         $users = $this->dao->select('account, realname')->from(TABLE_USER)->where('account')->in($members)->orderBy('id_asc')->fetchPairs();
+        foreach($users as $account => $realname) if($realname == '') $users[$account] = $account; 
         return array('' => '') + $users;
     }
 
