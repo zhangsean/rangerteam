@@ -37,6 +37,7 @@ $lang->depositor->forbid      = 'Disable';
 $lang->depositor->activate    = 'Activate';
 $lang->depositor->balance     = 'Blance';
 $lang->depositor->saveBalance = 'Save balance';
+$lang->depositor->detail      = 'Detail';
 
 $lang->depositor->check         = 'Check';
 $lang->depositor->start         = 'Begin';

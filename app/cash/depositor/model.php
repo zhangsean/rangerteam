@@ -189,9 +189,10 @@ class depositorModel extends model
         {
             $computed = $this->computeTrades($tradeList, $id);
 
-            $depositor->origin   = isset($balances[$id][$start]) ? $balances[$id][$start]->money : 0;
-            $depositor->computed = $depositor->origin + $this->computeTrades($tradeList, $id);
-            $depositor->actual   = isset($balances[$id][$end]) ? $balances[$id][$end]->money : 0;
+            $depositor->origin    = isset($balances[$id][$start]) ? $balances[$id][$start]->money : 0;
+            $depositor->computed  = $depositor->origin + $this->computeTrades($tradeList, $id);
+            $depositor->actual    = isset($balances[$id][$end]) ? $balances[$id][$end]->money : 0;
+            $depositor->tradeList = !empty($tradeList[$id]) ? $tradeList[$id] : array();
         }
 
         return $depositorList;

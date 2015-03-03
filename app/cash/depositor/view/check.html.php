@@ -32,7 +32,7 @@
     </form>
   </div>
   <?php if(!empty($results)):?>
-  <table class='table table-hover table-striped tablesorter table-data'>
+  <table class='table tablesorter table-data'>
     <thead>
       <tr>
         <th><?php echo $lang->depositor->common;?></th>
@@ -63,8 +63,45 @@
         <?php if($diff < 0):?>
         <td><?php printf($lang->depositor->less, $diff);?></td>
         <?php endif;?>
-        <td><?php echo html::a(inlink('saveBalance', "depositor={$depositorID}&mony={$result->computed}&date=" . strtotime($this->post->end)), $lang->depositor->saveBalance, "class='btn-save-result'");?></td>
+        <td>
+          <?php echo html::a(inlink('saveBalance', "depositor={$depositorID}&mony={$result->computed}&date=" . strtotime($this->post->end)), $lang->depositor->saveBalance, "class='btn-save-result'");?>
+          <?php if($result->tradeList) echo html::a('javascript:;', $lang->depositor->detail, "class='btn-detail'");?>
+        </td>
       </tr>
+      <?php if($result->tradeList):?>
+      <tr class='detail hide'>
+        <td colspan='9'>
+          <table class='table table-hover table-striped table-data'>
+            <thead>
+              <tr class='text-center'>
+                <th class='w-50px'> <?php echo $lang->trade->id;?></th>
+                <th class='w-60px'> <?php echo $lang->trade->type;?></th>
+                <th>                <?php echo $lang->trade->trader;?></th>
+                <th class='w-120px'><?php echo $lang->trade->money;?></th>
+                <th class='w-100px'><?php echo $lang->trade->category;?></th>
+                <th class='w-100px'><?php echo $lang->trade->handlers;?></th>
+                <th class='w-100px'><?php echo $lang->trade->date;?></th>
+                <th class='visible-lg'><?php echo $lang->trade->desc;?></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($result->tradeList as $trade):?>
+              <tr class='text-center'>
+                <td><?php echo $trade->id;?></td>
+                <td><?php echo $lang->trade->typeList[$trade->type];?></td>
+                <td><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
+                <td><?php echo zget($currencySign, $trade->currency) . $trade->money;?></td>
+                <td><?php echo zget($categories, $trade->category, ' ');?></td>
+                <td><?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?></td>
+                <td><?php echo formatTime($trade->date, DT_DATE1);?></td>
+                <td class='text-left visible-lg'><?php echo $trade->desc;?></td>
+              </tr>
+              <?php endforeach;?>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <?php endif;?>
       <?php endforeach;?>
     </tbody>
   </table>

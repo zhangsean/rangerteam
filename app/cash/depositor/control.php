@@ -155,6 +155,7 @@ class depositor extends control
      */
     public function check($depositorID = 0)
     {
+        $this->loadModel('trade');
         unset($this->lang->depositor->menu);
         $this->lang->menuGroups->depositor = 'check';
 
@@ -164,8 +165,11 @@ class depositor extends control
         {
             $selected = (array) $this->post->depositor;
             if(in_array('all', $selected)) $selected = array();
-            $this->view->results    = $this->depositor->check($selected, $this->post->start, $this->post->end);
+            $this->view->results = $this->depositor->check($selected, $this->post->start, $this->post->end);
         }
+
+        $expenseTypes = $this->loadModel('tree')->getPairs(0, 'out');
+        $incomeTypes  = $this->loadModel('tree')->getPairs(0, 'in');
 
         $this->view->start         = $this->post->start;
         $this->view->end           = $this->post->end;
@@ -173,7 +177,11 @@ class depositor extends control
         $this->view->selected      = $selected;
         $this->view->depositorList = $this->depositor->getPairs();
         $this->view->dateOptions   = (array) $this->loadModel('balance')->getDateOptions();
+        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->categories    = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
+        $this->view->currencySign  = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->currencyList  = $this->loadModel('common', 'sys')->getCurrencyList();
+        $this->view->users         = $this->loadModel('user')->getPairs();
 
         $this->display();
     } 
