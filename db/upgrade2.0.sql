@@ -6,3 +6,5 @@ ALTER TABLE `oa_relation` RENAME TO `sys_relation`;
 UPDATE `cash_trade` SET `type` = 'out' WHERE `type`='fee';
 
 ALTER TABLE `cash_trade` CHANGE `type` `type` enum('in','out','transferin','transferout','inveset','redeem') NOT NULL AFTER `dept`;
+
+ALTER TABLE `crm_order` CHANGE `product` `product` char(30) NOT NULL AFTER `id`;
