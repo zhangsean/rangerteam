@@ -22,6 +22,7 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->at      = ' 于 ';
 $lang->by      = ' 由 ';
 $lang->ditto   = '同上';
+$lang->etc     = '等';
 
 /* Apps lang items.*/
 $lang->apps = new stdclass();

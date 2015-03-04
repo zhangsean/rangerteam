@@ -22,6 +22,7 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->at      = ' At ';
 $lang->by      = ' By ';
 $lang->ditto   = 'Ditto';
+$lang->etc     = 'Etc';
 
 /* Apps lang items.*/
 $lang->apps = new stdclass();
