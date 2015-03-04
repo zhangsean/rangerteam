@@ -79,7 +79,7 @@ class task extends control
         $this->view->project   = $project;
         $this->view->projectID = $projectID;
         $this->view->projects  = $this->loadModel('project')->getPairs();
-        $this->view->users     = $this->loadModel('project')->getMemberPairs($projectID);
+        $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
