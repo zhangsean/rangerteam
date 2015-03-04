@@ -41,7 +41,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->order->product;?></th>
-              <td><?php echo html::select('product', $products, $order->product, "class='form-control chosen'");?></td>
+              <td><?php echo html::select('product[]', $products, $order->product, "class='form-control chosen' multiple");?></td>
             </tr>
             <tr>
               <th><?php echo $lang->order->currency;?></th>

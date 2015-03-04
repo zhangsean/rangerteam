@@ -149,7 +149,6 @@ class order extends control
     
         $this->view->order        = $order;
         $this->view->title        = $this->lang->order->view;
-        $this->view->product      = $this->loadModel('product')->getByID($order->product);
         $this->view->customer     = $this->loadModel('customer')->getByID($order->customer);
         $this->view->contract     = $this->order->getContract($orderID);
         $this->view->users        = $this->loadModel('user')->getPairs();

@@ -26,8 +26,10 @@ class orderModel extends model
         $order = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($id)->andWhere('customer')->in($customerIdList)->fetch(); 
         if(!$order) return false;
 
-        $product = $this->loadModel('product')->getByID($order->product);
-        if(!$product) return false;
+        $products = $this->dao->select('*')->from(TABLE_PRODUCT)->where('id')->in($order->product)->orderBy('id_desc')->fetchAll();
+        if(empty($products)) return false;
+
+        $order->products = $products;
 
         return $order;
     }
@@ -75,9 +77,8 @@ class orderModel extends model
         if(strpos($orderBy, 'status') !== false) $orderBy .= ', closedReason';
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
-        $orders = $this->dao->select('o.*, c.name as customerName, c.level as level, p.name as productName')->from(TABLE_ORDER)->alias('o')
+        $orders = $this->dao->select('o.*, c.name as customerName, c.level as level')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
-            ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
             ->where('o.deleted')->eq(0)
             ->beginIF($mode == 'past')->andWhere('o.nextDate')->andWhere('o.nextDate')->lt(helper::today())->fi()
             ->beginIF($mode == 'today')->andWhere('o.nextDate')->eq(helper::today())->fi()
@@ -90,7 +91,13 @@ class orderModel extends model
             ->andWhere('o.customer')->in($customerIdList)
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
-        foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->customerName, $order->productName); 
+        $this->setProductsForOrders($orders);
+
+        foreach($orders as $order)
+        {
+            $productName = count($order->products) > 1 ? $order->products[0] . $this->lang->etc : $order->products[0];
+            $order->title = sprintf($this->lang->order->titleLBL, $order->customerName, $productName, date('Y-m-d', strtotime($order->createdDate))); 
+        }
 
         return $orders;
     }
@@ -104,13 +111,18 @@ class orderModel extends model
      */
     public function getByIdList($idList)
     {
-        $orders = $this->dao->select('o.*, c.name as customerName, p.name as productName')->from(TABLE_ORDER)->alias('o')
+        $orders = $this->dao->select('o.*, c.name as customerName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
-            ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
             ->where('o.id')->in($idList)
             ->fetchAll('id');
 
-        foreach($orders as $order) $order->title = sprintf($this->lang->order->titleLBL, $order->customerName, $order->productName); 
+        $this->setProductsForOrders($orders);
+
+        foreach($orders as $order)
+        {
+            $productName = count($order->products) > 1 ? $order->products[0] . $this->lang->etc : $order->products[0];
+            $order->title = sprintf($this->lang->order->titleLBL, $order->customerName, $productName, date('Y-m-d', strtotime($order->createdDate))); 
+        }
 
         return $orders;
     }
@@ -128,16 +140,21 @@ class orderModel extends model
         $customerIdList = $this->loadModel('customer')->getMine();
         if(empty($customerIdList)) return array();
 
-        $orders = $this->dao->select('o.id, o.createdDate, c.name as customerName, p.name as productName')->from(TABLE_ORDER)->alias('o')
+        $orders = $this->dao->select('o.id, o.createdDate, o.product, c.name as customerName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
-            ->leftJoin(TABLE_PRODUCT)->alias('p')->on("o.product=p.id")
             ->where(1)
             ->beginIF($customer)->andWhere('customer')->eq($customer)->fi()
             ->beginIF($status)->andWhere('status')->eq($status)->fi()
             ->andWhere('o.customer')->in($customerIdList)
             ->fetchAll('id');
 
-        foreach($orders as $key => $order) $orders[$key] = sprintf($this->lang->order->titleLBL, $order->customerName, $order->productName); 
+        $this->setProductsForOrders($orders);
+
+        foreach($orders as $key => $order)
+        {
+            $productName = count($order->products) > 1 ? $order->products[0] . $this->lang->etc : $order->products[0];
+            $orders[$key] = sprintf($this->lang->order->titleLBL, $order->customerName, $productName, date('Y-m-d', strtotime($order->createdDate))); 
+        }
 
         return $orders;
     }
@@ -159,11 +176,13 @@ class orderModel extends model
             ->fetchAll('id');
 
         $customers = $this->loadModel('customer')->getPairs('client');
-        $products  = $this->loadModel('product')->getPairs();
+
+        $this->setProductsForOrders($orders);
 
         foreach($orders as $order)
         {
-           $order->title = sprintf($this->lang->order->selectTitle, $customers[$order->customer], $products[$order->product], date('Y-m-d', strtotime($order->createdDate))); 
+            $productName = count($order->products) > 1 ? $order->products[0] . $this->lang->etc : $order->products[0];
+            $order->title = sprintf($this->lang->order->titleLBL, $customers[$order->customer], $productName, date('Y-m-d', strtotime($order->createdDate))); 
         }
 
         return array('0' => '') + $orders;
@@ -239,6 +258,7 @@ class orderModel extends model
             ->setDefault('assignedBy', $this->app->user->account)
             ->setDefault('assignedTo', $this->app->user->account)
             ->setDefault('assignedDate', $now)
+            ->join('product', ',')
             ->setIF($this->post->createCustomer, 'customer', isset($customerID) ? $customerID : '')
             ->remove('createCustomer, name, contact, phone, email, qq')
             ->get();
@@ -274,6 +294,7 @@ class orderModel extends model
             ->setDefault('nextDate', '0000-00-00')
             ->setDefault('signedDate', '0000-00-00')
             ->setDefault('closedDate', '0000-00-00 00:00:00')
+            ->join('product', ',')
 
             ->setIF($this->post->signedBy, 'status', 'signed')
             ->setIF($this->post->closedBy, 'status', 'closed')
@@ -453,5 +474,24 @@ class orderModel extends model
         foreach($totalAmount as $type => $currencyAmount) foreach($currencyAmount as $currency => $amount) $totalAmount[$type][$currency] = "<span title='$amount'>" . $currencySign[$currency] . commonModel::tidyMOney($amount) . "</span>";
 
         return $totalAmount;
+    }
+
+    /**
+     * Set pruducts for orders.
+     * 
+     * @param  array  $orders 
+     * @access public
+     * @return void
+     */
+    public function setProductsForOrders($orders)
+    {
+        $products = $this->loadModel('product')->getPairs();
+
+        foreach($orders as $order)
+        {
+            $order->products = array();
+            $order->product  = explode(',', $order->product);
+            foreach($order->product as $product) $order->products[] = $products[$product];
+        }
     }
 }

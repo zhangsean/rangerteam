@@ -14,7 +14,8 @@
 <ul id='menuTitle'>
   <li><?php commonmodel::printLink('order', 'browse', '', "<i class='icon-list-ul'></i> " . $lang->order->list);?></li>
   <li class='divider angle'></li>
-  <li class='title'><?php printf($lang->order->titleLBL, $customer->name, $product->name);?> <span class='label-primary label'><?php echo $customer->level != '0' ? $customer->level : '';?></span> <span class='label-success label'><?php echo $lang->order->statusList[$order->status];?></span></li>
+  <?php $productName = count($order->products) > 1 ? current($order->products)->name . $lang->etc : current($order->products)->name;?>
+  <li class='title'><?php printf($lang->order->titleLBL, $customer->name, $productName, date('Y-m-d', strtotime($order->createdDate)));?> <span class='label-primary label'><?php echo $customer->level != '0' ? $customer->level : '';?></span> <span class='label-success label'><?php echo $lang->order->statusList[$order->status];?></span></li>
 </ul>
 <div class='row-table'>
   <div class='col-main'>
@@ -24,7 +25,12 @@
         <?php 
         $payed = $order->status == 'payed';
         $customerLink = html::a($this->createLink('customer', 'view', "customerID={$customer->id}"), $customer->name);
-        $productLink  = html::a($this->createLink('product', 'view', "productID={$product->id}"), $product->name);
+        $productLink = '';
+        foreach($order->products as $product)
+        {
+            $productLink .= html::a($this->createLink('product', 'view', "productID={$product->id}"), $product->name);
+        }
+
         if($contract) $contractLink = html::a($this->createLink('contract', 'view', "contractID={$contract->id}"), $contract->name);
         ?>
         <p><?php printf($lang->order->infoBuy, $customerLink, $productLink);?></p>
