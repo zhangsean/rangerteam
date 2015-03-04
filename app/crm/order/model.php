@@ -95,7 +95,7 @@ class orderModel extends model
 
         foreach($orders as $order)
         {
-            $productName = count($order->products) > 1 ? $order->products[0] . $this->lang->etc : $order->products[0];
+            $productName = count($order->products) > 1 ? current($order->products) . $this->lang->etc : current($order->products);
             $order->title = sprintf($this->lang->order->titleLBL, $order->customerName, $productName, date('Y-m-d', strtotime($order->createdDate))); 
         }
 
@@ -120,7 +120,7 @@ class orderModel extends model
 
         foreach($orders as $order)
         {
-            $productName = count($order->products) > 1 ? $order->products[0] . $this->lang->etc : $order->products[0];
+            $productName = count($order->products) > 1 ? current($order->products) . $this->lang->etc : current($order->products);
             $order->title = sprintf($this->lang->order->titleLBL, $order->customerName, $productName, date('Y-m-d', strtotime($order->createdDate))); 
         }
 
@@ -152,7 +152,7 @@ class orderModel extends model
 
         foreach($orders as $key => $order)
         {
-            $productName = count($order->products) > 1 ? $order->products[0] . $this->lang->etc : $order->products[0];
+            $productName = count($order->products) > 1 ? current($order->products) . $this->lang->etc : current($order->products);
             $orders[$key] = sprintf($this->lang->order->titleLBL, $order->customerName, $productName, date('Y-m-d', strtotime($order->createdDate))); 
         }
 
@@ -181,7 +181,7 @@ class orderModel extends model
 
         foreach($orders as $order)
         {
-            $productName = count($order->products) > 1 ? $order->products[0] . $this->lang->etc : $order->products[0];
+            $productName = count($order->products) > 1 ? current($order->products) . $this->lang->etc : current($order->products);
             $order->title = sprintf($this->lang->order->titleLBL, $customers[$order->customer], $productName, date('Y-m-d', strtotime($order->createdDate))); 
         }
 

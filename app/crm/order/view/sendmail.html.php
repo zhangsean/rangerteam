@@ -25,7 +25,8 @@ if($onlybody) $_GET['onlybody'] = 'no';
     <fieldset>
       <legend><?php echo $lang->order->view;?></legend>
       <div class='content'>
-        <p><?php printf($lang->order->infoBuy, $order->customerName, $order->productName);?></p>
+        <?php $productName = count($order->products) > 1 ? current($order->products) . $lang->etc : current($order->products);?>
+        <p><?php printf($lang->order->infoBuy, $order->customerName, $productName);?></p>
         <?php if($order->status == 'signed' and $contract):?>
         <p><?php printf($lang->order->infoContract, $order->contractName);?></p>
         <?php endif;?>

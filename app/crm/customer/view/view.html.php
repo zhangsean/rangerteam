@@ -128,7 +128,7 @@
       <table class='table table-data table-condensed'>
         <?php foreach($orders as $order):?>
         <tr data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id"); ?>'>
-          <td class='w-p35'><?php echo $products[$order->product];?></td>
+          <td class='w-p35'><?php foreach($order->products as $product) echo $product . ' ';?></td>
           <td class='w-p25'><?php echo $order->plan;?></td>
           <td class='w-p25'><?php echo zget($currencySign, $order->currency, '') . $order->real;?></td>
           <td class='w-p15 <?php echo "order-{$order->status}";?>'><?php echo $lang->order->statusList[$order->status];?></td>
