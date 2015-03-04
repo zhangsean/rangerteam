@@ -734,7 +734,6 @@ class upgradeModel extends model
         }
     }
 
-
     /**
      * Set assignedTo is closed if the task is closed.
      * 
