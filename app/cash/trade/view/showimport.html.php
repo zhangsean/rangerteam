@@ -32,9 +32,9 @@
       </thead>
       <tbody>
         <?php
-        $incomeTypes['ditto']           = $lang->trade->ditto;
-        $expenseTypes['ditto']          = $lang->trade->ditto;
-        $deptList['ditto']              = $lang->trade->ditto;
+        $incomeTypes['ditto']  = $lang->ditto;
+        $expenseTypes['ditto'] = $lang->ditto;
+        $deptList['ditto']     = $lang->ditto;
         ?>
         <?php foreach($trades as $i => $trade):?>
         <?php

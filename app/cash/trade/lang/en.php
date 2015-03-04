@@ -34,7 +34,6 @@ $lang->trade->transferOut = 'Amount';
 $lang->trade->schema      = 'Schema';
 $lang->trade->importFile  = 'Import file';
 $lang->trade->encode      = 'Encode';
-$lang->trade->ditto       = 'Ditto';
 
 $lang->trade->create      = 'Create Trade';
 $lang->trade->in          = 'Income';

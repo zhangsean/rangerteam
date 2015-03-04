@@ -34,7 +34,6 @@ $lang->trade->transferOut = '转出金额';
 $lang->trade->schema      = '模板';
 $lang->trade->importFile  = '导入文件';
 $lang->trade->encode      = '编码';
-$lang->trade->ditto       = '同上';
 
 $lang->trade->create      = '记账';
 $lang->trade->in          = '收入';
