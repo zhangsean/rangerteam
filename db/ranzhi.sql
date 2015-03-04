@@ -223,6 +223,21 @@ CREATE TABLE `crm_service` (
   `expire` date NOT NULL,
   UNIQUE KEY `customer` (`customer`,`product`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `crm_salesgroup`;
+CREATE TABLE `crm_salesgroup` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `desc` varchar(255) NOT NULL,
+  `users` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `crm_salespriv`;
+CREATE TABLE `crm_salespriv` (
+  `account` char(30) NOT NULL,
+  `salesgroup` mediumint(8) unsigned NOT NULL,
+  `priv` enum('view','edit') NOT NULL,
+  KEY `account` (`account`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_doc`;
 CREATE TABLE `oa_doc` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,

@@ -83,6 +83,11 @@ $lang->setting->menu->customerLevel = 'Customer Level|setting|lang|module=custom
 $lang->setting->menu->area          = 'Area|tree|browse|type=area|';
 $lang->setting->menu->industry      = 'Industry|tree|browse|type=industry|';
 $lang->setting->menu->currency      = 'Currency|setting|lang|module=common&field=currencyList';
+$lang->setting->menu->salesGroup    = 'Sales Group|sales|browse|';
+
+/* Menu of sales module. */
+$lang->sales = new stdclass();
+$lang->sales->menu = $lang->setting->menu;
 
 $lang->dashboard = new stdclass();
 $lang->resume    = new stdclass();
