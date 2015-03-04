@@ -64,6 +64,36 @@ class taskModel extends model
         if($groupBy == 'id') return $this->dao->fetchAll('id');
         if($groupBy != 'id') return $this->dao->fetchGroup($groupBy);
     }
+    
+    /**
+     * Get tasks of a project.
+     * 
+     * @param  int    $projectID 
+     * @param  string $type       all|wait|doing|done|cancel
+     * @param  object $pager 
+     * @access public
+     * @return array
+     */
+    public function getProjectTasks($projectID, $type = 'all', $orderBy = 'status_asc, id_desc', $pager = null)
+    {
+        if(is_string($type)) $type = strtolower($type);
+
+        $tasks = $this->dao->select('*')
+            ->from(TABLE_TASK)
+            ->where('project')->eq((int)$projectID)
+            ->andWhere('deleted')->eq(0)
+            ->beginIF($type == 'undone')->andWhere("(status = 'wait' or status ='doing')")->fi()
+            ->beginIF($type == 'assignedtome')->andWhere('assignedTo')->eq($this->app->user->account)->fi()
+            ->beginIF($type == 'finishedbyme')->andWhere('finishedby')->eq($this->app->user->account)->fi()
+            ->beginIF($type == 'delayed')->andWhere('deadline')->between('1970-1-1', helper::now())->andWhere('status')->in('wait,doing')->fi()
+            ->beginIF(is_array($type) or strpos(',all,undone,assignedtome,delayed,finishedbyme,', ",$type,") === false)->andWhere('status')->in($type)->fi()
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll();
+
+        if($tasks) return $tasks;
+        return array();
+    }
 
     /**
      * Fix task groups.
