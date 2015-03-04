@@ -51,6 +51,7 @@ class projectModel extends model
     /**
      * Get member pairs.
      * 
+     * @param  int    $projectID
      * @access public
      * @return array
      */
@@ -65,9 +66,9 @@ class projectModel extends model
     /**
      * Get project list.
      * 
-     * @param  int    $status 
+     * @param  string  $status 
      * @access public
-     * @return void
+     * @return array
      */
     public function getList($status = null)
     {
@@ -81,8 +82,9 @@ class projectModel extends model
         foreach($projects as $project)
         {
             $project->members = isset($members[$project->id]) ? $members[$project->id] : array();
-            foreach($project->members as $member)
+            foreach($project->members as $key => $member)
             {
+                if(!$member->account) unset($project->members[$key]);
                 if($member->role != 'manager') continue;
                 if($member->role == 'manager') $project->PM = $member->account;
             }
@@ -95,11 +97,51 @@ class projectModel extends model
      * Get  project pairs.
      * 
      * @access public
-     * @return void
+     * @return array
      */
     public function getPairs()
     {
         return $this->dao->select('id,name')->from(TABLE_PROJECT)->where('deleted')->eq(0)->fetchPairs();
+    }
+
+    /**
+     * Get projects to import 
+     * 
+     * @access public
+     * @return array
+     */
+    public function getProjectsToImport()
+    {
+        $projects = $this->dao->select('distinct t1.*')->from(TABLE_PROJECT)->alias('t1')
+            ->leftJoin(TABLE_TASK)->alias('t2')->on('t1.id=t2.project')
+            ->where('t2.status')->notIN('done,closed')
+            ->andWhere('t2.deleted')->eq(0)
+            ->andWhere('t1.deleted')->eq(0)
+            ->orderBy('id desc')
+            ->fetchAll('id');
+
+        $pairs = array();
+        $now   = date('Y-m-d');
+        foreach($projects as $id => $project)
+        {
+            if($project->status == 'done' or $project->end < $now) $pairs[$id] = $project->name;
+        }
+        return $pairs;
+    }
+
+    /**
+     * Get tasks can be imported.
+     * 
+     * @param  int    $fromProject 
+     * @access public
+     * @return array
+     */
+    public function getTasks2Imported($fromProject)
+    {
+        $tasks        = array();
+        $projectTasks = $this->loadModel('task')->getProjectTasks($fromProject, 'wait,doing,pause,cancel');
+        $tasks        = array_merge($tasks, $projectTasks); 
+        return $tasks;
     }
 
     /**
@@ -134,6 +176,7 @@ class projectModel extends model
         $user->id   = $projectID;
         foreach($members as $member)
         {
+            if($member == '') continue;
             $user->account = $member;
             $user->role    = $member == $this->post->manager ? 'manager' : 'member';
 
@@ -249,6 +292,76 @@ class projectModel extends model
     }
 
     /**
+     * Import tasks.
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return void
+     */
+    public function importTask($projectID)
+    {
+        $this->loadModel('task');
+
+        /* Update tasks. */
+        $tasks = $this->dao->select('id, project, assignedTo, consumed, status')->from(TABLE_TASK)->where('id')->in($this->post->tasks)->fetchAll('id');
+        foreach($tasks as $task)
+        {
+            /* Save the assignedToes, should linked to project. */
+            $assignedToes[$task->assignedTo] = $task->project;
+
+            $data = new stdclass();
+            $data->project = $projectID;
+
+            if($task->status == 'cancel')
+            {
+                $data->canceledBy = '';
+                $data->canceledDate = NULL;
+            }
+
+            $data->status = $task->consumed > 0 ? 'doing' : 'wait';
+            $this->dao->update(TABLE_TASK)->data($data)->where('id')->eq($task->id)->exec();
+
+            if(dao::isError()) return false;
+
+            $this->loadModel('action')->create('task', $task->id, 'moved', '', $task->project);
+        }
+
+        /* Add members to project team. */
+        $members = $this->getMemberPairs($projectID);
+        foreach($assignedToes as $account => $preProjectID)
+        {
+            if(!isset($members[$account]))
+            {
+                $role = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($preProjectID)->andWhere('account')->eq($account)->fetch();
+                $role->id   = $projectID;
+                $role->join = helper::today();
+                $this->dao->insert(TABLE_TEAM)->data($role)->exec();
+                
+                return !dao::isError();
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Save the project id user last visited to session.
+     * 
+     * @param  int   $projectID 
+     * @param  array $projects 
+     * @access public
+     * @return int
+     */
+    public function saveState($projectID, $projects)
+    {
+        if($projectID > 0) $this->session->set('project', (int)$projectID);
+        if($projectID == 0 and $this->cookie->lastProject)    $this->session->set('project', (int)$this->cookie->lastProject);
+        if($projectID == 0 and $this->session->project == '') $this->session->set('project', $projects[0]);
+        if(!in_array($this->session->project, $projects)) $this->session->set('project', $projects[0]);
+        return $this->session->project;
+    }
+
+    /**
      * Set menu.
      * 
      * @param  array  $projects 
@@ -309,7 +422,7 @@ class projectModel extends model
         $viewIcons = array('browse' => 'list-ul', 'kanban' => 'columns', 'outline' => 'list-alt');
         $this->lang->task->browse = $this->lang->task->list;
 
-        if($methodName ==  'browse')
+        if($methodName ==  'browse' or $methodName == 'importtask')
         {
             $menu .= '<li class="divider angle"></li>';
             $menu .= "<li class='all'>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), $this->lang->task->all);
@@ -341,6 +454,7 @@ class projectModel extends model
 
         $menu .= "</ul>";
         $menu .= "<div class='pull-right'>" . html::a(helper::createLink('task', 'batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $this->lang->task->create, 'class="btn btn-primary"') . "</div>";
+        $menu .= "<div class='pull-right'>" . html::a(helper::createLink('project', 'importTask', "projectID=$projectID"), '<i class="icon-upload-alt"></i> ' . $this->lang->project->importTask, 'class="btn btn-primary"') . "</div>";
 
         if($methodName == 'browse' || $methodName == 'kanban' || $methodName == 'outline')
         {

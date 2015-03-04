@@ -27,16 +27,19 @@ $lang->project->finished   = '已结束';
 $lang->project->suspended  = '已挂起';
 $lang->project->noMatched  = '找不到包含"%s"的项目';
 $lang->project->search     = '搜索';
+$lang->project->import     = '导入';
+$lang->project->importTask = '导入任务';
 
-$lang->project->id          = '编号';
-$lang->project->name        = '项目名称';
-$lang->project->desc        = '项目描述';
-$lang->project->begin       = '开始日期';
-$lang->project->manager     = '负责人';
-$lang->project->member      = '团队';
-$lang->project->end         = '结束日期';
-$lang->project->createdBy   = '由谁创建';
-$lang->project->createdDate = '创建时间';
+$lang->project->id            = '编号';
+$lang->project->name          = '项目名称';
+$lang->project->desc          = '项目描述';
+$lang->project->begin         = '开始日期';
+$lang->project->manager       = '负责人';
+$lang->project->member        = '团队';
+$lang->project->end           = '结束日期';
+$lang->project->createdBy     = '由谁创建';
+$lang->project->createdDate   = '创建时间';
+$lang->project->fromproject   = '所属项目';
 
 $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = '确认激活此项目？';
@@ -44,3 +47,4 @@ $lang->project->confirm->suspend  = '确认挂起此项目？';
 
 $lang->project->activateSuccess = '激活操作成功';
 $lang->project->suspendSuccess  = '挂起操作成功';
+$lang->project->selectProject   = "请选择项目";

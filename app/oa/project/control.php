@@ -28,10 +28,10 @@ class project extends control
     {
         if(empty($this->projects)) $this->locate(inlink('create'));
 
-        $this->view->title      = $this->lang->project->common;
-        $this->view->status     = $status;
-        $this->view->projects   = $this->project->getList($status);
-        $this->view->users      = $this->loadModel('user')->getPairs('noclosed');
+        $this->view->title    = $this->lang->project->common;
+        $this->view->status   = $status;
+        $this->view->projects = $this->project->getList($status);
+        $this->view->users    = $this->loadModel('user')->getPairs('noclosed');
         $this->display();
     }
 
@@ -149,6 +149,42 @@ class project extends control
         $this->project->delete(TABLE_PROJECT, $projectID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
+    }
+
+    /**
+     * Import tasks undoned from other projects.
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return void
+     */
+    public function importTask($toProject, $fromProject = 0)
+    {   
+        if(!empty($_POST))
+        {
+            $this->project->importTask($toProject, $fromProject);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer));
+        }
+
+        /* Get projects and products info. */
+        $projectID = $this->project->saveState($toProject, array_keys($this->projects));
+        $project   = $this->project->getById($projectID);
+        $projects  = $this->project->getProjectsToImport();
+        unset($projects[$toProject]);
+
+        $fromProject = ($fromProject == 0 and !empty($projects)) ? key($projects) : $fromProject;
+
+        /* Save session. */
+        $this->app->session->set('taskList',  $this->app->getURI(true));
+
+        $this->view->title          = $project->name . $this->lang->colon . $this->lang->project->importTask;
+        $this->view->tasks2Imported = $this->project->getTasks2Imported($fromProject);
+        $this->view->projects       = $projects;
+        $this->view->projectID      = $project->id;
+        $this->view->fromProject    = $fromProject;
+        $this->view->users          = $this->loadModel('user')->getPairs();
+        $this->display();
     }
 
     /**
