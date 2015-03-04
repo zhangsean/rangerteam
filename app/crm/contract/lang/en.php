@@ -63,6 +63,8 @@ $lang->contract->completeReturn   = 'Complete payments';
 $lang->contract->completeDelivery = 'Complete delivery';
 $lang->contract->editReturn       = 'Edit payment';
 $lang->contract->editDelivery     = 'Edit delivery';
+$lang->contract->deleteReturn     = 'Delete Return';
+$lang->contract->deleteDelivery   = 'Delete Delivery';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = 'Pending';
