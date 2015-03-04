@@ -99,15 +99,19 @@ $lang->order->methodOrder[50] = 'delete';
 
 /* Contract. */
 $lang->resource->contract = new stdclass();
-$lang->resource->contract->browse   = 'browse';
-$lang->resource->contract->create   = 'create';
-$lang->resource->contract->edit     = 'edit';
-$lang->resource->contract->view     = 'view';
-$lang->resource->contract->delivery = 'delivery';
-$lang->resource->contract->receive  = 'receive';
-$lang->resource->contract->cancel   = 'cancel';
-$lang->resource->contract->finish   = 'finish';
-$lang->resource->contract->delete   = 'delete';
+$lang->resource->contract->browse         = 'browse';
+$lang->resource->contract->create         = 'create';
+$lang->resource->contract->edit           = 'edit';
+$lang->resource->contract->view           = 'view';
+$lang->resource->contract->delivery       = 'delivery';
+$lang->resource->contract->editDelivery   = 'editDelivery';
+$lang->resource->contract->deleteDelivery = 'deleteDelivery';
+$lang->resource->contract->receive        = 'receive';
+$lang->resource->contract->editReturn     = 'editReturn';
+$lang->resource->contract->deleteReturn   = 'deleteReturn';
+$lang->resource->contract->cancel         = 'cancel';
+$lang->resource->contract->finish         = 'finish';
+$lang->resource->contract->delete         = 'delete';
 
 $lang->contract->methodOrder[5]  = 'browse';
 $lang->contract->methodOrder[10] = 'create';
@@ -204,6 +208,7 @@ $lang->resource->trade->batchCreate = 'batchCreate';
 $lang->resource->trade->batchEdit   = 'batchEdit';
 $lang->resource->trade->edit        = 'edit';
 $lang->resource->trade->transfer    = 'transfer';
+$lang->resource->trade->inveset     = 'inveset';
 $lang->resource->trade->detail      = 'detail';
 $lang->resource->trade->delete      = 'delete';
 $lang->resource->trade->import      = 'import';
@@ -215,6 +220,7 @@ $lang->trade->methodOrder[20] = 'batchCreate';
 $lang->trade->methodOrder[21] = 'batchEdit';
 $lang->trade->methodOrder[25] = 'edit';
 $lang->trade->methodOrder[30] = 'transfer';
+$lang->trade->methodOrder[31] = 'inveset';
 $lang->trade->methodOrder[35] = 'detail';
 $lang->trade->methodOrder[40] = 'delete';
 $lang->trade->methodOrder[45] = 'import';
@@ -287,13 +293,14 @@ $lang->schema->methodOrder[25] = 'delete';
 
 /* Project. */
 $lang->resource->project = new stdclass();
-$lang->resource->project->index    = 'index';
-$lang->resource->project->create   = 'create';
-$lang->resource->project->edit     = 'edit';
-$lang->resource->project->finish   = 'finish';
-$lang->resource->project->activate = 'activate';
-$lang->resource->project->suspend  = 'suspend';
-$lang->resource->project->delete   = 'delete';
+$lang->resource->project->index      = 'index';
+$lang->resource->project->create     = 'create';
+$lang->resource->project->edit       = 'edit';
+$lang->resource->project->finish     = 'finish';
+$lang->resource->project->activate   = 'activate';
+$lang->resource->project->suspend    = 'suspend';
+$lang->resource->project->importTask = 'importTask';
+$lang->resource->project->delete     = 'delete';
 
 $lang->project->methodOrder[0]  = 'index';
 $lang->project->methodOrder[5]  = 'create';
@@ -301,6 +308,7 @@ $lang->project->methodOrder[10] = 'edit';
 $lang->project->methodOrder[15] = 'finish';
 $lang->project->methodOrder[20] = 'activate';
 $lang->project->methodOrder[25] = 'suspend';
+$lang->project->methodOrder[30] = 'importTask';
 $lang->project->methodOrder[35] = 'delete';
 
 /* Task. */
