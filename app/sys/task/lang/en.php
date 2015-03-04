@@ -71,7 +71,6 @@ $lang->task->lastEdited     = 'Last Edited';
 $lang->task->hour           = 'Hour';
 $lang->task->leftThisTime   = 'Left';
 $lang->task->date           = 'Date';
-$lang->task->ditto          = 'Ditto';
 
 $lang->task->confirmFinish     = '"Left" is zero, this task will be done. Are you sure?';
 $lang->task->consumedBefore    = 'consumed before';

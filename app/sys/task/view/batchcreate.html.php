@@ -30,7 +30,7 @@
         </thead>
 
         <?php
-        $users['ditto'] = $lang->task->ditto;
+        $users['ditto'] = $lang->ditto;
         ?>
         <?php for($i = 0; $i < $config->task->batchCreate; $i++):?>
         <?php 
