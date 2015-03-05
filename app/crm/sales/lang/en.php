@@ -1,5 +1,5 @@
 <?php
-$lang-sales->common = 'Sales Group';
+$lang->sales->common = 'Sales Group';
 $lang->sales->browse = 'Sales Group List';
 $lang->sales->create = 'Create Group';
 $lang->sales->edit   = 'Edit';
