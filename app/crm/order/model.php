@@ -37,14 +37,16 @@ class orderModel extends model
     /**
      * Get my order id list.
      * 
+     * @param  string $type 
      * @access public
      * @return array
      */
-    public function getMine()
+    public function getMine($type = 'view')
     {
+        $customerIdList = $this->loadModel('customer')->getMine($type);
         $orderList = $this->dao->select('*')->from(TABLE_ORDER)
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
-            ->where('createdBy')->eq($this->app->user->account)
+            ->where('customer')->in($customerIdList)
             ->fi()
             ->fetchAll('id');
 
@@ -411,30 +413,30 @@ class orderModel extends model
     public function buildOperateMenu($order)
     {
         $menu = '';
-        $menu .= html::a(inlink('view', "orderID=$order->id"), $this->lang->view);
-        $menu .= html::a(helper::createLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}"), $this->lang->order->record, "data-toggle='modal' data-type='iframe'");
+        $menu .= commonModel::printLink('order', 'view', "orderID=$order->id", $this->lang->view, '', false);
+        $menu .= commonModel::printLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}", $this->lang->order->record, "data-toggle='modal' data-type='iframe'", false);
 
-        if($order->status == 'normal') $menu .= html::a(helper::createLink('contract', 'create', "customerID={$order->customer}&orderID={$order->id}"), $this->lang->order->sign);
+        if($order->status == 'normal') $menu .= commonModel::printLink('contract', 'create', "customerID={$order->customer}&orderID={$order->id}", $this->lang->order->sign, '', false);
         if($order->status != 'normal') $menu .= html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
 
-        $menu .= html::a(inlink('edit',   "orderID=$order->id"), $this->lang->edit);
+        $menu .= commonModel::printLink('order', 'edit', "orderID=$order->id", $this->lang->edit, '', false);
         $menu .="<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
-        $menu .= "<li>" . html::a(inlink('assign', "orderID=$order->id"), $this->lang->assign, "data-toggle='modal'") . "</li>";
+        $menu .= commonModel::printLink('order', 'assign', "orderID=$order->id", $this->lang->assign, "data-toggle='modal'", false, '', 'li');
 
         if($order->status != 'closed')
         {
-            $menu .= "<li>" . html::a(inlink('close', "orderID=$order->id"), $this->lang->close, "data-toggle='modal'") . "</li>";
-            $menu .= "<li>" . html::a('###', $this->lang->activate, "disabled='disabled' class='disabled'") . "</li>";
+            $menu .= commonModel::printLink('order', 'close', "orderID=$order->id", $this->lang->close, "data-toggle='modal'", false, '', 'li');
+            $menu .= "<li disabled='disabled' class='disabled'>" . html::a('###', $this->lang->activate) . "</li>";
         }
         else
         {
-            if($order->closedReason == 'payed') $menu .= "<li>" . html::a('###', $this->lang->close, "disabled='disabled' class='disabled'") . "</li>";
-            if($order->closedReason == 'payed') $menu .= "<li>" . html::a('###', $this->lang->activate, "disabled='disabled' class='disabled'") . "</li>";
-            if($order->closedReason != 'payed') $menu .= "<li>" . html::a(inlink('activate', "orderID=$order->id"), $this->lang->activate, "data-toggle='modal'") . "</li>";
+            if($order->closedReason == 'payed') $menu .= "<li disabled='disabled' class='disabled'>" . html::a('###', $this->lang->close) . "</li>";
+            if($order->closedReason == 'payed') $menu .= "<li disabled='disabled' class='disabled'>" . html::a('###', $this->lang->activate) . "</li>";
+            if($order->closedReason != 'payed') $menu .= commonModel::printLink('order', 'activate', "orderID=$order->id", $this->lang->activate, "data-toggle='modal'", false, '', 'li');
         }
         if($order->status == 'normal' or $order->closedReason == 'failed')
         {
-            $menu .= "<li>" . html::a(inlink('delete', "orderID=$order->id"), $this->lang->delete, "class='deleter'") . "</li>";
+            $menu .= commonModel::printLink('order', 'delete', "orderID=$order->id", $this->lang->delete, "class='deleter'", false, '', 'li');
         }
         $menu .= '</ul></div>';
 

@@ -11,6 +11,13 @@
  */
 class order extends control
 {
+    public function __construct()
+    {
+        parent::__construct();
+        /* Set allowed edit order ID list. */
+        $this->app->user->canEditOrderIdList = ',' . implode(',', $this->order->getMine('edit')) . ',';
+    }
+
     /** 
      * The index page, locate to browse.
      * 
@@ -97,7 +104,7 @@ class order extends control
     public function edit($orderID)
     {
         $order = $this->order->getByID($orderID);
-        if(empty($order)) $this->loadModel('common', 'sys')->checkPrivByCustomer($order->customer);
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($order)? '0' : $order->customer, 'edit');
 
         if($_POST)
         {
@@ -136,7 +143,7 @@ class order extends control
     public function view($orderID)
     {
         $order = $this->order->getByID($orderID);
-        if(empty($order)) $this->loadModel('common', 'sys')->checkPrivByCustomer($order->customer);
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($order)? '0' : $order->customer);
 
         $this->app->loadLang('resume');
         $this->app->loadLang('contract');
@@ -146,7 +153,7 @@ class order extends control
         $this->session->set('productList',  $uri);
         $this->session->set('contactList',  $uri);
         if(!$this->session->contractList) $this->session->set('contractList', $uri);
-    
+
         $this->view->order        = $order;
         $this->view->title        = $this->lang->order->view;
         $this->view->customer     = $this->loadModel('customer')->getByID($order->customer);
@@ -169,6 +176,8 @@ class order extends control
     public function close($orderID) 
     {
         $order = $this->order->getByID($orderID);
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($order)? '0' : $order->customer, 'edit');
+
         if(!empty($_POST))
         {
             $this->order->close($orderID);
@@ -195,6 +204,8 @@ class order extends control
     public function activate($orderID) 
     {
         $order = $this->order->getByID($orderID); 
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($order)? '0' : $order->customer, 'edit');
+
         if(!empty($_POST))
         {
             $this->order->activate($orderID);
@@ -249,6 +260,7 @@ class order extends control
     {
         $order   = $this->order->getByID($orderID);
         $members = $this->loadModel('user')->getPairs('noclosed, nodeleted, devfirst');
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($order)? '0' : $order->customer, 'edit');
 
         if($_POST)
         {

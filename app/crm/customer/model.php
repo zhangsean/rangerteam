@@ -28,16 +28,19 @@ class customerModel extends model
     }
 
     /**
-     * Get my customer id list.
+     * Get my customer id list or allowed view customer.
      * 
+     * @param  string $type 
      * @access public
      * @return array
      */
-    public function getMine()
+    public function getMine($type = 'view')
     {
+        $allowedAccounts = $this->loadModel('sales')->getAllowedAccounts($this->app->user->account, $type);
         $customerList = $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
-            ->where('assignedTo')->eq($this->app->user->account)->orWhere('public')->eq('1')
+            ->where('assignedTo')->in($allowedAccounts)
+            ->orWhere('public')->eq('1')
             ->fi()
             ->fetchAll('id');
         return array_keys($customerList);

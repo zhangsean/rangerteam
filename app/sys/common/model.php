@@ -164,13 +164,14 @@ class commonModel extends model
      * Check priviledge by customer.
      * 
      * @param  int    $customerID 
+     * @param  string $type 
      * @static
      * @access public
      * @return bool
      */
-    public function checkPrivByCustomer($customerID)
+    public function checkPrivByCustomer($customerID, $type = 'view')
     {
-        $customers = $this->loadModel('customer', 'crm')->getMine();
+        $customers = $this->loadModel('customer', 'crm')->getMine($type);
         if(!in_array($customerID, $customers))
         {
             $locate = helper::createLink('crm.index');
@@ -950,19 +951,82 @@ class commonModel extends model
      * @param  string $vars     vars to be passed
      * @param  string $label    the label of the link
      * @param  string $misc     others
-     * @param  bool   $newline 
+     * @param  bool   $print 
      * @param  bool   $onlyBody 
      * @param  string $type     li
      * @static
      * @access public
      * @return bool
      */
-    public static function printLink($module, $method, $vars = '', $label, $misc = '', $newline = true, $onlyBody = false, $type = '')
+    public static function printLink($module, $method, $vars = '', $label, $misc = '', $print = true, $onlyBody = false, $type = '')
     {
         if(!commonModel::hasPriv($module, $method)) return false;
-        if($type == 'li') echo '<li>';
-        echo html::a(helper::createLink($module, $method, $vars, '', $onlyBody), $label, $misc);
-        if($type == 'li') echo '</li>';
+
+        $content  = '';
+        $canClick = commonModel::checkPrivByVars($module, $method, $vars);
+        $link     = helper::createLink($module, $method, $vars, '', $onlyBody);
+        if(!$canClick)
+        {
+            $misc = str_replace("class='", "disabled='disabled' class='disabled ", $misc);
+            $misc = str_replace("data-toggle='modal'", ' ', $misc);
+            if(strpos($misc, "class='") === false) $misc .= " class='disabled' disabled='disabled'";
+        }
+        if($type == 'li') $content .= '<li' . ($canClick ? '' : " disabled='disabled' class='disabled'") . '>';
+        $content .= html::a($canClick ? $link : 'javascript:void(0)', $label, $misc);
+        if($type == 'li') $content .= '</li>';
+
+        if($print !== false) echo $content;
+        return $content;
+    }
+
+    /**
+     * Check privilege by vars. 
+     * 
+     * @param  string $module 
+     * @param  string $method 
+     * @param  string $vars 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function checkPrivByVars($module, $method, $vars)
+    {
+        global $app;
+        if(!is_array($vars)) parse_str($vars, $vars);
+        $method = strtolower($method);
+        $needCheck['customer'] = ',assign,edit,delete,linkContact,';
+        $needCheck['order']    = ',assign,edit,delete,close,activate,';
+        $needCheck['action']   = ',createrecord,';
+
+        if($module == 'customer' and strpos($needCheck['customer'], ",$method,") !== false)
+        {
+            if(!isset($vars['customerID'])) return false;
+            $customerIdList = isset($app->user->canEditCustomerIdList) ? $app->user->canEditCustomerIdList : '';
+            if(strpos($customerIdList, ",{$vars['customerID']},") === false) return false;
+        }
+
+        if($module == 'order' and strpos($needCheck['order'], ",$method,") !== false)
+        {
+            if(!isset($vars['orderID'])) return false;
+            $orderIdList = isset($app->user->canEditOrderIdList) ? $app->user->canEditOrderIdList : '';
+            if(strpos($orderIdList, ",{$vars['orderID']},") === false) return false;
+        }
+
+        if($module == 'action' and strpos($needCheck['action'], ",$method,") !== false)
+        {
+            if(!isset($vars['objectType']) or !isset($vars['objectID'])) return false;
+            if($vars['objectType'] == 'order')
+            {
+                $orderIdList = isset($app->user->canEditOrderIdList) ? $app->user->canEditOrderIdList : '';
+                if(strpos($orderIdList, ",{$vars['objectID']},") === false) return false;
+            }
+            elseif($vars['objectType'] == 'customer')
+            {
+                $customerIdList = isset($app->user->canEditCustomerIdList) ? $app->user->canEditCustomerIdList : '';
+                if(strpos($customerIdList, ",{$vars['objectID']},") === false) return false;
+            }
+        }
+
         return true;
     }
 

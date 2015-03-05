@@ -19,7 +19,7 @@ class salesModel extends model
      */
     public function getList()
     {
-        return $this->dao->select('*')->from(TABLE_SALESGROUP)->fetchAll();
+        return $this->dao->select('*')->from(TABLE_SALESGROUP)->fetchAll('id');
     }
 
     /**
@@ -188,5 +188,34 @@ class salesModel extends model
             $privs[$priv->account][$priv->salesgroup][$priv->priv] = true;
         }
         return $privs;
+    }
+
+    /**
+     * Get allowed accounts by sales group.
+     * 
+     * @param  string $account 
+     * @param  string $type     view|edit
+     * @access public
+     * @return void
+     */
+    public function getAllowedAccounts($account, $type = 'view')
+    {
+        $privs = $this->getPrivsByAccount($account);
+        $groups = $this->getList();
+        $users = '';
+        foreach($privs as $key => $priv)
+        {
+            if($type == 'view' and isset($priv['view'])) $users .= $groups[$key]->users;
+            if(($type == 'edit' or $type == 'view') and isset($priv['edit'])) $users .= $groups[$key]->users;
+        }
+
+        /* delete repeat user. */
+        $accounts = ",$account,";
+        foreach(explode(',', $users) as $user)
+        {
+            if($user != '' and strpos($accounts, ",$user,") === false) $accounts .= "$user,";
+        }
+
+        return $accounts;
     }
 }

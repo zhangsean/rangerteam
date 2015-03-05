@@ -11,6 +11,13 @@
  */
 class customer extends control
 {
+    public function __construct()
+    {
+        parent::__construct();
+        /* Set allowed edit customer ID list. */
+        $this->app->user->canEditCustomerIdList = ',' . implode(',', $this->customer->getMine('edit')) . ',';
+    }
+
     /** 
      * The index page, locate to the browse page.
      * 
@@ -107,7 +114,7 @@ class customer extends control
     public function edit($customerID)
     {
         $customer = $this->customer->getByID($customerID);
-        if(!$customer) $this->loadModel('common', 'sys')->checkPrivByCustomer('0');
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($customer) ? '0' : $customerID, 'edit');
 
         if($_POST)
         {
@@ -135,7 +142,7 @@ class customer extends control
     public function view($customerID)
     {
         $customer = $this->customer->getByID($customerID);
-        if(!$customer) $this->loadModel('common', 'sys')->checkPrivByCustomer('0');
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($customer) ? '0' : $customerID);
 
         $uri = $this->app->getURI(true);
         $this->session->set('orderList',    $uri);
@@ -171,6 +178,8 @@ class customer extends control
      */
     public function assign($customerID, $table = null)
     {
+        $this->loadModel('common', 'sys')->checkPrivByCustomer($customerID, 'edit');
+
         if($_POST)
         {
             $this->customer->assign($customerID);
