@@ -69,6 +69,7 @@ class upgradeModel extends model
             case '2_0':
                 $this->execSQL($this->getUpgradeFile('2.0'));
                 $this->fixClosedTask();
+                $this->setSalesGroup();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -735,7 +736,7 @@ class upgradeModel extends model
     }
 
     /**
-     * Set assignedTo is closed if the task is closed.
+     * Set assignedTo is closed if the task is closed when upgrade from 2.0.
      * 
      * @access public
      * @return int
@@ -744,6 +745,63 @@ class upgradeModel extends model
     {
         $this->dao->update(TABLE_TASK)->set('assignedTo')->eq('closed')->where('status')->eq('closed')->exec();
 
-        return dao::isError();
+        return !dao::isError();
+    }
+
+    /**
+     * Set default salesGroup when upgrade from 2.0.
+     * 
+     * @access public
+     * @return int
+     */
+    public function setSalesGroup()
+    {
+        $sales = $this->dao->select('distinct createdBy')->from(TABLE_CUSTOMER)->fetchPairs();
+
+        $manageAllUsers = $this->dao->select('t1.account, t1.group, t2.group, t2.method')
+            ->from(TABLE_USERGROUP)->alias('t1')
+            ->leftJoin(TABLE_GROUPPRIV)->alias('t2')->on('t1.group=t2.group')
+            ->where('t2.method')->eq('manageAll')
+            ->fetchAll();
+
+        if(!empty($manageAllUsers))
+        {
+            foreach($manageAllUsers as $manageAllUser)
+            {
+                if(isset($sales[$manageAllUser->account])) continue;
+                $sales[$manageAllUser->account] = $manageAllUser->account;
+            }
+        }
+
+        $users = '';
+        foreach($sales as $sale) $users .= ',' . $sale;
+        if($users != '') $users = rtrim($users, ',') . ',';
+
+        $group = new stdclass(); 
+        $group->name  = '销售人员';
+        $group->desc  = '';
+        $group->users = $users;
+
+        $this->dao->insert(TABLE_SALESGROUP)->data($group)->exec();
+
+        $groupID = $this->dao->lastInsertID();
+
+        if(!empty($manageAllUsers))
+        {
+            foreach($manageAllUsers as $manageAllUser)
+            {
+                $data['salesgroup'] = $groupID;
+                $data['account']    = $manageAllUser->account;
+                $data['priv']       = 'view';
+                $this->dao->insert(TABLE_SALESPRIV)->data($data)->exec();
+
+                $data['priv'] = 'edit';
+                $this->dao->insert(TABLE_SALESPRIV)->data($data)->exec();
+            }
+        }
+
+        $this->dao->delete()->from(TABLE_GROUPPRIV)->where('method')->eq('manageAll')->exec();
+
+        return !dao::isError();
     }
 }
