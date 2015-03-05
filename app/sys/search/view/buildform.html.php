@@ -33,6 +33,7 @@ include '../../common/view/chosen.html.php';
 .outer #querybox .table tr > th:last-child, .outer #querybox .table tr > td:last-child,
 .outer #querybox .table tbody > tr:last-child td {padding: 2px}
 #querybox a:hover {text-decoration: none;}
+#querybox .chosen-container .chosen-drop {min-width: 250px;!important}
 
 #selectPeriod {padding: 4px; height: 197px; min-width: 120px}
 #selectPeriod > .dropdown-header {background: #f1f1f1; display: block; text-align: center; padding: 4px 0; line-height: 20px; margin-bottom: 5px; font-size: 14px; border-radius: 2px; color: #333; font-size: 12px}

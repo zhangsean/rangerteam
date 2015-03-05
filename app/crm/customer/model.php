@@ -36,7 +36,7 @@ class customerModel extends model
      */
     public function getMine($type = 'view')
     {
-        $allowedAccounts = $this->loadModel('sales')->getAllowedAccounts($this->app->user->account, $type);
+        $allowedAccounts = $this->loadModel('sales', 'crm')->getAllowedAccounts($this->app->user->account, $type);
         $customerList = $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->where('assignedTo')->in($allowedAccounts)
