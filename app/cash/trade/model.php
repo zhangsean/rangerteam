@@ -410,6 +410,7 @@ class tradeModel extends model
                     $customer->status      = 'payed';
                     $customer->intension   = $trade->desc;
                     $customer->createdBy   = $this->app->user->account;
+                    $customer->assignedTo  = $this->app->user->account;
                     $customer->createdDate = $now;
 
                     $this->dao->insert(TABLE_CUSTOMER)->data($customer)->exec();

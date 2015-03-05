@@ -12,6 +12,7 @@ $(document).ready(function()
         });
         return false;
     })
+
     $('.btn-detail').click(function()
     {
         $(this).parents('tr').next('tr.detail').toggle();

@@ -72,7 +72,6 @@
       <tr class='detail hide'>
         <td colspan='9'>
           <table class='table table-hover table-striped table-data'>
-            <thead>
               <tr class='text-center'>
                 <th class='w-50px'> <?php echo $lang->trade->id;?></th>
                 <th class='w-60px'> <?php echo $lang->trade->type;?></th>
@@ -83,8 +82,6 @@
                 <th class='w-100px'><?php echo $lang->trade->date;?></th>
                 <th class='visible-lg'><?php echo $lang->trade->desc;?></th>
               </tr>
-            </thead>
-            <tbody>
               <?php foreach($result->tradeList as $trade):?>
               <tr class='text-center'>
                 <td><?php echo $trade->id;?></td>
@@ -97,7 +94,6 @@
                 <td class='text-left visible-lg'><?php echo $trade->desc;?></td>
               </tr>
               <?php endforeach;?>
-            </tbody>
           </table>
         </td>
       </tr>

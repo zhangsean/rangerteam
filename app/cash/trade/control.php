@@ -409,6 +409,10 @@ class trade extends control
         $rows = $this->schema->parseCSV($this->session->importFile);
 
         unset($this->lang->trade->menu);
+        unset($this->lang->trade->typeList['transferin']);
+        unset($this->lang->trade->typeList['transferout']);
+        unset($this->lang->trade->typeList['inveset']);
+        unset($this->lang->trade->typeList['redeem']);
 
         $customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
         $traderList    = $this->customer->getPairs('provider,partner');
