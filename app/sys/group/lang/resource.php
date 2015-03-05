@@ -21,6 +21,7 @@ $lang->appModule->crm[] = 'contact';
 $lang->appModule->crm[] = 'product';
 $lang->appModule->crm[] = 'address';
 $lang->appModule->crm[] = 'resume';
+$lang->appModule->crm[] = 'sales';
 
 $lang->appModule->cash = array();
 $lang->appModule->cash[] = 'trade';
@@ -199,6 +200,18 @@ $lang->resume->methodOrder[5]  = 'browse';
 $lang->resume->methodOrder[10] = 'create';
 $lang->resume->methodOrder[15] = 'edit';
 $lang->resume->methodOrder[20] = 'delete';
+
+/* Sales group. */
+$lang->resource->sales = new stdclass();
+$lang->resource->sales->browse = 'browse';
+$lang->resource->sales->create = 'create';
+$lang->resource->sales->edit   = 'edit';
+$lang->resource->sales->delete = 'delete';
+
+$lang->sales->methodOrder[5]  = 'browse';
+$lang->sales->methodOrder[10] = 'create';
+$lang->sales->methodOrder[15] = 'edit';
+$lang->sales->methodOrder[20] = 'delete';
 
 /* Product plan. */
 $lang->resource->trade = new stdclass();

@@ -43,7 +43,7 @@ $lang->group->extent   = 'extent';
 $lang->group->havePriv = 'Have Privilege';
 $lang->group->noPriv   = 'No Privilege';
 
-$lang->group->manageAll = 'Manage information of others';
+$lang->group->manageAll = 'View all customers and orders';
 
 $lang->group->copyOptions['copyPriv'] = 'Copy priviledge';
 $lang->group->copyOptions['copyUser'] = 'Copy user';
