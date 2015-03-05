@@ -41,8 +41,8 @@ class sales extends control
             foreach($accounts as $account) if($account != '') $group->users .= " " . $users[$account]; 
         }
 
-        $this->view->title      = $this->lang->sales->browse;
-        $this->view->groups     = $groups;
+        $this->view->title  = $this->lang->sales->browse;
+        $this->view->groups = $groups;
 
         $this->display();
     }
