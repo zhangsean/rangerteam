@@ -773,9 +773,7 @@ class upgradeModel extends model
             }
         }
 
-        $users = '';
-        foreach($sales as $sale) $users .= ',' . $sale;
-        if($users != '') $users = rtrim($users, ',') . ',';
+        $users = ',' . implode(',', $sales) . ',';
 
         $group = new stdclass(); 
         $group->name  = '销售人员';
