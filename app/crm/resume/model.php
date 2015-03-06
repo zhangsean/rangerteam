@@ -60,6 +60,7 @@ class resumeModel extends model
                 $customer->size        = $this->post->size;
                 $customer->status      = $this->post->status;
                 $customer->level       = $this->post->level;
+                $customer->assignTo    = $this->app->user->account;
                 $customer->createdBy   = $this->app->user->account;
                 $customer->createdDate = helper::now();
 
