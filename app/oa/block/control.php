@@ -248,10 +248,11 @@ class block extends control
                     $consumed += $task->consumed;
                 }
             }
+            $total = $left + $consumed;
 
             $project->wait = isset($tasks['wait']) ? count($tasks['wait']) : 0;
             $project->done = isset($tasks['done']) ? count($tasks['done']) : 0;
-            $project->rate = round(($consumed / ($left + $consumed)) * 10000) / 100 . '%';
+            $project->rate = $total ? round(($consumed / $total), 3) * 100 . '%' : '0%';
         }
 
         $this->view->users    = $this->loadModel('user')->getPairs();
