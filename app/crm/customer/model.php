@@ -37,12 +37,21 @@ class customerModel extends model
     public function getMine($type = 'view')
     {
         $allowedAccounts = $this->loadModel('sales', 'crm')->getAllowedAccounts($this->app->user->account, $type);
+
+        $orderList = $this->dao->select('customer')->from(TABLE_ORDER)->where('assignedTo')->in($allowedAccounts)->fetchAll('customer');
+
         $customerList = $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->where('assignedTo')->in($allowedAccounts)
             ->orWhere('public')->eq('1')
             ->fi()
             ->fetchAll('id');
+
+        foreach($orderList as $customer => $order)
+        {
+            if(!isset($customerList[$customer])) $customerList[$customer] = $customer;
+        }
+
         return array_keys($customerList);
     }
 
