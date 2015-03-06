@@ -733,6 +733,7 @@ class upgradeModel extends model
             $this->dao->update(TABLE_ENTRY)->set('`order`')->eq($order)->where('id')->eq($entry->id)->exec();
             $order += 10;
         }
+        return !dao::isError();
     }
 
     /**
@@ -756,7 +757,7 @@ class upgradeModel extends model
      */
     public function setSalesGroup()
     {
-        $sales = $this->dao->select('distinct createdBy')->from(TABLE_CUSTOMER)->fetchPairs();
+        $sales = $this->dao->select('DISTINCT createdBy')->from(TABLE_CUSTOMER)->fetchPairs();
 
         $manageAllUsers = $this->dao->select('t1.account, t1.group, t2.group, t2.method')
             ->from(TABLE_USERGROUP)->alias('t1')

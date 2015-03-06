@@ -28,8 +28,8 @@ $lang->customer->menu->browse    = array('link' => '所有客户|customer|browse
 $lang->customer->menu->past      = array('link' => '亟需联系|customer|browse|mode=past');
 $lang->customer->menu->today     = array('link' => '今天联系|customer|browse|mode=today');
 $lang->customer->menu->tomorrow  = array('link' => '明天联系|customer|browse|mode=tomorrow');
-$lang->customer->menu->thisweek  = array('link' => '一周内联系|customer|browse|mode=thisweek');
-$lang->customer->menu->thismonth = array('link' => '一月内联系|customer|browse|mode=thismonth');
+$lang->customer->menu->thisweek  = array('link' => '本周内联系|customer|browse|mode=thisweek');
+$lang->customer->menu->thismonth = array('link' => '本月内联系|customer|browse|mode=thismonth');
 $lang->customer->menu->public    = array('link' => '公共客户|customer|browse|mode=public');
 
 /* Menu of product module. */
