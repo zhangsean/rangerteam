@@ -20,9 +20,7 @@
       <table class='table table-form'>
         <tr>
           <th class='w-80px'><?php echo $lang->sales->name;?></th>
-          <td class='w-p40'>
-            <?php echo html::input('name', '', "class='form-control'");?>
-          </td><td></td>
+          <td class='w-p40'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->sales->desc;?></th>
@@ -30,9 +28,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->sales->users;?></th>
-          <td colspan='2'>
-            <div class='checkbox-users'><?php echo html::checkbox('users', $users);?></div>
-          </td>
+          <td colspan='2'><div class='checkbox-users'><?php echo html::checkbox('users', $users);?></div></td>
         </tr>
         <tr>
           <th><?php echo $lang->sales->priv;?></th>

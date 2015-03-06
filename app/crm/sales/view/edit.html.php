@@ -31,11 +31,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->sales->users;?></th>
-          <td colspan='2'>
-            <div class='checkbox-users'>
-            <?php echo html::checkbox('users', $users, $group->users);?>
-            </div>
-          </td>
+          <td colspan='2'><div class='checkbox-users'><?php echo html::checkbox('users', $users, $group->users);?></div></td>
         </tr>
         <tr>
           <th><?php echo $lang->sales->priv;?></th>
@@ -51,18 +47,18 @@
                 <?php foreach($groups as $g):?>
                 <div class='priv-item'> 
                   <?php 
-                    $value   = "{$account}_{$g->id}";
-                    $label   = sprintf($lang->sales->viewTip, $realname, $g->id == $group->id ? $lang->sales->currentGroup : $g->name);
-                    $checked = isset($privs[$account][$g->id]['view']) ? $value : '';
-                    echo html::checkbox('privs_view', array($value => $label), $checked);
+                  $value   = "{$account}_{$g->id}";
+                  $label   = sprintf($lang->sales->viewTip, $realname, $g->id == $group->id ? $lang->sales->currentGroup : $g->name);
+                  $checked = isset($privs[$account][$g->id]['view']) ? $value : '';
+                  echo html::checkbox('privs_view', array($value => $label), $checked);
                   ?>
                 </div>
                 <div class='priv-item'> 
                   <?php 
-                    $value   = "{$account}_{$g->id}";
-                    $label   = sprintf($lang->sales->editTip, $realname, $g->id == $group->id ? $lang->sales->currentGroup : $g->name);
-                    $checked = isset($privs[$account][$g->id]['edit']) ? $value : '';
-                    echo html::checkbox('privs_edit', array($value => $label), $checked);
+                  $value   = "{$account}_{$g->id}";
+                  $label   = sprintf($lang->sales->editTip, $realname, $g->id == $group->id ? $lang->sales->currentGroup : $g->name);
+                  $checked = isset($privs[$account][$g->id]['edit']) ? $value : '';
+                  echo html::checkbox('privs_edit', array($value => $label), $checked);
                   ?> 
                 </div>
                 <?php endforeach;?>
@@ -73,9 +69,7 @@
         </tr>
         <tr>
           <th></th>
-          <td colspan='2'>
-            <?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?>
-          </td>
+          <td colspan='2'><?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?></td>
         </tr>
       </table>
     </form>

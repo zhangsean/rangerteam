@@ -164,12 +164,11 @@ class salesModel extends model
      */
     public function getPrivsByAccount($account)
     {
-        $privs = array();
         $all = $this->dao->select('*')->from(TABLE_SALESPRIV)->where('account')->eq($account)->fetchAll();
-        foreach($all as $account => $priv)
-        {
-            $privs[$priv->salesgroup][$priv->priv] = true;
-        }
+
+        $privs = array();
+        foreach($all as $account => $priv) $privs[$priv->salesgroup][$priv->priv] = true;
+
         return $privs;
     }
 
@@ -181,12 +180,11 @@ class salesModel extends model
      */
     public function getPrivs()
     {
-        $privs = array();
         $all = $this->dao->select('*')->from(TABLE_SALESPRIV)->fetchAll();
-        foreach($all as $key => $priv)
-        {
-            $privs[$priv->account][$priv->salesgroup][$priv->priv] = true;
-        }
+
+        $privs = array();
+        foreach($all as $key => $priv) $privs[$priv->account][$priv->salesgroup][$priv->priv] = true;
+
         return $privs;
     }
 
