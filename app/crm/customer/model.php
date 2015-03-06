@@ -152,6 +152,11 @@ class customerModel extends model
                 ->add('assignedTo', $this->app->user->account)
                 ->add('createdDate', $now)
                 ->get();
+
+            /* check field before insert. */
+            $this->dao->insert(TABLE_CUSTOMER)
+                ->data($customer)
+                ->check('contact', 'length', 30, 0);
         }
 
         if(!$this->post->continue)

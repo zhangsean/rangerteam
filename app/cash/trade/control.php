@@ -99,7 +99,7 @@ class trade extends control
         $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider');
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
-        $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
 
         if($type == 'out') $this->view->categories = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
         if($type == 'in')  $this->view->categories = $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
@@ -134,7 +134,7 @@ class trade extends control
 
         $this->view->title        = $this->lang->trade->batchCreate;
         $this->view->depositors   = array('' => '') + $this->loadModel('depositor')->getPairs();
-        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->users        = $this->loadModel('user')->getPairs('nodeleted');
         $this->view->customerList = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->view->traderList   = $this->loadModel('customer', 'crm')->getPairs('provider');
         $this->view->expenseTypes = array('' => '') + $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
@@ -185,7 +185,7 @@ class trade extends control
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
         $this->view->tradeContract = $this->loadModel('contract', 'crm')->getPairs($customerID = $trade->trader);
-        $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
        
         if($trade->type == 'out') $this->view->categories = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0);
