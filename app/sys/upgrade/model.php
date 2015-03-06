@@ -70,6 +70,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('2.0'));
                 $this->fixClosedTask();
                 $this->setSalesGroup();
+                $this->fixOrderProduct();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -800,6 +801,24 @@ class upgradeModel extends model
         }
 
         $this->dao->delete()->from(TABLE_GROUPPRIV)->where('method')->eq('manageAll')->exec();
+
+        return !dao::isError();
+    }
+
+    /**
+     * Format product for order when upgrade from 2.0.
+     * 
+     * @access public
+     * @return int
+     */
+    public function fixOrderProduct()
+    {
+        $orders = $this->dao->select('*')->from(TABLE_ORDER)->fetchAll();
+
+        foreach($orders as $order) 
+        {
+            $this->dao->update(TABLE_ORDER)->set('product')->eq(',' . $order->product . ',')->where('id')->eq($order->id)->exec();
+        }
 
         return !dao::isError();
     }

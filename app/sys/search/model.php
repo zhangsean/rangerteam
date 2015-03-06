@@ -89,6 +89,7 @@ class searchModel extends model
 
             if($operator == "include")
             {
+                if($this->post->$fieldName == 'o.product') $value = ',' . $value . ',';
                 $where .= ' LIKE ' . $this->dbh->quote("%$value%");
             }
             elseif($operator == "notinclude")

@@ -47,7 +47,7 @@ $config->order->search['fields']['o.editedBy']      = $lang->order->editedBy;
 $config->order->search['fields']['o.editedDate']    = $lang->order->editedDate;
 
 $config->order->search['params']['o.customer']      = array('operator' => '=',  'control' => 'select', 'values' => 'set in control');
-$config->order->search['params']['o.product']       = array('operator' => '=',  'control' => 'select', 'values' => 'set in control');
+$config->order->search['params']['o.product']       = array('operator' => 'include',  'control' => 'select', 'values' => 'set in control');
 $config->order->search['params']['o.status']        = array('operator' => '=',  'control' => 'select', 'values' => array('' => '') + $lang->order->statusList);
 $config->order->search['params']['o.plan']          = array('operator' => '>=', 'control' => 'input',  'values' => '');
 $config->order->search['params']['o.real']          = array('operator' => '>=', 'control' => 'input',  'values' => '');

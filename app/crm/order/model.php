@@ -265,6 +265,8 @@ class orderModel extends model
             ->remove('createCustomer, name, contact, phone, email, qq')
             ->get();
 
+        $order->product = $order->product ? ',' . $order->product . ',' : '';
+
         $this->dao->insert(TABLE_ORDER)
             ->data($order)
             ->autoCheck()
@@ -311,6 +313,9 @@ class orderModel extends model
             ->add('editedDate', $now)
 
             ->get();
+
+        $order->product = $order->product ? ',' . $order->product . ',' : '';
+
 
         $this->dao->update(TABLE_ORDER)
             ->data($order, $skip = 'referer')
@@ -492,8 +497,8 @@ class orderModel extends model
         foreach($orders as $order)
         {
             $order->products = array();
-            $order->product  = explode(',', $order->product);
-            foreach($order->product as $product) $order->products[] = $products[$product];
+            $productList = explode(',', $order->product);
+            foreach($productList as $product) if(isset($products[$product])) $order->products[] = $products[$product];
         }
     }
 }
