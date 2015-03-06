@@ -23,3 +23,5 @@ CREATE TABLE `crm_salespriv` (
   `priv` enum('view','edit') NOT NULL,
   KEY `account` (`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+UPDATE `crm_customer` SET `assignedTo` = `createdBy` WHERE `assignedTo` = '' AND `relation` = 'client';
