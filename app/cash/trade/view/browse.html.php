@@ -48,7 +48,7 @@
           <td><?php echo zget($depositorList, $trade->depositor, ' ');?></td>
           <td><?php echo $lang->trade->typeList[$trade->type];?></td>
           <td><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
-          <td><?php echo zget($currencySign, $trade->currency) . $trade->money;?></td>
+          <td><?php echo zget($currencySign, $trade->currency) . number_format($trade->money, 2, '.', ' ');?></td>
           <td><?php echo zget($categories, $trade->category, ' ');?></td>
           <td><?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?></td>
           <td><?php echo formatTime($trade->date, DT_DATE1);?></td>

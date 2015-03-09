@@ -51,17 +51,17 @@
       <tr class='<?php echo $class;?>'>
         <td><?php echo zget($depositorList, $depositorID); ?></td>
         <td><?php echo zget($currencyList, $result->currency); ?></td>
-        <td><?php echo $result->origin;?></td>
-        <td><?php echo $result->computed;?></td>
-        <td><?php echo $result->actual;?></td>
+        <td><?php echo number_format($result->origin, 2, '.', ' ');?></td>
+        <td><?php echo number_format($result->computed, 2, '.', ' ');?></td>
+        <td><?php echo number_format($result->actual, 2, '.', ' ');?></td>
         <?php if($diff == 0):?>
         <td><?php echo $lang->depositor->success;?></td>
         <?php endif;?>
         <?php if($diff > 0):?>
-        <td><?php printf($lang->depositor->more, $diff);?></td>
+        <td><?php printf($lang->depositor->more, number_format($diff, 2, '.', ' '));?></td>
         <?php endif;?>
         <?php if($diff < 0):?>
-        <td><?php printf($lang->depositor->less, $diff);?></td>
+        <td><?php printf($lang->depositor->less, number_format($diff, 2, '.', ' '));?></td>
         <?php endif;?>
         <td>
           <?php echo html::a(inlink('saveBalance', "depositor={$depositorID}&mony={$result->computed}&date=" . strtotime($this->post->end)), $lang->depositor->saveBalance, "class='btn-save-result'");?>
@@ -87,7 +87,7 @@
                 <td><?php echo $trade->id;?></td>
                 <td><?php echo $lang->trade->typeList[$trade->type];?></td>
                 <td><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
-                <td><?php echo zget($currencySign, $trade->currency) . $trade->money;?></td>
+                <td><?php echo zget($currencySign, $trade->currency) . number_format($trade->money, 2, '.', ' ');?></td>
                 <td><?php echo zget($categories, $trade->category, ' ');?></td>
                 <td><?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?></td>
                 <td><?php echo formatTime($trade->date, DT_DATE1);?></td>

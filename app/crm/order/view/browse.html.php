@@ -42,8 +42,8 @@
         <td class='visible-lg'><?php echo zget($lang->customer->levelNameList, $order->level, $order->level);?></td>
         <td class='text-left'><?php echo $order->customerName;?></td>
         <td><?php foreach($order->products as $product) echo $product . ' ';?></td>
-        <td class='text-right'><?php echo zget($currencySign, $order->currency, '') . $order->plan;?></td>
-        <td class='text-right'><?php echo zget($currencySign, $order->currency, '') . $order->real;?></td>
+        <td class='text-right'><?php echo zget($currencySign, $order->currency, '') . number_format($order->plan, 2);?></td>
+        <td class='text-right'><?php echo zget($currencySign, $order->currency, '') . number_format($order->real, 2);?></td>
         <td><?php if(isset($users[$order->assignedTo])) echo $users[$order->assignedTo];?></td>
         <td class="<?php echo $status;?>">
           <?php if($order->status != 'closed') echo isset($lang->order->statusList[$order->status]) ? $lang->order->statusList[$order->status] : $order->status;?>

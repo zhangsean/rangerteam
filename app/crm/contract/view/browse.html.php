@@ -38,7 +38,7 @@
       <tr class='text-center' data-url='<?php echo inlink('view', "contractID=$contract->id"); ?>'>
         <td><?php echo $contract->id;?></td>
         <td class='text-left'><?php echo $contract->name;?></td>
-        <td class='text-right'><?php echo zget($currencySign, $contract->currency, '') . $contract->amount;?></td>
+        <td class='text-right'><?php echo zget($currencySign, $contract->currency, '') . number_format($contract->amount, 2);?></td>
         <td class='visible-lg'><?php echo substr($contract->createdDate, 0, 10);?></td>
         <td><?php echo substr($contract->begin, 0, 10);?></td>
         <td><?php echo substr($contract->end, 0, 10);?></td>
