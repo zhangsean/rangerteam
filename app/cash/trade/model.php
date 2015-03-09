@@ -508,10 +508,11 @@ class tradeModel extends model
 
         if($this->post->fee)
         {
-            $fee->type     = 'out';
-            $fee->category = 'fee';
-            $fee->money    = $this->post->fee;
-            $fee->desc     = sprintf($this->lang->trade->feeDesc, $fee->date, $paymentDepositor->abbr, $receiptDepositor->abbr);
+            $fee->type      = 'out';
+            $fee->category  = 'fee';
+            $fee->depositor = $this->post->payment;
+            $fee->money     = $this->post->fee;
+            $fee->desc      = sprintf($this->lang->trade->feeDesc, $fee->date, $paymentDepositor->abbr, $receiptDepositor->abbr);
             if($diffCurrency) $fee->desc = sprintf($this->lang->trade->feeDesc, $fee->date, $paymentDepositor->abbr, $receiptDepositor->abbr);
 
             $this->dao->insert(TABLE_TRADE)->data($fee, $skip = 'receipt, payment, fee, transferIn, transferOut')->exec();
