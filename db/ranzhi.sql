@@ -161,7 +161,7 @@ CREATE TABLE `crm_customer` (
 -- DROP TABLE IF EXISTS `crm_order`;
 CREATE TABLE `crm_order` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `product` smallint(5) unsigned NOT NULL,
+  `product` char(255) unsigned NOT NULL,
   `customer` mediumint(8) unsigned NOT NULL,
   `plan` decimal(12,2) NOT NULL,
   `real` decimal(12,2) NOT NULL,
@@ -330,7 +330,7 @@ CREATE TABLE `cash_trade` (
   `order` mediumint(8) NOT NULL,
   `contract` mediumint(8) NOT NULL,
   `dept` mediumint(8) unsigned NOT NULL,
-  `type` enum('in', 'out', 'transferin', 'transferout', 'fee') NOT NULL,
+  `type` enum('in', 'out', 'transferin', 'transferout', 'inveset', 'redeem') NOT NULL,
   `money` decimal(12,2) NOT NULL,
   `currency` varchar(30) NOT NULL,
   `date` date NOT NULL,
