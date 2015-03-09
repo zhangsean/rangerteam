@@ -207,7 +207,7 @@ class salesModel extends model
             if(($type == 'edit' or $type == 'view') and isset($priv['edit'])) $users .= $groups[$key]->users;
         }
 
-        /* delete repeat user. */
+        /* Remove repeat user. */
         $accounts = ",$account,";
         foreach(explode(',', $users) as $user)
         {

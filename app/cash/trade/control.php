@@ -234,7 +234,7 @@ class trade extends control
 
         unset($this->lang->trade->menu);
         $this->view->title         = $this->lang->trade->inveset;
-        $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->depositorList = array('' => '') + $this->loadModel('depositor')->getPairs();
 
