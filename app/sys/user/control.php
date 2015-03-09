@@ -319,6 +319,7 @@ class user extends control
     {
         if($this->post->query) die($this->locate(inlink('colleague', "deptID=$deptID&query={$this->post->query}&orderBy=$orderBy&recTotal=0&recPerPage=$recPerPage&pageID=1")));
 
+        $this->app->loadLang('user', 'sys');
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
