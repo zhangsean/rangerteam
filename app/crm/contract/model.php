@@ -97,9 +97,10 @@ class contractModel extends model
      */
     public function create()
     {
+        $now = helper::now();
         $contract = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
-            ->add('createdDate', helper::now())
+            ->add('createdDate', $now)
             ->add('status', 'normal')
             ->add('delivery', 'wait')
             ->add('return', 'wait')
@@ -107,6 +108,7 @@ class contractModel extends model
             ->setDefault('real', array())
             ->setDefault('begin', '0000-00-00')
             ->setDefault('end', '0000-00-00')
+            ->setDefault('signedDate', substr($now, 0, 10))
             ->join('handlers', ',')
             ->stripTags('items', $this->config->allowedTags->admin)
             ->get();

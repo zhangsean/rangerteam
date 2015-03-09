@@ -240,7 +240,7 @@ class task extends control
         {
             if($this->post->doStart != 'yes')
             {
-                if((int) $this->post->left == '0') $this->send(array('result' => 'fail', 'confirm' => $this->lang->task->confirmFinish));
+                if($this->post->left == '0') $this->send(array('result' => 'fail', 'confirm' => $this->lang->task->confirmFinish));
             }
 
             $this->loadModel('action');
