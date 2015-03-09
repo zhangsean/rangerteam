@@ -64,7 +64,7 @@
         <td><?php printf($lang->depositor->less, number_format($diff, 2, '.', ' '));?></td>
         <?php endif;?>
         <td>
-          <?php echo html::a(inlink('saveBalance', "depositor={$depositorID}&mony={$result->computed}&date=" . strtotime($this->post->end)), $lang->depositor->saveBalance, "class='btn-save-result'");?>
+          <?php commonModel::printLink('depositor', 'saveBalance', "depositor={$depositorID}&mony={$result->computed}&date=" . strtotime($this->post->end), $lang->depositor->saveBalance, "class='btn-save-result'");?>
           <?php if($result->tradeList) echo html::a('javascript:;', $lang->depositor->detail, "class='btn-detail'");?>
         </td>
       </tr>
