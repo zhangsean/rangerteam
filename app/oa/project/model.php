@@ -425,12 +425,12 @@ class projectModel extends model
         if($methodName ==  'browse' or $methodName == 'importtask')
         {
             $menu .= '<li class="divider angle"></li>';
-            $menu .= "<li class='all'>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), $this->lang->task->all);
-            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=createdBy"), $this->lang->task->createdByMe);
-            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=assignedTo"), $this->lang->task->assignedToMe);
-            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=finishedBy"), $this->lang->task->finishedByMe);
-            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=untilToday"), $this->lang->task->untilToday);
-            $menu .= "<li>" . html::a(helper::createLink('task', 'browse', "projectID=$projectID&mode=expired"), $this->lang->task->expired);
+            $menu .= "<li class='all'>" . commonModel::printLink('task', 'browse', "projectID=$projectID", $this->lang->task->all, '', false) . '</li>';
+            $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=createdBy",  $this->lang->task->createdByMe, '', false, '', 'li');
+            $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=assignedTo", $this->lang->task->assignedToMe, '', false, '', 'li');
+            $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=finishedBy", $this->lang->task->finishedByMe, '', false, '', 'li');
+            $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=untilToday", $this->lang->task->untilToday, '', false, '', 'li');
+            $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=expired",    $this->lang->task->expired, '', false, '', 'li');
         }
         else if($methodName == 'kanban' || $methodName == 'outline')
         {
@@ -438,7 +438,7 @@ class projectModel extends model
             foreach($this->lang->task->groups as $key => $value)
             {
                 if(empty($key)) continue;
-                $menu .= "<li data-group='{$key}'>" . html::a(helper::createLink('task', $methodName, "projectID=$projectID&groupBy=$key"), $value) . "</li>";
+                $menu .= "<li data-group='{$key}'>" . commonModel::printLink('task', $methodName, "projectID=$projectID&groupBy=$key", $value, '', false) . "</li>";
             }
         }
         else if($methodName == 'view')
@@ -453,8 +453,8 @@ class projectModel extends model
         }
 
         $menu .= "</ul>";
-        $menu .= "<div class='pull-right'>" . html::a(helper::createLink('task', 'batchCreate', "projectID=$projectID"), '<i class="icon-plus"></i> ' . $this->lang->task->create, 'class="btn btn-primary"') . "</div>";
-        $menu .= "<div class='pull-right'>" . html::a(helper::createLink('project', 'importTask', "projectID=$projectID"), '<i class="icon-upload-alt"></i> ' . $this->lang->project->importTask, 'class="btn btn-primary"') . "</div>";
+        $menu .= "<div class='pull-right'>" . commonModel::printLink('task', 'batchCreate', "projectID=$projectID", '<i class="icon-plus"></i> ' . $this->lang->task->create, 'class="btn btn-primary"', false) . "</div>";
+        $menu .= "<div class='pull-right'>" . commonModel::printLink('project', 'importTask', "projectID=$projectID", '<i class="icon-upload-alt"></i> ' . $this->lang->project->importTask, 'class="btn btn-primary"', false) . "</div>";
 
         if($methodName == 'browse' || $methodName == 'kanban' || $methodName == 'outline')
         {
@@ -462,9 +462,9 @@ class projectModel extends model
             $viewName = $this->lang->task->{$methodName};
             $menu .= "<ul class='nav pull-right'>";
             $menu .= "<li id='viewBar' class='dropdown'><a href='javascript:;' id='groupButton' data-toggle='dropdown' class='dropdown-toggle'><i class='icon-" . $viewIcons[$methodName] . "'></i> {$viewName} <i class='icon-caret-down'></i></a><ul class='dropdown-menu'>";
-            $menu .= "<li" . ($methodName == 'browse' ? " class='active'" : '') . ">" . html::a(helper::createLink('task', 'browse', "projectID=$projectID"), "<i class='icon-list-ul icon'></i> " . $this->lang->task->list) . "</li>";
-            $menu .= "<li" . ($methodName == 'kanban' ? " class='active'" : '') . ">" . html::a(helper::createLink('task', 'kanban', "projectID=$projectID"), "<i class='icon-columns icon'></i> " . $this->lang->task->kanban) . "</li>";
-            $menu .= "<li" . ($methodName == 'outline' ? " class='active'" : '') . ">" . html::a(helper::createLink('task', 'outline', "projectID=$projectID"), "<i class='icon-list-alt icon'></i> " . $this->lang->task->outline) . "</li>";
+            $menu .= "<li" . ($methodName == 'browse' ? " class='active'" : '') . ">" . commonModel::printLink('task', 'browse', "projectID=$projectID", "<i class='icon-list-ul icon'></i> " . $this->lang->task->list, '', false) . "</li>";
+            $menu .= "<li" . ($methodName == 'kanban' ? " class='active'" : '') . ">" . commonModel::printLink('task', 'kanban', "projectID=$projectID", "<i class='icon-columns icon'></i> " . $this->lang->task->kanban, '', false) . "</li>";
+            $menu .= "<li" . ($methodName == 'outline' ? " class='active'" : '') . ">" . commonModel::printLink('task', 'outline', "projectID=$projectID", "<i class='icon-list-alt icon'></i> " . $this->lang->task->outline, '', false) . "</li>";
             $menu .= '</ul></li>';
 
             if($methodName == 'outline')
