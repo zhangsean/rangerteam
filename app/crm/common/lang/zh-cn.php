@@ -47,8 +47,8 @@ $lang->order->menu->browse    = array('link' => '所有订单|order|browse|mode=
 $lang->order->menu->past      = array('link' => '亟需联系|order|browse|mode=past', 'alias' => 'create,edit,view,record');
 $lang->order->menu->today     = array('link' => '今天联系|order|browse|mode=today', 'alias' => 'create,edit,view,record');
 $lang->order->menu->tomorrow  = array('link' => '明天联系|order|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
-$lang->order->menu->thisweek  = array('link' => '一周内联系|order|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
-$lang->order->menu->thismonth = array('link' => '一月内联系|order|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
+$lang->order->menu->thisweek  = array('link' => '本周内联系|order|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
+$lang->order->menu->thismonth = array('link' => '本月内联系|order|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
 $lang->order->menu->public    = array('link' => '公共客户|order|browse|mode=public', 'alias' => 'create,edit,view,record');
 
 /* Menu of contact module. */
@@ -58,8 +58,8 @@ $lang->contact->menu->browse    = array('link' => '所有联系人|contact|brows
 $lang->contact->menu->past      = array('link' => '亟需联系|contact|browse|mode=past', 'alias' => 'create,edit,view,record');
 $lang->contact->menu->today     = array('link' => '今天联系|contact|browse|mode=today', 'alias' => 'create,edit,view,record');
 $lang->contact->menu->tomorrow  = array('link' => '明天联系|contact|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
-$lang->contact->menu->thisweek  = array('link' => '一周内联系|contact|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
-$lang->contact->menu->thismonth = array('link' => '一月内联系|contact|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
+$lang->contact->menu->thisweek  = array('link' => '本周内联系|contact|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
+$lang->contact->menu->thismonth = array('link' => '本月内联系|contact|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();
