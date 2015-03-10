@@ -215,7 +215,7 @@ class task extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
         $task = $this->task->getByID($taskID);
@@ -254,7 +254,7 @@ class task extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
         $this->view->taskID = $taskID; 
@@ -284,7 +284,7 @@ class task extends control
                 $this->sendmail($taskID, $actionID);
             }
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
         $task = $this->task->getByID($taskID);
@@ -315,7 +315,7 @@ class task extends control
                 $actionID = $this->loadModel('action')->create('task', $taskID, 'Activated', $this->post->comment);
                 $this->action->logHistory($actionID, $changes);
             }
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
         $this->view->title = $this->lang->task->activate;
         $this->view->task  = $this->task->getByID($taskID);
@@ -342,7 +342,7 @@ class task extends control
                 $actionID = $this->loadModel('action')->create('task', $taskID, 'Canceled', $this->post->comment);
                 $this->action->logHistory($actionID, $changes);
             }
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
         $this->view->title  = $this->lang->task->cancel;
@@ -370,7 +370,7 @@ class task extends control
                 $actionID = $this->loadModel('action')->create('task', $taskID, 'Closed', $this->post->comment, $this->lang->task->reasonList[$task->closedReason]);
                 $this->action->logHistory($actionID, $changes);
             }
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload', 'closeModal' => true, 'callback' => 'reloadDataTable'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
         $this->view->title  = $this->lang->task->close;
         $this->view->taskID = $taskID;

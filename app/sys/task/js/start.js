@@ -9,27 +9,11 @@ $(document).ready(function()
                 $('#doStart').val('yes');
                 $('#startForm').submit();
             }
+            return false;
         }
         else(response.result == 'success')
         {
-            if(response.closeModal)
-            {
-                setTimeout($.closeModal, 1200);
-            }
-
-            if(response.callback)
-            {
-                var rcall = window[response.callback];
-                if($.isFunction(rcall))
-                {
-                    if(rcall() === false)
-                    {
-                        return;
-                    }
-                }
-            }
-            if(response.locate == 'reload') return location.href = location.href;
-            $.reloadAjaxModal(1500);
+            setTimeout(function(){location.href = response.locate;}, 1200);
         }
     })
 })
