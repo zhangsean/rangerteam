@@ -30,7 +30,15 @@ $(document).ready(function()
     }
     else
     {
-        $('#menu li').removeClass('active').find('[href*=' + v.mode + ']').parent().addClass('active');
+        $('#menu li').removeClass('active');
+        if(v.mode == 'in')
+        {
+            $('#menu li').find("[href*='trade-browse-in.html']").parent().addClass('active');
+        }
+        else
+        {
+            $('#menu li').find('[href*=' + v.mode + ']').parent().addClass('active');
+        }
     }
 })
 
