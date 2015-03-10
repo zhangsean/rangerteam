@@ -22,7 +22,7 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->at      = ' 于 ';
 $lang->by      = ' 由 ';
 $lang->ditto   = '同上';
-$lang->submitting   = '稍候...';
+$lang->etc     = '等';
 
 /* Apps lang items.*/
 $lang->apps = new stdclass();
@@ -119,6 +119,7 @@ $lang->comment        = '備註';
 $lang->selectAll      = '全選';
 $lang->selectReverse  = '反選';
 $lang->continueSave   = '繼續保存';
+$lang->submitting     = '稍候...';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();
@@ -242,6 +243,7 @@ $lang->error->passwordrule = '密碼應該符合規則，長度至少為六位�
 $lang->error->captcha      = '請輸入正確的驗證碼。';
 $lang->error->noWritable   = '%s 可能不可寫，請修改權限！';
 $lang->error->noConvertFun = '不存在iconv和mb_convert_encoding轉碼方法，不能將數據轉成想要的編碼！';
+$lang->error->notInt       = '<strong>%s</strong>不能為純數字組合。';
 
 /* The pager items. */
 $lang->pager = new stdclass();
@@ -323,6 +325,8 @@ $lang->currencySymbols['nzd']  = 'NZ$';
 $lang->currencySymbols['thb']  = 'B';
 $lang->currencySymbols['sgd']  = 'S$';
 
+$lang->currencyTip['w'] = '萬';
+$lang->currencyTip['y'] = '億';
 
 /* The datetime settings. */
 define('DT_DATETIME1',  'Y-m-d H:i:s');

@@ -27,6 +27,8 @@ $lang->project->finished   = '已結束';
 $lang->project->suspended  = '已掛起';
 $lang->project->noMatched  = '找不到包含"%s"的項目';
 $lang->project->search     = '搜索';
+$lang->project->import     = '導入';
+$lang->project->importTask = '導入任務';
 
 $lang->project->id          = '編號';
 $lang->project->name        = '項目名稱';
@@ -37,6 +39,7 @@ $lang->project->member      = '團隊';
 $lang->project->end         = '結束日期';
 $lang->project->createdBy   = '由誰創建';
 $lang->project->createdDate = '創建時間';
+$lang->project->fromproject = '所屬項目';
 
 $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = '確認激活此項目？';
@@ -44,3 +47,4 @@ $lang->project->confirm->suspend  = '確認掛起此項目？';
 
 $lang->project->activateSuccess = '激活操作成功';
 $lang->project->suspendSuccess  = '掛起操作成功';
+$lang->project->selectProject   = "請選擇項目";

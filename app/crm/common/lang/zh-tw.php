@@ -28,8 +28,8 @@ $lang->customer->menu->browse    = array('link' => '所有客戶|customer|browse
 $lang->customer->menu->past      = array('link' => '亟需聯繫|customer|browse|mode=past');
 $lang->customer->menu->today     = array('link' => '今天聯繫|customer|browse|mode=today');
 $lang->customer->menu->tomorrow  = array('link' => '明天聯繫|customer|browse|mode=tomorrow');
-$lang->customer->menu->thisweek  = array('link' => '一周內聯繫|customer|browse|mode=thisweek');
-$lang->customer->menu->thismonth = array('link' => '一月內聯繫|customer|browse|mode=thismonth');
+$lang->customer->menu->thisweek  = array('link' => '本週內聯繫|customer|browse|mode=thisweek');
+$lang->customer->menu->thismonth = array('link' => '本月內聯繫|customer|browse|mode=thismonth');
 $lang->customer->menu->public    = array('link' => '公共客戶|customer|browse|mode=public');
 
 /* Menu of product module. */
@@ -83,6 +83,11 @@ $lang->setting->menu->customerLevel = '客戶等級|setting|lang|module=customer
 $lang->setting->menu->area          = '區域設置|tree|browse|type=area|';
 $lang->setting->menu->industry      = '行業設置|tree|browse|type=industry|';
 $lang->setting->menu->currency      = '貨幣設置|setting|lang|module=common&field=currencyList';
+$lang->setting->menu->salesGroup    = '銷售分組|sales|browse|';
+
+/* Menu of sales module. */
+$lang->sales = new stdclass();
+$lang->sales->menu = $lang->setting->menu;
 
 $lang->dashboard = new stdclass();
 $lang->resume    = new stdclass();

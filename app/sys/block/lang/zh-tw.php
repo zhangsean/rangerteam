@@ -51,6 +51,7 @@ $lang->block->default['oa']['3']['grid']  = 4;
 
 $lang->block->default['oa']['3']['params']['num']     = 15;
 $lang->block->default['oa']['3']['params']['orderBy'] = 'id_desc';
+$lang->block->default['oa']['3']['params']['status']  = 'doing';
 
 $lang->block->default['crm']['1']['title'] = '我的訂單';
 $lang->block->default['crm']['1']['block'] = 'order';

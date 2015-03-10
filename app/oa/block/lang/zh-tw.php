@@ -13,6 +13,9 @@ $lang->block->announce = '系統公告';
 $lang->block->lblBlock = '區塊';
 $lang->block->admin    = '管理區塊';
 $lang->block->type     = '類型';
+$lang->block->waitTask = '未完成';
+$lang->block->doneTask = '已完成';
+$lang->block->rate     = '進度';
 
 $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->announce = '系統公告';
@@ -43,8 +46,12 @@ $lang->block->orderByList->project['begin_desc']       = '開始時間遞減';
 $lang->block->orderByList->project['end_asc']          = '結束時間遞增';
 $lang->block->orderByList->project['end_desc']         = '結束時間遞減';
 
-$lang->block->typeList['assignedTo'] = '指派給我';
-$lang->block->typeList['createdBy']  = '由我創建';
-$lang->block->typeList['finishedBy'] = '由我完成';
-$lang->block->typeList['closedBy']   = '由我關閉';
-$lang->block->typeList['canceledBy'] = '由我取消';
+$lang->block->typeList->task['assignedTo'] = '指派給我';
+$lang->block->typeList->task['createdBy']  = '由我創建';
+$lang->block->typeList->task['finishedBy'] = '由我完成';
+$lang->block->typeList->task['closedBy']   = '由我關閉';
+$lang->block->typeList->task['canceledBy'] = '由我取消';
+
+$lang->block->statusList->project['doing']    = '進行中';
+$lang->block->statusList->project['finished'] = '已完成';
+$lang->block->statusList->project['suspend']  = '已掛起';

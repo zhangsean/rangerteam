@@ -43,7 +43,7 @@ $lang->group->extent   = '權限範圍';
 $lang->group->havePriv = '已授權';
 $lang->group->noPriv   = '未授權';
 
-$lang->group->manageAll   = '可管理他人信息';
+$lang->group->manageAll = '可瀏覽所有客戶和訂單';
 
 $lang->group->copyOptions['copyPriv'] = '複製權限';
 $lang->group->copyOptions['copyUser'] = '複製用戶';

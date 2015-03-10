@@ -38,6 +38,8 @@ $lang->trade->encode      = '編碼';
 $lang->trade->create      = '記賬';
 $lang->trade->in          = '收入';
 $lang->trade->out         = '支出';
+$lang->trade->inveset     = '投資';
+$lang->trade->redeem      = '贖回';
 $lang->trade->createIn    = '記收入';
 $lang->trade->createOut   = '記支出';
 $lang->trade->transfer    = '記轉賬';
@@ -55,14 +57,29 @@ $lang->trade->typeList['in']          = '收入';
 $lang->trade->typeList['out']         = '支出';
 $lang->trade->typeList['transferout'] = '轉出';
 $lang->trade->typeList['transferin']  = '轉入';
-$lang->trade->typeList['fee']         = '手續費';
+$lang->trade->typeList['inveset']     = '投資';
+$lang->trade->typeList['redeem']      = '贖回';
 
 $lang->trade->categoryList['transferin']  = '轉入';
 $lang->trade->categoryList['transferout'] = '轉出';
-$lang->trade->categoryList['fee']         = '手續費';
+$lang->trade->categoryList['inveset']     = '投資';
+$lang->trade->categoryList['redeem']      = '贖回';
+
+$lang->trade->expenseCategoryList['fee']  = '手續費';
+$lang->trade->expenseCategoryList['loss'] = '理財虧損';
+
+$lang->trade->incomeCategoryList['profit'] = '理財盈利';
+
+$lang->trade->categoryList = $lang->trade->categoryList + $lang->trade->expenseCategoryList + $lang->trade->incomeCategoryList;
+
+$lang->trade->invesetCategoryList['profit'] = '盈利';
+$lang->trade->invesetCategoryList['loss']   = '虧損';
 
 $lang->trade->objectTypeList['order']    = '訂單支出';
 $lang->trade->objectTypeList['contract'] = '合同支出';
+
+$lang->trade->invesetTypeList['inveset'] = '投資';
+$lang->trade->invesetTypeList['redeem']  = '贖回';
 
 $lang->trade->encodeList['gbk']  = 'GBK';
 $lang->trade->encodeList['utf8'] = 'UTF-8';
@@ -83,6 +100,8 @@ $lang->trade->importedFields['dept']     = '部門';
 $lang->trade->importedFields['desc']     = '備註';
 $lang->trade->importedFields['fee']      = '手續費';
 
+$lang->trade->totalIn     = '%s收入%s；';
+$lang->trade->totalOut    = '%s支出%s；';
 $lang->trade->totalAmount = '%s收入%s，支出%s，%s；';
 $lang->trade->profit      = '盈';
 $lang->trade->loss        = '虧';
