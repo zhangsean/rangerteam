@@ -21,9 +21,9 @@
     <thead>
       <tr class='text-center'>
         <?php $vars = "mode={$mode}&param=&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
-        <th class='w-60px'> <?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->customer->id);?></th>
-        <th>                <?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->customer->name);?></th>
-        <th class='w-60px'> <?php commonModel::printOrderLink('level', $orderBy, $vars, $lang->customer->level);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('id',     $orderBy, $vars, $lang->customer->id);?></th>
+        <th>                <?php commonModel::printOrderLink('name',   $orderBy, $vars, $lang->customer->name);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('level',  $orderBy, $vars, $lang->customer->level);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->customer->status);?></th>
         <th class='w-80px visible-lg'><?php commonModel::printOrderLink('size', $orderBy, $vars, $lang->customer->size);?></th>
         <th class='w-80px'> <?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->customer->type);?></th>
@@ -63,8 +63,6 @@
       <?php endforeach;?>
     </tbody>
   </table>
-  <div class='table-footer'>
-    <?php $pager->show();?>
-  </div>
+  <div class='table-footer'><?php $pager->show();?></div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

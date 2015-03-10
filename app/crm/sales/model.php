@@ -15,7 +15,7 @@ class salesModel extends model
      * Get sales group list.
      * 
      * @access public
-     * @return void
+     * @return array
      */
     public function getList()
     {
@@ -27,7 +27,7 @@ class salesModel extends model
      * 
      * @param  int    $groupID 
      * @access public
-     * @return void
+     * @return object
      */
     public function getByID($groupID)
     {
@@ -44,7 +44,7 @@ class salesModel extends model
     {
         $users = '';
         if($this->post->users != false) foreach($this->post->users as $key => $value) $users .= ',' . $value;
-        if($users != '') $users = rtrim($users, ',') . ',';
+        if($users != '') $users = $users . ',';
 
         $group = fixer::input('post')
             ->remove('users, privs_view, privs_edit')
@@ -100,7 +100,7 @@ class salesModel extends model
     {
         $users = '';
         if($this->post->users != false) foreach($this->post->users as $key => $value) $users .= ',' . $value;
-        if($users != '') $users = rtrim($users, ',') . ',';
+        if($users != '') $users = $users . ',';
 
         $group = fixer::input('post')
             ->remove('users, privs_view, privs_edit, id')
@@ -110,7 +110,7 @@ class salesModel extends model
 
         $this->dao->update(TABLE_SALESGROUP)
             ->data($group)
-            ->batchCheck($this->config->sales->require->create, 'notempty')
+            ->batchCheck($this->config->sales->require->edit, 'notempty')
             ->where('id')->eq($groupID)
             ->exec();
 
@@ -194,13 +194,13 @@ class salesModel extends model
      * @param  string $account 
      * @param  string $type     view|edit
      * @access public
-     * @return void
+     * @return string
      */
     public function getAllowedAccounts($account, $type = 'view')
     {
-        $privs = $this->getPrivsByAccount($account);
+        $privs  = $this->getPrivsByAccount($account);
         $groups = $this->getList();
-        $users = '';
+        $users  = '';
         foreach($privs as $key => $priv)
         {
             if($type == 'view' and isset($priv['view'])) $users .= $groups[$key]->users;

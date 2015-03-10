@@ -358,7 +358,6 @@ class contractModel extends model
             
             return !dao::isError();
         }
-
         return false;
     }
 

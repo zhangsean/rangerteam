@@ -183,7 +183,7 @@ class orderModel extends model
 
         foreach($orders as $order)
         {
-            $productName = count($order->products) > 1 ? current($order->products) . $this->lang->etc : current($order->products);
+            $productName  = count($order->products) > 1 ? current($order->products) . $this->lang->etc : current($order->products);
             $order->title = sprintf($this->lang->order->titleLBL, $customers[$order->customer], $productName, date('Y-m-d', strtotime($order->createdDate))); 
         }
 
@@ -315,7 +315,6 @@ class orderModel extends model
             ->get();
 
         $order->product = $order->product ? ',' . $order->product . ',' : '';
-
 
         $this->dao->update(TABLE_ORDER)
             ->data($order, $skip = 'referer')
