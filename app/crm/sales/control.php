@@ -21,6 +21,7 @@ class sales extends control
     {
         parent::__construct();
         $this->loadModel('user');
+        $this->lang->menuGroups->sales = 'setting';
     }
 
     /**

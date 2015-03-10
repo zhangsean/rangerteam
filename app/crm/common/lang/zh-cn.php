@@ -83,7 +83,7 @@ $lang->setting->menu->customerLevel = '客户等级|setting|lang|module=customer
 $lang->setting->menu->area          = '区域设置|tree|browse|type=area|';
 $lang->setting->menu->industry      = '行业设置|tree|browse|type=industry|';
 $lang->setting->menu->currency      = '货币设置|setting|lang|module=common&field=currencyList';
-$lang->setting->menu->salesGroup    = '销售分组|sales|browse|';
+$lang->setting->menu->salesGroup    = array('link' => '销售分组|sales|browse|', 'alias' => 'create,edit');
 
 /* Menu of sales module. */
 $lang->sales = new stdclass();

@@ -246,7 +246,7 @@ class commonModel extends model
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
-            if(strpos(',tree,setting,schema,', $module) != false) 
+            if(strpos(',tree,setting,schema,sales,', $module) != false) 
             {
                 if(isset($lang->setting->menu)) 
                 {
