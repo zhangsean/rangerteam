@@ -33,7 +33,7 @@ class sales extends control
      */
     public function browse()
     {
-        $groups = $this->sales->getList();
+        $groups = $this->sales->getGroupList();
         $users  = $this->user->getPairs('nodeleted, noempty, noclosed');
         foreach($groups as $group) 
         {
@@ -66,7 +66,7 @@ class sales extends control
         $this->view->title  = $this->lang->sales->create;
         $this->view->users  = $this->user->getPairs('nodeleted, noempty, noclosed');
         $this->view->privs  = $this->sales->getPrivs();
-        $this->view->groups = $this->sales->getList();
+        $this->view->groups = $this->sales->getGroupList();
 
         $this->display();
     }
@@ -90,7 +90,7 @@ class sales extends control
         /* Put current group first. */
         $group    = $this->sales->getByID($groupID);
         $groups[] = $group;
-        foreach($this->sales->getList() as $g) if($g->id != $groupID) $groups[] = $g;
+        foreach($this->sales->getGroupList() as $g) if($g->id != $groupID) $groups[] = $g;
 
         $this->view->title  = $this->lang->sales->create;
         $this->view->group  = $group;
