@@ -71,7 +71,8 @@
       <?php if($result->tradeList):?>
       <tr class='detail hide'>
         <td colspan='9'>
-          <table class='table table-hover table-striped table-data'>
+          <div class='panel'>
+            <table class='table table-hover table-striped table-data'>
               <tr class='text-center'>
                 <th class='w-50px'> <?php echo $lang->trade->id;?></th>
                 <th class='w-60px'> <?php echo $lang->trade->type;?></th>
@@ -94,7 +95,8 @@
                 <td class='text-left visible-lg'><?php echo $trade->desc;?></td>
               </tr>
               <?php endforeach;?>
-          </table>
+            </table>
+          </div>
         </td>
       </tr>
       <?php endif;?>
