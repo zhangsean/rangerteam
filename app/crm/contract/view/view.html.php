@@ -54,6 +54,18 @@
               <?php endforeach;?>
             </td>
           </tr>
+          <?php if(!empty($orders)):?>
+          <tr>
+            <th><?php echo $lang->order->product;?></th>
+            <td>
+              <?php foreach($orders as $order):?>
+                <?php foreach($order->products as $product):?>
+                <span><?php echo $product?>；</span>
+                <?php endforeach;?>
+              <?php endforeach;?>
+            </td>
+          </tr>
+          <?php endif;?>
           <tr>
             <th><?php echo $lang->contract->amount;?></th>
             <td><?php echo zget($currencySign, $contract->currency, '') . number_format($contract->amount, 2);?></td>

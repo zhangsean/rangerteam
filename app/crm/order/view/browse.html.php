@@ -38,10 +38,11 @@
       <?php if(!empty($orders)) foreach($orders as $order):?>
       <?php $status = $order->status != 'closed' ? "order-{$order->status}" : "order-{$order->closedReason}"?>
       <tr class='text-center' data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id");?>'>
+        <?php $products = ''; foreach($order->products as $product) $products .= $product . ' ';?>
         <td><?php echo $order->id;?></td>
         <td class='visible-lg'><?php echo zget($lang->customer->levelNameList, $order->level, $order->level);?></td>
         <td class='text-left'><?php echo $order->customerName;?></td>
-        <td><?php foreach($order->products as $product) echo $product . ' ';?></td>
+        <td title='<?php echo $products;?>'><?php echo $products;?></td>
         <td class='text-right'><?php echo zget($currencySign, $order->currency, '') . number_format($order->plan, 2);?></td>
         <td class='text-right'><?php echo zget($currencySign, $order->currency, '') . number_format($order->real, 2);?></td>
         <td><?php if(isset($users[$order->assignedTo])) echo $users[$order->assignedTo];?></td>
