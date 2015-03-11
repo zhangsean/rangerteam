@@ -317,9 +317,12 @@ class task extends control
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
+
+        $task = $this->task->getByID($taskID);
+
         $this->view->title = $this->lang->task->activate;
-        $this->view->task  = $this->task->getByID($taskID);
-        $this->view->users = $this->loadModel('user')->getPairs('noclosed');
+        $this->view->task  = $task;
+        $this->view->users = $this->loadModel('project')->getMemberPairs($task->project);
         $this->display();
     }
 

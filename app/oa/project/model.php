@@ -333,6 +333,12 @@ class projectModel extends model
             if(!isset($members[$account]))
             {
                 $role = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($preProjectID)->andWhere('account')->eq($account)->fetch();
+                if(!isset($role))
+                {
+                    $role = new stdclass();
+                    $role->type    = 'project';
+                    $role->account = $account;
+                }
                 $role->id   = $projectID;
                 $role->join = helper::today();
                 $this->dao->insert(TABLE_TEAM)->data($role)->exec();
