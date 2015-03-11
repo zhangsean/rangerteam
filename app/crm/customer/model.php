@@ -20,7 +20,7 @@ class customerModel extends model
      */
     public function getByID($id)
     {
-        $mine = $this->getMine();
+        $mine = $this->getCustomersSawByMe();
         if(empty($mine)) return false;
         if(!in_array($id, $mine)) return false;
 
@@ -34,7 +34,7 @@ class customerModel extends model
      * @access public
      * @return array
      */
-    public function getMine($type = 'view')
+    public function getCustomersSawByMe($type = 'view')
     {
         $allowedAccounts = $this->loadModel('sales', 'crm')->getAllowedAccounts($this->app->user->account, $type);
 
@@ -68,7 +68,7 @@ class customerModel extends model
      */
     public function getList($mode = 'all', $param = null, $relation = 'client', $orderBy = 'id_desc', $pager = null)
     {
-        $mine = $this->getMine();
+        $mine = $this->getCustomersSawByMe();
         if(empty($mine)) return array();
 
         $this->app->loadClass('date', $static = true);
@@ -112,7 +112,7 @@ class customerModel extends model
      */
     public function getPairs($relation = '', $emptyOption = true)
     {
-        $mine = $this->getMine();
+        $mine = $this->getCustomersSawByMe();
 
         if(empty($mine))
         {

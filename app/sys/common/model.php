@@ -171,7 +171,7 @@ class commonModel extends model
      */
     public function checkPrivByCustomer($customerID, $type = 'view')
     {
-        $customers = $this->loadModel('customer', 'crm')->getMine($type);
+        $customers = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
         if(!in_array($customerID, $customers))
         {
             $locate = helper::createLink('crm.index');

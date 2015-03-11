@@ -15,7 +15,7 @@ class order extends control
     {
         parent::__construct();
         /* Set allowed edit order ID list. */
-        $this->app->user->canEditOrderIdList = ',' . implode(',', $this->order->getMine('edit')) . ',';
+        $this->app->user->canEditOrderIdList = ',' . implode(',', $this->order->getOrdersSawByMe('edit')) . ',';
     }
 
     /** 

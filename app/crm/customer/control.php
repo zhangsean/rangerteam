@@ -15,7 +15,7 @@ class customer extends control
     {
         parent::__construct();
         /* Set allowed edit customer ID list. */
-        $this->app->user->canEditCustomerIdList = ',' . implode(',', $this->customer->getMine('edit')) . ',';
+        $this->app->user->canEditCustomerIdList = ',' . implode(',', $this->customer->getCustomersSawByMe('edit')) . ',';
     }
 
     /** 

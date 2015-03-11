@@ -20,7 +20,7 @@ class orderModel extends model
      */
     public function getByID($id)
     {
-        $customerIdList = $this->loadModel('customer')->getMine();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return null;
 
         $order = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($id)->andWhere('customer')->in($customerIdList)->fetch(); 
@@ -41,9 +41,9 @@ class orderModel extends model
      * @access public
      * @return array
      */
-    public function getMine($type = 'view')
+    public function getOrdersSawByMe($type = 'view')
     {
-        $customerIdList = $this->loadModel('customer')->getMine($type);
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
         $orderList = $this->dao->select('*')->from(TABLE_ORDER)
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->where('customer')->in($customerIdList)
@@ -65,7 +65,7 @@ class orderModel extends model
      */
     public function getList($mode = 'all', $param = null, $orderBy = 'id_desc', $pager = null)
     {
-        $customerIdList = $this->loadModel('customer')->getMine();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
         $this->app->loadClass('date', $static = true);
@@ -139,7 +139,7 @@ class orderModel extends model
      */
     public function getPairs($customer, $status = '')
     {
-        $customerIdList = $this->loadModel('customer')->getMine();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
         $orders = $this->dao->select('o.id, o.createdDate, o.product, c.name as customerName')->from(TABLE_ORDER)->alias('o')
