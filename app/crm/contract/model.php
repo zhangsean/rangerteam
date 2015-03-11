@@ -29,8 +29,8 @@ class contractModel extends model
             foreach($contractOrders as $contractOrder) $contract->order[] = $contractOrder->order;
 
             $contract->files        = $this->loadModel('file')->getByObject('contract', $contractID);
-            $contract->returnList   = $this->dao->select('*')->from(TABLE_PLAN)->where('contract')->eq($contractID)->fetchAll();
-            $contract->deliveryList = $this->dao->select('*')->from(TABLE_DELIVERY)->where('contract')->eq($contractID)->fetchAll();
+            $contract->returnList   = $this->getReturnList($contractID);
+            $contract->deliveryList = $this->getDeliveryList($contractID);
         }
 
         return $contract;
@@ -87,6 +87,54 @@ class contractModel extends model
             ->beginIF($customerID)->andWhere('customer')->eq($customerID)->fi()
             ->andWhere('deleted')->eq(0)
             ->fetchPairs('id', 'name');
+    }
+
+    /**
+     * Get return by ID.
+     * 
+     * @param  int    $returnID 
+     * @access public
+     * @return object
+     */
+    public function getReturnByID($returnID)
+    {
+        return $this->dao->select('*')->from(TABLE_PLAN)->where('id')->eq($returnID)->fetch();
+    }
+
+    /**
+     * Get returnList of its contract.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return array
+     */
+    public function getReturnList($contractID, $orderBy = 'id_desc')
+    {
+        return $this->dao->select('*')->from(TABLE_PLAN)->where('contract')->eq($contractID)->orderBy($orderBy)->fetchAll();
+    }
+
+    /**
+     * Get delivery by ID.
+     * 
+     * @param  int    $deliveryID 
+     * @access public
+     * @return object
+     */
+    public function getDeliveryByID($deliveryID)
+    {
+        return $this->dao->select('*')->from(TABLE_DELIVERY)->where('id')->eq($deliveryID)->fetch();
+    }
+
+    /**
+     * Get deliveryList of its contract.
+     * 
+     * @param  int    $contractID 
+     * @access public
+     * @return array
+     */
+    public function getDeliveryList($contractID, $orderBy = 'id_desc')
+    {
+        return $this->dao->select('*')->from(TABLE_DELIVERY)->where('contract')->eq($contractID)->orderBy($orderBy)->fetchAll();
     }
 
     /**
@@ -329,7 +377,7 @@ class contractModel extends model
             ->stripTags('comment', $this->config->allowedTags->admin)
             ->get();
 
-        $this->dao->update(TABLE_DELIVERY)->data($data, $skip = 'uid, handlers, finish')->autoCheck()->exec();
+        $this->dao->update(TABLE_DELIVERY)->data($data, $skip = 'uid, handlers, finish')->where('id')->eq($delivery->id)->autoCheck()->exec();
 
         if(!dao::isError())
         {
@@ -340,22 +388,20 @@ class contractModel extends model
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $contractData = fixer::input('post')
-                ->add('delivery', 'doing')
-                ->add('editedBy', $this->app->user->account)
-                ->add('editedDate', $now)
-                ->setDefault('deliveredBy', $this->app->user->account)
-                ->setDefault('deliveredDate', $now)
-                ->setIF($this->post->finish, 'delivery', 'done')
-                ->join('handlers', ',')
-                ->remove('finish')
-                ->get();
+            $deliveryList = $this->getDeliveryList($delivery->contract, 'deliveredDate_desc');
 
-            $this->dao->update(TABLE_CONTRACT)->data($contractData, $skip = 'uid, comment')
-                ->autoCheck()
-                ->where('id')->eq($contract->id)
-                ->exec();
-            
+            $contractData = new stdclass();
+            $contractData->delivery      = 'doing';
+            $contractData->editedBy      = $this->app->user->account;
+            $contractData->editedDate    = $now;
+            $contractData->handlers      = implode(',', $this->post->handlers);
+            $contractData->deliveredBy   = current($deliveryList)->deliveredBy;
+            $contractData->deliveredDate = current($deliveryList)->deliveredDate;
+
+            if($this->post->finish) $contractData->delivery = 'done';
+
+            $this->dao->update(TABLE_CONTRACT)->data($contractData, $skip = 'uid, comment')->where('id')->eq($contract->id)->exec();
+
             return !dao::isError();
         }
         return false;
@@ -370,7 +416,27 @@ class contractModel extends model
      */
     public function deleteDelivery($deliveryID)
     {
+        $delivery = $this->getDeliveryByID($deliveryID);
+
         $this->dao->delete()->from(TABLE_DELIVERY)->where('id')->eq($deliveryID)->exec();
+
+        $deliveryList = $this->getDeliveryList($delivery->contract, 'deliveredDate_desc');
+        $contract = new stdclass();
+        if(empty($deliveryList))
+        {
+            $contract->delivery      = 'wait';
+            $contract->deliveredBy   = '';
+            $contract->deliveredDate = '0000-00-00';
+        }
+        else
+        {
+            $contract->delivery       = 'doing';
+            $contract->deliveredBy   = current($deliveryList)->deliveredBy;
+            $contract->deliveredDate = current($deliveryList)->deliveredDate;
+        }
+
+        $this->dao->update(TABLE_CONTRACT)->data($contract)->where('id')->eq($delivery->contract)->autoCheck()->exec();
+
         return !dao::isError();
     }
 
@@ -421,30 +487,6 @@ class contractModel extends model
     }
 
     /**
-     * Get return by ID.
-     * 
-     * @param  int    $returnID 
-     * @access public
-     * @return object
-     */
-    public function getReturnByID($returnID)
-    {
-        return $this->dao->select('*')->from(TABLE_PLAN)->where('id')->eq($returnID)->fetch();
-    }
-
-    /**
-     * Get delivery by ID.
-     * 
-     * @param  int    $deliveryID 
-     * @access public
-     * @return object
-     */
-    public function getDeliveryByID($deliveryID)
-    {
-        return $this->dao->select('*')->from(TABLE_DELIVERY)->where('id')->eq($deliveryID)->fetch();
-    }
-
-    /**
      * Edit return.
      * 
      * @param  object    $return 
@@ -477,13 +519,16 @@ class contractModel extends model
                 $this->action->logHistory($actionID, $changes);
             }
 
+            $returnList = $this->getReturnList($return->contract, 'returnedDate_desc');
+
             $contractData = new stdclass();
             $contractData->return       = 'doing';
             $contractData->editedBy     = $this->app->user->account;
             $contractData->editedDate   = $now;
             $contractData->handlers     = implode(',', $this->post->handlers);
-            $contractData->returnedBy   = $this->post->returnedBy ? $this->post->returnedBy : $this->app->user->account;
-            $contractData->returnedDate = $this->post->returnedDate ? $this->post->returnedDate : $now;
+            $contractData->returnedBy   = current($returnList)->returnedBy;
+            $contractData->returnedDate = current($returnList)->returnedDate;
+
             if($this->post->finish) $contractData->return = 'done';
 
             $this->dao->update(TABLE_CONTRACT)->data($contractData, $skip = 'uid, comment')->where('id')->eq($contract->id)->exec();
@@ -505,7 +550,27 @@ class contractModel extends model
      */
     public function deleteReturn($returnID)
     {
+        $return = $this->getReturnByID($returnID);
+
         $this->dao->delete()->from(TABLE_PLAN)->where('id')->eq($returnID)->exec();
+
+        $returnList = $this->getReturnList($return->contract, 'returnedDate_desc');
+        $contract = new stdclass();
+        if(empty($returnList))
+        {
+            $contract->return       = 'wait';
+            $contract->returnedBy   = '';
+            $contract->returnedDate = '0000-00-00';
+        }
+        else
+        {
+            $contract->return       = 'doing';
+            $contract->returnedBy   = current($returnList)->returnedBy;
+            $contract->returnedDate = current($returnList)->returnedDate;
+        }
+
+        $this->dao->update(TABLE_CONTRACT)->data($contract)->where('id')->eq($return->contract)->autoCheck()->exec();
+
         return !dao::isError();
     }
 
