@@ -124,7 +124,7 @@ class projectModel extends model
         $now   = date('Y-m-d');
         foreach($projects as $id => $project)
         {
-            if($project->status == 'done' or $project->end < $now) $pairs[$id] = $project->name;
+            if($project->status == 'finished' or $project->end < $now) $pairs[$id] = $project->name;
         }
         return $pairs;
     }
