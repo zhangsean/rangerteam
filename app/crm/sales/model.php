@@ -189,14 +189,14 @@ class salesModel extends model
     }
 
     /**
-     * Get allowed accounts by sales group.
+     * Get accounts accessed by sales group.
      * 
      * @param  string $account 
      * @param  string $type     view|edit
      * @access public
      * @return string
      */
-    public function getAllowedAccounts($account, $type = 'view')
+    public function getAccountsSawByMe($account, $type = 'view')
     {
         $privs  = $this->getPrivsByAccount($account);
         $groups = $this->getList();

@@ -36,17 +36,17 @@ class customerModel extends model
      */
     public function getCustomersSawByMe($type = 'view')
     {
-        $allowedAccounts = $this->loadModel('sales', 'crm')->getAllowedAccounts($this->app->user->account, $type);
+        $accountsSawByMe = $this->loadModel('sales', 'crm')->getAccountsSawByMe($this->app->user->account, $type);
 
         $customerList = $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
-            ->where('assignedTo')->in($allowedAccounts)
+            ->where('assignedTo')->in($accountsSawByMe)
             ->orWhere('public')->eq('1')
             ->fi()
             ->fetchAll('id');
 
         /* Get customers not assigned to these accounts but theirs orders assigned to. */
-        $orderList = $this->dao->select('customer')->from(TABLE_ORDER)->where('assignedTo')->in($allowedAccounts)->fetchAll('customer');
+        $orderList = $this->dao->select('customer')->from(TABLE_ORDER)->where('assignedTo')->in($accountsSawByMe)->fetchAll('customer');
         foreach($orderList as $customer => $order)
         {
             if(!isset($customerList[$customer])) $customerList[$customer] = $customer;
