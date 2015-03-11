@@ -26,7 +26,7 @@
       <td><?php echo $depositorList[$balance->depositor];?></td>
       <td><?php echo formatTime($balance->date, DT_DATE1);?></td>
       <td><?php echo zget($currencyList, $balance->currency);?></td>
-      <td><?php echo number_format($balance->money, 2, '.', ' ');?></td>
+      <td><?php echo formatMoney($balance->money);?></td>
       <td class='text-center'>
         <?php commonModel::printLink('balance', 'edit', "balanceID={$balance->id}", $lang->edit, "class='loadInModal'");?>
         <?php commonModel::printLink('balance', 'delete', "balanceID={$balance->id}", $lang->delete, "class='deleter'");?>

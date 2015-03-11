@@ -1111,7 +1111,7 @@ class commonModel extends model
         }
         else
         {
-            return number_format($money, 2);
+            return formatMoney($money);
         }
     } 
 }

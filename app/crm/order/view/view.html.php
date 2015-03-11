@@ -37,7 +37,7 @@
         <?php if($order->status == 'signed' and $contract):?>
         <p><?php printf($lang->order->infoContract, $contractLink);?></p>
         <?php endif;?>
-        <p><?php printf($lang->order->infoAmount, zget($currencySign, $order->currency, '') . number_format($order->plan, 2), zget($currencySign, $order->currency, '') . number_format($order->real, 2))?></p>
+        <p><?php printf($lang->order->infoAmount, zget($currencySign, $order->currency, '') . formatMoney($order->plan), zget($currencySign, $order->currency, '') . formatMoney($order->real))?></p>
         <p>
           <?php if(formatTime($order->contactedDate)) printf($lang->order->infoContacted, $order->contactedDate)?>
           <?php if(formatTime($order->nextDate)) printf($lang->order->infoNextDate, $order->nextDate)?>

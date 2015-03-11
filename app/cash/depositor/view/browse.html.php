@@ -47,7 +47,7 @@
            <?php if(isset($balances[$depositor->currency][$depositor->id])):?>
              <span  class='label-balance text-danger'>
              <?php echo zget($lang->currencySymbols, $depositor->currency)?>
-             <?php echo number_format($balances[$depositor->currency][$depositor->id]->money, 2);?>
+             <?php echo formatMoney($balances[$depositor->currency][$depositor->id]->money);?>
              </span>
            <?php endif;?>
           </div>

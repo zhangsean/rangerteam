@@ -707,7 +707,7 @@ function isonlybody()
  */
 function formatMoney($money)
 {
-    return trim(preg_replace('/\.0*$/', '', $money));
+    return trim(preg_replace('/\.0*$/', '', number_format($money, 2)));
 }
 
 /**

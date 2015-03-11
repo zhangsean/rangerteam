@@ -27,7 +27,6 @@ class orderModel extends model
         if(!$order) return false;
 
         $products = $this->dao->select('*')->from(TABLE_PRODUCT)->where('id')->in($order->product)->orderBy('id_desc')->fetchAll();
-        if(empty($products)) return false;
 
         $order->products = $products;
 

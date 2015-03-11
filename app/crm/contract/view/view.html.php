@@ -68,7 +68,7 @@
           <?php endif;?>
           <tr>
             <th><?php echo $lang->contract->amount;?></th>
-            <td><?php echo zget($currencySign, $contract->currency, '') . number_format($contract->amount, 2);?></td>
+            <td><?php echo zget($currencySign, $contract->currency, '') . formatMoney($contract->amount);?></td>
           </tr>
           <tr>
             <th class='w-70px'><?php echo $lang->contract->delivery;?></th>
@@ -122,7 +122,7 @@
         <tr>
           <td class='w-p30'><?php echo $return->returnedDate;?></td>
           <td class='w-p30'><?php echo zget($users, $return->returnedBy, $return->returnedBy);?></td>
-          <td class='w-p20'><?php echo zget($currencySign, $contract->currency, '') . number_format($return->amount, 2);?></td>
+          <td class='w-p20'><?php echo zget($currencySign, $contract->currency, '') . formatMoney($return->amount);?></td>
           <td class='w-p20'>
             <?php commonModel::printLink('contract', 'editReturn', "id=$return->id", $lang->edit, "data-toggle='modal'");?>
             <?php commonModel::printLink('contract', 'deleteReturn', "id=$return->id", $lang->delete, "class='deleter'");?>
