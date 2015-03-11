@@ -38,8 +38,6 @@ class customerModel extends model
     {
         $allowedAccounts = $this->loadModel('sales', 'crm')->getAllowedAccounts($this->app->user->account, $type);
 
-        $orderList = $this->dao->select('customer')->from(TABLE_ORDER)->where('assignedTo')->in($allowedAccounts)->fetchAll('customer');
-
         $customerList = $this->dao->select('*')->from(TABLE_CUSTOMER)
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->where('assignedTo')->in($allowedAccounts)
@@ -47,6 +45,8 @@ class customerModel extends model
             ->fi()
             ->fetchAll('id');
 
+        /* Get customers not assigned to these accounts but theirs orders assigned to. */
+        $orderList = $this->dao->select('customer')->from(TABLE_ORDER)->where('assignedTo')->in($allowedAccounts)->fetchAll('customer');
         foreach($orderList as $customer => $order)
         {
             if(!isset($customerList[$customer])) $customerList[$customer] = $customer;
@@ -70,9 +70,10 @@ class customerModel extends model
     {
         $mine = $this->getMine();
         if(empty($mine)) return array();
+
         $this->app->loadClass('date', $static = true);
-        $thisMonth  = date::getThisMonth();
-        $thisWeek   = date::getThisWeek();
+        $thisMonth = date::getThisMonth();
+        $thisWeek  = date::getThisWeek();
 
         if($this->session->customerQuery == false) $this->session->set('customerQuery', ' 1 = 1');
         $customerQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->customerQuery);
