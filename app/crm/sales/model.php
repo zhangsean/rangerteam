@@ -178,7 +178,7 @@ class salesModel extends model
      * @access public
      * @return array
      */
-    public function getPrivs()
+    public function getAllPrivs()
     {
         $all = $this->dao->select('*')->from(TABLE_SALESPRIV)->fetchAll();
 
@@ -198,7 +198,7 @@ class salesModel extends model
      */
     public function getAccountsSawByMe($account, $type = 'view')
     {
-        $privs  = $this->getPrivsByAccount($account);
+        $privs  = $this->getAllPrivsByAccount($account);
         $groups = $this->getGroupList();
         $users  = '';
         foreach($privs as $key => $priv)

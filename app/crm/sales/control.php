@@ -65,7 +65,7 @@ class sales extends control
 
         $this->view->title  = $this->lang->sales->create;
         $this->view->users  = $this->user->getPairs('nodeleted, noempty, noclosed');
-        $this->view->privs  = $this->sales->getPrivs();
+        $this->view->privs  = $this->sales->getAllPrivs();
         $this->view->groups = $this->sales->getGroupList();
 
         $this->display();
@@ -95,7 +95,7 @@ class sales extends control
         $this->view->title  = $this->lang->sales->create;
         $this->view->group  = $group;
         $this->view->users  = $this->user->getPairs('nodeleted, noempty, noclosed');
-        $this->view->privs  = $this->sales->getPrivs();
+        $this->view->privs  = $this->sales->getAllPrivs();
         $this->view->groups = $groups;
 
         $this->display();
