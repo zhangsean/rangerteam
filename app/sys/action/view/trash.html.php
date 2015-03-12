@@ -53,7 +53,7 @@
       <tr>
         <td colspan='3'>
           <?php if($trashes and $type == 'all'):?>
-          <?php echo html::a(inlink('hideAll'), $lang->action->hideAll, "id='hideAll' class='btn'");?>
+          <?php echo html::a(inlink('hideAll'), $lang->action->hideAll, "id='hideAll' class='btn ajax'");?>
           <span class=''><?php echo $lang->action->trashTips;?></span>
           <?php endif;?>
         </td>
