@@ -47,7 +47,6 @@ class contactModel extends model
         return array_keys($contactList);
     }
 
-
     /** 
      * Get contact list.
      * 
