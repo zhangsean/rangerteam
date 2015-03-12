@@ -11,9 +11,9 @@
  */
 class contact extends control
 {
-    public function __construct()
+    public function __construct($moduleName = '', $methodName = '', $appName = '')
     {
-        parent::__construct();
+        parent::__construct($moduleName, $methodName, $appName);
         /* Set allowed edit contact ID list. */
         $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit')) . ',';
     }
