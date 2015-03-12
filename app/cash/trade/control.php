@@ -237,6 +237,7 @@ class trade extends control
         $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->depositorList = array('' => '') + $this->loadModel('depositor')->getPairs();
+        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider');
 
         $this->display();
     }

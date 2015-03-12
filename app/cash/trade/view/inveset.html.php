@@ -28,6 +28,20 @@
           <th><?php echo $lang->trade->type;?></th>
           <td><?php echo html::select('type', $lang->trade->invesetTypeList, '', "class='form-control'");?></td>
         </tr>
+        <tr class='trader'>
+          <th><?php echo $lang->trade->trader;?></th>
+          <td>
+            <?php if(count($traderList) > 1):?>
+            <div class='input-group'>
+              <?php  echo html::select('trader', $traderList, '', "class='form-control chosen'");?>
+              <?php  echo html::input('traderName', '', "class='form-control' style='display:none'");?>
+              <div class='input-group-addon'><?php echo html::checkbox('createTrader', array( 1 => $lang->trade->newTrader));?></div>
+            </div>
+            <?php else:?>
+            <?php echo html::input('traderName', '', "class='form-control'") . html::hidden('createTrader', '');?>
+            <?php endif;?>
+          </td>
+        </tr>
         <tr>
           <th><?php echo $lang->trade->money;?></th>
           <td><?php echo html::input('money', '', "class='form-control'");?></td>

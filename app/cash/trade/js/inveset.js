@@ -6,10 +6,12 @@ $(document).ready(function()
         if(type == 'redeem')
         {
             $('tr.category').show();
+            $('tr.trader').hide();
         }
         else
         {
             $('tr.category').hide();
+            $('tr.trader').show();
         }
 
     })

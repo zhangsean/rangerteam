@@ -536,17 +536,18 @@ class tradeModel extends model
         $depositor = $this->loadModel('depositor')->getByID($this->post->depositor);
         $now = helper::now();
 
-        $data = fixer::input('post')
+        $trade = fixer::input('post')
             ->add('category', $this->post->type)
             ->add('currency', !empty($depositor) ? $depositor->currency : '')
             ->add('handlers', trim(join(',', $this->post->handlers), ','))
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
             ->add('editedDate', $now)
+            ->setIf($this->post->createTrader, 'trader', 0)
             ->get();
 
         $this->dao->insert(TABLE_TRADE)
-            ->data($data, $skip = 'invesetCategory, invesetMoney')
+            ->data($trade, $skip = 'invesetCategory,invesetMoney,createTrader,traderName')
             ->autoCheck()
             ->batchCheck($this->config->trade->require->inveset, 'notempty')
             ->exec();
@@ -555,6 +556,24 @@ class tradeModel extends model
 
         $tradeID = $this->dao->lastInsertID();
         $this->loadModel('action')->create('trade', $tradeID, 'Created');
+
+        if($this->post->createTrader and $this->post->type == 'inveset')
+        {
+            $trader = new stdclass();
+            $trader->relation    = 'provider';
+            $trader->name        = $this->post->traderName;
+            $trader->createdBy   = $this->app->user->account;
+            $trader->createdDate = helper::now();
+            $trader->public      = 1;
+
+            $this->dao->insert(TABLE_CUSTOMER)->data($trader)->check('name', 'notempty')->exec();
+            if(dao::isError()) return false;
+
+            $traderID = $this->dao->lastInsertID();
+            $this->loadModel('action')->create('customer', $traderID, 'Created');
+
+            $this->dao->update(TABLE_TRADE)->set('trader')->eq($traderID)->where('id')->eq($tradeID)->exec();
+        }
 
         if($this->post->type == 'redeem' and $this->post->invesetMoney)
         {
@@ -581,6 +600,8 @@ class tradeModel extends model
             $revesetID = $this->dao->lastInsertID();
             $this->loadModel('action')->create('trade', $revesetID, 'Created');
         }
+
+        return !dao::isError();
     }
 
     /**
