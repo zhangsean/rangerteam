@@ -187,8 +187,6 @@ class depositorModel extends model
 
         foreach($depositorList as $id => $depositor)
         {
-            $computed = $this->computeTrades($tradeList, $id);
-
             $depositor->origin    = isset($balances[$id][$start]) ? $balances[$id][$start]->money : 0;
             $depositor->computed  = $depositor->origin + $this->computeTrades($tradeList, $id);
             $depositor->actual    = isset($balances[$id][$end]) ? $balances[$id][$end]->money : 0;
@@ -214,10 +212,12 @@ class depositorModel extends model
         {
             foreach($tradeList[$depositorID] as $item)
             {
-                if($item->type == 'in')  $money += $item->money;    
+                if($item->type == 'in')          $money += $item->money;    
                 if($item->type == 'transferin')  $money += $item->money;    
-                if($item->type == 'out') $money -= $item->money;    
+                if($item->type == 'redeem')      $money += $item->money;    
+                if($item->type == 'out')         $money -= $item->money;    
                 if($item->type == 'transferout') $money -= $item->money;    
+                if($item->type == 'inveset')     $money -= $item->money;    
             }
         }
 
