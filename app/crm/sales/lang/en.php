@@ -13,6 +13,6 @@ $lang->sales->users  = 'Users';
 $lang->sales->group  = 'Group';
 $lang->sales->priv   = 'Privilege';
 
-$lang->sales->viewTip      = '%s view &lt %s &gt';
-$lang->sales->editTip      = '%s edit &lt %s &gt';
+$lang->sales->viewTip      = 'view';
+$lang->sales->editTip      = 'edit';
 $lang->sales->currentGroup = 'this group';

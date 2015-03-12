@@ -13,6 +13,6 @@ $lang->sales->users  = '用户';
 $lang->sales->group  = '分组';
 $lang->sales->priv   = '权限';
 
-$lang->sales->viewTip      = '%s 浏览 &lt %s &gt';
-$lang->sales->editTip      = '%s 编辑 &lt %s &gt';
+$lang->sales->viewTip      = '浏览';
+$lang->sales->editTip      = '编辑';
 $lang->sales->currentGroup = '当前组';
