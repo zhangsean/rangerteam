@@ -253,6 +253,7 @@ class commonModel extends model
                     foreach($lang->setting->menu as $settingMenu)
                     {
                         $class = $currentModule == 'setting' ? " class='active'" : '';
+                        if(is_array($settingMenu)) $settingMenu = $settingMenu['link'];
                         list($settingLabel, $moduleName, $methodName, $settingVars) = explode('|', $settingMenu);
 
                         if(commonModel::hasPriv($moduleName, $methodName))
@@ -969,6 +970,7 @@ class commonModel extends model
         {
             $misc = str_replace("class='", "disabled='disabled' class='disabled ", $misc);
             $misc = str_replace("data-toggle='modal'", ' ', $misc);
+            $misc = str_replace("deleter", ' ', $misc);
             if(strpos($misc, "class='") === false) $misc .= " class='disabled' disabled='disabled'";
         }
         if($type == 'li') $content .= '<li' . ($canClick ? '' : " disabled='disabled' class='disabled'") . '>';
@@ -992,38 +994,57 @@ class commonModel extends model
     public static function checkPrivByVars($module, $method, $vars)
     {
         global $app;
+        $checkByID['customer'] = ',assign,edit,delete,linkContact,';
+        $checkByID['order']    = ',assign,edit,delete,close,activate,';
+        $checkByID['contact']  = ',edit,delete,';
+        $checkByID['resume']   = ',edit,delete,';
+        $checkByID['address']  = ',edit,delete,';
+
+        $checkByType['action']   = ',createrecord,';
+        $checkByType['address']  = ',create,';
+
+        $checkByGroup['resume']['create'] = 'contact|edit|contactID|contactID';
+
         if(!is_array($vars)) parse_str($vars, $vars);
         $method = strtolower($method);
-        $needCheck['customer'] = ',assign,edit,delete,linkContact,';
-        $needCheck['order']    = ',assign,edit,delete,close,activate,';
-        $needCheck['action']   = ',createrecord,';
 
-        if($module == 'customer' and strpos($needCheck['customer'], ",$method,") !== false)
+        /* Check priv by {$moduleName}ID. */
+        foreach($checkByID as $moduleName =>$methodName)
         {
-            if(!isset($vars['customerID'])) return false;
-            $customerIdList = isset($app->user->canEditCustomerIdList) ? $app->user->canEditCustomerIdList : '';
-            if(strpos($customerIdList, ",{$vars['customerID']},") === false) return false;
-        }
-
-        if($module == 'order' and strpos($needCheck['order'], ",$method,") !== false)
-        {
-            if(!isset($vars['orderID'])) return false;
-            $orderIdList = isset($app->user->canEditOrderIdList) ? $app->user->canEditOrderIdList : '';
-            if(strpos($orderIdList, ",{$vars['orderID']},") === false) return false;
-        }
-
-        if($module == 'action' and strpos($needCheck['action'], ",$method,") !== false)
-        {
-            if(!isset($vars['objectType']) or !isset($vars['objectID'])) return false;
-            if($vars['objectType'] == 'order')
+            if($module == $moduleName and strpos($methodName, ",$method,") !== false)
             {
-                $orderIdList = isset($app->user->canEditOrderIdList) ? $app->user->canEditOrderIdList : '';
-                if(strpos($orderIdList, ",{$vars['objectID']},") === false) return false;
+                $idName     = "{$moduleName}ID";
+                $idListName = 'canEdit' . ucwords($moduleName) . 'IdList';
+                if(!isset($vars[$idName])) return false;
+                $idList = isset($app->user->$idListName) ? $app->user->$idListName : '';
+                if(strpos($idList, ",{$vars[$idName]},") === false) return false;
             }
-            elseif($vars['objectType'] == 'customer')
+        }
+
+        /* Check priv by objectType and objectID. */
+        foreach($checkByType as $moduleName => $methodName)
+        {
+            if($module == $moduleName and strpos($methodName, ",$method,") !== false)
             {
-                $customerIdList = isset($app->user->canEditCustomerIdList) ? $app->user->canEditCustomerIdList : '';
-                if(strpos($customerIdList, ",{$vars['objectID']},") === false) return false;
+                if(!isset($vars['objectType']) or !isset($vars['objectID'])) return false;
+                $idName     = $vars['objectType'] . 'ID';
+                $idListName = 'canEdit' . ucwords($vars['objectType']) . 'IdList';
+                $idList     = isset($app->user->$idListName) ? $app->user->$idListName : '';
+                return commonModel::checkPrivByVars($vars['objectType'], 'edit', "{$idName}={$vars['objectID']}");
+            }
+        }
+
+        /* Check priv use another method. module|method|oldVarName|newVarName */
+        foreach($checkByGroup as $moduleName => $methodNames)
+        {
+            foreach($methodNames as $methodName => $settings)
+            {
+                list($newModuleName, $newMethodName, $oldVarName, $newVarName) = explode('|', $settings);
+                if($module == $moduleName and $method == $methodName)
+                {
+                    if(!isset($vars[$oldVarName])) return false;
+                    return commonModel::checkPrivByVars($newModuleName, $newMethodName, "{$newVarName}={$vars[$oldVarName]}");
+                }
             }
         }
 

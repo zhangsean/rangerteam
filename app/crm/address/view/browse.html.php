@@ -28,8 +28,8 @@
       <?php
       if($address->objectType == $objectType and $address->objectID == $objectID)
       {
-          commonModel::printLink('address', 'edit', "id=$address->id", $lang->edit, "class='loadInModal'");
-          commonModel::printLink('address', 'delete', "id=$address->id", $lang->delete, "class='deleter'");
+          commonModel::printLink('address', 'edit', "addressID=$address->id", $lang->edit, "class='loadInModal'");
+          commonModel::printLink('address', 'delete', "addressID=$address->id", $lang->delete, "class='deleter'");
       }
       ?>
     </td>

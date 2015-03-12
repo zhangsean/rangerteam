@@ -11,6 +11,13 @@
  */
 class resume extends control
 {
+    public function __construct()
+    {
+        parent::__construct();
+        /* Set allowed edit resume ID list. */
+        $this->app->user->canEditResumeIdList = ',' . implode(',', $this->resume->getResumesSawByMe('edit')) . ',';
+    }
+
     /**
      * Browse resume. 
      * 
@@ -70,6 +77,8 @@ class resume extends control
     public function edit($resumeID)
     {
         $resume = $this->resume->getByID($resumeID);
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($resume) ? 0 : $resume->customer, 'edit');
+
         if($_POST)
         {
             $changes = $this->resume->update($resumeID);
@@ -99,6 +108,8 @@ class resume extends control
     public function delete($resumeID)
     {
         $resume = $this->resume->getByID($resumeID);
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($resume) ? 0 : $resume->customer, 'edit');
+
         $customers = $this->loadModel('customer')->getPairs('client');
 
         $this->resume->delete(TABLE_RESUME, $resumeID);

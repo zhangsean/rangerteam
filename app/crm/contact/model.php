@@ -47,6 +47,27 @@ class contactModel extends model
         return array_keys($contactList);
     }
 
+    /**
+     * Get contacts saw by me. 
+     * 
+     * @param  string $type view|edit
+     * @access public
+     * @return void
+     */
+    public function getContactsSawByMe($type = 'view')
+    {
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
+        $contactList = $this->dao->select('*')->from(TABLE_CONTACT)->alias('t1')
+            ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
+            ->where('t1.deleted')->eq(0)
+            ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
+            ->andWhere('t2.customer')->in($customerIdList)
+            ->fi()
+            ->fetchAll('id');
+
+        return array_keys($contactList);
+    }
+
     /** 
      * Get contact list.
      * 

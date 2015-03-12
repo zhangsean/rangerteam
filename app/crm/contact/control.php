@@ -11,6 +11,13 @@
  */
 class contact extends control
 {
+    public function __construct()
+    {
+        parent::__construct();
+        /* Set allowed edit contact ID list. */
+        $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit')) . ',';
+    }
+
     /** 
      * The index page, locate to the browse page.
      * 
@@ -95,7 +102,7 @@ class contact extends control
     public function edit($contactID)
     {
         $contact = $this->contact->getByID($contactID);
-        if(empty($contact)) $this->loadModel('common', 'sys')->checkPrivByCustomer('0');
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($contact) ? 0 : $contact->customer, 'edit');
 
         if($_POST)
         {
@@ -156,7 +163,7 @@ class contact extends control
     public function delete($contactID)
     {
         $contact = $this->contact->getByID($contactID);
-        if(empty($contact)) $this->loadModel('common', 'sys')->checkPrivByCustomer('0');
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($contact) ? 0 : $contact->customer, 'edit');
 
         $this->contact->delete(TABLE_CONTACT, $contactID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));

@@ -24,6 +24,27 @@ class resumeModel extends model
     }
 
     /**
+     * Get resumes saw by me. 
+     * 
+     * @param  string $type view|edit
+     * @access public
+     * @return void
+     */
+    public function getResumesSawByMe($type = 'view')
+    {
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
+        $resumeList = $this->dao->select('*')->from(TABLE_RESUME)
+            ->where('deleted')->eq(0)
+            ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
+            ->andWhere('customer')->in($customerIdList)
+            ->fi()
+            ->fetchAll('id');
+
+        return array_keys($resumeList);
+
+    }
+
+    /**
      * Get list.
      * 
      * @param  int    $contactID 

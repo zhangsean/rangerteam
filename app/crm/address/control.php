@@ -11,6 +11,13 @@
  */
 class address extends control
 {
+    public function __construct()
+    {
+        parent::__construct();
+        /* Set allowed edit address ID list. */
+        $this->app->user->canEditAddressIdList = ',' . implode(',', $this->address->getAddressesSawByMe('edit')) . ',';
+    }
+
     /**
      * Browse address. 
      * 

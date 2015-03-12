@@ -30,13 +30,13 @@
       if($resume->left) printf($lang->resume->showLeft, $resume->left);
       ?>
     </td>
-    <td><?php echo $customers[$resume->customer]?></td>
+    <td><?php echo isset($customers[$resume->customer]) ? $customers[$resume->customer] : ''?></td>
     <td><?php echo $resume->dept?></td>
     <td><?php echo $resume->title?></td>
     <td>
       <?php
-      commonModel::printLink('resume', 'edit', "id=$resume->id", $lang->edit, "class='loadInModal'");
-      commonModel::printLink('resume', 'delete', "id=$resume->id", $lang->delete, "class='deleter'");
+      commonModel::printLink('resume', 'edit', "resumeID=$resume->id", $lang->edit, "class='loadInModal'");
+      commonModel::printLink('resume', 'delete', "resumeID=$resume->id", $lang->delete, "class='deleter'");
       ?>
     </td>
   </tr>
