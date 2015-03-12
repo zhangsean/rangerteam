@@ -78,8 +78,8 @@ $(function()
             time = Y + '-' + m + '-' + d;
             $('.date').val(time);
         }
+        setDateField(this);
     });
-    setDateField('.date');
 });
 
 var params        = <?php echo json_encode($fieldParams);?>;
@@ -96,6 +96,8 @@ var actionURL     = '<?php echo $actionURL;?>';
  */
 function setDateField(query, fieldNO)
 {
+    var $query = $(query);
+    if(fieldNO === undefined) fieldNO = $query.closest('.search-field').data('id');
     var $period = $('#selectPeriod');
     if(!$period.length)
     {
@@ -113,7 +115,7 @@ function setDateField(query, fieldNO)
             return false;
         });
     }
-    $(query).datetimepicker('remove').datetimepicker(dtOptions).on('show', function(e)
+    $query.datetimepicker('remove').datetimepicker(dtOptions).on('show', function(e)
     {
         var $e = $(e.target);
         var ePos = $e.offset();
@@ -292,7 +294,7 @@ foreach($fieldParams as $fieldName => $param)
       for($i = 1; $i <= $groupItems; $i ++)
       {
           $spanClass = $i == 1 ? '' : 'hidden';
-          echo "<tr id='searchbox$fieldNO' class='$spanClass'>";
+          echo "<tr id='searchbox$fieldNO' data-id='$fieldNO' class='search-field $spanClass'>";
 
           /* Get params of current field. */
           $currentField = $formSession["field$fieldNO"];
@@ -338,7 +340,7 @@ foreach($fieldParams as $fieldName => $param)
       for($i = 1; $i <= $groupItems; $i ++)
       {
           $spanClass = $i == 1 ? '' : 'hidden';
-          echo "<tr id='searchbox$fieldNO' class='$spanClass'>";
+          echo "<tr id='searchbox$fieldNO' data-id='$fieldNO' class='search-field $spanClass'>";
 
           /* Get params of current field. */
           $currentField = $formSession["field$fieldNO"];

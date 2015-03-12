@@ -99,7 +99,7 @@ function initSearch()
     {
         $('#menu > ul > li.active').removeClass('active');
         ajaxGetSearchForm($queryBox);
-        $searchTab.addClass('active').find('a').attr('href', '##bysearch');
+        $searchTab.addClass('active').find('a').attr('href', '#bysearch');
         $queryBox.removeClass('hidden');
     }
 
