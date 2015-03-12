@@ -198,7 +198,7 @@ class salesModel extends model
      */
     public function getAccountsSawByMe($account, $type = 'view')
     {
-        $privs  = $this->getAllPrivsByAccount($account);
+        $privs  = $this->getPrivsByAccount($account);
         $groups = $this->getGroupList();
         $users  = '';
         foreach($privs as $key => $priv)
