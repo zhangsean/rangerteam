@@ -47,8 +47,8 @@ $lang->order->menu->browse    = array('link' => '所有訂單|order|browse|mode=
 $lang->order->menu->past      = array('link' => '亟需聯繫|order|browse|mode=past', 'alias' => 'create,edit,view,record');
 $lang->order->menu->today     = array('link' => '今天聯繫|order|browse|mode=today', 'alias' => 'create,edit,view,record');
 $lang->order->menu->tomorrow  = array('link' => '明天聯繫|order|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
-$lang->order->menu->thisweek  = array('link' => '一周內聯繫|order|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
-$lang->order->menu->thismonth = array('link' => '一月內聯繫|order|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
+$lang->order->menu->thisweek  = array('link' => '本週內聯繫|order|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
+$lang->order->menu->thismonth = array('link' => '本月內聯繫|order|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
 $lang->order->menu->public    = array('link' => '公共客戶|order|browse|mode=public', 'alias' => 'create,edit,view,record');
 
 /* Menu of contact module. */
@@ -58,8 +58,8 @@ $lang->contact->menu->browse    = array('link' => '所有聯繫人|contact|brows
 $lang->contact->menu->past      = array('link' => '亟需聯繫|contact|browse|mode=past', 'alias' => 'create,edit,view,record');
 $lang->contact->menu->today     = array('link' => '今天聯繫|contact|browse|mode=today', 'alias' => 'create,edit,view,record');
 $lang->contact->menu->tomorrow  = array('link' => '明天聯繫|contact|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
-$lang->contact->menu->thisweek  = array('link' => '一周內聯繫|contact|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
-$lang->contact->menu->thismonth = array('link' => '一月內聯繫|contact|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
+$lang->contact->menu->thisweek  = array('link' => '本週內聯繫|contact|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
+$lang->contact->menu->thismonth = array('link' => '本月內聯繫|contact|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();
@@ -83,7 +83,7 @@ $lang->setting->menu->customerLevel = '客戶等級|setting|lang|module=customer
 $lang->setting->menu->area          = '區域設置|tree|browse|type=area|';
 $lang->setting->menu->industry      = '行業設置|tree|browse|type=industry|';
 $lang->setting->menu->currency      = '貨幣設置|setting|lang|module=common&field=currencyList';
-$lang->setting->menu->salesGroup    = '銷售分組|sales|browse|';
+$lang->setting->menu->salesGroup    = array('link' => '銷售分組|sales|browse|', 'alias' => 'create,edit');
 
 /* Menu of sales module. */
 $lang->sales = new stdclass();
