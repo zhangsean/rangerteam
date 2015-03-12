@@ -20,9 +20,9 @@ class customerModel extends model
      */
     public function getByID($id)
     {
-        $mine = $this->getCustomersSawByMe();
-        if(empty($mine)) return false;
-        if(!in_array($id, $mine)) return false;
+        $customerIdList = $this->getCustomersSawByMe();
+        if(empty($customerIdList)) return false;
+        if(!in_array($id, $customerIdList)) return false;
 
         return $this->dao->select('*')->from(TABLE_CUSTOMER)->where('id')->eq($id)->limit(1)->fetch();
     }
@@ -68,8 +68,8 @@ class customerModel extends model
      */
     public function getList($mode = 'all', $param = null, $relation = 'client', $orderBy = 'id_desc', $pager = null)
     {
-        $mine = $this->getCustomersSawByMe();
-        if(empty($mine)) return array();
+        $customerIdList = $this->getCustomersSawByMe();
+        if(empty($customerIdList)) return array();
 
         $this->app->loadClass('date', $static = true);
         $thisMonth = date::getThisMonth();
@@ -94,7 +94,7 @@ class customerModel extends model
             ->beginIF($mode == 'query')->andWhere($param)->fi()
             ->beginIF($mode == 'bysearch')->andWhere($customerQuery)->fi()
             ->beginIF($mode != 'all' and $mode != 'bysearch')->andWhere('nextDate')->ne('0000-00-00')->fi()
-            ->andWhere('id')->in($mine)
+            ->andWhere('id')->in($customerIdList)
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
@@ -112,9 +112,9 @@ class customerModel extends model
      */
     public function getPairs($relation = '', $emptyOption = true)
     {
-        $mine = $this->getCustomersSawByMe();
+        $customerIdList = $this->getCustomersSawByMe();
 
-        if(empty($mine))
+        if(empty($customerIdList))
         {
            $customers = array();
         }
@@ -124,7 +124,7 @@ class customerModel extends model
                 ->where('deleted')->eq(0)
                 ->beginIF($relation == 'client')->andWhere('relation')->ne('provider')->fi()
                 ->beginIF($relation == 'provider')->andWhere('relation')->ne('client')->fi()
-                ->andWhere('id')->in($mine)
+                ->andWhere('id')->in($customerIdList)
                 ->orderBy('id_desc')
                 ->fetchPairs('id');
         }
