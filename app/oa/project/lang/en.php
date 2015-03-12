@@ -47,4 +47,8 @@ $lang->project->confirm->suspend  = 'Are you sure to suspend this projcet?';
 
 $lang->project->activateSuccess = 'Successfully activtated';
 $lang->project->suspendSuccess  = 'Successfully suspended';
-$lang->project->selectProject   = "Select Project";
+$lang->project->selectProject   = 'Select Project';
+
+$lang->project->note = new stdclass();
+$lang->project->note->rate = 'According to working hours';
+$lang->project->note->task = 'The number of tasks';

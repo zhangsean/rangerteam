@@ -47,4 +47,8 @@ $lang->project->confirm->suspend  = '确认挂起此项目？';
 
 $lang->project->activateSuccess = '激活操作成功';
 $lang->project->suspendSuccess  = '挂起操作成功';
-$lang->project->selectProject   = "请选择项目";
+$lang->project->selectProject   = '请选择项目';
+
+$lang->project->note = new stdclass();
+$lang->project->note->rate = '按工时计算';
+$lang->project->note->task = '任务数';
