@@ -61,9 +61,9 @@ class contactModel extends model
         $contactList = $this->dao->select('*')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
+            ->beginIF(!empty($contactIdList))->andWhere('t1.id')->in($contactIdList)->fi()
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->andWhere('t2.customer')->in($customerIdList)
-            ->beginIF(!empty($contactIdList))->andWhere('t1.id')->in($contactIdList)->fi()
             ->fi()
             ->fetchAll('id');
 

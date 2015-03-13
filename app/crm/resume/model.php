@@ -36,9 +36,9 @@ class resumeModel extends model
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
         $resumeList = $this->dao->select('*')->from(TABLE_RESUME)
             ->where('deleted')->eq(0)
+            ->beginIF(!empty($resumeIdList))->andWhere('id')->in($resumeIdList)->fi()
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->andWhere('customer')->in($customerIdList)
-            ->beginIF(!empty($resumeIdList))->andWhere('id')->in($resumeIdList)->fi()
             ->fi()
             ->fetchAll('id');
 
