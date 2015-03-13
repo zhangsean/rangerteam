@@ -36,16 +36,18 @@ class orderModel extends model
     /**
      * Get my order id list.
      * 
-     * @param  string $type 
+     * @param  string $type        view|edit
+     * @param  array  $orderIdList 
      * @access public
      * @return array
      */
-    public function getOrdersSawByMe($type = 'view')
+    public function getOrdersSawByMe($type = 'view', $orderIdList = array())
     {
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
         $orderList = $this->dao->select('*')->from(TABLE_ORDER)
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->where('customer')->in($customerIdList)
+            ->beginIF(!empty($orderIdList))->andWhere('id')->in($orderIdList)->fi()
             ->fi()
             ->fetchAll('id');
 

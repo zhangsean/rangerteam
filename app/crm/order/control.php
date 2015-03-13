@@ -11,13 +11,6 @@
  */
 class order extends control
 {
-    public function __construct()
-    {
-        parent::__construct();
-        /* Set allowed edit order ID list. */
-        $this->app->user->canEditOrderIdList = ',' . implode(',', $this->order->getOrdersSawByMe('edit')) . ',';
-    }
-
     /** 
      * The index page, locate to browse.
      * 
@@ -49,6 +42,9 @@ class order extends control
         /* Set pre and next condition. */
         $this->session->set('orderQueryCondition', $this->dao->get());
         $this->session->set('orderList', $this->app->getURI(true));
+
+        /* Set allowed edit order ID list. */
+        $this->app->user->canEditOrderIdList = ',' . implode(',', $this->order->getOrdersSawByMe('edit', array_keys($orders))) . ',';
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
@@ -144,6 +140,9 @@ class order extends control
     {
         $order = $this->order->getByID($orderID);
         $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($order)? '0' : $order->customer);
+
+        /* Set allowed edit order ID list. */
+        $this->app->user->canEditOrderIdList = ',' . implode(',', $this->order->getOrdersSawByMe('edit', (array)$orderID)) . ',';
 
         $this->app->loadLang('resume');
         $this->app->loadLang('contract');
