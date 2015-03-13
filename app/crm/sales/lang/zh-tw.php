@@ -13,6 +13,6 @@ $lang->sales->users  = '用戶';
 $lang->sales->group  = '分組';
 $lang->sales->priv   = '權限';
 
-$lang->sales->viewTip      = '%s 瀏覽 &lt %s &gt';
-$lang->sales->editTip      = '%s 編輯 &lt %s &gt';
+$lang->sales->viewTip      = '瀏覽';
+$lang->sales->editTip      = '編輯';
 $lang->sales->currentGroup = '當前組';
