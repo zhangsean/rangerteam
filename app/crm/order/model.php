@@ -45,7 +45,7 @@ class orderModel extends model
     {
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
         $orderList = $this->dao->select('*')->from(TABLE_ORDER)
-            ->where('1=1')
+            ->where('deleted')->eq(0)
             ->beginIF(!empty($orderIdList))->andWhere('id')->in($orderIdList)->fi()
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->andWhere('customer')->in($customerIdList)

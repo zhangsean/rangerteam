@@ -40,7 +40,7 @@ class customerModel extends model
         $accountsSawByMe = $this->loadModel('sales', 'crm')->getAccountsSawByMe($this->app->user->account, $type);
 
         $customerList = $this->dao->select('*')->from(TABLE_CUSTOMER)
-            ->where('1=1')
+            ->where('deleted')->eq(0)
             ->beginIF(!empty($customerIdList))->andWhere('id')->in($customerIdList)->fi()
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->andWhere('assignedTo')->in($accountsSawByMe)
