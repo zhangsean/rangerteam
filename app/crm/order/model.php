@@ -45,9 +45,10 @@ class orderModel extends model
     {
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
         $orderList = $this->dao->select('*')->from(TABLE_ORDER)
-            ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
-            ->where('customer')->in($customerIdList)
+            ->where('1=1')
             ->beginIF(!empty($orderIdList))->andWhere('id')->in($orderIdList)->fi()
+            ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
+            ->andWhere('customer')->in($customerIdList)
             ->fi()
             ->fetchAll('id');
 

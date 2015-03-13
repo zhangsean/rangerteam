@@ -11,11 +11,6 @@
  */
 class customer extends control
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /** 
      * The index page, locate to the browse page.
      * 
