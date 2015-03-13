@@ -986,7 +986,7 @@ class commonModel extends model
      * 
      * @param  string $module 
      * @param  string $method 
-     * @param  string $vars 
+     * @param  string|array $vars 
      * @static
      * @access public
      * @return void
@@ -994,22 +994,16 @@ class commonModel extends model
     public static function checkPrivByVars($module, $method, $vars)
     {
         global $app;
+        if(!is_array($vars)) parse_str($vars, $vars);
+        $method = strtolower($method);
+
+        /* Check priv by {$moduleName}ID. */
         $checkByID['customer'] = ',assign,edit,delete,linkContact,';
         $checkByID['order']    = ',assign,edit,delete,close,activate,';
         $checkByID['contact']  = ',edit,delete,';
         $checkByID['resume']   = ',edit,delete,';
         $checkByID['address']  = ',edit,delete,';
-
-        $checkByType['action']   = ',createrecord,';
-        $checkByType['address']  = ',create,';
-
-        $checkByGroup['resume']['create'] = 'contact|edit|contactID|contactID';
-
-        if(!is_array($vars)) parse_str($vars, $vars);
-        $method = strtolower($method);
-
-        /* Check priv by {$moduleName}ID. */
-        foreach($checkByID as $moduleName =>$methodName)
+        foreach($checkByID as $moduleName => $methodName)
         {
             if($module == $moduleName and strpos($methodName, ",$method,") !== false)
             {
@@ -1022,6 +1016,8 @@ class commonModel extends model
         }
 
         /* Check priv by objectType and objectID. */
+        $checkByType['action']  = ',createrecord,';
+        $checkByType['address'] = ',create,';
         foreach($checkByType as $moduleName => $methodName)
         {
             if($module == $moduleName and strpos($methodName, ",$method,") !== false)
@@ -1034,16 +1030,16 @@ class commonModel extends model
             }
         }
 
-        /* Check priv use another method. module|method|oldVarName|newVarName */
+        /* Check priv use another method. module|method */
+        $checkByGroup['resume']['create'] = 'contact|edit';
         foreach($checkByGroup as $moduleName => $methodNames)
         {
             foreach($methodNames as $methodName => $settings)
             {
-                list($newModuleName, $newMethodName, $oldVarName, $newVarName) = explode('|', $settings);
+                list($newModuleName, $newMethodName) = explode('|', $settings);
                 if($module == $moduleName and $method == $methodName)
                 {
-                    if(!isset($vars[$oldVarName])) return false;
-                    return commonModel::checkPrivByVars($newModuleName, $newMethodName, "{$newVarName}={$vars[$oldVarName]}");
+                    return commonModel::checkPrivByVars($newModuleName, $newMethodName, $vars);
                 }
             }
         }
