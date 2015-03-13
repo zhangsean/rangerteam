@@ -14,8 +14,6 @@ class customer extends control
     public function __construct()
     {
         parent::__construct();
-        /* Set allowed edit customer ID list. */
-        $this->app->user->canEditCustomerIdList = ',' . implode(',', $this->customer->getCustomersSawByMe('edit')) . ',';
     }
 
     /** 
@@ -53,14 +51,19 @@ class customer extends control
         $this->config->customer->search['params']['industry']['values'] = array('' => '') + $this->loadModel('tree')->getOptionMenu('industry');
         $this->config->customer->search['params']['area']['values']     = array('' => '') + $this->loadModel('tree')->getOptionMenu('area');
         $this->search->setSearchParams($this->config->customer->search);
+
+        $customers = $this->customer->getList($mode = $mode, $param = $param, $relation = 'client', $orderBy, $pager);
+
+        $this->session->set('customerQueryCondition', $this->dao->get());
+
+        /* Set allowed edit customer ID list. */
+        $this->app->user->canEditCustomerIdList = ',' . implode(',', $this->customer->getCustomersSawByMe('edit', array_keys($customers))) . ',';
         
         $this->view->title     = $this->lang->customer->list;
         $this->view->mode      = $mode;
-        $this->view->customers = $this->customer->getList($mode = $mode, $param = $param, $relation = 'client', $orderBy, $pager);
+        $this->view->customers = $customers;
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
-
-        $this->session->set('customerQueryCondition', $this->dao->get());
 
         $this->display();
     }   
@@ -143,6 +146,9 @@ class customer extends control
     {
         $customer = $this->customer->getByID($customerID);
         $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($customer) ? '0' : $customerID);
+
+        /* Set allowed edit customer ID list. */
+        $this->app->user->canEditCustomerIdList = ',' . implode(',', $this->customer->getCustomersSawByMe('edit', (array)$customerID)) . ',';
 
         $uri = $this->app->getURI(true);
         $this->session->set('orderList',    $uri);
