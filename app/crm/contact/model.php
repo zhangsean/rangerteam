@@ -51,10 +51,11 @@ class contactModel extends model
      * Get contacts saw by me. 
      * 
      * @param  string $type view|edit
+     * @param  array  $contactIdList 
      * @access public
      * @return void
      */
-    public function getContactsSawByMe($type = 'view')
+    public function getContactsSawByMe($type = 'view', $contactIdList = array())
     {
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
         $contactList = $this->dao->select('*')->from(TABLE_CONTACT)->alias('t1')
@@ -62,6 +63,7 @@ class contactModel extends model
             ->where('t1.deleted')->eq(0)
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->andWhere('t2.customer')->in($customerIdList)
+            ->beginIF(!empty($contactIdList))->andWhere('t1.id')->in($contactIdList)->fi()
             ->fi()
             ->fetchAll('id');
 

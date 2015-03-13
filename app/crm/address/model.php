@@ -40,10 +40,11 @@ class addressModel extends model
      * Get addresses saw by me.  
      * 
      * @param  string $type  view|edit
+     * @param  array  $addressIdList 
      * @access public
      * @return array
      */
-    public function getAddressesSawByMe($type = 'view')
+    public function getAddressesSawByMe($type = 'view', $addressIdList = array())
     {
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
         $contactIdList  = $this->loadModel('contact')->getContactsSawByMe($type);
@@ -51,11 +52,13 @@ class addressModel extends model
         $addressListOfCustomer = $this->dao->select('*')->from(TABLE_ADDRESS)
             ->where('objectType')->eq('customer')
             ->andWhere('objectID')->in($customerIdList)
+            ->beginIF(!empty($addressIdList))->andWhere('id')->in($addressIdList)->fi()
             ->fetchAll('id');
 
         $addressListOfContact = $this->dao->select('*')->from(TABLE_ADDRESS)
             ->where('objectType')->eq('contact')
             ->andWhere('objectID')->in($contactIdList)
+            ->beginIF(!empty($addressIdList))->andWhere('id')->in($addressIdList)->fi()
             ->fetchAll('id');
 
         return array_keys($addressListOfCustomer + $addressListOfContact);

@@ -11,13 +11,6 @@
  */
 class address extends control
 {
-    public function __construct()
-    {
-        parent::__construct();
-        /* Set allowed edit address ID list. */
-        $this->app->user->canEditAddressIdList = ',' . implode(',', $this->address->getAddressesSawByMe('edit')) . ',';
-    }
-
     /**
      * Browse address. 
      * 
@@ -28,9 +21,15 @@ class address extends control
      */
     public function browse($objectType, $objectID)
     {
+        $addresses = $this->address->getList($objectType, $objectID);
+
+        $addressIdList = array();
+        foreach($addresses as $address) $addressIdList[] = $address->id;
+        $this->app->user->canEditAddressIdList = ',' . implode(',', $this->address->getAddressesSawByMe('edit', $addressIdList)) . ',';
+
         $this->view->title      = $this->lang->address->common;
         $this->view->modalWidth = 800;
-        $this->view->addresses  = $this->address->getList($objectType, $objectID);
+        $this->view->addresses  = $addresses;
         $this->view->areaList   = $this->loadModel('tree')->getOptionMenu('area');
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;

@@ -11,13 +11,6 @@
  */
 class resume extends control
 {
-    public function __construct()
-    {
-        parent::__construct();
-        /* Set allowed edit resume ID list. */
-        $this->app->user->canEditResumeIdList = ',' . implode(',', $this->resume->getResumesSawByMe('edit')) . ',';
-    }
-
     /**
      * Browse resume. 
      * 
@@ -28,11 +21,13 @@ class resume extends control
     public function browse($contactID)
     {
         $contact = $this->loadModel('contact')->getByID($contactID);
+        $resumes = $this->resume->getList($contactID);
+        $this->app->user->canEditResumeIdList = ',' . implode(',', $this->resume->getResumesSawByMe('edit', array_keys($resumes))) . ',';
 
         $this->view->title      = $contact->realname . $this->lang->minus . $this->lang->resume->common;
         $this->view->modalWidth = 800;
-        $this->view->contact    = $this->loadModel('contact')->getByID($contactID);
-        $this->view->resumes    = $this->resume->getList($contactID);
+        $this->view->contact    = $contact;
+        $this->view->resumes    = $resumes;
         $this->view->customers  = $this->loadModel('customer')->getPairs('client');
 
         $this->display();
