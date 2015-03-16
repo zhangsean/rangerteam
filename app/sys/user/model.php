@@ -342,7 +342,7 @@ class userModel extends model
             $dateDiff = (strtotime($user->locked) - time()) / 60;
 
             /* Check the type of lock and show it. */
-            if($dateDiff > 0 && $dateDiff <= 0)
+            if($dateDiff > 0 && $dateDiff <= 10)
             {
                 $this->lang->user->loginFailed = sprintf($this->lang->user->locked, '10' . $this->lang->date->minute);
                 return false;
