@@ -60,7 +60,7 @@
             <td>
               <?php foreach($orders as $order):?>
                 <?php foreach($order->products as $product):?>
-                <span><?php echo $product?>；</span>
+                <span><?php echo $product?> </span>
                 <?php endforeach;?>
               <?php endforeach;?>
             </td>
