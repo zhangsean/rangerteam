@@ -65,8 +65,9 @@ class salesModel extends model
         {
             foreach($this->post->privs_view as $key => $value)
             {
-                $data['account']    = explode('_', $value)[0];
-                $data['salesgroup'] = explode('_', $value)[1];
+                $value = explode('_', $value);
+                $data['account']    = $value[0];
+                $data['salesgroup'] = $value[1];
                 $data['priv']       = 'view';
                 if($data['salesgroup'] == 'current') $data['salesgroup'] = $groupID;
 
@@ -79,8 +80,9 @@ class salesModel extends model
         {
             foreach($this->post->privs_edit as $key => $value)
             {
-                $data['account']    = explode('_', $value)[0];
-                $data['salesgroup'] = explode('_', $value)[1];
+                $value = explode('_', $value);
+                $data['account']    = $value[0];
+                $data['salesgroup'] = $value[1];
                 $data['priv']       = 'edit';
                 if($data['salesgroup'] == 'current') $data['salesgroup'] = $groupID;
 
@@ -120,8 +122,9 @@ class salesModel extends model
         {
             foreach($this->post->privs_view as $key => $value)
             {
-                $data['account']    = explode('_', $value)[0];
-                $data['salesgroup'] = explode('_', $value)[1];
+                $value = explode('_', $value);
+                $data['account']    = $value[0];
+                $data['salesgroup'] = $value[1];
                 $data['priv']       = 'view';
 
                 $this->dao->insert(TABLE_SALESPRIV)->data($data)->exec();
@@ -133,8 +136,9 @@ class salesModel extends model
         {
             foreach($this->post->privs_edit as $key => $value)
             {
-                $data['account']    = explode('_', $value)[0];
-                $data['salesgroup'] = explode('_', $value)[1];
+                $value = explode('_', $value);
+                $data['account']    = $value[0];
+                $data['salesgroup'] = $value[1];
                 $data['priv']       = 'edit';
 
                 $this->dao->insert(TABLE_SALESPRIV)->data($data)->exec();
