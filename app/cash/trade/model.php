@@ -543,7 +543,7 @@ class tradeModel extends model
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
             ->add('editedDate', $now)
-            ->setIf($this->post->createTrader, 'trader', 0)
+            ->setIf($this->post->createTrader or !$this->post->trader, 'trader', 0)
             ->get();
 
         $this->dao->insert(TABLE_TRADE)
@@ -584,13 +584,14 @@ class tradeModel extends model
                 ->add('money', $this->post->invesetMoney)
                 ->add('currency', !empty($depositor) ? $depositor->currency : '')
                 ->add('handlers', trim(join(',', $this->post->handlers), ','))
+                ->setIf($this->post->createTrader or !$this->post->trader, 'trader', 0)
                 ->add('createdBy', $this->app->user->account)
                 ->add('createdDate', $now)
                 ->add('editedDate', $now)
                 ->get();
 
             $this->dao->insert(TABLE_TRADE)
-                ->data($inveset, $skip = 'invesetMoney, invesetCategory')
+                ->data($inveset, $skip = 'invesetCategory,invesetMoney,createTrader,traderName')
                 ->autoCheck()
                 ->batchCheck($this->config->trade->require->inveset, 'notempty')
                 ->exec();
