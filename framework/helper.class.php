@@ -662,6 +662,7 @@ function isLocalIP()
 {
     $serverIP = $_SERVER['SERVER_ADDR'];
     if($serverIP == '127.0.0.1') return true;
+    if(strpos($serverIP, '10.60') !== false) return false;
     return !filter_var($serverIP, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE);
 }
 
