@@ -39,7 +39,7 @@ class sales extends control
         {
             $accounts = explode(',', $group->users);
             $group->users = '';
-            foreach($accounts as $account) if($account != '') $group->users .= " " . $users[$account]; 
+            foreach($accounts as $account) if($account != '') $group->users .= " " . (isset($users[$account]) ? $users[$account] : ''); 
         }
 
         $this->view->title  = $this->lang->sales->browse;
