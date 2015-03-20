@@ -998,7 +998,7 @@ class commonModel extends model
         $method = strtolower($method);
 
         /* Check priv by {$moduleName}ID. */
-        $checkByID['customer'] = ',assign,edit,delete,linkContact,';
+        $checkByID['customer'] = ',assign,edit,delete,linkcontact,';
         $checkByID['order']    = ',assign,edit,delete,close,activate,';
         $checkByID['contact']  = ',edit,delete,';
         $checkByID['resume']   = ',edit,delete,';

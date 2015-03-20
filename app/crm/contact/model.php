@@ -58,7 +58,7 @@ class contactModel extends model
     public function getContactsSawByMe($type = 'view', $contactIdList = array())
     {
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
-        $contactList = $this->dao->select('*')->from(TABLE_CONTACT)->alias('t1')
+        $contactList = $this->dao->select('t1.*')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
             ->beginIF(!empty($contactIdList))->andWhere('t1.id')->in($contactIdList)->fi()

@@ -207,6 +207,7 @@ class salesModel extends model
         $users  = '';
         foreach($privs as $key => $priv)
         {
+            if(!isset($groups[$key])) continue;
             if($type == 'view' and isset($priv['view'])) $users .= $groups[$key]->users;
             if(($type == 'edit' or $type == 'view') and isset($priv['edit'])) $users .= $groups[$key]->users;
         }
