@@ -10,7 +10,6 @@
  * @link        http://www.ranzhico.com
  */
 include '../../common/view/header.html.php';
-$defaultImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQI12NgYGBgAAAABQABXvMqOgAAAABJRU5ErkJggg==';
 ?>
 <div class='panel'>
   <div class='panel-heading'>
@@ -33,7 +32,20 @@ $defaultImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcS
       <?php foreach($entries as $entry):?>
       <tr class='text-left'>
         <td><?php echo html::input("order[$entry->id]", $entry->order, "class='form-control input-sm text-center'")?></td>
-        <td><?php echo "<img src='" . (empty($entry->logo) ? $defaultImg : $entry->logo) . "' class='small-icon'>" . $entry->name?></td>
+        <td>
+          <?php if($entry->logo):?> 
+          <img src="<?php echo $entry->logo;?>" class='small-icon' /> 
+          <?php else:?>
+          <?php $name = $entry->abbr ? $entry->abbr : $entry->name;?>
+          <?php $entryName = validater::checkCode(substr($name, 0, 1)) ? strtoupper(substr($name, 0, 1)) : substr($name, 0, 3);?>
+          <?php if(validater::checkCode(substr($name, 0, 1)) and validater::checkCode(substr($name, 1, 1)))   $entryName .= strtoupper(substr($name, 1, 1));?>
+          <?php if(validater::checkCode(substr($name, 0, 1)) and !validater::checkCode(substr($name, 1, 1)))  $entryName .= strtoupper(substr($name, 1, 3));?>
+          <?php if(!validater::checkCode(substr($name, 0, 1)) and validater::checkCode(substr($name, 3, 1)))  $entryName .= strtoupper(substr($name, 3, 1));?>
+          <?php if(!validater::checkCode(substr($name, 0, 1)) and !validater::checkCode(substr($name, 3, 1))) $entryName .= substr($name, 3, 3);?>
+          <i class='icon icon-default' style="background-color: hsl(<?php echo $entry->id * 47 % 360;?>, 100%, 40%)"><span><?php echo $entryName;?></span></i>
+          <?php endif;?>
+          <?php echo $entry->name?>
+        </td>
         <td><?php echo $entry->code?></td>
         <td><?php if($entry->integration) echo $entry->key?></td>
         <td class='text-center'><?php echo $entry->ip?></td>

@@ -24,7 +24,16 @@
           <?php if($right['right'] != 1):?>
           <div class='group-item'>
             <label>
-              <?php echo html::image($right['icon'], "class='app-icon'");?>
+              <?php if($right['icon']) echo html::image($right['icon'], "class='app-icon'");?>
+              <?php if(!$right['icon']):?>
+              <?php $name = $right['abbr'] ? $right['abbr'] : $right['name'];?>
+              <?php $rightName = validater::checkCode(substr($name, 0, 1)) ? strtoupper(substr($name, 0, 1)) : substr($name, 0, 3);?>
+              <?php if(validater::checkCode(substr($name, 0, 1)) and validater::checkCode(substr($name, 1, 1)))   $rightName .= strtoupper(substr($name, 1, 1));?>
+              <?php if(validater::checkCode(substr($name, 0, 1)) and !validater::checkCode(substr($name, 1, 1)))  $rightName .= strtoupper(substr($name, 1, 3));?>
+              <?php if(!validater::checkCode(substr($name, 0, 1)) and validater::checkCode(substr($name, 3, 1)))  $rightName .= strtoupper(substr($name, 3, 1));?>
+              <?php if(!validater::checkCode(substr($name, 0, 1)) and !validater::checkCode(substr($name, 3, 1))) $rightName .= substr($name, 3, 3);?>
+              <i class='icon icon-default' style="background-color: hsl(<?php echo $right['id'] * 47 % 360;?>, 100%, 40%)"> <span><?php echo $rightName;?> </span></i>
+              <?php endif;?>
               <?php echo html::checkbox('apps', array($code => $right['name']), ($right['right'] == '1' ? $code : '') . "onchange='submitForm()'");?>
             </label>
           </div>
@@ -43,7 +52,16 @@
           <?php if($right['right'] == 1):?>
           <div class='group-item'>
             <label>
-              <?php echo html::image($right['icon'], "class='app-icon'");?>
+              <?php if($right['icon']) echo html::image($right['icon'], "class='app-icon'");?>
+              <?php if(!$right['icon']):?>
+              <?php $name = $right['abbr'] ? $right['abbr'] : $right['name'];?>
+              <?php $rightName = validater::checkCode(substr($name, 0, 1)) ? strtoupper(substr($name, 0, 1)) : substr($name, 0, 3);?>
+              <?php if(validater::checkCode(substr($name, 0, 1)) and validater::checkCode(substr($name, 1, 1)))   $rightName .= strtoupper(substr($name, 1, 1));?>
+              <?php if(validater::checkCode(substr($name, 0, 1)) and !validater::checkCode(substr($name, 1, 1)))  $rightName .= strtoupper(substr($name, 1, 3));?>
+              <?php if(!validater::checkCode(substr($name, 0, 1)) and validater::checkCode(substr($name, 3, 1)))  $rightName .= strtoupper(substr($name, 3, 1));?>
+              <?php if(!validater::checkCode(substr($name, 0, 1)) and !validater::checkCode(substr($name, 3, 1))) $rightName .= substr($name, 3, 3);?>
+              <i class='icon icon-default' style="background-color: hsl(<?php echo $right['id'] * 47 % 360;?>, 100%, 40%)"> <span><?php echo $rightName;?> </span></i>
+              <?php endif;?>
               <?php echo html::checkbox('apps', array($code => $right['name']), $right['right'] == '1' ? $code : '');?>
             </label>
           </div>
