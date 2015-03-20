@@ -47,6 +47,7 @@ class userModel extends model
         $users = $this->dao->select('account, realname')->from(TABLE_USER) 
             ->where('1=1')
             ->beginIF(strpos($params, 'nodeleted') !== false)->andWhere('deleted')->eq('0')->fi()
+            ->beginIF(strpos($params, 'noforbidden') !== false)->andWhere('locked')->eq('0000-00-00 00:00:00')->fi()
             ->beginIF(strpos($params, 'admin') !== false)->andWhere('admin')->ne('no')->fi()
             ->beginIF($dept != 0)->andWhere('dept')->in($dept)->fi()
             ->orderBy('id_asc')    

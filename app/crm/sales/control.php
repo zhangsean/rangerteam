@@ -34,12 +34,12 @@ class sales extends control
     public function browse()
     {
         $groups = $this->sales->getGroupList();
-        $users  = $this->user->getPairs('nodeleted, noempty, noclosed');
+        $users  = $this->user->getPairs('nodeleted, noempty, noclosed, noforbidden');
         foreach($groups as $group) 
         {
             $accounts = explode(',', $group->users);
             $group->users = '';
-            foreach($accounts as $account) if($account != '') $group->users .= " " . (isset($users[$account]) ? $users[$account] : ''); 
+            foreach($accounts as $account) if($account != '' and isset($users[$account])) $group->users .= " " . $users[$account]; 
         }
 
         $this->view->title  = $this->lang->sales->browse;
@@ -64,7 +64,7 @@ class sales extends control
         }
 
         $this->view->title  = $this->lang->sales->create;
-        $this->view->users  = $this->user->getPairs('nodeleted, noempty, noclosed');
+        $this->view->users  = $this->user->getPairs('nodeleted, noempty, noclosed, noforbidden');
         $this->view->privs  = $this->sales->getAllPrivs();
         $this->view->groups = $this->sales->getGroupList();
 
@@ -94,7 +94,7 @@ class sales extends control
 
         $this->view->title  = $this->lang->sales->create;
         $this->view->group  = $group;
-        $this->view->users  = $this->user->getPairs('nodeleted, noempty, noclosed');
+        $this->view->users  = $this->user->getPairs('nodeleted, noempty, noclosed, noforbidden');
         $this->view->privs  = $this->sales->getAllPrivs();
         $this->view->groups = $groups;
 
