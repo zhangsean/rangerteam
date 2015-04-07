@@ -26,7 +26,7 @@
             <span title="<?php echo $users[$article->author];?>"><i class='icon-user'></i> <?php echo $users[$article->author];?></span> &nbsp; 
             <span title="<?php echo $lang->article->createdDate;?>"><i class='icon-time'></i> <?php echo substr($article->createdDate, 0, 10);?></span>&nbsp; 
           </div>
-          <h4><?php echo $article->title;?></h4>
+          <h4><span class='label label-primary'><?php echo $categories[$article->category];?></span> <?php echo $article->title;?></h4>
         </div>
         <div class='item-content'>
           <div class='text'><?php echo $article->content;?></div>

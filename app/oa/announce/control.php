@@ -51,14 +51,11 @@ class announce extends control
         $articles = $this->article->getList($type, $families, $mode, $param = null, $orderBy, $pager);
 
         $this->view->title      = $this->lang->announce->browse;
-        $this->view->type       = $type;
         $this->view->mode       = $mode;
         $this->view->users      = $this->loadModel('user')->getPairs();
-        $this->view->category   = $this->loadModel('tree')->getByID($categoryID);
-        $this->view->categoryID = $categoryID;
+        $this->view->categories = $this->loadModel('tree')->getPairs($categoryID, $type);
         $this->view->articles   = $articles;
         $this->view->pager      = $pager;
-        $this->view->orderBy    = $orderBy;
 
         $this->display();
     }   
