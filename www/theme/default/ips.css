@@ -248,3 +248,5 @@ body[class*='dropdown-mode-'] .window-active .window-cover {display: block;}
 #modalContainer {position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: transparent; background-color: rgba(0,0,0,0.5); z-index: 50000; display: none; filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000,endColorstr=#BF000000);}
 #modalContainer .min-win{display: none;}
 #desktop.modal-mode #modalContainer {display: block;}
+
+.progress{margin-bottom: 0;}
