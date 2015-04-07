@@ -72,8 +72,9 @@ class treeModel extends model
     public function getPairs($categories = '', $type = 'article')
     {
         return $this->dao->select('id, name')->from(TABLE_CATEGORY)
-            ->beginIF($categories)->where('id')->in($categories)->fi()
-            ->beginIF($type)->where('type')->eq($type)->fi()
+            ->where('1=1')
+            ->beginIF($categories)->andWhere('id')->in($categories)->fi()
+            ->beginIF($type)->andWhere('type')->eq($type)->fi()
             ->fetchPairs();
     }
 
