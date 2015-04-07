@@ -46,7 +46,7 @@
         commonModel::printLink('action',  'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt'");
         commonModel::printLink('address', 'browse', "objectType=contact&objectID=$contact->id", $lang->contact->address, "data-toggle='modal'");
         commonModel::printLink('contact', 'edit', "contactID=$contact->id", $lang->edit);
-        commonModel::printLink('contact', 'vcard', "contactID=$contact->id", $lang->contact->qrcode, "class='iframe' data-width='390' data-icon='qrcode' data-height='400'");
+        commonModel::printLink('contact', 'vcard', "contactID=$contact->id", $lang->contact->qrcode, "class='iframe' data-width='400' data-icon='qrcode' data-height='440'");
         echo "<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
         commonModel::printLink('resume',  'browse', "contactID=$contact->id", $lang->contact->resume, "data-toggle='modal'", '', '', 'li');
         commonModel::printLink('contact', 'delete', "contactID=$contact->id", $lang->delete, "class='reloadDeleter'", '', '', 'li');
