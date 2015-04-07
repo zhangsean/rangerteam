@@ -26,7 +26,7 @@
           <th class='w-260px'><?php echo $lang->trade->trader;?></th> 
           <th class='w-100px'><?php echo $lang->trade->money;?></th>
           <th class='w-80px'> <?php echo $lang->trade->dept;?></th>
-          <th class='w-110px'><?php echo $lang->trade->handlers;?></th>
+          <th class='w-120px'><?php echo $lang->trade->handlers;?></th>
           <th class='w-110px'><?php echo $lang->trade->date;?></th>
           <th><?php echo $lang->trade->desc;?></th>
         </tr>
@@ -50,7 +50,7 @@
                 </label>
               </span>
             </div>
-            <?php echo html::select("trader[$i]", $customerList, '', "class='form-control in' id='trader{$i}' style='display:none'");?>
+            <div class='in'><?php echo html::select("trader[$i]", $customerList, '', "class='form-control in chosen' id='trader{$i}' style='display:none'");?></div>
           </td>
           <td><?php echo html::input("money[$i]", '', "class='form-control'");?></td>
           <td><?php echo html::select("dept[$i]", $deptList, '', "class='form-control chosen'");?></td>

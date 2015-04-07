@@ -183,11 +183,12 @@ class tradeModel extends model
         $errors = $this->batchCheck($trades);
         if(!empty($errors)) return array('result' => 'fail', 'message' => $errors);
 
-        $tradeIDList = array();
         foreach($trades as $trade)
         {
-            $this->dao->insert(TABLE_TRADE)->data($trade, $skip = 'createTrader,traderName,createCustomer')->autoCheck()->exec();
+            $tradeID = $this->dao->insert(TABLE_TRADE)->data($trade, $skip = 'createTrader,traderName,createCustomer')->autoCheck()->exec();
+            if(!dao::isError()) $this->action->create('trade', $tradeID, 'Created');
         }
+
         if(!dao::isError()) return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'));
         return array('result' => 'fail', 'message' => dao::getError());
     }

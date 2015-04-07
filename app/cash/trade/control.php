@@ -120,9 +120,6 @@ class trade extends control
             $result = $this->trade->batchCreate();
             if($result['result'] != 'success') $this->send($result);
 
-            $this->loadModel('action');
-            foreach($tradeIDList as $tradeID) $this->action->create('trade', $tradeID, 'Created');
-
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
@@ -183,8 +180,8 @@ class trade extends control
         $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider');
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
-        $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
-        $this->view->tradeContract = $this->loadModel('contract', 'crm')->getPairs($customerID = $trade->trader);
+        $this->view->contractList  = array('' => '') + $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
+        $this->view->tradeContract = array('' => '') + $this->loadModel('contract', 'crm')->getPairs($customerID = $trade->trader);
         $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
        
