@@ -44,7 +44,7 @@
             <?php echo "<dl class='dl-horizontal'><dt>{$lang->depositor->account} {$lang->colon} </dt><dd>$depositor->account</dd></dl>";?>
             <?php if($depositor->type == 'bank') echo "<dl class='dl-horizontal'><dt>{$lang->depositor->bankcode} {$lang->colon} </dt><dd>$depositor->bankcode</dd></dl>";?>
            <?php endif;?>
-           <?php if(isset($balances[$depositor->currency][$depositor->id])):?>
+           <?php if(($app->user->admin == 'super' or isset($app->user->rights['balance']['browse'])) and isset($balances[$depositor->currency][$depositor->id])):?>
              <span  class='label-balance text-danger'>
              <?php echo zget($lang->currencySymbols, $depositor->currency)?>
              <?php echo formatMoney($balances[$depositor->currency][$depositor->id]->money);?>
