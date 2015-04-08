@@ -61,8 +61,15 @@ function checkSize(obj)
         $(obj).parents('#fileform').find(':file').each(function()
         {
             if($(this).val()) fileSize += $(this)[0].files[0].size;
-        })
-        if(fileSize > maxUploadSize) alert('<?php echo $lang->file->errorFileSize?>');
+        });
+        if(fileSize > maxUploadSize)
+        {
+            alert('<?php echo $lang->file->errorFileSize?>');
+            $(obj).parents('#fileform').find(':file').each(function()
+            {
+                if($(this).val()) $(this).val('');
+            });
+        }
     }
 }
 
