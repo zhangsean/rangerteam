@@ -76,14 +76,15 @@ $lang->contract->menu->expire       = array('link' => '即将到期|contract|bro
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->product       = '产品状态|setting|lang|module=product&field=statusList';
-$lang->setting->menu->customerType  = '客户类型|setting|lang|module=customer&field=typeList';
-$lang->setting->menu->customerSize  = '客户规模|setting|lang|module=customer&field=sizeNameList';
-$lang->setting->menu->customerLevel = '客户等级|setting|lang|module=customer&field=levelNameList';
-$lang->setting->menu->area          = '区域设置|tree|browse|type=area|';
-$lang->setting->menu->industry      = '行业设置|tree|browse|type=industry|';
-$lang->setting->menu->currency      = '货币设置|setting|lang|module=common&field=currencyList';
-$lang->setting->menu->salesGroup    = array('link' => '销售分组|sales|browse|', 'alias' => 'create,edit');
+$lang->setting->menu->product        = '产品状态|setting|lang|module=product&field=statusList';
+$lang->setting->menu->customerType   = '客户类型|setting|lang|module=customer&field=typeList';
+$lang->setting->menu->customerSize   = '客户规模|setting|lang|module=customer&field=sizeNameList';
+$lang->setting->menu->customerLevel  = '客户等级|setting|lang|module=customer&field=levelNameList';
+$lang->setting->menu->customerStatus = '客户状态|setting|lang|module=customer&field=statusList';
+$lang->setting->menu->area           = '区域设置|tree|browse|type=area|';
+$lang->setting->menu->industry       = '行业设置|tree|browse|type=industry|';
+$lang->setting->menu->currency       = '货币设置|setting|lang|module=common&field=currencyList';
+$lang->setting->menu->salesGroup     = array('link' => '销售分组|sales|browse|', 'alias' => 'create,edit');
 
 /* Menu of sales module. */
 $lang->sales = new stdclass();

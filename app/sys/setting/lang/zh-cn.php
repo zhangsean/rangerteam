@@ -31,6 +31,7 @@ $lang->setting->customer = new stdClass();
 $lang->setting->customer->fields['typeList']      = '客户类型';
 $lang->setting->customer->fields['sizeNameList']  = '客户规模';
 $lang->setting->customer->fields['levelNameList'] = '客户等级';
+$lang->setting->customer->fields['statusList']    = '客户状态';
 
 $lang->setting->system = new stdclass();
 $lang->setting->system->setCurrency            = '使用的货币';

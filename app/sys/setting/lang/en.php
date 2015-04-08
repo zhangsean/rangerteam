@@ -31,6 +31,7 @@ $lang->setting->customer = new stdClass();
 $lang->setting->customer->fields['typeList']      = 'Customer type';
 $lang->setting->customer->fields['sizeNameList']  = 'Customer Size';
 $lang->setting->customer->fields['levelNameList'] = 'Customer Level';
+$lang->setting->customer->fields['statusList']    = 'Customer Status';
 
 $lang->setting->system = new stdclass();
 $lang->setting->system->setCurrency            = 'Set used currency';
