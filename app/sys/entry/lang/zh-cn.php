@@ -64,7 +64,7 @@ $lang->entry->error->name  = '名称不能为空';
 $lang->entry->error->code  = '代号不能为空';
 $lang->entry->error->key   = '密钥不能为空';
 $lang->entry->error->ip    = 'IP列表不能为空';
-$lang->entry->error->url   = ' 非内置应用的登录地址，必须包含http://或者https://';
+$lang->entry->error->url   = ' 非内置应用的登录地址，必须包含 /、http://或者https://';
 
 $lang->entry->openList['']       = '';
 $lang->entry->openList['blank']  = '新开标签';

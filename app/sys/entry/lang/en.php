@@ -64,7 +64,7 @@ $lang->entry->error->name  = 'Please input name';
 $lang->entry->error->code  = 'Please input code';
 $lang->entry->error->key   = 'Please input key';
 $lang->entry->error->ip    = 'Please input IP';
-$lang->entry->error->url   = 'Non built-in application login address, you must include the http:// or https://';
+$lang->entry->error->url   = 'Non built-in application login address, you must include the /, http:// or https://';
 
 $lang->entry->openList['']       = '';
 $lang->entry->openList['blank']  = 'Blank';
