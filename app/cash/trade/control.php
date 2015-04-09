@@ -152,6 +152,7 @@ class trade extends control
     {
         $trade = $this->trade->getByID($tradeID);
         if(empty($trade)) die();
+        if($trade->type == 'out') $this->loadModel('tree')->checkRight($trade->category);
 
         if($_POST)
         {
@@ -249,6 +250,7 @@ class trade extends control
     public function detail($tradeID)
     {
         $trade = $this->trade->getByID($tradeID);
+        if($trade->type == 'out') $this->loadModel('tree')->checkRight($trade->category);
 
         if($_POST)
         {
@@ -526,6 +528,9 @@ class trade extends control
      */
     public function delete($tradeID)
     {
+        $trade = $this->trade->getByID($tradeID);
+        if($trade->type == 'out') $this->loadModel('tree')->checkRight($trade->category);
+
         if($this->trade->delete($tradeID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }

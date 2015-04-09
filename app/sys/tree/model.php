@@ -71,11 +71,24 @@ class treeModel extends model
      */
     public function getPairs($categories = '', $type = 'article')
     {
-        return $this->dao->select('id, name')->from(TABLE_CATEGORY)
+        $categories = $this->dao->select('*')->from(TABLE_CATEGORY)
             ->where('1=1')
             ->beginIF($categories)->andWhere('id')->in($categories)->fi()
             ->beginIF($type)->andWhere('type')->eq($type)->fi()
+            ->fetchAll('id');
+
+        foreach($categories as $id => $category)
+        {
+            if($category->type == 'out' and !$this->hasRight($id)) unset($categories[$id]);
+        }
+
+        $categories = $this->dao->select('id, name')->from(TABLE_CATEGORY)
+            ->where('1=1')
+            ->beginIF($categories)->andWhere('id')->in(array_keys($categories))->fi()
+            ->beginIF($type)->andWhere('type')->eq($type)->fi()
             ->fetchPairs();
+
+        return $categories;
     }
 
     /**
@@ -131,12 +144,19 @@ class treeModel extends model
      */
     public function getChildren($categoryID, $type = 'article', $root = 0)
     {
-        return $this->dao->select('*')->from(TABLE_CATEGORY)
+        $categories = $this->dao->select('*')->from(TABLE_CATEGORY)
             ->where('parent')->eq((int)$categoryID)
             ->andWhere('type')->eq($type)
             ->beginIF($root)->andWhere('root')->eq((int)$root)->fi()
             ->orderBy('`order`')
             ->fetchAll('id');
+
+        foreach($categories as $id => $category)
+        {
+            if($category->type == 'out' and !$this->hasRight($id)) unset($categories[$id]);
+        }
+
+        return $categories;
     }
 
     /**
@@ -200,7 +220,11 @@ class treeModel extends model
         $lastMenu   = array();
         $stmt       = $this->dbh->query($this->buildQuery($type, $startCategory, $root));
         $categories = array();
-        while($category = $stmt->fetch()) $categories[$category->id] = $category;
+        while($category = $stmt->fetch())
+        {
+            if($category->type == 'out' and !$this->hasRight($category->id)) continue;
+            $categories[$category->id] = $category;
+        }
 
         /* Cycle them, build the select control.  */
         foreach($categories as $category)
@@ -273,6 +297,8 @@ class treeModel extends model
         $stmt = $this->dbh->query($this->buildQuery($type, $startCategoryID, $root));
         while($category = $stmt->fetch())
         {
+            if($category->type == 'out' and !$this->hasRight($category->id)) continue;
+
             $linkHtml = call_user_func($userFunc, $category);
 
             if(isset($treeMenu[$category->id]) and !empty($treeMenu[$category->id]))
@@ -483,8 +509,11 @@ class treeModel extends model
         $category = fixer::input('post')
             ->stripTags('desc', $this->config->allowedTags->admin)
             ->join('moderators', ',')
+            ->join('rights', ',')
             ->setDefault('readonly', 0)
             ->get();
+
+        $category->rights = !empty($category->rights) ? ',' . trim($category->rights, ',') . ',' : '';
 
         /* Set moderators. */
         if(!isset($category->moderators))
@@ -658,6 +687,49 @@ class treeModel extends model
             $this->dao->update(TABLE_CATEGORY)->data($category)
                 ->where('id')->eq($category->id)
                 ->exec();
+        }
+    }
+
+    /**
+     * Check current user has priviledge for this category. 
+     *
+     * @param  int    $category 
+     * @access public
+     * @return bool
+     */
+    public function hasRight($categoryID)
+    {
+        $category = $this->getByID($categoryID);
+
+        if(!empty($category->rights))
+        {
+            $users = $this->dao->select('t2.account')
+                ->from(TABLE_USERGROUP)->alias('t1')
+                ->leftJoin(TABLE_USER)->alias('t2')->on('t1.account = t2.account')
+                ->where('t2.deleted')->eq(0)
+                ->andWhere('`group`')->in($category->rights)
+                ->fetchAll('account');
+        }
+
+        if($this->app->user->admin != 'super' and isset($users) and !isset($users[$this->app->user->account])) return false;
+
+        return true;
+    }
+
+    /**
+     * Check privilege for expense category.
+     *
+     * @param  int    $category 
+     * @access public
+     * @return void
+     */
+    public function checkRight($categoryID)
+    {
+        if(!$this->hasRight($categoryID))
+        {
+            $locate = helper::createLink('cash.index');
+            $errorLink = helper::createLink('sys.error', 'index', "type=accessLimited&locate={$locate}");
+            die(js::locate($errorLink));
         }
     }
 }

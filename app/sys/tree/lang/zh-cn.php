@@ -37,7 +37,8 @@ $lang->category->alias    = '别名';
 $lang->category->parent   = '上级类目';
 $lang->category->desc     = '描述';
 $lang->category->keywords = '关键词';
-$lang->category->children = "子类目";
+$lang->category->children = '子类目';
+$lang->category->rights   = '权限';
 
 /* Lang items for area. */
 $lang->area = new stdclass();
@@ -88,6 +89,7 @@ $lang->out->parent   = '上级科目';
 $lang->out->desc     = '描述';
 $lang->out->keywords = '关键词';
 $lang->out->children = '子科目';
+$lang->out->rights   = '权限';
 
 /* Lang items for forum. */
 $lang->board = new stdclass();

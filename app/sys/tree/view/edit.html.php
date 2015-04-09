@@ -35,6 +35,14 @@ $themeRoot = $webRoot . "theme/";
         <label class='col-md-2 control-label'><?php echo $lang->category->keywords;?></label>
         <div class='col-md-9'><?php echo html::input('keywords', $category->keywords, "class='form-control'");?></div>
       </div>
+      <?php if($category->type == 'out'):?>
+      <div class='form-group'> 
+        <label class='col-md-2 control-label'><?php echo $lang->category->rights;?></label>
+        <div class='col-md-9'>
+          <div class='group-item'><?php echo html::checkbox('rights', $groups, $category->rights);?></div>
+        </div>
+      </div>
+      <?php endif;?>
       <div class='form-group'> 
         <label class='col-md-2 control-label'><?php echo $lang->category->desc;?></label>
         <div class='col-md-9'><?php echo html::textarea('desc', $category->desc, "class='form-control' rows=3'");?></div>

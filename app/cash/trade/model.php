@@ -38,7 +38,7 @@ class tradeModel extends model
 
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
-        return $this->dao->select('*')->from(TABLE_TRADE)
+        $trades = $this->dao->select('*')->from(TABLE_TRADE)
             ->where('parent')->eq('')
             ->beginIF($mode == 'in')->andWhere('type')->eq('in')
             ->beginIF($mode == 'out')->andWhere('type')->eq('out')
@@ -48,6 +48,13 @@ class tradeModel extends model
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
+
+        foreach($trades as $id => $trade)
+        {
+            if($trade->type == 'out' and !$this->loadModel('tree')->hasRight($trade->category)) unset($trades[$id]);
+        }
+
+        return $trades;
     }
 
     /** 

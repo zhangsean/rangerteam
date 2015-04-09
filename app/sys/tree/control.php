@@ -74,6 +74,8 @@ class tree extends control
         /* Get current category. */
         $category = $this->tree->getById($categoryID);
 
+        if($category->type == 'out') $this->tree->checkRight($category->id);
+
         /* If type is forum, assign board to category. */
         if($category->type != 'blog' and strpos($this->config->tree->menuGroup->setting, ',' . $category->type . ',') !== false) $this->lang->category = $this->lang->{$category->type};
         if($category->type == 'forum') $this->lang->category = $this->lang->board;
@@ -107,6 +109,9 @@ class tree extends control
         if($category->type == 'forum') $this->view->users = $this->loadModel('user')->getPairs('admin, noclosed');
         if($category->type == 'dept')  $this->view->users = $this->loadModel('user')->getPairs(null, $category->id);
 
+        $groups = $this->loadModel('group')->getPairs();
+        $this->view->groups = $groups;
+
         /* remove left menu. */
         unset($this->lang->tree->menu);
 
@@ -138,6 +143,8 @@ class tree extends control
         }
         if($type == 'product') $this->lang->category = $this->lang->product;
 
+        if($type == 'out' and $category) $this->tree->checkRight($category);
+
         if(!empty($_POST))
         { 
             $result = $this->tree->manageChildren($type, $this->post->parent, $this->post->children, $root);
@@ -167,6 +174,9 @@ class tree extends control
     {
         /* If type is 'forum' and has children, warning. */
         $category = $this->tree->getByID($categoryID);
+
+        if($category->type == 'out') $this->tree->checkRight($categoryID);
+
         $children = $this->tree->getChildren($categoryID, $category->type); 
         if($children) $this->send(array('result' => 'fail', 'message' => $this->lang->tree->hasChildren));
 

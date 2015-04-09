@@ -38,6 +38,7 @@ $lang->category->parent   = 'Parent';
 $lang->category->desc     = 'Description';
 $lang->category->keywords = 'Keyword';
 $lang->category->children = "Children";
+$lang->category->rights   = 'Rights';
 
 /* Lang items for area. */
 $lang->area = new stdclass();
@@ -88,6 +89,7 @@ $lang->out->parent   = 'Parent';
 $lang->out->desc     = 'Description';
 $lang->out->keywords = 'Keyword';
 $lang->out->children = "Children";
+$lang->out->rights   = 'Rights';
 
 /* Lang items for forum. */
 $lang->board = new stdclass();
