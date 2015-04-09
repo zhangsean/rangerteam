@@ -55,6 +55,7 @@ class customer extends control
         $this->app->user->canEditCustomerIdList = ',' . implode(',', $this->customer->getCustomersSawByMe('edit', array_keys($customers))) . ',';
         
         $this->view->title     = $this->lang->customer->list;
+        $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->mode      = $mode;
         $this->view->customers = $customers;
         $this->view->pager     = $pager;

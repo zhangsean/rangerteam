@@ -23,6 +23,7 @@
         <?php $vars = "mode={$mode}&param=&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px'> <?php commonModel::printOrderLink('id',     $orderBy, $vars, $lang->customer->id);?></th>
         <th>                <?php commonModel::printOrderLink('name',   $orderBy, $vars, $lang->customer->name);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('assignedTo', $orderBy, $vars, $lang->customer->assignedTo);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('level',  $orderBy, $vars, $lang->customer->level);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->customer->status);?></th>
         <th class='w-80px visible-lg'><?php commonModel::printOrderLink('size', $orderBy, $vars, $lang->customer->size);?></th>
@@ -38,6 +39,7 @@
       <tr class='text-center' data-url='<?php echo $this->createLink('customer', 'view', "customerID=$customer->id"); ?>'>
         <td><?php echo $customer->id;?></td>
         <td class='text-left'><?php echo $customer->name;?></td>
+        <td><?php if(isset($users[$customer->assignedTo])) echo $users[$customer->assignedTo];?></td>
         <td><?php echo isset($lang->customer->levelNameList[$customer->level]) ? $lang->customer->levelNameList[$customer->level] : '';?></td>
         <td class='<?php echo "customer-{$customer->status}";?>'><?php if($customer->status) echo $lang->customer->statusList[$customer->status];?></td>
         <td class='visible-lg'><?php echo $lang->customer->sizeNameList[$customer->size];?></td>
