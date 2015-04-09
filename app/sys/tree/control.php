@@ -50,6 +50,7 @@ class tree extends control
             $this->lang->menuGroups->tree = 'doc';
             if($root == 'product' or $root == 'project') $type = $root . 'doc';
         }
+        if($type == 'product') $this->lang->category = $this->lang->product;
 
         $this->view->title    = $this->lang->category->common;
         $this->view->type     = $type;
@@ -76,6 +77,7 @@ class tree extends control
         /* If type is forum, assign board to category. */
         if($category->type != 'blog' and strpos($this->config->tree->menuGroup->setting, ',' . $category->type . ',') !== false) $this->lang->category = $this->lang->{$category->type};
         if($category->type == 'forum') $this->lang->category = $this->lang->board;
+        if($category->type == 'product') $this->lang->category = $this->lang->product;
         if($category->type == 'dept')
         {
             $this->app->loadLang('user');
@@ -134,6 +136,7 @@ class tree extends control
             $this->app->loadLang('user');
             $this->lang->category = $this->lang->dept;
         }
+        if($type == 'product') $this->lang->category = $this->lang->product;
 
         if(!empty($_POST))
         { 

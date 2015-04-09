@@ -39,6 +39,7 @@ $lang->product->menu->browse     = array('link' => '所有产品|product|browse|
 $lang->product->menu->normal     = array('link' => '正常|product|browse|mode=normal');
 $lang->product->menu->developing = array('link' => '研发中|product|browse|mode=developing');
 $lang->product->menu->offline    = array('link' => '下线|product|browse|mode=offline');
+$lang->product->menu->lines      = array('link' => '产品线|tree|browse|type=product');
 
 /* Menu of order module. */
 $lang->order = new stdclass();

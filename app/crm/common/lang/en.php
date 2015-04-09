@@ -39,6 +39,7 @@ $lang->product->menu->browse     = array('link' => 'All Products|product|browse|
 $lang->product->menu->normal     = array('link' => 'Normal|product|browse|mode=normal');
 $lang->product->menu->developing = array('link' => 'Developing|product|browse|mode=developing');
 $lang->product->menu->offline    = array('link' => 'Offline|product|browse|mode=offline');
+$lang->product->menu->lines      = array('link' => 'Product line|tree|browse|type=product');
 
 /* Menu of order module. */
 $lang->order = new stdclass();
@@ -84,7 +85,7 @@ $lang->setting->menu->customerStatus = 'Customer Status|setting|lang|module=cust
 $lang->setting->menu->area           = 'Area|tree|browse|type=area|';
 $lang->setting->menu->industry       = 'Industry|tree|browse|type=industry|';
 $lang->setting->menu->currency       = 'Currency|setting|lang|module=common&field=currencyList';
-$lang->setting->menu->salesGroup     = 'Sales Group|sales|browse|';
+$lang->setting->menu->salesGroup     = array('link' => 'Sales Group|sales|browse|', 'alias' => 'create,edit');
 
 /* Menu of sales module. */
 $lang->sales = new stdclass();

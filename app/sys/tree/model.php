@@ -465,7 +465,7 @@ class treeModel extends model
 
         $linkHtml  = $category->name;
         $linkHtml .= ' ' . html::a(helper::createLink('tree', 'edit',     "category={$category->id}"), $lang->tree->edit, "class='ajax'");
-        if(strpos($category->type, 'doc') === false) $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
+        if(strpos($category->type, 'doc') === false and $category->type != 'product') $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
         $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
 
         return $linkHtml;
