@@ -48,13 +48,24 @@ body[class*='dropdown-mode-'] .s-menu-tooltip, body.mute-tooltip .s-menu-tooltip
 #leftBar {width: 40px; height: 100%; background-color: #0a2e66; background-color: rgba(0,0,0,0.4); z-index: 40010; transition: left .3s;-o-transition: left .3s;-moz-transition: left .3s;-webkit-transition: left .3s;}
 #desktop.menu-auto #leftBar.menu-hide {left: -38px;}
 
-#apps-menu {position: absolute; overflow: hidden; bottom: 268px; top: 0; overflow: no-display; transition: height .3s;-o-transition: height .3s;-moz-transition: height .3s;-webkit-transition: height .3s;}
+#apps-menu {position: absolute; bottom: 36px; top: 0; overflow: no-display; transition: height .3s;-o-transition: height .3s;-moz-transition: height .3s;-webkit-transition: height .3s;}
 #apps-menu .bar-menu > li {display: inline-block;}
-#apps-menu .bar-menu > li button {text-align: center; padding:6px; width: 40px;}
+#apps-menu .bar-menu > li button, #moreOptionBtn {text-align: center; padding:6px; width: 40px;}
 #apps-menu .bar-menu > li img {width: 28px; height: 28px; box-shadow: 0 1px 1px rgba(0,0,0,0.35); border-radius: 5px}
-#apps-menu .bar-menu > li > button > .icon { text-shadow: 0 1px 1px rgba(0,0,0,0.35); color: #f1f1f1; color: rgba(255,255,255,0.8); line-height: 28px; line-height: 28px; text-align: center;}
-#apps-menu .bar-menu > li > button:hover > .icon {color: #fff; text-shadow: 0 1px 1px rgba(0,0,0,0.15);}
+#apps-menu .bar-menu > li > button > .icon, #moreOptionBtn > .icon { text-shadow: 0 1px 1px rgba(0,0,0,0.35); color: #f1f1f1; color: rgba(255,255,255,0.8); line-height: 28px; line-height: 28px; text-align: center;}
+#apps-menu .bar-menu > li > button:hover > .icon, #moreOptionBtn:hover > .icon {color: #fff; text-shadow: 0 1px 1px rgba(0,0,0,0.15);}
 #apps-menu .bar-menu > li.drag-from > button {opacity: 0.3; background: #000}
+
+#moreOptionBtn {display: none}
+#moreOptionBtn:hover {text-decoration: none; color: #fff; color: rgba(255,255,255,0.9); background-color: #666; background-color: rgba(255,255,255,0.20);}
+#moreOptionBtn > .icon {transition: all 0.2s; font-size: 24px; font-style: normal; line-height: 30px; background: #666; background: rgba(255,255,255, 0.45); display: block; width: 28px; height: 28px; border-radius: 14px}
+#apps-menu.more-option #moreOptionBtn {display: block; position: absolute; left: 0; bottom: 0}
+#apps-menu.more-option .bar-menu > li.option {display: none}
+#moreOptionBtn.active > .icon {transform: scale(1.2); background: #555; background: rgba(255,255,255, .2); }
+#moreOptionMenu {left: 100%; bottom: 0; top: auto; padding: 10px}
+#moreOptionMenu > li {display: block; float: left;}
+#moreOptionMenu.bar-menu > li > button > .icon {color: #444; color: rgba(0,0,0,.6);}
+#moreOptionMenu.bar-menu > li > button:hover > .icon {color: #333; color: rgba(0,0,0,.8);}
 
 /* bottom bar. */
 #bottomBar {height: 36px; background-color: #0a2e66; background-color: rgba(0,0,0,0.5); z-index: 50000; left: 40px; right: 0}
