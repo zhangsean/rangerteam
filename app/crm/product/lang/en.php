@@ -16,6 +16,7 @@ $lang->product->name        = 'Name';
 $lang->product->code        = 'Code';
 $lang->product->type        = 'Type';
 $lang->product->status      = 'Status';
+$lang->product->line        = 'Product Line';
 $lang->product->desc        = 'Introductions';
 $lang->product->roles       = 'Roles';
 $lang->product->createdBy   = 'Created By';

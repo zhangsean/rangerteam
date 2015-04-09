@@ -18,6 +18,10 @@
       <td><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
     </tr>
     <tr>
+      <th><?php echo $lang->product->line;?></th>
+      <td><?php echo html::select("line", $lineList, '', "class='form-control'");?></td>
+    </tr>
+    <tr>
       <th><?php echo $lang->product->type;?></th>
       <td><?php echo html::select("type", $lang->product->typeList, '', "class='form-control'");?></td>
     </tr>

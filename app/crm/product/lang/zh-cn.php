@@ -16,6 +16,7 @@ $lang->product->name        = '名称';
 $lang->product->code        = '代号';
 $lang->product->type        = '类型';
 $lang->product->status      = '状态';
+$lang->product->line        = '产品线';
 $lang->product->desc        = '简介';
 $lang->product->roles       = '角色';
 $lang->product->createdBy   = '添加者';
