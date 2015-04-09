@@ -32,6 +32,8 @@
       echo "<div class='btn-group'>";
       commonModel::printLink('action', 'createRecord', "objectType=customer&objectID={$customer->id}&customer={$customer->id}", $lang->customer->record, "class='btn' data-toggle='modal' data-type='iframe' data-icon='comment-alt'");
       commonModel::printLink('customer', 'assign', "customerID=$customer->id", $lang->customer->assign, "class='btn' data-toggle='modal'");
+      commonModel::printLink('customer', 'contact', "customerID=$customer->id", $lang->customer->contact,  "class='btn' data-toggle='modal'");
+      commonModel::printLink('address',  'browse', "objectType=customer&objectID=$customer->id", $lang->customer->address, "class='btn' data-toggle='modal'");
       echo '</div>';
       echo "<div class='btn-group'>";
       commonModel::printLink('customer', 'edit', "customerID=$customer->id", $lang->edit, "class='btn'");
