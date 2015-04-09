@@ -10,4 +10,5 @@
  * @link        http://www.ranzhico.com
  */
 $appName = 'sys';
+if(strpos($_SERVER['PHP_SELF'], 'pathinfo.php') !== false) die('pathinfo');
 include '../../framework/loader.php';
