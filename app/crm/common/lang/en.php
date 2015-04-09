@@ -66,11 +66,11 @@ $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
 $lang->contract->menu->browse       = array('link' => 'All Contracts|contract|browse|', 'alias' => 'create,edit,view');
 $lang->contract->menu->unfinished   = array('link' => 'Unfinished|contract|browse|mode=unfinished',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->unreceived   = array('link' => 'Wait for receiving|contract|browse|mode=unreceived',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->undeliveried = array('link' => 'Wait for delivering|contract|browse|mode=undeliveried', 'alias' => 'create,edit,view,history');
-$lang->contract->menu->finished     = array('link' => 'Finished|contract|browse|mode=finished',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->canceled     = array('link' => 'Canceled|contract|browse|mode=canceled',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->expired      = array('link' => 'Expired|contract|browse|mode=expired',   'alias' => 'create,edit,view,history');
+$lang->contract->menu->unreceived   = array('link' => 'Receiving|contract|browse|mode=unreceived',    'alias' => 'create,edit,view,history');
+$lang->contract->menu->undeliveried = array('link' => 'Delivering|contract|browse|mode=undeliveried', 'alias' => 'create,edit,view,history');
+$lang->contract->menu->finished     = array('link' => 'Finished|contract|browse|mode=finished',       'alias' => 'create,edit,view,history');
+$lang->contract->menu->canceled     = array('link' => 'Canceled|contract|browse|mode=canceled',       'alias' => 'create,edit,view,history');
+$lang->contract->menu->expired      = array('link' => 'Expired|contract|browse|mode=expired',         'alias' => 'create,edit,view,history');
 $lang->contract->menu->expire       = array('link' => 'Will Expire|contract|browse|mode=expire', 'alias' => 'create,edit,view,history');
 
 /* Menu of setting module. */
