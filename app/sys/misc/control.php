@@ -33,4 +33,3 @@ class misc extends control
         die($this->display());
     }
 }
-
