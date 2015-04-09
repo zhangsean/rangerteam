@@ -139,6 +139,11 @@ class block extends control
         if($this->get->app == 'sys') $this->session->set('taskList', 'javascript:$.openEntry("home")');
 
         $this->processParams();
+        if(strpos(join($this->params->status), 'unfinished') !== false)
+        {
+            $this->params->status[] = 'wait';
+            $this->params->status[] = 'doing';
+        }
 
         /* Get project ids. */
         $projects = $this->loadMOdel('project')->getPairs();
