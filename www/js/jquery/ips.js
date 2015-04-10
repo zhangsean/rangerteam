@@ -740,7 +740,9 @@
             if(!q) q = $(this).closest('.app-btn').attr('data-id');
             if(!q) q = $('#taskMenu.show').data('id');
 
-            windows.query(q).reload();
+            var win = windows.query(q);
+            win.reload();
+            win.show();
         }).on('click', '.open-win', function()
         {
             var id = $(this).closest('.dropdown-menu').data('id');
@@ -992,8 +994,6 @@
                     this.loadHtml();
                     break;
             }
-
-            if(!this.isActive()) this.active();
         }
         else
         {
@@ -1219,6 +1219,7 @@
         }
 
         this.updateEntryUrl();
+        debugger;
     };
 
     /**
