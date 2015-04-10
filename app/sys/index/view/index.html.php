@@ -150,7 +150,7 @@ var entries = [
 {
     id        : 'home',
     code      : 'home',
-    name      : 'home',
+    name      : '<?php echo $title?>',
     display   : 'fullscreen',
     menu      : 'none',
     icon      : 'icon-desktop',
