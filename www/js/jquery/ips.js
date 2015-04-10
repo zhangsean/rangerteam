@@ -1618,6 +1618,7 @@
                     bootbox.alert(settings.entryNotFindTip);
                 }
 
+                desktop.menu.hideMoreMenu();
                 event.preventDefault();
                 if(et && et.id != 'superadmin')
                 {
