@@ -487,7 +487,7 @@
                 var $moreIcons = $icons.removeClass('option')
                 .slice(start)
                 .addClass('option').clone().removeClass('option');
-                $moreIcons.children('.app-btn').attr('data-btn-type', 'list');
+                $moreIcons.children('.app-btn').attr('data-btn-type', 'list').attr('data-placement', 'bottom').attr('data-tip-class', '');
 
                 $btn.addClass('active').data('icons-count', $moreIcons.length)
                     .data('icons', $moreIcons)
