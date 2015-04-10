@@ -1658,14 +1658,17 @@
                     if(btnType == 'menu')
                     {
                         menu.css({left: desktopPos.x + 2, top: offset.top, bottom: 'inherit'});
-                        $('.tooltip').remove();
                     }
                     else if(isListBtn)
                     {
                         var menuHeight = menu.outerHeight();
-                        menu.css({left: e.clientX, top: (menuHeight + e.clientY > desktop.height) ? (e.clientY - menuHeight - 1) : e.clientY, bottom: 'inherit'});
+                        menu.css({left: e.clientX - 2, top: (menuHeight + e.clientY > desktop.height) ? (e.clientY - menuHeight - 2) : e.clientY, bottom: 'inherit'});
                     }
-                    else if(btnType == 'task') menu.css({left: offset.left, top: 'inherit', bottom: settings.bottomBarHeight + 2});
+                    else if(btnType == 'task')
+                    {
+                        menu.css({left: offset.left, top: 'inherit', bottom: settings.bottomBarHeight + 2});
+                        desktop.menu.hideMoreMenu();
+                    }
 
                     desktop.toggleDropmenuMode('taskmenu', true);
                     menu.addClass('show in').data('id', et.id);
@@ -1801,6 +1804,7 @@
             var $menu = this.$menu;
             this.layoutMenu();
             this.$btn.addClass('hover');
+            $menu.css('background-color', $('body').css('background-color'));
             $menu.addClass('show');
             setTimeout(function(){$menu.addClass('in');}, 10);
             if(desktop.toggleDropmenuMode) desktop.toggleDropmenuMode('more-option', true);
@@ -1868,6 +1872,7 @@
     {
         refreshEntries(entriesOptions, reset);
         desktop.refreshShortcuts();
+        desktop.refreshMenuSize();
     }
 
     /*
