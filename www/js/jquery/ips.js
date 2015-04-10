@@ -57,8 +57,6 @@
      */
     function initSettings(options)
     {
-        indexTone = $('body').css('background-color');
-
         $.extend(settings, defaults, options);
         settings.init();
     }
@@ -1801,7 +1799,7 @@
         {
             var $menu = this.$menu;
             this.layoutMenu();
-
+            this.$btn.addClass('hover');
             $menu.addClass('show');
             setTimeout(function(){$menu.addClass('in');}, 10);
             if(desktop.toggleDropmenuMode) desktop.toggleDropmenuMode('more-option', true);
@@ -1810,10 +1808,14 @@
         this.hideMoreMenu = function()
         {
             var $menu = this.$menu;
-            $menu.removeClass('in');
-            setTimeout(function(){$menu.removeClass('show');}, 200);
-            if(desktop.toggleDropmenuMode) desktop.toggleDropmenuMode('more-option', false);
-        };
+            if($menu.hasClass('show'))
+            {
+                this.$btn.removeClass('hover');
+                $menu.removeClass('in');
+                setTimeout(function(){$menu.removeClass('show');}, 200);
+                if(desktop.toggleDropmenuMode) desktop.toggleDropmenuMode('more-option', false);
+            }
+       };
 
         this.init();
     };
