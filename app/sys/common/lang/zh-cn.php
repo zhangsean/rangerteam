@@ -198,6 +198,7 @@ $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
 $lang->system->menu->mail  = array('link' => '发信|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->system->menu->trash = array('link' => '回收站|action|trash|');
+$lang->system->menu->cron  = '计划任务|cron|index|';
 //$lang->system->menu->backup = '备份|admin|backup|';
 
 $lang->article = new stdclass();
@@ -217,6 +218,11 @@ $lang->menuGroups->mail = 'system';
 $lang->action = new stdclass();
 $lang->action->menu = $lang->system->menu;
 $lang->menuGroups->action = 'system';
+
+/* Menu of cron module. */
+$lang->cron = new stdclass();
+$lang->cron->menu = $lang->system->menu;
+$lang->menuGroups->cron = 'system';
 
 /* The error messages. */
 $lang->error = new stdclass();

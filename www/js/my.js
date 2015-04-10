@@ -167,3 +167,14 @@ function setMenu()
         $menu.prepend($menuTitle.addClass('nav'));
     }
 }
+
+/**
+ * Start cron.
+ * 
+ * @access public
+ * @return void
+ */
+function startCron()
+{
+    $.ajax({type:"GET", timeout:100, url:createLink('cron', 'ajaxExec')});
+}

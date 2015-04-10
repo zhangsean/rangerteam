@@ -115,6 +115,7 @@ define('TABLE_TAG',       '`sys_tag`');
 define('TABLE_BLOCK',     '`sys_block`');
 define('TABLE_SCHEMA',    '`sys_schema`');
 define('TABLE_RELATION',  '`sys_relation`');
+define('TABLE_CRON',      '`sys_cron`');
 
 /* Tables for crm. */
 define('TABLE_ADDRESS',       '`crm_address`');
@@ -170,6 +171,7 @@ $config->objectTables['contact']     = TABLE_CONTACT;
 $config->objectTables['thread']      = TABLE_THREAD;
 $config->objectTables['article']     = TABLE_ARTICLE;
 $config->objectTables['doc']         = TABLE_DOC;
+$config->objectTables['cron']        = TABLE_CRON;
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext/*.php');
