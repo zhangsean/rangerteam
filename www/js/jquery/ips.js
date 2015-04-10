@@ -453,17 +453,7 @@
             this.height = this.size.height;
 
             /* refresh app menu size */
-            var menu       = this.$menu;
-            var iconHeight = menu.find('li').height();
-            var menuHeight = this.height - this.$bottombar.height();
-            if(iconHeight > 0)
-            {
-                while(menuHeight % iconHeight != 0)
-                {
-                    menuHeight--;
-                }
-            }
-            menu.height(menuHeight);
+            this.refreshMenuSize()
 
             /* refresh entry window size */
             windows.afterBrowserResized();
@@ -479,6 +469,40 @@
             $e.toggleClass('toggle-on');
         });
     };
+
+    desktopManager.prototype.refreshMenuSize = function()
+    {
+        var $menu      = this.$menu;
+        var $icons     = $menu.children('.bar-menu:not(#moreOptionMenu)').find('li:not(#s-menu-allapps)');
+        var iconHeight = $icons.height();
+        var iconsCount = $icons.length;
+        var maxHeight  = $menu.height();
+        var moreOption = (iconsCount + 1) * iconHeight > maxHeight;
+        var $btn       = $('#moreOptionBtn');
+
+        $menu.toggleClass('more-option', moreOption);
+        if(moreOption)
+        {
+            var start = Math.floor((maxHeight - (2 * iconHeight)) / iconHeight);
+            if($btn.data('icons-count') != (iconsCount - start))
+            {
+                var $moreIcons = $icons.removeClass('option')
+                .slice(start)
+                .addClass('option').clone().removeClass('option');
+                $moreIcons.children('.app-btn').attr('data-btn-type', 'list');
+
+                $btn.addClass('active').data('icons-count', $moreIcons.length)
+                    .data('icons', $moreIcons)
+                    .attr('data-original-title', settings.moreOptionTip.format($moreIcons.length));
+                setTimeout(function(){$btn.removeClass('active')}, 200);
+                this.menu.tryLayoutMenu();            
+            }
+        }
+        else
+        {
+            this.menu.hideMoreMenu();
+        }
+    }
 
     /* Update browser url in address bar by change browser history */
     desktopManager.prototype.updateBrowserUrl = function(url, isForcePush, title, state)
@@ -1218,17 +1242,19 @@
 
             $('#start').click(function(e)
             {
-                if(menu.hasClass('show'))
+                var isShowed = menu.hasClass('show');
+                if(isShowed)
                 {
                     menu.removeClass('in');
                     setTimeout(function(){menu.removeClass('show');}, 100);
                 }
                 else
                 {
+                    desktop.menu.hideMoreMenu();
                     menu.addClass('show');
                     setTimeout(function(){menu.addClass('in')}, 0);
                 }
-                desktop.toggleDropmenuMode('startmenu', menu.hasClass('show'));
+                desktop.toggleDropmenuMode('startmenu', !isShowed);
                 e.stopPropagation();
             });
         }
@@ -1690,6 +1716,8 @@
         this.init = function()
         {
             this.$leftBar = $('#leftBar');
+            this.$menu = $('#moreOptionMenu');
+            this.$btn = $('#moreOptionBtn');
 
             if(settings.autoHideMenu)
             {
@@ -1700,6 +1728,8 @@
 
                 this.$leftBar.mouseover(this.show).mouseout(this.hide);;
             }
+
+            this.bindEvents();
         };
 
         /* Hide the menu */
@@ -1722,6 +1752,66 @@
         {
             desktop.menu.$leftBar.removeClass('menu-hide').addClass('menu-show');
             setTimeout(function(){$('#apps-menu .app-btn').attr('data-toggle', 'tooltip');}, 500);
+        };
+
+        /* Bind events */
+        this.bindEvents = function()
+        {
+            // Handle more option btn
+            var that = this;
+            that.$btn.on('click', function(e)
+            {
+                that.toggleMoreMenu();
+                e.stopPropagation();
+            });
+            
+            $(document).click(function(e)
+            {
+                if($(e.target).is(that.$btn)) return;
+                that.hideMoreMenu();
+            });
+        };
+
+        this.toggleMoreMenu = function()
+        {           
+            if(this.$menu.hasClass('show')) this.hideMoreMenu();
+            else this.showMoreMenu();
+        };
+
+        this.layoutMenu = function()
+        {
+            var $btn = this.$btn, $menu = this.$menu;
+            var data = $btn.data('icons');
+            if(data)
+            {
+                $menu.children().remove();
+                $menu.append(data);
+                $btn.data('icons', false);
+                $menu.width(Math.ceil(Math.sqrt(data.length)) * 40);
+            }
+        };
+
+        this.tryLayoutMenu = function()
+        {
+            if(this.$menu.hasClass('show')) this.layoutMenu();
+        };
+
+        this.showMoreMenu = function()
+        {
+            var $menu = this.$menu;
+            this.layoutMenu();
+
+            $menu.addClass('show');
+            setTimeout(function(){$menu.addClass('in');}, 10);
+            if(desktop.toggleDropmenuMode) desktop.toggleDropmenuMode('more-option', true);
+        };
+
+        this.hideMoreMenu = function()
+        {
+            var $menu = this.$menu;
+            $menu.removeClass('in');
+            setTimeout(function(){$menu.removeClass('show');}, 200);
+            if(desktop.toggleDropmenuMode) desktop.toggleDropmenuMode('more-option', false);
         };
 
         this.init();

@@ -43,4 +43,5 @@ $lang->index->ips['confirmRemoveBlock']  = 'Be sure to remove block [{0}]?';
 $lang->index->ips['removedBlock']        = 'Block has been removed';
 $lang->index->ips['hiddenBlock']         = 'Block has been hidden';
 $lang->index->ips['orderdBlocksSaved']   = 'Order has been saved';
+$lang->index->ips['moreOptionTip'] 	     = 'Show other {0} entries';
 $lang->index->ips['confirmCloseBrowser'] = 'Notice:This app has been opened already';

@@ -43,4 +43,5 @@ $lang->index->ips['confirmRemoveBlock'] = '确定要删除区块 【{0}】 吗�
 $lang->index->ips['removedBlock']       = '区块已删除';
 $lang->index->ips['hiddenBlock']        = '区块已隐藏';
 $lang->index->ips['orderdBlocksSaved']  = '排序已保存';
+$lang->index->ips['moreOptionTip'] 	    = '显示另外 {0} 个应用';
 $lang->index->ips['confirmCloseBrowser']= '提示：当前有打开的应用窗口';
