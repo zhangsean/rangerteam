@@ -23,7 +23,7 @@
 <div class='panel'>
   <table class='table table-condensed table-bordered active-disabled table-fixed'>
     <thead>
-      <tr>
+      <tr class='text-center'>
         <th class='w-150px'><?php echo $lang->backup->time?></th>
         <th><?php echo $lang->backup->files?></th>
         <th class='w-150px'><?php echo $lang->backup->size?></th>
