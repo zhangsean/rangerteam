@@ -40,7 +40,8 @@ $lang->provider->menu->browse = array('link' => 'Provider List|provider|browse|'
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->income   = 'Income|tree|browse|type=in|';
-$lang->setting->menu->expend   = 'Expend|tree|browse|type=out|';
-$lang->setting->menu->currency = 'Currency|setting|lang|module=common&field=currencyList';
-$lang->setting->menu->schema   = 'Schema|schema|browse|';
+$lang->setting->menu->income    = 'Income|tree|browse|type=in|';
+$lang->setting->menu->expend    = 'Expend|tree|browse|type=out|';
+$lang->setting->menu->currency  = 'Currency|setting|lang|module=common&field=currencyList';
+$lang->setting->menu->schema    = 'Schema|schema|browse|';
+$lang->setting->menu->tradePriv = 'Expend Privilege|group|managetradepriv|';

@@ -34,6 +34,8 @@ class trade extends control
      */
     public function browse($mode = 'all', $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
+        if($mode == 'out') $this->trade->checkOutPriv();
+
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 

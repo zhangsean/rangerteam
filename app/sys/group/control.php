@@ -240,6 +240,36 @@ class group extends control
     }
 
     /**
+     * Manage privleges of out. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function manageTradePriv()
+    {
+        $this->lang->group->menu = $this->lang->setting->menu;
+        $this->lang->menuGroups->group = 'setting';
+
+        if($_POST)
+        {
+            $this->group->updateTradePriv($this->post->groups);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $groups = $this->group->getPairs();
+        $privs  = $this->group->getTradePriv();
+        foreach($groups as $code => $name)
+        {
+            $rights[$code]['right'] = isset($privs[$code]) ? 1 : 0;
+            $rights[$code]['name']  = $name;
+        }
+
+        $this->view->rights = $rights;
+        $this->display();
+    }
+
+    /**
      * Manage members of a group.
      * 
      * @param  int    $groupID 

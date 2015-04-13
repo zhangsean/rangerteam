@@ -445,6 +445,30 @@ class groupModel extends model
     }
 
     /**
+     * Update priv for expense. 
+     * 
+     * @param  array  $groups 
+     * @access public
+     * @return bool
+     */
+    public function updateTradePriv($groups)
+    {
+        /* Delete old priv. */
+        $this->dao->delete()->from(TABLE_GROUPPRIV)->where('`module`')->eq('trade')->andWhere('`method`')->eq('out')->exec();
+
+        if(empty($groups)) return true;
+        $priv = new stdclass();
+        $priv->module = 'trade';
+        $priv->method = 'out';
+        foreach($groups as $group)
+        {
+            $priv->group = $group;
+            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+        }
+        return true;
+    }
+
+    /**
      * get privilege by app code. 
      * 
      * @param  string $appCode 
@@ -454,5 +478,16 @@ class groupModel extends model
     public function getAppPriv($appCode)
     {
         return $this->dao->select('*')->from(TABLE_GROUPPRIV)->where('`module`')->eq('apppriv')->andWhere('`method`')->eq($appCode)->fetchAll('group');
+    }
+
+    /**
+     * get privilege of expense. 
+     * 
+     * @access public
+     * @return array
+     */
+    public function getTradePriv()
+    {
+        return $this->dao->select('*')->from(TABLE_GROUPPRIV)->where('`module`')->eq('trade')->andWhere('`method`')->eq('out')->fetchAll('group');
     }
 }

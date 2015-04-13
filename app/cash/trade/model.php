@@ -705,4 +705,23 @@ class tradeModel extends model
             }
         }
     }
+
+    /**
+     * Check privilege for expense.
+     *
+     * @access public
+     * @return void
+     */
+    public function checkOutPriv()
+    {
+        if($this->app->user->admin == 'super') return true;
+
+        $rights = $this->app->user->rights;
+        if(!isset($rights['trade']['out']))
+        {
+            $locate = helper::createLink('cash.index');
+            $errorLink = helper::createLink('sys.error', 'index', "type=accessLimited&locate={$locate}");
+            die(js::locate($errorLink));
+        }
+    }
 }

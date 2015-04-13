@@ -246,7 +246,7 @@ class commonModel extends model
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
-            if(strpos(',tree,setting,schema,sales,', $module) != false) 
+            if(strpos(',tree,setting,schema,sales,group,', $module) != false) 
             {
                 if(isset($lang->setting->menu)) 
                 {
@@ -294,7 +294,7 @@ class commonModel extends model
         if(!isset($lang->$currentModule->menu)) return false;
 
         $string = "<nav id='menu'><ul class='nav'>\n";
-        if(strpos(',setting, tree, schema, sales,', $currentModule)) $string = "<nav class='menu leftmenu affix'><ul class='nav nav-primary'>\n";
+        if(strpos(',setting, tree, schema, sales, group,', $currentModule)) $string = "<nav class='menu leftmenu affix'><ul class='nav nav-primary'>\n";
 
         /* Get menus of current module and current method. */
         $moduleMenus   = $lang->$currentModule->menu;  
@@ -320,6 +320,11 @@ class commonModel extends model
 
             if(commonModel::hasPriv($module, $method))
             {
+                if($module == 'trade' and $method == 'browse' and $vars == 'mode=out')
+                {
+                    if(!commonModel::hasPriv('trade', 'out')) continue;
+                }
+
                 $class = '';
                 if($module == $currentModule && $method == $currentMethod) $class = " class='active'";
                 if($module == $currentModule && strpos($methodAlias, $currentMethod) !== false) $class = " class='active'";
