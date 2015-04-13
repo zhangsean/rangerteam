@@ -24,10 +24,17 @@ $(document).ready(function()
     {
         if(response.result == 'fail')
         {
-            $('.popover').html(response.message);
-            $('#submit').popover({trigger:'manual', placement:'right'}).popover('show');
-            $('#submit').next('.popover').addClass('popover-content');
-            return false;
+            if(response.error && response.error.length)
+            {
+                $('#duplicateError').html($('.errorMessage').html());
+                $('#duplicateError .alert').prepend(response.error).show();
+
+                $(document).on('click', '#duplicateError #continueSubmit', function()
+                {
+                    $('#duplicateError').append("<input value='1' name='continue' class='hide'>");
+                    $('#submit').attr('type', 'button');
+                })
+            }
         }
         else
         {

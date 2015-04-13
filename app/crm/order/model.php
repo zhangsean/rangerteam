@@ -264,10 +264,10 @@ class orderModel extends model
             ->setDefault('assignedDate', $now)
             ->join('product', ',')
             ->setIF($this->post->createCustomer, 'customer', isset($customerID) ? $customerID : '')
-            ->remove('createCustomer, name, contact, phone, email, qq')
+            ->remove('createCustomer, name, contact, phone, email, qq, continue')
             ->get();
 
-        $order->product = $order->product ? ',' . $order->product . ',' : '';
+        $order->product = !empty($order->product) ? ',' . $order->product . ',' : '';
 
         $this->dao->insert(TABLE_ORDER)
             ->data($order)

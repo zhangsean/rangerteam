@@ -240,8 +240,8 @@ class contactModel extends model
             ->data($contact, 'customer,title,dept,maker,join,continue')
             ->autoCheck()
             ->batchCheck($this->config->contact->require->create, 'notempty')
-            ->checkIF($contact->email, 'email', 'email')
-            ->checkIF($contact->phone, 'phone', 'length', 20, 7)
+            ->checkIF(!empty($contact->email), 'email', 'email')
+            ->checkIF(!empty($contact->phone), 'phone', 'length', 20, 7)
             ->exec();
 
         if(!dao::isError())
@@ -262,7 +262,7 @@ class contactModel extends model
 
             $result = $this->updateAvatar($contactID);
             $message = $result['result'] ? $this->lang->saveSuccess : $result['message'];
-            return array('result' => 'success', 'message' => $message, 'locate' => helper::createLink('contact', 'browse'));
+            return array('result' => 'success', 'message' => $message, 'locate' => helper::createLink('contact', 'browse'), 'contactID' => $contactID);
         }
 
         return array('result' => 'fail', 'message' => dao::getError());

@@ -84,11 +84,18 @@
       <td>
         <div class='col-sm-12'>
           <?php echo html::submitButton() . html::hidden('customer', $customer);?>
+          <div id='duplicateError' class='hide'></div>
         </div>
       </td>
     </tr>
   </table>
   <?php echo $this->fetch('action', 'history', "objectType={$objectType}&objectID={$objectID}&action=record&from=createRecord");?>
 </form>
+</div>
+<div class='errorMessage hide'>
+  <div class='alert alert-danger alert-dismissable'>
+    <button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
+    <button type='submit' class='btn btn-default' id='continueSubmit'><?php echo $lang->continueSave;?></button>
+  </div>
 </div>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

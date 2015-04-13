@@ -78,8 +78,15 @@ class action extends control
                 $contact->realname = $this->post->realname;
                 $contact->customer = $objectID;
                 $contact->email    = '';
-                $contactID = $this->loadModel('contact', 'crm')->create($contact);
-                $this->post->set('contact', $contactID);
+                $return = $this->loadModel('contact', 'crm')->create($contact);
+                if($return['result'] == 'success')
+                {
+                    $this->post->set('contact', $return['contactID']);
+                }
+                else
+                {
+                    $this->send($return);
+                }
             }
 
             $this->action->createRecord($objectType, $objectID, $customer, $this->post->contact);

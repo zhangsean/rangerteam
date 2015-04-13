@@ -69,11 +69,17 @@
           <th></th>
           <td>
             <?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?>
-            <div class='popover'></div> 
+            <div id='duplicateError' class='hide'></div>
           </td>
         </tr>
       </table>
     </form>
+  </div>
+</div>
+<div class='errorMessage hide'>
+  <div class='alert alert-danger alert-dismissable'>
+    <button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
+    <button type='submit' class='btn btn-default' id='continueSubmit'><?php echo $lang->continueSave;?></button>
   </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>
