@@ -87,10 +87,10 @@ class resumeModel extends model
                 $customer->createdBy   = $this->app->user->account;
                 $customer->createdDate = helper::now();
 
-                $customerID = $this->loadModel('customer')->create($customer);
+                $return = $this->loadModel('customer')->create($customer);
+                if($return['result'] == 'fail') return false;
 
-                if(dao::isError()) return false;
-                $resume->customer = $customerID;
+                $resume->customer = $return['customerID'];
                 $this->loadModel('action')->create('customer', $resume->customer, 'Created');
             }
         }
