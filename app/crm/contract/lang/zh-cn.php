@@ -18,6 +18,7 @@ $lang->contract->customer      = '所属客户';
 $lang->contract->name          = '名称';
 $lang->contract->code          = '编号';
 $lang->contract->amount        = '金额';
+$lang->contract->currency      = '货币类型';
 $lang->contract->all           = '合同总额';
 $lang->contract->thisAmount    = '本次回款';
 $lang->contract->items         = '主要条款';
@@ -43,6 +44,9 @@ $lang->contract->createdDate   = '创建时间';
 $lang->contract->editedBy      = '最后修改';
 $lang->contract->editedDate    = '最后修改时间';
 $lang->contract->handlers      = '经手人';
+$lang->contract->contactedBy   = '由谁联系';
+$lang->contract->contactedDate = '最后联系';
+$lang->contract->nextDate      = '下次联系';
 
 $lang->contract->browse           = '浏览合同';
 $lang->contract->receive          = '回款';

@@ -52,3 +52,11 @@ $config->contract->search['params']['return']        = array('operator' => '=', 
 $config->contract->search['params']['returnedBy']    = array('operator' => '=',  'control' => 'select', 'values' => 'users');
 $config->contract->search['params']['returnedDate']  = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->contract->search['params']['id']            = array('operator' => '=',  'control' => 'input',  'values' => '');
+
+$config->contract->list = new stdclass();
+$config->contract->list->exportFields = '
+  id, customer, order, name, code, amount, currency, begin, end,
+  delivery, return, status, contact, handlers, signedBy, signedDate,
+  deliveredBy, deliveredDate, returnedBy, returnedDate, finishedBy, finishedDate,
+  canceledBy, canceledDate, createdBy, createdDate, editedBy, editedDate,
+  contactedBy, contactedDate, nextDate, items, files';

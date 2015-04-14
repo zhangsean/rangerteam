@@ -14,6 +14,13 @@
 <?php js::set('mode', $mode);?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
+  <div class='btn-group'>
+    <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><i class='icon-upload-alt'></i> <?php echo $lang->export;?><span class='caret'></span></button>
+    <ul id='exportActionMenu' class='dropdown-menu'>
+      <li><?php commonModel::printLink('contract', 'export', "mode=all&orderBy={$orderBy}", $lang->exportAll, "class='iframe' data-width='700'");?></li>
+      <li><?php commonModel::printLink('contract', 'export', "mode=thispage&orderBy={$orderBy}&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}", $lang->exportThisPage, "class='iframe' data-width='700'");?></li>
+    </ul>
+  </div>
   <?php commonModel::printLink('contract', 'create', '', '<i class="icon-plus"></i> ' . $lang->contract->create, "class='btn btn-primary'");?>
 </div>
 <div class='panel'>

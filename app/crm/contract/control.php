@@ -500,4 +500,150 @@ class contract extends control
         foreach($options as $value => $text) echo "<option value='{$value}'>{$text}</option>";
         exit;
     }
+
+    /**
+     * get data to export.
+     * 
+     * @param  string $mode 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function export($mode, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    { 
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        if($mode == 'all') $pager = null;
+
+        if($_POST)
+        {
+            $contractLang   = $this->lang->contract;
+            $contractConfig = $this->config->contract;
+
+            /* Create field lists. */
+            $fields = explode(',', $contractConfig->list->exportFields);
+            foreach($fields as $key => $fieldName)
+            {
+                $fieldName = trim($fieldName);
+                $fields[$fieldName] = isset($contractLang->$fieldName) ? $contractLang->$fieldName : $fieldName;
+                unset($fields[$key]);
+            }
+
+            $contracts = $this->dao->select('*')->from(TABLE_CONTRACT)->where('deleted')->eq(0)->orderBy($orderBy)->page($pager)->fetchAll('id');
+
+            $users        = $this->loadModel('user')->getPairs('noletter');
+            $customers    = $this->loadModel('customer')->getPairs();
+            $contacts     = $this->loadModel('contact')->getPairs();
+            $relatedFiles = $this->dao->select('id, objectID, pathname, title')->from(TABLE_FILE)->where('objectType')->eq('contract')->andWhere('objectID')->in(@array_keys($contracts))->fetchGroup('objectID');
+
+            $contractOrderList = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->fetchGroup('contract');
+            foreach($contracts as $id => $contract)
+            {
+                $contract->order = array();
+                if($contractOrderList[$id])
+                {
+                    foreach($contractOrderList[$id] as $contractOrder)
+                    {
+                        $contract->order[] = $contractOrder->order;
+                    }
+                }
+            }
+
+            /* Get related products names. */
+            $orderPairs = array();
+            $orders = $this->dao->select('*')->from(TABLE_ORDER)->fetchAll('id');
+            $this->loadModel('order')->setProductsForOrders($orders);
+            foreach($orders as $key => $order)
+            {
+                $productName = count($order->products) > 1 ? current($order->products) . $this->lang->etc : current($order->products);
+                $orderPairs[$key] = sprintf($this->lang->order->titleLBL, $customers[$order->customer], $productName, date('Y-m-d', strtotime($order->createdDate))); 
+            }
+
+            foreach($contracts as $contract)
+            {
+                $contract->items = htmlspecialchars_decode($contract->items);
+                $contract->items = str_replace("<br />", "\n", $contract->items);
+                $contract->items = str_replace('"', '""', $contract->items);
+
+                /* fill some field with useful value. */
+                if(isset($customers[$contract->customer])) $contract->customer = $customers[$contract->customer] . "(#$contract->customer)";
+                if(isset($contacts[$contract->contact]))   $contract->contact  = $contacts[$contract->contact] . "(#$contract->contact)";
+
+                if(isset($contractLang->statusList[$contract->status]))     $contract->status   = $contractLang->statusList[$contract->status];
+                if(isset($contractLang->deliveryList[$contract->delivery])) $contract->delivery = $contractLang->deliveryList[$contract->delivery];
+                if(isset($contractLang->returnList[$contract->return]))     $contract->return   = $contractLang->returnList[$contract->return];
+                if(isset($this->lang->currencyList[$contract->currency]))   $contract->currency = $this->lang->currencyList[$contract->currency];
+
+                if(isset($users[$contract->createdBy]))   $contract->createdBy   = $users[$contract->createdBy];
+                if(isset($users[$contract->editedBy]))    $contract->editedBy    = $users[$contract->editedBy];
+                if(isset($users[$contract->signedBy]))    $contract->signedBy    = $users[$contract->signedBy];
+                if(isset($users[$contract->deliveredBy])) $contract->deliveredBy = $users[$contract->deliveredBy];
+                if(isset($users[$contract->returnedBy]))  $contract->returnedBy  = $users[$contract->returnedBy];
+                if(isset($users[$contract->finishedBy]))  $contract->finishedBy  = $users[$contract->finishedBy];
+                if(isset($users[$contract->canceledBy]))  $contract->canceledBy  = $users[$contract->canceledBy];
+                if(isset($users[$contract->contactedBy])) $contract->contactedBy = $users[$contract->contactedBy];
+
+                $contract->begin          = substr($contract->begin, 0, 10);
+                $contract->end            = substr($contract->end, 0, 10);
+                $contract->createdDate    = substr($contract->createdDate, 0, 10);
+                $contract->editedDate     = substr($contract->editedDate, 0, 10);
+                $contract->signedDate     = substr($contract->signedDate, 0, 10);
+                $contract->deliveredDate  = substr($contract->deliveredDate, 0, 10);
+                $contract->returnedDate   = substr($contract->returnedDate, 0, 10);
+                $contract->finishedDate   = substr($contract->finishedDate, 0, 10);
+                $contract->canceledDate   = substr($contract->canceledDate, 0, 10);
+                $contract->contactedDate  = substr($contract->contactedDate, 0, 10);
+                $contract->nextDate       = substr($contract->contactedDate, 0, 10);
+
+                if($contract->handlers)
+                {
+                    $tmpHandlers = array();
+                    $handlers = explode(',', $contract->handlers);
+                    foreach($handlers as $handler)
+                    {
+                        if(!$handler) continue;
+                        $handler = trim($handler);
+                        $tmpHandlers[] = isset($users[$handler]) ? $users[$handler] : $handler;
+                    }
+
+                    $contract->handlers = join("; \n", $tmpHandlers);
+                }
+
+                if(!empty($contract->order))
+                {
+                    $tmpOrders = array();
+                    foreach($contract->order as $orderID)
+                    {
+                        if(!$orderID) continue;
+                        $orderID = trim($orderID);
+                        $tmpOrders[] = isset($orderPairs[$orderID]) ? $orderPairs[$orderID] : $orderID;
+                    }
+
+                    $contract->order = join("; \n", $tmpOrders);
+                }
+
+                /* Set related files. */
+                $contract->files = '';
+                if(isset($relatedFiles[$contract->id]))
+                {
+                    foreach($relatedFiles[$contract->id] as $file)
+                    {
+                        $fileURL = 'http://' . $this->server->http_host . $this->config->webRoot . "data/upload/" . $file->pathname;
+                        $contract->files .= html::a($fileURL, $file->title, '_blank') . '<br />';
+                    }
+                }
+            }
+
+            $this->post->set('fields', $fields);
+            $this->post->set('rows', $contracts);
+            $this->post->set('kind', 'contract');
+            $this->fetch('file', 'export2CSV' , $_POST);
+        }
+
+        $this->display();
+    }
 }

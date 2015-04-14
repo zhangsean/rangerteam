@@ -18,6 +18,7 @@ $lang->contract->customer      = 'Customer';
 $lang->contract->name          = 'Name';
 $lang->contract->code          = 'Code';
 $lang->contract->amount        = 'Amount';
+$lang->contract->currency      = 'Currency';
 $lang->contract->all           = 'Total amount';
 $lang->contract->thisAmount    = 'This amount';
 $lang->contract->items         = 'Main items';
@@ -43,6 +44,9 @@ $lang->contract->createdDate   = 'Created Date';
 $lang->contract->editedBy      = 'Edited By';
 $lang->contract->editedDate    = 'Edited Date';
 $lang->contract->handlers      = 'Handlers';
+$lang->contract->contactedBy   = 'Contacted By';
+$lang->contract->contactedDate = 'Contacted Date';
+$lang->contract->nextDate      = 'Next Date';
 
 $lang->contract->browse           = 'Browse Contract';
 $lang->contract->receive          = 'Receive';
