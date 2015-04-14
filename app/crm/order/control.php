@@ -336,9 +336,13 @@ class order extends control
     }
 
     /**
-     * get data to export
+     * get data to export.
      * 
+     * @param  string $mode 
      * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
      * @access public
      * @return void
      */
@@ -363,9 +367,7 @@ class order extends control
                 unset($fields[$key]);
             }
 
-            /* Get orders. */
-            $orders = array();
-            $orders = $this->dao->select('*')->from(TABLE_ORDER)->orderBy($orderBy)->page($pager)->fetchAll('id');
+            $orders = $this->dao->select('*')->from(TABLE_ORDER)->where('deleted')->eq(0)->orderBy($orderBy)->page($pager)->fetchAll('id');
 
             /* Get users, products and projects. */
             $users     = $this->loadModel('user')->getPairs('noletter');
@@ -391,18 +393,19 @@ class order extends control
             foreach($orders as $order)
             {
                 /* fill some field with useful value. */
-                if(isset($customers[$order->customer])) $order->customer = $customers[$order->customer] . "(#$order->customer)";
-                if(isset($orderLang->statusList[$order->status])) $order->status = $orderLang->statusList[$order->status];
+                if(isset($customers[$order->customer]))                       $order->customer     = $customers[$order->customer] . "(#$order->customer)";
+                if(isset($orderLang->statusList[$order->status]))             $order->status       = $orderLang->statusList[$order->status];
                 if(isset($orderLang->closedReasonList[$order->closedReason])) $order->closedReason = $orderLang->closedReasonList[$order->closedReason];
+                if(isset($this->lang->currencyList[$order->currency]))        $order->currency     = $this->lang->currencyList[$order->currency];
 
-                if(isset($users[$order->createdBy]))    $order->createdBy    = $users[$order->createdBy];
-                if(isset($users[$order->editedBy]))     $order->editedBy     = $users[$order->editedBy];
-                if(isset($users[$order->assignedTo]))   $order->assignedTo   = $users[$order->assignedTo];
-                if(isset($users[$order->assignedBy]))   $order->assignedBy   = $users[$order->assignedBy];
-                if(isset($users[$order->signedBy]))     $order->signedBy     = $users[$order->signedBy];
-                if(isset($users[$order->activatedBy]))  $order->activatedBy  = $users[$order->activatedBy];
-                if(isset($users[$order->contactedBy]))  $order->contactedBy  = $users[$order->contactedBy];
-                if(isset($users[$order->closedBy]))     $order->closedBy     = $users[$order->closedBy]; 
+                if(isset($users[$order->createdBy]))   $order->createdBy   = $users[$order->createdBy];
+                if(isset($users[$order->editedBy]))    $order->editedBy    = $users[$order->editedBy];
+                if(isset($users[$order->assignedTo]))  $order->assignedTo  = $users[$order->assignedTo];
+                if(isset($users[$order->assignedBy]))  $order->assignedBy  = $users[$order->assignedBy];
+                if(isset($users[$order->signedBy]))    $order->signedBy    = $users[$order->signedBy];
+                if(isset($users[$order->activatedBy])) $order->activatedBy = $users[$order->activatedBy];
+                if(isset($users[$order->contactedBy])) $order->contactedBy = $users[$order->contactedBy];
+                if(isset($users[$order->closedBy]))    $order->closedBy    = $users[$order->closedBy]; 
 
                 $order->createdDate    = substr($order->createdDate, 0, 10);
                 $order->editedDate     = substr($order->editedDate, 0, 10);

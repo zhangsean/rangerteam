@@ -70,4 +70,4 @@ $config->order->list->exportFields = '
   status, createdBy, createdDate, editedBy, editedDate,
   assignedTo, assignedBy, assignedDate, signedBy, signedDate,
   closedBy, closedDate, closedReason, activatedBy, activatedDate,
-  contactedBy, contactedDate, nextDate, deleted';
+  contactedBy, contactedDate, nextDate';
