@@ -374,22 +374,6 @@ class order extends control
             $products  = $this->loadModel('product')->getPairs();
             $customers = $this->loadModel('customer')->getPairs();
 
-            /* Get related products id lists. */
-            $relatedProductIdList = array();
-
-            foreach($orders as $order)
-            {
-                /* Process related stories. */
-                $relatedProducts = explode(',', $order->product);
-                foreach($relatedProducts as $productID)
-                {
-                    if($productID) $relatedProductIdList[$productID] = trim($productID);
-                }
-            }
-
-            /* Get related products names. */
-            $relatedProducts = $this->dao->select('id, name')->from(TABLE_PRODUCT)->where('id')->in($relatedProductIdList)->fetchPairs();
-
             foreach($orders as $order)
             {
                 /* fill some field with useful value. */
