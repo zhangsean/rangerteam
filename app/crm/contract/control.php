@@ -512,12 +512,12 @@ class contract extends control
      * @access public
      * @return void
      */
-    public function export($mode, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function export($range = 'all', $mode, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     { 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        if($mode == 'all') $pager = null;
+        if($range == 'all') $pager = null;
 
         if($_POST)
         {
@@ -533,7 +533,7 @@ class contract extends control
                 unset($fields[$key]);
             }
 
-            $contracts = $this->dao->select('*')->from(TABLE_CONTRACT)->where('deleted')->eq(0)->orderBy($orderBy)->page($pager)->fetchAll('id');
+            $contracts = $this->contract->getList(0, $mode, $orderBy, $pager);
 
             $users        = $this->loadModel('user')->getPairs('noletter');
             $customers    = $this->loadModel('customer')->getPairs();

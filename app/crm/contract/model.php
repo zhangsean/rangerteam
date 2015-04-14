@@ -70,7 +70,7 @@ class contractModel extends model
             ->beginIF($mode == 'bysearch')->andWhere($contractQuery)->fi()
             ->orderBy($orderBy)
             ->page($pager)
-            ->fetchAll();
+            ->fetchAll('id');
     }
 
     /**
