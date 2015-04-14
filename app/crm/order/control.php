@@ -334,4 +334,105 @@ class order extends control
         $this->loadModel('mail')->send($toList, 'ORDER#' . $order->id . $this->lang->colon . $order->title, $mailContent);
         if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
+
+    /**
+     * get data to export
+     * 
+     * @param  string $orderBy 
+     * @access public
+     * @return void
+     */
+    public function export($mode, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    { 
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        if($mode == 'all') $pager = null;
+
+        if($_POST)
+        {
+            $orderLang   = $this->lang->order;
+            $orderConfig = $this->config->order;
+
+            /* Create field lists. */
+            $fields = explode(',', $orderConfig->list->exportFields);
+            foreach($fields as $key => $fieldName)
+            {
+                $fieldName = trim($fieldName);
+                $fields[$fieldName] = isset($orderLang->$fieldName) ? $orderLang->$fieldName : $fieldName;
+                unset($fields[$key]);
+            }
+
+            /* Get orders. */
+            $orders = array();
+            $orders = $this->dao->select('*')->from(TABLE_ORDER)->orderBy($orderBy)->page($pager)->fetchAll('id');
+
+            /* Get users, products and projects. */
+            $users     = $this->loadModel('user')->getPairs('noletter');
+            $products  = $this->loadModel('product')->getPairs();
+            $customers = $this->loadModel('customer')->getPairs();
+
+            /* Get related products id lists. */
+            $relatedProductIdList = array();
+
+            foreach($orders as $order)
+            {
+                /* Process related stories. */
+                $relatedProducts = explode(',', $order->product);
+                foreach($relatedProducts as $productID)
+                {
+                    if($productID) $relatedProductIdList[$productID] = trim($productID);
+                }
+            }
+
+            /* Get related products names. */
+            $relatedProducts = $this->dao->select('id, name')->from(TABLE_PRODUCT)->where('id')->in($relatedProductIdList)->fetchPairs();
+
+            foreach($orders as $order)
+            {
+                /* fill some field with useful value. */
+                if(isset($customers[$order->customer])) $order->customer = $customers[$order->customer] . "(#$order->customer)";
+                if(isset($orderLang->statusList[$order->status])) $order->status = $orderLang->statusList[$order->status];
+                if(isset($orderLang->closedReasonList[$order->closedReason])) $order->closedReason = $orderLang->closedReasonList[$order->closedReason];
+
+                if(isset($users[$order->createdBy]))    $order->createdBy    = $users[$order->createdBy];
+                if(isset($users[$order->editedBy]))     $order->editedBy     = $users[$order->editedBy];
+                if(isset($users[$order->assignedTo]))   $order->assignedTo   = $users[$order->assignedTo];
+                if(isset($users[$order->assignedBy]))   $order->assignedBy   = $users[$order->assignedBy];
+                if(isset($users[$order->signedBy]))     $order->signedBy     = $users[$order->signedBy];
+                if(isset($users[$order->activatedBy]))  $order->activatedBy  = $users[$order->activatedBy];
+                if(isset($users[$order->contactedBy]))  $order->contactedBy  = $users[$order->contactedBy];
+                if(isset($users[$order->closedBy]))     $order->closedBy     = $users[$order->closedBy]; 
+
+                $order->createdDate    = substr($order->createdDate, 0, 10);
+                $order->editedDate     = substr($order->editedDate, 0, 10);
+                $order->assignedDate   = substr($order->assignedDate, 0, 10);
+                $order->signedDate     = substr($order->signedDate, 0, 10);
+                $order->activatedDate  = substr($order->activatedDate, 0, 10);
+                $order->contactedDate  = substr($order->contactedDate, 0, 10);
+                $order->nextDate       = substr($order->contactedDate, 0, 10);
+                $order->closedDate     = substr($order->closedDate, 0, 10);
+
+                if($order->product)
+                {
+                    $tmpProducts = array();
+                    $productIdList = explode(',', $order->product);
+                    foreach($productIdList as $productID)
+                    {
+                        if(!$productID) continue;
+                        $productID = trim($productID);
+                        $tmpProducts[] = isset($relatedProducts[$productID]) ? $relatedProducts[$productID] : $productID;
+                    }
+                    $order->product = join("; \n", $tmpProducts);
+                }
+            }
+
+            $this->post->set('fields', $fields);
+            $this->post->set('rows', $orders);
+            $this->post->set('kind', 'order');
+            $this->fetch('file', 'export2CSV' , $_POST);
+        }
+
+        $this->display();
+    }
 }

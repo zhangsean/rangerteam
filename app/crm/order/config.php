@@ -63,3 +63,11 @@ $config->order->search['params']['o.closedDate']    = array('operator' => '>=', 
 $config->order->search['params']['o.closedReason']  = array('operator' => '=',  'control' => 'select', 'values' => $lang->order->closedReasonList);
 $config->order->search['params']['o.editedBy']      = array('operator' => '=',  'control' => 'select', 'values' => 'users');
 $config->order->search['params']['o.editedDate']    = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
+
+$config->order->list = new stdclass();
+$config->order->list->exportFields = '
+  id, product, customer, plan, real, currency,
+  status, createdBy, createdDate, editedBy, editedDate,
+  assignedTo, assignedBy, assignedDate, signedBy, signedDate,
+  closedBy, closedDate, closedReason, activatedBy, activatedDate,
+  contactedBy, contactedDate, nextDate, deleted';

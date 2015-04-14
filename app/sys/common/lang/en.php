@@ -86,6 +86,9 @@ $lang->delete         = 'Delete';
 $lang->close          = 'Close';
 $lang->finish         = 'Finish';
 $lang->cancel         = 'Cancel';
+$lang->import         = 'Import';
+$lang->export         = 'Export';
+$lang->setFileName    = 'File Name:';
 $lang->save           = 'Save';
 $lang->saved          = 'Saved';
 $lang->confirm        = 'Confirm';
@@ -120,6 +123,9 @@ $lang->selectAll      = 'All';
 $lang->selectReverse  = 'Inverse';
 $lang->continueSave   = 'Continue To Save';
 $lang->submitting     = 'Saving...';
+
+$lang->exportAll      = 'Export All';
+$lang->exportThisPage = 'Export This Page';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();

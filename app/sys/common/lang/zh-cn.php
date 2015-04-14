@@ -86,6 +86,9 @@ $lang->delete         = '删除';
 $lang->close          = '关闭';
 $lang->finish         = '完成';
 $lang->cancel         = '取消';
+$lang->import         = '导入';
+$lang->export         = '导出';
+$lang->setFileName    = '文件名：';
 $lang->save           = '保存';
 $lang->saved          = '已保存';
 $lang->confirm        = '确认';
@@ -120,6 +123,9 @@ $lang->selectAll      = '全选';
 $lang->selectReverse  = '反选';
 $lang->continueSave   = '继续保存';
 $lang->submitting     = '稍候...';
+
+$lang->exportAll      = '导出全部记录';
+$lang->exportThisPage = '导出本页记录';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();
