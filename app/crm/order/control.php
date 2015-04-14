@@ -346,12 +346,12 @@ class order extends control
      * @access public
      * @return void
      */
-    public function export($mode, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function export($range = 'all', $mode, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     { 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        if($mode == 'all') $pager = null;
+        if($range == 'all') $pager = null;
 
         if($_POST)
         {
@@ -367,7 +367,7 @@ class order extends control
                 unset($fields[$key]);
             }
 
-            $orders = $this->dao->select('*')->from(TABLE_ORDER)->where('deleted')->eq(0)->orderBy($orderBy)->page($pager)->fetchAll('id');
+            $orders = $this->order->getList($mode, '', $orderBy, $pager);
 
             /* Get users, products and projects. */
             $users     = $this->loadModel('user')->getPairs('noletter');
@@ -393,7 +393,6 @@ class order extends control
             foreach($orders as $order)
             {
                 /* fill some field with useful value. */
-                if(isset($customers[$order->customer]))                       $order->customer     = $customers[$order->customer] . "(#$order->customer)";
                 if(isset($orderLang->statusList[$order->status]))             $order->status       = $orderLang->statusList[$order->status];
                 if(isset($orderLang->closedReasonList[$order->closedReason])) $order->closedReason = $orderLang->closedReasonList[$order->closedReason];
                 if(isset($this->lang->currencyList[$order->currency]))        $order->currency     = $this->lang->currencyList[$order->currency];
@@ -416,18 +415,8 @@ class order extends control
                 $order->nextDate       = substr($order->contactedDate, 0, 10);
                 $order->closedDate     = substr($order->closedDate, 0, 10);
 
-                if($order->product)
-                {
-                    $tmpProducts = array();
-                    $productIdList = explode(',', $order->product);
-                    foreach($productIdList as $productID)
-                    {
-                        if(!$productID) continue;
-                        $productID = trim($productID);
-                        $tmpProducts[] = isset($relatedProducts[$productID]) ? $relatedProducts[$productID] : $productID;
-                    }
-                    $order->product = join("; \n", $tmpProducts);
-                }
+                $order->customer = $order->customerName;
+                if(!empty($order->products)) $order->product = join("; \n", $order->products);
             }
 
             $this->post->set('fields', $fields);
