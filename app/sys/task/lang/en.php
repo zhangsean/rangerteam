@@ -23,6 +23,7 @@ $lang->task->cancel   = 'Cancel';
 $lang->task->close    = 'Close';
 $lang->task->assignTo = 'Assign to';
 $lang->task->delete   = 'Delete';
+$lang->task->export   = 'Export';
 
 $lang->task->batchCreate    = 'Batch Create';
 $lang->task->backToProjects = 'Back to project list'; 
@@ -52,6 +53,8 @@ $lang->task->createdBy      = 'Created By';
 $lang->task->createdByAB    = 'Create';
 $lang->task->createdDate    = 'Create Date';
 $lang->task->createdDateAB  = 'Create';
+$lang->task->editedBy       = 'Edited By';
+$lang->task->editedDate     = 'Edited Date';
 $lang->task->assignedTo     = 'Assigned To';
 $lang->task->assignedDate   = 'Assigned Date';
 $lang->task->estStarted     = 'Estimate start';

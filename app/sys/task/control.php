@@ -444,6 +444,8 @@ class task extends control
         if($groupBy == 'assignedTo' or $groupBy == 'createdBy') $orderBy = 'status';
 
         $tasks = $this->task->getList($projectID, $mode = null, $orderBy, $pager = null, $groupBy);
+        $this->session->set('taskQueryCondition', $this->dao->get());
+
         $tasks = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
 
         $this->view->tasks       = $tasks;
@@ -483,6 +485,8 @@ class task extends control
 
         /* Get tasks and group them. */
         $tasks = $this->task->getList($projectID, $mode = null, $orderBy, $pager = null, $groupBy);
+        $this->session->set('taskQueryCondition', $this->dao->get());
+
         $tasks = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
 
         $this->view->tasks     = $tasks;
@@ -550,5 +554,91 @@ class task extends control
         /* Send emails. */
         $this->loadModel('mail')->send($toList, $projectName . ':' . 'TASK#' . $task->id . $this->lang->colon . $task->name, $mailContent, $ccList);
         if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
+    }
+
+    /**
+     * get data to export.
+     * 
+     * @param  int $projectID 
+     * @param  string $orderBy 
+     * @access public
+     * @return void
+     */
+    public function export($mode, $projectID, $orderBy = 'id_desc')
+    {
+        if($_POST)
+        {
+            $taskLang   = $this->lang->task;
+            $taskConfig = $this->config->task;
+
+            /* Create field lists. */
+            $fields = explode(',', $taskConfig->exportFields);
+            foreach($fields as $key => $fieldName)
+            {
+                $fieldName = trim($fieldName);
+                $fields[$fieldName] = isset($taskLang->$fieldName) ? $taskLang->$fieldName : $fieldName;
+                unset($fields[$key]);
+            }
+
+            /* Get tasks. */
+            $tasks = array();
+            if($mode == 'all')$tasks = $this->dao->select('*')->from(TABLE_TASK)->where('deleted')->eq(0)->andWhere('project')->eq($projectID)->orderBy($orderBy)->fetchAll('id');
+            if($mode == 'thisPage')
+            {
+                $stmt = $this->dbh->query($this->session->taskQueryCondition);
+                while($row = $stmt->fetch()) $tasks[$row->id] = $row;
+            }
+
+            /* Get users and projects. */
+            $users    = $this->loadModel('user')->getPairs('noletter');
+            $projects = $this->loadModel('project')->getPairs();
+
+            $relatedFiles = $this->dao->select('id, objectID, pathname, title')->from(TABLE_FILE)->where('objectType')->eq('task')->andWhere('objectID')->in(@array_keys($tasks))->fetchGroup('objectID');
+
+            foreach($tasks as $task)
+            {
+                $task->desc = htmlspecialchars_decode($task->desc);
+                $task->desc = str_replace("<br />", "\n", $task->desc);
+                $task->desc = str_replace('"', '""', $task->desc);
+
+                if(isset($projects[$task->project]))                  $task->project      = $projects[$task->project] . "(#$task->project)";
+                if(isset($taskLang->typeList[$task->type]))           $task->type         = $taskLang->typeList[$task->type];
+                if(isset($taskLang->priList[$task->pri]))             $task->pri          = $taskLang->priList[$task->pri];
+                if(isset($taskLang->statusList[$task->status]))       $task->status       = $taskLang->statusList[$task->status];
+                if(isset($taskLang->reasonList[$task->closedReason])) $task->closedReason = $taskLang->reasonList[$task->closedReason];
+
+                if(isset($users[$task->createdBy]))  $task->createdBy  = $users[$task->createdBy];
+                if(isset($users[$task->assignedTo])) $task->assignedTo = $users[$task->assignedTo];
+                if(isset($users[$task->finishedBy])) $task->finishedBy = $users[$task->finishedBy];
+                if(isset($users[$task->canceledBy])) $task->canceledBy = $users[$task->canceledBy];
+                if(isset($users[$task->closedBy]))   $task->closedBy   = $users[$task->closedBy];
+                if(isset($users[$task->editedBy]))   $task->editedBy   = $users[$task->editedBy];
+
+                $task->createdDate  = substr($task->createdDate,  0, 10);
+                $task->assignedDate = substr($task->assignedDate, 0, 10);
+                $task->finishedDate = substr($task->finishedDate, 0, 10);
+                $task->canceledDate = substr($task->canceledDate, 0, 10);
+                $task->closedDate   = substr($task->closedDate,   0, 10);
+                $task->editedDate   = substr($task->editedDate,   0, 10);
+
+                /* Set related files. */
+                if(isset($relatedFiles[$task->id]))
+                {
+                    $task->files = '';
+                    foreach($relatedFiles[$task->id] as $file)
+                    {
+                        $fileURL = 'http://' . $this->server->http_host . $this->config->webRoot . "data/upload/" . $file->pathname;
+                        $task->files .= html::a($fileURL, $file->title, '_blank') . '<br />';
+                    }
+                }
+            }
+
+            $this->post->set('fields', $fields);
+            $this->post->set('rows', $tasks);
+            $this->post->set('kind', 'task');
+            $this->fetch('file', 'export2CSV', $_POST);
+        }
+
+        $this->display();
     }
 }

@@ -11,7 +11,7 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
-<?php $this->loadModel('project')->setMenu($projects, $projectID);?>
+<?php $this->loadModel('project')->setMenu($projects, $projectID, $orderBy);?>
 <?php js::set('groupBy', $groupBy);?>
 <div class='with-menu page-content'>
   <div class='panel'>

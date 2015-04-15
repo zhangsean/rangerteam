@@ -23,6 +23,7 @@ $lang->task->cancel   = '取消任务';
 $lang->task->close    = '关闭任务';
 $lang->task->assignTo = '指派任务';
 $lang->task->delete   = '删除任务';
+$lang->task->export   = '导出任务';
 
 $lang->task->batchCreate    = '批量添加';
 $lang->task->backToProjects = '返回项目列表'; 
@@ -52,6 +53,8 @@ $lang->task->createdBy      = '由谁创建';
 $lang->task->createdByAB    = '创建者';
 $lang->task->createdDate    = '创建日期';
 $lang->task->createdDateAB  = '创建';
+$lang->task->editedBy       = '由谁编辑';
+$lang->task->editedDate     = '编辑时间';
 $lang->task->assignedTo     = '指派给';
 $lang->task->assignedDate   = '指派日期';
 $lang->task->estStarted     = '预计开始';

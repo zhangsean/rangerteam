@@ -13,7 +13,7 @@
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php js::set('notAllowed', $lang->task->notAllowed);?>
 <?php js::set('groupBy', $groupBy);?>
-<?php $this->loadModel('project')->setMenu($projects, $projectID);?>
+<?php $this->loadModel('project')->setMenu($projects, $projectID, $orderBy);?>
 <div class='with-menu page-content'>
   <div class='boards-container'>
     <div class='boards task-boards clearfix' id='taskKanban'>

@@ -45,3 +45,13 @@ $config->task->search['params']['status']      = array('operator' => '=',  'cont
 $config->task->search['params']['createdDate'] = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->task->search['params']['consumed']    = array('operator' => '>=', 'control' => 'input',  'values' => '');
 $config->task->search['params']['id']          = array('operator' => '=',  'control' => 'input',  'values' => '');
+
+$config->task->exportFields = '
+    id, project, name, desc,
+    type, pri, estStarted, realStarted, estimate, consumed, left, deadline, status,
+    mailto,
+    createdBy, createdDate, assignedTo, assignedDate, 
+    finishedBy, finishedDate, canceledBy, canceledDate,
+    closedBy, closedDate, closedReason,
+    editedBy, editedDate,
+    files';
