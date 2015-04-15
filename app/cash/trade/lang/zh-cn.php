@@ -34,6 +34,10 @@ $lang->trade->transferOut = '转出金额';
 $lang->trade->schema      = '模板';
 $lang->trade->importFile  = '导入文件';
 $lang->trade->encode      = '编码';
+$lang->trade->createdBy   = '由谁创建';
+$lang->trade->createdDate = '创建时间';
+$lang->trade->editedBy    = '由谁编辑';
+$lang->trade->editedDate  = '编辑时间';
 
 $lang->trade->create      = '记账';
 $lang->trade->in          = '收入';

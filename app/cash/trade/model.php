@@ -49,11 +49,6 @@ class tradeModel extends model
             ->page($pager)
             ->fetchAll('id');
 
-        foreach($trades as $id => $trade)
-        {
-            if($trade->type == 'out' and !$this->loadModel('tree')->hasRight($trade->category)) unset($trades[$id]);
-        }
-
         return $trades;
     }
 

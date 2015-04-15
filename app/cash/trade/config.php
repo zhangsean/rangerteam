@@ -38,3 +38,8 @@ $config->trade->search['params']['category']  = array('operator' => '=',  'contr
 $config->trade->search['params']['handlers']  = array('operator' => 'include', 'control' => 'select', 'values' => 'users');
 $config->trade->search['params']['date']      = array('operator' => '>=', 'control' => 'input', 'values' => '', 'class' => 'date');
 $config->trade->search['params']['id']        = array('operator' => '=',  'control' => 'input',  'values' => '');
+
+$config->trade->exportFields = '
+  id, depositor, type, money, currency, category, trader, date,
+  desc, dept, handlers, order, contract,
+  createdBy, createdDate, editedBy, editedDate, detail';

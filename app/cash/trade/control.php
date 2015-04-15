@@ -53,6 +53,12 @@ class trade extends control
         $this->search->setSearchParams($this->config->trade->search);
 
         $trades = $this->trade->getList($mode, $orderBy, $pager);
+        $this->session->set('tradeQueryCondition', $this->dao->get());
+
+        foreach($trades as $id => $trade)
+        {
+            if($trade->type == 'out' and !$this->loadModel('tree')->hasRight($trade->category)) unset($trades[$id]);
+        }
 
         $this->view->title   = $this->lang->trade->browse;
         $this->view->trades  = $trades;
@@ -61,7 +67,6 @@ class trade extends control
         $this->view->orderBy = $orderBy;
 
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
-        $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
         $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getPairs(0, 'dept');
         $this->view->categories    = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
@@ -535,5 +540,121 @@ class trade extends control
 
         if($this->trade->delete($tradeID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
+     * get data to export.
+     * 
+     * @param  int $projectID 
+     * @param  string $orderBy 
+     * @access public
+     * @return void
+     */
+    public function export($mode, $orderBy = 'id_desc')
+    {
+        if($_POST)
+        {
+            $tradeLang   = $this->lang->trade;
+            $tradeConfig = $this->config->trade;
+
+            /* Create field lists. */
+            $fields = explode(',', $tradeConfig->exportFields);
+            foreach($fields as $key => $fieldName)
+            {
+                $fieldName = trim($fieldName);
+                $fields[$fieldName] = isset($tradeLang->$fieldName) ? $tradeLang->$fieldName : $fieldName;
+                unset($fields[$key]);
+            }
+
+            /* Get trades. */
+            $trades = array();
+            if($mode == 'all') $trades = $this->dao->select('*')->from(TABLE_TRADE)->where('parent')->eq('')->orderBy($orderBy)->fetchAll('id');
+            if($mode == 'thisPage')
+            {
+                $stmt = $this->dbh->query($this->session->tradeQueryCondition);
+                while($row = $stmt->fetch()) $trades[$row->id] = $row;
+            }
+
+            /* Get users and projects. */
+            $expenseTypes = $this->loadModel('tree')->getPairs(0, 'out');
+            $incomeTypes  = $this->loadModel('tree')->getPairs(0, 'in');
+            
+            $users      = $this->loadModel('user')->getPairs('noletter');
+            $depositors = $this->loadModel('depositor')->getPairs();
+            $customers  = $this->loadModel('customer', 'crm')->getPairs();
+            $deptList   = $this->loadModel('tree')->getPairs(0, 'dept');
+            $categories = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
+
+            $details = $this->dao->select('*')->from(TABLE_TRADE)->where('parent')->ne('')->fetchGroup('parent');
+
+            foreach($trades as $trade)
+            {
+                $trade->detail = array();
+                if(isset($details[$trade->id]))
+                {
+                    foreach($details[$trade->id] as $detail)
+                    {
+                        $detail->desc = htmlspecialchars_decode($detail->desc);
+                        $detail->desc = str_replace("<br />", "\n", $detail->desc);
+                        $detail->desc = str_replace('"', '""', $detail->desc);
+
+                        $trade->detail[] = $categories[$detail->category] . $detail->money . '(' . $detail->desc . ')';
+                    }
+                }
+            }
+
+            $users      = $this->loadModel('user')->getPairs('noletter');
+            $depositors = $this->loadModel('depositor')->getPairs();
+            $customers  = $this->loadModel('customer', 'crm')->getPairs();
+            $deptList   = $this->loadModel('tree')->getPairs(0, 'dept');
+            $categories = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
+            $orders     = $this->loadModel('order', 'crm')->getPairs(0);
+            $contracts  = $this->loadModel('contract', 'crm')->getPairs(0);
+
+            foreach($trades as $trade)
+            {
+                $trade->desc = htmlspecialchars_decode($trade->desc);
+                $trade->desc = str_replace("<br />", "\n", $trade->desc);
+                $trade->desc = str_replace('"', '""', $trade->desc);
+
+                if(isset($depositors[$trade->depositor]))     $trade->depositor = $depositors[$trade->depositor];
+                if(isset($customers[$trade->trader]))         $trade->trader    = $customers[$trade->trader] . "(#$trade->trader)";
+                if(isset($deptList[$trade->dept]))            $trade->dept      = $deptList[$trade->dept];
+                if(isset($categories[$trade->category]))      $trade->category  = $categories[$trade->category];
+                if(isset($orders[$trade->order]))             $trade->order     = $orders[$trade->order];
+                if(isset($contracts[$trade->contract]))       $trade->contract  = $contracts[$trade->contract];
+                if(isset($tradeLang->typeList[$trade->type])) $trade->type      = $tradeLang->typeList[$trade->type];
+                if(isset($this->lang->currencyList[$trade->currency])) $trade->currency = $this->lang->currencyList[$trade->currency];
+
+                if(isset($users[$trade->createdBy])) $trade->createdBy  = $users[$trade->createdBy];
+                if(isset($users[$trade->editedBy]))  $trade->editedBy   = $users[$trade->editedBy];
+
+                $trade->createdDate = substr($trade->createdDate,  0, 10);
+                $trade->editedDate  = substr($trade->editedDate,   0, 10);
+
+                if($trade->handlers)
+                {
+                    $tmpHandlers = array();
+                    $handlers = explode(',', $trade->handlers);
+                    foreach($handlers as $handler)
+                    {
+                        if(!$handler) continue;
+                        $handler = trim($handler);
+                        $tmpHandlers[] = isset($users[$handler]) ? $users[$handler] : $handler;
+                    }
+
+                    $trade->handlers = join("; \n", $tmpHandlers);
+                }
+
+                $trade->detail = join("; \n", $trade->detail);
+            }
+
+            $this->post->set('fields', $fields);
+            $this->post->set('rows', $trades);
+            $this->post->set('kind', 'trade');
+            $this->fetch('file', 'export2CSV', $_POST);
+        }
+
+        $this->display();
     }
 }
