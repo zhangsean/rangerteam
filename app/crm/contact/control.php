@@ -213,4 +213,104 @@ END:VCARD";
         $this->app->loadClass('qrcode');
         QRcode::png($vcard, false, 4, 6); 
     }
+
+    /**
+     * get data to export.
+     * 
+     * @param  string $range 
+     * @param  string $mode 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function export($range = 'all', $mode, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    { 
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        if($range == 'all') $pager = null;
+
+        if($_POST)
+        {
+            $contactLang   = $this->lang->contact;
+            $contactConfig = $this->config->contact;
+
+            /* Create field lists. */
+            $fields = explode(',', $contactConfig->list->exportFields);
+            foreach($fields as $key => $fieldName)
+            {
+                $fieldName = trim($fieldName);
+                $fields[$fieldName] = isset($contactLang->$fieldName) ? $contactLang->$fieldName : $fieldName;
+                unset($fields[$key]);
+            }
+
+            $contacts = $this->contact->getList($customer = '', $relation = 'client', $mode, $orderBy, $pager);
+
+            $users     = $this->loadModel('user')->getPairs('noletter');
+            $customers = $this->loadModel('customer')->getPairs();
+
+            $resumes     = $this->dao->select('*')->FROM(TABLE_RESUME)->where('deleted')->eq(0)->fetchGroup('contact');
+            $addressList = $this->dao->select('*')->FROM(TABLE_ADDRESS)->fetchGroup('objectID');
+            $areaList    = $this->loadModel('tree')->getOptionMenu('area');
+
+            foreach($contacts as $id => $contact)
+            {
+                $contact->resume = array();
+                if(!empty($resumes[$id]))
+                {
+                    foreach($resumes[$id] as $resume)
+                    {
+                        $contact->resume[] = $resume->join . $this->lang->minus . ($resume->left ? $resume->left : $this->lang->today . ' ') . $customers[$resume->customer] . $resume->dept . $resume->title;
+                    }
+                }
+            }
+
+            foreach($contacts as $contact)
+            {
+                $contact->address = array();
+                if(!empty($addressList[$contact->id]))
+                {
+                    foreach($addressList[$contact->id] as $address)
+                    {
+                        $contact->address[] = ((isset($address->area)) ? str_replace('/', ' ', zget($areaList, $address->area)) : '') . $address->location;
+                    }
+                }
+                elseif(!empty($addressList[$contact->customer]))
+                {
+                    foreach($addressList[$contact->customer] as $address)
+                    {
+                        $contact->address[] = ((isset($address->area)) ? str_replace('/', ' ', zget($areaList, $address->area)) : '') . $address->location;
+                    }
+                }
+            }
+
+            foreach($contacts as $contact)
+            {
+                if(isset($customers[$contact->customer]))              $contact->customer = $customers[$contact->customer];
+                if(isset($this->lang->genderList->{$contact->gender})) $contact->gender   = $this->lang->genderList->{$contact->gender};
+
+                if(isset($users[$contact->createdBy]))   $contact->createdBy   = $users[$contact->createdBy];
+                if(isset($users[$contact->editedBy]))    $contact->editedBy    = $users[$contact->editedBy];
+                if(isset($users[$contact->contactedBy])) $contact->contactedBy = $users[$contact->contactedBy];
+
+                $contact->createdDate   = substr($contact->createdDate, 0, 10);
+                $contact->editedDate    = substr($contact->editedDate, 0, 10);
+                $contact->contactedDate = substr($contact->contactedDate, 0, 10);
+                $contact->nextDate      = substr($contact->contactedDate, 0, 10);
+
+                if(isset($contact->resume))  $contact->resume  = join("; \n", $contact->resume);
+                if(isset($contact->address)) $contact->address = join("; \n", $contact->address);
+            }
+
+            $this->post->set('fields', $fields);
+            $this->post->set('rows', $contacts);
+            $this->post->set('kind', 'contact');
+            $this->fetch('file', 'export2CSV' , $_POST);
+        }
+
+        $this->display();
+    }
 }

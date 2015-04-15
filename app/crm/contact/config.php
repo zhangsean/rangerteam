@@ -39,3 +39,11 @@ $config->contact->search['params']['t1.qq']            = array('operator' => 'in
 $config->contact->search['params']['t1.contactedDate'] = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->contact->search['params']['t1.nextDate']      = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->contact->search['params']['t1.id']            = array('operator' => '=', 'control' => 'input',  'values' => '');
+
+$config->contact->list = new stdclass();
+$config->contact->list->exportFields = '
+  id, realname, customer, nickname, birthday, gender, 
+  mobile, phone, email, qq, weixin, weibo, 
+  skype,yahoo, gtalk, wangwang, site, fax, area,
+  createdBy, createdDate, editedBy, editedDate,
+  contactedBy, contactedDate, nextDate, desc, resume, address';
