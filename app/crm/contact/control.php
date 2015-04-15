@@ -226,13 +226,8 @@ END:VCARD";
      * @access public
      * @return void
      */
-    public function export($range = 'all', $mode, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function export($mode = 'all', $orderBy = 'id_desc')
     { 
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
-
-        if($range == 'all') $pager = null;
-
         if($_POST)
         {
             $contactLang   = $this->lang->contact;
@@ -247,7 +242,13 @@ END:VCARD";
                 unset($fields[$key]);
             }
 
-            $contacts = $this->contact->getList($customer = '', $relation = 'client', $mode, $orderBy, $pager);
+            $contacts = array();
+            if($mode == 'all') $contacts = $this->contact->getList($customer = '', $relation = 'client', $mode, $orderBy);
+            if($mode == 'thisPage')
+            {
+                $stmt = $this->dbh->query($this->session->contactQueryCondition);
+                while($row = $stmt->fetch()) $contacts[$row->id] = $row;
+            }
 
             $users     = $this->loadModel('user')->getPairs('noletter');
             $customers = $this->loadModel('customer')->getPairs();
