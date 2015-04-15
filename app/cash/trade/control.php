@@ -603,14 +603,6 @@ class trade extends control
                 }
             }
 
-            $users      = $this->loadModel('user')->getPairs('noletter');
-            $depositors = $this->loadModel('depositor')->getPairs();
-            $customers  = $this->loadModel('customer', 'crm')->getPairs();
-            $deptList   = $this->loadModel('tree')->getPairs(0, 'dept');
-            $categories = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
-            $orders     = $this->loadModel('order', 'crm')->getPairs(0);
-            $contracts  = $this->loadModel('contract', 'crm')->getPairs(0);
-
             foreach($trades as $trade)
             {
                 $trade->desc = htmlspecialchars_decode($trade->desc);
