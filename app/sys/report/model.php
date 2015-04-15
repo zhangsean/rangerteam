@@ -340,12 +340,13 @@ EOT;
             $listName = $this->config->report->{$module}->listName[$chart];
 
             /* Set list. */
-            if($listName == 'USERS')     $list = $this->loadModel('user')->getPairs('noempty');
-            if($listName == 'AREA')      $list = $this->loadModel('tree')->getOptionMenu('area');
-            if($listName == 'PRODUCTS')  $list = $this->loadModel('product', 'crm')->getPairs();
-            if($listName == 'CUSTOMERS') $list = $this->loadModel('customer', 'crm')->getPairs();
+            if($listName == 'USERS')      $list = $this->loadModel('user')->getPairs('noempty');
+            if($listName == 'AREA')       $list = $this->loadModel('tree')->getOptionMenu('area');
+            if($listName == 'PRODUCTS')   $list = $this->loadModel('product', 'crm')->getPairs();
+            if($listName == 'CUSTOMERS')  $list = $this->loadModel('customer', 'crm')->getPairs();
             if($listName == 'DEPOSITORS') $list = $this->loadModel('depositor')->getPairs();
-            if($listName == 'DEPTS')     $list = $this->loadModel('tree')->getOptionMenu('dept', 0);
+            if($listName == 'DEPTS')      $list = $this->loadModel('tree')->getOptionMenu('dept', 0);
+            if($listName == 'CATEGORIES_TRADE') $list = $this->lang->trade->categoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true) + $this->loadModel('tree')->getOptionMenu('in', 0);
             if(!isset($list)) $list = $this->lang->{$module}->{$listName};
         }
 

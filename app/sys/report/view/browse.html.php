@@ -20,10 +20,8 @@
       <div class='panel-body' style='padding-top:0'>
         <form method='post'>
           <?php echo html::checkBox('charts', $lang->report->{$module}->chartList, $checkedCharts, '', 'block');?>
-          <div class='btn-group'>
-            <?php echo html::selectButton(); ?>
-            <?php echo html::submitButton($lang->report->create);?>
-          </div>
+          <p><?php echo html::selectButton();?></p>
+          <p><?php echo html::submitButton($lang->report->create);?></p>
         </form>
       </div>
     </div>
