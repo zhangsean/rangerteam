@@ -299,13 +299,8 @@ class customer extends control
      * @access public
      * @return void
      */
-    public function export($range = 'all', $mode, $param = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function export($mode = 'all', $orderBy = 'id_desc')
     { 
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
-
-        if($range == 'all') $pager = null;
-
         if($_POST)
         {
             $customerLang   = $this->lang->customer;
@@ -320,7 +315,13 @@ class customer extends control
                 unset($fields[$key]);
             }
 
-            $customers = $this->customer->getList($mode, $param, $relation = 'client', $orderBy, $pager);
+            $customers = array();
+            if($mode == 'all') $customers = $this->customer->getList($mode, null, $relation = 'client', $orderBy);
+            if($mode == 'thisPage')
+            {
+                $stmt = $this->dbh->query($this->session->customerQueryCondition);
+                while($row = $stmt->fetch()) $customers[$row->id] = $row;
+            }
 
             $users        = $this->loadModel('user')->getPairs('noletter');
             $areaList     = $this->loadModel('tree')->getOptionMenu('area');
