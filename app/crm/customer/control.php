@@ -60,6 +60,7 @@ class customer extends control
         $this->view->customers = $customers;
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
+        $this->view->param     = $param;
 
         $this->display();
     }   
@@ -284,5 +285,83 @@ class customer extends control
         $this->customer->delete(TABLE_CUSTOMER, $customerID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'locate' => inlink('browse')));
+    }
+
+    /**
+     * get data to export.
+     * 
+     * @param  string $range 
+     * @param  string $mode 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function export($range = 'all', $mode, $param = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    { 
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        if($range == 'all') $pager = null;
+
+        if($_POST)
+        {
+            $customerLang   = $this->lang->customer;
+            $customerConfig = $this->config->customer;
+
+            /* Create field lists. */
+            $fields = explode(',', $customerConfig->list->exportFields);
+            foreach($fields as $key => $fieldName)
+            {
+                $fieldName = trim($fieldName);
+                $fields[$fieldName] = isset($customerLang->$fieldName) ? $customerLang->$fieldName : $fieldName;
+                unset($fields[$key]);
+            }
+
+            $customers = $this->customer->getList($mode, $param, $relation = 'client', $orderBy, $pager);
+
+            $users        = $this->loadModel('user')->getPairs('noletter');
+            $areaList     = $this->loadModel('tree')->getOptionMenu('area');
+            $industryList = $this->tree->getOptionMenu('industry');
+
+            foreach($customers as $customer)
+            {
+                $customer->desc = htmlspecialchars_decode($customer->desc);
+                $customer->desc = str_replace("<br />", "\n", $customer->desc);
+                $customer->desc = str_replace('"', '""', $customer->desc);
+
+                $customer->public = $customer->public ? $this->lang->yes : $this->lang->no;
+
+                /* fill some field with useful value. */
+                if(isset($customerLang->statusList[$customer->status]))     $customer->status   = $customerLang->statusList[$customer->status];
+                if(isset($customerLang->typeList[$customer->type]))         $customer->type     = $customerLang->typeList[$customer->type];
+                if(isset($customerLang->sizeNameList[$customer->size]))     $customer->size     = $customerLang->sizeNameList[$customer->size];
+                if(isset($customerLang->levelNameList[$customer->level]))   $customer->level    = $customerLang->levelNameList[$customer->level];
+                if(isset($customerLang->relationList[$customer->relation])) $customer->relation = $customerLang->relationList[$customer->relation];
+                if(isset($areaList[$customer->area]))                       $customer->area     = $areaList[$customer->area];
+                if(isset($industryList[$customer->industry]))               $customer->industry = $areaList[$customer->industry];
+
+                if(isset($users[$customer->createdBy]))   $customer->createdBy   = $users[$customer->createdBy];
+                if(isset($users[$customer->editedBy]))    $customer->editedBy    = $users[$customer->editedBy];
+                if(isset($users[$customer->assignedTo]))  $customer->assignedTo  = $users[$customer->assignedTo];
+                if(isset($users[$customer->assignedBy]))  $customer->assignedBy  = $users[$customer->assignedBy];
+                if(isset($users[$customer->contactedBy])) $customer->contactedBy = $users[$customer->contactedBy];
+
+                $customer->createdDate    = substr($customer->createdDate, 0, 10);
+                $customer->editedDate     = substr($customer->editedDate, 0, 10);
+                $customer->assignedDate   = substr($customer->assignedDate, 0, 10);
+                $customer->contactedDate  = substr($customer->contactedDate, 0, 10);
+                $customer->nextDate       = substr($customer->contactedDate, 0, 10);
+            }
+
+            $this->post->set('fields', $fields);
+            $this->post->set('rows', $customers);
+            $this->post->set('kind', 'customer');
+            $this->fetch('file', 'export2CSV' , $_POST);
+        }
+
+        $this->display();
     }
 }

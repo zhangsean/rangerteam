@@ -50,3 +50,10 @@ $config->customer->search['params']['assignedTo']    = array('operator' => '=', 
 $config->customer->search['params']['industry']      = array('operator' => 'belong', 'control' => 'select', 'values' => 'set in control');
 $config->customer->search['params']['area']          = array('operator' => 'belong', 'control' => 'select', 'values' => 'set in control');
 $config->customer->search['params']['id']            = array('operator' => '=', 'control' => 'input',  'values' => '');
+
+$config->customer->list = new stdclass();
+$config->customer->list->exportFields = '
+  id, name, type, relation, size, industry, area,
+  status, level, intension, site, weibo, weixin, public,
+  createdBy, createdDate, assignedBy, assignedDate, assignedTo,
+  editedBy, editedDate, contactedBy, contactedDate, nextDate, desc';

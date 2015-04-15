@@ -123,6 +123,8 @@ $lang->selectAll      = 'All';
 $lang->selectReverse  = 'Inverse';
 $lang->continueSave   = 'Continue To Save';
 $lang->submitting     = 'Saving...';
+$lang->yes            = 'YES';
+$lang->no             = 'NO';
 
 $lang->exportAll      = 'Export All';
 $lang->exportThisPage = 'Export This Page';
