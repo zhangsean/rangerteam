@@ -31,6 +31,7 @@ $lang->customer->menu->tomorrow  = array('link' => 'Contact Tomorrow|customer|br
 $lang->customer->menu->thisweek  = array('link' => 'Contact This Week|customer|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
 $lang->customer->menu->thismonth = array('link' => 'Contact This Month|customer|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
 $lang->customer->menu->public    = array('link' => 'Public Customers|customer|browse|mode=public', 'alias' => 'create,edit,view,record');
+$lang->customer->menu->report    = array('link' => 'Report|report|browse|module=customer');
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -51,6 +52,7 @@ $lang->order->menu->tomorrow  = array('link' => 'Contact Tomorrow|order|browse|m
 $lang->order->menu->thisweek  = array('link' => 'Contact This Week|order|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
 $lang->order->menu->thismonth = array('link' => 'Contact This Month|order|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
 $lang->order->menu->public    = array('link' => 'Public|order|browse|mode=public', 'alias' => 'create,edit,view,record');
+$lang->order->menu->report    = array('link' => 'Report|report|browse|module=order');
 
 /* Menu of contact module. */
 $lang->contact = new stdclass();
@@ -73,6 +75,7 @@ $lang->contract->menu->finished     = array('link' => 'Finished|contract|browse|
 $lang->contract->menu->canceled     = array('link' => 'Canceled|contract|browse|mode=canceled',       'alias' => 'create,edit,view,history');
 $lang->contract->menu->expired      = array('link' => 'Expired|contract|browse|mode=expired',         'alias' => 'create,edit,view,history');
 $lang->contract->menu->expire       = array('link' => 'Will Expire|contract|browse|mode=expire', 'alias' => 'create,edit,view,history');
+$lang->contract->menu->report       = array('link' => 'Report|report|browse|module=contract');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();
