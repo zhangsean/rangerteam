@@ -226,4 +226,67 @@ class depositor extends control
         if($this->depositor->delete($depositorID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
+
+    /**
+     * get data to export.
+     * 
+     * @param  int $projectID 
+     * @param  string $orderBy 
+     * @access public
+     * @return void
+     */
+    public function export()
+    {
+        if($_POST)
+        {
+            $depositorLang   = $this->lang->depositor;
+            $depositorConfig = $this->config->depositor;
+
+            /* Create field lists. */
+            $fields = explode(',', $depositorConfig->exportFields);
+            foreach($fields as $key => $fieldName)
+            {
+                $fieldName = trim($fieldName);
+                $fields[$fieldName] = isset($depositorLang->$fieldName) ? $depositorLang->$fieldName : $fieldName;
+                unset($fields[$key]);
+            }
+
+            $depositors = $this->depositor->getList();
+
+            /* Get users and projects. */
+            $users    = $this->loadModel('user')->getPairs('noletter');
+            $balances = $this->loadModel('balance')->getLatest();
+            
+            foreach($depositors as $depositor)
+            {
+                $depositor->balance = '';
+                if(($this->app->user->admin == 'super' or isset($this->app->user->rights['balance']['browse'])) and isset($balances[$depositor->currency][$depositor->id]))
+                {
+                    $depositor->balance = $balances[$depositor->currency][$depositor->id]->money;
+                }
+            }
+
+            foreach($depositors as $depositor)
+            {
+                if(isset($depositorLang->typeList[$depositor->type]))         $depositor->type     = $depositorLang->typeList[$depositor->type];
+                if(isset($depositorLang->publicList[$depositor->public]))     $depositor->public   = $depositorLang->publicList[$depositor->public];
+                if(isset($depositorLang->providerList[$depositor->provider])) $depositor->provider = $depositorLang->providerList[$depositor->provider];
+                if(isset($depositorLang->statusList[$depositor->status]))     $depositor->status   = $depositorLang->statusList[$depositor->status];
+                if(isset($this->lang->currencyList[$depositor->currency]))    $depositor->currency = $this->lang->currencyList[$depositor->currency];
+
+                if(isset($users[$depositor->createdBy])) $depositor->createdBy = $users[$depositor->createdBy];
+                if(isset($users[$depositor->editedBy]))  $depositor->editedBy  = $users[$depositor->editedBy];
+
+                $depositor->createdDate = substr($depositor->createdDate,  0, 10);
+                $depositor->editedDate  = substr($depositor->editedDate,   0, 10);
+            }
+
+            $this->post->set('fields', $fields);
+            $this->post->set('rows', $depositors);
+            $this->post->set('kind', 'depositor');
+            $this->fetch('file', 'export2CSV', $_POST);
+        }
+
+        $this->display();
+    }
 }

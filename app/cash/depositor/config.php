@@ -16,3 +16,7 @@ $config->depositor->require->edit   = 'abbr';
 $config->depositor->editor = new stdclass();
 $config->depositor->editor->forbid   = array('id' => 'comment', 'tools' => 'simple');
 $config->depositor->editor->activate = array('id' => 'comment', 'tools' => 'simple');
+
+$config->depositor->exportFields = '
+  id, abbr, provider, type, title, account, bankcode, public, currency, status, public,
+  createdBy, createdDate, editedBy, editedDate, balance';
