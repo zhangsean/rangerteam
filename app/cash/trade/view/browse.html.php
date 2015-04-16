@@ -22,7 +22,7 @@
   <?php commonModel::printLink('trade', 'batchcreate', '', "{$lang->trade->batchCreate}</i>", "class='btn btn-primary'")?>
   <?php commonModel::printLink('trade', 'import', '', "{$lang->trade->import}</i>", "class='btn btn-primary' data-toggle='modal'")?>
   <div class='btn-group'>
-    <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><i class='icon-upload-alt'></i> <?php echo $lang->export;?> <span class='caret'></span></button>
+    <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo $lang->export;?> <span class='caret'></span></button>
     <ul id='exportActionMenu' class='dropdown-menu'>
       <li><?php commonModel::printLink('trade', 'export', "mode=all&orderBy={$orderBy}", $lang->exportAll, "class='iframe' data-width='700'");?></li>
       <li><?php commonModel::printLink('trade', 'export', "mode=thisPage&orderBy={$orderBy}", $lang->exportThisPage, "class='iframe' data-width='700'");?></li>
