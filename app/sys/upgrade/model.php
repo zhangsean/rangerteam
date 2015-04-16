@@ -71,6 +71,8 @@ class upgradeModel extends model
                 $this->fixClosedTask();
                 $this->setSalesGroup();
                 $this->fixOrderProduct();
+            case '2_1':
+                $this->execSQL($this->getUpgradeFile('2.1'));
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -98,6 +100,7 @@ class upgradeModel extends model
             case '1_5_beta': $confirmContent .= file_get_contents($this->getUpgradeFile('1.5.beta'));
             case '1_6'     : $confirmContent .= file_get_contents($this->getUpgradeFile('1.6'));
             case '2_0'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.0'));
+            case '2_1'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.1'));
         }
         return $confirmContent;
     }
