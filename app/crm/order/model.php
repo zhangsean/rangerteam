@@ -70,6 +70,8 @@ class orderModel extends model
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
+        $products = $this->loadModel('product')->getPairs();
+
         $this->app->loadClass('date', $static = true);
         $thisMonth = date::getThisMonth();
         $thisWeek  = date::getThisWeek();
@@ -95,7 +97,12 @@ class orderModel extends model
             ->andWhere('o.customer')->in($customerIdList)
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
-        $this->setProductsForOrders($orders);
+        foreach($orders as $order)
+        {
+            $order->products = array();
+            $productList = explode(',', $order->product);
+            foreach($productList as $product) if(isset($products[$product])) $order->products[] = $products[$product];
+        }
 
         foreach($orders as $order)
         {

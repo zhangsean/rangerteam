@@ -346,13 +346,8 @@ class order extends control
      * @access public
      * @return void
      */
-    public function export($range = 'all', $mode, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function export($mode = 'all', $orderBy = 'id_desc')
     { 
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
-
-        if($range == 'all') $pager = null;
-
         if($_POST)
         {
             $orderLang   = $this->lang->order;
@@ -367,12 +362,25 @@ class order extends control
                 unset($fields[$key]);
             }
 
-            $orders = $this->order->getList($mode, '', $orderBy, $pager);
+            $orders = array();
+            if($mode == 'all') $orders = $this->order->getList($mode, '', $orderBy);
+            if($mode == 'thisPage')
+            {
+                $stmt = $this->dbh->query($this->session->orderQueryCondition);
+                while($row = $stmt->fetch()) $orders[$row->id] = $row;
+            }
 
             /* Get users, products and projects. */
-            $users     = $this->loadModel('user')->getPairs('noletter');
-            $products  = $this->loadModel('product')->getPairs();
-            $customers = $this->loadModel('customer')->getPairs();
+            $users    = $this->loadModel('user')->getPairs('noletter');
+            $products = $this->loadModel('product')->getPairs();
+
+            foreach($orders as $order)
+            {
+                if(isset($order->products)) continue;
+                $order->products = array();
+                $productList = explode(',', $order->product);
+                foreach($productList as $product) if(isset($products[$product])) $order->products[] = $products[$product];
+            }
 
             foreach($orders as $order)
             {
