@@ -69,6 +69,7 @@ $lang->contract->editReturn       = '编辑回款';
 $lang->contract->editDelivery     = '编辑交付';
 $lang->contract->deleteReturn     = '删除回款';
 $lang->contract->deleteDelivery   = '删除交付';
+$lang->contract->export           = '导出';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = '等待交付';

@@ -34,6 +34,10 @@ $lang->trade->transferOut = 'Amount';
 $lang->trade->schema      = 'Schema';
 $lang->trade->importFile  = 'Import file';
 $lang->trade->encode      = 'Encode';
+$lang->trade->createdBy   = 'Created By';
+$lang->trade->createdDate = 'Created Date';
+$lang->trade->editedBy    = 'Edited By';
+$lang->trade->editedDate  = 'Edited Date';
 
 $lang->trade->create      = 'Create Trade';
 $lang->trade->in          = 'Income';
@@ -51,6 +55,7 @@ $lang->trade->batchCreate = 'Batch Create';
 $lang->trade->batchEdit   = 'Batch Edit';
 $lang->trade->newTrader   = 'Create Trader';
 $lang->trade->import      = 'Import';
+$lang->trade->export      = 'Export';
 $lang->trade->showImport  = 'Show result';
 
 $lang->trade->typeList['in']          = 'Income';

@@ -204,10 +204,10 @@ $lang->entry->menu->webapp = 'WEB Application|webapp|obtain|';
 /* Menu system. */
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
-$lang->system->menu->mail  = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->system->menu->trash = array('link' => 'Trash|action|trash|');
-$lang->system->menu->cron  = 'Cron|cron|index|';
-//$lang->system->menu->backup = '备份|admin|backup|';
+$lang->system->menu->mail   = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->system->menu->trash  = array('link' => 'Trash|action|trash|');
+$lang->system->menu->cron   = 'Cron|cron|index|';
+$lang->system->menu->backup = 'Backup|backup|index|';
 
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
@@ -231,6 +231,11 @@ $lang->menuGroups->action = 'system';
 $lang->cron = new stdclass();
 $lang->cron->menu = $lang->system->menu;
 $lang->menuGroups->cron = 'system';
+
+/* Menu of backup module. */
+$lang->backup = new stdclass();
+$lang->backup->menu = $lang->system->menu;
+$lang->menuGroups->backup = 'system';
 
 /* The error messages. */
 $lang->error = new stdclass();

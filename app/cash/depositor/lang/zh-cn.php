@@ -35,6 +35,7 @@ $lang->depositor->delete      = '删除帐号';
 $lang->depositor->view        = '帐号详情';
 $lang->depositor->forbid      = '禁用';
 $lang->depositor->activate    = '激活';
+$lang->depositor->export      = '导出';
 $lang->depositor->balance     = '余额';
 $lang->depositor->saveBalance = '登记余额';
 $lang->depositor->detail      = '明细';

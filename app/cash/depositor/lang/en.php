@@ -35,6 +35,7 @@ $lang->depositor->delete      = 'Delete Depositor';
 $lang->depositor->view        = 'View';
 $lang->depositor->forbid      = 'Disable';
 $lang->depositor->activate    = 'Activate';
+$lang->depositor->export      = 'Export';
 $lang->depositor->balance     = 'Blance';
 $lang->depositor->saveBalance = 'Save balance';
 $lang->depositor->detail      = 'Detail';

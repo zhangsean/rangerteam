@@ -54,6 +54,7 @@ $lang->order->close         = '关闭订单';
 $lang->order->sign          = '签约';
 $lang->order->assign        = '订单指派';
 $lang->order->activate      = '激活';
+$lang->order->export        = '导出';
 
 $lang->order->statusList['normal'] = '正常';
 $lang->order->statusList['signed'] = '已签约';

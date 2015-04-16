@@ -54,6 +54,7 @@ $lang->order->close         = 'Close';
 $lang->order->sign          = 'Sign';
 $lang->order->assign        = 'Assign Order';
 $lang->order->activate      = 'Activate';
+$lang->order->export        = 'Export';
 
 $lang->order->statusList['normal'] = 'Normal';
 $lang->order->statusList['signed'] = 'Signed';

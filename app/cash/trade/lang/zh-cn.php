@@ -55,6 +55,7 @@ $lang->trade->batchCreate = '批量记账';
 $lang->trade->batchEdit   = '批量编辑';
 $lang->trade->newTrader   = '新建';
 $lang->trade->import      = '导入';
+$lang->trade->export      = '导出';
 $lang->trade->showImport  = '导入确认';
 
 $lang->trade->typeList['in']          = '收入';

@@ -87,6 +87,7 @@ $lang->resource->order->close    = 'close';
 $lang->resource->order->activate = 'activate';
 $lang->resource->order->contact  = 'contact';
 $lang->resource->order->assign   = 'assign';
+$lang->resource->order->export   = 'export';
 $lang->resource->order->delete   = 'delete';
 
 $lang->order->methodOrder[5]  = 'browse';
@@ -97,7 +98,8 @@ $lang->order->methodOrder[25] = 'close';
 $lang->order->methodOrder[30] = 'activate';
 $lang->order->methodOrder[40] = 'contact';
 $lang->order->methodOrder[45] = 'assign';
-$lang->order->methodOrder[50] = 'delete';
+$lang->order->methodOrder[50] = 'export';
+$lang->order->methodOrder[55] = 'delete';
 
 /* Contract. */
 $lang->resource->contract = new stdclass();
@@ -113,6 +115,7 @@ $lang->resource->contract->editReturn     = 'editReturn';
 $lang->resource->contract->deleteReturn   = 'deleteReturn';
 $lang->resource->contract->cancel         = 'cancel';
 $lang->resource->contract->finish         = 'finish';
+$lang->resource->contract->export         = 'export';
 $lang->resource->contract->delete         = 'delete';
 
 $lang->contract->methodOrder[5]  = 'browse';
@@ -123,7 +126,8 @@ $lang->contract->methodOrder[25] = 'delivery';
 $lang->contract->methodOrder[30] = 'receive';
 $lang->contract->methodOrder[40] = 'cancel';
 $lang->contract->methodOrder[45] = 'finish';
-$lang->contract->methodOrder[50] = 'delete';
+$lang->contract->methodOrder[50] = 'export';
+$lang->contract->methodOrder[55] = 'delete';
 
 /* Customer. */
 $lang->resource->customer = new stdclass();
@@ -136,6 +140,7 @@ $lang->resource->customer->order         = 'order';
 $lang->resource->customer->contact       = 'contact';
 $lang->resource->customer->linkContact   = 'linkContact';
 $lang->resource->customer->contract      = 'contract';
+$lang->resource->customer->export        = 'export';
 $lang->resource->customer->delete        = 'delete';
 
 $lang->customer->methodOrder[5]  = 'browse';
@@ -146,6 +151,7 @@ $lang->customer->methodOrder[30] = 'order';
 $lang->customer->methodOrder[35] = 'contact';
 $lang->customer->methodOrder[40] = 'linkContact';
 $lang->customer->methodOrder[45] = 'contract';
+$lang->customer->methodOrder[50] = 'export';
 $lang->customer->methodOrder[55] = 'delete';
 
 /* Contact. */
@@ -154,6 +160,7 @@ $lang->resource->contact->browse        = 'browse';
 $lang->resource->contact->create        = 'create';
 $lang->resource->contact->edit          = 'edit';
 $lang->resource->contact->view          = 'view';
+$lang->resource->contact->export        = 'export';
 $lang->resource->contact->delete        = 'delete';
 $lang->resource->contact->vcard         = 'vcard';
 
@@ -161,6 +168,7 @@ $lang->contact->methodOrder[10] = 'browse';
 $lang->contact->methodOrder[15] = 'create';
 $lang->contact->methodOrder[20] = 'edit';
 $lang->contact->methodOrder[25] = 'view';
+$lang->contact->methodOrder[30] = 'export';
 $lang->contact->methodOrder[35] = 'delete';
 $lang->contact->methodOrder[40] = 'vcard';
 
@@ -227,6 +235,7 @@ $lang->resource->trade->detail      = 'detail';
 $lang->resource->trade->delete      = 'delete';
 $lang->resource->trade->import      = 'import';
 $lang->resource->trade->showimport  = 'showImport';
+$lang->resource->trade->export      = 'export';
 
 $lang->trade->methodOrder[10] = 'browse';
 $lang->trade->methodOrder[15] = 'create';
@@ -239,6 +248,7 @@ $lang->trade->methodOrder[35] = 'detail';
 $lang->trade->methodOrder[40] = 'delete';
 $lang->trade->methodOrder[45] = 'import';
 $lang->trade->methodOrder[50] = 'showImport';
+$lang->trade->methodOrder[55] = 'export';
 
 /* Depositor. */
 $lang->resource->depositor = new stdclass();
@@ -248,6 +258,7 @@ $lang->resource->depositor->edit        = 'edit';
 $lang->resource->depositor->forbid      = 'forbid';
 $lang->resource->depositor->activate    = 'activate';
 $lang->resource->depositor->check       = 'check';
+$lang->resource->depositor->export      = 'export';
 $lang->resource->depositor->savebalance = 'saveBalance';
 $lang->resource->depositor->delete      = 'delete';
 
@@ -257,8 +268,9 @@ $lang->depositor->methodOrder[15] = 'edit';
 $lang->depositor->methodOrder[20] = 'forbid';
 $lang->depositor->methodOrder[25] = 'activate';
 $lang->depositor->methodOrder[30] = 'check';
-$lang->depositor->methodOrder[35] = 'saveBalance';
-$lang->depositor->methodOrder[40] = 'delete';
+$lang->depositor->methodOrder[35] = 'export';
+$lang->depositor->methodOrder[40] = 'saveBalance';
+$lang->depositor->methodOrder[45] = 'delete';
 
 /* Balance. */
 $lang->resource->balance = new stdclass();
@@ -340,6 +352,7 @@ $lang->resource->task->assignTo    = 'assignTo';
 $lang->resource->task->activate    = 'activate';
 $lang->resource->task->cancel      = 'cancel';
 $lang->resource->task->close       = 'close';
+$lang->resource->task->export      = 'export';
 $lang->resource->task->delete      = 'delete';
 
 $lang->task->methodOrder[10] = 'browse';
@@ -353,7 +366,8 @@ $lang->task->methodOrder[45] = 'assignTo';
 $lang->task->methodOrder[50] = 'activate';
 $lang->task->methodOrder[55] = 'cancel';
 $lang->task->methodOrder[60] = 'close';
-$lang->task->methodOrder[65] = 'delete';
+$lang->task->methodOrder[65] = 'export';
+$lang->task->methodOrder[70] = 'delete';
 
 /* Announce. */
 $lang->resource->announce = new stdclass();

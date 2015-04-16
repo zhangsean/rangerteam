@@ -56,6 +56,7 @@ $lang->customer->assign      = '指派';
 $lang->customer->linkContact = '添加联系人';
 $lang->customer->list        = '客户列表';
 $lang->customer->edit        = '编辑客户';
+$lang->customer->export      = '导出';
 $lang->customer->basicInfo   = '基本信息';
 $lang->customer->moreInfo    = '更多信息';
 

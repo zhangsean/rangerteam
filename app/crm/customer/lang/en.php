@@ -56,6 +56,7 @@ $lang->customer->assign      = 'Assign Customer';
 $lang->customer->linkContact = 'Create Contact';
 $lang->customer->list        = 'Customer List';
 $lang->customer->edit        = 'Edit';
+$lang->customer->export      = 'Export';
 $lang->customer->basicInfo   = 'Basic Info';
 $lang->customer->moreInfo    = 'More Info';
 
