@@ -34,6 +34,10 @@ $lang->trade->transferOut = '轉出金額';
 $lang->trade->schema      = '模板';
 $lang->trade->importFile  = '導入檔案';
 $lang->trade->encode      = '編碼';
+$lang->trade->createdBy   = '由誰創建';
+$lang->trade->createdDate = '創建時間';
+$lang->trade->editedBy    = '由誰編輯';
+$lang->trade->editedDate  = '編輯時間';
 
 $lang->trade->create      = '記賬';
 $lang->trade->in          = '收入';
@@ -51,6 +55,7 @@ $lang->trade->batchCreate = '批量記賬';
 $lang->trade->batchEdit   = '批量編輯';
 $lang->trade->newTrader   = '新建';
 $lang->trade->import      = '導入';
+$lang->trade->export      = '導出';
 $lang->trade->showImport  = '導入確認';
 
 $lang->trade->typeList['in']          = '收入';

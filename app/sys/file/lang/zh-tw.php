@@ -38,4 +38,4 @@ $lang->file->maxUploadSize = "<span class='red'>%s</span>";
 
 $lang->file->errorUnwritable = '上傳目錄不可寫，無法上傳附件。';
 $lang->file->errorNoFile     = '未選擇任何檔案。';
-$lang->file->errorFileSize   = '檔案大小已經超過限制，可能不能成功上傳！';
+$lang->file->errorFileSize   = '檔案大小已經超過限制，不能成功上傳！';

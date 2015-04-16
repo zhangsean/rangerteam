@@ -31,6 +31,7 @@ $lang->customer->menu->tomorrow  = array('link' => '明天聯繫|customer|browse
 $lang->customer->menu->thisweek  = array('link' => '本週內聯繫|customer|browse|mode=thisweek');
 $lang->customer->menu->thismonth = array('link' => '本月內聯繫|customer|browse|mode=thismonth');
 $lang->customer->menu->public    = array('link' => '公共客戶|customer|browse|mode=public');
+$lang->customer->menu->report    = array('link' => '報表|report|browse|module=customer');
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -39,6 +40,7 @@ $lang->product->menu->browse     = array('link' => '所有產品|product|browse|
 $lang->product->menu->normal     = array('link' => '正常|product|browse|mode=normal');
 $lang->product->menu->developing = array('link' => '研發中|product|browse|mode=developing');
 $lang->product->menu->offline    = array('link' => '下線|product|browse|mode=offline');
+$lang->product->menu->lines      = array('link' => '產品綫|tree|browse|type=product');
 
 /* Menu of order module. */
 $lang->order = new stdclass();
@@ -50,6 +52,7 @@ $lang->order->menu->tomorrow  = array('link' => '明天聯繫|order|browse|mode=
 $lang->order->menu->thisweek  = array('link' => '本週內聯繫|order|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
 $lang->order->menu->thismonth = array('link' => '本月內聯繫|order|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
 $lang->order->menu->public    = array('link' => '公共客戶|order|browse|mode=public', 'alias' => 'create,edit,view,record');
+$lang->order->menu->report    = array('link' => '報表|report|browse|module=order');
 
 /* Menu of contact module. */
 $lang->contact = new stdclass();
@@ -66,24 +69,26 @@ $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
 $lang->contract->menu->browse       = array('link' => '所有合同|contract|browse|mode=all', 'alias' => 'create,edit,view');
 $lang->contract->menu->unfinished   = array('link' => '未完成|contract|browse|mode=unfinished',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->unreceived   = array('link' => '未回款|contract|browse|mode=unreceived',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->undeliveried = array('link' => '未交付|contract|browse|mode=undeliveried', 'alias' => 'create,edit,view,history');
-$lang->contract->menu->finished     = array('link' => '已完成|contract|browse|mode=finished',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->canceled     = array('link' => '已取消|contract|browse|mode=canceled',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->expired      = array('link' => '已過期|contract|browse|mode=expired',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->expire       = array('link' => '即將到期|contract|browse|mode=expire', 'alias' => 'create,edit,view,history');
+$lang->contract->menu->unreceived   = array('link' => '回款中|contract|browse|mode=unreceived',   'alias' => 'create,edit,view,history');
+$lang->contract->menu->undeliveried = array('link' => '交付中|contract|browse|mode=undeliveried', 'alias' => 'create,edit,view,history');
+$lang->contract->menu->finished     = array('link' => '已完成|contract|browse|mode=finished',     'alias' => 'create,edit,view,history');
+$lang->contract->menu->canceled     = array('link' => '已取消|contract|browse|mode=canceled',     'alias' => 'create,edit,view,history');
+$lang->contract->menu->expired      = array('link' => '已過期|contract|browse|mode=expired',      'alias' => 'create,edit,view,history');
+$lang->contract->menu->expire       = array('link' => '即將到期|contract|browse|mode=expire',     'alias' => 'create,edit,view,history');
+$lang->contract->menu->report       = array('link' => '報表|report|browse|module=contract');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
-$lang->setting->menu->product       = '產品狀態|setting|lang|module=product&field=statusList';
-$lang->setting->menu->customerType  = '客戶類型|setting|lang|module=customer&field=typeList';
-$lang->setting->menu->customerSize  = '客戶規模|setting|lang|module=customer&field=sizeNameList';
-$lang->setting->menu->customerLevel = '客戶等級|setting|lang|module=customer&field=levelNameList';
-$lang->setting->menu->area          = '區域設置|tree|browse|type=area|';
-$lang->setting->menu->industry      = '行業設置|tree|browse|type=industry|';
-$lang->setting->menu->currency      = '貨幣設置|setting|lang|module=common&field=currencyList';
-$lang->setting->menu->salesGroup    = array('link' => '銷售分組|sales|browse|', 'alias' => 'create,edit');
+$lang->setting->menu->product        = '產品狀態|setting|lang|module=product&field=statusList';
+$lang->setting->menu->customerType   = '客戶類型|setting|lang|module=customer&field=typeList';
+$lang->setting->menu->customerSize   = '客戶規模|setting|lang|module=customer&field=sizeNameList';
+$lang->setting->menu->customerLevel  = '客戶等級|setting|lang|module=customer&field=levelNameList';
+$lang->setting->menu->customerStatus = '客戶狀態|setting|lang|module=customer&field=statusList';
+$lang->setting->menu->area           = '區域設置|tree|browse|type=area|';
+$lang->setting->menu->industry       = '行業設置|tree|browse|type=industry|';
+$lang->setting->menu->currency       = '貨幣設置|setting|lang|module=common&field=currencyList';
+$lang->setting->menu->salesGroup     = array('link' => '銷售分組|sales|browse|', 'alias' => 'create,edit');
 
 /* Menu of sales module. */
 $lang->sales = new stdclass();

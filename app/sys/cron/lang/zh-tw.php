@@ -1,4 +1,5 @@
 <?php
+if(!isset($lang->cron)) $lang->cron = new stdclass();
 $lang->cron->common  = '定時任務';
 $lang->cron->index   = '首頁';
 $lang->cron->list    = '任務列表';
@@ -26,7 +27,7 @@ $lang->cron->statusList['normal']  = '正常';
 $lang->cron->statusList['running'] = '運行中';
 $lang->cron->statusList['stop']    = '停止';
 
-$lang->cron->typeList['zentao'] = '禪道自調用';
+$lang->cron->typeList['ranzhi'] = '然之自調用';
 $lang->cron->typeList['system'] = '操作系統命令';
 
 $lang->cron->toggleList['start'] = '激活';
@@ -35,11 +36,11 @@ $lang->cron->toggleList['stop']  = '禁用';
 $lang->cron->confirmDelete = '是否刪除該計劃任務？';
 $lang->cron->confirmTurnon = '是否關閉計劃任務？';
 $lang->cron->introduction  = <<<EOD
-<p>計劃任務功能可以定時執行諸如更新燃盡圖、備份等操作，免除自己佈置定時任務。</p>
+<p>計劃任務功能可以定時執行諸如備份等操作，免除自己佈置定時任務。</p>
 <p>該功能還有待完善，所以預設關閉該功能</p>
 EOD;
 $lang->cron->confirmOpen = <<<EOD
-<p>是否開啟該功能？<a href="%s" target='hiddenwin'>打開計劃任務</a></p>
+<p>是否開啟該功能？<a href="%s" data-type="iframe" data-toggle="modal">打開計劃任務</a></p>
 EOD;
 
 $lang->cron->notice = new stdclass();

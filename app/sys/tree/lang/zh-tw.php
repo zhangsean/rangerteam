@@ -37,7 +37,8 @@ $lang->category->alias    = '別名';
 $lang->category->parent   = '上級類目';
 $lang->category->desc     = '描述';
 $lang->category->keywords = '關鍵詞';
-$lang->category->children = "子類目";
+$lang->category->children = '子類目';
+$lang->category->rights   = '權限';
 
 /* Lang items for area. */
 $lang->area = new stdclass();
@@ -59,6 +60,16 @@ $lang->industry->desc     = '描述';
 $lang->industry->keywords = '關鍵詞';
 $lang->industry->children = "子行業";
 
+/* Lang items for product. */
+if(!isset($lang->product))$lang->product = new stdclass();
+$lang->product->common   = '產品綫';
+$lang->product->name     = '名稱';
+$lang->product->alias    = '別名';
+$lang->product->parent   = '上級產品綫';
+$lang->product->desc     = '描述';
+$lang->product->keywords = '關鍵詞';
+$lang->product->children = "子產品綫";
+
 /* Lang items for income. */
 $lang->in = new stdclass();
 $lang->in->common   = '收入科目';
@@ -78,6 +89,7 @@ $lang->out->parent   = '上級科目';
 $lang->out->desc     = '描述';
 $lang->out->keywords = '關鍵詞';
 $lang->out->children = '子科目';
+$lang->out->rights   = '權限';
 
 /* Lang items for forum. */
 $lang->board = new stdclass();

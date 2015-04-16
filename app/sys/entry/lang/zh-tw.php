@@ -6,7 +6,7 @@
  * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id: zh-tw.php 2508 2015-01-26 08:32:52Z chujilu $
+ * @version     $Id: zh-tw.php 2685 2015-04-08 09:39:38Z chujilu $
  * @link        http://www.ranzhico.com
  */
 $lang->entry->common    = '應用';
@@ -64,7 +64,7 @@ $lang->entry->error->name  = '名稱不能為空';
 $lang->entry->error->code  = '代號不能為空';
 $lang->entry->error->key   = '密鑰不能為空';
 $lang->entry->error->ip    = 'IP列表不能為空';
-$lang->entry->error->url   = ' 非內置應用的登錄地址，必須包含http://或者https://';
+$lang->entry->error->url   = ' 非內置應用的登錄地址，必須包含 /、http://或者https://';
 
 $lang->entry->openList['']       = '';
 $lang->entry->openList['blank']  = '新開標籤';

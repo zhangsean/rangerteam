@@ -54,6 +54,7 @@ $lang->order->close         = '關閉訂單';
 $lang->order->sign          = '簽約';
 $lang->order->assign        = '訂單指派';
 $lang->order->activate      = '激活';
+$lang->order->export        = '導出';
 
 $lang->order->statusList['normal'] = '正常';
 $lang->order->statusList['signed'] = '已簽約';

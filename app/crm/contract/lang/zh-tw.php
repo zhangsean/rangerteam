@@ -18,6 +18,7 @@ $lang->contract->customer      = '所屬客戶';
 $lang->contract->name          = '名稱';
 $lang->contract->code          = '編號';
 $lang->contract->amount        = '金額';
+$lang->contract->currency      = '貨幣類型';
 $lang->contract->all           = '合同總額';
 $lang->contract->thisAmount    = '本次回款';
 $lang->contract->items         = '主要條款';
@@ -43,6 +44,9 @@ $lang->contract->createdDate   = '創建時間';
 $lang->contract->editedBy      = '最後修改';
 $lang->contract->editedDate    = '最後修改時間';
 $lang->contract->handlers      = '經手人';
+$lang->contract->contactedBy   = '由誰聯繫';
+$lang->contract->contactedDate = '最後聯繫';
+$lang->contract->nextDate      = '下次聯繫';
 
 $lang->contract->browse           = '瀏覽合同';
 $lang->contract->receive          = '回款';
@@ -65,6 +69,7 @@ $lang->contract->editReturn       = '編輯回款';
 $lang->contract->editDelivery     = '編輯交付';
 $lang->contract->deleteReturn     = '刪除回款';
 $lang->contract->deleteDelivery   = '刪除交付';
+$lang->contract->export           = '導出';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = '等待交付';

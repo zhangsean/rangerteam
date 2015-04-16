@@ -86,6 +86,9 @@ $lang->delete         = '刪除';
 $lang->close          = '關閉';
 $lang->finish         = '完成';
 $lang->cancel         = '取消';
+$lang->import         = '導入';
+$lang->export         = '導出';
+$lang->setFileName    = '檔案名：';
 $lang->save           = '保存';
 $lang->saved          = '已保存';
 $lang->confirm        = '確認';
@@ -120,6 +123,11 @@ $lang->selectAll      = '全選';
 $lang->selectReverse  = '反選';
 $lang->continueSave   = '繼續保存';
 $lang->submitting     = '稍候...';
+$lang->yes            = '是';
+$lang->no             = '否';
+
+$lang->exportAll      = '導出全部記錄';
+$lang->exportThisPage = '導出本頁記錄';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();
@@ -196,9 +204,10 @@ $lang->entry->menu->webapp = 'WEB應用|webapp|obtain|';
 /* Menu system. */
 $lang->system       = new stdclass();
 $lang->system->menu = new stdclass();
-$lang->system->menu->mail  = array('link' => '發信|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->system->menu->trash = array('link' => '資源回收筒|action|trash|');
-//$lang->system->menu->backup = '備份|admin|backup|';
+$lang->system->menu->mail   = array('link' => '發信|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->system->menu->trash  = array('link' => '資源回收筒|action|trash|');
+$lang->system->menu->cron   = '計劃任務|cron|index|';
+$lang->system->menu->backup = '備份|backup|index|';
 
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
@@ -217,6 +226,16 @@ $lang->menuGroups->mail = 'system';
 $lang->action = new stdclass();
 $lang->action->menu = $lang->system->menu;
 $lang->menuGroups->action = 'system';
+
+/* Menu of cron module. */
+$lang->cron = new stdclass();
+$lang->cron->menu = $lang->system->menu;
+$lang->menuGroups->cron = 'system';
+
+/* Menu of backup module. */
+$lang->backup = new stdclass();
+$lang->backup->menu = $lang->system->menu;
+$lang->menuGroups->backup = 'system';
 
 /* The error messages. */
 $lang->error = new stdclass();
