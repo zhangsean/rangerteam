@@ -166,7 +166,7 @@ class cron extends control
                     $return = '';
                     if($cron['command'])
                     {
-                        if(isset($crons[$id]) and $crons[$id]->type == 'zentao')
+                        if(isset($crons[$id]) and $crons[$id]->type == 'ranzhi')
                         {
                             parse_str($cron['command'], $params);
                             if(isset($params['moduleName']) and isset($params['methodName']))

@@ -1697,4 +1697,4 @@ INSERT INTO `sys_grouppriv` VALUES
 (5,'user','colleague');
 
 INSERT INTO `sys_cron` (`m`, `h`, `dom`, `mon`, `dow`, `command`, `remark`, `type`, `buildin`, `status`, `lastTime`) VALUES
-('*',    '*',    '*',    '*',    '*',    '',     '监控定时任务', 'zentao',       1,      'normal',       '0000-00-00 00:00:00');
+('*', '*', '*', '*', '*', '', '监控定时任务', 'ranzhi', 1, 'normal', '0000-00-00 00:00:00');

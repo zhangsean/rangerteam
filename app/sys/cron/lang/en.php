@@ -27,7 +27,7 @@ $lang->cron->statusList['normal']  = 'Normal';
 $lang->cron->statusList['running'] = 'Running';
 $lang->cron->statusList['stop']    = 'Stop';
 
-$lang->cron->typeList['zentao'] = 'Self call';
+$lang->cron->typeList['ranzhi'] = 'Self call';
 $lang->cron->typeList['system'] = 'System command';
 
 $lang->cron->toggleList['start'] = 'Activation';

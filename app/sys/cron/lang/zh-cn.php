@@ -27,7 +27,7 @@ $lang->cron->statusList['normal']  = '正常';
 $lang->cron->statusList['running'] = '运行中';
 $lang->cron->statusList['stop']    = '停止';
 
-$lang->cron->typeList['zentao'] = '然之自调用';
+$lang->cron->typeList['ranzhi'] = '然之自调用';
 $lang->cron->typeList['system'] = '操作系统命令';
 
 $lang->cron->toggleList['start'] = '激活';
