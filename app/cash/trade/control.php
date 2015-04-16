@@ -55,11 +55,6 @@ class trade extends control
         $trades = $this->trade->getList($mode, $orderBy, $pager);
         $this->session->set('tradeQueryCondition', $this->dao->get());
 
-        foreach($trades as $id => $trade)
-        {
-            if($trade->type == 'out' and !$this->loadModel('tree')->hasRight($trade->category)) unset($trades[$id]);
-        }
-
         $this->view->title   = $this->lang->trade->browse;
         $this->view->trades  = $trades;
         $this->view->mode    = $mode;

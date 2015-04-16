@@ -38,6 +38,13 @@ class tradeModel extends model
 
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
+        $outCategories = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->fetchAll('id');
+        $denyCategories = array();
+        foreach($outCategories as $id => $outCategory)
+        {
+            if(!$this->loadModel('tree')->hasRight($id)) $denyCategories[] = $id; 
+        }
+
         $trades = $this->dao->select('*')->from(TABLE_TRADE)
             ->where('parent')->eq('')
             ->beginIF($mode == 'in')->andWhere('type')->eq('in')
@@ -45,6 +52,7 @@ class tradeModel extends model
             ->beginIF($mode == 'transfer')->andWhere('type')->like('transfer%')->orWhere('category')->eq('fee')
             ->beginIF($mode == 'inveset')->andWhere('type')->in('inveset,redeem')->orWhere('category')->in('profit,loss')
             ->beginIF($mode == 'bysearch')->andWhere($tradeQuery)->fi()
+            ->beginIF(!empty($denyCategories))->andWhere('category')->notin($denyCategories)
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
