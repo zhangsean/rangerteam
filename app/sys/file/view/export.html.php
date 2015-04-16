@@ -14,7 +14,7 @@
 <script>
 function setDownloading()
 {
-    if($.browser.opera) return true;   // Opera don't support, omit it.
+    if(/opera/.test(navigator.userAgent.toLowerCase())) return true;   // Opera don't support, omit it.
 
     $.cookie('downloading', 0);
     time = setInterval("closeWindow()", 300);
@@ -45,4 +45,5 @@ function closeWindow()
     </tr>
   </table>
 </form>
+<iframe id='hiddenwin' name='hiddenwin' class='hidden'></iframe>
 <?php include '../../../sys/common/view/footer.html.php';?>
