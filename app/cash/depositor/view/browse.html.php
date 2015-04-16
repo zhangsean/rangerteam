@@ -14,11 +14,13 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-group"></i> <?php echo $lang->depositor->browse;?></strong>
+    <?php if($app->user->admin == 'super' or isset($app->user->rights['balance']['browse'])):?>
     <?php foreach($balances as $currency => $balanceList):?>
     <?php $sum = 0;?>
     <?php foreach($balanceList as $balance) $sum += $balance->money;?>
     <strong class='text-danger' title='<?php echo $sum?>'><?php echo $currencyList[$currency] . $lang->colon . commonModel::tidyMoney($sum);?></strong>
     <?php endforeach;?>
+    <?php endif;?>
     <div class='panel-actions pull-right'>
       <?php commonModel::printLink('depositor', 'export', '', "<i class='icon-download-alt'></i> " . $lang->export, "class='iframe btn btn-primary' data-width='700'");?></li>
       <?php commonModel::printLink('depositor', 'create', '', "<i class='icon-plus'></i> {$lang->depositor->create}", "class='btn btn-primary' data-toggle='modal'")?>
