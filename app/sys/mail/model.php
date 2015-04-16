@@ -47,6 +47,15 @@ class mailModel extends model
         if(!$config) $config = $this->getConfigByMXRR($domain, $username);
         if(!$config) $config = $this->getConfigByDetectingSMTP($domain, $username, 25);
         if(!$config) $config = $this->getConfigByDetectingSMTP($domain, $username, 465);
+        if(!$config) 
+        {
+            $config = new stdclass();
+            $config->username = $username;
+            $config->host     = 'smtp.' . $domain;
+            $config->auth     = 1;
+            $config->port     = 25;
+            $config->secure   = '';
+        }
 
         /* Set default values. */
         $config->mta      = 'smtp';
@@ -139,7 +148,9 @@ class mailModel extends model
     {
         $host = 'smtp.' . $domain;
         ini_set('default_socket_timeout', 3);
-        $connection = @fsockopen($host, $port);
+        ob_start();
+        $connection = fsockopen($host, $port);
+        ob_end_clean();
         if(!$connection) return false;
         fclose($connection); 
 

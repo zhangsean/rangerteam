@@ -33,23 +33,29 @@ class mail extends control
     {
         if($_POST)
         {
-            $error = '';
-            if($this->post->fromAddress == false) $error = sprintf($this->lang->error->notempty, $this->lang->mail->fromAddress);
-            if(!validater::checkEmail($this->post->fromAddress)) $error .= '\n' . sprintf($this->lang->error->email, $this->lang->mail->fromAddress);
-
-            if($error) die(js::alert($error));
-
+            if($this->post->fromAddress == false) 
+            {
+                $error   = sprintf($this->lang->error->notempty, $this->lang->mail->fromAddress);
+                $message = array('fromAddress' => $error);
+                $this->send(array('result' => 'fail', 'message' => $message));
+            }
+            if(!validater::checkEmail($this->post->fromAddress)) 
+            {
+                $error   = sprintf($this->lang->error->email, $this->lang->mail->fromAddress);
+                $message = array('fromAddress' => $error);
+                $this->send(array('result' => 'fail', 'message' => $message));
+            }
+            
             $mailConfig = $this->mail->autoDetect($this->post->fromAddress);
             $mailConfig->fromAddress = $this->post->fromAddress;
             $this->session->set('mailConfig',  $mailConfig);
 
-            die(js::locate(inlink('edit'), 'parent'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('edit')));
         }
 
-        $this->view->title      = $this->lang->mail->common . $this->lang->colon . $this->lang->mail->detect;
-        $this->view->position[] = html::a(inlink('index'), $this->lang->mail->common);
-        $this->view->position[] = $this->lang->mail->detect;
-
+        $this->view->title       = $this->lang->mail->common . $this->lang->colon . $this->lang->mail->detect;
+        $this->view->position[]  = html::a(inlink('index'), $this->lang->mail->common);
+        $this->view->position[]  = $this->lang->mail->detect;
         $this->view->fromAddress = $this->session->mailConfig ? $this->session->mailConfig->fromAddress : '';
 
         $this->display();
