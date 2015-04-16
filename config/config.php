@@ -116,6 +116,9 @@ define('TABLE_BLOCK',     '`sys_block`');
 define('TABLE_SCHEMA',    '`sys_schema`');
 define('TABLE_RELATION',  '`sys_relation`');
 define('TABLE_CRON',      '`sys_cron`');
+define('TABLE_USERGROUP', '`sys_usergroup`');
+define('TABLE_GROUPPRIV', '`sys_grouppriv`');
+define('TABLE_USERQUERY', '`sys_userquery`');
 
 /* Tables for crm. */
 define('TABLE_ADDRESS',       '`crm_address`');
@@ -125,6 +128,7 @@ define('TABLE_CUSTOMER',      '`crm_customer`');
 define('TABLE_RESUME',        '`crm_resume`');
 define('TABLE_CONTACT',       '`crm_contact`');
 define('TABLE_CONTRACT',      '`crm_contract`');
+define('TABLE_CONTRACTORDER', '`crm_contractorder`');
 define('TABLE_PLAN',          '`crm_plan`');
 define('TABLE_SERVICE',       '`crm_service`');
 define('TABLE_DELIVERY',      '`crm_delivery`');
@@ -138,6 +142,7 @@ define('TABLE_EFFORT',      '`oa_effort`');
 define('TABLE_BOOK',        '`oa_book`');
 define('TABLE_LAYOUT',      '`oa_layout`');
 define('TABLE_DOC',         '`oa_doc`');
+define('TABLE_DOCLIB',      '`oa_doclib`');
 
 /* Tables for cash. */
 define('TABLE_DEPOSITOR', '`cash_depositor`');
@@ -148,15 +153,6 @@ define('TABLE_TRADE',     '`cash_trade`');
 define('TABLE_THREAD',  '`team_thread`');
 define('TABLE_REPLY',   '`team_reply`');
 define('TABLE_MESSAGE', '`sys_message`');
-
-if(RUN_MODE != 'upgrade')
-{
-    define('TABLE_CONTRACTORDER', '`crm_contractorder`');
-    define('TABLE_DOCLIB',        '`oa_doclib`');
-    define('TABLE_USERGROUP',     '`sys_usergroup`');
-    define('TABLE_GROUPPRIV',     '`sys_grouppriv`');
-    define('TABLE_USERQUERY',     '`sys_userquery`');
-}
 
 /* The mapping list of object and tables. */
 $config->objectTables['product']     = TABLE_PRODUCT;

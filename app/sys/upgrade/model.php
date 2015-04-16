@@ -545,16 +545,16 @@ class upgradeModel extends model
             $priv->group  = $group->id;
             $priv->module = 'search';
             $priv->method = 'buildForm';
-            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+            $this->dao->replace('`sys_groupPriv`')->data($priv)->exec();
 
             $priv->method = 'buildQuery';
-            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+            $this->dao->replace('`sys_groupPriv`')->data($priv)->exec();
 
             $priv->method = 'saveQuery';
-            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+            $this->dao->replace('`sys_groupPriv`')->data($priv)->exec();
 
             $priv->method = 'deleteQuery';
-            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+            $this->dao->replace('`sys_groupPriv`')->data($priv)->exec();
         }
 
         return !dao::isError();
@@ -626,7 +626,7 @@ class upgradeModel extends model
                     foreach($modules[$module] as $method)
                     {
                         $priv->method = $method;
-                        $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+                        $this->dao->replace('`sys_groupPriv`')->data($priv)->exec();
                     }
                 }
             }
@@ -637,10 +637,10 @@ class upgradeModel extends model
                 $priv->group  = 2;
                 $priv->module = 'depositor';
                 $priv->method = 'delete';
-                $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+                $this->dao->replace('`sys_groupPriv`')->data($priv)->exec();
 
                 $priv->method = 'savabalance';
-                $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+                $this->dao->replace('`sys_groupPriv`')->data($priv)->exec();
             }
 
             if($group->id == 3)
@@ -653,7 +653,7 @@ class upgradeModel extends model
                 foreach($methods as $method)
                 {
                     $priv->method = $method;
-                    $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+                    $this->dao->replace('`sys_groupPriv`')->data($priv)->exec();
                 }
             }
 
@@ -661,16 +661,16 @@ class upgradeModel extends model
             $priv->group  = $group->id;
             $priv->module = 'apppriv';
             $priv->method = 'crm';
-            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+            $this->dao->replace('`sys_groupPriv`')->data($priv)->exec();
 
             $priv->method = 'cash';
-            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+            $this->dao->replace('`sys_groupPriv`')->data($priv)->exec();
 
             $priv->method = 'oa';
-            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+            $this->dao->replace('`sys_groupPriv`')->data($priv)->exec();
 
             $priv->method = 'team';
-            $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+            $this->dao->replace('`sys_groupPriv`')->data($priv)->exec();
         }
 
         return !dao::isError();
