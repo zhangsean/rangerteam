@@ -45,6 +45,7 @@ $lang->appModule->team[] = 'user';
 $lang->appModule->sys = array();
 $lang->appModule->sys[] = 'tree';
 $lang->appModule->sys[] = 'setting';
+$lang->appModule->sys[] = 'report';
 
 /* Module order. */
 $lang->moduleOrder[0]   = 'order';
@@ -53,26 +54,26 @@ $lang->moduleOrder[10]  = 'customer';
 $lang->moduleOrder[15]  = 'contact';
 $lang->moduleOrder[20]  = 'product';
 $lang->moduleOrder[25]  = 'address';
-$lang->moduleOrder[26]  = 'resume';
+$lang->moduleOrder[27]  = 'resume';
 
 $lang->moduleOrder[30]  = 'trade';
 $lang->moduleOrder[35]  = 'depositor';
 $lang->moduleOrder[40]  = 'balance';
-$lang->moduleOrder[41]  = 'provider';
+$lang->moduleOrder[42]  = 'provider';
+$lang->moduleOrder[43] = 'schema';
 
 $lang->moduleOrder[45]  = 'project';
 $lang->moduleOrder[50]  = 'announce';
 $lang->moduleOrder[55]  = 'doc';
+$lang->moduleOrder[57]  = 'task';
 
 $lang->moduleOrder[60]  = 'blog';
 $lang->moduleOrder[65]  = 'forum';
 $lang->moduleOrder[70]  = 'thread';
 $lang->moduleOrder[72]  = 'user';
 
-$lang->moduleOrder[75]  = 'task';
 $lang->moduleOrder[80]  = 'tree';
-$lang->moduleOrder[100] = 'schema';
-$lang->moduleOrder[105] = 'setting';
+$lang->moduleOrder[85] = 'setting';
 
 $lang->resource = new stdclass();
 
@@ -459,6 +460,12 @@ $lang->resource->setting->reset = 'reset';
 
 $lang->setting->methodOrder[5]  = 'lang';
 $lang->setting->methodOrder[10] = 'reset';
+
+/* Report. */
+$lang->resource->report = new stdclass();
+$lang->resource->report->browse = 'browse';
+
+$lang->report->methodOrder[5] = 'browse';
 
 /* Every version of new privilege. */
 $lang->changelog = array();

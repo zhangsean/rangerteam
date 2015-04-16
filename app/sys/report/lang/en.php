@@ -11,7 +11,7 @@
  */
 if(!isset($lang->report)) $lang->report = new stdclass();
 $lang->report->common     = 'Report';
-$lang->report->index      = 'Report index';
+$lang->report->browse     = 'View Report';
 $lang->report->list       = 'Report list';
 $lang->report->item       = 'Item';
 $lang->report->value      = 'Value';

@@ -246,22 +246,19 @@ class commonModel extends model
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
-            if(strpos(',tree,setting,schema,sales,group,', $module) != false) 
+            if(strpos(',tree,setting,schema,sales,', $module) != false and isset($lang->setting->menu)) 
             {
-                if(isset($lang->setting->menu)) 
+                foreach($lang->setting->menu as $settingMenu)
                 {
-                    foreach($lang->setting->menu as $settingMenu)
-                    {
-                        $class = $currentModule == 'setting' ? " class='active'" : '';
-                        if(is_array($settingMenu)) $settingMenu = $settingMenu['link'];
-                        list($settingLabel, $moduleName, $methodName, $settingVars) = explode('|', $settingMenu);
+                    $class = $currentModule == 'setting' ? " class='active'" : '';
+                    if(is_array($settingMenu)) $settingMenu = $settingMenu['link'];
+                    list($settingLabel, $moduleName, $methodName, $settingVars) = explode('|', $settingMenu);
 
-                        if(commonModel::hasPriv($moduleName, $methodName))
-                        {
-                            $link  = helper::createLink($moduleName, $methodName, $settingVars);
-                            $string .= "<li$class><a href='$link'>$label</a></li>\n";
-                            break;
-                        }
+                    if(commonModel::hasPriv($moduleName, $methodName))
+                    {
+                        $link  = helper::createLink($moduleName, $methodName, $settingVars);
+                        $string .= "<li$class><a href='$link'>$label</a></li>\n";
+                        break;
                     }
                 }
             }

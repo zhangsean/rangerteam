@@ -10,8 +10,8 @@
  * @link        http://www.ranzhico.com
  */
 if(!isset($lang->report)) $lang->report = new stdclass();
-$lang->report->common     = '统计视图';
-$lang->report->index      = '统计首页';
+$lang->report->common     = '报表';
+$lang->report->browse     = '查看报表';
 $lang->report->list       = '统计报表';
 $lang->report->item       = '条目';
 $lang->report->value      = '值';
