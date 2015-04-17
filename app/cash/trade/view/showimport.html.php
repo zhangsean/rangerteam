@@ -62,16 +62,24 @@
             <?php $hasCustomer = (is_numeric($trade['trader']) or empty($trade['trader']));?>
             <div class='input-group out' <?php if($trade['type'] == 'in') echo "style='display:none'"?>>
               <?php echo html::select("trader[$i]", $traderList, ($hasCustomer ? $trade['trader'] : 0), "class='form-control chosen' id='trader{$i}'");?>
-              <?php echo html::input("traderName[$i]", '', "class='form-control' id='traderName{$i}' style='display:none'");?>
+              <?php echo html::input("traderName[$i]", $hasCustomer ? '' : $trade['trader'], "class='form-control' id='traderName{$i}' style='display:none'");?>
               <div class='input-group-addon'>
-                <label class="checkbox"><input type="checkbox" name="createTrader[<?php echo $i;?>]" value="1"><?php echo $lang->trade->newTrader;?></label>
+                <label class="checkbox">
+                  <input type="checkbox" name="createTrader[<?php echo $i;?>]" value="1">
+                  <?php echo $lang->trade->newTrader;?>
+                  <?php if(!$hasCustomer and empty($trader['trader'])):?><i class='red icon-question' title="<?php echo $lang->trade->noTraderMatch;?>"></i><?php endif;?>
+                </label>
               </div>
             </div>
             <div class='input-group in' <?php if($trade['type'] == 'out') echo "style='display:none'"?>>
               <?php echo html::select("trader[$i]", $customerList, ($hasCustomer ? $trade['trader'] : 0), "class='form-control chosen' id='trader{$i}'");?>
-              <?php echo html::input("customerName[$i]", '', "class='form-control' id='customerName{$i}' style='display:none'");?>
+              <?php echo html::input("customerName[$i]", ($hasCustomer ? '' : $trade['trader']), "class='form-control' id='customerName{$i}' style='display:none'");?>
               <div class='input-group-addon'>
-                <label class="checkbox"><input type="checkbox" name="createCustomer[<?php echo $i;?>]" value="1"><?php echo $lang->trade->newTrader;?></label>
+                <label class="checkbox">
+                  <input type="checkbox" name="createCustomer[<?php echo $i;?>]" value="1">
+                  <?php echo $lang->trade->newTrader;?>
+                  <?php if(!$hasCustomer and empty($trader['trader'])):?><i class='red icon-question' title="<?php echo $lang->trade->noTraderMatch;?>"></i><?php endif;?>
+                </label>
               </div>
             </div>
           </td>

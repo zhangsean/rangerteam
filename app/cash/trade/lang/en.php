@@ -111,3 +111,5 @@ $lang->trade->totalAmount = '%s: income %s, expend %s，%s；';
 $lang->trade->profit      = 'profit';
 $lang->trade->loss        = 'loss';
 $lang->trade->balance     = 'Income is equal to expenditure';
+
+$lang->trade->noTraderMatch = 'No matched trader，click to create';

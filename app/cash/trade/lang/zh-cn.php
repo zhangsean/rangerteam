@@ -111,3 +111,5 @@ $lang->trade->totalAmount = '%s收入%s，支出%s，%s；';
 $lang->trade->profit      = '盈';
 $lang->trade->loss        = '亏';
 $lang->trade->balance     = '收支平衡';
+
+$lang->trade->noTraderMatch = '没有匹配到相应的商户，点击新建';

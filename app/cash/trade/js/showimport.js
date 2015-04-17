@@ -26,6 +26,7 @@ $(document).ready(function()
             $(this).parents('.input-group').find('select').hide();
             $(this).parents('.input-group').find('[id*=trader][id*=_chosen]').hide();
             $(this).parents('.input-group').find('input[type=text][id*=customerName]').show().focus();
+            $(this).parents('.input-group-addon').find('.icon-question').hide();
         }
         else
         {
