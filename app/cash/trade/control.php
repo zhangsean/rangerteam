@@ -501,22 +501,22 @@ class trade extends control
 
             if($schema->fee and $fee)
             {
-                $data['type']   = 'out';
-                $data['money']  = $fee;
-                $data['desc']   = '';
+                $data['type']  = 'out';
+                $data['money'] = $fee;
+                $data['desc']  = '';
                 $dataList[]    = $data;
             }
         }
 
-        $this->view->title         = $this->lang->trade->showImport;
-        $this->view->trades        = $dataList;
-        $this->view->depositor     = $this->loadModel('depositor')->getByID($depositorID);
-        $this->view->users         = $this->loadModel('user')->getPairs();
-        $this->view->customerList  = $customerList;
-        $this->view->traderList    = $traderList;
-        $this->view->expenseTypes  = $expenseTypes;
-        $this->view->incomeTypes   = $incomeTypes;
-        $this->view->deptList      = $this->tree->getOptionMenu('dept', 0, $removeRoot = true);
+        $this->view->title        = $this->lang->trade->showImport;
+        $this->view->trades       = $dataList;
+        $this->view->depositor    = $this->loadModel('depositor')->getByID($depositorID);
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->customerList = $customerList;
+        $this->view->traderList   = $traderList;
+        $this->view->expenseTypes = $expenseTypes;
+        $this->view->incomeTypes  = $incomeTypes;
+        $this->view->deptList     = $this->tree->getOptionMenu('dept', 0, $removeRoot = true);
 
         $this->display();
     }
