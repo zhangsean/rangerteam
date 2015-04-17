@@ -26,6 +26,11 @@ $lang->setting->user->fields['roleList'] = 'Role list';
 
 $lang->setting->product = new stdClass();
 $lang->setting->product->fields['statusList'] = 'Product status';
+$lang->setting->product->fields['lineList']   = 'Product line';
+
+$lang->setting->product->lineList = new stdclass();
+$lang->setting->product->lineList->key   = 'Code';
+$lang->setting->product->lineList->value = 'Name';
 
 $lang->setting->customer = new stdClass();
 $lang->setting->customer->fields['typeList']      = 'Customer type';
@@ -57,3 +62,7 @@ $lang->setting->placeholder->levelNameList = new stdclass();
 $lang->setting->placeholder->levelNameList->key   = 'Key should be interger or letters';
 $lang->setting->placeholder->levelNameList->value = 'Brief description';
 $lang->setting->placeholder->levelNameList->info  = 'Detailed description';
+
+$lang->setting->placeholder->lineList = new stdclass();
+$lang->setting->placeholder->lineList->key   = 'Key should be interger or letters';
+$lang->setting->placeholder->lineList->value = 'Brief description';

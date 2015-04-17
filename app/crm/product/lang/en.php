@@ -40,3 +40,5 @@ $lang->product->typeList['virtual'] = 'Virtual';
 $lang->product->statusList['developing'] = 'Developing';
 $lang->product->statusList['normal']     = 'Normal';
 $lang->product->statusList['offline']    = 'Offline';
+
+$lang->product->lineList['default'] = '';

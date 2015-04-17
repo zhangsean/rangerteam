@@ -11,6 +11,7 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
+<?php $isLineList = ($module == 'product' and $field == 'lineList') ? true : false;?>
 <form method='post' id='ajaxForm' class='form-inline'>
   <div class='panel'>
     <div class="panel-heading">
@@ -26,10 +27,14 @@
       </table>
     </div>
     <?php else:?>
+    <?php 
+    $tipsK = isset($lang->setting->{$module}->{$field}->key)   ? $lang->setting->{$module}->{$field}->key   : $lang->setting->key;
+    $tipsV = isset($lang->setting->{$module}->{$field}->value) ? $lang->setting->{$module}->{$field}->value : $lang->setting->value;
+    ?>
     <table class='table table-condensed'>
       <tr>
-        <th class='w-150px text-center'><?php echo $lang->setting->key;?></th>
-        <th class='w-400px'><?php echo $lang->setting->value;?></th>
+        <th class='w-150px text-center'><?php echo $tipsK;?></th>
+        <th class='w-400px'><?php echo $tipsV;?></th>
         <th></th>
       </tr>
       <?php foreach($fieldList as $key => $value):?>
@@ -58,7 +63,8 @@
       </tr>
       <?php endforeach;?>
       <tfoot>
-        <tr>
+        <?php $langClass = $isLineList ? "class='hidden'" : ''?>
+        <tr <?php echo $langClass;?>>
           <td></td>
           <td colspan='2'>
           <?php 
@@ -72,7 +78,7 @@
           <td>
           <?php
           echo html::submitButton();
-          echo html::a(inlink('reset', "module=$module&field=$field&appName=$appName"), $lang->setting->reset, "class='btn deleter'");
+          if(!$isLineList) echo html::a(inlink('reset', "module=$module&field=$field&appName=$appName"), $lang->setting->reset, "class='btn deleter'");
           ?>
           </td>
           <td></td>

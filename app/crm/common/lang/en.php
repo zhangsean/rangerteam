@@ -81,6 +81,7 @@ $lang->contract->menu->report       = array('link' => 'Report|report|browse|modu
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->product        = 'Product Status|setting|lang|module=product&field=statusList';
+$lang->setting->menu->productLine    = 'Product Line|setting|lang|module=product&field=lineList';
 $lang->setting->menu->customerType   = 'Customer Status|setting|lang|module=customer&field=typeList';
 $lang->setting->menu->customerSize   = 'Customer Size|setting|lang|module=customer&field=sizeNameList';
 $lang->setting->menu->customerLevel  = 'Customer Level|setting|lang|module=customer&field=levelNameList';
