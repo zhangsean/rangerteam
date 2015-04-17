@@ -79,7 +79,7 @@ $lang->action->desc->deleteaddress         = '$date, deleted address by <strong>
 $lang->action->desc->diff1                 = 'changed <strong><i>%s</i></strong>, old is "%s", new is "%s".<br />';
 $lang->action->desc->diff2                 = 'changed <strong><i>%s</i></strong>, the diff is:' . "\n" . "<blockquote>%s</blockquote>" . "\n<div class='hidden'>%s</div>";
 $lang->action->desc->diff3                 = "changed file's name %s to %s.";
-$lang->action->desc->record                = '$date, <strong>$actor</strong> created log, the contact is:<strong>$contact</strong>.' . "\n";
+$lang->action->desc->record                = '$extra, <strong>$actor</strong> created log, the contact is:<strong>$contact</strong>, the date is:$date.' . "\n";
 $lang->action->desc->signed                = '$date, signed by <strong>$actor</strong>，the turnover is： <strong>$extra</strong>.' . "\n";
 $lang->action->desc->linkcontact           = '$date, <strong>$actor</strong> added contacts for customer： <strong>$extra</strong>.' . "\n";
 $lang->action->desc->createorder           = '$date, <strong>$actor</strong> created order:<strong>$extra</strong>.' . "\n";

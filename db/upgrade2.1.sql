@@ -20,3 +20,5 @@ CREATE TABLE IF NOT EXISTS `sys_cron` (
 
 INSERT INTO `sys_cron` (`m`, `h`, `dom`, `mon`, `dow`, `command`, `remark`, `type`, `buildin`, `status`, `lastTime`) VALUES
 ('*', '*', '*', '*', '*', '', '监控定时任务', 'ranzhi', 1, 'normal', '0000-00-00 00:00:00');
+
+UPDATE `sys_action` SET `extra` = `date` WHERE `action` = 'record';

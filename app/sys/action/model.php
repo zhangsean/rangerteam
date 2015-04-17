@@ -53,7 +53,7 @@ class actionModel extends model
         $this->dao->insert(TABLE_ACTION)
             ->data($action, $skip = 'nextDate')
             ->batchCheckIF($actionType == 'record', $this->config->action->require->createRecord, 'notempty')
-            ->checkIF($this->post->nextDate, 'nextDate', 'gt', helper::today())
+            ->checkIF($this->post->nextDate, 'nextDate', 'ge', helper::today())
             ->exec();
 
         return $this->dbh->lastInsertID();
@@ -68,7 +68,7 @@ class actionModel extends model
      */
     public function createRecord($objectType, $objectID, $customer, $contact)
     {
-        $result = $this->create($objectType, $objectID, $action = 'record', $this->post->comment, $extra = '', $actor = null, $customer, $contact);
+        $result = $this->create($objectType, $objectID, $action = 'record', $this->post->comment, helper::now(), $actor = null, $customer, $contact);
 
         if(!$result) return false;
         return $this->syncContactInfo($objectType, $objectID, $customer, $contact);
