@@ -29,6 +29,7 @@ class fileModel extends model
         $this->now = time();
         $this->setSavePath();
         $this->setWebPath();
+        $this->setMaxFileSize();
     }
 
     /**
@@ -503,5 +504,29 @@ class fileModel extends model
         $thumber = phpThumbFactory::create($rawImage);
         $thumber->resize($width, $height);
         $thumber->save($target);
+    }
+
+    /**
+     * Set max file size by php.ini.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setMaxFileSize()
+    {
+        global $config;
+        $value = ini_get('upload_max_filesize');
+        $last  = strtolower(substr($value, strlen($value) - 1));
+        $value = substr($value, 0, strlen($value) - 1);
+        switch($last)
+        {
+            case 'g':
+                $value *= 1024;
+            case 'm':
+                $value *= 1024;
+            case 'k':
+                $value *= 1024;
+        }
+        $config->file->maxSize = $value;
     }
 }
