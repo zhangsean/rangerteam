@@ -86,7 +86,7 @@ class oablockModel extends blockModel
         $params->orderBy['options'] = $this->lang->block->orderByList->task;
         $params->orderBy['control'] = 'select';
 
-        $this->lang->task->statusList['unfinished'] = $this->lang->block->waitTask;
+        $this->lang->task->statusList = array_merge(array('unfinished' => $this->lang->block->waitTask), $this->lang->task->statusList);
 
         $params->status['name']    = $this->lang->task->status;
         $params->status['options'] = $this->lang->task->statusList;
