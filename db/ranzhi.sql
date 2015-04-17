@@ -595,7 +595,7 @@ CREATE TABLE `sys_product` (
   `name` varchar(150) NOT NULL,
   `type` varchar(10) NOT NULL,
   `status` varchar(10) NOT NULL,
-  `line` mediumint(8) unsigned NOT NULL,
+  `line` varchar(30) NOT NULL DEFAULT 'default',
   `desc` text NOT NULL,
   `createdBy` varchar(30) NOT NULL,
   `createdDate` datetime NOT NULL,

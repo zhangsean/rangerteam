@@ -41,7 +41,6 @@ class product extends control
         
         $this->view->title    = $this->lang->product->browse;
         $this->view->products = $this->product->getList($mode, $orderBy, $pager);
-        $this->view->lineList = $this->loadModel('tree')->getOptionMenu('product');
         $this->view->pager    = $pager;
         $this->view->orderBy  = $orderBy;
         $this->view->mode     = $mode;
@@ -66,7 +65,6 @@ class product extends control
         }
 
         $this->view->title    = $this->lang->product->create;
-        $this->view->lineList = $this->loadModel('tree')->getOptionMenu('product');
         $this->display();
     }
 
@@ -95,7 +93,6 @@ class product extends control
 
         $this->view->title    = $this->lang->product->edit;
         $this->view->product  = $this->product->getByID($productID);
-        $this->view->lineList = $this->loadModel('tree')->getOptionMenu('product');
         $this->display();
     }
 
@@ -110,7 +107,6 @@ class product extends control
     {
         $this->view->title    = $this->lang->product->view;
         $this->view->product  = $this->product->getByID($productID);
-        $this->view->lineList = $this->loadModel('tree')->getOptionMenu('product');
         
         $this->display();
     }

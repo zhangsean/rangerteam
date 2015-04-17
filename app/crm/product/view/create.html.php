@@ -19,7 +19,7 @@
     </tr>
     <tr>
       <th><?php echo $lang->product->line;?></th>
-      <td><?php echo html::select("line", $lineList, '', "class='form-control'");?></td>
+      <td><?php echo html::select("line", $lang->product->lineList, '', "class='form-control'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->product->type;?></th>

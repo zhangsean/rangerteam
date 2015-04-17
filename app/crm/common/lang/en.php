@@ -40,7 +40,6 @@ $lang->product->menu->browse     = array('link' => 'All Products|product|browse|
 $lang->product->menu->normal     = array('link' => 'Normal|product|browse|mode=normal');
 $lang->product->menu->developing = array('link' => 'Developing|product|browse|mode=developing');
 $lang->product->menu->offline    = array('link' => 'Offline|product|browse|mode=offline');
-$lang->product->menu->lines      = array('link' => 'Product line|tree|browse|type=product');
 
 /* Menu of order module. */
 $lang->order = new stdclass();

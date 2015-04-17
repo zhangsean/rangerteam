@@ -35,7 +35,7 @@
         <td><?php echo $product->id;?></td>
         <td class='text-left'><?php echo $product->name;?></td>
         <td class='visible-lg'><?php echo $product->createdDate;?></td>
-        <td><?php echo $lineList[$product->line];?></td>
+        <td><?php echo $lang->product->lineList[$product->line];?></td>
         <td><?php echo $lang->product->typeList[$product->type];?></td>
         <td><?php echo $lang->product->statusList[$product->status];?></td>
         <td>

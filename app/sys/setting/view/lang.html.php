@@ -20,10 +20,10 @@
     <?php if($module == 'common' and $field == 'currencyList'):?>
     <div class='panel-body'>
       <table class='table table-form table-condensed table-currency'>
-      <tr>
-        <td><?php echo html::checkbox('currency', $lang->currencyList, isset($this->config->setting->currency) ? $this->config->setting->currency : '');?></td>
-      </tr>
-      <tr><td><?php echo html::submitButton();?></td></tr>
+        <tr>
+          <td><?php echo html::checkbox('currency', $lang->currencyList, isset($this->config->setting->currency) ? $this->config->setting->currency : '');?></td>
+        </tr>
+        <tr><td><?php echo html::submitButton();?></td></tr>
       </table>
     </div>
     <?php else:?>

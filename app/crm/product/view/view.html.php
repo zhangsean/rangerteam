@@ -42,7 +42,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->product->line;?></th>
-            <td><?php echo $lineList[$product->line];?></td>
+            <td><?php echo $lang->product->lineList[$product->line];?></td>
           </tr>
           <tr>
             <th><?php echo $lang->product->type;?></th>
