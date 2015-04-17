@@ -38,8 +38,9 @@ class tradeModel extends model
 
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
-        $outCategories = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->fetchAll('id');
+        /* Do not get trades which user has no privilege to browse their categories. */
         $denyCategories = array();
+        $outCategories = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->fetchAll('id');
         foreach($outCategories as $id => $outCategory)
         {
             if(!$this->loadModel('tree')->hasRight($id)) $denyCategories[] = $id; 
