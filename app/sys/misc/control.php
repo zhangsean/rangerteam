@@ -32,4 +32,15 @@ class misc extends control
     {
         die($this->display());
     }
+
+    /**
+     * Support PATH_INFO or not.
+     * 
+     * @access public
+     * @return void
+     */
+    public function pathinfo()
+    {
+        die('pathinfo');
+    }
 }

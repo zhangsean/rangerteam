@@ -1,8 +1,9 @@
 $(document).ready(function()
 {
     /* Compute request type. */
-    $.get('pathinfo.php', function(result)
+    $.get('sys/misc-pathinfo.php', function(result)
     {
-        if(result == 'pathinfo') $('#requestType').val('PATH_INFO');
+        pos = result.indexOf('Fatal error');
+        if(pos > 0) $('#requestType').val('PATH_INFO');
     });
 });     
