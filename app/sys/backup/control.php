@@ -82,7 +82,7 @@ class backup extends control
         $result = $this->backup->backSQL($this->backupPath . $fileName . '.sql.php');
         if(!$result->result)
         {
-            die(js::alert(sprintf($this->lang->backup->error->noWritable, $this->backupPath)) . js::locate(inlink('index')));
+            $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->noWritable, $this->backupPath), 'locate' => inlink('index')));
         }
         $this->backup->addFileHeader($this->backupPath . $fileName . '.sql.php');
 
@@ -91,29 +91,23 @@ class backup extends control
             $result = $this->backup->backFile($this->backupPath . $fileName . '.file.zip.php');
             if(!$result->result)
             {
-                die(js::alert(sprintf($this->lang->backup->error->backupFile, $result->error)) . js::locate(inlink('index')));
+                $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->backupFile, $this->error), 'locate' => inlink('index')));
             }
             $this->backup->addFileHeader($this->backupPath . $fileName . '.file.zip.php');
         }
 
-        die(js::alert($this->lang->backup->success->backup) . js::locate(inlink('index')));
+        $this->send(array('result' => 'success', 'message' => $this->lang->backup->success->backup, 'locate' => inlink('index')));
     }
 
     /**
      * Restore 
      * 
      * @param  string $fileName 
-     * @param  string $confirm 
      * @access public
      * @return void
      */
-    public function restore($fileName, $confirm = 'no')
+    public function restore($fileName)
     {
-        if($confirm == 'no')
-        {
-            die(js::confirm($this->lang->backup->confirmRestore, inlink('restore', "fileName=$fileName&confirm=yes"), inlink('index'), 'self'));
-        }
-
         set_time_limit(0);
 
         /* Restore database. */
@@ -122,8 +116,7 @@ class backup extends control
         $this->backup->addFileHeader($this->backupPath . $fileName . '.sql.php');
         if(!$result->result)
         {
-            echo js::alert(sprintf($this->lang->backup->error->restoreSQL, $result->error));
-            die(js::locate(inlink('index')));
+            $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->restoreSQL, $result->error), 'locate' => inlink('index')));
         }
 
         /* Restore attatchments. */
@@ -134,12 +127,10 @@ class backup extends control
             $this->backup->addFileHeader($this->backupPath . $fileName . '.file.zip.php');
             if(!$result->result)
             {
-                echo js::alert(sprintf($this->lang->backup->error->restoreFile, $result->error));
-                die(js::locate(inlink('index')));
+                $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->restoreFile, $result->error), 'locate' => inlink('index')));
             }
         }
-        echo js::alert($this->lang->backup->success->restore);
-        die(js::locate(inlink('index')));
+        $this->send(array('result' => 'success', 'message' => $this->lang->backup->success->restore, 'locate' => inlink('index')));
     }
 
     /**

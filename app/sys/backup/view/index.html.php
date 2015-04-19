@@ -56,13 +56,5 @@
     </tbody>
   </table>
 </div>
-<div class="modal fade" id="waitting" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog w-300px">
-    <div class="modal-content">
-      <div class="modal-body"><?php echo $lang->backup->waitting?></div>
-    </div>
-  </div>
-</div>
-<?php js::set('backup', $lang->backup->backup);?>
-<?php js::set('restore', $lang->backup->restore);?>
+<?php js::set('backup', $lang->backup);?>
 <?php include '../../common/view/footer.html.php';?>

@@ -1,13 +1,33 @@
 $(function()
 {
-    $('.backup').click(function()
+    $.setAjaxJSONER('.backup', function(response)
     {
-        $('#waitting .modal-body #backupType').html(v.backup);
-        $('#waitting').modal('show');
-    })
-    $('.restore').click(function()
+         if(response.message)
+         {
+             bootbox.alert(response.message, function()
+             {
+                 /* If the response has locate param, locate the browse. */
+                 if(response.locate) return location.href = response.locate;
+             });
+         }
+    });
+
+    $(document).on('click', '.restore', function()
     {
-        $('#waitting .modal-body #backupType').html(v.restore);
-        $('#waitting').modal('show');
-    })
+        if(confirm(v.backup.confirmRestore))
+        {
+            var restore = $(this);
+            restore.text(v.backup.waitting);
+
+            $.getJSON(restore.attr('href'), function(response) 
+            {
+                 bootbox.alert(response.message, function()
+                 {
+                     /* If the response has locate param, locate the browse. */
+                     if(response.locate) return location.href = response.locate;
+                 });
+            });
+        }
+        return false;
+    });
 })
