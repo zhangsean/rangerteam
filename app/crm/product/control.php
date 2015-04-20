@@ -64,7 +64,7 @@ class product extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $this->view->title    = $this->lang->product->create;
+        $this->view->title = $this->lang->product->create;
         $this->display();
     }
 
@@ -91,8 +91,8 @@ class product extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
-        $this->view->title    = $this->lang->product->edit;
-        $this->view->product  = $this->product->getByID($productID);
+        $this->view->title   = $this->lang->product->edit;
+        $this->view->product = $this->product->getByID($productID);
         $this->display();
     }
 
@@ -105,8 +105,8 @@ class product extends control
      */
     public function view($productID)
     {
-        $this->view->title    = $this->lang->product->view;
-        $this->view->product  = $this->product->getByID($productID);
+        $this->view->title   = $this->lang->product->view;
+        $this->view->product = $this->product->getByID($productID);
         
         $this->display();
     }

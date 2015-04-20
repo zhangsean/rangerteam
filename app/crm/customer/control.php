@@ -60,7 +60,6 @@ class customer extends control
         $this->view->customers = $customers;
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
-        $this->view->param     = $param;
 
         $this->display();
     }   

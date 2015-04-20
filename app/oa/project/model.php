@@ -23,8 +23,14 @@ class projectModel extends model
         $project = $this->dao->select('*')->from(TABLE_PROJECT)->where('id')->eq($projectID)->fetch();
         $members = $this->getMembers($projectID); 
 
-        if(isset($members['manager'])) $project->PM = $members['manager'][0]->account;
-        $project->members = array($project->PM);
+        $project->PM      = '';
+        $project->members = array();
+        if(isset($members['manager'][0]))
+        {
+            $project->PM      = $members['manager'][0]->account;
+            $project->members = array($project->PM);
+        }
+
         if(isset($members['member']))
         {
             foreach($members['member'] as $member)
