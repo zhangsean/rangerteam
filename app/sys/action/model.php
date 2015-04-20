@@ -41,7 +41,7 @@ class actionModel extends model
         $action->contact    = $contact;
         $action->actor      = $actor ? $actor : $this->app->user->account;
         $action->action     = strtolower($actionType);
-        $action->date       = ($this->post->date and is_string($this->post->date)) ? $this->post->date : helper::now();
+        $action->date       = helper::now();
         $action->comment    = trim(strip_tags($comment, "<img>")) ? $comment : '';
         $action->extra      = $extra;
         $action->nextDate   = $this->post->nextDate;
@@ -68,7 +68,7 @@ class actionModel extends model
      */
     public function createRecord($objectType, $objectID, $customer, $contact)
     {
-        $result = $this->create($objectType, $objectID, $action = 'record', $this->post->comment, helper::now(), $actor = null, $customer, $contact);
+        $result = $this->create($objectType, $objectID, $action = 'record', $this->post->comment, $this->post->date, $actor = null, $customer, $contact);
 
         if(!$result) return false;
         return $this->syncContactInfo($objectType, $objectID, $customer, $contact);
@@ -125,7 +125,7 @@ class actionModel extends model
             ->fi()
             ->beginIF($action)->andWhere('action')->eq($action)->fi()
             ->page($pager)
-            ->orderBy('date, id')->fetchAll('id');
+            ->orderBy('id')->fetchAll('id');
 
         $histories = $this->getHistory(array_keys($actions));
         $contacts  = $this->loadModel('contact', 'crm')->getPairs();

@@ -79,7 +79,7 @@ $lang->action->desc->deleteaddress         = '$date, 由 <strong>$actor</strong>
 $lang->action->desc->diff1                 = '修改了 <strong><i>%s</i></strong>，舊值為 "%s"，新值為 "%s"。<br />' . "\n";
 $lang->action->desc->diff2                 = '修改了 <strong><i>%s</i></strong>，區別為：' . "\n" . "<blockquote>%s</blockquote>" . "\n<div class='hidden'>%s</div>";
 $lang->action->desc->diff3                 = "將檔案名 %s 改為 %s 。\n";
-$lang->action->desc->record                = '$extra, <strong>$actor</strong> 添加了溝通日誌，聯繫人：<strong>$contact</strong>，聯繫時間：$date。' . "\n";
+$lang->action->desc->record                = '$date, <strong>$actor</strong> 添加了溝通日誌，聯繫人：<strong>$contact</strong>，聯繫時間：$extra。' . "\n";
 $lang->action->desc->signed                = '$date, 由 <strong>$actor</strong> 簽約，成交金額：<strong>$extra</strong>。' . "\n";
 $lang->action->desc->linkcontact           = '$date, 由 <strong>$actor</strong> 添加聯繫人：<strong>$extra</strong>。' . "\n";
 $lang->action->desc->createorder           = '$date, 由 <strong>$actor</strong> 創建訂單：<strong>$extra</strong>。' . "\n";

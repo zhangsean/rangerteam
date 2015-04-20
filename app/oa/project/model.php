@@ -470,8 +470,8 @@ class projectModel extends model
         $menu .= "<div class='btn-group pull-right'>";
         $menu .= "<button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><i class='icon-upload-alt'></i> " . $this->lang->task->export . " <span class='caret'></span></button>";
         $menu .= "<ul id='exportActionMenu' class='dropdown-menu'>";
-        $menu .= "<li>" . commonModel::printLink('task', 'export', "mode=all&projectID=$projectID&orderBy={$extra}", $this->lang->exportAll, "class='iframe' data-width='700'") . "</li>";
-        $menu .= "<li>" . commonModel::printLink('task', 'export', "mode=thisPage&projectID={$projectID}&orderBy={$extra}", $this->lang->exportThisPage, "class='iframe' data-width='700'") . "</li>";
+        $menu .= "<li>" . commonModel::printLink('task', 'export', "mode=all&projectID=$projectID&orderBy={$extra}", $this->lang->exportAll, "class='iframe' data-width='700'", false) . "</li>";
+        $menu .= "<li>" . commonModel::printLink('task', 'export', "mode=thisPage&projectID={$projectID}&orderBy={$extra}", $this->lang->exportThisPage, "class='iframe' data-width='700'", false) . "</li>";
         $menu .= "</ul>";
         $menu .= "</div>";
 
