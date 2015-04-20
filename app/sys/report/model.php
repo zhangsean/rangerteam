@@ -77,6 +77,16 @@ $chartID.render("$divID");
 EOT;
     }
 
+    /**
+     * Create JS ChartFlot. 
+     * 
+     * @param  string       $projectName 
+     * @param  string       $flotJSON 
+     * @param  string|int   $width 
+     * @param  int          $height 
+     * @access public
+     * @return void
+     */
     public function createJSChartFlot($projectName, $flotJSON, $width = 'auto', $height = 500)
     {
         $this->app->loadLang('project');
@@ -237,6 +247,14 @@ EOT;
         return $data;
     }
 
+    /**
+     * Create single JSON. 
+     * 
+     * @param  array    $sets 
+     * @param  array    $dateList 
+     * @access public
+     * @return string
+     */
     public function createSingleJSON($sets, $dateList)
     {
         $data = '[';
@@ -358,7 +376,7 @@ EOT;
             foreach($list as $key => $value)
             {
                 $count = $this->dao->select("$func($field) as value")->from($tableName)
-                    ->where($groupBy)->like("%$key%")
+                    ->where($groupBy)->like("%,$key,%")
                     ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
                     ->fetch('value');
 
@@ -385,6 +403,14 @@ EOT;
     }
 }
 
+/**
+ * Sort summary. 
+ * 
+ * @param  array    $pre 
+ * @param  array    $next 
+ * @access public
+ * @return int
+ */
 function sortSummary($pre, $next)
 {
     if($pre['validRate'] == $next['validRate']) return 0;

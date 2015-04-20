@@ -1,11 +1,11 @@
 <?php
 /**
- * The report view file of product module of RanZhi.
+ * The report view file of report module of RanZhi.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     product
+ * @package     report
  * @version     $Id: report.html.php 1594 2011-03-13 07:27:55Z wwccss $
  * @link        http://www.ranzhico.com
  */
@@ -14,10 +14,8 @@
 <div class='row'>
   <div class='col-md-3 col-lg-2'>
     <div class='panel panel-sm'>
-      <div class='panel-heading'>
-        <strong><?php echo $lang->report->select;?></strong>
-      </div>
-      <div class='panel-body' style='padding-top:0'>
+      <div class='panel-heading'><strong><?php echo $lang->report->select;?></strong></div>
+      <div class='panel-body'>
         <form method='post'>
           <?php echo html::checkBox('charts', $lang->report->{$module}->chartList, $checkedCharts, '', 'block');?>
           <p><?php echo html::selectButton();?></p>
@@ -28,9 +26,7 @@
   </div>
   <div class='col-md-9 col-lg-10'>
     <div class='panel panel-sm'>
-      <div class='panel-heading'>
-        <strong><?php echo $lang->report->common;?></strong>
-      </div>
+      <div class='panel-heading'><strong><?php echo $lang->report->common;?></strong></div>
       <table class='table active-disabled'>
         <?php foreach($charts as $chartType => $chartContent):?>
         <tr valign='top'>
@@ -38,9 +34,7 @@
           <td width='300'>
             <div style="height:<?php echo $lang->report->options->height . 'px';?>; overflow:auto">
               <div class='panel'>
-                <div class='panel-heading'>
-                  <strong><?php echo $tips['caption'][$chartType]?></strong>
-                </div>
+                <div class='panel-heading'><strong><?php echo $tips['caption'][$chartType]?></strong></div>
                 <table class='table table-condensed table-hover table-striped table-bordered'>
                   <thead>
                     <tr class='text-center'>
