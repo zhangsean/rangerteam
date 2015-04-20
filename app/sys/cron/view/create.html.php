@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-      <strong><i class="icon-plus"></i> <?php echo $lang->cron->create . $lang->cron->common?></strong>
+    <strong><i class="icon-plus"></i> <?php echo $lang->cron->create . $lang->cron->common?></strong>
   </div>
   <div class='panel-body'>
     <form class='form-condensed' method='post' id='ajaxForm'>
@@ -64,4 +64,3 @@
   </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>
-

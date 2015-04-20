@@ -1,10 +1,10 @@
 <?php
-$lang->backup->common   = '备份';
-$lang->backup->index    = '备份首页';
-$lang->backup->history  = '备份历史';
-$lang->backup->delete   = '删除备份';
-$lang->backup->backup   = '备份';
-$lang->backup->restore  = '还原';
+$lang->backup->common  = '备份';
+$lang->backup->index   = '备份首页';
+$lang->backup->history = '备份历史';
+$lang->backup->delete  = '删除备份';
+$lang->backup->backup  = '备份';
+$lang->backup->restore = '还原';
 
 $lang->backup->name  = '文件名称';
 $lang->backup->time  = '备份时间';

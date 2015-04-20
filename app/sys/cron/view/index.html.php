@@ -26,7 +26,7 @@
         <th class='w-60px'><?php echo $lang->cron->mon?></th>
         <th class='w-60px'><?php echo $lang->cron->dow?></th>
         <th><?php echo $lang->cron->command?></th>
-        <th class='w-100px'><?php echo $lang->cron->remark?></th>
+        <th class='w-130px'><?php echo $lang->cron->remark?></th>
         <th class='w-120px'><?php echo $lang->cron->lastTime?></th>
         <th class='w-60px'><?php echo $lang->cron->status?></th>
         <th class='w-120px'><?php echo $lang->actions;?></th>
@@ -46,9 +46,9 @@
         <td><?php echo zget($lang->cron->statusList, $cron->status);?></td>
         <td class='text-left'>
           <?php
-          if(commonModel::hasPriv('cron', 'toggle') and !empty($cron->command)) echo html::a(inlink('toggle', "id=$cron->id&status=" . ($cron->status == 'stop' ? 'normal' :  'stop')), $cron->status == 'stop' ? $lang->cron->toggleList['start'] : $lang->cron->toggleList['stop']);
-          if($cron->buildin == 0 and commonModel::hasPriv('cron', 'edit')) echo html::a(inlink('edit', "id=$cron->id"), $lang->edit);
-          if($cron->buildin == 0 and commonModel::hasPriv('cron', 'delete')) echo html::a(inlink('delete', "id=$cron->id"), $lang->delete, "class='deleter'");
+          if(!empty($cron->command)) echo html::a(inlink('toggle', "id=$cron->id&status=" . ($cron->status == 'stop' ? 'normal' :  'stop')), $cron->status == 'stop' ? $lang->cron->toggleList['start'] : $lang->cron->toggleList['stop']);
+          if($cron->buildin == 0) echo html::a(inlink('edit', "id=$cron->id"), $lang->edit);
+          if($cron->buildin == 0) echo html::a(inlink('delete', "id=$cron->id"), $lang->delete, "class='deleter'");
           ?>
         </td>
       </tr>
@@ -61,10 +61,9 @@
   <div class='panel-body'>
     <?php
     echo $lang->cron->introduction;
-    if(commonModel::hasPriv('cron', 'turnon')) printf($lang->cron->confirmOpen, inlink('turnon'));
+    printf($lang->cron->confirmOpen, inlink('turnon'));
     ?>
   </div>
 </div>
 <?php endif;?>
 <?php include '../../common/view/footer.html.php';?>
-

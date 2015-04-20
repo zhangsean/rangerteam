@@ -91,7 +91,7 @@ class cronModel extends model
         $data->status = $status;
         if($status == 'running' or $changeTime) $data->lastTime = date(DT_DATETIME1);
         $this->dao->update(TABLE_CRON)->data($data)->where('id')->eq($cronID)->exec();
-        return dao::isError() ? false : true;
+        return !dao::isError();
     }
 
     /**
@@ -151,7 +151,7 @@ class cronModel extends model
     public function checkChange()
     {
         $updatedCron = $this->dao->select('*')->from(TABLE_CRON)->where('lastTime')->eq('0000-00-00 00:00:00')->andWhere('status')->ne('stop')->fetch();
-        return $updatedCron ? true : false;
+        return !empty($updatedCron);
     }
 
     /**
@@ -192,9 +192,17 @@ class cronModel extends model
             ->autoCheck()
             ->batchCheck($this->config->cron->require->create, 'notempty')
             ->where('id')->eq($cronID)->exec();
-        return dao::isError() ? false : true;
+        return !dao::isError();
     }
 
+    /**
+     * Mark cron status.
+     * 
+     * @param  string $status 
+     * @param  int    $configID 
+     * @access public
+     * @return int
+     */
     public function markCronStatus($status, $configID = 0)
     {
         if($configID)
@@ -215,6 +223,12 @@ class cronModel extends model
         }
     }
 
+    /**
+     * Get configID.
+     * 
+     * @access public
+     * @return object
+     */
     public function getConfigID()
     {
         return $this->dao->select('*')->from(TABLE_CONFIG)
