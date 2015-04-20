@@ -60,16 +60,6 @@ $lang->industry->desc     = '描述';
 $lang->industry->keywords = '關鍵詞';
 $lang->industry->children = "子行業";
 
-/* Lang items for product. */
-if(!isset($lang->product))$lang->product = new stdclass();
-$lang->product->common   = '產品綫';
-$lang->product->name     = '名稱';
-$lang->product->alias    = '別名';
-$lang->product->parent   = '上級產品綫';
-$lang->product->desc     = '描述';
-$lang->product->keywords = '關鍵詞';
-$lang->product->children = "子產品綫";
-
 /* Lang items for income. */
 $lang->in = new stdclass();
 $lang->in->common   = '收入科目';

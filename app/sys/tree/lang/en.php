@@ -60,16 +60,6 @@ $lang->industry->desc     = 'Description';
 $lang->industry->keywords = 'Keyword';
 $lang->industry->children = "Children";
 
-/* Lang items for product. */
-if(!isset($lang->product))$lang->product = new stdclass();
-$lang->product->common   = 'Product Lines';
-$lang->product->name     = 'Name';
-$lang->product->alias    = 'Alias';
-$lang->product->parent   = 'Parent';
-$lang->product->desc     = 'Description';
-$lang->product->keywords = 'Keyword';
-$lang->product->children = "Children";
-
 /* Lang items for income. */
 $lang->in = new stdclass();
 $lang->in->common   = 'Income';
