@@ -45,3 +45,4 @@ $lang->upgrade->fromVersions['1_5_beta'] = '1.5.beta';
 $lang->upgrade->fromVersions['1_6']      = '1.6';
 $lang->upgrade->fromVersions['1_7']      = '1.7';
 $lang->upgrade->fromVersions['2_0']      = '2.0';
+$lang->upgrade->fromVersions['2_1']      = '2.1';
