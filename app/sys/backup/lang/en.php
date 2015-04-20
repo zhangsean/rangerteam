@@ -11,7 +11,7 @@ $lang->backup->time  = 'Time';
 $lang->backup->files = 'Files';
 $lang->backup->size  = 'Size';
 
-$lang->backup->waitting       = '<span id="backupType"></span> is in progress, please wait...';
+$lang->backup->waitting       = 'Restoring...';
 $lang->backup->confirmDelete  = 'Are you sure delete this backup?';
 $lang->backup->confirmRestore = 'Are you sure restore this backup?';
 

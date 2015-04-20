@@ -26,6 +26,11 @@ $lang->setting->user->fields['roleList'] = '角色設置';
 
 $lang->setting->product = new stdClass();
 $lang->setting->product->fields['statusList'] = '產品狀態';
+$lang->setting->product->fields['lineList']   = '產品綫';
+
+$lang->setting->product->lineList = new stdclass();
+$lang->setting->product->lineList->key   = '代號';
+$lang->setting->product->lineList->value = '名稱';
 
 $lang->setting->customer = new stdClass();
 $lang->setting->customer->fields['typeList']      = '客戶類型';
@@ -57,3 +62,7 @@ $lang->setting->placeholder->levelNameList = new stdclass();
 $lang->setting->placeholder->levelNameList->key   = '數字和字母組合';
 $lang->setting->placeholder->levelNameList->value = '簡短描述';
 $lang->setting->placeholder->levelNameList->info  = '詳細描述';
+
+$lang->setting->placeholder->lineList = new stdclass();
+$lang->setting->placeholder->lineList->key   = '數字和字母組合';
+$lang->setting->placeholder->lineList->value = '簡短描述';

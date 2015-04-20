@@ -11,7 +11,7 @@ $lang->backup->time  = '備份時間';
 $lang->backup->files = '備份檔案';
 $lang->backup->size  = '大小';
 
-$lang->backup->waitting       = '<span id="backupType"></span>正在進行中，請稍候...';
+$lang->backup->waitting       = '還原中...';
 $lang->backup->confirmDelete  = '是否刪除備份？';
 $lang->backup->confirmRestore = '是否還原該備份？';
 

@@ -40,3 +40,5 @@ $lang->product->typeList['virtual'] = '虛擬類';
 $lang->product->statusList['developing'] = '研發中';
 $lang->product->statusList['normal']     = '正常';
 $lang->product->statusList['offline']    = '下線';
+
+$lang->product->lineList['default'] = '';

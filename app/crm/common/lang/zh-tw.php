@@ -40,7 +40,6 @@ $lang->product->menu->browse     = array('link' => '所有產品|product|browse|
 $lang->product->menu->normal     = array('link' => '正常|product|browse|mode=normal');
 $lang->product->menu->developing = array('link' => '研發中|product|browse|mode=developing');
 $lang->product->menu->offline    = array('link' => '下線|product|browse|mode=offline');
-$lang->product->menu->lines      = array('link' => '產品綫|tree|browse|type=product');
 
 /* Menu of order module. */
 $lang->order = new stdclass();
@@ -81,6 +80,7 @@ $lang->contract->menu->report       = array('link' => '報表|report|browse|modu
 $lang->setting = new stdclass();
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->product        = '產品狀態|setting|lang|module=product&field=statusList';
+$lang->setting->menu->productLine    = '產品綫|setting|lang|module=product&field=lineList';
 $lang->setting->menu->customerType   = '客戶類型|setting|lang|module=customer&field=typeList';
 $lang->setting->menu->customerSize   = '客戶規模|setting|lang|module=customer&field=sizeNameList';
 $lang->setting->menu->customerLevel  = '客戶等級|setting|lang|module=customer&field=levelNameList';
