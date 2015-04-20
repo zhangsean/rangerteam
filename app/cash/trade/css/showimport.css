@@ -2,3 +2,4 @@
 .table .checkbox,.table input[type="radio"] + label {margin-right: 10px;}
 .table textarea.form-control{height: 32px;}
 .icon-question{cursor: pointer;}
+.table .out .chosen-container .chosen-drop, .table .in .chosen-container .chosen-drop{min-width: 250px;!important}

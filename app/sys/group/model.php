@@ -237,7 +237,7 @@ class groupModel extends model
 
         /* Delete old. */
         $this->dao->delete()->from(TABLE_GROUPPRIV)->where('`group`')->eq($groupID)
-            ->andWhere('module')->ne('apppriv')
+            ->andWhere('module')->notin('apppriv,tradebrowse')
             ->beginIF($menu)->andWhere('module')->in($this->getMenuModules($menu))->fi()
             ->exec();
 
@@ -454,11 +454,11 @@ class groupModel extends model
     public function updateTradePriv($groups)
     {
         /* Delete old priv. */
-        $this->dao->delete()->from(TABLE_GROUPPRIV)->where('`module`')->eq('trade')->andWhere('`method`')->eq('out')->exec();
+        $this->dao->delete()->from(TABLE_GROUPPRIV)->where('`module`')->eq('tradebrowse')->andWhere('`method`')->eq('out')->exec();
 
         if(empty($groups)) return true;
         $priv = new stdclass();
-        $priv->module = 'trade';
+        $priv->module = 'tradebrowse';
         $priv->method = 'out';
         foreach($groups as $group)
         {
@@ -488,6 +488,6 @@ class groupModel extends model
      */
     public function getTradePriv()
     {
-        return $this->dao->select('*')->from(TABLE_GROUPPRIV)->where('`module`')->eq('trade')->andWhere('`method`')->eq('out')->fetchAll('group');
+        return $this->dao->select('*')->from(TABLE_GROUPPRIV)->where('`module`')->eq('tradebrowse')->andWhere('`method`')->eq('out')->fetchAll('group');
     }
 }

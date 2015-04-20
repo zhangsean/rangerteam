@@ -716,12 +716,12 @@ class tradeModel extends model
      * @access public
      * @return void
      */
-    public function checkOutPriv()
+    public function checkExpensePriv()
     {
         if($this->app->user->admin == 'super') return true;
 
         $rights = $this->app->user->rights;
-        if(!isset($rights['trade']['out']))
+        if(!isset($rights['tradebrowse']['out']))
         {
             $locate = helper::createLink('cash.index');
             $errorLink = helper::createLink('sys.error', 'index', "type=accessLimited&locate={$locate}");

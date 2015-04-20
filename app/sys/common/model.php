@@ -319,7 +319,7 @@ class commonModel extends model
             {
                 if($module == 'trade' and $method == 'browse' and $vars == 'mode=out')
                 {
-                    if(!commonModel::hasPriv('trade', 'out')) continue;
+                    if(!commonModel::hasPriv('tradebrowse', 'out')) continue;
                 }
 
                 $class = '';

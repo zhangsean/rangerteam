@@ -22,7 +22,7 @@
           <th class='w-100px'><?php echo $lang->trade->depositor;?></th>
           <th class='w-90px'><?php echo $lang->trade->type;?></th> 
           <th class='w-120px'><?php echo $lang->trade->category;?></th> 
-          <th class='w-160px'><?php echo $lang->trade->trader;?></th> 
+          <th class='w-220px'><?php echo $lang->trade->trader;?></th> 
           <th class='w-100px'><?php echo $lang->trade->money;?></th>
           <th class='w-80px'><?php echo $lang->trade->dept;?></th>
           <th class='w-170px'><?php echo $lang->trade->handlers;?></th>
