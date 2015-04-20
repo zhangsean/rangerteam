@@ -1697,4 +1697,6 @@ INSERT INTO `sys_grouppriv` VALUES
 (5,'user','colleague');
 
 INSERT INTO `sys_cron` (`m`, `h`, `dom`, `mon`, `dow`, `command`, `remark`, `type`, `buildin`, `status`, `lastTime`) VALUES
-('*', '*', '*', '*', '*', '', '监控定时任务', 'ranzhi', 1, 'normal', '0000-00-00 00:00:00');
+('*', '*', '*', '*', '*', '', '监控定时任务', 'ranzhi', 1, 'normal', '0000-00-00 00:00:00'),
+('1', '1', '*', '*', '*', 'appName=sys&moduleName=backup&methodName=backup&reload=0', '定时备份任务', 'ranzhi', 0, 'normal', '0000-00-00 00:00:00'),
+('1', '1', '*', '*', '*', 'appName=sys&moduleName=backup&methodName=batchdelete&saveDays=30', '删除30天前的备份', 'ranzhi', 0, 'normal', '0000-00-00 00:00:00');

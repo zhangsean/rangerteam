@@ -165,6 +165,7 @@ class cronModel extends model
         $cron = fixer::input('post')
             ->add('status', 'normal')
             ->add('lastTime', '0000-00-00 00:00:00')
+            ->skipSpecial('m,h,dom,mon,dow,command')
             ->get();
         $this->dao->insert(TABLE_CRON)->data($cron)
             ->autoCheck()
@@ -185,6 +186,7 @@ class cronModel extends model
     {
         $cron = fixer::input('post')
             ->add('lastTime', '0000-00-00 00:00:00')
+            ->skipSpecial('m,h,dom,mon,dow,command')
             ->get();
         $this->dao->update(TABLE_CRON)->data($cron)
             ->autoCheck()

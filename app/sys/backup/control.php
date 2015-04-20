@@ -72,17 +72,18 @@ class backup extends control
     /**
      * Backup 
      * 
+     * @param  bool  $reload 
      * @access public
      * @return void
      */
-    public function backup()
+    public function backup($reload = true)
     {
         set_time_limit(0);
         $fileName = date('YmdHis') . mt_rand(0, 9);
         $result = $this->backup->backSQL($this->backupPath . $fileName . '.sql.php');
         if(!$result->result)
         {
-            $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->noWritable, $this->backupPath), 'locate' => inlink('index')));
+            if($reload) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->noWritable, $this->backupPath), 'locate' => inlink('index')));
         }
         $this->backup->addFileHeader($this->backupPath . $fileName . '.sql.php');
 
@@ -91,12 +92,12 @@ class backup extends control
             $result = $this->backup->backFile($this->backupPath . $fileName . '.file.zip.php');
             if(!$result->result)
             {
-                $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->backupFile, $this->error), 'locate' => inlink('index')));
+                if($reload) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->backupFile, $this->error), 'locate' => inlink('index')));
             }
             $this->backup->addFileHeader($this->backupPath . $fileName . '.file.zip.php');
         }
 
-        $this->send(array('result' => 'success', 'message' => $this->lang->backup->success->backup, 'locate' => inlink('index')));
+        if($reload) $this->send(array('result' => 'success', 'message' => $this->lang->backup->success->backup, 'locate' => inlink('index')));
     }
 
     /**
@@ -156,5 +157,37 @@ class backup extends control
         }
 
         $this->send(array('result' => 'success'));
+    }
+
+    /**
+     * Batch delete backup files days ago.
+     * 
+     * @param  int    $saveDays 
+     * @access public
+     * @return void
+     */
+    public function batchDelete($saveDays = 30)
+    {
+        $now = strtotime("-{$saveDays}days");
+        $sqlFiles  = glob("{$this->backupPath}*.sql.php");
+        $fileFiles = glob("{$this->backupPath}*.file.zip.php");
+        
+        if(!empty($sqlFiles))
+        {
+            foreach($sqlFiles as $file)
+            {
+                $fileTime = filemtime($file);
+                if($now > $fileTime) unlink($file);
+            }
+        }
+
+        if(!empty($fileFiles))
+        {
+            foreach($fileFiles as $file)
+            {
+                $fileTime = filemtime($file);
+                if($now > $fileTime) unlink($file);
+            }
+        }
     }
 }

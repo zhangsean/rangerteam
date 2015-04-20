@@ -168,10 +168,15 @@ class cron extends control
                     {
                         if(isset($crons[$id]) and $crons[$id]->type == 'ranzhi')
                         {
+                            parse_str($cron['command'], $customParams);
+                            unset($customParams['moduleName']);
+                            unset($customParams['methodName']);
+                            unset($customParams['appName']);
+
                             parse_str($cron['command'], $params);
-                            if(isset($params['moduleName']) and isset($params['methodName']))
+                            if(isset($params['moduleName']) and isset($params['methodName']) and isset($params['appName']))
                             {
-                                $output = $this->fetch($params['moduleName'], $params['methodName']);
+                                $output = $this->fetch($params['moduleName'], $params['methodName'], $customParams, $params['appName']);
                             }
                         }
                         elseif(isset($crons[$id]) and $crons[$id]->type == 'system')

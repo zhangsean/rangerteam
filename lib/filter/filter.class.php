@@ -577,6 +577,20 @@ class fixer
     }
 
     /**
+     * Skip special chars check.
+     * 
+     * @param  string    $filename 
+     * @access public
+     * @return object fixer object
+     */
+    public function skipSpecial($fieldName)
+    {
+        $fields = $this->processFields($fieldName);
+        foreach($fields as $fieldName) $this->stripedFields[] = $fieldName;
+        return $this;
+    }
+
+    /**
      * Quote 
      * 
      * @param  string $fieldName 
