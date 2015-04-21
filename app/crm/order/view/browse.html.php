@@ -14,6 +14,7 @@
 <?php js::set('mode', $mode);?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
+  <?php if(commonModel::hasPriv('order', 'export')):?>
   <div class='btn-group'>
     <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><i class='icon-upload-alt'></i> <?php echo $lang->export;?> <span class='caret'></span></button>
     <ul id='exportActionMenu' class='dropdown-menu'>
@@ -21,6 +22,7 @@
       <li><?php commonModel::printLink('order', 'export', "mode=thisPage&&orderBy={$orderBy}", $lang->exportThisPage, "class='iframe' data-width='700'");?></li>
     </ul>
   </div>
+  <?php endif;?>
   <?php commonModel::printLink('order', 'create', '', '<i class="icon-plus"></i> ' . $lang->order->create, 'class="btn btn-primary"');?>
 </div>
 <div class='panel'>
