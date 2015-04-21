@@ -20,6 +20,7 @@ ranzhi:
 	rm -fr ranzhi/tmp/extension/*
 	rm -fr ranzhi/tmp/log/*
 	rm -fr ranzhi/tmp/model/*
+	rm -fr ranzhi/tmp/backup/*
 	cp -fr www ranzhi && rm -fr ranzhi/www/data/ && mkdir -p ranzhi/www/data/upload
 	cp VERSION ranzhi/
 	# combine js and css files.
