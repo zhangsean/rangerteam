@@ -243,6 +243,20 @@ class orderModel extends model
      */
     public function create()
     {
+
+        $now = helper::now();
+        $order = fixer::input('post')
+            ->add('createdBy', $this->app->user->account)
+            ->add('createdDate', $now)
+            ->setDefault('status', 'normal')
+            ->setDefault('assignedBy', $this->app->user->account)
+            ->setDefault('assignedTo', $this->app->user->account)
+            ->setDefault('assignedDate', $now)
+            ->setDefault('customer', 0)
+            ->join('product', ',')
+            ->remove('createCustomer, name, contact, phone, email, qq, continue')
+            ->get();
+
         if($this->post->createCustomer)
         {
             $customer = new stdclass();
@@ -256,25 +270,16 @@ class orderModel extends model
             $customer->createdBy   = $this->app->user->account;
             $customer->createdDate = helper::now();
 
+            $this->dao->insert(TABLE_ORDER)->data($order)->autoCheck()->check('product', 'notempty');
+            if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+
             $return = $this->loadModel('customer')->create($customer);
             if($return['result'] == 'fail') return $return;
             $customerID = $return['customerID'];
         }
 
-        $now = helper::now();
-        $order = fixer::input('post')
-            ->add('createdBy', $this->app->user->account)
-            ->add('createdDate', $now)
-            ->setDefault('status', 'normal')
-            ->setDefault('assignedBy', $this->app->user->account)
-            ->setDefault('assignedTo', $this->app->user->account)
-            ->setDefault('assignedDate', $now)
-            ->join('product', ',')
-            ->setIF($this->post->createCustomer, 'customer', isset($customerID) ? $customerID : '')
-            ->remove('createCustomer, name, contact, phone, email, qq, continue')
-            ->get();
-
-        $order->product = !empty($order->product) ? ',' . $order->product . ',' : '';
+        $order->customer = ($this->post->createCustomer and isset($customerID)) ? $customerID : '';
+        $order->product  = !empty($order->product) ? ',' . $order->product . ',' : '';
 
         $this->dao->insert(TABLE_ORDER)
             ->data($order)
