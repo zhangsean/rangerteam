@@ -45,8 +45,8 @@
             <?php if(in_array($trade->type, array('transferin', 'transferout', 'inveset', 'redeem'))) echo html::select("category[$id]", $lang->trade->categoryList, $trade->category, "class='form-control' disabled");?>
           </td>
           <td>
-            <?php if($trade->type == 'in' and !in_array($trade->category, array('profit'))) echo html::select("trader[{$id}]", $customerList, $trade->trader, "class='form-control'");?>
-            <?php if($trade->type == 'out' and !in_array($trade->category, array('fee', 'loss'))) echo html::select("trader[{$id}]", $traderList, $trade->trader, "class='form-control'");?>
+            <?php if($trade->type == 'in' and !in_array($trade->category, array('profit'))) echo html::select("trader[{$id}]", $customerList, $trade->trader, "class='form-control chosen'");?>
+            <?php if($trade->type == 'out' and !in_array($trade->category, array('fee', 'loss'))) echo html::select("trader[{$id}]", $traderList, $trade->trader, "class='form-control chosen'");?>
             <?php if(in_array($trade->type, array('transferin', 'transferout', 'inveset', 'redeem')) or in_array($trade->category, array('profit', 'fee', 'loss'))) echo html::hidden("trader[$id]", 0);?>
           </td>
           <td><?php echo html::input("money[$id]", $trade->money, "class='form-control' id='money{$id}'");?></td>
