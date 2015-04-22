@@ -276,9 +276,9 @@ class orderModel extends model
             $return = $this->loadModel('customer')->create($customer);
             if($return['result'] == 'fail') return $return;
             $customerID = $return['customerID'];
+            $order->customer = isset($customerID) ? $customerID : '';
         }
 
-        $order->customer = ($this->post->createCustomer and isset($customerID)) ? $customerID : '';
         $order->product  = !empty($order->product) ? ',' . $order->product . ',' : '';
 
         $this->dao->insert(TABLE_ORDER)
