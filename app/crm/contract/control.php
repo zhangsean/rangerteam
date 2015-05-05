@@ -545,7 +545,7 @@ class contract extends control
             foreach($contracts as $id => $contract)
             {
                 $contract->order = array();
-                if($contractOrderList[$id])
+                if(isset($contractOrderList[$id]))
                 {
                     foreach($contractOrderList[$id] as $contractOrder)
                     {
