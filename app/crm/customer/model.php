@@ -231,7 +231,6 @@ class customerModel extends model
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->setIF(!$this->post->public and $oldCustomer->relation == 'client', 'public', 0)
-            ->setIF($this->post->relation == 'client', 'public', 0)
             ->stripTags('desc', $this->config->allowedTags->admin)
             ->get();
 
