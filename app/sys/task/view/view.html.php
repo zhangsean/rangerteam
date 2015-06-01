@@ -25,7 +25,7 @@
       <?php echo $this->fetch('action', 'history', "objectType=task&objectID={$task->id}");?>
       <div class='page-actions'>
         <?php
-        echo $this->task->buildOperateMenu($task, 'btn', 'view');
+        $this->task->buildOperateMenu($task, 'btn', 'view');
 
         $browseLink = $this->session->taskList ? $this->session->taskList : inlink('browse', "project=$task->project");
         commonModel::printRPN($browseLink, $preAndNext);

@@ -504,43 +504,43 @@ class taskModel extends model
         $disabled = self::isClickable($task, 'assignto') ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'assignto', "taskID=$task->id");
-        $menu    .= html::a($link, $this->lang->assign, $misc);
+        $menu    .= commonModel::printLink('task', 'assignto', "taskID=$task->id", $this->lang->assign, $misc);
 
         $disabled = self::isClickable($task, 'start') ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'start', "taskID=$task->id");
-        $menu    .= html::a($link, $this->lang->start, $misc);
+        $menu    .= commonModel::printLink('task', 'start', "taskID=$task->id", $this->lang->start, $misc);
 
         if($type == 'view')
         {
             $disabled = self::isClickable($task, 'activate') ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
             $link     = $disabled ? '###' : helper::createLink('task', 'activate', "taskID=$task->id");
-            $menu    .= html::a($link, $this->lang->activate, $misc);
+            $menu    .= commonModel::printLink('task', 'activate', "taskID=$task->id", $this->lang->activate, $misc);
         }
 
         $disabled = self::isClickable($task, 'finish') ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'finish', "taskID=$task->id");
-        $menu    .= html::a($link, $this->lang->finish, $misc);
+        $menu    .= commonModel::printLink('task', 'finish', "taskID=$task->id", $this->lang->finish, $misc);
 
         if($type == 'view')
         {
             $disabled = self::isClickable($task, 'cancel') ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
             $link     = $disabled ? '###' : helper::createLink('task', 'cancel', "taskID=$task->id");
-            $menu    .= html::a($link, $this->lang->cancel, $misc);
+            $menu    .= commonModel::printLink('task', 'cancel', "taskID=$task->id", $this->lang->cancel, $misc);
         }
 
         $disabled = self::isClickable($task, 'close') ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'close', "taskID=$task->id");
-        $menu    .= html::a($link, $this->lang->close, $misc);
+        $menu    .= commonModel::printLink('task', 'close', "taskID=$task->id", $this->lang->close, $misc);
 
         if($type == 'view') $menu .= "</div><div class='btn-group'>";
-        $menu .= html::a(helper::createLink('task', 'edit', "taskID=$task->id"), $this->lang->edit, "class='$class'");
+        $menu .= commonModel::printLink('task', 'edit', "taskID=$task->id", $this->lang->edit, "class='$class'");
         $deleter = $type == 'browse' ? 'reloadDeleter' : 'deleter';
-        $menu   .= html::a(helper::createLink('task', 'delete', "taskID=$task->id"), $this->lang->delete, "class='$deleter $class'");
+        $menu   .= commonModel::printLink('task', 'delete', "taskID=$task->id", $this->lang->delete, "class='$deleter $class'");
         if($type == 'view') $menu .= "</div>";
 
         return $menu;

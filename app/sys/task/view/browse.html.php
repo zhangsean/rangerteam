@@ -28,8 +28,8 @@
           <th class='w-90px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->task->status);?></th>
           <th class='w-100px visible-lg'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->task->createdDate);?></th>
           <th class='w-90px visible-lg'> <?php commonModel::printOrderLink('consumed',    $orderBy, $vars, $lang->task->consumedAB . $lang->task->lblHour);?></th>
-          <th class='w-110px visible-lg'> <?php commonModel::printOrderLink('left',        $orderBy, $vars, $lang->task->left . $lang->task->lblHour);?></th>
-          <th class='w-200px'><?php echo $lang->actions;?></th>
+          <th class='w-110px visible-lg'> <?php commonModel::printOrderLink('left',       $orderBy, $vars, $lang->task->left . $lang->task->lblHour);?></th>
+          <th><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
@@ -44,7 +44,7 @@
           <td class='visible-lg'><?php echo substr($task->createdDate, 0, 10);?></td>
           <td class='visible-lg'><?php echo $task->consumed;?></td>
           <td class='visible-lg'><?php echo $task->left;?></td>
-          <td><?php echo $this->task->buildOperateMenu($task);?></td>
+          <td><?php $this->task->buildOperateMenu($task);?></td>
         </tr>
         <?php endforeach;?>
       </tbody>
