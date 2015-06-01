@@ -1,5 +1,6 @@
 ALTER TABLE `sys_category` ADD `rights` char(30) NOT NULL;
 ALTER TABLE `sys_product` ADD `line` varchar(30) NOT NULL DEFAULT 'default' AFTER `status`;
+ALTER TABLE `crm_customer` CHANGE `status` `status` varchar(30) NOT NULL;
 
 -- DROP TABLE IF EXISTS `sys_cron`;
 CREATE TABLE IF NOT EXISTS `sys_cron` (
