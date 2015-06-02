@@ -14,7 +14,12 @@
 <ul id='menuTitle'>
   <li><?php commonModel::printLink('customer', 'browse', '', "<i class='icon-list-ul'></i> " . $lang->customer->list);?></li>
   <li class='divider angle'></li>
-  <li class='title'><?php echo $customer->name . $lang->customer->desc;?></li>
+  <li class='title'>
+    <?php echo $customer->name;?>
+    <?php if($customer->public):?>
+    <span class='label label-primary'><?php echo $lang->customer->public;?></span>
+    <?php endif;?>
+  </li>
 </ul>
 <div class='row-table'>
   <div class='col-main'>
