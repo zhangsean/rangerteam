@@ -360,6 +360,7 @@ EOT;
             /* Set list. */
             if($listName == 'USERS')      $list = $this->loadModel('user')->getPairs('noempty');
             if($listName == 'AREA')       $list = $this->loadModel('tree')->getOptionMenu('area');
+            if($listName == 'INDUSTRY')   $list = $this->loadModel('tree')->getOptionMenu('industry');
             if($listName == 'PRODUCTS')   $list = $this->loadModel('product', 'crm')->getPairs();
             if($listName == 'CUSTOMERS')  $list = $this->loadModel('customer', 'crm')->getPairs();
             if($listName == 'DEPOSITORS') $list = $this->loadModel('depositor')->getPairs();
@@ -397,7 +398,9 @@ EOT;
 
         /* Add names. */
         if(isset($this->config->report->{$module}->listName[$chart]))
+        {
             foreach($datas as $name => $data) $data->name = isset($list[$name]) ? $list[$name] : $this->lang->report->undefined;
+        }
 
         return $datas;
     }

@@ -34,7 +34,7 @@ class report extends control
         if($_POST)
         {
             $checkedCharts = $this->post->charts;
-            foreach($this->post->charts as $chart)
+            foreach($checkedCharts as $chart)
             {
                 if(!isset($this->config->report->{$module}->chartList[$chart])) continue;
                 $groupBy = $this->config->report->{$module}->chartList[$chart];
@@ -42,7 +42,7 @@ class report extends control
                 /* merge options. */
                 $chartOption = clone $this->lang->report->options;
                 $chartOption->item = $this->lang->report->{$module}->item[$chart];
-                if(isset($this->lang->report->{$module}->swf[$chart])) $chartOption->swf = $this->lang->report->{$module}->swf[$chart];
+                if(isset($this->lang->report->{$module}->swf[$chart]))       $chartOption->swf = $this->lang->report->{$module}->swf[$chart];
                 if(isset($this->lang->report->{$module}->xAxisName[$chart])) $chartOption->graph->xAxisName = $this->lang->report->{$module}->xAxisName[$chart];
                 if(isset($this->lang->report->{$module}->chartList[$chart])) $chartOption->graph->caption   = $this->lang->report->{$module}->chartList[$chart];
 

@@ -61,6 +61,7 @@ $lang->report->customer->chartList['level']      = 'Level';
 $lang->report->customer->chartList['type']       = 'Type';
 $lang->report->customer->chartList['size']       = 'Size';
 $lang->report->customer->chartList['area']       = 'Area';
+$lang->report->customer->chartList['industry']   = 'Industry';
 
 $lang->report->customer->item['assignedTo'] = 'User';
 $lang->report->customer->item['status']     = 'Status';
@@ -68,6 +69,7 @@ $lang->report->customer->item['level']      = 'Level';
 $lang->report->customer->item['type']       = 'Type';
 $lang->report->customer->item['size']       = 'Size';
 $lang->report->customer->item['area']       = 'Area';
+$lang->report->customer->item['industry']   = 'Industry';
 
 $lang->report->customer->value['assignedTo'] = 'Customer';
 $lang->report->customer->value['status']     = 'Customer';
@@ -75,6 +77,7 @@ $lang->report->customer->value['level']      = 'Customer';
 $lang->report->customer->value['type']       = 'Customer';
 $lang->report->customer->value['size']       = 'Customer';
 $lang->report->customer->value['area']       = 'Customer';
+$lang->report->customer->value['industry']   = 'Customer';
 
 /* order setting. */
 $lang->report->order = new stdclass();
@@ -83,34 +86,28 @@ $lang->report->order->chartList['product']     = 'Product(Number)';
 $lang->report->order->chartList['status']      = 'Status(Number)';
 $lang->report->order->chartList['assignedTo']  = 'Assigned To(Number)';
 $lang->report->order->chartList['createdBy']   = 'Created by(Number)';
-$lang->report->order->chartList['customer']    = 'Customer(Number)';
 $lang->report->order->chartList['productA']    = 'Product(Money)';
 $lang->report->order->chartList['statusA']     = 'Status(Money)';
 $lang->report->order->chartList['assignedToA'] = 'Assigned To(Money)';
 $lang->report->order->chartList['createdByA']  = 'Created By(Money)';
-$lang->report->order->chartList['customerA']   = 'Customer(Money)';
 
 $lang->report->order->item['product']     = 'Product';
 $lang->report->order->item['status']      = 'Status';
 $lang->report->order->item['assignedTo']  = 'User';
 $lang->report->order->item['createdBy']   = 'User';
-$lang->report->order->item['customer']    = 'Customer';
 $lang->report->order->item['productA']    = 'Product';
 $lang->report->order->item['statusA']     = 'Status';
 $lang->report->order->item['assignedToA'] = 'User';
 $lang->report->order->item['createdByA']  = 'User';
-$lang->report->order->item['customerA']   = 'Customer';
 
 $lang->report->order->value['product']     = 'Order';
 $lang->report->order->value['status']      = 'Order';
 $lang->report->order->value['assignedTo']  = 'Order';
 $lang->report->order->value['createdBy']   = 'Order';
-$lang->report->order->value['customer']    = 'Order';
 $lang->report->order->value['productA']    = 'Real money';
 $lang->report->order->value['statusA']     = 'Real money';
 $lang->report->order->value['assignedToA'] = 'Real money';
 $lang->report->order->value['createdByA']  = 'Real money';
-$lang->report->order->value['customerA']   = 'Real money';
 
 $lang->report->contract = new stdclass();
 $lang->report->contract->common = 'Contract Report';
@@ -122,7 +119,6 @@ $lang->report->contract->chartList['signedBy']     = 'Signed By(Number)';
 $lang->report->contract->chartList['deliveredBy']  = 'Delivered By(Number)';
 //$lang->report->contract->chartList['handlers']     = 'Handlers(Number)';
 $lang->report->contract->chartList['contactedBy']  = 'Contacted By(Number)';
-$lang->report->contract->chartList['customer']     = 'Customer(Number)';
 $lang->report->contract->chartList['statusA']      = 'Status(Money)';
 $lang->report->contract->chartList['deliveryA']    = 'Delivery(Money)';
 $lang->report->contract->chartList['returnA']      = 'Return(Money)';
@@ -131,7 +127,6 @@ $lang->report->contract->chartList['signedByA']    = 'Signed By(Money)';
 $lang->report->contract->chartList['deliveredByA'] = 'Delivered By(Money)';
 //$lang->report->contract->chartList['handlersA']    = 'Handlers(Money)';
 $lang->report->contract->chartList['contactedByA'] = 'Contacted By(Money)';
-$lang->report->contract->chartList['customerA']    = 'Customer(Money)';
 
 $lang->report->contract->item['status']       = 'Stuatus';
 $lang->report->contract->item['delivery']     = 'Delivery';
@@ -141,7 +136,6 @@ $lang->report->contract->item['signedBy']     = 'User';
 $lang->report->contract->item['deliveredBy']  = 'User';
 $lang->report->contract->item['handlers']     = 'User';
 $lang->report->contract->item['contactedBy']  = 'User';
-$lang->report->contract->item['customer']     = 'Customer';
 $lang->report->contract->item['statusA']      = 'Status';
 $lang->report->contract->item['deliveryA']    = 'Delivery';
 $lang->report->contract->item['returnA']      = 'Return';
@@ -150,7 +144,6 @@ $lang->report->contract->item['signedByA']    = 'User';
 $lang->report->contract->item['deliveredByA'] = 'User';
 $lang->report->contract->item['handlersA']    = 'User';
 $lang->report->contract->item['contactedByA'] = 'User';
-$lang->report->contract->item['customerA']    = 'Customer';
 
 $lang->report->contract->value['status']       = 'Number';
 $lang->report->contract->value['delivery']     = 'Number';
@@ -160,7 +153,6 @@ $lang->report->contract->value['signedBy']     = 'Number';
 $lang->report->contract->value['deliveredBy']  = 'Number';
 $lang->report->contract->value['handlers']     = 'Number';
 $lang->report->contract->value['contactedBy']  = 'Number';
-$lang->report->contract->value['customer']     = 'Number';
 $lang->report->contract->value['statusA']      = 'Money';
 $lang->report->contract->value['deliveryA']    = 'Money';
 $lang->report->contract->value['returnA']      = 'Money';
@@ -169,7 +161,6 @@ $lang->report->contract->value['signedByA']    = 'Money';
 $lang->report->contract->value['deliveredByA'] = 'Money';
 $lang->report->contract->value['handlersA']    = 'Money';
 $lang->report->contract->value['contactedByA'] = 'Money';
-$lang->report->contract->value['customerA']    = 'Money';
 
 $lang->report->trade = new stdclass();
 $lang->report->trade->common = 'Trade Report';

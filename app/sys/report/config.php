@@ -14,6 +14,7 @@ $config->report->customer->chartList['level']      = 'level||';
 $config->report->customer->chartList['type']       = 'type||';
 $config->report->customer->chartList['size']       = 'size||';
 $config->report->customer->chartList['area']       = 'area||';
+$config->report->customer->chartList['industry']   = 'industry||';
 
 /* type list name. */
 $config->report->customer->listName['assignedTo'] = 'USERS';
@@ -22,27 +23,24 @@ $config->report->customer->listName['level']      = 'levelNameList';
 $config->report->customer->listName['type']       = 'typeList';
 $config->report->customer->listName['size']       = 'sizeNameList';
 $config->report->customer->listName['area']       = 'AREA';
+$config->report->customer->listName['industry']   = 'INDUSTRY';
 
 /* order setting. */
 $config->report->order = new stdclass();
 $config->report->order->chartList['product']     = 'product_multi||';
-$config->report->order->chartList['customer']    = 'customer||';
 $config->report->order->chartList['status']      = 'status||';
 $config->report->order->chartList['createdBy']   = 'createdBy||';
 $config->report->order->chartList['assignedTo']  = 'assignedTo||';
 $config->report->order->chartList['productA']    = 'product_multi|`real`|sum';
-$config->report->order->chartList['customerA']   = 'customer|`real`|sum';
 $config->report->order->chartList['statusA']     = 'status|`real`|sum';
 $config->report->order->chartList['createdByA']  = 'createdBy|`real`|sum';
 $config->report->order->chartList['assignedToA'] = 'assignedTo|`real`|sum';
 
 $config->report->order->listName['product']     = 'PRODUCTS';
-$config->report->order->listName['customer']    = 'CUSTOMERS';
 $config->report->order->listName['status']      = 'statusList';
 $config->report->order->listName['createdBy']   = 'USERS';
 $config->report->order->listName['assignedTo']  = 'USERS';
 $config->report->order->listName['productA']    = 'PRODUCTS';
-$config->report->order->listName['customerA']   = 'CUSTOMERS';
 $config->report->order->listName['statusA']     = 'statusList';
 $config->report->order->listName['createdByA']  = 'USERS';
 $config->report->order->listName['assignedToA'] = 'USERS';
@@ -57,7 +55,6 @@ $config->report->contract->chartList['signedBy']     = 'signedBy||';
 $config->report->contract->chartList['deliveredBy']  = 'deliveredBy||';
 $config->report->contract->chartList['handlers']     = 'handlers_multi||';
 $config->report->contract->chartList['contactedBy']  = 'createdBy||';
-$config->report->contract->chartList['customer']     = 'customer||';
 $config->report->contract->chartList['statusA']      = 'status|amount|sum';
 $config->report->contract->chartList['deliveryA']    = 'delivery|amount|sum';
 $config->report->contract->chartList['returnA']      = '`return`|amount|sum';
@@ -66,7 +63,6 @@ $config->report->contract->chartList['signedByA']    = 'signedBy|amount|sum';
 $config->report->contract->chartList['deliveredByA'] = 'deliveredBy|amount|sum';
 $config->report->contract->chartList['handlersA']    = 'handlers_multi|amount|sum';
 $config->report->contract->chartList['contactedByA'] = 'createdBy|amount|sum';
-$config->report->contract->chartList['customerA']    = 'customer|amount|sum';
 
 $config->report->contract->listName['status']       = 'statusList';
 $config->report->contract->listName['delivery']     = 'deliveryList';
@@ -76,7 +72,6 @@ $config->report->contract->listName['signedBy']     = 'USERS';
 $config->report->contract->listName['deliveredBy']  = 'USERS';
 $config->report->contract->listName['handlers']     = 'USERS';
 $config->report->contract->listName['contactedBy']  = 'USERS';
-$config->report->contract->listName['customer']     = 'CUSTOMERS';
 $config->report->contract->listName['statusA']      = 'statusList';
 $config->report->contract->listName['deliveryA']    = 'deliveryList';
 $config->report->contract->listName['returnA']      = 'returnList';
@@ -85,7 +80,6 @@ $config->report->contract->listName['signedByA']    = 'USERS';
 $config->report->contract->listName['deliveredByA'] = 'USERS';
 $config->report->contract->listName['handlersA']    = 'USERS';
 $config->report->contract->listName['contactedByA'] = 'USERS';
-$config->report->contract->listName['customerA']    = 'CUSTOMERS';
 
 /* trade setting. */
 $config->report->trade = new stdclass();

@@ -61,6 +61,7 @@ $lang->report->customer->chartList['level']      = '按级别统计';
 $lang->report->customer->chartList['type']       = '按类型统计';
 $lang->report->customer->chartList['size']       = '按规模统计';
 $lang->report->customer->chartList['area']       = '按地区统计';
+$lang->report->customer->chartList['industry']   = '按行业统计';
 
 $lang->report->customer->item['assignedTo'] = '用户';
 $lang->report->customer->item['status']     = '状态';
@@ -68,6 +69,7 @@ $lang->report->customer->item['level']      = '级别';
 $lang->report->customer->item['type']       = '类型';
 $lang->report->customer->item['size']       = '规模';
 $lang->report->customer->item['area']       = '地区';
+$lang->report->customer->item['industry']   = '行业';
 
 $lang->report->customer->value['assignedTo'] = '客户数';
 $lang->report->customer->value['status']     = '客户数';
@@ -75,6 +77,7 @@ $lang->report->customer->value['level']      = '客户数';
 $lang->report->customer->value['type']       = '客户数';
 $lang->report->customer->value['size']       = '客户数';
 $lang->report->customer->value['area']       = '客户数';
+$lang->report->customer->value['industry']   = '客户数';
 
 /* order setting. */
 $lang->report->order = new stdclass();
@@ -83,34 +86,28 @@ $lang->report->order->chartList['product']     = '按产品统计（数量）';
 $lang->report->order->chartList['status']      = '按状态统计（数量）';
 $lang->report->order->chartList['assignedTo']  = '按指派给统计（数量）';
 $lang->report->order->chartList['createdBy']   = '按创建者统计（数量）';
-$lang->report->order->chartList['customer']    = '按客户统计（数量）';
 $lang->report->order->chartList['productA']    = '按产品统计（金额）';
 $lang->report->order->chartList['statusA']     = '按状态统计（金额）';
 $lang->report->order->chartList['assignedToA'] = '按指派给统计（金额）';
 $lang->report->order->chartList['createdByA']  = '按创建者统计（金额）';
-$lang->report->order->chartList['customerA']   = '按客户统计（金额）';
 
 $lang->report->order->item['product']     = '产品';
 $lang->report->order->item['status']      = '状态';
 $lang->report->order->item['assignedTo']  = '指派给';
 $lang->report->order->item['createdBy']   = '创建者';
-$lang->report->order->item['customer']    = '客户';
 $lang->report->order->item['productA']    = '产品';
 $lang->report->order->item['statusA']     = '状态';
 $lang->report->order->item['assignedToA'] = '指派给';
 $lang->report->order->item['createdByA']  = '创建者';
-$lang->report->order->item['customerA']   = '客户';
 
 $lang->report->order->value['product']     = '订单数';
 $lang->report->order->value['status']      = '订单数';
 $lang->report->order->value['assignedTo']  = '订单数';
 $lang->report->order->value['createdBy']   = '订单数';
-$lang->report->order->value['customer']    = '订单数';
 $lang->report->order->value['productA']    = '成交金额';
 $lang->report->order->value['statusA']     = '成交金额';
 $lang->report->order->value['assignedToA'] = '成交金额';
 $lang->report->order->value['createdByA']  = '成交金额';
-$lang->report->order->value['customerA']   = '成交金额';
 
 $lang->report->contract = new stdclass();
 $lang->report->contract->common = '合同报表';
@@ -122,7 +119,6 @@ $lang->report->contract->chartList['signedBy']     = '按指派给统计（数�
 $lang->report->contract->chartList['deliveredBy']  = '按交付人统计（数量）';
 //$lang->report->contract->chartList['handlers']     = '按经手人统计（数量）';
 $lang->report->contract->chartList['contactedBy']  = '按联系人统计（数量）';
-$lang->report->contract->chartList['customer']     = '按客户统计（数量）';
 $lang->report->contract->chartList['statusA']      = '按合同状态统计（金额）';
 $lang->report->contract->chartList['deliveryA']    = '按交付状态统计（金额）';
 $lang->report->contract->chartList['returnA']      = '按回款状态统计（金额）';
@@ -131,7 +127,6 @@ $lang->report->contract->chartList['signedByA']    = '按指派给统计（金�
 $lang->report->contract->chartList['deliveredByA'] = '按交付人统计（金额）';
 //$lang->report->contract->chartList['handlersA']    = '按经手人统计（金额）';
 $lang->report->contract->chartList['contactedByA'] = '按联系人统计（金额）';
-$lang->report->contract->chartList['customerA']    = '按客户统计（金额）';
 
 $lang->report->contract->item['status']       = '合同状态';
 $lang->report->contract->item['delivery']     = '交付状态';
@@ -141,7 +136,6 @@ $lang->report->contract->item['signedBy']     = '用户';
 $lang->report->contract->item['deliveredBy']  = '交付人';
 $lang->report->contract->item['handlers']     = '经手人';
 $lang->report->contract->item['contactedBy']  = '联系人';
-$lang->report->contract->item['customer']     = '客户';
 $lang->report->contract->item['statusA']      = '订单状态';
 $lang->report->contract->item['deliveryA']    = '交付状态';
 $lang->report->contract->item['returnA']      = '回款状态';
@@ -150,7 +144,6 @@ $lang->report->contract->item['signedByA']    = '用户';
 $lang->report->contract->item['deliveredByA'] = '交付人';
 $lang->report->contract->item['handlersA']    = '经手人';
 $lang->report->contract->item['contactedByA'] = '联系人';
-$lang->report->contract->item['customerA']    = '客户';
 
 $lang->report->contract->value['status']       = '合同数';
 $lang->report->contract->value['delivery']     = '合同数';
@@ -160,7 +153,6 @@ $lang->report->contract->value['signedBy']     = '合同数';
 $lang->report->contract->value['deliveredBy']  = '合同数';
 $lang->report->contract->value['handlers']     = '合同数';
 $lang->report->contract->value['contactedBy']  = '合同数';
-$lang->report->contract->value['customer']     = '合同数';
 $lang->report->contract->value['statusA']      = '合同金额';
 $lang->report->contract->value['deliveryA']    = '合同金额';
 $lang->report->contract->value['returnA']      = '合同金额';
@@ -169,7 +161,6 @@ $lang->report->contract->value['signedByA']    = '合同金额';
 $lang->report->contract->value['deliveredByA'] = '合同金额';
 $lang->report->contract->value['handlersA']    = '合同金额';
 $lang->report->contract->value['contactedByA'] = '合同金额';
-$lang->report->contract->value['customerA']    = '合同金额';
 
 $lang->report->trade = new stdclass();
 $lang->report->trade->common = '记账报表';
