@@ -24,57 +24,59 @@ $lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=status
 /* Menu of customer module. */
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
-$lang->customer->menu->browse    = array('link' => 'All Customers|customer|browse|', 'alias' => 'create,edit,record,view');
-$lang->customer->menu->past      = array('link' => 'Urgently need contacted|customer|browse|mode=past', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->today     = array('link' => 'Contact Today|customer|browse|mode=today', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->tomorrow  = array('link' => 'Contact Tomorrow|customer|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->thisweek  = array('link' => 'Contact This Week|customer|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->thismonth = array('link' => 'Contact This Month|customer|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->public    = array('link' => 'Public Customers|customer|browse|mode=public', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->report    = array('link' => 'Report|report|browse|module=customer');
+$lang->customer->menu->browse       = 'All Customers|customer|browse|mode=all';
+$lang->customer->menu->assignedtome = 'Assigned To Me|customer|browse|mode=assignedtome';
+$lang->customer->menu->past         = 'Urgently need contacted|customer|browse|mode=past';
+$lang->customer->menu->today        = 'Contact Today|customer|browse|mode=today';
+$lang->customer->menu->tomorrow     = 'Contact Tomorrow|customer|browse|mode=tomorrow';
+$lang->customer->menu->thisweek     = 'Contact This Week|customer|browse|mode=thisweek';
+$lang->customer->menu->thismonth    = 'Contact This Month|customer|browse|mode=thismonth';
+$lang->customer->menu->public       = 'Public Customers|customer|browse|mode=public';
+$lang->customer->menu->report       = 'Report|report|browse|module=customer';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse     = array('link' => 'All Products|product|browse|mode=all');
-$lang->product->menu->normal     = array('link' => 'Normal|product|browse|mode=normal');
-$lang->product->menu->developing = array('link' => 'Developing|product|browse|mode=developing');
-$lang->product->menu->offline    = array('link' => 'Offline|product|browse|mode=offline');
+$lang->product->menu->browse     = 'All Products|product|browse|mode=all';
+$lang->product->menu->normal     = 'Normal|product|browse|mode=normal';
+$lang->product->menu->developing = 'Developing|product|browse|mode=developing';
+$lang->product->menu->offline    = 'Offline|product|browse|mode=offline';
 
 /* Menu of order module. */
 $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
-$lang->order->menu->browse    = array('link' => 'All Orders|order|browse|mode=all', 'alias' => 'create,edit,view,record');
-$lang->order->menu->past      = array('link' => 'Urgently need contacted|order|browse|mode=past', 'alias' => 'create,edit,view,record');
-$lang->order->menu->today     = array('link' => 'Contact Today|order|browse|mode=today', 'alias' => 'create,edit,view,record');
-$lang->order->menu->tomorrow  = array('link' => 'Contact Tomorrow|order|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
-$lang->order->menu->thisweek  = array('link' => 'Contact This Week|order|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
-$lang->order->menu->thismonth = array('link' => 'Contact This Month|order|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
-$lang->order->menu->public    = array('link' => 'Public|order|browse|mode=public', 'alias' => 'create,edit,view,record');
-$lang->order->menu->report    = array('link' => 'Report|report|browse|module=order');
+$lang->order->menu->browse       = 'All Orders|order|browse|mode=all';
+$lang->order->menu->assignedtome = 'Assigned To Me|order|browse|mode=assignedtome';
+$lang->order->menu->past         = 'Urgently need contacted|order|browse|mode=past';
+$lang->order->menu->today        = 'Contact Today|order|browse|mode=today';
+$lang->order->menu->tomorrow     = 'Contact Tomorrow|order|browse|mode=tomorrow';
+$lang->order->menu->thisweek     = 'Contact This Week|order|browse|mode=thisweek';
+$lang->order->menu->thismonth    = 'Contact This Month|order|browse|mode=thismonth';
+$lang->order->menu->public       = 'Public|order|browse|mode=public';
+$lang->order->menu->report       = 'Report|report|browse|module=order';
 
 /* Menu of contact module. */
 $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
-$lang->contact->menu->browse    = array('link' => 'All Contacts|contact|browse|', 'alias' => 'create,edit,view,history');
-$lang->contact->menu->past      = array('link' => 'Urgently need contacted|contact|browse|mode=past', 'alias' => 'create,edit,view,record');
-$lang->contact->menu->today     = array('link' => 'Contact Today|contact|browse|mode=today', 'alias' => 'create,edit,view,record');
-$lang->contact->menu->tomorrow  = array('link' => 'Contact Tomorrow|contact|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
-$lang->contact->menu->thisweek  = array('link' => 'Contact This Week|contact|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
-$lang->contact->menu->thismonth = array('link' => 'Contact This Month|contact|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
+$lang->contact->menu->browse    = 'All Contacts|contact|browse|mode=all';
+$lang->contact->menu->past      = 'Urgently need contacted|contact|browse|mode=past';
+$lang->contact->menu->today     = 'Contact Today|contact|browse|mode=today';
+$lang->contact->menu->tomorrow  = 'Contact Tomorrow|contact|browse|mode=tomorrow';
+$lang->contact->menu->thisweek  = 'Contact This Week|contact|browse|mode=thisweek';
+$lang->contact->menu->thismonth = 'Contact This Month|contact|browse|mode=thismonth';
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
-$lang->contract->menu->browse       = array('link' => 'All Contracts|contract|browse|', 'alias' => 'create,edit,view');
-$lang->contract->menu->unfinished   = array('link' => 'Unfinished|contract|browse|mode=unfinished',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->unreceived   = array('link' => 'Receiving|contract|browse|mode=unreceived',    'alias' => 'create,edit,view,history');
-$lang->contract->menu->undeliveried = array('link' => 'Delivering|contract|browse|mode=undeliveried', 'alias' => 'create,edit,view,history');
-$lang->contract->menu->finished     = array('link' => 'Finished|contract|browse|mode=finished',       'alias' => 'create,edit,view,history');
-$lang->contract->menu->canceled     = array('link' => 'Canceled|contract|browse|mode=canceled',       'alias' => 'create,edit,view,history');
-$lang->contract->menu->expired      = array('link' => 'Expired|contract|browse|mode=expired',         'alias' => 'create,edit,view,history');
-$lang->contract->menu->expire       = array('link' => 'Will Expire|contract|browse|mode=expire', 'alias' => 'create,edit,view,history');
-$lang->contract->menu->report       = array('link' => 'Report|report|browse|module=contract');
+$lang->contract->menu->browse       = 'All Contracts|contract|browse|mode=all';
+$lang->contract->menu->unfinished   = 'Unfinished|contract|browse|mode=unfinished';
+$lang->contract->menu->unreceived   = 'Receiving|contract|browse|mode=unreceived';
+$lang->contract->menu->undeliveried = 'Delivering|contract|browse|mode=undeliveried';
+$lang->contract->menu->finished     = 'Finished|contract|browse|mode=finished';
+$lang->contract->menu->canceled     = 'Canceled|contract|browse|mode=canceled';
+$lang->contract->menu->expired      = 'Expired|contract|browse|mode=expired';
+$lang->contract->menu->expire       = 'Will Expire|contract|browse|mode=expire';
+$lang->contract->menu->report       = 'Report|report|browse|module=contract';
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

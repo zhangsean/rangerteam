@@ -24,57 +24,59 @@ $lang->menu->crm->setting   = '设置|setting|lang|module=product&field=statusLi
 /* Menu of customer module. */
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
-$lang->customer->menu->browse    = array('link' => '所有客户|customer|browse|mode=all', 'alias' => 'create,edit,view,record');
-$lang->customer->menu->past      = array('link' => '亟需联系|customer|browse|mode=past');
-$lang->customer->menu->today     = array('link' => '今天联系|customer|browse|mode=today');
-$lang->customer->menu->tomorrow  = array('link' => '明天联系|customer|browse|mode=tomorrow');
-$lang->customer->menu->thisweek  = array('link' => '本周内联系|customer|browse|mode=thisweek');
-$lang->customer->menu->thismonth = array('link' => '本月内联系|customer|browse|mode=thismonth');
-$lang->customer->menu->public    = array('link' => '公共客户|customer|browse|mode=public');
-$lang->customer->menu->report    = array('link' => '报表|report|browse|module=customer');
+$lang->customer->menu->browse       = '所有客户|customer|browse|mode=all';
+$lang->customer->menu->assignedtome = '指派给我|customer|browse|mode=assignedtome';
+$lang->customer->menu->past         = '亟需联系|customer|browse|mode=past';
+$lang->customer->menu->today        = '今天联系|customer|browse|mode=today';
+$lang->customer->menu->tomorrow     = '明天联系|customer|browse|mode=tomorrow';
+$lang->customer->menu->thisweek     = '本周内联系|customer|browse|mode=thisweek';
+$lang->customer->menu->thismonth    = '本月内联系|customer|browse|mode=thismonth';
+$lang->customer->menu->public       = '公共客户|customer|browse|mode=public';
+$lang->customer->menu->report       = '报表|report|browse|module=customer';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse     = array('link' => '所有产品|product|browse|mode=all');
-$lang->product->menu->normal     = array('link' => '正常|product|browse|mode=normal');
-$lang->product->menu->developing = array('link' => '研发中|product|browse|mode=developing');
-$lang->product->menu->offline    = array('link' => '下线|product|browse|mode=offline');
+$lang->product->menu->browse     = '所有产品|product|browse|mode=all';
+$lang->product->menu->normal     = '正常|product|browse|mode=normal';
+$lang->product->menu->developing = '研发中|product|browse|mode=developing';
+$lang->product->menu->offline    = '下线|product|browse|mode=offline';
 
 /* Menu of order module. */
 $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
-$lang->order->menu->browse    = array('link' => '所有订单|order|browse|mode=all', 'alias' => 'create,edit,view,record');
-$lang->order->menu->past      = array('link' => '亟需联系|order|browse|mode=past', 'alias' => 'create,edit,view,record');
-$lang->order->menu->today     = array('link' => '今天联系|order|browse|mode=today', 'alias' => 'create,edit,view,record');
-$lang->order->menu->tomorrow  = array('link' => '明天联系|order|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
-$lang->order->menu->thisweek  = array('link' => '本周内联系|order|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
-$lang->order->menu->thismonth = array('link' => '本月内联系|order|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
-$lang->order->menu->public    = array('link' => '公共客户|order|browse|mode=public', 'alias' => 'create,edit,view,record');
-$lang->order->menu->report    = array('link' => '报表|report|browse|module=order');
+$lang->order->menu->browse       = '所有订单|order|browse|mode=all';
+$lang->order->menu->assignedtome = '指派给我|order|browse|mode=assignedtome';
+$lang->order->menu->past         = '亟需联系|order|browse|mode=past';
+$lang->order->menu->today        = '今天联系|order|browse|mode=today';
+$lang->order->menu->tomorrow     = '明天联系|order|browse|mode=tomorrow';
+$lang->order->menu->thisweek     = '本周内联系|order|browse|mode=thisweek';
+$lang->order->menu->thismonth    = '本月内联系|order|browse|mode=thismonth';
+$lang->order->menu->public       = '公共客户|order|browse|mode=public';
+$lang->order->menu->report       = '报表|report|browse|module=order';
 
 /* Menu of contact module. */
 $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
-$lang->contact->menu->browse    = array('link' => '所有联系人|contact|browse|mode=all', 'alias' => 'create,edit,view,history');
-$lang->contact->menu->past      = array('link' => '亟需联系|contact|browse|mode=past', 'alias' => 'create,edit,view,record');
-$lang->contact->menu->today     = array('link' => '今天联系|contact|browse|mode=today', 'alias' => 'create,edit,view,record');
-$lang->contact->menu->tomorrow  = array('link' => '明天联系|contact|browse|mode=tomorrow', 'alias' => 'create,edit,view,record');
-$lang->contact->menu->thisweek  = array('link' => '本周内联系|contact|browse|mode=thisweek', 'alias' => 'create,edit,view,record');
-$lang->contact->menu->thismonth = array('link' => '本月内联系|contact|browse|mode=thismonth', 'alias' => 'create,edit,view,record');
+$lang->contact->menu->browse    = '所有联系人|contact|browse|mode=all';
+$lang->contact->menu->past      = '亟需联系|contact|browse|mode=past';
+$lang->contact->menu->today     = '今天联系|contact|browse|mode=today';
+$lang->contact->menu->tomorrow  = '明天联系|contact|browse|mode=tomorrow';
+$lang->contact->menu->thisweek  = '本周内联系|contact|browse|mode=thisweek';
+$lang->contact->menu->thismonth = '本月内联系|contact|browse|mode=thismonth';
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
-$lang->contract->menu->browse       = array('link' => '所有合同|contract|browse|mode=all', 'alias' => 'create,edit,view');
-$lang->contract->menu->unfinished   = array('link' => '未完成|contract|browse|mode=unfinished',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->unreceived   = array('link' => '回款中|contract|browse|mode=unreceived',   'alias' => 'create,edit,view,history');
-$lang->contract->menu->undeliveried = array('link' => '交付中|contract|browse|mode=undeliveried', 'alias' => 'create,edit,view,history');
-$lang->contract->menu->finished     = array('link' => '已完成|contract|browse|mode=finished',     'alias' => 'create,edit,view,history');
-$lang->contract->menu->canceled     = array('link' => '已取消|contract|browse|mode=canceled',     'alias' => 'create,edit,view,history');
-$lang->contract->menu->expired      = array('link' => '已过期|contract|browse|mode=expired',      'alias' => 'create,edit,view,history');
-$lang->contract->menu->expire       = array('link' => '即将到期|contract|browse|mode=expire',     'alias' => 'create,edit,view,history');
-$lang->contract->menu->report       = array('link' => '报表|report|browse|module=contract');
+$lang->contract->menu->browse       = '所有合同|contract|browse|mode=all';
+$lang->contract->menu->unfinished   = '未完成|contract|browse|mode=unfinished';
+$lang->contract->menu->unreceived   = '回款中|contract|browse|mode=unreceived';
+$lang->contract->menu->undeliveried = '交付中|contract|browse|mode=undeliveried';
+$lang->contract->menu->finished     = '已完成|contract|browse|mode=finished';
+$lang->contract->menu->canceled     = '已取消|contract|browse|mode=canceled';
+$lang->contract->menu->expired      = '已过期|contract|browse|mode=expired';
+$lang->contract->menu->expire       = '即将到期|contract|browse|mode=expire';
+$lang->contract->menu->report       = '报表|report|browse|module=contract';
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();
