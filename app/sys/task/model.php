@@ -40,7 +40,7 @@ class taskModel extends model
      * @access public
      * @return array
      */
-    public function getList($projectID = 0, $mode = null, $orderBy = 'id_desc', $pager = null, $groupBy = 'id')
+    public function getList($projectID = 0, $mode = 'all', $orderBy = 'id_desc', $pager = null, $groupBy = 'id')
     {
         if($this->session->taskQuery == false) $this->session->set('taskQuery', ' 1 = 1');
         $taskQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->taskQuery);
