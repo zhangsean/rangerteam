@@ -158,9 +158,9 @@ class action extends control
     {
         /* Save session. */
         $uri = $this->app->getURI(true);
-        $this->session->set('projectList',     $uri);
-        $this->session->set('taskList',        $uri);
-        $this->session->set('docList',         $uri);
+        $this->session->set('projectList', $uri);
+        $this->session->set('taskList',    $uri);
+        $this->session->set('docList',     $uri);
 
         /* Get deleted objects. */
         $this->app->loadClass('pager', $static = true);
