@@ -10,7 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 ?>
-<?php include '../../common/view/header.html.php';?>
+<?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <div class='row'>
   <div class='col-md-3 col-lg-2'>
     <div class='panel panel-sm'>
@@ -61,4 +61,4 @@
   </div>
 </div>
 <?php echo $renderJS;?>
-<?php include '../../common/view/footer.html.php';?>
+<?php include $app->getModuleRoot() . 'common/view/footer.html.php';?>
