@@ -92,6 +92,7 @@ class orderModel extends model
             ->beginIF($mode == 'thisweek')->andWhere('o.nextDate')->between($thisWeek['begin'], $thisWeek['end'])->fi()
             ->beginIF($mode == 'thismonth')->andWhere('o.nextDate')->between($thisMonth['begin'], $thisMonth['end'])->fi()
             ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
+            ->beginIF($mode == 'assignedtome')->andWhere('o.assignedTo')->eq($this->app->user->account)->fi()
             ->beginIF($mode == 'query')->andWhere($param)->fi()
             ->beginIF($mode == 'bysearch')->andWhere($orderQuery)->fi()
             ->andWhere('o.customer')->in($customerIdList)
@@ -505,7 +506,7 @@ class orderModel extends model
      */
     public function setProductsForOrders($orders)
     {
-        $products = $this->loadModel('product')->getPairs();
+        $products = $this->loadModel('product', 'crm')->getPairs();
 
         foreach($orders as $order)
         {
