@@ -110,6 +110,7 @@ class tradeModel extends model
             ->setIf(!$this->post->objectType or !in_array('order', $this->post->objectType), 'order', 0)
             ->setIf(!$this->post->objectType or !in_array('contract', $this->post->objectType), 'contract', 0)
             ->removeIf($type == 'out', 'objectType')
+            ->striptags('desc')
             ->get();
 
         $depositor = $this->loadModel('depositor')->getByID($trade->depositor);
@@ -234,7 +235,7 @@ class tradeModel extends model
             $trade->traderName     = $this->post->traderName[$key];
             $trade->handlers       = !empty($this->post->handlers[$key]) ? join(',', $this->post->handlers[$key]) : '';
             $trade->date           = $this->post->date[$key];
-            $trade->desc           = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags->admin);
+            $trade->desc           = strip_tags(nl2br($this->post->desc[$key]));
             $trade->currency       = $depositorList[$trade->depositor]->currency;
 
             $trades[$key] = $trade;
@@ -302,6 +303,7 @@ class tradeModel extends model
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->remove('objectType')
+            ->striptags('desc')
             ->get();
 
         $handlers = $this->loadModel('user')->getByAccount($trade->handlers);
@@ -375,7 +377,7 @@ class tradeModel extends model
             $trade->customerName   = isset($this->post->customerName[$key])   ? $this->post->customerName[$key] : '';
             $trade->handlers       = !empty($this->post->handlers[$key]) ? join(',', $this->post->handlers[$key]) : '';
             $trade->date           = $this->post->date[$key];
-            $trade->desc           = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags->admin);
+            $trade->desc           = strip_tags(nl2br($this->post->desc[$key]));
             $trade->currency       = $depositor->currency;
             $trade->createdBy      = $this->app->user->account;
             $trade->createdDate    = $now;

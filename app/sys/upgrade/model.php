@@ -73,6 +73,8 @@ class upgradeModel extends model
                 $this->fixOrderProduct();
             case '2_1':
                 $this->execSQL($this->getUpgradeFile('2.1'));
+            case '2_2':
+                $this->processTradeDesc();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -821,6 +823,25 @@ class upgradeModel extends model
         foreach($orders as $order) 
         {
             $this->dao->update(TABLE_ORDER)->set('product')->eq(',' . $order->product . ',')->where('id')->eq($order->id)->exec();
+        }
+
+        return !dao::isError();
+    }
+
+    /**
+     * Process desc of trade when upgrade from 2.2.
+     * 
+     * @access public
+     * @return void
+     */
+    public function processTradeDesc()
+    {
+        $trades = $this->dao->select('id, `desc`')->from(TABLE_TRADE)->fetchPairs();
+
+        foreach($trades as $id => $trade)
+        {
+            $desc = strip_tags(htmlspecialchars_decode($trade));
+            $this->dao->update(TABLE_TRADE)->set('desc')->eq($desc)->where('id')->eq($id)->exec();
         }
 
         return !dao::isError();
