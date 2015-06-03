@@ -479,6 +479,7 @@ EOT;
         $range[200]  = 200;
         $range[500]  = 500;
         $range[1000] = 1000;
+        $range[2000] = 2000;
         $html = "<div class='dropdown dropup'><a href='javascript:;' data-toggle='dropdown' id='_recPerPage' data-value='{$this->recPerPage}'>" . (sprintf($this->lang->pager->recPerPage, $this->recPerPage)) . "<span class='caret'></span></a><ul class='dropdown-menu'>";
         foreach ($range as $key => $value)
         {
