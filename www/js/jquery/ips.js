@@ -162,7 +162,7 @@
      */
     var entry = function(options)
     {
-        this.uuid = $.uuid();
+        this.uuid = $.zui.uuid();
         this.init(options);
     }
 
@@ -758,7 +758,7 @@
                 {
                     if(result)
                     {
-                        $.messager.info(settings.removedEntry.format(et.name));
+                        $.zui.messager.info(settings.removedEntry.format(et.name));
                         var option = {id: et.id};
                         option['delete'] = true;
                         $.refreshDesktop([option]);
@@ -1414,7 +1414,7 @@
                 if(settings.onDeleteBlock && $.isFunction(settings.onDeleteBlock))
                 {
                     settings.onDeleteBlock(index);
-                    $.messager.info(settings.removedBlock);
+                    $.zui.messager.info(settings.removedBlock);
                 }
             }
 
@@ -1425,7 +1425,7 @@
                     settings.onBlocksOrdered(newOrders);
                 }
 
-                messager.success(settings.orderdBlocksSaved);
+                $.zui.messager.success(settings.orderdBlocksSaved);
             }
         };
 
@@ -1845,7 +1845,7 @@
      *
      * @param  array  entiresOptions
      * @param  object options
-     * @return void
+     * @return void 
      */
     function start(entriesOptions, options)
     {
@@ -1895,7 +1895,7 @@
     {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]); return null;
+        if (r !== null) return unescape(r[2]); return null;
     }
 
     /* make jquery object call the ips interface manager */

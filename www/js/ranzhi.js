@@ -67,7 +67,7 @@ $.extend(
 
                     if(response.closeModal)
                     {
-                        setTimeout($.closeModal, 1200);
+                        setTimeout($.zui.closeModal, 1200);
                     }
 
                     if(response.callback)
@@ -253,7 +253,7 @@ $.extend(
             if(!$target.size()) return false;
             $target.load(url, function()
             {
-                if($target.hasClass('modal') && $.ajustModalPosition) $.ajustModalPosition();
+                if($target.hasClass('modal') && $.zui.ajustModalPosition) $.zui.ajustModalPosition();
             });
 
             return false;
@@ -461,7 +461,7 @@ $.extend(
         setTimeout(function()
         {
             var modal = $('#ajaxModal');
-            modal.load(modal.attr('ref'), function(){$(this).find('.modal-dialog').css('width', $(this).data('width')); $.ajustModalPosition()})}, duration);
+            modal.load(modal.attr('ref'), function(){$(this).find('.modal-dialog').css('width', $(this).data('width')); $.zui.ajustModalPosition()})}, duration);
     }
 });
 
@@ -745,7 +745,7 @@ function reloadHome()
 
         $('#home .refresh-all-panel').first().click();
     });
-    window.closeModal();
+    $.zui.closeModal();
 }
 
 /**

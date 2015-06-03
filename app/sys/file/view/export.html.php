@@ -25,7 +25,7 @@ function closeWindow()
 {
     if($.cookie('downloading') == 1)
     {
-        parent.$.closeModal();
+        parent.$.zui.closeModal();
         $.cookie('downloading', null);
         clearInterval(time);
     }

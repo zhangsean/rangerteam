@@ -8,7 +8,7 @@ $(document).ready(function()
             {
                 $('#ajaxModal').attr('rel', response.locate).load(response.locate, function()
                 {
-                    $.ajustModalPosition();
+                    $.zui.ajustModalPosition();
                 });
             }, 2000);
         }

@@ -42,11 +42,11 @@ $imgCutter.imgCutter(
 {
     fixedRatio: true,
     post: '<?php echo inlink('cropavatar', "image={$image->id}")?>',
-    ready: function() {$.ajustModalPosition(); $imgCutter.css('width', $imgCutter.closest('.modal-dialog').width() - 50);},
+    ready: function() {$.zui.ajustModalPosition(); $imgCutter.css('width', $imgCutter.closest('.modal-dialog').width() - 50);},
     done: function(response)
     {
-        $('#start .avatar, #startMenu .avatar').html('<img src="<?php echo $user->avatar?>?rid=' + $.uuid() + '" />');
-        $('#ajaxModal').load(createLink('user', 'profile'), function(){$.ajustModalPosition()});
+        $('#start .avatar, #startMenu .avatar').html('<img src="<?php echo $user->avatar?>?rid=' + $.zui.uuid() + '" />');
+        $('#ajaxModal').load(createLink('user', 'profile'), function(){$.zui.ajustModalPosition()});
     },
 });
 </script>

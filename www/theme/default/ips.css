@@ -66,7 +66,7 @@ body[class*='dropdown-mode-'] .s-menu-tooltip, body.mute-tooltip .s-menu-tooltip
 #apps-menu.more-option .bar-menu > li.option {display: none}
 #moreOptionBtn.active > .icon {transform: scale(1.2); background: #555; background: rgba(255,255,255, .2); }
 #moreOptionBtn.hover > .icon:before {content: '\e6e0'; position: relative; top: -2px; left: -1px}
-#moreOptionMenu {left: 100%; bottom: 0; top: auto; padding: 10px}
+#moreOptionMenu {left: 39px; bottom: -1px; top: auto; padding: 10px}
 #moreOptionMenu > li {display: block; float: left;}
 
 /* bottom bar. */

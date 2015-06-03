@@ -26,7 +26,7 @@ function getBlocks(entryID)
     {
         $(entryBlock).html(data);
         $(entryBlock).show();
-        $.ajustModalPosition();
+        $.zui.ajustModalPosition();
     })
 }
 
@@ -45,7 +45,7 @@ function getRssAndHtmlParams(type, blockID)
     {
         $('#blockParam').html(data);
         $.setAjaxForm('#ajaxForm', function(){parent.location.href=config.webRoot + config.appName;});
-        $.ajustModalPosition();
+        $.zui.ajustModalPosition();
     });
 }
 
@@ -66,7 +66,7 @@ function getBlockParams(blockID, entryID)
     {
         $('#blockParam').html(data);
         $.setAjaxForm('#ajaxForm', function(){parent.location.href=config.webRoot + config.appName;});
-        $.ajustModalPosition();
+        $.zui.ajustModalPosition();
     });
 }
 
