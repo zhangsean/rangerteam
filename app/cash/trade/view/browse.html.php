@@ -36,15 +36,14 @@
     <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>
       <thead>
         <tr class='text-center'>
-          <th class='w-70px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->trade->id);?></th>
+          <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->trade->date);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('depositor', $orderBy, $vars, $lang->trade->depositor);?></th>
           <th class='w-60px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->trade->type);?></th>
           <th><?php commonModel::printOrderLink('trader', $orderBy, $vars, $lang->trade->trader);?></th>
-          <th class='w-120px'><?php commonModel::printOrderLink('money', $orderBy, $vars, $lang->trade->money);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->trade->category);?></th>
+          <th class='w-120px'><?php commonModel::printOrderLink('money', $orderBy, $vars, $lang->trade->money);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('handlers', $orderBy, $vars, $lang->trade->handlers);?></th>
-          <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->trade->date);?></th>
-          <th class='visible-lg'><?php echo $lang->trade->desc;?></th>
+          <th class='w-200px visible-lg'><?php echo $lang->trade->desc;?></th>
           <th class='w-120px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
@@ -52,16 +51,15 @@
         <?php foreach($trades as $trade):?>
         <tr class='text-center'>
           <td class='text-left'>
-          <label class='checkbox-inline'><input type='checkbox' name='tradeIDList[]' value='<?php echo $trade->id;?>'/><?php echo $trade->id;?></label>
+          <label class='checkbox-inline'><input type='checkbox' name='tradeIDList[]' value='<?php echo $trade->id;?>'/><?php echo formatTime($trade->date, DT_DATE1);?></label>
           </td>
-          <td><?php echo zget($depositorList, $trade->depositor, ' ');?></td>
+          <td class='text-left'><?php echo zget($depositorList, $trade->depositor, ' ');?></td>
           <td><?php echo $lang->trade->typeList[$trade->type];?></td>
-          <td><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
-          <td><?php echo zget($currencySign, $trade->currency) . formatMoney($trade->money);?></td>
-          <td><?php echo zget($categories, $trade->category, ' ');?></td>
+          <td class='text-left'><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
+          <td class='text-left'><?php echo zget($categories, $trade->category, ' ');?></td>
+          <td class='text-right'><?php echo zget($currencySign, $trade->currency) . formatMoney($trade->money);?></td>
           <td><?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?></td>
-          <td><?php echo formatTime($trade->date, DT_DATE1);?></td>
-          <td class='text-left visible-lg'><?php echo $trade->desc;?></td>
+          <td class='text-left visible-lg'><div title="<?php echo $trade->desc;?>" class='w-200px text-ellipsis'><?php echo $trade->desc;?><div></td>
           <td>
             <?php commonModel::printLink('trade', 'edit', "tradeID={$trade->id}", $lang->edit);?>
             <?php commonModel::printLink('trade', 'detail', "tradeID={$trade->id}", $lang->trade->detail, "data-toggle='modal'");?>
