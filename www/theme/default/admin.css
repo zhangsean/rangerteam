@@ -85,7 +85,6 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 /* fixed table */
 .with-fixed-table {overflow: hidden;}
 #fixedHeader {position: fixed; z-index: 10; box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2); display: none; background-color: #fff}
-#fixedHeader th {background-color: #fff}
 .with-fixed-table #fixedHeader {display: block;}
 
 /* menu */
