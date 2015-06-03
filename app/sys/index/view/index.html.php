@@ -35,7 +35,7 @@ $isSuperAdmin = $this->app->user->admin == 'super';
     </ul>
     <div id='apps-menu'>
       <ul class='bar-menu'></ul>
-      <button id='moreOptionBtn' data-toggle='tooltip' data-tip-class='s-menu-tooltip' data-placement='right' data-btn-type='menu' class='btn-more' data-original-title='...'><i class='icon icon-ellipsis-horizontal'></i></button>
+      <button id='moreOptionBtn' data-toggle='tooltip' data-tip-class='s-menu-tooltip' data-placement='right' data-btn-type='menu' class='btn-more' data-original-title='...'><i class='icon icon-ellipsis-h'></i></button>
       <ul id='moreOptionMenu' class='bar-menu dropdown-menu fade'>
       </ul>
     </div>
