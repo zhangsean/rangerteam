@@ -18,6 +18,7 @@ $lang->menu->cash->trade     = 'Bills|trade|index|';
 $lang->menu->cash->check     = 'Checking|depositor|check|';
 $lang->menu->cash->depositor = 'Depositor|depositor|index|';
 $lang->menu->cash->provider  = 'Provider|provider|index|';
+$lang->menu->cash->contact   = 'Contact|contact|browse|';
 $lang->menu->cash->setting   = 'Settings|tree|browse|type=in|';
 
 /* Menu of depositor module. */
@@ -37,6 +38,11 @@ $lang->trade->menu->report   = array('link' => 'Report|report|browse|module=trad
 $lang->provider = new stdclass();
 $lang->provider->menu = new stdclass();
 $lang->provider->menu->browse = array('link' => 'Provider List|provider|browse|', 'alias' => 'create,edit,view');
+
+/* Menu of trade module. */
+$lang->contact = new stdclass();
+$lang->contact->menu = new stdclass();
+$lang->contact->menu->browse = array('link' => 'Contact List|contact|browse|', 'alias' => 'create,edit,view');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

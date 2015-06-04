@@ -309,10 +309,10 @@ class contactModel extends model
             $resume = new stdclass();
             $resume->contact  = $contactID;
             $resume->customer = $contact->customer;
-            $resume->dept     = $contact->dept;
+            $resume->dept     = isset($contact->dept) ? $contact->dept : '';
             $resume->maker    = isset($contact->maker) ? $contact->maker : 0;
-            $resume->title    = $contact->title;
-            $resume->join     = $contact->join;
+            $resume->title    = isset($contact->title) ? $contact->title : '';
+            $resume->join     = isset($contact->join) ? $contact->join : '';
 
             if($oldContact->customer != $contact->customer)
             {
