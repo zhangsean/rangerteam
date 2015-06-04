@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
+if(!isset($lang->address)) $lang->address = new stdclass();
 $lang->address->common   = 'Address';
 $lang->address->title    = 'Title';
 $lang->address->country  = 'Country';

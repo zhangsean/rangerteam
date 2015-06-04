@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
+if(!isset($lang->address)) $lang->address = new stdclass();
 $lang->address->common   = '地址管理';
 $lang->address->title    = '名称';
 $lang->address->country  = '国家';
