@@ -37,21 +37,13 @@ $lang->report->colors[]   = 'A186BE';
 $lang->report->singleColor[] = 'F6BD0F';
 
 $lang->report->options = new stdclass();
+$lang->report->options->type   = 'pie';
+$lang->report->options->width  = 500;
+$lang->report->options->height = 140;
+
 $lang->report->options->graph = new stdclass();
-$lang->report->options->swf                     = 'pie2d';
-$lang->report->options->width                   = 'auto';
-$lang->report->options->height                  = 300;
-$lang->report->options->graph->baseFontSize     = 12;
-$lang->report->options->graph->showNames        = 1;
-$lang->report->options->graph->formatNumber     = 1;
-$lang->report->options->graph->decimalPrecision = 0;
-$lang->report->options->graph->animation        = 0;
-$lang->report->options->graph->rotateNames      = 0;
-$lang->report->options->graph->yAxisName        = 'COUNT';
-$lang->report->options->graph->xAxisName        = 'DEFAULT';
-$lang->report->options->graph->pieRadius        = 100; // 饼图直径。
-$lang->report->options->graph->showColumnShadow = 0;   // 是否显示柱状图阴影。
-$lang->report->options->graph->caption          = 'DEFAULT';   // 是否显示柱状图阴影。
+$lang->report->options->graph->xAxisName = 'DEFAULT';
+$lang->report->options->graph->caption   = 'DEFAULT';   // 是否显示柱状图阴影。
 
 $lang->report->customer = new stdclass();
 $lang->report->customer->common = '客户报表';
@@ -215,7 +207,5 @@ $lang->report->trade->value['dateA']      = '金额';
 $lang->report->trade->value['handlersA']  = '金额';
 $lang->report->trade->value['categoryA']  = '金额';
 
-$lang->report->trade->swf['date']        = 'column2d';
 $lang->report->trade->xAxisName['date']  = '日期';
-$lang->report->trade->swf['dateA']       = 'column2d';
 $lang->report->trade->xAxisName['dateA'] = '日期';

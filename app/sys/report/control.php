@@ -42,7 +42,6 @@ class report extends control
                 /* merge options. */
                 $chartOption = clone $this->lang->report->options;
                 $chartOption->item = $this->lang->report->{$module}->item[$chart];
-                if(isset($this->lang->report->{$module}->swf[$chart]))       $chartOption->swf = $this->lang->report->{$module}->swf[$chart];
                 if(isset($this->lang->report->{$module}->xAxisName[$chart])) $chartOption->graph->xAxisName = $this->lang->report->{$module}->xAxisName[$chart];
                 if(isset($this->lang->report->{$module}->chartList[$chart])) $chartOption->graph->caption   = $this->lang->report->{$module}->chartList[$chart];
 
@@ -58,8 +57,7 @@ class report extends control
                         $sum       = $this->report->computeSum($chartData);
                         if(empty($chartData) or $sum == 0) continue;
 
-                        $chartXML = $this->report->createSingleXML($chartData, $chartOption->graph);
-                        $charts["$chart$key"] = $this->report->createJSChart($chartOption->swf, $chartXML, $chartOption->width, $chartOption->height);
+                        $charts["$chart$key"] = $chartOption;
                         $datas["$chart$key"]  = $this->report->computePercent($chartData);
 
                         $tips['caption']["$chart$key"] = $chartOption->graph->caption;
@@ -70,8 +68,7 @@ class report extends control
                 else
                 {
                     $chartData = $this->report->getChartData($module, $chart, $tableName, $groupBy);
-                    $chartXML  = $this->report->createSingleXML($chartData, $chartOption->graph);
-                    $charts[$chart] = $this->report->createJSChart($chartOption->swf, $chartXML, $chartOption->width, $chartOption->height);
+                    $charts[$chart] = $chartOption;
                     $datas[$chart]  = $this->report->computePercent($chartData);
 
                     $tips['caption'][$chart] = $chartOption->graph->caption;
@@ -88,7 +85,6 @@ class report extends control
         $this->view->charts        = $charts;
         $this->view->datas         = $datas;
         $this->view->tips          = $tips;
-        $this->view->renderJS      = $this->report->renderJsCharts(count($charts));
         $this->display();
     }
 }
