@@ -27,23 +27,27 @@ $config->report->customer->listName['industry']   = 'INDUSTRY';
 
 /* order setting. */
 $config->report->order = new stdclass();
-$config->report->order->chartList['product']     = 'product_multi||';
-$config->report->order->chartList['status']      = 'status||';
-$config->report->order->chartList['createdBy']   = 'createdBy||';
-$config->report->order->chartList['assignedTo']  = 'assignedTo||';
-$config->report->order->chartList['productA']    = 'product_multi|`real`|sum';
-$config->report->order->chartList['statusA']     = 'status|`real`|sum';
-$config->report->order->chartList['createdByA']  = 'createdBy|`real`|sum';
-$config->report->order->chartList['assignedToA'] = 'assignedTo|`real`|sum';
+$config->report->order->chartList['product']      = 'product_multi||';
+$config->report->order->chartList['productLine']  = 'productLine_multi||';
+$config->report->order->chartList['status']       = 'status||';
+$config->report->order->chartList['createdBy']    = 'createdBy||';
+$config->report->order->chartList['assignedTo']   = 'assignedTo||';
+$config->report->order->chartList['productA']     = 'product_multi|`real`|sum';
+$config->report->order->chartList['productLineA'] = 'productLine_multi|`real`|sum';
+$config->report->order->chartList['statusA']      = 'status|`real`|sum';
+$config->report->order->chartList['createdByA']   = 'createdBy|`real`|sum';
+$config->report->order->chartList['assignedToA']  = 'assignedTo|`real`|sum';
 
-$config->report->order->listName['product']     = 'PRODUCTS';
-$config->report->order->listName['status']      = 'statusList';
-$config->report->order->listName['createdBy']   = 'USERS';
-$config->report->order->listName['assignedTo']  = 'USERS';
-$config->report->order->listName['productA']    = 'PRODUCTS';
-$config->report->order->listName['statusA']     = 'statusList';
-$config->report->order->listName['createdByA']  = 'USERS';
-$config->report->order->listName['assignedToA'] = 'USERS';
+$config->report->order->listName['product']      = 'PRODUCTS';
+$config->report->order->listName['productLine']  = 'productLineList';
+$config->report->order->listName['status']       = 'statusList';
+$config->report->order->listName['createdBy']    = 'USERS';
+$config->report->order->listName['assignedTo']   = 'USERS';
+$config->report->order->listName['productA']     = 'PRODUCTS';
+$config->report->order->listName['productLineA'] = 'productLineList';
+$config->report->order->listName['statusA']      = 'statusList';
+$config->report->order->listName['createdByA']   = 'USERS';
+$config->report->order->listName['assignedToA']  = 'USERS';
 
 /* contract setting. */
 $config->report->contract = new stdclass();

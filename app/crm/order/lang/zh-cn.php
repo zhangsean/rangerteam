@@ -14,6 +14,7 @@ $lang->order->common         = '订单';
 $lang->order->id             = '编号';
 $lang->order->name           = '名称';
 $lang->order->product        = '产品';
+$lang->order->productLine    = '产品线';
 $lang->order->customer       = '客户';
 $lang->order->contact        = '联系人';
 $lang->order->team           = '团队';

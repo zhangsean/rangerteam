@@ -105,6 +105,8 @@ class reportModel extends model
         /* process lang list. */
         if(isset($this->config->report->{$module}->listName[$chart]))
         {
+            if($chart == 'productLine' or $chart == 'productLineA') $this->app->loadLang('product');
+
             $this->app->loadLang($module);
             $listName = $this->config->report->{$module}->listName[$chart];
 
@@ -117,7 +119,17 @@ class reportModel extends model
             if($listName == 'DEPOSITORS') $list = $this->loadModel('depositor')->getPairs();
             if($listName == 'DEPTS')      $list = $this->loadModel('tree')->getOptionMenu('dept', 0);
             if($listName == 'CATEGORIES_TRADE') $list = $this->lang->trade->categoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true) + $this->loadModel('tree')->getOptionMenu('in', 0);
-            if(!isset($list)) $list = $this->lang->{$module}->{$listName};
+            if(!isset($list))
+            {
+                if($chart == 'productLine' or $chart == 'productLineA')
+                {
+                    $list = $this->lang->product->lineList;
+                }
+                else
+                {
+                    $list = $this->lang->{$module}->{$listName};
+                }
+            }
         }
 
         if(strpos($groupBy, '_multi') !== false and !empty($list))
@@ -125,17 +137,46 @@ class reportModel extends model
             $datas   = array();
             $groupBy = str_replace('_multi', '', $groupBy);
             $field   = str_replace('_multi', '', $field);
-            foreach($list as $key => $value)
-            {
-                $count = $this->dao->select("$func($field) as value")->from($tableName)
-                    ->where($groupBy)->like("%,$key,%")
-                    ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
-                    ->fetch('value');
 
-                $data = new stdclass();
-                $data->name  = $key;
-                $data->value = $count; 
-                if($count != 0) $datas[$key] = $data;
+            if(strpos($chart, 'productLine') !== false)
+            {
+                if($chart == 'productLine') $field = 'product';
+
+                foreach($list as $key => $value)
+                {
+                    if($key == 'default') continue;
+                    $productList = $this->dao->select('id')->from(TABLE_PRODUCT)->where('line')->eq($key)->fetchAll('id');
+
+                    $data = new stdclass();
+                    $data->name  = $key;
+                    $data->value = 0; 
+                    foreach($productList as $id => $product)
+                    {
+                        $count = $this->dao->select("$func($field) as value")->from($tableName)
+                            ->where('product')->like("%,$id,%")
+                            ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
+                            ->fetch('value');
+
+                        $data->value += $count; 
+                    }
+
+                    if($data->value != 0) $datas[$key] = $data;
+                }
+            }
+            else
+            {
+                foreach($list as $key => $value)
+                {
+                    $count = $this->dao->select("$func($field) as value")->from($tableName)
+                        ->where($groupBy)->like("%,$key,%")
+                        ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
+                        ->fetch('value');
+
+                    $data = new stdclass();
+                    $data->name  = $key;
+                    $data->value = $count; 
+                    if($count != 0) $datas[$key] = $data;
+                }
             }
         }
         else
