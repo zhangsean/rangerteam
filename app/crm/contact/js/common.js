@@ -39,7 +39,14 @@ $(function()
         }
         else
         {
-            setTimeout(function(){location.href = response.locate;}, 1200);
+            if(response.locate == 'reload')
+            {
+                $.reloadAjaxModal(1500);
+            }
+            else
+            {
+                setTimeout(function(){location.href = response.locate;}, 1200);
+            }
         }
     });
 });

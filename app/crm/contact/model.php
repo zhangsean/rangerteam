@@ -334,7 +334,9 @@ class contactModel extends model
             $return = $this->updateAvatar($contactID);
 
             $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
-            return array('result' => 'success', 'message' => $message, 'locate' => helper::createLink('contact', 'view', "contactID=$contactID"));
+            $locate = helper::createLink('contact', 'view', "contactID=$contactID");
+            if(strpos($this->server->http_referer, 'contact') === false) $locate = 'reload';
+            return array('result' => 'success', 'message' => $message, 'locate' => $locate);
         }
 
         return array('result' => 'fail', 'message' => dao::getError());

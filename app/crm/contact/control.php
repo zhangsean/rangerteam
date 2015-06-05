@@ -106,9 +106,10 @@ class contact extends control
 
         $this->app->loadLang('resume');
 
-        $this->view->title     = $this->lang->contact->edit;
-        $this->view->customers = $this->loadModel('customer')->getPairs('client');
-        $this->view->contact   = $contact;
+        $this->view->title      = $this->lang->contact->edit;
+        $this->view->customers  = $this->loadModel('customer')->getPairs('client');
+        $this->view->contact    = $contact;
+        $this->view->modalWidth = 1000;
 
         $this->display();
     }

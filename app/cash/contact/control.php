@@ -50,7 +50,6 @@ class contact extends control
         $this->session->set('contactQueryCondition', $this->dao->get());
         $this->session->set('contactList', $this->app->getURI(true));
         $this->session->set('customerList', $this->app->getURI(true));
-        $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit', array_keys($contacts))) . ',';
 
         $customers = $this->customer->getPairs();
 
@@ -109,9 +108,10 @@ class contact extends control
 
         $this->app->loadLang('resume');
 
-        $this->view->title     = $this->lang->contact->edit;
-        $this->view->customers = $this->customer->getPairs('provider');
-        $this->view->contact   = $contact;
+        $this->view->title      = $this->lang->contact->edit;
+        $this->view->customers  = $this->customer->getPairs('provider');
+        $this->view->contact    = $contact;
+        $this->view->modalWidth = 1000;
 
         $this->display();
     }
@@ -126,7 +126,6 @@ class contact extends control
     public function view($contactID)
     {
         if($this->session->customerList == $this->session->contactList) $this->session->set('customerList', $this->app->getURI(true));
-        $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit', (array)$contactID)) . ',';
 
         $this->view->title      = $this->lang->contact->view;
         $this->view->contact    = $this->contact->getByID($contactID);

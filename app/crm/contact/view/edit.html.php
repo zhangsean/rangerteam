@@ -10,6 +10,11 @@
  * @link        http://www.ranzhico.com
  */
 ?>
+<?php if(helper::isAjaxRequest()):?>
+<?php include '../../../sys/common/view/header.modal.html.php';?>
+<?php include '../../common/view/datepicker.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
+<?php else:?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
@@ -20,7 +25,8 @@
   <li class='divider angle'></li>
   <li class='title'><?php echo $lang->contact->edit?></li>
 </ul>
-<form method='post' id='contactForm' class='form-condensed'>
+<?php endif;?>
+<form method='post' id='contactForm' class='form-condensed' action="<?php echo helper::createLink('contact', 'edit', "contactID=$contact->id")?>">
   <div class="row-table">
     <div class='col-main'>
       <div class='panel'>
@@ -111,4 +117,8 @@
     </div>
   </div>
 </form>
+<?php if(helper::isAjaxRequest()):?>
+<?php include '../../../sys/common/view/footer.modal.html.php';?>
+<?php else:?>
 <?php include '../../common/view/footer.html.php';?>
+<?php endif;?>

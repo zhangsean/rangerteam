@@ -225,6 +225,7 @@ class customer extends control
     public function contact($customerID)
     {
         $this->app->loadLang('resume');
+        $this->app->user->canEditContactIdList = ',' . implode(',', $this->loadModel('contact')->getContactsSawByMe('edit')) . ',';
 
         $this->view->title      = $this->lang->customer->contact;
         $this->view->modalWidth = 'lg';

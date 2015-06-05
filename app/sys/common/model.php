@@ -1002,9 +1002,9 @@ class commonModel extends model
         /* Check priv by {$moduleName}ID. */
         $checkByID['customer'] = ',assign,edit,delete,linkcontact,';
         $checkByID['order']    = ',assign,edit,delete,close,activate,';
-        $checkByID['contact']  = ',edit,delete,';
         $checkByID['resume']   = ',edit,delete,';
         $checkByID['address']  = ',edit,delete,';
+        if($app->appName == 'crm') $checkByID['contact'] = ',edit,delete,';
         foreach($checkByID as $moduleName => $methodName)
         {
             if($module == $moduleName and strpos($methodName, ",$method,") !== false)
