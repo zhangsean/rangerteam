@@ -24,7 +24,7 @@ class project extends control
      * @access public
      * @return void
      */
-    public function index($status = 'doing')
+    public function index($status = 'involved')
     {
         if(empty($this->projects)) $this->locate(inlink('create'));
 

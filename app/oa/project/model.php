@@ -80,7 +80,8 @@ class projectModel extends model
     {
         $projects = $this->dao->select('*')->from(TABLE_PROJECT)
             ->where('deleted')->eq(0)
-            ->beginIF($status)->andWhere('status')->eq($status)->fi()
+            ->beginIF($status and $status != 'involved')->andWhere('status')->eq($status)->fi()
+            ->beginIF($status and $status == 'involved')->andWhere('status')->eq('doing')->fi()
             ->fetchAll('id');
 
         $members = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id');
@@ -88,8 +89,10 @@ class projectModel extends model
         foreach($projects as $project)
         {
             $project->members = isset($members[$project->id]) ? $members[$project->id] : array();
+
             foreach($project->members as $key => $member)
             {
+                if($status == 'involved' and $this->app->user->account != $member->account) unset($projects[$project->id]);
                 if(!$member->account) unset($project->members[$key]);
                 if($member->role != 'manager') continue;
                 if($member->role == 'manager') $project->PM = $member->account;
