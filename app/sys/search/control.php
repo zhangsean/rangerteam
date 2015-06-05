@@ -64,7 +64,14 @@ class search extends control
                 $this->session->set($query->module . 'Query', $query->sql);
                 $this->session->set($query->module . 'Form', $query->form);
                 $this->session->set('queryID', $queryID);
-                die(js::locate($query->form['actionURL']));
+                if(!empty($query->form['actionURL']))
+                {
+                    die(js::locate($query->form['actionURL']));
+                }
+                else
+                {
+                    die(js::locate('back'));
+                }
             }
             else
             {
