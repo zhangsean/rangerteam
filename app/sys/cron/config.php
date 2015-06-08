@@ -5,4 +5,4 @@ $config->cron->require->create = 'm,h,dom,mon,dow,command';
 $config->cron->require->edit   = 'm,h,dom,mon,dow,command';
 
 $config->cron->maxRunDays = 8;
-$config->cron->maxRunTime = 6 * 3600;
+$config->cron->maxRunTime = 65;

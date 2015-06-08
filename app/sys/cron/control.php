@@ -149,7 +149,7 @@ class cron extends control
                 /* Skip cron that status is running and run time is less than max. */
                 if($cronInfo->status == 'running' and (time() - strtotime($cronInfo->lastTime)) < $this->config->cron->maxRunTime) continue;
                 /* Skip cron that last time is more than this cron time. */
-                if($cronInfo->lastTime > $cron['time']->format(DT_DATETIME1)) continue;
+                if($cronInfo->lastTime > $cron['time']->format(DT_DATETIME1)) die();
 
                 if($now > $cron['time'])
                 {
