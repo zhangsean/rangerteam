@@ -20,6 +20,12 @@ class teamblockModel extends blockmodel
      */
     public function getAvailableBlocks()
     {
+        foreach($this->lang->block->availableBlocks as $key => $block)
+        {
+            $module = $key == 'thread' ? 'forum' : $key; 
+            $method = $key == 'thread' ? 'board' : 'index';
+            if(!commonModel::hasPriv($module, $method)) unset($this->lang->block->availableBlocks->$key);
+        }
         return json_encode($this->lang->block->availableBlocks);
     }
 

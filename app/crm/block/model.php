@@ -20,6 +20,11 @@ class crmblockModel extends blockModel
      */
     public function getAvailableBlocks()
     {
+        foreach($this->lang->block->availableBlocks as $key => $block)
+        {
+            if(!commonModel::hasPriv($key, 'browse')) unset($this->lang->block->availableBlocks->$key);
+        }
+
         return json_encode($this->lang->block->availableBlocks);
     }
 

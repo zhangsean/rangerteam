@@ -220,11 +220,25 @@ class blockModel extends model
      */
     public function getBlockList($appName = 'sys')
     {
-        return $this->dao->select('*')->from(TABLE_BLOCK)->where('account')->eq($this->app->user->account)
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('account')->eq($this->app->user->account)
             ->andWhere('app')->eq($appName)
             ->andWhere('hidden')->eq(0)
             ->orderBy('`order`')
             ->fetchAll('order');
+
+        foreach($blocks as $key => $block)
+        {
+            $module = $block->block;
+            $method = 'browse';
+            if(strpos('blog, project', $block->block) !== false) $method = 'index';
+            if($block->block == 'thread')
+            {
+                $module = 'forum';
+                $method = 'board';
+            }
+            if(!commonModel::hasPriv($module, $method)) unset($blocks[$key]);
+        }
+        return $blocks;
     }
 
     /**

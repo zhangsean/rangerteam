@@ -30,7 +30,12 @@ class block extends control
         if(!$index) $index = $this->block->getLastKey('sys') + 1;
 
         $allEntries[''] = '';
-        foreach($entries as $id => $entry) $allEntries[$entry->code] = $entry->name;
+        foreach($entries as $id => $entry)
+        {
+            if(!commonModel::hasAppPriv($entry->code)) continue;
+            $allEntries[$entry->code] = $entry->name;
+        }
+
         //$allEntries['rss']  = 'RSS';
         $allEntries['html'] = 'HTML';
 

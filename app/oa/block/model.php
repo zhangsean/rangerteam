@@ -20,6 +20,11 @@ class oablockModel extends blockModel
      */
     public function getAvailableBlocks()
     {
+        foreach($this->lang->block->availableBlocks as $key => $block)
+        {
+            $method = $key == 'project' ? 'index' : 'browse';
+            if(!commonModel::hasPriv($key, $method)) unset($this->lang->block->availableBlocks->$key);
+        }
         return json_encode($this->lang->block->availableBlocks);
     }
 
