@@ -8,10 +8,17 @@ $(function()
         }
         else
         {
-            $('.popover').html(data.message);
-            $('#submit').popover({trigger:'manual', placement:'right'}).popover('show');
-            $('#submit').next('.popover').addClass('popover-content');
-            return false;
+            if(data.error && data.error.length)
+            {
+                $('#duplicateError').html($('.errorMessage').html());
+                $('#duplicateError .alert').prepend(data.error).show();
+
+                $(document).on('click', '#duplicateError #continueSubmit', function()
+                {
+                    $('#duplicateError').append("<input value='1' name='continue' class='hide'>");
+                    $('#submit').attr('type', 'button');
+                })
+            }
         }
     })
 

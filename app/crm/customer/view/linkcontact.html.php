@@ -51,9 +51,15 @@
       </tr>
     </tbody>
   </table>
-  <p class='text-center'>
+  <div class='text-center'>
     <?php echo html::submitButton() . html::commonButton($lang->goback, 'reloadModal btn')?>
-    <div class='popover'></div>
-  </p>
+    <div id='duplicateError' class='hide'></div>
+  </div>
 <form>
+<div class='errorMessage hide'>
+  <div class='alert alert-danger alert-dismissable'>
+    <button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
+    <button type='submit' class='btn btn-default' id='continueSubmit'><?php echo $lang->continueSave;?></button>
+  </div>
+</div>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>
