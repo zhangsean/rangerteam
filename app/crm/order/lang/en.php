@@ -14,6 +14,7 @@ $lang->order->common         = 'Order';
 $lang->order->id             = 'ID';
 $lang->order->name           = 'Name';
 $lang->order->product        = 'Product';
+$lang->order->productLine    = 'Product Line';
 $lang->order->customer       = 'Customer';
 $lang->order->contact        = 'Contact';
 $lang->order->team           = 'Team';
