@@ -65,6 +65,23 @@ $lang->trade->typeList['transferin']  = 'Transfer in';
 $lang->trade->typeList['inveset']     = 'Inveset';
 $lang->trade->typeList['redeem']      = 'Redeem';
 
+$lang->trade->modeList['all']      = 'All';
+$lang->trade->modeList['in']       = 'In';
+$lang->trade->modeList['out']      = 'Out';
+$lang->trade->modeList['transfer'] = 'Transfer';
+$lang->trade->modeList['inveset']  = 'Inveset';
+
+$lang->trade->quarters = new stdclass();
+$lang->trade->quarters->Q1 = '01, 02, 03';
+$lang->trade->quarters->Q2 = '04, 05, 06';
+$lang->trade->quarters->Q3 = '07, 08, 09';
+$lang->trade->quarters->Q4 = '10, 11, 12';
+
+$lang->trade->quarterList['Q1'] = 'First quarter';
+$lang->trade->quarterList['Q2'] = 'Second quarter';
+$lang->trade->quarterList['Q3'] = 'Third quarter';
+$lang->trade->quarterList['Q4'] = 'Fourth quarter';
+
 $lang->trade->categoryList['transferin']  = 'Transfer In';
 $lang->trade->categoryList['transferout'] = 'Transfer Out';
 $lang->trade->categoryList['inveset']     = 'Inveset';

@@ -33,4 +33,28 @@ $(document).ready(function()
 
         return tradeChecked;
     })
+
+    $('.side-handle').click(function()
+    {
+        if($(this).parents('.with-side').hasClass('hide-side'))
+        {
+            $('.with-side').removeClass('hide-side');
+        }
+        else
+        {
+            $('.with-side').addClass('hide-side');
+        }
+    })
+
+    if(v.date)
+    {
+        if(config.requestType == 'GET')
+        {
+            $(".side-body .tree li a[href$='" + v.date + "']").parent().addClass('active');
+        }
+        else
+        {
+            $(".side-body .tree li a[href$='" + v.date + ".html']").parent().addClass('active');
+        }
+    }
 });

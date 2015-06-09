@@ -65,6 +65,23 @@ $lang->trade->typeList['transferin']  = '转入';
 $lang->trade->typeList['inveset']     = '投资';
 $lang->trade->typeList['redeem']      = '赎回';
 
+$lang->trade->modeList['all']      = '所有账目';
+$lang->trade->modeList['in']       = '收入';
+$lang->trade->modeList['out']      = '支出';
+$lang->trade->modeList['transfer'] = '转账';
+$lang->trade->modeList['inveset']  = '投资';
+
+$lang->trade->quarters = new stdclass();
+$lang->trade->quarters->Q1 = '01, 02, 03';
+$lang->trade->quarters->Q2 = '04, 05, 06';
+$lang->trade->quarters->Q3 = '07, 08, 09';
+$lang->trade->quarters->Q4 = '10, 11, 12';
+
+$lang->trade->quarterList['Q1'] = '第一季度';
+$lang->trade->quarterList['Q2'] = '第二季度';
+$lang->trade->quarterList['Q3'] = '第三季度';
+$lang->trade->quarterList['Q4'] = '第四季度';
+
 $lang->trade->categoryList['transferin']  = '转入';
 $lang->trade->categoryList['transferout'] = '转出';
 $lang->trade->categoryList['inveset']     = '投资';

@@ -11,7 +11,9 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../../sys/common/view/treeview.html.php';?>
 <?php js::set('mode', $mode);?>
+<?php js::set('date', $date);?>
 <?php $vars = "mode={$mode}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
@@ -31,58 +33,95 @@
   </div>
   <?php endif;?>
 </div>
-<div class='panel'>
-  <form method='post' action='<?php echo inlink('batchedit', 'step=form')?>'>
-    <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>
-      <thead>
-        <tr class='text-center'>
-          <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->trade->date);?></th>
-          <th class='w-100px'><?php commonModel::printOrderLink('depositor', $orderBy, $vars, $lang->trade->depositor);?></th>
-          <th class='w-60px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->trade->type);?></th>
-          <th><?php commonModel::printOrderLink('trader', $orderBy, $vars, $lang->trade->trader);?></th>
-          <th class='w-100px'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->trade->category);?></th>
-          <th class='w-120px'><?php commonModel::printOrderLink('money', $orderBy, $vars, $lang->trade->money);?></th>
-          <th class='w-100px'><?php commonModel::printOrderLink('handlers', $orderBy, $vars, $lang->trade->handlers);?></th>
-          <th class='w-200px visible-lg'><?php echo $lang->trade->desc;?></th>
-          <th class='w-120px'><?php echo $lang->actions;?></th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach($trades as $trade):?>
-        <tr class='text-center'>
-          <td class='text-left'>
-          <label class='checkbox-inline'><input type='checkbox' name='tradeIDList[]' value='<?php echo $trade->id;?>'/><?php echo formatTime($trade->date, DT_DATE1);?></label>
-          </td>
-          <td class='text-left'><?php echo zget($depositorList, $trade->depositor, ' ');?></td>
-          <td><?php echo $lang->trade->typeList[$trade->type];?></td>
-          <td class='text-left'><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
-          <td class='text-left'><?php echo zget($categories, $trade->category, ' ');?></td>
-          <td class='text-right'><?php echo zget($currencySign, $trade->currency) . formatMoney($trade->money);?></td>
-          <td><?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?></td>
-          <td class='text-left visible-lg'><div title="<?php echo $trade->desc;?>" class='w-200px text-ellipsis'><?php echo $trade->desc;?><div></td>
-          <td>
-            <?php commonModel::printLink('trade', 'edit', "tradeID={$trade->id}", $lang->edit);?>
-            <?php commonModel::printLink('trade', 'detail', "tradeID={$trade->id}", $lang->trade->detail, "data-toggle='modal'");?>
-            <?php commonModel::printLink('trade', 'delete', "tradeID={$trade->id}", $lang->delete, "class='deleter'");?>
-          </td>
-        </tr>
-        <?php endforeach;?>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan='7'>
-          </td>
-          <td colspan='3'></td>
-        </tr>
-      </tfoot>
-    </table>
-    <div class='table-footer'>
-      <div class='pull-left'>
-        <?php echo html::selectButton() . html::submitButton($lang->edit);?>
-        <span class='text-danger'><?php $this->trade->countMoney($trades, $mode);?></span>
+<div class='with-side'>
+  <div class='side'>
+    <a class='side-handle'><i class='icon-caret-left'></i></a>
+    <div class='side-body'>
+      <div class='panel panel-sm'>
+        <div class='panel-heading nobr'>
+          <strong><?php echo $lang->trade->modeList[$mode];?></strong>
+        </div>
+        <div class="panel-body">
+          <ul class="tree">
+            <?php foreach($tradeYears as $tradeYear):?>
+            <li>
+              <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear", $tradeYear);?>
+              <ul>
+                <?php foreach($tradeQuarters[$tradeYear] as $tradeQuarter):?>
+                <li>
+                  <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear$tradeQuarter", $lang->trade->quarterList[$tradeQuarter]);?>
+                  <ul>
+                    <?php foreach($tradeMonths[$tradeYear][$tradeQuarter] as $tradeMonth):?>
+                    <li>
+                      <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear$tradeMonth", $tradeYear . $tradeMonth);?>
+                    </li>
+                    <?php endforeach;?>
+                  </ul>
+                </li>
+                <?php endforeach;?>
+              </ul>
+            </li>
+            <?php endforeach;?>
+          </ul>
+        </div>
       </div>
-      <?php echo $pager->get();?>
     </div>
-  </from>
+  </div>
+  <div class='main'>
+    <div class='panel'>
+      <form method='post' action='<?php echo inlink('batchedit', 'step=form')?>'>
+        <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>
+          <thead>
+            <tr class='text-center'>
+              <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->trade->date);?></th>
+              <th class='w-100px'><?php commonModel::printOrderLink('depositor', $orderBy, $vars, $lang->trade->depositor);?></th>
+              <th class='w-60px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->trade->type);?></th>
+              <th><?php commonModel::printOrderLink('trader', $orderBy, $vars, $lang->trade->trader);?></th>
+              <th class='w-100px'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->trade->category);?></th>
+              <th class='w-120px'><?php commonModel::printOrderLink('money', $orderBy, $vars, $lang->trade->money);?></th>
+              <th class='w-100px'><?php commonModel::printOrderLink('handlers', $orderBy, $vars, $lang->trade->handlers);?></th>
+              <th class='w-200px visible-lg'><?php echo $lang->trade->desc;?></th>
+              <th class='w-110px'><?php echo $lang->actions;?></th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach($trades as $trade):?>
+            <tr class='text-center'>
+              <td class='text-left'>
+              <label class='checkbox-inline'><input type='checkbox' name='tradeIDList[]' value='<?php echo $trade->id;?>'/><?php echo formatTime($trade->date, DT_DATE1);?></label>
+              </td>
+              <td class='text-left'><?php echo zget($depositorList, $trade->depositor, ' ');?></td>
+              <td><?php echo $lang->trade->typeList[$trade->type];?></td>
+              <td class='text-left'><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
+              <td class='text-left'><?php echo zget($categories, $trade->category, ' ');?></td>
+              <td class='text-right'><?php echo zget($currencySign, $trade->currency) . formatMoney($trade->money);?></td>
+              <td><?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?></td>
+              <td class='text-left visible-lg'><div title="<?php echo $trade->desc;?>" class='w-200px text-ellipsis'><?php echo $trade->desc;?><div></td>
+              <td>
+                <?php commonModel::printLink('trade', 'edit', "tradeID={$trade->id}", $lang->edit);?>
+                <?php commonModel::printLink('trade', 'detail', "tradeID={$trade->id}", $lang->trade->detail, "data-toggle='modal'");?>
+                <?php commonModel::printLink('trade', 'delete', "tradeID={$trade->id}", $lang->delete, "class='deleter'");?>
+              </td>
+            </tr>
+            <?php endforeach;?>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan='7'>
+              </td>
+              <td colspan='3'></td>
+            </tr>
+          </tfoot>
+        </table>
+        <div class='table-footer'>
+          <div class='pull-left'>
+            <?php echo html::selectButton() . html::submitButton($lang->edit);?>
+            <span class='text-danger'><?php $this->trade->countMoney($trades, $mode);?></span>
+          </div>
+          <?php echo $pager->get();?>
+        </div>
+      </from>
+    </div>
+  </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

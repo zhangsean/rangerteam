@@ -32,7 +32,7 @@ class trade extends control
      * @access public
      * @return void
      */
-    public function browse($mode = 'all', $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'all', $date = '', $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         if($mode == 'out') $this->trade->checkExpensePriv();
 
@@ -52,12 +52,43 @@ class trade extends control
         $this->config->trade->search['params']['category']['values']  = array('' => '') + $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
         $this->search->setSearchParams($this->config->trade->search);
 
-        $trades = $this->trade->getList($mode, $orderBy, $pager);
+        $tradeDates = $this->dao->select('id, date')->from(TABLE_TRADE)->fetchPairs();
+
+        $tradeYears    = array();
+        $tradeQuarters = array();
+        $tradeMonths   = array();
+        foreach($tradeDates as $tradeDate)
+        {
+            $year  = substr($tradeDate, 0, 4);
+            $month = substr($tradeDate, 5, 2);
+
+            if(!in_array($year, $tradeYears)) $tradeYears[] = $year;
+
+            if(!isset($tradeQuarters[$year])) $tradeQuarters[$year] = array();
+            foreach($this->lang->trade->quarters as $key => $quarterMonth)
+            {
+                if(strpos($quarterMonth, $month) !== false)    
+                {
+                    $quarter = $key;
+                    if(!in_array($key, $tradeQuarters[$year])) $tradeQuarters[$year][] = $key;
+                }
+            }
+
+            if(!isset($tradeMonths[$year][$quarter])) $tradeMonths[$year][$quarter] = array();
+
+            if(!in_array($month, $tradeMonths[$year][$quarter]))
+            {
+                $tradeMonths[$year][$quarter][] = $month;
+            }
+        }
+
+        $trades = $this->trade->getList($mode, $date, $orderBy, $pager);
         $this->session->set('tradeQueryCondition', $this->dao->get());
 
         $this->view->title   = $this->lang->trade->browse;
         $this->view->trades  = $trades;
         $this->view->mode    = $mode;
+        $this->view->date    = $date;
         $this->view->pager   = $pager;
         $this->view->orderBy = $orderBy;
 
@@ -68,6 +99,9 @@ class trade extends control
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->currencySign  = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->currencyList  = $this->common->getCurrencyList();
+        $this->view->tradeYears    = $tradeYears;
+        $this->view->tradeQuarters = $tradeQuarters;
+        $this->view->tradeMonths   = $tradeMonths;
 
         $this->display();
     }   

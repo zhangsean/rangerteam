@@ -31,7 +31,7 @@ class tradeModel extends model
      * @access public
      * @return array
      */
-    public function getList($mode, $orderBy, $pager = null)
+    public function getList($mode, $date, $orderBy, $pager = null)
     {
         if($this->session->tradeQuery === false) $this->session->set('tradeQuery', ' 1 = 1');
         $tradeQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->tradeQuery);
@@ -46,8 +46,33 @@ class tradeModel extends model
             if(!$this->loadModel('tree')->hasRight($id)) $denyCategories[] = $id; 
         }
 
+        $startDate = '';
+        $endDate   = '';
+
+        if(strlen($date) == 4)
+        {
+            $startDate = $date . '-01-01';
+            $endDate   = $date . '-12-31';
+        }
+
+        if(strlen($date) == 6 and strpos($date, 'Q') === false)
+        {
+            $nextMonth = substr($date, 5, 1) + 1;
+            $startDate = substr($date, 0, 4) . '-' . substr($date, 4, 2) . '-01';
+            $endDate   = substr($date, 0, 4) . '-0' . $nextMonth . '-01';
+        }
+
+        if(strlen($date) == 6 and strpos($date, 'Q') !== false)
+        {
+            $startMonth = (substr($date, 5, 1) - 1) * 3 + 1;
+            $endMonth   = substr($date, 5, 1) * 3 + 1;
+            $startDate  = substr($date, 0, 4) . '-' . $startMonth . '-01';
+            $endDate    = substr($date, 5, 1) == 4 ? substr($date, 0, 4) . '-12-31' : substr($date, 0, 4) . '-' . $endMonth . '-01';
+        }
+
         $trades = $this->dao->select('*')->from(TABLE_TRADE)
             ->where('parent')->eq('')
+            ->beginIF($startDate and $endDate)->andWhere('date')->ge($startDate)->andWhere('date')->lt($endDate)->fi()
             ->beginIF($mode == 'in')->andWhere('type')->eq('in')
             ->beginIF($mode == 'out')->andWhere('type')->eq('out')
             ->beginIF($mode == 'transfer')->andWhere('type')->like('transfer%')->orWhere('category')->eq('fee')
