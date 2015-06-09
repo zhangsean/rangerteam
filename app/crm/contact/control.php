@@ -244,7 +244,14 @@ END:VCARD";
             }
 
             $contacts = array();
-            if($mode == 'all') $contacts = $this->contact->getList($customer = '', $relation = 'client', $mode, $orderBy);
+            if($mode == 'all')
+            {
+                $contactQueryCondition = $this->session->contactQueryCondition;
+                $contactQueryCondition = substr($contactQueryCondition, 0, strpos($contactQueryCondition, 'limit'));
+                $stmt = $this->dbh->query($contactQueryCondition);
+                while($row = $stmt->fetch()) $contacts[$row->id] = $row;
+            }
+
             if($mode == 'thisPage')
             {
                 $stmt = $this->dbh->query($this->session->contactQueryCondition);

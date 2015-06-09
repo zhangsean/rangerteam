@@ -363,7 +363,14 @@ class order extends control
             }
 
             $orders = array();
-            if($mode == 'all') $orders = $this->order->getList($mode, '', $orderBy);
+            if($mode == 'all')
+            {
+                $orderQueryCondition = $this->session->orderQueryCondition;
+                $orderQueryCondition = substr($orderQueryCondition, 0, strpos($orderQueryCondition, 'limit'));
+                $stmt = $this->dbh->query($orderQueryCondition);
+                while($row = $stmt->fetch()) $orders[$row->id] = $row;
+            }
+
             if($mode == 'thisPage')
             {
                 $stmt = $this->dbh->query($this->session->orderQueryCondition);

@@ -582,7 +582,14 @@ class task extends control
 
             /* Get tasks. */
             $tasks = array();
-            if($mode == 'all')$tasks = $this->dao->select('*')->from(TABLE_TASK)->where('deleted')->eq(0)->andWhere('project')->eq($projectID)->orderBy($orderBy)->fetchAll('id');
+            if($mode == 'all')
+            {
+                $taskQueryCondition = $this->session->taskQueryCondition;
+                $taskQueryCondition = substr($taskQueryCondition, 0, strpos($taskQueryCondition, 'limit'));
+                $stmt = $this->dbh->query($taskQueryCondition);
+                while($row = $stmt->fetch()) $tasks[$row->id] = $row;
+            }
+
             if($mode == 'thisPage')
             {
                 $stmt = $this->dbh->query($this->session->taskQueryCondition);

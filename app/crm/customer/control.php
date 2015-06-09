@@ -316,7 +316,13 @@ class customer extends control
             }
 
             $customers = array();
-            if($mode == 'all') $customers = $this->customer->getList($mode, null, $relation = 'client', $orderBy);
+            if($mode == 'all')
+            {
+                $customerQueryCondition = $this->session->customerQueryCondition;
+                $customerQueryCondition = substr($customerQueryCondition, 0, strpos($customerQueryCondition, 'limit'));
+                $stmt = $this->dbh->query($customerQueryCondition);
+                while($row = $stmt->fetch()) $customers[$row->id] = $row;
+            }
             if($mode == 'thisPage')
             {
                 $stmt = $this->dbh->query($this->session->customerQueryCondition);
@@ -342,7 +348,7 @@ class customer extends control
                 if(isset($customerLang->levelNameList[$customer->level]))   $customer->level    = $customerLang->levelNameList[$customer->level];
                 if(isset($customerLang->relationList[$customer->relation])) $customer->relation = $customerLang->relationList[$customer->relation];
                 if(isset($areaList[$customer->area]))                       $customer->area     = $areaList[$customer->area];
-                if(isset($industryList[$customer->industry]))               $customer->industry = $areaList[$customer->industry];
+                if(isset($industryList[$customer->industry]))               $customer->industry = $industryList[$customer->industry];
 
                 if(isset($users[$customer->createdBy]))   $customer->createdBy   = $users[$customer->createdBy];
                 if(isset($users[$customer->editedBy]))    $customer->editedBy    = $users[$customer->editedBy];
