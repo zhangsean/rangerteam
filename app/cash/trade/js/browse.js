@@ -7,7 +7,7 @@ $(document).ready(function()
         $(this).parents('tr').next().find("[name*='handlers']").chosen({no_results_text: '', placeholder_text:' ', disable_search_threshold: 1, search_contains: true, width: '100%'});
         $(this).parents('tr').next().find("[name*='category']").chosen({no_results_text: '', placeholder_text:' ', disable_search_threshold: 1, search_contains: true, width: '100%'});
         v.key ++;
-    })
+    });
 
     /* Remove a trade detail item. */
     $(document).on('click', '.icon-minus', function()
@@ -20,7 +20,7 @@ $(document).ready(function()
         {
             $(this).parents('tr').find('input,select').val('');
         }
-    })
+    });
 
     $('#submit').click(function()
     {
@@ -32,7 +32,9 @@ $(document).ready(function()
         })
 
         return tradeChecked;
-    })
+    });
+
+    fixTableFooter($('#tradeList'));
 
     $('.side-handle').click(function()
     {

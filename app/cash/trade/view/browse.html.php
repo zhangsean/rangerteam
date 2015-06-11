@@ -26,7 +26,7 @@
   <?php if(commonModel::hasPriv('trade', 'export')):?>
   <div class='btn-group'>
     <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo $lang->export;?> <span class='caret'></span></button>
-    <ul id='exportActionMenu' class='dropdown-menu'>
+    <ul id='exportActionMenu' class='dropdown-menu pull-right'>
       <li><?php commonModel::printLink('trade', 'export', "mode=all&orderBy={$orderBy}", $lang->exportAll, "class='iframe' data-width='700'");?></li>
       <li><?php commonModel::printLink('trade', 'export', "mode=thisPage&orderBy={$orderBy}", $lang->exportThisPage, "class='iframe' data-width='700'");?></li>
     </ul>
@@ -105,13 +105,6 @@
             </tr>
             <?php endforeach;?>
           </tbody>
-          <tfoot>
-            <tr>
-              <td colspan='7'>
-              </td>
-              <td colspan='3'></td>
-            </tr>
-          </tfoot>
         </table>
         <div class='table-footer'>
           <div class='pull-left'>

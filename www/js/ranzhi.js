@@ -613,9 +613,7 @@ function selectLang(lang)
  */
 function fixTableHeader()
 {
-    var table = $('.page-content > .panel > .table');
-
-    if($('#tradeList').length) table = $('#tradeList');
+    var table = $('.page-content > .panel > .table, #tradeList');
 
     if(!table.length) return;
 
@@ -654,6 +652,36 @@ function fixTableHeader()
         };
 
         $('#fixedHeader').css({top: navHeight, left: tHead.offset().left, width: table.width()});
+    }
+}
+
+/**
+ * Fix table footer in admin page
+ * 
+ * @access public
+ * @return void
+ */
+function fixTableFooter($table)
+{
+    var $footer = $table.next('.table-footer');
+    if(!$footer.length) return;
+
+    $footer.addClass('table-fixed-footer');
+    var $col = $table.closest('.page-content');
+    var $win = $(window).scroll(checkPosition).resize(resizeFooter);
+    checkPosition();
+
+    function checkPosition()
+    {
+        var bottomPos = $table.offset().top + $table.height() + $footer.outerHeight() / 3;
+        var scrollPos = $win.scrollTop() + $win.height();
+        $col.toggleClass('with-fixed-table-footer', scrollPos < bottomPos);
+    }
+
+    function resizeFooter()
+    {
+        $footer.css({bottom: 0, left: $table.offset().left, width: $table.width()});
+        checkPosition();
     }
 }
 
