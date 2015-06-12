@@ -14,7 +14,7 @@
 <?php include '../../../sys/common/view/treeview.html.php';?>
 <?php js::set('mode', $mode);?>
 <?php js::set('date', $date);?>
-<?php $vars = "mode={$mode}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+<?php $vars = "mode={$mode}&date={$date}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
   <?php commonModel::printLink('trade', 'create', 'type=in',  "{$lang->trade->createIn}</i>", "class='btn btn-primary'")?>
