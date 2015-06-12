@@ -133,7 +133,21 @@ class block extends control
 
         $this->processParams();
 
+        /* Do not get trades which user has no privilege to browse their categories. */
+        $denyCategories = array();
+        $outCategories = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->fetchAll('id');
+        foreach($outCategories as $id => $outCategory)
+        {
+            if(!$this->loadModel('tree')->hasRight($id)) $denyCategories[] = $id; 
+        }
+
+        $rights = $this->app->user->rights;
+        $expensePriv = (isset($rights['tradebrowse']['out']) or $this->app->user->admin == 'super') ? true : false; 
+
         $this->view->trades = $this->dao->select('*')->from(TABLE_TRADE)
+            ->where('1=1')
+            ->beginIF(!empty($denyCategories))->andWhere('category')->notin($denyCategories)
+            ->beginIF(!$expensePriv)->andWhere('type')->ne('out')->fi()
             ->orderBy($this->params->orderBy)
             ->limit($this->params->num)
             ->fetchAll('id');

@@ -125,8 +125,13 @@ class block extends control
         $this->view->products  = $this->loadModel('product')->getPairs();
         $this->view->customers = $this->loadModel('customer')->getPairs('client');
 
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe('view');
+
         $this->view->orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where('deleted')->eq(0)
+            ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
+            ->andWhere('customer')->in($customerIdList)
+            ->fi()
             ->beginIF($params->type and strpos($params->type, 'status') === false)->andWhere($params->type)->eq($params->account)->fi()
             ->beginIF($params->type and strpos($params->type, 'status') !== false)->andWhere('status')->eq(str_replace('status' , '', $params->type))->fi()
             ->orderBy($params->orderBy)
@@ -215,16 +220,26 @@ class block extends control
         $this->session->set('customerList', $this->createLink('crm.dashboard', 'index'));
         if($this->get->app == 'sys') $this->session->set('customerList', 'javascript:$.openEntry("home")');
 
-        $this->view->sso    = base64_decode($this->get->sso);
-        $this->view->code   = $this->get->blockid;
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+        if(empty($customerIdList))
+        {
+            $customers = array();
+        }
+        else
+        {
+            $customers = $this->dao->select('*')->from(TABLE_CUSTOMER)
+                ->where('deleted')->eq(0)
+                ->andWhere('id')->in($customerIdList)
+                ->beginIF($params->type and $params->type == 'today')->andWhere('nextDate')->eq(helper::today())->fi()
+                ->beginIF($params->type and $params->type == 'thisweek')->andWhere('nextDate')->between($thisWeek['begin'], $thisWeek['end'])->fi()
+                ->orderBy($params->orderBy)
+                ->limit($params->num)
+                ->fetchAll('id');
+        }
 
-        $this->view->customers = $this->dao->select('*')->from(TABLE_CUSTOMER)
-            ->where('deleted')->eq(0)
-            ->beginIF($params->type and $params->type == 'today')->andWhere('nextDate')->eq(helper::today())->fi()
-            ->beginIF($params->type and $params->type == 'thisweek')->andWhere('nextDate')->between($thisWeek['begin'], $thisWeek['end'])->fi()
-            ->orderBy($params->orderBy)
-            ->limit($params->num)
-            ->fetchAll('id');
+        $this->view->sso       = base64_decode($this->get->sso);
+        $this->view->code      = $this->get->blockid;
+        $this->view->customers = $customers;
 
         $this->display();
     }

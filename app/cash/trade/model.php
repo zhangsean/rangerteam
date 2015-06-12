@@ -46,6 +46,9 @@ class tradeModel extends model
             if(!$this->loadModel('tree')->hasRight($id)) $denyCategories[] = $id; 
         }
 
+        $rights = $this->app->user->rights;
+        $expensePriv = ($this->app->user->admin == 'super' or isset($rights['tradebrowse']['out'])) ? true : false; 
+
         $startDate = '';
         $endDate   = '';
 
@@ -79,6 +82,7 @@ class tradeModel extends model
             ->beginIF($mode == 'inveset')->andWhere('type')->in('inveset,redeem')->orWhere('category')->in('profit,loss')
             ->beginIF($mode == 'bysearch')->andWhere($tradeQuery)->fi()
             ->beginIF(!empty($denyCategories))->andWhere('category')->notin($denyCategories)
+            ->beginIF(!$expensePriv)->andWhere('type')->ne('out')->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
