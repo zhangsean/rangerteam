@@ -32,7 +32,7 @@ $lang->trade->menu->in       = array('link' => 'Income|trade|browse|mode=in');
 $lang->trade->menu->out      = array('link' => 'Expenditure|trade|browse|mode=out');
 $lang->trade->menu->transfer = array('link' => 'Transfer|trade|browse|mode=transfer');
 $lang->trade->menu->inveset  = array('link' => 'Inveset|trade|browse|mode=inveset&orderBy=depositor');
-$lang->trade->menu->report   = array('link' => 'Report|report|browse|module=trade');
+$lang->trade->menu->report   = array('link' => 'Report|trade|report');
 
 /* Menu of trade module. */
 $lang->provider = new stdclass();

@@ -86,6 +86,59 @@ class tradeModel extends model
         return $trades;
     }
 
+    /**
+     * Get date pairs of trade.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getDatePairs()
+    {
+        return $this->dao->select('id, date')->from(TABLE_TRADE)->orderBy('date_desc')->fetchPairs();
+    }
+
+    /**
+     * Get monthly chart data.
+     * 
+     * @param  string    $type 
+     * @param  string    $currentYear 
+     * @param  string    $currentMonth 
+     * @param  string    $groupBy 
+     * @param  string    $currency 
+     * @access public
+     * @return array
+     */
+    public function getChartData($type, $currentYear, $currentMonth, $groupBy, $currency)
+    {
+        $nextMonth = substr($currentMonth, 1, 1) + 1;
+        $startDate = $currentYear . '-' . $currentMonth . '-01';
+        $endDate   = $currentYear . '-0' . $nextMonth . '-01';
+
+        if($groupBy == 'category')
+        {
+            if($type == 'in')  $list = $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0);
+            if($type == 'out') $list = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0);
+            $list = array('' => '') + $list;
+        }
+
+        if($groupBy == 'dept') $list = $this->loadModel('tree')->getOptionMenu('dept', 0);
+
+        $datas = $this->dao->select("$groupBy as name, sum(money) as value")->from(TABLE_TRADE)
+                ->where('type')->eq($type)
+                ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
+                ->beginIf($startDate != '' and $endDate != '')->andWhere('date')->ge($startDate)->andWhere('date')->lt($endDate)->fi()
+                ->beginIf($groupBy == 'category')->andWhere('category')->in(array_keys($list))
+                ->groupBy($groupBy)
+                ->orderBy('value_desc')
+                ->fetchAll('name');
+
+        if(empty($datas)) return array();
+
+        foreach($datas as $name => $data) $data->name = ($name and isset($list[$name])) ? $list[$name] : $this->lang->report->undefined;
+
+        return $datas;
+    }
+
     /** 
      * Get trade list by trade's id list.
      * 
@@ -166,7 +219,6 @@ class tradeModel extends model
         }
 
         return $tradeID;
-
     }
 
     /**
@@ -245,6 +297,7 @@ class tradeModel extends model
         /* Get data. */
         if($this->post->type === false) return array('result' => 'fail');
 
+
         foreach($this->post->type as $key => $type)
         {
             if(empty($type)) break;
@@ -252,7 +305,6 @@ class tradeModel extends model
             $trade->depositor      = $this->post->depositor[$key];
             $trade->money          = $this->post->money[$key];
             $trade->type           = $type;
-            $trade->category       = $this->post->category[$key];
             $trade->dept           = $this->post->dept[$key];
             $trade->trader         = $this->post->trader[$key] ? $this->post->trader[$key] : 0;
             $trade->createTrader   = false;
@@ -262,6 +314,7 @@ class tradeModel extends model
             $trade->date           = $this->post->date[$key];
             $trade->desc           = strip_tags(nl2br($this->post->desc[$key]));
             $trade->currency       = $depositorList[$trade->depositor]->currency;
+            if(isset($this->post->category[$key])) $trade->category = $this->post->category[$key];
 
             $trades[$key] = $trade;
         }
@@ -330,9 +383,6 @@ class tradeModel extends model
             ->remove('objectType')
             ->striptags('desc')
             ->get();
-
-        $handlers = $this->loadModel('user')->getByAccount($trade->handlers);
-        if($handlers) $trade->dept = $handlers->dept;
 
         $this->dao->update(TABLE_TRADE)
             ->data($trade, $skip = 'createTrader,traderName')
@@ -406,9 +456,6 @@ class tradeModel extends model
             $trade->currency       = $depositor->currency;
             $trade->createdBy      = $this->app->user->account;
             $trade->createdDate    = $now;
-
-            $handlers = $this->loadModel('user')->getByAccount($trade->handlers);
-            if($handlers) $trade->dept = $handlers->dept;
 
             if($trade->createTrader)
             {

@@ -52,7 +52,7 @@ class trade extends control
         $this->config->trade->search['params']['category']['values']  = array('' => '') + $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
         $this->search->setSearchParams($this->config->trade->search);
 
-        $tradeDates = $this->dao->select('id, date')->from(TABLE_TRADE)->fetchPairs();
+        $tradeDates = $this->trade->getDatePairs();
 
         $tradeYears    = array();
         $tradeQuarters = array();
@@ -676,6 +676,86 @@ class trade extends control
             $this->fetch('file', 'export2CSV', $_POST);
         }
 
+        $this->display();
+    }
+
+    /**
+     * Report for trade.
+     * 
+     * @param  string $date 
+     * @param  string $currency 
+     * @access public
+     * @return void
+     */
+    public function report($date = '', $currency = 'rmb')
+    {
+        $this->loadModel('report');
+
+        $currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
+
+        $date = !empty($date) ? $date : date('Y');
+        $currentYear = substr($date, 0, 4);
+
+        $startDate = $currentYear . '-01-01';
+        $endDate   = $currentYear . '-12-31';
+
+        $trades = $this->dao->select('*, substr(date, 6, 2) as month')->from(TABLE_TRADE)->where('date')->ge($startDate)->andWhere('date')->lt($endDate)->andWhere('currency')->eq($currency)->orderBy('date_desc')->fetchGroup('month');
+        
+        $tradeMonths = array();
+        $annualChartDatas = array();
+        $annualChartDatas['all']['in']   = 0;
+        $annualChartDatas['all']['out']  = 0;
+        $annualChartDatas['all']['profit']  = 0;
+        foreach($trades as $month => $monthTrades)
+        {
+            $tradeMonths[] = $month;
+            $annualChartDatas[$month]['in']  = 0;
+            $annualChartDatas[$month]['out'] = 0;
+            foreach($monthTrades as $trade)
+            {
+                if($trade->type == 'in')  $annualChartDatas[$month]['in']  += $trade->money;
+                if($trade->type == 'out') $annualChartDatas[$month]['out'] += $trade->money;
+            }
+            $annualChartDatas[$month]['profit'] = $annualChartDatas[$month]['in'] - $annualChartDatas[$month]['out'];
+
+            $annualChartDatas['all']['in']     += $annualChartDatas[$month]['in'];
+            $annualChartDatas['all']['out']    += $annualChartDatas[$month]['out'];
+            $annualChartDatas['all']['profit'] += $annualChartDatas[$month]['profit'];
+        }
+
+        ksort($annualChartDatas);
+
+        $currentMonth = !empty($tradeMonths) ? current($tradeMonths) : '';
+
+        $tradeDates = $this->trade->getDatePairs();
+        $tradeYears = array();
+        foreach($tradeDates as $tradeDate)
+        {
+            $year = substr($tradeDate, 0, 4);
+            if(!in_array($year, $tradeYears)) $tradeYears[] = $year;
+        }
+
+        if(strlen($date) == 6) $currentMonth = substr($date, 4, 2);
+
+        $monthlyChartDatas['in']['category'] = $this->trade->getChartData('in', $currentYear, $currentMonth, 'category', $currency);
+        $monthlyChartDatas['in']['category'] = $this->report->computePercent($monthlyChartDatas['in']['category']);
+        $monthlyChartDatas['in']['dept']     = $this->trade->getChartData('in', $currentYear, $currentMonth, 'dept', $currency);
+        $monthlyChartDatas['in']['dept']     = $this->report->computePercent($monthlyChartDatas['in']['dept']);
+
+        $monthlyChartDatas['out']['category'] = $this->trade->getChartData('out', $currentYear, $currentMonth, 'category', $currency);
+        $monthlyChartDatas['out']['category'] = $this->report->computePercent($monthlyChartDatas['out']['category']);
+        $monthlyChartDatas['out']['dept']     = $this->trade->getChartData('out', $currentYear, $currentMonth, 'dept', $currency);
+        $monthlyChartDatas['out']['dept']     = $this->report->computePercent($monthlyChartDatas['out']['dept']);
+
+        $this->view->title             = $this->lang->trade->report->common;
+        $this->view->annualChartDatas  = $annualChartDatas;
+        $this->view->monthlyChartDatas = $monthlyChartDatas;
+        $this->view->tradeYears        = $tradeYears;
+        $this->view->tradeMonths       = $tradeMonths;
+        $this->view->currentYear       = $currentYear;
+        $this->view->currentMonth      = $currentMonth;
+        $this->view->currencyList      = $currencyList;
+        $this->view->currency          = $currency;
         $this->display();
     }
 }

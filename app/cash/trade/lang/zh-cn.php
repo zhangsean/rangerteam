@@ -57,6 +57,7 @@ $lang->trade->newTrader   = '新建';
 $lang->trade->import      = '导入';
 $lang->trade->export      = '导出';
 $lang->trade->showImport  = '导入确认';
+$lang->trade->report      = '报表';
 
 $lang->trade->typeList['in']          = '收入';
 $lang->trade->typeList['out']         = '支出';
@@ -128,5 +129,15 @@ $lang->trade->totalAmount = '%s收入%s，支出%s，%s；';
 $lang->trade->profit      = '盈';
 $lang->trade->loss        = '亏';
 $lang->trade->balance     = '收支平衡';
+$lang->trade->total       = '总计';
 
 $lang->trade->noTraderMatch = '没有匹配到相应的商户，点击新建';
+
+$lang->trade->report = new stdclass();
+$lang->trade->report->common = '报表';
+$lang->trade->report->month  = '月份';
+$lang->trade->report->annualCaption  = '年度收支表';
+$lang->trade->report->monthlyCaption = '月度统计表';
+
+$lang->trade->report->chartList['category'] = '按科目统计';
+$lang->trade->report->chartList['dept']     = '按部门统计';
