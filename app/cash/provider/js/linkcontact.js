@@ -2,7 +2,24 @@ $(function()
 {
     $.setAjaxForm('#linkContactForm', function(data)
     {
-        if(data.result == 'success') $.reloadAjaxModal(1500);
+        if(data.result == 'success')
+        {
+            $.reloadAjaxModal(1500);
+        }
+        else
+        {
+            if(data.error && data.error.length)
+            {
+                $('#duplicateError').html($('.errorMessage').html());
+                $('#duplicateError .alert').prepend(data.error).show();
+
+                $(document).on('click', '#duplicateError #continueSubmit', function()
+                {
+                    $('#duplicateError').append("<input value='1' name='continue' class='hide'>");
+                    $('#submit').attr('type', 'button');
+                })
+            }
+        }
     })
 
     $('#selectContact').change(function()
