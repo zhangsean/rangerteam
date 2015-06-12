@@ -28,8 +28,15 @@ $(document).ready(function()
         var $this = $(this);
         if (!$this.data('zui.modaltrigger'))
         {
+            var modalWidth  = '';
+            var modalHeight = '';
+            if($this.attr('width') != 'undefined')  modalWidth = $this.attr('width');
+            if($this.attr('height') != 'undefined') modalHeight = $this.attr('width');
+
             $this.modalTrigger(
             {
+                width: modalWidth,
+                height: modalHeight,
                 show: true
             });
         }

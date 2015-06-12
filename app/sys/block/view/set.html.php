@@ -32,7 +32,7 @@ if($type == 'html')
         <th><?php echo $lang->block->lblNum?></th>
         <td><?php echo html::input('params[num]', $block ? $block->params->num : 0, "class='form-control'")?></td>
       </tr>
-      <?php else:?>
+      <?php elseif($type == 'html'):?>
       <tr>
         <th class='w-100px'><?php echo $lang->block->lblHtml;?></th>
         <td><?php echo html::textarea('html', $block ? $block->params->html : '', "class='form-control' rows='10'")?></td>

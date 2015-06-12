@@ -264,3 +264,7 @@ body[class*='dropdown-mode-'] .window-active .window-cover {display: block;}
 #desktop.modal-mode #modalContainer {display: block;}
 
 .progress{margin-bottom: 0;}
+
+#allEntriesBlock{padding: 10px;}
+#allEntriesBlock i.icon-default {border-radius: 3px; color: #fff; display: inline-block; font-size: 10px; height: 18px; line-height: 18px; width: 18px; text-align: center; vertical-align: middle;}
+#allEntriesBlock table td{border-bottom: none;}

@@ -16,7 +16,7 @@ function getBlocks(entryID)
         getRssAndHtmlParams('html', entryID.replace('hiddenBlock', ''));
         return true;
     }
-    if(entryID == 'rss' || entryID == 'html')
+    if(entryID == 'rss' || entryID == 'html' || entryID == 'allEntries')
     {
         getRssAndHtmlParams(entryID);
         return true;
