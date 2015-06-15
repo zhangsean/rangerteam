@@ -26,12 +26,6 @@
     <div class='page-actions'>
       <?php
       echo "<div class='btn-group'>";
-      commonModel::printLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt' class='btn'");
-      commonModel::printLink('address', 'browse', "objectType=contact&objectID=$contact->id", $lang->contact->address, "data-toggle='modal' class='btn'");
-      commonModel::printLink('resume', 'browse', "contactID=$contact->id", $lang->contact->resume, "data-toggle='modal' class='btn'");
-      echo "</div>";
-
-      echo "<div class='btn-group'>";
       commonModel::printLink('contact', 'edit', "contactID=$contact->id", $lang->edit, "class='btn'");
       commonModel::printLink('contact', 'delete', "contactID=$contact->id", $lang->delete, "class='deleter btn'");
       echo "</div>";
@@ -93,13 +87,13 @@
                   <dl class='contact-info'>
                   <?php foreach($config->contact->contactWayList as $item):?>
                   <?php if(!empty($contact->{$item})):?>
-                    <dd>
-                      <span><?php echo $lang->contact->{$item};?></span>
-                      <?php $site = isset($config->company->name) ? $config->company->name : '';?>
-                      <?php if($item == 'qq') echo html::a("http://wpa.qq.com/msgrd?v=3&uin={$contact->$item}&site={$site}&menu=yes", $contact->$item, "target='_blank'");?>
-                      <?php if($item == 'email') echo html::mailto($contact->{$item}, $contact->{$item});?>
-                      <?php if($item != 'qq' and $item != 'email') echo $contact->{$item};?>
-                    </dd>
+                  <dd>
+                    <span><?php echo $lang->contact->{$item};?></span>
+                    <?php $site = isset($config->company->name) ? $config->company->name : '';?>
+                    <?php if($item == 'qq') echo html::a("http://wpa.qq.com/msgrd?v=3&uin={$contact->$item}&site={$site}&menu=yes", $contact->$item, "target='_blank'");?>
+                    <?php if($item == 'email') echo html::mailto($contact->{$item}, $contact->{$item});?>
+                    <?php if($item != 'qq' and $item != 'email') echo $contact->{$item};?>
+                  </dd>
                   <?php endif;?>
                   <?php endforeach;?>
                   </dl>
