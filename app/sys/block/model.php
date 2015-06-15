@@ -228,6 +228,8 @@ class blockModel extends model
 
         foreach($blocks as $key => $block)
         {
+            if($block->block == 'html' or $block->block == 'allEntries') continue;
+
             $module = $block->block;
             $method = 'browse';
             if(strpos('blog, project', $block->block) !== false) $method = 'index';
