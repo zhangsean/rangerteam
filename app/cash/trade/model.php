@@ -120,12 +120,12 @@ class tradeModel extends model
 
         if($groupBy == 'category')
         {
-            if($type == 'in')  $list = $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0);
-            if($type == 'out') $list = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0);
+            if($type == 'in')  $list = $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0, true);
+            if($type == 'out') $list = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, true);
             $list = array('' => '') + $list;
         }
 
-        if($groupBy == 'dept') $list = $this->loadModel('tree')->getOptionMenu('dept', 0);
+        if($groupBy == 'dept') $list = $this->loadModel('tree')->getOptionMenu('dept', 0, true);
 
         $datas = $this->dao->select("$groupBy as name, sum(money) as value")->from(TABLE_TRADE)
                 ->where('type')->eq($type)
