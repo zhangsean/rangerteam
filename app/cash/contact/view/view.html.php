@@ -45,21 +45,8 @@
             <td>
               <?php
               if(isset($customers[$contact->customer])) echo html::a($this->createLink('provider', 'view', "customerID={$contact->customer}"), $customers[$contact->customer]);
-              if($contact->maker) echo " ({$lang->resume->maker})";
               ?>
             </td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->resume->dept;?></th>
-            <td><?php echo  $contact->dept;?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->resume->title;?></th>
-            <td><?php echo  $contact->title;?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->resume->join;?></th>
-            <td><?php echo  $contact->join;?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contact->birthday;?></th>
@@ -105,36 +92,6 @@
           </tr>
         </table>
       </div>
-    </div>
-    <div class='panel'>
-      <div class='panel-heading'>
-        <div class='row'>
-        <div class='col-sm-3'><strong><?php echo $lang->contact->resume;?></strong></div>
-        <div class='col-sm-4 text-center'><strong><?php echo $lang->resume->customer;?></strong></div>
-        <div class='col-sm-2'><strong><?php echo $lang->resume->dept;?></strong></div>
-        <div class='col-sm-3 text-center'><strong><?php echo $lang->resume->title;?></strong></div>
-        </div>
-      </div>
-      <table class='table table-data'>
-        <?php foreach($resumes as $resume):?>
-        <tr class='text-center'>
-          <td class='w-p25'><?php echo $resume->join . $lang->minus . $resume->left;?></td>
-          <td class='w-p30'><?php if(isset($customers[$resume->customer])) echo $customers[$resume->customer]?></td>
-          <td class='w-p20'><?php echo $resume->dept?></td>
-          <td class='w-p25'><?php echo $resume->title?></td>
-       </tr>
-        <?php endforeach;?>
-      </table>
-    </div>
-    <div class='panel'>
-      <div class='panel-heading'><strong><?php echo $lang->contact->address;?></strong></div>
-      <table class='table table-data'>
-        <?php foreach($addresses as $address):?>
-        <tr>
-          <td><?php echo $address->title . $lang->colon . $address->fullLocation;?></td>
-        </tr>
-        <?php endforeach;?>
-      </table>
     </div>
   </div>
 </div>
