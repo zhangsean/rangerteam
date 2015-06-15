@@ -4,7 +4,6 @@ $config->report = new stdclass();
 $config->report->moduleList['customer'] = TABLE_CUSTOMER;
 $config->report->moduleList['order']    = TABLE_ORDER;
 $config->report->moduleList['contract'] = TABLE_CONTRACT;
-$config->report->moduleList['trade']    = TABLE_TRADE;
 
 $config->report->customer = new stdclass();
 /* select conditions, groupBy|(count field default is same as groupby)|(count|sum default is count). */
@@ -84,39 +83,3 @@ $config->report->contract->listName['signedByA']    = 'USERS';
 $config->report->contract->listName['deliveredByA'] = 'USERS';
 $config->report->contract->listName['handlersA']    = 'USERS';
 $config->report->contract->listName['contactedByA'] = 'USERS';
-
-/* trade setting. */
-$config->report->trade = new stdclass();
-$config->report->trade->chartList['depositor'] = 'depositor||';
-$config->report->trade->chartList['product']   = 'product||';
-$config->report->trade->chartList['trader']    = 'trader||';
-$config->report->trade->chartList['dept']      = 'dept||';
-$config->report->trade->chartList['type']      = 'type||';
-$config->report->trade->chartList['date']      = 'date||';
-$config->report->trade->chartList['handlers']  = 'handlers_multi||';
-$config->report->trade->chartList['category']  = 'category||';
-$config->report->trade->chartList['depositorA'] = 'depositor|money|sum';
-$config->report->trade->chartList['productA']   = 'product|money|sum';
-$config->report->trade->chartList['traderA']    = 'trader|money|sum';
-$config->report->trade->chartList['deptA']      = 'dept|money|sum';
-$config->report->trade->chartList['typeA']      = 'type|money|sum';
-$config->report->trade->chartList['dateA']      = 'date|money|sum';
-$config->report->trade->chartList['handlersA']  = 'handlers_multi|money|sum';
-$config->report->trade->chartList['categoryA']  = 'category|money|sum';
-
-$config->report->trade->listName['depositor']  = 'DEPOSITORS';
-$config->report->trade->listName['product']    = 'PRODUCTS';
-$config->report->trade->listName['trader']     = 'CUSTOMERS';
-$config->report->trade->listName['dept']       = 'DEPTS';
-$config->report->trade->listName['type']       = 'typeList';
-$config->report->trade->listName['date']       = null;
-$config->report->trade->listName['handlers']   = 'USERS';
-$config->report->trade->listName['category']   = 'CATEGORIES_TRADE';
-$config->report->trade->listName['depositorA'] = 'DEPOSITORS';
-$config->report->trade->listName['productA']   = 'PRODUCTS';
-$config->report->trade->listName['traderA']    = 'CUSTOMERS';
-$config->report->trade->listName['deptA']      = 'DEPTS';
-$config->report->trade->listName['typeA']      = 'typeList';
-$config->report->trade->listName['dateA']      = null;
-$config->report->trade->listName['handlersA']  = 'USERS';
-$config->report->trade->listName['categoryA']  = 'CATEGORIES_TRADE';
