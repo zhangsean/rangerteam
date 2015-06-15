@@ -57,6 +57,7 @@ $lang->trade->newTrader   = '新建';
 $lang->trade->import      = '導入';
 $lang->trade->export      = '導出';
 $lang->trade->showImport  = '導入確認';
+$lang->trade->report      = '報表';
 
 $lang->trade->typeList['in']          = '收入';
 $lang->trade->typeList['out']         = '支出';
@@ -64,6 +65,23 @@ $lang->trade->typeList['transferout'] = '轉出';
 $lang->trade->typeList['transferin']  = '轉入';
 $lang->trade->typeList['inveset']     = '投資';
 $lang->trade->typeList['redeem']      = '贖回';
+
+$lang->trade->modeList['all']      = '所有賬目';
+$lang->trade->modeList['in']       = '收入';
+$lang->trade->modeList['out']      = '支出';
+$lang->trade->modeList['transfer'] = '轉賬';
+$lang->trade->modeList['inveset']  = '投資';
+
+$lang->trade->quarters = new stdclass();
+$lang->trade->quarters->Q1 = '01, 02, 03';
+$lang->trade->quarters->Q2 = '04, 05, 06';
+$lang->trade->quarters->Q3 = '07, 08, 09';
+$lang->trade->quarters->Q4 = '10, 11, 12';
+
+$lang->trade->quarterList['Q1'] = '第一季度';
+$lang->trade->quarterList['Q2'] = '第二季度';
+$lang->trade->quarterList['Q3'] = '第三季度';
+$lang->trade->quarterList['Q4'] = '第四季度';
 
 $lang->trade->categoryList['transferin']  = '轉入';
 $lang->trade->categoryList['transferout'] = '轉出';
@@ -111,5 +129,15 @@ $lang->trade->totalAmount = '%s收入%s，支出%s，%s；';
 $lang->trade->profit      = '盈';
 $lang->trade->loss        = '虧';
 $lang->trade->balance     = '收支平衡';
+$lang->trade->total       = '總計';
 
 $lang->trade->noTraderMatch = '沒有匹配到相應的商戶，點擊新建';
+
+$lang->trade->report = new stdclass();
+$lang->trade->report->common = '報表';
+$lang->trade->report->month  = '月份';
+$lang->trade->report->annualCaption  = '年度收支表';
+$lang->trade->report->monthlyCaption = '月度統計表';
+
+$lang->trade->report->chartList['category'] = '按科目統計';
+$lang->trade->report->chartList['dept']     = '按部門統計';

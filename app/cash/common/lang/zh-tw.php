@@ -18,6 +18,7 @@ $lang->menu->cash->trade     = '記賬|trade|browse|';
 $lang->menu->cash->check     = '對賬|depositor|check|';
 $lang->menu->cash->depositor = '賬戶|depositor|browse|';
 $lang->menu->cash->provider  = '供應商|provider|browse|';
+$lang->menu->cash->contact   = '聯繫人|contact|browse|';
 $lang->menu->cash->setting   = '設置|tree|browse|type=in|';
 
 /* Menu of depositor module. */
@@ -31,12 +32,17 @@ $lang->trade->menu->in       = array('link' => '收入|trade|browse|mode=in');
 $lang->trade->menu->out      = array('link' => '支出|trade|browse|mode=out');
 $lang->trade->menu->transfer = array('link' => '轉賬|trade|browse|mode=transfer');
 $lang->trade->menu->inveset  = array('link' => '投資|trade|browse|mode=inveset&orderBy=depositor');
-$lang->trade->menu->report   = array('link' => '報表|report|browse|module=trade');
+$lang->trade->menu->report   = array('link' => '報表|trade|report|');
 
 /* Menu of trade module. */
 $lang->provider = new stdclass();
 $lang->provider->menu = new stdclass();
 $lang->provider->menu->browse = array('link' => '供應商列表|provider|browse|', 'alias' => 'create,edit,view');
+
+/* Menu of trade module. */
+$lang->contact = new stdclass();
+$lang->contact->menu = new stdclass();
+$lang->contact->menu->browse = array('link' => '聯繫人列表|contact|browse|', 'alias' => 'create,edit,view');
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

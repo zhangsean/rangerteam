@@ -14,6 +14,7 @@ $lang->order->common         = '訂單';
 $lang->order->id             = '編號';
 $lang->order->name           = '名稱';
 $lang->order->product        = '產品';
+$lang->order->productLine    = '產品綫';
 $lang->order->customer       = '客戶';
 $lang->order->contact        = '聯繫人';
 $lang->order->team           = '團隊';

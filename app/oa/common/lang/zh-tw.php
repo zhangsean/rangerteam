@@ -22,6 +22,7 @@ $lang->dashboard = new stdclass();
 
 $lang->project   = new stdclass();
 $lang->project->menu = new stdclass();
+$lang->project->menu->involved = '我參與的|project|index|status=involved';
 $lang->project->menu->doing    = '進行中|project|index|status=doing';
 $lang->project->menu->finished = '已完成|project|index|ststus=finished';
 $lang->project->menu->suspend  = '已掛起|project|index|ststus=suspend';

@@ -1,10 +1,10 @@
 <?php
-$lang->backup->common   = '備份';
-$lang->backup->index    = '備份首頁';
-$lang->backup->history  = '備份歷史';
-$lang->backup->delete   = '刪除備份';
-$lang->backup->backup   = '備份';
-$lang->backup->restore  = '還原';
+$lang->backup->common  = '備份';
+$lang->backup->index   = '備份首頁';
+$lang->backup->history = '備份歷史';
+$lang->backup->delete  = '刪除備份';
+$lang->backup->backup  = '備份';
+$lang->backup->restore = '還原';
 
 $lang->backup->name  = '檔案名稱';
 $lang->backup->time  = '備份時間';
