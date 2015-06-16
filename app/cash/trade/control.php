@@ -597,7 +597,14 @@ class trade extends control
 
             /* Get trades. */
             $trades = array();
-            if($mode == 'all') $trades = $this->dao->select('*')->from(TABLE_TRADE)->where('parent')->eq('')->orderBy($orderBy)->fetchAll('id');
+            if($mode == 'all')
+            {
+                $tradeQueryCondition = $this->session->tradeQueryCondition;
+                if(strpos($tradeQueryCondition, 'limit') !== false) $tradeQueryCondition = substr($tradeQueryCondition, 0, strpos($tradeQueryCondition, 'limit'));
+                $stmt = $this->dbh->query($tradeQueryCondition);
+                while($row = $stmt->fetch()) $trades[$row->id] = $row;
+            }
+
             if($mode == 'thisPage')
             {
                 $stmt = $this->dbh->query($this->session->tradeQueryCondition);
@@ -647,11 +654,11 @@ class trade extends control
                 if(isset($tradeLang->typeList[$trade->type])) $trade->type      = $tradeLang->typeList[$trade->type];
                 if(isset($this->lang->currencyList[$trade->currency])) $trade->currency = $this->lang->currencyList[$trade->currency];
 
-                if(isset($users[$trade->createdBy])) $trade->createdBy  = $users[$trade->createdBy];
-                if(isset($users[$trade->editedBy]))  $trade->editedBy   = $users[$trade->editedBy];
+                if(isset($users[$trade->createdBy])) $trade->createdBy = $users[$trade->createdBy];
+                if(isset($users[$trade->editedBy]))  $trade->editedBy  = $users[$trade->editedBy];
 
-                $trade->createdDate = substr($trade->createdDate,  0, 10);
-                $trade->editedDate  = substr($trade->editedDate,   0, 10);
+                $trade->createdDate = substr($trade->createdDate, 0, 10);
+                $trade->editedDate  = substr($trade->editedDate,  0, 10);
 
                 if($trade->handlers)
                 {

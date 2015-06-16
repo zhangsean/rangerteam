@@ -73,7 +73,7 @@ class tradeModel extends model
             $endDate    = substr($date, 5, 1) == 4 ? substr($date, 0, 4) . '-12-31' : substr($date, 0, 4) . '-' . $endMonth . '-01';
         }
 
-        $trades = $this->dao->select('*')->from(TABLE_TRADE)
+        return $this->dao->select('*')->from(TABLE_TRADE)
             ->where('parent')->eq('')
             ->beginIF($startDate and $endDate)->andWhere('date')->ge($startDate)->andWhere('date')->lt($endDate)->fi()
             ->beginIF($mode == 'in')->andWhere('type')->eq('in')
@@ -86,8 +86,6 @@ class tradeModel extends model
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
-
-        return $trades;
     }
 
     /**
@@ -300,7 +298,6 @@ class tradeModel extends model
 
         /* Get data. */
         if($this->post->type === false) return array('result' => 'fail');
-
 
         foreach($this->post->type as $key => $type)
         {
