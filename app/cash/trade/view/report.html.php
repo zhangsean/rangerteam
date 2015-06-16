@@ -12,6 +12,7 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include '../../../sys/common/view/chart.html.php';?>
+<?php js::set('monthList', $lang->trade->monthList);?>
 <div class='panel panel-sm'>
   <div class='panel-heading'>
     <div class='date dropdown'>
@@ -58,7 +59,7 @@
                 <th><?php echo $lang->trade->report->month;?></th>
                 <th class='chart-label-in'><i class='chart-color-dot-in icon-circle'></i> <?php echo $lang->trade->in;?></th>
                 <th class='chart-label-out'><i class='chart-color-dot-out icon-circle'></i> <?php echo $lang->trade->out;?></th>
-                <th class='chart-label-profit'><i class='chart-color-dot-profit icon-circle'></i> <?php echo $lang->trade->profit . '/' . $lang->trade->loss;?></th>
+                <th class='chart-label-profit'><?php echo $lang->trade->profit . '/' . $lang->trade->loss;?></th>
               </tr>
             </thead>
             <tbody>

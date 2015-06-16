@@ -82,6 +82,19 @@ $lang->trade->quarterList['Q2'] = 'Second quarter';
 $lang->trade->quarterList['Q3'] = 'Third quarter';
 $lang->trade->quarterList['Q4'] = 'Fourth quarter';
 
+$lang->trade->monthList['01'] = 'January';
+$lang->trade->monthList['02'] = 'February';
+$lang->trade->monthList['03'] = 'March';
+$lang->trade->monthList['04'] = 'April';
+$lang->trade->monthList['05'] = 'May';
+$lang->trade->monthList['06'] = 'June';
+$lang->trade->monthList['07'] = 'July';
+$lang->trade->monthList['08'] = 'August';
+$lang->trade->monthList['09'] = 'September';
+$lang->trade->monthList['10'] = 'October';
+$lang->trade->monthList['11'] = 'November';
+$lang->trade->monthList['12'] = 'December';
+
 $lang->trade->categoryList['transferin']  = 'Transfer In';
 $lang->trade->categoryList['transferout'] = 'Transfer Out';
 $lang->trade->categoryList['inveset']     = 'Inveset';

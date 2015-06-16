@@ -83,6 +83,19 @@ $lang->trade->quarterList['Q2'] = '第二季度';
 $lang->trade->quarterList['Q3'] = '第三季度';
 $lang->trade->quarterList['Q4'] = '第四季度';
 
+$lang->trade->monthList['01'] = '一月';
+$lang->trade->monthList['02'] = '二月';
+$lang->trade->monthList['03'] = '三月';
+$lang->trade->monthList['04'] = '四月';
+$lang->trade->monthList['05'] = '五月';
+$lang->trade->monthList['06'] = '六月';
+$lang->trade->monthList['07'] = '七月';
+$lang->trade->monthList['08'] = '八月';
+$lang->trade->monthList['09'] = '九月';
+$lang->trade->monthList['10'] = '十月';
+$lang->trade->monthList['11'] = '十一月';
+$lang->trade->monthList['12'] = '十二月';
+
 $lang->trade->categoryList['transferin']  = '转入';
 $lang->trade->categoryList['transferout'] = '转出';
 $lang->trade->categoryList['inveset']     = '投资';

@@ -107,6 +107,7 @@ $lang->reverse        = 'Reverse';
 $lang->switchDisplay  = 'Switching Display';
 $lang->feature        = 'Feature';
 $lang->year           = 'Year';
+$lang->month          = 'Month';
 $lang->loading        = 'Loading...';
 $lang->saveSuccess    = 'Successfully saved.';
 $lang->setSuccess     = 'Successfully saved.';

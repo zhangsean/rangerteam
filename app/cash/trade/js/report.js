@@ -7,30 +7,49 @@ $(document).ready(function()
         return new $.zui.Color({h: idx * 67 % 360, s: 0.5, l: 0.55});
     }
     
-    var labels   = [];
+    var labels   = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
     var datasets = [];
-    
+
     var colorIn     = nextAccentColor().toCssStr();
     var colorOut    = nextAccentColor().toCssStr();
-    var colorProfit = nextAccentColor().toCssStr();
 
     var datasetIn     = {label: $('#lineChart').find('thead .chart-label-in').text(), color: colorIn, data: []};
     var datasetOut    = {label: $('#lineChart').find('thead .chart-label-out').text(), color: colorOut, data: []};
-    var datasetProfit = {label: $('#lineChart').find('thead .chart-label-profit').text(), color: colorProfit, data: []};
     
     $('#lineChart').find('.chart-color-dot-in').css('color', colorIn);
     $('#lineChart').find('.chart-color-dot-out').css('color', colorOut);
-    $('#lineChart').find('.chart-color-dot-profit').css('color', colorProfit);
-    $('#lineChart').find('tbody .chart-value-in').each(function(){ datasetIn.data.push(parseInt($(this).text())); })
-    $('#lineChart').find('tbody .chart-value-out').each(function(){ datasetOut.data.push(parseInt($(this).text())); })
-    $('#lineChart').find('tbody .chart-value-profit').each(function(){ datasetProfit.data.push(parseInt($(this).text())); })
     
-    var $rows = $('#lineChart').find('tbody > tr').not(':last').each(function(idx)
+    var chartLabels = [];
+    $('#lineChart').find('tbody .chart-label').each(function(){ chartLabels.push($(this).text()); })
+
+    $.each(labels, function(key, value)
     {
-        labels.push($(this).find('.chart-label').text());
-    });
+        if($.inArray(value, chartLabels) != -1)
+        {
+            $('#lineChart').find('tbody .chart-value-in').each(function()
+            {
+                if($(this).parent('tr').find('.chart-label').text() == value)
+                {
+                    datasetIn.data.push(parseInt($(this).text()));
+                }
+            })
+
+            $('#lineChart').find('tbody .chart-value-out').each(function()
+            {
+                if($(this).parent('tr').find('.chart-label').text() == value)
+                {
+                    datasetOut.data.push(parseInt($(this).text()));
+                }
+            })
+        }
+        else
+        {
+            datasetIn.data.push(parseInt(0));
+            datasetOut.data.push(parseInt(0));
+        }
+    })
     
-    var data = {labels: labels, datasets: [datasetIn, datasetOut, datasetProfit]};
+    var data = {labels: labels, datasets: [datasetIn, datasetOut]};
     
     var options = {};
     chart = $('#myLineChart').lineChart(data, options);
