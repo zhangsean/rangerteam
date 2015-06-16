@@ -306,7 +306,7 @@ body.body-modal {padding-top: 10px;}
 .text-middle,.text-middle td {vertical-align: middle !important;}
 tr.text-center > td, tr.text-center > th {text-align: center;}
 tr.text-center > td.text-left, tr.text-center > th.text-left {text-align: left;}
-tr.text-center > td.text-right, tr.text-right > th.text-right {text-align: right;}
+tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: right;}
 
 /* form */
 body > form {margin-top: 20px;} /* form behind body */
