@@ -18,7 +18,7 @@ $lang->menu->cash->trade     = 'Bills|trade|index|';
 $lang->menu->cash->check     = 'Checking|depositor|check|';
 $lang->menu->cash->depositor = 'Depositor|depositor|index|';
 $lang->menu->cash->provider  = 'Provider|provider|index|';
-$lang->menu->cash->contact   = 'Contact|contact|browse|';
+//$lang->menu->cash->contact   = 'Contact|contact|browse|';
 $lang->menu->cash->setting   = 'Settings|tree|browse|type=in|';
 
 /* Menu of depositor module. */

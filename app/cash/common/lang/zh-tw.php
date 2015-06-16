@@ -18,7 +18,7 @@ $lang->menu->cash->trade     = '記賬|trade|browse|';
 $lang->menu->cash->check     = '對賬|depositor|check|';
 $lang->menu->cash->depositor = '賬戶|depositor|browse|';
 $lang->menu->cash->provider  = '供應商|provider|browse|';
-$lang->menu->cash->contact   = '聯繫人|contact|browse|';
+//$lang->menu->cash->contact   = '聯繫人|contact|browse|';
 $lang->menu->cash->setting   = '設置|tree|browse|type=in|';
 
 /* Menu of depositor module. */
