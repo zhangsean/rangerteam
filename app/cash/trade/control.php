@@ -74,12 +74,16 @@ class trade extends control
                 }
             }
 
+            krsort($tradeQuarters[$year]);
+
             if(!isset($tradeMonths[$year][$quarter])) $tradeMonths[$year][$quarter] = array();
 
             if(!in_array($month, $tradeMonths[$year][$quarter]))
             {
                 $tradeMonths[$year][$quarter][] = $month;
             }
+
+            krsort($tradeMonths[$year][$quarter]);
         }
 
         $trades = $this->trade->getList($mode, $date, $orderBy, $pager);
@@ -702,20 +706,16 @@ class trade extends control
 
         $date = !empty($date) ? $date : date('Y');
         $currentYear = substr($date, 0, 4);
-
-        $startDate = $currentYear . '-01-01';
-        $endDate   = $currentYear . '-12-31';
-
+        $startDate   = $currentYear . '-01-01';
+        $endDate     = $currentYear . '-12-31';
         $trades = $this->dao->select('*, substr(date, 6, 2) as month')->from(TABLE_TRADE)->where('date')->ge($startDate)->andWhere('date')->lt($endDate)->andWhere('currency')->eq($currency)->orderBy('date_desc')->fetchGroup('month');
         
-        $tradeMonths = array();
         $annualChartDatas = array();
         $annualChartDatas['all']['in']   = 0;
         $annualChartDatas['all']['out']  = 0;
         $annualChartDatas['all']['profit']  = 0;
         foreach($trades as $month => $monthTrades)
         {
-            $tradeMonths[] = $month;
             $annualChartDatas[$month]['in']  = 0;
             $annualChartDatas[$month]['out'] = 0;
             foreach($monthTrades as $trade)
@@ -729,19 +729,25 @@ class trade extends control
             $annualChartDatas['all']['out']    += $annualChartDatas[$month]['out'];
             $annualChartDatas['all']['profit'] += $annualChartDatas[$month]['profit'];
         }
-
         ksort($annualChartDatas);
 
-        $currentMonth = !empty($tradeMonths) ? current($tradeMonths) : '';
-
+        $tradeYears  = array();
+        $tradeMonths = array();
         $tradeDates = $this->trade->getDatePairs();
-        $tradeYears = array();
         foreach($tradeDates as $tradeDate)
         {
-            $year = substr($tradeDate, 0, 4);
+            $year  = substr($tradeDate, 0, 4);
+            $month = substr($tradeDate, 5, 2);
+
             if(!in_array($year, $tradeYears)) $tradeYears[] = $year;
+
+            if(!isset($tradeMonths[$year])) $tradeMonths[$year] = array();
+            if(!in_array($month, $tradeMonths[$year])) $tradeMonths[$year][] = $month;
+
+            krsort($tradeMonths[$year]);
         }
 
+        $currentMonth = !empty($tradeMonths[$currentYear]) ? current($tradeMonths[$currentYear]) : '';
         if(strlen($date) == 6) $currentMonth = substr($date, 4, 2);
 
         $monthlyChartDatas['in']['category'] = $this->trade->getChartData('in', $currentYear, $currentMonth, 'category', $currency);
@@ -762,7 +768,7 @@ class trade extends control
         $this->view->currentYear       = $currentYear;
         $this->view->currentMonth      = $currentMonth;
         $this->view->currencyList      = $currencyList;
-        $this->view->currency          = $currency;
+        $this->view->currentCurrency   = $currency;
         $this->display();
     }
 }

@@ -35,13 +35,6 @@ $(document).ready(function()
     var options = {};
     chart = $('#myLineChart').lineChart(data, options);
     
-    $('#year').change(function()
-    {
-       var selectYear     = $('#year option:selected').text();
-       var selectCurrency = $('#currency').val();
-       location.href = createLink('trade', 'report', "date=" + selectYear + "&currency=" + selectCurrency);
-    })
-
     $('#currency').change(function()
     {
        var selectYear     = $('#year option:selected').text();
@@ -49,10 +42,4 @@ $(document).ready(function()
        location.href = createLink('trade', 'report', "date=" + selectYear + "&currency=" + selectCurrency);
     })
 
-    $('#month').change(function()
-    {
-       var selectMonth    = $('#year option:selected').text() + $('#month option:selected').text();
-       var selectCurrency = $('#currency').val();
-       location.href = createLink('trade', 'report', "date=" + selectMonth + "&currency=" + selectCurrency) + '#monthlyChart';
-    })
 })

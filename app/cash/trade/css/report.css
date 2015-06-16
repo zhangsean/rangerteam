@@ -1,1 +1,2 @@
-caption{margin: 10px 0;}
+.table-wrapper{border: 1px solid #ddd;}
+.date, .currency{display:inline-block;}
