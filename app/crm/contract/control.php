@@ -532,7 +532,7 @@ class contract extends control
             if($mode == 'all')
             {
                 $contractQueryCondition = $this->session->contractQueryCondition;
-                $contractQueryCondition = substr($contractQueryCondition, 0, strpos($contractQueryCondition, 'limit'));
+                if(strpos($contractQueryCondition, 'limit') !== false) $contractQueryCondition = substr($contractQueryCondition, 0, strpos($contractQueryCondition, 'limit'));
                 $stmt = $this->dbh->query($contractQueryCondition);
                 while($row = $stmt->fetch()) $contracts[$row->id] = $row;
             }

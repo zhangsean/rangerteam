@@ -585,7 +585,7 @@ class task extends control
             if($mode == 'all')
             {
                 $taskQueryCondition = $this->session->taskQueryCondition;
-                $taskQueryCondition = substr($taskQueryCondition, 0, strpos($taskQueryCondition, 'limit'));
+                if(strpos($taskQueryCondition, 'limit') !== false) $taskQueryCondition = substr($taskQueryCondition, 0, strpos($taskQueryCondition, 'limit'));
                 $stmt = $this->dbh->query($taskQueryCondition);
                 while($row = $stmt->fetch()) $tasks[$row->id] = $row;
             }

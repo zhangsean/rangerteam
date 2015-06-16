@@ -278,9 +278,9 @@ class file extends control
 
         header("Content-type: $contentType");
         header("Content-Disposition: attachment; filename=\"$fileName\"");
-        header("Content-length: {$fileSize}");
         header("Pragma: no-cache");
         header("Expires: 0");
+        if($fileSize) header("Content-length: {$fileSize}");
         die($content);
     }
 
