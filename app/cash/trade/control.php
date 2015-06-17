@@ -705,13 +705,31 @@ class trade extends control
     public function report($date = '', $currency = 'rmb')
     {
         $this->loadModel('report');
-
         $currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
 
-        $date = !empty($date) ? $date : date('Y');
-        $currentYear = substr($date, 0, 4);
-        $startDate   = $currentYear . '-01-01';
-        $endDate     = $currentYear . '-12-31';
+        $tradeYears  = array();
+        $tradeMonths = array();
+        $tradeDates = $this->trade->getDatePairs();
+        foreach($tradeDates as $tradeDate)
+        {
+            $year  = substr($tradeDate, 0, 4);
+            $month = substr($tradeDate, 5, 2);
+
+            if(!in_array($year, $tradeYears)) $tradeYears[] = $year;
+
+            if(!isset($tradeMonths[$year])) $tradeMonths[$year] = array();
+            if(!in_array($month, $tradeMonths[$year])) $tradeMonths[$year][] = $month;
+
+            krsort($tradeMonths[$year]);
+        }
+
+        $date = !empty($date) ? $date : current($tradeYear);
+        $currentYear  = substr($date, 0, 4);
+        $currentMonth = !empty($tradeMonths[$currentYear]) ? current($tradeMonths[$currentYear]) : '';
+        if(strlen($date) == 6) $currentMonth = substr($date, 4, 2);
+
+        $startDate = $currentYear . '-01-01';
+        $endDate   = $currentYear . '-12-31';
         $trades = $this->dao->select('*, substr(date, 6, 2) as month')->from(TABLE_TRADE)->where('date')->ge($startDate)->andWhere('date')->lt($endDate)->andWhere('currency')->eq($currency)->orderBy('date_desc')->fetchGroup('month');
         
         $annualChartDatas = array();
@@ -734,25 +752,6 @@ class trade extends control
             $annualChartDatas['all']['profit'] += $annualChartDatas[$month]['profit'];
         }
         ksort($annualChartDatas);
-
-        $tradeYears  = array();
-        $tradeMonths = array();
-        $tradeDates = $this->trade->getDatePairs();
-        foreach($tradeDates as $tradeDate)
-        {
-            $year  = substr($tradeDate, 0, 4);
-            $month = substr($tradeDate, 5, 2);
-
-            if(!in_array($year, $tradeYears)) $tradeYears[] = $year;
-
-            if(!isset($tradeMonths[$year])) $tradeMonths[$year] = array();
-            if(!in_array($month, $tradeMonths[$year])) $tradeMonths[$year][] = $month;
-
-            krsort($tradeMonths[$year]);
-        }
-
-        $currentMonth = !empty($tradeMonths[$currentYear]) ? current($tradeMonths[$currentYear]) : '';
-        if(strlen($date) == 6) $currentMonth = substr($date, 4, 2);
 
         $monthlyChartDatas['in']['category'] = $this->trade->getChartData('in', $currentYear, $currentMonth, 'category', $currency);
         $monthlyChartDatas['in']['category'] = $this->report->computePercent($monthlyChartDatas['in']['category']);
