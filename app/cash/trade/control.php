@@ -751,7 +751,7 @@ class trade extends control
             $annualChartDatas['all']['out']    += $annualChartDatas[$month]['out'];
             $annualChartDatas['all']['profit'] += $annualChartDatas[$month]['profit'];
         }
-        ksort($annualChartDatas);
+        ksort($annualChartDatas, SORT_STRING);
 
         $monthlyChartDatas['in']['category'] = $this->trade->getChartData('in', $currentYear, $currentMonth, 'category', $currency);
         $monthlyChartDatas['in']['category'] = $this->report->computePercent($monthlyChartDatas['in']['category']);
