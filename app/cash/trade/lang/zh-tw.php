@@ -38,6 +38,7 @@ $lang->trade->createdBy   = '由誰創建';
 $lang->trade->createdDate = '創建時間';
 $lang->trade->editedBy    = '由誰編輯';
 $lang->trade->editedDate  = '編輯時間';
+$lang->trade->month       = '月份';
 
 $lang->trade->create      = '記賬';
 $lang->trade->in          = '收入';
@@ -73,15 +74,28 @@ $lang->trade->modeList['transfer'] = '轉賬';
 $lang->trade->modeList['inveset']  = '投資';
 
 $lang->trade->quarters = new stdclass();
-$lang->trade->quarters->Q1 = '01, 02, 03';
-$lang->trade->quarters->Q2 = '04, 05, 06';
-$lang->trade->quarters->Q3 = '07, 08, 09';
-$lang->trade->quarters->Q4 = '10, 11, 12';
+$lang->trade->quarters->Q1 = '01,02,03';
+$lang->trade->quarters->Q2 = '04,05,06';
+$lang->trade->quarters->Q3 = '07,08,09';
+$lang->trade->quarters->Q4 = '10,11,12';
 
 $lang->trade->quarterList['Q1'] = '第一季度';
 $lang->trade->quarterList['Q2'] = '第二季度';
 $lang->trade->quarterList['Q3'] = '第三季度';
 $lang->trade->quarterList['Q4'] = '第四季度';
+
+$lang->trade->monthList['01'] = '一月';
+$lang->trade->monthList['02'] = '二月';
+$lang->trade->monthList['03'] = '三月';
+$lang->trade->monthList['04'] = '四月';
+$lang->trade->monthList['05'] = '五月';
+$lang->trade->monthList['06'] = '六月';
+$lang->trade->monthList['07'] = '七月';
+$lang->trade->monthList['08'] = '八月';
+$lang->trade->monthList['09'] = '九月';
+$lang->trade->monthList['10'] = '十月';
+$lang->trade->monthList['11'] = '十一月';
+$lang->trade->monthList['12'] = '十二月';
 
 $lang->trade->categoryList['transferin']  = '轉入';
 $lang->trade->categoryList['transferout'] = '轉出';
@@ -123,21 +137,16 @@ $lang->trade->importedFields['dept']     = '部門';
 $lang->trade->importedFields['desc']     = '備註';
 $lang->trade->importedFields['fee']      = '手續費';
 
-$lang->trade->totalIn     = '%s收入%s；';
-$lang->trade->totalOut    = '%s支出%s；';
-$lang->trade->totalAmount = '%s收入%s，支出%s，%s；';
-$lang->trade->profit      = '盈';
-$lang->trade->loss        = '虧';
-$lang->trade->balance     = '收支平衡';
-$lang->trade->total       = '總計';
+$lang->trade->totalIn       = '%s收入%s；';
+$lang->trade->totalOut      = '%s支出%s；';
+$lang->trade->totalAmount   = '%s收入%s，支出%s，%s；';
+$lang->trade->profit        = '盈';
+$lang->trade->loss          = '虧';
+$lang->trade->balance       = '收支平衡';
+$lang->trade->total         = '總計';
+$lang->trade->annualCaption = '年度收支表';
 
 $lang->trade->noTraderMatch = '沒有匹配到相應的商戶，點擊新建';
 
-$lang->trade->report = new stdclass();
-$lang->trade->report->common = '報表';
-$lang->trade->report->month  = '月份';
-$lang->trade->report->annualCaption  = '年度收支表';
-$lang->trade->report->monthlyCaption = '月度統計表';
-
-$lang->trade->report->chartList['category'] = '按科目統計';
-$lang->trade->report->chartList['dept']     = '按部門統計';
+$lang->trade->chartList['category'] = '按科目統計';
+$lang->trade->chartList['dept']     = '按部門統計';

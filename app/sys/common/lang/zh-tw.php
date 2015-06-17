@@ -107,6 +107,7 @@ $lang->reverse        = '切換順序';
 $lang->switchDisplay  = '切換顯示';
 $lang->feature        = '未來';
 $lang->year           = '年';
+$lang->month          = '月';
 $lang->loading        = '稍候...';
 $lang->saveSuccess    = '保存成功';
 $lang->setSuccess     = '設置成功';
