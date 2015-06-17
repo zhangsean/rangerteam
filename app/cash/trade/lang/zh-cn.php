@@ -38,6 +38,7 @@ $lang->trade->createdBy   = '由谁创建';
 $lang->trade->createdDate = '创建时间';
 $lang->trade->editedBy    = '由谁编辑';
 $lang->trade->editedDate  = '编辑时间';
+$lang->trade->month       = '月份';
 
 $lang->trade->create      = '记账';
 $lang->trade->in          = '收入';
@@ -136,21 +137,16 @@ $lang->trade->importedFields['dept']     = '部门';
 $lang->trade->importedFields['desc']     = '备注';
 $lang->trade->importedFields['fee']      = '手续费';
 
-$lang->trade->totalIn     = '%s收入%s；';
-$lang->trade->totalOut    = '%s支出%s；';
-$lang->trade->totalAmount = '%s收入%s，支出%s，%s；';
-$lang->trade->profit      = '盈';
-$lang->trade->loss        = '亏';
-$lang->trade->balance     = '收支平衡';
-$lang->trade->total       = '总计';
+$lang->trade->totalIn       = '%s收入%s；';
+$lang->trade->totalOut      = '%s支出%s；';
+$lang->trade->totalAmount   = '%s收入%s，支出%s，%s；';
+$lang->trade->profit        = '盈';
+$lang->trade->loss          = '亏';
+$lang->trade->balance       = '收支平衡';
+$lang->trade->total         = '总计';
+$lang->trade->annualCaption = '年度收支表';
 
 $lang->trade->noTraderMatch = '没有匹配到相应的商户，点击新建';
 
-$lang->trade->report = new stdclass();
-$lang->trade->report->common = '报表';
-$lang->trade->report->month  = '月份';
-$lang->trade->report->annualCaption  = '年度收支表';
-$lang->trade->report->monthlyCaption = '月度统计表';
-
-$lang->trade->report->chartList['category'] = '按科目统计';
-$lang->trade->report->chartList['dept']     = '按部门统计';
+$lang->trade->chartList['category'] = '按科目统计';
+$lang->trade->chartList['dept']     = '按部门统计';

@@ -38,6 +38,7 @@ $lang->trade->createdBy   = 'Created By';
 $lang->trade->createdDate = 'Created Date';
 $lang->trade->editedBy    = 'Edited By';
 $lang->trade->editedDate  = 'Edited Date';
+$lang->trade->month       = 'Month';
 
 $lang->trade->create      = 'Create Trade';
 $lang->trade->in          = 'Income';
@@ -57,6 +58,7 @@ $lang->trade->newTrader   = 'Create Trader';
 $lang->trade->import      = 'Import';
 $lang->trade->export      = 'Export';
 $lang->trade->showImport  = 'Show result';
+$lang->trade->report      = 'Report';
 
 $lang->trade->typeList['in']          = 'Income';
 $lang->trade->typeList['out']         = 'Expend';
@@ -135,11 +137,16 @@ $lang->trade->importedFields['dept']     = 'Department';
 $lang->trade->importedFields['desc']     = 'Desc';
 $lang->trade->importedFields['fee']      = 'Fee';
 
-$lang->trade->totalIn     = '%s: income %s；';
-$lang->trade->totalOut    = '%s: expend %s；';
-$lang->trade->totalAmount = '%s: income %s, expend %s，%s；';
-$lang->trade->profit      = 'profit';
-$lang->trade->loss        = 'loss';
-$lang->trade->balance     = 'Income is equal to expenditure';
+$lang->trade->totalIn       = '%s: income %s；';
+$lang->trade->totalOut      = '%s: expend %s；';
+$lang->trade->totalAmount   = '%s: income %s, expend %s，%s；';
+$lang->trade->profit        = 'profit';
+$lang->trade->loss          = 'loss';
+$lang->trade->balance       = 'Income is equal to expenditure';
+$lang->trade->total         = 'Total';
+$lang->trade->annualCaption = 'Annual statistical table of income and expenditure';
 
 $lang->trade->noTraderMatch = 'No matched trader，click to create';
+
+$lang->trade->chartList['category'] = 'statistic according to category';
+$lang->trade->chartList['dept']     = 'statistic according to department';

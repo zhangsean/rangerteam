@@ -30,7 +30,7 @@
         <?php endforeach;?>
       </ul>
     </div>
-    <strong><?php echo $lang->trade->report->common;?></strong>
+    <strong><?php echo $lang->trade->report;?></strong>
     <div class='currency dropdown pull-right'>
       <button type='button' class='btn btn-sm btn-default dropdown-toggle' data-toggle='dropdown'><?php echo $currencyList[$currentCurrency];?> <span class="caret"></span></button>
       <ul class='dropdown-menu'>
@@ -47,7 +47,7 @@
     <tr>
       <td colspan='3'>
         <div class='chart-wrapper text-center'>
-          <h5><?php echo $currentYear . $lang->trade->report->annualCaption . '(' . $currencyList[$currentCurrency] . ')';?></h5>
+          <h5><?php echo $currentYear . $lang->trade->annualCaption . '(' . $currencyList[$currentCurrency] . ')';?></h5>
           <div class='chart-canvas'><canvas height='260' width='800' id='myLineChart'></canvas></div>
         </div>
       </td>
@@ -56,7 +56,7 @@
           <table id='lineChart' class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='line' data-target='#myLineChart' data-animation='false'>
             <thead>
               <tr class='text-center'>
-                <th><?php echo $lang->trade->report->month;?></th>
+                <th><?php echo $lang->trade->month;?></th>
                 <th class='chart-label-in'><i class='chart-color-dot-in icon-circle'></i> <?php echo $lang->trade->in;?></th>
                 <th class='chart-label-out'><i class='chart-color-dot-out icon-circle'></i> <?php echo $lang->trade->out;?></th>
                 <th class='chart-label-profit'><?php echo $lang->trade->profit . '/' . $lang->trade->loss;?></th>
@@ -83,7 +83,7 @@
       <?php foreach($chartDatas as $groupBy => $datas):?>
       <td>
         <div class='chart-wrapper text-center'>
-          <h5><?php echo $lang->trade->$type . $lang->trade->report->chartList[$groupBy];?></h5>
+          <h5><?php echo $currentMonth . $lang->month . $lang->trade->$type . $lang->trade->chartList[$groupBy];?></h5>
           <div class='chart-canvas'><canvas id="<?php echo 'chart-' . $type . '-' . $groupBy;?>" width='320' height='140' data-responsive='true'></canvas></div>
         </div>
       </td>
