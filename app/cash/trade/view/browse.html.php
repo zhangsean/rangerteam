@@ -42,6 +42,7 @@
           <strong><?php echo $lang->trade->modeList[$mode];?></strong>
         </div>
         <div class='panel-body'>
+          <?php if($currentYear):?> 
           <ul class='tree'>
             <li>
               <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$currentYear", $currentYear);?>
@@ -62,6 +63,7 @@
               </ul>
             </li>
           </ul>
+          <?php endif;?>
           <ul class='tree' data-collapsed='true'>
             <?php foreach($tradeYears as $tradeYear):?>
             <li>
