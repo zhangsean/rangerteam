@@ -12,7 +12,7 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include '../../../sys/common/view/chart.html.php';?>
-<?php js::set('monthList', $lang->trade->monthList);?>
+<?php js::set('mode', 'report');?>
 <div class='panel panel-sm'>
   <div class='panel-heading'>
     <div class='date dropdown'>
@@ -30,8 +30,7 @@
         <?php endforeach;?>
       </ul>
     </div>
-    <strong><?php echo $lang->trade->report;?></strong>
-    <div class='currency dropdown pull-right'>
+    <div class='currency dropdown'>
       <button type='button' class='btn btn-sm btn-default dropdown-toggle' data-toggle='dropdown'><?php echo $currencyList[$currentCurrency];?> <span class="caret"></span></button>
       <ul class='dropdown-menu'>
         <?php foreach($currencyList as $key => $currency):?>

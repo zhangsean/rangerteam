@@ -1,23 +1,13 @@
 $(document).ready(function()
 {
-    var colorIndex = 0;
-    function nextAccentColor(idx)
-    {
-        if(typeof idx === 'undefined') idx = colorIndex++;
-        return new $.zui.Color({h: idx * 67 % 360, s: 0.5, l: 0.55});
-    }
-    
     var labels   = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
     var datasets = [];
 
-    var colorIn     = nextAccentColor().toCssStr();
-    var colorOut    = nextAccentColor().toCssStr();
-
-    var datasetIn     = {label: $('#lineChart').find('thead .chart-label-in').text(), color: colorIn, data: []};
-    var datasetOut    = {label: $('#lineChart').find('thead .chart-label-out').text(), color: colorOut, data: []};
+    var datasetIn     = {label: $('#lineChart').find('thead .chart-label-in').text(), color: 'green', data: []};
+    var datasetOut    = {label: $('#lineChart').find('thead .chart-label-out').text(), color: 'red', data: []};
     
-    $('#lineChart').find('.chart-color-dot-in').css('color', colorIn);
-    $('#lineChart').find('.chart-color-dot-out').css('color', colorOut);
+    $('#lineChart').find('.chart-color-dot-in').css('color', 'green');
+    $('#lineChart').find('.chart-color-dot-out').css('color', 'red');
     
     var chartLabels = [];
     $('#lineChart').find('tbody .chart-label').each(function(){ chartLabels.push($(this).text()); })
