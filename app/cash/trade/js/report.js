@@ -60,5 +60,4 @@ $(document).ready(function()
        var selectCurrency = $('#currency').val();
        location.href = createLink('trade', 'report', "date=" + selectYear + "&currency=" + selectCurrency);
     })
-
 })

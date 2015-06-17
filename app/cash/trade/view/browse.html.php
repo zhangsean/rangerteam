@@ -41,8 +41,27 @@
         <div class='panel-heading nobr'>
           <strong><?php echo $lang->trade->modeList[$mode];?></strong>
         </div>
-        <div class="panel-body">
-          <ul class="tree">
+        <div class='panel-body'>
+          <ul class='tree' data-collapsed='true'>
+            <li>
+              <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$currentYear", $currentYear);?>
+              <ul>
+                <?php foreach($tradeQuarters[$currentYear] as $tradeQuarter):?>
+                <li>
+                  <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$currentYear$tradeQuarter", $lang->trade->quarterList[$tradeQuarter]);?>
+                  <ul>
+                    <?php foreach($tradeMonths[$currentYear][$tradeQuarter] as $tradeMonth):?>
+                    <li>
+                      <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$currentYear$tradeMonth", $currentYear . $tradeMonth);?>
+                    </li>
+                    <?php endforeach;?>
+                  </ul>
+                </li>
+                <?php endforeach;?>
+              </ul>
+            </li>
+          </ul>
+          <ul class='tree'>
             <?php foreach($tradeYears as $tradeYear):?>
             <li>
               <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear", $tradeYear);?>
