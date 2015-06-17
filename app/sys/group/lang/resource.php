@@ -236,6 +236,7 @@ $lang->resource->trade->delete      = 'delete';
 $lang->resource->trade->import      = 'import';
 $lang->resource->trade->showimport  = 'showImport';
 $lang->resource->trade->export      = 'export';
+$lang->resource->trade->report      = 'report';
 
 $lang->trade->methodOrder[10] = 'browse';
 $lang->trade->methodOrder[15] = 'create';
@@ -249,6 +250,7 @@ $lang->trade->methodOrder[40] = 'delete';
 $lang->trade->methodOrder[45] = 'import';
 $lang->trade->methodOrder[50] = 'showImport';
 $lang->trade->methodOrder[55] = 'export';
+$lang->trade->methodOrder[60] = 'report';
 
 /* Depositor. */
 $lang->resource->depositor = new stdclass();
