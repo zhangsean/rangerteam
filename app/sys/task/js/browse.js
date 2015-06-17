@@ -1,5 +1,5 @@
 $(function()
 {
-   if(v.mode)  $('#menu').find('[href*=' + v.mode + ']').parent().addClass('active');
-   else $('#menu').find('li.all').addClass('active');
+   if(v.mode) $('#menu .nav').find('[href*=' + v.mode + ']').parent().addClass('active');
+   else $('#menu .nav').find('li.all').addClass('active');
 });
