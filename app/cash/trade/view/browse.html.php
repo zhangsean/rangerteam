@@ -46,13 +46,14 @@
             <li>
               <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$currentYear", $currentYear);?>
               <ul>
-                <?php foreach($tradeQuarters[$currentYear] as $tradeQuarter):?>
+                <?php foreach($lang->trade->quarterList as $key => $quarter):?>
                 <li>
-                  <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$currentYear$tradeQuarter", $lang->trade->quarterList[$tradeQuarter]);?>
+                  <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$currentYear$key", $quarter);?>
                   <ul>
-                    <?php foreach($tradeMonths[$currentYear][$tradeQuarter] as $tradeMonth):?>
+                    <?php $monthList = explode(',', $lang->trade->quarters->$key);?>
+                    <?php foreach($monthList as $month):?>
                     <li>
-                      <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$currentYear$tradeMonth", $currentYear . $tradeMonth);?>
+                      <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$currentYear$month", $currentYear . $month);?>
                     </li>
                     <?php endforeach;?>
                   </ul>
@@ -66,13 +67,14 @@
             <li>
               <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear", $tradeYear);?>
               <ul>
-                <?php foreach($tradeQuarters[$tradeYear] as $tradeQuarter):?>
+                <?php foreach($lang->trade->quarterList as $key => $quarter):?>
                 <li>
-                  <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear$tradeQuarter", $lang->trade->quarterList[$tradeQuarter]);?>
+                  <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear$key", $quarter);?>
                   <ul>
-                    <?php foreach($tradeMonths[$tradeYear][$tradeQuarter] as $tradeMonth):?>
+                    <?php $monthList = explode(',', $lang->trade->quarters->$key);?>
+                    <?php foreach($monthList as $month):?>
                     <li>
-                      <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear$tradeMonth", $tradeYear . $tradeMonth);?>
+                      <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear$month", $tradeYear . $month);?>
                     </li>
                     <?php endforeach;?>
                   </ul>

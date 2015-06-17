@@ -74,10 +74,10 @@ $lang->trade->modeList['transfer'] = 'Transfer';
 $lang->trade->modeList['inveset']  = 'Inveset';
 
 $lang->trade->quarters = new stdclass();
-$lang->trade->quarters->Q1 = '01, 02, 03';
-$lang->trade->quarters->Q2 = '04, 05, 06';
-$lang->trade->quarters->Q3 = '07, 08, 09';
-$lang->trade->quarters->Q4 = '10, 11, 12';
+$lang->trade->quarters->Q1 = '01,02,03';
+$lang->trade->quarters->Q2 = '04,05,06';
+$lang->trade->quarters->Q3 = '07,08,09';
+$lang->trade->quarters->Q4 = '10,11,12';
 
 $lang->trade->quarterList['Q1'] = 'First quarter';
 $lang->trade->quarterList['Q2'] = 'Second quarter';

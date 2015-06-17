@@ -74,10 +74,10 @@ $lang->trade->modeList['transfer'] = '转账';
 $lang->trade->modeList['inveset']  = '投资';
 
 $lang->trade->quarters = new stdclass();
-$lang->trade->quarters->Q1 = '01, 02, 03';
-$lang->trade->quarters->Q2 = '04, 05, 06';
-$lang->trade->quarters->Q3 = '07, 08, 09';
-$lang->trade->quarters->Q4 = '10, 11, 12';
+$lang->trade->quarters->Q1 = '01,02,03';
+$lang->trade->quarters->Q2 = '04,05,06';
+$lang->trade->quarters->Q3 = '07,08,09';
+$lang->trade->quarters->Q4 = '10,11,12';
 
 $lang->trade->quarterList['Q1'] = '第一季度';
 $lang->trade->quarterList['Q2'] = '第二季度';
