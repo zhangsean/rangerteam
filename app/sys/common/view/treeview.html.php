@@ -12,4 +12,11 @@
 css::import($jsRoot . 'jquery/treeview/min.css');
 js::import($jsRoot . 'jquery/treeview/min.js');
 ?>
-<script language='javascript'>$(function() {$(".tree").treeview({collapsed: false, unique: false}) })</script>
+<script language='javascript'>$(function()
+{
+    $('.tree').each(function()
+    {
+        var $this = $(this);
+        $this.treeview($.extend({collapsed: false, unique: false}, $this.data()));
+    });
+})</script>
