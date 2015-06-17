@@ -15,8 +15,6 @@
   <tr class='text-center'>
     <th class='w-50px'><?php echo $lang->contact->id;?></th>
     <th class='w-80px'><?php echo $lang->contact->realname;?></th>
-    <th class='w-100px'><?php echo $lang->resume->dept;?></th>
-    <th><?php echo $lang->resume->title;?></th>
     <th class='w-200px'><?php echo $lang->contact->email;?></th>
     <th class='w-110px'><?php echo $lang->contact->phone;?></th>
     <th class='w-80px'><?php echo $lang->contact->qq;?></th>
@@ -34,8 +32,6 @@
       if($contact->maker) echo " ({$lang->resume->maker})";
       ?>
     </td>
-    <td><?php echo $contact->dept;?></td>
-    <td><?php echo $contact->title;?></td>
     <td><?php echo $contact->email;?></td>
     <td><?php echo $contact->phone . ' ' . $contact->mobile;?></td>
     <td><?php echo $contact->qq;?></td>
