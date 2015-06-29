@@ -90,13 +90,16 @@ class projectModel extends model
         {
             $project->members = isset($members[$project->id]) ? $members[$project->id] : array();
 
+            $accountList = array();
             foreach($project->members as $key => $member)
             {
-                if($status == 'involved' and $this->app->user->account != $member->account) unset($projects[$project->id]);
                 if(!$member->account) unset($project->members[$key]);
+                $accountList[] = $member->account;
                 if($member->role != 'manager') continue;
                 if($member->role == 'manager') $project->PM = $member->account;
             }
+
+            if($status == 'involved' and !in_array($this->app->user->account, $accountList)) unset($projects[$project->id]);
         }
 
         return $projects;
