@@ -29,12 +29,29 @@ $(document).ready(function()
           if(orderClass == 'log-asc')
           {
               $(this).find('span').attr('class', 'log-desc');
+              $.cookie('historyOrder', 'log-desc', {path: v.webRoot});
           }
           else
           {
               $(this).find('span').attr('class', 'log-asc');
+              $.cookie('historyOrder', 'log-asc', {path: v.webRoot});
           }
 
           $(this).parents('.panel').find('.panel-body li').reverseOrder();
      });
+     customeHistoryOrder();
 });
+
+function customeHistoryOrder()
+{
+     var historyOrder = $.cookie('historyOrder');
+     if(typeof(historyOrder) == 'undefined') return true;
+
+     $('.panel-history').each(function()
+     {
+         if(historyOrder != $(this).find('.sorter').find('span').attr('class'))
+         {
+             $(this).find('.sorter').click();
+         }
+     });
+}
