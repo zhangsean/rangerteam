@@ -861,6 +861,7 @@ EOT;
         $jsConfig->save           = $lang->save;
         $jsConfig->router         = $app->server->SCRIPT_NAME;
         $jsConfig->runMode        = $runMode;
+        $jsConfig->timeout        = $config->timeout;
 
         $js  = self::start(false);
         $js .= 'var config=' . json_encode($jsConfig);

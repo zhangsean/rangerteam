@@ -32,7 +32,7 @@ $.extend(
         var options = 
         {
             target  : null,
-            timeout : 30000,
+            timeout : config.timeout,
             dataType:'json',
             
             success: function(response)
