@@ -23,7 +23,7 @@ class contactModel extends model
         $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
         if(empty($customerIdList)) return null;
 
-        return $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join')->from(TABLE_CONTACT)->alias('t1')
+        return $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.id')->eq($id)
             ->andWhere('t2.customer')->in($customerIdList)
@@ -95,7 +95,18 @@ class contactModel extends model
         $contactQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->contactQuery);
 
         $resumes = array();
-        if($customer) $resumes = $this->dao->select('*')->from(TABLE_RESUME)->where('customer')->eq($customer)->andWhere('deleted')->eq(0)->fetchAll('contact');
+        if($customer) 
+        {
+            $resumes = $this->dao->select('*')->from(TABLE_RESUME)
+                ->where('customer')->eq($customer)
+                ->andWhere('`left`')->eq('')
+                ->andWhere('deleted')->eq(0)
+                ->orWhere('customer')->eq($customer)
+                ->andWhere('`left`')->gt(helper::today())
+                ->andWhere('deleted')->eq(0)
+                ->fetchAll('contact');
+        }
+
         if($relation == 'client') $customers = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('relation')->ne('provider')->fetchAll('id');
         if($relation == 'provider') $customers = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('relation')->ne('client')->fetchAll('id');
 

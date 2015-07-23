@@ -315,7 +315,7 @@ class customerModel extends model
             $contact   = $this->contact->getByID($contactID);
             $contacts  = $this->contact->getPairs();
 
-            if($contact->customer != $customerID)
+            if($contact->customer != $customerID or ($contact->left != '' and strtotime($contact->left) <= strtotime(helper::today())))
             {
                 $resume = new stdclass();
                 $resume->customer = $customerID;

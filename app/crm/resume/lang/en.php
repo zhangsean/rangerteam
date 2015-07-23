@@ -26,6 +26,7 @@ $lang->resume->browse = 'Browse Resume';
 $lang->resume->delete = 'Delete Resume';
 $lang->resume->create = 'Change Resume';
 $lang->resume->edit   = 'Edit company info';
+$lang->resume->leave  = 'Leave';
 
 $lang->resume->showJoin = 'Join : %s';
 $lang->resume->showLeft = ' Left : %s';

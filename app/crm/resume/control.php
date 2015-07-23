@@ -94,6 +94,29 @@ class resume extends control
     }
 
     /**
+     * leave 
+     * 
+     * @param  int    $resumeID 
+     * @access public
+     * @return void
+     */
+    public function leave($resumeID)
+    {
+        $resume = $this->resume->getByID($resumeID);
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($resume) ? 0 : $resume->customer, 'edit');
+
+        $changes = $this->resume->leave($resumeID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+        if($changes)
+        {
+            $actionID = $this->loadModel('action')->create('contact', $resume->contact, 'editedResume');
+            $this->action->logHistory($actionID, $changes);
+        }
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "contact=$resume->customer")));
+    }
+
+    /**
      * Delete resume.
      * 
      * @param  int    $resumeID 

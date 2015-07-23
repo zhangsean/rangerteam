@@ -127,4 +127,33 @@ class resumeModel extends model
 
         return commonModel::createChanges($oldResume, $resume);
     }
+
+    /**
+     * leave 
+     * 
+     * @param  int    $resumeID 
+     * @access public
+     * @return void
+     */
+    public function leave($resumeID)
+    {
+        $oldResume = $this->getByID($resumeID);
+
+        $resume = new stdclass();
+        $resume->left = helper::today();
+        $this->dao->update(TABLE_RESUME)->data($resume)->where('id')->eq($resumeID)->exec();
+
+        /* Update contact info if exists another same resume. */
+        $sameResume = $this->dao->select('id')->from(TABLE_RESUME)
+            ->where('contact')->eq($oldResume->contact)
+            ->andWhere('customer')->eq($oldResume->customer)
+            ->andWhere('`left`')->eq('')
+            ->orWhere('contact')->eq($oldResume->contact)
+            ->andWhere('customer')->eq($oldResume->customer)
+            ->andWhere('`left`')->gt(helper::today())
+            ->fetch('id');
+        if($sameResume) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($sameResume)->exec();
+
+        return commonModel::createChanges($oldResume, $resume);
+    }
 }
