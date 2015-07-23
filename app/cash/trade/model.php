@@ -175,7 +175,8 @@ class tradeModel extends model
     public function create($type)
     {
         $now = helper::now();
-        
+        if($type == 'in') $_POST['objectType'] = array('contract');
+
         $trade = fixer::input('post')
             ->add('type', $type)
             ->add('createdBy', $this->app->user->account)
@@ -184,12 +185,11 @@ class tradeModel extends model
             ->add('editedDate', $now)
             ->add('handlers', trim(join(',', $this->post->handlers), ','))
             ->setIf($this->post->trader == '', 'trader', 0)
-            ->setIf($this->post->type == 'in', 'contract', '')
             ->setIf($this->post->createTrader, 'trader', 0)
-            ->setIf($this->post->type == 'in', 'order', '')
+            ->setIf($type == 'in', 'order', '')
             ->setIf(!$this->post->objectType or !in_array('order', $this->post->objectType), 'order', 0)
             ->setIf(!$this->post->objectType or !in_array('contract', $this->post->objectType), 'contract', 0)
-            ->removeIf($type == 'out', 'objectType')
+            ->remove('objectType')
             ->striptags('desc')
             ->get();
 
@@ -372,6 +372,8 @@ class tradeModel extends model
     public function update($tradeID)
     {
         $oldTrade = $this->getByID($tradeID);
+
+        if($oldTrade->type == 'in') $_POST['objectType'] = array('contract');
 
         $trade = fixer::input('post')
             ->add('type', $oldTrade->type)
