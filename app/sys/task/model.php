@@ -494,54 +494,56 @@ class taskModel extends model
      * @param  object $task 
      * @param  string $class 
      * @param  string $type 
+     * @param  string $print 
      * @access public
      * @return string
      */
-    public function buildOperateMenu($task, $class = '', $type = 'browse')
+    public function buildOperateMenu($task, $class = '', $type = 'browse', $print = true)
     {
         $menu  = $type == 'view' ? "<div class='btn-group'>" : '';
 
         $disabled = self::isClickable($task, 'assignto') ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'assignto', "taskID=$task->id");
-        $menu    .= commonModel::printLink('task', 'assignto', "taskID=$task->id", $this->lang->assign, $misc);
+        $menu    .= commonModel::printLink('task', 'assignto', "taskID=$task->id", $this->lang->assign, $misc, false);
 
         $disabled = self::isClickable($task, 'start') ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'start', "taskID=$task->id");
-        $menu    .= commonModel::printLink('task', 'start', "taskID=$task->id", $this->lang->start, $misc);
+        $menu    .= commonModel::printLink('task', 'start', "taskID=$task->id", $this->lang->start, $misc, false);
 
         if($type == 'view')
         {
             $disabled = self::isClickable($task, 'activate') ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
             $link     = $disabled ? '###' : helper::createLink('task', 'activate', "taskID=$task->id");
-            $menu    .= commonModel::printLink('task', 'activate', "taskID=$task->id", $this->lang->activate, $misc);
+            $menu    .= commonModel::printLink('task', 'activate', "taskID=$task->id", $this->lang->activate, $misc, false);
         }
 
         $disabled = self::isClickable($task, 'finish') ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'finish', "taskID=$task->id");
-        $menu    .= commonModel::printLink('task', 'finish', "taskID=$task->id", $this->lang->finish, $misc);
+        $menu    .= commonModel::printLink('task', 'finish', "taskID=$task->id", $this->lang->finish, $misc, false);
 
         if($type == 'view')
         {
             $disabled = self::isClickable($task, 'cancel') ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
             $link     = $disabled ? '###' : helper::createLink('task', 'cancel', "taskID=$task->id");
-            $menu    .= commonModel::printLink('task', 'cancel', "taskID=$task->id", $this->lang->cancel, $misc);
+            $menu    .= commonModel::printLink('task', 'cancel', "taskID=$task->id", $this->lang->cancel, $misc, false);
         }
 
         $disabled = self::isClickable($task, 'close') ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'close', "taskID=$task->id");
-        $menu    .= commonModel::printLink('task', 'close', "taskID=$task->id", $this->lang->close, $misc);
+        $menu    .= commonModel::printLink('task', 'close', "taskID=$task->id", $this->lang->close, $misc, false);
 
         if($type == 'view') $menu .= "</div><div class='btn-group'>";
-        $menu .= commonModel::printLink('task', 'edit', "taskID=$task->id", $this->lang->edit, "class='$class'");
+        $menu .= commonModel::printLink('task', 'edit', "taskID=$task->id", $this->lang->edit, "class='$class'", false);
         $deleter = $type == 'browse' ? 'reloadDeleter' : 'deleter';
-        $menu   .= commonModel::printLink('task', 'delete', "taskID=$task->id", $this->lang->delete, "class='$deleter $class'");
+        $menu   .= commonModel::printLink('task', 'delete', "taskID=$task->id", $this->lang->delete, "class='$deleter $class'", false);
         if($type == 'view') $menu .= "</div>";
+        if($print) echo $menu;
 
         return $menu;
     }
