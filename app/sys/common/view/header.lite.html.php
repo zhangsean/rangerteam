@@ -19,6 +19,8 @@ $themeRoot = $webRoot . "theme/";
 <head profile="http://www.w3.org/2005/10/profile">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel='icon' href='<?php echo $webRoot . 'favicon.ico'?>' type='image/x-icon' />
+  <link rel='shortcut icon' href='<?php echo $webRoot . 'favicon.ico'?>' type='image/x-icon' />
   <?php
   if(!isset($title)) $title  = '';
   if(!empty($title)) $title .= $lang->minus;
