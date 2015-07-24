@@ -33,7 +33,7 @@
       <tr class='text-center'>
         <?php 
           $appname = $this->config->action->objectAppNames[$action->objectType];
-          $link = $this->createLink("{$appname}.{$action->objectType}", 'view', "id=$action->objectID");
+          $link    = $action->objectType == 'resume' ? '' : $this->createLink("{$appname}.{$action->objectType}", 'view', "id=$action->objectID");
         ?>
         <td><?php echo zget($lang->action->objectTypes, $action->objectType, '');?></td>
         <td><?php echo $action->objectID;?></td>

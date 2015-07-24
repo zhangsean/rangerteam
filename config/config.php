@@ -169,6 +169,7 @@ $config->objectTables['thread']      = TABLE_THREAD;
 $config->objectTables['article']     = TABLE_ARTICLE;
 $config->objectTables['doc']         = TABLE_DOC;
 $config->objectTables['cron']        = TABLE_CRON;
+$config->objectTables['resume']      = TABLE_RESUME;
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext/*.php');
