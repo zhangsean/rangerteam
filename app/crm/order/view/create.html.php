@@ -54,7 +54,29 @@
         </tr>
         <tr>
           <th><?php echo $lang->order->product;?></th>
-          <td><?php echo html::select('product[]', $products, '', "class='form-control chosen' multiple");?></td>
+          <td>
+            <div class='input-group'>
+              <?php echo html::select('product[]', $products, '', "class='form-control chosen' multiple");?>
+              <?php echo html::input('productName', '', "class='form-control' style='display:none'");?>
+              <span class='input-group-addon'>
+                <label class='checkbox'>
+                  <input type='checkbox' name='createProduct' id='createProduct' value='1' /><?php echo $lang->order->createProduct?>
+                </label>
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr class='productInfo hide'>
+          <th><?php echo $lang->product->line;?></th>
+          <td><?php echo html::select("line", $lang->product->lineList, '', "class='form-control'");?></td>
+        </tr>
+        <tr class='productInfo hide'>
+          <th><?php echo $lang->product->type;?></th>
+          <td><?php echo html::select("type", $lang->product->typeList, '', "class='form-control'");?></td>
+        </tr>
+        <tr class='productInfo hide'>
+          <th><?php echo $lang->product->status;?></th>
+          <td><?php echo html::select("status", $lang->product->statusList, '', "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->order->plan;?></th>

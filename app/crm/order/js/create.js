@@ -20,6 +20,24 @@ $(document).ready(function()
         }
     })
 
+    /* Create product when create an order. */
+    $('#createProduct').change(function()
+    {
+        if($(this).prop('checked')) 
+        {
+            $(this).parents('.input-group').find('select').hide();
+            $('#product_chosen').hide();
+            $(this).parents('.input-group').find('input[type=text][id=productName]').show().focus();
+            $('.productInfo').show();
+        }
+        else
+        {
+            $('#product_chosen').show();
+            $(this).parents('.input-group').find('input[type=text][id=productName]').hide();
+            $('.productInfo').hide();
+        }
+    })
+
     $.setAjaxForm('#orderForm', function(response)
     {
         if(response.result == 'fail')

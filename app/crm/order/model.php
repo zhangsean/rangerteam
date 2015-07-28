@@ -255,8 +255,24 @@ class orderModel extends model
             ->setDefault('assignedDate', $now)
             ->setDefault('customer', 0)
             ->join('product', ',')
-            ->remove('createCustomer, name, contact, phone, email, qq, continue')
+            ->remove('createCustomer, name, contact, phone, email, qq, continue, createProduct, productName, line, type, status')
             ->get();
+
+        /* Check data. */
+        if($this->post->createProduct)
+        {
+            if($this->post->productName == '') return array('result' => 'fail', 'message' => array('productName' => sprintf($this->lang->error->notempty, $this->lang->customer->name)));
+        }
+        if(!$this->post->createCustomer and $this->post->createProduct)
+        {
+            $this->dao->insert(TABLE_ORDER)->data($order)->autoCheck()->check('customer', 'notempty');
+            if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+        }
+        if($this->post->createCustomer and !$this->post->createProduct)
+        {
+            $this->dao->insert(TABLE_ORDER)->data($order)->autoCheck()->check('product', 'notempty');
+            if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+        }
 
         if($this->post->createCustomer)
         {
@@ -271,13 +287,30 @@ class orderModel extends model
             $customer->createdBy   = $this->app->user->account;
             $customer->createdDate = helper::now();
 
-            $this->dao->insert(TABLE_ORDER)->data($order)->autoCheck()->check('product', 'notempty');
-            if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
-
             $return = $this->loadModel('customer')->create($customer);
             if($return['result'] == 'fail') return $return;
             $customerID = $return['customerID'];
             $order->customer = isset($customerID) ? $customerID : '';
+        }
+
+        if($this->post->createProduct)
+        {
+            $product = new stdclass();
+            $product->name        = $this->post->productName;
+            $product->line        = $this->post->line;
+            $product->type        = $this->post->type;
+            $product->status      = $this->post->status;
+            $product->createdBy   = $this->app->user->account;
+            $product->createdDate = helper::now();
+            $product->editedDate  = helper::now();
+
+            $this->dao->insert(TABLE_PRODUCT)
+                ->data($product)
+                ->autoCheck()
+                ->exec();
+
+            if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+            $order->product = $this->dao->lastInsertID(); 
         }
 
         $order->product  = !empty($order->product) ? ',' . $order->product . ',' : '';
