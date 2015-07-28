@@ -56,12 +56,14 @@ $(document).on('keyup', function(e)
     if(e.keyCode == '37')
     {
         /* left, go to pre object. */
+        if($('#ajaxModal').css('display') == 'block') return false;
         preLink = ($('#pre').attr("href"));
         if(typeof(preLink) != 'undefined') location.href = preLink;
     }
     if(e.keyCode == '39')
     {
         /* right, go to next object. */
+        if($('#ajaxModal').css('display') == 'block') return false;
         nextLink = ($('#next').attr("href"));
         if(typeof(nextLink) != 'undefined') location.href = nextLink;
     }
