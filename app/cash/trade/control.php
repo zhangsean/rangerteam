@@ -722,10 +722,11 @@ class trade extends control
 
             krsort($tradeMonths[$year]);
         }
+        ksort($tradeYears);
 
         $date = !empty($date) ? $date : current($tradeYears);
         $currentYear  = substr($date, 0, 4);
-        $currentMonth = !empty($tradeMonths[$currentYear]) ? current($tradeMonths[$currentYear]) : '';
+        $currentMonth = !empty($tradeMonths[$currentYear]) ? end($tradeMonths[$currentYear]) : '';
         if(strlen($date) == 6) $currentMonth = substr($date, 4, 2);
 
         $startDate = $currentYear . '-01-01';
