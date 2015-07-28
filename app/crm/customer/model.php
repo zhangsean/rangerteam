@@ -389,4 +389,49 @@ class customerModel extends model
             return array('result' => 'fail', 'error' => $error);
         }
     }
+
+    /**
+     * Move customer to public if customer and his order longtime no edited.
+     * 
+     * @access public
+     * @return void
+     */
+    public function intoCustomerPool()
+    {
+        $intoCustomerPool = zget($this->config->customer->intoCustomerPool, 0);
+        if($intoCustomerPool == 0) return true;
+        
+        $startTime = date(DT_DATETIME1, strtotime("-{$intoCustomerPool} day"));
+        $customers = $this->dao->select('id')->from(TABLE_CUSTOMER)
+            ->where('editedDate')->lt($startTime)
+            ->andWhere('public')->eq('0')
+            ->andWhere('deleted')->eq('0')
+            ->fetchAll('id');
+        if(empty($customers)) return true;
+
+        $unsetCustomers = $this->dao->select('customer')->from(TABLE_ORDER)
+            ->where('closedReason')->eq('payed')
+            ->andWhere('customer')->in(array_keys($customers))
+            ->andWhere('deleted')->eq('0')
+            ->orWhere('closedReason')->ne('payed')
+            ->andWhere('editedDate')->gt($startTime)
+            ->andWhere('customer')->in(array_keys($customers))
+            ->andWhere('deleted')->eq('0')
+            ->fetchAll('customer');
+        foreach($unsetCustomers as $key => $customer) unset($customers[$key]);
+        if(empty($customers)) return true;
+
+        $this->dao->update(TABLE_CUSTOMER)
+            ->set('public')->eq('1')
+            ->set('editedDate')->eq(helper::now())
+            ->where('id')->in(array_keys($customers))
+            ->exec();
+
+        $changes[] = array('field' => 'public', 'old' => '0', 'new' => '1', 'diff' => '');
+        foreach($customers as $key => $customer)
+        {
+            $actionID  = $this->loadModel('action')->create('customer', $key, 'Edited');
+            $this->action->logHistory($actionID, $changes);
+        }
+    }
 }

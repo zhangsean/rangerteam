@@ -14,7 +14,8 @@ $lang->setting->reset  = 'Reset';
 $lang->setting->key    = 'Key';
 $lang->setting->value  = 'Value';
 
-$lang->setting->lang   = 'Setting';
+$lang->setting->lang     = 'Setting';
+$lang->setting->customer = 'Customer setting';
 
 $lang->setting->module = new stdClass();
 $lang->setting->module->user     = 'User role';
@@ -66,3 +67,6 @@ $lang->setting->placeholder->levelNameList->info  = 'Detailed description';
 $lang->setting->placeholder->lineList = new stdclass();
 $lang->setting->placeholder->lineList->key   = 'Key should be interger or letters';
 $lang->setting->placeholder->lineList->value = 'Brief description';
+
+$lang->setting->intoCustomerPool    = 'Into customer pool days';
+$lang->setting->intoCustomerPoolTip = "System will move customer into pool if hasn't update anything of customer's info and his order info in this setting days. This function will disabled if it is '0' days.";

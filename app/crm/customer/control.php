@@ -37,6 +37,9 @@ class customer extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        /* Auto move customer to public. */
+        $this->customer->intoCustomerPool();
+
         $this->session->set('customerList', $this->app->getURI(true));
         $this->session->set('contactList',  '');
 

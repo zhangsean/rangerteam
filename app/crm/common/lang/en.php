@@ -91,6 +91,7 @@ $lang->setting->menu->area           = 'Area|tree|browse|type=area|';
 $lang->setting->menu->industry       = 'Industry|tree|browse|type=industry|';
 $lang->setting->menu->currency       = 'Currency|setting|lang|module=common&field=currencyList';
 $lang->setting->menu->salesGroup     = array('link' => 'Sales Group|sales|browse|', 'alias' => 'create,edit');
+$lang->setting->menu->customerPool   = 'Customer Pool|setting|customer||';
 
 /* Menu of sales module. */
 $lang->sales = new stdclass();

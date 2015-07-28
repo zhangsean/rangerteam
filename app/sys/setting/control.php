@@ -95,4 +95,26 @@ class setting extends control
 
         $this->send(array('result' => 'success'));
     }   
+
+    /**
+     * customer settings. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function customer()
+    {
+        if($_POST)
+        {
+            if($this->post->intoCustomerPool == '') $this->send(array('result' => 'fail', 'message' => array('intoCustomerPool' => sprintf($this->lang->error->notempty, $this->lang->setting->intoCustomerPool))));
+            $this->setting->setItem("system.crm.customer.intoCustomerPool", $this->post->intoCustomerPool);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success'));
+        }
+        $intoCustomerPool = $this->setting->getItem('owner=system&app=crm&module=customer&key=intoCustomerPool');
+        if($intoCustomerPool == '') $intoCustomerPool = 0;
+
+        $this->view->intoCustomerPool = $intoCustomerPool;
+        $this->display();
+    }
 }

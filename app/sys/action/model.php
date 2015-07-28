@@ -88,6 +88,7 @@ class actionModel extends model
     {
         $contactInfo['contactedDate'] = $this->post->date;
         $contactInfo['contactedBy']   = $this->app->user->account;
+        $contactInfo['editedDate']    = helper::now();
 
         $this->dao->update(TABLE_CUSTOMER)->data($contactInfo)->where('id')->eq($customer)->andWhere('contactedDate')->lt($this->post->date)->exec();
         $this->dao->update(TABLE_CONTACT)->data($contactInfo)->where('id')->eq($contact)->andWhere('contactedDate')->lt($this->post->date)->exec();
