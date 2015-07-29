@@ -60,7 +60,7 @@
                       <span class='icon-ellipsis-vertical'></span>
                     </button>
                     <div class='dropdown-menu pull-right'>
-                      <?php echo $this->task->buildOperateMenu($task);?>
+                      <?php $this->task->buildOperateMenu($task);?>
                     </div>
                   </div>
                 </div>
