@@ -10,3 +10,4 @@ label.checkbox input[type='checkbox']{margin:0;}
 .with-side.hide-side .main, .with-side.hide-side .side + form, .with-side .side + table {margin-left: 0;}
 .side-body .tree .active{font-weight: bold;}
 .side-body .tree li{margin-right: 0; padding-right: 0;}
+.table-footer{transition: all 0.3s ease 0s;}

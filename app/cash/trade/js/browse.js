@@ -48,6 +48,7 @@ $(document).ready(function()
             $('.with-side').addClass('hide-side');
             $.cookie('tradeBrowseSide', 'hide', {path: config.webRoot});
         }
+        setTimeout(function(){$(window).scroll().resize()}, 300);
     });
 
     if(v.date)
