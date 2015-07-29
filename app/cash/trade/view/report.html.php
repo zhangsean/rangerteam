@@ -87,7 +87,7 @@
         </div>
       </td>
       <td class='w-300px'>
-        <div style="overflow:auto;" class='table-wrapper'>
+        <div style="overflow:auto; max-height:250px" class='table-wrapper'>
         <table class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='pie' data-target="<?php echo '#chart-' . $type . '-' . $groupBy;?>" data-animation='false'>
             <thead>
               <tr>
