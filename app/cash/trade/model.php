@@ -104,7 +104,7 @@ class tradeModel extends model
      * 
      * @param  string    $type 
      * @param  string    $currentYear 
-     * @param  string    $currentMonth 
+     * @param  string    $currentMonth 00-12
      * @param  string    $groupBy 
      * @param  string    $currency 
      * @access public
@@ -112,9 +112,9 @@ class tradeModel extends model
      */
     public function getChartData($type, $currentYear, $currentMonth, $groupBy, $currency)
     {
-        $nextMonth = substr($currentMonth, 1, 1) + 1;
-        $startDate = $currentYear . '-' . $currentMonth . '-01';
-        $endDate   = $currentYear . '-0' . $nextMonth . '-01';
+        /* Get this year data if currentMonth == '00'. */
+        $startDate = $currentMonth == '00' ? $currentYear . '-01-01' : $currentYear . '-' . $currentMonth . '-01';
+        $endDate   = $currentMonth == '00' ? date('Y-m-d', strtotime('+12 months', strtotime($startDate))) : date('Y-m-d', strtotime('+1 months', strtotime($startDate)));
 
         if($groupBy == 'category')
         {

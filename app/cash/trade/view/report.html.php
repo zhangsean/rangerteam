@@ -16,7 +16,8 @@
 <div class='panel panel-sm'>
   <div class='panel-heading'>
     <div class='date dropdown'>
-      <button type='button' class='btn btn-sm btn-default dropdown-toggle' data-toggle='dropdown'><?php echo $currentYear . $lang->year . $currentMonth . $lang->month;?> <span class="caret"></span></button>
+      <?php $currentMonthTip = $currentMonth == '00' ? '' : $currentMonth . $lang->month;?>
+      <button type='button' class='btn btn-sm btn-default dropdown-toggle' data-toggle='dropdown'><?php echo $currentYear . $lang->year . $currentMonthTip;?> <span class="caret"></span></button>
       <ul class='dropdown-menu'>
         <?php foreach($tradeYears as $tradeYear):?>
         <li class='dropdown-submenu'>
@@ -25,6 +26,7 @@
             <?php foreach($tradeMonths[$tradeYear] as $tradeMonth):?>
             <li><?php echo html::a(helper::createLink('trade', 'report', "date=$tradeYear$tradeMonth&currency=$currentCurrency"), $tradeMonth . $lang->month);?></li>
             <?php endforeach;?>
+            <li><?php echo html::a(helper::createLink('trade', 'report', "date={$tradeYear}00&currency=$currentCurrency"), $lang->trade->fullYear);?></li>
           </ul>
         </li>
         <?php endforeach;?>
@@ -82,13 +84,14 @@
       <?php foreach($chartDatas as $groupBy => $datas):?>
       <td>
         <div class='chart-wrapper text-center'>
-          <h5><?php echo $currentMonth . $lang->month . $lang->trade->$type . $lang->trade->chartList[$groupBy];?></h5>
+          <?php $dateTip = $currentMonth == '00' ? $currentYear . $lang->year : $currentMonth . $lang->month;?>
+          <h5><?php echo $dateTip . $lang->trade->$type . $lang->trade->chartList[$groupBy];?></h5>
           <div class='chart-canvas'><canvas id="<?php echo 'chart-' . $type . '-' . $groupBy;?>" width='320' height='140' data-responsive='true'></canvas></div>
         </div>
       </td>
       <td class='w-300px'>
         <div style="overflow:auto; max-height:250px" class='table-wrapper'>
-        <table class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='pie' data-target="<?php echo '#chart-' . $type . '-' . $groupBy;?>" data-animation='false'>
+          <table class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='pie' data-target="<?php echo '#chart-' . $type . '-' . $groupBy;?>" data-animation='false'>
             <thead>
               <tr>
                 <th class='w-20px'></th>

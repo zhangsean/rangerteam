@@ -59,6 +59,7 @@ $lang->trade->import      = 'Import';
 $lang->trade->export      = 'Export';
 $lang->trade->showImport  = 'Show result';
 $lang->trade->report      = 'Report';
+$lang->trade->fullYear    = 'Full year';
 
 $lang->trade->typeList['in']          = 'Income';
 $lang->trade->typeList['out']         = 'Expend';
