@@ -55,7 +55,7 @@
     <?php echo html::submitButton() . html::commonButton($lang->goback, 'reloadModal btn')?>
     <div id='duplicateError' class='hide'></div>
   </div>
-<form>
+</form>
 <div class='errorMessage hide'>
   <div class='alert alert-danger alert-dismissable'>
     <button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
