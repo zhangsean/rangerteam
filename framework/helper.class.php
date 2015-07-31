@@ -152,17 +152,21 @@ class helper
 
         /* Set the main model file and extension and hook pathes and files. */
         $mainModelFile = $app->getModulePath($appName, $moduleName) . 'model.php';
+        if(!file_exists($mainModelFile)) $mainModelFile = $app->getModulePath('sys', $moduleName) . 'model.php';
         $modelExtPath  = $app->getModuleExtPath($appName, $moduleName, 'model');
         $modelHookPath = $modelExtPath . 'hook/';
         $extFiles      = helper::ls($modelExtPath, '.php');
         $hookFiles     = helper::ls($modelHookPath, '.php');
+
+        /* Get ext's app name from realname. */
+        $extAppName = basename(dirname(dirname(dirname($modelExtPath))));
 
         /* If no extension files and no hook files, return the main file directly. */
         if(empty($extFiles) and empty($hookFiles)) return $mainModelFile;
 
         /* Else, judge whether needed update or not .*/
         $needUpdate      = false;
-        $mergedModelFile = $app->getTmpRoot() . 'model' . DS . $moduleName . '.php';
+        $mergedModelFile = $app->getTmpRoot() . 'model' . DS . $extAppName . '_' . $moduleName . '.php';
         $lastTime        = file_exists($mergedModelFile) ? filemtime($mergedModelFile) : 0;
 
         while(!$needUpdate)
