@@ -33,7 +33,7 @@
   </div>
   <?php endif;?>
 </div>
-<?php $sideClass = $this->cookie->tradeBrowseSide == 'hide' ? 'hide-side' : '';?>
+<?php $sideClass = $this->cookie->tradeListSide == 'hide' ? 'hide-side' : '';?>
 <div class='with-side <?php echo $sideClass?>'>
   <div class='side'>
     <a class='side-handle'><i class='icon-caret-left'></i></a>

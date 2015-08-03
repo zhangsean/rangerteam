@@ -41,12 +41,12 @@ $(document).ready(function()
         if($(this).parents('.with-side').hasClass('hide-side'))
         {
             $('.with-side').removeClass('hide-side');
-            $.cookie('tradeBrowseSide', 'show', {path: config.webRoot});
+            $.cookie('tradeListSide', 'show', {path: config.webRoot});
         }
         else
         {
             $('.with-side').addClass('hide-side');
-            $.cookie('tradeBrowseSide', 'hide', {path: config.webRoot});
+            $.cookie('tradeListSide', 'hide', {path: config.webRoot});
         }
         setTimeout(function(){$(window).scroll().resize()}, 300);
     });

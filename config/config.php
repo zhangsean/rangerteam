@@ -25,7 +25,7 @@ $config->timezone     = 'Asia/Shanghai';   // The time zone setting, for more se
 $config->cookiePath   = '/';               // The path of cookies.
 $config->webRoot      = getWebRoot();      // The web root.
 $config->checkVersion = true;              // Auto check for new version or not.
-$config->timeout      = 10 * 1000;         // The timeout of ajax request.
+$config->timeout      = 30 * 1000;         // The timeout of ajax request.
 
 /* The request settings. */
 $config->requestType = 'PATH_INFO';       // The request type: PATH_INFO|GET, if PATH_INFO, must use url rewrite.
