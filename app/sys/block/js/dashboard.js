@@ -61,6 +61,6 @@ function sortBlocks(orders)
             $(this).find('.panel-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
         });
 
-        messager.success(config.ordersSaved);
+        $.zui.messager.success(config.ordersSaved);
     });
 }

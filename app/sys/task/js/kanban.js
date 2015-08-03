@@ -19,7 +19,7 @@ $(function()
                     if(toBoard.data('key') == 'doing')  button = e.element.find('a[href*=start]');
                     if(!button || !button.length || button.prop('disabled')) 
                     {
-                        messager.danger(v.notAllowed);
+                        $.zui.messager.danger(v.notAllowed);
                         reloadDataTable();
                     }
 
@@ -42,7 +42,7 @@ $(function()
                         change,
                         function(response)
                         {
-                            if(response.result == 'success') messager.success(response.message);
+                            if(response.result == 'success') $.zui.messager.success(response.message);
                         },
                         'json'
                     )

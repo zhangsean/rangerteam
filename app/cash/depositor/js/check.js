@@ -7,7 +7,7 @@ $(document).ready(function()
         var btn = $(this);
         $.getJSON(btn.attr('href'), function(response)
         {
-            messager.success(response.message);
+            $.zui.messager.success(response.message);
             $('#submit').click(); 
         });
         return false;

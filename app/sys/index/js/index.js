@@ -88,7 +88,7 @@ function hiddenBlock(index)
             return false;
         }
         reloadHome();
-        messager.info(ipsLang["hiddenBlock"]);
+        $.zui.messager.info(ipsLang["hiddenBlock"]);
     })
 }
 
