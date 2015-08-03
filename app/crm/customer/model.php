@@ -413,7 +413,7 @@ class customerModel extends model
      */
     public function moveCustomerPool()
     {
-        $reserveDays = zget($this->config->customer->reserveDays, 0);
+        $reserveDays = isset($this->config->customer->reserveDays) ? $this->config->customer->reserveDays : 0;
         if($reserveDays == 0) return true;
         
         $reserveTime = date(DT_DATETIME1, strtotime("-{$reserveDays} day"));
