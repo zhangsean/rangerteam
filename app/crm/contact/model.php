@@ -83,7 +83,7 @@ class contactModel extends model
     {
         if($relation != 'provider')
         {
-            $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
+            $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
             if(empty($customerIdList)) return array();
         }
 

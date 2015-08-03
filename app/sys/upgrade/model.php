@@ -75,6 +75,9 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('2.1'));
             case '2_2':
                 $this->processTradeDesc();
+            case '2_3':
+                $this->processCustomerEditedDate();
+                $this->execSQL($this->getUpgradeFile('2.3'));
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -845,5 +848,47 @@ class upgradeModel extends model
         }
 
         return !dao::isError();
+    }
+
+    /**
+     * Process customer edited date when upgrade from 2.3.
+     * 
+     * @access public
+     * @return void
+     */
+    public function processCustomerEditedDate()
+    {
+        $customers = $this->loadModel('customer', 'crm')->getList();
+        foreach($customers as $customer)
+        {
+            $editedDate = $customer->editedDate;
+
+            $this->app->loadLang('order', 'crm');
+            $orders = $this->loadModel('order', 'crm')->getOrderForCustomer($customer->id);
+            foreach($orders as $order) 
+            {
+                if(!empty($order) and strtotime($order->editedDate) > strtotime($editedDate))  $editedDate = $order->editedDate;
+                if(!empty($order) and strtotime($order->createdDate) > strtotime($editedDate)) $editedDate = $order->createdDate;
+            }
+
+            $contracts = $this->loadModel('contract', 'crm')->getList($customer->id);
+            foreach($contracts as $contract) 
+            {
+                if(!empty($contract) and strtotime($contract->editedDate) > strtotime($editedDate))  $editedDate = $contract->editedDate;
+                if(!empty($contract) and strtotime($contract->createdDate) > strtotime($editedDate)) $editedDate = $contract->createdDate;
+            }
+
+            $this->app->loadLang('contact', 'crm');
+            $this->app->loadConfig('contact', 'crm');
+            $contacts = $this->loadModel('contact', 'crm')->getList($customer->id);
+            foreach($contacts as $contact) 
+            {
+                if(!empty($contact) and strtotime($contact->editedDate) > strtotime($editedDate))  $editedDate = $contact->editedDate;
+                if(!empty($contact) and strtotime($contact->createdDate) > strtotime($editedDate)) $editedDate = $contact->createdDate;
+            }
+
+            if($editedDate != $customer->editedDate) $this->dao->update(TABLE_CUSTOMER)->set('editedDate')->eq($editedDate)->where('id')->eq($customer->id)->exec();
+        }
+        return true;
     }
 }

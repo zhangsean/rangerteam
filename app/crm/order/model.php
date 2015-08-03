@@ -181,13 +181,13 @@ class orderModel extends model
      */
     public function getOrderForCustomer($customerID, $status = '')
     {
-        $orders = $this->dao->select('id, `plan`, customer, product, createdDate, currency')->from(TABLE_ORDER)
+        $orders = $this->dao->select('id, `plan`, customer, product, createdDate, currency, editedDate')->from(TABLE_ORDER)
             ->where(1)
             ->beginIF($customerID)->andWhere('customer')->eq($customerID)->fi()
             ->beginIF($status)->andWhere('status')->eq($status)->fi()
             ->fetchAll('id');
 
-        $customers = $this->loadModel('customer')->getPairs('client');
+        $customers = $this->loadModel('customer', 'crm')->getPairs('client');
 
         $this->setProductsForOrders($orders);
 
