@@ -108,4 +108,23 @@ class productModel extends model
 
         return commonModel::createChanges($oldProduct, $product);
     }
+
+    /**
+     * Check product is unique.
+     * 
+     * @param  string  $name
+     * @access public
+     * @return array
+     */
+    public function checkUnique($name)
+    {
+        if($name) $data = $this->dao->select('*')->from(TABLE_PRODUCT)->where('name')->eq($name)->fetch();
+        if(!empty($data))
+        {
+            $error = sprintf($this->lang->error->unique, $this->lang->product->name, html::a(helper::createLink('product', 'view', "productID={$data->id}"), $data->name, "target='_blank'"));
+            return array('result' => 'fail', 'error' => $error);
+        }
+
+        return array('result' => 'success');
+    }
 }

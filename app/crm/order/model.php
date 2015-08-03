@@ -262,6 +262,11 @@ class orderModel extends model
         if($this->post->createProduct)
         {
             if($this->post->productName == '') return array('result' => 'fail', 'message' => array('productName' => sprintf($this->lang->error->notempty, $this->lang->customer->name)));
+            if(!$this->post->continue) 
+            {
+                $result = $this->loadModel('product')->checkUnique($this->post->productName);
+                if($result['result'] == 'fail') return $result;
+            }
         }
         if(!$this->post->createCustomer and $this->post->createProduct)
         {
