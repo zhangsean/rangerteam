@@ -720,9 +720,9 @@ class trade extends control
             if(!isset($tradeMonths[$year])) $tradeMonths[$year] = array();
             if(!in_array($month, $tradeMonths[$year])) $tradeMonths[$year][] = $month;
 
-            krsort($tradeMonths[$year]);
+            sort($tradeMonths[$year]);
         }
-        ksort($tradeYears);
+        rsort($tradeYears);
 
         $currentYear  = current($tradeYears);
         $currentMonth = !empty($tradeMonths[$currentYear]) ? end($tradeMonths[$currentYear]) : '';
