@@ -14,8 +14,9 @@ $lang->setting->reset  = '恢复默认';
 $lang->setting->key    = '键';
 $lang->setting->value  = '值';
 
-$lang->setting->lang     = '自定义';
-$lang->setting->customer = '客户池设置';
+$lang->setting->lang = '自定义';
+
+$lang->setting->customerSetting = '客户池设置';
 
 $lang->setting->module = new stdClass();
 $lang->setting->module->user     = '员工角色';
@@ -68,5 +69,5 @@ $lang->setting->placeholder->lineList = new stdclass();
 $lang->setting->placeholder->lineList->key   = '数字和字母组合';
 $lang->setting->placeholder->lineList->value = '简短描述';
 
-$lang->setting->intoCustomerPool    = '进入客户池（天）';
-$lang->setting->intoCustomerPoolTip = '在设定天数内没有更新客户信息以及客户的未付款订单信息，该客户将自动进入客户池。值设为0时禁用此功能。';
+$lang->setting->reserveDays    = '进入客户池（天）';
+$lang->setting->reserveDaysTip = '在设定天数内没有更新客户信息（未签约客户），该客户将自动进入客户池。值设为0时禁用此功能。';

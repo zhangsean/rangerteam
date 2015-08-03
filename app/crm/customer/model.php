@@ -262,6 +262,21 @@ class customerModel extends model
     }
 
     /**
+     * Update editeddate. 
+     * 
+     * @param  int    $customerID 
+     * @access public
+     * @return void
+     */
+    public function updateEditedDate($customerID)
+    {
+        $this->dao->update(TABLE_CUSTOMER)
+            ->set('editedDate')->eq(helper::now())
+            ->where('id')->eq($customerID)
+            ->exec();
+    }
+
+    /**
      * Assign an customer to a member again.
      * 
      * @param  int    $customerID 
@@ -391,34 +406,23 @@ class customerModel extends model
     }
 
     /**
-     * Move customer to public if customer and his order longtime no edited.
+     * Move customer to public if customer longtime no edited.
      * 
      * @access public
      * @return void
      */
-    public function intoCustomerPool()
+    public function moveCustomerPool()
     {
-        $intoCustomerPool = zget($this->config->customer->intoCustomerPool, 0);
-        if($intoCustomerPool == 0) return true;
+        $reserveDays = zget($this->config->customer->reserveDays, 0);
+        if($reserveDays == 0) return true;
         
-        $startTime = date(DT_DATETIME1, strtotime("-{$intoCustomerPool} day"));
+        $reserveTime = date(DT_DATETIME1, strtotime("-{$reserveDays} day"));
         $customers = $this->dao->select('id')->from(TABLE_CUSTOMER)
-            ->where('editedDate')->lt($startTime)
+            ->where('editedDate')->lt($reserveTime)
+            ->andWhere('status')->in('potential,intension,failed')
             ->andWhere('public')->eq('0')
             ->andWhere('deleted')->eq('0')
             ->fetchAll('id');
-        if(empty($customers)) return true;
-
-        $unsetCustomers = $this->dao->select('customer')->from(TABLE_ORDER)
-            ->where('closedReason')->eq('payed')
-            ->andWhere('customer')->in(array_keys($customers))
-            ->andWhere('deleted')->eq('0')
-            ->orWhere('closedReason')->ne('payed')
-            ->andWhere('editedDate')->gt($startTime)
-            ->andWhere('customer')->in(array_keys($customers))
-            ->andWhere('deleted')->eq('0')
-            ->fetchAll('customer');
-        foreach($unsetCustomers as $key => $customer) unset($customers[$key]);
         if(empty($customers)) return true;
 
         $this->dao->update(TABLE_CUSTOMER)

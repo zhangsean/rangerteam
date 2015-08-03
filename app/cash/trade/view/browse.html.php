@@ -137,7 +137,7 @@
           </div>
           <?php echo $pager->get();?>
         </div>
-      </from>
+      </form>
     </div>
   </div>
 </div>

@@ -31,7 +31,7 @@ $lang->customer->menu->today        = '今天联系|customer|browse|mode=today';
 $lang->customer->menu->tomorrow     = '明天联系|customer|browse|mode=tomorrow';
 $lang->customer->menu->thisweek     = '本周内联系|customer|browse|mode=thisweek';
 $lang->customer->menu->thismonth    = '本月内联系|customer|browse|mode=thismonth';
-$lang->customer->menu->public       = '公共客户|customer|browse|mode=public';
+$lang->customer->menu->public       = '客户池|customer|browse|mode=public';
 $lang->customer->menu->report       = '报表|report|browse|module=customer';
 
 /* Menu of product module. */

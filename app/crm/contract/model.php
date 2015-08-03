@@ -192,6 +192,12 @@ class contractModel extends model
                 }
             }
 
+            /* Update customer info. */
+            $customer = new stdclass();
+            $customer->status = 'signed';
+            $customer->editedDate = helper::now();
+            $this->dao->update(TABLE_CUSTOMER)->data($customer)->where('id')->eq($contract->customer)->exec();
+
             $this->loadModel('file')->saveUpload('contract', $contractID);
 
             return $contractID;

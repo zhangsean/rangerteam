@@ -71,6 +71,7 @@ $lang->customer->typeList['personal']    = 'Personal';
 
 $lang->customer->statusList['potential'] = 'Potential';
 $lang->customer->statusList['intension'] = 'Intension';
+$lang->customer->statusList['signed']    = 'Signed';
 $lang->customer->statusList['payed']     = 'Payed';
 $lang->customer->statusList['failed']    = 'Failed';
 

@@ -101,6 +101,7 @@ class contact extends control
         if($_POST)
         {
             $return = $this->contact->update($contactID);
+            $this->loadModel('customer')->updateEditedDate($this->post->customer);
             $this->send($return);
         }
 

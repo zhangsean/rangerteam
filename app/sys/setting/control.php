@@ -106,15 +106,15 @@ class setting extends control
     {
         if($_POST)
         {
-            if($this->post->intoCustomerPool == '') $this->send(array('result' => 'fail', 'message' => array('intoCustomerPool' => sprintf($this->lang->error->notempty, $this->lang->setting->intoCustomerPool))));
-            $this->setting->setItem("system.crm.customer.intoCustomerPool", $this->post->intoCustomerPool);
+            if($this->post->reserveDays == '') $this->send(array('result' => 'fail', 'message' => array('reserveDays' => sprintf($this->lang->error->notempty, $this->lang->setting->reserveDays))));
+            $this->setting->setItem("system.crm.customer.reserveDays", $this->post->reserveDays);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
-        $intoCustomerPool = $this->setting->getItem('owner=system&app=crm&module=customer&key=intoCustomerPool');
-        if($intoCustomerPool == '') $intoCustomerPool = 0;
+        $reserveDays = $this->setting->getItem('owner=system&app=crm&module=customer&key=reserveDays');
+        if($reserveDays == '') $reserveDays = 0;
 
-        $this->view->intoCustomerPool = $intoCustomerPool;
+        $this->view->reserveDays = $reserveDays;
         $this->display();
     }
 }

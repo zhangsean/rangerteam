@@ -180,6 +180,7 @@ class order extends control
         if(!empty($_POST))
         {
             $this->order->close($orderID);
+            $this->loadModel('customer')->updateEditedDate($order->customer);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->loadModel('action')->create('order', $orderID, 'Closed', $this->post->closedNote, $this->lang->order->closedReasonList[$this->post->closedReason]);
@@ -208,6 +209,7 @@ class order extends control
         if(!empty($_POST))
         {
             $this->order->activate($orderID);
+            $this->loadModel('customer')->updateEditedDate($order->customer);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->loadModel('action')->create('order', $orderID, 'Activated', $this->post->comment);
             $this->loadModel('action')->create('customer', $order->customer, 'activateOrder', $this->post->comment, html::a($this->createLink('order', 'view', "orderID=$orderID"), $orderID));
@@ -264,6 +266,7 @@ class order extends control
         if($_POST)
         {
             $this->order->assign($orderID);
+            $this->loadModel('customer')->updateEditedDate($order->customer);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             if($this->post->assignedTo)

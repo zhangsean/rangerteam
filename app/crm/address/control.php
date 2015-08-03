@@ -51,6 +51,15 @@ class address extends control
         {
             $this->address->create($objectType, $objectID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            /* Update customer info. */
+            if($objectType == 'customer') $this->loadModel('customer')->updateEditedDate($objectID);
+            if($objectType == 'contact')
+            {
+                $contact = $this->loadModel('contact')->getByID($objectID);
+                if(isset($contact->customer)) $this->loadModel('customer')->updateEditedDate($contact->customer);
+            }
+
             $this->loadModel('action')->create($objectType, $objectID, "createAddress", '',  $this->post->title);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "objectType=$objectType&objectID=$objectID")));
         }
@@ -76,6 +85,14 @@ class address extends control
         {
             $changes = $this->address->update($addressID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            /* Update customer info. */
+            if($address->objectType == 'customer') $this->loadModel('customer')->updateEditedDate($address->objectID);
+            if($address->objectType == 'contact')
+            {
+                $contact = $this->loadModel('contact')->getByID($address->objectID);
+                if(isset($contact->customer)) $this->loadModel('customer')->updateEditedDate($contact->customer);
+            }
 
             if($changes)
             {

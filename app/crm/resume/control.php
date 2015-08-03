@@ -48,6 +48,10 @@ class resume extends control
         {
             $this->resume->create($contactID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            /* Update customer info. */
+            $this->loadModel('customer')->updateEditedDate($this->post->customer);
+
             $this->loadModel('action')->create('contact', $contactID, "createdResume", '', $this->post->newCustomer ? $this->post->name : $customers[$this->post->customer]);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
@@ -78,6 +82,9 @@ class resume extends control
         {
             $changes = $this->resume->update($resumeID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            /* Update customer info. */
+            $this->loadModel('customer')->updateEditedDate($resume->customer);
 
             if($changes)
             {
