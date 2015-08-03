@@ -9,14 +9,14 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->block->depositor = '付款帳號';
+$lang->block->depositor = '付款賬號';
 $lang->block->lblBlock  = '區塊';
 $lang->block->admin     = '管理區塊';
 $lang->block->num       = '數量';
 $lang->block->orderBy   = '排序';
 
 $lang->block->availableBlocks = new stdclass();
-$lang->block->availableBlocks->depositor = '付款帳號';
+$lang->block->availableBlocks->depositor = '付款賬號';
 $lang->block->availableBlocks->trade     = '賬目';
 $lang->block->availableBlocks->provider  = '供應商';
 

@@ -43,6 +43,7 @@ $lang->order->nextDate       = '下次聯繫';
 $lang->order->editedBy       = '最後修改';
 $lang->order->editedDate     = '最後修改日期';
 $lang->order->createCustomer = '新建';
+$lang->order->createProduct  = '新建';
 
 $lang->order->list          = '訂單列表';
 $lang->order->browse        = '瀏覽訂單';

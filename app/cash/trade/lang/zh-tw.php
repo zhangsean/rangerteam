@@ -59,6 +59,7 @@ $lang->trade->import      = '導入';
 $lang->trade->export      = '導出';
 $lang->trade->showImport  = '導入確認';
 $lang->trade->report      = '報表';
+$lang->trade->fullYear    = '全年';
 
 $lang->trade->typeList['in']          = '收入';
 $lang->trade->typeList['out']         = '支出';

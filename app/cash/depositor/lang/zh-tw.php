@@ -16,9 +16,9 @@ $lang->depositor->abbr            = '簡稱';
 $lang->depositor->serviceProvider = '服務商';
 $lang->depositor->bankProvider    = '開戶網點';
 $lang->depositor->title           = '賬戶名稱';
-$lang->depositor->account         = '開戶帳號';
+$lang->depositor->account         = '開戶賬號';
 $lang->depositor->bankcode        = '聯行號';
-$lang->depositor->public          = '對公帳號';
+$lang->depositor->public          = '對公賬號';
 $lang->depositor->type            = '類型';
 $lang->depositor->currency        = '貨幣類型';
 $lang->depositor->status          = '狀態';
@@ -28,11 +28,11 @@ $lang->depositor->editedBy        = '由誰編輯';
 $lang->depositor->editedDate      = '編輯時間';
 
 $lang->depositor->all         = '所有賬號';
-$lang->depositor->create      = '添加帳號';
+$lang->depositor->create      = '添加賬號';
 $lang->depositor->browse      = '瀏覽賬號';
-$lang->depositor->edit        = '編輯帳號';
-$lang->depositor->delete      = '刪除帳號';
-$lang->depositor->view        = '帳號詳情';
+$lang->depositor->edit        = '編輯賬號';
+$lang->depositor->delete      = '刪除賬號';
+$lang->depositor->view        = '賬號詳情';
 $lang->depositor->forbid      = '禁用';
 $lang->depositor->activate    = '激活';
 $lang->depositor->export      = '導出';
@@ -53,12 +53,12 @@ $lang->depositor->less          = "<span class='text-danger'>低於實際餘額 
 
 $lang->depositor->createBalance = '請先錄入賬號餘額。';
 
-$lang->depositor->typeList['cash']   = '現金帳號';
+$lang->depositor->typeList['cash']   = '現金賬號';
 $lang->depositor->typeList['bank']   = '借記卡';
 $lang->depositor->typeList['online'] = '在綫支付';
 
-$lang->depositor->publicList['1'] = '對公帳號';
-$lang->depositor->publicList['0'] = '個人帳號';
+$lang->depositor->publicList['1'] = '對公賬號';
+$lang->depositor->publicList['0'] = '個人賬號';
 
 $lang->depositor->providerList['']       = '';
 $lang->depositor->providerList['alipay'] = '支付寶';

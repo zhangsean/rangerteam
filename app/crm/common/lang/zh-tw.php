@@ -31,7 +31,7 @@ $lang->customer->menu->today        = '今天聯繫|customer|browse|mode=today';
 $lang->customer->menu->tomorrow     = '明天聯繫|customer|browse|mode=tomorrow';
 $lang->customer->menu->thisweek     = '本週內聯繫|customer|browse|mode=thisweek';
 $lang->customer->menu->thismonth    = '本月內聯繫|customer|browse|mode=thismonth';
-$lang->customer->menu->public       = '公共客戶|customer|browse|mode=public';
+$lang->customer->menu->public       = '客戶池|customer|browse|mode=public';
 $lang->customer->menu->report       = '報表|report|browse|module=customer';
 
 /* Menu of product module. */
@@ -91,6 +91,7 @@ $lang->setting->menu->area           = '區域設置|tree|browse|type=area|';
 $lang->setting->menu->industry       = '行業設置|tree|browse|type=industry|';
 $lang->setting->menu->currency       = '貨幣設置|setting|lang|module=common&field=currencyList';
 $lang->setting->menu->salesGroup     = array('link' => '銷售分組|sales|browse|', 'alias' => 'create,edit');
+$lang->setting->menu->customerPool   = '客戶池|setting|customer||';
 
 /* Menu of sales module. */
 $lang->sales = new stdclass();

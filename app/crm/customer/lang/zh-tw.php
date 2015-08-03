@@ -71,6 +71,7 @@ $lang->customer->typeList['personal']    = '個人個體';
 
 $lang->customer->statusList['potential'] = '潛在';
 $lang->customer->statusList['intension'] = '意向';
+$lang->customer->statusList['signed']    = '已簽約';
 $lang->customer->statusList['payed']     = '已付款';
 $lang->customer->statusList['failed']    = '失敗';
 

@@ -26,6 +26,7 @@ $lang->resume->browse = '瀏覽履歷';
 $lang->resume->delete = '刪除履歷';
 $lang->resume->create = '新增履歷';
 $lang->resume->edit   = '修改公司信息';
+$lang->resume->leave  = '離職';
 
 $lang->resume->showJoin = '入職：%s';
 $lang->resume->showLeft = ' 離職：%s';

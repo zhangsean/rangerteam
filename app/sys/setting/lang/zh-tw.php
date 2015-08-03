@@ -14,7 +14,9 @@ $lang->setting->reset  = '恢復預設';
 $lang->setting->key    = '鍵';
 $lang->setting->value  = '值';
 
-$lang->setting->lang   = '自定義';
+$lang->setting->lang = '自定義';
+
+$lang->setting->customerSetting = '客戶池設置';
 
 $lang->setting->module = new stdClass();
 $lang->setting->module->user     = '員工角色';
@@ -66,3 +68,6 @@ $lang->setting->placeholder->levelNameList->info  = '詳細描述';
 $lang->setting->placeholder->lineList = new stdclass();
 $lang->setting->placeholder->lineList->key   = '數字和字母組合';
 $lang->setting->placeholder->lineList->value = '簡短描述';
+
+$lang->setting->reserveDays    = '進入客戶池（天）';
+$lang->setting->reserveDaysTip = '在設定天數內沒有更新客戶信息（未簽約客戶），該客戶將自動進入客戶池。值設為0時禁用此功能。';
