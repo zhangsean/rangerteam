@@ -49,6 +49,8 @@ class user extends control
         {
             if(!$this->user->login($this->post->account, $this->post->password)) $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
 
+            /* Save sign in info. */
+            $this->loadModel('attendance', 'oa')->sign();
             /* Goto the referer or to the default module */
             if($this->post->referer != false and strpos($loginLink . $denyLink, $this->post->referer) === false)
             {
@@ -77,6 +79,9 @@ class user extends control
      */
     public function logout($referer = 0)
     {
+        /* Save sign out info. */
+        $this->loadModel('attendance', 'oa')->quit();
+
         session_destroy();
         setcookie('keepLogin', 'false', $this->config->cookieLife, $this->config->webRoot);
         $vars = !empty($referer) ? "referer=$referer" : '';

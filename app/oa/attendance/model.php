@@ -51,8 +51,11 @@ class attendanceModel extends model
      * @access public
      * @return bool
      */
-    public function sign($account, $date)
+    public function sign($account = '', $date = '')
     {
+        if($account == '') $account = $this->app->user->account;
+        if($date == '')    $date    = date('y-m-d');
+
         $attendance = $this->dao->select('*')->from(TABLE_ATTENDANCE)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
         if(empty($attendance))
         {
@@ -86,8 +89,11 @@ class attendanceModel extends model
      * @access public
      * @return bool
      */
-    public function quit($account, $date)
+    public function quit($account = '', $date = '')
     {
+        if($account == '') $account = $this->app->user->account;
+        if($date == '')    $date    = date('y-m-d');
+
         $attendance = $this->dao->select('*')->from(TABLE_ATTENDANCE)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
         if(empty($attendance))
         {
