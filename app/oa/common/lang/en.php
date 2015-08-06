@@ -13,10 +13,11 @@ $lang->app = new stdclass();
 $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
-$lang->menu->oa->dashboard = 'Dashboard|dashboard|index|';
-$lang->menu->oa->project   = 'Project|project|index|';
-$lang->menu->oa->announce  = 'Announce|announce|index|';
-$lang->menu->oa->doc       = 'Document|doc|index|';
+$lang->menu->oa->dashboard  = 'Dashboard|dashboard|index|';
+$lang->menu->oa->project    = 'Project|project|index|';
+$lang->menu->oa->announce   = 'Announce|announce|index|';
+$lang->menu->oa->doc        = 'Document|doc|index|';
+$lang->menu->oa->attendance = 'Attendance|attendance|personal|';
 
 $lang->dashboard = new stdclass();
 
@@ -35,3 +36,7 @@ $lang->announce->menu->category = 'Category|tree|browse|type=announce|';
 $lang->doc = new stdclass();
 $lang->doc->menu = new stdclass();
 $lang->doc->menu->create = 'Create Library|doc|createlib|';
+
+$lang->attendance = new stdclass();
+$lang->attendance->menu = new stdclass();
+$lang->attendance->menu->personal = 'My attendance|attendance|personal|';

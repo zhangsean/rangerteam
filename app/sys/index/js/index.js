@@ -2,6 +2,7 @@ $(function()
 {
     /* start ips */
     $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock, onDeleteEntry: deleteEntry, onUpdateEntryMenu: updateEntryMenu, onSortEntries: sortEntries}, config, ipsLang));
+    initAttendanceButton();
 });
 
 /**
@@ -120,6 +121,32 @@ function sortBlocks(orders)
             /* Update new index for block id edit and delete. */
             $this.attr('id', 'block' + index).attr('data-id', index).attr('data-url', createLink('block', 'printBlock', 'index=' + index));
             $this.find('.panel-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
+        });
+    });
+}
+
+/**
+ * init attendance sign in and sign out button.
+ * 
+ * @access public
+ * @return void
+ */
+function initAttendanceButton()
+{
+    $('.signin').click(function()
+    {
+        $.getJSON(createLink('oa.attendance', 'sign'), function(data)
+        {
+            if(data.result == 'success') $.zui.messager.success(data.message);
+            if(data.result == 'fail') $.zui.messager.info(data.message);
+        });
+    });
+    $('.signout').click(function()
+    {
+        $.getJSON(createLink('oa.attendance', 'quit'), function(data)
+        {
+            if(data.result == 'success') window.location.href = createLink('user', 'logout');
+            if(data.result == 'fail') $.zui.messager.info(data.message);
         });
     });
 }

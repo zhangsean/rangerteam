@@ -137,13 +137,15 @@ define('TABLE_SALESGROUP',    '`crm_salesgroup`');
 define('TABLE_SALESPRIV',     '`crm_salespriv`');
 
 /* Tables for oa. */
-define('TABLE_TODO',        '`oa_todo`');
-define('TABLE_PROJECT',     '`oa_project`');
-define('TABLE_EFFORT',      '`oa_effort`');
-define('TABLE_BOOK',        '`oa_book`');
-define('TABLE_LAYOUT',      '`oa_layout`');
-define('TABLE_DOC',         '`oa_doc`');
-define('TABLE_DOCLIB',      '`oa_doclib`');
+define('TABLE_TODO',             '`oa_todo`');
+define('TABLE_PROJECT',          '`oa_project`');
+define('TABLE_EFFORT',           '`oa_effort`');
+define('TABLE_BOOK',             '`oa_book`');
+define('TABLE_LAYOUT',           '`oa_layout`');
+define('TABLE_DOC',              '`oa_doc`');
+define('TABLE_DOCLIB',           '`oa_doclib`');
+define('TABLE_ATTENDANCE',       '`oa_attendance`');
+define('TABLE_ATTENDANCEREPAIR', '`oa_attendancerepair`');
 
 /* Tables for cash. */
 define('TABLE_DEPOSITOR', '`cash_depositor`');

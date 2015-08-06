@@ -13,10 +13,11 @@ $lang->app = new stdclass();
 $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
-$lang->menu->oa->dashboard = '我的地盘|dashboard|index|';
-$lang->menu->oa->project   = '项目|project|index|';
-$lang->menu->oa->announce  = '公告|announce|browse|';
-$lang->menu->oa->doc       = '文档|doc|browse|';
+$lang->menu->oa->dashboard  = '我的地盘|dashboard|index|';
+$lang->menu->oa->project    = '项目|project|index|';
+$lang->menu->oa->announce   = '公告|announce|browse|';
+$lang->menu->oa->doc        = '文档|doc|browse|';
+$lang->menu->oa->attendance = '考勤|attendance|personal|';
 
 $lang->dashboard = new stdclass();
 
@@ -35,3 +36,7 @@ $lang->announce->menu->category = '类目管理|tree|browse|type=announce|';
 $lang->doc = new stdclass();
 $lang->doc->menu = new stdclass();
 $lang->doc->menu->create = '添加文档库|doc|createlib|';
+
+$lang->attendance = new stdclass();
+$lang->attendance->menu = new stdclass();
+$lang->attendance->menu->personal = '我的考勤|attendance|personal|';
