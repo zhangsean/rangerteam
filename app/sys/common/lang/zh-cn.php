@@ -126,8 +126,8 @@ $lang->continueSave   = '继续保存';
 $lang->submitting     = '稍候...';
 $lang->yes            = '是';
 $lang->no             = '否';
-$lang->sign           = '签到';
-$lang->quit           = '签退';
+$lang->signIn         = '签到';
+$lang->signOut        = '签退';
 
 $lang->exportAll      = '导出全部记录';
 $lang->exportThisPage = '导出本页记录';

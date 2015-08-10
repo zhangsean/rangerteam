@@ -4,7 +4,7 @@ CREATE TABLE `oa_attendance` (
   `sign` datetime NOT NULL,
   `quit` datetime NOT NULL,
   `date` date NOT NULL,
-  `status` enum('unknown','normal','late','early','absenteeism','off','travel','holiday') NOT NULL DEFAULT 'unknown',
+  `status` enum('unknown','normal','late','early', 'lateEarly','absenteeism','off','travel','holiday') NOT NULL DEFAULT 'unknown',
   `account` char(30) NOT NULL,
   `extra` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),

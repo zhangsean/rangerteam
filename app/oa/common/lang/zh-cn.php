@@ -40,3 +40,4 @@ $lang->doc->menu->create = '添加文档库|doc|createlib|';
 $lang->attendance = new stdclass();
 $lang->attendance->menu = new stdclass();
 $lang->attendance->menu->personal = '我的考勤|attendance|personal|';
+$lang->attendance->menu->settings  = '设置|attendance|settings|';

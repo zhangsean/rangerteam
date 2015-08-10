@@ -20,45 +20,88 @@ class attendance extends control
      */
     public function personal($date = '')
     {
-        if($date == '' or strlen($date) != 6) $date = date('ym');
+        if($date == '' or strlen($date) != 6) $date = date('Ym');
         $currentYear  = substr($date, 0, 4);
         $currentMonth = substr($date, 4, 2);
-        $startDate    = strtotime("{$currentYear}-{$currentMonth}-01");
-        $endDate      = strtotime("+1 month", $startDate);
+        $startDate    = "{$currentYear}-{$currentMonth}-01";
+        $endDate      = date('Y-m-d', strtotime("$startDate +1 month"));
 
-        $account = $this->app->user->account;
-        $this->view->attendances = $this->attendance->getByAccount($account, $startDate, $endDate);
+        $dayNum      = (int)date('d', strtotime("$endDate -1 day"));
+        $weekNum     = (int)ceil($dayNum / 7);
+        $account     = $this->app->user->account;
+        $attendances = $this->attendance->getByAccount($account, $startDate, $endDate);
+
+        $yearList  = array();
+        $monthList = array();
+        $dateList  = $this->attendance->getAllDate();
+        foreach($dateList as $date)
+        {
+            $year  = substr($date->date, 0, 4);
+            $month = substr($date->date, 5, 2);
+            if(!isset($yearList[$year])) $yearList[$year] = $year;
+            if(!isset($monthList[$year][$month])) $monthList[$year][$month] = $month;
+        }
+
+        $this->view->attendances  = $attendances;
+        $this->view->dayNum       = $dayNum;
+        $this->view->weekNum      = $weekNum;
+        $this->view->currentYear  = $currentYear;
+        $this->view->currentMonth = $currentMonth;
+        $this->view->yearList     = $yearList;
+        $this->view->monthList    = $monthList;
         $this->display();
     }
 
     /**
-     * sign 
+     * Sign in. 
      * 
      * @access public
      * @return void
      */
-    public function sign()
+    public function signIn()
     {
         $account = $this->app->user->account;
         $date    = date('y-m-d');
-        $result  = $this->attendance->sign($account, $date);
-        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attendance->signFail));
-        $this->send(array('result' => 'success', 'message' => $this->lang->attendance->signSuccess));
+        $result  = $this->attendance->signIn($account, $date);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attendance->signInFail));
+        $this->send(array('result' => 'success', 'message' => $this->lang->attendance->signInSuccess));
     }
 
     /**
-     * quit 
+     * Sign out. 
      * 
      * @access public
      * @return void
      */
-    public function quit()
+    public function signOut()
     {
         $account = $this->app->user->account;
         $date    = date('y-m-d');
-        $result  = $this->attendance->quit($account, $date);
-        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attendance->quitFail));
-        $this->send(array('result' => 'success', 'message' => $this->lang->attendance->quitSuccess));
+        $result  = $this->attendance->signOut($account, $date);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attendance->signOutFail));
+        $this->send(array('result' => 'success', 'message' => $this->lang->attendance->signOutSuccess));
+    }
+
+    /**
+     * settings 
+     * 
+     * @access public
+     * @return void
+     */
+    public function settings()
+    {
+        if($_POST)
+        {
+            $settings = fixer::input('post')->get();
+            $this->loadModel('setting')->setItems('system.oa.attendance', $settings);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+        $this->view->latestSignInTime    = $this->config->attendance->latestSignInTime;
+        $this->view->earliestSignOutTime = $this->config->attendance->earliestSignOutTime;
+        $this->view->workingDaysPerWeek  = $this->config->attendance->workingDaysPerWeek;
+        $this->view->forcedSignOut       = $this->config->attendance->forcedSignOut;
+        $this->display();
     }
 }
 

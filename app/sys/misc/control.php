@@ -20,7 +20,7 @@ class misc extends control
     public function ping()
     {
         /* Save attendance info. */
-        $this->loadModel('attendance', 'oa')->quit();
+        $this->loadModel('attendance', 'oa')->signOut();
         die();
     }
 

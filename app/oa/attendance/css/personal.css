@@ -1,0 +1,17 @@
+.panel .no-padding{padding: 0px;}
+
+.attendance-unkown {}
+.attendance-normal [class^=attendance] {background: #DDF4DF}
+.attendance-late .attendance-signin {background: #FFF0D5;}
+.attendance-early .attendance-signout {background: #FFF0D5;}
+.attendance-lateEarly [class^=attendance] {background: #FFF0D5;}
+.attendance-absenteeism [class^=attendance] {background: #FFE5E0;}
+.attendance-off [class^=attendance] {background: #DDF4DF}
+.attendance-travel [class^=attendance] {background: #DDF4DF}
+.attendance-holiday [class^=attendance] {}
+
+.dropdown-submenu > .dropdown-menu {left: -100%;}
+.dropdown-submenu > a:after {content: ""; display: none;}
+.dropdown-submenu > a:before {content: " "; display: block; float: left; width: 0; height: 0; margin-top: 3px; margin-left: -10px; border-color: transparent; border-style: solid; border-width: 5px 5px 5px 0; border-right-color: #ccc;}
+.dropdown-menu > li > a, .dropdown-header {padding: 5px 15px 5px 25px}
+  

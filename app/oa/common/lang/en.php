@@ -40,3 +40,4 @@ $lang->doc->menu->create = 'Create Library|doc|createlib|';
 $lang->attendance = new stdclass();
 $lang->attendance->menu = new stdclass();
 $lang->attendance->menu->personal = 'My attendance|attendance|personal|';
+$lang->attendance->menu->settings = 'Setting|attendance|settings|';

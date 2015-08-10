@@ -135,7 +135,7 @@ function initAttendanceButton()
 {
     $('.signin').click(function()
     {
-        $.getJSON(createLink('oa.attendance', 'sign'), function(data)
+        $.getJSON(createLink('oa.attendance', 'signin'), function(data)
         {
             if(data.result == 'success') $.zui.messager.success(data.message);
             if(data.result == 'fail') $.zui.messager.info(data.message);
@@ -143,7 +143,7 @@ function initAttendanceButton()
     });
     $('.signout').click(function()
     {
-        $.getJSON(createLink('oa.attendance', 'quit'), function(data)
+        $.getJSON(createLink('oa.attendance', 'signout'), function(data)
         {
             if(data.result == 'success') window.location.href = createLink('user', 'logout');
             if(data.result == 'fail') $.zui.messager.info(data.message);

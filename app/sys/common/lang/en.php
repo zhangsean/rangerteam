@@ -126,8 +126,8 @@ $lang->continueSave   = 'Continue To Save';
 $lang->submitting     = 'Saving...';
 $lang->yes            = 'YES';
 $lang->no             = 'NO';
-$lang->sign           = 'Sign in';
-$lang->quit           = 'Sign out';
+$lang->signIn         = 'Sign in';
+$lang->signOut        = 'Sign out';
 
 $lang->exportAll      = 'Export All';
 $lang->exportThisPage = 'Export This Page';
