@@ -21,15 +21,15 @@ $lang->attend->signOutSuccess = 'Sign out success';
 $lang->attend->signInFail     = 'Sign in fail';
 $lang->attend->signOutFail    = 'Sign out fail';
 
-$lang->attend->latestSignInTime    = 'Latest time of sign in';
-$lang->attend->earliestSignOutTime = 'Earlies time of sign out';
-$lang->attend->workingDaysPerWeek  = 'Working days per week';
-$lang->attend->forcedSignOut       = 'Must sign out';
+$lang->attend->signInLimit    = 'Latest time of sign in';
+$lang->attend->signOutLimit = 'Earlies time of sign out';
+$lang->attend->workingDays  = 'Working days per week';
+$lang->attend->mustSignOut       = 'Must sign out';
 
-$lang->attend->workingDaysPerWeekList['5'] = "Monday ~ Friday";
-$lang->attend->workingDaysPerWeekList['6'] = "Monday ~ Saturday";
+$lang->attend->workingDaysList['5'] = "Monday ~ Friday";
+$lang->attend->workingDaysList['6'] = "Monday ~ Saturday";
 
-$lang->attend->forcedSignOutList['yes'] = 'need';
-$lang->attend->forcedSignOutList['no']  = 'not need';
+$lang->attend->mustSignOutList['yes'] = 'need';
+$lang->attend->mustSignOutList['no']  = 'not need';
 
 $lang->attend->weeks = array('First week', 'Second week', 'Third week', 'Fourth week', 'Fifth week');

@@ -1,6 +1,6 @@
 <?php
 if(!isset($comfig->attend)) $config->attend = new stdclass();
-$config->attend->latestSignInTime    = '10:00:00';
-$config->attend->earliestSignOutTime = '17:00:00';
-$config->attend->workingDaysPerWeek  = '5';
-$config->attend->forcedSignOut       = 'yes';
+$config->attend->signInLimit  = '9:00';
+$config->attend->signOutLimit = '18:00';
+$config->attend->workingDays  = '5';
+$config->attend->mustSignOut  = 'yes';

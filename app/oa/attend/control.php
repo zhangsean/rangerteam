@@ -152,10 +152,10 @@ class attend extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
-        $this->view->latestSignInTime    = $this->config->attend->latestSignInTime;
-        $this->view->earliestSignOutTime = $this->config->attend->earliestSignOutTime;
-        $this->view->workingDaysPerWeek  = $this->config->attend->workingDaysPerWeek;
-        $this->view->forcedSignOut       = $this->config->attend->forcedSignOut;
+        $this->view->signInLimit    = $this->config->attend->signInLimit;
+        $this->view->signOutLimit = $this->config->attend->signOutLimit;
+        $this->view->workingDays  = $this->config->attend->workingDays;
+        $this->view->mustSignOut       = $this->config->attend->mustSignOut;
         $this->display();
     }
 }

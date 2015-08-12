@@ -19,23 +19,23 @@
     <form id='ajaxForm' method='post'>
       <table class='table table-form table-condensed'>
       <tr>
-        <th class='w-150px'><?php echo $lang->attend->latestSignInTime?></th>
-        <td class='w-300px'><?php echo html::input('latestSignInTime', $latestSignInTime, "class='form-control'")?></td>
+        <th class='w-150px'><?php echo $lang->attend->signInLimit?></th>
+        <td class='w-300px'><?php echo html::input('signInLimit', $signInLimit, "class='form-control'")?></td>
         <td></td>
       </tr>
       <tr>
-        <th><?php echo $lang->attend->earliestSignOutTime?></th>
-        <td><?php echo html::input('earliestSignOutTime', $earliestSignOutTime, "class='form-control'")?></td>
+        <th><?php echo $lang->attend->signOutLimit?></th>
+        <td><?php echo html::input('signOutLimit', $signOutLimit, "class='form-control'")?></td>
         <td></td>
       </tr>
       <tr>
-        <th><?php echo $lang->attend->workingDaysPerWeek?></th>
-        <td><?php echo html::select('workingDaysPerWeek', $lang->attend->workingDaysPerWeekList, $workingDaysPerWeek, "class='form-control'")?></td>
+        <th><?php echo $lang->attend->workingDays?></th>
+        <td><?php echo html::select('workingDays', $lang->attend->workingDaysList, $workingDays, "class='form-control'")?></td>
         <td></td>
       </tr>
       <tr>
-        <th><?php echo $lang->attend->forcedSignOut?></th>
-        <td><?php echo html::radio('forcedSignOut', $lang->attend->forcedSignOutList, $forcedSignOut)?></td>
+        <th><?php echo $lang->attend->mustSignOut?></th>
+        <td><?php echo html::radio('mustSignOut', $lang->attend->mustSignOutList, $mustSignOut)?></td>
         <td></td>
       </tr>
       <tr><th></th><td clospan='2'><?php echo html::submitButton();?></td></tr>

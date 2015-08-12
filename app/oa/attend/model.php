@@ -92,7 +92,7 @@ class attendModel extends model
         /* get status and remove signout for today. */
         if($attend->date == helper::today()) 
         {
-            if(time() < strtotime("{$attend->date} {$this->config->attend->earliestSignOutTime}")) $attend->signOut = '0000-00-00 00:00:00';
+            if(time() < strtotime("{$attend->date} {$this->config->attend->signOutLimit}")) $attend->signOut = '0000-00-00 00:00:00';
             $status = $this->computeStatus($attend);
             if($status == 'early') $attend->status = 'normal';
             if($status == 'lateEarly') $attend->status = 'late';
@@ -231,7 +231,7 @@ class attendModel extends model
     {
         /* holiday */
         $dayIndex = date('w', strtotime($attend->date));
-        if($dayIndex >= $this->config->attend->workingDaysPerWeek) return 'holiday';
+        if($dayIndex >= $this->config->attend->workingDays) return 'holiday';
 
         /* travel, off */
 
@@ -240,10 +240,10 @@ class attendModel extends model
 
         /* late, early, lateEarly */
         $status = 'unknown';
-        if(strtotime($attend->signIn) > strtotime("{$attend->date} {$this->config->attend->latestSignInTime}")) $status = 'late';
-        if($this->config->attend->forcedSignOut == 'yes')
+        if(strtotime($attend->signIn) > strtotime("{$attend->date} {$this->config->attend->signInLimit}")) $status = 'late';
+        if($this->config->attend->mustSignOut == 'yes')
         {
-            if(strtotime($attend->signOut) <  strtotime("{$attend->date} {$this->config->attend->earliestSignOutTime}"))
+            if(strtotime($attend->signOut) <  strtotime("{$attend->date} {$this->config->attend->signOutLimit}"))
             {
                 $status = $status == 'late' ? 'lateEarly' : 'early';
             }

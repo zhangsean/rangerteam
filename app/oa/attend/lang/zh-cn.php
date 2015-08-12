@@ -31,15 +31,15 @@ $lang->attend->signInFail     = '签到失败';
 $lang->attend->signOutSuccess = '签退成功';
 $lang->attend->signOutFail    = '签退失败';
 
-$lang->attend->latestSignInTime    = '最晚签到时间';
-$lang->attend->earliestSignOutTime = '最早签退时间';
-$lang->attend->workingDaysPerWeek  = '每周工作天数';
-$lang->attend->forcedSignOut       = '必须签退';
+$lang->attend->signInLimit  = '最晚签到时间';
+$lang->attend->signOutLimit = '最早签退时间';
+$lang->attend->workingDays  = '每周工作天数';
+$lang->attend->mustSignOut  = '必须签退';
 
-$lang->attend->workingDaysPerWeekList['5'] = "周一～周五";
-$lang->attend->workingDaysPerWeekList['6'] = "周一～周六";
+$lang->attend->workingDaysList['5'] = "周一～周五";
+$lang->attend->workingDaysList['6'] = "周一～周六";
 
-$lang->attend->forcedSignOutList['yes'] = '需要';
-$lang->attend->forcedSignOutList['no']  = '不需要';
+$lang->attend->mustSignOutList['yes'] = '需要';
+$lang->attend->mustSignOutList['no']  = '不需要';
 
 $lang->attend->weeks = array('第一周', '第二周', '第三周', '第四周', '第五周');
