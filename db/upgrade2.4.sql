@@ -4,7 +4,7 @@ CREATE TABLE `oa_attend` (
   `account` char(30) NOT NULL,
   `date` date NOT NULL,
   `signIn` time NOT NULL,
-  `dignOut` time NOT NULL,
+  `signOut` time NOT NULL,
   `status` varchar(30) NOT NULL DEFAULT '',
   `ip` varchar(15) NOT NULL,
   `device` varchar(30) NOT NULL,

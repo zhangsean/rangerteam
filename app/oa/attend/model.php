@@ -34,15 +34,15 @@ class attendModel extends model
      */
     public function getByAccount($account, $startDate = '', $endDate = '')
     {
-        $this->updateStatus();
-
+        $this->processStatus();
         $attends = $this->dao->select('*')->from(TABLE_ATTEND)
             ->where('account')->eq($account)
             ->beginIf($startDate != '')->andWhere('`date`')->ge($startDate)->fi()
             ->beginIf($endDate != '')->andWhere('`date`')->lt($endDate)->fi()
             ->orderBy('`date`')
             ->fetchAll('date');
-        return $this->processAttendlist($attends);
+
+        return $this->processAttendList($attends);
     }
 
     /**
@@ -51,13 +51,12 @@ class attendModel extends model
      * @param  string $deptID
      * @param  string $startDate 
      * @param  string $endDate 
-     * @param  string $groupBy 
      * @access public
      * @return array
      */
-    public function getByDept($deptID, $startDate = '', $endDate = '', $groupBy = '')
+    public function getByDept($deptID, $startDate = '', $endDate = '')
     {
-        $this->updateStatus();
+        $this->processStatus();
         $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
 
         $attends = $this->dao->select('*')->from(TABLE_ATTEND)
@@ -66,22 +65,17 @@ class attendModel extends model
             ->beginIf($endDate != '')->andWhere('`date`')->lt($endDate)->fi()
             ->orderBy('`date`')
             ->fetchAll();
+        $attends = $this->processAttendList($attends);
 
-        if($groupBy != '')
-        {
-            $newAttends = array();
-            foreach($attends as $key => $attend)
-            {
-                $newAttends[$attend->$groupBy][$attend->date] = $attend; 
-            }
-            return $newAttends;
-        }
+        $newAttends = array();
+        foreach($attends as $key => $attend) $newAttends[$attend->account][$attend->date] = $attend; 
 
-        return $this->processAttendlist($attends);
+        foreach($newAttends as $userAttends) $userAttends = $this->fixUserAttendList($userAttends);
+        return $newAttends;
     }
 
     /**
-     * Process attend. 
+     * Process attend, add dayName, comput today's status.
      * 
      * @param  object $attend 
      * @access public
@@ -89,13 +83,13 @@ class attendModel extends model
      */
     public function processAttend($attend)
     {
-        /* get status and remove signout for today. */
+        /* Compute status and remove signOut if date is today. */
         if($attend->date == helper::today()) 
         {
-            if(time() < strtotime("{$attend->date} {$this->config->attend->signOutLimit}")) $attend->signOut = '0000-00-00 00:00:00';
+            if(time() < strtotime("{$attend->date} {$this->config->attend->signOutLimit}")) $attend->signOut = '00:00:00';
             $status = $this->computeStatus($attend);
             if($status == 'early') $attend->status = 'normal';
-            if($status == 'lateEarly') $attend->status = 'late';
+            if($status == 'both')  $attend->status = 'late';
         }
 
         $dayIndex = date('w', strtotime($attend->date));
@@ -117,14 +111,65 @@ class attendModel extends model
     }
 
     /**
-     * Get date pairs. 
+     * Fix user's attendlist, add default data if no this date record. 
+     * 
+     * @param  array $attends 
+     * @access public
+     * @return void
+     */
+    public function fixUserAttendList($attends)
+    {
+        $startDate = '0000-00-00';
+        $endDate   = '0000-00-00';
+        $account   = '';
+        /* Get account, start date and end date. */
+        foreach($attends as $attend)
+        {
+            if(strtotime($attend->date) < strtotime($startDate) or $startDate == '0000-00-00') $startDate = $attend->date;
+            if(strtotime($attend->date) > strtotime($endDate)) $endDate   = $attend->date;
+            if($account == '') $account = $attend->account;
+        }
+
+        /* Add data if not set. */
+        while(strtotime($startDate) < strtotime($endDate))
+        {
+            if(!isset($attends[$startDate]))
+            {
+                $attend = new stdclass();
+                $attend->account = $account;
+                $attend->date    = $startDate;
+                $attend->signIn  = '00:00:00';
+                $attend->signOut = '00:00:00';
+                $attend->status  = '';
+                $attend->ip      = '';
+                $attend->device  = '';
+                $attends[$startDate] = $attend;
+            }
+            $startDate = date("Y-m-d", strtotime("$startDate +1 day"));
+        }
+
+        return $attends;
+    }
+
+    /**
+     * Get all month data.
+     * return array[year][month]
      * 
      * @access public
      * @return array
      */
-    public function getAllDate()
+    public function getAllMonth()
     {
-        return $this->dao->select('date')->from(TABLE_ATTEND)->groupBy('date')->orderBy('date_asc')->fetchAll('date');
+        $dateList = $this->dao->select('date')->from(TABLE_ATTEND)->groupBy('date')->orderBy('date_asc')->fetchAll();
+
+        $monthList = array();
+        foreach($dateList as $date)
+        {
+            $year  = substr($date->date, 0, 4);
+            $month = substr($date->date, 5, 2);
+            if(!isset($monthList[$year][$month])) $monthList[$year][$month] = $month;
+        }
+        return $monthList;
     }
 
     /**
@@ -138,7 +183,7 @@ class attendModel extends model
     public function signIn($account = '', $date = '')
     {
         if($account == '') $account = $this->app->user->account;
-        if($date == '')    $date    = date('y-m-d');
+        if($date == '')    $date    = date('Y-m-d');
 
         $attend = $this->dao->select('*')->from(TABLE_ATTEND)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
         if(empty($attend))
@@ -146,7 +191,7 @@ class attendModel extends model
             $attend = new stdclass();
             $attend->account = $account;
             $attend->date    = $date;
-            $attend->signIn  = helper::now();
+            $attend->signIn  = helper::time();
             $this->dao->insert(TABLE_ATTEND)
                 ->data($attend)
                 ->autoCheck()
@@ -157,11 +202,12 @@ class attendModel extends model
         if($attend->signIn == '')
         {
             $this->dao->update(TABLE_ATTEND)
-                ->set('signIn')->eq(helper::now)
+                ->set('signIn')->eq(helper::time())
                 ->where('id')->eq($attend->id)
                 ->exec();
             return !dao::isError();
         }
+
         return true;
     }
 
@@ -176,7 +222,7 @@ class attendModel extends model
     public function signOut($account = '', $date = '')
     {
         if($account == '') $account = $this->app->user->account;
-        if($date == '')    $date    = date('y-m-d');
+        if($date == '')    $date    = date('Y-m-d');
 
         $attend = $this->dao->select('*')->from(TABLE_ATTEND)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
         if(empty($attend))
@@ -184,7 +230,7 @@ class attendModel extends model
             $attend = new stdclass();
             $attend->account = $account;
             $attend->date    = $date;
-            $attend->signOut = helper::now();
+            $attend->signOut = helper::time();
             $this->dao->insert(TABLE_ATTEND)
                 ->data($attend)
                 ->autoCheck()
@@ -193,7 +239,7 @@ class attendModel extends model
         }
 
         $this->dao->update(TABLE_ATTEND)
-            ->set('signOut')->eq(helper::now())
+            ->set('signOut')->eq(helper::time())
             ->where('id')->eq($attend->id)
             ->exec();
         return !dao::isError();
@@ -205,10 +251,10 @@ class attendModel extends model
      * @access public
      * @return bool
      */
-    public function updateStatus()
+    public function processStatus()
     {
         $attends = $this->dao->select('*')->from(TABLE_ATTEND)
-            ->where('status')->eq('unknown')
+            ->where('status')->eq('')
             ->andWhere('date')->lt(helper::today())
             ->fetchAll('id');
 
@@ -229,29 +275,26 @@ class attendModel extends model
      */
     public function computeStatus($attend)
     {
-        /* holiday */
+        /* 'rest', rest day. */
         $dayIndex = date('w', strtotime($attend->date));
-        if($dayIndex >= $this->config->attend->workingDays) return 'holiday';
+        if($dayIndex >= $this->config->attend->workingDays) return 'rest';
 
-        /* travel, off */
+        /* 'leave', ask for leave. 'trip', biz trip. */
 
-        /* absenteeism */
-        if($attend->signIn == "0000-00-00 00:00:00" and $attend->signOut == "0000-00-00 00:00:00") return 'absenteeism';
+        /* 'absent', absenteeism */
+        if($attend->signIn == "00:00:00" and $attend->signOut == "00:00:00") return 'absent';
 
-        /* late, early, lateEarly */
-        $status = 'unknown';
-        if(strtotime($attend->signIn) > strtotime("{$attend->date} {$this->config->attend->signInLimit}")) $status = 'late';
+        /* normal, late, early, both */
+        $status = 'normal';
+        if(strtotime("{$attend->date} {$attend->signIn}") > strtotime("{$attend->date} {$this->config->attend->signInLimit}")) $status = 'late';
         if($this->config->attend->mustSignOut == 'yes')
         {
-            if(strtotime($attend->signOut) <  strtotime("{$attend->date} {$this->config->attend->signOutLimit}"))
+            if(strtotime("{$attend->date} {$attend->signOut}") <  strtotime("{$attend->date} {$this->config->attend->signOutLimit}"))
             {
-                $status = $status == 'late' ? 'lateEarly' : 'early';
+                $status = $status == 'late' ? 'both' : 'early';
             }
         }
-        if($status != 'unknown') return $status;
-
-        /* normal */
-        return 'normal';
+        return $status;
     }
 }
 

@@ -31,7 +31,7 @@ class userModel extends model
             ->beginIF($dept != 0)->andWhere('dept')->in($dept)->fi()
             ->orderBy($orderBy)
             ->page($pager)
-            ->fetchAll();          
+            ->fetchAll();
     }
 
     /**

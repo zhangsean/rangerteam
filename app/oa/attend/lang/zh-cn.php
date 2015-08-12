@@ -16,15 +16,22 @@ $lang->attend->extra    = '其他信息';
 $lang->attend->dayName  = '星期';
 $lang->attend->report   = '考勤表';
 
-$lang->attend->statusList['normal'] = '';
-$lang->attend->statusList['late'] = '';
-$lang->attend->statusList['early'] = '';
-$lang->attend->statusList['lateEarly'] = '';
-$lang->attend->statusList[''] = '';
-$lang->attend->statusList[] = '';
-$lang->attend->statusList[] = '';
-$lang->attend->statusList[] = '';
-$lang->attend->statusList[] = '';
+$lang->attend->statusList['normal'] = '正常';
+$lang->attend->statusList['late']   = '迟到';
+$lang->attend->statusList['early']  = '早退';
+$lang->attend->statusList['both']   = '迟到+早退';
+$lang->attend->statusList['absent'] = '矿工';
+$lang->attend->statusList['leave']  = '请假';
+$lang->attend->statusList['trip']   = '出差';
+$lang->attend->statusList['rest']   = '假期';
+
+$lang->attend->reasonlist['normal'] = '正常';
+$lang->attend->reasonlist['trip']   = '出差';
+$lang->attend->reasonlist['leave']  = '请假';
+
+$lang->attend->reviewList['wait']   = '等待审核';
+$lang->attend->reviewList['pass']   = '批准';
+$lang->attend->reviewList['reject'] = '拒绝';
 
 $lang->attend->inSuccess  = '签到成功';
 $lang->attend->inFail     = '签到失败';

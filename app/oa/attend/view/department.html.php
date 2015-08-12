@@ -46,4 +46,3 @@
   <?php endforeach;?>
 </table>
 <?php include '../../common/view/footer.html.php';?>
-

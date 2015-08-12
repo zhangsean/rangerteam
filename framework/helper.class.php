@@ -400,6 +400,17 @@ class helper
     }
 
     /**
+     *  Get now time use the DT_TIME1 constant defined in the lang file.
+     * 
+     * @access  public
+     * @return  date  today
+     */
+    static public function time()
+    {
+        return date(DT_TIME1);
+    }
+
+    /**
      *  Judge a date is zero or not.
      * 
      * @access  public
