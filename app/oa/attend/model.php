@@ -20,7 +20,7 @@ class attendModel extends model
      */
     public function getByID($attendID)
     {
-        return $this->dao->select('*')->from(TABLE_ATTENDANCE)->where('ID')->eq($attendID)->fetch();
+        return $this->dao->select('*')->from(TABLE_ATTEND)->where('ID')->eq($attendID)->fetch();
     }
 
     /**
@@ -36,7 +36,7 @@ class attendModel extends model
     {
         $this->updateStatus();
 
-        $attends = $this->dao->select('*')->from(TABLE_ATTENDANCE)
+        $attends = $this->dao->select('*')->from(TABLE_ATTEND)
             ->where('account')->eq($account)
             ->beginIf($startDate != '')->andWhere('`date`')->ge($startDate)->fi()
             ->beginIf($endDate != '')->andWhere('`date`')->lt($endDate)->fi()
@@ -60,7 +60,7 @@ class attendModel extends model
         $this->updateStatus();
         $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
 
-        $attends = $this->dao->select('*')->from(TABLE_ATTENDANCE)
+        $attends = $this->dao->select('*')->from(TABLE_ATTEND)
             ->where('account')->in(array_keys($users))
             ->beginIf($startDate != '')->andWhere('`date`')->ge($startDate)->fi()
             ->beginIf($endDate != '')->andWhere('`date`')->lt($endDate)->fi()
@@ -124,7 +124,7 @@ class attendModel extends model
      */
     public function getAllDate()
     {
-        return $this->dao->select('date')->from(TABLE_ATTENDANCE)->groupBy('date')->orderBy('date_asc')->fetchAll('date');
+        return $this->dao->select('date')->from(TABLE_ATTEND)->groupBy('date')->orderBy('date_asc')->fetchAll('date');
     }
 
     /**
@@ -140,14 +140,14 @@ class attendModel extends model
         if($account == '') $account = $this->app->user->account;
         if($date == '')    $date    = date('y-m-d');
 
-        $attend = $this->dao->select('*')->from(TABLE_ATTENDANCE)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
+        $attend = $this->dao->select('*')->from(TABLE_ATTEND)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
         if(empty($attend))
         {
             $attend = new stdclass();
             $attend->account = $account;
             $attend->date    = $date;
             $attend->signIn  = helper::now();
-            $this->dao->insert(TABLE_ATTENDANCE)
+            $this->dao->insert(TABLE_ATTEND)
                 ->data($attend)
                 ->autoCheck()
                 ->exec();
@@ -156,7 +156,7 @@ class attendModel extends model
 
         if($attend->signIn == '')
         {
-            $this->dao->update(TABLE_ATTENDANCE)
+            $this->dao->update(TABLE_ATTEND)
                 ->set('signIn')->eq(helper::now)
                 ->where('id')->eq($attend->id)
                 ->exec();
@@ -178,21 +178,21 @@ class attendModel extends model
         if($account == '') $account = $this->app->user->account;
         if($date == '')    $date    = date('y-m-d');
 
-        $attend = $this->dao->select('*')->from(TABLE_ATTENDANCE)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
+        $attend = $this->dao->select('*')->from(TABLE_ATTEND)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
         if(empty($attend))
         {
             $attend = new stdclass();
             $attend->account = $account;
             $attend->date    = $date;
             $attend->signOut = helper::now();
-            $this->dao->insert(TABLE_ATTENDANCE)
+            $this->dao->insert(TABLE_ATTEND)
                 ->data($attend)
                 ->autoCheck()
                 ->exec();
             return !dao::isError();
         }
 
-        $this->dao->update(TABLE_ATTENDANCE)
+        $this->dao->update(TABLE_ATTEND)
             ->set('signOut')->eq(helper::now())
             ->where('id')->eq($attend->id)
             ->exec();
@@ -207,7 +207,7 @@ class attendModel extends model
      */
     public function updateStatus()
     {
-        $attends = $this->dao->select('*')->from(TABLE_ATTENDANCE)
+        $attends = $this->dao->select('*')->from(TABLE_ATTEND)
             ->where('status')->eq('unknown')
             ->andWhere('date')->lt(helper::today())
             ->fetchAll('id');
@@ -215,7 +215,7 @@ class attendModel extends model
         foreach($attends as $attend)
         {
             $status = $this->computeStatus($attend);
-            $this->dao->update(TABLE_ATTENDANCE)->set('status')->eq($status)->where('id')->eq($attend->id)->exec();
+            $this->dao->update(TABLE_ATTEND)->set('status')->eq($status)->where('id')->eq($attend->id)->exec();
         }
         return true;
     }

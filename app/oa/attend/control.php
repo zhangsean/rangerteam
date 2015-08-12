@@ -26,9 +26,9 @@ class attend extends control
         $startDate    = "{$currentYear}-{$currentMonth}-01";
         $endDate      = date('Y-m-d', strtotime("$startDate +1 month"));
 
-        $dayNum      = (int)date('d', strtotime("$endDate -1 day"));
-        $weekNum     = (int)ceil($dayNum / 7);
-        $account     = $this->app->user->account;
+        $dayNum  = (int)date('d', strtotime("$endDate -1 day"));
+        $weekNum = (int)ceil($dayNum / 7);
+        $account = $this->app->user->account;
         $attends = $this->attend->getByAccount($account, $startDate, $endDate);
 
         $yearList  = array();
