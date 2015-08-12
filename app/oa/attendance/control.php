@@ -53,6 +53,61 @@ class attendance extends control
     }
 
     /**
+     * department's attendance. 
+     * 
+     * @param  string $date 
+     * @access public
+     * @return void
+     */
+    public function department($date = '', $dept = '')
+    {
+        if($date == '' or strlen($date) != 6) $date = date('Ym');
+        $currentYear  = substr($date, 0, 4);
+        $currentMonth = substr($date, 4, 2);
+        $startDate    = "{$currentYear}-{$currentMonth}-01";
+        $endDate      = date('Y-m-d', strtotime("$startDate +1 month"));
+
+        $deptList = $this->loadModel('tree')->getDeptByAccount($this->app->user->account);
+        if(empty($deptList)) 
+        {
+            $this->display();
+        }
+        if($dept == '' or !isset($deptList[$dept])) $dept = current($deptList)->id;
+
+        $dayNum      = (int)date('d', strtotime("$endDate -1 day"));
+        $weekNum     = (int)ceil($dayNum / 7);
+        $account     = $this->app->user->account;
+        $attendances = $this->attendance->getByDept($dept, $startDate, $endDate, 'account');
+
+        $yearList  = array();
+        $monthList = array();
+        $dateList  = $this->attendance->getAllDate();
+        foreach($dateList as $date)
+        {
+            $year  = substr($date->date, 0, 4);
+            $month = substr($date->date, 5, 2);
+            if(!isset($yearList[$year])) $yearList[$year] = $year;
+            if(!isset($monthList[$year][$month])) $monthList[$year][$month] = $month;
+        }
+
+        $newUsers = array();
+        $users    = $this->loadMOdel('user')->getList($dept);
+        foreach($users as $key => $user) $newUsers[$user->account] = $user;
+
+        $this->view->attendances  = $attendances;
+        $this->view->dayNum       = $dayNum;
+        $this->view->weekNum      = $weekNum;
+        $this->view->currentYear  = $currentYear;
+        $this->view->currentMonth = $currentMonth;
+        $this->view->currentDept  = $dept;
+        $this->view->yearList     = $yearList;
+        $this->view->monthList    = $monthList;
+        $this->view->deptList     = $deptList;
+        $this->view->users        = $newUsers;
+        $this->display();
+    }
+
+    /**
      * Sign in. 
      * 
      * @access public
@@ -61,7 +116,7 @@ class attendance extends control
     public function signIn()
     {
         $account = $this->app->user->account;
-        $date    = date('y-m-d');
+        $date    = date('Y-m-d');
         $result  = $this->attendance->signIn($account, $date);
         if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attendance->signInFail));
         $this->send(array('result' => 'success', 'message' => $this->lang->attendance->signInSuccess));
@@ -76,7 +131,7 @@ class attendance extends control
     public function signOut()
     {
         $account = $this->app->user->account;
-        $date    = date('y-m-d');
+        $date    = date('Y-m-d');
         $result  = $this->attendance->signOut($account, $date);
         if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attendance->signOutFail));
         $this->send(array('result' => 'success', 'message' => $this->lang->attendance->signOutSuccess));
@@ -104,4 +159,3 @@ class attendance extends control
         $this->display();
     }
 }
-

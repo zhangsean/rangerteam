@@ -170,6 +170,21 @@ class treeModel extends model
     }
 
     /**
+     * get dept by account. 
+     * 
+     * @param  int    $account 
+     * @access public
+     * @return void
+     */
+    public function getDeptByAccount($account)
+    {
+        return $this->dao->select('*')->from(TABLE_CATEGORY)
+            ->where('rights')->eq(",$account,")
+            ->andWhere('type')->eq('dept')
+            ->fetchAll('id');
+    }
+
+    /**
      * Build the sql to execute.
      * 
      * @param string $type              the tree type, for example, article|forum

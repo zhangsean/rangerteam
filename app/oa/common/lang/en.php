@@ -39,5 +39,7 @@ $lang->doc->menu->create = 'Create Library|doc|createlib|';
 
 $lang->attendance = new stdclass();
 $lang->attendance->menu = new stdclass();
-$lang->attendance->menu->personal = 'My attendance|attendance|personal|';
-$lang->attendance->menu->settings = 'Setting|attendance|settings|';
+$lang->attendance->menu->personal   = 'My attendance|attendance|personal|';
+$lang->attendance->menu->department = 'Department attendance|attendance|department|';
+$lang->attendance->menu->company    = 'Company attendance|attendance|personal|';
+$lang->attendance->menu->settings   = 'Setting|attendance|settings|';

@@ -1,8 +1,10 @@
 <?php
 if(!isset($lang->attendance)) $lang->attendance = new stdclass();
-$lang->attendance->common   = '考勤';
-$lang->attendance->personal = '我的考勤';
-$lang->attendance->settings = '设置';
+$lang->attendance->common     = '考勤';
+$lang->attendance->personal   = '我的考勤';
+$lang->attendance->department = '部门考勤';
+$lang->attendance->company    = '公司考勤';
+$lang->attendance->settings   = '设置';
 
 $lang->attendance->id       = '编号';
 $lang->attendance->signIn   = '签到';
@@ -12,6 +14,17 @@ $lang->attendance->status   = '状态';
 $lang->attendance->account  = '用户';
 $lang->attendance->extra    = '其他信息';
 $lang->attendance->dayName  = '星期';
+$lang->attendance->report   = '考勤表';
+
+$lang->attendance->statusList['normal'] = '';
+$lang->attendance->statusList['late'] = '';
+$lang->attendance->statusList['early'] = '';
+$lang->attendance->statusList['lateEarly'] = '';
+$lang->attendance->statusList[''] = '';
+$lang->attendance->statusList[] = '';
+$lang->attendance->statusList[] = '';
+$lang->attendance->statusList[] = '';
+$lang->attendance->statusList[] = '';
 
 $lang->attendance->signInSuccess  = '签到成功';
 $lang->attendance->signInFail     = '签到失败';

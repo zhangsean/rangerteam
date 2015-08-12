@@ -45,7 +45,7 @@
             <th class='text-center'><?php echo $lang->attendance->signOut;?></th>
           </tr>
           <?php $startDay = $weekIndex * 7 + 1;?>
-          <?php for($day = $startDay; $day < $dayNum and $day < $startDay + 7; $day++):?>
+          <?php for($day = $startDay; $day <= $dayNum and $day < $startDay + 7; $day++):?>
             <?php $currentDate = $day < 10 ? "{$currentYear}-{$currentMonth}-0{$day}" : "{$currentYear}-{$currentMonth}-{$day}";?>
             <?php if(isset($attendances[$currentDate])):?>
             <tr class="attendance-<?php echo $attendances[$currentDate]->status?>">

@@ -46,6 +46,41 @@ class attendanceModel extends model
     }
 
     /**
+     * Get department's attendance list. 
+     * 
+     * @param  string $deptID
+     * @param  string $startDate 
+     * @param  string $endDate 
+     * @param  string $groupBy 
+     * @access public
+     * @return array
+     */
+    public function getByDept($deptID, $startDate = '', $endDate = '', $groupBy = '')
+    {
+        $this->updateStatus();
+        $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
+
+        $attendances = $this->dao->select('*')->from(TABLE_ATTENDANCE)
+            ->where('account')->in(array_keys($users))
+            ->beginIf($startDate != '')->andWhere('`date`')->ge($startDate)->fi()
+            ->beginIf($endDate != '')->andWhere('`date`')->lt($endDate)->fi()
+            ->orderBy('`date`')
+            ->fetchAll();
+
+        if($groupBy != '')
+        {
+            $newAttendances = array();
+            foreach($attendances as $key => $attendance)
+            {
+                $newAttendances[$attendance->$groupBy][$attendance->date] = $attendance; 
+            }
+            return $newAttendances;
+        }
+
+        return $this->processAttendancelist($attendances);
+    }
+
+    /**
      * Process attendance. 
      * 
      * @param  object $attendance 

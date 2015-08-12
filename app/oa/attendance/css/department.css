@@ -1,0 +1,9 @@
+.attendance-unkown {}
+.attendance-normal [class^=attendance] {background: #DDF4DF}
+.attendance-late .attendance-signin {background: #FFF0D5;}
+.attendance-early .attendance-signout {background: #FFF0D5;}
+.attendance-lateEarly [class^=attendance] {background: #FFF0D5;}
+.attendance-absenteeism [class^=attendance] {background: #FFE5E0;}
+.attendance-off [class^=attendance] {background: #DDF4DF}
+.attendance-travel [class^=attendance] {background: #DDF4DF}
+.attendance-holiday [class^=attendance] {}

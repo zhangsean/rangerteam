@@ -39,5 +39,7 @@ $lang->doc->menu->create = '添加文档库|doc|createlib|';
 
 $lang->attendance = new stdclass();
 $lang->attendance->menu = new stdclass();
-$lang->attendance->menu->personal = '我的考勤|attendance|personal|';
-$lang->attendance->menu->settings  = '设置|attendance|settings|';
+$lang->attendance->menu->personal   = '我的考勤|attendance|personal|';
+$lang->attendance->menu->department = '部门考勤|attendance|department|';
+$lang->attendance->menu->company    = '公司考勤|attendance|personal|';
+$lang->attendance->menu->settings   = '设置|attendance|settings|';
