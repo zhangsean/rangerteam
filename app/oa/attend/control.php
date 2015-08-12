@@ -63,7 +63,7 @@ class attend extends control
         $yearList  = array_keys($monthList);
 
         $attends  = array();
-        $deptList = $this->loadModel('tree')->getDeptByAccount($this->app->user->account);
+        $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
         if(!empty($deptList)) 
         {
             if($dept == '' or !isset($deptList[$dept])) $dept = current($deptList)->id;

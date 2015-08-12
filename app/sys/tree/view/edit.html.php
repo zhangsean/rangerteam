@@ -34,7 +34,7 @@ $themeRoot = $webRoot . "theme/";
       <?php if($category->type == 'dept'):?>
       <div class='form-group'> 
         <label class='col-md-2 control-label'><?php echo $lang->category->moderators;?></label>
-        <div class='col-md-4'><?php echo html::select('rights', $users, $category->rights, "class='chosen form-control'");?></div>
+        <div class='col-md-4'><?php echo html::select('moderators[]', $users, $category->moderators, "class='chosen form-control'");?></div>
       </div>
       <?php endif;?>
       <div class='form-group'> 

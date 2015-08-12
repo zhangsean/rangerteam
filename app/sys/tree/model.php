@@ -170,16 +170,16 @@ class treeModel extends model
     }
 
     /**
-     * get dept by account. 
+     * Get departments managed by me.
      * 
-     * @param  int    $account 
+     * @param  string $account 
      * @access public
      * @return void
      */
-    public function getDeptByAccount($account)
+    public function getDeptManagedByMe($account)
     {
         return $this->dao->select('*')->from(TABLE_CATEGORY)
-            ->where('rights')->eq(",$account,")
+            ->where('moderators')->eq(",$account,")
             ->andWhere('type')->eq('dept')
             ->fetchAll('id');
     }
