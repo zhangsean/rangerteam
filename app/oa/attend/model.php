@@ -42,6 +42,7 @@ class attendModel extends model
             ->orderBy('`date`')
             ->fetchAll('date');
 
+        $attends = $this->fixUserAttendList($attends);
         return $this->processAttendList($attends);
     }
 
@@ -65,13 +66,18 @@ class attendModel extends model
             ->beginIf($endDate != '')->andWhere('`date`')->lt($endDate)->fi()
             ->orderBy('`date`')
             ->fetchAll();
-        $attends = $this->processAttendList($attends);
 
-        $newAttends = array();
-        foreach($attends as $key => $attend) $newAttends[$attend->account][$attend->date] = $attend; 
-
-        foreach($newAttends as $userAttends) $userAttends = $this->fixUserAttendList($userAttends);
-        return $newAttends;
+        foreach($attends as $key => $attend) 
+        {
+            unset($attends[$key]);
+            $attends[$attend->account][$attend->date] = $attend; 
+        }
+        foreach($attends as $userAttends)
+        {
+            $userAttends = $this->fixUserAttendList($userAttends);
+            $userAttends = $this->processAttendList($userAttends);
+        }
+        return $attends;
     }
 
     /**
@@ -91,6 +97,10 @@ class attendModel extends model
             if($status == 'early') $attend->status = 'normal';
             if($status == 'both')  $attend->status = 'late';
         }
+
+        /* Remove time. */
+        if($attend->signIn == '00:00:00')  $attend->signIn = '';
+        if($attend->signOut == '00:00:00') $attend->signOut = '';
 
         $dayIndex = date('w', strtotime($attend->date));
         $attend->dayName = $this->lang->datepicker->dayNames[$dayIndex];
@@ -140,9 +150,9 @@ class attendModel extends model
                 $attend->date    = $startDate;
                 $attend->signIn  = '00:00:00';
                 $attend->signOut = '00:00:00';
-                $attend->status  = '';
                 $attend->ip      = '';
                 $attend->device  = '';
+                $attend->status  = $this->computeStatus($attend);
                 $attends[$startDate] = $attend;
             }
             $startDate = date("Y-m-d", strtotime("$startDate +1 day"));
@@ -275,11 +285,12 @@ class attendModel extends model
      */
     public function computeStatus($attend)
     {
-        /* 'rest', rest day. */
+        /* 'rest': rest day. */
         $dayIndex = date('w', strtotime($attend->date));
-        if($dayIndex >= $this->config->attend->workingDays) return 'rest';
+        if($this->config->attend->workingDays == '5' and ($dayIndex == 0 or $dayIndex == 6)) return 'rest';
+        if($this->config->attend->workingDays == '6' and $dayIndex == 0) return 'rest';
 
-        /* 'leave', ask for leave. 'trip', biz trip. */
+        /* 'leave': ask for leave. 'trip': biz trip. */
 
         /* 'absent', absenteeism */
         if($attend->signIn == "00:00:00" and $attend->signOut == "00:00:00") return 'absent';

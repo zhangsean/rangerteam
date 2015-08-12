@@ -38,7 +38,7 @@
     <?php $currentDate = $day < 10 ? "{$currentYear}-{$currentMonth}-0{$day}" : "{$currentYear}-{$currentMonth}-{$day}";?>
     <td>
       <?php if(isset($userAttends[$currentDate])):?>
-      <span class='attend-<?php echo $userAttends[$currentDate]->status?>'> </span>
+      <span class='attend-<?php echo $userAttends[$currentDate]->status?>'><?php echo $userAttends[$currentDate]->status?></span>
       <?php endif;?>
     </td>
     <?php endfor;?>

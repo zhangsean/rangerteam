@@ -1,9 +1,8 @@
-.attend-unkown {}
 .attend-normal [class^=attend] {background: #DDF4DF}
 .attend-late .attend-signin {background: #FFF0D5;}
 .attend-early .attend-signout {background: #FFF0D5;}
-.attend-lateEarly [class^=attend] {background: #FFF0D5;}
-.attend-absenteeism [class^=attend] {background: #FFE5E0;}
-.attend-off [class^=attend] {background: #DDF4DF}
-.attend-travel [class^=attend] {background: #DDF4DF}
-.attend-holiday [class^=attend] {}
+.attend-both [class^=attend] {background: #FFF0D5;}
+.attend-absent [class^=attend] {background: #FFE5E0;}
+.attend-leave [class^=attend] {background: #DDF4DF}
+.attend-trip [class^=attend] {background: #DDF4DF}
+.attend-rest [class^=attend] {}

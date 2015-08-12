@@ -30,6 +30,7 @@
 
 </div>
 <div class='row'>
+  <?php $weekOffset = date('w', strtotime("$currentYear-$currentMonth-01")) - 1;?>
   <?php for($weekIndex = 0; $weekIndex < $weekNum; $weekIndex++):?>
   <div class='col-xs-3'>
     <div class='panel'>
@@ -47,21 +48,17 @@
           <?php $startDay = $weekIndex * 7 + 1;?>
           <?php for($day = $startDay; $day <= $dayNum and $day < $startDay + 7; $day++):?>
             <?php $currentDate = $day < 10 ? "{$currentYear}-{$currentMonth}-0{$day}" : "{$currentYear}-{$currentMonth}-{$day}";?>
-            <?php if(isset($attends[$currentDate])):?>
             <tr class="attend-<?php echo $attends[$currentDate]->status?>">
               <td><?php echo $currentDate;?></td>
-              <td><?php echo $attends[$currentDate]->dayName;?></td>
-              <td class='attend-signin'><?php echo substr($attends[$currentDate]->signIn, 10);?></td>
-              <td class='attend-signout'><?php echo substr($attends[$currentDate]->signOut, 10);?></td>
+              <td><?php echo $lang->datepicker->dayNames[($day + $weekOffset) % 7]?></td>
+              <?php if(isset($attends[$currentDate])):?>
+              <td class='attend-signin'><?php echo substr($attends[$currentDate]->signIn, 0, 5);?></td>
+              <td class='attend-signout'><?php echo substr($attends[$currentDate]->signOut, 0, 5);?></td>
+              <?php else:?>
+              <td></td>
+              <td></td>
+              <?php endif;?>
             </tr>
-            <?php else:?>
-            <tr>
-              <td><?php echo $currentDate;?></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <?php endif;?>
           <?php endfor;?>
         </table>
       </div>
