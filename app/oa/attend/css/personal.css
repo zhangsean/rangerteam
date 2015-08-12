@@ -1,0 +1,17 @@
+.panel .no-padding{padding: 0px;}
+
+.attend-unkown {}
+.attend-normal [class^=attend] {background: #DDF4DF}
+.attend-late .attend-signin {background: #FFF0D5;}
+.attend-early .attend-signout {background: #FFF0D5;}
+.attend-lateEarly [class^=attend] {background: #FFF0D5;}
+.attend-absenteeism [class^=attend] {background: #FFE5E0;}
+.attend-off [class^=attend] {background: #DDF4DF}
+.attend-travel [class^=attend] {background: #DDF4DF}
+.attend-holiday [class^=attend] {}
+
+.dropdown-submenu > .dropdown-menu {left: -100%;}
+.dropdown-submenu > a:after {content: ""; display: none;}
+.dropdown-submenu > a:before {content: " "; display: block; float: left; width: 0; height: 0; margin-top: 3px; margin-left: -10px; border-color: transparent; border-style: solid; border-width: 5px 5px 5px 0; border-right-color: #ccc;}
+.dropdown-menu > li > a, .dropdown-header {padding: 5px 15px 5px 25px}
+  

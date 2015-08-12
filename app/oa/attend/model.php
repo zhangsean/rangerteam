@@ -1,26 +1,26 @@
 <?php
 /**
- * The model file of attendance module of Ranzhi.
+ * The model file of attend module of Ranzhi.
  *
  * @copyright   Copyright 2009-2015 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
  * @license     ZPL
  * @author      chujilu <chujilu@cnezsoft.com>
- * @package     attendance
+ * @package     attend
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-class attendanceModel extends model
+class attendModel extends model
 {
     /**
-     * Get by attendance id. 
+     * Get by attend id. 
      * 
-     * @param  int    $attendanceID 
+     * @param  int    $attendID 
      * @access public
      * @return object
      */
-    public function getByID($attendanceID)
+    public function getByID($attendID)
     {
-        return $this->dao->select('*')->from(TABLE_ATTENDANCE)->where('ID')->eq($attendanceID)->fetch();
+        return $this->dao->select('*')->from(TABLE_ATTENDANCE)->where('ID')->eq($attendID)->fetch();
     }
 
     /**
@@ -36,17 +36,17 @@ class attendanceModel extends model
     {
         $this->updateStatus();
 
-        $attendances = $this->dao->select('*')->from(TABLE_ATTENDANCE)
+        $attends = $this->dao->select('*')->from(TABLE_ATTENDANCE)
             ->where('account')->eq($account)
             ->beginIf($startDate != '')->andWhere('`date`')->ge($startDate)->fi()
             ->beginIf($endDate != '')->andWhere('`date`')->lt($endDate)->fi()
             ->orderBy('`date`')
             ->fetchAll('date');
-        return $this->processAttendancelist($attendances);
+        return $this->processAttendlist($attends);
     }
 
     /**
-     * Get department's attendance list. 
+     * Get department's attend list. 
      * 
      * @param  string $deptID
      * @param  string $startDate 
@@ -60,7 +60,7 @@ class attendanceModel extends model
         $this->updateStatus();
         $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
 
-        $attendances = $this->dao->select('*')->from(TABLE_ATTENDANCE)
+        $attends = $this->dao->select('*')->from(TABLE_ATTENDANCE)
             ->where('account')->in(array_keys($users))
             ->beginIf($startDate != '')->andWhere('`date`')->ge($startDate)->fi()
             ->beginIf($endDate != '')->andWhere('`date`')->lt($endDate)->fi()
@@ -69,51 +69,51 @@ class attendanceModel extends model
 
         if($groupBy != '')
         {
-            $newAttendances = array();
-            foreach($attendances as $key => $attendance)
+            $newAttends = array();
+            foreach($attends as $key => $attend)
             {
-                $newAttendances[$attendance->$groupBy][$attendance->date] = $attendance; 
+                $newAttends[$attend->$groupBy][$attend->date] = $attend; 
             }
-            return $newAttendances;
+            return $newAttends;
         }
 
-        return $this->processAttendancelist($attendances);
+        return $this->processAttendlist($attends);
     }
 
     /**
-     * Process attendance. 
+     * Process attend. 
      * 
-     * @param  object $attendance 
+     * @param  object $attend 
      * @access public
      * @return object
      */
-    public function processAttendance($attendance)
+    public function processAttend($attend)
     {
         /* get status and remove signout for today. */
-        if($attendance->date == helper::today()) 
+        if($attend->date == helper::today()) 
         {
-            if(time() < strtotime("{$attendance->date} {$this->config->attendance->earliestSignOutTime}")) $attendance->signOut = '0000-00-00 00:00:00';
-            $status = $this->computeStatus($attendance);
-            if($status == 'early') $attendance->status = 'normal';
-            if($status == 'lateEarly') $attendance->status = 'late';
+            if(time() < strtotime("{$attend->date} {$this->config->attend->earliestSignOutTime}")) $attend->signOut = '0000-00-00 00:00:00';
+            $status = $this->computeStatus($attend);
+            if($status == 'early') $attend->status = 'normal';
+            if($status == 'lateEarly') $attend->status = 'late';
         }
 
-        $dayIndex = date('w', strtotime($attendance->date));
-        $attendance->dayName = $this->lang->datepicker->dayNames[$dayIndex];
-        return $attendance;
+        $dayIndex = date('w', strtotime($attend->date));
+        $attend->dayName = $this->lang->datepicker->dayNames[$dayIndex];
+        return $attend;
     }
 
     /**
-     * Process attendance list. 
+     * Process attend list. 
      * 
-     * @param  array $attendances 
+     * @param  array $attends 
      * @access public
      * @return array
      */
-    public function processAttendanceList($attendances)
+    public function processAttendList($attends)
     {
-        foreach($attendances as $attendance) $attendance = $this->processAttendance($attendance);
-        return $attendances;
+        foreach($attends as $attend) $attend = $this->processAttend($attend);
+        return $attends;
     }
 
     /**
@@ -140,25 +140,25 @@ class attendanceModel extends model
         if($account == '') $account = $this->app->user->account;
         if($date == '')    $date    = date('y-m-d');
 
-        $attendance = $this->dao->select('*')->from(TABLE_ATTENDANCE)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
-        if(empty($attendance))
+        $attend = $this->dao->select('*')->from(TABLE_ATTENDANCE)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
+        if(empty($attend))
         {
-            $attendance = new stdclass();
-            $attendance->account = $account;
-            $attendance->date    = $date;
-            $attendance->signIn  = helper::now();
+            $attend = new stdclass();
+            $attend->account = $account;
+            $attend->date    = $date;
+            $attend->signIn  = helper::now();
             $this->dao->insert(TABLE_ATTENDANCE)
-                ->data($attendance)
+                ->data($attend)
                 ->autoCheck()
                 ->exec();
             return !dao::isError();
         }
 
-        if($attendance->signIn == '')
+        if($attend->signIn == '')
         {
             $this->dao->update(TABLE_ATTENDANCE)
                 ->set('signIn')->eq(helper::now)
-                ->where('id')->eq($attendance->id)
+                ->where('id')->eq($attend->id)
                 ->exec();
             return !dao::isError();
         }
@@ -178,15 +178,15 @@ class attendanceModel extends model
         if($account == '') $account = $this->app->user->account;
         if($date == '')    $date    = date('y-m-d');
 
-        $attendance = $this->dao->select('*')->from(TABLE_ATTENDANCE)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
-        if(empty($attendance))
+        $attend = $this->dao->select('*')->from(TABLE_ATTENDANCE)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
+        if(empty($attend))
         {
-            $attendance = new stdclass();
-            $attendance->account = $account;
-            $attendance->date    = $date;
-            $attendance->signOut = helper::now();
+            $attend = new stdclass();
+            $attend->account = $account;
+            $attend->date    = $date;
+            $attend->signOut = helper::now();
             $this->dao->insert(TABLE_ATTENDANCE)
-                ->data($attendance)
+                ->data($attend)
                 ->autoCheck()
                 ->exec();
             return !dao::isError();
@@ -194,56 +194,56 @@ class attendanceModel extends model
 
         $this->dao->update(TABLE_ATTENDANCE)
             ->set('signOut')->eq(helper::now())
-            ->where('id')->eq($attendance->id)
+            ->where('id')->eq($attend->id)
             ->exec();
         return !dao::isError();
     }
 
     /**
-     * Update status of unknow attendance.
+     * Update status of unknow attend.
      * 
      * @access public
      * @return bool
      */
     public function updateStatus()
     {
-        $attendances = $this->dao->select('*')->from(TABLE_ATTENDANCE)
+        $attends = $this->dao->select('*')->from(TABLE_ATTENDANCE)
             ->where('status')->eq('unknown')
             ->andWhere('date')->lt(helper::today())
             ->fetchAll('id');
 
-        foreach($attendances as $attendance)
+        foreach($attends as $attend)
         {
-            $status = $this->computeStatus($attendance);
-            $this->dao->update(TABLE_ATTENDANCE)->set('status')->eq($status)->where('id')->eq($attendance->id)->exec();
+            $status = $this->computeStatus($attend);
+            $this->dao->update(TABLE_ATTENDANCE)->set('status')->eq($status)->where('id')->eq($attend->id)->exec();
         }
         return true;
     }
 
     /**
-     * Compute attendance's status. 
+     * Compute attend's status. 
      * 
-     * @param  object $attendance 
+     * @param  object $attend 
      * @access public
      * @return string
      */
-    public function computeStatus($attendance)
+    public function computeStatus($attend)
     {
         /* holiday */
-        $dayIndex = date('w', strtotime($attendance->date));
-        if($dayIndex >= $this->config->attendance->workingDaysPerWeek) return 'holiday';
+        $dayIndex = date('w', strtotime($attend->date));
+        if($dayIndex >= $this->config->attend->workingDaysPerWeek) return 'holiday';
 
         /* travel, off */
 
         /* absenteeism */
-        if($attendance->signIn == "0000-00-00 00:00:00" and $attendance->signOut == "0000-00-00 00:00:00") return 'absenteeism';
+        if($attend->signIn == "0000-00-00 00:00:00" and $attend->signOut == "0000-00-00 00:00:00") return 'absenteeism';
 
         /* late, early, lateEarly */
         $status = 'unknown';
-        if(strtotime($attendance->signIn) > strtotime("{$attendance->date} {$this->config->attendance->latestSignInTime}")) $status = 'late';
-        if($this->config->attendance->forcedSignOut == 'yes')
+        if(strtotime($attend->signIn) > strtotime("{$attend->date} {$this->config->attend->latestSignInTime}")) $status = 'late';
+        if($this->config->attend->forcedSignOut == 'yes')
         {
-            if(strtotime($attendance->signOut) <  strtotime("{$attendance->date} {$this->config->attendance->earliestSignOutTime}"))
+            if(strtotime($attend->signOut) <  strtotime("{$attend->date} {$this->config->attend->earliestSignOutTime}"))
             {
                 $status = $status == 'late' ? 'lateEarly' : 'early';
             }

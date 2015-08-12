@@ -1,15 +1,15 @@
 <?php
 /**
- * The control file of attendance of Ranzhi.
+ * The control file of attend of Ranzhi.
  *
  * @copyright   Copyright 2009-2015 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
  * @license     ZPL 
  * @author      chujilu <chujilu@cnezsoft.com>
- * @package     attendance
+ * @package     attend
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-class attendance extends control
+class attend extends control
 {
     /**
      * personal 
@@ -29,11 +29,11 @@ class attendance extends control
         $dayNum      = (int)date('d', strtotime("$endDate -1 day"));
         $weekNum     = (int)ceil($dayNum / 7);
         $account     = $this->app->user->account;
-        $attendances = $this->attendance->getByAccount($account, $startDate, $endDate);
+        $attends = $this->attend->getByAccount($account, $startDate, $endDate);
 
         $yearList  = array();
         $monthList = array();
-        $dateList  = $this->attendance->getAllDate();
+        $dateList  = $this->attend->getAllDate();
         foreach($dateList as $date)
         {
             $year  = substr($date->date, 0, 4);
@@ -42,7 +42,7 @@ class attendance extends control
             if(!isset($monthList[$year][$month])) $monthList[$year][$month] = $month;
         }
 
-        $this->view->attendances  = $attendances;
+        $this->view->attends  = $attends;
         $this->view->dayNum       = $dayNum;
         $this->view->weekNum      = $weekNum;
         $this->view->currentYear  = $currentYear;
@@ -53,7 +53,7 @@ class attendance extends control
     }
 
     /**
-     * department's attendance. 
+     * department's attend. 
      * 
      * @param  string $date 
      * @access public
@@ -77,11 +77,11 @@ class attendance extends control
         $dayNum      = (int)date('d', strtotime("$endDate -1 day"));
         $weekNum     = (int)ceil($dayNum / 7);
         $account     = $this->app->user->account;
-        $attendances = $this->attendance->getByDept($dept, $startDate, $endDate, 'account');
+        $attends = $this->attend->getByDept($dept, $startDate, $endDate, 'account');
 
         $yearList  = array();
         $monthList = array();
-        $dateList  = $this->attendance->getAllDate();
+        $dateList  = $this->attend->getAllDate();
         foreach($dateList as $date)
         {
             $year  = substr($date->date, 0, 4);
@@ -94,7 +94,7 @@ class attendance extends control
         $users    = $this->loadMOdel('user')->getList($dept);
         foreach($users as $key => $user) $newUsers[$user->account] = $user;
 
-        $this->view->attendances  = $attendances;
+        $this->view->attends  = $attends;
         $this->view->dayNum       = $dayNum;
         $this->view->weekNum      = $weekNum;
         $this->view->currentYear  = $currentYear;
@@ -117,9 +117,9 @@ class attendance extends control
     {
         $account = $this->app->user->account;
         $date    = date('Y-m-d');
-        $result  = $this->attendance->signIn($account, $date);
-        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attendance->signInFail));
-        $this->send(array('result' => 'success', 'message' => $this->lang->attendance->signInSuccess));
+        $result  = $this->attend->signIn($account, $date);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attend->signInFail));
+        $this->send(array('result' => 'success', 'message' => $this->lang->attend->signInSuccess));
     }
 
     /**
@@ -132,9 +132,9 @@ class attendance extends control
     {
         $account = $this->app->user->account;
         $date    = date('Y-m-d');
-        $result  = $this->attendance->signOut($account, $date);
-        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attendance->signOutFail));
-        $this->send(array('result' => 'success', 'message' => $this->lang->attendance->signOutSuccess));
+        $result  = $this->attend->signOut($account, $date);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attend->signOutFail));
+        $this->send(array('result' => 'success', 'message' => $this->lang->attend->signOutSuccess));
     }
 
     /**
@@ -148,14 +148,14 @@ class attendance extends control
         if($_POST)
         {
             $settings = fixer::input('post')->get();
-            $this->loadModel('setting')->setItems('system.oa.attendance', $settings);
+            $this->loadModel('setting')->setItems('system.oa.attend', $settings);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
-        $this->view->latestSignInTime    = $this->config->attendance->latestSignInTime;
-        $this->view->earliestSignOutTime = $this->config->attendance->earliestSignOutTime;
-        $this->view->workingDaysPerWeek  = $this->config->attendance->workingDaysPerWeek;
-        $this->view->forcedSignOut       = $this->config->attendance->forcedSignOut;
+        $this->view->latestSignInTime    = $this->config->attend->latestSignInTime;
+        $this->view->earliestSignOutTime = $this->config->attend->earliestSignOutTime;
+        $this->view->workingDaysPerWeek  = $this->config->attend->workingDaysPerWeek;
+        $this->view->forcedSignOut       = $this->config->attend->forcedSignOut;
         $this->display();
     }
 }

@@ -2,7 +2,7 @@ $(function()
 {
     /* start ips */
     $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock, onDeleteEntry: deleteEntry, onUpdateEntryMenu: updateEntryMenu, onSortEntries: sortEntries}, config, ipsLang));
-    initAttendanceButton();
+    initAttendButton();
 });
 
 /**
@@ -126,16 +126,16 @@ function sortBlocks(orders)
 }
 
 /**
- * init attendance sign in and sign out button.
+ * init sign in and sign out button.
  * 
  * @access public
  * @return void
  */
-function initAttendanceButton()
+function initAttendButton()
 {
     $('.signin').click(function()
     {
-        $.getJSON(createLink('oa.attendance', 'signin'), function(data)
+        $.getJSON(createLink('oa.attend', 'signin'), function(data)
         {
             if(data.result == 'success') $.zui.messager.success(data.message);
             if(data.result == 'fail') $.zui.messager.info(data.message);
@@ -143,7 +143,7 @@ function initAttendanceButton()
     });
     $('.signout').click(function()
     {
-        $.getJSON(createLink('oa.attendance', 'signout'), function(data)
+        $.getJSON(createLink('oa.attend', 'signout'), function(data)
         {
             if(data.result == 'success') window.location.href = createLink('user', 'logout');
             if(data.result == 'fail') $.zui.messager.info(data.message);

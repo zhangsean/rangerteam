@@ -13,11 +13,11 @@ $lang->app = new stdclass();
 $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
-$lang->menu->oa->dashboard  = '我的地盘|dashboard|index|';
-$lang->menu->oa->project    = '项目|project|index|';
-$lang->menu->oa->announce   = '公告|announce|browse|';
-$lang->menu->oa->doc        = '文档|doc|browse|';
-$lang->menu->oa->attendance = '考勤|attendance|personal|';
+$lang->menu->oa->dashboard = '我的地盘|dashboard|index|';
+$lang->menu->oa->project   = '项目|project|index|';
+$lang->menu->oa->announce  = '公告|announce|browse|';
+$lang->menu->oa->doc       = '文档|doc|browse|';
+$lang->menu->oa->attend    = '考勤|attend|personal|';
 
 $lang->dashboard = new stdclass();
 
@@ -37,9 +37,9 @@ $lang->doc = new stdclass();
 $lang->doc->menu = new stdclass();
 $lang->doc->menu->create = '添加文档库|doc|createlib|';
 
-$lang->attendance = new stdclass();
-$lang->attendance->menu = new stdclass();
-$lang->attendance->menu->personal   = '我的考勤|attendance|personal|';
-$lang->attendance->menu->department = '部门考勤|attendance|department|';
-$lang->attendance->menu->company    = '公司考勤|attendance|personal|';
-$lang->attendance->menu->settings   = '设置|attendance|settings|';
+$lang->attend = new stdclass();
+$lang->attend->menu = new stdclass();
+$lang->attend->menu->personal   = '我的考勤|attend|personal|';
+$lang->attend->menu->department = '部门考勤|attend|department|';
+$lang->attend->menu->company    = '公司考勤|attend|personal|';
+$lang->attend->menu->settings   = '设置|attend|settings|';

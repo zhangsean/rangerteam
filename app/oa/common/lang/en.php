@@ -13,11 +13,11 @@ $lang->app = new stdclass();
 $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
-$lang->menu->oa->dashboard  = 'Dashboard|dashboard|index|';
-$lang->menu->oa->project    = 'Project|project|index|';
-$lang->menu->oa->announce   = 'Announce|announce|index|';
-$lang->menu->oa->doc        = 'Document|doc|index|';
-$lang->menu->oa->attendance = 'Attendance|attendance|personal|';
+$lang->menu->oa->dashboard = 'Dashboard|dashboard|index|';
+$lang->menu->oa->project   = 'Project|project|index|';
+$lang->menu->oa->announce  = 'Announce|announce|index|';
+$lang->menu->oa->doc       = 'Document|doc|index|';
+$lang->menu->oa->attend    = 'Attendance|attend|personal|';
 
 $lang->dashboard = new stdclass();
 
@@ -37,9 +37,9 @@ $lang->doc = new stdclass();
 $lang->doc->menu = new stdclass();
 $lang->doc->menu->create = 'Create Library|doc|createlib|';
 
-$lang->attendance = new stdclass();
-$lang->attendance->menu = new stdclass();
-$lang->attendance->menu->personal   = 'My attendance|attendance|personal|';
-$lang->attendance->menu->department = 'Department attendance|attendance|department|';
-$lang->attendance->menu->company    = 'Company attendance|attendance|personal|';
-$lang->attendance->menu->settings   = 'Setting|attendance|settings|';
+$lang->attend = new stdclass();
+$lang->attend->menu = new stdclass();
+$lang->attend->menu->personal   = 'My attendance|attend|personal|';
+$lang->attend->menu->department = 'Department attendance|attend|department|';
+$lang->attend->menu->company    = 'Company attendance|attend|personal|';
+$lang->attend->menu->settings   = 'Setting|attendance|settings|';
