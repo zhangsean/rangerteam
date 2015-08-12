@@ -118,8 +118,8 @@ class attend extends control
         $account = $this->app->user->account;
         $date    = date('Y-m-d');
         $result  = $this->attend->signIn($account, $date);
-        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attend->signInFail));
-        $this->send(array('result' => 'success', 'message' => $this->lang->attend->signInSuccess));
+        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attend->inFail));
+        $this->send(array('result' => 'success', 'message' => $this->lang->attend->inSuccess));
     }
 
     /**
@@ -133,8 +133,8 @@ class attend extends control
         $account = $this->app->user->account;
         $date    = date('Y-m-d');
         $result  = $this->attend->signOut($account, $date);
-        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attend->signOutFail));
-        $this->send(array('result' => 'success', 'message' => $this->lang->attend->signOutSuccess));
+        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attend->outFail));
+        $this->send(array('result' => 'success', 'message' => $this->lang->attend->outSuccess));
     }
 
     /**

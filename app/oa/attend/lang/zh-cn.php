@@ -26,10 +26,10 @@ $lang->attend->statusList[] = '';
 $lang->attend->statusList[] = '';
 $lang->attend->statusList[] = '';
 
-$lang->attend->signInSuccess  = '签到成功';
-$lang->attend->signInFail     = '签到失败';
-$lang->attend->signOutSuccess = '签退成功';
-$lang->attend->signOutFail    = '签退失败';
+$lang->attend->inSuccess  = '签到成功';
+$lang->attend->inFail     = '签到失败';
+$lang->attend->outSuccess = '签退成功';
+$lang->attend->outFail    = '签退失败';
 
 $lang->attend->signInLimit  = '最晚签到时间';
 $lang->attend->signOutLimit = '最早签退时间';

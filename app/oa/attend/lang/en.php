@@ -16,10 +16,10 @@ $lang->attend->extra    = 'Other info';
 $lang->attend->dayName  = 'Day name';
 $lang->attend->report   = 'Report';
 
-$lang->attend->signInSuccess  = 'Sign in success';
-$lang->attend->signOutSuccess = 'Sign out success';
-$lang->attend->signInFail     = 'Sign in fail';
-$lang->attend->signOutFail    = 'Sign out fail';
+$lang->attend->inSuccess  = 'Sign in success';
+$lang->attend->outSuccess = 'Sign out success';
+$lang->attend->inFail     = 'Sign in fail';
+$lang->attend->outFail    = 'Sign out fail';
 
 $lang->attend->signInLimit    = 'Latest time of sign in';
 $lang->attend->signOutLimit = 'Earlies time of sign out';
