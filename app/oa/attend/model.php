@@ -20,7 +20,22 @@ class attendModel extends model
      */
     public function getByID($attendID)
     {
-        return $this->dao->select('*')->from(TABLE_ATTEND)->where('ID')->eq($attendID)->fetch();
+        $attend = $this->dao->select('*')->from(TABLE_ATTEND)->where('id')->eq($attendID)->fetch();
+        return empty($attend) ? $attend : $this->processAttend($attend);
+    }
+
+    /**
+     * Get by date and account.
+     * 
+     * @param  string $date 
+     * @param  string $account 
+     * @access public
+     * @return void
+     */
+    public function getByDate($date, $account)
+    {
+        $attend = $this->dao->select('*')->from(TABLE_ATTEND)->where('date')->eq($date)->andWhere('account')->eq($account)->fetch();
+        return empty($attend) ? $attend : $this->processAttend($attend);
     }
 
     /**
@@ -52,10 +67,11 @@ class attendModel extends model
      * @param  string $deptID
      * @param  string $startDate 
      * @param  string $endDate 
+     * @param  string $reviewStatus 
      * @access public
      * @return array
      */
-    public function getByDept($deptID, $startDate = '', $endDate = '')
+    public function getByDept($deptID, $startDate = '', $endDate = '', $reviewStatus = '')
     {
         $this->processStatus();
         $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
@@ -64,6 +80,7 @@ class attendModel extends model
             ->where('account')->in(array_keys($users))
             ->beginIf($startDate != '')->andWhere('`date`')->ge($startDate)->fi()
             ->beginIf($endDate != '')->andWhere('`date`')->lt($endDate)->fi()
+            ->beginIf($reviewStatus != '')->andWhere('reviewStatus')->eq($reviewStatus)->fi()
             ->orderBy('`date`')
             ->fetchAll();
 
@@ -72,92 +89,11 @@ class attendModel extends model
             unset($attends[$key]);
             $attends[$attend->account][$attend->date] = $attend; 
         }
-        foreach($attends as $userAttends)
+        foreach($attends as $key => $userAttends)
         {
-            $userAttends = $this->fixUserAttendList($userAttends);
-            $userAttends = $this->processAttendList($userAttends);
+            if($reviewStatus == '') $attends[$key] = $this->fixUserAttendList($attends[$key]);
+            $attends[$key] = $this->processAttendList($attends[$key]);
         }
-        return $attends;
-    }
-
-    /**
-     * Process attend, add dayName, comput today's status.
-     * 
-     * @param  object $attend 
-     * @access public
-     * @return object
-     */
-    public function processAttend($attend)
-    {
-        /* Compute status and remove signOut if date is today. */
-        if($attend->date == helper::today()) 
-        {
-            if(time() < strtotime("{$attend->date} {$this->config->attend->signOutLimit}")) $attend->signOut = '00:00:00';
-            $status = $this->computeStatus($attend);
-            if($status == 'early') $attend->status = 'normal';
-            if($status == 'both')  $attend->status = 'late';
-        }
-
-        /* Remove time. */
-        if($attend->signIn == '00:00:00')  $attend->signIn = '';
-        if($attend->signOut == '00:00:00') $attend->signOut = '';
-
-        $dayIndex = date('w', strtotime($attend->date));
-        $attend->dayName = $this->lang->datepicker->dayNames[$dayIndex];
-        return $attend;
-    }
-
-    /**
-     * Process attend list. 
-     * 
-     * @param  array $attends 
-     * @access public
-     * @return array
-     */
-    public function processAttendList($attends)
-    {
-        foreach($attends as $attend) $attend = $this->processAttend($attend);
-        return $attends;
-    }
-
-    /**
-     * Fix user's attendlist, add default data if no this date record. 
-     * 
-     * @param  array $attends 
-     * @access public
-     * @return void
-     */
-    public function fixUserAttendList($attends)
-    {
-        $startDate = '0000-00-00';
-        $endDate   = '0000-00-00';
-        $account   = '';
-        /* Get account, start date and end date. */
-        foreach($attends as $attend)
-        {
-            if(strtotime($attend->date) < strtotime($startDate) or $startDate == '0000-00-00') $startDate = $attend->date;
-            if(strtotime($attend->date) > strtotime($endDate)) $endDate   = $attend->date;
-            if($account == '') $account = $attend->account;
-        }
-
-        /* Add data if not set. */
-        while(strtotime($startDate) < strtotime($endDate))
-        {
-            if(!isset($attends[$startDate]))
-            {
-                $attend = new stdclass();
-                $attend->account = $account;
-                $attend->date    = $startDate;
-                $attend->signIn  = '00:00:00';
-                $attend->signOut = '00:00:00';
-                $attend->ip      = '';
-                $attend->device  = '';
-                $attend->status  = $this->computeStatus($attend);
-                $attends[$startDate] = $attend;
-            }
-            $startDate = date("Y-m-d", strtotime("$startDate +1 day"));
-        }
-
         return $attends;
     }
 
@@ -202,6 +138,7 @@ class attendModel extends model
             $attend->account = $account;
             $attend->date    = $date;
             $attend->signIn  = helper::time();
+            $attend->ip      = helper::getRemoteIp();
             $this->dao->insert(TABLE_ATTEND)
                 ->data($attend)
                 ->autoCheck()
@@ -252,6 +189,85 @@ class attendModel extends model
             ->set('signOut')->eq(helper::time())
             ->where('id')->eq($attend->id)
             ->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Pass manual sign date.
+     * 
+     * @param  int    $attendID 
+     * @access public
+     * @return bool
+     */
+    public function pass($attendID)
+    {
+        $attend  = $this->getByID($attendID);
+        $signIn  = (!empty($attend->manualIn) and $attend->manualIn != '00:00:00') ? $attend->manualIn : $attend->signIn;
+        $signOut = (!empty($attend->manualOut) and $attend->manualOut != '00:00:00') ? $attend->manualOut : $attend->signOut;
+        $this->dao->update(TABLE_ATTEND)
+            ->set('status')->eq($attend->reason)
+            ->set('reviewStatus')->eq('pass')
+            ->set('signIn')->eq($signIn)
+            ->set('signOut')->eq($signOut)
+            ->where('id')->eq($attendID)
+            ->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Reject manual sign data.
+     * 
+     * @param  int    $attendID 
+     * @access public
+     * @return bool
+     */
+    public function reject($attendID)
+    {
+        $this->dao->update(TABLE_ATTEND)->set('reviewStatus')->eq('reject')->where('id')->eq($attendID)->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * add manual sign in and sign out date.
+     * 
+     * @param  string $date 
+     * @param  string $account 
+     * @access public
+     * @return void
+     */
+    public function update($date, $account)
+    {
+        $oldAttend = $this->getByDate($date, $account);
+        $attend = fixer::input('post')
+            ->remove('date,account,signIn,signOut,status,reviewStatus')
+            ->setDefault('manualIn', '')
+            ->setDefault('manualOut', '')
+            ->add('reviewStatus', 'wait')
+            ->get();
+
+        $attend->manualIn  = date("H:i", strtotime("2010-10-01 {$attend->manualIn}"));
+        $attend->manualOut = date("H:i", strtotime("2010-10-01 {$attend->manualOut}"));
+
+        if(empty($oldAttend))
+        {
+            $attend->date    = $date;
+            $attend->account = $account;
+            $attend->status  = 'absent';
+            $this->dao->insert(TABLE_ATTEND)
+                ->data($attend)
+                ->autoCheck()
+                ->exec();
+        }
+        else
+        {
+            $this->dao->update(TABLE_ATTEND)
+                ->data($attend)
+                ->autoCheck()
+                ->where('date')->eq($date)
+                ->andWhere('account')->eq($account)
+                ->exec();
+        }
+
         return !dao::isError();
     }
 
@@ -307,5 +323,90 @@ class attendModel extends model
         }
         return $status;
     }
-}
 
+    /**
+     * Process attend, add dayName, comput today's status.
+     * 
+     * @param  object $attend 
+     * @access public
+     * @return object
+     */
+    public function processAttend($attend)
+    {
+        /* Compute status and remove signOut if date is today. */
+        if($attend->date == helper::today()) 
+        {
+            if(time() < strtotime("{$attend->date} {$this->config->attend->signOutLimit}")) $attend->signOut = '00:00:00';
+            $status = $this->computeStatus($attend);
+            $attend->status = $status;
+            if($status == 'early') $attend->status = 'normal';
+            if($status == 'both')  $attend->status = 'late';
+        }
+
+        /* Remove time. */
+        if($attend->signIn == '00:00:00')    $attend->signIn = '';
+        if($attend->signOut == '00:00:00')   $attend->signOut = '';
+        if($attend->manualIn == '00:00:00')  $attend->manualIn = '';
+        if($attend->manualOut == '00:00:00') $attend->manualOut = '';
+
+        $dayIndex = date('w', strtotime($attend->date));
+        $attend->dayName = $this->lang->datepicker->dayNames[$dayIndex];
+        return $attend;
+    }
+
+    /**
+     * Process attend list. 
+     * 
+     * @param  array $attends 
+     * @access public
+     * @return array
+     */
+    public function processAttendList($attends)
+    {
+        foreach($attends as $attend) $attend = $this->processAttend($attend);
+        return $attends;
+    }
+
+    /**
+     * Fix user's attendlist, add default data if no this date record. 
+     * 
+     * @param  array $attends 
+     * @access public
+     * @return void
+     */
+    public function fixUserAttendList($attends)
+    {
+        $startDate = '0000-00-00';
+        $endDate   = '0000-00-00';
+        $account   = '';
+        /* Get account, start date and end date. */
+        foreach($attends as $attend)
+        {
+            if(strtotime($attend->date) < strtotime($startDate) or $startDate == '0000-00-00') $startDate = $attend->date;
+            if(strtotime($attend->date) > strtotime($endDate)) $endDate   = $attend->date;
+            if($account == '') $account = $attend->account;
+        }
+
+        /* Add data if not set. */
+        while(strtotime($startDate) < strtotime($endDate))
+        {
+            if(!isset($attends[$startDate]))
+            {
+                $attend = new stdclass();
+                $attend->account = $account;
+                $attend->date    = $startDate;
+                $attend->signIn  = '00:00:00';
+                $attend->signOut = '00:00:00';
+                $attend->ip      = '';
+                $attend->device  = '';
+                $attend->status  = $this->computeStatus($attend);
+                $attend->manualIn  = '00:00:00';
+                $attend->manualOut = '00:00:00';
+                $attends[$startDate] = $attend;
+            }
+            $startDate = date("Y-m-d", strtotime("$startDate +1 day"));
+        }
+
+        return $attends;
+    }
+}

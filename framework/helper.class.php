@@ -589,6 +589,31 @@ class helper
         $string = str_replace($labels, $to, $string);
         return preg_replace("/[{$to}]+/", $to, trim($string, $to));
     }
+
+    /** 
+     * Get remote ip. 
+     * 
+     * @access public
+     * @return string
+     */
+    public static function getRemoteIp()
+    {   
+        $ip = ''; 
+        if(!empty($_SERVER['HTTP_CLIENT_IP']))
+        {   
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }   
+        else if(!empty($_SERVER["HTTP_X_FORWARDED_FOR"]))
+        {   
+            $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+        }   
+        else if(!empty($_SERVER["REMOTE_ADDR"]))
+        {   
+            $ip = $_SERVER["REMOTE_ADDR"];
+        }   
+
+        return $ip;
+    }   
 }
 
 /**

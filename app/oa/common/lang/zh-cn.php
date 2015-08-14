@@ -42,4 +42,5 @@ $lang->attend->menu = new stdclass();
 $lang->attend->menu->personal   = '我的考勤|attend|personal|';
 $lang->attend->menu->department = '部门考勤|attend|department|';
 $lang->attend->menu->company    = '公司考勤|attend|personal|';
+$lang->attend->menu->review     = '补录审核|attend|review|';
 $lang->attend->menu->settings   = '设置|attend|settings|';

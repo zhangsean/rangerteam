@@ -32,6 +32,7 @@ class attend extends control
         $monthList = $this->attend->getAllMonth();
         $yearList  = array_keys($monthList);
 
+        $this->view->title        = $this->lang->attend->personal;
         $this->view->attends      = $attends;
         $this->view->dayNum       = $dayNum;
         $this->view->weekNum      = $weekNum;
@@ -46,6 +47,7 @@ class attend extends control
      * department's attend. 
      * 
      * @param  string $date 
+     * @param  int    $dept 
      * @access public
      * @return void
      */
@@ -74,6 +76,7 @@ class attend extends control
         $newUsers = array();
         foreach($users as $key => $user) $newUsers[$user->account] = $user;
 
+        $this->view->title        = $this->lang->attend->department;
         $this->view->attends      = $attends;
         $this->view->dayNum       = $dayNum;
         $this->view->weekNum      = $weekNum;
@@ -131,10 +134,111 @@ class attend extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
+        $this->view->title        = $this->lang->attend->settings; 
         $this->view->signInLimit  = $this->config->attend->signInLimit;
         $this->view->signOutLimit = $this->config->attend->signOutLimit;
         $this->view->workingDays  = $this->config->attend->workingDays;
         $this->view->mustSignOut  = $this->config->attend->mustSignOut;
         $this->display();
+    }
+
+    /**
+     * add manual sign in and sign out data. 
+     * 
+     * @param  string $date 
+     * @access public
+     * @return void
+     */
+    public function edit($date)
+    {
+        $account = $this->app->user->account;
+        $attend  = $this->attend->getByDate($date, $account);
+        if(empty($attend))
+        {
+            $attend = new stdclass();
+            $attend->account = $account;
+            $attend->date    = $date;
+            $attend->signIn  = '00:00';
+            $attend->signOut = '00:00';
+            $attend->status  = 'absent';
+            $attend->manualIn     = '';
+            $attend->manualOut    = '';
+            $attend->reason       = '';
+            $attend->desc         = '';
+            $attend->reviewStatus = '';
+            $attend->reviewedBy   = '';
+            $attend->reviewedDate = '';
+            $attend->new          = true;
+        }
+
+        if($_POST)
+        {
+            $this->attend->update($date, $account);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $this->view->title  = $this->lang->attend->manual;
+        $this->view->attend = $attend;
+        $this->display();
+    }
+
+    /**
+     * browse review list.
+     * 
+     * @param  int    $dept 
+     * @param  string $reviewStatus 
+     * @access public
+     * @return void
+     */
+    public function review($dept = '', $reviewStatus = 'wait')
+    {
+        $attends  = array();
+        $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+        if(!empty($deptList)) 
+        {
+            if($dept == '' or !isset($deptList[$dept])) $dept = current($deptList)->id;
+            $attends = $this->attend->getByDept($dept, $startDate = '', $endDate = '', $reviewStatus);
+        }
+
+        $users    = $this->loadModel('user')->getList($dept);
+        $newUsers = array();
+        foreach($users as $key => $user) $newUsers[$user->account] = $user;
+
+        $this->view->title        = $this->lang->attend->review;
+        $this->view->attends      = $attends;
+        $this->view->currentDept  = $dept;
+        $this->view->reviewStatus = $reviewStatus;
+        $this->view->deptList     = $deptList;
+        $this->view->users        = $newUsers;
+        $this->display();
+    }
+
+    /**
+     * Pass manual sign data. 
+     * 
+     * @param  int    $attendID 
+     * @access public
+     * @return void
+     */
+    public function pass($attendID)
+    {
+        $result = $this->attend->pass($attendID);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'fail', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('attend', 'review')));
+    }
+
+    /**
+     * Reject manual sign data. 
+     * 
+     * @param  int    $attendID 
+     * @access public
+     * @return void
+     */
+    public function reject($attendID)
+    {
+        $result = $this->attend->reject($attendID);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'fail', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('attend', 'review')));
     }
 }

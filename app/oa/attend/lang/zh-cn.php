@@ -4,34 +4,45 @@ $lang->attend->common     = '考勤';
 $lang->attend->personal   = '我的考勤';
 $lang->attend->department = '部门考勤';
 $lang->attend->company    = '公司考勤';
+$lang->attend->manual     = '补录';
+$lang->attend->review     = '补录审核';
 $lang->attend->settings   = '设置';
 
 $lang->attend->id       = '编号';
+$lang->attend->date     = '日期';
+$lang->attend->account  = '用户';
 $lang->attend->signIn   = '签到';
 $lang->attend->signOut  = '签退';
-$lang->attend->date     = '日期';
 $lang->attend->status   = '状态';
-$lang->attend->account  = '用户';
-$lang->attend->extra    = '其他信息';
+$lang->attend->ip       = 'IP';
+$lang->attend->device   = '设备';
+$lang->attend->desc     = '描述';
 $lang->attend->dayName  = '星期';
 $lang->attend->report   = '考勤表';
+
+$lang->attend->manualIn     = '签到时间';
+$lang->attend->manualOut    = '签退时间';
+$lang->attend->reason       = '原因';
+$lang->attend->reviewStatus = '补录状态';
+$lang->attend->reviewedBy   = '审核人';
+$lang->attend->reviewedDate = '审核时间';
 
 $lang->attend->statusList['normal'] = '正常';
 $lang->attend->statusList['late']   = '迟到';
 $lang->attend->statusList['early']  = '早退';
 $lang->attend->statusList['both']   = '迟到+早退';
-$lang->attend->statusList['absent'] = '矿工';
+$lang->attend->statusList['absent'] = '旷工';
 $lang->attend->statusList['leave']  = '请假';
 $lang->attend->statusList['trip']   = '出差';
 $lang->attend->statusList['rest']   = '假期';
 
-$lang->attend->reasonlist['normal'] = '正常';
-$lang->attend->reasonlist['trip']   = '出差';
-$lang->attend->reasonlist['leave']  = '请假';
+$lang->attend->reasonList['normal'] = '正常';
+$lang->attend->reasonList['trip']   = '出差';
+$lang->attend->reasonList['leave']  = '请假';
 
-$lang->attend->reviewList['wait']   = '等待审核';
-$lang->attend->reviewList['pass']   = '批准';
-$lang->attend->reviewList['reject'] = '拒绝';
+$lang->attend->reviewStatusList['wait']   = '等待审核';
+$lang->attend->reviewStatusList['pass']   = '通过';
+$lang->attend->reviewStatusList['reject'] = '拒绝';
 
 $lang->attend->inSuccess  = '签到成功';
 $lang->attend->inFail     = '签到失败';

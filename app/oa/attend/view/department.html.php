@@ -35,7 +35,7 @@
     <td><?php echo $deptList[$currentDept]->name?></td>
     <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
     <?php for($day = 1; $day <= $dayNum; $day++):?>
-    <?php $currentDate = $day < 10 ? "{$currentYear}-{$currentMonth}-0{$day}" : "{$currentYear}-{$currentMonth}-{$day}";?>
+    <?php $currentDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-{$day}"));?>
     <td>
       <?php if(isset($userAttends[$currentDate])):?>
       <span class='attend-<?php echo $userAttends[$currentDate]->status?>'><?php echo $userAttends[$currentDate]->status?></span>

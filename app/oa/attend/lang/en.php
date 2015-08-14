@@ -4,17 +4,28 @@ $lang->attend->common     = 'Attend';
 $lang->attend->personal   = 'My Attend';
 $lang->attend->department = 'Department attend';
 $lang->attend->company    = 'Company attend';
+$lang->attend->manual     = 'Manual sign';
+$lang->attend->review     = 'Review attendance';
 $lang->attend->settings   = 'Setting';
 
 $lang->attend->id       = 'ID';
+$lang->attend->date     = 'Date';
+$lang->attend->account  = 'User';
 $lang->attend->signIn   = 'Sign in';
 $lang->attend->signOut  = 'Sign out';
-$lang->attend->date     = 'Date';
 $lang->attend->status   = 'Status';
-$lang->attend->account  = 'User';
-$lang->attend->extra    = 'Other info';
+$lang->attend->ip       = 'IP';
+$lang->attend->device   = 'Device';
+$lang->attend->desc     = 'description';
 $lang->attend->dayName  = 'Day name';
 $lang->attend->report   = 'Report';
+
+$lang->attend->manualIn     = 'Manual sign in';
+$lang->attend->manualOut    = 'Manual sign out';
+$lang->attend->reason       = 'Reason';
+$lang->attend->reviewStatus = 'Review status';
+$lang->attend->reviewedBy   = 'Reviewed By';
+$lang->attend->reviewedDate = 'Reviewed Date';
 
 $lang->attend->statusList['normal'] = 'Normal';
 $lang->attend->statusList['late']   = 'Late';
@@ -29,9 +40,9 @@ $lang->attend->reasonlist['normal'] = 'Normal';
 $lang->attend->reasonlist['trip']   = 'Biz trip';
 $lang->attend->reasonlist['leave']  = 'Ask for leave';
 
-$lang->attend->reviewList['wait']   = 'Wait';
-$lang->attend->reviewList['pass']   = 'Pass';
-$lang->attend->reviewList['reject'] = 'Reject';
+$lang->attend->reviewStatusList['wait']   = 'Wait';
+$lang->attend->reviewStatusList['pass']   = 'Pass';
+$lang->attend->reviewStatusList['reject'] = 'Reject';
 
 $lang->attend->inSuccess  = 'Sign in success';
 $lang->attend->outSuccess = 'Sign out success';

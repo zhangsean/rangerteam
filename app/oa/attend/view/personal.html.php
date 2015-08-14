@@ -47,13 +47,25 @@
           </tr>
           <?php $startDay = $weekIndex * 7 + 1;?>
           <?php for($day = $startDay; $day <= $dayNum and $day < $startDay + 7; $day++):?>
-            <?php $currentDate = $day < 10 ? "{$currentYear}-{$currentMonth}-0{$day}" : "{$currentYear}-{$currentMonth}-{$day}";?>
-            <tr class="attend-<?php echo $attends[$currentDate]->status?>">
+            <?php 
+              $currentDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-{$day}"));
+              $status = isset($attends[$currentDate]) ? $attends[$currentDate]->status : '';
+            ?>
+            <tr class="attend-<?php echo $status?>">
               <td><?php echo $currentDate;?></td>
               <td><?php echo $lang->datepicker->dayNames[($day + $weekOffset) % 7]?></td>
               <?php if(isset($attends[$currentDate])):?>
-              <td class='attend-signin'><?php echo substr($attends[$currentDate]->signIn, 0, 5);?></td>
-              <td class='attend-signout'><?php echo substr($attends[$currentDate]->signOut, 0, 5);?></td>
+              <?php $url = $this->createLink('oa.attend', 'edit', "date=" . str_replace('-', '', $currentDate));?>
+              <td class='attend-signin'>
+                <?php $signIn = substr($attends[$currentDate]->signIn, 0, 5);?>
+                <?php if(strpos(',late,both,absent,', $status) !== false) $signIn = html::a($url, $signIn . " <i class='icon icon-edit'></i>" , "data-toggle='modal' data-type='iframe' data-title='{$lang->attend->manual}'");?>
+                <?php echo $signIn;?>
+              </td>
+              <td class='attend-signout'>
+                <?php $signOut = substr($attends[$currentDate]->signOut, 0, 5);?>
+                <?php if(strpos(',early,both,absent,', $status) !== false) $signOut = html::a($url, $signOut . " <i class='icon icon-edit'></i>" , "data-toggle='modal' data-type='iframe' data-title='{$lang->attend->manual}'");?>
+                <?php echo $signOut;?>
+              </td>
               <?php else:?>
               <td></td>
               <td></td>
