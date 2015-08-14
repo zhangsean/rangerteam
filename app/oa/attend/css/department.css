@@ -6,3 +6,5 @@
 .attend-leave [class^=attend] {background: #DDF4DF}
 .attend-trip [class^=attend] {background: #DDF4DF}
 .attend-rest [class^=attend] {}
+
+.valign-middle {vertical-align: middle !important;}
