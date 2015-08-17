@@ -17,12 +17,12 @@
 <?php $vars = "mode={$mode}&date={$date}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
-  <?php commonModel::printLink('trade', 'create', 'type=in',  "{$lang->trade->createIn}</i>", "class='btn btn-primary'")?>
-  <?php commonModel::printLink('trade', 'create', 'type=out', "{$lang->trade->createOut}</i>", "class='btn btn-primary'")?>
-  <?php commonModel::printLink('trade', 'transfer', '', "{$lang->trade->transfer}</i>", "class='btn btn-primary'")?>
-  <?php commonModel::printLink('trade', 'inveset', '', "{$lang->trade->inveset}</i>", "class='btn btn-primary'")?>
-  <?php commonModel::printLink('trade', 'batchcreate', '', "{$lang->trade->batchCreate}</i>", "class='btn btn-primary'")?>
-  <?php commonModel::printLink('trade', 'import', '', "{$lang->trade->import}</i>", "class='btn btn-primary' data-toggle='modal'")?>
+  <?php commonModel::printLink('trade', 'create', 'type=in',  "{$lang->trade->createIn}", "class='btn btn-primary'")?>
+  <?php commonModel::printLink('trade', 'create', 'type=out', "{$lang->trade->createOut}", "class='btn btn-primary'")?>
+  <?php commonModel::printLink('trade', 'transfer', '', "{$lang->trade->transfer}", "class='btn btn-primary'")?>
+  <?php commonModel::printLink('trade', 'inveset', '', "{$lang->trade->inveset}", "class='btn btn-primary'")?>
+  <?php commonModel::printLink('trade', 'batchcreate', '', "{$lang->trade->batchCreate}", "class='btn btn-primary'")?>
+  <?php commonModel::printLink('trade', 'import', '', "{$lang->trade->import}", "class='btn btn-primary' data-toggle='modal'")?>
   <?php if(commonModel::hasPriv('trade', 'export')):?>
   <div class='btn-group'>
     <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo $lang->export;?> <span class='caret'></span></button>

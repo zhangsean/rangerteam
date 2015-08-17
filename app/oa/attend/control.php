@@ -103,6 +103,86 @@ class attend extends control
     }
 
     /**
+     * Export attend data.
+     * 
+     * @param  string $date 
+     * @param  bool   $company 
+     * @access public
+     * @return void
+     */
+    public function export($date = '', $company = false)
+    {
+        if($_POST)
+        {
+            if($date == '' or strlen($date) != 6) $date = date('Ym');
+            $currentYear  = substr($date, 0, 4);
+            $currentMonth = substr($date, 4, 2);
+            $startDate    = "{$currentYear}-{$currentMonth}-01";
+            $endDate      = date('Y-m-d', strtotime("$startDate +1 month"));
+            $dayNum       = (int)date('d', strtotime("$endDate -1 day"));
+
+            /* Get deptList. */
+            if($company) 
+            {
+                $deptList = $this->loadModel('tree')->getPairs('', 'dept');
+                $deptList[0] = '/';
+            }
+            else
+            {
+                $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+                foreach($deptList as $key => $value) $deptList[$key] = $value->name;
+            }
+
+            /* Get attend. */
+            $attends = array();
+            if(!empty($deptList)) 
+            {
+                $dept = array_keys($deptList);
+                $attends = $this->attend->getByDept($dept, $startDate, $endDate);
+            }
+
+            $users    = $this->loadModel('user')->getList();
+            $tmpUsers = array();
+            foreach($users as $key => $user) $tmpUsers[$user->account] = $user;
+            $users = $tmpUsers;
+
+            /* Get fields. */
+            $this->app->loadLang('user');
+            $fields['id']       = $this->lang->attend->id;
+            $fields['dept']     = $this->lang->user->dept;
+            $fields['realname'] = $this->lang->user->realname;
+            for($i = 1; $i <= $dayNum; $i++)
+            {
+                $currentDate  = date("Y-m-d", strtotime("$currentYear-$currentMonth-$i"));
+                $dayNameIndex = date('w', strtotime($currentDate));
+                $fields[$currentDate] = "$currentDate({$this->lang->datepicker->dayNames[$dayNameIndex]})";
+            }
+
+            /* Get row data. */
+            $datas = array();
+            foreach($attends as $account => $attendList)
+            {
+                $data = new stdclass();
+                $data->id       = $users[$account]->id;
+                $data->dept     = $deptList[$users[$account]->dept];
+                $data->realname = $users[$account]->realname;
+                for($i = 1; $i <= $dayNum; $i++)
+                {
+                    $currentDate  = date("Y-m-d", strtotime("$currentYear-$currentMonth-$i"));
+                    $data->$currentDate = isset($attendList[$currentDate]) ? $this->lang->attend->abbrStatusList[$attendList[$currentDate]->status] : '';
+                }
+                $datas[] = $data;
+            }
+
+            $this->post->set('fields', $fields);
+            $this->post->set('rows', $datas);
+            $this->post->set('kind', 'attendance');
+            $this->fetch('file', 'export2CSV', $_POST);
+        }
+        $this->display();
+    }
+
+    /**
      * Sign in. 
      * 
      * @access public

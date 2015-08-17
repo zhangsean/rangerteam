@@ -12,6 +12,9 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('company', $company)?>
+<div id='menuActions'>
+  <?php commonModel::printLink('oa.attend', 'export', "data=$currentYear$currentMonth&company=$company", "{$lang->attend->export}", "class='iframe btn btn-primary'")?>
+</div>
 <div class='row'>
   <div class='col-xs-2'>
     <div class='panel panel-sm'>

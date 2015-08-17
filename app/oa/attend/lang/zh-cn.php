@@ -7,6 +7,7 @@ $lang->attend->company    = '公司考勤';
 $lang->attend->manual     = '补录';
 $lang->attend->review     = '补录审核';
 $lang->attend->settings   = '设置';
+$lang->attend->export     = '导出';
 
 $lang->attend->id       = '编号';
 $lang->attend->date     = '日期';

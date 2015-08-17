@@ -7,6 +7,7 @@ $lang->attend->company    = 'Company attend';
 $lang->attend->manual     = 'Manual sign';
 $lang->attend->review     = 'Review attendance';
 $lang->attend->settings   = 'Setting';
+$lang->attend->export     = 'Export';
 
 $lang->attend->id       = 'ID';
 $lang->attend->date     = 'Date';
