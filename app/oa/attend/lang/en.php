@@ -36,6 +36,15 @@ $lang->attend->statusList['leave']  = 'Ask for leave';
 $lang->attend->statusList['trip']   = 'Biz trip';
 $lang->attend->statusList['rest']   = 'Rest day';
 
+$lang->attend->abbrStatusList['normal'] = '√';
+$lang->attend->abbrStatusList['late']   = 'Late';
+$lang->attend->abbrStatusList['early']  = 'Early';
+$lang->attend->abbrStatusList['both']   = 'L+E';
+$lang->attend->abbrStatusList['absent'] = 'Absent';
+$lang->attend->abbrStatusList['leave']  = 'Leave';
+$lang->attend->abbrStatusList['trip']   = 'Biz';
+$lang->attend->abbrStatusList['rest']   = 'Rest';
+
 $lang->attend->reasonlist['normal'] = 'Normal';
 $lang->attend->reasonlist['trip']   = 'Biz trip';
 $lang->attend->reasonlist['leave']  = 'Ask for leave';

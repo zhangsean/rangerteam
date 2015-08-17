@@ -18,10 +18,10 @@
         <ul class='tree' data-collapsed='true'>
           <?php foreach($yearList as $year):?>
           <li>
-            <?php commonModel::printLink('attend', 'personal', "date=$year", $year);?>
+            <?php commonModel::printLink('attend', 'department', "date=$year", $year);?>
             <ul>
               <?php foreach($monthList[$year] as $month):?>
-              <li><?php commonModel::printLink('attend', 'personal', "date=$year$month", $year . $month);?></li>
+              <li><?php commonModel::printLink('attend', 'department', "date=$year$month", $year . $month);?></li>
               <?php endforeach;?>
             </ul>
           </li>
@@ -55,13 +55,13 @@
         <?php foreach($attends as $account => $userAttends):?>
         <tr>
           <td><?php echo isset($users[$account]) ? $users[$account]->id : '';?></td>
-          <td><?php echo $deptList[$currentDept]->name?></td>
+          <td><?php echo isset($users[$account]) ? $deptList[$users[$account]->dept]->name : ''?></td>
           <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
           <?php for($day = 1; $day <= $dayNum; $day++):?>
           <?php $currentDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-{$day}"));?>
           <td>
             <?php if(isset($userAttends[$currentDate])):?>
-            <span class='attend-<?php echo $userAttends[$currentDate]->status?>'><?php echo $userAttends[$currentDate]->status?></span>
+            <span class='attend-<?php echo $userAttends[$currentDate]->status?>'><?php echo $lang->attend->abbrStatusList[$userAttends[$currentDate]->status]?></span>
             <?php endif;?>
           </td>
           <?php endfor;?>

@@ -47,11 +47,10 @@ class attend extends control
      * department's attend. 
      * 
      * @param  string $date 
-     * @param  int    $dept 
      * @access public
      * @return void
      */
-    public function department($date = '', $dept = '')
+    public function department($date = '')
     {
         if($date == '' or strlen($date) != 6) $date = date('Ym');
         $currentYear  = substr($date, 0, 4);
@@ -68,11 +67,11 @@ class attend extends control
         $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
         if(!empty($deptList)) 
         {
-            if($dept == '' or !isset($deptList[$dept])) $dept = current($deptList)->id;
+            $dept = array_keys($deptList);
             $attends = $this->attend->getByDept($dept, $startDate, $endDate);
         }
 
-        $users    = $this->loadModel('user')->getList($dept);
+        $users    = $this->loadModel('user')->getList();
         $newUsers = array();
         foreach($users as $key => $user) $newUsers[$user->account] = $user;
 
@@ -82,7 +81,6 @@ class attend extends control
         $this->view->weekNum      = $weekNum;
         $this->view->currentYear  = $currentYear;
         $this->view->currentMonth = $currentMonth;
-        $this->view->currentDept  = $dept;
         $this->view->yearList     = $yearList;
         $this->view->monthList    = $monthList;
         $this->view->deptList     = $deptList;

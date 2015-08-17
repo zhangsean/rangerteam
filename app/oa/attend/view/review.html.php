@@ -19,8 +19,6 @@
         <th class='w-100px'><?php echo $lang->user->dept;?></th>
         <th class='w-100px'><?php echo $lang->user->realname;?></th>
         <th class='w-100px'><?php echo $lang->attend->date;?></th>
-        <th class='w-80px'><?php echo $lang->attend->signIn;?></th>
-        <th class='w-80px'><?php echo $lang->attend->signOut;?></th>
         <th class='w-100px'><?php echo $lang->attend->status;?></th>
         <th class='w-80px'><?php echo $lang->attend->manualIn;?></th>
         <th class='w-80px'><?php echo $lang->attend->manualOut;?></th>
@@ -36,8 +34,6 @@
         <td><?php echo $deptList[$currentDept]->name?></td>
         <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
         <td><?php echo $attend->date?></td>
-        <td><?php echo substr($attend->signIn, 0, 5)?></td>
-        <td><?php echo substr($attend->signOut, 0, 5)?></td>
         <td><?php echo zget($lang->attend->statusList, $attend->status)?></td>
         <td><?php echo substr($attend->manualIn, 0, 5)?></td>
         <td><?php echo substr($attend->manualOut, 0, 5)?></td>
