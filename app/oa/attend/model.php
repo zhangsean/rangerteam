@@ -76,12 +76,12 @@ class attendModel extends model
         $this->processStatus();
         $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
 
-        $attends = $this->dao->select('*')->from(TABLE_ATTEND)
-            ->where('account')->in(array_keys($users))
-            ->beginIf($startDate != '')->andWhere('`date`')->ge($startDate)->fi()
-            ->beginIf($endDate != '')->andWhere('`date`')->lt($endDate)->fi()
-            ->beginIf($reviewStatus != '')->andWhere('reviewStatus')->eq($reviewStatus)->fi()
-            ->orderBy('`date`')
+        $attends = $this->dao->select('t1.*')->from(TABLE_ATTEND)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.account=t2.account")
+            ->where('t1.account')->in(array_keys($users))
+            ->beginIf($startDate != '')->andWhere('t1.date')->ge($startDate)->fi()
+            ->beginIf($endDate != '')->andWhere('t1.date')->lt($endDate)->fi()
+            ->beginIf($reviewStatus != '')->andWhere('t1.reviewStatus')->eq($reviewStatus)->fi()
+            ->orderBy('t2.dept,t1.date')
             ->fetchAll();
 
         foreach($attends as $key => $attend) 

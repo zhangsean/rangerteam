@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php js::set('company', $company)?>
 <div class='row'>
   <div class='col-xs-2'>
     <div class='panel panel-sm'>
@@ -18,10 +19,10 @@
         <ul class='tree' data-collapsed='true'>
           <?php foreach($yearList as $year):?>
           <li>
-            <?php commonModel::printLink('attend', 'department', "date=$year", $year);?>
+            <?php commonModel::printLink('attend', 'department', "date=$year&company=$company", $year);?>
             <ul>
               <?php foreach($monthList[$year] as $month):?>
-              <li><?php commonModel::printLink('attend', 'department', "date=$year$month", $year . $month);?></li>
+              <li><?php commonModel::printLink('attend', 'department', "date=$year$month&company=$company", $year . $month);?></li>
               <?php endforeach;?>
             </ul>
           </li>
@@ -55,7 +56,7 @@
         <?php foreach($attends as $account => $userAttends):?>
         <tr>
           <td><?php echo isset($users[$account]) ? $users[$account]->id : '';?></td>
-          <td><?php echo isset($users[$account]) ? $deptList[$users[$account]->dept]->name : ''?></td>
+          <td><?php echo isset($users[$account]) ? $deptList[$users[$account]->dept] : ''?></td>
           <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
           <?php for($day = 1; $day <= $dayNum; $day++):?>
           <?php $currentDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-{$day}"));?>
