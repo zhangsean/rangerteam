@@ -305,6 +305,7 @@ class attendModel extends model
         $dayIndex = date('w', strtotime($attend->date));
         if($this->config->attend->workingDays == '5' and ($dayIndex == 0 or $dayIndex == 6)) return 'rest';
         if($this->config->attend->workingDays == '6' and $dayIndex == 0) return 'rest';
+        if($this->loadModel('holiday')->isHoliday($attend->date)) return 'rest';
 
         /* 'leave': ask for leave. 'trip': biz trip. */
 

@@ -43,4 +43,9 @@ $lang->attend->menu->personal   = 'My attendance|attend|personal|';
 $lang->attend->menu->department = 'Department attendance|attend|department|';
 $lang->attend->menu->company    = 'Company attendance|attend|department|date=&company=true';
 $lang->attend->menu->review     = 'Review attendance|attend|review|';
+$lang->attend->menu->holiday    = 'Holiday|holiday|browse|';
 $lang->attend->menu->settings   = 'Setting|attendance|settings|';
+
+$lang->holiday = new stdclass();
+$lang->holiday->menu = $lang->attend->menu;
+$lang->menuGroups->holiday = 'attend';
