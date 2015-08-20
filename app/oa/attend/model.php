@@ -146,7 +146,7 @@ class attendModel extends model
             return !dao::isError();
         }
 
-        if($attend->signIn == '')
+        if($attend->signIn == '' or $attend->signIn == '00:00:00')
         {
             $this->dao->update(TABLE_ATTEND)
                 ->set('signIn')->eq(helper::time())

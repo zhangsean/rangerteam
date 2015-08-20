@@ -8,3 +8,4 @@
 .attend-rest [class^=attend] {}
 
 .valign-middle {vertical-align: middle !important;}
+.tree .active{font-weight: bold;}

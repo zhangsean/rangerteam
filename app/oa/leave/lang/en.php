@@ -1,0 +1,35 @@
+<?php
+if(!isset($lang->leave)) $lang->leave = new stdclass();
+$lang->leave->common = 'Leave';
+$lang->leave->browse = 'Browse leave';
+$lang->leave->create = 'Create';
+$lang->leave->edit   = 'Edit';
+$lang->leave->review = 'Review';
+
+$lang->leave->id           = 'ID';
+$lang->leave->begin        = 'Begin date';
+$lang->leave->end          = 'End date';
+$lang->leave->start        = 'Begin time';
+$lang->leave->finish       = 'End time';
+$lang->leave->type         = 'Type';
+$lang->leave->desc         = 'Description';
+$lang->leave->status       = 'Status';
+$lang->leave->createdBy    = 'Created by';
+$lang->leave->createdDate  = 'Created date';
+$lang->leave->reviewedBy   = 'Reviewed by';
+$lang->leave->reviewedDate = 'Reviewed date';
+$lang->leave->date         = 'Date';
+$lang->leave->time         = 'Time';
+
+$lang->leave->typeList['sick']      = 'Sick';
+$lang->leave->typeList['marry']     = 'Marry';
+$lang->leave->typeList['maternity'] = 'Maternity';
+$lang->leave->typeList['affairs']   = 'Affairs';
+$lang->leave->typeList['home']      = 'Home';
+$lang->leave->typeList['annual']    = 'Annual';
+
+$lang->leave->statusList['wait']   = 'Wait';
+$lang->leave->statusList['pass']   = 'Pass';
+$lang->leave->statusList['reject'] = 'Reject';
+
+$lang->leave->denied = 'access denied';

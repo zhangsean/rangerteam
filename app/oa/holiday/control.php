@@ -72,7 +72,7 @@ class holiday extends control
         $holiday = $this->holiday->getById($id);
         if($_POST)
         {
-            $this->holiday->edit($id);
+            $this->holiday->update($id);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }

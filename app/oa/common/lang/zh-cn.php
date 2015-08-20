@@ -18,6 +18,7 @@ $lang->menu->oa->project   = '项目|project|index|';
 $lang->menu->oa->announce  = '公告|announce|browse|';
 $lang->menu->oa->doc       = '文档|doc|browse|';
 $lang->menu->oa->attend    = '考勤|attend|personal|';
+$lang->menu->oa->leave     = '请假|leave|browse|type=personal';
 
 $lang->dashboard = new stdclass();
 
@@ -49,3 +50,9 @@ $lang->attend->menu->settings   = '设置|attend|settings|';
 $lang->holiday = new stdclass();
 $lang->holiday->menu = $lang->attend->menu;
 $lang->menuGroups->holiday = 'attend';
+
+$lang->leave = new stdclass();
+$lang->leave->menu = new stdclass();
+$lang->leave->menu->browsePersonal = '我的请假|leave|browse|type=personal';
+$lang->leave->menu->browseDept     = '部门|leave|browse|type=department';
+$lang->leave->menu->browseCompany  = '公司|leave|browse|type=company';

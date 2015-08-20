@@ -102,7 +102,7 @@ class holidayModel extends model
      * @access public
      * @return bool
      */
-    public function edit($id)
+    public function update($id)
     {
         $holiday = fixer::input('post')->get();
         $holiday->year = substr($holiday->begin, 0, 4);
@@ -110,7 +110,7 @@ class holidayModel extends model
         $this->dao->update(TABLE_HOLIDAY)
             ->data($holiday)
             ->autoCheck()
-            ->batchCheck($this->config->holiday->require->create, 'notempty')
+            ->batchCheck($this->config->holiday->require->edit, 'notempty')
             ->check('end', 'ge', $holiday->begin)
             ->where('id')->eq($id)
             ->exec();

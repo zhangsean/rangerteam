@@ -21,11 +21,13 @@
       <div class='panel-body'>
         <ul class='tree' data-collapsed='true'>
           <?php foreach($yearList as $year):?>
-          <li>
+          <li class='<?php echo $year == $currentYear ? 'active' : ''?>'>
             <?php commonModel::printLink('attend', 'department', "date=$year&company=$company", $year);?>
             <ul>
               <?php foreach($monthList[$year] as $month):?>
-              <li><?php commonModel::printLink('attend', 'department', "date=$year$month&company=$company", $year . $month);?></li>
+              <li class='<?php echo ($year == $currentYear and $month == $currentMonth) ? 'active' : ''?>'>
+                <?php commonModel::printLink('attend', 'department', "date=$year$month&company=$company", $year . $month);?>
+              </li>
               <?php endforeach;?>
             </ul>
           </li>
