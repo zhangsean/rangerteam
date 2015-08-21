@@ -19,6 +19,7 @@ $lang->menu->oa->announce  = '公告|announce|browse|';
 $lang->menu->oa->doc       = '文档|doc|browse|';
 $lang->menu->oa->attend    = '考勤|attend|personal|';
 $lang->menu->oa->leave     = '请假|leave|browse|type=personal';
+$lang->menu->oa->trip      = '出差|trip|browse|type=personal';
 
 $lang->dashboard = new stdclass();
 
@@ -56,3 +57,9 @@ $lang->leave->menu = new stdclass();
 $lang->leave->menu->browsePersonal = '我的请假|leave|browse|type=personal';
 $lang->leave->menu->browseDept     = '部门|leave|browse|type=department';
 $lang->leave->menu->browseCompany  = '公司|leave|browse|type=company';
+
+$lang->trip = new stdclass();
+$lang->trip->menu = new stdclass();
+$lang->trip->menu->browsePersonal = '我的出差|trip|browse|type=personal';
+$lang->trip->menu->browseDept     = '部门|trip|browse|type=department';
+$lang->trip->menu->browseCompany  = '公司|trip|browse|type=company';

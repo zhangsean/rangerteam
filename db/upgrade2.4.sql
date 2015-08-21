@@ -60,18 +60,17 @@ CREATE TABLE `oa_leave` (
 CREATE TABLE `oa_trip` (
   `id` mediumint NOT NULL AUTO_INCREMENT,
   `name` char(30) NOT NULL,
-  `users` char(255) NOT NULL,
+  `desc` text NOT NULL,
   `year` char(4) NOT NULL,
   `begin` date NOT NULL,
   `end` date NOT NULL,
   `start` time NOT NULL,
   `finish` time NOT NULL,
-  `from` char(30) NOT NULL,
-  `to` char(30) NOT NULL,
-  `desc` text NOT NULL,
+  `from` char(50) NOT NULL,
+  `to` char(50) NOT NULL,
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `year` (`year`),
-  KEY `account` (`account`)
+  KEY `createdBy` (`createdBy`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

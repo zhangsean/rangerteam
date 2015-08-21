@@ -26,6 +26,13 @@ else if(isset($modalSizeList[$modalWidth]))
     $modalWidth = $modalSizeList[$modalWidth];
 }
 if(isset($pageCSS)) css::internal($pageCSS);
+
+/* set requiredField. */
+if(isset($this->config->$moduleName->require->$methodName)) 
+{
+    $requiredFields = str_replace(' ', '', $this->config->$moduleName->require->$methodName);
+    js::execute("config.requiredFields = \"$requiredFields\"; setRequiredFields();");
+}
 ?>
 <div class="modal-dialog" style="width:<?php echo $modalWidth;?>;">
   <div class="modal-content">
