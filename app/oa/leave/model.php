@@ -108,7 +108,7 @@ class leaveModel extends model
         $this->dao->update(TABLE_LEAVE)
             ->data($leave)
             ->autoCheck()
-            ->batchCheck($this->config->leave->require->update, 'notempty')
+            ->batchCheck($this->config->leave->require->edit, 'notempty')
             ->where('id')->eq($id)
             ->exec();
         return !dao::isError();

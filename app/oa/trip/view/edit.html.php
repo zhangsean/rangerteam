@@ -12,7 +12,6 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
-<?php js::exportConfigVars();?>
 <div class='panel-body'>
   <form id='ajaxForm' method='post' action="<?php echo $this->createLink('oa.trip', 'edit', "id=$trip->id")?>">
     <table class='table table-form table-condensed'>

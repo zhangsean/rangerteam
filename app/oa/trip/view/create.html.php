@@ -27,7 +27,7 @@
             <span class='input-group-addon'><?php echo $lang->trip->date?></span>
             <?php echo html::input('begin', '', "class='form-control form-date'")?>
             <span class='input-group-addon fix-border'><?php echo $lang->trip->time?></span>
-            <?php echo html::input('start', '', "class='form-control form-time'")?>
+            <?php echo html::input('start', $this->config->attend->signInLimit, "class='form-control form-time'")?>
           </div>
         </td>
         <td></td>
@@ -39,7 +39,7 @@
             <span class='input-group-addon'><?php echo $lang->trip->date?></span>
             <?php echo html::input('end', '', "class='form-control form-date'")?>
             <span class='input-group-addon fix-border'><?php echo $lang->trip->time?></span>
-            <?php echo html::input('finish', '', "class='form-control form-time'")?>
+            <?php echo html::input('finish', $this->config->attend->signOutLimit, "class='form-control form-time'")?>
           </div>
         </td>
         <td></td>

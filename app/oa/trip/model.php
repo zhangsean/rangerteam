@@ -104,7 +104,7 @@ class tripModel extends model
         $this->dao->update(TABLE_TRIP)
             ->data($trip)
             ->autoCheck()
-            ->batchCheck($this->config->trip->require->update, 'notempty')
+            ->batchCheck($this->config->trip->require->edit, 'notempty')
             ->where('id')->eq($id)
             ->exec();
         return !dao::isError();
