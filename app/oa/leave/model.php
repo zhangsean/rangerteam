@@ -85,6 +85,7 @@ class leaveModel extends model
             ->data($leave)
             ->autoCheck()
             ->batchCheck($this->config->leave->require->create, 'notempty')
+            ->check('end', 'ge', $leave->begin)
             ->exec();
         return !dao::isError();
     }
@@ -109,6 +110,7 @@ class leaveModel extends model
             ->data($leave)
             ->autoCheck()
             ->batchCheck($this->config->leave->require->edit, 'notempty')
+            ->check('end', 'ge', $leave->begin)
             ->where('id')->eq($id)
             ->exec();
         return !dao::isError();
@@ -132,6 +134,27 @@ class leaveModel extends model
             ->where('id')->eq($id)
             ->exec();
         return !dao::isError();
+    }
+
+    /**
+     * check date is in leave. 
+     * 
+     * @param  string $date 
+     * @param  string $account 
+     * @access public
+     * @return bool
+     */
+    public function isLeave($date, $account)
+    {
+        static $leaveList = array();
+        if(!isset($leaveList[$account])) $leaveList[$account] = $this->getList($year = '', $month = '', $account, $dept = '', 'pass');
+
+        foreach($leaveList[$account] as $leave)
+        {
+            if(strtotime($date) >= strtotime($leave->begin) and strtotime($date) <= strtotime($leave->end)) return true;
+        }
+
+        return false;
     }
 
     /**

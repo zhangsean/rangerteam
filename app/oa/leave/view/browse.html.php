@@ -58,17 +58,19 @@
           <td><?php echo $leave->begin . ' ' . $leave->start;?></td>
           <td><?php echo $leave->end . ' ' . $leave->finish;?></td>
           <td><?php echo zget($this->lang->leave->typeList, $leave->type);?></td>
-          <td><?php echo zget($this->lang->leave->statusList, $leave->status);?></td>
+          <td class='leave-<?php echo $leave->status?>'><?php echo zget($this->lang->leave->statusList, $leave->status);?></td>
           <td><?php echo zget($users, $leave->createdBy);?></td>
           <td><?php echo zget($users, $leave->reviewedBy);?></td>
           <td><?php echo $leave->desc;?></td>
-          <td class='text-left'>
+          <td>
             <?php if($type == 'department' and $leave->status == 'wait'):?>
             <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=pass"), $lang->leave->statusList['pass'], "class='review'");?>
             <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=reject"), $lang->leave->statusList['reject'], "class='review'");?>
             <?php endif;?>
+            <?php if($type == 'personal' and $leave->status == 'wait'):?>
             <?php echo html::a($this->createLink('oa.leave', 'edit', "id=$leave->id"), $lang->edit, "data-toggle='modal'");?>
             <?php echo html::a($this->createLink('oa.leave', 'delete', "id=$leave->id"), $lang->delete, "class='deleter'");?>
+            <?php endif;?>
           </td>
         </tr>
         <?php endforeach;?>

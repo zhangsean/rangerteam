@@ -308,6 +308,8 @@ class attendModel extends model
         if($this->loadModel('holiday')->isHoliday($attend->date)) return 'rest';
 
         /* 'leave': ask for leave. 'trip': biz trip. */
+        if($this->loadModel('leave')->isLeave($attend->date, $attend->account)) return 'leave';
+        if($this->loadModel('trip')->isTrip($attend->date, $attend->account)) return 'trip';
 
         /* 'absent', absenteeism */
         if($attend->signIn == "00:00:00" and $attend->signOut == "00:00:00") return 'absent';

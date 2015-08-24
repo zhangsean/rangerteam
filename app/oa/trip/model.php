@@ -82,6 +82,7 @@ class tripModel extends model
             ->data($trip)
             ->autoCheck()
             ->batchCheck($this->config->trip->require->create, 'notempty')
+            ->check('end', 'ge', $trip->begin)
             ->exec();
         return !dao::isError();
     }
@@ -105,9 +106,31 @@ class tripModel extends model
             ->data($trip)
             ->autoCheck()
             ->batchCheck($this->config->trip->require->edit, 'notempty')
+            ->check('end', 'ge', $trip->begin)
             ->where('id')->eq($id)
             ->exec();
         return !dao::isError();
+    }
+
+    /**
+     * Check date is in trip. 
+     * 
+     * @param  string $date 
+     * @param  string $account 
+     * @access public
+     * @return bool
+     */
+    public function isTrip($date, $account)
+    {
+        static $tripList = array();
+        if(!isset($tripList[$account])) $tripList[$account] = $this->getList($year = '', $month = '', $account);
+
+        foreach($tripList[$account] as $trip)
+        {
+            if(strtotime($date) >= strtotime($trip->begin) and strtotime($date) <= strtotime($trip->end)) return true;
+        }
+
+        return false;
     }
 
     /**

@@ -106,6 +106,7 @@ class leave extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
+        $this->app->loadConfig('attend');
         $this->view->title = $this->lang->leave->create;
         $this->display();
     }
