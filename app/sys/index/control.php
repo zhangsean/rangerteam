@@ -81,6 +81,7 @@ class index extends control
         $this->view->allEntries = $allEntries;
         $this->view->blocks     = $blocks;
         $this->view->company    = $this->loadModel('setting')->getItem('owner=system&app=sys&module=common&section=company&key=name');
+        $this->view->notice     = $this->loadModel('attend', 'oa')->getNotice();
         $this->display();
     }
 }

@@ -35,7 +35,25 @@ class attendModel extends model
     public function getByDate($date, $account)
     {
         $attend = $this->dao->select('*')->from(TABLE_ATTEND)->where('date')->eq($date)->andWhere('account')->eq($account)->fetch();
-        return empty($attend) ? $attend : $this->processAttend($attend);
+        if(empty($attend))
+        {
+            $attend = new stdclass();
+            $attend->account = $account;
+            $attend->date    = $date;
+            $attend->signIn  = '00:00';
+            $attend->signOut = '00:00';
+            $attend->status  = $this->computeStatus($attend);
+            $attend->manualIn     = '';
+            $attend->manualOut    = '';
+            $attend->reason       = '';
+            $attend->desc         = '';
+            $attend->reviewStatus = '';
+            $attend->reviewedBy   = '';
+            $attend->reviewedDate = '';
+            $attend->new          = true;
+        }
+
+        return $this->processAttend($attend);
     }
 
     /**
@@ -116,6 +134,38 @@ class attendModel extends model
             if(!isset($monthList[$year][$month])) $monthList[$year][$month] = $month;
         }
         return $monthList;
+    }
+
+    /**
+     * Get notice.
+     * 
+     * @access public
+     * @return string
+     */
+    public function getNotice()
+    {
+        $account = $this->app->user->account;
+        $link    = helper::createLink('oa.attend', 'personal');
+        $entry   = $this->loadModel('entry')->getByCode('oa');
+        $misc    = "class='app-btn' data-id='{$entry->id}'";
+
+        $today  = helper::today();
+        $attend = $this->getByDate($today, $account);
+        if(empty($attend)) return sprintf($this->lang->attend->notice['today'], $this->lang->attend->statusList['absent'], $link, $misc); 
+        if(!empty($attend) and strpos('late,early,both,absent', $attend->status) !== false) 
+        {
+            return sprintf($this->lang->attend->notice['today'], zget($this->lang->attend->statusList, $attend->status), $link, $misc); 
+        }
+
+        $yestoday = date("Y-m-d", strtotime("-1 day"));
+        $attend   = $this->getByDate($yestoday, $account);
+        if(empty($attend)) return sprintf($this->lang->attend->notice['yestoday'], $this->lang->attend->statusList['absent'], $link, $misc); 
+        if(!empty($attend) and strpos('late,early,both,absent', $attend->status) !== false) 
+        {
+            return sprintf($this->lang->attend->notice['yestoday'], zget($this->lang->attend->statusList, $attend->status), $link, $misc); 
+        }
+
+        return '';
     }
 
     /**
@@ -282,6 +332,7 @@ class attendModel extends model
         $attends = $this->dao->select('*')->from(TABLE_ATTEND)
             ->where('status')->eq('')
             ->andWhere('date')->lt(helper::today())
+            ->orWhere('date')->eq(date("Y-m-d", strtotime("-1 day")))
             ->fetchAll('id');
 
         foreach($attends as $attend)

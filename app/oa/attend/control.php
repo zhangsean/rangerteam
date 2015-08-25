@@ -245,23 +245,6 @@ class attend extends control
     {
         $account = $this->app->user->account;
         $attend  = $this->attend->getByDate($date, $account);
-        if(empty($attend))
-        {
-            $attend = new stdclass();
-            $attend->account = $account;
-            $attend->date    = $date;
-            $attend->signIn  = '00:00';
-            $attend->signOut = '00:00';
-            $attend->status  = 'absent';
-            $attend->manualIn     = '';
-            $attend->manualOut    = '';
-            $attend->reason       = '';
-            $attend->desc         = '';
-            $attend->reviewStatus = '';
-            $attend->reviewedBy   = '';
-            $attend->reviewedDate = '';
-            $attend->new          = true;
-        }
 
         if($_POST)
         {

@@ -67,6 +67,7 @@ $isSuperAdmin = $this->app->user->admin == 'super';
     </nav>
     <div id='dashboardWrapper'>
       <div class='panels-container dashboard' id='dashboard' data-confirm-remove-block='<?php  echo $lang->block->confirmRemoveBlock;?>'>
+        <?php echo empty($notice) ? '' : "<div class='alert alert-danger'>$notice</div>";?>
         <div class='row'>
           <?php
           $index = 0;
