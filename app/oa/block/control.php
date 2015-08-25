@@ -267,6 +267,24 @@ class block extends control
     }
 
     /**
+     * Print attend block. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function printAttendBlock()
+    {
+        $this->loadModel('attend', 'oa');
+        $startDate = date("Y") . "-" . date("m") . "-01";
+        $endDate   = date('Y-m-d', strtotime("$startDate +1 month"));
+        $attends   = $this->attend->getByAccount($this->app->user->account, $startDate, $endDate);
+
+        $this->processParams();
+        $this->view->attends = $attends;
+        $this->display();
+    }
+
+    /**
      * Process params.
      * 
      * @access public

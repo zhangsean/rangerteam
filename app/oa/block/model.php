@@ -126,4 +126,16 @@ class oablockModel extends blockModel
 
         return json_encode($params);
     }
+
+    /**
+     * Get attend params.
+     * 
+     * @access public
+     * @return string
+     */
+    public function getAttendParams()
+    {
+        $params = new stdclass();
+        return json_encode($params);
+    }
 }
