@@ -4,7 +4,11 @@ $lang->trip->common = 'Trip';
 $lang->trip->browse = 'Browse trip';
 $lang->trip->create = 'Create';
 $lang->trip->edit   = 'Edit';
-$lang->trip->review = 'Review';
+$lang->trip->delete = 'Delete';
+
+$lang->trip->personal   = 'My trip';
+$lang->trip->department = 'Department';
+$lang->trip->company    = 'Company';
 
 $lang->trip->id          = 'ID';
 $lang->trip->name        = 'Name';

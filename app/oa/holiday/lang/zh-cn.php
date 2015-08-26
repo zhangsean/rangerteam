@@ -4,6 +4,7 @@ $lang->holiday->common = '节假日';
 $lang->holiday->browse = '浏览';
 $lang->holiday->create = '新建';
 $lang->holiday->edit   = '编辑';
+$lang->holiday->delete = '删除';
 
 $lang->holiday->id    = '编号';
 $lang->holiday->name  = '名称';

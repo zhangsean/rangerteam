@@ -4,7 +4,12 @@ $lang->leave->common = 'Leave';
 $lang->leave->browse = 'Browse leave';
 $lang->leave->create = 'Create';
 $lang->leave->edit   = 'Edit';
+$lang->leave->delete = 'Delete';
 $lang->leave->review = 'Review';
+
+$lang->leave->personal   = 'My leave';
+$lang->leave->department = 'Department';
+$lang->leave->company    = 'Company';
 
 $lang->leave->id           = 'ID';
 $lang->leave->begin        = 'Begin date';

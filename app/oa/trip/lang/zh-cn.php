@@ -6,6 +6,10 @@ $lang->trip->create = '新建';
 $lang->trip->edit   = '编辑';
 $lang->trip->delete = '删除';
 
+$lang->trip->personal   = '我的请假';
+$lang->trip->department = '部门';
+$lang->trip->company    = '公司';
+
 $lang->trip->id          = '编号';
 $lang->trip->name        = '名称';
 $lang->trip->begin       = '开始';

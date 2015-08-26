@@ -18,8 +18,8 @@ $lang->menu->oa->project   = '项目|project|index|';
 $lang->menu->oa->announce  = '公告|announce|browse|';
 $lang->menu->oa->doc       = '文档|doc|browse|';
 $lang->menu->oa->attend    = '考勤|attend|personal|';
-$lang->menu->oa->leave     = '请假|leave|browse|type=personal';
-$lang->menu->oa->trip      = '出差|trip|browse|type=personal';
+$lang->menu->oa->leave     = '请假|leave|personal|';
+$lang->menu->oa->trip      = '出差|trip|personal|';
 
 $lang->dashboard = new stdclass();
 
@@ -43,7 +43,7 @@ $lang->attend = new stdclass();
 $lang->attend->menu = new stdclass();
 $lang->attend->menu->personal   = '我的考勤|attend|personal|';
 $lang->attend->menu->department = '部门考勤|attend|department|';
-$lang->attend->menu->company    = '公司考勤|attend|department|date=&company=true';
+$lang->attend->menu->company    = '公司考勤|attend|company|';
 $lang->attend->menu->review     = '补录审核|attend|browsereview|';
 $lang->attend->menu->holiday    = '节假日|holiday|browse|';
 $lang->attend->menu->settings   = '设置|attend|settings|';
@@ -54,12 +54,12 @@ $lang->menuGroups->holiday = 'attend';
 
 $lang->leave = new stdclass();
 $lang->leave->menu = new stdclass();
-$lang->leave->menu->browsePersonal = '我的请假|leave|browse|type=personal';
-$lang->leave->menu->browseDept     = '部门|leave|browse|type=department';
-$lang->leave->menu->browseCompany  = '公司|leave|browse|type=company';
+$lang->leave->menu->personal   = '我的请假|leave|personal|';
+$lang->leave->menu->department = '部门|leave|department|';
+$lang->leave->menu->company    = '公司|leave|company|';
 
 $lang->trip = new stdclass();
 $lang->trip->menu = new stdclass();
-$lang->trip->menu->browsePersonal = '我的出差|trip|browse|type=personal';
-$lang->trip->menu->browseDept     = '部门|trip|browse|type=department';
-$lang->trip->menu->browseCompany  = '公司|trip|browse|type=company';
+$lang->trip->menu->personal   = '我的出差|trip|personal|';
+$lang->trip->menu->department = '部门|trip|department|';
+$lang->trip->menu->company    = '公司|trip|company|';

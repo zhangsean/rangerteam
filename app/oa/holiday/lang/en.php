@@ -3,7 +3,8 @@ if(!isset($lang->holiday)) $lang->holiday = new stdclass();
 $lang->holiday->common = 'Holiday';
 $lang->holiday->browse = 'Browse';
 $lang->holiday->create = 'Create';
-$lang->holiday->eidt   = 'Edit';
+$lang->holiday->edit   = 'Edit';
+$lang->holiday->delete = 'Delete';
 
 $lang->holiday->id    = 'ID';
 $lang->holiday->name  = 'Name';

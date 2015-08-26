@@ -23,6 +23,43 @@ class trip extends control
     }
 
     /**
+     * personal's trip. 
+     * 
+     * @param  string $date 
+     * @access public
+     * @return void
+     */
+    public function personal($date = '')
+    {
+        die($this->fetch('trip', 'browse', "type=personal&date=$date", 'oa'));
+    }
+
+    /**
+     * Department's trip. 
+     * 
+     * @param  string $date 
+     * @access public
+     * @return void
+     */
+    public function department($date = '')
+    {
+        die($this->fetch('trip', 'browse', "type=department&date=$date", 'oa'));
+    }
+
+    /**
+     * Company's trip. 
+     * 
+     * @param  string $date 
+     * @access public
+     * @return void
+     */
+    public function company($date = '')
+    {
+        die($this->fetch('trip', 'browse', "type=company&date=$date", 'oa'));
+    }
+
+
+    /**
      * browse 
      * 
      * @param  string $type 

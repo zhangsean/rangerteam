@@ -43,7 +43,7 @@ $lang->attend = new stdclass();
 $lang->attend->menu = new stdclass();
 $lang->attend->menu->personal   = 'My attendance|attend|personal|';
 $lang->attend->menu->department = 'Department attendance|attend|department|';
-$lang->attend->menu->company    = 'Company attendance|attend|department|date=&company=true';
+$lang->attend->menu->company    = 'Company attendance|attend|company|';
 $lang->attend->menu->review     = 'Review attendance|attend|browsereview|';
 $lang->attend->menu->holiday    = 'Holiday|holiday|browse|';
 $lang->attend->menu->settings   = 'Setting|attendance|settings|';
@@ -54,12 +54,12 @@ $lang->menuGroups->holiday = 'attend';
 
 $lang->leave = new stdclass();
 $lang->leave->menu = new stdclass();
-$lang->leave->menu->browsePersonal = 'My|leave|browse|type=personal';
-$lang->leave->menu->browseDept     = 'Department|leave|browse|type=department';
-$lang->leave->menu->browseCompany  = 'Company|leave|browse|type=company';
+$lang->leave->menu->personal   = 'My|leave|personal|';
+$lang->leave->menu->department = 'Department|leave|department|';
+$lang->leave->menu->company    = 'Company|leave|company|';
 
 $lang->trip = new stdclass();
 $lang->trip->menu = new stdclass();
-$lang->trip->menu->browsePersonal = 'My|trip|browse|type=personal';
-$lang->trip->menu->browseDept     = 'Department|trip|browse|type=department';
-$lang->trip->menu->browseCompany  = 'Company|trip|browse|type=company';
+$lang->trip->menu->personal   = 'My|trip|personal|';
+$lang->trip->menu->department = 'Department|trip|department|';
+$lang->trip->menu->company    = 'Company|trip|company|';

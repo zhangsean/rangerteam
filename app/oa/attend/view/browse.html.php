@@ -1,6 +1,6 @@
 <?php
 /**
- * The personal view file of attend module of Ranzhi.
+ * The browse view file of attend module of Ranzhi.
  *
  * @copyright   Copyright 2009-2015 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
  * @license     ZPL
@@ -22,11 +22,11 @@
         <ul class='tree' data-collapsed='true'>
           <?php foreach($yearList as $year):?>
           <li class='<?php echo $year == $currentYear ? 'active' : ''?>'>
-            <?php commonModel::printLink('attend', 'department', "date=$year&company=$company", $year);?>
+            <?php commonModel::printLink('attend', $company ? 'company' : 'department', "date=$year", $year);?>
             <ul>
               <?php foreach($monthList[$year] as $month):?>
               <li class='<?php echo ($year == $currentYear and $month == $currentMonth) ? 'active' : ''?>'>
-                <?php commonModel::printLink('attend', 'department', "date=$year$month&company=$company", $year . $month);?>
+                <?php commonModel::printLink('attend', $company ? 'company' : 'department', "date=$year$month", $year . $month);?>
               </li>
               <?php endforeach;?>
             </ul>

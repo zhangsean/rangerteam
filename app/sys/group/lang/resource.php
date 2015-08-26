@@ -413,24 +413,67 @@ $lang->doc->methodOrder[35] = 'delete';
 $lang->resource->attend = new stdclass();
 $lang->resource->attend->personal     = 'personal';
 $lang->resource->attend->department   = 'department';
+$lang->resource->attend->company      = 'company';
 $lang->resource->attend->export       = 'export';
 $lang->resource->attend->settings     = 'settings';
 $lang->resource->attend->edit         = 'edit';
 $lang->resource->attend->browseReview = 'browseReview';
 $lang->resource->attend->review       = 'review';
 
-$lang->doc->methodOrder[0]  = 'personal';
-$lang->doc->methodOrder[5]  = 'department';
-$lang->doc->methodOrder[10] = 'export';
-$lang->doc->methodOrder[15] = 'settings';
-$lang->doc->methodOrder[20] = 'edit';
-$lang->doc->methodOrder[25] = 'browseReview';
-$lang->doc->methodOrder[30] = 'review';
+$lang->attend->methodOrder[0]  = 'personal';
+$lang->attend->methodOrder[5]  = 'department';
+$lang->attend->methodOrder[10] = 'company';
+$lang->attend->methodOrder[15] = 'export';
+$lang->attend->methodOrder[20] = 'settings';
+$lang->attend->methodOrder[25] = 'edit';
+$lang->attend->methodOrder[30] = 'browseReview';
+$lang->attend->methodOrder[35] = 'review';
 
-/* Attend */
+/* Holiday */
 $lang->resource->holiday = new stdclass();
-$lang->resource->holiday->browse     = 'personal';
-$lang->doc->methodOrder[0]  = 'personal';
+$lang->resource->holiday->browse = 'browse';
+$lang->resource->holiday->create = 'create';
+$lang->resource->holiday->edit   = 'edit';
+$lang->resource->holiday->delete = 'delete';
+
+$lang->holiday->methodOrder[0]  = 'browse';
+$lang->holiday->methodOrder[5]  = 'create';
+$lang->holiday->methodOrder[10] = 'edit';
+$lang->holiday->methodOrder[15] = 'delete';
+
+/* Leave */
+$lang->resource->leave = new stdclass();
+$lang->resource->leave->personal   = 'personal';
+$lang->resource->leave->department = 'department';
+$lang->resource->leave->company    = 'company';
+$lang->resource->leave->create     = 'create';
+$lang->resource->leave->edit       = 'edit';
+$lang->resource->leave->delete     = 'delete';
+$lang->resource->leave->review     = 'review';
+
+$lang->leave->methodOrder[0]  = 'personal';
+$lang->leave->methodOrder[5]  = 'department';
+$lang->leave->methodOrder[10] = 'company';
+$lang->leave->methodOrder[15] = 'create';
+$lang->leave->methodOrder[20] = 'edit';
+$lang->leave->methodOrder[25] = 'delete';
+$lang->leave->methodOrder[30] = 'review';
+
+/* Trip */
+$lang->resource->trip = new stdclass();
+$lang->resource->trip->personal   = 'personal';
+$lang->resource->trip->department = 'department';
+$lang->resource->trip->company    = 'company';
+$lang->resource->trip->create     = 'create';
+$lang->resource->trip->edit       = 'edit';
+$lang->resource->trip->delete     = 'delete';
+
+$lang->trip->methodOrder[0]  = 'personal';
+$lang->trip->methodOrder[5]  = 'department';
+$lang->trip->methodOrder[10] = 'company';
+$lang->trip->methodOrder[15] = 'create';
+$lang->trip->methodOrder[20] = 'edit';
+$lang->trip->methodOrder[25] = 'delete';
 
 /* Blog. */
 $lang->resource->blog = new stdclass();

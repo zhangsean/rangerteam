@@ -1,7 +1,5 @@
 $(document).ready(function()
 {
-    $("#menu li a").parent().removeClass('active');
-    $("#menu li a[href*='" + v.type + "']").parent().addClass('active');
     $.setAjaxJSONER('.review', function(response)
     {
         if(response.message)

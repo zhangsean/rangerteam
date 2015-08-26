@@ -47,11 +47,35 @@ class attend extends control
      * department's attend. 
      * 
      * @param  string $date 
+     * @access public
+     * @return void
+     */
+    public function department($date = '')
+    {
+        die($this->fetch('attend', 'browse', "date=$date", 'oa'));
+    }
+
+    /**
+     * company's attend. 
+     * 
+     * @param  string $date 
+     * @access public
+     * @return void
+     */
+    public function company($date = '')
+    {
+        die($this->fetch('attend', 'browse', "date=$date&company=true", 'oa'));
+    }
+
+    /**
+     * Browse attend. 
+     * 
+     * @param  string $date 
      * @param  bool   $company 
      * @access public
      * @return void
      */
-    public function department($date = '', $company = false)
+    public function browse($date = '', $company = false)
     {
         if($date == '' or strlen($date) != 6) $date = date('Ym');
         $currentYear  = substr($date, 0, 4);

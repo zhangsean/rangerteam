@@ -23,6 +23,42 @@ class leave extends control
     }
 
     /**
+     * personal's leave. 
+     * 
+     * @param  string $date 
+     * @access public
+     * @return void
+     */
+    public function personal($date = '')
+    {
+        die($this->fetch('leave', 'browse', "type=personal&date=$date", 'oa'));
+    }
+
+    /**
+     * Department's leave. 
+     * 
+     * @param  string $date 
+     * @access public
+     * @return void
+     */
+    public function department($date = '')
+    {
+        die($this->fetch('leave', 'browse', "type=department&date=$date", 'oa'));
+    }
+
+    /**
+     * Company's leave. 
+     * 
+     * @param  string $date 
+     * @access public
+     * @return void
+     */
+    public function company($date = '')
+    {
+        die($this->fetch('leave', 'browse', "type=company&date=$date", 'oa'));
+    }
+
+    /**
      * browse 
      * 
      * @param  string $type 
