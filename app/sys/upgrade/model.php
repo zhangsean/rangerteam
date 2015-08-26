@@ -78,6 +78,9 @@ class upgradeModel extends model
             case '2_3':
                 $this->processCustomerEditedDate();
                 $this->execSQL($this->getUpgradeFile('2.3'));
+            case '2_4':
+                $this->addAttendPriv();
+                $this->execSQL($this->getUpgradeFile('2.4'));
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -106,6 +109,8 @@ class upgradeModel extends model
             case '1_6'     : $confirmContent .= file_get_contents($this->getUpgradeFile('1.6'));
             case '2_0'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.0'));
             case '2_1'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.1'));
+            case '2_3'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.3'));
+            case '2_4'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.4'));
         }
         return $confirmContent;
     }
@@ -890,5 +895,43 @@ class upgradeModel extends model
             if($editedDate != $customer->editedDate) $this->dao->update(TABLE_CUSTOMER)->set('editedDate')->eq($editedDate)->where('id')->eq($customer->id)->exec();
         }
         return true;
+    }
+
+    /**
+     * Add attend holiday leave trip privilages. when upgrade from 2.4.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function addAttendPriv()
+    {
+        $groups = $this->dao->select('id')->from(TABLE_GROUP)->fetchAll('id');
+        $privs = array();
+        $privs['attend']['personal'] = 'personal';
+        $privs['attend']['edit']     = 'edit';
+        $privs['leave']['personal']  = 'personal';
+        $privs['leave']['create']    = 'create';
+        $privs['leave']['edit']      = 'edit';
+        $privs['leave']['delete']    = 'delete';
+        $privs['trip']['personal']   = 'personal';
+        $privs['trip']['create']     = 'create';
+        $privs['trip']['edit']       = 'edit';
+        $privs['trip']['delete']     = 'delete';
+        foreach($groups as $group)
+        {
+            $priv = new stdclass();
+            $priv->group  = $group->id;
+            foreach($privs as $module => $modulePriv)
+            {
+                $priv->module = $module;
+                foreach($modulePriv as $method => $methodPriv)
+                {
+                    $priv->method = $method;
+                    $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+                }
+            }
+        }
+
+        return !dao::isError();
     }
 }
