@@ -60,12 +60,12 @@
                   <?php $url = $this->createLink('oa.attend', 'edit', "date=" . str_replace('-', '', $currentDate));?>
                   <td class='attend-signin'>
                     <?php $signIn = substr($attends[$currentDate]->signIn, 0, 5);?>
-                    <?php if(strpos(',late,both,absent,', $status) !== false) $signIn = html::a($url, $signIn . " <i class='icon icon-edit'></i>" , "data-toggle='modal' data-type='iframe' data-title='{$lang->attend->manual}'");?>
+                    <?php if(strpos(',late,both,absent,', $status) !== false) $signIn = html::a($url, $signIn . " <i class='icon icon-edit'></i>" , "data-toggle='modal' data-type='iframe' data-title='{$lang->attend->edit}'");?>
                     <?php echo $signIn;?>
                   </td>
                   <td class='attend-signout'>
                     <?php $signOut = substr($attends[$currentDate]->signOut, 0, 5);?>
-                    <?php if(strpos(',early,both,absent,', $status) !== false) $signOut = html::a($url, $signOut . " <i class='icon icon-edit'></i>" , "data-toggle='modal' data-type='iframe' data-title='{$lang->attend->manual}'");?>
+                    <?php if(strpos(',early,both,absent,', $status) !== false) $signOut = html::a($url, $signOut . " <i class='icon icon-edit'></i>" , "data-toggle='modal' data-type='iframe' data-title='{$lang->attend->edit}'");?>
                     <?php echo $signOut;?>
                   </td>
                   <?php else:?>

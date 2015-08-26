@@ -35,6 +35,10 @@ $lang->appModule->oa[] = 'project';
 $lang->appModule->oa[] = 'announce';
 $lang->appModule->oa[] = 'doc';
 $lang->appModule->oa[] = 'task';
+$lang->appModule->oa[] = 'attend';
+$lang->appModule->oa[] = 'holiday';
+$lang->appModule->oa[] = 'leave';
+$lang->appModule->oa[] = 'trip';
 
 $lang->appModule->team = array();
 $lang->appModule->team[] = 'blog';
@@ -404,6 +408,29 @@ $lang->doc->methodOrder[20] = 'create';
 $lang->doc->methodOrder[25] = 'edit';
 $lang->doc->methodOrder[30] = 'view';
 $lang->doc->methodOrder[35] = 'delete';
+
+/* Attend */
+$lang->resource->attend = new stdclass();
+$lang->resource->attend->personal     = 'personal';
+$lang->resource->attend->department   = 'department';
+$lang->resource->attend->export       = 'export';
+$lang->resource->attend->settings     = 'settings';
+$lang->resource->attend->edit         = 'edit';
+$lang->resource->attend->browseReview = 'browseReview';
+$lang->resource->attend->review       = 'review';
+
+$lang->doc->methodOrder[0]  = 'personal';
+$lang->doc->methodOrder[5]  = 'department';
+$lang->doc->methodOrder[10] = 'export';
+$lang->doc->methodOrder[15] = 'settings';
+$lang->doc->methodOrder[20] = 'edit';
+$lang->doc->methodOrder[25] = 'browseReview';
+$lang->doc->methodOrder[30] = 'review';
+
+/* Attend */
+$lang->resource->holiday = new stdclass();
+$lang->resource->holiday->browse     = 'personal';
+$lang->doc->methodOrder[0]  = 'personal';
 
 /* Blog. */
 $lang->resource->blog = new stdclass();

@@ -253,7 +253,7 @@ class attend extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
-        $this->view->title  = $this->lang->attend->manual;
+        $this->view->title  = $this->lang->attend->edit;
         $this->view->attend = $attend;
         $this->display();
     }
@@ -266,7 +266,7 @@ class attend extends control
      * @access public
      * @return void
      */
-    public function review($dept = '', $reviewStatus = 'wait')
+    public function browseReview($dept = '', $reviewStatus = 'wait')
     {
         $attends  = array();
         $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
@@ -290,30 +290,17 @@ class attend extends control
     }
 
     /**
-     * Pass manual sign data. 
+     * Review manual sign data. 
      * 
      * @param  int    $attendID 
+     * @param  string $reviewStatus 
      * @access public
      * @return void
      */
-    public function pass($attendID)
+    public function review($attendID, $reviewStatus)
     {
-        $result = $this->attend->pass($attendID);
+        $result = $this->attend->review($attendID, $reviewStatus);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'fail', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('attend', 'review')));
-    }
-
-    /**
-     * Reject manual sign data. 
-     * 
-     * @param  int    $attendID 
-     * @access public
-     * @return void
-     */
-    public function reject($attendID)
-    {
-        $result = $this->attend->reject($attendID);
-        if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'fail', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('attend', 'review')));
+        $this->send(array('result' => 'fail', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('attend', 'browseReview')));
     }
 }

@@ -1,13 +1,14 @@
 <?php
 if(!isset($lang->attend)) $lang->attend = new stdclass();
-$lang->attend->common     = 'Attend';
-$lang->attend->personal   = 'My Attend';
-$lang->attend->department = 'Department attend';
-$lang->attend->company    = 'Company attend';
-$lang->attend->manual     = 'Manual sign';
-$lang->attend->review     = 'Review attendance';
-$lang->attend->settings   = 'Setting';
-$lang->attend->export     = 'Export';
+$lang->attend->common       = 'Attend';
+$lang->attend->personal     = 'My Attend';
+$lang->attend->department   = 'Department attend';
+$lang->attend->company      = 'Company attend';
+$lang->attend->edit         = 'Manual sign';
+$lang->attend->review       = 'Review attendance';
+$lang->attend->settings     = 'Setting';
+$lang->attend->export       = 'Export';
+$lang->attend->browseReview = 'Review List';
 
 $lang->attend->id       = 'ID';
 $lang->attend->date     = 'Date';

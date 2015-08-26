@@ -40,8 +40,8 @@ class attendModel extends model
             $attend = new stdclass();
             $attend->account = $account;
             $attend->date    = $date;
-            $attend->signIn  = '00:00';
-            $attend->signOut = '00:00';
+            $attend->signIn  = '00:00:00';
+            $attend->signOut = '00:00:00';
             $attend->status  = $this->computeStatus($attend);
             $attend->manualIn     = '';
             $attend->manualOut    = '';
@@ -246,21 +246,32 @@ class attendModel extends model
      * Pass manual sign date.
      * 
      * @param  int    $attendID 
+     * @param  string $status 
      * @access public
      * @return bool
      */
-    public function pass($attendID)
+    public function review($attendID, $status)
     {
-        $attend  = $this->getByID($attendID);
-        $signIn  = (!empty($attend->manualIn) and $attend->manualIn != '00:00:00') ? $attend->manualIn : $attend->signIn;
-        $signOut = (!empty($attend->manualOut) and $attend->manualOut != '00:00:00') ? $attend->manualOut : $attend->signOut;
-        $this->dao->update(TABLE_ATTEND)
-            ->set('status')->eq($attend->reason)
-            ->set('reviewStatus')->eq('pass')
-            ->set('signIn')->eq($signIn)
-            ->set('signOut')->eq($signOut)
-            ->where('id')->eq($attendID)
-            ->exec();
+        if($status == 'pass')
+        {
+            $attend  = $this->getByID($attendID);
+            $signIn  = (!empty($attend->manualIn) and $attend->manualIn != '00:00:00') ? $attend->manualIn : $attend->signIn;
+            $signOut = (!empty($attend->manualOut) and $attend->manualOut != '00:00:00') ? $attend->manualOut : $attend->signOut;
+
+            $this->dao->update(TABLE_ATTEND)
+                ->set('status')->eq($attend->reason)
+                ->set('reviewStatus')->eq('pass')
+                ->set('signIn')->eq($signIn)
+                ->set('signOut')->eq($signOut)
+                ->where('id')->eq($attendID)
+                ->exec();
+        }
+
+        if($status == 'reject')
+        {
+            $this->dao->update(TABLE_ATTEND)->set('reviewStatus')->eq('reject')->where('id')->eq($attendID)->exec();
+        }
+
         return !dao::isError();
     }
 
@@ -273,7 +284,6 @@ class attendModel extends model
      */
     public function reject($attendID)
     {
-        $this->dao->update(TABLE_ATTEND)->set('reviewStatus')->eq('reject')->where('id')->eq($attendID)->exec();
         return !dao::isError();
     }
 
@@ -298,7 +308,7 @@ class attendModel extends model
         $attend->manualIn  = date("H:i", strtotime("2010-10-01 {$attend->manualIn}"));
         $attend->manualOut = date("H:i", strtotime("2010-10-01 {$attend->manualOut}"));
 
-        if(empty($oldAttend))
+        if(isset($oldAttend->new))
         {
             $attend->date    = $date;
             $attend->account = $account;
