@@ -233,6 +233,7 @@ class blockModel extends model
             $module = $block->block;
             $method = 'browse';
             if(strpos('blog, project', $block->block) !== false) $method = 'index';
+            if($block->block == 'attend') $method = 'personal';
             if($block->block == 'thread')
             {
                 $module = 'forum';
