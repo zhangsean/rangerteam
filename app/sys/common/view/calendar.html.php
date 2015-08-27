@@ -29,10 +29,10 @@ $(function()
         {
             var rowObj = $(this);
             var calendar = new Array();
-            if(rowObj.find('.name').length)  calendar['name']  = rowObj.find('.name').html();
-            if(rowObj.find('.title').length) calendar['title'] = rowObj.find('.title').html();
-            if(rowObj.find('.desc').length)  calendar['desc']  = rowObj.find('.desc').html();
-            if(rowObj.find('.color').length) calendar['color'] = rowObj.find('.color').html();
+            if(rowObj.find('.name').length)  calendar['name']  = rowObj.find('.name').text();
+            if(rowObj.find('.title').length) calendar['title'] = rowObj.find('.title').text();
+            if(rowObj.find('.desc').length)  calendar['desc']  = rowObj.find('.desc').text();
+            if(rowObj.find('.color').length) calendar['color'] = rowObj.find('.color').text();
             calendars.push(calendar);
         });
         var events = new Array();
@@ -40,19 +40,28 @@ $(function()
         {
             var rowObj = $(this);
             var event = new Array();
-            if(rowObj.find('.title').length)    event['title']    = rowObj.find('.title').html();
-            if(rowObj.find('.desc').length)     event['desc']     = rowObj.find('.desc').html();
-            if(rowObj.find('.allDay').length)   event['allDay']   = rowObj.find('.allDay').html();
-            if(rowObj.find('.start').length)    event['start']    = rowObj.find('.start').html();
-            if(rowObj.find('.end').length)      event['end']      = rowObj.find('.end').html();
-            if(rowObj.find('.data').length)     event['data']     = rowObj.find('.data').html();
-            if(rowObj.find('.calendar').length) event['calendar'] = rowObj.find('.calendar').html();
+            if(rowObj.find('.title').length)    event['title']      = rowObj.find('.title').text();
+            if(rowObj.find('.desc').length)     event['desc']       = rowObj.find('.desc').text();
+            if(rowObj.find('.allDay').length)   event['allDay']     = rowObj.find('.allDay').text();
+            if(rowObj.find('.start').length)    event['start']      = rowObj.find('.start').text();
+            if(rowObj.find('.end').length)      event['end']        = rowObj.find('.end').text();
+            if(rowObj.find('.data').length)     event['data']       = rowObj.find('.data').text();
+            if(rowObj.find('.calendar').length) event['calendar']   = rowObj.find('.calendar').text();
+            if(rowObj.find('.click').length)    event['click']      = rowObj.find('.click').text();
+            if(rowObj.find('.click').length)    event['modalTitle'] = rowObj.find('.click').data('title');
             events.push(event);
         });
         calendarObj.find(".calendar-data").remove();
 
         /* Init calendar. */
         settings.data = {'calendars':calendars, 'events':events};
+        settings.clickEvent = function(event)
+        {
+            if(event.event.click != undefined)
+            {
+                $.zui.modalTrigger.show({iframe:event.event.click, title:event.event.modalTitle});
+            }
+        }
         calendarObj.calendar(settings);
     });
 });

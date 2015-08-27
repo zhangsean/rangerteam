@@ -27,23 +27,25 @@
         <th class='w-150px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
-    <?php foreach($attends as $account => $userAttends):?>
-      <?php foreach($userAttends as $attend):?>
-      <tr>
-        <td><?php echo isset($users[$account]) ? $users[$account]->id : '';?></td>
-        <td><?php echo $deptList[$currentDept]->name?></td>
-        <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
-        <td><?php echo $attend->date?></td>
-        <td><?php echo zget($lang->attend->statusList, $attend->status)?></td>
-        <td><?php echo substr($attend->manualIn, 0, 5)?></td>
-        <td><?php echo substr($attend->manualOut, 0, 5)?></td>
-        <td><?php echo zget($lang->attend->reasonList, $attend->reason)?></td>
-        <td><?php echo $attend->desc?></td>
-        <td>
-          <?php echo html::a($this->createLink('attend', 'review', "attendID={$attend->id}&status=pass"), $lang->attend->reviewStatusList['pass'], "class='pass'")?>
-          <?php echo html::a($this->createLink('attend', 'review', "attendID={$attend->id}&status=reject"), $lang->attend->reviewStatusList['reject'], "class='reject'")?>
-        </td>
-      </tr>
+    <?php foreach($attends as $dept => $deptAttends):?>
+      <?php foreach($deptAttends as $account => $userAttends):?>
+        <?php foreach($userAttends as $attend):?>
+        <tr>
+          <td><?php echo $attend->id;?></td>
+          <td><?php echo $deptList[$currentDept]->name?></td>
+          <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
+          <td><?php echo $attend->date?></td>
+          <td><?php echo zget($lang->attend->statusList, $attend->status)?></td>
+          <td><?php echo substr($attend->manualIn, 0, 5)?></td>
+          <td><?php echo substr($attend->manualOut, 0, 5)?></td>
+          <td><?php echo zget($lang->attend->reasonList, $attend->reason)?></td>
+          <td><?php echo $attend->desc?></td>
+          <td>
+            <?php echo html::a($this->createLink('attend', 'review', "attendID={$attend->id}&status=pass"), $lang->attend->reviewStatusList['pass'], "class='pass'")?>
+            <?php echo html::a($this->createLink('attend', 'review', "attendID={$attend->id}&status=reject"), $lang->attend->reviewStatusList['reject'], "class='reject'")?>
+          </td>
+        </tr>
+        <?php endforeach;?>
       <?php endforeach;?>
     <?php endforeach;?>
   </table>

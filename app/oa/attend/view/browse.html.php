@@ -44,7 +44,6 @@
       <table class='table table-data table-bordered text-center table-fixed'>
         <thead>
           <tr class='text-center'>
-            <th rowspan='2' class='w-40px valign-middle'><?php echo $lang->user->id;?></th>
             <th rowspan='2' class='w-80px valign-middle'><?php echo $lang->user->dept;?></th>
             <th rowspan='2' class='w-80px valign-middle'><?php echo $lang->user->realname;?></th>
             <?php for($day = 1; $day <= $dayNum; $day++):?>
@@ -58,20 +57,27 @@
             <?php endfor;?>
           </tr>
         </thead>
-        <?php foreach($attends as $account => $userAttends):?>
-        <tr>
-          <td><?php echo isset($users[$account]) ? $users[$account]->id : '';?></td>
-          <td><?php echo isset($users[$account]) ? $deptList[$users[$account]->dept] : ''?></td>
-          <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
-          <?php for($day = 1; $day <= $dayNum; $day++):?>
-          <?php $currentDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-{$day}"));?>
-          <td>
-            <?php if(isset($userAttends[$currentDate])):?>
-            <span class='attend-<?php echo $userAttends[$currentDate]->status?>'><?php echo $lang->attend->abbrStatusList[$userAttends[$currentDate]->status]?></span>
+        <?php foreach($attends as $dept => $deptAttends):?>
+          <?php $isFirst = true;?>
+          <?php foreach($deptAttends as $account => $userAttends):?>
+          <tr>
+            <?php if($isFirst):?>
+            <td rowspan='<?php echo count($deptAttends);?>' class='valign-middle'>
+              <?php echo isset($users[$account]) ? $deptList[$users[$account]->dept] : ''?>
+            </td>
+            <?php $isFirst = false;?>
             <?php endif;?>
-          </td>
-          <?php endfor;?>
-        </tr>
+            <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
+            <?php for($day = 1; $day <= $dayNum; $day++):?>
+            <?php $currentDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-{$day}"));?>
+            <td>
+              <?php if(isset($userAttends[$currentDate])):?>
+              <span class='attend-<?php echo $userAttends[$currentDate]->status?>'><?php echo $lang->attend->abbrStatusList[$userAttends[$currentDate]->status]?></span>
+              <?php endif;?>
+            </td>
+            <?php endfor;?>
+          </tr>
+          <?php endforeach;?>
         <?php endforeach;?>
       </table>
     </div>

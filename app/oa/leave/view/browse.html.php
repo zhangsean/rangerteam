@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('type', $type)?>
 <div id='menuActions'>
-  <?php commonModel::printLink('oa.leave', 'create', "", "{$lang->create}", "data-toggle='modal' class='btn btn-primary'")?>
+  <?php commonModel::printLink('leave', 'create', "", "{$lang->create}", "data-toggle='modal' class='btn btn-primary'")?>
 </div>
 <div class='row'>
   <div class='col-xs-2'>
@@ -22,11 +22,11 @@
         <ul class='tree' data-collapsed='true'>
           <?php foreach($yearList as $year):?>
           <li class='<?php echo $year == $currentYear ? 'active' : ''?>'>
-            <?php commonModel::printLink('leave', 'browse', "type=$type&date=$year", $year);?>
+            <?php commonModel::printLink('leave', $type, "date=$year", $year);?>
             <ul>
               <?php foreach($monthList[$year] as $month):?>
               <li class='<?php echo ($year == $currentYear and $month == $currentMonth) ? 'active' : ''?>'>
-                <?php commonModel::printLink('leave', 'browse', "type=$type&date=$year$month", $year . $month);?>
+                <?php commonModel::printLink('leave', $type, "date=$year$month", $year . $month);?>
               </li>
               <?php endforeach;?>
             </ul>
@@ -42,26 +42,26 @@
         <thead>
           <tr class='text-center'>
             <th class='w-80px'> <?php echo $lang->leave->id;?></th>
+            <th class='w-80px'><?php echo $lang->leave->createdBy;?></th>
+            <th class='w-80px'><?php echo $lang->leave->type;?></th>
             <th class='w-150px'><?php echo $lang->leave->begin;?></th>
             <th class='w-150px'><?php echo $lang->leave->end;?></th>
-            <th class='w-80px'><?php echo $lang->leave->type;?></th>
-            <th class='w-80px'><?php echo $lang->leave->status;?></th>
-            <th class='w-80px'><?php echo $lang->leave->createdBy;?></th>
-            <th class='w-80px'><?php echo $lang->leave->reviewedBy;?></th>
             <th><?php echo $lang->leave->desc;?></th>
+            <th class='w-80px'><?php echo $lang->leave->status;?></th>
+            <th class='w-80px'><?php echo $lang->leave->reviewedBy;?></th>
             <th class='w-150px'><?php echo $lang->actions;?></th>
           </tr>
         </thead>
         <?php foreach($leaveList as $leave):?>
         <tr>
           <td><?php echo $leave->id;?></td>
+          <td><?php echo zget($users, $leave->createdBy);?></td>
+          <td><?php echo zget($this->lang->leave->typeList, $leave->type);?></td>
           <td><?php echo $leave->begin . ' ' . $leave->start;?></td>
           <td><?php echo $leave->end . ' ' . $leave->finish;?></td>
-          <td><?php echo zget($this->lang->leave->typeList, $leave->type);?></td>
+          <td title='<?php echo $leave->desc?>'><?php echo $leave->desc;?></td>
           <td class='leave-<?php echo $leave->status?>'><?php echo zget($this->lang->leave->statusList, $leave->status);?></td>
-          <td><?php echo zget($users, $leave->createdBy);?></td>
           <td><?php echo zget($users, $leave->reviewedBy);?></td>
-          <td><?php echo $leave->desc;?></td>
           <td>
             <?php if($type == 'department' and $leave->status == 'wait'):?>
             <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=pass"), $lang->leave->statusList['pass'], "class='review'");?>

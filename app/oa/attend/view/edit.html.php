@@ -37,20 +37,20 @@
       <?php endif;?>
       <tr>
         <th><?php echo $lang->attend->reason?></th>
-        <td><?php echo html::select('reason', $lang->attend->reasonList, $attend->reason, "class='form-control'")?></td>
-        <td></td>
+        <td><?php echo html::select('reason', $lang->attend->reasonList, $attend->reason, "class='form-control w-p50'")?></td>
+        <td class='w-p10'></td>
       </tr> 
       <?php if(strpos(',late,both,absent', $attend->status) !== false):?>
       <tr id='trIn'>
         <th><?php echo $lang->attend->manualIn?></th>
-        <td><?php echo html::input('manualIn', empty($attend->manualIn) ? $this->config->attend->signInLimit : $attend->manualIn, "class='form-control'")?></td>
+        <td><?php echo html::input('manualIn', empty($attend->manualIn) ? $this->config->attend->signInLimit : $attend->manualIn, "class='form-control w-p50'")?></td>
         <td></td>
       </tr>
       <?php endif;?>
       <?php if(strpos(',early,both,absent', $attend->status) !== false):?>
       <tr id='trOut'>
         <th><?php echo $lang->attend->manualOut?></th>
-        <td><?php echo html::input('manualOut', empty($attend->manualOut) ? $this->config->attend->signOutLimit : $attend->manualOut, "class='form-control'")?></td>
+        <td><?php echo html::input('manualOut', empty($attend->manualOut) ? $this->config->attend->signOutLimit : $attend->manualOut, "class='form-control w-p50'")?></td>
         <td></td>
       </tr> 
       <?php endif;?>

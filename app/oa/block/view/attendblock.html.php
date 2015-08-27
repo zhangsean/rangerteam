@@ -30,6 +30,9 @@
       <td class='end'><?php echo $attend->date?></td>
       <td class='allDay'>true</td>
       <td class='calendar'><?php echo strpos('normal,leave,trip,rest', $attend->status) !== false ? 'normal' : 'abnormal';?></td>
+      <?php if(strpos('normal,leave,trip,rest', $attend->status) === false):?>
+      <td class='click' data-title=<?php echo $lang->attend->edit;?>><?php echo $this->createLink('oa.attend', 'edit', "date=$attend->date");?></td>
+      <?php endif;?>
     </tr>
     <?php endforeach;?>
   </table>
