@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <div id='menuActions'>
-  <?php commonModel::printLink('oa.holiday', 'create', "", "{$lang->create}", "data-toggle='modal' class='btn btn-primary'")?>
+  <?php commonModel::printLink('holiday', 'create', "", "{$lang->create}", "data-toggle='modal' class='btn btn-primary'")?>
 </div>
 <div class='row'>
   <div class='col-xs-2'>
@@ -20,7 +20,7 @@
       <div class='panel-body'>
         <ul class='tree' data-collapsed='true'>
           <?php foreach($yearList as $year):?>
-          <li>
+          <li class='<?php echo $year == $currentYear ? 'active' : ''?>'>
             <?php commonModel::printLink('holiday', 'browse', "year=$year", $year);?>
           </li>
           <?php endforeach;?>

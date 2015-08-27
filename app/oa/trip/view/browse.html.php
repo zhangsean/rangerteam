@@ -63,8 +63,10 @@
           <td><?php echo $trip->to;?></td>
           <td title='<?php echo $trip->desc?>'><?php echo $trip->desc;?></td>
           <td>
+            <?php if($trip->createdBy == $this->app->user->account):?>
             <?php echo html::a($this->createLink('oa.trip', 'edit', "id=$trip->id"), $lang->edit, "data-toggle='modal'");?>
             <?php echo html::a($this->createLink('oa.trip', 'delete', "id=$trip->id"), $lang->delete, "class='deleter'");?>
+            <?php endif;?>
           </td>
         </tr>
         <?php endforeach;?>

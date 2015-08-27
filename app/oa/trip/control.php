@@ -136,7 +136,7 @@ class trip extends control
         /* check privilage. */
         if($trip->createdBy != $this->app->user->account) 
         {
-            $locate = helper::createLink('oa.trip', 'browse');
+            $locate = helper::safe64Encode(helper::createLink('oa.trip', 'browse'));
             $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
             die(js::locate($errorLink));
         }

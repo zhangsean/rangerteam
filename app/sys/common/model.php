@@ -174,7 +174,7 @@ class commonModel extends model
         $customers = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
         if(!in_array($customerID, $customers))
         {
-            $locate = helper::createLink('crm.index');
+            $locate = helper::safe64Encode(helper::createLink('crm.index'));
             $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
             die(js::locate($errorLink));
         }

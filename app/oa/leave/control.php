@@ -160,7 +160,7 @@ class leave extends control
         /* check privilage. */
         if($leave->createdBy != $this->app->user->account) 
         {
-            $locate = helper::createLink('oa.leave', 'browse');
+            $locate = helper::safe64Encode(helper::createLink('oa.leave', 'browse'));
             $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
             die(js::locate($errorLink));
         }

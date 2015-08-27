@@ -1,4 +1,5 @@
 .panel .no-padding{padding: 0px;}
+.tree .active{font-weight: bold;}
 
 .attend-normal [class^=attend] {background: #DDF4DF}
 .attend-late .attend-signin {background: #FFF0D5;}

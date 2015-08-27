@@ -21,7 +21,7 @@ class error extends control
     {
         $this->view->title   = $this->lang->error->common;
         $this->view->message = isset($this->lang->error->typeList[$type]) ? $this->lang->error->typeList[$type] : $this->lang->error->typeList['notFound'];
-        $this->view->locate  = $locate;
+        $this->view->locate  = helper::safe64Decode($locate);
 
         $this->display();
     }

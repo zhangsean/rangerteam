@@ -184,18 +184,21 @@ class attend extends control
 
             /* Get row data. */
             $datas = array();
-            foreach($attends as $account => $attendList)
+            foreach($attends as $dept => $deptAttendList)
             {
-                $data = new stdclass();
-                $data->id       = $users[$account]->id;
-                $data->dept     = $deptList[$users[$account]->dept];
-                $data->realname = $users[$account]->realname;
-                for($i = 1; $i <= $dayNum; $i++)
+                foreach($deptAttendList as $account => $attendList)
                 {
-                    $currentDate  = date("Y-m-d", strtotime("$currentYear-$currentMonth-$i"));
-                    $data->$currentDate = isset($attendList[$currentDate]) ? $this->lang->attend->abbrStatusList[$attendList[$currentDate]->status] : '';
+                    $data = new stdclass();
+                    $data->id       = $users[$account]->id;
+                    $data->dept     = $deptList[$users[$account]->dept];
+                    $data->realname = $users[$account]->realname;
+                    for($i = 1; $i <= $dayNum; $i++)
+                    {
+                        $currentDate  = date("Y-m-d", strtotime("$currentYear-$currentMonth-$i"));
+                        $data->$currentDate = isset($attendList[$currentDate]) ? $this->lang->attend->abbrStatusList[$attendList[$currentDate]->status] : '';
+                    }
+                    $datas[] = $data;
                 }
-                $datas[] = $data;
             }
 
             $this->post->set('fields', $fields);

@@ -35,9 +35,10 @@ class holiday extends control
         $holidays = $this->holiday->getList($year);
         $yearList = $this->holiday->getYearPairs();
 
-        $this->view->title = $this->lang->holiday->browse;
-        $this->view->holidays = $holidays;
-        $this->view->yearList = $yearList;
+        $this->view->title       = $this->lang->holiday->browse;
+        $this->view->holidays    = $holidays;
+        $this->view->yearList    = $yearList;
+        $this->view->currentYear = $year;
         $this->display();
     }
 
