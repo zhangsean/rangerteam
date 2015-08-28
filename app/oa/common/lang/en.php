@@ -18,8 +18,8 @@ $lang->menu->oa->project   = 'Project|project|index|';
 $lang->menu->oa->announce  = 'Announce|announce|index|';
 $lang->menu->oa->doc       = 'Document|doc|index|';
 $lang->menu->oa->attend    = 'Attendance|attend|personal|';
-$lang->menu->oa->leave     = 'Leave|leave|browse|type=personal';
-$lang->menu->oa->trip      = 'Trip|trip|browse|type=personal';
+$lang->menu->oa->leave     = 'Leave|leave|personal|';
+$lang->menu->oa->trip      = 'Trip|trip|personal|';
 
 $lang->dashboard = new stdclass();
 
@@ -46,7 +46,7 @@ $lang->attend->menu->department = 'Department attendance|attend|department|';
 $lang->attend->menu->company    = 'Company attendance|attend|company|';
 $lang->attend->menu->review     = 'Review attendance|attend|browsereview|';
 $lang->attend->menu->holiday    = 'Holiday|holiday|browse|';
-$lang->attend->menu->settings   = 'Setting|attendance|settings|';
+$lang->attend->menu->settings   = 'Setting|attend|settings|';
 
 $lang->holiday = new stdclass();
 $lang->holiday->menu = $lang->attend->menu;

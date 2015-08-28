@@ -47,9 +47,9 @@ $lang->attend->abbrStatusList['leave']  = 'Leave';
 $lang->attend->abbrStatusList['trip']   = 'Biz';
 $lang->attend->abbrStatusList['rest']   = 'Rest';
 
-$lang->attend->reasonlist['normal'] = 'Normal';
-$lang->attend->reasonlist['trip']   = 'Biz trip';
-$lang->attend->reasonlist['leave']  = 'Ask for leave';
+$lang->attend->reasonList['normal'] = 'Normal';
+$lang->attend->reasonList['trip']   = 'Biz trip';
+$lang->attend->reasonList['leave']  = 'Ask for leave';
 
 $lang->attend->reviewStatusList['wait']   = 'Wait';
 $lang->attend->reviewStatusList['pass']   = 'Pass';
