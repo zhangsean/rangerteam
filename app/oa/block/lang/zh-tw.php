@@ -21,6 +21,7 @@ $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->announce = '系統公告';
 $lang->block->availableBlocks->task     = '任務列表';
 $lang->block->availableBlocks->project  = '項目列表';
+$lang->block->availableBlocks->attend   = '我的考勤';
 
 $lang->block->num     = '數量';
 $lang->block->orderBy = '排序';
