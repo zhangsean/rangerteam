@@ -69,12 +69,14 @@
             <?php endif;?>
             <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
             <?php for($day = 1; $day <= $dayNum; $day++):?>
-            <?php $currentDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-{$day}"));?>
-            <td>
+              <?php $currentDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-{$day}"));?>
               <?php if(isset($userAttends[$currentDate])):?>
-              <span class='attend-<?php echo $userAttends[$currentDate]->status?>'><?php echo $lang->attend->abbrStatusList[$userAttends[$currentDate]->status]?></span>
+                  <td class='attend-<?php echo $userAttends[$currentDate]->status?>' title='<?php echo $lang->attend->statusList[$userAttends[$currentDate]->status]?>'>
+                <span><?php echo $lang->attend->abbrStatusList[$userAttends[$currentDate]->status]?></span>
+              </td>
+              <?php else:?>
+              <td></td>
               <?php endif;?>
-            </td>
             <?php endfor;?>
           </tr>
           <?php endforeach;?>

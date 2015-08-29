@@ -75,7 +75,7 @@ class attendModel extends model
             ->orderBy('`date`')
             ->fetchAll('date');
 
-        $attends = $this->fixUserAttendList($attends);
+        $attends = $this->fixUserAttendList($attends, $startDate, $endDate);
         return $this->processAttendList($attends);
     }
 
@@ -111,7 +111,7 @@ class attendModel extends model
         {
             foreach($deptAttends as $user => $userAttends)
             {
-                if($reviewStatus == '') $attends[$dept][$user] = $this->fixUserAttendList($attends[$dept][$user]);
+                if($reviewStatus == '') $attends[$dept][$user] = $this->fixUserAttendList($attends[$dept][$user], $startDate, $endDate);
                 $attends[$dept][$user] = $this->processAttendList($attends[$dept][$user]);
             }
         }
@@ -439,15 +439,17 @@ class attendModel extends model
     /**
      * Fix user's attendlist, add default data if no this date record. 
      * 
-     * @param  array $attends 
+     * @param  array  $attends 
+     * @param  string $startDate 
+     * @param  string $endDate 
      * @access public
      * @return void
      */
-    public function fixUserAttendList($attends)
+    public function fixUserAttendList($attends, $startDate = '0000-00-00', $endDate = '0000-00-00')
     {
-        $startDate = '0000-00-00';
-        $endDate   = '0000-00-00';
-        $account   = '';
+        $account = '';
+        if(strtotime($endDate) > time()) $endDate = date("Y-m-d");
+
         /* Get account, start date and end date. */
         foreach($attends as $attend)
         {
@@ -457,7 +459,7 @@ class attendModel extends model
         }
 
         /* Add data if not set. */
-        while(strtotime($startDate) < strtotime($endDate))
+        while(strtotime($startDate) <= strtotime($endDate))
         {
             if(!isset($attends[$startDate]))
             {
