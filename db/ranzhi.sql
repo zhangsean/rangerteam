@@ -304,6 +304,7 @@ CREATE TABLE `oa_attend` (
   KEY `status` (`status`),
   KEY `reason` (`reason`),
   KEY `reviewStatus` (`reviewStatus`),
+  KEY `reviewedBy` (`reviewedBy`),
   UNIQUE KEY `attend` (`date`,`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_holiday`;

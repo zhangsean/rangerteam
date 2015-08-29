@@ -1,5 +1,8 @@
 .panel .no-padding{padding: 0px;}
 .tree .active{font-weight: bold;}
+.tree > li {margin-right: 0;}
+.with-side .side {position: absolute; width: 130px;}
+.with-side .main {padding-left: 145px; float: left;}
 
 .attend-normal [class^=attend] {background: #DDF4DF}
 .attend-late .attend-signin {background: #FFF0D5;}
@@ -9,9 +12,3 @@
 .attend-leave [class^=attend] {background: #DDF4DF}
 .attend-trip [class^=attend] {background: #DDF4DF}
 .attend-rest [class^=attend] {}
-
-.dropdown-submenu > .dropdown-menu {left: -100%;}
-.dropdown-submenu > a:after {content: ""; display: none;}
-.dropdown-submenu > a:before {content: " "; display: block; float: left; width: 0; height: 0; margin-top: 3px; margin-left: -10px; border-color: transparent; border-style: solid; border-width: 5px 5px 5px 0; border-right-color: #ccc;}
-.dropdown-menu > li > a, .dropdown-header {padding: 5px 15px 5px 25px}
-  

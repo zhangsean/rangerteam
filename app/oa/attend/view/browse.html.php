@@ -15,8 +15,8 @@
 <div id='menuActions'>
   <?php commonModel::printLink('attend', 'export', "data=$currentYear$currentMonth&company=$company", "{$lang->attend->export}", "class='iframe btn btn-primary'")?>
 </div>
-<div class='row'>
-  <div class='col-xs-2'>
+<div class='with-side'>
+  <div class='side'>
     <div class='panel panel-sm'>
       <div class='panel-body'>
         <ul class='tree' data-collapsed='true'>
@@ -36,7 +36,7 @@
       </div>
     </div>
   </div>
-  <div class='col-xs-10'>
+  <div class='main'>
     <div class='panel'>
       <div class='panel-heading text-center'>
         <strong><?php echo $currentYear . $lang->year . $currentMonth . $lang->month . $lang->attend->report;?></strong>

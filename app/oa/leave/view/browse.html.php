@@ -15,8 +15,8 @@
 <div id='menuActions'>
   <?php commonModel::printLink('leave', 'create', "", "{$lang->create}", "data-toggle='modal' class='btn btn-primary'")?>
 </div>
-<div class='row'>
-  <div class='col-xs-2'>
+<div class='with-side'>
+  <div class='side'>
     <div class='panel panel-sm'>
       <div class='panel-body'>
         <ul class='tree' data-collapsed='true'>
@@ -36,7 +36,7 @@
       </div>
     </div>
   </div>
-  <div class='col-xs-10'>
+  <div class='main'>
     <div class='panel'>
       <table class='table table-data table-hover text-center table-fixed'>
         <thead>
