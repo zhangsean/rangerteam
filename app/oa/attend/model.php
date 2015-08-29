@@ -410,6 +410,8 @@ class attendModel extends model
             if($status == 'both')  $attend->status = 'late';
         }
 
+        if($attend->status == '') $attend->status = $this->computeStatus($attend);
+
         /* Remove time. */
         if($attend->signIn == '00:00:00')    $attend->signIn = '';
         if($attend->signOut == '00:00:00')   $attend->signOut = '';

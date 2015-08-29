@@ -11,3 +11,6 @@ $lang->holiday->name  = 'Name';
 $lang->holiday->desc  = 'Description';
 $lang->holiday->begin = 'Begin';
 $lang->holiday->end   = 'End';
+
+$lang->holiday->holiday = 'Holiday';
+$lang->holiday->working = 'Working day';

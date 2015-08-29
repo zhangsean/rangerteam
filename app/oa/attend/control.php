@@ -245,7 +245,11 @@ class attend extends control
     {
         if($_POST)
         {
-            $settings = fixer::input('post')->get();
+            $settings = fixer::input('post')
+                ->setDefault('mustSignOut', 'no')
+                ->join('mustSignOut', '')
+                ->get();
+
             $settings->signInLimit  = date("H:i", strtotime($settings->signInLimit));
             $settings->signOutLimit = date("H:i", strtotime($settings->signOutLimit));
             $this->loadModel('setting')->setItems('system.oa.attend', $settings);

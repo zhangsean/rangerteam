@@ -35,8 +35,8 @@
         <td></td>
       </tr>
       <tr>
-        <th><?php echo $lang->attend->mustSignOut?></th>
-        <td><?php echo html::radio('mustSignOut', $lang->attend->mustSignOutList, $mustSignOut)?></td>
+        <th></th>
+        <td><?php echo html::checkbox('mustSignOut', array('yes' => $lang->attend->mustSignOut), $mustSignOut)?></td>
         <td></td>
       </tr>
       <tr><th></th><td clospan='2'><?php echo html::submitButton();?></td></tr>

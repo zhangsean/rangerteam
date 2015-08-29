@@ -73,7 +73,7 @@ class holidayModel extends model
      */
     public function getYearPairs()
     {
-        return $this->dao->select('year,year')->from(TABLE_HOLIDAY)->groupBy('year')->fetchPairs();
+        return $this->dao->select('year,year')->from(TABLE_HOLIDAY)->groupBy('year')->orderBy('year_desc')->fetchPairs();
     }
 
     /**

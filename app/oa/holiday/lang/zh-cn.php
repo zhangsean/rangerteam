@@ -11,3 +11,6 @@ $lang->holiday->name  = '名称';
 $lang->holiday->desc  = '描述';
 $lang->holiday->begin = '开始日期';
 $lang->holiday->end   = '结束日期';
+
+$lang->holiday->holiday = '假期';
+$lang->holiday->working = '补班';
