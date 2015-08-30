@@ -11,7 +11,12 @@
  */
 ?>
 <?php include "../../../sys/common/view/calendar.html.php";?>
-<?php css::internal(".calendar .day>.content {min-height: 5px;}");?>
+<style>
+.calendar {margin: 0;}
+.calendar .day>.content {min-height: 5px;}
+.calendar .day {position: relative; min-height: 30px;}
+.calendar .day .content {position: absolute; top: 0;}
+</style>
 <div id='attendCalendar' class='calendar' data-with-header='false' data-drag-then-drop='false'>
   <table class='calendar-data'>
     <tr class='calendar-calendar'>

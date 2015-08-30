@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php $lang->attend->abbrStatusList['rest'] = '';?>
 <div id='menuActions'>
   <?php commonModel::printLink('attend', 'export', "data=$currentYear$currentMonth&company=$company", "{$lang->attend->export}", "class='iframe btn btn-primary'")?>
 </div>
@@ -70,7 +71,7 @@
             <?php for($day = 1; $day <= $dayNum; $day++):?>
               <?php $currentDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-{$day}"));?>
               <?php if(isset($userAttends[$currentDate])):?>
-                  <td class='attend-<?php echo $userAttends[$currentDate]->status?>' title='<?php echo $lang->attend->statusList[$userAttends[$currentDate]->status]?>'>
+              <td class='attend-<?php echo $userAttends[$currentDate]->status?>' title='<?php echo $lang->attend->statusList[$userAttends[$currentDate]->status]?>'>
                 <span><?php echo $lang->attend->abbrStatusList[$userAttends[$currentDate]->status]?></span>
               </td>
               <?php else:?>
