@@ -443,16 +443,16 @@ $lang->holiday->methodOrder[15] = 'delete';
 
 /* Leave */
 $lang->resource->leave = new stdclass();
-$lang->resource->leave->personal   = 'personal';
-$lang->resource->leave->department = 'department';
-$lang->resource->leave->company    = 'company';
-$lang->resource->leave->create     = 'create';
-$lang->resource->leave->edit       = 'edit';
-$lang->resource->leave->delete     = 'delete';
-$lang->resource->leave->review     = 'review';
+$lang->resource->leave->personal     = 'personal';
+$lang->resource->leave->browseReview = 'browseReview';
+$lang->resource->leave->company      = 'company';
+$lang->resource->leave->create       = 'create';
+$lang->resource->leave->edit         = 'edit';
+$lang->resource->leave->delete       = 'delete';
+$lang->resource->leave->review       = 'review';
 
 $lang->leave->methodOrder[0]  = 'personal';
-$lang->leave->methodOrder[5]  = 'department';
+$lang->leave->methodOrder[5]  = 'browseReview';
 $lang->leave->methodOrder[10] = 'company';
 $lang->leave->methodOrder[15] = 'create';
 $lang->leave->methodOrder[20] = 'edit';

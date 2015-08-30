@@ -41,9 +41,9 @@ class leave extends control
      * @access public
      * @return void
      */
-    public function department($date = '')
+    public function browseReview($date = '')
     {
-        die($this->fetch('leave', 'browse', "type=department&date=$date", 'oa'));
+        die($this->fetch('leave', 'browse', "type=browseReview&date=$date", 'oa'));
     }
 
     /**
@@ -79,7 +79,7 @@ class leave extends control
         {
             $leaveList = $this->leave->getList($currentYear, $currentMonth, $this->app->user->account);
         }
-        elseif($type == 'department')
+        elseif($type == 'browseReview')
         {
             $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
             foreach($deptList as $key => $value) $deptList[$key] = $value->name;

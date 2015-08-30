@@ -7,9 +7,9 @@ $lang->leave->edit   = 'Edit';
 $lang->leave->delete = 'Delete';
 $lang->leave->review = 'Review';
 
-$lang->leave->personal   = 'My leave';
-$lang->leave->department = 'Department';
-$lang->leave->company    = 'Company';
+$lang->leave->personal     = 'My leave';
+$lang->leave->browseReview = 'Review list';
+$lang->leave->company      = 'All leave';
 
 $lang->leave->id           = 'ID';
 $lang->leave->begin        = 'Begin date';

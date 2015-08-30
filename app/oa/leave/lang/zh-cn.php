@@ -7,9 +7,9 @@ $lang->leave->edit   = '编辑';
 $lang->leave->delete = '删除';
 $lang->leave->review = '审核';
 
-$lang->leave->personal   = '我的请假';
-$lang->leave->department = '部门';
-$lang->leave->company    = '公司';
+$lang->leave->personal     = '我的请假';
+$lang->leave->browseReview = '审核列表';
+$lang->leave->company      = '所有请假';
 
 $lang->leave->id           = '编号';
 $lang->leave->begin        = '开始';
