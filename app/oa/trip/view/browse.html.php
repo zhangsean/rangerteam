@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('type', $type)?>
 <div id='menuActions'>
-  <?php commonModel::printLink('trip', 'create', "", "{$lang->create}", "data-toggle='modal' class='btn btn-primary'")?>
+  <?php commonModel::printLink('trip', 'create', "", "<i class='icon icon-plus'></i> {$lang->trip->create}", "data-toggle='modal' class='btn btn-primary'")?>
 </div>
 <div class='with-side'>
   <div class='side'>

@@ -11,4 +11,3 @@
 .attend-absent [class^=attend] {background: #E3A21A;}
 .attend-leave [class^=attend] {background: #DDF4DF}
 .attend-trip [class^=attend] {background: #DDF4DF}
-.attend-rest [class^=attend] {}

@@ -17,7 +17,7 @@
     <table class='table table-form table-condensed'>
       <tr>
         <th class='w-80px'><?php echo $lang->leave->type?></th>
-        <td><?php echo html::select('type', $lang->leave->typeList, '', "class='form-control'")?></td>
+        <td><?php echo html::radio('type', $lang->leave->typeList, 'sick', "class=''")?></td>
         <td></td>
       </tr>
       <tr>

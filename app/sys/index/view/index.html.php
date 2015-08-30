@@ -44,8 +44,8 @@ $isSuperAdmin = $this->app->user->admin == 'super';
     <div id='taskbar'><ul class='bar-menu'></ul></div>
     <div id='bottomRightBar' class='dock-right'>
       <ul class='bar-menu'>
-        <li><?php echo html::a('javascript:void(0)', $lang->signIn, "class='signin'");?></li>
-        <li><?php echo html::a('javascript:void(0)', $lang->signOut, "class='signout'");?></li>
+        <li><?php echo html::a('javascript:void(0)', $lang->signIn, "class='sign signin'");?></li>
+        <li><?php echo html::a('javascript:void(0)', $lang->signOut, "class='sign signout'");?></li>
         <li><button id='showDesk' type='button' class='fullscreen-btn icon-desktop' data-id='home' data-toggle='tooltip' title='<?php echo $lang->index->showDesk; ?>'></button></li>
       </ul>
     </div>
