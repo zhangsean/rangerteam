@@ -36,7 +36,7 @@ $lang->attend->statusList['both']   = '迟到+早退';
 $lang->attend->statusList['absent'] = '旷工';
 $lang->attend->statusList['leave']  = '请假';
 $lang->attend->statusList['trip']   = '出差';
-$lang->attend->statusList['rest']   = '假期';
+$lang->attend->statusList['rest']   = '休息日';
 
 $lang->attend->abbrStatusList['normal'] = '√';
 $lang->attend->abbrStatusList['late']   = '迟';
@@ -75,3 +75,6 @@ $lang->attend->weeks = array('第一周', '第二周', '第三周', '第四周',
 
 $lang->attend->notice['today']    = "您今天的考勤状态为：%s。<a href='%s' %s>去补录</a>";
 $lang->attend->notice['yestoday'] = "您昨天的考勤状态为：%s。<a href='%s' %s>去补录</a>";
+
+$lang->attend->confirmReview['pass']   = '您确定要执行通过操作吗？';
+$lang->attend->confirmReview['reject'] = '您确定要执行拒绝操作吗？';

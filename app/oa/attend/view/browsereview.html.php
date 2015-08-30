@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php js::set('confirmReview', $lang->attend->confirmReview);?>
 <div class='panel'>
   <table class='table table-hover table-striped table-sorter table-data table-fixed text-center'>
     <thead>

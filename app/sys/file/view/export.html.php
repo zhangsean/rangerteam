@@ -37,7 +37,7 @@ function closeWindow()
       <td>
         <div class='input-group'>
           <span class='input-group-addon'><?php echo $lang->setFileName;?></span>
-          <?php echo html::input('fileName', '', 'class=form-control');?>
+          <?php echo html::input('fileName', isset($fileName) ? $fileName : '', 'class=form-control');?>
         </div>
       </td>
       <td class='w-90px'><?php echo html::select('encode', $config->charsets[$this->cookie->lang], 'utf-8', "class='form-control'");?></td>

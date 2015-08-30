@@ -136,15 +136,15 @@ class attend extends control
      */
     public function export($date = '', $company = false)
     {
+        if($date == '' or strlen($date) != 6) $date = date('Ym');
+        $currentYear  = substr($date, 0, 4);
+        $currentMonth = substr($date, 4, 2);
+        $startDate    = "{$currentYear}-{$currentMonth}-01";
+        $endDate      = date('Y-m-d', strtotime("$startDate +1 month"));
+        $dayNum       = (int)date('d', strtotime("$endDate -1 day"));
+
         if($_POST)
         {
-            if($date == '' or strlen($date) != 6) $date = date('Ym');
-            $currentYear  = substr($date, 0, 4);
-            $currentMonth = substr($date, 4, 2);
-            $startDate    = "{$currentYear}-{$currentMonth}-01";
-            $endDate      = date('Y-m-d', strtotime("$startDate +1 month"));
-            $dayNum       = (int)date('d', strtotime("$endDate -1 day"));
-
             /* Get deptList. */
             if($company) 
             {
@@ -195,7 +195,7 @@ class attend extends control
                     for($i = 1; $i <= $dayNum; $i++)
                     {
                         $currentDate  = date("Y-m-d", strtotime("$currentYear-$currentMonth-$i"));
-                        $data->$currentDate = isset($attendList[$currentDate]) ? $this->lang->attend->abbrStatusList[$attendList[$currentDate]->status] : '';
+                        $data->$currentDate = isset($attendList[$currentDate]) ? $this->lang->attend->statusList[$attendList[$currentDate]->status] : '';
                     }
                     $datas[] = $data;
                 }
@@ -206,6 +206,8 @@ class attend extends control
             $this->post->set('kind', 'attendance');
             $this->fetch('file', 'export2CSV', $_POST);
         }
+
+        $this->view->fileName = $currentYear . $this->lang->year . $currentMonth . $this->lang->month . $this->lang->attend->report;
         $this->display();
     }
 
@@ -332,6 +334,6 @@ class attend extends control
     {
         $result = $this->attend->review($attendID, $reviewStatus);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'fail', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('attend', 'browseReview')));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('attend', 'browseReview')));
     }
 }
