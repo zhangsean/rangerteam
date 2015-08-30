@@ -1,14 +1,50 @@
 $(document).ready(function()
 {
-    $.setAjaxJSONER('.review', function(response)
+    $(document).on('click', '.reviewPass', function()
     {
-        if(response.message)
+        if(confirm(v.confirmReview.pass))
         {
-            bootbox.alert(response.message);
-        }
+            var selecter = $(this);
 
-        /* If the response has locate param, locate the browse. */
-        if(response.locate == 'reload') return location.href = location.href;
-        if(response.locate) return location.href = response.locate;
+            $.getJSON(selecter.attr('href'), function(data) 
+            {
+                if(data.result == 'success')
+                {
+                    if(selecter.parents('#ajaxModal').size()) return $.reloadAjaxModal(1200);
+                    if(data.locate) return location.href = data.locate;
+                    return location.reload();
+                }
+                else
+                {
+                    alert(data.message);
+                    return location.reload();
+                }
+            });
+        }
+        return false;
+    });
+
+    $(document).on('click', '.reviewReject', function()
+    {
+        if(confirm(v.confirmReview.reject))
+        {
+            var selecter = $(this);
+
+            $.getJSON(selecter.attr('href'), function(data) 
+            {
+                if(data.result == 'success')
+                {
+                    if(selecter.parents('#ajaxModal').size()) return $.reloadAjaxModal(1200);
+                    if(data.locate) return location.href = data.locate;
+                    return location.reload();
+                }
+                else
+                {
+                    alert(data.message);
+                    return location.reload();
+                }
+            });
+        }
+        return false;
     });
 });

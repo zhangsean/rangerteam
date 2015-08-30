@@ -38,3 +38,6 @@ $lang->leave->statusList['pass']   = 'Pass';
 $lang->leave->statusList['reject'] = 'Reject';
 
 $lang->leave->denied = 'access denied';
+
+$lang->leave->confirmReview['pass']   = 'Are sure to pass it?';
+$lang->leave->confirmReview['reject'] = 'Are sure to reject it?';

@@ -124,7 +124,7 @@ class leave extends control
 
         $this->leave->review($id, $status);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 
     /**

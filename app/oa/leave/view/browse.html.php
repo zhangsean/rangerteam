@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<?php js::set('type', $type)?>
+<?php js::set('confirmReview', $lang->leave->confirmReview)?>
 <div id='menuActions'>
   <?php commonModel::printLink('leave', 'create', "", "<i class='icon icon-plus'></i> {$lang->leave->create}", "data-toggle='modal' class='btn btn-primary'")?>
 </div>
@@ -63,9 +63,9 @@
           <td class='leave-<?php echo $leave->status?>'><?php echo zget($this->lang->leave->statusList, $leave->status);?></td>
           <td><?php echo zget($users, $leave->reviewedBy);?></td>
           <td>
-            <?php if($type == 'department' and $leave->status == 'wait'):?>
-            <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=pass"), $lang->leave->statusList['pass'], "class='review'");?>
-            <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=reject"), $lang->leave->statusList['reject'], "class='review'");?>
+            <?php if($type == 'browseReview' and $leave->status == 'wait'):?>
+            <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=pass"), $lang->leave->statusList['pass'], "class='reviewPass'");?>
+            <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=reject"), $lang->leave->statusList['reject'], "class='reviewReject'");?>
             <?php endif;?>
             <?php if($type == 'personal' and $leave->status == 'wait'):?>
             <?php echo html::a($this->createLink('oa.leave', 'edit', "id=$leave->id"), $lang->edit, "data-toggle='modal'");?>

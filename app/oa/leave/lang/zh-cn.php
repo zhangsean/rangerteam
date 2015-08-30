@@ -35,6 +35,9 @@ $lang->leave->typeList['annual']    = '年假';
 
 $lang->leave->statusList['wait']   = '等待审核';
 $lang->leave->statusList['pass']   = '通过';
-$lang->leave->statusList['reject'] = '驳回';
+$lang->leave->statusList['reject'] = '拒绝';
 
 $lang->leave->denied = '信息访问受限';
+
+$lang->leave->confirmReview['pass']   = '您确定要执行通过操作吗？';
+$lang->leave->confirmReview['reject'] = '您确定要执行拒绝操作吗？';
