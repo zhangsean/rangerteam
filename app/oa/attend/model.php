@@ -365,29 +365,35 @@ class attendModel extends model
      */
     public function computeStatus($attend)
     {
-        /* 'rest': rest day. */
-        $dayIndex = date('w', strtotime($attend->date));
-        if($this->config->attend->workingDays == '5' and ($dayIndex == 0 or $dayIndex == 6)) return 'rest';
-        if($this->config->attend->workingDays == '6' and $dayIndex == 0) return 'rest';
-        if($this->loadModel('holiday')->isHoliday($attend->date)) return 'rest';
-
         /* 'leave': ask for leave. 'trip': biz trip. */
         if($this->loadModel('leave')->isLeave($attend->date, $attend->account)) return 'leave';
         if($this->loadModel('trip')->isTrip($attend->date, $attend->account)) return 'trip';
 
-        /* 'absent', absenteeism */
-        if($attend->signIn == "00:00:00" and $attend->signOut == "00:00:00") return 'absent';
-
-        /* normal, late, early, both */
         $status = 'normal';
-        if(strtotime("{$attend->date} {$attend->signIn}") > strtotime("{$attend->date} {$this->config->attend->signInLimit}")) $status = 'late';
-        if($this->config->attend->mustSignOut == 'yes')
+        if($attend->signIn == "00:00:00" and $attend->signOut == "00:00:00") 
         {
-            if(strtotime("{$attend->date} {$attend->signOut}") <  strtotime("{$attend->date} {$this->config->attend->signOutLimit}"))
+            /* 'absent', absenteeism */
+            $status = 'absent';
+        }
+        else
+        {
+            /* normal, late, early, both */
+            if(strtotime("{$attend->date} {$attend->signIn}") > strtotime("{$attend->date} {$this->config->attend->signInLimit}")) $status = 'late';
+            if($this->config->attend->mustSignOut == 'yes')
             {
-                $status = $status == 'late' ? 'both' : 'early';
+                if(strtotime("{$attend->date} {$attend->signOut}") <  strtotime("{$attend->date} {$this->config->attend->signOutLimit}"))
+                {
+                    $status = $status == 'late' ? 'both' : 'early';
+                }
             }
         }
+
+        /* 'rest': rest day. */
+        $dayIndex = date('w', strtotime($attend->date));
+        if($this->config->attend->workingDays == '5' and ($dayIndex == 0 or $dayIndex == 6)) $status = $status == 'absent' ? 'rest' : $status;
+        if($this->config->attend->workingDays == '6' and $dayIndex == 0) $status = $status == 'absent' ? 'rest' : $status;
+        if($this->loadModel('holiday')->isHoliday($attend->date)) $status = $status == 'absent' ? 'rest' : $status;
+
         return $status;
     }
 

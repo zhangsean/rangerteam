@@ -78,10 +78,17 @@ class index extends control
         $customApp = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
         if(isset($customApp->superadmin)) $this->view->superadmin = $customApp->superadmin;
 
-        $this->view->allEntries = $allEntries;
-        $this->view->blocks     = $blocks;
-        $this->view->company    = $this->loadModel('setting')->getItem('owner=system&app=sys&module=common&section=company&key=name');
-        $this->view->notice     = $this->loadModel('attend', 'oa')->getNotice();
+        /* sign buttons. */
+        $signButtons = '';
+        $this->loadModel('attend', 'oa');
+        if(time() < strtotime(date("Y-m-d") . " " . $this->config->attend->signInLimit . "+4 hour")) $signButtons .= "<li>" . html::a('javascript:void(0)', $this->lang->signIn, "class='sign signin'") . "</li>";
+        if(time() > strtotime(date("Y-m-d") . " " . $this->config->attend->signInLimit . "-4 hour")) $signButtons .= "<li>" . html::a('javascript:void(0)', $this->lang->signOut, "class='sign signout'") . "</li>";
+
+        $this->view->allEntries  = $allEntries;
+        $this->view->blocks      = $blocks;
+        $this->view->company     = $this->loadModel('setting')->getItem('owner=system&app=sys&module=common&section=company&key=name');
+        $this->view->notice      = $this->loadModel('attend', 'oa')->getNotice();
+        $this->view->signButtons = $signButtons;
         $this->display();
     }
 }
