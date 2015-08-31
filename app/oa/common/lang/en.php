@@ -54,9 +54,9 @@ $lang->menuGroups->holiday = 'attend';
 
 $lang->leave = new stdclass();
 $lang->leave->menu = new stdclass();
-$lang->leave->menu->personal     = 'My|leave|personal|';
-$lang->leave->menu->browseReview = 'Leave review|leave|browseReview|';
-$lang->leave->menu->company      = 'All|leave|company|';
+$lang->leave->menu->personal     = 'My leave|leave|personal|';
+$lang->leave->menu->browseReview = 'Reviewed by me|leave|browsereview|';
+$lang->leave->menu->company      = 'All leave|leave|company|';
 
 $lang->trip = new stdclass();
 $lang->trip->menu = new stdclass();

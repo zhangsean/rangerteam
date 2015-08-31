@@ -34,7 +34,7 @@
         <thead>
           <tr class='text-center'>
             <th class='w-150px'><?php echo $lang->holiday->name;?></th>
-            <th class='w-100px'><?php echo $lang->holiday->holiday;?></th>
+            <th class='w-200px'><?php echo $lang->holiday->holiday;?></th>
             <th><?php echo $lang->holiday->desc;?></th>
             <th class='w-100px'><?php echo $lang->actions;?></th>
           </tr>
@@ -42,7 +42,7 @@
         <?php foreach($holidays as $holiday):?>
         <tr>
           <td><?php echo $holiday->name;?></td>
-          <td><?php echo substr($holiday->begin, 5) . ' ~ ' . substr($holiday->end, 5);?></td>
+          <td><?php echo $holiday->begin . ' ~ ' . $holiday->end;?></td>
           <td><?php echo $holiday->desc;?></td>
           <td>
             <?php echo html::a($this->createLink('oa.holiday', 'edit', "id=$holiday->id"), $lang->edit, "data-toggle='modal'");?>

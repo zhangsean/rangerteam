@@ -81,8 +81,14 @@ class index extends control
         /* sign buttons. */
         $signButtons = '';
         $this->loadModel('attend', 'oa');
-        if(time() < strtotime(date("Y-m-d") . " " . $this->config->attend->signInLimit . "+4 hour")) $signButtons .= "<li>" . html::a('javascript:void(0)', $this->lang->signIn, "class='sign signin'") . "</li>";
-        if(time() > strtotime(date("Y-m-d") . " " . $this->config->attend->signInLimit . "-4 hour")) $signButtons .= "<li>" . html::a('javascript:void(0)', $this->lang->signOut, "class='sign signout'") . "</li>";
+        if(time() < strtotime(date("Y-m-d") . " " . $this->config->attend->signInLimit . "+4 hour"))
+        {
+            $signButtons .= "<li>" . html::a('javascript:void(0)', $this->lang->signIn, "class='sign signin'") . "</li>";
+        }
+        if($this->config->attend->mustSignOut == 'yes' and time() > strtotime(date("Y-m-d") . " " . $this->config->attend->signInLimit . "-4 hour")) 
+        {
+            $signButtons .= "<li>" . html::a('javascript:void(0)', $this->lang->signOut, "class='sign signout'") . "</li>";
+        }
 
         $this->view->allEntries  = $allEntries;
         $this->view->blocks      = $blocks;
