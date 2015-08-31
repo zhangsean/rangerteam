@@ -152,6 +152,8 @@ class attendModel extends model
         $entry   = $this->loadModel('entry')->getByCode('oa');
         $misc    = "class='app-btn' data-id='{$entry->id}'";
 
+        $this->lang->attend->statusList['absent'] = $this->lang->attend->notice['absent'];
+
         $today  = helper::today();
         $attend = $this->getByDate($today, $account);
         if(empty($attend)) return sprintf($this->lang->attend->notice['today'], $this->lang->attend->statusList['absent'], $link, $misc); 
