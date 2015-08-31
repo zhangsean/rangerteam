@@ -71,7 +71,7 @@ $lang->attend->workingDaysList['6'] = "Monday ~ Saturday";
 $lang->attend->mustSignOutList['yes'] = 'need';
 $lang->attend->mustSignOutList['no']  = 'not need';
 
-$lang->attend->weeks = array('First week', 'Second week', 'Third week', 'Fourth week', 'Fifth week');
+$lang->attend->weeks = array('First week', 'Second week', 'Third week', 'Fourth week', 'Fifth week', 'Sixth week');
 
 $lang->attend->notice['today']    = "Your yestoday's attendance is %s, <a href='%s' %s>Go to edit.</a>";
 $lang->attend->notice['yestoday'] = "Your today's attendance is %s, <a href='%s' %s>Go to edit.</a>";

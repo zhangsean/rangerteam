@@ -4,10 +4,12 @@
 .with-side .side {position: absolute; width: 130px;}
 .with-side .main {padding-left: 145px; float: left;}
 
-.attend-normal [class^=attend] {background: #DDF4DF}
-.attend-late .attend-signin {background: #FFF0D5;}
-.attend-early .attend-signout {background: #FFF0D5;}
-.attend-both [class^=attend] {background: #FFF0D5;}
-.attend-absent [class^=attend] {background: #E3A21A;}
-.attend-leave [class^=attend] {background: #DDF4DF}
-.attend-trip [class^=attend] {background: #DDF4DF}
+.attend-normal [class^=attend] {}
+.attend-late .attend-signin {background: #ffccbc;}
+.attend-early .attend-signout {background: #ff8a65;}
+.attend-both [class^=attend] {background: #ff5722;}
+.attend-absent [class^=attend] {background: #ffff00;}
+.attend-leave [class^=attend] {background: #9e9e9e}
+.attend-trip [class^=attend] {background: #e0e0e0}
+
+table .otherMonth {background: #f0f0f0; color: #9e9e9e}

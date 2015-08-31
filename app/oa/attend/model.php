@@ -71,7 +71,7 @@ class attendModel extends model
         $attends = $this->dao->select('*')->from(TABLE_ATTEND)
             ->where('account')->eq($account)
             ->beginIf($startDate != '')->andWhere('`date`')->ge($startDate)->fi()
-            ->beginIf($endDate != '')->andWhere('`date`')->lt($endDate)->fi()
+            ->beginIf($endDate != '')->andWhere('`date`')->le($endDate)->fi()
             ->orderBy('`date`')
             ->fetchAll('date');
 
@@ -97,7 +97,7 @@ class attendModel extends model
         $attends = $this->dao->select('t1.*, t2.dept')->from(TABLE_ATTEND)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.account=t2.account")
             ->where('t1.account')->in(array_keys($users))
             ->beginIf($startDate != '')->andWhere('t1.date')->ge($startDate)->fi()
-            ->beginIf($endDate != '')->andWhere('t1.date')->lt($endDate)->fi()
+            ->beginIf($endDate != '')->andWhere('t1.date')->le($endDate)->fi()
             ->beginIf($reviewStatus != '')->andWhere('t1.reviewStatus')->eq($reviewStatus)->fi()
             ->orderBy('t2.dept,t1.date')
             ->fetchAll();

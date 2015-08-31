@@ -28,6 +28,7 @@
       <td class='color'>red</td>
     </tr>
     <?php foreach($attends as $attend):?>
+    <?php if(strpos('normal,rest', $attend->status) !== false) continue;?>
     <tr class='calendar-row'>
       <td class='title'><?php echo $lang->attend->abbrStatusList[$attend->status]?></td>
       <td class='desc'><?php echo $lang->attend->statusList[$attend->status]?></td>
