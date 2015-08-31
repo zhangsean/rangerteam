@@ -133,7 +133,7 @@ body.page-actions-fixed {padding-bottom: 70px}
 
 /* --- COMPONENTS SETTING --- */
 /* menu */
-.menu > .nav > li > a {padding: 0 30px 0 15px; max-height: 36px; overflow: hidden; line-height: 34px;}
+.menu > .nav > li > a {padding: 0 15px 0 15px; max-height: 36px; overflow: hidden; line-height: 34px;}
 .menu > .nav > li > .actions {position: absolute; right: 0; top:0;}
 .menu > .nav > li > .actions .dropdown .btn {background: none; padding: 8px 8px; border:none; border-left:1px solid #ddd; border-color: rgba(0,0,0,0.15); border-radius: 0 4px 4px 0}
 .menu > .nav > li.active > .actions .dropdown .btn .caret {border-top-color: #fff;border-bottom-color: #fff}

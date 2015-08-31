@@ -54,9 +54,9 @@ $lang->menuGroups->holiday = 'attend';
 
 $lang->leave = new stdclass();
 $lang->leave->menu = new stdclass();
-$lang->leave->menu->personal   = '我的請假|leave|personal|';
-$lang->leave->menu->department = '部門|leave|department|';
-$lang->leave->menu->company    = '公司|leave|company|';
+$lang->leave->menu->personal     = '我的請假|leave|personal|';
+$lang->leave->menu->browseReview = '我的審核|leave|browsereview|';
+$lang->leave->menu->company      = '所有請假|leave|company|';
 
 $lang->trip = new stdclass();
 $lang->trip->menu = new stdclass();

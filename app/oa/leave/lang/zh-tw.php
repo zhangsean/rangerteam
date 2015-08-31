@@ -2,14 +2,14 @@
 if(!isset($lang->leave)) $lang->leave = new stdclass();
 $lang->leave->common = '請假';
 $lang->leave->browse = '請假列表';
-$lang->leave->create = '新建';
+$lang->leave->create = '請假';
 $lang->leave->edit   = '編輯';
 $lang->leave->delete = '刪除';
 $lang->leave->review = '審核';
 
-$lang->leave->personal   = '我的請假';
-$lang->leave->department = '部門';
-$lang->leave->company    = '公司';
+$lang->leave->personal     = '我的請假';
+$lang->leave->browseReview = '審核列表';
+$lang->leave->company      = '所有請假';
 
 $lang->leave->id           = '編號';
 $lang->leave->begin        = '開始';
@@ -35,6 +35,9 @@ $lang->leave->typeList['annual']    = '年假';
 
 $lang->leave->statusList['wait']   = '等待審核';
 $lang->leave->statusList['pass']   = '通過';
-$lang->leave->statusList['reject'] = '駁回';
+$lang->leave->statusList['reject'] = '拒絶';
 
 $lang->leave->denied = '信息訪問受限';
+
+$lang->leave->confirmReview['pass']   = '您確定要執行通過操作嗎？';
+$lang->leave->confirmReview['reject'] = '您確定要執行拒絶操作嗎？';

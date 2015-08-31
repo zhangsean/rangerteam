@@ -36,7 +36,7 @@ $lang->attend->statusList['both']   = '遲到+早退';
 $lang->attend->statusList['absent'] = '曠工';
 $lang->attend->statusList['leave']  = '請假';
 $lang->attend->statusList['trip']   = '出差';
-$lang->attend->statusList['rest']   = '假期';
+$lang->attend->statusList['rest']   = '休息日';
 
 $lang->attend->abbrStatusList['normal'] = '√';
 $lang->attend->abbrStatusList['late']   = '遲';
@@ -60,8 +60,8 @@ $lang->attend->inFail     = '簽到失敗';
 $lang->attend->outSuccess = '簽退成功';
 $lang->attend->outFail    = '簽退失敗';
 
-$lang->attend->signInLimit  = '最晚簽到時間';
-$lang->attend->signOutLimit = '最早簽退時間';
+$lang->attend->signInLimit  = '上班時間';
+$lang->attend->signOutLimit = '下班時間';
 $lang->attend->workingDays  = '每週工作天數';
 $lang->attend->mustSignOut  = '必須簽退';
 
@@ -71,7 +71,10 @@ $lang->attend->workingDaysList['6'] = "周一～周六";
 $lang->attend->mustSignOutList['yes'] = '需要';
 $lang->attend->mustSignOutList['no']  = '不需要';
 
-$lang->attend->weeks = array('第一周', '第二周', '第三周', '第四周', '第五周');
+$lang->attend->weeks = array('第一周', '第二周', '第三周', '第四周', '第五周', '第六周');
 
 $lang->attend->notice['today']    = "您今天的考勤狀態為：%s。<a href='%s' %s>去補錄</a>";
 $lang->attend->notice['yestoday'] = "您昨天的考勤狀態為：%s。<a href='%s' %s>去補錄</a>";
+
+$lang->attend->confirmReview['pass']   = '您確定要執行通過操作嗎？';
+$lang->attend->confirmReview['reject'] = '您確定要執行拒絶操作嗎？';
