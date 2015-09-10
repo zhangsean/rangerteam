@@ -24,7 +24,6 @@ $lang->task->close    = 'Close';
 $lang->task->assignTo = 'Assign to';
 $lang->task->delete   = 'Delete';
 $lang->task->export   = 'Export';
-$lang->task->transmit = 'Transmit';
 
 $lang->task->batchCreate    = 'Batch Create';
 $lang->task->backToProjects = 'Back to project list'; 
@@ -78,6 +77,8 @@ $lang->task->date           = 'Date';
 $lang->task->multiple       = 'Multiple Task';
 $lang->task->multipleAB     = 'Multiple';
 $lang->task->team           = 'Team';
+$lang->task->transmit       = 'Transmit';
+$lang->task->transmitTo     = 'Transmit To';
 
 $lang->task->confirmFinish     = '"Left" is zero, this task will be done. Are you sure?';
 $lang->task->consumedBefore    = 'consumed before';

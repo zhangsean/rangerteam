@@ -16,7 +16,7 @@
 <form method='post' id='ajaxForm' action='<?php echo $this->createLink('task', 'assignTo', "taskID=$taskID")?>'>
   <table class='table table-form'>
     <tr>
-      <th class='w-100px'><?php echo $lang->task->assignedTo;?></th>
+      <th class='w-100px'><?php echo empty($task->team) ? $lang->task->assignedTo : $lang->task->transmitTo;?></th>
       <td><?php echo html::select('assignedTo', $users, $task->assignedTo, "class='form-control chosen'");?></td>
     </tr>
     <tr>
