@@ -24,6 +24,7 @@ $lang->task->close    = '关闭任务';
 $lang->task->assignTo = '指派任务';
 $lang->task->delete   = '删除任务';
 $lang->task->export   = '导出任务';
+$lang->task->transmit = '转交';
 
 $lang->task->batchCreate    = '批量添加';
 $lang->task->backToProjects = '返回项目列表'; 
@@ -74,6 +75,9 @@ $lang->task->lastEdited     = '最后编辑';
 $lang->task->hour           = '小时';
 $lang->task->leftThisTime   = '剩余';
 $lang->task->date           = '日期';
+$lang->task->multiple       = '多人任务';
+$lang->task->multipleAB     = '多人';
+$lang->task->team           = '团队';
 
 $lang->task->confirmFinish     = '"预计剩余"为0，确认将任务状态改为"已完成"吗？';
 $lang->task->consumedBefore    = '之前消耗';

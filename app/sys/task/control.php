@@ -287,12 +287,34 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
-        $task = $this->task->getByID($taskID);
+        $task    = $this->task->getByID($taskID);
+        $members = $this->loadModel('project')->getMemberPairs($task->project);
+
+        /* Process team member and assignedTo data. */
+        if($task->team != '')
+        {
+            $users = array();
+            $team = explode(',', trim($task->team, ','));
+            foreach($team as $key => $account) $users[$account] = $members[$account];
+
+            if(empty($task->assignedTo))
+            {
+                $assignedTo = reset($team);
+            }
+            else
+            {
+                foreach($team as $key => $account) if($account == $task->assignedTo) break;
+                $assignedTo = next($team);
+                if($assignedTo == false) $assignedTo = reset($team);
+            }
+            $task->assignedTo = $assignedTo;
+            if(!empty($users)) $members = $users;
+        }
 
         $this->view->title  = $task->name;
         $this->view->taskID = $taskID;
         $this->view->task   = $task;
-        $this->view->users  = $this->loadModel('project')->getMemberPairs($task->project);
+        $this->view->users  = $members;
         $this->display();
     }
 

@@ -46,6 +46,15 @@
               <td><?php echo zget($members, $task->assignedTo, $task->assignedTo);?></td>
             </tr>
             <tr>
+              <th><?php echo $lang->task->team;?></th>
+              <td>
+                <?php 
+                $team = explode(',', $task->team);
+                foreach($team as $account) echo zget($members, $account, $account) . ' ';
+                ?>
+              </td>
+            </tr>
+            <tr>
               <th><?php echo $lang->task->status;?></th>
               <td><?php echo $lang->task->statusList[$task->status];?></td>
             </tr>

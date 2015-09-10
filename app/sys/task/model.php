@@ -202,6 +202,16 @@ class taskModel extends model
             $task->createdBy   = $this->app->user->account;
             $task->createdDate = $now;
 
+            if(isset($_POST['multiple'][$key]))
+            {
+                $team = $this->post->team[$key];
+                foreach($team as $key => $account) if($account == '') unset($team[$key]);
+
+                $task->team = join(',', $team);
+                $assignedTo = reset($team);
+                $task->assignedTo = $assignedTo;
+            }
+
             if($task->assignedTo) $task->assignedDate = $now;
 
             $tasks[] = $task;
@@ -262,6 +272,8 @@ class taskModel extends model
                 ->stripTags('desc', $this->config->allowedTags->admin)
                 ->remove('referer, uid, files, labels')
                 ->join('mailto', ',')
+                ->join('team', ',')
+                ->setDefault('team', '')
                 ->get();
         }
         $this->dao->update(TABLE_TASK)->data($task)
@@ -503,9 +515,10 @@ class taskModel extends model
         $menu  = $type == 'view' ? "<div class='btn-group'>" : '';
 
         $disabled = self::isClickable($task, 'assignto') ? '' : 'disabled';
+        $multiple = $task->team == '' ? false : true;
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'assignto', "taskID=$task->id");
-        $menu    .= commonModel::printLink('task', 'assignto', "taskID=$task->id", $this->lang->assign, $misc, false);
+        $menu    .= commonModel::printLink('task', 'assignto', "taskID=$task->id", $multiple ? $this->lang->task->transmit : $this->lang->assign, $misc, false);
 
         $disabled = self::isClickable($task, 'start') ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";

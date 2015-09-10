@@ -12,6 +12,7 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
+<?php include '../../common/view/chosen.html.php';?>
 <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
 <div class='with-menu page-content'>
   <form id='ajaxForm' method='post'>
@@ -21,15 +22,17 @@
           <tr class='text-center'>
             <th class='w-60px'><?php echo $lang->task->id;?></th> 
             <th><?php echo $lang->task->name;?> <span class='required'></span></th>
-            <th class='w-90px'><?php echo $lang->task->assignedTo;?></th>
+            <th class='w-100px'><?php echo $lang->task->assignedTo;?></th>
             <th class='w-p25'><?php echo $lang->task->desc;?></th>
             <th class='w-120px'><?php echo $lang->task->deadline;?></th>
             <th class='w-70px'><?php echo $lang->task->pri;?></th>
             <th class='w-70px'><?php echo $lang->task->estimateAB;?></th>
+            <th class='w-40px'><?php echo $lang->task->multipleAB;?></th>
           </tr>
         </thead>
 
         <?php
+        $teamUsers = $users;
         $users['ditto'] = $lang->ditto;
         ?>
         <?php for($i = 0; $i < $config->task->batchCreate; $i++):?>
@@ -40,11 +43,15 @@
         <tr>
           <td class='text-center'><?php echo $i+1;?></td>
           <td><?php echo html::input("name[$i]", '', "class='form-control'");?></td>
-          <td><?php echo html::select("assignedTo[$i]", $users, $member, "class='form-control'");?></td>
+          <td>
+            <div class='assignedToForm'><?php echo html::select("assignedTo[$i]", $users, $member, "class='form-control'");?></div>
+            <div class='teamForm hide'><?php echo html::select("team[$i][]", $teamUsers, '', "class='form-control chosen' multiple");?></div>
+          </td>
           <td><?php echo html::textarea("desc[$i]", '', "rows='1' class='form-control'");?></td>
           <td><?php echo html::input("deadline[$i]", '', "class='form-control form-date'");?></td>
           <td><?php echo html::select("pri[$i]", $lang->task->priList, $pri, "class=form-control");?></td>
           <td><?php echo html::input("estimate[$i]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'");?></td>
+          <td class='text-center' title='<?php echo $lang->task->multiple?>'><input type='checkbox' name='multiple[<?php echo $i?>]' class='multiple' /></td>
         </tr>
         <?php endfor;?>
         <tr>
