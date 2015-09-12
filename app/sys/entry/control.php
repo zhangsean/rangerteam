@@ -42,6 +42,33 @@ class entry extends control
         {
             if(!$this->post->buildin and strpos($this->post->login, '/') !== 0 and !preg_match('/https?\:\/\//Ui', $this->post->login)) $this->send(array('result' => 'fail', 'message' => $this->lang->entry->error->url));
 
+            if($this->post->zentao) 
+            {
+                /* Check admin account, password and code. */
+                $error = array();
+                if($this->post->adminPassword == '') $error['adminPassword'] = sprintf($this->lang->error->notempty, $this->lang->password);
+                if($this->post->adminAccount == '') $error['adminAccount'] = sprintf($this->lang->error->notempty, $this->lang->account);
+                if($this->post->code == '') $error['code'] = sprintf($this->lang->error->notempty, $this->lang->entry->code);
+                if(!empty($error)) $this->send(array('result' => 'fail', 'message' => $error));
+
+                /* Get zentao url. */
+                $loginUrl = $this->post->login;
+                if(strpos($loginUrl, '&') === false) $zentaoUrl = substr($loginUrl, 0, strrpos($loginUrl, '/') + 1);
+                if(strpos($loginUrl, '&') !== false) $zentaoUrl = substr($loginUrl, 0, strpos($loginUrl, '?'));
+
+                /* Get zentao config. */
+                $zentaoConfig = $this->loadModel('sso')->getZentaoServerConfig($zentaoUrl);
+                if(empty($zentaoConfig)) $this->send(array('result' => 'fail', 'message' => $this->lang->entry->error->zentaoUrl));
+
+                $_POST['login']  = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, "sso", "login", '', 'html', false);
+                $_POST['logout'] = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, "sso", "logout", '', 'html', false);
+                $_POST['block']  = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, "block", "main", '', 'html', false);
+
+                /* Init zentao setting. */
+                $result = $this->loadModel('sso')->initZentaoSSO($zentaoConfig, $zentaoUrl, $this->post->adminAccount, $this->post->adminPassword, $this->post->code, $this->post->key);
+                if($result['result'] != 'success') $this->send($result);
+            }
+
             $entryID = $this->entry->create();
             $this->entry->updateLogo($entryID);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));

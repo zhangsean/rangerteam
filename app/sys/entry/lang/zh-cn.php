@@ -40,8 +40,14 @@ $lang->entry->priv        = '权限';
 $lang->entry->integrateChanzhi = '集成蝉知';
 $lang->entry->integrateZentao  = '集成禅道';
 
-$lang->entry->chanzhiPlaceholder  = '请输入蝉知的后台访问地址';
-$lang->entry->chanzhiURL          = '后台入口';
+$lang->entry->chanzhiPlaceholder = '请输入蝉知的后台访问地址';
+$lang->entry->chanzhiURL         = '后台入口';
+$lang->entry->zentaoPlaceholder  = '如：http://www.zentaopms.com/user-login-Lw==.html';
+$lang->entry->zentaoURL          = '禅道登录地址';
+
+$lang->entry->zentaoAdmin   = '禅道管理员';
+$lang->entry->adminAccount  = '管理员账号';
+$lang->entry->adminPassword = '管理员密码';
 
 $lang->entry->confirmDelete = '您确定删除该应用吗？';
 $lang->entry->lblBlock      = '区块';
@@ -65,6 +71,10 @@ $lang->entry->error->code  = '代号不能为空';
 $lang->entry->error->key   = '密钥不能为空';
 $lang->entry->error->ip    = 'IP列表不能为空';
 $lang->entry->error->url   = ' 非内置应用的登录地址，必须包含 /、http://或者https://';
+
+$lang->entry->error->admin         = '管理员用户名或密码错误';
+$lang->entry->error->zentaoSetting = '禅道系统设置失败，您的禅道系统版本低于7.3或没有安装然之集成插件';
+$lang->entry->error->zentaoUrl     = '禅道登录地址错误';
 
 $lang->entry->openList['']       = '';
 $lang->entry->openList['blank']  = '新开标签';

@@ -89,7 +89,7 @@ class entryModel extends model
             ->setDefault('integration', 0)
             ->setDefault('order', $maxOrder + 10)
             ->setIF($this->post->allip, 'ip', '*')
-            ->remove('allip')
+            ->remove('allip,zentao,adminAccount,adminPassword')
             ->stripTags('login,logout,block', $this->config->allowedTags->admin)
             ->get();
         if($this->post->chanzhi) 

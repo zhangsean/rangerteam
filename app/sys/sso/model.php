@@ -105,4 +105,110 @@ class ssoModel extends model
         $this->dao->insert(TABLE_SSO)->data($data)->exec();
         return $data->token;
     }
+
+    /**
+     * Init zentao sso settings; 
+     * 
+     * @param  string $config 
+     * @param  string $zentaoUrl 
+     * @param  string $account 
+     * @param  string $password 
+     * @param  string $code 
+     * @param  string $key 
+     * @access public
+     * @return object
+     */
+    public function initZentaoSSO($config, $zentaoUrl, $account, $password, $code, $key)
+    {
+        /* login. */
+        $loginUrl = $this->createZentaoLink($config, $zentaoUrl, 'user', 'login') . "&account={$account}&password={$password}";
+        $result = $this->fetchZentaoAPI($loginUrl);
+        if(!$result) return array('result' => 'fail', 'message' => $this->lang->entry->error->admin);
+
+        /* Init settings. */
+        $settingUrl = $this->createZentaoLink($config, $zentaoUrl, 'sso', 'ajaxSetConfig');
+        $data = new stdclass();
+        $data->addr = $this->loadModel('common', 'sys')->getSysURL() . helper::createLink('sys.sso', 'check');
+        $data->code = $code;
+        $data->key  = $key;
+        $result = $this->fetchZentaoAPI($settingUrl, $data);
+        if(!$result) return array('result' => 'fail', 'message' => $this->lang->entry->error->zentaoSetting);
+
+        return array('result' => 'success');
+    }
+
+    /**
+     * Fetch data from an api.
+     * 
+     * @param  string $url 
+     * @param  object $data 
+     * @access public
+     * @return mixed
+     */
+    public function fetchZentaoAPI($url, $data = null)
+    {
+        if(!isset($this->snoopy)) $this->snoopy = $this->app->loadClass('snoopy');
+        if(empty($data))  $this->snoopy->fetch($url);
+        if(!empty($data)) $this->snoopy->submit($url, $data);
+        $result = json_decode($this->snoopy->results);
+
+        if($this->snoopy->results == 'success') return array('status' => 'success');
+        if(!isset($result->status)) return false;
+        if($result->status != 'success') return false;
+        if(isset($result->data) and md5($result->data) != $result->md5) return false;
+        if(isset($result->data)) return json_decode($result->data);
+        return $result;
+    }
+
+    /**
+     * Get zentao server config. 
+     * 
+     * @param  string $zentaoUrl 
+     * @access public
+     * @return object
+     */
+    public function getZentaoServerConfig($zentaoUrl)
+    {
+        if(!isset($this->snoopy)) $this->snoopy = $this->app->loadClass('snoopy');
+
+        $url = $zentaoUrl . "?mode=getconfig";
+        $this->snoopy->fetch($url);
+        $result = json_decode($this->snoopy->results);
+        return $result;
+    }
+
+    /**
+     * Create a zentao link url. 
+     * 
+     * @param  string $config 
+     * @param  string $zentaoUrl 
+     * @param  string $module 
+     * @param  string $method 
+     * @param  string $vars 
+     * @param  string $viewType       json|html 
+     * @param  string $useSession        
+     * @access public
+     * @return return string
+     */
+    public function createZentaoLink($config, $zentaoUrl, $module, $method, $vars = '', $viewType = 'json', $useSession = true)
+    {
+        if($config->requestType == 'GET')
+        {
+            $url = "{$zentaoUrl}?{$config->moduleVar}={$module}&{$config->methodVar}={$method}&{$config->viewVar}={$viewType}";
+            if($vars != '') $url .= "&{$vars}";
+            if($useSession) $url .= "&{$config->sessionVar}={$config->sessionID}";
+        }
+        if($config->requestType == 'PATH_INFO')
+        {
+            $vars = explode('&', $vars);
+            foreach($vars as $key => $var) $vars[$key] = substr($var, strpos($var, '=') + 1);
+            $vars = join($config->requestFix, $vars);
+
+            $url = "{$zentaoUrl}{$module}{$config->requestFix}{$method}";
+            if($vars != '') $url .= "{$config->requestFix}{$vars}";
+            $url .= ".{$viewType}";
+            if($useSession) $url .= "?{$config->sessionVar}={$config->sessionID}";
+        }
+        return $url;
+    }
 }

@@ -10,8 +10,12 @@
  * @link        http://www.ranzhico.com
  */
 include '../../common/view/header.html.php';
-js::set('chanzhiPlaceholder', $lang->entry->chanzhiPlaceholder);
+js::set('loginUrl', $lang->entry->login);
+js::set('loginPlaceholder', $lang->entry->note->login);
 js::set('chanzhiURL', $lang->entry->chanzhiURL);
+js::set('chanzhiPlaceholder', $lang->entry->chanzhiPlaceholder);
+js::set('zentaoURL', $lang->entry->zentaoURL);
+js::set('zentaoPlaceholder', $lang->entry->zentaoPlaceholder);
 ?>
 <div class='panel'>
   <div class='panel-heading'>
@@ -30,9 +34,11 @@ js::set('chanzhiURL', $lang->entry->chanzhiURL);
               <div class='input-group-addon'>
                 <label class="checkbox"><input type="checkbox" id="visible" name="visible" value="1"> <?php echo $lang->entry->note->visible;?></label>
               </div>
+              <div class='input-group-addon'>
+                <label class="checkbox"><input type="checkbox" id="zentao" name="zentao" value="1"> <?php echo $lang->entry->integrateZentao;?></label>
+              </div>
             </div>
           </td>
-          <td></td>
           <td></td>
         </tr>
         <tr>
@@ -43,10 +49,12 @@ js::set('chanzhiURL', $lang->entry->chanzhiURL);
         <tr>
           <th><?php echo $lang->entry->code;?></th>
           <td><?php echo html::input('code', '', "class='form-control' placeholder='{$lang->entry->note->code}'");?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->open;?></th>
           <td><?php echo html::select('open', $lang->entry->openList, '', 'class="form-control"');?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->login;?></th>
@@ -58,14 +66,30 @@ js::set('chanzhiURL', $lang->entry->chanzhiURL);
               </div>
             </div>
           </td>
+          <td></td>
+        </tr>
+        <tr class='hide'>
+          <th><?php echo $lang->entry->zentaoAdmin;?></th>
+          <td>
+            <div class='required required-wrapper'></div>
+            <div class='input-group'>
+              <label class='input-group-addon fix-border'><?php echo $lang->account;?></label>
+            <?php echo html::input('adminAccount', '', "class='form-control' placeholder='{$lang->entry->adminAccount}'");?>
+              <label class='input-group-addon fix-border'><?php echo $lang->password;?></label>
+            <?php echo html::password('adminPassword', '', "class='form-control' placeholder='{$lang->entry->adminPassword}'");?>
+            </div>
+          </td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->logout;?></th>
           <td><?php echo html::input('logout', '', "class='form-control' placeholder='{$lang->entry->note->logout}'");?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->block;?></th>
           <td><?php echo html::input('block', '', "class='form-control' placeholder='{$lang->entry->note->api}'");?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->key;?></th>
@@ -82,10 +106,12 @@ js::set('chanzhiURL', $lang->entry->chanzhiURL);
               </div>
             </div>
           </td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->control;?></th>
           <td><?php echo html::select('control', $lang->entry->controlList, 'simple', "class='form-control'");?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->size;?></th>
@@ -102,6 +128,7 @@ js::set('chanzhiURL', $lang->entry->chanzhiURL);
         <tr>
           <th><?php echo $lang->entry->position;?></th>
           <td><?php echo html::select('position', $lang->entry->positionList, '', "class='form-control'");?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->priv;?></th>
@@ -112,9 +139,10 @@ js::set('chanzhiURL', $lang->entry->chanzhiURL);
               <?php endforeach?>
             </div>
           </td>
+          <td></td>
         </tr>
         <tr>
-          <th></th><td><?php echo html::submitButton() . html::backButton();?></td>
+          <th></th><td><?php echo html::submitButton() . html::backButton();?></td><td></td>
         </tr>
       </table>
     </form>

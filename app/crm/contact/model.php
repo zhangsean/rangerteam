@@ -118,7 +118,7 @@ class contactModel extends model
             ->where('t1.deleted')->eq(0)
             ->andWhere('t2.customer')->in($customerIdList)
             ->beginIF($customer)->andWhere('t1.id')->in(array_keys($resumes))->fi()
-            ->beginIF($mode == 'past')->andWhere('t1.nextDate')->lt(helper::today())->fi()
+            ->beginIF($mode == 'past')->andWhere('t1.nextDate')->lt(helper::today())->andWhere('t1.nextDate')->ne('0000-00-00')->fi()
             ->beginIF($mode == 'today')->andWhere('t1.nextDate')->eq(helper::today())->fi()
             ->beginIF($mode == 'tomorrow')->andWhere('t1.nextDate')->eq(formattime(date::tomorrow(), DT_DATE1))->fi()
             ->beginIF($mode == 'thisweek')->andWhere('t1.nextDate')->between($thisWeek['begin'], $thisWeek['end'])->fi()

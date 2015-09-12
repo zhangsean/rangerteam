@@ -40,8 +40,14 @@ $lang->entry->priv        = 'Privilege';
 $lang->entry->integrateChanzhi = 'Integrate ChanZhi';
 $lang->entry->integrateZentao  = 'Integrate ZenTao';
 
-$lang->entry->chanzhiPlaceholder  = 'Please input url of admin';
-$lang->entry->chanzhiURL          = 'Url of admin';
+$lang->entry->chanzhiPlaceholder = 'Please input url of admin';
+$lang->entry->chanzhiURL         = 'Url of admin';
+$lang->entry->zentaoPlaceholder  = 'Example: http://www.zentaopms.com/user-login-Lw==.html';
+$lang->entry->zentaoURL          = 'Login url of zentao';
+
+$lang->entry->zentaoAdmin   = 'Zentao Admin';
+$lang->entry->adminAccount  = 'Admin account';
+$lang->entry->adminPassword = 'Admin password';
 
 $lang->entry->confirmDelete = 'Are you sure to delete this App?';
 $lang->entry->lblBlock      = 'Block';
@@ -65,6 +71,10 @@ $lang->entry->error->code  = 'Please input code';
 $lang->entry->error->key   = 'Please input key';
 $lang->entry->error->ip    = 'Please input IP';
 $lang->entry->error->url   = 'Non built-in application login address, you must include the /, http:// or https://';
+
+$lang->entry->error->admin         = 'Wrong admin account or password.';
+$lang->entry->error->zentaoSetting = 'ZentaoPMS set config failed, Please upgrade ZentaoPMS to head or install extension of ranzhi in ZentaoPMS.';
+$lang->entry->error->zentaoUrl     = 'Wrong ZentaoPMS login url.';
 
 $lang->entry->openList['']       = '';
 $lang->entry->openList['blank']  = 'Blank';

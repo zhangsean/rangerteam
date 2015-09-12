@@ -40,6 +40,8 @@ class sso extends control
                     $user = $this->loadModel('user')->getByAccount($this->session->user->account);
 
                     $data = new stdclass();
+                    $data->token    = $token;
+                    $data->auth     = $auth;
                     $data->id       = $user->id;
                     $data->dept     = $user->dept;
                     $data->account  = $user->account;
