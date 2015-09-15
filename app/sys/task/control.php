@@ -221,9 +221,11 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
-        $task = $this->task->getByID($taskID);
+        $task   = $this->task->getByID($taskID);
+        $status = 'finish';
+        foreach($task->children as $child) if($child->status == 'wait' or $child->status == 'doing') $status = '';
 
-        $this->view->title  = $task->name;
+        $this->view->title  = $status == 'finish' ? $task->name : $task->name . " <span class='label label-warning'>{$this->lang->task->children} {$this->lang->task->unfinished}</span>";
         $this->view->taskID = $taskID;
         $this->view->task   = $task;
         $this->view->users  = $this->loadModel('user')->getPairs();

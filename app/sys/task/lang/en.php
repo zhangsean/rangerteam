@@ -82,6 +82,7 @@ $lang->task->transmitTo     = 'Transmit To';
 $lang->task->children       = 'Children Task';
 $lang->task->childrenAB     = 'Child';
 $lang->task->parent         = 'Parent Task';
+$lang->task->unfinished     = 'Unfinished';
 
 $lang->task->confirmFinish     = '"Left" is zero, this task will be done. Are you sure?';
 $lang->task->consumedBefore    = 'consumed before';
