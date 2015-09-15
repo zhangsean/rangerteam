@@ -10,12 +10,16 @@
  * @link        http://www.ranzhico.com
  */
 ?>
-<?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
+<?php 
+$isChildren = !empty($taskID);
+if(!$isChildren) include $app->getModuleRoot() . 'common/view/header.html.php';
+if($isChildren)  include $app->getAppRoot() . '../sys/common/view/header.modal.html.php';
+?>
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
-<?php $this->loadModel('project')->setMenu($projects, $projectID);?>
-<div class='with-menu page-content'>
-  <form id='ajaxForm' method='post'>
+<?php if(!$isChildren) $this->loadModel('project')->setMenu($projects, $projectID);?>
+<div class='<?php echo $isChildren ? '' : 'with-menu';?> page-content'>
+  <form id='ajaxForm' method='post' action='<?php echo $this->createLink('task', 'batchCreate', "projectID=$projectID&taskID=$taskID");?>'>
     <div class='panel'>
       <table class='table table-form'>
         <thead>
@@ -23,11 +27,13 @@
             <th class='w-60px'><?php echo $lang->task->id;?></th> 
             <th><?php echo $lang->task->name;?> <span class='required'></span></th>
             <th class='w-100px'><?php echo $lang->task->assignedTo;?></th>
+            <?php if(!$isChildren):?>
+            <th class='w-100px'><?php echo $lang->task->team;?></th>
+            <?php endif;?>
             <th class='w-p25'><?php echo $lang->task->desc;?></th>
             <th class='w-120px'><?php echo $lang->task->deadline;?></th>
             <th class='w-70px'><?php echo $lang->task->pri;?></th>
             <th class='w-70px'><?php echo $lang->task->estimateAB;?></th>
-            <th class='w-40px'><?php echo $lang->task->multipleAB;?></th>
           </tr>
         </thead>
 
@@ -41,21 +47,20 @@
         $pri = 3;
         ?>
         <tr>
-          <td class='text-center'><?php echo $i+1;?></td>
+          <td class='text-center'><?php echo $i+1;?><?php echo html::input("parent[$i]", $taskID, "class='hide'");?></td>
           <td><?php echo html::input("name[$i]", '', "class='form-control'");?></td>
-          <td>
-            <div class='assignedToForm'><?php echo html::select("assignedTo[$i]", $users, $member, "class='form-control'");?></div>
-            <div class='teamForm hide'><?php echo html::select("team[$i][]", $teamUsers, '', "class='form-control chosen' multiple");?></div>
-          </td>
+          <td><?php echo html::select("assignedTo[$i]", $users, $member, "class='form-control'");?></td>
+          <?php if(!$isChildren):?>
+          <td><?php echo html::select("team[$i][]", $teamUsers, '', "class='form-control chosen' multiple");?></td>
+          <?php endif;?>
           <td><?php echo html::textarea("desc[$i]", '', "rows='1' class='form-control'");?></td>
           <td><?php echo html::input("deadline[$i]", '', "class='form-control form-date'");?></td>
           <td><?php echo html::select("pri[$i]", $lang->task->priList, $pri, "class=form-control");?></td>
           <td><?php echo html::input("estimate[$i]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'");?></td>
-          <td class='text-center' title='<?php echo $lang->task->multiple?>'><input type='checkbox' name='multiple[<?php echo $i?>]' class='multiple' /></td>
         </tr>
         <?php endfor;?>
         <tr>
-          <td colspan='7' class='text-center'>
+            <td colspan='<?php echo $isChildren ? 6 : 7?>' class='text-center'>
             <?php
             $browseLink = $this->session->taskList ? $this->session->taskList : inlink('browse', "project=$task->project");
             echo html::submitButton() . html::a($browseLink, $lang->goback, "class='btn btn-default'") . html::hidden('referer', $this->server->http_referer);
@@ -66,4 +71,7 @@
     </div>
   </form>
 </div>
-<?php include $app->getModuleRoot() . 'common/view/footer.html.php';?>
+<?php
+if(!$isChildren) include $app->getModuleRoot() . 'common/view/footer.html.php';
+if($isChildren)  include $app->getAppRoot() . '../sys/common/view/footer.modal.html.php';
+?>

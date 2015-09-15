@@ -79,6 +79,9 @@ $lang->task->multipleAB     = 'Multiple';
 $lang->task->team           = 'Team';
 $lang->task->transmit       = 'Transmit';
 $lang->task->transmitTo     = 'Transmit To';
+$lang->task->children       = 'Children Task';
+$lang->task->childrenAB     = 'Child';
+$lang->task->parent         = 'Parent Task';
 
 $lang->task->confirmFinish     = '"Left" is zero, this task will be done. Are you sure?';
 $lang->task->consumedBefore    = 'consumed before';

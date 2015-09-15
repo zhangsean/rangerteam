@@ -22,6 +22,37 @@
           <div><?php echo $this->fetch('file', 'printFiles', array('files' =>$task->files, 'fieldset' => 'false'))?></div>
         </div>
       </div>
+      <?php if(!empty($task->children)):?>
+      <div class='panel'>
+        <div class='panel-heading'><strong><?php echo $this->lang->task->children;?></strong></div>
+        <table class='table table-hover table-data table-fixed'>
+          <tr class='text-center'>
+            <th class='w-60px'> <?php echo$lang->task->id;?></th>
+            <th class='w-40px'> <?php echo$lang->task->lblPri;?></th>
+            <th>                <?php echo$lang->task->name;?></th>
+            <th class='w-100px'><?php echo$lang->task->deadline;?></th>
+            <th class='w-80px'> <?php echo$lang->task->assignedTo;?></th>
+            <th class='w-90px'> <?php echo$lang->task->status;?></th>
+            <th class='w-50px visible-lg'> <?php echo $lang->task->consumedAB . $lang->task->lblHour;?></th>
+            <th class='w-50px visible-lg'><?php echo $lang->task->leftAB . $lang->task->lblHour;?></th>
+            <th class='w-200px'><?php echo $lang->actions;?></th>
+          </tr>
+          <?php foreach($task->children as $child):?>
+          <tr class='text-center' data-url='<?php echo $this->createLink('task', 'view', "taskID=$child->id"); ?>'>
+            <td><?php echo $child->id;?></td>
+            <td><span class='active pri pri-<?php echo $child->pri; ?>'><?php echo $lang->task->priList[$child->pri];?></span></td>
+            <td class='text-left'><?php echo $child->name;?></td>
+            <td><?php echo $child->deadline;?></td>
+            <td><?php if(isset($users[$child->assignedTo])) echo $users[$child->assignedTo];?></td>
+            <td><?php echo zget($lang->task->statusList, $child->status);?></td>
+            <td class='visible-lg'><?php echo $child->consumed;?></td>
+            <td class='visible-lg'><?php echo $child->left;?></td>
+            <td><?php $this->task->buildOperateMenu($child);?></td>
+          </tr>
+          <?php endforeach;?>
+        </table>
+      </div>
+      <?php endif;?>
       <?php echo $this->fetch('action', 'history', "objectType=task&objectID={$task->id}");?>
       <div class='page-actions'>
         <?php

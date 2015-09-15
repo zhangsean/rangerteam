@@ -20,11 +20,16 @@ class taskModel extends model
      */
     public function getByID($taskID)
     {
-        $task = $this->dao->select('*')->from(TABLE_TASK)->where('id')->eq($taskID)->limit(1)->fetch();
+        $task     = $this->dao->select('*')->from(TABLE_TASK)->where('id')->eq($taskID)->limit(1)->fetch();
+        $children = $this->dao->select('*')->from(TABLE_TASK)->where('parent')->eq($taskID)->fetchAll('id');
 
         foreach($task as $key => $value) if(strpos($key, 'Date') !== false and !(int)substr($value, 0, 4)) $task->$key = '';
 
-        if($task) $task->files = $this->loadModel('file')->getByObject('task', $taskID);
+        if($task) 
+        {
+            $task->files = $this->loadModel('file')->getByObject('task', $taskID);
+            $task->children = $children;
+        }
 
         return $task;
     }
@@ -61,8 +66,43 @@ class taskModel extends model
             ->orderBy($orderBy)
             ->page($pager);
         
-        if($groupBy == 'id') return $this->dao->fetchAll('id');
-        if($groupBy != 'id') return $this->dao->fetchGroup($groupBy);
+        if($groupBy == 'id') $taskList = $this->dao->fetchAll('id');
+        if($groupBy != 'id') $taskList = $this->dao->fetchGroup($groupBy);
+
+        /* Process childen task. */
+        if($groupBy == 'id') 
+        {
+            foreach($taskList as $key => $task)
+            {
+                if(!isset($task->children)) $task->children = array();
+                if($task->parent != 0 and isset($taskList[$task->parent])) 
+                {
+                    $taskList[$task->parent]->children[$key] = $task;
+                    unset($taskList[$key]);
+                }
+            } 
+        }
+        if($groupBy != 'id') 
+        {
+            foreach($taskList as $groupKey => $tasks)
+            {
+                $children = array();
+                $done     = array();
+                foreach($tasks as $task) if($task->parent != 0) $children[$task->parent][$task->id] = $task;
+                foreach($tasks as $task)
+                {
+                    $task->children = array();
+                    if(isset($children[$task->id])) 
+                    {
+                        $task->children = $children[$task->id];
+                        $done += $children[$task->id];
+                    }
+                }
+                foreach($tasks as $taskKey => $task) if(isset($done[$task->id])) unset($taskList[$groupKey][$taskKey]);
+            }
+        }
+
+        return $taskList;
     }
     
     /**
@@ -89,7 +129,7 @@ class taskModel extends model
             ->beginIF(is_array($type) or strpos(',all,undone,assignedtome,delayed,finishedbyme,', ",$type,") === false)->andWhere('status')->in($type)->fi()
             ->orderBy($orderBy)
             ->page($pager)
-            ->fetchAll();
+            ->fetchAll('id');
 
         if($tasks) return $tasks;
         return array();
@@ -201,15 +241,15 @@ class taskModel extends model
             $task->status      = 'wait';
             $task->createdBy   = $this->app->user->account;
             $task->createdDate = $now;
+            $task->parent      = empty($this->post->parent[$key]) ? 0 : $this->post->parent[$key];
 
-            if(isset($_POST['multiple'][$key]))
+            /* Process team. */
+            if(isset($_POST['team'][$key]))
             {
                 $team = $this->post->team[$key];
                 foreach($team as $key => $account) if($account == '') unset($team[$key]);
-
+                if(!isset($team[$assignedTo]) and !empty($team)) array_unshift($team, $assignedTo);
                 $task->team = join(',', $team);
-                $assignedTo = reset($team);
-                $task->assignedTo = $assignedTo;
             }
 
             if($task->assignedTo) $task->assignedDate = $now;
@@ -556,8 +596,22 @@ class taskModel extends model
         $deleter = $type == 'browse' ? 'reloadDeleter' : 'deleter';
         $menu   .= commonModel::printLink('task', 'delete', "taskID=$task->id", $this->lang->delete, "class='$deleter $class'", false);
         if($type == 'view') $menu .= "</div>";
-        if($print) echo $menu;
 
+        if($task->parent == 0)
+        {
+            $disabled = self::isClickable($task, 'batchCreate') ? '' : 'disabled';
+            $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class' data-width='80%'";
+            $menu    .= commonModel::printLink('task', 'batchCreate', "projectID=$task->project&taskID=$task->id", $this->lang->task->children, $misc, false);
+        }
+
+        if($task->parent != 0 and $type == 'view')
+        {
+            $disabled = self::isClickable($task, 'view') ? '' : 'disabled';
+            $misc     = $disabled ? "class='$disabled $class'" : "class='$class'";
+            $menu    .= commonModel::printLink('task', 'view', "taskID=$task->parent", $this->lang->task->parent, $misc, false);
+        }
+
+        if($print) echo $menu;
         return $menu;
     }
 
@@ -603,4 +657,32 @@ class taskModel extends model
         return !dao::isError();
     }
 
+    /**
+     * Get next user. 
+     * 
+     * @param  string $users 
+     * @param  string $currentUser 
+     * @access public
+     * @return void
+     */
+    public function getNextUser($users, $current)
+    {
+        /* Process user */
+        if(!is_array($users)) $users = explode(',', trim($users, ','));
+        if(!$current) return reset($users);
+        $hit  = false;
+        $next = '';
+        foreach($users as $key => $account)
+        {
+            if($hit)
+            {
+                $next = $account;
+                break;
+            }
+
+            if($account == $current) $hit = true;
+        }
+        if($next == '') return reset($users);
+        return $next;
+    }
 }

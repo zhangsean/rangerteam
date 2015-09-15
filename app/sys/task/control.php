@@ -112,10 +112,11 @@ class task extends control
      * Batch create task.
      * 
      * @param  int    $projectID 
+     * @param  int    $taskID 
      * @access public
      * @return void
      */
-    public function batchCreate($projectID)
+    public function batchCreate($projectID, $taskID = '')
     {
         if($_POST)
         {
@@ -127,9 +128,11 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer));
         }
 
+        $this->view->title     = $taskID == '' ? $this->lang->task->batchCreate : $this->lang->task->children;
         $this->view->projectID = $projectID;
         $this->view->projects  = $this->loadModel('project')->getPairs();
         $this->view->users     = $this->loadModel('project')->getMemberPairs($projectID);
+        $this->view->taskID    = $taskID;
         $this->display();
     }
 
@@ -294,20 +297,9 @@ class task extends control
         if($task->team != '')
         {
             $users = array();
-            $team = explode(',', trim($task->team, ','));
+            $team  = explode(',', trim($task->team, ','));
             foreach($team as $key => $account) $users[$account] = $members[$account];
-
-            if(empty($task->assignedTo))
-            {
-                $assignedTo = reset($team);
-            }
-            else
-            {
-                foreach($team as $key => $account) if($account == $task->assignedTo) break;
-                $assignedTo = next($team);
-                if($assignedTo == false) $assignedTo = reset($team);
-            }
-            $task->assignedTo = $assignedTo;
+            $task->assignedTo = $this->task->getNextUser($task->team, $task->assignedTo);
             if(!empty($users)) $members = $users;
         }
 

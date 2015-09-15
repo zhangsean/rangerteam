@@ -9,4 +9,20 @@ $(function()
     });
 
     $('#menu li[data-group="' + v.groupBy + '"]').addClass('active');
+
+    $('.task-toogle').click(function()
+    {
+        var obj = $(this).find('i');
+        if(obj.hasClass('icon-plus'))
+        {
+           obj.parents('tr').next('tr').show();
+           obj.removeClass('icon-plus').addClass('icon-minus');
+        }
+        else if(obj.hasClass('icon-minus'))
+        {
+           obj.parents('tr').next('tr').hide();
+           obj.removeClass('icon-minus').addClass('icon-plus');
+        }
+        return false;
+    });
 });

@@ -34,6 +34,7 @@
               <?php foreach($groupTasks as $task):?>
               <div class='board-item task' data-id="<?php echo $task->id;?>">
                 <div class='task-heading'>
+                  <?php if(!empty($task->children)) $task->name .= "&nbsp;<i class='icon icon-plus'></i>"?>
                   <?php echo html::a($this->createLink('task', 'view', "taskID={$task->id}"), $task->name)?>
                 </div>
                 <?php if(!empty($task->desc)): ?>

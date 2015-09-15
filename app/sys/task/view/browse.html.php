@@ -29,7 +29,7 @@
           <th class='w-100px visible-lg'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->task->createdDate);?></th>
           <th class='w-90px visible-lg'> <?php commonModel::printOrderLink('consumed',    $orderBy, $vars, $lang->task->consumedAB . $lang->task->lblHour);?></th>
           <th class='w-110px visible-lg'> <?php commonModel::printOrderLink('left',       $orderBy, $vars, $lang->task->left . $lang->task->lblHour);?></th>
-          <th><?php echo $lang->actions;?></th>
+          <th class='w-240px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
@@ -37,15 +37,44 @@
         <tr class='text-center' data-url='<?php echo $this->createLink('task', 'view', "taskID=$task->id"); ?>'>
           <td><?php echo $task->id;?></td>
           <td><span class='active pri pri-<?php echo $task->pri; ?>'><?php echo $lang->task->priList[$task->pri];?></span></td>
-          <td class='text-left'><?php echo $task->name;?></td>
+          <td class='text-left'>
+            <?php if($task->parent != 0) echo "<span class='label'>{$lang->task->childrenAB}</span>"?>
+            <?php echo $task->name;?>
+            <?php if(!empty($task->children)) echo "<span class='task-toogle'>&nbsp;&nbsp;<i class='icon icon-minus'></i>&nbsp;&nbsp;</span>"?>
+          </td>
           <td><?php echo $task->deadline;?></td>
           <td><?php if(isset($users[$task->assignedTo])) echo $users[$task->assignedTo];?></td>
           <td><?php echo zget($lang->task->statusList, $task->status);?></td>
           <td class='visible-lg'><?php echo substr($task->createdDate, 0, 10);?></td>
           <td class='visible-lg'><?php echo $task->consumed;?></td>
           <td class='visible-lg'><?php echo $task->left;?></td>
-          <td><?php $this->task->buildOperateMenu($task);?></td>
+          <td class='text-left'><?php $this->task->buildOperateMenu($task);?></td>
         </tr>
+        <?php if(!empty($task->children)):?>
+        <tr>
+          <td colspan='10'>
+            <table class='table table-data'>
+              <?php foreach($task->children as $child):?>
+              <tr class="text-center children" data-url='<?php echo $this->createLink('task', 'view', "taskID=$child->id"); ?>'>
+                <td class='w-60px'>   <?php echo $child->id;?></td>
+                <td class='w-40px'>   <span class='active pri pri-<?php echo $child->pri; ?>'><?php echo $lang->task->priList[$child->pri];?></span></td>
+                <td class='text-left'>
+                  <span class='label'><?php echo $lang->task->childrenAB?></span>
+                  <?php echo $child->name;?>
+                </td>
+                <td class='w-100px'>  <?php echo $child->deadline;?></td>
+                <td class='w-80px'>   <?php if(isset($users[$child->assignedTo])) echo $users[$child->assignedTo];?></td>
+                <td class='w-90px'>   <?php echo zget($lang->task->statusList, $child->status);?></td>
+                <td class='w-100px visible-lg'><?php echo substr($child->createdDate, 0, 10);?></td>
+                <td class='w-90px visible-lg'> <?php echo $child->consumed;?></td>
+                <td class='w-110px visible-lg'><?php echo $child->left;?></td>
+                <td class='w-230px text-left'><?php $this->task->buildOperateMenu($child);?></td>
+              </tr>
+              <?php endforeach;?>
+            </table>
+          </td>
+        </tr>
+        <?php endif;?>
         <?php endforeach;?>
       </tbody>
       <tfoot><tr><td colspan='10'><?php $pager->show();?></td></tr></tfoot>

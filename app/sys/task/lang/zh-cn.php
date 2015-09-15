@@ -79,6 +79,9 @@ $lang->task->multipleAB     = '多人';
 $lang->task->team           = '团队';
 $lang->task->transmit       = '转交';
 $lang->task->transmitTo     = '转交给';
+$lang->task->children       = '子任务';
+$lang->task->childrenAB     = '子';
+$lang->task->parent         = '父任务';
 
 $lang->task->confirmFinish     = '"预计剩余"为0，确认将任务状态改为"已完成"吗？';
 $lang->task->consumedBefore    = '之前消耗';
