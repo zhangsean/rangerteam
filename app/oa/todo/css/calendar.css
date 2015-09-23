@@ -1,0 +1,15 @@
+.with-side {position: relative;}
+.with-side .main{padding-right:300px;}
+.with-side .side {position: absolute; right: 0px; top: 0px; width: 280px;}
+
+[data-toggle="droppable"] {cursor: move;}
+
+.board-item {margin-top: 5px;}
+.tab-content {padding: 5px; border: 1px solid #ddd; border-top-color: transparent;}
+
+.calendar .event.with-action {position: relative; padding-right: 30px;}
+.calendar .event.with-action .action {position: absolute; right: 0; top: 0;}
+.calendar .event.with-action .action > a {display: inline-block; padding: 0 4px; color: #fff; background-color: rgba(0,0,0,0.25); line-height: 19px; padding: 0 6px;}
+.calendar .event.with-action .action > a:hover {background-color: rgba(0,0,0,0.5)}
+
+.tab-content .action {float: right; cursor: pointer;}
