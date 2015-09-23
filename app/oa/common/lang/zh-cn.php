@@ -14,6 +14,7 @@ $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = '我的地盘|dashboard|index|';
+$lang->menu->oa->todo      = '待办|todo|calendar|';
 $lang->menu->oa->project   = '项目|project|index|';
 $lang->menu->oa->announce  = '公告|announce|browse|';
 $lang->menu->oa->doc       = '文档|doc|browse|';
@@ -22,6 +23,10 @@ $lang->menu->oa->leave     = '请假|leave|personal|';
 $lang->menu->oa->trip      = '出差|trip|personal|';
 
 $lang->dashboard = new stdclass();
+
+$lang->todo = new stdclass();
+$lang->todo->menu = new stdclass();
+$lang->todo->menu->calendar = '日历|todo|calendar|';
 
 $lang->project   = new stdclass();
 $lang->project->menu = new stdclass();

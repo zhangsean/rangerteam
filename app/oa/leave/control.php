@@ -193,5 +193,30 @@ class leave extends control
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
     }
+
+    /**
+     * ajax get leave list for todo. 
+     * 
+     * @param  string $account   not used.
+     * @param  string $id 
+     * @access public
+     * @return void
+     */
+    public function ajaxGetTodoList($account = '', $id = '')
+    {
+        $currentYear  = date('Y');
+        $currentMonth = date('m');
+        $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+        foreach($deptList as $key => $value) $deptList[$key] = $value->name;
+        $leaveList = $this->leave->getList($currentYear, $currentMonth, '', array_keys($deptList), 'wait');
+        $leaves = array();
+        foreach($leaveList as $leave)
+        {
+            $leaves[$leave->id] = $leave->realname . '(' . $leave->begin . ')[' . $this->lang->leave->typeList[$leave->type] . ']';
+        }
+
+        if($id) die(html::select("idvalues[$id]", $leaves, '', 'class="form-control"'));
+        die(html::select('idvalue', $leaves, '', 'class=form-control'));
+    }
 }
 

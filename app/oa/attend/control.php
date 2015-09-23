@@ -288,6 +288,7 @@ class attend extends control
 
         $this->view->title  = $this->lang->attend->edit;
         $this->view->attend = $attend;
+        $this->view->date   = $date;
         $this->display();
     }
 
@@ -335,5 +336,39 @@ class attend extends control
         $result = $this->attend->review($attendID, $reviewStatus);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('attend', 'browseReview')));
+    }
+
+    /**
+     * ajax get review list for todo. 
+     * 
+     * @param  string $account 
+     * @param  string $id 
+     * @access public
+     * @return void
+     */
+    public function ajaxGetTodoList($account = '', $id = '')
+    {
+        $attendList = array();
+        $deptList   = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+        if(!empty($deptList)) 
+        {
+            $dept = join(',', array_keys($deptList));
+            $attendList = $this->attend->getByDept($dept, $startDate = '', $endDate = '', 'wait');
+        }
+        $users = $this->loadModel('user')->getPairs();
+        $attends = array();
+        foreach($attendList as $deptKey => $attendDept)
+        {
+            foreach($attendDept as $accountKey => $attendUser)
+            {
+                foreach($attendUser as $attend)
+                {
+                    $attends[$attend->id] = $deptList[$deptKey]->name . '/' . $users[$accountKey] . '(' . $attend->date . ')';
+                }
+            }
+        }
+
+        if($id) die(html::select("idvalues[$id]", $attends, '', 'class="form-control"'));
+        die(html::select('idvalue', $attends, '', 'class=form-control'));
     }
 }

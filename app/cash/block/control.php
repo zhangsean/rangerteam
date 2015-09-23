@@ -173,7 +173,8 @@ class block extends control
         $this->processParams();
 
         $this->view->providers = $this->dao->select('*')->from(TABLE_CUSTOMER)
-            ->where('relation')->eq('provider')
+            ->where('deleted')->eq(0)
+            ->andWhere('relation')->eq('provider')
             ->orderBy($this->params->orderBy)
             ->limit($this->params->num)
             ->fetchAll('id');

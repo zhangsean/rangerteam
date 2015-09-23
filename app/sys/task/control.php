@@ -664,4 +664,20 @@ class task extends control
 
         $this->display();
     }
+
+    /**
+     * ajax get user tasks for todo. 
+     * 
+     * @param  string $account 
+     * @param  string $id 
+     * @access public
+     * @return void
+     */
+    public function ajaxGetTodoList($account = '', $id = '')
+    {
+        if($account = '') $account = $this->app->user->account;
+        $tasks = $this->task->getUserTaskPairs($account, 'wait,doing');
+        if($id) die(html::select("idvalues[$id]", $tasks, '', 'class="form-control"'));
+        die(html::select('idvalue', $tasks, '', 'class=form-control'));
+    }
 }

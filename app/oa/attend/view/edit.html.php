@@ -10,9 +10,9 @@
  * @link        http://www.ranzhico.com
  */
 ?>
-<?php include '../../../sys/common/view/header.lite.html.php';?>
+<?php include '../../../sys/common/view/header.modal.html.php';?>
 <div class='panel-body'>
-  <form id='ajaxForm' method='post'>
+    <form id='ajaxForm' method='post' action='<?php echo $this->createLink('attend', 'edit', "date=$date")?>'>
     <table class='table table-form table-condensed'>
       <tr>
         <th><?php echo $lang->attend->date?></th>

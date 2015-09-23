@@ -429,4 +429,22 @@ class order extends control
 
         $this->display();
     }
+
+    /**
+     * ajax get orders this week need conect. 
+     * 
+     * @param  string $account   not used.
+     * @param  string $id 
+     * @access public
+     * @return void
+     */
+    public function ajaxGetTodoList($account = '', $id = '')
+    {
+        $orderList = $this->order->getList('thismonth');
+        $orders = array();
+        foreach($orderList as $order) $orders[$order->id] = $order->title; 
+
+        if($id) die(html::select("idvalues[$id]", $orders, '', 'class="form-control"'));
+        die(html::select('idvalue', $orders, '', 'class=form-control'));
+    }
 }

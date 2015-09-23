@@ -685,4 +685,29 @@ class taskModel extends model
         if($next == '') return reset($users);
         return $next;
     }
+
+    /**
+     * getUserTaskPairs 
+     * 
+     * @param  string $account 
+     * @param  string $status 
+     * @access public
+     * @return void
+     */
+    public function getUserTaskPairs($account, $status)
+    {
+        $tasks = array();
+        $sql = $this->dao->select('t1.id, t1.name, t2.name as project')
+            ->from(TABLE_TASK)->alias('t1')
+            ->leftjoin(TABLE_PROJECT)->alias('t2')->on('t1.project = t2.id')
+            ->where('t1.assignedTo')->eq($account)
+            ->andWhere('t1.deleted')->eq(0);
+        if($status != 'all') $sql->andwhere('t1.status')->in($status);
+        $stmt = $sql->query();
+        while($task = $stmt->fetch())
+        {    
+            $tasks[$task->id] = $task->project . ' / ' . $task->name;
+        }    
+        return $tasks;
+    }
 }

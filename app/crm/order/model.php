@@ -20,7 +20,7 @@ class orderModel extends model
      */
     public function getByID($id)
     {
-        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
         if(empty($customerIdList)) return null;
 
         $order = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($id)->andWhere('customer')->in($customerIdList)->fetch(); 

@@ -186,3 +186,4 @@ $lang->action->objectTypes['contact']  = 'Contact';
 $lang->action->objectTypes['contract'] = 'Contract';
 $lang->action->objectTypes['project']  = 'Project';
 $lang->action->objectTypes['user']     = 'User';
+$lang->action->objectTypes['resume']   = 'Resume';

@@ -374,4 +374,22 @@ class customer extends control
 
         $this->display();
     }
+
+    /**
+     * ajax get customers for todo.
+     * 
+     * @param  string $account    not used.
+     * @param  string $id 
+     * @access public
+     * @return void
+     */
+    public function ajaxGetTodoList($account = '', $id = '')
+    {
+        $customerList = $this->customer->getList('thismonth');
+        $customers = array();
+        foreach($customerList as $customer) $customers[$customer->id] = $customer->name;
+
+        if($id) die(html::select("idvalues[$id]", $customers, '', 'class="form-control"'));
+        die(html::select('idvalue', $customers, '', 'class=form-control'));
+    }
 }

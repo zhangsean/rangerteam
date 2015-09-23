@@ -198,7 +198,7 @@ class actionModel extends model
         }
 
         /* Add name field to the trashes. */
-        foreach($trashes as $trash) $trash->objectName = $objectNames[$trash->objectType][$trash->objectID];
+        foreach($trashes as $trash) $trash->objectName = isset($objectNames[$trash->objectType][$trash->objectID]) ? $objectNames[$trash->objectType][$trash->objectID] : $trash->objectID;
         return $trashes;
     }
 

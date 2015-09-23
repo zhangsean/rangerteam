@@ -186,3 +186,4 @@ $lang->action->objectTypes['contact']  = '联系人';
 $lang->action->objectTypes['contract'] = '合同';
 $lang->action->objectTypes['project']  = '项目';
 $lang->action->objectTypes['user']     = '用户';
+$lang->action->objectTypes['resume']   = '履历';

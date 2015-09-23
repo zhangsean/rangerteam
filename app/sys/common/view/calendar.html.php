@@ -21,7 +21,12 @@ $(function()
     $('div.calendar').each(function()
     {
         var calendarObj = $(this);
-        var settings    = calendarObj.data();
+        var settings    = {};
+        if(typeof v.settings != 'undefined') settings = v.settings;
+
+        /* Get setting from div. */
+        var divData    = calendarObj.data();
+        for(key in divData) settings[key] = divData[key];
 
         /* Get data from table. */
         var calendars = new Array();
@@ -40,28 +45,29 @@ $(function()
         {
             var rowObj = $(this);
             var event = new Array();
+            event['data'] = rowObj.data();
             if(rowObj.find('.title').length)    event['title']      = rowObj.find('.title').text();
             if(rowObj.find('.desc').length)     event['desc']       = rowObj.find('.desc').text();
             if(rowObj.find('.allDay').length)   event['allDay']     = rowObj.find('.allDay').text();
             if(rowObj.find('.start').length)    event['start']      = rowObj.find('.start').text();
             if(rowObj.find('.end').length)      event['end']        = rowObj.find('.end').text();
-            if(rowObj.find('.data').length)     event['data']       = rowObj.find('.data').text();
             if(rowObj.find('.calendar').length) event['calendar']   = rowObj.find('.calendar').text();
-            if(rowObj.find('.click').length)    event['click']      = rowObj.find('.click').text();
-            if(rowObj.find('.click').length)    event['modalTitle'] = rowObj.find('.click').data('title');
+            if(rowObj.find('.click').length)    event['click']      = rowObj.find('.click').data();
             events.push(event);
         });
+        if(calendarObj.find(".calendar-data").length) settings.data = {'calendars':calendars, 'events':events};
         calendarObj.find(".calendar-data").remove();
 
-        /* Init calendar. */
-        settings.data = {'calendars':calendars, 'events':events};
+        /* Add default click event. */
         settings.clickEvent = function(event)
         {
             if(event.event.click != undefined)
             {
-                $.zui.modalTrigger.show({iframe:event.event.click, title:event.event.modalTitle});
+                $.zui.modalTrigger.show(event.event.click);
             }
         }
+
+        /* init calendar. */
         calendarObj.calendar(settings);
     });
 });

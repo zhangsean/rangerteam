@@ -18,7 +18,7 @@
 .calendar .day .content {position: absolute; top: 0;}
 </style>
 <div id='attendCalendar' class='calendar' data-with-header='false' data-drag-then-drop='false'>
-  <table class='calendar-data'>
+  <table class='calendar-data hidden'>
     <tr class='calendar-calendar'>
       <td class='name'>normal</td>
       <td class='color'>primary</td>
@@ -37,7 +37,7 @@
       <td class='allDay'>true</td>
       <td class='calendar'><?php echo strpos('normal,leave,trip,rest', $attend->status) !== false ? 'normal' : 'abnormal';?></td>
       <?php if(strpos('normal,leave,trip,rest', $attend->status) === false):?>
-      <td class='click' data-title=<?php echo $lang->attend->edit;?>><?php echo $this->createLink('oa.attend', 'edit', "date=$attend->date");?></td>
+      <td class='click' data-title=<?php echo $lang->attend->edit;?> data-width='500px' data-remote='<?php echo $this->createLink('oa.attend', 'edit', "date=$attend->date");?>'></td>
       <?php endif;?>
     </tr>
     <?php endforeach;?>
