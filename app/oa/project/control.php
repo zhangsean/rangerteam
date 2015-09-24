@@ -50,8 +50,9 @@ class project extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('task', 'browse', "projectID={$projectID}")));
         }
 
-        $this->view->users = $this->loadModel('user')->getPairs('noclosed');
-        $this->view->title = $this->lang->project->create;
+        $this->view->title  = $this->lang->project->create;
+        $this->view->users  = $this->loadModel('user')->getPairs('noclosed');
+        $this->view->groups = $this->loadModel('group')->getPairs();
         $this->display();
     }
 
@@ -77,6 +78,7 @@ class project extends control
         $this->view->title   = $this->lang->project->edit;
         $this->view->users   = $this->loadModel('user')->getPairs('noclosed');
         $this->view->project = $this->project->getByID($projectID);
+        $this->view->groups  = $this->loadModel('group')->getPairs();
         $this->display();
     }
 
@@ -199,22 +201,9 @@ class project extends control
      */
     public function ajaxGetDropMenu($projectID, $module, $method, $extra)
     {
-        $projects = $this->dao->select('*')->from(TABLE_PROJECT)->where('id')->in(array_keys($this->projects))->fetchAll();
-        $members  =  $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id');
-
-        foreach($projects as $project)
-        {
-            $project->members = isset($members[$project->id]) ? $members[$project->id] : array();
-            foreach($project->members as $member)
-            {
-                if($member->role != 'manager') continue;
-                if($member->role == 'manager') $project->PM = $member->account;
-            }
-            if($project->id == $projectID)
-            {
-                $currentProject = $project;
-            }
-        }
+        $projects       = $this->project->getList();
+        $members        =  $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id');
+        $currentProject = $projects[$projectID];
 
         $this->view->link            = $this->project->getProjectLink($module, $method, $extra);
         $this->view->projectID       = $projectID;

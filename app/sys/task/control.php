@@ -50,11 +50,12 @@ class task extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        /* Check project deleted. */
+        /* Check project deleted and privilage. */
         if($projectID)
         {
             $project = $this->loadModel('project')->getByID($projectID);
             if($project->deleted) $this->locate($this->createLink('project'));
+            if(!$this->project->checkPriv($projectID)) $this->locate($this->createLink('project'));
         }
 
         $this->session->set('taskList', $this->app->getURI(true));

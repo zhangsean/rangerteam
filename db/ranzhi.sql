@@ -278,6 +278,8 @@ CREATE TABLE `oa_project` (
   `editedBy` char(30) NOT NULL,
   `editedDate` datetime NOT NULL,
   `status` enum('doing','finished','suspend') NOT NULL DEFAULT 'doing',
+  `acl` enum('open','private','custom') NOT NULL default 'open',
+  `whitelist` varchar(255) NOT NULL,
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE='MyISAM' COLLATE 'utf8_general_ci'; 

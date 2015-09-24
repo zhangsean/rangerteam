@@ -18,3 +18,6 @@ CREATE TABLE IF NOT EXISTS `oa_todo` (
   PRIMARY KEY  (`id`),
   KEY `user` (`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `oa_project` add `acl` enum('open','private','custom') NOT NULL default 'open' AFTER `status`;
+ALTER TABLE `oa_project` add `whitelist` varchar(255) NOT NULL AFTER `acl`;

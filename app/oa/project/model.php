@@ -100,8 +100,8 @@ class projectModel extends model
             }
 
             if($status == 'involved' and !in_array($this->app->user->account, $accountList)) unset($projects[$project->id]);
+            if(!$this->checkPriv($project->id)) unset($projects[$project->id]);
         }
-
         return $projects;
     }
 
@@ -168,6 +168,7 @@ class projectModel extends model
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', helper::now())
             ->remove('member,manager,master')
+            ->setDefault('whitelist', '')
             ->stripTags('desc', $this->config->allowedTags->admin)
             ->get();
 
@@ -216,6 +217,8 @@ class projectModel extends model
                 ->add('editedBy', $this->app->user->account)
                 ->add('editedDate', helper::now())
                 ->stripTags('desc', $this->config->allowedTags->admin)
+                ->join('whitelist', ',')
+                ->setDefault('whitelist', '')
                 ->remove('member,manager,master')
                 ->get();
         }
@@ -531,5 +534,52 @@ class projectModel extends model
         $link = helper::createLink($module, $method, "projectID=%s");
         if($extra != '') $link = helper::createLink($module, $method, "projectID=%s&type=$extra");
         return $link;
+    }
+    
+    /**
+     * check project's Priv. 
+     * 
+     * @param  int    $project 
+     * @access public
+     * @return bool
+     */
+    public function checkPriv($projectID)
+    {
+        //if($this->app->user->admin == 'super') return true;
+        static $projects, $members, $groups, $groupUsers = array();
+        if(empty($groups)) 
+        {
+            $groups = $this->loadModel('group')->getList(0);
+            foreach($groups as $group) $groupUsers[$group->id] = $this->group->getUserPairs($group->id);
+
+            $members  = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id');
+            $projects = $this->dao->select('*')->from(TABLE_PROJECT)->fetchAll('id');
+            foreach($projects as $project)
+            {
+                $project->members = isset($members[$project->id]) ? $members[$project->id] : array();
+                $accountList = array();
+                foreach($project->members as $key => $member)
+                {
+                    if(!$member->account) unset($project->members[$key]);
+                    $accountList[] = $member->account;
+                }
+                $project->accountList = $accountList;
+            }
+        }
+
+        if($projects[$projectID]->acl == 'open') return true;
+        if($projects[$projectID]->acl == 'private') return in_array($this->app->user->account, $projects[$projectID]->accountList);
+        if($projects[$projectID]->acl == 'custom')
+        {
+            $accountList = $projects[$projectID]->accountList;
+            $whitelist   = trim($projects[$projectID]->whitelist, ',');
+            if($whitelist != '')
+            {
+                $whitelist = explode(',', $whitelist);
+                foreach($whitelist as $groupID) foreach($groupUsers[$groupID] as $account => $realname) $accountList[] = $account;
+            }
+            return in_array($this->app->user->account, $accountList);
+        } 
+        return false;
     }
 }

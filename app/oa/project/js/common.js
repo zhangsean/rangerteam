@@ -1,3 +1,8 @@
+function setWhite(acl)
+{
+    acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
+}
+
 $(document).ready(function()
 {
     /* Prevent duplicate bindings */

@@ -49,6 +49,14 @@
       <th><?php echo $lang->project->desc;?></th>
       <td colspan='2'><?php echo html::textarea('desc', '', "class='form-control' rows='5'");?></td>
     </tr>
+    <tr>
+      <th><?php echo $lang->project->acl;?></th>
+      <td colspan='2'><?php echo nl2br(html::radio('acl', $lang->project->aclList, 'open', "onclick='setWhite(this.value);'", 'block'));?></td>
+    </tr>  
+    <tr id='whitelistBox' class='hidden'>
+      <th><?php echo $lang->project->whitelist;?></th>
+      <td colspan='2'><?php echo html::checkbox('whitelist', $groups, '');?></td>
+    </tr>
     <tr><th></th><td><?php echo html::submitButton();?></td></tr>
   </table>
 </form>

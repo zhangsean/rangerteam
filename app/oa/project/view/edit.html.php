@@ -14,7 +14,7 @@
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
-<form method='post' id='ajaxForm' action='<?php echo inlink('edit', "projectID={$project->id}")?>'>
+<form method='post' id='ajaxForm' action='<?php echo inlink('edit', "projectID={$project->id}")?>' class='form-inline'>
   <table class='table-form w-p90'>
     <tr>
       <th class='w-80px'><?php echo $lang->project->name;?></th>
@@ -48,6 +48,14 @@
     <tr>
       <th><?php echo $lang->project->desc;?></th>
       <td colspan='2'><?php echo html::textarea('desc', $project->desc, "class='form-control' rows='5'");?></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->project->acl;?></th>
+      <td colspan='2'><?php echo nl2br(html::radio('acl', $lang->project->aclList, $project->acl, "onclick='setWhite(this.value);'", 'block'));?></td>
+    </tr>  
+    <tr id='whitelistBox' <?php echo $project->acl == 'custom' ? '' : "class='hidden'";?>>
+      <th><?php echo $lang->project->whitelist;?></th>
+      <td colspan='2'><?php echo html::checkbox('whitelist', $groups, $project->whitelist);?></td>
     </tr>
     <tr><th></th><td><?php echo html::submitButton();?></td></tr>
   </table>

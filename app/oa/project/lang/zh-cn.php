@@ -40,6 +40,8 @@ $lang->project->end         = '结束日期';
 $lang->project->createdBy   = '由谁创建';
 $lang->project->createdDate = '创建时间';
 $lang->project->fromproject = '所属项目';
+$lang->project->acl         = '访问控制';
+$lang->project->whitelist   = '白名单';
 
 $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = '确认激活此项目？';
@@ -52,3 +54,7 @@ $lang->project->selectProject   = '请选择项目';
 $lang->project->note = new stdclass();
 $lang->project->note->rate = '按工时计算';
 $lang->project->note->task = '任务数';
+
+$lang->project->aclList['open']    = '默认设置(有项目视图权限，即可访问)';
+$lang->project->aclList['private'] = '私有项目(只有项目团队成员才能访问)';
+$lang->project->aclList['custom']  = '自定义白名单(团队成员和白名单的成员可以访问)';

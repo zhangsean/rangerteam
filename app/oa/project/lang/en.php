@@ -40,6 +40,8 @@ $lang->project->end         = 'End Date';
 $lang->project->createdBy   = 'Created by';
 $lang->project->createdDate = 'Created date';
 $lang->project->fromproject = 'FromProject';
+$lang->project->acl         = 'Access limitation';
+$lang->project->whitelist   = 'Whitelist';
 
 $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = 'Are you sure to activate this projcet?';
@@ -52,3 +54,7 @@ $lang->project->selectProject   = 'Select Project';
 $lang->project->note = new stdclass();
 $lang->project->note->rate = 'According to working hours';
 $lang->project->note->task = 'The number of tasks';
+
+$lang->project->aclList['open']    = 'Default(Having the priviledge of Project module can visit this Project)';
+$lang->project->aclList['private'] = 'Private(Only team members can visit)';
+$lang->project->aclList['custom']  = 'Whitelist(Team members and who belongs to the whitelist grups can visit)';
