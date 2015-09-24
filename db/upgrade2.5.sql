@@ -21,3 +21,5 @@ CREATE TABLE IF NOT EXISTS `oa_todo` (
 
 ALTER TABLE `oa_project` add `acl` enum('open','private','custom') NOT NULL default 'open' AFTER `status`;
 ALTER TABLE `oa_project` add `whitelist` varchar(255) NOT NULL AFTER `acl`;
+ALTER TABLE `oa_project` add `viewList` varchar(255) NOT NULL AFTER `whitelist`;
+ALTER TABLE `oa_project` add `editList` varchar(255) NOT NULL AFTER `viewList`;

@@ -42,6 +42,9 @@ $lang->project->createdDate = 'Created date';
 $lang->project->fromproject = 'FromProject';
 $lang->project->acl         = 'Access limitation';
 $lang->project->whitelist   = 'Whitelist';
+$lang->project->privilege   = 'Privilage';
+$lang->project->viewTask    = "View all task";
+$lang->project->editTask    = "Edit all task";
 
 $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = 'Are you sure to activate this projcet?';

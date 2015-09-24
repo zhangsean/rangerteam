@@ -39,6 +39,14 @@ class projectModel extends model
             }
         }
 
+        /* Process viewList and editList */
+        $viewList = array();
+        if(!empty(trim($project->viewList, ','))) $viewList = explode(',', trim($project->viewList, ','));
+        $project->viewList = $viewList;
+        $editList = array();
+        if(!empty(trim($project->editList, ','))) $editList = explode(',', trim($project->editList, ','));
+        $project->editList = $editList;
+
         return $project;
     }
 
@@ -98,6 +106,14 @@ class projectModel extends model
                 if($member->role != 'manager') continue;
                 if($member->role == 'manager') $project->PM = $member->account;
             }
+
+            /* Process viewList and editList. */
+            $viewList = array();
+            if(!empty(trim($project->viewList, ','))) $viewList = explode(',', trim($project->viewList, ','));
+            $project->viewList = $viewList;
+            $editList = array();
+            if(!empty(trim($project->editList, ','))) $editList = explode(',', trim($project->editList, ','));
+            $project->editList = $editList;
 
             if($status == 'involved' and !in_array($this->app->user->account, $accountList)) unset($projects[$project->id]);
             if(!$this->checkPriv($project->id)) unset($projects[$project->id]);
@@ -168,7 +184,6 @@ class projectModel extends model
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', helper::now())
             ->remove('member,manager,master')
-            ->setDefault('whitelist', '')
             ->stripTags('desc', $this->config->allowedTags->admin)
             ->get();
 
@@ -217,8 +232,6 @@ class projectModel extends model
                 ->add('editedBy', $this->app->user->account)
                 ->add('editedDate', helper::now())
                 ->stripTags('desc', $this->config->allowedTags->admin)
-                ->join('whitelist', ',')
-                ->setDefault('whitelist', '')
                 ->remove('member,manager,master')
                 ->get();
         }
@@ -249,6 +262,34 @@ class projectModel extends model
             if(dao::isError()) return false;
         }
 
+        return commonModel::createChanges($oldProject, $project);
+    }
+
+    /**
+     * Update project's privilege. 
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return object
+     */
+    public function updatePriv($projectID)
+    {
+        $oldProject = $this->getByID($projectID);
+        $project = fixer::input('post')
+            ->join('whitelist', ',')
+            ->join('viewList', ',')
+            ->join('editList', ',')
+            ->setDefault('whitelist', '')
+            ->setDefault('viewList', '')
+            ->setDefault('editList', '')
+            ->get();
+
+        $this->dao->update(TABLE_PROJECT)
+            ->data($project, $skip = 'uid')
+            ->where('id')->eq($projectID)
+            ->exec();
+
+        if(dao::isError()) return false;
         return commonModel::createChanges($oldProject, $project);
     }
 
@@ -398,7 +439,6 @@ class projectModel extends model
 
         if($projects and !isset($projects[$projectID]))
         {
-            echo(js::alert($this->lang->project->accessDenied));
             die(js::locate('back'));
         }
 

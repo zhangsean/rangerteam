@@ -23,7 +23,8 @@
           <div class="dropdown">
             <button class="btn btn-mini" data-toggle="dropdown"><span class="caret"></span></button>
             <ul class="dropdown-menu pull-right">
-              <?php echo '<li>' . html::a(inlink('edit', "projectID=$project->id"), $lang->edit, "data-toggle='modal'") . '</li>';?>
+              <?php commonModel::printLink('project', 'edit', "projectID=$project->id", $lang->edit, "data-toggle='modal'", '', '', 'li');?>
+              <?php commonModel::printLink('project', 'privilege', "projectID=$project->id", $lang->project->privilege, "data-toggle='modal'", '', '', 'li');?>
               <?php if($project->status != 'finished') commonModel::printLink('project','finish', "projectID=$project->id", $lang->finish, "data-toggle='modal'", '', '', 'li');?>
               <?php if($project->status != 'doing') commonModel::printLink('project', 'activate', "projectID=$project->id", $lang->activate, "class='switcher' data-confirm='{$lang->project->confirm->activate}'", '', '', 'li');?>
               <?php if($project->status != 'suspend') commonModel::printLink('project', 'suspend', "projectID=$project->id", $lang->project->suspend, "class='switcher' data-confirm='{$lang->project->confirm->suspend}'", '', '', 'li');?>

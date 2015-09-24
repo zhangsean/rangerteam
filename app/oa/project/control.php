@@ -83,6 +83,35 @@ class project extends control
     }
 
     /**
+     * Edit project's privilege.
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return void
+     */
+    public function privilege($projectID)
+    {
+        if($_POST)
+        {
+            $changes  = $this->project->updatePriv($projectID);
+            $actionID = $this->loadModel('action')->create('project', $projectID, 'Edited');
+            if($changes) $this->action->logHistory($actionID, $changes);
+
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+        $groups     = $this->loadModel('group')->getPairs();
+        $groupUsers = array();
+        foreach($groups as $groupID => $group) $groupUsers[$groupID] = $this->group->getUserPairs($groupID);
+
+        $this->view->title      = $this->lang->project->edit;
+        $this->view->project    = $this->project->getByID($projectID);
+        $this->view->groups     = $groups;
+        $this->view->groupUsers = $groupUsers;
+        $this->display();
+    }
+
+    /**
      * Finish project.
      * 
      * @param  int    $projectID 

@@ -42,6 +42,9 @@ $lang->project->createdDate = '创建时间';
 $lang->project->fromproject = '所属项目';
 $lang->project->acl         = '访问控制';
 $lang->project->whitelist   = '白名单';
+$lang->project->privilege   = '权限';
+$lang->project->viewTask    = '查看全部任务';
+$lang->project->editTask    = '编辑全部任务';
 
 $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = '确认激活此项目？';
