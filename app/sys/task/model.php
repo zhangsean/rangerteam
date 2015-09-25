@@ -49,6 +49,8 @@ class taskModel extends model
     {
         if($this->session->taskQuery == false) $this->session->set('taskQuery', ' 1 = 1');
         $taskQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->taskQuery);
+        $project = $this->loadModel('project', 'oa')->getByID($projectID);
+        $canViewAll = $this->app->user->admin == 'super' ? true : in_array($this->app->user->account, $project->viewList);
 
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
@@ -63,6 +65,9 @@ class taskModel extends model
             ->beginIF($mode == 'bysearch')->andWhere($taskQuery)->fi()
             ->beginIF($groupBy == 'closedBy')->andWhere('status')->eq('closed')->fi()
             ->beginIF($groupBy == 'finishedBy')->andWhere('finishedBy')->ne('')->fi()
+            ->beginIF(!$canViewAll)
+            ->andWhere()->markLeft(1)->where('assignedTo')->eq($this->app->user->account)->orWhere('team')->like("%{$this->app->user->account}%")->markRight(1)
+            ->fi()
             ->orderBy($orderBy)
             ->page($pager);
         
@@ -117,6 +122,8 @@ class taskModel extends model
     public function getProjectTasks($projectID, $type = 'all', $orderBy = 'status_asc, id_desc', $pager = null)
     {
         if(is_string($type)) $type = strtolower($type);
+        $project = $this->loadModel('project', 'oa')->getByID($projectID);
+        $canViewAll = $this->app->user->admin == 'super' ? true : in_array($this->app->user->account, $project->viewList);
 
         $tasks = $this->dao->select('*')
             ->from(TABLE_TASK)
@@ -127,6 +134,9 @@ class taskModel extends model
             ->beginIF($type == 'finishedbyme')->andWhere('finishedby')->eq($this->app->user->account)->fi()
             ->beginIF($type == 'delayed')->andWhere('deadline')->between('1970-1-1', helper::now())->andWhere('status')->in('wait,doing')->fi()
             ->beginIF(is_array($type) or strpos(',all,undone,assignedtome,delayed,finishedbyme,', ",$type,") === false)->andWhere('status')->in($type)->fi()
+            ->beginIF(!$canViewAll)
+            ->andWhere()->markLeft(1)->where('assignedTo')->eq($this->app->user->account)->orWhere('team')->like("%{$this->app->user->account}%")->markRight(1)
+            ->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
@@ -541,6 +551,28 @@ class taskModel extends model
     }
 
     /**
+     * Check task's privilege for action. 
+     * 
+     * @param  object $task 
+     * @param  string $action 
+     * @access public
+     * @return bool
+     */
+    public function checkPriv($task, $action)
+    {
+        if($this->app->user->admin == 'super') return true;
+
+        static $projects;
+        if(empty($projects)) $projects = $this->loadModel('project', 'oa')->getList();
+        $action  = strtolower($action);  
+        $account = $this->app->user->account;
+
+        if($action == 'view') return in_array($account, $projects[$task->project]->viewList);
+        if(strpos(',edit,assignto,start,finish,close,activate,cancel,delete,', $action) !== false) return in_array($account, $projects[$task->project]->editList);
+        return true;
+    }
+
+    /**
      * Build operate menu.
      * 
      * @param  object $task 
@@ -553,60 +585,63 @@ class taskModel extends model
     public function buildOperateMenu($task, $class = '', $type = 'browse', $print = true)
     {
         $menu  = $type == 'view' ? "<div class='btn-group'>" : '';
+        $canEdit = $this->checkPriv($task, 'edit');
 
-        $disabled = self::isClickable($task, 'assignto') ? '' : 'disabled';
+        $disabled = ($canEdit and self::isClickable($task, 'assignto')) ? '' : 'disabled';
         $multiple = $task->team == '' ? false : true;
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'assignto', "taskID=$task->id");
         $menu    .= commonModel::printLink('task', 'assignto', "taskID=$task->id", $multiple ? $this->lang->task->transmit : $this->lang->assign, $misc, false);
 
-        $disabled = self::isClickable($task, 'start') ? '' : 'disabled';
+        $disabled = ($canEdit and self::isClickable($task, 'start')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'start', "taskID=$task->id");
         $menu    .= commonModel::printLink('task', 'start', "taskID=$task->id", $this->lang->start, $misc, false);
 
         if($type == 'view')
         {
-            $disabled = self::isClickable($task, 'activate') ? '' : 'disabled';
+            $disabled = ($canEdit and self::isClickable($task, 'activate')) ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
             $link     = $disabled ? '###' : helper::createLink('task', 'activate', "taskID=$task->id");
             $menu    .= commonModel::printLink('task', 'activate', "taskID=$task->id", $this->lang->activate, $misc, false);
         }
 
-        $disabled = self::isClickable($task, 'finish') ? '' : 'disabled';
+        $disabled = ($canEdit and self::isClickable($task, 'finish')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'finish', "taskID=$task->id");
         $menu    .= commonModel::printLink('task', 'finish', "taskID=$task->id", $this->lang->finish, $misc, false);
 
         if($type == 'view')
         {
-            $disabled = self::isClickable($task, 'cancel') ? '' : 'disabled';
+            $disabled = ($canEdit and self::isClickable($task, 'cancel')) ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
             $link     = $disabled ? '###' : helper::createLink('task', 'cancel', "taskID=$task->id");
             $menu    .= commonModel::printLink('task', 'cancel', "taskID=$task->id", $this->lang->cancel, $misc, false);
         }
 
-        $disabled = self::isClickable($task, 'close') ? '' : 'disabled';
+        $disabled = ($canEdit and self::isClickable($task, 'close')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'close', "taskID=$task->id");
         $menu    .= commonModel::printLink('task', 'close', "taskID=$task->id", $this->lang->close, $misc, false);
 
         if($type == 'view') $menu .= "</div><div class='btn-group'>";
-        $menu .= commonModel::printLink('task', 'edit', "taskID=$task->id", $this->lang->edit, "class='$class'", false);
-        $deleter = $type == 'browse' ? 'reloadDeleter' : 'deleter';
-        $menu   .= commonModel::printLink('task', 'delete', "taskID=$task->id", $this->lang->delete, "class='$deleter $class'", false);
+        $disabled = $canEdit ? '' : 'disabled';
+        $menu    .= commonModel::printLink('task', 'edit', "taskID=$task->id", $this->lang->edit, "class='$class $disabled'", false);
+        $disabled = $canEdit ? '' : 'disabled';
+        $deleter  = $type == 'browse' ? 'reloadDeleter' : 'deleter';
+        $menu    .= commonModel::printLink('task', 'delete', "taskID=$task->id", $this->lang->delete, "class='$deleter $class $disabled'", false);
         if($type == 'view') $menu .= "</div>";
 
         if($task->parent == 0)
         {
-            $disabled = self::isClickable($task, 'batchCreate') ? '' : 'disabled';
+            $disabled = ($canEdit and self::isClickable($task, 'batchCreate')) ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class' data-width='80%'";
             $menu    .= commonModel::printLink('task', 'batchCreate', "projectID=$task->project&taskID=$task->id", $this->lang->task->children, $misc, false);
         }
 
         if($task->parent != 0 and $type == 'view')
         {
-            $disabled = self::isClickable($task, 'view') ? '' : 'disabled';
+            $disabled = ($canEdit and self::isClickable($task, 'view')) ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "class='$class'";
             $menu    .= commonModel::printLink('task', 'view', "taskID=$task->parent", $this->lang->task->parent, $misc, false);
         }

@@ -164,8 +164,11 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer));
         }
 
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'edit');
+
         $this->view->title     = $this->lang->task->edit;
-        $this->view->task      = $this->task->getByID($taskID);
+        $this->view->task      = $task;
         $this->view->projectID = $this->view->task->project;
         $this->view->projects  = $this->loadModel('project')->getPairs();
         $this->view->members   = $this->loadModel('project')->getMemberPairs($this->view->task->project);
@@ -183,6 +186,7 @@ class task extends control
     public function view($taskID)
     {
         $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'view');
 
         $this->view->title      = $this->lang->task->view . $task->name;
         $this->view->task       = $task;
@@ -222,7 +226,8 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
-        $task   = $this->task->getByID($taskID);
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'finish');
         $status = 'finish';
         foreach($task->children as $child) if($child->status == 'wait' or $child->status == 'doing') $status = '';
 
@@ -263,8 +268,11 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'start');
+
         $this->view->taskID = $taskID; 
-        $this->view->task   = $this->loadModel('task')->getByID($taskID);
+        $this->view->task   = $task;
         $this->view->title  = $this->view->task->name . $this->lang->minus . $this->lang->start;
         $this->display();
     }
@@ -295,6 +303,7 @@ class task extends control
 
         $task    = $this->task->getByID($taskID);
         $members = $this->loadModel('project')->getMemberPairs($task->project);
+        $this->checkPriv($task, 'assignTo');
 
         /* Process team member and assignedTo data. */
         if($task->team != '')
@@ -336,6 +345,7 @@ class task extends control
         }
 
         $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'activate');
 
         $this->view->title = $this->lang->task->activate;
         $this->view->task  = $task;
@@ -364,6 +374,8 @@ class task extends control
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'cancel');
 
         $this->view->title  = $this->lang->task->cancel;
         $this->view->taskID = $taskID;
@@ -392,6 +404,10 @@ class task extends control
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
+
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'close');
+
         $this->view->title  = $this->lang->task->close;
         $this->view->taskID = $taskID;
         $this->display();
@@ -406,6 +422,9 @@ class task extends control
      */
     public function delete($taskID)
     {
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'delete');
+
         $this->task->delete(TABLE_TASK, $taskID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'massage' => dao::getError()));
 
@@ -680,5 +699,23 @@ class task extends control
         $tasks = $this->task->getUserTaskPairs($account, 'wait,doing');
         if($id) die(html::select("idvalues[$id]", $tasks, '', 'class="form-control"'));
         die(html::select('idvalue', $tasks, '', 'class=form-control'));
+    }
+
+    /**
+     * Check task privilege and locate project if no privilege. 
+     * 
+     * @param  object $task 
+     * @param  string $action 
+     * @access private
+     * @return void
+     */
+    private function checkPriv($task, $action)
+    {
+        if(!$this->task->checkPriv($task, $action))
+        {
+            $locate = helper::safe64Encode($this->server->http_referer);
+            $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
+            $this->locate($errorLink);
+        }
     }
 }
