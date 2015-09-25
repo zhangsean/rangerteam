@@ -113,6 +113,7 @@ class userModel extends model
         return $this->dao->select('*')->from(TABLE_USER)
             ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
+            ->andWhere('deleted')->eq('0')
             ->fetch('', false);
     }
 

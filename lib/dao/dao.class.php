@@ -754,8 +754,10 @@ class dao
         /* Check unique. */
         if($funcName == 'unique')
         {
-            $args = func_get_args();
-            $sql  = "SELECT COUNT(*) AS count FROM $this->table WHERE `$fieldName` = " . $this->sqlobj->quote($value); 
+            $args   = func_get_args();
+            $sql    = "SELECT COUNT(*) AS count FROM $this->table WHERE `$fieldName` = " . $this->sqlobj->quote($value); 
+            $fields = $this->getFieldsType();
+            if(isset($fields['deleted'])) $sql .= " AND `deleted` = '0'";
             if($condition) $sql .= ' AND ' . $condition;
             try
             {
