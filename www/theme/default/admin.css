@@ -17,7 +17,7 @@ body {background: #fff;}
 #body-content > div {transition: all .8s cubic-bezier(0.175,0.885,0.32,1);}
 
 /* left menu. */
-.menu {width: 140px; margin-left: 15px;}
+.menu {width: 140px; margin-left: 15px; max-height: 80%; overflow-y: auto;}
 .row > .menu {margin-left: 0;}
 .page-content > .page-content {padding: 0}
 .menu .nav {box-shadow:0px 2px 1px rgba(0,0,0,0.15); border-radius: 4px}

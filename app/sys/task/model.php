@@ -48,9 +48,9 @@ class taskModel extends model
     public function getList($projectID = 0, $mode = 'all', $orderBy = 'id_desc', $pager = null, $groupBy = 'id')
     {
         if($this->session->taskQuery == false) $this->session->set('taskQuery', ' 1 = 1');
-        $taskQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->taskQuery);
-        $project = $this->loadModel('project', 'oa')->getByID($projectID);
-        $canViewAll = $this->app->user->admin == 'super' ? true : in_array($this->app->user->account, $project->viewList);
+        $taskQuery  = $this->loadModel('search', 'sys')->replaceDynamic($this->session->taskQuery);
+        $project    = $this->loadModel('project', 'oa')->getByID($projectID);
+        $canViewAll = ($this->app->user->admin == 'super' or $project->acl == 'open' or in_array($this->app->user->account, $project->viewList));
 
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
@@ -66,7 +66,12 @@ class taskModel extends model
             ->beginIF($groupBy == 'closedBy')->andWhere('status')->eq('closed')->fi()
             ->beginIF($groupBy == 'finishedBy')->andWhere('finishedBy')->ne('')->fi()
             ->beginIF(!$canViewAll)
-            ->andWhere()->markLeft(1)->where('assignedTo')->eq($this->app->user->account)->orWhere('team')->like("%{$this->app->user->account}%")->markRight(1)
+            ->andWhere()->markLeft(1)
+            ->where('assignedTo')->eq($this->app->user->account)
+            ->orWhere('finishedBy')->eq($this->app->user->account)
+            ->orWhere('createdBy')->eq($this->app->user->account)
+            ->orWhere('team')->like("%{$this->app->user->account}%")
+            ->markRight(1)
             ->fi()
             ->orderBy($orderBy)
             ->page($pager);
@@ -122,8 +127,8 @@ class taskModel extends model
     public function getProjectTasks($projectID, $type = 'all', $orderBy = 'status_asc, id_desc', $pager = null)
     {
         if(is_string($type)) $type = strtolower($type);
-        $project = $this->loadModel('project', 'oa')->getByID($projectID);
-        $canViewAll = $this->app->user->admin == 'super' ? true : in_array($this->app->user->account, $project->viewList);
+        $project    = $this->loadModel('project', 'oa')->getByID($projectID);
+        $canViewAll = ($this->app->user->admin == 'super' or $project->acl == 'open' or in_array($this->app->user->account, $project->viewList));
 
         $tasks = $this->dao->select('*')
             ->from(TABLE_TASK)
@@ -135,7 +140,12 @@ class taskModel extends model
             ->beginIF($type == 'delayed')->andWhere('deadline')->between('1970-1-1', helper::now())->andWhere('status')->in('wait,doing')->fi()
             ->beginIF(is_array($type) or strpos(',all,undone,assignedtome,delayed,finishedbyme,', ",$type,") === false)->andWhere('status')->in($type)->fi()
             ->beginIF(!$canViewAll)
-            ->andWhere()->markLeft(1)->where('assignedTo')->eq($this->app->user->account)->orWhere('team')->like("%{$this->app->user->account}%")->markRight(1)
+            ->andWhere()->markLeft(1)
+            ->where('assignedTo')->eq($this->app->user->account)
+            ->orWhere('finishedBy')->eq($this->app->user->account)
+            ->orWhere('createdBy')->eq($this->app->user->account)
+            ->orWhere('team')->like("%{$this->app->user->account}%")
+            ->markRight(1)
             ->fi()
             ->orderBy($orderBy)
             ->page($pager)
@@ -567,6 +577,7 @@ class taskModel extends model
         $action  = strtolower($action);  
         $account = $this->app->user->account;
 
+        if($projects[$task->project]->acl == 'open') return true;
         if($action == 'view') return in_array($account, $projects[$task->project]->viewList);
         if(strpos(',edit,assignto,start,finish,close,activate,cancel,delete,', $action) !== false) return in_array($account, $projects[$task->project]->editList);
         return true;

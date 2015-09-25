@@ -18,12 +18,27 @@
   <table class='table-form w-p90'>
     <tr>
       <th class='w-p20'><?php echo $lang->project->acl;?></th>
-      <td colspan='2'><?php echo nl2br(html::radio('acl', $lang->project->aclList, $project->acl, "onclick='updateChecked();'", 'block'));?></td>
+      <td colspan='2'><?php echo nl2br(html::radio('acl', $lang->project->aclList, $project->acl, "onclick='updateChecked(this);'", 'block'));?></td>
     </tr>  
     <tr id='whitelistBox'>
       <th><?php echo $lang->project->whitelist;?></th>
-      <td colspan='2'><?php echo html::checkbox('whitelist', $groups, $project->whitelist, "onChange='updateChecked();'");?></td>
+      <td colspan='2'><?php echo html::checkbox('whitelist', $groups, $project->whitelist, "onChange='updateChecked(this);'");?></td>
     </tr>
+    <tr id='editListBox'>
+      <th><?php echo $lang->project->editTask;?></th>
+      <td colspan='2'>
+        <?php foreach($groupUsers as $groupID => $groupUser):?>
+          <?php foreach($groupUser as $account => $realname):?>
+            <?php $class  = "group-$groupID";?>
+            <?php $class .= in_array($account, $project->members) ? ' in-team' : '';?>
+            <label class='checkbox <?php echo $class?>' id='edituser<?php echo $account?>'>
+              <input type='checkbox' name='editList[]' value='<?php echo $account?>' <?php echo in_array($account, $project->editList) ? "checked='checked'" : ''?> onChange='updateChecked(this);' />
+              <?php echo $realname;?>
+            </label>
+          <?php endforeach;?>
+        <?php endforeach;?>
+      </td>
+    </tr>  
     <tr id='viewListBox'>
       <th><?php echo $lang->project->viewTask;?></th>
       <td colspan='2'>
@@ -32,22 +47,7 @@
             <?php $class  = "group-$groupID";?>
             <?php $class .= in_array($account, $project->members) ? ' in-team' : '';?>
             <label class='checkbox <?php echo $class?>' id='viewuser<?php echo $account?>'>
-              <input type='checkbox' name='viewList[]' value='<?php echo $account?>' <?php echo in_array($account, $project->viewList) ? "checked='checked'" : ''?> onChange='updateChecked();' />
-              <?php echo $realname;?>
-            </label>
-          <?php endforeach;?>
-        <?php endforeach;?>
-      </td>
-    </tr>  
-    <tr id='editListBox'>
-      <th><?php echo $lang->project->editTask;?></th>
-      <td colspan='2'>
-        <?php foreach($groupUsers as $groupID => $groupUser):?>
-          <?php foreach($groupUser as $account => $realname):?>
-            <?php $class  = "group-$groupID";?>
-            <?php $class .= in_array($account, $project->members) ? ' in-team' : '';?>
-            <label class='checkbox <?php echo $class?>' id='viewuser<?php echo $account?>'>
-              <input type='checkbox' name='editList[]' value='<?php echo $account?>' <?php echo in_array($account, $project->editList) ? "checked='checked'" : ''?> onChange='updateChecked();' />
+              <input type='checkbox' name='viewList[]' value='<?php echo $account?>' <?php echo in_array($account, $project->viewList) ? "checked='checked'" : ''?> onChange='updateChecked(this);' />
               <?php echo $realname;?>
             </label>
           <?php endforeach;?>

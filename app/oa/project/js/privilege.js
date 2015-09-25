@@ -1,5 +1,6 @@
-function updateChecked()
+function updateChecked(clickObj)
 {
+    var clickObj = $(clickObj);
     var acl = $('input[name=acl]:checked').val();    
     /* hide all tr. */
     $('#whitelistBox').addClass('hidden');
@@ -26,6 +27,12 @@ function updateChecked()
                 checkbox.find('input').prop('checked', '');
                 checkbox.addClass('hidden');
             }
+        });
+        /* check viewList if editList checked. */
+        $('#editListBox input[type=checkbox]:checked').each(function()
+        {
+            var checkbox = $(this);
+            $('#viewuser' + checkbox.val()).find('input').prop('checked', 'checked');
         });
     }
     if(acl == 'custom')
@@ -54,6 +61,15 @@ function updateChecked()
         {
             var checkbox = $(this);
             $('#viewuser' + checkbox.val()).find('input').prop('checked', 'checked');
+        });
+    }
+    /* check all checkbox. */
+    if(clickObj.prop('name') == 'acl')
+    {
+        $('#editListBox label.checkbox, #viewListBox label.checkbox').each(function()
+        {
+            var checkbox = $(this);
+            if(!checkbox.hasClass('hidden')) checkbox.find('input').prop('checked', 'checked');
         });
     }
 }
