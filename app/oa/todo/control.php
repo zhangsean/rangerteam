@@ -208,13 +208,23 @@ class todo extends control
     {
         $todo = $this->todo->getById($todoID);
         if($todo->status != 'done') $this->todo->finish($todoID);
-        if($todo->type != 'custom')
+
+        if($todo->type == 'task') 
         {
-            $entry = 'oa';
-            if($todo->type == 'order' or $todo->type == 'customer') $entry = 'crm';
+            $_POST['consumed'] = '1';
+            $changes = $this->loadModel('task')->finish($todo->idvalue);
+            if(!empty($changes))
+            {
+                $actionID = $this->loadModel('action')->create('task', $todo->idvalue, 'Finished');
+                $this->action->logHistory($actionID, $changes);
+            }
+        }
+        if($todo->type == 'order' or $todo->type == 'customer')
+        {
+            $entry = 'crm';
             $confirmNote = sprintf($this->lang->todo->confirmTip, $this->lang->{$todo->type}->common, $todo->id);
             $confirmURL  = $this->createLink("{$entry}.{$todo->type}", 'view', "id=$todo->idvalue", 'html');
-            $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'confirm' => $confirmURL, 'entry' => $entry)));
+            $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'url' => $confirmURL, 'entry' => $entry)));
         }
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$todo->date")));
     }

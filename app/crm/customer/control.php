@@ -413,7 +413,7 @@ class customer extends control
         }
         if($type == 'board')
         {
-            die($this->loadModel('todo', 'oa')->buildBoardList($customers, 'task'));
+            die($this->loadModel('todo', 'oa')->buildBoardList($customers, 'customer'));
         }
         die(json_encode($customers));
     }

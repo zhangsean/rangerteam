@@ -18,14 +18,16 @@
       <div class='main'>
         <fieldset>
           <legend>
-            <?php 
-            echo $lang->todo->desc;
-            if($todo->type == 'task') echo html::a("javascript:$.openEntry(\"oa\",\"" . $this->createLink('oa.task', 'view', "id={$todo->idvalue}") . "\")", '  TASK#' . $todo->idvalue);
-            if($todo->type == 'order') echo html::a("javascript:$.openEntry(\"crm\",\"" . $this->createLink('crm.order', 'view', "id={$todo->idvalue}") . "\")", '  ORDER#' . $todo->idvalue);
-            if($todo->type == 'customer') echo html::a("javascript:$.openEntry(\"crm\",\"" . $this->createLink('crm.customer', 'view', "id={$todo->idvalue}") . "\")", '  CUSTOMER#' . $todo->idvalue);
-            ?>
+            <?php echo $lang->todo->desc;?>
           </legend>
-          <div><?php echo $todo->desc;?></div>
+          <div>
+            <?php echo $todo->desc;?>
+            <?php 
+            if($todo->type == 'task') echo html::a("javascript:$.openEntry(\"oa\",\"" . $this->createLink('oa.task', 'view', "id={$todo->idvalue}") . "\")", $lang->task->common . '#' . $todo->idvalue, "class='btn'");
+            if($todo->type == 'order') echo html::a("javascript:$.openEntry(\"crm\",\"" . $this->createLink('crm.order', 'view', "id={$todo->idvalue}") . "\")", $lang->order->common . '#' . $todo->idvalue, "class='btn'");
+            if($todo->type == 'customer') echo html::a("javascript:$.openEntry(\"crm\",\"" . $this->createLink('crm.customer', 'view', "id={$todo->idvalue}") . "\")", $lang->customer->common . '#' . $todo->idvalue, "class='btn'");
+            ?>
+          </div>
         </fieldset>
         <?php echo $this->fetch('action', 'history', "objectType=todo&objectID={$todo->id}");?>
       </div>

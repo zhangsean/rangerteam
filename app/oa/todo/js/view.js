@@ -9,7 +9,7 @@ function finishTodo(id)
             {
                 if(confirm(response.confirm.note))
                 {   
-                    $.openEntry(response.confirm.entry, response.confirm.confirm);
+                    $.openEntry(response.confirm.entry, response.confirm.url);
                 }   
             }
             if(response.message) $.zui.messager.success(response.message);

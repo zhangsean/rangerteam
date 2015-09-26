@@ -304,7 +304,7 @@ class todoModel extends model
             $data = new stdclass();
             $data->id       = $todo->id;
             $data->title    = $todo->name;
-            $data->desc     = $todo->desc;
+            $data->desc     = strip_tags($todo->desc);
             $data->allDay   = ($todo->begin == '' and $todo->end == '');
             $data->start    = date(DT_DATETIME1, strtotime($todo->date . ' ' . $todo->begin));
             $data->end      = date(DT_DATETIME1, strtotime($todo->date . ' ' . $todo->end));
