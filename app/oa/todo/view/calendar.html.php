@@ -14,7 +14,7 @@
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/calendar.html.php';?>
 <?php js::set('settings', new stdclass());?>
-<?php js::set('settings.startDate', date('Y-m-d', strtotime($date)));?>
+<?php js::set('settings.startDate', $date == 'future' ? date('Y-m-d') : date('Y-m-d', strtotime($date)));?>
 <?php js::set('settings.data', $data);?>
 <div class='with-side <?php echo $this->cookie->todoCalendarSide == 'hide' ? 'hide-side' : ''?>'>
   <div class='side'>
@@ -42,7 +42,9 @@
       <?php endforeach;?>
     </div>
   </div>
-  <div class='calendar main'></div>
+  <div class='calendar main'>
+    <div class='day trash' data-date='1970-01-01' title='<?php echo $lang->delete?>'><i class="icon icon-trash"></i></div>
+  </div>
 </div>
 <script>
 function updateCalendar()
@@ -180,9 +182,20 @@ v.settings.beforeChange = function(event)
             data.begin = event.event.start.format('hh:mm');
             data.end = event.event.end.format('hh:mm');
         }
-        $.post(createLink('oa.todo', 'edit', 'id=' + event.event.id), data, function(response)
+        if(data.date == '1970-01-01')
         {
-            if(response.result == 'success')
+            /* Delete. */
+            var link = createLink('oa.todo', 'delete', 'id=' + event.event.id);
+        }
+        else
+        {
+            /* Edit. */
+            var link = createLink('oa.todo', 'edit', 'id=' + event.event.id);
+        }
+
+        $.post(link, data, function(response)
+        {
+            if(response.result == 'success' && response.message)
             {
                 $.zui.messager.success(response.message);
             }

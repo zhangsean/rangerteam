@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    /* Adjust calendar */
+    /* Adjust calendar' startDate. */
     $('.calendar').data('zui.calendar').display('month', v.settings.startDate);
 
     /* dropable setting. */
@@ -13,7 +13,7 @@ $(document).ready(function()
             var target = from.data('targeta');
             if(typeof target == 'undefined') target = '.droppable-target';
             to.date = new Date(to.data('date'));
-            if(from.data('type') == 'custom')
+            if(from.data('type') == 'custom' && to.data('date') != '1970-01-01')
             {
                 var data = {
                 'date': to.date.format('yyyy-MM-dd'),
@@ -24,7 +24,7 @@ $(document).ready(function()
                 }
                 var url = createLink('oa.todo', 'edit', 'id=' + from.data('id'), 'json');
             }
-            else
+            else if(from.data('type') != 'custom' && to.data('date') != '1970-01-01')
             {
                 var data = {
                 'date': to.date.format('yyyy-MM-dd'),
@@ -36,11 +36,21 @@ $(document).ready(function()
                 }
                 var url = createLink('oa.todo', 'create', '', 'json');
             }
+            else if(from.data('type') == 'custom' && to.data('date') == '1970-01-01')
+            {
+                var data = {}
+                var url = createLink('oa.todo', 'delete', 'id=' + from.data('id'), 'json');
+            }
+            else if(from.data('type') != 'custom' && to.data('date') == '1970-01-01')
+            {
+                return false;
+            }
+
             $.post(url, data, function(response)
             {
                 if(response.result == 'success')
                 {
-                    $.zui.messager.success(response.message);
+                    if(response.message) $.zui.messager.success(response.message);
                     updateCalendar();
                     from.hide();
                 }
@@ -48,39 +58,6 @@ $(document).ready(function()
         }
     }};
     $('[data-toggle="droppable"]').droppable(dropSetting);
-
-    $('.events .event').droppable(
-    {
-        start: function(event)
-        {
-            var from   = event.element;
-            var target = event.element.data('targeta');
-            if(typeof target == 'undefined') target = '.droppable-target';
-            console.log(event);
-        },
-        drop: function(event)
-        {
-            if(event.target)
-            {
-                var from   = event.element;
-                var to     = event.target;
-                var target = from.data('targeta');
-                if(typeof target == 'undefined') target = '.droppable-target';
-                if(to.data('action') == 'delete')
-                {
-                    $.post(url, data, function(response)
-                    {
-                        if(response.result == 'success')
-                        {
-                            $.zui.messager.success(response.message);
-                            updateCalendar();
-                            from.hide();
-                        }
-                    }, 'json');
-                }
-            }
-        }
-    });
 
     /* hide side. */
     $('.side-handle').click(function()

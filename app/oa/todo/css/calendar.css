@@ -23,3 +23,7 @@
 .calendar .event.with-action .action > a:hover {background-color: rgba(0,0,0,0.5)}
 .calendar .btn-toolbar {padding-right: 15px;}
 .calendar .btn-toolbar .btn-group{float: right;}
+
+.trash {position: absolute; top: 0; left: 0; padding: 3px 8px 3px 8px;}
+.trash:hover {background: #f0f0f0;}
+.trash .icon{font-size: 36px;}
