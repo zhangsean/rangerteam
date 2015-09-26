@@ -9,6 +9,7 @@
  * @version     $Id: zh-cn.php 5022 2013-07-05 06:50:39Z chencongzhi520@gmail.com $
  * @link        http://www.ranzhico.com
  */
+if(!isset($lang->todo)) $lang->todo = new stdclass();
 $lang->todo->common       = '待办';
 $lang->todo->index        = "待办一览";
 $lang->todo->create       = "新增";
@@ -61,8 +62,6 @@ $lang->todo->typeList['custom']   = '自定义';
 $lang->todo->typeList['task']     = '项目任务';
 $lang->todo->typeList['order']    = '订单沟通';
 $lang->todo->typeList['customer'] = '客户沟通';
-$lang->todo->typeList['attend']   = '考勤审批';
-$lang->todo->typeList['leave']    = '请假审批';
 
 $lang->todo->confirmDelete  = "您确定要删除这条待办吗？";
 $lang->todo->successMarked  = "成功切换状态！";

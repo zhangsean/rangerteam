@@ -690,15 +690,41 @@ class task extends control
      * 
      * @param  string $account 
      * @param  string $id 
+     * @param  string $type    select|json|board 
      * @access public
      * @return void
      */
-    public function ajaxGetTodoList($account = '', $id = '')
+    public function ajaxGetTodoList($account = '', $id = '', $type = 'select')
     {
-        if($account = '') $account = $this->app->user->account;
-        $tasks = $this->task->getUserTaskPairs($account, 'wait,doing');
-        if($id) die(html::select("idvalues[$id]", $tasks, '', 'class="form-control"'));
-        die(html::select('idvalue', $tasks, '', 'class=form-control'));
+        $status = 'wait,doing';
+        $tasks  = array();
+        if($account == '') $account = $this->app->user->account;
+
+        $sql = $this->dao->select('t1.id, t1.name, t2.name as project, t3.id as todo')
+            ->from(TABLE_TASK)->alias('t1')
+            ->leftjoin(TABLE_PROJECT)->alias('t2')->on('t1.project = t2.id')
+            ->leftjoin(TABLE_TODO)->alias('t3')->on("t3.type='task' and t1.id = t3.idvalue")
+            ->where('t1.assignedTo')->eq($account)
+            ->andwhere('t1.status')->in($status)
+            ->andWhere('t1.deleted')->eq(0)
+            ->orderBy('t1.id_desc');
+        $stmt = $sql->query();
+        while($task = $stmt->fetch())
+        {    
+            if($task->todo) continue;
+            $tasks[$task->id] = $task->project . ' / ' . $task->name;
+        } 
+
+        if($type == 'select')
+        {
+            if($id) die(html::select("idvalues[$id]", $tasks, '', 'class="form-control"'));
+            die(html::select('idvalue', $tasks, '', 'class=form-control'));
+        }
+        if($type == 'board')
+        {
+            die($this->loadModel('todo', 'oa')->buildBoardList($tasks, 'task'));
+        }
+        die(json_encode($tasks));
     }
 
     /**

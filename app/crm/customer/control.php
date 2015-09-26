@@ -380,16 +380,41 @@ class customer extends control
      * 
      * @param  string $account    not used.
      * @param  string $id 
+     * @param  string $type       select|json|board 
      * @access public
      * @return void
      */
-    public function ajaxGetTodoList($account = '', $id = '')
+    public function ajaxGetTodoList($account = '', $id = '', $type = 'select')
     {
-        $customerList = $this->customer->getList('thismonth');
-        $customers = array();
-        foreach($customerList as $customer) $customers[$customer->id] = $customer->name;
+        $this->app->loadClass('date', $static = true);
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+        $thisMonth      = date::getThisMonth();
+        $customers      = array();
 
-        if($id) die(html::select("idvalues[$id]", $customers, '', 'class="form-control"'));
-        die(html::select('idvalue', $customers, '', 'class=form-control'));
+        $sql = $this->dao->select('c.id, c.name, c.nextDate, t.id as todo')->from(TABLE_CUSTOMER)->alias('c')
+            ->leftjoin(TABLE_TODO)->alias('t')->on("t.type='customer' and c.id = t.idvalue")
+            ->where('c.deleted')->eq(0)
+            ->andWhere('c.relation')->ne('provider')
+            ->andWhere('c.nextDate')->between($thisMonth['begin'], $thisMonth['end'])
+            ->andWhere('c.nextDate')->ne('0000-00-00')
+            ->andWhere('c.id')->in($customerIdList)
+            ->orderBy('c.nextDate_asc');
+        $stmt = $sql->query();
+        while($customer = $stmt->fetch())
+        {    
+            if($customer->todo) continue;
+            $customers[$customer->id] = $customer->name . '(' . $customer->nextDate . ')';
+        } 
+
+        if($type == 'select')
+        {
+            if($id) die(html::select("idvalues[$id]", $customers, '', 'class="form-control"'));
+            die(html::select('idvalue', $customers, '', 'class=form-control'));
+        }
+        if($type == 'board')
+        {
+            die($this->loadModel('todo', 'oa')->buildBoardList($customers, 'task'));
+        }
+        die(json_encode($customers));
     }
 }

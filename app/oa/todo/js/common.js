@@ -25,6 +25,7 @@ function loadList(type, id)
 
     var param = 'account=' + v.account;
     if(id) param += '&id=' + id;
+
     if(type == 'task')
     {
         link = createLink('task', 'ajaxGetTodoList', param);
@@ -36,14 +37,6 @@ function loadList(type, id)
     else if(type == 'customer')
     {
         link = createLink('crm.customer', 'ajaxGetTodoList', param);
-    }
-    else if(type == 'attend')
-    {
-        link = createLink('attend', 'ajaxGetTodoList', param);
-    }
-    else if(type == 'leave')
-    {
-        link = createLink('leave', 'ajaxGetTodoList', param);
     }
 
     if(type != 'custom')

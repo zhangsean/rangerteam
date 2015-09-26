@@ -155,16 +155,6 @@ class todoModel extends model
             $order = $this->dao->select('c.name, o.createdDate')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->where('o.id')->eq($todo->idvalue)->fetch(); 
             $todo->name = $order->name . '|' . date('Y-m-d', strtotime($order->createdDate));
         }
-        if($todo->type == 'attend')
-        {
-            $attend = $this->dao->select('u.realname, a.date')->from(TABLE_ATTEND)->alias('a')->leftJoin(TABLE_USER)->alias('u')->on('a.account=u.account')->where('a.id')->eq($todo->idvalue)->fetch(); 
-            $todo->name = "{$attend->realname}({$attend->date})";
-        }
-        if($todo->type == 'leave')
-        {
-            $attend = $this->dao->select('u.realname, l.begin')->from(TABLE_LEAVE)->alias('l')->leftJoin(TABLE_USER)->alias('u')->on('l.createdBy=u.account')->where('l.id')->eq($todo->idvalue)->fetch(); 
-            $todo->name = "{$attend->realname}({$attend->begin})";
-        }
         $todo->date = str_replace('-', '', $todo->date);
         return $todo;
     }
@@ -271,16 +261,6 @@ class todoModel extends model
                 $order = $this->dao->select('c.name, o.createdDate')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->where('o.id')->eq($todo->idvalue)->fetch(); 
                 $todo->name = $order->name . '|' . date('Y-m-d', strtotime($order->createdDate));
             }
-            if($todo->type == 'attend')
-            {
-                $attend = $this->dao->select('u.realname, a.date')->from(TABLE_ATTEND)->alias('a')->leftJoin(TABLE_USER)->alias('u')->on('a.account=u.account')->where('a.id')->eq($todo->idvalue)->fetch(); 
-                $todo->name = "{$attend->realname}({$attend->date})";
-            }
-            if($todo->type == 'leave')
-            {
-                $attend = $this->dao->select('u.realname, l.begin')->from(TABLE_LEAVE)->alias('l')->leftJoin(TABLE_USER)->alias('u')->on('l.createdBy=u.account')->where('l.id')->eq($todo->idvalue)->fetch(); 
-                $todo->name = "{$attend->realname}({$attend->begin})";
-            }
 
             $todo->begin = date::formatTime($todo->begin);
             $todo->end   = date::formatTime($todo->end);
@@ -361,5 +341,26 @@ class todoModel extends model
         if($action == 'finish') return $todo->status != 'done';
 
         return true;
+    }
+
+    /**
+     * build board list. 
+     * 
+     * @param  array  $items 
+     * @access public
+     * @return string
+     */
+    public function buildBoardList($items, $type)
+    {
+        $div = '';
+        $index = 1;
+        foreach($items as $id => $name)
+        {
+            $div .= "<div class='board-item' data-id='$id' data-type='$type' data-index='$index' data-toggle='droppable' data-target='.day'>\r\n";
+            $div .= "$name\r\n";
+            $div .= "</div>\r\n";
+            $index += 1;
+        }
+        return $div;
     }
 }

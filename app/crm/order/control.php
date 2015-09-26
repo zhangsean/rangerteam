@@ -435,16 +435,46 @@ class order extends control
      * 
      * @param  string $account   not used.
      * @param  string $id 
+     * @param  string $type      select|json|board
      * @access public
      * @return void
      */
-    public function ajaxGetTodoList($account = '', $id = '')
+    public function ajaxGetTodoList($account = '', $id = '', $type = 'select')
     {
-        $orderList = $this->order->getList('thismonth');
-        $orders = array();
-        foreach($orderList as $order) $orders[$order->id] = $order->title; 
+        $this->app->loadClass('date', $static = true);
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+        $products       = $this->loadModel('product')->getPairs();
+        $thisMonth      = date::getThisMonth();
+        $orders         = array();
 
-        if($id) die(html::select("idvalues[$id]", $orders, '', 'class="form-control"'));
-        die(html::select('idvalue', $orders, '', 'class=form-control'));
+        $sql = $this->dao->select('o.id, o.product, o.createdDate, c.name as customerName, t.id as todo')->from(TABLE_ORDER)->alias('o')
+            ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
+            ->leftJoin(TABLE_TODO)->alias('t')->on("t.type='order' and o.id=t.idvalue")
+            ->where('o.deleted')->eq(0)
+            ->andWhere('o.nextDate')->between($thisMonth['begin'], $thisMonth['end'])
+            ->andWhere('o.customer')->in($customerIdList)
+            ->orderBy('o.id_desc');
+        $stmt = $sql->query();
+        while($order = $stmt->fetch())
+        {    
+            if($order->todo) continue;
+            $order->products = array();
+            $productList = explode(',', $order->product);
+            foreach($productList as $product) if(isset($products[$product])) $order->products[] = $products[$product];
+            $productName  = count($order->products) > 1 ? current($order->products) . $this->lang->etc : current($order->products);
+            $order->title = sprintf($this->lang->order->titleLBL, $order->customerName, $productName, date('Y-m-d', strtotime($order->createdDate))); 
+            $orders[$order->id] = $order->title;
+        } 
+
+        if($type == 'select')
+        {
+            if($id) die(html::select("idvalues[$id]", $orders, '', 'class="form-control"'));
+            die(html::select('idvalue', $orders, '', 'class=form-control'));
+        }
+        if($type == 'board')
+        {
+            die($this->loadModel('todo', 'oa')->buildBoardList($orders, 'order'));
+        }
+        die(json_encode($orders));
     }
 }

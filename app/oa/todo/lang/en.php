@@ -9,6 +9,7 @@
  * @version     $Id: en.php 4676 2013-04-26 06:08:23Z chencongzhi520@gmail.com $
  * @link        http://www.ranzhico.com
  */
+if(!isset($lang->todo)) $lang->todo = new stdclass();
 $lang->todo->common       = 'TODO';
 $lang->todo->index        = "Index";
 $lang->todo->create       = "Create";
@@ -61,8 +62,6 @@ $lang->todo->typeList['custom']   = 'Customer';
 $lang->todo->typeList['task']     = 'Project';
 $lang->todo->typeList['order']    = 'Order';
 $lang->todo->typeList['customer'] = 'Customer';
-$lang->todo->typeList['attend']   = 'Attendance';
-$lang->todo->typeList['leave']    = 'Leave';
 
 $lang->todo->confirmDelete  = "Are you sure to delete this todo?";
 $lang->todo->successMarked  = "Successfully changed status";;

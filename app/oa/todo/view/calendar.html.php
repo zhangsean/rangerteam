@@ -37,11 +37,6 @@
           <?php echo html::a($this->createLink('oa.todo', 'view', "id=$todo->id"), $todo->name, "data-toggle='modal'")?>
         </div>
         <?php endif;?>
-        <?php if($type != 'custom'):?>
-        <div class='board-item' data-id='<?php echo $id?>' data-type='<?php echo $type?>' data-toggle="droppable" data-target=".day">
-          <?php echo $todo;?>
-        </div>
-        <?php endif;?>
         <?php endforeach;?>
       </div>
       <?php endforeach;?>

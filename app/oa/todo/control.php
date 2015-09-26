@@ -24,8 +24,6 @@ class todo extends control
         $this->loadModel('task');
         $this->loadModel('order', 'crm');
         $this->loadModel('customer', 'crm');
-        $this->loadModel('attend', 'oa');
-        $this->loadModel('leave', 'oa');
     }
 
     /**
@@ -39,48 +37,10 @@ class todo extends control
     {
         if($date == '') $date = date('Ymd');
         $account = $this->app->user->account;
-        $todoList['custom'] = $this->todo->getList('future', $account);
-        $todoList['task'] = $this->task->getUserTaskPairs($account, 'wait,doing');
-
-        /* Get order data. */
-        $toduList = array();
-        $todoList['order'] = array();
-        $orderList = $this->order->getList('thismonth');
-        foreach($orderList as $order) $todoList['order'][$order->id] = $order->title; 
-
-        $customerList = $this->customer->getList('thismonth');
+        $todoList['custom']   = $this->todo->getList('future', $account);
+        $todoList['task']     = array();
+        $todoList['order']    = array();
         $todoList['customer'] = array();
-        foreach($customerList as $customer) $todoList['customer'][$customer->id] = $customer->name;
-
-        /* Get attend and leave data. */
-        $deptList   = $this->loadModel('tree')->getDeptManagedByMe($account);
-        $attendList = array();
-        $leaveList  = array();
-        if(!empty($deptList)) 
-        {
-            $dept = join(',', array_keys($deptList));
-            $attendList = $this->attend->getByDept($dept, $startDate = '', $endDate = '', 'wait');
-            $leaveList  = $this->leave->getList(date('Y'), date('m'), '', $dept, 'wait');
-        }
-        $users = $this->loadModel('user')->getPairs();
-
-        $todoList['attend'] = array();
-        foreach($attendList as $deptKey => $attendDept)
-        {
-            foreach($attendDept as $accountKey => $attendUser)
-            {
-                foreach($attendUser as $attend)
-                {
-                    $todoList['attend'][$attend->id] = $deptList[$deptKey]->name . '/' . $users[$accountKey] . '(' . $attend->date . ')';
-                }
-            }
-        }
-
-        $todoList['leave'] = array();
-        foreach($leaveList as $leave)
-        {
-            $todoList['leave'][$leave->id] = $leave->realname . '(' . $leave->begin . ')[' . $this->lang->leave->typeList[$leave->type] . ']';
-        }
 
         $this->view->title    = $this->lang->todo->calendar;
         $this->view->date     = $date;
@@ -254,7 +214,6 @@ class todo extends control
             if($todo->type == 'order' or $todo->type == 'customer') $entry = 'crm';
             $confirmNote = sprintf($this->lang->todo->confirmTip, $this->lang->{$todo->type}->common, $todo->id);
             $confirmURL  = $this->createLink("{$entry}.{$todo->type}", 'view', "id=$todo->idvalue", 'html');
-            if($todo->type == 'attend' or $todo->type == 'leave') $confirmURL = $this->createLink("{$entry}.{$todo->type}", 'browseReview', "", 'html');
             $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'confirm' => $confirmURL, 'entry' => $entry)));
         }
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$todo->date")));

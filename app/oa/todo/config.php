@@ -25,5 +25,3 @@ $config->todo->calendarColor['custom']   = '#3280FC';
 $config->todo->calendarColor['task']     = '#3280FC';
 $config->todo->calendarColor['order']    = '#3280FC';
 $config->todo->calendarColor['customer'] = '#3280FC';
-$config->todo->calendarColor['attend']   = '#3280FC';
-$config->todo->calendarColor['leave']    = '#3280FC';

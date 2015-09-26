@@ -23,8 +23,6 @@
             if($todo->type == 'task') echo html::a("javascript:$.openEntry(\"oa\",\"" . $this->createLink('oa.task', 'view', "id={$todo->idvalue}") . "\")", '  TASK#' . $todo->idvalue);
             if($todo->type == 'order') echo html::a("javascript:$.openEntry(\"crm\",\"" . $this->createLink('crm.order', 'view', "id={$todo->idvalue}") . "\")", '  ORDER#' . $todo->idvalue);
             if($todo->type == 'customer') echo html::a("javascript:$.openEntry(\"crm\",\"" . $this->createLink('crm.customer', 'view', "id={$todo->idvalue}") . "\")", '  CUSTOMER#' . $todo->idvalue);
-            if($todo->type == 'attend') echo html::a("javascript:$.openEntry(\"oa\",\"" . $this->createLink('oa.attend', 'browseReview', "") . "\")", '  ATTEND#' . $todo->idvalue);
-            if($todo->type == 'leave') echo html::a("javascript:$.openEntry(\"oa\",\"" . $this->createLink('oa.leave', 'browseReview', "") . "\")", '  LEAVE#' . $todo->idvalue);
             ?>
           </legend>
           <div><?php echo $todo->desc;?></div>
