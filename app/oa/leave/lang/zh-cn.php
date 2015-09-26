@@ -26,12 +26,12 @@ $lang->leave->reviewedDate = '审核时间';
 $lang->leave->date         = '日期';
 $lang->leave->time         = '时间';
 
+$lang->leave->typeList['affairs']   = '事假';
 $lang->leave->typeList['sick']      = '病假';
+$lang->leave->typeList['annual']    = '年假';
+$lang->leave->typeList['home']      = '探亲假';
 $lang->leave->typeList['marry']     = '婚假';
 $lang->leave->typeList['maternity'] = '产假';
-$lang->leave->typeList['affairs']   = '事假';
-$lang->leave->typeList['home']      = '探亲假';
-$lang->leave->typeList['annual']    = '年假';
 
 $lang->leave->statusList['wait']   = '等待审核';
 $lang->leave->statusList['pass']   = '通过';

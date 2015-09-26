@@ -749,6 +749,7 @@ class taskModel extends model
             ->where('t1.assignedTo')->eq($account)
             ->andWhere('t1.deleted')->eq(0);
         if($status != 'all') $sql->andwhere('t1.status')->in($status);
+        $sql->orderBy('t1.id_desc');
         $stmt = $sql->query();
         while($task = $stmt->fetch())
         {    

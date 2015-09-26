@@ -11,5 +11,6 @@
 .calendar .event.with-action .action {position: absolute; right: 0; top: 0;}
 .calendar .event.with-action .action > a {display: inline-block; padding: 0 4px; color: #fff; background-color: rgba(0,0,0,0.25); line-height: 19px; padding: 0 6px;}
 .calendar .event.with-action .action > a:hover {background-color: rgba(0,0,0,0.5)}
+.calendar .btn-toolbar .btn-group{float: right;}
 
 .tab-content .action {float: right; cursor: pointer;}

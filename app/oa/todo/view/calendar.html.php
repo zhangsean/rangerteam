@@ -19,22 +19,10 @@
 <div class='with-side'>
   <div class='side'>
     <ul id="myTab" class="nav nav-tabs">
-      <li class="active"><a href="#tab_custom" data-toggle="tab"><?php echo $lang->todo->periods['future'] . $lang->todo->common?></a></li>
-      <li class='dropdown'>
-        <a href='#' class='dropdown-toggle' data-toggle='dropdown'>OA</a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="tableDropCRM">
-          <li><a href="#tab_task" data-toggle="tab"><?php echo $lang->task->common;?></a></li>
-          <li><a href="#tab_attend" data-toggle="tab"><?php echo $lang->attend->common;?></a></li>
-          <li><a href="#tab_leave" data-toggle="tab"><?php echo $lang->leave->common;?></a></li>
-        </ul>
-      </li>
-      <li class='dropdown'>
-        <a href='#' class='dropdown-toggle' data-toggle='dropdown'>CRM</a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="tableDropCRM">
-          <li><a href="#tab_order" data-toggle="tab"><?php echo $lang->order->common;?></a></li>
-          <li><a href="#tab_customer" data-toggle="tab"><?php echo $lang->customer->common;?></a></li>
-        </ul>
-      </li>
+      <li class="active"><a href="#tab_custom" data-toggle="tab"><?php echo $lang->todo->periods['future']?></a></li>
+      <li><a href="#tab_task" data-toggle="tab"><?php echo $lang->task->common;?></a></li>
+      <li><a href="#tab_order" data-toggle="tab"><?php echo $lang->order->common;?></a></li>
+      <li><a href="#tab_customer" data-toggle="tab"><?php echo $lang->customer->common;?></a></li>
     </ul>
     <div class='tab-content'>
       <?php foreach($todoList as $type => $todos):?>
@@ -43,8 +31,7 @@
         <?php if($type == 'custom'):?>
         <div class='board-item' data-id='<?php echo $todo->id?>' data-name='<?php echo $todo->name?>' data-type='<?php echo $todo->type?>' data-begin='<?php echo $todo->begin?>' data-end='<?php echo $todo->end?>' data-toggle="droppable" data-target=".day">
           <span class='label'><?php echo $todo->begin?></span>
-          <?php echo $todo->name?>
-          <div class='action'><?php echo html::a($this->createLink('oa.todo', 'view', "id=$todo->id"), $lang->view, "data-toggle='modal'")?></div>
+          <?php echo html::a($this->createLink('oa.todo', 'view', "id=$todo->id"), $todo->name, "data-toggle='modal'")?>
         </div>
         <?php endif;?>
         <?php if($type != 'custom'):?>
@@ -63,7 +50,7 @@
 function updateCalendar()
 {
     var calendar = $('.calendar').data('zui.calendar');
-    var date = calendar.date.format('yyyy-MM-dd');
+    var date = calendar.date.format('yyyyMMdd');
     $.get(createLink('oa.todo', 'calendar', 'date=' + date, 'json'), function(response)
     {
         if(response.status == 'success')
@@ -221,7 +208,7 @@ v.settings.display = function(event)
                 return false;
             });
         }
-        else if(e.data.status == 'done')
+        if(e.data.status == 'done')
         {
             $('.events .event[data-id=' + e.id + ']').css('background-color', '#38B03F');
         }
@@ -232,67 +219,5 @@ v.settings.display = function(event)
 
 v.settings.clickNextBtn = updateCalendar;
 v.settings.clickPrevBtn = updateCalendar;
-
-/* dropable setting. */
-$(document).ready(function()
-{
-    $('[data-toggle="droppable"]').droppable(
-    {
-        start: function(event)
-        {
-            var from   = event.element;
-            var target = event.element.data('targeta');
-            if(typeof target == 'undefined') target = '.droppable-target';
-        },
-        drop: function(event)
-        {
-            if(event.target)
-            {
-                var from   = event.element;
-                var to     = event.target;
-                var target = from.data('targeta');
-                if(typeof target == 'undefined') target = '.droppable-target';
-                to.date = new Date(to.data('date'));
-                if(from.data('type') == 'custom')
-                {
-                    var data = {
-                    'date': to.date.format('yyyy-MM-dd'),
-                    'name': from.data('name'),
-                    'type': from.data('type'),
-                    'begin': from.data('begin'),
-                    'end': from.data('end')
-                    }
-                    var url = createLink('oa.todo', 'edit', 'id=' + from.data('id'), 'json');
-                }
-                else
-                {
-                    var data = {
-                    'date': to.date.format('yyyy-MM-dd'),
-                    'type': from.data('type'),
-                    'idvalue': from.data('id'),
-                    'name': '',
-                    'begin': '',
-                    'end':'' 
-                    }
-                    var url = createLink('oa.todo', 'create', '', 'json');
-                }
-                $.post(url, data, function(response)
-                {
-                    if(response.result == 'success')
-                    {
-                        $.zui.messager.success(response.message);
-                        updateCalendar();
-                        from.hide();
-                    }
-                }, 'json');
-            }
-        },
-        drag: function(event)
-        {
-            $('.day').removeClass('panel-success').removeClass('panel-warning');
-            if(event.target) event.target.addClass('panel-warning');
-        }
-    });
-});
 </script>
 <?php include '../../common/view/footer.html.php';?>

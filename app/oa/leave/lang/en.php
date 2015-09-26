@@ -26,12 +26,12 @@ $lang->leave->reviewedDate = 'Reviewed date';
 $lang->leave->date         = 'Date';
 $lang->leave->time         = 'Time';
 
+$lang->leave->typeList['affairs']   = 'Affairs';
 $lang->leave->typeList['sick']      = 'Sick';
+$lang->leave->typeList['annual']    = 'Annual';
+$lang->leave->typeList['home']      = 'Home';
 $lang->leave->typeList['marry']     = 'Marry';
 $lang->leave->typeList['maternity'] = 'Maternity';
-$lang->leave->typeList['affairs']   = 'Affairs';
-$lang->leave->typeList['home']      = 'Home';
-$lang->leave->typeList['annual']    = 'Annual';
 
 $lang->leave->statusList['wait']   = 'Wait';
 $lang->leave->statusList['pass']   = 'Pass';

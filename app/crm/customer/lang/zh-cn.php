@@ -11,7 +11,7 @@
  */
 if(!isset($lang->customer)) $lang->customer = new stdclass();
 
-$lang->customer->common        = '客户维护';
+$lang->customer->common        = '客户';
 $lang->customer->id            = '编号';
 $lang->customer->name          = '名称';
 $lang->customer->contact       = '联系人';

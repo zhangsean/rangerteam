@@ -21,9 +21,9 @@ $config->todo->editor->edit   = array('id' => 'desc', 'tools' => 'simple');
 $config->todo->list = new stdclass();
 $config->todo->list->exportFields = 'id, account, date, begin, end, type, idvalue, pri, name, desc, status, private'; 
 
-$config->todo->calendarColor['custom']   = '#EA644A';
-$config->todo->calendarColor['task']     = '#f1a325';
-$config->todo->calendarColor['order']    = '#03b8cf';
-$config->todo->calendarColor['customer'] = '#bd7b46';
-$config->todo->calendarColor['attend']   = '#8666b8';
-$config->todo->calendarColor['leave']    = '#8666b8';
+$config->todo->calendarColor['custom']   = '#3280FC';
+$config->todo->calendarColor['task']     = '#3280FC';
+$config->todo->calendarColor['order']    = '#3280FC';
+$config->todo->calendarColor['customer'] = '#3280FC';
+$config->todo->calendarColor['attend']   = '#3280FC';
+$config->todo->calendarColor['leave']    = '#3280FC';
