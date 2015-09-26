@@ -179,7 +179,8 @@ class todo extends control
                 $actionID = $this->loadModel('action')->create('todo', $todoID, 'edited');
                 $this->action->logHistory($actionID, $changes);
             }
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date={$this->post->date}")));
+            $date = str_replace('-', '', $this->post->date);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$date")));
         }
 
         /* Judge a private todo or not, If private, die. */
@@ -227,10 +228,13 @@ class todo extends control
      */
     public function delete($todoID)
     {
+        $todo = $this->todo->getByID($todoID);
+        $date = str_replace('-', '', $todo->date);
+        if($date == '00000000') $date = '';
         $this->dao->delete()->from(TABLE_TODO)->where('id')->eq($todoID)->exec();
         $this->loadModel('action')->create('todo', $todoID, 'erased');
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success', 'locate' => $this->createLink('todo', 'calendar')));
+        $this->send(array('result' => 'success', 'locate' => $this->createLink('oa.todo', 'calendar', "date=$date")));
     }
 
     /**

@@ -16,8 +16,12 @@
 <?php js::set('settings', new stdclass());?>
 <?php js::set('settings.startDate', date('Y-m-d', strtotime($date)));?>
 <?php js::set('settings.data', $data);?>
-<div class='with-side'>
+<div class='with-side <?php echo $this->cookie->todoCalendarSide == 'hide' ? 'hide-side' : ''?>'>
   <div class='side'>
+    <div class='side-handle'>
+      <?php $class = $this->cookie->todoCalendarSide == 'hide' ? 'icon-caret-left' : 'icon-caret-right'?>
+      <?php echo html::a('###', "<i class='$class'></i>", "title='{$lang->todo->periods['future']}'")?>
+    </div>
     <ul id="myTab" class="nav nav-tabs">
       <li class="active"><a href="#tab_custom" data-toggle="tab"><?php echo $lang->todo->periods['future']?></a></li>
       <li><a href="#tab_task" data-toggle="tab"><?php echo $lang->task->common;?></a></li>
@@ -30,7 +34,6 @@
         <?php foreach($todos as $id => $todo):?>
         <?php if($type == 'custom'):?>
         <div class='board-item' data-id='<?php echo $todo->id?>' data-name='<?php echo $todo->name?>' data-type='<?php echo $todo->type?>' data-begin='<?php echo $todo->begin?>' data-end='<?php echo $todo->end?>' data-toggle="droppable" data-target=".day">
-          <span class='label'><?php echo $todo->begin?></span>
           <?php echo html::a($this->createLink('oa.todo', 'view', "id=$todo->id"), $todo->name, "data-toggle='modal'")?>
         </div>
         <?php endif;?>

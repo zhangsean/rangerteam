@@ -80,4 +80,25 @@ $(document).ready(function()
             }
         }
     });
+
+    $('.side-handle').click(function()
+    {
+        if($(this).parents('.with-side').hasClass('hide-side'))
+        {
+            $('.with-side').removeClass('hide-side');
+            $('.side-handle i').removeClass('icon-caret-left');
+            $('.side-handle i').addClass('icon-caret-right');
+            $.cookie('todoCalendarSide', 'show', {path: config.webRoot});
+        }
+        else
+        {
+            $('.side-handle i').removeClass('icon-caret-right');
+            $('.side-handle i').addClass('icon-caret-left');
+            $('.with-side').addClass('hide-side');
+            $.cookie('todoCalendarSide', 'hide', {path: config.webRoot});
+        }
+    });
+
+    /* Adjust calendar */
+    $('.calendar').data('zui.calendar').display('month', v.settings.startDate);
 });
