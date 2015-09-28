@@ -39,6 +39,7 @@ $lang->appModule->oa[] = 'attend';
 $lang->appModule->oa[] = 'holiday';
 $lang->appModule->oa[] = 'leave';
 $lang->appModule->oa[] = 'trip';
+$lang->appModule->oa[] = 'todo';
 
 $lang->appModule->team = array();
 $lang->appModule->team[] = 'blog';
@@ -69,15 +70,20 @@ $lang->moduleOrder[43] = 'schema';
 $lang->moduleOrder[45]  = 'project';
 $lang->moduleOrder[50]  = 'announce';
 $lang->moduleOrder[55]  = 'doc';
-$lang->moduleOrder[57]  = 'task';
+$lang->moduleOrder[60]  = 'task';
+$lang->moduleOrder[65]  = 'todo';
+$lang->moduleOrder[70]  = 'attend';
+$lang->moduleOrder[75]  = 'holiday';
+$lang->moduleOrder[80]  = 'leave';
+$lang->moduleOrder[85]  = 'trip';
 
-$lang->moduleOrder[60]  = 'blog';
-$lang->moduleOrder[65]  = 'forum';
-$lang->moduleOrder[70]  = 'thread';
-$lang->moduleOrder[72]  = 'user';
+$lang->moduleOrder[90]  = 'blog';
+$lang->moduleOrder[95]  = 'forum';
+$lang->moduleOrder[100] = 'thread';
+$lang->moduleOrder[105] = 'user';
 
-$lang->moduleOrder[80]  = 'tree';
-$lang->moduleOrder[85] = 'setting';
+$lang->moduleOrder[110]  = 'tree';
+$lang->moduleOrder[115] = 'setting';
 
 $lang->resource = new stdclass();
 
@@ -328,6 +334,7 @@ $lang->resource->project = new stdclass();
 $lang->resource->project->index      = 'index';
 $lang->resource->project->create     = 'create';
 $lang->resource->project->edit       = 'edit';
+$lang->resource->project->privilege  = 'privilege';
 $lang->resource->project->finish     = 'finish';
 $lang->resource->project->activate   = 'activate';
 $lang->resource->project->suspend    = 'suspend';
@@ -337,11 +344,30 @@ $lang->resource->project->delete     = 'delete';
 $lang->project->methodOrder[0]  = 'index';
 $lang->project->methodOrder[5]  = 'create';
 $lang->project->methodOrder[10] = 'edit';
+$lang->project->methodOrder[12] = 'privilege';
 $lang->project->methodOrder[15] = 'finish';
 $lang->project->methodOrder[20] = 'activate';
 $lang->project->methodOrder[25] = 'suspend';
 $lang->project->methodOrder[30] = 'importTask';
 $lang->project->methodOrder[35] = 'delete';
+
+/* Todo. */
+$lang->resource->todo = new stdclass();
+$lang->resource->todo->calendar    = 'calendar';
+$lang->resource->todo->create      = 'create';
+$lang->resource->todo->batchCreate = 'batchCreate';
+$lang->resource->todo->edit        = 'edit';
+$lang->resource->todo->view        = 'view';
+$lang->resource->todo->delete      = 'delete';
+$lang->resource->todo->finish      = 'finish';
+
+$lang->todo->methodOrder[0]  = 'calendar';
+$lang->todo->methodOrder[5]  = 'create';
+$lang->todo->methodOrder[10] = 'batchCreate';
+$lang->todo->methodOrder[15] = 'edit';
+$lang->todo->methodOrder[20] = 'view';
+$lang->todo->methodOrder[25] = 'delete';
+$lang->todo->methodOrder[30] = 'finish';
 
 /* Task. */
 $lang->resource->task = new stdclass();
