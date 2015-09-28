@@ -37,6 +37,8 @@ $lang->entry->width       = 'Width';
 $lang->entry->height      = 'Height';
 $lang->entry->priv        = 'Privilege';
 
+$lang->entry->chanzhi          = 'Chanzhi';
+$lang->entry->zentao           = 'Zentao';
 $lang->entry->integrateChanzhi = 'Integrate ChanZhi';
 $lang->entry->integrateZentao  = 'Integrate ZenTao';
 

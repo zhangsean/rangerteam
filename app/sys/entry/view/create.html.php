@@ -16,6 +16,7 @@ js::set('chanzhiURL', $lang->entry->chanzhiURL);
 js::set('chanzhiPlaceholder', $lang->entry->chanzhiPlaceholder);
 js::set('zentaoURL', $lang->entry->zentaoURL);
 js::set('zentaoPlaceholder', $lang->entry->zentaoPlaceholder);
+js::set('zentaoName', $lang->entry->zentao);
 ?>
 <div class='panel'>
   <div class='panel-heading'>

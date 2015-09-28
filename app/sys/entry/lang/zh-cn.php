@@ -37,6 +37,8 @@ $lang->entry->width       = '宽';
 $lang->entry->height      = '高';
 $lang->entry->priv        = '权限';
 
+$lang->entry->chanzhi          = '蝉知';
+$lang->entry->zentao           = '禅道';
 $lang->entry->integrateChanzhi = '集成蝉知';
 $lang->entry->integrateZentao  = '集成禅道';
 
