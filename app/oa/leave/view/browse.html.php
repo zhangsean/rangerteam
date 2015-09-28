@@ -48,8 +48,12 @@
             <th class='w-150px'><?php echo $lang->leave->end;?></th>
             <th><?php echo $lang->leave->desc;?></th>
             <th class='w-80px'><?php echo $lang->leave->status;?></th>
+            <?php if($type != 'browseReview'):?>
             <th class='w-80px'><?php echo $lang->leave->reviewedBy;?></th>
+            <?php endif;?>
+            <?php if($type != 'company'):?>
             <th class='w-150px'><?php echo $lang->actions;?></th>
+            <?php endif;?>
           </tr>
         </thead>
         <?php foreach($leaveList as $leave):?>
@@ -61,7 +65,10 @@
           <td><?php echo $leave->end . ' ' . $leave->finish;?></td>
           <td title='<?php echo $leave->desc?>'><?php echo $leave->desc;?></td>
           <td class='leave-<?php echo $leave->status?>'><?php echo zget($this->lang->leave->statusList, $leave->status);?></td>
+          <?php if($type != 'browseReview'):?>
           <td><?php echo zget($users, $leave->reviewedBy);?></td>
+          <?php endif;?>
+          <?php if($type != 'company'):?>
           <td>
             <?php if($type == 'browseReview' and $leave->status == 'wait'):?>
             <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=pass"), $lang->leave->statusList['pass'], "class='reviewPass'");?>
@@ -72,6 +79,7 @@
             <?php echo html::a($this->createLink('oa.leave', 'delete', "id=$leave->id"), $lang->delete, "class='deleter'");?>
             <?php endif;?>
           </td>
+          <?php endif;?>
         </tr>
         <?php endforeach;?>
       </table>

@@ -56,7 +56,7 @@
             <table class='table table-data'>
               <?php foreach($task->children as $child):?>
               <tr class="text-center children" data-url='<?php echo $this->createLink('task', 'view', "taskID=$child->id"); ?>'>
-                <td class='w-60px'>   <?php echo $child->id;?></td>
+                <td class='w-52px'>   <?php echo $child->id;?></td>
                 <td class='w-40px'>   <span class='active pri pri-<?php echo $child->pri; ?>'><?php echo $lang->task->priList[$child->pri];?></span></td>
                 <td class='text-left'>
                   <span class='label'><?php echo $lang->task->childrenAB?></span>
@@ -68,7 +68,7 @@
                 <td class='w-100px visible-lg'><?php echo substr($child->createdDate, 0, 10);?></td>
                 <td class='w-90px visible-lg'> <?php echo $child->consumed;?></td>
                 <td class='w-110px visible-lg'><?php echo $child->left;?></td>
-                <td class='w-230px text-left'><?php $this->task->buildOperateMenu($child);?></td>
+                <td class='w-232px text-left'><?php $this->task->buildOperateMenu($child);?></td>
               </tr>
               <?php endforeach;?>
             </table>

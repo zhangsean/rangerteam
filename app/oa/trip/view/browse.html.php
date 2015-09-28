@@ -43,24 +43,24 @@
           <tr class='text-center'>
             <th class='w-50px'> <?php echo $lang->trip->id;?></th>
             <th class='w-80px'> <?php echo $lang->trip->createdBy;?></th>
-            <th class='w-80px'> <?php echo $lang->trip->name;?></th>
+            <th class='w-180px'> <?php echo $lang->trip->name;?></th>
             <th class='w-150px'><?php echo $lang->trip->begin;?></th>
             <th class='w-150px'><?php echo $lang->trip->end;?></th>
-            <th class='w-150px'><?php echo $lang->trip->from;?></th>
-            <th class='w-150px'><?php echo $lang->trip->to;?></th>
+            <th class='w-80px'><?php echo $lang->trip->from;?></th>
+            <th class='w-80px'><?php echo $lang->trip->to;?></th>
             <th><?php echo $lang->trip->desc;?></th>
-            <th class='w-150px'><?php echo $lang->actions;?></th>
+            <th class='w-100px'><?php echo $lang->actions;?></th>
           </tr>
         </thead>
         <?php foreach($tripList as $trip):?>
         <tr>
           <td><?php echo $trip->id;?></td>
           <td><?php echo zget($users, $trip->createdBy);?></td>
-          <td><?php echo $trip->name;?></td>
+          <td title='<?php echo $trip->name?>'><?php echo $trip->name;?></td>
           <td><?php echo $trip->begin . ' ' . $trip->start;?></td>
           <td><?php echo $trip->end . ' ' . $trip->finish;?></td>
-          <td><?php echo $trip->from;?></td>
-          <td><?php echo $trip->to;?></td>
+          <td title='<?php echo $trip->from?>'><?php echo $trip->from;?></td>
+          <td title='<?php echo $trip->to?>'>  <?php echo $trip->to;?></td>
           <td title='<?php echo $trip->desc?>'><?php echo $trip->desc;?></td>
           <td>
             <?php if($trip->createdBy == $this->app->user->account):?>
