@@ -264,12 +264,17 @@ class taskModel extends model
             $task->parent      = empty($this->post->parent[$key]) ? 0 : $this->post->parent[$key];
 
             /* Process team. */
-            if(isset($_POST['team'][$key]))
+            if(!empty($_POST['team'][$key]))
             {
                 $team = $this->post->team[$key];
-                foreach($team as $key => $account) if($account == '') unset($team[$key]);
-                if(!isset($team[$assignedTo]) and !empty($team)) array_unshift($team, $assignedTo);
-                $task->team = join(',', $team);
+                if(!empty($assignedTo))
+                {
+                    $team = ',' . trim($team, ',') . ',';
+                    $team = str_replace(",$assignedTo,", '', $team);
+                    $team = $assignedTo . ',' . trim($team, ',');
+                }
+                $team = trim($team, ',');
+                $task->team = $team;
             }
 
             if($task->assignedTo) $task->assignedDate = $now;
@@ -330,9 +335,8 @@ class taskModel extends model
                 ->add('editedDate', $now)
                 ->specialChars('name')
                 ->stripTags('desc', $this->config->allowedTags->admin)
-                ->remove('referer, uid, files, labels')
+                ->remove('referer, uid, files, labels, teamShow')
                 ->join('mailto', ',')
-                ->join('team', ',')
                 ->setDefault('team', '')
                 ->get();
         }

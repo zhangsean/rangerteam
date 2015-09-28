@@ -62,7 +62,10 @@
               </tr>
               <tr>
                 <th><?php echo $lang->task->team;?></th>
-                <td><?php echo html::select('team[]', $members, $task->team, "class='form-control chosen' multiple");?></td>
+                <td>
+                  <?php echo html::select('teamShow[]', $members, $task->team, "class='form-control chosen' multiple");?>
+                  <?php echo html::hidden('team', $task->team);?>
+                </td>
               </tr>
               <tr>
                 <th><?php echo $lang->task->status;?></th>

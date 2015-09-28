@@ -51,7 +51,10 @@ if($isChildren)  include $app->getAppRoot() . '../sys/common/view/header.modal.h
           <td><?php echo html::input("name[$i]", '', "class='form-control'");?></td>
           <td><?php echo html::select("assignedTo[$i]", $users, $member, "class='form-control'");?></td>
           <?php if(!$isChildren):?>
-          <td><?php echo html::select("team[$i][]", $teamUsers, '', "class='form-control chosen' multiple");?></td>
+          <td>
+            <?php echo html::select("teamShow[$i][]", $teamUsers, '', "class='form-control chosen' data-index='$i' multiple");?>
+            <?php echo html::hidden("team[$i]", '');?>
+          </td>
           <?php endif;?>
           <td><?php echo html::textarea("desc[$i]", '', "rows='1' class='form-control'");?></td>
           <td><?php echo html::input("deadline[$i]", '', "class='form-control form-date'");?></td>

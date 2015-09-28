@@ -167,11 +167,26 @@ class task extends control
         $task = $this->task->getByID($taskID);
         $this->checkPriv($task, 'edit');
 
+        /* Sort members by team. */
+        $members = $this->loadModel('project')->getMemberPairs($task->project);
+        $team = array_reverse(explode(',', trim($task->team, ',')));
+        foreach($team as $account)
+        {
+            if(isset($members[$account]))
+            {
+                $realname = $members[$account];
+                unset($members[$account]);
+                $members = array($account => $realname) + $members;
+            }
+        }
+        unset($members['']);
+        $members = array('' => '') + $members;
+
         $this->view->title     = $this->lang->task->edit;
         $this->view->task      = $task;
         $this->view->projectID = $this->view->task->project;
         $this->view->projects  = $this->loadModel('project')->getPairs();
-        $this->view->members   = $this->loadModel('project')->getMemberPairs($this->view->task->project);
+        $this->view->members   = $members;
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
     }
