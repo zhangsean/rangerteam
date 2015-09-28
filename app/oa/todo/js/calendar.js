@@ -13,7 +13,7 @@ $(document).ready(function()
             var target = from.data('targeta');
             if(typeof target == 'undefined') target = '.droppable-target';
             to.date = new Date(to.data('date'));
-            if(from.data('type') == 'custom' && to.data('date') != '1970-01-01')
+            if(from.data('action') == 'edit' && to.data('date') != '1970-01-01')
             {
                 var data = {
                 'date': to.date.format('yyyy-MM-dd'),
@@ -24,7 +24,7 @@ $(document).ready(function()
                 }
                 var url = createLink('oa.todo', 'edit', 'id=' + from.data('id'), 'json');
             }
-            else if(from.data('type') != 'custom' && to.data('date') != '1970-01-01')
+            else if(from.data('action') != 'edit' && to.data('date') != '1970-01-01')
             {
                 var data = {
                 'date': to.date.format('yyyy-MM-dd'),
@@ -36,12 +36,12 @@ $(document).ready(function()
                 }
                 var url = createLink('oa.todo', 'create', '', 'json');
             }
-            else if(from.data('type') == 'custom' && to.data('date') == '1970-01-01')
+            else if(from.data('action') == 'edit' && to.data('date') == '1970-01-01')
             {
                 var data = {}
                 var url = createLink('oa.todo', 'delete', 'id=' + from.data('id'), 'json');
             }
-            else if(from.data('type') != 'custom' && to.data('date') == '1970-01-01')
+            else if(from.data('type') != 'edit' && to.data('date') == '1970-01-01')
             {
                 return false;
             }

@@ -35,7 +35,7 @@ class todo extends control
      */
     public function calendar($date = '')
     {
-        if($date == '') $date = date('Ymd');
+        if($date == '' or $date == 'future') $date = date('Ymd');
         $account = $this->app->user->account;
         $todoList['custom']   = $this->todo->getList('future', $account);
         $todoList['task']     = array();
@@ -211,7 +211,8 @@ class todo extends control
 
         if($todo->type == 'task') 
         {
-            $_POST['consumed'] = '1';
+            $task = $this->loadModel('task')->getById($todo->idvalue);
+            $_POST['consumed'] = $task->left == 0 ? 1 : $task->left;
             $changes = $this->loadModel('task')->finish($todo->idvalue);
             if(!empty($changes))
             {
