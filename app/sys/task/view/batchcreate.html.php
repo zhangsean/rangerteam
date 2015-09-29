@@ -28,7 +28,7 @@ if($isChildren)  include $app->getAppRoot() . '../sys/common/view/header.modal.h
             <th><?php echo $lang->task->name;?> <span class='required'></span></th>
             <th class='w-100px'><?php echo $lang->task->assignedTo;?></th>
             <?php if(!$isChildren):?>
-            <th class='w-100px'><?php echo $lang->task->team;?></th>
+            <th class='w-100px hidden'><?php echo $lang->task->team;?></th>
             <?php endif;?>
             <th class='w-p25'><?php echo $lang->task->desc;?></th>
             <th class='w-120px'><?php echo $lang->task->deadline;?></th>
@@ -51,7 +51,7 @@ if($isChildren)  include $app->getAppRoot() . '../sys/common/view/header.modal.h
           <td><?php echo html::input("name[$i]", '', "class='form-control'");?></td>
           <td><?php echo html::select("assignedTo[$i]", $users, $member, "class='form-control'");?></td>
           <?php if(!$isChildren):?>
-          <td>
+          <td class='hidden'>
             <?php echo html::select("teamShow[$i][]", $teamUsers, '', "class='form-control chosen' data-index='$i' multiple");?>
             <?php echo html::hidden("team[$i]", '');?>
           </td>

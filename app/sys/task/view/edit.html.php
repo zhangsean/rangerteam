@@ -60,7 +60,7 @@
                 <th><?php echo $lang->task->assignedTo;?></th>
                 <td><?php echo html::select('assignedTo', $members, $task->assignedTo, "class='form-control chosen'");?></td>
               </tr>
-              <tr>
+              <tr class='hidden'>
                 <th><?php echo $lang->task->team;?></th>
                 <td>
                   <?php echo html::select('teamShow[]', $members, $task->team, "class='form-control chosen' multiple");?>

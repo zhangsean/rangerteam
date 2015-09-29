@@ -27,8 +27,9 @@ class taskModel extends model
 
         if($task) 
         {
-            $task->files = $this->loadModel('file')->getByObject('task', $taskID);
+            $task->files    = $this->loadModel('file')->getByObject('task', $taskID);
             $task->children = $children;
+            $task->team     = '';
         }
 
         return $task;
@@ -84,6 +85,7 @@ class taskModel extends model
         {
             foreach($taskList as $key => $task)
             {
+                $task->team = '';
                 if(!isset($task->children)) $task->children = array();
                 if($task->parent != 0 and isset($taskList[$task->parent])) 
                 {
@@ -109,6 +111,7 @@ class taskModel extends model
                     }
                 }
                 foreach($tasks as $taskKey => $task) if(isset($done[$task->id])) unset($taskList[$groupKey][$taskKey]);
+                foreach($tasks as $taskKey => $task) $task->team = '';
             }
         }
 
@@ -215,7 +218,7 @@ class taskModel extends model
                 ->get();
         }
 
-        $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels')
+        $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels,team')
             ->autoCheck()
             ->batchCheck($this->config->task->require->create, 'notempty')
             ->checkIF($task->estimate != '', 'estimate', 'float')
@@ -285,7 +288,7 @@ class taskModel extends model
         $taskIDList = array();
         foreach($tasks as $task)
         {
-            $this->dao->insert(TABLE_TASK)->data($task)->autoCheck()->exec();
+            $this->dao->insert(TABLE_TASK)->data($task, 'team')->autoCheck()->exec();
             if(!dao::isError()) $taskIDList[] = $this->dao->lastInsertID();
         }
 
@@ -335,9 +338,8 @@ class taskModel extends model
                 ->add('editedDate', $now)
                 ->specialChars('name')
                 ->stripTags('desc', $this->config->allowedTags->admin)
-                ->remove('referer, uid, files, labels, teamShow')
+                ->remove('referer, uid, files, labels, teamShow, team')
                 ->join('mailto', ',')
-                ->setDefault('team', '')
                 ->get();
         }
         $this->dao->update(TABLE_TASK)->data($task)

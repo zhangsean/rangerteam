@@ -1,5 +1,4 @@
-ALTER TABLE `sys_task` add `team` VARCHAR(255) NOT NULL DEFAULT '' AFTER `desc`;
-ALTER TABLE `sys_task` add `parent` mediumint(8) unsigned NOT NULL DEFAULT 0 AFTER `team`;
+ALTER TABLE `sys_task` add `parent` mediumint(8) unsigned NOT NULL DEFAULT 0 AFTER `desc`;
 
 -- DROP TABLE IF EXISTS `oa_todo`;
 CREATE TABLE IF NOT EXISTS `oa_todo` (
