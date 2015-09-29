@@ -25,7 +25,7 @@ $(function()
         if(typeof v.settings != 'undefined') settings = v.settings;
 
         /* Get setting from div. */
-        var divData    = calendarObj.data();
+        var divData = calendarObj.data();
         for(key in divData) settings[key] = divData[key];
 
         /* Get data from table. */
