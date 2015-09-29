@@ -12,6 +12,12 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
+<?php if($task->parent != 0):?>
+<div class='addonMenu'>
+  <li class='divider angle'></li>
+  <li><?php echo html::a($this->createLink('task', 'view', "id={$task->parent}"), $lang->task->parent)?></li>
+</div>
+<?php endif;?>
 <div class='with-menu page-content'>
   <div class='row-table'>
     <div class='col-main'>

@@ -25,4 +25,11 @@ $(function()
         }
         return false;
     });
+
+    /* Add parent task link to menu. */
+    if($('.addonMenu').length)
+    {
+        $('#menu .nav li:first').after($('.addonMenu').html());
+        $('.addonMenu').remove();
+    }
 });

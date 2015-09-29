@@ -698,13 +698,6 @@ class taskModel extends model
             $menu    .= commonModel::printLink('task', 'batchCreate', "projectID=$task->project&taskID=$task->id", $this->lang->task->children, $misc, false);
         }
 
-        if($task->parent != 0 and $type == 'view')
-        {
-            $disabled = ($canEdit and self::isClickable($task, 'view')) ? '' : 'disabled';
-            $misc     = $disabled ? "class='$disabled $class'" : "class='$class'";
-            $menu    .= commonModel::printLink('task', 'view', "taskID=$task->parent", $this->lang->task->parent, $misc, false);
-        }
-
         if($print) echo $menu;
         return $menu;
     }
