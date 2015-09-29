@@ -416,6 +416,17 @@ class task extends control
                 $task     = $this->task->getByID($taskID);
                 $actionID = $this->loadModel('action')->create('task', $taskID, 'Closed', $this->post->comment, $this->lang->task->reasonList[$task->closedReason]);
                 $this->action->logHistory($actionID, $changes);
+
+                /* Close children */
+                foreach($task->children as $key => $child) 
+                {
+                    $childChanges = $this->task->close($child->id);
+                    if($childChanges)
+                    {
+                        $actionID = $this->loadModel('action')->create('task', $child->id, 'Closed', $this->post->comment, $this->lang->task->reasonList[$task->closedReason]);
+                        $this->action->logHistory($actionID, $childChanges);
+                    }
+                }
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
@@ -442,6 +453,12 @@ class task extends control
 
         $this->task->delete(TABLE_TASK, $taskID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'massage' => dao::getError()));
+
+        /* Delete children. */
+        foreach($task->children as $child)
+        {
+            $this->task->delete(TABLE_TASK, $child->id);
+        }
 
         $link = $this->session->taskList ? $this->session->taskList : inlink('browse');
         $this->send(array('result' => 'success', 'locate' => $link));

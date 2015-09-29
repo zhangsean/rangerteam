@@ -20,8 +20,8 @@ class taskModel extends model
      */
     public function getByID($taskID)
     {
-        $task     = $this->dao->select('*')->from(TABLE_TASK)->where('id')->eq($taskID)->limit(1)->fetch();
-        $children = $this->dao->select('*')->from(TABLE_TASK)->where('parent')->eq($taskID)->fetchAll('id');
+        $task     = $this->dao->select("*, '' as team")->from(TABLE_TASK)->where('id')->eq($taskID)->limit(1)->fetch();
+        $children = $this->dao->select("*, '' as team")->from(TABLE_TASK)->where('parent')->eq($taskID)->andWhere('deleted')->eq(0)->fetchAll('id');
 
         foreach($task as $key => $value) if(strpos($key, 'Date') !== false and !(int)substr($value, 0, 4)) $task->$key = '';
 
@@ -29,7 +29,6 @@ class taskModel extends model
         {
             $task->files    = $this->loadModel('file')->getByObject('task', $taskID);
             $task->children = $children;
-            $task->team     = '';
         }
 
         return $task;
@@ -55,7 +54,7 @@ class taskModel extends model
 
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
-        $this->dao->select('*')->from(TABLE_TASK)
+        $this->dao->select("*, '' as team")->from(TABLE_TASK)
             ->where('deleted')->eq(0)
             ->beginIF($projectID)->andWhere('project')->eq($projectID)->fi()
             ->beginIF($mode == 'createdBy')->andWhere('createdBy')->eq($this->app->user->account)->fi()
@@ -85,7 +84,6 @@ class taskModel extends model
         {
             foreach($taskList as $key => $task)
             {
-                $task->team = '';
                 if(!isset($task->children)) $task->children = array();
                 if($task->parent != 0 and isset($taskList[$task->parent])) 
                 {
@@ -111,7 +109,6 @@ class taskModel extends model
                     }
                 }
                 foreach($tasks as $taskKey => $task) if(isset($done[$task->id])) unset($taskList[$groupKey][$taskKey]);
-                foreach($tasks as $taskKey => $task) $task->team = '';
             }
         }
 
@@ -133,7 +130,7 @@ class taskModel extends model
         $project    = $this->loadModel('project', 'oa')->getByID($projectID);
         $canViewAll = ($this->app->user->admin == 'super' or $project->acl == 'open' or in_array($this->app->user->account, $project->viewList));
 
-        $tasks = $this->dao->select('*')
+        $tasks = $this->dao->select("*, '' as team")
             ->from(TABLE_TASK)
             ->where('project')->eq((int)$projectID)
             ->andWhere('deleted')->eq(0)
@@ -361,8 +358,46 @@ class taskModel extends model
             ->batchCheckIF($task->closedReason == 'cancel', 'finishedBy, finishedDate', 'empty')
             ->where('id')->eq((int)$taskID)
             ->exec();
+
+        $this->updateParent($oldTask);
+
         if(dao::isError()) return false;
         return commonModel::createChanges($oldTask, $task);
+    }
+
+    /**
+     * Update parent task info. 
+     * 
+     * @param  object $task 
+     * @access public
+     * @return void
+     */
+    public function updateParent($task)
+    {
+        if($task->parent == 0) return true;
+        $parent   = $this->getById($task->parent);
+        $wait     = true;
+        $done     = true;
+        $estimate = 0;
+        $consumed = 0;
+        $left     = 0;
+
+        foreach($parent->children as $child)
+        {
+            if($child->status != 'wait') $wait = false;
+            if($child->status != 'done') $done = false;
+            $estimate += $child->estimate;
+            $consumed += $child->consumed;
+            $left     += $child->left;
+        }
+        $newParent = new stdclass();
+        $newParent->status   = $wait ? 'wait' : ($done ? 'done' : 'doing');
+        $newParent->estimate = $estimate;
+        $newParent->consumed = $consumed;
+        $newParent->left     = $left;
+
+        $this->dao->update(TABLE_TASK)->data($newParent)->where('id')->eq($parent->id)->exec();
+        return true;
     }
 
     /**
@@ -393,6 +428,8 @@ class taskModel extends model
             ->check('consumed', 'notempty')
             ->where('id')->eq((int)$taskID)
             ->exec();
+
+        $this->updateParent($oldTask);
 
         if(!dao::isError()) return commonModel::createChanges($oldTask, $task);
     }
@@ -432,6 +469,8 @@ class taskModel extends model
             ->checkIF($this->post->consumed < $oldTask->consumed, 'consumed', 'ge', $this->lang->task->consumedBefore)
             ->where('id')->eq((int)$taskID)
             ->exec();
+        
+        $this->updateParent($oldTask);
 
         if(!dao::isError()) return commonModel::createChanges($oldTask, $task);
     }
@@ -540,6 +579,8 @@ class taskModel extends model
 
         $this->dao->update(TABLE_TASK)->data($task, 'uid,comment')->autoCheck()->where('id')->eq((int)$taskID)->exec();
 
+        $this->updateParent($oldTask);
+
         if(!dao::isError()) return commonModel::createChanges($oldTask, $task);
     }
 
@@ -601,8 +642,9 @@ class taskModel extends model
      */
     public function buildOperateMenu($task, $class = '', $type = 'browse', $print = true)
     {
-        $menu  = $type == 'view' ? "<div class='btn-group'>" : '';
-        $canEdit = $this->checkPriv($task, 'edit');
+        $menu     = $type == 'view' ? "<div class='btn-group'>" : '';
+        $canEdit  = $this->checkPriv($task, 'edit');
+        $isParent = !empty($task->children);
 
         $disabled = ($canEdit and self::isClickable($task, 'assignto')) ? '' : 'disabled';
         $multiple = $task->team == '' ? false : true;
@@ -610,7 +652,7 @@ class taskModel extends model
         $link     = $disabled ? '###' : helper::createLink('task', 'assignto', "taskID=$task->id");
         $menu    .= commonModel::printLink('task', 'assignto', "taskID=$task->id", $multiple ? $this->lang->task->transmit : $this->lang->assign, $misc, false);
 
-        $disabled = ($canEdit and self::isClickable($task, 'start')) ? '' : 'disabled';
+        $disabled = (!$isParent and $canEdit and self::isClickable($task, 'start')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'start', "taskID=$task->id");
         $menu    .= commonModel::printLink('task', 'start', "taskID=$task->id", $this->lang->start, $misc, false);
@@ -623,7 +665,7 @@ class taskModel extends model
             $menu    .= commonModel::printLink('task', 'activate', "taskID=$task->id", $this->lang->activate, $misc, false);
         }
 
-        $disabled = ($canEdit and self::isClickable($task, 'finish')) ? '' : 'disabled';
+        $disabled = (!$isParent and $canEdit and self::isClickable($task, 'finish')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'finish', "taskID=$task->id");
         $menu    .= commonModel::printLink('task', 'finish', "taskID=$task->id", $this->lang->finish, $misc, false);
