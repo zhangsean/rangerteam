@@ -8,8 +8,8 @@
 .hide-side .tab-content {display: none;}
 .with-side .side, .with-side .main {transition: all 0.3s ease 0s;}
 
-.side-handle {background: #fff none repeat scroll 0 0; border: 0; cursor: pointer; line-height: 40px; padding: 0; position: absolute; right: 0; top: 0; text-align: center; transition: all 0.3s ease 0s; width: 20px; z-index: 99;}
-.side-handle:hover {border: 1px solid #d5d5d5; color: #666;}
+.side-handle {width: 20px; z-index: 99; position: absolute; left: -60px; top: 0; transition: all 0.3s ease 0s;}
+.hide-side .side-handle{left: -40px;}
 
 [data-toggle="droppable"] {cursor: move;}
 
@@ -21,9 +21,9 @@
 .calendar .event.with-action .action {position: absolute; right: 0; top: 0;}
 .calendar .event.with-action .action > a {display: inline-block; padding: 0 4px; color: #fff; background-color: rgba(0,0,0,0.25); line-height: 19px; padding: 0 6px;}
 .calendar .event.with-action .action > a:hover {background-color: rgba(0,0,0,0.5)}
-.calendar .btn-toolbar {padding-right: 15px;}
+.calendar .btn-toolbar {padding-right: 40px;}
 .calendar .btn-toolbar .btn-group{float: right;}
 
-.trash {position: absolute; top: 0; left: 0; padding: 3px 8px 3px 8px;}
+.trash {position: absolute; top: 0; left: 0; padding: 3px 80px 3px 8px;}
 .trash:hover {background: #f0f0f0;}
 .trash .icon{font-size: 36px;}
