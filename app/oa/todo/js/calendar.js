@@ -86,7 +86,7 @@ $(document).ready(function()
         var page  = Math.ceil(count/10);
         if(page > 1)
         {
-            for(i = 1; i<= page; i++)
+            for(i = page; i > 0; i--)
             {
                 tab.append("<span class='page-num' data-id='" + i + "'>" + i + '</span>')
             }
