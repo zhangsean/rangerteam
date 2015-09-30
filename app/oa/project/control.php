@@ -100,14 +100,13 @@ class project extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
-        $groups     = $this->loadModel('group')->getPairs();
-        $groupUsers = array();
-        foreach($groups as $groupID => $group) $groupUsers[$groupID] = $this->group->getUserPairs($groupID);
+        $groups = $this->loadModel('group')->getPairs();
+        $users  = $this->loadModel('user')->getPairs();
 
-        $this->view->title      = $this->lang->project->edit;
-        $this->view->project    = $this->project->getByID($projectID);
-        $this->view->groups     = $groups;
-        $this->view->groupUsers = $groupUsers;
+        $this->view->title   = $this->lang->project->edit;
+        $this->view->project = $this->project->getByID($projectID);
+        $this->view->groups  = $groups;
+        $this->view->users   = $users;
         $this->display();
     }
 

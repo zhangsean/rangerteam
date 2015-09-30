@@ -15,46 +15,46 @@
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <form method='post' id='ajaxForm' action='<?php echo inlink('privilege', "projectID={$project->id}")?>' class='form-inline'>
-  <table class='table-form w-p90'>
-    <tr>
-      <th class='w-p20'><?php echo $lang->project->acl;?></th>
-      <td colspan='2'><?php echo nl2br(html::radio('acl', $lang->project->aclList, $project->acl, "onclick='updateChecked(this);'", 'block'));?></td>
-    </tr>  
-    <tr id='whitelistBox'>
-      <th><?php echo $lang->project->whitelist;?></th>
-      <td colspan='2'><?php echo html::checkbox('whitelist', $groups, $project->whitelist, "onChange='updateChecked(this);'");?></td>
-    </tr>
-    <tr id='editListBox'>
-      <th><?php echo $lang->project->editTask;?></th>
-      <td colspan='2'>
-        <?php foreach($groupUsers as $groupID => $groupUser):?>
-          <?php foreach($groupUser as $account => $realname):?>
-            <?php $class  = "group-$groupID";?>
-            <?php $class .= in_array($account, $project->members) ? ' in-team' : '';?>
-            <label class='checkbox <?php echo $class?>' id='edituser<?php echo $account?>'>
-              <input type='checkbox' name='editList[]' value='<?php echo $account?>' <?php echo in_array($account, $project->editList) ? "checked='checked'" : ''?> onChange='updateChecked(this);' />
-              <?php echo $realname;?>
-            </label>
+  <fieldset>
+    <legend><?php echo $lang->project->common?></legend>
+    <table class='table-form w-p90'>
+      <tr>
+        <th class='w-100px'><?php echo $lang->project->acl;?></th>
+        <td colspan='2'><?php echo nl2br(html::radio('acl', $lang->project->aclList, $project->acl, "onclick='whitelistBox(this);'", 'block'));?></td>
+      </tr>  
+      <tr id='whitelistBox' class='hidden'>
+        <th><?php echo $lang->project->whitelist;?></th>
+        <td colspan='2'><?php echo html::checkbox('whitelist', $groups, $project->whitelist);?></td>
+      </tr>
+    </table>
+  </fieldset>
+  <fieldset>
+    <legend><?php echo $lang->project->task?></legend>
+    <table class='table-form w-p90'>
+      <tr id='editListBox'>
+        <th class='w-100px'><?php echo $lang->project->editTask;?></th>
+        <td colspan='2'>
+          <?php foreach($project->members as $account):?>
+          <label class='checkbox?>' id='edituser<?php echo $account?>'>
+            <input type='checkbox' name='editList[]' value='<?php echo $account?>' <?php echo in_array($account, $project->editList) ? "checked='checked'" : ''?> onChange='updateChecked(this);' />
+            <?php echo zget($users, $account);?>
+          </label>
           <?php endforeach;?>
-        <?php endforeach;?>
-      </td>
-    </tr>  
-    <tr id='viewListBox'>
-      <th><?php echo $lang->project->viewTask;?></th>
-      <td colspan='2'>
-        <?php foreach($groupUsers as $groupID => $groupUser):?>
-          <?php foreach($groupUser as $account => $realname):?>
-            <?php $class  = "group-$groupID";?>
-            <?php $class .= in_array($account, $project->members) ? ' in-team' : '';?>
-            <label class='checkbox <?php echo $class?>' id='viewuser<?php echo $account?>'>
-              <input type='checkbox' name='viewList[]' value='<?php echo $account?>' <?php echo in_array($account, $project->viewList) ? "checked='checked'" : ''?> onChange='updateChecked(this);' />
-              <?php echo $realname;?>
-            </label>
+        </td>
+      </tr>  
+      <tr id='viewListBox'>
+        <th><?php echo $lang->project->viewTask;?></th>
+        <td colspan='2'>
+          <?php foreach($project->members as $account):?>
+          <label class='checkbox?>' id='viewuser<?php echo $account?>'>
+            <input type='checkbox' name='viewList[]' value='<?php echo $account?>' <?php echo in_array($account, $project->viewList) ? "checked='checked'" : ''?> onChange='updateChecked(this);' />
+            <?php echo zget($users, $account);?>
+          </label>
           <?php endforeach;?>
-        <?php endforeach;?>
-      </td>
-    </tr>  
-    <tr><th></th><td><?php echo html::submitButton();?></td></tr>
-  </table>
+        </td>
+      </tr>  
+    </table>
+  </fieldset>
+  <div class='text-center w-p100'><?php echo html::submitButton();?></div>
 </form>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

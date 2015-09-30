@@ -40,11 +40,12 @@ $lang->project->end         = 'End Date';
 $lang->project->createdBy   = 'Created by';
 $lang->project->createdDate = 'Created date';
 $lang->project->fromproject = 'FromProject';
-$lang->project->acl         = 'Access limitation';
+$lang->project->acl         = 'Access';
 $lang->project->whitelist   = 'Whitelist';
 $lang->project->privilege   = 'Privilage';
-$lang->project->viewTask    = "View all task";
-$lang->project->editTask    = "Edit all task";
+$lang->project->viewTask    = "View all";
+$lang->project->editTask    = "Edit all";
+$lang->project->task        = 'Task privilege';
 
 $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = 'Are you sure to activate this projcet?';

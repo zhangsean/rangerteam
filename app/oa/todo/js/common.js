@@ -3,10 +3,12 @@ function switchDateTodo(switcher)
     if(switcher.checked)
     {
         $('#date').attr('disabled','disabled');
+        $('[name^=switchDate]:not(:checked)').click();
     }
     else
     {
         $('#date').removeAttr('disabled');
+        $('[name^=switchDate]:checked').click();
     }
 }
 

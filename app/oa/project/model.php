@@ -180,10 +180,13 @@ class projectModel extends model
      */
     public function create()
     {
+        $members = array_unique(array_merge(array($this->post->manager), (array)$this->post->member));
         $project = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', helper::now())
             ->remove('member,manager,master')
+            ->add('viewList', join(',', $members))
+            ->add('editList', join(',', $members))
             ->stripTags('desc', $this->config->allowedTags->admin)
             ->get();
 
@@ -196,8 +199,6 @@ class projectModel extends model
 
         if(dao::isError()) return false;
         $projectID = $this->dao->lastInsertId();
-
-        $members = array_unique(array_merge(array($this->post->manager), (array)$this->post->member));
 
         $user = new stdclass();
         $user->type = 'project';
@@ -585,7 +586,7 @@ class projectModel extends model
      */
     public function checkPriv($projectID)
     {
-        //if($this->app->user->admin == 'super') return true;
+        if($this->app->user->admin == 'super') return true;
         static $projects, $members, $groups, $groupUsers = array();
         if(empty($groups)) 
         {
