@@ -1,4 +1,9 @@
 ALTER TABLE `sys_task` add `parent` mediumint(8) unsigned NOT NULL DEFAULT 0 AFTER `desc`;
+ALTER TABLE `sys_task` add `children` varchar(255) NOT NULL AFTER `parent`;
+
+ALTER TABLE `sys_team` add `estimate` decimal(12,1) unsigned NOT NULL AFTER `hours`;
+ALTER TABLE `sys_team` add `consumed` decimal(12,1) unsigned NOT NULL AFTER `estimate`;
+ALTER TABLE `sys_team` add `left` decimal(12,1) unsigned NOT NULL AFTER `consumed`;
 
 -- DROP TABLE IF EXISTS `oa_todo`;
 CREATE TABLE IF NOT EXISTS `oa_todo` (
@@ -18,7 +23,4 @@ CREATE TABLE IF NOT EXISTS `oa_todo` (
   KEY `user` (`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-ALTER TABLE `oa_project` add `acl` enum('open','private','custom') NOT NULL default 'open' AFTER `status`;
 ALTER TABLE `oa_project` add `whitelist` varchar(255) NOT NULL AFTER `acl`;
-ALTER TABLE `oa_project` add `viewList` varchar(255) NOT NULL AFTER `whitelist`;
-ALTER TABLE `oa_project` add `editList` varchar(255) NOT NULL AFTER `viewList`;

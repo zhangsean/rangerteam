@@ -15,4 +15,22 @@ $(document).ready(function()
           console.log('#team\\[' + $select.data('index') + '\\]');
       }, 100);
     });
+
+    /* show team menu. */
+    $('[name^=multiple]').change(function()
+    {
+        var checkboxObj = $(this);
+        console.log(checkboxObj.prop('checked'));
+        var checked = checkboxObj.prop('checked');
+        if(checked)
+        {
+            checkboxObj.parents('td').next('td').find('select').addClass('hidden');
+            checkboxObj.parents('td').next('td').find('a').removeClass('hidden');
+        }
+        else
+        {
+            checkboxObj.parents('td').next('td').find('select').removeClass('hidden');
+            checkboxObj.parents('td').next('td').find('a').addClass('hidden');
+        }
+    });
 });

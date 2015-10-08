@@ -278,10 +278,7 @@ CREATE TABLE `oa_project` (
   `editedBy` char(30) NOT NULL,
   `editedDate` datetime NOT NULL,
   `status` enum('doing','finished','suspend') NOT NULL DEFAULT 'doing',
-  `acl` enum('open','private','custom') NOT NULL default 'open',
   `whitelist` varchar(255) NOT NULL,
-  `viewList` varchar(255) NOT NULL,
-  `editList` varchar(255) NOT NULL,
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE='MyISAM' COLLATE 'utf8_general_ci'; 
@@ -748,7 +745,6 @@ CREATE TABLE `sys_task` (
   `statusCustom` tinyint(3) unsigned NOT NULL,
   `mailto` varchar(255) NOT NULL DEFAULT '',
   `desc` text NOT NULL,
-  `team` VARCHAR(255) NOT NULL DEFAULT '',
   `parent` mediumint(8) unsigned NOT NULL DEFAULT 0,
   `createdBy` varchar(30) NOT NULL,
   `createdDate` datetime NOT NULL,

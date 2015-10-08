@@ -112,12 +112,12 @@ class task extends control
     /**
      * Batch create task.
      * 
-     * @param  int    $projectID 
-     * @param  int    $taskID 
+     * @param  int $projectID 
+     * @param  int $parent 
      * @access public
      * @return void
      */
-    public function batchCreate($projectID, $taskID = '')
+    public function batchCreate($projectID, $parent = '')
     {
         if($_POST)
         {
@@ -129,11 +129,11 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer));
         }
 
-        $this->view->title     = $taskID == '' ? $this->lang->task->batchCreate : $this->lang->task->children;
+        $this->view->title     = $parent == '' ? $this->lang->task->batchCreate : $this->lang->task->children;
         $this->view->projectID = $projectID;
         $this->view->projects  = $this->loadModel('project')->getPairs();
         $this->view->users     = $this->loadModel('project')->getMemberPairs($projectID);
-        $this->view->taskID    = $taskID;
+        $this->view->parent    = $parent;
         $this->display();
     }
 
