@@ -83,6 +83,9 @@ class taskModel extends model
         if($groupBy == 'id') $taskList = $this->dao->fetchAll('id');
         if($groupBy != 'id') $taskList = $this->dao->fetchGroup($groupBy, 'id');
 
+        /* Save query condition for export and pre/next button. */
+        $this->session->set('taskQueryCondition', $this->dao->get());
+
         if($groupBy == 'id') 
         {
             /* Process multiple user task. */

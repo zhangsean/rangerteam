@@ -71,7 +71,6 @@ class task extends control
         if($projectID) $this->view->title = $project->name . $this->lang->minus . $this->view->title;
 
         $tasks = $this->task->getList($projectID, $mode, $orderBy, $pager);
-        $this->session->set('taskQueryCondition', $this->dao->get());
 
         $this->view->tasks     = $tasks;
         $this->view->pager     = $pager;
@@ -537,7 +536,6 @@ class task extends control
         if($groupBy == 'assignedTo' or $groupBy == 'createdBy') $orderBy = 'status';
 
         $tasks = $this->task->getList($projectID, $mode = null, $orderBy, $pager = null, $groupBy);
-        $this->session->set('taskQueryCondition', $this->dao->get());
 
         $tasks = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
 
@@ -578,7 +576,6 @@ class task extends control
 
         /* Get tasks and group them. */
         $tasks = $this->task->getList($projectID, $mode = null, $orderBy, $pager = null, $groupBy);
-        $this->session->set('taskQueryCondition', $this->dao->get());
 
         $tasks = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
 
