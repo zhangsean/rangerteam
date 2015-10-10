@@ -60,8 +60,8 @@ $lang->attend->inFail     = '签到失败';
 $lang->attend->outSuccess = '签退成功';
 $lang->attend->outFail    = '签退失败';
 
-$lang->attend->signInLimit  = '上班时间';
-$lang->attend->signOutLimit = '下班时间';
+$lang->attend->signInLimit  = '最晚签到';
+$lang->attend->signOutLimit = '最早签退';
 $lang->attend->workingDays  = '每周工作天数';
 $lang->attend->mustSignOut  = '必须签退';
 
