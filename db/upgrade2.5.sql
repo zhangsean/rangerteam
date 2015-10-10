@@ -4,6 +4,7 @@ ALTER TABLE `sys_task` add `children` varchar(255) NOT NULL AFTER `parent`;
 ALTER TABLE `sys_team` add `estimate` decimal(12,1) unsigned NOT NULL AFTER `hours`;
 ALTER TABLE `sys_team` add `consumed` decimal(12,1) unsigned NOT NULL AFTER `estimate`;
 ALTER TABLE `sys_team` add `left` decimal(12,1) unsigned NOT NULL AFTER `consumed`;
+ALTER TABLE `sys_team` add `order` tinyint(3) unsigned NOT NULL AFTER `left`;
 
 -- DROP TABLE IF EXISTS `oa_todo`;
 CREATE TABLE IF NOT EXISTS `oa_todo` (
