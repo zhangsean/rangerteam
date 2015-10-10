@@ -3,3 +3,6 @@
 
 #taskList tr.heading td, #taskList tr.heading:hover td {background: #eee; cursor: pointer;}
 .text-muted strong{color: #333;}
+
+.tr-child, .tr-child > td {padding: 0;}
+.tr-child > td > table {padding: 5px; background-color: #fff; border: 2px solid #DDDDDD;}

@@ -84,20 +84,23 @@
               <td class='text-left'><?php $this->task->buildOperateMenu($task);?></td>
             </tr>
             <?php if(!empty($task->children)):?>
-            <tr>
-              <td colspan='9'>
-                <table class='table table-data'>
+            <tr class='tr-child'>
+              <td colspan='10'>
+                <table class='table table-data table-hover'>
                   <?php foreach($task->children as $child):?>
-                  <tr class="text-center children" data-url='<?php echo $this->createLink('task', 'view', "taskID=$child->id"); ?>'>
+                  <tr class="text-center" data-url='<?php echo $this->createLink('task', 'view', "taskID=$child->id"); ?>'>
                     <td class='w-60px'><?php echo $child->id;?></td>
                     <td class='w-40px'><span class='active pri pri-<?php echo $child->pri; ?>'><?php echo $lang->task->priList[$child->pri];?></span></td>
-                    <td class='text-left'><span class='label'><?php echo $lang->task->childrenAB?></span><?php echo $child->name;?></td>
-                    <td class='w-100px'><?php echo $child->deadline;?></td>
-                    <td class='w-80px'><?php if(isset($users[$child->assignedTo])) echo $users[$child->assignedTo];?></td>
+                    <td class='text-left'>
+                      <span class='label'><?php echo $lang->task->childrenAB?></span>
+                      <?php echo $child->name;?>
+                    </td>
+                    <td class='w-100px'>  <?php echo $child->deadline;?></td>
+                    <td class='w-80px'>   <?php if(isset($users[$child->assignedTo])) echo $users[$child->assignedTo];?></td>
                     <td class='w-100px visible-lg'><?php echo substr($child->createdDate, 0, 10);?></td>
                     <td class='w-90px visible-lg'> <?php echo $child->consumed;?></td>
                     <td class='w-110px visible-lg'><?php echo $child->left;?></td>
-                    <td class='w-230px text-left'><?php $this->task->buildOperateMenu($child);?></td>
+                    <td class='w-240px text-left'><?php $this->task->buildOperateMenu($child);?></td>
                   </tr>
                   <?php endforeach;?>
                 </table>
