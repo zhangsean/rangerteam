@@ -36,6 +36,8 @@
                 <div class='task-heading'>
                   <?php if(!empty($task->children)) $task->name .= "&nbsp;<i class='icon icon-plus'></i>"?>
                   <?php echo html::a($this->createLink('task', 'view', "taskID={$task->id}"), $task->name)?>
+                  <?php if(!empty($task->team))   echo "<span class='label'>{$lang->task->multipleAB}</span>"?>
+                  <?php if(!empty($task->parent)) echo "<span class='label'>{$lang->task->childrenAB}</span>"?>
                 </div>
                 <?php if(!empty($task->desc)): ?>
                 <div class='text-muted'><?php echo trim($task->name) == trim($task->desc) ? '' : $task->desc;?></div>

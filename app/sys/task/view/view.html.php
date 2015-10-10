@@ -22,7 +22,10 @@
   <div class='row-table'>
     <div class='col-main'>
       <div class='panel'>
-        <div class='panel-heading'><strong><?php echo $task->name;?></strong></div>
+        <div class='panel-heading'>
+          <?php if(!empty($task->team)) echo "<span class='label'>{$lang->task->multipleAB}</span>"?>
+          <strong><?php echo $task->name;?></strong>
+        </div>
         <div class='panel-body'>
           <?php echo $task->desc;?>
           <div><?php echo $this->fetch('file', 'printFiles', array('files' =>$task->files, 'fieldset' => 'false'))?></div>
@@ -82,15 +85,6 @@
               <th><?php echo $lang->task->assignedTo;?></th>
               <td><?php echo zget($members, $task->assignedTo, $task->assignedTo);?></td>
             </tr>
-            <tr class='hidden'>
-              <th><?php echo $lang->task->team;?></th>
-              <td>
-                <?php 
-                $team = explode(',', $task->team);
-                foreach($team as $account) echo zget($members, $account, $account) . ' ';
-                ?>
-              </td>
-            </tr>
             <tr>
               <th><?php echo $lang->task->status;?></th>
               <td><?php echo $lang->task->statusList[$task->status];?></td>
@@ -118,6 +112,28 @@
           </table>
         </div>
       </div>
+      <?php if(!empty($task->team)):?>
+      <div class='panel'>
+        <table class='table table-data'>
+          <thead>
+            <tr>
+              <th><?php echo $lang->task->team?></th>
+              <th class='text-center'><?php echo $lang->task->estimate?></th>
+              <th class='text-center'><?php echo $lang->task->consumed?></th>
+              <th class='text-center'><?php echo $lang->task->left?></th>
+            </tr>
+          </thead>
+          <?php foreach($task->team as $member):?>
+          <tr class='text-center'>
+            <td class='text-left'><?php echo zget($members, $member->account)?></td>
+            <td><?php echo $member->estimate?></td>
+            <td><?php echo $member->consumed?></td>
+            <td><?php echo $member->left?></td>
+          </tr>
+          <?php endforeach;?>
+        </table>
+      </div>
+      <?php endif;?>
       <div class='panel'>
         <div class='panel-heading'><strong><?php echo $lang->task->life?></strong></div>
         <div class='panel-body'>

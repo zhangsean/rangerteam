@@ -25,7 +25,21 @@
             <table class='table table-form table-data'>
               <tr>
                 <th class='w-80px'><?php echo $lang->task->name?></th>
-                <td><?php echo html::input('name', $task->name, "class='form-control'");?></td>
+                <td>
+                  <?php if(empty($task->children) and empty($task->parent)):?>
+                  <div class='input-group'>
+                    <?php echo html::input("name", $task->name, "class='form-control'");?>
+                    <span class='input-group-addon'>
+                      <label class='checkbox'>
+                        <input type='checkBox' name='multiple' value='1' <?php echo empty($task->team) ? '' : 'checked'?> />
+                        <?php echo $lang->task->multipleAB;?>
+                      </label>
+                    </span>
+                  </div>
+                  <?php else:?>
+                  <?php echo html::input("name", $task->name, "class='form-control'");?>
+                  <?php endif;?>
+                </td>
               </tr>
               <tr>
                 <th><?php echo $lang->task->desc?></th>
@@ -60,11 +74,10 @@
                 <th><?php echo $lang->task->assignedTo;?></th>
                 <td><?php echo html::select('assignedTo', $members, $task->assignedTo, "class='form-control chosen'");?></td>
               </tr>
-              <tr class='hidden'>
+              <tr class='<?php echo empty($task->team) ? 'hidden' : ''?>' id='teamTr'>
                 <th><?php echo $lang->task->team;?></th>
                 <td>
-                  <?php echo html::select('teamShow[]', $members, $task->team, "class='form-control chosen' multiple");?>
-                  <?php echo html::hidden('team', $task->team);?>
+                  <?php echo html::a("#modalTeam", $lang->task->team, "class='form-control btn' data-toggle='modal' data-target='#modalTeam'");?>
                 </td>
               </tr>
               <tr>
@@ -136,6 +149,49 @@
               </tr>
             </table>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade modal-team" id="modalTeam">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+          <h4 class="modal-title"><?php echo $lang->task->team?></h4>
+        </div>
+        <div class="modal-content">
+          <table class='table table-form'>
+            <?php foreach($task->team as $member):?>
+            <tr>
+              <td class='w-p20'><?php echo html::select("team[]", $members, $member->account, "class='form-control chosen'")?></td>
+              <td class='w-p80'>
+                <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->task->estimate?></span>
+                  <?php echo html::input("teamEstimate[]", $member->estimate, "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
+                  <span class='input-group-addon'><?php echo $lang->task->consumed?></span>
+                  <?php echo html::input("teamConsumed[]", $member->consumed, "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
+                  <span class='input-group-addon'><?php echo $lang->task->left?></span>
+                  <?php echo html::input("teamLeft[]", $member->left, "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
+                </div>
+              </td>
+            </tr>
+            <?php endforeach;?>
+            <?php for($i = 0; $i < 3; $i++):?>
+            <tr>
+              <td><?php echo html::select("team[]", $members, '', "class='form-control chosen'")?></td>
+              <td>
+                <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->task->estimate?></span>
+                  <?php echo html::input("teamEstimate[]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
+                  <span class='input-group-addon'><?php echo $lang->task->consumed?></span>
+                  <?php echo html::input("teamConsumed[]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
+                  <span class='input-group-addon'><?php echo $lang->task->left?></span>
+                  <?php echo html::input("teamLeft[]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
+                </div>
+              </td>
+            </tr>
+            <?php endfor;?>
+            <tr><td colspan='2' class='text-center'><?php echo html::a('javascript:void(0)', $lang->save, "class='btn btn-primary' data-dismiss='modal'")?></td></tr>
+          </table>
         </div>
       </div>
     </div>

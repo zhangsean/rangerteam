@@ -71,7 +71,8 @@
               <td><?php echo $task->id;?></td>
               <td><span class='active pri pri-<?php echo $task->pri; ?>'><?php echo $lang->task->priList[$task->pri];?></span></td>
               <td class='text-left'>
-                <?php if($task->parent != 0) echo "<span class='label'>{$lang->task->childrenAB}</span>"?>
+                <?php if($task->parent != 0)  echo "<span class='label'>{$lang->task->childrenAB}</span>"?>
+                <?php if(!empty($task->team)) echo "<span class='label'>{$lang->task->multipleAB}</span>"?>
                 <?php echo $task->name;?>
                 <?php if(!empty($task->children)) echo "<span class='task-toogle'>&nbsp;&nbsp;<i class='icon icon-minus'></i>&nbsp;&nbsp;</span>"?>
               </td>

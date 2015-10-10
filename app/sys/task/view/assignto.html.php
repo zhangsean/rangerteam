@@ -19,10 +19,17 @@
       <th class='w-100px'><?php echo empty($task->team) ? $lang->task->assignedTo : $lang->task->transmitTo;?></th>
       <td><?php echo html::select('assignedTo', $users, $task->assignedTo, "class='form-control chosen'");?></td>
     </tr>
+    <?php if(empty($task->team)):?>
     <tr>
       <th><?php echo $lang->task->left;?></th>
       <td><?php echo html::input('left', $task->left, "class='form-control'");?></td>
     </tr>
+    <?php else:?>
+    <tr>
+      <th><?php echo $lang->task->myConsumption;?></th>
+      <td><?php echo html::input('consumed', '', "class='form-control' placeholder='{$lang->task->hour}'");?></td>
+    </tr>
+    <?php endif;?>
     <tr>
       <th><?php echo $lang->comment?></th>
       <td><?php echo html::textarea('comment');?></td>

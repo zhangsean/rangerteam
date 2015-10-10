@@ -79,10 +79,13 @@ $lang->task->multipleAB     = 'Multiple';
 $lang->task->team           = 'Team';
 $lang->task->transmit       = 'Transmit';
 $lang->task->transmitTo     = 'Transmit To';
-$lang->task->children       = 'Children Task';
+$lang->task->children       = 'Children';
 $lang->task->childrenAB     = 'Child';
 $lang->task->parent         = 'Parent Task';
 $lang->task->unfinished     = 'Unfinished';
+$lang->task->end            = 'End';
+$lang->task->myConsumption  = 'My Consumption';
+$lang->task->recordEstimate = 'Record';
 
 $lang->task->confirmFinish     = '"Left" is zero, this task will be done. Are you sure?';
 $lang->task->consumedBefore    = 'consumed before';

@@ -20,8 +20,8 @@ class taskModel extends model
      */
     public function getByID($taskID)
     {
-        $task     = $this->dao->select("*, '' as team")->from(TABLE_TASK)->where('id')->eq($taskID)->limit(1)->fetch();
-        $children = $this->dao->select("*, '' as team")->from(TABLE_TASK)->where('parent')->eq($taskID)->andWhere('deleted')->eq(0)->fetchAll('id');
+        $task     = $this->dao->select("*")->from(TABLE_TASK)->where('id')->eq($taskID)->limit(1)->fetch();
+        $children = $this->dao->select("*")->from(TABLE_TASK)->where('parent')->eq($taskID)->andWhere('deleted')->eq(0)->fetchAll('id');
 
         foreach($task as $key => $value) if(strpos($key, 'Date') !== false and !(int)substr($value, 0, 4)) $task->$key = '';
 
@@ -30,6 +30,11 @@ class taskModel extends model
             $task->files    = $this->loadModel('file')->getByObject('task', $taskID);
             $task->children = $children;
         }
+        
+        $teams = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('task')->andWhere('id')->in(array_keys($children) + array($taskID))->orderBy('order_desc')->fetchGroup('id', 'account');
+        foreach($teams as $key => $team) $teams[$key] = array_reverse($team);
+        $task->team = isset($teams[$taskID]) ? $teams[$taskID] : array();
+        foreach($children as $child) $child->team = isset($teams[$child->id]) ? $teams[$child->id] : array();
 
         return $task;
     }
@@ -54,7 +59,7 @@ class taskModel extends model
 
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
-        $this->dao->select("*, '' as team")->from(TABLE_TASK)
+        $this->dao->select("*")->from(TABLE_TASK)
             ->where('deleted')->eq(0)
             ->beginIF($projectID)->andWhere('project')->eq($projectID)->fi()
             ->beginIF($mode == 'createdBy')->andWhere('createdBy')->eq($this->app->user->account)->fi()
@@ -70,18 +75,22 @@ class taskModel extends model
             ->where('assignedTo')->eq($this->app->user->account)
             ->orWhere('finishedBy')->eq($this->app->user->account)
             ->orWhere('createdBy')->eq($this->app->user->account)
-            ->orWhere('team')->like("%{$this->app->user->account}%")
             ->markRight(1)
             ->fi()
             ->orderBy($orderBy)
             ->page($pager);
         
         if($groupBy == 'id') $taskList = $this->dao->fetchAll('id');
-        if($groupBy != 'id') $taskList = $this->dao->fetchGroup($groupBy);
+        if($groupBy != 'id') $taskList = $this->dao->fetchGroup($groupBy, 'id');
 
-        /* Process childen task. */
         if($groupBy == 'id') 
         {
+            /* Process multiple user task. */
+            $teams = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('task')->andWhere('id')->in(array_keys($taskList))->orderBy('order_desc')->fetchGroup('id', 'account');
+            foreach($teams as $key => $team) $teams[$key] = array_reverse($team);
+            foreach($taskList as $key => $task) $task->team = isset($teams[$key]) ? $teams[$key] : array();
+
+            /* Process childen task. */
             foreach($taskList as $key => $task)
             {
                 if(!isset($task->children)) $task->children = array();
@@ -90,25 +99,29 @@ class taskModel extends model
                     $taskList[$task->parent]->children[$key] = $task;
                     unset($taskList[$key]);
                 }
-            } 
+            }
         }
         if($groupBy != 'id') 
         {
+            /* Prosess multiple user task. */
+            $idList = array();
+            foreach($taskList as $tasks) $idList += array_keys($tasks);
+            $teams = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('task')->andWhere('id')->in($idList)->orderBy('order_desc')->fetchGroup('id', 'account');
+            foreach($teams as $key => $team) $teams[$key] = array_reverse($team);
+            foreach($taskList as $tasks) foreach($tasks as $task) $task->team = isset($teams[$task->id]) ? $teams[$task->id] : array();
+
+            /* Prosess children task. */
             foreach($taskList as $groupKey => $tasks)
             {
-                $children = array();
-                $done     = array();
-                foreach($tasks as $task) if($task->parent != 0) $children[$task->parent][$task->id] = $task;
-                foreach($tasks as $task)
+                foreach($tasks as $key => $task)
                 {
-                    $task->children = array();
-                    if(isset($children[$task->id])) 
+                    if(!isset($task->children)) $task->children = array();
+                    if($task->parent != 0 and isset($taskList[$groupKey][$task->parent])) 
                     {
-                        $task->children = $children[$task->id];
-                        $done += $children[$task->id];
+                        $taskList[$groupKey][$task->parent]->children[$key] = $task;
+                        unset($taskList[$groupKey][$key]);
                     }
                 }
-                foreach($tasks as $taskKey => $task) if(isset($done[$task->id])) unset($taskList[$groupKey][$taskKey]);
             }
         }
 
@@ -130,7 +143,7 @@ class taskModel extends model
         $project    = $this->loadModel('project', 'oa')->getByID($projectID);
         $canViewAll = ($this->app->user->admin == 'super' or $project->acl == 'open' or in_array($this->app->user->account, $project->viewList));
 
-        $tasks = $this->dao->select("*, '' as team")
+        $tasks = $this->dao->select("*")
             ->from(TABLE_TASK)
             ->where('project')->eq((int)$projectID)
             ->andWhere('deleted')->eq(0)
@@ -144,14 +157,19 @@ class taskModel extends model
             ->where('assignedTo')->eq($this->app->user->account)
             ->orWhere('finishedBy')->eq($this->app->user->account)
             ->orWhere('createdBy')->eq($this->app->user->account)
-            ->orWhere('team')->like("%{$this->app->user->account}%")
             ->markRight(1)
             ->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
 
-        if($tasks) return $tasks;
+        if($tasks)
+        {
+            $teams = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('task')->andWhere('id')->in(array_keys($tasks))->orderBy('order_desc')->fetchGroup('id', 'account');
+            foreach($teams as $key => $team) $teams[$key] = array_reverse($team);
+            foreach($tasks as $task) $task->team = isset($teams[$task->id]) ? $teams[$task->id] : array();
+            return $tasks;
+        }
         return array();
     }
 
@@ -263,17 +281,35 @@ class taskModel extends model
             $task->createdDate = $now;
             $task->parent      = empty($this->post->parent[$key]) ? 0 : $this->post->parent[$key];
 
-            /* Process team. */
-            if(!empty($_POST['team'][$key]))
+            /* Process multiple user task data. */
+            if(isset($_POST['multiple'][$key]) and !empty($_POST['multiple'][$key]))
             {
-                $team = $this->post->team[$key];
-                if(!empty($assignedTo))
+                $team = array();
+                $estimate = 0;
+                $left     = 0;
+                foreach($this->post->team[$key] as $row => $account)
                 {
-                    $team = ',' . trim($team, ',') . ',';
-                    $team = str_replace(",$assignedTo,", '', $team);
-                    $team = $assignedTo . ',' . trim($team, ',');
+                    if(empty($account) or isset($team[$account])) continue;
+                    $member = new stdclass();
+                    $member->type     = 'task';
+                    $member->id       = '';
+                    $member->account  = $account;
+                    $member->role     = 'member';
+                    $member->join     = helper::today();
+                    $member->estimate = empty($this->post->teamEstimate[$key][$row]) ? 0 : $this->post->teamEstimate[$key][$row];
+                    $member->left     = $member->estimate;
+                    $member->order    = $row;
+                    $team[$account]   = $member;
+                    $estimate += (float)$member->estimate;
+                    $left     += (float)$member->left;
                 }
-                $team = trim($team, ',');
+                if(!empty($team))
+                {
+                    $firstMember = reset($team);
+                    $task->assignedTo = $firstMember->account;
+                    $task->estimate   = $estimate;
+                    $task->left       = $left;
+                }
                 $task->team = $team;
             }
 
@@ -287,6 +323,17 @@ class taskModel extends model
         {
             $this->dao->insert(TABLE_TASK)->data($task, 'team')->autoCheck()->exec();
             if(!dao::isError()) $taskIDList[] = $this->dao->lastInsertID();
+
+            /* Save team. */
+            if(!empty($task->team))
+            {
+                $lastInsertID = $this->dao->lastInsertID();
+                foreach($task->team as $member)
+                {
+                    $member->id = $lastInsertID;
+                    $this->dao->insert(TABLE_TEAM)->data($member)->autoCheck()->exec();
+                }
+            }
         }
 
         return $taskIDList;
@@ -335,11 +382,48 @@ class taskModel extends model
                 ->add('editedDate', $now)
                 ->specialChars('name')
                 ->stripTags('desc', $this->config->allowedTags->admin)
-                ->remove('referer, uid, files, labels, teamShow, team')
+                ->remove('referer,uid,files,labels,multiple,team,teamEstimate,teamConsumed,teamLeft')
                 ->join('mailto', ',')
                 ->get();
+
+            /* Process team. */
+            if($this->post->multiple)
+            {
+                $team = array();
+                $estimate = 0;
+                $left     = 0;
+                foreach($this->post->team as $row => $account)
+                {
+                    if(empty($account) or isset($team[$account])) continue;
+                    $member = new stdclass();
+                    $member->type     = 'task';
+                    $member->id       = $taskID;
+                    $member->account  = $account;
+                    $member->role     = 'member';
+                    $member->join     = helper::today();
+                    $member->estimate = $this->post->teamEstimate[$row];
+                    $member->consumed = $this->post->teamConsumed[$row];
+                    $member->left     = $this->post->teamLeft[$row];
+                    $member->order    = $row;
+                    $team[$account]   = $member;
+                    $estimate += (float)$member->estimate;
+                    $left     += (float)$member->left;
+                }
+                if(!empty($team))
+                {
+                    $task->estimate = $estimate;
+                    $task->left     = $left;
+                    if(!isset($team[$task->assignedTo]))
+                    {
+                        $firstMember = reset($team);
+                        $task->assignedTo = $firstMember->account;
+                    }
+                }
+                $task->team = $team;
+            }
         }
-        $this->dao->update(TABLE_TASK)->data($task)
+
+        $this->dao->update(TABLE_TASK)->data($task, 'team')
             ->autoCheck()
             ->batchCheckIF($task->status != 'cancel', $this->config->task->require->edit, 'notempty')
 
@@ -358,6 +442,13 @@ class taskModel extends model
             ->batchCheckIF($task->closedReason == 'cancel', 'finishedBy, finishedDate', 'empty')
             ->where('id')->eq((int)$taskID)
             ->exec();
+
+        /* Save team. */
+        $this->dao->delete()->from(TABLE_TEAM)->where('type')->eq('task')->andWhere('id')->eq($taskID)->exec();
+        if(!empty($task->team))
+        {
+            foreach($task->team as $member) $this->dao->insert(TABLE_TEAM)->data($member)->autoCheck()->exec();
+        }
 
         $this->updateParent($oldTask);
 
@@ -401,6 +492,57 @@ class taskModel extends model
     }
 
     /**
+     * Recordestimate 
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
+    public function recordEstimate($taskID)
+    {
+        $oldTask = $this->getByID($taskID);
+        if(empty($oldTask->team))
+        {
+            $task = new stdclass();
+            $task->consumed = (float)$this->post->consumed + $oldTask->consumed;
+            $task->left     = $this->post->left;
+            $this->dao->update(TABLE_TASK)->data($task)->autoCheck()->where('id')->eq($taskID)->exec();
+        }
+
+        if(!empty($oldTask->team) and $oldTask->assignedTo != '')
+        {
+            $account    = $oldTask->assignedTo;
+            $task       = new stdclass();
+            $task->team = $oldTask->team;
+            $task->team[$account]->consumed = (float)$this->post->consumed + $oldTask->team[$oldTask->assignedTo]->consumed;
+            $task->team[$account]->left     = $this->post->left;
+
+            $consumed = 0;
+            $left     = 0;
+            foreach($task->team as $member) $consumed += (float)$member->consumed;
+            foreach($task->team as $member) $left     += (float)$member->left;
+            $task->consumed = $consumed;
+            $task->left     = $left;
+
+            $this->dao->update(TABLE_TEAM)
+                ->set('consumed')->eq($task->team[$account]->consumed)
+                ->set('left')->eq($task->team[$account]->left)
+                ->where('type')->eq('task')
+                ->andWhere('id')->eq($taskID)
+                ->andWhere('account')->eq($account)
+                ->exec();
+
+            $this->dao->update(TABLE_TASK)
+                ->set('consumed')->eq($consumed)
+                ->set('left')->eq($left)
+                ->where('id')->eq($taskID)
+                ->exec();
+        }
+
+        return commonModel::createChanges($oldTask, $task);
+    }
+
+    /**
      * Finish task.
      * 
      * @param  int    $taskID 
@@ -421,6 +563,26 @@ class taskModel extends model
             ->setDefault('finishedDate, editedDate', $now) 
             ->remove('files,labels')
             ->get();
+
+        /* Compute time for multiple user task. */
+        if(!empty($oldTask->team) and $oldTask->assignedTo != '')
+        {
+            $team        = $oldTask->team;
+            $consumed    = empty($_POST['consumed']) ? 0 : $this->post->consumed;
+            $allConsumed = 0;
+            $account     = $oldTask->assignedTo;
+            $team[$account]->consumed = $consumed;
+            foreach($team as $member) $allConsumed += (float)$member->consumed;
+
+            $this->dao->update(TABLE_TEAM)
+                ->set('consumed')->eq($team[$account]->consumed)
+                ->where('type')->eq('task')
+                ->andWhere('id')->eq($taskID)
+                ->andWhere('account')->eq($account)
+                ->exec();
+
+            $task->consumed = $allConsumed;
+        }
 
         $this->dao->update(TABLE_TASK)
             ->data($task, $skip = 'uid, comment')
@@ -489,7 +651,29 @@ class taskModel extends model
             ->cleanFloat('left')
             ->setDefault('editedBy', $this->app->user->account)
             ->setDefault('editedDate', helper::now())
+            ->remove('consumed')
             ->get();
+
+        /* Compute time for multiple user task. */
+        if(!empty($oldTask->team) and $oldTask->assignedTo != '')
+        {
+            $team        = $oldTask->team;
+            $consumed    = empty($_POST['consumed']) ? 0 : $this->post->consumed;
+            $allConsumed = 0;
+            $account     = $oldTask->assignedTo;
+            $team[$account]->consumed = $consumed;
+            foreach($team as $member) $allConsumed += (float)$member->consumed;
+
+            $this->dao->update(TABLE_TEAM)
+                ->set('consumed')->eq($team[$account]->consumed)
+                ->where('type')->eq('task')
+                ->andWhere('id')->eq($taskID)
+                ->andWhere('account')->eq($account)
+                ->exec();
+
+            $task->consumed = $allConsumed;
+            if($oldTask->status == 'wait') $task->status = 'doing';
+        }
 
         $this->dao->update(TABLE_TASK)
             ->data($task, $skip = 'uid, comment')
@@ -519,6 +703,14 @@ class taskModel extends model
             ->setDefault('editedBy', $this->app->user->account)
             ->setDefault('editedDate', helper::now())
             ->get();
+
+        /* Compute multiple user task data. */
+        if(!empty($oldTask->team))
+        {
+            $left = 0;
+            foreach($oldTask->team as $member) $left += (float)$member->left;
+            $task->left = $left;
+        }
 
         $this->dao->update(TABLE_TASK)
             ->data($task, $skip = 'uid,comment')
@@ -645,20 +837,25 @@ class taskModel extends model
         $menu     = $type == 'view' ? "<div class='btn-group'>" : '';
         $canEdit  = $this->checkPriv($task, 'edit');
         $isParent = !empty($task->children);
+        $isMulti  = !empty($task->team);
 
         $disabled = ($canEdit and self::isClickable($task, 'assignto')) ? '' : 'disabled';
-        $multiple = $task->team == '' ? false : true;
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'assignto', "taskID=$task->id");
-        $menu    .= commonModel::printLink('task', 'assignto', "taskID=$task->id", $multiple ? $this->lang->task->transmit : $this->lang->assign, $misc, false);
+        $menu    .= commonModel::printLink('task', 'assignto', "taskID=$task->id", $isMulti ? $this->lang->task->transmit : $this->lang->assign, $misc, false);
 
-        $disabled = (!$isParent and $canEdit and self::isClickable($task, 'start')) ? '' : 'disabled';
+        $disabled = (!$isMulti and !$isParent and $canEdit and self::isClickable($task, 'start')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'start', "taskID=$task->id");
         $menu    .= commonModel::printLink('task', 'start', "taskID=$task->id", $this->lang->start, $misc, false);
 
         if($type == 'view')
         {
+            $disabled = (!$isParent and $canEdit and self::isClickable($task, 'recordEstimate')) ? '' : 'disabled';
+            $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
+            $link     = $disabled ? '###' : helper::createLink('task', 'recordEstimate', "taskID=$task->id");
+            $menu    .= commonModel::printLink('task', 'recordEstimate', "taskID=$task->id", $this->lang->task->recordEstimate, $misc, false);
+
             $disabled = ($canEdit and self::isClickable($task, 'activate')) ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
             $link     = $disabled ? '###' : helper::createLink('task', 'activate', "taskID=$task->id");
@@ -668,7 +865,7 @@ class taskModel extends model
         $disabled = (!$isParent and $canEdit and self::isClickable($task, 'finish')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
         $link     = $disabled ? '###' : helper::createLink('task', 'finish', "taskID=$task->id");
-        $menu    .= commonModel::printLink('task', 'finish', "taskID=$task->id", $this->lang->finish, $misc, false);
+        $menu    .= commonModel::printLink('task', 'finish', "taskID=$task->id", $isMulti ? $this->lang->task->end : $this->lang->finish, $misc, false);
 
         if($type == 'view')
         {
@@ -691,7 +888,7 @@ class taskModel extends model
         $menu    .= commonModel::printLink('task', 'delete', "taskID=$task->id", $this->lang->delete, "class='$deleter $class $disabled'", false);
         if($type == 'view') $menu .= "</div>";
 
-        if($task->parent == 0)
+        if($task->parent == 0 and !$isMulti)
         {
             $disabled = ($canEdit and self::isClickable($task, 'batchCreate')) ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class' data-width='80%'";
@@ -771,6 +968,24 @@ class taskModel extends model
         }
         if($next == '') return reset($users);
         return $next;
+    }
+
+    /**
+     * Get task's team member pairs. 
+     * 
+     * @param  object $task 
+     * @access public
+     * @return array
+     */
+    public function getMemberPairs($task)
+    {
+        $users   = $this->loadModel('user')->getPairs();
+        $members = array();
+        foreach($task->team as $member)
+        {
+            $members[$member->account] = $users[$member->account];
+        }
+        return $members;
     }
 
     /**

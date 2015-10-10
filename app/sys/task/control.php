@@ -104,7 +104,7 @@ class task extends control
 
         $this->view->title     = $this->lang->task->create;
         $this->view->projectID = $projectID;
-        $this->view->projects  = $this->project->getPairs();
+        $this->view->projects  = $this->loadModel('project')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
     }
@@ -167,20 +167,7 @@ class task extends control
         $task = $this->task->getByID($taskID);
         $this->checkPriv($task, 'edit');
 
-        /* Sort members by team. */
         $members = $this->loadModel('project')->getMemberPairs($task->project);
-        $team = array_reverse(explode(',', trim($task->team, ',')));
-        foreach($team as $account)
-        {
-            if(isset($members[$account]))
-            {
-                $realname = $members[$account];
-                unset($members[$account]);
-                $members = array($account => $realname) + $members;
-            }
-        }
-        unset($members['']);
-        $members = array('' => '') + $members;
 
         $this->view->title     = $this->lang->task->edit;
         $this->view->task      = $task;
@@ -211,6 +198,39 @@ class task extends control
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->preAndNext = $this->loadModel('common', 'sys')->getPreAndNextObject('task', $taskID);
 
+        $this->display();
+    }
+
+    /**
+     * Recorde stimate of task. 
+     * 
+     * @param  int    $taskID 
+     * @access public
+     * @return void
+     */
+    public function recordEstimate($taskID)
+    {
+        if($_POST)
+        {
+            $changes = $this->task->recordEstimate($taskID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if(!empty($changes))
+            {
+                $actionID = $this->loadModel('action')->create('task', $taskID, 'Edited', $this->post->comment);
+                if($changes) $this->action->logHistory($actionID, $changes);
+            }
+            
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
+        }
+
+        $task = $this->task->getByID($taskID);
+        $left = $task->left;
+        if(!empty($task->team) and $task->assignedTo != '') $left = $task->team[$task->assignedTo]->left; 
+
+        $this->view->title = $this->lang->task->recordEstimate;
+        $this->view->task  = $task;
+        $this->view->left  = $left;
         $this->display();
     }
 
@@ -301,6 +321,9 @@ class task extends control
      */
     public function assignTo($taskID)
     {
+        $task    = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'assignTo');
+
         if($_POST)
         {
             $changes = $this->task->assign($taskID);
@@ -308,7 +331,8 @@ class task extends control
 
             if($changes)
             {
-                $actionID = $this->loadModel('action')->create('task', $taskID, 'Assigned', $this->post->comment, $this->post->assignedTo);
+                $actionType = empty($task->team) ? 'Assigned' : 'Transmit';
+                $actionID = $this->loadModel('action')->create('task', $taskID, $actionType, $this->post->comment, $this->post->assignedTo);
                 $this->action->logHistory($actionID, $changes);
                 $this->sendmail($taskID, $actionID);
             }
@@ -316,18 +340,12 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
-        $task    = $this->task->getByID($taskID);
         $members = $this->loadModel('project')->getMemberPairs($task->project);
-        $this->checkPriv($task, 'assignTo');
-
-        /* Process team member and assignedTo data. */
-        if($task->team != '')
+        /* Compute next assignedTo. */
+        if(!empty($task->team))
         {
-            $users = array();
-            $team  = explode(',', trim($task->team, ','));
-            foreach($team as $key => $account) $users[$account] = $members[$account];
-            $task->assignedTo = $this->task->getNextUser($task->team, $task->assignedTo);
-            if(!empty($users)) $members = $users;
+            $task->assignedTo = $this->task->getNextUser(array_keys($task->team), $task->assignedTo);
+            $members = $this->task->getMemberPairs($task);
         }
 
         $this->view->title  = $task->name;
@@ -362,9 +380,13 @@ class task extends control
         $task = $this->task->getByID($taskID);
         $this->checkPriv($task, 'activate');
 
+        /* Set task team member if exists task team. */
+        $members = $this->loadModel('project')->getMemberPairs($task->project);
+        if(!empty($task->team)) $members = $this->task->getMemberPairs($task);
+
         $this->view->title = $this->lang->task->activate;
         $this->view->task  = $task;
-        $this->view->users = $this->loadModel('project')->getMemberPairs($task->project);
+        $this->view->users = $members;
         $this->display();
     }
 
@@ -453,6 +475,9 @@ class task extends control
 
         $this->task->delete(TABLE_TASK, $taskID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'massage' => dao::getError()));
+
+        /* Delete team. */
+        if(!empty($task->team)) $this->dao->delete()->from(TABLE_TEAM)->where('type')->eq('task')->andWhere('id')->eq($taskID)->exec();
 
         /* Delete children. */
         foreach($task->children as $child)
@@ -771,9 +796,18 @@ class task extends control
     {
         if(!$this->task->checkPriv($task, $action))
         {
-            $locate = helper::safe64Encode($this->server->http_referer);
-            $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
-            $this->locate($errorLink);
+            if(empty($_POST))
+            {
+                $locate = helper::safe64Encode($this->server->http_referer);
+                $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
+                $this->locate($errorLink);
+            }
+            else
+            {
+                $this->app->loadLang('error');
+                $this->send(array('result' => 'fail', 'message' => $this->lang->error->typeList['accessLimited']));
+            }
         }
+        return true;
     }
 }

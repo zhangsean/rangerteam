@@ -46,7 +46,7 @@ include $app->getAppRoot() . '../sys/common/view/header.modal.html.php';
           <td class='text-center'><?php echo $i+1;?><?php echo html::input("parent[$i]", $parent, "class='hide'");?></td>
           <?php if($isChildren):?>
           <td><?php echo html::input("name[$i]", '', "class='form-control'");?></td>
-          <td><?php echo html::select("assignedTo[$i]", $users, $member, "class='form-control'");?></td>
+          <td><?php echo html::select("assignedTo[$i]", $users, $member, "class='form-control chosen'");?></td>
           <?php else:?>
           <td>
             <div class='input-group'>
@@ -58,7 +58,7 @@ include $app->getAppRoot() . '../sys/common/view/header.modal.html.php';
                 </label>
               </span>
             </div>
-            <div class="modal fade" id="modal<?php echo $i;?>">
+            <div class="modal fade modal-team" id="modal<?php echo $i;?>">
               <div class="modal-dialog">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
@@ -71,7 +71,7 @@ include $app->getAppRoot() . '../sys/common/view/header.modal.html.php';
                       <td class='w-p70'><?php echo html::select("team[$i][]", $teamUsers, '', "class='form-control chosen'")?></td>
                       <td class='w-p30'>
                         <div class='input-group'>
-                          <?php echo html::input("estimate[$i][]", '', "class='form-control text-center' placeholder='{$lang->task->estimateAB}'")?>
+                          <?php echo html::input("teamEstimate[$i][]", '', "class='form-control text-center' placeholder='{$lang->task->estimateAB}'")?>
                           <span class='input-group-addon'><?php echo $lang->task->hour?></span>
                         </div>
                       </td>

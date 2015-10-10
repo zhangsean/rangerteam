@@ -19,7 +19,7 @@
       <th class='w-80px'><?php echo $lang->task->assignedTo;?></th>
       <td class='w-p45'><?php echo html::select('assignedTo', $users, $task->finishedBy, "class='form-control chosen'");?></td><td></td>
     </tr>
-    <tr>
+    <tr <?php if(!empty($task->team)) echo "class='hidden'";?>>
       <th><?php echo $lang->task->left;?></th>
       <td>
         <div class='input-group'>

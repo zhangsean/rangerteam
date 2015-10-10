@@ -83,6 +83,9 @@ $lang->task->children       = '子任务';
 $lang->task->childrenAB     = '子';
 $lang->task->parent         = '父任务';
 $lang->task->unfinished     = '未完成';
+$lang->task->end            = '结束';
+$lang->task->myConsumption  = '我的消耗';
+$lang->task->recordEstimate = '工时';
 
 $lang->task->confirmFinish     = '"预计剩余"为0，确认将任务状态改为"已完成"吗？';
 $lang->task->consumedBefore    = '之前消耗';

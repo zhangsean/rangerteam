@@ -14,14 +14,15 @@ $config->task->require->create = 'name';
 $config->task->require->edit   = 'name';
 
 $config->task->editor = new stdclass();
-$config->task->editor->create   = array('id' => 'desc', 'tools' => 'simple');
-$config->task->editor->edit     = array('id' => 'desc', 'tools' => 'simple');
-$config->task->editor->assignto = array('id' => 'comment', 'tools' => 'simple');
-$config->task->editor->finish   = array('id' => 'comment', 'tools' => 'simple');
-$config->task->editor->activate = array('id' => 'comment', 'tools' => 'simple');
-$config->task->editor->cancel   = array('id' => 'comment', 'tools' => 'simple');
-$config->task->editor->close    = array('id' => 'comment', 'tools' => 'simple');
-$config->task->editor->start    = array('id' => 'comment', 'tools' => 'simple');
+$config->task->editor->create         = array('id' => 'desc', 'tools' => 'simple');
+$config->task->editor->edit           = array('id' => 'desc', 'tools' => 'simple');
+$config->task->editor->assignto       = array('id' => 'comment', 'tools' => 'simple');
+$config->task->editor->finish         = array('id' => 'comment', 'tools' => 'simple');
+$config->task->editor->activate       = array('id' => 'comment', 'tools' => 'simple');
+$config->task->editor->cancel         = array('id' => 'comment', 'tools' => 'simple');
+$config->task->editor->close          = array('id' => 'comment', 'tools' => 'simple');
+$config->task->editor->start          = array('id' => 'comment', 'tools' => 'simple');
+$config->task->editor->recordestimate = array('id' => 'comment', 'tools' => 'simple');
 
 $config->task->batchCreate =  10;
 

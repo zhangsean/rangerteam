@@ -17,3 +17,5 @@ form .pri {width: 48px;}
 #currentItem {margin-right: 1px;}
 
 .children {background: #f0f0f0;}
+.modal-team .table-form {margin: auto; width: 90%;}
+.modal-team .modal-content {padding: 5px;}

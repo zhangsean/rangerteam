@@ -17,7 +17,7 @@
 <form method='post' id='ajaxForm' action='<?php echo $this->createLink('task', 'finish', "taskID=$taskID")?>'>
   <table class='table table-form'>
     <tr>
-      <th><?php echo $lang->task->consumed;?></th>
+      <th><?php echo empty($task->team) ? $lang->task->consumed : $lang->task->myConsumption;?></th>
       <td><?php echo html::input('consumed', $task->consumed ? $task->consumed : '', "class='form-control' autocomplete='off'")?></td>
     </tr>
     <tr>
