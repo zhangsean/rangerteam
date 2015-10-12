@@ -31,10 +31,8 @@ $lang->appModule->cash[] = 'provider';
 $lang->appModule->cash[] = 'schema';
 
 $lang->appModule->oa = array();
-$lang->appModule->oa[] = 'project';
 $lang->appModule->oa[] = 'announce';
 $lang->appModule->oa[] = 'doc';
-$lang->appModule->oa[] = 'task';
 $lang->appModule->oa[] = 'attend';
 $lang->appModule->oa[] = 'holiday';
 $lang->appModule->oa[] = 'leave';
@@ -67,10 +65,8 @@ $lang->moduleOrder[40]  = 'balance';
 $lang->moduleOrder[42]  = 'provider';
 $lang->moduleOrder[43] = 'schema';
 
-$lang->moduleOrder[45]  = 'project';
 $lang->moduleOrder[50]  = 'announce';
 $lang->moduleOrder[55]  = 'doc';
-$lang->moduleOrder[60]  = 'task';
 $lang->moduleOrder[65]  = 'todo';
 $lang->moduleOrder[70]  = 'attend';
 $lang->moduleOrder[75]  = 'holiday';
@@ -328,29 +324,6 @@ $lang->schema->methodOrder[15] = 'edit';
 $lang->schema->methodOrder[20] = 'view';
 $lang->schema->methodOrder[25] = 'delete';
 
-
-/* Project. */
-$lang->resource->project = new stdclass();
-$lang->resource->project->index      = 'index';
-$lang->resource->project->create     = 'create';
-$lang->resource->project->edit       = 'edit';
-$lang->resource->project->privilege  = 'privilege';
-$lang->resource->project->finish     = 'finish';
-$lang->resource->project->activate   = 'activate';
-$lang->resource->project->suspend    = 'suspend';
-$lang->resource->project->importTask = 'importTask';
-$lang->resource->project->delete     = 'delete';
-
-$lang->project->methodOrder[0]  = 'index';
-$lang->project->methodOrder[5]  = 'create';
-$lang->project->methodOrder[10] = 'edit';
-$lang->project->methodOrder[12] = 'privilege';
-$lang->project->methodOrder[15] = 'finish';
-$lang->project->methodOrder[20] = 'activate';
-$lang->project->methodOrder[25] = 'suspend';
-$lang->project->methodOrder[30] = 'importTask';
-$lang->project->methodOrder[35] = 'delete';
-
 /* Todo. */
 $lang->resource->todo = new stdclass();
 $lang->resource->todo->calendar    = 'calendar';
@@ -368,38 +341,6 @@ $lang->todo->methodOrder[15] = 'edit';
 $lang->todo->methodOrder[20] = 'view';
 $lang->todo->methodOrder[25] = 'delete';
 $lang->todo->methodOrder[30] = 'finish';
-
-/* Task. */
-$lang->resource->task = new stdclass();
-$lang->resource->task->browse      = 'browse';
-$lang->resource->task->kanban      = 'kanban';
-$lang->resource->task->outline     = 'outline';
-$lang->resource->task->create      = 'create';
-$lang->resource->task->batchCreate = 'batchCreate';
-$lang->resource->task->edit        = 'edit';
-$lang->resource->task->view        = 'view';
-$lang->resource->task->finish      = 'finish';
-$lang->resource->task->start       = 'start';
-$lang->resource->task->assignTo    = 'assignTo';
-$lang->resource->task->activate    = 'activate';
-$lang->resource->task->cancel      = 'cancel';
-$lang->resource->task->close       = 'close';
-$lang->resource->task->export      = 'export';
-$lang->resource->task->delete      = 'delete';
-
-$lang->task->methodOrder[10] = 'browse';
-$lang->task->methodOrder[15] = 'create';
-$lang->task->methodOrder[20] = 'batchCreate';
-$lang->task->methodOrder[25] = 'edit';
-$lang->task->methodOrder[30] = 'view';
-$lang->task->methodOrder[35] = 'finish';
-$lang->task->methodOrder[40] = 'start';
-$lang->task->methodOrder[45] = 'assignTo';
-$lang->task->methodOrder[50] = 'activate';
-$lang->task->methodOrder[55] = 'cancel';
-$lang->task->methodOrder[60] = 'close';
-$lang->task->methodOrder[65] = 'export';
-$lang->task->methodOrder[70] = 'delete';
 
 /* Announce. */
 $lang->resource->announce = new stdclass();
