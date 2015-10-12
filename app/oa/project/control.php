@@ -230,7 +230,6 @@ class project extends control
     public function ajaxGetDropMenu($projectID, $module, $method, $extra)
     {
         $projects       = $this->project->getList();
-        $members        =  $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id');
         $currentProject = $projects[$projectID];
 
         $this->view->link            = $this->project->getProjectLink($module, $method, $extra);

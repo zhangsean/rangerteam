@@ -55,7 +55,10 @@ class taskModel extends model
         if($this->session->taskQuery == false) $this->session->set('taskQuery', ' 1 = 1');
         $taskQuery  = $this->loadModel('search', 'sys')->replaceDynamic($this->session->taskQuery);
         $project    = $this->loadModel('project', 'oa')->getByID($projectID);
-        $canViewAll = ($this->app->user->admin == 'super' or $project->acl == 'open' or in_array($this->app->user->account, $project->viewList));
+
+        $canViewAll = $this->app->user->admin == 'super';
+        $canViewAll = $canViewAll or (in_array($this->app->user->account, $project->members) and $project->member[$this->app->user->account]->role == 'manager');
+        $canViewAll = $canViewAll or (in_array($this->app->user->account, $project->members) and $project->member[$this->app->user->account]->role == 'senior');
 
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
@@ -144,7 +147,10 @@ class taskModel extends model
     {
         if(is_string($type)) $type = strtolower($type);
         $project    = $this->loadModel('project', 'oa')->getByID($projectID);
-        $canViewAll = ($this->app->user->admin == 'super' or $project->acl == 'open' or in_array($this->app->user->account, $project->viewList));
+
+        $canViewAll = $this->app->user->admin == 'super';
+        $canViewAll = $canViewAll or (in_array($this->app->user->account, $project->member) and $project->member[$this->app->user->account]->role == 'manager');
+        $canViewAll = $canViewAll or (in_array($this->app->user->account, $project->member) and $project->member[$this->app->user->account]->role == 'senior');
 
         $tasks = $this->dao->select("*")
             ->from(TABLE_TASK)
@@ -819,9 +825,9 @@ class taskModel extends model
         $action  = strtolower($action);  
         $account = $this->app->user->account;
 
-        if($projects[$task->project]->acl == 'open') return true;
-        if($action == 'view') return in_array($account, $projects[$task->project]->viewList);
-        if(strpos(',edit,assignto,start,finish,close,activate,cancel,delete,', $action) !== false) return in_array($account, $projects[$task->project]->editList);
+        //if($projects[$task->project]->acl == 'open') return true;
+        //if($action == 'view') return in_array($account, $projects[$task->project]->viewList);
+        //if(strpos(',edit,assignto,start,finish,close,activate,cancel,delete,', $action) !== false) return in_array($account, $projects[$task->project]->editList);
         return true;
     }
 

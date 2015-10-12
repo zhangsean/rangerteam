@@ -28,10 +28,6 @@
       <td><?php echo html::select('manager', $users, $project->PM, "class='form-control user-chosen'");?></td><td></td>
     </tr>
     <tr>
-      <th><?php echo $lang->project->member;?></th>
-      <td><?php echo html::select('member[]', $users, $project->members, "class='form-control user-chosen' multiple");?></td><td></td>
-    </tr>
-    <tr>
       <th><?php echo $lang->project->begin;?></th>
       <td>
         <div class='required required-wrapper'></div>
@@ -48,6 +44,10 @@
     <tr>
       <th><?php echo $lang->project->desc;?></th>
       <td colspan='2'><?php echo html::textarea('desc', $project->desc, "class='form-control' rows='5'");?></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->project->whitelist . ' ' . html::a('javascript:void(0)', "<i class='icon-question-sign'></i>", "data-original-title='{$lang->project->whitelistTip}' data-toggle='tooltip'");?></th>
+      <td colspan='2'><?php echo html::checkbox('whitelist', $groups, '');?></td>
     </tr>
     <tr><th></th><td><?php echo html::submitButton();?></td></tr>
   </table>

@@ -21,31 +21,11 @@ class projectModel extends model
     public function getByID($projectID)
     {
         $project = $this->dao->select('*')->from(TABLE_PROJECT)->where('id')->eq($projectID)->fetch();
+
         $members = $this->getMembers($projectID); 
-
+        $project->members = $members;
         $project->PM      = '';
-        $project->members = array();
-        if(isset($members['manager'][0]))
-        {
-            $project->PM      = $members['manager'][0]->account;
-            $project->members = array($project->PM);
-        }
-
-        if(isset($members['member']))
-        {
-            foreach($members['member'] as $member)
-            {
-                $project->members[] = $member->account;   
-            }
-        }
-
-        /* Process viewList and editList */
-        $viewList = array();
-        if(!empty(trim($project->viewList, ','))) $viewList = explode(',', trim($project->viewList, ','));
-        $project->viewList = $viewList;
-        $editList = array();
-        if(!empty(trim($project->editList, ','))) $editList = explode(',', trim($project->editList, ','));
-        $project->editList = $editList;
+        foreach($members as $member) if($member->role == 'manager') $project->PM = $member->account;
 
         return $project;
     }
@@ -59,7 +39,7 @@ class projectModel extends model
      */
     public function getMembers($project)
     {
-        return $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($project)->fetchGroup('role');
+        return $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($project)->fetchAll('account');
     }
 
     /**
@@ -92,30 +72,15 @@ class projectModel extends model
             ->beginIF($status and $status == 'involved')->andWhere('status')->eq('doing')->fi()
             ->fetchAll('id');
 
-        $members = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id');
+        $members = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id', 'account');
 
         foreach($projects as $project)
         {
             $project->members = isset($members[$project->id]) ? $members[$project->id] : array();
 
-            $accountList = array();
-            foreach($project->members as $key => $member)
-            {
-                if(!$member->account) unset($project->members[$key]);
-                $accountList[] = $member->account;
-                if($member->role != 'manager') continue;
-                if($member->role == 'manager') $project->PM = $member->account;
-            }
+            foreach($project->members as $member) if($member->role == 'manager') $project->PM = $member->account;
 
-            /* Process viewList and editList. */
-            $viewList = array();
-            if(!empty(trim($project->viewList, ','))) $viewList = explode(',', trim($project->viewList, ','));
-            $project->viewList = $viewList;
-            $editList = array();
-            if(!empty(trim($project->editList, ','))) $editList = explode(',', trim($project->editList, ','));
-            $project->editList = $editList;
-
-            if($status == 'involved' and !in_array($this->app->user->account, $accountList)) unset($projects[$project->id]);
+            if($status == 'involved' and !isset($project->members[$this->app->user->account])) unset($projects[$project->id]);
             if(!$this->checkPriv($project->id)) unset($projects[$project->id]);
         }
         return $projects;
@@ -184,9 +149,8 @@ class projectModel extends model
         $project = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', helper::now())
+            ->join('whitelist', ',')
             ->remove('member,manager,master')
-            ->add('viewList', join(',', $members))
-            ->add('editList', join(',', $members))
             ->stripTags('desc', $this->config->allowedTags->admin)
             ->get();
 
@@ -232,6 +196,7 @@ class projectModel extends model
             $project = fixer::input('post')
                 ->add('editedBy', $this->app->user->account)
                 ->add('editedDate', helper::now())
+                ->join('whitelist', ',')
                 ->stripTags('desc', $this->config->allowedTags->admin)
                 ->remove('member,manager,master')
                 ->get();
@@ -247,50 +212,21 @@ class projectModel extends model
 
         if(dao::isError()) return false;
 
-        $members = array_unique(array_merge(array($this->post->manager), (array)$this->post->member));
-        $this->dao->delete()->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($projectID)->exec();
-
-        $user = new stdclass();
-        $user->type = 'project';
-        $user->id   = $projectID;
-        foreach($members as $member)
-        {
-            if($member == '') continue;
-            $user->account = $member;
-            $user->role    = $member == $this->post->manager ? 'manager' : 'member';
-
-            $this->dao->insert(TABLE_TEAM)->data($user)->autoCheck()->exec();
-            if(dao::isError()) return false;
-        }
-
-        return commonModel::createChanges($oldProject, $project);
-    }
-
-    /**
-     * Update project's privilege. 
-     * 
-     * @param  int    $projectID 
-     * @access public
-     * @return object
-     */
-    public function updatePriv($projectID)
-    {
-        $oldProject = $this->getByID($projectID);
-        $project = fixer::input('post')
-            ->join('whitelist', ',')
-            ->join('viewList', ',')
-            ->join('editList', ',')
-            ->setDefault('whitelist', '')
-            ->setDefault('viewList', '')
-            ->setDefault('editList', '')
-            ->get();
-
-        $this->dao->update(TABLE_PROJECT)
-            ->data($project, $skip = 'uid')
-            ->where('id')->eq($projectID)
+        /* Update manager. */
+        $this->dao->delete()->from(TABLE_TEAM)
+            ->where('type')->eq('project')
+            ->andWhere('id')->eq($projectID)
+            ->andWhere('account')->eq($this->post->manager)
+            ->andWhere('role')->ne('manager')
             ->exec();
 
-        if(dao::isError()) return false;
+        $this->dao->update(TABLE_TEAM)
+            ->set('account')->eq($this->post->manager)
+            ->where('type')->eq('project')
+            ->andWhere('id')->eq($projectID)
+            ->andWhere('role')->eq('manager')
+            ->exec();
+
         return commonModel::createChanges($oldProject, $project);
     }
 
@@ -587,40 +523,27 @@ class projectModel extends model
     public function checkPriv($projectID)
     {
         if($this->app->user->admin == 'super') return true;
+
         static $projects, $members, $groups, $groupUsers = array();
         if(empty($groups)) 
         {
             $groups = $this->loadModel('group')->getList(0);
             foreach($groups as $group) $groupUsers[$group->id] = $this->group->getUserPairs($group->id);
 
-            $members  = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id');
+            $members  = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id', 'account');
             $projects = $this->dao->select('*')->from(TABLE_PROJECT)->fetchAll('id');
             foreach($projects as $project)
             {
                 $project->members = isset($members[$project->id]) ? $members[$project->id] : array();
-                $accountList = array();
-                foreach($project->members as $key => $member)
-                {
-                    if(!$member->account) unset($project->members[$key]);
-                    $accountList[] = $member->account;
-                }
+                $accountList = empty($project->members) ? array() : array_keys($project->members);
+                $whitelist   = trim($project->whitelist, ',');
+                $whitelist   = empty($whitelist) ? array() : explode(',', $whitelist);
+                foreach($whitelist as $groupID) foreach($groupUsers[$groupID] as $account => $realname) $accountList[] = $account;
+
                 $project->accountList = $accountList;
             }
         }
 
-        if($projects[$projectID]->acl == 'open') return true;
-        if($projects[$projectID]->acl == 'private') return in_array($this->app->user->account, $projects[$projectID]->accountList);
-        if($projects[$projectID]->acl == 'custom')
-        {
-            $accountList = $projects[$projectID]->accountList;
-            $whitelist   = trim($projects[$projectID]->whitelist, ',');
-            if($whitelist != '')
-            {
-                $whitelist = explode(',', $whitelist);
-                foreach($whitelist as $groupID) foreach($groupUsers[$groupID] as $account => $realname) $accountList[] = $account;
-            }
-            return in_array($this->app->user->account, $accountList);
-        } 
-        return false;
+        return in_array($this->app->user->account, $projects[$projectID]->accountList);
     }
 }

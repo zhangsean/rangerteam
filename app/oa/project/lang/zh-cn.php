@@ -29,6 +29,7 @@ $lang->project->noMatched  = '找不到包含"%s"的项目';
 $lang->project->search     = '搜索';
 $lang->project->import     = '导入';
 $lang->project->importTask = '导入任务';
+$lang->project->role       = '角色';
 
 $lang->project->id          = '编号';
 $lang->project->name        = '项目名称';
@@ -40,12 +41,7 @@ $lang->project->end         = '结束日期';
 $lang->project->createdBy   = '由谁创建';
 $lang->project->createdDate = '创建时间';
 $lang->project->fromproject = '所属项目';
-$lang->project->acl         = '访问权限';
 $lang->project->whitelist   = '白名单';
-$lang->project->privilege   = '权限';
-$lang->project->viewTask    = '查看全部';
-$lang->project->editTask    = '编辑全部';
-$lang->project->task        = '任务权限';
 
 $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = '确认激活此项目？';
@@ -59,6 +55,9 @@ $lang->project->note = new stdclass();
 $lang->project->note->rate = '按工时计算';
 $lang->project->note->task = '任务数';
 
-$lang->project->aclList['open']    = '默认设置(有项目视图权限，即可访问)';
-$lang->project->aclList['private'] = '私有项目(只有项目团队成员才能访问)';
-$lang->project->aclList['custom']  = '自定义白名单(团队成员和白名单的成员可以访问)';
+$lang->project->whitelistTip = '白名单的成员可以查看项目和任务';
+$lang->project->roleTip      = <<<EOF
+管理员：可以查看、编辑、删除所有任务。
+默认：可以查看、编辑所有任务，不能删除他人任务。
+受限：只能查看、编辑、删除与自己相关的任务。
+EOF;

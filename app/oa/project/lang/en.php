@@ -29,6 +29,7 @@ $lang->project->noMatched  = 'No matched project including "%s"';
 $lang->project->search     = 'Search';
 $lang->project->import     = 'Import';
 $lang->project->importTask = 'Import task';
+$lang->project->role       = 'Role';
 
 $lang->project->id          = 'ID';
 $lang->project->name        = 'Name';
@@ -40,12 +41,7 @@ $lang->project->end         = 'End Date';
 $lang->project->createdBy   = 'Created by';
 $lang->project->createdDate = 'Created date';
 $lang->project->fromproject = 'FromProject';
-$lang->project->acl         = 'Access';
 $lang->project->whitelist   = 'Whitelist';
-$lang->project->privilege   = 'Privilage';
-$lang->project->viewTask    = "View all";
-$lang->project->editTask    = "Edit all";
-$lang->project->task        = 'Task privilege';
 
 $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = 'Are you sure to activate this projcet?';
@@ -59,6 +55,9 @@ $lang->project->note = new stdclass();
 $lang->project->note->rate = 'According to working hours';
 $lang->project->note->task = 'The number of tasks';
 
-$lang->project->aclList['open']    = 'Default(Having the priviledge of Project module can visit this Project)';
-$lang->project->aclList['private'] = 'Private(Only team members can visit)';
-$lang->project->aclList['custom']  = 'Whitelist(Team members and who belongs to the whitelist grups can visit)';
+$lang->project->whitelistTip = 'who belongs to the whitelist grups can visit project and tasks.';
+$lang->project->roleTip      = <<<EOF
+Manager: Can view, edit and delete all task;
+Default: Can view and edit all task, can't delete other's task.
+Limited: Can view, edit and delete self task.
+EOF;
