@@ -55,9 +55,11 @@ $lang->project->note = new stdclass();
 $lang->project->note->rate = 'According to working hours';
 $lang->project->note->task = 'The number of tasks';
 
-$lang->project->whitelistTip = 'who belongs to the whitelist grups can visit project and tasks.';
-$lang->project->roleTip      = <<<EOF
-Manager: Can view, edit and delete all task;
-Default: Can view and edit all task, can't delete other's task.
-Limited: Can view, edit and delete self task.
-EOF;
+$lang->project->roleList['member']  = 'Default';
+$lang->project->roleList['senior']  = 'Manager';
+$lang->project->roleList['limited'] = 'Limited';
+
+$lang->project->whitelistTip      = 'who belongs to the whitelist grups can visit project and tasks.';
+$lang->project->roleTips['senior'] = "Manager: Can view, edit and delete all task.";
+$lang->project->roleTips['senior'] = "Default: Can view and edit all task, can't delete other's task.";
+$lang->project->roleTips['senior'] = "Limited: Can view, edit and delete self task.";

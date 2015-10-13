@@ -55,9 +55,11 @@ $lang->project->note = new stdclass();
 $lang->project->note->rate = '按工时计算';
 $lang->project->note->task = '任务数';
 
-$lang->project->whitelistTip = '白名单的成员可以查看项目和任务';
-$lang->project->roleTip      = <<<EOF
-管理员：可以查看、编辑、删除所有任务。
-默认：可以查看、编辑所有任务，不能删除他人任务。
-受限：只能查看、编辑、删除与自己相关的任务。
-EOF;
+$lang->project->roleList['member']  = '默认';
+$lang->project->roleList['senior']  = '管理员';
+$lang->project->roleList['limited'] = '受限';
+
+$lang->project->whitelistTip        = '白名单的成员可以查看项目和任务';
+$lang->project->roleTips['senior']  = "管理员：可以查看、编辑、删除所有任务。";
+$lang->project->roleTips['member']  = "默认：可以查看、编辑所有任务，不能删除他人任务。";
+$lang->project->roleTips['limited'] = "受限：只能查看、编辑、删除与自己相关的任务。";

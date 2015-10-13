@@ -231,6 +231,46 @@ class projectModel extends model
     }
 
     /**
+     * Update project's members. 
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return array
+     */
+    public function updateMembers($projectID)
+    {
+        $oldProject = $this->getById($projectID);
+        $members    = array();
+        $project    = new stdclass();
+
+        /* Delete old member. */
+        $this->dao->delete()->from(TABLE_TEAM)
+            ->where('type')->eq('project')
+            ->andWhere('id')->eq($projectID)
+            ->andWhere('role')->ne('manager')
+            ->exec();
+
+        /* save new members. */
+        if(!empty($_POST['member']))
+        {
+            foreach($this->post->member as $key => $account)
+            {
+                if(empty($account)) continue;
+                $member = new stdclass();
+                $member->type    = 'project';
+                $member->id      = $projectID;
+                $member->account = $account;
+                $member->role    = $this->post->role[$key];
+                $this->dao->insert(TABLE_TEAM)->data($member)->autoCheck()->exec();
+                $members[$account] = $member;
+            }
+        }
+
+        $project->members = $members;
+        return commonModel::createChanges($oldProject, $project);
+    }
+
+    /**
      * Active project.
      * 
      * @param  int    $projectID 
