@@ -1,10 +1,10 @@
-.attend-normal {background: #8BC34A}
-.attend-late {background: #FFCCBC;}
-.attend-early {background: #FF8A65;}
-.attend-both {background: #FF5722;}
-.attend-absent {background: #FFFF00;}
-.attend-leave {background: #9E9E9E}
-.attend-trip {background: #E0E0E0}
+.attend-normal {color: #8BC34A;}
+.attend-late   {color: #EA644A;}
+.attend-early  {color: #FF8A65;}
+.attend-both   {color: #FF5722;}
+.attend-absent {color: #F1A325;}
+.attend-leave  {color: #9E9E9E;}
+.attend-trip   {color: #E0E0E0;}
 .attend-rest {}
 
 .valign-middle {vertical-align: middle !important;}
