@@ -53,7 +53,7 @@
           <tr class='text-center'>
             <?php $weekOffset = date('w', strtotime("$currentYear-$currentMonth-01")) - 1;?>
             <?php for($day = 1; $day <= $dayNum; $day++):?>
-            <th><?php echo $lang->datepicker->dayNames[($day + $weekOffset) % 7]?></th>
+            <th><?php echo $lang->datepicker->abbrDayNames[($day + $weekOffset) % 7]?></th>
             <?php endfor;?>
           </tr>
         </thead>
