@@ -47,7 +47,7 @@ $lang->attend->abbrStatusList['leave']  = '假';
 $lang->attend->abbrStatusList['trip']   = '差';
 $lang->attend->abbrStatusList['rest']   = '休';
 
-$lang->attend->reasonList['normal'] = '正常';
+$lang->attend->reasonList['normal'] = '准点上下班';
 $lang->attend->reasonList['trip']   = '出差';
 $lang->attend->reasonList['leave']  = '请假';
 
