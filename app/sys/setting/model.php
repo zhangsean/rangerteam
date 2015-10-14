@@ -191,19 +191,10 @@ class settingModel extends model
         $owner = 'system,' . ($account ? $account : '');
         $app   = $this->app->getAppName();
 
-        $sysRecords = $this->dao->select('*')->from(TABLE_CONFIG)
+        $records = $this->dao->select('*')->from(TABLE_CONFIG)
             ->where('owner')->in($owner)
-            ->andWhere('app')->eq('sys')
             ->orderBy('id')
             ->fetchAll('id');
-
-        $appRecords = $this->dao->select('*')->from(TABLE_CONFIG)
-            ->where('owner')->in($owner)
-            ->andWhere('app')->in($app)
-            ->orderBy('id')
-            ->fetchAll('id');
-
-       $records = array_merge($sysRecords, $appRecords); 
 
         if(!$records) return array();
 

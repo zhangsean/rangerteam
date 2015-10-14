@@ -41,9 +41,61 @@ class commonModel extends model
         $this->config->system   = isset($config['system']) ? $config['system'] : new stdclass();
         $this->config->personal = isset($config[$account]) ? $config[$account] : new stdclass();
 
-        /* Overide the items defined in config/config.php and config/my.php. */
-        if(isset($this->config->system->common))   helper::mergeConfig($this->config->system->common,   'common');
-        if(isset($this->config->personal->common)) helper::mergeConfig($this->config->personal->common, 'common');
+        foreach($this->config->system as $module => $records)
+        {
+            if($module == 'common')
+            {
+                /* Overide the items defined in config/config.php and config/my.php. */
+                if(isset($this->config->system->common)) helper::mergeConfig($this->config->system->common,   'common');
+            }
+            else
+            {
+                foreach($this->config->system->$module as $record)
+                {
+                    if($record->module)
+                    {
+                        if(!isset($this->config->{$record->module})) $this->config->{$record->module} = new stdclass();
+                        if($record->section)
+                        {
+                            if(!isset($this->config->{$record->module}->{$record->section})) $this->config->{$record->module}->{$record->section} = new stdclass();
+                            if($record->key) $this->config->{$record->module}->{$record->section}->{$record->key} = $record->value;
+                        }
+                        else
+                        {
+                            if(!$record->section) $this->config->{$record->module}->{$record->key} = $record->value;
+                        }
+                    }
+                }
+            }
+        }
+
+        foreach($this->config->personal as $module => $records)
+        {
+            if($module == 'common')
+            {
+                /* Overide the items defined in config/config.php and config/my.php. */
+                if(isset($this->config->personal->common)) helper::mergeConfig($this->config->personal->common, 'common');
+            }
+            else
+            {
+                foreach($this->config->personal->$module as $record)
+                {
+                    if($record->module)
+                    {
+                        if(!isset($this->config->{$record->module})) $this->config->{$record->module} = new stdclass();
+                        if($record->section)
+                        {
+                            if(!isset($this->config->{$record->module}->{$record->section})) $this->config->{$record->module}->{$record->section} = new stdclass();
+                            if($record->key) $this->config->{$record->module}->{$record->section}->{$record->key} = $record->value;
+                        }
+                        else
+                        {
+                            if(!$record->section) $this->config->{$record->module}->{$record->key} = $record->value;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
