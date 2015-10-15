@@ -55,10 +55,7 @@ class taskModel extends model
         if($this->session->taskQuery == false) $this->session->set('taskQuery', ' 1 = 1');
         $taskQuery  = $this->loadModel('search', 'sys')->replaceDynamic($this->session->taskQuery);
         $project    = $this->loadModel('project', 'oa')->getByID($projectID);
-
-        $canViewAll = $this->app->user->admin == 'super';
-        $canViewAll = $canViewAll or (in_array($this->app->user->account, $project->members) and $project->member[$this->app->user->account]->role == 'manager');
-        $canViewAll = $canViewAll or (in_array($this->app->user->account, $project->members) and $project->member[$this->app->user->account]->role == 'senior');
+        $canViewAll = $this->viewAllTask($projectID);
 
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
@@ -147,10 +144,7 @@ class taskModel extends model
     {
         if(is_string($type)) $type = strtolower($type);
         $project    = $this->loadModel('project', 'oa')->getByID($projectID);
-
-        $canViewAll = $this->app->user->admin == 'super';
-        $canViewAll = $canViewAll or (in_array($this->app->user->account, $project->member) and $project->member[$this->app->user->account]->role == 'manager');
-        $canViewAll = $canViewAll or (in_array($this->app->user->account, $project->member) and $project->member[$this->app->user->account]->role == 'senior');
+        $canViewAll = $this->viewAllTask($projectID);
 
         $tasks = $this->dao->select("*")
             ->from(TABLE_TASK)
@@ -201,14 +195,14 @@ class taskModel extends model
 
         if($groupBy != 'status' and !empty($project->members))
         {
-            foreach($project->members as $member) if(!isset($tasks[$member])) $tasks[$member] = array();
-
-            foreach($tasks as $groupKey => $task)
-            {
-                if($groupKey == '') $taskGroups[''] = $tasks[''];
-                foreach($project->members as $member) $taskGroups[$member] = $tasks[$member];
-                if(!in_array($groupKey, $project->members)) $taskGroups[$groupKey] = $tasks[$groupKey];
-            }
+            /* Add member to $tasks which no tasks. */
+            foreach($project->members as $key => $member) if(!isset($tasks[$key])) $tasks[$key] = array();
+            /* Add empty key group to $taskGroups. */
+            foreach($tasks as $groupKey => $task) if($groupKey == '') $taskGroups[''] = $tasks[''];
+            /* Add member's task to $taskGroups. */
+            foreach($project->members as $key => $member) $taskGroups[$key] = $tasks[$key];
+            /* Add other member's task to $taskGroups. */
+            foreach($tasks as $groupKey => $task) if(!in_array($groupKey, $project->members)) $taskGroups[$groupKey] = $tasks[$groupKey];
         }
 
         if(!empty($taskGroups)) return $taskGroups;
@@ -809,6 +803,51 @@ class taskModel extends model
     }
 
     /**
+     * is could view all tasks. 
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return bool
+     */
+    public function viewAllTask($projectID)
+    {
+        if($this->app->user->admin == 'super') return true;
+        if(!empty($this->app->user->rights['task']['viewall'])) return true;
+        if(!empty($this->app->user->rights['task']['editall'])) return true;
+        if($action == 'delete' and !empty($this->app->user->rights['task']['deleteall'])) return true;
+
+        static $projects;
+        if(empty($projects)) 
+        {
+            $projects = $this->loadModel('project', 'oa')->getList();
+            /* Process whitelist. */
+            $groups = $this->loadModel('group')->getList(0);
+            foreach($groups as $group) $groupUsers[$group->id] = $this->group->getUserPairs($group->id);
+            foreach($projects as $project)
+            {
+                $accountList = array();
+                $whitelist = trim($project->whitelist, ',');
+                $whitelist = empty($whitelist) ? array() : explode(',', $whitelist);
+                foreach($whitelist as $groupID) foreach($groupUsers[$groupID] as $account => $realname) $accountList[] = $account;
+                $project->whitelist = $accountList;
+            }
+            $account = $this->app->user->account;
+            $project = isset($projects[$projectID]) ? $projects[$projectID] : new stdclass();
+            if(empty($project)) return false;
+
+            /* manager, senior or member. */
+            if(isset($project->members[$account]))
+            {
+                if(strpos(',manager,senior,member,', $project->members[$account]->role) !== false) return true;
+                return false;
+            }
+
+            if(in_array($account, $project->whitelist)) return true;
+            return false;
+        }
+    }
+
+    /**
      * Check task's privilege for action. 
      * 
      * @param  object $task 
@@ -819,16 +858,60 @@ class taskModel extends model
     public function checkPriv($task, $action)
     {
         if($this->app->user->admin == 'super') return true;
+        if($action == 'view' and !empty($this->app->user->rights['task']['viewall'])) return true;
+        if(strpos(',edit,recordestimate,assignto,start,finish,close,activate,cancel,', ",$action,") !== false and !empty($this->app->user->rights['task']['editall'])) return true;
+        if($action == 'delete' and !empty($this->app->user->rights['task']['deleteall'])) return true;
 
         static $projects;
-        if(empty($projects)) $projects = $this->loadModel('project', 'oa')->getList();
+        if(empty($projects)) 
+        {
+            $projects = $this->loadModel('project', 'oa')->getList();
+            /* Process whitelist. */
+            $groups = $this->loadModel('group')->getList(0);
+            foreach($groups as $group) $groupUsers[$group->id] = $this->group->getUserPairs($group->id);
+            foreach($projects as $project)
+            {
+                $accountList = array();
+                $whitelist = trim($project->whitelist, ',');
+                $whitelist = empty($whitelist) ? array() : explode(',', $whitelist);
+                foreach($whitelist as $groupID) foreach($groupUsers[$groupID] as $account => $realname) $accountList[] = $account;
+                $project->whitelist = $accountList;
+            }
+        }
         $action  = strtolower($action);  
         $account = $this->app->user->account;
+        $project = isset($projects[$task->project]) ? $projects[$task->project] : new stdclass();
+        if(empty($project)) return false;
 
-        //if($projects[$task->project]->acl == 'open') return true;
-        //if($action == 'view') return in_array($account, $projects[$task->project]->viewList);
-        //if(strpos(',edit,assignto,start,finish,close,activate,cancel,delete,', $action) !== false) return in_array($account, $projects[$task->project]->editList);
-        return true;
+        /* manager and senior member. */
+        if(isset($project->member[$account]) and (strpos(',manager,senior,', $project->member[$account]->role) !== false)) return true;
+
+        /* default member. */
+        if(isset($project->member[$account]) and $project->member[$account]->role == 'member')
+        {
+            if(strpos(',view,edit,recordestimate,assignto,start,finish,close,activate,cancel,', ",$action,") !== false) return true;
+            if($action == 'delete')
+            {
+                if(strpos(",{$task->createdBy},{$task->assignedTo},{$task->finishedBy},", ",$account,") !== false) return true;
+            }
+        }
+
+        /* limited member. */
+        if(isset($project->member[$account]) and $project->member[$account]->role == 'limited')
+        {
+            if(strpos(',view,edit,recordestimate,assignto,start,finish,close,activate,cancel,', ",$action,") !== false)
+            {
+                if(strpos(",{$task->createdBy},{$task->assignedTo},{$task->finishedBy},", ",$account,") !== false) return true;
+            }
+        }
+
+        /* whitelist. */
+        if(in_array($account, $project->whitelist))
+        {
+            if($action == 'view') return true;
+        }
+
+        return false;
     }
 
     /**
@@ -843,10 +926,11 @@ class taskModel extends model
      */
     public function buildOperateMenu($task, $class = '', $type = 'browse', $print = true)
     {
-        $menu     = $type == 'view' ? "<div class='btn-group'>" : '';
-        $canEdit  = $this->checkPriv($task, 'edit');
-        $isParent = !empty($task->children);
-        $isMulti  = !empty($task->team);
+        $menu      = $type == 'view' ? "<div class='btn-group'>" : '';
+        $canEdit   = $this->checkPriv($task, 'edit');
+        $canDelete = $this->checkPriv($task, 'delete');
+        $isParent  = !empty($task->children);
+        $isMulti   = !empty($task->team);
 
         $disabled = ($canEdit and self::isClickable($task, 'assignto')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
@@ -892,7 +976,7 @@ class taskModel extends model
         if($type == 'view') $menu .= "</div><div class='btn-group'>";
         $disabled = $canEdit ? '' : 'disabled';
         $menu    .= commonModel::printLink('task', 'edit', "taskID=$task->id", $this->lang->edit, "class='$class $disabled'", false);
-        $disabled = $canEdit ? '' : 'disabled';
+        $disabled = $canDelete ? '' : 'disabled';
         $deleter  = $type == 'browse' ? 'reloadDeleter' : 'deleter';
         $menu    .= commonModel::printLink('task', 'delete', "taskID=$task->id", $this->lang->delete, "class='$deleter $class $disabled'", false);
         if($type == 'view') $menu .= "</div>";

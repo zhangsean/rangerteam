@@ -61,5 +61,5 @@ $lang->project->roleList['limited'] = '受限';
 
 $lang->project->whitelistTip        = '白名单的成员可以查看项目和任务';
 $lang->project->roleTips['senior']  = "管理员：可以查看、编辑、删除所有任务。";
-$lang->project->roleTips['member']  = "默认：可以查看、编辑所有任务，不能删除他人任务。";
-$lang->project->roleTips['limited'] = "受限：只能查看、编辑、删除与自己相关的任务。";
+$lang->project->roleTips['member']  = "默认：可以查看、编辑所有任务，删除与自己相关的任务。";
+$lang->project->roleTips['limited'] = "受限：只能查看、编辑与自己相关的任务。";

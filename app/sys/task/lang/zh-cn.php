@@ -27,6 +27,9 @@ $lang->task->export   = '导出任务';
 
 $lang->task->batchCreate    = '批量添加';
 $lang->task->backToProjects = '返回项目列表'; 
+$lang->task->viewAll        = '浏览所有项目任务';
+$lang->task->editAll        = '操作所有项目任务';
+$lang->task->deleteAll      = '删除所有项目任务';
 
 $lang->task->id             = '编号';
 $lang->task->project        = '所属项目';

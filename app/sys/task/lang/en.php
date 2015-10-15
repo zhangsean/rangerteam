@@ -27,6 +27,9 @@ $lang->task->export   = 'Export';
 
 $lang->task->batchCreate    = 'Batch Create';
 $lang->task->backToProjects = 'Back to project list'; 
+$lang->task->viewAll        = "View all project's task";
+$lang->task->editAll        = "Edit all project's task";
+$lang->task->deleteAll      = "Delete all project's task";
 
 $lang->task->id             = 'ID';
 $lang->task->project        = 'Project';

@@ -145,6 +145,9 @@ class task extends control
      */
     public function edit($taskID)
     {
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'edit');
+
         if($_POST)
         {
             $changes = $this->task->update($taskID);
@@ -162,9 +165,6 @@ class task extends control
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer));
         }
-
-        $task = $this->task->getByID($taskID);
-        $this->checkPriv($task, 'edit');
 
         $members = $this->loadModel('project')->getMemberPairs($task->project);
 
@@ -209,6 +209,9 @@ class task extends control
      */
     public function recordEstimate($taskID)
     {
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'recordEstimate');
+
         if($_POST)
         {
             $changes = $this->task->recordEstimate($taskID);
@@ -223,7 +226,6 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
-        $task = $this->task->getByID($taskID);
         $left = $task->left;
         if(!empty($task->team) and $task->assignedTo != '') $left = $task->team[$task->assignedTo]->left; 
 
@@ -242,6 +244,9 @@ class task extends control
      */
     public function finish($taskID) 
     {
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'finish');
+
         if($_POST)
         {
             $changes = $this->task->finish($taskID);
@@ -260,8 +265,6 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
-        $task = $this->task->getByID($taskID);
-        $this->checkPriv($task, 'finish');
         $status = 'finish';
         foreach($task->children as $child) if($child->status == 'wait' or $child->status == 'doing') $status = '';
 
@@ -281,6 +284,9 @@ class task extends control
      */
     public function start($taskID)
     {
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'start');
+
         if(!empty($_POST))
         {
             if($this->post->doStart != 'yes')
@@ -301,9 +307,6 @@ class task extends control
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
-
-        $task = $this->task->getByID($taskID);
-        $this->checkPriv($task, 'start');
 
         $this->view->taskID = $taskID; 
         $this->view->task   = $task;
@@ -363,6 +366,9 @@ class task extends control
      */
     public function activate($taskID)
     {
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'activate');
+
         if($_POST)
         {
             $changes = $this->task->activate($taskID);
@@ -375,9 +381,6 @@ class task extends control
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
-
-        $task = $this->task->getByID($taskID);
-        $this->checkPriv($task, 'activate');
 
         /* Set task team member if exists task team. */
         $members = $this->loadModel('project')->getMemberPairs($task->project);
@@ -398,6 +401,9 @@ class task extends control
      */
     public function cancel($taskID)
     {
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'cancel');
+
         if($_POST)
         {
             $changes = $this->task->cancel($taskID);
@@ -410,8 +416,6 @@ class task extends control
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
-        $task = $this->task->getByID($taskID);
-        $this->checkPriv($task, 'cancel');
 
         $this->view->title  = $this->lang->task->cancel;
         $this->view->taskID = $taskID;
@@ -427,6 +431,9 @@ class task extends control
      */
     public function close($taskID)
     {
+        $task = $this->task->getByID($taskID);
+        $this->checkPriv($task, 'close');
+
         if($_POST)
         {
             $changes = $this->task->close($taskID);
@@ -451,9 +458,6 @@ class task extends control
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
-
-        $task = $this->task->getByID($taskID);
-        $this->checkPriv($task, 'close');
 
         $this->view->title  = $this->lang->task->close;
         $this->view->taskID = $taskID;
@@ -500,7 +504,9 @@ class task extends control
     {
         if($_POST)
         {
-            $task = $this->dao->select('*')->from(TABLE_TASK)->where('id')->eq($this->post->id)->fetch();
+            $task = $this->task->getByID($this->post->id);
+            $this->checkPriv($task, 'delete');
+
             unset($task->canceledDate);
             unset($task->canceledBy);
             unset($task->finishedDate);
@@ -786,23 +792,25 @@ class task extends control
      * 
      * @param  object $task 
      * @param  string $action 
+     * @param  string $errorType   html|json 
      * @access private
      * @return void
      */
-    private function checkPriv($task, $action)
+    private function checkPriv($task, $action, $errorType = '')
     {
         if(!$this->task->checkPriv($task, $action))
         {
-            if(empty($_POST))
+            if($errorType == '') $errorType = empty($_POST) ? 'html' : 'json';
+            if($errorType == 'json')
+            {
+                $this->app->loadLang('error');
+                $this->send(array('result' => 'fail', 'message' => $this->lang->error->typeList['accessLimited']));
+            }
+            else
             {
                 $locate = helper::safe64Encode($this->server->http_referer);
                 $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
                 $this->locate($errorLink);
-            }
-            else
-            {
-                $this->app->loadLang('error');
-                $this->send(array('result' => 'fail', 'message' => $this->lang->error->typeList['accessLimited']));
             }
         }
         return true;

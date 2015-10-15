@@ -61,5 +61,5 @@ $lang->project->roleList['limited'] = 'Limited';
 
 $lang->project->whitelistTip      = 'who belongs to the whitelist grups can visit project and tasks.';
 $lang->project->roleTips['senior'] = "Manager: Can view, edit and delete all task.";
-$lang->project->roleTips['senior'] = "Default: Can view and edit all task, can't delete other's task.";
-$lang->project->roleTips['senior'] = "Limited: Can view, edit and delete self task.";
+$lang->project->roleTips['senior'] = "Default: Can view and edit all task, can delete self task.";
+$lang->project->roleTips['senior'] = "Limited: Can view and edit self task.";

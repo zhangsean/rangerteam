@@ -33,6 +33,7 @@ $lang->appModule->cash[] = 'schema';
 $lang->appModule->oa = array();
 $lang->appModule->oa[] = 'announce';
 $lang->appModule->oa[] = 'doc';
+$lang->appModule->oa[] = 'task';
 $lang->appModule->oa[] = 'attend';
 $lang->appModule->oa[] = 'holiday';
 $lang->appModule->oa[] = 'leave';
@@ -63,10 +64,11 @@ $lang->moduleOrder[30]  = 'trade';
 $lang->moduleOrder[35]  = 'depositor';
 $lang->moduleOrder[40]  = 'balance';
 $lang->moduleOrder[42]  = 'provider';
-$lang->moduleOrder[43] = 'schema';
+$lang->moduleOrder[43]  = 'schema';
 
 $lang->moduleOrder[50]  = 'announce';
 $lang->moduleOrder[55]  = 'doc';
+$lang->moduleOrder[57]  = 'task';
 $lang->moduleOrder[65]  = 'todo';
 $lang->moduleOrder[70]  = 'attend';
 $lang->moduleOrder[75]  = 'holiday';
@@ -78,7 +80,7 @@ $lang->moduleOrder[95]  = 'forum';
 $lang->moduleOrder[100] = 'thread';
 $lang->moduleOrder[105] = 'user';
 
-$lang->moduleOrder[110]  = 'tree';
+$lang->moduleOrder[110] = 'tree';
 $lang->moduleOrder[115] = 'setting';
 
 $lang->resource = new stdclass();
@@ -341,6 +343,16 @@ $lang->todo->methodOrder[15] = 'edit';
 $lang->todo->methodOrder[20] = 'view';
 $lang->todo->methodOrder[25] = 'delete';
 $lang->todo->methodOrder[30] = 'finish';
+
+/* Task. */
+$lang->resource->task = new stdclass();
+$lang->resource->task->viewAll   = 'viewAll';
+$lang->resource->task->editAll   = 'editAll';
+$lang->resource->task->deleteAll = 'deleteAll';
+
+$lang->task->methodOrder[5]  = 'viewAll';
+$lang->task->methodOrder[10] = 'editAll';
+$lang->task->methodOrder[15] = 'deleteAll';
 
 /* Announce. */
 $lang->resource->announce = new stdclass();

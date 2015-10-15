@@ -563,6 +563,9 @@ class projectModel extends model
     public function checkPriv($projectID)
     {
         if($this->app->user->admin == 'super') return true;
+        if(!empty($this->app->user->rights['task']['viewall']))   return true;
+        if(!empty($this->app->user->rights['task']['editall']))   return true;
+        if(!empty($this->app->user->rights['task']['deleteall'])) return true;
 
         static $projects, $members, $groups, $groupUsers = array();
         if(empty($groups)) 

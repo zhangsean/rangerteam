@@ -65,6 +65,8 @@ class project extends control
      */
     public function edit($projectID)
     {
+        $this->checkPriv($projectID);
+
         if($_POST)
         {
             $changes  = $this->project->update($projectID);
@@ -91,6 +93,8 @@ class project extends control
      */
     public function member($projectID)
     {
+        $this->checkPriv($projectID);
+
         if($_POST)
         {
             $changes  = $this->project->updateMembers($projectID);
@@ -117,6 +121,8 @@ class project extends control
      */
     public function finish($projectID) 
     {
+        $this->checkPriv($projectID);
+
         if($_POST)
         {
             $changes = $this->project->finish($projectID);
@@ -147,6 +153,7 @@ class project extends control
      */
     public function activate($projectID)
     {
+        $this->checkPriv($projectID, '', 'json');
         $result = $this->project->activate($projectID);
         if($result) $this->send(array('result' => 'success', 'message' => $this->lang->project->activateSuccess));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -161,6 +168,7 @@ class project extends control
      */
     public function suspend($projectID)
     {
+        $this->checkPriv($projectID, '', 'json');
         if($this->project->suspend($projectID)) $this->send(array('result' => 'success', 'message' => $this->lang->project->suspendSuccess));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
@@ -174,6 +182,7 @@ class project extends control
      */
     public function delete($projectID)
     {
+        $this->checkPriv($projectID, '', 'json');
         $this->project->delete(TABLE_PROJECT, $projectID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
@@ -188,6 +197,8 @@ class project extends control
      */
     public function importTask($toProject, $fromProject = 0)
     {   
+        $this->checkPriv($projectID);
+
         if(!empty($_POST))
         {
             $this->project->importTask($toProject, $fromProject);
@@ -213,6 +224,35 @@ class project extends control
         $this->view->fromProject    = $fromProject;
         $this->view->users          = $this->loadModel('user')->getPairs();
         $this->display();
+    }
+
+    /**
+     * Check project privilege and locate index if no privilege. 
+     * 
+     * @param  int    $projectID 
+     * @param  string $action 
+     * @param  string $errorType   html|json
+     * @access private
+     * @return void
+     */
+    public function checkPriv($projectID, $action = '', $errorType = '')
+    {
+        if(!$this->project->checkPriv($projectID))
+        {
+            if($errorType == '') $errorType = empty($_POST) ? 'html' : 'json';
+            if($errorType == 'json')
+            {
+                $this->app->loadLang('error');
+                $this->send(array('result' => 'fail', 'message' => $this->lang->error->typeList['accessLimited']));
+            }
+            else
+            {
+                $locate = helper::safe64Encode($this->server->http_referer);
+                $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
+                $this->locate($errorLink);
+            }
+        }
+        return true;
     }
 
     /**
