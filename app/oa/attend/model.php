@@ -118,7 +118,6 @@ class attendModel extends model
         /* Fix user's record. */
         foreach($newAttends as $dept => $deptAttends)
         {
-
             foreach($newAttends[$dept] as $user => $userAttends)
             {
                 if($reviewStatus == '') $newAttends[$dept][$user] = $this->fixUserAttendList($newAttends[$dept][$user], $startDate, $endDate, $user);
@@ -127,6 +126,17 @@ class attendModel extends model
         }
 
         return $newAttends;
+    }
+
+    /**
+     * Get wait attends.
+     * 
+     * @access public
+     * @return array()
+     */
+    public function getWaitAttends()
+    {
+        return $this->dao->select('*')->from(TABLE_ATTEND)->where('reviewStatus')->eq('wait')->fetchAll();
     }
 
     /**

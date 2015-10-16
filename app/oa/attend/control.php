@@ -172,13 +172,14 @@ class attend extends control
 
             /* Get fields. */
             $this->app->loadLang('user');
+            $fields['id']       = $this->lang->attend->id;
             $fields['dept']     = $this->lang->user->dept;
             $fields['realname'] = $this->lang->user->realname;
             for($i = 1; $i <= $dayNum; $i++)
             {
                 $currentDate  = date("Y-m-d", strtotime("$currentYear-$currentMonth-$i"));
                 $dayNameIndex = date('w', strtotime($currentDate));
-                $fields[$currentDate] = "$i({$this->lang->datepicker->dayNames[$dayNameIndex]})";
+                $fields[$currentDate] = "$currentDate({$this->lang->datepicker->dayNames[$dayNameIndex]})";
             }
 
             /* Get row data. */
@@ -188,41 +189,16 @@ class attend extends control
                 foreach($deptAttendList as $account => $attendList)
                 {
                     $data = new stdclass();
+                    $data->id       = $users[$account]->id;
                     $data->dept     = $deptList[$users[$account]->dept];
                     $data->realname = $users[$account]->realname;
                     for($i = 1; $i <= $dayNum; $i++)
                     {
                         $currentDate  = date("Y-m-d", strtotime("$currentYear-$currentMonth-$i"));
-                        $data->$currentDate = isset($attendList[$currentDate]) ? zget($this->lang->attend->markStatusList, $attendList[$currentDate]->status) : '';
+                        $data->$currentDate = isset($attendList[$currentDate]) ? $this->lang->attend->statusList[$attendList[$currentDate]->status] : '';
                     }
                     $datas[] = $data;
                 }
-            }
-
-            /* Get legend. */
-            if(!empty($datas))
-            {
-                $data = new stdclass();
-                $data->dept = '';
-                $datas[] = $data;
-
-                $legend = array();
-                foreach($this->lang->attend->statusList as $key => $value)
-                {
-                    $legend[] = $value;
-                    $legend[] = $this->lang->attend->markStatusList[$key];
-                    $legend[] = '';
-                }
-
-                $data = new stdclass();
-                $i    = 0;
-                foreach($fields as $key => $value)
-                {
-                    if(!isset($legend[$i])) continue;
-                    $data->$key = $legend[$i];
-                    $i++;
-                }
-                $datas[] = $data;
             }
 
             $this->post->set('fields', $fields);
@@ -288,6 +264,8 @@ class attend extends control
         $this->view->signOutLimit = $this->config->attend->signOutLimit;
         $this->view->workingDays  = $this->config->attend->workingDays;
         $this->view->mustSignOut  = $this->config->attend->mustSignOut;
+        $this->view->reviewedBy   = isset($this->config->attend->reviewedBy) ? $this->config->attend->reviewedBy : '';
+        $this->view->users        = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
@@ -327,23 +305,39 @@ class attend extends control
     public function browseReview($dept = '', $reviewStatus = 'wait')
     {
         $attends  = array();
-        $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
-        if(!empty($deptList)) 
-        {
-            if($dept == '' or !isset($deptList[$dept])) $dept = current($deptList)->id;
-            $attends = $this->attend->getByDept($dept, $startDate = '', $endDate = '', $reviewStatus);
-        }
-
         $users    = $this->loadModel('user')->getList($dept);
         $newUsers = array();
         foreach($users as $key => $user) $newUsers[$user->account] = $user;
 
-        $this->view->title        = $this->lang->attend->review;
-        $this->view->attends      = $attends;
-        $this->view->currentDept  = $dept;
-        $this->view->reviewStatus = $reviewStatus;
-        $this->view->deptList     = $deptList;
-        $this->view->users        = $newUsers;
+        $this->view->title = $this->lang->attend->review;
+        $this->view->users = $newUsers;
+
+        if(!empty($this->config->attend->reviewedBy))
+        { 
+            if($this->config->attend->reviewedBy == $this->app->user->account)
+            {
+                $deptList = $this->loadModel('tree')->getChildren(0, 'dept');
+                $attends  = $this->attend->getWaitAttends();
+
+                $this->view->attends  = $attends;
+                $this->view->deptList = $deptList;
+            }
+        }
+        else
+        {
+            $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+            if(!empty($deptList)) 
+            {
+                if($dept == '' or !isset($deptList[$dept])) $dept = current($deptList)->id;
+                $attends = $this->attend->getByDept($dept, $startDate = '', $endDate = '', $reviewStatus);
+            }
+
+            $this->view->attends      = $attends;
+            $this->view->deptList     = $deptList;
+            $this->view->reviewStatus = $reviewStatus;
+            $this->view->currentDept  = $dept;
+        }
+
         $this->display();
     }
 
