@@ -43,40 +43,58 @@
         <?php $dayIndex = date('w', $startDate);?>
         <?php if($dayIndex == 1):?>
         <div class='panel'>
-          <div class='panel-heading'>
-            <strong><?php echo $lang->attend->weeks[$weekIndex];?></strong>
-          </div>
           <div class='panel-body no-padding'>
             <table class='table table-data table-fixed text-center'>
-              <tr>
-                <th><?php echo $lang->attend->date;?></th>
-                <th class='text-center'><?php echo $lang->attend->dayName;?></th>
-                <th class='text-center'><?php echo $lang->attend->signIn;?></th>
-                <th class='text-center'><?php echo $lang->attend->signOut;?></th>
-              </tr>
+              <thead>
+                <tr>
+                  <th class='w-80px'><?php echo $lang->attend->weeks[$weekIndex];?></th>
+                  <th class='text-center'><?php echo $lang->attend->dayName;?></th>
+                  <th class='text-center'><?php echo $lang->attend->signIn;?></th>
+                  <th class='text-center'><?php echo $lang->attend->signOut;?></th>
+                  <th class='text-center w-100px'><?php echo $lang->actions . '/' . $lang->attend->status;?></th>
+                </tr>
+              </thead>
         <?php endif;?>
               <?php $currentDate = date("Y-m-d", $startDate);?>
               <?php if(isset($attends[$currentDate])):?>
               <?php $status = $attends[$currentDate]->status;?>
+              <?php $reason = $attends[$currentDate]->reason;?>
               <tr class="attend-<?php echo $status?> <?php echo (date('m', $startDate) == $currentMonth) ? '' : 'otherMonth'?>" title='<?php echo $lang->attend->statusList[$status]?>'>
                 <td><?php echo $currentDate;?></td>
-                <td><?php echo $lang->datepicker->dayNames[$dayIndex]?></td>
-                <?php $url = $this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate));?>
+                <td><?php echo $lang->datepicker->abbrDayNames[$dayIndex]?></td>
                 <td class='attend-signin'>
-                  <?php $signIn = substr($attends[$currentDate]->signIn, 0, 5);?>
-                  <?php if(strpos(',late,both,absent,', $status) !== false) $signIn = html::a($url, $signIn . " <i class='icon icon-edit'></i>" , "data-toggle='modal' data-width='500px' data-title='{$lang->attend->edit}'");?>
+                  <?php $signIn = substr($attends[$currentDate]->signIn, 0, 5); $currentDate;?>
+                  <?php if(strpos(',late,both,absent,', $status) !== false) $signIn = $lang->attend->statusList[$status];?>
                   <?php echo $signIn;?>
                 </td>
                 <td class='attend-signout'>
                   <?php $signOut = substr($attends[$currentDate]->signOut, 0, 5);?>
-                  <?php if(strpos(',early,both,absent,', $status) !== false) $signOut = html::a($url, $signOut . " <i class='icon icon-edit'></i>" , "data-toggle='modal' data-width='500px' data-title='{$lang->attend->edit}'");?>
+                  <?php if(strpos(',early,both,absent,', $status) !== false) $signOut = $lang->attend->statusList[$status];?>
                   <?php echo $signOut;?>
+                </td>
+                <td>
+                  <?php
+                  if(strpos('rest, normal, trip, leave', $status) === false)
+                  {
+                      if($reason == '' or $reason == 'normal') echo html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $lang->attend->edit, "data-toggle='modal' data-width='500px'");
+                      if($reason == '' or $reason == 'leave')  echo html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $lang->attend->leave, "data-toggle='modal' data-width='500px'");
+                      if($reason == '' or $reason == 'trip')   echo html::a($this->createLink('trip', 'create'), $lang->attend->trip, "data-toggle='modal' data-width='500px'");
+                  }
+                  else
+                  {
+                      echo "<span class='label label-success'>";
+                      echo $lang->attend->statusList[$status];
+                      if($status == 'leave' or $status == 'trip' and $attends[$currentDate]->desc) echo ' ' . $attends[$currentDate]->desc . 'h';
+                      echo "</span>";
+                  }
+                  ?>
                 </td>
               </tr>
               <?php else:?>
               <tr class="<?php echo (date('m', $startDate) == $currentMonth) ? '' : 'otherMonth'?>">
                 <td><?php echo $currentDate;?></td>
-                <td><?php echo $lang->datepicker->dayNames[$dayIndex]?></td>
+                <td><?php echo $lang->datepicker->abbrDayNames[$dayIndex]?></td>
+                <td></td>
                 <td></td>
                 <td></td>
               </tr>
