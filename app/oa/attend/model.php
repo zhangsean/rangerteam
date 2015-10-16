@@ -516,6 +516,7 @@ class attendModel extends model
             $attend->status       = $status ? $status : 'absent';
             $attend->reason       = $reason;
             $attend->reviewStatus = '';
+            $attend->desc         = '';
 
             if(is_object($time))
             {

@@ -112,10 +112,7 @@ class leaveModel extends model
             ->check('end', 'ge', $leave->begin)
             ->exec();
 
-        if(!dao::isError())
-        {
-            $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy, '', 'leave');
-        }
+        if(!dao::isError()) $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy, '', 'leave');
 
         return false;
     }
@@ -192,7 +189,7 @@ class leaveModel extends model
         if(!dao::isError() and $status == 'pass')
         {
             $dates = range(strtotime($leave->begin), strtotime($leave->end), 60*60*24);
-            $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy, 'leave');
+            $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy, 'leave', '', $leave);
         }
 
         return !dao::isError();

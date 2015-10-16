@@ -155,7 +155,7 @@ class tripModel extends model
             $oldDates = range(strtotime($oldTrip->begin), strtotime($oldTrip->end), 60*60*24);
             $this->loadModel('attend')->batchUpdate($oldDates, $oldTrip->createdBy, '');
 
-            $this->loadModel('attend')->batchUpdate($dates, $oldTrip->createdBy, 'trip');
+            $this->loadModel('attend')->batchUpdate($dates, $oldTrip->createdBy, 'trip', '', $trip);
         }
 
         return !dao::isError();
