@@ -49,6 +49,15 @@ $lang->attend->abbrStatusList['leave']  = '假';
 $lang->attend->abbrStatusList['trip']   = '差';
 $lang->attend->abbrStatusList['rest']   = '休';
 
+$lang->attend->markStatusList['normal'] = '√';
+$lang->attend->markStatusList['late']   = '※';
+$lang->attend->markStatusList['early']  = '◇';
+$lang->attend->markStatusList['both']   = '※◇';
+$lang->attend->markStatusList['absent'] = '×';
+$lang->attend->markStatusList['leave']  = '○';
+$lang->attend->markStatusList['trip']   = '△';
+$lang->attend->markStatusList['rest']   = '●';
+
 $lang->attend->reasonList['normal'] = '准点上下班';
 $lang->attend->reasonList['trip']   = '出差';
 $lang->attend->reasonList['leave']  = '请假';

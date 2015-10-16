@@ -102,20 +102,31 @@ class attendModel extends model
             ->orderBy('t2.dept,t1.date')
             ->fetchAll();
 
-        foreach($attends as $key => $attend) 
+        /* Format attend list. */
+        $newAttends = array();
+        foreach($attends as $key => $attend) $newAttends[$attend->dept][$attend->account][$attend->date] = $attend; 
+
+        /* Fix dept's user record. */
+        if(!is_array($deptID)) $deptID = explode(',', trim($deptID, ','));
+        foreach($deptID as $dept)
         {
-            unset($attends[$key]);
-            $attends[$attend->dept][$attend->account][$attend->date] = $attend; 
+            if($dept == 0) continue;
+            $deptUsers = $this->loadModel('user')->getPairs('noclosed,noempty', $dept);
+            foreach($deptUsers as $account => $realname) if(!isset($newAttends[$dept][$account])) $newAttends[$dept][$account] = array();
         }
-        foreach($attends as $dept => $deptAttends)
+
+        /* Fix user's record. */
+        foreach($newAttends as $dept => $deptAttends)
         {
-            foreach($deptAttends as $user => $userAttends)
+
+            foreach($newAttends[$dept] as $user => $userAttends)
             {
-                if($reviewStatus == '') $attends[$dept][$user] = $this->fixUserAttendList($attends[$dept][$user], $startDate, $endDate);
-                $attends[$dept][$user] = $this->processAttendList($attends[$dept][$user]);
+                if($reviewStatus == '') $newAttends[$dept][$user] = $this->fixUserAttendList($newAttends[$dept][$user], $startDate, $endDate, $user);
+                $newAttends[$dept][$user] = $this->processAttendList($newAttends[$dept][$user]);
             }
         }
-        return $attends;
+
+        return $newAttends;
     }
 
     /**
@@ -451,12 +462,12 @@ class attendModel extends model
      * @param  array  $attends 
      * @param  string $startDate 
      * @param  string $endDate 
+     * @param  string $account 
      * @access public
      * @return void
      */
-    public function fixUserAttendList($attends, $startDate = '0000-00-00', $endDate = '0000-00-00')
+    public function fixUserAttendList($attends, $startDate = '0000-00-00', $endDate = '0000-00-00', $account = '')
     {
-        $account = '';
         if(strtotime($endDate) > time()) $endDate = date("Y-m-d");
 
         /* Get account, start date and end date. */
