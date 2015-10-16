@@ -84,7 +84,14 @@ class tripModel extends model
             ->batchCheck($this->config->trip->require->create, 'notempty')
             ->check('end', 'ge', $trip->begin)
             ->exec();
-        return !dao::isError();
+
+        if(!dao::isError())
+        {
+            $dates = range(strtotime($trip->begin), strtotime($trip->end), 60*60*24);
+            $this->loadModel('attend')->batchUpdate($dates, $this->app->user->account, 'trip', '', $trip);
+        }
+
+        return false;
     }
 
     /**
@@ -96,6 +103,8 @@ class tripModel extends model
      */
     public function update($id)
     {
+        $oldTrip  = $this->getByID($id);
+
         $trip = fixer::input('post')
             ->remove('createdBy')
             ->remove('createdDate')
@@ -109,6 +118,16 @@ class tripModel extends model
             ->check('end', 'ge', $trip->begin)
             ->where('id')->eq($id)
             ->exec();
+
+        if(!dao::isError())
+        {
+            $oldDates = range(strtotime($oldTrip->begin), strtotime($oldTrip->end), 60*60*24);
+            $this->loadModel('attend')->batchUpdate($oldDates, $oldTrip->createdBy, '');
+
+            $dates = range(strtotime($trip->begin), strtotime($trip->end), 60*60*24);
+            $this->loadModel('attend')->batchUpdate($dates, $oldTrip->createdBy, 'trip');
+        }
+
         return !dao::isError();
     }
 
@@ -142,7 +161,16 @@ class tripModel extends model
      */
     public function delete($id, $null = null)
     {
+        $oldTrip  = $this->getByID($id);
+
         $this->dao->delete()->from(TABLE_TRIP)->where('id')->eq($id)->exec();
+
+        if(!dao::isError())
+        {
+            $oldDates = range(strtotime($oldTrip->begin), strtotime($oldTrip->end), 60*60*24);
+            $this->loadModel('attend')->batchUpdate($oldDates, $oldTrip->createdBy, '');
+        }
+
         return !dao::isError();
     }
 }

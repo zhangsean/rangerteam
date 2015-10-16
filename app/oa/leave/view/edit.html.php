@@ -16,8 +16,13 @@
   <form id='ajaxForm' method='post' action="<?php echo $this->createLink('oa.leave', 'edit', "id=$leave->id")?>">
     <table class='table table-form table-condensed'>
       <tr>
+        <th><?php echo $lang->leave->status;?></th>
+        <td class='text-warning'><?php echo $lang->leave->statusList[$leave->status];?></td>
+        <td></td>
+      </tr> 
+      <tr>
         <th class='w-80px'><?php echo $lang->leave->type?></th>
-        <td><?php echo html::select('type', $lang->leave->typeList, $leave->type, "class='form-control'")?></td>
+        <td><?php echo html::radio('type', $lang->leave->typeList, $leave->type, "class=''")?></td>
         <td></td>
       </tr>
       <tr>

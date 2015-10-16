@@ -133,13 +133,20 @@ class leave extends control
      * @access public
      * @return void
      */
-    public function create()
+    public function create($date = '')
     {
         if($_POST)
         {
             $this->leave->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        if($date)
+        {
+            $date = date('Y-m-d', strtotime($date));
+            $leave = $this->leave->getByDate($date, $this->app->user->account);
+            if($leave) $this->locate(inlink('edit', "id=$leave->id"));
         }
 
         $this->app->loadConfig('attend');

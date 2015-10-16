@@ -308,10 +308,11 @@ class attendModel extends model
             ->setDefault('manualIn', '')
             ->setDefault('manualOut', '')
             ->add('reviewStatus', 'wait')
+            ->add('reason', 'normal')
             ->get();
 
-        $attend->manualIn  = date("H:i", strtotime("2010-10-01 {$attend->manualIn}"));
-        $attend->manualOut = date("H:i", strtotime("2010-10-01 {$attend->manualOut}"));
+        $attend->manualIn  = date("H:i", strtotime("{$date} {$attend->manualIn}"));
+        $attend->manualOut = date("H:i", strtotime("{$date} {$attend->manualOut}"));
 
         if(isset($oldAttend->new))
         {
@@ -372,7 +373,7 @@ class attendModel extends model
         if($this->loadModel('trip')->isTrip($attend->date, $attend->account)) return 'trip';
 
         $status = 'normal';
-        if($attend->signIn == "00:00:00" and $attend->signOut == "00:00:00") 
+        if(($attend->signIn == "00:00:00" and $attend->signOut == "00:00:00") or (!$attend->signIn and !$attend->signOut)) 
         {
             /* 'absent', absenteeism */
             $status = 'absent';
@@ -478,6 +479,7 @@ class attendModel extends model
                 $attend->signOut = '00:00:00';
                 $attend->ip      = '';
                 $attend->device  = '';
+                $attend->reason  = '';
                 $attend->status  = $this->computeStatus($attend);
                 $attend->manualIn  = '00:00:00';
                 $attend->manualOut = '00:00:00';
@@ -487,5 +489,65 @@ class attendModel extends model
         }
 
         return $attends;
+    }
+
+    /**
+     * Batch update attends for trip and leave.
+     * 
+     * @param  string    $dates 
+     * @param  string    $account 
+     * @param  string    $status 
+     * @param  string    $reason 
+     * @param  object    $time 
+     * @access public
+     * @return bool
+     */
+    public function batchUpdate($dates, $account, $status = '', $reason = '', $time = '')
+    {
+        if($status != '' and strpos('trip,leave,normal', $status) === false) return false;
+        if($reason == '') $reason = $status;
+
+        foreach($dates as $datetime)
+        {
+            $date = date('Y-m-d', $datetime);
+            $oldAttend = $this->loadModel('attend')->getByDate($date, $this->app->user->account);
+
+            $attend = new stdclass();
+            $attend->status       = $status ? $status : 'absent';
+            $attend->reason       = $reason;
+            $attend->reviewStatus = '';
+
+            if(is_object($time))
+            {
+                if($time->begin == $date and $time->end == $date) $hours = floor((strtotime("{$date} {$time->finish}") - strtotime("{$date} {$time->start}")) / 3600);
+                if($time->begin == $date and $time->end != $date) $hours = floor((strtotime("{$date} {$this->config->attend->signOutLimit}") - strtotime("{$date} {$time->start}")) / 3600);
+                if($time->begin != $date and $time->end == $date) $hours = floor((strtotime("{$date} {$time->finish}") - strtotime("{$date} {$this->config->attend->signInLimit}")) / 3600);
+
+                $attend->desc = $hours;
+            }
+
+            if(isset($oldAttend->new))
+            {
+                $attend->date    = $date;
+                $attend->account = $account;
+                $this->dao->insert(TABLE_ATTEND)
+                    ->data($attend)
+                    ->autoCheck()
+                    ->exec();
+            }
+            else
+            {
+                $attend->status = $this->computeStatus($oldAttend);
+
+                $this->dao->update(TABLE_ATTEND)
+                    ->data($attend)
+                    ->autoCheck()
+                    ->where('date')->eq($date)
+                    ->andWhere('account')->eq($account)
+                    ->exec();
+            }
+        }
+
+        return !dao::isError();
     }
 }

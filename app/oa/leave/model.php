@@ -48,6 +48,19 @@ class leaveModel extends model
     }
 
     /**
+     * Get leave by date and account.
+     * 
+     * @param  string    $date 
+     * @param  string    $account 
+     * @access public
+     * @return object
+     */
+    public function getByDate($date, $account)
+    {
+        return $this->dao->select('*')->from(TABLE_LEAVE)->where('begin')->le($date)->andWhere('end')->ge($date)->andWhere('createdBy')->eq($account)->fetch();
+    }
+
+    /**
      * Get all month of leave's begin.
      * 
      * @access public
@@ -87,7 +100,14 @@ class leaveModel extends model
             ->batchCheck($this->config->leave->require->create, 'notempty')
             ->check('end', 'ge', $leave->begin)
             ->exec();
-        return !dao::isError();
+
+        if(!dao::isError())
+        {
+            $dates = range(strtotime($leave->begin), strtotime($leave->end), 60*60*24);
+            $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy, '', 'leave');
+        }
+
+        return false;
     }
 
     /**
@@ -99,11 +119,14 @@ class leaveModel extends model
      */
     public function update($id)
     {
+        $oldLeave = $this->getByID($id);
+
         $leave = fixer::input('post')
             ->remove('status')
             ->remove('createdBy')
             ->remove('createdDate')
             ->get();
+
         if(isset($leave->begin) and $leave->begin != '') $leave->year = substr($leave->begin, 0, 4);
 
         $this->dao->update(TABLE_LEAVE)
@@ -113,6 +136,15 @@ class leaveModel extends model
             ->check('end', 'ge', $leave->begin)
             ->where('id')->eq($id)
             ->exec();
+
+        if(!dao::isError())
+        {
+            $oldDates = range(strtotime($oldLeave->begin), strtotime($oldLeave->end), 60*60*24);
+            $this->loadModel('attend')->batchUpdate($oldDates, $oldLeave->createdBy, '');
+
+            $dates = range(strtotime($leave->begin), strtotime($leave->end), 60*60*24);
+            $this->loadModel('attend')->batchUpdate($dates, $oldLeave->createdBy, '', 'leave');
+        }
         return !dao::isError();
     }
 
@@ -127,12 +159,22 @@ class leaveModel extends model
     public function review($id, $status)
     {
         if(!isset($this->lang->leave->statusList[$status])) return false;
+
+        $leave = $this->getByID($id);
+
         $this->dao->update(TABLE_LEAVE)
             ->set('status')->eq($status)
             ->set('reviewedBy')->eq($this->app->user->account)
             ->set('reviewedDate')->eq(helper::now())
             ->where('id')->eq($id)
             ->exec();
+
+        if(!dao::isError() and $status == 'pass')
+        {
+            $dates = range(strtotime($leave->begin), strtotime($leave->end), 60*60*24);
+            $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy, 'leave');
+        }
+
         return !dao::isError();
     }
 
@@ -166,7 +208,16 @@ class leaveModel extends model
      */
     public function delete($id, $null = null)
     {
+        $oldLeave = $this->getByID($id);
+
         $this->dao->delete()->from(TABLE_LEAVE)->where('id')->eq($id)->exec();
+
+        if(!dao::isError())
+        {
+            $oldDates = range(strtotime($oldLeave->begin), strtotime($oldLeave->end), 60*60*24);
+            $this->loadModel('attend')->batchUpdate($oldDates, $oldLeave->createdBy, '');
+        }
+
         return !dao::isError();
     }
 }
