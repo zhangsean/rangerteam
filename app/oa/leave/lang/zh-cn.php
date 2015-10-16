@@ -38,6 +38,7 @@ $lang->leave->statusList['pass']   = '通过';
 $lang->leave->statusList['reject'] = '拒绝';
 
 $lang->leave->denied = '信息访问受限';
+$lang->leave->unique = '%s 已经存在请假记录';
 
 $lang->leave->confirmReview['pass']   = '您确定要执行通过操作吗？';
 $lang->leave->confirmReview['reject'] = '您确定要执行拒绝操作吗？';

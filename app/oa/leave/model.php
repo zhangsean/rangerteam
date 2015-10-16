@@ -94,6 +94,17 @@ class leaveModel extends model
             ->get();
         if(isset($leave->begin) and $leave->begin != '') $leave->year = substr($leave->begin, 0, 4);
 
+        $dates = range(strtotime($leave->begin), strtotime($leave->end), 60*60*24);
+        foreach($dates as $date)
+        {
+            $date = date('Y-m-d', $date);
+            $existLeave = $this->getByDate($date, $this->app->user->account);
+            if($existLeave) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, $date)); 
+
+            $existTrip = $this->loadModel('trip')->getByDate($date, $this->app->user->account);
+            if($existTrip) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, $date)); 
+        }
+
         $this->dao->insert(TABLE_LEAVE)
             ->data($leave)
             ->autoCheck()
@@ -103,7 +114,6 @@ class leaveModel extends model
 
         if(!dao::isError())
         {
-            $dates = range(strtotime($leave->begin), strtotime($leave->end), 60*60*24);
             $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy, '', 'leave');
         }
 
@@ -129,6 +139,17 @@ class leaveModel extends model
 
         if(isset($leave->begin) and $leave->begin != '') $leave->year = substr($leave->begin, 0, 4);
 
+        $dates = range(strtotime($leave->begin), strtotime($leave->end), 60*60*24);
+        foreach($dates as $date)
+        {
+            $date = date('Y-m-d', $date);
+            $existLeave = $this->getByDate($date, $this->app->user->account);
+            if($existLeave and $existLeave->id != $oldLeave->id) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, $date)); 
+
+            $existTrip = $this->loadModel('trip')->getByDate($date, $this->app->user->account);
+            if($existTrip) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, $date)); 
+        }
+
         $this->dao->update(TABLE_LEAVE)
             ->data($leave)
             ->autoCheck()
@@ -142,7 +163,6 @@ class leaveModel extends model
             $oldDates = range(strtotime($oldLeave->begin), strtotime($oldLeave->end), 60*60*24);
             $this->loadModel('attend')->batchUpdate($oldDates, $oldLeave->createdBy, '');
 
-            $dates = range(strtotime($leave->begin), strtotime($leave->end), 60*60*24);
             $this->loadModel('attend')->batchUpdate($dates, $oldLeave->createdBy, '', 'leave');
         }
         return !dao::isError();

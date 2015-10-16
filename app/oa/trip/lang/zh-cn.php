@@ -23,3 +23,4 @@ $lang->trip->date        = '日期';
 $lang->trip->time        = '时间';
 
 $lang->trip->denied = '信息访问受限';
+$lang->trip->unique = '%s 已经存在出差记录';

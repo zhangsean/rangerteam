@@ -113,7 +113,9 @@ class trip extends control
     {
         if($_POST)
         {
-            $this->trip->create();
+            $result = $this->trip->create();
+            if(is_array($result)) $this->send($result);
+
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
@@ -143,7 +145,9 @@ class trip extends control
 
         if($_POST)
         {
-            $this->trip->update($id);
+            $result = $this->trip->update($id);
+            if(is_array($result)) $this->send($result);
+
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }

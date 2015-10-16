@@ -23,3 +23,4 @@ $lang->trip->date        = 'Date';
 $lang->trip->time        = 'Time';
 
 $lang->trip->denied = 'access denied';
+$lang->trip->unique = 'There was a record of trip in %s.';

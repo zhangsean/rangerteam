@@ -137,7 +137,9 @@ class leave extends control
     {
         if($_POST)
         {
-            $this->leave->create();
+            $result = $this->leave->create();
+            if(is_array($result)) $this->send($result);
+
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
@@ -174,7 +176,9 @@ class leave extends control
 
         if($_POST)
         {
-            $this->leave->update($id);
+            $result = $this->leave->update($id);
+            if(is_array($result)) $this->send($result);
+
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
