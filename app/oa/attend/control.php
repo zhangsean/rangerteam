@@ -398,7 +398,7 @@ class attend extends control
      */
     public function setReviewer()
     {
-        $deptList = $this->loadModel('tree')->getList('dept');
+        $deptList = $this->loadModel('tree')->getListByType('dept');
 
         if($_POST)
         {

@@ -85,6 +85,18 @@ class treeModel extends model
     }
 
     /**
+     * Get list of one type.
+     * 
+     * @param  string $type 
+     * @access public
+     * @return array
+     */
+    public function getListByType($type = 'article')
+    {
+        return $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq($type)->fetchAll('id');
+    }
+
+    /**
      * Get origin of a category.
      * 
      * @param  int     $categoryID 
