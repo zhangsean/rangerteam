@@ -23,6 +23,8 @@ $lang->attend->device   = '设备';
 $lang->attend->desc     = '描述';
 $lang->attend->dayName  = '星期';
 $lang->attend->report   = '考勤表';
+$lang->attend->AM       = '上午';
+$lang->attend->PM       = '下午';
 
 $lang->attend->manualIn     = '签到时间';
 $lang->attend->manualOut    = '签退时间';

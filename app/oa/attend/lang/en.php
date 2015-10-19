@@ -23,6 +23,8 @@ $lang->attend->device   = 'Device';
 $lang->attend->desc     = 'description';
 $lang->attend->dayName  = 'Day name';
 $lang->attend->report   = 'Report';
+$lang->attend->AM       = 'AM';
+$lang->attend->PM       = 'PM';
 
 $lang->attend->manualIn     = 'Manual sign in';
 $lang->attend->manualOut    = 'Manual sign out';

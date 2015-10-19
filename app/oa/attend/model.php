@@ -501,6 +501,7 @@ class attendModel extends model
                 $attend->ip      = '';
                 $attend->device  = '';
                 $attend->reason  = '';
+                $attend->desc    = '';
                 $attend->status  = $this->computeStatus($attend);
                 $attend->manualIn  = '00:00:00';
                 $attend->manualOut = '00:00:00';

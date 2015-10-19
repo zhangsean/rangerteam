@@ -275,12 +275,33 @@ class block extends control
     public function printAttendBlock()
     {
         $this->loadModel('attend', 'oa');
-        $startDate = date("Y") . "-" . date("m") . "-01";
-        $endDate   = date('Y-m-d', strtotime("$startDate +1 month"));
+        $date      = date('Y-m-d');
+        $dateTime  = strtotime($date);
+        $startDate = date('w', $dateTime) == 1 ? date('Y-m-d', $dateTime) : date('Y-m-d', strtotime("last Monday $date"));
+        $endDate   = date('Y-m-d', strtotime("next Sunday $startDate"));
         $attends   = $this->attend->getByAccount($this->app->user->account, $startDate, $endDate);
 
+        $dateLimit = array();
+        $dateLimit['begin'] = $startDate;
+        $dateLimit['end']   = $endDate;
+        $todos = $this->loadModel('todo', 'oa')->getList($dateLimit, $this->app->user->account);
+
+        /* Process todos. */
+        $newTodos = array();
+        foreach($todos as $todo)
+        {
+            if(!isset($newTodos[$todo->date])) $newTodos[$todo->date] = array();
+            $time = date('H', strtotime("{$todo->date} {$todo->begin}")) > 12 ? 'PM' : 'AM';
+            if(!isset($newTodos[$todo->date][$time])) $newTodos[$todo->date][$time] = array();
+            $newTodos[$todo->date][$time][] = $todo;
+        }
+
         $this->processParams();
-        $this->view->attends = $attends;
+        $this->view->attends   = $attends;
+        $this->view->todos     = $newTodos;
+        $this->view->date      = $date;
+        $this->view->startDate = $startDate;
+        $this->view->endDate   = $endDate;
         $this->display();
     }
 
