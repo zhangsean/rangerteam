@@ -39,9 +39,9 @@
       <?php $endDate   = (date('w', $endDate) == 0) ? $endDate : strtotime("+6 day this week", $endDate)?>
       <?php $weekIndex = 0;?>
       <?php while($startDate <= $endDate):?>
+      <?php $dayIndex = date('w', $startDate);?>
+      <?php if($dayIndex == 1):?>
       <div class='col-xs-4'>
-        <?php $dayIndex = date('w', $startDate);?>
-        <?php if($dayIndex == 1):?>
         <div class='panel'>
           <div class='panel-body no-padding'>
             <table class='table table-data table-fixed text-center'>
@@ -99,14 +99,14 @@
                 <td></td>
               </tr>
               <?php endif;?>
-        <?php if($dayIndex == 0):?>
+      <?php if($dayIndex == 0):?>
             </table>
           </div>
         </div>
         <?php $weekIndex += 1;?>
-        <?php endif;?>
-        <?php $startDate = strtotime('+1 day', $startDate);?>
       </div>
+      <?php endif;?>
+      <?php $startDate = strtotime('+1 day', $startDate);?>
       <?php endwhile;?>
     </div>
   </div>
