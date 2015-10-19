@@ -35,7 +35,7 @@
     <?php $currentDept = $users[$attend->account]->dept;?>
     <tr>
       <td><?php echo $attend->id;?></td>
-      <td><?php echo $deptList[$currentDept]->name?></td>
+      <td><?php echo $deptList[$currentDept];?></td>
       <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
       <td><?php echo $attend->date?></td>
       <td><?php echo zget($lang->attend->statusList, $attend->status)?></td>

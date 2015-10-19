@@ -1,8 +1,6 @@
 .panel .no-padding{padding: 0px;}
 .tree .active{font-weight: bold;}
 .tree > li {margin-right: 0;}
-.with-side .side {position: absolute; width: 130px;}
-.with-side .main {padding-left: 145px; float: left;}
 
 .attend-normal [class^=attend] {}
 .attend-late .attend-signin    {color: #EA644A;}

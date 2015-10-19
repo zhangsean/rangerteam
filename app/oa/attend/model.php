@@ -513,6 +513,23 @@ class attendModel extends model
     }
 
     /**
+     * Set reviewer for attend.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function setReviewer()
+    {
+        $deptList = $this->post->dept;
+        foreach($deptList as $id => $dept)
+        {
+            if(!empty($dept)) $dept = ",{$dept}," ;
+            $this->dao->update(TABLE_CATEGORY)->set('moderators')->eq($dept)->where('id')->eq($id)->andWhere('type')->eq('dept')->exec();
+        }
+        return !dao::isError();
+    }
+
+    /**
      * Batch update attends for trip and leave.
      * 
      * @param  string    $dates 

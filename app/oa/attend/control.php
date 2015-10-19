@@ -316,7 +316,7 @@ class attend extends control
         { 
             if($this->config->attend->reviewedBy == $this->app->user->account)
             {
-                $deptList = $this->loadModel('tree')->getChildren(0, 'dept');
+                $deptList = $this->loadModel('tree')->getPairs('', 'dept');
                 $attends  = $this->attend->getWaitAttends();
 
                 $this->view->attends  = $attends;
@@ -388,5 +388,27 @@ class attend extends control
 
         if($id) die(html::select("idvalues[$id]", $attends, '', 'class="form-control"'));
         die(html::select('idvalue', $attends, '', 'class=form-control'));
+    }
+
+    /**
+     * Set reviewer for attend.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setReviewer()
+    {
+        $deptList = $this->loadModel('tree')->getList('dept');
+
+        if($_POST)
+        {
+            $this->attend->setReviewer();
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->view->deptList = $deptList;
+        $this->view->users    = $this->loadModel('user')->getPairs('noclosed');
+        $this->display();
     }
 }

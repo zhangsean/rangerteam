@@ -90,3 +90,6 @@ $lang->attend->notice['absent']   = "没有记录";
 
 $lang->attend->confirmReview['pass']   = '您确定要执行通过操作吗？';
 $lang->attend->confirmReview['reject'] = '您确定要执行拒绝操作吗？';
+
+$lang->attend->settings    = '考勤设置';
+$lang->attend->setReviewer = '审核人设置';
