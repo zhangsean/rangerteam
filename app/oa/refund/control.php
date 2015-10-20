@@ -88,9 +88,92 @@ class refund extends control
         $deptManager = trim($dept->moderators, ',');
 
         $this->view->title          = $this->lang->refund->settings; 
-        $this->view->firstReviewer  = isset($this->config->refund->firstReviewer) ? $this->config->attend->firstReviewer : $deptManager;
-        $this->view->secondReviewer = isset($this->config->refund->secondReviewer) ? $this->config->attend->secondReviewer : '';
+        $this->view->firstReviewer  = !empty($this->config->refund->firstReviewer) ? $this->config->refund->firstReviewer : $deptManager;
+        $this->view->secondReviewer = !empty($this->config->refund->secondReviewer) ? $this->config->refund->secondReviewer : '';
         $this->view->users          = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
+
+    /**
+     * browse review list.
+     * 
+     * @param  int    $dept 
+     * @param  string $reviewStatus 
+     * @access public
+     * @return void
+     */
+    public function browseReview($dept = '', $reviewStatus = 'wait')
+    {
+        $refunds  = array();
+        $newUsers = array();
+        $users    = $this->loadModel('user')->getList($dept);
+        foreach($users as $key => $user) $newUsers[$user->account] = $user;
+
+        $this->view->title = $this->lang->refund->review;
+        $this->view->users = $newUsers;
+
+        if(!empty($this->config->refund->firstReviewer) or !empty($this->config->refund->secondReviewer))
+        { 
+            if($this->config->refund->firstReviewer == $this->app->user->account)
+            {
+                $deptList = $this->loadModel('tree')->getPairs('', 'dept');
+                $refunds  = $this->refund->getByStatus('wait');
+
+                $this->view->refunds  = $refunds;
+                $this->view->deptList = $deptList;
+            }
+
+            if($this->config->refund->secondReviewer == $this->app->user->account)
+            {
+                $deptList = $this->loadModel('tree')->getPairs('', 'dept');
+                $refunds  = $this->refund->getByStatus('doing');
+
+                $this->view->refunds  = $refunds;
+                $this->view->deptList = $deptList;
+            }
+        }
+        else
+        {
+            $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+            if(!empty($deptList)) 
+            {
+                if($dept == '' or !isset($deptList[$dept])) $dept = current($deptList)->id;
+                $refunds = $this->refund->getByDept($dept, $reviewStatus);
+            }
+
+            $this->view->refunds      = $refunds;
+            $this->view->deptList     = $deptList;
+            $this->view->reviewStatus = $reviewStatus;
+            $this->view->currentDept  = $dept;
+        }
+
+        $this->display();
+    }
+
+    /**
+     * Set category for refund.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCategory()
+    {
+        $expenseList   = $this->loadModel('tree')->getPairs(0, 'out');
+        $expenseIdList =  array_keys($expenseList);
+
+        $refundCategories = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->andWhere('refund')->eq(1)->fetchAll('id');
+        $refundCategories = array_keys($refundCategories);
+        $refundCategories = implode($refundCategories, ',');
+
+        if($_POST)
+        {
+            $this->refund->setCategory($expenseIdList);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->view->expenseList      = $expenseList;
+        $this->view->refundCategories = $refundCategories;
         $this->display();
     }
 }
