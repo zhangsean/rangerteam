@@ -48,6 +48,12 @@ $themeRoot = $webRoot . "theme/";
           <div class='group-item'><?php echo html::checkbox('rights', $groups, $category->rights);?></div>
         </div>
       </div>
+      <div class='form-group'> 
+        <label class='col-md-2 control-label'><?php echo $lang->category->refund;?></label>
+        <div class='col-md-9'>
+          <div class='group-item'><?php echo html::radio('refund', $lang->category->refundList, $category->refund);?></div>
+        </div>
+      </div>
       <?php endif;?>
       <div class='form-group'> 
         <label class='col-md-2 control-label'><?php echo $lang->category->desc;?></label>

@@ -80,6 +80,10 @@ $lang->out->desc     = 'Description';
 $lang->out->keywords = 'Keyword';
 $lang->out->children = "Children";
 $lang->out->rights   = 'Rights';
+$lang->out->refund   = 'Reimbursement';
+
+$lang->out->refundList[1] = 'Yes';
+$lang->out->refundList[0] = 'No';
 
 /* Lang items for forum. */
 $lang->board = new stdclass();
