@@ -74,4 +74,5 @@ $lang->refund = new stdclass();
 $lang->refund->menu = new stdclass();
 $lang->refund->menu->personal = '我的报销|refund|personal|';
 $lang->refund->menu->company  = '公司|refund|company|';
+$lang->refund->menu->review   = '报销审批|refund|browsereview|';
 $lang->refund->menu->settings = '设置|refund|settings|';
