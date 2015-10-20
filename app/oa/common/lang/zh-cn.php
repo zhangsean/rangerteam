@@ -21,6 +21,7 @@ $lang->menu->oa->doc       = '文档|doc|browse|';
 $lang->menu->oa->attend    = '考勤|attend|personal|';
 $lang->menu->oa->leave     = '请假|leave|personal|';
 $lang->menu->oa->trip      = '出差|trip|personal|';
+$lang->menu->oa->refund    = '报销|refund|personal|';
 
 $lang->dashboard = new stdclass();
 
@@ -68,3 +69,9 @@ $lang->trip->menu = new stdclass();
 $lang->trip->menu->personal   = '我的出差|trip|personal|';
 $lang->trip->menu->department = '部门|trip|department|';
 $lang->trip->menu->company    = '公司|trip|company|';
+
+$lang->refund = new stdclass();
+$lang->refund->menu = new stdclass();
+$lang->refund->menu->personal = '我的报销|refund|personal|';
+$lang->refund->menu->company  = '公司|refund|company|';
+$lang->refund->menu->settings = '设置|refund|settings|';

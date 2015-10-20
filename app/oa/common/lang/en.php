@@ -21,6 +21,7 @@ $lang->menu->oa->doc       = 'Document|doc|index|';
 $lang->menu->oa->attend    = 'Attendance|attend|personal|';
 $lang->menu->oa->leave     = 'Leave|leave|personal|';
 $lang->menu->oa->trip      = 'Trip|trip|personal|';
+$lang->menu->oa->refund    = 'Refund|refund|personal|';
 
 $lang->dashboard = new stdclass();
 
@@ -68,3 +69,9 @@ $lang->trip->menu = new stdclass();
 $lang->trip->menu->personal   = 'My|trip|personal|';
 $lang->trip->menu->department = 'Department|trip|department|';
 $lang->trip->menu->company    = 'Company|trip|company|';
+
+$lang->refund = new stdclass();
+$lang->refund->menu = new stdclass();
+$lang->refund->menu->personal = 'My|refund|personal|';
+$lang->refund->menu->company  = 'Company|refund|company|';
+$lang->refund->menu->settings = 'Settings|refund|settings|';

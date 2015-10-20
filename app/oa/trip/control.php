@@ -58,7 +58,6 @@ class trip extends control
         die($this->fetch('trip', 'browse', "type=company&date=$date", 'oa'));
     }
 
-
     /**
      * browse 
      * 
