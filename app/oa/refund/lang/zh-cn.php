@@ -4,6 +4,7 @@ $lang->refund->common   = '报销';
 $lang->refund->create   = '申请报销';
 $lang->refund->browse   = '报销列表';
 $lang->refund->edit     = '编辑报销';
+$lang->refund->detail   = '明细';
 $lang->refund->settings = '设置';
 
 $lang->refund->id               = '编号';

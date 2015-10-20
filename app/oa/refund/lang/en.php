@@ -4,6 +4,7 @@ $lang->refund->common   = 'Reimbursement';
 $lang->refund->create   = 'Create';
 $lang->refund->browse   = 'Browse List';
 $lang->refund->edit     = 'Edit reimbursement';
+$lang->refund->detail   = 'Detail';
 $lang->refund->settings = 'Settings';
 
 $lang->refund->id               = 'ID';

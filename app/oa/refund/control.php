@@ -24,6 +24,9 @@ class refund extends control
             $this->send(array('result' => 'success', 'message' => $lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
+        $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->view->categories   = $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
         $this->display();
     }
 
