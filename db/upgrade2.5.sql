@@ -25,3 +25,35 @@ CREATE TABLE IF NOT EXISTS `oa_todo` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 ALTER TABLE `oa_project` add `whitelist` varchar(255) NOT NULL AFTER `acl`;
+
+-- DROP TABLE IF EXISTS `oa_refund`;
+CREATE TABLE IF NOT EXISTS `oa_refund` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `name` char(150) NOT NULL,
+  `parent`  mediumint(8) NOT NULL DEFAULT 0,
+  `category` char(30) NOT NULL,
+  `date` date NOT NULL,
+  `money` decimal(12,2) NOT NULL,
+  `currency` varchar(30) NOT NULL,
+  `desc` text NOT NULL,
+  `status` char(30) NOT NULL DEFAULT 'wait',
+  `createdBy` char(30) NOT NULL DEFAULT '',
+  `createdDate` datetime NOT NULL,
+  `editedBy` char(30) NOT NULL DEFAULT '',
+  `editedDate` datetime NOT NULL,
+  `firstReviewer` char(30) NOT NULL DEFAULT '',
+  `firstReviewDate` datetime NOT NULL,
+  `secondReviewer` char(30) NOT NULL DEFAULT '',
+  `secondReviewDate` datetime NOT NULL,
+  `refundBy` char(30) NOT NULL DEFAULT '',
+  `refundDate` datetime NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `createdBy` (`createdBy`)
+  KEY `firstReviewer` (`firstReviewer`)
+  KEY `secondReviewer` (`secondReviewer`)
+  KEY `refundBy` (`refundBy`)
+  KEY `category` (`category`)
+  KEY `date` (`date`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `sys_category` ADD `refund` enum('0','1') NOT NULL DEFAULT '0';

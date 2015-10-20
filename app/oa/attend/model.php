@@ -215,19 +215,13 @@ class attendModel extends model
             $attend->date    = $date;
             $attend->signIn  = helper::time();
             $attend->ip      = helper::getRemoteIp();
-            $this->dao->insert(TABLE_ATTEND)
-                ->data($attend)
-                ->autoCheck()
-                ->exec();
+            $this->dao->insert(TABLE_ATTEND)->data($attend)->autoCheck()->exec();
             return !dao::isError();
         }
 
         if($attend->signIn == '' or $attend->signIn == '00:00:00')
         {
-            $this->dao->update(TABLE_ATTEND)
-                ->set('signIn')->eq(helper::time())
-                ->where('id')->eq($attend->id)
-                ->exec();
+            $this->dao->update(TABLE_ATTEND)->set('signIn')->eq(helper::time())->where('id')->eq($attend->id)->exec();
             return !dao::isError();
         }
 

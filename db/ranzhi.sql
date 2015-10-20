@@ -528,6 +528,7 @@ CREATE TABLE `sys_category` (
   `postID` mediumint(9) NOT NULL,
   `replyID` mediumint(8) unsigned NOT NULL,
   `rights` char(30) NOT NULL,
+  `refund` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `tree` (`type`),
   KEY `order` (`order`),
