@@ -148,6 +148,7 @@ define('TABLE_ATTEND',  '`oa_attend`');
 define('TABLE_HOLIDAY', '`oa_holiday`');
 define('TABLE_LEAVE',   '`oa_leave`');
 define('TABLE_TRIP',    '`oa_trip`');
+define('TABLE_REFUND',  '`oa_refund`');
 
 /* Tables for cash. */
 define('TABLE_DEPOSITOR', '`cash_depositor`');

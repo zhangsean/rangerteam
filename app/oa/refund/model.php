@@ -14,6 +14,21 @@
 class refundModel extends model
 {
     /**
+     * Get a refund by id.
+     * 
+     * @param  int    $ID 
+     * @access public
+     * @return void
+     */
+    public function getByID($ID)
+    {
+        $refund  = $this->select('*')->from(TABLE_REFUND)->where('id')->eq($ID)->fetch();
+        $details = $this->select('*')->from(TABLE_REFUND)->where('parent')->eq($ID)->fetchAll('id');
+        $refund->detail = $details;
+        return $refund;
+    }
+
+    /**
      * Get wait refunds.
      * 
      * @access public
@@ -23,6 +38,54 @@ class refundModel extends model
     {
         return $this->dao->select('*')->from(TABLE_REFUND)->where('status')->eq($status)->fetchAll();
     }
+
+    /**
+     * Create a refund.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function create()
+    {
+        $refund = fixer::input('post')
+            ->add('status', 'wait')
+            ->add('createdBy', $this->app->user->account)
+            ->add('createdDate', helper::now())
+            ->remove('dateList,moneyList,currencyList,categoryList,descList')
+            ->get();
+
+        $this->dao->insert(TABLE_REFUND)
+            ->data($refund)
+            ->autoCheck()
+            ->batchCheck($this->config->refund->require->create, 'notempty')
+            ->exec();
+
+        if(dao::isError()) return false;
+        $refundID = $this->dao->lastInsertID();
+
+        /* Insert detail */
+        if(!empty($_POST['moneyList']))
+        {
+            foreach($this->post->moneyList as $key => $money)
+            {
+                if(empty($money)) continue;
+                $detail = new stdclass();
+                $detail->parent = $refundID;
+                $detail->status = 'wait';
+                $detail->createdBy = $this->app->user->account;
+                $detail->createdDate = helper::now();
+                $detail->money = $money;
+                $detail->date = empty($_POST['dateList'][$key]) ? $refund->date : $_POST['dateList'][$key];
+                $detail->currency = $_POST['currencyList'][$key];
+                $detail->category = $_POST['categoryList'][$key];
+                $detail->desc = $_POST['descList'][$key];
+
+                $this->dao->insert(TABLE_REFUND)->data($detail)->autoCheck()->exec();
+            }
+        }
+
+        return dao::isError();
+    } 
 
     /**
      * Get department's refund list. 

@@ -21,7 +21,9 @@ class refund extends control
     {
         if($_POST)
         {
-            $this->send(array('result' => 'success', 'message' => $lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->refund->create();
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
