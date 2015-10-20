@@ -48,11 +48,11 @@ CREATE TABLE IF NOT EXISTS `oa_refund` (
   `refundBy` char(30) NOT NULL DEFAULT '',
   `refundDate` datetime NOT NULL,
   PRIMARY KEY  (`id`),
-  KEY `createdBy` (`createdBy`)
-  KEY `firstReviewer` (`firstReviewer`)
-  KEY `secondReviewer` (`secondReviewer`)
-  KEY `refundBy` (`refundBy`)
-  KEY `category` (`category`)
+  KEY `createdBy` (`createdBy`),
+  KEY `firstReviewer` (`firstReviewer`),
+  KEY `secondReviewer` (`secondReviewer`),
+  KEY `refundBy` (`refundBy`),
+  KEY `category` (`category`),
   KEY `date` (`date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
