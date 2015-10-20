@@ -5,6 +5,7 @@ $lang->refund->create      = '申请报销';
 $lang->refund->browse      = '报销列表';
 $lang->refund->edit        = '编辑报销';
 $lang->refund->review      = '报销审批';
+$lang->refund->detail      = '详情';
 $lang->refund->settings    = '设置';
 $lang->refund->setCategory = '报销科目设置';
 
