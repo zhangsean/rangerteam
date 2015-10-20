@@ -25,7 +25,7 @@
 .calendar tr+tr {border-top: 1px solid rgb(221, 221, 221);}
 .calendar th+th, .calendar td+td, .calendar th+td {border-left: 1px solid rgb(221, 221, 221);}
 .calendar .today {background: #f0f0f0;}
-.event {color: rgb(255, 255, 255); width: 100%; height: 18px; overflow: hidden;}
+.event {color: rgb(255, 255, 255); width: 100%; height: 18px; overflow: hidden; margin: 1px 0;}
 .event:hover {cursor: pointer;}
 .event.done {background-color: rgb(56, 176, 63);}
 .event.wait {background-color: rgb(50, 128, 252);}
