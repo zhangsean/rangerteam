@@ -63,4 +63,31 @@ class refund extends control
         $this->view->pager = $pager;
         $this->display();
     }
+
+    /**
+     * Set reviewer for refund. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function settings()
+    {
+        if($_POST)
+        {
+            $settings = fixer::input('post')->get();
+
+            $this->loadModel('setting')->setItems('system.oa.refund', $settings);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
+        $deptManager = trim($dept->moderators, ',');
+
+        $this->view->title          = $this->lang->refund->settings; 
+        $this->view->firstReviewer  = isset($this->config->refund->firstReviewer) ? $this->config->attend->firstReviewer : $deptManager;
+        $this->view->secondReviewer = isset($this->config->refund->secondReviewer) ? $this->config->attend->secondReviewer : '';
+        $this->view->users          = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
 }
