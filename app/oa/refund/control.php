@@ -12,6 +12,17 @@
 class refund extends control
 {
     /**
+     * index 
+     * 
+     * @access public
+     * @return void
+     */
+    public function index()
+    {
+        $this->locate(inlink('personal'));
+    }
+
+    /**
      * create a refund.
      * 
      * @access public
@@ -23,7 +34,7 @@ class refund extends control
         {
             $this->refund->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('personal')));
         }
 
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
@@ -33,14 +44,64 @@ class refund extends control
     }
 
     /**
-     * view my refund 
+     * Edit a refund.
      * 
+     * @param  int    $refundID 
      * @access public
      * @return void
      */
-    public function personal()
+    public function edit($refundID)
     {
-        $this->locate(inlink('browse'));
+        if($_POST)
+        {
+            $changes = $this->refund->update($refundID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if(!empty($changes))
+            {
+                $actionID = $this->loadModel('action')->create('refund', $refundID, 'Edited');
+                $this->action->logHistory($actionID, $changes);
+            }
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "refundID=$refundID")));
+        }
+
+        $refund = $this->refund->getByID($refundID);
+
+        $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->view->categories   = $this->refund->getCategoryPairs();
+        $this->view->refund       = $refund;
+        $this->display();
+    }
+
+    /**
+     * view personal refund.
+     * 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function personal($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->browse('personal', $orderBy, $recTotal, $recPerPage, $pageID);
+    }
+
+    /**
+     * view company refund.
+     * 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function company($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->browse('company', $orderBy, $recTotal, $recPerPage, $pageID);
     }
 
     /**
@@ -54,19 +115,61 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function browse($mode = 'all', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'personal', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $refunds = $this->refund->getList('', '', '', $orderBy, $pager);
+        $users = $this->loadModel('user')->getList();
+        foreach($users as $key => $user) $newUsers[$user->account] = $user;
+        $deptList = $this->loadModel('tree')->getListByType('dept');
 
-        $this->view->title   = $this->lang->refund->browse;
-        $this->view->refunds = $refunds;
-        $this->view->orderBy = $orderBy;
-        $this->view->mode    = $mode;
-        $this->view->pager   = $pager;
+        if($mode == 'personal') $refunds = $this->refund->getList('', '', $this->app->user->account, $orderBy, $pager);
+        if($mode == 'company')  $refunds = $this->refund->getList('', '', '', $orderBy, $pager);
+
+        $this->view->title    = $this->lang->refund->$mode;
+        $this->view->refunds  = $refunds;
+        $this->view->orderBy  = $orderBy;
+        $this->view->mode     = $mode;
+        $this->view->pager    = $pager;
+        $this->view->categories = $this->refund->getCategoryPairs();
+        $this->view->users    = $newUsers;
+        $this->view->deptList = $deptList;
+        $this->display('refund', 'browse');
+    }
+    
+    /**
+     * View a refund.
+     * 
+     * @param  int    $refundID 
+     * @access public
+     * @return void
+     */
+    public function view($refundID)
+    {
+        $refund = $this->refund->getByID($refundID);
+
+        $this->view->title        = $this->lang->refund->view;
+        $this->view->refund       = $refund;
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->view->categories   = $this->refund->getCategoryPairs();
+        $this->view->preAndNext   = $this->loadModel('common', 'sys')->getPreAndNextObject('refund', $refundID);
         $this->display();
+    }
+
+    /**
+     * Delete a refund.
+     * 
+     * @param  int    $refundID 
+     * @access public
+     * @return void
+     */
+    public function delete($refundID)
+    {
+        $this->refund->delete($refundID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success'));
     }
 
     /**

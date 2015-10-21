@@ -67,6 +67,7 @@ class refundModel extends model
             ->add('status', 'wait')
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', helper::now())
+            ->remove('firstReviewer,firstReviewDate,sencondReviewer,secondReviewDate,refundBy,refundDate')
             ->remove('dateList,moneyList,currencyList,categoryList,descList')
             ->get();
 
@@ -78,6 +79,7 @@ class refundModel extends model
 
         if(dao::isError()) return false;
         $refundID = $this->dao->lastInsertID();
+        $this->loadModel('action')->create('refund', $refundID, 'Created', '');
 
         /* Insert detail */
         if(!empty($_POST['moneyList']))
@@ -86,15 +88,15 @@ class refundModel extends model
             {
                 if(empty($money)) continue;
                 $detail = new stdclass();
-                $detail->parent = $refundID;
-                $detail->status = 'wait';
-                $detail->createdBy = $this->app->user->account;
+                $detail->parent      = $refundID;
+                $detail->status      = 'wait';
+                $detail->createdBy   = $this->app->user->account;
                 $detail->createdDate = helper::now();
-                $detail->money = $money;
-                $detail->date = empty($_POST['dateList'][$key]) ? $refund->date : $_POST['dateList'][$key];
-                $detail->currency = $_POST['currencyList'][$key];
-                $detail->category = $_POST['categoryList'][$key];
-                $detail->desc = $_POST['descList'][$key];
+                $detail->money       = $money;
+                $detail->date        = empty($_POST['dateList'][$key]) ? $refund->date : $_POST['dateList'][$key];
+                $detail->currency    = $_POST['currencyList'][$key];
+                $detail->category    = $_POST['categoryList'][$key];
+                $detail->desc        = $_POST['descList'][$key];
 
                 $this->dao->insert(TABLE_REFUND)->data($detail)->autoCheck()->exec();
             }
@@ -102,6 +104,104 @@ class refundModel extends model
 
         return dao::isError();
     } 
+
+    /**
+     * update a refund.
+     * 
+     * @param  int    $refundID 
+     * @access public
+     * @return object|bool
+     */
+    public function update($refundID)
+    {
+        $oldRefund = $this->getByID($refundID);
+        $refund = fixer::input('post')
+            ->add('editedBy', $this->app->user->account)
+            ->add('editedDate', helper::now())
+            ->remove('firstReviewer,firstReviewDate,sencondReviewer,secondReviewDate,refundBy,refundDate')
+            ->remove('idList,dateList,moneyList,currencyList,categoryList,descList')
+            ->get();
+
+        $this->dao->update(TABLE_REFUND)
+            ->data($refund)
+            ->autoCheck()
+            ->batchCheck($this->config->refund->require->edit, 'notempty')
+            ->where('id')->eq($refundID)
+            ->exec();
+
+        /* update details. */
+        if(!empty($_POST['moneyList']))
+        {
+            $newDetails = array();
+            foreach($this->post->moneyList as $key => $money)
+            {
+                if(empty($money)) continue;
+                $detail = new stdclass();
+                $detail->id          = empty($_POST['idList'][$key]) ? '0' : $_POST['idList'][$key];
+                $detail->parent      = $refundID;
+                $detail->status      = 'wait';
+                $detail->createdBy   = $this->app->user->account;
+                $detail->createdDate = helper::now();
+                $detail->money       = $money;
+                $detail->date        = empty($_POST['dateList'][$key]) ? $refund->date : $_POST['dateList'][$key];
+                $detail->currency    = $_POST['currencyList'][$key];
+                $detail->category    = $_POST['categoryList'][$key];
+                $detail->desc        = $_POST['descList'][$key];
+
+                if($detail->id == '0') 
+                {
+                    $this->dao->insert(TABLE_REFUND)->data($detail, 'id')->autoCheck()->exec();
+                    $detail->id = $this->dao->lastInsertID();
+                }
+                else
+                {
+                    $this->dao->update(TABLE_REFUND)->data($detail, 'id')->autoCheck()->where('id')->eq($detail->id)->exec();
+                }
+                $newDetails[$detail->id] = $detail;
+            }
+            $refund->detail = $newDetails;
+
+            /* remove old details. */
+            foreach($oldRefund->detail as $detail)
+            {
+                if(!isset($newDetails[$detail->id])) $this->dao->delete()->from(TABLE_REFUND)->where('id')->eq($detail->id)->exec();
+            }
+        }
+        else
+        {
+            /* remove old details. */
+            foreach($oldRefund->detail as $detail)
+            {
+                $this->dao->delete()->from(TABLE_REFUND)->where('id')->eq($detail->id)->exec();
+            }
+        }
+
+        return commonModel::createChanges($oldRefund, $refund);
+    }
+
+    /**
+     * delete a refund.
+     * 
+     * @param  int    $refundID 
+     * @param  null   $null 
+     * @access public
+     * @return bool
+     */
+    public function delete($refundID, $null = null)
+    {
+        $oldRefund = $this->getByID($refundID);
+        $this->dao->delete()->from(TABLE_REFUND)->where('id')->eq($refundID)->exec();
+
+        /* remove old details. */
+        if(!empty($oldRefund->detail))
+        {
+            foreach($oldRefund->detail as $detail)
+            {
+                $this->dao->delete()->from(TABLE_REFUND)->where('id')->eq($detail->id)->exec();
+            }
+        }
+        return dao::isError();
+    }
 
     /**
      * Set refund category. 

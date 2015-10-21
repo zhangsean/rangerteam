@@ -73,6 +73,6 @@ $lang->trip->menu->company    = '公司|trip|company|';
 $lang->refund = new stdclass();
 $lang->refund->menu = new stdclass();
 $lang->refund->menu->personal = '我的报销|refund|personal|';
-$lang->refund->menu->company  = '公司|refund|company|';
+$lang->refund->menu->company  = '所有报销|refund|company|';
 $lang->refund->menu->review   = '报销审批|refund|browsereview|';
 $lang->refund->menu->settings = '设置|refund|settings|';

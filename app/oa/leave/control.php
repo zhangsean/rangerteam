@@ -19,7 +19,7 @@ class leave extends control
      */
     public function index()
     {
-        $this->locate(inlink('browse'));
+        $this->locate(inlink('personal'));
     }
 
     /**

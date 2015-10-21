@@ -3,9 +3,12 @@ if(!isset($lang->refund)) $lang->refund = new stdclass();
 $lang->refund->common      = '报销';
 $lang->refund->create      = '申请报销';
 $lang->refund->browse      = '报销列表';
+$lang->refund->personal    = '我的报销';
+$lang->refund->company     = '所有报销';
 $lang->refund->edit        = '编辑报销';
+$lang->refund->view        = '查看';
 $lang->refund->review      = '报销审批';
-$lang->refund->detail      = '详情';
+$lang->refund->detail      = '明细';
 $lang->refund->settings    = '设置';
 $lang->refund->setCategory = '报销科目设置';
 
@@ -28,6 +31,7 @@ $lang->refund->secondReviewer   = '第二审批人';
 $lang->refund->secondReviewDate = '第二审批日期';
 $lang->refund->refundBy         = '经办人';
 $lang->refund->refundDate       = '报销日期';
+$lang->refund->baseInfo         = '基本信息';
 $lang->refund->reason           = '理由';
 
 $lang->refund->statusList['wait']   = '等待审批';
