@@ -54,6 +54,7 @@
     <?php foreach($attends as $dept => $deptAttends):?>
       <?php foreach($deptAttends as $account => $userAttends):?>
         <?php foreach($userAttends as $attend):?>
+        <?php $currentDept = $users[$attend->account]->dept;?>
         <tr>
           <td><?php echo $attend->id;?></td>
           <td><?php echo $deptList[$currentDept]->name?></td>

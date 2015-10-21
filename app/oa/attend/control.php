@@ -328,14 +328,13 @@ class attend extends control
             $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
             if(!empty($deptList)) 
             {
-                if($dept == '' or !isset($deptList[$dept])) $dept = current($deptList)->id;
+                if($dept == '' or !isset($deptList[$dept])) $dept = array_keys($deptList);
                 $attends = $this->attend->getByDept($dept, $startDate = '', $endDate = '', $reviewStatus);
             }
 
             $this->view->attends      = $attends;
             $this->view->deptList     = $deptList;
             $this->view->reviewStatus = $reviewStatus;
-            $this->view->currentDept  = $dept;
         }
 
         $this->display();
