@@ -28,8 +28,8 @@ $lang->refund->secondReviewDate = '第二审批日期';
 $lang->refund->refundBy         = '经办人';
 $lang->refund->refundDate       = '报销日期';
 
-$lang->refund->statuList['wait']   = '等待审批';
-$lang->refund->statuList['doing']  = '审批中';
-$lang->refund->statuList['pass']   = '审批通过';
-$lang->refund->statuList['refuse'] = '审批拒绝';
-$lang->refund->statuList['finish'] = '已报销';
+$lang->refund->statusList['wait']   = '等待审批';
+$lang->refund->statusList['doing']  = '审批中';
+$lang->refund->statusList['pass']   = '审批通过';
+$lang->refund->statusList['refuse'] = '审批拒绝';
+$lang->refund->statusList['finish'] = '已报销';
