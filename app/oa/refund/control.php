@@ -184,8 +184,7 @@ class refund extends control
         {
             $settings = fixer::input('post')->get();
 
-            if($settings->firstReviewer == $settings->secondReviewer) $this->send(array('result' => 'fail', 'message' => $this->lang->refund->uniqueReviewer));
-            if(!$settings->firstReviewer and $settings->secondReviewer) $this->send(array('result' => 'fail', 'message' => $this->lang->refund->firstNotEmpty));
+            if($settings->firstReviewer and $settings->secondReviewer and $settings->firstReviewer == $settings->secondReviewer) $this->send(array('result' => 'fail', 'message' => $this->lang->refund->uniqueReviewer));
 
             $this->loadModel('setting')->setItems('system.oa.refund', $settings);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -215,9 +214,26 @@ class refund extends control
 
         if(!empty($this->config->refund->firstReviewer) or !empty($this->config->refund->secondReviewer))
         { 
-            $deptList = $this->loadModel('tree')->getListByType('dept');
-            if($this->config->refund->firstReviewer == $this->app->user->account) $refunds = $this->refund->getList('', 'wait');
-            if($this->config->refund->secondReviewer == $this->app->user->account) $refunds = $this->refund->getList('', 'doing');
+            if(empty($this->config->refund->firstReviewer) and !empty($this->config->refund->secondReviewer))
+            {
+                if($this->config->refund->secondReviewer == $this->app->user->account)
+                {
+                    $deptList = $this->loadModel('tree')->getListByType('dept');
+                    $refunds = $this->refund->getList('', 'doing');
+                }
+                else
+                {
+                    $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+                    $deptIDList = array_keys($deptList);
+                    if(!empty($deptList)) $refunds = $this->refund->getList($deptIDList, 'wait');
+                }
+            }
+            else
+            {
+                $deptList = $this->loadModel('tree')->getListByType('dept');
+                if($this->config->refund->firstReviewer == $this->app->user->account) $refunds = $this->refund->getList('', 'wait');
+                if($this->config->refund->secondReviewer == $this->app->user->account) $refunds = $this->refund->getList('', 'doing');
+            }
         }
         else
         {

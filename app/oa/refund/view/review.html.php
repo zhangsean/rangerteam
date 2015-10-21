@@ -14,7 +14,11 @@
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
+<?php if($status == 'pass'):?>
 <form method='post' id='ajaxForm' action='<?php echo inlink('review', "refundID={$refund->id}&status=$status")?>'>
+<?php else:?>
+<form method='post' id='rejectForm' action='<?php echo inlink('review', "refundID={$refund->id}&status=$status")?>'>
+<?php endif;?>
   <?php if($status == 'pass'):?>
   <?php if(!empty($refund->detail)):?>
   <table class='table table-form'>
@@ -33,7 +37,7 @@
       <td><?php echo $detail->money;?></td>
       <td><?php echo $lang->refund->statusList[$detail->status];?></td>
       <td><?php echo $detail->desc?></td>
-      <td><?php echo html::a($this->createLink('refund', 'review', "refundID={$detail->id}&status=reject"), $lang->refund->reviewStatusList['reject'], "class='loadInModal'")?></td>
+      <td><?php if($detail->status == 'wait' or $detail->status == 'doing') echo html::a($this->createLink('refund', 'review', "refundID={$detail->id}&status=reject"), $lang->refund->reviewStatusList['reject'], "class='loadInModal'")?></td>
     </tr>
     <?php endforeach;?>
   </table>
