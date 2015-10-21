@@ -9,8 +9,6 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-?>
-<?php
 class refundModel extends model
 {
     /**
@@ -27,6 +25,50 @@ class refundModel extends model
         $refund->detail = $details;
         return $refund;
     }
+
+    /**
+     * Get refund list. 
+     * 
+     * @param  string $deptID 
+     * @param  string $status 
+     * @param  string $createdBy 
+     * @param  string $orderBy 
+     * @param  object $pager 
+     * @access public
+     * @return array
+     */
+    public function getList($deptID = '', $status = '', $createdBy = '', $orderBy = 'id_desc', $pager = null)
+    {
+        $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
+        $refunds = $this->dao->select('*')->from(TABLE_REFUND)
+            ->where('parent')->eq('0')
+            ->beginIf($deptID != '')->andWhere('createdBy')->in(array_keys($users))->fi()
+            ->beginIf($status != '')->andWhere('status')->in($status)->fi()
+            ->beginIf($createdBy != '')->andWhere('createdBy')->in($createdBy)->fi()
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll('id');
+
+        $details = $this->dao->select('*')->from(TABLE_REFUND)->where('parent')->in(array_keys($refunds))->fetchGroup('parent', 'id');
+        foreach($refunds as $key => $refund) $refund->detail = isset($details[$key]) ? $details[$key] : array();
+
+        return $refunds;
+    }
+
+    /**
+     * Get department's refund list. 
+     * 
+     * @param  string $deptID
+     * @param  string $status 
+     * @access public
+     * @return array
+     */
+    public function getByDept($deptID)
+    {
+        $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
+        return $this->dao->select('*')->from(TABLE_REFUND)->where('createdBy')->in(array_keys($users))->andWhere('status')->in('wait,doing')->fetchAll();
+    }
+
 
     /**
      * Get wait refunds.
@@ -86,20 +128,6 @@ class refundModel extends model
 
         return dao::isError();
     } 
-
-    /**
-     * Get department's refund list. 
-     * 
-     * @param  string $deptID
-     * @param  string $status 
-     * @access public
-     * @return array
-     */
-    public function getByDept($deptID)
-    {
-        $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
-        return $this->dao->select('*')->from(TABLE_REFUND)->where('createdBy')->in(array_keys($users))->andWhere('status')->in('wait,doing')->fetchAll();
-    }
 
     /**
      * Set refund category. 

@@ -59,13 +59,13 @@ class refund extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $refunds = array();
+        $refunds = $this->refund->getList('', '', '', $orderBy, $pager);
 
-        $this->view->title = $this->lang->refund->browse;
-        $this->view->refund = $refunds;
+        $this->view->title   = $this->lang->refund->browse;
+        $this->view->refunds = $refunds;
         $this->view->orderBy = $orderBy;
-        $this->view->mode = $mode;
-        $this->view->pager = $pager;
+        $this->view->mode    = $mode;
+        $this->view->pager   = $pager;
         $this->display();
     }
 
