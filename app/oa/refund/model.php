@@ -95,30 +95,10 @@ class refundModel extends model
      * @access public
      * @return array
      */
-    public function getByDept($deptID, $status)
+    public function getByDept($deptID)
     {
         $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
-
-        $refunds = $this->dao->select('t1.*, t2.dept')->from(TABLE_REFUND)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.createdBy=t2.account")
-            ->where('t1.createdBy')->in(array_keys($users))
-            ->andWhere('t1.status')->eq($status)->fi()
-            ->orderBy('t2.dept,t1.date')
-            ->fetchAll();
-
-        /* Format refund list. */
-        $newRefunds = array();
-        foreach($refunds as $key => $refund) $newRefunds[$refund->dept][$refund->createdBy] = $refund; 
-
-        /* Fix dept's user record. */
-        if(!is_array($deptID)) $deptID = explode(',', trim($deptID, ','));
-        foreach($deptID as $dept)
-        {
-            if($dept == 0) continue;
-            $deptUsers = $this->loadModel('user')->getPairs('noclosed,noempty', $dept);
-            foreach($deptUsers as $account => $realname) if(!isset($newRefunds[$dept][$account])) $newRefunds[$dept][$account] = array();
-        }
-
-        return $newRefunds;
+        return $this->dao->select('*')->from(TABLE_REFUND)->where('createdBy')->in(array_keys($users))->andWhere('status')->in('wait,doing')->fetchAll();
     }
 
     /**

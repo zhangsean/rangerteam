@@ -33,3 +33,6 @@ $lang->refund->statusList['doing']  = 'Doing';
 $lang->refund->statusList['pass']   = 'Pass';
 $lang->refund->statusList['refuse'] = 'Refuse';
 $lang->refund->statusList['finish'] = 'Finish';
+
+$lang->refund->reviewStatusList['pass']   = 'Pass';
+$lang->refund->reviewStatusList['reject'] = 'Reject';

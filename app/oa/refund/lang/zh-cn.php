@@ -31,5 +31,8 @@ $lang->refund->refundDate       = '报销日期';
 $lang->refund->statusList['wait']   = '等待审批';
 $lang->refund->statusList['doing']  = '审批中';
 $lang->refund->statusList['pass']   = '审批通过';
-$lang->refund->statusList['refuse'] = '审批拒绝';
+$lang->refund->statusList['reject'] = '审批拒绝';
 $lang->refund->statusList['finish'] = '已报销';
+
+$lang->refund->reviewStatusList['pass']   = '通过';
+$lang->refund->reviewStatusList['reject'] = '拒绝';
