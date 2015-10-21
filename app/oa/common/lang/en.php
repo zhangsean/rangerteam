@@ -75,4 +75,5 @@ $lang->refund->menu = new stdclass();
 $lang->refund->menu->personal = 'My|refund|personal|';
 $lang->refund->menu->company  = 'All|refund|company|';
 $lang->refund->menu->review   = 'Review|refund|browsereview|';
+$lang->refund->menu->todo     = 'Waiting For Reimbursement|refund|todo|';
 $lang->refund->menu->settings = 'Settings|refund|settings|';
