@@ -52,6 +52,9 @@ class refund extends control
      */
     public function edit($refundID)
     {
+        $refund = $this->refund->getByID($refundID);
+        $this->checkPriv($refund, 'delete');
+
         if($_POST)
         {
             $changes = $this->refund->update($refundID);
@@ -64,8 +67,6 @@ class refund extends control
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "refundID=$refundID")));
         }
-
-        $refund = $this->refund->getByID($refundID);
 
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
@@ -105,6 +106,21 @@ class refund extends control
     }
 
     /**
+     * view todo refund.
+     * 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function todo($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->browse('todo', $orderBy, $recTotal, $recPerPage, $pageID);
+    }
+
+    /**
      * browse refund.
      * 
      * @param  string $mode 
@@ -120,21 +136,30 @@ class refund extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $users = $this->loadModel('user')->getList();
-        foreach($users as $key => $user) $newUsers[$user->account] = $user;
-        $deptList = $this->loadModel('tree')->getListByType('dept');
+        $deptList    = $this->loadModel('tree')->getPairs('', 'dept');
+        $deptList[0] = '/';
+        $users       = $this->loadModel('user')->getList();
+        $userPairs   = array();
+        $userDept    = array();
+        foreach($users as $key => $user) 
+        {
+            $userPairs[$user->account] = $user->realname;
+            $userDept[$user->account] = zget($deptList, $user->dept);
+        }
 
         if($mode == 'personal') $refunds = $this->refund->getList('', '', $this->app->user->account, $orderBy, $pager);
         if($mode == 'company')  $refunds = $this->refund->getList('', '', '', $orderBy, $pager);
+        if($mode == 'todo')     $refunds = $this->refund->getList('', 'pass', '', $orderBy, $pager);
 
-        $this->view->title    = $this->lang->refund->$mode;
-        $this->view->refunds  = $refunds;
-        $this->view->orderBy  = $orderBy;
-        $this->view->mode     = $mode;
-        $this->view->pager    = $pager;
-        $this->view->categories = $this->refund->getCategoryPairs();
-        $this->view->users    = $newUsers;
-        $this->view->deptList = $deptList;
+        $this->view->title        = $this->lang->refund->$mode;
+        $this->view->refunds      = $refunds;
+        $this->view->orderBy      = $orderBy;
+        $this->view->mode         = $mode;
+        $this->view->pager        = $pager;
+        $this->view->categories   = $this->refund->getCategoryPairs();
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->view->userPairs    = $userPairs;
+        $this->view->userDept     = $userDept;
         $this->display('refund', 'browse');
     }
     
@@ -167,9 +192,50 @@ class refund extends control
      */
     public function delete($refundID)
     {
+        $refund = $this->refund->getByID($refundID);
+        $this->checkPriv($refund, 'delete', 'json');
+
         $this->refund->delete($refundID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
+    }
+
+    /**
+     * Check refund privilege and locate personal if no privilege. 
+     * 
+     * @param  object $refund 
+     * @param  string $action 
+     * @param  string $errorType   html|json 
+     * @access private
+     * @return void
+     */
+    private function checkPriv($refund, $action, $errorType = '')
+    {
+        if($this->app->user->admin == 'super') return true;
+
+        $pass = true;
+        $action = strtolower($action);
+        $account = $this->app->user->account;
+
+        if($action == 'edit')   if($refund->createdBy != $account) $pass = false;
+        if($action == 'delete') if($refund->createdBy != $account) $pass = false;
+
+        if(!$pass)
+        {
+            if($errorType == '') $errorType = empty($_POST) ? 'html' : 'json';
+            if($errorType == 'json')
+            {
+                $this->app->loadLang('error');
+                $this->send(array('result' => 'fail', 'message' => $this->lang->error->typeList['accessLimited']));
+            }
+            else
+            {
+                $locate = helper::safe64Encode($this->server->http_referer);
+                $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
+                $this->locate($errorLink);
+            }
+        }
+        return $pass;
     }
 
     /**

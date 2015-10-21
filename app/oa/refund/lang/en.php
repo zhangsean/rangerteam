@@ -11,6 +11,7 @@ $lang->refund->review      = 'Review';
 $lang->refund->detail      = 'Detail';
 $lang->refund->settings    = 'Settings';
 $lang->refund->setCategory = 'Set Category';
+$lang->refund->todo        = 'Waiting For Reimbursement';
 
 $lang->refund->id               = 'ID';
 $lang->refund->name             = 'Name';

@@ -19,25 +19,31 @@
   <table class='table table-hover table-striped table-sorter table-data table-fixed text-center'>
     <thead>
       <tr class='text-center'>
-        <th class='w-50px'><?php echo $lang->user->id;?></th>
-        <th class='w-100px'><?php echo $lang->user->dept;?></th>
+        <th class='w-50px'><?php echo $lang->refund->id;?></th>
+        <th class='w-100px visible-lg'><?php echo $lang->user->dept;?></th>
         <th class='w-100px'><?php echo $lang->user->realname;?></th>
         <th class='w-100px'><?php echo $lang->refund->date;?></th>
+        <th class='w-100px'><?php echo $lang->refund->money;?></th>
         <th class='w-100px'><?php echo $lang->refund->status;?></th>
-        <th><?php echo $lang->refund->desc;?></th>
+        <th class='w-100px'><?php echo $lang->refund->firstReviewer;?></th>
+        <th class='w-100px'><?php echo $lang->refund->secondReviewer;?></th>
+        <th class='w-100px'><?php echo $lang->refund->refundBy;?></th>
+        <th><?php echo $lang->refund->name;?></th>
         <th class='w-150px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <?php foreach($refunds as $refund):?>
-    <?php $account = $refund->createdBy;?>
-    <?php $currentDept = $users[$account]->dept;?>
     <tr data-url='<?php echo $this->createLink('refund', 'view', "refundID=$refund->id");?>'>
       <td><?php echo $refund->id;?></td>
-      <td><?php echo $deptList[$currentDept]->name;?></td>
-      <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
+      <td class='visible-lg'><?php echo zget($userDept, $refund->createdBy);?></td>
+      <td><?php echo zget($userPairs, $refund->createdBy);?></td>
       <td><?php echo $refund->date?></td>
+      <td><?php echo zget($currencySign, $refund->currency) . $refund->money?></td>
       <td><?php echo zget($lang->refund->statusList, $refund->status)?></td>
-      <td><?php echo $refund->desc?></td>
+      <td><?php echo zget($userPairs, $refund->firstReviewer);?></td>
+      <td><?php echo zget($userPairs, $refund->secondReviewer);?></td>
+      <td><?php echo zget($userPairs, $refund->refundBy);?></td>
+      <td><?php echo $refund->name?></td>
       <td>
         <?php echo html::a($this->createLink('refund', 'edit',   "refundID={$refund->id}"), $lang->edit, "")?>
         <?php echo html::a($this->createLink('refund', 'delete', "refundID={$refund->id}"), $lang->delete, "class='deleter'")?>

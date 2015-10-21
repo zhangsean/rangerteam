@@ -11,6 +11,7 @@ $lang->refund->review      = '报销审批';
 $lang->refund->detail      = '明细';
 $lang->refund->settings    = '设置';
 $lang->refund->setCategory = '报销科目设置';
+$lang->refund->todo        = '待报销';
 
 $lang->refund->id               = '编号';
 $lang->refund->name             = '名称';
