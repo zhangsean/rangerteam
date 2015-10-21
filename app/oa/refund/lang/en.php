@@ -1,11 +1,13 @@
 <?php
 if(!isset($lang->refund)) $lang->refund = new stdclass();
-$lang->refund->common   = 'Reimbursement';
-$lang->refund->create   = 'Create';
-$lang->refund->browse   = 'Browse List';
-$lang->refund->edit     = 'Edit reimbursement';
-$lang->refund->detail   = 'Detail';
-$lang->refund->settings = 'Settings';
+$lang->refund->common      = 'Reimbursement';
+$lang->refund->create      = 'Create';
+$lang->refund->browse      = 'Browse List';
+$lang->refund->edit        = 'Edit reimbursement';
+$lang->refund->review      = 'Review';
+$lang->refund->detail      = 'Detail';
+$lang->refund->settings    = 'Settings';
+$lang->refund->setCategory = 'Set Category';
 
 $lang->refund->id               = 'ID';
 $lang->refund->name             = 'Name';
@@ -25,3 +27,9 @@ $lang->refund->secondReviewer   = 'Second reviewer';
 $lang->refund->secondReviewDate = 'Second review Date';
 $lang->refund->refundBy         = 'Reimbursed By';
 $lang->refund->refundDate       = 'Reimbursec Date';
+
+$lang->refund->statusList['wait']   = 'Wait';
+$lang->refund->statusList['doing']  = 'Doing';
+$lang->refund->statusList['pass']   = 'Pass';
+$lang->refund->statusList['refuse'] = 'Refuse';
+$lang->refund->statusList['finish'] = 'Finish';
