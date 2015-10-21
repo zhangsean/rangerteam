@@ -28,7 +28,7 @@ class refund extends control
 
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
-        $this->view->categories   = $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
+        $this->view->categories   = $this->refund->getCategoryPairs();
         $this->display();
     }
 

@@ -118,4 +118,26 @@ class refundModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Get refund categories.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getCategory()
+    {
+        return $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->andWhere('refund')->eq(1)->fetchAll('id');
+    }
+
+    /**
+     * Get refund category pairs.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getCategoryPairs()
+    {
+        return $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->andWhere('refund')->eq(1)->fetchPairs('id', 'name');
+    }
 }

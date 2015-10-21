@@ -50,24 +50,22 @@
           <th><?php echo $lang->refund->detail?></th>
           <td colspan='2' id='detailBox'>
             <div class='row'>
-              <div class='col-md-1'><?php echo html::input('dateList[]', '', "class='form-control form-date' placeholder='{$lang->refund->date}'")?></div>
-              <div class='col-md-3'>
-                <div class='input-group'>
+              <div class='col-md-2'><?php echo html::input('dateList[]', '', "class='form-control form-date' placeholder='{$lang->refund->date}'")?></div>
+              <div class='col-md-1'>
                   <?php echo html::input('moneyList[]', '', "class='form-control' placeholder='{$lang->refund->money}'")?>
-                  <span class='input-group-addon'></span>
+              </div>
+              <div class='col-md-2'>
                   <?php echo html::select('currencyList[]', $currencyList, '', "class='form-control'")?>
-                </div>
               </div>
               <div class='col-md-2'><?php echo html::select('categoryList[]', $categories, '', "class='form-control chosen' placeholder='{$lang->refund->category}'")?></div>
-              <div class='col-md-3'><?php echo html::textarea('descList[]', '', "class='form-control' style='height:32px;' placeholder='{$lang->refund->desc}'")?></div>
-              <div class='col-md-2'><i class='btn btn-mini icon-plus'></i>&nbsp;&nbsp;<i class='btn btn-mini icon-minus'></i></div>
+              <div class='col-md-4'><?php echo html::textarea('descList[]', '', "class='form-control' style='height:32px;' placeholder='{$lang->refund->desc}'")?></div>
+              <div class='col-md-1'><i class='btn btn-mini icon-plus'></i>&nbsp;&nbsp;<i class='btn btn-mini icon-minus'></i></div>
             </div>
           </td>
         </tr>
         <tr>
           <th><?php echo $lang->refund->desc?></th>
-          <td><?php echo html::textarea('desc', '', "class='form-control'")?></td>
-          <td></td>
+          <td colspan='2'><?php echo html::textarea('desc', '', "class='form-control'")?></td>
         </tr>
         <tr><th></th><td colspan='2'><?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?></td></tr>
       </table>
@@ -76,17 +74,16 @@
 </form>
 <script type='text/template' id='detailTpl'>
 <div class='row'>
-  <div class='col-md-1'><?php echo html::input('dateList[]', '', "class='form-control form-date' placeholder='{$lang->refund->date}'")?></div>
-  <div class='col-md-3'>
-    <div class='input-group'>
+  <div class='col-md-2'><?php echo html::input('dateList[]', '', "class='form-control form-date' placeholder='{$lang->refund->date}'")?></div>
+  <div class='col-md-1'>
       <?php echo html::input('moneyList[]', '', "class='form-control' placeholder='{$lang->refund->money}'")?>
-      <span class='input-group-addon'></span>
-      <?php echo html::select('currencyList[]', $currencyList, '', "class='form-control'")?>
-    </div>
   </div>
-  <div class='col-md-2'><?php echo html::select('categoryList[]', $categories, '', "class='form-control' placeholder='{$lang->refund->category}'")?></div>
-  <div class='col-md-3'><?php echo html::textarea('descList[]', '', "class='form-control' style='height:32px;' placeholder='{$lang->refund->desc}'")?></div>
-  <div class='col-md-2'><i class='btn btn-mini icon-plus'></i>&nbsp;&nbsp;<i class='btn btn-mini icon-minus'></i></div>
+  <div class='col-md-2'>
+      <?php echo html::select('currencyList[]', $currencyList, '', "class='form-control'")?>
+  </div>
+  <div class='col-md-2'><?php echo html::select('categoryList[]', $categories, '', "class='form-control chosen' placeholder='{$lang->refund->category}'")?></div>
+  <div class='col-md-4'><?php echo html::textarea('descList[]', '', "class='form-control' style='height:32px;' placeholder='{$lang->refund->desc}'")?></div>
+  <div class='col-md-1'><i class='btn btn-mini icon-plus'></i>&nbsp;&nbsp;<i class='btn btn-mini icon-minus'></i></div>
 </div>
 </script>
 <?php include '../../common/view/footer.html.php';?>
