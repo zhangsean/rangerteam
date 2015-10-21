@@ -20,8 +20,8 @@ class refundModel extends model
      */
     public function getByID($ID)
     {
-        $refund  = $this->select('*')->from(TABLE_REFUND)->where('id')->eq($ID)->fetch();
-        $details = $this->select('*')->from(TABLE_REFUND)->where('parent')->eq($ID)->fetchAll('id');
+        $refund  = $this->dao->select('*')->from(TABLE_REFUND)->where('id')->eq($ID)->fetch();
+        $details = $this->dao->select('*')->from(TABLE_REFUND)->where('parent')->eq($ID)->fetchAll('id');
         $refund->detail = $details;
         return $refund;
     }
@@ -53,32 +53,6 @@ class refundModel extends model
         foreach($refunds as $key => $refund) $refund->detail = isset($details[$key]) ? $details[$key] : array();
 
         return $refunds;
-    }
-
-    /**
-     * Get department's refund list. 
-     * 
-     * @param  string $deptID
-     * @param  string $status 
-     * @access public
-     * @return array
-     */
-    public function getByDept($deptID)
-    {
-        $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
-        return $this->dao->select('*')->from(TABLE_REFUND)->where('createdBy')->in(array_keys($users))->andWhere('status')->in('wait,doing')->fetchAll();
-    }
-
-
-    /**
-     * Get wait refunds.
-     * 
-     * @access public
-     * @return array()
-     */
-    public function getByStatus($status)
-    {
-        return $this->dao->select('*')->from(TABLE_REFUND)->where('status')->eq($status)->fetchAll();
     }
 
     /**
@@ -167,5 +141,28 @@ class refundModel extends model
     public function getCategoryPairs()
     {
         return $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->andWhere('refund')->eq(1)->fetchPairs('id', 'name');
+    }
+
+    /**
+     * Review a refund.
+     * 
+     * @param  int    $refundID 
+     * @param  int    $status 
+     * @access public
+     * @return bool
+     */
+    public function review($refundID, $status)
+    {
+        if($status == 'pass')
+        {
+            if(!empty($this->config->refund->firstReviewer) and !empty($this->config->refund->secondReviewer))
+            {
+                if($this->config->refund->firstReviewer == $this->app->user->account) $status = 'doing';
+            }
+        }
+
+        $data = fixer::input('post')->add('status', $status)->get();
+        $this->dao->update(TABLE_REFUND)->data($data)->where('id')->eq($refundID)->exec();
+        return !dao::isError();
     }
 }

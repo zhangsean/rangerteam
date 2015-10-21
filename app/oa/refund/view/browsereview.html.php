@@ -15,9 +15,12 @@
   <table class='table table-hover table-striped table-sorter table-data table-fixed text-center'>
     <thead>
       <tr class='text-center'>
-        <th class='w-50px'><?php echo $lang->user->id;?></th>
+        <th class='w-50px'><?php echo $lang->refund->id;?></th>
+        <th class='w-150px'><?php echo $lang->refund->name;?></th>
+        <th class='w-100px'><?php echo $lang->refund->category;?></th>
         <th class='w-100px'><?php echo $lang->user->dept;?></th>
         <th class='w-100px'><?php echo $lang->user->realname;?></th>
+        <th class='w-100px'><?php echo $lang->refund->money;?></th>
         <th class='w-100px'><?php echo $lang->refund->date;?></th>
         <th class='w-100px'><?php echo $lang->refund->status;?></th>
         <th><?php echo $lang->refund->desc;?></th>
@@ -29,14 +32,17 @@
     <?php $currentDept = $users[$account]->dept;?>
     <tr>
       <td><?php echo $refund->id;?></td>
+      <td><?php echo $refund->name;?></td>
+      <td><?php echo $categories[$refund->category];?></td>
       <td><?php echo $deptList[$currentDept]->name;?></td>
       <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
-      <td><?php echo $refund->date?></td>
-      <td><?php echo zget($lang->refund->statusList, $refund->status)?></td>
+      <td><?php echo $refund->money;?></td>
+      <td><?php echo $refund->date;?></td>
+      <td><?php echo zget($lang->refund->statusList, $refund->status);?></td>
       <td><?php echo $refund->desc?></td>
       <td>
-        <?php echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}&status=pass"),   $lang->refund->reviewStatusList['pass'], "class='pass'")?>
-        <?php echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}&status=reject"), $lang->refund->reviewStatusList['reject'], "class='reject'")?>
+        <?php echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}&status=pass"),   $lang->refund->reviewStatusList['pass'], "data-toggle='modal'")?>
+        <?php echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}&status=reject"), $lang->refund->reviewStatusList['reject'], "data-toggle='modal'")?>
       </td>
     </tr>
     <?php endforeach;?>

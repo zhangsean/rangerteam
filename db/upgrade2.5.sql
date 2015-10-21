@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `oa_refund` (
   `secondReviewDate` datetime NOT NULL,
   `refundBy` char(30) NOT NULL DEFAULT '',
   `refundDate` datetime NOT NULL,
+  `reason` text NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `createdBy` (`createdBy`),
   KEY `firstReviewer` (`firstReviewer`),

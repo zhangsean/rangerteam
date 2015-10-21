@@ -14,6 +14,7 @@ $lang->refund->name             = '名称';
 $lang->refund->category         = '科目';
 $lang->refund->date             = '日期';
 $lang->refund->money            = '金额';
+$lang->refund->reviewMoney      = '审批金额';
 $lang->refund->currency         = '货币';
 $lang->refund->desc             = '描述';
 $lang->refund->status           = '状态';
@@ -27,6 +28,7 @@ $lang->refund->secondReviewer   = '第二审批人';
 $lang->refund->secondReviewDate = '第二审批日期';
 $lang->refund->refundBy         = '经办人';
 $lang->refund->refundDate       = '报销日期';
+$lang->refund->reason           = '理由';
 
 $lang->refund->statusList['wait']   = '等待审批';
 $lang->refund->statusList['doing']  = '审批中';
@@ -36,3 +38,6 @@ $lang->refund->statusList['finish'] = '已报销';
 
 $lang->refund->reviewStatusList['pass']   = '通过';
 $lang->refund->reviewStatusList['reject'] = '拒绝';
+
+$lang->refund->uniqueReviewer = '第一审核人和第二审核人不能是同一个人';
+$lang->refund->firstNotEmpty  = '第一审核人不能为空';

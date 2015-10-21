@@ -81,16 +81,16 @@ class refund extends control
         {
             $settings = fixer::input('post')->get();
 
+            if($settings->firstReviewer == $settings->secondReviewer) $this->send(array('result' => 'fail', 'message' => $this->lang->refund->uniqueReviewer));
+            if(!$settings->firstReviewer and $settings->secondReviewer) $this->send(array('result' => 'fail', 'message' => $this->lang->refund->firstNotEmpty));
+
             $this->loadModel('setting')->setItems('system.oa.refund', $settings);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
-        $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
-        $deptManager = trim($dept->moderators, ',');
-
         $this->view->title          = $this->lang->refund->settings; 
-        $this->view->firstReviewer  = !empty($this->config->refund->firstReviewer) ? $this->config->refund->firstReviewer : $deptManager;
+        $this->view->firstReviewer  = !empty($this->config->refund->firstReviewer) ? $this->config->refund->firstReviewer : '';
         $this->view->secondReviewer = !empty($this->config->refund->secondReviewer) ? $this->config->refund->secondReviewer : '';
         $this->view->users          = $this->loadModel('user')->getPairs();
         $this->display();
@@ -113,20 +113,21 @@ class refund extends control
         if(!empty($this->config->refund->firstReviewer) or !empty($this->config->refund->secondReviewer))
         { 
             $deptList = $this->loadModel('tree')->getListByType('dept');
-            if($this->config->refund->firstReviewer == $this->app->user->account) $refunds = $this->refund->getByStatus('wait');
-            if($this->config->refund->secondReviewer == $this->app->user->account) $refunds = $this->refund->getByStatus('doing');
+            if($this->config->refund->firstReviewer == $this->app->user->account) $refunds = $this->refund->getList('', 'wait');
+            if($this->config->refund->secondReviewer == $this->app->user->account) $refunds = $this->refund->getList('', 'doing');
         }
         else
         {
             $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
             $deptIDList = array_keys($deptList);
-            if(!empty($deptList)) $refunds = $this->refund->getByDept($deptIDList);
+            if(!empty($deptList)) $refunds = $this->refund->getList($deptIDList, 'wait,doing');
         }
 
-        $this->view->title    = $this->lang->refund->review;
-        $this->view->users    = $newUsers;
-        $this->view->refunds  = $refunds;
-        $this->view->deptList = $deptList;
+        $this->view->title      = $this->lang->refund->review;
+        $this->view->users      = $newUsers;
+        $this->view->refunds    = $refunds;
+        $this->view->deptList   = $deptList;
+        $this->view->categories = $this->refund->getCategoryPairs();
 
         $this->display();
     }
@@ -155,6 +156,30 @@ class refund extends control
 
         $this->view->expenseList      = $expenseList;
         $this->view->refundCategories = $refundCategories;
+        $this->display();
+    }
+
+    /**
+     * Review refund.
+     * 
+     * @param  int     $refundID 
+     * @param  string  $status 
+     * @access public
+     * @return void
+     */
+    public function review($refundID, $status)
+    {
+        if($_POST)
+        {
+            $this->refund->review($refundID, $status);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $this->view->title      = $this->lang->refund->review;
+        $this->view->refund     = $this->refund->getByID($refundID);
+        $this->view->status     = $status;
+        $this->view->categories = $this->refund->getCategoryPairs();
         $this->display();
     }
 }

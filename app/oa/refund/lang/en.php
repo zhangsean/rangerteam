@@ -14,6 +14,7 @@ $lang->refund->name             = 'Name';
 $lang->refund->category         = 'Category';
 $lang->refund->date             = 'Date';
 $lang->refund->money            = 'Money';
+$lang->refund->reviewMoney      = 'Approval Amount';
 $lang->refund->currency         = 'Currency';
 $lang->refund->desc             = 'Description';
 $lang->refund->status           = 'Status';
@@ -27,6 +28,7 @@ $lang->refund->secondReviewer   = 'Second reviewer';
 $lang->refund->secondReviewDate = 'Second review Date';
 $lang->refund->refundBy         = 'Reimbursed By';
 $lang->refund->refundDate       = 'Reimbursec Date';
+$lang->refund->reason           = 'Reason';
 
 $lang->refund->statusList['wait']   = 'Wait';
 $lang->refund->statusList['doing']  = 'Doing';
@@ -36,3 +38,6 @@ $lang->refund->statusList['finish'] = 'Finish';
 
 $lang->refund->reviewStatusList['pass']   = 'Pass';
 $lang->refund->reviewStatusList['reject'] = 'Reject';
+
+$lang->refund->uniqueReviewer = 'The first reviewer and the second reviewer can not be the same.';
+$lang->refund->firstNotEmpty  = 'The first reviewer can not be empty.';
