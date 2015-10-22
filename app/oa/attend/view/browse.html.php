@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../../sys/common/view/treeview.html.php';?>
 <?php $lang->attend->abbrStatusList['rest'] = '';?>
 <div id='menuActions'>
   <?php commonModel::printLink('attend', 'export', "data=$currentYear$currentMonth&company=$company", "{$lang->attend->export}", "class='iframe btn btn-primary'")?>

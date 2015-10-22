@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../../sys/common/view/treeview.html.php';?>
 <?php js::set('confirmReview', $lang->leave->confirmReview)?>
 <div id='menuActions'>
   <?php commonModel::printLink('leave', 'create', "", "<i class='icon icon-plus'></i> {$lang->leave->create}", "data-toggle='modal' class='btn btn-primary'")?>

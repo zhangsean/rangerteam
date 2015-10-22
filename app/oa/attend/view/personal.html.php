@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../../sys/common/view/treeview.html.php';?>
 <div class='with-side'>
   <div class='side'>
     <div class='panel panel-sm'>

@@ -11,4 +11,7 @@ $(document).ready(function()
         if(response.locate == 'reload') return location.href = location.href;
         if(response.locate) return location.href = response.locate;
     });
+
+    /* expand active tree. */
+    $('.tree li.active .hitarea').click();
 });
