@@ -47,4 +47,4 @@ $lang->refund->reviewStatusList['reject'] = 'Reject';
 $lang->refund->descTip = "%s apply %s.";
 
 $lang->refund->uniqueReviewer = 'The first reviewer and the second reviewer can not be the same.';
-$lang->refund->createTrateTip = 'Do you record expense for this reimbursement?';
+$lang->refund->createTradeTip = 'Do you record expense for this reimbursement?';
