@@ -286,4 +286,47 @@ class refundModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Refund a reimbursement.
+     * 
+     * @param  int    $refundID 
+     * @access public
+     * @return void
+     */
+    public function reimburse($refundID)
+    {
+        $this->dao->update(TABLE_REFUND)->set('status')->eq('finish')->where('id')->eq($refundID)->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Create a trade for a reimbursement.
+     * 
+     * @param  int    $refundID 
+     * @access public
+     * @return void
+     */
+    public function createTrade($refundID)
+    {
+        $refund = $this->getByID($refundID);
+
+        $trade = new stdclass();
+        $trade->type      = 'out';
+        $trade->depositor = $this->post->depositor;
+        $trade->money     = $refund->money;
+        $trade->currency  = $refund->currency;
+        $trade->date      = date('Y-m-d');
+        $trade->handlers  = $this->app->user->account;
+        $trade->category  = $refund->category;
+        $trade->desc      = $refund->desc;
+        $trade->createdBy = $this->app->user->account;
+        $trade->createdDate = helper::now();
+        $trade->editedBy    = $this->app->user->account;
+        $trade->editedDate  = helper::now();
+
+        $this->dao->insert(TABLE_TRADE)->data($trade)->autoCheck()->exec();
+
+        return !dao::isError();
+    }
 }

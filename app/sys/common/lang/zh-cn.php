@@ -153,6 +153,8 @@ $lang->js->deleteing             = '删除中';
 $lang->js->doing                 = '处理中';
 $lang->js->timeout               = '网络超时,请重试';
 $lang->js->confirmDiscardChanges = '表单已更改，确定关闭？';
+$lang->js->yes                   = '是';
+$lang->js->no                    = '否';
 
 /* Contact fields*/
 $lang->company = new stdclass();

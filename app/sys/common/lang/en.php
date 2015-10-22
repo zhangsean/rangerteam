@@ -153,6 +153,8 @@ $lang->js->deleteing             = 'Deleting...';
 $lang->js->doing                 = 'Processing...';
 $lang->js->timeout               = 'Timeout';
 $lang->js->confirmDiscardChanges = 'Discard changes?';
+$lang->js->yes                   = 'Yes';
+$lang->js->no                    = 'No';
 
 /* Contact fields*/
 $lang->company = new stdclass();

@@ -372,4 +372,43 @@ class refund extends control
         $this->view->categories = $this->refund->getCategoryPairs();
         $this->display();
     }
+
+    /**
+     * Refund a reimbursement.
+     * 
+     * @param  int    $refundID 
+     * @access public
+     * @return void
+     */
+    public function reimburse($refundID)
+    {
+        $this->refund->reimburse($refundID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'refundID' => $refundID));
+    }
+
+    /**
+     * Create trade of refund.
+     * 
+     * @param  int    $refundID 
+     * @access public
+     * @return void
+     */
+    public function createTrade($refundID)
+    {
+        $this->app->loadLang('trade', 'cash');
+
+        if($_POST)
+        {
+            $this->refund->createTrade($refundID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $this->view->title       = $this->lang->refund->common;
+        $this->view->refundID    = $refundID;
+        $this->view->depositorList = array('' => '') + $this->loadModel('depositor', 'cash')->getPairs();
+
+        $this->display();
+    }
 }

@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('mode', $mode);?>
+<?php js::set('createTradeTip', $lang->refund->createTradeTip);?>
 <?php $secondReviewerClass = empty($this->config->refund->secondReviewer) ? 'hidden' : '';?>
 <div id='menuActions'>
   <?php commonModel::printLink('refund', 'create', '', '<i class="icon-plus"></i> ' . $lang->refund->create, 'class="btn btn-primary"');?>
@@ -52,6 +53,8 @@
       <td>
         <?php echo html::a($this->createLink('refund', 'edit',   "refundID={$refund->id}"), $lang->edit, "")?>
         <?php echo html::a($this->createLink('refund', 'delete', "refundID={$refund->id}"), $lang->delete, "class='deleter'")?>
+        <?php if($mode == 'todo') echo html::a($this->createLink('refund', 'reimburse', "refundID={$refund->id}"), $lang->refund->common, "class='refund'");?>
+        <?php if($mode == 'todo') echo html::a($this->createLink('refund', 'createtrade', "refundID={$refund->id}"), $lang->refund->common, "class='createTrade hide'");?>
       </td>
     </tr>
     <?php endforeach;?>
