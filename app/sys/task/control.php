@@ -189,13 +189,50 @@ class task extends control
         $task = $this->task->getByID($taskID);
         $this->checkPriv($task, 'view');
 
+        /* Process pre and next button. */
+        $preAndNext = $this->loadModel('common', 'sys')->getPreAndNextObject('task', $taskID);
+        if(!empty($task->children))
+        {
+            $this->session->set('childrenTaskIDList', join(',', array_keys($task->children)));
+            $this->session->set('parentTaskID', $task->id);
+        }
+        if($task->id == $this->session->parentTaskID)
+        {
+            $preAndNext->next = reset($task->children);
+        }
+        if($task->parent == $this->session->parentTaskID)
+        {
+            $IDs  = explode(',', $this->session->childrenTaskIDList);
+            $hit  = false;
+            $pre  = '';
+            $next = '';
+            foreach($IDs as $id)
+            {
+                if($hit) $next = $id;
+                if($hit) break;
+                if($task->id == $id) $hit = true;
+                if(!$hit) $pre = $id;
+            }
+            if($hit)
+            {
+                if($pre != '')  $preAndNext->pre  = $this->task->getByID($pre);
+                if($pre == '')  $preAndNext->pre  = $this->task->getByID($task->parent);
+                if($next != '') $preAndNext->next = $this->task->getByID($next);
+                if($next == '') 
+                {
+                    $parentPRN = $this->loadModel('common', 'sys')->getPreAndNextObject('task', $task->parent);
+                    $preAndNext->next = $parentPRN->next;
+                }
+            }
+        }
+
         $this->view->title      = $this->lang->task->view . $task->name;
         $this->view->task       = $task;
         $this->view->projectID  = $task->project;
         $this->view->projects   = $this->loadModel('project')->getPairs();
         $this->view->members    = $this->loadModel('project')->getMemberPairs($task->project);
         $this->view->users      = $this->loadModel('user')->getPairs();
-        $this->view->preAndNext = $this->loadModel('common', 'sys')->getPreAndNextObject('task', $taskID);
+        $this->view->preAndNext = $preAndNext;
 
         $this->display();
     }
