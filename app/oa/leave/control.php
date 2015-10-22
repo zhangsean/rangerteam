@@ -74,6 +74,7 @@ class leave extends control
         $monthList    = $this->leave->getAllMonth();
         $yearList     = array_reverse(array_keys($monthList));
         $deptList     = array();
+        $leaveList    = array();
 
         if($type == 'personal')
         {
@@ -81,9 +82,20 @@ class leave extends control
         }
         elseif($type == 'browseReview')
         {
-            $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
-            foreach($deptList as $key => $value) $deptList[$key] = $value->name;
-            $leaveList = $this->leave->getList($currentYear, $currentMonth, '', array_keys($deptList));
+            if(!empty($this->config->attend->reviewedBy))
+            { 
+                if($this->config->attend->reviewedBy == $this->app->user->account)
+                {
+                    $deptList = $this->loadModel('tree')->getPairs('', 'dept');
+                    $leaveList = $this->leave->getList($currentYear, $currentMonth, '', array_keys($deptList));
+                }
+            }
+            else
+            {
+                $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+                foreach($deptList as $key => $value) $deptList[$key] = $value->name;
+                $leaveList = $this->leave->getList($currentYear, $currentMonth, '', array_keys($deptList));
+            }
         }
         elseif($type == 'company')
         {
