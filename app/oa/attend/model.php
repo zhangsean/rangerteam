@@ -515,7 +515,7 @@ class attendModel extends model
      * @access public
      * @return bool
      */
-    public function setReviewer()
+    public function setManager()
     {
         $deptList = $this->post->dept;
         foreach($deptList as $id => $dept)

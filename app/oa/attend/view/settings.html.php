@@ -17,7 +17,7 @@
     <nav class='menu leftmenu affix'>
       <ul class='nav nav-primary'>
         <li><?php commonModel::printLink('attend', 'settings', '', "{$lang->attend->settings}");?></li>
-        <li><?php commonModel::printLink('attend', 'setreviewer', '', "{$lang->attend->setReviewer}");?></li>
+        <li><?php commonModel::printLink('attend', 'setmanager', '', "{$lang->attend->setManager}");?></li>
       </ul>
     </nav>
   </div>

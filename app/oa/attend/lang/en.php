@@ -95,5 +95,5 @@ $lang->attend->notice['absent']   = "No record";
 $lang->attend->confirmReview['pass']   = 'Are sure to pass it?';
 $lang->attend->confirmReview['reject'] = 'Are sure to reject it?';
 
-$lang->attend->settings    = 'Normal Settings';
-$lang->attend->setReviewer = 'Reviewer Settings';
+$lang->attend->settings   = 'Normal Settings';
+$lang->attend->setManager = 'Depatment Manager Settings';

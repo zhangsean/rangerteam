@@ -395,13 +395,13 @@ class attend extends control
      * @access public
      * @return void
      */
-    public function setReviewer()
+    public function setManager()
     {
         $deptList = $this->loadModel('tree')->getListByType('dept');
 
         if($_POST)
         {
-            $this->attend->setReviewer();
+            $this->attend->setManager();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
