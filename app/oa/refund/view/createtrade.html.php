@@ -14,7 +14,7 @@
 <form method='post' id='ajaxForm' action='<?php echo inlink('createtrade', "refundid={$refundID}")?>'>
   <table class='table table-form'>
     <tr>
-      <th class='w-100px'><?php echo $lang->trade->depositor;?></th>
+      <th class='w-60px'><?php echo $lang->trade->depositor;?></th>
       <td><?php echo html::select('depositor', $depositorList, '', "class='form-control'");?></td>
       <td><?php echo html::submitButton();?></td>
     </tr>

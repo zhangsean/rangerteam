@@ -296,7 +296,12 @@ class refundModel extends model
      */
     public function reimburse($refundID)
     {
+        $refund = $this->getByID($refundID);
         $this->dao->update(TABLE_REFUND)->set('status')->eq('finish')->where('id')->eq($refundID)->exec();
+        foreach($refund->detail as $detail)
+        {
+            if($detail->status != 'reject') $this->dao->update(TABLE_REFUND)->set('status')->eq('finish')->where('id')->eq($detail->id)->exec();
+        }
         return !dao::isError();
     }
 
