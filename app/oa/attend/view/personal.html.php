@@ -34,13 +34,30 @@
   </div>
   <div class='main'>
     <div class='row'>
-      <?php $startDate = strtotime('this week', strtotime("$currentYear-$currentMonth-01"))?>
-      <?php $endDate   = strtotime('last day of this month', strtotime("$currentYear-$currentMonth-01"))?>
-      <?php $endDate   = (date('w', $endDate) == 0) ? $endDate : strtotime("+6 day this week", $endDate)?>
-      <?php $weekIndex = 0;?>
+      <?php
+      $weekIndex = 0;
+      if($this->config->attend->workingDays > 7)
+      {
+          $startDate     = strtotime("$currentYear-$currentMonth-01");
+          $startDate     = date('w', $startDate) == 0 ? $startDate : strtotime("last Sunday", $startDate);
+          $endDate       = strtotime("last day of this month $currentYear-$currentMonth-01");
+          $endDate       = date('w', $endDate) == 6 ? $endDate : strtotime("next Saturday", $endDate);
+          $firstDayIndex = 0;
+          $lastDayIndex  = 6;
+      }
+      else
+      {
+          $startDate     = strtotime("$currentYear-$currentMonth-01");
+          $startDate     = date('w', $startDate) == 1 ? $startDate : strtotime("last Monday", $startDate);
+          $endDate       = strtotime("last day of this month $currentYear-$currentMonth-01");
+          $endDate       = date('w', $endDate) == 0 ? $endDate : strtotime("next Sunday", $endDate);
+          $firstDayIndex = 1;
+          $lastDayIndex  = 0;
+      }
+      ?>
       <?php while($startDate <= $endDate):?>
       <?php $dayIndex = date('w', $startDate);?>
-      <?php if($dayIndex == 1):?>
+      <?php if($dayIndex == $firstDayIndex):?>
       <div class='col-xs-4'>
         <div class='panel'>
           <div class='panel-body no-padding'>
@@ -99,7 +116,7 @@
                 <td></td>
               </tr>
               <?php endif;?>
-      <?php if($dayIndex == 0):?>
+      <?php if($dayIndex == $lastDayIndex):?>
             </table>
           </div>
         </div>

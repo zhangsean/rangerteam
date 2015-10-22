@@ -78,8 +78,10 @@ $lang->attend->signOutLimit = '最早签退';
 $lang->attend->workingDays  = '每周工作天数';
 $lang->attend->mustSignOut  = '必须签退';
 
-$lang->attend->workingDaysList['5'] = "周一～周五";
-$lang->attend->workingDaysList['6'] = "周一～周六";
+$lang->attend->workingDaysList['5']  = "周一～周五";
+$lang->attend->workingDaysList['6']  = "周一～周六";
+$lang->attend->workingDaysList['12'] = "周日～周四";
+$lang->attend->workingDaysList['13'] = "周日～周五";
 
 $lang->attend->mustSignOutList['yes'] = '需要';
 $lang->attend->mustSignOutList['no']  = '不需要';

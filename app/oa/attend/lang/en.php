@@ -78,8 +78,10 @@ $lang->attend->signOutLimit = 'Earlies time of sign out';
 $lang->attend->workingDays  = 'Working days per week';
 $lang->attend->mustSignOut  = 'Must sign out';
 
-$lang->attend->workingDaysList['5'] = "Monday ~ Friday";
-$lang->attend->workingDaysList['6'] = "Monday ~ Saturday";
+$lang->attend->workingDaysList['5']  = "Monday ~ Friday";
+$lang->attend->workingDaysList['6']  = "Monday ~ Saturday";
+$lang->attend->workingDaysList['12'] = "Sunday ~ Thursday";
+$lang->attend->workingDaysList['13'] = "Sunday ~ Friday";
 
 $lang->attend->mustSignOutList['yes'] = 'need';
 $lang->attend->mustSignOutList['no']  = 'not need';
@@ -92,3 +94,6 @@ $lang->attend->notice['absent']   = "No record";
 
 $lang->attend->confirmReview['pass']   = 'Are sure to pass it?';
 $lang->attend->confirmReview['reject'] = 'Are sure to reject it?';
+
+$lang->attend->settings    = 'Normal Settings';
+$lang->attend->setReviewer = 'Reviewer Settings';
