@@ -24,11 +24,6 @@
           <td></td>
         </tr>
         <tr>
-          <th class='w-100px'><?php echo $lang->refund->status?></th>
-          <td class='w-400px'><?php echo html::select('status', $lang->refund->statusList, $refund->status, "class='form-control chosen'")?></td>
-          <td></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->refund->category?></th>
           <td><?php echo html::select('category', $categories, $refund->category, "class='form-control chosen'")?></td>
           <td></td>

@@ -175,6 +175,7 @@ $config->objectTables['article']     = TABLE_ARTICLE;
 $config->objectTables['doc']         = TABLE_DOC;
 $config->objectTables['cron']        = TABLE_CRON;
 $config->objectTables['resume']      = TABLE_RESUME;
+$config->objectTables['refund']      = TABLE_REFUND;
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext/*.php');

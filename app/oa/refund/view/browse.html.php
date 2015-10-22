@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('mode', $mode);?>
+<?php $secondReviewerClass = empty($this->config->refund->secondReviewer) ? 'hidden' : '';?>
 <div id='menuActions'>
   <?php commonModel::printLink('refund', 'create', '', '<i class="icon-plus"></i> ' . $lang->refund->create, 'class="btn btn-primary"');?>
 </div>
@@ -20,13 +21,15 @@
     <thead>
       <tr class='text-center'>
         <th class='w-50px'><?php echo $lang->refund->id;?></th>
+        <?php if($mode != 'personal'):?>
         <th class='w-100px visible-lg'><?php echo $lang->user->dept;?></th>
         <th class='w-100px'><?php echo $lang->user->realname;?></th>
+        <?php endif;?>
         <th class='w-100px'><?php echo $lang->refund->date;?></th>
         <th class='w-100px'><?php echo $lang->refund->money;?></th>
         <th class='w-100px'><?php echo $lang->refund->status;?></th>
         <th class='w-100px'><?php echo $lang->refund->firstReviewer;?></th>
-        <th class='w-100px'><?php echo $lang->refund->secondReviewer;?></th>
+        <th class='w-100px <?php echo $secondReviewerClass?>'><?php echo $lang->refund->secondReviewer;?></th>
         <th class='w-100px'><?php echo $lang->refund->refundBy;?></th>
         <th><?php echo $lang->refund->name;?></th>
         <th class='w-150px'><?php echo $lang->actions;?></th>
@@ -35,13 +38,15 @@
     <?php foreach($refunds as $refund):?>
     <tr data-url='<?php echo $this->createLink('refund', 'view', "refundID=$refund->id");?>'>
       <td><?php echo $refund->id;?></td>
+      <?php if($mode != 'personal'):?>
       <td class='visible-lg'><?php echo zget($userDept, $refund->createdBy);?></td>
       <td><?php echo zget($userPairs, $refund->createdBy);?></td>
+      <?php endif;?>
       <td><?php echo $refund->date?></td>
       <td><?php echo zget($currencySign, $refund->currency) . $refund->money?></td>
-      <td><?php echo zget($lang->refund->statusList, $refund->status)?></td>
+      <td class='<?php echo $refund->status?>'><?php echo zget($lang->refund->statusList, $refund->status)?></td>
       <td><?php echo zget($userPairs, $refund->firstReviewer);?></td>
-      <td><?php echo zget($userPairs, $refund->secondReviewer);?></td>
+      <td class='<?php echo $secondReviewerClass?>'><?php echo zget($userPairs, $refund->secondReviewer);?></td>
       <td><?php echo zget($userPairs, $refund->refundBy);?></td>
       <td><?php echo $refund->name?></td>
       <td>

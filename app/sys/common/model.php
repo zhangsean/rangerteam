@@ -918,7 +918,7 @@ class commonModel extends model
     {
         $preAndNextObject = new stdClass();
 
-        if(strpos('order, contract, customer, contact, task, thread, blog', $type) === false) return $preAndNextObject;
+        if(strpos('order, contract, customer, contact, task, thread, blog, refund', $type) === false) return $preAndNextObject;
         $table = $this->config->objectTables[$type];
 
         $queryCondition = "{$type}QueryCondition";

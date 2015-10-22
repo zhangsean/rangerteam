@@ -49,6 +49,9 @@ class refundModel extends model
             ->page($pager)
             ->fetchAll('id');
 
+        /* Set pre and next condition. */
+        $this->session->set('refundQueryCondition', $this->dao->get());
+
         $details = $this->dao->select('*')->from(TABLE_REFUND)->where('parent')->in(array_keys($refunds))->fetchGroup('parent', 'id');
         foreach($refunds as $key => $refund) $refund->detail = isset($details[$key]) ? $details[$key] : array();
 
@@ -118,7 +121,7 @@ class refundModel extends model
         $refund = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
-            ->remove('firstReviewer,firstReviewDate,sencondReviewer,secondReviewDate,refundBy,refundDate')
+            ->remove('status,firstReviewer,firstReviewDate,sencondReviewer,secondReviewDate,refundBy,refundDate')
             ->remove('idList,dateList,moneyList,currencyList,categoryList,descList')
             ->get();
 

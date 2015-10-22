@@ -16,7 +16,8 @@
     <div class='panel'>
       <div class='panel-heading'><strong><?php echo $refund->name?></strong></div>
       <div class='panel-body'>
-        <p><?php echo$refund->desc?></p>
+        <p><?php echo sprintf($lang->refund->descTip, zget($users, $refund->createdBy), zget($currencySign, $refund->currency) . $refund->money)?></p>
+        <p><?php echo $refund->desc?></p>
       </div>
     </div> 
     <?php if(!empty($refund->detail)):?>
@@ -54,7 +55,7 @@
       commonModel::printLink('refund', 'delete', "refundID=$refund->id", $lang->delete, "class='btn btn-default deleter'");
       echo '</div>';
 
-      $browseLink = $this->session->refundList ? $this->session->refundList : inlink('browse');
+      $browseLink = $this->session->refundList ? $this->session->refundList : inlink('personal');
       commonModel::printRPN($browseLink, $preAndNext);
       ?>
     </div>
@@ -67,6 +68,10 @@
           <tr>
             <th class='w-80px'><?php echo $lang->refund->category;?></th>
             <td><?php echo zget($categories, $refund->category)?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->refund->date;?></th>
+            <td><?php echo $refund->date?></td>
           </tr>
           <tr>
             <th><?php echo $lang->refund->money;?></th>

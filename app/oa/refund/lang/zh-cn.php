@@ -44,5 +44,7 @@ $lang->refund->statusList['finish'] = '已报销';
 $lang->refund->reviewStatusList['pass']   = '通过';
 $lang->refund->reviewStatusList['reject'] = '拒绝';
 
+$lang->refund->descTip = "%s 申请报销 %s。";
+
 $lang->refund->uniqueReviewer = '第一审核人和第二审核人不能是同一个人';
 $lang->refund->firstNotEmpty  = '第一审核人不能为空';

@@ -151,6 +151,9 @@ class refund extends control
         if($mode == 'company')  $refunds = $this->refund->getList('', '', '', $orderBy, $pager);
         if($mode == 'todo')     $refunds = $this->refund->getList('', 'pass', '', $orderBy, $pager);
 
+        /* Set return url. */
+        $this->session->set('refundList', $this->app->getURI(true));
+
         $this->view->title        = $this->lang->refund->$mode;
         $this->view->refunds      = $refunds;
         $this->view->orderBy      = $orderBy;
@@ -217,8 +220,10 @@ class refund extends control
         $action = strtolower($action);
         $account = $this->app->user->account;
 
-        if($action == 'edit')   if($refund->createdBy != $account) $pass = false;
-        if($action == 'delete') if($refund->createdBy != $account) $pass = false;
+        if(strpos(',edit,delete,', ",$action,") !== false)
+        {
+            if($refund->status != 'wait' or $refund->createdBy != $account) $pass = false;
+        }
 
         if(!$pass)
         {
