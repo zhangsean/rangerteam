@@ -18,21 +18,22 @@
   <?php commonModel::printLink('refund', 'create', '', '<i class="icon-plus"></i> ' . $lang->refund->create, 'class="btn btn-primary"');?>
 </div>
 <div class='panel'>
-  <table class='table table-hover table-striped table-sorter table-data table-fixed text-center'>
+  <table class='table table-hover table-striped tablesorter table-data table-fixed text-center'>
     <thead>
       <tr class='text-center'>
-        <th class='w-50px'><?php echo $lang->refund->id;?></th>
+        <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+        <th class='w-50px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->refund->id);?></th>
         <?php if($mode != 'personal'):?>
         <th class='w-100px visible-lg'><?php echo $lang->user->dept;?></th>
         <th class='w-100px'><?php echo $lang->user->realname;?></th>
         <?php endif;?>
-        <th class='w-100px'><?php echo $lang->refund->date;?></th>
-        <th class='w-100px'><?php echo $lang->refund->money;?></th>
-        <th class='w-100px'><?php echo $lang->refund->status;?></th>
-        <th class='w-100px'><?php echo $lang->refund->firstReviewer;?></th>
-        <th class='w-100px <?php echo $secondReviewerClass?>'><?php echo $lang->refund->secondReviewer;?></th>
-        <th class='w-100px'><?php echo $lang->refund->refundBy;?></th>
-        <th><?php echo $lang->refund->name;?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->refund->date);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('money', $orderBy, $vars, $lang->refund->money);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->refund->status);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('firstReviewer', $orderBy, $vars, $lang->refund->firstReviewer);?></th>
+        <th class='w-100px <?php echo $secondReviewerClass?>'><?php commonModel::printOrderLink('secondReviewer', $orderBy, $vars, $lang->refund->secondReviewer);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('refundBy', $orderBy, $vars, $lang->refund->refundBy);?></th>
+        <th><?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->refund->name);?></th>
         <th class='w-150px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
