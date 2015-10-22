@@ -2,30 +2,35 @@ $(document).ready(function()
 {
      $.setAjaxJSONER('.refund', function(response)
      {
-        bootbox.dialog(
-        {  
-            message: v.createTradeTip,  
-            buttons:
+        if(response.result == 'success')
+        {
+            bootbox.dialog(
             {  
-                back:
+                message: v.createTradeTip,  
+                buttons:
                 {  
-                    label: v.lang.no,
-                    className: 'btn-primary',  
-                    callback:  function(){location.reload();}  
-                },
-                trade:
-                {  
-                    label: v.lang.yes,
-                    className: 'btn-primary',  
-                    callback:  function()
-                    {
-                         $.setAjaxLoader('.createTrade', '.modal');
-                         $('.createTrade').click();
-                         return false;
-                    }
+                    back:
+                    {  
+                        label: v.lang.no,
+                        className: 'btn-primary',  
+                        callback:  function(){location.reload();}  
+                    },
+                    trade:
+                    {  
+                        label: v.lang.yes,
+                        className: 'btn-primary',  
+                        callback:  function()
+                        {
+                             $.setAjaxLoader('.createTrade', '.modal');
+                             $('.createTrade').click();
+                             return false;
+                        }
 
+                    }  
                 }  
-            }  
-        });
+            });
+         }
+
+         return false;
     })
 })
