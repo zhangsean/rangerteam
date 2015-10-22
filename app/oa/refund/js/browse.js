@@ -21,9 +21,11 @@ $(document).ready(function()
                         className: 'btn-primary',  
                         callback:  function()
                         {
-                             $.setAjaxLoader('.createTrade', '.modal');
-                             $('.createTrade').click();
-                             return false;
+                            $('.modal').load($('.createTrade').prop('href'), '', function()
+                            {
+                                $('.modal').modal('ajustPosition', 'fit');
+                            });
+                            return false;
                         }
 
                     }  

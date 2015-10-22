@@ -52,8 +52,10 @@
       <td><?php echo zget($userPairs, $refund->refundBy);?></td>
       <td><?php echo $refund->name?></td>
       <td>
+        <?php if($refund->createdBy == $this->app->user->account and $refund->status == 'wait'):?>
         <?php echo html::a($this->createLink('refund', 'edit',   "refundID={$refund->id}"), $lang->edit, "")?>
         <?php echo html::a($this->createLink('refund', 'delete', "refundID={$refund->id}"), $lang->delete, "class='deleter'")?>
+        <?php endif;?>
         <?php if($mode == 'todo') echo html::a($this->createLink('refund', 'reimburse', "refundID={$refund->id}"), $lang->refund->common, "class='refund'");?>
         <?php if($mode == 'todo') echo html::a($this->createLink('refund', 'createtrade', "refundID={$refund->id}"), $lang->refund->common, "class='createTrade hide'");?>
       </td>
