@@ -814,7 +814,7 @@ class taskModel extends model
         if($this->app->user->admin == 'super') return true;
         if(!empty($this->app->user->rights['task']['viewall'])) return true;
         if(!empty($this->app->user->rights['task']['editall'])) return true;
-        if($action == 'delete' and !empty($this->app->user->rights['task']['deleteall'])) return true;
+        if(!empty($this->app->user->rights['task']['deleteall'])) return true;
 
         static $projects;
         if(empty($projects)) 
@@ -831,20 +831,21 @@ class taskModel extends model
                 foreach($whitelist as $groupID) foreach($groupUsers[$groupID] as $account => $realname) $accountList[] = $account;
                 $project->whitelist = $accountList;
             }
-            $account = $this->app->user->account;
-            $project = isset($projects[$projectID]) ? $projects[$projectID] : new stdclass();
-            if(empty($project)) return false;
+        }
 
-            /* manager, senior or member. */
-            if(isset($project->members[$account]))
-            {
-                if(strpos(',manager,senior,member,', $project->members[$account]->role) !== false) return true;
-                return false;
-            }
+        if(!isset($projects[$projectID])) return false;
+        $account = $this->app->user->account;
+        $project = $projects[$projectID];
 
-            if(in_array($account, $project->whitelist)) return true;
+        /* manager, senior or member. */
+        if(isset($project->members[$account]))
+        {
+            if(strpos(',manager,senior,member,', $project->members[$account]->role) !== false) return true;
             return false;
         }
+
+        if(in_array($account, $project->whitelist)) return true;
+        return false;
     }
 
     /**
@@ -884,10 +885,10 @@ class taskModel extends model
         if(empty($project)) return false;
 
         /* manager and senior member. */
-        if(isset($project->member[$account]) and (strpos(',manager,senior,', $project->member[$account]->role) !== false)) return true;
+        if(isset($project->members[$account]) and (strpos(',manager,senior,', $project->members[$account]->role) !== false)) return true;
 
         /* default member. */
-        if(isset($project->member[$account]) and $project->member[$account]->role == 'member')
+        if(isset($project->members[$account]) and $project->members[$account]->role == 'member')
         {
             if(strpos(',view,edit,recordestimate,assignto,start,finish,close,activate,cancel,', ",$action,") !== false) return true;
             if($action == 'delete')
@@ -897,7 +898,7 @@ class taskModel extends model
         }
 
         /* limited member. */
-        if(isset($project->member[$account]) and $project->member[$account]->role == 'limited')
+        if(isset($project->members[$account]) and $project->members[$account]->role == 'limited')
         {
             if(strpos(',view,edit,recordestimate,assignto,start,finish,close,activate,cancel,', ",$action,") !== false)
             {
