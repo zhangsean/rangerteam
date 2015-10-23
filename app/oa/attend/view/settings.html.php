@@ -29,15 +29,15 @@
           <table class='table table-form table-condensed w-p40'>
             <tr>
               <th class='w-150px'><?php echo $lang->attend->signInLimit?></th>
-              <td class='w-300px'><?php echo html::input('signInLimit', $signInLimit, "class='form-control form-time'")?></td>
+              <td class='w-300px'><?php echo html::input('signInLimit', $signInLimit, "class='form-control form-time'")?></td><td></td>
             </tr>
             <tr>
               <th><?php echo $lang->attend->signOutLimit?></th>
-              <td><?php echo html::input('signOutLimit', $signOutLimit, "class='form-control form-time'")?></td>
+              <td><?php echo html::input('signOutLimit', $signOutLimit, "class='form-control form-time'")?></td><td></td>
             </tr>
             <tr>
               <th><?php echo $lang->attend->workingDays?></th>
-              <td><?php echo html::select('workingDays', $lang->attend->workingDaysList, $workingDays, "class='form-control'")?></td>
+              <td><?php echo html::select('workingDays', $lang->attend->workingDaysList, $workingDays, "class='form-control'")?></td><td></td>
             </tr>
             <tr>
               <th><?php echo $lang->attend->reviewedBy;?></th>
@@ -46,9 +46,9 @@
             </tr>
             <tr>
               <th></th>
-              <td><?php echo html::checkbox('mustSignOut', array('yes' => $lang->attend->mustSignOut), $mustSignOut)?></td>
+              <td><?php echo html::checkbox('mustSignOut', array('yes' => $lang->attend->mustSignOut), $mustSignOut)?></td><td></td>
             </tr>
-          <tr><th></th><td><?php echo html::submitButton();?></td></tr>
+          <tr><th></th><td colspan='2'><?php echo html::submitButton();?></td></tr>
           </table>
         </form>
       </div>
