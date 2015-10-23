@@ -1,17 +1,20 @@
 <?php
 if(!isset($lang->refund)) $lang->refund = new stdclass();
-$lang->refund->common      = 'Reimbursement';
-$lang->refund->create      = 'Create';
-$lang->refund->browse      = 'Browse List';
-$lang->refund->personal    = 'My Reimbursement';
-$lang->refund->company     = 'All Reimbursement';
-$lang->refund->edit        = 'Edit reimbursement';
-$lang->refund->view        = 'View';
-$lang->refund->review      = 'Review';
-$lang->refund->detail      = 'Detail';
-$lang->refund->settings    = 'Settings';
-$lang->refund->setCategory = 'Set Category';
-$lang->refund->todo        = 'Waiting For Reimbursement';
+$lang->refund->common       = 'Reimbursement';
+$lang->refund->create       = 'Create';
+$lang->refund->browse       = 'Browse List';
+$lang->refund->personal     = 'My Reimbursement';
+$lang->refund->company      = 'All Reimbursement';
+$lang->refund->todo         = 'Waiting For Reimbursement';
+$lang->refund->browseReview = 'Browse review';
+$lang->refund->edit         = 'Edit reimbursement';
+$lang->refund->view         = 'View';
+$lang->refund->delete       = 'Delete';
+$lang->refund->review       = 'Review';
+$lang->refund->detail       = 'Detail';
+$lang->refund->settings     = 'Settings';
+$lang->refund->setCategory  = 'Set Category';
+$lang->refund->reimburse    = 'Reimburse';
 
 $lang->refund->id               = 'ID';
 $lang->refund->name             = 'Name';
@@ -38,7 +41,7 @@ $lang->refund->reason           = 'Reason';
 $lang->refund->statusList['wait']   = 'Wait';
 $lang->refund->statusList['doing']  = 'Doing';
 $lang->refund->statusList['pass']   = 'Pass';
-$lang->refund->statusList['refuse'] = 'Refuse';
+$lang->refund->statusList['reject'] = 'Reject';
 $lang->refund->statusList['finish'] = 'Finish';
 
 $lang->refund->reviewStatusList['pass']   = 'Pass';

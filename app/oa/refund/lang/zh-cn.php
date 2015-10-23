@@ -1,17 +1,20 @@
 <?php
 if(!isset($lang->refund)) $lang->refund = new stdclass();
-$lang->refund->common      = '报销';
-$lang->refund->create      = '申请报销';
-$lang->refund->browse      = '报销列表';
-$lang->refund->personal    = '我的报销';
-$lang->refund->company     = '所有报销';
-$lang->refund->edit        = '编辑报销';
-$lang->refund->view        = '查看';
-$lang->refund->review      = '报销审批';
-$lang->refund->detail      = '明细';
-$lang->refund->settings    = '设置';
-$lang->refund->setCategory = '报销科目设置';
-$lang->refund->todo        = '待报销';
+$lang->refund->common       = '报销';
+$lang->refund->create       = '申请报销';
+$lang->refund->browse       = '报销列表';
+$lang->refund->personal     = '我的报销';
+$lang->refund->company      = '所有报销';
+$lang->refund->todo         = '待报销';
+$lang->refund->browseReview = '报销审批列表';
+$lang->refund->edit         = '编辑报销';
+$lang->refund->view         = '查看';
+$lang->refund->delete       = '删除';
+$lang->refund->review       = '报销审批';
+$lang->refund->detail       = '明细';
+$lang->refund->settings     = '设置';
+$lang->refund->setCategory  = '报销科目设置';
+$lang->refund->reimburse    = '报销记账';
 
 $lang->refund->id               = '编号';
 $lang->refund->name             = '名称';

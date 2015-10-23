@@ -396,6 +396,8 @@ class refund extends control
      */
     public function createTrade($refundID)
     {
+        if(!commonModel::hasPriv('refund', 'reimburse')) $this->deny('refund', 'reimburse');
+
         $this->app->loadLang('trade', 'cash');
 
         if($_POST)

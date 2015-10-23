@@ -69,8 +69,8 @@ $lang->attend->reviewStatusList['pass']   = 'Pass';
 $lang->attend->reviewStatusList['reject'] = 'Reject';
 
 $lang->attend->inSuccess  = 'Sign in success';
-$lang->attend->outSuccess = 'Sign out success';
 $lang->attend->inFail     = 'Sign in fail';
+$lang->attend->outSuccess = 'Sign out success';
 $lang->attend->outFail    = 'Sign out fail';
 
 $lang->attend->signInLimit  = 'Latest time of sign in';
@@ -97,3 +97,5 @@ $lang->attend->confirmReview['reject'] = 'Are sure to reject it?';
 
 $lang->attend->settings   = 'Normal Settings';
 $lang->attend->setManager = 'Depatment Manager Settings';
+
+$lang->attend->reviewerTip = 'If this is empty, the first reviewer is deparment manager.';

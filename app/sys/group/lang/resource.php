@@ -39,6 +39,7 @@ $lang->appModule->oa[] = 'holiday';
 $lang->appModule->oa[] = 'leave';
 $lang->appModule->oa[] = 'trip';
 $lang->appModule->oa[] = 'todo';
+$lang->appModule->oa[] = 'refund';
 
 $lang->appModule->team = array();
 $lang->appModule->team[] = 'blog';
@@ -74,11 +75,12 @@ $lang->moduleOrder[70]  = 'attend';
 $lang->moduleOrder[75]  = 'holiday';
 $lang->moduleOrder[80]  = 'leave';
 $lang->moduleOrder[85]  = 'trip';
+$lang->moduleOrder[90]  = 'refund';
 
-$lang->moduleOrder[90]  = 'blog';
-$lang->moduleOrder[95]  = 'forum';
-$lang->moduleOrder[100] = 'thread';
-$lang->moduleOrder[105] = 'user';
+$lang->moduleOrder[95]  = 'blog';
+$lang->moduleOrder[100] = 'forum';
+$lang->moduleOrder[105] = 'thread';
+$lang->moduleOrder[110] = 'user';
 
 $lang->moduleOrder[110] = 'tree';
 $lang->moduleOrder[115] = 'setting';
@@ -212,11 +214,13 @@ $lang->resource->resume->browse = 'browse';
 $lang->resource->resume->create = 'create';
 $lang->resource->resume->edit   = 'edit';
 $lang->resource->resume->delete = 'delete';
+$lang->resource->resume->leave  = 'leave';
 
 $lang->resume->methodOrder[5]  = 'browse';
 $lang->resume->methodOrder[10] = 'create';
 $lang->resume->methodOrder[15] = 'edit';
 $lang->resume->methodOrder[20] = 'delete';
+$lang->resume->methodOrder[25] = 'leave';
 
 /* Sales group. */
 $lang->resource->sales = new stdclass();
@@ -398,6 +402,9 @@ $lang->resource->attend->settings     = 'settings';
 $lang->resource->attend->edit         = 'edit';
 $lang->resource->attend->browseReview = 'browseReview';
 $lang->resource->attend->review       = 'review';
+$lang->resource->attend->signIn       = 'signIn';
+$lang->resource->attend->signOut      = 'signOut';
+$lang->resource->attend->setManager   = 'setManager';
 
 $lang->attend->methodOrder[0]  = 'personal';
 $lang->attend->methodOrder[5]  = 'department';
@@ -407,6 +414,9 @@ $lang->attend->methodOrder[20] = 'settings';
 $lang->attend->methodOrder[25] = 'edit';
 $lang->attend->methodOrder[30] = 'browseReview';
 $lang->attend->methodOrder[35] = 'review';
+$lang->attend->methodOrder[40] = 'signIn';
+$lang->attend->methodOrder[45] = 'signOut';
+$lang->attend->methodOrder[50] = 'setManager';
 
 /* Holiday */
 $lang->resource->holiday = new stdclass();
@@ -453,6 +463,34 @@ $lang->trip->methodOrder[10] = 'company';
 $lang->trip->methodOrder[15] = 'create';
 $lang->trip->methodOrder[20] = 'edit';
 $lang->trip->methodOrder[25] = 'delete';
+
+/* Trip */
+$lang->resource->refund = new stdclass();
+$lang->resource->refund->personal     = 'personal';
+$lang->resource->refund->company      = 'company';
+$lang->resource->refund->todo         = 'todo';
+$lang->resource->refund->create       = 'create';
+$lang->resource->refund->edit         = 'edit';
+$lang->resource->refund->view         = 'view';
+$lang->resource->refund->delete       = 'delete';
+$lang->resource->refund->settings     = 'settings';
+$lang->resource->refund->browseReview = 'browseReview';
+$lang->resource->refund->setCategory  = 'setCategory';
+$lang->resource->refund->review       = 'review';
+$lang->resource->refund->reimburse    = 'reimburse';
+
+$lang->refund->methodOrder[0]  = 'personal';
+$lang->refund->methodOrder[10] = 'company';
+$lang->refund->methodOrder[15] = 'todo';
+$lang->refund->methodOrder[20] = 'create';
+$lang->refund->methodOrder[25] = 'edit';
+$lang->refund->methodOrder[30] = 'view';
+$lang->refund->methodOrder[35] = 'delete';
+$lang->refund->methodOrder[40] = 'settings';
+$lang->refund->methodOrder[45] = 'browseReview';
+$lang->refund->methodOrder[50] = 'setCategory';
+$lang->refund->methodOrder[55] = 'review';
+$lang->refund->methodOrder[60] = 'reimburse';
 
 /* Blog. */
 $lang->resource->blog = new stdclass();
@@ -520,11 +558,13 @@ $lang->tree->methodOrder[15] = 'delete';
 
 /* Setting. */
 $lang->resource->setting = new stdclass();
-$lang->resource->setting->lang  = 'lang';
-$lang->resource->setting->reset = 'reset';
+$lang->resource->setting->lang     = 'lang';
+$lang->resource->setting->reset    = 'reset';
+$lang->resource->setting->customer = 'customer';
 
 $lang->setting->methodOrder[5]  = 'lang';
 $lang->setting->methodOrder[10] = 'reset';
+$lang->setting->methodOrder[15] = 'customer';
 
 /* Report. */
 $lang->resource->report = new stdclass();
