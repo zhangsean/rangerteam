@@ -376,6 +376,36 @@ CREATE TABLE IF NOT EXISTS `oa_todo` (
   PRIMARY KEY  (`id`),
   KEY `user` (`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `oa_refund`;
+CREATE TABLE IF NOT EXISTS `oa_refund` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `name` char(150) NOT NULL,
+  `parent`  mediumint(8) NOT NULL DEFAULT 0,
+  `category` char(30) NOT NULL,
+  `date` date NOT NULL,
+  `money` decimal(12,2) NOT NULL,
+  `currency` varchar(30) NOT NULL,
+  `desc` text NOT NULL,
+  `status` char(30) NOT NULL DEFAULT 'wait',
+  `createdBy` char(30) NOT NULL DEFAULT '',
+  `createdDate` datetime NOT NULL,
+  `editedBy` char(30) NOT NULL DEFAULT '',
+  `editedDate` datetime NOT NULL,
+  `firstReviewer` char(30) NOT NULL DEFAULT '',
+  `firstReviewDate` datetime NOT NULL,
+  `secondReviewer` char(30) NOT NULL DEFAULT '',
+  `secondReviewDate` datetime NOT NULL,
+  `refundBy` char(30) NOT NULL DEFAULT '',
+  `refundDate` datetime NOT NULL,
+  `reason` text NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `createdBy` (`createdBy`),
+  KEY `firstReviewer` (`firstReviewer`),
+  KEY `secondReviewer` (`secondReviewer`),
+  KEY `refundBy` (`refundBy`),
+  KEY `category` (`category`),
+  KEY `date` (`date`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_relation`;
 CREATE TABLE `sys_relation` (
   `type` char(20) NOT NULL,
@@ -747,6 +777,7 @@ CREATE TABLE `sys_task` (
   `mailto` varchar(255) NOT NULL DEFAULT '',
   `desc` text NOT NULL,
   `parent` mediumint(8) unsigned NOT NULL DEFAULT 0,
+  `children` varchar(255) NOT NULL,
   `createdBy` varchar(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `assignedTo` varchar(30) NOT NULL,
@@ -782,6 +813,10 @@ CREATE TABLE `sys_team` (
   `join` date NOT NULL DEFAULT '0000-00-00',
   `days` smallint(5) unsigned NOT NULL,
   `hours` float(2,1) unsigned NOT NULL DEFAULT '0.0',
+  `estimate` decimal(12,1) unsigned NOT NULL,
+  `consumed` decimal(12,1) unsigned NOT NULL,
+  `left` decimal(12,1) unsigned NOT NULL,
+  `order` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`type`,`id`,`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_user`;
