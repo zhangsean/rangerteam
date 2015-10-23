@@ -197,6 +197,7 @@ class todo extends control
         $todo = $this->todo->getByID($todoID);
         $date = str_replace('-', '', $todo->date);
         if($date == '00000000') $date = '';
+
         $this->dao->delete()->from(TABLE_TODO)->where('id')->eq($todoID)->exec();
         $this->loadModel('action')->create('todo', $todoID, 'erased');
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));

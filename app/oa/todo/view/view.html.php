@@ -72,7 +72,7 @@
     if($todo->account == $app->user->account)
     {
         commonModel::printLink('todo', 'edit',   "todoID=$todo->id", $lang->edit, "class='btn ajaxEdit'");
-        commonModel::printLink('todo', 'delete', "todoID=$todo->id", $lang->delete, "class='btn deleter'");
+        commonModel::printLink('todo', 'delete', "todoID=$todo->id", $lang->delete, "class='btn todoDeleter'");
     }
     ?>
   </div>

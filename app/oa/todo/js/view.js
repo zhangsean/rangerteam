@@ -25,8 +25,25 @@ $(document).ready(function()
     $.setAjaxLoader('#ajaxModal .ajaxEdit', '#ajaxModal');
     $('.ajaxFinish').click(function()
     {
+        $(this).prop('href', '');
         finishTodo($(this).data('id'));
         $.zui.modalTrigger.close();
         return false;
+    });
+
+    /* Adjust default deleter. */
+    $.setAjaxDeleter('.todoDeleter', function(data)
+    {
+        if(data.result == 'success')
+        {
+            if(data.locate) return location.href = data.locate;
+            if(deleter.parents('#ajaxModal').size()) return $.reloadAjaxModal(1200);
+            return location.reload();
+        }
+        else
+        {
+            alert(data.message);
+            return location.reload();
+        }
     });
 });
