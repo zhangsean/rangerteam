@@ -15,7 +15,7 @@
 
 .board-item {margin-top: 5px;}
 .tab-content {padding: 5px 5px 40px 5px; border: 1px solid #ddd; border-top-color: transparent; min-height: 20px;}
-.page-num {padding: 5px; margin: 5px; border: 1px solid #ddd; float: right; cursor: pointer; background: #f0f0f0;}
+.page-num {padding: 5px 10px; margin: 5px; border: 1px solid #ddd; float: right; cursor: pointer; background: #f0f0f0;}
 
 .calendar .event.with-action {position: relative; padding-right: 30px;}
 .calendar .event.with-action .action {position: absolute; right: 0; top: 0;}

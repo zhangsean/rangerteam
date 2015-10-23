@@ -92,12 +92,14 @@ $(document).ready(function()
         {
             for(i = page; i > 0; i--)
             {
-                tab.append("<span class='page-num' data-id='" + i + "'>" + i + '</span>')
+                tab.append("<span class='page-num btn' data-id='" + i + "'>" + i + '</span>')
             }
             $(selecter + ' span.page-num').click(function()
             {
                 var tab = $(this).parent();
                 var page = $(this).data('id');
+                tab.find('.page-num').removeClass('active');
+                $(this).addClass('active');
                 page = parseInt(page) *  10;
                 tab.find('.board-item').hide();
                 for(i = page; i > page - 10; i--)

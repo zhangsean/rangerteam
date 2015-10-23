@@ -169,6 +169,12 @@ class todo extends control
         $todo = $this->todo->getById($todoID, true);
         if(!$todo) $this->locate($this->createLink('todo', 'calendar'));
 
+        /* Save session for back to this app. */
+        if(strpos('order,customer', $todo->type) !== false)
+        {
+            $this->session->set('returnOpenApp', 'oa');
+        }
+
         $this->view->title      = "{$this->lang->todo->common} #$todo->id $todo->name";
         $this->view->todo       = $todo;
         $this->view->times      = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
