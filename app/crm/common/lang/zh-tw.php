@@ -91,7 +91,7 @@ $lang->setting->menu->area           = '區域設置|tree|browse|type=area|';
 $lang->setting->menu->industry       = '行業設置|tree|browse|type=industry|';
 $lang->setting->menu->currency       = '貨幣設置|setting|lang|module=common&field=currencyList';
 $lang->setting->menu->salesGroup     = array('link' => '銷售分組|sales|browse|', 'alias' => 'create,edit');
-$lang->setting->menu->customerPool   = '客戶池|setting|customer||';
+$lang->setting->menu->customerPool   = '客戶池|setting|customerpool||';
 
 /* Menu of sales module. */
 $lang->sales = new stdclass();

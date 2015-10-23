@@ -16,7 +16,7 @@ $lang->setting->value  = '值';
 
 $lang->setting->lang = '自定義';
 
-$lang->setting->customerSetting = '客戶池設置';
+$lang->setting->customerPool = '客戶池設置';
 
 $lang->setting->module = new stdClass();
 $lang->setting->module->user     = '員工角色';

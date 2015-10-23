@@ -13,7 +13,7 @@
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <?php echo $lang->setting->customerSetting;?>
+    <?php echo $lang->setting->customerPool;?>
   </div>
   <div class='panel-body'>
     <form id='ajaxForm' method='post'>

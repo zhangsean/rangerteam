@@ -102,7 +102,7 @@ class setting extends control
      * @access public
      * @return void
      */
-    public function customer()
+    public function customerPool()
     {
         if($_POST)
         {
