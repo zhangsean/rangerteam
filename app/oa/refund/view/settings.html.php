@@ -30,10 +30,12 @@
           <tr>
             <th class='w-100px'><?php echo $lang->refund->firstReviewer;?></th>
             <td><?php echo html::select('firstReviewer', $users, $firstReviewer, "class='form-control chosen'")?></td>
+            <td><a title="<?php echo $lang->refund->firstReviewerTip;?>"><i class='icon-question-sign'></i></a></td>
           </tr>
           <tr>
             <th><?php echo $lang->refund->secondReviewer;?></th>
             <td><?php echo html::select('secondReviewer', $users, $secondReviewer, "class='form-control chosen'")?></td>
+            <td><a title="<?php echo $lang->refund->secondReviewerTip;?>"><i class='icon-question-sign'></i></a></td>
           </tr>
           <tr><th></th><td><?php echo html::submitButton();?></td></tr>
           </table>

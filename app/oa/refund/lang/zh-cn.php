@@ -46,5 +46,7 @@ $lang->refund->reviewStatusList['reject'] = '拒绝';
 
 $lang->refund->descTip = "%s 申请报销 %s。";
 
-$lang->refund->uniqueReviewer = '第一审核人和第二审核人不能是同一个人';
-$lang->refund->createTradeTip = '是否关联记账？';
+$lang->refund->uniqueReviewer    = '第一审批人和第二审批人不能是同一个人';
+$lang->refund->createTradeTip    = '是否关联记账？';
+$lang->refund->firstReviewerTip  = '如果没有设置统一的第一审批人，第一审批人为部门经理。';
+$lang->refund->secondReviewerTip = '二级审批需要设置二级审批人。';
