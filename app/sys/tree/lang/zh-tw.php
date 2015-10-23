@@ -80,6 +80,10 @@ $lang->out->desc     = '描述';
 $lang->out->keywords = '關鍵詞';
 $lang->out->children = '子科目';
 $lang->out->rights   = '權限';
+$lang->out->refund   = '報銷科目';
+
+$lang->out->refundList[1] = '是';
+$lang->out->refundList[0] = '否';
 
 /* Lang items for forum. */
 $lang->board = new stdclass();

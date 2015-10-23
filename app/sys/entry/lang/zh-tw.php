@@ -6,7 +6,7 @@
  * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id: zh-tw.php 2685 2015-04-08 09:39:38Z chujilu $
+ * @version     $Id: zh-tw.php 2960 2015-09-28 02:04:46Z chujilu $
  * @link        http://www.ranzhico.com
  */
 $lang->entry->common    = '應用';
@@ -37,11 +37,19 @@ $lang->entry->width       = '寬';
 $lang->entry->height      = '高';
 $lang->entry->priv        = '權限';
 
+$lang->entry->chanzhi          = '蟬知';
+$lang->entry->zentao           = '禪道';
 $lang->entry->integrateChanzhi = '整合蟬知';
 $lang->entry->integrateZentao  = '整合禪道';
 
-$lang->entry->chanzhiPlaceholder  = '請輸入蟬知的後台訪問地址';
-$lang->entry->chanzhiURL          = '後台入口';
+$lang->entry->chanzhiPlaceholder = '請輸入蟬知的後台訪問地址';
+$lang->entry->chanzhiURL         = '後台入口';
+$lang->entry->zentaoPlaceholder  = '如：http://www.zentaopms.com/user-login-Lw==.html';
+$lang->entry->zentaoURL          = '禪道登錄地址';
+
+$lang->entry->zentaoAdmin   = '禪道管理員';
+$lang->entry->adminAccount  = '管理員賬號';
+$lang->entry->adminPassword = '管理員密碼';
 
 $lang->entry->confirmDelete = '您確定刪除該應用嗎？';
 $lang->entry->lblBlock      = '區塊';
@@ -65,6 +73,10 @@ $lang->entry->error->code  = '代號不能為空';
 $lang->entry->error->key   = '密鑰不能為空';
 $lang->entry->error->ip    = 'IP列表不能為空';
 $lang->entry->error->url   = ' 非內置應用的登錄地址，必須包含 /、http://或者https://';
+
+$lang->entry->error->admin         = '管理員用戶名或密碼錯誤';
+$lang->entry->error->zentaoSetting = '禪道系統設置失敗，您的禪道系統版本低於7.3或沒有安裝然之整合插件';
+$lang->entry->error->zentaoUrl     = '禪道登錄地址錯誤';
 
 $lang->entry->openList['']       = '';
 $lang->entry->openList['blank']  = '新開標籤';

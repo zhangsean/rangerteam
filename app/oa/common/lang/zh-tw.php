@@ -14,14 +14,20 @@ $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = '我的地盤|dashboard|index|';
+$lang->menu->oa->todo      = '待辦|todo|calendar|';
 $lang->menu->oa->project   = '項目|project|index|';
 $lang->menu->oa->announce  = '公告|announce|browse|';
 $lang->menu->oa->doc       = '文檔|doc|browse|';
 $lang->menu->oa->attend    = '考勤|attend|personal|';
 $lang->menu->oa->leave     = '請假|leave|personal|';
 $lang->menu->oa->trip      = '出差|trip|personal|';
+$lang->menu->oa->refund    = '報銷|refund|personal|';
 
 $lang->dashboard = new stdclass();
+
+$lang->todo = new stdclass();
+$lang->todo->menu = new stdclass();
+$lang->todo->menu->calendar = '日曆|todo|calendar|';
 
 $lang->project   = new stdclass();
 $lang->project->menu = new stdclass();
@@ -63,3 +69,11 @@ $lang->trip->menu = new stdclass();
 $lang->trip->menu->personal   = '我的出差|trip|personal|';
 $lang->trip->menu->department = '部門|trip|department|';
 $lang->trip->menu->company    = '公司|trip|company|';
+
+$lang->refund = new stdclass();
+$lang->refund->menu = new stdclass();
+$lang->refund->menu->personal = '我的報銷|refund|personal|';
+$lang->refund->menu->company  = '所有報銷|refund|company|';
+$lang->refund->menu->review   = '報銷審批|refund|browsereview|';
+$lang->refund->menu->todo     = '待報銷|refund|todo|';
+$lang->refund->menu->settings = '設置|refund|settings|';

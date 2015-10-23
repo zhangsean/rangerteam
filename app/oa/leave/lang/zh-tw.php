@@ -26,18 +26,19 @@ $lang->leave->reviewedDate = '審核時間';
 $lang->leave->date         = '日期';
 $lang->leave->time         = '時間';
 
+$lang->leave->typeList['affairs']   = '事假';
 $lang->leave->typeList['sick']      = '病假';
+$lang->leave->typeList['annual']    = '年假';
+$lang->leave->typeList['home']      = '探親假';
 $lang->leave->typeList['marry']     = '婚假';
 $lang->leave->typeList['maternity'] = '產假';
-$lang->leave->typeList['affairs']   = '事假';
-$lang->leave->typeList['home']      = '探親假';
-$lang->leave->typeList['annual']    = '年假';
 
 $lang->leave->statusList['wait']   = '等待審核';
 $lang->leave->statusList['pass']   = '通過';
 $lang->leave->statusList['reject'] = '拒絶';
 
 $lang->leave->denied = '信息訪問受限';
+$lang->leave->unique = '%s 已經存在請假記錄';
 
 $lang->leave->confirmReview['pass']   = '您確定要執行通過操作嗎？';
 $lang->leave->confirmReview['reject'] = '您確定要執行拒絶操作嗎？';

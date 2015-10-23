@@ -27,6 +27,9 @@ $lang->task->export   = '導出任務';
 
 $lang->task->batchCreate    = '批量添加';
 $lang->task->backToProjects = '返回項目列表'; 
+$lang->task->viewAll        = '瀏覽所有項目任務';
+$lang->task->editAll        = '操作所有項目任務';
+$lang->task->deleteAll      = '刪除所有項目任務';
 
 $lang->task->id             = '編號';
 $lang->task->project        = '所屬項目';
@@ -74,6 +77,18 @@ $lang->task->lastEdited     = '最後編輯';
 $lang->task->hour           = '小時';
 $lang->task->leftThisTime   = '剩餘';
 $lang->task->date           = '日期';
+$lang->task->multiple       = '多人任務';
+$lang->task->multipleAB     = '多人';
+$lang->task->team           = '團隊';
+$lang->task->transmit       = '轉交';
+$lang->task->transmitTo     = '轉交給';
+$lang->task->children       = '子任務';
+$lang->task->childrenAB     = '子';
+$lang->task->parent         = '父任務';
+$lang->task->unfinished     = '未完成';
+$lang->task->end            = '結束';
+$lang->task->myConsumption  = '我的消耗';
+$lang->task->recordEstimate = '工時';
 
 $lang->task->confirmFinish     = '"預計剩餘"為0，確認將任務狀態改為"已完成"嗎？';
 $lang->task->consumedBefore    = '之前消耗';

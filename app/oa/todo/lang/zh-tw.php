@@ -9,6 +9,7 @@
  * @version     $Id: zh-tw.php 5022 2013-07-05 06:50:39Z chencongzhi520@gmail.com $
  * @link        http://www.ranzhico.com
  */
+if(!isset($lang->todo)) $lang->todo = new stdclass();
 $lang->todo->common       = '待辦';
 $lang->todo->index        = "待辦一覽";
 $lang->todo->create       = "新增";
@@ -26,6 +27,7 @@ $lang->todo->import2Today = "導入到今天";
 $lang->todo->import       = "導入";
 $lang->todo->changeStatus = "更改";
 $lang->todo->legendBasic  = "基本信息";
+$lang->todo->calendar     = "日曆";
 
 $lang->todo->id          = '編號';
 $lang->todo->account     = '所有者';
@@ -43,8 +45,7 @@ $lang->todo->desc        = '描述';
 $lang->todo->private     = '私人事務';
 $lang->todo->idvalue     = '任務或Bug';
 
-$lang->todo->confirmBug   = '該Todo關聯的是Bug #%s，需要修改它嗎？';
-$lang->todo->confirmTask  = '該Todo關聯的是Task #%s，需要修改它嗎？';
+$lang->todo->confirmTip = '該Todo關聯的是%s #%s，需要修改它嗎？';
 
 $lang->todo->statusList['wait']     = '未開始';
 $lang->todo->statusList['doing']    = '進行中';
@@ -57,9 +58,10 @@ $lang->todo->priList[1] = '最高';
 $lang->todo->priList[2] = '較高';
 $lang->todo->priList[4] = '最低';
 
-$lang->todo->typeList['custom'] = '自定義';
-$lang->todo->typeList['bug']    = 'Bug';
-$lang->todo->typeList['task']   = $lang->projectCommon . '任務';
+$lang->todo->typeList['custom']   = '自定義';
+$lang->todo->typeList['task']     = '項目任務';
+$lang->todo->typeList['order']    = '訂單溝通';
+$lang->todo->typeList['customer'] = '客戶溝通';
 
 $lang->todo->confirmDelete  = "您確定要刪除這條待辦嗎？";
 $lang->todo->successMarked  = "成功切換狀態！";
@@ -80,5 +82,4 @@ $lang->todo->periods['all']        = '所有';
 
 $lang->todo->action = new stdclass();
 $lang->todo->action->finished  = array('main' => '$date, 由 <strong>$actor</strong>完成');
-$lang->todo->action->marked    = array('main' => '$date, 由 <strong>$actor</strong> 標記為<strong>$extra</strong>。', 'extra' => $lang->todo->statusList);
-
+$lang->todo->action->marked    = array('main' => '$date, 由 <strong>$actor</strong> 標記為<strong>$extra</strong>。', 'extra' => 'statusList');
