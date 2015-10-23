@@ -197,6 +197,7 @@ class projectModel extends model
                 ->add('editedBy', $this->app->user->account)
                 ->add('editedDate', helper::now())
                 ->join('whitelist', ',')
+                ->setDefault('whitelist', '')
                 ->stripTags('desc', $this->config->allowedTags->admin)
                 ->remove('member,manager,master')
                 ->get();

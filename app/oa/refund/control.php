@@ -204,72 +204,6 @@ class refund extends control
     }
 
     /**
-     * Check refund privilege and locate personal if no privilege. 
-     * 
-     * @param  object $refund 
-     * @param  string $action 
-     * @param  string $errorType   html|json 
-     * @access private
-     * @return void
-     */
-    private function checkPriv($refund, $action, $errorType = '')
-    {
-        if($this->app->user->admin == 'super') return true;
-
-        $pass = true;
-        $action = strtolower($action);
-        $account = $this->app->user->account;
-
-        if(strpos(',edit,delete,', ",$action,") !== false)
-        {
-            if($refund->status != 'wait' or $refund->createdBy != $account) $pass = false;
-        }
-
-        if(!$pass)
-        {
-            if($errorType == '') $errorType = empty($_POST) ? 'html' : 'json';
-            if($errorType == 'json')
-            {
-                $this->app->loadLang('error');
-                $this->send(array('result' => 'fail', 'message' => $this->lang->error->typeList['accessLimited']));
-            }
-            else
-            {
-                $locate = helper::safe64Encode($this->server->http_referer);
-                $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
-                $this->locate($errorLink);
-            }
-        }
-        return $pass;
-    }
-
-    /**
-     * Set reviewer for refund. 
-     * 
-     * @access public
-     * @return void
-     */
-    public function settings()
-    {
-        if($_POST)
-        {
-            $settings = fixer::input('post')->get();
-
-            if($settings->firstReviewer and $settings->secondReviewer and $settings->firstReviewer == $settings->secondReviewer) $this->send(array('result' => 'fail', 'message' => $this->lang->refund->uniqueReviewer));
-
-            $this->loadModel('setting')->setItems('system.oa.refund', $settings);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
-        }
-
-        $this->view->title          = $this->lang->refund->settings; 
-        $this->view->firstReviewer  = !empty($this->config->refund->firstReviewer) ? $this->config->refund->firstReviewer : '';
-        $this->view->secondReviewer = !empty($this->config->refund->secondReviewer) ? $this->config->refund->secondReviewer : '';
-        $this->view->users          = $this->loadModel('user')->getPairs();
-        $this->display();
-    }
-
-    /**
      * browse review list.
      * 
      * @access public
@@ -312,6 +246,8 @@ class refund extends control
             $deptIDList = array_keys($deptList);
             if(!empty($deptList)) $refunds = $this->refund->getList($deptIDList, 'wait,doing');
         }
+        $deptList[0] = new stdclass();
+        $deptList[0]->name = '/';
 
         $this->view->title      = $this->lang->refund->review;
         $this->view->users      = $newUsers;
@@ -319,33 +255,6 @@ class refund extends control
         $this->view->deptList   = $deptList;
         $this->view->categories = $this->refund->getCategoryPairs();
 
-        $this->display();
-    }
-
-    /**
-     * Set category for refund.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setCategory()
-    {
-        $expenseList   = $this->loadModel('tree')->getPairs(0, 'out');
-        $expenseIdList =  array_keys($expenseList);
-
-        $refundCategories = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->andWhere('refund')->eq(1)->fetchAll('id');
-        $refundCategories = array_keys($refundCategories);
-        $refundCategories = implode($refundCategories, ',');
-
-        if($_POST)
-        {
-            $this->refund->setCategory($expenseIdList);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
-        }
-
-        $this->view->expenseList      = $expenseList;
-        $this->view->refundCategories = $refundCategories;
         $this->display();
     }
 
@@ -412,5 +321,98 @@ class refund extends control
         $this->view->depositorList = array('' => '') + $this->loadModel('depositor', 'cash')->getPairs();
 
         $this->display();
+    }
+
+    /**
+     * Set reviewer for refund. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function settings()
+    {
+        if($_POST)
+        {
+            $settings = fixer::input('post')->get();
+
+            if($settings->firstReviewer and $settings->secondReviewer and $settings->firstReviewer == $settings->secondReviewer) $this->send(array('result' => 'fail', 'message' => $this->lang->refund->uniqueReviewer));
+
+            $this->loadModel('setting')->setItems('system.oa.refund', $settings);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $this->view->title          = $this->lang->refund->settings; 
+        $this->view->firstReviewer  = !empty($this->config->refund->firstReviewer) ? $this->config->refund->firstReviewer : '';
+        $this->view->secondReviewer = !empty($this->config->refund->secondReviewer) ? $this->config->refund->secondReviewer : '';
+        $this->view->users          = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
+
+    /**
+     * Set category for refund.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCategory()
+    {
+        $expenseList   = $this->loadModel('tree')->getPairs(0, 'out');
+        $expenseIdList =  array_keys($expenseList);
+
+        $refundCategories = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->andWhere('refund')->eq(1)->fetchAll('id');
+        $refundCategories = array_keys($refundCategories);
+        $refundCategories = implode($refundCategories, ',');
+
+        if($_POST)
+        {
+            $this->refund->setCategory($expenseIdList);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->view->expenseList      = $expenseList;
+        $this->view->refundCategories = $refundCategories;
+        $this->display();
+    }
+
+    /**
+     * Check refund privilege and locate personal if no privilege. 
+     * 
+     * @param  object $refund 
+     * @param  string $action 
+     * @param  string $errorType   html|json 
+     * @access private
+     * @return void
+     */
+    private function checkPriv($refund, $action, $errorType = '')
+    {
+        if($this->app->user->admin == 'super') return true;
+
+        $pass = true;
+        $action = strtolower($action);
+        $account = $this->app->user->account;
+
+        if(strpos(',edit,delete,', ",$action,") !== false)
+        {
+            if($refund->status != 'wait' or $refund->createdBy != $account) $pass = false;
+        }
+
+        if(!$pass)
+        {
+            if($errorType == '') $errorType = empty($_POST) ? 'html' : 'json';
+            if($errorType == 'json')
+            {
+                $this->app->loadLang('error');
+                $this->send(array('result' => 'fail', 'message' => $this->lang->error->typeList['accessLimited']));
+            }
+            else
+            {
+                $locate = helper::safe64Encode($this->server->http_referer);
+                $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
+                $this->locate($errorLink);
+            }
+        }
+        return $pass;
     }
 }
