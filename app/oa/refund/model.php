@@ -297,10 +297,16 @@ class refundModel extends model
     public function reimburse($refundID)
     {
         $refund = $this->getByID($refundID);
-        $this->dao->update(TABLE_REFUND)->set('status')->eq('finish')->where('id')->eq($refundID)->exec();
+
+        $data = new stdclass();
+        $data->status     = 'finish';
+        $data->refundBy   = $this->app->user->account;
+        $data->refundDate = helper::now(); 
+
+        $this->dao->update(TABLE_REFUND)->data($data)->where('id')->eq($refundID)->exec();
         foreach($refund->detail as $detail)
         {
-            if($detail->status != 'reject') $this->dao->update(TABLE_REFUND)->set('status')->eq('finish')->where('id')->eq($detail->id)->exec();
+            if($detail->status != 'reject') $this->dao->update(TABLE_REFUND)->data($data)->where('id')->eq($detail->id)->exec();
         }
         return !dao::isError();
     }
@@ -317,15 +323,15 @@ class refundModel extends model
         $refund = $this->getByID($refundID);
 
         $trade = new stdclass();
-        $trade->type      = 'out';
-        $trade->depositor = $this->post->depositor;
-        $trade->money     = $refund->money;
-        $trade->currency  = $refund->currency;
-        $trade->date      = date('Y-m-d');
-        $trade->handlers  = $this->app->user->account;
-        $trade->category  = $refund->category;
-        $trade->desc      = $refund->desc;
-        $trade->createdBy = $this->app->user->account;
+        $trade->type        = 'out';
+        $trade->depositor   = $this->post->depositor;
+        $trade->money       = $refund->money;
+        $trade->currency    = $refund->currency;
+        $trade->date        = date('Y-m-d');
+        $trade->handlers    = $this->app->user->account;
+        $trade->category    = $refund->category;
+        $trade->desc        = $refund->desc;
+        $trade->createdBy   = $this->app->user->account;
         $trade->createdDate = helper::now();
         $trade->editedBy    = $this->app->user->account;
         $trade->editedDate  = helper::now();
