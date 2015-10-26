@@ -17,6 +17,9 @@
       <div class='panel-heading'><strong><?php echo $refund->name?></strong></div>
       <div class='panel-body'>
         <p><?php echo sprintf($lang->refund->descTip, zget($users, $refund->createdBy), zget($currencySign, $refund->currency) . $refund->money)?></p>
+        <?php if(!empty($refund->reason)):?>
+        <p><?php echo "{$lang->refund->statusList[$refund->status]}{$lang->refund->reason}:{$refund->reason}"?></p>
+        <?php endif;?>
         <p><?php echo $refund->desc?></p>
       </div>
     </div> 
@@ -39,7 +42,7 @@
             <td><?php echo zget($currencySign, $d->currency) . $d->money?></td>
             <td><?php echo $d->date?></td>
             <td><?php echo zget($categories, $d->category)?></td>
-            <td><?php echo zget($lang->refund->statusList, $d->status)?></td>
+            <td><span data-toggle='tooltip' data-original-title="<?php echo $d->reason?>"><?php echo zget($lang->refund->statusList, $d->status)?></span></td>
             <td><?php echo $d->desc?></td>
           </tr>
           <?php endforeach;?>
@@ -50,10 +53,13 @@
     <?php echo $this->fetch('action', 'history', "objectType=refund&objectID={$refund->id}");?>
     <div class='page-actions'>
       <?php
-      echo "<div class='btn-group'>";
-      commonModel::printLink('refund', 'edit', "refundID=$refund->id", $lang->edit, "class='btn btn-default'");
-      commonModel::printLink('refund', 'delete', "refundID=$refund->id", $lang->delete, "class='btn btn-default deleter'");
-      echo '</div>';
+      if($refund->status == 'wait')
+      {
+          echo "<div class='btn-group'>";
+          commonModel::printLink('refund', 'edit', "refundID=$refund->id", $lang->edit, "class='btn btn-default'");
+          commonModel::printLink('refund', 'delete', "refundID=$refund->id", $lang->delete, "class='btn btn-default deleter'");
+          echo '</div>';
+      }
 
       $browseLink = $this->session->refundList ? $this->session->refundList : inlink('personal');
       commonModel::printRPN($browseLink, $preAndNext);
