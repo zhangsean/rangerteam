@@ -256,25 +256,27 @@ class refundModel extends model
      */
     public function review($refundID, $status)
     {
-        $refund = $this->getByID($refundID);
+        $refund  = $this->getByID($refundID);
+        $account = $this->app->user->account;
+        $now     = helper::now();
 
         if($status == 'pass')
         {
-            if(!empty($this->config->refund->secondReviewer) and $this->config->refund->secondReviewer != $this->app->user->account) $status = 'doing';
+            if(!empty($this->config->refund->secondReviewer) and $this->config->refund->secondReviewer != $account) $status = 'doing';
         }
 
         $data = fixer::input('post')->add('status', $status)->get();
 
         if($refund->status == 'wait')
         {
-            $data->firstReviewer   = $this->app->user->account;
-            $data->firstReviewDate = date('Y-m-d') ;
+            $data->firstReviewer   = $account;
+            $data->firstReviewDate = $now;
         }
 
         if($refund->status == 'doing')
         {
-            $data->secondReviewer   = $this->app->user->account;
-            $data->secondReviewDate = date('Y-m-d') ;
+            $data->secondReviewer   = $account;
+            $data->secondReviewDate = $now;
         }
 
         $this->dao->update(TABLE_REFUND)->data($data)->where('id')->eq($refundID)->exec();
