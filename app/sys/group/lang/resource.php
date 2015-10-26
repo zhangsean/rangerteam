@@ -402,8 +402,6 @@ $lang->resource->attend->settings     = 'settings';
 $lang->resource->attend->edit         = 'edit';
 $lang->resource->attend->browseReview = 'browseReview';
 $lang->resource->attend->review       = 'review';
-$lang->resource->attend->signIn       = 'signIn';
-$lang->resource->attend->signOut      = 'signOut';
 $lang->resource->attend->setManager   = 'setManager';
 
 $lang->attend->methodOrder[0]  = 'personal';
@@ -414,9 +412,7 @@ $lang->attend->methodOrder[20] = 'settings';
 $lang->attend->methodOrder[25] = 'edit';
 $lang->attend->methodOrder[30] = 'browseReview';
 $lang->attend->methodOrder[35] = 'review';
-$lang->attend->methodOrder[40] = 'signIn';
-$lang->attend->methodOrder[45] = 'signOut';
-$lang->attend->methodOrder[50] = 'setManager';
+$lang->attend->methodOrder[40] = 'setManager';
 
 /* Holiday */
 $lang->resource->holiday = new stdclass();
