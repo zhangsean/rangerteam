@@ -345,7 +345,7 @@ class refund extends control
         $this->view->title          = $this->lang->refund->settings; 
         $this->view->firstReviewer  = !empty($this->config->refund->firstReviewer) ? $this->config->refund->firstReviewer : '';
         $this->view->secondReviewer = !empty($this->config->refund->secondReviewer) ? $this->config->refund->secondReviewer : '';
-        $this->view->users          = $this->loadModel('user')->getPairs();
+        $this->view->users          = $this->loadModel('user')->getPairs('nodeleted, noclosed');
         $this->display();
     }
 

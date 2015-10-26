@@ -51,7 +51,7 @@ class project extends control
         }
 
         $this->view->title  = $this->lang->project->create;
-        $this->view->users  = $this->loadModel('user')->getPairs('noclosed');
+        $this->view->users  = $this->loadModel('user')->getPairs('noclosed,nodeleted');
         $this->view->groups = $this->loadModel('group')->getPairs();
         $this->display();
     }
@@ -78,7 +78,7 @@ class project extends control
         }
 
         $this->view->title   = $this->lang->project->edit;
-        $this->view->users   = $this->loadModel('user')->getPairs('noclosed');
+        $this->view->users   = $this->loadModel('user')->getPairs('noclosed,nodeleted');
         $this->view->project = $this->project->getByID($projectID);
         $this->view->groups  = $this->loadModel('group')->getPairs();
         $this->display();
@@ -108,7 +108,7 @@ class project extends control
 
         $this->view->title   = $this->lang->project->member;
         $this->view->project = $project;
-        $this->view->users   = $this->loadModel('user')->getPairs('noclosed');
+        $this->view->users   = $this->loadModel('user')->getPairs('noclosed,nodeleted');
         $this->display();
     }
 

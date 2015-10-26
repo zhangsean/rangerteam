@@ -265,7 +265,7 @@ class attend extends control
         $this->view->workingDays  = $this->config->attend->workingDays;
         $this->view->mustSignOut  = $this->config->attend->mustSignOut;
         $this->view->reviewedBy   = isset($this->config->attend->reviewedBy) ? $this->config->attend->reviewedBy : '';
-        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->users        = $this->loadModel('user')->getPairs('noclosed,nodeleted');
         $this->display();
     }
 
@@ -407,7 +407,7 @@ class attend extends control
         }
 
         $this->view->deptList = $deptList;
-        $this->view->users    = $this->loadModel('user')->getPairs('noclosed');
+        $this->view->users    = $this->loadModel('user')->getPairs('noclosed,nodeleted');
         $this->display();
     }
 }
