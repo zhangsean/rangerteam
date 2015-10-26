@@ -249,11 +249,12 @@ class refund extends control
         $deptList[0] = new stdclass();
         $deptList[0]->name = '/';
 
-        $this->view->title      = $this->lang->refund->review;
-        $this->view->users      = $newUsers;
-        $this->view->refunds    = $refunds;
-        $this->view->deptList   = $deptList;
-        $this->view->categories = $this->refund->getCategoryPairs();
+        $this->view->title        = $this->lang->refund->review;
+        $this->view->users        = $newUsers;
+        $this->view->refunds      = $refunds;
+        $this->view->deptList     = $deptList;
+        $this->view->categories   = $this->refund->getCategoryPairs();
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
 
         $this->display();
     }

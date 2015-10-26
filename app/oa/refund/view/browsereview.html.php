@@ -32,11 +32,11 @@
     <?php $currentDept = $users[$account]->dept;?>
     <tr>
       <td><?php echo $refund->id;?></td>
-      <td><?php echo $refund->name;?></td>
+      <td class='text-left'><?php echo $refund->name;?></td>
       <td><?php echo $categories[$refund->category];?></td>
       <td><?php echo $deptList[$currentDept]->name;?></td>
       <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
-      <td><?php echo $refund->money;?></td>
+      <td class='text-right'><?php echo zget($currencySign, $refund->currency) . $refund->money;?></td>
       <td><?php echo $refund->date;?></td>
       <td><?php echo zget($lang->refund->statusList, $refund->status);?></td>
       <td><?php echo $refund->desc?></td>
