@@ -42,7 +42,7 @@
             <tr>
               <th><?php echo $lang->attend->reviewedBy;?></th>
               <td><?php echo html::select('reviewedBy', $users, $reviewedBy, "class='form-control'")?></td>
-              <td class='reviewer'><a title="<?php echo $lang->attend->reviewerTip;?>"><i class='icon-question-sign'></i></a></td>
+              <td class='reviewer'><?php echo html::a('javascript:void(0)', "<i class='icon-question-sign'></i>", "data-original-title='{$lang->attend->reviewerTip}' data-toggle='tooltip' data-placement='right'");?></td>
             </tr>
             <tr>
               <th></th>
