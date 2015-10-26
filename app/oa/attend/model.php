@@ -92,7 +92,7 @@ class attendModel extends model
     public function getByDept($deptID, $startDate = '', $endDate = '', $reviewStatus = '')
     {
         $this->processStatus();
-        $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
+        $users = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted', $deptID);
 
         $attends = $this->dao->select('t1.*, t2.dept')->from(TABLE_ATTEND)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.account=t2.account")
             ->where('t1.account')->in(array_keys($users))
@@ -111,7 +111,7 @@ class attendModel extends model
         foreach($deptID as $dept)
         {
             if($dept == 0) continue;
-            $deptUsers = $this->loadModel('user')->getPairs('noclosed,noempty', $dept);
+            $deptUsers = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted', $dept);
             foreach($deptUsers as $account => $realname) if(!isset($newAttends[$dept][$account])) $newAttends[$dept][$account] = array();
         }
 
