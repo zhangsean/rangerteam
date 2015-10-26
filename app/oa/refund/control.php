@@ -268,15 +268,18 @@ class refund extends control
      */
     public function review($refundID, $status)
     {
+        $refund = $this->refund->getByID($refundID);
+
         if($_POST)
         {
             $this->refund->review($refundID, $status);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $isDetail = ($refund->parent != 0) ? true : false;
+            $this->send(array('result' => 'success', 'isDetail' => $isDetail, 'message' => $this->lang->saveSuccess, 'locate' => inlink('browsereview')));
         }
 
         $this->view->title      = $this->lang->refund->review;
-        $this->view->refund     = $this->refund->getByID($refundID);
+        $this->view->refund     = $refund;
         $this->view->status     = $status;
         $this->view->categories = $this->refund->getCategoryPairs();
         $this->display();
