@@ -39,9 +39,8 @@
           <th><?php echo $lang->refund->money?></th>
           <td>
             <div class='input-group'>
-            <?php echo html::input('money', '', "class='form-control'")?>
-            <span class='input-group-addon'></span>
-            <?php echo html::select('currency', $currencyList, '', "class='form-control w-p20'")?>
+              <div class='input-group-btn w-90px'><?php echo html::select('currency', $currencyList, '', "class='form-control'")?></div>
+              <?php echo html::input('money', '', "class='form-control'")?>
             </div>
           </td>
           <td></td>
@@ -51,11 +50,11 @@
           <td colspan='2' id='detailBox'>
             <div class='row'>
               <div class='col-md-2'><?php echo html::input('dateList[]', '', "class='form-control form-date' placeholder='{$lang->refund->date}'")?></div>
-              <div class='col-md-1'>
-                  <?php echo html::input('moneyList[]', '', "class='form-control' placeholder='{$lang->refund->money}'")?>
-              </div>
-              <div class='col-md-2'>
-                  <?php echo html::select('currencyList[]', $currencyList, '', "class='form-control'")?>
+              <div class='col-md-3'>
+                <div class='input-group'>
+                  <div class='input-group-btn w-90px'><?php echo html::select('currencyList[]', $currencyList, '', "class='form-control'")?></div>
+                  <?php echo html::input('moneyList[]', '', "class='form-control'")?>
+                </div>
               </div>
               <div class='col-md-2'><?php echo html::select('categoryList[]', $categories, '', "class='form-control chosen' placeholder='{$lang->refund->category}'")?></div>
               <div class='col-md-4'><?php echo html::textarea('descList[]', '', "class='form-control' style='height:32px;' placeholder='{$lang->refund->desc}'")?></div>
@@ -75,11 +74,11 @@
 <script type='text/template' id='detailTpl'>
 <div class='row'>
   <div class='col-md-2'><?php echo html::input('dateList[]', '', "class='form-control form-date' placeholder='{$lang->refund->date}'")?></div>
-  <div class='col-md-1'>
-      <?php echo html::input('moneyList[]', '', "class='form-control' placeholder='{$lang->refund->money}'")?>
-  </div>
-  <div class='col-md-2'>
-      <?php echo html::select('currencyList[]', $currencyList, '', "class='form-control'")?>
+  <div class='col-md-3'>
+    <div class='input-group'>
+      <div class='input-group-btn w-90px'><?php echo html::select('currencyList[]', $currencyList, '', "class='form-control'")?></div>
+      <?php echo html::input('moneyList[]', '', "class='form-control'")?>
+    </div>
   </div>
   <div class='col-md-2'><?php echo html::select('categoryList[]', $categories, '', "class='form-control chosen' placeholder='{$lang->refund->category}'")?></div>
   <div class='col-md-4'><?php echo html::textarea('descList[]', '', "class='form-control' style='height:32px;' placeholder='{$lang->refund->desc}'")?></div>

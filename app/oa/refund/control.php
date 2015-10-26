@@ -53,7 +53,7 @@ class refund extends control
     public function edit($refundID)
     {
         $refund = $this->refund->getByID($refundID);
-        $this->checkPriv($refund, 'delete');
+        $this->checkPriv($refund, 'edit');
 
         if($_POST)
         {

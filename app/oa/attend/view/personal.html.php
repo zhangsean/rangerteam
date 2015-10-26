@@ -81,13 +81,15 @@
                 <td><?php echo $currentDate;?></td>
                 <td><?php echo $lang->datepicker->abbrDayNames[$dayIndex]?></td>
                 <td class='attend-signin'>
-                  <?php $signIn = substr($attends[$currentDate]->signIn, 0, 5); $currentDate;?>
-                  <?php if(strpos(',late,both,absent,', $status) !== false) $signIn = $lang->attend->statusList[$status];?>
+                  <?php $signIn = substr($attends[$currentDate]->signIn, 0, 5);?>
+                  <?php if(strpos(',late,absent,', $status) !== false) $signIn = $lang->attend->statusList[$status];?>
+                  <?php if($status == 'both') $signIn = $lang->attend->statusList['late'];?>
                   <?php echo $signIn;?>
                 </td>
                 <td class='attend-signout'>
                   <?php $signOut = substr($attends[$currentDate]->signOut, 0, 5);?>
-                  <?php if(strpos(',early,both,absent,', $status) !== false) $signOut = $lang->attend->statusList[$status];?>
+                  <?php if(strpos(',early,absent,', $status) !== false) $signOut = $lang->attend->statusList[$status];?>
+                  <?php if($status == 'both') $signOut = $lang->attend->statusList['early'];?>
                   <?php echo $signOut;?>
                 </td>
                 <td>

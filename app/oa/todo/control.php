@@ -170,10 +170,9 @@ class todo extends control
         if(!$todo) $this->locate($this->createLink('todo', 'calendar'));
 
         /* Save session for back to this app. */
-        if(strpos('order,customer', $todo->type) !== false)
-        {
-            $this->session->set('returnOpenApp', 'oa');
-        }
+        if($todo->type == 'task')     $this->session->set('taskList', $this->createLink('todo', 'calendar', "date=" . str_replace('-', '', $todo->date)));
+        if($todo->type == 'order')    $this->session->set('orderList', "javascript:$.openEntry(\"oa\")");
+        if($todo->type == 'customer') $this->session->set('customerList', "javascript:$.openEntry(\"oa\")");
 
         $this->view->title      = "{$this->lang->todo->common} #$todo->id $todo->name";
         $this->view->todo       = $todo;

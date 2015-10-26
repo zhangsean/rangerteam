@@ -82,6 +82,7 @@ $(function()
         showMeridian: 1,
         format: 'yyyy-mm-dd hh:ii'
     }
+    window.datetimepickerDefaultOptions = options;
 
     $('.form-datetime').fixedDate().datetimepicker(options);
     $('.form-date').fixedDate().datetimepicker($.extend(options, {minView: 2, format: 'yyyy-mm-dd'}));

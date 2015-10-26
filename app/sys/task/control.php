@@ -225,8 +225,6 @@ class task extends control
                 }
             }
         }
-        /* Process return link for todo. */
-        if(strpos($this->server->http_referer, 'calendar') !== false && strpos($this->server->http_referer, 'todo')) $this->session->set('taskList', $this->createLink('todo', 'calendar'));
 
         $this->view->title      = $this->lang->task->view . $task->name;
         $this->view->task       = $task;

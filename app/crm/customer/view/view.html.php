@@ -46,12 +46,6 @@
       echo '</div>';
 
       $browseLink = $this->session->customerList ? $this->session->customerList : inlink('browse');
-      /* Process back url if referer is todo. */
-      if($this->session->returnOpenApp) 
-      {
-          $browseLink = "javascript:$.openEntry(\"{$this->session->returnOpenApp}\")";
-          $this->session->set('returnOpenApp', '');
-      }
       commonModel::printRPN($browseLink, $preAndNext);
       ?>
     </div>
