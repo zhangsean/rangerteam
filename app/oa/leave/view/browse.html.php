@@ -44,6 +44,7 @@
           <tr class='text-center'>
             <th class='w-80px'> <?php echo $lang->leave->id;?></th>
             <th class='w-80px'><?php echo $lang->leave->createdBy;?></th>
+            <th class='w-100px'><?php echo $lang->user->dept;?></th>
             <th class='w-80px'><?php echo $lang->leave->type;?></th>
             <th class='w-150px'><?php echo $lang->leave->begin;?></th>
             <th class='w-150px'><?php echo $lang->leave->end;?></th>
@@ -61,6 +62,7 @@
         <tr>
           <td><?php echo $leave->id;?></td>
           <td><?php echo zget($users, $leave->createdBy);?></td>
+          <td><?php echo zget($deptList, $leave->dept);?></td>
           <td><?php echo zget($this->lang->leave->typeList, $leave->type);?></td>
           <td><?php echo $leave->begin . ' ' . $leave->start;?></td>
           <td><?php echo $leave->end . ' ' . $leave->finish;?></td>

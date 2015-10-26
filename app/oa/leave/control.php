@@ -73,7 +73,7 @@ class leave extends control
         $currentMonth = strlen($date) == 6 ? substr($date, 4, 2) : '';
         $monthList    = $this->leave->getAllMonth();
         $yearList     = array_reverse(array_keys($monthList));
-        $deptList     = array();
+        $deptList     = $this->loadModel('tree')->getPairs(0, 'dept');
         $leaveList    = array();
 
         if($type == 'personal')
