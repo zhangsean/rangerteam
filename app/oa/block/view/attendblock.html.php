@@ -29,6 +29,13 @@
 .event:hover {cursor: pointer;}
 .event.done {background-color: rgb(56, 176, 63);}
 .event.wait {background-color: rgb(50, 128, 252);}
+.attend-normal {color: #8BC34A;}
+.attend-late   {color: #EA644A;}
+.attend-early  {color: #FF8A65;}
+.attend-both   {color: #FF5722;}
+.attend-absent {color: #F1A325;}
+.attend-leave  {color: #9E9E9E;}
+.attend-trip   {color: #8668B8;}
 </style>
 <?php $dateList = range(strtotime($startDate), strtotime($endDate), 86400);?>
 <table class='calendar'>
@@ -78,9 +85,13 @@
     <?php foreach($dateList as $d):?>
     <?php $dStr = date('Y-m-d', $d);?>
     <?php $class = $dStr == $date ? 'today' : '';?>
-      <td class='<?php echo $class?>'>
-        <?php echo isset($attends[$dStr]) ? zget($this->lang->attend->abbrStatusList, $attends[$dStr]->status) : ''?>
+    <?php if(isset($attends[$dStr])):?>
+      <td class='<?php echo "$class attend-{$attends[$dStr]->status}"?>'>
+        <?php echo zget($this->lang->attend->abbrStatusList, $attends[$dStr]->status)?>
       </td>
+    <?php else:?>
+      <td class='<?php echo $class?>'></td>
+    <?php endif;?>
     <?php endforeach;?>
   </tr>
 </table>
