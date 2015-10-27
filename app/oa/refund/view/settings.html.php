@@ -29,15 +29,14 @@
           <table class='table table-form table-condensed w-p40'>
           <tr>
             <th class='w-100px'><?php echo $lang->refund->firstReviewer;?></th>
-            <td><?php echo html::select('firstReviewer', $users, $firstReviewer, "class='form-control chosen'")?></td>
-            <td><?php echo html::a('javascript:void(0)', "<i class='icon-question-sign'></i>", "data-original-title='{$lang->refund->firstReviewerTip}' data-toggle='tooltip' data-placement='right'");?></td>
+            <td><?php echo html::select('firstReviewer', $firstReviewers, $firstReviewer, "class='form-control chosen'")?></td><td></td>
           </tr>
           <tr>
             <th><?php echo $lang->refund->secondReviewer;?></th>
-            <td><?php echo html::select('secondReviewer', $users, $secondReviewer, "class='form-control chosen'")?></td>
+            <td><?php echo html::select('secondReviewer', $secondReviewers, $secondReviewer, "class='form-control chosen'")?></td>
             <td><?php echo html::a('javascript:void(0)', "<i class='icon-question-sign'></i>", "data-original-title='{$lang->refund->secondReviewerTip}' data-toggle='tooltip' data-placement='right' ");?></td>
           </tr>
-          <tr><th></th><td><?php echo html::submitButton();?></td></tr>
+          <tr><th></th><td colspan='2'><?php echo html::submitButton();?></td></tr>
           </table>
         </form>
       </div>

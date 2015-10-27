@@ -97,5 +97,3 @@ $lang->attend->confirmReview['reject'] = '您确定要执行拒绝操作吗？';
 
 $lang->attend->settings   = '考勤设置';
 $lang->attend->setManager = '部门经理设置';
-
-$lang->attend->reviewerTip = '如果没有设置统一的考勤审核人，审核人为部门经理。';

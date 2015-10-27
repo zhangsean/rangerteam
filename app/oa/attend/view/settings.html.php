@@ -29,26 +29,25 @@
           <table class='table table-form table-condensed w-p40'>
             <tr>
               <th class='w-150px'><?php echo $lang->attend->signInLimit?></th>
-              <td class='w-300px'><?php echo html::input('signInLimit', $signInLimit, "class='form-control form-time'")?></td><td></td>
+              <td class='w-300px'><?php echo html::input('signInLimit', $signInLimit, "class='form-control form-time'")?></td>
             </tr>
             <tr>
               <th><?php echo $lang->attend->signOutLimit?></th>
-              <td><?php echo html::input('signOutLimit', $signOutLimit, "class='form-control form-time'")?></td><td></td>
+              <td><?php echo html::input('signOutLimit', $signOutLimit, "class='form-control form-time'")?></td>
             </tr>
             <tr>
               <th><?php echo $lang->attend->workingDays?></th>
-              <td><?php echo html::select('workingDays', $lang->attend->workingDaysList, $workingDays, "class='form-control'")?></td><td></td>
+              <td><?php echo html::select('workingDays', $lang->attend->workingDaysList, $workingDays, "class='form-control'")?></td>
             </tr>
             <tr>
               <th><?php echo $lang->attend->reviewedBy;?></th>
               <td><?php echo html::select('reviewedBy', $users, $reviewedBy, "class='form-control'")?></td>
-              <td class='reviewer'><?php echo html::a('javascript:void(0)', "<i class='icon-question-sign'></i>", "data-original-title='{$lang->attend->reviewerTip}' data-toggle='tooltip' data-placement='right'");?></td>
             </tr>
             <tr>
               <th></th>
-              <td><?php echo html::checkbox('mustSignOut', array('yes' => $lang->attend->mustSignOut), $mustSignOut)?></td><td></td>
+              <td><?php echo html::checkbox('mustSignOut', array('yes' => $lang->attend->mustSignOut), $mustSignOut)?></td>
             </tr>
-          <tr><th></th><td colspan='2'><?php echo html::submitButton();?></td></tr>
+          <tr><th></th><td><?php echo html::submitButton();?></td></tr>
           </table>
         </form>
       </div>

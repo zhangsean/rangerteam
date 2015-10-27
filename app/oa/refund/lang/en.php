@@ -51,5 +51,4 @@ $lang->refund->descTip = "%s apply %s.";
 
 $lang->refund->uniqueReviewer    = 'The first reviewer and the second reviewer can not be the same.';
 $lang->refund->createTradeTip    = 'Do you record expense for this reimbursement?';
-$lang->refund->firstReviewerTip  = 'If this is empty, the first reviewer is department manager.';
 $lang->refund->secondReviewerTip = 'If reimbursement requires two approvals, please set this.';

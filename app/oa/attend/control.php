@@ -283,13 +283,14 @@ class attend extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
+        $this->loadModel('user');
         $this->view->title        = $this->lang->attend->settings; 
         $this->view->signInLimit  = $this->config->attend->signInLimit;
         $this->view->signOutLimit = $this->config->attend->signOutLimit;
         $this->view->workingDays  = $this->config->attend->workingDays;
         $this->view->mustSignOut  = $this->config->attend->mustSignOut;
         $this->view->reviewedBy   = isset($this->config->attend->reviewedBy) ? $this->config->attend->reviewedBy : '';
-        $this->view->users        = $this->loadModel('user')->getPairs('noclosed,nodeleted');
+        $this->view->users        = array('' => $this->lang->dept->moderators) + $this->user->getPairs('noempty,noclosed,nodeleted');
         $this->display();
     }
 

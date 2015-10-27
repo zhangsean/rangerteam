@@ -97,5 +97,3 @@ $lang->attend->confirmReview['reject'] = 'Are sure to reject it?';
 
 $lang->attend->settings   = 'Normal Settings';
 $lang->attend->setManager = 'Depatment Manager Settings';
-
-$lang->attend->reviewerTip = 'If this is empty, the first reviewer is deparment manager.';

@@ -335,6 +335,7 @@ class refund extends control
      */
     public function settings()
     {
+        $this->loadModel('user');
         if($_POST)
         {
             $settings = fixer::input('post')->get();
@@ -346,10 +347,11 @@ class refund extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
-        $this->view->title          = $this->lang->refund->settings; 
-        $this->view->firstReviewer  = !empty($this->config->refund->firstReviewer) ? $this->config->refund->firstReviewer : '';
-        $this->view->secondReviewer = !empty($this->config->refund->secondReviewer) ? $this->config->refund->secondReviewer : '';
-        $this->view->users          = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->title           = $this->lang->refund->settings; 
+        $this->view->firstReviewer   = !empty($this->config->refund->firstReviewer) ? $this->config->refund->firstReviewer : '';
+        $this->view->secondReviewer  = !empty($this->config->refund->secondReviewer) ? $this->config->refund->secondReviewer : '';
+        $this->view->firstReviewers  = array('' => $this->lang->dept->moderators) + $this->user->getPairs('noempty,nodeleted,noclosed');
+        $this->view->secondReviewers = $this->user->getPairs('nodeleted,noclosed');
         $this->display();
     }
 
