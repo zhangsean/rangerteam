@@ -18,4 +18,16 @@ $(document).ready(function()
             checkboxObj.parents('tr').find('[id*=estimate]').attr('readonly', false);
         }
     });
+
+    /* update team title. */
+    $('select[name^=team]').change(function()
+    {
+        var modal = $(this).closest('.modal');
+        var title = '';
+        modal.find('select[name^=team]').each(function()
+        {
+            if($(this).val() != '') title += ' ' + $(this).find('option[value=' + $(this).val() + ']').text();
+        })
+        modal.closest('td').next('td').find('a[class*=btn]').prop('title', title);
+    });
 });
