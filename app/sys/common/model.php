@@ -828,8 +828,17 @@ class commonModel extends model
             if(strtolower($key) == 'editedby')       continue;
             if(strtolower($key) == 'editeddate')     continue;
 
-            if(is_array($value)) $value = join(',', $value);
-            if(is_array($old->$key)) $old->$key = join(',', $old->$key);
+            if(is_array($value))
+            {
+                if(is_string(reset($value))) $value = join(',', $value);
+                else $value = join(',', array_keys($value)); 
+            }
+            if(is_array($old->$key)) 
+            {
+                if(is_string(reset($old->$key))) $old->$key = join(',', $old->$key);
+                else $old->$key = join(',', array_keys($old->$key)); 
+            }
+
             if($magicQuote) $value = stripslashes($value);
             if($value != stripslashes($old->$key))
             {
