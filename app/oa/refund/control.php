@@ -363,7 +363,7 @@ class refund extends control
      */
     public function setCategory()
     {
-        $expenseList   = $this->loadModel('tree')->getPairs(0, 'out');
+        $expenseList   = $this->loadModel('tree')->getOptionMenu('out', 0, true);
         $expenseIdList =  array_keys($expenseList);
 
         $refundCategories = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->andWhere('refund')->eq(1)->fetchAll('id');
