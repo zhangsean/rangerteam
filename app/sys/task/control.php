@@ -202,18 +202,18 @@ class task extends control
         }
         if($task->parent == $this->session->parentTaskID)
         {
-            $IDs  = explode(',', $this->session->childrenTaskIDList);
-            $hit  = false;
-            $pre  = '';
-            $next = '';
-            foreach($IDs as $id)
+            $IDList = explode(',', $this->session->childrenTaskIDList);
+            $found  = false;
+            $pre    = '';
+            $next   = '';
+            foreach($IDList as $id)
             {
-                if($hit) $next = $id;
-                if($hit) break;
-                if($task->id == $id) $hit = true;
-                if(!$hit) $pre = $id;
+                if($found) $next = $id;
+                if($found) break;
+                if($task->id == $id) $found = true;
+                if(!$found) $pre = $id;
             }
-            if($hit)
+            if($found)
             {
                 if($pre != '')  $preAndNext->pre  = $this->task->getByID($pre);
                 if($pre == '')  $preAndNext->pre  = $this->task->getByID($task->parent);

@@ -41,7 +41,7 @@ $(document).ready(function()
     
     var data = {labels: labels, datasets: [datasetIn, datasetOut]};
     
-    var options = {};
+    var options = {multiTooltipTemplate: "<%= datasetLabel %> <%= value %>"};
     chart = $('#myLineChart').lineChart(data, options);
     
     $('#currency').change(function()
