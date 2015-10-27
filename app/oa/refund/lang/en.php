@@ -37,6 +37,7 @@ $lang->refund->refundBy         = 'Reimbursed By';
 $lang->refund->refundDate       = 'Reimbursec Date';
 $lang->refund->baseInfo         = 'Base Info';
 $lang->refund->reason           = 'Reason';
+$lang->refund->reviewer         = 'Reviewer';
 
 $lang->refund->statusList['wait']   = 'Wait';
 $lang->refund->statusList['doing']  = 'Doing';
