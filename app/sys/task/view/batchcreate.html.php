@@ -61,7 +61,7 @@ include $app->getAppRoot() . '../sys/common/view/header.modal.html.php';
             <div class="modal fade modal-team" id="modal<?php echo $i;?>">
               <div class="modal-dialog">
                 <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only"><?php echo $lang->close?></span></button>
                   <h4 class="modal-title"><?php echo $lang->task->team?></h4>
                 </div>
                 <div class="modal-content">
@@ -77,7 +77,7 @@ include $app->getAppRoot() . '../sys/common/view/header.modal.html.php';
                       </td>
                     </tr>
                     <?php endfor;?>
-                    <tr><td colspan='2' class='text-center'><?php echo html::a('javascript:void(0)', $lang->save, "class='btn btn-primary' data-dismiss='modal'")?></td></tr>
+                    <tr><td colspan='2' class='text-center'><?php echo html::a('javascript:void(0)', $lang->confirm, "class='btn btn-primary' data-dismiss='modal'")?></td></tr>
                   </table>
                 </div>
               </div>
