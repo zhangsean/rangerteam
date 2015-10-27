@@ -1,12 +1,3 @@
-/* update role tip. */
-function updateRole()
-{
-    $('[name^=role]:checked').each(function()
-    {
-        $(this).parents('td').next('td').text(v.roleTips[$(this).val()]);
-    });
-}
-
 /* Disabled user who selected. */
 function updateMember()
 {
@@ -31,7 +22,6 @@ function updateMember()
 
 $(document).ready(function()
 {
-    updateRole();
     updateMember();
     /* Add a trade detail item. */
     $(document).on('click', '.icon-plus', function()

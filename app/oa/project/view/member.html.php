@@ -18,32 +18,34 @@
     <?php foreach($project->members as $member):?>
     <?php if($member->role == 'manager') continue;?>
     <tr>
-      <td class='w-120px'><?php echo html::select("member[$key]", $users, $member->account, "class='form-control chosen' onchange='updateMember()'")?></td>
-      <td class='w-160px'><?php echo html::radio("role[$key]", $lang->project->roleList, $member->role, "onchange='updateRole()'")?></td>
-      <td class='text-info'></td>
-      <td class='w-60px'></td>
+      <td><?php echo html::select("member[$key]", $users, $member->account, "class='form-control chosen' onchange='updateMember()'")?></td>
+      <td class='w-180px text-center'><?php echo html::radio("role[$key]", $lang->project->roleList, $member->role)?></td>
+      <td class='w-100px'></td>
     </tr>
     <?php $key++;?>
     <?php endforeach;?>
     <?php for($i = 0; $i < 3; $i++):?>
     <tr>
-      <td class='w-120px'><?php echo html::select("member[$key]", $users, '', "class='form-control chosen' onchange='updateMember()'")?></td>
-      <td class='w-160px'><?php echo html::radio("role[$key]", $lang->project->roleList, 'member', "onchange='updateRole()'")?></td>
-      <td class='text-info'></td>
-      <td class='w-60px'><i class='btn btn-mini icon-plus'></i> <i class='btn btn-mini icon-minus'></i></td>
+      <td><?php echo html::select("member[$key]", $users, '', "class='form-control chosen' onchange='updateMember()'")?></td>
+      <td class='w-180px text-center'><?php echo html::radio("role[$key]", $lang->project->roleList, 'member')?></td>
+      <td class='w-100px'><i class='btn btn-mini icon-plus'></i> <i class='btn btn-mini icon-minus'></i></td>
     </tr>
     <?php $key++;?>
     <?php endfor;?>
-    <tr><td colspan='4' class='text-center'><?php echo html::submitButton()?></td></tr>
+    <tr><td colspan='3'><?php echo html::submitButton();?></td></tr>
   </table>
 </form>
+<div class='alert alert-info'>
+  <?php foreach($lang->project->roleTips as $roleTip):?>
+  <p><?php echo $roleTip;?></p>
+  <?php endforeach;?>
+</div>
 <table class='hidden'>
   <tbody id='hiddenMember'>
     <tr>
       <td><?php echo html::select("member[key]", $users, '', "class='form-control' onchange='updateMember()'")?></td>
-      <td><?php echo html::radio("role[key]", $lang->project->roleList, 'member', "onchange='updateRole()'")?></td>
-      <td class='text-info'></td>
-      <td class='w-60px'><i class='btn btn-mini icon-plus'></i> <i class='btn btn-mini icon-minus'></i></td>
+      <td class='w-180px text-center'><?php echo html::radio("role[key]", $lang->project->roleList, 'member')?></td>
+      <td class='w-100px'><i class='btn btn-mini icon-plus'></i> <i class='btn btn-mini icon-minus'></i></td>
     </tr>
   </tbody>
 </table>
