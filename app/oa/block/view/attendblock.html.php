@@ -19,7 +19,7 @@
 .status:hover {cursor: pointer;}
 .col-p13 {width: 13%;}
 .col-p9 {width: 9%;}
-.calendar {width: 100%; height: 100%; text-align: center;}
+.calendar {width: 100%; height: 101%; text-align: center;}
 .calendar th {text-align: center; color: gray;}
 .AM td, .PM td {vertical-align: top;}
 .calendar tr+tr {border-top: 1px solid rgb(221, 221, 221);}
