@@ -32,14 +32,14 @@
     </tr>
     <?php $key++;?>
     <?php endfor;?>
-    <tr><td colspan='3'><?php echo html::submitButton();?></td></tr>
   </table>
-</form>
 <div class='alert alert-info'>
   <?php foreach($lang->project->roleTips as $roleTip):?>
   <p><?php echo $roleTip;?></p>
   <?php endforeach;?>
 </div>
+<div class='text-center'><?php echo html::submitButton();?></div>
+</form>
 <table class='hidden'>
   <tbody id='hiddenMember'>
     <tr>
