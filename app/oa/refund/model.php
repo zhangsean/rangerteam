@@ -268,16 +268,17 @@ class refundModel extends model
 
         if($this->post->allReject or $this->post->status == 'reject')
         {
-            $data->status = 'reject';
+            $status = 'reject';
             $data->reason = $this->post->reason;
         }
         else
         {
-            $data->status = 'pass';
-            $data->money  = $this->post->money;
-            if(!empty($this->config->refund->secondReviewer) and $this->config->refund->secondReviewer != $account) $data->status = 'doing';
+            $status = 'pass';
+            $data->money = $this->post->money;
+            if(!empty($this->config->refund->secondReviewer) and $this->config->refund->secondReviewer != $account) $status = 'doing';
         }
 
+        $data->status = $status;
         if($refund->status == 'wait')
         {
             $data->firstReviewer   = $account;
@@ -297,6 +298,7 @@ class refundModel extends model
         {
             foreach($refund->detail as $detail)
             {
+                $data->status = $status;
                 if($_POST["status{$detail->id}"] == 'reject') $data->status = 'reject';
                 $this->dao->update(TABLE_REFUND)->data($data, $skip = 'money')->where('id')->eq($detail->id)->exec();
             }
