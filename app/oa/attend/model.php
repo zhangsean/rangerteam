@@ -545,7 +545,7 @@ class attendModel extends model
         foreach($dates as $datetime)
         {
             $date = date('Y-m-d', $datetime);
-            $oldAttend = $this->loadModel('attend')->getByDate($date, $this->app->user->account);
+            $oldAttend = $this->loadModel('attend')->getByDate($date, $account);
 
             $attend = new stdclass();
             $attend->status       = $status ? $status : 'absent';
