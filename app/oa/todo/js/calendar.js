@@ -3,7 +3,7 @@ $(document).ready(function()
     /* remove menu */
     $('#menu').remove();
     $('.page-content').removeClass('with-menu');
-    
+
     /* Adjust calendar' startDate. */
     $('.calendar').data('zui.calendar').display('month', v.settings.startDate);
 
@@ -45,7 +45,7 @@ $(document).ready(function()
                 var data = {}
                 var url = createLink('oa.todo', 'delete', 'id=' + from.data('id'), 'json');
             }
-            else if(from.data('type') != 'edit' && to.data('date') == '1970-01-01')
+            else if(from.data('action') != 'edit' && to.data('date') == '1970-01-01')
             {
                 return false;
             }
@@ -57,6 +57,7 @@ $(document).ready(function()
                     if(response.message) $.zui.messager.success(response.message);
                     updateCalendar();
                     from.hide();
+                    updateBoard(from.data('type'));
                 }
             }, 'json');
         }
@@ -110,12 +111,17 @@ $(document).ready(function()
             $(selecter + ' span.page-num[data-id=1]').click();
         }
     }
+
     /* load board list. */
-    var param = 'account=&id=&type=board';
-    var link = createLink('task', 'ajaxGetTodoList', param);
-    $('#tab_task').load(link, function(){$('#tab_task [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_task');});
-    var link = createLink('crm.order', 'ajaxGetTodoList', param);
-    $('#tab_order').load(link, function(){$('#tab_order [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_order');});
-    var link = createLink('crm.customer', 'ajaxGetTodoList', param);
-    $('#tab_customer').load(link, function(){$('#tab_customer [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_customer');});
+    function updateBoard(type)
+    {
+        var param = 'account=&id=&type=board';
+        var link = createLink('task', 'ajaxGetTodoList', param);
+        if(type == 'all' || type == 'task') $('#tab_task').load(link, function(){$('#tab_task [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_task');});
+        var link = createLink('crm.order', 'ajaxGetTodoList', param);
+        if(type == 'all' || type == 'order') $('#tab_order').load(link, function(){$('#tab_order [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_order');});
+        var link = createLink('crm.customer', 'ajaxGetTodoList', param);
+        if(type == 'all' || type == 'customer') $('#tab_customer').load(link, function(){$('#tab_customer [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_customer');});
+    }
+    updateBoard('all');
 });
