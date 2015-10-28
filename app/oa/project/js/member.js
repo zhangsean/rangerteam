@@ -23,24 +23,4 @@ function updateMember()
 $(document).ready(function()
 {
     updateMember();
-    /* Add a trade detail item. */
-    $(document).on('click', '.icon-plus', function()
-    {
-        $(this).parents('tr').after($('#hiddenMember').html().replace(/key/g, v.key));
-        $(this).parents('tr').next().find("[name^='member']").chosen();
-        v.key ++;
-    });
-
-    /* Remove a trade detail item. */
-    $(document).on('click', '.icon-minus', function()
-    {
-        if($('#ajaxForm table tbody tr').size() > 1)
-        {
-            $(this).parents('tr').remove();
-        }
-        else
-        {
-            $(this).parents('tr').find('input,select').val('');
-        }
-    });
 });
