@@ -40,7 +40,7 @@
       <td><?php echo $lang->refund->statusList[$detail->status];?></td>
       <td><?php echo $categories[$detail->category];?></td>
       <td><?php echo $detail->desc?></td>
-      <td><?php echo html::radio("status{$detail->id}", $lang->refund->reviewStatusList, 'pass');?></td>
+      <td><?php echo html::radio("status{$detail->id}", $lang->refund->reviewStatusList, $detail->status == 'reject' ? 'reject' : 'pass');?></td>
     </tr>
     <?php endforeach;?>
   </table>
