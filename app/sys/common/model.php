@@ -228,6 +228,7 @@ class commonModel extends model
         if($module == 'error') return true;
         if($module == 'sso'  and strpos(',auth|check', $method)) return true;
         if($module == 'attend'  and strpos(',signin|signout', $method)) return true;
+        if($module == 'refund' and $method == 'createtrade') return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;
 
