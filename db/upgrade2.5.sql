@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `oa_todo` (
   KEY `user` (`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-ALTER TABLE `oa_project` add `whitelist` varchar(255) NOT NULL AFTER `acl`;
+ALTER TABLE `oa_project` add `whitelist` varchar(255) NOT NULL AFTER `status`;
 
 -- DROP TABLE IF EXISTS `oa_refund`;
 CREATE TABLE IF NOT EXISTS `oa_refund` (
