@@ -507,7 +507,7 @@ class taskModel extends model
         if(empty($oldTask->team))
         {
             $task = new stdclass();
-            $task->consumed = (float)$this->post->consumed + $oldTask->consumed;
+            $task->consumed = $this->post->consumed;
             $task->left     = $this->post->left;
             $this->dao->update(TABLE_TASK)->data($task)->autoCheck()->where('id')->eq($taskID)->exec();
         }

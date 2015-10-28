@@ -16,7 +16,7 @@
   <table class='table table-form'>
     <tr>
       <th><?php echo $lang->task->myConsumption;?></th>
-      <td><?php echo html::input('consumed', '', "class='form-control' placeholder='{$lang->task->hour}'");?></td>
+      <td><?php echo html::input('consumed', $task->consumed, "class='form-control' placeholder='{$lang->task->hour}'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->task->left;?></th>
