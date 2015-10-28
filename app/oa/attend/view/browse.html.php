@@ -68,12 +68,12 @@
             </td>
             <?php $isFirst = false;?>
             <?php endif;?>
-            <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
+            <td class='valign-middle'><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
             <?php for($day = 1; $day <= $dayNum; $day++):?>
               <?php $currentDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-{$day}"));?>
               <?php if(isset($userAttends[$currentDate])):?>
-              <td class='attend-<?php echo $userAttends[$currentDate]->status?>' title='<?php echo $lang->attend->statusList[$userAttends[$currentDate]->status]?>'>
-                <span><?php echo $lang->attend->abbrStatusList[$userAttends[$currentDate]->status]?></span>
+              <td class='attend-status attend-<?php echo $userAttends[$currentDate]->status?>' title='<?php echo $lang->attend->statusList[$userAttends[$currentDate]->status]?>'>
+                <span><?php echo $lang->attend->markStatusList[$userAttends[$currentDate]->status]?></span>
               </td>
               <?php else:?>
               <td></td>
@@ -83,6 +83,14 @@
           <?php endforeach;?>
         <?php endforeach;?>
       </table>
+    </div>
+    <div class='legend'>
+    <?php foreach($lang->attend->markStatusList as $key => $value):?>
+      <span class='legend-item attend-<?php echo $key?>'>
+        <i class='legend-i'><?php echo $value?></i>
+        <?php echo $lang->attend->statusList[$key]?>
+      </span>
+    <?php endforeach;?>
     </div>
   </div>
 </div>

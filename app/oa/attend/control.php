@@ -177,12 +177,23 @@ class attend extends control
             for($i = 1; $i <= $dayNum; $i++)
             {
                 $currentDate  = date("Y-m-d", strtotime("$currentYear-$currentMonth-$i"));
-                $dayNameIndex = date('w', strtotime($currentDate));
-                $fields[$currentDate] = "$i({$this->lang->datepicker->dayNames[$dayNameIndex]})";
+                $fields[$currentDate] = $i;
             }
 
-            /* Get row data. */
+            /* Get dayname */
             $datas = array();
+            $data  = new stdclass();
+            $data->dept     = '';
+            $data->realname = '';
+            for($i = 1; $i <= $dayNum; $i++)
+            {
+                $currentDate  = date("Y-m-d", strtotime("$currentYear-$currentMonth-$i"));
+                $dayNameIndex = date('w', strtotime($currentDate));
+                $data->$currentDate = $this->lang->datepicker->abbrDayNames[$dayNameIndex];
+            }
+            $datas[] = $data;
+
+            /* Get row data. */
             foreach($attends as $dept => $deptAttendList)
             {
                 foreach($deptAttendList as $account => $attendList)
@@ -207,22 +218,13 @@ class attend extends control
                 $datas[] = $data;
 
                 $legend = array();
-                foreach($this->lang->attend->statusList as $key => $value)
+                foreach($this->lang->attend->markStatusList as $key => $value)
                 {
-                    $legend[] = $value;
-                    $legend[] = $this->lang->attend->markStatusList[$key];
-                    $legend[] = '';
+                    $data = new stdclass();
+                    $data->dept = $value;
+                    $data->realname = $this->lang->attend->statusList[$key];
+                    $datas[] = $data;
                 }
-
-                $data = new stdclass();
-                $i    = 0;
-                foreach($fields as $key => $value)
-                {
-                    if(!isset($legend[$i])) continue;
-                    $data->$key = $legend[$i];
-                    $i++;
-                }
-                $datas[] = $data;
             }
 
             $this->post->set('fields', $fields);

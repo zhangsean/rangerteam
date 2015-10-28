@@ -52,13 +52,13 @@ $lang->attend->abbrStatusList['trip']   = 'Biz';
 $lang->attend->abbrStatusList['rest']   = 'Rest';
 
 $lang->attend->markStatusList['normal'] = '√';
-$lang->attend->markStatusList['late']   = '※';
-$lang->attend->markStatusList['early']  = '◇';
-$lang->attend->markStatusList['both']   = '※◇';
-$lang->attend->markStatusList['absent'] = '×';
-$lang->attend->markStatusList['leave']  = '○';
-$lang->attend->markStatusList['trip']   = '△';
-$lang->attend->markStatusList['rest']   = '●';
+$lang->attend->markStatusList['late']   = '=';
+$lang->attend->markStatusList['early']  = '>';
+$lang->attend->markStatusList['both']   = '=>';
+$lang->attend->markStatusList['absent'] = 'x';
+$lang->attend->markStatusList['leave']  = '!';
+$lang->attend->markStatusList['trip']   = '$';
+$lang->attend->markStatusList['rest']   = '~';
 
 $lang->attend->reasonList['normal'] = 'Normal';
 $lang->attend->reasonList['trip']   = 'Biz trip';
