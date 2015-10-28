@@ -33,15 +33,18 @@
             <th class='w-100px'><?php echo $lang->refund->money;?></th>
             <th class='w-100px'><?php echo $lang->refund->date;?></th>
             <th class='w-100px'><?php echo $lang->refund->category;?></th>
+            <th class='w-100px'><?php echo $lang->refund->related;?></th>
             <th class='w-100px'><?php echo $lang->refund->status;?></th>
             <th><?php echo $lang->refund->desc;?></th>
           </tr>
           <?php foreach($refund->detail as $d):?>
+          <?php $related = ''; foreach(explode(',', trim($d->related, ',')) as $account) $related .= ' ' . zget($users, $account)?>
           <tr>
             <td><?php echo $d->id?></td>
             <td><?php echo zget($currencySign, $d->currency) . $d->money?></td>
             <td><?php echo $d->date?></td>
             <td><?php echo zget($categories, $d->category)?></td>
+            <td><?php echo $related?></td>
             <td><span data-toggle='tooltip' data-original-title="<?php echo $d->reason?>"><?php echo zget($lang->refund->statusList, $d->status)?></span></td>
             <td><?php echo $d->desc?></td>
           </tr>
@@ -76,16 +79,21 @@
             <td><?php echo zget($categories, $refund->category)?></td>
           </tr>
           <tr>
-            <th><?php echo $lang->refund->date;?></th>
-            <td><?php echo $refund->date?></td>
-          </tr>
-          <tr>
             <th><?php echo $lang->refund->money;?></th>
             <td><?php echo zget($currencySign, $refund->currency) . $refund->money?></td>
           </tr>
           <tr>
             <th><?php echo $lang->refund->status;?></th>
             <td><?php echo zget($lang->refund->statusList, $refund->status)?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->refund->date;?></th>
+            <td><?php echo $refund->date?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->refund->related;?></th>
+            <?php $related = ''; foreach(explode(',', trim($refund->related, ',')) as $account) $related .= ' ' . zget($users, $account)?>
+            <td><?php echo $related?></td>
           </tr>
           <tr>
             <th><?php echo $lang->refund->createdBy;?></th>

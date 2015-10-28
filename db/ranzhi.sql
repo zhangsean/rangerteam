@@ -386,6 +386,7 @@ CREATE TABLE IF NOT EXISTS `oa_refund` (
   `money` decimal(12,2) NOT NULL,
   `currency` varchar(30) NOT NULL,
   `desc` text NOT NULL,
+  `related` char(200) NOT NULL DEFAULT '',
   `status` char(30) NOT NULL DEFAULT 'wait',
   `createdBy` char(30) NOT NULL DEFAULT '',
   `createdDate` datetime NOT NULL,

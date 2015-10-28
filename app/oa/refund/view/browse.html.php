@@ -44,7 +44,7 @@
       <td class='<?php echo $refund->status?>'><?php echo zget($lang->refund->statusList, $refund->status)?></td>
       <td><?php echo zget($userPairs, $refund->createdBy);?></td>
       <td><?php echo substr($refund->createdDate, 0, 10)?></td>
-      <td><?php echo zget($userPairs, $refund->firstReviewer) . ',' . zget($userPairs, $refund->secondReviewer);?></td>
+      <td><?php echo zget($userPairs, $refund->firstReviewer) . ' ' . zget($userPairs, $refund->secondReviewer);?></td>
       <td><?php echo zget($userPairs, $refund->refundBy);?></td>
       <td><?php echo substr($refund->refundDate, 0, 10)?></td>
       <td>

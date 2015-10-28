@@ -70,8 +70,10 @@ class refundModel extends model
             ->add('status', 'wait')
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', helper::now())
+            ->setDefault('date', '1970-01-01')
+            ->join('related', ',')
             ->remove('firstReviewer,firstReviewDate,sencondReviewer,secondReviewDate,refundBy,refundDate')
-            ->remove('dateList,moneyList,currencyList,categoryList,descList')
+            ->remove('dateList,moneyList,currencyList,categoryList,descList,relatedList')
             ->get();
 
         $this->dao->insert(TABLE_REFUND)
@@ -96,10 +98,11 @@ class refundModel extends model
                 $detail->createdBy   = $this->app->user->account;
                 $detail->createdDate = helper::now();
                 $detail->money       = $money;
-                $detail->date        = empty($_POST['dateList'][$key]) ? $refund->date : $_POST['dateList'][$key];
-                $detail->currency    = $_POST['currencyList'][$key];
+                $detail->date        = empty($_POST['dateList'][$key]) ? '1970-01-01' : $_POST['dateList'][$key];
+                $detail->currency    = $refund->currency;
                 $detail->category    = $_POST['categoryList'][$key];
                 $detail->desc        = $_POST['descList'][$key];
+                $detail->related     = join(',', $_POST['relatedList'][$key]);
 
                 $this->dao->insert(TABLE_REFUND)->data($detail)->autoCheck()->exec();
             }
@@ -121,8 +124,10 @@ class refundModel extends model
         $refund = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
+            ->setDefault('date', '1970-01-01')
+            ->join('related', ',')
             ->remove('status,firstReviewer,firstReviewDate,sencondReviewer,secondReviewDate,refundBy,refundDate')
-            ->remove('idList,dateList,moneyList,currencyList,categoryList,descList')
+            ->remove('idList,dateList,moneyList,currencyList,categoryList,descList,relatedList')
             ->get();
 
         $this->dao->update(TABLE_REFUND)
@@ -147,7 +152,7 @@ class refundModel extends model
                 $detail->createdDate = helper::now();
                 $detail->money       = $money;
                 $detail->date        = empty($_POST['dateList'][$key]) ? $refund->date : $_POST['dateList'][$key];
-                $detail->currency    = $_POST['currencyList'][$key];
+                $detail->currency    = $refund->currency;
                 $detail->category    = $_POST['categoryList'][$key];
                 $detail->desc        = $_POST['descList'][$key];
 
@@ -158,7 +163,7 @@ class refundModel extends model
                 }
                 else
                 {
-                    $this->dao->update(TABLE_REFUND)->data($detail, 'id')->autoCheck()->where('id')->eq($detail->id)->exec();
+                    $this->dao->update(TABLE_REFUND)->data($detail, 'id,createdBy,createdDate')->autoCheck()->where('id')->eq($detail->id)->exec();
                 }
                 $newDetails[$detail->id] = $detail;
             }

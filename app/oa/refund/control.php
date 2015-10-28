@@ -40,6 +40,7 @@ class refund extends control
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->categories   = $this->refund->getCategoryPairs();
+        $this->view->users        = $this->loadModel('user')->getPairs('noclosed,nodeleted');
         $this->display();
     }
 
@@ -72,6 +73,7 @@ class refund extends control
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->categories   = $this->refund->getCategoryPairs();
         $this->view->refund       = $refund;
+        $this->view->users        = $this->loadModel('user')->getPairs('noclosed,nodeleted');
         $this->display();
     }
 

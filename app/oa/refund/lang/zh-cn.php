@@ -38,6 +38,7 @@ $lang->refund->refundDate       = '报销日期';
 $lang->refund->baseInfo         = '基本信息';
 $lang->refund->reason           = '理由';
 $lang->refund->reviewer         = '审批人';
+$lang->refund->related          = '参与人';
 
 $lang->refund->statusList['wait']   = '等待审批';
 $lang->refund->statusList['doing']  = '审批中';
