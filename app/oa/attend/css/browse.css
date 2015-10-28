@@ -1,11 +1,11 @@
-.attend-normal {color: #8BC34A;}
+.attend-normal {color: #38B03F;}
 .attend-late   {color: #EA644A;}
 .attend-early  {color: #FF8A65;}
 .attend-both   {color: #FF5722;}
 .attend-absent {color: #F1A325;}
 .attend-leave  {color: #9E9E9E;}
 .attend-trip   {color: #8668B8;}
-.attend-rest {}
+.attend-rest   {color: #3280FC;}
 
 .valign-middle {vertical-align: middle !important;}
 .tree .active {font-weight: bold;}

@@ -102,7 +102,7 @@
                   }
                   else
                   {
-                      echo "<span class='label label-success'>";
+                      echo "<span class='attend-{$status}'>";
                       echo $lang->attend->statusList[$status];
                       if($status == 'leave' or $status == 'trip' and $attends[$currentDate]->desc) echo ' ' . $attends[$currentDate]->desc . 'h';
                       echo "</span>";
