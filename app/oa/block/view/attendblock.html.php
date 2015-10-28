@@ -16,7 +16,6 @@
 .AM {height: 39%;}
 .PM {height: 39%;}
 .status {height: 12%;}
-.status:hover {cursor: pointer;}
 .col-p13 {width: 13%;}
 .col-p9 {width: 9%;}
 .calendar {width: 100%; height: 101%; text-align: center;}
@@ -36,6 +35,7 @@
 .attend-absent {color: #F1A325;}
 .attend-leave  {color: #9E9E9E;}
 .attend-trip   {color: #8668B8;}
+.attend-status:hover {cursor: pointer;}
 </style>
 <?php $dateList = range(strtotime($startDate), strtotime($endDate), 86400);?>
 <table class='calendar'>
@@ -56,7 +56,7 @@
         <?php if(!isset($todos[$dStr]['AM'])) continue;?>
         <?php foreach($todos[$dStr]['AM'] as $todo):?>
         <?php $link = "$.openEntry('oa', '" . $this->createLink('oa.todo', 'calendar') . "')";?>
-        <div class='event <?php echo $todo->status?>' onclick="<?php echo $link?>">
+        <div class='event <?php echo $todo->status?>' onclick="<?php echo $link?>" title='<?php echo $todo->begin . ' ' . $todo->name?>'>
           <?php echo $todo->name;?>
         </div>
         <?php endforeach;?>
@@ -72,7 +72,7 @@
         <?php if(!isset($todos[$dStr]['PM'])) continue;?>
         <?php foreach($todos[$dStr]['PM'] as $todo):?>
         <?php $link = "$.openEntry('oa', '" . $this->createLink('oa.todo', 'calendar') . "')";?>
-        <div class='event <?php echo $todo->status?>' onclick="<?php echo $link?>">
+        <div class='event <?php echo $todo->status?>' onclick="<?php echo $link?>" title='<?php echo $todo->begin . ' ' . $todo->name?>'>
           <?php echo $todo->name;?>
         </div>
         <?php endforeach;?>
@@ -80,13 +80,13 @@
     <?php endforeach;?>
   </tr>
   <?php $link = "$.openEntry('oa', '" . $this->createLink('oa.attend', 'personal') . "')";?>
-  <tr class='status' onclick="<?php echo $link?>">
-    <th><?php echo $lang->attend->status?></th>
+  <tr class='status'>
+    <th><?php echo $lang->attend->common?></th>
     <?php foreach($dateList as $d):?>
     <?php $dStr = date('Y-m-d', $d);?>
     <?php $class = $dStr == $date ? 'today' : '';?>
     <?php if(isset($attends[$dStr])):?>
-      <td class='<?php echo "$class attend-{$attends[$dStr]->status}"?>'>
+      <td class='<?php echo "$class attend-status attend-{$attends[$dStr]->status}"?>' onclick="<?php echo $link?>">
         <?php echo zget($this->lang->attend->abbrStatusList, $attends[$dStr]->status)?>
       </td>
     <?php else:?>
