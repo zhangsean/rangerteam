@@ -31,7 +31,16 @@ $(document).ready(function()
         var money = 0;
         $('input[name^=moneyList]').each(function()
         {
-            if($(this).val() != '') money += parseFloat($(this).val());
+            if($(this).val() != '')
+            {
+                var value = parseFloat($(this).val());
+                if(isNaN(value))
+                {
+                  $(this).val('');
+                  $.zui.messager.show('money must a number.');
+                }
+                else money += value;
+            }
         });
         $('#money').val(money);
         return false;

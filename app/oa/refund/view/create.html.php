@@ -57,8 +57,8 @@
             <table class='table table-detail'>
               <tr class='text-center'>
                 <td class='w-100px'><?php echo html::input('dateList[1]', '', "class='form-control form-date' placeholder='{$lang->refund->date}'")?></td>
-                <td class='w-100px'><?php echo html::input('moneyList[1]', '', "class='form-control' placeholder='{$lang->refund->money}'")?></td>
                 <td class='w-100px'><?php echo html::select('categoryList[1]', $categories, '', "class='form-control chosen' placeholder='{$lang->refund->category}'")?></td>
+                <td class='w-100px'><?php echo html::input('moneyList[1]', '', "class='form-control' placeholder='{$lang->refund->money}'")?></td>
                 <td class='w-200px'><?php echo html::select('relatedList[1][]', $users, '', "class='form-control chosen' multiple data-placeholder='{$lang->refund->related}'")?></td>
                 <td><?php echo html::textarea('descList[1]', '', "class='form-control' style='height:32px;' placeholder='{$lang->refund->desc}'")?></td>
                 <td class='w-100px'><i class='btn btn-mini icon-plus'></i>&nbsp;&nbsp;<i class='btn btn-mini icon-minus'></i></td>
@@ -78,8 +78,8 @@
 <script type='text/template' id='detailTpl'>
 <tr class='text-center'>
   <td class='w-100px'><?php echo html::input('dateList[key]', '', "class='form-control form-date' placeholder='{$lang->refund->date}'")?></td>
-  <td class='w-100px'><?php echo html::input('moneyList[key]', '', "class='form-control' placeholder='{$lang->refund->money}'")?></td>
   <td class='w-100px'><?php echo html::select('categoryList[key]', $categories, '', "class='form-control chosen' placeholder='{$lang->refund->category}'")?></td>
+  <td class='w-100px'><?php echo html::input('moneyList[key]', '', "class='form-control' placeholder='{$lang->refund->money}'")?></td>
   <td class='w-200px'><?php echo html::select('relatedList[key][]', $users, '', "class='form-control chosen' multiple data-placeholder='{$lang->refund->related}'")?></td>
   <td><?php echo html::textarea('descList[key]', '', "class='form-control' style='height:32px;' placeholder='{$lang->refund->desc}'")?></td>
   <td class='w-100px'><i class='btn btn-mini icon-plus'></i>&nbsp;&nbsp;<i class='btn btn-mini icon-minus'></i></td>
