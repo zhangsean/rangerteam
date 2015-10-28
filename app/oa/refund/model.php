@@ -259,18 +259,24 @@ class refundModel extends model
      * @access public
      * @return bool
      */
-    public function review($refundID, $status)
+    public function review($refundID)
     {
         $refund  = $this->getByID($refundID);
         $account = $this->app->user->account;
         $now     = helper::now();
+        $data    = new stdclass();
 
-        if($status == 'pass')
+        if($this->post->allReject or $this->post->status == 'reject')
         {
-            if(!empty($this->config->refund->secondReviewer) and $this->config->refund->secondReviewer != $account) $status = 'doing';
+            $data->status = 'reject';
+            $data->reason = $this->post->reason;
         }
-
-        $data = fixer::input('post')->add('status', $status)->get();
+        else
+        {
+            $data->status = 'pass';
+            $data->money  = $this->post->money;
+            if(!empty($this->config->refund->secondReviewer) and $this->config->refund->secondReviewer != $account) $data->status = 'doing';
+        }
 
         if($refund->status == 'wait')
         {
@@ -284,11 +290,16 @@ class refundModel extends model
             $data->secondReviewDate = $now;
         }
 
+        if(isset($data->money) and $data->money > $refund->money) return array('result' => 'fail', 'message' => $this->lang->refund->correctMoney);
         $this->dao->update(TABLE_REFUND)->data($data)->where('id')->eq($refundID)->exec();
 
-        foreach($refund->detail as $detail)
+        if(!empty($refund->detail))
         {
-            if($detail->status != 'reject') $this->dao->update(TABLE_REFUND)->data($data, $skip = 'money')->where('id')->eq($detail->id)->exec();
+            foreach($refund->detail as $detail)
+            {
+                if($_POST["status{$detail->id}"] == 'reject') $data->status = 'reject';
+                $this->dao->update(TABLE_REFUND)->data($data, $skip = 'money')->where('id')->eq($detail->id)->exec();
+            }
         }
 
         return !dao::isError();

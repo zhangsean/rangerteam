@@ -269,13 +269,14 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function review($refundID, $status)
+    public function review($refundID)
     {
         $refund = $this->refund->getByID($refundID);
 
         if($_POST)
         {
-            $this->refund->review($refundID, $status);
+            $result = $this->refund->review($refundID);
+            if(is_array($result)) $this->send($result);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $isDetail = ($refund->parent != 0) ? true : false;
             $this->send(array('result' => 'success', 'isDetail' => $isDetail, 'message' => $this->lang->saveSuccess, 'locate' => inlink('browsereview')));
@@ -283,8 +284,8 @@ class refund extends control
 
         $this->view->title      = $this->lang->refund->review;
         $this->view->refund     = $refund;
-        $this->view->status     = $status;
         $this->view->categories = $this->refund->getCategoryPairs();
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->display();
     }
 

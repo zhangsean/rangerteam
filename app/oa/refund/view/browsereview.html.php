@@ -41,8 +41,7 @@
       <td><?php echo zget($lang->refund->statusList, $refund->status);?></td>
       <td><?php echo $refund->desc?></td>
       <td>
-        <?php echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}&status=pass"),   $lang->refund->reviewStatusList['pass'], "data-toggle='modal'")?>
-        <?php echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}&status=reject"), $lang->refund->reviewStatusList['reject'], "data-toggle='modal'")?>
+        <?php echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}"), $lang->refund->review, "data-toggle='modal'")?>
       </td>
     </tr>
     <?php endforeach;?>

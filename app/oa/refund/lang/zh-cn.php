@@ -10,7 +10,7 @@ $lang->refund->browseReview = '报销审批列表';
 $lang->refund->edit         = '编辑报销';
 $lang->refund->view         = '查看';
 $lang->refund->delete       = '删除';
-$lang->refund->review       = '报销审批';
+$lang->refund->review       = '审批';
 $lang->refund->detail       = '明细';
 $lang->refund->settings     = '设置';
 $lang->refund->setCategory  = '报销科目设置';
@@ -49,8 +49,12 @@ $lang->refund->statusList['finish'] = '已报销';
 $lang->refund->reviewStatusList['pass']   = '通过';
 $lang->refund->reviewStatusList['reject'] = '拒绝';
 
+$lang->refund->reviewAllStatusList['allpass']   = '全部通过';
+$lang->refund->reviewAllStatusList['allreject'] = '全部拒绝';
+
 $lang->refund->descTip = "%s 申请报销 %s。";
 
 $lang->refund->uniqueReviewer    = '第一审批人和第二审批人不能是同一个人';
 $lang->refund->createTradeTip    = '是否关联记账？';
 $lang->refund->secondReviewerTip = '二级审批需要设置二级审批人。';
+$lang->refund->correctMoney      = '审批金额不能多于申请金额';
