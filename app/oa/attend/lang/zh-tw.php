@@ -52,13 +52,13 @@ $lang->attend->abbrStatusList['trip']   = '差';
 $lang->attend->abbrStatusList['rest']   = '休';
 
 $lang->attend->markStatusList['normal'] = '√';
-$lang->attend->markStatusList['late']   = '※';
-$lang->attend->markStatusList['early']  = '◇';
-$lang->attend->markStatusList['both']   = '※◇';
-$lang->attend->markStatusList['absent'] = '×';
-$lang->attend->markStatusList['leave']  = '○';
-$lang->attend->markStatusList['trip']   = '△';
-$lang->attend->markStatusList['rest']   = '●';
+$lang->attend->markStatusList['late']   = '=';
+$lang->attend->markStatusList['early']  = '>';
+$lang->attend->markStatusList['both']   = '=>';
+$lang->attend->markStatusList['absent'] = 'x';
+$lang->attend->markStatusList['leave']  = '!';
+$lang->attend->markStatusList['trip']   = '$';
+$lang->attend->markStatusList['rest']   = '~';
 
 $lang->attend->reasonList['normal'] = '準點上下班';
 $lang->attend->reasonList['trip']   = '出差';
@@ -97,5 +97,3 @@ $lang->attend->confirmReview['reject'] = '您確定要執行拒絶操作嗎？';
 
 $lang->attend->settings   = '考勤設置';
 $lang->attend->setManager = '部門經理設置';
-
-$lang->attend->reviewerTip = '如果沒有設置統一的考勤審核人，審核人為部門經理。';
