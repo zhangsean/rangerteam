@@ -34,6 +34,7 @@ class attendModel extends model
      */
     public function getByDate($date, $account)
     {
+        $this->processStatus();
         $attend = $this->dao->select('*')->from(TABLE_ATTEND)->where('date')->eq($date)->andWhere('account')->eq($account)->fetch();
         if(empty($attend))
         {
@@ -353,7 +354,7 @@ class attendModel extends model
     }
 
     /**
-     * Update status of unknow attend.
+     * Update status of unknow status attend.
      * 
      * @access public
      * @return bool
