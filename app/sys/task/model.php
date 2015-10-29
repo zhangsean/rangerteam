@@ -517,7 +517,7 @@ class taskModel extends model
             $account    = $oldTask->assignedTo;
             $task       = new stdclass();
             $task->team = $oldTask->team;
-            $task->team[$account]->consumed = (float)$this->post->consumed + $oldTask->team[$oldTask->assignedTo]->consumed;
+            $task->team[$account]->consumed = (float)$this->post->consumed;
             $task->team[$account]->left     = $this->post->left;
 
             $consumed = 0;
