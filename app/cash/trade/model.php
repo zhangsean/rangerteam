@@ -60,9 +60,11 @@ class tradeModel extends model
 
         if(strlen($date) == 6 and strpos($date, 'Q') === false)
         {
-            $nextMonth = substr($date, 5, 1) + 1;
+            if(substr($date, 4, 1) == 0) $nextMonth = '0' . (substr($date, 5, 1) + 1);
+            if(substr($date, 4, 1) == 1) $nextMonth = substr($date, 4, 2) + 1;
             $startDate = substr($date, 0, 4) . '-' . substr($date, 4, 2) . '-01';
-            $endDate   = substr($date, 0, 4) . '-0' . $nextMonth . '-01';
+            $endDate   = substr($date, 0, 4) . '-' . $nextMonth . '-01';
+            if(substr($date, 4, 2) == 12) $endDate = substr($date, 0, 4) . '-12-31';
         }
 
         if(strlen($date) == 6 and strpos($date, 'Q') !== false)
