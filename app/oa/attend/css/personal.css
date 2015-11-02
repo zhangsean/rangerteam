@@ -2,7 +2,7 @@
 .tree .active{font-weight: bold;}
 .tree > li {margin-right: 0;}
 
-.attend-normal [class^=attend] {color: #38B03F;}
+td .attend-normal {color: #38B03F;}
 .attend-late .attend-signin    {color: #EA644A;}
 .attend-early .attend-signout  {color: #FF8A65;}
 .attend-both [class^=attend]   {color: #FF5722;}
