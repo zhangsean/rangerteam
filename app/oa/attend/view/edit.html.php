@@ -31,7 +31,7 @@
     <table class='table table-form table-condensed editMode'>
       <?php if(strpos(',late,both,absent', $attend->status) !== false):?>
       <tr id='trIn'>
-        <th class='w-80px'><?php echo $lang->attend->manualIn?></th>
+        <th><?php echo $lang->attend->manualIn?></th>
         <td><?php echo html::input('manualIn', empty($attend->manualIn) ? $this->config->attend->signInLimit : $attend->manualIn, "class='form-control form-time'")?></td>
       </tr>
       <?php endif;?>
@@ -42,7 +42,7 @@
       </tr> 
       <?php endif;?>
       <tr>
-        <th><?php echo $lang->attend->desc?></th>
+        <th class='w-80px'><?php echo $lang->attend->desc?></th>
         <td><?php echo html::textarea('desc', $attend->desc, "class='form-control'")?></td>
       </tr> 
       <tr><th></th><td><?php echo html::submitButton();?></td></tr>
@@ -50,7 +50,7 @@
     <table class='table table-form table-condensed viewMode'>
       <?php if(strpos(',late,both,absent', $attend->status) !== false):?>
       <tr id='trIn'>
-        <th class='w-80px'><?php echo $lang->attend->manualIn?></th>
+        <th><?php echo $lang->attend->manualIn?></th>
         <td><?php echo $attend->manualIn;?></td>
       </tr>
       <?php endif;?>
@@ -61,7 +61,7 @@
       </tr> 
       <?php endif;?>
       <tr>
-        <th><?php echo $lang->attend->desc?></th>
+        <th class='w-80px'><?php echo $lang->attend->desc?></th>
         <td><?php echo $attend->desc;?></td>
       </tr> 
       <?php if($attend->reviewStatus != 'pass'):?>
