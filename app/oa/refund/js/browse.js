@@ -9,12 +9,6 @@ $(document).ready(function()
                 message: v.createTradeTip,  
                 buttons:
                 {  
-                    back:
-                    {  
-                        label: v.lang.no,
-                        className: 'btn-primary',  
-                        callback:  function(){location.reload();}  
-                    },
                     trade:
                     {  
                         label: v.lang.yes,
@@ -28,7 +22,13 @@ $(document).ready(function()
                             return false;
                         }
 
-                    }  
+                    },
+                    back:
+                    {  
+                        label: v.lang.no,
+                        className: '',  
+                        callback:  function(){location.reload();}  
+                    }
                 }  
             });
          }
