@@ -20,7 +20,7 @@
   <div class='side'>
     <div class='side-handle'>
       <?php $class = $this->cookie->todoCalendarSide == 'hide' ? 'icon-collapse-full' : 'icon-expand-full'?>
-      <?php echo html::a('###', "<i class='$class'></i>", "title='{$lang->todo->periods['future']}' class='btn'")?>
+      <?php echo html::a('###', "<i class='$class'></i>", "class='btn'")?>
     </div>
     <ul id="myTab" class="nav nav-tabs">
       <li class="active"><a href="#tab_custom" data-toggle="tab"><?php echo $lang->todo->periods['future']?></a></li>

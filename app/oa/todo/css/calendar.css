@@ -21,9 +21,8 @@
 .calendar .event.with-action .action {position: absolute; right: 0; top: 0;}
 .calendar .event.with-action .action > a {display: inline-block; padding: 0 4px; color: #fff; background-color: rgba(0,0,0,0.25); line-height: 19px; padding: 0 6px;}
 .calendar .event.with-action .action > a:hover {background-color: rgba(0,0,0,0.5)}
-.calendar .btn-toolbar {padding-right: 40px;}
-.calendar .btn-toolbar .btn-group{float: right;}
 
-.trash {position: absolute; top: 0; left: 0; padding: 3px 80px 3px 8px;}
+.trash {position: absolute; top: 0; right: 350px; padding: 3px 8px 3px 180px; transition: all 0.3s ease 0s;}
+.hide-side .trash {right: 50px;}
 .trash:hover {background: #f0f0f0;}
-.trash .icon{font-size: 36px;}
+.trash .icon{font-size: 30px;}
