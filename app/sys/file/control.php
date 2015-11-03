@@ -179,7 +179,7 @@ class file extends control
         /* If the mode is open, locate directly. */
         if($mode == 'open')
         {
-            if(file_exists($file->realPath))$this->locate($file->webPath);
+            if(file_exists($file->realPath)) $this->locate($file->webPath);
             $this->app->triggerError("The file you visit $fileID not found.", __FILE__, __LINE__, true);
         }
         else

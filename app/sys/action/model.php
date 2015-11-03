@@ -51,7 +51,7 @@ class actionModel extends model
         if($objectType == 'contact')  $action->contact  = $objectID;
 
         $this->dao->insert(TABLE_ACTION)
-            ->data($action, $skip = 'nextDate')
+            ->data($action, $skip = 'nextDate,files,labels')
             ->batchCheckIF($actionType == 'record', $this->config->action->require->createRecord, 'notempty')
             ->checkIF($this->post->nextDate, 'nextDate', 'ge', helper::today())
             ->exec();
@@ -68,9 +68,10 @@ class actionModel extends model
      */
     public function createRecord($objectType, $objectID, $customer, $contact)
     {
-        $result = $this->create($objectType, $objectID, $action = 'record', $this->post->comment, $this->post->date, $actor = null, $customer, $contact);
+        $actionID = $this->create($objectType, $objectID, $action = 'record', $this->post->comment, $this->post->date, $actor = null, $customer, $contact);
 
-        if(!$result) return false;
+        if(!$actionID) return false;
+        $this->loadModel('file')->saveUpload('action', $actionID);
         return $this->syncContactInfo($objectType, $objectID, $customer, $contact);
     }
     
@@ -135,6 +136,7 @@ class actionModel extends model
         foreach($actions as $actionID => $action)
         {
             $action->history = isset($histories[$actionID]) ? $histories[$actionID] : array();
+            $action->files = $this->loadModel('file')->getByObject('action', $actionID);
             if($action->action == 'record') $action->contact = isset($contacts[$action->contact]) ? $contacts[$action->contact] : '';
             $actions[$actionID] = $action;
         }
@@ -151,7 +153,10 @@ class actionModel extends model
      */
     public function getById($actionID)
     {
-        return $this->dao->findById((int)$actionID)->from(TABLE_ACTION)->fetch();
+        $action = $this->dao->findById((int)$actionID)->from(TABLE_ACTION)->fetch();
+        if(!$action) return false;
+        $action->files = $this->loadModel('file')->getByObject('action', $actionID);
+        return $action;
     }
 
     /**
@@ -268,7 +273,7 @@ class actionModel extends model
         /* Cycle actions, replace vars. */
         foreach($action as $key => $value)
         {
-            if($key == 'history') continue;
+            if($key == 'history' or $key == 'files') continue;
 
             /* Desc can be an array or string. */
             if(is_array($desc))

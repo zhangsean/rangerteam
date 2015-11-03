@@ -178,6 +178,7 @@ $lang->action->record->contact  = 'Contact';
 $lang->action->record->actor    = 'Actor';
 $lang->action->record->comment  = 'Content';
 $lang->action->record->date     = 'Contact time';
+$lang->action->record->file     = 'Files';
 $lang->action->record->nextDate = 'Next Contact';
 
 $lang->action->objectTypes['order']    = 'Order';

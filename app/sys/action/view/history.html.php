@@ -79,6 +79,7 @@
         <?php endif;?>
         <?php if(!empty($action->comment)) echo "</div>";?>
         <?php endif;?>
+        <div><?php echo $this->fetch('file', 'printFiles', array('files' => $action->files, 'fieldset' => 'false'))?></div>
       </li>
       <?php endforeach;?>
     </ol>

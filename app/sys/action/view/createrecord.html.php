@@ -80,6 +80,10 @@
       <td><div class='col-sm-12'><?php echo html::textarea('comment', '', "class='form-control' rows='3'");?></div></td>
     </tr>
     <tr>
+      <th><?php echo $lang->action->record->file;?></th>
+      <td colspan='2'><?php echo $this->fetch('file', 'buildForm');?></td>
+    </tr>
+    <tr>
       <th></th>
       <td>
         <div class='col-sm-12'>

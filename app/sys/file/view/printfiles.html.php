@@ -46,7 +46,7 @@ function downloadFile(fileID)
     foreach($files as $file)
     {
         echo "<li><i class='icon-file-text-alt text-muted'></i> ";
-        echo html::a($this->createLink('file', 'download', "fileID=$file->id") . $sessionString, $file->title .'.' . $file->extension, '_blank', "onclick='return downloadFile($file->id)'");
+        echo html::a('javascript:;', $file->title .'.' . $file->extension, "onclick='return downloadFile($file->id)'");
         echo html::a($this->createLink('file', 'edit', "fileID=$file->id"), "<i class='icon-pencil'></i>", "data-toggle='modal' class='link-edit link-btn'");
         echo html::a($this->createLink('file', 'delete', "fileID=$file->id"), "<i class='icon-remove'></i>", "class='deleter link-btn'");
         echo '</li>';
