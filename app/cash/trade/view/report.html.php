@@ -49,12 +49,12 @@
       <td colspan='3'>
         <div class='chart-wrapper text-center'>
           <h5><?php echo $currentYear . $lang->trade->annualCaption . '(' . $currencyList[$currentCurrency] . ')';?></h5>
-          <div class='chart-canvas'><canvas height='260' width='800' id='myLineChart'></canvas></div>
+          <div class='chart-canvas'><canvas height='260' width='800' id='myBarChart'></canvas></div>
         </div>
       </td>
       <td class='w-400px'>
         <div class='table-wrapper'>
-          <table id='lineChart' class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='line' data-target='#myLineChart' data-animation='false'>
+          <table id='barChart' class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='bar' data-target='#myBarChart' data-animation='false'>
             <thead>
               <tr class='text-center'>
                 <th><?php echo $lang->trade->month;?></th>
