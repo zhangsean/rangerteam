@@ -40,7 +40,7 @@
     <div class='side-body'>
       <div class='panel panel-sm'>
         <div class='panel-heading nobr'>
-          <strong><?php echo $lang->trade->modeList[$mode];?></strong>
+          <strong><?php echo zget($lang->trade->modeList, $mode, $lang->trade->modeList['all']);?></strong>
         </div>
         <div class='panel-body'>
           <?php if($currentYear):?> 

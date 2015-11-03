@@ -779,7 +779,7 @@ class tradeModel extends model
             if($mode == 'in')  printf($this->lang->trade->totalIn, $currencyList[$currency], $tidyMoneyIn);
             if($mode == 'out') printf($this->lang->trade->totalOut, $currencyList[$currency], $tidyMoneyOut);
 
-            if($mode == 'all') 
+            if($mode == 'all' or $mode == 'bysearch') 
             {
                 $profitsMoney = $money['in'] - $money['out'];
                 if($profitsMoney > 0)  $profits = "<span title='$profitsMoney'>" . $this->lang->trade->profit . commonModel::tidyMoney($profitsMoney) . '</span>';
