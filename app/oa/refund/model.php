@@ -23,6 +23,7 @@ class refundModel extends model
         $refund  = $this->dao->select('*')->from(TABLE_REFUND)->where('id')->eq($ID)->fetch();
         $details = $this->dao->select('*')->from(TABLE_REFUND)->where('parent')->eq($ID)->fetchAll('id');
         $refund->detail = $details;
+        $refund->files  = $this->loadModel('file')->getByObject('refund', $ID);
         return $refund;
     }
 
@@ -77,13 +78,14 @@ class refundModel extends model
             ->get();
 
         $this->dao->insert(TABLE_REFUND)
-            ->data($refund)
+            ->data($refund, $skip='files,labels')
             ->autoCheck()
             ->batchCheck($this->config->refund->require->create, 'notempty')
             ->exec();
 
         if(dao::isError()) return false;
         $refundID = $this->dao->lastInsertID();
+        $this->loadModel('file')->saveUpload('refund', $refundID);
         $this->loadModel('action')->create('refund', $refundID, 'Created', '');
 
         /* Insert detail */
@@ -126,7 +128,7 @@ class refundModel extends model
             ->add('editedDate', helper::now())
             ->setDefault('date', helper::today())
             ->join('related', ',')
-            ->remove('status,firstReviewer,firstReviewDate,sencondReviewer,secondReviewDate,refundBy,refundDate')
+            ->remove('status,firstReviewer,firstReviewDate,sencondReviewer,secondReviewDate,refundBy,refundDate,files,labels')
             ->remove('idList,dateList,moneyList,currencyList,categoryList,descList,relatedList')
             ->get();
 

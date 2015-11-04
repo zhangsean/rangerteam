@@ -60,11 +60,14 @@ class refund extends control
         {
             $changes = $this->refund->update($refundID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $files = $this->loadModel('file')->saveUpload('refund', $refundID);
 
-            if(!empty($changes))
+            if(!empty($changes) or $files)
             {
-                $actionID = $this->loadModel('action')->create('refund', $refundID, 'Edited');
-                $this->action->logHistory($actionID, $changes);
+                $fileAction = '';
+                if($files) $fileAction = $this->lang->addFiles . join(',', $files);
+                $actionID = $this->loadModel('action')->create('refund', $refundID, 'Edited', $fileAction);
+                if($changes) $this->action->logHistory($actionID, $changes);
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "refundID=$refundID")));
         }

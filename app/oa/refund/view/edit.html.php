@@ -17,7 +17,7 @@
   <div class='panel'>
     <div class='panel-heading'><?php echo $lang->refund->edit;?></div>
     <div class='panel-body'>
-      <table class='table table-form'>
+      <table class='table table-form w-p70'>
         <tr>
           <th class='w-100px'><?php echo $lang->refund->name?></th>
           <td class='w-400px'><?php echo html::input('name', $refund->name, "class='form-control'")?></td>
@@ -80,7 +80,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->refund->desc?></th>
-          <td><?php echo html::textarea('desc', $refund->desc, "class='form-control'")?></td>
+          <td colspan='2'><?php echo html::textarea('desc', $refund->desc, "class='form-control'")?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->refund->files;?></th>
+          <td colspan='2'><?php echo $this->fetch('file', 'buildForm')?></td>
         </tr>
         <tr><th></th><td colspan='2'><?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?></td></tr>
       </table>

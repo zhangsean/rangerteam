@@ -24,6 +24,7 @@ $lang->refund->money            = 'Money';
 $lang->refund->reviewMoney      = 'Approval Amount';
 $lang->refund->currency         = 'Currency';
 $lang->refund->desc             = 'Description';
+$lang->refund->files            = 'Files';
 $lang->refund->status           = 'Status';
 $lang->refund->createdBy        = 'Created By';
 $lang->refund->createdDate      = 'Created Date';

@@ -21,6 +21,7 @@
         <p><?php echo "{$lang->refund->statusList[$refund->status]}{$lang->refund->reason}:{$refund->reason}"?></p>
         <?php endif;?>
         <p><?php echo $refund->desc?></p>
+        <div><?php echo $this->fetch('file', 'printFiles', array('files' => $refund->files, 'fieldset' => 'false'))?></div>
       </div>
     </div> 
     <?php if(!empty($refund->detail)):?>

@@ -19,7 +19,7 @@
       <?php echo $lang->refund->create;?>
     </div>
     <div class='panel-body'>
-      <table class='table table-form'>
+      <table class='table table-form w-p70'>
         <tr>
           <th class='w-100px'><?php echo $lang->refund->name?></th>
           <td class='w-400px'><?php echo html::input('name', '', "class='form-control'")?></td>
@@ -68,7 +68,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->refund->desc?></th>
-          <td><?php echo html::textarea('desc', '', "class='form-control'")?></td>
+          <td colspan='2'><?php echo html::textarea('desc', '', "class='form-control'")?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->refund->files;?></th>
+          <td colspan='2'><?php echo $this->fetch('file', 'buildForm')?></td>
         </tr>
         <tr><th></th><td colspan='2'><?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?></td></tr>
       </table>

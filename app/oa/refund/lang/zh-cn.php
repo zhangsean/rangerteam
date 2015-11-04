@@ -24,6 +24,7 @@ $lang->refund->money            = '金额';
 $lang->refund->reviewMoney      = '审批金额';
 $lang->refund->currency         = '货币';
 $lang->refund->desc             = '描述';
+$lang->refund->files            = '附件';
 $lang->refund->status           = '状态';
 $lang->refund->createdBy        = '申请人';
 $lang->refund->createdDate      = '申请日期';
