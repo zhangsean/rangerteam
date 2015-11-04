@@ -39,16 +39,17 @@
   </div>
   <div class='main'>
     <div class='panel'>
-      <table class='table table-data table-hover text-center table-fixed'>
+      <table class='table table-data table-hover text-center table-fixed tablesorter'>
         <thead>
           <tr class='text-center'>
-            <th class='w-50px'> <?php echo $lang->trip->id;?></th>
-            <th class='w-80px'> <?php echo $lang->trip->createdBy;?></th>
-            <th class='w-180px'> <?php echo $lang->trip->name;?></th>
-            <th class='w-150px'><?php echo $lang->trip->begin;?></th>
-            <th class='w-150px'><?php echo $lang->trip->end;?></th>
-            <th class='w-80px'><?php echo $lang->trip->from;?></th>
-            <th class='w-80px'><?php echo $lang->trip->to;?></th>
+            <?php $vars = "date=$date&orderBy=%s";?>
+            <th class='w-50px'>  <?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->trip->id);?></th>
+            <th class='w-80px'>  <?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->trip->createdBy);?></th>
+            <th class='w-180px'> <?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->trip->name);?></th>
+            <th class='w-150px'> <?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->trip->begin);?></th>
+            <th class='w-150px'> <?php commonModel::printOrderLink('end', $orderBy, $vars, $lang->trip->end);?></th>
+            <th class='w-80px'>  <?php commonModel::printOrderLink('from', $orderBy, $vars, $lang->trip->from);?></th>
+            <th class='w-80px'>  <?php commonModel::printOrderLink('to', $orderBy, $vars, $lang->trip->to);?></th>
             <th><?php echo $lang->trip->desc;?></th>
             <th class='w-100px'><?php echo $lang->actions;?></th>
           </tr>

@@ -46,7 +46,7 @@ class tripModel extends model
      * @access public
      * @return array
      */
-    public function getList($year = '', $month = '', $account = '', $dept = '')
+    public function getList($year = '', $month = '', $account = '', $dept = '', $orderBy = 'id_desc')
     {
         return $this->dao->select('t1.*, t2.realname, t2.dept')->from(TABLE_TRIP)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.createdBy=t2.account")
             ->where('1=1')
@@ -54,7 +54,7 @@ class tripModel extends model
             ->beginIf($month != '')->andWhere('t1.begin')->like("%-$month-%")->fi()
             ->beginIf($account != '')->andWhere('t1.createdBy')->eq($account)->fi()
             ->beginIf($dept != '')->andWhere('t2.dept')->in($dept)->fi()
-            ->orderBy('t2.dept,t1.id_desc')
+            ->orderBy("t2.dept,t1.{$orderBy}")
             ->fetchAll();
     }
 

@@ -29,9 +29,9 @@ class trip extends control
      * @access public
      * @return void
      */
-    public function personal($date = '')
+    public function personal($date = '', $orderBy = 'id_desc')
     {
-        die($this->fetch('trip', 'browse', "type=personal&date=$date", 'oa'));
+        die($this->fetch('trip', 'browse', "type=personal&date=$date&orderBy=$orderBy", 'oa'));
     }
 
     /**
@@ -41,9 +41,9 @@ class trip extends control
      * @access public
      * @return void
      */
-    public function department($date = '')
+    public function department($date = '', $orderBy = 'id_desc')
     {
-        die($this->fetch('trip', 'browse', "type=department&date=$date", 'oa'));
+        die($this->fetch('trip', 'browse', "type=department&date=$date&orderBy=$orderBy", 'oa'));
     }
 
     /**
@@ -53,9 +53,9 @@ class trip extends control
      * @access public
      * @return void
      */
-    public function company($date = '')
+    public function company($date = '', $orderBy = 'id_desc')
     {
-        die($this->fetch('trip', 'browse', "type=company&date=$date", 'oa'));
+        die($this->fetch('trip', 'browse', "type=company&date=$date&orderBy=$orderBy", 'oa'));
     }
 
     /**
@@ -66,7 +66,7 @@ class trip extends control
      * @access public
      * @return void
      */
-    public function browse($type = 'personal', $date = '')
+    public function browse($type = 'personal', $date = '', $orderBy = 'id_desc')
     {
         if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Ym");
         $currentYear  = substr($date, 0, 4);
@@ -77,17 +77,17 @@ class trip extends control
 
         if($type == 'personal')
         {
-            $tripList = $this->trip->getList($currentYear, $currentMonth, $this->app->user->account);
+            $tripList = $this->trip->getList($currentYear, $currentMonth, $this->app->user->account, '', $orderBy);
         }
         elseif($type == 'department')
         {
             $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
             foreach($deptList as $key => $value) $deptList[$key] = $value->name;
-            $tripList = $this->trip->getList($currentYear, $currentMonth, '', array_keys($deptList));
+            $tripList = $this->trip->getList($currentYear, $currentMonth, '', array_keys($deptList), $orderBy);
         }
         elseif($type == 'company')
         {
-            $tripList = $this->trip->getList($currentYear, $currentMonth);
+            $tripList = $this->trip->getList($currentYear, $currentMonth, '', '', $orderBy);
         }
 
         $this->view->title        = $this->lang->trip->browse;
@@ -98,7 +98,9 @@ class trip extends control
         $this->view->yearList     = $yearList;
         $this->view->deptList     = $deptList;
         $this->view->users        = $this->loadModel('user')->getPairs();
-        $this->view->tripList    = $tripList;
+        $this->view->tripList     = $tripList;
+        $this->view->date         = $date;
+        $this->view->orderBy      = $orderBy;
         $this->display();
     }
 
