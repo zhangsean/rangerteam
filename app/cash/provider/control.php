@@ -45,6 +45,8 @@ class provider extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        $this->session->set('providerList', $this->app->getURI(true));
+
         $this->view->title      = $this->lang->provider->list;
         $this->view->mode       = $mode;
         $this->view->providers  = $this->customer->getList($mode = $mode, $param = $param, $relation = 'provider', $orderBy, $pager);

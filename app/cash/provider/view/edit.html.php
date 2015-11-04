@@ -22,7 +22,7 @@
     <strong><i class="icon-edit"></i> <?php echo $lang->provider->edit;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='providerForm' class='form-inline'>
+    <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form w-p60'>
         <tr>
           <th class='w-80px'><?php echo $lang->provider->name;?></th>
@@ -66,10 +66,7 @@
         </tr>
         <tr>
           <th></th>
-          <td>
-            <?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?>
-            <div class='popover'></div>
-          </td><td></td>
+          <td colspan='2'><?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?></td>
         </tr>
       </table>
     </form>
