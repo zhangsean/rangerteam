@@ -171,28 +171,36 @@ class attendModel extends model
     {
         $account = $this->app->user->account;
         $link    = helper::createLink('oa.attend', 'personal');
-        $entry   = $this->loadModel('entry')->getByCode('oa');
-        $misc    = "class='app-btn' data-id='{$entry->id}'";
+        $misc    = "class='app-btn alert-link' data-id='oa'";
+        $notice  = '';
 
         $this->lang->attend->statusList['absent'] = $this->lang->attend->notice['absent'];
 
         $today  = helper::today();
         $attend = $this->getByDate($today, $account);
-        if(empty($attend)) return sprintf($this->lang->attend->notice['today'], $this->lang->attend->statusList['absent'], $link, $misc); 
+        if(empty($attend)) $notice .= sprintf($this->lang->attend->notice['today'], $this->lang->attend->statusList['absent'], $link, $misc); 
         if(!empty($attend) and strpos('late,early,both,absent', $attend->status) !== false) 
         {
-            return sprintf($this->lang->attend->notice['today'], zget($this->lang->attend->statusList, $attend->status), $link, $misc); 
+            $notice .= sprintf($this->lang->attend->notice['today'], zget($this->lang->attend->statusList, $attend->status), $link, $misc); 
         }
 
         $yestoday = date("Y-m-d", strtotime("-1 day"));
         $attend   = $this->getByDate($yestoday, $account);
-        if(empty($attend)) return sprintf($this->lang->attend->notice['yestoday'], $this->lang->attend->statusList['absent'], $link, $misc); 
+        if(empty($attend)) $notice .= sprintf($this->lang->attend->notice['yestoday'], $this->lang->attend->statusList['absent'], $link, $misc); 
         if(!empty($attend) and strpos('late,early,both,absent', $attend->status) !== false) 
         {
-            return sprintf($this->lang->attend->notice['yestoday'], zget($this->lang->attend->statusList, $attend->status), $link, $misc); 
+            $notice .= sprintf($this->lang->attend->notice['yestoday'], zget($this->lang->attend->statusList, $attend->status), $link, $misc); 
         }
 
-        return '';
+        $fullNotice = <<<EOT
+<div class='alert alert-danger with-icon alert-dismissable' style='width:360px; position:fixed; bottom:25px; right:15px; z-index: 9999;' id='planInfo'>
+  <i class='icon icon-envelope-alt'>  </i>
+  <div class='content'>{$notice}</div>
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+</div>
+EOT;
+       
+        return empty($notice) ? '' : $fullNotice;
     }
 
     /**

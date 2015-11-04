@@ -110,7 +110,7 @@ $(document).ready(function()
     /* view todo. */
     calendar.find('.event').click(function()
     {
-        var todourl = createLink('todo', 'view', "id=" + $(this).data('id'), '', true);
+        var todourl = createLink('oa.todo', 'view', "id=" + $(this).data('id'), '', true);
         $.zui.modalTrigger.show({width: '85%', url: todourl});
         return false;
     });
@@ -141,7 +141,7 @@ $(document).ready(function()
             month = month + 1;
             if(day <= 9) day = '0' + day;
             if(month <= 9) month = '0' + month;
-            var todourl = createLink('todo', 'batchCreate', "date=" + year + '' + month + '' + day, '', true);
+            var todourl = createLink('oa.todo', 'batchCreate', "date=" + year + '' + month + '' + day, '', true);
             $.zui.modalTrigger.show({width: '85%', url: todourl});
         }
         return false;
