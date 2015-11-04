@@ -65,7 +65,7 @@
       </div>
     </div>
   </div>
-  <div class='text-center'>
+  <div class='text-center actions'>
     <?php
     $disable = $this->todo->isClickable($todo, 'finish') ? '' : 'disable';
     commonModel::printLink('todo', 'finish', "id=$todo->id", $lang->finish, "data-id='{$todo->id}' class='btn btn-success ajaxFinish $disable'");

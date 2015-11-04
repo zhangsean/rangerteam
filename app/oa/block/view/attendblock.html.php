@@ -36,6 +36,10 @@
 .attend-leave  {color: #9E9E9E;}
 .attend-trip   {color: #8668B8;}
 .attend-status:hover {cursor: pointer;}
+
+#triggerModal .actions {display: none;}
+.day {position: relative;}
+.text-muted {position: absolute; right: 0; top: 0; padding: 3px; color: #CCC;}
 </style>
 <?php $dateList = range(strtotime($startDate), strtotime($endDate), 86400);?>
 <table class='calendar'>
@@ -52,11 +56,10 @@
     <?php foreach($dateList as $d):?>
     <?php $dStr = date('Y-m-d', $d);?>
     <?php $class = $dStr == $date ? 'today' : '';?>
-      <td class='<?php echo $class?>'>
+      <td class='day <?php echo $class?>' data-date='<?php echo $dStr?>'>
         <?php if(!isset($todos[$dStr]['AM'])) continue;?>
         <?php foreach($todos[$dStr]['AM'] as $todo):?>
-        <?php $link = "$.openEntry('oa', '" . $this->createLink('oa.todo', 'calendar') . "')";?>
-        <div class='event <?php echo $todo->status?>' onclick="<?php echo $link?>" title='<?php echo $todo->begin . ' ' . $todo->name?>'>
+        <div class='event <?php echo $todo->status?>' data-id="<?php echo $todo->id?>" title='<?php echo $todo->begin . ' ' . $todo->name?>'>
           <?php echo $todo->name;?>
         </div>
         <?php endforeach;?>
@@ -68,7 +71,7 @@
     <?php foreach($dateList as $d):?>
     <?php $dStr = date('Y-m-d', $d);?>
     <?php $class = $dStr == $date ? 'today' : '';?>
-      <td class='<?php echo $class?>'>
+      <td class='day <?php echo $class?>' data-date='<?php echo $dStr?>'>
         <?php if(!isset($todos[$dStr]['PM'])) continue;?>
         <?php foreach($todos[$dStr]['PM'] as $todo):?>
         <?php $link = "$.openEntry('oa', '" . $this->createLink('oa.todo', 'calendar') . "')";?>
@@ -95,3 +98,53 @@
     <?php endforeach;?>
   </tr>
 </table>
+<script>
+$(document).ready(function()
+{
+    v.date = new Date();
+    v.d    = v.date.getDate();
+    v.m    = v.date.getMonth();
+    v.y    = v.date.getFullYear();
+
+    var calendar = $('table.calendar');
+    /* view todo. */
+    calendar.find('.event').click(function()
+    {
+        var todourl = createLink('todo', 'view', "id=" + $(this).data('id'), '', true);
+        $.zui.modalTrigger.show({width: '85%', url: todourl});
+        return false;
+    });
+    /* Add + */
+    calendar.find('.day').each(function()
+    {
+        var date = new Date($(this).data('date'));
+        var year   = date.getFullYear();
+        var month  = date.getMonth();
+        var day    = date.getDate();
+        if(year > v.y || (year == v.y && month > v.m) || (year == v.y && month == v.m && day >= v.d))
+        {
+            if($(this).find('.icon-plus').length == 0)
+            {
+                $(this).append("<span class='text-muted icon-plus'></span>");
+            }
+        }
+    });
+    /* batch create todo. */
+    calendar.find('.day').click(function()
+    {
+        var date = new Date($(this).data('date'));
+        var year   = date.getFullYear();
+        var month  = date.getMonth();
+        var day    = date.getDate();
+        if(year > v.y || (year == v.y && month > v.m) || (year == v.y && month == v.m && day >= v.d))
+        {
+            month = month + 1;
+            if(day <= 9) day = '0' + day;
+            if(month <= 9) month = '0' + month;
+            var todourl = createLink('todo', 'batchCreate', "date=" + year + '' + month + '' + day, '', true);
+            $.zui.modalTrigger.show({width: '85%', url: todourl});
+        }
+        return false;
+    });
+});
+</script>
