@@ -57,6 +57,7 @@ $(document).ready(function()
                     if(response.message) $.zui.messager.success(response.message);
                     updateCalendar();
                     from.hide();
+                    from.prop('data-remove', '1')
                     updateBoard(from.data('type'));
                 }
             }, 'json');
@@ -105,7 +106,8 @@ $(document).ready(function()
                 tab.find('.board-item').hide();
                 for(i = page; i > page - 10; i--)
                 {
-                    tab.find('[data-index=' + i + ']').show();
+                    var item = tab.find('[data-index=' + i + ']');
+                    if(item.prop('data-remove') != '1') item.show();
                 }
             });
             $(selecter + ' span.page-num[data-id=1]').click();
@@ -123,5 +125,6 @@ $(document).ready(function()
         var link = createLink('crm.customer', 'ajaxGetTodoList', param);
         if(type == 'all' || type == 'customer') $('#tab_customer').load(link, function(){$('#tab_customer [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_customer');});
     }
+    addPager('#tab_custom');
     updateBoard('all');
 });
