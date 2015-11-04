@@ -94,7 +94,7 @@
                 </td>
                 <td>
                   <?php
-                  if(strpos('rest, normal, trip, leave', $status) === false)
+                  if(strpos('rest, normal, trip, leave, overtime', $status) === false)
                   {
                       if($reason == '' or $reason == 'normal') echo html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $lang->attend->edit, "data-toggle='modal' data-width='500px'");
                       if($reason == '' or $reason == 'leave')  echo html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $lang->attend->leave, "data-toggle='modal' data-width='500px'");

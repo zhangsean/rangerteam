@@ -409,11 +409,13 @@ class attendModel extends model
 
         /* 'rest': rest day. */
         $dayIndex = date('w', strtotime($attend->date));
-        if($this->config->attend->workingDays == '5' and ($dayIndex == 0 or $dayIndex == 6)) $status = $status == 'absent' ? 'rest' : $status;
-        if($this->config->attend->workingDays == '6' and $dayIndex == 0) $status = $status == 'absent' ? 'rest' : $status;
-        if($this->config->attend->workingDays == '12' and $dayIndex == 5 or $dayIndex == 6) $status = $status == 'absent' ? 'rest' : $status;
-        if($this->config->attend->workingDays == '13' and $dayIndex == 6) $status = $status == 'absent' ? 'rest' : $status;
-        if($this->loadModel('holiday')->isHoliday($attend->date)) $status = $status == 'absent' ? 'rest' : $status;
+        if( ($this->config->attend->workingDays == '5' and ($dayIndex == 0 or $dayIndex == 6)) or 
+            ($this->config->attend->workingDays == '6' and $dayIndex == 0) or
+            ($this->config->attend->workingDays == '12' and ($dayIndex == 5 or $dayIndex == 6)) or 
+            ($this->config->attend->workingDays == '13' and $dayIndex == 6) ) 
+        {
+            $status = $status == 'absent' ? 'rest' : 'overtime';
+        }
 
         return $status;
     }
