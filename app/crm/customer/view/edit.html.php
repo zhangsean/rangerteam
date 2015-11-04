@@ -20,7 +20,7 @@
   <li class='divider angle'></li>
   <li class='title'><?php echo $lang->customer->edit?></li>
 </ul>
-<form method='post' id='customerForm' class='form-condensed'>
+<form method='post' id='ajaxForm' class='form-condensed'>
 <div class='row-table'>
   <div class='col-main'>
    <div class='panel'>
@@ -49,10 +49,7 @@
      </div>
    </div>
     <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}")?>
-    <div class='page-actions'>
-      <?php echo html::submitButton() . html::backButton();?>
-      <div class='popover'></div>
-    </div>
+    <div class='page-actions'><?php echo html::submitButton() . html::backButton();?></div>
   </div>
   <div class='col-side'>  
    <div class='panel'>
@@ -60,7 +57,11 @@
      <div class='panel-body'>
        <table class='table table-info'>
          <tr>
-           <th class='w-70px'><?php echo $lang->customer->level;?></th>
+           <th class='w-70px'><?php echo $lang->customer->relation;?></th>
+           <td><?php echo html::select('relation', $lang->customer->relationList, $customer->relation, "class='form-control'");?></td>
+         </tr>
+         <tr>
+           <th><?php echo $lang->customer->level;?></th>
            <td><?php echo html::select('level', $levelList, $customer->level, "class='form-control'");?></td>
          </tr>
          <tr>
