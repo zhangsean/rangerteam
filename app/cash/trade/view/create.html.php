@@ -48,7 +48,14 @@
         </tr>
         <tr>
           <th><?php echo $lang->trade->contract;?></th>
-          <td><?php echo html::select('contract', array('') + (array) $contractList, '', "class='form-control chosen'");?></td>
+          <td>
+            <select class='form-control' id='contract' name='contract'>
+              <option value=''></option>
+              <?php foreach($contractList as $id => $contract):?>
+              <option value="<?php echo $id?>" data-amount="<?php echo $contract->amount;?>"><?php echo $contract->name;?></option>
+              <?php endforeach;?>
+            </select>
+          </td>
         </tr>
         <?php endif;?>
         <?php if($type == 'out'):?>

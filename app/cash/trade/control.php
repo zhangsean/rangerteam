@@ -141,7 +141,7 @@ class trade extends control
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
         $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider');
-        $this->view->contractList  = $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
+        $this->view->contractList  = $this->loadModel('contract', 'crm')->getList($customerID = 0);
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
 

@@ -495,9 +495,9 @@ class contract extends control
      */
     public function getOptionMenu($customer)
     {
-        $options = $this->contract->getPairs($customer);
+        $contractList = $this->contract->getList($customer);
         echo "<option value=''></option>";
-        foreach($options as $value => $text) echo "<option value='{$value}'>{$text}</option>";
+        foreach($contractList as $id => $contract) echo "<option value='{$id}' data-amount='{$contract->amount}'>{$contract->name}</option>";
         exit;
     }
 
