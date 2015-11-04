@@ -29,9 +29,9 @@ class leave extends control
      * @access public
      * @return void
      */
-    public function personal($date = '')
+    public function personal($date = '', $orderBy = 'id_desc')
     {
-        die($this->fetch('leave', 'browse', "type=personal&date=$date", 'oa'));
+        die($this->fetch('leave', 'browse', "type=personal&date=$date&orderBy=$orderBy", 'oa'));
     }
 
     /**
@@ -41,9 +41,9 @@ class leave extends control
      * @access public
      * @return void
      */
-    public function browseReview($date = '')
+    public function browseReview($date = '', $orderBy = 'id_desc')
     {
-        die($this->fetch('leave', 'browse', "type=browseReview&date=$date", 'oa'));
+        die($this->fetch('leave', 'browse', "type=browseReview&date=$date&orderBy=$orderBy", 'oa'));
     }
 
     /**
@@ -53,7 +53,7 @@ class leave extends control
      * @access public
      * @return void
      */
-    public function company($date = '')
+    public function company($date = '', $orderBy = 'id_desc')
     {
         die($this->fetch('leave', 'browse', "type=company&date=$date", 'oa'));
     }
@@ -66,7 +66,7 @@ class leave extends control
      * @access public
      * @return void
      */
-    public function browse($type = 'personal', $date = '')
+    public function browse($type = 'personal', $date = '', $orderBy = 'id_desc')
     {
         if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Ym");
         $currentYear  = substr($date, 0, 4);
@@ -78,7 +78,7 @@ class leave extends control
 
         if($type == 'personal')
         {
-            $leaveList = $this->leave->getList($currentYear, $currentMonth, $this->app->user->account);
+            $leaveList = $this->leave->getList($currentYear, $currentMonth, $this->app->user->account, '', '', $orderBy);
         }
         elseif($type == 'browseReview')
         {
@@ -87,19 +87,19 @@ class leave extends control
                 if($this->config->attend->reviewedBy == $this->app->user->account)
                 {
                     $deptList = $this->loadModel('tree')->getPairs('', 'dept');
-                    $leaveList = $this->leave->getList($currentYear, $currentMonth, '', array_keys($deptList));
+                    $leaveList = $this->leave->getList($currentYear, $currentMonth, '', array_keys($deptList), '', $orderBy);
                 }
             }
             else
             {
                 $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
                 foreach($deptList as $key => $value) $deptList[$key] = $value->name;
-                $leaveList = $this->leave->getList($currentYear, $currentMonth, '', array_keys($deptList));
+                $leaveList = $this->leave->getList($currentYear, $currentMonth, '', array_keys($deptList), '', $orderBy);
             }
         }
         elseif($type == 'company')
         {
-            $leaveList = $this->leave->getList($currentYear, $currentMonth);
+            $leaveList = $this->leave->getList($currentYear, $currentMonth, '', '', '', $orderBy);
         }
 
         $this->view->title        = $this->lang->leave->browse;
@@ -111,6 +111,8 @@ class leave extends control
         $this->view->deptList     = $deptList;
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->leaveList    = $leaveList;
+        $this->view->date         = $date;
+        $this->view->orderBy      = $orderBy;
         $this->display();
     }
 

@@ -39,19 +39,20 @@
   </div>
   <div class='main'>
     <div class='panel'>
-      <table class='table table-data table-hover text-center table-fixed'>
+      <table class='table table-data table-hover text-center table-fixed tablesorter'>
         <thead>
           <tr class='text-center'>
-            <th class='w-80px'> <?php echo $lang->leave->id;?></th>
-            <th class='w-80px'><?php echo $lang->leave->createdBy;?></th>
-            <th class='w-100px'><?php echo $lang->user->dept;?></th>
-            <th class='w-80px'><?php echo $lang->leave->type;?></th>
-            <th class='w-150px'><?php echo $lang->leave->begin;?></th>
-            <th class='w-150px'><?php echo $lang->leave->end;?></th>
+            <?php $vars = "&date={$date}&orderBy=%s";?>
+            <th class='w-80px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->leave->id);?></th>
+            <th class='w-80px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->leave->createdBy);?></th>
+            <th class='w-80px'><?php echo $lang->user->dept;?></th>
+            <th class='w-80px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->leave->type);?></th>
+            <th class='w-150px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->leave->begin);?></th>
+            <th class='w-150px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->leave->end);?></th>
             <th><?php echo $lang->leave->desc;?></th>
-            <th class='w-80px'><?php echo $lang->leave->status;?></th>
+            <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->leave->status);?></th>
             <?php if($type != 'browseReview'):?>
-            <th class='w-80px'><?php echo $lang->leave->reviewedBy;?></th>
+            <th class='w-80px'><?php commonModel::printOrderLink('reviewedBy', $orderBy, $vars, $lang->leave->reviewedBy);?></th>
             <?php endif;?>
             <?php if($type != 'company'):?>
             <th class='w-150px'><?php echo $lang->actions;?></th>
