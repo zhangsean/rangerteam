@@ -223,7 +223,9 @@ v.settings.display = function(event)
         }
         if(e.data.status == 'done')
         {
-            $('.events .event[data-id=' + e.id + ']').css('background-color', '#38B03F');
+            var eventObj = $('.events .event[data-id=' + e.id + ']');
+            eventObj.css('background-color', '#38B03F');
+            eventObj.appendTo(eventObj.parent());
         }
     }
     adjustWidth();
