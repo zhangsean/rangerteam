@@ -195,7 +195,7 @@ class model
             if(!class_exists($modelClass)) $this->app->triggerError(" The model $modelClass not found", __FILE__, __LINE__, $exit = true);
         }
 
-        $this->$moduleName = new $modelClass();
+        $this->$moduleName = new $modelClass($appName);
         return $this->$moduleName;
     }
 
