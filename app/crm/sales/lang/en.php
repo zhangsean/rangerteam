@@ -1,4 +1,5 @@
 <?php
+if(!isset($lang->sales)) $lang->sales = new stdclass();
 $lang->sales->common = 'Sales Group';
 $lang->sales->browse = 'Sales Group List';
 $lang->sales->create = 'Create Group';
