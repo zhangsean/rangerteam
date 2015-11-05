@@ -38,7 +38,7 @@ class refundModel extends model
      * @access public
      * @return array
      */
-    public function getList($deptID = '', $status = '', $createdBy = '', $orderBy = 'id_desc', $pager = null)
+    public function getList($mode = 'company', $deptID = '', $status = '', $createdBy = '', $orderBy = 'id_desc', $pager = null)
     {
         $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
         $refunds = $this->dao->select('*')->from(TABLE_REFUND)
@@ -46,6 +46,7 @@ class refundModel extends model
             ->beginIf($deptID != '')->andWhere('createdBy')->in(array_keys($users))->fi()
             ->beginIf($status != '')->andWhere('status')->in($status)->fi()
             ->beginIf($createdBy != '')->andWhere('createdBy')->in($createdBy)->fi()
+            ->beginIf($mode != 'personal')->andWhere('status')->ne('draft')->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');

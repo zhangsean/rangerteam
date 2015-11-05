@@ -18,7 +18,7 @@
   <?php commonModel::printLink('refund', 'create', '', '<i class="icon-plus"></i> ' . $lang->refund->create, 'class="btn btn-primary"');?>
 </div>
 <div class='panel'>
-  <table class='table table-hover table-striped tablesorter table-data table-fixed text-center'>
+  <table class='table table-hover table-striped tablesorter table-data table-fixed text-center' id='refundTable'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
@@ -32,7 +32,7 @@
         <th class='w-150px'><?php commonModel::printOrderLink('firstReviewer', $orderBy, $vars, $lang->refund->reviewer);?></th>
         <th class='w-90px'><?php commonModel::printOrderLink('refundBy', $orderBy, $vars, $lang->refund->refundBy);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('refundDate', $orderBy, $vars, $lang->refund->refundDate);?></th>
-        <th class='w-100px'><?php echo $lang->actions;?></th>
+        <th class='w-130px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <?php foreach($refunds as $refund):?>
@@ -48,11 +48,12 @@
       <td><?php echo zget($userPairs, $refund->refundBy);?></td>
       <td><?php echo substr($refund->refundDate, 0, 10)?></td>
       <td>
-        <?php echo html::a($this->createLink('refund', 'view',   "refundID={$refund->id}"), $lang->view, "")?>
-        <?php if($refund->createdBy == $this->app->user->account and $refund->status == 'wait'):?>
+        <?php if($refund->createdBy == $this->app->user->account and ($refund->status == 'wait' or $refund->status == 'draft')):?>
+        <?php if($refund->status == 'wait' or $refund->status == 'draft') echo html::a($this->createLink('refund', 'switchstatus', "id=$refund->id"), $refund->status == 'wait' ? $lang->refund->cancel : $lang->refund->commit, "class='reload'");?>
         <?php echo html::a($this->createLink('refund', 'edit',   "refundID={$refund->id}"), $lang->edit, "")?>
         <?php echo html::a($this->createLink('refund', 'delete', "refundID={$refund->id}"), $lang->delete, "class='deleter'")?>
         <?php endif;?>
+        <?php echo html::a($this->createLink('refund', 'view',   "refundID={$refund->id}"), $lang->view, "")?>
         <?php if($mode == 'todo') echo html::a($this->createLink('refund', 'reimburse', "refundID={$refund->id}"), $lang->refund->common, "class='refund'");?>
         <?php if($mode == 'todo') echo html::a($this->createLink('refund', 'createtrade', "refundID={$refund->id}"), $lang->refund->common, "class='createTrade hide'");?>
       </td>

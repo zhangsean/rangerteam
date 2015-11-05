@@ -152,9 +152,9 @@ class refund extends control
             $userDept[$user->account] = zget($deptList, $user->dept);
         }
 
-        if($mode == 'personal') $refunds = $this->refund->getList('', '', $this->app->user->account, $orderBy, $pager);
-        if($mode == 'company')  $refunds = $this->refund->getList('', '', '', $orderBy, $pager);
-        if($mode == 'todo')     $refunds = $this->refund->getList('', 'pass', '', $orderBy, $pager);
+        if($mode == 'personal') $refunds = $this->refund->getList($mode, '', '', $this->app->user->account, $orderBy, $pager);
+        if($mode == 'company')  $refunds = $this->refund->getList($mode, '', '', '', $orderBy, $pager);
+        if($mode == 'todo')     $refunds = $this->refund->getList($mode, '', 'pass', '', $orderBy, $pager);
 
         /* Set return url. */
         $this->session->set('refundList', $this->app->getURI(true));
@@ -229,27 +229,27 @@ class refund extends control
                 if($this->config->refund->secondReviewer == $this->app->user->account)
                 {
                     $deptList = $this->loadModel('tree')->getListByType('dept');
-                    $refunds = $this->refund->getList('', 'doing');
+                    $refunds = $this->refund->getList('', '', 'doing');
                 }
                 else
                 {
                     $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
                     $deptIDList = array_keys($deptList);
-                    if(!empty($deptList)) $refunds = $this->refund->getList($deptIDList, 'wait');
+                    if(!empty($deptList)) $refunds = $this->refund->getList('', $deptIDList, 'wait');
                 }
             }
             else
             {
                 $deptList = $this->loadModel('tree')->getListByType('dept');
-                if($this->config->refund->firstReviewer == $this->app->user->account) $refunds = $this->refund->getList('', 'wait');
-                if($this->config->refund->secondReviewer == $this->app->user->account) $refunds = $this->refund->getList('', 'doing');
+                if($this->config->refund->firstReviewer == $this->app->user->account) $refunds = $this->refund->getList('', '', 'wait');
+                if($this->config->refund->secondReviewer == $this->app->user->account) $refunds = $this->refund->getList('', '', 'doing');
             }
         }
         else
         {
             $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
             $deptIDList = array_keys($deptList);
-            if(!empty($deptList)) $refunds = $this->refund->getList($deptIDList, 'wait,doing');
+            if(!empty($deptList)) $refunds = $this->refund->getList('', $deptIDList, 'wait,doing');
         }
         $deptList[0] = new stdclass();
         $deptList[0]->name = '/';
@@ -426,5 +426,24 @@ class refund extends control
             }
         }
         return $pass;
+    }
+
+    /**
+     * Cancel a refund or commit a refund. 
+     * 
+     * @param  int    $refundID 
+     * @access public
+     * @return void
+     */
+    public function switchStatus($refundID)
+    {
+        $refund = $this->refund->getByID($refundID);
+        if(!$refund) return false;
+
+        if($refund->status == 'wait') $this->dao->update(TABLE_REFUND)->set('status')->eq('draft')->where('id')->eq($refundID)->exec();
+        if($refund->status == 'draft') $this->dao->update(TABLE_REFUND)->set('status')->eq('wait')->where('id')->eq($refundID)->exec();
+
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 }

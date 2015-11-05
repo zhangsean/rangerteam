@@ -15,6 +15,8 @@ $lang->refund->detail       = '明细';
 $lang->refund->settings     = '设置';
 $lang->refund->setCategory  = '报销科目设置';
 $lang->refund->reimburse    = '报销记账';
+$lang->refund->cancel       = '撤销';
+$lang->refund->commit       = '提交';
 
 $lang->refund->id               = '编号';
 $lang->refund->name             = '名称';
@@ -41,6 +43,7 @@ $lang->refund->reason           = '理由';
 $lang->refund->reviewer         = '审批人';
 $lang->refund->related          = '参与人';
 
+$lang->refund->statusList['draft']  = '草稿';
 $lang->refund->statusList['wait']   = '等待审批';
 $lang->refund->statusList['doing']  = '审批中';
 $lang->refund->statusList['pass']   = '审批通过';

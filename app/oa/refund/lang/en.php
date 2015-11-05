@@ -15,6 +15,8 @@ $lang->refund->detail       = 'Detail';
 $lang->refund->settings     = 'Settings';
 $lang->refund->setCategory  = 'Set Category';
 $lang->refund->reimburse    = 'Reimburse';
+$lang->refund->cancel       = 'Cancel';
+$lang->refund->commit       = 'Commit';
 
 $lang->refund->id               = 'ID';
 $lang->refund->name             = 'Name';
@@ -41,6 +43,7 @@ $lang->refund->reason           = 'Reason';
 $lang->refund->reviewer         = 'Reviewer';
 $lang->refund->related          = 'Related';
 
+$lang->refund->statusList['draft']  = 'Draft';
 $lang->refund->statusList['wait']   = 'Wait';
 $lang->refund->statusList['doing']  = 'Doing';
 $lang->refund->statusList['pass']   = 'Pass';
