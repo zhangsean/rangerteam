@@ -34,7 +34,7 @@ class leaveModel extends model
      * @access public
      * @return array
      */
-    public function getList($year = '', $month = '', $account = '', $dept = '', $status = '', $orderBy = 'id_desc')
+    public function getList($type = 'personal', $year = '', $month = '', $account = '', $dept = '', $status = '', $orderBy = 'id_desc')
     {
         return $this->dao->select('t1.*, t2.realname, t2.dept')->from(TABLE_LEAVE)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.createdBy=t2.account")
             ->where('1=1')
@@ -43,6 +43,7 @@ class leaveModel extends model
             ->beginIf($account != '')->andWhere('t1.createdBy')->eq($account)->fi()
             ->beginIf($dept != '')->andWhere('t2.dept')->in($dept)->fi()
             ->beginIf($status != '')->andWhere('t1.status')->eq($status)->fi()
+            ->beginIf($type != 'personal')->andWhere('t1.status')->ne('draft')->fi()
             ->orderBy("t2.dept,t1.{$orderBy}")
             ->fetchAll();
     }
@@ -206,7 +207,7 @@ class leaveModel extends model
     public function isLeave($date, $account)
     {
         static $leaveList = array();
-        if(!isset($leaveList[$account])) $leaveList[$account] = $this->getList($year = '', $month = '', $account, $dept = '', 'pass');
+        if(!isset($leaveList[$account])) $leaveList[$account] = $this->getList($type = 'company', $year = '', $month = '', $account, $dept = '', 'pass');
 
         foreach($leaveList[$account] as $leave)
         {

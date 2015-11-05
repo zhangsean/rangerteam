@@ -39,7 +39,7 @@
   </div>
   <div class='main'>
     <div class='panel'>
-      <table class='table table-data table-hover text-center table-fixed tablesorter'>
+      <table class='table table-data table-hover text-center table-fixed tablesorter' id='leaveTable'>
         <thead>
           <tr class='text-center'>
             <?php $vars = "&date={$date}&orderBy=%s";?>
@@ -78,7 +78,8 @@
             <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=pass"), $lang->leave->statusList['pass'], "class='reviewPass'");?>
             <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=reject"), $lang->leave->statusList['reject'], "class='reviewReject'");?>
             <?php endif;?>
-            <?php if($type == 'personal' and $leave->status == 'wait'):?>
+            <?php if($type == 'personal' and ($leave->status == 'wait' or $leave->status == 'draft')):?>
+            <?php if($leave->status == 'wait' or $leave->status == 'draft') echo html::a($this->createLink('oa.leave', 'switchstatus', "id=$leave->id"), $leave->status == 'wait' ? $lang->leave->cancel : $lang->leave->commit, "class='reload'");?>
             <?php echo html::a($this->createLink('oa.leave', 'edit', "id=$leave->id"), $lang->edit, "data-toggle='modal'");?>
             <?php echo html::a($this->createLink('oa.leave', 'delete', "id=$leave->id"), $lang->delete, "class='deleter'");?>
             <?php endif;?>

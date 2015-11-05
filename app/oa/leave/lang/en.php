@@ -6,6 +6,8 @@ $lang->leave->create = 'Create';
 $lang->leave->edit   = 'Edit';
 $lang->leave->delete = 'Delete';
 $lang->leave->review = 'Review';
+$lang->leave->cancel = 'Cancel';
+$lang->leave->commit = 'Commit';
 
 $lang->leave->personal     = 'My leave';
 $lang->leave->browseReview = 'Review list';
@@ -26,6 +28,7 @@ $lang->leave->reviewedDate = 'Reviewed date';
 $lang->leave->date         = 'Date';
 $lang->leave->time         = 'Time';
 
+$lang->leave->statusList['draft']   = 'Draft';
 $lang->leave->typeList['affairs']   = 'Affairs';
 $lang->leave->typeList['sick']      = 'Sick';
 $lang->leave->typeList['annual']    = 'Annual';

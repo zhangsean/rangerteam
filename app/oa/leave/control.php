@@ -78,7 +78,7 @@ class leave extends control
 
         if($type == 'personal')
         {
-            $leaveList = $this->leave->getList($currentYear, $currentMonth, $this->app->user->account, '', '', $orderBy);
+            $leaveList = $this->leave->getList($type, $currentYear, $currentMonth, $this->app->user->account, '', '', $orderBy);
         }
         elseif($type == 'browseReview')
         {
@@ -87,19 +87,19 @@ class leave extends control
                 if($this->config->attend->reviewedBy == $this->app->user->account)
                 {
                     $deptList = $this->loadModel('tree')->getPairs('', 'dept');
-                    $leaveList = $this->leave->getList($currentYear, $currentMonth, '', array_keys($deptList), '', $orderBy);
+                    $leaveList = $this->leave->getList($type, $currentYear, $currentMonth, '', array_keys($deptList), '', $orderBy);
                 }
             }
             else
             {
                 $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
                 foreach($deptList as $key => $value) $deptList[$key] = $value->name;
-                $leaveList = $this->leave->getList($currentYear, $currentMonth, '', array_keys($deptList), '', $orderBy);
+                $leaveList = $this->leave->getList($type, $currentYear, $currentMonth, '', array_keys($deptList), '', $orderBy);
             }
         }
         elseif($type == 'company')
         {
-            $leaveList = $this->leave->getList($currentYear, $currentMonth, '', '', '', $orderBy);
+            $leaveList = $this->leave->getList($type, $currentYear, $currentMonth, '', '', '', $orderBy);
         }
 
         $this->view->title        = $this->lang->leave->browse;
@@ -220,28 +220,32 @@ class leave extends control
     }
 
     /**
-     * ajax get leave list for todo. 
+     * Cancel a leave.
      * 
-     * @param  string $account   not used.
-     * @param  string $id 
+     * @param  int    $leaveID 
      * @access public
      * @return void
      */
-    public function ajaxGetTodoList($account = '', $id = '')
+    public function switchStatus($leaveID)
     {
-        $currentYear  = date('Y');
-        $currentMonth = date('m');
-        $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
-        foreach($deptList as $key => $value) $deptList[$key] = $value->name;
-        $leaveList = $this->leave->getList($currentYear, $currentMonth, '', array_keys($deptList), 'wait');
-        $leaves = array();
-        foreach($leaveList as $leave)
+        $leave = $this->leave->getByID($leaveID);
+        if(!$leave) return false;
+
+        $dates = range(strtotime($leave->begin), strtotime($leave->end), 60*60*24);
+
+        if($leave->status == 'wait')
         {
-            $leaves[$leave->id] = $leave->realname . '(' . $leave->begin . ')[' . $this->lang->leave->typeList[$leave->type] . ']';
+            $this->dao->update(TABLE_LEAVE)->set('status')->eq('draft')->where('id')->eq($leaveID)->exec();
+            $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy);
         }
 
-        if($id) die(html::select("idvalues[$id]", $leaves, '', 'class="form-control"'));
-        die(html::select('idvalue', $leaves, '', 'class=form-control'));
+        if($leave->status == 'draft')
+        {
+            $this->dao->update(TABLE_LEAVE)->set('status')->eq('wait')->where('id')->eq($leaveID)->exec();
+            $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy, '', 'leave');
+        }
+
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('personal')));
     }
 }
-
