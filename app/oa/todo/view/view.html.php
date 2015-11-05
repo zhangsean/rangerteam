@@ -50,10 +50,6 @@
               <td><?php echo $lang->todo->typeList[$todo->type];?></td>
             </tr>
             <tr>
-              <th class='w-80px'><?php echo $lang->todo->account;?></th>
-              <td><?php echo $todo->account;?></td>
-            </tr>
-            <tr>
               <th class='w-80px'><?php echo $lang->todo->date;?></th>
               <td><?php echo $todo->date == '00000000' ? $lang->todo->periods['future'] : date(DT_DATE1, strtotime($todo->date));?></td>
             </tr>
@@ -61,19 +57,32 @@
               <th><?php echo $lang->todo->beginAndEnd;?></th>
               <td><?php if(isset($times[$todo->begin])) echo $times[$todo->begin]; if(isset($times[$todo->end])) echo ' ~ ' . $times[$todo->end];?></td>
             </tr>
+            <tr>
+              <th class='w-80px'><?php echo $lang->todo->account;?></th>
+              <td><?php echo zget($users, $todo->account);?></td>
+            </tr>
+            <tr>
+              <th class='w-80px'><?php echo $lang->todo->assignedTo;?></th>
+              <td><?php echo zget($users, $todo->assignedTo);?></td>
+            </tr>
+            <tr>
+              <th class='w-80px'><?php echo $lang->todo->assignedBy;?></th>
+              <td><?php echo zget($users, $todo->assignedBy);?></td>
+            </tr>
           </table>
       </div>
     </div>
   </div>
   <div class='text-center actions'>
     <?php
-    $disable = $this->todo->isClickable($todo, 'finish') ? '' : 'disable';
+    $disable = ($this->todo->checkPriv($todo, 'finish') and $this->todo->isClickable($todo, 'finish')) ? '' : 'disabled';
     commonModel::printLink('todo', 'finish', "id=$todo->id", $lang->finish, "data-id='{$todo->id}' class='btn btn-success ajaxFinish $disable'");
-    if($todo->account == $app->user->account)
-    {
-        commonModel::printLink('todo', 'edit',   "todoID=$todo->id", $lang->edit, "class='btn ajaxEdit'");
-        commonModel::printLink('todo', 'delete', "todoID=$todo->id", $lang->delete, "class='btn todoDeleter'");
-    }
+    $disable = $this->todo->checkPriv($todo, 'assignTo') ? '' : 'disabled';
+    commonModel::printLink('todo', 'assignTo', "id=$todo->id", $lang->todo->assignTo, "data-id='{$todo->id}' class='btn ajaxAssign $disable'");
+    $disable = $this->todo->checkPriv($todo, 'edit') ? '' : 'disabled';
+    commonModel::printLink('todo', 'edit',   "todoID=$todo->id", $lang->edit, "class='btn ajaxEdit $disable'");
+    $disable = $this->todo->checkPriv($todo, 'delete') ? '' : 'disabled';
+    commonModel::printLink('todo', 'delete', "todoID=$todo->id", $lang->delete, "class='btn todoDeleter $disable'");
     ?>
   </div>
 </div>

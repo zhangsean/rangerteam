@@ -130,6 +130,10 @@ class todo extends control
      */
     public function edit($todoID)
     {
+        /* Judge a private todo or not, If private, die. */
+        $todo = $this->todo->getById($todoID);
+        $this->checkPriv($todo, 'edit');
+
         if(!empty($_POST))
         {
             $changes = $this->todo->update($todoID);
@@ -142,10 +146,6 @@ class todo extends control
             $date = str_replace('-', '', $this->post->date);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$date")));
         }
-
-        /* Judge a private todo or not, If private, die. */
-        $todo = $this->todo->getById($todoID);
-        if($todo->private and $this->app->user->account != $todo->account) die('private');
        
         if($todo->date != '00000000') $todo->date = strftime("%Y-%m-%d", strtotime($todo->date));
         $this->view->title      = $this->lang->todo->edit;
@@ -167,6 +167,7 @@ class todo extends control
     public function view($todoID, $from = 'company')
     {
         $todo = $this->todo->getById($todoID, true);
+        $this->checkPriv($todo, 'view');
         if(!$todo) $this->locate($this->createLink('todo', 'calendar'));
 
         /* Save session for back to this app. */
@@ -194,6 +195,7 @@ class todo extends control
     public function delete($todoID)
     {
         $todo = $this->todo->getByID($todoID);
+        $this->checkPriv($todo, 'delete', 'json');
         $date = str_replace('-', '', $todo->date);
         if($date == '00000000') $date = '';
 
@@ -213,6 +215,7 @@ class todo extends control
     public function finish($todoID)
     {
         $todo = $this->todo->getById($todoID);
+        $this->checkPriv($todo, 'finish', 'json');
         if($todo->status != 'done') $this->todo->finish($todoID);
 
         if($todo->type == 'task') 
@@ -234,6 +237,65 @@ class todo extends control
             $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'url' => $confirmURL, 'entry' => $entry)));
         }
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$todo->date")));
+    }
+
+    /**
+     * Assign one todo to someone. 
+     * 
+     * @param  int    $todoID 
+     * @access public
+     * @return void
+     */
+    public function assignTo($todoID)
+    {
+        $todo = $this->todo->getById($todoID);
+        $this->checkPriv($todo, 'assignTo');
+
+        if($_POST)
+        {
+            $changes = $this->todo->assignTo($todoID);
+            if(!empty($changes))
+            {
+                $actionID = $this->loadModel('action')->create('todo', $todo->id, 'edited');
+                $this->action->logHistory($actionID, $changes);
+            }
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'closeModal' => 'true'));
+        }
+
+        $this->view->title = $this->lang->todo->assignTo;
+        $this->view->todo  = $todo;
+        $this->view->users = $this->loadModel('user')->getPairs('nodeleted,noclosed');
+        $this->display();
+    }
+
+    /**
+     * Check privilage. 
+     * 
+     * @param  obejct $todo 
+     * @param  string $action 
+     * @param  string $errorType   html|json
+     * @access public
+     * @return bool
+     */
+    public function checkPriv($todo, $action, $errorType = '')
+    {
+        if(!$this->todo->checkPriv($todo, $action))
+        {
+            if($errorType == '') $errorType = empty($_POST) ? 'html' : 'json';
+            if($errorType == 'json')
+            {
+                $this->app->loadLang('error');
+                $this->send(array('result' => 'fail', 'message' => $this->lang->error->typeList['accessLimited']));
+            }
+            else
+            {
+                $locate = helper::safe64Encode($this->server->http_referer);
+                $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
+                $this->locate($errorLink);
+            }
+        }
+        return true;
     }
 
     /**

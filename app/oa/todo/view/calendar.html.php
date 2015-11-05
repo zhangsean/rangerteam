@@ -86,6 +86,10 @@ function finishTodo(id)
             }
             if(response.message) $.zui.messager.success(response.message);
         }
+        else
+        {
+            if(response.message) $.zui.messager.show(response.message);
+        }
         updateCalendar();
         return false;
     }, 'json');

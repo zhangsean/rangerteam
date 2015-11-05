@@ -28,6 +28,7 @@ $lang->todo->import       = "Import to";
 $lang->todo->changeStatus = "Change";
 $lang->todo->legendBasic  = "Basic Info";
 $lang->todo->calendar     = "Calendar";
+$lang->todo->assignTo     = "Assign To";
 
 $lang->todo->id          = 'ID';
 $lang->todo->account     = 'Owner';
@@ -43,7 +44,9 @@ $lang->todo->name        = 'Name';
 $lang->todo->status      = 'Status';
 $lang->todo->desc        = 'Desc';
 $lang->todo->private     = 'Private';
-$lang->todo->idvalue     = 'Task or bug';
+$lang->todo->idvalue     = 'Task or Order';
+$lang->todo->assignedTo  = 'Assigned To';
+$lang->todo->assignedBy  = 'Assigned By';
 
 $lang->todo->confirmTip = 'This todo linked to %s #%s，chang it also?';
 

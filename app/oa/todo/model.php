@@ -138,6 +138,30 @@ class todoModel extends model
     }
 
     /**
+     * Assign to. 
+     * 
+     * @param  int    $todoID 
+     * @access public
+     * @return array|bool
+     */
+    public function assignTo($todoID)
+    {
+        $oldTodo = $this->getById($todoID);
+        $todo = fixer::input('post')
+            ->remove('account')
+            ->add('assignedBy', $this->app->user->account)
+            ->get();
+
+        $this->dao->update(TABLE_TODO)->data($todo)
+            ->autoCheck()
+            ->where('id')->eq($todoID)
+            ->exec();
+
+        if(!dao::isError()) return commonModel::createChanges($oldTodo, $todo);
+        return false;
+    }
+
+    /**
      * Get info of a todo.
      * 
      * @param  int    $todoID 
@@ -237,7 +261,8 @@ class todoModel extends model
         if($account == '')   $account = $this->app->user->account;
 
         $stmt = $this->dao->select('*')->from(TABLE_TODO)
-            ->where('account')->eq($account)
+            ->where('1=1')
+            ->andWhere()->markLeft()->where('account')->eq($account)->orWhere('assignedTo')->eq($account)->markRight()
             ->andWhere("date >= '$begin'")
             ->andWhere("date <= '$end'")
             ->beginIF($status != 'all' and $status != 'undone')->andWhere('status')->in($status)->fi()
@@ -341,6 +366,30 @@ class todoModel extends model
         if($action == 'finish') return $todo->status != 'done';
 
         return true;
+    }
+
+    /**
+     * Check privilage of todo. 
+     * 
+     * @param  object $task 
+     * @param  string $action 
+     * @access public
+     * @return bool
+     */
+    public function checkPriv($todo, $action)
+    {
+        $account = $this->app->user->account;
+        $action  = strtolower($action);
+        if(strpos('edit,finish,assignto,delete', $action) !== false)
+        {
+            if(empty($todo->assignedTo) and ($todo->account == $account)) return true;
+            if(!empty($todo->assignedTo) and ($todo->assignedTo == $account)) return true;
+        }
+        if(strpos('view', $action) !== false)
+        {
+            if($todo->private == 0 or $todo->account == $account or $todo->assignedTo == $account) return true;
+        }
+        return false;
     }
 
     /**

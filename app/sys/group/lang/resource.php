@@ -339,6 +339,7 @@ $lang->resource->todo->edit        = 'edit';
 $lang->resource->todo->view        = 'view';
 $lang->resource->todo->delete      = 'delete';
 $lang->resource->todo->finish      = 'finish';
+$lang->resource->todo->assignTo    = 'assignTo';
 
 $lang->todo->methodOrder[0]  = 'calendar';
 $lang->todo->methodOrder[5]  = 'create';
@@ -347,6 +348,7 @@ $lang->todo->methodOrder[15] = 'edit';
 $lang->todo->methodOrder[20] = 'view';
 $lang->todo->methodOrder[25] = 'delete';
 $lang->todo->methodOrder[30] = 'finish';
+$lang->todo->methodOrder[35] = 'assignTo';
 
 /* Task. */
 $lang->resource->task = new stdclass();

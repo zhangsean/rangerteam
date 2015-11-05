@@ -91,8 +91,8 @@ $lang->attend->mustSignOutList['no']  = '不需要';
 
 $lang->attend->weeks = array('第一周', '第二周', '第三周', '第四周', '第五周', '第六周');
 
-$lang->attend->notice['today']    = "您今天的考勤状态为：%s。<a href='%s' %s>去补录</a>";
-$lang->attend->notice['yestoday'] = "您昨天的考勤状态为：%s。<a href='%s' %s>去补录</a>";
+$lang->attend->notice['today']    = "您今天的考勤状态为：%s，<a href='%s' %s>去补录</a>。";
+$lang->attend->notice['yestoday'] = "您昨天的考勤状态为：%s，<a href='%s' %s>去补录</a>。";
 $lang->attend->notice['absent']   = "没有记录";
 
 $lang->attend->confirmReview['pass']   = '您确定要执行通过操作吗？';

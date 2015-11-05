@@ -48,7 +48,7 @@
     <?php foreach($dateList as $d):?>
     <?php $dStr = date('Y-m-d', $d);?>
     <?php $class = $dStr == $date ? 'today' : '';?>
-      <th class='col-p13 <?php echo $class?>'><?php echo zget($this->lang->datepicker->abbrDayNames, date('w', $d))?></th>
+      <th class='col-p13 <?php echo $class?>' data-date='<?php echo $dStr?>'><?php echo zget($this->lang->datepicker->abbrDayNames, date('w', $d))?></th>
     <?php endforeach;?>
   </tr>
   <tr class='AM'>

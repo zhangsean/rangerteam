@@ -14,6 +14,10 @@ function finishTodo(id)
             }
             if(response.message) $.zui.messager.success(response.message);
         }
+        else
+        {
+            if(response.message) $.zui.messager.show(response.message);
+        }
         updateCalendar();
         return false;
     }, 'json');
@@ -30,6 +34,9 @@ $(document).ready(function()
         $.zui.modalTrigger.close();
         return false;
     });
+
+    $.setAjaxLoader('#triggerModal .ajaxAssign', '#triggerModal');
+    $.setAjaxLoader('#ajaxModal .ajaxAssign', '#ajaxModal');
 
     /* Adjust default deleter. */
     $.setAjaxDeleter('.todoDeleter', function(data)
