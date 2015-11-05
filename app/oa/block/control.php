@@ -160,6 +160,8 @@ class block extends control
             ->limit($this->params->num)
             ->fetchAll('id');
 
+        $this->view->type = $this->params->type;
+
         $this->display();
     }
 
