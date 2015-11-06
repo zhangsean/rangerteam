@@ -55,3 +55,4 @@ $lang->mail->mailContentTip = <<<EOT
 <strong>%s</strong>(%s)由<a href='https://www.ranzhico.com' target='blank'>然之协同管理系统</a>搭建。<br />
 <a href='http://www.cnezsoft.com' target='blank'>易软天创</a>为天下企业提供专业的管理工具。
 EOT;
+$lang->mail->openTip = '订单、客户、任务指派，请假、报销审批时会进行邮件提醒。';

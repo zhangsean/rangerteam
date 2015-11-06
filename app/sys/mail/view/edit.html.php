@@ -18,7 +18,10 @@
       <table class='table table-form'>
         <tr>
           <th class='col-xs-4 col-sm-3 col-md-2'><?php echo $lang->mail->turnon; ?></th>
-          <td colspan='2'><?php echo html::radio('turnon', $lang->mail->turnonList, 1);?></td>
+          <td colspan='2'>
+            <?php echo html::radio('turnon', $lang->mail->turnonList, 1);?>
+            &nbsp;&nbsp;<i class='icon-question-sign' data-toggle='tooltip' data-original-title='<?php echo $lang->mail->openTip?>'></i>
+          </td>
         </tr>
         <tr>
           <th><?php echo $lang->mail->fromAddress; ?></th>

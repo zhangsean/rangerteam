@@ -55,3 +55,4 @@ $lang->mail->mailContentTip = <<<EOT
 <strong>%s</strong>(%s) Powered by <a href='https://www.ranzhico.com' target='blank'>RanZhi OA</a>.<br />
 <a href='http://www.cnezsoft.com' target='blank'>Nature Easy Soft</a>
 EOT;
+$lang->mail->openTip = 'Send e-mail when assign order, customer and task, review leave and refund.';

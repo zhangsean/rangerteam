@@ -18,7 +18,10 @@
       <div class='form-group'><label for='fromAddress' class='col-sm-12'><?php echo $lang->mail->inputFromEmail; ?></label></div>
       <div class='form-group'>
         <div class='col-xs-10 col-sm-6 col-md-3'><?php echo html::input('fromAddress', $fromAddress, "class='form-control'"); ?></div>
-        <div class='col-xs-2 col-sm-6 col-md-3'><?php echo html::submitButton($lang->mail->nextStep); ?></div>
+        <div class='col-xs-2 col-sm-6 col-md-3'>
+          <?php echo html::submitButton($lang->mail->nextStep); ?>
+          &nbsp;&nbsp;<i class='icon-question-sign' data-toggle='tooltip' data-original-title='<?php echo $lang->mail->openTip?>'></i>
+        </div>
       </div>
     </form>
   </div>
