@@ -104,3 +104,26 @@ $config->rights->member['file']['delete']         = 'delete';
 $config->rights->member['file']['ajaxpasteimage'] = 'ajaxpasteimage';
 $config->rights->member['file']['filemanager']    = 'filemanager';
 $config->rights->member['file']['sort']           = 'sort';
+
+$config->rights->member['attend']['personal'] = 'personal';
+$config->rights->member['attend']['edit']     = 'edit';
+
+$config->rights->member['holiday']['browse']  = 'browse';
+
+$config->rights->member['leave']['personal']     = 'personal';
+$config->rights->member['leave']['create']       = 'create';
+$config->rights->member['leave']['edit']         = 'edit';
+$config->rights->member['leave']['delete']       = 'delete';
+$config->rights->member['leave']['switchstatus'] = 'switchstatus';
+
+$config->rights->member['trip']['personal'] = 'personal';
+$config->rights->member['trip']['create']   = 'create';
+$config->rights->member['trip']['edit']     = 'edit';
+$config->rights->member['trip']['delete']   = 'delete';
+
+$config->rights->member['refund']['personal']     = 'personal';
+$config->rights->member['refund']['create']       = 'create';
+$config->rights->member['refund']['edit']         = 'edit';
+$config->rights->member['refund']['delete']       = 'delete';
+$config->rights->member['refund']['view']         = 'view';
+$config->rights->member['refund']['switchstatus'] = 'switchstatus';

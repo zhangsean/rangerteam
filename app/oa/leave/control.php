@@ -230,6 +230,7 @@ class leave extends control
     {
         $leave = $this->leave->getByID($leaveID);
         if(!$leave) return false;
+        if($leave->createdBy != $this->app->user->account) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
 
         $dates = range(strtotime($leave->begin), strtotime($leave->end), 60*60*24);
 

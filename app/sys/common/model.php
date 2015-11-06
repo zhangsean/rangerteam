@@ -134,7 +134,7 @@ class commonModel extends model
             if($app->user->admin != 'super') return false;
         }
 
-        $rights  = $app->user->rights;
+        $rights = $app->user->rights;
         /* Check app priv. */
         if(!commonModel::hasAppPriv()) return false;
         if(isset($rights[strtolower($module)][strtolower($method)])) return true;
@@ -227,7 +227,7 @@ class commonModel extends model
         if($module == 'block') return true;
         if($module == 'error') return true;
         if($module == 'sso'  and strpos(',auth|check', $method)) return true;
-        if($module == 'attend'  and strpos(',signin|signout', $method)) return true;
+        if($module == 'attend' and strpos(',signin|signout', $method)) return true;
         if($module == 'refund' and $method == 'createtrade') return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;
