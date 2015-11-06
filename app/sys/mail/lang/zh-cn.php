@@ -50,3 +50,8 @@ $lang->mail->subject        = '测试邮件';
 $lang->mail->content        = '邮箱设置成功';
 $lang->mail->successSended  = '成功发送！';
 $lang->mail->needConfigure  = '无法找到邮件配置信息，请先配置邮件发送参数。';
+
+$lang->mail->mailContentTip = <<<EOT
+<strong>%s</strong>(%s)由<a href='https://www.ranzhico.com' target='blank'>然之协同管理系统</a>搭建。<br />
+<a href='http://www.cnezsoft.com' target='blank'>易软天创</a>为天下企业提供专业的管理工具。
+EOT;

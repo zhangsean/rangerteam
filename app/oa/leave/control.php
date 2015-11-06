@@ -138,6 +138,10 @@ class leave extends control
 
         $this->leave->review($id, $status);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+        $actionID = $this->loadModel('action')->create('leave', $id, 'reviewed', '', $status);
+        $this->sendmail($id, $actionID);
+
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 
@@ -217,6 +221,42 @@ class leave extends control
         $this->leave->delete($id);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
+    }
+
+    /**
+     * Send email.
+     * 
+     * @param  int    $leaveID 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function sendmail($leaveID, $actionID)
+    {
+        /* Reset $this->output. */
+        $this->clear();
+
+        /* Set toList and ccList. */
+        $leave  = $this->leave->getById($leaveID);
+        $users  = $this->loadModel('user')->getPairs('noletter');
+        $toList = $leave->createdBy;
+
+        /* Get action info. */
+        $action          = $this->loadModel('action')->getById($actionID);
+        $history         = $this->action->getHistory($actionID);
+        $action->history = isset($history[$actionID]) ? $history[$actionID] : array();
+
+        /* Create the email content. */
+        $this->view->leave  = $leave;
+        $this->view->action = $action;
+        $this->view->users  = $users;
+
+        $mailContent = $this->parse($this->moduleName, 'sendmail');
+
+        /* Send emails. */
+        $subject = "{$this->lang->leave->common}{$this->lang->leave->statusList[$leave->status]}#{$leave->id}{$this->lang->colon}{$leave->begin}~{$leave->end}";
+        $this->loadModel('mail')->send($toList, $subject, $mailContent);
+        if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
 
     /**

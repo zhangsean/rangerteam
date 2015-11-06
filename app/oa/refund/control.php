@@ -281,6 +281,11 @@ class refund extends control
             $result = $this->refund->review($refundID);
             if(is_array($result)) $this->send($result);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            
+            /* send email. */
+            $actionID = $this->loadModel('action')->create('refund', $refundID, 'reviewed', '', '');
+            $this->sendmail($refundID, $actionID);
+
             $isDetail = ($refund->parent != 0) ? true : false;
             $this->send(array('result' => 'success', 'isDetail' => $isDetail, 'message' => $this->lang->saveSuccess, 'locate' => inlink('browsereview')));
         }
@@ -303,6 +308,11 @@ class refund extends control
     {
         $this->refund->reimburse($refundID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            
+        /* send email. */
+        $actionID = $this->loadModel('action')->create('refund', $refundID, 'reimburse', '', '');
+        $this->sendmail($refundID, $actionID);
+
         $this->send(array('result' => 'success', 'refundID' => $refundID));
     }
 
@@ -386,6 +396,44 @@ class refund extends control
         $this->view->expenseList      = $expenseList;
         $this->view->refundCategories = $refundCategories;
         $this->display();
+    }
+
+    /**
+     * Send email.
+     * 
+     * @param  int    $refundID 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function sendmail($refundID, $actionID)
+    {
+        /* Reset $this->output. */
+        $this->clear();
+
+        /* Set toList and ccList. */
+        $refund = $this->refund->getById($refundID);
+        $users  = $this->loadModel('user')->getPairs('noletter');
+        $toList = "{$refund->createdBy},{$refund->firstReviewer},{$refund->secondReviewer}";
+
+        /* Get action info. */
+        $action          = $this->loadModel('action')->getById($actionID);
+        $history         = $this->action->getHistory($actionID);
+        $action->history = isset($history[$actionID]) ? $history[$actionID] : array();
+
+        /* Create the email content. */
+        $this->view->refund     = $refund;
+        $this->view->action     = $action;
+        $this->view->users      = $users;
+        $this->view->categories = $this->refund->getCategoryPairs();
+
+        $this->loadModel('mail');
+        $mailContent = $this->parse($this->moduleName, 'sendmail');
+
+        /* Send emails. */
+        $subject = "{$this->lang->refund->common}{$this->lang->refund->review}#{$refund->id}{$this->lang->colon}{$refund->name} " . zget($users, $refund->createdBy);
+        $this->loadModel('mail')->send($toList, $subject, $mailContent);
+        if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
 
     /**

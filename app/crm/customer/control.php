@@ -190,7 +190,11 @@ class customer extends control
             $this->customer->assign($customerID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            if($this->post->assignedTo) $this->loadModel('action')->create('customer', $customerID, 'Assigned', $this->post->comment, $this->post->assignedTo);
+            if($this->post->assignedTo) 
+            {
+                $actionID = $this->loadModel('action')->create('customer', $customerID, 'Assigned', $this->post->comment, $this->post->assignedTo);
+                $this->sendmail($customerID, $actionID);
+            }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
@@ -373,6 +377,41 @@ class customer extends control
         }
 
         $this->display();
+    }
+
+    /**
+     * Send email.
+     * 
+     * @param  int    $customerID 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function sendmail($customerID, $actionID)
+    {
+        /* Reset $this->output. */
+        $this->clear();
+
+        /* Set toList and ccList. */
+        $customer = $this->customer->getById($customerID);
+        $users    = $this->loadModel('user')->getPairs('noletter');
+        $toList   = $customer->assignedTo;
+
+        /* Get action info. */
+        $action          = $this->loadModel('action')->getById($actionID);
+        $history         = $this->action->getHistory($actionID);
+        $action->history = isset($history[$actionID]) ? $history[$actionID] : array();
+
+        /* Create the email content. */
+        $this->view->customer = $customer;
+        $this->view->action   = $action;
+        $this->view->users    = $users;
+
+        $mailContent = $this->parse($this->moduleName, 'sendmail');
+
+        /* Send emails. */
+        $this->loadModel('mail')->send($toList, 'CUSTOMER#' . $customer->id . $this->lang->colon . $customer->name, $mailContent);
+        if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
 
     /**
