@@ -469,7 +469,8 @@ class trade extends control
         $flipDeptList  = array_flip($deptList);
 
         $dataList = array();
-        foreach($rows as $row)
+        $existTrades = array(); 
+        foreach($rows as $key => $row)
         {
             /* Exclude invalid column. */
             if(is_array($fields['money']))
@@ -548,6 +549,9 @@ class trade extends control
                 $data['desc']  = '';
                 $dataList[]    = $data;
             }
+
+            $existTrade = $this->dao->select('*')->from(TABLE_TRADE)->where('money')->eq($data['money'])->andWhere('date')->eq($data['date'])->fetch();
+            if($existTrade) $existTrades[$key] = $existTrade;
         }
 
         $this->view->title        = $this->lang->trade->showImport;
@@ -559,6 +563,7 @@ class trade extends control
         $this->view->expenseTypes = $expenseTypes;
         $this->view->incomeTypes  = $incomeTypes;
         $this->view->deptList     = $this->tree->getOptionMenu('dept', 0, $removeRoot = true);
+        $this->view->existTrades  = $existTrades;
 
         $this->display();
     }

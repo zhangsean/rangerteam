@@ -26,7 +26,11 @@
           <th class='w-100px'><?php echo $lang->trade->money;?></th>
           <th class='w-80px'><?php echo $lang->trade->dept;?></th>
           <th class='w-170px'><?php echo $lang->trade->handlers;?></th>
+          <?php if(!empty($existTrades)):?>
+          <th class='w-200px'><?php echo $lang->trade->date;?></th>
+          <?php else:?>
           <th class='w-110px'><?php echo $lang->trade->date;?></th>
+          <?php endif;?>
           <th><?php echo $lang->trade->desc;?></th>
         </tr>
       </thead>
@@ -86,7 +90,22 @@
           <td><?php echo html::input("money[$i]", $trade['money'], "class='form-control'");?></td>
           <td><?php echo html::select("dept[$i]", $deptList, $trade['dept'], "class='form-control chosen'");?></td>
           <td><?php echo html::select("handlers[$i][]", $users, $this->app->user->account, "class='form-control chosen' id='handlers{$i}' multiple");?></td>
-          <td><?php echo html::input("date[$i]", $trade['date'], "class='form-control form-date' id='date{$i}'");?></td>
+          <td>
+            <?php if(!empty($existTrades[$i])):?>
+            <div class='input-group'>
+              <?php echo html::input("date[$i]", $trade['date'], "class='form-control form-date' id='date{$i}'");?>
+              <div class='input-group-addon'>
+                <label class="checkbox">
+                  <input type="checkbox" name="ignoreUnique[<?php echo $i;?>]" value="1">
+                  <?php echo $lang->trade->ignore;?>
+                  <i class='red icon-question' title="<?php echo $lang->trade->unique;?>"></i>
+                </label>
+              </div>
+            </div>
+            <?php else:?>
+            <?php echo html::input("date[$i]", $trade['date'], "class='form-control form-date' id='date{$i}'");?>
+            <?php endif;?>
+          </td>
           <td><?php echo html::textarea("desc[$i]", $trade['desc'], "rows='1' class='form-control'");?></td>
         </tr>
         <?php endforeach;?>

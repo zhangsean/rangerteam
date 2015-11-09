@@ -442,6 +442,7 @@ class tradeModel extends model
         {
             if(empty($type)) break;
             if(!$this->post->money[$key]) continue;
+            if(isset($this->post->ignoreUnique[$key]) and $this->post->ignoreUnique[$key]) continue;
 
             $category = $this->post->category[$key] == 'ditto' ? $category : $this->post->category[$key];
             $dept     = $this->post->dept[$key]     == 'ditto' ? $dept : $this->post->dept[$key];
