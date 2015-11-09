@@ -3,7 +3,7 @@
  * The doc module english file of RanZhi.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc
  * @version     $Id: en.php 824 2010-05-02 15:32:06Z wwccss $

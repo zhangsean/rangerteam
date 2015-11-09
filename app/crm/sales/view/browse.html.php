@@ -3,7 +3,7 @@
  * The browse view file of sales module of RanZhi.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      chujilu <chujilu@cnezsoft.com>
  * @package     sales
  * @version     $Id: browse.html.php 4769 2013-05-05 07:24:21Z wwccss $

@@ -3,7 +3,7 @@
  * The English file of common module of RanZhi.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common 
  * @version     $Id$
@@ -34,7 +34,7 @@ $lang->apps->team = 'TEAM';
 
 /* Lang items for ranzhi. */
 $lang->ranzhi    = 'ranzhi';
-$lang->agreement = "I Agree to the <a href='http://zpl.pub/page/zplv11.html' target='_blank'>Z PUBLIC LICENSE 1.1</a>, <span class='text-danger'>and promise to keep the logo, link of RanZhi.</span>";
+$lang->agreement = "I Agree to the <a href='http://zpl.pub/page/zplv11.html' target='_blank'>Z PUBLIC LICENSE 1.2</a>, <span class='text-danger'>and promise to keep the logo, link of RanZhi.</span>";
 $lang->poweredBy = "<a href='http://www.ranzhi.org/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
 
 /* IE6 alert.  */
