@@ -38,3 +38,38 @@ ranzhi:
 	#find ranzhi/ -name ext |xargs chmod -R 777
 	# zip it.
 	zip -rm -9 ranzhi.$(VERSION).zip ranzhi
+deb:
+	mkdir buildroot
+	cp -r build/debian/DEBIAN buildroot
+	sed -i '/^Version/cVersion: ${VERSION}' buildroot/DEBIAN/control
+	mkdir buildroot/opt
+	mkdir buildroot/etc/apache2/sites-enabled/ -p
+	cp build/debian/ranzhi.conf buildroot/etc/apache2/sites-enabled/
+	cp ranzhi.${VERSION}.zip buildroot/opt
+	cd buildroot/opt; unzip ranzhi.${VERSION}.zip; rm ranzhi.${VERSION}.zip
+	sed -i 's/index.php/\/ranzhi\/sys\/index.php/' buildroot/opt/ranzhi/www/sys/.htaccess
+	sed -i 's/index.php/\/ranzhi\/crm\/index.php/' buildroot/opt/ranzhi/www/crm/.htaccess
+	sed -i 's/index.php/\/ranzhi\/cash\/index.php/' buildroot/opt/ranzhi/www/cash/.htaccess
+	sed -i 's/index.php/\/ranzhi\/oa\/index.php/' buildroot/opt/ranzhi/www/oa/.htaccess
+	sed -i 's/index.php/\/ranzhi\/team\/index.php/' buildroot/opt/ranzhi/www/team/.htaccess
+	sudo dpkg -b buildroot/ ranzhi_${VERSION}_1_all.deb
+	rm -rf buildroot
+rpm:
+	mkdir ~/rpmbuild/SPECS -p
+	cp build/rpm/ranzhi.spec ~/rpmbuild/SPECS
+	sed -i '/^Version/cVersion:${VERSION}' ~/rpmbuild/SPECS/ranzhi.spec
+	mkdir ~/rpmbuild/SOURCES
+	cp ranzhi.${VERSION}.zip ~/rpmbuild/SOURCES
+	mkdir ~/rpmbuild/SOURCES/etc/httpd/conf.d/ -p
+	cp build/debian/ranzhi.conf ~/rpmbuild/SOURCES/etc/httpd/conf.d/
+	mkdir ~/rpmbuild/SOURCES/opt/ -p
+	cd ~/rpmbuild/SOURCES; unzip ranzhi.${VERSION}.zip; mv ranzhi opt/ranzhi;
+	sed -i 's/index.php/\/ranzhi\/sys\/index.php/' buildroot/opt/ranzhi/www/sys/.htaccess
+	sed -i 's/index.php/\/ranzhi\/crm\/index.php/' buildroot/opt/ranzhi/www/crm/.htaccess
+	sed -i 's/index.php/\/ranzhi\/cash\/index.php/' buildroot/opt/ranzhi/www/cash/.htaccess
+	sed -i 's/index.php/\/ranzhi\/oa\/index.php/' buildroot/opt/ranzhi/www/oa/.htaccess
+	sed -i 's/index.php/\/ranzhi\/team\/index.php/' buildroot/opt/ranzhi/www/team/.htaccess
+	cd ~/rpmbuild/SOURCES; tar -czvf ranzhi-${VERSION}.tar.gz etc opt; rm -rf ranzhi.${VERSION}.zip etc opt;
+	rpmbuild -ba ~/rpmbuild/SPECS/ranzhi.spec
+	cp ~/rpmbuild/RPMS/noarch/ranzhi-${VERSION}-1.noarch.rpm ./
+	rm -rf ~/rpmbuild

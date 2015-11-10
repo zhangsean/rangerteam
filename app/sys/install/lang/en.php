@@ -20,7 +20,7 @@ $lang->install->start            = 'Start install';
 $lang->install->keepInstalling   = 'Keep install this version';
 $lang->install->seeLatestRelease = 'See the latest release.';
 $lang->install->welcome          = 'Welcome to use RanZhi.';
-$lang->install->license          = 'RanZhi use license of Z PUBLIC LICENSE(ZPL) 1.1. ';
+$lang->install->license          = 'RanZhi use license of Z PUBLIC LICENSE(ZPL) 1.2. ';
 $lang->install->desc             = <<<EOT
 <blockquote>
   <strong>{$lang->ranzhi}</strong>Developed by<strong><a href='http://www.cnezsoft.com' target='_blank' class='red'>QingDao Nature Easy Soft Network Technology Co,LTD</a></strong>，
