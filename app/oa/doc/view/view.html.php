@@ -16,7 +16,7 @@
 <div class='col-md-8'>
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $lang->doc->view;?></strong></div>
-    <div class='panel-body'>
+    <div class='panel-body doc-content'>
       <table class='table table-form table-data'>
         <tr>
           <th class='w-70px'><?php echo $lang->doc->title;?></th>
@@ -40,7 +40,10 @@
         <?php if($doc->type == 'text'):?>
         <tr>
           <th class='text-top'><?php echo $lang->doc->content;?></th>
-          <td class='content'><?php echo $doc->content;?></td>
+          <td class='content'></td>
+        </tr>
+        <tr>
+          <td colspan='2' class='content'><?php echo $doc->content;?></td>
         </tr>
         <?php endif;?>
         <?php if($doc->type == 'file'):?>
