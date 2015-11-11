@@ -16,6 +16,8 @@ $config->rights->guest = array();
 
 $config->rights->member['index']['index']           = 'index';
 $config->rights->member['dashboard']['index']       = 'index';
+$config->rights->member['dashboard']['todo']        = 'todo';
+$config->rights->member['dashboard']['task']        = 'task';
 $config->rights->member['entry']['visit']           = 'visit';
 $config->rights->member['entry']['blocks']          = 'blocks';
 $config->rights->member['entry']['setblock']        = 'setblock';

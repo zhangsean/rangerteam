@@ -81,7 +81,7 @@ class dashboard extends control
     }
 
     /**
-     * Browse assignedTo and this month todos. 
+     * Browse not finished todos owner by user. 
      * 
      * @param  string $orderBy 
      * @param  int    $recTotal 
@@ -90,7 +90,7 @@ class dashboard extends control
      * @access public
      * @return void
      */
-    public function todo($orderBy = 'status', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function todo($orderBy = 'date', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->loadModel('todo');
         $this->app->loadClass('date');
@@ -100,12 +100,9 @@ class dashboard extends control
         $account = $this->app->user->account;
         $todos   = array();
 
-        extract(date::getThisMonth());
         $stmt = $this->dao->select('*')->from(TABLE_TODO)
-            ->where('1=1')
+            ->where('status')->ne('done')
             ->andWhere()->markLeft(1)->where('assignedTo')->eq($account)->orWhere()->markLeft(1)->where('account')->eq($account)->andWhere('assignedTo')->eq('')->markRight(2)
-            ->andWhere("date >= '$begin'")
-            ->andWhere("date <= '$end'")
             ->orderBy($orderBy)
             ->page($pager)
             ->query();
