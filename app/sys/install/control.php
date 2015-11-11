@@ -59,15 +59,17 @@ class install extends control
     public function step1()
     {
         $this->view->title  = $this->lang->install->checking;
-        $this->view->phpVersion     = $this->install->getPhpVersion();
-        $this->view->phpResult      = $this->install->checkPHP();
-        $this->view->pdoResult      = $this->install->checkPDO();
-        $this->view->pdoMySQLResult = $this->install->checkPDOMySQL();
-        $this->view->tmpRootInfo    = $this->install->getTmpRoot();
-        $this->view->tmpRootResult  = $this->install->checkTmpRoot();
-        $this->view->dataRootInfo   = $this->install->getDataRoot();
-        $this->view->dataRootResult = $this->install->checkDataRoot();
-        $this->view->iniInfo        = $this->install->getIniInfo();
+        $this->view->phpVersion      = $this->install->getPhpVersion();
+        $this->view->phpResult       = $this->install->checkPHP();
+        $this->view->pdoResult       = $this->install->checkPDO();
+        $this->view->pdoMySQLResult  = $this->install->checkPDOMySQL();
+        $this->view->tmpRootInfo     = $this->install->getTmpRoot();
+        $this->view->tmpRootResult   = $this->install->checkTmpRoot();
+        $this->view->dataRootInfo    = $this->install->getDataRoot();
+        $this->view->dataRootResult  = $this->install->checkDataRoot();
+        $this->view->iniInfo         = $this->install->getIniInfo();
+        $this->view->sessionRoot     = session_save_path();
+        $this->view->sessionRootResult = $this->install->checkSessionRoot();
         $this->display();
     }
 

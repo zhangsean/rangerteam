@@ -58,8 +58,10 @@ $lang->install->pdoMySQL     = 'PDO_MySQL extension';
 $lang->install->pdoMySQLFail = 'Edit the php.ini file to load PDO_MySQL extsion.';
 $lang->install->tmpRoot      = 'Temp directory';
 $lang->install->dataRoot     = 'Upload directory.';
+$lang->install->sessionRoot  = 'session directory';
 $lang->install->mkdir        = '<p>Should creat the directory %s。<br /> Under linux, can try<br /> mkdir -p %s</p>';
 $lang->install->chmod        = 'Should change the permission of "%s".<br />Under linux, can try<br />chmod o=rwx -R %s';
+$lang->install->sessionChmod = 'Should change the permission of "%s".<br />Under linux, can try<br />sudo chmod o=wtx %s';
 
 $lang->install->settingDB    = 'Set database';
 $lang->install->dbHost     = 'Database host';

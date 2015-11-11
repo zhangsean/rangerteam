@@ -84,6 +84,18 @@ class installModel extends model
     }
 
     /**
+     * Check the session root.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function checkSessionRoot()
+    {
+        $sessionRoot = session_save_path();
+        return $result = is_writable($sessionRoot) ? 'ok' : 'fail';
+    }
+
+    /**
      * Get the data root.
      * 
      * @access public
