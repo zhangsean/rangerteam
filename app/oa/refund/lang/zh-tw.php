@@ -15,6 +15,8 @@ $lang->refund->detail       = '明細';
 $lang->refund->settings     = '設置';
 $lang->refund->setCategory  = '報銷科目設置';
 $lang->refund->reimburse    = '報銷記賬';
+$lang->refund->cancel       = '撤銷';
+$lang->refund->commit       = '提交';
 
 $lang->refund->id               = '編號';
 $lang->refund->name             = '名稱';
@@ -24,6 +26,7 @@ $lang->refund->money            = '金額';
 $lang->refund->reviewMoney      = '審批金額';
 $lang->refund->currency         = '貨幣';
 $lang->refund->desc             = '描述';
+$lang->refund->files            = '附件';
 $lang->refund->status           = '狀態';
 $lang->refund->createdBy        = '申請人';
 $lang->refund->createdDate      = '申請日期';
@@ -40,6 +43,7 @@ $lang->refund->reason           = '理由';
 $lang->refund->reviewer         = '審批人';
 $lang->refund->related          = '參與人';
 
+$lang->refund->statusList['draft']  = '草稿';
 $lang->refund->statusList['wait']   = '等待審批';
 $lang->refund->statusList['doing']  = '審批中';
 $lang->refund->statusList['pass']   = '審批通過';

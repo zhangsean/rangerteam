@@ -28,6 +28,7 @@ $lang->todo->import       = "導入";
 $lang->todo->changeStatus = "更改";
 $lang->todo->legendBasic  = "基本信息";
 $lang->todo->calendar     = "日曆";
+$lang->todo->assignTo     = "指派";
 
 $lang->todo->id          = '編號';
 $lang->todo->account     = '所有者';
@@ -43,7 +44,9 @@ $lang->todo->name        = '名稱';
 $lang->todo->status      = '狀態';
 $lang->todo->desc        = '描述';
 $lang->todo->private     = '私人事務';
-$lang->todo->idvalue     = '任務或Bug';
+$lang->todo->idvalue     = '任務或訂單';
+$lang->todo->assignedTo  = '指派給';
+$lang->todo->assignedBy  = '由誰指派';
 
 $lang->todo->confirmTip = '該Todo關聯的是%s #%s，需要修改它嗎？';
 

@@ -148,6 +148,8 @@ $lang->trade->total         = '總計';
 $lang->trade->annualCaption = '年度收支表';
 
 $lang->trade->noTraderMatch = '沒有匹配到相應的商戶，點擊新建';
+$lang->trade->unique        = '今天已經有相同金額的賬目，點擊忽略';
+$lang->trade->ignore        = '忽略';
 
 $lang->trade->chartList['category'] = '按科目統計';
 $lang->trade->chartList['dept']     = '按部門統計';

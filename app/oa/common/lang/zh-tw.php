@@ -24,6 +24,10 @@ $lang->menu->oa->trip      = '出差|trip|personal|';
 $lang->menu->oa->refund    = '報銷|refund|personal|';
 
 $lang->dashboard = new stdclass();
+$lang->dashboard->menu = new stdclass();
+$lang->dashboard->menu->index = '首頁|dashboard|index|';
+$lang->dashboard->menu->todo  = '待辦|dashboard|todo|';
+$lang->dashboard->menu->task  = '任務|dashboard|task|';
 
 $lang->todo = new stdclass();
 $lang->todo->menu = new stdclass();

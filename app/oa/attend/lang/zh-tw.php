@@ -33,32 +33,35 @@ $lang->attend->reviewStatus = '補錄狀態';
 $lang->attend->reviewedBy   = '審核人';
 $lang->attend->reviewedDate = '審核時間';
 
-$lang->attend->statusList['normal'] = '正常';
-$lang->attend->statusList['late']   = '遲到';
-$lang->attend->statusList['early']  = '早退';
-$lang->attend->statusList['both']   = '遲到+早退';
-$lang->attend->statusList['absent'] = '曠工';
-$lang->attend->statusList['leave']  = '請假';
-$lang->attend->statusList['trip']   = '出差';
-$lang->attend->statusList['rest']   = '休息日';
+$lang->attend->statusList['normal']   = '正常';
+$lang->attend->statusList['late']     = '遲到';
+$lang->attend->statusList['early']    = '早退';
+$lang->attend->statusList['both']     = '遲到+早退';
+$lang->attend->statusList['absent']   = '曠工';
+$lang->attend->statusList['leave']    = '請假';
+$lang->attend->statusList['trip']     = '出差';
+$lang->attend->statusList['rest']     = '休息日';
+$lang->attend->statusList['overtime'] = '加班';
 
-$lang->attend->abbrStatusList['normal'] = '√';
-$lang->attend->abbrStatusList['late']   = '遲';
-$lang->attend->abbrStatusList['early']  = '早';
-$lang->attend->abbrStatusList['both']   = '遲+早';
-$lang->attend->abbrStatusList['absent'] = '曠';
-$lang->attend->abbrStatusList['leave']  = '假';
-$lang->attend->abbrStatusList['trip']   = '差';
-$lang->attend->abbrStatusList['rest']   = '休';
+$lang->attend->abbrStatusList['normal']   = '√';
+$lang->attend->abbrStatusList['late']     = '遲';
+$lang->attend->abbrStatusList['early']    = '早';
+$lang->attend->abbrStatusList['both']     = '遲+早';
+$lang->attend->abbrStatusList['absent']   = '曠';
+$lang->attend->abbrStatusList['leave']    = '假';
+$lang->attend->abbrStatusList['trip']     = '差';
+$lang->attend->abbrStatusList['rest']     = '休';
+$lang->attend->abbrStatusList['overtime'] = '加';
 
-$lang->attend->markStatusList['normal'] = '√';
-$lang->attend->markStatusList['late']   = '=';
-$lang->attend->markStatusList['early']  = '>';
-$lang->attend->markStatusList['both']   = '=>';
-$lang->attend->markStatusList['absent'] = 'x';
-$lang->attend->markStatusList['leave']  = '!';
-$lang->attend->markStatusList['trip']   = '$';
-$lang->attend->markStatusList['rest']   = '~';
+$lang->attend->markStatusList['normal']   = '√';
+$lang->attend->markStatusList['late']     = '=';
+$lang->attend->markStatusList['early']    = '>';
+$lang->attend->markStatusList['both']     = '=>';
+$lang->attend->markStatusList['absent']   = 'x';
+$lang->attend->markStatusList['leave']    = '!';
+$lang->attend->markStatusList['trip']     = '$';
+$lang->attend->markStatusList['rest']     = '~';
+$lang->attend->markStatusList['overtime'] = '+';
 
 $lang->attend->reasonList['normal'] = '準點上下班';
 $lang->attend->reasonList['trip']   = '出差';
@@ -88,8 +91,8 @@ $lang->attend->mustSignOutList['no']  = '不需要';
 
 $lang->attend->weeks = array('第一周', '第二周', '第三周', '第四周', '第五周', '第六周');
 
-$lang->attend->notice['today']    = "您今天的考勤狀態為：%s。<a href='%s' %s>去補錄</a>";
-$lang->attend->notice['yestoday'] = "您昨天的考勤狀態為：%s。<a href='%s' %s>去補錄</a>";
+$lang->attend->notice['today']    = "<p>您今天的考勤狀態為：%s，<a href='%s' %s>去補錄</a>。</p>";
+$lang->attend->notice['yestoday'] = "<p>您昨天的考勤狀態為：%s，<a href='%s' %s>去補錄</a>。</p>";
 $lang->attend->notice['absent']   = "沒有記錄";
 
 $lang->attend->confirmReview['pass']   = '您確定要執行通過操作嗎？';

@@ -1,4 +1,5 @@
 <?php
+if(!isset($lang->sales)) $lang->sales = new stdclass();
 $lang->sales->common = '銷售分組';
 $lang->sales->browse = '分組列表';
 $lang->sales->create = '添加分組';

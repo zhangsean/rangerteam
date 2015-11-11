@@ -6,7 +6,7 @@
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id: zh-tw.php 2960 2015-09-28 02:04:46Z chujilu $
+ * @version     $Id: zh-tw.php 3144 2015-11-11 03:36:34Z chujilu $
  * @link        http://www.ranzhico.com
  */
 $lang->entry->common    = '應用';
@@ -50,6 +50,9 @@ $lang->entry->zentaoURL          = '禪道登錄地址';
 $lang->entry->zentaoAdmin   = '禪道管理員';
 $lang->entry->adminAccount  = '管理員賬號';
 $lang->entry->adminPassword = '管理員密碼';
+$lang->entry->bindUser      = '綁定用戶';
+$lang->entry->nextStep      = '下一步';
+$lang->entry->createUser    = '新建';
 
 $lang->entry->confirmDelete = '您確定刪除該應用嗎？';
 $lang->entry->lblBlock      = '區塊';
@@ -78,7 +81,6 @@ $lang->entry->error->admin         = '管理員用戶名或密碼錯誤';
 $lang->entry->error->zentaoSetting = '禪道系統設置失敗，您的禪道系統版本低於7.3或沒有安裝然之整合插件';
 $lang->entry->error->zentaoUrl     = '禪道登錄地址錯誤';
 
-$lang->entry->openList['']       = '';
 $lang->entry->openList['blank']  = '新開標籤';
 $lang->entry->openList['iframe'] = '內嵌窗口';
 

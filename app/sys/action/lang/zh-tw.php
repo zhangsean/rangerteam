@@ -178,6 +178,7 @@ $lang->action->record->contact  = '聯繫人';
 $lang->action->record->actor    = '操作人';
 $lang->action->record->comment  = '溝通內容';
 $lang->action->record->date     = '時間';
+$lang->action->record->file     = '附件';
 $lang->action->record->nextDate = '下次聯繫';
 
 $lang->action->objectTypes['order']    = '訂單';
@@ -190,3 +191,5 @@ $lang->action->objectTypes['contract'] = '合同';
 $lang->action->objectTypes['project']  = '項目';
 $lang->action->objectTypes['user']     = '用戶';
 $lang->action->objectTypes['resume']   = '履歷';
+$lang->action->objectTypes['leave']    = '請假';
+$lang->action->objectTypes['refund']   = '報銷';

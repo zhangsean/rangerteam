@@ -34,7 +34,7 @@ $lang->apps->team = '團隊';
 
 /* Lang items for ranzhi. */
 $lang->ranzhi    = '然之協同';
-$lang->agreement = "已閲讀並同意<a href='http://zpl.pub/page/zplv11.html' target='_blank'>《Z PUBLIC LICENSE授權協議1.1》</a>。<span class='text-danger'>未經許可，不得去除、隱藏或遮掩然之系統的任何標誌及連結。</span>";
+$lang->agreement = "已閲讀並同意<a href='http://zpl.pub/page/zplv11.html' target='_blank'>《Z PUBLIC LICENSE授權協議1.2》</a>。<span class='text-danger'>未經許可，不得去除、隱藏或遮掩然之系統的任何標誌及連結。</span>";
 $lang->poweredBy = "<span id='poweredBy'><a href='http://www.ranzhi.org/?v=%s' target='_blank'>{$lang->ranzhi}%s</a></span>";
 
 /* IE6 alert.  */

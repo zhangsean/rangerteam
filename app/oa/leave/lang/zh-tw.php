@@ -6,6 +6,8 @@ $lang->leave->create = '請假';
 $lang->leave->edit   = '編輯';
 $lang->leave->delete = '刪除';
 $lang->leave->review = '審核';
+$lang->leave->cancel = '撤銷';
+$lang->leave->commit = '提交';
 
 $lang->leave->personal     = '我的請假';
 $lang->leave->browseReview = '審核列表';
@@ -33,6 +35,7 @@ $lang->leave->typeList['home']      = '探親假';
 $lang->leave->typeList['marry']     = '婚假';
 $lang->leave->typeList['maternity'] = '產假';
 
+$lang->leave->statusList['draft']  = '草稿';
 $lang->leave->statusList['wait']   = '等待審核';
 $lang->leave->statusList['pass']   = '通過';
 $lang->leave->statusList['reject'] = '拒絶';

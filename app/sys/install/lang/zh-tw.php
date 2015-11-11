@@ -20,7 +20,7 @@ $lang->install->start            = '開始安裝';
 $lang->install->keepInstalling   = '繼續安裝當前版本';
 $lang->install->seeLatestRelease = '看看最新的版本';
 $lang->install->welcome          = "您睿智地選擇了$lang->ranzhi!";
-$lang->install->license          = '然之協同使用 Z PUBLIC LICENSE(ZPL) 1.1 授權協議。';
+$lang->install->license          = '然之協同使用 Z PUBLIC LICENSE(ZPL) 1.2 授權協議。';
 $lang->install->desc             = <<<EOT
 <blockquote>
   <strong>{$lang->ranzhi}</strong>由<strong><a href='http://www.cnezsoft.com' target='_blank' class='red'>青島易軟天創網絡科技有限公司</a>開發</strong>，
@@ -58,8 +58,10 @@ $lang->install->pdoMySQL     = 'PDO_MySQL擴展';
 $lang->install->pdoMySQLFail = '修改PHP配置檔案，加載pdo_mysql擴展。';
 $lang->install->tmpRoot      = '臨時檔案目錄';
 $lang->install->dataRoot     = '上傳檔案目錄';
+$lang->install->sessionRoot  = 'session目錄';
 $lang->install->mkdir        = '<p>需要創建目錄%s。linux下面命令為：<br /> <code>mkdir -p %s</code></p>';
 $lang->install->chmod        = '需要修改目錄 "%s" 的權限。linux下面命令為：<br /><code>chmod o=rwx -R %s</code>';
+$lang->install->sessionChmod = '需要修改目錄 "%s" 的權限。linux下面命令為：<br /><code>sudo chmod o=wtx %s</code>';
 
 $lang->install->settingDB  = '設置資料庫';
 $lang->install->dbHost     = '資料庫伺服器';
