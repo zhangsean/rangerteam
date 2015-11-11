@@ -28,7 +28,7 @@
     <td> <?php echo html::a($this->createLink('oa.task', 'view', "taskID=$id"), $task->name);?></td>
     <td class='w-60px'><?php echo $lang->task->statusList[$task->status];?></td>
     <?php if(strpos('createdBy,assignedTo,finishedBy', $type) !== false):?>
-    <td class='w-50px'>
+    <td class='actions w-50px'>
       <div class='dropdown'>
         <a href='###' data-target='#' data-toggle='dropdown' role='button' id='dLabel'><?php echo $lang->actions;?><span class='caret'></span></a>
         <ul aria-labelledby='dropdownMenu1' role='menu' class='dropdown-menu'>
