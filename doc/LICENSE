@@ -1,132 +1,138 @@
 Z PUBLIC LICENSE 1.2
 
-Ğí¿É
+è®¸å¯
 
-Z PUBLIC LICENSE ÓÉÇàµºÒ×ÈíÌì´´ÍøÂç¿Æ¼¼ÓĞÏŞ¹«Ë¾£¨www.cnezsoft.com£©Æğ²İ£¬¼ò³ÆZPLĞ­Òé¡£
-ÈÎºÎÈË¾ù¿ÉÊ¹ÓÃ¸ÃĞ­ÒéÀ´·¢²¼¿ªÔ´Èí¼ş£¬²¢¿É¶ÔÏÂÃæĞ­ÒéÕıÎÄÖĞÒÔÏÂ»®Ïß±ê×¢µÄ¿Õ°×²¿·Ö×öÏàÓ¦ĞŞ¸Ä£¬
-³ı´ËÖ®ÍâµÄÈÎºÎÄÚÈİ²»µÃ×öÈÎºÎĞŞ¸Ä¡£ÇàµºÒ×ÈíÌì´´ÍøÂç¿Æ¼¼ÓĞÏŞ¹«Ë¾ÓµÓĞ¶Ô¸ÃĞ­ÒéÌõ¿îµÄ×îÖÕ½âÊÍÈ¨¡£
+Z PUBLIC LICENSE ç”±é’å²›æ˜“è½¯å¤©åˆ›ç½‘ç»œç§‘æŠ€æœ‰é™å…¬å¸ï¼ˆwww.cnezsoft.comï¼‰èµ·è‰ï¼Œç®€ç§°ZPLåè®®ã€‚
+ä»»ä½•äººå‡å¯ä½¿ç”¨è¯¥åè®®æ¥å‘å¸ƒå¼€æºè½¯ä»¶ï¼Œå¹¶å¯å¯¹ä¸‹é¢åè®®æ­£æ–‡ä¸­ä»¥ä¸‹åˆ’çº¿æ ‡æ³¨çš„ç©ºç™½éƒ¨åˆ†åšç›¸åº”ä¿®æ”¹ï¼Œ
+é™¤æ­¤ä¹‹å¤–çš„ä»»ä½•å†…å®¹ä¸å¾—åšä»»ä½•ä¿®æ”¹ã€‚é’å²›æ˜“è½¯å¤©åˆ›ç½‘ç»œç§‘æŠ€æœ‰é™å…¬å¸æ‹¥æœ‰å¯¹è¯¥åè®®æ¡æ¬¾çš„æœ€ç»ˆè§£é‡Šæƒã€‚
 
-Ç°ÑÔ£º
+å‰è¨€ï¼š
 
-___________£¨ÒÔÏÂ¼ò³Æ¸ÃÈí¼ş£©ÓÉ_____________¿ª·¢£¨ÒÔÏÂ¼ò³ÆÎÒ£©¡£ÎÒÒÀ·¨ÓµÓĞ¸ÃÈí¼şµÄËùÓĞ°æÈ¨¡£
-±¾×Å¹²Ïí¿ª·ÅµÄ½Ç¶È£¬ÎÒÒÔ¿ª·ÅÔ´´úÂëµÄĞÎÊ½·¢²¼¸ÃÈí¼ş¡£Äú¿ÉÒÔÔÚ×ñÊØ¸ÃĞ­ÒéµÄÇ°ÌáÏÂÊ¹ÓÃ¸ÃÈí¼ş¡£
-×ÔÄú°²×°¸ÃÈí¼ş¿ªÊ¼£¬ÄúºÍÎÒÖ®¼äµÄºÏÍ¬¹ØÏµ×Ô¶¯³ÉÁ¢¡£³ı·ÇÄúÍ£Ö¹Ê¹ÓÃ¸ÃÈí¼ş»òÓëÎÒÓĞÇ©Êğ¶îÍâºÏÍ¬£¬
-ÄúĞëÈÏÕæ×ñÑ­¸ÃÊÚÈ¨Ğ­ÒéÔ¼¶¨µÄÃ¿Ò»Ìõ¿î¡£
+ç„¶ä¹‹ååŒç®¡ç†è½¯ä»¶ï¼ˆä»¥ä¸‹ç®€ç§°è¯¥è½¯ä»¶ï¼‰ç”± é’å²›æ˜“è½¯å¤©åˆ›ç½‘ç»œç§‘æŠ€æœ‰é™å…¬å¸ï¼ˆwww.cnezsoft.comï¼‰å¼€å‘ï¼ˆä»¥ä¸‹ç®€ç§°æˆ‘ï¼‰ã€‚æˆ‘ä¾æ³•æ‹¥æœ‰è¯¥è½¯ä»¶çš„æ‰€æœ‰ç‰ˆæƒã€‚
+æœ¬ç€å…±äº«å¼€æ”¾çš„è§’åº¦ï¼Œæˆ‘ä»¥å¼€æ”¾æºä»£ç çš„å½¢å¼å‘å¸ƒè¯¥è½¯ä»¶ã€‚æ‚¨å¯ä»¥åœ¨éµå®ˆè¯¥åè®®çš„å‰æä¸‹ä½¿ç”¨è¯¥è½¯ä»¶ã€‚
+è‡ªæ‚¨å®‰è£…è¯¥è½¯ä»¶å¼€å§‹ï¼Œæ‚¨å’Œæˆ‘ä¹‹é—´çš„åˆåŒå…³ç³»è‡ªåŠ¨æˆç«‹ã€‚é™¤éæ‚¨åœæ­¢ä½¿ç”¨è¯¥è½¯ä»¶æˆ–ä¸æˆ‘æœ‰ç­¾ç½²é¢å¤–åˆåŒï¼Œ
+æ‚¨é¡»è®¤çœŸéµå¾ªè¯¥æˆæƒåè®®çº¦å®šçš„æ¯ä¸€æ¡æ¬¾ã€‚
 
-ÎÒµÄÁªÏµ·½Ê½£º___________________________________________________________________¡£
+æˆ‘çš„è”ç³»æ–¹å¼ï¼š
+è”ç³»äººï¼šå¾å…ˆç”Ÿ
+ç”µè¯ï¼š  4006-8899-23
+Emailï¼š co@cnezsoft.com
+QQï¼š    1492153927
+åœ°å€ï¼š  é’å²›å¼€å‘åŒºäº•å†ˆå±±è·¯ä¸œæ–¹é“¶åº§ Cåº§ 1106
 
-Ô¼¶¨:
+çº¦å®š:
 
-ÏÂÊöÌõ¿îÖĞËùÖ¸¸ÃÈí¼şµÄ±êÖ¾°üÀ¨ÈçÏÂ·½Ãæ£º
+ä¸‹è¿°æ¡æ¬¾ä¸­æ‰€æŒ‡è¯¥è½¯ä»¶çš„æ ‡å¿—åŒ…æ‹¬å¦‚ä¸‹æ–¹é¢ï¼š
 
-    ¸ÃÈí¼şÔ´´úÂë¼°ÎÄµµÖĞ¹ØÓÚ¸ÃÈí¼şµÄ°æÈ¨ÌáÊ¾¡¢ÎÄ×Ö¡¢Í¼Æ¬ºÍÁ´½Ó¡£
-    ¸ÃÈí¼şÔËĞĞÊ±½çÃæÉÏ³ÊÏÖ³öÀ´µÄÓĞ¹Ø¸ÃÈí¼şµÄÎÄ×Ö¡¢Í¼Æ¬ºÍÁ´½Ó¡£
-    _________________________________________________¡£
+    è¯¥è½¯ä»¶æºä»£ç åŠæ–‡æ¡£ä¸­å…³äºè¯¥è½¯ä»¶çš„ç‰ˆæƒæç¤ºã€æ–‡å­—ã€å›¾ç‰‡å’Œé“¾æ¥ã€‚
+    è¯¥è½¯ä»¶è¿è¡Œæ—¶ç•Œé¢ä¸Šå‘ˆç°å‡ºæ¥çš„æœ‰å…³è¯¥è½¯ä»¶çš„æ–‡å­—ã€å›¾ç‰‡å’Œé“¾æ¥ã€‚
 
-²»°üÀ¨ÈçÏÂ·½Ãæ£º
+ä¸åŒ…æ‹¬å¦‚ä¸‹æ–¹é¢ï¼š
 
-    ¸ÃÈí¼şÌá¹©µÄÑİÊ¾Êı¾İÖĞ¹ØÓÚ¸ÃÈí¼şµÄÎÄ×Ö¡¢Í¼Æ¬ºÍÁ´½Ó¡£
-    _________________________________________________¡£
+    è¯¥è½¯ä»¶æä¾›çš„æ¼”ç¤ºæ•°æ®ä¸­å…³äºè¯¥è½¯ä»¶çš„æ–‡å­—ã€å›¾ç‰‡å’Œé“¾æ¥ã€‚
 
-Ò»¡¢ÃâÔğ
+ä¸€ã€å…è´£
 
-¸ÃÈí¼şÊÇÒÔ¿ª·ÅÔ´´úÂëµÄ·½Ê½·¢ĞĞ£¬ÄúÊ¹ÓÃ¸ÃÈí¼şÎŞĞèÈÎºÎ·ÑÓÃ£¬Òò´ËÔÚÊ¹ÓÃ¸ÃÈí¼şÇ°£¬ÄúĞëÖªÏş£º
+è¯¥è½¯ä»¶æ˜¯ä»¥å¼€æ”¾æºä»£ç çš„æ–¹å¼å‘è¡Œï¼Œæ‚¨ä½¿ç”¨è¯¥è½¯ä»¶æ— éœ€ä»»ä½•è´¹ç”¨ï¼Œå› æ­¤åœ¨ä½¿ç”¨è¯¥è½¯ä»¶å‰ï¼Œæ‚¨é¡»çŸ¥æ™“ï¼š
 
-  1.1 ÎÒÃ»ÓĞ¶Ô¸ÃÈí¼şÌá¹©ÈÎºÎ¼¼ÊõÖ§³ÖµÄÒåÎñ£¬Äú¿ÉÁªÏµÎÒ¹ºÂòÉÌÒµµÄ¼¼ÊõÖ§³Ö¡£
-  1.2 ÎÒ¶ÔÒòÊ¹ÓÃ¸ÃÈí¼ş¶ø²úÉúÖ±½Ó»ò¼ä½ÓµÄÈÎºÎÎÊÌâ²»¸ºÈÎºÎÔğÈÎ¡£
-  1.3 ¿ªÔ´²»µÈÓÚÃâ·Ñ£¬¿ªÔ´²»µÈÓÚÎŞ°æÈ¨£¬¿ªÔ´Èí¼şµÄ·¢Õ¹ĞèÒªÄúÎÒ¹²Í¬µÄÅ¬Á¦¡£
+  1.1 æˆ‘æ²¡æœ‰å¯¹è¯¥è½¯ä»¶æä¾›ä»»ä½•æŠ€æœ¯æ”¯æŒçš„ä¹‰åŠ¡ï¼Œæ‚¨å¯è”ç³»æˆ‘è´­ä¹°å•†ä¸šçš„æŠ€æœ¯æ”¯æŒã€‚  
+  1.2 æˆ‘å¯¹å› ä½¿ç”¨è¯¥è½¯ä»¶è€Œäº§ç”Ÿç›´æ¥æˆ–é—´æ¥çš„ä»»ä½•é—®é¢˜ä¸è´Ÿä»»ä½•è´£ä»»ã€‚  
+  1.3 å¼€æºä¸ç­‰äºå…è´¹ï¼Œå¼€æºä¸ç­‰äºæ— ç‰ˆæƒï¼Œå¼€æºè½¯ä»¶çš„å‘å±•éœ€è¦æ‚¨æˆ‘å…±åŒçš„åŠªåŠ›ã€‚
 
-¶ş¡¢×ÔÓÃ¸ÃÈí¼ş
+äºŒã€è‡ªç”¨è¯¥è½¯ä»¶
 
-2.1 Äú¸öÈË»òÄú¾ÍÖ°µÄ¹«Ë¾£¨×éÖ¯£©¿É×ÔÓÉÊ¹ÓÃ¸ÃÈí¼ş£¬ÎÒ²»¶ÔÄú»òÄú¾ÍÖ°¹«Ë¾£¨×éÖ¯£©µÄĞÔÖÊ×öÈÎºÎÏŞÖÆ¡£
-2.2 Äú¿ÉÒÔÔÚÄú¸öÈË»òÄú¾ÍÖ°¹«Ë¾£¨×éÖ¯£©ÈÎÒâÊıÁ¿µÄµçÄÔÉÏÔËĞĞ¸ÃÈí¼ş£¬ÎÒ²»¶ÔµçÄÔµÄÊıÁ¿×öÈÎºÎÏŞÖÆ¡£
-2.3 Äú¿ÉÒÔ¶Ô¸ÃÈí¼şÔ´´úÂë½øĞĞĞŞ¸ÄÒÔÊÊÓ¦Äú¸öÈË»òÄúËùÔÚ¹«Ë¾£¨×éÖ¯£©Ê¹ÓÃµÄÒªÇó£¬Äú×öµÄ¸Ä¶¯ÎŞĞè¶ÔÍâ·¢²¼¡£
-2.4 Äú¸öÈË»òÄú¾ÍÖ°¹«Ë¾£¨×éÖ¯£©Ê¹ÓÃ¸ÃÈí¼şÊ±£¬±ØĞë±£Áô¸ÃÈí¼şµÄËùÓĞ±êÖ¾£¬²»µÃÒÔÈÎºÎ·½Ê½Òş²Ø»òÕÚÑÚÈÎÒ»±êÖ¾¡£
+2.1 æ‚¨ä¸ªäººæˆ–æ‚¨å°±èŒçš„å…¬å¸ï¼ˆç»„ç»‡ï¼‰å¯è‡ªç”±ä½¿ç”¨è¯¥è½¯ä»¶ï¼Œæˆ‘ä¸å¯¹æ‚¨æˆ–æ‚¨å°±èŒå…¬å¸ï¼ˆç»„ç»‡ï¼‰çš„æ€§è´¨åšä»»ä½•é™åˆ¶ã€‚
+2.2 æ‚¨å¯ä»¥åœ¨æ‚¨ä¸ªäººæˆ–æ‚¨å°±èŒå…¬å¸ï¼ˆç»„ç»‡ï¼‰ä»»æ„æ•°é‡çš„ç”µè„‘ä¸Šè¿è¡Œè¯¥è½¯ä»¶ï¼Œæˆ‘ä¸å¯¹ç”µè„‘çš„æ•°é‡åšä»»ä½•é™åˆ¶ã€‚
+2.3 æ‚¨å¯ä»¥å¯¹è¯¥è½¯ä»¶æºä»£ç è¿›è¡Œä¿®æ”¹ä»¥é€‚åº”æ‚¨ä¸ªäººæˆ–æ‚¨æ‰€åœ¨å…¬å¸ï¼ˆç»„ç»‡ï¼‰ä½¿ç”¨çš„è¦æ±‚ï¼Œæ‚¨åšçš„æ”¹åŠ¨æ— éœ€å¯¹å¤–å‘å¸ƒã€‚
+2.4 æ‚¨ä¸ªäººæˆ–æ‚¨å°±èŒå…¬å¸ï¼ˆç»„ç»‡ï¼‰ä½¿ç”¨è¯¥è½¯ä»¶æ—¶ï¼Œå¿…é¡»ä¿ç•™è¯¥è½¯ä»¶çš„æ‰€æœ‰æ ‡å¿—ï¼Œä¸å¾—ä»¥ä»»ä½•æ–¹å¼éšè—æˆ–é®æ©ä»»ä¸€æ ‡å¿—ã€‚
 
-Èı¡¢ÎªÓÃ»§¶¨ÖÆ
+ä¸‰ã€ä¸ºç”¨æˆ·å®šåˆ¶
 
-3.1 Äú¿ÉÒÔÊ¹ÓÃ¸ÃÈí¼şÎªÄúµÄÓÃ»§²¿Êğ¸÷ÖÖĞÎÊ½µÄÓ¦ÓÃ£¬ÎÒ²»¶ÔÓ¦ÓÃµÄĞÔÖÊ×öÈÎºÎÏŞÖÆ¡£
-3.2 Äú¿ÉÒÔÊ¹ÓÃ¸ÃÈí¼şÎªÄúµÄÓÃ»§²¿ÊğÈÎÒâÊıÁ¿µÄÓ¦ÓÃ£¬ÎÒ²»¶ÔÓ¦ÓÃµÄÊıÁ¿×öÈÎºÎÏŞÖÆ¡£
-3.3 Äú¿ÉÒÔ¶Ô¸ÃÈí¼şÔ´´úÂë½øĞĞĞŞ¸ÄÒÔÊÊÓ¦ÄúµÄÓÃ»§µÄÒªÇó£¬Äú×öµÄ¸Ä¶¯ÎŞĞè¶ÔÍâ·¢²¼¡£
-3.4 Äú¶Ô¸ÃÈí¼şÔ´´úÂëËù×öµÄĞŞ¸Ä¿ÉÒÔÔ´´úÂë»ò¶ş½øÖÆµÄ·½Ê½Ìá¹©¸øÄúµÄÓÃ»§¡£
-3.5 ÄúÊ¹ÓÃ¸ÃÈí¼şÎªÄúµÄÈÎÒ»ÓÃ»§²¿ÊğµÄÈÎÒ»Ó¦ÓÃ¶¼±ØĞë±£Áô¸ÃÈí¼şËùÓĞµÄ±êÖ¾¡£
-3.6 ÄúÊ¹ÓÃ¸ÃÈí¼şÎªÄúµÄÈÎÒ»ÓÃ»§²¿ÊğµÄÈÎÒ»Ó¦ÓÃ¶¼²»µÃÒÔÈÎºÎ·½Ê½Òş²Ø»òÕÚÑÚ¸ÃÈí¼şÈÎÒ»±êÖ¾¡£
+3.1 æ‚¨å¯ä»¥ä½¿ç”¨è¯¥è½¯ä»¶ä¸ºæ‚¨çš„ç”¨æˆ·éƒ¨ç½²å„ç§å½¢å¼çš„åº”ç”¨ï¼Œæˆ‘ä¸å¯¹åº”ç”¨çš„æ€§è´¨åšä»»ä½•é™åˆ¶ã€‚
+3.2 æ‚¨å¯ä»¥ä½¿ç”¨è¯¥è½¯ä»¶ä¸ºæ‚¨çš„ç”¨æˆ·éƒ¨ç½²ä»»æ„æ•°é‡çš„åº”ç”¨ï¼Œæˆ‘ä¸å¯¹åº”ç”¨çš„æ•°é‡åšä»»ä½•é™åˆ¶ã€‚
+3.3 æ‚¨å¯ä»¥å¯¹è¯¥è½¯ä»¶æºä»£ç è¿›è¡Œä¿®æ”¹ä»¥é€‚åº”æ‚¨çš„ç”¨æˆ·çš„è¦æ±‚ï¼Œæ‚¨åšçš„æ”¹åŠ¨æ— éœ€å¯¹å¤–å‘å¸ƒã€‚
+3.4 æ‚¨å¯¹è¯¥è½¯ä»¶æºä»£ç æ‰€åšçš„ä¿®æ”¹å¯ä»¥æºä»£ç æˆ–äºŒè¿›åˆ¶çš„æ–¹å¼æä¾›ç»™æ‚¨çš„ç”¨æˆ·ã€‚
+3.5 æ‚¨ä½¿ç”¨è¯¥è½¯ä»¶ä¸ºæ‚¨çš„ä»»ä¸€ç”¨æˆ·éƒ¨ç½²çš„ä»»ä¸€åº”ç”¨éƒ½å¿…é¡»ä¿ç•™è¯¥è½¯ä»¶æ‰€æœ‰çš„æ ‡å¿—ã€‚
+3.6 æ‚¨ä½¿ç”¨è¯¥è½¯ä»¶ä¸ºæ‚¨çš„ä»»ä¸€ç”¨æˆ·éƒ¨ç½²çš„ä»»ä¸€åº”ç”¨éƒ½ä¸å¾—ä»¥ä»»ä½•æ–¹å¼éšè—æˆ–é®æ©è¯¥è½¯ä»¶ä»»ä¸€æ ‡å¿—ã€‚
 
-ËÄ¡¢Ìá¹©ÔÚÏß·şÎñ
+å››ã€æä¾›åœ¨çº¿æœåŠ¡
 
-4.1 Äú¿ÉÒÔÊ¹ÓÃ¸ÃÈí¼ş´î½¨ÔÚÏß·şÎñ£¬ÎªÄúµÄÓÃ»§Ìá¹©·şÎñ£¬ÎÒ²»¶Ô¸Ã·şÎñ¼°¸Ã·şÎñÓÃ»§µÄĞÔÖÊ×öÈÎºÎÏŞÖÆ¡£
-4.2 Äú¿ÉÒÔÊ¹ÓÃ¸ÃÈí¼ş´î½¨ÔÚÏß·şÎñ£¬ÎªÄúµÄÓÃ»§Ìá¹©·şÎñ£¬ÎÒ²»¶Ô¸Ã·şÎñµÄÓÃ»§ÊıÁ¿×öÈÎºÎÏŞÖÆ¡£
-4.3 Äú¿ÉÒÔ¶Ô¸ÃÈí¼şÔ´´úÂë½øĞĞĞŞ¸ÄÒÔÊÊÓ¦ÔÚÏß·şÎñµÄÒªÇó£¬Äú×öµÄ¸Ä¶¯ÎŞĞè¶ÔÍâ·¢²¼¡£
-4.4 ÄúÊ¹ÓÃ¸ÃÈí¼ş´î½¨ÔÚÏß·şÎñÊ±£¬±ØĞëÒÔÃ÷È·µÄ·½Ê½¸æÖªÄúµÄÓÃ»§¸Ã·şÎñÊÇ»ùÓÚ¸ÃÈí¼ş´î½¨µÄ¡£
-4.5 ÄúÊ¹ÓÃ¸ÃÈí¼ş´î½¨ÔÚÏß·şÎñÎªÄúµÄÈÎÒ»ÓÃ»§²¿ÊğµÄÈÎÒ»Ó¦ÓÃ±ØĞë±£Áô¸ÃÈí¼şËùÓĞµÄ±êÖ¾¡£
-4.6 ÄúÊ¹ÓÃ¸ÃÈí¼ş´î½¨ÔÚÏß·şÎñÎªÄúµÄÈÎÒ»ÓÃ»§²¿ÊğµÄÈÎÒ»Ó¦ÓÃ²»µÃÒÔÈÎºÎ·½Ê½Òş²Ø»òÕÚÑÚ¸ÃÈí¼şÈÎÒ»±êÖ¾¡£
-4.7 ÄúÊ¹ÓÃ¸ÃÈí¼ş´î½¨ÔÚÏß·şÎñÊ±£¬²»µÃÎªÄúµÄÓÃ»§Ìá¹©È¥³ı¡¢Òş²Ø»òÕÚÑÚ¸ÃÈí¼şÈÎÒ»±êÖ¾µÄ¹¦ÄÜ¡£
+4.1 æ‚¨å¯ä»¥ä½¿ç”¨è¯¥è½¯ä»¶æ­å»ºåœ¨çº¿æœåŠ¡ï¼Œä¸ºæ‚¨çš„ç”¨æˆ·æä¾›æœåŠ¡ï¼Œæˆ‘ä¸å¯¹è¯¥æœåŠ¡åŠè¯¥æœåŠ¡ç”¨æˆ·çš„æ€§è´¨åšä»»ä½•é™åˆ¶ã€‚
+4.2 æ‚¨å¯ä»¥ä½¿ç”¨è¯¥è½¯ä»¶æ­å»ºåœ¨çº¿æœåŠ¡ï¼Œä¸ºæ‚¨çš„ç”¨æˆ·æä¾›æœåŠ¡ï¼Œæˆ‘ä¸å¯¹è¯¥æœåŠ¡çš„ç”¨æˆ·æ•°é‡åšä»»ä½•é™åˆ¶ã€‚
+4.3 æ‚¨å¯ä»¥å¯¹è¯¥è½¯ä»¶æºä»£ç è¿›è¡Œä¿®æ”¹ä»¥é€‚åº”åœ¨çº¿æœåŠ¡çš„è¦æ±‚ï¼Œæ‚¨åšçš„æ”¹åŠ¨æ— éœ€å¯¹å¤–å‘å¸ƒã€‚
+4.4 æ‚¨ä½¿ç”¨è¯¥è½¯ä»¶æ­å»ºåœ¨çº¿æœåŠ¡æ—¶ï¼Œå¿…é¡»ä»¥æ˜ç¡®çš„æ–¹å¼å‘ŠçŸ¥æ‚¨çš„ç”¨æˆ·è¯¥æœåŠ¡æ˜¯åŸºäºè¯¥è½¯ä»¶æ­å»ºçš„ã€‚
+4.5 æ‚¨ä½¿ç”¨è¯¥è½¯ä»¶æ­å»ºåœ¨çº¿æœåŠ¡ä¸ºæ‚¨çš„ä»»ä¸€ç”¨æˆ·éƒ¨ç½²çš„ä»»ä¸€åº”ç”¨å¿…é¡»ä¿ç•™è¯¥è½¯ä»¶æ‰€æœ‰çš„æ ‡å¿—ã€‚
+4.6 æ‚¨ä½¿ç”¨è¯¥è½¯ä»¶æ­å»ºåœ¨çº¿æœåŠ¡ä¸ºæ‚¨çš„ä»»ä¸€ç”¨æˆ·éƒ¨ç½²çš„ä»»ä¸€åº”ç”¨ä¸å¾—ä»¥ä»»ä½•æ–¹å¼éšè—æˆ–é®æ©è¯¥è½¯ä»¶ä»»ä¸€æ ‡å¿—ã€‚
+4.7 æ‚¨ä½¿ç”¨è¯¥è½¯ä»¶æ­å»ºåœ¨çº¿æœåŠ¡æ—¶ï¼Œä¸å¾—ä¸ºæ‚¨çš„ç”¨æˆ·æä¾›å»é™¤ã€éšè—æˆ–é®æ©è¯¥è½¯ä»¶ä»»ä¸€æ ‡å¿—çš„åŠŸèƒ½ã€‚
 
-Îå¡¢ÎŞ¸Ä¶¯·¢²¼»ò¼¯³É¸ÃÈí¼ş
+äº”ã€æ— æ”¹åŠ¨å‘å¸ƒæˆ–é›†æˆè¯¥è½¯ä»¶
 
-5.1 ÎÒ»¶Ó­²¢¸ĞĞ»Äú½«¸ÃÈí¼ş·¢²¼ÔÚÄúµÄ¸öÈËÍøÕ¾¡¢ÆóÒµ¹ÙÍø»òÕßÆäËûµÄµÚÈı·½ÍøÕ¾¡£
-5.2 ÎÒ»¶Ó­²¢¸ĞĞ»Äú½«¸ÃÈí¼ş¼¯³ÉÔÚÆäËûÏµÍ³ÖĞÒ»Æğ·¢²¼£¬±ÈÈçÔÆ·şÎñ¾µÏñ¡¢²Ù×÷ÏµÍ³·¢ĞĞ°æµÈ¡£
-5.3 ÄúÔÚ·¢²¼»òÕß¼¯³É¸ÃÈí¼şµÄÊ±ºò£¬²»µÃ¶Ô¸ÃÈí¼şÔ´Âë×öÈÎºÎ¸Ä¶¯¡£
-5.4 ÄúÔÚ·¢²¼»òÕß¼¯³É¸ÃÈí¼şµÄÊ±ºò£¬Ğë±£Áô¸ÃÈí¼şµÄËùÓĞ±êÖ¾¡£
+5.1 æˆ‘æ¬¢è¿å¹¶æ„Ÿè°¢æ‚¨å°†è¯¥è½¯ä»¶å‘å¸ƒåœ¨æ‚¨çš„ä¸ªäººç½‘ç«™ã€ä¼ä¸šå®˜ç½‘æˆ–è€…å…¶ä»–çš„ç¬¬ä¸‰æ–¹ç½‘ç«™ã€‚
+5.2 æˆ‘æ¬¢è¿å¹¶æ„Ÿè°¢æ‚¨å°†è¯¥è½¯ä»¶é›†æˆåœ¨å…¶ä»–ç³»ç»Ÿä¸­ä¸€èµ·å‘å¸ƒï¼Œæ¯”å¦‚äº‘æœåŠ¡é•œåƒã€æ“ä½œç³»ç»Ÿå‘è¡Œç‰ˆç­‰ã€‚
+5.3 æ‚¨åœ¨å‘å¸ƒæˆ–è€…é›†æˆè¯¥è½¯ä»¶çš„æ—¶å€™ï¼Œä¸å¾—å¯¹è¯¥è½¯ä»¶æºç åšä»»ä½•æ”¹åŠ¨ã€‚
+5.4 æ‚¨åœ¨å‘å¸ƒæˆ–è€…é›†æˆè¯¥è½¯ä»¶çš„æ—¶å€™ï¼Œé¡»ä¿ç•™è¯¥è½¯ä»¶çš„æ‰€æœ‰æ ‡å¿—ã€‚
 
-Áù¡¢·¢²¼»ùÓÚ¸ÃÈí¼şµÄÑÜÉú×÷Æ·
+å…­ã€å‘å¸ƒåŸºäºè¯¥è½¯ä»¶çš„è¡ç”Ÿä½œå“
 
-6.1 ÎÒ»¶Ó­²¢¸ĞĞ»ÄúÎª¸ÃÈí¼ş¿ª·¢ÑÜÉú×÷Æ·¡£
-6.2 Äú¿ª·¢µÄÑÜÉú×÷Æ·ÖĞÉæ¼°µ½¶Ô¸ÃÈí¼şÔ´´úÂë¸Ä¶¯µÄµØ·½£¬Ğë×ñÑ­ÈçÏÂÌõ¿î£º
+6.1 æˆ‘æ¬¢è¿å¹¶æ„Ÿè°¢æ‚¨ä¸ºè¯¥è½¯ä»¶å¼€å‘è¡ç”Ÿä½œå“ã€‚
+6.2 æ‚¨å¼€å‘çš„è¡ç”Ÿä½œå“ä¸­æ¶‰åŠåˆ°å¯¹è¯¥è½¯ä»¶æºä»£ç æ”¹åŠ¨çš„åœ°æ–¹ï¼Œé¡»éµå¾ªå¦‚ä¸‹æ¡æ¬¾ï¼š
 
-  6.2.1 ÈçĞŞ¸ÄÁË¸ÃÈí¼şµÄÔ´´úÂë£¬ĞëÒÀ¾İ±¾Ğ­Òé·¢²¼ĞŞ¸ÄºóµÄÔ´´úÂë¡£
-  6.2.2 ÈçĞŞ¸ÄÁË¸ÃÈí¼şµÄÔ´´úÂë£¬Ğë±£Áô´úÂëÀïÃæ¸ÃÈí¼şÔ­ÓĞµÄËùÓĞ±êÖ¾¡£
-  6.2.3 Äú¿ÉÒÔÔÚ´úÂëÖĞ×·¼ÓÄú×Ô¼ºµÄ±êÖ¾¡£
-  6.2.4 Äú¿ÉÒÔ¶ÔÄú¿ª·¢µÄÑÜÉú×÷Æ·½øĞĞÊÕ·Ñ¡£  
-  6.2.5 µÚÈı·½µÄÓÃ»§¿ÉÔÚ×ñÑ­6.2ËùÓĞÌõ¿îÏÂ¿É¼ÌĞøÔÚÄú¿ª·¢µÄÑÜÉú×÷Æ·»ù´¡ÉÏ½øĞĞĞŞ¸Ä²¢·¢²¼¡£
+  6.2.1 å¦‚ä¿®æ”¹äº†è¯¥è½¯ä»¶çš„æºä»£ç ï¼Œé¡»ä¾æ®æœ¬åè®®å‘å¸ƒä¿®æ”¹åçš„æºä»£ç ã€‚ 
+  6.2.2 å¦‚ä¿®æ”¹äº†è¯¥è½¯ä»¶çš„æºä»£ç ï¼Œé¡»ä¿ç•™ä»£ç é‡Œé¢è¯¥è½¯ä»¶åŸæœ‰çš„æ‰€æœ‰æ ‡å¿—ã€‚ 
+  6.2.3 æ‚¨å¯ä»¥åœ¨ä»£ç ä¸­è¿½åŠ æ‚¨è‡ªå·±çš„æ ‡å¿—ã€‚ 
+  6.2.4 æ‚¨å¯ä»¥å¯¹æ‚¨å¼€å‘çš„è¡ç”Ÿä½œå“è¿›è¡Œæ”¶è´¹ã€‚  
+  6.2.5 ç¬¬ä¸‰æ–¹çš„ç”¨æˆ·å¯åœ¨éµå¾ª6.2æ‰€æœ‰æ¡æ¬¾ä¸‹å¯ç»§ç»­åœ¨æ‚¨å¼€å‘çš„è¡ç”Ÿä½œå“åŸºç¡€ä¸Šè¿›è¡Œä¿®æ”¹å¹¶å‘å¸ƒã€‚
 
-6.3 Äú¿ª·¢µÄÑÜÉú×÷Æ·ÖĞ¶ÀÁ¢ÓÚ±¾Èí¼ş¿ª·¢µÄ´úÂë£¬¿ÉÒÔÔ´´úÂë»ò¶ş½øÖÆµÄ·½Ê½½øĞĞ·¢²¼£¬¿ÉÃâ·Ñ»òÊÕ·Ñ·¢²¼¡£
-6.4 Äú¿ª·¢µÄÑÜÉú×÷Æ·²»µÃÒÔÈÎºÎ·½Ê½È¥³ı¡¢Òş²Ø»òÕÚÑÚ¸ÃÈí¼şµÄÈÎÒ»±êÖ¾¡£
+6.3 æ‚¨å¼€å‘çš„è¡ç”Ÿä½œå“ä¸­ç‹¬ç«‹äºæœ¬è½¯ä»¶å¼€å‘çš„ä»£ç ï¼Œå¯ä»¥æºä»£ç æˆ–äºŒè¿›åˆ¶çš„æ–¹å¼è¿›è¡Œå‘å¸ƒï¼Œå¯å…è´¹æˆ–æ”¶è´¹å‘å¸ƒã€‚
+6.4 æ‚¨å¼€å‘çš„è¡ç”Ÿä½œå“ä¸å¾—ä»¥ä»»ä½•æ–¹å¼å»é™¤ã€éšè—æˆ–é®æ©è¯¥è½¯ä»¶çš„ä»»ä¸€æ ‡å¿—ã€‚
 
-Æß¡¢·¢²¼»ùÓÚ¸ÃÈí¼şAPIµÄÓ¦ÓÃ
+ä¸ƒã€å‘å¸ƒåŸºäºè¯¥è½¯ä»¶APIçš„åº”ç”¨
 
-7.1 ÎÒ»¶Ó­²¢¸ĞĞ»ÄúÎª¸ÃÈí¼ş¿ª·¢»ùÓÚAPIµÄ¸÷ÖÖÓ¦ÓÃ£¬±ÈÈç¿Í»§¶ËÈí¼şµÈ¡£
-7.2 Äú»ùÓÚ¸ÃÈí¼şAPI»úÖÆ¿ª·¢µÄÓ¦ÓÃ£¬¿ÉÒÔÔ´´úÂë»òÕß¶ş½øÖÆµÄ·½Ê½½øĞĞ·¢²¼£¬ÎÒ¶Ô´ËÃ»ÓĞÈÎºÎÏŞÖÆ¡£
-7.3 Äú»ùÓÚ¸ÃÈí¼şAPI»úÖÆ¿ª·¢µÄÓ¦ÓÃ£¬ÊÚÈ¨Ğ­Òé¿ÉÒÔ×ÔĞĞÔ¼¶¨£¬ÎÒ¶Ô´ËÃ»ÓĞÈÎºÎÏŞÖÆ¡£
-7.4 Äú»ùÓÚ¸ÃÈí¼şAPI»úÖÆ¿ª·¢µÄÓ¦ÓÃ£¬¿ÉÒÔÃâ·Ñ»òÕßÊÕ·Ñ·¢²¼£¬ÎÒ¶Ô´ËÃ»ÓĞÈÎºÎÏŞÖÆ¡£
+7.1 æˆ‘æ¬¢è¿å¹¶æ„Ÿè°¢æ‚¨ä¸ºè¯¥è½¯ä»¶å¼€å‘åŸºäºAPIçš„å„ç§åº”ç”¨ï¼Œæ¯”å¦‚å®¢æˆ·ç«¯è½¯ä»¶ç­‰ã€‚
+7.2 æ‚¨åŸºäºè¯¥è½¯ä»¶APIæœºåˆ¶å¼€å‘çš„åº”ç”¨ï¼Œå¯ä»¥æºä»£ç æˆ–è€…äºŒè¿›åˆ¶çš„æ–¹å¼è¿›è¡Œå‘å¸ƒï¼Œæˆ‘å¯¹æ­¤æ²¡æœ‰ä»»ä½•é™åˆ¶ã€‚
+7.3 æ‚¨åŸºäºè¯¥è½¯ä»¶APIæœºåˆ¶å¼€å‘çš„åº”ç”¨ï¼Œæˆæƒåè®®å¯ä»¥è‡ªè¡Œçº¦å®šï¼Œæˆ‘å¯¹æ­¤æ²¡æœ‰ä»»ä½•é™åˆ¶ã€‚
+7.4 æ‚¨åŸºäºè¯¥è½¯ä»¶APIæœºåˆ¶å¼€å‘çš„åº”ç”¨ï¼Œå¯ä»¥å…è´¹æˆ–è€…æ”¶è´¹å‘å¸ƒï¼Œæˆ‘å¯¹æ­¤æ²¡æœ‰ä»»ä½•é™åˆ¶ã€‚
 
-°Ë¡¢ÊÚÈ¨ÀıÍâ
+å…«ã€æˆæƒä¾‹å¤–
 
-Èç¹ûÉÏÊöÌõ¿îÎŞ·¨Âú×ãÄúÊ¹ÓÃ¸ÃÈí¼şµÄÒªÇó£¬¿ÉÁªÏµÎÒÇ©Êğ¶îÍâµÄºÏÍ¬ÒÔ»ñµÃ¸üÁé»îµÄÊÚÈ¨Ğí¿É¡£
+å¦‚æœä¸Šè¿°æ¡æ¬¾æ— æ³•æ»¡è¶³æ‚¨ä½¿ç”¨è¯¥è½¯ä»¶çš„è¦æ±‚ï¼Œå¯è”ç³»æˆ‘ç­¾ç½²é¢å¤–çš„åˆåŒä»¥è·å¾—æ›´çµæ´»çš„æˆæƒè®¸å¯ã€‚
 
-¾Å¡¢ºÏÍ¬Ô¼Êø
+ä¹ã€åˆåŒçº¦æŸ
 
-9.1 Èç¹ûÄúÎ¥·´ÁË¸ÃĞ­ÒéµÄÈÎÒ»Ìõ¿î£¬¸ÃÊÚÈ¨Ğ­Òé½«×Ô¶¯ÖÕÖ¹£¬ÎÒ±£ÁôÍ¨¹ı·¨ÂÉÊÖ¶Î×·¾¿ÔğÈÎµÄÈ¨Àû¡£
+9.1 å¦‚æœæ‚¨è¿åäº†è¯¥åè®®çš„ä»»ä¸€æ¡æ¬¾ï¼Œè¯¥æˆæƒåè®®å°†è‡ªåŠ¨ç»ˆæ­¢ï¼Œæˆ‘ä¿ç•™é€šè¿‡æ³•å¾‹æ‰‹æ®µè¿½ç©¶è´£ä»»çš„æƒåˆ©ã€‚
 
 Z PUBLIC LICENSE 1.2
 
 Authorization
 
 Z PUBLIC LICENSE, also known as ZPL Agreement, is drafted by QingDao Nature Easy Soft Network Technology Co,LTD. (,www.cnezsoft.com).
-Anyone can use the agreement to publish open source software, and modify the blank underlined part of the following text of the agreement accordingly.
+Anyone can use the agreement to publish open source software, and modify the blank underlined part of the following text of the agreement accordingly. 
 No other text of the agreement shall be changed. QingDao Nature Easy Soft Network Technology Co,LTD has the final authority to interpret the terms of the agreement.
 
 Preface
 
-___________ (Hereinafter referred to as "the software") developed by _____________ (hereinafter referred to I). I'm entitled to all copyright of the software.
-The software is released as open source software. You are authorized to use the software as long as you are in compliance with this agreement.
-By installation of the software, you agree that a contractual relationship between you and me is automatically established.
+RanZhi (Hereinafter referred to as "the software") developed by Nature EasySoft Network Tecnology Co.ltd, QingDao, China (www.cnezsoft.com) (hereinafter referred to I). I'm entitled to all copyright of the software. 
+The software is released as open source software. You are authorized to use the software as long as you are in compliance with this agreement. 
+By installation of the software, you agree that a contractual relationship between you and me is automatically established. 
 You are obliged to fully comply with all the terms of this agreement unless you choose to stop using the software or you have signed additional contracts with me.
 
-My Contact: ___________________________________________________________________.
+My Contact: 
+Contact: Mr. Xu
+Phone: 4006-8899-23
+Email: co@cnezsoft.com
+QQ:    1492153927
+Address:  Qingdao Development Zone, the Oriental Kenzo C 1106
 
-We agree:
+We agree: 
 
-Indications of the software include:
+Indications of the software include: 
 
     Notes, texts, pictures and links showing copyright attribution of the software in the source code and related documentation.                                  
     and texts, picture and links on the interface of the software when running.
-    _________________________________________________.
 
 Excluding
 
     texts, picture and links on the interface of the demo versions of the software.
-    _________________________________________________¡£
 
 1. Disclaimer
 
@@ -134,9 +140,9 @@ The software is an open-source software, so you are authorized to use the softwa
 
   1.1 I do not have any obligation to provide technical support for the software. You can contact me to purchase technical support service.
   1.2 I'm not responsible for any liability caused by your using the software directly or indirectly.
-  1.3 Open source software does not mean it's free of charge, neither does it mean the software does not enjoy copyright.
+  1.3 Open source software does not mean it's free of charge, neither does it mean the software does not enjoy copyright. 
 
-2. For personal use
+2. For personal use 
 
 2.1 You or your company/organization are authorized to use the software for your internal use for both commercial and non-commercial purposes..
 2.2 You or your company/organization are authorized to run the software on any number of computers.
@@ -148,9 +154,9 @@ The software is an open-source software, so you are authorized to use the softwa
 3.1 You are authorized to use the software to deploy various forms of application for your users in any way you like.
 3.2 You are authorized to use the software to deploy any number of applications for your users.
 3.3 You are authorized to modify the source code to meet your user's requirements without releasing the modified codes.
-3.4 You are authorized to provide the modified codes to your users in either source code form or binary.
+3.4 You are authorized to provide the modified codes to your users in either source code form or binary. 
 3.5 You must keep all the indications of the software when providing applications to your users.
-3.6 None of the indications of the software may be removed, hidden or obscured in any way when you provide applications to your users.
+3.6 None of the indications of the software may be removed, hidden or obscured in any way when you provide applications to your users. 
 
 4. Online service
 
@@ -162,7 +168,7 @@ The software is an open-source software, so you are authorized to use the softwa
 4.6 You must keep all the indications of the software in any application you make for your users. None of the indications can be hidden or obscured in any way.
 4.7 You are forbidden from assisting your users by providing tools for your users to remove, hide or obscure any indication of the software when you use the software to build your online service.
 
-5. Publish or integrate the software without modification
+5. Publish or integrate the software without modification 
 
 5.1 You are authorized to publish the software on your personal sites, corporate official website or other third-party sites.
 5.2 You are authorized to integrate the software  with other systems, such as cloud virtual machine images, operating system images and so on.
@@ -187,7 +193,7 @@ The software is an open-source software, so you are authorized to use the softwa
 
 7.1 You are authorized to develop your applications based on the API of the software, for example, client software.
 7.2 You are authorized to publish applications you developed based on the API in either source code form or binary.
-7.3 You are authorized to use your own license to release applications you developed based on the API.
+7.3 You are authorized to use your own license to release applications you developed based on the API. 
 7.4 You are entitled to release applications you developed based on the API either free or with a charge.
 
 8. Exceptions
