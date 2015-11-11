@@ -50,6 +50,9 @@ $lang->entry->zentaoURL          = '禅道登录地址';
 $lang->entry->zentaoAdmin   = '禅道管理员';
 $lang->entry->adminAccount  = '管理员账号';
 $lang->entry->adminPassword = '管理员密码';
+$lang->entry->bindUser      = '绑定用户';
+$lang->entry->nextStep      = '下一步';
+$lang->entry->createUser    = '新建';
 
 $lang->entry->confirmDelete = '您确定删除该应用吗？';
 $lang->entry->lblBlock      = '区块';

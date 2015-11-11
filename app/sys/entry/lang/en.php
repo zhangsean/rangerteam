@@ -50,6 +50,9 @@ $lang->entry->zentaoURL          = 'Login url of zentao';
 $lang->entry->zentaoAdmin   = 'Zentao Admin';
 $lang->entry->adminAccount  = 'Admin account';
 $lang->entry->adminPassword = 'Admin password';
+$lang->entry->bindUser      = 'Bind User';
+$lang->entry->nextStep      = 'Next Step';
+$lang->entry->createUser    = 'Create User';
 
 $lang->entry->confirmDelete = 'Are you sure to delete this App?';
 $lang->entry->lblBlock      = 'Block';

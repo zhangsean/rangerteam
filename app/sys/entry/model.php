@@ -49,6 +49,17 @@ class entryModel extends model
     }
 
     /**
+     * Get zentao entry list.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getZentaoEntryList()
+    {
+        return $this->dao->select('*')->from(TABLE_ENTRY)->where('zentao')->eq('1')->fetchAll();
+    }
+
+    /**
      * Get entry by id.
      * 
      * @param  int    $entryID
@@ -88,8 +99,9 @@ class entryModel extends model
             ->setDefault('buildin', 0)
             ->setDefault('integration', 0)
             ->setDefault('order', $maxOrder + 10)
+            ->setDefault('zentao', 0)
             ->setIF($this->post->allip, 'ip', '*')
-            ->remove('allip,zentao,adminAccount,adminPassword')
+            ->remove('allip,adminAccount,adminPassword')
             ->stripTags('login,logout,block', $this->config->allowedTags->admin)
             ->get();
         if($this->post->chanzhi) 

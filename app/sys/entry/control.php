@@ -12,6 +12,22 @@
 class entry extends control
 {
     /**
+     * Construct 
+     * 
+     * @access public
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $zentaoEntryList = $this->entry->getZentaoEntryList();
+        if(!empty($zentaoEntryList))
+        {
+            foreach($zentaoEntryList as $zentaoEntry) $this->lang->entry->menu->{$zentaoEntry->code} = "{$zentaoEntry->name}|entry|zentaoAdmin|code={$zentaoEntry->id}";
+        }
+    }
+
+    /**
      * Manage all entries.
      * 
      * @access public
@@ -23,10 +39,8 @@ class entry extends control
         /* add web root if logo not start with /  */
         foreach($entries as $entry) if(!empty($entry->logo) && substr($entry->logo, 0, 1) != '/') $entry->logo = $this->config->webRoot . $entry->logo;
         
-        $this->view->title       = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->admin;
-        $this->view->position[]  = $this->lang->entry->common;
-        $this->view->position[]  = $this->lang->entry->admin;
-        $this->view->entries     = $entries;
+        $this->view->title   = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->admin;
+        $this->view->entries = $entries;
         $this->display();
     }
 
@@ -74,11 +88,9 @@ class entry extends control
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
         }
-        $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->create;
-        $this->view->key        = $this->entry->createKey();
-        $this->view->groups     = $this->loadModel('group')->getPairs();
-        $this->view->position[] = $this->lang->entry->common;
-        $this->view->position[] = $this->lang->entry->create;
+        $this->view->title  = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->create;
+        $this->view->key    = $this->entry->createKey();
+        $this->view->groups = $this->loadModel('group')->getPairs();
         $this->display();
     }
 
@@ -170,10 +182,7 @@ class entry extends control
             $entry->height = $size->height;
         }
 
-        $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->edit;
-        $this->view->position[] = $this->lang->entry->common;
-        $this->view->position[] = $this->lang->entry->edit;
-
+        $this->view->title = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->edit;
         $this->view->entry = $entry;
         $this->view->code  = $code;
         $this->display();
@@ -239,10 +248,7 @@ class entry extends control
             $this->send(array('result' => 'success', 'locate'=>inlink('admin')));
         }
 
-        $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->sort;
-        $this->view->position[] = $this->lang->entry->common;
-        $this->view->position[] = $this->lang->entry->sort;
-
+        $this->view->title   = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->sort;
         $this->view->entries = $this->entry->getEntries();
         $this->display();
     }
@@ -465,5 +471,94 @@ class entry extends control
             if(dao::isError()) $this->send(array('result' => 'fael', 'message' => dao::getError()));
         }
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+    }
+
+    /**
+     * Input admin of zentao. 
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return void
+     */
+    public function zentaoAdmin($id)
+    {
+        $entry = $this->entry->getByID($id);
+        if($_POST)
+        {
+            /* Get zentao url. */
+            if(strpos($entry->login, '&') === false) $zentaoUrl = substr($entry->login, 0, strrpos($entry->login, '/') + 1);
+            if(strpos($entry->login, '&') !== false) $zentaoUrl = substr($entry->login, 0, strpos($entry->login, '?'));
+            /* Get zentao config. */
+            $zentaoConfig = $this->loadModel('sso')->getZentaoServerConfig($zentaoUrl);
+            $result = $this->loadModel('sso')->initZentaoSSO($zentaoConfig, $zentaoUrl, $this->post->account, $this->post->password, $entry->code, $entry->key);
+            if($result['result'] != 'success') $this->send($result);
+            $this->send(array('result' => 'success', 'locate' => inlink('bindUser', "id=$id&sessionID=$zentaoConfig->sessionID")));
+        }
+
+        $this->view->title = $this->lang->entry->bindUser;
+        $this->display();
+    }
+
+    /**
+     * Bind user with zentao.
+     * 
+     * @param  int     $id 
+     * @param  string  $sessionID 
+     * @access public
+     * @return void
+     */
+    public function bindUser($id, $sessionID)
+    {
+        $entry = $this->entry->getByID($id);
+        if(!isset($this->snoopy)) $this->snoopy = $this->app->loadClass('snoopy');
+
+        /* Get zentao url. */
+        if(strpos($entry->login, '&') === false) $zentaoUrl = substr($entry->login, 0, strrpos($entry->login, '/') + 1);
+        if(strpos($entry->login, '&') !== false) $zentaoUrl = substr($entry->login, 0, strpos($entry->login, '?'));
+
+        /* Get zentao config. */
+        $zentaoConfig = $this->loadModel('sso')->getZentaoServerConfig($zentaoUrl);
+        $zentaoConfig->sessionID = $sessionID;
+
+        if($_POST)
+        {
+            foreach($this->post->ranzhiAccounts as $key => $ranzhiAccount)
+            {
+                if(isset($this->post->createUsers[$key]) and $this->post->createUsers[$key])
+                {
+                    $user = $this->loadModel('user')->getByAccount($ranzhiAccount);
+                    $createUrl = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'createUser');
+                    $this->snoopy->submit($createUrl, $user);
+                    $result = $this->snoopy->results;
+                    if($result != 'success') $this->send(array('result' => 'fail', 'message' => $result));
+                }
+                else
+                {
+                    $data = new stdclass();
+                    $data->ranzhiAccount = $ranzhiAccount; 
+                    $data->zentaoAccount = $this->post->zentaoAccounts[$key]; 
+                    $bindUrl = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'bindUser');
+                    $this->snoopy->submit($bindUrl, $data);
+                    $result = $this->snoopy->results;
+                    if($result != 'success') $this->send(array('result' => 'fail', 'message' => $result));
+                }
+            }
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('bindUser', "id=$id&sessionID=$sessionID")));
+        }
+
+        $getUsersUrl = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getUserPairs');
+        $this->snoopy->fetch($getUsersUrl);
+        $zentaoUsers = json_decode($this->snoopy->results, true);
+
+        $getBindUsersUrl = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getBindUsers');
+        $this->snoopy->fetch($getBindUsersUrl);
+        $bindUsers = json_decode($this->snoopy->results, true);
+
+        $this->view->title       = $this->lang->entry->bindUser;
+        $this->view->ranzhiUsers = $this->loadModel('user')->getPairs('noempty,noclosed,nodeleted');
+        $this->view->zentaoUsers = $zentaoUsers;
+        $this->view->bindUsers   = $bindUsers;
+        $this->display();
     }
 }
