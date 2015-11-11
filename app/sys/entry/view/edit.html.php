@@ -42,15 +42,6 @@ include '../../common/view/header.html.php';
           <td></td>
         </tr>
         <tr>
-          <th><?php echo $lang->entry->logo;?></th>
-          <td><?php echo html::file('files', "class='form-control'");?></td>
-          <td colspan='2'><?php echo $lang->entry->note->logo;?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->entry->open;?></th>
-          <td><?php echo html::select('open', $lang->entry->openList, $entry->open,'class="form-control"');?></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->entry->login;?></th>
           <td>
             <div class='input-group'>
@@ -84,6 +75,15 @@ include '../../common/view/header.html.php';
               </div>
             </div>
           </td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->logo;?></th>
+          <td><?php echo html::file('files', "class='form-control'");?></td>
+          <td colspan='2'><?php echo $lang->entry->note->logo;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->open;?></th>
+          <td><?php echo html::select('open', $lang->entry->openList, $entry->open,'class="form-control"');?></td>
         </tr>
         <tr>
           <th><?php echo $lang->entry->control;?></th>

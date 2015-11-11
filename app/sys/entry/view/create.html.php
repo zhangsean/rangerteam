@@ -43,18 +43,8 @@ js::set('zentaoName', $lang->entry->zentao);
           <td></td>
         </tr>
         <tr>
-          <th><?php echo $lang->entry->logo;?></th>
-          <td><?php echo html::file('files', "class='form-control'");?></td>
-          <td colspan='2'><?php echo $lang->entry->note->logo;?></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->entry->code;?></th>
           <td><?php echo html::input('code', '', "class='form-control' placeholder='{$lang->entry->note->code}'");?></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->entry->open;?></th>
-          <td><?php echo html::select('open', $lang->entry->openList, '', 'class="form-control"');?></td>
           <td></td>
         </tr>
         <tr>
@@ -107,6 +97,16 @@ js::set('zentaoName', $lang->entry->zentao);
               </div>
             </div>
           </td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->logo;?></th>
+          <td><?php echo html::file('files', "class='form-control'");?></td>
+          <td colspan='2'><?php echo $lang->entry->note->logo;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->open;?></th>
+          <td><?php echo html::select('open', $lang->entry->openList, '', 'class="form-control"');?></td>
           <td></td>
         </tr>
         <tr>

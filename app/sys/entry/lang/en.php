@@ -81,7 +81,6 @@ $lang->entry->error->admin         = 'Wrong admin account or password.';
 $lang->entry->error->zentaoSetting = 'ZentaoPMS set config failed, Please upgrade ZentaoPMS to head or install extension of ranzhi in ZentaoPMS.';
 $lang->entry->error->zentaoUrl     = 'Wrong ZentaoPMS login url.';
 
-$lang->entry->openList['']       = '';
 $lang->entry->openList['blank']  = 'Blank';
 $lang->entry->openList['iframe'] = 'Iframe';
 
