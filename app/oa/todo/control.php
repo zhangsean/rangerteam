@@ -260,7 +260,7 @@ class todo extends control
                 $this->action->logHistory($actionID, $changes);
             }
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'closeModal' => 'true'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'closeModal' => 'true', 'locate' => 'reload'));
         }
 
         $this->view->title = $this->lang->todo->assignTo;

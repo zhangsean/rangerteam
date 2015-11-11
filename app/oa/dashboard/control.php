@@ -79,4 +79,60 @@ class dashboard extends control
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
     }
+
+    /**
+     * Browse assignedTo and this month todos. 
+     * 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function todo($orderBy = 'status', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->loadModel('todo');
+        $this->app->loadClass('date');
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $account = $this->app->user->account;
+        $todos   = array();
+
+        extract(date::getThisMonth());
+        $stmt = $this->dao->select('*')->from(TABLE_TODO)
+            ->where('1=1')
+            ->andWhere()->markLeft(1)->where('assignedTo')->eq($account)->orWhere()->markLeft(1)->where('account')->eq($account)->andWhere('assignedTo')->eq('')->markRight(2)
+            ->andWhere("date >= '$begin'")
+            ->andWhere("date <= '$end'")
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->query();
+        
+        while($todo = $stmt->fetch())
+        {
+            if($todo->type == 'task') $todo->name = $this->dao->findById($todo->idvalue)->from(TABLE_TASK)->fetch('name');
+            if($todo->type == 'customer') $todo->name = $this->dao->findById($todo->idvalue)->from(TABLE_CUSTOMER)->fetch('name'); 
+            if($todo->type == 'order') 
+            {
+                $order = $this->dao->select('c.name, o.createdDate')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->where('o.id')->eq($todo->idvalue)->fetch(); 
+                $todo->name = $order->name . '|' . date('Y-m-d', strtotime($order->createdDate));
+            }
+
+            $todo->begin = date::formatTime($todo->begin);
+            $todo->end   = date::formatTime($todo->end);
+
+            /* If is private, change the title to private. */
+            if($todo->private and $this->app->user->account != $todo->account) $todo->name = $this->lang->todo->thisIsPrivate;
+            $todos[] = $todo;
+        }
+
+        $this->view->title     = $this->lang->todo->browse;
+        $this->view->todos     = $todos;
+        $this->view->pager     = $pager;
+        $this->view->orderBy   = $orderBy;
+        $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
 }
