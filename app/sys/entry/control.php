@@ -70,7 +70,9 @@ class entry extends control
             $entryID = $this->entry->create();
             $this->entry->updateLogo($entryID);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
+            $locate = inlink('admin');
+            if($this->post->zentao) $locate = inlink('bindUser', "id=$entryID&sessionID=$zentaoConfig->sessionID");
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate, 'entries' => $this->entry->getJSONEntries()));
         }
         $this->view->title  = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->create;
         $this->view->key    = $this->entry->createKey();
