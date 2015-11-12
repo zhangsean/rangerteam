@@ -27,7 +27,7 @@
           <th class='w-80px'><?php echo $lang->trade->dept;?></th>
           <th class='w-170px'><?php echo $lang->trade->handlers;?></th>
           <?php if(!empty($existTrades)):?>
-          <th class='w-200px'><?php echo $lang->trade->date;?></th>
+          <th class='w-180px'><?php echo $lang->trade->date;?></th>
           <?php else:?>
           <th class='w-110px'><?php echo $lang->trade->date;?></th>
           <?php endif;?>
@@ -53,7 +53,7 @@
             $trade['dept']     = $trade['dept'] ? $trade['dept'] : 'ditto';
         }
         ?>
-        <tr>
+        <tr <?php echo !empty($existTrades[$i]) ? "class='repeat-record' title={$lang->trade->unique} data-toggle='tooltip'" : '';?>>
           <td class='text-middle'><?php echo $depositor->abbr;?></td>
           <td>
             <?php echo html::select("type[$i]", $lang->trade->typeList, $trade['type'], "class='form-control type' id='type{$i}'");?>
@@ -96,9 +96,8 @@
               <?php echo html::input("date[$i]", $trade['date'], "class='form-control form-date' id='date{$i}'");?>
               <div class='input-group-addon'>
                 <label class="checkbox">
-                  <input type="checkbox" name="ignoreUnique[<?php echo $i;?>]" value="1">
+                  <input type='checkbox' checked='checked' name="ignoreUnique[<?php echo $i;?>]" value='1'>
                   <?php echo $lang->trade->ignore;?>
-                  <i class='red icon-question' title="<?php echo $lang->trade->unique;?>"></i>
                 </label>
               </div>
             </div>

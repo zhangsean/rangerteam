@@ -470,7 +470,8 @@ class trade extends control
 
         $dataList = array();
         $existTrades = array(); 
-        foreach($rows as $key => $row)
+        $i = 0;
+        foreach($rows as $row)
         {
             /* Exclude invalid column. */
             if(is_array($fields['money']))
@@ -540,18 +541,20 @@ class trade extends control
  
             $fee = $data['fee'];
             unset($data['fee']);
-            $dataList[] = $data;
+            $dataList[$i] = $data;
+
+            $existTrade = $this->dao->select('*')->from(TABLE_TRADE)->where('money')->eq($data['money'])->andWhere('date')->eq($data['date'])->fetch();
+            if($existTrade) $existTrades[$i] = $existTrade;
 
             if($schema->fee and $fee)
             {
+                $i + 1;
                 $data['type']  = 'out';
                 $data['money'] = $fee;
                 $data['desc']  = '';
-                $dataList[]    = $data;
+                $dataList[$i]    = $data;
             }
-
-            $existTrade = $this->dao->select('*')->from(TABLE_TRADE)->where('money')->eq($data['money'])->andWhere('date')->eq($data['date'])->fetch();
-            if($existTrade) $existTrades[$key] = $existTrade;
+            $i++;
         }
 
         $this->view->title        = $this->lang->trade->showImport;

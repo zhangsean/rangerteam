@@ -148,7 +148,7 @@ $lang->trade->total         = 'Total';
 $lang->trade->annualCaption = 'Annual statistical table of income and expenditure';
 
 $lang->trade->noTraderMatch = 'No matched trader，click to create';
-$lang->trade->unique        = 'There has been same record,click to ignore';
+$lang->trade->unique        = 'There has been same record';
 $lang->trade->ignore        = 'Ignore';
 
 $lang->trade->chartList['category'] = 'statistic according to category';
