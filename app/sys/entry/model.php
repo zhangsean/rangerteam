@@ -49,17 +49,6 @@ class entryModel extends model
     }
 
     /**
-     * Get zentao entry list.
-     * 
-     * @access public
-     * @return array
-     */
-    public function getZentaoEntryList()
-    {
-        return $this->dao->select('*')->from(TABLE_ENTRY)->where('zentao')->eq('1')->fetchAll();
-    }
-
-    /**
      * Get entry by id.
      * 
      * @param  int    $entryID

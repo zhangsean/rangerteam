@@ -25,7 +25,7 @@ include '../../common/view/header.html.php';
         <th class='w-80px'><?php echo $lang->entry->code;?></th>
         <th class='w-240px'><?php echo $lang->entry->key;?></th>
         <th><?php echo $lang->entry->ip;?></th>
-        <th class='w-120px'><?php echo $lang->actions;?></th>
+        <th class='w-160px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -53,10 +53,8 @@ include '../../common/view/header.html.php';
           <?php
           echo html::a($this->createLink('group', 'manageAppPriv', "type=byApp&appCode=$entry->code"), $lang->entry->priv);
           echo html::a($this->createLink('entry', 'edit', "code=$entry->code"), $lang->edit);
-          if(!$entry->buildin)
-          {
-              echo html::a($this->createLink('entry', 'delete', "code=$entry->code"), $lang->delete, 'class="entry-deleter"');
-          }
+          if(!$entry->buildin) echo html::a($this->createLink('entry', 'delete', "code=$entry->code"), $lang->delete, 'class="entry-deleter"');
+          if($entry->zentao) echo html::a($this->createLink('entry', 'zentaoAdmin', "id={$entry->id}"), $lang->entry->bindUser);
           ?>
         </td>
       </tr>

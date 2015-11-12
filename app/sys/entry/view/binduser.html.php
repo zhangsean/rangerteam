@@ -12,11 +12,11 @@
 include '../../common/view/header.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class='icon-building'></i> <?php echo $lang->entry->create;?></strong>
+    <strong><i class='icon-link'></i> <?php echo $lang->entry->bindUser;?></strong>
   </div>
   <div class='panel-body'>
     <form id='ajaxForm' method='post' class='form-inline'>
-      <table class='table table-form'>
+      <table class='table table-form w-p50'>
         <?php $i=1;?>
         <?php foreach($ranzhiUsers as $account => $realname):?>
         <tr>

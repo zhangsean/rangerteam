@@ -12,22 +12,6 @@
 class entry extends control
 {
     /**
-     * Construct 
-     * 
-     * @access public
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $zentaoEntryList = $this->entry->getZentaoEntryList();
-        if(!empty($zentaoEntryList))
-        {
-            foreach($zentaoEntryList as $zentaoEntry) $this->lang->entry->menu->{$zentaoEntry->code} = "{$zentaoEntry->name}|entry|zentaoAdmin|code={$zentaoEntry->id}";
-        }
-    }
-
-    /**
      * Manage all entries.
      * 
      * @access public
