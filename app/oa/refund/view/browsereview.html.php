@@ -24,7 +24,7 @@
         <th class='w-100px'><?php echo $lang->refund->date;?></th>
         <th class='w-100px'><?php echo $lang->refund->status;?></th>
         <th><?php echo $lang->refund->desc;?></th>
-        <th class='w-150px'><?php echo $lang->actions;?></th>
+        <th class='w-80px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <?php foreach($refunds as $refund):?>
@@ -40,9 +40,7 @@
       <td><?php echo $refund->date;?></td>
       <td><?php echo zget($lang->refund->statusList, $refund->status);?></td>
       <td><?php echo $refund->desc?></td>
-      <td>
-        <?php echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}"), $lang->refund->review, "data-toggle='modal'")?>
-      </td>
+      <td><?php echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}"), $lang->refund->review, "data-toggle='modal'")?></td>
     </tr>
     <?php endforeach;?>
   </table>

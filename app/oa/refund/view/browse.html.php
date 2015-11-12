@@ -32,7 +32,11 @@
         <th class='w-150px'><?php commonModel::printOrderLink('firstReviewer', $orderBy, $vars, $lang->refund->reviewer);?></th>
         <th class='w-90px'><?php commonModel::printOrderLink('refundBy', $orderBy, $vars, $lang->refund->refundBy);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('refundDate', $orderBy, $vars, $lang->refund->refundDate);?></th>
+        <?php if($mode == 'personal'):?>
         <th class='w-130px'><?php echo $lang->actions;?></th>
+        <?php else:?>
+        <th class='w-80px'><?php echo $lang->actions;?></th>
+        <?php endif;?>
       </tr>
     </thead>
     <?php foreach($refunds as $refund):?>
@@ -48,10 +52,20 @@
       <td><?php echo zget($userPairs, $refund->refundBy);?></td>
       <td><?php echo substr($refund->refundDate, 0, 10)?></td>
       <td>
+        <?php if($mode == 'personal'):?>
         <?php if($refund->createdBy == $this->app->user->account and ($refund->status == 'wait' or $refund->status == 'draft')):?>
-        <?php if($refund->status == 'wait' or $refund->status == 'draft') echo html::a($this->createLink('refund', 'switchstatus', "id=$refund->id"), $refund->status == 'wait' ? $lang->refund->cancel : $lang->refund->commit, "class='reload'");?>
         <?php echo html::a($this->createLink('refund', 'edit',   "refundID={$refund->id}"), $lang->edit, "")?>
         <?php echo html::a($this->createLink('refund', 'delete', "refundID={$refund->id}"), $lang->delete, "class='deleter'")?>
+        <?php if($refund->status == 'wait' or $refund->status == 'draft'):?>
+        <?php echo html::a($this->createLink('refund', 'switchstatus', "id=$refund->id"), $refund->status == 'wait' ? $lang->refund->cancel : $lang->refund->commit, "class='reload'");?>
+        <?php else:?>
+        <?php echo html::a('javascript:;', $lang->refund->cancel, "class='disabled'");?>
+        <?php endif;?>
+        <?php else:?>
+        <?php echo html::a('javascript:;', $lang->edit, "class='disabled'")?>
+        <?php echo html::a('javascript:;', $lang->delete, "class='disabled'")?>
+        <?php echo html::a('javascript:;', $lang->refund->cancel, "class='disabled'");?>
+        <?php endif;?>
         <?php endif;?>
         <?php echo html::a($this->createLink('refund', 'view',   "refundID={$refund->id}"), $lang->view, "")?>
         <?php if($mode == 'todo') echo html::a($this->createLink('refund', 'reimburse', "refundID={$refund->id}"), $lang->refund->common, "class='refund'");?>
