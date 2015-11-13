@@ -133,6 +133,7 @@ class ssoModel extends model
         $data->key  = $key;
         $result = $this->fetchZentaoAPI($settingUrl, $data);
         if(!$result) return array('result' => 'fail', 'message' => $this->lang->entry->error->zentaoSetting);
+        if($result == 'deny') return array('result' => 'fail', 'message' => $this->lang->error->accessDenied);
 
         return array('result' => 'success');
     }
@@ -150,6 +151,7 @@ class ssoModel extends model
         if(!isset($this->snoopy)) $this->snoopy = $this->app->loadClass('snoopy');
         if(empty($data))  $this->snoopy->fetch($url);
         if(!empty($data)) $this->snoopy->submit($url, $data);
+        if($this->snoopy->results == 'deny') return 'deny';
         $result = json_decode($this->snoopy->results);
 
         if($this->snoopy->results == 'success') return array('status' => 'success');
