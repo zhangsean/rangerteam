@@ -38,8 +38,7 @@
 .attend-status:hover {cursor: pointer;}
 
 #triggerModal .actions {display: none;}
-.day {position: relative;}
-.text-muted {position: absolute; right: 0; top: 0; padding: 3px; color: #CCC;}
+.text-muted {position: relative; right: -45px; top: 0; padding: 3px; color: #CCC;}
 </style>
 <?php $dateList = range(strtotime($startDate), strtotime($endDate), 86400);?>
 <table class='calendar'>
@@ -125,7 +124,7 @@ $(document).ready(function()
         {
             if($(this).find('.icon-plus').length == 0)
             {
-                $(this).append("<span class='text-muted icon-plus'></span>");
+                $(this).prepend("<span class='text-muted icon-plus'></span>");
             }
         }
     });
