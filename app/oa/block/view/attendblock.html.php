@@ -73,8 +73,7 @@
       <td class='day <?php echo $class?>' data-date='<?php echo $dStr?>'>
         <?php if(!isset($todos[$dStr]['PM'])) continue;?>
         <?php foreach($todos[$dStr]['PM'] as $todo):?>
-        <?php $link = "$.openEntry('oa', '" . $this->createLink('oa.todo', 'calendar') . "')";?>
-        <div class='event <?php echo $todo->status?>' onclick="<?php echo $link?>" title='<?php echo $todo->begin . ' ' . $todo->name?>'>
+        <div class='event <?php echo $todo->status?>' data-id="<?php echo $todo->id?>" title='<?php echo $todo->begin . ' ' . $todo->name?>'>
           <?php echo $todo->name;?>
         </div>
         <?php endforeach;?>
