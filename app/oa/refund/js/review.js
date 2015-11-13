@@ -45,7 +45,7 @@ $(document).ready(function()
             }
         })
 
-        $('input[name^=status]').click(function()
+        $('input[name^=status], .all-pass').click(function()
         {
             var money = 0;
             $('input[name^=status]').each(function()
