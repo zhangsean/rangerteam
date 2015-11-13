@@ -160,7 +160,7 @@ class todoModel extends model
             ->set('status')->eq('wait')
             ->where('id')->eq((int)$todoID)
             ->exec();
-        $this->loadModel('action')->create('todo', $todoID, 'activate', '', 'closed');
+        $this->loadModel('action')->create('todo', $todoID, 'activated', '', 'closed');
         return true;
     }
 

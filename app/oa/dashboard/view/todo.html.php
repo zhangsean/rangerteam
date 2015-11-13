@@ -22,6 +22,7 @@
           <th class='w-100px'><?php commonModel::printOrderLink('type',   $orderBy, $vars, $lang->todo->type);?></th>
           <th class='w-80px'> <?php commonModel::printOrderLink('pri',    $orderBy, $vars, $lang->todo->pri);?></th>
           <th>                <?php commonModel::printOrderLink('name',   $orderBy, $vars, $lang->todo->name);?></th>
+          <th class='w-100px'><?php commonModel::printOrderLink('assignedTo', $orderBy, $vars, $lang->todo->assignedTo);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('begin',  $orderBy, $vars, $lang->todo->begin);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('end',    $orderBy, $vars, $lang->todo->end);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->todo->status);?></th>
@@ -36,18 +37,20 @@
           <td><?php echo zget($lang->todo->typeList, $todo->type);?></td>
           <td><?php echo $lang->todo->priList[$todo->pri];?></td>
           <td class='text-left'><?php echo $todo->name;?></td>
+          <td><?php echo zget($users, $todo->assignedTo);?></td>
           <td><?php echo $todo->begin;?></td>
           <td><?php echo $todo->end;?></td>
           <td><?php echo zget($lang->todo->statusList, $todo->status);?></td>
           <td class='text-left'>
             <?php echo html::a($this->createLink('oa.todo', 'view', "todoID={$todo->id}"), $lang->view, "data-toggle='modal'")?>
-            <?php echo html::a($this->createLink('oa.todo', 'finish', "todoID={$todo->id}"), $lang->todo->finish, "data-id='{$todo->id}' class='ajaxFinish'")?>
+            <?php $disabled = ($this->todo->checkPriv($todo, 'finish') && $this->todo->isClickable($todo, 'finish')) ? '' : 'disabled';?>
+            <?php echo html::a($this->createLink('oa.todo', 'finish', "todoID={$todo->id}"), $lang->todo->finish, "data-id='{$todo->id}' class='ajaxFinish $disabled'")?>
             <?php echo html::a($this->createLink('oa.todo', 'assignTo', "todoID={$todo->id}"), $lang->todo->assignTo, "data-toggle='modal'")?>
           </td>
         </tr>
         <?php endforeach;?>
       </tbody>
-      <tfoot><tr><td colspan='10'><?php $pager->show();?></td></tr></tfoot>
+      <tfoot><tr><td colspan='11'><?php $pager->show();?></td></tr></tfoot>
     </table>
   </div>
 </div>

@@ -101,7 +101,7 @@ class dashboard extends control
         $todos   = array();
 
         $stmt = $this->dao->select('*')->from(TABLE_TODO)
-            ->where('status')->ne('done')
+            ->where('status')->ne('closed')
             ->andWhere()->markLeft(1)->where('assignedTo')->eq($account)->orWhere()->markLeft(1)->where('account')->eq($account)->andWhere('assignedTo')->eq('')->markRight(2)
             ->orderBy($orderBy)
             ->page($pager)
