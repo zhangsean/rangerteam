@@ -26,5 +26,3 @@
 .hide-side .trash {right: 50px;}
 .trash:hover {background: #f0f0f0;}
 .trash .icon{font-size: 30px;}
-
-.form-condensed textarea.form-control {height: 30px; min-height: 30px;}
