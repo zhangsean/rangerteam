@@ -371,8 +371,15 @@ CREATE TABLE IF NOT EXISTS `oa_todo` (
   `pri` tinyint(3) unsigned NOT NULL,
   `name` char(150) NOT NULL,
   `desc` text NOT NULL,
-  `status`  enum('wait','doing','done') NOT NULL DEFAULT 'wait',
+  `status` varchar(30) NOT NULL DEFAULT '',
   `private` tinyint(1) NOT NULL,
+  `assignedTo` varchar(30) NOT NULL DEFAULT '',
+  `assignedBy` varchar(30) NOT NULL DEFAULT '',
+  `assignedDate` datetime NOT NULL,
+  `finishedBy` varchar(30) NOT NULL DEFAULT '',
+  `finishedDate` datetime NOT NULL,
+  `closedBy` varchar(30) NOT NULL DEFAULT '',
+  `closedDate` datetime NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user` (`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -620,6 +627,7 @@ CREATE TABLE `sys_entry` (
   `position` varchar(10) NOT NULL DEFAULT 'default',
   `visible` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `order` tinyint(5) unsigned NOT NULL DEFAULT '0',
+  `zentao` enum('0', '1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
