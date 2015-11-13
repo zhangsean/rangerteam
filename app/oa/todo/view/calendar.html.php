@@ -35,7 +35,7 @@
         <?php foreach($todos as $id => $todo):?>
         <?php if($type == 'custom'):?>
         <?php $index++?>
-        <div class='board-item' data-id='<?php echo $todo->id?>' data-index='<?php echo $index?>' data-name='<?php echo $todo->name?>' data-type='<?php echo $todo->type?>' data-begin='<?php echo $todo->begin?>' data-end='<?php echo $todo->end?>' data-action='edit' data-toggle="droppable" data-target=".day">
+        <div class='board-item text-nowrap text-ellipsis' title='<?php echo $todo->name;?>' data-id='<?php echo $todo->id?>' data-index='<?php echo $index?>' data-name='<?php echo $todo->name?>' data-type='<?php echo $todo->type?>' data-begin='<?php echo $todo->begin?>' data-end='<?php echo $todo->end?>' data-action='edit' data-toggle="droppable" data-target=".day">
           <?php echo html::a($this->createLink('oa.todo', 'view', "id=$todo->id"), $todo->name, "data-toggle='modal'")?>
         </div>
         <?php endif;?>
