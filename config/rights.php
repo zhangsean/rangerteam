@@ -80,6 +80,17 @@ $config->rights->member['task']['export']         = 'export';
 $config->rights->member['task']['delete']         = 'delete';
 $config->rights->member['task']['recordestimate'] = 'delete';
 
+$config->rights->member['todo']['calendar']    = 'calendar';
+$config->rights->member['todo']['create']      = 'create';
+$config->rights->member['todo']['batchcreate'] = 'batchcreate';
+$config->rights->member['todo']['edit']        = 'edit';
+$config->rights->member['todo']['view']        = 'view';
+$config->rights->member['todo']['delete']      = 'delete';
+$config->rights->member['todo']['finish']      = 'finish';
+$config->rights->member['todo']['assignto']    = 'assignto';
+$config->rights->member['todo']['close']       = 'close';
+$config->rights->member['todo']['activate']    = 'activate';
+
 $config->rights->member['reply']['post']          = 'post';
 $config->rights->member['reply']['edit']          = 'edit';
 $config->rights->member['reply']['delete']        = 'delete';

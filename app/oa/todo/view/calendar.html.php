@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/calendar.html.php';?>
+<?php js::set('account', $this->app->user->account);?>
 <?php js::set('settings', new stdclass());?>
 <?php js::set('settings.startDate', $date == 'future' ? date('Y-m-d') : date('Y-m-d', strtotime($date)));?>
 <?php js::set('settings.data', $data);?>
@@ -36,7 +37,7 @@
         <?php if($type == 'custom'):?>
         <?php $index++?>
         <div class='board-item text-nowrap text-ellipsis' title='<?php echo $todo->name;?>' data-id='<?php echo $todo->id?>' data-index='<?php echo $index?>' data-name='<?php echo $todo->name?>' data-type='<?php echo $todo->type?>' data-begin='<?php echo $todo->begin?>' data-end='<?php echo $todo->end?>' data-action='edit' data-toggle="droppable" data-target=".day">
-          <?php echo html::a($this->createLink('oa.todo', 'view', "id=$todo->id"), $todo->name, "data-toggle='modal'")?>
+          <?php echo html::a("javascript:void(0)", $todo->name, "onclick=\"viewTodo(this)\" data-remote='" . $this->createLink('oa.todo', 'view', "id=$todo->id") . "' data-title='{$todo->name}' data-width='70%'")?>
         </div>
         <?php endif;?>
         <?php endforeach;?>
@@ -84,7 +85,6 @@ function finishTodo(id)
                     $.openEntry(response.confirm.entry, response.confirm.url);
                 }   
             }
-            if(response.message) $.zui.messager.success(response.message);
         }
         else
         {
@@ -201,10 +201,6 @@ v.settings.beforeChange = function(event)
 
         $.post(link, data, function(response)
         {
-            if(response.result == 'success' && response.message)
-            {
-                $.zui.messager.success(response.message);
-            }
             updateCalendar();
         }, 'json');
     }
@@ -215,9 +211,9 @@ v.settings.display = function(event)
     for(key in v.settings.data.events)
     {
         var e = v.settings.data.events[key];
-        if(e.data.status != 'done')
+        if((e.data.status != 'done' && e.data.status != 'closed') && (e.data.assignedTo == '' || e.data.assignedTo == v.account))
         {
-            $('.events .event[data-id=' + e.id + ']').append("<div class='action'><a href='javascript:;' class='finish'><?php echo $lang->todo->finish?><\/a>\n<\/span>").addClass('with-action');
+            $('.events .event[data-id=' + e.id + ']').append("<div class='action'><a href='javascript:;' class='finish'><?php echo $lang->todo->finish?><\/a><\/div>").addClass('with-action');
             $('.events .event[data-id=' + e.id + '] .action .finish').click(function()
             {
                 var id = $(this).closest('.event').data('id');
@@ -225,7 +221,12 @@ v.settings.display = function(event)
                 return false;
             });
         }
-        if(e.data.status == 'done')
+        if(e.data.assignedTo != '' && e.data.assignedTo != v.account)
+        {
+            var eventObj = $('.events .event[data-id=' + e.id + ']');
+            eventObj.css('background-color', '#808080');
+        }
+        if(e.data.status == 'done' || e.data.status == 'closed')
         {
             var eventObj = $('.events .event[data-id=' + e.id + ']');
             eventObj.css('background-color', '#38B03F');

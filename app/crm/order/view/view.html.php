@@ -34,7 +34,7 @@
         if($contract) $contractLink = html::a($this->createLink('contract', 'view', "contractID={$contract->id}"), $contract->name);
         ?>
         <p><?php printf($lang->order->infoBuy, $customerLink, $productLink);?></p>
-        <?php if($order->status == 'signed' and $contract):?>
+        <?php if($contract):?>
         <p><?php printf($lang->order->infoContract, $contractLink);?></p>
         <?php endif;?>
         <p><?php printf($lang->order->infoAmount, zget($currencySign, $order->currency, '') . formatMoney($order->plan), zget($currencySign, $order->currency, '') . formatMoney($order->real))?></p>

@@ -12,7 +12,6 @@ function finishTodo(id)
                     $.openEntry(response.confirm.entry, response.confirm.url);
                 }   
             }
-            if(response.message) $.zui.messager.success(response.message);
         }
         else
         {
@@ -27,6 +26,10 @@ $(document).ready(function()
 {
     $.setAjaxLoader('#triggerModal .ajaxEdit', '#triggerModal');
     $.setAjaxLoader('#ajaxModal .ajaxEdit', '#ajaxModal');
+
+    $.setAjaxLoader('#triggerModal .ajaxAssign', '#triggerModal');
+    $.setAjaxLoader('#ajaxModal .ajaxAssign', '#ajaxModal');
+
     $('.ajaxFinish').click(function()
     {
         $(this).prop('href', '');
@@ -35,8 +38,17 @@ $(document).ready(function()
         return false;
     });
 
-    $.setAjaxLoader('#triggerModal .ajaxAssign', '#triggerModal');
-    $.setAjaxLoader('#ajaxModal .ajaxAssign', '#ajaxModal');
+    $('.btn-ajax').click(function()
+    {
+        $.get($(this).prop('href'), function(response)
+        {
+            if(response.message) $.zui.messager.success(response.message);
+            updateCalendar();
+            return false;
+        }, 'json');
+        $.zui.modalTrigger.close();
+        return false;
+    });
 
     /* Adjust default deleter. */
     $.setAjaxDeleter('.todoDeleter', function(data)
@@ -52,5 +64,6 @@ $(document).ready(function()
             alert(data.message);
             return location.reload();
         }
+        return false;
     });
 });

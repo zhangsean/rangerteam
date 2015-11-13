@@ -1,3 +1,9 @@
+/* open view page. */
+function viewTodo(obj)
+{
+    $.zui.modalTrigger.show($(obj).data());
+}
+
 $(document).ready(function()
 {
     /* remove menu */

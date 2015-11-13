@@ -62,12 +62,20 @@
               <td><?php echo zget($users, $todo->account);?></td>
             </tr>
             <tr>
-              <th class='w-80px'><?php echo $lang->todo->assignedTo;?></th>
-              <td><?php echo zget($users, $todo->assignedTo);?></td>
-            </tr>
-            <tr>
               <th class='w-80px'><?php echo $lang->todo->assignedBy;?></th>
               <td><?php echo zget($users, $todo->assignedBy);?></td>
+            </tr>
+            <tr>
+              <th class='w-80px'><?php echo $lang->todo->assignedTo;?></th>
+              <td><?php echo !empty($todo->assignedTo) ? sprintf($lang->todo->assignedTip, zget($users, $todo->assignedTo), $todo->assignedDate) : '';?></td>
+            </tr>
+            <tr>
+              <th class='w-80px'><?php echo $lang->todo->finishedBy;?></th>
+              <td><?php echo !empty($todo->finishedBy) ? sprintf($lang->todo->finishedTip, zget($users, $todo->finishedBy), $todo->finishedDate) : '';?></td>
+            </tr>
+            <tr>
+              <th class='w-80px'><?php echo $lang->todo->closedBy;?></th>
+              <td><?php echo !empty($todo->closedBy) ? sprintf($lang->todo->closedTip, zget($users, $todo->closedBy), $todo->closedDate) : '';?></td>
             </tr>
           </table>
       </div>
@@ -75,14 +83,18 @@
   </div>
   <div class='text-center actions'>
     <?php
-    $disable = ($this->todo->checkPriv($todo, 'finish') and $this->todo->isClickable($todo, 'finish')) ? '' : 'disabled';
-    commonModel::printLink('todo', 'finish', "id=$todo->id", $lang->finish, "data-id='{$todo->id}' class='btn btn-success ajaxFinish $disable'");
-    $disable = $this->todo->checkPriv($todo, 'assignTo') ? '' : 'disabled';
-    commonModel::printLink('todo', 'assignTo', "id=$todo->id", $lang->todo->assignTo, "data-id='{$todo->id}' class='btn ajaxAssign $disable'");
-    $disable = $this->todo->checkPriv($todo, 'edit') ? '' : 'disabled';
-    commonModel::printLink('todo', 'edit',   "todoID=$todo->id", $lang->edit, "class='btn ajaxEdit $disable'");
-    $disable = $this->todo->checkPriv($todo, 'delete') ? '' : 'disabled';
-    commonModel::printLink('todo', 'delete', "todoID=$todo->id", $lang->delete, "class='btn todoDeleter $disable'");
+    $disabled = ($this->todo->checkPriv($todo, 'finish') and $this->todo->isClickable($todo, 'finish')) ? '' : 'disabled';
+    commonModel::printLink('todo', 'finish', "id=$todo->id", $lang->finish, "data-id='{$todo->id}' class='btn btn-success ajaxFinish $disabled'");
+    $disabled = $this->todo->checkPriv($todo, 'assignTo') ? '' : 'disabled';
+    commonModel::printLink('todo', 'assignTo', "id=$todo->id", $lang->todo->assignTo, "data-id='{$todo->id}' class='btn ajaxAssign $disabled'");
+    $disabled = $this->todo->checkPriv($todo, 'edit') ? '' : 'disabled';
+    commonModel::printLink('todo', 'edit',   "todoID=$todo->id", $lang->edit, "class='btn ajaxEdit $disabled'");
+    $disabled = ($this->todo->checkPriv($todo, 'activate') and $this->todo->isClickable($todo, 'activate')) ? '' : 'disabled';
+    commonModel::printLink('todo', 'activate', "id=$todo->id", $lang->activate, "data-id='{$todo->id}' class='btn btn-ajax $disabled'");
+    $disabled = ($this->todo->checkPriv($todo, 'close') and $this->todo->isClickable($todo, 'close')) ? '' : 'disabled';
+    commonModel::printLink('todo', 'close', "id=$todo->id", $lang->close, "data-id='{$todo->id}' class='btn btn-ajax $disabled'");
+    $disabled = $this->todo->checkPriv($todo, 'delete') ? '' : 'disabled';
+    commonModel::printLink('todo', 'delete', "todoID=$todo->id", $lang->delete, "class='btn todoDeleter $disabled'");
     ?>
   </div>
 </div>

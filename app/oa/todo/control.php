@@ -113,10 +113,11 @@ class todo extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$date")));
         }
 
-        $this->view->title      = $this->lang->todo->common . $this->lang->colon . $this->lang->todo->batchCreate;
-        $this->view->date       = (int)$date == 0 ? $date : date('Y-m-d', strtotime($date));
-        $this->view->times      = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
-        $this->view->time       = date::now();
+        $this->view->title = $this->lang->todo->common . $this->lang->colon . $this->lang->todo->batchCreate;
+        $this->view->date  = (int)$date == 0 ? $date : date('Y-m-d', strtotime($date));
+        $this->view->times = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
+        $this->view->time  = date::now();
+        $this->view->users = $this->loadModel('user')->getPairs('noclosed,nodeleted');
 
         $this->display();
     }
@@ -206,6 +207,38 @@ class todo extends control
     }
 
     /**
+     * Close a todo.
+     * 
+     * @param  int    $todoID 
+     * @access public
+     * @return void
+     */
+    public function close($todoID)
+    {
+        $todo = $this->todo->getById($todoID);
+        $this->checkPriv($todo, 'close', 'json');
+
+        if($todo->status == 'done') $this->todo->close($todoID);
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$todo->date")));
+    }
+
+    /**
+     * Activate a todo.
+     * 
+     * @param  int    $todoID 
+     * @access public
+     * @return void
+     */
+    public function activate($todoID)
+    {
+        $todo = $this->todo->getById($todoID);
+        $this->checkPriv($todo, 'activate', 'json');
+
+        if($todo->status == 'closed') $this->todo->activate($todoID);
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$todo->date")));
+    }
+
+    /**
      * Finish a todo.
      * 
      * @param  int    $todoID 
@@ -216,7 +249,7 @@ class todo extends control
     {
         $todo = $this->todo->getById($todoID);
         $this->checkPriv($todo, 'finish', 'json');
-        if($todo->status != 'done') $this->todo->finish($todoID);
+        if(strpos('done,closed', $todo->status) === false) $this->todo->finish($todoID);
 
         if($todo->type == 'task') 
         {
@@ -256,16 +289,18 @@ class todo extends control
             $changes = $this->todo->assignTo($todoID);
             if(!empty($changes))
             {
-                $actionID = $this->loadModel('action')->create('todo', $todo->id, 'edited');
+                $actionID = $this->loadModel('action')->create('todo', $todo->id, 'Assigned', '', $this->post->assignedTo);
                 $this->action->logHistory($actionID, $changes);
             }
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'closeModal' => 'true', 'locate' => 'reload'));
         }
 
+        if($todo->date != '00000000') $todo->date = strftime("%Y-%m-%d", strtotime($todo->date));
         $this->view->title = $this->lang->todo->assignTo;
         $this->view->todo  = $todo;
         $this->view->users = $this->loadModel('user')->getPairs('nodeleted,noclosed');
+        $this->view->times = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
         $this->display();
     }
 

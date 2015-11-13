@@ -67,15 +67,21 @@ class todoModel extends model
                 {
                     $todo->date    = $this->post->date;
                 }
-                $todo->type    = $todos->types[$i];
-                $todo->pri     = $todos->pris[$i];
-                $todo->name    = isset($todos->names[$i]) ? $todos->names[$i] : '';
-                $todo->desc    = $todos->descs[$i];
-                $todo->begin   = isset($todos->begins[$i]) ? $todos->begins[$i] : 2400;
-                $todo->end     = isset($todos->ends[$i]) ? $todos->ends[$i] : 2400;
-                $todo->status  = "wait";
-                $todo->private = 0;
-                $todo->idvalue = isset($todos->idvalues[$i + 1]) ? $todos->idvalues[$i + 1] : '0';
+                $todo->type       = $todos->types[$i];
+                $todo->pri        = $todos->pris[$i];
+                $todo->assignedTo = $todos->assignedTo[$i];
+                $todo->name       = isset($todos->names[$i]) ? $todos->names[$i] : '';
+                $todo->desc       = $todos->descs[$i];
+                $todo->begin      = isset($todos->begins[$i]) ? $todos->begins[$i] : 2400;
+                $todo->end        = isset($todos->ends[$i]) ? $todos->ends[$i] : 2400;
+                $todo->status     = "wait";
+                $todo->private    = 0;
+                $todo->idvalue    = isset($todos->idvalues[$i + 1]) ? $todos->idvalues[$i + 1] : '0';
+                if(!empty($todo->assignedTo))
+                {
+                    $todo->assignedBy   = $todo->account;
+                    $todo->assignedDate = helper::now();
+                }
 
                 $this->dao->insert(TABLE_TODO)->data($todo)->autoCheck()->exec();
                 if(dao::isError()) return false;
@@ -126,15 +132,56 @@ class todoModel extends model
      * Change the status of a todo.
      * 
      * @param  string $todoID 
+     * @access public
+     * @return bool
+     */
+    public function close($todoID)
+    {
+        $this->dao->update(TABLE_TODO)
+            ->set('status')->eq('closed')
+            ->set('closedBy')->eq($this->app->user->account)
+            ->set('closedDate')->eq(helper::now())
+            ->where('id')->eq((int)$todoID)
+            ->exec();
+        $this->loadModel('action')->create('todo', $todoID, 'closed', '', 'closed');
+        return !dao::isError();
+    }
+
+    /**
+     * Change the status of a todo.
+     * 
+     * @param  string $todoID 
+     * @access public
+     * @return bool
+     */
+    public function activate($todoID)
+    {
+        $this->dao->update(TABLE_TODO)
+            ->set('status')->eq('wait')
+            ->where('id')->eq((int)$todoID)
+            ->exec();
+        $this->loadModel('action')->create('todo', $todoID, 'activate', '', 'closed');
+        return true;
+    }
+
+    /**
+     * Change the status of a todo.
+     * 
+     * @param  string $todoID 
      * @param  string $status 
      * @access public
-     * @return void
+     * @return bool
      */
     public function finish($todoID)
     {
-        $this->dao->update(TABLE_TODO)->set('status')->eq('done')->where('id')->eq((int)$todoID)->exec();
+        $this->dao->update(TABLE_TODO)
+            ->set('status')->eq('done')
+            ->set('finishedBy')->eq($this->app->user->account)
+            ->set('finishedDate')->eq(helper::now())
+            ->where('id')->eq((int)$todoID)
+            ->exec();
         $this->loadModel('action')->create('todo', $todoID, 'finished', '', 'done');
-        return;
+        return true;
     }
 
     /**
@@ -150,6 +197,7 @@ class todoModel extends model
         $todo = fixer::input('post')
             ->remove('account')
             ->add('assignedBy', $this->app->user->account)
+            ->add('assignedDate', helper::now())
             ->get();
 
         $this->dao->update(TABLE_TODO)->data($todo)
@@ -335,11 +383,13 @@ class todoModel extends model
             $data->end      = strtotime($todo->date . ' ' . $todo->end) * 1000;
             $data->calendar = $todo->type;
 
-            $data->data          = new stdclass();
-            $data->data->account = $todo->account;
-            $data->data->status  = $todo->status;
-            $data->click         = new stdclass();
-            $data->click->title  = $this->lang->task->view;
+            $data->data = new stdclass();
+            $data->data->account    = $todo->account;
+            $data->data->status     = $todo->status;
+            $data->data->assignedTo = $todo->assignedTo;
+
+            $data->click = new stdclass();
+            $data->click->title  = $this->lang->todo->view;
             $data->click->width  = '70%';
             $data->click->remote = helper::createLink('todo', 'view', "id=$todo->id", 'html');
             $todoList[] = $data;
@@ -363,7 +413,9 @@ class todoModel extends model
     {
         $action = strtolower($action);
 
-        if($action == 'finish') return $todo->status != 'done';
+        if($action == 'finish') return strpos('done,closed', $todo->status) === false;
+        if($action == 'close') return $todo->status == 'done';
+        if($action == 'activate') return $todo->status == 'closed';
 
         return true;
     }
@@ -380,12 +432,7 @@ class todoModel extends model
     {
         $account = $this->app->user->account;
         $action  = strtolower($action);
-        if(strpos('edit,finish,assignto,delete', $action) !== false)
-        {
-            if(empty($todo->assignedTo) and ($todo->account == $account)) return true;
-            if(!empty($todo->assignedTo) and ($todo->assignedTo == $account)) return true;
-        }
-        if(strpos('view', $action) !== false)
+        if(strpos('view,edit,assignto,close,activate,finish,delete', $action) !== false)
         {
             if($todo->private == 0 or $todo->account == $account or $todo->assignedTo == $account) return true;
         }
