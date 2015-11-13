@@ -133,7 +133,7 @@ class ssoModel extends model
         $data->key  = $key;
         $result = $this->fetchZentaoAPI($settingUrl, $data);
         if(!$result) return array('result' => 'fail', 'message' => $this->lang->entry->error->zentaoSetting);
-        if($result == 'deny') return array('result' => 'fail', 'message' => $this->lang->error->accessDenied);
+        if($result == 'deny') return array('result' => 'fail', 'message' => $this->lang->entry->error->accessDenied);
 
         return array('result' => 'success');
     }

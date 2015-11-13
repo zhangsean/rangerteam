@@ -78,8 +78,9 @@ $lang->entry->error->ip    = 'IP列表不能為空';
 $lang->entry->error->url   = ' 非內置應用的登錄地址，必須包含 /、http://或者https://';
 
 $lang->entry->error->admin         = '管理員用戶名或密碼錯誤';
-$lang->entry->error->zentaoSetting = '禪道系統設置失敗，您的禪道系統版本低於7.3或沒有安裝然之整合插件';
+$lang->entry->error->zentaoSetting = '禪道系統設置失敗，您的禪道系統版本低於7.4';
 $lang->entry->error->zentaoUrl     = '禪道登錄地址錯誤';
+$lang->entry->error->accessDenied  = '訪問受限';
 
 $lang->entry->openList['blank']  = '新開標籤';
 $lang->entry->openList['iframe'] = '內嵌窗口';

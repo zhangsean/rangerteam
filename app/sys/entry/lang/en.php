@@ -78,8 +78,9 @@ $lang->entry->error->ip    = 'Please input IP';
 $lang->entry->error->url   = 'Non built-in application login address, you must include the /, http:// or https://';
 
 $lang->entry->error->admin         = 'Wrong admin account or password.';
-$lang->entry->error->zentaoSetting = 'ZentaoPMS set config failed, Please upgrade ZentaoPMS to head or install extension of ranzhi in ZentaoPMS.';
+$lang->entry->error->zentaoSetting = 'ZentaoPMS set config failed, Please upgrade ZentaoPMS to head.';
 $lang->entry->error->zentaoUrl     = 'Wrong ZentaoPMS login url.';
+$lang->entry->error->accessDenied  = 'Access denied';
 
 $lang->entry->openList['blank']  = 'Blank';
 $lang->entry->openList['iframe'] = 'Iframe';
