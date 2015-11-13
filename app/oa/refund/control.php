@@ -32,8 +32,12 @@ class refund extends control
     {
         if($_POST)
         {
-            $this->refund->create();
+            $refundID = $this->refund->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            $actionID = $this->loadModel('action')->create('refund', $refundID, 'Created', '');
+            $this->sendmail($refundID, $actionID);
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('personal')));
         }
 
@@ -411,15 +415,41 @@ class refund extends control
         /* Reset $this->output. */
         $this->clear();
 
-        /* Set toList and ccList. */
-        $refund = $this->refund->getById($refundID);
-        $users  = $this->loadModel('user')->getPairs('noletter');
-        $toList = "{$refund->createdBy},{$refund->firstReviewer},{$refund->secondReviewer}";
-
         /* Get action info. */
         $action          = $this->loadModel('action')->getById($actionID);
         $history         = $this->action->getHistory($actionID);
         $action->history = isset($history[$actionID]) ? $history[$actionID] : array();
+
+        /* Set toList and ccList. */
+        $refund = $this->refund->getById($refundID);
+        $users  = $this->loadModel('user')->getPairs('noletter');
+
+        if($action->action == 'reviewed')
+        {
+            if($refund->status == 'doing') $toList = $this->config->refund->secondReviewer;
+            if($refund->status != 'doing') $toList = $refund->createdBy;
+            $subject = "{$this->lang->refund->common}{$this->lang->refund->review}#{$refund->id}{$this->lang->colon}{$refund->name} " . zget($users, $refund->createdBy);
+        }
+
+        if($action->action == 'reimburse')
+        {
+            $toList = $refund->createdBy;
+            $subject = "{$this->lang->refund->reimburse}#{$refund->id}{$this->lang->colon}{$refund->name} " . zget($users, $refund->createdBy);
+        }
+
+        if($action->action == 'created' or $action->action == 'revoked' or $action->action == 'commited')
+        {
+            if(!empty($this->config->refund->firstReviewedBy))
+            {
+                $toList = $this->config->refund->firstReviewedBy; 
+            }
+            else
+            {
+               $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
+               $toList = trim($dept->moderators, ',');
+            }
+            $subject = "{$this->lang->refund->create}#{$refund->id}{$this->lang->colon}{$refund->name} " . zget($users, $refund->createdBy);
+        }
 
         /* Create the email content. */
         $this->view->refund     = $refund;
@@ -431,7 +461,6 @@ class refund extends control
         $mailContent = $this->parse($this->moduleName, 'sendmail');
 
         /* Send emails. */
-        $subject = "{$this->lang->refund->common}{$this->lang->refund->review}#{$refund->id}{$this->lang->colon}{$refund->name} " . zget($users, $refund->createdBy);
         $this->loadModel('mail')->send($toList, $subject, $mailContent);
         if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
@@ -488,8 +517,18 @@ class refund extends control
         $refund = $this->refund->getByID($refundID);
         if(!$refund) return false;
 
-        if($refund->status == 'wait') $this->dao->update(TABLE_REFUND)->set('status')->eq('draft')->where('id')->eq($refundID)->exec();
-        if($refund->status == 'draft') $this->dao->update(TABLE_REFUND)->set('status')->eq('wait')->where('id')->eq($refundID)->exec();
+        if($refund->status == 'wait')
+        {
+            $this->dao->update(TABLE_REFUND)->set('status')->eq('draft')->where('id')->eq($refundID)->exec();
+            $actionID = $this->loadModel('action')->create('refund', $refundID, 'revoked');
+            $this->sendmail($refundID, $actionID);
+        }
+        if($refund->status == 'draft')
+        {
+            $this->dao->update(TABLE_REFUND)->set('status')->eq('wait')->where('id')->eq($refundID)->exec();
+            $actionID = $this->loadModel('action')->create('refund', $refundID, 'commited');
+            $this->sendmail($refundID, $actionID);
+        }
 
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));

@@ -269,7 +269,7 @@ class leave extends control
                $toList = trim($dept->moderators, ',');
             }
 
-            $subject = "{$this->lang->leave->common}{$this->lang->leave->review}#{$leave->id}{$this->lang->colon}{$leave->begin}~{$leave->end}";
+            $subject = "{$this->lang->leave->common}#{$leave->id}{$this->lang->colon}{$leave->begin}~{$leave->end}";
         }
 
         /* Create the email content. */

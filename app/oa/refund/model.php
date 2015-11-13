@@ -87,7 +87,6 @@ class refundModel extends model
         if(dao::isError()) return false;
         $refundID = $this->dao->lastInsertID();
         $this->loadModel('file')->saveUpload('refund', $refundID);
-        $this->loadModel('action')->create('refund', $refundID, 'Created', '');
 
         /* Insert detail */
         if(!empty($_POST['moneyList']))
@@ -109,9 +108,11 @@ class refundModel extends model
 
                 $this->dao->insert(TABLE_REFUND)->data($detail)->autoCheck()->exec();
             }
+
+            if(dao::isError()) return false;
         }
 
-        return dao::isError();
+        return $refundID;
     } 
 
     /**

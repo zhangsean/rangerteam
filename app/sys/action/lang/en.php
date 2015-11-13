@@ -63,6 +63,7 @@ $lang->action->desc->finished              = '$date, finished by <strong>$actor<
 $lang->action->desc->replied               = '$date, replied by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->doubted               = '$date, doubted by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->transfered            = '$date, transfered by <strong>$actor</strong>.' . "\n";
+$lang->action->desc->reviewed              = '$date, reviewed by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->revoked               = '$date, revoked by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->commited              = '$date, commited by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->returned              = '$date, received payments $extra by <strong>$actor</strong>.' . "\n";
