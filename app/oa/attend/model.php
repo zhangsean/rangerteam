@@ -193,7 +193,7 @@ class attendModel extends model
         }
 
         $fullNotice = <<<EOT
-<div class='alert alert-danger with-icon alert-dismissable' style='width:360px; position:fixed; bottom:25px; right:15px; z-index: 9999;' id='planInfo'>
+<div class='alert alert-danger with-icon alert-dismissable' style='width:380px; position:fixed; bottom:25px; right:15px; z-index: 9999;' id='planInfo'>
   <i class='icon icon-envelope-alt'>  </i>
   <div class='content'>{$notice}</div>
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
