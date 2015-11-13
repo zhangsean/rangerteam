@@ -64,11 +64,11 @@ rpm:
 	cp build/debian/ranzhi.conf ~/rpmbuild/SOURCES/etc/httpd/conf.d/
 	mkdir ~/rpmbuild/SOURCES/opt/ -p
 	cd ~/rpmbuild/SOURCES; unzip ranzhi.${VERSION}.zip; mv ranzhi opt/ranzhi;
-	sed -i 's/index.php/\/ranzhi\/sys\/index.php/' buildroot/opt/ranzhi/www/sys/.htaccess
-	sed -i 's/index.php/\/ranzhi\/crm\/index.php/' buildroot/opt/ranzhi/www/crm/.htaccess
-	sed -i 's/index.php/\/ranzhi\/cash\/index.php/' buildroot/opt/ranzhi/www/cash/.htaccess
-	sed -i 's/index.php/\/ranzhi\/oa\/index.php/' buildroot/opt/ranzhi/www/oa/.htaccess
-	sed -i 's/index.php/\/ranzhi\/team\/index.php/' buildroot/opt/ranzhi/www/team/.htaccess
+	sed -i 's/index.php/\/ranzhi\/sys\/index.php/' ~/rpmbuild/SOURCES/opt/ranzhi/www/sys/.htaccess
+	sed -i 's/index.php/\/ranzhi\/crm\/index.php/' ~/rpmbuild/SOURCES/opt/ranzhi/www/crm/.htaccess
+	sed -i 's/index.php/\/ranzhi\/cash\/index.php/' ~/rpmbuild/SOURCES/opt/ranzhi/www/cash/.htaccess
+	sed -i 's/index.php/\/ranzhi\/oa\/index.php/' ~/rpmbuild/SOURCES/opt/ranzhi/www/oa/.htaccess
+	sed -i 's/index.php/\/ranzhi\/team\/index.php/' ~/rpmbuild/SOURCES/opt/ranzhi/www/team/.htaccess
 	cd ~/rpmbuild/SOURCES; tar -czvf ranzhi-${VERSION}.tar.gz etc opt; rm -rf ranzhi.${VERSION}.zip etc opt;
 	rpmbuild -ba ~/rpmbuild/SPECS/ranzhi.spec
 	cp ~/rpmbuild/RPMS/noarch/ranzhi-${VERSION}-1.noarch.rpm ./
