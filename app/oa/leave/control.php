@@ -159,6 +159,14 @@ class leave extends control
             if(is_array($result)) $this->send($result);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if(is_numeric($result))
+            {
+                $leaveID = $result;
+                $actionID = $this->loadModel('action')->create('leave', $leaveID, 'created');
+                $this->sendmail($leaveID, $actionID);
+            }
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
@@ -236,15 +244,33 @@ class leave extends control
         /* Reset $this->output. */
         $this->clear();
 
-        /* Set toList and ccList. */
-        $leave  = $this->leave->getById($leaveID);
-        $users  = $this->loadModel('user')->getPairs('noletter');
-        $toList = $leave->createdBy;
-
         /* Get action info. */
         $action          = $this->loadModel('action')->getById($actionID);
         $history         = $this->action->getHistory($actionID);
         $action->history = isset($history[$actionID]) ? $history[$actionID] : array();
+
+        /* Set toList and ccList. */
+        $leave  = $this->leave->getById($leaveID);
+        $users  = $this->loadModel('user')->getPairs('noletter');
+        if($action->action == 'reviewed')
+        {
+            $toList = $leave->createdBy;
+            $subject = "{$this->lang->leave->common}{$this->lang->leave->statusList[$leave->status]}#{$leave->id}{$this->lang->colon}{$leave->begin}~{$leave->end}";
+        }
+        if($action->action == 'created' or $action->action == 'revoked' or $action->action == 'commited')
+        {
+            if(!empty($this->config->attend->reviewedBy))
+            {
+                $toList = $this->config->attend->reviewedBy; 
+            }
+            else
+            {
+               $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
+               $toList = trim($dept->moderators, ',');
+            }
+
+            $subject = "{$this->lang->leave->common}{$this->lang->leave->review}#{$leave->id}{$this->lang->colon}{$leave->begin}~{$leave->end}";
+        }
 
         /* Create the email content. */
         $this->view->leave  = $leave;
@@ -254,7 +280,6 @@ class leave extends control
         $mailContent = $this->parse($this->moduleName, 'sendmail');
 
         /* Send emails. */
-        $subject = "{$this->lang->leave->common}{$this->lang->leave->statusList[$leave->status]}#{$leave->id}{$this->lang->colon}{$leave->begin}~{$leave->end}";
         $this->loadModel('mail')->send($toList, $subject, $mailContent);
         if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
@@ -277,12 +302,20 @@ class leave extends control
         if($leave->status == 'wait')
         {
             $this->dao->update(TABLE_LEAVE)->set('status')->eq('draft')->where('id')->eq($leaveID)->exec();
+
+            $actionID = $this->loadModel('action')->create('leave', $leaveID, 'revoked');
+            $this->sendmail($leaveID, $actionID);
+
             $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy);
         }
 
         if($leave->status == 'draft')
         {
             $this->dao->update(TABLE_LEAVE)->set('status')->eq('wait')->where('id')->eq($leaveID)->exec();
+
+            $actionID = $this->loadModel('action')->create('leave', $leaveID, 'commited');
+            $this->sendmail($leaveID, $actionID);
+
             $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy, '', 'leave');
         }
 

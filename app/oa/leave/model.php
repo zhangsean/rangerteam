@@ -113,7 +113,12 @@ class leaveModel extends model
             ->check('end', 'ge', $leave->begin)
             ->exec();
 
-        if(!dao::isError()) $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy, '', 'leave');
+        $leaveID = $this->dao->lastInsertID();
+        if(!dao::isError())
+        {
+            $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy, '', 'leave');
+            return $leaveID;
+        }
 
         return false;
     }
