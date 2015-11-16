@@ -123,7 +123,7 @@ $(document).ready(function()
         {
             if($(this).find('.icon-plus').length == 0)
             {
-                $(this).prepend("<span class='text-muted icon-plus'></span>");
+                $(this).prepend("<span class='text-muted icon-plus'></span><div class='clearfix'></div>");
             }
         }
     });
