@@ -38,7 +38,7 @@
 .attend-status:hover {cursor: pointer;}
 
 #triggerModal .actions {display: none;}
-.text-muted {position: relative; right: -45px; top: 0; padding: 3px; color: #CCC;}
+.text-muted {position: relative; float: right; padding: 3px; color: #CCC;}
 </style>
 <?php $dateList = range(strtotime($startDate), strtotime($endDate), 86400);?>
 <table class='calendar'>
