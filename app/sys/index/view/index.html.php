@@ -17,7 +17,7 @@ $isSuperAdmin = $this->app->user->admin == 'super';
 <!-- Desktop -->
 <div id='desktop' class='fullscreen-mode' unselectable='on' style='-moz-user-select:none;-webkit-user-select:none;' onselectstart='return false;'>
   <div id='leftBar' class='dock-left'>
-    <button id='start' class='dock-bottom' type='button'>
+    <button id='start' class='dock-bottom' type='button' title="<?php echo $app->user->realname;?>">
       <div class='avatar avatar-md'><?php if(!empty($app->user->avatar)) echo html::image($app->user->avatar);?></div>
     </button>
     <ul id='startMenu' class='dropdown-menu fade'>
