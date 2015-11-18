@@ -187,6 +187,8 @@ $lang->task    = new stdclass();
 $lang->schema  = new stdclass();
 $lang->package = new stdclass();
 
+$lang->admin->common = '后台管理';
+
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = '公司|company|setbasic|';
 $lang->menu->sys->user      = '组织|user|admin|';

@@ -187,6 +187,8 @@ $lang->task    = new stdclass();
 $lang->schema  = new stdclass();
 $lang->package = new stdclass();
 
+$lang->admin->common = 'Admin';
+
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = 'Company|company|setbasic|';
 $lang->menu->sys->user      = 'User|user|admin|';

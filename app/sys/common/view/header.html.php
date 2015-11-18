@@ -27,7 +27,7 @@
     }
     else
     {
-        echo html::a('', $lang->ranzhi, "class='navbar-brand'");
+        echo html::a('', $lang->admin->common, "class='navbar-brand'");
     }
     ?>
   </div>
