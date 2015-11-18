@@ -22,7 +22,7 @@
     <?php endforeach;?>
     <?php endif;?>
     <div class='panel-actions pull-right'>
-      <?php commonModel::printLink('depositor', 'export', '', "<i class='icon-download-alt'></i> " . $lang->export, "class='iframe btn btn-primary' data-width='700'");?></li>
+      <?php commonModel::printLink('depositor', 'export', '', "<i class='icon-upload-alt'></i> " . $lang->export, "class='iframe btn btn-primary' data-width='700'");?></li>
       <?php commonModel::printLink('depositor', 'create', '', "<i class='icon-plus'></i> {$lang->depositor->create}", "class='btn btn-primary' data-toggle='modal'")?>
     </div>
   </div>
