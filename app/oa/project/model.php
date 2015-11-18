@@ -21,6 +21,7 @@ class projectModel extends model
     public function getByID($projectID)
     {
         $project = $this->dao->select('*')->from(TABLE_PROJECT)->where('id')->eq($projectID)->fetch();
+        if(!$project) return false;
 
         $members = $this->getMembers($projectID); 
         $project->members = $members;

@@ -197,11 +197,11 @@ class project extends control
      */
     public function importTask($toProject, $fromProject = 0)
     {   
-        $this->checkPriv($projectID);
+        $this->checkPriv($toProject);
 
         if(!empty($_POST))
         {
-            $this->project->importTask($toProject, $fromProject);
+            $this->project->importTask($toProject);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer));
         }
