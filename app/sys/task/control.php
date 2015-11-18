@@ -93,7 +93,7 @@ class task extends control
     {
         if($_POST)
         {
-            $taskID = $this->task->create();
+            $taskID = $this->task->create($projectID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->loadModel('action')->create('task', $taskID, 'Created');
@@ -104,7 +104,8 @@ class task extends control
         $this->view->title     = $this->lang->task->create;
         $this->view->projectID = $projectID;
         $this->view->projects  = $this->loadModel('project')->getPairs();
-        $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->view->users     = $this->loadModel('user')->getPairs('noclosed,nodeleted');
+        $this->view->members   = $this->loadModel('project')->getMemberPairs($projectID);
         $this->display();
     }
 
@@ -173,6 +174,7 @@ class task extends control
         }
 
         $members = $this->loadModel('project')->getMemberPairs($task->project);
+        if(!empty($task->team)) $members = $this->task->getMemberPairs($task);
 
         $this->view->title     = $this->lang->task->edit;
         $this->view->task      = $task;
@@ -232,11 +234,14 @@ class task extends control
             }
         }
 
+        $members = $this->loadModel('project')->getMemberPairs($task->project);
+        if(!empty($task->team)) $members = $this->task->getMemberPairs($task);
+
         $this->view->title      = $this->lang->task->view . $task->name;
         $this->view->task       = $task;
         $this->view->projectID  = $task->project;
         $this->view->projects   = $this->loadModel('project')->getPairs();
-        $this->view->members    = $this->loadModel('project')->getMemberPairs($task->project);
+        $this->view->members    = $members;
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->preAndNext = $preAndNext;
 

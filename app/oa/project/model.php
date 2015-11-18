@@ -491,9 +491,15 @@ class projectModel extends model
             $menu .= '<li class="divider angle"></li>';
             $menu .= '<li class="title">' . $this->lang->{$moduleName}->batchCreate . '</li>';
         }
+        else if($methodName == 'create')
+        {
+            $menu .= '<li class="divider angle"></li>';
+            $menu .= '<li class="title">' . $this->lang->{$moduleName}->create . '</li>';
+        }
 
         $menu .= "</ul>";
-        $menu .= "<div class='pull-right'>" . commonModel::printLink('task', 'batchCreate', "projectID=$projectID", '<i class="icon-plus"></i> ' . $this->lang->create, 'class="btn btn-primary"', false) . "</div>";
+        $menu .= "<div class='pull-right'>" . commonModel::printLink('task', 'create', "projectID=$projectID", '<i class="icon-sitemap"></i> ' . $this->lang->task->create, 'class="btn btn-primary"', false) . "</div>";
+        $menu .= "<div class='pull-right'>" . commonModel::printLink('task', 'batchCreate', "projectID=$projectID", '<i class="icon-plus"></i> ' . $this->lang->task->batchCreate, 'class="btn btn-primary"', false) . "</div>";
         $menu .= "<div class='pull-right'>" . commonModel::printLink('project', 'importTask', "projectID=$projectID", '<i class="icon-download-alt"></i> ' . $this->lang->project->import, 'class="btn btn-primary"', false) . "</div>";
         if(commonModel::hasPriv('task', 'export'))
         {

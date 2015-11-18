@@ -216,27 +216,64 @@ class taskModel extends model
      * @access public
      * @return void
      */
-    public function create($task = null)
+    public function create($projectID, $task = null)
     {
         $now  = helper::now();
         if(empty($task))
         {
             $task = fixer::input('post')
+                ->setDefault('project', $projectID)
                 ->setDefault('estimate, left', 0)
                 ->setDefault('estStarted', '0000-00-00')
                 ->setDefault('deadline', '0000-00-00')
                 ->setDefault('status', 'wait')
                 ->setIF($this->post->estimate != false, 'left', $this->post->estimate)
                 ->setIF($this->post->assignedTo, 'assignedDate', $now)
+                ->setIF(!$this->post->multiple, 'team', '')
                 ->setForce('assignedTo', $this->post->assignedTo)
                 ->setDefault('createdBy', $this->app->user->account)
                 ->setDefault('createdDate', $now)
                 ->specialChars('name')
                 ->stripTags('desc', $this->config->allowedTags->admin)
+                ->join('mailto', ',')
                 ->get();
+
+            /* Process multiple user task data. */
+            if($this->post->multiple)
+            {
+                $team = array();
+                $estimate = 0;
+                $left     = 0;
+                foreach($this->post->team as $row => $account)
+                {
+                    if(empty($account) or isset($team[$account])) continue;
+                    $member = new stdclass();
+                    $member->type     = 'task';
+                    $member->id       = '';
+                    $member->account  = $account;
+                    $member->role     = 'member';
+                    $member->join     = helper::today();
+                    $member->estimate = $this->post->teamEstimate[$row] ? $this->post->teamEstimate[$row] : 0;
+                    $member->left     = $member->estimate;
+                    $member->order    = $row;
+                    $team[$account]   = $member;
+                    $estimate += (float)$member->estimate;
+                    $left     += (float)$member->left;
+                }
+
+                if(!empty($team))
+                {
+                    $firstMember = reset($team);
+                    $task->assignedTo = $firstMember->account;
+                    $task->estimate   = $estimate;
+                    $task->left       = $left;
+                }
+
+                $task->team = $team;
+            }
         }
 
-        $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels,team')
+        $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels,team,teamEstimate,multiple')
             ->autoCheck()
             ->batchCheck($this->config->task->require->create, 'notempty')
             ->checkIF($task->estimate != '', 'estimate', 'float')
@@ -244,9 +281,19 @@ class taskModel extends model
             ->exec();
 
         if(dao::isError()) return false;
-
         $taskID = $this->dao->lastInsertID();
+        /* Save team. */
+        if(!empty($task->team))
+        {
+            foreach($task->team as $member)
+            {
+                $member->id = $taskID;
+                $this->dao->insert(TABLE_TEAM)->data($member)->autoCheck()->exec();
+            }
+        }
+
         $this->loadModel('file')->saveUpload('task', $taskID);
+
         return $taskID;
     }
 
@@ -1078,7 +1125,7 @@ class taskModel extends model
         {
             $members[$member->account] = $users[$member->account];
         }
-        return $members;
+        return array('' => '') + $members;
     }
 
     /**
