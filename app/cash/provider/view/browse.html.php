@@ -23,21 +23,23 @@
         <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->provider->name);?></th>
         <th class='w-110px'><?php commonModel::printOrderLink('size',        $orderBy, $vars, $lang->provider->size);?></th>
         <th class='w-70px'> <?php commonModel::printOrderLink('type',        $orderBy, $vars, $lang->provider->type);?></th>
-        <th class='w-160px'><?php commonModel::printOrderLink('area',        $orderBy, $vars, $lang->provider->area);?></th>
-        <th class='w-150px'><?php commonModel::printOrderLink('industry',    $orderBy, $vars, $lang->provider->industry);?></th>
+        <th class='w-160px text-left'><?php commonModel::printOrderLink('area',        $orderBy, $vars, $lang->provider->area);?></th>
+        <th class='w-150px text-left'><?php commonModel::printOrderLink('industry',    $orderBy, $vars, $lang->provider->industry);?></th>
         <th class='w-100px visible-lg'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->provider->createdDate);?></th>
         <th class='w-120px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
+      <?php $areas[0] = '';?>
+      <?php $industries[0] = '';?>
       <?php foreach($providers as $provider):?>
       <tr class='text-center' data-url='<?php echo $this->createLink('provider', 'view', "providerID=$provider->id"); ?>'>
         <td><?php echo $provider->id;?></td>
         <td class='text-left'><?php echo $provider->name;?></td>
         <td><?php echo $lang->provider->sizeList[$provider->size];?></td>
         <td><?php echo $lang->provider->typeList[$provider->type];?></td>
-        <td><?php echo zget($areas, $provider->area);?></td>
-        <td><?php echo zget($industries, $provider->industry);?></td>
+        <td class='text-left'><?php echo zget($areas, $provider->area);?></td>
+        <td class='text-left'><?php echo zget($industries, $provider->industry);?></td>
         <td class='visible-lg'><?php echo substr($provider->createdDate, 0, 10);?></td>
         <td class='actions'>
           <?php commonModel::printLink('provider', 'contact', "providerID=$provider->id", $lang->provider->contact, "data-toggle='modal'");?>
