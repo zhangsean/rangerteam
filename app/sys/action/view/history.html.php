@@ -25,7 +25,7 @@
     <ol>
       <?php $i = 1; ?>
       <?php foreach($actions as $action):?>
-      <?php $canEditComment = ($action->action != 'record' and end($actions) == $action and $action->comment and $this->methodName == 'view' and $action->actor == $this->app->user->account);?>
+      <?php $canEditComment = ($action->action != 'record' and end($actions) == $action and $action->comment and (strpos($this->server->request_uri, 'view') !== false) and $action->actor == $this->app->user->account);?>
       <li value='<?php echo $i ++;?>'>
       <?php
       if(isset($users[$action->actor])) $action->actor = $users[$action->actor];
@@ -42,7 +42,7 @@
         <?php echo $this->action->printChanges($action->objectType, $action->history, $action->action);?>
         </div>
         <?php if($canEditComment):?>
-        <span class='link-button pull-right comment<?php echo $action->id;?>'><?php echo html::a('#lastCommentBox', '<i class="icon-edit-sign icon-large"></i>', "onclick='toggleComment($action->id)'")?></span>
+        <span class='link-button pull-right text-muted comment<?php echo $action->id;?>'><?php echo html::a('#lastCommentBox', '<i class="icon-edit"></i>', "onclick='toggleComment($action->id)'")?></span>
         <?php endif;?>
         <?php if($action->action == 'record'):?>
         <span class='link-button text-muted pull-right'>
@@ -71,7 +71,7 @@
         ?>
         <?php if($canEditComment):?>
         <div id='lastCommentBox' style='display:none'>
-          <form method='post' id='ajaxFormComment' action='<?php echo $this->createLink('action', 'editComment', "actionID=$action->id")?>'>
+          <form method='post' id='ajaxForm' action='<?php echo $this->createLink('action', 'editComment', "actionID=$action->id")?>'>
             <p><?php echo html::textarea('lastComment', $action->comment);?></p>
             <p><?php echo html::submitButton() . html::commonButton($lang->goback, 'btn btn-default', "onclick='toggleComment($action->id)'");?></p>
           </form>

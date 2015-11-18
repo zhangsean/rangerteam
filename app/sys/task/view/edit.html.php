@@ -46,6 +46,10 @@
                 <td><?php echo html::textarea('desc', $task->desc, "class='form-control'");?></td>
               </tr>
               <tr>
+                <th><?php echo $lang->comment;?></th>
+                <td><?php echo html::textarea('comment', '', "class='form-control'");?></td>
+              </tr>
+              <tr>
                 <th><?php echo $lang->files;?></th>
                 <td><?php echo $this->fetch('file', 'buildForm')?></td>
               </tr>

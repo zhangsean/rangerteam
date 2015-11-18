@@ -11,6 +11,7 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
+<?php include '../../common/view/kindeditor.html.php';?>
 <?php $this->loadModel('project')->setMenu($projects, $projectID);?>
 <?php if($task->parent != 0):?>
 <div class='addonMenu'>
@@ -66,11 +67,17 @@
       <div class='page-actions'>
         <?php
         $this->task->buildOperateMenu($task, 'btn', 'view');
-
         $browseLink = $this->session->taskList ? $this->session->taskList : inlink('browse', "project=$task->project");
         commonModel::printRPN($browseLink, $preAndNext);
         ?>
       </div>
+      <fieldset id='commentBox' class='hide'>
+        <legend><?php echo $lang->comment;?></legend>
+        <form id='ajaxForm' method='post' action='<?php echo inlink('edit', "taskID=$task->id&comment=true")?>'>
+          <div class="form-group"><?php echo html::textarea('comment', '',"rows='5' class='w-p100'");?></div>
+          <?php echo html::submitButton() . html::backButton();?>
+        </form>
+      </fieldset>      
     </div>
     <div class='col-side'>
       <div class='panel'>

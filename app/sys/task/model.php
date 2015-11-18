@@ -385,7 +385,7 @@ class taskModel extends model
                 ->add('editedDate', $now)
                 ->specialChars('name')
                 ->stripTags('desc', $this->config->allowedTags->admin)
-                ->remove('referer,uid,files,labels,multiple,team,teamEstimate,teamConsumed,teamLeft')
+                ->remove('referer,uid,files,labels,multiple,team,teamEstimate,teamConsumed,teamLeft,comment')
                 ->join('mailto', ',')
                 ->get();
 
@@ -979,6 +979,7 @@ class taskModel extends model
         if($type == 'view') $menu .= "</div><div class='btn-group'>";
         $disabled = $canEdit ? '' : 'disabled';
         $menu    .= $disabled ? html::a('###', $this->lang->edit, "class='disabled $class' disabled='disabled'") : commonModel::printLink('task', 'edit', "taskID=$task->id", $this->lang->edit, "class='$class'", false);
+        if($type == 'view') $menu .= $disabled ? html::a('###', $this->lang->comment, "class='disabled $class' disabled='disabled'") : html::a('#commentBox', $this->lang->comment, "class='$class' onclick=setComment()");
 
         if($task->parent == 0 and !$isMulti)
         {

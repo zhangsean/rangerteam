@@ -143,27 +143,33 @@ class task extends control
      * @access public
      * @return void
      */
-    public function edit($taskID)
+    public function edit($taskID, $comment = false)
     {
         $task = $this->task->getByID($taskID);
         $this->checkPriv($task, 'edit');
 
         if($_POST)
         {
-            $changes = $this->task->update($taskID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $files = $this->loadModel('file')->saveUpload('task', $taskID);
+            $changes = array();
+            $files   = array();
+            if($comment == false)
+            {    
+                $changes = $this->task->update($taskID);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+                $files = $this->loadModel('file')->saveUpload('task', $taskID);
+            }
 
-            if(!empty($changes) or !empty($files))
+            if($this->post->comment != '' or !empty($changes) or !empty($files))
             {
                 $fileAction = '';
+                $action = !empty($changes) ? 'Edited' : 'Commented';
                 if($files) $fileAction = $this->lang->addFiles . join(',', $files);
 
-                $actionID = $this->loadModel('action')->create('task', $taskID, 'Edited', $fileAction);
+                $actionID = $this->loadModel('action')->create('task', $taskID, $action, $fileAction . $this->post->comment);
                 if($changes) $this->action->logHistory($actionID, $changes);
             }
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer ? $this->post->referer : inlink('view', "id=$taskID")));
         }
 
         $members = $this->loadModel('project')->getMemberPairs($task->project);

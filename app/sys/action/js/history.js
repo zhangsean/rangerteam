@@ -54,4 +54,11 @@ function customeHistoryOrder()
              $(this).find('.sorter').click();
          }
      });
+} 
+
+function toggleComment(actionID)
+{
+    $('.comment' + actionID).toggle();
+    $('#lastCommentBox').toggle();
+    $('.ke-container').css('width', '100%');
 }

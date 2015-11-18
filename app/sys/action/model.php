@@ -477,7 +477,6 @@ class actionModel extends model
         $this->dao->update(TABLE_ACTION)
             ->set('date')->eq(helper::now())
             ->set('comment')->eq($this->post->lastComment)
-            ->beginIF($this->post->extra)->set('edit')->eq($this->post->extra)->FI()
             ->where('id')->eq($actionID)
             ->exec();
     }
