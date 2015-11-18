@@ -94,7 +94,7 @@
   <div class='main'>
     <div class='panel'>
       <form method='post' action='<?php echo inlink('batchedit', 'step=form')?>'>
-        <table class='table table-hover table-striped tablesorter table-data' id='tradeList'>
+        <table class='table table-hover table-striped tablesorter table-data table-fixed' id='tradeList'>
           <thead>
             <tr class='text-center'>
               <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->trade->date);?></th>
@@ -116,8 +116,8 @@
               </td>
               <td class='text-left'><?php echo zget($depositorList, $trade->depositor, ' ');?></td>
               <td><?php echo $lang->trade->typeList[$trade->type];?></td>
-              <td class='text-left'><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
-              <td class='text-left'><?php echo zget($categories, $trade->category, ' ');?></td>
+              <td class='text-left' title="<?php echo zget($customerList, $trade->trader, '');?>"><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
+              <td class='text-left' title="<?php echo zget($categories, $trade->category, '');?>"><?php echo zget($categories, $trade->category, ' ');?></td>
               <td class='text-right'><?php echo zget($currencySign, $trade->currency) . formatMoney($trade->money);?></td>
               <td><?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?></td>
               <td class='text-left visible-lg'><div title="<?php echo $trade->desc;?>" class='w-200px text-ellipsis'><?php echo $trade->desc;?><div></td>
