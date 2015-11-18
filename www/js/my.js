@@ -10,7 +10,7 @@ $(document).ready(function()
     $.setAjaxLoader('.loadInModal', '#ajaxModal');
 
     /* Set ping keep online. */
-    setInterval('ping()', 1000 * 360);
+    setInterval('ping()', 1000 * 60);
 
     /* Enable tooltip */
     $('body').tooltip({html: true,selector: "[data-toggle='tooltip']",container: "body"});
