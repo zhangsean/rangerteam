@@ -33,6 +33,7 @@ $lang->project->role       = '角色';
 
 $lang->project->id          = '编号';
 $lang->project->name        = '项目名称';
+$lang->project->status      = '状态';
 $lang->project->desc        = '项目描述';
 $lang->project->begin       = '开始日期';
 $lang->project->manager     = '负责人';
@@ -54,6 +55,10 @@ $lang->project->selectProject   = '请选择项目';
 $lang->project->note = new stdclass();
 $lang->project->note->rate = '按工时计算';
 $lang->project->note->task = '任务数';
+
+$lang->project->statusList['doing']    = '进行中';
+$lang->project->statusList['finished'] = '已完成';
+$lang->project->statusList['suspend']  = '已挂起';
 
 $lang->project->roleList['member']  = '默认';
 $lang->project->roleList['senior']  = '管理员';

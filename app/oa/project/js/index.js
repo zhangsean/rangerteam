@@ -22,4 +22,17 @@ $(document).ready(function()
         }
         return false;
     });
+
+    $('a.mode-toggle').click(function()
+    {
+        $('a.mode-toggle').removeClass('active');
+        $(this).addClass('active');
+        $('a.mode-toggle').parent('div').nextAll('div').hide();
+        $('#' + $(this).data('mode') + 'Mode').show();
+        $.cookie('projectViewType', $(this).data('mode'), {path: "/"});
+    })
+
+    var type = $.cookie('projectViewType');
+    if(typeof(type) == 'undefined' || type == '') type = 'card';
+    $('#menuActions a[data-mode=' + type +']').click();
 });

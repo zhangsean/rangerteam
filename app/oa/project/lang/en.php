@@ -33,6 +33,7 @@ $lang->project->role       = 'Role';
 
 $lang->project->id          = 'ID';
 $lang->project->name        = 'Name';
+$lang->project->status      = 'Status';
 $lang->project->desc        = 'Description';
 $lang->project->begin       = 'Start Date';
 $lang->project->manager     = 'Manager';
@@ -54,6 +55,10 @@ $lang->project->selectProject   = 'Select Project';
 $lang->project->note = new stdclass();
 $lang->project->note->rate = 'According to working hours';
 $lang->project->note->task = 'The number of tasks';
+
+$lang->project->statusList['doing']    = 'Doing';
+$lang->project->statusList['finished'] = 'Finished';
+$lang->project->statusList['suspend']  = 'Suspend';
 
 $lang->project->roleList['member']  = 'Default';
 $lang->project->roleList['senior']  = 'Manager';
