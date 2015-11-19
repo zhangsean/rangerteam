@@ -81,7 +81,7 @@ class announce extends control
             $announceID = $this->article->create('announce');
             $actionID = $this->loadModel('action')->create('announce', $announceID, 'created');
             $users = $this->loadModel('user')->getPairs('nodeleted,noclosed,noempty');
-            $this->loadModel('action')->sendNotice($actionID, join(',', $users));
+            $this->loadModel('action')->sendNotice($actionID, array_keys($users), true);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('announce', 'browse')));
         }

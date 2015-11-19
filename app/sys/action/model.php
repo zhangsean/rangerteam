@@ -558,18 +558,19 @@ class actionModel extends model
      * 
      * @param  int    $actionID 
      * @param  string $reader 
+     * @param  bool   $onlyNotice 
      * @access public
      * @return string
      */
-    public function sendNotice($actionID, $reader)
+    public function sendNotice($actionID, $reader, $onlyNotice = false)
     {
-        $readers = explode(',', trim($reader, ','));
+        $readers = is_array($reader) ? $reader : explode(',', trim($reader, ','));
         $failedReaders = array();
 
         foreach($readers as $key => $account) if($account == '' or $account == $this->app->user->account) unset($readers[$key]);
         foreach($readers as $key => $account) 
         {
-            if(!$this->loadModel('user')->isOnline($account))
+            if(!$onlyNotice and !$this->loadModel('user')->isOnline($account))
             {
                 unset($readers[$key]);
                 $failedReaders[] = $account;
