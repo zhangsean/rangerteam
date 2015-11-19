@@ -272,6 +272,9 @@ class leave extends control
             $subject = "{$this->lang->leave->common}#{$leave->id}{$this->lang->colon}{$leave->begin}~{$leave->end}";
         }
 
+        /* send notice if user is online and return failed accounts. */
+        $toList = $this->loadModel('action')->sendNotice($actionID, $toList);
+
         /* Create the email content. */
         $this->view->leave  = $leave;
         $this->view->action = $action;

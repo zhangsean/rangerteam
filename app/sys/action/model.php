@@ -50,61 +50,6 @@ class actionModel extends model
         if($objectType == 'customer') $action->customer = $objectID;
         if($objectType == 'contact')  $action->contact  = $objectID;
 
-        /* Add reader for notice */
-        if(strpos('order,customer,task,todo', $action->objectType) !== false and $action->action == 'assigned')
-        {
-            $action->reader = ",{$action->extra},";
-        }
-        if($action->objectType == 'announce' and $action->action == 'created')
-        {
-            $action->reader = ',' . join(',', array_keys($this->loadModel('user')->getPairs('noclosed,nodeleted,noempty'))) . ',';
-        }
-        if(($action->objectType == 'attend' and $action->action == 'commited') or ($action->objectType == 'leave' and strpos('created,commited', $action->action) !== false))
-        {
-            if(!empty($this->config->attend->reviewedBy))
-            {
-                $action->reader = ',' . $this->config->attend->reviewedBy . ',';
-            }
-            else
-            {
-               $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
-               $action->reader = ',' . trim($dept->moderators, ',') . ',';
-            }
-        }
-        if(strpos('attend,leave', $action->objectType) !== false and $action->action == 'reviewed')
-        {
-            $field = $action->objectType == 'attend' ? 'account' : 'createdBy';
-            $action->reader = ',' . $this->dao->findById($action->objectID)->from($this->config->objectTables[$action->objectType])->fetch($field) . ','; 
-        }
-        if($action->objectType == 'refund')
-        {
-            $refund = $this->loadModel('refund')->getByID($action->objectID);
-            if($action->action == 'reviewed')
-            {
-                if($refund->status == 'doing') $action->reader = $this->config->refund->secondReviewer;
-                if($refund->status != 'doing') $action->reader = $refund->createdBy;
-            }
-
-            if($action->action == 'reimburse')
-            {
-                $action->reader = $refund->createdBy;
-            }
-
-            if($action->action == 'created' or $action->action == 'commited')
-            {
-                if(!empty($this->config->refund->firstReviewedBy))
-                {
-                    $action->reader = $this->config->refund->firstReviewedBy; 
-                }
-                else
-                {
-                    $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
-                    $action->reader = trim($dept->moderators, ',');
-                }
-            }
-            if(!empty($action->reader)) $action->reader = ",{$action->reader},";
-        }
-
         $this->dao->insert(TABLE_ACTION)
             ->data($action, $skip = 'nextDate,files,labels')
             ->batchCheckIF($actionType == 'record', $this->config->action->require->createRecord, 'notempty')
@@ -606,6 +551,40 @@ class actionModel extends model
         
         $this->dao->update(TABLE_ACTION)->set('read')->eq($read)->set('reader')->eq($reader)->where('id')->eq($actionID)->exec();
         return !dao::isError();
+    }
+
+    /**
+     * Send notice to user. return failed user account.
+     * 
+     * @param  int    $actionID 
+     * @param  string $reader 
+     * @access public
+     * @return string
+     */
+    public function sendNotice($actionID, $reader)
+    {
+        $readers = explode(',', trim($reader, ','));
+        $failedReaders = array();
+
+        foreach($readers as $key => $account) if($account == '' or $account == $this->app->user->account) unset($readers[$key]);
+        foreach($readers as $key => $account) 
+        {
+            if(!$this->loadModel('user')->isOnline($account))
+            {
+                unset($readers[$key]);
+                $failedReaders[] = $account;
+            }
+        }
+
+        if(!empty($readers)) 
+        {
+            $reader = ',' . join(',', $readers) . ',';
+            $oldReader = $this->dao->select('reader')->from(TABLE_ACTION)->where('id')->eq($actionID)->fetch('reader');
+            if(!empty($oldReader)) $reader .= $oldReader;
+            $this->dao->update(TABLE_ACTION)->set('read')->eq(0)->set('reader')->eq($reader)->where('id')->eq($actionID)->exec();
+        }
+
+        return join(',', $failedReaders);
     }
 
     /**

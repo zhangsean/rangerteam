@@ -451,6 +451,9 @@ class refund extends control
             $subject = "{$this->lang->refund->create}#{$refund->id}{$this->lang->colon}{$refund->name} " . zget($users, $refund->createdBy);
         }
 
+        /* send notice if user is online and return failed accounts. */
+        $toList = $this->loadModel('action')->sendNotice($actionID, $toList);
+
         /* Create the email content. */
         $this->view->refund     = $refund;
         $this->view->action     = $action;

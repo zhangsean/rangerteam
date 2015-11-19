@@ -321,6 +321,9 @@ class order extends control
         $order  = $order[$orderID];
         $toList = $order->assignedTo;
 
+        /* send notice if user is online and return failed accounts. */
+        $toList = $this->loadModel('action')->sendNotice($actionID, $toList);
+
         /* Get action info. */
         $action          = $this->loadModel('action')->getById($actionID);
         $history         = $this->action->getHistory($actionID);

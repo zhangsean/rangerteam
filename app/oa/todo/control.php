@@ -291,6 +291,7 @@ class todo extends control
             {
                 $actionID = $this->loadModel('action')->create('todo', $todo->id, 'Assigned', '', $this->post->assignedTo);
                 $this->action->logHistory($actionID, $changes);
+                $this->sendmail($todoID, $actionID);
             }
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'closeModal' => 'true', 'locate' => 'reload'));
@@ -302,6 +303,45 @@ class todo extends control
         $this->view->users = $this->loadModel('user')->getPairs('nodeleted,noclosed');
         $this->view->times = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
         $this->display();
+    }
+
+    /**
+     * Send email.
+     * 
+     * @param  int    $todoID 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function sendmail($todoID, $actionID)
+    {
+        /* Reset $this->output. */
+        $this->clear();
+
+        /* Get action info. */
+        $action          = $this->loadModel('action')->getById($actionID);
+        $history         = $this->action->getHistory($actionID);
+        $action->history = isset($history[$actionID]) ? $history[$actionID] : array();
+
+        /* Set toList. */
+        $todo    = $this->todo->getById($todoID);
+        $users   = $this->loadModel('user')->getPairs('noletter');
+        $toList  = $todo->assignedTo;
+        $subject = "{$this->lang->todo->common}#{$todo->id}{$this->lang->colon}{$todo->name}";
+
+        /* send notice if user is online and return failed accounts. */
+        $toList = $this->loadModel('action')->sendNotice($actionID, $toList);
+
+        /* Create the email content. */
+        $this->view->todo   = $todo;
+        $this->view->action = $action;
+        $this->view->users  = $users;
+
+        $mailContent = $this->parse($this->moduleName, 'sendmail');
+
+        /* Send emails. */
+        $this->loadModel('mail')->send($toList, $subject, $mailContent);
+        if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
 
     /**

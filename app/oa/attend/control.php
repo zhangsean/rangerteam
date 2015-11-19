@@ -310,9 +310,12 @@ class attend extends control
 
         if($_POST)
         {
-            $this->attend->update($date, $account);
+            $result = $this->attend->update($date, $account);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->loadModel('action')->create('attend', $attend->id, 'commited');
+
+            if(isset($attend->new)) $attend->id = $result;
+            $actionID = $this->loadModel('action')->create('attend', $attend->id, 'commited');
+            $this->sendmail($attend->id, $actionID);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
@@ -380,8 +383,60 @@ class attend extends control
     {
         $result = $this->attend->review($attendID, $reviewStatus);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->loadModel('action')->create('attend', $attendID, 'reviewed', '', $reviewStatus);
+        $actionID = $this->loadModel('action')->create('attend', $attendID, 'reviewed', '', $reviewStatus);
+        $this->sendmail($attendID, $actionID);
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('attend', 'browseReview')));
+    }
+
+    /**
+     * Send email.
+     * 
+     * @param  int    $attendID 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function sendmail($attendID, $actionID)
+    {
+        /* Reset $this->output. */
+        $this->clear();
+
+        /* Get action info. */
+        $action          = $this->loadModel('action')->getById($actionID);
+        $history         = $this->action->getHistory($actionID);
+        $action->history = isset($history[$actionID]) ? $history[$actionID] : array();
+
+        /* Set toList. */
+        $attend  = $this->attend->getById($attendID);
+        $users   = $this->loadModel('user')->getPairs('noletter');
+        $toList  = $attend->account;
+        if($action->action == 'commited')
+        {
+            if(!empty($this->config->attend->reviewedBy))
+            {
+                $toList = $this->config->attend->reviewedBy; 
+            }
+            else
+            {
+               $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
+               $toList = trim($dept->moderators, ',');
+            }
+        }
+        $subject = "{$this->lang->attend->common}#{$attend->account}{$this->lang->colon}{$attend->date}";
+
+        /* send notice if user is online and return failed accounts. */
+        $toList = $this->loadModel('action')->sendNotice($actionID, $toList);
+
+        /* Create the email content. */
+        $this->view->attend = $attend;
+        $this->view->action = $action;
+        $this->view->users  = $users;
+
+        $mailContent = $this->parse($this->moduleName, 'sendmail');
+
+        /* Send emails. */
+        $this->loadModel('mail')->send($toList, $subject, $mailContent);
+        if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
 
     /**

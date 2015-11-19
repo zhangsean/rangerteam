@@ -347,6 +347,8 @@ EOT;
                 ->data($attend)
                 ->autoCheck()
                 ->exec();
+
+            return $this->dao->lastInsertID();
         }
         else
         {

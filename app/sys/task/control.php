@@ -663,6 +663,10 @@ class task extends control
         $toList      = $task->assignedTo;
         $ccList      = trim($task->mailto, ',');
 
+        /* send notice if user is online and return failed accounts. */
+        $toList = $this->loadModel('action')->sendNotice($actionID, $toList);
+        $ccList = $this->loadModel('action')->sendNotice($actionID, $ccList);
+
         if($toList == '')
         {
             if($ccList == '') return;

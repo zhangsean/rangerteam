@@ -397,6 +397,9 @@ class customer extends control
         $users    = $this->loadModel('user')->getPairs('noletter');
         $toList   = $customer->assignedTo;
 
+        /* send notice if user is online and return failed accounts. */
+        $toList = $this->loadModel('action')->sendNotice($actionID, $toList);
+
         /* Get action info. */
         $action          = $this->loadModel('action')->getById($actionID);
         $history         = $this->action->getHistory($actionID);
