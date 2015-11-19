@@ -65,7 +65,6 @@ $isSuperAdmin = $this->app->user->admin == 'super';
       </div>
     </nav>
     <div id='dashboardWrapper'>
-      <?php echo $notice;?>
       <div class='panels-container dashboard' id='dashboard' data-confirm-remove-block='<?php  echo $lang->block->confirmRemoveBlock;?>'>
         <div class='row'>
           <?php
@@ -134,6 +133,9 @@ $isSuperAdmin = $this->app->user->admin == 'super';
   </div>
   <div id='deskContainer'></div>
   <div id='modalContainer'></div>
+</div>
+<div id='noticeBox'>
+  <?php echo $notice;?>
 </div>
 <script>
 var entries = [

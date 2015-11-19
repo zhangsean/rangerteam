@@ -17,11 +17,19 @@ class misc extends control
      * @access public
      * @return void
      */
-    public function ping()
+    public function ping($notice = '')
     {
         /* Save attend info. */
         $this->loadModel('attend', 'oa')->signOut();
-        die();
+        /* Save online status. */
+        $this->loadModel('user')->online();
+        /* Get notices. */
+        $notices = array();
+        if($notice != '') $notices = $this->loadModel('action')->getUnreadNotice('', $skipNotice = $notice);
+
+        $res = new stdclass();
+        $res->notices = $notices;
+        die(json_encode($res));
     }
 
     /**

@@ -11,6 +11,7 @@ $(document).ready(function()
 
     /* Set ping keep online. */
     setInterval('ping()', 1000 * 60);
+    ping();
 
     /* Enable tooltip */
     $('body').tooltip({html: true,selector: "[data-toggle='tooltip']",container: "body"});

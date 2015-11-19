@@ -50,6 +50,61 @@ class actionModel extends model
         if($objectType == 'customer') $action->customer = $objectID;
         if($objectType == 'contact')  $action->contact  = $objectID;
 
+        /* Add reader for notice */
+        if(strpos('order,customer,task,todo', $action->objectType) !== false and $action->action == 'assigned')
+        {
+            $action->reader = ",{$action->extra},";
+        }
+        if($action->objectType == 'announce' and $action->action == 'created')
+        {
+            $action->reader = ',' . join(',', array_keys($this->loadModel('user')->getPairs('noclosed,nodeleted,noempty'))) . ',';
+        }
+        if(($action->objectType == 'attend' and $action->action == 'commited') or ($action->objectType == 'leave' and strpos('created,commited', $action->action) !== false))
+        {
+            if(!empty($this->config->attend->reviewedBy))
+            {
+                $action->reader = ',' . $this->config->attend->reviewedBy . ',';
+            }
+            else
+            {
+               $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
+               $action->reader = ',' . trim($dept->moderators, ',') . ',';
+            }
+        }
+        if(strpos('attend,leave', $action->objectType) !== false and $action->action == 'reviewed')
+        {
+            $field = $action->objectType == 'attend' ? 'account' : 'createdBy';
+            $action->reader = ',' . $this->dao->findById($action->objectID)->from($this->config->objectTables[$action->objectType])->fetch($field) . ','; 
+        }
+        if($action->objectType == 'refund')
+        {
+            $refund = $this->loadModel('refund')->getByID($action->objectID);
+            if($action->action == 'reviewed')
+            {
+                if($refund->status == 'doing') $action->reader = $this->config->refund->secondReviewer;
+                if($refund->status != 'doing') $action->reader = $refund->createdBy;
+            }
+
+            if($action->action == 'reimburse')
+            {
+                $action->reader = $refund->createdBy;
+            }
+
+            if($action->action == 'created' or $action->action == 'commited')
+            {
+                if(!empty($this->config->refund->firstReviewedBy))
+                {
+                    $action->reader = $this->config->refund->firstReviewedBy; 
+                }
+                else
+                {
+                    $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
+                    $action->reader = trim($dept->moderators, ',');
+                }
+            }
+            if(!empty($action->reader)) $action->reader = ",{$action->reader},";
+        }
+
         $this->dao->insert(TABLE_ACTION)
             ->data($action, $skip = 'nextDate,files,labels')
             ->batchCheckIF($actionType == 'record', $this->config->action->require->createRecord, 'notempty')
@@ -324,9 +379,10 @@ class actionModel extends model
             $objectIds   = array_unique($objectIds);
             $table       = $this->config->objectTables[$objectType];
             $field       = $this->config->action->objectNameFields[$objectType];
-            if($table != '`zt_todo`')
+            if($table != '`oa_todo`')
             {
                 $objectNames[$objectType] = $this->dao->select("id, $field AS name")->from($table)->where('id')->in($objectIds)->fetchPairs();
+                if($objectType == 'order') $objectNames[$objectType] = $this->dao->select('o.id, concat(c.name, o.createdDate) as name')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->where('o.id')->in($objectIds)->fetchPairs(); 
             }
             else
             {
@@ -334,7 +390,14 @@ class actionModel extends model
                 foreach($todos as $id => $todo)
                 {
                     if($todo->type == 'task') $todo->name = $this->dao->findById($todo->idvalue)->from(TABLE_TASK)->fetch('name');
-                    if($todo->type == 'bug')  $todo->name = $this->dao->findById($todo->idvalue)->from(TABLE_BUG)->fetch('title');
+                    if($todo->type == 'customer') $todo->name = $this->dao->findById($todo->idvalue)->from(TABLE_CUSTOMER)->fetch('name'); 
+                    if($todo->type == 'order') 
+                    {
+                        $order = $this->dao->select('c.name, o.createdDate')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->where('o.id')->eq($todo->idvalue)->fetch(); 
+                        $todo->name = $order->name . '|' . date('Y-m-d', strtotime($order->createdDate));
+                    }
+                    if(isset($this->lang->action->objectTypes[$todo->type])) $todo->name = $this->lang->action->objectTypes[$todo->type] . ':' . $todo->name;
+
                     if($todo->private == 1 and $todo->account != $this->app->user->account) 
                     {
                        $objectNames[$objectType][$id] = $this->lang->todo->thisIsPrivate;
@@ -357,13 +420,25 @@ class actionModel extends model
             $objectType = strtolower($action->objectType);
             $action->date        = date(DT_MONTHTIME2, strtotime($action->date));
             $action->actionLabel = isset($this->lang->action->label->$actionType) ? $this->lang->action->label->$actionType : $action->action;
-            $action->objectLabel = isset($this->lang->action->label->$objectType) ? $this->lang->action->label->$objectType : $objectType;
+            $action->objectLabel = $objectType;
+            if(isset($this->lang->action->label->$objectType))
+            {
+                $objectLabel = $this->lang->action->label->$objectType;
+                if(!is_array($objectLabel)) $action->objectLabel = $objectLabel;
+                if(is_array($objectLabel) and isset($objectLabel[$actionType])) $action->objectLabel = $objectLabel[$actionType];
+            }
+
+            /* app name. */
+            $action->appName = '';
+            if(isset($this->config->action->objectAppNames[$objectType])) $action->appName = $this->config->action->objectAppNames[$objectType];
 
             /* Other actions, create a link. */
             if(strpos($action->objectLabel, '|') !== false)
             {
                 list($objectLabel, $moduleName, $methodName, $vars) = explode('|', $action->objectLabel);
-                $action->objectLink  = helper::createLink($moduleName, $methodName, sprintf($vars, $action->objectID));
+                $vars = empty($vars) ? '' : sprintf($vars, $action->objectID);
+                if(!empty($action->appName)) $moduleName = "{$action->appName}.{$moduleName}";
+                $action->objectLink  = helper::createLink($moduleName, $methodName, $vars);
                 $action->objectLabel = $objectLabel;
             }
             else
@@ -510,5 +585,81 @@ class actionModel extends model
             ->where('action')->eq('deleted')
             ->andWhere('extra')->eq(self::CAN_UNDELETED)
             ->exec();
+    }
+
+    /**
+     * update a action read status to read. 
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return bool
+     */
+    public function read($actionID, $account = '')
+    {
+        if($account == '') $account = $this->app->user->account;
+        $reader = $this->dao->select('reader')->from(TABLE_ACTION)->where('id')->eq($actionID)->fetch('reader');
+        $readers = explode(',', trim($reader, ','));
+        foreach($readers as $key => $value) if($value == $account or $value == '') unset($readers[$key]);
+
+        $read = empty($readers) ? 1 : 0;
+        $reader = empty($readers) ? '' : ',' . join(',', $readers) . ',';
+        
+        $this->dao->update(TABLE_ACTION)->set('read')->eq($read)->set('reader')->eq($reader)->where('id')->eq($actionID)->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Get unread notice for user.
+     * 
+     * @param  string $account 
+     * @param  string $skipNotice 
+     * @access public
+     * @return array
+     */
+    public function getUnreadNotice($account = '', $skipNotice = '')
+    {
+        if($account == '') $account = $this->app->user->account;
+        $users = $this->loadModel('user')->getPairs();
+
+        $actions = $this->dao->select('*')->from(TABLE_ACTION)
+            ->where('`read`')->eq('0')
+            ->andWhere('reader')->like("%,$account,%")
+            ->beginIf($skipNotice != '')->andWhere('id')->notin($skipNotice)->fi()
+            ->orderBy('id_desc')
+            ->fetchAll('id');
+
+        $histories = $this->getHistory(array_keys($actions));
+        foreach($actions as $actionID => $action) $action->history = isset($histories[$actionID]) ? $histories[$actionID] : array();
+        if(!empty($actions)) $actions = $this->transformActions($actions);
+
+        /* create notices. */
+        $notices = array();
+        foreach($actions as $action)
+        {
+            $notice = new stdclass();
+            $notice->id = $action->id;
+            $notice->title = sprintf($this->lang->action->noticeTitle, $action->objectLabel, $action->objectLink, $action->appName, $action->objectName);
+            $notice->type  = 'success';
+            $notice->read = helper::createLink('action', 'read', "actionID={$action->id}");
+
+            /* process user and status. */
+            if($action->objectType == 'leave')  $this->loadModel('leave', 'oa');
+            if($action->objectType == 'attend') $this->loadModel('attend', 'oa');
+            if($action->objectType == 'refund') $this->loadModel('refund', 'oa');
+            if(isset($users[$action->actor])) $action->actor = $users[$action->actor];
+            if($action->action == 'assigned' and isset($users[$action->extra]) ) $action->extra = $users[$action->extra];
+            if($action->action == 'reviewed' and isset($this->lang->{$action->objectType}->statusList[$action->extra])) $action->extra = $this->lang->{$action->objectType}->statusList[$action->extra];
+            if($action->action == 'reviewed' and isset($this->lang->{$action->objectType}->reviewStatusList[$action->extra])) $action->extra = $this->lang->{$action->objectType}->reviewStatusList[$action->extra];
+
+            /* Get contents. */
+            ob_start();
+            $this->printAction($action);
+            $notice->content = ob_get_contents(); 
+            ob_end_clean();
+
+            $notices[$action->id] = $notice;
+        }
+
+        return $notices;
     }
 }

@@ -312,6 +312,7 @@ class attend extends control
         {
             $this->attend->update($date, $account);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('attend', $attend->id, 'commited');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
@@ -379,6 +380,7 @@ class attend extends control
     {
         $result = $this->attend->review($attendID, $reviewStatus);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->loadModel('action')->create('attend', $attendID, 'reviewed', '', $reviewStatus);
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('attend', 'browseReview')));
     }
 

@@ -216,4 +216,17 @@ class action extends control
         $this->action->undelete($actionID);
         $this->send(array('result' => 'success', 'locate' => $this->server->http_referer));
     }
+
+    /**
+     * read 
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function read($actionID)
+    {
+        $this->action->read($actionID, $this->app->user->account);
+        die('success');
+    }
 }

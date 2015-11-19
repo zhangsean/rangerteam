@@ -287,7 +287,7 @@ class refund extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             
             /* send email. */
-            $actionID = $this->loadModel('action')->create('refund', $refundID, 'reviewed', '', '');
+            $actionID = $this->loadModel('action')->create('refund', $refundID, 'reviewed');
             $this->sendmail($refundID, $actionID);
 
             $isDetail = ($refund->parent != 0) ? true : false;

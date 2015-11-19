@@ -85,7 +85,10 @@ class todoModel extends model
 
                 $this->dao->insert(TABLE_TODO)->data($todo)->autoCheck()->exec();
                 if(dao::isError()) return false;
-                $this->loadModel('action')->create('todo', $this->dao->lastInsertID(), 'opened');
+
+                $todoID = $this->dao->lastInsertID();
+                $this->loadModel('action')->create('todo', $todoID, 'opened');
+                if(!empty($todo->assignedTo)) $this->loadModel('action')->create('todo', $todoID, 'assigned', '', $todo->assignedTo);
             }
             else
             {

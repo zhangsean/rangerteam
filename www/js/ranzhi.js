@@ -589,7 +589,107 @@ function removeAnchor(url)
  */
 function ping()
 {
-    $.get(createLink('misc', 'ping'));
+    var vars = '';
+
+    /* get showed notice ids. */
+    var notice = getShowedNotice().join(',');
+    if(notice == '') notice = 0;
+    if(config && config.appName == 'sys' && config.currentModule == 'index' && config.currentMethod == 'index' && self.frameElement === null) vars = "notice=" + notice;
+
+    $.get(createLink('misc', 'ping', vars), function(response)
+    {
+        if(typeof(response.notices) != 'undefined')
+        {
+            for(key in response.notices)
+            {
+                showNotice(response.notices[key]);
+            }
+        }
+    }, 'json');
+}
+
+/**
+ * get showed notice id. 
+ * 
+ * @access public
+ * @return array
+ */
+function getShowedNotice()
+{
+    var ids = [];
+    $('#noticeBox').find('[id^=notice]').each(function()
+    {
+        if($(this).data('id') != undefined) ids.push($(this).data('id'));
+    });
+    return ids;
+}
+
+/**
+ * Adjust notice position.
+ * 
+ * @access public
+ * @return void
+ */
+function adjustNoticePosition()
+{
+    var bottom = 25;
+    $('#noticeBox').find('[id^=notice]').each(function()
+    {
+        $(this).css('bottom',  bottom + 'px');
+        bottom += $(this).outerHeight(true) - 10;
+    });
+}
+
+/**
+ * Show a notice.
+ * 
+ * @param  object $notice 
+ * @access public
+ * @return void
+ */
+function showNotice(notice)
+{
+    if(typeof(notice['type']) == 'undefined') notice['type'] = 'success';
+    if(typeof(notice['read']) == 'undefined') notice['read'] = '';
+
+    if($('#noticeBox').length < 1) $('body').append("<div id='noticeBox'></div>");
+    var noticeBox = $('#noticeBox');
+    if($('#notice' + notice['id']).length > 0) $('#notice' + notice['id']).remove();
+
+    var noticeTpl = "<div id='notice{id}' data-id='{id}' class='alert alert-{type} with-icon alert-dismissable' style='width:380px; position:fixed; bottom:25px; right:15px; z-index: 9999;'>";
+    noticeTpl += "<i class='icon icon-envelope-alt'></i>";
+    noticeTpl += "<div class='content'><p><strong>{title}</strong></p>{content}</div>";
+    noticeTpl += "<button type='button' class='close' data-dismiss='alert' aria-hidden='true' data-read='{read}'>×</button>";
+    noticeTpl += "</div>";
+    noticeTpl = noticeTpl.replace(/\{id\}/g, notice['id']);
+    noticeTpl = noticeTpl.replace(/\{title\}/g, notice['title']);
+    noticeTpl = noticeTpl.replace(/\{content\}/g, notice['content']);
+    noticeTpl = noticeTpl.replace(/\{type\}/g, notice['type']);
+    noticeTpl = noticeTpl.replace(/\{read\}/g, notice['read']);
+    noticeBox.append(noticeTpl);
+
+    adjustNoticePosition();
+
+    /* close */
+    $('#notice' + notice['id']).find('.close').click(function()
+    {
+        if($(this).data('read') != '')
+        {
+            $.get($(this).data('read'), function()
+            {
+                adjustNoticePosition();
+            });
+        }
+    });
+
+    /* read */
+    $('#notice' + notice['id']).find('a').click(function()
+    {
+        $(this).closest('.alert').find('.close').click();
+        $.openEntry($(this).data('appid'), $(this).prop('href'));
+        $(this).prop('href', '###');
+        return false;
+    });
 }
 
 /**

@@ -374,6 +374,7 @@ class userModel extends model
         /* Update user data. */
         $user->ip     = $this->server->remote_addr;
         $user->last   = helper::now();
+        $user->ping   = helper::now();
         $user->fails  = 0;
         $user->visits ++;
 
@@ -457,7 +458,7 @@ class userModel extends model
     }
 
     /**
-     * Juage a user is logon or not.
+     * Judge a user is logon or not.
      * 
      * @access public
      * @return bool
@@ -465,6 +466,31 @@ class userModel extends model
     public function isLogon()
     {
         return (isset($_SESSION['user']) and !empty($_SESSION['user']) and $_SESSION['user']->account != 'guest');
+    }
+
+    /**
+     * Judge a user is Online or not.
+     * 
+     * @param  string $account 
+     * @access public
+     * @return bool
+     */
+    public function isOnline($account)
+    {
+        $ping = $this->dao->select('ping')->from(TABLE_USER)->where('account')->eq($account)->fetch('ping');
+        return (time() - strtotime($ping)) < 60;
+    }
+
+    /**
+     * Record online status.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function online()
+    {
+        $this->dao->update(TABLE_USER)->set('ping')->eq(helper::now())->where('account')->eq($this->app->user->account)->exec();
+        return true;
     }
 
     /**

@@ -63,7 +63,7 @@ $lang->action->desc->finished              = '$date, 由 <strong>$actor</strong>
 $lang->action->desc->replied               = '$date, 由 <strong>$actor</strong> 回复。' . "\n";
 $lang->action->desc->doubted               = '$date, 由 <strong>$actor</strong> 追问。' . "\n";
 $lang->action->desc->transfered            = '$date, 由 <strong>$actor</strong> 转交。' . "\n";
-$lang->action->desc->reviewed              = '$date, 由 <strong>$actor</strong> 审核。' . "\n";
+$lang->action->desc->reviewed              = '$date, 由 <strong>$actor</strong> 审核 $extra。' . "\n";
 $lang->action->desc->revoked               = '$date, 由 <strong>$actor</strong> 撤销。' . "\n";
 $lang->action->desc->commited              = '$date, 由 <strong>$actor</strong> 提交' . "\n";
 $lang->action->desc->returned              = '$date, 由 <strong>$actor</strong> 回款$extra。' . "\n";
@@ -130,7 +130,23 @@ $lang->action->label->order    = '订单|order|view|orderID=%s';
 $lang->action->label->task     = '任务|task|view|taskID=%s';
 $lang->action->label->contract = '合同|contract|view|contractID=%s';
 $lang->action->label->user     = '成员|user|view|account=%s';
+$lang->action->label->announce = '公告|announce|browse|';
+$lang->action->label->customer = '客户|customer|view|customerID=%s';
+$lang->action->label->todo     = '待办|todo|calendar|';
 $lang->action->label->space    = '　';
+
+$lang->action->label->attend = array();
+$lang->action->label->attend['commited'] = '考勤审核|attend|browsereview|';
+$lang->action->label->attend['reviewed'] = '考勤审核|attend|personal|';
+$lang->action->label->leave = array();
+$lang->action->label->leave['created']  = '请假审核|leave|browsereview|';
+$lang->action->label->leave['commited'] = '请假审核|leave|browsereview|';
+$lang->action->label->leave['reviewed'] = '请假审核|leave|personal|';
+$lang->action->label->refund = array();
+$lang->action->label->refund['created']   = '报销审批|refund|browsereview|';
+$lang->action->label->refund['commited']  = '报销审批|refund|browsereview|';
+$lang->action->label->refund['reviewed']  = '报销审批|refund|view|refundID=%s';
+$lang->action->label->refund['reimburse'] = '报销审批|refund|view|refundID=%s';
 
 /* Object type. */
 $lang->action->search->objectTypeList['']            = '';    
@@ -196,3 +212,5 @@ $lang->action->objectTypes['user']     = '用户';
 $lang->action->objectTypes['resume']   = '履历';
 $lang->action->objectTypes['leave']    = '请假';
 $lang->action->objectTypes['refund']   = '报销';
+
+$lang->action->noticeTitle = "%s <a href='%s' data-appid='%s'>%s</a>";

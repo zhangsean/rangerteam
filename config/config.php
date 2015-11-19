@@ -176,6 +176,9 @@ $config->objectTables['doc']         = TABLE_DOC;
 $config->objectTables['cron']        = TABLE_CRON;
 $config->objectTables['resume']      = TABLE_RESUME;
 $config->objectTables['refund']      = TABLE_REFUND;
+$config->objectTables['announce']    = TABLE_ARTICLE;
+$config->objectTables['attend']      = TABLE_ATTEND;
+$config->objectTables['leave']       = TABLE_LEAVE;
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext/*.php');
