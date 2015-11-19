@@ -138,6 +138,18 @@ $isSuperAdmin = $this->app->user->admin == 'super';
 <script>
 var entries = [
 {
+    id    : 'home',
+    code  : 'home',
+    name  : '<?php echo $lang->index->dashboard;?>',
+    open  : 'iframe',
+    desc  : '<?php echo $lang->index->dashboard?>',
+    menu  : 'all',
+    sys   : true,
+    icon  : 'icon-home',
+    url   : '',
+    order : 0, 
+},
+{
     id        : 'allapps',
     code      : 'allapps',
     name      : '<?php echo $lang->index->allEntries?>',
@@ -166,6 +178,7 @@ var entries = [
     $superadminMenu  = (isset($superadmin) and isset($superadmin->visible) and $superadmin->visible == 0) ? 'list' : 'all';
     $superadminOrder = (isset($superadmin) and isset($superadmin->order)) ? $superadmin->order : 9999998;
 ?>
+
 entries.push(
 {
     id    : 'superadmin',

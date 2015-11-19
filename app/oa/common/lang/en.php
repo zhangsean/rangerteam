@@ -13,7 +13,7 @@ $lang->app = new stdclass();
 $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
-$lang->menu->oa->dashboard = 'Dashboard|dashboard|index|';
+$lang->menu->oa->dashboard = 'Home|dashboard|index|';
 $lang->menu->oa->todo      = 'Todo|todo|calendar|';
 $lang->menu->oa->project   = 'Project|project|index|';
 $lang->menu->oa->announce  = 'Announce|announce|index|';

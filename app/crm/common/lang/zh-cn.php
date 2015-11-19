@@ -13,7 +13,7 @@ $lang->app = new stdclass();
 $lang->app->name = 'CRM';
 
 $lang->menu->crm = new stdclass();
-$lang->menu->crm->dashboard = '我的地盘|dashboard|index|';
+$lang->menu->crm->dashboard = '首页|dashboard|index|';
 $lang->menu->crm->order     = '订单|order|browse|';
 $lang->menu->crm->contract  = '合同|contract|browse|mode=unfinished';
 $lang->menu->crm->customer  = '客户|customer|browse|';

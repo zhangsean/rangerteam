@@ -13,7 +13,7 @@ $lang->app = new stdclass();
 $lang->app->name = 'TEAM';
 
 $lang->menu->team = new stdclass();
-$lang->menu->team->dashboard = '我的地盘|dashboard|index|';
+$lang->menu->team->dashboard = '首页|dashboard|index|';
 $lang->menu->team->forum     = '论坛|forum|index|';
 $lang->menu->team->blog      = '博客|blog|index|';
 $lang->menu->team->user      = '同事|user|colleague|';

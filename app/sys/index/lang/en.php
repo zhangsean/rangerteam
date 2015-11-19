@@ -10,6 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 $lang->index->common       = 'Index';
+$lang->index->dashboard    = 'Dashboard';
 $lang->index->about        = 'About';
 $lang->index->allEntries   = 'All Entries';
 $lang->index->showOnLeft   = 'On left';
