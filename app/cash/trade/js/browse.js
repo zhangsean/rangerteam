@@ -62,4 +62,12 @@ $(document).ready(function()
             $(".side-body .tree li a[href$='" + v.date + ".html']").parent().addClass('active');
         }
     }
+
+    if(v.treeview == '') 
+    {
+        $('a[href*=' + v.currentYear + ']').parents('li.expandable').find('ul').show();
+        $('a[href*=' + v.currentYear + ']').parents('li').replaceClass('expandable', 'collapsable');
+        $('a[href*=' + v.currentYear + ']').parents('li').replaceClass('lastExpandable', 'lastCollapsable');
+        $('a[href*=' + v.currentYear + ']').parents('li').find('.hitarea').replaceClass('expandable-hitarea', 'collapsable-hitarea');
+    }
 });

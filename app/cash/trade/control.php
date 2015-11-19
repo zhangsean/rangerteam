@@ -89,9 +89,6 @@ class trade extends control
         $trades = $this->trade->getList($mode, $date, $orderBy, $pager);
         $this->session->set('tradeQueryCondition', $this->dao->get());
 
-        $currentYear = current($tradeYears);
-        array_shift($tradeYears);
-
         $this->view->title   = $this->lang->trade->browse;
         $this->view->trades  = $trades;
         $this->view->mode    = $mode;
@@ -109,7 +106,7 @@ class trade extends control
         $this->view->tradeYears    = $tradeYears;
         $this->view->tradeQuarters = $tradeQuarters;
         $this->view->tradeMonths   = $tradeMonths;
-        $this->view->currentYear   = $currentYear;
+        $this->view->currentYear   = current($tradeYears);
 
         $this->display();
     }   

@@ -14,6 +14,8 @@
 <?php include '../../../sys/common/view/treeview.html.php';?>
 <?php js::set('mode', $mode);?>
 <?php js::set('date', $date);?>
+<?php js::set('currentYear', $currentYear);?>
+<?php js::set('treeview', !empty($_COOKIE['treeview']) ? $_COOKIE['treeview'] : '');?>
 <?php $vars = "mode={$mode}&date={$date}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
@@ -43,29 +45,7 @@
           <strong><?php echo zget($lang->trade->modeList, $mode, $lang->trade->modeList['all']);?></strong>
         </div>
         <div class='panel-body'>
-          <?php if($currentYear):?> 
-          <ul class='tree'>
-            <li>
-              <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$currentYear", $currentYear);?>
-              <ul>
-                <?php foreach($lang->trade->quarterList as $key => $quarter):?>
-                <li>
-                  <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$currentYear$key", $quarter);?>
-                  <ul>
-                    <?php $monthList = explode(',', $lang->trade->quarters->$key);?>
-                    <?php foreach($monthList as $month):?>
-                    <li>
-                      <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$currentYear$month", $currentYear . $month);?>
-                    </li>
-                    <?php endforeach;?>
-                  </ul>
-                </li>
-                <?php endforeach;?>
-              </ul>
-            </li>
-          </ul>
-          <?php endif;?>
-          <ul class='tree' data-collapsed='true'>
+          <ul class='tree' data-collapsed='true' data-unique=false data-persist='cookie'>
             <?php foreach($tradeYears as $tradeYear):?>
             <li>
               <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear", $tradeYear);?>
