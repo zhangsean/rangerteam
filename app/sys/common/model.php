@@ -224,6 +224,7 @@ class commonModel extends model
         if($module == 'user' and strpos(',login|logout|deny|control', $method)) return true;
         if($module == 'api'  and $method == 'getsessionid') return true;
         if($module == 'misc' and $method == 'ping') return true;
+        if($module == 'misc' and $method == 'ignorenotice') return true;
         if($module == 'action' and $method == 'read') return true;
         if($module == 'block') return true;
         if($module == 'error') return true;

@@ -62,10 +62,15 @@ css::internal('body{background-color:#f6f5f5}');
       </form>
     </div>
   </div>
+  <div class='notice text-center'>
+  </div>
 </div>
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);
+js::import("http://api.ranzhico.com/updater-latest-{$config->version}.html");
+js::set('ignoreNotice', $ignoreNotice);
+js::set('ignore', $lang->user->ignore);
 ?>
 </body>
 </html>

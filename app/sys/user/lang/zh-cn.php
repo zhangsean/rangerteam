@@ -43,6 +43,7 @@ $lang->user->allowTime = '开放时间';
 $lang->user->status    = '状态';
 $lang->user->alert     = '您的帐号已被禁用';
 $lang->user->keepLogin = '保持登录';
+$lang->user->ignore    = '忽略';
 
 $lang->user->admin           = '浏览成员';
 $lang->user->list            = '成员列表';

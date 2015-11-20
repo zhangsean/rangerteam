@@ -64,6 +64,9 @@ class user extends control
 
         if(!$this->session->random) $this->session->set('random', md5(time() . mt_rand()));
 
+        $ignoreNotice = isset($this->config->global->ignoreNotice) ? json_decode($this->config->global->ignoreNotice) : array();
+        $this->view->ignoreNotice = $ignoreNotice;
+
         $this->view->title   = $this->lang->user->login->common;
         $this->view->referer = $this->referer;
 

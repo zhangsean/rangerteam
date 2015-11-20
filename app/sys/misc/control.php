@@ -53,4 +53,19 @@ class misc extends control
     {
         die('pathinfo');
     }
+
+    /**
+     * ignoreNotice  
+     * 
+     * @param  string $version 
+     * @access public
+     * @return void
+     */
+    public function ignoreNotice($version)
+    {
+        $ignore = isset($config->ignoreNotice) ? json_decode($config->ignoreNotice) : array();
+        $ignore[] = strip_tags(trim($version));
+        $this->loadModel('setting')->setItem('system.sys.common.global.ignoreNotice', json_encode($ignore));
+        die('success');
+    }
 }

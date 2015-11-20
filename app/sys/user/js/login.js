@@ -6,6 +6,35 @@ $(document).ready(function()
     {
         selectLang($(this).data('value'));
     });
+
+    /* show update notice. */
+    if(typeof(latest) != 'undefined')
+    {
+        if(typeof(v.ignoreNotice) == 'undefined' || $.inArray('update' + latest.version, v.ignoreNotice) == -1)
+        {
+            var content = 'NOTE: <a href=' + latest.url + ' target=\'_blank\'>' + latest.note + '(' + latest.releaseDate + ')</a>';
+            content += "&nbsp;&nbsp;&nbsp;<a class='ignore' href=" + createLink('misc', 'ignoreNotice', 'version=update' + latest.version) + ">" + v.ignore + "</a>";
+            content = "<p>" + content + "</p>";
+            $('.notice').append(content); 
+        }
+    }
+    if(typeof(notice) != 'undefined')
+    {
+        if(typeof(v.ignoreNotice) == 'undefined' || $.inArray('notice' + notice.id, v.ignoreNotice) == -1)
+        {
+            var content = 'NOTE: <a href=' + notice.url + ' target=\'_blank\'>' + notice.note + '(' + notice.date + ')</a>';
+            content += "&nbsp;&nbsp;&nbsp;<a class='ignore' href=" + createLink('misc', 'ignoreNotice', 'version=notice' + notice.id) + ">" + v.ignore + "</a>";
+            content = "<p>" + content + "</p>";
+            $('.notice').append(content); 
+        }
+    }
+    $('.ignore').click(function()
+    {
+        $.get($(this).prop('href'));
+        $(this).prop('href', '###');
+        $('.notice').html('');
+        return false;
+    });
 })
 
 /* Keep session random valid. */

@@ -43,6 +43,7 @@ $lang->user->allowTime = 'Allow time';
 $lang->user->status    = 'Status';
 $lang->user->alert     = 'Your account has been forbidden';
 $lang->user->keepLogin = 'Keep Login';
+$lang->user->ignore    = 'Ignore';
 
 $lang->user->admin           = 'Admin';
 $lang->user->list            = 'User list';
