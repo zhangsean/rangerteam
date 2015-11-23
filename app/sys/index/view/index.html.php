@@ -10,7 +10,6 @@
  * @link        http://www.ranzhico.com
  */
 include "../../common/view/header.lite.html.php";
-css::import($themeRoot . 'default/ips.css');
 js::import($jsRoot . 'jquery/ips.js');
 $isSuperAdmin = $this->app->user->admin == 'super';
 ?>
