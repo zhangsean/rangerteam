@@ -157,6 +157,16 @@ class customer extends control
 
         $this->app->loadLang('resume');
 
+        $actionList   = $this->loadModel('action')->getList('customer', $customerID);
+        $actionIDList = array_keys($actionList);
+        $actionFiles  = $this->loadModel('file')->getByObject('action', $actionIDList);
+        $fileList = array();
+        foreach($actionFiles as $files)
+        {
+            foreach($files as $file) $fileList[$file->id] = $file;
+        }
+
+
         $this->view->title        = $this->lang->customer->view;
         $this->view->customer     = $customer;
         $this->view->orders       = $this->loadModel('order')->getList($mode = 'query', "customer=$customerID");
@@ -170,6 +180,7 @@ class customer extends control
         $this->view->industryList = $this->tree->getPairs('', 'industry');
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->preAndNext   = $this->common->getPreAndNextObject('customer', $customerID);
+        $this->view->files        = $fileList;
         $this->display();
     }
 

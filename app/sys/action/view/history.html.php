@@ -78,8 +78,13 @@
         </div>
         <?php endif;?>
         <?php if(!empty($action->comment)) echo "</div>";?>
+        <?php if(!empty($action->files)):?>
+        <fieldset>
+          <legend><?php echo $lang->files;?></legend>
+            <?php foreach($action->files as $file) echo '<p>' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</p>';?>
+        </fieldset>      
         <?php endif;?>
-        <div><?php echo $this->fetch('file', 'printFiles', array('files' => $action->files, 'fieldset' => 'false'))?></div>
+        <?php endif;?>
       </li>
       <?php endforeach;?>
     </ol>

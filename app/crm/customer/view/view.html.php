@@ -31,6 +31,7 @@
       <div class='panel-heading'><strong><i class="icon-list-info"></i> <?php echo $lang->customer->intension;?></strong></div>
       <div class='panel-body'><?php echo $customer->intension;?></div>
     </div>
+    <?php echo $this->fetch('file', 'printFiles', array('files' => $files, 'fieldset' => 'true'))?>
     <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$customer->id}")?>
     <div class='page-actions'>
       <?php

@@ -22,6 +22,7 @@
       <div class='panel-heading'><strong><?php echo $lang->contact->desc;?></strong></div>
       <div class='panel-body'><?php echo $contact->desc;?></div>
     </div>
+    <?php echo $this->fetch('file', 'printFiles', array('files' => $fileList, 'fieldset' => 'true'))?>
     <?php echo $this->fetch('action', 'history', "objectType=contact&objectID={$contact->id}")?>
     <div class='page-actions'>
       <?php
