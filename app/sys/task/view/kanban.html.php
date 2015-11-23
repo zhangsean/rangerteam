@@ -60,7 +60,7 @@
                   <button type='button' class='btn btn-mini btn-link btn-info-toggle'><i class='icon-angle-down'></i></button>
                   <div class='dropdown'>
                     <button type='button' class='btn btn-mini btn-link dropdown-toggle' data-toggle='dropdown'>
-                      <span class='icon-ellipsis-vertical'></span>
+                      <span class='icon-ellipsis-v'></span>
                     </button>
                     <div class='dropdown-menu pull-right'>
                       <?php $this->task->buildOperateMenu($task);?>
