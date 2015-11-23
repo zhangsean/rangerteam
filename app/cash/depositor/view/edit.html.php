@@ -21,6 +21,10 @@
       <th><?php echo $lang->depositor->abbr;?></th>
       <td><?php echo html::input('abbr', $depositor->abbr, "class='form-control'");?></td>
     </tr>
+    <tr>
+      <th><?php echo $lang->depositor->tags;?></th>
+      <td><?php echo html::input('tags', $depositor->tags, "class='form-control' placeholder='{$lang->depositor->placeholder->tags}'");?></td>
+    </tr>
     <?php if($depositor->type != 'cash'):?>
     <?php if($depositor->type == 'bank'):?>
     <tr>

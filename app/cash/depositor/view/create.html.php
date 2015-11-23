@@ -21,6 +21,10 @@
       <th><?php echo $lang->depositor->abbr;?></th>
       <td><?php echo html::input('abbr', '', "class='form-control'");?></td>
     </tr>
+    <tr>
+      <th><?php echo $lang->depositor->tags;?></th>
+      <td><?php echo html::input('tags', '', "class='form-control' placeholder='{$lang->depositor->placeholder->tags}'");?></td>
+    </tr>
     <tr class='form-online'>
       <th><?php echo $lang->depositor->serviceProvider;?></th>
       <td><?php echo html::select('provider', $lang->depositor->providerList, '', "class='form-control'");?></td>

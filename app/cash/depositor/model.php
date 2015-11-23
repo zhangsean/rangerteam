@@ -43,9 +43,9 @@ class depositorModel extends model
      * @access public
      * @return array
      */
-    public function getList($orderBy = 'id_desc', $pager = null)
+    public function getList($tag, $orderBy = 'id_desc', $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_DEPOSITOR)->orderBy($orderBy)->page($pager)->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_DEPOSITOR)->where('tags')->like("%{$tag}%")->orderBy($orderBy)->page($pager)->fetchAll('id');
     }
 
     /** 
@@ -71,6 +71,27 @@ class depositorModel extends model
     }
 
     /**
+     * Get tags of depositors.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getTags()
+    {
+        $tags = array();
+        $tagList = $this->dao->select('tags')->from(TABLE_DEPOSITOR)->fetchAll();
+        foreach($tagList as $tag)
+        {
+            if(!$tag->tags) continue;
+            $depositorTags = explode(',', $tag->tags);
+            foreach($depositorTags as $depositorTag) $tags[] = $depositorTag;
+
+        }
+
+        return array_unique($tags);
+    }
+
+    /**
      * Create a depositor.
      * 
      * @access public
@@ -85,6 +106,8 @@ class depositorModel extends model
             ->add('editedDate', $now)
             ->removeIF($this->post->type == 'cash', 'public')
             ->get();
+
+        $depositor->tags = trim(str_replace('，', ',', $depositor->tags), ',');
 
         $this->dao->insert(TABLE_DEPOSITOR)
             ->data($depositor)
@@ -111,6 +134,8 @@ class depositorModel extends model
             ->add('editedDate', helper::now())
             ->removeIF($this->post->type == 'cash', 'public')
             ->get();
+
+        $depositor->tags = trim(str_replace('，', ',', $depositor->tags), ',');
 
         $this->dao->update(TABLE_DEPOSITOR)
             ->data($depositor)

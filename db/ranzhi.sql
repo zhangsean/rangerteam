@@ -427,6 +427,7 @@ CREATE TABLE `cash_depositor` (
   `abbr` char(60) NOT NULL,
   `provider` char(100) NOT NULL,
   `title` char(100) NOT NULL,
+  `tags` varchar(255) NOT NULL,
   `account` char(90) NOT NULL,
   `bankcode` varchar(30) NOT NULL,
   `public` enum('0','1') NOT NULL,

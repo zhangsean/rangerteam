@@ -18,3 +18,6 @@
 .card-depositor > .card-heading.bank > .info > .label {background: #39B3D7;}
 
 .label-balance{ position:absolute; right:20px; bottom:60px; font-size:16px; font-weight:600;}
+.panel-heading > a {display: inline-block; line-height: 26px; padding: 0 10px;}
+.panel-heading > a.active {background-color: #f05500; border-radius: 13px; color: #fff;}
+.panel-heading > a:hover {text-decoration: none;}

@@ -16,6 +16,7 @@ $lang->depositor->abbr            = '简称';
 $lang->depositor->serviceProvider = '服务商';
 $lang->depositor->bankProvider    = '开户网点';
 $lang->depositor->title           = '账户名称';
+$lang->depositor->tags            = '标签';
 $lang->depositor->account         = '开户账号';
 $lang->depositor->bankcode        = '联行号';
 $lang->depositor->public          = '对公账号';
@@ -67,3 +68,6 @@ $lang->depositor->providerList['tenpay'] = '财付通';
 
 $lang->depositor->statusList['normal']  = '正常';
 $lang->depositor->statusList['disable'] = '停用';
+
+$lang->depositor->placeholder = new stdclass();
+$lang->depositor->placeholder->tags = '多个标签之间用逗号隔开';

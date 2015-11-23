@@ -16,6 +16,7 @@ $lang->depositor->abbr            = 'Abbreviation';
 $lang->depositor->serviceProvider = 'Service Provider';
 $lang->depositor->bankProvider    = 'Account Branch';
 $lang->depositor->title           = 'Title';
+$lang->depositor->tags            = 'Tags';
 $lang->depositor->account         = 'Account';
 $lang->depositor->bankcode        = 'Bank Code';
 $lang->depositor->public          = 'Public';
@@ -67,3 +68,6 @@ $lang->depositor->providerList['tenpay'] = 'Tenpay';
 
 $lang->depositor->statusList['normal']  = 'Normal';
 $lang->depositor->statusList['disable'] = 'Disable';
+
+$lang->depositor->placeholder = new stdclass();
+$lang->depositor->placeholder->tags = 'Please divide tags with commas';
