@@ -568,6 +568,18 @@ function selectLang(lang)
 }
 
 /**
+ * Set theme.
+ * 
+ * @access public
+ * @return void
+ */
+function selectTheme(theme)
+{
+    $.cookie('theme', theme, {expires:config.cookieLife, path:config.webRoot});
+    location.href = removeAnchor(location.href);
+}
+
+/**
  * Remove anchor from the url.
  * 
  * @param  string $url 

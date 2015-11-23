@@ -51,6 +51,11 @@ $lang->IE6Alert = <<<EOT
     </div>
 EOT;
 
+/* Themes. */
+$lang->theme             = 'Theme';
+$lang->themes['default'] = 'Default';
+$lang->themes['clear']   = 'Clear';
+
 /* Global lang items. */
 $lang->home           = 'Home';
 $lang->welcome        = '%s RanZhi';

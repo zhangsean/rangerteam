@@ -10,9 +10,10 @@
  * @link        http://www.ranzhico.com
  */
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
-$webRoot   = $config->webRoot;
-$jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "theme/";
+$webRoot      = $config->webRoot;
+$jsRoot       = $webRoot . "js/";
+$themeRoot    = $webRoot . "theme/";
+$clientTheme  = $this->app->getClientTheme();
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,6 +38,8 @@ $themeRoot = $webRoot . "theme/";
       css::import($themeRoot . 'zui/css/min.css');
       css::import($themeRoot . 'default/style.css');
       css::import($themeRoot . 'default/admin.css');
+      
+      if(strpos($clientTheme, 'default') === false) css::import($clientTheme . 'style.css', $config->version);
   }
   else
   {

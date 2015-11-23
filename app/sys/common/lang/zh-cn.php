@@ -51,6 +51,11 @@ $lang->IE6Alert = <<<EOT
     </div>
 EOT;
 
+/* Themes. */
+$lang->theme             = '主题';
+$lang->themes['default'] = '默认';
+$lang->themes['clear']   = '清晰';
+
 /* Global lang items. */
 $lang->home           = '首页';
 $lang->welcome        = "%s协同管理系统";
