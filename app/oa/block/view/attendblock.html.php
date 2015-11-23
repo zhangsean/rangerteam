@@ -37,7 +37,6 @@
 .attend-trip   {color: #8668B8;}
 .attend-status:hover {cursor: pointer;}
 
-#triggerModal .actions {display: none;}
 .text-muted {position: relative; float: right; padding: 3px; color: #CCC;}
 </style>
 <?php $dateList = range(strtotime($startDate), strtotime($endDate), 86400);?>
