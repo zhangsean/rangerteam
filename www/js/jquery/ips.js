@@ -19,7 +19,7 @@
     /* Save the index configs */
     var indexUrl         = window.location.href;
     var indexTitle       = document.title;
-    var indexTone        = '#145ccd';
+    var indexTone        = $('body').css('background-color');
 
     /* The default global settings */
     var defaults =
