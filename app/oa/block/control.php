@@ -294,7 +294,7 @@ class block extends control
         $dateLimit = array();
         $dateLimit['begin'] = $startDate;
         $dateLimit['end']   = $endDate;
-        $todos = $this->loadModel('todo', 'oa')->getList($dateLimit, $this->app->user->account);
+        $todos = $this->loadModel('todo', 'oa')->getList('self', $this->app->user->account, $dateLimit);
 
         /* Process todos. */
         $newTodos = array();

@@ -128,6 +128,8 @@ class todoModel extends model
             ->autoCheck()
             ->checkIF($todo->type == 'custom', $this->config->todo->require->edit, 'notempty')->where('id')->eq($todoID)
             ->exec();
+
+        $todo->date = str_replace('-', '', $todo->date);
         if(!dao::isError()) return commonModel::createChanges($oldTodo, $todo);
     }
 
@@ -237,15 +239,19 @@ class todoModel extends model
     /**
      * Get todo list of a user.
      * 
-     * @param  date   $date 
+     * @param  string $mode     all|self|assignedToOther|assignedToMe
      * @param  string $account 
-     * @param  string $status   all|today|thisweek|lastweek|before, or a date.
-     * @param  int    $limit    
+     * @param  date   $date     all|today|thisweek|lastweek|before, or a date. 
+     * @param  string $status   
+     * @param  string $orderBy   
+     * @param  object $pager   
      * @access public
      * @return void
      */
-    public function getList($date = 'today', $account = '', $status = 'all', $limit = 0, $pager = null, $orderBy="date, status, begin")
+    public function getList($mode = 'self', $account = '', $date = 'all',  $status = 'all', $orderBy="date, status, begin", $pager = null)
     {
+        if($account == '') $account = $this->app->user->account;
+        $mode = strtolower($mode);
         $this->app->loadClass('date');
         $todos = array();
         if(!is_array($date)) $date = strtolower($date);
@@ -292,7 +298,7 @@ class todoModel extends model
         elseif($date == 'future')
         {
             $begin = '0000-00-00';
-            $end   = $begin;
+            $end   = '1970-01-01';
         }
         elseif($date == 'all')
         {
@@ -309,17 +315,16 @@ class todoModel extends model
             $begin = $end = $date;
         }
 
-        if($account == '')   $account = $this->app->user->account;
-
         $stmt = $this->dao->select('*')->from(TABLE_TODO)
             ->where('1=1')
-            ->andWhere()->markLeft()->where('account')->eq($account)->orWhere('assignedTo')->eq($account)->markRight()
+            ->beginIF($mode == 'self')->andWhere()->markLeft()->where('account')->eq($account)->orWhere('assignedTo')->eq($account)->markRight()->fi()
+            ->beginIF($mode == 'assignedtoother')->andWhere('account')->eq($account)->andWhere('assignedTo')->ne($account)->andWhere('assignedTo')->ne('')->fi()
+            ->beginIF($mode == 'assignedtome')->andWhere('account')->ne($account)->andWhere('assignedTo')->eq($account)->fi()
             ->andWhere("date >= '$begin'")
             ->andWhere("date <= '$end'")
             ->beginIF($status != 'all' and $status != 'undone')->andWhere('status')->in($status)->fi()
             ->beginIF($status == 'undone')->andWhere('status')->ne('done')->fi()
             ->orderBy($orderBy)
-            ->beginIF($limit > 0)->limit($limit)->fi()
             ->page($pager)
             ->query();
         
@@ -361,7 +366,7 @@ class todoModel extends model
         $dateLimit['end']   = date('Y-m-d', strtotime("{$dateLimit['begin']} +1 month"));
 
         $calendars    = $this->lang->todo->typeList;
-        $todos        = $this->getList($dateLimit, $this->app->user->account);
+        $todos        = $this->getList('self', $this->app->user->account, $dateLimit);
         $calendarList = array();
         $todoList     = array();
 

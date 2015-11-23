@@ -6,10 +6,6 @@ function viewTodo(obj)
 
 $(document).ready(function()
 {
-    /* remove menu */
-    $('#menu').remove();
-    $('.page-content').removeClass('with-menu');
-
     /* Adjust calendar' startDate. */
     $('.calendar').data('zui.calendar').display('month', v.settings.startDate);
 

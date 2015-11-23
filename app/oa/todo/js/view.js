@@ -17,7 +17,6 @@ function finishTodo(id)
         {
             if(response.message) $.zui.messager.show(response.message);
         }
-        updateCalendar();
         return false;
     }, 'json');
 }
@@ -26,7 +25,6 @@ $(document).ready(function()
 {
     $.setAjaxLoader('#triggerModal .ajaxEdit', '#triggerModal');
     $.setAjaxLoader('#ajaxModal .ajaxEdit', '#ajaxModal');
-
     $.setAjaxLoader('#triggerModal .ajaxAssign', '#triggerModal');
     $.setAjaxLoader('#ajaxModal .ajaxAssign', '#ajaxModal');
 
@@ -34,19 +32,39 @@ $(document).ready(function()
     {
         $(this).prop('href', '');
         finishTodo($(this).data('id'));
-        $.zui.modalTrigger.close();
+
+        /* update calendar data if in calendar page. */
+        var uc = window['updateCalendar'];
+        if($.isFunction(uc))
+        {
+            updateCalendar();
+            $.zui.modalTrigger.close();
+        }
+        else
+        {
+            location.reload();
+        }
         return false;
     });
 
-    $('.btn-ajax').click(function()
+    $('[data-toggle=ajax]').click(function()
     {
         $.get($(this).prop('href'), function(response)
         {
             if(response.message) $.zui.messager.success(response.message);
-            updateCalendar();
+            /* update calendar data if in calendar page. */
+            var uc = window['updateCalendar'];
+            if($.isFunction(uc))
+            {
+                updateCalendar();
+                $.zui.modalTrigger.close();
+            }
+            else
+            {
+                location.reload();
+            }
             return false;
         }, 'json');
-        $.zui.modalTrigger.close();
         return false;
     });
 
@@ -55,9 +73,17 @@ $(document).ready(function()
     {
         if(data.result == 'success')
         {
-            if(data.locate) return location.href = data.locate;
-            if(deleter.parents('#ajaxModal').size()) return $.reloadAjaxModal(1200);
-            return location.reload();
+            /* update calendar data if in calendar page. */
+            var uc = window['updateCalendar'];
+            if($.isFunction(uc))
+            {
+                updateCalendar();
+                $.zui.modalTrigger.close();
+            }
+            else
+            {
+                location.reload();
+            }
         }
         else
         {

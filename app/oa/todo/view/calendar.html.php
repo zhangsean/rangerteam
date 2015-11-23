@@ -19,10 +19,6 @@
 <?php js::set('settings.data', $data);?>
 <div class='with-side <?php echo $this->cookie->todoCalendarSide == 'hide' ? 'hide-side' : ''?>'>
   <div class='side'>
-    <div class='side-handle'>
-      <?php $class = $this->cookie->todoCalendarSide == 'hide' ? 'icon-collapse-full' : 'icon-expand-full'?>
-      <?php echo html::a('###', "<i class='$class'></i>", "class='btn'")?>
-    </div>
     <ul id="myTab" class="nav nav-tabs">
       <li class="active"><a href="#tab_custom" data-toggle="tab"><?php echo $lang->todo->periods['future']?></a></li>
       <li><a href="#tab_task" data-toggle="tab"><?php echo $lang->task->common;?></a></li>
@@ -46,6 +42,10 @@
     </div>
   </div>
   <div class='calendar main'>
+    <div class='side-handle'>
+      <?php $class = $this->cookie->todoCalendarSide == 'hide' ? 'icon-collapse-full' : 'icon-expand-full'?>
+      <?php echo html::a('###', "<i class='$class'></i>", "class='btn'")?>
+    </div>
     <div class='day trash' data-date='1970-01-01' title='<?php echo $lang->delete?>'><i class="icon icon-trash"></i></div>
   </div>
 </div>

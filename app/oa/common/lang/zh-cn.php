@@ -31,7 +31,10 @@ $lang->dashboard->menu->task  = '任务|dashboard|task|';
 
 $lang->todo = new stdclass();
 $lang->todo->menu = new stdclass();
-$lang->todo->menu->calendar = '日历|todo|calendar|';
+$lang->todo->menu->calendar        = '日历|todo|calendar|';
+$lang->todo->menu->assignedToOther = '指派他人|todo|browse|mode=assignedtoother';
+$lang->todo->menu->assignedToMe    = '指派给我|todo|browse|mode=assignedtome';
+$lang->todo->menu->future          = '待定|todo|browse|mode=future';
 
 $lang->project   = new stdclass();
 $lang->project->menu = new stdclass();

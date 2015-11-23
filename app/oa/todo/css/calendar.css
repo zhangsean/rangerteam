@@ -1,6 +1,6 @@
 .with-side {position: relative;}
 .with-side .main{padding-right: 300px;}
-.with-side .side {position: absolute; right: 0px; top: 0px; width: 280px;}
+.with-side .side {position: fixed; right: 15px; top: 100px; width: 280px;}
 
 .hide-side .main{padding-right: 0;}
 .hide-side .side {width: 0;}
@@ -8,8 +8,8 @@
 .hide-side .tab-content {display: none;}
 .with-side .side, .with-side .main {transition: all 0.3s ease 0s;}
 
-.side-handle {width: 20px; z-index: 99; position: absolute; left: -60px; top: 0; transition: all 0.3s ease 0s;}
-.hide-side .side-handle{left: -40px;}
+.side-handle {width: 20px; z-index: 99; position: absolute; right: 320px; top: 0; transition: all 0.3s ease 0s;}
+.hide-side .side-handle{right: 20px;}
 
 [data-toggle="droppable"] {cursor: move;}
 

@@ -37,7 +37,7 @@ class todo extends control
     {
         if($date == '' or $date == 'future') $date = date('Ymd');
         $account = $this->app->user->account;
-        $todoList['custom']   = $this->todo->getList('future', $account);
+        $todoList['custom']   = $this->todo->getList('self', $account, 'future');
         $todoList['task']     = array();
         $todoList['order']    = array();
         $todoList['customer'] = array();
@@ -46,6 +46,40 @@ class todo extends control
         $this->view->date     = $date;
         $this->view->data     = $this->todo->getCalendarData($date);
         $this->view->todoList = $todoList;
+        $this->display();
+    }
+
+    /**
+     * browse todos.
+     * 
+     * @param  string $mode 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function browse($mode = 'assignedTo', $orderBy = 'date', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        if($mode == 'future')
+        {
+            $todos = $this->todo->getList('self', $this->app->user->account, 'future', 'all', $orderBy, $pager);
+        }
+        else
+        {
+            $todos = $this->todo->getList($mode, $this->app->user->account, 'all', 'all', $orderBy, $pager);
+        }
+
+        $this->view->title   = $this->lang->todo->browse;
+        $this->view->todos   = $todos;
+        $this->view->users   = $this->loadModel('user')->getPairs();
+        $this->view->mode    = $mode;
+        $this->view->orderBy = $orderBy;
+        $this->view->pager   = $pager;
         $this->display();
     }
 
@@ -145,7 +179,7 @@ class todo extends control
                 $this->action->logHistory($actionID, $changes);
             }
             $date = str_replace('-', '', $this->post->date);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$date")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'closeModal' => 'true', 'locate' => 'reload'));
         }
        
         if($todo->date != '00000000') $todo->date = strftime("%Y-%m-%d", strtotime($todo->date));
@@ -176,12 +210,12 @@ class todo extends control
         if($todo->type == 'order')    $this->session->set('orderList', "javascript:$.openEntry(\"oa\")");
         if($todo->type == 'customer') $this->session->set('customerList', "javascript:$.openEntry(\"oa\")");
 
-        $this->view->title      = "{$this->lang->todo->common} #$todo->id $todo->name";
-        $this->view->todo       = $todo;
-        $this->view->times      = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
-        $this->view->users      = $this->loadModel('user')->getPairs('noletter');
-        $this->view->actions    = $this->loadModel('action')->getList('todo', $todoID);
-        $this->view->from       = $from;
+        $this->view->title   = "{$this->lang->todo->common} #$todo->id $todo->name";
+        $this->view->todo    = $todo;
+        $this->view->times   = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
+        $this->view->users   = $this->loadModel('user')->getPairs('noletter');
+        $this->view->actions = $this->loadModel('action')->getList('todo', $todoID);
+        $this->view->from    = $from;
 
         $this->display();
     }
@@ -203,7 +237,7 @@ class todo extends control
         $this->dao->delete()->from(TABLE_TODO)->where('id')->eq($todoID)->exec();
         $this->loadModel('action')->create('todo', $todoID, 'erased');
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success', 'locate' => $this->createLink('oa.todo', 'calendar', "date=$date")));
+        $this->send(array('result' => 'success'));
     }
 
     /**
@@ -219,7 +253,7 @@ class todo extends control
         $this->checkPriv($todo, 'close', 'json');
 
         if($todo->status == 'done') $this->todo->close($todoID);
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$todo->date")));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 
     /**
@@ -235,7 +269,7 @@ class todo extends control
         $this->checkPriv($todo, 'activate', 'json');
 
         if($todo->status == 'closed') $this->todo->activate($todoID);
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$todo->date")));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 
     /**
@@ -269,7 +303,7 @@ class todo extends control
             $confirmURL  = $this->createLink("{$entry}.{$todo->type}", 'view', "id=$todo->idvalue", 'html');
             $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'url' => $confirmURL, 'entry' => $entry)));
         }
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$todo->date")));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 
     /**
