@@ -16,6 +16,7 @@ $lang->entry->edit      = 'Edit App';
 $lang->entry->delete    = 'Delete App';
 $lang->entry->createKey = 'New one';
 $lang->entry->order     = 'Order';
+$lang->entry->style     = 'Style';
 
 $lang->entry->name        = 'Name';
 $lang->entry->abbr        = 'Abbreviation';
@@ -94,3 +95,6 @@ $lang->entry->positionList['center']  = 'Center';
 $lang->entry->controlList['none']   = 'None';
 $lang->entry->controlList['full']   = 'Full';
 $lang->entry->controlList['simple'] = 'Transparent';
+
+$lang->entry->integrationList[1] = 'Open';
+$lang->entry->integrationList[0] = 'Close';

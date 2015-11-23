@@ -88,11 +88,18 @@ class entryModel extends model
             ->setDefault('buildin', 0)
             ->setDefault('integration', 0)
             ->setDefault('order', $maxOrder + 10)
+            ->setDefault('open', 'blank')
+            ->setDefault('control', 'simple')
+            ->setDefault('size', 'max')
+            ->setDefault('width', '700')
+            ->setDefault('height', '538')
+            ->setDefault('position', 'default')
             ->setDefault('zentao', 0)
             ->setIF($this->post->allip, 'ip', '*')
             ->remove('allip,adminAccount,adminPassword')
             ->stripTags('login,logout,block', $this->config->allowedTags->admin)
             ->get();
+
         if($this->post->chanzhi) 
         {
             $entry->logout = $entry->login . "?m=ranzhi&f=logout";
@@ -141,28 +148,59 @@ class entryModel extends model
      */
     public function update($code)
     {
-        $oldEntry = $this->getByCode($code);
-
-        $entry = fixer::input('post')
-            ->setDefault('ip', '*')
-            ->setDefault('visible', 0)
-            ->setDefault('buildin', 0)
-            ->setDefault('integration', 0)
-            ->setIF($this->post->allip, 'ip', '*')
-            ->remove('allip')
-            ->stripTags('login,logout,block', $this->config->allowedTags->admin)
-            ->get();
-
-        if($entry->size == 'custom') $entry->size = helper::jsonEncode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
+        $entry = fixer::input('post')->stripTags('login', $this->config->allowedTags->admin)->get();
         if(!isset($entry->visible)) $entry->visible = 0;
-        unset($entry->logo);
 
-        $this->dao->update(TABLE_ENTRY)->data($entry, $skip = 'width,height,files')
+        $this->dao->update(TABLE_ENTRY)->data($entry)
             ->autoCheck()
             ->batchCheck($this->config->entry->require->edit, 'notempty')
             ->where('code')->eq($code)
             ->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Set style for entry.
+     * 
+     * @param  string    $code 
+     * @access public
+     * @return int
+     */
+    public function setStyle($code)
+    {
+        $oldEntry = $this->getByCode($code);
+
+        $entry = fixer::input('post')->get();
+
+        if($entry->size == 'custom') $entry->size = helper::jsonEncode(array('width' => (int)$entry->width, 'height' => (int)$entry->height));
+        unset($entry->logo);
+
+        $this->dao->update(TABLE_ENTRY)->data($entry, $skip = 'width,height,files')
+            ->autoCheck()
+            ->where('code')->eq($code)
+            ->exec();
+
         return $oldEntry->id;
+    }
+
+    /**
+     * Integration entry.
+     * 
+     * @param  string    $code 
+     * @access public
+     * @return void
+     */
+    public function integration($code)
+    {
+        $entry = fixer::input('post')
+            ->setDefault('ip', '*')
+            ->setDefault('integration', 0)
+            ->setIF($this->post->allip, 'ip', '*')
+            ->stripTags('logout,block', $this->config->allowedTags->admin)
+            ->get();
+
+        $this->dao->update(TABLE_ENTRY)->data($entry)->autoCheck()->where('code')->eq($code)->exec();
+        return !dao::isError();
     }
 
     /**

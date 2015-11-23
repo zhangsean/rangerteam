@@ -16,6 +16,7 @@ $lang->entry->edit      = '编辑应用';
 $lang->entry->delete    = '删除应用';
 $lang->entry->createKey = '重新生成密钥';
 $lang->entry->order     = '排序';
+$lang->entry->style     = '样式';
 
 $lang->entry->name        = '名称';
 $lang->entry->abbr        = '缩写';
@@ -94,3 +95,6 @@ $lang->entry->positionList['center']  = '居中';
 $lang->entry->controlList['none']   = '无';
 $lang->entry->controlList['full']   = '完整';
 $lang->entry->controlList['simple'] = '透明';
+
+$lang->entry->integrationList[1] = '启用';
+$lang->entry->integrationList[0] = '关闭';

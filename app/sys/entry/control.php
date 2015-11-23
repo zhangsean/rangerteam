@@ -38,7 +38,7 @@ class entry extends control
     {
         if(!empty($_POST))
         {
-            if(!$this->post->buildin and strpos($this->post->login, '/') !== 0 and !preg_match('/https?\:\/\//Ui', $this->post->login)) $this->send(array('result' => 'fail', 'message' => $this->lang->entry->error->url));
+            if((!$this->post->buildin) and (strpos($this->post->login, '/') !== 0) and (!preg_match('/https?\:\/\//Ui', $this->post->login))) $this->send(array('result' => 'fail', 'message' => $this->lang->entry->error->url));
 
             if($this->post->zentao) 
             {
@@ -68,7 +68,6 @@ class entry extends control
             }
 
             $entryID = $this->entry->create();
-            $this->entry->updateLogo($entryID);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
             $locate = inlink('admin');
             if($this->post->zentao) $locate = inlink('bindUser', "id=$entryID&sessionID=$zentaoConfig->sessionID");
@@ -141,6 +140,69 @@ class entry extends control
     }
 
     /**
+     * Integration entry.
+     * 
+     * @param  string    $code 
+     * @access public
+     * @return void
+     */
+    public function integration($code)
+    {
+        if(!empty($_POST))
+        {
+            $this->entry->integration($code);
+            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
+            $this->send(array('result' => 'success', 'locate' => inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
+        }
+
+        $entry = $this->entry->getByCode($code);
+        if($entry->size != 'max')
+        {
+            $size = json_decode($entry->size);
+            $entry->size   = 'custom';
+            $entry->width  = $size->width;
+            $entry->height = $size->height;
+        }
+
+        $this->view->title = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->integration;
+        $this->view->entry = $entry;
+        $this->view->code  = $code;
+        $this->display();
+    }
+
+    /**
+     * Set style for entry. 
+     * 
+     * @param  string    $code 
+     * @access public
+     * @return void
+     */
+    public function style($code)
+    {
+        if(!empty($_POST))
+        {
+            $entryID = $this->entry->setStyle($code);
+            $this->entry->updateLogo($entryID);
+            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
+            $this->send(array('result' => 'success', 'locate' => inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
+        }
+
+        $entry = $this->entry->getByCode($code);
+        if($entry->size != 'max')
+        {
+            $size = json_decode($entry->size);
+            $entry->size   = 'custom';
+            $entry->width  = $size->width;
+            $entry->height = $size->height;
+        }
+
+        $this->view->title = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->style;
+        $this->view->entry = $entry;
+        $this->view->code  = $code;
+        $this->display();
+    }
+
+    /**
      * Edit auth.
      * 
      * @param  string $code 
@@ -151,10 +213,9 @@ class entry extends control
     {
         if(!empty($_POST))
         {
-            if(!$this->post->buildin and strpos($this->post->login, '/') !== 0 and !preg_match('/https?\:\/\//Ui', $this->post->login)) $this->send(array('result' => 'fail', 'message' => $this->lang->entry->error->url));
+            if((!$this->post->buildin) and (strpos($this->post->login, '/') !== 0) and (!preg_match('/https?\:\/\//Ui', $this->post->login))) $this->send(array('result' => 'fail', 'message' => $this->lang->entry->error->url));
 
-            $entryID = $this->entry->update($code);
-            $this->entry->updateLogo($entryID);
+            $this->entry->update($code);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
             $this->send(array('result' => 'success', 'locate' => inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
         }

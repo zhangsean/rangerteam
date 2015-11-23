@@ -12,4 +12,4 @@
 $config->entry = new stdclass();
 $config->entry->require = new stdclass();
 $config->entry->require->create = 'name,code,open,key,login';
-$config->entry->require->edit   = 'name,open,key,login';
+$config->entry->require->edit   = 'name,login';

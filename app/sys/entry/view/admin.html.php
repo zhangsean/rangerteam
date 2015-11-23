@@ -25,7 +25,7 @@ include '../../common/view/header.html.php';
         <th class='w-80px'><?php echo $lang->entry->code;?></th>
         <th class='w-240px'><?php echo $lang->entry->key;?></th>
         <th><?php echo $lang->entry->ip;?></th>
-        <th class='w-160px'><?php echo $lang->actions;?></th>
+        <th class='w-260px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -53,7 +53,17 @@ include '../../common/view/header.html.php';
           <?php
           echo html::a($this->createLink('group', 'manageAppPriv', "type=byApp&appCode=$entry->code"), $lang->entry->priv);
           echo html::a($this->createLink('entry', 'edit', "code=$entry->code"), $lang->edit);
-          if(!$entry->buildin) echo html::a($this->createLink('entry', 'delete', "code=$entry->code"), $lang->delete, 'class="entry-deleter"');
+          echo html::a($this->createLink('entry', 'style', "code=$entry->code"), $lang->entry->style);
+          if(!$entry->buildin)
+          {
+              echo html::a($this->createLink('entry', 'integration', "code=$entry->code"), $lang->entry->integration);
+              echo html::a($this->createLink('entry', 'delete', "code=$entry->code"), $lang->delete, 'class="entry-deleter"');
+          }
+          else
+          {
+              echo html::a('javascript:;', $lang->entry->integration, "disabled='disabled'");
+              echo html::a('javascript:;', $lang->delete, "disabled='disabled'");
+          }
           if($entry->zentao) echo html::a($this->createLink('entry', 'zentaoAdmin', "id={$entry->id}"), $lang->entry->bindUser);
           ?>
         </td>
@@ -61,7 +71,7 @@ include '../../common/view/header.html.php';
       <?php endforeach;?>
     </tbody>
     <tfoot>
-      <tr><td colspan="6"><?php echo html::submitButton($lang->entry->order);?></td></tr>
+      <tr><td colspan='6'><?php echo html::submitButton($lang->entry->order);?></td></tr>
     </tfoot>
     <?php if(empty($entries)):?>
     <tfoot>

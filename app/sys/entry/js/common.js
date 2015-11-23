@@ -20,24 +20,6 @@ function createKey()
 $('#size').change(function(){$('#custom').toggle($(this).val() == 'custom')});
 $(function(){$('#custom').toggle($('#size').val() == 'custom')})
 
-$('#integration').change(function()
-{
-    if($(this).prop('checked'))
-    {
-        $('#key').parents('tr').show();
-        $('#logout').parents('tr').show();
-        $('#block').parents('tr').show();
-        $('#ip').parents('tr').show();
-    }
-    else
-    {
-        $('#key').parents('tr').hide();
-        $('#logout').parents('tr').hide();
-        $('#block').parents('tr').hide();
-        $('#ip').parents('tr').hide();
-    }
-});
-
 $('#allip').change(function()
 {
     if($(this).prop('checked'))
@@ -49,13 +31,6 @@ $('#allip').change(function()
         $('#ip').removeAttr('disabled');
     }
 })
-if(!$('#integration').prop('checked'))
-{
-    $('#key').parents('tr').hide();
-    $('#logout').parents('tr').hide();
-    $('#block').parents('tr').hide();
-    $('#ip').parents('tr').hide();
-}
 
 /* refresh entries. */
 $(document).ready(function()
