@@ -1284,11 +1284,8 @@
                 /* replace function 'show()' with 'toggle()' to change the behavoir */
                 desktop.fullScreenApps.toggle($(this).attr('data-id'));
             });
-        };
 
-        /* Bind events */
-        this.bindEvents = function()
-        {
+            /* toggle desktop and others entry. */
             $('#s-menu-dashboard button').click(function()
             {
                 var et = getEntry('dashboard');
