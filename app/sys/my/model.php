@@ -19,6 +19,7 @@ class myModel extends model
 
         /* Get menus of current module and current method. */
         $moduleMenus = $this->lang->my->$method->menu;  
+        $currentMethod = $this->app->getMethodName();
 
         /* Cycling to print every menus of current module. */
         foreach($moduleMenus as $methodName => $methodMenu)
@@ -26,9 +27,11 @@ class myModel extends model
             /* Split the methodMenu to label, module, method, vars. */
             list($label, $module, $method, $vars) = explode('|', $methodMenu);
 
+            $class = '';
+            if($method == $currentMethod) $class = "class='active'";
             if(commonModel::hasPriv($module, $method))
             {
-                $string .= "<li>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
+                $string .= "<li $class>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
             }
         }
 
