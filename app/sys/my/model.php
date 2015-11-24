@@ -32,7 +32,7 @@ class myModel extends model
             }
         }
 
-        $string .= "</ul>\n";
+        $string .= "</ul></nav>\n";
         return $string;
     }
 }
