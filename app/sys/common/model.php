@@ -355,6 +355,33 @@ class commonModel extends model
     }
 
     /**
+     * Create menu of dashboard.
+     * 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function createDashboardMenu()
+    {
+        global $app, $lang;
+        $string = "<ul class='nav navbar-nav'>\n";
+
+        foreach($lang->menu->dashboard as $moduleName => $moduleMenu)
+        {
+            list($label, $module, $method, $vars) = explode('|', $moduleMenu);
+
+            if(commonModel::hasPriv($module, $method))
+            {
+                $link = helper::createLink($module, $method, $vars);
+                $string .= "<li><a class='app-btn open' data-id='dashboard' href='$link'>$label</a></li>\n";
+            }
+        }
+
+        $string .= "</ul>\n";
+        return $string;
+    }
+
+    /**
      * Create menu for managers.
      * 
      * @access public

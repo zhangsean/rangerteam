@@ -59,6 +59,7 @@ $isSuperAdmin = $this->app->user->admin == 'super';
         <ul class='nav navbar-nav'>
           <li><?php echo html::a($this->createLink('user', 'profile'), "<i class='icon-user'></i> " . $app->user->realname, "data-toggle='modal' data-id='profile'");?></li>
         </ul>
+        <?php echo commonModel::createDashboardMenu();?>
         <ul class='nav navbar-nav navbar-right'>
           <li><a href='javascript:;' class='refresh-all-panel'><i class='icon-repeat'></i></a></li>
           <li><a data-toggle='modal' href='<?php echo $this->createLink("block", "admin"); ?>' title='<?php echo $lang->index->addBlock; ?>'><i class='icon-plus'></i></a></li>
@@ -141,16 +142,16 @@ $isSuperAdmin = $this->app->user->admin == 'super';
 <script>
 var entries = [
 {
-    id    : 'home',
-    code  : 'home',
-    name  : '<?php echo $lang->index->dashboard;?>',
-    open  : 'iframe',
-    desc  : '<?php echo $lang->index->dashboard?>',
-    menu  : 'all',
-    sys   : true,
-    icon  : 'icon-home',
-    url   : '',
-    order : 0, 
+    id        : 'dashboard',
+    code      : 'dashboard',
+    name      : '<?php echo $lang->index->dashboard;?>',
+    open      : 'iframe',
+    desc      : '<?php echo $lang->index->dashboard?>',
+    menu      : 'all',
+    sys       : true,
+    icon      : 'icon-home',
+    url       : '<?php echo $this->createLink('index')?>',
+    order     : 0, 
 },
 {
     id        : 'allapps',

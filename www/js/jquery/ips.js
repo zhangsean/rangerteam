@@ -1286,6 +1286,20 @@
             });
         };
 
+        /* Bind events */
+        this.bindEvents = function()
+        {
+            $('#s-menu-dashboard button').click(function()
+            {
+                var et = getEntry('dashboard');
+                if(!et.opened)
+                {
+                    desktop.fullScreenApps.toggle('home');
+                    return false;
+                }
+            });
+        };
+
         /* Handle the app: all app list */
         this.handleAllApps = function()
         {

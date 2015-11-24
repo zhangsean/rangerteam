@@ -201,7 +201,7 @@ $lang->menu->sys->group     = '权限|group|browse|';
 $lang->menu->sys->entry     = '应用|entry|admin|';
 $lang->menu->sys->system    = '系统|mail|admin|';
 $lang->menu->sys->package   = '扩展|package|browse|';
- 
+
 $lang->message = new stdclass(); 
 $lang->blog    = new stdclass(); 
 $lang->group   = new stdclass(); 
@@ -229,6 +229,16 @@ $lang->article->menu->create = array('link' => '添加文章|article|create|type
 
 $lang->menuGroups = new stdclass();
 
+$lang->menu->dashboard = new stdclass();
+$lang->menu->dashboard->todo     = '待办|my|todo|';
+$lang->menu->dashboard->task     = '任务|my|task|';
+$lang->menu->dashboard->order    = '订单|my|order|';
+$lang->menu->dashboard->contract = '合同|my|contract|';
+$lang->menu->dashboard->project  = '项目|my|project|';
+$lang->menu->dashboard->dynamic  = '动态|my|dynamic|';
+$lang->menu->dashboard->review   = '审批|my|review|';
+$lang->menu->dashboard->company  = '组织|my|company|';
+ 
 /* Menu of mail module. */
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->system->menu;
