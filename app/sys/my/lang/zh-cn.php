@@ -12,5 +12,5 @@
 $lang->my = new stdclass();
 $lang->my->task = new stdclass();
 $lang->my->task->menu = new stdclass();
-$lang->my->task->menu->createdByMe  = '由我创建|my|task|mode=createdbyme';
-$lang->my->task->menu->assignedToMe = '指派给我|my|task|mode=assigntome';
+$lang->my->task->menu->createdByMe  = '由我创建|my|task|type=createdbyme';
+$lang->my->task->menu->assignedToMe = '指派给我|my|task|type=assigntome';
