@@ -14,7 +14,7 @@
 <style>body {padding-top: 58px}</style>
 <nav class='navbar navbar-inverse navbar-fixed-top'>
   <div class='navbar-header'>
-    <a class='navbar-brand' href='<?php $this->createLink('index', 'index') ?>'><?php echo $company . $lang->ranzhi ?></a>
+    <a class='navbar-brand' href='<?php $this->createLink('index', 'index') ?>'><?php echo $this->config->company->name . $lang->ranzhi ?></a>
   </div>
   <div class='collapse navbar-collapse'>
     <ul class='nav navbar-nav'>
