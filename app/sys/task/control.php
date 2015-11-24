@@ -53,7 +53,7 @@ class task extends control
         /* Check project deleted and privilage. */
         if($projectID)
         {
-            $project = $this->loadModel('project')->getByID($projectID);
+            $project = $this->loadModel('project', 'oa')->getByID($projectID);
             if($project->deleted) $this->locate($this->createLink('project'));
             if(!$this->project->checkPriv($projectID)) $this->locate($this->createLink('project'));
         }
@@ -64,7 +64,7 @@ class task extends control
         /* Build search form. */
         $this->loadModel('search', 'sys');
         $this->config->task->search['actionURL'] = $this->createLink('task', 'browse', "projectID=$projectID&mode=bysearch");
-        $this->config->task->search['params']['assignedTo']['values'] = $this->loadModel('project')->getMemberPairs($projectID);
+        $this->config->task->search['params']['assignedTo']['values'] = $this->loadModel('project', 'oa')->getMemberPairs($projectID);
         $this->search->setSearchParams($this->config->task->search);
 
         $this->view->title = $this->lang->task->browse;
@@ -78,7 +78,7 @@ class task extends control
         $this->view->orderBy   = $orderBy;
         $this->view->project   = $project;
         $this->view->projectID = $projectID;
-        $this->view->projects  = $this->loadModel('project')->getPairs();
+        $this->view->projects  = $this->loadModel('project', 'oa')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
     }
@@ -103,9 +103,9 @@ class task extends control
 
         $this->view->title     = $this->lang->task->create;
         $this->view->projectID = $projectID;
-        $this->view->projects  = $this->loadModel('project')->getPairs();
+        $this->view->projects  = $this->loadModel('project', 'oa')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs('noclosed,nodeleted');
-        $this->view->members   = $this->loadModel('project')->getMemberPairs($projectID);
+        $this->view->members   = $this->loadModel('project', 'oa')->getMemberPairs($projectID);
         $this->display();
     }
 
@@ -131,8 +131,8 @@ class task extends control
 
         $this->view->title     = $parent == '' ? $this->lang->task->batchCreate : $this->lang->task->children;
         $this->view->projectID = $projectID;
-        $this->view->projects  = $this->loadModel('project')->getPairs();
-        $this->view->users     = $this->loadModel('project')->getMemberPairs($projectID);
+        $this->view->projects  = $this->loadModel('project', 'oa')->getPairs();
+        $this->view->users     = $this->loadModel('project', 'oa')->getMemberPairs($projectID);
         $this->view->parent    = $parent;
         $this->display();
     }
@@ -173,13 +173,13 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer ? $this->post->referer : inlink('view', "id=$taskID")));
         }
 
-        $members = $this->loadModel('project')->getMemberPairs($task->project);
+        $members = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
         if(!empty($task->team)) $members = $this->task->getMemberPairs($task);
 
         $this->view->title     = $this->lang->task->edit;
         $this->view->task      = $task;
         $this->view->projectID = $this->view->task->project;
-        $this->view->projects  = $this->loadModel('project')->getPairs();
+        $this->view->projects  = $this->loadModel('project', 'oa')->getPairs();
         $this->view->members   = $members;
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->display();
@@ -234,13 +234,13 @@ class task extends control
             }
         }
 
-        $members = $this->loadModel('project')->getMemberPairs($task->project);
+        $members = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
         if(!empty($task->team)) $members = $this->task->getMemberPairs($task);
 
         $this->view->title      = $this->lang->task->view . $task->name;
         $this->view->task       = $task;
         $this->view->projectID  = $task->project;
-        $this->view->projects   = $this->loadModel('project')->getPairs();
+        $this->view->projects   = $this->loadModel('project', 'oa')->getPairs();
         $this->view->members    = $members;
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->preAndNext = $preAndNext;
@@ -390,7 +390,7 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
-        $members = $this->loadModel('project')->getMemberPairs($task->project);
+        $members = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
         /* Compute next assignedTo. */
         if(!empty($task->team))
         {
@@ -431,7 +431,7 @@ class task extends control
         }
 
         /* Set task team member if exists task team. */
-        $members = $this->loadModel('project')->getMemberPairs($task->project);
+        $members = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
         if(!empty($task->team)) $members = $this->task->getMemberPairs($task);
 
         $this->view->title = $this->lang->task->activate;
@@ -578,7 +578,7 @@ class task extends control
         /* Check project deleted. */
         if($projectID)
         {
-            $project = $this->loadModel('project')->getByID($projectID);
+            $project = $this->loadModel('project', 'oa')->getByID($projectID);
             if($project->deleted) $this->locate($this->createLink('project'));
         }
 
@@ -617,7 +617,7 @@ class task extends control
         /* Check project deleted. */
         if($projectID)
         {
-            $project = $this->loadModel('project')->getByID($projectID);
+            $project = $this->loadModel('project', 'oa')->getByID($projectID);
             if($project->deleted) $this->locate($this->createLink('project'));
         }
 
@@ -746,7 +746,7 @@ class task extends control
 
             /* Get users and projects. */
             $users    = $this->loadModel('user')->getPairs('noletter');
-            $projects = $this->loadModel('project')->getPairs();
+            $projects = $this->loadModel('project', 'oa')->getPairs();
 
             $relatedFiles = $this->dao->select('id, objectID, pathname, title')->from(TABLE_FILE)->where('objectType')->eq('task')->andWhere('objectID')->in(@array_keys($tasks))->fetchGroup('objectID');
 

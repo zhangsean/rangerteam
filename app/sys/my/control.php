@@ -11,12 +11,29 @@
  */
 class my extends control
 {
-    public function task()
+    /**
+     * Browse task list.
+     * 
+     * @param  string  $type 
+     * @param  string  $orderBy 
+     * @param  int     $recTotal 
+     * @param  int     $recPerPage 
+     * @param  int     $pageID 
+     * @access public
+     * @return void
+     */
+    public function task($type = 'assignedTo', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        $this->loadModel('task');
+        $this->session->set('taskList', "javascript:$.openEntry(\"dashboard\")");
 
-        $this->view->title   = $this->lang->task->common;
-        $this->view->company = $this->loadModel('setting')->getItem('owner=system&app=sys&module=common&section=company&key=name');
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $this->view->title   = $this->lang->my->task->$type;
+        $this->view->type    = $type;
+        $this->view->orderBy = $orderBy;
+        $this->view->pager   = $pager;
+        $this->view->tasks   = $this->loadModel('task')->getList(0, $type, $orderBy, $pager);
         $this->display();
     }
 }

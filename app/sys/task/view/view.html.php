@@ -12,7 +12,7 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
-<?php $this->loadModel('project')->setMenu($projects, $projectID);?>
+<?php $this->loadModel('project', 'oa')->setMenu($projects, $projectID);?>
 <?php if($task->parent != 0):?>
 <div class='addonMenu'>
   <li class='divider angle'></li>
