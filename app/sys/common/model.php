@@ -366,14 +366,17 @@ class commonModel extends model
         global $app, $lang;
         $string = "<ul class='nav navbar-nav'>\n";
 
+        $currentMethod = $app->getMethodName();
         foreach($lang->menu->dashboard as $moduleName => $moduleMenu)
         {
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
+            $class = '';
+            if($currentMethod == $method) $class = "class='active'";
             if(commonModel::hasPriv($module, $method))
             {
                 $link = helper::createLink($module, $method, $vars);
-                $string .= "<li><a class='app-btn open' data-id='dashboard' href='$link'>$label</a></li>\n";
+                $string .= "<li $class><a class='app-btn open' data-id='dashboard' href='$link'>$label</a></li>\n";
             }
         }
 

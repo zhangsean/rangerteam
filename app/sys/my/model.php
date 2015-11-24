@@ -18,31 +18,17 @@ class myModel extends model
         $string = "<nav id='menu'><ul class='nav'>\n";
 
         /* Get menus of current module and current method. */
-        $moduleMenus   = $this->lang->my->$method->menu;  
-        $currentMethod = $this->app->getMethodName();
+        $moduleMenus = $this->lang->my->$method->menu;  
 
         /* Cycling to print every menus of current module. */
         foreach($moduleMenus as $methodName => $methodMenu)
         {
-            if(is_array($methodMenu)) 
-            {
-                $methodAlias = isset($methodMenu['alias']) ? $methodMenu['alias'] : '';
-                $methodLink  = $methodMenu['link'];
-            }
-            else
-            {
-                $methodAlias = '';
-                $methodLink  = $methodMenu;
-            }
-
-            /* Split the methodLink to label, module, method, vars. */
-            list($label, $module, $method, $vars) = explode('|', $methodLink);
+            /* Split the methodMenu to label, module, method, vars. */
+            list($label, $module, $method, $vars) = explode('|', $methodMenu);
 
             if(commonModel::hasPriv($module, $method))
             {
-                $class = '';
-                if($method == $currentMethod) $class = " class='active'";
-                $string .= "<li{$class}>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
+                $string .= "<li>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
             }
         }
 
