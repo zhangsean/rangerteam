@@ -103,7 +103,7 @@ class todo extends control
         {
             $todoID = $this->todo->create($date, $account);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->loadModel('action')->create('todo', $todoID, 'opened');
+            $this->loadModel('action')->create('todo', $todoID, 'created');
             $date = str_replace('-', '', $this->post->date);
             if($date == '')
             {
