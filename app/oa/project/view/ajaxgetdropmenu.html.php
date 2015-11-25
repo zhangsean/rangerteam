@@ -37,7 +37,7 @@
       {
           if($project->status != 'finished' and $project->status != 'suspend' and $project->PM == $this->app->user->account)
           {
-              echo "<li>" . html::a(sprintf($link, $project->id), "<i class='icon-folder-close-alt'></i> " . $project->name). "</li>";
+              echo "<li class='text-nowrap text-ellipsis'>" . html::a(sprintf($link, $project->id), "<i class='icon-folder-close-alt'></i> " . $project->name). "</li>";
           }
       }
  
@@ -47,7 +47,7 @@
       {
           if($project->status != 'finished' and $project->status != 'suspend' and !($project->PM == $this->app->user->account))
           {
-              echo "<li>" . html::a(sprintf($link, $project->id), "<i class='icon-folder-close-alt'></i> " . $project->name, '', "$class"). "</li>";
+              echo "<li class='text-nowrap text-ellipsis'>" . html::a(sprintf($link, $project->id), "<i class='icon-folder-close-alt'></i> " . $project->name, '', "$class"). "</li>";
           }
       }
       ?>
@@ -66,7 +66,7 @@
       <?php
       foreach($projects as $project)
       {
-          if($project->status == 'finished') echo "<li>" . html::a(sprintf($link, $project->id), "<i class='icon-folder-close-alt'></i> " . $project->name, '', "class='done'"). "</li>";
+          if($project->status == 'finished') echo "<li class='text-nowrap text-ellipsis'>" . html::a(sprintf($link, $project->id), "<i class='icon-folder-close-alt'></i> " . $project->name, '', "class='done'"). "</li>";
       }
       ?>
     </ul>
@@ -77,7 +77,7 @@
       <?php
       foreach($projects as $project)
       {
-          if($project->status == 'suspend') echo "<li>" . html::a(sprintf($link, $project->id), "<i class='icon-folder-close-alt'></i> " . $project->name, '', "class='done'"). "</li>";
+          if($project->status == 'suspend') echo "<li class='text-nowrap text-ellipsis'>" . html::a(sprintf($link, $project->id), "<i class='icon-folder-close-alt'></i> " . $project->name, '', "class='done'"). "</li>";
       }
       ?>
     </ul>
