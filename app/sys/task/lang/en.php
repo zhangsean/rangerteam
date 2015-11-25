@@ -150,5 +150,6 @@ $lang->task->unAssigned = 'Un assigned';
 
 $lang->task->mindMoveTip = 'You should move a task to a sub node.';
 $lang->task->notAllowed  = 'Can not move like this.';
+$lang->task->skipClose   = 'The status of Tasks : %s are not finished or canceled, can not close.';
 
 $lang->task->groupinfo = "<div class='text-muted'>Total <strong>%s</strong>,waitin <strong>%s</strong>,doing <strong>%s</strong>,finished <strong>%s</strong>,closed <strong>%s</strong></div>";

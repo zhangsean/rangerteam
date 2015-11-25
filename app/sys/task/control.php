@@ -644,6 +644,56 @@ class task extends control
     }
 
     /**
+     * Batch close tasks.
+     * 
+     * @access public
+     * @return void
+     */
+    public function batchClose()
+    {
+        if($this->post->taskIDList)
+        {
+            $this->loadModel('action');
+            $tasks = $this->task->getByList($this->post->taskIDList);
+            foreach($tasks as $taskID => $task)
+            {
+                if($task->status == 'wait' or $task->status == 'doing')
+                {
+                    $skipTasks[$taskID] = $taskID;
+                    continue;
+                }
+
+                if($task->status == 'closed') continue;
+
+                $changes = $this->task->close($taskID);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+                if($changes)
+                {
+                    $actionID = $this->action->create('task', $taskID, 'Closed', '');
+                    $this->action->logHistory($actionID, $changes);
+
+                    /* Close children */
+                    foreach($task->children as $key => $child) 
+                    {
+                        $childChanges = $this->task->close($child->id);
+                        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+                        if($childChanges)
+                        {
+                            $actionID = $this->loadModel('action')->create('task', $child->id, 'Closed', $this->post->comment, $this->lang->task->reasonList[$task->closedReason]);
+                            $this->action->logHistory($actionID, $childChanges);
+                        }
+                    }
+                }
+            }
+
+            if(isset($skipTasks)) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->task->skipClose, join(',', $skipTasks))));
+        }
+        $this->send(array('result' => 'success', 'locate' => $this->server->http_referer));
+    }
+
+    /**
      * Send email.
      * 
      * @param  int    $taskID 

@@ -131,6 +131,33 @@ class taskModel extends model
 
         return $taskList;
     }
+
+    /**
+     * Get task list.
+     * 
+     * @param  int|array|string    $taskIDList 
+     * @access public
+     * @return array
+     */
+    public function getByList($taskIDList = 0)
+    {
+        $taskList = $this->dao->select('*')->from(TABLE_TASK)
+            ->where('deleted')->eq(0)
+            ->beginIF($taskIDList)->andWhere('id')->in($taskIDList)->fi()
+            ->fetchAll('id');
+
+        foreach($taskList as $key => $task)
+        {
+            if(empty($task->children)) $task->children = array();
+            if($task->parent != 0 and isset($taskList[$task->parent])) 
+            {
+                $taskList[$task->parent]->children[$key] = $task;
+                unset($taskList[$key]);
+            }
+        }
+
+        return $taskList;
+    }
     
     /**
      * Get tasks of a project.

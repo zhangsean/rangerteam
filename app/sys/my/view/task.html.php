@@ -14,7 +14,7 @@
 <?php js::set('type', $type);?>
 <div class='panel'>
   <?php if(commonModel::hasPriv('task', 'batchClose')):?>
-  <form method='post' action="<?php echo $this->createLink('oa.task', 'batchClose');?>">
+  <form id='ajaxForm' method='post' action="<?php echo $this->createLink('oa.task', 'batchClose');?>">
   <?php endif;?>
     <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
       <thead>
