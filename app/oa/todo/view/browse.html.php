@@ -44,7 +44,7 @@
           <td><?php echo zget($lang->todo->statusList, $todo->status);?></td>
           <td class='text-left'>
             <?php 
-              echo html::a($this->createLink('oa.todo', 'view', "todoID={$todo->id}"), $lang->view, "data-toggle='modal'");
+              echo html::a($this->createLink('oa.todo', 'view', "todoID={$todo->id}"), $lang->view, "data-toggle='modal' data-width='80%'");
               $disabled = ($this->todo->checkPriv($todo, 'finish') && $this->todo->isClickable($todo, 'finish')) ? '' : 'disabled';
               echo html::a($this->createLink('oa.todo', 'finish', "todoID={$todo->id}"), $lang->todo->finish, "class='$disabled' data-toggle='ajax'");
               echo html::a($this->createLink('oa.todo', 'assignTo', "todoID={$todo->id}"), $lang->todo->assignTo, "data-toggle='modal'");

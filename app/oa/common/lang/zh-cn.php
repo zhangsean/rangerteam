@@ -26,7 +26,6 @@ $lang->menu->oa->refund    = '报销|refund|personal|';
 $lang->dashboard = new stdclass();
 $lang->dashboard->menu = new stdclass();
 $lang->dashboard->menu->index = '首页|dashboard|index|';
-$lang->dashboard->menu->todo  = '待办|dashboard|todo|';
 $lang->dashboard->menu->task  = '任务|dashboard|task|';
 
 $lang->todo = new stdclass();
@@ -35,6 +34,7 @@ $lang->todo->menu->calendar        = '日历|todo|calendar|';
 $lang->todo->menu->assignedToOther = '指派他人|todo|browse|mode=assignedtoother';
 $lang->todo->menu->assignedToMe    = '指派给我|todo|browse|mode=assignedtome';
 $lang->todo->menu->future          = '待定|todo|browse|mode=future';
+$lang->todo->menu->all             = '所有|todo|browse|mode=all';
 
 $lang->project   = new stdclass();
 $lang->project->menu = new stdclass();

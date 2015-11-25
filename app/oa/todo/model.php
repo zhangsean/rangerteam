@@ -322,8 +322,9 @@ class todoModel extends model
             ->beginIF($mode == 'assignedtome')->andWhere('account')->ne($account)->andWhere('assignedTo')->eq($account)->fi()
             ->andWhere("date >= '$begin'")
             ->andWhere("date <= '$end'")
-            ->beginIF($status != 'all' and $status != 'undone')->andWhere('status')->in($status)->fi()
-            ->beginIF($status == 'undone')->andWhere('status')->ne('done')->fi()
+            ->beginIF($status != 'all' and $status != 'undone' and $status != 'unclosed')->andWhere('status')->in($status)->fi()
+            ->beginIF($status == 'undone')->andWhere('status')->notin('done,closed')->fi()
+            ->beginIF($status == 'unclosed')->andWhere('status')->ne('closed')->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->query();

@@ -23,7 +23,7 @@
           <div>
             <?php echo $todo->desc;?>
             <?php 
-            if($todo->type == 'task') echo html::a($this->createLink('oa.task', 'view', "id={$todo->idvalue}"), $lang->task->common . '#' . $todo->idvalue, "class='btn'");
+            if($todo->type == 'task') echo html::a("javascript:$.openEntry(\"oa\",\"" . $this->createLink('oa.task', 'view', "id={$todo->idvalue}") . "\")", $lang->task->common . '#' . $todo->idvalue, "class='btn'");
             if($todo->type == 'order') echo html::a("javascript:$.openEntry(\"crm\",\"" . $this->createLink('crm.order', 'view', "id={$todo->idvalue}") . "\")", $lang->order->common . '#' . $todo->idvalue, "class='btn'");
             if($todo->type == 'customer') echo html::a("javascript:$.openEntry(\"crm\",\"" . $this->createLink('crm.customer', 'view', "id={$todo->idvalue}") . "\")", $lang->customer->common . '#' . $todo->idvalue, "class='btn'");
             ?>

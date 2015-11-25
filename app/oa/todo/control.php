@@ -67,11 +67,15 @@ class todo extends control
 
         if($mode == 'future')
         {
-            $todos = $this->todo->getList('self', $this->app->user->account, 'future', 'all', $orderBy, $pager);
+            $todos = $this->todo->getList('self', $this->app->user->account, 'future', 'unclosed', $orderBy, $pager);
+        }
+        if($mode == 'all')
+        {
+            $todos = $this->todo->getList('self', $this->app->user->account, 'all', 'all', $orderBy, $pager);
         }
         else
         {
-            $todos = $this->todo->getList($mode, $this->app->user->account, 'all', 'all', $orderBy, $pager);
+            $todos = $this->todo->getList($mode, $this->app->user->account, 'all', 'unclosed', $orderBy, $pager);
         }
 
         $this->view->title   = $this->lang->todo->browse;
@@ -254,6 +258,24 @@ class todo extends control
 
         if($todo->status == 'done') $this->todo->close($todoID);
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+    }
+
+    /**
+     * batch close todos. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function batchClose()
+    {
+        $todoIDList = $this->post->todoIDList ? $this->post->todoIDList : array();
+        foreach($todoIDList as $todoID)
+        {
+            $todo = $this->todo->getById($todoID);
+            if($this->todo->checkPriv($todo, 'close') and $todo->status == 'done') $this->todo->close($todoID);
+        }
+
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
     }
 
     /**

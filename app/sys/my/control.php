@@ -12,6 +12,49 @@
 class my extends control
 {
     /**
+     * browse todos.
+     * 
+     * @param  string $mode 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function todo($type = 'today', $orderBy = 'status,date', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->loadModel('todo', 'oa');
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        if($type == 'future')
+        {
+            $todos = $this->todo->getList('self', $this->app->user->account, 'future', 'unclosed', $orderBy, $pager);
+        }
+        else if($type == 'today')
+        {
+            $todos = $this->todo->getList('self', $this->app->user->account, 'today', 'unclosed', $orderBy, $pager);
+        }
+        else if($type == 'all')
+        {
+            $todos = $this->todo->getList('self', $this->app->user->account, 'all', 'all', $orderBy, $pager);
+        }
+        else
+        {
+            $todos = $this->todo->getList($type, $this->app->user->account, 'all', 'unclosed', $orderBy, $pager);
+        }
+
+        $this->view->title   = $this->lang->todo->browse;
+        $this->view->todos   = $todos;
+        $this->view->users   = $this->loadModel('user')->getPairs();
+        $this->view->type    = $type;
+        $this->view->orderBy = $orderBy;
+        $this->view->pager   = $pager;
+        $this->display();
+    }
+
+    /**
      * Browse task list.
      * 
      * @param  string  $type 
