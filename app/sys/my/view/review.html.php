@@ -12,8 +12,8 @@
 ?>
 <?php include './header.html.php';?>
 <?php js::set('type', $type)?>
-<?php if($type == 'attend'):?>
 <?php js::set('confirmReview', $lang->attend->confirmReview);?>
+<?php if($type == 'attend'):?>
 <div class='panel'>
   <table class='table table-hover table-striped table-sorter table-data table-fixed text-center'>
     <thead>
@@ -40,8 +40,8 @@
       <td><?php echo zget($lang->attend->reasonList, $attend->reason)?></td>
       <td><?php echo $attend->desc?></td>
       <td>
-        <?php echo html::a($this->createLink('oa.attend', 'review', "attendID={$attend->id}&status=pass"), $lang->attend->reviewStatusList['pass'], "data-toggle='ajax'")?>
-        <?php echo html::a($this->createLink('oa.attend', 'review', "attendID={$attend->id}&status=reject"), $lang->attend->reviewStatusList['reject'], "data-toggle='ajax'")?>
+        <?php echo html::a($this->createLink('oa.attend', 'review', "attendID={$attend->id}&status=pass"), $lang->attend->reviewStatusList['pass'], "data-status='pass' data-toggle='ajax'")?>
+        <?php echo html::a($this->createLink('oa.attend', 'review', "attendID={$attend->id}&status=reject"), $lang->attend->reviewStatusList['reject'], "data-status='reject' data-toggle='ajax'")?>
       </td>
     </tr>
     <?php endforeach;?>
@@ -78,8 +78,8 @@
       <td class='leave-<?php echo $leave->status?>'><?php echo zget($this->lang->leave->statusList, $leave->status);?></td>
       <td><?php echo zget($users, $leave->reviewedBy);?></td>
       <td>
-        <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=pass"), $lang->leave->statusList['pass'], "data-toggle='ajax'");?>
-        <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=reject"), $lang->leave->statusList['reject'], "data-toggle='ajax'");?>
+        <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=pass"), $lang->leave->statusList['pass'], "data-status='pass' data-toggle='ajax'");?>
+        <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=reject"), $lang->leave->statusList['reject'], "data-status='reject' data-toggle='ajax'");?>
       </td>
     </tr>
     <?php endforeach;?>

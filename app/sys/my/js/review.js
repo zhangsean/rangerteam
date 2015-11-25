@@ -3,12 +3,16 @@ $(document).ready(function()
     $('[data-toggle=ajax]').click(function()
     {
         if($(this).hasClass('disabled')) return false;
-        $.get($(this).prop('href'), function(response)
+        var status = $(this).data('status');
+        if(status == 'undefined' || confirm(v.confirmReview[status]))
         {
-            if(response.message) $.zui.messager.success(response.message);
-            if(response.result == 'success') location.reload();
-            return false;
-        }, 'json');
+            $.get($(this).prop('href'), function(response)
+            {
+                if(response.message) $.zui.messager.success(response.message);
+                if(response.result == 'success') location.reload();
+                return false;
+            }, 'json');
+        }
         return false;
     });
 });
