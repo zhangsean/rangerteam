@@ -132,12 +132,17 @@ class attendModel extends model
     /**
      * Get wait attends.
      * 
+     * @param  string $deptID 
      * @access public
      * @return array()
      */
-    public function getWaitAttends()
+    public function getWaitAttends($deptID = '')
     {
-        return $this->dao->select('*')->from(TABLE_ATTEND)->where('reviewStatus')->eq('wait')->fetchAll();
+        if($deptID != '') $users = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted', $deptID);
+        return $this->dao->select('*')->from(TABLE_ATTEND)
+            ->where('reviewStatus')->eq('wait')
+            ->beginIf($deptID != '')->andWhere('account')->in(array_keys($users))->fi()
+            ->fetchAll();
     }
 
     /**

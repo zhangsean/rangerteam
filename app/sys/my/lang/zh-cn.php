@@ -19,6 +19,12 @@ $lang->my->todo->menu->assignedToMe    = '指派给我|my|todo|type=assignedToMe
 $lang->my->todo->menu->future          = '待定|my|todo|type=future';
 $lang->my->todo->menu->all             = '所有|my|todo|type=all';
 
+$lang->my->review = new stdclass();
+$lang->my->review->menu = new stdclass();
+$lang->my->review->menu->attend = '考勤|my|review|type=attend';
+$lang->my->review->menu->leave  = '请假|my|review|type=leave';
+$lang->my->review->menu->refund = '报销|my|review|type=refund';
+
 $lang->my->task = new stdclass();
 $lang->my->task->common     = '我的任务';
 $lang->my->task->assignedTo = '指派给我';

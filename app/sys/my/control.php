@@ -12,6 +12,79 @@
 class my extends control
 {
     /**
+     * review 
+     * 
+     * @param  string $type 
+     * @param  string $orderBy 
+     * @access public
+     * @return void
+     */
+    public function review($type = 'attend', $orderBy = 'status')
+    {
+        $this->loadModel('attend', 'oa');
+        $this->loadModel('leave', 'oa');
+        $this->loadModel('refund', 'oa');
+        $account = $this->app->user->account;
+
+        /* Get dept info. */
+        $allDeptList = $this->loadModel('tree')->getPairs('', 'dept');
+        $allDeptList['0'] = '/';
+        $managedDeptList = array();
+        $tmpDept = $this->loadModel('tree')->getDeptManagedByMe($account);
+        foreach($tmpDept as $d) $managedDeptList[$d->id] = $d->name;
+
+        /* Get deptments managed by me. used when get attend and leave. */
+        $deptList = array();
+        if(!empty($this->config->attend->reviewedBy) and $this->config->attend->reviewedBy == $account) $deptList = $allDeptList;
+        if(empty($this->config->attend->reviewedBy)) $deptList = $managedDeptList;
+
+        /* Get attend list. */
+        $attends  = array();
+        if($type == 'attend' and !empty($deptList)) $attends = $this->attend->getWaitAttends(array_keys($deptList));
+        
+        /* Get leave list. */
+        $leaves = array();
+        if($type == 'leave' and !empty($deptList)) $leaves = $this->leave->getList('browseReview', $year = '', $month = '', '', array_keys($deptList), $status = 'wait', $orderBy);
+
+        /* Get refund list. */
+        $refunds = array();
+        if($type == 'refund')
+        {
+            /* Get refund list for secondReviewer. */
+            $secondRefunds = array();
+            if(!empty($this->config->refund->secondReviewer) and $this->config->refund->secondReviewer == $account)
+            {
+                $secondRefunds = $this->refund->getList($mode = 'browseReview', $deptIDList = '', 'doing');
+            }
+
+            /* Get refund list for firstReviewer. */
+            $firstRefunds = array();
+            if(!empty($this->config->refund->firstReviewer) and $this->config->refund->firstReviewer == $account)
+            {
+                $deptList = $allDeptList;
+            }
+            else if(empty($this->config->refund->firstReviewer))
+            {
+                $deptList = $managedDeptList;
+            }
+            if(!empty($deptList)) $firstRefunds = $this->refund->getList($mode = 'browseReview', $deptIDList = array_keys($deptList), 'wait');
+            $refunds = array_merge($secondRefunds, $firstRefunds);
+        }
+
+        $this->view->title        = $this->lang->refund->review;
+        $this->view->attends      = $attends;
+        $this->view->leaveList    = $leaves;
+        $this->view->refunds      = $refunds;
+        $this->view->deptList     = $allDeptList;
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->type         = $type;
+        $this->view->orderBy      = $orderBy;
+        $this->view->categories   = $this->refund->getCategoryPairs();
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->display();
+    }
+
+    /**
      * browse todos.
      * 
      * @param  string $mode 

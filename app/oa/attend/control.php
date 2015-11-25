@@ -329,45 +329,38 @@ class attend extends control
      * browse review list.
      * 
      * @param  int    $dept 
-     * @param  string $reviewStatus 
      * @access public
      * @return void
      */
-    public function browseReview($dept = '', $reviewStatus = 'wait')
+    public function browseReview($dept = '')
     {
         $attends  = array();
-        $users    = $this->loadModel('user')->getList($dept);
-        $newUsers = array();
-        foreach($users as $key => $user) $newUsers[$user->account] = $user;
-
-        $this->view->title = $this->lang->attend->review;
-        $this->view->users = $newUsers;
-
+        $deptList = array();
+        /* Get deptments managed by me. */
         if(!empty($this->config->attend->reviewedBy))
         { 
             if($this->config->attend->reviewedBy == $this->app->user->account)
             {
                 $deptList = $this->loadModel('tree')->getPairs('', 'dept');
-                $attends  = $this->attend->getWaitAttends();
-
-                $this->view->attends  = $attends;
-                $this->view->deptList = $deptList;
+                $deptList['0'] = '/';
             }
         }
         else
         {
-            $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
-            if(!empty($deptList)) 
-            {
-                if($dept == '' or !isset($deptList[$dept])) $dept = array_keys($deptList);
-                $attends = $this->attend->getByDept($dept, $startDate = '', $endDate = '', $reviewStatus);
-            }
-
-            $this->view->attends      = $attends;
-            $this->view->deptList     = $deptList;
-            $this->view->reviewStatus = $reviewStatus;
+            $depts = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+            foreach($depts as $d) $deptList[$d->id] = $d->name;
         }
+        if(!empty($deptList)) $attends = $this->attend->getWaitAttends(array_keys($deptList));
 
+        /* Get users info. */
+        $users    = $this->loadModel('user')->getList($dept);
+        $newUsers = array();
+        foreach($users as $key => $user) $newUsers[$user->account] = $user;
+
+        $this->view->title    = $this->lang->attend->review;
+        $this->view->users    = $newUsers;
+        $this->view->attends  = $attends;
+        $this->view->deptList = $deptList;
         $this->display();
     }
 
@@ -437,40 +430,6 @@ class attend extends control
         /* Send emails. */
         $this->loadModel('mail')->send($toList, $subject, $mailContent);
         if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
-    }
-
-    /**
-     * ajax get review list for todo. 
-     * 
-     * @param  string $account 
-     * @param  string $id 
-     * @access public
-     * @return void
-     */
-    public function ajaxGetTodoList($account = '', $id = '')
-    {
-        $attendList = array();
-        $deptList   = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
-        if(!empty($deptList)) 
-        {
-            $dept = join(',', array_keys($deptList));
-            $attendList = $this->attend->getByDept($dept, $startDate = '', $endDate = '', 'wait');
-        }
-        $users = $this->loadModel('user')->getPairs();
-        $attends = array();
-        foreach($attendList as $deptKey => $attendDept)
-        {
-            foreach($attendDept as $accountKey => $attendUser)
-            {
-                foreach($attendUser as $attend)
-                {
-                    $attends[$attend->id] = $deptList[$deptKey]->name . '/' . $users[$accountKey] . '(' . $attend->date . ')';
-                }
-            }
-        }
-
-        if($id) die(html::select("idvalues[$id]", $attends, '', 'class="form-control"'));
-        die(html::select('idvalue', $attends, '', 'class=form-control'));
     }
 
     /**

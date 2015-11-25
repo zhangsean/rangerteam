@@ -291,7 +291,7 @@ class refund extends control
             $this->sendmail($refundID, $actionID);
 
             $isDetail = ($refund->parent != 0) ? true : false;
-            $this->send(array('result' => 'success', 'isDetail' => $isDetail, 'message' => $this->lang->saveSuccess, 'locate' => inlink('browsereview')));
+            $this->send(array('result' => 'success', 'isDetail' => $isDetail, 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
         $this->view->title      = $this->lang->refund->review;

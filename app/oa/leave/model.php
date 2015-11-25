@@ -26,6 +26,7 @@ class leaveModel extends model
     /**
      * Get leave list. 
      * 
+     * @param  string $type 
      * @param  string $year 
      * @param  string $month 
      * @param  string $account 
