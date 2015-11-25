@@ -20,7 +20,7 @@ $lang->my->todo->menu->future          = '待定|my|todo|type=future';
 $lang->my->todo->menu->all             = '所有|my|todo|type=all';
 
 $lang->my->task = new stdclass();
-$lang->my->task->common = '我的任务';
+$lang->my->task->common     = '我的任务';
 $lang->my->task->assignedTo = '指派给我';
 $lang->my->task->createdBy  = '由我创建';
 $lang->my->task->finishedBy = '由我完成';
@@ -31,3 +31,6 @@ $lang->my->task->menu->assignedToMe = '指派给我|my|task|type=assignedTo';
 $lang->my->task->menu->createdByMe  = '由我创建|my|task|type=createdBy';
 $lang->my->task->menu->fineshedByMe = '由我完成|my|task|type=finishedBy';
 $lang->my->task->menu->canceledByMe = '由我取消|my|task|type=canceledBy';
+
+$lang->my->project = new stdclass();
+$lang->my->project->common = '我的项目';

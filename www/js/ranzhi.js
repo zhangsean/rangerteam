@@ -953,7 +953,6 @@ function switchFinished()
     $('#finishedMenu').width($('#defaultMenu').outerWidth());
     $('#searchResult').removeClass('show-suspend');
     $('#searchResult').toggleClass('show-finished');
-
 }
 
 /**
@@ -968,5 +967,4 @@ function switchSuspend()
     $('#suspendMenu').width($('#defaultMenu').outerWidth());
     $('#searchResult').removeClass('show-finished');
     $('#searchResult').toggleClass('show-suspend');
-
 }

@@ -12,7 +12,7 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php if($mode) js::set('mode', $mode);?>
-<?php $this->loadModel('project')->setMenu($projects, $projectID, "$orderBy");?>
+<?php $this->loadModel('project', 'oa')->setMenu($projects, $projectID, "$orderBy");?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div class='row with-menu page-content'>
   <div class='panel'>

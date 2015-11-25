@@ -79,4 +79,19 @@ class my extends control
         $this->view->tasks   = $this->loadModel('task')->getList(0, $type, $orderBy, $pager);
         $this->display();
     }
+
+    /**
+     *  Involved projects list.
+     * 
+     * @access public
+     * @return void
+     */
+    public function project()
+    {
+        $this->loadModel('project', 'oa');
+        $this->view->title    = $this->lang->my->project->common;
+        $this->view->projects = $this->project->getList('involved');
+        $this->view->users    = $this->loadModel('user')->getPairs('noclosed');
+        $this->display();
+    }
 }
