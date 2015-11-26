@@ -139,7 +139,7 @@ class order extends control
     public function view($orderID)
     {
         $order = $this->order->getByID($orderID);
-        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($order)? '0' : $order->customer);
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($order) ? '0' : $order->customer);
 
         /* Set allowed edit order ID list. */
         $this->app->user->canEditOrderIdList = ',' . implode(',', $this->order->getOrdersSawByMe('edit', (array)$orderID)) . ',';
