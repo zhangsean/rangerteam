@@ -25,6 +25,13 @@ $lang->my->review->menu->attend = '考勤|my|review|type=attend';
 $lang->my->review->menu->leave  = '请假|my|review|type=leave';
 $lang->my->review->menu->refund = '报销|my|review|type=refund';
 
+$lang->my->order = new stdclass();
+$lang->my->order->menu = new stdclass();
+$lang->my->order->menu->past     = '亟需联系|my|order|type=past';
+$lang->my->order->menu->today    = '今天联系|my|order|type=today';
+$lang->my->order->menu->tomorrow = '明天联系|my|order|type=tomorrow';
+$lang->my->order->menu->all      = '所有|my|order|type=all';
+
 $lang->my->task = new stdclass();
 $lang->my->task->common     = '我的任务';
 $lang->my->task->assignedTo = '指派给我';

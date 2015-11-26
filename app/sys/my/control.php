@@ -128,6 +128,44 @@ class my extends control
     }
 
     /**
+     * order list.
+     * 
+     * @param  string $type 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function order($type = 'past', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->loadModel('order', 'crm');
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $orders = $this->order->getList($type, '', $orderBy, $pager);
+
+        /* Set pre and next condition. */
+        $this->session->set('orderQueryCondition', $this->dao->get());
+        $this->session->set('orderList', $this->app->getURI(true));
+
+        /* Set allowed edit order ID list. */
+        $this->app->user->canEditOrderIdList = ',' . implode(',', $this->order->getOrdersSawByMe('edit', array_keys($orders))) . ',';
+
+        $this->view->title        = $this->lang->order->browse;
+        $this->view->orders       = $orders;
+        $this->view->customers    = $this->loadModel('customer', 'crm')->getList('client');
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->pager        = $pager;
+        $this->view->type         = $type;
+        $this->view->orderBy      = $orderBy;
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->view->currencyList = $this->common->getCurrencyList();
+        $this->display();
+    }
+
+    /**
      * Browse task list.
      * 
      * @param  string  $type 

@@ -470,30 +470,30 @@ class orderModel extends model
     public function buildOperateMenu($order)
     {
         $menu = '';
-        $menu .= commonModel::printLink('order', 'view', "orderID=$order->id", $this->lang->view, '', false);
+        $menu .= commonModel::printLink('crm.order', 'view', "orderID=$order->id", $this->lang->view, '', false);
         $menu .= commonModel::printLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}", $this->lang->order->record, "data-toggle='modal' data-type='iframe'", false);
 
-        if($order->status == 'normal') $menu .= commonModel::printLink('contract', 'create', "customerID={$order->customer}&orderID={$order->id}", $this->lang->order->sign, '', false);
+        if($order->status == 'normal') $menu .= commonModel::printLink('crm.contract', 'create', "customerID={$order->customer}&orderID={$order->id}", $this->lang->order->sign, '', false);
         if($order->status != 'normal') $menu .= html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");
 
-        $menu .= commonModel::printLink('order', 'edit', "orderID=$order->id", $this->lang->edit, '', false);
+        $menu .= commonModel::printLink('crm.order', 'edit', "orderID=$order->id", $this->lang->edit, '', false);
         $menu .="<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
-        $menu .= commonModel::printLink('order', 'assign', "orderID=$order->id", $this->lang->assign, "data-toggle='modal'", false, '', 'li');
+        $menu .= commonModel::printLink('crm.order', 'assign', "orderID=$order->id", $this->lang->assign, "data-toggle='modal'", false, '', 'li');
 
         if($order->status != 'closed')
         {
-            $menu .= commonModel::printLink('order', 'close', "orderID=$order->id", $this->lang->close, "data-toggle='modal'", false, '', 'li');
+            $menu .= commonModel::printLink('crm.order', 'close', "orderID=$order->id", $this->lang->close, "data-toggle='modal'", false, '', 'li');
             $menu .= "<li disabled='disabled' class='disabled'>" . html::a('###', $this->lang->activate) . "</li>";
         }
         else
         {
             if($order->closedReason == 'payed') $menu .= "<li disabled='disabled' class='disabled'>" . html::a('###', $this->lang->close) . "</li>";
             if($order->closedReason == 'payed') $menu .= "<li disabled='disabled' class='disabled'>" . html::a('###', $this->lang->activate) . "</li>";
-            if($order->closedReason != 'payed') $menu .= commonModel::printLink('order', 'activate', "orderID=$order->id", $this->lang->activate, "data-toggle='modal'", false, '', 'li');
+            if($order->closedReason != 'payed') $menu .= commonModel::printLink('crm.order', 'activate', "orderID=$order->id", $this->lang->activate, "data-toggle='modal'", false, '', 'li');
         }
         if($order->status == 'normal' or $order->closedReason == 'failed')
         {
-            $menu .= commonModel::printLink('order', 'delete', "orderID=$order->id", $this->lang->delete, "class='deleter'", false, '', 'li');
+            $menu .= commonModel::printLink('crm.order', 'delete', "orderID=$order->id", $this->lang->delete, "class='deleter'", false, '', 'li');
         }
         $menu .= '</ul></div>';
 
