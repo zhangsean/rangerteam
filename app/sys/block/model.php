@@ -228,7 +228,7 @@ class blockModel extends model
 
         foreach($blocks as $key => $block)
         {
-            if($block->block == 'html' or $block->block == 'allEntries') continue;
+            if(strpos('html,allEntries,dynamic', $block->block) !== false) continue;
 
             $module = $block->block;
             $method = 'browse';
