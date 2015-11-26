@@ -982,7 +982,7 @@ class taskModel extends model
         }
 
         /* whitelist. */
-        if(in_array($account, $project->whitelist))
+        if(isset($project->whitelist) && in_array($account, $project->whitelist))
         {
             if($action == 'view') return true;
         }
