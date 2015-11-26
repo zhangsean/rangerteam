@@ -307,6 +307,37 @@ class actionModel extends model
     }
 
     /**
+     * Get actions as dynamic.
+     * 
+     * @param  string $objectType 
+     * @param  string $count 
+     * @param  string $period 
+     * @param  string $orderBy 
+     * @param  object $pager
+     * @access public
+     * @return array
+     */
+    public function getDynamic($account = 'all', $period = 'all', $orderBy = 'date_desc', $pager = null)
+    {
+        /* Computer the begin and end date of a period. */
+        $beginAndEnd = $this->computeBeginAndEnd($period);
+        extract($beginAndEnd);
+
+        /* Get actions. */
+        $actions = $this->dao->select('*')->from(TABLE_ACTION)
+            ->where(1)
+            ->beginIF($period != 'all')->andWhere('date')->gt($begin)->fi()
+            ->beginIF($period != 'all')->andWhere('date')->lt($end)->fi()
+            ->beginIF($account != 'all')->andWhere('actor')->eq($account)->fi()
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll();
+
+        if(!$actions) return array();
+        return $this->transformActions($actions);
+    }
+
+    /**
      * Transform the actions for display.
      * 
      * @param  int    $actions 
@@ -321,15 +352,15 @@ class actionModel extends model
         {
             if(!isset($this->config->objectTables[$objectType])) continue;    // If no defination for this type, omit it.
 
-            $objectIds   = array_unique($objectIds);
-            $table       = $this->config->objectTables[$objectType];
-            $field       = $this->config->action->objectNameFields[$objectType];
-            if($table != '`oa_todo`')
+            $objectIds = array_unique($objectIds);
+            $table     = $this->config->objectTables[$objectType];
+            $field     = $this->config->action->objectNameFields[$objectType];
+            if($table != '`oa_todo`' and $table != '`cash_trade`')
             {
                 $objectNames[$objectType] = $this->dao->select("id, $field AS name")->from($table)->where('id')->in($objectIds)->fetchPairs();
                 if($objectType == 'order') $objectNames[$objectType] = $this->dao->select('o.id, concat(c.name, o.createdDate) as name')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->where('o.id')->in($objectIds)->fetchPairs(); 
             }
-            else
+            elseif($table == '`oa_todo`')
             {
                 $todos = $this->dao->select("id, $field AS name, account, private, type, idvalue")->from($table)->where('id')->in($objectIds)->fetchAll('id');
                 foreach($todos as $id => $todo)
@@ -353,6 +384,15 @@ class actionModel extends model
                     }
                 }
             } 
+            else
+            {
+                $this->app->loadLang('trade', 'cash');
+                $trades = $this->dao->select("id, type, money, currency")->from($table)->where('id')->in($objectIds)->fetchAll('id');
+                foreach($trades as $id => $trade)
+                {
+                    $objectNames[$objectType][$id] = $this->lang->trade->typeList[$trade->type] . $this->lang->currencySymbols[$trade->currency] . $trade->money;
+                }
+            }
         }
         $objectNames['user'][0] = 'guest';    // Add guest account.
 
@@ -641,5 +681,41 @@ class actionModel extends model
         }
 
         return $notices;
+    }
+
+    /**
+     * Compute the begin date and end date of a period.
+     * 
+     * @param  string    $period   all|today|yesterday|twodaysago|latest2days|thisweek|lastweek|thismonth|lastmonth
+     * @access public
+     * @return array
+     */
+    public function computeBeginAndEnd($period)
+    {
+        $this->app->loadClass('date');
+
+        $today      = date::today();
+        $tomorrow   = date::tomorrow();
+        $yesterday  = date::yesterday();
+        $twoDaysAgo = date::twoDaysAgo();
+
+        $period = strtolower($period);
+
+        if($period == 'all')        return array('begin' => '1970-1-1',  'end' => '2109-1-1');
+        if($period == 'today')      return array('begin' => $today,      'end' => $tomorrow);
+        if($period == 'yesterday')  return array('begin' => $yesterday,  'end' => $today);
+        if($period == 'twodaysago') return array('begin' => $twoDaysAgo, 'end' => $yesterday);
+        if($period == 'latest3days')return array('begin' => $twoDaysAgo, 'end' => $tomorrow);
+
+        /* If the period is by week, add the end time to the end date. */
+        if($period == 'thisweek' or $period == 'lastweek')
+        {
+            $func = "get$period";
+            extract(date::$func());
+            return array('begin' => $begin, 'end' => $end . ' 23:59:59');
+        }
+
+        if($period == 'thismonth')  return date::getThisMonth();
+        if($period == 'lastmonth')  return date::getLastMonth();
     }
 }

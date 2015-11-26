@@ -179,6 +179,10 @@ $config->objectTables['refund']      = TABLE_REFUND;
 $config->objectTables['announce']    = TABLE_ARTICLE;
 $config->objectTables['attend']      = TABLE_ATTEND;
 $config->objectTables['leave']       = TABLE_LEAVE;
+$config->objectTables['depositor']   = TABLE_DEPOSITOR;
+$config->objectTables['trade']       = TABLE_TRADE;
+$config->objectTables['doclib']      = TABLE_DOCLIB;
+$config->objectTables['schema']      = TABLE_SCHEMA;
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext/*.php');

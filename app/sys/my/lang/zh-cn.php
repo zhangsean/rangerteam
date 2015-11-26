@@ -40,3 +40,16 @@ $lang->my->task->menu->canceledByMe = '由我取消|my|task|type=canceledBy';
 
 $lang->my->project = new stdclass();
 $lang->my->project->common = '我的项目';
+
+$lang->my->dynamic = new stdclass();
+$lang->my->dynamic->common = '我的动态';
+
+$lang->my->dynamic->menu = new stdclass();
+$lang->my->dynamic->menu->today      = '今天|my|dynamic|period=today';
+$lang->my->dynamic->menu->yesterday  = '昨天|my|dynamic|period=yesterday';
+$lang->my->dynamic->menu->twodaysago = '前天|my|dynamic|period=twodaysago';
+$lang->my->dynamic->menu->thisweek   = '本周|my|dynamic|period=thisweek';
+$lang->my->dynamic->menu->lastweek   = '上周|my|dynamic|period=lastweek';
+$lang->my->dynamic->menu->thismonth  = '本月|my|dynamic|period=thismonth';
+$lang->my->dynamic->menu->lastmonth  = '上月|my|dynamic|period=lastmonth';
+$lang->my->dynamic->menu->all        = '所有|my|dynamic|period=all';

@@ -167,4 +167,28 @@ class my extends control
         $this->view->users    = $this->loadModel('user')->getPairs('noclosed');
         $this->display();
     }
+
+    /**
+     * My dynamic. 
+     * 
+     * @param  string   $type 
+     * @param  string   $orderBy 
+     * @param  int      $recTotal 
+     * @param  int      $recPerPage 
+     * @param  int      $pageID 
+     * @access public
+     * @return void
+     */
+    public function dynamic($type = 'today', $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $this->view->title   = $this->lang->my->dynamic->common;
+        $this->view->type    = $type;
+        $this->view->pager   = $pager;
+        $this->view->orderBy = $orderBy;
+        $this->view->actions = $this->loadModel('action')->getDynamic($this->app->user->account, $type, $orderBy, $pager);
+        $this->display();
+    }
 }
