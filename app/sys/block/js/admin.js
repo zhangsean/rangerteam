@@ -9,14 +9,16 @@ function getBlocks(entryID)
 {
     var entryBlock = $('#allEntries').parent().parent().next();
     $(entryBlock).hide();
+
     $('#blockParam').empty();
     if(entryID == '') return false;
+
     if(entryID.indexOf('hiddenBlock') != -1)
     {
         getRssAndHtmlParams('html', entryID.replace('hiddenBlock', ''));
         return true;
     }
-    if(entryID == 'rss' || entryID == 'html' || entryID == 'allEntries')
+    if(entryID == 'rss' || entryID == 'html' || entryID == 'allEntries' || entryID == 'dynamic')
     {
         getRssAndHtmlParams(entryID);
         return true;

@@ -38,7 +38,8 @@ class block extends control
 
         //$allEntries['rss']  = 'RSS';
         $allEntries['html'] = 'HTML';
-        $allEntries['allEntries'] = '所有应用';
+        $allEntries['allEntries'] = $this->lang->block->allEntries;
+        $allEntries['dynamic']    = $this->lang->block->dynamic;
 
         $hiddenBlocks = $this->block->getHiddenBlocks();
         foreach($hiddenBlocks as $block) $allEntries['hiddenBlock' . $block->id] = $block->title;
@@ -133,6 +134,10 @@ class block extends control
                 $html .= "<td class='pull-left' width='33%'>" . html::a($entry->login, $image . $entry->name, "$class $width $height") . "</td>";
             }
             $html .= "</tr></table></div>";
+        }
+        elseif($block->block == 'dynamic')
+        {
+            $html = $this->fetch('block', 'dynamic');
         }
         
         die($html);
@@ -231,6 +236,22 @@ class block extends control
         }
 
         $this->view->blocks = $blocks;
+        $this->display();
+    }
+
+    /**
+     * latest dynamic.
+     * 
+     * @access public
+     * @return void
+     */
+    public function dynamic()
+    {
+        $actions = $this->loadModel('action')->getDynamic();
+        foreach($actions as $key => $action) if(!$this->action->checkPriv($action)) unset($actions[$key]);
+
+        $this->view->actions = $actions;
+        $this->view->users   = $this->loadModel('user')->getPairs();
         $this->display();
     }
 }

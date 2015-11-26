@@ -333,6 +333,8 @@ class actionModel extends model
             ->page($pager)
             ->fetchAll();
 
+        foreach($actions as $key => $action) if(strpos('attend,refund,leave,trip,action', $action->objectType) !== false) unset($actions[$key]);
+
         if(!$actions) return array();
         return $this->transformActions($actions);
     }
@@ -717,5 +719,64 @@ class actionModel extends model
 
         if($period == 'thismonth')  return date::getThisMonth();
         if($period == 'lastmonth')  return date::getLastMonth();
+    }
+
+    /**
+     * Check privilege for action.
+     * 
+     * @param  object    $action 
+     * @access public
+     * @return bool
+     */
+    public function checkPriv($action)
+    {
+        $canView = true;
+
+        if($action->customer)
+        {
+            $customers = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+            if(in_array($action->customer, $customers)) $canView = false;
+        }
+
+        if($action->objectType == 'project' && !($this->loadModel('project', 'oa')->checkPriv($action->objectID))) $canView = false;
+
+        if($action->objectType == 'task')
+        {
+            $task = $this->loadModel('task')->getByID($action->objectID);
+            if(!($this->loadModel('task', 'sys')->checkPriv($task, 'view'))) $canView = false;
+        }
+
+        if($action->objectType == 'trade')
+        {
+            $trade = $this->loadModel('trade', 'cash')->getByID($action->objectID);
+            $rights = $this->app->user->rights;
+            if($this->app->user->admin != 'super' and $trade->type == 'out' and (!isset($rights['tradebrowse']['out']) or !$this->loadModel('tree')->hasRight($trade->category))) $canView = false;
+        }
+
+        if($action->objectType == 'todo')
+        {
+            $todo = $this->loadModel('todo', 'oa')->getByID($action->objectID);
+            if($this->app->user->account != $todo->account && $this->app->user->account != $todo->assignedTo) $canView = false;
+        }
+
+        $objectType = $action->objectType;
+        $actionType = $action->action;
+        if(isset($this->lang->action->label->$objectType))
+        {
+            $objectLabel = $this->lang->action->label->$objectType;
+            if(!is_array($objectLabel)) $action->objectLabel = $objectLabel;
+            if(is_array($objectLabel) and isset($objectLabel[$actionType])) $action->objectLabel = $objectLabel[$actionType];
+
+            if(strpos($action->objectLabel, '|') !== false)
+            {
+                list($objectLabel, $moduleName, $methodName, $vars) = explode('|', $action->objectLabel);
+                $action->objectLabel = $objectLabel;
+                if(!commonModel::hasPriv($moduleName, $methodName)) $canView = false;
+            }
+        }
+
+        if(!commonModel::hasAppPriv($action->appName)) $canView = false;
+
+        return $canView;
     }
 }
