@@ -787,7 +787,6 @@ CREATE TABLE `sys_task` (
   `mailto` varchar(255) NOT NULL DEFAULT '',
   `desc` text NOT NULL,
   `parent` mediumint(8) unsigned NOT NULL DEFAULT 0,
-  `children` varchar(255) NOT NULL,
   `createdBy` varchar(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `assignedTo` varchar(30) NOT NULL,
