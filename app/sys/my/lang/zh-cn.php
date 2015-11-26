@@ -32,6 +32,11 @@ $lang->my->order->menu->today    = '今天联系|my|order|type=today';
 $lang->my->order->menu->tomorrow = '明天联系|my|order|type=tomorrow';
 $lang->my->order->menu->all      = '所有|my|order|type=all';
 
+$lang->my->contract = new stdclass();
+$lang->my->contract->menu = new stdclass();
+$lang->my->contract->menu->unfinished = '未完成|my|contract|type=unfinished';
+$lang->my->contract->menu->finished   = '已完成|my|contract|type=finished';
+
 $lang->my->task = new stdclass();
 $lang->my->task->common     = '我的任务';
 $lang->my->task->assignedTo = '指派给我';

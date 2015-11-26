@@ -674,7 +674,7 @@ class contractModel extends model
 
         if($contract->return != 'done' and $contract->status == 'normal' and $canReceive)
         {
-            $menu .= html::a(helper::createLink('contract', 'receive',  "contract=$contract->id"), $this->lang->contract->return, "data-toggle='modal' class='$class'");
+            $menu .= html::a(helper::createLink('crm.contract', 'receive',  "contract=$contract->id"), $this->lang->contract->return, "data-toggle='modal' class='$class'");
         }
         else
         {
@@ -683,7 +683,7 @@ class contractModel extends model
 
         if($contract->delivery != 'done' and $contract->status == 'normal' and $canDelivery)
         {
-            $menu .= html::a(helper::createLink('contract', 'delivery', "contract=$contract->id"), $this->lang->contract->delivery, "data-toggle='modal' class='$class'");
+            $menu .= html::a(helper::createLink('crm.contract', 'delivery', "contract=$contract->id"), $this->lang->contract->delivery, "data-toggle='modal' class='$class'");
         }
         else
         {
@@ -694,21 +694,21 @@ class contractModel extends model
 
         if($contract->status == 'normal' and $contract->return == 'done' and $contract->delivery == 'done' and $canFinish)
         {
-            $menu .= html::a(helper::createLink('contract', 'finish', "contract=$contract->id"), $this->lang->finish, "data-toggle='modal' class='$class'");
+            $menu .= html::a(helper::createLink('crm.contract', 'finish', "contract=$contract->id"), $this->lang->finish, "data-toggle='modal' class='$class'");
         }
         else
         {
             $menu .= "<a href='###' disabled='disabled' class='disabled $class'>" . $this->lang->finish . '</a> ';
         }
 
-        if($canEdit) $menu .= html::a(helper::createLink('contract', 'edit', "contract=$contract->id"), $this->lang->edit, "class='$class'");
+        if($canEdit) $menu .= html::a(helper::createLink('crm.contract', 'edit', "contract=$contract->id"), $this->lang->edit, "class='$class'");
 
         if($type == 'view')
         {
             $menu .= "</div><div class='btn-group'>";
             if($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done') and $canCancel)
             {
-                $menu .= html::a(helper::createLink('contract', 'cancel', "contract=$contract->id"), $this->lang->cancel, "data-toggle='modal' class='$class'");
+                $menu .= html::a(helper::createLink('crm.contract', 'cancel', "contract=$contract->id"), $this->lang->cancel, "data-toggle='modal' class='$class'");
             }
             else
             {
@@ -717,7 +717,7 @@ class contractModel extends model
 
             if($contract->status == 'canceled' or ($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done')) and $canDelete)
             {
-                $menu .= html::a(helper::createLink('contract', 'delete', "contract=$contract->id"), $this->lang->delete, "class='deleter $class'");
+                $menu .= html::a(helper::createLink('crm.contract', 'delete', "contract=$contract->id"), $this->lang->delete, "class='deleter $class'");
             }
             else
             {
@@ -731,7 +731,7 @@ class contractModel extends model
 
             if($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done') and $canCancel)
             {
-                $menu .= "<li>" . html::a(helper::createLink('contract', 'cancel', "contract=$contract->id"), $this->lang->cancel, "data-toggle='modal' class='$class'") . "</li>";
+                $menu .= "<li>" . html::a(helper::createLink('crm.contract', 'cancel', "contract=$contract->id"), $this->lang->cancel, "data-toggle='modal' class='$class'") . "</li>";
             }
             else
             {
@@ -740,7 +740,7 @@ class contractModel extends model
 
             if($contract->status == 'canceled' or ($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done')) and $canDelete)
             {
-                $menu .= "<li>" . html::a(helper::createLink('contract', 'delete', "contract=$contract->id"), $this->lang->delete, "class='reloadDeleter $class'") . "</li>";
+                $menu .= "<li>" . html::a(helper::createLink('crm.contract', 'delete', "contract=$contract->id"), $this->lang->delete, "class='reloadDeleter $class'") . "</li>";
             }
             else
             {

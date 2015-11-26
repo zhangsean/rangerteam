@@ -166,6 +166,43 @@ class my extends control
     }
 
     /**
+     * contract list.
+     * 
+     * @param  string $type 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function contract($type = 'unfinished', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->loadModel('contract', 'crm');
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $contracts = $this->contract->getList(0, $type, $orderBy, $pager);
+
+        /* Set preAndNext condition. */
+        $this->session->set('contractQueryCondition', $this->dao->get());
+
+        /* Save session for return link. */
+        $this->session->set('contractList', $this->app->getURI(true));
+
+        $this->view->title        = $this->lang->contract->browse;
+        $this->view->contracts    = $contracts;
+        $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->pager        = $pager;
+        $this->view->type         = $type;
+        $this->view->orderBy      = $orderBy;
+        $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->view->currencyList = $this->common->getCurrencyList();
+
+        $this->display();
+    }
+
+    /**
      * Browse task list.
      * 
      * @param  string  $type 
