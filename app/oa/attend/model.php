@@ -184,7 +184,7 @@ class attendModel extends model
         $today  = helper::today();
         $attend = $this->getByDate($today, $account);
         if(empty($attend)) $notice .= sprintf($this->lang->attend->notice['today'], $this->lang->attend->statusList['absent'], $link, $misc); 
-        if(!empty($attend) and strpos('late,early,both,absent', $attend->status) !== false) 
+        if(!empty($attend) and strpos('late,early,both,absent', $attend->status) !== false and empty($attend->reason)) 
         {
             $notice .= sprintf($this->lang->attend->notice['today'], zget($this->lang->attend->statusList, $attend->status), $link, $misc); 
         }
@@ -192,7 +192,7 @@ class attendModel extends model
         $yestoday = date("Y-m-d", strtotime("-1 day"));
         $attend   = $this->getByDate($yestoday, $account);
         if(empty($attend)) $notice .= sprintf($this->lang->attend->notice['yestoday'], $this->lang->attend->statusList['absent'], $link, $misc); 
-        if(!empty($attend) and strpos('late,early,both,absent', $attend->status) !== false) 
+        if(!empty($attend) and strpos('late,early,both,absent', $attend->status) !== false and empty($attend->reason)) 
         {
             $notice .= sprintf($this->lang->attend->notice['yestoday'], zget($this->lang->attend->statusList, $attend->status), $link, $misc); 
         }

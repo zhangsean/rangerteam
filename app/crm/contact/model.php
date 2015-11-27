@@ -409,7 +409,7 @@ class contactModel extends model
                 if((strlen($phone) == 12 or strlen($phone) == 11) and substr($phone, 0, 1) == 0) $contact->phone = substr($phone, 0, 4) . $this->lang->hyphen . substr($phone, 4);
                 if((strlen($phone) == 11 or strlen($phone) == 10) and (substr($phone, 0, 1) != 0 and substr($phone, 0, 1) > 2)) $contact->phone = substr($phone, 0, 3) . $this->lang->hyphen . substr($phone, 3);
                 if(substr($phone, 0, 4) == '4008') $contact->phone = substr($phone, 0, 4) . $this->lang->hyphen . substr($phone, 4);
-                if(strlen($phone) == 11 and substr($phone, 0, 1) == '1') $contact->phone = substr($contact->phone, 0, 3) . ' ' . substr($contact->phone, 3, 4) . ' ' . substr($contact->phone, 7, 4);
+                if(strlen($phone) == 11 and substr($phone, 0, 1) == '1') $contact->phone = substr($phone, 0, 3) . ' ' . substr($phone, 3, 4) . ' ' . substr($phone, 7, 4);
             }
         }
 
