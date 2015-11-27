@@ -1,0 +1,5 @@
+.with-side {position: relative; padding-left: 260px;}
+.side {position: absolute; left: 0; top: 0; width: 240px;}
+.main {width: 100%;}
+.closed, .finished {color: #38B03F;}
+#ajaxModal .actions {display: none;}

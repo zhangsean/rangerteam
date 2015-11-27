@@ -37,6 +37,15 @@ $lang->my->contract->menu = new stdclass();
 $lang->my->contract->menu->unfinished = '未完成|my|contract|type=unfinished';
 $lang->my->contract->menu->finished   = '已完成|my|contract|type=finished';
 
+$lang->my->company = new stdclass();
+$lang->my->company->common  = '待办';
+$lang->my->company->dept    = '部门';
+$lang->my->company->all     = '所有';
+$lang->my->company->account = '用户';
+$lang->my->company->begin   = '开始';
+$lang->my->company->end     = '结束';
+$lang->my->company->view    = '查看';
+
 $lang->my->task = new stdclass();
 $lang->my->task->common     = '我的任务';
 $lang->my->task->assignedTo = '指派给我';

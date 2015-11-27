@@ -128,6 +128,67 @@ class my extends control
     }
 
     /**
+     * company's todo list.
+     * 
+     * @param  string $type 
+     * @param  string $dept 
+     * @param  string $account 
+     * @param  string $begin 
+     * @param  string $end 
+     * @access public
+     * @return void
+     */
+    public function company($type = 'todo', $dept = '', $account = '', $begin = '', $end = '')
+    {
+        $this->loadModel('todo', 'oa');
+
+        /* compute begin and end. */
+        if($begin == '') $begin = helper::today();
+        if($end == '') $end = date('Y-m-d', strtotime("$begin +7 days"));
+        if(strtotime($begin) > strtotime($end)) $end = date('Y-m-d', strtotime("$begin +7 days"));
+        $date = array();
+        $date['begin'] = date('Y-m-d', strtotime($begin));
+        $date['end']   = date('Y-m-d', strtotime($end));
+
+        /* compute account list. */
+        $acountList = array();
+        if($account == '')
+        {
+            if($dept == '') $users = $this->loadModel('user')->getPairs('nodeleted,noclosed,noempty');
+            else $users = $this->loadModel('user')->getPairs('nodeleted,noclosed,noempty', $dept);
+            $accountList = array_keys($users);
+        }
+        else
+        {
+            $accountList[] = $account;
+        }
+
+        $todoList = array();
+        foreach($accountList as $user)
+        {
+            $todos = $this->todo->getList('self', $user, $date);
+            $todoList[$user] = $todos;
+        }
+
+        $deptList = $this->loadModel('tree')->getPairs('', 'dept');
+        $deptList[''] = $this->lang->my->company->all;
+        $deptList = array_reverse($deptList, true);
+
+        $this->view->title    = $this->lang->todo->common;
+        $this->view->todoList = $todoList;
+        $this->view->type     = $type;
+        $this->view->dept     = $dept;
+        $this->view->account  = $account;
+        $this->view->begin    = $date['begin'];
+        $this->view->end      = $date['end'];
+        $this->view->deptList = $deptList;
+        $this->view->users    = $this->loadModel('user')->getPairs('nodeleted,noclosed');
+        $this->view->userDept = $this->dao->select('account,dept')->from(TABLE_USER)->fetchPairs();
+        $this->view->dateList = range(strtotime($begin), strtotime($end), 86400);
+        $this->display();
+    }
+
+    /**
      * order list.
      * 
      * @param  string $type 
