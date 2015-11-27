@@ -96,6 +96,9 @@ class entryModel extends model
             ->setDefault('position', 'default')
             ->setDefault('zentao', 0)
             ->setIF($this->post->allip, 'ip', '*')
+            ->setIF($this->post->zentao, 'open', 'iframe')
+            ->setIF($this->post->zentao, 'integration', 1)
+            ->setIF($this->post->zentao, 'control', 'full')
             ->remove('allip,adminAccount,adminPassword')
             ->stripTags('login,logout,block', $this->config->allowedTags->admin)
             ->get();
