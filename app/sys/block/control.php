@@ -235,9 +235,9 @@ class block extends control
             $block->blockLink = $this->createLink($appName . '.block', 'index') . $sign . $query;
             
             $moduleName = $block->block;
-            if(isset($block->params->type))
+            if((isset($block->params->type) or isset($block->params->status)) and is_array($this->lang->block->moreLinkList->{$moduleName}))
             {
-                $type = $block->params->type;
+                $type = isset($block->params->type) ? $block->params->type : $block->params->status;
                 list($label, $app, $module, $method, $vars) = explode('|', $this->lang->block->moreLinkList->{$moduleName}[$type]);
             }
             else
