@@ -24,9 +24,6 @@ $lang->menu->oa->trip      = 'Trip|trip|personal|';
 $lang->menu->oa->refund    = 'Refund|refund|personal|';
 
 $lang->dashboard = new stdclass();
-$lang->dashboard->menu = new stdclass();
-$lang->dashboard->menu->index = 'index|dashboard|index|';
-$lang->dashboard->menu->task  = 'Task|dashboard|task|';
 
 $lang->todo = new stdclass();
 $lang->todo->menu = new stdclass();
