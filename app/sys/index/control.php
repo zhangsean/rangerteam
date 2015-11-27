@@ -74,6 +74,35 @@ class index extends control
             if($this->loadModel('block')->initBlock('sys')) die(js::reload());
         }
 
+        foreach($blocks as $key => $block)
+        {
+            $block->params = json_decode($block->params);
+            if(empty($block->params)) $block->params = new stdclass();
+
+            if(strpos('dynamic, allEntries, html, rss', $block->block) !== false) continue;
+
+            if($block->source == 'zentao')
+            {
+                $block->moreLink = '';
+                $block->appid    = 'zentao';
+            }
+            else
+            {
+                $moduleName = $block->block;
+                if((isset($block->params->type) or isset($block->params->status)) and is_array($this->lang->block->moreLinkList->{$moduleName}))
+                {
+                    $type = isset($block->params->type) ? $block->params->type : $block->params->status;
+                    list($label, $app, $module, $method, $vars) = explode('|', $this->lang->block->moreLinkList->{$moduleName}[$type]);
+                }
+                else
+                {
+                    list($label, $app, $module, $method, $vars) = explode('|', $this->lang->block->moreLinkList->{$moduleName});
+                }
+                $block->moreLink = $this->createLink($app . '.' . $module, $method, $vars);
+                $block->appid = $app == 'sys' ? 'dashboard' : $app;
+            }
+        }
+
         /* Get custom setting about superadmin */
         $customApp = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
         if(isset($customApp->superadmin)) $this->view->superadmin = $customApp->superadmin;

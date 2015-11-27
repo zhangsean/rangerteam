@@ -20,6 +20,15 @@ $(document).ready(function()
     condensedForm();
     setPageActions();
 
+    $(document).on('click', '.app-btn', function(event)
+    {
+        if($(this).attr('data-id'))
+        {
+            $.openEntry($(this).attr('data-id'), $(this).data('url') || $(this).attr('href'));
+            return false;
+        }
+    });
+
     /* Reload modal. */
     $(document).on('click', '.reloadModal', function(){$.reloadAjaxModal()});
 

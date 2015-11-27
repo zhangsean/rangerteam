@@ -141,3 +141,45 @@ $lang->block->default['sys']['6'] = $lang->block->default['team']['1'];
 $lang->block->default['sys']['6']['source'] = 'team';
 $lang->block->default['sys']['7'] = $lang->block->default['team']['2'];
 $lang->block->default['sys']['7']['source'] = 'team';
+
+$lang->block->moreLinkList = new stdclass();
+$lang->block->moreLinkList->order['assinedTo']   = '指派给我|sys|my|order|type=assinedTo';
+$lang->block->moreLinkList->order['createdBy']   = '由我创建|sys|my|order|type=createdBy';
+$lang->block->moreLinkList->order['signedBy']    = '由我签约|sys|my|order|type=signedBy';
+$lang->block->moreLinkList->order['closedBy']    = '由我关闭|sys|my|order|type=closedBy';
+$lang->block->moreLinkList->order['activatedBy'] = '由我激活|sys|my|order|type=activatedBy';
+$lang->block->moreLinkList->order['normal']      = '正常|sys|my|order|status=normal';
+$lang->block->moreLinkList->order['signed']      = '已签约|sys|my|order|status=signed';
+$lang->block->moreLinkList->order['closed']      = '已关闭|sys|my|order|status=closed';
+
+$lang->block->moreLinkList->contract['returnedBy']  = '由我回款|sys|my|contract|type=returnedBy';
+$lang->block->moreLinkList->contract['deliveredBy'] = '由我交付|sys|my|contract|type=deliveredBy';
+$lang->block->moreLinkList->contract['closedBy']    = '由我关闭|sys|my|contract|type=closedBy';
+$lang->block->moreLinkList->contract['canceledBy']  = '由我取消|sys|my|contract|type=canceledBy';
+$lang->block->moreLinkList->contract['normal']      = '正常|sys|my|contract|status=normal';
+$lang->block->moreLinkList->contract['signed']      = '已签约|sys|my|contract|status=signed';
+$lang->block->moreLinkList->contract['closed']      = '已关闭|sys|my|contract|status=closed';
+
+$lang->block->moreLinkList->customer['today']    = '今天联系|sys|my|customer|type=today';
+$lang->block->moreLinkList->customer['thisweek'] = '本周联系|sys|my|customer|type=thisweek';
+
+$lang->block->moreLinkList->trade     = '账目|cash|trade|browse|';
+$lang->block->moreLinkList->depositor = '账户|cash|depositor|index|';
+$lang->block->moreLinkList->provider  = '供应商|cash|provider|browse|';
+
+$lang->block->moreLinkList->announce = '公告|oa|announce|browse|';
+$lang->block->moreLinkList->attend   = '日历|sys|my|todo|';
+
+$lang->block->moreLinkList->task['assignedTo'] = '指派给我|sys|my|task|type=assignedTo';
+$lang->block->moreLinkList->task['createdBy']  = '由我创建|sys|my|task|type=createdBy';
+$lang->block->moreLinkList->task['finishedBy'] = '由我完成|sys|my|task|type=finnshedBy';
+$lang->block->moreLinkList->task['closedBy']   = '由我关闭|sys|my|task|type=closedBy';
+$lang->block->moreLinkList->task['canceledBy'] = '由我取消|sys|my|task|type=canceledBy';
+
+$lang->block->moreLinkList->project['doing']    = '进行中|sys|my|project|status=doing';
+$lang->block->moreLinkList->project['finished'] = '已完成|sys|my|project|status=finished';
+$lang->block->moreLinkList->project['suspend']  = '已挂起|sys|my|project|status=suspend';
+
+$lang->block->moreLinkList->blog = '最新博客|team|blog|index|';
+$lang->block->moreLinkList->thread['new']   = '最新帖子|team|forum|index|';
+$lang->block->moreLinkList->thread['stick'] = '置顶帖子|team|forum|index|';

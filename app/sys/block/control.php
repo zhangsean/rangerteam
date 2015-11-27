@@ -233,6 +233,19 @@ class block extends control
             $sign  = $this->config->requestType == 'PATH_INFO' ? '?' : '&';
 
             $block->blockLink = $this->createLink($appName . '.block', 'index') . $sign . $query;
+            
+            $moduleName = $block->block;
+            if(isset($block->params->type))
+            {
+                $type = $block->params->type;
+                list($label, $app, $module, $method, $vars) = explode('|', $this->lang->block->moreLinkList->{$moduleName}[$type]);
+            }
+            else
+            {
+                list($label, $app, $module, $method, $vars) = explode('|', $this->lang->block->moreLinkList->{$moduleName});
+            }
+            $block->moreLink = $this->createLink($app . '.' . $module, $method, $vars);
+            $block->appid    = $app == 'sys' ? 'dashboard' : $app;
         }
 
         $this->view->blocks = $blocks;
