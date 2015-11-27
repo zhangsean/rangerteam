@@ -184,7 +184,6 @@ class customerModel extends model
 
             $this->dao->insert(TABLE_CONTACT)->data($contact)
                 ->autoCheck()
-                ->checkIF($contact->email, 'email', 'email')
                 ->checkIF($contact->phone, 'phone', 'length', 20, 7);
 
             if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());

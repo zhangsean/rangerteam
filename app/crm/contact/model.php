@@ -226,7 +226,6 @@ class contactModel extends model
 
                 $this->dao->insert(TABLE_CONTACT)->data($contact)
                     ->autoCheck()
-                    ->checkIF($contact->email, 'email', 'email')
                     ->checkIF($contact->phone, 'phone', 'length', 20, 7);
 
                 if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
@@ -253,7 +252,6 @@ class contactModel extends model
             ->data($contact, 'customer,title,dept,maker,join,continue')
             ->autoCheck()
             ->batchCheck($this->config->contact->require->create, 'notempty')
-            ->checkIF(!empty($contact->email), 'email', 'email')
             ->checkIF(!empty($contact->phone), 'phone', 'length', 20, 7)
             ->exec();
 

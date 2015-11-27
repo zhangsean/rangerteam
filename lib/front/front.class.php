@@ -94,8 +94,16 @@ class html
      */
     static public function mailto($mail = '', $title = '')
     {
-        if(empty($title)) $title = $mail;
-        return "<a href='mailto:$mail'>$title</a>";
+        $html   = '';
+        $mails  = explode(',', $mail);
+        $titles = explode(',', $title);
+        foreach($mails as $key => $m)
+        {
+            if(empty($m)) continue;
+            $t = empty($titles[$key]) ? $mail : $titles[$key];
+            $html .= " <a href='mailto:$m'>$t</a>";
+        }
+        return $html;
     }
 
     /**
