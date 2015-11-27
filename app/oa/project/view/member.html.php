@@ -34,9 +34,7 @@
     <?php endfor;?>
   </table>
   <div class='alert alert-info'>
-    <?php foreach($lang->project->roleTips as $roleTip):?>
-    <p><?php echo $roleTip;?></p>
-    <?php endforeach;?>
+    <p title='<?php echo join("\r\n", $lang->project->roleTips)?>'><?php echo $lang->project->roleTip;?></p>
   </div>
   <div class='text-center'><?php echo html::submitButton();?></div>
 </form>
@@ -49,5 +47,4 @@
 </script>
 <?php js::set('key', $key);?>
 <?php js::set('manager', $project->PM);?>
-<?php js::set('roleTips', $lang->project->roleTips);?>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

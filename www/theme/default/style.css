@@ -537,6 +537,7 @@ td #aliasLabel {display: table-row;}
 
 .customer-potential {color:inherit;}
 .customer-intension {color:#81511c;}
+.customer-signed    {color:#229f24;}
 .customer-payed     {color:#229f24;}
 .customer-failed    {color:#d2322d}
 

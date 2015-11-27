@@ -42,7 +42,7 @@ $lang->project->end         = '结束日期';
 $lang->project->createdBy   = '由谁创建';
 $lang->project->createdDate = '创建时间';
 $lang->project->fromproject = '所属项目';
-$lang->project->whitelist   = '白名单';
+$lang->project->whitelist   = '参观者';
 
 $lang->project->confirm = new stdclass();
 $lang->project->confirm->activate = '确认激活此项目？';
@@ -64,7 +64,8 @@ $lang->project->roleList['member']  = '默认';
 $lang->project->roleList['senior']  = '管理员';
 $lang->project->roleList['limited'] = '受限';
 
-$lang->project->whitelistTip        = '白名单的成员可以查看项目和任务';
+$lang->project->whitelistTip        = '参观者可以查看项目和任务';
+$lang->project->roleTip             = "管理员拥有所有权限，默认成员不可删除任务，受限成员仅可操作自己相关任务。";
 $lang->project->roleTips['senior']  = "管理员：可以查看、编辑、删除所有任务。";
 $lang->project->roleTips['member']  = "默认：可以查看、编辑所有任务，删除与自己相关的任务。";
 $lang->project->roleTips['limited'] = "受限：只能查看、编辑与自己相关的任务。";
