@@ -49,7 +49,7 @@
           <td class='visible-lg'><?php echo substr($task->createdDate, 0, 10);?></td>
           <td class='visible-lg'><?php echo $task->consumed;?></td>
           <td class='visible-lg'><?php echo $task->left;?></td>
-          <td class='text-left'><?php $this->task->buildOperateMenu($task);?></td>
+          <td class='text-left actions'><?php $this->task->buildOperateMenu($task);?></td>
         </tr>
         <?php if(!empty($task->children)):?>
         <tr class='tr-child'>

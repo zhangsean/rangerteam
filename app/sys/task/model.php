@@ -1010,29 +1010,29 @@ class taskModel extends model
 
         $disabled = (!$isParent and $canEdit and self::isClickable($task, 'recordEstimate')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
-        $menu    .= $disabled ? html::a('###', $this->lang->task->recordEstimate, $misc) : commonModel::printLink('task', 'recordEstimate', "taskID=$task->id", $this->lang->task->recordEstimate, $misc, false);
+        $menu    .= $disabled ? html::a('###', $this->lang->task->recordEstimate, $misc) : commonModel::printLink('oa.task', 'recordEstimate', "taskID=$task->id", $this->lang->task->recordEstimate, $misc, false);
 
         $disabled = ($canEdit and self::isClickable($task, 'assignto')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
-        $menu    .= $disabled ? html::a('###', $isMulti ? $this->lang->task->transmit : $this->lang->assign, "$misc") : commonModel::printLink('task', 'assignto', "taskID=$task->id", $isMulti ? $this->lang->task->transmit : $this->lang->assign, $misc, false);
+        $menu    .= $disabled ? html::a('###', $isMulti ? $this->lang->task->transmit : $this->lang->assign, "$misc") : commonModel::printLink('oa.task', 'assignto', "taskID=$task->id", $isMulti ? $this->lang->task->transmit : $this->lang->assign, $misc, false);
 
         if(!$isMulti)
         {
             $disabled = (!$isParent and $canEdit and self::isClickable($task, 'start')) ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
-            $menu    .= $disabled ? html::a('###', $this->lang->start, $misc) : commonModel::printLink('task', 'start', "taskID=$task->id", $this->lang->start, $misc, false);
+            $menu    .= $disabled ? html::a('###', $this->lang->start, $misc) : commonModel::printLink('oa.task', 'start', "taskID=$task->id", $this->lang->start, $misc, false);
         }
 
         if($type == 'view')
         {
             $disabled = ($canEdit and self::isClickable($task, 'activate')) ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
-            $menu    .= $disabled ? html::a('###', $this->lang->activate, $misc) : commonModel::printLink('task', 'activate', "taskID=$task->id", $this->lang->activate, $misc, false);
+            $menu    .= $disabled ? html::a('###', $this->lang->activate, $misc) : commonModel::printLink('oa.task', 'activate', "taskID=$task->id", $this->lang->activate, $misc, false);
         }
 
         $disabled = (!$isParent and $canEdit and self::isClickable($task, 'finish')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
-        $menu    .= $disabled ? html::a('###', $isMulti ? $this->lang->task->end : $this->lang->finish, $misc) : commonModel::printLink('task', 'finish', "taskID=$task->id", $isMulti ? $this->lang->task->end : $this->lang->finish, $misc, false);
+        $menu    .= $disabled ? html::a('###', $isMulti ? $this->lang->task->end : $this->lang->finish, $misc) : commonModel::printLink('oa.task', 'finish', "taskID=$task->id", $isMulti ? $this->lang->task->end : $this->lang->finish, $misc, false);
 
         if($type == 'view')
         {
@@ -1040,27 +1040,27 @@ class taskModel extends model
 
             $disabled = ($canEdit and self::isClickable($task, 'cancel')) ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
-            $menu    .= $disabled ? html::a('###', $this->lang->cancel, $misc) : commonModel::printLink('task', 'cancel', "taskID=$task->id", $this->lang->cancel, $misc, false);
+            $menu    .= $disabled ? html::a('###', $this->lang->cancel, $misc) : commonModel::printLink('oa.task', 'cancel', "taskID=$task->id", $this->lang->cancel, $misc, false);
 
             $disabled = $canDelete ? '' : 'disabled';
             $deleter  = $type == 'browse' ? 'reloadDeleter' : 'deleter';
-            $menu    .= $disabled ? html::a('###', $this->lang->delete, "class='disabled $class' disabled='disabled'") : commonModel::printLink('task', 'delete', "taskID=$task->id", $this->lang->delete, "class='$deleter $class'", false);
+            $menu    .= $disabled ? html::a('###', $this->lang->delete, "class='disabled $class' disabled='disabled'") : commonModel::printLink('oa.task', 'delete', "taskID=$task->id", $this->lang->delete, "class='$deleter $class'", false);
         }
 
         $disabled = ($canEdit and self::isClickable($task, 'close')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
-        $menu    .= $disabled ? html::a('###', $this->lang->close, $misc) : commonModel::printLink('task', 'close', "taskID=$task->id", $this->lang->close, $misc, false);
+        $menu    .= $disabled ? html::a('###', $this->lang->close, $misc) : commonModel::printLink('oa.task', 'close', "taskID=$task->id", $this->lang->close, $misc, false);
 
         if($type == 'view') $menu .= "</div><div class='btn-group'>";
         $disabled = $canEdit ? '' : 'disabled';
-        $menu    .= $disabled ? html::a('###', $this->lang->edit, "class='disabled $class' disabled='disabled'") : commonModel::printLink('task', 'edit', "taskID=$task->id", $this->lang->edit, "class='$class'", false);
+        $menu    .= $disabled ? html::a('###', $this->lang->edit, "class='disabled $class' disabled='disabled'") : commonModel::printLink('oa.task', 'edit', "taskID=$task->id", $this->lang->edit, "class='$class'", false);
         if($type == 'view') $menu .= $disabled ? html::a('###', $this->lang->comment, "class='disabled $class' disabled='disabled'") : html::a('#commentBox', $this->lang->comment, "class='$class' onclick=setComment()");
 
         if($task->parent == 0 and !$isMulti)
         {
             $disabled = ($canEdit and self::isClickable($task, 'batchCreate')) ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class' data-width='80%'";
-            $menu    .= $disabled ? html::a('###', $this->lang->task->children, $misc) : commonModel::printLink('task', 'batchCreate', "projectID=$task->project&taskID=$task->id", $this->lang->task->children, $misc, false);
+            $menu    .= $disabled ? html::a('###', $this->lang->task->children, $misc) : commonModel::printLink('oa.task', 'batchCreate', "projectID=$task->project&taskID=$task->id", $this->lang->task->children, $misc, false);
         }
         if($type == 'view') $menu .= "</div>";
         if($print) echo $menu;
