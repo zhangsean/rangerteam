@@ -81,7 +81,7 @@ $isSuperAdmin = $this->app->user->admin == 'super';
             <div class='panel <?php if(isset($block->params->color)) echo 'panel-' . $block->params->color;?>' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->title?>' data-url='<?php echo $this->createLink('entry', 'printBlock', 'index=' . $index) ?>'>
               <div class='panel-heading'>
                 <div class='panel-actions'>
-                  <?php if(isset($block->moreLink) and isset($block->appid)) echo html::a($block->moreLink, $lang->more, "class='more app-btn' data-id='{$block->appid}'");?>
+                  <?php if(isset($block->moreLink) and isset($block->appid)) echo html::a($block->moreLink, $lang->more . "<i class='icon-double-angle-right'></i>", "class='more app-btn' data-id='{$block->appid}'");?>
                   <button class="btn btn-mini refresh-panel" type='button'><i class="icon-repeat"></i></button>
                   <div class='dropdown'>
                     <button role="button" class="btn btn-mini" data-toggle="dropdown" type='button'><span class="caret"></span></button>
