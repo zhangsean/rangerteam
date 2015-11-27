@@ -176,9 +176,9 @@ $lang->block->moreLinkList->task['finishedBy'] = '由我完成|sys|my|task|type=
 $lang->block->moreLinkList->task['closedBy']   = '由我关闭|sys|my|task|type=closedBy';
 $lang->block->moreLinkList->task['canceledBy'] = '由我取消|sys|my|task|type=canceledBy';
 
-$lang->block->moreLinkList->project['doing']    = '进行中|sys|my|project|status=doing';
-$lang->block->moreLinkList->project['finished'] = '已完成|sys|my|project|status=finished';
-$lang->block->moreLinkList->project['suspend']  = '已挂起|sys|my|project|status=suspend';
+$lang->block->moreLinkList->project['doing']    = '进行中|oa|project|index|status=doing';
+$lang->block->moreLinkList->project['finished'] = '已完成|oa|project|index|status=finished';
+$lang->block->moreLinkList->project['suspend']  = '已挂起|oa|project|index|status=suspend';
 
 $lang->block->moreLinkList->blog = '最新博客|team|blog|index|';
 $lang->block->moreLinkList->thread['new']   = '最新帖子|team|forum|index|';
