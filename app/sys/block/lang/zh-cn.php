@@ -161,11 +161,11 @@ $lang->block->moreLinkList->depositor = '账户|cash|depositor|index|';
 $lang->block->moreLinkList->provider  = '供应商|cash|provider|browse|';
 
 $lang->block->moreLinkList->announce = '公告|oa|announce|browse|';
-$lang->block->moreLinkList->attend   = '日历|sys|my|todo|';
+$lang->block->moreLinkList->attend   = '日历|oa|todo|calendar|';
 
 $lang->block->moreLinkList->task['assignedTo'] = '指派给我|sys|my|task|type=assignedTo';
 $lang->block->moreLinkList->task['createdBy']  = '由我创建|sys|my|task|type=createdBy';
-$lang->block->moreLinkList->task['finishedBy'] = '由我完成|sys|my|task|type=finnshedBy';
+$lang->block->moreLinkList->task['finishedBy'] = '由我完成|sys|my|task|type=finishedBy';
 $lang->block->moreLinkList->task['closedBy']   = '由我关闭|sys|my|task|type=closedBy';
 $lang->block->moreLinkList->task['canceledBy'] = '由我取消|sys|my|task|type=canceledBy';
 
