@@ -85,6 +85,9 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('2.5'));
             case '2_6':
                 $this->execSQL($this->getUpgradeFile('2.6'));
+            case '2_7':
+                $this->processBlockType();
+                $this->execSQL($this->getUpgradeFile('2.7'));
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -117,6 +120,7 @@ class upgradeModel extends model
             case '2_4'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.4'));
             case '2_5'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5'));
             case '2_6'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.6'));
+            case '2_7'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.7'));
         }
         return $confirmContent;
     }
@@ -934,6 +938,47 @@ class upgradeModel extends model
                 {
                     $priv->method = $method;
                     $this->dao->replace(TABLE_GROUPPRIV)->data($priv)->exec();
+                }
+            }
+        }
+
+        return !dao::isError();
+    }
+
+    /**
+     * Process block type.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function processBlockType()
+    {
+        $blocksHasType = 'order,contract,customer,task,project,thread';
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('block')->in($blocksHasType)->fetchAll();
+        foreach($blocks as $block)
+        {
+            $block->params = json_decode($block->params);
+            if($block->block == 'project')
+            {
+                if(!isset($block->params->status))
+                {
+                    $block->params->status = 'doing';
+                    $params = helper::jsonEncode($block->params);
+                    $this->dao->update(TABLE_BLOCK)->set('params')->eq($params)->where('id')->eq($block->id)->exec();
+                }
+            }
+            else
+            {
+                if(!isset($block->params->type))
+                {
+                    if($block->block == 'order')    $block->params->type = 'assignedTo';
+                    if($block->block == 'contract') $block->params->type = 'returnedBy';
+                    if($block->block == 'customer') $block->params->type = 'today';
+                    if($block->block == 'task')     $block->params->type = 'assignedTo';
+                    if($block->block == 'thread')   $block->params->type = 'new';
+
+                    $params = helper::jsonEncode($block->params);
+                    $this->dao->update(TABLE_BLOCK)->set('params')->eq($params)->where('id')->eq($block->id)->exec();
                 }
             }
         }
