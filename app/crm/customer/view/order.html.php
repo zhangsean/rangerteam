@@ -29,7 +29,7 @@
       <td><?php echo $order->id;?></td>
       <td><?php foreach($order->products as $product) echo $product . ' ';?></td>
       <td><?php echo $order->plan;?></td>
-      <td><?php echo $order->assignedTo;?></td>
+      <td><?php echo zget($users, $order->assignedTo);?></td>
       <td><?php echo $lang->order->statusList[$order->status];?></td>
       <td><?php echo substr($order->contactedDate, 0, 10);?></td>
       <td><?php echo substr($order->nextDate, 0, 10);?></td>

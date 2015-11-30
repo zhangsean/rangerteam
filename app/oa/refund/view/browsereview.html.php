@@ -34,7 +34,7 @@
       <td><?php echo $refund->id;?></td>
       <td class='text-left'><?php echo $refund->name;?></td>
       <td><?php echo $categories[$refund->category];?></td>
-      <td><?php echo $deptList[$currentDept]->name;?></td>
+      <td><?php echo zget($deptList, $currentDept);?></td>
       <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
       <td class='text-right'><?php echo zget($currencySign, $refund->currency) . $refund->money;?></td>
       <td><?php echo $refund->date;?></td>

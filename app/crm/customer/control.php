@@ -230,6 +230,7 @@ class customer extends control
         $this->view->modalWidth = 'lg';
         $this->view->orders     = $this->loadModel('order')->getList($mode = 'query', "customer=$customerID");
         $this->view->products   = $this->loadModel('product')->getPairs();
+        $this->view->users      = $this->loadModel('user')->getPairs();
         $this->display();
     }
 

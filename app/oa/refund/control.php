@@ -220,48 +220,43 @@ class refund extends control
      */
     public function browseReview()
     {
+        $account  = $this->app->user->account;
         $refunds  = array();
-        $deptList = array();
         $newUsers = array();
         $users    = $this->loadModel('user')->getList();
         foreach($users as $key => $user) $newUsers[$user->account] = $user;
 
-        if(!empty($this->config->refund->firstReviewer) or !empty($this->config->refund->secondReviewer))
-        { 
-            if(empty($this->config->refund->firstReviewer) and !empty($this->config->refund->secondReviewer))
-            {
-                if($this->config->refund->secondReviewer == $this->app->user->account)
-                {
-                    $deptList = $this->loadModel('tree')->getListByType('dept');
-                    $refunds = $this->refund->getList('', '', 'doing');
-                }
-                else
-                {
-                    $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
-                    $deptIDList = array_keys($deptList);
-                    if(!empty($deptList)) $refunds = $this->refund->getList('', $deptIDList, 'wait');
-                }
-            }
-            else
-            {
-                $deptList = $this->loadModel('tree')->getListByType('dept');
-                if($this->config->refund->firstReviewer == $this->app->user->account) $refunds = $this->refund->getList('', '', 'wait');
-                if($this->config->refund->secondReviewer == $this->app->user->account) $refunds = $this->refund->getList('', '', 'doing');
-            }
-        }
-        else
+        /* Get dept info. */
+        $allDeptList = $this->loadModel('tree')->getPairs('', 'dept');
+        $allDeptList['0'] = '/';
+        $managedDeptList = array();
+        $tmpDept = $this->loadModel('tree')->getDeptManagedByMe($account);
+        foreach($tmpDept as $d) $managedDeptList[$d->id] = $d->name;
+
+        /* Get refund list for secondReviewer. */
+        $secondRefunds = array();
+        if(!empty($this->config->refund->secondReviewer) and $this->config->refund->secondReviewer == $account)
         {
-            $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
-            $deptIDList = array_keys($deptList);
-            if(!empty($deptList)) $refunds = $this->refund->getList('', $deptIDList, 'wait,doing');
+            $secondRefunds = $this->refund->getList($mode = 'browseReview', $deptIDList = '', 'doing');
         }
-        $deptList[0] = new stdclass();
-        $deptList[0]->name = '/';
+
+        /* Get refund list for firstReviewer. */
+        $firstRefunds = array();
+        if(!empty($this->config->refund->firstReviewer) and $this->config->refund->firstReviewer == $account)
+        {
+            $deptList = $allDeptList;
+        }
+        else if(empty($this->config->refund->firstReviewer))
+        {
+            $deptList = $managedDeptList;
+        }
+        if(!empty($deptList)) $firstRefunds = $this->refund->getList($mode = 'browseReview', $deptIDList = array_keys($deptList), 'wait');
+        $refunds = array_merge($secondRefunds, $firstRefunds);
 
         $this->view->title        = $this->lang->refund->review;
         $this->view->users        = $newUsers;
         $this->view->refunds      = $refunds;
-        $this->view->deptList     = $deptList;
+        $this->view->deptList     = $allDeptList;
         $this->view->categories   = $this->refund->getCategoryPairs();
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
 
