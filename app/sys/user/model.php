@@ -515,7 +515,7 @@ class userModel extends model
      */
     public function active($userID)
     {
-        $this->dao->update(TABLE_USER)->set('locked')->eq('0000-00-00 00:00:00')->where('id')->eq($userID)->exec();
+        $this->dao->update(TABLE_USER)->set('fails')->eq(0)->set('locked')->eq('0000-00-00 00:00:00')->where('id')->eq($userID)->exec();
         return !dao::isError();
     }
 
