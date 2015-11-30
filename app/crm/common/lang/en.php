@@ -25,7 +25,7 @@ $lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=status
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
 $lang->customer->menu->browse       = 'All Customers|customer|browse|mode=all';
-$lang->customer->menu->assignedtome = 'Assigned To Me|customer|browse|mode=assignedtome';
+$lang->customer->menu->assignedTo   = 'Assigned To Me|customer|browse|mode=assignedtome';
 $lang->customer->menu->past         = 'Urgently need contacted|customer|browse|mode=past';
 $lang->customer->menu->today        = 'Contact Today|customer|browse|mode=today';
 $lang->customer->menu->tomorrow     = 'Contact Tomorrow|customer|browse|mode=tomorrow';
@@ -46,7 +46,7 @@ $lang->product->menu->offline    = 'Offline|product|browse|mode=offline';
 $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
 $lang->order->menu->browse       = 'All Orders|order|browse|mode=all';
-$lang->order->menu->assignedtome = 'Assigned To Me|order|browse|mode=assignedtome';
+$lang->order->menu->assignedTo   = 'Assigned To Me|order|browse|mode=assignedtome';
 $lang->order->menu->past         = 'Urgently need contacted|order|browse|mode=past';
 $lang->order->menu->today        = 'Contact Today|order|browse|mode=today';
 $lang->order->menu->tomorrow     = 'Contact Tomorrow|order|browse|mode=tomorrow';

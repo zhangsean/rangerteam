@@ -122,7 +122,7 @@ $lang->action->label->marked      = '编辑了';
 $lang->action->label->started     = '开始了';
 $lang->action->label->canceled    = '取消了';
 $lang->action->label->finished    = '完成了';
-$lang->action->label->reimburse   = '报销了';
+$lang->action->label->reimbursed  = '报销了';
 $lang->action->label->record      = '沟通了';
 $lang->action->label->signed      = '签约了';
 $lang->action->label->commited    = '提交了';
@@ -153,7 +153,7 @@ $lang->action->label->project   = '项目|task|browse|projectID=%s';
 $lang->action->label->depositor = '账户|depositor|browse|';
 $lang->action->label->trade     = '账目|trade|browse|';
 $lang->action->label->doc       = '文档|doc|view|docID=%s';
-$lang->action->label->doclib    = '文档|doc|browse|doclibID=%s';
+$lang->action->label->doclib    = '文档库|doc|browse|doclibID=%s';
 $lang->action->label->schema    = '记账模板|schema|browse|';
 $lang->action->label->space     = '　';
 

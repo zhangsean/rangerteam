@@ -229,6 +229,16 @@ $lang->article->menu->create = array('link' => 'Add|article|create|type=article'
 
 $lang->menuGroups = new stdclass();
 
+$lang->menu->dashboard = new stdclass();
+$lang->menu->dashboard->todo     = 'Todo|my|todo|';
+$lang->menu->dashboard->task     = 'Task|my|task|';
+$lang->menu->dashboard->order    = 'Order|my|order|';
+$lang->menu->dashboard->contract = 'Contract|my|contract|';
+$lang->menu->dashboard->project  = 'Project|my|project|';
+$lang->menu->dashboard->dynamic  = 'Dynamic|my|dynamic|';
+$lang->menu->dashboard->review   = 'Review|my|review|';
+$lang->menu->dashboard->company  = 'Company|my|company|';
+ 
 /* Menu of mail module. */
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->system->menu;

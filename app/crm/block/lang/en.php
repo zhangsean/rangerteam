@@ -64,8 +64,7 @@ $lang->block->typeList->order['closedstatus'] = 'Closed';
 
 $lang->block->typeList->contract['returnedBy']     = 'My recieved';
 $lang->block->typeList->contract['deliveredBy']    = 'My delivered';
-$lang->block->typeList->contract['closedBy']       = 'My closed';
-$lang->block->typeList->contract['canceled']       = 'My canceled';
+$lang->block->typeList->contract['canceledBy']     = 'My canceled';
 $lang->block->typeList->contract['normalstatus']   = 'Normal';
 $lang->block->typeList->contract['closedstatus']   = 'Closed';
 $lang->block->typeList->contract['canceledstatus'] = 'Canceled';
