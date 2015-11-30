@@ -654,7 +654,7 @@ class actionModel extends model
         foreach($actions as $actionID => $action) $action->history = isset($histories[$actionID]) ? $histories[$actionID] : array();
         if(!empty($actions)) $actions = $this->transformActions($actions);
 
-        /* create notices. */
+        /* create action notices. */
         $notices = array();
         foreach($actions as $action)
         {
@@ -680,6 +680,40 @@ class actionModel extends model
             ob_end_clean();
 
             $notices[$action->id] = $notice;
+        }
+
+        /* create todo notices. */
+        $date  = helper::today();
+        $now   = helper::now();
+        $link  = helper::createLink('oa.todo', 'calendar');
+        $todos = $this->loadModel('todo', 'oa')->getList('self', $this->app->user->account, $date, 'undone');
+
+        $begin[1]  = date('Hi', strtotime($now));
+        $end[1]    = date('Hi', strtotime("+1 minute $now"));
+        $begin[10] = date('Hi', strtotime("+10 minute $now"));
+        $end[10]   = date('Hi', strtotime("+11 minute $now"));
+        $begin[30] = date('Hi', strtotime("+30 minute $now"));
+        $end[30]   = date('Hi', strtotime("+31 minute $now"));
+        foreach($todos as $todo)
+        {
+            if(empty($todo->begin)) continue;
+            $time = str_replace(':', '', $todo->begin);
+
+            $lastTime = 0;
+            if((int)$time >= (int)$begin[1]  and (int)$time <= (int)$end[1])  $lastTime = 1;
+            if((int)$time >= (int)$begin[10] and (int)$time <= (int)$end[10]) $lastTime = 10;
+            if((int)$time >= (int)$begin[30] and (int)$time <= (int)$end[30]) $lastTime = 30;
+            if($lastTime)
+            {
+                $notice = new stdclass();
+                $notice->id      = 'todo' . $todo->id;
+                $notice->title   = sprintf($this->lang->action->noticeTitle, $this->lang->todo->common, $link, 'oa', "{$todo->begin} {$todo->name}");
+                $notice->content = ''; 
+                $notice->type    = 'success';
+                $notice->read    = '';
+
+                $notices[$notice->id] = $notice;
+            }
         }
 
         return $notices;

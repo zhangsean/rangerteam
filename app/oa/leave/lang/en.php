@@ -18,6 +18,7 @@ $lang->leave->begin        = 'Begin date';
 $lang->leave->end          = 'End date';
 $lang->leave->start        = 'Begin time';
 $lang->leave->finish       = 'End time';
+$lang->leave->hours        = 'Hours';
 $lang->leave->type         = 'Type';
 $lang->leave->desc         = 'Description';
 $lang->leave->status       = 'Status';
@@ -45,3 +46,5 @@ $lang->leave->unique = 'There was a record of leave in %s.';
 
 $lang->leave->confirmReview['pass']   = 'Are sure to pass it?';
 $lang->leave->confirmReview['reject'] = 'Are sure to reject it?';
+
+$lang->leave->hoursTip = 'Hour';

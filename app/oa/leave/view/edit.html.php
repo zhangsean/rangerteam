@@ -50,6 +50,16 @@
         <td></td>
       </tr>
       <tr>
+        <th><?php echo $lang->leave->hours?></th>
+        <td>
+          <div class='input-group'>
+            <?php echo html::input('hours', $leave->hours, "class='form-control'")?>
+            <span class='input-group-addon'><?php echo $lang->leave->hoursTip?></span>
+          </div>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
         <th><?php echo $lang->leave->desc?></th>
         <td><?php echo html::textarea('desc', $leave->desc, "class='form-control'")?></td>
         <td></td>

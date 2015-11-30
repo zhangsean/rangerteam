@@ -45,10 +45,11 @@
             <?php $vars = "&date={$date}&orderBy=%s";?>
             <th class='w-80px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->leave->id);?></th>
             <th class='w-80px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->leave->createdBy);?></th>
-            <th class='w-80px'><?php echo $lang->user->dept;?></th>
+            <th class='w-80px visible-lg'><?php echo $lang->user->dept;?></th>
             <th class='w-80px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->leave->type);?></th>
             <th class='w-150px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->leave->begin);?></th>
-            <th class='w-150px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->leave->end);?></th>
+            <th class='w-150px'><?php commonModel::printOrderLink('end', $orderBy, $vars, $lang->leave->end);?></th>
+            <th class='w-50px visible-lg'><?php commonModel::printOrderLink('hours', $orderBy, $vars, $lang->leave->hours);?></th>
             <th><?php echo $lang->leave->desc;?></th>
             <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->leave->status);?></th>
             <?php if($type != 'browseReview'):?>
@@ -63,10 +64,11 @@
         <tr>
           <td><?php echo $leave->id;?></td>
           <td><?php echo zget($users, $leave->createdBy);?></td>
-          <td><?php echo zget($deptList, $leave->dept);?></td>
+          <td class='visible-lg'><?php echo zget($deptList, $leave->dept);?></td>
           <td><?php echo zget($this->lang->leave->typeList, $leave->type);?></td>
           <td><?php echo $leave->begin . ' ' . $leave->start;?></td>
           <td><?php echo $leave->end . ' ' . $leave->finish;?></td>
+          <td class='visible-lg'><?php echo $leave->hours == 0 ? '' : $leave->hours;?></td>
           <td title='<?php echo $leave->desc?>'><?php echo $leave->desc;?></td>
           <td class='leave-<?php echo $leave->status?>'><?php echo zget($this->lang->leave->statusList, $leave->status);?></td>
           <?php if($type != 'browseReview'):?>

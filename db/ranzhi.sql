@@ -328,6 +328,7 @@ CREATE TABLE `oa_leave` (
   `end` date NOT NULL,
   `start` time NOT NULL,
   `finish` time NOT NULL,
+  `hours` float(4,1) unsigned NOT NULL DEFAULT '0.0',
   `type` varchar(30) NOT NULL DEFAULT '',
   `desc` text NOT NULL,
   `status` varchar(30) NOT NULL DEFAULT '',

@@ -18,6 +18,7 @@ $lang->leave->begin        = '开始';
 $lang->leave->end          = '结束';
 $lang->leave->start        = '开始时间';
 $lang->leave->finish       = '结束时间';
+$lang->leave->hours        = '总时长';
 $lang->leave->type         = '类型';
 $lang->leave->desc         = '描述';
 $lang->leave->status       = '状态';
@@ -45,3 +46,5 @@ $lang->leave->unique = '%s 已经存在请假记录';
 
 $lang->leave->confirmReview['pass']   = '您确定要执行通过操作吗？';
 $lang->leave->confirmReview['reject'] = '您确定要执行拒绝操作吗？';
+
+$lang->leave->hoursTip = '小时';

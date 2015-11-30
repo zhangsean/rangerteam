@@ -12,6 +12,8 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
+<?php js::set('signIn', $this->config->attend->signInLimit)?>
+<?php js::set('signOut', $this->config->attend->signOutLimit)?>
 <div class='panel-body'>
     <form id='ajaxForm' method='post' action="<?php echo $this->createLink('oa.leave', 'create')?>">
     <table class='table table-form table-condensed'>
@@ -40,6 +42,16 @@
             <?php echo html::input('end', '', "class='form-control form-date'")?>
             <span class='input-group-addon fix-border'><?php echo $lang->leave->time?></span>
             <?php echo html::input('finish', $this->config->attend->signOutLimit, "class='form-control form-time'")?>
+          </div>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->leave->hours?></th>
+        <td>
+          <div class='input-group'>
+            <?php echo html::input('hours', '', "class='form-control'")?>
+            <span class='input-group-addon'><?php echo $lang->leave->hoursTip?></span>
           </div>
         </td>
         <td></td>
