@@ -94,7 +94,7 @@ class customerModel extends model
             ->beginIF($mode == 'thisweek')->andWhere('nextDate')->between($thisWeek['begin'], $thisWeek['end'])->fi()
             ->beginIF($mode == 'thismonth')->andWhere('nextDate')->between($thisMonth['begin'], $thisMonth['end'])->fi()
             ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
-            ->beginIF($mode == 'assignedtome')->andWhere('assignedTo')->eq($this->app->user->account)->fi()
+            ->beginIF($mode == 'assignedTo')->andWhere('assignedTo')->eq($this->app->user->account)->fi()
             ->beginIF($mode == 'query')->andWhere($param)->fi()
             ->beginIF($mode == 'bysearch')->andWhere($customerQuery)->fi()
             ->beginIF(strpos('all, bysearch, public, assignedtome, query', $mode) === false)->andWhere('nextDate')->ne('0000-00-00')->fi()

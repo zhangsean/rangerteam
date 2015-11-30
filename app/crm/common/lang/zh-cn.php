@@ -25,7 +25,7 @@ $lang->menu->crm->setting   = '设置|setting|lang|module=product&field=statusLi
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
 $lang->customer->menu->browse       = '所有客户|customer|browse|mode=all';
-$lang->customer->menu->assignedtome = '指派给我|customer|browse|mode=assignedtome';
+$lang->customer->menu->assignedTo   = '指派给我|customer|browse|mode=assignedTo';
 $lang->customer->menu->past         = '亟需联系|customer|browse|mode=past';
 $lang->customer->menu->today        = '今天联系|customer|browse|mode=today';
 $lang->customer->menu->tomorrow     = '明天联系|customer|browse|mode=tomorrow';
@@ -46,7 +46,7 @@ $lang->product->menu->offline    = '下线|product|browse|mode=offline';
 $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
 $lang->order->menu->browse       = '所有订单|order|browse|mode=all';
-$lang->order->menu->assignedtome = '指派给我|order|browse|mode=assignedtome';
+$lang->order->menu->assignedTo   = '指派给我|order|browse|mode=assignedTo';
 $lang->order->menu->past         = '亟需联系|order|browse|mode=past';
 $lang->order->menu->today        = '今天联系|order|browse|mode=today';
 $lang->order->menu->tomorrow     = '明天联系|order|browse|mode=tomorrow';

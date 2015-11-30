@@ -143,25 +143,18 @@ $lang->block->default['sys']['7'] = $lang->block->default['team']['2'];
 $lang->block->default['sys']['7']['source'] = 'team';
 
 $lang->block->moreLinkList = new stdclass();
-$lang->block->moreLinkList->order['assinedTo']   = '指派给我|sys|my|order|type=assinedTo';
-$lang->block->moreLinkList->order['createdBy']   = '由我创建|sys|my|order|type=createdBy';
-$lang->block->moreLinkList->order['signedBy']    = '由我签约|sys|my|order|type=signedBy';
-$lang->block->moreLinkList->order['closedBy']    = '由我关闭|sys|my|order|type=closedBy';
-$lang->block->moreLinkList->order['activatedBy'] = '由我激活|sys|my|order|type=activatedBy';
-$lang->block->moreLinkList->order['normal']      = '正常|sys|my|order|status=normal';
-$lang->block->moreLinkList->order['signed']      = '已签约|sys|my|order|status=signed';
-$lang->block->moreLinkList->order['closed']      = '已关闭|sys|my|order|status=closed';
+$lang->block->moreLinkList->order['assinedTo'] = '指派给我|sys|my|order|type=assinedTo';
+$lang->block->moreLinkList->order['createdBy'] = '由我创建|sys|my|order|type=createdBy';
+$lang->block->moreLinkList->order['signedBy']  = '由我签约|sys|my|order|type=signedBy';
 
-$lang->block->moreLinkList->contract['returnedBy']  = '由我回款|sys|my|contract|type=returnedBy';
-$lang->block->moreLinkList->contract['deliveredBy'] = '由我交付|sys|my|contract|type=deliveredBy';
-$lang->block->moreLinkList->contract['closedBy']    = '由我关闭|sys|my|contract|type=closedBy';
-$lang->block->moreLinkList->contract['canceledBy']  = '由我取消|sys|my|contract|type=canceledBy';
-$lang->block->moreLinkList->contract['normal']      = '正常|sys|my|contract|status=normal';
-$lang->block->moreLinkList->contract['signed']      = '已签约|sys|my|contract|status=signed';
-$lang->block->moreLinkList->contract['closed']      = '已关闭|sys|my|contract|status=closed';
+$lang->block->moreLinkList->contract['returnedBy']     = '由我回款|sys|my|contract|type=returnedBy';
+$lang->block->moreLinkList->contract['deliveredBy']    = '由我交付|sys|my|contract|type=deliveredBy';
+$lang->block->moreLinkList->contract['normalstatus']   = '未完成|sys|my|contract|type=unfinished';
+$lang->block->moreLinkList->contract['closedstatus']   = '已完成|sys|my|contract|type=finished';
+$lang->block->moreLinkList->contract['canceledstatus'] = '已取消|sys|my|contract|type=canceled';
 
-$lang->block->moreLinkList->customer['today']    = '今天联系|sys|my|customer|type=today';
-$lang->block->moreLinkList->customer['thisweek'] = '本周联系|sys|my|customer|type=thisweek';
+$lang->block->moreLinkList->customer['today']    = '今天联系|crm|customer|browse|type=today';
+$lang->block->moreLinkList->customer['thisweek'] = '本周联系|crm|customer|browse|type=thisweek';
 
 $lang->block->moreLinkList->trade     = '账目|cash|trade|browse|';
 $lang->block->moreLinkList->depositor = '账户|cash|depositor|index|';

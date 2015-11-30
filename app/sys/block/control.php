@@ -238,14 +238,22 @@ class block extends control
             if((isset($block->params->type) or isset($block->params->status)) and is_array($this->lang->block->moreLinkList->{$moduleName}))
             {
                 $type = isset($block->params->type) ? $block->params->type : $block->params->status;
-                list($label, $app, $module, $method, $vars) = explode('|', $this->lang->block->moreLinkList->{$moduleName}[$type]);
+                if(isset($this->lang->block->moreLinkList->{$moduleName}[$type]))
+                {
+                    list($label, $app, $module, $method, $vars) = explode('|', $this->lang->block->moreLinkList->{$moduleName}[$type]);
+                    $block->moreLink = $this->createLink($app . '.' . $module, $method, $vars);
+                    $block->appid    = $app == 'sys' ? 'dashboard' : $app;
+                }
             }
             else
             {
-                list($label, $app, $module, $method, $vars) = explode('|', $this->lang->block->moreLinkList->{$moduleName});
+                if(isset($this->lang->block->moreLinkList->{$moduleName}))
+                {
+                    list($label, $app, $module, $method, $vars) = explode('|', $this->lang->block->moreLinkList->{$moduleName});
+                    $block->moreLink = $this->createLink($app . '.' . $module, $method, $vars);
+                    $block->appid    = $app == 'sys' ? 'dashboard' : $app;
+                }
             }
-            $block->moreLink = $this->createLink($app . '.' . $module, $method, $vars);
-            $block->appid    = $app == 'sys' ? 'dashboard' : $app;
         }
 
         $this->view->blocks = $blocks;

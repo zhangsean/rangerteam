@@ -27,15 +27,21 @@ $lang->my->review->menu->refund = '报销|my|review|type=refund';
 
 $lang->my->order = new stdclass();
 $lang->my->order->menu = new stdclass();
-$lang->my->order->menu->past     = '亟需联系|my|order|type=past';
-$lang->my->order->menu->today    = '今天联系|my|order|type=today';
-$lang->my->order->menu->tomorrow = '明天联系|my|order|type=tomorrow';
-$lang->my->order->menu->all      = '所有|my|order|type=all';
+$lang->my->order->menu->past       = '亟需联系|my|order|type=past';
+$lang->my->order->menu->today      = '今天联系|my|order|type=today';
+$lang->my->order->menu->tomorrow   = '明天联系|my|order|type=tomorrow';
+$lang->my->order->menu->assignedTo = '指派给我|my|order|type=assignedTo';
+$lang->my->order->menu->createdBy  = '由我创建|my|order|type=createdBy';
+$lang->my->order->menu->signedBy   = '由我签约|my|order|type=signedBy';
+$lang->my->order->menu->all        = '所有|my|order|type=all';
 
 $lang->my->contract = new stdclass();
 $lang->my->contract->menu = new stdclass();
-$lang->my->contract->menu->unfinished = '未完成|my|contract|type=unfinished';
-$lang->my->contract->menu->finished   = '已完成|my|contract|type=finished';
+$lang->my->contract->menu->unfinished  = '未完成|my|contract|type=unfinished';
+$lang->my->contract->menu->finished    = '已完成|my|contract|type=finished';
+$lang->my->contract->menu->canceled    = '已取消|my|contract|type=canceled';
+$lang->my->contract->menu->returnedBy  = '由我回款|my|contract|type=returnedBy';
+$lang->my->contract->menu->deliveredBy = '由我交付|my|contract|type=deliveredBy';
 
 $lang->my->company = new stdclass();
 $lang->my->company->common  = '待办';

@@ -62,6 +62,8 @@ class contractModel extends model
             ->beginIF($mode == 'canceled')->andWhere('`status`')->eq('canceled')->fi()
             ->beginIF($mode == 'finished')->andWhere('`status`')->eq('closed')->fi()
             ->beginIF($mode == 'expired')->andWhere('`end`')->lt(date(DT_DATE1))->andWhere('`status`')->ne('canceled')->fi()
+            ->beginIF($mode == 'returnedBy')->andWhere('returnedBy')->eq($this->app->user->account)->fi()
+            ->beginIF($mode == 'deliveredBy')->andWhere('deliveredBy')->eq($this->app->user->account)->fi()
             ->beginIF($mode == 'expire')
             ->andWhere('`end`')->lt(date(DT_DATE1, strtotime('+1 month')))
             ->andWhere('`end`')->gt(date(DT_DATE1))
