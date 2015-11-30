@@ -160,13 +160,13 @@ class task extends control
                 $files = $this->loadModel('file')->saveUpload('task', $taskID);
             }
 
-            if($this->post->comment != '' or !empty($changes) or !empty($files))
+            if($this->post->remark != '' or !empty($changes) or !empty($files))
             {
                 $fileAction = '';
                 $action = !empty($changes) ? 'Edited' : 'Commented';
                 if($files) $fileAction = $this->lang->addFiles . join(',', $files);
 
-                $actionID = $this->loadModel('action')->create('task', $taskID, $action, $fileAction . $this->post->comment);
+                $actionID = $this->loadModel('action')->create('task', $taskID, $action, $fileAction . $this->post->remark);
                 if($changes) $this->action->logHistory($actionID, $changes);
             }
 

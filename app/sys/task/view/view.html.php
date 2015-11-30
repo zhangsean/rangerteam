@@ -74,7 +74,7 @@
       <fieldset id='commentBox' class='hide'>
         <legend><?php echo $lang->comment;?></legend>
         <form id='ajaxForm' method='post' action='<?php echo inlink('edit', "taskID=$task->id&comment=true")?>'>
-          <div class="form-group"><?php echo html::textarea('comment', '',"rows='5' class='w-p100'");?></div>
+          <div class="form-group"><?php echo html::textarea('remark', '',"rows='5' class='w-p100'");?></div>
           <?php echo html::submitButton() . html::backButton();?>
         </form>
       </fieldset>      
