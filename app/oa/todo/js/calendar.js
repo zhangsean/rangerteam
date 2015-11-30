@@ -129,4 +129,7 @@ $(document).ready(function()
     }
     addPager('#tab_custom');
     updateBoard('all');
+
+    /* adjust focus position. */
+    $(window).scrollTop($('.current').offset().top);
 });

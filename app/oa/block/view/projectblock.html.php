@@ -10,7 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 ?>
-<table class='table table-data table-hover block-project'>
+<table class='table table-data table-hover table-fixed block-project'>
   <tr>
     <th class='text-left'><?php echo $lang->project->name;?></th>
     <th class='text-center w-60px' title="<?php echo $lang->project->note->task;?>"><?php echo $lang->block->doneTask;?></th>
@@ -20,7 +20,7 @@
   <?php foreach($projects as $id => $project):?>
   <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn text-center' data-id={$this->get->entry}" : "class='text-center'"?>
   <tr data-url='<?php echo $this->createLink('oa.task', 'browse', "projectID=$id"); ?>' <?php echo $appid?>>
-    <td class='text-left'><?php echo $project->name;?></td>
+    <td class='text-left' title='<?php echo $project->name;?>'><?php echo $project->name;?></td>
     <td><?php echo $project->done;?></td>
     <td><?php echo $project->wait;?></td>
     <td>
