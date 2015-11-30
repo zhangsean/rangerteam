@@ -29,6 +29,7 @@ $clientTheme  = $this->app->getClientTheme();
   js::exportConfigVars();
   if(isset($this->app->entry->id)) js::set('entryID', $this->app->entry->id);
   if(RUN_MODE != 'upgrade' and RUN_MODE != 'install' and !isset($this->app->entry->id) and ($this->app->user->admin == 'super')) js::set('entryID', 'superadmin');
+  if(RUN_MODE != 'upgrade' and RUN_MODE != 'install' and !isset($this->app->entry->id) and ($this->moduleName == 'my')) js::set('entryID', 'dashboard');
   if($config->debug)
   {
       js::import($jsRoot . 'jquery/min.js');
