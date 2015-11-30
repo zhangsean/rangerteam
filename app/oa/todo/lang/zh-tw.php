@@ -12,6 +12,7 @@
 if(!isset($lang->todo)) $lang->todo = new stdclass();
 $lang->todo->common       = '待辦';
 $lang->todo->index        = "待辦一覽";
+$lang->todo->browse       = "待辦列表";
 $lang->todo->create       = "新增";
 $lang->todo->batchCreate  = "批量添加";
 $lang->todo->edit         = "更新待辦";

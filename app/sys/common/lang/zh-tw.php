@@ -35,7 +35,7 @@ $lang->apps->team = '團隊';
 /* Lang items for ranzhi. */
 $lang->ranzhi    = '然之協同';
 $lang->agreement = "已閲讀並同意<a href='http://zpl.pub/page/zplv11.html' target='_blank'>《Z PUBLIC LICENSE授權協議1.2》</a>。<span class='text-danger'>未經許可，不得去除、隱藏或遮掩然之系統的任何標誌及連結。</span>";
-$lang->poweredBy = "<span id='poweredBy'><a href='http://www.ranzhi.org/?v=%s' target='_blank'>{$lang->ranzhi}%s</a></span>";
+$lang->poweredBy = "<a href='http://www.ranzhico.com/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
 
 /* IE6 alert.  */
 $lang->IE6Alert = <<<EOT
@@ -50,6 +50,11 @@ $lang->IE6Alert = <<<EOT
       <p></p>
     </div>
 EOT;
+
+/* Themes. */
+$lang->theme             = '主題';
+$lang->themes['default'] = '預設';
+$lang->themes['clear']   = '清晰';
 
 /* Global lang items. */
 $lang->home           = '首頁';
@@ -187,6 +192,8 @@ $lang->task    = new stdclass();
 $lang->schema  = new stdclass();
 $lang->package = new stdclass();
 
+$lang->admin->common = '後台管理';
+
 $lang->menu->sys = new stdclass();
 $lang->menu->sys->company   = '公司|company|setbasic|';
 $lang->menu->sys->user      = '組織|user|admin|';
@@ -194,7 +201,7 @@ $lang->menu->sys->group     = '權限|group|browse|';
 $lang->menu->sys->entry     = '應用|entry|admin|';
 $lang->menu->sys->system    = '系統|mail|admin|';
 $lang->menu->sys->package   = '擴展|package|browse|';
- 
+
 $lang->message = new stdclass(); 
 $lang->blog    = new stdclass(); 
 $lang->group   = new stdclass(); 
@@ -222,6 +229,16 @@ $lang->article->menu->create = array('link' => '添加文章|article|create|type
 
 $lang->menuGroups = new stdclass();
 
+$lang->menu->dashboard = new stdclass();
+$lang->menu->dashboard->todo     = '待辦|my|todo|';
+$lang->menu->dashboard->task     = '任務|my|task|';
+$lang->menu->dashboard->order    = '訂單|my|order|';
+$lang->menu->dashboard->contract = '合同|my|contract|';
+$lang->menu->dashboard->project  = '項目|my|project|';
+$lang->menu->dashboard->dynamic  = '動態|my|dynamic|';
+$lang->menu->dashboard->review   = '審批|my|review|';
+$lang->menu->dashboard->company  = '組織|my|company|';
+ 
 /* Menu of mail module. */
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->system->menu;

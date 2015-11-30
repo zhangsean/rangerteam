@@ -13,7 +13,7 @@ $lang->app = new stdclass();
 $lang->app->name = 'CASH';
 
 $lang->menu->cash = new stdclass();
-$lang->menu->cash->dashboard = '我的地盤|dashboard|index|';
+$lang->menu->cash->dashboard = '首頁|dashboard|index|';
 $lang->menu->cash->trade     = '記賬|trade|browse|';
 $lang->menu->cash->check     = '對賬|depositor|check|';
 $lang->menu->cash->depositor = '賬戶|depositor|browse|';

@@ -6,7 +6,7 @@
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id: zh-tw.php 3144 2015-11-11 03:36:34Z chujilu $
+ * @version     $Id: zh-tw.php 3205 2015-11-23 06:27:38Z daitingting $
  * @link        http://www.ranzhico.com
  */
 $lang->entry->common    = '應用';
@@ -16,6 +16,7 @@ $lang->entry->edit      = '編輯應用';
 $lang->entry->delete    = '刪除應用';
 $lang->entry->createKey = '重新生成密鑰';
 $lang->entry->order     = '排序';
+$lang->entry->style     = '樣式';
 
 $lang->entry->name        = '名稱';
 $lang->entry->abbr        = '縮寫';
@@ -94,3 +95,6 @@ $lang->entry->positionList['center']  = '居中';
 $lang->entry->controlList['none']   = '無';
 $lang->entry->controlList['full']   = '完整';
 $lang->entry->controlList['simple'] = '透明';
+
+$lang->entry->integrationList[1] = '啟用';
+$lang->entry->integrationList[0] = '關閉';

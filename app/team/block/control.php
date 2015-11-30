@@ -123,6 +123,8 @@ class block extends control
             ->limit($this->params->num)
             ->fetchAll('id');
 
+        $this->view->users = $this->loadModel('user', 'sys')->getPairs();
+
         $this->display();
     }
 

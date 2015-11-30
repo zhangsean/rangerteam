@@ -150,5 +150,6 @@ $lang->task->unAssigned = '未指派';
 
 $lang->task->mindMoveTip = '只能將任務移動至二級節點下。';
 $lang->task->notAllowed  = '不允許這樣操作。';
+$lang->task->skipClose   = '任務：%s 不是“已完成”或“已取消”狀態，不能關閉！';
 
 $lang->task->groupinfo = "<div class='text-muted'>總計 <strong>%s</strong> 項，未開始 <strong>%s</strong>，進行中 <strong>%s</strong>，已完成 <strong>%s</strong>，已關閉 <strong>%s</strong></div>";

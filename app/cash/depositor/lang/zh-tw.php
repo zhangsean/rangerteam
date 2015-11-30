@@ -16,6 +16,7 @@ $lang->depositor->abbr            = '簡稱';
 $lang->depositor->serviceProvider = '服務商';
 $lang->depositor->bankProvider    = '開戶網點';
 $lang->depositor->title           = '賬戶名稱';
+$lang->depositor->tags            = '標籤';
 $lang->depositor->account         = '開戶賬號';
 $lang->depositor->bankcode        = '聯行號';
 $lang->depositor->public          = '對公賬號';
@@ -67,3 +68,6 @@ $lang->depositor->providerList['tenpay'] = '財付通';
 
 $lang->depositor->statusList['normal']  = '正常';
 $lang->depositor->statusList['disable'] = '停用';
+
+$lang->depositor->placeholder = new stdclass();
+$lang->depositor->placeholder->tags = '多個標籤之間用逗號隔開';

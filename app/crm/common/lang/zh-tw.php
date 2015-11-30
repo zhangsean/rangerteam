@@ -13,7 +13,7 @@ $lang->app = new stdclass();
 $lang->app->name = 'CRM';
 
 $lang->menu->crm = new stdclass();
-$lang->menu->crm->dashboard = '我的地盤|dashboard|index|';
+$lang->menu->crm->dashboard = '首頁|dashboard|index|';
 $lang->menu->crm->order     = '訂單|order|browse|';
 $lang->menu->crm->contract  = '合同|contract|browse|mode=unfinished';
 $lang->menu->crm->customer  = '客戶|customer|browse|';
@@ -25,7 +25,7 @@ $lang->menu->crm->setting   = '設置|setting|lang|module=product&field=statusLi
 $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
 $lang->customer->menu->browse       = '所有客戶|customer|browse|mode=all';
-$lang->customer->menu->assignedtome = '指派給我|customer|browse|mode=assignedtome';
+$lang->customer->menu->assignedTo   = '指派給我|customer|browse|mode=assignedTo';
 $lang->customer->menu->past         = '亟需聯繫|customer|browse|mode=past';
 $lang->customer->menu->today        = '今天聯繫|customer|browse|mode=today';
 $lang->customer->menu->tomorrow     = '明天聯繫|customer|browse|mode=tomorrow';
@@ -46,7 +46,7 @@ $lang->product->menu->offline    = '下線|product|browse|mode=offline';
 $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
 $lang->order->menu->browse       = '所有訂單|order|browse|mode=all';
-$lang->order->menu->assignedtome = '指派給我|order|browse|mode=assignedtome';
+$lang->order->menu->assignedTo   = '指派給我|order|browse|mode=assignedTo';
 $lang->order->menu->past         = '亟需聯繫|order|browse|mode=past';
 $lang->order->menu->today        = '今天聯繫|order|browse|mode=today';
 $lang->order->menu->tomorrow     = '明天聯繫|order|browse|mode=tomorrow';

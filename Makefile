@@ -31,9 +31,9 @@ ranzhi:
 	find ranzhi -name tests |xargs rm -fr
 	for path in `find ranzhi/ -type d`; do touch "$$path/index.php"; done	
 	# change mode.
-	chmod 777 -R ranzhi/tmp/
-	chmod 777 -R ranzhi/www/data
-	chmod 777 -R ranzhi/config
+	chmod -R 777 ranzhi/tmp/
+	chmod -R 777 ranzhi/www/data
+	chmod -R 777 ranzhi/config
 	#chmod a+rx ranzhi/bin/*
 	#find ranzhi/ -name ext |xargs chmod -R 777
 	# zip it.

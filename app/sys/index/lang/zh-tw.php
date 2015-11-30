@@ -10,6 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 $lang->index->common       = '首頁';
+$lang->index->dashboard    = '我的地盤';
 $lang->index->about        = '關於';
 $lang->index->allEntries   = '所有應用';
 $lang->index->showOnLeft   = '左側顯示';
