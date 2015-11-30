@@ -153,7 +153,7 @@ $lang->action->label->project   = '項目|task|browse|projectID=%s';
 $lang->action->label->depositor = '賬戶|depositor|browse|';
 $lang->action->label->trade     = '賬目|trade|browse|';
 $lang->action->label->doc       = '文檔|doc|view|docID=%s';
-$lang->action->label->doclib    = '文檔|doc|browse|doclibID=%s';
+$lang->action->label->doclib    = '文檔庫|doc|browse|doclibID=%s';
 $lang->action->label->schema    = '記賬模板|schema|browse|';
 $lang->action->label->space     = '　';
 
