@@ -461,7 +461,7 @@ class todoModel extends model
         $index = 1;
         foreach($items as $id => $name)
         {
-            $div .= "<div class='board-item' data-id='$id' data-type='$type' data-action='create' data-index='$index' data-toggle='droppable' data-target='.day'>\r\n";
+            $div .= "<div class='board-item text-nowrap text-ellipsis' title='$name' data-id='$id' data-type='$type' data-action='create' data-index='$index' data-toggle='droppable' data-target='.day'>\r\n";
             $div .= "$name\r\n";
             $div .= "</div>\r\n";
             $index += 1;
