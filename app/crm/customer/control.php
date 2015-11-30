@@ -442,14 +442,16 @@ class customer extends control
     {
         $this->app->loadClass('date', $static = true);
         $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
-        $thisMonth      = date::getThisMonth();
+        $thisWeek       = date::getThisWeek();
         $customers      = array();
+        if($account == '') $account = $this->app->user->account;
 
         $sql = $this->dao->select('c.id, c.name, c.nextDate, t.id as todo')->from(TABLE_CUSTOMER)->alias('c')
             ->leftjoin(TABLE_TODO)->alias('t')->on("t.type='customer' and c.id = t.idvalue")
             ->where('c.deleted')->eq(0)
+            ->andWhere('c.assignedTo')->eq($account)
             ->andWhere('c.relation')->ne('provider')
-            ->andWhere('c.nextDate')->between($thisMonth['begin'], $thisMonth['end'])
+            ->andWhere('c.nextDate')->between($thisWeek['begin'], $thisWeek['end'])
             ->andWhere('c.nextDate')->ne('0000-00-00')
             ->andWhere('c.id')->in($customerIdList)
             ->orderBy('c.nextDate_asc');

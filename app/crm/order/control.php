@@ -447,14 +447,16 @@ class order extends control
         $this->app->loadClass('date', $static = true);
         $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
         $products       = $this->loadModel('product')->getPairs();
-        $thisMonth      = date::getThisMonth();
+        $thisWeek       = date::getThisWeek();
         $orders         = array();
+        if($account == '') $account = $this->app->user->account;
 
         $sql = $this->dao->select('o.id, o.product, o.createdDate, c.name as customerName, t.id as todo')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
             ->leftJoin(TABLE_TODO)->alias('t')->on("t.type='order' and o.id=t.idvalue")
             ->where('o.deleted')->eq(0)
-            ->andWhere('o.nextDate')->between($thisMonth['begin'], $thisMonth['end'])
+            ->andWhere('o.assignedTo')->eq($account)
+            ->andWhere('o.nextDate')->between($thisWeek['begin'], $thisWeek['end'])
             ->andWhere('o.customer')->in($customerIdList)
             ->orderBy('o.id_desc');
         $stmt = $sql->query();
