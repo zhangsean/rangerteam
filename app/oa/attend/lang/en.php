@@ -83,6 +83,7 @@ $lang->attend->mustSignOut  = 'Must sign out';
 
 $lang->attend->workingDaysList['5']  = "Monday ~ Friday";
 $lang->attend->workingDaysList['6']  = "Monday ~ Saturday";
+$lang->attend->workingDaysList['7']  = "Monday ~ Sunday";
 $lang->attend->workingDaysList['12'] = "Sunday ~ Thursday";
 $lang->attend->workingDaysList['13'] = "Sunday ~ Friday";
 
