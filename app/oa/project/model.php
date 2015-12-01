@@ -465,7 +465,7 @@ class projectModel extends model
         if($methodName ==  'browse' or $methodName == 'importtask')
         {
             $menu .= '<li class="divider angle"></li>';
-            $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=assignedTo", $this->lang->task->assignedToMe, '', false, '', 'li');
+            if(isset($currentProject->members[$this->app->user->account])) $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=assignedTo", $this->lang->task->assignedToMe, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=all", $this->lang->task->all, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=createdBy",  $this->lang->task->createdByMe, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=finishedBy", $this->lang->task->finishedByMe, '', false, '', 'li');

@@ -58,6 +58,8 @@ class task extends control
             if(!$this->project->checkPriv($projectID)) $this->locate($this->createLink('project'));
         }
 
+        if(!isset($project->members[$this->app->user->account])) $mode = 'all';
+
         $this->session->set('taskList', $this->app->getURI(true));
         setCookie('taskListType', 'browse', time() + 60 * 60 * 24 * 10);
 
