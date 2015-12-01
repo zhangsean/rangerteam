@@ -17,6 +17,13 @@ function finishTodo(id)
         {
             if(response.message) $.zui.messager.show(response.message);
         }
+
+        /* update calendar data if in calendar page. */
+        var uc = window['updateCalendar'];
+        if($.isFunction(uc))
+        {
+            updateCalendar();
+        }
         return false;
     }, 'json');
 }
@@ -33,11 +40,10 @@ $(document).ready(function()
         $(this).prop('href', '');
         finishTodo($(this).data('id'));
 
-        /* update calendar data if in calendar page. */
+        /* close model if in calendar page. */
         var uc = window['updateCalendar'];
         if($.isFunction(uc))
         {
-            updateCalendar();
             $.zui.modalTrigger.close();
         }
         else
