@@ -9,20 +9,22 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->colon   = ' : ';
-$lang->prev    = '‹';
-$lang->next    = '›';
-$lang->laquo   = '&laquo;';
-$lang->raquo   = '&raquo;';
-$lang->minus   = ' - ';
-$lang->hyphen  = '-';
-$lang->slash   = ' / ';
-$lang->RMB     = '￥';
-$lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
-$lang->at      = ' At ';
-$lang->by      = ' By ';
-$lang->ditto   = 'Ditto';
-$lang->etc     = 'Etc';
+$lang->colon      = ' : ';
+$lang->prev       = '‹';
+$lang->next       = '›';
+$lang->laquo      = '&laquo;';
+$lang->raquo      = '&raquo;';
+$lang->minus      = ' - ';
+$lang->hyphen     = '-';
+$lang->slash      = ' / ';
+$lang->RMB        = '￥';
+$lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
+$lang->at         = ' At ';
+$lang->by         = ' By ';
+$lang->ditto      = 'Ditto';
+$lang->etc        = 'Etc';
+$lang->importIcon = "<i class='icon-download-alt'> </i>";
+$lang->exportIcon = "<i class='icon-upload-alt'> </i>";
 
 /* Apps lang items.*/
 $lang->apps = new stdclass();

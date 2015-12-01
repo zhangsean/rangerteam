@@ -18,7 +18,7 @@
     <?php echo html::a(inlink('browse', "tag=$tag"), $tag, $currentTag == $tag ? "class='active'" : '');?>
     <?php endforeach;?>
     <div class='panel-actions pull-right'>
-      <?php commonModel::printLink('depositor', 'export', '', "<i class='icon-upload-alt'></i> " . $lang->export, "class='iframe btn btn-primary' data-width='700'");?></li>
+      <?php commonModel::printLink('depositor', 'export', '', $lang->exportIcon . $lang->export, "class='iframe btn btn-primary' data-width='700'");?></li>
       <?php commonModel::printLink('depositor', 'create', '', "<i class='icon-plus'></i> {$lang->depositor->create}", "class='btn btn-primary' data-toggle='modal'")?>
     </div>
     <?php if($app->user->admin == 'super' or isset($app->user->rights['balance']['browse'])):?>

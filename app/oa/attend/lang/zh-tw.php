@@ -83,6 +83,7 @@ $lang->attend->mustSignOut  = '必須簽退';
 
 $lang->attend->workingDaysList['5']  = "周一～周五";
 $lang->attend->workingDaysList['6']  = "周一～周六";
+$lang->attend->workingDaysList['7']  = "周一～周日";
 $lang->attend->workingDaysList['12'] = "周日～周四";
 $lang->attend->workingDaysList['13'] = "周日～周五";
 

@@ -500,11 +500,11 @@ class projectModel extends model
         $menu .= "</ul>";
         $menu .= "<div class='pull-right'>" . commonModel::printLink('task', 'create', "projectID=$projectID", '<i class="icon-sitemap"></i> ' . $this->lang->task->create, 'class="btn btn-primary"', false) . "</div>";
         $menu .= "<div class='pull-right'>" . commonModel::printLink('task', 'batchCreate', "projectID=$projectID", '<i class="icon-plus"></i> ' . $this->lang->task->batchCreate, 'class="btn btn-primary"', false) . "</div>";
-        $menu .= "<div class='pull-right'>" . commonModel::printLink('project', 'importTask', "projectID=$projectID", '<i class="icon-download-alt"></i> ' . $this->lang->project->import, 'class="btn btn-primary"', false) . "</div>";
+        $menu .= "<div class='pull-right'>" . commonModel::printLink('project', 'importTask', "projectID=$projectID", $this->lang->importIcon . $this->lang->project->import, 'class="btn btn-primary"', false) . "</div>";
         if(commonModel::hasPriv('task', 'export'))
         {
             $menu .= "<div class='btn-group pull-right'>";
-            $menu .= "<button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><i class='icon-upload-alt'></i> " . $this->lang->export . " <span class='caret'></span></button>";
+            $menu .= "<button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'>" . $this->lang->exportIcon . $this->lang->export . " <span class='caret'></span></button>";
             $menu .= "<ul id='exportActionMenu' class='dropdown-menu w-100px'>";
             $menu .= "<li>" . commonModel::printLink('task', 'export', "mode=all&projectID=$projectID&orderBy={$extra}", $this->lang->exportAll, "class='iframe' data-width='700'", false) . "</li>";
             $menu .= "<li>" . commonModel::printLink('task', 'export', "mode=thisPage&projectID={$projectID}&orderBy={$extra}", $this->lang->exportThisPage, "class='iframe' data-width='700'", false) . "</li>";

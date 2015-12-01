@@ -15,7 +15,7 @@
 <div class='row page-content'>
   <div class='panel'>
     <div class='panel-heading'>
-      <strong><i class='icon-download-alt'></i> <?php echo $lang->project->importTask;?></strong>
+      <strong><?php echo $lang->importIcon . $lang->project->importTask;?></strong>
       <div class='input-group pull-right'>
         <?php $projects = array(0 => $lang->project->fromproject) + $projects;?>
         <span class='input-group-addon'><strong><?php echo $lang->project->selectProject;?></strong></span>
