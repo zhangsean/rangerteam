@@ -10,6 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 $lang->my = new stdclass();
+$lang->my->common = 'Dashbord';
 
 $lang->my->todo = new stdclass();
 $lang->my->todo->menu = new stdclass();
@@ -26,6 +27,8 @@ $lang->my->review->menu->leave  = 'Leave|my|review|type=leave';
 $lang->my->review->menu->refund = 'Refund|my|review|type=refund';
 
 $lang->my->order = new stdclass();
+$lang->my->order->common = 'Order';
+
 $lang->my->order->menu = new stdclass();
 $lang->my->order->menu->past       = 'Urgently need contacted|my|order|type=past';
 $lang->my->order->menu->today      = 'Contact Today|my|order|type=today';
@@ -36,6 +39,8 @@ $lang->my->order->menu->signedBy   = 'Signed By Me|my|order|type=signedBy';
 $lang->my->order->menu->all        = 'All|my|order|type=all';
 
 $lang->my->contract = new stdclass();
+$lang->my->contract->common = 'Contract';
+
 $lang->my->contract->menu = new stdclass();
 $lang->my->contract->menu->unfinished  = 'Unfinished|my|contract|type=unfinished';
 $lang->my->contract->menu->finished    = 'Finished|my|contract|type=finished';

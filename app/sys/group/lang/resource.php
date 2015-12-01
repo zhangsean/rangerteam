@@ -50,6 +50,7 @@ $lang->appModule->sys = array();
 $lang->appModule->sys[] = 'tree';
 $lang->appModule->sys[] = 'setting';
 $lang->appModule->sys[] = 'report';
+$lang->appModule->sys[] = 'my';
 
 /* Module order. */
 $lang->moduleOrder[0]   = 'order';
@@ -516,6 +517,12 @@ $lang->resource->report = new stdclass();
 $lang->resource->report->browse = 'browse';
 
 $lang->report->methodOrder[5] = 'browse';
+
+/* My. */
+$lang->resource->my = new stdclass();
+$lang->resource->my->company = 'company';
+
+$lang->my->methodOrder[5] = 'company';
 
 /* Every version of new privilege. */
 $lang->changelog = array();

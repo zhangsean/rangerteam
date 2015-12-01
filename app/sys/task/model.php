@@ -933,6 +933,8 @@ class taskModel extends model
      */
     public function checkPriv($task, $action)
     {
+        $action  = strtolower($action);  
+
         if($this->app->user->admin == 'super') return true;
         if($action == 'view' and !empty($this->app->user->rights['task']['viewall'])) return true;
         if(strpos(',edit,recordestimate,assignto,start,finish,close,activate,cancel,', ",$action,") !== false and !empty($this->app->user->rights['task']['editall'])) return true;
@@ -954,7 +956,7 @@ class taskModel extends model
                 $project->whitelist = $accountList;
             }
         }
-        $action  = strtolower($action);  
+
         $account = $this->app->user->account;
         $project = isset($projects[$task->project]) ? $projects[$task->project] : new stdclass();
         if(empty($project)) return false;

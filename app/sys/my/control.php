@@ -201,6 +201,9 @@ class my extends control
      */
     public function order($type = 'past', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
+        $this->loadModel('common', 'sys');
+        if(!commonModel::hasPriv('order', 'browse')) $this->common->deny('my', 'order');
+
         $this->loadModel('order', 'crm');
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -239,6 +242,9 @@ class my extends control
      */
     public function contract($type = 'unfinished', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
+        $this->loadModel('common', 'sys');
+        if(!commonModel::hasPriv('order', 'browse')) $this->common->deny('my', 'order');
+
         $this->loadModel('contract', 'crm');
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);

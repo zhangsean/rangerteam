@@ -29,7 +29,11 @@ class myModel extends model
 
             $class = '';
             if($method == $currentMethod) $class = "class='active'";
-            if(commonModel::hasPriv($module, $method))
+
+            $hasPriv = commonModel::hasPriv($module, $method);
+            if($module == 'my' and $method == 'order')    $hasPriv = commonModel::hasPriv('order', 'browse');
+            if($module == 'my' and $method == 'contract') $hasPriv = commonModel::hasPriv('contract', 'browse');
+            if($hasPriv)
             {
                 $string .= "<li $class>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
             }

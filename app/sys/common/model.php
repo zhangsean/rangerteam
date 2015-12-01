@@ -373,7 +373,10 @@ class commonModel extends model
 
             $class = '';
             if($currentMethod == $method) $class = "class='active'";
-            if(commonModel::hasPriv($module, $method))
+            $hasPriv = commonModel::hasPriv($module, $method);
+            if($module == 'my' and $method == 'order')    $hasPriv = commonModel::hasPriv('order', 'browse');
+            if($module == 'my' and $method == 'contract') $hasPriv = commonModel::hasPriv('contract', 'browse');
+            if($hasPriv)
             {
                 $link = helper::createLink($module, $method, $vars);
                 $string .= "<li $class><a class='app-btn open' data-id='dashboard' href='$link'>$label</a></li>\n";

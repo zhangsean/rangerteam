@@ -69,7 +69,7 @@
             foreach($moduleActions as $action => $actionLabel)
             {
                 if(!empty($version) and strpos($changelogs, ",$moduleName-$actionLabel,") === false) continue;
-                $options[$action] = $lang->$moduleName->$actionLabel;
+                $options[$action] = is_object($lang->$moduleName->$actionLabel) ? $lang->$moduleName->$actionLabel->common : $lang->$moduleName->$actionLabel;
             }
             echo html::checkbox("actions[$moduleName]", $options, isset($groupPrivs[$moduleName]) ? $groupPrivs[$moduleName] : '');
             ?>

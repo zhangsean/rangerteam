@@ -76,19 +76,22 @@ $config->rights->member['task']['assignto']       = 'assignto';
 $config->rights->member['task']['activate']       = 'activate';
 $config->rights->member['task']['cancel']         = 'cancel';
 $config->rights->member['task']['close']          = 'close';
+$config->rights->member['task']['batchclose']     = 'batchclose';
 $config->rights->member['task']['export']         = 'export';
 $config->rights->member['task']['delete']         = 'delete';
-$config->rights->member['task']['recordestimate'] = 'delete';
+$config->rights->member['task']['recordestimate'] = 'recordestimate';
 
 $config->rights->member['todo']['calendar']    = 'calendar';
 $config->rights->member['todo']['create']      = 'create';
 $config->rights->member['todo']['batchcreate'] = 'batchcreate';
 $config->rights->member['todo']['edit']        = 'edit';
+$config->rights->member['todo']['browse']      = 'browse';
 $config->rights->member['todo']['view']        = 'view';
 $config->rights->member['todo']['delete']      = 'delete';
 $config->rights->member['todo']['finish']      = 'finish';
 $config->rights->member['todo']['assignto']    = 'assignto';
 $config->rights->member['todo']['close']       = 'close';
+$config->rights->member['todo']['batchclose']  = 'batchclose';
 $config->rights->member['todo']['activate']    = 'activate';
 
 $config->rights->member['reply']['post']          = 'post';
@@ -103,6 +106,7 @@ $config->rights->member['action']['createrecord'] = 'createrecord';
 $config->rights->member['action']['editrecord']   = 'editrecord';
 $config->rights->member['action']['history']      = 'history';
 $config->rights->member['action']['editcomment']  = 'editcomment';
+$config->rights->member['action']['read']         = 'read';
 
 $config->rights->member['file']['buildform']      = 'buildform';
 $config->rights->member['file']['buildlist']      = 'buildlist';
@@ -140,3 +144,11 @@ $config->rights->member['refund']['edit']         = 'edit';
 $config->rights->member['refund']['delete']       = 'delete';
 $config->rights->member['refund']['view']         = 'view';
 $config->rights->member['refund']['switchstatus'] = 'switchstatus';
+
+$config->rights->member['my']['todo']     = 'todo';
+$config->rights->member['my']['task']     = 'task';
+$config->rights->member['my']['project']  = 'project';
+$config->rights->member['my']['dynamic']  = 'dynamic';
+$config->rights->member['my']['order']    = 'order';
+$config->rights->member['my']['contract'] = 'contract';
+$config->rights->member['my']['review']   = 'review';

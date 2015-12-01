@@ -10,6 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 $lang->my = new stdclass();
+$lang->my->common = '我的地盘';
 
 $lang->my->todo = new stdclass();
 $lang->my->todo->menu = new stdclass();
@@ -26,6 +27,8 @@ $lang->my->review->menu->leave  = '请假|my|review|type=leave';
 $lang->my->review->menu->refund = '报销|my|review|type=refund';
 
 $lang->my->order = new stdclass();
+$lang->my->order->common = '任务';
+
 $lang->my->order->menu = new stdclass();
 $lang->my->order->menu->past       = '亟需联系|my|order|type=past';
 $lang->my->order->menu->today      = '今天联系|my|order|type=today';
@@ -36,6 +39,8 @@ $lang->my->order->menu->signedBy   = '由我签约|my|order|type=signedBy';
 $lang->my->order->menu->all        = '所有|my|order|type=all';
 
 $lang->my->contract = new stdclass();
+$lang->my->contract->common = '合同';
+
 $lang->my->contract->menu = new stdclass();
 $lang->my->contract->menu->unfinished  = '未完成|my|contract|type=unfinished';
 $lang->my->contract->menu->finished    = '已完成|my|contract|type=finished';
