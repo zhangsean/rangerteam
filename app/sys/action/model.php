@@ -688,12 +688,13 @@ class actionModel extends model
         $link  = helper::createLink('oa.todo', 'calendar');
         $todos = $this->loadModel('todo', 'oa')->getList('self', $this->app->user->account, $date, 'undone');
 
+        $interval  = $this->config->pingInterval;
         $begin[1]  = date('Hi', strtotime($now));
-        $end[1]    = date('Hi', strtotime("+1 minute $now"));
+        $end[1]    = date('Hi', strtotime("+$interval seconds $now"));
         $begin[10] = date('Hi', strtotime("+10 minute $now"));
-        $end[10]   = date('Hi', strtotime("+11 minute $now"));
+        $end[10]   = date('Hi', strtotime("+10 minute $interval seconds $now"));
         $begin[30] = date('Hi', strtotime("+30 minute $now"));
-        $end[30]   = date('Hi', strtotime("+31 minute $now"));
+        $end[30]   = date('Hi', strtotime("+30 minute $interval seconds $now"));
         foreach($todos as $todo)
         {
             if(empty($todo->begin)) continue;

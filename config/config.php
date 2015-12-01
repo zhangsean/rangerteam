@@ -26,6 +26,7 @@ $config->cookiePath   = '/';               // The path of cookies.
 $config->webRoot      = getWebRoot();      // The web root.
 $config->checkVersion = true;              // Auto check for new version or not.
 $config->timeout      = 30 * 1000;         // The timeout of ajax request.
+$config->pingInterval = 60;                // The interval of ping request, seconds.
 
 /* The request settings. */
 $config->requestType = 'PATH_INFO';       // The request type: PATH_INFO|GET, if PATH_INFO, must use url rewrite.
@@ -92,7 +93,6 @@ $myConfig   = $configRoot . 'my.php';
 if(file_exists($myConfig)) include $myConfig;
 $rightsConfig = $configRoot . 'rights.php';
 if(file_exists($rightsConfig)) include $rightsConfig;
-
 
 /* Tables for basic system. */
 define('TABLE_CONFIG',    '`sys_config`');

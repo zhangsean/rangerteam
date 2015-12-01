@@ -24,8 +24,7 @@ class misc extends control
         /* Save online status. */
         $this->loadModel('user')->online();
         /* Get notices. */
-        $notices = array();
-        if($notice != '') $notices = $this->loadModel('action')->getUnreadNotice('', $skipNotice = $notice);
+        $notices = $this->loadModel('action')->getUnreadNotice('', $skipNotice = $notice);
 
         $res = new stdclass();
         $res->notices = $notices;

@@ -605,10 +605,8 @@ function ping()
 
     /* get showed notice ids. */
     var notice = getShowedNotice().join(',');
-    if(notice == '') notice = 0;
-    if(config && config.appName == 'sys' && config.currentModule == 'index' && config.currentMethod == 'index' && self.frameElement === null) vars = "notice=" + notice;
 
-    $.get(createLink('misc', 'ping', vars), function(response)
+    $.get(createLink('misc', 'ping', 'notice=' + notice), function(response)
     {
         if(typeof(response.notices) != 'undefined')
         {

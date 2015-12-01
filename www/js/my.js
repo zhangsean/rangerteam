@@ -10,8 +10,11 @@ $(document).ready(function()
     $.setAjaxLoader('.loadInModal', '#ajaxModal');
 
     /* Set ping keep online. */
-    setInterval('ping()', 1000 * 60);
-    ping();
+    if(typeof $.ipsStart != 'undefined') 
+    {
+        setInterval('ping()', 1000 * config.pingInterval);
+        ping();
+    }
 
     /* Enable tooltip */
     $('body').tooltip({html: true,selector: "[data-toggle='tooltip']",container: "body"});
