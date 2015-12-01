@@ -21,10 +21,11 @@ class taskModel extends model
     public function getByID($taskID)
     {
         $task     = $this->dao->select("*")->from(TABLE_TASK)->where('id')->eq($taskID)->limit(1)->fetch();
-        $children = $this->dao->select("*")->from(TABLE_TASK)->where('parent')->eq($taskID)->andWhere('deleted')->eq(0)->fetchAll('id');
+        if(empty($task)) return new stdclass();
 
         foreach($task as $key => $value) if(strpos($key, 'Date') !== false and !(int)substr($value, 0, 4)) $task->$key = '';
 
+        $children = $this->dao->select("*")->from(TABLE_TASK)->where('parent')->eq($taskID)->andWhere('deleted')->eq(0)->fetchAll('id');
         if($task) 
         {
             $task->files    = $this->loadModel('file')->getByObject('task', $taskID);

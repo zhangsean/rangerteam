@@ -145,7 +145,7 @@ $lang->action->label->product   = '产品|product|view|productID=%s';
 $lang->action->label->order     = '订单|order|view|orderID=%s';
 $lang->action->label->task      = '任务|task|view|taskID=%s';
 $lang->action->label->contract  = '合同|contract|view|contractID=%s';
-$lang->action->label->user      = '成员|user|view|account=%s';
+$lang->action->label->user      = '成员|user|admin|';
 $lang->action->label->announce  = '公告|announce|browse|';
 $lang->action->label->customer  = '客户|customer|view|customerID=%s';
 $lang->action->label->contact   = '联系人|contact|view|contactID=%s';

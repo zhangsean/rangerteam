@@ -790,8 +790,8 @@ class actionModel extends model
 
         if($action->objectType == 'todo')
         {
-            $todo = $this->loadModel('todo', 'oa')->getByID($action->objectID);
-            if($this->app->user->account != $todo->account && $this->app->user->account != $todo->assignedTo) $canView = false;
+            $todo = $this->loadModel('todo')->getByID($action->objectID);
+            if(empty($todo) or ($this->app->user->account != $todo->account && $this->app->user->account != $todo->assignedTo)) $canView = false;
         }
 
         $objectType = $action->objectType;

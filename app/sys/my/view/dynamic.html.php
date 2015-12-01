@@ -26,6 +26,8 @@
   </thead>
   <tbody>
   <?php foreach($actions as $action):?>
+  <?php if($action->appName == 'sys') $action->appName = 'superadmin';?>
+  <?php if($action->objectType == 'todo') $action->appName = 'dashboard';?>
   <tr class='text-center'>
     <td><?php echo $action->date;?></td>
     <td><?php echo zget($users, $action->actor, $action->actor);?></td>
