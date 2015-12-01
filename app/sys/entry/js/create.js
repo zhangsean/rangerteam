@@ -46,7 +46,6 @@ $(document).ready(function()
             $('#login').attr('placeholder', v.loginPlaceholder);
             $('#login').parents('tr').find('th').text(v.loginUrl);
             $('#adminAccount').parents('tr').hide();
-            $('#key').parents('tr').show();
             $('#logout').parents('tr').show();
             $('#block').parents('tr').show();
             /* Remove default data and show. */
