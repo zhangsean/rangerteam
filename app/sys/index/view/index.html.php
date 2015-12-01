@@ -52,15 +52,13 @@ $isSuperAdmin = $this->app->user->admin == 'super';
   </div>
   <div id='home' class='fullscreen fullscreen-active'>
     <nav class='navbar navbar-inverse navbar-fixed-top'>
-      <div class='navbar-header'>
-        <a class='navbar-brand' href='<?php $this->createLink('index', 'index') ?>'><?php echo $company . $lang->ranzhi ?></a>
-      </div>
       <div class='collapse navbar-collapse'>
         <ul class='nav navbar-nav'>
           <li><?php echo html::a($this->createLink('user', 'profile'), "<i class='icon-user'></i> " . $app->user->realname, "data-toggle='modal' data-id='profile'");?></li>
         </ul>
         <?php echo commonModel::createDashboardMenu();?>
         <ul class='nav navbar-nav navbar-right'>
+          <li><a class='navbar-brand' href='<?php $this->createLink('index', 'index') ?>'><?php echo $this->config->company->name . $lang->ranzhi ?></a></li>
           <li><a href='javascript:;' class='refresh-all-panel'><i class='icon-repeat'></i></a></li>
           <li><a data-toggle='modal' href='<?php echo $this->createLink("block", "admin"); ?>' title='<?php echo $lang->index->addBlock; ?>'><i class='icon-plus'></i></a></li>
         </ul>

@@ -13,9 +13,6 @@
 <?php include '../../common/view/header.lite.html.php';?>
 <style>body {padding-top: 58px}</style>
 <nav class='navbar navbar-inverse navbar-fixed-top'>
-  <div class='navbar-header'>
-    <a class='navbar-brand' href='<?php $this->createLink('index', 'index') ?>'><?php echo $this->config->company->name . $lang->ranzhi ?></a>
-  </div>
   <div class='collapse navbar-collapse'>
     <ul class='nav navbar-nav'>
       <li><?php echo html::a($this->createLink('user', 'profile'), "<i class='icon-user'></i> " . $app->user->realname, "data-toggle='modal' data-id='profile'");?></li>
