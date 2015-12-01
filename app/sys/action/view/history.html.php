@@ -64,7 +64,7 @@
         <?php 
         if($action->comment) 
         {
-            echo "<div class='comment$action->id'>";
+            echo "<div class='comment$action->id mgb-10'>";
             echo strip_tags($action->comment) == $action->comment ? nl2br($action->comment) : $action->comment; 
             echo "</div>";
         }
@@ -77,13 +77,13 @@
           </form>
         </div>
         <?php endif;?>
-        <?php if(!empty($action->comment)) echo "</div>";?>
         <?php if(!empty($action->files)):?>
-        <fieldset>
-          <legend><?php echo $lang->files;?></legend>
-            <?php foreach($action->files as $file) echo '<p>' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</p>';?>
-        </fieldset>      
+        <p class='files'>
+          <span><strong><?php echo $lang->action->record->uploadFile;?></strong></span>
+          <?php foreach($action->files as $file) echo "<span style='margin-right:5px'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</span>';?>
+        </ul>
         <?php endif;?>
+        <?php if(!empty($action->comment)) echo "</div>";?>
         <?php endif;?>
       </li>
       <?php endforeach;?>
