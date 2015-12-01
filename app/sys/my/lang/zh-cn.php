@@ -12,14 +12,6 @@
 $lang->my = new stdclass();
 $lang->my->common = '我的地盘';
 
-$lang->my->todo = new stdclass();
-$lang->my->todo->menu = new stdclass();
-$lang->my->todo->menu->today           = '今天|my|todo|type=today';
-$lang->my->todo->menu->assignedToOther = '指派他人|my|todo|type=assignedToOther';
-$lang->my->todo->menu->assignedToMe    = '指派给我|my|todo|type=assignedToMe';
-$lang->my->todo->menu->future          = '待定|my|todo|type=future';
-$lang->my->todo->menu->all             = '所有|my|todo|type=all';
-
 $lang->my->review = new stdclass();
 $lang->my->review->menu = new stdclass();
 $lang->my->review->menu->attend = '考勤|my|review|type=attend';

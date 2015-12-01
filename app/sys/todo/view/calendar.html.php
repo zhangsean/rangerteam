@@ -10,7 +10,7 @@
  * @link        http://www.zentao.net
  */
 ?>
-<?php include '../../common/view/header.html.php';?>
+<?php include '../../../sys/my/view/header.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/calendar.html.php';?>
 <?php js::set('account', $this->app->user->account);?>
@@ -33,7 +33,7 @@
         <?php if($type == 'custom'):?>
         <?php $index++?>
         <div class='board-item text-nowrap text-ellipsis' title='<?php echo $todo->name;?>' data-id='<?php echo $todo->id?>' data-index='<?php echo $index?>' data-name='<?php echo $todo->name?>' data-type='<?php echo $todo->type?>' data-begin='<?php echo $todo->begin?>' data-end='<?php echo $todo->end?>' data-action='edit' data-toggle="droppable" data-target=".day">
-          <?php echo html::a("javascript:void(0)", $todo->name, "onclick=\"viewTodo(this)\" data-remote='" . $this->createLink('oa.todo', 'view', "id=$todo->id") . "' data-title='{$todo->name}' data-width='70%'")?>
+          <?php echo html::a("javascript:void(0)", $todo->name, "onclick=\"viewTodo(this)\" data-remote='" . $this->createLink('todo', 'view', "id=$todo->id") . "' data-title='{$todo->name}' data-width='70%'")?>
         </div>
         <?php endif;?>
         <?php endforeach;?>
@@ -54,7 +54,7 @@ function updateCalendar()
 {
     var calendar = $('.calendar').data('zui.calendar');
     var date = calendar.date.format('yyyyMMdd');
-    $.get(createLink('oa.todo', 'calendar', 'date=' + date, 'json'), function(response)
+    $.get(createLink('todo', 'calendar', 'date=' + date, 'json'), function(response)
     {
         if(response.status == 'success')
         {
@@ -74,7 +74,7 @@ function updateCalendar()
 /* Finish a todo. */
 function finishTodo(id)
 {
-    $.get(createLink('oa.todo', 'finish', 'todoId=' + id, 'json'),function(response)
+    $.get(createLink('todo', 'finish', 'todoId=' + id, 'json'),function(response)
     {
         if(response.result == 'success')
         {
@@ -191,12 +191,12 @@ v.settings.beforeChange = function(event)
         if(data.date == '1970-01-01')
         {
             /* Delete. */
-            var link = createLink('oa.todo', 'delete', 'id=' + event.event.id);
+            var link = createLink('todo', 'delete', 'id=' + event.event.id);
         }
         else
         {
             /* Edit. */
-            var link = createLink('oa.todo', 'edit', 'id=' + event.event.id);
+            var link = createLink('todo', 'edit', 'id=' + event.event.id);
         }
 
         $.post(link, data, function(response)

@@ -367,12 +367,13 @@ class commonModel extends model
         $string = "<ul class='nav navbar-nav'>\n";
 
         $currentMethod = $app->getMethodName();
+        $currentModule = $app->getModuleName();
         foreach($lang->menu->dashboard as $moduleName => $moduleMenu)
         {
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
             $class = '';
-            if($currentMethod == $method) $class = "class='active'";
+            if($currentMethod == $method or ($currentModule == 'todo' and $module == 'todo')) $class = "class='active'";
             $hasPriv = commonModel::hasPriv($module, $method);
             if($module == 'my' and $method == 'order')    $hasPriv = commonModel::hasPriv('order', 'browse');
             if($module == 'my' and $method == 'contract') $hasPriv = commonModel::hasPriv('contract', 'browse');

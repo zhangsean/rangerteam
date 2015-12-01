@@ -1,7 +1,7 @@
 /* Finish a todo. */
 function finishTodo(id)
 {
-    $.get(createLink('oa.todo', 'finish', 'todoId=' + id, 'json'),function(response)
+    $.get(createLink('todo', 'finish', 'todoId=' + id, 'json'),function(response)
     {
         if(response.result == 'success')
         {

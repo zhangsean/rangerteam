@@ -42,10 +42,11 @@ class todo extends control
         $todoList['order']    = array();
         $todoList['customer'] = array();
 
-        $this->view->title    = $this->lang->todo->calendar;
-        $this->view->date     = $date;
-        $this->view->data     = $this->todo->getCalendarData($date);
-        $this->view->todoList = $todoList;
+        $this->view->title      = $this->lang->todo->calendar;
+        $this->view->date       = $date;
+        $this->view->data       = $this->todo->getCalendarData($date);
+        $this->view->todoList   = $todoList;
+        $this->view->moduleMenu = commonModel::createModuleMenu($this->moduleName);
         $this->display();
     }
 
@@ -78,12 +79,13 @@ class todo extends control
             $todos = $this->todo->getList($mode, $this->app->user->account, 'all', 'unclosed', $orderBy, $pager);
         }
 
-        $this->view->title   = $this->lang->todo->browse;
-        $this->view->todos   = $todos;
-        $this->view->users   = $this->loadModel('user')->getPairs();
-        $this->view->mode    = $mode;
-        $this->view->orderBy = $orderBy;
-        $this->view->pager   = $pager;
+        $this->view->title      = $this->lang->todo->browse;
+        $this->view->todos      = $todos;
+        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->mode       = $mode;
+        $this->view->orderBy    = $orderBy;
+        $this->view->pager      = $pager;
+        $this->view->moduleMenu = commonModel::createModuleMenu($this->moduleName);
         $this->display();
     }
 
@@ -210,9 +212,9 @@ class todo extends control
         if(!$todo) $this->locate($this->createLink('todo', 'calendar'));
 
         /* Save session for back to this app. */
-        if($todo->type == 'task')     $this->session->set('taskList', $this->createLink('todo', 'calendar', "date=" . str_replace('-', '', $todo->date)));
-        if($todo->type == 'order')    $this->session->set('orderList', "javascript:$.openEntry(\"oa\")");
-        if($todo->type == 'customer') $this->session->set('customerList', "javascript:$.openEntry(\"oa\")");
+        if($todo->type == 'task')     $this->session->set('taskList', "javascript:$.openEntry(\"dashboard\")");
+        if($todo->type == 'order')    $this->session->set('orderList', "javascript:$.openEntry(\"dashboard\")");
+        if($todo->type == 'customer') $this->session->set('customerList', "javascript:$.openEntry(\"dashboard\")");
 
         $this->view->title   = "{$this->lang->todo->common} #$todo->id $todo->name";
         $this->view->todo    = $todo;

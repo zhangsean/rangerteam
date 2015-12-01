@@ -10,7 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 ?>
-<?php include '../../common/view/header.lite.html.php';?>
+<?php include $app->getModuleRoot() . '../sys/common/view/header.lite.html.php';?>
 <style>body {padding-top: 58px}</style>
 <nav class='navbar navbar-inverse navbar-fixed-top'>
   <div class='collapse navbar-collapse'>

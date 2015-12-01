@@ -14,7 +14,6 @@ $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = 'Home|dashboard|index|';
-$lang->menu->oa->todo      = 'Todo|todo|calendar|';
 $lang->menu->oa->project   = 'Project|project|index|';
 $lang->menu->oa->announce  = 'Announce|announce|index|';
 $lang->menu->oa->doc       = 'Document|doc|index|';
@@ -24,14 +23,6 @@ $lang->menu->oa->trip      = 'Trip|trip|personal|';
 $lang->menu->oa->refund    = 'Refund|refund|personal|';
 
 $lang->dashboard = new stdclass();
-
-$lang->todo = new stdclass();
-$lang->todo->menu = new stdclass();
-$lang->todo->menu->calendar        = 'Calendar|todo|calendar|';
-$lang->todo->menu->assignedToOther = 'Assigned to other|todo|browse|mode=assignedtoother';
-$lang->todo->menu->assignedToMe    = 'Assigned to me|todo|browse|mode=assignedtome';
-$lang->todo->menu->future          = 'Future|todo|browse|mode=future';
-$lang->todo->menu->all             = 'All|todo|browse|mode=all';
 
 $lang->project   = new stdclass();
 $lang->project->menu = new stdclass();

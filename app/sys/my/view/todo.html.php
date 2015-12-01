@@ -10,7 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 ?>
-<?php include $app->getModuleRoot() . 'my/view/header.html.php';?>
+<?php include $app->getModuleRoot() . '../sys/my/view/header.html.php';?>
 <?php js::set('type', $type)?>
 <div class='row page-content'>
   <div class='panel'>

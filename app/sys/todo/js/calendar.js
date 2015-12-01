@@ -28,7 +28,7 @@ $(document).ready(function()
                 'begin': from.data('begin'),
                 'end': from.data('end')
                 }
-                var url = createLink('oa.todo', 'edit', 'id=' + from.data('id'), 'json');
+                var url = createLink('todo', 'edit', 'id=' + from.data('id'), 'json');
             }
             else if(from.data('action') != 'edit' && to.data('date') != '1970-01-01')
             {
@@ -40,12 +40,12 @@ $(document).ready(function()
                 'begin': '',
                 'end':'' 
                 }
-                var url = createLink('oa.todo', 'create', '', 'json');
+                var url = createLink('todo', 'create', '', 'json');
             }
             else if(from.data('action') == 'edit' && to.data('date') == '1970-01-01')
             {
                 var data = {}
-                var url = createLink('oa.todo', 'delete', 'id=' + from.data('id'), 'json');
+                var url = createLink('todo', 'delete', 'id=' + from.data('id'), 'json');
             }
             else if(from.data('action') != 'edit' && to.data('date') == '1970-01-01')
             {
@@ -131,5 +131,5 @@ $(document).ready(function()
     updateBoard('all');
 
     /* adjust focus position. */
-    $(window).scrollTop($('.current').offset().top);
+    if($('.current').offset().top >= $(window).scrollTop() + $(window).height()) $(window).scrollTop($('.current').offset().top);
 });

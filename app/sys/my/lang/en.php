@@ -12,14 +12,6 @@
 $lang->my = new stdclass();
 $lang->my->common = 'Dashbord';
 
-$lang->my->todo = new stdclass();
-$lang->my->todo->menu = new stdclass();
-$lang->my->todo->menu->today           = 'Today|my|todo|type=today';
-$lang->my->todo->menu->assignedToOther = 'Assigned To Other|my|todo|type=assignedToOther';
-$lang->my->todo->menu->assignedToMe    = 'Assigned To Me|my|todo|type=assignedToMe';
-$lang->my->todo->menu->future          = 'Future|my|todo|type=future';
-$lang->my->todo->menu->all             = 'All|my|todo|type=all';
-
 $lang->my->review = new stdclass();
 $lang->my->review->menu = new stdclass();
 $lang->my->review->menu->attend = 'Attend|my|review|type=attend';
