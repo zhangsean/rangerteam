@@ -9,11 +9,24 @@ $(document).ready(function()
     $.setReloadDeleter('.reloadDeleter');
     $.setAjaxLoader('.loadInModal', '#ajaxModal');
 
-    /* Set ping keep online. */
+    /* run code if desktop. */
     if(typeof $.ipsStart != 'undefined') 
     {
+        /* Set ping keep online. */
         setInterval('ping()', 1000 * config.pingInterval);
         ping();
+    }
+    else
+    {
+        /* bind app-btn events. */
+        $(document).on('click', '.app-btn', function(event)
+        {
+            if($(this).attr('data-id'))
+            {
+                $.openEntry($(this).attr('data-id'), $(this).data('url') || $(this).attr('href'));
+                return false;
+            }
+        });
     }
 
     /* Enable tooltip */
@@ -22,15 +35,6 @@ $(document).ready(function()
     fixTableHeader();
     condensedForm();
     setPageActions();
-
-    $(document).on('click', '.app-btn', function(event)
-    {
-        if($(this).attr('data-id'))
-        {
-            $.openEntry($(this).attr('data-id'), $(this).data('url') || $(this).attr('href'));
-            return false;
-        }
-    });
 
     /* Reload modal. */
     $(document).on('click', '.reloadModal', function(){$.reloadAjaxModal()});

@@ -148,7 +148,7 @@ var entries = [
     menu      : 'all',
     sys       : true,
     icon      : 'icon-home',
-    url       : '<?php echo $this->createLink('index')?>',
+    url       : '<?php echo $this->createLink('todo', 'calendar')?>',
     order     : 0, 
 },
 {
