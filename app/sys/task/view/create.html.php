@@ -36,7 +36,9 @@
               <td class='w-p40'>
                 <div class='input-group'>
                   <?php echo html::select('assignedTo', $members, '', "class='form-control chosen'");?>
-                  <div class='hidden' id='team'><?php echo html::a("#modalTeam", $lang->task->team, "class='form-control btn' data-toggle='modal' data-target='#modalTeam'");?></div>
+                  <?php echo html::input('teamMember', '', "class='form-control team-group hidden' readonly='readonly'");?>
+                  <span class='input-group-addon team-group hidden'></span>
+                  <?php echo html::a("#modalTeam", $lang->task->team, "class='form-control btn team-group hidden' data-toggle='modal' data-target='#modalTeam'");?>
                   <span class='input-group-addon'>
                     <label class='checkbox'>
                       <input type='checkBox' name='multiple' value='1'/>

@@ -302,7 +302,7 @@ class taskModel extends model
             }
         }
 
-        $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels,team,teamEstimate,multiple')
+        $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels,team,teamEstimate,multiple,teamMember')
             ->autoCheck()
             ->batchCheck($this->config->task->require->create, 'notempty')
             ->checkIF($task->estimate != '', 'estimate', 'float')
