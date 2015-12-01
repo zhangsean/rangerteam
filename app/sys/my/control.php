@@ -287,7 +287,8 @@ class my extends control
         $this->view->type    = $type;
         $this->view->pager   = $pager;
         $this->view->orderBy = $orderBy;
-        $this->view->actions = $this->loadModel('action')->getDynamic($this->app->user->account, $type, $orderBy, $pager);
+        $this->view->actions = $this->loadModel('action')->getDynamic('all', $type, $orderBy, $pager);
+        $this->view->users   = $this->loadModel('user')->getPairs();
         $this->display();
     }
 }

@@ -234,12 +234,12 @@ $lang->menuGroups = new stdclass();
 $lang->menu->dashboard = new stdclass();
 $lang->menu->dashboard->todo     = '待办|todo|calendar|';
 $lang->menu->dashboard->task     = '任务|my|task|';
+$lang->menu->dashboard->project  = '项目|my|project|';
 $lang->menu->dashboard->order    = '订单|my|order|';
 $lang->menu->dashboard->contract = '合同|my|contract|';
-$lang->menu->dashboard->project  = '项目|my|project|';
-$lang->menu->dashboard->dynamic  = '动态|my|dynamic|';
 $lang->menu->dashboard->review   = '审批|my|review|';
 $lang->menu->dashboard->company  = '组织|my|company|';
+$lang->menu->dashboard->dynamic  = '动态|my|dynamic|';
 
 $lang->todo = new stdclass();
 $lang->todo->menu = new stdclass();

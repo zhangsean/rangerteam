@@ -132,6 +132,7 @@ $lang->action->label->logout      = "退出登录";
 
 $lang->action->label->createdbalance = '登记余额';
 $lang->action->label->createorder    = '创建了订单';
+$lang->action->label->editorder      = '编辑了订单';
 $lang->action->label->deletereturned = '删除了回款';
 $lang->action->label->cancelcontract = '取消了合同';
 $lang->action->label->finishreturned = '完成了回款';

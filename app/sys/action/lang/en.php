@@ -132,6 +132,7 @@ $lang->action->label->logout      = "logout";
 
 $lang->action->label->createdbalance = 'create balance';
 $lang->action->label->createorder    = 'create order';
+$lang->action->label->editorder      = 'edit order';
 $lang->action->label->deletereturned = 'delete rerurned';
 $lang->action->label->cancelcontract = 'cancel contract';
 $lang->action->label->finishreturned = 'finish returned';
