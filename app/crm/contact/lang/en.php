@@ -61,3 +61,4 @@ $lang->contact->contactInfo = 'Contact Info';
 
 $lang->contact->leftAt       = 'Left at %s';
 $lang->contact->failedAvatar = 'Avatar upload failed';
+$lang->contact->emailTip     = 'Please divide emails with commas or space';

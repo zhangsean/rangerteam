@@ -61,3 +61,4 @@ $lang->contact->contactInfo = '联系方式';
 
 $lang->contact->leftAt       = '已于%s离职';
 $lang->contact->failedAvatar = '头像上传失败';
+$lang->contact->emailTip     = '多个邮箱之间用逗号或者空格隔开';

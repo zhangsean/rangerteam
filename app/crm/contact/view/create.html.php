@@ -67,7 +67,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->contact->email;?></th>
-              <td><?php echo html::input('email', '', "class='form-control'");?></td>
+              <td><?php echo html::input('email', '', "class='form-control' placeholder='{$lang->contact->email->tip}'");?></td>
             </tr>
             <tr>
               <th><?php echo $lang->contact->mobile;?></th>

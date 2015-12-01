@@ -309,7 +309,6 @@ class contactModel extends model
             ->data($contact, 'customer,dept,maker,title,join')
             ->autoCheck()
             ->batchCheck($this->config->contact->require->edit, 'notempty')
-            ->checkIF($contact->email, 'email', 'email')
             ->where('id')->eq($contactID)
             ->exec();
 

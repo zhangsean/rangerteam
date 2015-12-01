@@ -106,7 +106,8 @@
                 $itemValue = $contact->$item;
                 if($item == 'site' and empty($contact->$item)) $itemValue = 'http://';
                 if($item == 'weibo' and empty($contact->$item)) $itemValue = 'http://weibo.com/';
-                echo html::input($item, $itemValue, "class='form-control'");
+                $placeholder = $item == 'email' ? "placeholder='{$lang->contact->emailTip}'" : '';
+                echo html::input($item, $itemValue, "class='form-control' $placeholder");
                 ?>
               </td>
             </tr>
