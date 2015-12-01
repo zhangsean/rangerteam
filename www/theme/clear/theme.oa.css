@@ -1,5 +1,5 @@
 /*!
- * ZUI - v1.3.2 - 2015-11-23
+ * ZUI - v1.3.2 - 2015-12-01
  * http://zui.sexy
  * GitHub: https://github.com/easysoft/zui.git 
  * Copyright (c) 2015 cnezsoft.com; Licensed MIT
@@ -785,7 +785,7 @@ a.list-group-item:focus {
 }
 .panel > .panel-heading {
   color: #333;
-  background-color: #ddd;
+  background-color: #f1f1f1;
   border-color: #ddd;
 }
 .panel > .panel-heading + .panel-collapse .panel-body {
@@ -811,6 +811,14 @@ a.list-group-item:focus {
 }
 .panel-primary > .panel-footer + .panel-collapse .panel-body {
   border-bottom-color: #d9534f;
+}
+.panel-success > .panel-body,
+.panel-warning > .panel-body,
+.panel-primary > .panel-body,
+.panel-info > .panel-body,
+.panel-danger > .panel-body {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 .table-hover > tbody > tr:hover > td,
 .table-hover > tbody > tr:hover > th {
