@@ -58,7 +58,7 @@ $isSuperAdmin = $this->app->user->admin == 'super';
         </ul>
         <?php echo commonModel::createDashboardMenu();?>
         <ul class='nav navbar-nav navbar-right'>
-          <li><a class='navbar-brand' href='<?php $this->createLink('index', 'index') ?>'><?php echo $this->config->company->name . $lang->ranzhi ?></a></li>
+          <li><a class='navbar-brand' href='<?php $this->createLink('index', 'index') ?>'><?php echo isset($this->config->company->name) ? $this->config->company->name : '' . $lang->ranzhi ?></a></li>
           <li><a href='javascript:;' class='refresh-all-panel'><i class='icon-repeat'></i></a></li>
           <li><a data-toggle='modal' href='<?php echo $this->createLink("block", "admin"); ?>' title='<?php echo $lang->index->addBlock; ?>'><i class='icon-plus'></i></a></li>
         </ul>
