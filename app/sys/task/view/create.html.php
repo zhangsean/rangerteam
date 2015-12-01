@@ -86,7 +86,7 @@
           <table class='table-form'>
             <?php for($i = 0; $i < 6; $i++):?>
             <tr>
-              <td class='w-p70'><?php echo html::select("team[]", $users, '', "class='form-control chosen'")?></td>
+              <td class='w-p70'><?php echo html::select("team[]", $members, '', "class='form-control chosen'")?></td>
               <td class='w-p30'>
                 <div class='input-group'>
                   <?php echo html::input("teamEstimate[]", '', "class='form-control text-center' placeholder='{$lang->task->estimateAB}'")?>
