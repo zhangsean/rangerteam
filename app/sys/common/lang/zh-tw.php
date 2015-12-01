@@ -232,14 +232,22 @@ $lang->article->menu->create = array('link' => '添加文章|article|create|type
 $lang->menuGroups = new stdclass();
 
 $lang->menu->dashboard = new stdclass();
-$lang->menu->dashboard->todo     = '待辦|my|todo|';
+$lang->menu->dashboard->todo     = '待辦|todo|calendar|';
 $lang->menu->dashboard->task     = '任務|my|task|';
+$lang->menu->dashboard->project  = '項目|my|project|';
 $lang->menu->dashboard->order    = '訂單|my|order|';
 $lang->menu->dashboard->contract = '合同|my|contract|';
-$lang->menu->dashboard->project  = '項目|my|project|';
-$lang->menu->dashboard->dynamic  = '動態|my|dynamic|';
 $lang->menu->dashboard->review   = '審批|my|review|';
 $lang->menu->dashboard->company  = '組織|my|company|';
+$lang->menu->dashboard->dynamic  = '動態|my|dynamic|';
+
+$lang->todo = new stdclass();
+$lang->todo->menu = new stdclass();
+$lang->todo->menu->calendar        = '日曆|todo|calendar|';
+$lang->todo->menu->assignedToOther = '指派他人|todo|browse|mode=assignedtoother';
+$lang->todo->menu->assignedToMe    = '指派給我|todo|browse|mode=assignedtome';
+$lang->todo->menu->future          = '待定|todo|browse|mode=future';
+$lang->todo->menu->all             = '所有|todo|browse|mode=all';
  
 /* Menu of mail module. */
 $lang->mail = new stdclass();

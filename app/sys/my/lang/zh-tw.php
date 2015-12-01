@@ -10,14 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 $lang->my = new stdclass();
-
-$lang->my->todo = new stdclass();
-$lang->my->todo->menu = new stdclass();
-$lang->my->todo->menu->today           = '今天|my|todo|type=today';
-$lang->my->todo->menu->assignedToOther = '指派他人|my|todo|type=assignedToOther';
-$lang->my->todo->menu->assignedToMe    = '指派給我|my|todo|type=assignedToMe';
-$lang->my->todo->menu->future          = '待定|my|todo|type=future';
-$lang->my->todo->menu->all             = '所有|my|todo|type=all';
+$lang->my->common = '我的地盤';
 
 $lang->my->review = new stdclass();
 $lang->my->review->menu = new stdclass();
@@ -26,6 +19,8 @@ $lang->my->review->menu->leave  = '請假|my|review|type=leave';
 $lang->my->review->menu->refund = '報銷|my|review|type=refund';
 
 $lang->my->order = new stdclass();
+$lang->my->order->common = '任務';
+
 $lang->my->order->menu = new stdclass();
 $lang->my->order->menu->past       = '亟需聯繫|my|order|type=past';
 $lang->my->order->menu->today      = '今天聯繫|my|order|type=today';
@@ -36,6 +31,8 @@ $lang->my->order->menu->signedBy   = '由我簽約|my|order|type=signedBy';
 $lang->my->order->menu->all        = '所有|my|order|type=all';
 
 $lang->my->contract = new stdclass();
+$lang->my->contract->common = '合同';
+
 $lang->my->contract->menu = new stdclass();
 $lang->my->contract->menu->unfinished  = '未完成|my|contract|type=unfinished';
 $lang->my->contract->menu->finished    = '已完成|my|contract|type=finished';

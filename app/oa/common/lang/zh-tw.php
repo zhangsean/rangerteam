@@ -14,7 +14,6 @@ $lang->app->name = 'OA';
 
 $lang->menu->oa = new stdclass();
 $lang->menu->oa->dashboard = '首頁|dashboard|index|';
-$lang->menu->oa->todo      = '待辦|todo|calendar|';
 $lang->menu->oa->project   = '項目|project|index|';
 $lang->menu->oa->announce  = '公告|announce|browse|';
 $lang->menu->oa->doc       = '文檔|doc|browse|';
@@ -24,14 +23,6 @@ $lang->menu->oa->trip      = '出差|trip|personal|';
 $lang->menu->oa->refund    = '報銷|refund|personal|';
 
 $lang->dashboard = new stdclass();
-
-$lang->todo = new stdclass();
-$lang->todo->menu = new stdclass();
-$lang->todo->menu->calendar        = '日曆|todo|calendar|';
-$lang->todo->menu->assignedToOther = '指派他人|todo|browse|mode=assignedtoother';
-$lang->todo->menu->assignedToMe    = '指派給我|todo|browse|mode=assignedtome';
-$lang->todo->menu->future          = '待定|todo|browse|mode=future';
-$lang->todo->menu->all             = '所有|todo|browse|mode=all';
 
 $lang->project   = new stdclass();
 $lang->project->menu = new stdclass();
