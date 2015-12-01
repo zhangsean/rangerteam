@@ -578,12 +578,22 @@ class actionModel extends model
      * update a action read status to read. 
      * 
      * @param  int    $actionID 
+     * @param  string $type 
      * @access public
      * @return bool
      */
-    public function read($actionID, $account = '')
+    public function read($actionID, $type = 'action')
     {
-        if($account == '') $account = $this->app->user->account;
+        /* Save read status to session if type isn't action. */
+        if($type != 'action')
+        {
+            if(!isset($this->app->user->readNotices)) $this->app->user->readNotices = array();
+            $this->app->user->readNotices[$actionID] = $actionID;
+            return true;
+        }
+
+        /* Update action data. */
+        $account = $this->app->user->account;
         $reader = $this->dao->select('reader')->from(TABLE_ACTION)->where('id')->eq($actionID)->fetch('reader');
         $readers = explode(',', trim($reader, ','));
         foreach($readers as $key => $value) if($value == $account or $value == '') unset($readers[$key]);
@@ -654,15 +664,15 @@ class actionModel extends model
         foreach($actions as $actionID => $action) $action->history = isset($histories[$actionID]) ? $histories[$actionID] : array();
         if(!empty($actions)) $actions = $this->transformActions($actions);
 
-        /* create action notices. */
+        /* Create action notices. */
         $notices = array();
         foreach($actions as $action)
         {
             $notice = new stdclass();
-            $notice->id = $action->id;
+            $notice->id    = $action->id;
             $notice->title = sprintf($this->lang->action->noticeTitle, $action->objectLabel, $action->objectLink, $action->appName, $action->objectName);
             $notice->type  = 'success';
-            $notice->read = helper::createLink('action', 'read', "actionID={$action->id}");
+            $notice->read  = helper::createLink('action', 'read', "actionID={$notice->id}");
 
             /* process user and status. */
             if($action->objectType == 'leave')  $this->loadModel('leave', 'oa');
@@ -682,7 +692,7 @@ class actionModel extends model
             $notices[$action->id] = $notice;
         }
 
-        /* create todo notices. */
+        /* Create todo notices. */
         $date  = helper::today();
         $now   = helper::now();
         $link  = helper::createLink('oa.todo', 'calendar');
@@ -715,6 +725,25 @@ class actionModel extends model
 
                 $notices[$notice->id] = $notice;
             }
+        }
+
+        /* Create past order notice. */
+        $orders = $this->loadModel('order', 'crm')->getList('past');
+        foreach($orders as $order)
+        {
+            /* Skip read and showed notice. */
+            if(isset($this->app->user->readNotices["order{$order->id}"])) continue;
+            if(strpos(",$skipNotice,", ",order{$order->id},") !== false) continue;
+
+            $link = helper::createLink('crm.order', 'view', "orderID=$order->id");
+            $notice = new stdclass();
+            $notice->id      = 'order' . $order->id;
+            $notice->title   = sprintf($this->lang->action->noticeTitle, $this->lang->order->record . $this->lang->order->common, $link, 'crm', $order->title);
+            $notice->content = ''; 
+            $notice->type    = 'success';
+            $notice->read    = helper::createLink('action', 'read', "actionID={$notice->id}&type=order");
+
+            $notices[$notice->id] = $notice;
         }
 
         return $notices;

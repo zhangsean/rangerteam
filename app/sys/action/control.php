@@ -218,15 +218,16 @@ class action extends control
     }
 
     /**
-     * read 
+     * read a notice.
      * 
      * @param  int    $actionID 
+     * @param  string $type 
      * @access public
      * @return void
      */
-    public function read($actionID)
+    public function read($actionID, $type = 'action')
     {
-        $this->action->read($actionID, $this->app->user->account);
+        $this->action->read($actionID, $type);
         die('success');
     }
 }
