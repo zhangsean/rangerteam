@@ -336,7 +336,9 @@ class actionModel extends model
         foreach($actions as $key => $action) if(strpos('attend,refund,leave,trip,action', $action->objectType) !== false) unset($actions[$key]);
 
         if(!$actions) return array();
-        return $this->transformActions($actions);
+        $actions = $this->transformActions($actions);
+        foreach($actions as $key => $action) if(!$this->checkPriv($action)) unset($actions[$key]);
+        return $actions;
     }
 
     /**
@@ -799,8 +801,9 @@ class actionModel extends model
 
         if($action->customer)
         {
-            $customers = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
-            if(in_array($action->customer, $customers)) $canView = false;
+            static $customers = array();
+            if(empty($customers)) $customers = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+            if(!in_array($action->customer, $customers)) $canView = false;
         }
 
         if($action->objectType == 'project' && !($this->loadModel('project', 'oa')->checkPriv($action->objectID))) $canView = false;

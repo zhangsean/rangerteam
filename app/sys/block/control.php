@@ -268,10 +268,7 @@ class block extends control
      */
     public function dynamic()
     {
-        $actions = $this->loadModel('action')->getDynamic();
-        foreach($actions as $key => $action) if(!$this->action->checkPriv($action)) unset($actions[$key]);
-
-        $this->view->actions = $actions;
+        $this->view->actions = $this->loadModel('action')->getDynamic();
         $this->view->users   = $this->loadModel('user')->getPairs();
         $this->display();
     }

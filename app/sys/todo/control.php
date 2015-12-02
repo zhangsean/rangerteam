@@ -241,7 +241,7 @@ class todo extends control
         if($date == '00000000') $date = '';
 
         $this->dao->delete()->from(TABLE_TODO)->where('id')->eq($todoID)->exec();
-        $this->loadModel('action')->create('todo', $todoID, 'erased');
+        $this->loadModel('action')->create('todo', $todoID, 'deleted');
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
     }
