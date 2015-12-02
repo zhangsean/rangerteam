@@ -33,9 +33,16 @@ class upgrade extends control
         if(version_compare($this->config->installedVersion, '1.3.beta', '>'))
         {
             if(version_compare($this->config->installedVersion, '2.0', '<')) $this->locate(inlink('upgradeLicense'));
+            if(!$this->upgrade->removeOldTodoFile() and version_compare($this->config->installedVersion, '3.0', '<'))
+            {
+                $this->view->type     = 'todoFolder';
+                $this->view->todoPath = $this->app->getBasePath() . "app/oa/todo/";
+                die($this->display());
+            }
             $this->locate(inlink('backup'));
         }
 
+        $this->view->type = 'appFolder';
         $this->display();
     }
 

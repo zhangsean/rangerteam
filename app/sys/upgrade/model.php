@@ -985,4 +985,17 @@ class upgradeModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Remove old todo module files. 
+     * 
+     * @access public
+     * @return bool
+     */
+    public function removeOldTodoFile()
+    {
+        $dir = $this->app->getBasePath() . "app/oa/todo/";
+        if(!file_exists($dir)) return true;
+        return $this->app->loadClass('zfile')->removeDir($dir);
+    }
 }
