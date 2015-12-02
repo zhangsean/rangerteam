@@ -696,7 +696,7 @@ class actionModel extends model
         $date  = helper::today();
         $now   = helper::now();
         $link  = helper::createLink('oa.todo', 'calendar');
-        $todos = $this->loadModel('todo', 'oa')->getList('self', $this->app->user->account, $date, 'undone');
+        $todos = $this->loadModel('todo', 'oa')->getList('self', $account, $date, 'undone');
 
         $interval  = $this->config->pingInterval;
         $begin[1]  = date('Hi', strtotime($now));
@@ -731,7 +731,8 @@ class actionModel extends model
         $orders = $this->loadModel('order', 'crm')->getList('past');
         foreach($orders as $order)
         {
-            /* Skip read and showed notice. */
+            /* Skip not assigned to me, read and showed notice. */
+            if($order->assignedTo != $account) continue;
             if(isset($this->app->user->readNotices["order{$order->id}"])) continue;
             if(strpos(",$skipNotice,", ",order{$order->id},") !== false) continue;
 
