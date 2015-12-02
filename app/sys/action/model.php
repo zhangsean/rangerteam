@@ -806,6 +806,20 @@ class actionModel extends model
             if(!in_array($action->customer, $customers)) $canView = false;
         }
 
+        if($action->contact)
+        {
+            static $contacts = array();
+            if(empty($contacts)) $contacts = $this->loadModel('contact', 'crm')->getContactsSawByMe();
+            if(!in_array($action->contact, $contacts)) $canView = false;
+        }
+
+        if($action->objectType == 'order')
+        {
+            static $orders = array();
+            if(empty($orders)) $orders = $this->loadModel('order', 'crm')->getOrdersSawByMe();
+            if(!in_array($action->objectID, $orders)) $canView = false;
+        }
+
         if($action->objectType == 'project' && !($this->loadModel('project', 'oa')->checkPriv($action->objectID))) $canView = false;
 
         if($action->objectType == 'task')
@@ -818,7 +832,7 @@ class actionModel extends model
         {
             $trade = $this->loadModel('trade', 'cash')->getByID($action->objectID);
             $rights = $this->app->user->rights;
-            if($this->app->user->admin != 'super' and $trade->type == 'out' and (!isset($rights['tradebrowse']['out']) or !$this->loadModel('tree')->hasRight($trade->category))) $canView = false;
+            if(empty($trade) or ($this->app->user->admin != 'super' and $trade->type == 'out' and (!isset($rights['tradebrowse']['out']) or !$this->loadModel('tree')->hasRight($trade->category)))) $canView = false;
         }
 
         if($action->objectType == 'todo')
