@@ -48,6 +48,8 @@ $clientTheme  = $this->app->getClientTheme();
   {
       css::import($themeRoot . 'default/all.css');
 
+      if($this->app->getModuleName() === 'index' && $this->app->getMethodName() === 'index') css::import($themeRoot . 'default/ips.css');
+
       if(strpos($clientTheme, 'default') === false) css::import($clientTheme . 'style.css', $config->version);
 
       js::import($jsRoot     . 'all.js');
