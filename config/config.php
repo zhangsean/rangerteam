@@ -17,7 +17,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* Basic settings. */
 $config = new config();
-$config->version      = '2.7';             // The version of ranzhi. Don't change it.
+$config->version      = '3.0';             // The version of ranzhi. Don't change it.
 $config->debug        = true;              // Turn debug on or off.
 $config->charset      = 'UTF-8';           // The charset of ranzhi.
 $config->cookieLife   = time() + 2592000;  // The cookie life time.
