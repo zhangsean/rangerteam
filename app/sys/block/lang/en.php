@@ -36,7 +36,7 @@ $lang->block->dynamicInfo = "%s, %s <em>%s</em> %s <a href='%s'>%s</a>。";
 
 $lang->block->default['oa']['1']['title'] = 'Calendar';
 $lang->block->default['oa']['1']['block'] = 'attend';
-$lang->block->default['oa']['1']['grid']  = 12;
+$lang->block->default['oa']['1']['grid']  = 6;
 
 $lang->block->default['oa']['2']['title'] = 'System Announcement';
 $lang->block->default['oa']['2']['block'] = 'announce';
@@ -129,18 +129,22 @@ $lang->block->default['team']['3']['params']['type'] = 'stick';
 
 $lang->block->default['sys']['1'] = $lang->block->default['oa']['1'];
 $lang->block->default['sys']['1']['source'] = 'oa';
-$lang->block->default['sys']['2'] = $lang->block->default['oa']['2'];
-$lang->block->default['sys']['2']['source'] = 'oa';
-$lang->block->default['sys']['3'] = $lang->block->default['crm']['2'];
-$lang->block->default['sys']['3']['source'] = 'crm';
-$lang->block->default['sys']['4'] = $lang->block->default['crm']['1'];
+$lang->block->default['sys']['2']['title']  = 'Latest Dynamic';
+$lang->block->default['sys']['2']['block']  = 'dynamic';
+$lang->block->default['sys']['2']['grid']   = 6;
+$lang->block->default['sys']['2']['source'] = '';
+$lang->block->default['sys']['3'] = $lang->block->default['oa']['2'];
+$lang->block->default['sys']['3']['source'] = 'oa';
+$lang->block->default['sys']['4'] = $lang->block->default['crm']['2'];
 $lang->block->default['sys']['4']['source'] = 'crm';
-$lang->block->default['sys']['5'] = $lang->block->default['cash']['1'];
-$lang->block->default['sys']['5']['source'] = 'cash';
-$lang->block->default['sys']['6'] = $lang->block->default['team']['1'];
-$lang->block->default['sys']['6']['source'] = 'team';
-$lang->block->default['sys']['7'] = $lang->block->default['team']['2'];
+$lang->block->default['sys']['5'] = $lang->block->default['crm']['1'];
+$lang->block->default['sys']['5']['source'] = 'crm';
+$lang->block->default['sys']['6'] = $lang->block->default['cash']['1'];
+$lang->block->default['sys']['6']['source'] = 'cash';
+$lang->block->default['sys']['7'] = $lang->block->default['team']['1'];
 $lang->block->default['sys']['7']['source'] = 'team';
+$lang->block->default['sys']['8'] = $lang->block->default['team']['2'];
+$lang->block->default['sys']['8']['source'] = 'team';
 
 $lang->block->moreLinkList = new stdclass();
 $lang->block->moreLinkList->order['assinedTo'] = 'Assigned To Me|sys|my|order|type=assinedTo';
