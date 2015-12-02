@@ -52,16 +52,17 @@ include '../../common/view/header.html.php';
         <td>
           <?php
           echo html::a($this->createLink('group', 'manageAppPriv', "type=byApp&appCode=$entry->code"), $lang->entry->priv);
-          echo html::a($this->createLink('entry', 'edit', "code=$entry->code"), $lang->edit);
           echo html::a($this->createLink('entry', 'style', "code=$entry->code"), $lang->entry->style);
           if(!$entry->buildin)
           {
               echo html::a($this->createLink('entry', 'integration', "code=$entry->code"), $lang->entry->integration);
+              echo html::a($this->createLink('entry', 'edit', "code=$entry->code"), $lang->edit);
               echo html::a($this->createLink('entry', 'delete', "code=$entry->code"), $lang->delete, 'class="entry-deleter"');
           }
           else
           {
               echo html::a('javascript:;', $lang->entry->integration, "disabled='disabled'");
+              echo html::a($this->createLink('entry', 'edit', "code=$entry->code"), $lang->edit);
               echo html::a('javascript:;', $lang->delete, "disabled='disabled'");
           }
           if($entry->zentao) echo html::a($this->createLink('entry', 'zentaoAdmin', "id={$entry->id}"), $lang->entry->bindUser);
