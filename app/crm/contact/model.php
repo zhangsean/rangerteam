@@ -209,7 +209,7 @@ class contactModel extends model
                 ->remove('newCustomer,type,size,status,level,name,files')
                 ->get();
 
-            $contact->email = trim($contact->email);
+            $contact->email = str_replace(array(' ', '，'), ',', trim($contact->email));
 
             if($this->post->newCustomer)
             {
@@ -303,7 +303,7 @@ class contactModel extends model
 
         if($contact->site and strpos($contact->site, '://') === false )  $contact->site  = 'http://' . $contact->site;
         if($contact->weibo and strpos($contact->weibo, 'http://weibo.com/') === false ) $contact->weibo = 'http://weibo.com/' . $contact->weibo;
-        $contact->email = trim($contact->email);
+        $contact->email = str_replace(array(' ', '，'), ',', trim($contact->email));
 
         $this->dao->update(TABLE_CONTACT)
             ->data($contact, 'customer,dept,maker,title,join')

@@ -177,7 +177,7 @@ class customerModel extends model
             $contact->realname    = $customer->contact;
             $contact->customer    = '';
             $contact->phone       = $customer->phone;
-            $contact->email       = $customer->email;
+            $contact->email       = str_replace(array(' ', '，'), ',', $customer->email);
             $contact->qq          = $customer->qq;
             $contact->createdBy   = $this->app->user->account;
             $contact->createdDate = $now;

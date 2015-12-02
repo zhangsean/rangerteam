@@ -95,15 +95,8 @@ class html
     static public function mailto($mail = '', $title = '')
     {
         $html   = '';
-        if(strpos($mail, ',') !== false)
-        {
-            $mails  = explode(',', $mail);
-            $titles = explode(',', $title);
-        }
-
-        $mails  = explode(' ', $mail);
-        $titles = explode(' ', $title);
-
+        $mails  = explode(',', $mail);
+        $titles = explode(',', $title);
         foreach($mails as $key => $m)
         {
             if(empty($m)) continue;
