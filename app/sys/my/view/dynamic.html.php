@@ -34,7 +34,7 @@
     <td><?php echo $action->actionLabel;?></td>
     <td><?php echo $lang->action->objectTypes[$action->objectType];?></td>
     <td><?php echo $action->objectID;?></td>
-    <td class='text-left'><?php echo html::a("javascript:$.openEntry(\"" . $action->appName . "\",\"" . $action->objectLink . "\")", $action->objectName);?></td>
+    <td class='text-left'><?php if($action->objectName) echo html::a("javascript:$.openEntry(\"" . $action->appName . "\",\"" . $action->objectLink . "\")", $action->objectName);?></td>
   </tr>
   <?php endforeach;?>
   </tbody>
