@@ -136,7 +136,9 @@ class commonModel extends model
 
         $rights = $app->user->rights;
         /* Check app priv. */
-        if(!commonModel::hasAppPriv()) return false;
+        $appName = '';
+        if(strpos($module, '.') !== false) list($appName, $module) = explode('.', $module);
+        if(!commonModel::hasAppPriv($appName)) return false;
         if(isset($rights[strtolower($module)][strtolower($method)])) return true;
 
         return false;
