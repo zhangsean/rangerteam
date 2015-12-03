@@ -16,7 +16,7 @@
   <?php if(commonModel::hasPriv('task', 'batchClose')):?>
   <form id='ajaxForm' method='post' action="<?php echo $this->createLink('oa.task', 'batchClose');?>">
   <?php endif;?>
-    <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
+    <table class='table table-hover table-striped tablesorter table-data table-fixed' id='taskList'>
       <thead>
         <tr class='text-center'>
           <?php $vars = "type={$type}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
@@ -40,7 +40,7 @@
           <td class='text-left'>
             <?php if($task->parent != 0) echo "<span class='label'>{$lang->task->childrenAB}</span>"?>
             <?php if(!empty($task->team)) echo "<span class='label'>{$lang->task->multipleAB}</span>"?>
-            <?php echo html::a("javascript:$.openEntry(\"oa\", \"" . $this->createLink('oa.task', 'view', "taskID=$task->id") . "\")", $task->name);?>
+            <?php echo html::a("javascript:$.openEntry(\"oa\", \"" . $this->createLink('oa.task', 'view', "taskID=$task->id") . "\")", $task->name, "title='$task->name'");?>
             <?php if(!empty($task->children)) echo "<span class='task-toogle'>&nbsp;&nbsp;<i class='icon icon-minus'></i>&nbsp;&nbsp;</span>"?>
           </td>
           <td><?php echo $task->deadline;?></td>
@@ -56,12 +56,12 @@
           <td colspan='10'>
             <table class='table table-data table-hover'>
               <?php foreach($task->children as $child):?>
-              <tr class="text-center" data-url='<?php echo $this->createLink('task', 'view', "taskID=$child->id"); ?>'>
-                <td class='w-60px'><?php echo $child->id;?></td>
+              <tr class="text-center">
+                <td class='w-60px text-left'><label class='checkbox-inline'><input type='checkbox' name='taskIDList[]' value='<?php echo $child->id;?>'/><?php echo $child->id;?></td>
                 <td class='w-40px'><span class='active pri pri-<?php echo $child->pri; ?>'><?php echo $lang->task->priList[$child->pri];?></span></td>
                 <td class='text-left'>
                   <span class='label'><?php echo $lang->task->childrenAB?></span>
-                  <?php echo $child->name;?>
+                  <?php echo html::a("javascript:$.openEntry(\"oa\", \"" . $this->createLink('oa.task', 'view', "taskID=$child->id") . "\")", $child->name, "title='$child->name'");?>
                 </td>
                 <td class='w-100px'>  <?php echo $child->deadline;?></td>
                 <td class='w-80px'>   <?php if(isset($users[$child->assignedTo])) echo $users[$child->assignedTo];?></td>
@@ -69,7 +69,7 @@
                 <td class='w-100px visible-lg'><?php echo substr($child->createdDate, 0, 10);?></td>
                 <td class='w-90px visible-lg'> <?php echo $child->consumed;?></td>
                 <td class='w-110px visible-lg'><?php echo $child->left;?></td>
-                <td class='w-240px text-left'><?php $this->task->buildOperateMenu($child);?></td>
+                <td class='w-240px text-left actions'><?php $this->task->buildOperateMenu($child);?></td>
               </tr>
               <?php endforeach;?>
             </table>
