@@ -33,7 +33,7 @@
       <?php foreach($contracts as $contract):?>
       <tr class='text-center'>
         <td><?php echo $contract->id;?></td>
-        <td class='text-left'><?php echo $contract->name;?></td>
+        <td class='text-left actions'><?php echo html::a($this->createLink('crm.contract', 'view', "id=$contract->id"), $contract->name);?></td>
         <td class='text-right'><?php echo zget($currencySign, $contract->currency, '') . formatMoney($contract->amount);?></td>
         <td class='visible-lg'><?php echo substr($contract->createdDate, 0, 10);?></td>
         <td><?php echo substr($contract->begin, 0, 10);?></td>

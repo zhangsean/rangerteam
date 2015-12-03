@@ -158,6 +158,7 @@ class my extends control
      */
     public function order($type = 'past', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
+
         $this->loadModel('common', 'sys');
         if(!commonModel::hasPriv('order', 'browse')) $this->common->deny('my', 'order');
 
@@ -169,7 +170,7 @@ class my extends control
 
         /* Set pre and next condition. */
         $this->session->set('orderQueryCondition', $this->dao->get());
-        $this->session->set('orderList', $this->app->getURI(true));
+        $this->session->set('orderList', "javascript:$.openEntry(\"dashboard\")");
 
         /* Set allowed edit order ID list. */
         $this->app->user->canEditOrderIdList = ',' . implode(',', $this->order->getOrdersSawByMe('edit', array_keys($orders))) . ',';
@@ -212,7 +213,7 @@ class my extends control
         $this->session->set('contractQueryCondition', $this->dao->get());
 
         /* Save session for return link. */
-        $this->session->set('contractList', $this->app->getURI(true));
+        $this->session->set('contractList', "javascript:$.openEntry(\"dashboard\")");
 
         $this->view->title        = $this->lang->contract->browse;
         $this->view->contracts    = $contracts;
