@@ -25,6 +25,8 @@ $lang->upgrade->execute       = '確認執行';
 $lang->upgrade->next          = '下一步';
 $lang->upgrade->redeploy      = '請重新部署app檔案夾後繼續';
 $lang->upgrade->redeployDesc  = "<h5>因為代碼結構調整,需要重新部署app目錄。</h5><div class='text-important'>操作方法:刪除舊的app目錄，再從新的安裝包裡面複製app檔案夾。</div>";
+$lang->upgrade->removeTodo    = '請刪除 %s 檔案夾後繼續';
+$lang->upgrade->removeTodoTip = "<h5>因為代碼結構調整,需要刪除%s目錄。</h5><div class='text-important'>操作方法:刪除舊的%s檔案夾。</div>";
 $lang->upgrade->updateLicense = '然之協同 2. 0 已更換授權協議至 Z PUBLIC LICENSE(ZPL) 1.1。';
 
 $lang->upgrade->backupData = <<<EOT
