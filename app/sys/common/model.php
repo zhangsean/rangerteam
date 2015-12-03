@@ -134,11 +134,13 @@ class commonModel extends model
             if($app->user->admin != 'super') return false;
         }
 
-        $rights = $app->user->rights;
-        /* Check app priv. */
         $appName = '';
         if(strpos($module, '.') !== false) list($appName, $module) = explode('.', $module);
+
+        /* Check app priv. */
         if(!commonModel::hasAppPriv($appName)) return false;
+
+        $rights = $app->user->rights;
         if(isset($rights[strtolower($module)][strtolower($method)])) return true;
 
         return false;
