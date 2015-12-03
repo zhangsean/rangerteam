@@ -12,15 +12,16 @@
 ?>
 <?php include './header.html.php';?>
 <?php js::set('type', $type);?>
-<table class='table table-condensed table-hover table-striped tablesorter table-fixed'>
+<div class='panel'>
+<table class='table table-hover table-striped tablesorter table-fixed'>
   <?php $vars = "type=$type&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
   <thead>
-  <tr class='colhead'>
-    <th class='w-150px'><?php commonModel::printOrderLink('date',       $orderBy, $vars, $lang->action->date);?></th>
-    <th class='w-user'> <?php commonModel::printOrderLink('actor',      $orderBy, $vars, $lang->action->actor);?></th>
-    <th class='w-100px'><?php commonModel::printOrderLink('action',     $orderBy, $vars, $lang->action->action);?></th>
-    <th class='w-80px'> <?php commonModel::printOrderLink('objectType', $orderBy, $vars, $lang->action->objectType);?></th>
-    <th class='w-id'>   <?php commonModel::printOrderLink('id',         $orderBy, $vars, $lang->action->actionID);?></th>
+  <tr class='colhead text-center'>
+    <th class='w-100px'><?php commonModel::printOrderLink('date',      $orderBy, $vars, $lang->action->date);?></th>
+    <th class='w-120px'> <?php commonModel::printOrderLink('actor',    $orderBy, $vars, $lang->action->actor);?></th>
+    <th class='w-100px'><?php commonModel::printOrderLink('action',    $orderBy, $vars, $lang->action->action);?></th>
+    <th class='w-80px'><?php commonModel::printOrderLink('objectType', $orderBy, $vars, $lang->action->objectType);?></th>
+    <th class='w-80px'><?php commonModel::printOrderLink('id',         $orderBy, $vars, $lang->action->actionID);?></th>
     <th><?php echo $lang->action->objectName;?></th>
   </tr>
   </thead>
@@ -29,7 +30,7 @@
   <?php if($action->appName == 'sys') $action->appName = 'superadmin';?>
   <?php if($action->objectType == 'todo') $action->appName = 'dashboard';?>
   <tr class='text-center'>
-    <td><?php echo $action->date;?></td>
+    <td class='text-left'><?php echo $action->date;?></td>
     <td><?php echo zget($users, $action->actor, $action->actor);?></td>
     <td><?php echo $action->actionLabel;?></td>
     <td><?php echo $lang->action->objectTypes[$action->objectType];?></td>
@@ -40,4 +41,5 @@
   </tbody>
   <tfoot><tr><td colspan='6'><?php $pager->show();?></td></tr></tfoot>
 </table>
+</div>
 <?php include '../../common/view/footer.html.php';?>
