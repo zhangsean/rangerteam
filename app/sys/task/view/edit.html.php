@@ -47,7 +47,7 @@
               </tr>
               <tr>
                 <th><?php echo $lang->comment;?></th>
-                <td><?php echo html::textarea('comment', '', "class='form-control'");?></td>
+                <td><?php echo html::textarea('remark', '', "class='form-control'");?></td>
               </tr>
               <tr>
                 <th><?php echo $lang->files;?></th>

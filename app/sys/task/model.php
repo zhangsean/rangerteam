@@ -462,7 +462,7 @@ class taskModel extends model
                 ->add('editedDate', $now)
                 ->specialChars('name')
                 ->stripTags('desc', $this->config->allowedTags->admin)
-                ->remove('referer,uid,files,labels,multiple,team,teamEstimate,teamConsumed,teamLeft,comment')
+                ->remove('referer,uid,files,labels,multiple,team,teamEstimate,teamConsumed,teamLeft,remark')
                 ->join('mailto', ',')
                 ->get();
 
