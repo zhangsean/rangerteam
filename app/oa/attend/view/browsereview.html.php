@@ -42,8 +42,8 @@
       <td><?php echo zget($lang->attend->reasonList, $attend->reason)?></td>
       <td><?php echo $attend->desc?></td>
       <td>
-        <?php echo html::a($this->createLink('attend', 'review', "attendID={$attend->id}&status=pass"), $lang->attend->reviewStatusList['pass'], "class='pass'")?>
-        <?php echo html::a($this->createLink('attend', 'review', "attendID={$attend->id}&status=reject"), $lang->attend->reviewStatusList['reject'], "class='reject'")?>
+        <?php echo commonModel::printLink('attend', 'review', "attendID={$attend->id}&status=pass", $lang->attend->reviewStatusList['pass'], "class='pass'")?>
+        <?php echo commonModel::printLink('attend', 'review', "attendID={$attend->id}&status=reject", $lang->attend->reviewStatusList['reject'], "class='reject'")?>
       </td>
     </tr>
     <?php endforeach;?>
