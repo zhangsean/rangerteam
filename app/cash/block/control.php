@@ -112,7 +112,6 @@ class block extends control
      */
     public function printDepositorBlock()
     {
-        $this->lang->depositor = new stdclass();
         $this->app->loadLang('depositor', 'cash');
 
         $this->processParams();

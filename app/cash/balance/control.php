@@ -14,6 +14,7 @@ class balance extends control
     /**
      * Browse balance.
      * 
+     * @param int    $depositor
      * @param string $orderBy     the order by
      * @param int    $recTotal 
      * @param int    $recPerPage 
@@ -21,7 +22,7 @@ class balance extends control
      * @access public
      * @return void
      */
-    public function browse($depositor= 0, $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function browse($depositor = 0, $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -43,7 +44,7 @@ class balance extends control
     }   
 
     /**
-     * Create a contact.
+     * Create a balance.
      * 
      * @param  int    $depositor 
      * @access public

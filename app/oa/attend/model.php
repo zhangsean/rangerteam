@@ -262,10 +262,7 @@ EOT;
             $attend->account = $account;
             $attend->date    = $date;
             $attend->signOut = helper::time();
-            $this->dao->insert(TABLE_ATTEND)
-                ->data($attend)
-                ->autoCheck()
-                ->exec();
+            $this->dao->insert(TABLE_ATTEND)->data($attend)->autoCheck()->exec();
             return !dao::isError();
         }
 
