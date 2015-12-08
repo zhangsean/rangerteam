@@ -97,7 +97,7 @@ class customerModel extends model
             ->beginIF($mode == 'assignedTo')->andWhere('assignedTo')->eq($this->app->user->account)->fi()
             ->beginIF($mode == 'query')->andWhere($param)->fi()
             ->beginIF($mode == 'bysearch')->andWhere($customerQuery)->fi()
-            ->beginIF(strpos('all, bysearch, public, assignedtome, query', $mode) === false)->andWhere('nextDate')->ne('0000-00-00')->fi()
+            ->beginIF(strpos('all, bysearch, public, assignedTo, query', $mode) === false)->andWhere('nextDate')->ne('0000-00-00')->fi()
             ->andWhere('id')->in($customerIdList)
             ->orderBy($orderBy)
             ->page($pager)
