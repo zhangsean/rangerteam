@@ -75,7 +75,7 @@ $isSuperAdmin = $this->app->user->admin == 'super';
           <?php
           $index = $key;
           ?>
-          <div class='col-xs-<?php echo $block->grid;?>'>
+          <div class='col-xs-<?php echo $block->grid;?> pull-left'>
             <div class='panel <?php if(isset($block->params->color)) echo 'panel-' . $block->params->color;?>' id='block<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $block->title?>' data-url='<?php echo $this->createLink('entry', 'printBlock', 'index=' . $index) ?>'>
               <div class='panel-heading'>
                 <div class='panel-actions'>
