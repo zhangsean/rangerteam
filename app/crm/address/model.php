@@ -78,8 +78,8 @@ class addressModel extends model
 
         if($objectType == 'contact')
         {
-            $contact   = $this->loadModel('contact')->getByID($objectID);
-            $addresses = array_merge($this->getByObject('customer', $contact->customer), $addresses);
+            $contact = $this->loadModel('contact')->getByID($objectID);
+            if(isset($contact->customer)) $addresses = array_merge($this->getByObject('customer', $contact->customer), $addresses);
         }
 
         /* Join area and location to fullLocation. */
