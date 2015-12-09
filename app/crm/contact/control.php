@@ -32,12 +32,12 @@ class contact extends control
      * @access public
      * @return void
      */
-    public function browse($mode = 'all', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'all', $status = 'normal', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $contacts = $this->contact->getList($customer = '', $relation = 'client',  $mode, $orderBy, $pager);
+        $contacts = $this->contact->getList($customer = '', $relation = 'client', $status, $mode, $orderBy, $pager);
         $this->session->set('contactQueryCondition', $this->dao->get());
         $this->session->set('contactList', $this->app->getURI(true));
         $this->session->set('customerList', $this->app->getURI(true));
@@ -122,7 +122,7 @@ class contact extends control
      * @access public
      * @return void
      */
-    public function view($contactID)
+    public function view($contactID, $status = 'normal')
     {
         if($this->session->customerList == $this->session->contactList) $this->session->set('customerList', $this->app->getURI(true));
         $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit', (array)$contactID)) . ',';
@@ -137,7 +137,7 @@ class contact extends control
         }
 
         $this->view->title      = $this->lang->contact->view;
-        $this->view->contact    = $this->contact->getByID($contactID);
+        $this->view->contact    = $this->contact->getByID($contactID, $status);
         $this->view->addresses  = $this->loadModel('address')->getList('contact', $contactID);
         $this->view->resumes    = $this->loadModel('resume')->getList($contactID);
         $this->view->customers  = $this->loadModel('customer')->getPairs('client');
@@ -332,5 +332,21 @@ END:VCARD";
         }
 
         $this->display();
+    }
+
+    /**
+     * Switch contact.
+     * 
+     * @param  int     $contactID 
+     * @param  string  $status 
+     * @access public
+     * @return void
+     */
+    public function switchContact($contactID, $status)
+    {
+        $this->contact->switch($contactID, $status);
+
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 }

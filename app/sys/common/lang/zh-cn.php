@@ -106,6 +106,7 @@ $lang->start          = '开始';
 $lang->create         = '新建';
 $lang->forbid         = '禁用';
 $lang->activate       = '激活';
+$lang->ignore         = '忽略';
 $lang->view           = '查看';
 $lang->more           = '更多';
 $lang->actions        = '操作';

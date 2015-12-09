@@ -18,16 +18,23 @@ class contactModel extends model
      * @access public
      * @return object
      */
-    public function getByID($id)
+    public function getByID($id, $status = 'normal')
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
-        if(empty($customerIdList)) return null;
+        if($status != 'normal')
+        {
+            return $this->dao->select('*')->from(TABLE_CONTACT)->where('id')->eq($id)->fetch();
+        }
+        else
+        {
+            $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+            if(empty($customerIdList)) return null;
 
-        return $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
-            ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
-            ->where('t1.id')->eq($id)
-            ->andWhere('t2.customer')->in($customerIdList)
-            ->fetch();
+            return $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
+                ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
+                ->where('t1.id')->eq($id)
+                ->andWhere('t2.customer')->in($customerIdList)
+                ->fetch();
+        }
     }
 
     /**
@@ -79,7 +86,7 @@ class contactModel extends model
      * @access public
      * @return array
      */
-    public function getList($customer = 0, $relation = 'client', $mode = '',  $orderBy = 'maker_desc', $pager = null)
+    public function getList($customer = 0, $relation = 'client', $status = 'normal', $mode = '',  $orderBy = 'maker_desc', $pager = null)
     {
         if($relation != 'provider')
         {
@@ -116,7 +123,8 @@ class contactModel extends model
         $contacts = $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
-            ->andWhere('t2.customer')->in($customerIdList)
+            ->andWhere('status')->eq($status)
+            ->beginIF($status != 'wait')->andWhere('t2.customer')->in($customerIdList)->fi()
             ->beginIF($customer)->andWhere('t1.id')->in(array_keys($resumes))->fi()
             ->beginIF($mode == 'past')->andWhere('t1.nextDate')->lt(helper::today())->andWhere('t1.nextDate')->ne('0000-00-00')->fi()
             ->beginIF($mode == 'today')->andWhere('t1.nextDate')->eq(helper::today())->fi()
@@ -125,7 +133,6 @@ class contactModel extends model
             ->beginIF($mode == 'thismonth')->andWhere('t1.nextDate')->between($thisMonth['begin'], $thisMonth['end'])->fi()
             ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
             ->beginIF($mode == 'bysearch')->andWhere($contactQuery)->fi()
-            ->beginIF($mode == 'roster')->andWhere('status')->eq('unknown')->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
@@ -429,6 +436,8 @@ class contactModel extends model
 
         if(!empty($contactList))
         {
+            if(empty($contact->customer)) return array('result' => 'fail');
+
             $customerContactList = $this->dao->select('contact')->from(TABLE_RESUME)->where('customer')->eq($contact->customer)->fetchAll('contact');
 
             foreach($contactList as $id => $data)
@@ -468,5 +477,19 @@ class contactModel extends model
                 return array('result' => 'fail', 'error' => $error);
             }
         }
+    }
+
+    /**
+     * Switch status for contact.
+     * 
+     * @param  int    $contactID 
+     * @param  string $status 
+     * @access public
+     * @return void
+     */
+    public function switchContact($contactID, $status)
+    {
+        $this->dao->update(TABLE_CONTACT)->set('status')->eq($status)->where('id')->eq($contactID)->exec();
+        return !dao::isError();
     }
 }
