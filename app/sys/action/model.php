@@ -697,8 +697,8 @@ class actionModel extends model
         /* Create todo notices. */
         $date  = helper::today();
         $now   = helper::now();
-        $link  = helper::createLink('oa.todo', 'calendar');
-        $todos = $this->loadModel('todo', 'oa')->getList('self', $account, $date, 'undone');
+        $link  = helper::createLink('sys.todo', 'calendar');
+        $todos = $this->loadModel('todo', 'sys')->getList('self', $account, $date, 'undone');
 
         $interval  = $this->config->pingInterval;
         $begin[1]  = date('Hi', strtotime($now));
