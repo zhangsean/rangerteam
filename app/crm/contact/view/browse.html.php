@@ -15,6 +15,7 @@
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
   <?php if(commonModel::hasPriv('contact', 'export')):?>
+  <?php if($mode == 'roster') commonModel::printLink('contact', 'import', '', $lang->importIcon . $lang->import, "class='btn btn-primary' data-toggle='modal'");?>
   <div class='btn-group'>
     <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo $lang->exportIcon . $lang->export;?> <span class='caret'></span></button>
     <ul id='exportActionMenu' class='dropdown-menu'>
