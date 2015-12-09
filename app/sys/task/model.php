@@ -847,6 +847,7 @@ class taskModel extends model
             ->setDefault('closedDate, editedDate', $now)
             ->setIF($oldTask->status == 'done',   'closedReason', 'done')
             ->setIF($oldTask->status == 'cancel', 'closedReason', 'cancel')
+            ->remove('taskIDList')
             ->get();
 
         $this->dao->update(TABLE_TASK)->data($task, 'uid,comment')->autoCheck()->where('id')->eq((int)$taskID)->exec();
