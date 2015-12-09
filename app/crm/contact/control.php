@@ -335,16 +335,16 @@ END:VCARD";
     }
 
     /**
-     * Switch contact.
+     * Transform contact.
      * 
      * @param  int     $contactID 
      * @param  string  $status 
      * @access public
      * @return void
      */
-    public function switchContact($contactID, $status)
+    public function transform($contactID, $status)
     {
-        $this->contact->switch($contactID, $status);
+        $this->contact->transform($contactID, $status);
 
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));

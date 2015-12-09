@@ -124,7 +124,7 @@ class contactModel extends model
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
             ->andWhere('status')->eq($status)
-            ->beginIF($status != 'wait')->andWhere('t2.customer')->in($customerIdList)->fi()
+            ->beginIF($status == 'normal')->andWhere('t2.customer')->in($customerIdList)->fi()
             ->beginIF($customer)->andWhere('t1.id')->in(array_keys($resumes))->fi()
             ->beginIF($mode == 'past')->andWhere('t1.nextDate')->lt(helper::today())->andWhere('t1.nextDate')->ne('0000-00-00')->fi()
             ->beginIF($mode == 'today')->andWhere('t1.nextDate')->eq(helper::today())->fi()
@@ -480,14 +480,14 @@ class contactModel extends model
     }
 
     /**
-     * Switch status for contact.
+     * Transform status for contact.
      * 
      * @param  int    $contactID 
      * @param  string $status 
      * @access public
      * @return void
      */
-    public function switchContact($contactID, $status)
+    public function transform($contactID, $status)
     {
         $this->dao->update(TABLE_CONTACT)->set('status')->eq($status)->where('id')->eq($contactID)->exec();
         return !dao::isError();
