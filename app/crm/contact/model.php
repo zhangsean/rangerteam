@@ -483,13 +483,48 @@ class contactModel extends model
      * Transform status for contact.
      * 
      * @param  int    $contactID 
-     * @param  string $status 
      * @access public
      * @return void
      */
-    public function transform($contactID, $status)
+    public function transform($contactID)
     {
-        $this->dao->update(TABLE_CONTACT)->set('status')->eq($status)->where('id')->eq($contactID)->exec();
+        if(!$this->post->selectCustomer)
+        {
+            $customer = new stdclass();
+            $customer->name        = $this->post->name;
+            $customer->relation    = 'client';
+            $customer->createdBy   = $this->app->user->account;
+            $customer->assignedTo  = $this->app->user->account;
+            $customer->createdDate = helper::now();
+
+            if(!$this->post->continue)
+            {
+                $return = $this->loadModel('customer')->checkUnique($customer);
+                if($return['result'] == 'fail') return $return;
+            }
+            
+            $this->dao->insert(TABLE_CUSTOMER)->data($customer, $skip = 'uid,contact,email,qq,phone,continue')->autoCheck()->exec();
+            if(dao::isError()) return false;
+            $customerID = $this->dao->lastInsertID();
+            $this->loadModel('action')->create('customer', $customerID, 'Created');
+
+            $resume = new stdclass();
+            $resume->contact  = $contactID;
+            $resume->customer = $customerID;
+
+            $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
+            if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->set('status')->eq('normal')->where('id')->eq($contactID)->exec();
+        }
+        else
+        {
+            $resume = new stdclass();
+            $resume->contact  = $contactID;
+            $resume->customer = $this->post->customer;
+
+            $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
+            if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->set('status')->eq('normal')->where('id')->eq($contactID)->exec();
+        }
+
         return !dao::isError();
     }
 }

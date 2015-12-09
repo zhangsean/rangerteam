@@ -66,8 +66,8 @@
         echo "<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
         commonModel::printLink('resume',  'browse', "contactID=$contact->id", $lang->contact->resume, "data-toggle='modal'", '', '', 'li');
         commonModel::printLink('contact', 'delete', "contactID=$contact->id", $lang->delete, "class='reloadDeleter'", '', '', 'li');
-        if($contact->status == 'wait') commonModel::printLink('contact', 'transform', "contactID=$contact->id&status=normal", $lang->confirm, "class='reload'", '', '', 'li');
-        if($contact->status == 'wait') commonModel::printLink('contact', 'transform', "contactID=$contact->id&status=ignore", $lang->ignore, "class='reload'", '', '', 'li');
+        if($contact->status == 'wait') commonModel::printLink('contact', 'transform', "contactID=$contact->id", $lang->confirm, "data-toggle='modal'", '', '', 'li');
+        if($contact->status == 'wait') commonModel::printLink('contact', 'ignore', "contactID=$contact->id", $lang->ignore, "class='reload'", '', '', 'li');
         echo '</ul></div>';
         ?>
       </td>

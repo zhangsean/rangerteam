@@ -338,15 +338,23 @@ END:VCARD";
      * Transform contact.
      * 
      * @param  int     $contactID 
-     * @param  string  $status 
      * @access public
      * @return void
      */
-    public function transform($contactID, $status)
+    public function transform($contactID)
     {
-        $this->contact->transform($contactID, $status);
+        if($_POST)
+        {
+            $result = $this->contact->transform($contactID);
+            if(is_array($result)) $this->send($result);
 
-        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
+        }
+
+        $this->view->title     = $this->lang->confirm . $this->lang->contact->common;
+        $this->view->contact   = $this->contact->getByID($contactID, 'wait');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
+        $this->display();
     }
 }
