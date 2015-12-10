@@ -459,7 +459,6 @@ class taskModel extends model
 
                 ->add('editedBy',   $this->app->user->account)
                 ->add('editedDate', $now)
-                ->specialChars('name')
                 ->stripTags('desc', $this->config->allowedTags->admin)
                 ->remove('referer,uid,files,labels,multiple,team,teamEstimate,teamConsumed,teamLeft,remark')
                 ->join('mailto', ',')
