@@ -335,6 +335,55 @@ END:VCARD";
     }
 
     /**
+     * Export contact template. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function exportTemplate()
+    {
+        if($_POST)
+        {
+            foreach($this->config->contact->templateFields as $field) $fields[$field] = $this->lang->contact->$field;
+
+            $rows = array();
+            for($i = 0; $i < $this->post->num; $i++)
+            {
+                foreach($fields as $field)
+                {
+                    $rows[$i][$field] = '';
+                }
+            }
+
+            $data = new stdclass();
+            $data->fields   = $fields;
+            $data->kind     = 'contact';
+            $data->rows     = $rows;
+            $data->fileName = 'contactTemplate';
+            $data->customWidth = $this->config->contact->excelCustomWidth;
+
+            $this->app->loadClass('export2excel')->export($data, $this->post->fileType);
+        }
+
+        $this->display();
+    }
+
+    /**
+     * Import contacts from excel. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function import()
+    {
+        if($_POST)
+        {
+        }
+
+        $this->display();
+    }
+
+    /**
      * Transform contact.
      * 
      * @param  int     $contactID 

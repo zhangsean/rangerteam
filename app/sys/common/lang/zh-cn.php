@@ -96,6 +96,8 @@ $lang->cancel         = '取消';
 $lang->import         = '导入';
 $lang->export         = '导出';
 $lang->setFileName    = '文件名：';
+$lang->setFileNum     = '记录数';
+$lang->setFileType    = '文件类型';
 $lang->save           = '保存';
 $lang->saved          = '已保存';
 $lang->confirm        = '确认';
@@ -139,6 +141,7 @@ $lang->signOut        = '签退';
 
 $lang->exportAll      = '导出全部记录';
 $lang->exportThisPage = '导出本页记录';
+$lang->exportTemplate = '导出模板';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();
@@ -307,6 +310,18 @@ $lang->pager->pre        = '上页';
 $lang->pager->next       = '下页';
 $lang->pager->last       = '末页';
 $lang->pager->locate     = 'Go!';
+
+/* The excel items. */
+$lang->excel = new stdClass();
+$lang->excel->canNotRead = '不能解析该文件';
+
+$lang->excel->error = new stdclass();
+$lang->excel->error->info  = '您输入的值不在下拉框列表内。';
+$lang->excel->error->title = '输入有误';
+
+$lang->excel->title = new stdclass();
+$lang->excel->title->contact  = '联系人';
+$lang->excel->title->sysValue = '系统数据';
 
 $lang->date = new stdclass();
 $lang->date->minute = '分钟';
