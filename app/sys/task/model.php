@@ -263,7 +263,6 @@ class taskModel extends model
                 ->setForce('assignedTo', $this->post->assignedTo)
                 ->setDefault('createdBy', $this->app->user->account)
                 ->setDefault('createdDate', $now)
-                ->specialChars('name')
                 ->stripTags('desc', $this->config->allowedTags->admin)
                 ->join('mailto', ',')
                 ->get();
