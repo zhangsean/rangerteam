@@ -357,4 +357,18 @@ END:VCARD";
         $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->display();
     }
+
+    /**
+     * Ignore contact in roster.
+     * 
+     * @param  int    $contactID 
+     * @access public
+     * @return void
+     */
+    public function ignore($contactID)
+    {
+        $this->contact->ignore($contactID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+    }
 }

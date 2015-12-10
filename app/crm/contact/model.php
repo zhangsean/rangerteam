@@ -527,4 +527,17 @@ class contactModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Ignore contact in roster.
+     * 
+     * @param  int    $contactID 
+     * @access public
+     * @return bool
+     */
+    public function ignore($contactID)
+    {
+        $this->dao->update(TABLE_CONTACT)->set('status')->eq('ignore')->where('id')->eq($contactID)->exec();
+        return !dao::isError();
+    }
 }
