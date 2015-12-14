@@ -559,11 +559,15 @@ class contactModel extends model
         
         $errorList   = array();
         $successList = array();
+        $gender      = $this->lang->contact->genderList;
         foreach($contactList as $key => $contact)
         {
             if(empty($contact->realname)) continue;
 
-            //$contact->gender = 'u';
+            foreach($this->config->contact->listFields as $k)
+            {
+                $contact->$k = array_search($contact->$k, $$k);
+            }
 
             $contact->customer = $contact->realname;
             $result = $this->checkContact($contact);

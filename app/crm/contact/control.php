@@ -345,24 +345,23 @@ END:VCARD";
     {
         if($_POST)
         {
-            foreach($this->config->contact->templateFields as $field) $fields[$field] = $this->lang->contact->$field;
+            $fieldsKey = $this->config->contact->templateFields;
 
-            $rows = array();
-            for($i = 0; $i < $this->post->num; $i++)
+            $fields = array();
+            $rows   = array();
+            foreach($fieldsKey as $key)
             {
-                foreach($fields as $field)
-                {
-                    $rows[$i][$field] = '';
-                }
+                $fields[$key] = $this->lang->contact->$key;
+                for($i = 0; $i < $this->post->num; $i++) $rows[$i][$key] = '';
             }
 
             $data = new stdclass();
-            $data->fields   = $fields;
-            $data->kind     = 'contact';
-            $data->rows     = $rows;
-            $data->fileName = 'contactTemplate';
+            $data->fields      = $fields;
+            $data->kind        = 'contact';
+            $data->rows        = $rows;
+            $data->fileName    = 'contactTemplate';
             $data->customWidth = $this->config->contact->excelCustomWidth;
-            $data->genderList  = array_values($this->lang->genderList);
+            $data->genderList  = array_values($this->lang->contact->genderList);
             $data->SysDataList = $this->config->contact->listFields;
             $data->listStyle   = $this->config->contact->listFields;
 
