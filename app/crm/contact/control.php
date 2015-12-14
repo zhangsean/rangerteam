@@ -53,6 +53,7 @@ class contact extends control
 
         $this->view->title     = $this->lang->contact->list;
         $this->view->mode      = $mode;
+        $this->view->status    = $status;
         $this->view->contacts  = $contacts;
         $this->view->customers = $customers;
         $this->view->pager     = $pager;
@@ -361,11 +362,14 @@ END:VCARD";
             $data->rows     = $rows;
             $data->fileName = 'contactTemplate';
             $data->customWidth = $this->config->contact->excelCustomWidth;
+            $data->genderList  = array_values($this->lang->genderList);
+            $data->SysDataList = $this->config->contact->listFields;
+            $data->listStyle   = $this->config->contact->listFields;
 
             $this->app->loadClass('export2excel')->export($data, $this->post->fileType);
         }
 
-        $this->display();
+        $this->display('file', 'exportTemplate');
     }
 
     /**
@@ -376,10 +380,57 @@ END:VCARD";
      */
     public function import()
     {
-        if($_POST)
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
+            $file = $this->loadModel('file')->getUpload('files');
+            if(empty($file)) $this->send(array('result' => 'fail', 'message' => $this->lang->contact->noFile));
+            $file = $file[0];
+            move_uploaded_file($file['tmpname'], $this->file->savePath . $file['pathname']);
+
+            $file = $this->file->savePath . $file['pathname'];
+            $phpExcel  = $this->app->loadClass('phpexcel');
+            $phpReader = new PHPExcel_Reader_Excel2007(); 
+            if(!$phpReader->canRead($file))
+            { 
+                $phpReader = new PHPExcel_Reader_Excel5(); 
+                if(!$phpReader->canRead($file)) 
+                {   
+                    unlink($file);
+                    die(js::alert($this->lang->excel->canNotRead));
+                }
+            } 
+            $this->session->set('importFile', $file);
+            $this->send(array('result' => 'success', 'locate' => (inlink('showImport'))));
         }
 
+        $this->view->title = $this->lang->import;
+        $this->display('file', 'import');
+    }
+
+    /**
+     * Show import result. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function showImport()
+    {
+        if(!$this->session->importFile) $this->locate(inlink('browse'));
+        
+        $successList = $this->contact->import();
+        $errorList   = $this->session->errorList;
+
+        unlink($this->session->importFile);
+        unset($_SESSION['importFile']);
+    
+        if(empty($errorList)) die(js::alert($this->lang->saveSuccess) . js::locate(inlink('browse', "mode=all&status=wait")));
+
+        $this->app->loadLang('search');
+        $this->view->title       = $this->lang->import . $this->lang->contact->common;
+        $this->view->successList = $successList;
+        $this->view->errorList   = $errorList;
+        $this->view->mode        = 'all';
+        $this->view->status      = 'wait';
         $this->display();
     }
 
@@ -398,7 +449,7 @@ END:VCARD";
             if(is_array($result)) $this->send($result);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
+            $this->send(array('result' => 'success', 'message' => $this->lang->importSuccess, 'locate' => $this->server->http_referer));
         }
 
         $this->view->title     = $this->lang->confirm . $this->lang->contact->common;

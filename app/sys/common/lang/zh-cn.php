@@ -142,6 +142,9 @@ $lang->signOut        = '签退';
 $lang->exportAll      = '导出全部记录';
 $lang->exportThisPage = '导出本页记录';
 $lang->exportTemplate = '导出模板';
+$lang->importFile     = '导入文件';
+$lang->importSuccess  = '导入成功';
+$lang->importFail     = '导入失败';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();

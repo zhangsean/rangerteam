@@ -541,4 +541,60 @@ class contactModel extends model
         $this->dao->update(TABLE_CONTACT)->set('status')->eq('ignore')->where('id')->eq($contactID)->exec();
         return !dao::isError();
     }
+
+    /**
+     * Import contacts. 
+     * 
+     * @access public
+     * @return array
+     */
+    public function import()
+    {
+        $fields = array();
+        foreach($this->config->contact->templateFields as $field)
+        {
+            $fields[$field] = $this->lang->contact->$field;
+        }
+        $contactList = $this->loadModel('file')->parseExcel($fields);
+        
+        $errorList   = array();
+        $successList = array();
+        foreach($contactList as $key => $contact)
+        {
+            if(empty($contact->realname)) continue;
+
+            //$contact->gender = 'u';
+
+            $contact->customer = $contact->realname;
+            $result = $this->checkContact($contact);
+            if($result['result'] == 'fail') 
+            {
+                $contact->reason = $result['error'];
+                $errorList[$key] = $contact;
+                continue;
+            }
+
+            if(empty($contact->birthday)) $skip = 'birthday'; 
+            $this->dao->insert(TABLE_CONTACT)->data($contact, 'customer')->autoCheck($skip)->exec();
+            if(dao::isError())
+            {
+                $contact->reason = '';
+                foreach(dao::getError() as $error)
+                {
+                    $contact->reason .= implode(';', $error);
+                }
+                $errorList[$key] = $contact;
+            }
+            else
+            {
+                $successList[$key] = $contact;
+            }
+
+            $contactID = $this->dao->lastInsertID();
+            $this->loadModel('action')->create('contact', $contactID, 'Created', $this->lang->import);
+        }
+        $this->session->set('errorList', $errorList);
+
+        return $successList;
+    }
 }

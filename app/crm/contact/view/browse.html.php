@@ -12,10 +12,11 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('mode', $mode);?>
+<?php js::set('status', $status);?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
-  <?php if(commonModel::hasPriv('contact', 'export')):?>
   <?php commonModel::printLink('contact', 'import', '', $lang->importIcon . $lang->import, "class='btn btn-primary' data-toggle='modal'");?>
+  <?php if(commonModel::hasPriv('contact', 'export')):?>
   <div class='btn-group'>
     <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo $lang->exportIcon . $lang->export;?> <span class='caret'></span></button>
     <ul id='exportActionMenu' class='dropdown-menu'>

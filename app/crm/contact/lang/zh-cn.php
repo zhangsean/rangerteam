@@ -67,3 +67,8 @@ $lang->contact->contactInfo = '联系方式';
 $lang->contact->leftAt       = '已于%s离职';
 $lang->contact->failedAvatar = '头像上传失败';
 $lang->contact->emailTip     = '多个邮箱之间用逗号或者空格隔开';
+
+$lang->contact->noFile       = '没有文件';
+$lang->contact->importResult = '%s条数据导入成功，%s条数据导入失败，失败数据如下：';
+$lang->contact->failReason   = '原因';
+$lang->contact->showImport   = '查看已导入联系人';

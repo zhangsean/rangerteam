@@ -529,4 +529,59 @@ class fileModel extends model
         }
         $config->file->maxSize = $value;
     }
+
+    /**
+     * parse excel file into array. 
+     * 
+     * @param  array  $fields 
+     * @access public
+     * @return array
+     */
+    public function parseExcel($fields = array())
+    {
+        $file = $this->session->importFile;
+
+        $phpExcel  = $this->app->loadClass('phpexcel');
+        $phpReader = new PHPExcel_Reader_Excel2007(); 
+        if(!$phpReader->canRead($file)) $phpReader = new PHPExcel_Reader_Excel5();
+
+        $phpExcel     = $phpReader->load($file);
+        $currentSheet = $phpExcel->getSheet(0); 
+        $allRows      = $currentSheet->getHighestRow(); 
+        $allColumns   = $currentSheet->getHighestColumn(); 
+        /* In php, 'A'++  === 'B', 'Z'++ === 'AA', 'a'++ === 'b', 'z'++ === 'aa'. */
+        $allColumns++;
+        $currentColumn = 'A';
+        $columnKey = array();
+        while($currentColumn != $allColumns)
+        {
+            $title = $currentSheet->getCell($currentColumn . '1')->getValue();
+            $field = array_search($title, $fields);
+            $columnKey[$currentColumn] = $field ? $field : '';
+            $currentColumn++;
+        }
+        $dataList = array();
+        for($currentRow = 2; $currentRow <= $allRows; $currentRow++)
+        {
+            $currentColumn = 'A'; 
+            $data          = new stdclass(); 
+            $ignoreRow     = false;
+            while($currentColumn != $allColumns)
+            {
+                $cellValue = $currentSheet->getCell($currentColumn . $currentRow)->getValue();
+                $cellValue = trim($cellValue);
+                if(empty($columnKey[$currentColumn]))
+                {
+                    $currentColumn++;
+                    continue;
+                }
+                $field = $columnKey[$currentColumn];
+                $currentColumn++;
+                $data->$field = empty($cellValue) ? '' : $cellValue;
+            }
+            foreach(array_keys($fields) as $key) if(!isset($data->$key)) $data->$key = '';
+            $dataList[] = $data;
+        }
+        return $dataList;   
+    }
 }
