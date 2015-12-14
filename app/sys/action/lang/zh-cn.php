@@ -161,7 +161,6 @@ $lang->action->label->product   = '产品|product|view|productID=%s';
 $lang->action->label->order     = '订单|order|view|orderID=%s';
 $lang->action->label->task      = '任务|task|view|taskID=%s';
 $lang->action->label->contract  = '合同|contract|view|contractID=%s';
-$lang->action->label->user      = '成员|user|admin|';
 $lang->action->label->announce  = '公告|announce|browse|';
 $lang->action->label->customer  = '客户|customer|view|customerID=%s';
 $lang->action->label->contact   = '联系人|contact|view|contactID=%s';
@@ -191,6 +190,9 @@ $lang->action->label->refund['edited']      = '报销审批|refund|view|refundID
 $lang->action->label->refund['reviewed']    = '报销审批|refund|view|refundID=%s';
 $lang->action->label->refund['reimburse']   = '报销审批|refund|view|refundID=%s';
 $lang->action->label->refund['deletedfile'] = '报销审批|refund|view|refundID=%s';
+
+$lang->action->label->user['login']  = '登录|user|login|';
+$lang->action->label->user['logout'] = '退出|user|logout|';
 
 /* Object type. */
 $lang->action->search->objectTypeList['']            = '';    

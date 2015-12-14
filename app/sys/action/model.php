@@ -853,7 +853,7 @@ class actionModel extends model
             {
                 list($objectLabel, $moduleName, $methodName, $vars) = explode('|', $action->objectLabel);
                 $action->objectLabel = $objectLabel;
-                if(!commonModel::hasPriv($moduleName, $methodName)) $canView = false;
+                if((!$this->loadModel('common')->isOpenMethod($moduleName, $methodName)) and (!commonModel::hasPriv($moduleName, $methodName))) $canView = false;
             }
         }
 
