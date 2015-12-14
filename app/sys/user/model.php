@@ -386,6 +386,9 @@ class userModel extends model
         $user->shortJoin = substr($user->join, 5, -3);
         unset($_SESSION['random']);
 
+        /* Save sign in info. */
+        $this->loadModel('attend', 'oa')->signIn($user->account);
+
         /* Return him.*/
         return $user;
     }

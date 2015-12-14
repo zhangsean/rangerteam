@@ -49,8 +49,6 @@ class user extends control
         {
             if(!$this->user->login($this->post->account, $this->post->password)) $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
 
-            /* Save sign in info. */
-            $this->loadModel('attend', 'oa')->signIn();
             /* Goto the referer or to the default module */
             if($this->post->referer != false and strpos($loginLink . $denyLink, $this->post->referer) === false)
             {
