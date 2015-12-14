@@ -232,7 +232,7 @@ $lang->article->menu->create = array('link' => 'Add|article|create|type=article'
 $lang->menuGroups = new stdclass();
 
 $lang->menu->dashboard = new stdclass();
-$lang->menu->dashboard->todo     = 'Todo|my|todo|';
+$lang->menu->dashboard->todo     = 'Todo|todo|calendar|';
 $lang->menu->dashboard->task     = 'Task|my|task|';
 $lang->menu->dashboard->project  = 'Project|my|project|';
 $lang->menu->dashboard->order    = 'Order|my|order|';
