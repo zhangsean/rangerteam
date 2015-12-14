@@ -313,6 +313,8 @@ class userModel extends model
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
 
+        $this->loadModel('action')->create('user', $user->id, 'login');
+
         return true;
     }
 
