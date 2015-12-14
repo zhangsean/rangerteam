@@ -171,7 +171,10 @@ class salesModel extends model
         $all = $this->dao->select('*')->from(TABLE_SALESPRIV)->where('account')->eq($account)->fetchAll();
 
         $privs = array();
-        foreach($all as $account => $priv) $privs[$priv->salesgroup][$priv->priv] = true;
+        if(!empty($all))
+        {
+            foreach($all as $account => $priv) $privs[$priv->salesgroup][$priv->priv] = true;
+        }
 
         return $privs;
     }
