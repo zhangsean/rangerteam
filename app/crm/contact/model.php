@@ -86,7 +86,7 @@ class contactModel extends model
      * @access public
      * @return array
      */
-    public function getList($customer = 0, $relation = 'client', $status = 'normal', $mode = '',  $orderBy = 'maker_desc', $pager = null)
+    public function getList($customer = 0, $relation = 'client', $mode = '', $status = 'normal', $origin ='', $orderBy = 'maker_desc', $pager = null)
     {
         if($relation != 'provider')
         {
@@ -124,6 +124,7 @@ class contactModel extends model
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
             ->andWhere('status')->eq($status)
+            ->beginIF($origin)->andWhere('origin')->eq($origin)->fi()
             ->beginIF($status == 'normal')->andWhere('t2.customer')->in($customerIdList)->fi()
             ->beginIF($customer)->andWhere('t1.id')->in(array_keys($resumes))->fi()
             ->beginIF($mode == 'past')->andWhere('t1.nextDate')->lt(helper::today())->andWhere('t1.nextDate')->ne('0000-00-00')->fi()

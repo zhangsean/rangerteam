@@ -32,12 +32,12 @@ class contact extends control
      * @access public
      * @return void
      */
-    public function browse($mode = 'all', $status = 'normal', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'all', $status = 'normal', $origin = '',  $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $contacts = $this->contact->getList($customer = '', $relation = 'client', $status, $mode, $orderBy, $pager);
+        $contacts = $this->contact->getList($customer = '', $relation = 'client', $mode, $status, $origin, $orderBy, $pager);
         $this->session->set('contactQueryCondition', $this->dao->get());
         $this->session->set('contactList', $this->app->getURI(true));
         $this->session->set('customerList', $this->app->getURI(true));
