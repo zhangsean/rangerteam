@@ -64,7 +64,6 @@ $lang->contact->menu->today     = '今天联系|contact|browse|mode=today';
 $lang->contact->menu->tomorrow  = '明天联系|contact|browse|mode=tomorrow';
 $lang->contact->menu->thisweek  = '本周内联系|contact|browse|mode=thisweek';
 $lang->contact->menu->thismonth = '本月内联系|contact|browse|mode=thismonth';
-$lang->contact->menu->roster    = '名单|contact|browse|mode=all&status=wait';
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();
