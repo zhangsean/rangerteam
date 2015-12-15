@@ -43,6 +43,10 @@
       <div class='panel-body'>
         <table class='table table-info'>
           <tr>
+            <th class='w-80px'><?php echo $lang->contract->code;?></th>
+            <td><?php echo $contract->code;?></td>
+          </tr>
+          <tr>
             <th class='w-80px'><?php echo $lang->contract->customer;?></th>
             <td><?php echo html::a($this->createLink('customer', 'view', "customerID={$contract->customer}"), zget($customers, $contract->customer));?></td>
           </tr>
