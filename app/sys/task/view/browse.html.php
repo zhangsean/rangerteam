@@ -16,7 +16,7 @@
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div class='row with-menu page-content'>
   <div class='panel'>
-    <table class='table table-hover table-striped tablesorter table-data' id='taskList'>
+    <table class='table table-hover table-striped tablesorter table-data table-fixed' id='taskList'>
       <thead>
         <tr class='text-center'>
           <?php $vars = "projectID=$projectID&mode={$mode}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
@@ -37,7 +37,7 @@
         <tr class='text-center' data-url='<?php echo $this->createLink('task', 'view', "taskID=$task->id"); ?>'>
           <td><?php echo $task->id;?></td>
           <td><span class='active pri pri-<?php echo $task->pri; ?>'><?php echo $lang->task->priList[$task->pri];?></span></td>
-          <td class='text-left'>
+          <td class='text-left' title="<?php echo $task->name;?>">
             <?php if($task->parent != 0) echo "<span class='label'>{$lang->task->childrenAB}</span>"?>
             <?php if(!empty($task->team)) echo "<span class='label'>{$lang->task->multipleAB}</span>"?>
             <?php echo $task->name;?>
@@ -54,12 +54,12 @@
         <?php if(!empty($task->children)):?>
         <tr class='tr-child'>
           <td colspan='10'>
-            <table class='table table-data table-hover'>
+            <table class='table table-data table-hover table-fixed'>
               <?php foreach($task->children as $child):?>
               <tr class="text-center" data-url='<?php echo $this->createLink('task', 'view', "taskID=$child->id"); ?>'>
                 <td class='w-60px'><?php echo $child->id;?></td>
                 <td class='w-40px'><span class='active pri pri-<?php echo $child->pri; ?>'><?php echo $lang->task->priList[$child->pri];?></span></td>
-                <td class='text-left'>
+                <td class='text-left' title="<?php echo $child->name;?>">
                   <span class='label'><?php echo $lang->task->childrenAB?></span>
                   <?php echo $child->name;?>
                 </td>
