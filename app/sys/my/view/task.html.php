@@ -54,12 +54,12 @@
         <?php if(!empty($task->children)):?>
         <tr class='tr-child'>
           <td colspan='10'>
-            <table class='table table-data table-hover'>
+            <table class='table table-data table-hover table-fixed'>
               <?php foreach($task->children as $child):?>
               <tr class="text-center">
                 <td class='w-60px text-left'><label class='checkbox-inline'><input type='checkbox' name='taskIDList[]' value='<?php echo $child->id;?>'/><?php echo $child->id;?></td>
                 <td class='w-40px'><span class='active pri pri-<?php echo $child->pri; ?>'><?php echo $lang->task->priList[$child->pri];?></span></td>
-                <td class='text-left'>
+                <td class='text-left' title='<?php echo $child->name;?>'>
                   <span class='label'><?php echo $lang->task->childrenAB?></span>
                   <?php echo html::a("javascript:$.openEntry(\"oa\", \"" . $this->createLink('oa.task', 'view', "taskID=$child->id") . "\")", $child->name, "title='$child->name'");?>
                 </td>
