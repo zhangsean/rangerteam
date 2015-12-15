@@ -111,7 +111,7 @@ class my extends control
         $acountList = array();
         if($account == '')
         {
-            if($dept == '') $users = $this->loadModel('user')->getPairs('nodeleted,noclosed,noempty');
+            if($dept == '') $users = $this->dao->select('account, realname')->from(TABLE_USER)->where('deleted')->eq(0)->orderBy('dept')->fetchPairs();
             else $users = $this->loadModel('user')->getPairs('nodeleted,noclosed,noempty', $dept);
             $accountList = array_keys($users);
         }
