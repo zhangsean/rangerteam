@@ -65,12 +65,13 @@ class projectModel extends model
      * @access public
      * @return array
      */
-    public function getList($status = null)
+    public function getList($status = null, $pager = null)
     {
         $projects = $this->dao->select('*')->from(TABLE_PROJECT)
             ->where('deleted')->eq(0)
             ->beginIF($status and $status != 'involved')->andWhere('status')->eq($status)->fi()
             ->beginIF($status and $status == 'involved')->andWhere('status')->eq('doing')->fi()
+            ->page($pager)
             ->fetchAll('id');
 
         $members = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id', 'account');

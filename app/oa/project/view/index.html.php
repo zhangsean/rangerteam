@@ -18,7 +18,7 @@
   <?php commonModel::printLink('project', 'create', '', $this->lang->project->create, "id='createButton' class='btn btn-primary'");?>
 </div>
 <div class='row' id='cardMode'>
-<?php foreach($projects as $project):?>
+  <?php foreach($projects as $project):?>
   <div class='col-md-4 col-sm-6'>
     <div class='panel project-block'>
       <div class='panel-heading'>
@@ -48,7 +48,8 @@
       </div>
     </div>
   </div>
-<?php endforeach;?>
+  <?php endforeach;?>
+  <div class='col-sm-6 col-md-12'><?php echo $pager->show();?></div>
 </div>
 <div class='panel hide' id='listMode'>
   <table class='table table-hover table-striped tablesorter table-fixed table-data'>
@@ -86,6 +87,7 @@
       </td>
     </tr>
     <?php endforeach;?>
+    <tr><td colspan='9'><?php echo $pager->show();?></td></tr>
   </table>
 </div>
 <?php include '../../common/view/footer.html.php';?>
