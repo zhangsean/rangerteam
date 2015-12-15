@@ -54,6 +54,7 @@ class contact extends control
         $this->view->title     = $this->lang->contact->list;
         $this->view->mode      = $mode;
         $this->view->status    = $status;
+        $this->view->origin    = $origin;
         $this->view->contacts  = $contacts;
         $this->view->customers = $customers;
         $this->view->pager     = $pager;
