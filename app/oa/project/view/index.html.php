@@ -87,7 +87,7 @@
       </td>
     </tr>
     <?php endforeach;?>
-    <tr><td colspan='9'><?php echo $pager->show();?></td></tr>
+    <tfoot><tr><td colspan='9'><?php echo $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.html.php';?>

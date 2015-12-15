@@ -259,12 +259,16 @@ class my extends control
      * @access public
      * @return void
      */
-    public function project()
+    public function project($recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
         $this->loadModel('project', 'oa');
         $this->view->title    = $this->lang->my->project->common;
-        $this->view->projects = $this->project->getList('involved');
+        $this->view->projects = $this->project->getList('involved', $pager);
         $this->view->users    = $this->loadModel('user')->getPairs('noclosed');
+        $this->view->pager    = $pager;
         $this->display();
     }
 
