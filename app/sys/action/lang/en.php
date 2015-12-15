@@ -161,7 +161,6 @@ $lang->action->label->product   = 'product|product|view|productID=%s';
 $lang->action->label->order     = 'order|order|view|orderID=%s';
 $lang->action->label->task      = 'task|task|view|taskID=%s';
 $lang->action->label->contract  = 'contract|contract|view|contractID=%s';
-$lang->action->label->user      = 'user|user|view|account=%s';
 $lang->action->label->announce  = 'announce|announce|browse|';
 $lang->action->label->customer  = 'customer|customer|view|customerID=%s';
 $lang->action->label->contact   = 'contact|contact|view|contactID=%s';
@@ -191,6 +190,9 @@ $lang->action->label->refund['edited']      = 'refund review|refund|view|refundI
 $lang->action->label->refund['reviewed']    = 'refund review|refund|view|refundID=%s';
 $lang->action->label->refund['reimburse']   = 'refund review|refund|view|refundID=%s';
 $lang->action->label->refund['deletedfile'] = 'refund review|refund|view|refundID=%s';
+$lang->action->label->user = array();
+$lang->action->label->user['login']  = 'login|user|login|';
+$lang->action->label->user['logout'] = 'logout|user|logout|';
 
 /* Object type. */
 $lang->action->search->objectTypeList['']            = '';    

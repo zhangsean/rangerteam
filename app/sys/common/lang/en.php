@@ -96,6 +96,8 @@ $lang->cancel         = 'Cancel';
 $lang->import         = 'Import';
 $lang->export         = 'Export';
 $lang->setFileName    = 'File Name:';
+$lang->setFileNum     = 'File Number:';
+$lang->setFileType    = 'File Type:';
 $lang->save           = 'Save';
 $lang->saved          = 'Saved';
 $lang->confirm        = 'Confirm';
@@ -106,6 +108,7 @@ $lang->start          = 'Start';
 $lang->create         = 'Add';
 $lang->forbid         = 'Forbid';
 $lang->activate       = 'Activate';
+$lang->ignore         = 'Ignore';
 $lang->view           = 'View';
 $lang->more           = 'More';
 $lang->actions        = 'Actions';
@@ -138,6 +141,10 @@ $lang->signOut        = 'Sign out';
 
 $lang->exportAll      = 'Export All';
 $lang->exportThisPage = 'Export This Page';
+$lang->exportTemplate = 'Export Template';
+$lang->importFile     = 'Import File';
+$lang->importSuccess  = 'Import Successfully';
+$lang->importFail     = 'Import Failure';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();
@@ -306,6 +313,18 @@ $lang->pager->pre        = " Previous";
 $lang->pager->next       = " Next";
 $lang->pager->last       = " Last";
 $lang->pager->locate     = "GO!";
+
+/* The excel items. */
+$lang->excel = new stdClass();
+$lang->excel->canNotRead = 'Can not resolve this file.';
+
+$lang->excel->error = new stdclass();
+$lang->excel->error->info  = 'The value you entered is not in the drop-down list.';
+$lang->excel->error->title = 'Input error';
+
+$lang->excel->title = new stdclass();
+$lang->excel->title->contact  = 'Contact';
+$lang->excel->title->sysValue = 'System value';
 
 $lang->date = new stdclass();
 $lang->date->minute = 'minute';

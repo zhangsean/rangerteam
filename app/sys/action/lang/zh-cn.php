@@ -190,7 +190,7 @@ $lang->action->label->refund['edited']      = '报销审批|refund|view|refundID
 $lang->action->label->refund['reviewed']    = '报销审批|refund|view|refundID=%s';
 $lang->action->label->refund['reimburse']   = '报销审批|refund|view|refundID=%s';
 $lang->action->label->refund['deletedfile'] = '报销审批|refund|view|refundID=%s';
-
+$lang->action->label->user = array();
 $lang->action->label->user['login']  = '登录|user|login|';
 $lang->action->label->user['logout'] = '退出|user|logout|';
 
