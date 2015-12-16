@@ -27,6 +27,7 @@ class misc extends control
         $notices = $this->loadModel('action')->getUnreadNotice('', $skipNotice = $notice);
 
         $res = new stdclass();
+        $res->time    = helper::now();
         $res->notices = $notices;
         die(json_encode($res));
     }

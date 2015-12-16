@@ -713,9 +713,9 @@ class actionModel extends model
             $time = str_replace(':', '', $todo->begin);
 
             $lastTime = 0;
-            if((int)$time >= (int)$begin[1]  and (int)$time <= (int)$end[1])  $lastTime = 1;
-            if((int)$time >= (int)$begin[10] and (int)$time <= (int)$end[10]) $lastTime = 10;
-            if((int)$time >= (int)$begin[30] and (int)$time <= (int)$end[30]) $lastTime = 30;
+            if((int)$time > (int)$begin[1]  and (int)$time <= (int)$end[1])  $lastTime = 1;
+            if((int)$time > (int)$begin[10] and (int)$time <= (int)$end[10]) $lastTime = 10;
+            if((int)$time > (int)$begin[30] and (int)$time <= (int)$end[30]) $lastTime = 30;
             if($lastTime)
             {
                 $notice = new stdclass();
