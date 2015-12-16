@@ -61,7 +61,7 @@ class todo extends control
      * @access public
      * @return void
      */
-    public function browse($mode = 'assignedTo', $orderBy = 'date', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'assignedTo', $orderBy = 'date_asc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -76,7 +76,7 @@ class todo extends control
         }
         else if($mode == 'undone')
         {
-            $todos = $this->todo->getList('self', $this->app->user->account, 'all', 'undone', $orderBy, $pager);
+            $todos = $this->todo->getList('self', $this->app->user->account, 'before', 'undone', $orderBy, $pager);
         }
         else
         {
