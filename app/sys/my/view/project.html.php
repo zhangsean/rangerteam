@@ -11,6 +11,10 @@
  */
 ?>
 <?php include './header.html.php';?>
+<div style='height: 25px;'></div>
+<div id='menuActions' class='actions'>
+  <?php commonModel::printLink('oa.project', 'create', '', '<i class="icon-plus"></i> ' . $this->lang->project->create, "id='createButton' class='btn btn-primary'");?>
+</div>
 <div class='panel'>
   <table class='table table-hover table-striped tablesorter table-fixed table-data'>
     <thead>

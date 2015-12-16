@@ -26,8 +26,32 @@
       <div class='panel-body'>
         <form id='ajaxForm' class='form-inline' method='post'>
           <table class='table table-form table-condensed'>
-            <tr><td><?php echo html::checkbox('refundCategories', $expenseList, $refundCategories);?></td></tr>
-            <tr><td><?php echo html::submitButton();?></td></tr>
+            <tr>
+              <td>
+                <?php if(empty($expenseList))
+                { 
+                    echo $lang->refund->categoryTips;
+                } 
+                else
+                {
+                    echo html::checkbox('refundCategories', $expenseList, $refundCategories);
+                }
+                ?>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <?php if(empty($expenseList))
+                { 
+                    commonModel::printLink('cash.tree', 'browse', 'type=out', $lang->refund->setExpense, "class='btn btn-primary setExpense'");
+                } 
+                else
+                {
+                    echo html::submitButton();
+                }
+                ?>
+              </td>
+            </tr>
           </table>
         </form>
       </div>

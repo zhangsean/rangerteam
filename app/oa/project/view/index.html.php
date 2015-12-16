@@ -15,7 +15,7 @@
 <div id='menuActions'>
   <?php echo html::a("javascript:;", "<i class='icon icon-th-large'></i>", "data-mode='card' class='mode-toggle btn'");?>
   <?php echo html::a("javascript:;", "<i class='icon icon-list'></i>", "data-mode='list' class='mode-toggle btn'");?>
-  <?php commonModel::printLink('project', 'create', '', $this->lang->project->create, "id='createButton' class='btn btn-primary'");?>
+  <?php commonModel::printLink('project', 'create', '', '<i class="icon-plus"></i> ' . $this->lang->project->create, "id='createButton' class='btn btn-primary'");?>
 </div>
 <div class='row' id='cardMode'>
   <?php foreach($projects as $project):?>

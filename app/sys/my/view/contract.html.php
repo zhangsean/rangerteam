@@ -12,6 +12,9 @@
 ?>
 <?php include './header.html.php';?>
 <?php js::set('type', $type);?>
+<div id='menuActions' class='actions'>
+  <?php commonModel::printLink('crm.contract', 'create', '', '<i class="icon-plus"></i> ' . $lang->contract->create, "class='btn btn-primary'");?>
+</div>
 <div class='panel'>
   <table class='table table-hover table-striped tablesorter table-data table-fixed' id='contractList'>
     <thead>

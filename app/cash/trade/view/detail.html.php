@@ -32,7 +32,7 @@
         <td><?php if(isset($categories)) echo html::select("category[{$key}][]", array('') + $categories, $detail->category, "class='form-control chosen'")?></td>
         <td><?php echo html::select("handlers[{$key}][]", $users, $detail->handlers, "class='form-control chosen' multiple")?></td>
         <td><?php echo html::textarea("desc[{$key}]", $detail->desc, "class='form-control'")?></td>
-        <td><i class='btn icon icon-plus'></i> <i class='btn icon icon-minus'></i></td>
+        <td><i class='btn icon icon-plus'></i> <i class='btn icon icon-remove'></i></td>
       </tr>
       <?php endforeach;?>
     </tbody>
@@ -48,7 +48,7 @@
       <td><?php if(isset($categories)) echo html::select("category[key][]", array('') + $categories, '', "class='form-control'")?></td>
       <td><?php echo html::select("handlers[key][]", $users, $trade->handlers, "class='form-control' multiple")?></td>
       <td><?php echo html::textarea("desc[key]", '', "class='form-control'")?></td>
-      <td><i class='btn icon icon-plus'></i> <i class='btn icon icon-minus'></i></td>
+      <td><i class='btn icon icon-plus'></i> <i class='btn icon icon-remove'></i></td>
     </tr>
   </tbody>
 </table>

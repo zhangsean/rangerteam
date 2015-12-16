@@ -10,7 +10,7 @@ $(document).ready(function()
     });
 
     /* Remove a trade detail item. */
-    $(document).on('click', '.icon-minus', function()
+    $(document).on('click', '.icon-remove', function()
     {
         if($('#ajaxForm table tbody tr').size() > 1)
         {

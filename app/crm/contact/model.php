@@ -564,12 +564,13 @@ class contactModel extends model
         {
             if(empty($contact->realname)) continue;
 
-            foreach($this->config->contact->listFields as $k)
+            foreach($this->config->contact->listFields as $field)
             {
-                $contact->$k = array_search($contact->$k, $$k);
+                $contact->$field = array_search($contact->$field, $$field);
             }
 
             $contact->customer = $contact->realname;
+            $contact->status   = 'wait';
             $result = $this->checkContact($contact);
             if($result['result'] == 'fail') 
             {

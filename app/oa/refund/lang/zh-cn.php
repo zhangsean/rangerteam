@@ -62,3 +62,5 @@ $lang->refund->uniqueReviewer    = '第一审批人和第二审批人不能是�
 $lang->refund->createTradeTip    = '是否关联记账？';
 $lang->refund->secondReviewerTip = '二级审批需要设置二级审批人。';
 $lang->refund->correctMoney      = '审批金额不能多于申请金额';
+$lang->refund->categoryTips      = '尚未设置支出科目。';
+$lang->refund->setExpense        = '前往设置';

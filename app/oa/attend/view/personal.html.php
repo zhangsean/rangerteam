@@ -77,6 +77,7 @@
               <?php if(isset($attends[$currentDate])):?>
               <?php $status = $attends[$currentDate]->status;?>
               <?php $reason = $attends[$currentDate]->reason;?>
+              <?php $reviewStatus = $attends[$currentDate]->reviewStatus;?>
               <tr class="attend-<?php echo $status?> <?php echo (date('m', $startDate) == $currentMonth) ? '' : 'otherMonth'?>" title='<?php echo $lang->attend->statusList[$status]?>'>
                 <td><?php echo $currentDate;?></td>
                 <td><?php echo $lang->datepicker->abbrDayNames[$dayIndex]?></td>
@@ -96,7 +97,8 @@
                   <?php
                   if(strpos('rest, normal, trip, leave, overtime', $status) === false)
                   {
-                      if($reason == '' or $reason == 'normal') echo html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $lang->attend->edit, "data-toggle='modal' data-width='500px'");
+                      $edit = $reviewStatus == 'wait' ? $lang->attend->edited : $lang->attend->edit;
+                      if($reason == '' or $reason == 'normal') echo html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $edit, "data-toggle='modal' data-width='500px'");
                       if($reason == '' or $reason == 'leave')  echo html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $lang->attend->leave, "data-toggle='modal' data-width='500px'");
                       if($reason == '' or $reason == 'trip')   echo html::a($this->createLink('trip', 'create'), $lang->attend->trip, "data-toggle='modal' data-width='500px'");
                   }
