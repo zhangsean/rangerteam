@@ -74,6 +74,10 @@ class todo extends control
         {
             $todos = $this->todo->getList('self', $this->app->user->account, 'all', 'all', $orderBy, $pager);
         }
+        else if($mode == 'undone')
+        {
+            $todos = $this->todo->getList('self', $this->app->user->account, 'all', 'undone', $orderBy, $pager);
+        }
         else
         {
             $todos = $this->todo->getList($mode, $this->app->user->account, 'all', 'unclosed', $orderBy, $pager);
