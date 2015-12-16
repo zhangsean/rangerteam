@@ -1,3 +1,28 @@
+$(document).ready(function()
+{
+    $('input[name=switchAll]').click(function()
+    {
+        if($(this).prop('checked'))
+        {
+            $('[name*=switchDate]').each(function()
+            {
+                var key = $(this).attr('data-key');
+                $('#switchDate' + key).prop('checked', 'checked');
+                switchDateList(key);
+            })
+        }
+        else
+        {
+            $('[name*=switchDate]').each(function()
+            {
+                var key = $(this).attr('data-key');
+                $('#switchDate' + key).prop('checked', false);
+                switchDateList(key);
+            })
+        }
+    })
+})
+
 function updateAction(date)
 {
   if(date.indexOf('-') != -1)
