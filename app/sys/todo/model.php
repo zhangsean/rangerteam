@@ -124,7 +124,7 @@ class todoModel extends model
             ->setDefault('private', 0)
             ->stripTags($this->config->todo->editor->edit['id'], $this->config->allowedTags->front)
             ->get();
-        $this->dao->update(TABLE_TODO)->data($todo)
+        $this->dao->update(TABLE_TODO)->data($todo, $skip = 'comment')
             ->autoCheck()
             ->checkIF($todo->type == 'custom', $this->config->todo->require->edit, 'notempty')->where('id')->eq($todoID)
             ->exec();

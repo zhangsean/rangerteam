@@ -16,7 +16,8 @@ $config->todo->times->delta = 10;
 
 $config->todo->editor = new stdclass();
 $config->todo->editor->create = array('id' => 'desc', 'tools' => 'simple');
-$config->todo->editor->edit   = array('id' => 'desc', 'tools' => 'simple');
+$config->todo->editor->edit   = array('id' => 'desc,comment', 'tools' => 'simple');
+$config->todo->editor->view   = array('id' => 'comment,lastComment', 'tools' => 'simple');
 
 $config->todo->list = new stdclass();
 $config->todo->list->exportFields = 'id, account, date, begin, end, type, idvalue, pri, name, desc, status, private'; 

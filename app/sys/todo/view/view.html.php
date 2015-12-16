@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
+<?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php if(!$todo->private or ($todo->private and $todo->account == $app->user->account)):?>
 <div class='container mw-700px'>
   <div class='row-table'>
@@ -31,6 +32,35 @@
         </fieldset>
         <?php echo $this->fetch('action', 'history', "objectType=todo&objectID={$todo->id}");?>
       </div>
+      <div class='text-center actions'>
+        <span class='self'>
+          <?php
+          $disabled = ($this->todo->checkPriv($todo, 'finish') and $this->todo->isClickable($todo, 'finish')) ? '' : 'disabled';
+          commonModel::printLink('todo', 'finish', "id=$todo->id", $lang->finish, "data-id='{$todo->id}' class='btn btn-success ajaxFinish $disabled'");
+          $disabled = $this->todo->checkPriv($todo, 'assignTo') ? '' : 'disabled';
+          commonModel::printLink('todo', 'assignTo', "id=$todo->id", $lang->todo->assignTo, "data-id='{$todo->id}' class='btn ajaxAssign $disabled'");
+          $disabled = $this->todo->checkPriv($todo, 'edit') ? '' : 'disabled';
+          commonModel::printLink('todo', 'edit',   "todoID=$todo->id", $lang->edit, "class='btn ajaxEdit $disabled'");
+          $disabled = ($this->todo->checkPriv($todo, 'activate') and $this->todo->isClickable($todo, 'activate')) ? '' : 'disabled';
+          commonModel::printLink('todo', 'activate', "id=$todo->id", $lang->activate, "data-id='{$todo->id}' data-toggle='ajax' class='btn $disabled'");
+          $disabled = ($this->todo->checkPriv($todo, 'close') and $this->todo->isClickable($todo, 'close')) ? '' : 'disabled';
+          commonModel::printLink('todo', 'close', "id=$todo->id", $lang->close, "data-id='{$todo->id}' data-toggle='ajax' class='btn $disabled'");
+          $disabled = $this->todo->checkPriv($todo, 'delete') ? '' : 'disabled';
+          commonModel::printLink('todo', 'delete', "todoID=$todo->id", $lang->delete, "class='btn todoDeleter $disabled'");
+          ?>
+        </span>
+        <?php
+        $disabled = $this->todo->checkPriv($todo, 'edit') ? '' : 'disabled';
+        echo $disabled ? html::a('###', $this->lang->comment, "class='btn disabled' disabled='disabled'") : html::a('#commentBox', $this->lang->comment, "class='btn' onclick=setComment()");
+        ?>
+      </div>
+      <fieldset id='commentBox' class='hide'>
+        <legend><?php echo $lang->comment;?></legend>
+        <form id='ajaxForm' method='post' action='<?php echo inlink('edit', "todoID=$todo->id&comment=true")?>'>
+          <div class='form-group'><?php echo html::textarea('comment', '',"rows='5' class='w-p100'");?></div>
+          <?php echo html::submitButton();?>
+        </form>
+      </fieldset>      
     </div>
     <div class='col-side'>
       <div class='main main-side'>
@@ -80,22 +110,6 @@
           </table>
       </div>
     </div>
-  </div>
-  <div class='text-center actions'>
-    <?php
-    $disabled = ($this->todo->checkPriv($todo, 'finish') and $this->todo->isClickable($todo, 'finish')) ? '' : 'disabled';
-    commonModel::printLink('todo', 'finish', "id=$todo->id", $lang->finish, "data-id='{$todo->id}' class='btn btn-success ajaxFinish $disabled'");
-    $disabled = $this->todo->checkPriv($todo, 'assignTo') ? '' : 'disabled';
-    commonModel::printLink('todo', 'assignTo', "id=$todo->id", $lang->todo->assignTo, "data-id='{$todo->id}' class='btn ajaxAssign $disabled'");
-    $disabled = $this->todo->checkPriv($todo, 'edit') ? '' : 'disabled';
-    commonModel::printLink('todo', 'edit',   "todoID=$todo->id", $lang->edit, "class='btn ajaxEdit $disabled'");
-    $disabled = ($this->todo->checkPriv($todo, 'activate') and $this->todo->isClickable($todo, 'activate')) ? '' : 'disabled';
-    commonModel::printLink('todo', 'activate', "id=$todo->id", $lang->activate, "data-id='{$todo->id}' data-toggle='ajax' class='btn $disabled'");
-    $disabled = ($this->todo->checkPriv($todo, 'close') and $this->todo->isClickable($todo, 'close')) ? '' : 'disabled';
-    commonModel::printLink('todo', 'close', "id=$todo->id", $lang->close, "data-id='{$todo->id}' data-toggle='ajax' class='btn $disabled'");
-    $disabled = $this->todo->checkPriv($todo, 'delete') ? '' : 'disabled';
-    commonModel::printLink('todo', 'delete', "todoID=$todo->id", $lang->delete, "class='btn todoDeleter $disabled'");
-    ?>
   </div>
 </div>
 <?php else:?>

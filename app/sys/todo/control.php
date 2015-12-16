@@ -169,7 +169,7 @@ class todo extends control
      * @access public
      * @return void
      */
-    public function edit($todoID)
+    public function edit($todoID, $comment = false)
     {
         /* Judge a private todo or not, If private, die. */
         $todo = $this->todo->getById($todoID);
@@ -177,11 +177,16 @@ class todo extends control
 
         if(!empty($_POST))
         {
-            $changes = $this->todo->update($todoID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            if($changes)
+            $changes = array();
+            if($comment == false)
             {
-                $actionID = $this->loadModel('action')->create('todo', $todoID, 'edited');
+                $changes = $this->todo->update($todoID);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
+
+            if($this->post->comment != '' or !empty($changes))
+            {
+                $actionID = $this->loadModel('action')->create('todo', $todoID, 'edited', $this->post->comment);
                 $this->action->logHistory($actionID, $changes);
             }
             $date = str_replace('-', '', $this->post->date);

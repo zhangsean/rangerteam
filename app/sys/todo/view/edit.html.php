@@ -48,6 +48,10 @@
         <td colspan='2'><?php echo html::textarea('desc', htmlspecialchars($todo->desc), "rows=4 class='form-control'");?></td>
       </tr>
       <tr>
+        <th><?php echo $lang->comment;?></th>
+        <td colspan='2'><?php echo html::textarea('comment', '', "class='form-control'");?></td>
+      </tr>
+      <tr>
         <th><?php echo $lang->todo->status;?></th>
         <td><?php echo html::select('status', $lang->todo->statusList, $todo->status, "class='form-control'");?></td>
       </tr>  
