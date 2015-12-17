@@ -1543,13 +1543,7 @@
                         }
                     });
 
-                    settings.onSortEntries(orders, function(result)
-                    {
-                        if(result)
-                        {
-                            $.refreshDesktop();
-                        }
-                    });
+                    settings.onSortEntries(orders);
                 }});
             }
             else
