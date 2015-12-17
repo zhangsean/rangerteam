@@ -11,10 +11,11 @@
  */
 ?>
 <?php include $app->getModuleRoot() . '../sys/my/view/header.html.php';?>
+<?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php js::set('mode', $mode)?>
 <div class='row page-content'>
   <div class='panel'>
-    <form id='ajaxForm' method='post' action="<?php echo $this->createLink('sys.todo', 'batchClose');?>">
+    <form id='ajaxForm' method='post'>
       <table class='table table-hover table-striped tablesorter table-data table-fixed' id='todoList'>
         <thead>
           <tr class='text-center'>
@@ -63,7 +64,22 @@
         <tfoot>
           <tr>
             <td colspan='10'>
-              <div class='pull-left'><?php echo html::selectButton() . html::submitButton($lang->close);?></div>
+              <div class='pull-left batch-actions'>
+                <?php $closeActionLink = $this->createLink('sys.todo', 'batchClose');?>
+                <div class='pull-left close-action'><?php echo html::selectButton() . html::commonButton($lang->close, 'btn btn-primary', "onclick=\"setFormAction('$closeActionLink')\"");?></div>
+                <?php
+                if(commonModel::hasPriv('todo', 'import2Today'))
+                {
+                    $actionLink = $this->createLink('todo', 'import2Today');
+                    echo "<div class='input-group import-action'>";
+                    echo "<div class='datepicker-wrapper datepicker-date'>" . html::input('date', date('Y-m-d'), "class='form-control form-date'") . '</div>';
+                    echo "<span class='input-group-btn'>";
+                    echo html::commonButton($lang->todo->import, 'btn btn-default', "onclick=\"setFormAction('$actionLink')\"");
+                    echo '</span>';
+                    echo '</div>';
+                }
+                ?>
+              </div>
               <?php $pager->show();?>
             </td>
           </tr>

@@ -66,6 +66,8 @@ class todo extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        $this->session->set('todoList', $this->app->getURI(true));
+
         if($mode == 'future')
         {
             $todos = $this->todo->getList('self', $this->app->user->account, 'future', 'unclosed', $orderBy, $pager);
@@ -370,6 +372,21 @@ class todo extends control
         $this->view->users = $this->loadModel('user')->getPairs('nodeleted,noclosed');
         $this->view->times = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
         $this->display();
+    }
+
+    /**
+     * Import selected todoes to today.
+     * 
+     * @access public
+     * @return void
+     */
+    public function import2Today($todoID = 0)
+    {
+        $todoIDList = $_POST ? $this->post->todoIDList : array($todoID);
+        $date       = !empty($_POST['date']) ? $_POST['date'] : date::today();
+        $this->dao->update(TABLE_TODO)->set('date')->eq($date)->where('id')->in($todoIDList)->exec();
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'locate' => $this->session->todoList));
     }
 
     /**

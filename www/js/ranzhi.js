@@ -966,3 +966,20 @@ function switchSuspend()
     $('#searchResult').removeClass('show-finished');
     $('#searchResult').toggleClass('show-suspend');
 }
+
+/**
+ * Set form action and submit.
+ * 
+ * @param  url    $actionLink 
+ * @param  string $hiddenwin 'hiddenwin'
+ * @access public
+ * @return void
+ */
+function setFormAction(actionLink, hiddenwin, obj)
+{
+    $form = typeof(obj) == 'undefined' ? $('form') : $(obj).closest('form');
+    if(hiddenwin) $form.attr('target', hiddenwin);
+    else $form.removeAttr('target');
+
+    $form.attr('action', actionLink).submit();
+}
