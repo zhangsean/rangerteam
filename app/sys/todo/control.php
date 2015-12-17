@@ -164,6 +164,7 @@ class todo extends control
         $this->view->times = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
         $this->view->time  = date::now();
         $this->view->users = $this->loadModel('user')->getPairs('noclosed,nodeleted');
+        $this->view->modalWidth = '85%';
 
         $this->display();
     }

@@ -9,8 +9,16 @@ function updateAction(date)
       date = date + datearray[i];
     }
   }
+
+  var modal = $('#triggerModal');
   link = createLink('todo', 'batchCreate', 'date=' + date);
-  location.href=link;
+  modal.attr('ref', link);
+
+  setTimeout(function()
+  {
+      modal.load(modal.attr('ref'), function(){$(this).find('.modal-dialog').css('width', $(this).data('width'));
+      $.zui.ajustModalPosition()})
+  }, 1000);
 }
 
 function switchDateList(number)
