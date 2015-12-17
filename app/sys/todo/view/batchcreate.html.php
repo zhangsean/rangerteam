@@ -32,7 +32,7 @@
           <th class='w-p30 red'><?php echo $lang->todo->name;?></th>
           <th><?php echo $lang->todo->desc;?></th>
           <th class='w-300px'><?php echo $lang->todo->beginAndEnd;?></th>
-          <th class='w-70px'><input type='checkbox' name='switchAll' id='switchAll'><?php echo $lang->todo->periods['future'];?></th>
+          <th class='w-70px'><input type='checkbox' name='switchAll' id='switchAll' onclick='switchDateAll(this)'><?php echo $lang->todo->periods['future'];?></th>
         </tr>
       </thead>
       <?php $pri = 3;?>
