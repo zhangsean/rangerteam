@@ -21,6 +21,7 @@
       <tr class='text-center'>
         <?php $vars = "type={$type}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->contract->id);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('code',        $orderBy, $vars, $lang->contract->code);?></th>
         <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->contract->name);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('amount',      $orderBy, $vars, $lang->contract->amount);?></th>
         <th class='w-100px visible-lg'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->contract->createdDate);?></th>
@@ -36,6 +37,7 @@
       <?php foreach($contracts as $contract):?>
       <tr class='text-center'>
         <td><?php echo $contract->id;?></td>
+        <td><?php echo $contract->code;?></td>
         <td class='text-left actions'><?php echo html::a($this->createLink('crm.contract', 'view', "id=$contract->id"), $contract->name);?></td>
         <td class='text-right'><?php echo zget($currencySign, $contract->currency, '') . formatMoney($contract->amount);?></td>
         <td class='visible-lg'><?php echo substr($contract->createdDate, 0, 10);?></td>
