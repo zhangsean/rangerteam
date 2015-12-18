@@ -27,7 +27,7 @@
     }
     else
     {
-        echo html::a('', $lang->admin->common, "class='navbar-brand'");
+        echo html::a($this->createLink('admin'), $lang->admin->common, "class='navbar-brand'");
     }
     ?>
   </div>
