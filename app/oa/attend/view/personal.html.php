@@ -77,7 +77,7 @@
               <?php if(isset($attends[$currentDate])):?>
               <?php $status = $attends[$currentDate]->status;?>
               <?php $reason = $attends[$currentDate]->reason;?>
-              <?php $reviewStatus = $attends[$currentDate]->reviewStatus;?>
+              <?php $reviewStatus = isset($attends[$currentDate]->reviewStatus) ? $attends[$currentDate]->reviewStatus : '';?>
               <tr class="attend-<?php echo $status?> <?php echo (date('m', $startDate) == $currentMonth) ? '' : 'otherMonth'?>" title='<?php echo $lang->attend->statusList[$status]?>'>
                 <td><?php echo $currentDate;?></td>
                 <td><?php echo $lang->datepicker->abbrDayNames[$dayIndex]?></td>
