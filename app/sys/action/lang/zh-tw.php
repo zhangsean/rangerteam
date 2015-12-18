@@ -161,7 +161,6 @@ $lang->action->label->product   = '產品|product|view|productID=%s';
 $lang->action->label->order     = '訂單|order|view|orderID=%s';
 $lang->action->label->task      = '任務|task|view|taskID=%s';
 $lang->action->label->contract  = '合同|contract|view|contractID=%s';
-$lang->action->label->user      = '成員|user|admin|';
 $lang->action->label->announce  = '公告|announce|browse|';
 $lang->action->label->customer  = '客戶|customer|view|customerID=%s';
 $lang->action->label->contact   = '聯繫人|contact|view|contactID=%s';
@@ -191,6 +190,9 @@ $lang->action->label->refund['edited']      = '報銷審批|refund|view|refundID
 $lang->action->label->refund['reviewed']    = '報銷審批|refund|view|refundID=%s';
 $lang->action->label->refund['reimburse']   = '報銷審批|refund|view|refundID=%s';
 $lang->action->label->refund['deletedfile'] = '報銷審批|refund|view|refundID=%s';
+$lang->action->label->user = array();
+$lang->action->label->user['login']  = '登錄|user|login|';
+$lang->action->label->user['logout'] = '退出|user|logout|';
 
 /* Object type. */
 $lang->action->search->objectTypeList['']            = '';    

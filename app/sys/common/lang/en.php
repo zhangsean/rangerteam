@@ -76,6 +76,7 @@ $lang->logout         = 'Logout';
 $lang->login          = 'Login';
 $lang->account        = 'Account';
 $lang->password       = 'Password';
+$lang->all            = 'All';
 $lang->changePassword = 'Change password';
 $lang->currentPos     = 'Positon';
 $lang->categoryMenu   = 'Categories';

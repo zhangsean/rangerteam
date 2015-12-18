@@ -62,3 +62,5 @@ $lang->refund->uniqueReviewer    = '第一審批人和第二審批人不能是�
 $lang->refund->createTradeTip    = '是否關聯記賬？';
 $lang->refund->secondReviewerTip = '二級審批需要設置二級審批人。';
 $lang->refund->correctMoney      = '審批金額不能多於申請金額';
+$lang->refund->categoryTips      = '尚未設置支出科目。';
+$lang->refund->setExpense        = '前往設置';

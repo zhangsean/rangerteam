@@ -76,6 +76,7 @@ $lang->logout         = '退出';
 $lang->login          = '登錄';
 $lang->account        = '帳號';
 $lang->password       = '密碼';
+$lang->all            = '全部';
 $lang->changePassword = '修改密碼';
 $lang->currentPos     = '當前位置';
 $lang->categoryMenu   = '分類導航';
@@ -96,6 +97,8 @@ $lang->cancel         = '取消';
 $lang->import         = '導入';
 $lang->export         = '導出';
 $lang->setFileName    = '檔案名：';
+$lang->setFileNum     = '記錄數';
+$lang->setFileType    = '檔案類型';
 $lang->save           = '保存';
 $lang->saved          = '已保存';
 $lang->confirm        = '確認';
@@ -106,6 +109,7 @@ $lang->start          = '開始';
 $lang->create         = '新建';
 $lang->forbid         = '禁用';
 $lang->activate       = '激活';
+$lang->ignore         = '忽略';
 $lang->view           = '查看';
 $lang->more           = '更多';
 $lang->actions        = '操作';
@@ -138,6 +142,10 @@ $lang->signOut        = '簽退';
 
 $lang->exportAll      = '導出全部記錄';
 $lang->exportThisPage = '導出本頁記錄';
+$lang->exportTemplate = '導出模板';
+$lang->importFile     = '導入檔案';
+$lang->importSuccess  = '導入成功';
+$lang->importFail     = '導入失敗';
 
 /* Items for lifetime. */
 $lang->lifetime = new stdclass();
@@ -247,6 +255,7 @@ $lang->todo->menu->calendar        = '日曆|todo|calendar|';
 $lang->todo->menu->assignedToOther = '指派他人|todo|browse|mode=assignedtoother';
 $lang->todo->menu->assignedToMe    = '指派給我|todo|browse|mode=assignedtome';
 $lang->todo->menu->future          = '待定|todo|browse|mode=future';
+$lang->todo->menu->undone          = '未完成|todo|browse|mode=undone';
 $lang->todo->menu->all             = '所有|todo|browse|mode=all';
  
 /* Menu of mail module. */
@@ -306,6 +315,18 @@ $lang->pager->pre        = '上頁';
 $lang->pager->next       = '下頁';
 $lang->pager->last       = '末頁';
 $lang->pager->locate     = 'Go!';
+
+/* The excel items. */
+$lang->excel = new stdClass();
+$lang->excel->canNotRead = '不能解析該檔案';
+
+$lang->excel->error = new stdclass();
+$lang->excel->error->info  = '您輸入的值不在下拉框列表內。';
+$lang->excel->error->title = '輸入有誤';
+
+$lang->excel->title = new stdclass();
+$lang->excel->title->contact  = '聯繫人';
+$lang->excel->title->sysValue = '系統數據';
 
 $lang->date = new stdclass();
 $lang->date->minute = '分鐘';

@@ -5,6 +5,7 @@ $lang->attend->personal     = 'My Attend';
 $lang->attend->department   = 'Department attend';
 $lang->attend->company      = 'Company attend';
 $lang->attend->edit         = 'Manual sign';
+$lang->attend->edited       = 'Signed in';
 $lang->attend->leave        = 'Leave';
 $lang->attend->trip         = 'Trip';
 $lang->attend->review       = 'Review attendance';
