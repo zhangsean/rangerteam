@@ -302,6 +302,7 @@ class taskModel extends model
             }
         }
 
+        $this->loadModel('file')->processEditor($task, $this->config->task->editor->create['id']);
         $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels,team,teamEstimate,multiple,teamMember')
             ->autoCheck()
             ->batchCheck($this->config->task->require->create, 'notempty')
@@ -321,7 +322,7 @@ class taskModel extends model
             }
         }
 
-        $this->loadModel('file')->saveUpload('task', $taskID);
+        $this->file->saveUpload('task', $taskID);
 
         return $taskID;
     }
@@ -460,7 +461,7 @@ class taskModel extends model
                 ->add('editedBy',   $this->app->user->account)
                 ->add('editedDate', $now)
                 ->stripTags('desc', $this->config->allowedTags->admin)
-                ->remove('referer,uid,files,labels,multiple,team,teamEstimate,teamConsumed,teamLeft,remark')
+                ->remove('referer,files,labels,multiple,team,teamEstimate,teamConsumed,teamLeft,remark')
                 ->join('mailto', ',')
                 ->get();
 
@@ -501,7 +502,8 @@ class taskModel extends model
             }
         }
 
-        $this->dao->update(TABLE_TASK)->data($task, 'team')
+        $this->loadModel('file')->processEditor($task, $this->config->task->editor->edit['id']);
+        $this->dao->update(TABLE_TASK)->data($task, 'team, uid')
             ->autoCheck()
             ->batchCheckIF($task->status != 'cancel', $this->config->task->require->edit, 'notempty')
 

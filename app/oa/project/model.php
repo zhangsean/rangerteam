@@ -156,6 +156,7 @@ class projectModel extends model
             ->stripTags('desc', $this->config->allowedTags->admin)
             ->get();
 
+        $this->loadModel('file')->processEditor($project, $this->config->project->editor->create['id']);
         $this->dao->insert(TABLE_PROJECT)
             ->data($project, $skip = 'uid')
             ->autoCheck()
@@ -205,6 +206,7 @@ class projectModel extends model
                 ->get();
         }
 
+        $this->loadModel('file')->processEditor($project, $this->config->project->editor->edit['id']);
         $this->dao->update(TABLE_PROJECT)
             ->data($project, $skip = 'uid')
             ->autoCheck()

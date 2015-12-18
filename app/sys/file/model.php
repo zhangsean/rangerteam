@@ -363,6 +363,7 @@ class fileModel extends model
      */
     public function pasteImage($data, $uid)
     {
+        if(empty($data)) return '';
         $data = str_replace('\"', '"', $data);
 
         if(!$this->checkSavePath()) return false;
@@ -371,6 +372,8 @@ class fileModel extends model
         preg_match_all('/<img src="(data:image\/(\S+);base64,(\S+))" .+ \/>/U', $data, $out);
         foreach($out[3] as $key => $base64Image)
         {
+            $extension = strtolower($out[2][$key]);
+            if(!in_array($extension, $this->config->file->imageExtensions)) die();
             $imageData = base64_decode($base64Image);
 
             $file['extension'] = $out[2][$key];
@@ -583,5 +586,25 @@ class fileModel extends model
             $dataList[] = $data;
         }
         return $dataList;   
+    }
+
+    /**
+     * Process editor.
+     * 
+     * @param  object    $data 
+     * @param  string    $editorList 
+     * @access public
+     * @return object
+     */
+    public function processEditor($data, $editorList)
+    {
+        $editors = explode(',', $editorList);
+        foreach($editors as $editorID)
+        {
+            $editorID = trim($editorID);
+            if(empty($editorID) or !isset($data->$editorID)) continue;
+            $data->$editorID = $this->pasteImage($data->$editorID, $data->uid);
+        }
+        return $data;
     }
 }

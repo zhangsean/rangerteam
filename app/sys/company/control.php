@@ -36,6 +36,7 @@ class company extends control
         {
             $now = helper::now();
             $company = fixer::input('post')->stripTags('content', $this->config->allowedTags->admin)->get();
+            $company = $this->loadModel('file')->processEditor($company, $this->config->company->editor->setbasic['id']);
 
             $result = $this->loadModel('setting')->setItems('system.sys.common.company', $company);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));

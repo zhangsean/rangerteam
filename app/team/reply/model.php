@@ -182,6 +182,7 @@ class replyModel extends model
             ->remove('files,labels,hidden')
             ->get();
 
+        $this->loadModel('file')->processEditor($reply, $this->config->reply->editor->edit['id']);
         $this->dao->update(TABLE_REPLY)
             ->data($reply, $skip = 'uid')
             ->autoCheck()
@@ -189,7 +190,7 @@ class replyModel extends model
             ->where('id')->eq($replyID)
             ->exec();
 
-        $this->loadModel('file')->updateObjectID($this->post->uid, $replyID, 'reply');
+        $this->file->updateObjectID($this->post->uid, $replyID, 'reply');
         $this->file->copyFromContent($this->post->content, $replyID, 'reply');
 
         if(!dao::isError())

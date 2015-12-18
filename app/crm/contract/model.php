@@ -177,6 +177,7 @@ class contractModel extends model
             ->stripTags('items', $this->config->allowedTags->admin)
             ->get();
 
+        $contract = $this->loadModel('file')->processEditor($contract, $this->config->contract->editor->create['id']);
         $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid,files,labels,real')
             ->autoCheck()
             ->batchCheck($this->config->contract->require->create, 'notempty')
@@ -255,11 +256,12 @@ class contractModel extends model
             ->setIF($this->post->status == 'cancel' and $this->post->canceledDate == '0000-00-00', 'canceledDate', $now)
             ->setIF($this->post->status == 'finished' and $this->post->finishedBy == '', 'finishedBy', $this->app->user->account)
             ->setIF($this->post->status == 'finished' and $this->post->finishedDate == '0000-00-00', 'finishedDate', $now)
-            ->remove('uid,files,labels')
+            ->remove('files,labels')
             ->stripTags('items', $this->config->allowedTags->admin)
             ->get();
 
-        $this->dao->update(TABLE_CONTRACT)->data($data, 'order,real')
+        $data = $this->loadModel('file')->processEditor($data, $this->config->contract->editor->edit['id']);
+        $this->dao->update(TABLE_CONTRACT)->data($data, 'uid,order,real')
             ->where('id')->eq($contractID)
             ->autoCheck()
             ->batchCheck($this->config->contract->require->edit, 'notempty')
@@ -355,6 +357,7 @@ class contractModel extends model
             ->stripTags('comment', $this->config->allowedTags->admin)
             ->get();
 
+        $data = $this->loadModel('file')->processEditor($data, $this->config->contract->editor->delivery['id']);
         $this->dao->insert(TABLE_DELIVERY)->data($data, $skip = 'uid, handlers, finish')->autoCheck()->exec();
 
         if(!dao::isError())
@@ -399,6 +402,7 @@ class contractModel extends model
             ->stripTags('comment', $this->config->allowedTags->admin)
             ->get();
 
+        $data = $this->loadModel('file')->processEditor($data, $this->config->contract->editor->editdelivery['id']);
         $this->dao->update(TABLE_DELIVERY)->data($data, $skip = 'uid, handlers, finish')->where('id')->eq($delivery->id)->autoCheck()->exec();
 
         if(!dao::isError())

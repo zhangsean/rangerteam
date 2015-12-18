@@ -221,12 +221,13 @@ class docModel extends model
             ->encodeURL('url')
             ->stripTags('content', $this->config->allowedTags->admin)
             ->cleanInt('product, project, module')
-            ->remove('files,labels,uid')
+            ->remove('files,labels')
             ->get();
 
         $condition = "lib = '$doc->lib' AND module = $doc->module";
+        $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->create['id']);
         $this->dao->insert(TABLE_DOC)
-            ->data($doc)
+            ->data($doc, 'uid')
             ->autoCheck()
             ->batchCheck($this->config->doc->require->create, 'notempty')
             ->check('title', 'unique', $condition)
@@ -235,7 +236,7 @@ class docModel extends model
         if(!dao::isError())
         {
             $docID = $this->dao->lastInsertID();
-            $this->loadModel('file')->saveUpload('doc', $docID);
+            $this->file->saveUpload('doc', $docID);
             return $docID;
         }
         return false;
@@ -259,11 +260,12 @@ class docModel extends model
             ->stripTags('content', $this->config->allowedTags->admin)
             ->add('editedBy',   $this->app->user->account)
             ->add('editedDate', helper::now())
-            ->remove('comment,files,labels,uid')
+            ->remove('comment,files,labels')
             ->get();
 
         $uniqueCondition = "lib = '{$oldDoc->lib}' AND module = {$doc->module} AND id != $docID";
-        $this->dao->update(TABLE_DOC)->data($doc)
+        $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->edit['id']);
+        $this->dao->update(TABLE_DOC)->data($doc, 'uid')
             ->autoCheck()
             ->batchCheck($this->config->doc->require->edit, 'notempty')
             ->check('title', 'unique', $uniqueCondition)

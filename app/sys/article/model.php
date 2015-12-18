@@ -258,6 +258,7 @@ class articleModel extends model
             ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
 
+        $this->loadModel('file')->processEditor($article, $this->config->article->editor->create['id']);
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
@@ -266,7 +267,7 @@ class articleModel extends model
 
         $articleID = $this->dao->lastInsertID();
 
-        $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);
+        $this->file->updateObjectID($this->post->uid, $articleID, $type);
 
         if(dao::isError()) return false;
 
@@ -296,6 +297,7 @@ class articleModel extends model
             ->add('editedDate', helper::now())
             ->get();
 
+        $this->loadModel('file')->processEditor($article, $this->config->article->editor->edit['id']);
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
@@ -303,7 +305,7 @@ class articleModel extends model
             ->where('id')->eq($articleID)
             ->exec();
 
-        $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);
+        $this->file->updateObjectID($this->post->uid, $articleID, $type);
 
         if(dao::isError()) return false;
 

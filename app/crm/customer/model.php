@@ -240,6 +240,7 @@ class customerModel extends model
         if($customer->site == 'http://') $customer->site = '';
         if($customer->weibo == 'http://weibo.com/') $customer->weibo = '';
 
+        $customer = $this->loadModel('file')->processEditor($customer, $this->config->customer->editor->edit['id']);
         $this->dao->update(TABLE_CUSTOMER)
             ->data($customer, $skip = 'uid')
             ->autoCheck()

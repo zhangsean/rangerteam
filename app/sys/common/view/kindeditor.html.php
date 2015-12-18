@@ -65,11 +65,12 @@ function initKindeditor(afterInit)
 {
     $(':input[type=submit]').after("<input type='hidden' id='uid' name='uid' value=" + v.uid + ">");
 
+    var nextFormControl = 'input:not([type="hidden"]), textarea:not(.ke-edit-textarea), button[type="submit"], select';
     $.each(v.editors.id, function(key, editorID)
     {
         if(typeof(v.editors.filterMode) == 'undefined') v.editors.filterMode = true;
         editorTool = eval(v.editors.tools);
-        var K = KindEditor;
+        var K = KindEditor, $editor = $('#' + editorID);
         keEditor = K.create('#' + editorID,
         {
             width:'100%',
@@ -85,40 +86,63 @@ function initKindeditor(afterInit)
             allowFileManager:true,
             langType:v.editorLang,
             afterBlur: function(){this.sync(); },
-            afterChange: function(){$('#' + editorID ).change().hide();},
-            afterCreate : function()
+            afterChange: function(){$editor.change().hide();},
+            afterCreate: function()
             {
                 var doc = this.edit.doc; 
                 var cmd = this.edit.cmd; 
+                if(!K.WEBKIT && !K.GECKO)
+                {
+                    var pasted = false;
+                    $(doc.body).bind('paste', function(ev)
+                    {
+                        pasted = true;
+                        return true;
+                    });
+                    setTimeout(function()
+                    {
+                        $(doc.body).bind('keyup', function(ev)
+                        {
+                            if(pasted)
+                            {
+                                pasted = false;
+                                return true;
+                            }
+                            if(ev.keyCode == 86 && ev.ctrlKey) alert('<?php echo $this->lang->error->pasteImg;?>');
+                        })
+                    }, 10);
+                }
                 /* Paste in chrome.*/
                 /* Code reference from http://www.foliotek.com/devblog/copy-images-from-clipboard-in-javascript/. */
                 if(K.WEBKIT)
                 {
                     $(doc.body).bind('paste', function(ev)
                     {
-                        var $this = $(this);
+                        var $this    = $(this);
                         var original =  ev.originalEvent;
-                        var file =  original.clipboardData.items[0].getAsFile();
-                        var reader = new FileReader();
-                        reader.onload = function (evt) 
+                        var file     =  original.clipboardData.items[0].getAsFile();
+                        if(file)
                         {
-                            var result = evt.target.result; 
-                            var result = evt.target.result;
-                            var arr = result.split(",");
-                            var data = arr[1]; // raw base64
-                            var contentType = arr[0].split(";")[0].split(":")[1];
-
-                            html = '<img src="' + result + '" alt="" />';
-                            $.post(createLink('file', 'ajaxPasteImage', 'uid=' + v.uid), {editor: html}, function(data)
+                            var reader = new FileReader();
+                            reader.onload = function (evt) 
                             {
-                                if(data) return cmd.inserthtml(data);
+                                var result = evt.target.result; 
+                                var result = evt.target.result;
+                                var arr    = result.split(",");
+                                var data   = arr[1]; // raw base64
+                                var contentType = arr[0].split(";")[0].split(":")[1];
 
-                                alert(v.errorUnwritable);
-                                return cmd.inserthtml(html);
-                            });
-                        };
+                                html = '<img src="' + result + '" alt="" />';
+                                $.post(createLink('file', 'ajaxPasteImage', 'uid=' + v.uid), {editor: html}, function(data)
+                                {
+                                    if(data) return cmd.inserthtml(data);
 
-                        reader.readAsDataURL(file);
+                                    alert(v.errorUnwritable);
+                                    return cmd.inserthtml(html);
+                                });
+                            };
+                            reader.readAsDataURL(file);
+                        }
                     });
                 }
 
@@ -132,18 +156,29 @@ function initKindeditor(afterInit)
                             var html = K(doc.body).html();
                             if(html.search(/<img src="data:.+;base64,/) > -1)
                             {
+                                K(doc.body).html(html.replace(/<img src="data:.+;base64,.*".*\/>/, ''));
                                 $.post(createLink('file', 'ajaxPasteImage', "uid=" + v.uid), {editor: html}, function(data)
                                 {
                                     if(data) return K(doc.body).html(data);
 
                                     alert(v.errorUnwritable);
-                                    return K(doc.body).html(data);
+                                    return K(doc.body).html(html);
                                 });
                             }
                         }, 80);
                     });
                 }
                 /* End */
+            },
+            afterTab: function(id)
+            {
+                var $next = $editor.next(nextFormControl);
+                if(!$next.length) $next = $editor.parent().next().find(nextFormControl);
+                if(!$next.length) $next = $editor.parent().parent().next().find(nextFormControl);
+                $next = $next.first().focus();
+                var keditor = $next.data('keditor');
+                if(keditor) keditor.focus();
+                else if($next.hasClass('chosen')) $next.trigger('chosen:activate');
             }
         });
     });

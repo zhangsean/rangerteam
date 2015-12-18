@@ -183,6 +183,7 @@ class threadModel extends model
             ->remove('files, labels, views, replies, hidden, stick')
             ->get();
 
+        $this->loadModel('file')->processEditor($thread, $this->config->thread->editor->post['id']);
         $this->dao->insert(TABLE_THREAD)
             ->data($thread, $skip = 'uid')
             ->autoCheck()
@@ -191,13 +192,13 @@ class threadModel extends model
 
         $threadID = $this->dao->lastInsertID();
 
-        $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
+        $this->file->updateObjectID($this->post->uid, $threadID, 'thread');
         $this->file->copyFromContent($this->post->content, $threadID, 'thread');
 
         if(!dao::isError())
         {
             $this->saveCookie($threadID);
-            $this->loadModel('file')->saveUpload('thread', $threadID);
+            $this->file->saveUpload('thread', $threadID);
 
             /* Update board stats. */
             $this->loadModel('forum')->updateBoardStats($boardID);
@@ -246,6 +247,7 @@ class threadModel extends model
             ->remove('files,labels, views, replies, stick, hidden')
             ->get();
 
+        $this->loadModel('file')->processEditor($thread, $this->config->thread->editor->edit['id']);
         $this->dao->update(TABLE_THREAD)
             ->data($thread, $skip = 'uid')
             ->autoCheck()
@@ -253,13 +255,13 @@ class threadModel extends model
             ->where('id')->eq($threadID)
             ->exec();
 
-        $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
+        $this->file->updateObjectID($this->post->uid, $threadID, 'thread');
         $this->file->copyFromContent($this->post->content, $threadID, 'thread');
 
         if(dao::isError()) return false;
 
         /* Upload file.*/
-        $this->loadModel('file')->saveUpload('thread', $threadID);
+        $this->file->saveUpload('thread', $threadID);
 
         return true;
     }
