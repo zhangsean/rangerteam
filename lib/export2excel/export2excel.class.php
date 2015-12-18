@@ -3,7 +3,7 @@
  * The class file of export2excel of Yidou.
  *
  * @copyright   Copyright 2014-2015 青岛亿斗网络信息有限公司(QingDao Yidou Network Infomation Co,LTD, www.yidou.com.cn)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      yaozeyuan <yaozeyuan@yidou.biz>
  * @package     export2excel 
  * @version     $Id$

@@ -3,7 +3,7 @@
  * The browse view file of leave module of Ranzhi.
  *
  * @copyright   Copyright 2009-2015 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
- * @license     ZPL
+ * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      chujilu <chujilu@cnezsoft.com>
  * @package     leave
  * @version     $Id$
