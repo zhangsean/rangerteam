@@ -100,7 +100,8 @@ class my extends control
         $this->loadModel('todo', 'oa');
 
         /* compute begin and end. */
-        if($begin == '') $begin = helper::today();
+        $today = helper::today();
+        if($begin == '') $begin = date('Y-m-d', strtotime("$today -1 days"));
         if($end == '') $end = date('Y-m-d', strtotime("$begin +7 days"));
         if(strtotime($begin) > strtotime($end)) $end = date('Y-m-d', strtotime("$begin +7 days"));
         $date = array();
