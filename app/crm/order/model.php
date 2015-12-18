@@ -65,7 +65,7 @@ class orderModel extends model
      * @access public
      * @return array
      */
-    public function getList($mode = 'all', $param = null, $orderBy = 'id_desc', $pager = null)
+    public function getList($mode = 'all', $param = null, $owner = '', $orderBy = 'id_desc', $pager = null)
     {
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
@@ -86,6 +86,14 @@ class orderModel extends model
         $orders = $this->dao->select('o.*, c.name as customerName, c.level as level')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
             ->where('o.deleted')->eq(0)
+            ->beginIF($owner == 'my' and strpos('assignedTo,createdBy,signedBy', $mode) === false)
+            ->andWhere()->markLeft(1)
+            ->where('o.assignedTo')->eq($this->app->user->account)
+            ->orWhere('o.createdBy')->eq($this->app->user->account)
+            ->where('o.editedBy')->eq($this->app->user->account)
+            ->orWhere('o.signedBy')->eq($this->app->user->account)
+            ->markRight(1)
+            ->fi()
             ->beginIF($mode == 'past')->andWhere('o.nextDate')->andWhere('o.nextDate')->lt(helper::today())->fi()
             ->beginIF($mode == 'today')->andWhere('o.nextDate')->eq(helper::today())->fi()
             ->beginIF($mode == 'tomorrow')->andWhere('o.nextDate')->eq(formattime(date::tomorrow(), DT_DATE1))->fi()

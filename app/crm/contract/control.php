@@ -53,7 +53,7 @@ class contract extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $contracts = $this->contract->getList(0, $mode, $orderBy, $pager);
+        $contracts = $this->contract->getList(0, $mode, '', $orderBy, $pager);
 
         /* Set preAndNext condition. */
         $this->session->set('contractQueryCondition', $this->dao->get());

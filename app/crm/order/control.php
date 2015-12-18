@@ -37,7 +37,7 @@ class order extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $orders = $this->order->getList($mode, '', $orderBy, $pager);
+        $orders = $this->order->getList($mode, '', $owner = 'all', $orderBy, $pager);
 
         /* Set pre and next condition. */
         $this->session->set('orderQueryCondition', $this->dao->get());

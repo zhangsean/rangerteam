@@ -167,7 +167,7 @@ class my extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $orders = $this->order->getList($type, '', $orderBy, $pager);
+        $orders = $this->order->getList($type, '', $owner = 'my', $orderBy, $pager);
 
         /* Set pre and next condition. */
         $this->session->set('orderQueryCondition', $this->dao->get());
@@ -208,7 +208,7 @@ class my extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $contracts = $this->contract->getList(0, $type, $orderBy, $pager);
+        $contracts = $this->contract->getList(0, $type, $owner = 'my', $orderBy, $pager);
 
         /* Set preAndNext condition. */
         $this->session->set('contractQueryCondition', $this->dao->get());

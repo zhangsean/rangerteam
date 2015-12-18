@@ -45,7 +45,7 @@ class contractModel extends model
      * @access public
      * @return array
      */
-    public function getList($customer = 0, $mode = 'all', $orderBy = 'id_desc', $pager = null)
+    public function getList($customer = 0, $mode = 'all', $owner = 'all', $orderBy = 'id_desc', $pager = null)
     {
         /* process search condition. */
         if($this->session->contractQuery == false) $this->session->set('contractQuery', ' 1 = 1');
@@ -55,6 +55,20 @@ class contractModel extends model
 
         return $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('deleted')->eq(0)
+            ->beginIF($owner == 'my' and strpos('returnedBy,deliveredBy', $mode) === false)
+            ->andWhere()
+            ->markLeft(1)
+            ->where('createdBy')->eq($this->app->user->account)
+            ->orWhere('editedBy')->eq($this->app->user->account)
+            ->orWhere('signedBy')->eq($this->app->user->account)
+            ->orWhere('returnedBy')->eq($this->app->user->account)
+            ->orWhere('deliveredBy')->eq($this->app->user->account)
+            ->orWhere('finishedBy')->eq($this->app->user->account)
+            ->orWhere('canceledBy')->eq($this->app->user->account)
+            ->orWhere('contactedBy')->eq($this->app->user->account)
+            ->orWhere('handlers')->like("%{$this->app->user->account}%")
+            ->markRight(1)
+            ->fi()
             ->beginIF($customer)->andWhere('customer')->eq($customer)->fi()
             ->beginIF($mode == 'unfinished')->andWhere('`status`')->eq('normal')->fi()
             ->beginIF($mode == 'unreceived')->andWhere('`return`')->ne('done')->andWhere('`status`')->ne('canceled')->fi()
