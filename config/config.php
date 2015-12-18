@@ -5,7 +5,7 @@
  * Don't modify this file directly, copy the item to my.php and change it.
  *
  * @copyright   Copyright 2009-2013 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
- * @license     LGPL
+ * @license     ZPL (http://zpl.pub/page/zplv12.html) 
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     config
  * @version     $Id$
