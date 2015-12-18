@@ -90,7 +90,7 @@ class orderModel extends model
             ->andWhere()->markLeft(1)
             ->where('o.assignedTo')->eq($this->app->user->account)
             ->orWhere('o.createdBy')->eq($this->app->user->account)
-            ->where('o.editedBy')->eq($this->app->user->account)
+            ->orWhere('o.editedBy')->eq($this->app->user->account)
             ->orWhere('o.signedBy')->eq($this->app->user->account)
             ->markRight(1)
             ->fi()
