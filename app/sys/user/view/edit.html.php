@@ -28,14 +28,6 @@
         <td><?php unset($lang->user->genderList->u); echo html::radio('gender', $lang->user->genderList, $user->gender);?></td>
       </tr>  
       <tr>
-        <th class='w-80px'><?php echo $lang->user->dept;?></th>
-        <td class='w-p40'><?php echo html::select('dept', $depts, $user->dept, "class='form-control'");?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->user->role;?></th>
-        <td><?php echo html::select('role', $lang->user->roleList, $user->role, "class='form-control'");?></td><td></td>
-      </tr>
-      <tr>
         <th><?php echo $lang->user->password;?></th>
         <td><?php echo html::password('password1', '', "class='form-control' autocomplete='off'")?></td><td></td>
       </tr>  

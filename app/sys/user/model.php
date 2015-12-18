@@ -233,9 +233,11 @@ class userModel extends model
         {
             if($this->app->user->account != $account) return false;
             $user = $user->remove('admin');
-            /* Remove check for role in front. */
-            $this->config->user->require->edit = str_replace(',role', '', $this->config->user->require->edit);
         }
+
+        /* Remove check for role in front. */
+        if($account == $this->app->user->account) $this->config->user->require->edit = str_replace(',role', '', $this->config->user->require->edit);
+
         $user = $user->get();
         return $this->dao->update(TABLE_USER)
             ->data($user, $skip = 'password1,password2')
