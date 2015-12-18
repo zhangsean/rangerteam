@@ -519,7 +519,7 @@ class trade extends control
 
 
             $matchs = $data['type'] == 'out' ? $flipTraders : ($data['type'] == 'in' ? $flipCustomers : '');
-            if($matchs and isset($matchs[$data['trader']])) $data['trader'] = $matchs[$data['trader']];
+            if($data['trader'] and $matchs and isset($matchs[$data['trader']])) $data['trader'] = $matchs[$data['trader']];
 
             if(!empty($data['category']) and in_array($data['type'], array('in', 'out')))
             {
