@@ -27,6 +27,16 @@
         <th><?php echo $lang->user->gender;?></th>
         <td><?php unset($lang->user->genderList->u); echo html::radio('gender', $lang->user->genderList, $user->gender);?></td>
       </tr>  
+      <?php if($this->app->user->admin == 'super'):?>
+      <tr>
+        <th><?php echo $lang->user->dept;?></th>
+        <td><?php echo html::select('dept', $depts, $user->dept, "class='form-control'");?></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->user->role;?></th>
+        <td><?php echo html::select('role', $lang->user->roleList, $user->role, "class='form-control'");?></td><td></td>
+      </tr>
+      <?php endif;?>
       <tr>
         <th><?php echo $lang->user->password;?></th>
         <td><?php echo html::password('password1', '', "class='form-control' autocomplete='off'")?></td><td></td>
