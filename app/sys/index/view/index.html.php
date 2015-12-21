@@ -51,7 +51,7 @@ $isSuperAdmin = $this->app->user->admin == 'super';
     </div>
   </div>
   <div id='home' class='fullscreen fullscreen-active'>
-    <nav class='navbar navbar-inverse navbar-fixed-top'>
+    <nav class='navbar navbar-inverse navbar-fixed-top' id='mainNavbar'>
       <div class='collapse navbar-collapse'>
         <ul class='nav navbar-nav'>
           <li><?php echo html::a($this->createLink('user', 'profile'), "<i class='icon-user'></i> " . $app->user->realname, "data-toggle='modal' data-id='profile'");?></li>

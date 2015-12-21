@@ -21,4 +21,6 @@ $(document).ready(function()
         }, 'json');
         return false;
     });
+
+    fixTableFooter($('#todoList'));
 });
