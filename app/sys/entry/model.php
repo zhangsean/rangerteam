@@ -391,7 +391,6 @@ class entryModel extends model
 
         foreach($entries as $entry)
         {
-
             $sso     = helper::createLink('entry', 'visit', "entryID=$entry->id");
             $logo    = !empty($entry->logo) ? $entry->logo : '';
             $size    = !empty($entry->size) ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
