@@ -369,20 +369,20 @@ class fileModel extends model
         if(!$this->checkSavePath()) return false;
 
         ini_set('pcre.backtrack_limit', strlen($data));
-        preg_match_all('/<img src="(data:image\/(\S+);base64,(\S+))" .+ \/>/U', $data, $out);
+        preg_match_all('/<img src="(data:image\/(\S+);base64,(\S+))".*\/>/U', $data, $out);
         foreach($out[3] as $key => $base64Image)
         {
             $extension = strtolower($out[2][$key]);
             if(!in_array($extension, $this->config->file->imageExtensions)) die();
             $imageData = base64_decode($base64Image);
 
-            $file['extension'] = $out[2][$key];
-            $file['pathname']  = $this->setPathName($key, $file['extension']);
-            $file['size']      = strlen($imageData);
+            $file['extension']   = $extension;
+            $file['pathname']    = $this->setPathName($key, $file['extension']);
+            $file['size']        = strlen($imageData);
             $file['createdBy']   = $this->app->user->account;
             $file['createdDate'] = helper::today();
-            $file['title']     = basename($file['pathname']);
-            $file['editor']    = 1;
+            $file['title']       = basename($file['pathname']);
+            $file['editor']      = 1;
 
             file_put_contents($this->savePath . $file['pathname'], $imageData);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();

@@ -302,7 +302,7 @@ class taskModel extends model
             }
         }
 
-        $this->loadModel('file')->processEditor($task, $this->config->task->editor->create['id']);
+        $task = $this->loadModel('file')->processEditor($task, $this->config->task->editor->create['id']);
         $this->dao->insert(TABLE_TASK)->data($task, $skip = 'uid,files,labels,team,teamEstimate,multiple,teamMember')
             ->autoCheck()
             ->batchCheck($this->config->task->require->create, 'notempty')
@@ -502,7 +502,7 @@ class taskModel extends model
             }
         }
 
-        $this->loadModel('file')->processEditor($task, $this->config->task->editor->edit['id']);
+        $task = $this->loadModel('file')->processEditor($task, $this->config->task->editor->edit['id']);
         $this->dao->update(TABLE_TASK)->data($task, 'team, uid')
             ->autoCheck()
             ->batchCheckIF($task->status != 'cancel', $this->config->task->require->edit, 'notempty')

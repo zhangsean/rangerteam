@@ -549,7 +549,7 @@ class bookModel extends model
             ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
 
-        $this->loadModel('file')->processEditor($node, $this->config->book->editor->edit['id']);
+        $node = $this->loadModel('file')->processEditor($node, $this->config->book->editor->edit['id']);
         $this->dao->update(TABLE_BOOK)
             ->data($node, $skip = 'uid,referer')
             ->autoCheck()

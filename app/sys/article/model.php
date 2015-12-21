@@ -258,7 +258,7 @@ class articleModel extends model
             ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
 
-        $this->loadModel('file')->processEditor($article, $this->config->article->editor->create['id']);
+        $article = $this->loadModel('file')->processEditor($article, $this->config->article->editor->create['id']);
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
@@ -297,7 +297,7 @@ class articleModel extends model
             ->add('editedDate', helper::now())
             ->get();
 
-        $this->loadModel('file')->processEditor($article, $this->config->article->editor->edit['id']);
+        $article = $this->loadModel('file')->processEditor($article, $this->config->article->editor->edit['id']);
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()

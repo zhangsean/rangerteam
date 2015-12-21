@@ -182,7 +182,7 @@ class replyModel extends model
             ->remove('files,labels,hidden')
             ->get();
 
-        $this->loadModel('file')->processEditor($reply, $this->config->reply->editor->edit['id']);
+        $reply = $this->loadModel('file')->processEditor($reply, $this->config->reply->editor->edit['id']);
         $this->dao->update(TABLE_REPLY)
             ->data($reply, $skip = 'uid')
             ->autoCheck()

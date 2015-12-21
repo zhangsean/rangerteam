@@ -225,7 +225,7 @@ class docModel extends model
             ->get();
 
         $condition = "lib = '$doc->lib' AND module = $doc->module";
-        $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->create['id']);
+        $doc = $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->create['id']);
         $this->dao->insert(TABLE_DOC)
             ->data($doc, 'uid')
             ->autoCheck()
@@ -264,7 +264,7 @@ class docModel extends model
             ->get();
 
         $uniqueCondition = "lib = '{$oldDoc->lib}' AND module = {$doc->module} AND id != $docID";
-        $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->edit['id']);
+        $doc = $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->edit['id']);
         $this->dao->update(TABLE_DOC)->data($doc, 'uid')
             ->autoCheck()
             ->batchCheck($this->config->doc->require->edit, 'notempty')

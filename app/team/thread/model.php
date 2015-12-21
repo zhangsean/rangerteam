@@ -183,7 +183,7 @@ class threadModel extends model
             ->remove('files, labels, views, replies, hidden, stick')
             ->get();
 
-        $this->loadModel('file')->processEditor($thread, $this->config->thread->editor->post['id']);
+        $thread = $this->loadModel('file')->processEditor($thread, $this->config->thread->editor->post['id']);
         $this->dao->insert(TABLE_THREAD)
             ->data($thread, $skip = 'uid')
             ->autoCheck()
@@ -247,7 +247,7 @@ class threadModel extends model
             ->remove('files,labels, views, replies, stick, hidden')
             ->get();
 
-        $this->loadModel('file')->processEditor($thread, $this->config->thread->editor->edit['id']);
+        $thread = $this->loadModel('file')->processEditor($thread, $this->config->thread->editor->edit['id']);
         $this->dao->update(TABLE_THREAD)
             ->data($thread, $skip = 'uid')
             ->autoCheck()
