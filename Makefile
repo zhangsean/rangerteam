@@ -31,6 +31,11 @@ ranzhi:
 	find ranzhi -name tests |xargs rm -fr
 	for path in `find ranzhi/ -type d`; do touch "$$path/index.html"; done	
 	rm ranzhi/www/index.html
+	rm ranzhi/www/sys/index.html
+	rm ranzhi/www/crm/index.html
+	rm ranzhi/www/cash/index.html
+	rm ranzhi/www/oa/index.html
+	rm ranzhi/www/team/index.html
 	# change mode.
 	chmod -R 777 ranzhi/tmp/
 	chmod -R 777 ranzhi/www/data
