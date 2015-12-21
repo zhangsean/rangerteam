@@ -64,7 +64,7 @@
         <?php 
         if($action->comment) 
         {
-            echo "<div class='comment$action->id mgb-10'>";
+            echo "<div class='comment$action->id'>";
             echo strip_tags($action->comment) == $action->comment ? nl2br($action->comment) : $action->comment; 
             echo "</div>";
         }

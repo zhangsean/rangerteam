@@ -84,8 +84,20 @@ $.extend(
 
                     if(response.locate) 
                     {
-                        var reloadUrl = response.locate == 'reload' ? location.href : response.locate;
-                        setTimeout(function(){location.href = reloadUrl;}, 1200);
+                        if(response.locate == 'loadInModal')
+                        {
+                            var modal = $('#ajaxModal');
+                            setTimeout(function()
+                            {
+                                modal.load(modal.attr('ref'), function(){$(this).find('.modal-dialog').css('width', $(this).data('width'));
+                                $.zui.ajustModalPosition()})
+                            }, 1000);
+                        }
+                        else
+                        {
+                            var reloadUrl = response.locate == 'reload' ? location.href : response.locate;
+                            setTimeout(function(){location.href = reloadUrl;}, 1200);
+                        }
                     }
 
                     if(response.ajaxReload)

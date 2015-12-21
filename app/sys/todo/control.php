@@ -197,7 +197,8 @@ class todo extends control
                 $this->action->logHistory($actionID, $changes);
             }
             $date = str_replace('-', '', $this->post->date);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'closeModal' => 'true', 'locate' => 'reload'));
+            if(!$comment) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'closeModal' => 'true', 'locate' => 'reload'));
+            if($comment)  $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'loadInModal'));
         }
        
         if($todo->date != '00000000') $todo->date = strftime("%Y-%m-%d", strtotime($todo->date));
@@ -228,12 +229,13 @@ class todo extends control
         if($todo->type == 'order')    $this->session->set('orderList', "javascript:$.openEntry(\"dashboard\")");
         if($todo->type == 'customer') $this->session->set('customerList', "javascript:$.openEntry(\"dashboard\")");
 
-        $this->view->title   = "{$this->lang->todo->common} #$todo->id $todo->name";
-        $this->view->todo    = $todo;
-        $this->view->times   = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
-        $this->view->users   = $this->loadModel('user')->getPairs('noletter');
-        $this->view->actions = $this->loadModel('action')->getList('todo', $todoID);
-        $this->view->from    = $from;
+        $this->view->title      = "{$this->lang->todo->common} #$todo->id $todo->name";
+        $this->view->modalWidth = '80%';
+        $this->view->todo       = $todo;
+        $this->view->times      = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
+        $this->view->users      = $this->loadModel('user')->getPairs('noletter');
+        $this->view->actions    = $this->loadModel('action')->getList('todo', $todoID);
+        $this->view->from       = $from;
 
         $this->display();
     }
