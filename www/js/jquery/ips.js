@@ -92,7 +92,7 @@
         {
             $.each(entries, function(idx, et)
             {
-                if(et.id != 'allapps' && et.id != 'superadmin') et[DEL] = true;
+                if(et.id != 'allapps' && et.id != 'superadmin' && et.id != 'dashboard') et[DEL] = true;
             });
         }
         var et, deleted;
