@@ -304,6 +304,7 @@ $lang->error->captcha      = '請輸入正確的驗證碼。';
 $lang->error->noWritable   = '%s 可能不可寫，請修改權限！';
 $lang->error->noConvertFun = '不存在iconv和mb_convert_encoding轉碼方法，不能將數據轉成想要的編碼！';
 $lang->error->notInt       = '<strong>%s</strong>不能為純數字組合。';
+$lang->error->pasteImg     = '您的瀏覽器不支持粘貼圖片！';
 
 /* The pager items. */
 $lang->pager = new stdclass();

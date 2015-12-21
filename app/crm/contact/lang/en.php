@@ -16,6 +16,8 @@ $lang->contact->customer       = 'Customer';
 $lang->contact->customerName   = 'Customer Name';
 $lang->contact->realname       = 'Real Name';
 $lang->contact->nickname       = 'Nickname';
+$lang->contact->origin         = 'origin';
+$lang->contact->status         = 'Status';
 $lang->contact->avatar         = 'Avatar';
 $lang->contact->birthday       = 'Birthday';
 $lang->contact->gender         = 'Gender';
@@ -28,6 +30,7 @@ $lang->contact->wangwang       = 'Trade Manager';
 $lang->contact->site           = 'Site';
 $lang->contact->mobile         = 'Mobile';
 $lang->contact->phone          = 'Phone';
+$lang->contact->company        = 'Company';
 $lang->contact->fax            = 'Fax';
 $lang->contact->weibo          = 'Sina Weibo';
 $lang->contact->weixin         = 'Wechat';
@@ -56,6 +59,7 @@ $lang->contact->record  = 'History';
 $lang->contact->qrcode  = 'Qrcode';
 $lang->contact->vcard   = 'Vcard';
 $lang->contact->export  = 'Export';
+$lang->contact->roster  = 'Roster';
 
 $lang->contact->basicInfo   = 'Basic Info';
 $lang->contact->contactInfo = 'Contact Info';
@@ -63,3 +67,12 @@ $lang->contact->contactInfo = 'Contact Info';
 $lang->contact->leftAt       = 'Left at %s';
 $lang->contact->failedAvatar = 'Avatar upload failed';
 $lang->contact->emailTip     = 'Please divide emails with commas or space';
+
+$lang->contact->noFile       = 'No File';
+$lang->contact->importResult = '%s data imported successfully, %s data imported failure, as follows:';
+$lang->contact->failReason   = 'Reason';
+$lang->contact->showImport   = 'Show contact has been imported';
+
+$lang->contact->genderList['m'] = 'male';
+$lang->contact->genderList['f'] = 'Female';
+$lang->contact->genderList['u'] = '';
