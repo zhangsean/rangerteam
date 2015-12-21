@@ -97,9 +97,10 @@
                   <?php
                   if(strpos('rest, normal, trip, leave, overtime', $status) === false)
                   {
-                      $edit = $reviewStatus == 'wait' ? $lang->attend->edited : $lang->attend->edit;
+                      $edit  = $reviewStatus == 'wait' ? $lang->attend->edited : $lang->attend->edit;
+                      $leave = $reason == 'leave' ? $lang->attend->leaved : $lang->attend->leave;
                       if($reason == '' or $reason == 'normal') echo html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $edit, "data-toggle='modal' data-width='500px'");
-                      if($reason == '' or $reason == 'leave')  echo html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $lang->attend->leave, "data-toggle='modal' data-width='500px'");
+                      if($reason == '' or $reason == 'leave')  echo html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $leave, "data-toggle='modal' data-width='500px'");
                       if($reason == '' or $reason == 'trip')   echo html::a($this->createLink('trip', 'create'), $lang->attend->trip, "data-toggle='modal' data-width='500px'");
                   }
                   else
