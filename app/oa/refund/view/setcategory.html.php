@@ -41,14 +41,11 @@
             </tr>
             <tr>
               <td>
-                <?php if(empty($expenseList))
+                <?php if(!empty($expenseList))
                 { 
-                    commonModel::printLink('cash.tree', 'browse', 'type=out', $lang->refund->setExpense, "class='btn btn-primary setExpense'");
-                } 
-                else
-                {
                     echo html::submitButton();
-                }
+                } 
+                commonModel::printLink('cash.tree', 'browse', 'type=out', $lang->refund->setExpense, "class='btn btn-primary setExpense'");
                 ?>
               </td>
             </tr>
