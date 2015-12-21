@@ -1,6 +1,7 @@
 .with-side {position: relative;}
 .with-side .main{padding-right: 300px;}
 .with-side .side {position: fixed; right: 15px; top: 100px; width: 280px;}
+.with-side .nav > li > a {padding: 10px;}
 
 .hide-side .main{padding-right: 0;}
 .hide-side .side {width: 0;}

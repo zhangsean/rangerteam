@@ -254,8 +254,8 @@ $lang->todo->menu = new stdclass();
 $lang->todo->menu->calendar        = 'Calendar|todo|calendar|';
 $lang->todo->menu->assignedToOther = 'Assigned to other|todo|browse|mode=assignedtoother';
 $lang->todo->menu->assignedToMe    = 'Assigned to me|todo|browse|mode=assignedtome';
-$lang->todo->menu->future          = 'Future|todo|browse|mode=future';
 $lang->todo->menu->undone          = 'Undone|todo|browse|mode=undone';
+$lang->todo->menu->future          = 'Future|todo|browse|mode=future';
 $lang->todo->menu->all             = 'All|todo|browse|mode=all';
  
 /* Menu of mail module. */

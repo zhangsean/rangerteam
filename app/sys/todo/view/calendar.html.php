@@ -20,7 +20,8 @@
 <div class='with-side <?php echo $this->cookie->todoCalendarSide == 'hide' ? 'hide-side' : ''?>'>
   <div class='side'>
     <ul id="myTab" class="nav nav-tabs">
-      <li class="active"><a href="#tab_custom" data-toggle="tab"><?php echo $lang->todo->periods['future']?></a></li>
+      <li class="active"><a href="#tab_undone" data-toggle="tab"><?php echo $lang->todo->periods['before']?></a></li>
+      <li><a href="#tab_custom" data-toggle="tab"><?php echo $lang->todo->periods['future']?></a></li>
       <li><a href="#tab_task" data-toggle="tab"><?php echo $lang->task->common;?></a></li>
       <li><a href="#tab_order" data-toggle="tab"><?php echo $lang->order->common;?></a></li>
       <li><a href="#tab_customer" data-toggle="tab"><?php echo $lang->customer->common;?></a></li>
@@ -28,10 +29,10 @@
     <div class='tab-content'>
       <?php foreach($todoList as $type => $todos):?>
       <?php $index = 0;?>
-      <div class='tab-pane fade in <?php echo $type == 'custom' ? 'active' : ''?>' id='tab_<?php echo $type;?>'>
+      <div class='tab-pane fade in <?php echo $type == 'undone' ? 'active' : ''?>' id='tab_<?php echo $type;?>'>
         <?php foreach($todos as $id => $todo):?>
-        <?php if($type == 'custom'):?>
-        <?php $index++?>
+        <?php if($type == 'custom' or $type == 'undone'):?>
+        <?php $index++;?>
         <div class='board-item text-nowrap text-ellipsis' title='<?php echo $todo->name;?>' data-id='<?php echo $todo->id?>' data-index='<?php echo $index?>' data-name='<?php echo $todo->name?>' data-type='<?php echo $todo->type?>' data-begin='<?php echo $todo->begin?>' data-end='<?php echo $todo->end?>' data-action='edit' data-toggle="droppable" data-target=".day">
           <?php echo html::a("javascript:void(0)", $todo->name, "onclick=\"viewTodo(this)\" data-remote='" . $this->createLink('todo', 'view', "id=$todo->id") . "' data-title='{$todo->name}' data-width='70%'")?>
         </div>
