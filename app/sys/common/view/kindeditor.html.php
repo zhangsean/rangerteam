@@ -71,12 +71,12 @@ function initKindeditor(afterInit)
         if(typeof(v.editors.filterMode) == 'undefined') v.editors.filterMode = true;
         editorTool = eval(v.editors.tools);
         var K = KindEditor, $editor = $('#' + editorID);
-        keEditor = K.create('#' + editorID,
+        var options = 
         {
+            cssPath:[v.themeRoot + 'zui/css/min.css'],
             width:'100%',
             items:editorTool,
             filterMode:true, 
-            cssPath:[v.themeRoot + 'zui/css/min.css'],
             bodyClass:'article-content',
             urlType:'absolute', 
             uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),
@@ -85,7 +85,8 @@ function initKindeditor(afterInit)
             filterMode:v.editors.filterMode,
             allowFileManager:true,
             langType:v.editorLang,
-            afterBlur: function(){this.sync(); },
+            afterBlur: function(){this.sync();$editor.prev('.ke-container').removeClass('focus');},
+            afterFocus: function(){$editor.prev('.ke-container').addClass('focus');},
             afterChange: function(){$editor.change().hide();},
             afterCreate: function()
             {
@@ -119,8 +120,8 @@ function initKindeditor(afterInit)
                     $(doc.body).bind('paste', function(ev)
                     {
                         var $this    = $(this);
-                        var original =  ev.originalEvent;
-                        var file     =  original.clipboardData.items[0].getAsFile();
+                        var original = ev.originalEvent;
+                        var file     = original.clipboardData.items[0].getAsFile();
                         if(file)
                         {
                             var reader = new FileReader();
@@ -145,11 +146,10 @@ function initKindeditor(afterInit)
                         }
                     });
                 }
-
-                /* Paste in firefox.*/
-                if(K.GECKO)
+                /* Paste in firfox and other firfox.*/
+                else
                 {
-                    K(doc.body).bind('paste', function(ev)
+                    $(doc.body).bind('paste', function(ev)
                     {
                         setTimeout(function()
                         {
@@ -180,7 +180,15 @@ function initKindeditor(afterInit)
                 if(keditor) keditor.focus();
                 else if($next.hasClass('chosen')) $next.trigger('chosen:activate');
             }
-        });
+        };
+        try
+        {
+            if(!window.editor) window.editor = {};
+            var keditor = K.create('#' + editorID, options);
+            window.editor['#'] = window.editor[editorID] = keditor;
+            $editor.data('keditor', keditor);
+        }
+        catch(e){}
     });
 
     if($.isFunction(afterInit)) afterInit();
