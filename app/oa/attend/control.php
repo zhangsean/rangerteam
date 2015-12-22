@@ -412,7 +412,7 @@ class attend extends control
             else
             {
                $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
-               $toList = trim($dept->moderators, ',');
+               if(!empty($dept->moderators)) $toList = trim($dept->moderators, ','); 
             }
         }
         $subject = "{$this->lang->attend->common}#{$attend->account}{$this->lang->colon}{$attend->date}";
