@@ -1528,7 +1528,7 @@
 
                     $.each(entries, function(idx, et)
                     {
-                        if(et.id == 'allapps')
+                        if(et.id == 'allapps' || et.id == 'superadmin' || et.id == 'dashboard')
                         {
                             orders[et.id] = et.order;
                         }
@@ -1543,7 +1543,14 @@
                         }
                     });
 
-                    settings.onSortEntries(orders);
+
+                    settings.onSortEntries(orders, function(result)
+                    {
+                        if(result)
+                        {
+                            $.refreshDesktop();
+                        }
+                   });
                 }});
             }
             else

@@ -138,6 +138,7 @@ $isSuperAdmin = $this->app->user->admin == 'super';
   <?php echo $notice;?>
 </div>
 <script>
+<?php $dashboardMenu = (isset($dashboard) and isset($dashboard->visible) and $dashboard->visible == 0) ? 'list' : 'all';?>
 var entries = [
 {
     id        : 'dashboard',
@@ -145,7 +146,7 @@ var entries = [
     name      : '<?php echo $lang->index->dashboard;?>',
     open      : 'iframe',
     desc      : '<?php echo $lang->index->dashboard?>',
-    menu      : 'all',
+    menu      : '<?php echo $dashboardMenu;?>',
     sys       : true,
     icon      : 'icon-home',
     url       : '<?php echo $this->createLink('todo', 'calendar')?>',
@@ -176,10 +177,7 @@ var entries = [
 }];
 
 <?php if($isSuperAdmin):?>
-<?php 
-    $superadminMenu  = (isset($superadmin) and isset($superadmin->visible) and $superadmin->visible == 0) ? 'list' : 'all';
-    $superadminOrder = (isset($superadmin) and isset($superadmin->order)) ? $superadmin->order : 9999998;
-?>
+<?php $superadminMenu  = (isset($superadmin) and isset($superadmin->visible) and $superadmin->visible == 0) ? 'list' : 'all';?>
 
 entries.push(
 {
@@ -192,7 +190,7 @@ entries.push(
     sys   : true,
     icon  : 'icon-cog',
     url   : "<?php echo $this->createLink('admin')?>",
-    order : <?php echo $superadminOrder;?>
+    order : 9999997
 });
 <?php endif;?>
 

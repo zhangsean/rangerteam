@@ -114,6 +114,7 @@ class index extends control
         /* Get custom setting about superadmin */
         $customApp = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
         if(isset($customApp->superadmin)) $this->view->superadmin = $customApp->superadmin;
+        if(isset($customApp->dashboard))  $this->view->dashboard  = $customApp->dashboard;
 
         /* sign buttons. */
         $signButtons = '';
