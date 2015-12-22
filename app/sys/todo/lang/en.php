@@ -71,7 +71,6 @@ $lang->todo->priList[1] = '1';
 $lang->todo->priList[2] = '2';
 $lang->todo->priList[4] = '4';
 
-$lang->todo->typeList['undone']   = 'Undone';
 $lang->todo->typeList['custom']   = 'Customer';
 $lang->todo->typeList['task']     = 'Project';
 $lang->todo->typeList['order']    = 'Order';
