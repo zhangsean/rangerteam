@@ -93,7 +93,6 @@ $(document).ready(function()
         }
         else
         {
-            alert(data.message);
             return location.reload();
         }
         return false;

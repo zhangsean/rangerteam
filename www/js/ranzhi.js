@@ -86,7 +86,7 @@ $.extend(
                     {
                         if(response.locate == 'loadInModal')
                         {
-                            var modal = $('#ajaxModal');
+                            var modal = $('.modal');
                             setTimeout(function()
                             {
                                 modal.load(modal.attr('ref'), function(){$(this).find('.modal-dialog').css('width', $(this).data('width'));
