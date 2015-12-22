@@ -88,6 +88,8 @@ class upgradeModel extends model
             case '2_7':
                 $this->processBlockType();
                 $this->execSQL($this->getUpgradeFile('2.7'));
+            case '3_0':
+                $this->execSQL($this->getUpgradeFile('3.0'));
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -121,6 +123,7 @@ class upgradeModel extends model
             case '2_5'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5'));
             case '2_6'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.6'));
             case '2_7'     : $confirmContent .= file_get_contents($this->getUpgradeFile('2.7'));
+            case '3_0'     : $confirmContent .= file_get_contents($this->getUpgradeFile('3.0'));
         }
         return $confirmContent;
     }
