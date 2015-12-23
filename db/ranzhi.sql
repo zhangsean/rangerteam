@@ -30,7 +30,7 @@ CREATE TABLE `crm_contact` (
   `site` varchar(100) NOT NULL,
   `mobile` char(11) NOT NULL DEFAULT '',
   `phone` char(20) NOT NULL DEFAULT '',
-  `company` varchar(255) NOT NULL;
+  `company` varchar(255) NOT NULL,
   `fax` char(20) NOT NULL DEFAULT '',
   `weibo` char(50) NOT NULL,
   `weixin` char(50) NOT NULL,
