@@ -15,6 +15,9 @@ CREATE TABLE `crm_contact` (
   `realname` char(30) NOT NULL DEFAULT '',
   `nickname` char(30) NOT NULL,
   `resume` mediumint(8) unsigned NOT NULL,
+  `origin` varchar(150) NOT NULL,
+  `originID` mediumint(8) NOT NULL,
+  `status` enum('normal','wait','ignore') NOT NULL DEFAULT 'normal',
   `avatar` varchar(255) NOT NULL,
   `birthday` date NOT NULL default '0000-00-00',
   `gender` enum('f','m','u') NOT NULL DEFAULT 'u',
@@ -27,6 +30,7 @@ CREATE TABLE `crm_contact` (
   `site` varchar(100) NOT NULL,
   `mobile` char(11) NOT NULL DEFAULT '',
   `phone` char(20) NOT NULL DEFAULT '',
+  `company` varchar(255) NOT NULL;
   `fax` char(20) NOT NULL DEFAULT '',
   `weibo` char(50) NOT NULL,
   `weixin` char(50) NOT NULL,
