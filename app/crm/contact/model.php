@@ -88,7 +88,8 @@ class contactModel extends model
      */
     public function getList($customer = 0, $relation = 'client', $mode = '', $status = 'normal', $origin ='', $orderBy = 'maker_desc', $pager = null)
     {
-        if($relation != 'provider')
+        $customerIdList = array();
+        if($relation != 'provider' and $status == 'normal')
         {
             $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
             if(empty($customerIdList)) return array();
