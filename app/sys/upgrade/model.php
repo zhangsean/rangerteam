@@ -1001,4 +1001,21 @@ class upgradeModel extends model
         if(!file_exists($dir)) return true;
         return $this->app->loadClass('zfile')->removeDir($dir);
     }
+
+    /**
+     * Process status for contact.
+     * 
+     * @access public
+     * @return void
+     */
+    public function processStatusForContact()
+    {
+        $contactList = $this->dao->select('*')->from(TABLE_CONTACT)->fetchAll('id');
+        foreach($contactList as $id => $contact)
+        {
+            $this->dao->update(TABLE_CONTACT)->set('status')->eq('normal')->where('id')->eq($id)->exec();
+        }
+
+        return !dao::isError();
+    }
 }
