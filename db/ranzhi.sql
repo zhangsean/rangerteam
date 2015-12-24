@@ -37,6 +37,7 @@ CREATE TABLE `crm_contact` (
   `desc` text NOT NULL,
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
+  `assignedTo` char(30) NOT NULL,
   `editedBy` char(30) NOT NULL,
   `editedDate` datetime NOT NULL,
   `contactedBy` char(30) NOT NULL,
