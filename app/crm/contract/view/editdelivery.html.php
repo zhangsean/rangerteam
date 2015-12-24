@@ -38,7 +38,7 @@
     </tr>
     <tr>
       <th><?php echo $lang->comment;?></th>
-      <td colspan='2'><?php echo html::textarea('comment');?></td>
+      <td colspan='2'><?php echo html::textarea('comment', $delivery->comment);?></td>
     </tr>
     <tr>
       <th></th>

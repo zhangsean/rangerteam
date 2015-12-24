@@ -3,7 +3,7 @@
  * The loader of framework of RanZhi.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv12.html)
+ * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     RanZhi
  * @version     $Id$
@@ -31,6 +31,9 @@ $startTime = getTime();
 /* Run the app. */
 $app = router::createApp($appName);
 $common = $app->loadCommon();
+
+/* Check the reqeust is getconfig or not. */
+if(isset($_GET['mode']) && $_GET['mode'] == 'getconfig') die(helper::removeUTF8Bom($app->exportConfig()));
 
 /* Check for need upgrade. */
 if(RUN_MODE != 'upgrade')

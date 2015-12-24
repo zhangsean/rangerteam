@@ -67,8 +67,8 @@ $lang->trip->menu->company    = '公司|trip|company|';
 
 $lang->refund = new stdclass();
 $lang->refund->menu = new stdclass();
-$lang->refund->menu->personal = '我的报销|refund|personal|';
+$lang->refund->menu->personal = array('link' => '我的报销|refund|personal|', 'alias' => 'create');
 $lang->refund->menu->review   = '待审批|refund|browsereview|';
 $lang->refund->menu->todo     = '待报销|refund|todo|';
 $lang->refund->menu->company  = '所有报销|refund|company|';
-$lang->refund->menu->settings = '设置|refund|settings|';
+$lang->refund->menu->settings = array('link' => '设置|refund|settings|', 'alias' => 'setcategory');

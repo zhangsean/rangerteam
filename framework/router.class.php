@@ -1490,6 +1490,11 @@ class router
         $view->methodVar   = $this->config->methodVar;
         $view->viewVar     = $this->config->viewVar;
         $view->sessionVar  = $this->config->sessionVar;
+        $view->sessionName = session_name();
+        
+        $view->ip          = gethostbyname($_SERVER['HTTP_HOST']);
+        $view->name        = $this->config->socket->name;
+        $view->port        = $this->config->socket->port;
         echo json_encode($view);
     }
     
