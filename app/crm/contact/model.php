@@ -325,6 +325,8 @@ class contactModel extends model
         if($contact->weibo and strpos($contact->weibo, 'http://weibo.com/') === false ) $contact->weibo = 'http://weibo.com/' . $contact->weibo;
         $contact->email = str_replace(array(' ', '，'), ',', trim($contact->email));
 
+        if($oldContact->status != 'normal') $this->config->contact->require->edit = 'realname';
+
         $this->dao->update(TABLE_CONTACT)
             ->data($contact, 'customer,dept,maker,title,join')
             ->autoCheck()
@@ -334,22 +336,25 @@ class contactModel extends model
 
         if(!dao::isError())
         {
-            $resume = new stdclass();
-            $resume->contact  = $contactID;
-            $resume->customer = $contact->customer;
-            $resume->dept     = isset($contact->dept) ? $contact->dept : '';
-            $resume->maker    = isset($contact->maker) ? $contact->maker : 0;
-            $resume->title    = isset($contact->title) ? $contact->title : '';
-            $resume->join     = isset($contact->join) ? $contact->join : '';
+            if($oldContact->status == 'normal')
+            {
+                $resume = new stdclass();
+                $resume->contact  = $contactID;
+                $resume->customer = $contact->customer;
+                $resume->dept     = isset($contact->dept) ? $contact->dept : '';
+                $resume->maker    = isset($contact->maker) ? $contact->maker : 0;
+                $resume->title    = isset($contact->title) ? $contact->title : '';
+                $resume->join     = isset($contact->join) ? $contact->join : '';
 
-            if($oldContact->customer != $contact->customer)
-            {
-                $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
-                if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->where('id')->eq($contactID)->exec();
-            }
-            else
-            {
-                $this->dao->update(TABLE_RESUME)->data($resume)->where('id')->eq($oldContact->resume)->exec();
+                if($oldContact->customer != $contact->customer)
+                {
+                    $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
+                    if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->where('id')->eq($contactID)->exec();
+                }
+                else
+                {
+                    $this->dao->update(TABLE_RESUME)->data($resume)->where('id')->eq($oldContact->resume)->exec();
+                }
             }
 
             $changes = commonModel::createChanges($oldContact, $contact);

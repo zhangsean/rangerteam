@@ -11,6 +11,21 @@
  */
 class leads extends control
 {
+    /**
+     * Construct method.
+     * 
+     * @param  string $moduleName 
+     * @param  string $methodName 
+     * @param  string $appName 
+     * @access public
+     * @return void
+     */
+    public function __construct($moduleName = '', $methodName = '', $appName = '')
+    {
+        parent::__construct($moduleName, $methodName, $appName);
+        $this->loadModel('contact', 'crm');
+    }
+
     /** 
      * The index page, locate to the browse page.
      * 
@@ -34,7 +49,6 @@ class leads extends control
      */
     public function browse($mode = 'all', $origin = '',  $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
-        $this->loadModel('contact');
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
@@ -61,5 +75,65 @@ class leads extends control
         $this->view->orderBy   = $orderBy;
         $this->display();
     }   
+
+    /**
+     * Edit a contact.
+     * 
+     * @param  int    $contactID 
+     * @access public
+     * @return void
+     */
+    public function edit($contactID)
+    {
+        $contact = $this->contact->getByID($contactID);
+
+        if($_POST)
+        {
+            $return = $this->contact->update($contactID);
+            $this->loadModel('customer')->updateEditedDate($this->post->customer);
+            $this->send($return);
+        }
+
+        $this->app->loadLang('resume');
+
+        $this->view->title      = $this->lang->contact->edit;
+        $this->view->customers  = $this->loadModel('customer')->getPairs('client');
+        $this->view->contact    = $contact;
+        $this->view->modalWidth = 1000;
+
+        $this->display();
+    }
+
+    /**
+     * View contact. 
+     * 
+     * @param  int    $contactID 
+     * @access public
+     * @return void
+     */
+    public function view($contactID, $status = 'normal')
+    {
+        if($this->session->customerList == $this->session->contactList) $this->session->set('customerList', $this->app->getURI(true));
+        $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit', (array)$contactID)) . ',';
+
+        $actionList = $this->loadModel('action')->getList('contact', $contactID);
+        $actionIDList = array_keys($actionList);
+        $actionFiles = $this->loadModel('file')->getByObject('action', $actionIDList);
+        $fileList = array();
+        foreach($actionFiles as $files)
+        {
+            foreach($files as $file) $fileList[$file->id] = $file;
+        }
+
+        $this->view->title      = $this->lang->contact->view;
+        $this->view->contact    = $this->contact->getByID($contactID, $status);
+        $this->view->addresses  = $this->loadModel('address')->getList('contact', $contactID);
+        $this->view->resumes    = $this->loadModel('resume')->getList($contactID);
+        $this->view->customers  = $this->loadModel('customer')->getPairs('client');
+        $this->view->preAndNext = $this->loadModel('common', 'sys')->getPreAndNextObject('contact', $contactID); 
+        $this->view->fileList   = $fileList;
+
+        $this->display();
+    }
 }
 

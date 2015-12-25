@@ -15,14 +15,12 @@
 <?php js::set('status', $status);?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
-  <?php //commonModel::printLink('contact', 'import', '', $lang->importIcon . $lang->import, "class='btn btn-primary' data-toggle='modal'");?>
   <?php if(commonModel::hasPriv('contact', 'export')):?>
   <div class='btn-group'>
     <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo $lang->exportIcon . $lang->export;?> <span class='caret'></span></button>
     <ul id='exportActionMenu' class='dropdown-menu'>
       <li><?php commonModel::printLink('contact', 'export', "mode=all&orderBy={$orderBy}", $lang->exportAll, "class='iframe' data-width='700'");?></li>
       <li><?php commonModel::printLink('contact', 'export', "mode=thisPage&orderBy={$orderBy}", $lang->exportThisPage, "class='iframe' data-width='700'");?></li>
-      <li><?php //commonModel::printLink('contact', 'exportTemplate', '', $lang->exportTemplate, "class='iframe' data-width='700'");?></li>
     </ul>
   </div>
   <?php endif;?>
@@ -48,13 +46,7 @@
     <tr class='text-center'>
       <td><?php echo $contact->id;?></td>
       <td class='text-left'><?php echo html::a(inlink('view', "contactID=$contact->id&status=$contact->status"), $contact->realname);?></td>
-      <td class='text-left'>
-        <?php if($contact->customer and isset($customers[$contact->customer])):?>
-        <?php echo html::a($this->createLink('customer', 'view', "customerID=$contact->customer"), $customers[$contact->customer]);?>
-        <?php else:?>
-        <?php echo $contact->company;?>
-        <?php endif;?>
-      </td>
+      <td class='text-left'><?php echo html::a($this->createLink('customer', 'view', "customerID=$contact->customer"), $customers[$contact->customer]);?></td>
       <td><?php echo isset($lang->genderList->{$contact->gender}) ? $lang->genderList->{$contact->gender} : '';?></td>
       <td class='text-left'><?php echo $contact->phone . ' ' . $contact->mobile;?></td>
       <td><?php echo html::mailto($contact->email, $contact->email)?></td>
@@ -68,8 +60,6 @@
         echo "<div class='dropdown'><a data-toggle='dropdown' href='javascript:;'>" . $this->lang->more . "<span class='caret'></span> </a><ul class='dropdown-menu pull-right'>";
         commonModel::printLink('resume',  'browse', "contactID=$contact->id", $lang->contact->resume, "data-toggle='modal'", '', '', 'li');
         commonModel::printLink('contact', 'delete', "contactID=$contact->id", $lang->delete, "class='reloadDeleter'", '', '', 'li');
-        if($contact->status == 'wait') commonModel::printLink('contact', 'transform', "contactID=$contact->id", $lang->confirm, "data-toggle='modal'", '', '', 'li');
-        if($contact->status == 'wait') commonModel::printLink('contact', 'ignore', "contactID=$contact->id", $lang->ignore, "class='reload'", '', '', 'li');
         echo '</ul></div>';
         ?>
       </td>

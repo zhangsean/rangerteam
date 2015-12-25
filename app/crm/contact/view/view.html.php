@@ -27,8 +27,7 @@
     <div class='page-actions'>
       <?php
       echo "<div class='btn-group'>";
-      if(isset($contact->customer))commonModel::printLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt' class='btn'");
-      if(!isset($contact->customer))commonModel::printLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt' class='btn'");
+      commonModel::printLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt' class='btn'");
       commonModel::printLink('address', 'browse', "objectType=contact&objectID=$contact->id", $lang->contact->address, "data-toggle='modal' class='btn'");
       commonModel::printLink('resume', 'browse', "contactID=$contact->id", $lang->contact->resume, "data-toggle='modal' class='btn'");
       echo "</div>";
@@ -48,7 +47,6 @@
       <div class='panel-heading'><strong><?php echo $lang->contact->basicInfo;?></strong></div>
       <div class='panel-body'>
         <table class='table table-info'>
-          <?php if(isset($contact->customer)):?>
           <tr>
             <th class='w-70px'><?php echo $lang->contact->customer;?></th>
             <td>
@@ -70,7 +68,6 @@
             <th><?php echo $lang->resume->join;?></th>
             <td><?php echo  $contact->join;?></td>
           </tr>
-          <?php endif;?>
           <tr>
             <th class='w-70px'><?php echo $lang->contact->birthday;?></th>
             <td><?php echo $contact->birthday;?></td>
