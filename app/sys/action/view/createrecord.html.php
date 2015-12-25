@@ -35,7 +35,7 @@
         </div>
       </td>
     </tr>
-    <?php elseif($objectType != 'customer'):?>
+    <?php elseif($objectType != 'customer' and !empty($customers)):?>
     <tr>
       <th><?php echo $lang->action->record->customer;?></th>
       <td>
