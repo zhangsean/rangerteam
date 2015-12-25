@@ -18,7 +18,7 @@ $lang->menu->crm->order     = '订单|order|browse|';
 $lang->menu->crm->contract  = '合同|contract|browse|mode=unfinished';
 $lang->menu->crm->customer  = '客户|customer|browse|';
 $lang->menu->crm->contact   = '联系人|contact|browse|';
-$lang->menu->crm->roster    = '名单|roster|browse|';
+$lang->menu->crm->leads    = '名单|leads|browse|';
 $lang->menu->crm->product   = '产品|product|browse|';
 $lang->menu->crm->setting   = '设置|setting|lang|module=product&field=statusList';
 
@@ -66,11 +66,11 @@ $lang->contact->menu->tomorrow  = '明天联系|contact|browse|mode=tomorrow';
 $lang->contact->menu->thisweek  = '本周内联系|contact|browse|mode=thisweek';
 $lang->contact->menu->thismonth = '本月内联系|contact|browse|mode=thismonth';
 
-$lang->roster = new stdclass();
-$lang->roster->menu = new stdclass();
-$lang->roster->menu->browse      = '所有|roster|browse|mode=all';
-$lang->roster->menu->assignedTo  = '指派给我|roster|browse|mode=assignedTo';
-$lang->roster->menu->public      = '公共名单|roster|browse|mode=public';
+$lang->leads = new stdclass();
+$lang->leads->menu = new stdclass();
+$lang->leads->menu->browse      = '所有|leads|browse|mode=all';
+$lang->leads->menu->assignedTo  = '指派给我|leads|browse|mode=assignedTo';
+$lang->leads->menu->public      = '公共名单|leads|browse|mode=public';
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();

@@ -459,7 +459,7 @@ END:VCARD";
     }
 
     /**
-     * Ignore contact in roster.
+     * Ignore contact in leads.
      * 
      * @param  int    $contactID 
      * @access public

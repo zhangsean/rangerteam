@@ -59,7 +59,7 @@ $lang->contact->record  = 'History';
 $lang->contact->qrcode  = 'Qrcode';
 $lang->contact->vcard   = 'Vcard';
 $lang->contact->export  = 'Export';
-$lang->contact->roster  = 'Roster';
+$lang->contact->leads   = 'Leads';
 
 $lang->contact->basicInfo   = 'Basic Info';
 $lang->contact->contactInfo = 'Contact Info';

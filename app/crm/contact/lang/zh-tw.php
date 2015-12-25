@@ -59,7 +59,7 @@ $lang->contact->record  = '溝通';
 $lang->contact->qrcode  = '二維碼';
 $lang->contact->vcard   = '二維碼名片';
 $lang->contact->export  = '導出';
-$lang->contact->roster  = '名單';
+$lang->contact->leads   = '名單';
 
 $lang->contact->basicInfo   = '基本信息';
 $lang->contact->contactInfo = '聯繫方式';
