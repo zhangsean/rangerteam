@@ -20,21 +20,31 @@ class contactModel extends model
      */
     public function getByID($id, $status = 'normal')
     {
-        if($status != 'normal')
-        {
-            return $this->dao->select('*')->from(TABLE_CONTACT)->where('id')->eq($id)->fetch();
-        }
-        else
+        $contact = $this->dao->select('*')->from(TABLE_CONTACT)->where('id')->eq($id)->fetch();
+
+        $contact->customer = '';
+        $contact->maker    = '';
+        $contact->title    = '';
+        $contact->dept     = '';
+        $contact->join     = '';
+        $contact->left     = '';
+
+        if($contact->status == 'normal')
         {
             $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
             if(empty($customerIdList)) return null;
 
-            return $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
-                ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
-                ->where('t1.id')->eq($id)
-                ->andWhere('t2.customer')->in($customerIdList)
-                ->fetch();
+            $resume = $this->dao->select('`customer`, `maker`, `title`, `dept`, `join`, `left`')->from(TABLE_RESUME)->where('id')->eq($contact->resume)->andWhere('customer')->in($customerIdList)->fetch();
+
+            $contact->customer = $resume->customer;
+            $contact->maker    = $resume->maker;
+            $contact->title    = $resume->title;
+            $contact->dept     = $resume->dept;
+            $contact->join     = $resume->join;
+            $contact->left     = $resume->left;
         }
+
+        return $contact;
     }
 
     /**

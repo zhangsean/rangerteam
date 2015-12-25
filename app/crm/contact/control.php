@@ -98,7 +98,7 @@ class contact extends control
     public function edit($contactID)
     {
         $contact = $this->contact->getByID($contactID);
-        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($contact) ? 0 : $contact->customer, 'edit');
+        if($contact->status == 'normal') $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($contact) ? 0 : $contact->customer, 'edit');
 
         if($_POST)
         {

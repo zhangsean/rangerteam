@@ -32,13 +32,14 @@
     <thead>
       <tr class='text-center'>
         <?php $vars = "mode={$mode}&origin={$origin}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
-        <th class='w-60px'> <?php commonModel::printOrderLink('id',       $orderBy, $vars, $lang->contact->id);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->contact->id);?></th>
         <th class='w-100px text-left'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
         <th class="text-left"><?php commonModel::printOrderLink('customer', $orderBy, $vars, $lang->contact->customer);?></th>
-        <th class='w-60px'> <?php commonModel::printOrderLink('gender',   $orderBy, $vars, $lang->contact->gender);?></th>
-        <th class='w-200px text-left'><?php commonModel::printOrderLink('phone',    $orderBy, $vars, $lang->contact->phone . $lang->slash . $lang->contact->mobile);?></th>
-        <th class='w-200px'><?php commonModel::printOrderLink('email',    $orderBy, $vars, $lang->contact->email);?></th>
-        <th class='w-100px visible-lg'><?php commonModel::printOrderLink('qq',       $orderBy, $vars, $lang->contact->qq);?></th>
+        <th class='w-60px'> <?php commonModel::printOrderLink('gender', $orderBy, $vars, $lang->contact->gender);?></th>
+        <th class='w-200px text-left'><?php commonModel::printOrderLink('phone', $orderBy, $vars, $lang->contact->phone . $lang->slash . $lang->contact->mobile);?></th>
+        <th class='w-200px'><?php commonModel::printOrderLink('email', $orderBy, $vars, $lang->contact->email);?></th>
+        <th class='w-100px visible-lg'><?php commonModel::printOrderLink('qq', $orderBy, $vars, $lang->contact->qq);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('origin', $orderBy, $vars, $lang->contact->origin);?></th>
         <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
@@ -46,7 +47,7 @@
     <?php foreach($contacts as $contact):?>
     <tr class='text-center'>
       <td><?php echo $contact->id;?></td>
-      <td class='text-left'><?php echo html::a(inlink('view', "contactID=$contact->id"), $contact->realname);?></td>
+      <td class='text-left'><?php echo html::a($this->createLink('contact', 'view', "contactID=$contact->id"), $contact->realname);?></td>
       <td class='text-left'>
         <?php if($contact->customer and isset($customers[$contact->customer])):?>
         <?php echo html::a($this->createLink('customer', 'view', "customerID=$contact->customer"), $customers[$contact->customer]);?>
@@ -58,6 +59,7 @@
       <td class='text-left'><?php echo $contact->phone . ' ' . $contact->mobile;?></td>
       <td><?php echo html::mailto($contact->email, $contact->email)?></td>
       <td class='visible-lg'><?php echo empty($contact->qq) ? '' : html::a("tencent://Message/?Uin={$contact->qq}&websiteName=RanZhi&Menu=yes", $contact->qq, "target='_blank'")?></td>
+      <td><?php echo zget($lang->contact->originList, $contact->origin);?></td>
       <td class='operate'>
         <?php
         commonModel::printLink('action',  'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt'");
