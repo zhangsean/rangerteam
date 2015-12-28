@@ -8,6 +8,7 @@ $(document).ready(function()
     $.setReload('.reload');
     $.setReloadDeleter('.reloadDeleter');
     $.setAjaxLoader('.loadInModal', '#ajaxModal');
+    $.setAjaxJSONER('.jsoner')
 
     /* run code if desktop. */
     if(typeof $.ipsStart != 'undefined') 
