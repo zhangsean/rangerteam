@@ -55,22 +55,16 @@ class leads extends control
         $contacts = $this->contact->getList($customer = '', $relation = 'client', $mode, $status = 'wait', $origin, $orderBy, $pager);
         $this->session->set('contactQueryCondition', $this->dao->get());
         $this->session->set('contactList', $this->app->getURI(true));
-        $this->session->set('customerList', $this->app->getURI(true));
-        $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit', array_keys($contacts))) . ',';
-
-        $customers = $this->loadModel('customer')->getPairs();
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
         $this->config->contact->search['actionURL'] = $this->createLink('contact', 'browse', 'mode=bysearch');
-        $this->config->contact->search['params']['t2.customer']['values'] = $customers;
         $this->search->setSearchParams($this->config->contact->search);
 
         $this->view->title     = $this->lang->contact->list;
         $this->view->mode      = $mode;
         $this->view->origin    = $origin;
         $this->view->contacts  = $contacts;
-        $this->view->customers = $customers;
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
         $this->display();
@@ -90,14 +84,10 @@ class leads extends control
         if($_POST)
         {
             $return = $this->contact->update($contactID);
-            $this->loadModel('customer')->updateEditedDate($this->post->customer);
             $this->send($return);
         }
 
-        $this->app->loadLang('resume');
-
         $this->view->title      = $this->lang->contact->edit;
-        $this->view->customers  = $this->loadModel('customer')->getPairs('client');
         $this->view->contact    = $contact;
         $this->view->modalWidth = 1000;
 
@@ -113,9 +103,6 @@ class leads extends control
      */
     public function view($contactID, $status = 'normal')
     {
-        if($this->session->customerList == $this->session->contactList) $this->session->set('customerList', $this->app->getURI(true));
-        $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit', (array)$contactID)) . ',';
-
         $actionList = $this->loadModel('action')->getList('contact', $contactID);
         $actionIDList = array_keys($actionList);
         $actionFiles = $this->loadModel('file')->getByObject('action', $actionIDList);
@@ -128,12 +115,30 @@ class leads extends control
         $this->view->title      = $this->lang->contact->view;
         $this->view->contact    = $this->contact->getByID($contactID, $status);
         $this->view->addresses  = $this->loadModel('address')->getList('contact', $contactID);
-        $this->view->resumes    = $this->loadModel('resume')->getList($contactID);
-        $this->view->customers  = $this->loadModel('customer')->getPairs('client');
         $this->view->preAndNext = $this->loadModel('common', 'sys')->getPreAndNextObject('contact', $contactID); 
         $this->view->fileList   = $fileList;
 
         $this->display();
+    }
+
+    /**
+     * Apply leads.
+     * 
+     * @access public
+     * @return void
+     */
+    public function apply()
+    {
+        $contactCount = $this->dao->select('count(*) as count')->from(TABLE_CONTACT)->where('assignedTo')->eq($this->app->user->account)->andWhere('status')->eq('wait')->fetch('count');
+        if($contactCount > 20) $this->send(array('result' => 'fail', 'message' => $this->lang->leads->message->apply));
+
+        $contacts = $this->dao->select('*')->from(TABLE_CONTACT)->where('status')->eq('wait')->andWhere('assignedTo')->eq('')->orderBy('id_desc')->limit(50)->fetchAll();
+        foreach($contacts as $contact)
+        {
+            $this->dao->update(TABLE_CONTACT)->set('assignedTo')->eq($this->app->user->account)->where('id')->eq($contact->id)->exec();
+        }
+        if(!dao::isError()) return $this->send(array('result' => 'success', 'locate' => inlink('browse', "mode=assignedTo")));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 }
 
