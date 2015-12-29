@@ -149,7 +149,7 @@ class contactModel extends model
                 ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
                 ->where('t1.deleted')->eq(0)
                 ->andWhere('status')->eq($status)
-                ->beginIF($origin)->andWhere('origin')->like("%$origin%")->fi()
+                ->beginIF($origin)->andWhere('origin')->eq("%$origin%")->fi()
                 ->andWhere('t2.customer')->in($customerIdList)
                 ->beginIF($customer)->andWhere('t1.id')->in(array_keys($resumes))->fi()
                 ->beginIF($mode == 'assignedTo')->andWhere('t1.assignedTo')->eq($this->app->user->account)->fi()
