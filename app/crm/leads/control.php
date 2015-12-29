@@ -130,10 +130,13 @@ class leads extends control
      */
     public function apply()
     {
-        $contactCount = $this->dao->select('count(*) as count')->from(TABLE_CONTACT)->where('assignedTo')->eq($this->app->user->account)->andWhere('status')->eq('wait')->fetch('count');
-        if($contactCount > 20) $this->send(array('result' => 'fail', 'message' => $this->lang->leads->message->apply));
+        $remain = isset($this->config->leads->remainCount) ? $this->config->leads->remainCount : 10;
+        $limit  = isset($this->config->leads->applyLimit) ? $this->config->leads->applyLimit : 50;
 
-        $contacts = $this->dao->select('*')->from(TABLE_CONTACT)->where('status')->eq('wait')->andWhere('assignedTo')->eq('')->orderBy('id_desc')->limit(50)->fetchAll();
+        $contactCount = $this->dao->select('count(*) as count')->from(TABLE_CONTACT)->where('assignedTo')->eq($this->app->user->account)->andWhere('status')->eq('wait')->fetch('count');
+        if($contactCount >= $remain) $this->send(array('result' => 'fail', 'message' => $this->lang->leads->message->apply));
+
+        $contacts = $this->dao->select('*')->from(TABLE_CONTACT)->where('status')->eq('wait')->andWhere('assignedTo')->eq('')->orderBy('id_desc')->limit($limit)->fetchAll();
         foreach($contacts as $contact)
         {
             $this->dao->update(TABLE_CONTACT)->set('assignedTo')->eq($this->app->user->account)->where('id')->eq($contact->id)->exec();
