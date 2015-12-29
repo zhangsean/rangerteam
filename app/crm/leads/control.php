@@ -55,6 +55,7 @@ class leads extends control
         $contacts = $this->contact->getList($customer = '', $relation = 'client', $mode, $status = 'wait', $origin, $orderBy, $pager);
         $this->session->set('contactQueryCondition', $this->dao->get());
         $this->session->set('contactList', $this->app->getURI(true));
+        $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit', array_keys($contacts))) . ',';
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
