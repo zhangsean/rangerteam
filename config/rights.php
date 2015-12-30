@@ -152,3 +152,7 @@ $config->rights->member['my']['dynamic']  = 'dynamic';
 $config->rights->member['my']['order']    = 'order';
 $config->rights->member['my']['contract'] = 'contract';
 $config->rights->member['my']['review']   = 'review';
+
+$config->rights->member['leads']['browse'] = 'browse';
+$config->rights->member['leads']['edit']   = 'edit';
+$config->rights->member['leads']['view']   = 'view';
