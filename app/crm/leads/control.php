@@ -130,8 +130,8 @@ class leads extends control
      */
     public function apply()
     {
-        $remain = isset($this->config->leads->remainCount) ? $this->config->leads->remainCount : 10;
-        $limit  = isset($this->config->leads->applyLimit) ? $this->config->leads->applyLimit : 50;
+        $remain = isset($this->config->leads->apply->remain) ? $this->config->leads->apply->remain : 10;
+        $limit  = isset($this->config->leads->apply->limit) ? $this->config->leads->apply->limit : 50;
 
         $contactCount = $this->dao->select('count(*) as count')->from(TABLE_CONTACT)->where('assignedTo')->eq($this->app->user->account)->andWhere('status')->eq('wait')->fetch('count');
         if($contactCount >= $remain) $this->send(array('result' => 'fail', 'message' => $this->lang->leads->message->apply));
