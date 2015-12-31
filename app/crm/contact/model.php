@@ -122,7 +122,7 @@ class contactModel extends model
                 ->andWhere('status')->eq($status)
                 ->beginIF($origin)->andWhere('origin')->like("%,$origin,%")->fi()
                 ->beginIF($mode == 'assignedTo')->andWhere('assignedTo')->eq($this->app->user->account)->fi()
-                ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
+                ->beginIF($mode == 'public')->andWhere('status')->eq('ignore')->fi()
                 ->beginIF($mode == 'bysearch')->andWhere($contactQuery)->fi()
                 ->orderBy($orderBy)
                 ->page($pager)
