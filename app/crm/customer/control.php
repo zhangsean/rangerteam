@@ -218,6 +218,23 @@ class customer extends control
     }
 
     /**
+     * Batch assign customers to a user. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function batchAssign()
+    {
+        if($this->post->assignedTo && $this->post->customerIDList)
+        {
+            $this->dao->update(TABLE_CUSTOMER)->set('assignedTo')->eq($this->post->assignedTo)->where('id')->in($this->post->customerIDList)->exec();
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'locate' => inlink('browse')));
+        }
+        $this->send(array('result' => 'success'));
+    }
+
+    /**
      * Browse orders of the customer.
      * 
      * @param  int    $customerID 
