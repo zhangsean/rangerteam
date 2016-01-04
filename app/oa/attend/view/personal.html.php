@@ -41,7 +41,7 @@
       {
           $startDate     = strtotime("$currentYear-$currentMonth-01");
           $startDate     = date('w', $startDate) == 0 ? $startDate : strtotime("last Sunday", $startDate);
-          $endDate       = strtotime("last day of this month $currentYear-$currentMonth-01");
+          $endDate       = strtotime("next month -1 day $currentYear-$currentMonth-01");
           $endDate       = date('w', $endDate) == 6 ? $endDate : strtotime("next Saturday", $endDate);
           $firstDayIndex = 0;
           $lastDayIndex  = 6;
@@ -50,7 +50,7 @@
       {
           $startDate     = strtotime("$currentYear-$currentMonth-01");
           $startDate     = date('w', $startDate) == 1 ? $startDate : strtotime("last Monday", $startDate);
-          $endDate       = strtotime("last day of this month $currentYear-$currentMonth-01");
+          $endDate       = strtotime("next month -1 day $currentYear-$currentMonth-01");
           $endDate       = date('w', $endDate) == 0 ? $endDate : strtotime("next Sunday", $endDate);
           $firstDayIndex = 1;
           $lastDayIndex  = 0;
