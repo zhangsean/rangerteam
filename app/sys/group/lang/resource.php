@@ -140,17 +140,18 @@ $lang->contract->methodOrder[55] = 'delete';
 
 /* Customer. */
 $lang->resource->customer = new stdclass();
-$lang->resource->customer->browse        = 'browse';
-$lang->resource->customer->create        = 'create';
-$lang->resource->customer->edit          = 'edit';
-$lang->resource->customer->view          = 'view';
-$lang->resource->customer->assign        = 'assign';
-$lang->resource->customer->order         = 'order';
-$lang->resource->customer->contact       = 'contact';
-$lang->resource->customer->linkContact   = 'linkContact';
-$lang->resource->customer->contract      = 'contract';
-$lang->resource->customer->export        = 'export';
-$lang->resource->customer->delete        = 'delete';
+$lang->resource->customer->browse      = 'browse';
+$lang->resource->customer->create      = 'create';
+$lang->resource->customer->edit        = 'edit';
+$lang->resource->customer->view        = 'view';
+$lang->resource->customer->assign      = 'assign';
+$lang->resource->customer->order       = 'order';
+$lang->resource->customer->contact     = 'contact';
+$lang->resource->customer->linkContact = 'linkContact';
+$lang->resource->customer->contract    = 'contract';
+$lang->resource->customer->export      = 'export';
+$lang->resource->customer->delete      = 'delete';
+$lang->resource->customer->batchAssign = 'batchAssign';
 
 $lang->customer->methodOrder[5]  = 'browse';
 $lang->customer->methodOrder[15] = 'create';
@@ -162,6 +163,8 @@ $lang->customer->methodOrder[40] = 'linkContact';
 $lang->customer->methodOrder[45] = 'contract';
 $lang->customer->methodOrder[50] = 'export';
 $lang->customer->methodOrder[55] = 'delete';
+$lang->customer->methodOrder[60] = 'assign';
+$lang->customer->methodOrder[65] = 'batchAssign';
 
 /* Contact. */
 $lang->resource->contact = new stdclass();

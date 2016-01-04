@@ -53,6 +53,7 @@ $lang->customer->contract    = '合同';
 $lang->customer->address     = '地址';
 $lang->customer->record      = '沟通';
 $lang->customer->assign      = '指派';
+$lang->customer->batchAssign = '批量指派';
 $lang->customer->linkContact = '添加联系人';
 $lang->customer->list        = '客户列表';
 $lang->customer->edit        = '编辑客户';
