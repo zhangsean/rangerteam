@@ -70,7 +70,8 @@ $lang->leads = new stdclass();
 $lang->leads->menu = new stdclass();
 $lang->leads->menu->browse      = '所有|leads|browse|mode=all';
 $lang->leads->menu->assignedTo  = '指派给我|leads|browse|mode=assignedTo';
-$lang->leads->menu->public      = '公共名单|leads|browse|mode=public';
+$lang->leads->menu->ignoredBy   = '由我忽略|leads|browse|mode=ignoredBy&status=ignore';
+$lang->leads->menu->public      = '公共名单|leads|browse|mode=all&status=ignore';
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();

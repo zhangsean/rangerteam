@@ -123,7 +123,7 @@ class contactModel extends model
                 ->andWhere('status')->eq($status)
                 ->beginIF($origin)->andWhere('origin')->like("%,$origin,%")->fi()
                 ->beginIF($mode == 'assignedTo')->andWhere('assignedTo')->eq($this->app->user->account)->fi()
-                ->beginIF($mode == 'public')->andWhere('status')->eq('ignore')->fi()
+                ->beginIF($mode == 'ignoredBy')->andWhere('ignoredBy')->eq($this->app->user->account)->fi()
                 ->beginIF($mode == 'bysearch')->andWhere($contactQuery)->fi()
                 ->orderBy($orderBy)
                 ->page($pager)
@@ -471,16 +471,17 @@ class contactModel extends model
 
         if(!empty($contactList))
         {
-            if(empty($contact->customer)) return array('result' => 'fail');
-
-            $customerContactList = $this->dao->select('contact')->from(TABLE_RESUME)->where('customer')->eq($contact->customer)->fetchAll('contact');
-
-            foreach($contactList as $id => $data)
+            if(!empty($contact->customer))
             {
-                if(isset($customerContactList[$id]))
+                $customerContactList = $this->dao->select('contact')->from(TABLE_RESUME)->where('customer')->eq($contact->customer)->fetchAll('contact');
+
+                foreach($contactList as $id => $data)
                 {
-                    $error = sprintf($this->lang->error->unique, $this->lang->customer->contact, html::a(helper::createLink('contact', 'view', "contactID={$data->id}"), $data->realname, "target='_blank'"));
-                    return array('result' => 'fail', 'error' => $error);
+                    if(isset($customerContactList[$id]))
+                    {
+                        $error = sprintf($this->lang->error->unique, $this->lang->customer->contact, html::a(helper::createLink('contact', 'view', "contactID={$data->id}"), $data->realname, "target='_blank'"));
+                        return array('result' => 'fail', 'error' => $error);
+                    }
                 }
             }
         }
@@ -572,7 +573,7 @@ class contactModel extends model
      */
     public function ignore($contactID)
     {
-        $this->dao->update(TABLE_CONTACT)->set('status')->eq('ignore')->where('id')->eq($contactID)->exec();
+        $this->dao->update(TABLE_CONTACT)->set('status')->eq('ignore')->set('ignoredBy')->eq($this->app->user->account)->where('id')->eq($contactID)->exec();
         return !dao::isError();
     }
 
@@ -635,5 +636,28 @@ class contactModel extends model
         $this->session->set('errorList', $errorList);
 
         return $successList;
+    }
+
+    /**
+     * Assign a contact to a member.
+     * 
+     * @param  int    $contactID 
+     * @access public
+     * @return void
+     */
+    public function assign($contactID)
+    {
+        $contact = fixer::input('post')
+            ->add('editedBy', $this->app->user->account)
+            ->add('editedDate', helper::now())
+            ->get();
+
+        $this->dao->update(TABLE_CONTACT)
+            ->data($contact, $skip = 'uid, comment')
+            ->autoCheck()
+            ->where('id')->eq($contactID)
+            ->exec();
+
+        return !dao::isError();
     }
 }

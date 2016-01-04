@@ -41,6 +41,8 @@ $lang->contact->editedBy       = '由谁编辑';
 $lang->contact->editedDate     = '编辑时间';
 $lang->contact->contactedBy    = '由谁联系';
 $lang->contact->contactedDate  = '联系时间';
+$lang->contact->nextDate       = '下次联系';
+$lang->contact->assignedTo     = '指派给';
 $lang->contact->newCustomer    = '新建';
 $lang->contact->uploadAvatar   = '上传头像';
 $lang->contact->changeAvatar   = '更换头像';
@@ -61,6 +63,7 @@ $lang->contact->vcard   = '二维码名片';
 $lang->contact->export  = '导出';
 $lang->contact->leads   = '名单';
 $lang->contact->apply   = '申请';
+$lang->contact->assign  = '指派';
 
 $lang->contact->basicInfo   = '基本信息';
 $lang->contact->contactInfo = '联系方式';

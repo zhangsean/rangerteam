@@ -47,15 +47,15 @@ class leads extends control
      * @access public
      * @return void
      */
-    public function browse($mode = 'all', $origin = '',  $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'all', $status = 'wait', $origin = '',  $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $contacts = $this->contact->getList($customer = '', $relation = 'client', $mode, $status = 'wait', $origin, $orderBy, $pager);
+        $contacts = $this->contact->getList($customer = '', $relation = 'client', $mode, $status, $origin, $orderBy, $pager);
         $this->session->set('contactQueryCondition', $this->dao->get());
         $this->session->set('contactList', $this->app->getURI(true));
-        $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit', array_keys($contacts))) . ',';
+        $this->app->user->canEditContactIdList = ',' . implode(',', array_keys($contacts)) . ',';
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
@@ -144,5 +144,71 @@ class leads extends control
         if(!dao::isError()) return $this->send(array('result' => 'success', 'locate' => inlink('browse', "mode=assignedTo")));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
-}
 
+    /**
+     * Assign a contact to a member.
+     * 
+     * @param  int    $contactID 
+     * @param  string    $table 
+     * @access public
+     * @return void
+     */
+    public function assign($contactID, $table = null)
+    {
+        $this->loadModel('contact');
+        if($_POST) 
+        {
+            $this->contact->assign($contactID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if($this->post->assignedTo) 
+            {
+                $actionID = $this->loadModel('action')->create('contact', $contactID, 'Assigned', $this->post->comment, $this->post->assignedTo);
+                $this->sendmail($contactID, $actionID);
+            }
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
+        }
+
+        $this->view->title     = $this->lang->contact->assign;
+        $this->view->users     = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->contactID = $contactID;
+        $this->display();
+    }
+
+    /**
+     * Send email.
+     * 
+     * @param  int    $contactID 
+     * @param  int    $actionID 
+     * @access public
+     * @return void
+     */
+    public function sendmail($contactID, $actionID)
+    {
+        /* Reset $this->output. */
+        $this->clear();
+
+        /* Set toList and ccList. */
+        $contact = $this->contact->getById($contactID);
+        $users   = $this->loadModel('user')->getPairs('noletter');
+        $toList  = $contact->assignedTo;
+
+        /* send notice if user is online and return failed accounts. */
+        $toList = $this->loadModel('action')->sendNotice($actionID, $toList);
+
+        /* Get action info. */
+        $action          = $this->loadModel('action')->getById($actionID);
+        $history         = $this->action->getHistory($actionID);
+        $action->history = isset($history[$actionID]) ? $history[$actionID] : array();
+
+        /* Create the email content. */
+        $this->view->contact = $contact;
+        $this->view->action  = $action;
+        $this->view->users   = $users;
+
+        $mailContent = $this->parse($this->moduleName, 'sendmail');
+
+        /* Send emails. */
+        $this->loadModel('mail')->send($toList, 'CONTACT#' . $contact->id . $this->lang->colon . $contact->realname, $mailContent);
+        if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
+    }
+}

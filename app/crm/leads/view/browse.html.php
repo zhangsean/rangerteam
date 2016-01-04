@@ -27,7 +27,6 @@
     </ul>
   </div>
   <?php endif;?>
-  <?php commonModel::printLink('contact', 'create', '', "<i class='icon-plus'></i> {$lang->contact->create}", "class='btn btn-primary'")?>
 </div>
 <div class='panel'>
   <table class='table table-hover table-striped tablesorter table-data table-fixed' id='contactList'>
