@@ -78,6 +78,7 @@ class contactModel extends model
         $contactList = $this->dao->select('t1.*')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
+            ->andWhere('t1.status')->eq('normal')
             ->beginIF(!empty($contactIdList))->andWhere('t1.id')->in($contactIdList)->fi()
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->andWhere('t2.customer')->in($customerIdList)
@@ -199,6 +200,7 @@ class contactModel extends model
         $contacts = $this->dao->select('t1.*')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.id = t2.contact')
             ->where('t1.deleted')->eq(0)
+            ->andWhere('t1.status')->eq('normal')
             ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->FI()
             ->andWhere('t2.customer')->in($customerIdList)
             ->fetchPairs('id', 'realname');
