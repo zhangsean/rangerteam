@@ -59,8 +59,8 @@ class leads extends control
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
-        $this->config->contact->search['actionURL'] = $this->createLink('contact', 'browse', 'mode=bysearch');
-        $this->search->setSearchParams($this->config->contact->search);
+        $this->config->leads->search['actionURL'] = $this->createLink('leads', 'browse', 'mode=bysearch');
+        $this->search->setSearchParams($this->config->leads->search);
 
         $this->view->title     = $this->lang->contact->list;
         $this->view->mode      = $mode;
@@ -155,7 +155,6 @@ class leads extends control
      */
     public function assign($contactID, $table = null)
     {
-        $this->loadModel('contact');
         if($_POST) 
         {
             $this->contact->assign($contactID);
