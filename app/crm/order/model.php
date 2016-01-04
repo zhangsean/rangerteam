@@ -164,7 +164,7 @@ class orderModel extends model
 
         $orders = $this->dao->select('o.id, o.createdDate, o.product, c.name as customerName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
-            ->where(1)
+            ->where('o.deleted')->eq(0)
             ->beginIF($customer)->andWhere('customer')->eq($customer)->fi()
             ->beginIF($status)->andWhere('status')->eq($status)->fi()
             ->andWhere('o.customer')->in($customerIdList)
