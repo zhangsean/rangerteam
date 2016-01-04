@@ -433,42 +433,4 @@ END:VCARD";
         $this->view->status      = 'wait';
         $this->display();
     }
-
-    /**
-     * Transform contact.
-     * 
-     * @param  int     $contactID 
-     * @access public
-     * @return void
-     */
-    public function transform($contactID)
-    {
-        if($_POST)
-        {
-            $result = $this->contact->transform($contactID);
-            if(is_array($result)) $this->send($result);
-
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->importSuccess, 'locate' => $this->server->http_referer));
-        }
-
-        $this->view->title     = $this->lang->confirm . $this->lang->contact->common;
-        $this->view->contact   = $this->contact->getByID($contactID, 'wait');
-        $this->view->customers = $this->loadModel('customer')->getPairs('client');
-        $this->display();
-    }
-
-    /**
-     * Ignore contact in leads.
-     * 
-     * @param  int    $contactID 
-     * @access public
-     * @return void
-     */
-    public function ignore($contactID)
-    {
-        $this->contact->ignore($contactID);
-        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
-    }
 }

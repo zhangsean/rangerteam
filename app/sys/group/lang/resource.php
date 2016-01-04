@@ -18,6 +18,7 @@ $lang->appModule->crm[] = 'order';
 $lang->appModule->crm[] = 'contract';
 $lang->appModule->crm[] = 'customer';
 $lang->appModule->crm[] = 'contact';
+$lang->appModule->crm[] = 'leads';
 $lang->appModule->crm[] = 'product';
 $lang->appModule->crm[] = 'address';
 $lang->appModule->crm[] = 'resume';
@@ -57,6 +58,7 @@ $lang->moduleOrder[0]   = 'order';
 $lang->moduleOrder[5]   = 'contract';
 $lang->moduleOrder[10]  = 'customer';
 $lang->moduleOrder[15]  = 'contact';
+$lang->moduleOrder[16]  = 'leads';
 $lang->moduleOrder[20]  = 'product';
 $lang->moduleOrder[25]  = 'address';
 $lang->moduleOrder[27]  = 'resume';
@@ -183,6 +185,23 @@ $lang->contact->methodOrder[25] = 'view';
 $lang->contact->methodOrder[30] = 'export';
 $lang->contact->methodOrder[35] = 'delete';
 $lang->contact->methodOrder[40] = 'vcard';
+
+$lang->resource->leads = new stdclass();
+$lang->resource->leads->browse    = 'browse';
+$lang->resource->leads->edit      = 'edit';
+$lang->resource->leads->view      = 'view';
+$lang->resource->leads->assign    = 'assign';
+$lang->resource->leads->apply     = 'apply';
+$lang->resource->leads->transform = 'transform';
+$lang->resource->leads->ignore    = 'ignore';
+
+$lang->leads->methodOrder[10] = 'browse';
+$lang->leads->methodOrder[15] = 'edit';
+$lang->leads->methodOrder[20] = 'view';
+$lang->leads->methodOrder[25] = 'assign';
+$lang->leads->methodOrder[30] = 'apply';
+$lang->leads->methodOrder[35] = 'transform';
+$lang->leads->methodOrder[40] = 'ignore';
 
 /* Product. */
 $lang->resource->product = new stdclass();

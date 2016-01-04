@@ -60,8 +60,8 @@
         commonModel::printLink('action',  'createRecord', "objectType=contact&objectID={$contact->id}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt'");
         commonModel::printLink('address', 'browse', "objectType=contact&objectID=$contact->id", $lang->contact->address, "data-toggle='modal'");
         commonModel::printLink('leads', 'edit', "contactID=$contact->id", $lang->edit);
-        commonModel::printLink('contact', 'transform', "contactID=$contact->id", $lang->confirm, "data-toggle='modal'");
-        commonModel::printLink('contact', 'ignore', "contactID=$contact->id", $lang->ignore, "class='reload'");
+        commonModel::printLink('leads', 'transform', "contactID=$contact->id", $lang->confirm, "data-toggle='modal'");
+        commonModel::printLink('leads', 'ignore', "contactID=$contact->id", $lang->ignore, "class='reload'");
         ?>
       </td>
     </tr>
