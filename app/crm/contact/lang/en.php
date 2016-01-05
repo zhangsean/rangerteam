@@ -41,6 +41,8 @@ $lang->contact->editedBy       = 'Edited By';
 $lang->contact->editedDate     = 'Edited Date';
 $lang->contact->contactedBy    = 'Contacted By';
 $lang->contact->contactedDate  = 'Contacted Date';
+$lang->contact->nextDate       = 'Next Date';
+$lang->contact->assignedTo     = 'Assigned To';
 $lang->contact->newCustomer    = 'Create Customer';
 $lang->contact->uploadAvatar   = 'Upload Avatar';
 $lang->contact->changeAvatar   = 'Change Avatar';
@@ -60,6 +62,8 @@ $lang->contact->qrcode  = 'Qrcode';
 $lang->contact->vcard   = 'Vcard';
 $lang->contact->export  = 'Export';
 $lang->contact->leads   = 'Leads';
+$lang->contact->apply   = 'Apply';
+$lang->contact->assign  = 'Assign';
 
 $lang->contact->basicInfo   = 'Basic Info';
 $lang->contact->contactInfo = 'Contact Info';

@@ -18,6 +18,7 @@ $lang->menu->crm->order     = 'Orders|order|index|';
 $lang->menu->crm->contract  = 'Contracts|contract|browse|mode=unfinished';
 $lang->menu->crm->customer  = 'Customers|customer|index|';
 $lang->menu->crm->contact   = 'Contact|contact|index|';
+$lang->menu->crm->leads     = 'Leads|leads|browse|';
 $lang->menu->crm->product   = 'Products|product|index|';
 $lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=statusList';
 
@@ -64,6 +65,13 @@ $lang->contact->menu->today     = 'Contact Today|contact|browse|mode=today';
 $lang->contact->menu->tomorrow  = 'Contact Tomorrow|contact|browse|mode=tomorrow';
 $lang->contact->menu->thisweek  = 'Contact This Week|contact|browse|mode=thisweek';
 $lang->contact->menu->thismonth = 'Contact This Month|contact|browse|mode=thismonth';
+
+$lang->leads = new stdclass();
+$lang->leads->menu = new stdclass();
+$lang->leads->menu->browse      = 'All|leads|browse|mode=all';
+$lang->leads->menu->assignedTo  = 'Assigned To Me|leads|browse|mode=assignedTo';
+$lang->leads->menu->ignoredBy   = 'Ignored By Me|leads|browse|mode=ignoredBy&status=ignore';
+$lang->leads->menu->public      = 'Public|leads|browse|mode=all&status=ignore';
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();

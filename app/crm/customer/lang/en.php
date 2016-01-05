@@ -53,6 +53,7 @@ $lang->customer->contract    = 'Contract List';
 $lang->customer->address     = 'Address List';
 $lang->customer->record      = 'Record';
 $lang->customer->assign      = 'Assign Customer';
+$lang->customer->batchAssign = 'Batch Assign';
 $lang->customer->linkContact = 'Create Contact';
 $lang->customer->list        = 'Customer List';
 $lang->customer->edit        = 'Edit';
