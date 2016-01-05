@@ -539,7 +539,7 @@ class contactModel extends model
                 if($return['result'] == 'fail') return $return;
             }
             
-            $this->dao->insert(TABLE_CUSTOMER)->data($customer, $skip = 'uid,contact,email,qq,phone,continue')->autoCheck()->exec();
+            $this->dao->insert(TABLE_CUSTOMER)->data($customer, $skip = 'uid,contact,email,qq,phone,continue')->autoCheck()->batchCheck('name', 'notempty')->exec();
             if(dao::isError()) return false;
             $customerID = $this->dao->lastInsertID();
             $this->loadModel('action')->create('customer', $customerID, 'Created');
