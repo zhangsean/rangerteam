@@ -57,6 +57,7 @@
       <td><?php echo $contact->origin;?></td>
       <td class='operate'>
         <?php
+        commonModel::printLink('leads', 'assign', "contactID=$contact->id", $lang->contact->assign, "data-toggle='modal'");
         commonModel::printLink('action',  'createRecord', "objectType=contact&objectID={$contact->id}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt'");
         commonModel::printLink('address', 'browse', "objectType=contact&objectID=$contact->id", $lang->contact->address, "data-toggle='modal'");
         commonModel::printLink('leads', 'edit', "contactID=$contact->id", $lang->edit);
