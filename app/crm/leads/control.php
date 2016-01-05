@@ -65,6 +65,7 @@ class leads extends control
         $this->view->title     = $this->lang->contact->list;
         $this->view->mode      = $mode;
         $this->view->origin    = $origin;
+        $this->view->status    = $status;
         $this->view->contacts  = $contacts;
         $this->view->pager     = $pager;
         $this->view->orderBy   = $orderBy;
