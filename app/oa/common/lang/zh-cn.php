@@ -19,6 +19,7 @@ $lang->menu->oa->announce  = '公告|announce|browse|';
 $lang->menu->oa->doc       = '文档|doc|browse|';
 $lang->menu->oa->attend    = '考勤|attend|personal|';
 $lang->menu->oa->leave     = '请假|leave|personal|';
+$lang->menu->oa->overtime  = '加班|overtime|personal|';
 $lang->menu->oa->trip      = '出差|trip|personal|';
 $lang->menu->oa->refund    = '报销|refund|personal|';
 
@@ -58,6 +59,12 @@ $lang->leave->menu = new stdclass();
 $lang->leave->menu->personal     = '我的请假|leave|personal|';
 $lang->leave->menu->browseReview = '我的审核|leave|browsereview|';
 $lang->leave->menu->company      = '所有请假|leave|company|';
+
+$lang->overtime = new stdclass();
+$lang->overtime->menu = new stdclass();
+$lang->overtime->menu->personal     = '我的加班|overtime|personal|';
+$lang->overtime->menu->browseReview = '我的审核|overtime|browsereview|';
+$lang->overtime->menu->company      = '所有加班|overtime|company|';
 
 $lang->trip = new stdclass();
 $lang->trip->menu = new stdclass();
