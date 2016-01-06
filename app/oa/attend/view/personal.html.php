@@ -62,7 +62,7 @@
       <div class='col-xs-4'>
         <div class='panel'>
           <div class='panel-body no-padding'>
-            <table class='table table-data table-fixed text-center'>
+            <table class='table table-data text-center'>
               <thead>
                 <tr>
                   <th class='w-80px'><?php echo $lang->attend->weeks[$weekIndex];?></th>
@@ -95,22 +95,25 @@
                 </td>
                 <td>
                   <?php
-                  if(strpos('rest, normal, trip, leave, overtime', $status) === false)
-                  {
-                      $edit  = $reviewStatus == 'wait' ? $lang->attend->edited : $lang->attend->edit;
-                      $leave = $reason == 'leave' ? $lang->attend->leaved : $lang->attend->leave;
-                      if($reason == '' or $reason == 'normal') echo html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $edit, "data-toggle='modal' data-width='500px'");
-                      if($reason == '' or $reason == 'leave')  echo html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $leave, "data-toggle='modal' data-width='700px'");
-                      if($reason == '' or $reason == 'trip')   echo html::a($this->createLink('trip', 'create'), $lang->attend->trip, "data-toggle='modal' data-width='500px'");
-                  }
-                  else
-                  {
-                      echo "<span class='attend-{$status}'>";
-                      echo $lang->attend->statusList[$status];
-                      if($status == 'leave' or $status == 'trip' and $attends[$currentDate]->desc) echo ' ' . $attends[$currentDate]->desc . 'h';
-                      echo "</span>";
-                  }
+                  if(strpos('rest, normal, trip, leave, overtime', $status) === false):
+                  $edit  = $reviewStatus == 'wait' ? $lang->attend->edited : $lang->attend->edit;
+                  $leave = $reason == 'leave' ? $lang->attend->leaved : $lang->attend->leave;
                   ?>
+                  <div class='dropdown'>
+                    <a href='javascript:;' data-toggle='dropdown'>操作 <span class='caret'></span></button>
+                    <ul role='menu' class='dropdown-menu'>
+                      <li><?php if($reason == '' or $reason == 'normal')   echo html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $edit, "data-toggle='modal' data-width='500px'");?></li>
+                      <li><?php if($reason == '' or $reason == 'leave')    echo html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $leave, "data-toggle='modal' data-width='700px'");?></li>
+                      <li><?php if($reason == '' or $reason == 'trip')     echo html::a($this->createLink('trip', 'create'), $lang->attend->trip, "data-toggle='modal' data-width='500px'");?></li>
+                      <li><?php if($reason == '' or $reason == 'overtime') echo html::a($this->createLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate)), $lang->attend->overtime, "data-toggle='modal' data-width='500px'");?></li>
+                    </ul>
+                  </div>
+                  <?php else:?>
+                  <span class="attend-<?php echo $status;?>">
+                  <?php echo $lang->attend->statusList[$status];?>
+                  <?php if(strpos('leave,trip,overtime', $status) !== false and $attends[$currentDate]->desc) echo ' ' . $attends[$currentDate]->desc . 'h';?>
+                  </span>
+                  <?php endif;?>
                 </td>
               </tr>
               <?php else:?>

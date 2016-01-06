@@ -399,6 +399,7 @@ EOT;
         /* 'leave': ask for leave. 'trip': biz trip. */
         if($this->loadModel('leave')->isLeave($attend->date, $attend->account)) return 'leave';
         if($this->loadModel('trip')->isTrip($attend->date, $attend->account)) return 'trip';
+        if($this->loadModel('overtime')->isOvertime($attend->date, $attend->account)) return 'overtime';
 
         $status = 'normal';
         if(($attend->signIn == "00:00:00" and $attend->signOut == "00:00:00") or (!$attend->signIn and !$attend->signOut)) 
@@ -420,12 +421,7 @@ EOT;
         }
 
         /* 'rest': rest day. */
-        $dayIndex = date('w', strtotime($attend->date));
-        if( ($this->config->attend->workingDays == '5' and ($dayIndex == 0 or $dayIndex == 6)) or 
-            ($this->config->attend->workingDays == '6' and $dayIndex == 0) or
-            ($this->config->attend->workingDays == '12' and ($dayIndex == 5 or $dayIndex == 6)) or 
-            ($this->config->attend->workingDays == '13' and $dayIndex == 6) or 
-            ($this->loadModel('holiday')->isHoliday($attend->date)) ) 
+        if($this->isWeekend($attend->date) or $this->loadModel('holiday')->isHoliday($attend->date)) 
         {
             $status = $status == 'absent' ? 'rest' : 'overtime';
         }
@@ -543,6 +539,29 @@ EOT;
     }
 
     /**
+     * Date is weekend or not.
+     * 
+     * @param  string    $date 
+     * @access public
+     * @return bool
+     */
+    public function isWeekend($date)
+    {
+        $dayIndex = date('w', strtotime($date));
+        if( (($this->config->attend->workingDays == '5' and ($dayIndex == 0 or $dayIndex == 6)) or 
+            ($this->config->attend->workingDays == '6' and $dayIndex == 0) or
+            ($this->config->attend->workingDays == '12' and ($dayIndex == 5 or $dayIndex == 6)) or 
+            ($this->config->attend->workingDays == '13' and $dayIndex == 6)) )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
      * Batch update attends for trip and leave.
      * 
      * @param  string    $dates 
@@ -555,16 +574,15 @@ EOT;
      */
     public function batchUpdate($dates, $account, $status = '', $reason = '', $time = '')
     {
-        if($status != '' and strpos('trip,leave,normal', $status) === false) return false;
+        if($status != '' and strpos('trip,leave,overtime,normal', $status) === false) return false;
         if($reason == '') $reason = $status;
 
         foreach($dates as $datetime)
         {
             $date = date('Y-m-d', $datetime);
-            $oldAttend = $this->loadModel('attend')->getByDate($date, $account);
 
             $attend = new stdclass();
-            $attend->status       = $status ? $status : 'absent';
+            $attend->status       = $status ? $status : ($this->isWeekend($date) ? 'rest' : 'absent');
             $attend->reason       = $reason;
             $attend->reviewStatus = '';
             $attend->desc         = '';
@@ -578,25 +596,17 @@ EOT;
                 $attend->desc = $hours;
             }
 
+            $oldAttend = $this->loadModel('attend')->getByDate($date, $account);
             if(isset($oldAttend->new))
             {
                 $attend->date    = $date;
                 $attend->account = $account;
-                $this->dao->insert(TABLE_ATTEND)
-                    ->data($attend)
-                    ->autoCheck()
-                    ->exec();
+                $this->dao->insert(TABLE_ATTEND)->data($attend)->autoCheck()->exec();
             }
             else
             {
                 $attend->status = $this->computeStatus($oldAttend);
-
-                $this->dao->update(TABLE_ATTEND)
-                    ->data($attend)
-                    ->autoCheck()
-                    ->where('date')->eq($date)
-                    ->andWhere('account')->eq($account)
-                    ->exec();
+                $this->dao->update(TABLE_ATTEND)->data($attend)->autoCheck()->where('date')->eq($date)->andWhere('account')->eq($account)->exec();
             }
         }
 
