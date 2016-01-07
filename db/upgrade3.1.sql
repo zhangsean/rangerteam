@@ -67,3 +67,26 @@ CREATE TABLE `oa_salarydetail` (
   KEY `item` (`item`),
   KEY `type` (`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- DROP TABLE IF EXISTS `oa_attendstat`;
+CREATE TABLE `oa_attendstat` (
+  `id` mediumint NOT NULL AUTO_INCREMENT,
+  `account` char(30) NOT NULL,
+  `month` char(10) NOT NULL DEFAULT '',
+  `normal` decimal(12,1) NOT NULL DEFAULT 0.0,
+  `late` decimal(12,1) NOT NULL DEFAULT 0.0,
+  `early` decimal(12,1) NOT NULL DEFAULT 0.0,
+  `absent` decimal(12,1) NOT NULL DEFAULT 0.0,
+  `trip` decimal(12,1) NOT NULL DEFAULT 0.0,
+  `paidLeave` decimal(12,1) NOT NULL DEFAULT 0.0,
+  `unpaidLeave` decimal(12,1) NOT NULL DEFAULT 0.0,
+  `timeOvertime` decimal(12,1) NOT NULL DEFAULT 0.0,
+  `restOvertime` decimal(12,1) NOT NULL DEFAULT 0.0,
+  `holidayOvertime` decimal(12,1) NOT NULL DEFAULT 0.0,
+  `status` char(30) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `account` (`account`),
+  KEY `month` (`month`),
+  KEY `status` (`status`),
+  UNIQUE KEY `attend` (`month`,`account`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
