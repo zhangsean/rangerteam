@@ -13,6 +13,7 @@ $lang->attend->overtime     = '加班';
 $lang->attend->review       = '补录审核';
 $lang->attend->settings     = '设置';
 $lang->attend->export       = '导出';
+$lang->attend->stat         = '统计';
 $lang->attend->browseReview = '补录列表';
 
 $lang->attend->id       = '编号';
@@ -82,6 +83,7 @@ $lang->attend->outFail    = '签退失败';
 $lang->attend->signInLimit  = '最晚签到';
 $lang->attend->signOutLimit = '最早签退';
 $lang->attend->workingDays  = '每周工作天数';
+$lang->attend->workingHours = '每天工作工时';
 $lang->attend->mustSignOut  = '必须签退';
 
 $lang->attend->workingDaysList['5']  = "周一～周五";

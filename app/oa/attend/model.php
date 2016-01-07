@@ -81,6 +81,45 @@ class attendModel extends model
     }
 
     /**
+     * Get stat.
+     * 
+     * @param  string    $date 
+     * @access public
+     * @return array
+     */
+    public function getStat($date)
+    {
+        return $this->dao->select('*')->from(TABLE_ATTENDSTAT)->where('month')->eq($date)->fetchAll('account');
+    }
+
+    /**
+     * Get attends group by account.
+     * 
+     * @param  string $startDate 
+     * @param  string $endDate 
+     * @access public
+     * @return array
+     */
+    public function getGroupByAccount($startDate = '', $endDate = '')
+    {
+        $this->processStatus();
+
+        $users = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted');
+        $attends = $this->dao->select('*')->from(TABLE_ATTEND)
+            ->where(1)
+            ->beginIf($startDate != '')->andWhere('`date`')->ge($startDate)->fi()
+            ->beginIf($endDate != '')->andWhere('`date`')->le($endDate)->fi()
+            ->fetchGroup('account');
+
+        foreach($users as $account => $realname)
+        {
+            if(!isset($attends[$account])) $attends[$account] = array();
+        }
+
+        return $attends;
+    }
+
+    /**
      * Get department's attend list. 
      * 
      * @param  string $deptID
@@ -608,6 +647,38 @@ EOT;
                 $attend->status = $this->computeStatus($oldAttend);
                 $this->dao->update(TABLE_ATTEND)->data($attend)->autoCheck()->where('date')->eq($date)->andWhere('account')->eq($account)->exec();
             }
+        }
+
+        return !dao::isError();
+    }
+
+    /**
+     * Save stat.
+     * 
+     * @param  string    $date 
+     * @access public
+     * @return bool
+     */
+    public function saveStat($date)
+    {
+        foreach($this->post->normal as $account => $normal)
+        {
+            $data = new stdclass();
+            $data->account         = $account;
+            $data->normal          = $normal;
+            $data->late            = $this->post->late[$account];
+            $data->early           = $this->post->early[$account];
+            $data->absent          = $this->post->absent[$account];
+            $data->trip            = $this->post->trip[$account];
+            $data->paidLeave       = $this->post->paidLeave[$account];
+            $data->unpaidLeave     = $this->post->unpaidLeave[$account];
+            $data->timeOvertime    = $this->post->timeOvertime[$account];
+            $data->restOvertime    = $this->post->restOvertime[$account];
+            $data->holidayOvertime = $this->post->holidayOvertime[$account];
+            $data->month           = $date;
+            $data->status          = 'wait';
+
+            $this->dao->replace(TABLE_ATTENDSTAT)->data($data)->autoCheck()->exec();
         }
 
         return !dao::isError();

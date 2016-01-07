@@ -36,6 +36,10 @@
               <td><?php echo html::input('signOutLimit', $signOutLimit, "class='form-control form-time'")?></td>
             </tr>
             <tr>
+              <th><?php echo $lang->attend->workingHours?></th>
+              <td><?php echo html::input('workingHours', $workingHours, "class='form-control'")?></td>
+            </tr>
+            <tr>
               <th><?php echo $lang->attend->workingDays?></th>
               <td><?php echo html::select('workingDays', $lang->attend->workingDaysList, $workingDays, "class='form-control'")?></td>
             </tr>

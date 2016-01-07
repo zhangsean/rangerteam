@@ -37,6 +37,9 @@ $lang->leave->typeList['home']      = '探亲假';
 $lang->leave->typeList['marry']     = '婚假';
 $lang->leave->typeList['maternity'] = '产假';
 
+$lang->leave->paid   = '带薪假';
+$lang->leave->unpaid = '非带薪假';
+
 $lang->leave->statusList['draft']  = '草稿';
 $lang->leave->statusList['wait']   = '等待审核';
 $lang->leave->statusList['pass']   = '通过';

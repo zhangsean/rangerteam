@@ -290,6 +290,7 @@ class attend extends control
         $this->view->signInLimit  = $this->config->attend->signInLimit;
         $this->view->signOutLimit = $this->config->attend->signOutLimit;
         $this->view->workingDays  = $this->config->attend->workingDays;
+        $this->view->workingHours = $this->config->attend->workingHours;
         $this->view->mustSignOut  = $this->config->attend->mustSignOut;
         $this->view->reviewedBy   = isset($this->config->attend->reviewedBy) ? $this->config->attend->reviewedBy : '';
         $this->view->users        = array('' => $this->lang->dept->moderators) + $this->user->getPairs('noempty,noclosed,nodeleted');
@@ -452,5 +453,156 @@ class attend extends control
         $this->view->deptList = $deptList;
         $this->view->users    = $this->loadModel('user')->getPairs('noclosed,nodeleted');
         $this->display();
+    }
+
+    /**
+     * Browse stat of attend.
+     * 
+     * @param  string  $date 
+     * @param  string  $mode 
+     * @access public
+     * @return void
+     */
+    public function stat($date = '', $mode = '')
+    {
+        if($date == '' or strlen($date) != 6) $date = date('Ym');
+        $currentYear  = substr($date, 0, 4);
+        $currentMonth = substr($date, 4, 2);
+        $startDate    = "{$currentYear}-{$currentMonth}-01";
+        $endDate      = date('Y-m-d', strtotime("$startDate +1 month"));
+
+        $stat = $this->attend->getStat($date);
+        if(!empty($stat))
+        {
+            $mode = $mode ? $mode : 'view';
+            $this->app->loadLang('leave');
+            $this->app->loadLang('overtime');
+        }
+        else
+        {
+            $mode = 'edit';
+
+            $attends   = $this->attend->getGroupByAccount($startDate, $endDate);
+            $trips     = $this->loadModel('trip')->getList($currentYear, $currentMonth);
+            $leaves    = $this->loadModel('leave')->getList($type = 'company', $currentYear, $currentMonth);
+            $overtimes = $this->loadModel('overtime')->getList($type = 'company', $currentYear, $currentMonth);
+
+            $stat = array();
+            foreach($attends as $account => $accountAttends)
+            {
+                $stat[$account] = new stdclass(); 
+                $stat[$account]->normal = 0;
+                $stat[$account]->absent = 0;
+                $stat[$account]->late   = 0;
+                $stat[$account]->early  = 0;
+                $stat[$account]->trip   = 0;
+
+                $stat[$account]->paidLeave   = 0;
+                $stat[$account]->unpaidLeave = 0;
+
+                $stat[$account]->timeOvertime    = 0;
+                $stat[$account]->restOvertime    = 0;
+                $stat[$account]->holidayOvertime = 0;
+
+                foreach($accountAttends as $attend)
+                {
+                    if($attend->status == 'normal') $stat[$account]->normal ++;
+                    if($attend->status == 'absent') $stat[$account]->absent ++;
+
+                    if($attend->status == 'late' or $attend->status == 'both') $stat[$account]->late ++;
+                    if($attend->status == 'early' or $attend->status == 'both') $stat[$account]->early ++;
+
+                    if($attend->status == 'trip')
+                    {
+                        foreach($trips as $trip)
+                        {
+                            if($trip->end >= $attend->date and $attend->date >= $trip->begin)
+                            {
+                                if($attend->desc < ($this->config->attend->signOutLimit - $this->config->attend->signInLimit))
+                                {
+                                    $stat[$account]->trip += round($attend->desc / $this->config->attend->workingHours, 2);
+                                }
+                                else
+                                {
+                                    $stat[$account]->trip ++;
+                                }
+                            }
+                        }
+                    }
+
+                    if($attend->status == 'leave')
+                    {
+                        foreach($leaves as $leave)
+                        {
+                            if($leave->end >= $attend->date and $attend->date >= $leave->begin)
+                            {
+                                if($attend->desc < ($this->config->attend->signOutLimit - $this->config->attend->signInLimit))
+                                {
+                                    if(strpos('affairs,sick', $leave->type) !== false)  $stat[$account]->unpaidLeave += round($attend->desc / $this->config->attend->workingHours, 2);
+                                    if(strpos('annual,home,marry,maternity', $leave->type) !== false) $stat[$account]->paidLeave += round($attend->desc / $this->config->attend->workingHours, 2);
+                                }
+                                else
+                                {
+                                    if(strpos('affairs,sick', $leave->type) !== false)  $stat[$account]->unpaidLeave ++;
+                                    if(strpos('annual,home,marry,maternity', $leave->type) !== false) $stat[$account]->paidLeave ++;
+                                }
+                            }
+                        }
+                    }
+                    if($attend->status == 'overtime')
+                    {
+                        foreach($overtimes as $overtime)
+                        {
+                            if($overtime->end >= $attend->date and $attend->date >= $overtime->begin)
+                            {
+                                if($overtime->type == 'time') $stat[$account]->timeOvertime += $attend->desc;
+
+                                if($attend->desc < ($this->config->attend->signOutLimit - $this->config->attend->signInLimit))
+                                {
+                                    if($overtime->type == 'rest') $stat[$account]->restOvertime += round($attend->desc / $this->config->attend->workingHours, 2);
+                                    if($overtime->type == 'holiday') $stat[$account]->holidayOvertime += round($attend->desc / $this->config->attend->workingHours, 2);
+                                }
+                                else
+                                {
+                                    if($overtime->type == 'rest') $stat[$account]->restOvertime ++;
+                                    if($overtime->type == 'holiday') $stat[$account]->holidayOvertime ++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        $monthList = $this->attend->getAllMonth();
+        $yearList  = array_reverse(array_keys($monthList));
+
+        $this->view->title        = $this->lang->attend->stat;
+        $this->view->stat         = $stat;
+        $this->view->date         = $date;
+        $this->view->currentYear  = $currentYear;
+        $this->view->currentMonth = $currentMonth;
+        $this->view->yearList     = $yearList;
+        $this->view->monthList    = $monthList;
+        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->mode         = $mode;
+        $this->display();
+    }
+
+    /**
+     * Save stat for attend.
+     * 
+     * @param  string    $date 
+     * @access public
+     * @return void
+     */
+    public function saveStat($date)
+    {
+        if($_POST)
+        {
+            $this->attend->saveStat($date);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('stat', "date=$date&mode=view")));
+        }
     }
 }
