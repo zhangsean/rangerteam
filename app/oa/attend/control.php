@@ -493,12 +493,13 @@ class attend extends control
             foreach($attends as $account => $accountAttends)
             {
                 $stat[$account] = new stdclass(); 
-                $stat[$account]->deserve = $workingDays;
-                $stat[$account]->normal  = 0;
-                $stat[$account]->absent  = 0;
-                $stat[$account]->late    = 0;
-                $stat[$account]->early   = 0;
-                $stat[$account]->trip    = 0;
+                $stat[$account]->deserve  = $workingDays;
+                $stat[$account]->normal   = 0;
+                $stat[$account]->abnormal = 0;
+                $stat[$account]->absent   = 0;
+                $stat[$account]->late     = 0;
+                $stat[$account]->early    = 0;
+                $stat[$account]->trip     = 0;
 
                 $stat[$account]->paidLeave   = 0;
                 $stat[$account]->unpaidLeave = 0;
@@ -512,8 +513,16 @@ class attend extends control
                     if($attend->status == 'normal') $stat[$account]->normal ++;
                     if($attend->status == 'absent') $stat[$account]->absent ++;
 
-                    if($attend->status == 'late' or $attend->status == 'both') $stat[$account]->late ++;
-                    if($attend->status == 'early' or $attend->status == 'both') $stat[$account]->early ++;
+                    if($attend->status == 'late' or $attend->status == 'both')
+                    {
+                        $stat[$account]->late ++;
+                        $stat[$account]->abnormal ++;
+                    }
+                    if($attend->status == 'early' or $attend->status == 'both')
+                    {
+                        $stat[$account]->early ++;
+                        $stat[$account]->abnormal ++;
+                    }
 
                     if($attend->status == 'trip')
                     {
@@ -590,7 +599,7 @@ class attend extends control
                     }
                 }
 
-                $stat[$account]->actual = $stat[$account]->normal + $stat[$account]->restOvertime + $stat[$account]->holidayOvertime + $stat[$account]->timeOvertime + $stat[$account]->trip;
+                $stat[$account]->actual = $stat[$account]->normal + $stat[$account]->restOvertime + $stat[$account]->holidayOvertime + $stat[$account]->timeOvertime + $stat[$account]->trip + $stat[$account]->abnormal;
             }
         }
 
