@@ -640,7 +640,7 @@ EOT;
             $date = date('Y-m-d', $datetime);
 
             $attend = new stdclass();
-            $attend->status       = $status ? $status : ($this->isWeekend($date) ? 'rest' : 'absent');
+            $attend->status       = $status ? $status : (($this->isWeekend($date) or $this->loadModel('holiday')->isHoliday($date)) ? 'rest' : 'absent');
             $attend->reason       = $reason;
             $attend->reviewStatus = '';
             $attend->desc         = '';

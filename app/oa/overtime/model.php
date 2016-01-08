@@ -176,12 +176,12 @@ class overtimeModel extends model
      */
     public function delete($id, $null = null)
     {
+        $oldOvertime = $this->getByID($id);
         $this->dao->delete()->from(TABLE_OVERTIME)->where('id')->eq($id)->exec();
 
         if(!dao::isError())
         {
-            $oldOvertime = $this->getByID($id);
-            $oldDates = range(strtotime($oldOvertime->begin), strtotime($oldOvertime->end), 60*60*24);
+            $oldDates = range(strtotime($oldOvertime->begin), strtotime($oldOvertime->end), 60 * 60 * 24);
             $this->loadModel('attend')->batchUpdate($oldDates, $oldOvertime->createdBy, '');
         }
         return !dao::isError();
