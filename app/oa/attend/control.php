@@ -470,6 +470,7 @@ class attend extends control
         $currentMonth = substr($date, 4, 2);
         $startDate    = "{$currentYear}-{$currentMonth}-01";
         $endDate      = date('Y-m-d', strtotime("$startDate +1 month"));
+        $endDate      = date('Y-m-d', strtotime("$endDate -1 day"));
         $workingDays  = $this->attend->computeWorkingDays($startDate, $endDate);
 
         $stat = $this->attend->getStat($date);
@@ -485,8 +486,8 @@ class attend extends control
 
             $attends   = $this->attend->getGroupByAccount($startDate, $endDate < helper::today() ? $endDate : helper::today());
             $trips     = $this->loadModel('trip')->getList($currentYear, $currentMonth);
-            $leaves    = $this->loadModel('leave')->getList($type = 'company', $currentYear, $currentMonth);
-            $overtimes = $this->loadModel('overtime')->getList($type = 'company', $currentYear, $currentMonth);
+            $leaves    = $this->loadModel('leave')->getList($type = 'company', $currentYear, $currentMonth, '', '', $status = 'pass');
+            $overtimes = $this->loadModel('overtime')->getList($type = 'company', $currentYear, $currentMonth, '', '', $status = 'pass');
 
             $stat = array();
             foreach($attends as $account => $accountAttends)
@@ -518,7 +519,7 @@ class attend extends control
                     {
                         foreach($trips as $trip)
                         {
-                            if($trip->end >= $attend->date and $attend->date >= $trip->begin)
+                            if($trip->end >= $attend->date and $attend->date >= $trip->begin and $trip->createdBy == $account)
                             {
                                 if($attend->desc < ($this->config->attend->signOutLimit - $this->config->attend->signInLimit))
                                 {
@@ -537,7 +538,7 @@ class attend extends control
                     {
                         foreach($leaves as $leave)
                         {
-                            if($leave->end >= $attend->date and $attend->date >= $leave->begin)
+                            if($leave->end >= $attend->date and $attend->date >= $leave->begin and $leave->createdBy == $account)
                             {
                                 if($attend->desc < ($this->config->attend->signOutLimit - $this->config->attend->signInLimit))
                                 {
@@ -564,9 +565,13 @@ class attend extends control
                     {
                         foreach($overtimes as $overtime)
                         {
-                            if($overtime->end >= $attend->date and $attend->date >= $overtime->begin)
+                            if($overtime->end >= $attend->date and $attend->date >= $overtime->begin and $overtime->createdBy == $account)
                             {
-                                if($overtime->type == 'time') $stat[$account]->timeOvertime += round($attend->desc / $this->config->attend->workingHours, 2);
+                                if($overtime->type == 'time')
+                                {
+                                    $stat[$account]->timeOvertime += round($attend->desc / $this->config->attend->workingHours, 2);
+                                    $stat[$account]->normal ++;
+                                }
 
                                 if($attend->desc < ($this->config->attend->signOutLimit - $this->config->attend->signInLimit))
                                 {

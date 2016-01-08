@@ -100,12 +100,12 @@
                   $leave = $reason == 'leave' ? $lang->attend->leaved : $lang->attend->leave;
                   ?>
                   <div class='dropdown'>
-                    <a href='javascript:;' data-toggle='dropdown'>操作 <span class='caret'></span></button>
+                    <a href='javascript:;' data-toggle='dropdown'><?php echo $lang->actions;?><span class='caret'></span></a>
                     <ul role='menu' class='dropdown-menu'>
-                      <li><?php if($reason == '' or $reason == 'normal')   echo html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $edit, "data-toggle='modal' data-width='500px'");?></li>
-                      <li><?php if($reason == '' or $reason == 'leave')    echo html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $leave, "data-toggle='modal' data-width='700px'");?></li>
-                      <li><?php if($reason == '' or $reason == 'trip')     echo html::a($this->createLink('trip', 'create'), $lang->attend->trip, "data-toggle='modal' data-width='500px'");?></li>
-                      <li><?php if($reason == '' or $reason == 'overtime') echo html::a($this->createLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate)), $lang->attend->overtime, "data-toggle='modal' data-width='500px'");?></li>
+                      <?php if($reason == '' or $reason == 'normal')   echo "<li>" . html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $edit, "data-toggle='modal' data-width='500px'") . "</li>";?>
+                      <?php if($reason == '' or $reason == 'leave')    echo "<li>" . html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $leave, "data-toggle='modal' data-width='700px'") . "</li>";?>
+                      <?php if($reason == '' or $reason == 'trip')     echo "<li>" . html::a($this->createLink('trip', 'create'), $lang->attend->trip, "data-toggle='modal' data-width='500px'") . "</li>";?>
+                      <?php if($reason == '' or $reason == 'overtime') echo "<li>" . html::a($this->createLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate)), $lang->attend->overtime, "data-toggle='modal' data-width='500px'") . "</li>";?>
                     </ul>
                   </div>
                   <?php else:?>
