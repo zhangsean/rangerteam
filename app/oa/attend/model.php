@@ -601,6 +601,28 @@ EOT;
     }
 
     /**
+     * Compute working days between time.
+     * 
+     * @param  date    $begin 
+     * @param  date    $end 
+     * @access public
+     * @return int
+     */
+    public function computeWorkingDays($begin, $end)
+    {
+        $dates = range(strtotime($begin), strtotime($end), 60 * 60 * 24);
+        $workingDays = 0;
+        foreach($dates as $datetime)
+        {
+            $date = date('Y-m-d', $datetime);
+            if($this->isWeekend($date)) continue;
+            if($this->loadModel('holiday')->isHoliday($date)) continue;
+            $workingDays ++;
+        }
+        return $workingDays;
+    }
+
+    /**
      * Batch update attends for trip and leave.
      * 
      * @param  string    $dates 

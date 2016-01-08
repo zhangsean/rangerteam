@@ -12,7 +12,6 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/treeview.html.php';?>
-<?php js::set('mode', $mode);?>
 <div id='menuActions'>
   <?php commonModel::printLink('attend', 'export', "data=$currentYear$currentMonth", "{$lang->attend->export}", "class='iframe btn btn-primary'")?>
 </div>
@@ -57,9 +56,9 @@
             <th><?php echo $lang->overtime->typeList['time'];?></th>
             <th><?php echo $lang->overtime->typeList['rest'];?></th>
             <th><?php echo $lang->overtime->typeList['holiday'];?></th>
-            <?php if($mode == 'view'):?>
+            <th><?php echo $lang->attend->deserveDays;?></th>
+            <th><?php echo $lang->attend->totalDays;?></th>
             <th><?php echo $lang->actions;?></th>
-            <?php endif;?>
           </tr>
         </thead>
         <?php foreach($stat as $account => $accountStat):?>
@@ -76,9 +75,11 @@
           <td><?php echo $accountStat->timeOvertime;?></td>
           <td><?php echo $accountStat->restOvertime;?></td>
           <td><?php echo $accountStat->holidayOvertime;?></td>
+          <td><?php echo $accountStat->deserve;?></td>
+          <td><?php echo $accountStat->total;?></td>
           <td><?php echo html::a('javascript:;', $lang->edit, "class='singleEdit'")?></td>
         </tr>
-        <tr class='edit'>
+        <tr class='edit hide'>
           <td class='valign-middle'><?php echo $users[$account];?></td>
           <td><?php echo html::input("normal[$account]", $accountStat->normal, "class='form-control'");?></td>
           <td><?php echo html::input("late[$account]", $accountStat->late, "class='form-control'");?></td>
@@ -90,15 +91,11 @@
           <td><?php echo html::input("timeOvertime[$account]", $accountStat->timeOvertime, "class='form-control'");?></td>
           <td><?php echo html::input("restOvertime[$account]", $accountStat->restOvertime, "class='form-control'");?></td>
           <td><?php echo html::input("holidayOvertime[$account]", $accountStat->holidayOvertime, "class='form-control'");?></td>
-          <td class='singleSave hide'><?php echo html::submitButton();?></td>
+          <td><?php echo html::input("deserve[$account]", $accountStat->deserve, "class='form-control'");?></td>
+          <td><?php echo html::input("total[$account]", $accountStat->total, "class='form-control'");?></td>
+          <td class='singleSave'><?php echo html::submitButton();?></td>
         </tr>
         <?php endforeach;?>
-        <tr>
-            <td colspan="<?php echo $mode == 'edit' ? 11 : 12;?>" class='text-left'>
-            <?php echo html::a($this->createLink('attend', 'stat', "date=$date&mode=edit"), $lang->edit, "class='btn'");?>
-            <?php if($mode == 'edit') echo html::submitButton();?>
-          </td>
-        </tr>
       </table>
       </form>
     </div>

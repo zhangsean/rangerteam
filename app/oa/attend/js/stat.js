@@ -1,16 +1,5 @@
 $(document).ready(function()
 {
-    if(v.mode == 'edit') 
-    {
-        $('tr.edit').show();
-        $('tr.view').hide();
-    }
-    else
-    {
-        $('tr.edit').hide();
-        $('tr.view').show();
-    }
-
     $('.singleEdit').click(function()
     {
         if($('tr.edit').is(':visible')) return false;

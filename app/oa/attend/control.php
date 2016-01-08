@@ -28,7 +28,7 @@ class attend extends control
         $dayNum       = (int)date('d', strtotime("$endDate -1 day"));
         $weekNum      = (int)ceil($dayNum / 7);
 
-        $attends   = $this->attend->getByAccount($this->app->user->account, $startDate, $endDate < helper::today() ? $endDate : helper::today());
+        $attends   = $this->attend->getByAccount($this->app->user->account, $startDate, $endDate > helper::today() ? helper::today() : $endDate);
         $monthList = $this->attend->getAllMonth();
         $yearList  = array_reverse(array_keys($monthList));
 
@@ -463,26 +463,24 @@ class attend extends control
      * @access public
      * @return void
      */
-    public function stat($date = '', $mode = '')
+    public function stat($date = '')
     {
         if($date == '' or strlen($date) != 6) $date = date('Ym');
         $currentYear  = substr($date, 0, 4);
         $currentMonth = substr($date, 4, 2);
         $startDate    = "{$currentYear}-{$currentMonth}-01";
         $endDate      = date('Y-m-d', strtotime("$startDate +1 month"));
+        $workingDays  = $this->attend->computeWorkingDays($startDate, $endDate);
 
         $stat = $this->attend->getStat($date);
         if(!empty($stat))
         {
-            $mode = $mode ? $mode : 'view';
             $this->app->loadLang('leave');
             $this->app->loadLang('overtime');
         }
         else
         {
-            $mode = 'edit';
-
-            $attends   = $this->attend->getGroupByAccount($startDate, $endDate);
+            $attends   = $this->attend->getGroupByAccount($startDate, $endDate < helper::today() ? $endDate : helper::today());
             $trips     = $this->loadModel('trip')->getList($currentYear, $currentMonth);
             $leaves    = $this->loadModel('leave')->getList($type = 'company', $currentYear, $currentMonth);
             $overtimes = $this->loadModel('overtime')->getList($type = 'company', $currentYear, $currentMonth);
@@ -491,11 +489,12 @@ class attend extends control
             foreach($attends as $account => $accountAttends)
             {
                 $stat[$account] = new stdclass(); 
-                $stat[$account]->normal = 0;
-                $stat[$account]->absent = 0;
-                $stat[$account]->late   = 0;
-                $stat[$account]->early  = 0;
-                $stat[$account]->trip   = 0;
+                $stat[$account]->deserve = $workingDays;
+                $stat[$account]->normal  = 0;
+                $stat[$account]->absent  = 0;
+                $stat[$account]->late    = 0;
+                $stat[$account]->early   = 0;
+                $stat[$account]->trip    = 0;
 
                 $stat[$account]->paidLeave   = 0;
                 $stat[$account]->unpaidLeave = 0;
@@ -561,16 +560,20 @@ class attend extends control
                                 {
                                     if($overtime->type == 'rest') $stat[$account]->restOvertime += round($attend->desc / $this->config->attend->workingHours, 2);
                                     if($overtime->type == 'holiday') $stat[$account]->holidayOvertime += round($attend->desc / $this->config->attend->workingHours, 2);
+                                    if($overtime->type == 'lieu') $stat[$account]->normal += round($attend->desc / $this->config->attend->workingHours, 2);
                                 }
                                 else
                                 {
                                     if($overtime->type == 'rest') $stat[$account]->restOvertime ++;
                                     if($overtime->type == 'holiday') $stat[$account]->holidayOvertime ++;
+                                    if($overtime->type == 'lieu') $stat[$account]->normal ++;
                                 }
                             }
                         }
                     }
                 }
+
+                $stat[$account]->total = $stat[$account]->normal + $stat[$account]->restOvertime + $stat[$account]->holidayOvertime + $stat[$account]->timeOvertime + $stat[$account]->trip;
             }
         }
 
@@ -585,7 +588,6 @@ class attend extends control
         $this->view->yearList     = $yearList;
         $this->view->monthList    = $monthList;
         $this->view->users        = $this->loadModel('user')->getPairs();
-        $this->view->mode         = $mode;
         $this->display();
     }
 
@@ -602,7 +604,7 @@ class attend extends control
         {
             $this->attend->saveStat($date);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('stat', "date=$date&mode=view")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('stat', "date=$date")));
         }
     }
 }
