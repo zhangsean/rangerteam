@@ -460,10 +460,7 @@ EOT;
         }
 
         /* 'rest': rest day. */
-        if($this->isWeekend($attend->date) or $this->loadModel('holiday')->isHoliday($attend->date)) 
-        {
-            $status = $status == 'absent' ? 'rest' : 'overtime';
-        }
+        if($this->isWeekend($attend->date) or $this->loadModel('holiday')->isHoliday($attend->date)) $status = 'rest';
 
         return $status;
     }

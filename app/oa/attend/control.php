@@ -563,7 +563,7 @@ class attend extends control
                         {
                             if($overtime->end >= $attend->date and $attend->date >= $overtime->begin)
                             {
-                                if($overtime->type == 'time') $stat[$account]->timeOvertime += $attend->desc;
+                                if($overtime->type == 'time') $stat[$account]->timeOvertime += round($attend->desc / $this->config->attend->workingHours, 2);
 
                                 if($attend->desc < ($this->config->attend->signOutLimit - $this->config->attend->signInLimit))
                                 {

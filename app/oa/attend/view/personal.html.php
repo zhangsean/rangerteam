@@ -83,13 +83,13 @@
                 <td><?php echo $lang->datepicker->abbrDayNames[$dayIndex]?></td>
                 <td class='attend-signin'>
                   <?php $signIn = substr($attends[$currentDate]->signIn, 0, 5);?>
-                  <?php if(strpos(',late,absent,', $status) !== false) $signIn = $lang->attend->statusList[$status];?>
+                  <?php if(strpos(',late,absent,rest,', $status) !== false) $signIn = $lang->attend->statusList[$status];?>
                   <?php if($status == 'both') $signIn = $lang->attend->statusList['late'];?>
                   <?php echo $signIn;?>
                 </td>
                 <td class='attend-signout'>
                   <?php $signOut = substr($attends[$currentDate]->signOut, 0, 5);?>
-                  <?php if(strpos(',early,absent,', $status) !== false) $signOut = $lang->attend->statusList[$status];?>
+                  <?php if(strpos(',early,absent,rest,', $status) !== false) $signOut = $lang->attend->statusList[$status];?>
                   <?php if($status == 'both') $signOut = $lang->attend->statusList['early'];?>
                   <?php echo $signOut;?>
                 </td>
@@ -110,7 +110,8 @@
                   </div>
                   <?php else:?>
                   <span class="attend-<?php echo $status;?>">
-                  <?php echo $lang->attend->statusList[$status];?>
+                  <?php if($status == 'rest') echo html::a($this->createLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate)), $lang->attend->overtime, "data-toggle='modal' data-width='500px'");?></li>
+                  <?php if($status != 'rest') echo $lang->attend->statusList[$status];?>
                   <?php if(strpos('leave,trip,overtime', $status) !== false and $attends[$currentDate]->desc) echo ' ' . $attends[$currentDate]->desc . 'h';?>
                   </span>
                   <?php endif;?>
