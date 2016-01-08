@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/treeview.html.php';?>
+<?php js::set('mode', $mode);?>
 <div id='menuActions'>
   <?php commonModel::printLink('attend', 'export', "data=$currentYear$currentMonth", "{$lang->attend->export}", "class='iframe btn btn-primary'")?>
 </div>
@@ -58,7 +59,9 @@
             <th><?php echo $lang->overtime->typeList['holiday'];?></th>
             <th><?php echo $lang->attend->deserveDays;?></th>
             <th><?php echo $lang->attend->actualDays;?></th>
+            <?php if($mode == 'view'):?>
             <th><?php echo $lang->actions;?></th>
+            <?php endif;?>
           </tr>
         </thead>
         <?php foreach($stat as $account => $accountStat):?>
@@ -93,9 +96,15 @@
           <td><?php echo html::input("holidayOvertime[$account]", $accountStat->holidayOvertime, "class='form-control'");?></td>
           <td><?php echo html::input("deserve[$account]", $accountStat->deserve, "class='form-control'");?></td>
           <td><?php echo html::input("actual[$account]", $accountStat->actual, "class='form-control'");?></td>
-          <td class='singleSave'><?php echo html::submitButton();?></td>
+          <td class='singleSave hide'><?php echo html::submitButton();?></td>
         </tr>
         <?php endforeach;?>
+        <tr class='text-left'>
+          <td colspan="<?php echo $mode == 'view' ? 14 : 13;?>">
+            <?php echo html::a($this->createLink('attend', 'stat', "date=$date&mode=edit"), $lang->edit, "class='btn'");?>
+            <?php if($mode == 'edit') echo html::submitButton();?>
+          </td>
+        </tr>
       </table>
       </form>
     </div>

@@ -463,7 +463,7 @@ class attend extends control
      * @access public
      * @return void
      */
-    public function stat($date = '')
+    public function stat($date = '', $mode = '')
     {
         if($date == '' or strlen($date) != 6) $date = date('Ym');
         $currentYear  = substr($date, 0, 4);
@@ -475,11 +475,14 @@ class attend extends control
         $stat = $this->attend->getStat($date);
         if(!empty($stat))
         {
+            $mode = $mode ? $mode : 'view';
             $this->app->loadLang('leave');
             $this->app->loadLang('overtime');
         }
         else
         {
+            $mode = 'edit';
+
             $attends   = $this->attend->getGroupByAccount($startDate, $endDate < helper::today() ? $endDate : helper::today());
             $trips     = $this->loadModel('trip')->getList($currentYear, $currentMonth);
             $leaves    = $this->loadModel('leave')->getList($type = 'company', $currentYear, $currentMonth);
@@ -590,6 +593,7 @@ class attend extends control
         $yearList  = array_reverse(array_keys($monthList));
 
         $this->view->title        = $this->lang->attend->stat;
+        $this->view->mode         = $mode;
         $this->view->stat         = $stat;
         $this->view->date         = $date;
         $this->view->currentYear  = $currentYear;
