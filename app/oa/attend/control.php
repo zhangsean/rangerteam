@@ -520,6 +520,7 @@ class attend extends control
                                 if($attend->desc < ($this->config->attend->signOutLimit - $this->config->attend->signInLimit))
                                 {
                                     $stat[$account]->trip += round($attend->desc / $this->config->attend->workingHours, 2);
+                                    $stat[$account]->normal += 1 - round($attend->desc / $this->config->attend->workingHours, 2);
                                 }
                                 else
                                 {
@@ -537,8 +538,16 @@ class attend extends control
                             {
                                 if($attend->desc < ($this->config->attend->signOutLimit - $this->config->attend->signInLimit))
                                 {
-                                    if(strpos('affairs,sick', $leave->type) !== false)  $stat[$account]->unpaidLeave += round($attend->desc / $this->config->attend->workingHours, 2);
-                                    if(strpos('annual,home,marry,maternity', $leave->type) !== false) $stat[$account]->paidLeave += round($attend->desc / $this->config->attend->workingHours, 2);
+                                    if(strpos('affairs,sick', $leave->type) !== false)
+                                    {
+                                        $stat[$account]->unpaidLeave += round($attend->desc / $this->config->attend->workingHours, 2);
+                                        $stat[$account]->normal += 1 - round($attend->desc / $this->config->attend->workingHours, 2);
+                                    }
+                                    if(strpos('annual,home,marry,maternity', $leave->type) !== false)
+                                    {
+                                        $stat[$account]->paidLeave += round($attend->desc / $this->config->attend->workingHours, 2);
+                                        $stat[$account]->normal += 1 - round($attend->desc / $this->config->attend->workingHours, 2);
+                                    }
                                 }
                                 else
                                 {
@@ -573,7 +582,7 @@ class attend extends control
                     }
                 }
 
-                $stat[$account]->total = $stat[$account]->normal + $stat[$account]->restOvertime + $stat[$account]->holidayOvertime + $stat[$account]->timeOvertime + $stat[$account]->trip;
+                $stat[$account]->actual = $stat[$account]->normal + $stat[$account]->restOvertime + $stat[$account]->holidayOvertime + $stat[$account]->timeOvertime + $stat[$account]->trip;
             }
         }
 

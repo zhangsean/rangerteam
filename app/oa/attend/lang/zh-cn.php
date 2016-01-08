@@ -37,7 +37,7 @@ $lang->attend->reviewStatus = '补录状态';
 $lang->attend->reviewedBy   = '审核人';
 $lang->attend->reviewedDate = '审核时间';
 $lang->attend->deserveDays  = '应出勤天数';
-$lang->attend->totalDays    = '共出勤天数';
+$lang->attend->actualDays   = '实际出勤天数';
 
 $lang->attend->statusList['normal']   = '正常';
 $lang->attend->statusList['late']     = '迟到';

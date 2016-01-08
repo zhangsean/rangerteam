@@ -57,7 +57,7 @@
             <th><?php echo $lang->overtime->typeList['rest'];?></th>
             <th><?php echo $lang->overtime->typeList['holiday'];?></th>
             <th><?php echo $lang->attend->deserveDays;?></th>
-            <th><?php echo $lang->attend->totalDays;?></th>
+            <th><?php echo $lang->attend->actualDays;?></th>
             <th><?php echo $lang->actions;?></th>
           </tr>
         </thead>
@@ -76,7 +76,7 @@
           <td><?php echo $accountStat->restOvertime;?></td>
           <td><?php echo $accountStat->holidayOvertime;?></td>
           <td><?php echo $accountStat->deserve;?></td>
-          <td><?php echo $accountStat->total;?></td>
+          <td><?php echo $accountStat->actual;?></td>
           <td><?php echo html::a('javascript:;', $lang->edit, "class='singleEdit'")?></td>
         </tr>
         <tr class='edit hide'>
@@ -92,7 +92,7 @@
           <td><?php echo html::input("restOvertime[$account]", $accountStat->restOvertime, "class='form-control'");?></td>
           <td><?php echo html::input("holidayOvertime[$account]", $accountStat->holidayOvertime, "class='form-control'");?></td>
           <td><?php echo html::input("deserve[$account]", $accountStat->deserve, "class='form-control'");?></td>
-          <td><?php echo html::input("total[$account]", $accountStat->total, "class='form-control'");?></td>
+          <td><?php echo html::input("actual[$account]", $accountStat->actual, "class='form-control'");?></td>
           <td class='singleSave'><?php echo html::submitButton();?></td>
         </tr>
         <?php endforeach;?>

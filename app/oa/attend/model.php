@@ -697,6 +697,8 @@ EOT;
             $data->timeOvertime    = $this->post->timeOvertime[$account];
             $data->restOvertime    = $this->post->restOvertime[$account];
             $data->holidayOvertime = $this->post->holidayOvertime[$account];
+            $data->deserve         = $this->post->deserve[$account];
+            $data->actual          = $this->post->actual[$account];
             $data->month           = $date;
             $data->status          = 'wait';
 
