@@ -3,9 +3,13 @@ $(document).ready(function()
     /* Add a trade detail item. */
     $(document).on('click', '.icon-plus', function()
     {
-        $(this).parents('tr').after($('#hiddenDetail').html().replace(/key/g, v.key));
-        $(this).parents('tr').next().find("[name*='handlers']").chosen({no_results_text: '', placeholder_text:' ', disable_search_threshold: 1, search_contains: true, width: '100%'});
-        $(this).parents('tr').next().find("[name*='category']").chosen({no_results_text: '', placeholder_text:' ', disable_search_threshold: 1, search_contains: true, width: '100%'});
+        if($('#hiddenDetail').length)
+        {
+            $(this).parents('tr').after($('#hiddenDetail').html().replace(/key/g, v.key));
+            $(this).parents('tr').next().find("[name*='handlers']").chosen({no_results_text: '', placeholder_text:' ', disable_search_threshold: 1, search_contains: true, width: '100%'});
+            $(this).parents('tr').next().find("[name*='category']").chosen({no_results_text: '', placeholder_text:' ', disable_search_threshold: 1, search_contains: true, width: '100%'});
+        }
+
         v.key ++;
     });
 
