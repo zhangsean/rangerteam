@@ -494,9 +494,9 @@ class attend extends control
             {
                 $stat[$account] = new stdclass(); 
                 $stat[$account]->deserve  = $workingDays;
+                $stat[$account]->absent   = ($workingDays - count($accountAttends) > 0) ? ($workingDays - count($accountAttends)) : 0;
                 $stat[$account]->normal   = 0;
                 $stat[$account]->abnormal = 0;
-                $stat[$account]->absent   = 0;
                 $stat[$account]->late     = 0;
                 $stat[$account]->early    = 0;
                 $stat[$account]->trip     = 0;
