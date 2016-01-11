@@ -10,6 +10,7 @@ $lang->attend->leave        = '请假';
 $lang->attend->leaved       = '已请假';
 $lang->attend->trip         = '出差';
 $lang->attend->overtime     = '加班';
+$lang->attend->overtimed    = '已加班';
 $lang->attend->review       = '补录审核';
 $lang->attend->settings     = '设置';
 $lang->attend->export       = '导出';

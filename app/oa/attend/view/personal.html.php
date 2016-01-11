@@ -96,9 +96,17 @@
                 <td>
                   <?php
                   if(strpos('rest, normal, trip, leave, overtime', $status) === false):
-                  $edit  = $reviewStatus == 'wait' ? $lang->attend->edited : $lang->attend->edit;
-                  $leave = $reason == 'leave' ? $lang->attend->leaved : $lang->attend->leave;
+                  $edit     = $reviewStatus == 'wait' ? $lang->attend->edited : $lang->attend->edit;
+                  $leave    = $reason == 'leave' ? $lang->attend->leaved : $lang->attend->leave;
+                  $overtime = $reason == 'overtime' ? $lang->attend->overtimed : $lang->attend->overtime;
                   ?>
+                  <?php if($reviewStatus == 'wait'):?>
+                  <?php echo html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $edit, "data-toggle='modal' data-width='500px'");?>
+                  <?php elseif($reason == 'leave'): ?>
+                  <?php echo html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $leave, "data-toggle='modal' data-width='700px'");?>
+                  <?php elseif($reason == 'overtime'): ?>
+                  <?php echo html::a($this->createLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate)), $overtime, "data-toggle='modal' data-width='500px'");?>
+                  <?php else:?>
                   <div class='dropdown'>
                     <a href='javascript:;' data-toggle='dropdown'><?php echo $lang->actions;?><span class='caret'></span></a>
                     <ul role='menu' class='dropdown-menu'>
@@ -108,6 +116,7 @@
                       <?php if($reason == '' or $reason == 'overtime') echo "<li>" . html::a($this->createLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate)), $lang->attend->overtime, "data-toggle='modal' data-width='500px'") . "</li>";?>
                     </ul>
                   </div>
+                  <?php endif;?>
                   <?php else:?>
                   <span class="attend-<?php echo $status;?>">
                   <?php if($status == 'rest') echo html::a($this->createLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate)), $lang->attend->overtime, "data-toggle='modal' data-width='500px'");?></li>
