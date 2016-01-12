@@ -93,6 +93,7 @@ $config->rights->member['todo']['assignto']    = 'assignto';
 $config->rights->member['todo']['close']       = 'close';
 $config->rights->member['todo']['batchclose']  = 'batchclose';
 $config->rights->member['todo']['activate']    = 'activate';
+$config->rights->member['todo']['import2today'] = 'import2today';
 
 $config->rights->member['reply']['post']          = 'post';
 $config->rights->member['reply']['edit']          = 'edit';
