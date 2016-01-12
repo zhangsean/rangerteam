@@ -156,6 +156,7 @@ define('TABLE_REFUND',     '`oa_refund`');
 define('TABLE_DEPOSITOR', '`cash_depositor`');
 define('TABLE_BALANCE',   '`cash_balance`');
 define('TABLE_TRADE',     '`cash_trade`');
+define('TABLE_COMMISSION','`cash_commission`');
 
 /* Tables for team. */
 define('TABLE_THREAD',  '`team_thread`');

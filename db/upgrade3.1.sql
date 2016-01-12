@@ -51,3 +51,23 @@ CREATE TABLE `oa_attendstat` (
   KEY `status` (`status`),
   UNIQUE KEY `attend` (`month`,`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `cash_trade` add `base` decimal(12,2) NOT NULL DEFAULT 0.00;
+
+-- DROP TABLE IF EXISTS `cash_commission`;
+CREATE TABLE `cash_commission` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `trade` mediumint(8) NOT NULL DEFAULT 0,
+  `account` char(30) NOT NULL,
+  `rate` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `amount` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `desc` text,
+  `createdBy` char(30) NOT NULL,
+  `createdDate` datetime NOT NULL,
+  `editedBy` char(30) NOT NULL,
+  `editedDate` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `account` (`account`),
+  KEY `trade` (`trade`),
+  UNIQUE KEY `commission` (`trade`,`account`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
