@@ -442,7 +442,7 @@ $lang->trip->methodOrder[0]  = 'department';
 $lang->trip->methodOrder[5]  = 'company';
 $lang->trip->methodOrder[10] = 'create';
 
-/* Trip */
+/* Refund */
 $lang->resource->refund = new stdclass();
 $lang->resource->refund->company      = 'company';
 $lang->resource->refund->todo         = 'todo';
