@@ -68,7 +68,7 @@ css::internal('body{background-color:#f6f5f5}');
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);
-js::import("http://api.ranzhico.com/updater-latest-{$config->version}.html");
+if($config->checkVersion) js::import("http://api.ranzhico.com/updater-latest-{$config->version}.html");
 js::set('ignoreNotice', $ignoreNotice);
 js::set('ignore', $lang->user->ignore);
 ?>

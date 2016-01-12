@@ -41,7 +41,7 @@ $lang->my->contract->menu->returnedBy  = '由我回款|my|contract|type=returned
 $lang->my->contract->menu->deliveredBy = '由我交付|my|contract|type=deliveredBy';
 
 $lang->my->company = new stdclass();
-$lang->my->company->common  = '待办';
+$lang->my->company->common  = '组织待办';
 $lang->my->company->dept    = '部门';
 $lang->my->company->all     = '所有';
 $lang->my->company->account = '用户';
