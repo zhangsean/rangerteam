@@ -353,7 +353,7 @@ class refundModel extends model
         $trade->money       = $refund->money;
         $trade->currency    = $refund->currency;
         $trade->date        = date('Y-m-d');
-        $trade->handlers    = $this->app->user->account;
+        $trade->handlers    = $refund->related;
         $trade->category    = $refund->category;
         $trade->desc        = $refund->desc;
         $trade->createdBy   = $this->app->user->account;
