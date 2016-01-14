@@ -16,13 +16,16 @@ $(document).ready(function()
     /* Remove a trade detail item. */
     $(document).on('click', '.icon-remove', function()
     {
-        if($('#ajaxForm table tbody tr').size() > 1)
+        if($('#hiddenDetail').length)
         {
-            $(this).parents('tr').remove();
-        }
-        else
-        {
-            $(this).parents('tr').find('input,select').val('');
+            if($('#ajaxForm > table tbody tr').size() > 1)
+            {
+                $(this).parents('tr').remove();
+            }
+            else
+            {
+                $(this).parents('tr').find('input,select').val('');
+            }
         }
     });
 
