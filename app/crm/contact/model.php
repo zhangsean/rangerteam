@@ -439,21 +439,7 @@ class contactModel extends model
      */
     public function formatContact($contact)
     {
-        if($contact->phone)
-        {
-            $phone = str_replace(' ', '', str_replace('-', '', $contact->phone));
-            if(strpos($this->config->contact->areaCode, ',' . substr($phone, 0, 3) . ',') !== false)
-            {
-                $contact->phone = substr($phone, 0, 3) . $this->lang->hyphen . substr($phone, 3);
-            }
-            else
-            {
-                if((strlen($phone) == 12 or strlen($phone) == 11) and substr($phone, 0, 1) == 0) $contact->phone = substr($phone, 0, 4) . $this->lang->hyphen . substr($phone, 4);
-                if((strlen($phone) == 11 or strlen($phone) == 10) and (substr($phone, 0, 1) != 0 and substr($phone, 0, 1) > 2)) $contact->phone = substr($phone, 0, 3) . $this->lang->hyphen . substr($phone, 3);
-                if(substr($phone, 0, 4) == '4008') $contact->phone = substr($phone, 0, 4) . $this->lang->hyphen . substr($phone, 4);
-                if(strlen($phone) == 11 and substr($phone, 0, 1) == '1') $contact->phone = substr($phone, 0, 3) . ' ' . substr($phone, 3, 4) . ' ' . substr($phone, 7, 4);
-            }
-        }
+        if($contact->phone and strlen($contact->phone) == 11 and substr($contact->phone, 0, 1) == '1') $contact->phone = substr($contact->phone, 0, 3) . ' ' . substr($contact->phone, 3, 4) . ' ' . substr($contact->phone, 7, 4);
 
         if($contact->mobile and strlen($contact->mobile) == 11) $contact->mobile = substr($contact->mobile, 0, 3) . ' ' . substr($contact->mobile, 3, 4) . ' ' . substr($contact->mobile, 7, 4);
     }
