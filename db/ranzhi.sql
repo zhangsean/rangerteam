@@ -530,6 +530,21 @@ CREATE TABLE `cash_trade` (
   `editedDate` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `cash_commission`;
+CREATE TABLE `cash_commission` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `trade` mediumint(8) NOT NULL DEFAULT 0,
+  `account` char(30) NOT NULL,
+  `rate` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `amount` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `desc` text,
+  `createdBy` char(30) NOT NULL,
+  `createdDate` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `account` (`account`),
+  KEY `trade` (`trade`),
+  UNIQUE KEY `commission` (`trade`,`account`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `team_thread`;
 CREATE TABLE IF NOT EXISTS `team_thread` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,

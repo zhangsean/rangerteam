@@ -64,8 +64,6 @@ CREATE TABLE `cash_commission` (
   `desc` text,
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
-  `editedBy` char(30) NOT NULL,
-  `editedDate` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `account` (`account`),
   KEY `trade` (`trade`),
