@@ -15,6 +15,8 @@ $lang->attend->review       = '补录审核';
 $lang->attend->settings     = '设置';
 $lang->attend->export       = '导出';
 $lang->attend->stat         = '统计';
+$lang->attend->saveStat     = '保存考勤统计';
+$lang->attend->exportStat   = '导出考勤统计表';
 $lang->attend->browseReview = '补录列表';
 
 $lang->attend->id       = '编号';
