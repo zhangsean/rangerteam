@@ -100,7 +100,7 @@
                   $leave    = $reason == 'leave' ? $lang->attend->leaved : $lang->attend->leave;
                   $overtime = $reason == 'overtime' ? $lang->attend->overtimed : $lang->attend->overtime;
                   ?>
-                  <?php if($reviewStatus == 'wait'):?>
+                  <?php if($reviewStatus == 'wait' or strpos('late,early,both', $status) !== false):?>
                   <?php echo html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $edit, "data-toggle='modal' data-width='500px'");?>
                   <?php elseif($reason == 'leave'): ?>
                   <?php echo html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $leave, "data-toggle='modal' data-width='700px'");?>

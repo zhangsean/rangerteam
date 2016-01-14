@@ -64,7 +64,7 @@
         <th class='w-80px'><?php echo $lang->attend->desc?></th>
         <td><?php echo $attend->desc;?></td>
       </tr> 
-      <?php if($attend->reviewStatus != 'pass' or strpos('late,early,boty', $attend->status) !== false):?>
+      <?php if($attend->reviewStatus != 'pass' or strpos('late,early,both', $attend->status) !== false):?>
       <tr><th></th><td clospan='3'><?php echo html::commonButton($lang->edit, "btn btn-primary edit");?></td></tr>
       <?php endif;?>
     </table>
