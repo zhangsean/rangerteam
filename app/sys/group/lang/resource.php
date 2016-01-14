@@ -40,6 +40,7 @@ $lang->appModule->oa[] = 'holiday';
 $lang->appModule->oa[] = 'leave';
 $lang->appModule->oa[] = 'trip';
 $lang->appModule->oa[] = 'refund';
+$lang->appModule->oa[] = 'overtime';
 
 $lang->appModule->team = array();
 $lang->appModule->team[] = 'blog';
@@ -77,6 +78,7 @@ $lang->moduleOrder[75]  = 'holiday';
 $lang->moduleOrder[80]  = 'leave';
 $lang->moduleOrder[85]  = 'trip';
 $lang->moduleOrder[90]  = 'refund';
+$lang->moduleOrder[80]  = 'overtime';
 
 $lang->moduleOrder[95]  = 'blog';
 $lang->moduleOrder[100] = 'forum';
@@ -438,6 +440,16 @@ $lang->resource->leave->review       = 'review';
 $lang->leave->methodOrder[0]  = 'browseReview';
 $lang->leave->methodOrder[5]  = 'company';
 $lang->leave->methodOrder[10] = 'review';
+
+/* Overtime */
+$lang->resource->overtime = new stdclass();
+$lang->resource->overtime->browseReview = 'browseReview';
+$lang->resource->overtime->company      = 'company';
+$lang->resource->overtime->review       = 'review';
+
+$lang->overtime->methodOrder[0]  = 'browseReview';
+$lang->overtime->methodOrder[5]  = 'company';
+$lang->overtime->methodOrder[10] = 'review';
 
 /* Trip */
 $lang->resource->trip = new stdclass();

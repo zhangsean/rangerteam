@@ -134,6 +134,12 @@ $config->rights->member['leave']['edit']         = 'edit';
 $config->rights->member['leave']['delete']       = 'delete';
 $config->rights->member['leave']['switchstatus'] = 'switchstatus';
 
+$config->rights->member['overtime']['personal']     = 'personal';
+$config->rights->member['overtime']['create']       = 'create';
+$config->rights->member['overtime']['edit']         = 'edit';
+$config->rights->member['overtime']['delete']       = 'delete';
+$config->rights->member['overtime']['switchstatus'] = 'switchstatus';
+
 $config->rights->member['trip']['personal'] = 'personal';
 $config->rights->member['trip']['create']   = 'create';
 $config->rights->member['trip']['edit']     = 'edit';
