@@ -14,7 +14,7 @@
 <?php include '../../../sys/common/view/treeview.html.php';?>
 <?php js::set('mode', $mode);?>
 <div id='menuActions'>
-  <?php commonModel::printLink('attend', 'export', "data=$currentYear$currentMonth", "{$lang->attend->export}", "class='iframe btn btn-primary'")?>
+  <?php commonModel::printLink('attend', 'exportstat', "data=$currentYear$currentMonth", "{$lang->attend->export}", "class='iframe btn btn-primary'")?>
 </div>
 <div class='with-side'>
   <div class='side'>
