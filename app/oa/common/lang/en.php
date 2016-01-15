@@ -19,6 +19,7 @@ $lang->menu->oa->announce  = 'Announce|announce|index|';
 $lang->menu->oa->doc       = 'Document|doc|index|';
 $lang->menu->oa->attend    = 'Attendance|attend|personal|';
 $lang->menu->oa->leave     = 'Leave|leave|personal|';
+$lang->menu->oa->overtime  = 'Overtime|overtime|personal|';
 $lang->menu->oa->trip      = 'Trip|trip|personal|';
 $lang->menu->oa->refund    = 'Refund|refund|personal|';
 
@@ -46,6 +47,7 @@ $lang->attend->menu->personal   = 'My attendance|attend|personal|';
 $lang->attend->menu->department = 'Department attendance|attend|department|';
 $lang->attend->menu->company    = 'Company attendance|attend|company|';
 $lang->attend->menu->review     = 'Review attendance|attend|browsereview|';
+$lang->attend->menu->stat       = 'Stat|attend|stat|';
 $lang->attend->menu->holiday    = 'Holiday|holiday|browse|';
 $lang->attend->menu->settings   = 'Setting|attend|settings|';
 
@@ -58,6 +60,12 @@ $lang->leave->menu = new stdclass();
 $lang->leave->menu->personal     = 'My leave|leave|personal|';
 $lang->leave->menu->browseReview = 'Reviewed by me|leave|browsereview|';
 $lang->leave->menu->company      = 'All leave|leave|company|';
+
+$lang->overtime = new stdclass();
+$lang->overtime->menu = new stdclass();
+$lang->overtime->menu->personal     = 'My overtime|overtime|personal|';
+$lang->overtime->menu->browseReview = 'Reviewed by me|overtime|browsereview|';
+$lang->overtime->menu->company      = 'All overtime|overtime|company|';
 
 $lang->trip = new stdclass();
 $lang->trip->menu = new stdclass();

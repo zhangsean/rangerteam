@@ -9,9 +9,14 @@ $lang->attend->edited       = 'Signed in';
 $lang->attend->leave        = 'Leave';
 $lang->attend->leaved       = 'Already leave';
 $lang->attend->trip         = 'Trip';
+$lang->attend->overtime     = 'Overtime';
+$lang->attend->overtimed    = 'Already overtime';
 $lang->attend->review       = 'Review attendance';
 $lang->attend->settings     = 'Setting';
 $lang->attend->export       = 'Export';
+$lang->attend->stat         = 'Stat';
+$lang->attend->saveStat     = 'Save Stat';
+$lang->attend->exportStat   = 'Export Stat';
 $lang->attend->browseReview = 'Review List';
 
 $lang->attend->id       = 'ID';
@@ -34,6 +39,8 @@ $lang->attend->reason       = 'Reason';
 $lang->attend->reviewStatus = 'Review status';
 $lang->attend->reviewedBy   = 'Reviewed By';
 $lang->attend->reviewedDate = 'Reviewed Date';
+$lang->attend->deserveDays  = 'Deserved Days';
+$lang->attend->actualDays   = 'Actual Days';
 
 $lang->attend->statusList['normal']   = 'Normal';
 $lang->attend->statusList['late']     = 'Late';
@@ -81,6 +88,7 @@ $lang->attend->outFail    = 'Sign out fail';
 $lang->attend->signInLimit  = 'Latest time of sign in';
 $lang->attend->signOutLimit = 'Earlies time of sign out';
 $lang->attend->workingDays  = 'Working days per week';
+$lang->attend->workingHours = 'Working hours per day';
 $lang->attend->mustSignOut  = 'Must sign out';
 
 $lang->attend->workingDaysList['5']  = "Monday ~ Friday";

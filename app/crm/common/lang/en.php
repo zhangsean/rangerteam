@@ -68,7 +68,6 @@ $lang->contact->menu->thismonth = 'Contact This Month|contact|browse|mode=thismo
 
 $lang->leads = new stdclass();
 $lang->leads->menu = new stdclass();
-$lang->leads->menu->browse      = 'All|leads|browse|mode=all';
 $lang->leads->menu->assignedTo  = 'Assigned To Me|leads|browse|mode=assignedTo';
 $lang->leads->menu->ignoredBy   = 'Ignored By Me|leads|browse|mode=ignoredBy&status=ignore';
 $lang->leads->menu->public      = 'Public|leads|browse|mode=all&status=ignore';

@@ -37,6 +37,9 @@ $lang->leave->typeList['home']      = 'Home';
 $lang->leave->typeList['marry']     = 'Marry';
 $lang->leave->typeList['maternity'] = 'Maternity';
 
+$lang->leave->paid   = 'Paid Leave';
+$lang->leave->unpaid = 'Unpaid Leave';
+
 $lang->leave->statusList['draft']  = 'Draft';
 $lang->leave->statusList['wait']   = 'Wait';
 $lang->leave->statusList['pass']   = 'Pass';

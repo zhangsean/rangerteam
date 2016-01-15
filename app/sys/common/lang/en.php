@@ -12,6 +12,7 @@
 $lang->colon      = ' : ';
 $lang->prev       = '‹';
 $lang->next       = '›';
+$lang->percent    = '%';
 $lang->laquo      = '&laquo;';
 $lang->raquo      = '&raquo;';
 $lang->minus      = ' - ';
