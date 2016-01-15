@@ -595,8 +595,9 @@ class contactModel extends model
                 $contact->$field = array_search($contact->$field, $$field);
             }
 
-            $contact->customer = $contact->realname;
-            $contact->status   = 'wait';
+            $contact->customer   = $contact->realname;
+            $contact->status     = 'wait';
+            $contact->assignedTo = $this->app->user->account;
             $result = $this->checkContact($contact);
             if($result['result'] == 'fail') 
             {

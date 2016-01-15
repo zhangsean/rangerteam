@@ -161,6 +161,7 @@ class export2Xls extends model
             }
         }
 
+        if(isset($this->lang->excel->help->{$this->post->kind}) and !empty($_POST['extraNum'])) $excelSheet->setCellValue("A" . $i, $this->lang->excel->help->{$this->post->kind});
         $this->setStyle($excelSheet, $i);
 
         /* urlencode the filename for ie. */

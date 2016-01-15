@@ -426,7 +426,7 @@ END:VCARD";
         unlink($this->session->importFile);
         unset($_SESSION['importFile']);
     
-        if(empty($errorList)) die(js::alert($this->lang->saveSuccess) . js::locate(inlink('browse', "mode=all&status=wait")));
+        if(empty($errorList)) die(js::alert($this->lang->saveSuccess) . js::locate($this->createLink('leads', 'browse', 'mode=assignedTo')));
 
         $this->app->loadLang('search');
         $this->view->title       = $this->lang->import . $this->lang->contact->common;

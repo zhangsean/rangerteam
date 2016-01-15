@@ -330,6 +330,9 @@ $lang->excel->title = new stdclass();
 $lang->excel->title->contact  = '联系人';
 $lang->excel->title->sysValue = '系统数据';
 
+$lang->excel->help = new stdclass();
+$lang->excel->help->contact = "“真实姓名“是必填字段，如果不填导入时会忽略这条数据。";
+
 $lang->date = new stdclass();
 $lang->date->minute = '分钟';
 $lang->date->day    = '天';
