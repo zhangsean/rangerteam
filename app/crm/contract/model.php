@@ -273,8 +273,11 @@ class contractModel extends model
             if($data->order)
             {
                 $oldOrders = $this->loadModel('order')->getByIdList($data->order);
-                $real = array();
-                foreach($data->order as $key => $orderID) $real[$key] = $oldOrders[$orderID]->real;
+                foreach($data->order as $key => $orderID)
+                {
+                    if(!$orderID) continue;
+                    $real[$key] = $oldOrders[$orderID]->real;
+                }
 
                 if($contract->order != $data->order || $real != $data->real)
                 {
@@ -292,6 +295,7 @@ class contractModel extends model
                         $order->real       = $data->real[$key];
                         $order->signedBy   = $data->signedBy;
                         $order->signedDate = $data->signedDate;
+                        $order->status     = 'signed';
 
                         $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
 
