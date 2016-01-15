@@ -387,8 +387,8 @@ class contactModel extends model
             $return = $this->updateAvatar($contactID);
 
             $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
-            $locate = helper::createLink('contact', 'view', "contactID=$contactID");
-            if(strpos($this->server->http_referer, 'contact') === false) $locate = 'reload';
+            $locate = $oldContact->status == 'normal' ? helper::createLink('contact', 'view', "contactID=$contactID") : helper::createLink('leads', 'view', "contactID=$contactID");
+            if(strpos($this->server->http_referer, 'contact') === false and strpos($this->server->http_referer, 'leads') === false) $locate = 'reload';
             return array('result' => 'success', 'message' => $message, 'locate' => $locate);
         }
 
