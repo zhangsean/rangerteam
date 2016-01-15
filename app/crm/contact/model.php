@@ -313,9 +313,10 @@ class contactModel extends model
             $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
             if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->where('id')->eq($contactID)->exec();
 
-            $result = $this->updateAvatar($contactID);
+            $result  = $this->updateAvatar($contactID);
             $message = $result['result'] ? $this->lang->saveSuccess : $result['message'];
-            return array('result' => 'success', 'message' => $message, 'locate' => helper::createLink('contact', 'browse'), 'contactID' => $contactID);
+            $link    = $type == 'leads' ? helper::createLink('leads', 'browse', 'mode=assignedTo') : helper::createLink('contact', 'browse');
+            return array('result' => 'success', 'message' => $message, 'locate' => $link, 'contactID' => $contactID);
         }
 
         return array('result' => 'fail', 'message' => dao::getError());
