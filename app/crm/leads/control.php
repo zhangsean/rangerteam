@@ -164,6 +164,7 @@ class leads extends control
             {
                 $actionID = $this->loadModel('action')->create('contact', $contactID, 'Assigned', $this->post->comment, $this->post->assignedTo);
                 $this->sendmail($contactID, $actionID);
+                $this->loadModel('action')->create('leads', $contactID, 'assigned', $this->post->comment, '', '', '', $contactID);
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
@@ -189,6 +190,7 @@ class leads extends control
             if(is_array($result)) $this->send($result);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('leads', $contactID, 'transform', '', '', '', '', $contactID);
             $this->send(array('result' => 'success', 'message' => $this->lang->importSuccess, 'locate' => $this->server->http_referer));
         }
 
@@ -209,6 +211,7 @@ class leads extends control
     {
         $this->contact->ignore($contactID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->loadModel('action')->create('leads', $contactID, 'ignored', '', '', '', '', $contactID);
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 
