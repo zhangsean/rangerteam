@@ -735,7 +735,7 @@ function selectLang(lang)
  */
 function fixTableHeader()
 {
-    var table = $('.page-content > .panel > .table, #tradeList, #todoList');
+    var table = $('.page-content > .panel > .table, #tradeList, #todoList, #attendStat');
 
     if(!table.length) return;
 

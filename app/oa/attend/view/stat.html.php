@@ -43,7 +43,7 @@
         <strong><?php echo $currentYear . $lang->year . $currentMonth . $lang->month . $lang->attend->report;?></strong>
       </div>
       <form id='ajaxForm' method='post' action='<?php echo $this->createLink('attend', 'saveStat', "date=$date")?>'>
-      <table class='table table-data table-striped table-hover table-bordered text-center table-fixed'>
+      <table class='table table-data table-striped table-hover table-bordered text-center table-fixed' id='attendStat'>
         <thead>
           <tr class='text-center'>
             <th rowspan='2' class='w-80px valign-middle'><?php echo $lang->user->realname;?></th>
