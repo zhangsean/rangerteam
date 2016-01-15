@@ -133,11 +133,14 @@ class overtime extends control
         $overtime = $this->overtime->getById($id);
 
         /* Check privilage. */
-        $user = $this->loadModel('user')->getByAccount($overtime->createdBy);
-        $dept = $this->loadModel('tree')->getById($user->dept);
-        if(empty($dept) or $this->app->user->account == ",$dept->moderators,")
+        if(!empty($this->config->attend->reviewedBy))
+        { 
+            if($this->config->attend->reviewedBy != $this->app->user->account) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
+        }
+        else
         {
-            $this->send(array('result' => 'fail', 'message' => $this->lang->overtime->denied));
+            $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
+            if((empty($dept) or ",$this->app->user->account," != $dept->moderators)) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
         }
 
         $this->overtime->review($id, $status);
