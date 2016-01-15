@@ -35,12 +35,11 @@
         </div>
       </td>
     </tr>
-    <?php elseif($objectType != 'customer' and !empty($customers)):?>
+    <?php elseif(!empty($customers)):?>
     <tr>
       <th><?php echo $lang->action->record->customer;?></th>
       <td>
         <div class='col-sm-5'>
-          <?php echo html::hidden('contact', $objectID);?>
           <?php echo html::select('customer', $customers, '', "class='form-control'");?>
         </div>
       </td>
@@ -87,6 +86,7 @@
       <th></th>
       <td>
         <div class='col-sm-12'>
+          <?php if($objectType == 'contact') echo html::hidden('contact', $objectID);?>
           <?php echo html::submitButton() . html::hidden('customer', $customer);?>
           <div id='duplicateError' class='hide'></div>
         </div>

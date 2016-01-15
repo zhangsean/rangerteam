@@ -22,7 +22,7 @@ class action extends control
      */
     public function history($objectType, $objectID, $action = '', $from = 'view')
     {
-        $this->view->actions    = $this->loadModel('action')->getList($objectType, $objectID, $action);
+        $this->view->actions    = $this->action->getList($objectType, $objectID, $action);
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
         $this->view->users      = $this->loadModel('user')->getPairs();

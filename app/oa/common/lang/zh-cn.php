@@ -49,7 +49,7 @@ $lang->attend->menu->company    = '公司考勤|attend|company|';
 $lang->attend->menu->review     = '补录审核|attend|browsereview|';
 $lang->attend->menu->stat       = '统计|attend|stat|';
 $lang->attend->menu->holiday    = '节假日|holiday|browse|';
-$lang->attend->menu->settings   = '设置|attend|settings|';
+$lang->attend->menu->settings   = array('link' => '设置|attend|settings|', 'alias' => 'setmanager');
 
 $lang->holiday = new stdclass();
 $lang->holiday->menu = $lang->attend->menu;

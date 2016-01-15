@@ -130,7 +130,7 @@ class actionModel extends model
             ->orderBy('id')->fetchAll('id');
 
         $histories = $this->getHistory(array_keys($actions));
-        $contacts  = $this->loadModel('contact', 'crm')->getPairs();
+        $contacts  = $this->loadModel('contact', 'crm')->getPairs(0, false, '');
         $this->loadModel('file');
 
         foreach($actions as $actionID => $action)

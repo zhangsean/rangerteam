@@ -27,6 +27,7 @@
     </ul>
   </div>
   <?php endif;?>
+  <?php commonModel::printLink('contact', 'create', "customer=0&type=leads", "<i class='icon-plus'></i> {$lang->contact->create}", "class='btn btn-primary'")?>
 </div>
 <div class='panel'>
   <table class='table table-hover table-striped tablesorter table-data table-fixed' id='contactList'>
@@ -35,6 +36,9 @@
         <?php $vars = "mode={$mode}&status={$status}&origin={$origin}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px'> <?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->contact->id);?></th>
         <th class='w-100px text-left'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
+        <?php if($mode == 'next')):?>
+        <th class="text-left"><?php commonModel::printOrderLink('nextDate', $orderBy, $vars, $lang->contact->nextDate);?></th>
+        <?php endif;?>
         <th class="text-left"><?php commonModel::printOrderLink('company', $orderBy, $vars, $lang->contact->company);?></th>
         <th class='w-60px'> <?php commonModel::printOrderLink('gender', $orderBy, $vars, $lang->contact->gender);?></th>
         <th class='w-200px text-left'><?php commonModel::printOrderLink('phone', $orderBy, $vars, $lang->contact->phone . $lang->slash . $lang->contact->mobile);?></th>
@@ -49,6 +53,9 @@
     <tr class='text-center'>
       <td><?php echo $contact->id;?></td>
       <td class='text-left'><?php echo html::a(inlink('view', "contactID=$contact->id"), $contact->realname);?></td>
+      <?php if($mode == 'next')):?>
+      <td class="text-left"><?php echo $contact->nextDate;?></td>
+      <?php endif;?>
       <td class='text-left'><?php echo $contact->company;?></td>
       <td><?php echo isset($lang->genderList->{$contact->gender}) ? $lang->genderList->{$contact->gender} : '';?></td>
       <td class='text-left'><?php echo $contact->phone . ' ' . $contact->mobile;?></td>

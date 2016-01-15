@@ -125,6 +125,7 @@ class contactModel extends model
                 ->beginIF($mode == 'assignedTo')->andWhere('assignedTo')->eq($this->app->user->account)->fi()
                 ->beginIF($mode == 'ignoredBy')->andWhere('ignoredBy')->eq($this->app->user->account)->fi()
                 ->beginIF($mode == 'bysearch')->andWhere($contactQuery)->fi()
+                ->beginIF($mode == 'next')->andWhere('assignedTo')->eq($this->app->user->account)->andWhere('nextDate')->fi()
                 ->orderBy($orderBy)
                 ->page($pager)
                 ->fetchAll('id');
@@ -187,12 +188,13 @@ class contactModel extends model
     /**
      * Get common selecter of contact.
      * 
-     * @param  int     $customer 
-     * @param  bool    $emptyOption 
+     * @param  int    $customer 
+     * @param  bool   $emptyOption 
+     * @param  string $status 
      * @access public
      * @return void
      */
-    public function getPairs($customer = 0, $emptyOption = true)
+    public function getPairs($customer = 0, $emptyOption = true, $status = 'normal')
     {
         $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
@@ -200,9 +202,9 @@ class contactModel extends model
         $contacts = $this->dao->select('t1.*')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.id = t2.contact')
             ->where('t1.deleted')->eq(0)
-            ->andWhere('t1.status')->eq('normal')
-            ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->FI()
-            ->andWhere('t2.customer')->in($customerIdList)
+            ->beginIF($status)->andWhere('t1.status')->eq($status)->fi()
+            ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->fi()
+            ->beginIF($status)->andWhere('t2.customer')->in($customerIdList)->fi()
             ->fetchPairs('id', 'realname');
 
         if($emptyOption)  $contacts = array(0 => '') + $contacts;

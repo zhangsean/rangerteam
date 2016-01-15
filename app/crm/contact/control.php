@@ -66,18 +66,21 @@ class contact extends control
      * Create a contact.
      * 
      * @param  int    $customer
+     * @param  string $type 
      * @access public
      * @return void
      */
-    public function create($customer = 0)
+    public function create($customer = 0, $type = 'contact')
     {
         if($_POST)
         {
-            $return = $this->contact->create(); 
+            $return = $this->contact->create($type); 
             $this->send($return);
         }
 
         $this->app->loadLang('resume');
+
+        if($type == 'leads') $this->lang->menuGroups->contact = 'leads';
 
         unset($this->lang->contact->menu);
         $this->view->title     = $this->lang->contact->create;
