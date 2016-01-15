@@ -101,6 +101,8 @@ $lang->action->desc->finishcontract        = '$date, <strong>$actor</strong> fin
 $lang->action->desc->cancelcontract        = '$date, <strong>$actor</strong> canceled contract:<strong>$extra</strong>.' . "\n";
 $lang->action->desc->hidden                = '$date, hidden by <strong>$actor</strong> .' . "\n";
 $lang->action->desc->undeleted             = '$date, restored by <strong>$actor</strong> .' . "\n";
+$lang->action->desc->transform             = '$date, transformed by <strong>$actor</strong> .' . "\n";
+$lang->action->desc->ignored               = '$date, ignored by <strong>$actor</strong> .' . "\n";
 
 /* The action labels. */
 $lang->action->label = new stdclass();
@@ -129,6 +131,8 @@ $lang->action->label->signed      = 'signed';
 $lang->action->label->commited    = 'commited';
 $lang->action->label->revoked     = 'revoked';
 $lang->action->label->forbidden   = 'Forbidden';
+$lang->action->label->transform   = 'transformed';
+$lang->action->label->ignore      = 'ignored';
 $lang->action->label->login       = 'login';
 $lang->action->label->logout      = "logout";
 

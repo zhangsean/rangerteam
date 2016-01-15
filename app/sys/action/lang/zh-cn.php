@@ -101,6 +101,8 @@ $lang->action->desc->finishcontract        = '$date, 由 <strong>$actor</strong>
 $lang->action->desc->cancelcontract        = '$date, 由 <strong>$actor</strong> 取消合同：<strong>$extra</strong>。' . "\n";
 $lang->action->desc->hidden                = '$date, 由 <strong>$actor</strong> 隐藏。' . "\n";
 $lang->action->desc->undeleted             = '$date, 由 <strong>$actor</strong> 还原。' . "\n";
+$lang->action->desc->transform             = '$date, 由 <strong>$actor</strong> 转换为联系人。' . "\n";
+$lang->action->desc->ignored               = '$date, 由 <strong>$actor</strong> 忽略。' . "\n";
 
 /* 用来显示动态信息。*/
 $lang->action->label = new stdclass();
@@ -129,6 +131,8 @@ $lang->action->label->signed      = '签约了';
 $lang->action->label->commited    = '提交了';
 $lang->action->label->revoked     = '撤销了';
 $lang->action->label->forbidden   = '禁用了';
+$lang->action->label->transform   = '转换了';
+$lang->action->label->ignore      = '忽略了';
 $lang->action->label->login       = '登录系统';
 $lang->action->label->logout      = "退出登录";
 
