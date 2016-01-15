@@ -74,7 +74,7 @@ class contact extends control
     {
         if($_POST)
         {
-            $return = $this->contact->create($type); 
+            $return = $this->contact->create($contact = null, $type); 
             $this->send($return);
         }
 

@@ -240,13 +240,15 @@ class contactModel extends model
      * @access public
      * @return void
      */
-    public function create($contact = null)
+    public function create($contact = null, $type = '')
     {
         if(empty($contact))
         {
             $contact = fixer::input('post')
                 ->add('createdBy', $this->app->user->account)
                 ->remove('newCustomer,type,size,status,level,name,files')
+                ->setIF($type == 'leads', 'status', 'wait')
+                ->setIF($type == 'leads', 'assignedTo', $this->app->user->account)
                 ->get();
 
             $contact->email = str_replace(array(' ', '，'), ',', trim($contact->email));
