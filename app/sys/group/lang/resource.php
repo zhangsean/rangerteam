@@ -172,13 +172,16 @@ $lang->customer->methodOrder[65] = 'batchAssign';
 
 /* Contact. */
 $lang->resource->contact = new stdclass();
-$lang->resource->contact->browse        = 'browse';
-$lang->resource->contact->create        = 'create';
-$lang->resource->contact->edit          = 'edit';
-$lang->resource->contact->view          = 'view';
-$lang->resource->contact->export        = 'export';
-$lang->resource->contact->delete        = 'delete';
-$lang->resource->contact->vcard         = 'vcard';
+$lang->resource->contact->browse         = 'browse';
+$lang->resource->contact->create         = 'create';
+$lang->resource->contact->edit           = 'edit';
+$lang->resource->contact->view           = 'view';
+$lang->resource->contact->export         = 'export';
+$lang->resource->contact->delete         = 'delete';
+$lang->resource->contact->vcard          = 'vcard';
+$lang->resource->contact->import         = 'import';
+$lang->resource->contact->showImport     = 'showImport';
+$lang->resource->contact->exportTemplate = 'exportTemplate';
 
 $lang->contact->methodOrder[10] = 'browse';
 $lang->contact->methodOrder[15] = 'create';
@@ -187,6 +190,9 @@ $lang->contact->methodOrder[25] = 'view';
 $lang->contact->methodOrder[30] = 'export';
 $lang->contact->methodOrder[35] = 'delete';
 $lang->contact->methodOrder[40] = 'vcard';
+$lang->contact->methodOrder[45] = 'import';
+$lang->contact->methodOrder[50] = 'showImport';
+$lang->contact->methodOrder[55] = 'exportTemplate';
 
 $lang->resource->leads = new stdclass();
 $lang->resource->leads->browse    = 'browse';
