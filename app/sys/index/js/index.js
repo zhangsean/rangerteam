@@ -118,8 +118,9 @@ function sortBlocks(orders)
         {
             var $this = $(this);
             var index = $this.data('order');
+            var url = createLink('entry', 'printBlock', 'index=' + index);
             /* Update new index for block id edit and delete. */
-            $this.attr('id', 'block' + index).attr('data-id', index).attr('data-url', createLink('block', 'printBlock', 'index=' + index));
+            $this.attr('id', 'block' + index).attr('data-id', index).attr('data-url', url).data('url', url);
             $this.find('.panel-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
         });
     });
