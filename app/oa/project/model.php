@@ -67,12 +67,25 @@ class projectModel extends model
      */
     public function getList($status = null, $pager = null)
     {
-        $projects = $this->dao->select('*')->from(TABLE_PROJECT)
-            ->where('deleted')->eq(0)
-            ->beginIF($status and $status != 'involved')->andWhere('status')->eq($status)->fi()
-            ->beginIF($status and $status == 'involved')->andWhere('status')->eq('doing')->fi()
-            ->page($pager)
-            ->fetchAll('id');
+        if($status == 'involved')
+        {
+            $projects = $this->dao->select('t1.*')->from(TABLE_PROJECT)->alias('t1')
+                ->leftJoin(TABLE_TEAM)->alias('t2')->on('t1.id=t2.id')
+                ->where('t1.deleted')->eq(0)
+                ->andWhere('t2.type')->eq('project')
+                ->andWhere('t1.status')->eq('doing')
+                ->andWhere('t2.account')->eq($this->app->user->account)
+                ->page($pager)
+                ->fetchAll('id');
+        }
+        else
+        {
+            $projects = $this->dao->select('*')->from(TABLE_PROJECT)
+                ->where('deleted')->eq(0)
+                ->beginIF($status and $status != 'involved')->andWhere('status')->eq($status)->fi()
+                ->page($pager)
+                ->fetchAll('id');
+        }
 
         $members = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id', 'account');
 
@@ -80,11 +93,15 @@ class projectModel extends model
         {
             $project->members = isset($members[$project->id]) ? $members[$project->id] : array();
 
-            foreach($project->members as $member) if($member->role == 'manager') $project->PM = $member->account;
+            foreach($project->members as $member)
+            {
+                if($member->role != 'manager') continue;
+                $project->PM = $member->account;
+            }
 
-            if($status == 'involved' and !isset($project->members[$this->app->user->account])) unset($projects[$project->id]);
             if(!$this->checkPriv($project->id)) unset($projects[$project->id]);
         }
+
         return $projects;
     }
 
