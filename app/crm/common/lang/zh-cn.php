@@ -68,7 +68,7 @@ $lang->contact->menu->thismonth = '本月内联系|contact|browse|mode=thismonth
 
 $lang->leads = new stdclass();
 $lang->leads->menu = new stdclass();
-$lang->leads->menu->assignedTo  = '指派给我|leads|browse|mode=assignedTo';
+$lang->leads->menu->assignedTo  = array('link' => '指派给我|leads|browse|mode=assignedTo', 'alias' => 'create');
 $lang->leads->menu->next        = '下次联系|leads|browse|mode=next';
 $lang->leads->menu->ignoredBy   = '由我忽略|leads|browse|mode=ignoredBy&status=ignore';
 $lang->leads->menu->public      = '公共名单|leads|browse|mode=all&status=ignore';
