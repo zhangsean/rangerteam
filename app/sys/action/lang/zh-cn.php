@@ -262,6 +262,7 @@ $lang->action->objectTypes['project']   = '项目';
 $lang->action->objectTypes['user']      = '用户';
 $lang->action->objectTypes['resume']    = '履历';
 $lang->action->objectTypes['leave']     = '请假';
+$lang->action->objectTypes['overtime']  = '加班';
 $lang->action->objectTypes['refund']    = '报销';
 $lang->action->objectTypes['depositor'] = '账户';
 $lang->action->objectTypes['balance']   = '余额';
