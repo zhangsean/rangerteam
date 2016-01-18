@@ -161,7 +161,7 @@ class export2Xls extends model
             }
         }
 
-        if(isset($this->lang->excel->help->{$this->post->kind}) and !empty($_POST['extraNum'])) $excelSheet->setCellValue("A" . $i, $this->lang->excel->help->{$this->post->kind});
+        if(isset($this->lang->excel->help->{$this->post->kind})) $excelSheet->setCellValue("A" . $i, $this->lang->excel->help->{$this->post->kind});
         $this->setStyle($excelSheet, $i);
 
         /* urlencode the filename for ie. */
@@ -546,6 +546,14 @@ class export2Xlsx extends model
         }
 
         $this->sheet1Params['colspan'] = count($this->excelKey) - 1;
+        /*Add help lang in end.*/
+        if(isset($this->lang->excel->help->{$this->post->kind}))
+        {
+            $this->mergeCells('A' . $i, $this->setExcelFiled($this->sheet1Params['colspan'] - 1) . $i);
+            $this->sheet1SheetData .= '<row r="' . $i . '" spans="1:%colspan%">';
+            $this->sheet1SheetData .= $this->setCellValue("A", $i, $this->lang->excel->help->{$this->post->kind});
+            $this->sheet1SheetData .= '</row>';
+        }
         $this->setStyle($i);
 
         if(!empty($this->sheet1Params['cols'])) $this->sheet1Params['cols'] = '<cols>' . $this->sheet1Params['cols'] . '</cols>';
