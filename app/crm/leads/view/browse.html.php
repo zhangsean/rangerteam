@@ -36,7 +36,7 @@
         <?php $vars = "mode={$mode}&status={$status}&origin={$origin}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
         <th class='w-60px'> <?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->contact->id);?></th>
         <th class='w-80px text-left'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
-        <?php if($mode == 'next')):?>
+        <?php if($mode == 'next'):?>
         <th class="w-80px text-left"><?php commonModel::printOrderLink('nextDate', $orderBy, $vars, $lang->contact->nextDate);?></th>
         <?php endif;?>
         <th class="text-left"><?php commonModel::printOrderLink('company', $orderBy, $vars, $lang->contact->company);?></th>
@@ -53,7 +53,7 @@
     <tr class='text-center'>
       <td><?php echo $contact->id;?></td>
       <td class='text-left'><?php echo html::a(inlink('view', "contactID=$contact->id"), $contact->realname);?></td>
-      <?php if($mode == 'next')):?>
+      <?php if($mode == 'next'):?>
       <td class="text-left"><?php echo $contact->nextDate;?></td>
       <?php endif;?>
       <td class='text-left'><?php echo $contact->company;?></td>

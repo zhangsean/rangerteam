@@ -338,6 +338,8 @@ class actionModel extends model
         if(!$actions) return array();
         $actions = $this->transformActions($actions);
         foreach($actions as $key => $action) if(!$this->checkPriv($action)) unset($actions[$key]);
+
+        $pager->recTotal = count($actions);
         return $actions;
     }
 
