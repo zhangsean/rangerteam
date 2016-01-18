@@ -8,6 +8,7 @@ $(function()
             {
                 $('#duplicateError').html($('.errorMessage').html());
                 $('#duplicateError .alert').prepend(response.error).show();
+                $('#duplicateError').show();
 
                 $(document).on('click', '#duplicateError #continueSubmit', function()
                 {

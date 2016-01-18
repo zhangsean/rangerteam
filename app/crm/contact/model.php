@@ -290,6 +290,8 @@ class contactModel extends model
             if($return['result'] == 'fail') return $return;
         }
 
+        if($type == 'leads') $this->config->contact->require->create = 'realname, origin';
+
         $this->dao->insert(TABLE_CONTACT)
             ->data($contact, 'customer,title,dept,maker,join,continue')
             ->autoCheck()
@@ -302,16 +304,19 @@ class contactModel extends model
             $contactID = $this->dao->lastInsertID();
             $this->loadModel('action')->create('contact', $contactID, 'Created', '');
 
-            $resume = new stdclass();
-            $resume->contact  = $contactID;
-            $resume->customer = $contact->customer;
-            $resume->maker    = isset($contact->maker) ? $contact->maker : 0;
-            $resume->dept     = isset($contact->dept) ? $contact->dept : '';
-            $resume->title    = isset($contact->title) ? $contact->title : '';
-            $resume->join     = isset($contact->join) ? $contact->join : '';
+            if($type != 'leads')
+            {
+                $resume = new stdclass();
+                $resume->contact  = $contactID;
+                $resume->customer = $contact->customer;
+                $resume->maker    = isset($contact->maker) ? $contact->maker : 0;
+                $resume->dept     = isset($contact->dept) ? $contact->dept : '';
+                $resume->title    = isset($contact->title) ? $contact->title : '';
+                $resume->join     = isset($contact->join) ? $contact->join : '';
 
-            $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
-            if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->where('id')->eq($contactID)->exec();
+                $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
+                if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->where('id')->eq($contactID)->exec();
+            }
 
             $result  = $this->updateAvatar($contactID);
             $message = $result['result'] ? $this->lang->saveSuccess : $result['message'];

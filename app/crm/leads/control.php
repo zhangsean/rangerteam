@@ -73,6 +73,27 @@ class leads extends control
     }   
 
     /**
+     * Create a leads.
+     * 
+     * @access public
+     * @return void
+     */
+    public function create()
+    {
+        if($_POST)
+        {
+            $return = $this->contact->create($contact = null, $type = 'leads'); 
+            $this->send($return);
+        }
+
+        $this->lang->menuGroups->contact = 'leads';
+        unset($this->lang->contact->menu);
+
+        $this->view->title = $this->lang->leads->create;
+        $this->display();
+    }
+
+    /**
      * Edit a contact.
      * 
      * @param  int    $contactID 
