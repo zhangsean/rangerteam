@@ -330,6 +330,9 @@ $lang->excel->title = new stdclass();
 $lang->excel->title->contact  = 'Contact';
 $lang->excel->title->sysValue = 'System value';
 
+$lang->excel->help = new stdclass();
+$lang->excel->help->contact = "'realname' is required，this data will be ignored if it is empty.";
+
 $lang->date = new stdclass();
 $lang->date->minute = 'minute';
 $lang->date->day    = 'day';

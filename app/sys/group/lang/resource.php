@@ -196,6 +196,7 @@ $lang->contact->methodOrder[55] = 'exportTemplate';
 
 $lang->resource->leads = new stdclass();
 $lang->resource->leads->browse    = 'browse';
+$lang->resource->leads->create    = 'create';
 $lang->resource->leads->edit      = 'edit';
 $lang->resource->leads->view      = 'view';
 $lang->resource->leads->assign    = 'assign';
@@ -204,6 +205,7 @@ $lang->resource->leads->transform = 'transform';
 $lang->resource->leads->ignore    = 'ignore';
 
 $lang->leads->methodOrder[10] = 'browse';
+$lang->leads->methodOrder[11] = 'create';
 $lang->leads->methodOrder[15] = 'edit';
 $lang->leads->methodOrder[20] = 'view';
 $lang->leads->methodOrder[25] = 'assign';
