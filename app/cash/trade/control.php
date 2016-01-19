@@ -738,7 +738,7 @@ class trade extends control
         }
 
         $startDate = $currentYear . '-01-01';
-        $endDate   = $currentYear . '-12-31';
+        $endDate   = ($currentYear + 1) . '-01-01';
         $trades = $this->dao->select('*, substr(date, 6, 2) as month')->from(TABLE_TRADE)->where('date')->ge($startDate)->andWhere('date')->lt($endDate)->andWhere('currency')->eq($currency)->orderBy('date_desc')->fetchGroup('month');
         
         $annualChartDatas = array();
