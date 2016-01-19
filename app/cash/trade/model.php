@@ -55,7 +55,7 @@ class tradeModel extends model
         if(strlen($date) == 4)
         {
             $startDate = $date . '-01-01';
-            $endDate   = $date . '-12-31';
+            $endDate   = ($date + 1) . '-01-01';
         }
 
         if(strlen($date) == 6 and strpos($date, 'Q') === false)
@@ -64,7 +64,7 @@ class tradeModel extends model
             if(substr($date, 4, 1) == 1) $nextMonth = substr($date, 4, 2) + 1;
             $startDate = substr($date, 0, 4) . '-' . substr($date, 4, 2) . '-01';
             $endDate   = substr($date, 0, 4) . '-' . $nextMonth . '-01';
-            if(substr($date, 4, 2) == 12) $endDate = substr($date, 0, 4) . '-12-31';
+            if(substr($date, 4, 2) == 12) $endDate = (substr($date, 0, 4) + 1) . '-01-01';
         }
 
         if(strlen($date) == 6 and strpos($date, 'Q') !== false)
@@ -72,7 +72,7 @@ class tradeModel extends model
             $startMonth = (substr($date, 5, 1) - 1) * 3 + 1;
             $endMonth   = substr($date, 5, 1) * 3 + 1;
             $startDate  = substr($date, 0, 4) . '-' . $startMonth . '-01';
-            $endDate    = substr($date, 5, 1) == 4 ? substr($date, 0, 4) . '-12-31' : substr($date, 0, 4) . '-' . $endMonth . '-01';
+            $endDate    = substr($date, 5, 1) == 4 ? (substr($date, 0, 4) + 1) . '-01-01' : substr($date, 0, 4) . '-' . $endMonth . '-01';
         }
 
         return $this->dao->select('*')->from(TABLE_TRADE)
