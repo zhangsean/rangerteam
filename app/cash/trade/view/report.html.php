@@ -48,7 +48,7 @@
     <tr>
       <td colspan='3'>
         <div class='chart-wrapper text-center'>
-          <h5><?php echo $currentYear . $lang->trade->annualCaption . '(' . $currencyList[$currentCurrency] . ')';?></h5>
+          <h5><?php echo $currentYear . $lang->trade->report->annual . '(' . $currencyList[$currentCurrency] . ')';?></h5>
           <div class='chart-canvas'><canvas height='260' width='800' id='myBarChart'></canvas></div>
         </div>
       </td>

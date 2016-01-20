@@ -58,8 +58,11 @@ $lang->trade->newTrader   = '新建';
 $lang->trade->import      = '导入';
 $lang->trade->export      = '导出';
 $lang->trade->showImport  = '导入确认';
-$lang->trade->report      = '报表';
 $lang->trade->fullYear    = '全年';
+
+$lang->trade->report = new stdclass();
+$lang->trade->report->common      = '报表'; 
+$lang->trade->report->annual      = '年度收支表'; 
 
 $lang->trade->typeList['in']          = '收入';
 $lang->trade->typeList['out']         = '支出';
@@ -145,7 +148,6 @@ $lang->trade->profit        = '盈';
 $lang->trade->loss          = '亏';
 $lang->trade->balance       = '收支平衡';
 $lang->trade->total         = '总计';
-$lang->trade->annualCaption = '年度收支表';
 
 $lang->trade->noTraderMatch = '没有匹配到相应的商户，点击新建';
 $lang->trade->unique        = '今天已经有相同金额的账目';

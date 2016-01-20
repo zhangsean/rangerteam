@@ -155,6 +155,23 @@ class tradeModel extends model
         return $this->dao->select('*')->from(TABLE_TRADE)->where('id')->in($idList)->fetchAll('id');
     }
 
+    /**
+     * Get trades by year.
+     * 
+     * @param  string    $year 
+     * @param  string    $currency 
+     * @access public
+     * @return void
+     */
+    public function getByYear($year, $currency)
+    {
+        return $this->dao->select('*, substr(date, 6, 2) as month')->from(TABLE_TRADE)
+            ->where('date')->like("$year%")
+            ->andWhere('currency')->eq($currency)
+            ->orderBy('date_desc')
+            ->fetchGroup('month');
+    }
+
     /** 
      * Get details of a trade.
      * 
