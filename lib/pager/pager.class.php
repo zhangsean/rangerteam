@@ -21,7 +21,7 @@ class pager
      *
      * @public int
      */
-    const DEFAULT_REC_PRE_PAGE = 20;
+    const DEFAULT_REC_PER_PAGE = 20;
 
     /**
      * The total counts.
@@ -163,7 +163,7 @@ class pager
         $this->pageCookie = 'pager' . ucfirst($this->app->getModuleName()) . ucfirst($this->app->getMethodName());
 
         if(isset($_COOKIE[$this->pageCookie])) $recPerPage = $_COOKIE[$this->pageCookie];
-        $this->recPerPage = ($recPerPage > 0) ? $recPerPage : PAGER::DEFAULT_REC_PRE_PAGE;
+        $this->recPerPage = ($recPerPage > 0) ? $recPerPage : PAGER::DEFAULT_REC_PER_PAGE;
     }
 
     /**
