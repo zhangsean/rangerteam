@@ -128,13 +128,13 @@ class tradeModel extends model
         if($groupBy == 'dept') $list = $this->loadModel('tree')->getOptionMenu('dept', 0, true);
 
         $datas = $this->dao->select("$groupBy as name, sum(money) as value")->from(TABLE_TRADE)
-                ->where('type')->eq($type)
-                ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
-                ->beginIf($startDate != '' and $endDate != '')->andWhere('date')->ge($startDate)->andWhere('date')->lt($endDate)->fi()
-                ->beginIf($groupBy == 'category')->andWhere('category')->in(array_keys($list))
-                ->groupBy($groupBy)
-                ->orderBy('value_desc')
-                ->fetchAll('name');
+            ->where('type')->eq($type)
+            ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
+            ->beginIf($startDate != '' and $endDate != '')->andWhere('date')->ge($startDate)->andWhere('date')->lt($endDate)->fi()
+            ->beginIf($groupBy == 'category')->andWhere('category')->in(array_keys($list))
+            ->groupBy($groupBy)
+            ->orderBy('value_desc')
+            ->fetchAll('name');
 
         if(empty($datas)) return array();
 
