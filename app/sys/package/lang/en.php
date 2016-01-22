@@ -96,12 +96,12 @@ $lang->package->errorGetModules              = "Get packages' categories data fr
 $lang->package->errorGetPackages             = 'Get packages from www.ranzhico.com failed. You can visit <a href="http://www.ranzhico.com/extension/" target="_blank">www.ranzhico.com</a> to find your packages, download it manually and then upload to ranzhi to install it.';
 $lang->package->errorDownloadPathNotFound    = 'The save path of package file <strong>%s</strong>does not exists.<br />For linux users, can execute <strong>mkdir -p %s</strong> to fix it.';
 $lang->package->errorDownloadPathNotWritable = 'The save path of package file <strong>%s</strong>is not writable.<br />For linux users, can execute <strong>sudo chmod 777 %s</strong> to fix it.';
-$lang->package->errorPackageFileExists       = 'There is already a file with the same name <strong>%s</strong>.<h3> If you want to %s again, <a href="%s">please click this link</a>.</h3>';
+$lang->package->errorPackageFileExists       = 'There is already a file with the same name <strong>%s</strong>.<h3> If you want to %s again, <a href="%s" class="alert-link loadInModal">please click this link</a>.</h3>';
 $lang->package->errorDownloadFailed          = 'Download failed, please try again. Or you can download it manually and upload it to install.';
 $lang->package->errorMd5Checking             = 'The downloawd files checking failed, Please download it manually and upload it to install';
 $lang->package->errorExtracted               = 'The package file <strong> %s </strong> extracted failed. The error is:<br />%s';
-$lang->package->errorCheckIncompatible       = 'This extenion is not compatible with current ranzhi version. <h3>You can <a href="%s">Force %s</a> or <a href="#" onclick=parent.location.href="%s">Cancel</a></h3>.';
-$lang->package->errorFileConflicted          = 'There are some files conflicted: <br />%s <h3>You can <a href="%s">Overide them</a> or <a href="#" onclick=parent.location.href="%s">Cancel</a></h3>.';
+$lang->package->errorCheckIncompatible       = 'This extenion is not compatible with current ranzhi version. <h3>You can <a href="%s" class="loadInModal">Force %s</a> or <a href="#" onclick=parent.location.href="%s">Cancel</a></h3>.';
+$lang->package->errorFileConflicted          = 'There are some files conflicted: <br />%s <h3>You can <a href="%s" class="loadInModal">Overide them</a> or <a href="#" onclick=parent.location.href="%s">Cancel</a></h3>.';
 $lang->package->errorPackageNotFound         = 'The package file <strong>%s </strong> not found, perhaps download failed, try again.';
 $lang->package->errorTargetPathNotWritable   = 'Target path <strong>%s </strong>not writable.';
 $lang->package->errorTargetPathNotExists     = 'Target path <strong>%s </strong>not exists';
