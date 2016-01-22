@@ -32,7 +32,7 @@ $lang->trade->menu->in       = array('link' => '收入|trade|browse|mode=in');
 $lang->trade->menu->out      = array('link' => '支出|trade|browse|mode=out');
 $lang->trade->menu->transfer = array('link' => '转账|trade|browse|mode=transfer');
 $lang->trade->menu->inveset  = array('link' => '投资|trade|browse|mode=inveset&orderBy=depositor');
-$lang->trade->menu->report   = array('link' => '报表|trade|report|');
+$lang->trade->menu->annual   = array('link' => '年度收支表|trade|report|');
 
 /* Menu of trade module. */
 $lang->provider = new stdclass();
