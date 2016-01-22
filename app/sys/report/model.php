@@ -105,7 +105,7 @@ class reportModel extends model
         /* process lang list. */
         if(isset($this->config->report->{$module}->listName[$chart]))
         {
-            if($chart == 'productLine' or $chart == 'productLineA') $this->app->loadLang('product');
+            if($chart == 'productLine' or $chart == 'productLineA') $this->app->loadLang('product', 'crm');
 
             $this->app->loadLang($module);
             $listName = $this->config->report->{$module}->listName[$chart];
@@ -125,7 +125,15 @@ class reportModel extends model
                 }
                 else
                 {
-                    $list = $this->lang->{$module}->{$listName};
+                    if($module != 'customer' and strpos('level, size', $chart) !== false)
+                    {
+                        $this->app->loadLang('customer', 'crm');
+                        $list = $this->lang->customer->{$listName};
+                    }
+                    else
+                    {
+                        $list = $this->lang->{$module}->{$listName};
+                    }
                 }
             }
         }
@@ -179,17 +187,46 @@ class reportModel extends model
         }
         else
         {
-            $datas = $this->dao->select("$groupBy as name, $func($field) as value")->from($tableName)
-                ->beginIf($currency != '')->where('currency')->eq($currency)->fi()
-                ->groupBy($groupBy)
-                ->orderBy('value_desc')
-                ->fetchAll('name');
+            if(isset($this->config->report->$module->joinTable[$chart]))
+            {
+                list($joinTable, $joinField) = explode('|', $this->config->report->$module->joinTable[$chart]);
+                $joinTable = $this->config->report->moduleList[$joinTable];
+
+                $datas = $this->dao->select("ifnull(t2.{$groupBy}, 'null') as name, $func($field) as value")->from($tableName)->alias('t1')
+                    ->leftJoin($joinTable)->alias('t2')->on("t1.$joinField = t2.id")
+                    ->where('t1.type')->eq('in')
+                    ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
+                    ->groupBy("t2.{$groupBy}")
+                    ->orderBy('value_desc')
+                    ->fetchAll("name");
+            }
+            else
+            {
+                $datas = $this->dao->select("$groupBy as name, $func($field) as value")->from($tableName)
+                    ->beginIf($currency != '')->where('currency')->eq($currency)->fi()
+                    ->groupBy($groupBy)
+                    ->orderBy('value_desc')
+                    ->fetchAll('name');
+            }
         }
 
         /* Add names. */
         if(isset($this->config->report->{$module}->listName[$chart]))
         {
-            foreach($datas as $name => $data) $data->name = isset($list[$name]) ? $list[$name] : $this->lang->report->undefined;
+            foreach($datas as $name => $data)
+            {
+                if(empty($list[$name]))
+                {
+                    $data->name  = $this->lang->report->undefined;
+                    $data->value = isset($datas['unset']) ? $datas['unset']->value + $data->value : $data->value;
+                    $datas['unset'] = $data;
+                    unset($datas[$name]);
+                }
+                else
+                {
+                    $data->name = $list[$name];
+                }
+            }
         }
 
         return $datas;
