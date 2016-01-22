@@ -194,7 +194,8 @@ class reportModel extends model
 
                 $datas = $this->dao->select("ifnull(t2.{$groupBy}, 'null') as name, $func($field) as value")->from($tableName)->alias('t1')
                     ->leftJoin($joinTable)->alias('t2')->on("t1.$joinField = t2.id")
-                    ->where('t1.type')->eq('in')
+                    ->where(1)
+                    ->beginIF($module == 'trade')->andWhere('t1.type')->eq('in')->fi()
                     ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
                     ->groupBy("t2.{$groupBy}")
                     ->orderBy('value_desc')
