@@ -271,10 +271,12 @@ class orderModel extends model
         /* Check data. */
         if($this->post->createProduct)
         {
+            $this->loadModel('product');
+            if(!commonModel::hasPriv('product', 'create')) return array('result' => 'fail', 'message' => sprintf($this->lang->order->deny, $this->lang->product->common));
             if($this->post->productName == '') return array('result' => 'fail', 'message' => array('productName' => sprintf($this->lang->error->notempty, $this->lang->customer->name)));
             if(!$this->post->continue) 
             {
-                $result = $this->loadModel('product')->checkUnique($this->post->productName);
+                $result = $this->product->checkUnique($this->post->productName);
                 if($result['result'] == 'fail') return $result;
             }
         }
@@ -291,6 +293,8 @@ class orderModel extends model
 
         if($this->post->createCustomer)
         {
+            if(!commonModel::hasPriv('customer', 'create')) return array('result' => 'fail', 'message' => sprintf($this->lang->order->deny, $this->lang->customer->common));
+
             $customer = new stdclass();
             $customer->name        = $this->post->name ? $this->post->name : $this->post->contact;
             $customer->contact     = $this->post->contact; 
