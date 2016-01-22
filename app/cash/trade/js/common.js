@@ -27,7 +27,14 @@ $(document).ready(function()
     /* Highlight submenu. */
     if(config.requestType == 'GET')
     {
-        $('#menu li').removeClass('active').find("[href*='=" + v.mode + "']").parent().addClass('active');
+        if(v.mode == 'in')
+        {
+            $('#menu li').removeClass('active').find("[href*='=" + v.mode + "']").not('[href*=mode\\=inveset]').parent().addClass('active');
+        }
+        else
+        {
+            $('#menu li').removeClass('active').find("[href*='=" + v.mode + "']").parent().addClass('active');
+        }
     }
     else
     {
