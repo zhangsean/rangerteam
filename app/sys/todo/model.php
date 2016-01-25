@@ -113,11 +113,11 @@ class todoModel extends model
     public function update($todoID)
     {
         $oldTodo = $this->getById($todoID);
-        if($oldTodo->type != 'custom') $oldTodo->name = '';
+        if($oldTodo->type != 'custom' and $oldTodo->type != 'undone') $oldTodo->name = '';
         $todo = fixer::input('post')
             ->remove('uid')
             ->cleanInt('date, pri, begin, end, private')
-            ->setIF($this->post->type  != 'custom', 'name', '')
+            ->setIF($this->post->type  != 'custom' and $this->post->type != 'undone', 'name', '')
             ->setIF($this->post->date  == false, 'date', '0000-00-00')
             ->setIF($this->post->begin == false, 'begin', '2400')
             ->setIF($this->post->end   == false, 'end', '2400')
@@ -126,7 +126,7 @@ class todoModel extends model
             ->get();
         $this->dao->update(TABLE_TODO)->data($todo, $skip = 'comment')
             ->autoCheck()
-            ->checkIF($todo->type == 'custom', $this->config->todo->require->edit, 'notempty')->where('id')->eq($todoID)
+            ->checkIF($todo->type == 'custom' or $todo->type == 'undone', $this->config->todo->require->edit, 'notempty')->where('id')->eq($todoID)
             ->exec();
 
         $todo->date = str_replace('-', '', $todo->date);
