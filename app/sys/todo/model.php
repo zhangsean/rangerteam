@@ -179,12 +179,16 @@ class todoModel extends model
      */
     public function finish($todoID)
     {
-        $this->dao->update(TABLE_TODO)
-            ->set('status')->eq('done')
-            ->set('finishedBy')->eq($this->app->user->account)
-            ->set('finishedDate')->eq(helper::now())
-            ->where('id')->eq((int)$todoID)
-            ->exec();
+        $todo = $this->getById($todoID);
+
+        $data = new stdclass();
+        $data->status       = 'done';
+        $data->finishedBy   = $this->app->user->account;
+        $data->finishedDate = helper::now();
+        if($todo->date == '00000000') $data->date = helper::today();
+
+        $this->dao->update(TABLE_TODO)->data($data)->where('id')->eq((int)$todoID)->exec();
+
         $this->loadModel('action')->create('todo', $todoID, 'finished', '', 'done');
         return true;
     }
@@ -317,13 +321,14 @@ class todoModel extends model
 
         $stmt = $this->dao->select('*')->from(TABLE_TODO)
             ->where('1=1')
-            ->beginIF($mode == 'self')->andWhere()->markLeft()->where('account')->eq($account)->orWhere('assignedTo')->eq($account)->markRight()->fi()
+            ->beginIF($mode == 'self')->andWhere()->markLeft()->where('account')->eq($account)->orWhere('assignedTo')->eq($account)->orWhere('finishedBy')->eq($account)->markRight()->fi()
             ->beginIF($mode == 'assignedtoother')->andWhere('account')->eq($account)->andWhere('assignedTo')->ne($account)->andWhere('assignedTo')->ne('')->fi()
             ->beginIF($mode == 'assignedtome')->andWhere('account')->ne($account)->andWhere('assignedTo')->eq($account)->fi()
             ->andWhere("date >= '$begin'")
             ->andWhere("date <= '$end'")
-            ->beginIF($status != 'all' and $status != 'undone' and $status != 'unclosed')->andWhere('status')->in($status)->fi()
+            ->beginIF(strpos('all, undone, unclosed,custom', $status) === false)->andWhere('status')->in($status)->fi()
             ->beginIF($status == 'undone')->andWhere('status')->notin('done,closed')->fi()
+            ->beginIF($status == 'custom')->andWhere('status')->notin('done,closed')->fi()
             ->beginIF($status == 'unclosed')->andWhere('status')->ne('closed')->fi()
             ->orderBy($orderBy)
             ->page($pager)

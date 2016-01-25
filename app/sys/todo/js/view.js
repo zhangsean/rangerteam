@@ -19,11 +19,7 @@ function finishTodo(id)
         }
 
         /* update calendar data if in calendar page. */
-        var uc = window['updateCalendar'];
-        if($.isFunction(uc))
-        {
-            updateCalendar();
-        }
+        location.reload();
         return false;
     }, 'json');
 }
@@ -42,14 +38,7 @@ $(document).ready(function()
 
         /* close model if in calendar page. */
         var uc = window['updateCalendar'];
-        if($.isFunction(uc))
-        {
-            $.zui.modalTrigger.close();
-        }
-        else
-        {
-            location.reload();
-        }
+        location.reload();
         return false;
     });
 

@@ -38,7 +38,7 @@ class todo extends control
         if($date == '' or $date == 'future') $date = date('Ymd');
         $account = $this->app->user->account;
         $todoList['undone']   = $this->todo->getList('self', $account, 'before', 'undone');
-        $todoList['custom']   = $this->todo->getList('self', $account, 'future');
+        $todoList['custom']   = $this->todo->getList('self', $account, 'future', 'custom');
         $todoList['task']     = array();
         $todoList['order']    = array();
         $todoList['customer'] = array();
