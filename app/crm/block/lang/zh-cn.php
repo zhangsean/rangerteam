@@ -64,6 +64,7 @@ $lang->block->typeList->order['closedstatus'] = '已关闭';
 
 $lang->block->typeList->contract['returnedBy']     = '由我回款';
 $lang->block->typeList->contract['deliveredBy']    = '由我交付';
+$lang->block->typeList->contract['createdBy']      = '由我创建';
 $lang->block->typeList->contract['canceledBy']     = '由我取消';
 $lang->block->typeList->contract['normalstatus']   = '正常';
 $lang->block->typeList->contract['closedstatus']   = '已完成';
