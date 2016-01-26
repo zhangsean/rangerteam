@@ -48,6 +48,7 @@ class todo extends control
         $this->view->data       = $this->todo->getCalendarData($date);
         $this->view->todoList   = $todoList;
         $this->view->moduleMenu = commonModel::createModuleMenu($this->moduleName);
+        $this->view->users      = $this->loadModel('user')->getPairs();
         $this->display();
     }
 

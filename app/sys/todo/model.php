@@ -406,6 +406,7 @@ class todoModel extends model
             $data->data->account    = $todo->account;
             $data->data->status     = $todo->status;
             $data->data->assignedTo = $todo->assignedTo;
+            $data->data->assignedBy = $todo->assignedBy;
 
             $data->click = new stdclass();
             $data->click->title  = $this->lang->todo->view;

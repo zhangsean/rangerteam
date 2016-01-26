@@ -17,6 +17,7 @@
 <?php js::set('settings', new stdclass());?>
 <?php js::set('settings.startDate', $date == 'future' ? date('Y-m-d') : date('Y-m-d', strtotime($date)));?>
 <?php js::set('settings.data', $data);?>
+<?php js::set('users', $users);?>
 <div class='with-side <?php echo $this->cookie->todoCalendarSide == 'hide' ? 'hide-side' : ''?>'>
   <div class='side'>
     <ul id="myTab" class="nav nav-tabs">
@@ -222,9 +223,15 @@ v.settings.display = function(event)
                 return false;
             });
         }
+        if(typeof(e.data.assignedBy) != 'undefined' && e.data.assignedBy != '' && e.data.assignedBy != v.account && e.data.assignedTo == v.account)
+        {
+            var eventObj = $('.events .event[data-id=' + e.id + ']');
+            eventObj.prepend("<div><?php echo $lang->by;?>" + v.users[e.data.assignedBy] + "<?php echo $lang->assign;?><\/div>");
+        }
         if(e.data.assignedTo != '' && e.data.assignedTo != v.account)
         {
             var eventObj = $('.events .event[data-id=' + e.id + ']');
+            eventObj.prepend("<div><?php echo $lang->todo->assignedTo;?>" + v.users[e.data.assignedTo] + "<\/div>");
             eventObj.css('background-color', '#808080');
         }
         if(e.data.status == 'done' || e.data.status == 'closed')
