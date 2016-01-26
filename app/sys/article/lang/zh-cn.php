@@ -32,6 +32,9 @@ $lang->article->type        = '类型';
 $lang->article->views       = '阅读';
 $lang->article->stick       = '置顶级别';
 $lang->article->order       = '排序';
+$lang->article->private     = '设为私密';
+$lang->article->users       = '授权用户';
+$lang->article->groups      = '授权分组';
 
 $lang->article->list        = '文章列表';
 $lang->article->admin       = '维护文章';

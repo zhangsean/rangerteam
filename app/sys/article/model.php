@@ -256,7 +256,12 @@ class articleModel extends model
             ->add('order', 0)
             ->add('keywords', helper::unify($this->post->keywords, ','))
             ->stripTags('content', $this->config->allowedTags->admin)
+            ->join('users', ',')
+            ->join('groups', ',')
             ->get();
+
+        $article->users  = !empty($article->users) ? ',' . trim($article->users, ',') . ',' : '';
+        $article->groups = !empty($article->groups) ? ',' . trim($article->groups, ',') . ',' : '';
 
         $article = $this->loadModel('file')->processEditor($article, $this->config->article->editor->create['id']);
         $this->dao->insert(TABLE_ARTICLE)
@@ -295,7 +300,12 @@ class articleModel extends model
             ->add('editor', $this->app->user->account)
             ->add('keywords', helper::unify($this->post->keywords, ','))
             ->add('editedDate', helper::now())
+            ->join('users', ',')
+            ->join('groups', ',')
             ->get();
+
+        $article->users  = !empty($article->users) ? ',' . trim($article->users, ',') . ',' : '';
+        $article->groups = !empty($article->groups) ? ',' . trim($article->groups, ',') . ',' : '';
 
         $article = $this->loadModel('file')->processEditor($article, $this->config->article->editor->edit['id']);
         $this->dao->update(TABLE_ARTICLE)
@@ -392,5 +402,78 @@ class articleModel extends model
             }
         }
         echo "<ul class='article-files clearfix'>" . $imagesHtml . $filesHtml . '</ul>';
+    }
+
+    /**
+     * Check if user has rights to view an article. 
+     * 
+     * @param  object $article 
+     * @access public
+     * @return bool 
+     */
+    public function hasRights($object = null, $type = '')
+    {
+        if(empty($object) || empty($type)) return false;
+        if($this->app->user->admin == 'super') return true;
+
+        $canView = true;
+        if($type == 'blog')
+        {
+            $canView = $object->author == $this->app->user->account;
+        }
+        elseif($type == 'doc' || $type == 'doclib')
+        {
+            $canView = $object->createdBy == $this->app->user->account;
+        }
+        elseif($type == 'forumboard')
+        {
+            if(is_array($object->moderators)) $object->moderators = implode(',', $object->moderators);
+            $canView = strpos($object->moderators, ',' . $this->app->user->account . ',') !== false;
+        }
+
+        /* If the object is private check if the user is the author. */
+        if(isset($object->private) && !empty($object->private)) 
+        {
+            return $canView;
+        }
+
+        /* Check rights. */
+        if(!$canView)
+        {
+            if(!empty($object->users))
+            {
+                $canView = strpos($object->users, ',' . $this->app->user->account . ',') !== false;
+            }
+
+            if(!$canView && !empty($object->rights))
+            {
+                $groups  = $this->dao->select('`group`')->from(TABLE_USERGROUP)->where('account')->eq($this->app->user->account)->fetchPairs();
+                $canView = !empty(array_intersect($groups, explode(',', $object->rights)));
+            }
+        }
+        /* If the article can view check the article's category. */
+        if($canView)
+        {
+            if($type == 'blog')
+            {
+                $this->loadModel('tree');
+                foreach($object->categories as $categoryID)
+                {
+                    $category = $this->tree->getByID($categoryID, $type = 'blog');
+                    $canView  = $this->hasRights($category, 'blogboard');
+                }
+            }
+            elseif($type == 'doc')
+            {
+                $doclib  = $this->dao->select('*')->from(TABLE_DOCLIB)->where('id')->eq($object->lib)->fetch();
+                $canView = $this->hasRights($doclib, 'doclib');
+            }
+            elseif($type == 'forumboard' || $type == 'bolgboard')
+            {
+                $board   = $this->dao->select('*')->from(TABLE_CATEGORY)->where('id')->eq($object->parent)->andWhere('type')->eq(str_replace('board', '', $type))->fetch();
+                $canView = $this->hasRights($board, $type);
+            }
+        }
+        return $canView;
     }
 }

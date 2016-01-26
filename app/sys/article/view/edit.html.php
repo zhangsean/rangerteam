@@ -25,8 +25,23 @@
         <?php 
         echo html::select("categories[]", $categories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");
         ?>
-        </td><td></td>
+        </td>
+        <td>
+          <?php if($type == 'blog'):?>
+          <label class='checkbox'><input type='checkbox' name='private' id='private' value='1' /><?php echo $lang->article->private;?></label>
+          <?php endif;?>
+        </td>
       </tr>
+      <?php if($type == 'blog'):?>
+      <tr id='userTR'>
+        <th><?php echo $lang->category->users;?></th>
+        <td colspan='2'><?php echo html::select('users[]', $users, $article->users, "class='form-control chosen' multiple");?></td>
+      </tr>
+      <tr id='groupTR'>
+        <th><?php echo $lang->article->groups;?></th>
+        <td colspan='2'><?php echo html::checkbox('groups', $groups, $article->groups);?></td>
+      </tr>
+      <?php endif;?>
       <tr>
         <th><?php echo $lang->article->title;?></th>
         <td colspan='2'><?php echo html::input('title', $article->title, "class='form-control'");?></td>

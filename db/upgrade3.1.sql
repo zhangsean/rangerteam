@@ -51,3 +51,6 @@ CREATE TABLE `oa_attendstat` (
   KEY `status` (`status`),
   UNIQUE KEY `attend` (`month`,`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `sys_category` ADD `users` text NOT NULL AFTER `replyID`; 
+ALTER TABLE `sys_category` CHANGE `rights` `rights` varchar(255) NOT NULL DEFAULT '';

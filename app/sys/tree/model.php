@@ -530,10 +530,12 @@ class treeModel extends model
             ->stripTags('desc', $this->config->allowedTags->admin)
             ->join('moderators', ',')
             ->join('rights', ',')
+            ->join('users', ',')
             ->setDefault('readonly', 0)
             ->get();
 
         $category->rights = !empty($category->rights) ? ',' . trim($category->rights, ',') . ',' : '';
+        $category->users  = !empty($category->users) ? ',' . trim($category->users, ',') . ',' : '';
 
         /* Set moderators. */
         if(!isset($category->moderators))

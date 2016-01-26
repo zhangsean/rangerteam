@@ -11,5 +11,5 @@ $(document).ready(function()
         });
     });
 
-    $('.ke-container').css('width','90%');
+    $('label.checkbox').css('float', 'left').css('margin-right', '10px').css('width', '100px');
 });

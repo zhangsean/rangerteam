@@ -39,6 +39,8 @@ $lang->category->desc     = '描述';
 $lang->category->keywords = '关键词';
 $lang->category->children = '子类目';
 $lang->category->rights   = '权限';
+$lang->category->users    = '授权用户';
+$lang->category->groups   = '授权分组';
 
 /* Lang items for area. */
 $lang->area = new stdclass();
@@ -96,6 +98,8 @@ $lang->board->keywords   = '关键词';
 $lang->board->children   = "子版块";
 $lang->board->readonly   = '访问权限';
 $lang->board->moderators = '版主';
+$lang->board->users   = '授权用户';
+$lang->board->groups  = '授权分组';
 
 $lang->board->readonlyList[0] = '开放';
 $lang->board->readonlyList[1] = '只读';

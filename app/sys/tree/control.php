@@ -104,7 +104,7 @@ class tree extends control
 
         if(strpos('forum,blog', $category->type) !== false) $this->view->aliasAddon .=  $category->type . '/';
 
-        if($category->type == 'dept' or $category->type == 'forum') $this->view->users = $this->loadModel('user')->getPairs('noclosed');
+        if($category->type == 'dept' or $category->type == 'forum' or $category->type == 'blog') $this->view->users = $this->loadModel('user')->getPairs('nodeleted, noclosed');
 
         $groups = $this->loadModel('group')->getPairs();
         $this->view->groups = $groups;

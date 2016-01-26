@@ -41,4 +41,10 @@ $(document).ready(function()
         $('#value4').val($('#searchInput').val());
         $('#searchform').find('#submit').click();
     });
+
+    $(document).on('click', '#private', function()
+    {
+        $('#userTR').toggle();
+        $('#groupTR').toggle();
+    });
 });

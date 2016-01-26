@@ -40,6 +40,8 @@ class forum extends control
         $board = $this->loadModel('tree')->getByID($boardID, 'forum');
         if(!$board) die(js::locate('back'));
 
+        if(!$this->forum->hasRights($board)) commonModel::deny('forum', 'board');
+
         /* Build search form. */
         $this->loadModel('search', 'sys');
         $this->config->forum->search['actionURL'] = $this->createLink('forum', 'board', "boardID={$boardID}&mode=bysearch");

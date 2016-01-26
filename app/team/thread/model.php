@@ -24,6 +24,9 @@ class threadModel extends model
         $thread = $this->dao->findById($threadID)->from(TABLE_THREAD)->fetch();
         if(!$thread) return false;
 
+        $board = $this->loadModel('tree')->getById($thread->board, $type = 'forum');
+        if(!$this->loadModel('forum')->hasRights($board)) return false; 
+
         $speaker   = array();
         $speaker[] = $thread->editor;
         $speaker   = $this->loadModel('user')->getRealNamePairs($speaker);
@@ -146,8 +149,13 @@ class threadModel extends model
      */
     public function process($threads)
     {
-        foreach($threads as $thread)
+        $this->loadModel('forum');
+        foreach($threads as $key => $thread)
         {
+
+            $board = $this->loadModel('tree')->getById($thread->board, $type = 'forum');
+            if(!$this->forum->hasRights($board)) unset($threads[$key]); 
+
             /* Hide the thread or not. */
             if(RUN_MODE == 'front' and $thread->hidden and strpos($this->cookie->t, ",$thread->id,") === false) unset($threads[$thread->id]);
 

@@ -69,6 +69,18 @@ $themeRoot = $webRoot . "theme/";
         <div class='col-md-4'><?php echo html::radio('readonly', $lang->category->readonlyList, $category->readonly);?></div>
       </div>  
       <?php endif;?>
+      <?php if($category->type == 'forum' || $category->type == 'blog'):?>
+      <div class='form-group'>
+        <label class='col-md-2 control-label'><?php echo $lang->category->users;?></label>
+        <div class='col-md-9'><?php echo html::select('users[]', $users, $category->users, "class='form-control chosen' multiple");?></div>
+      </div>
+      <div class='form-group'> 
+        <label class='col-md-2 control-label'><?php echo $lang->category->groups;?></label>
+        <div class='col-md-9'>
+          <div class='group-item'><?php echo html::checkbox('rights', $groups, $category->rights);?></div>
+        </div>
+      </div>
+      <?php endif;?>
       <div class='form-group'>
         <label class='col-md-2'></label>
         <div class='col-md-4'><?php echo html::submitButton() . html::hidden('type', $category->type);?></div>

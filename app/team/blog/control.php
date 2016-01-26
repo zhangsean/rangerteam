@@ -101,6 +101,8 @@ class blog extends control
         $this->view->title           = $this->lang->blog->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
+        $this->view->users           = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->groups          = $this->loadModel('group')->getPairs();
         $this->view->type            = 'blog';
 
         $this->display();
