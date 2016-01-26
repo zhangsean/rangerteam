@@ -132,4 +132,6 @@ $(document).ready(function()
 
     /* adjust focus position. */
     if($('.current').offset().top >= $(window).scrollTop() + $(window).height()) $(window).scrollTop($('.current').offset().top);
+
+    fixTableHeader();
 });
