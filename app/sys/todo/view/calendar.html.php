@@ -212,7 +212,7 @@ v.settings.display = function(event)
     for(key in v.settings.data.events)
     {
         var e = v.settings.data.events[key];
-        if((e.data.status != 'done' && e.data.status != 'closed') && (e.data.assignedTo == '' || e.data.assignedTo == v.account))
+        if((e.data.status != 'done' && e.data.status != 'closed') && (e.data.assignedTo == '' || e.data.assignedTo == v.account) && (e.calendar != 'trip' && e.calendar != 'leave' ))
         {
             $('.events .event[data-id=' + e.id + ']').append("<div class='action'><a href='javascript:;' class='finish'><?php echo $lang->todo->finish?><\/a><\/div>").addClass('with-action');
             $('.events .event[data-id=' + e.id + '] .action .finish').click(function()
