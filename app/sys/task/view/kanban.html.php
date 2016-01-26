@@ -19,8 +19,14 @@
     <div class='boards task-boards clearfix' id='taskKanban'>
     <?php foreach($tasks as $groupKey => $groupTasks):?>
       <div class='board task-board' data-group="<?php echo $groupBy?>" data-key="<?php echo $groupKey;?>" style="width: <?php echo $colWidth?>%">
-        <div class='panel'>
-          <div class='panel-heading'>
+        <?php if(empty($groupKey))      $panelStatus = 'panel-info';?>
+        <?php if($groupKey == 'wait')   $panelStatus = 'panel-primary';?>
+        <?php if($groupKey == 'doing')  $panelStatus = 'panel-danger';?>
+        <?php if($groupKey == 'done')   $panelStatus = 'panel-success';?>
+        <?php if($groupKey == 'cancel') $panelStatus = 'panel-warning';?>
+        <?php if($groupKey == 'closed') $panelStatus = '';?>
+        <div class="panel <?php echo $panelStatus;?>">
+        <div class='panel-heading'>
             <?php if(empty($groupKey)):?>
             <?php echo $lang->task->unkown;?>
             <?php elseif($groupBy == 'status'):?>
