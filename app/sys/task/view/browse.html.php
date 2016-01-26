@@ -65,7 +65,7 @@
                 </td>
                 <td class='w-100px'>  <?php echo $child->deadline;?></td>
                 <td class='w-80px'>   <?php if(isset($users[$child->assignedTo])) echo $users[$child->assignedTo];?></td>
-                <td class='w-90px'>   <?php echo zget($lang->task->statusList, $child->status);?></td>
+                <td class="w-90px <?php echo $child->status;?>">   <?php echo zget($lang->task->statusList, $child->status);?></td>
                 <td class='w-100px visible-lg'><?php echo substr($child->createdDate, 0, 10);?></td>
                 <td class='w-90px visible-lg'> <?php echo $child->consumed;?></td>
                 <td class='w-110px visible-lg'><?php echo $child->left;?></td>
