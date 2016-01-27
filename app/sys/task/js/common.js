@@ -32,6 +32,28 @@ $(function()
         $('#menu .nav li:first').after($('.addonMenu').html());
         $('.addonMenu').remove();
     }
+    $('.switcher').on('click', function()
+    {
+        var url = $(this).attr('href');
+        bootbox.confirm($(this).data('confirm'),  function(result)
+        {
+            if(result)
+            {
+                $.getJSON(url, function(response)
+                {
+                    if(response.result == 'success')
+                    {
+                        bootbox.alert(response.message, function(){location.reload()});
+                    }
+                    else
+                    {
+                        bootbox.alert(response.message);
+                    }
+                })
+            }
+        })
+        return false;
+    });
 });
 
 function setComment()

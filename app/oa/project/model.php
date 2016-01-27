@@ -469,6 +469,7 @@ class projectModel extends model
     public function select($projects, $projectID, $currentModule, $currentMethod, $extra = '')
     {
         if(!$projectID) return;
+        $project = $this->getByID($projectID);
 
         setCookie("lastProject", $projectID, $this->config->cookieLife, $this->config->webRoot);
         $currentProject = $this->getById($projectID);
@@ -491,6 +492,17 @@ class projectModel extends model
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=finishedBy", $this->lang->task->finishedByMe, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=untilToday", $this->lang->task->untilToday, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=expired",    $this->lang->task->expired, '', false, '', 'li');
+
+            $menu .= "<li>";
+            $menu .= "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>" . $this->lang->actions . " <span class='caret'></span></a>";
+            $menu .= "<ul class='dropdown-menu'>";
+            $menu .= commonModel::printLink('project', 'edit', "projectID=$projectID", $this->lang->edit, "data-toggle='modal'", false, '', 'li');
+            $menu .= commonModel::printLink('project', 'member', "projectID=$projectID", $this->lang->project->member, "data-toggle='modal''", false, '', 'li');
+            if($project->status != 'finished') $menu .= commonModel::printLink('project','finish', "projectID=$projectID", $this->lang->finish, "data-toggle='modal'", false, '', 'li');
+            if($project->status != 'doing') $menu .= commonModel::printLink('project', 'activate', "projectID=$projectID", $this->lang->activate, "class='switcher' data-confirm='{$this->lang->project->confirm->activate}'", false, '', 'li');
+            if($project->status != 'suspend') $menu .= commonModel::printLink('project', 'suspend', "projectID=$projectID", $this->lang->project->suspend, "class='switcher' data-confirm='{$this->lang->project->confirm->suspend}'", false, '', 'li');
+            $menu .= commonModel::printLink('project', 'delete', "projectID=$projectID", $this->lang->delete, "class='deleter'", false, '', 'li');
+            $menu .= "</ul></li>";
         }
         else if($methodName == 'kanban' || $methodName == 'outline')
         {
@@ -500,21 +512,31 @@ class projectModel extends model
                 if(empty($key)) continue;
                 $menu .= "<li data-group='{$key}'>" . commonModel::printLink('task', $methodName, "projectID=$projectID&groupBy=$key", $value, '', false) . "</li>";
             }
+
+            $menu .= "<li>";
+            $menu .= "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>" . $this->lang->actions . " <span class='caret'></span></a>";
+            $menu .= "<ul class='dropdown-menu'>";
+            $menu .= commonModel::printLink('project', 'edit', "projectID=$projectID", $this->lang->edit, "data-toggle='modal'", false, '', 'li');
+            $menu .= commonModel::printLink('project', 'member', "projectID=$projectID", $this->lang->project->member, "data-toggle='modal''", false, '', 'li');
+            if($project->status != 'finished') $menu .= commonModel::printLink('project','finish', "projectID=$projectID", $this->lang->finish, "data-toggle='modal'", false, '', 'li');
+            if($project->status != 'doing') $menu .= commonModel::printLink('project', 'activate', "projectID=$projectID", $this->lang->activate, "class='switcher' data-confirm='{$this->lang->project->confirm->activate}'", false, '', 'li');
+            if($project->status != 'suspend') $menu .= commonModel::printLink('project', 'suspend', "projectID=$projectID", $this->lang->project->suspend, "class='switcher' data-confirm='{$this->lang->project->confirm->suspend}'", false, '', 'li');
+            $menu .= commonModel::printLink('project', 'delete', "projectID=$projectID", $this->lang->delete, "class='deleter'", false, '', 'li');
+            $menu .= "</ul></li>";
         }
-        else if($methodName == 'view')
+        else if(strpos('view,create,edit', $methodName) !== false)
         {
             $menu .= '<li class="divider angle"></li>';
-            $menu .= '<li class="title">' . $this->lang->{$moduleName}->view . '</li>';
+            $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID", $this->lang->task->browse, '', false, '', 'li');
+            $menu .= '<li class="divider angle"></li>';
+            $menu .= '<li class="title">' . $this->lang->{$moduleName}->{$methodName} . '</li>';
         }
         else if($methodName == 'batchcreate')
         {
             $menu .= '<li class="divider angle"></li>';
-            $menu .= '<li class="title">' . $this->lang->{$moduleName}->batchCreate . '</li>';
-        }
-        else if($methodName == 'create')
-        {
+            $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID", $this->lang->task->browse, '', false, '', 'li');
             $menu .= '<li class="divider angle"></li>';
-            $menu .= '<li class="title">' . $this->lang->{$moduleName}->create . '</li>';
+            $menu .= '<li class="title">' . $this->lang->{$moduleName}->batchCreate . '</li>';
         }
 
         $menu .= "</ul>";
