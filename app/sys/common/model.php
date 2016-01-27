@@ -96,6 +96,21 @@ class commonModel extends model
      */
     public function checkPriv()
     {
+        if(!empty($this->config->group->unUpdatedAccounts) and strpos($this->config->group->unUpdatedAccounts, $this->app->user->account) !== false)
+        {
+            $unUpdatedAccounts = explode(',', $this->config->group->unUpdatedAccounts);
+            $key = array_search($this->app->user->account, $unUpdatedAccounts);
+            unset($unUpdatedAccounts[$key]);
+
+            $groupAccounts = implode(',', $unUpdatedAccounts);
+            $this->loadModel('setting')->setItem("system.sys.group.unUpdatedAccounts", $groupAccounts);
+
+            $user = $this->app->user;
+            $user->rights = $this->loadModel('user')->authorize($user);
+            $this->session->set('user', $user);
+            $this->app->user = $this->session->user;
+        }
+
         $module = $this->app->getModuleName();
         $method = $this->app->getMethodName();
 

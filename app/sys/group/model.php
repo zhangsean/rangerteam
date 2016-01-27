@@ -490,4 +490,28 @@ class groupModel extends model
     {
         return $this->dao->select('*')->from(TABLE_GROUPPRIV)->where('`module`')->eq('tradebrowse')->andWhere('`method`')->eq('out')->fetchAll('group');
     }
+
+    /**
+     * Update accounts when change priviledge.
+     * 
+     * @param  int    $groupID 
+     * @access public
+     * @return void
+     */
+    public function updateAccounts($groupID)
+    {
+        $groupUsers    = $this->getUserPairs($groupID);
+        $groupAccounts = array_keys($groupUsers);
+        $groupAccounts = implode(',', array_keys($groupUsers));
+
+        if(!empty($this->config->group->unUpdatedAccounts))
+        {
+            $groupAccounts = $this->config->group->unUpdatedAccounts . ',' . $groupAccounts;
+            $groupAccounts = explode(',', $groupAccounts);
+            $groupAccounts = array_unique($groupAccounts);
+            $groupAccounts = implode(',', $groupAccounts);
+        }
+
+        $this->loadModel('setting')->setItem("system.sys.group.unUpdatedAccounts", $groupAccounts);
+    }
 }
