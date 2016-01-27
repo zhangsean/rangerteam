@@ -51,6 +51,7 @@ class project extends control
         {
             $projectID = $this->project->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('project', $projectID, 'Created');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('task', 'browse', "projectID={$projectID}")));
         }
 
