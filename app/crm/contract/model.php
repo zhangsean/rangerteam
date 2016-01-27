@@ -486,7 +486,7 @@ class contractModel extends model
             ->add('contract', $contractID)
             ->setDefault('returnedBy', $this->app->user->account)
             ->setDefault('returnedDate', $now)
-            ->remove('finish,handlers')
+            ->remove('finish,handlers,createTrade,depositor,category,dept')
             ->get();
 
         $this->dao->insert(TABLE_PLAN)
@@ -510,6 +510,28 @@ class contractModel extends model
 
             if(!dao::isError() and $this->post->finish) $this->dao->update(TABLE_CUSTOMER)->set('status')->eq('payed')->where('id')->eq($contract->customer)->exec();
 
+            if($this->post->createTrade)
+            {
+                $trade = fixer::input('post')
+                    ->add('money', $this->post->amount)
+                    ->add('type', 'in')
+                    ->add('date', substr($contractData->returnedDate, 0, 10))
+                    ->add('createdBy', $this->app->user->account)
+                    ->add('createdDate', $now)
+                    ->add('editedBy', $this->app->user->account)
+                    ->add('editedDate', $now)
+                    ->join('handlers', ',')
+                    ->add('trader', $contract->customer)
+                    ->add('contract', $contractID)
+                    ->remove('finish,amount,returnedBy,returnedDate,createTrade')
+                    ->get();
+                
+                $depositor = $this->loadModel('depositor', 'cash')->getByID($trade->depositor);
+                $trade->currency = $depositor->currency;
+                
+                $this->dao->insert(TABLE_TRADE)->data($trade, $skip = 'uid,comment')->autoCheck()->exec();
+            }
+            
             return !dao::isError();
         }
 

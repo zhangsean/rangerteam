@@ -1,0 +1,14 @@
+$(document).ready(function()
+{
+    $('#createTrade').change(function()
+    {
+        if($(this).prop('checked'))
+        {
+            $('.tradeTR').show();
+        }
+        else
+        {
+            $('.tradeTR').hide();
+        }
+    });
+})

@@ -28,8 +28,23 @@
           <div class='input-group-addon'>
             <label class='checkbox'><input type='checkbox' id='finish' name='finish' value='1'> <?php echo $lang->contract->completeReturn;?></label>
           </div>
+          <div class='input-group-addon'>
+            <label class='checkbox'><input type='checkbox' id='createTrade' name='createTrade' value='1' checked='checked'> <?php echo $lang->trade->create;?></label>
+          </div>
         </div>
       </td><td></td>
+    </tr>
+    <tr class='tradeTR'>
+      <th><?php echo $lang->trade->depositor;?></th>
+      <td><?php echo html::select('depositor', $depositorList, '', "class='form-control'");?></td>
+    </tr>
+    <tr class='tradeTR'>
+      <th><?php echo $lang->trade->category;?></th>
+      <td><?php echo html::select('category', array('') + (array) $categories, '', "class='form-control'");?></td>
+    </tr>
+    <tr class='tradeTR'>
+      <th><?php echo $lang->trade->dept;?></th>
+      <td><?php echo html::select('dept', array('') + (array) $deptList, '', "class='form-control'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->contract->returnedBy;?></th>

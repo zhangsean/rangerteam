@@ -264,6 +264,7 @@ class contract extends control
      */
     public function receive($contractID)
     {
+        $this->loadModel('trade', 'cash');
         $contract     = $this->contract->getByID($contractID);
         $currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         if(!empty($_POST))
@@ -283,14 +284,16 @@ class contract extends control
                 $this->loadModel('action')->create('contract', $contractID, 'returned', $this->post->comment, zget($currencySign, $contract->currency, '') . $this->post->amount, $this->post->returnedBy);
                 $this->loadModel('action')->create('customer', $contract->customer, 'receiveContract', $this->post->comment, $actionExtra, $this->post->returnedBy);
             }
-            
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
-        $this->view->title        = $contract->name;
-        $this->view->contract     = $contract;
-        $this->view->users        = $this->loadModel('user')->getPairs();
-        $this->view->currencySign = $currencySign;
+        $this->view->title         = $contract->name;
+        $this->view->contract      = $contract;
+        $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->currencySign  = $currencySign;
+        $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
+        $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
+        $this->view->categories    = $this->loadModel('tree')->getOptionMenu('in', 0);
         $this->display();
     }
 
