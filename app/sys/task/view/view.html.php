@@ -84,6 +84,12 @@
         <div class='panel-heading'><strong><?php echo $lang->task->basicInfo?></strong></div>
         <div class='panel-body'>
           <table class='table table-info'>
+            <?php if($task->parent != 0):?>
+            <tr>
+              <th class='w-80px'><?php echo $lang->task->parent;?></th>
+              <td><?php echo html::a(inlink('view', "id=$parent->id"), $parent->name);?></td>
+            </tr>
+            <?php endif;?>
             <tr>
               <th class='w-80px'><?php echo $lang->task->project;?></th>
               <td><?php echo $projects[$task->project];?></td>

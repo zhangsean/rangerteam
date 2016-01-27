@@ -196,7 +196,8 @@ class task extends control
      */
     public function view($taskID)
     {
-        $task = $this->task->getByID($taskID);
+        $task   = $this->task->getByID($taskID);
+        $parent = $this->task->getByID($task->parent);
         $this->checkPriv($task, 'view');
 
         /* Process pre and next button. */
@@ -241,6 +242,7 @@ class task extends control
 
         $this->view->title      = $this->lang->task->view . $task->name;
         $this->view->task       = $task;
+        $this->view->parent     = $parent;
         $this->view->projectID  = $task->project;
         $this->view->projects   = $this->loadModel('project', 'oa')->getPairs();
         $this->view->members    = $members;
