@@ -103,17 +103,17 @@
                   <?php if($reviewStatus == 'wait' or strpos('late,early,both', $status) !== false):?>
                   <?php echo html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $edit, "data-toggle='modal' data-width='500px'");?>
                   <?php elseif($reason == 'leave'): ?>
-                  <?php echo html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $leave, "data-toggle='modal' data-width='700px'");?>
+                  <?php commonModel::printLink('leave', 'create', "date=" . str_replace('-', '', $currentDate), $leave, "data-toggle='modal' data-width='700px'");?>
                   <?php elseif($reason == 'overtime'): ?>
-                  <?php echo html::a($this->createLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate)), $overtime, "data-toggle='modal' data-width='500px'");?>
+                  <?php commonModel::printLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate), $overtime, "data-toggle='modal' data-width='500px'");?>
                   <?php else:?>
                   <div class='dropdown'>
                     <a href='javascript:;' data-toggle='dropdown'><?php echo $lang->actions;?><span class='caret'></span></a>
                     <ul role='menu' class='dropdown-menu'>
                       <?php if($reason == '' or $reason == 'normal')   echo "<li>" . html::a($this->createLink('attend', 'edit', "date=" . str_replace('-', '', $currentDate)), $edit, "data-toggle='modal' data-width='500px'") . "</li>";?>
-                      <?php if($reason == '' or $reason == 'leave')    echo "<li>" . html::a($this->createLink('leave', 'create', "date=" . str_replace('-', '', $currentDate)), $leave, "data-toggle='modal' data-width='700px'") . "</li>";?>
-                      <?php if($reason == '' or $reason == 'trip')     echo "<li>" . html::a($this->createLink('trip', 'create'), $lang->attend->trip, "data-toggle='modal' data-width='500px'") . "</li>";?>
-                      <?php if($reason == '' or $reason == 'overtime') echo "<li>" . html::a($this->createLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate)), $lang->attend->overtime, "data-toggle='modal' data-width='500px'") . "</li>";?>
+                      <?php if($reason == '' or $reason == 'leave')    commonModel::printLink('leave', 'create', "date=" . str_replace('-', '', $currentDate), $leave, "data-toggle='modal' data-width='700px'", '', '', 'li');?>
+                      <?php if($reason == '' or $reason == 'trip')     commonModel::printLink('trip', 'create', '', $lang->attend->trip, "data-toggle='modal' data-width='500px'", '', '', 'li');?>
+                      <?php if($reason == '' or $reason == 'overtime') commonModel::printLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate), $lang->attend->overtime, "data-toggle='modal' data-width='500px'", '', '', 'li');?>
                     </ul>
                   </div>
                   <?php endif;?>

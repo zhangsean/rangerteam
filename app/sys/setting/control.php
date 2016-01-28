@@ -117,4 +117,25 @@ class setting extends control
         $this->view->reserveDays = $reserveDays;
         $this->display();
     }
+
+    /**
+     * Set available modules.
+     * 
+     * @param  string    $app 
+     * @access public
+     * @return void
+     */
+    public function modules($app)
+    {
+        if($_POST)
+        {
+            $setting = fixer::input('post')->join('modules', ',')->setDefault('modules', '')->get();
+            $this->setting->setItems("system.{$app}.setting", $setting);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->view->title = $this->lang->setting->modules;
+        $this->display();
+    }
 }

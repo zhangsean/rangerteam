@@ -213,6 +213,11 @@ $lang->menu->sys->entry     = '应用|entry|admin|';
 $lang->menu->sys->system    = '系统|mail|admin|';
 $lang->menu->sys->package   = '扩展|package|browse|';
 
+$lang->setting->moduleList['attend'] = '考勤';
+$lang->setting->moduleList['trip']   = '出差';
+$lang->setting->moduleList['leave']  = '请假';
+$lang->setting->moduleList['refund'] = '报销';
+
 $lang->message = new stdclass(); 
 $lang->blog    = new stdclass(); 
 $lang->group   = new stdclass(); 

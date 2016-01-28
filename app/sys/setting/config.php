@@ -4,3 +4,4 @@ $config->setting->appendLang['customer']['sizeNameList']  = 'sizeNoteList';
 $config->setting->appendLang['customer']['levelNameList'] = 'levelNoteList';
 
 $config->setting->currency = 'rmb,usd';
+$config->setting->modules  = 'attend,trip,leave,refund';

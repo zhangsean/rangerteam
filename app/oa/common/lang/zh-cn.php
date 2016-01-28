@@ -22,6 +22,7 @@ $lang->menu->oa->leave     = '请假|leave|personal|';
 $lang->menu->oa->overtime  = '加班|overtime|personal|';
 $lang->menu->oa->trip      = '出差|trip|personal|';
 $lang->menu->oa->refund    = '报销|refund|personal|';
+$lang->menu->oa->setting   = '设置|setting|modules|app=oa';
 
 $lang->dashboard = new stdclass();
 
@@ -80,3 +81,6 @@ $lang->refund->menu->review   = '待审批|refund|browsereview|';
 $lang->refund->menu->todo     = '待报销|refund|todo|';
 $lang->refund->menu->company  = '所有报销|refund|company|';
 $lang->refund->menu->settings = array('link' => '设置|refund|settings|', 'alias' => 'setcategory');
+
+$lang->setting->menu = new stdclass();
+$lang->setting->menu->modules = '功能模块|setting|modules|app=oa';

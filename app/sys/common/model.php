@@ -141,16 +141,19 @@ class commonModel extends model
      */
     public static function hasPriv($module, $method)
     {
-        global $app, $config;
+        global $app, $config, $lang;
+
+        $appName = '';
+        if(strpos($module, '.') !== false) list($appName, $module) = explode('.', $module);
+
+        if(isset($lang->setting->moduleList[$module]) and strpos($config->setting->modules, $module) === false) return false;
+
         if($app->user->admin == 'super') return true;
 
         if(RUN_MODE == 'admin')
         {
             if($app->user->admin != 'super') return false;
         }
-
-        $appName = '';
-        if(strpos($module, '.') !== false) list($appName, $module) = explode('.', $module);
 
         /* Check app priv. */
         if(!commonModel::hasAppPriv($appName)) return false;
@@ -266,7 +269,7 @@ class commonModel extends model
      */
     public static function createMainMenu($currentModule)
     {
-        global $app, $lang;
+        global $app, $lang, $config;
 
         /* Set current module. */
         if(isset($lang->menuGroups->$currentModule)) $currentModule = $lang->menuGroups->$currentModule;
@@ -278,6 +281,8 @@ class commonModel extends model
         {
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
+
+            if(isset($lang->setting->moduleList[$module]) and strpos($config->setting->modules, $module) === false) continue;
 
             if(strpos(',tree,setting,schema,sales,', $module) != false and isset($lang->setting->menu)) 
             {
