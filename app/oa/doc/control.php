@@ -176,6 +176,8 @@ class doc extends control
         }
         
         $lib = $this->doc->getLibByID($libID);
+        if(!$lib) die(js::error($this->lang->doc->libNotFound) . js::locate('back'));
+
         $this->view->libID  = $libID;
         $this->view->title  = $this->lang->doc->editLib;
         $this->view->lib    = $lib;
@@ -195,6 +197,8 @@ class doc extends control
     public function deleteLib($libID)
     {
         if($libID == 'product' or $libID == 'project') die();
+        $lib = $this->doc->getLibById($libID);
+        if(!$lib) die(js::error($this->lang->doc->libNotFound));
 
         if($this->doc->deleteLib($libID)) $this->send(array('result' => 'success', 'locate' => inlink('browse')));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -285,7 +289,8 @@ class doc extends control
         }
 
         /* Get doc and set menu. */
-        $doc   = $this->doc->getById($docID);
+        $doc = $this->doc->getById($docID);
+        if(!$doc) die(js::error($this->lang->doc->notFound) . js::locate('back'));
         $libID = $doc->lib;
 
         /* Get modules. */
@@ -349,6 +354,8 @@ class doc extends control
      */
     public function delete($docID)
     {
+        $doc = $this->doc->getById($docID);
+        if(!$doc) die(js::error($this->lang->doc->notFound));
         $this->doc->delete(TABLE_DOC, $docID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'locate' => inlink('browse')));

@@ -23,6 +23,8 @@ class docModel extends model
     public function getLibById($libID)
     {
         $lib = $this->dao->findByID($libID)->from(TABLE_DOCLIB)->fetch();
+        /* Check rights. */
+        if(!$this->hasRight($lib)) return false;
         return $lib;
     }
 
@@ -34,8 +36,15 @@ class docModel extends model
      */
     public function getLibList()
     {
-        $libs = $this->dao->select('id, name')->from(TABLE_DOCLIB)->where('deleted')->eq(0)->fetchPairs();
-        return $this->lang->doc->systemLibs + $libs;
+        $libs    = $this->dao->select('*')->from(TABLE_DOCLIB)->where('deleted')->eq(0)->fetchAll();
+        $libList = array();
+        /* Check rights. */
+        foreach($libs as $lib)
+        {
+            if(!$this->hasRight($lib)) continue;
+            $libList[$lib->id] = $lib->name;
+        }
+        return $this->lang->doc->systemLibs + $libList;
     }
     
     /**
@@ -155,7 +164,7 @@ class docModel extends model
 
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
-        return $this->dao->select('*')->from(TABLE_DOC)
+        $libs = $this->dao->select('*')->from(TABLE_DOC)
             ->where('deleted')->eq(0)
             ->beginIF(is_numeric($libID))->andWhere('lib')->eq($libID)->fi()
             ->beginIF($libID == 'product')->andWhere('product')->in($keysOfProducts)->andWhere('project')->in($allKeysOfProjects)->fi()
@@ -167,6 +176,13 @@ class docModel extends model
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll();
+        
+        /* Check rights. */
+        foreach($libs as $key => $lib)
+        {
+            if(!$this->hasRight($lib)) unset($libs[$key]);
+        }
+        return $libs;
     }
 
     /**
@@ -182,12 +198,19 @@ class docModel extends model
         if($this->session->docQuery == false) $this->session->set('docQuery', ' 1 = 1');
         $docQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->docQuery);
 
-        return $this->dao->select('*')->from(TABLE_DOC)
+        $libs = $this->dao->select('*')->from(TABLE_DOC)
             ->where('deleted')->eq(0)
             ->andWhere($docQuery)
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll();
+
+        /* Check rights. */
+        foreach($libs as $key => $lib)
+        {
+            if(!$this->hasRight($lib)) unset($libs[$key]);
+        }
+        return $libs;
     }
 
     /**
@@ -205,6 +228,7 @@ class docModel extends model
             ->where('id')->eq((int)$docID)
             ->fetch();
         if(!$doc) return false;
+        if(!$this->hasRight($doc)) return false;
         $doc->files = $this->loadModel('file')->getByObject('doc', $docID);
 
         $doc->libName     = '';
@@ -388,8 +412,54 @@ class docModel extends model
         return $css;
     }
 
+    /**
+     * Check rights of doc and lib.
+     * 
+     * @param  object $object 
+     * @access public
+     * @return bool
+     */
     public function hasRight($object = null)
     {
+        if($this->app->user->admin == 'super') return true;
+        if(!$object) return false;
         
+        if(!empty($object->private))
+        {
+            return $object->createdBy == $this->app->user->account;
+        }   
+
+        if(empty($object->users) && empty($object->groups))
+        {
+            $hasRight = true;
+        }
+        else
+        {
+            $hasRight = false;
+            if(!empty($object->users))
+            {
+                $hasRight = strpos($object->users, ',' . $this->app->user->account . ',') !== false;
+            }
+
+            if(!$hasRight && !empty($object->groups))
+            {
+                $count = $this->dao->select('count(t2.account) as count')
+                    ->from(TABLE_USER)->alias('t1')
+                    ->leftJoin(TABLE_USERGROUP)->alias('t2')->on('t1.account = t2.account')
+                    ->where('t1.deleted')->eq(0)
+                    ->andWhere('t1.account')->eq($this->app->user->account)
+                    ->andWhere('t2.group')->in($object->groups)
+                    ->fetch('count');
+                $hasRight = $count > 0;
+            }
+        }
+
+        if($hasRight && !empty($object->lib))
+        {
+            $object   = $this->getLibById($object->lib);
+            $hasRight = $this->hasRight($object);
+        }
+
+        return $hasRight;
     }
 }

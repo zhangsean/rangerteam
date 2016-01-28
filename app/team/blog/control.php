@@ -118,6 +118,7 @@ class blog extends control
     public function edit($articleID)
     {
         $article    = $this->article->getByID($articleID, $replaceTag = false);
+        if(!$article) die(js::error($this->lang->blog->notFound) . js::locate('back'));
         $categories = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
 
         if($_POST)
@@ -147,7 +148,8 @@ class blog extends control
     public function view($articleID, $currentCategory = 0)
     {
         unset($this->lang->blog->menu);
-        $article  = $this->loadModel('article')->getByID($articleID);
+        $article = $this->loadModel('article')->getByID($articleID);
+        if(!$article) die(js::error($this->lang->blog->notFound) . js::locate('back'));
 
         /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);
@@ -178,6 +180,8 @@ class blog extends control
      */
     public function delete($articleID)
     {
+        $article = $this->loadModel('article')->getByID($articleID);
+        if(!$article) die(js::error($this->lang->blog->notFound));
         if($this->article->delete($articleID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }

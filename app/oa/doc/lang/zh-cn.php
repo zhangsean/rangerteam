@@ -66,4 +66,5 @@ $lang->doc->errorEditSystemDoc = "系统文档库无需修改。";
 $lang->doc->placeholder = new stdclass();
 $lang->doc->placeholder->url = '相应的链接地址';
 
-$lang->doc->notFound = '该文档不存在';
+$lang->doc->notFound    = '该文档不存在';
+$lang->doc->libNotFound = '该文档库不存在';
