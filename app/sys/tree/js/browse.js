@@ -27,4 +27,6 @@ $(document).ready(function()
     });
 
     $.setAjaxLoader('#treeMenuBox .ajax', '#categoryBox');
+
+    if(v.type == 'customdoc') $('.leftmenu .nav li a[href*=createlib]').modalTrigger({type:'ajax', width:800});
 })

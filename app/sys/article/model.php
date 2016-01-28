@@ -26,6 +26,11 @@ class articleModel extends model
         if(!$article) $article = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($articleID)->fetch();
 
         if(!$article) return false;
+        /* Check if the article is private. */
+        if(!empty($article->private))
+        {
+            if($this->app->user->admin != 'super' && $article->author != $this->app->user->account) return false; 
+        }
         
         /* Get it's categories. */
         $article->categories = $this->dao->select('t2.*')
@@ -37,7 +42,16 @@ class articleModel extends model
 
         /* Get article path to highlight main nav. */
         $path = '';
-        foreach($article->categories as $category) $path .= $category->path;
+        $this->loadModel('tree');
+        $hasRight = false;
+        foreach($article->categories as $category) 
+        {
+            /* Check rights. */
+            if(!$hasRight) $hasRight = $this->tree->hasRight($category->id);
+            $path .= $category->path;
+        }
+        if(!$hasRight) return false;
+
         $article->path = explode(',', trim($path, ','));
 
         /* Get it's files. */
@@ -86,7 +100,9 @@ class articleModel extends model
             ->fetchGroup('article', 'id');
 
         /* Assign categories to it's article. */
-        foreach($articles as $article) $article->categories = isset($categories[$article->id]) ? $categories[$article->id] : array();
+        foreach($articles as $key => $article) $article->categories = isset($categories[$article->id]) ? $categories[$article->id] : array();
+
+        $articles = $this->process($articles);
 
         /* Get images for these articles. */
         $images = $this->loadModel('file')->getByObject($type, array_keys($articles), $isImage = true);
@@ -231,7 +247,8 @@ class articleModel extends model
      */
     public function getTagList($type = 'article')
     {
-        $articles = $this->dao->select('id,keywords')->from(TABLE_ARTICLE)->where('type')->eq($type)->fetchAll('id');
+        $articles = $this->dao->select('id,keywords,type')->from(TABLE_ARTICLE)->where('type')->eq($type)->fetchAll('id');
+        $articles = $this->process($articles);
         $tags =array();
         foreach($articles as $article) $tags = array_merge($tags, explode(',', $article->keywords));
         return $tags;
@@ -405,75 +422,47 @@ class articleModel extends model
     }
 
     /**
-     * Check if user has rights to view an article. 
+     * Process articles. 
      * 
-     * @param  object $article 
+     * @param  array  $articles 
      * @access public
-     * @return bool 
+     * @return array
      */
-    public function hasRights($object = null, $type = '')
+    public function process($articles = array())
     {
-        if(empty($object) || empty($type)) return false;
-        if($this->app->user->admin == 'super') return true;
-
-        $canView = true;
-        if($type == 'blog')
+        $this->loadModel('tree');
+        foreach($articles as $key => $article)
         {
-            $canView = $object->author == $this->app->user->account;
-        }
-        elseif($type == 'doc' || $type == 'doclib')
-        {
-            $canView = $object->createdBy == $this->app->user->account;
-        }
-        elseif($type == 'forumboard')
-        {
-            if(is_array($object->moderators)) $object->moderators = implode(',', $object->moderators);
-            $canView = strpos($object->moderators, ',' . $this->app->user->account . ',') !== false;
-        }
-
-        /* If the object is private check if the user is the author. */
-        if(isset($object->private) && !empty($object->private)) 
-        {
-            return $canView;
-        }
-
-        /* Check rights. */
-        if(!$canView)
-        {
-            if(!empty($object->users))
+            /* Check if the article is private. */
+            if(!empty($article->private))
             {
-                $canView = strpos($object->users, ',' . $this->app->user->account . ',') !== false;
-            }
-
-            if(!$canView && !empty($object->rights))
-            {
-                $groups  = $this->dao->select('`group`')->from(TABLE_USERGROUP)->where('account')->eq($this->app->user->account)->fetchPairs();
-                $canView = !empty(array_intersect($groups, explode(',', $object->rights)));
-            }
-        }
-        /* If the article can view check the article's category. */
-        if($canView)
-        {
-            if($type == 'blog')
-            {
-                $this->loadModel('tree');
-                foreach($object->categories as $categoryID)
+                if($this->app->user->admin != 'super' && $article->author != $this->app->user->account) 
                 {
-                    $category = $this->tree->getByID($categoryID, $type = 'blog');
-                    $canView  = $this->hasRights($category, 'blogboard');
+                    unset($articles[$key]);
+                    continue;
                 }
             }
-            elseif($type == 'doc')
+            if(!isset($article->categories))
             {
-                $doclib  = $this->dao->select('*')->from(TABLE_DOCLIB)->where('id')->eq($object->lib)->fetch();
-                $canView = $this->hasRights($doclib, 'doclib');
+                $article->categories = $this->dao->select('t2.*')
+                    ->from(TABLE_RELATION)->alias('t1')
+                    ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
+                    ->where('t1.type')->eq($article->type)
+                    ->andWhere('t1.id')->eq($article->id)
+                    ->fetchAll('id');
             }
-            elseif($type == 'forumboard' || $type == 'bolgboard')
+            /* Check rights. */
+            if(!empty($article->categories))
             {
-                $board   = $this->dao->select('*')->from(TABLE_CATEGORY)->where('id')->eq($object->parent)->andWhere('type')->eq(str_replace('board', '', $type))->fetch();
-                $canView = $this->hasRights($board, $type);
+                $hasRight = false;
+                foreach($article->categories as $category)
+                {
+                    $hasRight = $this->tree->hasRight($category->id);
+                    if($hasRight) break;
+                }
+                if(!$hasRight) unset($articles[$key]);
             }
         }
-        return $canView;
+        return $articles;
     }
 }

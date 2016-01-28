@@ -158,7 +158,7 @@ class treeModel extends model
 
         foreach($categories as $id => $category)
         {
-            if($category->type == 'out' and !$this->hasRight($id)) unset($categories[$id]);
+            if(!$this->hasRight($id)) unset($categories[$id]);
         }
 
         return $categories;
@@ -242,7 +242,7 @@ class treeModel extends model
         $categories = array();
         while($category = $stmt->fetch())
         {
-            if($category->type == 'out' and !$this->hasRight($category->id)) continue;
+            if(!$this->hasRight($category->id)) continue;
             $categories[$category->id] = $category;
         }
 
@@ -317,7 +317,7 @@ class treeModel extends model
         $stmt = $this->dbh->query($this->buildQuery($type, $startCategoryID, $root));
         while($category = $stmt->fetch())
         {
-            if($category->type == 'out' and !$this->hasRight($category->id)) continue;
+            if(!$this->hasRight($category->id)) continue;
 
             $linkHtml = call_user_func($userFunc, $category);
 
@@ -721,21 +721,47 @@ class treeModel extends model
      */
     public function hasRight($categoryID)
     {
-        $category = $this->getByID($categoryID);
+        if($this->app->user->admin == 'super') return true;
 
-        if(!empty($category->rights))
+        $category = $this->getByID($categoryID);
+        if(!$category) return false;
+
+        if(empty($category->users) && empty($category->rights))
         {
-            $users = $this->dao->select('t2.account')
-                ->from(TABLE_USERGROUP)->alias('t1')
-                ->leftJoin(TABLE_USER)->alias('t2')->on('t1.account = t2.account')
-                ->where('t2.deleted')->eq(0)
-                ->andWhere('`group`')->in($category->rights)
-                ->fetchAll('account');
+            $hasRight = true;
+        }
+        else
+        {
+            $hasRight = false;
+            if(!empty($category->users))
+            {
+                $hasRight = strpos($category->users, ',' . $this->app->user->account . ',') !== false;
+            }
+
+            if(!$hasRight && !empty($category->rights))
+            {
+                $count = $this->dao->select('count(t2.account) as count')
+                    ->from(TABLE_USER)->alias('t1')
+                    ->leftJoin(TABLE_USERGROUP)->alias('t2')->on('t1.account = t2.account')
+                    ->where('t1.deleted')->eq(0)
+                    ->andWhere('t1.account')->eq($this->app->user->account)
+                    ->andWhere('t2.group')->in($category->rights)
+                    ->fetch('count');
+                $hasRight = $count > 0;
+            }
+
+            if(!$hasRight && !empty($category->moderators))
+            {
+                $hasRight = in_array($this->app->user->account, $category->moderators);
+            }
         }
 
-        if($this->app->user->admin != 'super' and isset($users) and !isset($users[$this->app->user->account])) return false;
+        if($hasRight && !empty($category->parent))
+        {
+            $hasRight = $this->hasRight($category->parent);
+        }
 
-        return true;
+        return $hasRight;
     }
 
     /**

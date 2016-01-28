@@ -11,12 +11,26 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <form method='post' id='ajaxForm' action='<?php echo inlink('createLib')?>'>
-  <div class='form-group'>
-    <label for="name"><?php echo $lang->doc->libName;?></label>
-    <?php echo html::input('name', '', "class='form-control'");?>
-  </div>
-  <?php echo html::submitButton();?>
+  <table class='table table-form'>
+    <tr>
+      <th class='w-100px'><?php echo $lang->doc->libName;?></th>
+      <td><?php echo html::input('name', '', "class='form-control'");?></td>
+      <td class='w-100px'>
+        <label class='checkbox'><input type='checkbox' name='private' id='private' value='1' /><?php echo $lang->doc->private;?></label>
+      </td>
+    </tr>
+    <tr id='userTR'>
+      <th><?php echo $lang->doc->users;?></th>
+      <td colspan='2'><?php echo html::select('users[]', $users, '', "class='form-control chosen' multiple");?></td>
+    </tr>
+    <tr id='groupTR'>
+      <th><?php echo $lang->doc->groups;?></th>
+      <td colspan='2'><?php echo html::checkbox('groups', $groups);?></td>
+    </tr>
+  </table>
+  <div class='text-center'><?php echo html::submitButton();?></div>
 </form>
 <?php js::set('libID', 'createLib')?>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

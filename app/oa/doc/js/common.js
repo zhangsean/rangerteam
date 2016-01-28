@@ -36,4 +36,19 @@ $(document).ready(function()
         if(typeof(v.libID) != undefined) $(".nav li a[href*='" + v.libID + "']").parent().addClass('active');
         $(".nav li a[href*='createlib']").attr('data-toggle', 'modal');
     }
+
+    $(document).on('click', '#private', function()
+    {
+        $('#userTR').toggle();
+        $('#groupTR').toggle();
+
+        if($(this).prop('checked'))
+        {
+            $('#users').val('');
+            $('#users').trigger('chosen:updated');
+            $('[name*=groups]').attr('checked', false);
+        }
+    });
+
+    if(v.private) $('#private').click();
 });

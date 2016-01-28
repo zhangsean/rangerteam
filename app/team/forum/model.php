@@ -27,15 +27,16 @@ class forumModel extends model
             ->fetchGroup('parent');
         if(!isset($rawBoards[0])) return $boards;
 
+        $this->loadModel('tree');
         foreach($rawBoards[0] as $parentBoard)
         {
-            if(!$this->hasRights($parentBoard)) continue;
+            if(!$this->tree->hasRight($parentBoard->id)) continue;
 
             if(isset($rawBoards[$parentBoard->id]))
             {
                 foreach($rawBoards[$parentBoard->id] as $key => $childBoard) 
                 {
-                    if(!$this->hasRights($childBoard)) unset($rawBoards[$parentBoard->id][$key]);
+                    if(!$this->tree->hasRight($childBoard->id)) unset($rawBoards[$parentBoard->id][$key]);
                     
                     $childBoard->lastPostReplies = isset($replies[$childBoard->postID]) ? $replies[$childBoard->postID] : 0;
                     $childBoard->moderators      = explode(',', trim($childBoard->moderators, ','));
@@ -155,40 +156,5 @@ class forumModel extends model
         if(strpos($moderators, $user) !== false) return true;
 
         return false;
-    }
-
-    /**
-     * Check if user has rights to view a board. 
-     * 
-     * @param  object $board 
-     * @access public
-     * @return bool 
-     */
-    public function hasRights($board)
-    {
-        $groups = $this->dao->select('`group`')->from(TABLE_USERGROUP)->where('account')->eq($this->app->user->account)->fetchPairs();
-        if(is_array($board->moderators)) $board->moderators = ',' . implode(',', $board->moderators) . ',';
-
-        $canView = true;
-        /* If the user isn't an administrator nor the moderator, check rights.  */
-        if($this->app->user->admin != 'super' && strpos($board->moderators, ',' . $this->app->user->account . ',') === false)
-        {
-            if(!empty($board->users))
-            {
-                $canView = strpos(',' . $this->app->user->account . ',', $board->users) !== false;
-            }
-
-            if(!empty($board->rights))
-            {
-                $canView = !empty(array_intersect($groups, explode(',', $board->rights)));
-            }
-        }
-        /* If the board can view check the board's parent. */
-        if($canView && $board->parent != 0)
-        {
-            $board   = $this->dao->select('*')->from(TABLE_CATEGORY)->where('id')->eq($board->parent)->andWhere('type')->eq('forum')->fetch();
-            $canView = $this->hasRights($board);
-        }
-        return $canView;
     }
 }

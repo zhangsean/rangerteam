@@ -61,7 +61,7 @@ $lang->trade->showImport  = '导入确认';
 $lang->trade->fullYear    = '全年';
 
 $lang->trade->report = new stdclass();
-$lang->trade->report->common      = '报表'; 
+$lang->trade->report->common      = '年度收支表'; 
 $lang->trade->report->annual      = '年度收支表'; 
 
 $lang->trade->typeList['in']          = '收入';

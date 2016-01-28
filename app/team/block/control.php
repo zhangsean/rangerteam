@@ -117,12 +117,14 @@ class block extends control
 
         $this->processParams();
 
-        $this->view->blogs = $this->dao->select('*')->from(TABLE_ARTICLE)
+        $blogs = $this->dao->select('*')->from(TABLE_ARTICLE)
             ->where('type')->eq('blog')
             ->orderBy('createdDate desc')
             ->limit($this->params->num)
             ->fetchAll('id');
+        $blogs = $this->loadModel('article')->process($blogs);
 
+        $this->view->blogs = $blogs;
         $this->view->users = $this->loadModel('user', 'sys')->getPairs();
 
         $this->display();

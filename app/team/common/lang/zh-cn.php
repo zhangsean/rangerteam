@@ -26,7 +26,7 @@ $lang->forum = new stdclass();
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->index    = '博客列表|blog|index|';
+$lang->blog->menu->index    = array('link' => '博客列表|blog|index|', 'alias' => 'create, edit');
 $lang->blog->menu->category = '类目设置|tree|browse|type=blog';
 
 /* Menu of setting module. */

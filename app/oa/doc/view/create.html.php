@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('holders', $lang->doc->placeholder);?>
 <?php js::set('libID', $libID);?>
 <div class='panel'>
@@ -39,38 +40,49 @@
         <tr>
           <th class='w-80px'><?php echo $lang->doc->category;?></th>
           <td><?php echo html::select('module', $moduleOptionMenu, $moduleID, "class='form-control'");?></td>
+          <td class='w-100px'>
+            <label class='checkbox'><input type='checkbox' name='private' id='private' value='1' /><?php echo $lang->doc->private;?></label>
+          </td>
         </tr>  
+        <tr id='userTR'>
+          <th><?php echo $lang->doc->users;?></th>
+          <td colspan='2'><?php echo html::select('users[]', $users, '', "class='form-control chosen' multiple");?></td>
+        </tr>
+        <tr id='groupTR'>
+          <th><?php echo $lang->doc->groups;?></th>
+          <td colspan='2'><?php echo html::checkbox('groups', $groups);?></td>
+        </tr>
         <tr>
           <th><?php echo $lang->doc->type;?></th>
-          <td><?php echo html::radio('type', $lang->doc->types, 'file', "onclick=setType(this.value)");?></td>
+          <td colspan='2'><?php echo html::radio('type', $lang->doc->types, 'file', "onclick=setType(this.value)");?></td>
         </tr>  
         <tr>
           <th><?php echo $lang->doc->title;?></th>
-          <td><?php echo html::input('title', '', "class='form-control'");?></td>
+          <td colspan='2'><?php echo html::input('title', '', "class='form-control'");?></td>
         </tr> 
         <tr id='urlBox' class='hidden'>
           <th><?php echo $lang->doc->url;?></th>
-          <td><?php echo html::input('url', '', "class='form-control'");?></td>
+          <td colspan='2'><?php echo html::input('url', '', "class='form-control'");?></td>
         </tr>  
         <tr id='contentBox' class='hidden'>
           <th><?php echo $lang->doc->content;?></th>
-          <td><?php echo html::textarea('content', '', "class='form-control' rows=8");?></td>
+          <td colspan='2'><?php echo html::textarea('content', '', "class='form-control' rows=8");?></td>
         </tr>  
         <tr>
           <th><?php echo $lang->doc->keywords;?></th>
-          <td><?php echo html::input('keywords', '', "class='form-control'");?></td>
+          <td colspan='2'><?php echo html::input('keywords', '', "class='form-control'");?></td>
         </tr>  
         <tr>
           <th><?php echo $lang->doc->digest;?></th>
-          <td><?php echo html::textarea('digest', '', "class='form-control' rows=3");?></td>
+          <td colspan='2'><?php echo html::textarea('digest', '', "class='form-control' rows=3");?></td>
         </tr>  
         <tr id='fileBox'>
           <th><?php echo $lang->doc->files;?></th>
-          <td><?php echo $this->fetch('file', 'buildform', 'fileCount=2');?></td>
+          <td colspan='2'><?php echo $this->fetch('file', 'buildform', 'fileCount=2');?></td>
         </tr>  
         <tr>
           <th></th>
-          <td><?php echo html::submitButton() . html::backButton() . html::hidden('lib', $libID);?></td>
+          <td colspan='2'><?php echo html::submitButton() . html::backButton() . html::hidden('lib', $libID);?></td>
         </tr>
       </table>
     </form>

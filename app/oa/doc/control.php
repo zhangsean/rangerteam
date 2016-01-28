@@ -147,7 +147,9 @@ class doc extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "libID=$libID")));
         }
 
-        $this->view->title = $this->lang->doc->createLib;
+        $this->view->title  = $this->lang->doc->createLib;
+        $this->view->users  = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->groups = $this->loadModel('group')->getPairs();
         $this->display();
     }
 
@@ -174,9 +176,11 @@ class doc extends control
         }
         
         $lib = $this->doc->getLibByID($libID);
-        $this->view->libName = empty($lib) ? $libID : $lib->name;
-        $this->view->libID   = $libID;
-        $this->view->title   = $this->lang->doc->editLib;
+        $this->view->libID  = $libID;
+        $this->view->title  = $this->lang->doc->editLib;
+        $this->view->lib    = $lib;
+        $this->view->users  = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->groups = $this->loadModel('group')->getPairs();
         
         $this->display();
     }
@@ -249,6 +253,8 @@ class doc extends control
         //$this->view->products         = $projectID == 0 ? $this->product->getPairs() : $this->project->getProducts($projectID);
         $this->view->projects         = array();
         //$this->view->projects         = $this->project->getPairs('all');
+        $this->view->users            = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->groups           = $this->loadModel('group')->getPairs();
 
         $this->display();
     }
@@ -296,6 +302,8 @@ class doc extends control
         $this->view->doc              = $doc;
         $this->view->libID            = $libID;
         $this->view->moduleOptionMenu = $moduleOptionMenu;
+        $this->view->users            = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->groups           = $this->loadModel('group')->getPairs();
         $this->display();
     }
 

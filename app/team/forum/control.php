@@ -40,7 +40,7 @@ class forum extends control
         $board = $this->loadModel('tree')->getByID($boardID, 'forum');
         if(!$board) die(js::locate('back'));
 
-        if(!$this->forum->hasRights($board)) commonModel::deny('forum', 'board');
+        if(!$this->loadModel('tree')->hasRight($boardID)) die(js::locate('back'));
 
         /* Build search form. */
         $this->loadModel('search', 'sys');

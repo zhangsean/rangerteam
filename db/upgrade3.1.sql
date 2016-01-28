@@ -54,3 +54,18 @@ CREATE TABLE `oa_attendstat` (
 
 ALTER TABLE `sys_category` ADD `users` text NOT NULL AFTER `replyID`; 
 ALTER TABLE `sys_category` CHANGE `rights` `rights` varchar(255) NOT NULL DEFAULT '';
+
+ALTER TABLE `sys_article` 
+ADD `private` enum('0', '1') NOT NULL DEFAULT '0',
+ADD `users` text NOT NULL,
+ADD `groups` varchar(255) NOT NULL DEFAULT '';
+
+ALTER TABLE `oa_doc` 
+ADD `private` enum('0', '1') NOT NULL DEFAULT '0' AFTER `deleted`,
+ADD `users` text NOT NULL AFTER `private`,
+ADD `groups` varchar(255) NOT NULL DEFAULT '' AFTER `users`;
+
+ALTER TABLE `oa_doclib` 
+ADD `private` enum('0', '1') NOT NULL DEFAULT '0' AFTER `deleted`,
+ADD `users` text NOT NULL AFTER `private`,
+ADD `groups` varchar(255) NOT NULL DEFAULT '' AFTER `users`;

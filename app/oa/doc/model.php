@@ -22,7 +22,8 @@ class docModel extends model
      */
     public function getLibById($libID)
     {
-        return $this->dao->findByID($libID)->from(TABLE_DOCLIB)->fetch();
+        $lib = $this->dao->findByID($libID)->from(TABLE_DOCLIB)->fetch();
+        return $lib;
     }
 
     /**
@@ -69,7 +70,14 @@ class docModel extends model
      */
     public function createLib()
     {
-        $lib = fixer::input('post')->stripTags('name')->get();
+        $lib = fixer::input('post')->stripTags('name')
+            ->join('users', ',')
+            ->join('groups', ',')
+            ->get();
+
+        $lib->users  = !empty($lib->users) ? ',' . trim($lib->users, ',') . ',' : '';
+        $lib->groups = !empty($lib->groups) ? ',' . trim($lib->groups, ',') . ',' : '';
+
         $this->dao->insert(TABLE_DOCLIB)
             ->data($lib)
             ->autoCheck()
@@ -90,7 +98,13 @@ class docModel extends model
     {
         $libID  = (int)$libID;
         $oldLib = $this->getLibById($libID);
-        $lib    = fixer::input('post')->stripTags('name')->get();
+        $lib    = fixer::input('post')->stripTags('name')
+            ->join('users', ',')
+            ->join('groups', ',')
+            ->get();
+
+        $lib->users  = !empty($lib->users) ? ',' . trim($lib->users, ',') . ',' : '';
+        $lib->groups = !empty($lib->groups) ? ',' . trim($lib->groups, ',') . ',' : '';
 
         $this->dao->update(TABLE_DOCLIB)
             ->data($lib)
@@ -222,7 +236,12 @@ class docModel extends model
             ->stripTags('content', $this->config->allowedTags->admin)
             ->cleanInt('product, project, module')
             ->remove('files,labels')
+            ->join('users', ',')
+            ->join('groups', ',')
             ->get();
+
+        $doc->users  = !empty($doc->users) ? ',' . trim($doc->users, ',') . ',' : '';
+        $doc->groups = !empty($doc->groups) ? ',' . trim($doc->groups, ',') . ',' : '';
 
         $condition = "lib = '$doc->lib' AND module = $doc->module";
         $doc = $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->create['id']);
@@ -261,7 +280,12 @@ class docModel extends model
             ->add('editedBy',   $this->app->user->account)
             ->add('editedDate', helper::now())
             ->remove('comment,files,labels')
+            ->join('users', ',')
+            ->join('groups', ',')
             ->get();
+
+        $doc->users  = !empty($doc->users) ? ',' . trim($doc->users, ',') . ',' : '';
+        $doc->groups = !empty($doc->groups) ? ',' . trim($doc->groups, ',') . ',' : '';
 
         $uniqueCondition = "lib = '{$oldDoc->lib}' AND module = {$doc->module} AND id != $docID";
         $doc = $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->edit['id']);
@@ -362,5 +386,10 @@ class docModel extends model
             }
         }
         return $css;
+    }
+
+    public function hasRight($object = null)
+    {
+        
     }
 }

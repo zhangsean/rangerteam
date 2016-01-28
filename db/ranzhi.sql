@@ -262,6 +262,9 @@ CREATE TABLE `oa_doc` (
   `createdDate` datetime NOT NULL,
   `editedBy` varchar(30) NOT NULL,
   `editedDate` datetime NOT NULL,
+  `private` enum('0', '1') NOT NULL DEFAULT '0',
+  `users` text NOT NULL,
+  `groups` varchar(255) NOT NULL DEFAULT '',
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -269,6 +272,9 @@ CREATE TABLE `oa_doc` (
 CREATE TABLE `oa_doclib` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
+  `private` enum('0', '1') NOT NULL DEFAULT '0',
+  `users` text NOT NULL,
+  `groups` varchar(255) NOT NULL DEFAULT '',
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -708,6 +714,9 @@ CREATE TABLE `sys_article` (
   `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
   `sticky` enum('0','1','2','3') NOT NULL DEFAULT '0',
   `order` smallint(5) unsigned NOT NULL,
+  `private` enum('0', '1') NOT NULL DEFAULT '0',
+  `users` text NOT NULL,
+  `groups` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `order` (`order`),
   KEY `views` (`views`),
@@ -971,7 +980,8 @@ CREATE TABLE IF NOT EXISTS `sys_cron` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `sys_category` VALUES (1,'化工','','','',0,0,',1,',1,0,'industry','0','',0,0,'','0000-00-00 00:00:00',0,0,'',''),
+INSERT INTO `sys_category` (`id`, `name`, `alias`, `desc`, `keywords`, `root`, `parent`, `path`, `grade`, `order`, `type`, `readonly`, `moderators`, `threads`, `posts`, `postedBy`, `postedDate`, `postID`, `replyID`, `rights`, `refund`) VALUES 
+(1,'化工','','','',0,0,',1,',1,0,'industry','0','',0,0,'','0000-00-00 00:00:00',0,0,'',''),
 (3,'环保、绿化、公共事业','','','',0,0,',3,',1,0,'industry','0','',0,0,'','0000-00-00 00:00:00',0,0,'',''),
 (4,'电子电工及通讯','','','',0,0,',4,',1,0,'industry','0','',0,0,'','0000-00-00 00:00:00',0,0,'',''),
 (5,'办公文教及光仪','','','',0,0,',5,',1,0,'industry','0','',0,0,'','0000-00-00 00:00:00',0,0,'',''),

@@ -130,6 +130,8 @@ class blog extends control
         $this->view->title      = $this->lang->article->edit;
         $this->view->article    = $article;
         $this->view->categories = $categories;
+        $this->view->users      = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->groups     = $this->loadModel('group')->getPairs();
         $this->view->type       = 'blog';
         $this->display();
     }

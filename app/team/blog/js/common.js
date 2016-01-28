@@ -46,5 +46,14 @@ $(document).ready(function()
     {
         $('#userTR').toggle();
         $('#groupTR').toggle();
+
+        if($(this).prop('checked'))
+        {
+            $('#users').val('');
+            $('#users').trigger('chosen:updated');
+            $('[name*=groups]').attr('checked', false);
+        }
     });
+
+    if(v.private) $('#private').click();
 });

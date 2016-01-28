@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('type',  $doc->type);?>
 <?php js::set('libID', $doc->lib);?>
 <form method='post' enctype='multipart/form-data' id='ajaxForm' action='<?php echo inlink('edit', "libID=$doc->id")?>'>
@@ -23,26 +24,37 @@
           <tr>
             <th><?php echo $lang->doc->title;?></th>
             <td><?php echo html::input('title', $doc->title, "class='form-control'");?></td>
+            <td class='w-100px'>
+              <label class='checkbox'><input type='checkbox' name='private' id='private' value='1' /><?php echo $lang->doc->private;?></label>
+            </td>
           </tr> 
+          <tr id='userTR'>
+            <th><?php echo $lang->doc->users;?></th>
+            <td colspan='2'><?php echo html::select('users[]', $users, $doc->users, "class='form-control chosen' multiple");?></td>
+          </tr>
+          <tr id='groupTR'>
+            <th><?php echo $lang->doc->groups;?></th>
+            <td colspan='2'><?php echo html::checkbox('groups', $groups, $doc->groups);?></td>
+          </tr>
           <tr>
             <th><?php echo $lang->doc->digest;?></th>
-            <td><?php echo html::textarea('digest', $doc->digest, "class='form-control' rows=2");?></td>
+            <td colspan='2'><?php echo html::textarea('digest', $doc->digest, "class='form-control' rows=2");?></td>
           </tr>  
           <tr id='urlBox' class='hidden'>
             <th><?php echo $lang->doc->url;?></th>
-            <td><?php echo html::input('url', urldecode($doc->url), "class='form-control'");?></td>
+            <td colspan='2'><?php echo html::input('url', urldecode($doc->url), "class='form-control'");?></td>
           </tr>  
           <tr id='contentBox' class='hidden'>
             <th><?php echo $lang->doc->content;?></th>
-            <td><?php echo html::textarea('content', $doc->content, "class='form-control'");?></td>
+            <td colspan='2'><?php echo html::textarea('content', $doc->content, "class='form-control'");?></td>
           </tr>  
           <tr>
             <th><?php echo $lang->doc->comment;?></th>
-            <td><?php echo html::textarea('comment','', "class='form-control'");?></td>
+            <td colspan='2'><?php echo html::textarea('comment','', "class='form-control'");?></td>
           </tr> 
           <tr id='fileBox' class='hidden'>
             <th><?php echo $lang->doc->files;?></th>
-            <td><?php echo $this->fetch('file', 'buildform', 'fileCount=2');?></td>
+            <td colspan='2'><?php echo $this->fetch('file', 'buildform', 'fileCount=2');?></td>
           </tr>
         </table>
       </div>

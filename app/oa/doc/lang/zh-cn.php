@@ -47,6 +47,10 @@ $lang->doc->deleteLib      = '删除文档库';
 $lang->doc->allProduct     = '所有产品';
 $lang->doc->allProject     = '所有项目';
 
+$lang->doc->private        = '设为私密';
+$lang->doc->users          = '授权用户';
+$lang->doc->groups         = '授权分组';
+
 $lang->doc->systemLibs = array();
 //$lang->doc->systemLibs['product'] = '产品文档库';
 //$lang->doc->systemLibs['project'] = '项目文档库';
