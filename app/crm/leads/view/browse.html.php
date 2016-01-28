@@ -15,7 +15,7 @@
 <?php js::set('origin', $origin);?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div id='menuActions'>
-  <?php commonModel::printLink('leads', 'apply', '', $lang->contact->apply, "class='jsoner btn btn-primary'");?>
+  <?php commonModel::printLink('leads', 'apply', '', "<i class='icon-pencil'> </i>" . $lang->contact->apply, "class='jsoner btn btn-primary'");?>
   <?php commonModel::printLink('contact', 'import', '', $lang->importIcon . $lang->import, "class='btn btn-primary' data-toggle='modal'");?>
   <?php if(commonModel::hasPriv('contact', 'export')):?>
   <div class='btn-group'>

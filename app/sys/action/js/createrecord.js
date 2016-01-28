@@ -57,6 +57,16 @@ $(document).ready(function()
             $(this).parents('.input-group').find('input[type=text]').hide();
         }   
     });
+
+    /* Change contact. */
+    $('#contact').change(function()
+    {
+        var phone = $(this).find('option:selected').attr('data-phone');
+        if($.trim(phone) == '' || $.trim(phone) == '/') return false;
+        
+        $('#phoneTR').show();
+        $('#phoneTD').html(phone);
+    });
 });
 
 /**

@@ -1383,13 +1383,15 @@ class sql
      * Create the AND part.
      * 
      * @param  string $condition 
+     * @param  bool   $addMark 
      * @access public
      * @return object the sql object.
      */
-    public function andWhere($condition)
+    public function andWhere($condition, $addMark = false)
     {
         if($this->inCondition and !$this->conditionIsTrue) return $this;
-        $this->sql .= " AND $condition ";
+        $mark = $addMark ? '(' : '';
+        $this->sql .= " AND {$mark} $condition ";
         return $this;
     }
 

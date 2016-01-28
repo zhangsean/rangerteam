@@ -12,6 +12,7 @@
 ?>
 <?php include '../../../sys/common/view/header.lite.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::import($jsRoot . 'date.js');?>
 <?php js::set('customer', $customer);?>
 <div class='panel-body'>
@@ -23,7 +24,12 @@
       <td>
         <div class='col-sm-5'>
           <div class='input-group'>
-            <?php echo html::select('contact', $contacts, '', "class='form-control'");?>
+            <select id='contact' name='contact' class='form-control chosen'>
+              <option></option>
+              <?php foreach($contacts as $contact):?>
+              <option value='<?php echo $contact->id;?>' data-phone='<?php echo $contact->phone . $lang->slash . $contact->mobile;?>'><?php echo $contact->realname;?></option>
+              <?php endforeach;?>
+            </select>
             <?php echo html::input('realname', '', "class='form-control' style='display:none'");?>
             <?php if($objectType == 'customer'):?>
             <span class='input-group-addon'>
@@ -34,6 +40,10 @@
           </div>
         </div>
       </td>
+    </tr>
+    <tr id='phoneTR' class='hide'>
+      <th><?php echo $lang->contact->phone . $lang->slash . $lang->contact->mobile;?></th>
+      <td id='phoneTD'></td>
     </tr>
     <?php elseif(!empty($customers)):?>
     <tr>

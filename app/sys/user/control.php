@@ -301,7 +301,7 @@ class user extends control
 
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptAdminLink'));
         $this->view->depts    = $this->tree->getOptionMenu('dept');
-        $this->view->users    = $this->user->getList($deptID, $field = 'account', $query, $orderBy, $pager);
+        $this->view->users    = $this->user->getList($deptID, $query, $orderBy, $pager);
         $this->view->query    = $query;
         $this->view->pager    = $pager;
         $this->view->deptID   = $deptID;
@@ -333,7 +333,7 @@ class user extends control
 
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptColleagueLink'));
         $this->view->depts    = $this->tree->getPairs(0, 'dept');
-        $this->view->users    = $this->user->getList($deptID, $field = 'realname', $query, $orderBy, $pager);
+        $this->view->users    = $this->user->getList($deptID, $query, $orderBy, $pager);
         $this->view->query    = $query;
         $this->view->pager    = $pager;
         $this->view->deptID   = $deptID;

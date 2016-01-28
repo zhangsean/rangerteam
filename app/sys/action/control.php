@@ -111,7 +111,7 @@ class action extends control
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
         $this->view->customer   = $customer;
-        $this->view->contacts   = $this->loadModel('contact', 'crm')->getPairs($customer);
+        $this->view->contacts   = $this->loadModel('contact', 'crm')->getList($customer);
         $this->display();
     }
 
@@ -139,7 +139,7 @@ class action extends control
         $this->view->title    = $this->lang->action->record->edit;
         $this->view->from     = $from;
         $this->view->record   = $record;
-        $this->view->contacts = $this->loadModel('contact')->getPairs($record->objectType == 'customer' ? $object->id : $object->customer);
+        $this->view->contacts = $this->loadModel('contact', 'crm')->getList($record->objectType == 'customer' ? $object->id : $object->customer);
         $this->display();
     }
 

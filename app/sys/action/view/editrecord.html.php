@@ -25,7 +25,18 @@
     <?php if($record->objectType != 'contact'):?>
     <tr>
       <th><?php echo $lang->action->record->contact;?></th>
-      <td><?php echo html::select('contact', $contacts, $record->contact, "class='form-control chosen select-contact'");?></td>
+      <td>
+        <select id='contact' name='contact' class='form-control select-contact chosen'>
+          <option></option>
+          <?php foreach($contacts as $contact):?>
+          <option value='<?php echo $contact->id;?>' <?php if($contact->id == $record->contact) echo 'selected';?> data-phone='<?php echo $contact->phone . $lang->slash . $contact->mobile;?>'><?php echo $contact->realname;?></option>
+          <?php endforeach;?>
+        </select>
+      </td>
+    </tr>
+    <tr id='phoneTR' class='hide'>
+      <th><?php echo $lang->contact->phone . $lang->slash . $lang->contact->mobile;?></th>
+      <td id='phoneTD'></td>
     </tr>
     <?php endif;?>
     <tr>
