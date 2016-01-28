@@ -39,6 +39,8 @@ $lang->category->desc     = 'Description';
 $lang->category->keywords = 'Keyword';
 $lang->category->children = "Children";
 $lang->category->rights   = 'Rights';
+$lang->category->users    = 'Users';
+$lang->category->groups   = 'Groups';
 
 /* Lang items for area. */
 $lang->area = new stdclass();
@@ -96,6 +98,8 @@ $lang->board->keywords   = 'Keyword';
 $lang->board->children   = "Children";
 $lang->board->readonly   = 'Readonly';
 $lang->board->moderators = 'Moderators';
+$lang->board->users      = 'Users';
+$lang->board->groups     = 'Groups';
 
 $lang->board->readonlyList[0] = 'Pulic';
 $lang->board->readonlyList[1] = 'Readonly';

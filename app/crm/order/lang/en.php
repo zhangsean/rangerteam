@@ -77,3 +77,4 @@ $lang->order->infoContract  = 'Signed Contract: %s.';
 $lang->order->infoAmount    = 'Planned Amount: %s, Real Amount: %s.';
 $lang->order->infoContacted = 'Contacted Date: %s. ';
 $lang->order->infoNextDate  = 'Next Contact: %s.';
+$lang->order->deny          = 'You has no priviledge for createing %s.';

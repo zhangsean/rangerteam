@@ -213,6 +213,11 @@ $lang->menu->sys->entry     = 'App|entry|admin|';
 $lang->menu->sys->system    = 'System|mail|admin|';
 $lang->menu->sys->package   = 'Extension|package|browse|';
 
+$lang->setting->moduleList['attend'] = 'Attend';
+$lang->setting->moduleList['trip']   = 'Trip';
+$lang->setting->moduleList['leave']  = 'Leave';
+$lang->setting->moduleList['refund'] = 'Refund';
+
 $lang->message = new stdclass(); 
 $lang->blog    = new stdclass(); 
 $lang->group   = new stdclass(); 
@@ -259,6 +264,50 @@ $lang->todo->menu->undone          = 'Undone|todo|browse|mode=undone';
 $lang->todo->menu->future          = 'Future|todo|browse|mode=future';
 $lang->todo->menu->all             = 'All|todo|browse|mode=all';
  
+$lang->my = new stdclass();
+$lang->my->review = new stdclass();
+$lang->my->review->menu = new stdclass();
+$lang->my->review->menu->attend = 'Attend|my|review|type=attend';
+$lang->my->review->menu->leave  = 'Leave|my|review|type=leave';
+$lang->my->review->menu->refund = 'Refund|my|review|type=refund';
+
+$lang->my->order = new stdclass();
+$lang->my->order->menu = new stdclass();
+$lang->my->order->menu->past       = 'Urgently need contacted|my|order|type=past';
+$lang->my->order->menu->today      = 'Contact Today|my|order|type=today';
+$lang->my->order->menu->tomorrow   = 'Contact Tomorrow|my|order|type=tomorrow';
+$lang->my->order->menu->assignedTo = 'Assigned To Me|my|order|type=assignedTo';
+$lang->my->order->menu->createdBy  = 'Created By Me|my|order|type=createdBy';
+$lang->my->order->menu->signedBy   = 'Signed By Me|my|order|type=signedBy';
+$lang->my->order->menu->all        = 'All|my|order|type=all';
+
+$lang->my->contract = new stdclass();
+$lang->my->contract->menu = new stdclass();
+$lang->my->contract->menu->unfinished  = 'Unfinished|my|contract|type=unfinished';
+$lang->my->contract->menu->finished    = 'Finished|my|contract|type=finished';
+$lang->my->contract->menu->canceled    = 'Canceled|my|contract|type=canceled';
+$lang->my->contract->menu->returnedBy  = 'Returned By Me|my|contract|type=returnedBy';
+$lang->my->contract->menu->deliveredBy = 'Delivered By Me|my|contract|type=deliveredBy';
+
+$lang->my->task = new stdclass();
+$lang->my->task->menu = new stdclass();
+$lang->my->task->menu->assignedToMe = 'Assigned To Me|my|task|type=assignedTo';
+$lang->my->task->menu->createdByMe  = 'Created By Me|my|task|type=createdBy';
+$lang->my->task->menu->finishedByMe = 'Finished By Me|my|task|type=finishedBy';
+$lang->my->task->menu->closedByMe   = 'Closed By Me|my|task|type=closedBy';
+$lang->my->task->menu->canceledByMe = 'Canceled By Me|my|task|type=canceledBy';
+
+$lang->my->dynamic = new stdclass();
+$lang->my->dynamic->menu = new stdclass();
+$lang->my->dynamic->menu->today      = 'Today|my|dynamic|period=today';
+$lang->my->dynamic->menu->yesterday  = 'Yesterday|my|dynamic|period=yesterday';
+$lang->my->dynamic->menu->twodaysago = 'The Day Before Yesterday|my|dynamic|period=twodaysago';
+$lang->my->dynamic->menu->thisweek   = 'This Week|my|dynamic|period=thisweek';
+$lang->my->dynamic->menu->lastweek   = 'Last Week|my|dynamic|period=lastweek';
+$lang->my->dynamic->menu->thismonth  = 'This Month|my|dynamic|period=thismonth';
+$lang->my->dynamic->menu->lastmonth  = 'Last Month|my|dynamic|period=lastmonth';
+$lang->my->dynamic->menu->all        = 'All|my|dynamic|period=all';
+
 /* Menu of mail module. */
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->system->menu;

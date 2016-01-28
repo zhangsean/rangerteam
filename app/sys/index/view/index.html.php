@@ -12,6 +12,7 @@
 include "../../common/view/header.lite.html.php";
 js::import($jsRoot . 'jquery/ips.js');
 $isSuperAdmin = $this->app->user->admin == 'super';
+js::set('attend', commonModel::isAvailable('attend') ? 1 : 0);
 ?>
 <!-- Desktop -->
 <div id='desktop' class='fullscreen-mode' unselectable='on' style='-moz-user-select:none;-webkit-user-select:none;' onselectstart='return false;'>

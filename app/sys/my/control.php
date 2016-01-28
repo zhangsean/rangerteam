@@ -21,6 +21,8 @@ class my extends control
      */
     public function review($type = 'attend', $orderBy = 'status')
     {
+        if(!commonModel::isAvailable($type)) $this->loadModel('common')->deny('my', 'review');
+
         $this->loadModel('attend', 'oa');
         $this->loadModel('leave', 'oa');
         $this->loadModel('refund', 'oa');

@@ -17,6 +17,7 @@ $lang->setting->value  = 'Value';
 $lang->setting->lang = 'Setting';
 
 $lang->setting->customerPool = 'Customer setting';
+$lang->setting->modules      = 'Modules setting';
 
 $lang->setting->module = new stdClass();
 $lang->setting->module->user     = 'User role';

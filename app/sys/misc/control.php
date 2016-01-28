@@ -20,7 +20,8 @@ class misc extends control
     public function ping($notice = '')
     {
         /* Save attend info. */
-        $this->loadModel('attend', 'oa')->signOut();
+        if(commonModel::isAvailable('attend')) $this->loadModel('attend', 'oa')->signOut();
+
         /* Save online status. */
         $this->loadModel('user')->online();
         /* Get notices. */

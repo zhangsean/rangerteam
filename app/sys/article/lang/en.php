@@ -32,6 +32,9 @@ $lang->article->type        = 'Type';
 $lang->article->views       = 'Views';
 $lang->article->stick       = 'Sticky';
 $lang->article->order       = 'Order';
+$lang->article->private     = 'Private';
+$lang->article->users       = 'Users';
+$lang->article->groups      = 'Groups';
 
 $lang->article->list   = 'List';
 $lang->article->admin  = 'Admin';

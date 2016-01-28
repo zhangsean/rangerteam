@@ -263,7 +263,51 @@ $lang->todo->menu->assignedToMe    = '指派给我|todo|browse|mode=assignedtome
 $lang->todo->menu->undone          = '未完成|todo|browse|mode=undone';
 $lang->todo->menu->future          = '待定|todo|browse|mode=future';
 $lang->todo->menu->all             = '所有|todo|browse|mode=all';
+
+$lang->my = new stdclass();
+$lang->my->review = new stdclass();
+$lang->my->review->menu = new stdclass();
+$lang->my->review->menu->attend = '考勤|my|review|type=attend';
+$lang->my->review->menu->leave  = '请假|my|review|type=leave';
+$lang->my->review->menu->refund = '报销|my|review|type=refund';
+
+$lang->my->order = new stdclass();
+$lang->my->order->menu = new stdclass();
+$lang->my->order->menu->past       = '亟需联系|my|order|type=past';
+$lang->my->order->menu->today      = '今天联系|my|order|type=today';
+$lang->my->order->menu->tomorrow   = '明天联系|my|order|type=tomorrow';
+$lang->my->order->menu->assignedTo = '指派给我|my|order|type=assignedTo';
+$lang->my->order->menu->createdBy  = '由我创建|my|order|type=createdBy';
+$lang->my->order->menu->signedBy   = '由我签约|my|order|type=signedBy';
+$lang->my->order->menu->all        = '所有|my|order|type=all';
  
+$lang->my->contract = new stdclass();
+$lang->my->contract->menu = new stdclass();
+$lang->my->contract->menu->unfinished  = '未完成|my|contract|type=unfinished';
+$lang->my->contract->menu->finished    = '已完成|my|contract|type=finished';
+$lang->my->contract->menu->canceled    = '已取消|my|contract|type=canceled';
+$lang->my->contract->menu->returnedBy  = '由我回款|my|contract|type=returnedBy';
+$lang->my->contract->menu->deliveredBy = '由我交付|my|contract|type=deliveredBy';
+
+$lang->my->task = new stdclass();
+$lang->my->task->menu = new stdclass();
+$lang->my->task->menu->assignedToMe = '指派给我|my|task|type=assignedTo';
+$lang->my->task->menu->createdByMe  = '由我创建|my|task|type=createdBy';
+$lang->my->task->menu->finishedByMe = '由我完成|my|task|type=finishedBy';
+$lang->my->task->menu->closedByMe   = '由我关闭|my|task|type=closedBy';
+$lang->my->task->menu->canceledByMe = '由我取消|my|task|type=canceledBy';
+
+$lang->my->dynamic = new stdclass();
+$lang->my->dynamic->menu = new stdclass();
+$lang->my->dynamic->menu->today      = '今天|my|dynamic|period=today';
+$lang->my->dynamic->menu->yesterday  = '昨天|my|dynamic|period=yesterday';
+$lang->my->dynamic->menu->twodaysago = '前天|my|dynamic|period=twodaysago';
+$lang->my->dynamic->menu->thisweek   = '本周|my|dynamic|period=thisweek';
+$lang->my->dynamic->menu->lastweek   = '上周|my|dynamic|period=lastweek';
+$lang->my->dynamic->menu->thismonth  = '本月|my|dynamic|period=thismonth';
+$lang->my->dynamic->menu->lastmonth  = '上月|my|dynamic|period=lastmonth';
+$lang->my->dynamic->menu->all        = '所有|my|dynamic|period=all';
+
 /* Menu of mail module. */
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->system->menu;

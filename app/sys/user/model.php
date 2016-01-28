@@ -395,7 +395,7 @@ class userModel extends model
         unset($_SESSION['random']);
 
         /* Save sign in info. */
-        $this->loadModel('attend', 'oa')->signIn($user->account);
+        if(commonModel::isAvailable('attend')) $this->loadModel('attend', 'oa')->signIn($user->account);
 
         /* Return him.*/
         return $user;

@@ -58,8 +58,11 @@ $lang->trade->newTrader   = 'Create Trader';
 $lang->trade->import      = 'Import';
 $lang->trade->export      = 'Export';
 $lang->trade->showImport  = 'Show result';
-$lang->trade->report      = 'Report';
 $lang->trade->fullYear    = 'Full year';
+
+$lang->trade->report = new stdclass();
+$lang->trade->report->common = 'Report'; 
+$lang->trade->report->annual = 'Annual Report'; 
 
 $lang->trade->typeList['in']          = 'Income';
 $lang->trade->typeList['out']         = 'Expend';
@@ -145,7 +148,6 @@ $lang->trade->profit        = 'profit';
 $lang->trade->loss          = 'loss';
 $lang->trade->balance       = 'Income is equal to expenditure';
 $lang->trade->total         = 'Total';
-$lang->trade->annualCaption = 'Annual statistical table of income and expenditure';
 
 $lang->trade->noTraderMatch = 'No matched trader，click to create';
 $lang->trade->unique        = 'There has been same record';

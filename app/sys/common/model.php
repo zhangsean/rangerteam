@@ -146,7 +146,7 @@ class commonModel extends model
         $appName = '';
         if(strpos($module, '.') !== false) list($appName, $module) = explode('.', $module);
 
-        if(isset($lang->setting->moduleList[$module]) and strpos($config->setting->modules, $module) === false) return false;
+        if(!commonModel::isAvailable($module)) return false;
 
         if($app->user->admin == 'super') return true;
 
@@ -190,6 +190,13 @@ class commonModel extends model
         if(isset($rights['apppriv'][strtolower($appname)])) return true;
 
         return false;
+    }
+
+    public static function isAvailable($module)
+    {
+        global $config, $lang;
+        if(isset($lang->setting->moduleList[$module]) and strpos($config->setting->modules, $module) === false) return false;
+        return true;
     }
 
     /**
@@ -282,7 +289,7 @@ class commonModel extends model
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
-            if(isset($lang->setting->moduleList[$module]) and strpos($config->setting->modules, $module) === false) continue;
+            if(!commonModel::isAvailable($module)) continue;
 
             if(strpos(',tree,setting,schema,sales,', $module) != false and isset($lang->setting->menu)) 
             {
@@ -401,6 +408,20 @@ class commonModel extends model
             $hasPriv = commonModel::hasPriv($module, $method);
             if($module == 'my' and $method == 'order')    $hasPriv = commonModel::hasPriv('order', 'browse');
             if($module == 'my' and $method == 'contract') $hasPriv = commonModel::hasPriv('contract', 'browse');
+
+            if($module == 'my' and $method == 'review')
+            {
+                $hasPriv = false;
+                foreach($lang->my->review->menu as $methodName => $methodMenu)
+                {
+                    if(commonModel::isAvailable($methodName))
+                    {
+                        $hasPriv = true;
+                        list($reviewLabel, $reviewModule, $reviewMethod, $vars) = explode('|', $methodMenu);
+                        break;
+                    }
+                }
+            }
             if($hasPriv)
             {
                 $link = helper::createLink($module, $method, $vars);

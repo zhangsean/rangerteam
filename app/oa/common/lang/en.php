@@ -22,6 +22,7 @@ $lang->menu->oa->leave     = 'Leave|leave|personal|';
 $lang->menu->oa->overtime  = 'Overtime|overtime|personal|';
 $lang->menu->oa->trip      = 'Trip|trip|personal|';
 $lang->menu->oa->refund    = 'Refund|refund|personal|';
+$lang->menu->oa->setting   = 'Setting|module|app=oa';
 
 $lang->dashboard = new stdclass();
 
@@ -80,3 +81,6 @@ $lang->refund->menu->review   = 'Waiting For Review|refund|browsereview|';
 $lang->refund->menu->todo     = 'Waiting For Reimbursement|refund|todo|';
 $lang->refund->menu->company  = 'All|refund|company|';
 $lang->refund->menu->settings = 'Settings|refund|settings|';
+
+$lang->setting->menu = new stdclass();
+$lang->setting->menu->modules = 'Modules|setting|modules|app=oa';

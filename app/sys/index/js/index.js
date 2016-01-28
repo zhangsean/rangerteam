@@ -2,7 +2,7 @@ $(function()
 {
     /* start ips */
     $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock, onDeleteEntry: deleteEntry, onUpdateEntryMenu: updateEntryMenu, onSortEntries: sortEntries}, config, ipsLang));
-    initAttendButton();
+    if(v.attend) initAttendButton();
 });
 
 /**
