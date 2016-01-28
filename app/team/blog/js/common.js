@@ -42,7 +42,7 @@ $(document).ready(function()
         $('#searchform').find('#submit').click();
     });
 
-    $(document).on('click', '#private', function()
+    $('#private').click(function()
     {
         $('#userTR').toggle();
         $('#groupTR').toggle();

@@ -37,7 +37,7 @@ $(document).ready(function()
         $(".nav li a[href*='createlib']").attr('data-toggle', 'modal');
     }
 
-    $(document).on('click', '#private', function()
+    $('#private').click(function()
     {
         $('#userTR').toggle();
         $('#groupTR').toggle();

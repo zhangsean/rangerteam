@@ -15,6 +15,7 @@
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('type',  $doc->type);?>
 <?php js::set('libID', $doc->lib);?>
+<?php js::set('private', $doc->private);?>
 <form method='post' enctype='multipart/form-data' id='ajaxForm' action='<?php echo inlink('edit', "libID=$doc->id")?>'>
   <div class='col-md-8'>
     <div class='panel'>

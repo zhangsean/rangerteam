@@ -64,6 +64,9 @@ class doc extends control
         $libID = $libID ? $libID : key((array)$this->libs);
         if(!$libID) $this->locate(inlink('createLib'));
 
+        $lib = $this->doc->getLibByID($libID);
+        if(!$lib) die(js::error($this->lang->doc->libNotFound) . js::locate(inlink('browse')));
+
         /* Set browseType.*/ 
         $browseType = strtolower($browseType);
         $queryID    = ($browseType == 'bysearch') ? (int)$param : 0;

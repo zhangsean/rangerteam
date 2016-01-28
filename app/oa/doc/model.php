@@ -112,8 +112,9 @@ class docModel extends model
             ->join('groups', ',')
             ->get();
 
-        $lib->users  = !empty($lib->users) ? ',' . trim($lib->users, ',') . ',' : '';
-        $lib->groups = !empty($lib->groups) ? ',' . trim($lib->groups, ',') . ',' : '';
+        $lib->private = $this->post->private ? 1 : 0;
+        $lib->users   = !empty($lib->users) ? ',' . trim($lib->users, ',') . ',' : '';
+        $lib->groups  = !empty($lib->groups) ? ',' . trim($lib->groups, ',') . ',' : '';
 
         $this->dao->update(TABLE_DOCLIB)
             ->data($lib)
@@ -308,8 +309,9 @@ class docModel extends model
             ->join('groups', ',')
             ->get();
 
-        $doc->users  = !empty($doc->users) ? ',' . trim($doc->users, ',') . ',' : '';
-        $doc->groups = !empty($doc->groups) ? ',' . trim($doc->groups, ',') . ',' : '';
+        $doc->private = $this->post->private ? 1 : 0;
+        $doc->users   = !empty($doc->users) ? ',' . trim($doc->users, ',') . ',' : '';
+        $doc->groups  = !empty($doc->groups) ? ',' . trim($doc->groups, ',') . ',' : '';
 
         $uniqueCondition = "lib = '{$oldDoc->lib}' AND module = {$doc->module} AND id != $docID";
         $doc = $this->loadModel('file')->processEditor($doc, $this->config->doc->editor->edit['id']);

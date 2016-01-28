@@ -321,8 +321,9 @@ class articleModel extends model
             ->join('groups', ',')
             ->get();
 
-        $article->users  = !empty($article->users) ? ',' . trim($article->users, ',') . ',' : '';
-        $article->groups = !empty($article->groups) ? ',' . trim($article->groups, ',') . ',' : '';
+        $article->private = $this->post->private ? 1 : 0;
+        $article->users   = !empty($article->users) ? ',' . trim($article->users, ',') . ',' : '';
+        $article->groups  = !empty($article->groups) ? ',' . trim($article->groups, ',') . ',' : '';
 
         $article = $this->loadModel('file')->processEditor($article, $this->config->article->editor->edit['id']);
         $this->dao->update(TABLE_ARTICLE)

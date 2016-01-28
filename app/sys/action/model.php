@@ -842,6 +842,18 @@ class actionModel extends model
             if(empty($todo) or ($this->app->user->account != $todo->account && $this->app->user->account != $todo->assignedTo)) $canView = false;
         }
 
+        if($action->objectType == 'doc')
+        {
+            $doc     = $this->loadModel('doc', 'oa')->getById($action->objectID);
+            $canView = $this->doc->hasRight($doc);
+        }
+
+        if($action->objectType == 'doclib')
+        {
+            $lib     = $this->loadModel('doc', 'oa')->getLibById($action->objectID);
+            $canView = $this->doc->hasRight($lib);
+        }
+
         $objectType = $action->objectType;
         $actionType = $action->action;
         if(isset($this->lang->action->label->$objectType))

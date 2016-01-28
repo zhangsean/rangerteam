@@ -12,6 +12,7 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
+<?php js::set('private', $lib->private);?>
 <form method='post' id='ajaxForm' action='<?php echo inlink('editLib', "libID=$libID")?>'>
   <table class='table table-form'>
     <tr>
