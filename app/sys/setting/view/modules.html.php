@@ -18,10 +18,8 @@
   <div class='panel-body'>
     <form id='ajaxForm' class='form-inline' method='post'>
       <table class='table table-form table-condensed'>
-      <tr>
-        <td><?php echo html::checkbox('modules', $lang->setting->moduleList, $config->setting->modules);?></td>
-      </tr>
-      <tr><td><?php echo html::submitButton();?></td></tr>
+        <tr><td><?php echo html::checkbox('modules', $lang->setting->moduleList, $config->setting->modules);?></td></tr>
+        <tr><td><?php echo html::submitButton() . html::hidden('hidden', 1);?></td></tr>
       </table>
     </form>
   </div>
