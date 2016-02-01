@@ -423,12 +423,13 @@ class docModel extends model
      */
     public function hasRight($object = null)
     {
-        if($this->app->user->admin == 'super') return true;
         if(!$object) return false;
+
+        if($this->app->user->admin == 'super') return true;
         
         if(!empty($object->private))
         {
-            return $object->createdBy == $this->app->user->account;
+            return $this->app->user->account == $object->createdBy;
         }   
 
         if(empty($object->users) && empty($object->groups))

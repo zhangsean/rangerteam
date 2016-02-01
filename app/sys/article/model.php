@@ -26,11 +26,6 @@ class articleModel extends model
         if(!$article) $article = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($articleID)->fetch();
 
         if(!$article) return false;
-        /* Check if the article is private. */
-        if(!empty($article->private))
-        {
-            if($this->app->user->admin != 'super' && $article->author != $this->app->user->account) return false; 
-        }
         
         /* Get it's categories. */
         $article->categories = $this->dao->select('t2.*')
@@ -40,17 +35,11 @@ class articleModel extends model
             ->andWhere('t1.id')->eq($articleID)
             ->fetchAll('id');
 
+        if(!$this->hasRight($article)) return false;
+
         /* Get article path to highlight main nav. */
         $path = '';
-        $this->loadModel('tree');
-        $hasRight = false;
-        foreach($article->categories as $category) 
-        {
-            /* Check rights. */
-            if(!$hasRight) $hasRight = $this->tree->hasRight($category->id);
-            $path .= $category->path;
-        }
-        if(!$hasRight) return false;
+        foreach($article->categories as $category) $path .= $category->path;
 
         $article->path = explode(',', trim($path, ','));
 
@@ -431,18 +420,58 @@ class articleModel extends model
      */
     public function process($articles = array())
     {
-        $this->loadModel('tree');
         foreach($articles as $key => $article)
         {
-            /* Check if the article is private. */
-            if(!empty($article->private))
+            if(!$this->hasRight($article)) unset($articles[$key]);
+        }
+        return $articles;
+    }
+
+    /**
+     * Check rights. 
+     * 
+     * @param  object $article 
+     * @access public
+     * @return bool
+     */
+    public function hasRight($article = null)
+    {
+        if(!$article) return false;
+
+        if($this->app->user->admin == 'super') return true;
+
+        if(!empty($article->private)) 
+        {
+            return $this->app->user->account == $article->author;
+        }
+
+        if(empty($article->users) && empty($article->rights))
+        {
+            $hasRight = true;
+        }
+        else
+        {
+            $hasRight = false;
+            if(!empty($article->users))
             {
-                if($this->app->user->admin != 'super' && $article->author != $this->app->user->account) 
-                {
-                    unset($articles[$key]);
-                    continue;
-                }
+                $hasRight = strpos($article->users, ',' . $this->app->user->account . ',') !== false;
             }
+
+            if(!$hasRight && !empty($article->rights))
+            {
+                $count = $this->dao->select('count(t2.account) as count')
+                    ->from(TABLE_USER)->alias('t1')
+                    ->leftJoin(TABLE_USERGROUP)->alias('t2')->on('t1.account = t2.account')
+                    ->where('t1.deleted')->eq(0)
+                    ->andWhere('t1.account')->eq($this->app->user->account)
+                    ->andWhere('t2.group')->in($article->rights)
+                    ->fetch('count');
+                $hasRight = $count > 0;
+            }
+        }
+
+        if($hasRight)
+        {
             if(!isset($article->categories))
             {
                 $article->categories = $this->dao->select('t2.*')
@@ -452,18 +481,17 @@ class articleModel extends model
                     ->andWhere('t1.id')->eq($article->id)
                     ->fetchAll('id');
             }
-            /* Check rights. */
             if(!empty($article->categories))
             {
-                $hasRight = false;
+                $this->loadModel('tree');
                 foreach($article->categories as $category)
                 {
                     $hasRight = $this->tree->hasRight($category->id);
                     if($hasRight) break;
                 }
-                if(!$hasRight) unset($articles[$key]);
             }
         }
-        return $articles;
+
+        return $hasRight;
     }
 }
