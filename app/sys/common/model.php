@@ -1235,4 +1235,65 @@ class commonModel extends model
             return formatMoney($money);
         }
     } 
+
+    /**
+     * Http.
+     * 
+     * @param  string    $url 
+     * @param  string    $data 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function http($url, $data = null)
+    {
+        $ci = curl_init();
+        curl_setopt($ci, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
+        curl_setopt($ci, CURLOPT_USERAGENT, 'Sae T OAuth2 v0.1');
+        curl_setopt($ci, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($ci, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ci, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ci, CURLOPT_ENCODING, "");
+        curl_setopt($ci, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ci, CURLOPT_HEADER, FALSE);
+
+        $headers[] = "API-RemoteIP: " . $_SERVER['REMOTE_ADDR'];
+        curl_setopt($ci, CURLOPT_URL, $url);
+        curl_setopt($ci, CURLOPT_HTTPHEADER, $headers );
+        curl_setopt($ci, CURLINFO_HEADER_OUT, TRUE);
+        if(!empty($data)) 
+        {
+            curl_setopt($ci, CURLOPT_POST, true);
+            curl_setopt($ci, CURLOPT_POSTFIELDS, $data);
+        }
+
+        $response = curl_exec($ci);
+        curl_close ($ci);
+
+        commonModel::log($url, $response);
+        return $response;
+    }
+
+    /**
+     * Log.
+     * 
+     * @param  string    $url 
+     * @param  string    $results 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function log($url, $results)
+    {
+        global $app;
+        $logFile = $app->getLogRoot() . 'saas.'. date('Ymd') . '.log';
+        $fh = @fopen($logFile, 'a');
+        if(!$fh) return false;
+
+        fwrite($fh, date('Ymd H:i:s') . ": " . $app->getURI() . "\n");
+        fwrite($fh, "url:    " . $url . "\n");
+        fwrite($fh, "results:" . print_r($results, true));
+        fwrite($fh, "\n");
+        fclose($fh);
+    }
 }

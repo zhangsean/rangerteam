@@ -557,7 +557,6 @@ class entry extends control
     public function bindUser($id, $sessionID)
     {
         $entry = $this->entry->getByID($id);
-        if(!isset($this->snoopy)) $this->snoopy = $this->app->loadClass('snoopy');
 
         /* Get zentao url. */
         if(strpos($entry->login, '&') === false) $zentaoUrl = substr($entry->login, 0, strrpos($entry->login, '/') + 1);
@@ -575,8 +574,7 @@ class entry extends control
                 {
                     $user = $this->loadModel('user')->getByAccount($ranzhiAccount);
                     $createUrl = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'createUser');
-                    $this->snoopy->submit($createUrl, $user);
-                    $result = $this->snoopy->results;
+                    $result = commonModel::http($createUrl, $user);
                     if($result != 'success') $this->send(array('result' => 'fail', 'message' => $result));
                 }
                 else
@@ -585,8 +583,7 @@ class entry extends control
                     $data->ranzhiAccount = $ranzhiAccount; 
                     $data->zentaoAccount = $this->post->zentaoAccounts[$key]; 
                     $bindUrl = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'bindUser');
-                    $this->snoopy->submit($bindUrl, $data);
-                    $result = $this->snoopy->results;
+                    $result = commonModel::http($bindUrl, $data);
                     if($result != 'success') $this->send(array('result' => 'fail', 'message' => $result));
                 }
             }
@@ -595,12 +592,12 @@ class entry extends control
         }
 
         $getUsersUrl = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getUserPairs');
-        $this->snoopy->fetch($getUsersUrl);
-        $zentaoUsers = json_decode($this->snoopy->results, true);
+        $results = commonModel::http($getUsersUrl);
+        $zentaoUsers = json_decode($results, true);
 
         $getBindUsersUrl = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getBindUsers');
-        $this->snoopy->fetch($getBindUsersUrl);
-        $bindUsers = json_decode($this->snoopy->results, true);
+        $results = commonModel::http($getBindUsersUrl);
+        $bindUsers = json_decode($results, true);
 
         $this->view->title       = $this->lang->entry->bindUser;
         $this->view->ranzhiUsers = $this->loadModel('user')->getPairs('noempty,noclosed,nodeleted');

@@ -57,7 +57,6 @@ class blockModel extends model
     {
         if(empty($block)) return false;
         $entry = $this->loadModel('entry')->getByCode($block->source);
-        $http  = $this->app->loadClass('http');
 
         if(empty($block->params)) $block->params = new stdclass();
 
@@ -95,7 +94,7 @@ class blockModel extends model
 
         /* Send login request. */
         $loginObj = "<iframe src=" . helper::createLink('sys.entry', 'visit', "entryID={$entry->id}") . "' class='hidden' />";
-        return $loginObj . $http->get($link);
+        return $loginObj . commonModel::http($link);
     }
 
     /**

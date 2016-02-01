@@ -318,8 +318,6 @@ class entryModel extends model
      */
     public function getBlocksByAPI($entry)
     {
-        $http = $this->app->loadClass('http');
-
         if(empty($entry)) return array();
         $parseUrl   = parse_url($entry->block);
         $blockQuery = "mode=getblocklist&hash={$entry->key}&lang=" . $this->app->getClientLang();
@@ -339,7 +337,7 @@ class entryModel extends model
             $link .= '?' . $parseUrl['query'];
         }
 
-        $blocks = $http->get($link);
+        $blocks = commonModel::http($link);
         return json_decode($blocks, true);
     }
 
@@ -353,8 +351,6 @@ class entryModel extends model
      */
     public function getBlockParams($entry, $blockID)
     {
-        $http = $this->app->loadClass('http');
-
         if(empty($entry)) return array();
         $parseUrl  = parse_url($entry->block);
         $formQuery = "mode=getblockform&blockid=$blockID&hash={$entry->key}&lang=" . $this->app->getClientLang();
@@ -373,7 +369,7 @@ class entryModel extends model
             if(isset($parseUrl['path'])) $link .= $parseUrl['path']; 
             $link .= '?' . $parseUrl['query'];
         }
-        $params = $http->get($link);
+        $params = commonModel::http($link);
 
         return json_decode($params, true);
     }

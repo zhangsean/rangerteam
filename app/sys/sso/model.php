@@ -148,13 +148,11 @@ class ssoModel extends model
      */
     public function fetchZentaoAPI($url, $data = null)
     {
-        if(!isset($this->snoopy)) $this->snoopy = $this->app->loadClass('snoopy');
-        if(empty($data))  $this->snoopy->fetch($url);
-        if(!empty($data)) $this->snoopy->submit($url, $data);
-        if($this->snoopy->results == 'deny') return 'deny';
-        $result = json_decode($this->snoopy->results);
+        $result = commonModel::http($url, $data);
+        if($result == 'deny') return 'deny';
+        if($result == 'success') return array('status' => 'success');
+        $result = json_decode($result);
 
-        if($this->snoopy->results == 'success') return array('status' => 'success');
         if(!isset($result->status)) return false;
         if($result->status != 'success') return false;
         if(isset($result->data) and md5($result->data) != $result->md5) return false;
@@ -171,11 +169,9 @@ class ssoModel extends model
      */
     public function getZentaoServerConfig($zentaoUrl)
     {
-        if(!isset($this->snoopy)) $this->snoopy = $this->app->loadClass('snoopy');
-
         $url = $zentaoUrl . "?mode=getconfig";
-        $this->snoopy->fetch($url);
-        $result = json_decode($this->snoopy->results);
+        $result = commonModel::http($url);
+        $result = json_decode($result);
         return $result;
     }
 
