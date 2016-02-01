@@ -101,7 +101,7 @@ class index extends control
                 }
                 else
                 {
-                    if(isset($this->lang->block->moreLinkList->{$moduleName}))
+                    if(isset($this->lang->block->moreLinkList->{$moduleName}) and !is_array($this->lang->block->moreLinkList->{$moduleName}))
                     {
                         list($label, $app, $module, $method, $vars) = explode('|', $this->lang->block->moreLinkList->{$moduleName});
                         $block->moreLink = $this->createLink($app . '.' . $module, $method, $vars);
