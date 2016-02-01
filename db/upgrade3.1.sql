@@ -66,6 +66,10 @@ ADD `users` text NOT NULL AFTER `private`,
 ADD `groups` varchar(255) NOT NULL DEFAULT '' AFTER `users`;
 
 ALTER TABLE `oa_doclib` 
-ADD `private` enum('0', '1') NOT NULL DEFAULT '0' AFTER `deleted`,
+ADD `private` enum('0', '1') NOT NULL DEFAULT '0' AFTER `name`,
 ADD `users` text NOT NULL AFTER `private`,
-ADD `groups` varchar(255) NOT NULL DEFAULT '' AFTER `users`;
+ADD `groups` varchar(255) NOT NULL DEFAULT '' AFTER `users`,
+ADD `createdBy` varchar(30) NOT NULL AFTER `groups`,
+ADD `createdDate` datetime NOT NULL AFTER `createdBy`,
+ADD `editedBy` varchar(30) NOT NULL AFTER `createdDate`,
+ADD `editedDate` datetime NOT NULL AFTER `editedBy`;

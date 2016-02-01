@@ -80,6 +80,8 @@ class docModel extends model
     public function createLib()
     {
         $lib = fixer::input('post')->stripTags('name')
+            ->add('createdBy', $this->app->user->account)
+            ->add('createdDate', helper::now())
             ->join('users', ',')
             ->join('groups', ',')
             ->get();
@@ -108,6 +110,10 @@ class docModel extends model
         $libID  = (int)$libID;
         $oldLib = $this->getLibById($libID);
         $lib    = fixer::input('post')->stripTags('name')
+            ->setIF(empty($oldLib->createdBy), 'createdBy', $this->app->user->account)
+            ->setIF(empty($oldLib->createdDate), 'createdDate', helper::now())
+            ->add('editedBy', $this->app->user->account)
+            ->add('editedDate', helper::now())
             ->join('users', ',')
             ->join('groups', ',')
             ->get();
@@ -425,7 +431,7 @@ class docModel extends model
     {
         if(!$object) return false;
 
-        if($this->app->user->admin == 'super') return true;
+        if($this->app->user->admin == 'super' || $this->app->user->account == $object->createdBy) return true;
         
         if(!empty($object->private))
         {

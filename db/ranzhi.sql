@@ -275,6 +275,10 @@ CREATE TABLE `oa_doclib` (
   `private` enum('0', '1') NOT NULL DEFAULT '0',
   `users` text NOT NULL,
   `groups` varchar(255) NOT NULL DEFAULT '',
+  `createdBy` varchar(30) NOT NULL,
+  `createdDate` datetime NOT NULL,
+  `editedBy` varchar(30) NOT NULL,
+  `editedDate` datetime NOT NULL,
   `deleted` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

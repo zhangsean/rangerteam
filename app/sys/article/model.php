@@ -438,7 +438,7 @@ class articleModel extends model
     {
         if(!$article) return false;
 
-        if($this->app->user->admin == 'super') return true;
+        if($this->app->user->admin == 'super' || $this->app->user->account == $article->author) return true;
 
         if(!empty($article->private)) 
         {
