@@ -494,7 +494,7 @@ class projectModel extends model
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=expired",    $this->lang->task->expired, '', false, '', 'li');
 
             $menu .= "<li>";
-            $menu .= "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>" . $this->lang->actions . " <span class='caret'></span></a>";
+            $menu .= "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>" . $this->lang->project->project. " <i class='icon-caret-down'></i></a>";
             $menu .= "<ul class='dropdown-menu'>";
             $menu .= commonModel::printLink('project', 'edit', "projectID=$projectID", $this->lang->edit, "data-toggle='modal'", false, '', 'li');
             $menu .= commonModel::printLink('project', 'member', "projectID=$projectID", $this->lang->project->member, "data-toggle='modal''", false, '', 'li');
@@ -514,7 +514,7 @@ class projectModel extends model
             }
 
             $menu .= "<li>";
-            $menu .= "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>" . $this->lang->actions . " <span class='caret'></span></a>";
+            $menu .= "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>" . $this->lang->project->project. " <i class='icon-caret-down'></i></a>";
             $menu .= "<ul class='dropdown-menu'>";
             $menu .= commonModel::printLink('project', 'edit', "projectID=$projectID", $this->lang->edit, "data-toggle='modal'", false, '', 'li');
             $menu .= commonModel::printLink('project', 'member', "projectID=$projectID", $this->lang->project->member, "data-toggle='modal''", false, '', 'li');

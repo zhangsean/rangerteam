@@ -30,6 +30,7 @@ $lang->project->search     = '搜索';
 $lang->project->import     = '导入';
 $lang->project->importTask = '导入任务';
 $lang->project->role       = '角色';
+$lang->project->project    = '项目';
 
 $lang->project->id          = '编号';
 $lang->project->name        = '项目名称';
