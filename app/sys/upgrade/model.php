@@ -459,7 +459,7 @@ class upgradeModel extends model
      */
     public function upgradeProjectMember()
     {
-        $projects = $this->loadModel('project', 'oa')->getList();
+        $projects = $this->dao->select('*')->from(TABLE_PROJECT)->fetchAll('id');
         foreach($projects as $project)
         {
             $member = new stdclass();
@@ -756,7 +756,7 @@ class upgradeModel extends model
      */
     public function updateAppOrder()
     {
-        $entries = $this->loadModel('entry')->getEntries('system');
+        $entries = $this->dao->select('*')->from(TABLE_ENTRY)->orderBy('`order, id`')->fetchAll();
         $order   = 10;
         foreach($entries as $entry)
         {
@@ -879,20 +879,19 @@ class upgradeModel extends model
      */
     public function processCustomerEditedDate()
     {
-        $customers = $this->loadModel('customer', 'crm')->getList();
+        $customers = $this->dao->select('*')->from(TABLE_CUSTOMER)->fetchAll('id');
         foreach($customers as $customer)
         {
             $editedDate = $customer->editedDate;
-
             $this->app->loadLang('order', 'crm');
-            $orders = $this->loadModel('order', 'crm')->getOrderForCustomer($customer->id);
+            $orders = $this->dao->select('*')->from(TABLE_ORDER)->where('customer')->eq($customer->id)->fetchAll('id');
             foreach($orders as $order) 
             {
                 if(!empty($order) and strtotime($order->editedDate) > strtotime($editedDate))  $editedDate = $order->editedDate;
                 if(!empty($order) and strtotime($order->createdDate) > strtotime($editedDate)) $editedDate = $order->createdDate;
             }
 
-            $contracts = $this->loadModel('contract', 'crm')->getList($customer->id);
+            $contracts = $this->dao->select('*')->from(TABLE_CONTRACT)->where('customer')->eq($customer->id)->fetchAll('id');
             foreach($contracts as $contract) 
             {
                 if(!empty($contract) and strtotime($contract->editedDate) > strtotime($editedDate))  $editedDate = $contract->editedDate;
@@ -901,7 +900,7 @@ class upgradeModel extends model
 
             $this->app->loadLang('contact', 'crm');
             $this->app->loadConfig('contact', 'crm');
-            $contacts = $this->loadModel('contact', 'crm')->getList($customer->id);
+            $contacts = $this->dao->select('*')->from(TABLE_CONTACT)->where('customer')->eq($customer->id)->fetchAll('id');
             foreach($contacts as $contact) 
             {
                 if(!empty($contact) and strtotime($contact->editedDate) > strtotime($editedDate))  $editedDate = $contact->editedDate;
