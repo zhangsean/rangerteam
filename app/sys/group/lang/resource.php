@@ -555,10 +555,12 @@ $lang->resource->setting = new stdclass();
 $lang->resource->setting->lang         = 'lang';
 $lang->resource->setting->reset        = 'reset';
 $lang->resource->setting->customerPool = 'customerPool';
+$lang->resource->setting->modules      = 'modules';
 
 $lang->setting->methodOrder[5]  = 'lang';
 $lang->setting->methodOrder[10] = 'reset';
 $lang->setting->methodOrder[15] = 'customerPool';
+$lang->setting->methodOrder[20] = 'modules';
 
 /* Report. */
 $lang->resource->report = new stdclass();
