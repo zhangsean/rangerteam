@@ -48,4 +48,8 @@ $lang->group->manageAll = '可浏览所有客户和订单';
 $lang->group->copyOptions['copyPriv'] = '复制权限';
 $lang->group->copyOptions['copyUser'] = '复制用户';
 
+$lang->group->placeholder = new stdclass();
+$lang->group->placeholder->tree = '类目权限包括对区域、行业、收入科目、支出科目、论坛版块、博客类目、部门的设置权限';
+$lang->group->placeholder->lang = '自定义权限包括对产品状态、产品线、客户类型、客户规模、客户级别、客户状态、货币设置、维护角色的设置权限';
+
 include (dirname(__FILE__) . '/resource.php');

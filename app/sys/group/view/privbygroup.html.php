@@ -49,7 +49,13 @@
           </th>
           <?php endif;?>
           <th class='text-right w-120px'>
-            <label class="checkbox">
+            <?php $title = '';?>
+            <?php if($moduleName == 'tree')    $title = $lang->group->placeholder->tree;?>
+            <?php if($moduleName == 'setting') $title = $lang->group->placeholder->lang;?>
+            <label class="checkbox" title="<?php echo $title;?>">
+              <?php if($moduleName == 'tree' or $moduleName == 'setting'):?>
+              <span class='required'></span>
+              <?php endif;?>
               <?php
               if($moduleName == 'user')
               {

@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->setting->common = '自定义';
+$lang->setting->common = '设置';
 $lang->setting->reset  = '恢复默认';
 $lang->setting->key    = '键';
 $lang->setting->value  = '值';
