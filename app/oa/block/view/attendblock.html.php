@@ -16,8 +16,6 @@
 .AM {height: 39%;}
 .PM {height: 39%;}
 .status {height: 13%;}
-.col-p13 {width: 13%;}
-.col-p9 {width: 9%;}
 .calendar {width: 100%; height: 100%; text-align: center;}
 .calendar th {text-align: center; color: gray;}
 .AM td, .PM td {vertical-align: top;}
@@ -42,11 +40,13 @@
 <?php $dateList = range(strtotime($startDate), strtotime($endDate), 86400);?>
 <table class='calendar'>
   <tr class='header'>
-    <th class='col-p9'></th>
+    <th class='w-p5'></th>
     <?php foreach($dateList as $d):?>
-    <?php $dStr = date('Y-m-d', $d);?>
+    <?php $dStr  = date('Y-m-d', $d);?>
+    <?php $week  = date('w', $d);?>
+    <?php $width = ($week == 0 || $week == 6) ? 'w-p10' : 'w-p15';?>
     <?php $class = $dStr == $date ? 'today' : '';?>
-      <th class='col-p13 <?php echo $class?>' data-date='<?php echo $dStr?>'><?php echo zget($this->lang->datepicker->abbrDayNames, date('w', $d))?></th>
+      <th class='<?php echo $width . ' ' . $class?>' data-date='<?php echo $dStr?>'><?php echo zget($this->lang->datepicker->abbrDayNames, date('w', $d))?></th>
     <?php endforeach;?>
   </tr>
   <tr class='AM'>

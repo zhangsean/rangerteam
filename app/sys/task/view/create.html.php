@@ -26,7 +26,7 @@
               <td class='w-p50'>
                 <div class='input-group'>
                   <?php echo html::input('name', '', "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->task->pri;?></span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->task->pri;?></span>
                   <?php echo html::select('pri', $lang->task->priList, '', "class='form-control'")?>
                 </div>
               </td><td></td>
@@ -37,7 +37,7 @@
                 <div class='input-group'>
                   <?php echo html::select('assignedTo', $members, '', "class='form-control chosen'");?>
                   <?php echo html::input('teamMember', '', "class='form-control team-group hidden' readonly='readonly'");?>
-                  <span class='input-group-addon team-group hidden'></span>
+                  <span class='input-group-addon fix-border fix-padding team-group hidden'></span>
                   <?php echo html::a("#modalTeam", $lang->task->team, "class='form-control btn team-group hidden' data-toggle='modal' data-target='#modalTeam'");?>
                   <span class='input-group-addon'>
                     <label class='checkbox'>
@@ -53,7 +53,7 @@
               <td>
                 <div class='input-group'>
                   <?php echo html::input('estimate', '', "class='form-control'")?>
-                  <span class='input-group-addon'><?php echo $lang->task->deadline;?></span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->task->deadline;?></span>
                   <?php echo html::input('deadline', '', "class='form-control form-date'");?>
                 </div>
               </td><td></td>

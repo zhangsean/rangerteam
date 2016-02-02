@@ -38,9 +38,8 @@
             </div>
           </td>
           <td style='width: 320px'>
-            <div style="overflow:auto;" class='table-wrapper'>
+            <div style="overflow:auto; height: 270px;" class='table-wrapper'>
               <table class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='<?php echo $chartOption->type; ?>' data-target='#chart-<?php echo $chartType ?>' data-animation='false'>
-                <caption class='text-left'><?php echo $tips['caption'][$chartType];?></caption>
                 <thead>
                   <tr>
                     <th class='w-20px'></th>

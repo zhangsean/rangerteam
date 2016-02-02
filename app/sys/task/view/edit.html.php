@@ -171,9 +171,9 @@
                 <div class='input-group'>
                   <span class='input-group-addon'><?php echo $lang->task->estimate?></span>
                   <?php echo html::input("teamEstimate[]", $member->estimate, "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
-                  <span class='input-group-addon'><?php echo $lang->task->consumed?></span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->task->consumed?></span>
                   <?php echo html::input("teamConsumed[]", $member->consumed, "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
-                  <span class='input-group-addon'><?php echo $lang->task->left?></span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->task->left?></span>
                   <?php echo html::input("teamLeft[]", $member->left, "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
                 </div>
               </td>
@@ -181,14 +181,14 @@
             <?php endforeach;?>
             <?php for($i = 0; $i < 3; $i++):?>
             <tr>
-              <td><?php echo html::select("team[]", $members, '', "class='form-control chosen'")?></td>
-              <td>
+              <td class='w-p20'><?php echo html::select("team[]", $members, '', "class='form-control chosen'")?></td>
+              <td class='w-p80'>
                 <div class='input-group'>
                   <span class='input-group-addon'><?php echo $lang->task->estimate?></span>
                   <?php echo html::input("teamEstimate[]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
-                  <span class='input-group-addon'><?php echo $lang->task->consumed?></span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->task->consumed?></span>
                   <?php echo html::input("teamConsumed[]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
-                  <span class='input-group-addon'><?php echo $lang->task->left?></span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->task->left?></span>
                   <?php echo html::input("teamLeft[]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
                 </div>
               </td>
