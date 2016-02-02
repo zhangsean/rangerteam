@@ -744,226 +744,229 @@ class packageModel extends model
      * @access public
      * @return array     the remove commands need executed manually.
      */
-     public function erasePackage($package)
-     {
-         $removeCommands = array();
+    public function erasePackage($package)
+    {
+        $removeCommands = array();
 
-         $this->dao->delete()->from(TABLE_PACKAGE)->where('code')->eq($package)->exec();
+        $this->dao->delete()->from(TABLE_PACKAGE)->where('code')->eq($package)->exec();
 
-         /* Remove the zip file. */
-         $packageFile = $this->getPackageFile($package);
-         if(!file_exists($packageFile)) return false;
-         if(file_exists($packageFile) and !@unlink($packageFile))
-         {
-             $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $packageFile" : "del $packageFile";
-         }
+        /* Remove the zip file. */
+        $packageFile = $this->getPackageFile($package);
+        if(!file_exists($packageFile)) return false;
+        if(file_exists($packageFile) and !@unlink($packageFile))
+        {
+            $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $packageFile" : "del $packageFile";
+        }
 
-         /* Remove the extracted files. */
-         $extractedDir = realpath("ext/$package");
-         if($extractedDir != '/' and !$this->classFile->removeDir($extractedDir))
-         {
-             $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $extractedDir" : "rmdir $extractedDir /s";
-         }
+        /* Remove the extracted files. */
+        $extractedDir = realpath("ext/$package");
+        if($extractedDir != '/' and !$this->classFile->removeDir($extractedDir))
+        {
+            $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $extractedDir" : "rmdir $extractedDir /s";
+        }
 
-         return $removeCommands;
-     }
+        return $removeCommands;
+    }
 
-     /**
-      * Judge need execute db install or not.
-      * 
-      * @param  string    $package 
-      * @param  string    $method 
-      * @access public
-      * @return bool
-      */
-     public function needExecuteDB($package, $method = 'install')
-     {
-         return file_exists($this->getDBFile($package, $method));
-     }
+    /**
+     * Judge need execute db install or not.
+     * 
+     * @param  string    $package 
+     * @param  string    $method 
+     * @access public
+     * @return bool
+     */
+    public function needExecuteDB($package, $method = 'install')
+    {
+        return file_exists($this->getDBFile($package, $method));
+    }
 
-     /**
-      * Install the db.
-      * 
-      * @param  int    $package 
-      * @access public
-      * @return object
-      */
-     public function executeDB($package, $method = 'install')
-     {
-         $return = new stdclass();
-         $return->result = 'ok';
-         $return->error  = '';
+    /**
+     * Install the db.
+     * 
+     * @param  int    $package 
+     * @access public
+     * @return object
+     */
+    public function executeDB($package, $method = 'install')
+    {
+        $return = new stdclass();
+        $return->result = 'ok';
+        $return->error  = '';
+        $ignoreCode     = '|1050|1060|1062|1091|1169|';
 
-         $dbFile = $this->getDBFile($package, $method);
-         if(!file_exists($dbFile)) return $return;
+        $dbFile = $this->getDBFile($package, $method);
+        if(!file_exists($dbFile)) return $return;
 
-         $sqls = file_get_contents($this->getDBFile($package, $method));
-         $sqls = explode(';', $sqls);
+        $sqls = file_get_contents($this->getDBFile($package, $method));
+        $sqls = explode(';', $sqls);
 
-         foreach($sqls as $sql)
-         {
-             $sql = trim($sql);
-             if(empty($sql)) continue;
+        foreach($sqls as $sql)
+        {
+            $sql = trim($sql);
+            if(empty($sql)) continue;
 
-             try
-             {
-                 $this->dbh->query($sql);
-             }
-             catch (PDOException $e) 
-             {
-                 $return->error .= '<p>' . $e->getMessage() . "<br />THE SQL IS: $sql</p>";
-             }
-         }
-         if($return->error) $return->result = 'fail';
-         return $return;
-     }
+            try
+            {
+                $this->dbh->query($sql);
+            }
+            catch (PDOException $e) 
+            {
+                $errorInfo = $e->errorInfo;
+                $errorCode = $errorInfo[1];
+                if(strpos($ignoreCode, "|$errorCode|") === false) $return->error .= '<p>' . $e->getMessage() . "<br />THE SQL IS: $sql</p>";
+            }
+        }
+        if($return->error) $return->result = 'fail';
+        return $return;
+    }
 
-     /**
-      * Backup db when uninstall package. 
-      * 
-      * @param  string    $package 
-      * @access public
-      * @return bool|string
-      */
-     public function backupDB($package)
-     {
-         $zdb = $this->app->loadClass('zdb');
+    /**
+     * Backup db when uninstall package. 
+     * 
+     * @param  string    $package 
+     * @access public
+     * @return bool|string
+     */
+    public function backupDB($package)
+    {
+        $zdb = $this->app->loadClass('zdb');
 
-         $sqls = file_get_contents($this->getDBFile($package, 'uninstall'));
-         $sqls = explode(';', $sqls);
+        $sqls = file_get_contents($this->getDBFile($package, 'uninstall'));
+        $sqls = explode(';', $sqls);
 
-         /* Get tables for backup. */
-         $backupTables = array();
-         foreach($sqls as $sql)
-         {
-             $sql = preg_replace('/IF EXISTS /i', '', trim($sql));
-             if(preg_match('/TABLE +`?([^` ]*)`?/i', $sql, $out))
-             {
-                 if(!empty($out[1])) $backupTables[$out[1]] = $out[1];
-             }
-         }
+        /* Get tables for backup. */
+        $backupTables = array();
+        foreach($sqls as $sql)
+        {
+            $sql = preg_replace('/IF EXISTS /i', '', trim($sql));
+            if(preg_match('/TABLE +`?([^` ]*)`?/i', $sql, $out))
+            {
+                if(!empty($out[1])) $backupTables[$out[1]] = $out[1];
+            }
+        }
 
-         /* Back up database. */
-         if($backupTables)
-         {
-             $backupFile = $this->app->getTmpRoot() . $package . '.' . date('Ymd') . '.sql';
-             $result     = $zdb->dump($backupFile, $backupTables);
-             if($result->result) return $backupFile;
-             return false; 
-         }
-         return false; 
-     }
+        /* Back up database. */
+        if($backupTables)
+        {
+            $backupFile = $this->app->getTmpRoot() . $package . '.' . date('Ymd') . '.sql';
+            $result     = $zdb->dump($backupFile, $backupTables);
+            if($result->result) return $backupFile;
+            return false; 
+        }
+        return false; 
+    }
 
-     /**
-      * Save the package to database.
-      * 
-      * @param  string    $package     the package code
-      * @param  string    $type          the package type
-      * @access public
-      * @return void
-      */
-     public function savePackage($package, $type)
-     {
-         $code      = $package;
-         $package = $this->getInfoFromPackage($package);
-         $package->status = 'available';
-         $package->code   = $code;
-         $package->type   = empty($type) ? $package->type : $type;
+    /**
+     * Save the package to database.
+     * 
+     * @param  string    $package     the package code
+     * @param  string    $type          the package type
+     * @access public
+     * @return void
+     */
+    public function savePackage($package, $type)
+    {
+        $code      = $package;
+        $package = $this->getInfoFromPackage($package);
+        $package->status = 'available';
+        $package->code   = $code;
+        $package->type   = empty($type) ? $package->type : $type;
 
-         $this->dao->replace(TABLE_PACKAGE)->data($package)->exec();
-     }
+        $this->dao->replace(TABLE_PACKAGE)->data($package)->exec();
+    }
 
-     /**
-      * Update an package.
-      * 
-      * @param  string    $package 
-      * @param  string    $status 
-      * @param  array     $files 
-      * @access public
-      * @return void
-      */
-     public function updatePackage($package, $data)
-     {
-         $data = (object)$data;
-         $basePath = $this->app->getBasePath();
-         $wwwRoot  = $this->app->getWwwRoot();
+    /**
+     * Update an package.
+     * 
+     * @param  string    $package 
+     * @param  string    $status 
+     * @param  array     $files 
+     * @access public
+     * @return void
+     */
+    public function updatePackage($package, $data)
+    {
+        $data = (object)$data;
+        $basePath = $this->app->getBasePath();
+        $wwwRoot  = $this->app->getWwwRoot();
 
-         if(isset($data->dirs))
-         {
-             if($data->dirs)
-             {
-                 foreach($data->dirs as $key => $dir)
-                 {
-                     $data->dirs[$key] = str_replace($basePath, '', $dir);
-                 }
-             }
-             $data->dirs = json_encode($data->dirs);
-         }
+        if(isset($data->dirs))
+        {
+            if($data->dirs)
+            {
+                foreach($data->dirs as $key => $dir)
+                {
+                    $data->dirs[$key] = str_replace($basePath, '', $dir);
+                }
+            }
+            $data->dirs = json_encode($data->dirs);
+        }
 
-         if(isset($data->files))
-         {
-             foreach($data->files as $fullFilePath => $md5)
-             {
-                 if(strpos($fullFilePath, $basePath) !== false) $relativeFilePath = str_replace($basePath, '', $fullFilePath);
-                 if(strpos($fullFilePath, $wwwRoot) !== false) $relativeFilePath = str_replace($wwwRoot, '', $fullFilePath);
-                 
-                 $data->files[$relativeFilePath] = $md5;
-                 unset($data->files[$fullFilePath]);
-             }
-             $data->files = json_encode($data->files);
-         }
-         return $this->dao->update(TABLE_PACKAGE)->data($data)->where('code')->eq($package)->exec();
-     }
+        if(isset($data->files))
+        {
+            foreach($data->files as $fullFilePath => $md5)
+            {
+                if(strpos($fullFilePath, $basePath) !== false) $relativeFilePath = str_replace($basePath, '', $fullFilePath);
+                if(strpos($fullFilePath, $wwwRoot) !== false) $relativeFilePath = str_replace($wwwRoot, '', $fullFilePath);
+                
+                $data->files[$relativeFilePath] = $md5;
+                unset($data->files[$fullFilePath]);
+            }
+            $data->files = json_encode($data->files);
+        }
+        return $this->dao->update(TABLE_PACKAGE)->data($data)->where('code')->eq($package)->exec();
+    }
 
-     /**
-      * Check depends package.
-      * 
-      * @param  string    $package 
-      * @access public
-      * @return array
-      */
-     public function checkDepends($package)
-     {
-         $result      = array();
-         $packageInfo = $this->dao->select('*')->from(TABLE_PACKAGE)->where('code')->eq($package)->fetch();
-         $dependsExts = $this->dao->select('*')->from(TABLE_PACKAGE)->where('depends')->like("%$package%")->andWhere('status')->ne('available')->fetchAll();
-         if($dependsExts)
-         {
-             foreach($dependsExts as $dependsExt)
-             {
-                 $depends = json_decode($dependsExt->depends, true);
-                 if($this->compare4Limit($packageInfo->version, $depends[$package])) $result[] = $dependsExt->name;
-             }
-         }
-         return $result;
-     }
+    /**
+     * Check depends package.
+     * 
+     * @param  string    $package 
+     * @access public
+     * @return array
+     */
+    public function checkDepends($package)
+    {
+        $result      = array();
+        $packageInfo = $this->dao->select('*')->from(TABLE_PACKAGE)->where('code')->eq($package)->fetch();
+        $dependsExts = $this->dao->select('*')->from(TABLE_PACKAGE)->where('depends')->like("%$package%")->andWhere('status')->ne('available')->fetchAll();
+        if($dependsExts)
+        {
+            foreach($dependsExts as $dependsExt)
+            {
+                $depends = json_decode($dependsExt->depends, true);
+                if($this->compare4Limit($packageInfo->version, $depends[$package])) $result[] = $dependsExt->name;
+            }
+        }
+        return $result;
+    }
 
-     /**
-      * Compare for limit data.
-      * 
-      * @param  string $version 
-      * @param  array  $limit 
-      * @param  string $type 
-      * @access public
-      * @return void
-      */
-     public function compare4Limit($version, $limit, $type = 'between')
-     {
-         $result = false;
-         if(empty($limit)) return true;
+    /**
+     * Compare for limit data.
+     * 
+     * @param  string $version 
+     * @param  array  $limit 
+     * @param  string $type 
+     * @access public
+     * @return void
+     */
+    public function compare4Limit($version, $limit, $type = 'between')
+    {
+        $result = false;
+        if(empty($limit)) return true;
 
-         if($limit == 'all')
-         {
-             $result = true;
-         }
-         else
-         {
-             if(!empty($limit['min']) and $version >= $limit['min']) $result = true;
-             if(!empty($limit['max']) and $version <= $limit['max']) $result = true;
-             if(!empty($limit['max']) and $version > $limit['max'] and $result) $result = false;
-         }
+        if($limit == 'all')
+        {
+            $result = true;
+        }
+        else
+        {
+            if(!empty($limit['min']) and $version >= $limit['min']) $result = true;
+            if(!empty($limit['max']) and $version <= $limit['max']) $result = true;
+            if(!empty($limit['max']) and $version > $limit['max'] and $result) $result = false;
+        }
 
-         if($type != 'between') return !$result;
-         return $result;
-     }
+        if($type != 'between') return !$result;
+        return $result;
+    }
 }
