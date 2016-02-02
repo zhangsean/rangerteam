@@ -82,7 +82,7 @@ class projectModel extends model
         {
             $projects = $this->dao->select('*')->from(TABLE_PROJECT)
                 ->where('deleted')->eq(0)
-                ->beginIF($status and $status != 'involved')->andWhere('status')->eq($status)->fi()
+                ->beginIF($status)->andWhere('status')->eq($status)->fi()
                 ->page($pager)
                 ->fetchAll('id');
         }
