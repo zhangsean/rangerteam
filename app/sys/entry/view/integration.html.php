@@ -23,6 +23,7 @@ include '../../common/view/header.html.php';
           <td class='w-p50'><?php echo html::radio('integration', $lang->entry->integrationList, $entry->integration);?></td>
         </tr>
         <tbody class="integration <?php echo $entry->integration ? '' : 'hide';?>">
+        <?php if(!$entry->zentao):?>
         <tr>
           <th><?php echo $lang->entry->logout;?></th>
           <td><?php echo html::input('logout', $entry->logout, "class='form-control' placeholder='{$lang->entry->note->logout}'");?></td>
@@ -33,6 +34,7 @@ include '../../common/view/header.html.php';
           <td><?php echo html::input('block', $entry->block, "class='form-control' placeholder='{$lang->entry->note->api}'");?></td>
           <td></td>
         </tr>
+        <?php endif;?>
         <tr>
           <th><?php echo $lang->entry->key;?></th>
           <td><?php echo html::input('key', $entry->key, "class='form-control' readonly='readonly'");?></td>

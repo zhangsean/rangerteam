@@ -211,16 +211,33 @@ class entry extends control
      */
     public function edit($code)
     {
+        $entry = $this->entry->getByCode($code);
+
         if(!empty($_POST))
         {
             if((!$this->post->buildin) and (strpos($this->post->login, '/') !== 0) and (!preg_match('/https?\:\/\//Ui', $this->post->login))) $this->send(array('result' => 'fail', 'message' => $this->lang->entry->error->url));
+
+            if($entry->zentao) 
+            {
+                /* Get zentao url. */
+                $loginUrl = $this->post->login;
+                if(strpos($loginUrl, '&') === false) $zentaoUrl = substr($loginUrl, 0, strrpos($loginUrl, '/') + 1);
+                if(strpos($loginUrl, '&') !== false) $zentaoUrl = substr($loginUrl, 0, strpos($loginUrl, '?'));
+
+                /* Get zentao config. */
+                $zentaoConfig = $this->loadModel('sso')->getZentaoServerConfig($zentaoUrl);
+                if(empty($zentaoConfig)) $this->send(array('result' => 'fail', 'message' => $this->lang->entry->error->zentaoUrl));
+
+                $_POST['login']  = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, "sso", "login", '', 'html', false);
+                $_POST['logout'] = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, "sso", "logout", '', 'html', false);
+                $_POST['block']  = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, "block", "main", '', 'html', false);
+            }
 
             $this->entry->update($code);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
             $this->send(array('result' => 'success', 'locate' => inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
         }
 
-        $entry = $this->entry->getByCode($code);
         if($entry->size != 'max')
         {
             $size = json_decode($entry->size);
