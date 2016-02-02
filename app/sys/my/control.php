@@ -103,7 +103,15 @@ class my extends control
 
         /* compute begin and end. */
         $today = helper::today();
-        if($begin == '') $begin = date('Y-m-d', strtotime("$today -1 days"));
+        if($begin == '')
+        {
+            $begin = date('Y-m-d', strtotime("$today -1 days"));
+            while($this->loadModel('attend', 'oa')->isWeekend($begin) or $this->loadModel('holiday', 'oa')->isHoliday($begin))
+            {
+                $begin = date('Y-m-d', strtotime("$begin -1 days")); 
+            }
+        }
+
         if($end == '') $end = date('Y-m-d', strtotime("$begin +7 days"));
         if(strtotime($begin) > strtotime($end)) $end = date('Y-m-d', strtotime("$begin +7 days"));
         $date = array();
