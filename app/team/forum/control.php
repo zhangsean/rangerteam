@@ -21,6 +21,7 @@ class forum extends control
     {
         $this->view->title  = $this->lang->forumHome;
         $this->view->boards = $this->forum->getBoards();
+        $this->view->users  = $this->loadModel('user')->getPairs('noempty, noclosed');
         if(empty($this->view->boards) && commonModel::hasPriv('tree', 'browse')) die(js::locate($this->createLink('tree', 'redirect', "type=forum")));
 
         $this->display();
