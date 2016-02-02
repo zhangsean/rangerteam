@@ -233,16 +233,34 @@ class block extends control
 
         $this->processParams();
 
-        $projects = $this->dao->select('*')->from(TABLE_PROJECT)
-            ->where('deleted')->eq(0)
-            ->andWhere('status')->eq(isset($this->params->status) ? $this->params->status : 'doing')
-            ->orderBy($this->params->orderBy)
-            ->limit($this->params->num)
-            ->fetchAll('id');
+        if($this->params->status == 'involved')
+        {
+            $projects = $this->dao->select('t1.*')->from(TABLE_PROJECT)->alias('t1')
+                ->leftJoin(TABLE_TEAM)->alias('t2')->on('t1.id=t2.id')
+                ->where('t1.deleted')->eq(0)
+                ->andWhere('t2.type')->eq('project')
+                ->andWhere('t2.account')->eq($this->app->user->account)
+                ->fetchAll('id');
+        }
+        else
+        {
+            $projects = $this->dao->select('*')->from(TABLE_PROJECT)
+                ->where('deleted')->eq(0)
+                ->andWhere('status')->eq(isset($this->params->status) ? $this->params->status : 'doing')
+                ->orderBy($this->params->orderBy)
+                ->limit($this->params->num)
+                ->fetchAll('id');
+        }
 
         /* Get task info of project. */
         foreach($projects as $project)
         {
+            if(!$this->loadModel('project')->checkPriv($project->id))
+            {
+                unset($projects[$project->id]);
+                continue;
+            }
+
             $tasks = $this->task->getList($project->id, null, 'id_desc', null, 'status');
 
             $left     = 0;

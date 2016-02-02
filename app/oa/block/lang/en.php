@@ -53,6 +53,7 @@ $lang->block->typeList->task['finishedBy'] = 'My finished';
 $lang->block->typeList->task['closedBy']   = 'My closed';
 $lang->block->typeList->task['canceledBy'] = 'My canceled';
 
+$lang->block->statusList->project['involved'] = 'Involved';
 $lang->block->statusList->project['doing']    = 'Doing';
 $lang->block->statusList->project['finished'] = 'Finished';
 $lang->block->statusList->project['suspend']  = 'Suspend';

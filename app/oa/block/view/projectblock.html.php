@@ -25,7 +25,7 @@
     <td><?php echo $project->wait;?></td>
     <td>
       <div class='progress' title="<?php echo $project->rate?>">
-        <div style="width: <?php echo $project->rate;?>" aria-valuemax='100' aria-valuemin='0' aria-valuenow="<?php echo $project->rate?>" role='progressbar' class='progress-bar progress-bar-danger'></div>
+        <div style="width: <?php echo $project->rate;?>" aria-valuemax='100' aria-valuemin='0' aria-valuenow="<?php echo $project->rate?>" role='progressbar' class='progress-bar progress-bar-success'></div>
       </div>
     </td>
   </tr>

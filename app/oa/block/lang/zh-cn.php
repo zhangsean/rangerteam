@@ -53,6 +53,7 @@ $lang->block->typeList->task['finishedBy'] = '由我完成';
 $lang->block->typeList->task['closedBy']   = '由我关闭';
 $lang->block->typeList->task['canceledBy'] = '由我取消';
 
+$lang->block->statusList->project['involved'] = '我参与的';
 $lang->block->statusList->project['doing']    = '进行中';
 $lang->block->statusList->project['finished'] = '已完成';
 $lang->block->statusList->project['suspend']  = '已挂起';

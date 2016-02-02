@@ -266,7 +266,7 @@ body[class*='dropdown-mode-'] .window-active .window-cover {display: block;}
 #modalContainer .min-win{display: none;}
 #desktop.modal-mode #modalContainer {display: block;}
 
-.progress{margin-bottom: 0;}
+.progress{margin-bottom: 0; border-radius: 0;}
 .block-task .actions{display: none;}
 
 #allEntriesBlock{padding: 10px;}
