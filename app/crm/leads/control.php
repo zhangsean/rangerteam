@@ -62,13 +62,13 @@ class leads extends control
         $this->config->leads->search['actionURL'] = $this->createLink('leads', 'browse', 'mode=bysearch');
         $this->search->setSearchParams($this->config->leads->search);
 
-        $this->view->title     = $this->lang->contact->list;
-        $this->view->mode      = $mode;
-        $this->view->origin    = $origin;
-        $this->view->status    = $status;
-        $this->view->contacts  = $contacts;
-        $this->view->pager     = $pager;
-        $this->view->orderBy   = $orderBy;
+        $this->view->title    = $this->lang->contact->list;
+        $this->view->mode     = $mode;
+        $this->view->origin   = $origin;
+        $this->view->status   = $status;
+        $this->view->contacts = $contacts;
+        $this->view->pager    = $pager;
+        $this->view->orderBy  = $orderBy;
         $this->display();
     }   
 

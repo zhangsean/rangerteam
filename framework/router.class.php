@@ -1626,13 +1626,17 @@ class router
      */
     public function shutdown()
     {
-        /* If debug on, save sql lines. */
-        if(!empty($this->config->debug)) $this->saveSQL();
+        /* If debug on, save logs. */
+        if(!empty($this->config->debug)) 
+        {
+            /* Save sql line. */
+            $this->saveSQL();
 
-        /* If any error occers, save it. */
-        if(!function_exists('error_get_last')) return;
-        $error = error_get_last();
-        if($error) $this->saveError($error['type'], $error['message'], $error['file'], $error['line']);
+            /* If any error occers, save it. */
+            if(!function_exists('error_get_last')) return;
+            $error = error_get_last();
+            if($error) $this->saveError($error['type'], $error['message'], $error['file'], $error['line']);
+        }
     }
 
     /**
@@ -1671,6 +1675,8 @@ class router
      */
     public function saveError($level, $message, $file, $line)
     {
+        if(empty($this->config->debug)) return true;
+
         /* Skip the error: Redefining already defined constructor. */
         if(strpos($message, 'Redefining') !== false) return true;
 
