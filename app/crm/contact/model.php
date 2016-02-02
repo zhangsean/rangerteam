@@ -242,10 +242,12 @@ class contactModel extends model
      */
     public function create($contact = null, $type = '')
     {
+        $now = helper::now();
         if(empty($contact))
         {
             $contact = fixer::input('post')
                 ->add('createdBy', $this->app->user->account)
+                ->add('createdDate', $now)
                 ->remove('newCustomer,type,size,status,level,name,files')
                 ->setIF($type == 'leads', 'status', 'wait')
                 ->setIF($type == 'leads', 'assignedTo', $this->app->user->account)
@@ -264,7 +266,7 @@ class contactModel extends model
                 $customer->desc        = $contact->desc;
                 $customer->assignedTo  = $this->app->user->account;
                 $customer->createdBy   = $this->app->user->account;
-                $customer->createdDate = helper::now();
+                $customer->createdDate = $now;
 
                 $this->dao->insert(TABLE_CONTACT)->data($contact)
                     ->autoCheck()
@@ -337,11 +339,10 @@ class contactModel extends model
     public function update($contactID)
     {
         $oldContact = $this->getByID($contactID);
-        $now        = helper::now();
 
         $contact = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
-            ->add('editedDate', $now)
+            ->add('editedDate', helper::now())
             ->setDefault('birthday', '0000-00-00')
             ->setIF($this->post->avatar == '', 'avatar', $oldContact->avatar)
             ->setIF($this->post->weibo == 'http://weibo.com/', 'weibo', '')

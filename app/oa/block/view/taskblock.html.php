@@ -10,7 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 ?>
-<table class='table table-hover table-condensed block-task'>
+<table class='table table-fixed table-hover table-condensed block-task'>
   <?php foreach($tasks as $id => $task):?>
   <?php
   if(strpos('createdBy,assignedTo,finishedBy', $type) !== false)
@@ -24,9 +24,9 @@
   ?>
   <?php $appid = ($this->get->app == 'sys' and isset($_GET['entry'])) ? "class='app-btn' data-id={$this->get->entry}" : ''?>
   <tr <?php echo $appid?>>
-    <td class='w-20px text-center'><span class='active pri pri-<?php echo $task->pri;?>'><?php echo $lang->task->priList[$task->pri];?></span></td>
-    <td> <?php echo html::a($this->createLink('oa.task', 'view', "taskID=$id"), $task->name);?></td>
-    <td class='w-60px'><?php echo $lang->task->statusList[$task->status];?></td>
+    <td class='w-30px text-center'><span class='active pri pri-<?php echo $task->pri;?>'><?php echo $lang->task->priList[$task->pri];?></span></td>
+    <td title='<?php echo $task->name;?>'> <?php echo html::a($this->createLink('oa.task', 'view', "taskID=$id"), $task->name);?></td>
+    <td class='w-50px'><?php echo $lang->task->statusList[$task->status];?></td>
     <?php if(strpos('createdBy,assignedTo,finishedBy', $type) !== false):?>
     <td class='actions w-50px'>
       <div class='dropdown'>

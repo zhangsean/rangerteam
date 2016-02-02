@@ -52,7 +52,7 @@
     <?php foreach($contacts as $contact):?>
     <tr class='text-center'>
       <td><?php echo $contact->id;?></td>
-      <td class='text-left'><?php echo html::a(inlink('view', "contactID=$contact->id"), $contact->realname);?></td>
+      <td class='text-left'><?php echo html::a(inlink('view', "contactID={$contact->id}&mode={$mode}&status={$status}"), $contact->realname);?></td>
       <?php if($mode == 'next'):?>
       <td class="text-left"><?php echo $contact->nextDate;?></td>
       <?php endif;?>
@@ -65,9 +65,9 @@
       <td class='operate'>
         <?php
         commonModel::printLink('leads', 'assign', "contactID=$contact->id", $lang->contact->assign, "data-toggle='modal'");
-        commonModel::printLink('action',  'createRecord', "objectType=contact&objectID={$contact->id}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt'");
+        commonModel::printLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt'");
         commonModel::printLink('address', 'browse', "objectType=contact&objectID=$contact->id", $lang->contact->address, "data-toggle='modal'");
-        commonModel::printLink('leads', 'edit', "contactID=$contact->id", $lang->edit);
+        commonModel::printLink('leads', 'edit', "contactID={$contact->id}&mode={$mode}&status={$status}", $lang->edit);
         commonModel::printLink('leads', 'transform', "contactID=$contact->id", $lang->confirm, "data-toggle='modal'");
         commonModel::printLink('leads', 'ignore', "contactID=$contact->id", $lang->ignore, "class='reload'");
         ?>

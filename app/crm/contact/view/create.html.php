@@ -102,10 +102,6 @@
               <td><?php echo html::select('level', $levelList, '', "class='form-control'");?></td>
             </tr>
             <tr>
-              <th><?php echo $lang->contact->createdDate;?></th>
-              <td><?php echo html::input('createdDate', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></td>
-            </tr>
-            <tr>
               <th><?php echo $lang->contact->desc;?></th>
               <td colspan='2'><?php echo html::textarea('desc', '', "rows='3' class='form-control'");?></td>
             </tr>

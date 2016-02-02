@@ -87,10 +87,6 @@
               <th><?php echo $lang->contact->gender;?></th>
               <td colspan='2'><?php unset($lang->genderList->u); echo html::radio('gender', $lang->genderList, $contact->gender);?></td>
             </tr>
-            <tr>
-              <th><?php echo $lang->contact->createdDate;?></th>
-              <td colspan='2'><?php echo html::input('createdDate', formatTime($contact->createdDate), "class='form-control form-datetime'");?></td>
-            </tr>
           </table>
         </div>
       </div>

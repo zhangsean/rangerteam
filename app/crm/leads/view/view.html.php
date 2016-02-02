@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <ul id='menuTitle'>
-  <li><?php commonModel::printLink('contact', 'browse', '', "<i class='icon-list-ul'></i> " . $lang->contact->list);?></li>
+  <li><?php commonModel::printLink('leads', 'browse', "mode={$mode}&status={$status}", "<i class='icon-list-ul'></i> " . $lang->contact->list);?></li>
   <li class='divider angle'></li>
   <li class='title'><?php echo $contact->realname;?></li>
 </ul>

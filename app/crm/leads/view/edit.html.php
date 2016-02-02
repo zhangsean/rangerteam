@@ -19,9 +19,9 @@
 <?php include '../../common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <ul id='menuTitle'>
-  <li><?php commonModel::printLink('contact', 'browse', '', $lang->contact->list);?></li>
+  <li><?php commonModel::printLink('leads', 'browse', "mode={$mode}&status={$status}", $lang->contact->list);?></li>
   <li class='divider angle'></li>
-  <li><?php commonModel::printLink('contact', 'view', "contactID={$contact->id}", $lang->contact->view);?></li>
+  <li><?php commonModel::printLink('leads', 'view', "contactID={$contact->id}&mode={$mode}&status={$status}", $lang->contact->view);?></li>
   <li class='divider angle'></li>
   <li class='title'><?php echo $lang->contact->edit?></li>
 </ul>
@@ -64,10 +64,6 @@
             <tr>
               <th><?php echo $lang->contact->gender;?></th>
               <td colspan='2'><?php unset($lang->genderList->u); echo html::radio('gender', $lang->genderList, $contact->gender);?></td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->contact->createdDate;?></th>
-              <td colspan='2'><?php echo html::input('createdDate', formatTime($contact->createdDate), "class='form-control form-datetime'");?></td>
             </tr>
           </table>
         </div>

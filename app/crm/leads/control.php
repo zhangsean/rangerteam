@@ -97,10 +97,12 @@ class leads extends control
      * Edit a contact.
      * 
      * @param  int    $contactID 
+     * @param  string $mode 
+     * @param  string $status 
      * @access public
      * @return void
      */
-    public function edit($contactID)
+    public function edit($contactID = 0, $mode = 'assignedTo', $status = 'wait')
     {
         $contact = $this->contact->getByID($contactID);
 
@@ -111,6 +113,8 @@ class leads extends control
         }
 
         $this->view->title      = $this->lang->contact->edit;
+        $this->view->mode       = $mode;
+        $this->view->status     = $status;
         $this->view->contact    = $contact;
         $this->view->modalWidth = 1000;
 
@@ -121,10 +125,12 @@ class leads extends control
      * View contact. 
      * 
      * @param  int    $contactID 
+     * @param  string $mode 
+     * @param  string $status 
      * @access public
      * @return void
      */
-    public function view($contactID, $status = 'normal')
+    public function view($contactID = 0, $mode = 'assignedTo', $status = 'wait')
     {
         $actionList = $this->loadModel('action')->getList('contact', $contactID);
         $actionIDList = array_keys($actionList);
@@ -136,6 +142,8 @@ class leads extends control
         }
 
         $this->view->title      = $this->lang->contact->view;
+        $this->view->mode       = $mode;
+        $this->view->status     = $status;
         $this->view->contact    = $this->contact->getByID($contactID, $status);
         $this->view->addresses  = $this->loadModel('address')->getList('contact', $contactID);
         $this->view->preAndNext = $this->loadModel('common', 'sys')->getPreAndNextObject('contact', $contactID); 
