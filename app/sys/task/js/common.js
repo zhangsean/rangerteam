@@ -32,6 +32,7 @@ $(function()
         $('#menu .nav li:first').after($('.addonMenu').html());
         $('.addonMenu').remove();
     }
+
     $('.switcher').on('click', function()
     {
         var url = $(this).attr('href');
@@ -54,7 +55,31 @@ $(function()
         })
         return false;
     });
+
+    $('.btn-move-up, .btn-move-down').click(function()
+    {
+        var $this = $(this);
+        if($this.hasClass('btn-move-up'))
+        {
+            $(this).parents('tr').prev().before($(this).parents('tr'));
+        }
+        else
+        {
+            $this.parents('tr').next().after($(this).parents('tr'));
+        }
+        $('.btn-move-up, .btn-move-down').removeClass('disabled').removeAttr('disabled');
+
+        adjustSortBtn();
+    });
+
+    adjustSortBtn();
 });
+
+function adjustSortBtn()
+{
+    $('.btn-move-up:first').addClass('disabled').attr('disabled', 'disabled');
+    $('.btn-move-down:last').addClass('disabled').attr('disabled', 'disabled');
+}
 
 function setComment()
 {

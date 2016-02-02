@@ -157,7 +157,7 @@
       </div>
     </div>
     <div class="modal fade modal-team" id="modalTeam">
-      <div class="modal-dialog">
+      <div class="modal-dialog" style='width: 700px'>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
           <h4 class="modal-title"><?php echo $lang->task->team?></h4>
@@ -166,8 +166,8 @@
           <table class='table table-form'>
             <?php foreach($task->team as $member):?>
             <tr>
-              <td class='w-p20'><?php echo html::select("team[]", $members, $member->account, "class='form-control chosen'")?></td>
-              <td class='w-p80'>
+              <td class='w-80px'><?php echo html::select("team[]", $members, $member->account, "class='form-control chosen'")?></td>
+              <td>
                 <div class='input-group'>
                   <span class='input-group-addon'><?php echo $lang->task->estimate?></span>
                   <?php echo html::input("teamEstimate[]", $member->estimate, "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
@@ -177,12 +177,16 @@
                   <?php echo html::input("teamLeft[]", $member->left, "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
                 </div>
               </td>
+              <td class='w-90px'>
+                <a href='javascript:;' class='btn btn-move-up btn-sm'><i class='icon-arrow-up'></i></a>
+                <a href='javascript:;' class='btn btn-move-down btn-sm'><i class='icon-arrow-down'></i></a>
+              </td>
             </tr>
             <?php endforeach;?>
             <?php for($i = 0; $i < 3; $i++):?>
             <tr>
-              <td class='w-p20'><?php echo html::select("team[]", $members, '', "class='form-control chosen'")?></td>
-              <td class='w-p80'>
+              <td class='w-80px'><?php echo html::select("team[]", $members, '', "class='form-control chosen'")?></td>
+              <td>
                 <div class='input-group'>
                   <span class='input-group-addon'><?php echo $lang->task->estimate?></span>
                   <?php echo html::input("teamEstimate[]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
@@ -191,6 +195,10 @@
                   <span class='input-group-addon fix-border'><?php echo $lang->task->left?></span>
                   <?php echo html::input("teamLeft[]", '', "class='form-control text-center' placeholder='{$lang->task->hour}'")?>
                 </div>
+              </td>
+              <td class='w-90px'>
+                <a href='javascript:;' class='btn btn-move-up btn-sm'><i class='icon-arrow-up'></i></a>
+                <a href='javascript:;' class='btn btn-move-down btn-sm'><i class='icon-arrow-down'></i></a>
               </td>
             </tr>
             <?php endfor;?>

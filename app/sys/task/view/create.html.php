@@ -88,12 +88,16 @@
           <table class='table-form'>
             <?php for($i = 0; $i < 6; $i++):?>
             <tr>
-              <td class='w-p70'><?php echo html::select("team[]", $members, '', "class='form-control chosen'")?></td>
-              <td class='w-p30'>
+              <td class='w-80px'><?php echo html::select("team[]", $members, '', "class='form-control chosen'")?></td>
+              <td>
                 <div class='input-group'>
                   <?php echo html::input("teamEstimate[]", '', "class='form-control text-center' placeholder='{$lang->task->estimateAB}'")?>
                   <span class='input-group-addon'><?php echo $lang->task->hour?></span>
                 </div>
+              </td>
+              <td class='w-90px'>
+                <a href='javascript:;' class='btn btn-move-up btn-sm'><i class='icon-arrow-up'></i></a>
+                <a href='javascript:;' class='btn btn-move-down btn-sm'><i class='icon-arrow-down'></i></a>
               </td>
             </tr>
             <?php endfor;?>
