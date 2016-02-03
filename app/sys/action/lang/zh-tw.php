@@ -101,6 +101,8 @@ $lang->action->desc->finishcontract        = '$date, 由 <strong>$actor</strong>
 $lang->action->desc->cancelcontract        = '$date, 由 <strong>$actor</strong> 取消合同：<strong>$extra</strong>。' . "\n";
 $lang->action->desc->hidden                = '$date, 由 <strong>$actor</strong> 隱藏。' . "\n";
 $lang->action->desc->undeleted             = '$date, 由 <strong>$actor</strong> 還原。' . "\n";
+$lang->action->desc->transform             = '$date, 由 <strong>$actor</strong> 轉換為聯繫人。' . "\n";
+$lang->action->desc->ignored               = '$date, 由 <strong>$actor</strong> 忽略。' . "\n";
 
 /* 用來顯示動態信息。*/
 $lang->action->label = new stdclass();
@@ -129,6 +131,8 @@ $lang->action->label->signed      = '簽約了';
 $lang->action->label->commited    = '提交了';
 $lang->action->label->revoked     = '撤銷了';
 $lang->action->label->forbidden   = '禁用了';
+$lang->action->label->transform   = '轉換了';
+$lang->action->label->ignore      = '忽略了';
 $lang->action->label->login       = '登錄系統';
 $lang->action->label->logout      = "退出登錄";
 
@@ -258,6 +262,7 @@ $lang->action->objectTypes['project']   = '項目';
 $lang->action->objectTypes['user']      = '用戶';
 $lang->action->objectTypes['resume']    = '履歷';
 $lang->action->objectTypes['leave']     = '請假';
+$lang->action->objectTypes['overtime']  = '加班';
 $lang->action->objectTypes['refund']    = '報銷';
 $lang->action->objectTypes['depositor'] = '賬戶';
 $lang->action->objectTypes['balance']   = '餘額';

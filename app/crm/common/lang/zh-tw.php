@@ -18,6 +18,7 @@ $lang->menu->crm->order     = '訂單|order|browse|';
 $lang->menu->crm->contract  = '合同|contract|browse|mode=unfinished';
 $lang->menu->crm->customer  = '客戶|customer|browse|';
 $lang->menu->crm->contact   = '聯繫人|contact|browse|';
+$lang->menu->crm->leads     = '名單|leads|browse|mode=assignedTo';
 $lang->menu->crm->product   = '產品|product|browse|';
 $lang->menu->crm->setting   = '設置|setting|lang|module=product&field=statusList';
 
@@ -64,6 +65,13 @@ $lang->contact->menu->today     = '今天聯繫|contact|browse|mode=today';
 $lang->contact->menu->tomorrow  = '明天聯繫|contact|browse|mode=tomorrow';
 $lang->contact->menu->thisweek  = '本週內聯繫|contact|browse|mode=thisweek';
 $lang->contact->menu->thismonth = '本月內聯繫|contact|browse|mode=thismonth';
+
+$lang->leads = new stdclass();
+$lang->leads->menu = new stdclass();
+$lang->leads->menu->assignedTo  = array('link' => '指派給我|leads|browse|mode=assignedTo', 'alias' => 'create');
+$lang->leads->menu->next        = '下次聯繫|leads|browse|mode=next';
+$lang->leads->menu->ignoredBy   = '由我忽略|leads|browse|mode=ignoredBy&status=ignore';
+$lang->leads->menu->public      = '公共名單|leads|browse|mode=all&status=ignore';
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();

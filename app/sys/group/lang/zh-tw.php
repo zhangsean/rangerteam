@@ -48,4 +48,8 @@ $lang->group->manageAll = '可瀏覽所有客戶和訂單';
 $lang->group->copyOptions['copyPriv'] = '複製權限';
 $lang->group->copyOptions['copyUser'] = '複製用戶';
 
+$lang->group->placeholder = new stdclass();
+$lang->group->placeholder->tree = '類目包括對區域、行業、收入科目、支出科目、論壇版塊、博客類目、部門的權限設置';
+$lang->group->placeholder->lang = '設置包括對產品狀態、產品綫、客戶類型、客戶規模、客戶級別、客戶狀態、貨幣設置、維護角色的權限設置';
+
 include (dirname(__FILE__) . '/resource.php');

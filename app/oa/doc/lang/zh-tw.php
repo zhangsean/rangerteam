@@ -47,6 +47,10 @@ $lang->doc->deleteLib      = '刪除文檔庫';
 $lang->doc->allProduct     = '所有產品';
 $lang->doc->allProject     = '所有項目';
 
+$lang->doc->private        = '設為私密';
+$lang->doc->users          = '授權用戶';
+$lang->doc->groups         = '授權分組';
+
 $lang->doc->systemLibs = array();
 //$lang->doc->systemLibs['product'] = '產品文檔庫';
 //$lang->doc->systemLibs['project'] = '項目文檔庫';
@@ -62,4 +66,5 @@ $lang->doc->errorEditSystemDoc = "系統文檔庫無需修改。";
 $lang->doc->placeholder = new stdclass();
 $lang->doc->placeholder->url = '相應的連結地址';
 
-$lang->doc->notFound = '該文檔不存在';
+$lang->doc->notFound    = '該文檔不存在';
+$lang->doc->libNotFound = '該文檔庫不存在';

@@ -9,9 +9,14 @@ $lang->attend->edited       = '已補錄';
 $lang->attend->leave        = '請假';
 $lang->attend->leaved       = '已請假';
 $lang->attend->trip         = '出差';
+$lang->attend->overtime     = '加班';
+$lang->attend->overtimed    = '已加班';
 $lang->attend->review       = '補錄審核';
 $lang->attend->settings     = '設置';
 $lang->attend->export       = '導出';
+$lang->attend->stat         = '統計';
+$lang->attend->saveStat     = '保存考勤統計';
+$lang->attend->exportStat   = '導出考勤統計表';
 $lang->attend->browseReview = '補錄列表';
 
 $lang->attend->id       = '編號';
@@ -34,6 +39,8 @@ $lang->attend->reason       = '原因';
 $lang->attend->reviewStatus = '補錄狀態';
 $lang->attend->reviewedBy   = '審核人';
 $lang->attend->reviewedDate = '審核時間';
+$lang->attend->deserveDays  = '應出勤天數';
+$lang->attend->actualDays   = '實際出勤天數';
 
 $lang->attend->statusList['normal']   = '正常';
 $lang->attend->statusList['late']     = '遲到';
@@ -81,6 +88,7 @@ $lang->attend->outFail    = '簽退失敗';
 $lang->attend->signInLimit  = '最晚簽到';
 $lang->attend->signOutLimit = '最早簽退';
 $lang->attend->workingDays  = '每週工作天數';
+$lang->attend->workingHours = '每天工作工時';
 $lang->attend->mustSignOut  = '必須簽退';
 
 $lang->attend->workingDaysList['5']  = "周一～周五";

@@ -18,3 +18,5 @@ $lang->blog->create = "添加博客";
 $lang->blog->edit   = "編輯博客";
 $lang->blog->view   = "查看博客";
 $lang->blog->delete = "刪除博客";
+
+$lang->blog->notFound = '該博客不存在';

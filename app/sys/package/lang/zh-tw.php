@@ -101,7 +101,7 @@ $lang->package->errorDownloadFailed          = '下載失敗，請重新下載�
 $lang->package->errorMd5Checking             = '下載檔案不完整，請重新下載。如果多次重試還不行，請嘗試手工下載，然後通過上傳功能上傳。';
 $lang->package->errorExtracted               = '包檔案<strong> %s </strong>解壓縮失敗，可能不是一個有效的zip檔案。錯誤信息如下：<br />%s';
 $lang->package->errorCheckIncompatible       = '該插件與然之版本不兼容，%s後可能無法使用。。<h3>您可以選擇 <a href="%s" class="loadInModal">強制%s</a> 或者 <a href="#" onclick=parent.location.href="%s">取消</a></h3>';
-$lang->package->errorFileConflicted          = '有以下檔案衝突：<br />%s <h3>您可以選擇 <a href="%s">覆蓋</a> 或者 <a href="#" onclick=parent.location.href="%s">取消</a></h3>';
+$lang->package->errorFileConflicted          = '有以下檔案衝突：<br />%s <h3>您可以選擇 <a href="%s" class="loadInModal">覆蓋</a> 或者 <a href="#" onclick=parent.location.href="%s">取消</a></h3>';
 $lang->package->errorPackageNotFound         = '包檔案 <strong>%s </strong>沒有找到，可能是因為自動下載失敗。您可以嘗試再次下載。';
 $lang->package->errorTargetPathNotWritable   = '目標路徑 <strong>%s </strong>不可寫。';
 $lang->package->errorTargetPathNotExists     = '目標路徑 <strong>%s </strong>不存在。';

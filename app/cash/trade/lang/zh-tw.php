@@ -24,7 +24,7 @@ $lang->trade->order       = '訂單';
 $lang->trade->contract    = '合同';
 $lang->trade->category    = '科目';
 $lang->trade->date        = '時間';
-$lang->trade->handlers    = '經辦人';
+$lang->trade->handlers    = '經手人';
 $lang->trade->dept        = '部門';
 $lang->trade->receipt     = '收款賬戶';
 $lang->trade->payment     = '付款賬戶';
@@ -58,8 +58,11 @@ $lang->trade->newTrader   = '新建';
 $lang->trade->import      = '導入';
 $lang->trade->export      = '導出';
 $lang->trade->showImport  = '導入確認';
-$lang->trade->report      = '報表';
 $lang->trade->fullYear    = '全年';
+
+$lang->trade->report = new stdclass();
+$lang->trade->report->common = '報表'; 
+$lang->trade->report->annual = '年度收支表'; 
 
 $lang->trade->typeList['in']          = '收入';
 $lang->trade->typeList['out']         = '支出';
@@ -145,7 +148,6 @@ $lang->trade->profit        = '盈';
 $lang->trade->loss          = '虧';
 $lang->trade->balance       = '收支平衡';
 $lang->trade->total         = '總計';
-$lang->trade->annualCaption = '年度收支表';
 
 $lang->trade->noTraderMatch = '沒有匹配到相應的商戶，點擊新建';
 $lang->trade->unique        = '今天已經有相同金額的賬目';

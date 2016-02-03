@@ -9,14 +9,15 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->setting->common = '自定義';
+$lang->setting->common = '設置';
 $lang->setting->reset  = '恢復預設';
 $lang->setting->key    = '鍵';
 $lang->setting->value  = '值';
 
-$lang->setting->lang = '自定義';
+$lang->setting->lang = '設置維護';
 
 $lang->setting->customerPool = '客戶池設置';
+$lang->setting->modules      = '功能模組設置';
 
 $lang->setting->module = new stdClass();
 $lang->setting->module->user     = '員工角色';
@@ -71,3 +72,8 @@ $lang->setting->placeholder->lineList->value = '簡短描述';
 
 $lang->setting->reserveDays    = '進入客戶池（天）';
 $lang->setting->reserveDaysTip = '在設定天數內沒有更新客戶信息（未簽約客戶），該客戶將自動進入客戶池。值設為0時禁用此功能。';
+
+$lang->setting->moduleList['attend'] = '考勤';
+$lang->setting->moduleList['trip']   = '出差';
+$lang->setting->moduleList['leave']  = '請假';
+$lang->setting->moduleList['refund'] = '報銷';

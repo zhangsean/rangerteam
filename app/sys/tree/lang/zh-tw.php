@@ -39,6 +39,8 @@ $lang->category->desc     = '描述';
 $lang->category->keywords = '關鍵詞';
 $lang->category->children = '子類目';
 $lang->category->rights   = '權限';
+$lang->category->users    = '授權用戶';
+$lang->category->groups   = '授權分組';
 
 /* Lang items for area. */
 $lang->area = new stdclass();
@@ -96,6 +98,8 @@ $lang->board->keywords   = '關鍵詞';
 $lang->board->children   = "子版塊";
 $lang->board->readonly   = '訪問權限';
 $lang->board->moderators = '版主';
+$lang->board->users      = '授權用戶';
+$lang->board->groups     = '授權分組';
 
 $lang->board->readonlyList[0] = '開放';
 $lang->board->readonlyList[1] = '只讀';
