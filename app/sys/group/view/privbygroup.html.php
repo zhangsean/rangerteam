@@ -49,14 +49,13 @@
           </th>
           <?php endif;?>
           <th class='text-right w-120px'>
-            <?php $title = '';?>
-            <?php if($moduleName == 'tree')    $title = $lang->group->placeholder->tree;?>
-            <?php if($moduleName == 'setting') $title = $lang->group->placeholder->lang;?>
-            <label class="checkbox" title="<?php echo $title;?>">
-              <?php if($moduleName == 'tree' or $moduleName == 'setting'):?>
-              <span class='required'></span>
-              <?php endif;?>
-              <?php
+            <label class="checkbox">
+              <?php 
+              if($moduleName == 'tree' or $moduleName == 'setting')
+              {
+                  $title = $moduleName == 'tree' ? $lang->group->placeholder->tree : $lang->group->placeholder->lang;
+                  echo "<a href='#' class='tips' data-original-title='{$title}' data-toggle='tooltip' data-placement='right'><i class='icon-question-sign'> </i></a>";
+              }
               if($moduleName == 'user')
               {
                   echo $this->lang->user->colleagueMenu;

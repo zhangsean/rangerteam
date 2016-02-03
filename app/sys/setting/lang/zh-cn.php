@@ -14,7 +14,7 @@ $lang->setting->reset  = '恢复默认';
 $lang->setting->key    = '键';
 $lang->setting->value  = '值';
 
-$lang->setting->lang = '自定义';
+$lang->setting->lang = '设置维护';
 
 $lang->setting->customerPool = '客户池设置';
 $lang->setting->modules      = '功能模块设置';
