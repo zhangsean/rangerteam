@@ -134,4 +134,17 @@ $(document).ready(function()
     if($('.current').offset().top >= $(window).scrollTop() + $(window).height()) $(window).scrollTop($('.current').offset().top);
 
     fixTableHeader();
+
+    var gap  = $('.calendar header').offset().top - $('#mainNavbar').outerHeight();
+    $(window).scroll(function()
+    {
+        if($(window).scrollTop() > gap)
+        {
+            $('.calendar header').addClass('fixed-date');
+        }
+        else
+        {
+            $('.calendar header').removeClass('fixed-date');
+        }
+    });
 });

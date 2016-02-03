@@ -27,3 +27,8 @@
 .hide-side .trash {right: 50px;}
 .trash:hover {background: #f0f0f0;}
 .trash .icon{font-size: 30px;}
+
+.calendar-views{padding-top: 43px;}
+.calendar header{position: fixed; top: 100px;}
+.calendar header.fixed-date{top: 82px; background: #f1f1f1; border: 1px solid #f1f1f1; z-index:10;}
+#fixedHeader {top: 116px !important;}
