@@ -15,6 +15,10 @@
 .header {height: 10%;}
 .AM {height: 39%;}
 .PM {height: 39%;}
+.col-p8 {width: 8%;}
+.col-p137 {width: 13.7%;}
+.col-p145 {width: 14.5%;}
+.col-p158 {width: 15.8%;}
 .status {height: 13%;}
 .calendar {width: 100%; height: 100%; text-align: center;}
 .calendar th {text-align: center; color: gray;}
@@ -41,12 +45,38 @@
 <table class='calendar'>
   <tr class='header'>
     <th class='w-p5'></th>
+    <?php 
+        $sunTodo = '';
+        $satTodo = '';
+        foreach($dateList as $d)
+        {
+            if(date('w', $d) == 0) $sunTodo = $todos[date('Y-m-d', $d)];
+            if(date('w', $d) == 6) $satTodo = $todos[date('Y-m-d', $d)];
+        }
+    ?>
     <?php foreach($dateList as $d):?>
-    <?php $dStr  = date('Y-m-d', $d);?>
-    <?php $week  = date('w', $d);?>
-    <?php $width = ($week == 0 || $week == 6) ? 'w-p10' : 'w-p15';?>
-    <?php $class = $dStr == $date ? 'today' : '';?>
-      <th class='<?php echo $width . ' ' . $class?>' data-date='<?php echo $dStr?>'><?php echo zget($this->lang->datepicker->abbrDayNames, date('w', $d))?></th>
+    <?php 
+        $dStr  = date('Y-m-d', $d);
+        $week  = date('w', $d);
+        if(empty($sunTodo) && empty($satTodo))
+        {
+            $width = ($week == 0 || $week == 6) ? 'col-p8' : 'col-p158';
+        }
+        elseif(!empty($sunTodo) && !empty($satTodo))
+        {
+            $width = 'col-p137';
+        }
+        elseif(!empty($sunTodo))
+        {
+            $width = $week == 6 ? 'col-p8' : 'col-p145';
+        }
+        else
+        {
+            $width = $week == 0 ? 'col-p8' : 'col-p145';
+        }
+        $class = $dStr == $date ? 'today' : '';
+    ?>
+    <th class='<?php echo $width . ' ' . $class?>' data-date='<?php echo $dStr?>'><?php echo zget($this->lang->datepicker->abbrDayNames, date('w', $d))?></th>
     <?php endforeach;?>
   </tr>
   <tr class='AM'>

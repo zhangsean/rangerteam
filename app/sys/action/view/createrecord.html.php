@@ -27,7 +27,12 @@
             <select id='contact' name='contact' class='form-control chosen'>
               <option></option>
               <?php foreach($contacts as $contact):?>
-              <option value='<?php echo $contact->id;?>' data-phone='<?php echo $contact->phone . $lang->slash . $contact->mobile;?>'><?php echo $contact->realname;?></option>
+              <?php 
+                  $phone  = $contact->phone;
+                  $mobile = $contact->mobile;
+                  $phone  = empty($phone) ? $mobile : (empty($mobile) ? $phone : $phone . $lang->slash . $mobile);
+              ?>
+              <option value='<?php echo $contact->id;?>' data-phone='<?php echo $phone;?>'><?php echo $contact->realname;?></option>
               <?php endforeach;?>
             </select>
             <?php echo html::input('realname', '', "class='form-control' style='display:none'");?>

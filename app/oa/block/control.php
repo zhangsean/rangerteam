@@ -295,8 +295,8 @@ class block extends control
     public function printAttendBlock()
     {
         $this->loadModel('attend', 'oa');
-        $date      = date('Y-m-d');
-        $dateTime  = strtotime($date);
+        $date     = date('Y-m-d');
+        $dateTime = strtotime($date);
         if($this->config->attend->workingDays > 7)
         {
             $startDate = date('w', $dateTime) == 0 ? date('Y-m-d', $dateTime) : date('Y-m-d', strtotime("last Sunday $date"));
@@ -307,7 +307,7 @@ class block extends control
             $startDate = date('w', $dateTime) == 1 ? date('Y-m-d', $dateTime) : date('Y-m-d', strtotime("last Monday $date"));
             $endDate   = date('Y-m-d', strtotime("next Sunday $startDate"));
         }
-        $attends   = $this->attend->getByAccount($this->app->user->account, $startDate, $endDate);
+        $attends = $this->attend->getByAccount($this->app->user->account, $startDate, $endDate);
 
         $dateLimit = array();
         $dateLimit['begin'] = $startDate;
