@@ -82,6 +82,27 @@ class leaveModel extends model
     }
 
     /**
+     * Get list by date.
+     * 
+     * @param  string    $date 
+     * @param  string    $account 
+     * @access public
+     * @return array
+     */
+    public function getListByDate($date, $account)
+    {
+        $begin = strtolower($date['begin']);
+        $end   = strtolower($date['end']);
+
+        return $this->dao->select('*')->from(TABLE_LEAVE)
+            ->where('status')->eq('pass')
+            ->andWhere('createdBy')->eq($account)
+            ->andWhere('begin')->ge($begin)
+            ->andWhere('end')->le($end)
+            ->fetchAll();
+    }
+
+    /**
      * Create a leave.
      * 
      * @access public

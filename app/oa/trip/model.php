@@ -78,6 +78,26 @@ class tripModel extends model
     }
 
     /**
+     * Get list by date.
+     * 
+     * @param  int    $date 
+     * @param  int    $account 
+     * @access public
+     * @return void
+     */
+    public function getListByDate($date, $account)
+    {
+        $begin = strtolower($date['begin']);
+        $end   = strtolower($date['end']);
+
+        return $this->dao->select('*')->from(TABLE_TRIP)
+            ->where('createdBy')->eq($account)
+            ->andWhere('begin')->ge($begin)
+            ->andWhere('end')->le($end)
+            ->fetchAll();
+    }
+
+    /**
      * Create a trip.
      * 
      * @access public

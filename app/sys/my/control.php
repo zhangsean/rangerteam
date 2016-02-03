@@ -131,10 +131,54 @@ class my extends control
             $accountList[] = $account;
         }
 
-        $todoList = array();
+        $todoList   = array();
         foreach($accountList as $user)
         {
             $todos = $this->todo->getList('self', $user, $date);
+
+            $leaves = $this->loadModel('leave', 'oa')->getListByDate($date, $user);
+            $trips  = $this->loadModel('trip', 'oa')->getListByDate($date, $user);
+            foreach($leaves as $leave)
+            {
+                $leaveDates = range(strtotime($leave->begin), strtotime($leave->end), 60*60*24);
+                foreach($leaveDates as $leaveDate)
+                {
+                    $leaveDate = date('Y-m-d', $leaveDate);
+
+                    $data = new stdclass();
+                    $data->id      = 'leave' . $leaveDate;
+                    $data->name    = $this->lang->leave->common;
+                    $data->type    = 'leave';
+                    $data->date    = $leaveDate;
+                    $data->desc    = $leave->desc;
+                    $data->start   = strtotime($leaveDate) * 1000;
+                    $data->end     = strtotime($leaveDate) * 1000;
+                    $data->account = $leave->createdBy;
+                    $data->status  = $leaveDate > helper::today() ? 'wait' : 'done';
+                    $todos[] = $data;
+                }
+            }
+
+            foreach($trips as $trip)
+            {
+                $tripDates = range(strtotime($trip->begin), strtotime($trip->end), 60*60*24);
+                foreach($tripDates as $tripDate)
+                {
+                    $tripDate = date('Y-m-d', $tripDate);
+
+                    $data = new stdclass();
+                    $data->id      = 'trip' . $tripDate;
+                    $data->name    = $this->lang->trip->common . $this->lang->minus . $trip->name;
+                    $data->type    = 'trip';
+                    $data->date    = $tripDate;
+                    $data->desc    = $trip->desc;
+                    $data->start   = strtotime($tripDate) * 1000;
+                    $data->end     = strtotime($tripDate) * 1000;
+                    $data->account = $trip->createdBy;
+                    $data->status  = $tripDate > helper::today() ? 'wait' : 'done';
+                    $todos[] = $data;
+                }
+            }
             $todoList[$user] = $todos;
         }
 

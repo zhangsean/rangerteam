@@ -371,11 +371,6 @@ class todoModel extends model
         $dateLimit['begin'] = date('Y-m-01', strtotime($date));
         $dateLimit['end']   = date('Y-m-d', strtotime("{$dateLimit['begin']} +1 month"));
 
-        $year  = substr($date, 0, 4);
-        $month = substr($date, 4, 2);
-        $leaves = $this->loadModel('leave', 'oa')->getList($type = 'personal', $year, $month, $this->app->user->account, '', 'pass');
-        $trips  = $this->loadModel('trip', 'oa')->getList($year, $month, $this->app->user->account);
-
         $calendars    = $this->lang->todo->typeList;
         $todos        = $this->getList('self', $this->app->user->account, $dateLimit);
         $calendarList = array();
@@ -415,55 +410,6 @@ class todoModel extends model
             $todoList[] = $data;
         }
 
-        foreach($leaves as $leave)
-        {
-            $dates = range(strtotime($leave->begin), strtotime($leave->end), 60*60*24);
-            foreach($dates as $date)
-            {
-                $date = date('Y-m-d', $date);
-
-                $data = new stdclass();
-                $data->id       = 'leave' . $date;
-                $data->title    = $this->lang->leave->common;
-                $data->desc     = $leave->desc;
-                $data->allDay   = 1;
-                $data->start    = strtotime($date) * 1000;
-                $data->end      = strtotime($date) * 1000;
-                $data->calendar = 'leave';
-
-                $data->data = new stdclass();
-                $data->data->account    = $leave->createdBy;
-                $data->data->status     = $date > helper::today() ? 'wait' : 'done';
-                $data->data->assignedTo = $leave->createdBy;
-                
-                $todoList[] = $data;
-            }
-        }
-
-        foreach($trips as $trip)
-        {
-            $dates = range(strtotime($trip->begin), strtotime($trip->end), 60*60*24);
-            foreach($dates as $date)
-            {
-                $date = date('Y-m-d', $date);
-
-                $data = new stdclass();
-                $data->id       = 'trip' . $date;
-                $data->title    = $this->lang->trip->common . $this->lang->minus . $trip->name;
-                $data->desc     = $trip->desc;
-                $data->allDay   = 1;
-                $data->start    = strtotime($date) * 1000;
-                $data->end      = strtotime($date) * 1000;
-                $data->calendar = 'trip';
-
-                $data->data = new stdclass();
-                $data->data->account    = $trip->createdBy;
-                $data->data->status     = $date > helper::today() ? 'wait' : 'done';
-                $data->data->assignedTo = $trip->createdBy;
-
-                $todoList[] = $data;
-            }
-        }
 
         $data = new stdclass();
         $data->calendars = $calendarList;
