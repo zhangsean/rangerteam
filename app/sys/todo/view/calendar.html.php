@@ -226,12 +226,12 @@ v.settings.display = function(event)
         if(typeof(e.data.assignedBy) != 'undefined' && e.data.assignedBy != '' && e.data.assignedBy != v.account && e.data.assignedTo == v.account)
         {
             var eventObj = $('.events .event[data-id=' + e.id + ']');
-            eventObj.prepend("<div><?php echo $lang->by;?>" + v.users[e.data.assignedBy] + "<?php echo $lang->assign;?><\/div>");
+            eventObj.prepend("<span title='<?php echo $lang->todo->assignedBy;?>' class='assign'>" + v.users[e.data.assignedBy] + "<\/span>");
         }
         if(e.data.assignedTo != '' && e.data.assignedTo != v.account)
         {
             var eventObj = $('.events .event[data-id=' + e.id + ']');
-            eventObj.prepend("<div><?php echo $lang->todo->assignedTo;?>" + v.users[e.data.assignedTo] + "<\/div>");
+            eventObj.prepend("<span title='<?php echo $lang->todo->assignedTo;?>' class='assign'>" + v.users[e.data.assignedTo] + "<\/span>");
             eventObj.css('background-color', '#808080');
         }
         if(e.data.status == 'done' || e.data.status == 'closed')
