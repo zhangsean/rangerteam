@@ -423,6 +423,7 @@ class todoModel extends model
                 $date = date('Y-m-d', $date);
 
                 $data = new stdclass();
+                $data->id       = 'leave' . $date;
                 $data->title    = $this->lang->leave->common;
                 $data->desc     = $leave->desc;
                 $data->allDay   = 1;
@@ -447,6 +448,7 @@ class todoModel extends model
                 $date = date('Y-m-d', $date);
 
                 $data = new stdclass();
+                $data->id       = 'trip' . $date;
                 $data->title    = $this->lang->trip->common . $this->lang->minus . $trip->name;
                 $data->desc     = $trip->desc;
                 $data->allDay   = 1;
