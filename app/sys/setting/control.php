@@ -133,7 +133,7 @@ class setting extends control
 
             $this->setting->setItems("system.{$app}.setting", $setting);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('modules')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('modules', "app=$app")));
         }
 
         $this->view->title = $this->lang->setting->modules;
