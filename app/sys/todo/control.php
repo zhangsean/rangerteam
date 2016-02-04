@@ -324,6 +324,7 @@ class todo extends control
         $todo = $this->todo->getById($todoID);
         $this->checkPriv($todo, 'finish', 'json');
         if(strpos('done,closed', $todo->status) === false) $this->todo->finish($todoID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
         if($todo->type == 'task') 
         {

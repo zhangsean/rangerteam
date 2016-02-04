@@ -35,10 +35,6 @@ $(document).ready(function()
     {
         $(this).prop('href', '');
         finishTodo($(this).data('id'));
-
-        /* close model if in calendar page. */
-        var uc = window['updateCalendar'];
-        location.reload();
         return false;
     });
 

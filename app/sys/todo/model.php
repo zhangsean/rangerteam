@@ -189,8 +189,9 @@ class todoModel extends model
 
         $this->dao->update(TABLE_TODO)->data($data)->where('id')->eq((int)$todoID)->exec();
 
-        $this->loadModel('action')->create('todo', $todoID, 'finished', '', 'done');
-        return true;
+        if(!dao::isError()) $this->loadModel('action')->create('todo', $todoID, 'finished', '', 'done');
+
+        return dao::isError();
     }
 
     /**
