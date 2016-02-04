@@ -18,3 +18,5 @@ $lang->blog->create = "Create";
 $lang->blog->edit   = "Edit";
 $lang->blog->view   = "View";
 $lang->blog->delete = "Delete";
+
+$lang->blog->notFound = 'This blog is not found.';

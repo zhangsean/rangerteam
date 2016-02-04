@@ -213,11 +213,6 @@ $lang->menu->sys->entry     = 'App|entry|admin|';
 $lang->menu->sys->system    = 'System|mail|admin|';
 $lang->menu->sys->package   = 'Extension|package|browse|';
 
-$lang->setting->moduleList['attend'] = 'Attend';
-$lang->setting->moduleList['trip']   = 'Trip';
-$lang->setting->moduleList['leave']  = 'Leave';
-$lang->setting->moduleList['refund'] = 'Refund';
-
 $lang->message = new stdclass(); 
 $lang->blog    = new stdclass(); 
 $lang->group   = new stdclass(); 

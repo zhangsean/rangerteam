@@ -14,7 +14,7 @@ $lang->setting->reset  = '恢復預設';
 $lang->setting->key    = '鍵';
 $lang->setting->value  = '值';
 
-$lang->setting->lang = '設置維護';
+$lang->setting->lang = '保存設置';
 
 $lang->setting->customerPool = '客戶池設置';
 $lang->setting->modules      = '功能模組設置';

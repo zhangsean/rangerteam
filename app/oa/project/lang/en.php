@@ -30,6 +30,7 @@ $lang->project->search     = 'Search';
 $lang->project->import     = 'Import';
 $lang->project->importTask = 'Import task';
 $lang->project->role       = 'Role';
+$lang->project->project    = 'Project';
 
 $lang->project->id          = 'ID';
 $lang->project->name        = 'Name';

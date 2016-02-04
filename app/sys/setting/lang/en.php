@@ -72,3 +72,8 @@ $lang->setting->placeholder->lineList->value = 'Brief description';
 
 $lang->setting->reserveDays    = 'Into customer pool days';
 $lang->setting->reserveDaysTip = "System will move customer into pool if hasn't update anything of customer's info in this setting days. This function will disabled if it is '0' days.";
+
+$lang->setting->moduleList['attend'] = 'Attend';
+$lang->setting->moduleList['trip']   = 'Trip';
+$lang->setting->moduleList['leave']  = 'Leave';
+$lang->setting->moduleList['refund'] = 'Refund';

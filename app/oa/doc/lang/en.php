@@ -47,6 +47,10 @@ $lang->doc->deleteLib      = 'Delete library';
 $lang->doc->allProduct     = 'All products';
 $lang->doc->allProject     = 'All projects';
 
+$lang->doc->private        = 'Private';
+$lang->doc->users          = 'Users';
+$lang->doc->groups         = 'Groups';
+
 $lang->doc->systemLibs = array();
 //$lang->doc->systemLibs['product'] = 'Product doc';
 //$lang->doc->systemLibs['project'] = 'Project doc';
@@ -62,4 +66,6 @@ $lang->doc->errorEditSystemDoc = "System doc library needn't edit.";
 $lang->doc->placeholder = new stdclass();
 $lang->doc->placeholder->url = 'url';
 
-$lang->doc->notFound = 'The document does not exist';
+$lang->doc->notFound    = 'The document does not exist';
+$lang->doc->libNotFound = 'The document library does not exist';
+$lang->doc->libNotFound = '该文档库不存在';

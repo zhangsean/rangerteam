@@ -19,7 +19,6 @@ $lang->menu->oa->announce  = 'Announce|announce|index|';
 $lang->menu->oa->doc       = 'Document|doc|index|';
 $lang->menu->oa->attend    = 'Attendance|attend|personal|';
 $lang->menu->oa->leave     = 'Leave|leave|personal|';
-$lang->menu->oa->overtime  = 'Overtime|overtime|personal|';
 $lang->menu->oa->trip      = 'Trip|trip|personal|';
 $lang->menu->oa->refund    = 'Refund|refund|personal|';
 $lang->menu->oa->setting   = 'Setting|module|app=oa';

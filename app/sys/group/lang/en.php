@@ -48,4 +48,8 @@ $lang->group->manageAll = 'View all customers and orders';
 $lang->group->copyOptions['copyPriv'] = 'Copy priviledge';
 $lang->group->copyOptions['copyUser'] = 'Copy user';
 
+$lang->group->placeholder = new stdclass();
+$lang->group->placeholder->tree = 'Including area,industry,income and expense,forum board,blog category, department';
+$lang->group->placeholder->lang = 'Including product status,product line,customer type,customer size,customer level,customer status,currency and role';
+
 include (dirname(__FILE__) . '/resource.php');
