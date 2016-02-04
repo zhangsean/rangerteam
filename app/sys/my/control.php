@@ -106,14 +106,24 @@ class my extends control
         if($begin == '')
         {
             $begin = date('Y-m-d', strtotime("$today -1 days"));
-            while($this->loadModel('attend', 'oa')->isWeekend($begin) or $this->loadModel('holiday', 'oa')->isHoliday($begin))
+            $beginTodos = $this->dao->select('*')->from(TABLE_TODO)->where('date')->eq($begin)->fetchAll();
+            while(($this->loadModel('attend', 'oa')->isWeekend($begin) or $this->loadModel('holiday', 'oa')->isHoliday($begin)) and empty($beginTodos))
             {
                 $begin = date('Y-m-d', strtotime("$begin -1 days")); 
             }
-        }
 
-        if($end == '') $end = date('Y-m-d', strtotime("$begin +7 days"));
-        if(strtotime($begin) > strtotime($end)) $end = date('Y-m-d', strtotime("$begin +7 days"));
+            if($end == '') $end = date('Y-m-d', strtotime("$today +6 days"));
+            if(strtotime($begin) > strtotime($end)) $end = date('Y-m-d', strtotime("$begin +6 days"));
+
+            $dateList = range(strtotime($today), strtotime($end), 86400);
+            array_unshift($dateList, strtotime($begin));
+        }
+        else
+        {
+            if($end == '') $end = date('Y-m-d', strtotime("$begin +7 days"));
+            if(strtotime($begin) > strtotime($end)) $end = date('Y-m-d', strtotime("$begin +7 days"));
+            $dateList = range(strtotime($begin), strtotime($end), 86400);
+        }
         $date = array();
         $date['begin'] = date('Y-m-d', strtotime($begin));
         $date['end']   = date('Y-m-d', strtotime($end));
@@ -196,7 +206,7 @@ class my extends control
         $this->view->deptList = $deptList;
         $this->view->users    = $this->loadModel('user')->getPairs('nodeleted,noclosed');
         $this->view->userDept = $this->dao->select('account,dept')->from(TABLE_USER)->fetchPairs();
-        $this->view->dateList = range(strtotime($begin), strtotime($end), 86400);
+        $this->view->dateList = $dateList;
         $this->display();
     }
 
