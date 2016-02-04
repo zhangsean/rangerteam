@@ -18,7 +18,7 @@ $lang->menu->team->forum     = 'Forum|forum|index|';
 $lang->menu->team->blog      = 'Blog|blog|index|';
 $lang->menu->team->user      = 'Colleague|user|colleague|';
 $lang->menu->team->company   = 'Company|company|index|';
-$lang->menu->team->setting   = 'Setting|tree|browse|type=forum|';
+$lang->menu->team->setting   = 'Settings|tree|browse|type=forum|';
 
 /* Menu of forum module. */
 $lang->forum = new stdclass();

@@ -21,7 +21,7 @@ $lang->menu->oa->attend    = 'Attendance|attend|personal|';
 $lang->menu->oa->leave     = 'Leave|leave|personal|';
 $lang->menu->oa->trip      = 'Trip|trip|personal|';
 $lang->menu->oa->refund    = 'Refund|refund|personal|';
-$lang->menu->oa->setting   = 'Setting|module|app=oa';
+$lang->menu->oa->setting   = 'Settings|setting|module|app=oa';
 
 $lang->dashboard = new stdclass();
 
