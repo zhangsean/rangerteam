@@ -492,7 +492,12 @@ class taskModel extends model
                 {
                     $task->estimate = $estimate;
                     $task->left     = $left;
-                    if(!isset($team[$task->assignedTo]))
+                    if($oldTask->status == 'wait')
+                    {
+                        $firstMember = reset($team);
+                        $task->assignedTo = $firstMember->account;
+                    }
+                    elseif(!isset($team[$task->assignedTo]))
                     {
                         $firstMember = reset($team);
                         $task->assignedTo = $firstMember->account;

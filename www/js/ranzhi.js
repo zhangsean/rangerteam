@@ -770,10 +770,10 @@ function fixTableHeader()
 
         for (var i = headers.length - 1; i >= 0; i--)
         {
-            $(headers[i]).width($(tHeaders[i]).width());
+            $(headers[i]).css('width', $(tHeaders[i]).width() + 1);
         };
 
-        $('#fixedHeader').css({top: navHeight, left: tHead.offset().left, width: table.width()});
+        $('#fixedHeader').css({top: navHeight, left: tHead.offset().left - 1, width: table.width() + 2});
     }
 }
 

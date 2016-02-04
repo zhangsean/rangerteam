@@ -50,8 +50,8 @@
         $satTodo = '';
         foreach($dateList as $d)
         {
-            if(date('w', $d) == 0) $sunTodo = $todos[date('Y-m-d', $d)];
-            if(date('w', $d) == 6) $satTodo = $todos[date('Y-m-d', $d)];
+            if(date('w', $d) == 0) $sunTodo = isset($todos[date('Y-m-d', $d)]) ? $todos[date('Y-m-d', $d)] : '';
+            if(date('w', $d) == 6) $satTodo = isset($todos[date('Y-m-d', $d)]) ? $todos[date('Y-m-d', $d)] : '';
         }
     ?>
     <?php foreach($dateList as $d):?>

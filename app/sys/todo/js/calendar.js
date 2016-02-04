@@ -140,7 +140,7 @@ $(document).ready(function()
     {
         if($(window).scrollTop() > gap)
         {
-            $('.calendar header').addClass('fixed-date');
+            $('.calendar header').addClass('fixed-date').css('width', $('#fixedHeader').width());
         }
         else
         {
