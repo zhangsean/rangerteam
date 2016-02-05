@@ -15,7 +15,7 @@
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <form id='ajaxForm' method='post' action="<?php echo inlink('batchedit', 'step=save')?>">
   <div class='panel'>
-    <div class='panel-heading'><strong><?php echo $lang->trade->showImport;?></strong></div>
+    <div class='panel-heading'><strong><?php echo $lang->trade->batchEdit;?></strong></div>
     <table class='table table-hover'>
       <thead>
         <tr class='text-center'>
