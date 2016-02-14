@@ -31,3 +31,5 @@ td .deviation{padding-left:20px; text-align:left;}
 .d20{color:#33A52E;}
 
 #titlebar {display: none}
+
+.panel .table-bordered {border: 1px solid rgb(221, 221, 221);}

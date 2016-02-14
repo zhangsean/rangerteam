@@ -61,11 +61,16 @@ $(document).ready(function()
     /* Change contact. */
     $('#contact').change(function()
     {
-        var phone = $(this).find('option:selected').attr('data-phone');
-        if($.trim(phone) == '' || $.trim(phone) == '/') return false;
+        var phone = $.trim($(this).find('option:selected').attr('data-phone'));
+        var qq    = $.trim($(this).find('option:selected').attr('data-qq'));
+        var email = $.trim($(this).find('option:selected').attr('data-email'));
+
+        phone = phone == '' ? '' : "<i class='icon-phone-sign'></i>" + phone;
+        qq    = qq    == '' ? '' : "<i class='icon-qq'></i><a target='_blank' href='http://wpa.qq.com/msgrd?v=3&uin=" + qq + "&site=&menu=yes'>" + qq + "</a>";
+        email = email == '' ? '' : "<i class='icon-envelope-alt'></i><a href='mailto:" + email + "'>" + email + "</a>";
         
         $('#phoneTR').show();
-        $('#phoneTD').html(phone);
+        $('#phoneTD').html(phone + qq + email);
     });
 });
 

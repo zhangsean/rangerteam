@@ -179,15 +179,17 @@ class refund extends control
      * View a refund.
      * 
      * @param  int    $refundID 
+     * @param  string $mode
      * @access public
      * @return void
      */
-    public function view($refundID)
+    public function view($refundID = 0, $mode = '')
     {
         $refund = $this->refund->getByID($refundID);
 
         $this->view->title        = $this->lang->refund->view;
         $this->view->refund       = $refund;
+        $this->view->mode         = $mode;
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->categories   = $this->refund->getCategoryPairs();

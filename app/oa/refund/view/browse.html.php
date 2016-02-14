@@ -40,7 +40,7 @@
       </tr>
     </thead>
     <?php foreach($refunds as $refund):?>
-    <tr data-url='<?php echo $this->createLink('refund', 'view', "refundID=$refund->id");?>'>
+    <tr data-url='<?php echo $this->createLink('refund', 'view', "refundID={$refund->id}&mode={$mode}");?>'>
       <td><?php echo $refund->id;?></td>
       <td class='visible-lg'><?php echo zget($userDept, $refund->createdBy);?></td>
       <td class='text-left'><?php echo $refund->name?></td>
@@ -67,7 +67,7 @@
         <?php echo html::a('javascript:;', $lang->refund->cancel, "class='disabled'");?>
         <?php endif;?>
         <?php endif;?>
-        <?php echo html::a($this->createLink('refund', 'view',   "refundID={$refund->id}"), $lang->view, "")?>
+        <?php echo html::a($this->createLink('refund', 'view',   "refundID={$refund->id}&mode={$mode}"), $lang->view, "")?>
         <?php if($mode == 'todo') echo html::a($this->createLink('refund', 'reimburse', "refundID={$refund->id}"), $lang->refund->common, "class='refund'");?>
         <?php if($mode == 'todo') echo html::a($this->createLink('refund', 'createtrade', "refundID={$refund->id}"), $lang->refund->common, "class='createTrade hide'");?>
       </td>

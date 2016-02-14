@@ -136,7 +136,7 @@ class leave extends control
         else
         {
             $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
-            if((empty($dept) or ",$this->app->user->account," != $dept->moderators)) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
+            if((empty($dept) or ",{$this->app->user->account}," != $dept->moderators)) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
         }
 
         $this->leave->review($id, $status);

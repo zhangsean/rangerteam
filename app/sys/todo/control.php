@@ -158,7 +158,8 @@ class todo extends control
             {
                 $date= 'today'; 
             }
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('todo', 'calendar', "date=$date")));
+            $link = empty($_SERVER['HTTP_REFERER']) ? $this->createLink('todo', 'calendar', "date=$date") : $_SERVER['HTTP_REFERER'];
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $link));
         }
 
         $this->view->title = $this->lang->todo->common . $this->lang->colon . $this->lang->todo->batchCreate;

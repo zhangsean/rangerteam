@@ -98,17 +98,14 @@ class commonModel extends model
     {
         if(!empty($this->config->group->unUpdatedAccounts) and strpos($this->config->group->unUpdatedAccounts, $this->app->user->account) !== false)
         {
-            $unUpdatedAccounts = explode(',', $this->config->group->unUpdatedAccounts);
-            $key = array_search($this->app->user->account, $unUpdatedAccounts);
-            unset($unUpdatedAccounts[$key]);
-
-            $groupAccounts = implode(',', $unUpdatedAccounts);
-            $this->loadModel('setting')->setItem("system.sys.group.unUpdatedAccounts", $groupAccounts);
-
             $user = $this->app->user;
             $user->rights = $this->loadModel('user')->authorize($user);
             $this->session->set('user', $user);
             $this->app->user = $this->session->user;
+
+            $unUpdatedAccounts = str_replace($this->app->user->account, '', $this->config->group->unUpdatedAccounts);
+            if(str_replace(',', '', $unUpdatedAccounts) == '') $unUpdatedAccounts = '';
+            $this->loadModel('setting')->setItem("system.sys.group.unUpdatedAccounts", $unUpdatedAccounts);
         }
 
         $module = $this->app->getModuleName();

@@ -125,7 +125,7 @@ class index extends control
             {
                 $signButtons .= "<li>" . html::a('javascript:void(0)', $this->lang->signIn, "class='sign signin'") . "</li>";
             }
-            if($this->config->attend->mustSignOut == 'yes' and time() > strtotime(date("Y-m-d") . " " . $this->config->attend->signInLimit . "-4 hour")) 
+            if($this->config->attend->mustSignOut == 'yes' and time() > strtotime(date("Y-m-d") . " " . $this->config->attend->signOutLimit . "-4 hour")) 
             {
                 $signButtons .= "<li>" . html::a('javascript:void(0)', $this->lang->signOut, "class='sign signout'") . "</li>";
             }

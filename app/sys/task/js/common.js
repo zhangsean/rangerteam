@@ -10,7 +10,7 @@ $(function()
 
     $('#menu li[data-group="' + v.groupBy + '"]').addClass('active');
 
-    $('.task-toogle').click(function()
+    $('.task-toggle').click(function()
     {
         var obj = $(this).find('i');
         if(obj.hasClass('icon-plus'))
@@ -29,7 +29,8 @@ $(function()
     /* Add parent task link to menu. */
     if($('.addonMenu').length)
     {
-        $('#menu .nav li:first').after($('.addonMenu').html());
+        $('#menu .nav li:last').html(v.viewChild);
+        $('#menu .nav li:last').before($('.addonMenu').html());
         $('.addonMenu').remove();
     }
 

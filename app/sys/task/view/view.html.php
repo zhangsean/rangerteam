@@ -12,11 +12,12 @@
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
+<?php js::set('viewChild', $lang->task->viewChild);?>
 <?php $this->loadModel('project', 'oa')->setMenu($projects, $projectID);?>
 <?php if($task->parent != 0):?>
 <div class='addonMenu'>
-  <li class='divider angle'></li>
   <li><?php echo html::a($this->createLink('task', 'view', "id={$task->parent}"), $lang->task->parent)?></li>
+  <li class='divider angle'></li>
 </div>
 <?php endif;?>
 <div class='with-menu page-content'>
@@ -25,7 +26,7 @@
       <div class='panel'>
         <div class='panel-heading'>
           <?php if(!empty($task->team)) echo "<span class='label'>{$lang->task->multipleAB}</span>"?>
-          <strong><?php echo $task->name;?></strong>
+          <strong><?php echo empty($task->parent) ? $task->name : html::a(inlink('view', "taskID={$parent->id}"), $parent->name, "title={$lang->task->parent}") . "<i class='icon-chevron-right'> </i>" . $task->name;?></strong>
         </div>
         <div class='panel-body'>
           <?php echo $task->desc;?>

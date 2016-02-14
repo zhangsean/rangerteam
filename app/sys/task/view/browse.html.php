@@ -41,7 +41,7 @@
             <?php if($task->parent != 0) echo "<span class='label'>{$lang->task->childrenAB}</span>"?>
             <?php if(!empty($task->team)) echo "<span class='label'>{$lang->task->multipleAB}</span>"?>
             <?php echo $task->name;?>
-            <?php if(!empty($task->children)) echo "<span class='task-toogle'>&nbsp;&nbsp;<i class='icon icon-minus'></i>&nbsp;&nbsp;</span>"?>
+            <?php if(!empty($task->children)) echo "<span class='task-toggle'>&nbsp;&nbsp;<i class='icon icon-minus'></i>&nbsp;&nbsp;</span>"?>
           </td>
           <td><?php echo $task->deadline;?></td>
           <td><?php if(isset($users[$task->assignedTo])) echo $users[$task->assignedTo];?></td>

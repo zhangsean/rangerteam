@@ -51,6 +51,8 @@ $(function()
         });
 
         $('[data-toggle="popover"]').popover();
+
+        $('.board-item-empty').html('');
     }
 
     window.reloadDataTable = function()

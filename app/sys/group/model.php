@@ -506,12 +506,12 @@ class groupModel extends model
 
         if(!empty($this->config->group->unUpdatedAccounts))
         {
-            $groupAccounts = $this->config->group->unUpdatedAccounts . ',' . $groupAccounts;
+            $groupAccounts = trim($this->config->group->unUpdatedAccounts, ',') . ',' . $groupAccounts;
             $groupAccounts = explode(',', $groupAccounts);
             $groupAccounts = array_unique($groupAccounts);
             $groupAccounts = implode(',', $groupAccounts);
         }
 
-        $this->loadModel('setting')->setItem("system.sys.group.unUpdatedAccounts", $groupAccounts);
+        $this->loadModel('setting')->setItem("system.sys.group.unUpdatedAccounts", ',' . trim($groupAccounts, ',') . ',');
     }
 }

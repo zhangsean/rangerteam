@@ -11,6 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.html.php'; ?>
+<?php js::set('mode', $mode);?>
+<?php js::set('createTradeTip', $lang->refund->createTradeTip);?>
 <div class='row-table'>
   <div class='col-main'>
     <div class='panel'>
@@ -63,6 +65,10 @@
           commonModel::printLink('refund', 'edit', "refundID=$refund->id", $lang->edit, "class='btn btn-default'");
           commonModel::printLink('refund', 'delete', "refundID=$refund->id", $lang->delete, "class='btn btn-default deleter'");
           echo '</div>';
+      }
+      if($mode == 'todo' && $refund->status == 'pass')
+      {
+          commonModel::printLink('refund', 'reimburse', "refundID={$refund->id}", $lang->refund->common, "class='btn btn-default refund'");
       }
 
       $browseLink = $this->session->refundList ? $this->session->refundList : inlink('personal');
