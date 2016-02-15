@@ -2,7 +2,15 @@ $(function()
 {
     /* start ips */
     $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock, onDeleteEntry: deleteEntry, onUpdateEntryMenu: updateEntryMenu, onSortEntries: sortEntries}, config, ipsLang));
-    if(v.attend) initAttendButton();
+    if(v.attend)
+    {
+        initAttendButton();
+        $('.sign').parent('li').show();
+    }
+    else
+    {
+        $('.sign').parent('li').hide();
+    }
 });
 
 /**

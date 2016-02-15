@@ -11,6 +11,7 @@
  */
 ?>
 <?php include $app->getModuleRoot() . 'common/view/header.html.php';?>
+<?php js::set('attend', commonModel::isAvailable('attend'));?>
 <div class='panel'>
   <div class='panel-heading'>
     <?php echo $lang->setting->modules;?>
