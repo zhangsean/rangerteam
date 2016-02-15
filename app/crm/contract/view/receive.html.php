@@ -14,7 +14,7 @@
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<form method='post' id='ajaxForm' class='form-inline' action='<?php echo $this->createLink('contract', 'receive', "contractID={$contract->id}")?>'>
+<form method='post' id='receiveForm' class='form-inline' action='<?php echo $this->createLink('contract', 'receive', "contractID={$contract->id}")?>'>
   <table class='table table-form table-condensed'>
     <tr>
       <th><?php echo $lang->contract->all;?></th>
@@ -44,7 +44,7 @@
     </tr>
     <tr class='tradeTR'>
       <th><?php echo $lang->trade->dept;?></th>
-      <td><?php echo html::select('dept', array('') + (array) $deptList, '', "class='form-control'");?></td>
+      <td><?php echo html::select('dept', array('') + (array) $deptList, $dept->id, "class='form-control'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->contract->returnedBy;?></th>
@@ -64,7 +64,10 @@
     </tr>
     <tr>
       <th></th>
-      <td><?php echo html::submitButton();?></td>
+      <td colspan='2'>
+        <?php echo html::submitButton();?>
+        <div id='duplicateError' class='hide'></div>
+      </td>
     </tr>
   </table>
 </form>
@@ -78,4 +81,10 @@
   </div>
 </div>
 <?php endif;?>
+<div class='errorMessage hide'>
+  <div class='alert alert-danger alert-dismissable'>
+    <button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
+    <button type='submit' class='btn btn-default' id='continueSubmit'><?php echo $lang->continueSave;?></button>
+  </div>
+</div>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

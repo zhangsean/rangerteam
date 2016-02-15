@@ -269,8 +269,8 @@ class contract extends control
         $currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         if(!empty($_POST))
         {
-            $this->contract->receive($contractID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $return = $this->contract->receive($contractID);
+            if($return['result'] == 'fail') $this->send($return);
 
             $actionExtra = html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name) . $this->lang->contract->return . zget($currencySign, $contract->currency, '') . $this->post->amount;
 
@@ -284,8 +284,11 @@ class contract extends control
                 $this->loadModel('action')->create('contract', $contractID, 'returned', $this->post->comment, zget($currencySign, $contract->currency, '') . $this->post->amount, $this->post->returnedBy);
                 $this->loadModel('action')->create('customer', $contract->customer, 'receiveContract', $this->post->comment, $actionExtra, $this->post->returnedBy);
             }
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+            $this->send($return);
         }
+
+        $user = $this->loadModel('user')->getByAccount($contract->createdBy);
+        $dept = $this->loadModel('tree')->getByID($user->dept);
 
         $this->view->title         = $contract->name;
         $this->view->contract      = $contract;
@@ -294,6 +297,7 @@ class contract extends control
         $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->categories    = $this->loadModel('tree')->getOptionMenu('in', 0);
+        $this->view->dept          = $dept;
         $this->display();
     }
 

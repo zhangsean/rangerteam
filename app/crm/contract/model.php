@@ -486,8 +486,19 @@ class contractModel extends model
             ->add('contract', $contractID)
             ->setDefault('returnedBy', $this->app->user->account)
             ->setDefault('returnedDate', $now)
-            ->remove('finish,handlers,createTrade,depositor,category,dept')
+            ->remove('finish,handlers,createTrade,depositor,category,dept,continue')
             ->get();
+
+        if(!$this->post->continue and $this->post->createTrade)
+        {
+            $existTrades = $this->dao->select('*')->from(TABLE_TRADE)
+                ->where('money')->eq($data->amount)
+                ->andWhere('date')->eq(substr($data->returnedDate, 0, 10))
+                ->andWhere('contract')->eq($contractID)
+                ->fetchAll();
+
+            if(!empty($existTrades)) return array('result' => 'fail', 'error' => $this->lang->trade->unique);
+        }
 
         $this->dao->insert(TABLE_PLAN)
             ->data($data, $skip = 'uid, comment')
@@ -523,19 +534,20 @@ class contractModel extends model
                     ->join('handlers', ',')
                     ->add('trader', $contract->customer)
                     ->add('contract', $contractID)
-                    ->remove('finish,amount,returnedBy,returnedDate,createTrade')
+                    ->remove('finish,amount,returnedBy,returnedDate,createTrade,continue')
                     ->get();
-                
+
                 $depositor = $this->loadModel('depositor', 'cash')->getByID($trade->depositor);
                 $trade->currency = $depositor->currency;
                 
                 $this->dao->insert(TABLE_TRADE)->data($trade, $skip = 'uid,comment')->autoCheck()->exec();
             }
             
-            return !dao::isError();
+            if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+            return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload');
         }
 
-        return false;
+        return array('result' => 'fail', 'message' => dao::getError());
     }
 
     /**
