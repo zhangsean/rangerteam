@@ -76,7 +76,6 @@ class articleModel extends model
             ->beginIf($mode == 'bysearch')->andWhere($$moduleQuery)->fi()
             ->groupBy('t2.id')
             ->orderBy($orderBy)
-            ->page($pager)
             ->fetchAll('id');
         if(!$articles) return array();
 
@@ -91,7 +90,7 @@ class articleModel extends model
         /* Assign categories to it's article. */
         foreach($articles as $key => $article) $article->categories = isset($categories[$article->id]) ? $categories[$article->id] : array();
 
-        $articles = $this->process($articles);
+        $articles = $this->process($articles, $pager);
 
         /* Get images for these articles. */
         $images = $this->loadModel('file')->getByObject($type, array_keys($articles), $isImage = true);
@@ -412,18 +411,27 @@ class articleModel extends model
     }
 
     /**
-     * Process articles. 
+     * Process articles and fix pager. 
      * 
      * @param  array  $articles 
+     * @param  object $pager
      * @access public
      * @return array
      */
-    public function process($articles = array())
+    public function process($articles = array(), $pager = null)
     {
+        $idList = array();
         foreach($articles as $key => $article)
         {
-            if(!$this->hasRight($article)) unset($articles[$key]);
+            if($this->hasRight($article)) $idList[] = $article->id;
         }
+
+        $articleIDList = $this->dao->select('id')->from(TABLE_ARTICLE)->where('id')->in($idList)->page($pager)->fetchAll('id');
+        foreach($articles as $key => $article)
+        {
+            if(!isset($articleIDList[$article->id])) unset($articles[$key]);
+        }
+
         return $articles;
     }
 

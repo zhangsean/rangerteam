@@ -330,14 +330,24 @@ class actionModel extends model
             ->beginIF($period != 'all')->andWhere('date')->lt($end)->fi()
             ->beginIF($account != 'all')->andWhere('actor')->eq($account)->fi()
             ->orderBy($orderBy)
-            ->page($pager)
             ->fetchAll();
 
         foreach($actions as $key => $action) if(strpos('attend,refund,leave,trip,action', $action->objectType) !== false) unset($actions[$key]);
 
         if(!$actions) return array();
         $actions = $this->transformActions($actions);
-        foreach($actions as $key => $action) if(!$this->checkPriv($action)) unset($actions[$key]);
+
+        $idList = array();
+        foreach($actions as $key => $action) 
+        {
+            if($this->checkPriv($action)) $idList[] = $action->id;
+        }
+        /* Fix pager. */
+        $actionIDList = $this->dao->select('id')->from(TABLE_ACTION)->where('id')->in($idList)->page($pager)->fetchAll('id');
+        foreach($actions as $key => $action)
+        {
+            if(!isset($actionIDList[$action->id])) unset($actions[$key]);
+        }
 
         return $actions;
     }

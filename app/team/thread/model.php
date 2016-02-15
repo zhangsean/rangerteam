@@ -54,14 +54,13 @@ class threadModel extends model
         $threads = $this->dao->select('*')->from(TABLE_THREAD)
             ->beginIf($board)->where('board')->in($board)->fi()
             ->orderBy($orderBy)
-            ->page($pager)
             ->fetchAll('id');
 
         if(!$threads) return array();
 
         $this->setRealNames($threads);
 
-        return $this->process($threads);
+        return $this->process($threads, $pager);
     }
 
     /**
@@ -89,14 +88,13 @@ class threadModel extends model
             ->beginIf($board)->andWhere('board')->in($board)->fi()
             ->andWhere($forumQuery)
             ->orderBy($orderBy)
-            ->page($pager)
             ->fetchAll('id');
 
         if(!$threads) return array();
 
         $this->setRealNames($threads);
 
-        return $this->process($threads);
+        return $this->process($threads, $pager);
     }
 
     /**
@@ -131,22 +129,22 @@ class threadModel extends model
             ->from(TABLE_THREAD)
             ->where('author')->eq($account)
             ->orderBy('repliedDate desc')
-            ->page($pager)
             ->fetchAll('id');
 
         $this->setRealNames($threads);
 
-        return $this->process($threads);
+        return $this->process($threads, $pager);
     }
 
     /**
-     * Process threads.
+     * Process threadso and fix pager.
      * 
      * @param  array    $threads 
+     * @param  object   $pager
      * @access public
      * @return array
      */
-    public function process($threads)
+    public function process($threads = array(), $pager = null)
     {
         $this->loadModel('tree');
         foreach($threads as $key => $thread)
@@ -158,6 +156,14 @@ class threadModel extends model
 
             /* Judge the thread is new or not.*/
             $thread->isNew = (time() - strtotime($thread->repliedDate)) < 24 * 60 * 60 * $this->config->thread->newDays;
+        }
+
+        $idList = array();
+        foreach($threads as $thread) $idList[] = $thread->id;
+        $threadIDList = $this->dao->select('id')->from(TABLE_THREAD)->where('id')->in($idList)->page($pager)->fetchAll('id');
+        foreach($threads as $key => $thread)
+        {
+            if(!isset($threadIDList[$thread->id])) unset($threads[$key]);
         }
 
         return $threads;

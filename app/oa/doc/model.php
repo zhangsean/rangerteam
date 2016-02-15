@@ -171,7 +171,7 @@ class docModel extends model
 
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
-        $libs = $this->dao->select('*')->from(TABLE_DOC)
+        $docs = $this->dao->select('*')->from(TABLE_DOC)
             ->where('deleted')->eq(0)
             ->beginIF(is_numeric($libID))->andWhere('lib')->eq($libID)->fi()
             ->beginIF($libID == 'product')->andWhere('product')->in($keysOfProducts)->andWhere('project')->in($allKeysOfProjects)->fi()
@@ -181,15 +181,11 @@ class docModel extends model
             ->beginIF((string)$projectID == 'int')->andWhere('project')->gt(0)->fi()
             ->beginIF($module)->andWhere('module')->in($module)->fi()
             ->orderBy($orderBy)
-            ->page($pager)
             ->fetchAll();
+
+        $docs = $this->process($docs, $pager);
         
-        /* Check rights. */
-        foreach($libs as $key => $lib)
-        {
-            if(!$this->hasRight($lib)) unset($libs[$key]);
-        }
-        return $libs;
+        return $docs;
     }
 
     /**
@@ -205,19 +201,15 @@ class docModel extends model
         if($this->session->docQuery == false) $this->session->set('docQuery', ' 1 = 1');
         $docQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->docQuery);
 
-        $libs = $this->dao->select('*')->from(TABLE_DOC)
+        $docs = $this->dao->select('*')->from(TABLE_DOC)
             ->where('deleted')->eq(0)
             ->andWhere($docQuery)
             ->orderBy($orderBy)
-            ->page($pager)
             ->fetchAll();
 
-        /* Check rights. */
-        foreach($libs as $key => $lib)
-        {
-            if(!$this->hasRight($lib)) unset($libs[$key]);
-        }
-        return $libs;
+        $docs = $this->process($docs, $pager);
+        
+        return $docs;
     }
 
     /**
@@ -418,6 +410,31 @@ class docModel extends model
             }
         }
         return $css;
+    }
+
+    /**
+     * Process docs and fix pager. 
+     * 
+     * @param  array  $docs 
+     * @param  object $pager 
+     * @access public
+     * @return array
+     */
+    public function process($docs = array(), $pager = null)
+    {
+        $idList = array();
+        foreach($docs as $key => $doc)
+        {
+            if($this->hasRight($doc)) $idList[] = $doc->id;
+        }
+
+        $docIDList = $this->dao->select('id')->from(TABLE_DOC)->where('id')->in($idList)->page($pager)->fetchAll('id');
+        foreach($docs as $key => $doc)
+        {
+            if(!isset($docIDList[$doc->id])) unset($docs[$key]);
+        }
+
+        return $docs;
     }
 
     /**
