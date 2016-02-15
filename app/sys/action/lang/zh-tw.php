@@ -64,6 +64,7 @@ $lang->action->desc->replied               = '$date, 由 <strong>$actor</strong>
 $lang->action->desc->doubted               = '$date, 由 <strong>$actor</strong> 追問。' . "\n";
 $lang->action->desc->transfered            = '$date, 由 <strong>$actor</strong> 轉交。' . "\n";
 $lang->action->desc->reviewed              = '$date, 由 <strong>$actor</strong> 審核 $extra。' . "\n";
+$lang->action->desc->reimburse             = '$date, 由 <strong>$actor</strong> 報銷 $extra。' . "\n";
 $lang->action->desc->revoked               = '$date, 由 <strong>$actor</strong> 撤銷。' . "\n";
 $lang->action->desc->commited              = '$date, 由 <strong>$actor</strong> 提交' . "\n";
 $lang->action->desc->returned              = '$date, 由 <strong>$actor</strong> 回款$extra。' . "\n";

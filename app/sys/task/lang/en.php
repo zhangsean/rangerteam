@@ -12,18 +12,19 @@
 $lang->task->common = 'Task';
 $lang->task->list   = 'Task list';
 
-$lang->task->browse   = 'Browse';
-$lang->task->view     = 'Info';
-$lang->task->create   = 'Create';
-$lang->task->edit     = 'Update';
-$lang->task->finish   = 'Finish';
-$lang->task->start    = 'Start';
-$lang->task->activate = 'Activate';
-$lang->task->cancel   = 'Cancel';
-$lang->task->close    = 'Close';
-$lang->task->assignTo = 'Assign to';
-$lang->task->delete   = 'Delete';
-$lang->task->export   = 'Export';
+$lang->task->browse    = 'Browse';
+$lang->task->view      = 'Info';
+$lang->task->viewChild = 'Child Info';
+$lang->task->create    = 'Create';
+$lang->task->edit      = 'Update';
+$lang->task->finish    = 'Finish';
+$lang->task->start     = 'Start';
+$lang->task->activate  = 'Activate';
+$lang->task->cancel    = 'Cancel';
+$lang->task->close     = 'Close';
+$lang->task->assignTo  = 'Assign to';
+$lang->task->delete    = 'Delete';
+$lang->task->export    = 'Export';
 
 $lang->task->batchCreate    = 'Batch Create';
 $lang->task->backToProjects = 'Back to project list'; 

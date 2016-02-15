@@ -9,6 +9,7 @@
  * @version     $Id: zh-tw.php 824 2010-05-02 15:32:06Z wwccss $
  * @link        http://www.ranzhico.com
  */
+if(!isset($lang->doc)) $lang->doc = new stdclass();
 $lang->doc->common         = '文檔視圖';
 $lang->doc->id             = '文檔編號';
 $lang->doc->product        = '所屬產品';

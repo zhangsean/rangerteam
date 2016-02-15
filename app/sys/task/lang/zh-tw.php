@@ -12,18 +12,19 @@
 $lang->task->common = '任務';
 $lang->task->list   = '任務列表';
 
-$lang->task->browse   = '瀏覽任務';
-$lang->task->view     = '查看任務';
-$lang->task->create   = '新建任務';
-$lang->task->edit     = '編輯任務';
-$lang->task->finish   = '任務完成';
-$lang->task->start    = '開始任務';
-$lang->task->activate = '激活任務';
-$lang->task->cancel   = '取消任務';
-$lang->task->close    = '關閉任務';
-$lang->task->assignTo = '指派任務';
-$lang->task->delete   = '刪除任務';
-$lang->task->export   = '導出任務';
+$lang->task->browse    = '瀏覽任務';
+$lang->task->view      = '查看任務';
+$lang->task->viewChild = '查看子任務';
+$lang->task->create    = '新建任務';
+$lang->task->edit      = '編輯任務';
+$lang->task->finish    = '任務完成';
+$lang->task->start     = '開始任務';
+$lang->task->activate  = '激活任務';
+$lang->task->cancel    = '取消任務';
+$lang->task->close     = '關閉任務';
+$lang->task->assignTo  = '指派任務';
+$lang->task->delete    = '刪除任務';
+$lang->task->export    = '導出任務';
 
 $lang->task->batchCreate    = '批量添加';
 $lang->task->backToProjects = '返回項目列表'; 
