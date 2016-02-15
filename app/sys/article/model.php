@@ -236,7 +236,7 @@ class articleModel extends model
      */
     public function getTagList($type = 'article')
     {
-        $articles = $this->dao->select('id,keywords,type')->from(TABLE_ARTICLE)->where('type')->eq($type)->fetchAll('id');
+        $articles = $this->dao->select('id,keywords,type,author,users,groups')->from(TABLE_ARTICLE)->where('type')->eq($type)->fetchAll('id');
         $articles = $this->process($articles);
         $tags =array();
         foreach($articles as $article) $tags = array_merge($tags, explode(',', $article->keywords));
@@ -445,7 +445,7 @@ class articleModel extends model
             return $this->app->user->account == $article->author;
         }
 
-        if(empty($article->users) && empty($article->rights))
+        if(empty($article->users) && empty($article->groups))
         {
             $hasRight = true;
         }
@@ -457,14 +457,14 @@ class articleModel extends model
                 $hasRight = strpos($article->users, ',' . $this->app->user->account . ',') !== false;
             }
 
-            if(!$hasRight && !empty($article->rights))
+            if(!$hasRight && !empty($article->groups))
             {
                 $count = $this->dao->select('count(t2.account) as count')
                     ->from(TABLE_USER)->alias('t1')
                     ->leftJoin(TABLE_USERGROUP)->alias('t2')->on('t1.account = t2.account')
                     ->where('t1.deleted')->eq(0)
                     ->andWhere('t1.account')->eq($this->app->user->account)
-                    ->andWhere('t2.group')->in($article->rights)
+                    ->andWhere('t2.group')->in($article->groups)
                     ->fetch('count');
                 $hasRight = $count > 0;
             }

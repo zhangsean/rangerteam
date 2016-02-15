@@ -1244,6 +1244,11 @@ class commonModel extends model
      */
     public static function http($url, $data = null)
     {
+        if(!extension_loaded('curl'))
+        {
+            return $this->lang->noCurlExt;
+        }
+
         $ci = curl_init();
         curl_setopt($ci, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
         curl_setopt($ci, CURLOPT_USERAGENT, 'Sae T OAuth2 v0.1');

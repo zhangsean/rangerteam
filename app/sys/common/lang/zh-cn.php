@@ -348,6 +348,7 @@ $lang->error->passwordrule = '密码应该符合规则，长度至少为六位�
 $lang->error->captcha      = '请输入正确的验证码。';
 $lang->error->noWritable   = '%s 可能不可写，请修改权限！';
 $lang->error->noConvertFun = '不存在iconv和mb_convert_encoding转码方法，不能将数据转成想要的编码！';
+$lang->error->noCurlExt    = '没有加载curl扩展！';
 $lang->error->notInt       = '<strong>%s</strong>不能为纯数字组合。';
 $lang->error->pasteImg     = '您的浏览器不支持粘贴图片！';
 
