@@ -544,7 +544,7 @@ class contractModel extends model
             }
             
             if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
-            return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload');
+            return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "contractID=$contractID"));
         }
 
         return array('result' => 'fail', 'message' => dao::getError());

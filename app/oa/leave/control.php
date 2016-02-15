@@ -269,8 +269,8 @@ class leave extends control
             }
             else
             {
-               $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
-               $toList = trim($dept->moderators, ',');
+               $dept   = $this->loadModel('tree')->getByID($this->app->user->dept);
+               $toList = isset($dept->moderators) ? trim($dept->moderators, ',') : '';
             }
 
             $subject = "{$this->lang->leave->common}#{$leave->id}{$this->lang->colon}{$leave->begin}~{$leave->end}";

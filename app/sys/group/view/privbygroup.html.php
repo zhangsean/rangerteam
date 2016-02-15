@@ -51,11 +51,6 @@
           <th class='text-right w-120px'>
             <label class="checkbox">
               <?php 
-              if($moduleName == 'tree' or $moduleName == 'setting')
-              {
-                  $title = $moduleName == 'tree' ? $lang->group->placeholder->tree : $lang->group->placeholder->lang;
-                  echo "<a href='#' class='tips' data-original-title='{$title}' data-toggle='tooltip' data-placement='right'><i class='icon-question-sign'> </i></a>";
-              }
               if($moduleName == 'user')
               {
                   echo $this->lang->user->colleagueMenu;
