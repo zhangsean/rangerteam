@@ -130,7 +130,7 @@ class index extends control
 
         $this->view->allEntries  = $allEntries;
         $this->view->blocks      = $blocks;
-        $this->view->notice      = commonModel::isAvailable('attend') ? $this->loadModel('attend', 'oa')->getNotice() : '';
+        $this->view->notice      = commonModel::isAvailable('attend') ? $this->attend->getNotice() : '';
         $this->view->signButtons = $signButtons;
         $this->display();
     }
