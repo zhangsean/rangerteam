@@ -50,3 +50,26 @@ ADD `createdBy` varchar(30) NOT NULL AFTER `groups`,
 ADD `createdDate` datetime NOT NULL AFTER `createdBy`,
 ADD `editedBy` varchar(30) NOT NULL AFTER `createdDate`,
 ADD `editedDate` datetime NOT NULL AFTER `editedBy`;
+
+-- DROP TABLE IF EXISTS `oa_overtime`;
+CREATE TABLE `oa_overtime` (
+  `id` mediumint NOT NULL AUTO_INCREMENT,
+  `year` char(4) NOT NULL,
+  `begin` date NOT NULL,
+  `end` date NOT NULL,
+  `start` time NOT NULL,
+  `finish` time NOT NULL,
+  `hours` float(4,1) unsigned NOT NULL DEFAULT '0.0',
+  `type` varchar(30) NOT NULL DEFAULT '',
+  `desc` text NOT NULL,
+  `status` varchar(30) NOT NULL DEFAULT '',
+  `createdBy` char(30) NOT NULL,
+  `createdDate` datetime NOT NULL,
+  `reviewedBy` char(30) NOT NULL,
+  `reviewedDate` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `year` (`year`),
+  KEY `type` (`type`),
+  KEY `status` (`status`),
+  KEY `createdBy` (`createdBy`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
