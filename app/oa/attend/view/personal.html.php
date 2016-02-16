@@ -119,7 +119,7 @@
                   <?php endif;?>
                   <?php else:?>
                   <span class="attend-<?php echo $status;?>">
-                  <?php if($status == 'rest') echo html::a($this->createLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate)), $lang->attend->overtime, "data-toggle='modal' data-width='500px'");?></li>
+                  <?php if($status == 'rest') commonModel::printLink('overtime', 'create', "date=" . str_replace('-', '', $currentDate), $lang->attend->overtime, "data-toggle='modal' data-width='500px'");?></li>
                   <?php if($status != 'rest') echo $lang->attend->statusList[$status];?>
                   <?php if(strpos('leave,trip,overtime', $status) !== false and $attends[$currentDate]->desc) echo ' ' . $attends[$currentDate]->desc . 'h';?>
                   </span>

@@ -19,6 +19,7 @@ $lang->menu->oa->announce  = '公告|announce|browse|';
 $lang->menu->oa->doc       = '文檔|doc|browse|';
 $lang->menu->oa->attend    = '考勤|attend|personal|';
 $lang->menu->oa->leave     = '請假|leave|personal|';
+$lang->menu->oa->leave     = '加班|overtime|personal|';
 $lang->menu->oa->trip      = '出差|trip|personal|';
 $lang->menu->oa->refund    = '報銷|refund|personal|';
 $lang->menu->oa->setting   = '設置|setting|modules|app=oa';
