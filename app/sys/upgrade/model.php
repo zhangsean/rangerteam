@@ -91,6 +91,7 @@ class upgradeModel extends model
             case '3_0':
                 $this->execSQL($this->getUpgradeFile('3.0'));
             case '3_1':
+                $this->processStatusForContact();
                 $this->execSQL($this->getUpgradeFile('3.1'));
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
@@ -1007,7 +1008,7 @@ class upgradeModel extends model
     }
 
     /**
-     * Process status for contact.
+     * Process status for contact when upgrade from 3.1.
      * 
      * @access public
      * @return void
