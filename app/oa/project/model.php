@@ -75,7 +75,6 @@ class projectModel extends model
                 ->andWhere('t2.type')->eq('project')
                 ->andWhere('t1.status')->eq('doing')
                 ->andWhere('t2.account')->eq($this->app->user->account)
-                ->page($pager)
                 ->fetchAll('id');
         }
         else
@@ -83,12 +82,12 @@ class projectModel extends model
             $projects = $this->dao->select('*')->from(TABLE_PROJECT)
                 ->where('deleted')->eq(0)
                 ->beginIF($status)->andWhere('status')->eq($status)->fi()
-                ->page($pager)
                 ->fetchAll('id');
         }
 
         $members = $this->dao->select('*')->from(TABLE_TEAM)->where('type')->eq('project')->fetchGroup('id', 'account');
 
+        $idList = array();
         foreach($projects as $project)
         {
             $project->members = isset($members[$project->id]) ? $members[$project->id] : array();
@@ -99,7 +98,13 @@ class projectModel extends model
                 $project->PM = $member->account;
             }
 
-            if(!$this->checkPriv($project->id)) unset($projects[$project->id]);
+            if($this->checkPriv($project->id)) $idList[] = $project->id; 
+        }
+
+        $projectIDList = $this->dao->select('id')->from(TABLE_PROJECT)->where('id')->in($idList)->page($pager)->fetchAll('id');
+        foreach($projects as $key => $project)
+        {
+            if(!isset($projectIDList[$project->id])) unset($projects[$key]);
         }
 
         return $projects;
