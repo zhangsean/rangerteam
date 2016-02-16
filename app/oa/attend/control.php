@@ -494,7 +494,6 @@ class attend extends control
             {
                 $stat[$account] = new stdclass(); 
                 $stat[$account]->deserve  = $workingDays;
-                $stat[$account]->absent   = ($workingDays - count($accountAttends) > 0) ? ($workingDays - count($accountAttends)) : 0;
                 $stat[$account]->normal   = 0;
                 $stat[$account]->abnormal = 0;
                 $stat[$account]->late     = 0;
@@ -600,6 +599,7 @@ class attend extends control
                 }
 
                 $stat[$account]->actual = $stat[$account]->normal + $stat[$account]->restOvertime + $stat[$account]->holidayOvertime + $stat[$account]->timeOvertime + $stat[$account]->trip + $stat[$account]->abnormal;
+                $stat[$account]->absent = ($workingDays - count($accountAttends) + $stat[$account]->restOvertime + $stat[$account]->holidayOvertime + $stat[$account]->timeOvertime > 0) ? ($workingDays - count($accountAttends) + $stat[$account]->restOvertime + $stat[$account]->holidayOvertime + $stat[$account]->timeOvertime) : 0;
             }
         }
 
