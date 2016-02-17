@@ -461,6 +461,7 @@ class trade extends control
         $expenseTypes  = array('' => '') + $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
         $incomeTypes   = array('' => '') + $this->lang->trade->incomeCategoryList + $this->tree->getOptionMenu('in', 0, $removeRoot = true);
         $deptList      = $this->loadModel('tree')->getPairs(0, 'dept');
+        $productList   = $this->loadModel('product', 'crm')->getPairs();
         $flipCustomers = array_flip($customerList);
         $flipTraders   = array_flip($traderList);
         $flipTypeList  = array_flip($this->lang->trade->typeList);
@@ -535,6 +536,18 @@ class trade extends control
                 }
             }
 
+            if(!empty($data['product']))
+            {
+                foreach($productList as $id => $product)
+                {
+                    if(strpos($product, $data['product']) !== false)
+                    {
+                        $data['product'] = $id;
+                        break;
+                    }
+                }
+            }
+
             if(!$fields['fee'] and in_array($data['category'], array('fee', 'profit', 'loss')) and $data['trader']) continue;
  
             $fee = $data['fee'];
@@ -564,6 +577,7 @@ class trade extends control
         $this->view->expenseTypes = $expenseTypes;
         $this->view->incomeTypes  = $incomeTypes;
         $this->view->deptList     = $this->tree->getOptionMenu('dept', 0, $removeRoot = true);
+        $this->view->productList  = array(0 => '') + $productList;
         $this->view->existTrades  = $existTrades;
 
         $this->display();
@@ -634,6 +648,7 @@ class trade extends control
             $customers  = $this->loadModel('customer', 'crm')->getPairs();
             $deptList   = $this->loadModel('tree')->getPairs(0, 'dept');
             $categories = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
+            $products   = $this->loadModel('product', 'crm')->getPairs();
 
             $details = $this->dao->select('*')->from(TABLE_TRADE)->where('parent')->ne('')->fetchGroup('parent');
 
@@ -663,6 +678,7 @@ class trade extends control
                 if(isset($customers[$trade->trader]))         $trade->trader    = $customers[$trade->trader] . "(#$trade->trader)";
                 if(isset($deptList[$trade->dept]))            $trade->dept      = $deptList[$trade->dept];
                 if(isset($categories[$trade->category]))      $trade->category  = $categories[$trade->category];
+                if(isset($products[$trade->product]))         $trade->product   = $products[$trade->product];
                 if(isset($orders[$trade->order]))             $trade->order     = $orders[$trade->order];
                 if(isset($contracts[$trade->contract]))       $trade->contract  = $contracts[$trade->contract];
                 if(isset($tradeLang->typeList[$trade->type])) $trade->type      = $tradeLang->typeList[$trade->type];

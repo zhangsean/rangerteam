@@ -140,6 +140,7 @@ $lang->trade->importedFields['category'] = '科目';
 $lang->trade->importedFields['dept']     = '部門';
 $lang->trade->importedFields['desc']     = '備註';
 $lang->trade->importedFields['fee']      = '手續費';
+$lang->trade->importedFields['product']  = '產品';
 
 $lang->trade->totalIn       = '%s收入%s；';
 $lang->trade->totalOut      = '%s支出%s；';

@@ -26,6 +26,7 @@ $lang->schema->placeholder->selectField = '請選擇對應的項目';
 $lang->schema->placeholder->common      = '填寫對賬單對應到該欄位的列，如：A';
 $lang->schema->placeholder->type        = '填寫“收入/支出”所對應的列';
 $lang->schema->placeholder->date        = '填寫“付款時間”所對應的列';
+$lang->schema->placeholder->product     = '填寫“產品”所對應的列';
 $lang->schema->placeholder->desc        = '賬目備註，可以填寫多列，用,隔開，如：I,O';
 $lang->schema->placeholder->in          = '收款所在的列，如：E';
 $lang->schema->placeholder->out         = '付款所在的列，如：D';

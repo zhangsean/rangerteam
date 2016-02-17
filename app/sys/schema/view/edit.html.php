@@ -34,15 +34,15 @@
           <th><?php echo $lang->trade->trader;?></th>
           <td><?php  echo html::input('trader', $schema->trader, "class='form-control' placeholder='{$lang->schema->placeholder->common}'");?></td>
         </tr>
-<?php
-$diffCol = strpos($schema->money, ',') !== false ? true : false;
-$in = $out = '';
-if($diffCol)
-{
-    list($in, $out) = explode(',', $schema->money);
-    $schema->money = '';
-}
-?>
+        <?php
+        $diffCol = strpos($schema->money, ',') !== false ? true : false;
+        $in = $out = '';
+        if($diffCol)
+        {
+            list($in, $out) = explode(',', $schema->money);
+            $schema->money = '';
+        }
+        ?>
         <tr>
           <th><?php echo $lang->trade->money;?></th>
           <td>
@@ -67,6 +67,11 @@ if($diffCol)
         <tr>
           <th><?php echo $lang->trade->date;?></th>
           <td><?php echo html::input('date', $schema->date, "class='form-control' placeholder='{$lang->schema->placeholder->date}'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->trade->product;?></th>
+          <td><?php echo html::input('product', $schema->product, "class='form-control' placeholder='{$lang->schema->placeholder->product}'");?></td>
+        </tr>
         <tr>
           <th><?php echo $lang->trade->desc;?></th>
           <td><?php echo html::input('desc', $schema->desc, "class='form-control' placeholder='{$lang->schema->placeholder->desc}'");?></td>

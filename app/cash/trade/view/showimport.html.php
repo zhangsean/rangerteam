@@ -26,6 +26,7 @@
           <th class='w-100px'><?php echo $lang->trade->money;?></th>
           <th class='w-80px'><?php echo $lang->trade->dept;?></th>
           <th class='w-170px'><?php echo $lang->trade->handlers;?></th>
+          <th class='w-120px'><?php echo $lang->trade->product;?></th>
           <?php if(!empty($existTrades)):?>
           <th class='w-180px'><?php echo $lang->trade->date;?></th>
           <?php else:?>
@@ -90,6 +91,7 @@
           <td><?php echo html::input("money[$i]", $trade['money'], "class='form-control'");?></td>
           <td><?php echo html::select("dept[$i]", $deptList, $trade['dept'], "class='form-control chosen'");?></td>
           <td><?php echo html::select("handlers[$i][]", $users, $this->app->user->account, "class='form-control chosen' id='handlers{$i}' multiple");?></td>
+          <td><?php echo html::select("product[$i]", $productList, $trade['product'], "class='form-control chosen' id='product{$i}'");?></td>
           <td>
             <?php if(!empty($existTrades[$i])):?>
             <div class='input-group'>
