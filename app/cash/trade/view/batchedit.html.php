@@ -26,6 +26,7 @@
           <th class='w-120px'><?php echo $lang->trade->money;?></th>
           <th class='w-80px'><?php echo $lang->trade->dept;?></th>
           <th class='w-200px'><?php echo $lang->trade->handlers;?></th>
+          <th class='w-120px'><?php echo $lang->trade->product;?></th>
           <th class='w-120px'><?php echo $lang->trade->date;?></th>
           <th><?php echo $lang->trade->desc;?></th>
         </tr>
@@ -52,6 +53,7 @@
           <td><?php echo html::input("money[$id]", $trade->money, "class='form-control' id='money{$id}'");?></td>
           <td><?php echo html::select("dept[$id]", $deptList, $trade->dept, "class='form-control chosen' id='dept{$id}'");?></td>
           <td><?php echo html::select("handlers[$id][]", $users, $trade->handlers, "class='form-control chosen' id='handlers{$id}' multiple");?></td>
+          <td><?php echo html::select("product[$id]", $productList, $trade->product, "class='form-control chosen' id='product{$id}'");?></td>
           <td><?php echo html::input("date[$id]", $trade->date, "class='form-control form-date' id='date{$id}'");?></td>
           <td><?php echo html::textarea("desc[$id]", $trade->desc, "rows='1' class='form-control'");?></td>
         </tr>

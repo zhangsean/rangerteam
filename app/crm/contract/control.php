@@ -297,6 +297,7 @@ class contract extends control
         $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->categories    = $this->loadModel('tree')->getOptionMenu('in', 0);
+        $this->view->productList   = array(0 => '') + $this->loadModel('product')->getPairs();
         $this->view->dept          = $dept;
         $this->display();
     }

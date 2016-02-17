@@ -273,6 +273,7 @@ class tradeModel extends model
             $trade->createCustomer = false;
             $trade->traderName     = isset($this->post->traderName[$key]) ? $this->post->traderName[$key] : '';
             $trade->handlers       = !empty($this->post->handlers[$key]) ? join(',', $this->post->handlers[$key]) : '';
+            $trade->product        = $this->post->product[$key];
             $trade->date           = $this->post->date[$key];
             $trade->desc           = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags->admin);
             $trade->currency       = isset($depositorList[$trade->depositor]) ? $depositorList[$trade->depositor]->currency : '';
@@ -332,6 +333,7 @@ class tradeModel extends model
             $trade->createCustomer = false;
             $trade->traderName     = $this->post->traderName[$key];
             $trade->handlers       = !empty($this->post->handlers[$key]) ? join(',', $this->post->handlers[$key]) : '';
+            $trade->product        = $this->post->product[$key];
             $trade->date           = $this->post->date[$key];
             $trade->desc           = strip_tags(nl2br($this->post->desc[$key]));
             $trade->currency       = $depositorList[$trade->depositor]->currency;

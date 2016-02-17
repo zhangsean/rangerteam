@@ -44,7 +44,11 @@
     </tr>
     <tr class='tradeTR'>
       <th><?php echo $lang->trade->dept;?></th>
-      <td><?php echo html::select('dept', array('') + (array) $deptList, $dept->id, "class='form-control'");?></td>
+      <td><?php echo html::select('dept', array('') + (array) $deptList, isset($dept->id) ? $dept->id : '', "class='form-control'");?></td>
+    </tr>
+    <tr class='tradeTR'>
+      <th><?php echo $lang->trade->product;?></th>
+      <td><?php echo html::select('product', $productList, '', "class='form-control chosen'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->contract->returnedBy;?></th>

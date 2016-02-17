@@ -178,6 +178,7 @@ class trade extends control
         $this->view->expenseTypes = array('' => '') + $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
         $this->view->incomeTypes  = array('' => '') + $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
         $this->view->deptList     = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
+        $this->view->productList  = array(0 => '') + $this->loadModel('product', 'crm')->getPairs();
 
         $this->display();
     }
@@ -390,6 +391,7 @@ class trade extends control
         $this->view->expenseTypes = array('' => '') + $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
         $this->view->incomeTypes  = array('' => '') + $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
         $this->view->deptList     = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
+        $this->view->productList  = array(0 => '') + $this->loadModel('product', 'crm')->getPairs();
 
         $this->display();
     }
