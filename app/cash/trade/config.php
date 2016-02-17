@@ -16,7 +16,7 @@ $config->trade->require->inveset = 'depositor,money,type,handlers';
 
 $config->trade->batchCreateCount = 10;
 
-$config->trade->importField = 'category,dept,trader,type,money,desc,date,fee';
+$config->trade->importField = 'category,dept,trader,type,money,desc,date,fee,product';
 
 global $lang;
 $config->trade->search['module'] = 'trade';
@@ -41,5 +41,5 @@ $config->trade->search['params']['id']        = array('operator' => '=',  'contr
 
 $config->trade->exportFields = '
   id, depositor, type, money, currency, category, trader, date,
-  desc, dept, handlers, order, contract,
+  desc, dept, handlers, product, order, contract,
   createdBy, createdDate, editedBy, editedDate, detail';

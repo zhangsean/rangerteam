@@ -87,7 +87,6 @@ class trade extends control
         }
 
         $trades = $this->trade->getList($mode, $date, $orderBy, $pager);
-        $this->session->set('tradeQueryCondition', $this->dao->get());
 
         $this->view->title   = $this->lang->trade->browse;
         $this->view->trades  = $trades;
