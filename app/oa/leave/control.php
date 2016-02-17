@@ -87,6 +87,7 @@ class leave extends control
                 if($this->config->attend->reviewedBy == $this->app->user->account)
                 {
                     $deptList = $this->loadModel('tree')->getPairs('', 'dept');
+                    $deptList[0] = '/';
                     $leaveList = $this->leave->getList($type, $currentYear, $currentMonth, '', array_keys($deptList), '', $orderBy);
                 }
             }
@@ -135,7 +136,7 @@ class leave extends control
         }
         else
         {
-            $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
+            $dept = $this->loadModel('tree')->getByID($leave->createdBy);
             if((empty($dept) or ",{$this->app->user->account}," != $dept->moderators)) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
         }
 
