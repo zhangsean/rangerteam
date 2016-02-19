@@ -254,7 +254,6 @@ class orderModel extends model
      */
     public function create()
     {
-
         $now = helper::now();
         $order = fixer::input('post')
             ->add('createdBy', $this->app->user->account)
@@ -346,7 +345,7 @@ class orderModel extends model
         $this->loadModel('action')->create('order', $orderID, 'Created', '');
         $this->loadModel('action')->create('customer', $this->post->customer, 'createOrder', '', html::a(helper::createLink('order', 'view', "orderID=$orderID"), $orderID));
 
-        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('order', 'browse'));
+        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('order', 'browse'), 'orderID' => $orderID);
     }
 
     /**
