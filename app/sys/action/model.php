@@ -343,7 +343,7 @@ class actionModel extends model
             if($this->checkPriv($action)) $idList[] = $action->id;
         }
         /* Fix pager. */
-        $actionIDList = $this->dao->select('id')->from(TABLE_ACTION)->where('id')->in($idList)->page($pager)->fetchAll('id');
+        $actionIDList = $this->dao->select('id')->from(TABLE_ACTION)->where('id')->in($idList)->orderBy($orderBy)->page($pager)->fetchAll('id');
         foreach($actions as $key => $action)
         {
             if(!isset($actionIDList[$action->id])) unset($actions[$key]);

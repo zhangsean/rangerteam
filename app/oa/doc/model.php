@@ -183,7 +183,7 @@ class docModel extends model
             ->orderBy($orderBy)
             ->fetchAll();
 
-        $docs = $this->process($docs, $pager);
+        $docs = $this->process($docs, $orderBy, $pager);
         
         return $docs;
     }
@@ -207,7 +207,7 @@ class docModel extends model
             ->orderBy($orderBy)
             ->fetchAll();
 
-        $docs = $this->process($docs, $pager);
+        $docs = $this->process($docs, $orderBy, $pager);
         
         return $docs;
     }
@@ -416,11 +416,12 @@ class docModel extends model
      * Process docs and fix pager. 
      * 
      * @param  array  $docs 
+     * @param  string $orderBy
      * @param  object $pager 
      * @access public
      * @return array
      */
-    public function process($docs = array(), $pager = null)
+    public function process($docs = array(), $orderBy = 'id_desc', $pager = null)
     {
         $idList = array();
         foreach($docs as $key => $doc)
@@ -428,7 +429,7 @@ class docModel extends model
             if($this->hasRight($doc)) $idList[] = $doc->id;
         }
 
-        $docIDList = $this->dao->select('id')->from(TABLE_DOC)->where('id')->in($idList)->page($pager)->fetchAll('id');
+        $docIDList = $this->dao->select('id')->from(TABLE_DOC)->where('id')->in($idList)->orderBy($orderBy)->page($pager)->fetchAll('id');
         foreach($docs as $key => $doc)
         {
             if(!isset($docIDList[$doc->id])) unset($docs[$key]);

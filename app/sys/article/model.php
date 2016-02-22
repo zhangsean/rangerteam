@@ -90,7 +90,7 @@ class articleModel extends model
         /* Assign categories to it's article. */
         foreach($articles as $key => $article) $article->categories = isset($categories[$article->id]) ? $categories[$article->id] : array();
 
-        $articles = $this->process($articles, $pager);
+        $articles = $this->process($articles, $orderBy, $pager);
 
         /* Get images for these articles. */
         $images = $this->loadModel('file')->getByObject($type, array_keys($articles), $isImage = true);
@@ -414,11 +414,12 @@ class articleModel extends model
      * Process articles and fix pager. 
      * 
      * @param  array  $articles 
+     * @param  string $orderBy
      * @param  object $pager
      * @access public
      * @return array
      */
-    public function process($articles = array(), $pager = null)
+    public function process($articles = array(), $orderBy = 'id_desc', $pager = null)
     {
         $idList = array();
         foreach($articles as $key => $article)
@@ -426,7 +427,7 @@ class articleModel extends model
             if($this->hasRight($article)) $idList[] = $article->id;
         }
 
-        $articleIDList = $this->dao->select('id')->from(TABLE_ARTICLE)->where('id')->in($idList)->page($pager)->fetchAll('id');
+        $articleIDList = $this->dao->select('id')->from(TABLE_ARTICLE)->where('id')->in($idList)->orderBy($orderBy)->page($pager)->fetchAll('id');
         foreach($articles as $key => $article)
         {
             if(!isset($articleIDList[$article->id])) unset($articles[$key]);

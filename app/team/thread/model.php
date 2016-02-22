@@ -60,7 +60,7 @@ class threadModel extends model
 
         $this->setRealNames($threads);
 
-        return $this->process($threads, $pager);
+        return $this->process($threads, $orderBy, $pager);
     }
 
     /**
@@ -94,7 +94,7 @@ class threadModel extends model
 
         $this->setRealNames($threads);
 
-        return $this->process($threads, $pager);
+        return $this->process($threads, $orderBy, $pager);
     }
 
     /**
@@ -133,18 +133,19 @@ class threadModel extends model
 
         $this->setRealNames($threads);
 
-        return $this->process($threads, $pager);
+        return $this->process($threads, 'repliedDate_desc', $pager);
     }
 
     /**
      * Process threadso and fix pager.
      * 
      * @param  array    $threads 
+     * @param  string   $orderBy
      * @param  object   $pager
      * @access public
      * @return array
      */
-    public function process($threads = array(), $pager = null)
+    public function process($threads = array(), $orderBy = 'repliedDate_desc', $pager = null)
     {
         $this->loadModel('tree');
         foreach($threads as $key => $thread)
@@ -160,7 +161,7 @@ class threadModel extends model
 
         $idList = array();
         foreach($threads as $thread) $idList[] = $thread->id;
-        $threadIDList = $this->dao->select('id')->from(TABLE_THREAD)->where('id')->in($idList)->page($pager)->fetchAll('id');
+        $threadIDList = $this->dao->select('id')->from(TABLE_THREAD)->where('id')->in($idList)->orderBy($orderBy)->page($pager)->fetchAll('id');
         foreach($threads as $key => $thread)
         {
             if(!isset($threadIDList[$thread->id])) unset($threads[$key]);
