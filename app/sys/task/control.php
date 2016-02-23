@@ -320,10 +320,14 @@ class task extends control
         $status = 'finish';
         foreach($task->children as $child) if($child->status == 'wait' or $child->status == 'doing') $status = '';
 
+        /* Set task team member if exists task team. */
+        $members = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
+        if(!empty($task->team)) $members = $this->task->getMemberPairs($task);
+
         $this->view->title  = $status == 'finish' ? $task->name : $task->name . " <span class='label label-warning'>{$this->lang->task->children} {$this->lang->task->unfinished}</span>";
         $this->view->taskID = $taskID;
         $this->view->task   = $task;
-        $this->view->users  = $this->loadModel('user')->getPairs();
+        $this->view->users  = $members;
         $this->display();
     }
 
