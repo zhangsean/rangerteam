@@ -94,8 +94,15 @@ class leave extends control
             else
             {
                 $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
-                foreach($deptList as $key => $value) $deptList[$key] = $value->name;
-                $leaveList = $this->leave->getList($type, $currentYear, $currentMonth, '', array_keys($deptList), '', $orderBy);
+                if(empty($deptList))
+                {
+                    $leaveList = array();
+                }
+                else
+                {
+                    foreach($deptList as $key => $value) $deptList[$key] = $value->name;
+                    $leaveList = $this->leave->getList($type, $currentYear, $currentMonth, '', array_keys($deptList), '', $orderBy);
+                }
             }
         }
         elseif($type == 'company')

@@ -98,8 +98,15 @@ class overtime extends control
             else
             {
                 $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
-                foreach($deptList as $key => $value) $deptList[$key] = $value->name;
-                $overtimeList = $this->overtime->getList($type, $currentYear, $currentMonth, '', array_keys($deptList), '', $orderBy);
+                if(empty($deptList))
+                {
+                    $overtimeList = array();
+                }
+                else
+                {
+                    foreach($deptList as $key => $value) $deptList[$key] = $value->name;
+                    $overtimeList = $this->overtime->getList($type, $currentYear, $currentMonth, '', array_keys($deptList), '', $orderBy);
+                }
             }
         }
         elseif($type == 'company')
@@ -136,13 +143,13 @@ class overtime extends control
         /* Check privilage. */
         if(!empty($this->config->attend->reviewedBy))
         { 
-            if($this->config->attend->reviewedBy != $this->app->user->account) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
+            if($this->config->attend->reviewedBy != $this->app->user->account) $this->send(array('result' => 'fail', 'message' => $this->lang->overtime->denied));
         }
         else
         {
             $createdUser = $this->loadModel('user')->getByAccount($overtime->createdBy);
             $dept = $this->loadModel('tree')->getByID($createdUser->dept);
-            if((empty($dept) or ",{$this->app->user->account}," != $dept->moderators)) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
+            if((empty($dept) or ",{$this->app->user->account}," != $dept->moderators)) $this->send(array('result' => 'fail', 'message' => $this->lang->overtime->denied));
         }
 
         $this->overtime->review($id, $status);
