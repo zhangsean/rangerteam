@@ -23,6 +23,7 @@
     <div class='panel project-block'>
       <div class='panel-heading'>
         <strong><?php echo $project->name;?></strong>
+        <?php if($this->project->hasActionPriv($project)):?>
         <div class="panel-actions pull-right">
           <div class="dropdown">
             <button class="btn btn-mini" data-toggle="dropdown"><span class="caret"></span></button>
@@ -36,6 +37,7 @@
             </ul>
           </div>
         </div>
+        <?php endif;?>
       </div>
       <div class='panel-body'>
         <p class='info'><?php echo $project->desc;?></p>

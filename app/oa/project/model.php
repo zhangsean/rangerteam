@@ -618,6 +618,12 @@ class projectModel extends model
     public function checkPriv($projectID)
     {
         if($this->app->user->admin == 'super') return true;
+        if(strpos('edit, member, finish, suspend,delete', $this->app->getMethodName()) !== false)
+        {
+            $project = $this->getByID($projectID);
+            if($this->app->user->account != $project->createdBy and $this->app->user->account != $project->PM) return false;
+        }
+
         if(!empty($this->app->user->rights['task']['viewall']))   return true;
         if(!empty($this->app->user->rights['task']['editall']))   return true;
         if(!empty($this->app->user->rights['task']['deleteall'])) return true;
@@ -643,5 +649,18 @@ class projectModel extends model
         }
 
         return in_array($this->app->user->account, $projects[$projectID]->accountList);
+    }
+
+    /**
+     * Check current user has action privilege or not. 
+     * 
+     * @param  int    $project 
+     * @access public
+     * @return void
+     */
+    public function hasActionPriv($project)
+    {
+        if($this->app->user->admin == 'super') return true;
+        return ($this->app->user->account == $project->createdBy or $this->app->user->account == $project->PM);
     }
 }
