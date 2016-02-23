@@ -140,9 +140,9 @@ class overtime extends control
         }
         else
         {
-            $createdUser = $this->loadModel('user')->getByAccount($leave->createdBy);
+            $createdUser = $this->loadModel('user')->getByAccount($overtime->createdBy);
             $dept = $this->loadModel('tree')->getByID($createdUser->dept);
-            if((empty($dept) or ",$this->app->user->account," != $dept->moderators)) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
+            if((empty($dept) or ",{$this->app->user->account}," != $dept->moderators)) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
         }
 
         $this->overtime->review($id, $status);
