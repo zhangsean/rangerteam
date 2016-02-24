@@ -130,7 +130,7 @@ class reportModel extends model
             }
         }
 
-        if(strpos($groupBy, '_multi') !== false and !empty($list))
+        if(strpos($groupBy, '_multi') !== false and isset($list))
         {
             $datas   = array();
             $groupBy = str_replace('_multi', '', $groupBy);
