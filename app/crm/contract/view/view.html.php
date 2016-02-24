@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../../sys/common/view/kindeditor.html.php';?>
 <ul id='menuTitle'>
   <li><?php commonModel::printLink('contract', 'browse', '', $lang->contract->list);?></li>
   <li class='divider angle'></li>
