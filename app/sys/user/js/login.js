@@ -2,6 +2,8 @@ $(document).ready(function()
 {
     $('#account').focus();
 
+    setInterval('ping()', 1000 * config.pingInterval);
+
     $("#langs li > a").click(function() 
     {
         selectLang($(this).data('value'));
