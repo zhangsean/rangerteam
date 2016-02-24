@@ -577,10 +577,10 @@ class contractModel extends model
         if(!dao::isError())
         {
             $changes = commonModel::createChanges($return, $data);
-            if($changes)
+            if($changes or $this->post->comment)
             {
-                $actionID = $this->loadModel('action')->create('contract', $contract->id, 'editReturned');
-                $this->action->logHistory($actionID, $changes);
+                $actionID = $this->loadModel('action')->create('contract', $contract->id, 'editReturned', $this->post->comment);
+                if($changes) $this->action->logHistory($actionID, $changes);
             }
 
             $returnList = $this->getReturnList($return->contract, 'returnedDate_desc');
