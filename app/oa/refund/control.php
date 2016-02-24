@@ -44,7 +44,7 @@ class refund extends control
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->categories   = $this->refund->getCategoryPairs();
-        $this->view->users        = $this->loadModel('user')->getPairs('noclosed,nodeleted');
+        $this->view->users        = $this->loadModel('user')->getPairs('noclosed,nodeleted,noforbidden');
         $this->display();
     }
 
@@ -80,7 +80,7 @@ class refund extends control
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->categories   = $this->refund->getCategoryPairs();
         $this->view->refund       = $refund;
-        $this->view->users        = $this->loadModel('user')->getPairs('noclosed,nodeleted');
+        $this->view->users        = $this->loadModel('user')->getPairs('noclosed,nodeleted,noforbidden');
         $this->display();
     }
 
@@ -367,8 +367,8 @@ class refund extends control
         $this->view->title           = $this->lang->refund->settings; 
         $this->view->firstReviewer   = !empty($this->config->refund->firstReviewer) ? $this->config->refund->firstReviewer : '';
         $this->view->secondReviewer  = !empty($this->config->refund->secondReviewer) ? $this->config->refund->secondReviewer : '';
-        $this->view->firstReviewers  = array('' => $this->lang->dept->moderators) + $this->user->getPairs('noempty,nodeleted,noclosed');
-        $this->view->secondReviewers = $this->user->getPairs('nodeleted,noclosed');
+        $this->view->firstReviewers  = array('' => $this->lang->dept->moderators) + $this->user->getPairs('noempty,nodeleted,noforbidden,noclosed');
+        $this->view->secondReviewers = $this->user->getPairs('nodeleted,noclosed,noforbidden');
         $this->display();
     }
 
