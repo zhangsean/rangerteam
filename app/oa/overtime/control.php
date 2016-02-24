@@ -319,7 +319,7 @@ class overtime extends control
             else
             {
                $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
-               $toList = trim($dept->moderators, ',');
+               if($dept) $toList = trim($dept->moderators, ',');
             }
 
             $subject = "{$this->lang->overtime->common}#{$overtime->id}{$this->lang->colon}{$overtime->begin}~{$overtime->end}";

@@ -498,16 +498,19 @@ class projectModel extends model
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=untilToday", $this->lang->task->untilToday, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=expired",    $this->lang->task->expired, '', false, '', 'li');
 
-            $menu .= "<li>";
-            $menu .= "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>" . $this->lang->project->project. " <i class='icon-caret-down'></i></a>";
-            $menu .= "<ul class='dropdown-menu'>";
-            $menu .= commonModel::printLink('project', 'edit', "projectID=$projectID", $this->lang->edit, "data-toggle='modal'", false, '', 'li');
-            $menu .= commonModel::printLink('project', 'member', "projectID=$projectID", $this->lang->project->member, "data-toggle='modal''", false, '', 'li');
-            if($project->status != 'finished') $menu .= commonModel::printLink('project','finish', "projectID=$projectID", $this->lang->finish, "data-toggle='modal'", false, '', 'li');
-            if($project->status != 'doing') $menu .= commonModel::printLink('project', 'activate', "projectID=$projectID", $this->lang->activate, "class='switcher' data-confirm='{$this->lang->project->confirm->activate}'", false, '', 'li');
-            if($project->status != 'suspend') $menu .= commonModel::printLink('project', 'suspend', "projectID=$projectID", $this->lang->project->suspend, "class='switcher' data-confirm='{$this->lang->project->confirm->suspend}'", false, '', 'li');
-            $menu .= commonModel::printLink('project', 'delete', "projectID=$projectID", $this->lang->delete, "class='deleter'", false, '', 'li');
-            $menu .= "</ul></li>";
+            if($this->app->user->account == $project->createdBy or $this->app->user->account == $project->PM)
+            {
+                $menu .= "<li>";
+                $menu .= "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>" . $this->lang->project->project. " <i class='icon-caret-down'></i></a>";
+                $menu .= "<ul class='dropdown-menu'>";
+                $menu .= commonModel::printLink('project', 'edit', "projectID=$projectID", $this->lang->edit, "data-toggle='modal'", false, '', 'li');
+                $menu .= commonModel::printLink('project', 'member', "projectID=$projectID", $this->lang->project->member, "data-toggle='modal''", false, '', 'li');
+                if($project->status != 'finished') $menu .= commonModel::printLink('project','finish', "projectID=$projectID", $this->lang->finish, "data-toggle='modal'", false, '', 'li');
+                if($project->status != 'doing') $menu .= commonModel::printLink('project', 'activate', "projectID=$projectID", $this->lang->activate, "class='switcher' data-confirm='{$this->lang->project->confirm->activate}'", false, '', 'li');
+                if($project->status != 'suspend') $menu .= commonModel::printLink('project', 'suspend', "projectID=$projectID", $this->lang->project->suspend, "class='switcher' data-confirm='{$this->lang->project->confirm->suspend}'", false, '', 'li');
+                $menu .= commonModel::printLink('project', 'delete', "projectID=$projectID", $this->lang->delete, "class='deleter'", false, '', 'li');
+                $menu .= "</ul></li>";
+            }
         }
         else if($methodName == 'kanban' || $methodName == 'outline')
         {
@@ -518,16 +521,19 @@ class projectModel extends model
                 $menu .= "<li data-group='{$key}'>" . commonModel::printLink('task', $methodName, "projectID=$projectID&groupBy=$key", $value, '', false) . "</li>";
             }
 
-            $menu .= "<li>";
-            $menu .= "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>" . $this->lang->project->project. " <i class='icon-caret-down'></i></a>";
-            $menu .= "<ul class='dropdown-menu'>";
-            $menu .= commonModel::printLink('project', 'edit', "projectID=$projectID", $this->lang->edit, "data-toggle='modal'", false, '', 'li');
-            $menu .= commonModel::printLink('project', 'member', "projectID=$projectID", $this->lang->project->member, "data-toggle='modal''", false, '', 'li');
-            if($project->status != 'finished') $menu .= commonModel::printLink('project','finish', "projectID=$projectID", $this->lang->finish, "data-toggle='modal'", false, '', 'li');
-            if($project->status != 'doing') $menu .= commonModel::printLink('project', 'activate', "projectID=$projectID", $this->lang->activate, "class='switcher' data-confirm='{$this->lang->project->confirm->activate}'", false, '', 'li');
-            if($project->status != 'suspend') $menu .= commonModel::printLink('project', 'suspend', "projectID=$projectID", $this->lang->project->suspend, "class='switcher' data-confirm='{$this->lang->project->confirm->suspend}'", false, '', 'li');
-            $menu .= commonModel::printLink('project', 'delete', "projectID=$projectID", $this->lang->delete, "class='deleter'", false, '', 'li');
-            $menu .= "</ul></li>";
+            if($this->app->user->account == $project->createdBy or $this->app->user->account == $project->PM)
+            {
+                $menu .= "<li>";
+                $menu .= "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>" . $this->lang->project->project. " <i class='icon-caret-down'></i></a>";
+                $menu .= "<ul class='dropdown-menu'>";
+                $menu .= commonModel::printLink('project', 'edit', "projectID=$projectID", $this->lang->edit, "data-toggle='modal'", false, '', 'li');
+                $menu .= commonModel::printLink('project', 'member', "projectID=$projectID", $this->lang->project->member, "data-toggle='modal''", false, '', 'li');
+                if($project->status != 'finished') $menu .= commonModel::printLink('project','finish', "projectID=$projectID", $this->lang->finish, "data-toggle='modal'", false, '', 'li');
+                if($project->status != 'doing') $menu .= commonModel::printLink('project', 'activate', "projectID=$projectID", $this->lang->activate, "class='switcher' data-confirm='{$this->lang->project->confirm->activate}'", false, '', 'li');
+                if($project->status != 'suspend') $menu .= commonModel::printLink('project', 'suspend', "projectID=$projectID", $this->lang->project->suspend, "class='switcher' data-confirm='{$this->lang->project->confirm->suspend}'", false, '', 'li');
+                $menu .= commonModel::printLink('project', 'delete', "projectID=$projectID", $this->lang->delete, "class='deleter'", false, '', 'li');
+                $menu .= "</ul></li>";
+            }
         }
         else if(strpos('view,create,edit', $methodName) !== false)
         {
