@@ -26,6 +26,7 @@ $lang->schema->placeholder->selectField = 'Please select the correct field';
 $lang->schema->placeholder->common      = 'Fill in to the field column, such as: A';
 $lang->schema->placeholder->type        = 'Fill in "income / expenditure" column';
 $lang->schema->placeholder->date        = 'Fill out the "payment time" column';
+$lang->schema->placeholder->product     = 'Fill in "product" column';
 $lang->schema->placeholder->desc        = 'The accounts note, use "," separated, such as: I,O';
 $lang->schema->placeholder->in          = 'The column of income such as E';
 $lang->schema->placeholder->out         = 'The column of expenses such as D';

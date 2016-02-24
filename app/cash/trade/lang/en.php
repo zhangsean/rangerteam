@@ -140,6 +140,7 @@ $lang->trade->importedFields['category'] = 'Category';
 $lang->trade->importedFields['dept']     = 'Department';
 $lang->trade->importedFields['desc']     = 'Desc';
 $lang->trade->importedFields['fee']      = 'Fee';
+$lang->trade->importedFields['product']  = 'Product';
 
 $lang->trade->totalIn       = '%s: income %s；';
 $lang->trade->totalOut      = '%s: expend %s；';
