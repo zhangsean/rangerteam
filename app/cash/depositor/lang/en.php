@@ -70,4 +70,5 @@ $lang->depositor->statusList['normal']  = 'Normal';
 $lang->depositor->statusList['disable'] = 'Disable';
 
 $lang->depositor->placeholder = new stdclass();
-$lang->depositor->placeholder->tags = 'Please divide tags with commas';
+$lang->depositor->placeholder->tags     = 'Please divide tags with commas';
+$lang->depositor->placeholder->noBccomp = 'Please install bccmom extension first.';

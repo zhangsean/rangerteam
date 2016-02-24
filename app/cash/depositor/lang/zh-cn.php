@@ -70,4 +70,5 @@ $lang->depositor->statusList['normal']  = '正常';
 $lang->depositor->statusList['disable'] = '停用';
 
 $lang->depositor->placeholder = new stdclass();
-$lang->depositor->placeholder->tags = '多个标签之间用逗号隔开';
+$lang->depositor->placeholder->tags     = '多个标签之间用逗号隔开';
+$lang->depositor->placeholder->noBccomp = '请先安装bccomp扩展';
