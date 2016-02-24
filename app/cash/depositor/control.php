@@ -157,7 +157,7 @@ class depositor extends control
      */
     public function check($depositorID = 0)
     {
-        if(function_exists('bccomp')) die(js::alert($this->lang->depositor->placeholder->noBccomp) . js::locate('back'));
+        if(!function_exists('bccomp')) die(js::alert($this->lang->depositor->placeholder->noBccomp) . js::locate('back'));
 
         $this->loadModel('trade');
         unset($this->lang->depositor->menu);
