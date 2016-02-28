@@ -102,6 +102,7 @@ class trade extends control
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->currencySign  = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->currencyList  = $this->common->getCurrencyList();
+        $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
         $this->view->tradeYears    = $tradeYears;
         $this->view->tradeQuarters = $tradeQuarters;
         $this->view->tradeMonths   = $tradeMonths;
