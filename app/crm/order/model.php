@@ -264,7 +264,7 @@ class orderModel extends model
             ->setDefault('assignedDate', $now)
             ->setDefault('customer', 0)
             ->join('product', ',')
-            ->remove('createCustomer, name, contact, phone, email, qq, continue, createProduct, productName, line, type, status')
+            ->remove('createCustomer, name, contact, phone, email, qq, continue, createProduct, productName, line, type, status, code')
             ->get();
 
         /* Check data. */
