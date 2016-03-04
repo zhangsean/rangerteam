@@ -24,14 +24,12 @@
           <td>
             <div class='input-group'>
               <?php echo html::select('customer', $customers, '', "class='form-control chosen'");?>
-              <?php if(commonModel::hasPriv('contact', 'create')):?>
               <?php echo html::input('name', '', "class='form-control' style='display:none'");?>
               <span class='input-group-addon'>
                 <label class='checkbox'>
                   <input type='checkbox' name='createCustomer' id='createCustomer' value='1' /><?php echo $lang->order->createCustomer?>
                 </label>
               </span>
-              <?php endif;?>
             </div>
           </td>
         </tr>
@@ -66,13 +64,6 @@
                 </label>
               </span>
             </div>
-          </td>
-        </tr>
-        <tr class='productInfo hide'>
-          <th><?php echo $lang->product->code;?></th>
-          <td>
-            <div class='required required-wrapper'></div>
-            <?php echo html::input("code", '', "class='form-control'");?>
           </td>
         </tr>
         <tr class='productInfo hide'>
