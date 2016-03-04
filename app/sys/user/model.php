@@ -176,7 +176,7 @@ class userModel extends model
      */
     public function getRoleList()
     {
-        return array_values($this->lang->user->roleList);
+        return $this->lang->user->roleList;
     }
 
     /**
