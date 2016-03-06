@@ -109,9 +109,10 @@ class actionModel extends model
     /**
      * Get actions of an object.
      * 
-     * @param  int       $objectType 
-     * @param  int       $objectID 
-     * @param  string    $action 
+     * @param  string $objectType 
+     * @param  int    $objectID 
+     * @param  string $action 
+     * @param  object $pager
      * @access public
      * @return array
      */
@@ -309,8 +310,7 @@ class actionModel extends model
     /**
      * Get actions as dynamic.
      * 
-     * @param  string $objectType 
-     * @param  string $count 
+     * @param  string $acount 
      * @param  string $period 
      * @param  string $orderBy 
      * @param  object $pager
