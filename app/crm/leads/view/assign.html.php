@@ -13,15 +13,15 @@
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
-<form method='post' id='ajaxForm' action='<?php echo $this->createLink('leads', 'assign', "contactID=$contactID")?>'>
+<form method='post' id='ajaxForm' action='<?php echo $this->createLink('leads', 'assign', "contactID=$contactID");?>'>
   <table class='table table-form'>
     <tr>
       <th class='w-50px'><?php echo $lang->contact->assign;?></th>
-      <td><?php echo html::select('assignedTo', $users, '', "class='form-control chosen'")?></td>
+      <td><?php echo html::select('assignedTo', $users, '', "class='form-control chosen'");?></td>
     </tr>
     <tr>
-      <th><?php echo $lang->comment?></th>
-      <td><?php echo html::textarea('comment')?></td>
+      <th><?php echo $lang->comment;?></th>
+      <td><?php echo html::textarea('comment');?></td>
     </tr>
     <tr>
       <th></th>
@@ -30,4 +30,3 @@
   </table>
 </form>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>
-

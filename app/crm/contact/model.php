@@ -126,6 +126,13 @@ class contactModel extends model
                 ->beginIF($mode == 'ignoredBy')->andWhere('ignoredBy')->eq($this->app->user->account)->fi()
                 ->beginIF($mode == 'bysearch')->andWhere($contactQuery)->fi()
                 ->beginIF($mode == 'next')->andWhere('assignedTo')->eq($this->app->user->account)->andWhere('nextDate')->fi()
+
+                ->beginIF($this->app->user->admin == 'super')
+                ->andWhere('assignedTo', true)->eq($this->app->user->account)
+                ->orWhere('status')->eq('ignore')
+                ->markRight()
+                ->fi()
+                
                 ->orderBy($orderBy)
                 ->page($pager)
                 ->fetchAll('id');
@@ -646,6 +653,8 @@ class contactModel extends model
     public function assign($contactID)
     {
         $contact = fixer::input('post')
+            ->add('status', 'wait')
+            ->add('ignoredBy', '')
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->get();
