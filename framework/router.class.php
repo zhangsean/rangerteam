@@ -1490,7 +1490,12 @@ class router
         $view->methodVar   = $this->config->methodVar;
         $view->viewVar     = $this->config->viewVar;
         $view->sessionVar  = $this->config->sessionVar;
+
+        if(!$this->session->random) $this->session->set('random', md5(time() . mt_rand()));
         $view->sessionName = session_name();
+        $view->sessionID   = session_id();
+        $view->rand        = $this->session->random;
+        $view->expiredTime = ini_get('session.gc_maxlifetime');
         
         $view->ip          = gethostbyname($_SERVER['HTTP_HOST']);
         $view->name        = $this->config->socket->name;

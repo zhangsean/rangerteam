@@ -36,9 +36,22 @@ class user extends control
         $loginLink = $this->createLink('user', 'login');
         $denyLink  = $this->createLink('user', 'deny');
 
+        /* Reload lang by lang of get when viewType is json. */
+        if($this->app->getViewType() == 'json' and $this->get->lang and $this->get->lang != $this->app->getClientLang())
+        {
+            $this->app->setClientLang($this->get->lang);
+            $this->app->loadLang('user');
+        }
+
         /* If the user logon already, goto the pre page. */
         if($this->user->isLogon())
         {
+            if($this->app->getViewType() == 'json')
+            {
+                $data = $this->user->getDataInJSON($this->app->user);
+                die(helper::removeUTF8Bom(json_encode(array('status' => 'success') + $data)));
+            }
+
             if($this->referer and strpos($loginLink . $denyLink, $this->referer) !== false) $this->locate($this->referer);
             $this->locate($this->createLink($this->config->default->module));
             exit;
@@ -47,7 +60,23 @@ class user extends control
         /* If the user sumbit post, check the user and then authorize him. */
         if(!empty($_POST))
         {
-            if(!$this->user->login($this->post->account, $this->post->password)) $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
+            $user = $this->user->login($this->post->account, $this->post->password);
+            if($this->app->getViewType() == 'json')
+            {
+                if($user)
+                {
+                    $data = $this->user->getDataInJSON($user);
+                    die(helper::removeUTF8Bom(json_encode(array('status' => 'success') + $data)));
+                }
+                else
+                {
+                    die(helper::removeUTF8Bom(json_encode(array('status' => 'failed', 'reason' => $this->lang->user->loginFailed))));
+                }
+            }
+            else
+            {
+                if(!$user) $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
+            }
 
             /* Goto the referer or to the default module */
             if($this->post->referer != false and strpos($loginLink . $denyLink, $this->post->referer) === false)
@@ -58,6 +87,10 @@ class user extends control
             {
                 $this->send(array('result'=>'success', 'locate' => $this->createLink('index', 'index')));
             }
+        }
+        else if($this->app->getViewType() == 'json')
+        {
+            die(helper::removeUTF8Bom(json_encode(array('status' => 'failed', 'reason' => $this->lang->user->loginFailed))));
         }
 
         if(!$this->session->random) $this->session->set('random', md5(time() . mt_rand()));

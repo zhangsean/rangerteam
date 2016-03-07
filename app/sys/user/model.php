@@ -321,7 +321,7 @@ class userModel extends model
 
         $this->loadModel('action')->create('user', $user->id, 'login');
 
-        return true;
+        return $user;
     }
 
     /**
@@ -598,5 +598,29 @@ class userModel extends model
         $file = $this->file->getByID($fileIdList[0]);
         $this->dao->update(TABLE_USER)->set('avatar')->eq($file->fullURL)->where('account')->eq($this->app->user->account)->exec();
         return array('result' => 'success', 'message' => $this->lang->user->uploadSuccess, 'locate' => inlink('cropavatar', "image={$file->id}"));
+    }
+
+    /**
+     * Get data in JSON.
+     * 
+     * @param  object    $user 
+     * @access public
+     * @return array
+     */
+    public function getDataInJSON($user)
+    {
+        $data                   = array();
+        $data['user']           = new stdclass();
+        $data['user']->id       = $user->id;
+        $data['user']->account  = $user->account;
+        $data['user']->email    = $user->email;
+        $data['user']->realname = $user->realname;
+        $data['user']->gender   = $user->gender;
+        $data['user']->dept     = $user->dept;
+        $data['user']->role     = $user->role;
+        $data['user']->company  = $this->app->company->name;
+        $data['user']->avatar   = $user->avatar;
+
+        return $data;
     }
 }
