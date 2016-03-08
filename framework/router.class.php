@@ -1180,6 +1180,7 @@ class router
      */
     public function loadModule()
     {
+        $appName    = $this->appName;
         $moduleName = $this->moduleName;
         $methodName = $this->methodName;
 
@@ -1210,9 +1211,9 @@ class router
             $name = $param->getName();
             
             $default = '_NOT_SET';
-            if(isset($paramDefaultValue[$className][$methodName][$name]))
+            if(isset($paramDefaultValue[$appName][$className][$methodName][$name]))
             {
-                $default = $paramDefaultValue[$className][$methodName][$name];
+                $default = $paramDefaultValue[$appName][$className][$methodName][$name];
             }
             elseif($param->isDefaultValueAvailable())
             {
