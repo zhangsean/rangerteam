@@ -277,7 +277,7 @@ $lang->resource->trade->inveset     = 'inveset';
 $lang->resource->trade->detail      = 'detail';
 $lang->resource->trade->delete      = 'delete';
 $lang->resource->trade->import      = 'import';
-$lang->resource->trade->showimport  = 'showImport';
+$lang->resource->trade->showImport  = 'showImport';
 $lang->resource->trade->export      = 'export';
 $lang->resource->trade->report      = 'report';
 

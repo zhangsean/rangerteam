@@ -1574,7 +1574,7 @@ INSERT INTO `sys_grouppriv` (`group`, `module`, `method`) VALUES
 (1,'trade','import'),
 (1,'trade','inveset'),
 (1,'trade','report'),
-(1,'trade','showimport'),
+(1,'trade','showImport'),
 (1,'trade','transfer'),
 (1,'tree','browse'),
 (1,'tree','children'),
