@@ -326,13 +326,12 @@ class actionModel extends model
         /* Get actions. */
         $actions = $this->dao->select('*')->from(TABLE_ACTION)
             ->where(1)
+            ->andWhere('objectType')->notin('attend,refund,leave,trip,action')
             ->beginIF($period != 'all')->andWhere('date')->gt($begin)->fi()
             ->beginIF($period != 'all')->andWhere('date')->lt($end)->fi()
             ->beginIF($account != 'all')->andWhere('actor')->eq($account)->fi()
             ->orderBy($orderBy)
             ->fetchAll();
-
-        foreach($actions as $key => $action) if(strpos('attend,refund,leave,trip,action', $action->objectType) !== false) unset($actions[$key]);
 
         if(!$actions) return array();
         $actions = $this->transformActions($actions);
