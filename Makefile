@@ -36,6 +36,7 @@ ranzhi:
 	rm ranzhi/www/cash/index.html
 	rm ranzhi/www/oa/index.html
 	rm ranzhi/www/team/index.html
+	rm ranzhi/www/rm/index.html
 	# change mode.
 	chmod -R 777 ranzhi/tmp/
 	chmod -R 777 ranzhi/www/data
