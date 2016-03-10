@@ -67,7 +67,7 @@ class orderModel extends model
      */
     public function getList($mode = 'all', $param = null, $owner = '', $orderBy = 'id_desc', $pager = null)
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
         $products = $this->loadModel('product')->getPairs();
