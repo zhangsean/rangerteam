@@ -25,6 +25,7 @@ class my extends control
 
         $this->loadModel('attend', 'oa');
         $this->loadModel('leave', 'oa');
+        $this->loadModel('overtime', 'oa');
         $this->loadModel('refund', 'oa');
         $account = $this->app->user->account;
 
@@ -47,6 +48,10 @@ class my extends control
         /* Get leave list. */
         $leaves = array();
         if($type == 'leave' and !empty($deptList)) $leaves = $this->leave->getList('browseReview', $year = '', $month = '', '', array_keys($deptList), $status = 'wait', $orderBy);
+
+        /* Get overtime list. */
+        $overtimes = array();
+        if($type == 'overtime' and !empty($deptList)) $overtimes = $this->overtime->getList('browseReview', $year = '', $month = '', '', array_keys($deptList), $status = 'wait', $orderBy);
 
         /* Get refund list. */
         $refunds = array();
@@ -76,6 +81,7 @@ class my extends control
         $this->view->title        = $this->lang->refund->review;
         $this->view->attends      = $attends;
         $this->view->leaveList    = $leaves;
+        $this->view->overtimeList = $overtimes;
         $this->view->refunds      = $refunds;
         $this->view->deptList     = $allDeptList;
         $this->view->users        = $this->loadModel('user')->getPairs();

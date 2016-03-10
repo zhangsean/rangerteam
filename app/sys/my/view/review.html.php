@@ -78,8 +78,46 @@
       <td class='leave-<?php echo $leave->status?>'><?php echo zget($this->lang->leave->statusList, $leave->status);?></td>
       <td><?php echo zget($users, $leave->reviewedBy);?></td>
       <td>
-        <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=pass"), $lang->leave->statusList['pass'], "data-status='pass' data-toggle='ajax'");?>
-        <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=reject"), $lang->leave->statusList['reject'], "data-status='reject' data-toggle='ajax'");?>
+        <?php echo html::a($this->createLink('oa.leave', 'review', "id={$leave->id}&status=pass"), $lang->leave->statusList['pass'], "data-status='pass' data-toggle='ajax'");?>
+        <?php echo html::a($this->createLink('oa.leave', 'review', "id={$leave->id}&status=reject"), $lang->leave->statusList['reject'], "data-status='reject' data-toggle='ajax'");?>
+      </td>
+    </tr>
+    <?php endforeach;?>
+  </table>
+</div>
+<?php endif;?>
+<?php if($type == 'overtime'):?>
+<div class='panel'>
+  <table class='table table-data table-hover text-center table-fixed tablesorter' id='overtimeTable'>
+    <thead>
+      <tr class='text-center'>
+        <?php $vars = "type={$type}&orderBy=%s";?>
+        <th class='w-80px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->overtime->id);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->overtime->createdBy);?></th>
+        <th class='w-80px'><?php echo $lang->user->dept;?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->overtime->type);?></th>
+        <th class='w-150px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->overtime->begin);?></th>
+        <th class='w-150px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->overtime->end);?></th>
+        <th><?php echo $lang->overtime->desc;?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->overtime->status);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('reviewedBy', $orderBy, $vars, $lang->overtime->reviewedBy);?></th>
+        <th class='w-150px'><?php echo $lang->actions;?></th>
+      </tr>
+    </thead>
+    <?php foreach($overtimeList as $overtime):?>
+    <tr>
+      <td><?php echo $overtime->id;?></td>
+      <td><?php echo zget($users, $overtime->createdBy);?></td>
+      <td><?php echo zget($deptList, $overtime->dept);?></td>
+      <td><?php echo zget($this->lang->overtime->typeList, $overtime->type);?></td>
+      <td><?php echo $overtime->begin . ' ' . $overtime->start;?></td>
+      <td><?php echo $overtime->end . ' ' . $overtime->finish;?></td>
+      <td title='<?php echo $overtime->desc?>'><?php echo $overtime->desc;?></td>
+      <td class='overtime-<?php echo $overtime->status?>'><?php echo zget($this->lang->overtime->statusList, $overtime->status);?></td>
+      <td><?php echo zget($users, $overtime->reviewedBy);?></td>
+      <td>
+        <?php echo html::a($this->createLink('oa.overtime', 'review', "id={$overtime->id}&status=pass"), $lang->overtime->statusList['pass'], "data-status='pass' data-toggle='ajax'");?>
+        <?php echo html::a($this->createLink('oa.overtime', 'review', "id={$overtime->id}&status=reject"), $lang->overtime->statusList['reject'], "data-status='reject' data-toggle='ajax'");?>
       </td>
     </tr>
     <?php endforeach;?>
