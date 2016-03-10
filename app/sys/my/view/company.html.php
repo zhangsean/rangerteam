@@ -60,7 +60,7 @@
       </thead>
       <?php foreach($todoList as $user => $todos):?>
       <tr>
-        <td class='text-center text-middle'><?php echo zget($deptList, $userDept[$user])?></td>
+        <td class='text-center text-middle'><?php echo zget($deptList, $userDept[$user], ' ')?></td>
         <td class='text-center text-middle'><?php echo zget($users, $user)?></td>
         <?php foreach($dateList as $currentDate):?>
         <td>
