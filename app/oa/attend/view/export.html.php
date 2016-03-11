@@ -10,4 +10,6 @@
  * @link        http://www.ranzhico.com
  */
 ?>
-<?php include '../../../sys/file/view/export.html.php';?>
+<?php 
+include '../../../sys/file/view/export.html.php';
+css::import($this->app->getClientTheme() . 'theme.oa.css');
