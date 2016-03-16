@@ -54,7 +54,7 @@ $(function()
         return $(this).each(function()
         {
             var $this = $(this);
-            if($this.offset().top + 200 > $(document.body).height())
+            if($this.hasClass('date-picker-up') || (!$this.hasClass('date-picker-down') && $this.offset().top + 200 > $(document.body).height()))
             {
                 $this.attr('data-picker-position', 'top-right');
             }
