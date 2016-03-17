@@ -19,8 +19,7 @@
       <div class='panel-body'>
         <form method='post'>
           <?php echo html::checkBox('charts', $lang->report->{$module}->chartList, $checkedCharts, '', 'block');?>
-          <p><?php echo html::selectButton();?></p>
-          <p><?php echo html::submitButton($lang->report->create);?></p>
+          <p><?php echo html::selectAll() . html::submitButton($lang->report->create);?></p>
         </form>
       </div>
     </div>
