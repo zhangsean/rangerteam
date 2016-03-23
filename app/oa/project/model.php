@@ -521,7 +521,7 @@ class projectModel extends model
                 $menu .= "<li data-group='{$key}'>" . commonModel::printLink('task', $methodName, "projectID=$projectID&groupBy=$key", $value, '', false) . "</li>";
             }
 
-            if($this->app->user->account == $project->createdBy or $this->app->user->account == $project->PM)
+            if($this->app->user->admin == 'super' or $this->app->user->account == $project->createdBy or $this->app->user->account == $project->PM)
             {
                 $menu .= "<li>";
                 $menu .= "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>" . $this->lang->project->project. " <i class='icon-caret-down'></i></a>";

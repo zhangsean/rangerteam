@@ -92,7 +92,7 @@
         <?php if($trade->type == 'in'):?>
         <tr>
           <th><?php echo $lang->trade->product;?></th>
-          <td><?php echo html::select('product', array('') + $productList, $trade->product, "class='form-control'");?></td>
+          <td><?php echo html::select('product', array('') + $productList, $trade->product, "class='form-control chosen'");?></td>
         </tr>
         <?php endif;?>
         <tr>

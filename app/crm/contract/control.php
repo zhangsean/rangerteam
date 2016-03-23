@@ -505,7 +505,11 @@ class contract extends control
     {
         $contractList = $this->contract->getList($customer);
         echo "<option value=''></option>";
-        foreach($contractList as $id => $contract) echo "<option value='{$id}' data-amount='{$contract->amount}'>{$contract->name}</option>";
+        foreach($contractList as $id => $contract) 
+        {
+            $date = date('Y-m-d', strtotime($contract->createdDate));
+            echo "<option value='{$id}' data-amount='{$contract->amount}'>{$contract->name}({$contract->amount}  {$date})</option>";
+        }
         exit;
     }
 

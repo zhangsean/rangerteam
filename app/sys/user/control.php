@@ -256,7 +256,7 @@ class user extends control
             $this->user->create();          
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError())); 
             /* Go to the referer. */        
-            $this->send( array('result' => 'success', 'locate'=>inlink('admin')) );
+            $this->send( array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')) );
         }                      
 
         $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('dept', 0, array('treeModel', 'createDeptAdminLink'));
