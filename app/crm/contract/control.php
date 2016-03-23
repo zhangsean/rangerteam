@@ -199,9 +199,9 @@ class contract extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
-        $this->view->title      = $this->lang->contract->delivery;
-        $this->view->contractID = $contractID;
-        $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->title    = $this->lang->contract->delivery;
+        $this->view->contract = $contract;
+        $this->view->users    = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
