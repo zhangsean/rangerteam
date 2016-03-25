@@ -71,7 +71,6 @@ $lang->todo->priList[1] = '最高';
 $lang->todo->priList[2] = '较高';
 $lang->todo->priList[4] = '最低';
 
-$lang->todo->typeList['undone']   = '未完成';
 $lang->todo->typeList['custom']   = '自定义';
 $lang->todo->typeList['task']     = '项目任务';
 $lang->todo->typeList['order']    = '订单沟通';

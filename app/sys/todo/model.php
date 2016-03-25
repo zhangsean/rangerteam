@@ -113,11 +113,11 @@ class todoModel extends model
     public function update($todoID)
     {
         $oldTodo = $this->getById($todoID);
-        if($oldTodo->type != 'custom' and $oldTodo->type != 'undone') $oldTodo->name = '';
+        if($oldTodo->type != 'custom') $oldTodo->name = '';
         $todo = fixer::input('post')
             ->remove('uid')
             ->cleanInt('date, pri, begin, end, private')
-            ->setIF($this->post->type  != 'custom' and $this->post->type != 'undone', 'name', '')
+            ->setIF($this->post->type  != 'custom', 'name', '')
             ->setIF($this->post->date  == false, 'date', '0000-00-00')
             ->setIF($this->post->begin == false, 'begin', '2400')
             ->setIF($this->post->end   == false, 'end', '2400')
@@ -126,7 +126,7 @@ class todoModel extends model
             ->get();
         $this->dao->update(TABLE_TODO)->data($todo, $skip = 'comment')
             ->autoCheck()
-            ->checkIF($todo->type == 'custom' or $todo->type == 'undone', $this->config->todo->require->edit, 'notempty')->where('id')->eq($todoID)
+            ->checkIF($todo->type == 'custom', $this->config->todo->require->edit, 'notempty')->where('id')->eq($todoID)
             ->exec();
 
         $todo->date = str_replace('-', '', $todo->date);
@@ -327,7 +327,7 @@ class todoModel extends model
             ->beginIF($mode == 'assignedtome')->andWhere('account')->ne($account)->andWhere('assignedTo')->eq($account)->fi()
             ->andWhere("date >= '$begin'")
             ->andWhere("date <= '$end'")
-            ->beginIF(strpos('all, undone, unclosed,custom', $status) === false)->andWhere('status')->in($status)->fi()
+            ->beginIF(strpos('all,undone,unclosed,custom', $status) === false)->andWhere('status')->in($status)->fi()
             ->beginIF($status == 'undone')->andWhere('status')->notin('done,closed')->fi()
             ->beginIF($status == 'custom')->andWhere('status')->notin('done,closed')->fi()
             ->beginIF($status == 'unclosed')->andWhere('status')->ne('closed')->fi()
