@@ -57,8 +57,8 @@ class settingModel extends model
         if($level <= 2) return false;
         if($type == 'config')
         {
-        if($level == 3) list($owner, $app, $module, $key) = explode('.', $path);
-        if($level == 4) list($owner, $app, $module, $section, $key) = explode('.', $path);
+            if($level == 3) list($owner, $app, $module, $key) = explode('.', $path);
+            if($level == 4) list($owner, $app, $module, $section, $key) = explode('.', $path);
         }
         elseif($type == 'lang')
         {
