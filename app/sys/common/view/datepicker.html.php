@@ -87,5 +87,6 @@ $(function()
     $('.form-datetime').fixedDate().datetimepicker(options);
     $('.form-date').fixedDate().datetimepicker($.extend(options, {minView: 2, format: 'yyyy-mm-dd'}));
     $('.form-time').fixedDate().datetimepicker($.extend(options, {startView: 1, minView: 0, maxView: 1, format: 'hh:ii'}));
+    $('.form-month').fixedDate().datetimepicker($.extend(options, {startView: 3, minView: 3, format: 'yyyy-mm'}));
 });
 </script>
