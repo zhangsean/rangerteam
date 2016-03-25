@@ -49,7 +49,7 @@
       <td colspan='3'>
         <div class='chart-wrapper text-center'>
           <h5><?php echo $currentYear . $lang->trade->report->annual . '(' . $currencyList[$currentCurrency] . ')';?></h5>
-          <div class='chart-canvas'><canvas height='260' width='800' id='myBarChart'></canvas></div>
+          <div class='chart-canvas'><canvas height='200' width='800' id='myBarChart'></canvas></div>
         </div>
       </td>
       <td class='w-400px'>
@@ -80,17 +80,17 @@
   </table>
   <?php foreach($monthlyChartDatas as $type => $chartDatas):?>
   <table class='table active-disabled'>
+    <?php foreach($chartDatas as $groupBy => $datas):?>
     <tr class='text-top'>
-      <?php foreach($chartDatas as $groupBy => $datas):?>
       <td>
         <div class='chart-wrapper text-center'>
           <?php $dateTip = $currentMonth == '00' ? $currentYear . $lang->year : $currentMonth . $lang->month;?>
           <h5><?php echo $dateTip . $lang->trade->$type . $lang->trade->chartList[$groupBy];?></h5>
-          <div class='chart-canvas'><canvas id="<?php echo 'chart-' . $type . '-' . $groupBy;?>" width='320' height='140' data-responsive='true'></canvas></div>
+          <div class='chart-canvas'><canvas id="<?php echo 'chart-' . $type . '-' . $groupBy;?>" width='800' height='200' data-responsive='true'></canvas></div>
         </div>
       </td>
       <td class='w-300px'>
-        <div style="overflow:auto; max-height:250px" class='table-wrapper'>
+        <div style="overflow:auto; max-height:260px" class='table-wrapper'>
           <table class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='pie' data-target="<?php echo '#chart-' . $type . '-' . $groupBy;?>" data-animation='false'>
             <thead>
               <tr>
@@ -113,8 +113,8 @@
           </table>
         </div>
       </td>
-      <?php endforeach;?>
     </tr>
+    <?php endforeach;?>
   </table>
   <?php endforeach;?>
 </div>

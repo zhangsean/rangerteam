@@ -64,6 +64,10 @@ $lang->trade->report = new stdclass();
 $lang->trade->report->common = '报表'; 
 $lang->trade->report->annual = '年度收支表'; 
 
+$lang->trade->report->typeList['annual']  = '年度收支表'; 
+$lang->trade->report->typeList['compare'] = '年度对比表'; 
+$lang->trade->report->typeList['in']      = '收入统计表'; 
+
 $lang->trade->typeList['in']          = '收入';
 $lang->trade->typeList['out']         = '支出';
 $lang->trade->typeList['transferout'] = '转出';
