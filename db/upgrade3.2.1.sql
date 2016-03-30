@@ -1,1 +1,12 @@
 UPDATE `oa_todo` set `type` = 'custom' where `type` = 'undone';
+ALTER TABLE `crm_customer` CHANGE `id`       `id`       mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+ALTER TABLE `crm_service`  CHANGE `customer` `customer` mediumint(8) unsigned NOT NULL;
+ALTER TABLE `oa_doc`       CHANGE `views`    `views`    mediumint(8) unsigned NOT NULL;
+ALTER TABLE `oa_doclib`    CHANGE `id`       `id`       mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+ALTER TABLE `cash_trade`   CHANGE `trader`   `trader`   mediumint(8) unsigned NOT NULL;
+ALTER TABLE `team_thread`  CHANGE `views`    `views`    mediumint(8) unsigned NOT NULL;
+ALTER TABLE `team_thread`  CHANGE `replies`  `replies`  mediumint(8) unsigned NOT NULL;
+ALTER TABLE `sys_block`    CHANGE `id`       `id`       mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+ALTER TABLE `sys_entry`    CHANGE `id`       `id`       mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+ALTER TABLE `sys_tag`      CHANGE `id`       `id`       mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
+ALTER TABLE `sys_user`     CHANGE `id`       `id`       mediumint(8) unsigned NOT NULL AUTO_INCREMENT;

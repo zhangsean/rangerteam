@@ -11,7 +11,7 @@
  */
 if(!isset($lang->report)) $lang->report = new stdclass();
 $lang->report->common     = '报表';
-$lang->report->browse     = '查看报表';
+$lang->report->browse     = '订单报表、客户报表、合同报表';
 $lang->report->list       = '统计报表';
 $lang->report->item       = '条目';
 $lang->report->value      = '值';

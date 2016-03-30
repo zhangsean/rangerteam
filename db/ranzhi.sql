@@ -127,7 +127,7 @@ CREATE TABLE `crm_contractorder` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `crm_customer`;
 CREATE TABLE `crm_customer` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(100) NOT NULL,
   `type` char(30) NOT NULL,
   `relation` enum('client', 'provider', 'partner') NOT NULL default 'client',
@@ -424,7 +424,7 @@ CREATE TABLE `oa_trip` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_todo`;
 CREATE TABLE IF NOT EXISTS `oa_todo` (
-  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `account` char(30) NOT NULL,
   `date` date NOT NULL,
   `begin` smallint(4) unsigned zerofill NOT NULL,
@@ -448,7 +448,7 @@ CREATE TABLE IF NOT EXISTS `oa_todo` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_refund`;
 CREATE TABLE IF NOT EXISTS `oa_refund` (
-  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(150) NOT NULL,
   `parent`  mediumint(8) NOT NULL DEFAULT 0,
   `category` char(30) NOT NULL,
