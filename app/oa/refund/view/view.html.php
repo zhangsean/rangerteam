@@ -69,6 +69,7 @@
       if($mode == 'todo' && $refund->status == 'pass')
       {
           commonModel::printLink('refund', 'reimburse', "refundID={$refund->id}", $lang->refund->common, "class='btn btn-default refund'");
+          commonModel::printLink('refund', 'createtrade', "refundID={$refund->id}", $lang->refund->common, "class='createTrade hide'");
       }
 
       $browseLink = $this->session->refundList ? $this->session->refundList : inlink('personal');

@@ -436,14 +436,14 @@ class refund extends control
 
         if($action->action == 'created' or $action->action == 'revoked' or $action->action == 'commited')
         {
-            if(!empty($this->config->refund->firstReviewedBy))
+            if(!empty($this->config->refund->firstReviewer))
             {
-                $toList = $this->config->refund->firstReviewedBy; 
+                $toList = $this->config->refund->firstReviewer; 
             }
             else
             {
                $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
-               $toList = trim($dept->moderators, ',');
+               $toList = isset($dept->moderators) ? trim($dept->moderators, ',') : '';
             }
             $subject = "{$this->lang->refund->create}#{$refund->id}{$this->lang->colon}{$refund->name} " . zget($users, $refund->createdBy);
         }
