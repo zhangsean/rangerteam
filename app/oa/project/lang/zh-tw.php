@@ -15,6 +15,7 @@ $lang->project->browse     = '項目列表';
 $lang->project->index      = '項目首頁';
 $lang->project->create     = "創建項目";
 $lang->project->edit       = '修改項目';
+$lang->project->view       = '項目詳情';
 $lang->project->finish     = '完成項目';
 $lang->project->delete     = '刪除項目';
 $lang->project->enter      = '進入';

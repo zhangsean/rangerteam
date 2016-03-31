@@ -262,9 +262,10 @@ $lang->todo->menu->all             = '所有|todo|browse|mode=all';
 $lang->my = new stdclass();
 $lang->my->review = new stdclass();
 $lang->my->review->menu = new stdclass();
-$lang->my->review->menu->attend = '考勤|my|review|type=attend';
-$lang->my->review->menu->leave  = '請假|my|review|type=leave';
-$lang->my->review->menu->refund = '報銷|my|review|type=refund';
+$lang->my->review->menu->attend   = '考勤|my|review|type=attend';
+$lang->my->review->menu->leave    = '請假|my|review|type=leave';
+$lang->my->review->menu->overtime = '加班|my|review|type=overtime';
+$lang->my->review->menu->refund   = '報銷|my|review|type=refund';
 
 $lang->my->order = new stdclass();
 $lang->my->order->menu = new stdclass();

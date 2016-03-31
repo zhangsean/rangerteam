@@ -14,7 +14,7 @@ $lang->tree->add         = "Add";
 $lang->tree->edit        = "Edit";
 $lang->tree->children    = "Add child";
 $lang->tree->delete      = "Delete";
-$lang->tree->browse      = "Manage";
+$lang->tree->browse      = "Area, Industry, Income Categories, Expend Categories, Forum Boards, Blog Categories, Depts";
 $lang->tree->manage      = "Manage";
 $lang->tree->fix         = "Fix data";
 

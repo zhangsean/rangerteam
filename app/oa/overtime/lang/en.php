@@ -34,10 +34,10 @@ $lang->overtime->typeList['rest']    = 'On weekends';
 $lang->overtime->typeList['holiday'] = 'On holiday';
 $lang->overtime->typeList['lieu']    = 'Lieu';
 
-$lang->overtime->statusList['draft']  = 'draft';
-$lang->overtime->statusList['wait']   = 'wait';
-$lang->overtime->statusList['pass']   = 'pass';
-$lang->overtime->statusList['reject'] = 'reject';
+$lang->overtime->statusList['draft']  = 'Draft';
+$lang->overtime->statusList['wait']   = 'Wait';
+$lang->overtime->statusList['pass']   = 'Pass';
+$lang->overtime->statusList['reject'] = 'Reject';
 
 $lang->overtime->denied = 'Denied';
 $lang->overtime->unique = '%s has a record.';

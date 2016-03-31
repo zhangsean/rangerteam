@@ -382,6 +382,14 @@ class task extends control
         $task    = $this->task->getByID($taskID);
         $this->checkPriv($task, 'assignTo');
 
+        $members = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
+        /* Compute next assignedTo. */
+        if(!empty($task->team))
+        {
+            $task->assignedTo = $this->task->getNextUser(array_keys($task->team), $task->assignedTo);
+            $members = $this->task->getMemberPairs($task);
+        }
+
         if($_POST)
         {
             $changes = $this->task->assign($taskID);
@@ -390,20 +398,12 @@ class task extends control
             if($changes)
             {
                 $actionType = empty($task->team) ? 'Assigned' : 'Transmit';
-                $actionID = $this->loadModel('action')->create('task', $taskID, $actionType, $this->post->comment, $this->post->assignedTo);
+                $actionID = $this->loadModel('action')->create('task', $taskID, $actionType, $this->post->comment, zget($members, $this->post->assignedTo));
                 $this->action->logHistory($actionID, $changes);
                 $this->sendmail($taskID, $actionID);
             }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
-        }
-
-        $members = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
-        /* Compute next assignedTo. */
-        if(!empty($task->team))
-        {
-            $task->assignedTo = $this->task->getNextUser(array_keys($task->team), $task->assignedTo);
-            $members = $this->task->getMemberPairs($task);
         }
 
         $this->view->title  = $task->name;

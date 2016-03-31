@@ -14,7 +14,7 @@ $lang->setting->reset  = 'Reset';
 $lang->setting->key    = 'Key';
 $lang->setting->value  = 'Value';
 
-$lang->setting->lang = 'Setting';
+$lang->setting->lang = 'Product status, Product lines, Customer types, Customer Size, Customer Level, Customer Status, Currency, Roles';
 
 $lang->setting->customerPool = 'Customer setting';
 $lang->setting->modules      = 'Modules setting';

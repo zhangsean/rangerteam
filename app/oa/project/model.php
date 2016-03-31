@@ -498,7 +498,7 @@ class projectModel extends model
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=untilToday", $this->lang->task->untilToday, '', false, '', 'li');
             $menu .= commonModel::printLink('task', 'browse', "projectID=$projectID&mode=expired",    $this->lang->task->expired, '', false, '', 'li');
 
-            if($this->app->user->account == $project->createdBy or $this->app->user->account == $project->PM)
+            if($this->app->user->admin == 'super' || $this->app->user->account == $project->createdBy || $this->app->user->account == $project->PM)
             {
                 $menu .= "<li>";
                 $menu .= "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>" . $this->lang->project->project. " <i class='icon-caret-down'></i></a>";
@@ -510,6 +510,10 @@ class projectModel extends model
                 if($project->status != 'suspend') $menu .= commonModel::printLink('project', 'suspend', "projectID=$projectID", $this->lang->project->suspend, "class='switcher' data-confirm='{$this->lang->project->confirm->suspend}'", false, '', 'li');
                 $menu .= commonModel::printLink('project', 'delete', "projectID=$projectID", $this->lang->delete, "class='deleter'", false, '', 'li');
                 $menu .= "</ul></li>";
+            }
+            else
+            {
+                $menu .= "<li>" . html::a(helper::createLink('project', 'view', "projectID=$projectID"), $this->lang->project->project, "data-toggle='modal'") . "</li>";
             }
         }
         else if($methodName == 'kanban' || $methodName == 'outline')

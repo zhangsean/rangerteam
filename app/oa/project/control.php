@@ -89,6 +89,15 @@ class project extends control
         $this->display();
     }
 
+    public function view($projectID = 0)
+    {
+        $this->view->title      = $this->lang->project->view;
+        $this->view->project    = $this->project->getById($projectID);
+        $this->view->users      = $this->loadModel('user')->getPairs('noclosed,nodeleted');
+        $this->view->modalWidth = 500;
+        $this->display();
+    }
+
     /**
      * Edit project's member.
      * 

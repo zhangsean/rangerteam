@@ -15,6 +15,7 @@ $lang->project->browse     = 'Projects List';
 $lang->project->index      = 'Projects';
 $lang->project->create     = "Create Project";
 $lang->project->edit       = 'Edit';
+$lang->project->view       = 'Project Detail';
 $lang->project->finish     = 'Finish';
 $lang->project->delete     = 'Delete';
 $lang->project->enter      = 'Enter';
