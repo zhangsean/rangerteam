@@ -25,6 +25,8 @@ class product extends control
     /**
      * Browse product.
      * 
+     * @param string $mode
+     * @param string $line
      * @param string $orderBy     the order by
      * @param int    $recTotal 
      * @param int    $recPerPage 
@@ -32,7 +34,7 @@ class product extends control
      * @access public
      * @return void
      */
-    public function browse($mode = 'all', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'all', $line = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -40,7 +42,7 @@ class product extends control
         $this->session->set('productList', $this->app->getURI(true));
         
         $this->view->title    = $this->lang->product->browse;
-        $this->view->products = $this->product->getList($mode, $orderBy, $pager);
+        $this->view->products = $this->product->getList($mode, $line, $orderBy, $pager);
         $this->view->pager    = $pager;
         $this->view->orderBy  = $orderBy;
         $this->view->mode     = $mode;

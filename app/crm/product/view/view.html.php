@@ -41,6 +41,10 @@
             <td><?php echo $product->name;?></td>
           </tr>
           <tr>
+            <th><?php echo $lang->product->code;?></th>
+            <td><?php echo $product->code;?></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->product->line;?></th>
             <td><?php echo $lang->product->lineList[$product->line];?></td>
           </tr>

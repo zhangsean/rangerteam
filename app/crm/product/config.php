@@ -10,5 +10,5 @@
  * @link        http://www.ranzhico.com
  */
 $config->product->require = new stdclass();
-$config->product->require->create = 'name';
-$config->product->require->edit   = 'name';
+$config->product->require->create = 'name, code';
+$config->product->require->edit   = 'name, code';

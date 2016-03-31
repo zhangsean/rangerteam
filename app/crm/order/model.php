@@ -264,7 +264,7 @@ class orderModel extends model
             ->setDefault('assignedDate', $now)
             ->setDefault('customer', 0)
             ->join('product', ',')
-            ->remove('createCustomer, name, contact, phone, email, qq, continue, createProduct, productName, line, type, status')
+            ->remove('createCustomer, name, contact, phone, email, qq, continue, createProduct, productName, code, line, type, status')
             ->get();
 
         /* Check data. */
@@ -272,7 +272,10 @@ class orderModel extends model
         {
             $this->loadModel('product');
             if(!commonModel::hasPriv('product', 'create')) return array('result' => 'fail', 'message' => sprintf($this->lang->order->deny, $this->lang->product->common));
-            if($this->post->productName == '') return array('result' => 'fail', 'message' => array('productName' => sprintf($this->lang->error->notempty, $this->lang->customer->name)));
+            $errors = array();
+            if($this->post->productName == '') $errors['productName'] = sprintf($this->lang->error->notempty, $this->lang->product->name);
+            if($this->post->code        == '') $errors['code'] = sprintf($this->lang->error->notempty, $this->lang->product->code);
+            if(!empty($errors)) return array('result' => 'fail', 'message' => $errors);
             if(!$this->post->continue) 
             {
                 $result = $this->product->checkUnique($this->post->productName);
@@ -315,6 +318,7 @@ class orderModel extends model
         {
             $product = new stdclass();
             $product->name        = $this->post->productName;
+            $product->code        = strtolower($this->post->code);
             $product->line        = $this->post->line;
             $product->type        = $this->post->type;
             $product->status      = $this->post->status;

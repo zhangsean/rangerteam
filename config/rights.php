@@ -55,6 +55,7 @@ $config->rights->member['tree']['redirect']          = 'redirect';
 $config->rights->member['project']['index']      = 'index';
 $config->rights->member['project']['create']     = 'create';
 $config->rights->member['project']['edit']       = 'edit';
+$config->rights->member['project']['view']       = 'view';
 $config->rights->member['project']['member']     = 'member';
 $config->rights->member['project']['finish']     = 'finish';
 $config->rights->member['project']['activate']   = 'activate';

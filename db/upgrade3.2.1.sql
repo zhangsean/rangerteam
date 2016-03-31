@@ -1,4 +1,5 @@
 UPDATE `oa_todo` set `type` = 'custom' where `type` = 'undone';
+ALTER TABLE `sys_product` ADD `code` varchar(20) NOT NULL AFTER `name`;
 ALTER TABLE `crm_customer` CHANGE `id`       `id`       mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
 ALTER TABLE `crm_service`  CHANGE `customer` `customer` mediumint(8) unsigned NOT NULL;
 ALTER TABLE `oa_doc`       CHANGE `views`    `views`    mediumint(8) unsigned NOT NULL;

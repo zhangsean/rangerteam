@@ -67,6 +67,13 @@
           </td>
         </tr>
         <tr class='productInfo hide'>
+          <th><?php echo $lang->product->code;?></th>
+          <td>
+            <div class='required required-wrapper'></div>
+            <?php echo html::input("code", '', "class='form-control' placeholder={$lang->product->placeholder->code}");?>
+          </td>
+        </tr>
+        <tr class='productInfo hide'>
           <th><?php echo $lang->product->line;?></th>
           <td><?php echo html::select("line", $lang->product->lineList, '', "class='form-control'");?></td>
         </tr>

@@ -224,8 +224,8 @@ CREATE TABLE `crm_resume` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `crm_service`;
 CREATE TABLE `crm_service` (
-  `customer` smallint(8) NOT NULL,
-  `product` mediumint(8) NOT NULL,
+  `customer` mediumint(8) unsigned NOT NULL,
+  `product` mediumint(8) unsigned NOT NULL,
   `expire` date NOT NULL,
   UNIQUE KEY `customer` (`customer`,`product`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -257,7 +257,7 @@ CREATE TABLE `oa_doc` (
   `type` varchar(30) NOT NULL,
   `content` text NOT NULL,
   `url` varchar(255) NOT NULL,
-  `views` smallint(5) unsigned NOT NULL,
+  `views` mediumint(8) unsigned NOT NULL,
   `createdBy` varchar(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `editedBy` varchar(30) NOT NULL,
@@ -270,7 +270,7 @@ CREATE TABLE `oa_doc` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_doclib`;
 CREATE TABLE `oa_doclib` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
   `private` enum('0', '1') NOT NULL DEFAULT '0',
   `users` text NOT NULL,
@@ -520,12 +520,12 @@ CREATE TABLE `cash_balance` (
 -- DROP TABLE IF EXISTS `cash_trade`;
 CREATE TABLE `cash_trade` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT, 
-  `depositor` mediumint(8) NOT NULL,
-  `parent`  mediumint(8) NOT NULL DEFAULT 0,
-  `product` mediumint(8) NOT NULL,
-  `trader` smallint(5) unsigned NOT NULL DEFAULT 0,
-  `order` mediumint(8) NOT NULL,
-  `contract` mediumint(8) NOT NULL,
+  `depositor` mediumint(8) unsigned NOT NULL,
+  `parent`  mediumint(8) unsigned NOT NULL DEFAULT 0,
+  `product` mediumint(8) unsigned NOT NULL,
+  `trader` mediumint(8) unsigned NOT NULL DEFAULT 0,
+  `order` mediumint(8) unsigned NOT NULL,
+  `contract` mediumint(8) unsigned NOT NULL,
   `dept` mediumint(8) unsigned NOT NULL,
   `type` enum('in', 'out', 'transferin', 'transferout', 'inveset', 'redeem') NOT NULL,
   `money` decimal(12,2) NOT NULL,
@@ -543,7 +543,7 @@ CREATE TABLE `cash_trade` (
 -- DROP TABLE IF EXISTS `team_thread`;
 CREATE TABLE IF NOT EXISTS `team_thread` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `board` mediumint(9) NOT NULL,
+  `board` mediumint(8) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `author` varchar(60) NOT NULL,
@@ -551,9 +551,9 @@ CREATE TABLE IF NOT EXISTS `team_thread` (
   `createdDate` datetime NOT NULL,
   `editedDate` datetime NOT NULL,
   `readonly` tinyint(1) NOT NULL DEFAULT '0',
-  `views` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `views` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `stick` enum('0','1','2','3') NOT NULL DEFAULT '0',
-  `replies` smallint(6) NOT NULL,
+  `replies` mediumint(8) unsigned NOT NULL,
   `repliedBy` varchar(30) NOT NULL,
   `repliedDate` datetime NOT NULL,
   `replyID` mediumint(8) unsigned NOT NULL,
@@ -596,7 +596,7 @@ CREATE TABLE `sys_action` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_block`;
 CREATE TABLE `sys_block` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `account` char(30) NOT NULL,
   `app` varchar(20) NOT NULL,
   `title` varchar(100) NOT NULL,
@@ -676,7 +676,7 @@ CREATE TABLE `sys_config` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_entry`;
 CREATE TABLE `sys_entry` (
-  `id` smallint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `abbr` char(6) NOT NULL,
   `code` varchar(20) NOT NULL,
@@ -728,7 +728,7 @@ CREATE TABLE `sys_article` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_tag`;
 CREATE TABLE `sys_tag` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `tag` varchar(50) NOT NULL,
   `rank` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`id`),
@@ -799,6 +799,7 @@ CREATE TABLE `sys_lang` (
 CREATE TABLE `sys_product` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
+  `code` varchar(20) NOT NULL, 
   `type` varchar(10) NOT NULL,
   `status` varchar(10) NOT NULL,
   `line` varchar(30) NOT NULL DEFAULT 'default',
@@ -900,7 +901,7 @@ CREATE TABLE `sys_team` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `dept` mediumint(8) unsigned NOT NULL,
   `account` char(30) NOT NULL DEFAULT '',
   `password` char(32) NOT NULL DEFAULT '',

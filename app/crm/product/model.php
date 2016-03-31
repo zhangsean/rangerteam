@@ -31,15 +31,16 @@ class productModel extends model
      * @access public
      * @return array
      */
-    public function getList($mode, $orderBy = 'id_desc', $pager = null)
+    public function getList($mode, $line = '', $orderBy = 'id_desc', $pager = null)
     {
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
         return $this->dao->select('*')->from(TABLE_PRODUCT)
             ->where('deleted')->eq(0)
-            ->beginIF($mode == 'developing')->andWhere('status')->eq('developing')
-            ->beginIF($mode == 'normal')->andWhere('status')->eq('normal')
-            ->beginIF($mode == 'offline')->andWhere('status')->eq('offline')
+            ->beginIF($mode == 'developing')->andWhere('status')->eq('developing')->fi()
+            ->beginIF($mode == 'normal')->andWhere('status')->eq('normal')->fi()
+            ->beginIF($mode == 'offline')->andWhere('status')->eq('offline')->fi()
+            ->beginIF($line)->andWhere('line')->eq($line)->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
@@ -76,6 +77,9 @@ class productModel extends model
             ->data($product)
             ->autoCheck()
             ->batchCheck($this->config->product->require->create, 'notempty')
+            ->check('code', 'unique')
+            ->check('code', 'code')
+            ->check('code', 'notInt')
             ->exec();
 
         return $this->dao->lastInsertID();
@@ -101,6 +105,8 @@ class productModel extends model
             ->data($product)
             ->autoCheck()
             ->batchCheck($this->config->product->require->edit, 'notempty')
+            ->check('code', 'unique', "id!={$productID}")
+            ->check('code', 'code')
             ->where('id')->eq($productID)
             ->exec();
 

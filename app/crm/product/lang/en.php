@@ -32,6 +32,7 @@ $lang->product->create      = 'Create';
 $lang->product->edit        = 'Edit';
 $lang->product->view        = 'View';
 $lang->product->basicInfo   = 'Basic Information';
+$lang->product->setline     = 'Product Line Settings';
 
 $lang->product->typeList['real']    = 'Real';
 $lang->product->typeList['service'] = 'Service';
@@ -42,3 +43,6 @@ $lang->product->statusList['normal']     = 'Normal';
 $lang->product->statusList['offline']    = 'Offline';
 
 $lang->product->lineList['default'] = '';
+
+$lang->product->placeHolder = new stdclass();
+$lang->product->placeHolder->code = 'Product code, it should be english, digital or underline.';

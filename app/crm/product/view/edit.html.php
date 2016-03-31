@@ -18,6 +18,10 @@
       <td><?php echo html::input('name', $product->name, "class='form-control'");?></td><td></td>
     </tr>
     <tr>
+      <th><?php echo $lang->product->code;?></th>
+      <td><?php echo html::input('code', $product->code, "class='form-control' placeHolder='{$lang->product->placeHolder->code}'");?></td>
+    </tr>
+    <tr>
       <th><?php echo $lang->product->line;?></th>
       <td><?php echo html::select("line", $lang->product->lineList, $product->line, "class='form-control'");?></td>
     </tr>
