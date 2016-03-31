@@ -107,6 +107,7 @@ class productModel extends model
             ->batchCheck($this->config->product->require->edit, 'notempty')
             ->check('code', 'unique', "id!={$productID}")
             ->check('code', 'code')
+            ->check('code', 'notInt')
             ->where('id')->eq($productID)
             ->exec();
 

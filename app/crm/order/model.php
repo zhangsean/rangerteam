@@ -272,10 +272,17 @@ class orderModel extends model
         {
             $this->loadModel('product');
             if(!commonModel::hasPriv('product', 'create')) return array('result' => 'fail', 'message' => sprintf($this->lang->order->deny, $this->lang->product->common));
+            
             $errors = array();
             if($this->post->productName == '') $errors['productName'] = sprintf($this->lang->error->notempty, $this->lang->product->name);
             if($this->post->code        == '') $errors['code'] = sprintf($this->lang->error->notempty, $this->lang->product->code);
+            $count = $this->dao->select('COUNT(*) as count')->from(TABLE_PRODUCT)->where('code')->eq($this->post->code)->fetch('count');
+            if($count > 0) $errors['code'] = sprintf($this->lang->error->unique, $this->lang->product->code, $this->post->code);
+            $this->app->loadClass('filter', true);
+            if(!validater::checkCode($this->post->code)) $errors['code'] = sprintf($this->lang->error->code, $this->lang->product->code);
+            if(!validater::checkNotInt($this->post->code)) $errors['code'] = sprintf($this->lang->error->notInt, $this->lang->product->code);
             if(!empty($errors)) return array('result' => 'fail', 'message' => $errors);
+            
             if(!$this->post->continue) 
             {
                 $result = $this->product->checkUnique($this->post->productName);
