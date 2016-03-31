@@ -111,7 +111,6 @@ define('TABLE_ENTRY',     '`sys_entry`');
 define('TABLE_SSO',       '`sys_sso`');
 define('TABLE_TASK',      '`sys_task`');
 define('TABLE_TEAM',      '`sys_team`');
-define('TABLE_ISSUE',     '`sys_issue`');
 define('TABLE_TAG',       '`sys_tag`');
 define('TABLE_BLOCK',     '`sys_block`');
 define('TABLE_SCHEMA',    '`sys_schema`');
