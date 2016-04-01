@@ -93,19 +93,18 @@
         <div style="overflow:auto; max-height:260px" class='table-wrapper'>
           <table class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='pie' data-target="<?php echo '#chart-' . $type . '-' . $groupBy;?>" data-animation='false'>
             <thead>
-              <tr>
-                <th class='w-20px'></th>
-                <th><?php echo $lang->trade->$groupBy;?></th>
-                <th class='text-right'><?php echo $lang->trade->money;?></th>
-                <th class='w-50px'> % </th>
+              <tr class='text-center'>
+                <th colspan='2'><?php echo $lang->trade->$groupBy;?></th>
+                <th><?php echo $lang->trade->money;?></th>
+                <th><?php echo $lang->report->percent;?></th>
               </tr>
             </thead>
             <tbody>
             <?php foreach($datas as $data):?>
-            <tr class='text-left'>
-              <td class='chart-color'><i class='chart-color-dot icon-circle'></i></td>
+            <tr class='text-center'>
+              <td class='chart-color w-20px'><i class='chart-color-dot icon-circle'></i></td>
               <td class='chart-label'><?php echo $data->name;?></td>
-              <td class='chart-value text-right'><?php echo $data->value;?></td>
+              <td class='chart-value'><?php echo $data->value;?></td>
               <td><?php echo ($data->percent * 100) . '%';?></td>
             </tr>
             <?php endforeach;?>

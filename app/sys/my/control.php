@@ -108,30 +108,18 @@ class my extends control
         $this->loadModel('todo', 'oa');
 
         /* compute begin and end. */
-        $today = helper::today();
         if($begin == '')
         {
-            /* days: count of days before today that to display todos. loops: count of days before today that to check todos. */
-            $days  = $loop  = 0; 
-            $begin = $today = helper::today();
-
+            $today = helper::today();
             if($end == '') $end = date('Y-m-d', strtotime("$today +6 days"));
-            if(strtotime($begin) > strtotime($end)) $end = date('Y-m-d', strtotime("$begin +6 days"));
-
             $dateList = range(strtotime($today), strtotime($end), 86400);
+            $begin = date('Y-m-d', strtotime("$today -1 days"));
+            while($this->loadModel('attend', 'oa')->isWeekend($begin) or $this->loadModel('holiday', 'oa')->isHoliday($begin))
+            {
+                $begin = date('Y-m-d', strtotime("$begin -1 days")); 
+            }
 
-            do {
-                $begin      = date('Y-m-d', strtotime("$begin -1 days")); 
-                $beginTodos = $this->dao->select('*')->from(TABLE_TODO)->where('date')->eq($begin)->fetchAll();
-                if(!empty($beginTodos)) 
-                {
-                    array_unshift($dateList, strtotime($begin));
-                    $days++;
-                }
-
-                $loop++;
-                if($loop > 30) break;
-            } while ($days < 3);
+            array_unshift($dateList, strtotime($begin));
         }
         else
         {
