@@ -32,6 +32,7 @@ $lang->product->create      = '添加產品';
 $lang->product->edit        = '編輯產品';
 $lang->product->view        = '產品詳情';
 $lang->product->basicInfo   = '基本信息';
+$lang->product->setline     = '維護產品綫';
 
 $lang->product->typeList['real']    = '實體類';
 $lang->product->typeList['service'] = '服務類';
@@ -42,3 +43,6 @@ $lang->product->statusList['normal']     = '正常';
 $lang->product->statusList['offline']    = '下線';
 
 $lang->product->lineList['default'] = '';
+
+$lang->product->placeHolder = new stdclass();
+$lang->product->placeHolder->code = '產品代號，必須為英文、數字或下劃線的組合';

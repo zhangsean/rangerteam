@@ -326,7 +326,7 @@ class actionModel extends model
         /* Get actions. */
         $actions = $this->dao->select('*')->from(TABLE_ACTION)
             ->where(1)
-            ->andWhere('objectType')->notin('attend,refund,leave,trip,action')
+            ->andWhere('objectType')->notin('attend,refund,leave,overtime,trip,action')
             ->beginIF($period != 'all')->andWhere('date')->gt($begin)->fi()
             ->beginIF($period != 'all')->andWhere('date')->lt($end)->fi()
             ->beginIF($account != 'all')->andWhere('actor')->eq($account)->fi()
@@ -687,9 +687,10 @@ class actionModel extends model
             $notice->read  = helper::createLink('action', 'read', "actionID={$notice->id}");
 
             /* process user and status. */
-            if($action->objectType == 'leave')  $this->loadModel('leave', 'oa');
-            if($action->objectType == 'attend') $this->loadModel('attend', 'oa');
-            if($action->objectType == 'refund') $this->loadModel('refund', 'oa');
+            if($action->objectType == 'leave')    $this->loadModel('leave', 'oa');
+            if($action->objectType == 'overtime') $this->loadModel('overtime', 'oa');
+            if($action->objectType == 'attend')   $this->loadModel('attend', 'oa');
+            if($action->objectType == 'refund')   $this->loadModel('refund', 'oa');
             if(isset($users[$action->actor])) $action->actor = $users[$action->actor];
             if($action->action == 'assigned' and isset($users[$action->extra]) ) $action->extra = $users[$action->extra];
             if($action->action == 'reviewed' and isset($this->lang->{$action->objectType}->statusList[$action->extra])) $action->extra = $this->lang->{$action->objectType}->statusList[$action->extra];

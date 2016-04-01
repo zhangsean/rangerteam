@@ -48,7 +48,7 @@ $lang->leave->statusList['reject'] = 'Reject';
 $lang->leave->denied = 'access denied';
 $lang->leave->unique = 'There was a record of leave in %s.';
 
-$lang->leave->confirmReview['pass']   = 'Are sure to pass it?';
-$lang->leave->confirmReview['reject'] = 'Are sure to reject it?';
+$lang->leave->confirmReview['pass']   = 'Are you sure to pass it?';
+$lang->leave->confirmReview['reject'] = 'Are you sure to reject it?';
 
 $lang->leave->hoursTip = 'Hour';

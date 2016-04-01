@@ -1,7 +1,7 @@
 <?php
 if(!isset($lang->overtime)) $lang->overtime = new stdclass();
 $lang->overtime->common = 'Overtime';
-$lang->overtime->browse = 'Browse';
+$lang->overtime->browse = 'Browse Overtime';
 $lang->overtime->create = 'Apply';
 $lang->overtime->edit   = 'Edit';
 $lang->overtime->delete = 'Delete';
@@ -39,10 +39,10 @@ $lang->overtime->statusList['wait']   = 'Wait';
 $lang->overtime->statusList['pass']   = 'Pass';
 $lang->overtime->statusList['reject'] = 'Reject';
 
-$lang->overtime->denied = 'Denied';
-$lang->overtime->unique = '%s has a record.';
+$lang->overtime->denied = 'Access denied';
+$lang->overtime->unique = 'There was a record of overtime in %s.';
 
-$lang->overtime->confirmReview['pass']   = 'Are you sure pass?';
-$lang->overtime->confirmReview['reject'] = 'Are you sure reject?';
+$lang->overtime->confirmReview['pass']   = 'Are you sure to pass it?';
+$lang->overtime->confirmReview['reject'] = 'Are you sure to reject it?';
 
 $lang->overtime->hoursTip = 'Hours';
