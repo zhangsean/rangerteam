@@ -383,3 +383,7 @@ table.tablesorter thead tr .headerSortDown:after {
 a.card:hover {
   color: #071e0b;
 }
+
+#fixedHeader thead th, #fixedHeader thead td{background: #145d23; color: #ddd; font-weight: normal;}
+#fixedHeader thead th a, #fixedHeader thead td a{color: #ddd; font-weight: normal;}
+#fixedHeader thead tr .headerSortUp:after,#fixedHeader thead tr .headerSortDown:after{color: #fff!important;}
