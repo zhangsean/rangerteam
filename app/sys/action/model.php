@@ -116,7 +116,7 @@ class actionModel extends model
      * @access public
      * @return array
      */
-    public function getList($objectType, $objectID, $action = '', $pager = null)
+    public function getList($objectType, $objectID, $action = '', $pager = null, $origin = '')
     {
         $actions = $this->dao->select('*')->from(TABLE_ACTION)
             ->where('1 = 1')
