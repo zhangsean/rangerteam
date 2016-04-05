@@ -64,6 +64,10 @@ $lang->trade->report = new stdclass();
 $lang->trade->report->common = 'Report'; 
 $lang->trade->report->annual = 'Annual Report'; 
 
+$lang->trade->report->typeList['annual']  = 'Annual balance report'; 
+$lang->trade->report->typeList['compare'] = 'Annual comparison report'; 
+$lang->trade->report->typeList['in']      = 'Income statistical report'; 
+
 $lang->trade->typeList['in']          = 'Income';
 $lang->trade->typeList['out']         = 'Expend';
 $lang->trade->typeList['transferout'] = 'Transfer out';

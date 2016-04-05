@@ -262,9 +262,10 @@ $lang->todo->menu->all             = 'All|todo|browse|mode=all';
 $lang->my = new stdclass();
 $lang->my->review = new stdclass();
 $lang->my->review->menu = new stdclass();
-$lang->my->review->menu->attend = 'Attend|my|review|type=attend';
-$lang->my->review->menu->leave  = 'Leave|my|review|type=leave';
-$lang->my->review->menu->refund = 'Refund|my|review|type=refund';
+$lang->my->review->menu->attend   = 'Attend|my|review|type=attend';
+$lang->my->review->menu->leave    = 'Leave|my|review|type=leave';
+$lang->my->review->menu->overtime = 'Overtime|my|review|type=overtime';
+$lang->my->review->menu->refund   = 'Refund|my|review|type=refund';
 
 $lang->my->order = new stdclass();
 $lang->my->order->menu = new stdclass();
