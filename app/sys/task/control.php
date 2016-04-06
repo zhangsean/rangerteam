@@ -98,7 +98,8 @@ class task extends control
             $taskID = $this->task->create($projectID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            $this->loadModel('action')->create('task', $taskID, 'Created');
+            $actionID = $this->loadModel('action')->create('task', $taskID, 'Created');
+            $this->sendmail($taskID, $actionID);
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "projectID=$projectID")));
         }
@@ -170,6 +171,8 @@ class task extends control
 
                 $actionID = $this->loadModel('action')->create('task', $taskID, $action, $fileAction . $this->post->remark);
                 if($changes) $this->action->logHistory($actionID, $changes);
+
+                if($task->assignedTo != $this->post->assignedTo) $this->sendmail($taskID, $actionID);
             }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer ? $this->post->referer : inlink('view', "id=$taskID")));
