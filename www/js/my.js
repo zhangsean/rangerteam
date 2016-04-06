@@ -75,6 +75,7 @@ $(document).on('keyup', function(e)
     {
         /* left, go to pre object. */
         if($('#ajaxModal').css('display') == 'block') return false;
+        if($('input,textarea').is(':focus')) return false;
         preLink = ($('#pre').attr("href"));
         if(typeof(preLink) != 'undefined') location.href = preLink;
     }
@@ -82,6 +83,7 @@ $(document).on('keyup', function(e)
     {
         /* right, go to next object. */
         if($('#ajaxModal').css('display') == 'block') return false;
+        if($('input,textarea').is(':focus')) return false;
         nextLink = ($('#next').attr("href"));
         if(typeof(nextLink) != 'undefined') location.href = nextLink;
     }
