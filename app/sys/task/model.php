@@ -20,7 +20,7 @@ class taskModel extends model
      */
     public function getByID($taskID)
     {
-        $task     = $this->dao->select("*")->from(TABLE_TASK)->where('id')->eq($taskID)->limit(1)->fetch();
+        $task = $this->dao->select("*")->from(TABLE_TASK)->where('id')->eq($taskID)->limit(1)->fetch();
         if(empty($task)) return new stdclass();
 
         foreach($task as $key => $value) if(strpos($key, 'Date') !== false and !(int)substr($value, 0, 4)) $task->$key = '';
@@ -941,7 +941,8 @@ class taskModel extends model
      */
     public function checkPriv($task, $action)
     {
-        $action  = strtolower($action);  
+        if(!isset($task->project)) return false;
+        $action = strtolower($action);  
 
         if($this->app->user->admin == 'super') return true;
         if($action == 'view' and !empty($this->app->user->rights['task']['viewall'])) return true;
