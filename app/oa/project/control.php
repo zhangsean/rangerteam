@@ -198,6 +198,8 @@ class project extends control
     {
         $this->checkPriv($projectID, '', 'json');
         $this->project->delete(TABLE_PROJECT, $projectID);
+        $this->dao->delete()->from(TABLE_TASK)->where('project')->eq($projectID)->exec();
+        $this->dao->delete()->from(TABLE_TEAM)->where('type')->eq('project')->andWhere('id')->eq($projectID)->exec();
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
     }
