@@ -631,7 +631,7 @@ class projectModel extends model
         if(strpos('edit, member, finish, suspend,delete', $this->app->getMethodName()) !== false)
         {
             $project = $this->getByID($projectID);
-            if($this->app->user->account != $project->createdBy and $this->app->user->account != $project->PM) return false;
+            if($project->members[$this->app->user->account]->role != 'senior' and $this->app->user->account != $project->createdBy and $this->app->user->account != $project->PM) return false;
         }
 
         if(!empty($this->app->user->rights['task']['viewall']))   return true;
@@ -670,7 +670,6 @@ class projectModel extends model
      */
     public function hasActionPriv($project)
     {
-        if($this->app->user->admin == 'super') return true;
-        return ($this->app->user->account == $project->createdBy or $this->app->user->account == $project->PM);
+        return ($this->app->user->admin == 'super' or $project->members[$this->app->user->account]->role == 'senior' or $this->app->user->account != $project->createdBy or $this->app->user->account != $project->PM);
     }
 }
