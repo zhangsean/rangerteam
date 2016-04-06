@@ -47,6 +47,7 @@ $lang->appModule->team[] = 'blog';
 $lang->appModule->team[] = 'forum';
 $lang->appModule->team[] = 'thread';
 $lang->appModule->team[] = 'user';
+$lang->appModule->team[] = 'company';
 
 $lang->appModule->sys = array();
 $lang->appModule->sys[] = 'tree';
@@ -84,6 +85,7 @@ $lang->moduleOrder[95]  = 'blog';
 $lang->moduleOrder[100] = 'forum';
 $lang->moduleOrder[105] = 'thread';
 $lang->moduleOrder[110] = 'user';
+$lang->moduleOrder[115] = 'company';
 
 $lang->moduleOrder[110] = 'tree';
 $lang->moduleOrder[115] = 'setting';
@@ -533,9 +535,14 @@ $lang->thread->methodOrder[30] = 'stick';
 $lang->thread->methodOrder[35] = 'deleteFile';
 
 $lang->resource->user = new stdclass();
-$lang->resource->user->colleague      = 'colleague';
+$lang->resource->user->colleague = 'colleague';
 
 $lang->user->methodOrder[10] = 'colleague';
+
+$lang->resource->company = new stdclass();
+$lang->resource->company->index = 'index';
+
+$lang->company->methodOrder[10] = 'index';
 
 /* Tree. */
 $lang->resource->tree = new stdclass();

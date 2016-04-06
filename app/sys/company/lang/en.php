@@ -9,10 +9,11 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->company->common  = "Company";
+$lang->company->common  = 'Company';
+$lang->company->index   = 'Index';
 
-$lang->company->name    = "Name";
-$lang->company->desc    = "Intro";
-$lang->company->content = "More";
+$lang->company->name    = 'Name';
+$lang->company->desc    = 'Intro';
+$lang->company->content = 'More';
 
-$lang->company->setBasic = "Company Info";
+$lang->company->setBasic = 'Company Info';

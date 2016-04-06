@@ -1584,6 +1584,7 @@ INSERT INTO `sys_grouppriv` (`group`, `module`, `method`) VALUES
 (1,'trip','company'),
 (1,'trip','department'),
 (1,'user','colleague'),
+(1,'company','index'),
 (2,'address','browse'),
 (2,'announce','browse'),
 (2,'announce','create'),
@@ -1692,6 +1693,7 @@ INSERT INTO `sys_grouppriv` (`group`, `module`, `method`) VALUES
 (2,'tree','edit'),
 (2,'trip','company'),
 (2,'user','colleague'),
+(2,'company','index'),
 (3,'address','browse'),
 (3,'address','create'),
 (3,'address','delete'),
@@ -1801,6 +1803,7 @@ INSERT INTO `sys_grouppriv` (`group`, `module`, `method`) VALUES
 (3,'tree','children'),
 (3,'tree','edit'),
 (3,'user','colleague'),
+(3,'company','index'),
 (4,'address','browse'),
 (4,'address','create'),
 (4,'address','edit'),
@@ -1901,6 +1904,7 @@ INSERT INTO `sys_grouppriv` (`group`, `module`, `method`) VALUES
 (4,'tree','edit'),
 (4,'trip','department'),
 (4,'user','colleague'),
+(4,'company','index'),
 (5,'announce','browse'),
 (5,'announce','create'),
 (5,'announce','edit'),
@@ -1926,7 +1930,8 @@ INSERT INTO `sys_grouppriv` (`group`, `module`, `method`) VALUES
 (5,'thread','switchStatus'),
 (5,'thread','transfer'),
 (5,'thread','view'),
-(5,'user','colleague');
+(5,'user','colleague'),
+(5,'company','index');
 
 INSERT INTO `sys_cron` (`m`, `h`, `dom`, `mon`, `dow`, `command`, `remark`, `type`, `buildin`, `status`, `lastTime`) VALUES
 ('*', '*', '*', '*', '*', '', '监控定时任务', 'ranzhi', 1, 'normal', '0000-00-00 00:00:00'),
