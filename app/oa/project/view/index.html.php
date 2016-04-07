@@ -40,7 +40,7 @@
         <?php endif;?>
       </div>
       <div class='panel-body'>
-        <p class='info'><?php echo $project->desc;?></p>
+        <div class='info'><?php echo $project->desc;?></div>
         <div class='footerbar text-important'>
           <span><?php foreach($project->members as $member) if($member->role == 'manager') echo "<i class='icon icon-user'> </i>" . $users[$member->account];?></span>
           <span class=''><i class='icon icon-time'> </i><?php echo formatTime($project->begin, 'm-d') . ' ~ ' .  formatTime($project->end, 'm-d');?></span>
