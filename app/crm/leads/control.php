@@ -238,10 +238,17 @@ class leads extends control
      */
     public function ignore($contactID)
     {
-        $this->contact->ignore($contactID);
-        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->loadModel('action')->create('leads', $contactID, 'ignored', '', '', '', '', $contactID);
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        if($_POST)
+        {
+            $this->contact->ignore($contactID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('leads', $contactID, 'ignored', $this->post->comment, '', '', '', $contactID);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
+        }
+
+        $this->view->title     = $this->lang->ignore;
+        $this->view->contactID = $contactID;
+        $this->display();
     }
 
     /**

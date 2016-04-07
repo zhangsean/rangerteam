@@ -69,7 +69,7 @@
         commonModel::printLink('address', 'browse', "objectType=contact&objectID=$contact->id", $lang->contact->address, "data-toggle='modal'");
         commonModel::printLink('leads', 'edit', "contactID={$contact->id}&mode={$mode}&status={$status}", $lang->edit);
         commonModel::printLink('leads', 'transform', "contactID=$contact->id", $lang->confirm, "data-toggle='modal'");
-        commonModel::printLink('leads', 'ignore', "contactID=$contact->id", $lang->ignore, "class='reload'");
+        commonModel::printLink('leads', 'ignore', "contactID=$contact->id", $lang->ignore, "data-toggle='modal'");
         ?>
       </td>
     </tr>
