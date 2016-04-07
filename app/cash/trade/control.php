@@ -788,7 +788,7 @@ class trade extends control
         $monthlyChartDatas['out']['dept']     = $this->trade->getChartData('out', $currentYear, $currentMonth, 'dept', $currency);
         $monthlyChartDatas['out']['dept']     = $this->report->computePercent($monthlyChartDatas['out']['dept']);
 
-        $this->view->title             = $this->lang->trade->report;
+        $this->view->title             = $this->lang->trade->report->common;
         $this->view->annualChartDatas  = $annualChartDatas;
         $this->view->monthlyChartDatas = $monthlyChartDatas;
         $this->view->tradeYears        = $tradeYears;

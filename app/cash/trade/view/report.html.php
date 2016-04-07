@@ -49,7 +49,7 @@
       <td colspan='3'>
         <div class='chart-wrapper text-center'>
           <h5><?php echo $currentYear . $lang->trade->report->annual . '(' . $currencyList[$currentCurrency] . ')';?></h5>
-          <div class='chart-canvas'><canvas height='200' width='800' id='myBarChart'></canvas></div>
+          <div class='chart-canvas'><canvas height='260' width='800' id='myBarChart'></canvas></div>
         </div>
       </td>
       <td class='w-400px'>
@@ -89,7 +89,7 @@
           <div class='chart-canvas'><canvas id="<?php echo 'chart-' . $type . '-' . $groupBy;?>" width='800' height='200' data-responsive='true'></canvas></div>
         </div>
       </td>
-      <td class='w-300px'>
+      <td class='w-400px'>
         <div style="overflow:auto; max-height:260px" class='table-wrapper'>
           <table class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='pie' data-target="<?php echo '#chart-' . $type . '-' . $groupBy;?>" data-animation='false'>
             <thead>
