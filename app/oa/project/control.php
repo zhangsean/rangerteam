@@ -24,7 +24,7 @@ class project extends control
      * @access public
      * @return void
      */
-    public function index($status = 'involved', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function index($status = 'involved', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -33,8 +33,9 @@ class project extends control
 
         $this->view->title    = $this->lang->project->common;
         $this->view->status   = $status;
-        $this->view->projects = $this->project->getList($status, $pager);
+        $this->view->projects = $this->project->getList($status, $orderBy, $pager);
         $this->view->users    = $this->loadModel('user')->getPairs('noclosed');
+        $this->view->orderBy  = $orderBy;
         $this->view->pager    = $pager;
         $this->display();
     }

@@ -65,7 +65,7 @@ class projectModel extends model
      * @access public
      * @return array
      */
-    public function getList($status = null, $pager = null)
+    public function getList($status = null, $orderBy = 'id_desc', $pager = null)
     {
         if($status == 'involved')
         {
@@ -75,6 +75,7 @@ class projectModel extends model
                 ->andWhere('t2.type')->eq('project')
                 ->andWhere('t1.status')->eq('doing')
                 ->andWhere('t2.account')->eq($this->app->user->account)
+                ->orderBy($orderBy)
                 ->fetchAll('id');
         }
         else
@@ -82,6 +83,7 @@ class projectModel extends model
             $projects = $this->dao->select('*')->from(TABLE_PROJECT)
                 ->where('deleted')->eq(0)
                 ->beginIF($status)->andWhere('status')->eq($status)->fi()
+                ->orderBy($orderBy)
                 ->fetchAll('id');
         }
 

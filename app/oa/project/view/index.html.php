@@ -56,14 +56,15 @@
 <div class='panel hide' id='listMode'>
   <table class='table table-hover table-striped tablesorter table-fixed table-data'>
     <thead>
+    <?php $vars = "status={$status}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
     <tr class='text-center'>
-      <th class='w-60px'><?php echo $lang->project->id;?></th>
-      <th class='text-left'><?php echo $lang->project->name;?></th>
-      <th class='w-100px'><?php echo $lang->project->manager;?></th>
-      <th class='w-100px'><?php echo $lang->project->begin;?></th>
-      <th class='w-100px'><?php echo $lang->project->end;?></th>
-      <th class='w-100px'><?php echo $lang->project->createdBy;?></th>
-      <th class='w-80px'><?php echo $lang->project->status;?></th>
+      <th class='w-60px'>   <?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->project->id);?></th>
+      <th class='text-left'><?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->project->name);?></th>
+      <th class='w-100px'>  <?php echo $lang->project->manager;?></th>
+      <th class='w-100px'>  <?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->project->begin);?></th>
+      <th class='w-100px'>  <?php commonModel::printOrderLink('end', $orderBy, $vars, $lang->project->end);?></th>
+      <th class='w-100px'>  <?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->project->createdBy);?></th>
+      <th class='w-80px'>   <?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->project->status);?></th>
       <th><?php echo $lang->project->desc;?></th>
       <th class='w-160px'><?php echo $lang->actions;?></th>
     </tr>
@@ -78,7 +79,7 @@
       <td><?php echo $project->end;?></td>
       <td><?php echo zget($users, $project->createdBy);?></td>
       <td><?php echo $lang->project->statusList[$project->status];?></td>
-      <td title='<?php echo $project->desc;?>'><?php echo $project->desc;?></td>
+      <td title='<?php echo $project->desc;?>'><?php echo helper::substr(strip_tags($project->desc), 20, '...');?></td>
       <td>
         <?php commonModel::printLink('project', 'edit', "projectID=$project->id", $lang->edit, "data-toggle='modal'");?>
         <?php commonModel::printLink('project', 'member', "projectID=$project->id", $lang->project->member, "data-toggle='modal'");?>
