@@ -60,7 +60,7 @@
     </tr>
     <tr>
       <th><?php echo $lang->contract->handlers;?></th>
-      <td colspan='2'><?php echo html::select('handlers[]', $users, $contract->handlers, "class='form-control chosen' multiple");?></td>
+      <td colspan='2'><?php echo html::select('handlers[]', $users, $contract->handlers . ',' . $this->app->user->account, "class='form-control chosen' multiple");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->comment;?></th>
