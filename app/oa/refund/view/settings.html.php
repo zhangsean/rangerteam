@@ -16,14 +16,14 @@
   <div class='side'>
     <nav class='menu leftmenu affix'>
       <ul class='nav nav-primary'>
-        <li><?php commonModel::printLink('refund', 'settings', '', "{$lang->refund->settings}");?></li>
+        <li><?php commonModel::printLink('refund', 'settings', '', "{$lang->refund->reviewer}");?></li>
         <li><?php commonModel::printLink('refund', 'setCategory', '', "{$lang->refund->setCategory}");?></li>
       </ul>
     </nav>
   </div>
   <div class='main'>
     <div class='panel'>
-      <div class='panel-heading'><?php echo $lang->refund->settings;?></div>
+      <div class='panel-heading'><?php echo $lang->refund->reviewer;?></div>
       <div class='panel-body'>
         <form id='ajaxForm' method='post'>
           <table class='table table-form table-condensed w-p40'>

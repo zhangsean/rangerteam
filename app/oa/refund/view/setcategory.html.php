@@ -15,7 +15,7 @@
   <div class='side'>
     <nav class='menu leftmenu affix'>
       <ul class='nav nav-primary'>
-        <li><?php commonModel::printLink('refund', 'settings', '', "{$lang->refund->settings}");?></li>
+        <li><?php commonModel::printLink('refund', 'settings', '', "{$lang->refund->reviewer}");?></li>
         <li><?php commonModel::printLink('refund', 'setcategory', '', "{$lang->refund->setCategory}");?></li>
       </ul>
     </nav>

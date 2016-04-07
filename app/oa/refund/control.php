@@ -364,7 +364,7 @@ class refund extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
-        $this->view->title           = $this->lang->refund->settings; 
+        $this->view->title           = $this->lang->refund->reviewer; 
         $this->view->firstReviewer   = !empty($this->config->refund->firstReviewer) ? $this->config->refund->firstReviewer : '';
         $this->view->secondReviewer  = !empty($this->config->refund->secondReviewer) ? $this->config->refund->secondReviewer : '';
         $this->view->firstReviewers  = array('' => $this->lang->dept->moderators) + $this->user->getPairs('noempty,nodeleted,noforbidden,noclosed');
@@ -394,6 +394,7 @@ class refund extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
+        $this->view->title            = $this->lang->refund->setCategory;
         $this->view->expenseList      = $expenseList;
         $this->view->refundCategories = $refundCategories;
         $this->display();
