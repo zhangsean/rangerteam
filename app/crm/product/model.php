@@ -53,9 +53,13 @@ class productModel extends model
      * @access public
      * @return array
      */
-    public function getPairs($orderBy = 'id_desc')
+    public function getPairs($status = '', $orderBy = 'id_desc')
     {
-        return $this->dao->select('id, name')->from(TABLE_PRODUCT)->where('deleted')->eq(0)->orderBy($orderBy)->fetchPairs('id');
+        return $this->dao->select('id, name')->from(TABLE_PRODUCT)
+            ->where('deleted')->eq(0)
+            ->beginIF($status)->andWhere('status')->in($status)->fi()
+            ->orderBy($orderBy)
+            ->fetchPairs('id');
     }
 
     /**
