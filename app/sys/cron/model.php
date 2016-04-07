@@ -238,20 +238,4 @@ class cronModel extends model
             ->andWhere('`key`')->eq('status')
             ->fetch('id');
     }
-
-    /**
-     * Get current cron status.
-     * 
-     * @access public
-     * @return int
-     */
-    public function getTurnon()
-    {
-        return $this->dao->select('*')->from(TABLE_CONFIG)
-            ->where('owner')->eq('system')
-            ->andWhere('module')->eq('common')
-            ->andWhere('section')->eq('global')
-            ->andWhere('`key`')->eq('cron')
-            ->fetch('value');
-    }
 }
