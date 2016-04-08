@@ -1497,10 +1497,7 @@ class router
         $view->sessionID   = session_id();
         $view->rand        = $this->session->random;
         $view->expiredTime = ini_get('session.gc_maxlifetime');
-        
-        $view->ip          = gethostbyname($_SERVER['HTTP_HOST']);
-        $view->name        = $this->config->socket->name;
-        $view->port        = $this->config->socket->port;
+
         echo json_encode($view);
     }
     
