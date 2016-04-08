@@ -79,7 +79,8 @@ $lang->entry->error->ip    = 'IP列表不能为空';
 $lang->entry->error->url   = ' 非内置应用的登录地址，必须包含 /、http://或者https://';
 
 $lang->entry->error->admin         = '管理员用户名或密码错误';
-$lang->entry->error->zentaoSetting = '禅道系统设置失败，您的禅道系统版本低于7.4';
+$lang->entry->error->zentaoSetting = '禅道系统设置失败';
+$lang->entry->error->version       = '您的禅道系统版本低于7.4';
 $lang->entry->error->zentaoUrl     = '禅道登录地址错误';
 $lang->entry->error->accessDenied  = '访问受限';
 
