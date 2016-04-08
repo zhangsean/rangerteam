@@ -327,16 +327,17 @@ class my extends control
      * @access public
      * @return void
      */
-    public function project($recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function project($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->loadModel('project', 'oa');
         $this->view->title    = $this->lang->my->project->common;
-        $this->view->projects = $this->project->getList('involved', $pager);
+        $this->view->projects = $this->project->getList('involved', $orderBy, $pager);
         $this->view->users    = $this->loadModel('user')->getPairs('noclosed');
         $this->view->pager    = $pager;
+        $this->view->orderBy  = $orderBy;
         $this->display();
     }
 

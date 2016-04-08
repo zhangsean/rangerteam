@@ -18,14 +18,15 @@
 <div class='panel'>
   <table class='table table-hover table-striped tablesorter table-fixed table-data'>
     <thead>
+    <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
     <tr class='text-center'>
-      <th class='w-60px'><?php echo $lang->project->id;?></th>
-      <th class='text-left'><?php echo $lang->project->name;?></th>
+      <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->project->id);?></th>
+      <th class='text-left'><?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->project->name);?></th>
       <th class='w-100px'><?php echo $lang->project->manager;?></th>
-      <th class='w-100px'><?php echo $lang->project->begin;?></th>
-      <th class='w-100px'><?php echo $lang->project->end;?></th>
-      <th class='w-100px'><?php echo $lang->project->createdBy;?></th>
-      <th class='w-80px'><?php echo $lang->project->status;?></th>
+      <th class='w-100px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->project->begin);?></th>
+      <th class='w-100px'><?php commonModel::printOrderLink('end', $orderBy, $vars, $lang->project->end);?></th>
+      <th class='w-100px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->project->createdBy);?></th>
+      <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->project->status);?></th>
       <th><?php echo $lang->project->desc;?></th>
       <th class='w-160px'><?php echo $lang->actions;?></th>
     </tr>
