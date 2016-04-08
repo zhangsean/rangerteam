@@ -82,6 +82,7 @@ class commonModel extends model
         if(!defined('SESSION_STARTED'))
         {
             $sessionName = $this->config->sessionVar;
+            if(isset($_GET[$sessionName])) session_id($_GET[$sessionName]);
             session_name($sessionName);
             session_start();
             define('SESSION_STARTED', true);
