@@ -707,12 +707,26 @@ class actionModel extends model
         }
 
         /* Create todo notices. */
-        $date  = helper::today();
-        $now   = helper::now();
-        $link  = helper::createLink('sys.todo', 'calendar');
+        $date     = helper::today();
+        $now      = helper::now();
+        $link     = helper::createLink('sys.todo', 'calendar');
+        $interval = $this->config->pingInterval;
+
+        //$todos = $this->loadModel('todo', 'sys')->getList('self', $account, $date);
+        //if(empty($todos))
+        //{
+        //    $signInLimit = date('Y-m-d') + $this->config->signInLimit;
+        //    foreach($i = 1; $i <= 3; $i++)
+        //    {
+        //        $begin = date('Hi', strtotime("+" . ($i - 1) * 30 . "minute $signInLimit"));
+        //        $end   = date('Hi', strtotime("+" . ($i - 1) * 30 . "minute $interval seconds $signInLimit"));
+
+        //        
+        //    }
+        //}
+
         $todos = $this->loadModel('todo', 'sys')->getList('self', $account, $date, 'undone');
 
-        $interval  = $this->config->pingInterval;
         $begin[1]  = date('Hi', strtotime($now));
         $end[1]    = date('Hi', strtotime("+$interval seconds $now"));
         $begin[10] = date('Hi', strtotime("+10 minute $now"));

@@ -26,32 +26,49 @@
       <div class='panel-heading'><?php echo $lang->attend->settings;?></div>
       <div class='panel-body'>
         <form id='ajaxForm' method='post'>
-          <table class='table table-form table-condensed w-p40'>
+          <table class='table table-form table-condensed w-p70'>
             <tr>
               <th class='w-150px'><?php echo $lang->attend->signInLimit?></th>
               <td class='w-300px'><?php echo html::input('signInLimit', $signInLimit, "class='form-control form-time'")?></td>
+              <td></td>
             </tr>
             <tr>
               <th><?php echo $lang->attend->signOutLimit?></th>
               <td><?php echo html::input('signOutLimit', $signOutLimit, "class='form-control form-time'")?></td>
+              <td></td>
             </tr>
             <tr>
               <th><?php echo $lang->attend->workingHours?></th>
               <td><?php echo html::input('workingHours', $workingHours, "class='form-control'")?></td>
+              <td></td>
             </tr>
             <tr>
               <th><?php echo $lang->attend->workingDays?></th>
               <td><?php echo html::select('workingDays', $lang->attend->workingDaysList, $workingDays, "class='form-control'")?></td>
+              <td></td>
             </tr>
             <tr>
               <th><?php echo $lang->attend->reviewedBy;?></th>
               <td><?php echo html::select('reviewedBy', $users, $reviewedBy, "class='form-control'")?></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->attend->ipList;?></th>
+              <td colspan='2'>
+                <div class='input-group'>
+                  <?php echo html::input('ip', $ip, "class='form-control' title='{$lang->attend->note->ip}' placeholder='{$lang->attend->note->ip}'");?>
+                  <div class='input-group-addon'>
+                    <label class="checkbox"><input type="checkbox" id="allip" name="allip" value="1"> <?php echo $lang->attend->note->allip;?></label>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
               <th></th>
               <td><?php echo html::checkbox('mustSignOut', array('yes' => $lang->attend->mustSignOut), $mustSignOut)?></td>
+              <td></td>
             </tr>
-          <tr><th></th><td><?php echo html::submitButton();?></td></tr>
+          <tr><th></th><td colspan='2'><?php echo html::submitButton();?></td></tr>
           </table>
         </form>
       </div>

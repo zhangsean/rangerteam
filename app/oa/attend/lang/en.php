@@ -32,6 +32,7 @@ $lang->attend->dayName  = 'Day name';
 $lang->attend->report   = 'Report';
 $lang->attend->AM       = 'AM';
 $lang->attend->PM       = 'PM';
+$lang->attend->ipList   = 'IP List';
 
 $lang->attend->manualIn     = 'Manual sign in';
 $lang->attend->manualOut    = 'Manual sign out';
@@ -111,3 +112,7 @@ $lang->attend->confirmReview['reject'] = 'Are sure to reject it?';
 
 $lang->attend->settings   = 'Normal Settings';
 $lang->attend->setManager = 'Depatment Manager Settings';
+
+$lang->attend->note = new stdClass();
+$lang->attend->note->ip    = "Use comma between two IPs, and support IP segment, for example 192.168.1.*";
+$lang->attend->note->allip = 'All IP';

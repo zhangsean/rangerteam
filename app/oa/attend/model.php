@@ -257,6 +257,7 @@ EOT;
      */
     public function signIn($account = '', $date = '')
     {
+        if(!$this->checkIP()) return false;
         if($account == '') $account = $this->app->user->account;
         if($date == '')    $date    = date('Y-m-d');
 
@@ -291,6 +292,7 @@ EOT;
      */
     public function signOut($account = '', $date = '')
     {
+        if(!$this->checkIP()) return false;
         if($account == '') $account = $this->app->user->account;
         if($date == '')    $date    = date('Y-m-d');
 
@@ -703,5 +705,29 @@ EOT;
         }
 
         return !dao::isError();
+    }
+
+    /**
+     * Check ip if is allowed.
+     * 
+     * @access public
+     * @return bool 
+     */
+    public function checkIP()
+    {
+        $ipParts  = explode('.', $_SERVER['REMOTE_ADDR']);
+        $allowIPs = explode(',', $this->config->attend->ip);
+
+        foreach($allowIPs as $allowIP)
+        {
+            if($allowIP == '*') return true;
+            $allowIPParts = explode('.', $allowIP);
+            foreach($allowIPParts as $key => $allowIPPart)
+            {
+                if($allowIPPart == '*') $allowIPParts[$key] = $ipParts[$key];
+            }
+            if(implode('.', $allowIPParts) == $_SERVER['REMOTE_ADDR']) return true;
+        }
+        return false;
     }
 }

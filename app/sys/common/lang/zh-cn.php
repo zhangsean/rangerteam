@@ -221,7 +221,7 @@ $lang->group   = new stdclass();
 /* Menu entry. */
 $lang->entry       = new stdclass();
 $lang->entry->menu = new stdclass();
-$lang->entry->menu->admin  = array('link' => '应用列表|entry|admin|', 'alias' => 'edit');
+$lang->entry->menu->admin  = array('link' => '应用列表|entry|admin|', 'alias' => 'edit, integration, style');
 $lang->entry->menu->create = '添加应用|entry|create|';
 $lang->entry->menu->webapp = 'WEB应用|webapp|obtain|';
 

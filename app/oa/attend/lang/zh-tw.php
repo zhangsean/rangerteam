@@ -32,6 +32,7 @@ $lang->attend->dayName  = '星期';
 $lang->attend->report   = '考勤表';
 $lang->attend->AM       = '上午';
 $lang->attend->PM       = '下午';
+$lang->attend->ipList   = 'IP列表';
 
 $lang->attend->manualIn     = '簽到時間';
 $lang->attend->manualOut    = '簽退時間';
@@ -111,3 +112,7 @@ $lang->attend->confirmReview['reject'] = '您確定要執行拒絶操作嗎？';
 
 $lang->attend->settings   = '考勤設置';
 $lang->attend->setManager = '部門經理設置';
+
+$lang->attend->note = new stdClass();
+$lang->attend->note->ip    = "允許簽到的ip，多個ip用逗號隔開。支持IP段，如192.168.1.*";
+$lang->attend->note->allip = '無限制';

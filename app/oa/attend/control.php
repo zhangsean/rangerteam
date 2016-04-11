@@ -275,7 +275,10 @@ class attend extends control
         {
             $settings = fixer::input('post')
                 ->setDefault('mustSignOut', 'no')
+                ->setDefault('ip', '*')
+                ->setIF($this->post->allip, 'ip', '*')
                 ->join('mustSignOut', '')
+                ->remove('allip')
                 ->get();
 
             $settings->signInLimit  = date("H:i", strtotime($settings->signInLimit));
@@ -292,6 +295,7 @@ class attend extends control
         $this->view->workingDays  = $this->config->attend->workingDays;
         $this->view->workingHours = $this->config->attend->workingHours;
         $this->view->mustSignOut  = $this->config->attend->mustSignOut;
+        $this->view->ip           = $this->config->attend->ip;
         $this->view->reviewedBy   = isset($this->config->attend->reviewedBy) ? $this->config->attend->reviewedBy : '';
         $this->view->users        = array('' => $this->lang->dept->moderators) + $this->user->getPairs('noempty,noclosed,nodeleted');
         $this->display();
