@@ -88,7 +88,7 @@
       </li>
       <?php endforeach;?>
     </ol>
-    <?php if($action == 'record'):?>
+    <?php if($behavior == 'record'):?>
     <div class='pager pull-right'><?php $pager->show('right', 'shortest');?></div>
     <?php endif;?>
   </div>

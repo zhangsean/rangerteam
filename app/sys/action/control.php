@@ -26,7 +26,7 @@ class action extends control
         if($action == 'record')
         {
             $this->app->loadClass('pager', $static = true);
-            $pager = new pager($recTotal = 0, $recPerPage = 5, $pageID = 1);
+            $pager = new pager($recTotal = 0, $recPerPage = 5, $pageID);
         }
 
         $this->view->actions    = $this->action->getList($objectType, $objectID, $action, $pager);
@@ -35,7 +35,7 @@ class action extends control
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->from       = $from;
         $this->view->pager      = $pager;
-        $this->view->action     = $action;
+        $this->view->behavior   = $action;
         $this->display();
     }
 
