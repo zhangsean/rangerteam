@@ -12,6 +12,7 @@
 $lang->tree->common        = "类目";
 $lang->tree->add           = "添加";
 $lang->tree->edit          = "编辑";
+$lang->tree->merge         = "合并";
 $lang->tree->children      = "添加子类目";
 $lang->tree->delete        = "删除类目";
 $lang->tree->browse        = "区域设置、行业设置、收入科目、支出科目、论坛版块、博客类目、维护部门";
@@ -28,6 +29,7 @@ $lang->tree->hasChildren   = '该版块存在子版块，不能删除。';
 $lang->tree->hasThreads    = '该版块存在帖子，不能删除。';
 $lang->tree->confirmDelete = "您确定删除该类目吗？";
 $lang->tree->successFixed  = "成功修复";
+$lang->tree->asParent      = '[%s]存在子科目，不能被合并';
 
 /* Lang items for article, products. */
 $lang->category = new stdclass();
@@ -41,6 +43,8 @@ $lang->category->children = '子类目';
 $lang->category->rights   = '权限';
 $lang->category->users    = '授权用户';
 $lang->category->groups   = '授权分组';
+$lang->category->origin   = '源科目';
+$lang->category->target   = '目标科目';
 
 /* Lang items for area. */
 $lang->area = new stdclass();

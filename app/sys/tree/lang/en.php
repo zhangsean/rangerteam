@@ -12,6 +12,7 @@
 $lang->tree->common      = "Tree";
 $lang->tree->add         = "Add";
 $lang->tree->edit        = "Edit";
+$lang->tree->merge       = "Merge";
 $lang->tree->children    = "Add child";
 $lang->tree->delete      = "Delete";
 $lang->tree->browse      = "Area, Industry, Income Categories, Expend Categories, Forum Boards, Blog Categories, Depts";
@@ -28,6 +29,7 @@ $lang->tree->hasChildren   = "The board has children, can't be deleted.";
 $lang->tree->hasThreads    = "The board has threads, can't be deleted.";
 $lang->tree->confirmDelete = "Are you sure to delete it?";
 $lang->tree->successFixed  = "Successfully fixed.";
+$lang->tree->asParent      = "[%s] has children, so it can't be merged.";
 
 /* Lang items for article, products. */
 $lang->category = new stdclass();
@@ -41,6 +43,8 @@ $lang->category->children = "Children";
 $lang->category->rights   = 'Rights';
 $lang->category->users    = 'Users';
 $lang->category->groups   = 'Groups';
+$lang->category->origin   = 'Origin Category';
+$lang->category->target   = 'Target Category';
 
 /* Lang items for area. */
 $lang->area = new stdclass();

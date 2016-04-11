@@ -34,7 +34,12 @@ js::set('moduleID', $moduleID);
   <div class='col-md-3'>
   <?php endif;?>
     <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $lang->category->common;?></strong></div>
+      <div class='panel-heading'>
+        <strong><i class="icon-sitemap"></i> <?php echo $lang->category->common;?></strong>
+        <?php if($type == 'in' or $type == 'out'):?>
+        <div class='panel-actions pull-right'><?php echo html::a(helper::createLink('tree', 'merge', "type=$type"), $lang->tree->merge, "class='btn btn-primary ajax'")?></div>
+        <?php endif;?>
+      </div>
       <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu;?></div></div>
     </div>
   </div>

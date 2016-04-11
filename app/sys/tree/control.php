@@ -116,6 +116,29 @@ class tree extends control
     }
 
     /**
+     * Merge category for trade.
+     * 
+     * @param  string  $type 
+     * @access public
+     * @return void
+     */
+    public function merge($type = 'in')
+    {
+        if($_POST)
+        {
+            $result = $this->tree->merge();
+            if(is_array($result))  $this->send($result);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $this->view->title      = $this->lang->tree->merge;
+        $this->view->type       = $type;
+        $this->view->categories = $this->tree->getPairs('', $type);
+        $this->display();
+    }
+
+    /**
      * Manage children.
      *
      * @param  string    $type 

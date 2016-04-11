@@ -26,7 +26,7 @@ $(document).ready(function()
         $(this).children('.deleter').remove();
     });
 
-    $.setAjaxLoader('#treeMenuBox .ajax', '#categoryBox');
+    $.setAjaxLoader('#treeMenuBox .ajax, .panel-actions .ajax', '#categoryBox');
 
     if(v.type == 'customdoc') $('.leftmenu .nav li a[href*=createlib]').modalTrigger({type:'ajax', width:800});
 })

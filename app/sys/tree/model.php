@@ -584,6 +584,32 @@ class treeModel extends model
     }
 
     /**
+     * Merge category for trade.
+     * 
+     * @access public
+     * @return void
+     */
+    public function merge()
+    {
+        if(!$this->post->originCategories) return false;
+        $targetCategoryID = $this->post->targetCategory;
+        foreach($this->post->originCategories as $originCategoryID)
+        {
+            if($originCategoryID == $targetCategoryID) continue;
+
+            $originCategory = $this->getByID($originCategoryID);
+            $children       = $this->getAllChildID($originCategoryID);
+            unset($children[$originCategoryID]);
+            if(!empty($children)) return array('result' => 'fail', 'message' => sprintf($this->lang->tree->asParent, $originCategory->name));
+
+            $this->dao->update(TABLE_TRADE)->set('category')->eq($targetCategoryID)->where('category')->eq($originCategoryID)->exec();
+            if(!dao::isError()) $this->dao->delete()->from(TABLE_CATEGORY)->where('id')->eq($originCategoryID)->exec();
+        }
+
+        return !dao::isError();
+    }
+
+    /**
      * Manage children of one category.
      * 
      * @param string $type 
