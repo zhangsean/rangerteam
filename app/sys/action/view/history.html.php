@@ -88,6 +88,7 @@
       </li>
       <?php endforeach;?>
     </ol>
+    <div class='pager pull-right'><?php $pager->show('right', 'shortest');?></div>
   </div>
 </div>
 <?php js::execute($pageJS);?>

@@ -33,6 +33,8 @@ $(document).ready(function()
         }
     });
 
+    $('#actionBox').load(createLink('action', 'history', 'objectType=' + v.objectType + '&objectID=' + v.objectID + '&action=record&from=createRecord'));
+
     $('[name*=objectType]').change(function()
     {
         $('#order, #contract').attr('disabled', true).parents('tr').hide();

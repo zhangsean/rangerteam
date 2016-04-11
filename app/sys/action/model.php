@@ -127,8 +127,9 @@ class actionModel extends model
               ->andWhere('objectID')->eq($objectID)
             ->fi()
             ->beginIF($action)->andWhere('action')->eq($action)->fi()
+            ->orderBy('id')
             ->page($pager)
-            ->orderBy('id')->fetchAll('id');
+            ->fetchAll('id');
 
         $histories = $this->getHistory(array_keys($actions));
         $contacts  = $this->loadModel('contact', 'crm')->getPairs(0, false, '');

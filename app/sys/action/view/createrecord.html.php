@@ -15,6 +15,8 @@
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::import($jsRoot . 'date.js');?>
 <?php js::set('customer', $customer);?>
+<?php js::set('objectType', $objectType);?>
+<?php js::set('objectID', $objectID);?>
 <div class='panel-body'>
 <form method='post' id='createRecordForm' action='<?php echo inlink('createrecord', "objectType={$objectType}&objectID={$objectID}")?>' class='form-inline'>
   <table class='table table-form'>
@@ -108,7 +110,7 @@
       </td>
     </tr>
   </table>
-  <?php echo $this->fetch('action', 'history', "objectType={$objectType}&objectID={$objectID}&action=record&from=createRecord");?>
+  <div id='actionBox'></div>
 </form>
 </div>
 <div class='errorMessage hide'>

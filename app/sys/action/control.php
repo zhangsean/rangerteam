@@ -20,13 +20,17 @@ class action extends control
      * @access public
      * @return void
      */
-    public function history($objectType, $objectID, $action = '', $from = 'view')
+    public function history($objectType, $objectID, $action = '', $from = 'view', $pageID = 1)
     {
-        $this->view->actions    = $this->action->getList($objectType, $objectID, $action);
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal = 0, $recPerPage = 5, $pageID);
+
+        $this->view->actions    = $this->action->getList($objectType, $objectID, $action, $pager);
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->from       = $from;
+        $this->view->pager      = $pager;
         $this->display();
     }
 
