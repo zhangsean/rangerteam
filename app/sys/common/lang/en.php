@@ -39,6 +39,7 @@ $lang->apps->team = 'TEAM';
 $lang->ranzhi    = 'ranzhi';
 $lang->agreement = "I Agree to the <a href='http://zpl.pub/page/zplv11.html' target='_blank'>Z PUBLIC LICENSE 1.2</a>, <span class='text-danger'>and promise to keep the logo, link of RanZhi.</span>";
 $lang->poweredBy = "<a href='http://www.ranzhico.com/?v=%s' target='_blank'>{$lang->ranzhi} %s</a>";
+$lang->ipLimited = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /></head><body>Sorry, current IP is limited by Administrator. Please contact the Administrator to lift the restrictions.</body></html>";
 
 /* IE6 alert.  */
 $lang->IE6Alert = <<<EOT

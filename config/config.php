@@ -65,6 +65,9 @@ $config->file = new stdclass();
 $config->file->dangers = 'php,php3,php4,phtml,php5,jsp,py,rb,asp,aspx,ashx,asa,cer,cdx,aspl,shtm,shtml,html,htm';
 $config->file->maxSize = 1024 * 1024;
 
+/* IP white list settings.*/
+$config->ipWhiteList = '*';
+
 /* Set the allowed tags.  */
 $config->allowedTags = new stdclass();
 $config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><ol><ul><li><img><a><b><font><hr><pre>';    // For front mode.
