@@ -22,8 +22,12 @@ class action extends control
      */
     public function history($objectType, $objectID, $action = '', $from = 'view', $pageID = 1)
     {
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0, $recPerPage = 5, $pageID);
+        $pager = null;
+        if($action == 'record')
+        {
+            $this->app->loadClass('pager', $static = true);
+            $pager = new pager($recTotal = 0, $recPerPage = 5, $pageID = 1);
+        }
 
         $this->view->actions    = $this->action->getList($objectType, $objectID, $action, $pager);
         $this->view->objectType = $objectType;
@@ -31,6 +35,7 @@ class action extends control
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->from       = $from;
         $this->view->pager      = $pager;
+        $this->view->action     = $action;
         $this->display();
     }
 
