@@ -67,6 +67,8 @@ class task extends control
         $this->loadModel('search', 'sys');
         $this->config->task->search['actionURL'] = $this->createLink('task', 'browse', "projectID=$projectID&mode=bysearch");
         $this->config->task->search['params']['assignedTo']['values'] = $this->loadModel('project', 'oa')->getMemberPairs($projectID);
+        $this->config->task->search['params']['createdBy']['values']  = $this->loadModel('project', 'oa')->getMemberPairs($projectID);
+        $this->config->task->search['params']['finishedBy']['values'] = $this->loadModel('project', 'oa')->getMemberPairs($projectID);
         $this->search->setSearchParams($this->config->task->search);
 
         $this->view->title = $this->lang->task->browse;

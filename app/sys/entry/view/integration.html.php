@@ -44,7 +44,7 @@ include '../../common/view/header.html.php';
           <th><?php echo $lang->entry->ip;?></th>
           <td>
             <div class='input-group'>
-              <?php echo html::input('ip', $entry->ip, "class='form-control' placeholder='{$lang->entry->note->ip}'");?>
+              <?php echo html::input('ip', $entry->ip, "class='form-control' title='{$lang->entry->note->ip}' placeholder='{$lang->entry->note->ip}'");?>
               <div class='input-group-addon'>
                 <label class="checkbox"><input type="checkbox" id="allip" name="allip" value="1"> <?php echo $lang->entry->note->allip;?></label>
               </div>

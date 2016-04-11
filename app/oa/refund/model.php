@@ -69,15 +69,32 @@ class refundModel extends model
      */
     public function create()
     {
+        $now    = helper::now();
         $refund = fixer::input('post')
             ->add('status', 'wait')
             ->add('createdBy', $this->app->user->account)
-            ->add('createdDate', helper::now())
+            ->add('createdDate', $now) 
             ->setDefault('date', helper::today())
             ->join('related', ',')
             ->remove('firstReviewer,firstReviewDate,sencondReviewer,secondReviewDate,refundBy,refundDate')
             ->remove('dateList,moneyList,currencyList,categoryList,descList,relatedList')
             ->get();
+
+        if(!empty($this->config->refund->firstReviewer) && $this->config->refund->firstReviewer == $this->app->user->account) 
+        {
+            $refund->status          = 'doing';
+            $refund->firstReviewer   = $this->app->user->account;
+            $refund->firstReviewDate = $now;
+
+            if(empty($this->config->refund->secondReviewer)) $refund->status = 'pass';
+            
+            if(!empty($this->config->refund->secondReviewer) && $this->config->refund->secondReviewer == $this->app->user->account)
+            {
+                $refund->status = 'pass';
+                $refund->secondReviewer   = $this->app->user->account;
+                $refund->secondReviewDate = $now;
+            }
+        }
 
         $this->dao->insert(TABLE_REFUND)
             ->data($refund, $skip='files,labels')
@@ -97,9 +114,9 @@ class refundModel extends model
                 if(empty($money)) continue;
                 $detail = new stdclass();
                 $detail->parent      = $refundID;
-                $detail->status      = 'wait';
+                $detail->status      = $refund->status;
                 $detail->createdBy   = $this->app->user->account;
-                $detail->createdDate = helper::now();
+                $detail->createdDate = $now;
                 $detail->money       = $money;
                 $detail->date        = empty($_POST['dateList'][$key]) ? helper::today() : $_POST['dateList'][$key];
                 $detail->currency    = $refund->currency;
@@ -134,6 +151,22 @@ class refundModel extends model
             ->remove('status,firstReviewer,firstReviewDate,sencondReviewer,secondReviewDate,refundBy,refundDate,files,labels')
             ->remove('idList,dateList,moneyList,currencyList,categoryList,descList,relatedList')
             ->get();
+
+        if(!empty($this->config->refund->firstReviewer) && $this->config->refund->firstReviewer == $this->app->user->account) 
+        {
+            $refund->status          = 'doing';
+            $refund->firstReviewer   = $this->app->user->account;
+            $refund->firstReviewDate = $now;
+
+            if(empty($this->config->refund->secondReviewer)) $refund->status = 'pass';
+            
+            if(!empty($this->config->refund->secondReviewer) && $this->config->refund->secondReviewer == $this->app->user->account)
+            {
+                $refund->status = 'pass';
+                $refund->secondReviewer   = $this->app->user->account;
+                $refund->secondReviewDate = $now;
+            }
+        }
 
         $this->dao->update(TABLE_REFUND)
             ->data($refund)
@@ -280,7 +313,12 @@ class refundModel extends model
         {
             $status = 'pass';
             $data->money = $this->post->money;
-            if(!empty($this->config->refund->secondReviewer) and $this->config->refund->secondReviewer != $account) $status = 'doing';
+            if(!empty($this->config->refund->secondReviewer))
+            {
+                $status = 'doing';
+                if($this->config->refund->secondReviewer == $account) $status = 'pass';
+                if($this->config->refund->secondReviewer == $refund->createdBy) $status = 'pass';
+            } 
         }
 
         $data->status = $status;
@@ -288,6 +326,13 @@ class refundModel extends model
         {
             $data->firstReviewer   = $account;
             $data->firstReviewDate = $now;
+
+            if($status == 'pass' && !empty($this->config->refund->secondReviewer))
+            {
+                if($this->config->refund->secondReviewer == $account) $data->secondReviewer = $account;
+                if($this->config->refund->secondReviewer == $refund->createdBy) $data->secondReviewer = $refund->createdBy;
+                $data->secondReviewDate = $now;
+            } 
         }
 
         if($refund->status == 'doing')

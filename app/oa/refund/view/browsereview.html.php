@@ -12,13 +12,13 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <div class='panel'>
-  <table class='table table-hover table-striped table-sorter table-data table-fixed text-center'>
+  <table class='table table-hover table-striped table-data table-fixed text-center'>
     <thead>
       <tr class='text-center'>
         <th class='w-50px'><?php echo $lang->refund->id;?></th>
+        <th class='w-100px'><?php echo $lang->user->dept;?></th>
         <th class='w-150px'><?php echo $lang->refund->name;?></th>
         <th class='w-100px'><?php echo $lang->refund->category;?></th>
-        <th class='w-100px'><?php echo $lang->user->dept;?></th>
         <th class='w-100px'><?php echo $lang->user->realname;?></th>
         <th class='w-100px'><?php echo $lang->refund->money;?></th>
         <th class='w-100px'><?php echo $lang->refund->date;?></th>
@@ -32,9 +32,9 @@
     <?php $currentDept = $users[$account]->dept;?>
     <tr>
       <td><?php echo $refund->id;?></td>
+      <td><?php echo zget($deptList, $currentDept);?></td>
       <td class='text-left'><?php echo $refund->name;?></td>
       <td><?php echo $categories[$refund->category];?></td>
-      <td><?php echo zget($deptList, $currentDept);?></td>
       <td><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
       <td class='text-right'><?php echo zget($currencySign, $refund->currency) . $refund->money;?></td>
       <td><?php echo $refund->date;?></td>

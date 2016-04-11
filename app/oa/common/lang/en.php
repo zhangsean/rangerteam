@@ -50,7 +50,7 @@ $lang->attend->menu->company    = 'Company attendance|attend|company|';
 $lang->attend->menu->review     = 'Review attendance|attend|browsereview|';
 $lang->attend->menu->stat       = 'Stat|attend|stat|';
 $lang->attend->menu->holiday    = 'Holiday|holiday|browse|';
-$lang->attend->menu->settings   = 'Setting|attend|settings|';
+$lang->attend->menu->settings   = array('link' => 'Setting|attend|settings|', 'alias' => 'setmanager');
 
 $lang->holiday = new stdclass();
 $lang->holiday->menu = $lang->attend->menu;
@@ -76,11 +76,11 @@ $lang->trip->menu->company    = 'Company|trip|company|';
 
 $lang->refund = new stdclass();
 $lang->refund->menu = new stdclass();
-$lang->refund->menu->personal = 'My|refund|personal|';
+$lang->refund->menu->personal = array('link' => 'My|refund|personal|', 'alias' = 'create, edit');
 $lang->refund->menu->review   = 'Waiting For Review|refund|browsereview|';
 $lang->refund->menu->todo     = 'Waiting For Reimbursement|refund|todo|';
 $lang->refund->menu->company  = 'All|refund|company|';
-$lang->refund->menu->settings = 'Settings|refund|settings|';
+$lang->refund->menu->settings = array('link' => 'Settings|refund|settings|', 'alias' => 'setcategory');
 
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->modules = 'Modules|setting|modules|app=oa';

@@ -9,5 +9,7 @@ $lang->leads->assign    = '指派';
 $lang->leads->transform = '確認';
 $lang->leads->ignore    = '忽略';
 
+$lang->leads->ignoreReason = '原因';
+
 $lang->leads->message = new stdclass();
 $lang->leads->message->apply = '請先處理現有的名單聯繫人。';

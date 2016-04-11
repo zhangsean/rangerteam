@@ -25,6 +25,7 @@
         <th class='w-50px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->refund->id);?></th>
         <th class='w-100px visible-lg'><?php echo $lang->user->dept;?></th>
         <th><?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->refund->name);?></th>
+        <th class='w-150px'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->refund->category);?></th>
         <th class='w-100px text-right'><?php commonModel::printOrderLink('money', $orderBy, $vars, $lang->refund->money);?></th>
         <th class='w-90px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->refund->status);?></th>
         <th class='w-90px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->refund->createdBy);?></th>
@@ -44,6 +45,7 @@
       <td><?php echo $refund->id;?></td>
       <td class='visible-lg'><?php echo zget($userDept, $refund->createdBy);?></td>
       <td class='text-left'><?php echo $refund->name?></td>
+      <td><?php echo $categories[$refund->category];?></td>
       <td class='text-right'><?php echo zget($currencySign, $refund->currency) . $refund->money?></td>
       <td class='<?php echo $refund->status?>'><?php echo zget($lang->refund->statusList, $refund->status)?></td>
       <td><?php echo zget($userPairs, $refund->createdBy);?></td>

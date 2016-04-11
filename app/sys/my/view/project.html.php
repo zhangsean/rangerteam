@@ -11,10 +11,6 @@
  */
 ?>
 <?php include './header.html.php';?>
-<div style='height: 25px;'></div>
-<div id='menuActions' class='actions'>
-  <?php commonModel::printLink('oa.project', 'create', '', '<i class="icon-plus"></i> ' . $this->lang->project->create, "id='createButton' class='btn btn-primary'");?>
-</div>
 <div class='panel'>
   <table class='table table-hover table-striped tablesorter table-fixed table-data'>
     <thead>
@@ -28,7 +24,7 @@
       <th class='w-100px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->project->createdBy);?></th>
       <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->project->status);?></th>
       <th><?php echo $lang->project->desc;?></th>
-      <th class='w-160px'><?php echo $lang->actions;?></th>
+      <th class='w-160px text-right createProductTH'><?php commonModel::printLink('oa.project', 'create', '', '<i class="icon-plus"></i> ' . $this->lang->project->create, "id='createButton' class='btn btn-primary'");?></th>
     </tr>
     </thead>
     <?php foreach($projects as $project):?>

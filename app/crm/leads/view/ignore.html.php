@@ -15,7 +15,7 @@
 <form method='post' id='ajaxForm' action='<?php echo inlink('ignore', "contactID={$contactID}")?>'>
   <table class='table table-form'>
     <tr>
-      <th class='w-80px'><?php echo $lang->leads->ignoreReason;?></th>
+      <th class='w-40px'><?php echo $lang->leads->ignoreReason;?></th>
       <td><?php echo html::textarea('comment');?></td>
     </tr>
     <tr>

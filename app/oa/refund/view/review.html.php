@@ -27,9 +27,9 @@
       <th class='w-160px'>
         <div class='btn-group'>
           <button class='btn btn-mini all-pass' type='button'><?php echo $lang->refund->reviewAllStatusList['allpass'];?></button>
+          <?php echo html::hidden('allPass', '1');?>
+          <?php echo html::hidden('allReject', '0');?>
           <button class='btn btn-mini all-reject' type='button'><?php echo $lang->refund->reviewAllStatusList['allreject'];?></button>
-          <?php echo html::input('allPass', '1', "class='hide'");?>
-          <?php echo html::input('allReject', '0', "class='hide'");?>
         </div>
       </th>
       <?php else:;?>
@@ -59,9 +59,9 @@
     </tr>
     <?php endif;?>
   </table>
-  <table class='table table-form'>
+  <table class='table table-borderless'>
     <tr class='reviewMoney'>
-      <th class='w-80px'><?php echo $lang->refund->reviewMoney;?></th>
+      <th class='w-80px text-center text-middle'><?php echo $lang->refund->reviewMoney;?></th>
       <td>
         <div class='input-group'>
           <?php echo html::input('money', $refund->money, "class='form-control'");?>
@@ -71,9 +71,9 @@
       <td><?php echo html::submitButton();?></td>
     </tr>
     <tr class='reason hide'>
-      <th class='w-60px'><?php echo $lang->refund->reason;?></th>
+      <th class='w-80px text-center text-middle'><?php echo $lang->refund->reason;?></th>
       <td><?php echo html::textarea("reason", '', "class='form-control rowspan=3'");?></td>
-      <td><?php echo html::submitButton();?></td>
+      <td class='text-middle'><?php echo html::submitButton();?></td>
     </tr>
   </table>
 </form>

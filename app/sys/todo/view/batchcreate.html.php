@@ -57,7 +57,10 @@
       </tr>  
       <?php endfor;?>
       <tfoot>
-        <tr><td colspan='6'><?php echo html::submitButton() . html::backButton();?></td></tr>
+        <tr>
+          <td></td>
+          <td colspan='5'><?php echo html::submitButton() . html::backButton();?></td>
+        </tr>
       </tfoot>
     </table>
   </div>

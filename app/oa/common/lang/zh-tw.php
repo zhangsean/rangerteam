@@ -76,7 +76,7 @@ $lang->trip->menu->company    = '公司|trip|company|';
 
 $lang->refund = new stdclass();
 $lang->refund->menu = new stdclass();
-$lang->refund->menu->personal = array('link' => '我的報銷|refund|personal|', 'alias' => 'create');
+$lang->refund->menu->personal = array('link' => '我的報銷|refund|personal|', 'alias' => 'create,edit');
 $lang->refund->menu->review   = '待審批|refund|browsereview|';
 $lang->refund->menu->todo     = '待報銷|refund|todo|';
 $lang->refund->menu->company  = '所有報銷|refund|company|';

@@ -77,13 +77,14 @@
           <?php if($type != 'company'):?>
           <td>
             <?php if($type == 'browseReview' and $leave->status == 'wait'):?>
-            <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=pass"), $lang->leave->statusList['pass'], "class='reviewPass'");?>
-            <?php echo html::a($this->createLink('oa.leave', 'review', "id=$leave->id&status=reject"), $lang->leave->statusList['reject'], "class='reviewReject'");?>
+            <?php echo html::a($this->createLink('oa.leave', 'edit', "id={$leave->id}"), $lang->edit, "data-toggle='modal'");?>
+            <?php echo html::a($this->createLink('oa.leave', 'review', "id={$leave->id}&status=pass"), $lang->leave->statusList['pass'], "class='reviewPass'");?>
+            <?php echo html::a($this->createLink('oa.leave', 'review', "id={$leave->id}&status=reject"), $lang->leave->statusList['reject'], "class='reviewReject'");?>
             <?php endif;?>
             <?php if($type == 'personal' and ($leave->status == 'wait' or $leave->status == 'draft')):?>
-            <?php if($leave->status == 'wait' or $leave->status == 'draft') echo html::a($this->createLink('oa.leave', 'switchstatus', "id=$leave->id"), $leave->status == 'wait' ? $lang->leave->cancel : $lang->leave->commit, "class='reload'");?>
-            <?php echo html::a($this->createLink('oa.leave', 'edit', "id=$leave->id"), $lang->edit, "data-toggle='modal'");?>
-            <?php echo html::a($this->createLink('oa.leave', 'delete', "id=$leave->id"), $lang->delete, "class='deleter'");?>
+            <?php if($leave->status == 'wait' or $leave->status == 'draft') echo html::a($this->createLink('oa.leave', 'switchstatus', "id={$leave->id}"), $leave->status == 'wait' ? $lang->leave->cancel : $lang->leave->commit, "class='reload'");?>
+            <?php echo html::a($this->createLink('oa.leave', 'edit', "id={$leave->id}"), $lang->edit, "data-toggle='modal'");?>
+            <?php echo html::a($this->createLink('oa.leave', 'delete', "id={$leave->id}"), $lang->delete, "class='deleter'");?>
             <?php endif;?>
           </td>
           <?php endif;?>

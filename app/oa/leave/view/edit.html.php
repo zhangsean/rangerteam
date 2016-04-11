@@ -15,11 +15,13 @@
 <div class='panel-body'>
   <form id='ajaxForm' method='post' action="<?php echo $this->createLink('oa.leave', 'edit', "id=$leave->id")?>">
     <table class='table table-form table-condensed'>
+      <?php if(!commonModel::hasPriv('oa.leave', 'browseReview')):?>
       <tr>
         <th><?php echo $lang->leave->status;?></th>
         <td class='text-warning'><?php echo $lang->leave->statusList[$leave->status];?></td>
         <td></td>
       </tr> 
+      <?php endif;?>
       <tr>
         <th class='w-80px'><?php echo $lang->leave->type?></th>
         <td><?php echo html::radio('type', $lang->leave->typeList, $leave->type, "class=''")?></td>
@@ -59,11 +61,13 @@
         </td>
         <td></td>
       </tr>
+      <?php if(!commonModel::hasPriv('oa.leave', 'browseReview')):?>
       <tr>
         <th><?php echo $lang->leave->desc?></th>
         <td><?php echo html::textarea('desc', $leave->desc, "class='form-control'")?></td>
         <td></td>
       </tr> 
+      <?php endif;?>
       <tr><th></th><td clospan='2'><?php echo html::submitButton();?></td></tr>
     </table>
   </form>
