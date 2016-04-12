@@ -236,7 +236,7 @@ class todo extends control
         $this->view->modalWidth = '80%';
         $this->view->todo       = $todo;
         $this->view->times      = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
-        $this->view->users      = $this->loadModel('user')->getPairs('noletter');
+        $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->actions    = $this->loadModel('action')->getList('todo', $todoID);
         $this->view->from       = $from;
 
@@ -416,7 +416,7 @@ class todo extends control
 
         /* Set toList. */
         $todo    = $this->todo->getById($todoID);
-        $users   = $this->loadModel('user')->getPairs('noletter');
+        $users   = $this->loadModel('user')->getPairs();
         $toList  = $todo->assignedTo;
         $subject = "{$this->lang->todo->common}#{$todo->id}{$this->lang->colon}{$todo->name}";
 

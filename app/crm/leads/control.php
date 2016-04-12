@@ -266,7 +266,7 @@ class leads extends control
 
         /* Set toList and ccList. */
         $contact = $this->contact->getById($contactID);
-        $users   = $this->loadModel('user')->getPairs('noletter');
+        $users   = $this->loadModel('user')->getPairs();
         $toList  = $contact->assignedTo;
 
         /* send notice if user is online and return failed accounts. */

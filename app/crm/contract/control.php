@@ -555,7 +555,7 @@ class contract extends control
                 while($row = $stmt->fetch()) $contracts[$row->id] = $row;
             }
 
-            $users        = $this->loadModel('user')->getPairs('noletter');
+            $users        = $this->loadModel('user')->getPairs();
             $customers    = $this->loadModel('customer')->getPairs();
             $contacts     = $this->loadModel('contact')->getPairs();
             $relatedFiles = $this->dao->select('id, objectID, pathname, title')->from(TABLE_FILE)->where('objectType')->eq('contract')->andWhere('objectID')->in(@array_keys($contracts))->fetchGroup('objectID');

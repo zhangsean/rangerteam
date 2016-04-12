@@ -122,7 +122,7 @@ class doc extends control
         $this->view->parentModules = $this->tree->getFamily($moduleID);
         $this->view->docs          = $docs;
         $this->view->pager         = $pager;
-        $this->view->users         = $this->loadModel('user')->getPairs('noletter');
+        $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->orderBy       = $orderBy;
         $this->view->productID     = $productID;
         $this->view->projectID     = $projectID;
@@ -341,7 +341,7 @@ class doc extends control
         $this->view->title      = "DOC #$doc->id $doc->title - " . $this->libs[$doc->lib];
         $this->view->doc        = $doc;
         $this->view->lib        = $lib;
-        $this->view->users      = $this->user->getPairs('noclosed,noletter');
+        $this->view->users      = $this->user->getPairs('noclosed');
         $this->view->keTableCSS = $this->doc->extractKETableCSS($doc->content);
 
         $this->display();

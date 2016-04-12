@@ -304,7 +304,7 @@ class overtime extends control
 
         /* Set toList and ccList. */
         $overtime = $this->overtime->getById($overtimeID);
-        $users  = $this->loadModel('user')->getPairs('noletter');
+        $users    = $this->loadModel('user')->getPairs();
         if($action->action == 'reviewed')
         {
             $toList = $overtime->createdBy;

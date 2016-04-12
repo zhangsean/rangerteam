@@ -264,7 +264,7 @@ class leave extends control
 
         /* Set toList and ccList. */
         $leave  = $this->leave->getById($leaveID);
-        $users  = $this->loadModel('user')->getPairs('noletter');
+        $users  = $this->loadModel('user')->getPairs();
         if($action->action == 'reviewed')
         {
             $toList = $leave->createdBy;

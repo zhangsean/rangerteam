@@ -183,7 +183,7 @@ class action extends control
         $this->view->type    = $type;
         $this->view->orderBy = $orderBy;
         $this->view->pager   = $pager;
-        $this->view->users   = $this->loadModel('user')->getPairs('noletter');
+        $this->view->users   = $this->loadModel('user')->getPairs();
         $this->display();
     }
 

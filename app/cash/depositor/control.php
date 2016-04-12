@@ -258,7 +258,7 @@ class depositor extends control
             $depositors = $this->depositor->getList();
 
             /* Get users and projects. */
-            $users    = $this->loadModel('user')->getPairs('noletter');
+            $users    = $this->loadModel('user')->getPairs();
             $balances = $this->loadModel('balance')->getLatest();
             
             foreach($depositors as $depositor)

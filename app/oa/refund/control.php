@@ -420,7 +420,7 @@ class refund extends control
 
         /* Set toList and ccList. */
         $refund = $this->refund->getById($refundID);
-        $users  = $this->loadModel('user')->getPairs('noletter');
+        $users  = $this->loadModel('user')->getPairs();
 
         if($action->action == 'reviewed')
         {

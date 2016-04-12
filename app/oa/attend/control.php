@@ -406,7 +406,7 @@ class attend extends control
 
         /* Set toList. */
         $attend  = $this->attend->getById($attendID);
-        $users   = $this->loadModel('user')->getPairs('noletter');
+        $users   = $this->loadModel('user')->getPairs();
         $toList  = $attend->account;
         if($action->action == 'commited')
         {

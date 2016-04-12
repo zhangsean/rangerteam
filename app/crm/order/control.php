@@ -317,7 +317,7 @@ class order extends control
 
         /* Set toList and ccList. */
         $order  = $this->order->getByIdList($orderID);
-        $users  = $this->loadModel('user')->getPairs('noletter');
+        $users  = $this->loadModel('user')->getPairs();
         $order  = $order[$orderID];
         $toList = $order->assignedTo;
 
@@ -384,7 +384,7 @@ class order extends control
             }
 
             /* Get users, products and projects. */
-            $users    = $this->loadModel('user')->getPairs('noletter');
+            $users    = $this->loadModel('user')->getPairs();
             $products = $this->loadModel('product')->getPairs();
 
             foreach($orders as $order)

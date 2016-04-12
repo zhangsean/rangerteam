@@ -647,7 +647,7 @@ class trade extends control
             $expenseTypes = $this->loadModel('tree')->getPairs(0, 'out');
             $incomeTypes  = $this->loadModel('tree')->getPairs(0, 'in');
             
-            $users      = $this->loadModel('user')->getPairs('noletter');
+            $users      = $this->loadModel('user')->getPairs();
             $depositors = $this->loadModel('depositor')->getPairs();
             $customers  = $this->loadModel('customer', 'crm')->getPairs();
             $deptList   = $this->loadModel('tree')->getPairs(0, 'dept');

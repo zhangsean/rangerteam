@@ -270,7 +270,7 @@ END:VCARD";
                 while($row = $stmt->fetch()) $contacts[$row->id] = $row;
             }
 
-            $users     = $this->loadModel('user')->getPairs('noletter');
+            $users     = $this->loadModel('user')->getPairs();
             $customers = $this->loadModel('customer')->getPairs();
 
             $resumes     = $this->dao->select('*')->FROM(TABLE_RESUME)->where('deleted')->eq(0)->fetchGroup('contact');
