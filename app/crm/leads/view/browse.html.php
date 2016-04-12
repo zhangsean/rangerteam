@@ -34,7 +34,7 @@
     <thead>
       <tr class='text-center'>
         <?php $vars = "mode={$mode}&status={$status}&origin={$origin}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
-        <th class='w-60px'> <?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->contact->id);?></th>
+        <th class='w-80px'> <?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->contact->id);?></th>
         <th class='w-80px text-left'><?php commonModel::printOrderLink('realname', $orderBy, $vars, $lang->contact->realname);?></th>
         <?php if($mode == 'next'):?>
         <th class="w-80px text-left"><?php commonModel::printOrderLink('nextDate', $orderBy, $vars, $lang->contact->nextDate);?></th>
