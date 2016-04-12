@@ -43,7 +43,7 @@
           <td><?php echo $todo->begin;?></td>
           <td><?php echo $todo->end;?></td>
           <td><?php echo zget($lang->todo->statusList, $todo->status);?></td>
-          <td class='text-left'>
+          <td class='text-left actions'>
             <?php 
               echo html::a($this->createLink('todo', 'view', "todoID={$todo->id}"), $lang->view, "data-toggle='modal' data-width='80%'");
               $disabled = ($this->todo->checkPriv($todo, 'finish') && $this->todo->isClickable($todo, 'finish')) ? '' : 'disabled';

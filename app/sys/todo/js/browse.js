@@ -22,5 +22,10 @@ $(document).ready(function()
         return false;
     });
 
+    $('tbody tr td:not(".actions")').click(function()
+    {
+        $(this).parent('tr').find('[type=checkbox]').click();
+    });
+
     fixTableFooter($('#todoList'));
 });
