@@ -15,14 +15,14 @@
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('detail', !empty($refund->detail) ? true : false);?>
 <form method='post' id='ajaxForm' action='<?php echo inlink('review', "refundID={$refund->id}")?>'>
-  <table class='table table-bordered'>
+  <table class='table table-fixed table-bordered'>
     <thead>
     <tr class='text-center'>
       <th class='w-80px'><?php echo $lang->refund->date;?></th>
       <th class='w-100px'><?php echo $lang->refund->money;?></th>
       <th class='w-100px'><?php echo $lang->refund->status;?></th>
       <th class='w-120px'><?php echo $lang->refund->category;?></th>
-      <th><?php echo $lang->refund->desc;?></th>
+      <th class='w-90px text-nowrap'><?php echo $lang->refund->desc;?></th>
       <?php if(!empty($refund->detail)):?>
       <th class='w-160px'>
         <div class='btn-group'>
@@ -33,7 +33,7 @@
         </div>
       </th>
       <?php else:;?>
-      <th></th>
+      <th class='w-160px'></th>
       <?php endif;?>
     </tr>
     </thead>
@@ -44,7 +44,7 @@
       <td class='text-right'><?php echo zget($currencySign, $detail->currency) . "<span class='detailMoney'>" . $detail->money . "</span>";?></td>
       <td><?php echo $lang->refund->statusList[$detail->status];?></td>
       <td><?php echo $categories[$detail->category];?></td>
-      <td><?php echo $detail->desc?></td>
+      <td class='text-ellipsis' title="<?php echo $detail->desc;?>"><?php echo $detail->desc?></td>
       <td><?php echo html::radio("status{$detail->id}", $lang->refund->reviewStatusList, $detail->status == 'reject' ? 'reject' : 'pass');?></td>
     </tr>
     <?php endforeach;?>
@@ -54,7 +54,7 @@
       <td class='text-right'><?php echo zget($currencySign, $refund->currency) . "<span class='detailMoney'>" . $refund->money . "</span>";?></td>
       <td><?php echo $lang->refund->statusList[$refund->status];?></td>
       <td><?php echo $categories[$refund->category];?></td>
-      <td><?php echo $refund->desc?></td>
+      <td class='text-ellipsis' title="<?php echo $refund->desc;?>"><?php echo $refund->desc?></td>
       <td><?php echo html::radio("status", $lang->refund->reviewStatusList, $refund->status == 'reject' ? 'reject' : 'pass');?></td>
     </tr>
     <?php endif;?>
