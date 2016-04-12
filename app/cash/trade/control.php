@@ -34,6 +34,7 @@ class trade extends control
      */
     public function browse($mode = 'all', $date = '', $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
+        if($mode == 'all' and $date == '' and $orderBy == 'date_desc' and strpos($this->server->request_uri, 'all') === false) $this->session->set('date', '');
         if($mode == 'out') $this->trade->checkExpensePriv();
 
         $this->app->loadClass('pager', $static = true);
@@ -43,6 +44,7 @@ class trade extends control
         $incomeTypes  = $this->loadModel('tree')->getPairs(0, 'in');
 
         $this->session->set('tradeList', $this->app->getURI(true));
+        if($date) $this->session->set('date', $date);
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
@@ -86,12 +88,13 @@ class trade extends control
             krsort($tradeMonths[$year][$quarter]);
         }
 
-        $trades = $this->trade->getList($mode, $date, $orderBy, $pager);
+        $currentDate = $date ? $date : ($this->session->date ? $this->session->date : '');
+        $trades = $this->trade->getList($mode, $currentDate, $orderBy, $pager);
 
         $this->view->title   = $this->lang->trade->browse;
         $this->view->trades  = $trades;
         $this->view->mode    = $mode;
-        $this->view->date    = $date;
+        $this->view->date    = $currentDate;
         $this->view->pager   = $pager;
         $this->view->orderBy = $orderBy;
 
