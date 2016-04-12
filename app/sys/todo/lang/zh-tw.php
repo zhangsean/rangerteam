@@ -80,6 +80,7 @@ $lang->todo->confirmDelete  = "您確定要刪除這條待辦嗎？";
 $lang->todo->successMarked  = "成功切換狀態！";
 $lang->todo->thisIsPrivate  = '這是一條私人事務。:)';
 $lang->todo->lblDisableDate = '暫時不設定時間';
+$lang->todo->emptyTodo      = '您今天還沒有添加待辦。';
 
 $lang->todo->periods['today']      = '今日';
 $lang->todo->periods['yesterday']  = '昨日';

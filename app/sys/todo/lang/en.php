@@ -80,6 +80,7 @@ $lang->todo->confirmDelete  = "Are you sure to delete this todo?";
 $lang->todo->successMarked  = "Successfully changed status";;
 $lang->todo->thisIsPrivate  = 'This is a private todo。:)';
 $lang->todo->lblDisableDate = 'Set time lately';
+$lang->todo->emptyTodo      = 'You have not set todo today.';
 
 $lang->todo->periods['today']      = 'Today';
 $lang->todo->periods['yesterday']  = 'Yesterday';

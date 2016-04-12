@@ -708,40 +708,50 @@ class actionModel extends model
 
         /* Create todo notices. */
         $date     = helper::today();
-        $now      = helper::now();
-        $link     = helper::createLink('sys.todo', 'calendar');
         $interval = $this->config->pingInterval;
 
-        //$todos = $this->loadModel('todo', 'sys')->getList('self', $account, $date);
-        //if(empty($todos))
-        //{
-        //    $signInLimit = date('Y-m-d') + $this->config->signInLimit;
-        //    foreach($i = 1; $i <= 3; $i++)
-        //    {
-        //        $begin = date('Hi', strtotime("+" . ($i - 1) * 30 . "minute $signInLimit"));
-        //        $end   = date('Hi', strtotime("+" . ($i - 1) * 30 . "minute $interval seconds $signInLimit"));
+        $link  = helper::createLink('sys.todo', 'calendar');
+        $todos = $this->loadModel('todo', 'sys')->getList('self', $account, $date);
+        if(empty($todos))
+        {
+            $last = $this->dao->select('last')->from(TABLE_USER)->where('account')->eq($account)->fetch('last');
+            for($i = 1; $i <= 3; $i++)
+            {
+                $begin = (int)date('Hi', strtotime("+" . ($i - 1) * 30 . "minute $last"));
+                $end   = (int)date('Hi', strtotime("+" . ($i - 1) * 30 . "minute $interval seconds $last"));
+                if((int)date('Hi') >= $begin and (int)date('Hi') <= $end)
+                {
+                    $notice = new stdclass();
+                    $notice->id      = "emptyTodo{$i}";
+                    $notice->title   = sprintf($this->lang->action->noticeTitle, $this->lang->todo->common, $link, 'oa', "{$this->lang->todo->emptyTodo}");
+                    $notice->content = ''; 
+                    $notice->type    = 'success';
+                    $notice->read    = '';
 
-        //        
-        //    }
-        //}
+                    $notices[$notice->id] = $notice;
+                }
+            }
+        }
 
+        $now   = helper::now();
+        $link  = helper::createLink('sys.todo', 'calendar');
         $todos = $this->loadModel('todo', 'sys')->getList('self', $account, $date, 'undone');
 
-        $begin[1]  = date('Hi', strtotime($now));
-        $end[1]    = date('Hi', strtotime("+$interval seconds $now"));
-        $begin[10] = date('Hi', strtotime("+10 minute $now"));
-        $end[10]   = date('Hi', strtotime("+10 minute $interval seconds $now"));
-        $begin[30] = date('Hi', strtotime("+30 minute $now"));
-        $end[30]   = date('Hi', strtotime("+30 minute $interval seconds $now"));
+        $begins[1]  = date('Hi', strtotime($now));
+        $ends[1]    = date('Hi', strtotime("+$interval seconds $now"));
+        $begins[10] = date('Hi', strtotime("+10 minute $now"));
+        $ends[10]   = date('Hi', strtotime("+10 minute $interval seconds $now"));
+        $begins[30] = date('Hi', strtotime("+30 minute $now"));
+        $ends[30]   = date('Hi', strtotime("+30 minute $interval seconds $now"));
         foreach($todos as $todo)
         {
             if(empty($todo->begin)) continue;
             $time = str_replace(':', '', $todo->begin);
 
             $lastTime = 0;
-            if((int)$time > (int)$begin[1]  and (int)$time <= (int)$end[1])  $lastTime = 1;
-            if((int)$time > (int)$begin[10] and (int)$time <= (int)$end[10]) $lastTime = 10;
-            if((int)$time > (int)$begin[30] and (int)$time <= (int)$end[30]) $lastTime = 30;
+            if((int)$time > (int)$begins[1]  and (int)$time <= (int)$ends[1])  $lastTime = 1;
+            if((int)$time > (int)$begins[10] and (int)$time <= (int)$ends[10]) $lastTime = 10;
+            if((int)$time > (int)$begins[30] and (int)$time <= (int)$ends[30]) $lastTime = 30;
             if($lastTime)
             {
                 $notice = new stdclass();
