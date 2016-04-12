@@ -45,7 +45,7 @@
       <td><?php echo $refund->id;?></td>
       <td class='visible-lg'><?php echo zget($userDept, $refund->createdBy);?></td>
       <td class='text-left'><?php echo $refund->name?></td>
-      <td><?php echo $categories[$refund->category];?></td>
+      <td><?php echo zget($categories, $refund->category, ' ');?></td>
       <td class='text-right'><?php echo zget($currencySign, $refund->currency) . $refund->money?></td>
       <td class='<?php echo $refund->status?>'><?php echo zget($lang->refund->statusList, $refund->status)?></td>
       <td><?php echo zget($userPairs, $refund->createdBy);?></td>

@@ -420,7 +420,10 @@ class attend extends control
                if(!empty($dept->moderators)) $toList = trim($dept->moderators, ','); 
             }
         }
-        $subject = "{$this->lang->attend->common}#{$attend->account}{$this->lang->colon}{$attend->date}";
+        $label = '';
+        if($action->action == 'commited') $label = $this->lang->attend->edit;
+        if($action->action == 'reviewed') $label = $this->lang->attend->review;
+        $subject = "{$this->lang->attend->common} - $label#" . zget($users, $attend->account) . " {$attend->date}";
 
         /* send notice if user is online and return failed accounts. */
         $toList = $this->loadModel('action')->sendNotice($actionID, $toList);
@@ -429,6 +432,7 @@ class attend extends control
         $this->view->attend = $attend;
         $this->view->action = $action;
         $this->view->users  = $users;
+        $this->view->label  = $label;
 
         $mailContent = $this->parse($this->moduleName, 'sendmail');
 

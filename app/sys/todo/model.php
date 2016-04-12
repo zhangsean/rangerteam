@@ -52,6 +52,7 @@ class todoModel extends model
      */
     public function batchCreate()
     {
+        $actionList = array();
         $todos = fixer::input('post')->cleanInt('date')->get();
         for($i = 0; $i < $this->config->todo->batchCreate; $i++)
         {
@@ -88,7 +89,11 @@ class todoModel extends model
 
                 $todoID = $this->dao->lastInsertID();
                 $this->loadModel('action')->create('todo', $todoID, 'created');
-                if(!empty($todo->assignedTo)) $this->loadModel('action')->create('todo', $todoID, 'assigned', '', $todo->assignedTo);
+                if(!empty($todo->assignedTo)) 
+                {
+                    $actionID = $this->loadModel('action')->create('todo', $todoID, 'assigned', '', $todo->assignedTo);
+                    $actionList[$todoID] = $actionID;
+                }
             }
             else
             {
@@ -100,7 +105,7 @@ class todoModel extends model
                 unset($todos->ends[$i]);
             }
         }
-        return true;
+        return $actionList;
     }
 
     /**

@@ -265,10 +265,11 @@ class leave extends control
         /* Set toList and ccList. */
         $leave  = $this->leave->getById($leaveID);
         $users  = $this->loadModel('user')->getPairs();
+        $toList = '';
         if($action->action == 'reviewed')
         {
             $toList = $leave->createdBy;
-            $subject = "{$this->lang->leave->common}{$this->lang->leave->statusList[$leave->status]}#{$leave->id}{$this->lang->colon}{$leave->begin}~{$leave->end}";
+            $subject = "{$this->lang->leave->common}{$this->lang->leave->statusList[$leave->status]}#{$leave->id} " . zget($users, $leave->createdBy) . " {$leave->begin}~{$leave->end}";
         }
         if($action->action == 'created' or $action->action == 'revoked' or $action->action == 'commited')
         {
@@ -282,7 +283,7 @@ class leave extends control
                $toList = isset($dept->moderators) ? trim($dept->moderators, ',') : '';
             }
 
-            $subject = "{$this->lang->leave->common}#{$leave->id}{$this->lang->colon}{$leave->begin}~{$leave->end}";
+            $subject = "{$this->lang->leave->common}#{$leave->id} " . zget($users, $leave->createdBy) . " {$leave->begin}~{$leave->end}";
         }
 
         /* send notice if user is online and return failed accounts. */

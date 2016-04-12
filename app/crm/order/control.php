@@ -330,14 +330,15 @@ class order extends control
         $action->history = isset($history[$actionID]) ? $history[$actionID] : array();
 
         /* Create the email content. */
-        $this->view->order  = $order;
-        $this->view->action = $action;
-        $this->view->users  = $users;
+        $this->view->order    = $order;
+        $this->view->action   = $action;
+        $this->view->users    = $users;
+        $this->view->contract = $this->order->getContract($orderID);
 
         $mailContent = $this->parse($this->moduleName, 'sendmail');
 
         /* Send emails. */
-        $this->loadModel('mail')->send($toList, 'ORDER#' . $order->id . $this->lang->colon . $order->title, $mailContent);
+        $this->loadModel('mail')->send($toList, 'ORDER#' . $order->id . ' ' . $order->title, $mailContent);
         if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
 

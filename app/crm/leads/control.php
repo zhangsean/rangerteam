@@ -193,7 +193,7 @@ class leads extends control
             {
                 $actionID = $this->loadModel('action')->create('contact', $contactID, 'Assigned', $this->post->comment, $this->post->assignedTo);
                 $this->sendmail($contactID, $actionID);
-                $this->loadModel('action')->create('leads', $contactID, 'assigned', $this->post->comment, '', '', '', $contactID);
+                $this->action->create('leads', $contactID, 'assigned', $this->post->comment, '', '', '', $contactID);
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
@@ -285,7 +285,7 @@ class leads extends control
         $mailContent = $this->parse($this->moduleName, 'sendmail');
 
         /* Send emails. */
-        $this->loadModel('mail')->send($toList, 'CONTACT#' . $contact->id . $this->lang->colon . $contact->realname, $mailContent);
+        $this->loadModel('mail')->send($toList, 'LEADS#' . $contact->id . ' ' . $contact->realname, $mailContent);
         if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
 }

@@ -722,7 +722,7 @@ class task extends control
         /* Set toList and ccList. */
         $task        = $this->task->getById($taskID);
         $projectName = $this->loadModel('project', 'oa')->getById($task->project)->name;
-        $users       = $this->loadModel('user')->getPairs('noletter');
+        $users       = $this->loadModel('user')->getPairs();
         $toList      = $task->assignedTo;
         $ccList      = trim($task->mailto, ',');
 
@@ -763,7 +763,7 @@ class task extends control
         $mailContent = $this->parse($this->moduleName, 'sendmail');
 
         /* Send emails. */
-        $this->loadModel('mail')->send($toList, $projectName . ':' . 'TASK#' . $task->id . $this->lang->colon . $task->name, $mailContent, $ccList);
+        $this->loadModel('mail')->send($toList, 'TASK#' . $task->id . ' '  . $task->name . ' - ' . $projectName, $mailContent, $ccList);
         if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
 
@@ -808,7 +808,7 @@ class task extends control
             }
 
             /* Get users and projects. */
-            $users    = $this->loadModel('user')->getPairs('noletter');
+            $users    = $this->loadModel('user')->getPairs();
             $projects = $this->loadModel('project', 'oa')->getPairs();
 
             $relatedFiles = $this->dao->select('id, objectID, pathname, title')->from(TABLE_FILE)->where('objectType')->eq('task')->andWhere('objectID')->in(@array_keys($tasks))->fetchGroup('objectID');

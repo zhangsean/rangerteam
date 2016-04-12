@@ -229,6 +229,13 @@ class customer extends control
         {
             $this->dao->update(TABLE_CUSTOMER)->set('assignedTo')->eq($this->post->assignedTo)->where('id')->in($this->post->customerIDList)->exec();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            $this->loadModel('action');
+            foreach($this->post->customerIDList as $customerID)
+            {
+                $actionID = $this->action->create('customer', $customerID, 'Assigned', '', $this->post->assignedTo);
+                $this->sendmail($customerID, $actionID);
+            }
             $this->send(array('result' => 'success', 'locate' => inlink('browse')));
         }
         $this->send(array('result' => 'success'));
@@ -365,7 +372,7 @@ class customer extends control
                 while($row = $stmt->fetch()) $customers[$row->id] = $row;
             }
 
-            $users        = $this->loadModel('user')->getPairs('noletter');
+            $users        = $this->loadModel('user')->getPairs();
             $areaList     = $this->loadModel('tree')->getOptionMenu('area');
             $industryList = $this->tree->getOptionMenu('industry');
 
@@ -423,7 +430,7 @@ class customer extends control
 
         /* Set toList and ccList. */
         $customer = $this->customer->getById($customerID);
-        $users    = $this->loadModel('user')->getPairs('noletter');
+        $users    = $this->loadModel('user')->getPairs();
         $toList   = $customer->assignedTo;
 
         /* send notice if user is online and return failed accounts. */
@@ -442,7 +449,7 @@ class customer extends control
         $mailContent = $this->parse($this->moduleName, 'sendmail');
 
         /* Send emails. */
-        $this->loadModel('mail')->send($toList, 'CUSTOMER#' . $customer->id . $this->lang->colon . $customer->name, $mailContent);
+        $this->loadModel('mail')->send($toList, 'CUSTOMER#' . $customer->id . ' ' . $customer->name, $mailContent);
         if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
 

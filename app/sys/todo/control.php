@@ -145,8 +145,13 @@ class todo extends control
         if($date == 'today') $date = date(DT_DATE1, time());
         if(!empty($_POST))
         {
-            $this->todo->batchCreate();
+            $actionList = $this->todo->batchCreate();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            foreach($actionList as $todoID => $actionID)
+            {
+                $this->sendmail($todoID, $actionID);
+            }
 
             /* Locate the browser. */
             $date = str_replace('-', '', $this->post->date);
@@ -418,7 +423,7 @@ class todo extends control
         $todo    = $this->todo->getById($todoID);
         $users   = $this->loadModel('user')->getPairs();
         $toList  = $todo->assignedTo;
-        $subject = "{$this->lang->todo->common}#{$todo->id}{$this->lang->colon}{$todo->name}";
+        $subject = "{$this->lang->todo->common}#{$todo->id} {$todo->name}";
 
         /* send notice if user is online and return failed accounts. */
         $toList = $this->loadModel('action')->sendNotice($actionID, $toList);

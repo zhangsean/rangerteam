@@ -43,7 +43,7 @@
       <td><?php echo $detail->date;?></td>
       <td class='text-right'><?php echo zget($currencySign, $detail->currency) . "<span class='detailMoney'>" . $detail->money . "</span>";?></td>
       <td><?php echo $lang->refund->statusList[$detail->status];?></td>
-      <td><?php echo $categories[$detail->category];?></td>
+      <td><?php echo zget($categories, $detail->category, ' ');?></td>
       <td class='text-ellipsis' title="<?php echo $detail->desc;?>"><?php echo $detail->desc?></td>
       <td><?php echo html::radio("status{$detail->id}", $lang->refund->reviewStatusList, $detail->status == 'reject' ? 'reject' : 'pass');?></td>
     </tr>
@@ -53,7 +53,7 @@
       <td><?php echo $refund->date;?></td>
       <td class='text-right'><?php echo zget($currencySign, $refund->currency) . "<span class='detailMoney'>" . $refund->money . "</span>";?></td>
       <td><?php echo $lang->refund->statusList[$refund->status];?></td>
-      <td><?php echo $categories[$refund->category];?></td>
+      <td><?php echo zget($categories, $refund->category, ' ');?></td>
       <td class='text-ellipsis' title="<?php echo $refund->desc;?>"><?php echo $refund->desc?></td>
       <td><?php echo html::radio("status", $lang->refund->reviewStatusList, $refund->status == 'reject' ? 'reject' : 'pass');?></td>
     </tr>

@@ -426,13 +426,13 @@ class refund extends control
         {
             if($refund->status == 'doing') $toList = $this->config->refund->secondReviewer;
             if($refund->status != 'doing') $toList = $refund->createdBy;
-            $subject = "{$this->lang->refund->common}{$this->lang->refund->review}#{$refund->id}{$this->lang->colon}{$refund->name} " . zget($users, $refund->createdBy);
+            $subject = "{$this->lang->refund->common}{$this->lang->refund->review}#{$refund->id} " . zget($users, $refund->createdBy) . " - {$refund->name}";
         }
 
         if($action->action == 'reimburse')
         {
             $toList = $refund->createdBy;
-            $subject = "{$this->lang->refund->reimburse}#{$refund->id}{$this->lang->colon}{$refund->name} " . zget($users, $refund->createdBy);
+            $subject = "{$this->lang->refund->reimburse}#{$refund->id} " . zget($users, $refund->createdBy) . " - {$refund->name}";
         }
 
         if($action->action == 'created' or $action->action == 'revoked' or $action->action == 'commited')
@@ -446,7 +446,7 @@ class refund extends control
                $dept = $this->loadModel('tree')->getByID($this->app->user->dept);
                $toList = isset($dept->moderators) ? trim($dept->moderators, ',') : '';
             }
-            $subject = "{$this->lang->refund->create}#{$refund->id}{$this->lang->colon}{$refund->name} " . zget($users, $refund->createdBy);
+            $subject = "{$this->lang->refund->create}#{$refund->id} " . zget($users, $refund->createdBy) . " - {$refund->name}";
         }
 
         /* send notice if user is online and return failed accounts. */

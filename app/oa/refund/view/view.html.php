@@ -46,7 +46,7 @@
             <td><?php echo $d->id?></td>
             <td><?php echo zget($currencySign, $d->currency) . $d->money?></td>
             <td><?php echo $d->date?></td>
-            <td><?php echo zget($categories, $d->category)?></td>
+            <td><?php echo zget($categories, $d->category, ' ')?></td>
             <td><?php echo $related?></td>
             <td><span data-toggle='tooltip' data-original-title="<?php echo $d->reason?>"><?php echo zget($lang->refund->statusList, $d->status)?></span></td>
             <td><?php echo $d->desc?></td>
@@ -84,7 +84,7 @@
         <table class='table table-info'>
           <tr>
             <th class='w-80px'><?php echo $lang->refund->category;?></th>
-            <td><?php echo zget($categories, $refund->category)?></td>
+            <td><?php echo zget($categories, $refund->category, ' ')?></td>
           </tr>
           <tr>
             <th><?php echo $lang->refund->money;?></th>

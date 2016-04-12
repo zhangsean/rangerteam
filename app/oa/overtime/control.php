@@ -305,10 +305,11 @@ class overtime extends control
         /* Set toList and ccList. */
         $overtime = $this->overtime->getById($overtimeID);
         $users    = $this->loadModel('user')->getPairs();
+        $toList   = '';
         if($action->action == 'reviewed')
         {
             $toList = $overtime->createdBy;
-            $subject = "{$this->lang->overtime->common}{$this->lang->overtime->statusList[$overtime->status]}#{$overtime->id}{$this->lang->colon}{$overtime->begin}~{$overtime->end}";
+            $subject = "{$this->lang->overtime->common}{$this->lang->overtime->statusList[$overtime->status]}#{$overtime->id} " . zget($users, $overtime->createdBy) . " {$overtime->begin}~{$overtime->end}";
         }
         if($action->action == 'created' or $action->action == 'revoked' or $action->action == 'commited')
         {
@@ -322,7 +323,7 @@ class overtime extends control
                if($dept) $toList = trim($dept->moderators, ',');
             }
 
-            $subject = "{$this->lang->overtime->common}#{$overtime->id}{$this->lang->colon}{$overtime->begin}~{$overtime->end}";
+            $subject = "{$this->lang->overtime->common}#{$overtime->id} " . zget($users, $overtime->createdBy) . " {$overtime->begin}~{$overtime->end}";
         }
 
         /* send notice if user is online and return failed accounts. */

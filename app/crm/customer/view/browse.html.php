@@ -84,7 +84,7 @@
             echo "<div class='input-group assign-action'>";
             echo html::select('assignedTo', $users, '', "class='form-control chosen'");
             echo "<span class='input-group-btn'>";
-            echo html::submitButton($lang->customer->assign);
+            echo html::a('#', $lang->customer->assign, "class='btn btn-primary batchAssign'");
             echo '</span>';
             echo '</div>';
         }
