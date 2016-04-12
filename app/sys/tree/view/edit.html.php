@@ -29,7 +29,21 @@ $themeRoot = $webRoot . "theme/";
       </div>
       <div class='form-group'> 
         <label class='col-md-2 control-label'><?php echo $lang->category->name;?></label>
-        <div class='col-md-4'><?php echo html::input('name', $category->name, "class='form-control'");?></div>
+        <div class='col-md-4'>
+          <?php if($category->type == 'in' or $category->type == 'out'):?>
+          <div class='input-group'>
+            <?php echo html::input('name', $category->name, "class='form-control'");?>
+            <span class='input-group-addon'>
+              <label class='checkbox'>
+                <input type='checkbox' name='mainBusiness' id='mainBusiness' value='1' <?php echo $category->mainBusiness ? 'checked' : ''?>/>
+                <span><?php echo $lang->category->mainBusiness;?></span>
+              </label>
+            </span>
+          </div>
+          <?php else:?>
+          <?php echo html::input('name', $category->name, "class='form-control'");?>
+          <?php endif;?>
+        </div>
       </div>
       <?php if($category->type == 'dept'):?>
       <div class='form-group'> 
