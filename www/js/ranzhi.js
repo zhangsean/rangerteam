@@ -738,7 +738,7 @@ function fixTableHeader()
     var table = $('.page-content > .panel > .table, #tradeList, #todoList, #attendStat, .calendar-view .table');
 
     if(!table.length) return;
-    if(table.parents('.hide').length) return;
+    if(table.parent('.panel').css('display') == 'none') return;
 
     var tHead     = table.find('thead');
     var navHeight = $('#mainNavbar').outerHeight();
@@ -747,6 +747,8 @@ function fixTableHeader()
 
     $(window).scroll(function()
     {
+        if(table.parent('.panel').css('display') == 'none') return;
+
         var fixedHeader = $('#fixedHeader');
         if(!fixedHeader.length)
         {

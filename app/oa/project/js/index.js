@@ -30,6 +30,7 @@ $(document).ready(function()
         $('a.mode-toggle').parent('div').nextAll('div').hide();
         $('#' + $(this).data('mode') + 'Mode').show();
         $.cookie('projectViewType', $(this).data('mode'), {path: "/"});
+        fixTableHeader();
     })
 
     var type = $.cookie('projectViewType');
