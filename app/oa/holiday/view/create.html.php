@@ -16,7 +16,7 @@
     <form id='ajaxForm' method='post' action="<?php echo $this->createLink('oa.holiday', 'create')?>">
     <table class='table table-form table-condensed'>
       <tr>
-        <th><?php echo $lang->holiday->name?></th>
+        <th class='w-80px'><?php echo $lang->holiday->name?></th>
         <td><?php echo html::input('name', '', "class='form-control'")?></td>
         <td></td>
       </tr>

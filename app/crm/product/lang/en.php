@@ -44,5 +44,5 @@ $lang->product->statusList['offline']    = 'Offline';
 
 $lang->product->lineList['default'] = '';
 
-$lang->product->placeHolder = new stdclass();
-$lang->product->placeHolder->code = 'Product code, it should be english, digital or underline.';
+$lang->product->placeholder = new stdclass();
+$lang->product->placeholder->code = 'Product code, it should be english, digital or underline.';

@@ -65,7 +65,7 @@
             <table class='table table-data text-center'>
               <thead>
                 <tr>
-                  <th class='w-80px'><?php echo $lang->attend->weeks[$weekIndex];?></th>
+                  <th class='w-90px'><?php echo $lang->attend->weeks[$weekIndex];?></th>
                   <th class='text-center'><?php echo $lang->attend->dayName;?></th>
                   <th class='text-center'><?php echo $lang->attend->signIn;?></th>
                   <th class='text-center'><?php echo $lang->attend->signOut;?></th>

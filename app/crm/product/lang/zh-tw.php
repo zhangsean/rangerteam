@@ -44,5 +44,5 @@ $lang->product->statusList['offline']    = '下線';
 
 $lang->product->lineList['default'] = '';
 
-$lang->product->placeHolder = new stdclass();
-$lang->product->placeHolder->code = '產品代號，必須為英文、數字或下劃線的組合';
+$lang->product->placeholder = new stdclass();
+$lang->product->placeholder->code = '產品代號，必須為英文、數字或下劃線的組合';

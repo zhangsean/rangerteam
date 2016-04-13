@@ -19,7 +19,7 @@
     <?php if($member->role == 'manager') continue;?>
     <tr>
       <td><?php echo html::select("member[$key]", $users, $member->account, "class='form-control chosen' onchange='updateMember()'")?></td>
-      <td class='w-180px text-center'><?php echo html::select("role[$key]", $lang->project->roleList, $member->role, "class='form-control'")?></td>
+      <td class='w-180px'><?php echo html::select("role[$key]", $lang->project->roleList, $member->role, "class='form-control chosen'")?></td>
       <td class='w-100px'></td>
     </tr>
     <?php $key++;?>
@@ -27,7 +27,7 @@
     <?php for($i = 0; $i < 3; $i++):?>
     <tr>
       <td><?php echo html::select("member[$key]", $users, '', "class='form-control chosen' onchange='updateMember()'")?></td>
-      <td class='w-180px text-center'><?php echo html::select("role[$key]", $lang->project->roleList, 'member', "class='form-control'")?></td>
+      <td class='w-180px'><?php echo html::select("role[$key]", $lang->project->roleList, 'member', "class='form-control chosen'")?></td>
       <td class='w-100px'><i class='btn btn-mini icon-plus'></i> <i class='btn btn-mini icon-remove'></i></td>
     </tr>
     <?php $key++;?>
@@ -40,8 +40,8 @@
 </form>
 <script type='text/template' id='memberTpl'>
   <tr>
-    <td><?php echo html::select("member[key]", $users, '', "class='form-control' onchange='updateMember()'")?></td>
-    <td class='w-180px text-center'><?php echo html::select("role[key]", $lang->project->roleList, 'member', "class='form-control'")?></td>
+    <td><?php echo html::select("member[key]", $users, '', "class='form-control chosen' onchange='updateMember()'")?></td>
+    <td class='w-180px'><?php echo html::select("role[key]", $lang->project->roleList, 'member', "class='form-control chosen'")?></td>
     <td class='w-100px'><i class='btn btn-mini icon-plus'></i> <i class='btn btn-mini icon-remove'></i></td>
   </tr>
 </script>

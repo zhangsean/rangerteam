@@ -14,3 +14,5 @@ td .attend-rest   {color: #3280fc;}
 
 table .otherMonth {background: #f0f0f0; color: #9e9e9e}
 table tr:last-child th ,table tr:last-child td{border-bottom: none;}
+
+td > .dropdown{height: 100%; line-height: 100%;}
