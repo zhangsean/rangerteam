@@ -630,7 +630,7 @@ class projectModel extends model
     public function checkPriv($projectID)
     {
         if($this->app->user->admin == 'super') return true;
-        if(strpos('edit, member, finish, suspend,delete', $this->app->getMethodName()) !== false)
+        if($this->app->getModuleName() == 'project' and strpos('edit, member, finish, suspend,delete', $this->app->getMethodName()) !== false)
         {
             $project = $this->getByID($projectID);
             if($project->members[$this->app->user->account]->role != 'senior' and $this->app->user->account != $project->createdBy and $this->app->user->account != $project->PM) return false;
@@ -672,6 +672,6 @@ class projectModel extends model
      */
     public function hasActionPriv($project)
     {
-        return ($this->app->user->admin == 'super' or $project->members[$this->app->user->account]->role == 'senior' or $this->app->user->account != $project->createdBy or $this->app->user->account != $project->PM);
+        return (($this->app->user->admin == 'super') or ($project->members[$this->app->user->account]->role == 'senior') or ($this->app->user->account == $project->createdBy) or ($this->app->user->account == $project->PM));
     }
 }
