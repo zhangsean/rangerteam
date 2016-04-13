@@ -2480,6 +2480,7 @@
       if ($p_filedescr_list[$j]['filename'] == "") {
         continue;
       }
+      if(filesize($p_filedescr_list[$j]['filename']) == 0) continue;
 
       // ----- Check the filename
       if (   ($p_filedescr_list[$j]['type'] != 'virtual_file')
