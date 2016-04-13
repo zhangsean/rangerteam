@@ -495,6 +495,19 @@ class treeModel extends model
     }
 
     /**
+     * Create entry admin link 
+     * 
+     * @param  object    $category 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function createEntryAdminLink($category)
+    {
+        return html::a(helper::createLink('entry', 'admin', "category={$category->id}"), $category->name, "id='category{$category->id}'");
+    }
+
+    /**
      * Create the manage link.
      * 
      * @param  object         $category 

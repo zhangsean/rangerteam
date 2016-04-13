@@ -1583,6 +1583,12 @@
             if(entry.hasMenu)
             {
                 $shortcut = $(entry.toLeftBarShortcutHtml());
+                if(entry.category !== undefined && entry.category != 0) 
+                {
+                    var shortcut = entry.toLeftBarShortcutHtml();
+                    $('#categoryMenu' + entry.category).append(shortcut);
+                    $shortcut.html($('#category' + entry.category));
+                }
                 if(activedId && entry.id === activedId)
                 {
                     $shortcut.find('.app-btn').addClass('active');

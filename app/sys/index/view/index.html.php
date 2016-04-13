@@ -36,6 +36,17 @@ js::set('attend', commonModel::isAvailable('attend') ? 1 : 0);
     </ul>
     <div id='apps-menu'>
       <ul class='bar-menu'></ul>
+      <?php 
+      foreach($categories as $id => $name)
+      {
+          $hue  = ($id - 820000) * 47 % 360;
+          $name = substr($name, 0, 6);
+          echo "<button id='category{$id}' class='categoryButton' data-id='{$id}' data-toggle='tooltip' data-tip-class='s-menu-tooltip' data-placement='right' data-btn-type='menu' class='btn-more'>";
+          echo "<i class='icon icon-default' style='background-color: hsl($hue, 100%, 40%)'>{$name}</i></button>";
+          echo "<ul id='categoryMenu{$id}' class='categoryMenu dropdown-menu fade'>";
+          echo "</ul>";
+      }
+      ?>
       <button id='moreOptionBtn' data-toggle='tooltip' data-tip-class='s-menu-tooltip' data-placement='right' data-btn-type='menu' class='btn-more' data-original-title='...'><i class='icon icon-ellipsis-h'></i></button>
       <ul id='moreOptionMenu' class='bar-menu dropdown-menu fade'>
       </ul>
@@ -204,5 +215,13 @@ foreach ($lang->index->ips as $key => $value)
 ?>
 
 <?php echo $allEntries;?>
+var categories = {};
+<?php 
+foreach($categories as $id => $name)
+{
+    $name = str_replace('/', '', $name);
+    echo 'categories["' . $id. '"] = "' . $name . '";';
+}
+;?>
 </script>
 <?php include "../../common/view/footer.html.php"; ?>

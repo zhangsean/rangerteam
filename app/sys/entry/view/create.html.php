@@ -10,6 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 include '../../common/view/header.html.php';
+include '../../common/view/chosen.html.php';
 js::set('loginUrl', $lang->entry->login);
 js::set('loginPlaceholder', $lang->entry->note->login);
 js::set('chanzhiURL', $lang->entry->chanzhiURL);
@@ -50,6 +51,11 @@ js::set('zentaoName', $lang->entry->zentao);
         <tr>
           <th><?php echo $lang->entry->login;?></th>
           <td><?php echo html::input('login', '', "class='form-control' placeholder='{$lang->entry->note->login}'");?></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->category;?></th>
+          <td><?php echo html::select('category', $categories, '', "class='form-control chosen'");?></td>
           <td></td>
         </tr>
         <tr class='hide'>

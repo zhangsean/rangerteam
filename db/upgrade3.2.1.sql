@@ -13,3 +13,4 @@ ALTER TABLE `sys_tag`      CHANGE `id`       `id`       mediumint(8) unsigned NO
 ALTER TABLE `sys_user`     CHANGE `id`       `id`       mediumint(8) unsigned NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `sys_category` ADD `mainBusiness` enum('0','1') NOT NULL DEFAULT '0';
+ALTER TABLE `sys_entry` ADD `category` mediumint(8) NOT NULL DEFAULT '0';

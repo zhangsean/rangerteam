@@ -17,14 +17,15 @@ class entry extends control
      * @access public
      * @return void
      */
-    public function admin()
+    public function admin($category = 0)
     {
-        $entries = $this->entry->getEntries();
+        $entries = $this->entry->getEntries($type = 'custom', $category);
         /* add web root if logo not start with /  */
         foreach($entries as $entry) if(!empty($entry->logo) && substr($entry->logo, 0, 1) != '/') $entry->logo = $this->config->webRoot . $entry->logo;
         
-        $this->view->title   = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->admin;
-        $this->view->entries = $entries;
+        $this->view->title    = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->admin;
+        $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('entry', 0, array('treeModel', 'createEntryAdminLink'));
+        $this->view->entries  = $entries;
         $this->display();
     }
 
@@ -74,9 +75,10 @@ class entry extends control
             if($this->post->zentao) $locate = inlink('bindUser', "id=$entryID&sessionID=$zentaoConfig->sessionID");
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate, 'entries' => $this->entry->getJSONEntries()));
         }
-        $this->view->title  = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->create;
-        $this->view->key    = $this->entry->createKey();
-        $this->view->groups = $this->loadModel('group')->getPairs();
+        $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->create;
+        $this->view->key        = $this->entry->createKey();
+        $this->view->groups     = $this->loadModel('group')->getPairs();
+        $this->view->categories = array('0' => '') + $this->loadModel('tree')->getOptionMenu('entry', 0, $removeRoot = true);
         $this->display();
     }
 
@@ -247,9 +249,10 @@ class entry extends control
             $entry->height = $size->height;
         }
 
-        $this->view->title = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->edit;
-        $this->view->entry = $entry;
-        $this->view->code  = $code;
+        $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->edit;
+        $this->view->entry      = $entry;
+        $this->view->code       = $code;
+        $this->view->categories = array('0' => '') + $this->loadModel('tree')->getOptionMenu('entry', 0, $removeRoot = true);
         $this->display();
     }
 

@@ -10,6 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 include '../../common/view/header.html.php';
+include '../../common/view/chosen.html.php';
 ?>
 <div class='panel'>
   <div class='panel-heading'>
@@ -44,6 +45,10 @@ include '../../common/view/header.html.php';
         <tr>
           <th><?php echo $lang->entry->login;?></th>
           <td><?php echo html::input('login', $entry->login, "class='form-control' placeholder='{$lang->entry->note->login}'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->entry->category;?></th>
+          <td><?php echo html::select('category', $categories, $entry->category, "class='form-control chosen'");?></td>
         </tr>
         <tr>
           <th></th><td><?php echo html::submitButton() . html::backButton();?></td>

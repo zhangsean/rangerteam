@@ -15,12 +15,16 @@ class entryModel extends model
      * Get all entries. 
      * 
      * @param  string $type custom|system
+     * @param  int    $category
      * @access public
      * @return array
      */
-    public function getEntries($type = 'custom')
+    public function getEntries($type = 'custom', $category = 0)
     {
-        $entries = $this->dao->select('*')->from(TABLE_ENTRY)->orderBy('`order, id`')->fetchAll();
+        $entries = $this->dao->select('*')->from(TABLE_ENTRY)
+            ->where(1)
+            ->beginIF($category)->andWhere('category')->eq($category)->fi()
+            ->orderBy('`order, id`')->fetchAll();
 
         /* Remove entry if no rights and fix logo path. */
         $newEntries = array();
@@ -385,6 +389,7 @@ class entryModel extends model
         $entries    = $this->getEntries();
         $allEntries = array();
 
+        $this->loadModel('tree');
         foreach($entries as $entry)
         {
             $sso     = helper::createLink('entry', 'visit', "entryID=$entry->id");
@@ -414,6 +419,7 @@ class entryModel extends model
             $tmpEntry['abbr']     = $entry->abbr;
             $tmpEntry['order']    = $entry->order;
             $tmpEntry['sys']      = $entry->buildin;
+            $tmpEntry['category'] = $entry->category;
             $allEntries[] = $tmpEntry;
         }
         return json_encode($allEntries);

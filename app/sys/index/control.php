@@ -33,8 +33,16 @@ class index extends control
         $entries    = $this->loadModel('entry')->getEntries();
         $allEntries = '';
 
+        $this->loadModel('tree');
+        $categories = array();
         foreach($entries as $entry)
         {
+            if($entry->category)
+            {
+                $category = $this->tree->getById($entry->category);
+                $categories[$category->id] = $category->name;
+            }
+
             $sso     = $this->createLink('entry', 'visit', "entryID=$entry->id");
             $logo    = !empty($entry->logo) ? $entry->logo : '';
             $size    = !empty($entry->size) ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
@@ -62,7 +70,8 @@ class index extends control
                 display:  '$display',
                 abbr:     '$entry->abbr',
                 order:    '$entry->order',
-                sys:      '$entry->buildin'
+                sys:      '$entry->buildin',
+                category: '$entry->category'
             });\n";
         }
 
@@ -129,6 +138,7 @@ class index extends control
         }
 
         $this->view->allEntries  = $allEntries;
+        $this->view->categories  = $categories; 
         $this->view->blocks      = $blocks;
         $this->view->notice      = commonModel::isAvailable('attend') ? $this->attend->getNotice() : '';
         $this->view->signButtons = $signButtons;

@@ -696,6 +696,7 @@ CREATE TABLE `sys_entry` (
   `visible` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `order` tinyint(5) unsigned NOT NULL DEFAULT '0',
   `zentao` enum('0', '1') NOT NULL DEFAULT '0',
+  `category` mediumint(8) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
