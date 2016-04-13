@@ -27,7 +27,7 @@
         <th class='w-60px'><?php echo $lang->cron->dow?></th>
         <th><?php echo $lang->cron->command?></th>
         <th class='w-130px'><?php echo $lang->cron->remark?></th>
-        <th class='w-120px'><?php echo $lang->cron->lastTime?></th>
+        <th class='w-130px'><?php echo $lang->cron->lastTime?></th>
         <th class='w-60px'><?php echo $lang->cron->status?></th>
         <th class='w-120px'><?php echo $lang->actions;?></th>
       </tr>
