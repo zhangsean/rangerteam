@@ -18,7 +18,10 @@
 <?php endif;?>
 
 <div id='menuActions'>
-  <div class='actions'><?php commonModel::printLink('backup', 'backup', '', $lang->backup->backup, "class='btn btn-primary backup'");?></div>
+  <div class='actions'>
+    <?php if($this->config->global->cron) commonModel::printLink('backup', 'setSaveDays', '', $lang->backup->setSaveDays, "class='btn btn-primary' data-toggle='modal'");?>
+    <?php commonModel::printLink('backup', 'backup', '', $lang->backup->backup, "class='btn btn-primary backup'");?>
+  </div>
 </div>
 <div class='panel'>
   <table class='table table-condensed table-bordered active-disabled table-fixed'>

@@ -40,6 +40,8 @@ class backup extends control
      */
     public function index()
     {
+        $this->app->loadConfig('cron');
+
         $backups = array();
         if(empty($this->view->error))
         {
@@ -131,6 +133,27 @@ class backup extends control
             }
         }
         $this->send(array('result' => 'success', 'message' => $this->lang->backup->success->restore, 'locate' => inlink('index')));
+    }
+
+    /**
+     * Set save days for backup.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setSaveDays()
+    {
+        if($_POST)
+        {
+            if($this->post->saveDays <= 0) $this->send(array('result' => 'fail', 'message' => $this->lang->backup->error->setSaveDays));
+
+            $this->backup->setSaveDays();
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $this->view->title = $this->lang->backup->setSaveDays;
+        $this->display();
     }
 
     /**
