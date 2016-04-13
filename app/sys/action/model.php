@@ -288,8 +288,6 @@ class actionModel extends model
                 $desc = str_replace('$' . $key, $value, $desc);
             }
         }
-        a($action);
-        a($desc);
 
         /* If the desc is an array, process extra. Please bug/lang. */
         if(is_array($desc))
