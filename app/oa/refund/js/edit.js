@@ -48,7 +48,7 @@ $(document).ready(function()
     $('input[name^=moneyList]').change(updateMoney);
 
     /* Add a trade detail item. */
-    $(document).on('click', '.icon-plus', function()
+    $(document).on('click', '.table-detail .icon-plus', function()
     {
         $(this).closest('tr').after($('#detailTpl').html().replace(/key/g, v.key));
         $(this).closest('tr').next().find("select").chosen();
@@ -61,7 +61,7 @@ $(document).ready(function()
     });
 
     /* Remove a trade detail item. */
-    $(document).on('click', '.icon-remove', function()
+    $(document).on('click', '.table-detail .icon-remove', function()
     {
         if($('#detailBox tr').size() > 1)
         {
