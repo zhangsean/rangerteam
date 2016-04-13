@@ -134,7 +134,7 @@ class tree extends control
 
         $this->view->title      = $this->lang->tree->merge;
         $this->view->type       = $type;
-        $this->view->categories = $this->tree->getPairs('', $type);
+        $this->view->categories = $this->tree->getOptionMenu($type, 0, $removeRoot = true);
         $this->display();
     }
 
