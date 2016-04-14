@@ -158,7 +158,7 @@ class overtimeModel extends model
 
         if(!dao::isError())
         {
-            $oldDates = range(strtotime($oldOvertime->begin), strtotime($oldovertime->end), 60 * 60 * 24);
+            $oldDates = range(strtotime($oldOvertime->begin), strtotime($oldOvertime->end), 60 * 60 * 24);
             $this->loadModel('attend')->batchUpdate($oldDates, $oldOvertime->createdBy, '');
 
             $this->loadModel('attend')->batchUpdate($dates, $oldOvertime->createdBy, '', 'overtime');
