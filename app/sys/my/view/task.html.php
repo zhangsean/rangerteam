@@ -44,7 +44,7 @@
             <?php if(!empty($task->children)) echo "<span class='task-toggle'>&nbsp;&nbsp;<i class='icon icon-remove'></i>&nbsp;&nbsp;</span>"?>
           </td>
           <td><?php echo $task->deadline;?></td>
-          <td><?php if(isset($users[$task->assignedTo])) echo $users[$task->assignedTo];?></td>
+          <td><?php echo zget($users, $task->assignedTo);?></td>
           <td><?php echo zget($lang->task->statusList, $task->status);?></td>
           <td class='visible-lg'><?php echo substr($task->createdDate, 0, 10);?></td>
           <td class='visible-lg'><?php echo $task->consumed;?></td>

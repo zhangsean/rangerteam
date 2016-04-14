@@ -318,6 +318,7 @@ class my extends control
         $this->view->orderBy = $orderBy;
         $this->view->pager   = $pager;
         $this->view->tasks   = $this->loadModel('task')->getList(0, $type, $orderBy, $pager);
+        $this->view->users   = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
