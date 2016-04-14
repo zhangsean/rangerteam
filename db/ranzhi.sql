@@ -908,7 +908,7 @@ CREATE TABLE `sys_user` (
   `account` char(30) NOT NULL DEFAULT '',
   `password` char(32) NOT NULL DEFAULT '',
   `realname` char(30) NOT NULL DEFAULT '',
-  `role` char(20) NOT NULL,
+  `role` char(30) NOT NULL,
   `nickname` char(60) NOT NULL DEFAULT '',
   `admin` enum('no','common','super') NOT NULL DEFAULT 'no',
   `avatar` varchar(255) NOT NULL DEFAULT '',
