@@ -126,7 +126,7 @@ class thread extends control
         $speakers = $this->loadModel('user')->getBasicInfo($speakers);
         foreach($speakers as $account => $speaker)
         {
-            $moderators = implode($board->moderators, ',');
+            $moderators = implode(array_flip($board->moderators), ',');
             $speaker->isModerator = strpos(",{$moderators},", ",{$account},") !== false;       
         }
 
