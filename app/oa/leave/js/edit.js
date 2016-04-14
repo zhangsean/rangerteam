@@ -8,8 +8,8 @@ $(document).ready(function()
         var finish = $('#finish').val();
         if(!begin || !end || !start || !finish) return false;
 
-        begin = begin.replace(/-/g, ',');
-        end   = end.replace(/-/g, ',');
+        begin = begin.replace(/-/g, '/');
+        end   = end.replace(/-/g, '/');
 
         var hours = 0;
         var beginTime = Date.parse(new Date(begin + ' ' + start));
