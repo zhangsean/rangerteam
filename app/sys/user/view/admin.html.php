@@ -47,7 +47,7 @@ js::set('from', 'admin');
                   <th class='w-130px visible-lg'><?php commonModel::printOrderLink('join', $orderBy, $vars, $lang->user->join);?></th>
                   <th class='w-80px visible-lg'><?php commonModel::printOrderLink('visits', $orderBy, $vars, $lang->user->visits);?></th>
                   <th class='w-130px'><?php commonModel::printOrderLink('last', $orderBy, $vars, $lang->user->last);?></th>
-                  <th class='w-70px'><?php commonModel::printOrderLink('ip', $orderBy, $vars, $lang->user->ip);?></th>
+                  <th class='w-110px'><?php commonModel::printOrderLink('ip', $orderBy, $vars, $lang->user->ip);?></th>
                   <th class='w-60px'><?php commonModel::printOrderLink('locked', $orderBy, $vars, $lang->user->status);?></th>
                   <th class='w-100px'><?php echo $lang->actions;?></th>
                 </tr>
