@@ -11,5 +11,5 @@ $lang->leads->ignore    = '忽略';
 
 $lang->leads->ignoreReason = '原因';
 
-$lang->leads->message = new stdclass();
-$lang->leads->message->apply = '請先處理現有的名單聯繫人。';
+$lang->leads->tips = new stdclass();
+$lang->leads->tips->apply = '請先處理現有的名單聯繫人。';

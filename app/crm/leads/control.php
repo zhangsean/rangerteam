@@ -161,10 +161,10 @@ class leads extends control
     public function apply()
     {
         $remain = isset($this->config->leads->apply->remain) ? $this->config->leads->apply->remain : 10;
-        $limit  = isset($this->config->leads->apply->limit) ? $this->config->leads->apply->limit : 50;
+        $limit  = isset($this->config->leads->apply->limit) ? $this->config->leads->apply->limit : 30;
 
         $contactCount = $this->dao->select('count(*) as count')->from(TABLE_CONTACT)->where('assignedTo')->eq($this->app->user->account)->andWhere('status')->eq('wait')->fetch('count');
-        if($contactCount >= $remain) $this->send(array('result' => 'fail', 'message' => $this->lang->leads->message->apply));
+        if($contactCount >= $remain) $this->send(array('result' => 'fail', 'message' => $this->lang->leads->tips->apply));
 
         $contacts = $this->dao->select('*')->from(TABLE_CONTACT)->where('status')->eq('wait')->andWhere('assignedTo')->eq('')->orderBy('id_desc')->limit($limit)->fetchAll();
         foreach($contacts as $contact)
@@ -248,6 +248,28 @@ class leads extends control
 
         $this->view->title     = $this->lang->ignore;
         $this->view->contactID = $contactID;
+        $this->display();
+    }
+
+    /**
+     * Setting apply rule.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setting() 
+    {
+        if($_POST)
+        {
+            $this->loadModel('setting');
+            if($this->post->applyLimit)  $this->setting->setItems('system.crm.leads.apply', array('limit' => $this->post->applyLimit));
+            if($this->post->applyRemain) $this->setting->setItems('system.crm.leads.apply', array('remain' => $this->post->applyRemain));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->view->title       = $this->lang->leads->applyRule;
+        $this->view->applyLimit  = isset($this->config->leads->apply->limit)  ? $this->config->leads->apply->limit : 10;
+        $this->view->applyRemain = isset($this->config->leads->apply->remain) ? $this->config->leads->apply->remain : 30;
         $this->display();
     }
 
