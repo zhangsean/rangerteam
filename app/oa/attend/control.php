@@ -518,8 +518,6 @@ class attend extends control
                 foreach($accountAttends as $attend)
                 {
                     if($attend->status == 'normal') $stat[$account]->normal ++;
-                    if($attend->status == 'absent') $stat[$account]->absent ++;
-
                     if($attend->status == 'late' or $attend->status == 'both')
                     {
                         $stat[$account]->late ++;
