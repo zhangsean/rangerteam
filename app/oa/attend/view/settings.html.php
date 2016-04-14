@@ -28,7 +28,7 @@
         <form id='ajaxForm' method='post'>
           <table class='table table-form table-condensed w-p70'>
             <tr>
-              <th class='w-150px'><?php echo $lang->attend->signInLimit?></th>
+              <th class='w-100px'><?php echo $lang->attend->signInLimit?></th>
               <td class='w-300px'><?php echo html::input('signInLimit', $signInLimit, "class='form-control form-time'")?></td>
               <td></td>
             </tr>
@@ -54,13 +54,16 @@
             </tr>
             <tr>
               <th><?php echo $lang->attend->ipList;?></th>
-              <td colspan='2'>
+              <td>
                 <div class='input-group'>
-                  <?php echo html::input('ip', $ip, "class='form-control' title='{$lang->attend->note->ip}' placeholder='{$lang->attend->note->ip}'");?>
+                  <?php echo html::input('ip', $ip, "class='form-control' title='{$lang->attend->note->ip}'");?>
                   <div class='input-group-addon'>
                     <label class="checkbox"><input type="checkbox" id="allip" name="allip" value="1"> <?php echo $lang->attend->note->allip;?></label>
                   </div>
                 </div>
+              </td>
+              <td style='padding-left: 10px'>
+                <?php echo html::a('javascript:void(0)', "<i class='icon-question-sign'></i>", "data-original-title='{$lang->attend->note->ip}' data-toggle='tooltip' data-placement='right' ");?>     
               </td>
             </tr>
             <tr>
@@ -68,7 +71,7 @@
               <td><?php echo html::checkbox('mustSignOut', array('yes' => $lang->attend->mustSignOut), $mustSignOut)?></td>
               <td></td>
             </tr>
-          <tr><th></th><td colspan='2'><?php echo html::submitButton();?></td></tr>
+            <tr><th></th><td colspan='2'><?php echo html::submitButton();?></td></tr>
           </table>
         </form>
       </div>
