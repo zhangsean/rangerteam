@@ -23,7 +23,7 @@ class entryModel extends model
     {
         $entries = $this->dao->select('*')->from(TABLE_ENTRY)
             ->where(1)
-            ->beginIF($category)->andWhere('category')->eq($category)->fi()
+            ->beginIF(!empty($category))->andWhere('category')->eq($category)->fi()
             ->orderBy('`order, id`')->fetchAll();
 
         /* Remove entry if no rights and fix logo path. */
@@ -389,7 +389,6 @@ class entryModel extends model
         $entries    = $this->getEntries();
         $allEntries = array();
 
-        $this->loadModel('tree');
         foreach($entries as $entry)
         {
             $sso     = helper::createLink('entry', 'visit', "entryID=$entry->id");

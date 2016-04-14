@@ -484,9 +484,28 @@
             var start = Math.floor((maxHeight - (2 * iconHeight)) / iconHeight);
             if($btn.data('icons-count') != (iconsCount - start))
             {
-                var $moreIcons = $icons.removeClass('option')
-                .slice(start)
-                .addClass('option').clone().removeClass('option');
+                var $moreIcons = $icons.removeClass('option').slice(start).addClass('option');
+
+                /* display the real apps instead of category button. */
+                var newIcons = new Array();
+                $moreIcons.each(function()
+                {
+                    if($(this).find('button').hasClass('categoryButton'))
+                    {
+                        var dataid = $(this).find('button').attr('data-id');
+                        $('#categoryMenu' + dataid).find('li').each(function()
+                        {
+                            newIcons.push($(this)[0]);
+                        });
+                    }
+                    else
+                    {
+                        newIcons.push($(this)[0]);
+                    }
+                });
+                var $newIcons = $(newIcons);
+
+                $moreIcons = $newIcons.clone().removeClass('option');
                 $moreIcons.children('.app-btn').attr('data-btn-type', 'list').attr('data-placement', 'bottom').attr('data-tip-class', '');
 
                 $btn.addClass('active').data('icons-count', $moreIcons.length)
@@ -730,6 +749,14 @@
             if(!q) q = $(this).closest('.app-btn').attr('data-id');
             if(!q) q = $('#taskMenu.show').data('id');
             windows.close(q);
+            $('.categoryMenu li .app-btn').each(function()
+            {
+                if($(this).attr('data-id') == q) 
+                {
+                    var dataid = $(this).parents('.categoryMenu').attr('data-id');
+                    $('#category' + dataid).removeClass('open active'); 
+                }
+            });
         }).on('click', '.min-win', function(event) // min-win
         {
             windows.opens[$(this).closest('.window').attr('id')].hide();
@@ -1493,7 +1520,8 @@
             this.$taskBar     = $('#taskbar');
             this.$appsMenu    = $('#apps-menu .bar-menu');
             this.$allAppsList = $("#allAppsList .bar-menu");
-            this.firstRender = true;
+            this.$categoryMenu= $('.categoryMenu');
+            this.firstRender  = true;
 
             this.render();
             this.bindEvents();
@@ -1504,6 +1532,7 @@
         {
             this.$appsMenu.empty();
             this.$allAppsList.empty();
+            this.$categoryMenu.empty();
             this.showAll();
 
             if(this.firstRender)
@@ -1543,7 +1572,6 @@
                         }
                     });
 
-
                     settings.onSortEntries(orders, function(result)
                     {
                         if(result)
@@ -1562,12 +1590,13 @@
         /* Show all shortcuts */
         this.showAll = function()
         {
+            this.categories = new Array();
             for(var index in entries)
             {
                 this.show(entries[index]);
             }
 
-            $('.entries-count').text(entries.length - 1);
+            $('.entries-count').text(entries.length - 2);
 
             if(desktop && desktop.isFullscreenMode && $('#search').val() !== '')
             {
@@ -1587,7 +1616,16 @@
                 {
                     var shortcut = entry.toLeftBarShortcutHtml();
                     $('#categoryMenu' + entry.category).append(shortcut);
-                    $shortcut.html($('#category' + entry.category));
+                    $shortcut.html($('#categoryTpl' + entry.category).html().replace(/categoryid/g, entry.category));
+
+                    if($.inArray(entry.category, this.categories) == -1) 
+                    {
+                        this.categories.push(entry.category);
+                    }
+                    else
+                    {
+                        $shortcut = '';
+                    }
                 }
                 if(activedId && entry.id === activedId)
                 {

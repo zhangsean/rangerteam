@@ -41,9 +41,11 @@ js::set('attend', commonModel::isAvailable('attend') ? 1 : 0);
       {
           $hue  = ($id - 820000) * 47 % 360;
           $name = substr($name, 0, 6);
-          echo "<button id='category{$id}' class='categoryButton' data-id='{$id}' data-toggle='tooltip' data-tip-class='s-menu-tooltip' data-placement='right' data-btn-type='menu' class='btn-more'>";
+          echo "<div id='categoryTpl{$id}' style='display:none'>";
+          echo "<button id='categorycategoryid' class='categoryButton' data-id='{$id}' data-toggle='tooltip' data-tip-class='s-menu-tooltip' data-placement='right' data-btn-type='menu' class='btn-more'>";
           echo "<i class='icon icon-default' style='background-color: hsl($hue, 100%, 40%)'>{$name}</i></button>";
-          echo "<ul id='categoryMenu{$id}' class='categoryMenu dropdown-menu fade'>";
+          echo "</div>";
+          echo "<ul id='categoryMenu{$id}' class='categoryMenu dropdown-menu fade' data-id='{$id}'>";
           echo "</ul>";
       }
       ?>
