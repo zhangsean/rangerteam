@@ -8,6 +8,7 @@ $lang->leads->apply     = '申请';
 $lang->leads->assign    = '指派';
 $lang->leads->transform = '确认';
 $lang->leads->ignore    = '忽略';
+$lang->leads->settings  = '设置';
 $lang->leads->applyRule = '派发规则';
 
 $lang->leads->applyLimit   = '每次申请记录数';

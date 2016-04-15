@@ -205,6 +205,7 @@ $lang->resource->leads->assign    = 'assign';
 $lang->resource->leads->apply     = 'apply';
 $lang->resource->leads->transform = 'transform';
 $lang->resource->leads->ignore    = 'ignore';
+$lang->resource->leads->setting   = 'settings';
 
 $lang->leads->methodOrder[10] = 'browse';
 $lang->leads->methodOrder[11] = 'create';
@@ -214,6 +215,7 @@ $lang->leads->methodOrder[25] = 'assign';
 $lang->leads->methodOrder[30] = 'apply';
 $lang->leads->methodOrder[35] = 'transform';
 $lang->leads->methodOrder[40] = 'ignore';
+$lang->leads->methodOrder[45] = 'setting';
 
 /* Product. */
 $lang->resource->product = new stdclass();
@@ -550,11 +552,13 @@ $lang->resource->tree->browse   = 'browse';
 $lang->resource->tree->edit     = 'edit';
 $lang->resource->tree->children = 'children';
 $lang->resource->tree->delete   = 'delete';
+$lang->resource->tree->merge    = 'merge';
 
 $lang->tree->methodOrder[0]  = 'browse';
 $lang->tree->methodOrder[5]  = 'edit';
 $lang->tree->methodOrder[10] = 'children';
 $lang->tree->methodOrder[15] = 'delete';
+$lang->tree->methodOrder[20] = 'merge';
 
 
 /* Setting. */

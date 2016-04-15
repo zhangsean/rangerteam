@@ -17,6 +17,7 @@ $lang->tree->delete      = "Delete";
 $lang->tree->browse      = "Area, Industry, Income Categories, Expend Categories, Forum Boards, Blog Categories, Depts";
 $lang->tree->manage      = "Manage";
 $lang->tree->fix         = "Fix data";
+$lang->tree->merge       = "Merge";
 
 $lang->tree->noCategories  = 'No category yet, add one first.';
 $lang->tree->noBoards      = 'No board yet, add one first.';

@@ -8,10 +8,11 @@ $lang->leads->apply     = 'Apply';
 $lang->leads->assign    = 'Assign';
 $lang->leads->transform = 'Confirm';
 $lang->leads->ignore    = 'Ignroe';
+$lang->leads->settings  = 'Setting';
 $lang->leads->applyRule = 'Apply rule';
 
-$lang->leads->syncLimit    = 'Max to sync everytime';
 $lang->leads->applyLimit   = 'Max to apply everytime';
+$lang->leads->applyRemain  = 'Max to wait';
 $lang->leads->ignoreReason = 'Reason';
 
 $lang->leads->tips = new stdclass();
