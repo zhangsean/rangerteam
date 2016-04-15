@@ -287,8 +287,10 @@ class contract extends control
             $this->send($return);
         }
 
-        $user = $this->loadModel('user')->getByAccount($contract->createdBy);
-        $dept = $this->loadModel('tree')->getByID($user->dept);
+        $user    = $this->loadModel('user')->getByAccount($contract->createdBy);
+        $dept    = $this->loadModel('tree')->getByID($user->dept);
+        $orderID = $this->dao->select('`order`')->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->fetch('order');
+        $order   = $this->loadModel('order')->getByID($orderID);
 
         $this->view->title         = $contract->name;
         $this->view->contract      = $contract;
@@ -297,7 +299,8 @@ class contract extends control
         $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->categories    = $this->loadModel('tree')->getOptionMenu('in', 0);
-        $this->view->productList   = array(0 => '') + $this->loadModel('product')->getPairs();
+        $this->view->productList   = array(0 => '') + $this->dao->select('id, name')->from(TABLE_PRODUCT)->where('id')->in($order->product)->fetchPairs();
+        $this->view->product       = strpos(trim($order->product, ','), ',') === false ? $order->product : '';
         $this->view->dept          = $dept;
         $this->display();
     }

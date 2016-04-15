@@ -48,7 +48,7 @@
     </tr>
     <tr class='tradeTR'>
       <th><?php echo $lang->trade->product;?></th>
-      <td><?php echo html::select('product', $productList, '', "class='form-control chosen'");?></td>
+      <td><?php echo html::select('product', $productList, $product, "class='form-control chosen'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->contract->returnedBy;?></th>
