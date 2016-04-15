@@ -539,6 +539,7 @@ class treeModel extends model
      */
     public function update($categoryID)
     {
+        $oldCategory = $this->getByID($categoryID);
         $category = fixer::input('post')
             ->stripTags('desc', $this->config->allowedTags->admin)
             ->join('moderators', ',')
@@ -573,6 +574,9 @@ class treeModel extends model
             ->exec();
 
         $this->fixPath($category->type);
+
+        $newCategory = $this->getByID($categoryID);
+        if(!$oldCategory->major and $newCategory->major) $this->dao->update(TABLE_CATEGORY)->set('major')->eq('1')->where('path')->like($newCategory->path . '%')->exec();
 
         return !dao::isError();
     }
