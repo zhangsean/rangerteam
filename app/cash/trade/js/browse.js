@@ -60,6 +60,7 @@ $(document).ready(function()
 
     if(v.date)
     {
+        $('#menu .nav').after($('.date-label').html());
         if(config.requestType == 'GET')
         {
             $(".side-body .tree li a[href$='" + v.date + "']").parent().addClass('active');

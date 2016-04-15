@@ -18,11 +18,12 @@
 <?php js::set('treeview', !empty($_COOKIE['treeview']) ? $_COOKIE['treeview'] : '');?>
 <?php $vars = "mode={$mode}&date={$date}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
-<?php if($date):?>
-<div class='pull-left label label-primary'>
-  <?php echo $currentYear . $lang->year . (strpos($date, 'Q') !== false ? $lang->trade->quarterList[substr($date, 4, 2)] : (strlen($date) == '6' ? substr($date, 4, 2) . $lang->month : ''));?>
+
+<div class='date-label hide'>
+  <span class='label label-primary'>
+    <?php echo $currentYear . $lang->year . (strpos($date, 'Q') !== false ? $lang->trade->quarterList[substr($date, 4, 2)] : (strlen($date) == '6' ? substr($date, 4, 2) . $lang->month : ''));?>
+  </span>
 </div>
-<?php endif;?>
 <div id='menuActions'>
   <?php commonModel::printLink('trade', 'create', 'type=in',  "{$lang->trade->createIn}", "class='btn btn-primary'")?>
   <?php commonModel::printLink('trade', 'create', 'type=out', "{$lang->trade->createOut}", "class='btn btn-primary'")?>
