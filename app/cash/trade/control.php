@@ -34,7 +34,7 @@ class trade extends control
      */
     public function browse($mode = 'all', $date = '', $orderBy = 'date_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
-        if($mode == 'all' and $date == '' and $orderBy == 'date_desc' and strpos($this->server->request_uri, 'all') === false) $this->session->set('date', '');
+        if($mode == 'all' and $date == '' and $orderBy == 'date_desc') $this->session->set('date', '');
         if($mode == 'out') $this->trade->checkExpensePriv();
 
         $this->app->loadClass('pager', $static = true);
