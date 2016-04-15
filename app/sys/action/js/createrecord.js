@@ -33,7 +33,7 @@ $(document).ready(function()
         }
     });
 
-    $('#actionBox').load(createLink('action', 'history', 'objectType=' + v.objectType + '&objectID=' + v.objectID + '&action=record&from=createRecord'));
+    $('#actionBox').load(createLink('action', 'history', 'objectType=' + v.objectType + '&objectID=' + v.objectID + '&action=record&from=record'));
 
     $('[name*=objectType]').change(function()
     {

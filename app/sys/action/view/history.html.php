@@ -49,7 +49,7 @@
         <?php 
         if(helper::isAjaxRequest())
         {
-            $append  = "class='loadInModal'";
+            $append  = $from != 'record' ? "class='loadInModal'" : '';
         }
         else
         {
