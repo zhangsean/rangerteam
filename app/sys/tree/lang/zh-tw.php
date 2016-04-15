@@ -17,6 +17,7 @@ $lang->tree->delete        = "刪除類目";
 $lang->tree->browse        = "區域設置、行業設置、收入科目、支出科目、論壇版塊、博客類目、維護部門";
 $lang->tree->manage        = "維護類目";
 $lang->tree->fix           = "修復數據";
+$lang->tree->merge         = "合併科目";
 
 $lang->tree->noCategories  = '您還沒有添加類目，請添加類目。';
 $lang->tree->noBoards      = '您還沒有設置版塊，請設置版塊。';

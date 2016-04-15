@@ -8,6 +8,7 @@ $lang->leads->apply     = '申請';
 $lang->leads->assign    = '指派';
 $lang->leads->transform = '確認';
 $lang->leads->ignore    = '忽略';
+$lang->leads->settings  = '設置';
 $lang->leads->applyRule = '派發規則';
 
 $lang->leads->applyLimit   = '每次申請記錄數';

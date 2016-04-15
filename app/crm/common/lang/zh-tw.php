@@ -72,7 +72,7 @@ $lang->leads->menu->assignedTo  = array('link' => '指派給我|leads|browse|mod
 $lang->leads->menu->next        = '下次聯繫|leads|browse|mode=next';
 $lang->leads->menu->ignoredBy   = '由我忽略|leads|browse|mode=ignoredBy&status=ignore';
 $lang->leads->menu->public      = '公共名單|leads|browse|mode=all&status=ignore';
-$lang->leads->menu->settings    = '設置|leads|setting|';
+$lang->leads->menu->setting     = '設置|leads|setting|';
 
 /* Menu of contract module. */
 $lang->contract = new stdclass();
