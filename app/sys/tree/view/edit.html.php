@@ -35,8 +35,8 @@ $themeRoot = $webRoot . "theme/";
             <?php echo html::input('name', $category->name, "class='form-control'");?>
             <span class='input-group-addon'>
               <label class='checkbox'>
-                <input type='checkbox' name='mainBusiness' id='mainBusiness' value='1' <?php echo $category->mainBusiness ? 'checked' : ''?>/>
-                <span><?php echo $lang->category->mainBusiness;?></span>
+                <input type='checkbox' name='major' id='major' value='1' <?php echo $category->major ? 'checked' : ''?>/>
+                <span><?php echo $lang->category->major;?></span>
               </label>
             </span>
           </div>

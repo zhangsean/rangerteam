@@ -634,7 +634,7 @@ CREATE TABLE `sys_category` (
   `users` text NOT NULL,
   `rights` varchar(255) NOT NULL,
   `refund` enum('0','1') NOT NULL DEFAULT '0',
-  `mainBusiness` enum('0','1') NOT NULL DEFAULT '0',
+  `major` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `tree` (`type`),
   KEY `order` (`order`),

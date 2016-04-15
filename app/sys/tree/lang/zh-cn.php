@@ -75,7 +75,7 @@ $lang->in->parent   = '上级科目';
 $lang->in->desc     = '描述';
 $lang->in->keywords = '关键词';
 $lang->in->children = '子科目';
-$lang->in->mainBusiness = '主营业务';
+$lang->in->major    = '主营业务收入';
 
 /* Lang items for expend. */
 $lang->out = new stdclass();
@@ -88,7 +88,7 @@ $lang->out->keywords = '关键词';
 $lang->out->children = '子科目';
 $lang->out->rights   = '权限';
 $lang->out->refund   = '报销科目';
-$lang->out->mainBusiness = '主营业务';
+$lang->out->major    = '主营业务成本';
 
 $lang->out->refundList[1] = '是';
 $lang->out->refundList[0] = '否';
