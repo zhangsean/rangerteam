@@ -89,7 +89,7 @@ $lang->out->children = '子科目';
 $lang->out->rights   = '权限';
 $lang->out->refund   = '报销科目';
 $lang->out->major    = '主营业务成本';
-$lang->out->merge    = '科目合并';
+$lang->out->merge    = '合并科目';
 
 $lang->out->refundList[1] = '是';
 $lang->out->refundList[0] = '否';

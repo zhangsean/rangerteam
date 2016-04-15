@@ -22,7 +22,7 @@ include '../../common/view/treeview.html.php';
         <?php echo $treeMenu;?>
       </ul>
       <div class='text-right'>
-        <?php commonModel::printLink('sys.tree', 'browse', 'type=entry', $lang->entry->category, "class='btn btn-primary'");?>
+        <?php commonModel::printLink('entry', 'category', '', $lang->entry->setCategory, "class='btn btn-primary'");?>
       </div>
     </div>
   </div>

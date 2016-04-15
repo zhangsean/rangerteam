@@ -75,7 +75,7 @@ $lang->in->desc     = 'Description';
 $lang->in->keywords = 'Keyword';
 $lang->in->children = "Children";
 $lang->in->major    = 'Major Income';
-$lang->in->merge    = 'Income Category Merge';
+$lang->in->merge    = 'Merge Category';
 
 /* Lang items for expend. */
 $lang->out = new stdclass();
@@ -89,7 +89,7 @@ $lang->out->children = "Children";
 $lang->out->rights   = 'Rights';
 $lang->out->refund   = 'Reimbursement';
 $lang->out->major    = 'Major Expense';
-$lang->out->merge    = 'Expense Category Merge';
+$lang->out->merge    = 'Merge Category';
 
 $lang->out->refundList[1] = 'Yes';
 $lang->out->refundList[0] = 'No';

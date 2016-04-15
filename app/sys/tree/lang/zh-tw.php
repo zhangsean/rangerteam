@@ -12,7 +12,6 @@
 $lang->tree->common        = "類目";
 $lang->tree->add           = "添加";
 $lang->tree->edit          = "編輯";
-$lang->tree->merge         = "合併";
 $lang->tree->children      = "添加子類目";
 $lang->tree->delete        = "刪除類目";
 $lang->tree->browse        = "區域設置、行業設置、收入科目、支出科目、論壇版塊、博客類目、維護部門";
@@ -75,7 +74,8 @@ $lang->in->parent   = '上級科目';
 $lang->in->desc     = '描述';
 $lang->in->keywords = '關鍵詞';
 $lang->in->children = '子科目';
-$lang->in->mainBusiness = '主營業務';
+$lang->in->major    = '主營業務收入';
+$lang->in->merge    = '科目合併';
 
 /* Lang items for expend. */
 $lang->out = new stdclass();
@@ -88,7 +88,8 @@ $lang->out->keywords = '關鍵詞';
 $lang->out->children = '子科目';
 $lang->out->rights   = '權限';
 $lang->out->refund   = '報銷科目';
-$lang->out->mainBusiness = '主營業務';
+$lang->out->major    = '主營業務成本';
+$lang->out->merge    = '合併科目';
 
 $lang->out->refundList[1] = '是';
 $lang->out->refundList[0] = '否';

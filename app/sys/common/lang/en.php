@@ -224,7 +224,7 @@ $lang->entry->menu = new stdclass();
 $lang->entry->menu->admin    = array('link' => 'Entries|entry|admin|', 'alias' => 'edit, integration, style');
 $lang->entry->menu->create   = array('link' => 'Create|entry|create|');
 $lang->entry->menu->webapp   = 'WEB Application|webapp|obtain|';
-$lang->entry->menu->category = 'Category|tree|browse|type=entry';
+$lang->entry->menu->category = 'Category|entry|category|';
 
 /* Menu system. */
 $lang->system       = new stdclass();

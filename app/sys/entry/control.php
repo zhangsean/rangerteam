@@ -626,4 +626,24 @@ class entry extends control
         $this->view->bindUsers   = $bindUsers;
         $this->display();
     }
+
+    /**
+     * Set category. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function category()
+    {
+        if($_POST)
+        {
+            $result = $this->loadModel('tree')->manageChildren('entry', 0, $this->post->children);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+        }
+
+        $this->view->title    = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->setCategory;
+        $this->view->children = $this->loadModel('tree')->getChildren(0, 'entry');
+        $this->display();
+    }
 }

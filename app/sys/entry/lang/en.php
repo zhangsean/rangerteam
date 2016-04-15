@@ -9,14 +9,15 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->entry->common    = 'App';
-$lang->entry->admin     = 'App list';
-$lang->entry->create    = 'Create App';
-$lang->entry->edit      = 'Edit App';
-$lang->entry->delete    = 'Delete App';
-$lang->entry->createKey = 'New one';
-$lang->entry->order     = 'Order';
-$lang->entry->style     = 'Style';
+$lang->entry->common      = 'App';
+$lang->entry->admin       = 'App list';
+$lang->entry->create      = 'Create App';
+$lang->entry->edit        = 'Edit App';
+$lang->entry->delete      = 'Delete App';
+$lang->entry->createKey   = 'New one';
+$lang->entry->order       = 'Order';
+$lang->entry->style       = 'Style';
+$lang->entry->setCategory = 'Category';
 
 $lang->entry->name        = 'Name';
 $lang->entry->abbr        = 'Abbreviation';

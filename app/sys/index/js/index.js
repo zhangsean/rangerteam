@@ -22,7 +22,7 @@ $(function()
         var color = $('body').css('background-color');
         menu.css({'background-color' : color, 'top' : $(this).offset().top - 3, 'width' : 40 * lis.size() + 20});
         $('.categoryMenu').not(menu).hide();
-        menu.toggle();
+        menu.show();
     });
 
     $(document).on('mouseover', '.categoryMenu li .app-btn', function()
@@ -63,6 +63,26 @@ $(function()
                 var id = $(this).parents('.categoryMenu').attr('data-id');
                 $('#category' + id).addClass('active');
                 return;
+            }
+        });
+    });
+
+    $(document).mouseover(function(e)
+    {
+        $('.categoryMenu').each(function()
+        {
+            if($(this).is(':visible'))
+            {
+                var dataid  = $(this).attr('data-id');
+                var button  = $('#category' + dataid);
+                var top     = button.offset().top;
+                var left    = button.offset().left;
+                var right   = left + button.width() + $(this).width();
+                var bottom  = top + button.height() + $(this).height();
+                if(e.pageX < left || e.pageX > right || e.pageY < top || e.pageY > bottom)
+                {
+                    $(this).hide();
+                }
             }
         });
     });
