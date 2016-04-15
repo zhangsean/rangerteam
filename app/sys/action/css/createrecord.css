@@ -10,3 +10,5 @@ label input[type='radio']{margin: 6px 2px 0 0;}
 #phoneTD .icon-qq, #phoneTD .icon-envelope-alt {margin-left: 10px;}
 
 .pager{margin: 0;}
+.fileBox{margin:0;}
+.table-condensed th, .table-condensed td{padding: 5px;}

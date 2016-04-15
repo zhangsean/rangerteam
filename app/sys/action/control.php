@@ -115,8 +115,8 @@ class action extends control
             $this->view->contracts = array('') + $this->loadModel('contract')->getPairs($objectID);
         }
 
+        $this->loadModel('file');
         $this->view->title      = $this->lang->action->record->create;
-        $this->view->modalWidth = 900;
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
         $this->view->customer   = $customer;

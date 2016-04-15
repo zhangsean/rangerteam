@@ -75,6 +75,8 @@ $(document).ready(function()
         $('#phoneTR').show();
         $('#phoneTD').html(phone + qq + email);
     });
+
+    $('#fileform > .text-danger').remove();
 });
 
 /**
