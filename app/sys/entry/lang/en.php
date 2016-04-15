@@ -37,6 +37,7 @@ $lang->entry->position    = 'Position';
 $lang->entry->width       = 'Width';
 $lang->entry->height      = 'Height';
 $lang->entry->priv        = 'Privilege';
+$lang->entry->category    = 'Category';
 
 $lang->entry->chanzhi          = 'Chanzhi';
 $lang->entry->zentao           = 'Zentao';

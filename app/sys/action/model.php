@@ -714,22 +714,19 @@ class actionModel extends model
         $todos = $this->loadModel('todo', 'sys')->getList('self', $account, $date);
         if(empty($todos))
         {
-            $last = $this->dao->select('last')->from(TABLE_USER)->where('account')->eq($account)->fetch('last');
-            for($i = 1; $i <= 3; $i++)
+            $signInLimit = date('Y-m-d ') . $this->config->attend->signInLimit;
+            $begin = (int)date('Hi', strtotime("+30 minute $signInLimit"));
+            $end   = (int)date('Hi', strtotime("+30 minute $interval seconds $signInLimit"));
+            if((int)date('Hi') >= $begin and (int)date('Hi') <= $end)
             {
-                $begin = (int)date('Hi', strtotime("+" . ($i - 1) * 30 . "minute $last"));
-                $end   = (int)date('Hi', strtotime("+" . ($i - 1) * 30 . "minute $interval seconds $last"));
-                if((int)date('Hi') >= $begin and (int)date('Hi') <= $end)
-                {
-                    $notice = new stdclass();
-                    $notice->id      = "emptyTodo{$i}";
-                    $notice->title   = sprintf($this->lang->action->noticeTitle, $this->lang->todo->common, $link, 'oa', "{$this->lang->todo->emptyTodo}");
-                    $notice->content = ''; 
-                    $notice->type    = 'success';
-                    $notice->read    = '';
+                $notice = new stdclass();
+                $notice->id      = "emptyTodo";
+                $notice->title   = sprintf($this->lang->action->noticeTitle, $this->lang->todo->common, $link, 'oa', "{$this->lang->todo->emptyTodo}");
+                $notice->content = ''; 
+                $notice->type    = 'success';
+                $notice->read    = '';
 
-                    $notices[$notice->id] = $notice;
-                }
+                $notices[$notice->id] = $notice;
             }
         }
 

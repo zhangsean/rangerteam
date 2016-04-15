@@ -142,10 +142,11 @@ class refundModel extends model
      */
     public function update($refundID)
     {
+        $now = helper::now();
         $oldRefund = $this->getByID($refundID);
         $refund = fixer::input('post')
             ->add('editedBy', $this->app->user->account)
-            ->add('editedDate', helper::now())
+            ->add('editedDate', $now)
             ->setDefault('date', helper::today())
             ->join('related', ',')
             ->remove('status,firstReviewer,firstReviewDate,sencondReviewer,secondReviewDate,refundBy,refundDate,files,labels')
@@ -187,7 +188,7 @@ class refundModel extends model
                 $detail->parent      = $refundID;
                 $detail->status      = 'wait';
                 $detail->createdBy   = $this->app->user->account;
-                $detail->createdDate = helper::now();
+                $detail->createdDate = $now;
                 $detail->money       = $money;
                 $detail->date        = empty($_POST['dateList'][$key]) ? $refund->date : $_POST['dateList'][$key];
                 $detail->currency    = $refund->currency;

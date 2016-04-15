@@ -6,7 +6,7 @@
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id: zh-tw.php 3714 2016-04-11 07:15:43Z liugang $
+ * @version     $Id: zh-tw.php 3740 2016-04-13 09:39:08Z liugang $
  * @link        http://www.ranzhico.com
  */
 $lang->entry->common    = '應用';
@@ -37,6 +37,7 @@ $lang->entry->position    = '顯示位置';
 $lang->entry->width       = '寬';
 $lang->entry->height      = '高';
 $lang->entry->priv        = '權限';
+$lang->entry->category    = '分組';
 
 $lang->entry->chanzhi          = '蟬知';
 $lang->entry->zentao           = '禪道';

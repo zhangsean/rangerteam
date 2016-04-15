@@ -329,7 +329,7 @@ class todoModel extends model
             ->where('1=1')
             ->beginIF($mode == 'self')->andWhere()->markLeft()->where('account')->eq($account)->orWhere('assignedTo')->eq($account)->orWhere('finishedBy')->eq($account)->markRight()->fi()
             ->beginIF($mode == 'assignedtoother')->andWhere('account')->eq($account)->andWhere('assignedTo')->ne($account)->andWhere('assignedTo')->ne('')->fi()
-            ->beginIF($mode == 'assignedtome')->andWhere('account')->ne($account)->andWhere('assignedTo')->eq($account)->fi()
+            ->beginIF($mode == 'assignedtome')->andWhere('assignedTo')->eq($account)->fi()
             ->andWhere("date >= '$begin'")
             ->andWhere("date <= '$end'")
             ->beginIF(strpos('all,undone,unclosed,custom', $status) === false)->andWhere('status')->in($status)->fi()

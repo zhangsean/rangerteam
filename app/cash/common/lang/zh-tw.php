@@ -31,7 +31,7 @@ $lang->trade->menu->browse   = array('link' => '所有賬目|trade|browse|mode=a
 $lang->trade->menu->in       = array('link' => '收入|trade|browse|mode=in');
 $lang->trade->menu->out      = array('link' => '支出|trade|browse|mode=out');
 $lang->trade->menu->transfer = array('link' => '轉賬|trade|browse|mode=transfer');
-$lang->trade->menu->inveset  = array('link' => '投資|trade|browse|mode=inveset&orderBy=depositor');
+$lang->trade->menu->inveset  = array('link' => '投資|trade|browse|mode=inveset');
 $lang->trade->menu->annual   = array('link' => '報表|trade|report|');
 
 /* Menu of trade module. */

@@ -36,6 +36,12 @@ class refund extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $actionID = $this->loadModel('action')->create('refund', $refundID, 'Created', '');
+            /* If the reviewer is as same as the login user, auto review. */
+            $refund = $this->refund->getByID($refundID);
+            if($refund->status == 'doing' || $refund->status == 'pass')
+            {
+                $this->loadModel('action')->create('refund', $refundID, 'reviewed');
+            }
             $this->sendmail($refundID, $actionID);
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('personal')));
@@ -73,7 +79,15 @@ class refund extends control
                 $actionID = $this->loadModel('action')->create('refund', $refundID, 'Edited', $fileAction);
                 if($changes) $this->action->logHistory($actionID, $changes);
             }
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "refundID=$refundID")));
+
+            /* If the reviewer is as same as the login user, auto review. */
+            $refund = $this->refund->getByID($refundID);
+            if($refund->status == 'doing' || $refund->status == 'pass')
+            {
+                $this->loadModel('action')->create('refund', $refundID, 'reviewed');
+            }
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "refundID=$refundID&mode=personal")));
         }
 
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
@@ -285,6 +299,13 @@ class refund extends control
             
             /* send email. */
             $actionID = $this->loadModel('action')->create('refund', $refundID, 'reviewed');
+
+            $refund = $this->refund->getByID($refundID);
+            if($refund->status == 'pass' && !empty($this->config->refund->secondReviewer) 
+                && $this->config->refund->secondReviewer != $this->app->user->account && $this->config->refund->secondReviewer == $refund->createdBy)
+            {
+                $this->loadModel('action')->create('refund', $refundID, 'reviewed', '', '', $this->config->refund->secondReviewer);
+            }
             $this->sendmail($refundID, $actionID);
 
             $isDetail = ($refund->parent != 0) ? true : false;

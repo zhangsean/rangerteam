@@ -75,6 +75,7 @@ $lang->in->parent   = '上級科目';
 $lang->in->desc     = '描述';
 $lang->in->keywords = '關鍵詞';
 $lang->in->children = '子科目';
+$lang->in->mainBusiness = '主營業務';
 
 /* Lang items for expend. */
 $lang->out = new stdclass();
@@ -87,6 +88,7 @@ $lang->out->keywords = '關鍵詞';
 $lang->out->children = '子科目';
 $lang->out->rights   = '權限';
 $lang->out->refund   = '報銷科目';
+$lang->out->mainBusiness = '主營業務';
 
 $lang->out->refundList[1] = '是';
 $lang->out->refundList[0] = '否';

@@ -37,7 +37,7 @@ $lang->entry->position    = '显示位置';
 $lang->entry->width       = '宽';
 $lang->entry->height      = '高';
 $lang->entry->priv        = '权限';
-$lang->entry->category    = '类目';
+$lang->entry->category    = '分组';
 
 $lang->entry->chanzhi          = '蝉知';
 $lang->entry->zentao           = '禅道';
