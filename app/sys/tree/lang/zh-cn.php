@@ -12,7 +12,6 @@
 $lang->tree->common        = "类目";
 $lang->tree->add           = "添加";
 $lang->tree->edit          = "编辑";
-$lang->tree->merge         = "合并";
 $lang->tree->children      = "添加子类目";
 $lang->tree->delete        = "删除类目";
 $lang->tree->browse        = "区域设置、行业设置、收入科目、支出科目、论坛版块、博客类目、维护部门";
@@ -76,6 +75,7 @@ $lang->in->desc     = '描述';
 $lang->in->keywords = '关键词';
 $lang->in->children = '子科目';
 $lang->in->major    = '主营业务收入';
+$lang->in->merge    = '科目合并';
 
 /* Lang items for expend. */
 $lang->out = new stdclass();
@@ -89,6 +89,7 @@ $lang->out->children = '子科目';
 $lang->out->rights   = '权限';
 $lang->out->refund   = '报销科目';
 $lang->out->major    = '主营业务成本';
+$lang->out->merge    = '科目合并';
 
 $lang->out->refundList[1] = '是';
 $lang->out->refundList[0] = '否';
