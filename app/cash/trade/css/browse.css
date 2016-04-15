@@ -11,4 +11,4 @@ label.checkbox input[type='checkbox']{margin:0;}
 .side-body .tree .active{font-weight: bold;}
 .side-body .tree li{margin-right: 0; padding-right: 0;}
 .table-footer{transition: all 0.3s ease 0s;}
-.label{position: absolute; left: 320px;top: 50px;z-index: 940; font-size: 14px;}
+.label{position: absolute; left: 345px;top: 50px;z-index: 940; font-size: 14px;}
