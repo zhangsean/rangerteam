@@ -37,7 +37,7 @@
       <td><?php echo $project->end;?></td>
       <td><?php echo zget($users, $project->createdBy);?></td>
       <td><?php echo $lang->project->statusList[$project->status];?></td>
-      <td title='<?php echo $project->desc;?>'><?php echo helper::substr(strip_tags($project->desc), 20, '...');?></td>
+      <td title='<?php echo strip_tags($project->desc);?>'><?php echo helper::substr(strip_tags($project->desc), 20, '...');?></td>
       <td class='actions'>
         <?php commonModel::printLink('oa.project', 'edit', "projectID=$project->id", $lang->edit, "data-toggle='modal'");?>
         <?php commonModel::printLink('oa.project', 'member', "projectID=$project->id", $lang->project->member, "data-toggle='modal'");?>
