@@ -545,7 +545,7 @@ class treeModel extends model
             ->join('rights', ',')
             ->join('users', ',')
             ->setDefault('readonly', 0)
-            ->setDefault('mainBusiness', 0)
+            ->setDefault('major', 0)
             ->get();
 
         $category->rights = !empty($category->rights) ? ',' . trim($category->rights, ',') . ',' : '';
