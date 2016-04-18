@@ -36,19 +36,6 @@ js::set('attend', commonModel::isAvailable('attend') ? 1 : 0);
     </ul>
     <div id='apps-menu'>
       <ul class='bar-menu'></ul>
-      <?php 
-      foreach($categories as $id => $name)
-      {
-          $hue  = ($id - 820000) * 47 % 360;
-          $name = substr($name, 0, 6);
-          echo "<div id='categoryTpl{$id}' style='display:none'>";
-          echo "<button id='categorycategoryid' class='categoryButton' data-id='{$id}' data-toggle='tooltip' data-tip-class='s-menu-tooltip' data-placement='right' data-btn-type='menu' class='btn-more'>";
-          echo "<i class='icon icon-default' style='background-color: hsl($hue, 100%, 40%)'>{$name}</i></button>";
-          echo "</div>";
-          echo "<ul id='categoryMenu{$id}' class='categoryMenu dropdown-menu fade' data-id='{$id}'>";
-          echo "</ul>";
-      }
-      ?>
       <button id='moreOptionBtn' data-toggle='tooltip' data-tip-class='s-menu-tooltip' data-placement='right' data-btn-type='menu' class='btn-more' data-original-title='...'><i class='icon icon-ellipsis-h'></i></button>
       <ul id='moreOptionMenu' class='bar-menu dropdown-menu fade'>
       </ul>
@@ -151,6 +138,14 @@ js::set('attend', commonModel::isAvailable('attend') ? 1 : 0);
 <div id='noticeBox'>
   <?php echo $notice;?>
 </div>
+<div id='categoryTpl' class='hide'>
+  <div id='categoryTplcategoryid' class='category' style='display:none'>
+    <button id='categorycategoryid' class='categoryButton' data-id='categoryid'>
+      <i class='icon icon-default' style='background-color: hsl(categoryhue, 100%, 40%)'>categoryname</i>
+    </button>  
+  </div>
+  <ul id='categoryMenucategoryid' class='category categoryMenu dropdown-menu fade' data-id='categoryid'></ul>
+</div>
 <script>
 <?php $dashboardMenu = (isset($dashboard) and isset($dashboard->visible) and $dashboard->visible == 0) ? 'list' : 'all';?>
 var entries = [
@@ -217,13 +212,13 @@ foreach ($lang->index->ips as $key => $value)
 ?>
 
 <?php echo $allEntries;?>
-var categories = {};
-<?php 
+
+var categories = [];
+<?php
 foreach($categories as $id => $name)
 {
-    $name = str_replace('/', '', $name);
-    echo 'categories["' . $id. '"] = "' . $name . '";';
+    echo "categories.push({id: '$id', name: '$name'});";
 }
-;?>
+?>
 </script>
 <?php include "../../common/view/footer.html.php"; ?>

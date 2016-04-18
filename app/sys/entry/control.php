@@ -73,7 +73,7 @@ class entry extends control
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
             $locate = inlink('admin');
             if($this->post->zentao) $locate = inlink('bindUser', "id=$entryID&sessionID=$zentaoConfig->sessionID");
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate, 'entries' => $this->entry->getJSONEntries()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate, 'entries' => $this->entry->getJSONEntries(), 'categories' => $this->entry->getJSONCategories()));
         }
         $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->create;
         $this->view->key        = $this->entry->createKey();
@@ -238,7 +238,7 @@ class entry extends control
 
             $this->entry->update($code);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
-            $this->send(array('result' => 'success', 'locate' => inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
+            $this->send(array('result' => 'success', 'locate' => inlink('admin'), 'entries' => $this->entry->getJSONEntries(), 'categories' => $this->entry->getJSONCategories()));
         }
 
         if($entry->size != 'max')
@@ -331,7 +331,7 @@ class entry extends control
      */
     public function delete($code)
     {
-        if($this->entry->delete($code)) $this->send(array('result' => 'success', 'entries' => $this->entry->getJSONEntries()));
+        if($this->entry->delete($code)) $this->send(array('result' => 'success', 'entries' => $this->entry->getJSONEntries(), 'categories' => $this->entry->getJSONCategories()));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 

@@ -423,4 +423,29 @@ class entryModel extends model
         }
         return json_encode($allEntries);
     }
+
+    /**
+     * Get categories of json. 
+     * 
+     * @access public
+     * @return string 
+     */
+    public function getJSONCategories()
+    {
+        $entries = $this->getEntries();
+        $categories = array();
+        $this->loadModel('treee');
+        foreach($entries as $entry)
+        {
+            if($entry->category)
+            {
+                unset($tmpCategory);
+                $tmpCategory['id']   = $entry->category;
+                $tmpCategory['name'] = $this->dao->select('name')->from(TABLE_CATEGORY)->where('id')->eq($entry->category)->fetch('name');
+
+                $categories[] = $tmpCategory;
+            }
+        }
+        return helper::jsonEncode($categories);
+    }
 }

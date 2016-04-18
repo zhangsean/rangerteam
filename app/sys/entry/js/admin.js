@@ -4,6 +4,11 @@ $(document).ready(function()
     {   
         if(response.result == 'success')
         {   
+            if(response.categories)
+            {
+                var categories = JSON.parse(response.categories);
+                $.refreshCategoryMenu(categories);
+            }
             if(response.entries) 
             {   
                 v.entries = JSON.parse(response.entries);

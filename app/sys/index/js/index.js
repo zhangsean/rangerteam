@@ -1,5 +1,7 @@
 $(function()
 {
+    $.refreshCategoryMenu(categories);
+
     /* start ips */
     $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock, onDeleteEntry: deleteEntry, onUpdateEntryMenu: updateEntryMenu, onSortEntries: sortEntries}, config, ipsLang));
     if(v.attend)

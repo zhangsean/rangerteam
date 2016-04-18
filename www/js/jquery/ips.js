@@ -1114,7 +1114,7 @@
                 var iframe$ = window.frames[fName].$;
                 if(iframe$)
                 {
-                    iframe$.extend({refreshDesktop: $.refreshDesktop, openEntry: $.openEntry});
+                    iframe$.extend({refreshDesktop: $.refreshDesktop, openEntry: $.openEntry, refreshCategoryMenu: $.refreshCategoryMenu});
                 }
             }
             catch(e){}
@@ -1931,6 +1931,20 @@
         desktop.refreshMenuSize();
     }
 
+    function refreshCategoryMenu(categories)
+    {
+        for(var index in categories)
+        {
+            var category = categories[index];
+            var id   = category.id;
+            var name = category.name.substr(0, 6);
+            var hue  = (parseInt(id) - 820000) * 47 % 360;
+            $('#categoryTpl' + id).remove();
+            $('#categoryMenu' + id).remove();
+            $('#leftBar #apps-menu .bar-menu:first').after($('#categoryTpl').html().replace(/categoryid/g, id).replace(/categoryname/g, name).replace(/categoryhue/g, hue));
+        }
+    }
+
     /*
      * Close modal window opened in desktop
      *
@@ -1955,5 +1969,5 @@
     }
 
     /* make jquery object call the ips interface manager */
-    $.extend({ipsStart: start, closeModal: closeModal, openEntry: openEntry, getQueryString: getQueryString, refreshDesktop: refreshDesktop});
+    $.extend({ipsStart: start, closeModal: closeModal, openEntry: openEntry, getQueryString: getQueryString, refreshDesktop: refreshDesktop, refreshCategoryMenu: refreshCategoryMenu});
 }(jQuery, window, document, Math);
