@@ -205,8 +205,18 @@ class leave extends control
     public function edit($id)
     {
         $leave = $this->leave->getById($id);
+
         /* check privilage. */
-        if($leave->createdBy != $this->app->user->account) 
+        if(!empty($this->config->attend->reviewedBy)) $reviewedBy = $this->config->attend->reviewedBy;
+        if(empty($this->config->attend->reviewedBy))
+        {
+            $createdUser = $this->loadModel('user')->getByAccount($leave->createdBy);
+            $dept = $this->loadModel('tree')->getByID($createdUser->dept);
+            $reviewedBy = empty($dept) ? '' : trim($dept->moderators, ',');
+        }
+
+
+        if($leave->createdBy != $this->app->user->account and $this->app->user->account != $reviewedBy) 
         {
             $locate = helper::safe64Encode(helper::createLink('oa.leave', 'browse'));
             $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
