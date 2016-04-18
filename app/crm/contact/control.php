@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-class contact1 extends control
+class contact extends control
 {
     /** 
      * The index page, locate to the browse page.
