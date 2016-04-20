@@ -434,7 +434,7 @@ class entryModel extends model
     {
         $entries = $this->getEntries();
         $categories = array();
-        $this->loadModel('treee');
+        $this->loadModel('tree');
         foreach($entries as $entry)
         {
             if($entry->category)
