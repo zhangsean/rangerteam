@@ -1287,9 +1287,10 @@ class commonModel extends model
      */
     public static function http($url, $data = null)
     {
+        global $lang;
         if(!extension_loaded('curl'))
         {
-            return $this->lang->noCurlExt;
+            return $lang->error->noCurlExt;
         }
 
         $ci = curl_init();
