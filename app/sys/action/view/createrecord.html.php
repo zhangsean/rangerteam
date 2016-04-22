@@ -97,7 +97,9 @@
       </td>
     </tr>
   </table>
-  <div id='actionBox'></div>
+  <div id='actionBox'>
+    <?php echo $this->fetch('action', 'history', "objectType={$objectType}&objectID={$objectID}&action=record&from=createRecord");?>
+  </div>
 </form>
 </div>
 <div class='errorMessage hide'>
