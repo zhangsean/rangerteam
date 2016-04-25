@@ -102,7 +102,7 @@
               </td>
               <td class='text-left'><?php echo zget($depositorList, $trade->depositor, ' ');?></td>
               <td><?php echo $lang->trade->typeList[$trade->type];?></td>
-              <td class='text-left' title="<?php echo zget($customerList, $trade->trader, '');?>"><?php if($trade->trader) echo zget($customerList, $trade->trader);?></td>
+              <td class='text-left' title="<?php echo zget($customerList, $trade->trader, '');?>"><?php if($trade->trader) echo zget($customerList, $trade->trader, ' ');?></td>
               <td class='text-right'><?php echo zget($currencySign, $trade->currency) . formatMoney($trade->money);?></td>
               <td title='<?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?>'><?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?></td>
               <td><?php echo zget($productList, $trade->product, ' ') . $lang->slash . zget($categories, $trade->category, ' ');?></td>

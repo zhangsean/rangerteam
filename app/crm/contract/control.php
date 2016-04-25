@@ -300,7 +300,7 @@ class contract extends control
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->categories    = $this->loadModel('tree')->getOptionMenu('in', 0);
         $this->view->productList   = array(0 => '') + $this->dao->select('id, name')->from(TABLE_PRODUCT)->where('id')->in($order->product)->fetchPairs();
-        $this->view->product       = strpos(trim($order->product, ','), ',') === false ? $order->product : '';
+        $this->view->product       = isset($order->product) && strpos(trim($order->product, ','), ',') === false ? $order->product : '';
         $this->view->dept          = $dept;
         $this->display();
     }
