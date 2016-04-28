@@ -76,7 +76,7 @@ $lang->trip->menu->company    = 'Company|trip|company|';
 
 $lang->refund = new stdclass();
 $lang->refund->menu = new stdclass();
-$lang->refund->menu->personal = array('link' => 'My|refund|personal|', 'alias' = 'create, edit');
+$lang->refund->menu->personal = array('link' => 'My|refund|personal|', 'alias' => 'create, edit');
 $lang->refund->menu->review   = 'Waiting For Review|refund|browsereview|';
 $lang->refund->menu->todo     = 'Waiting For Reimbursement|refund|todo|';
 $lang->refund->menu->company  = 'All|refund|company|';
