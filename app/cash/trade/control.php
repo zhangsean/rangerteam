@@ -558,7 +558,12 @@ class trade extends control
             unset($data['fee']);
             $dataList[$i] = $data;
 
-            $existTrade = $this->dao->select('*')->from(TABLE_TRADE)->where('money')->eq($data['money'])->andWhere('date')->eq($data['date'])->fetch();
+            $existTrade = $this->dao->select('*')->from(TABLE_TRADE)
+                ->where('money')->eq($data['money'])
+                ->andWhere('date')->eq($data['date'])
+                ->andWhere('type')->eq($data['type'])
+                ->andWhere('category')->eq($data['category'])
+                ->fetch();
             if($existTrade) $existTrades[$i] = $existTrade;
 
             if($schema->fee and $fee)
