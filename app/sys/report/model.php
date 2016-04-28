@@ -151,7 +151,8 @@ class reportModel extends model
                     foreach($productList as $id => $product)
                     {
                         $count = $this->dao->select("$func($field) as value")->from($tableName)
-                            ->where('product')->like("%,$id,%")
+                            ->where('deleted')->eq('0')
+                            ->andWhere('product')->like("%,$id,%")
                             ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
                             ->fetch('value');
 
@@ -166,7 +167,8 @@ class reportModel extends model
                 foreach($list as $key => $value)
                 {
                     $count = $this->dao->select("$func($field) as value")->from($tableName)
-                        ->where($groupBy)->like("%,$key,%")
+                        ->where('deleted')->eq('0')
+                        ->andWhere($groupBy)->like("%,$key,%")
                         ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
                         ->fetch('value');
 
@@ -180,7 +182,8 @@ class reportModel extends model
         else
         {
             $datas = $this->dao->select("$groupBy as name, $func($field) as value")->from($tableName)
-                ->beginIf($currency != '')->where('currency')->eq($currency)->fi()
+                ->where('deleted')->eq('0')
+                ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
                 ->groupBy($groupBy)
                 ->orderBy('value_desc')
                 ->fetchAll('name');
