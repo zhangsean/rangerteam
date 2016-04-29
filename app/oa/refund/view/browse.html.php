@@ -71,7 +71,6 @@
         <?php endif;?>
         <?php echo html::a($this->createLink('refund', 'view',   "refundID={$refund->id}&mode={$mode}"), $lang->view, "")?>
         <?php if($mode == 'todo') echo html::a($this->createLink('refund', 'reimburse', "refundID={$refund->id}"), $lang->refund->common, "class='refund'");?>
-        <?php if($mode == 'todo') echo html::a($this->createLink('refund', 'createtrade', "refundID={$refund->id}"), $lang->refund->common, "class='createTrade hide'");?>
       </td>
     </tr>
     <?php endforeach;?>
