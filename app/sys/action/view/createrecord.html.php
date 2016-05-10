@@ -24,26 +24,28 @@
     <tr>
       <th><?php echo $lang->action->record->contact;?></th>
       <td>
-        <div class='input-group'>
-          <select id='contact' name='contact' class='form-control chosen'>
-            <option></option>
-            <?php foreach($contacts as $contact):?>
-            <?php 
-                $phone  = $contact->phone;
-                $mobile = $contact->mobile;
-                $phone  = empty($phone) ? $mobile : (empty($mobile) ? $phone : $phone . $lang->slash . $mobile);
-            ?>
-            <option value='<?php echo $contact->id;?>' data-phone='<?php echo $phone;?>' data-qq='<?php echo $contact->qq;?>' data-email='<?php echo $contact->email;?>'><?php echo $contact->realname;?></option>
-            <?php endforeach;?>
-          </select>
-          <?php echo html::input('realname', '', "class='form-control' style='display:none'");?>
-          <?php if($objectType == 'customer'):?>
-          <span class='input-group-addon'>
-            <?php echo html::checkbox('createContact', array(1 => $lang->action->createContact), '', "class='checkbox-inline'");?>
-            <?php echo html::checkbox('objectType', array('order' => $lang->action->record->order, 'contract' => $lang->action->record->contract), '', "class='checkbox-inline'");?>
-          </span>
-          <?php endif;?>
-        </div>
+            <div class='input-group'>
+              <select id='contact' name='contact' class='form-control chosen'>
+                <option></option>
+                <?php foreach($contacts as $contact):?>
+                <?php 
+                    $phone  = $contact->phone;
+                    $mobile = $contact->mobile;
+                    $phone  = empty($phone) ? $mobile : (empty($mobile) ? $phone : $phone . $lang->slash . $mobile);
+                ?>
+                <option value='<?php echo $contact->id;?>' data-phone='<?php echo $phone;?>' data-qq='<?php echo $contact->qq;?>' data-email='<?php echo $contact->email;?>'><?php echo $contact->realname;?></option>
+                <?php endforeach;?>
+              </select>
+              <?php echo html::input('realname', '', "class='form-control' style='display:none'");?>
+              <?php if($objectType == 'customer'):?>
+              <span class='input-group-addon'>
+                <?php echo html::checkbox('createContact', array(1 => $lang->action->createContact), '', "class='checkbox-inline'");?>
+                <?php echo html::checkbox('objectType', array('order' => $lang->action->record->order, 'contract' => $lang->action->record->contract), '', "class='checkbox-inline'");?>
+              </span>
+              <?php endif;?>
+              <span class='input-group-addon fix-border'><?php echo $lang->action->record->date;?></span>
+              <?php echo html::input('date', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?>
+            </div>
       </td>
     </tr>
     <tr id='phoneTR' class='hide'>
@@ -67,14 +69,12 @@
     </tr>
     <?php endif;?>
     <tr>
-      <th class='w-70px'><?php echo $lang->action->record->date;?></th>
-      <td><?php echo html::input('date', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?></td>
-    </tr> 
-    <tr>
-      <th><?php echo $lang->action->record->nextDate;?></th>
+      <th class='w-70px'><?php echo $lang->action->record->nextDate;?></th>
       <td>
-        <div><?php echo html::input('nextDate', '', "class='form-control form-date'");?></div>
-        <div>&nbsp;&nbsp;<?php echo html::radio('delta', $lang->action->nextContactList , '', "onclick='computeNextDate(this.value)'");?></div>
+        <div class='row'>
+        <div class='col-sm-5'><?php echo html::input('nextDate', '', "class='form-control form-date'");?></div>
+        <div class='col-sm-7'><?php echo html::radio('delta', $lang->action->nextContactList , '', "onclick='computeNextDate(this.value)'");?></div>
+        </div>
       </td>
     </tr>
     <tr>

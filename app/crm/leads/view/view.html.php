@@ -27,7 +27,7 @@
     <div class='page-actions'>
       <?php
       echo "<div class='btn-group'>";
-      commonModel::printLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-icon='comment-alt' class='btn'");
+      commonModel::printLink('action', 'createRecord', "objectType=contact&objectID={$contact->id}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-width='860' data-icon='comment-alt' class='btn'");
       commonModel::printLink('address', 'browse', "objectType=contact&objectID=$contact->id", $lang->contact->address, "data-toggle='modal' class='btn'");
       commonModel::printLink('leads', 'edit', "contactID=$contact->id", $lang->edit, "class='btn'");
       echo "</div>";

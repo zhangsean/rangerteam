@@ -495,7 +495,7 @@ class orderModel extends model
     {
         $menu = '';
         $menu .= commonModel::printLink('crm.order', 'view', "orderID=$order->id", $this->lang->view, '', false);
-        $menu .= commonModel::printLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}", $this->lang->order->record, "data-toggle='modal' data-type='iframe'", false);
+        $menu .= commonModel::printLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}", $this->lang->order->record, "data-toggle='modal' data-type='iframe' data-width='860' data-icon='comment-alt'", false);
 
         if($order->status == 'normal') $menu .= commonModel::printLink('crm.contract', 'create', "customerID={$order->customer}&orderID={$order->id}", $this->lang->order->sign, '', false);
         if($order->status != 'normal') $menu .= html::a('###', $this->lang->order->sign, "disabled='disabled' class='disabled'");

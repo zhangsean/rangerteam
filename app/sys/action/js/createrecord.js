@@ -52,12 +52,12 @@ $(document).ready(function()
         {   
             $(this).parents('.input-group').find('select').hide();
             $('#contact_chosen').hide();
-            $(this).parents('.input-group').find('input[type=text]').show().focus();
+            $(this).parents('.input-group').find('input[id=realname]').show().focus();
         }   
         else
         {   
             $('#contact_chosen').show();
-            $(this).parents('.input-group').find('input[type=text]').hide();
+            $(this).parents('.input-group').find('input[id=realname]').hide();
         }   
     });
 
