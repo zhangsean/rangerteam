@@ -345,11 +345,9 @@ END:VCARD";
     {
         if($_POST)
         {
-            $fieldsKey = $this->config->contact->templateFields;
-
             $fields = array();
             $rows   = array();
-            foreach($fieldsKey as $key)
+            foreach($this->config->contact->templateFields as $key)
             {
                 $fields[$key] = $this->lang->contact->$key;
                 for($i = 0; $i < $this->post->num; $i++) $rows[$i][$key] = '';
@@ -359,13 +357,17 @@ END:VCARD";
             $data->fields      = $fields;
             $data->kind        = 'contact';
             $data->rows        = $rows;
-            $data->fileName    = 'contactTemplate';
+            $data->title       = $this->lang->contact->template;
             $data->customWidth = $this->config->contact->excelCustomWidth;
             $data->genderList  = array_values($this->lang->contact->genderList);
             $data->SysDataList = $this->config->contact->listFields;
             $data->listStyle   = $this->config->contact->listFields;
 
-            $this->app->loadClass('export2excel')->export($data, $this->post->fileType);
+            $excelData = new stdclass();
+            $excelData->dataList[] = $data;
+            $excelData->fileName   = $this->lang->contact->template;
+
+            $this->app->loadClass('export2excel')->export($excelData, $this->post->fileType);
         }
 
         $this->display('file', 'exportTemplate');

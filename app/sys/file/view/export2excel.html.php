@@ -10,7 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 ?>
-<?php include '../../../sys/common/view/header.lite.html.php';?>
+<?php include $this->app->getBasePath() . '/app/sys/common/view/header.lite.html.php';?>
 <script>
 function setDownloading()
 {
@@ -47,4 +47,4 @@ function closeWindow()
   </table>
 </form>
 <iframe id='hiddenwin' name='hiddenwin' class='hidden'></iframe>
-<?php include '../../../sys/common/view/footer.html.php';?>
+<?php include $this->app->getBasePath() . '/app/sys/common/view/footer.html.php';?>

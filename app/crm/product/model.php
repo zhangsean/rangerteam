@@ -31,7 +31,7 @@ class productModel extends model
      * @access public
      * @return array
      */
-    public function getList($mode, $line = '', $orderBy = 'id_desc', $pager = null)
+    public function getList($mode = '', $line = '', $orderBy = 'id_desc', $pager = null)
     {
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 

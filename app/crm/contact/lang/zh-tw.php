@@ -78,6 +78,7 @@ $lang->contact->noFile       = '沒有檔案';
 $lang->contact->importResult = '%s條數據導入成功，%s條數據導入失敗，失敗數據如下：';
 $lang->contact->failReason   = '原因';
 $lang->contact->showImport   = '查看已導入聯繫人';
+$lang->contact->template     = '聯繫人模板';
 
 $lang->contact->genderList['m'] = '男';
 $lang->contact->genderList['f'] = '女';

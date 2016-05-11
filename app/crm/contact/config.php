@@ -63,7 +63,7 @@ $config->excel->width->content = 100;
 
 $config->excel->titleFields  = array();
 $config->excel->centerFields = array();
-$config->excel->dateField    = array('birthday');
+$config->excel->dateFields   = array('birthday');
 
 $config->excel->freeze = new stdclass();
 $config->excel->freeze->contact = 'email';
