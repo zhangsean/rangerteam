@@ -39,6 +39,7 @@ $lang->trade->createdDate = '创建时间';
 $lang->trade->editedBy    = '由谁编辑';
 $lang->trade->editedDate  = '编辑时间';
 $lang->trade->month       = '月份';
+$lang->trade->uploadFile  = '上传附件';
 
 $lang->trade->create      = '记账';
 $lang->trade->in          = '收入';
@@ -50,6 +51,7 @@ $lang->trade->createOut   = '记支出';
 $lang->trade->transfer    = '记转账';
 $lang->trade->edit        = '编辑账目';
 $lang->trade->detail      = '明细';
+$lang->trade->view        = '详情';
 $lang->trade->browse      = '账目列表';
 $lang->trade->delete      = '删除记录';
 $lang->trade->batchCreate = '批量记账';

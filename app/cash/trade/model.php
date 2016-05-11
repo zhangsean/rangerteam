@@ -20,7 +20,9 @@ class tradeModel extends model
      */
     public function getByID($id)
     {
-        return $this->dao->select('*')->from(TABLE_TRADE)->where('id')->eq($id)->fetch();
+        $trade = $this->dao->select('*')->from(TABLE_TRADE)->where('id')->eq($id)->fetch();
+        if($trade) $trade->files = $this->loadModel('file')->getByObject('trade', $id);
+        return $trade;
     }
 
     /** 
@@ -221,12 +223,13 @@ class tradeModel extends model
         if(!empty($depositor)) $trade->currency = $depositor->currency;
 
         $this->dao->insert(TABLE_TRADE)
-            ->data($trade, $skip = 'createTrader,traderName')
+            ->data($trade, $skip = 'createTrader,traderName,files,labels')
             ->autoCheck()
             ->batchCheck($this->config->trade->require->create, 'notempty')
             ->exec();
 
         $tradeID = $this->dao->lastInsertID();
+        if(!dao::isError()) $this->loadModel('file')->saveUpload('trade', $tradeID);
 
         if($this->post->createTrader and $type == 'out')
         {
@@ -415,7 +418,7 @@ class tradeModel extends model
             ->get();
 
         $this->dao->update(TABLE_TRADE)
-            ->data($trade, $skip = 'createTrader,traderName')
+            ->data($trade, $skip = 'createTrader,traderName,files,labels')
             ->autoCheck()
             ->batchCheck($this->config->trade->require->edit, 'notempty')
             ->where('id')->eq($tradeID)->exec();
@@ -435,7 +438,11 @@ class tradeModel extends model
             $this->dao->update(TABLE_TRADE)->set('trader')->eq($traderID)->where('id')->eq($tradeID)->exec();
         }
 
-        if(!dao::isError()) return commonModel::createChanges($oldTrade, $trade);
+        if(!dao::isError())
+        {
+            $this->loadModel('file')->saveUpload('trade', $tradeID);
+            return commonModel::createChanges($oldTrade, $trade);
+        }
 
         return false;
     }

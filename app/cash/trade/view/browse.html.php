@@ -96,7 +96,7 @@
           </thead>
           <tbody>
             <?php foreach($trades as $trade):?>
-            <tr class='text-center'>
+            <tr class='text-center' data-url='<?php echo inlink('view', "tradeID=$trade->id"); ?>'>
               <td class='text-left'>
               <label class='checkbox-inline'><input type='checkbox' name='tradeIDList[]' value='<?php echo $trade->id;?>'/><?php echo formatTime($trade->date, DT_DATE1);?></label>
               </td>

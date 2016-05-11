@@ -101,7 +101,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->trade->desc;?></th>
-          <td><?php echo html::textarea('desc',$trade->desc, "class='form-control' rows='3'");?></td>
+          <td><?php echo html::textarea('desc', $trade->desc, "class='form-control' rows='3'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->trade->uploadFile;?></th>
+          <td><?php echo $this->fetch('file', 'buildForm');?></td>
         </tr>
         <tr>
           <th></th>

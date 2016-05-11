@@ -111,6 +111,10 @@
           <td><?php echo html::textarea('desc','', "class='form-control' rows='3'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->trade->uploadFile;?></th>
+          <td><?php echo $this->fetch('file', 'buildForm');?></td>
+        </tr>
+        <tr>
           <th></th>
           <td><?php echo html::submitButton() . '&nbsp;&nbsp;' . html::backButton();?></td>
         </tr>

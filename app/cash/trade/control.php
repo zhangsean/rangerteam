@@ -238,6 +238,34 @@ class trade extends control
     }
 
     /**
+     * View a trade.
+     * 
+     * @param  int    $tradeID 
+     * @access public
+     * @return void
+     */
+    public function view($tradeID)
+    {
+        $trade = $this->trade->getByID($tradeID);
+
+        $this->view->trade         = $trade;
+        $this->view->title         = $this->lang->trade->view;
+        $this->view->depositorList = $this->loadModel('depositor')->getPairs();
+        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider');
+        $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
+        $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
+        $this->view->contractList  = array('' => '') + $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
+        $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
+        $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
+        $this->view->preAndNext    = $this->loadModel('common')->getPreAndNextObject('trade', $tradeID);
+        $this->view->currencySign  = $this->loadModel('common', 'sys')->getCurrencySign();
+        if($trade->type == 'out') $this->view->categories = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0);
+        if($trade->type == 'in')  $this->view->categories = $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0);
+        $this->display();
+    }
+
+    /**
      * Transfer.
      * 
      * @access public
