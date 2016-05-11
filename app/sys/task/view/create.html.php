@@ -24,10 +24,14 @@
             <tr>
               <th class='w-80px'><?php echo $lang->task->name?></th>
               <td class='w-p50'>
-                <div class='input-group'>
-                  <?php echo html::input('name', '', "class='form-control'");?>
-                  <span class='input-group-addon fix-border'><?php echo $lang->task->pri;?></span>
-                  <?php echo html::select('pri', $lang->task->priList, '', "class='form-control'")?>
+                <div class='row'>
+                  <div class='col-md-9'><?php echo html::input('name', '', "class='form-control'");?></div>
+                  <div class='col-md-3 pd-0'>
+                    <div class='input-group'>
+                      <span class='input-group-addon fix-border'><?php echo $lang->task->pri;?></span>
+                      <?php echo html::select('pri', $lang->task->priList, '', "class='form-control'")?>
+                    </div>
+                  </div>
                 </div>
               </td><td></td>
             </tr>
