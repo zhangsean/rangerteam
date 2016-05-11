@@ -178,11 +178,10 @@ class export2Xls extends model
                         {
                             $excelSheet->setCellValueExplicit($this->excelKey[$key] . $i, $value, PHPExcel_Cell_DataType::TYPE_STRING);
                         }
+                        /* Add comments to cell, Excel5 don't work, must be Excel2007. */
                         if(isset($this->rawExcelData->comments[$num][$key])) 
                         {
-                            $excelSheet->getComment($this->excelKey[$key] . $i)->setAuthor('Ranzhi'); 
-                            $excelSheet->getComment($this->excelKey[$key] . $i)->getText()->createTextRun('AAA'); 
-                            $excelSheet->getComment($this->excelKey[$key] . $i)->getText()->createText('AAA'); 
+                            $excelSheet->getComment($this->excelKey[$key] . $i)->getText()->createTextRun($this->rawExcelData->comments[$num][$key]);
                         }
                     }
 
