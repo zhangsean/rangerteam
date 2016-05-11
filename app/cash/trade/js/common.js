@@ -29,23 +29,23 @@ $(document).ready(function()
     {
         if(v.mode == 'in')
         {
-            $('#menu li').removeClass('active').find("[href*='=" + v.mode + "']").not('[href*=mode\\=inveset]').parent().addClass('active');
+            $('#mainNavbar li').removeClass('active').find("[href*='=" + v.mode + "']").not('[href*=mode\\=inveset]').parent().addClass('active');
         }
         else
         {
-            $('#menu li').removeClass('active').find("[href*='=" + v.mode + "']").parent().addClass('active');
+            $('#mainNavbar li').removeClass('active').find("[href*='=" + v.mode + "']").parent().addClass('active');
         }
     }
     else
     {
-        $('#menu li').removeClass('active');
+        $('#mainNavbar li').removeClass('active');
         if(v.mode == 'in')
         {
-            $('#menu li').find("[href*='trade-browse-in.html']").parent().addClass('active');
+            $('#mainNavbar li').find("[href*='trade-browse-in.html']").parent().addClass('active');
         }
         else
         {
-            $('#menu li').find('[href*=' + v.mode + ']').parent().addClass('active');
+            $('#mainNavbar li').find('[href*=' + v.mode + ']').parent().addClass('active');
         }
     }
 })

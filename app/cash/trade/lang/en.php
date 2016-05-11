@@ -39,6 +39,7 @@ $lang->trade->createdDate = 'Created Date';
 $lang->trade->editedBy    = 'Edited By';
 $lang->trade->editedDate  = 'Edited Date';
 $lang->trade->month       = 'Month';
+$lang->trade->uploadFile  = 'Upload File';
 
 $lang->trade->create      = 'Create Trade';
 $lang->trade->in          = 'Income';
@@ -50,6 +51,7 @@ $lang->trade->createOut   = 'Expend';
 $lang->trade->transfer    = 'Transfer';
 $lang->trade->edit        = 'Edit Trade';
 $lang->trade->detail      = 'Detail';
+$lang->trade->view        = 'View';
 $lang->trade->browse      = 'Bills';
 $lang->trade->delete      = 'Delete Trade';
 $lang->trade->batchCreate = 'Batch Create';

@@ -14,7 +14,12 @@ $lang->app->name = 'CASH';
 
 $lang->menu->cash = new stdclass();
 $lang->menu->cash->dashboard = 'Home|dashboard|index|';
-$lang->menu->cash->trade     = 'Bills|trade|index|';
+$lang->menu->cash->all       = 'Bills|trade|browse|mode=all';
+$lang->menu->cash->in        = 'Income|trade|browse|mode=in';
+$lang->menu->cash->out       = 'Expenditure|trade|browse|mode=out';
+$lang->menu->cash->transfer  = 'Transfer|trade|browse|mode=transfer';
+$lang->menu->cash->inveset   = 'Inveset|trade|browse|mode=inveset';
+$lang->menu->cash->annual    = 'Annual Report|trade|report';
 $lang->menu->cash->check     = 'Checking|depositor|check|';
 $lang->menu->cash->depositor = 'Depositor|depositor|index|';
 $lang->menu->cash->provider  = 'Provider|provider|index|';
@@ -27,12 +32,6 @@ $lang->depositor = new stdclass();
 /* Menu of trade module. */
 $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
-$lang->trade->menu->browse   = array('link' => 'Bills|trade|browse|mode=all');
-$lang->trade->menu->in       = array('link' => 'Income|trade|browse|mode=in');
-$lang->trade->menu->out      = array('link' => 'Expenditure|trade|browse|mode=out');
-$lang->trade->menu->transfer = array('link' => 'Transfer|trade|browse|mode=transfer');
-$lang->trade->menu->inveset  = array('link' => 'Inveset|trade|browse|mode=inveset');
-$lang->trade->menu->annual   = array('link' => 'Annual Report|trade|report');
 
 /* Menu of trade module. */
 $lang->provider = new stdclass();
