@@ -32,11 +32,7 @@
       <div class='dropdown'>
         <a href='###' data-target='#' data-toggle='dropdown' role='button' id='dLabel'><?php echo $lang->actions;?><span class='caret'></span></a>
         <ul aria-labelledby='dropdownMenu1' role='menu' class='dropdown-menu'>
-          <li><?php echo $recordEstimateDisabled ? html::a('###', $lang->task->recordEstimate, "class='disabled'") : html::a($this->createLink('oa.task', 'recordestimate', "taskID=$id"), $lang->task->recordEstimate, "data-toggle='modal'");?></li>
-          <?php if(!$isMulti):?>
-          <li><?php echo $startDisabled ? html::a('###', $lang->start, "class='disabled'") : html::a($this->createLink('oa.task', 'start', "taskID=$id"), $lang->start, "data-toggle='modal'");?></li>
-          <?php endif;?>
-          <li><?php echo $finishDisabled ? html::a('###', $lang->finish, "class='disabled'") : html::a($this->createLink('oa.task', 'finish', "taskID=$id"), $lang->finish, "data-toggle='modal'");?></li>
+          <?php $this->task->buildOperateMenu($task, '', 'block');?>
         </ul>
       </div>
     </td>

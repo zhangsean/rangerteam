@@ -1021,17 +1021,23 @@ class taskModel extends model
 
         $disabled = (!$isParent and $canEdit and self::isClickable($task, 'recordEstimate')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
+        $menu    .= $type == 'block' ? ($disabled ? "<li class='disabled'>" : '<li>') : '';
         $menu    .= $disabled ? html::a('###', $this->lang->task->recordEstimate, $misc) : commonModel::printLink('oa.task', 'recordEstimate', "taskID=$task->id", $this->lang->task->recordEstimate, $misc, false);
+        $menu    .= $type == 'block' ? '</li>' : '';
 
         $disabled = ($canEdit and self::isClickable($task, 'assignto')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
+        $menu    .= $type == 'block' ? ($disabled ? "<li class='disabled'>" : '<li>') : '';
         $menu    .= $disabled ? html::a('###', $isMulti ? $this->lang->task->transmit : $this->lang->assign, "$misc") : commonModel::printLink('oa.task', 'assignto', "taskID=$task->id", $isMulti ? $this->lang->task->transmit : $this->lang->assign, $misc, false);
+        $menu    .= $type == 'block' ? '</li>' : '';
 
         if(!$isMulti)
         {
             $disabled = (!$isParent and $canEdit and self::isClickable($task, 'start')) ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
+            $menu    .= $type == 'block' ? ($disabled ? "<li class='disabled'>" : '<li>') : '';
             $menu    .= $disabled ? html::a('###', $this->lang->start, $misc) : commonModel::printLink('oa.task', 'start', "taskID=$task->id", $this->lang->start, $misc, false);
+            $menu    .= $type == 'block' ? '</li>' : '';
         }
 
         if($type == 'view')
@@ -1043,7 +1049,9 @@ class taskModel extends model
 
         $disabled = (!$isParent and $canEdit and self::isClickable($task, 'finish')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
+        $menu    .= $type == 'block' ? ($disabled ? "<li class='disabled'>" : '<li>') : '';
         $menu    .= $disabled ? html::a('###', $isMulti ? $this->lang->task->end : $this->lang->finish, $misc) : commonModel::printLink('oa.task', 'finish', "taskID=$task->id", $isMulti ? $this->lang->task->end : $this->lang->finish, $misc, false);
+        $menu    .= $type == 'block' ? '</li>' : '';
 
         if($type == 'view')
         {
@@ -1060,18 +1068,24 @@ class taskModel extends model
 
         $disabled = ($canEdit and self::isClickable($task, 'close')) ? '' : 'disabled';
         $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class'";
+        $menu    .= $type == 'block' ? ($disabled ? "<li class='disabled'>" : '<li>') : '';
         $menu    .= $disabled ? html::a('###', $this->lang->close, $misc) : commonModel::printLink('oa.task', 'close', "taskID=$task->id", $this->lang->close, $misc, false);
+        $menu    .= $type == 'block' ? '</li>' : '';
 
         if($type == 'view') $menu .= "</div><div class='btn-group'>";
         $disabled = $canEdit ? '' : 'disabled';
+        $menu    .= $type == 'block' ? ($disabled ? "<li class='disabled'>" : '<li>') : '';
         $menu    .= $disabled ? html::a('###', $this->lang->edit, "class='disabled $class' disabled='disabled'") : commonModel::printLink('oa.task', 'edit', "taskID=$task->id", $this->lang->edit, "class='$class'", false);
+        $menu    .= $type == 'block' ? '</li>' : '';
         if($type == 'view') $menu .= $disabled ? html::a('###', $this->lang->comment, "class='disabled $class' disabled='disabled'") : html::a('#commentBox', $this->lang->comment, "class='$class' onclick=setComment()");
 
         if($task->parent == 0 and !$isMulti)
         {
             $disabled = ($canEdit and self::isClickable($task, 'batchCreate')) ? '' : 'disabled';
             $misc     = $disabled ? "class='$disabled $class'" : "data-toggle='modal' class='$class' data-width='80%'";
+            $menu    .= $type == 'block' ? ($disabled ? "<li class='disabled'>" : '<li>') : '';
             $menu    .= $disabled ? html::a('###', $this->lang->task->children, $misc) : commonModel::printLink('oa.task', 'batchCreate', "projectID=$task->project&taskID=$task->id", $this->lang->task->children, $misc, false);
+            $menu    .= $type == 'block' ? '</li>' : '';
         }
         if($type == 'view') $menu .= "</div>";
         if($print) echo $menu;
