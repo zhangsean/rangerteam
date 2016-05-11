@@ -61,6 +61,7 @@ $lang->trade->import      = '导入';
 $lang->trade->export      = '导出';
 $lang->trade->showImport  = '导入确认';
 $lang->trade->fullYear    = '全年';
+$lang->trade->quarter     = '季度';
 
 $lang->trade->report = new stdclass();
 $lang->trade->report->common = '报表'; 
