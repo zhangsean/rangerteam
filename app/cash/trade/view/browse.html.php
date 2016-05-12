@@ -22,7 +22,7 @@
     <?php if(count($tradeYears) == 1):?>
     <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$year", $year . $lang->year);?></button>
     <?php else:?>
-    <?php echo html::a('#', $year . $lang->year . "<span class='caret'></span>", "class='dropdown-toggle' data-toggle='dropdown'");?>
+    <?php echo html::a('#', ($year ? $year : $currentYear) . $lang->year . "<span class='caret'></span>", "class='dropdown-toggle' data-toggle='dropdown'");?>
     <ul aria-labelledby="dropdownMenu1" role="menu" class="dropdown-menu">
       <?php foreach($tradeYears as $tradeYear):?>
       <li><?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear", $tradeYear);?></li>
@@ -33,7 +33,7 @@
 </li>
 <li class='month-menu'>
   <div class='dropdown'>
-    <?php echo html::a('#', strpos($date, 'Q') !== false ? $lang->trade->quarterList[substr($date, 4, 2)] : (strlen($date) == '6' ? $lang->trade->monthList[substr($date, 4, 2)] : $lang->trade->month) . "<span class='caret'></span>", "class='dropdown-toggle' data-toggle='dropdown'");?>
+    <?php echo html::a('#', (strpos($date, 'Q') !== false ? $lang->trade->quarterList[substr($date, 4, 2)] : (strlen($date) == '6' ? $lang->trade->monthList[substr($date, 4, 2)] : $lang->trade->month)) . "<span class='caret'></span>", "class='dropdown-toggle' data-toggle='dropdown'");?>
     <ul aria-labelledby="dropdownMenu1" role="menu" class="dropdown-menu">
       <?php foreach($tradeQuarters[$year] as $quarter):?>
       <li class='dropdown-submenu'>
