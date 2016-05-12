@@ -334,7 +334,7 @@ class refundModel extends model
         {
             $status = 'pass';
             $data->money = $this->post->money;
-            if(!empty($this->config->refund->secondReviewer))
+            if(!empty($this->config->refund->secondReviewer) and isset($this->config->refund->money) and $data->money > $this->config->refund->money)
             {
                 $status = 'doing';
                 if($this->config->refund->secondReviewer == $account) $status = 'pass';
@@ -348,7 +348,7 @@ class refundModel extends model
             $data->firstReviewer   = $account;
             $data->firstReviewDate = $now;
 
-            if($status == 'pass' && !empty($this->config->refund->secondReviewer))
+            if($status == 'pass' && !empty($this->config->refund->secondReviewer) and isset($this->config->refund->money) and $data->money > $this->config->refund->money)
             {
                 if($this->config->refund->secondReviewer == $account) $data->secondReviewer = $account;
                 if($this->config->refund->secondReviewer == $refund->createdBy) $data->secondReviewer = $refund->createdBy;

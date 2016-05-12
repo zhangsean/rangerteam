@@ -159,7 +159,7 @@ class refund extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Ym");
+        if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Y");
         $currentYear  = substr($date, 0, 4);
         $currentMonth = strlen($date) == 6 ? substr($date, 4, 2) : '';
         $currentDate  = $currentYear . '-' . $currentMonth;
@@ -247,7 +247,7 @@ class refund extends control
      */
     public function browseReview($date = '')
     {
-        if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Ym");
+        if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Y");
         $currentYear  = substr($date, 0, 4);
         $currentMonth = strlen($date) == 6 ? substr($date, 4, 2) : '';
         $currentDate  = $currentYear . '-' . $currentMonth;
@@ -462,6 +462,25 @@ class refund extends control
 
         $this->view->title = $this->lang->refund->setDepositor;
         $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
+        $this->display();
+    }
+
+    /**
+     * Set money for review of refund.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setMoney()
+    {
+        if($_POST)
+        {
+            $this->loadModel('setting')->setItem('system.oa.refund.money', $this->post->money);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->view->title = $this->lang->refund->money;
         $this->display();
     }
 

@@ -18,6 +18,7 @@
         <li><?php commonModel::printLink('refund', 'settings', '', "{$lang->refund->reviewer}");?></li>
         <li><?php commonModel::printLink('refund', 'setcategory', '', "{$lang->refund->setCategory}");?></li>
         <li><?php commonModel::printLink('refund', 'setdepositor', '', "{$lang->refund->setDepositor}");?></li>
+        <li><?php commonModel::printLink('refund', 'setmoney', '', "{$lang->refund->money}");?></li>
       </ul>
     </nav>
   </div>
