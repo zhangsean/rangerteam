@@ -39,7 +39,7 @@ class refundModel extends model
      * @access public
      * @return array
      */
-    public function getList($mode = 'company', $deptID = '', $status = '', $createdBy = '', $orderBy = 'id_desc', $pager = null)
+    public function getList($mode = 'company', $date = '', $deptID = '', $status = '', $createdBy = '', $orderBy = 'id_desc', $pager = null)
     {
         $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
         $refunds = $this->dao->select('*')->from(TABLE_REFUND)
@@ -48,6 +48,7 @@ class refundModel extends model
             ->beginIf($status != '')->andWhere('status')->in($status)->fi()
             ->beginIf($createdBy != '')->andWhere('createdBy')->in($createdBy)->fi()
             ->beginIf($mode != 'personal')->andWhere('status')->ne('draft')->fi()
+            ->beginIf($date != '')->andWhere('date')->like("$date%")->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
@@ -59,6 +60,25 @@ class refundModel extends model
         foreach($refunds as $key => $refund) $refund->detail = isset($details[$key]) ? $details[$key] : array();
 
         return $refunds;
+    }
+
+    /**
+     * Get all month of refund.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getAllMonth()
+    {
+        $monthList = array();
+        $dateList  = $this->dao->select('date')->from(TABLE_REFUND)->groupBy('date')->orderBy('date_asc')->fetchAll('date');
+        foreach($dateList as $date)
+        {
+            $year  = substr($date->date, 0, 4);
+            $month = substr($date->date, 5, 2);
+            if(!isset($monthList[$year][$month])) $monthList[$year][$month] = $month;
+        }
+        return $monthList;
     }
 
     /**

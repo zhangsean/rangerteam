@@ -108,9 +108,9 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function personal($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function personal($date = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        $this->browse('personal', $orderBy, $recTotal, $recPerPage, $pageID);
+        $this->browse('personal', $date, $orderBy, $recTotal, $recPerPage, $pageID);
     }
 
     /**
@@ -123,9 +123,9 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function company($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function company($date = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        $this->browse('company', $orderBy, $recTotal, $recPerPage, $pageID);
+        $this->browse('company', $date, $orderBy, $recTotal, $recPerPage, $pageID);
     }
 
     /**
@@ -138,9 +138,9 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function todo($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function todo($date = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        $this->browse('todo', $orderBy, $recTotal, $recPerPage, $pageID);
+        $this->browse('todo', $date, $orderBy, $recTotal, $recPerPage, $pageID);
     }
 
     /**
@@ -154,10 +154,17 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function browse($mode = 'personal', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'personal', $date = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Ym");
+        $currentYear  = substr($date, 0, 4);
+        $currentMonth = strlen($date) == 6 ? substr($date, 4, 2) : '';
+        $currentDate  = $currentYear . '-' . $currentMonth;
+        $monthList    = $this->refund->getAllMonth();
+        $yearList     = array_reverse(array_keys($monthList));
 
         $deptList    = $this->loadModel('tree')->getPairs('', 'dept');
         $deptList[0] = '/';
@@ -170,9 +177,9 @@ class refund extends control
             $userDept[$user->account] = zget($deptList, $user->dept);
         }
 
-        if($mode == 'personal') $refunds = $this->refund->getList($mode, '', '', $this->app->user->account, $orderBy, $pager);
-        if($mode == 'company')  $refunds = $this->refund->getList($mode, '', '', '', $orderBy, $pager);
-        if($mode == 'todo')     $refunds = $this->refund->getList($mode, '', 'pass', '', $orderBy, $pager);
+        if($mode == 'personal') $refunds = $this->refund->getList($mode, $currentDate, '', '', $this->app->user->account, $orderBy, $pager);
+        if($mode == 'company')  $refunds = $this->refund->getList($mode, $currentDate, '', '', '', $orderBy, $pager);
+        if($mode == 'todo')     $refunds = $this->refund->getList($mode, $currentDate, '', 'pass', '', $orderBy, $pager);
 
         /* Set return url. */
         $this->session->set('refundList', $this->app->getURI(true));
@@ -186,6 +193,10 @@ class refund extends control
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->userPairs    = $userPairs;
         $this->view->userDept     = $userDept;
+        $this->view->currentYear  = $currentYear;
+        $this->view->currentMonth = $currentMonth;
+        $this->view->monthList    = $monthList;
+        $this->view->yearList     = $yearList;
         $this->display('refund', 'browse');
     }
     
@@ -234,8 +245,15 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function browseReview()
+    public function browseReview($date = '')
     {
+        if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Ym");
+        $currentYear  = substr($date, 0, 4);
+        $currentMonth = strlen($date) == 6 ? substr($date, 4, 2) : '';
+        $currentDate  = $currentYear . '-' . $currentMonth;
+        $monthList    = $this->refund->getAllMonth();
+        $yearList     = array_reverse(array_keys($monthList));
+
         $account  = $this->app->user->account;
         $refunds  = array();
         $newUsers = array();
@@ -253,7 +271,7 @@ class refund extends control
         $secondRefunds = array();
         if(!empty($this->config->refund->secondReviewer) and $this->config->refund->secondReviewer == $account)
         {
-            $secondRefunds = $this->refund->getList($mode = 'browseReview', $deptIDList = '', 'doing');
+            $secondRefunds = $this->refund->getList($mode = 'browseReview', $currentDate, $deptIDList = '', 'doing');
         }
 
         /* Get refund list for firstReviewer. */
@@ -266,7 +284,7 @@ class refund extends control
         {
             $deptList = $managedDeptList;
         }
-        if(!empty($deptList)) $firstRefunds = $this->refund->getList($mode = 'browseReview', $deptIDList = array_keys($deptList), 'wait');
+        if(!empty($deptList)) $firstRefunds = $this->refund->getList($mode = 'browseReview', $currentDate, $deptIDList = array_keys($deptList), 'wait');
         $refunds = array_merge($secondRefunds, $firstRefunds);
 
         $this->session->set('refundList', $this->app->getURI(true));
@@ -277,6 +295,10 @@ class refund extends control
         $this->view->deptList     = $allDeptList;
         $this->view->categories   = $this->refund->getCategoryPairs();
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+        $this->view->currentYear  = $currentYear;
+        $this->view->currentMonth = $currentMonth;
+        $this->view->monthList    = $monthList;
+        $this->view->yearList     = $yearList;
 
         $this->display();
     }
