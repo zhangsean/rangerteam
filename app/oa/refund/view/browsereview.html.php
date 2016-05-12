@@ -30,7 +30,7 @@
     <?php foreach($refunds as $refund):?>
     <?php $account = $refund->createdBy;?>
     <?php $currentDept = $users[$account]->dept;?>
-    <tr>
+    <tr data-url='<?php echo $this->createLink('refund', 'view', "refundID={$refund->id}&mode=review");?>'>
       <td><?php echo $refund->id;?></td>
       <td><?php echo zget($deptList, $currentDept);?></td>
       <td class='text-left'><?php echo $refund->name;?></td>
@@ -40,7 +40,10 @@
       <td><?php echo $refund->date;?></td>
       <td><?php echo zget($lang->refund->statusList, $refund->status);?></td>
       <td><?php echo $refund->desc?></td>
-      <td><?php echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}"), $lang->refund->review, "data-toggle='modal'")?></td>
+      <td>
+        <?php echo html::a($this->createLink('refund', 'view',   "refundID={$refund->id}&mode=review"), $lang->view, "")?>
+        <?php echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}"), $lang->refund->review, "data-toggle='modal'")?>
+      </td>
     </tr>
     <?php endforeach;?>
   </table>

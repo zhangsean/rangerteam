@@ -269,6 +269,8 @@ class refund extends control
         if(!empty($deptList)) $firstRefunds = $this->refund->getList($mode = 'browseReview', $deptIDList = array_keys($deptList), 'wait');
         $refunds = array_merge($secondRefunds, $firstRefunds);
 
+        $this->session->set('refundList', $this->app->getURI(true));
+
         $this->view->title        = $this->lang->refund->review;
         $this->view->users        = $newUsers;
         $this->view->refunds      = $refunds;
