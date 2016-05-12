@@ -3,9 +3,7 @@
   <dimension ref="%area%"/>
   <sheetViews>
     <sheetView tabSelected="1" workbookViewId="0">
-      <pane xSplit="%xSplit%" ySplit="1" topLeftCell="%topLeftCell%" activePane="bottomRight" state="frozenSplit"/>
-      <selection pane="topRight"/>
-      <selection pane="bottomLeft"/>
+        %freezePane%
     </sheetView>
   </sheetViews>
   <sheetFormatPr defaultRowHeight="15"/>

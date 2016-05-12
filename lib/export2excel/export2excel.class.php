@@ -489,10 +489,19 @@ class export2Xlsx extends model
     public function __construct()
     {
         parent::__construct();
-        $this->zfile  = $this->app->loadClass('zfile');
-        $this->file   = $this->loadModel('file');
+        $this->zfile           = $this->app->loadClass('zfile');
+        $this->file            = $this->loadModel('file');
         $this->sysDataColIndex = 0;
         $this->hasSysData      = false;
+        $this->app->loadClass('pclzip', true);
+
+        /* Init excel file. */
+        list($t1, $t2) = explode(' ', microtime());
+        $this->exportPath = $this->app->getCacheRoot() . $this->app->user->account . $t2 . ($t1 * 1000000) . '/';
+        if(is_dir($this->exportPath)) $this->zfile->removeDir($this->exportPath);
+        $this->zfile->mkdir($this->exportPath);
+        $this->zfile->copyDir($this->app->getCoreLibRoot() . 'phpexcel/xlsx', $this->exportPath);
+        $this->sharedStrings = file_get_contents($this->exportPath . 'xl/sharedStrings.xml');
     }
 
     /**
@@ -505,19 +514,9 @@ class export2Xlsx extends model
     public function init($data)
     {
         $this->rawExcelData = $data;
-        $this->app->loadClass('pclzip', true);
-        $this->fields = $this->rawExcelData->fields;
-        $this->rows   = $this->rawExcelData->rows;
-
-        /* Init excel file. */
-        $this->exportPath = $this->app->getCacheRoot() . $this->app->user->account . $this->rawExcelData->kind . $this->rawExcelData->fileName . '/';
-        if(is_dir($this->exportPath)) $this->zfile->removeDir($this->exportPath);
-        $this->zfile->mkdir($this->exportPath);
-        $this->zfile->copyDir($this->app->getCoreLibRoot() . 'phpexcel/xlsx', $this->exportPath);
-
-        $this->sharedStrings = file_get_contents($this->exportPath . 'xl/sharedStrings.xml');
-
-        $this->fieldsKey = array_keys($this->fields);
+        $this->fields       = $this->rawExcelData->fields;
+        $this->rows         = $this->rawExcelData->rows;
+        $this->fieldsKey    = array_keys($this->fields);
 
         $this->sheet1Params['dataValidations'] = '';
         $this->sheet1Params['cols']            = '';
@@ -539,16 +538,11 @@ class export2Xlsx extends model
      */
     public function export($excelData, $savePath = '')
     {
-        $index = 0;
-        /* Create sheets. */
-        for($i = 0; $i < count($excelData->dataList); $i++)
-        {
-            $this->phpExcel->createSheet();
-        }
+        $this->setDocProps($excelData->dataList);
+        $index = 1;
         foreach($excelData->dataList as $data)
         {
             $this->init($data);
-            $this->setDocProps();
             $this->excelKey = array();
             for($i = 0; $i < count($this->fieldsKey); $i++)
             {
@@ -567,7 +561,6 @@ class export2Xlsx extends model
             $this->writeSysData();
 
             $i = 1;
-            $excelData = array();
             foreach($this->rows as $num => $row)
             {
                 $i++;
@@ -614,24 +607,27 @@ class export2Xlsx extends model
             if(!empty($this->sheet1Params['hyperlinks'])) $this->sheet1Params['hyperlinks'] = '<hyperlinks>' . $this->sheet1Params['hyperlinks'] . '</hyperlinks>';
 
             /* Save sheet1*/
-            $sheet1 = file_get_contents($this->exportPath . 'xl/worksheets/sheet1.xml');
+            $sheet1 = file_get_contents($this->exportPath . "xl/worksheets/sheet{$index}.xml");
             $sheet1 = str_replace(array('%area%', '%xSplit%', '%topLeftCell%', '%cols%', '%sheetData%', '%mergeCells%', '%dataValidations%', '%hyperlinks%', '%colspan%'),
                 array($this->sheet1Params['area'], $this->sheet1Params['xSplit'], $this->sheet1Params['topLeftCell'], $this->sheet1Params['cols'], $this->sheet1SheetData, $this->sheet1Params['mergeCells'], $this->sheet1Params['dataValidations'], $this->sheet1Params['hyperlinks'], $this->sheet1Params['colspan']), $sheet1);
-            file_put_contents($this->exportPath . 'xl/worksheets/sheet1.xml', $sheet1);
-
-            /* Save sharedStrings file. */
-            $this->sharedStrings .= '</sst>';
-            $this->sharedStrings  = str_replace('%count%', $this->record, $this->sharedStrings);
-            file_put_contents($this->exportPath . 'xl/sharedStrings.xml', $this->sharedStrings);
-
-            /* Save link message. */
-            if($this->rels)
+            if(isset($this->config->excel->freeze->{$this->rawExcelData->kind}))
             {
-                $this->rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"? ><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' . $this->rels . '</Relationships>';
-                if(!is_dir($this->exportPath . 'xl/worksheets/_rels/')) mkdir($this->exportPath . 'xl/worksheets/_rels/');
-                file_put_contents($this->exportPath . 'xl/worksheets/_rels/sheet1.xml.rels', $this->rels);
+                $freezePane = '<pane xSplit="%xSplit%" ySplit="1" topLeftCell="%topLeftCell%" activePane="bottomRight" state="frozenSplit"/><selection pane="topRight"/><selection pane="bottomLeft"/>';
+                $sheet1     = str_replace('%freezePane%', $freezePane, $sheet1);
+                $sheet1     = str_replace(array('%xSplit%', '%topLeftCell%'),array($this->sheet1Params['xSplit'], $this->sheet1Params['topLeftCell']), $sheet1);
             }
+            else
+            {
+                $sheet1 = str_replace('%freezePane%', '', $sheet1);
+            }
+            file_put_contents($this->exportPath . "xl/worksheets/sheet{$index}.xml", $sheet1);
+            $index++;
         }
+
+        /* Save sharedStrings file. */
+        $this->sharedStrings .= '</sst>';
+        $this->sharedStrings  = str_replace('%count%', $this->record, $this->sharedStrings);
+        file_put_contents($this->exportPath . 'xl/sharedStrings.xml', $this->sharedStrings);
         
         /* urlencode the filename for ie. */
         $fileName = $excelData->fileName . '.xlsx';
@@ -706,13 +702,14 @@ class export2Xlsx extends model
     }
 
     /**
-     * Write system data to sheet2
+     * Write system data to sysDataSheet
      *
      * @access public
      * @return void
      */
     public function writeSysData()
     {
+        return;
         $count        = 1;
         $sheetData    = '';
         $sysDataCount = 0;
@@ -728,23 +725,22 @@ class export2Xlsx extends model
             for($row = 0; $row < $count; $row++)
             {
                 $sheetData .= '<row r="' . (string)($row + 1) . '" spans="1:5">';
-                $col = 0;
                 foreach($this->rawExcelData->SysDataList as $key)
                 {
-                    $colIndex   = $this->setExcelField($col);
+                    $colIndex   = $this->setExcelField($this->sysDataColIndex);
                     $key       .= 'List';
                     $dropList   = $this->rawExcelData->$key;
                     $sheetData .= $this->setCellValue($colIndex, ($row + 1), isset($dropList[$row]) ? $dropList[$row] : '', false);
-                    $col++;
+                    $this->sysDataColIndex++;
                 }
                 $sheetData .= '</row>';
             }
         }
         $colIndex = $this->setExcelField($sysDataCount - 1);
 
-        $sheet2 = file_get_contents($this->exportPath . 'xl/worksheets/sheet2.xml');
-        $sheet2 = sprintf($sheet2, "A1:$colIndex$count", $sheetData);
-        file_put_contents($this->exportPath . 'xl/worksheets/sheet2.xml', $sheet2);
+        $sysDataSheet = file_get_contents($this->exportPath . "xl/worksheets/sheet{$this->sysDataSheetIndex}.xml");
+        $sysDataSheet = sprintf($sysDataSheet, "A1:$colIndex$count", $sheetData);
+        file_put_contents($this->exportPath . "xl/worksheets/sheet{$this->sysDataSheetIndex}.xml", $sysDataSheet);
     }
 
     /**
@@ -848,21 +844,68 @@ class export2Xlsx extends model
      * @access public
      * @return void
      */
-    public function setDocProps()
+    public function setDocProps($dataList)
     {
-        $sheetTitle = isset($this->lang->excel->title->{$this->rawExcelData->kind}) ? $this->lang->excel->title->{$this->rawExcelData->kind} : $this->rawExcelData->kind;
-        $appFile    = file_get_contents($this->exportPath . 'docProps/app.xml');
-        $appFile    = sprintf($appFile, $sheetTitle, $this->lang->excel->title->sysValue);
-        file_put_contents($this->exportPath . 'docProps/app.xml', $appFile);
+        $count        = count($dataList);
+        $contentTypes = '';
+        $apps         = '<vt:vector size="%s" baseType="lpstr">';
+        $sheets       = '';
+        $rels         = '';
+        $i = 1;
+        foreach($dataList as $data)
+        {
+            if(isset($data->sysDataList)) $this->hasSysData = true;
+            $title = isset($data->title) ? $data->title : $data->kind;
+            $this->zfile->copyFile($this->exportPath . 'xl/worksheets/sheettemplate.xml', $this->exportPath . "xl/worksheets/sheet{$i}.xml");
+            $contentTypes .= '<Override ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml" PartName="/xl/worksheets/sheet' . $i . '.xml"/>'; 
+            $apps         .= "<vt:lpstr>{$title}</vt:lpstr>";
+            $sheets       .= '<sheet name="' . $title . '" sheetId="' . $i . '" r:id="rId' . $i . '"/>';
+            $rels         .= '<Relationship Target="worksheets/sheet' . $i . '.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Id="rId' . $i . '"/>';
+            $i++;
+        }
+
+        if($hasSysData)
+        {
+            $sheetCount = $count + 1;
+            $sysSheetName = $this->exportPath . "xl/worksheets/sheet{$sheetCount}.xml";
+            $this->zfile->rename($this->exportPath . 'xl/worksheets/sheetsysdata.xml', $sysSheetName);
+            $apps .= "<vt:lpstr>{$this->lang->excel->title->sysValue}</vt:lpstr>";
+        }
+        else
+        {
+            $sheetCount = $count;
+            $this->zfile->removeFile($this->exportPath . 'xl/worksheets/sheetsysdata.xml');
+        }
+        $this->zfile->removeFile($this->exportPath . 'xl/worksheets/sheettemplate.xml');
+
+        $contentFile   = $this->exportPath . '[Content_Types].xml';
+        $content       = file_get_contents($contentFile);
+        $content       = sprintf($content, $contentTypes);
+        file_put_contents($contentFile, $content);
+
+        $apps    = sprintf($apps, $sheetCount);
+        $apps   .= '</vt:vector>';
+        $appFile = $this->exportPath . 'docProps/app.xml';
+        $app     = file_get_contents($appFile);
+        $app     = sprintf($app, $sheetCount, $apps);
+        file_put_contents($appFile, $app);
 
         $coreFile   = file_get_contents($this->exportPath . 'docProps/core.xml');
         $createDate = date('Y-m-d') . 'T' . date('H:i:s') . 'Z';
         $coreFile   = sprintf($coreFile, $createDate, $createDate);
         file_put_contents($this->exportPath . 'docProps/core.xml', $coreFile);
+        
+        $workbookFile = $this->exportPath . 'xl/workbook.xml';
+        $workbook     = file_get_contents($workbookFile);
+        $workbook     = sprintf($workbook, $sheets);
+        file_put_contents($workbookFile, $workbook);
 
-        $workbookFile = file_get_contents($this->exportPath . 'xl/workbook.xml');
-        $workbookFile = sprintf($workbookFile, $sheetTitle, $this->lang->excel->title->sysValue);
-        file_put_contents($this->exportPath . 'xl/workbook.xml', $workbookFile);
+        $relFile = $this->exportPath . 'xl/_rels/workbook.xml.rels';
+        $rel     = file_get_contents($relFile);
+        $rel     = sprintf($rel, $sheetCount + 3, $sheetCount + 2, $sheetCount + 1, $rels);
+        file_put_contents($relFile, $rel);
+
+        $this->sysDataSheetIndex = $sheetCount;
     }
 
     /**
