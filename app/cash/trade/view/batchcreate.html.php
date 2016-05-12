@@ -14,6 +14,7 @@
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('dittoText', $lang->ditto);?>
+<?php js::set('mode', 'all');?>
 <form id='ajaxForm' method='post'>
   <div class='panel'>
     <div class='panel-heading'><strong><?php echo $lang->trade->batchCreate;?></strong></div>

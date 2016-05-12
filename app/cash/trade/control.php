@@ -131,7 +131,7 @@ class trade extends control
 
             $this->loadModel('action')->create('trade', $tradeID, 'Created', '');
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "type=$type")));
         }
 
         unset($this->lang->trade->menu);
@@ -764,6 +764,7 @@ class trade extends control
      */
     public function report($date = '', $currency = 'rmb')
     {
+        unset($this->lang->trade->menu);
         $this->loadModel('report');
         $currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
 

@@ -51,11 +51,11 @@
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 
 <div id='menuActions'>
-  <?php commonModel::printLink('trade', 'create', 'type=in',  "{$lang->trade->createIn}", "class='btn btn-primary'")?>
-  <?php commonModel::printLink('trade', 'create', 'type=out', "{$lang->trade->createOut}", "class='btn btn-primary'")?>
-  <?php commonModel::printLink('trade', 'transfer', '', "{$lang->trade->transfer}", "class='btn btn-primary'")?>
-  <?php commonModel::printLink('trade', 'inveset', '', "{$lang->trade->inveset}", "class='btn btn-primary'")?>
-  <?php commonModel::printLink('trade', 'batchcreate', '', "{$lang->trade->batchCreate}", "class='btn btn-primary'")?>
+  <?php if($mode == 'in' or $mode == 'all')       commonModel::printLink('trade', 'create', 'type=in',  "{$lang->trade->createIn}", "class='btn btn-primary'")?>
+  <?php if($mode == 'out' or $mode == 'all')      commonModel::printLink('trade', 'create', 'type=out', "{$lang->trade->createOut}", "class='btn btn-primary'")?>
+  <?php if($mode == 'transfer' or $mode == 'all') commonModel::printLink('trade', 'transfer', '', "{$lang->trade->transfer}", "class='btn btn-primary'")?>
+  <?php if($mode == 'inveset' or $mode == 'all')  commonModel::printLink('trade', 'inveset', '', "{$lang->trade->inveset}", "class='btn btn-primary'")?>
+  <?php if($mode == 'all') commonModel::printLink('trade', 'batchcreate', '', "{$lang->trade->batchCreate}", "class='btn btn-primary'")?>
   <?php commonModel::printLink('trade', 'import', '', "{$lang->trade->import}", "class='btn btn-primary' data-toggle='modal'")?>
   <?php if(commonModel::hasPriv('trade', 'export')):?>
   <div class='btn-group'>

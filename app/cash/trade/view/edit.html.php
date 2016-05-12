@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
+<?php js::set('mode', $trade->type);?>
 <ul id='menuTitle'>
   <li><?php commonModel::printLink('trade', 'browse', '', $lang->trade->browse);?></li>
   <li class='divider angle'></li>
