@@ -14,6 +14,7 @@ $lang->refund->review       = '审批';
 $lang->refund->detail       = '明细';
 $lang->refund->settings     = '设置';
 $lang->refund->setCategory  = '报销科目';
+$lang->refund->setDepositor = '报销账户';
 $lang->refund->reimburse    = '报销记账';
 $lang->refund->cancel       = '撤销';
 $lang->refund->commit       = '提交';

@@ -422,6 +422,26 @@ class refund extends control
     }
 
     /**
+     * Set depositor for refund.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setDepositor()
+    {
+        if($_POST)
+        {
+            $this->loadModel('setting')->setItem('system.oa.refund.depositor', $this->post->depositor);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->view->title = $this->lang->refund->setDepositor;
+        $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
+        $this->display();
+    }
+
+    /**
      * Send email.
      * 
      * @param  int    $refundID 

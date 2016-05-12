@@ -17,12 +17,13 @@
       <ul class='nav nav-primary'>
         <li><?php commonModel::printLink('refund', 'settings', '', "{$lang->refund->reviewer}");?></li>
         <li><?php commonModel::printLink('refund', 'setcategory', '', "{$lang->refund->setCategory}");?></li>
+        <li><?php commonModel::printLink('refund', 'setdepositor', '', "{$lang->refund->setDepositor}");?></li>
       </ul>
     </nav>
   </div>
   <div class='main'>
     <div class='panel'>
-      <div class='panel-heading'><?php echo $lang->refund->setCategory;?></div>
+      <div class='panel-heading'><strong><?php echo $lang->refund->setCategory;?></strong></div>
       <div class='panel-body'>
         <form id='ajaxForm' class='form-inline' method='post'>
           <table class='table table-form table-condensed'>

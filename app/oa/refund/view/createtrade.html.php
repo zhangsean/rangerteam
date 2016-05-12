@@ -15,7 +15,7 @@
   <table class='table table-form'>
     <tr>
       <th class='w-60px'><?php echo $lang->trade->depositor;?></th>
-      <td><?php echo html::select('depositor', $depositorList, '', "class='form-control'");?></td>
+      <td><?php echo html::select('depositor', $depositorList, isset($this->config->refund->depositor) ? $this->config->refund->depositor : '', "class='form-control'");?></td>
       <td><?php echo html::submitButton();?></td>
     </tr>
   </table>

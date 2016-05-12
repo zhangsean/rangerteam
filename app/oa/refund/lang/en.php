@@ -14,6 +14,7 @@ $lang->refund->review       = 'Review';
 $lang->refund->detail       = 'Detail';
 $lang->refund->settings     = 'Settings';
 $lang->refund->setCategory  = 'Category';
+$lang->refund->setDepositor = 'Depositor';
 $lang->refund->reimburse    = 'Reimburse';
 $lang->refund->cancel       = 'Cancel';
 $lang->refund->commit       = 'Commit';
