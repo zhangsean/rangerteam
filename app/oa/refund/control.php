@@ -395,6 +395,8 @@ class refund extends control
         $this->view->title         = $this->lang->refund->common;
         $this->view->refundID      = $refundID;
         $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
+        $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
+        $this->view->contractList  = $this->loadModel('contract', 'crm')->getList($customerID = 0);
 
         $this->display();
     }
