@@ -111,7 +111,7 @@ class trade extends control
         $this->view->tradeQuarters = $tradeQuarters;
         $this->view->tradeMonths   = $tradeMonths;
         $this->view->currentYear   = $currentYear;
-        $this->view->year          = $date ? substr($date, 0, 4) : $currentYear;
+        $this->view->year          = $currentDate ? substr($currentDate, 0, 4) : $currentYear;
 
         $this->display();
     }   
