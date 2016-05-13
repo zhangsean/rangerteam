@@ -88,6 +88,7 @@ class trade extends control
             krsort($tradeMonths[$year][$quarter]);
         }
 
+        $currentYear = current($tradeYears);
         $currentDate = $date ? $date : ($this->session->date ? $this->session->date : '');
         $trades = $this->trade->getList($mode, $currentDate, $orderBy, $pager);
 
@@ -109,8 +110,8 @@ class trade extends control
         $this->view->tradeYears    = $tradeYears;
         $this->view->tradeQuarters = $tradeQuarters;
         $this->view->tradeMonths   = $tradeMonths;
-        $this->view->currentYear   = current($tradeYears);
-        $this->view->year          = substr($date, 0, 4);
+        $this->view->currentYear   = $currentYear;
+        $this->view->year          = $date ? substr($date, 0, 4) : $currentYear;
 
         $this->display();
     }   

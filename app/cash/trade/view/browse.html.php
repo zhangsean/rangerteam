@@ -17,12 +17,13 @@
 <?php js::set('currentYear', $currentYear);?>
 <?php js::set('treeview', !empty($_COOKIE['treeview']) ? $_COOKIE['treeview'] : '');?>
 <?php $vars = "mode={$mode}&date={$date}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+<?php if(!empty($tradeYears)):?>
 <li class='year-menu'>
   <div class='dropdown'>
     <?php if(count($tradeYears) == 1):?>
     <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$year", $year . $lang->year);?></button>
     <?php else:?>
-    <?php echo html::a('#', ($year ? $year : $currentYear) . $lang->year . "<span class='caret'></span>", "class='dropdown-toggle' data-toggle='dropdown'");?>
+    <?php echo html::a('#', $year . $lang->year . "<span class='caret'></span>", "class='dropdown-toggle' data-toggle='dropdown'");?>
     <ul aria-labelledby="dropdownMenu1" role="menu" class="dropdown-menu">
       <?php foreach($tradeYears as $tradeYear):?>
       <li><?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear", $tradeYear);?></li>
@@ -48,6 +49,7 @@
     </ul>
   </div> 
 </li>
+<?php endif;?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 
 <div id='menuActions'>
