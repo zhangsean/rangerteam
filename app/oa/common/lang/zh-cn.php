@@ -80,7 +80,7 @@ $lang->refund->menu->personal = array('link' => '我的报销|refund|personal|',
 $lang->refund->menu->review   = '待审批|refund|browsereview|';
 $lang->refund->menu->todo     = '待报销|refund|todo|';
 $lang->refund->menu->company  = '所有报销|refund|company|';
-$lang->refund->menu->settings = array('link' => '设置|refund|settings|', 'alias' => 'setcategory');
+$lang->refund->menu->settings = array('link' => '设置|refund|setreviewer|', 'alias' => 'setcategory,setmoney,setdepositor,setrefundby');
 
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->modules = '功能模块|setting|modules|app=oa';

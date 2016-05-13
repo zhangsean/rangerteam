@@ -15,10 +15,10 @@
   <div class='side'>
     <nav class='menu leftmenu affix'>
       <ul class='nav nav-primary'>
-        <li><?php commonModel::printLink('refund', 'settings', '', "{$lang->refund->reviewer}");?></li>
-        <li><?php commonModel::printLink('refund', 'setcategory', '', "{$lang->refund->setCategory}");?></li>
-        <li><?php commonModel::printLink('refund', 'setdepositor', '', "{$lang->refund->setDepositor}");?></li>
-        <li><?php commonModel::printLink('refund', 'setmoney', '', "{$lang->refund->money}");?></li>
+        <?php foreach($lang->refund->settings as $setting):?>
+        <?php list($label, $module, $method) = explode('|', $setting);?>
+        <li><?php commonModel::printLink($module, $method, '', $label);?></li>
+        <?php endforeach;?>
       </ul>
     </nav>
   </div>
@@ -27,9 +27,13 @@
       <div class='panel-heading'><strong><?php echo $lang->refund->setDepositor;?></strong></div>
       <div class='panel-body'>
         <form id='ajaxForm' class='form-inline' method='post'>
-          <table class='table table-form table-condensed'>
+          <table class='table table-form table-condensed w-p40'>
             <tr>
+              <th class='w-80px'><?php echo $lang->refund->setDepositor;?></th>
               <td><?php echo html::select('depositor', array('' => '') + $depositorList, isset($this->config->refund->depositor) ? $this->config->refund->depositor : '', "class='form-control'")?></td>
+            </tr>
+            <tr>
+              <th></th>
               <td><?php echo html::submitButton();?></td>
             </tr>
           </table>

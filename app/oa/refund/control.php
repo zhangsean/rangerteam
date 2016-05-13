@@ -177,9 +177,11 @@ class refund extends control
             $userDept[$user->account] = zget($deptList, $user->dept);
         }
 
+        $refunds = array();
         if($mode == 'personal') $refunds = $this->refund->getList($mode, $currentDate, '', '', $this->app->user->account, $orderBy, $pager);
         if($mode == 'company')  $refunds = $this->refund->getList($mode, $currentDate, '', '', '', $orderBy, $pager);
-        if($mode == 'todo')     $refunds = $this->refund->getList($mode, $currentDate, '', 'pass', '', $orderBy, $pager);
+        if($mode == 'todo' and empty($this->config->refund->refundBy)) $refunds = $this->refund->getList($mode, $currentDate, '', 'pass', '', $orderBy, $pager);
+        if($mode == 'todo' and !empty($this->config->refund->refundBy) and $this->config->refund->refundBy == $this->app->user->account) $refunds = $this->refund->getList($mode, $currentDate, '', 'pass', '', $orderBy, $pager);
 
         /* Set return url. */
         $this->session->set('refundList', $this->app->getURI(true));
@@ -395,7 +397,7 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function settings()
+    public function setReviewer()
     {
         $this->loadModel('user');
         if($_POST)
@@ -481,6 +483,26 @@ class refund extends control
         }
 
         $this->view->title = $this->lang->refund->money;
+        $this->display();
+    }
+
+    /**
+     * Set refundBy for refund.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setRefundBy()
+    {
+        if($_POST)
+        {
+            $this->loadModel('setting')->setItem('system.oa.refund.refundBy', $this->post->refundBy);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->view->title = $this->lang->refund->refundBy;
+        $this->view->users = $this->loadModel('user')->getPairs('nodeleted,noclosed,noforbidden');
         $this->display();
     }
 

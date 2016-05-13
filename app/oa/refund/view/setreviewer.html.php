@@ -16,10 +16,10 @@
   <div class='side'>
     <nav class='menu leftmenu affix'>
       <ul class='nav nav-primary'>
-        <li><?php commonModel::printLink('refund', 'settings', '', "{$lang->refund->reviewer}");?></li>
-        <li><?php commonModel::printLink('refund', 'setCategory', '', "{$lang->refund->setCategory}");?></li>
-        <li><?php commonModel::printLink('refund', 'setdepositor', '', "{$lang->refund->setDepositor}");?></li>
-        <li><?php commonModel::printLink('refund', 'setmoney', '', "{$lang->refund->money}");?></li>
+        <?php foreach($lang->refund->settings as $setting):?>
+        <?php list($label, $module, $method) = explode('|', $setting);?>
+        <li><?php commonModel::printLink($module, $method, '', $label);?></li>
+        <?php endforeach;?>
       </ul>
     </nav>
   </div>
