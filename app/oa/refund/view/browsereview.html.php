@@ -65,7 +65,7 @@
           <td><?php echo $refund->desc?></td>
           <td>
             <?php echo html::a($this->createLink('refund', 'view',   "refundID={$refund->id}&mode=review"), $lang->view, "")?>
-            <?php echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}"), $lang->refund->review, "data-toggle='modal'")?>
+            <?php if($refund->status == 'wait' or $refund->status == 'doing') echo html::a($this->createLink('refund', 'review', "refundID={$refund->id}"), $lang->refund->review, "data-toggle='modal'")?>
           </td>
         </tr>
         <?php endforeach;?>
