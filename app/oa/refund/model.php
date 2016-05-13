@@ -49,6 +49,12 @@ class refundModel extends model
             ->beginIf($createdBy != '')->andWhere('createdBy')->in($createdBy)->fi()
             ->beginIf($mode != 'personal')->andWhere('status')->ne('draft')->fi()
             ->beginIf($date != '')->andWhere('date')->like("$date%")->fi()
+            ->beginIf($mode == 'browseReview' and $status == 'pass,finish')
+            ->andWhere()->markLeft(1)
+            ->where('firstReviewer')->eq($this->app->user->account)
+            ->orWhere('secondReviewer')->eq($this->app->user->account)
+            ->markRight(1)
+            ->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');

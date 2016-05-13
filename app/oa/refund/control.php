@@ -247,7 +247,7 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function browseReview($date = '')
+    public function browseReview($date = '', $status = 'unreviewed')
     {
         if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Y");
         $currentYear  = substr($date, 0, 4);
@@ -273,7 +273,8 @@ class refund extends control
         $secondRefunds = array();
         if(!empty($this->config->refund->secondReviewer) and $this->config->refund->secondReviewer == $account)
         {
-            $secondRefunds = $this->refund->getList($mode = 'browseReview', $currentDate, $deptIDList = '', 'doing');
+            if($status == 'unreviewed') $secondRefunds = $this->refund->getList($mode = 'browseReview', $currentDate, $deptIDList = '', 'doing');
+            if($status == 'reviewed')   $secondRefunds = $this->refund->getList($mode = 'browseReview', $currentDate, $deptIDList = '', 'pass,finish');
         }
 
         /* Get refund list for firstReviewer. */
@@ -286,7 +287,13 @@ class refund extends control
         {
             $deptList = $managedDeptList;
         }
-        if(!empty($deptList)) $firstRefunds = $this->refund->getList($mode = 'browseReview', $currentDate, $deptIDList = array_keys($deptList), 'wait');
+
+        if(!empty($deptList))
+        {
+            if($status == 'unreviewed') $firstRefunds = $this->refund->getList($mode = 'browseReview', $currentDate, $deptIDList = array_keys($deptList), 'wait');
+            if($status == 'reviewed')   $firstRefunds = $this->refund->getList($mode = 'browseReview', $currentDate, $deptIDList = array_keys($deptList), 'pass,finish');
+        }
+
         $refunds = array_merge($secondRefunds, $firstRefunds);
 
         $this->session->set('refundList', $this->app->getURI(true));
@@ -301,6 +308,7 @@ class refund extends control
         $this->view->currentMonth = $currentMonth;
         $this->view->monthList    = $monthList;
         $this->view->yearList     = $yearList;
+        $this->view->status       = $status;
 
         $this->display();
     }

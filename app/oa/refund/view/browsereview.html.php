@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php js::set('status', $status);?>
 <div class='with-side'>
   <div class='side'>
     <div class='panel panel-sm'>
