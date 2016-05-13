@@ -40,7 +40,6 @@ class order extends control
         $orders = $this->order->getList($mode, '', $owner = 'all', $orderBy, $pager);
 
         /* Set pre and next condition. */
-        $this->session->set('orderQueryCondition', $this->dao->get());
         $this->session->set('orderList', $this->app->getURI(true));
 
         /* Set allowed edit order ID list. */

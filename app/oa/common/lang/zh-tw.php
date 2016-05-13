@@ -26,7 +26,7 @@ $lang->menu->oa->setting   = '設置|setting|modules|app=oa';
 
 $lang->dashboard = new stdclass();
 
-$lang->project   = new stdclass();
+$lang->project = new stdclass();
 $lang->project->menu = new stdclass();
 $lang->project->menu->involved = '我參與的|project|index|status=involved';
 $lang->project->menu->doing    = '進行中|project|index|status=doing';
@@ -35,7 +35,7 @@ $lang->project->menu->suspend  = '已掛起|project|index|ststus=suspend';
 
 $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();
-$lang->announce->menu->browse   = array('link' => '公告列表|announce|browse|', 'alias' => 'view');
+$lang->announce->menu->browse   = array('link' => '公告列表|announce|browse|', 'alias' => 'create,edit,view');
 $lang->announce->menu->category = '類目管理|tree|browse|type=announce|';
 
 $lang->doc = new stdclass();

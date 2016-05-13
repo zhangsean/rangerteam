@@ -26,7 +26,7 @@ $lang->menu->oa->setting   = 'Settings|setting|module|app=oa';
 
 $lang->dashboard = new stdclass();
 
-$lang->project   = new stdclass();
+$lang->project = new stdclass();
 $lang->project->menu = new stdclass();
 $lang->project->menu->involved = 'Involved With Me|project|index|status=involved';
 $lang->project->menu->doing    = 'Projects|project|index|status=doing';
@@ -35,7 +35,7 @@ $lang->project->menu->suspend  = 'Suspended|project|index|ststus=suspend';
 
 $lang->announce = new stdclass();
 $lang->announce->menu = new stdclass();
-$lang->announce->menu->browse   = array('link' => 'Announce List|announce|browse|', 'alias' => 'view');
+$lang->announce->menu->browse   = array('link' => 'Announce List|announce|browse|', 'alias' => 'create,edit,view');
 $lang->announce->menu->category = 'Category|tree|browse|type=announce|';
 
 $lang->doc = new stdclass();

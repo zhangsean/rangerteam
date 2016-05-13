@@ -46,6 +46,9 @@ class articleModel extends model
         /* Get it's files. */
         $article->files = $this->loadModel('file')->getByObject($article->type, $articleID);
 
+        $article->readers = explode(',', $article->readers);
+        foreach($article->readers as $key => $reader) if(!$reader) unset($article->readers[$key]);
+
         return $article;
     }   
 
@@ -106,7 +109,13 @@ class articleModel extends model
         }
 
         /* Assign summary to it's article. */
-        foreach($articles as $article) $article->summary = empty($article->summary) ? helper::substr(strip_tags($article->content), 200, '...') : $article->summary;
+        foreach($articles as $article) 
+        {
+            $article->summary = empty($article->summary) ? helper::substr(strip_tags($article->content), 200, '...') : $article->summary;
+
+            $article->readers = explode(',', $article->readers);
+            foreach($article->readers as $key => $reader) if(!$reader) unset($article->readers[$key]);
+        }
 
         return $articles;
     }
@@ -260,6 +269,7 @@ class articleModel extends model
             ->add('type', $type)
             ->add('order', 0)
             ->add('keywords', helper::unify($this->post->keywords, ','))
+            ->add('readers', $this->app->user->account)
             ->stripTags('content', $this->config->allowedTags->admin)
             ->join('users', ',')
             ->join('groups', ',')

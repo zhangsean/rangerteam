@@ -22,6 +22,12 @@
   </header>
   <section class='announce-content'><?php echo $announce->content;?></section>
   <footer>
+    <div class='row'>
+      <div class='col-xs-12 col-md-12'><strong><?php printf($lang->article->lblReaders, count($announce->readers));?></strong></div>
+      <?php foreach($announce->readers as $reader) echo "<div class='col-xs-1 col-md-1'>" . zget($users, $reader) . '</div>';?>
+    </div>
+  </footer>
+  <footer>
     <?php extract($prevAndNext);?>
     <ul class='pager pager-justify'>
       <?php if($prev):?>

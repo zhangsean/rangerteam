@@ -47,14 +47,14 @@ class announce extends control
         $this->config->announce->search['actionURL'] = $this->createLink('announce', 'browse', "type=announce&categoryID=$categoryID&mode=bysearch");
         $this->search->setSearchParams($this->config->announce->search);
 
-        $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
-        $articles = $this->article->getList($type, $families, $mode, $param = null, $orderBy, $pager);
+        $families  = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
+        $announces = $this->article->getList($type, $families, $mode, $param = null, $orderBy, $pager);
 
         $this->view->title      = $this->lang->announce->browse;
         $this->view->mode       = $mode;
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->categories = $this->loadModel('tree')->getPairs($categoryID, $type);
-        $this->view->articles   = $articles;
+        $this->view->announces  = $announces;
         $this->view->pager      = $pager;
 
         $this->display();
@@ -143,11 +143,34 @@ class announce extends control
         $this->view->category    = $category;
         $this->view->announce    = $announce;
         $this->view->author      = $this->loadModel('user')->getByAccount($announce->author);
+        $this->view->users       = $this->loadModel('user')->getPairs();
         $this->view->prevAndNext = $this->article->getPrevAndNext($announce->id, $category->id);
         $this->view->modalWidth  = 800;
 
-        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($announceID)->exec(false);
+        if(!in_array($this->app->user->account, $announce->readers)) $announce->readers[] = $this->app->user->account;
+        $readers   = implode(',', $announce->readers);
+        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->set('readers')->eq($readers)->where('id')->eq($announceID)->exec(false);
 
+        $this->display();
+    }
+
+    /**
+     * View readers. 
+     * 
+     * @param  int    $announceID 
+     * @access public
+     * @return void
+     */
+    public function viewReaders($announceID = 0)
+    {
+        $announce = $this->loadModel('article')->getById($announceID);
+        $users    = $this->loadModel('user')->getPairs();
+
+        $readers = array();
+        foreach($announce->readers as $reader) $readers[] = zget($users, $reader);
+
+        $this->view->title   = $announce->title . ' - ' . sprintf($this->lang->article->lblReaders, count($readers));
+        $this->view->readers = $readers;
         $this->display();
     }
 

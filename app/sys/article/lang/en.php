@@ -35,6 +35,7 @@ $lang->article->order       = 'Order';
 $lang->article->private     = 'Private';
 $lang->article->users       = 'Users';
 $lang->article->groups      = 'Groups';
+$lang->article->readers     = 'Readers';
 
 $lang->article->list   = 'List';
 $lang->article->admin  = 'Admin';
@@ -73,6 +74,7 @@ $lang->article->lblAuthor    = "<strong>Author:</strong> %s &nbsp;&nbsp;";
 $lang->article->lblSource    = '<strong>Source:</strong>';
 $lang->article->lblViews     = ' <strong>Views:</strong>%s';
 $lang->article->lblEditor    = '<i>Edited by %s at %s</i>';
+$lang->article->lblReaders   = '%s users had read.';
 
 $lang->article->prev      = 'Previous';
 $lang->article->next      = 'Next';

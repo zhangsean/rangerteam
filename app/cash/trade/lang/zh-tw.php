@@ -39,6 +39,7 @@ $lang->trade->createdDate = '創建時間';
 $lang->trade->editedBy    = '由誰編輯';
 $lang->trade->editedDate  = '編輯時間';
 $lang->trade->month       = '月份';
+$lang->trade->uploadFile  = '上傳附件';
 
 $lang->trade->create      = '記賬';
 $lang->trade->in          = '收入';
@@ -50,6 +51,7 @@ $lang->trade->createOut   = '記支出';
 $lang->trade->transfer    = '記轉賬';
 $lang->trade->edit        = '編輯賬目';
 $lang->trade->detail      = '明細';
+$lang->trade->view        = '詳情';
 $lang->trade->browse      = '賬目列表';
 $lang->trade->delete      = '刪除記錄';
 $lang->trade->batchCreate = '批量記賬';
@@ -59,6 +61,7 @@ $lang->trade->import      = '導入';
 $lang->trade->export      = '導出';
 $lang->trade->showImport  = '導入確認';
 $lang->trade->fullYear    = '全年';
+$lang->trade->quarter     = '季度';
 
 $lang->trade->report = new stdclass();
 $lang->trade->report->common = '報表'; 

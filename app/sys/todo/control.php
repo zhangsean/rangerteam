@@ -181,6 +181,7 @@ class todo extends control
      * Edit a todo.
      * 
      * @param  int    $todoID 
+     * @param  bool   $comment
      * @access public
      * @return void
      */
@@ -204,7 +205,6 @@ class todo extends control
                 $actionID = $this->loadModel('action')->create('todo', $todoID, 'edited', $this->post->comment);
                 $this->action->logHistory($actionID, $changes);
             }
-            $date = str_replace('-', '', $this->post->date);
             if(!$comment) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'closeModal' => 'true', 'locate' => 'reload'));
             if($comment)  $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'loadInModal'));
         }

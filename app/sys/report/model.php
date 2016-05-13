@@ -195,7 +195,12 @@ class reportModel extends model
             foreach($datas as $name => $data) $data->name = isset($list[$name]) ? $list[$name] : $this->lang->report->undefined;
         }
 
-        return $datas;
+        $temp = array();
+        foreach($datas as $key => $data) $temp[$key] = $data->value;
+        arsort($temp);
+        foreach($datas as $key => $data) $temp[$key] = $data;
+
+        return $temp;
     }
 }
 

@@ -35,6 +35,7 @@ $lang->article->order       = '排序';
 $lang->article->private     = '设为私密';
 $lang->article->users       = '授权用户';
 $lang->article->groups      = '授权分组';
+$lang->article->readers     = '已阅读用户';
 
 $lang->article->list        = '文章列表';
 $lang->article->admin       = '维护文章';
@@ -71,8 +72,9 @@ $lang->article->confirmDelete = '您确定删除该文章吗？';
 $lang->article->lblAddedDate = '<strong>添加时间：</strong> %s &nbsp;&nbsp;';
 $lang->article->lblAuthor    = "<strong>作者：</strong> %s &nbsp;&nbsp;";
 $lang->article->lblSource    = '<strong>来源：</strong>';
-$lang->article->lblViews     = ' <strong>阅读：</strong>%s';
+$lang->article->lblViews     = '<strong>阅读：</strong>%s';
 $lang->article->lblEditor    = '<i>最后编辑：%s 于 %s</i>';
+$lang->article->lblReaders   = '%s人已阅读';
 
 $lang->article->prev      = '上一篇';
 $lang->article->next      = '下一篇';

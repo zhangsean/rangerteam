@@ -108,6 +108,8 @@ class orderModel extends model
             ->andWhere('o.customer')->in($customerIdList)
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
+        $this->session->set('orderQueryCondition', $this->dao->get());
+
         foreach($orders as $order)
         {
             $order->products = array();
