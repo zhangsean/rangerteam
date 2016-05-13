@@ -531,7 +531,11 @@ class refund extends control
         if($action->action == 'reviewed')
         {
             if($refund->status == 'doing') $toList = $this->config->refund->secondReviewer;
-            if($refund->status != 'doing') $toList = $refund->createdBy;
+            if($refund->status != 'doing')
+            {
+                $toList = $refund->createdBy;
+                if(!empty($this->config->refund->refundBy)) $toList .= ',' . $this->config->refund->refundBy;
+            }
             $subject = "{$this->lang->refund->common}{$this->lang->refund->review}#{$refund->id} " . zget($users, $refund->createdBy) . " - {$refund->name}";
         }
 
