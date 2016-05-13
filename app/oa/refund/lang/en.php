@@ -65,3 +65,11 @@ $lang->refund->secondReviewerTip = 'If reimbursement requires two approvals, ple
 $lang->refund->correctMoney      = 'Approval amount can not be more than the application amount.';
 $lang->refund->categoryTips      = 'Not yet set up the expense category.';
 $lang->refund->setExpense        = 'Go to set.';
+$lang->refund->moneyTip          = 'If money of refund is less than this, reviewed once, but money of refund is more than this, reviewed twice.';
+
+$lang->refund->settings = new stdclass();
+$lang->refund->settings->setreviewer  = "Reviewer|refund|setreviewer";
+$lang->refund->settings->setCategory  = "Category|refund|setcategory";
+$lang->refund->settings->setDepositor = "Depositor|refund|setdepositor";
+$lang->refund->settings->setMoney     = "Money|refund|setmoney";
+$lang->refund->settings->setRefundBy  = "RefundBy|refund|setrefundby";

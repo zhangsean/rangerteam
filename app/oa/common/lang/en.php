@@ -76,11 +76,12 @@ $lang->trip->menu->company    = 'Company|trip|company|';
 
 $lang->refund = new stdclass();
 $lang->refund->menu = new stdclass();
-$lang->refund->menu->personal = array('link' => 'My|refund|personal|', 'alias' => 'create, edit');
-$lang->refund->menu->review   = 'Waiting For Review|refund|browsereview|';
-$lang->refund->menu->todo     = 'Waiting For Reimbursement|refund|todo|';
-$lang->refund->menu->company  = 'All|refund|company|';
-$lang->refund->menu->settings = array('link' => 'Settings|refund|settings|', 'alias' => 'setcategory');
+$lang->refund->menu->personal   = array('link' => 'My|refund|personal|', 'alias' => 'create, edit');
+$lang->refund->menu->review     = 'Waiting For Review|refund|browsereview|';
+$lang->refund->menu->reviewedBy = 'Reviewed By Me|refund|browsereview|date=&status=reviewed';
+$lang->refund->menu->todo       = 'Waiting For Reimbursement|refund|todo|';
+$lang->refund->menu->company    = 'All|refund|company|';
+$lang->refund->menu->settings   = array('link' => 'Settings|refund|settings|', 'alias' => 'setcategory');
 
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->modules = 'Modules|setting|modules|app=oa';
