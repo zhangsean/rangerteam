@@ -121,22 +121,28 @@ class contract extends control
      * Edit contract.
      * 
      * @param  int    $contractID 
+     * @param  bool   $comment
      * @access public
      * @return void
      */
-    public function edit($contractID)
+    public function edit($contractID, $comment = false)
     {
         $contract = $this->contract->getByID($contractID);
 
         if($_POST)
         {
-            $changes = $this->contract->update($contractID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $changes = array();
+            if($comment == false)
+            {
+                $changes = $this->contract->update($contractID);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
             $files = $this->loadModel('file')->saveUpload('contract', $contractID);
 
-            if($changes or $files)
+            if($this->post->comment or $changes or $files)
             {
                 $fileAction = '';
+                if($this->post->comment) $fileAction = $this->post->comment;
                 if($files) $fileAction = $this->lang->addFiles . join(',', $files);
 
                 $contractActionID = $this->loadModel('action')->create('contract', $contractID, 'Edited', $fileAction);

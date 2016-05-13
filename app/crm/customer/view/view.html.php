@@ -45,12 +45,20 @@
       echo "<div class='btn-group'>";
       commonModel::printLink('customer', 'edit', "customerID=$customer->id", $lang->edit, "class='btn'");
       commonModel::printLink('customer', 'delete', "customerID=$customer->id", $lang->delete, "class='deleter btn'");
+      echo html::a('#commentBox', $this->lang->comment, "class='btn btn-default' onclick=setComment()");
       echo '</div>';
 
       $browseLink = $this->session->customerList ? $this->session->customerList : inlink('browse');
       commonModel::printRPN($browseLink, $preAndNext);
       ?>
     </div>
+    <fieldset id='commentBox' class='hide'>
+      <legend><?php echo $lang->comment;?></legend>
+      <form id='ajaxForm' method='post' action='<?php echo inlink('edit', "customerID={$customer->id}&comment=true")?>'>
+        <div class='form-group'><?php echo html::textarea('comment', '',"rows='5' class='w-p100'");?></div>
+        <?php echo html::submitButton();?>
+      </form>
+    </fieldset>      
   </div>
   <div class='col-side'>  
     <div class='panel'>

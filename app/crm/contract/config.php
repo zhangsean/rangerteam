@@ -23,7 +23,7 @@ $config->contract->editor->finish       = array('id' => 'comment', 'tools' => 's
 $config->contract->editor->cancel       = array('id' => 'comment', 'tools' => 'simple');
 $config->contract->editor->editreturn   = array('id' => 'comment', 'tools' => 'simple');
 $config->contract->editor->editdelivery = array('id' => 'comment', 'tools' => 'simple');
-$config->contract->editor->view         = array('id' => 'lastComment', 'tools' => 'simple');
+$config->contract->editor->view         = array('id' => 'comment,lastComment', 'tools' => 'simple');
 
 $config->contract->codeFormat = array('Y', 'm', 'd', 'input');
 

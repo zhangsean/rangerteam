@@ -370,45 +370,30 @@ class contactModel extends model
             ->where('id')->eq($contactID)
             ->exec();
 
-        if(!dao::isError())
+        if(dao::isError()) return false;
+         
+        if($oldContact->status == 'normal')
         {
-            if($oldContact->status == 'normal')
+            $resume = new stdclass();
+            $resume->contact  = $contactID;
+            $resume->customer = $contact->customer;
+            $resume->dept     = isset($contact->dept) ? $contact->dept : '';
+            $resume->maker    = isset($contact->maker) ? $contact->maker : 0;
+            $resume->title    = isset($contact->title) ? $contact->title : '';
+            $resume->join     = isset($contact->join) ? $contact->join : '';
+
+            if($oldContact->customer != $contact->customer)
             {
-                $resume = new stdclass();
-                $resume->contact  = $contactID;
-                $resume->customer = $contact->customer;
-                $resume->dept     = isset($contact->dept) ? $contact->dept : '';
-                $resume->maker    = isset($contact->maker) ? $contact->maker : 0;
-                $resume->title    = isset($contact->title) ? $contact->title : '';
-                $resume->join     = isset($contact->join) ? $contact->join : '';
-
-                if($oldContact->customer != $contact->customer)
-                {
-                    $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
-                    if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->where('id')->eq($contactID)->exec();
-                }
-                else
-                {
-                    $this->dao->update(TABLE_RESUME)->data($resume)->where('id')->eq($oldContact->resume)->exec();
-                }
+                $this->dao->insert(TABLE_RESUME)->data($resume)->exec();
+                if(!dao::isError()) $this->dao->update(TABLE_CONTACT)->set('resume')->eq($this->dao->lastInsertID())->where('id')->eq($contactID)->exec();
             }
-
-            $changes = commonModel::createChanges($oldContact, $contact);
-            if($changes)
+            else
             {
-                $actionID = $this->loadModel('action')->create('contact', $contactID, 'Edited', '');
-                $this->action->logHistory($actionID, $changes);
+                $this->dao->update(TABLE_RESUME)->data($resume)->where('id')->eq($oldContact->resume)->exec();
             }
-
-            $return = $this->updateAvatar($contactID);
-
-            $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
-            $locate = $oldContact->status == 'normal' ? helper::createLink('contact', 'view', "contactID=$contactID") : helper::createLink('leads', 'view', "contactID=$contactID");
-            if(strpos($this->server->http_referer, 'contact') === false and strpos($this->server->http_referer, 'leads') === false) $locate = 'reload';
-            return array('result' => 'success', 'message' => $message, 'locate' => $locate);
         }
 
-        return array('result' => 'fail', 'message' => dao::getError());
+        return commonModel::createChanges($oldContact, $contact);
     }
 
     /**

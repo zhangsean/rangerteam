@@ -99,17 +99,36 @@ class leads extends control
      * @param  int    $contactID 
      * @param  string $mode 
      * @param  string $status 
+     * @param  bool   $comment
      * @access public
      * @return void
      */
-    public function edit($contactID = 0, $mode = 'assignedTo', $status = 'wait')
+    public function edit($contactID = 0, $mode = 'assignedTo', $status = 'wait', $comment = false)
     {
         $contact = $this->contact->getByID($contactID);
 
         if($_POST)
         {
-            $return = $this->contact->update($contactID);
-            $this->send($return);
+            $changes = array();
+            if($comment == false)
+            {
+                $changes = $this->contact->update($contactID);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
+
+            if($this->post->comment != '' or !empty($changes))
+            {
+                $actionID = $this->loadModel('action')->create('contact', $contactID, 'Edited', $this->post->comment);
+                $this->action->logHistory($actionID, $changes);
+            }
+
+            $this->loadModel('customer')->updateEditedDate($this->post->customer);
+            $return = $this->contact->updateAvatar($contactID);
+
+            $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
+            $locate  = helper::createLink('leads', 'view', "contactID=$contactID");
+            if(strpos($this->server->http_referer, 'contact') === false and strpos($this->server->http_referer, 'leads') === false) $locate = 'reload';
+            $this->send(array('result' => 'success', 'message' => $message, 'locate' => $locate));
         }
 
         $this->view->title      = $this->lang->contact->edit;

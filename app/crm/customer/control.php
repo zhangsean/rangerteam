@@ -110,18 +110,32 @@ class customer extends control
      * Edit a customer.
      * 
      * @param  int    $customerID 
+     * @param  bool   $comment
      * @access public
      * @return void
      */
-    public function edit($customerID)
+    public function edit($customerID, $comment = false)
     {
         $customer = $this->customer->getByID($customerID);
         $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($customer) ? '0' : $customerID, 'edit');
 
         if($_POST)
         {
-            $return = $this->customer->update($customerID);
-            $this->send($return);
+            $changes = array();
+            if($comment == false)
+            {
+                $changes = $this->customer->update($customerID);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
+
+            if($this->post->comment != '' or !empty($changes))
+            {
+                $actionID = $this->loadModel('action')->create('customer', $customerID, 'Edited', $this->post->comment);
+                $this->action->logHistory($actionID, $changes);
+            }
+
+            $locate = strpos($this->server->http_referer, 'provider') ? helper::createLink('provider', 'view', "customerID=$customerID") :helper::createLink('customer', 'view', "customerID=$customerID");
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
         }
 
         $this->view->title        = $this->lang->customer->edit;

@@ -35,6 +35,13 @@
       commonModel::printRPN($browseLink, $preAndNext);
       ?>
     </div>
+    <fieldset id='commentBox' class='hide'>
+      <legend><?php echo $lang->comment;?></legend>
+      <form id='ajaxForm' method='post' action='<?php echo inlink('edit', "contractID={$contract->id}&comment=true")?>'>
+        <div class='form-group'><?php echo html::textarea('comment', '',"rows='5' class='w-p100'");?></div>
+        <?php echo html::submitButton();?>
+      </form>
+    </fieldset>      
   </div>
   <div class='col-side'>
     <div class='panel'>

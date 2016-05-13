@@ -93,29 +93,33 @@ class order extends control
     /**
      * Edit an order.
      * 
-     * @param  int $orderID 
+     * @param  int    $orderID 
+     * @param  bool   $comment
      * @access public
      * @return void
      */
-    public function edit($orderID)
+    public function edit($orderID, $comment = false)
     {
         $order = $this->order->getByID($orderID);
         $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($order)? '0' : $order->customer, 'edit');
 
         if($_POST)
         {
-            $changes = $this->order->update($orderID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-
-            if(!empty($changes))
-            {   
-                $orderActionID = $this->loadModel('action')->create('order', $orderID, 'Edited');
-                $this->action->logHistory($orderActionID, $changes);
-
-                $customerActionID = $this->loadModel('action')->create('customer', $order->customer, 'editOrder', '', html::a($this->createLink('order', 'view', "orderID=$order->id"), $order->id));
-                $this->action->logHistory($customerActionID, $changes);
+            $changes = array();
+            if($comment == false)
+            {
+                $changes = $this->order->update($orderID);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             }
 
+            if($this->post->comment != '' or !empty($changes))
+            {
+                $orderActionID = $this->loadModel('action')->create('order', $orderID, 'Edited', $this->post->comment);
+                $this->action->logHistory($orderActionID, $changes);
+
+                $customerActionID = $this->loadModel('action')->create('customer', $order->customer, 'editOrder', $this->post->comment, html::a($this->createLink('order', 'view', "orderID=$order->id"), $order->id));
+                $this->action->logHistory($customerActionID, $changes);
+            }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "orderID=$orderID")));
         }
 

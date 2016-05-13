@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php'; ?>
+<?php include '../../../sys/common/view/kindeditor.html.php';?>
 <ul id='menuTitle'>
   <li><?php commonmodel::printLink('order', 'browse', '', "<i class='icon-list-ul'></i> " . $lang->order->list);?></li>
   <li class='divider angle'></li>
@@ -65,12 +66,20 @@
       echo "<div class='btn-group'>";
       commonModel::printLink('order', 'edit', "orderID=$order->id", $lang->edit, "class='btn btn-default'");
       if($order->status == 'normal' or $order->closedReason == 'failed') commonModel::printLink('order', 'delete', "orderID=$order->id", $lang->delete, "class='btn btn-default deleter'");
+      echo html::a('#commentBox', $this->lang->comment, "class='btn btn-default' onclick=setComment()");
       echo '</div>';
 
       $browseLink = $this->session->orderList ? $this->session->orderList : inlink('browse');
       commonModel::printRPN($browseLink, $preAndNext);
       ?>
     </div>
+    <fieldset id='commentBox' class='hide'>
+      <legend><?php echo $lang->comment;?></legend>
+      <form id='ajaxForm' method='post' action='<?php echo inlink('edit', "orderID={$order->id}&comment=true")?>'>
+        <div class='form-group'><?php echo html::textarea('comment', '',"rows='5' class='w-p100'");?></div>
+        <?php echo html::submitButton();?>
+      </form>
+    </fieldset>      
   </div>
   <div class='col-side'>
     <div class='panel'>

@@ -248,17 +248,7 @@ class customerModel extends model
             ->where('id')->eq($customerID)
             ->exec();
 
-        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
-
-        $changes = commonModel::createChanges($oldCustomer, $customer);
-        if($changes)
-        {
-            $actionID = $this->loadModel('action')->create('customer', $customerID, 'Edited');
-            $this->action->logHistory($actionID, $changes);
-        }
-
-        $locate = strpos($this->server->http_referer, 'provider') ? helper::createLink('provider', 'view', "customerID=$customerID") :helper::createLink('customer', 'view', "customerID=$customerID");
-        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate);
+        return commonModel::createChanges($oldCustomer, $customer);
     }
 
     /**

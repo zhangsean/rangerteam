@@ -13,6 +13,7 @@ $config->leads = new stdclass();
 $config->leads->editor = new stdclass();
 $config->leads->editor->assign = array('id' => 'comment', 'tools' => 'simple');
 $config->leads->editor->ignore = array('id' => 'comment', 'tools' => 'simple');
+$config->leads->editor->view   = array('id' => 'comment,lastComment', 'tools' => 'simple');
 
 global $lang, $app;
 $app->loadLang('contact', 'crm');

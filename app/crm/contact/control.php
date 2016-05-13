@@ -91,19 +91,37 @@ class contact extends control
      * Edit a contact.
      * 
      * @param  int    $contactID 
+     * @param  bool   $comment
      * @access public
      * @return void
      */
-    public function edit($contactID)
+    public function edit($contactID, $comment = false)
     {
         $contact = $this->contact->getByID($contactID);
         $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($contact) ? 0 : $contact->customer, 'edit');
 
         if($_POST)
         {
-            $return = $this->contact->update($contactID);
+            $changes = array();
+            if($comment == false)
+            {
+                $changes = $this->contact->update($contactID);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
+
+            if($this->post->comment != '' or !empty($changes))
+            {
+                $actionID = $this->loadModel('action')->create('contact', $contactID, 'Edited', $this->post->comment);
+                $this->action->logHistory($actionID, $changes);
+            }
+
             $this->loadModel('customer')->updateEditedDate($this->post->customer);
-            $this->send($return);
+            $return = $this->contact->updateAvatar($contactID);
+
+            $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
+            $locate  = helper::createLink('contact', 'view', "contactID=$contactID");
+            if(strpos($this->server->http_referer, 'contact') === false and strpos($this->server->http_referer, 'leads') === false) $locate = 'reload';
+            $this->send(array('result' => 'success', 'message' => $message, 'locate' => $locate));
         }
 
         $this->app->loadLang('resume');
