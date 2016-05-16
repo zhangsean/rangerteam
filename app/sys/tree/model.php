@@ -508,6 +508,19 @@ class treeModel extends model
     }
 
     /**
+     * Create provider browse link.
+     * 
+     * @param  int    $category 
+     * @static
+     * @access public
+     * @return string 
+     */
+    public static function createProviderBrowseLink($category)
+    {
+        return html::a(helper::createLink('provider', 'browse', "mode=query&param=category={$category->id}"), $category->name, "id='category{$category->id}'");
+    }
+
+    /**
      * Create the manage link.
      * 
      * @param  object         $category 

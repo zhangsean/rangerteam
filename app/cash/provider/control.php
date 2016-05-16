@@ -52,6 +52,7 @@ class provider extends control
         $this->view->providers  = $this->customer->getList($mode = $mode, $param = $param, $relation = 'provider', $orderBy, $pager);
         $this->view->areas      = $this->loadModel('tree')->getOptionMenu('area');
         $this->view->industries = $this->tree->getOptionMenu('industry');
+        $this->view->treeMenu   = $this->loadModel('tree')->getTreeMenu('provider', 0, array('treeModel', 'createProviderBrowseLink'));
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;
         $this->display();
@@ -75,6 +76,7 @@ class provider extends control
         $this->view->title      = $this->lang->provider->create;
         $this->view->areas      = $this->loadModel('tree')->getOptionMenu('area');
         $this->view->industries = $this->tree->getOptionMenu('industry');
+        $this->view->categories = $this->tree->getOptionMenu('provider');
         $this->display();
     }
 
@@ -89,14 +91,23 @@ class provider extends control
     {
         if($_POST)
         {
-            $return = $this->customer->update($providerID);
-            $this->send($return);
+            $changes = $this->customer->update($providerID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if(!empty($changes))
+            {
+                $actionID = $this->loadModel('action')->create('provider', $providerID, 'Edited');
+                $this->action->logHistory($actionID, $changes);
+            }
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "providerID=$providerID")));
         }
 
         $this->view->title      = $this->lang->provider->edit;
         $this->view->provider   = $this->customer->getByID($providerID);
         $this->view->areas      = $this->loadModel('tree')->getOptionMenu('area');
         $this->view->industries = $this->tree->getOptionMenu('industry');
+        $this->view->categories = $this->tree->getOptionMenu('provider');
 
         $this->display();
     }

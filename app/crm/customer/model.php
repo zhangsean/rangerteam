@@ -204,7 +204,8 @@ class customerModel extends model
 
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
         $customerID = $this->dao->lastInsertID();
-        $this->loadModel('action')->create('customer', $customerID, 'Created');
+        $objectType = $relation == 'provider' ? 'provider' : 'customer';
+        $this->loadModel('action')->create($objectType, $customerID, 'Created');
 
         if(isset($contact))
         {

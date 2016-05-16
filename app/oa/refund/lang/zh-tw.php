@@ -66,3 +66,10 @@ $lang->refund->correctMoney      = '報銷額度不能多於申請金額';
 $lang->refund->categoryTips      = '尚未設置支出科目。';
 $lang->refund->setExpense        = '設置科目';
 $lang->refund->moneyTip          = '低於金額只需要一級審批，高於金額需要二級審批';
+
+$lang->refund->settings = new stdclass();
+$lang->refund->settings->setreviewer  = "審批人|refund|setreviewer";
+$lang->refund->settings->setCategory  = "報銷科目|refund|setcategory";
+$lang->refund->settings->setDepositor = "報銷賬戶|refund|setdepositor";
+$lang->refund->settings->setMoney     = "金額|refund|setmoney";
+$lang->refund->settings->setRefundBy  = "由誰報銷|refund|setrefundby";

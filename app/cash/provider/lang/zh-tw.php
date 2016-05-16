@@ -23,6 +23,7 @@ $lang->provider->qq            = 'QQ';
 $lang->provider->site          = '網站';
 $lang->provider->weibo         = '微博';
 $lang->provider->weixin        = '微信';
+$lang->provider->category      = '類目';
 $lang->provider->desc          = '簡介';
 $lang->provider->relation      = '關係';
 $lang->provider->createdBy     = '由誰添加';
@@ -41,6 +42,7 @@ $lang->provider->contact     = '聯繫人';
 $lang->provider->linkContact = '添加聯繫人';
 $lang->provider->basicInfo   = '基本信息';
 $lang->provider->moreInfo    = '更多信息';
+$lang->provider->setCategory = '維護類目';
 
 $lang->provider->typeList['']           = '';
 $lang->provider->typeList['national']   = '國有企業';

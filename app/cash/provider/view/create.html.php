@@ -25,6 +25,10 @@
           <td class='w-p40'><?php echo html::input('name', '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
+          <th><?php echo $lang->provider->category;?></th>
+          <td><?php echo html::select('category', $categories, '', "class='form-control chosen'");?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->provider->contact;?></th>
           <td><?php echo html::input('contact', '', "class='form-control'");?></td>
         </tr>

@@ -47,7 +47,7 @@ class actionModel extends model
         $action->nextDate   = $this->post->nextDate;
 
         /* If objectType is customer or contact, save objectID as customer id or contact id. */
-        if($objectType == 'customer') $action->customer = $objectID;
+        if($objectType == 'customer' || $objectType == 'provider') $action->customer = $objectID;
         if($objectType == 'contact')  $action->contact  = $objectID;
 
         $this->dao->insert(TABLE_ACTION)
@@ -120,9 +120,9 @@ class actionModel extends model
     {
         $actions = $this->dao->select('*')->from(TABLE_ACTION)
             ->where('1 = 1')
-            ->beginIF($objectType == 'customer')->andWhere('customer')->eq($objectID)->fi()
+            ->beginIF($objectType == 'customer' || $objectType == 'provider')->andWhere('customer')->eq($objectID)->fi()
             ->beginIF($objectType == 'contact')->andWhere('contact')->eq($objectID)->fi()
-            ->beginIF($objectType != 'customer' and $objectType != 'contact')
+            ->beginIF($objectType != 'customer' and $objectType != 'provider' and $objectType != 'contact')
               ->andWhere('objectType')->eq($objectType)
               ->andWhere('objectID')->eq($objectID)
             ->fi()

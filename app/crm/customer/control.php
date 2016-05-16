@@ -134,8 +134,7 @@ class customer extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $locate = strpos($this->server->http_referer, 'provider') ? helper::createLink('provider', 'view', "customerID=$customerID") :helper::createLink('customer', 'view', "customerID=$customerID");
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "customerID=$customerID")));
         }
 
         $this->view->title        = $this->lang->customer->edit;

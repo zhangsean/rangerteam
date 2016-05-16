@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<?php include '../../../sys/common/view/datepicker.html.php';?>
+<?php include '../../../sys/common/view/kindeditor.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <ul id='menuTitle'>
   <li><?php commonModel::printLink('provider', 'browse', '', $lang->provider->browse);?></li>
@@ -27,6 +27,10 @@
         <tr>
           <th class='w-80px'><?php echo $lang->provider->name;?></th>
           <td class='w-p40'><?php echo html::input('name', $provider->name, "class='form-control'");?></td><td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->provider->category;?></th>
+          <td><?php echo html::select('category', $categories, $provider->category, "class='form-control chosen'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->relation;?></th>

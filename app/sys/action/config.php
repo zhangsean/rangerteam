@@ -33,6 +33,7 @@ $config->action->objectNameFields['depositor'] = 'abbr';
 $config->action->objectNameFields['trade']     = 'id';
 $config->action->objectNameFields['doclib']    = 'name';
 $config->action->objectNameFields['schema']    = 'name';
+$config->action->objectNameFields['provider']  = 'name';
 
 $config->action->objectAppNames['task']      = 'oa';
 $config->action->objectAppNames['doc']       = 'oa';
@@ -55,3 +56,4 @@ $config->action->objectAppNames['resume']    = 'crm';
 $config->action->objectAppNames['depositor'] = 'cash';
 $config->action->objectAppNames['trade']     = 'cash';
 $config->action->objectAppNames['schema']    = 'cash';
+$config->action->objectAppNames['provider']  = 'cash';

@@ -23,6 +23,7 @@ $lang->provider->qq            = 'QQ';
 $lang->provider->site          = 'Site';
 $lang->provider->weibo         = 'Sina Weibo';
 $lang->provider->weixin        = 'Wechat';
+$lang->provider->category      = 'Category';
 $lang->provider->desc          = 'Description';
 $lang->provider->relation      = 'Relation';
 $lang->provider->createdBy     = 'Created By';
@@ -41,6 +42,7 @@ $lang->provider->contact     = 'Contacts';
 $lang->provider->linkContact = 'Create Contact';
 $lang->provider->basicInfo   = 'Basic Info';
 $lang->provider->moreInfo    = 'More Info';
+$lang->provider->setCategory = 'Set Category';
 
 $lang->provider->typeList['']           = '';
 $lang->provider->typeList['national']   = 'National';

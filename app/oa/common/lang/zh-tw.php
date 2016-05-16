@@ -77,10 +77,11 @@ $lang->trip->menu->company    = '公司|trip|company|';
 $lang->refund = new stdclass();
 $lang->refund->menu = new stdclass();
 $lang->refund->menu->personal = array('link' => '我的報銷|refund|personal|', 'alias' => 'create,edit');
-$lang->refund->menu->review   = '待審批|refund|browsereview|';
-$lang->refund->menu->todo     = '待報銷|refund|todo|';
-$lang->refund->menu->company  = '所有報銷|refund|company|';
-$lang->refund->menu->settings = array('link' => '設置|refund|settings|', 'alias' => 'setcategory');
+$lang->refund->menu->review     = '待審批|refund|browsereview|';
+$lang->refund->menu->reviewedBy = '由我審批|refund|browsereview|date=&status=reviewed';
+$lang->refund->menu->todo       = '待報銷|refund|todo|';
+$lang->refund->menu->company    = '所有報銷|refund|company|';
+$lang->refund->menu->settings   = array('link' => '設置|refund|setreviewer|', 'alias' => 'setcategory,setmoney,setdepositor,setrefundby');
 
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->modules = '功能模組|setting|modules|app=oa';
