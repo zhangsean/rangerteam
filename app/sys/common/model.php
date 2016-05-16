@@ -270,6 +270,14 @@ class commonModel extends model
     public function deny($module, $method)
     {
         if(helper::isAjaxRequest()) exit;
+
+        /* Get authorize again. */
+        $user = $this->app->user;
+        $user->rights = $this->loadModel('user')->authorize($user);
+        $this->session->set('user', $user);
+        $this->app->user = $this->session->user;
+        if(commonModel::hasPriv($module, $method)) return true;
+
         $vars = "module=$module&method=$method";
         if(isset($_SERVER['HTTP_REFERER']))
         {
