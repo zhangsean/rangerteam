@@ -155,7 +155,7 @@ class overtime extends control
         $this->overtime->review($id, $status);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-        $actionID = $this->loadModel('action')->create('overtime', $id, 'reviewed', '', $status);
+        $actionID = $this->loadModel('action')->create('overtime', $id, 'reviewed', '', zget($this->lang->overtime->statusList, $status));
         $this->sendmail($id, $actionID);
 
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
@@ -225,6 +225,23 @@ class overtime extends control
 
         $this->view->title    = $this->lang->overtime->edit;
         $this->view->overtime = $overtime;
+        $this->display();
+    }
+
+    /**
+     * View overtime.
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return void
+     */
+    public function view($id, $type = '')
+    {
+        $this->view->title    = $this->lang->overtime->view;
+        $this->view->overtime = $this->overtime->getByID($id);
+        $this->view->type     = $type;
+        $this->view->users    = $this->loadModel('user')->getPairs();
+        $this->view->preAndNext = $this->loadModel('common', 'sys')->getPreAndNextObject('overtime', $id);
         $this->display();
     }
 

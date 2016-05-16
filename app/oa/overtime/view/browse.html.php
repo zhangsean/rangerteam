@@ -61,7 +61,7 @@
           </tr>
         </thead>
         <?php foreach($overtimeList as $overtime):?>
-        <tr>
+        <tr data-url="<?php echo helper::createLink('overtime', 'view', "id=$overtime->id&type=$type");?>">
           <td><?php echo $overtime->id;?></td>
           <td><?php echo zget($users, $overtime->createdBy);?></td>
           <td class='visible-lg'><?php echo zget($deptList, $overtime->dept);?></td>
@@ -82,6 +82,7 @@
             <?php endif;?>
             <?php if($type == 'personal' and ($overtime->status == 'wait' or $overtime->status == 'draft')):?>
             <?php if($overtime->status == 'wait' or $overtime->status == 'draft') echo html::a($this->createLink('oa.overtime', 'switchstatus', "id=$overtime->id"), $overtime->status == 'wait' ? $lang->overtime->cancel : $lang->overtime->commit, "class='reload'");?>
+            <?php echo html::a($this->createLink('oa.overtime', 'view', "id=$overtime->id&type=$type"), $lang->view);?>
             <?php echo html::a($this->createLink('oa.overtime', 'edit', "id=$overtime->id"), $lang->edit, "data-toggle='modal'");?>
             <?php echo html::a($this->createLink('oa.overtime', 'delete', "id=$overtime->id"), $lang->delete, "class='deleter'");?>
             <?php endif;?>
