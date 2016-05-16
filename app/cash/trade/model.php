@@ -144,6 +144,7 @@ class tradeModel extends model
 
         if(empty($datas)) return array();
 
+        $this->app->loadLang('report', 'sys');
         foreach($datas as $name => $data) $data->name = ($name and isset($list[$name])) ? $list[$name] : $this->lang->report->undefined;
 
         return $datas;

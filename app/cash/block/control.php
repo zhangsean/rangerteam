@@ -143,8 +143,10 @@ class block extends control
         $rights = $this->app->user->rights;
         $expensePriv = (isset($rights['tradebrowse']['out']) or $this->app->user->admin == 'super') ? true : false; 
 
+        $this->params->type = !empty($this->params->type) ? $this->params->type : '';
         $this->view->trades = $this->dao->select('*')->from(TABLE_TRADE)
             ->where('1=1')
+            ->beginIF($this->params->type)->andWhere('type')->eq($this->params->type)->fi()
             ->beginIF(!empty($denyCategories))->andWhere('category')->notin($denyCategories)
             ->beginIF(!$expensePriv)->andWhere('type')->ne('out')->fi()
             ->orderBy($this->params->orderBy)
@@ -180,6 +182,30 @@ class block extends control
 
         $this->view->areas      = $this->loadModel('tree')->getOptionMenu('area');
         $this->view->industries = $this->tree->getOptionMenu('industry');
+        $this->display();
+    }
+
+    /**
+     * Print report block.
+     * 
+     * @access public
+     * @return void
+     */
+    public function printReportBlock()
+    {
+        $this->processParams();
+
+        $currentYear  = date('Y');
+        $currentMonth = date('m');
+
+        $datas = $this->loadModel('trade', 'cash')->getChartData($this->params->type, $currentYear, $currentMonth, $this->params->groupBy, $this->params->currency); 
+        $datas = $this->loadModel('report', 'sys')->computePercent($datas);
+
+        $this->view->datas        = $datas;
+        $this->view->type         = $this->params->type;
+        $this->view->groupBy      = $this->params->groupBy;
+        $this->view->currentYear  = $currentYear;
+        $this->view->currentMonth = $currentMonth;
         $this->display();
     }
 

@@ -62,6 +62,38 @@ class cashblockModel extends blockModel
         $params->orderBy['options'] = $this->lang->block->orderByList->trade;
         $params->orderBy['control'] = 'select';
 
+        $params->type['name']    = $this->lang->trade->type;
+        $params->type['options'] = $this->lang->block->typeList->trade;
+        $params->type['control'] = 'select';
+
+        return json_encode($params);
+    }
+
+    /**
+     * Get report params.
+     * 
+     * @access public
+     * @return string
+     */
+    public function getReportParams()
+    {
+        $this->app->loadLang('trade', 'cash');
+        $this->app->loadLang('report', 'sys');
+
+        $params = new stdclass();
+
+        $params->type['name']    = $this->lang->trade->type;
+        $params->type['options'] = $this->lang->block->typeList->trade;
+        $params->type['control'] = 'select';
+
+        $params->groupBy['name']    = $this->lang->report->common;
+        $params->groupBy['options'] = $this->lang->block->groupByList->trade;
+        $params->groupBy['control'] = 'select';
+
+        $params->currency['name']    = $this->lang->trade->currency;
+        $params->currency['options'] = $this->loadModel('common', 'sys')->getCurrencyList();
+        $params->currency['control'] = 'select';
+
         return json_encode($params);
     }
 
