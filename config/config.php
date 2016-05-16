@@ -173,6 +173,7 @@ $config->objectTables['todo']        = TABLE_TODO;
 $config->objectTables['order']       = TABLE_ORDER;
 $config->objectTables['contract']    = TABLE_CONTRACT;
 $config->objectTables['customer']    = TABLE_CUSTOMER;
+$config->objectTables['provider']    = TABLE_CUSTOMER;
 $config->objectTables['contact']     = TABLE_CONTACT;
 $config->objectTables['thread']      = TABLE_THREAD;
 $config->objectTables['article']     = TABLE_ARTICLE;

@@ -42,6 +42,7 @@ $config->contract->search['fields']['return']        = $lang->contract->return;
 $config->contract->search['fields']['returnedBy']    = $lang->contract->returnedBy;
 $config->contract->search['fields']['returnedDate']  = $lang->contract->returnedDate;
 $config->contract->search['fields']['id']            = $lang->contract->id;
+$config->contract->search['fields']['contract.productLine']   = $lang->contract->product. ' / ' . $lang->contract->productLine;
 
 $config->contract->search['params']['name']          = array('operator' => 'include', 'control' => 'input', 'values' => '');
 $config->contract->search['params']['amount']        = array('operator' => '>=', 'control' => 'input',  'values' => '');
@@ -55,6 +56,7 @@ $config->contract->search['params']['return']        = array('operator' => '=', 
 $config->contract->search['params']['returnedBy']    = array('operator' => '=',  'control' => 'select', 'values' => 'users');
 $config->contract->search['params']['returnedDate']  = array('operator' => '>=', 'control' => 'input',  'values' => '', 'class' => 'date');
 $config->contract->search['params']['id']            = array('operator' => '=',  'control' => 'input',  'values' => '');
+$config->contract->search['params']['contract.productLine']   = array('operator' => 'include',  'control' => 'input',  'values' => '');
 
 $config->contract->list = new stdclass();
 $config->contract->list->exportFields = '

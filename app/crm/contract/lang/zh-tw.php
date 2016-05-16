@@ -47,6 +47,8 @@ $lang->contract->handlers      = '參與者';
 $lang->contract->contactedBy   = '由誰聯繫';
 $lang->contract->contactedDate = '最後聯繫';
 $lang->contract->nextDate      = '下次聯繫';
+$lang->contract->product       = '產品';
+$lang->contract->productLine   = '產品綫';
 
 $lang->contract->browse           = '瀏覽合同';
 $lang->contract->receive          = '回款';

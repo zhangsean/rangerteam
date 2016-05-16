@@ -47,6 +47,8 @@ $lang->contract->handlers      = 'Handlers';
 $lang->contract->contactedBy   = 'Contacted By';
 $lang->contract->contactedDate = 'Contacted Date';
 $lang->contract->nextDate      = 'Next Date';
+$lang->contract->product       = 'Product';
+$lang->contract->productLine   = 'Product Line';
 
 $lang->contract->browse           = 'Browse Contract';
 $lang->contract->receive          = 'Receive';
