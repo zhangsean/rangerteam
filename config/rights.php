@@ -138,6 +138,7 @@ $config->rights->member['leave']['switchstatus'] = 'switchstatus';
 $config->rights->member['overtime']['personal']     = 'personal';
 $config->rights->member['overtime']['create']       = 'create';
 $config->rights->member['overtime']['edit']         = 'edit';
+$config->rights->member['overtime']['view']         = 'view';
 $config->rights->member['overtime']['delete']       = 'delete';
 $config->rights->member['overtime']['switchstatus'] = 'switchstatus';
 
