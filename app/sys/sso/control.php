@@ -101,4 +101,27 @@ class sso extends control
         $response['data']   = 'auth failed.';
         die(json_encode($response));
     }
+
+    /**
+     * Get todo list for ranzhi.
+     * 
+     * @param  string  $code 
+     * @param  string  $type 
+     * @param  string  $account 
+     * @access public
+     * @return void
+     */
+    public function getTodoList($code = '', $type = '', $account = '')
+    {
+        if(!$account) $account = $this->app->user->account;
+        $datas = $this->sso->getZentaoTodoList($code, $type, $account);
+
+        $todos = $this->dao->select('*')->from(TABLE_TODO)->where('type')->eq("{$code}_{$type}")->fetchAll('idvalue');
+        foreach($datas as $id => $data)
+        {
+            if(isset($todos[$id])) unset($datas[$id]);
+        }
+
+        die($this->loadModel('todo', 'sys')->buildBoardList($datas, $code . '_' . $type));
+    }
 }

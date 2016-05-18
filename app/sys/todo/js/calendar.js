@@ -126,6 +126,17 @@ $(document).ready(function()
         if(type == 'all' || type == 'order') $('#tab_order').load(link, function(){$('#tab_order [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_order');});
         var link = createLink('crm.customer', 'ajaxGetTodoList', param);
         if(type == 'all' || type == 'customer') $('#tab_customer').load(link, function(){$('#tab_customer [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_customer');});
+        for(i = 0; i < v.zentaoEntryList.length; i++)
+        {
+            var code = v.zentaoEntryList[i];
+            var param = 'code=' + code + '&type=task&account=';
+            var link = createLink('sso', 'getTodoList', param);
+            if(type == 'all' || type == code + '_task') $('#tab_' + code + '_task').load(link, function(){$('#tab_' + code + '_task [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_' + code + '_task');});
+
+            var param = 'code=' + code + '&type=bug&account=';
+            var link = createLink('sso', 'getTodoList', param);
+            if(type == 'all' || type == code + '_bug') $('#tab_' + code + '_bug').load(link, function(){$('#tab_' + code + '_bug [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_' + code + '_bug');});
+        }
     }
     addPager('#tab_custom');
     updateBoard('all');

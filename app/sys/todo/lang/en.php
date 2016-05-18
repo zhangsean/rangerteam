@@ -53,6 +53,9 @@ $lang->todo->finishedBy   = 'Finished By';
 $lang->todo->finishedDate = 'Finished Date';
 $lang->todo->closedBy     = 'Closed By';
 $lang->todo->closedDate   = 'Closed Date';
+$lang->todo->ranzhi       = 'Ranzhi';
+$lang->todo->task         = 'Task';
+$lang->todo->bug          = 'Bug';
 
 $lang->todo->confirmTip  = 'This todo linked to %s #%s，chang it also?';
 $lang->todo->assignedTip = '%s at %s';

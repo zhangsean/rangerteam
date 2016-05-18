@@ -24,6 +24,7 @@ class todo extends control
         $this->loadModel('task');
         $this->loadModel('order', 'crm');
         $this->loadModel('customer', 'crm');
+
     }
 
     /**
@@ -43,12 +44,23 @@ class todo extends control
         $todoList['order']    = array();
         $todoList['customer'] = array();
 
-        $this->view->title      = $this->lang->todo->calendar;
-        $this->view->date       = $date;
-        $this->view->data       = $this->todo->getCalendarData($date);
-        $this->view->todoList   = $todoList;
-        $this->view->moduleMenu = commonModel::createModuleMenu($this->moduleName);
-        $this->view->users      = $this->loadModel('user')->getPairs();
+        $zentaoEntryList = $this->dao->select('code, name')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchPairs();
+        foreach($zentaoEntryList as $code => $name)
+        {
+            $todoList["{$code}_task"] = array();
+            $todoList["{$code}_bug"]  = array();
+
+            $this->lang->todo->typeList["{$code}_task"] = $name . $this->lang->todo->task;
+            $this->lang->todo->typeList["{$code}_bug"]  = $name . $this->lang->todo->bug;
+        }
+
+        $this->view->title           = $this->lang->todo->calendar;
+        $this->view->date            = $date;
+        $this->view->data            = $this->todo->getCalendarData($date);
+        $this->view->todoList        = $todoList;
+        $this->view->zentaoEntryList = $zentaoEntryList;
+        $this->view->moduleMenu      = commonModel::createModuleMenu($this->moduleName);
+        $this->view->users           = $this->loadModel('user')->getPairs();
         $this->display();
     }
 
@@ -85,6 +97,13 @@ class todo extends control
         else
         {
             $todos = $this->todo->getList($mode, $this->app->user->account, 'all', 'unclosed', $orderBy, $pager);
+        }
+
+        $zentaoEntryList = $this->dao->select('code, name')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchPairs();
+        foreach($zentaoEntryList as $code => $name)
+        {
+            $this->lang->todo->typeList["{$code}_task"] = $name . $this->lang->todo->task;
+            $this->lang->todo->typeList["{$code}_bug"]  = $name . $this->lang->todo->bug;
         }
 
         $this->view->title      = $this->lang->todo->browse;
@@ -208,6 +227,13 @@ class todo extends control
             if(!$comment) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'closeModal' => 'true', 'locate' => 'reload'));
             if($comment)  $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'loadInModal'));
         }
+
+        $zentaoEntryList = $this->dao->select('code, name')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchPairs();
+        foreach($zentaoEntryList as $code => $name)
+        {
+            $this->lang->todo->typeList["{$code}_task"] = $name . $this->lang->todo->task;
+            $this->lang->todo->typeList["{$code}_bug"]  = $name . $this->lang->todo->bug;
+        }
        
         if($todo->date != '00000000') $todo->date = strftime("%Y-%m-%d", strtotime($todo->date));
         $this->view->title      = $this->lang->todo->edit;
@@ -236,6 +262,13 @@ class todo extends control
         if($todo->type == 'task')     $this->session->set('taskList', "javascript:$.openEntry(\"dashboard\")");
         if($todo->type == 'order')    $this->session->set('orderList', "javascript:$.openEntry(\"dashboard\")");
         if($todo->type == 'customer') $this->session->set('customerList', "javascript:$.openEntry(\"dashboard\")");
+
+        $zentaoEntryList = $this->dao->select('code, name')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchPairs();
+        foreach($zentaoEntryList as $code => $name)
+        {
+            $this->lang->todo->typeList["{$code}_task"] = $name . $this->lang->todo->task;
+            $this->lang->todo->typeList["{$code}_bug"]  = $name . $this->lang->todo->bug;
+        }
 
         $this->view->title      = "{$this->lang->todo->common} #$todo->id $todo->name";
         $this->view->modalWidth = '80%';
@@ -349,6 +382,31 @@ class todo extends control
             $confirmNote = sprintf($this->lang->todo->confirmTip, $this->lang->{$todo->type}->common, $todo->id);
             $confirmURL  = $this->createLink("{$entry}.{$todo->type}", 'view', "id=$todo->idvalue", 'html');
             $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'url' => $confirmURL, 'entry' => $entry)));
+        }
+
+        $zentaoEntryList = $this->dao->select('code, name')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchPairs();
+        foreach($this->zentaoEntryList as $zentaoEntry)
+        {
+            if(strpos($zentaoEntry->login, '&') === false) $zentaoUrl = substr($zentaoEntry->login, 0, strrpos($zentaoEntry->login, '/') + 1); 
+            if(strpos($zentaoEntry->login, '&') !== false) $zentaoUrl = substr($zentaoEntry->login, 0, strpos($zentaoEntry->login, '?'));
+            $zentaoConfig = $this->loadModel('sso')->getZentaoServerConfig($zentaoUrl);
+
+            $code = $zentaoEntry->code;
+            if($todo->type == $code . '_task') 
+            {
+                $confirmNote = sprintf($this->lang->todo->confirmTip, $zentaoEntry->name, $todo->id);
+                $referer     = base64_encode($this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'task', 'view', "id=$todo->idvalue", 'html', false));
+                $confirmURL  = $this->createLink('entry', 'visit', "entryID=$zentaoEntry->id", 'html') . '?referer=' . $referer;
+                $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'url' => $confirmURL, 'entry' => $zentaoEntry->id)));
+            }
+
+            if($todo->type == $code . '_bug') 
+            {
+                $confirmNote = sprintf($this->lang->todo->confirmTip, $zentaoEntry->name, $todo->id);
+                $referer     = base64_encode($this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'bug', 'view', "id=$todo->idvalue", 'html'));
+                $confirmURL  = $this->createLink('entry', 'visit', "entryID=$zentaoEntry->id&referer=$referer", 'html');
+                $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'url' => $confirmURL, 'entry' => 'dashboard')));
+            }
         }
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }

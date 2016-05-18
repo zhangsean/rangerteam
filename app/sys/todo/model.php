@@ -362,6 +362,28 @@ class todoModel extends model
             if($todo->private and $this->app->user->account != $todo->account) $todo->name = $this->lang->todo->thisIsPrivate;
             $todos[] = $todo;
         }
+
+        $zentaoEntryList = $this->dao->select('*')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchAll();
+        foreach($zentaoEntryList as $zentaoEntry)
+        {
+            static $zentaoTaskList = array();
+            static $zentaoBugList  = array();
+            foreach($todos as $todo)
+            {
+                if($todo->type == $zentaoEntry->code . '_task')
+                {
+                    if(empty($zentaoTaskList)) $zentaoTaskList = $this->loadModel('sso')->getZentaoTodoList($zentaoEntry->code, 'task', $this->app->user->account);
+                    $todo->name = $zentaoTaskList[$todo->idvalue];
+                }
+
+                if($todo->type == $zentaoEntry->code . '_bug')
+                {
+                    if(empty($zentaoBugList)) $zentaoBugList = $this->loadModel('sso')->getZentaoTodoList($zentaoEntry->code, 'bug', $this->app->user->account);
+                    $todo->name = $zentaoBugList[$todo->idvalue];
+                }
+            }
+        }
+
         return $todos;
     }
 
@@ -388,7 +410,7 @@ class todoModel extends model
             $data->name  = $key;
             $data->title = $calendar;
             $data->desc  = $calendar;
-            $data->color = $this->config->todo->calendarColor[$key];
+            $data->color = zget($this->config->todo->calendarColor, $key, $this->config->todo->calendarColor['custom']);
             $calendarList[] = $data;
         }
 

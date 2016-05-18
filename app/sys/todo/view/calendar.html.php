@@ -7,7 +7,7 @@
  * @author      chujilu <chujilu@cnezsoft.com>
  * @package     todo
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.ranzhico.com
  */
 ?>
 <?php include '../../../sys/my/view/header.html.php';?>
@@ -18,14 +18,29 @@
 <?php js::set('settings.startDate', $date == 'future' ? date('Y-m-d') : date('Y-m-d', strtotime($date)));?>
 <?php js::set('settings.data', $data);?>
 <?php js::set('users', $users);?>
+<?php js::set('zentaoEntryList', array_keys($zentaoEntryList));?>
 <div class='with-side <?php echo $this->cookie->todoCalendarSide == 'hide' ? 'hide-side' : ''?>'>
   <div class='side'>
-    <ul id="myTab" class="nav nav-tabs">
-      <li class="active"><a href="#tab_undone" data-toggle="tab"><?php echo $lang->todo->periods['before']?></a></li>
-      <li><a href="#tab_custom" data-toggle="tab"><?php echo $lang->todo->periods['future']?></a></li>
-      <li><a href="#tab_task" data-toggle="tab"><?php echo $lang->task->common;?></a></li>
-      <li><a href="#tab_order" data-toggle="tab"><?php echo $lang->order->common;?></a></li>
-      <li><a href="#tab_customer" data-toggle="tab"><?php echo $lang->customer->common;?></a></li>
+    <ul id='myTab' class='nav nav-tabs'>
+      <li class='active'><a href='#tab_undone' data-toggle='tab'><?php echo $lang->todo->periods['before']?></a></li>
+      <li><a href='#tab_custom' data-toggle='tab'><?php echo $lang->todo->periods['future']?></a></li>
+      <li class='dropdown'>
+        <a data-toggle='dropdown' class='dropdown-toggle' href='#'><?php echo $lang->todo->ranzhi;?><b class='caret'></b></a>
+        <ul aria-labelledby='myTabDrop1' role='menu' class='dropdown-menu'>
+          <li><a href='#tab_task' data-toggle='tab'><?php echo $lang->task->common;?></a></li>
+          <li><a href='#tab_order' data-toggle='tab'><?php echo $lang->order->common;?></a></li>
+          <li><a href='#tab_customer' data-toggle='tab'><?php echo $lang->customer->common;?></a></li>
+        </ul>
+      </li>
+      <?php foreach($zentaoEntryList as $code => $name):?>
+      <li class='dropdown'>
+        <a data-toggle='dropdown' class='dropdown-toggle' href='#'><?php echo $name;?><b class='caret'></b></a>
+        <ul aria-labelledby='myTabDrop1' role='menu' class='dropdown-menu'>
+          <li><a data-toggle='tab' tabindex='-1' href="<?php echo "#tab_{$code}_task";?>"><?php echo $lang->task->common;?></a></li>
+          <li><a data-toggle='tab' tabindex='-1' href="<?php echo "#tab_{$code}_bug";?>"><?php echo $lang->todo->bug;?></a></li>
+        </ul>
+      </li>
+      <?php endforeach;?>
     </ul>
     <div class='tab-content'>
       <?php foreach($todoList as $type => $todos):?>
