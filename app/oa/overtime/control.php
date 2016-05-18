@@ -114,6 +114,8 @@ class overtime extends control
             $overtimeList = $this->overtime->getList($type, $currentYear, $currentMonth, '', '', '', $orderBy);
         }
 
+        $this->session->set('overtimeList', $this->app->getURI(true));
+
         $this->view->title        = $this->lang->overtime->browse;
         $this->view->type         = $type;
         $this->view->currentYear  = $currentYear;
