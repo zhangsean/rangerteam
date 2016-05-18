@@ -29,11 +29,12 @@ $lang->exportIcon = "<i class='icon-upload-alt'> </i>";
 
 /* Apps lang items.*/
 $lang->apps = new stdclass();
-$lang->apps->crm  = '客戶';
-$lang->apps->cash = '財務';
-$lang->apps->oa   = '辦公';
-$lang->apps->sys  = '通用';
-$lang->apps->team = '團隊';
+$lang->apps->crm        = '客戶';
+$lang->apps->cash       = '財務';
+$lang->apps->oa         = '辦公';
+$lang->apps->sys        = '通用';
+$lang->apps->team       = '團隊';
+$lang->apps->superadmin = '後台';
 
 /* Lang items for ranzhi. */
 $lang->ranzhi    = '然之協同';

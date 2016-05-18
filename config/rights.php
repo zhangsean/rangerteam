@@ -15,6 +15,7 @@ $config->rights = new stdclass();
 $config->rights->guest = array();
 
 $config->rights->member['index']['index']           = 'index';
+$config->rights->member['admin']['index']           = 'index';
 $config->rights->member['dashboard']['index']       = 'index';
 $config->rights->member['dashboard']['todo']        = 'todo';
 $config->rights->member['dashboard']['task']        = 'task';

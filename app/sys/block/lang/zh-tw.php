@@ -180,3 +180,5 @@ $lang->block->moreLinkList->project['suspend']  = '已掛起|oa|project|index|st
 $lang->block->moreLinkList->blog = '最新博客|team|blog|index|';
 $lang->block->moreLinkList->thread['new']   = '最新帖子|team|forum|index|';
 $lang->block->moreLinkList->thread['stick'] = '置頂帖子|team|forum|index|';
+
+$lang->block->moreLinkList->report = '賬目報表|cash|trade|report|';

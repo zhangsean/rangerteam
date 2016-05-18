@@ -29,11 +29,12 @@ $lang->exportIcon = "<i class='icon-upload-alt'> </i>";
 
 /* Apps lang items.*/
 $lang->apps = new stdclass();
-$lang->apps->crm  = 'CRM';
-$lang->apps->cash = 'CASH';
-$lang->apps->oa   = 'OA';
-$lang->apps->sys  = 'SYSTEM';
-$lang->apps->team = 'TEAM';
+$lang->apps->crm        = 'CRM';
+$lang->apps->cash       = 'CASH';
+$lang->apps->oa         = 'OA';
+$lang->apps->sys        = 'SYSTEM';
+$lang->apps->team       = 'TEAM';
+$lang->apps->superadmin = 'ADMIN';
 
 /* Lang items for ranzhi. */
 $lang->ranzhi    = 'ranzhi';

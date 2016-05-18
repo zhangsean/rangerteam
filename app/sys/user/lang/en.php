@@ -72,6 +72,7 @@ $lang->user->vcard           = 'Vcard';
 $lang->user->uploadAvatar    = 'Upload avatar';
 $lang->user->cropAvatar      = 'Crop avatar';
 $lang->user->cropAvatarTip   = 'Drag border to crop avatar';
+$lang->user->adminUser       = 'User';
 
 $lang->user->profile     = 'Profile';
 $lang->user->editProfile = 'Edit profile';

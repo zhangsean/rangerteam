@@ -72,6 +72,7 @@ $lang->user->vcard           = '獲取二維碼名片';
 $lang->user->uploadAvatar    = '上傳頭像';
 $lang->user->cropAvatar      = '裁剪頭像';
 $lang->user->cropAvatarTip   = '拖拽選框來選擇頭像裁剪範圍';
+$lang->user->adminUser       = '組織';
 
 $lang->user->profile     = '個人信息';
 $lang->user->editProfile = '編輯信息';

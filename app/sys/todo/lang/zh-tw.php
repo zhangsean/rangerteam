@@ -53,6 +53,9 @@ $lang->todo->finishedBy   = '完成者';
 $lang->todo->finishedDate = '完成時間';
 $lang->todo->closedBy     = '關閉者';
 $lang->todo->closedDate   = '關閉時間';
+$lang->todo->ranzhi       = '然之';
+$lang->todo->task         = '任務';
+$lang->todo->bug          = 'Bug';
 
 $lang->todo->confirmTip  = '該Todo關聯的是%s #%s，需要修改它嗎？';
 $lang->todo->assignedTip = '%s 于 %s';

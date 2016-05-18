@@ -49,6 +49,9 @@ $lang->appModule->team[] = 'thread';
 $lang->appModule->team[] = 'user';
 $lang->appModule->team[] = 'company';
 
+$lang->appModule->superadmin = array();
+$lang->appModule->superadmin[] = 'adminUser';
+
 $lang->appModule->sys = array();
 $lang->appModule->sys[] = 'tree';
 $lang->appModule->sys[] = 'setting';
@@ -87,8 +90,10 @@ $lang->moduleOrder[105] = 'thread';
 $lang->moduleOrder[110] = 'user';
 $lang->moduleOrder[115] = 'company';
 
-$lang->moduleOrder[110] = 'tree';
-$lang->moduleOrder[115] = 'setting';
+$lang->moduleOrder[120] = 'adminUser';
+
+$lang->moduleOrder[125] = 'tree';
+$lang->moduleOrder[130] = 'setting';
 
 $lang->resource = new stdclass();
 
@@ -539,7 +544,7 @@ $lang->thread->methodOrder[35] = 'deleteFile';
 $lang->resource->user = new stdclass();
 $lang->resource->user->colleague = 'colleague';
 
-$lang->user->methodOrder[10] = 'colleague';
+$lang->user->methodOrder[5] = 'colleague';
 
 $lang->resource->company = new stdclass();
 $lang->resource->company->index = 'index';
@@ -559,7 +564,6 @@ $lang->tree->methodOrder[5]  = 'edit';
 $lang->tree->methodOrder[10] = 'children';
 $lang->tree->methodOrder[15] = 'delete';
 $lang->tree->methodOrder[20] = 'merge';
-
 
 /* Setting. */
 $lang->resource->setting = new stdclass();
@@ -584,6 +588,20 @@ $lang->resource->my = new stdclass();
 $lang->resource->my->company = 'company';
 
 $lang->my->methodOrder[5] = 'company';
+
+/* User. */
+$lang->resource->adminUser = new stdclass();
+$lang->resource->adminUser->admin  = 'admin';
+$lang->resource->adminUser->create = 'create';
+$lang->resource->adminUser->edit   = 'edit';
+$lang->resource->adminUser->delete = 'delete';
+$lang->resource->adminUser->forbid = 'forbid';
+
+$lang->adminUser->methodOrder[10]  = 'admin';
+$lang->adminUser->methodOrder[15] = 'create';
+$lang->adminUser->methodOrder[20] = 'edit';
+$lang->adminUser->methodOrder[25] = 'delete';
+$lang->adminUser->methodOrder[30] = 'forbid';
 
 /* Every version of new privilege. */
 $lang->changelog = array();

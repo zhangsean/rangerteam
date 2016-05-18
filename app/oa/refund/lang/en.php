@@ -68,6 +68,7 @@ $lang->refund->setExpense        = 'Go to set.';
 $lang->refund->moneyTip          = 'If money of refund is less than this, reviewed once, but money of refund is more than this, reviewed twice.';
 
 $lang->refund->settings = new stdclass();
+$lang->refund->settings->common       = 'Settings';
 $lang->refund->settings->setreviewer  = "Reviewer|refund|setreviewer";
 $lang->refund->settings->setCategory  = "Category|refund|setcategory";
 $lang->refund->settings->setDepositor = "Depositor|refund|setdepositor";

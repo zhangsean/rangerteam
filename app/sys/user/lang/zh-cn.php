@@ -72,6 +72,7 @@ $lang->user->vcard           = '获取二维码名片';
 $lang->user->uploadAvatar    = '上传头像';
 $lang->user->cropAvatar      = '裁剪头像';
 $lang->user->cropAvatarTip   = '拖拽选框来选择头像裁剪范围';
+$lang->user->adminUser       = '组织';
 
 $lang->user->profile     = '个人信息';
 $lang->user->editProfile = '编辑信息';

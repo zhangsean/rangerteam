@@ -209,6 +209,16 @@ class group extends control
             }
 
             $apps  = $this->loadModel('entry')->getEntries();
+
+            $app = new stdclass();
+            $app->id = 'superadmin';
+            $app->code = 'superadmin';
+            $app->abbr = $this->lang->apps->superadmin;
+            $app->name = $this->lang->apps->superadmin;
+            $app->logo = '';
+
+            array_push($apps, $app);
+
             $privs = $this->group->getPrivs($groupID);
             foreach($apps as $app)
             {

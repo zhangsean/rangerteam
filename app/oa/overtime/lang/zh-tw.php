@@ -4,6 +4,7 @@ $lang->overtime->common = '加班';
 $lang->overtime->browse = '加班列表';
 $lang->overtime->create = '申請';
 $lang->overtime->edit   = '編輯';
+$lang->overtime->view   = '詳情';
 $lang->overtime->delete = '刪除';
 $lang->overtime->review = '審核';
 $lang->overtime->cancel = '撤銷';
@@ -45,4 +46,5 @@ $lang->overtime->unique = '%s 已經存在加班記錄';
 $lang->overtime->confirmReview['pass']   = '您確定要執行通過操作嗎？';
 $lang->overtime->confirmReview['reject'] = '您確定要執行拒絶操作嗎？';
 
-$lang->overtime->hoursTip = '小時';
+$lang->overtime->hoursTip  = '小時';
+$lang->overtime->baseInfo = '基本信息';

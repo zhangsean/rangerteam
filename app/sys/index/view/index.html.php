@@ -185,7 +185,7 @@ var entries = [
     order     : 9999998
 }];
 
-<?php if($isSuperAdmin):?>
+<?php if($isSuperAdmin || commonModel::hasAppPriv('superadmin')):?>
 <?php $superadminMenu  = (isset($superadmin) and isset($superadmin->visible) and $superadmin->visible == 0) ? 'list' : 'all';?>
 
 entries.push(

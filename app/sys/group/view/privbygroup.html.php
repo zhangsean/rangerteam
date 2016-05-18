@@ -51,7 +51,11 @@
           <th class='text-right w-120px'>
             <label class="checkbox">
               <?php 
-              if($moduleName == 'user')
+              if($app == 'superadmin' && $moduleName == 'adminUser') 
+              {
+                  echo $this->lang->user->adminUser;
+              }
+              elseif($moduleName == 'user')
               {
                   echo $this->lang->user->colleagueMenu;
               }
@@ -65,6 +69,7 @@
           </th>
           <td id='<?php echo $moduleName;?>'>
             <?php
+            if($app == 'superadmin' && $moduleName == 'adminUser') $moduleName = 'user';
             $options = array();
             foreach($moduleActions as $action => $actionLabel)
             {
