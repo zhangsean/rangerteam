@@ -19,9 +19,18 @@ $lang->block->availableBlocks = new stdclass();
 $lang->block->availableBlocks->depositor = 'Payment Depositor';
 $lang->block->availableBlocks->trade     = 'Trade';
 $lang->block->availableBlocks->provider  = 'Provider';
+$lang->block->availableBlocks->report    = 'Report';
 
 $this->lang->block->orderByList->trade['id_asc']  = 'ID ASC';
 $this->lang->block->orderByList->trade['id_desc'] = 'ID DESC';
+
+$this->lang->block->typeList->trade['all']  = 'All';
+$this->lang->block->typeList->trade['in']   = 'Income';
+$this->lang->block->typeList->trade['out']  = 'Expense';
+
+$this->lang->block->groupByList = new stdclass();
+$this->lang->block->groupByList->trade['category'] = 'Group by category';
+$this->lang->block->groupByList->trade['dept']     = 'Group by deptment';
 
 $this->lang->block->orderByList->provider['id_asc']  = 'ID ASC';
 $this->lang->block->orderByList->provider['id_desc'] = 'ID DESC';

@@ -180,3 +180,5 @@ $lang->block->moreLinkList->project['suspend']  = 'Suspend|oa|project|index|stat
 $lang->block->moreLinkList->blog = 'Latest Blog|team|blog|index|';
 $lang->block->moreLinkList->thread['new']   = 'Latest Thread|team|forum|index|';
 $lang->block->moreLinkList->thread['stick'] = 'Stick Thread|team|forum|index|';
+
+$lang->block->moreLinkList->report = 'Report|cash|trade|report|';

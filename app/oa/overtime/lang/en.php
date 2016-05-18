@@ -4,6 +4,7 @@ $lang->overtime->common = 'Overtime';
 $lang->overtime->browse = 'Browse Overtime';
 $lang->overtime->create = 'Apply';
 $lang->overtime->edit   = 'Edit';
+$lang->overtime->view   = 'View';
 $lang->overtime->delete = 'Delete';
 $lang->overtime->review = 'Review';
 $lang->overtime->cancel = 'Cancel';
@@ -46,3 +47,4 @@ $lang->overtime->confirmReview['pass']   = 'Are you sure to pass it?';
 $lang->overtime->confirmReview['reject'] = 'Are you sure to reject it?';
 
 $lang->overtime->hoursTip = 'Hours';
+$lang->overtime->baseInfo = 'Base Information';
