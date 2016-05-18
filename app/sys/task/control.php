@@ -897,7 +897,7 @@ class task extends control
         }
         if($type == 'board')
         {
-            die($this->loadModel('todo', 'oa')->buildBoardList($tasks, 'task'));
+            die($this->loadModel('todo', 'sys')->buildBoardList($tasks, 'task'));
         }
         die(json_encode($tasks));
     }
