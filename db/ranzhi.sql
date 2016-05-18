@@ -159,9 +159,13 @@ CREATE TABLE `crm_customer` (
   KEY `size` (`size`),
   KEY `name` (`name`),
   KEY `type` (`type`),
+  KEY `relation` (`relation`),
   KEY `area` (`area`),
   KEY `status` (`status`),
   KEY `level` (`level`),
+  KEY `category` (`category`),
+  KEY `public` (`public`),
+  KEY `assignedTo` (`assignedTo`),
   KEY `contactedDate` (`contactedDate`),
   KEY `nextDate` (`nextDate`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

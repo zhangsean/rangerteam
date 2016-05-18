@@ -75,7 +75,7 @@ class contactModel extends model
     public function getContactsSawByMe($type = 'view', $contactIdList = array())
     {
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
-        $contactList = $this->dao->select('t1.*')->from(TABLE_CONTACT)->alias('t1')
+        $contactList = $this->dao->select('t1.id')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
             ->andWhere('t1.status')->eq('normal')
@@ -83,9 +83,9 @@ class contactModel extends model
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->andWhere('t2.customer')->in($customerIdList)
             ->fi()
-            ->fetchAll('id');
+            ->fetchPairs();
 
-        return array_keys($contactList);
+        return $contactList;
     }
 
     /** 
@@ -130,7 +130,7 @@ class contactModel extends model
                 ->beginIF($this->app->user->admin == 'super')
                 ->andWhere('assignedTo', true)->eq($this->app->user->account)
                 ->orWhere('status')->eq('ignore')
-                ->markRight()
+                ->markRight(1)
                 ->fi()
                 
                 ->orderBy($orderBy)
@@ -148,10 +148,19 @@ class contactModel extends model
                 ->andWhere('deleted')->eq(0)
                 ->fetchAll('contact');
 
-            if($relation == 'client') $customers = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('relation')->ne('provider')->fetchAll('id');
-            if($relation == 'provider') $customers = $this->dao->select('*')->from(TABLE_CUSTOMER)->where('relation')->ne('client')->fetchAll('id');
+            if($relation == 'client') 
+            {
+                $customers = $this->dao->select('id')->from(TABLE_CUSTOMER)->where('relation')->ne('provider')->fetchPairs();
+                foreach($customerIdList as $id)
+                {
+                    if(!isset($customers[$id])) unset($customerIdList[$id]);
+                }
+            }
+            if($relation == 'provider') 
+            {
+                $customerIdList = $this->dao->select('id')->from(TABLE_CUSTOMER)->where('relation')->ne('client')->fetchPairs();
+            }
 
-            $customerIdList = $relation == 'provider' ? array_keys($customers) : ($customers ? array_intersect($customerIdList, array_keys($customers)) : $customerIdList);
             if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
             $contacts = $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
@@ -159,7 +168,6 @@ class contactModel extends model
                 ->where('t1.deleted')->eq(0)
                 ->andWhere('status')->eq($status)
                 ->beginIF($origin)->andWhere('origin')->like("%,$origin,%")->fi()
-                ->andWhere('t2.customer')->in($customerIdList)
                 ->beginIF($customer)->andWhere('t1.id')->in(array_keys($resumes))->fi()
                 ->beginIF($mode == 'assignedTo')->andWhere('t1.assignedTo')->eq($this->app->user->account)->fi()
                 ->beginIF($mode == 'past')->andWhere('t1.nextDate')->lt(helper::today())->andWhere('t1.nextDate')->ne('0000-00-00')->fi()
@@ -185,6 +193,10 @@ class contactModel extends model
                     $contacts[$contactID]->left     = $resume->left;
                 }
             }
+            foreach($contacts as $id => $contact)
+            {
+                if(!isset($customerIdList[$contact->customer])) unset($contacts[$id]);
+            }
         }
 
         foreach($contacts as $contact) $this->formatContact($contact);
@@ -206,15 +218,15 @@ class contactModel extends model
         $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
-        $contacts = $this->dao->select('t1.*')->from(TABLE_CONTACT)->alias('t1')
+        $contacts = $this->dao->select('t1.id, t1.realname')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.id = t2.contact')
             ->where('t1.deleted')->eq(0)
             ->beginIF($status)->andWhere('t1.status')->eq($status)->fi()
             ->beginIF($customer)->andWhere('t2.customer')->eq($customer)->fi()
             ->beginIF($status)->andWhere('t2.customer')->in($customerIdList)->fi()
-            ->fetchPairs('id', 'realname');
+            ->fetchPairs();
 
-        if($emptyOption)  $contacts = array(0 => '') + $contacts;
+        if($emptyOption) $contacts = array(0 => '') + $contacts;
 
         return $contacts;
     }

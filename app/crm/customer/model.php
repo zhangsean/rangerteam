@@ -37,25 +37,37 @@ class customerModel extends model
      */
     public function getCustomersSawByMe($type = 'view', $customerIdList = array())
     {
+        if(isset($_SESSION['getCustomersTime']) && time() - $_SESSION['getCustomersTime'] < 60 && isset($_SESSION['customersSawByMe']))
+        {
+            return $_SESSION['customersSawByMe'];
+        }
+
         $accountsSawByMe = $this->loadModel('sales', 'crm')->getAccountsSawByMe($this->app->user->account, $type);
 
-        $customerList = $this->dao->select('*')->from(TABLE_CUSTOMER)
+        $customerList = $this->dao->select('id')->from(TABLE_CUSTOMER)
             ->where('deleted')->eq(0)
-            ->beginIF(!empty($customerIdList))->andWhere('id')->in($customerIdList)->fi()
             ->beginIF(!isset($this->app->user->rights['crm']['manageall']) and ($this->app->user->admin != 'super'))
             ->andWhere('assignedTo')->in($accountsSawByMe)
             ->orWhere('public')->eq('1')
             ->fi()
-            ->fetchAll('id');
+            ->fetchPairs();
 
-        /* Get customers not assigned to these accounts but theirs orders assigned to. */
-        $orderList = $this->dao->select('customer')->from(TABLE_ORDER)->where('assignedTo')->in($accountsSawByMe)->fetchAll('customer');
-        foreach($orderList as $customer => $order)
+        if($customerIdList)
         {
-            if(!isset($customerList[$customer])) $customerList[$customer] = $customer;
+            foreach($customerList as $id => $customer)
+            {
+                if(!isset($customerIdList[$id])) unset($customerList[$id]);
+            }
         }
 
-        return array_keys($customerList);
+        /* Get customers not assigned to these accounts but theirs orders assigned to. */
+        $customers = $this->dao->select('customer')->from(TABLE_ORDER)->where('assignedTo')->in($accountsSawByMe)->fetchPairs();
+        foreach($customers as $customer) $customerList[$customer] = $customer;
+
+        $this->session->set('getCustomersTime', time());
+        $this->session->set('customersSawByMe', $customerList);
+
+        return $customerList;
     }
 
     /** 
@@ -128,12 +140,15 @@ class customerModel extends model
                 ->where('deleted')->eq(0)
                 ->beginIF($relation == 'client')->andWhere('relation')->ne('provider')->fi()
                 ->beginIF($relation == 'provider')->andWhere('relation')->ne('client')->fi()
-                ->andWhere('id')->in($customerIdList)
-                ->orderBy('id_desc')
-                ->fetchPairs('id');
+                ->fetchPairs();
+            foreach($customers as $id => $name)
+            {
+                if(!isset($customerIdList[$id])) unset($customers[$id]);
+            }
+            krsort($customers);
         }
 
-        if($emptyOption)  $customers = array('' => '') + $customers;
+        if($emptyOption) $customers = array('' => '') + $customers;
         return $customers;
     }
 
@@ -425,7 +440,7 @@ class customerModel extends model
         $changes[] = array('field' => 'public', 'old' => '0', 'new' => '1', 'diff' => '');
         foreach($customers as $key => $customer)
         {
-            $actionID  = $this->loadModel('action')->create('customer', $key, 'Edited');
+            $actionID = $this->loadModel('action')->create('customer', $key, 'Edited');
             $this->action->logHistory($actionID, $changes);
         }
     }
