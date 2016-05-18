@@ -482,7 +482,7 @@ class order extends control
         }
         if($type == 'board')
         {
-            die($this->loadModel('todo', 'oa')->buildBoardList($orders, 'order'));
+            die($this->loadModel('todo', 'sys')->buildBoardList($orders, 'order'));
         }
         die(json_encode($orders));
     }

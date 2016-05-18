@@ -105,7 +105,7 @@ class my extends control
      */
     public function company($type = 'todo', $dept = '', $account = '', $begin = '', $end = '')
     {
-        $this->loadModel('todo', 'oa');
+        $this->loadModel('todo', 'sys');
 
         /* compute begin and end. */
         if($begin == '')
