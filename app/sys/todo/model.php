@@ -366,6 +366,7 @@ class todoModel extends model
         $zentaoEntryList = $this->dao->select('*')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchAll();
         foreach($zentaoEntryList as $zentaoEntry)
         {
+            if(!commonModel::hasAppPriv($zentaoEntry->code)) continue;
             static $zentaoTaskList = array();
             static $zentaoBugList  = array();
             foreach($todos as $todo)

@@ -47,6 +47,11 @@ class todo extends control
         $zentaoEntryList = $this->dao->select('code, name')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchPairs();
         foreach($zentaoEntryList as $code => $name)
         {
+            if(!commonModel::hasAppPriv($code))
+            {
+                unset($zentaoEntryList[$code]);
+                continue;
+            }
             $todoList["{$code}_task"] = array();
             $todoList["{$code}_bug"]  = array();
 
@@ -102,6 +107,7 @@ class todo extends control
         $zentaoEntryList = $this->dao->select('code, name')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchPairs();
         foreach($zentaoEntryList as $code => $name)
         {
+            if(!commonModel::hasAppPriv($code)) continue;
             $this->lang->todo->typeList["{$code}_task"] = $name . $this->lang->todo->task;
             $this->lang->todo->typeList["{$code}_bug"]  = $name . $this->lang->todo->bug;
         }
@@ -266,6 +272,7 @@ class todo extends control
         $zentaoEntryList = $this->dao->select('code, name')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchPairs();
         foreach($zentaoEntryList as $code => $name)
         {
+            if(!commonModel::hasAppPriv($code)) continue;
             $this->lang->todo->typeList["{$code}_task"] = $name . $this->lang->todo->task;
             $this->lang->todo->typeList["{$code}_bug"]  = $name . $this->lang->todo->bug;
         }
@@ -387,24 +394,19 @@ class todo extends control
         $zentaoEntryList = $this->dao->select('code, name')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchPairs();
         foreach($this->zentaoEntryList as $zentaoEntry)
         {
-            if(strpos($zentaoEntry->login, '&') === false) $zentaoUrl = substr($zentaoEntry->login, 0, strrpos($zentaoEntry->login, '/') + 1); 
-            if(strpos($zentaoEntry->login, '&') !== false) $zentaoUrl = substr($zentaoEntry->login, 0, strpos($zentaoEntry->login, '?'));
-            $zentaoConfig = $this->loadModel('sso')->getZentaoServerConfig($zentaoUrl);
+            if(!commonModel::hasAppPriv($code)) continue;
 
             $code = $zentaoEntry->code;
-            if($todo->type == $code . '_task') 
+            if($todo->type == $code . '_task' or $todo->type == $code . '_bug') 
             {
-                $confirmNote = sprintf($this->lang->todo->confirmTip, $zentaoEntry->name, $todo->id);
-                $referer     = base64_encode($this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'task', 'view', "id=$todo->idvalue", 'html', false));
-                $confirmURL  = $this->createLink('entry', 'visit', "entryID=$zentaoEntry->id", 'html') . '?referer=' . $referer;
-                $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'url' => $confirmURL, 'entry' => $zentaoEntry->id)));
-            }
+                if(strpos($zentaoEntry->login, '&') === false) $zentaoUrl = substr($zentaoEntry->login, 0, strrpos($zentaoEntry->login, '/') + 1); 
+                if(strpos($zentaoEntry->login, '&') !== false) $zentaoUrl = substr($zentaoEntry->login, 0, strpos($zentaoEntry->login, '?'));
+                $zentaoConfig = $this->loadModel('sso')->getZentaoServerConfig($zentaoUrl);
 
-            if($todo->type == $code . '_bug') 
-            {
                 $confirmNote = sprintf($this->lang->todo->confirmTip, $zentaoEntry->name, $todo->id);
-                $referer     = base64_encode($this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'bug', 'view', "id=$todo->idvalue", 'html'));
-                $confirmURL  = $this->createLink('entry', 'visit', "entryID=$zentaoEntry->id&referer=$referer", 'html');
+                if($todo->type == $code . '_task') $referer = base64_encode($this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'task', 'view', "id=$todo->idvalue", 'html', false));
+                if($todo->type == $code . '_bug')  $referer = base64_encode($this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'bug', 'view', "id=$todo->idvalue", 'html', false));
+                $confirmURL  = $this->createLink('entry', 'visit', "entryID=$zentaoEntry->id", 'html') . '?referer=' . $referer;
                 $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'url' => $confirmURL, 'entry' => 'dashboard')));
             }
         }
