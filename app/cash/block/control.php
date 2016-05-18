@@ -143,10 +143,10 @@ class block extends control
         $rights = $this->app->user->rights;
         $expensePriv = (isset($rights['tradebrowse']['out']) or $this->app->user->admin == 'super') ? true : false; 
 
-        $this->params->type = !empty($this->params->type) ? $this->params->type : '';
+        $this->params->type = !empty($this->params->type) ? $this->params->type : 'all';
         $this->view->trades = $this->dao->select('*')->from(TABLE_TRADE)
             ->where('1=1')
-            ->beginIF($this->params->type)->andWhere('type')->eq($this->params->type)->fi()
+            ->beginIF($this->params->type != 'all')->andWhere('type')->eq($this->params->type)->fi()
             ->beginIF(!empty($denyCategories))->andWhere('category')->notin($denyCategories)
             ->beginIF(!$expensePriv)->andWhere('type')->ne('out')->fi()
             ->orderBy($this->params->orderBy)
