@@ -19,11 +19,11 @@
         <ul class='tree' data-collapsed='true'>
           <?php foreach($yearList as $year):?>
           <li class='<?php echo $year == $currentYear ? 'active' : ''?>'>
-            <?php commonModel::printLink('refund', 'browsereview', "date=$year", $year);?>
+            <?php commonModel::printLink('refund', 'browsereview', "date=$year&status=$status", $year);?>
             <ul>
               <?php foreach($monthList[$year] as $month):?>
               <li class='<?php echo ($year == $currentYear and $month == $currentMonth) ? 'active' : ''?>'>
-                <?php commonModel::printLink('refund', 'browsereview', "date=$year$month", $year . $month);?>
+                <?php commonModel::printLink('refund', 'browsereview', "date=$year$month&status=$status", $year . $month);?>
               </li>
               <?php endforeach;?>
             </ul>
