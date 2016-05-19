@@ -139,6 +139,7 @@ $(document).ready(function()
         }
     }
     addPager('#tab_custom');
+    addPager('#tab_undone');
     updateBoard('all');
 
     /* adjust focus position. */
