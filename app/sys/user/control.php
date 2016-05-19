@@ -510,7 +510,6 @@ END:VCARD";
         if(!empty($_POST))
         {
             $size = fixer::input('post')->get();
-            $this->loadModel('file')->resizeImage($image->realPath, $image->realPath, $size->width, $size->height);
             $this->loadModel('file')->cropImage($image->realPath, $image->realPath, $size->left, $size->top, $size->right - $size->left, $size->bottom - $size->top);
             exit('success');
         }
