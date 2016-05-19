@@ -55,7 +55,7 @@ class leave extends control
      */
     public function company($date = '', $orderBy = 'id_desc')
     {
-        die($this->fetch('leave', 'browse', "type=company&date=$date", 'oa'));
+        die($this->fetch('leave', 'browse', "type=company&date=$date&orderBy=$orderBy", 'oa'));
     }
 
     /**
