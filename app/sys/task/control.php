@@ -847,6 +847,13 @@ class task extends control
                         $task->files .= html::a($fileURL, $file->title, '_blank') . '<br />';
                     }
                 }
+
+                $teams = $this->dao->select('account')->from(TABLE_TEAM)->where('type')->eq('task')->andWhere('id')->eq($task->id)->orderBy('order')->fetchPairs();
+                if($teams)
+                {
+                    foreach($teams as $account) $assignedTo[] = $users[$account]; 
+                    $task->assignedTo = implode(',', $assignedTo);
+                }
             }
 
             $this->post->set('fields', $fields);
