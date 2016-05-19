@@ -508,7 +508,8 @@ class taskModel extends model
             $task = $this->loadModel('file')->processEditor($task, $this->config->task->editor->edit['id']);
         }
 
-        $this->dao->update(TABLE_TASK)->data($task, 'team,uid,files,children')
+        if(isset($task->uid)) $task = $this->loadModel('file')->processEditor($task, $this->config->task->editor->edit['id']);
+        $this->dao->update(TABLE_TASK)->data($task, 'files, children, team, uid')
             ->autoCheck()
             ->batchCheckIF($task->status != 'cancel', $this->config->task->require->edit, 'notempty')
 
