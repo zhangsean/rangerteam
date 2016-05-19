@@ -24,6 +24,8 @@
     <tr>
       <th><?php echo $lang->action->record->contact;?></th>
       <td>
+        <div class='row'>
+          <div class='col-sm-7'>
             <div class='input-group'>
               <select id='contact' name='contact' class='form-control chosen'>
                 <option></option>
@@ -43,9 +45,15 @@
                 <?php echo html::checkbox('objectType', array('order' => $lang->action->record->order, 'contract' => $lang->action->record->contract), '', "class='checkbox-inline'");?>
               </span>
               <?php endif;?>
-              <span class='input-group-addon fix-border'><?php echo $lang->action->record->date;?></span>
+            </div>
+          </div>
+          <div class='col-sm-5'>
+            <div class='input-group'>
+              <span class='input-group-addon'><?php echo $lang->action->record->date;?></span>
               <?php echo html::input('date', date('Y-m-d H:i:s'), "class='form-control form-datetime'");?>
             </div>
+          </div>
+        </div>
       </td>
     </tr>
     <tr id='phoneTR' class='hide'>
@@ -72,8 +80,8 @@
       <th class='w-70px'><?php echo $lang->action->record->nextDate;?></th>
       <td>
         <div class='row'>
-        <div class='col-sm-5'><?php echo html::input('nextDate', '', "class='form-control form-date'");?></div>
-        <div class='col-sm-7'><?php echo html::radio('delta', $lang->action->nextContactList , '', "onclick='computeNextDate(this.value)'");?></div>
+          <div class='col-sm-5'><?php echo html::input('nextDate', '', "class='form-control form-date'");?></div>
+          <div class='col-sm-7'><?php echo html::radio('delta', $lang->action->nextContactList , '', "onclick='computeNextDate(this.value)'");?></div>
         </div>
       </td>
     </tr>
