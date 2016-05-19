@@ -180,15 +180,13 @@ class task extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer ? $this->post->referer : inlink('view', "id=$taskID")));
         }
 
-        $members = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
-        if(!empty($task->team)) $members = $this->task->getMemberPairs($task);
-
-        $this->view->title     = $this->lang->task->edit;
-        $this->view->task      = $task;
-        $this->view->projectID = $this->view->task->project;
-        $this->view->projects  = $this->loadModel('project', 'oa')->getPairs();
-        $this->view->members   = $members;
-        $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->view->title          = $this->lang->task->edit;
+        $this->view->task           = $task;
+        $this->view->projectID      = $this->view->task->project;
+        $this->view->projects       = $this->loadModel('project', 'oa')->getPairs();
+        $this->view->members        = !empty($task->team) ? $this->task->getMemberPairs($task) : array();
+        $this->view->projectMembers = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
+        $this->view->users          = $this->loadModel('user')->getPairs();
         $this->display();
     }
 

@@ -76,7 +76,7 @@
               </tr>
               <tr>
                 <th><?php echo $lang->task->assignedTo;?></th>
-                <td><?php echo html::select('assignedTo', $members, $task->assignedTo, "class='form-control chosen'");?></td>
+                <td><?php echo html::select('assignedTo', !empty($members) ? $members : $projectMembers, $task->assignedTo, "class='form-control chosen'");?></td>
               </tr>
               <tr class='<?php echo empty($task->team) ? 'hidden' : ''?>' id='teamTr'>
                 <th><?php echo $lang->task->team;?></th>
@@ -166,7 +166,7 @@
           <table class='table table-form'>
             <?php foreach($task->team as $member):?>
             <tr>
-              <td class='w-80px'><?php echo html::select("team[]", $members, $member->account, "class='form-control chosen'")?></td>
+              <td class='w-80px'><?php echo html::select("team[]", $projectMembers, $member->account, "class='form-control chosen'")?></td>
               <td>
                 <div class='input-group'>
                   <span class='input-group-addon'><?php echo $lang->task->estimate?></span>
@@ -185,7 +185,7 @@
             <?php endforeach;?>
             <?php for($i = 0; $i < 3; $i++):?>
             <tr>
-              <td class='w-80px'><?php echo html::select("team[]", $members, '', "class='form-control chosen'")?></td>
+              <td class='w-80px'><?php echo html::select("team[]", $projectMembers, '', "class='form-control chosen'")?></td>
               <td>
                 <div class='input-group'>
                   <span class='input-group-addon'><?php echo $lang->task->estimate?></span>
