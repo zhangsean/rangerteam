@@ -434,7 +434,7 @@ CREATE TABLE IF NOT EXISTS `oa_todo` (
   `date` date NOT NULL,
   `begin` smallint(4) unsigned zerofill NOT NULL,
   `end` smallint(4) unsigned zerofill NOT NULL,
-  `type` char(10) NOT NULL,
+  `type` char(20) NOT NULL,
   `idvalue` mediumint(8) unsigned NOT NULL default '0',
   `pri` tinyint(3) unsigned NOT NULL,
   `name` char(150) NOT NULL,
