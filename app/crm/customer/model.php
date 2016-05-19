@@ -37,11 +37,6 @@ class customerModel extends model
      */
     public function getCustomersSawByMe($type = 'view', $customerIdList = array())
     {
-        if(isset($_SESSION['getCustomersTime']) && time() - $_SESSION['getCustomersTime'] < 60 && isset($_SESSION['customersSawByMe']))
-        {
-            return $_SESSION['customersSawByMe'];
-        }
-
         $accountsSawByMe = $this->loadModel('sales', 'crm')->getAccountsSawByMe($this->app->user->account, $type);
 
         $customerList = $this->dao->select('id')->from(TABLE_CUSTOMER)
@@ -424,7 +419,8 @@ class customerModel extends model
         
         $reserveTime = date(DT_DATETIME1, strtotime("-{$reserveDays} day"));
         $customers = $this->dao->select('id')->from(TABLE_CUSTOMER)
-            ->where('editedDate')->lt($reserveTime)
+            ->where('editedDate')
+            ->andWhere('editedDate')->lt($reserveTime)
             ->andWhere('status')->in('potential,intension,failed')
             ->andWhere('public')->eq('0')
             ->andWhere('deleted')->eq('0')
