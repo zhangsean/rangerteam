@@ -31,7 +31,7 @@
       </table>
     </form>
   </div>
-  <?php if(!empty($results)):?>
+  <?php if(!empty($checkResults)):?>
   <table class='table tablesorter table-data'>
     <thead>
       <tr>
@@ -45,7 +45,7 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach($results as $depositorID => $result):?>
+      <?php foreach($checkResults as $depositorID => $result):?>
       <?php $class = bccomp($result->computed, $result->actual, 2) === -1 ? 'text-error' : ''; ?>
       <?php $diff  = bcsub($result->computed, $result->actual, 2);?>
       <tr class='<?php echo $class;?>'>

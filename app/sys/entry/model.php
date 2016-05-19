@@ -31,8 +31,11 @@ class entryModel extends model
         $this->app->loadLang('install');
         foreach($entries as $entry)
         {
-            $entry->name = $this->lang->install->buildinEntry->{$entry->code}['name'];
-            $entry->abbr = $this->lang->install->buildinEntry->{$entry->code}['abbr'];
+            if($entry->buildin == 1)
+            {
+                $entry->name = $this->lang->install->buildinEntry->{$entry->code}['name'];
+                $entry->abbr = $this->lang->install->buildinEntry->{$entry->code}['abbr'];
+            }
             if($entry->logo != '' && substr($entry->logo, 0, 1) != '/') $entry->logo = $this->config->webRoot . $entry->logo;
             if(commonModel::hasAppPriv($entry->code)) $newEntries[] = $entry; 
         }

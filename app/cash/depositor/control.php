@@ -169,7 +169,7 @@ class depositor extends control
         {
             $selected = (array) $this->post->depositor;
             if(in_array('all', $selected)) $selected = array();
-            $this->view->results = $this->depositor->check($selected, $this->post->start, $this->post->end);
+            $this->view->checkResults = $this->depositor->check($selected, $this->post->start, $this->post->end);
         }
 
         $expenseTypes = $this->loadModel('tree')->getPairs(0, 'out');
