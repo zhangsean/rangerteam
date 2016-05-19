@@ -103,7 +103,7 @@ class projectModel extends model
             if($this->checkPriv($project->id)) $idList[] = $project->id; 
         }
 
-        $projectIDList = $this->dao->select('id')->from(TABLE_PROJECT)->where('id')->in($idList)->page($pager)->fetchAll('id');
+        $projectIDList = $this->dao->select('id')->from(TABLE_PROJECT)->where('id')->in($idList)->orderBy($orderBy)->page($pager)->fetchAll('id');
         foreach($projects as $key => $project)
         {
             if(!isset($projectIDList[$project->id])) unset($projects[$key]);
