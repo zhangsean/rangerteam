@@ -22,7 +22,7 @@
   <table class='table table-form table-condensed'>
     <?php if($objectType != 'contact'):?>
     <tr>
-      <th><?php echo $lang->action->record->contact;?></th>
+      <th class='w-80px'><?php echo $lang->action->record->contact;?></th>
       <td>
         <div class='row'>
           <div class='col-sm-7'>
