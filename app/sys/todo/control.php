@@ -391,12 +391,12 @@ class todo extends control
             $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'url' => $confirmURL, 'entry' => $entry)));
         }
 
-        $zentaoEntryList = $this->dao->select('code, name')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchPairs();
-        foreach($this->zentaoEntryList as $zentaoEntry)
+        $zentaoEntryList = $this->dao->select('*')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchAll();
+        foreach($zentaoEntryList as $zentaoEntry)
         {
+            $code = $zentaoEntry->code;
             if(!commonModel::hasAppPriv($code)) continue;
 
-            $code = $zentaoEntry->code;
             if($todo->type == $code . '_task' or $todo->type == $code . '_bug') 
             {
                 if(strpos($zentaoEntry->login, '&') === false) $zentaoUrl = substr($zentaoEntry->login, 0, strrpos($zentaoEntry->login, '/') + 1); 

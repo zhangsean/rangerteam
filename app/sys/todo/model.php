@@ -396,9 +396,16 @@ class todoModel extends model
      */
     public function getCalendarData($date)
     {
+        $begin     = date('Y-m-01', strtotime($date));
+        $weekday   = date('w', strtotime($begin));
+        $beginDays = $weekday == 0 ? 6 : $weekday - 1;
+        $begin     = date('Y-m-d', strtotime("$begin -$beginDays days"));
+        /* Make sure the calendar will display 6 rows.*/
+        $end       = date('Y-m-d', strtotime("$begin +42 days"));
+
         $dateLimit = array();
-        $dateLimit['begin'] = date('Y-m-01', strtotime($date));
-        $dateLimit['end']   = date('Y-m-d', strtotime("{$dateLimit['begin']} +1 month"));
+        $dateLimit['begin'] = $begin;
+        $dateLimit['end']   = $end;
 
         $calendars    = $this->lang->todo->typeList;
         $todos        = $this->getList('self', $this->app->user->account, $dateLimit);
