@@ -49,7 +49,7 @@
             <th class='w-80px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->leave->type);?></th>
             <th class='w-150px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->leave->begin);?></th>
             <th class='w-150px'><?php commonModel::printOrderLink('end', $orderBy, $vars, $lang->leave->end);?></th>
-            <th class='w-50px visible-lg'><?php commonModel::printOrderLink('hours', $orderBy, $vars, $lang->leave->hours);?></th>
+            <th class='w-80px visible-lg'><?php commonModel::printOrderLink('hours', $orderBy, $vars, $lang->leave->hours);?></th>
             <th><?php echo $lang->leave->desc;?></th>
             <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->leave->status);?></th>
             <?php if($type != 'browseReview'):?>

@@ -26,9 +26,9 @@
           <th class='w-100px'><?php commonModel::printOrderLink('deadline',    $orderBy, $vars, $lang->task->deadline);?></th>
           <th class='w-80px'> <?php commonModel::printOrderLink('assignedTo',  $orderBy, $vars, $lang->task->assignedTo);?></th>
           <th class='w-90px'> <?php commonModel::printOrderLink('status',      $orderBy, $vars, $lang->task->status);?></th>
-          <th class='w-100px visible-lg'><?php commonModel::printOrderLink('createdDate', $orderBy, $vars, $lang->task->createdDate);?></th>
-          <th class='w-90px visible-lg'> <?php commonModel::printOrderLink('consumed',    $orderBy, $vars, $lang->task->consumedAB . $lang->task->lblHour);?></th>
-          <th class='w-110px visible-lg'> <?php commonModel::printOrderLink('left',       $orderBy, $vars, $lang->task->left . $lang->task->lblHour);?></th>
+          <th class='w-90px'><?php commonModel::printOrderLink('createdDate',  $orderBy, $vars, $lang->task->createdDate);?></th>
+          <th class='w-80px'><?php commonModel::printOrderLink('consumed',     $orderBy, $vars, $lang->task->consumedAB . $lang->task->lblHour);?></th>
+          <th class='w-100px'><?php commonModel::printOrderLink('left',        $orderBy, $vars, $lang->task->left . $lang->task->lblHour);?></th>
           <th class='w-240px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
@@ -46,9 +46,9 @@
           <td><?php echo $task->deadline;?></td>
           <td><?php if(isset($users[$task->assignedTo])) echo $users[$task->assignedTo];?></td>
           <td class="<?php echo $task->status;?>"><?php echo zget($lang->task->statusList, $task->status);?></td>
-          <td class='visible-lg'><?php echo substr($task->createdDate, 0, 10);?></td>
-          <td class='visible-lg'><?php echo $task->consumed;?></td>
-          <td class='visible-lg'><?php echo $task->left;?></td>
+          <td><?php echo substr($task->createdDate, 0, 10);?></td>
+          <td><?php echo $task->consumed;?></td>
+          <td><?php echo $task->left;?></td>
           <td class='text-left'><?php $this->task->buildOperateMenu($task);?></td>
         </tr>
         <?php if(!empty($task->children)):?>
