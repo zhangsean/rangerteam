@@ -76,7 +76,7 @@
         }
         $class = $dStr == $date ? 'today' : '';
     ?>
-    <th class='<?php echo $width . ' ' . $class?>' data-date='<?php echo $dStr?>'><?php echo zget($this->lang->datepicker->abbrDayNames, date('w', $d))?></th>
+    <th class='<?php echo $width . ' ' . $class;?> dayheader' data-date='<?php echo $dStr?>'><?php echo zget($this->lang->datepicker->abbrDayNames, date('w', $d))?></th>
     <?php endforeach;?>
   </tr>
   <tr class='AM'>
@@ -142,7 +142,7 @@ $(document).ready(function()
         return false;
     });
     /* Add + */
-    calendar.find('.day').each(function()
+    calendar.find('.dayheader').each(function()
     {
         var date = new Date($(this).data('date'));
         var year   = date.getFullYear();
@@ -152,12 +152,12 @@ $(document).ready(function()
         {
             if($(this).find('.icon-plus').length == 0)
             {
-                $(this).prepend("<span class='text-muted icon-plus'></span><div class='clearfix'></div>");
+                $(this).prepend("<span class='text-muted icon-plus'></span>");
             }
         }
     });
     /* batch create todo. */
-    calendar.find('.day').click(function()
+    calendar.find('.dayheader, .day').click(function()
     {
         var date = new Date($(this).data('date'));
         var year   = date.getFullYear();

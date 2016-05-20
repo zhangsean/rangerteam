@@ -407,7 +407,7 @@ class todo extends control
                 if($todo->type == $code . '_task') $referer = base64_encode($this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'task', 'view', "id=$todo->idvalue", 'html', false));
                 if($todo->type == $code . '_bug')  $referer = base64_encode($this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'bug', 'view', "id=$todo->idvalue", 'html', false));
                 $confirmURL  = $this->createLink('entry', 'visit', "entryID=$zentaoEntry->id", 'html') . '?referer=' . $referer;
-                $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'url' => $confirmURL, 'entry' => 'dashboard')));
+                $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'url' => $confirmURL, 'entry' => $zentaoEntry->id)));
             }
         }
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
