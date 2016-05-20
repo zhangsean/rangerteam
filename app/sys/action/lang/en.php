@@ -166,7 +166,7 @@ $lang->action->label->product   = 'product|product|view|productID=%s';
 $lang->action->label->order     = 'order|order|view|orderID=%s';
 $lang->action->label->task      = 'task|task|view|taskID=%s';
 $lang->action->label->contract  = 'contract|contract|view|contractID=%s';
-$lang->action->label->announce  = 'announce|announce|browse|';
+$lang->action->label->announce  = 'announce|announce|view|announceID=%s';
 $lang->action->label->customer  = 'customer|customer|view|customerID=%s';
 $lang->action->label->provider  = 'provider|provider|view|providerID=%s';
 $lang->action->label->contact   = 'contact|contact|view|contactID=%s';

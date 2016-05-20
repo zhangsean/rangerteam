@@ -82,12 +82,12 @@
           <th class='w-100px'><?php commonModel::printOrderLink('handlers', $orderBy, $vars, $lang->trade->handlers);?></th>
           <th class='w-200px'><?php commonModel::printOrderLink('product', $orderBy, $vars, $lang->trade->product . $lang->slash . $lang->trade->category);?></th>
           <th class='w-200px visible-lg'><?php echo $lang->trade->desc;?></th>
-          <th class='w-110px'><?php echo $lang->actions;?></th>
+          <th class='w-130px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
         <?php foreach($trades as $trade):?>
-        <tr class='text-center' data-url='<?php echo inlink('view', "tradeID=$trade->id"); ?>'>
+        <tr class='text-center'>
           <td class='text-left'>
           <label class='checkbox-inline'><input type='checkbox' name='tradeIDList[]' value='<?php echo $trade->id;?>'/><?php echo formatTime($trade->date, DT_DATE1);?></label>
           </td>
@@ -99,6 +99,7 @@
           <td class='text-left'><?php echo isset($productList[$trade->product]) ? $productList[$trade->product] . $lang->slash . zget($categories, $trade->category, ' ') : zget($categories, $trade->category, ' ');?></td>
           <td class='text-left visible-lg'><div title="<?php echo $trade->desc;?>" class='w-200px text-ellipsis'><?php echo $trade->desc;?><div></td>
           <td>
+            <?php commonModel::printLink('trade', 'view', "tradeID={$trade->id}", $lang->view);?>
             <?php commonModel::printLink('trade', 'edit', "tradeID={$trade->id}", $lang->edit);?>
             <?php commonModel::printLink('trade', 'detail', "tradeID={$trade->id}", $lang->trade->detail, "data-toggle='modal'");?>
             <?php commonModel::printLink('trade', 'delete', "tradeID={$trade->id}", $lang->delete, "class='deleter'");?>

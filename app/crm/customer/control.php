@@ -130,7 +130,8 @@ class customer extends control
 
             if($this->post->comment != '' or !empty($changes))
             {
-                $actionID = $this->loadModel('action')->create('customer', $customerID, 'Edited', $this->post->comment);
+                $action   = $this->post->comment == '' ? 'Edited' : 'Commented';
+                $actionID = $this->loadModel('action')->create('customer', $customerID, $action, $this->post->comment);
                 $this->action->logHistory($actionID, $changes);
             }
 

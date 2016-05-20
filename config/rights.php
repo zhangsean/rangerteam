@@ -125,6 +125,8 @@ $config->rights->member['file']['ajaxpasteimage'] = 'ajaxpasteimage';
 $config->rights->member['file']['filemanager']    = 'filemanager';
 $config->rights->member['file']['sort']           = 'sort';
 
+$config->rights->member['announce']['viewreaders'] = 'viewreaders';
+
 $config->rights->member['attend']['personal'] = 'personal';
 $config->rights->member['attend']['edit']     = 'edit';
 

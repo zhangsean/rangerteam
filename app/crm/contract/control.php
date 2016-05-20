@@ -145,7 +145,8 @@ class contract extends control
                 if($this->post->comment) $fileAction = $this->post->comment;
                 if($files) $fileAction = $this->lang->addFiles . join(',', $files);
 
-                $contractActionID = $this->loadModel('action')->create('contract', $contractID, 'Edited', $fileAction);
+                $action           = $this->post->comment == '' ? 'Edited' : 'Commented';
+                $contractActionID = $this->loadModel('action')->create('contract', $contractID, $action, $fileAction);
                 if($changes) $this->action->logHistory($contractActionID, $changes);
 
                 $customerActionID = $this->loadModel('action')->create('customer', $contract->customer, 'editContract', $fileAction, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));

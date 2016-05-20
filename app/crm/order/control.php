@@ -113,7 +113,8 @@ class order extends control
 
             if($this->post->comment != '' or !empty($changes))
             {
-                $orderActionID = $this->loadModel('action')->create('order', $orderID, 'Edited', $this->post->comment);
+                $action        = $this->post->comment == '' ? 'Edited' : 'Commented';
+                $orderActionID = $this->loadModel('action')->create('order', $orderID, $action, $this->post->comment);
                 $this->action->logHistory($orderActionID, $changes);
 
                 $customerActionID = $this->loadModel('action')->create('customer', $order->customer, 'editOrder', $this->post->comment, html::a($this->createLink('order', 'view', "orderID=$order->id"), $order->id));

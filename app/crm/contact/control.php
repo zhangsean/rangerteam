@@ -111,7 +111,8 @@ class contact extends control
 
             if($this->post->comment != '' or !empty($changes))
             {
-                $actionID = $this->loadModel('action')->create('contact', $contactID, 'Edited', $this->post->comment);
+                $action   = $this->post->comment == '' ? 'Edited' : 'Commented';
+                $actionID = $this->loadModel('action')->create('contact', $contactID, $action, $this->post->comment);
                 $this->action->logHistory($actionID, $changes);
             }
 
