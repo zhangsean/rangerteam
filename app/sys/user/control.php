@@ -426,6 +426,20 @@ class user extends control
         {
             $this->referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
         }
+
+        if(strpos($this->referer, 'entry') !== false and strpos($this->referer, 'visit') !== false)
+        {
+            if($this->config->requestType == 'PATH_INFO')
+            {
+                if(substr($this->referer, strpos($this->referer, 'entry-visit-') + strlen('entry-visit-'), strpos($this->referer, '.html')) > 4) $this->referer = '';
+            }
+            else
+            {
+                $url = parse_url($this->referer);
+                parse_str($url['query'], $params);
+                if($params['m'] == 'entry' and $params['f'] == 'visit' and $params['entryID'] > 4) $this->referer = '';
+            }
+        }
     }
 
     /**
