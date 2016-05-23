@@ -213,10 +213,11 @@ class tradeModel extends model
             ->setDefault('contract', 0)
             ->setIf($this->post->trader == '', 'trader', 0)
             ->setIf($this->post->createTrader, 'trader', 0)
+            ->setIf($this->post->customer, 'trader', $this->post->customer)
             ->setIf($type == 'in', 'order', 0)
             ->setIf(!$this->post->objectType or !in_array('order', $this->post->objectType), 'order', 0)
             ->setIf(!$this->post->objectType or !in_array('contract', $this->post->objectType), 'contract', 0)
-            ->remove('objectType')
+            ->remove('objectType,customer')
             ->striptags('desc')
             ->get();
 

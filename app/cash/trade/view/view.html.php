@@ -77,8 +77,8 @@
           </tr>
           <?php if($trade->trader and $trade->type == 'out'):?>
           <tr>
-            <th><?php echo $lang->trade->trader;?></th>
-            <td><?php echo zget($traderList, $trade->trader, '');?></td>
+            <th><?php echo isset($customerList[$trade->trader]) ? $lang->trade->customer : $lang->trade->trader;?></th>
+            <td><?php echo isset($customerList[$trade->trader]) ? $customerList[$trade->trader] : zget($traderList, $trade->trader, '');?></td>
           </tr>
           <?php endif;?>
           <?php if($trade->trader and $trade->type == 'in'):?>

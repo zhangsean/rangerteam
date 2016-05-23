@@ -58,9 +58,13 @@
             </select>
           </td>
         </tr>
+        <tr>
+          <th><?php echo $lang->trade->customer;?></th>
+          <td><?php echo html::select('customer', $customerList, '', "class='form-control chosen' onchange='getContract(this.value)'");?></td>
+        </tr>
         <?php endif;?>
         <?php if($type == 'out'):?>
-        <tr>
+        <tr class='traderTR'>
           <th><?php echo $lang->trade->trader;?></th>
           <td>
             <?php if(count($traderList) > 1):?>

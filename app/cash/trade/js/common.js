@@ -3,6 +3,14 @@ $(document).ready(function()
     $('[name*=objectType]').change(function()
     {
         if($(this).prop('checked'))$('[name*=objectType]').not(this).prop('checked', false).change();
+        if($(this).prop('checked') && $(this).val() == 'customer') 
+        {
+            $('.traderTR').hide();
+        }
+        else
+        {
+            $('.traderTR').show();
+        }
         $('#' + $(this).val()).parents('tr').toggle($(this).prop('checked'))
     })
     $('[name*=objectType]').change();
