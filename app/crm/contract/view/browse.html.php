@@ -26,7 +26,7 @@
   <?php commonModel::printLink('contract', 'create', '', '<i class="icon-plus"></i> ' . $lang->contract->create, "class='btn btn-primary'");?>
 </div>
 <div class='panel'>
-  <table class='table table-hover table-striped tablesorter table-data table-fixed' id='contractList'>
+  <table class='table table-hover table-striped table-bordered tablesorter table-data table-fixed' id='contractList'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "mode={$mode}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>

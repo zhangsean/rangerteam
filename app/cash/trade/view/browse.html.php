@@ -36,16 +36,12 @@
   <div class='dropdown'>
     <?php echo html::a('#', (strpos($date, 'Q') !== false ? $lang->trade->quarterList[substr($date, 4, 2)] : (strlen($date) == '6' ? $lang->trade->monthList[substr($date, 4, 2)] : $lang->trade->month)) . "<span class='caret'></span>", "class='dropdown-toggle' data-toggle='dropdown'");?>
     <ul aria-labelledby="dropdownMenu1" role="menu" class="dropdown-menu">
-      <?php foreach($tradeQuarters[$year] as $quarter):?>
-      <li class='dropdown-submenu'>
-        <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$year$quarter", $lang->trade->quarterList[$quarter]);?>
-        <ul class='dropdown-menu'>
-          <?php foreach($tradeMonths[$year][$quarter] as $month):?>
-          <li><?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$year$month", $lang->trade->monthList[$month]);?></li>
-          <?php endforeach;?>
-        </ul>
-      </li>
+    <?php foreach($tradeQuarters[$year] as $quarter):?>
+      <li><?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$year$quarter", $lang->trade->quarterList[$quarter]);?></li>
+      <?php foreach($tradeMonths[$year][$quarter] as $month):?>
+      <li><?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$year$month", $lang->trade->monthList[$month]);?></li>
       <?php endforeach;?>
+    <?php endforeach;?>
     </ul>
   </div> 
 </li>
@@ -53,25 +49,36 @@
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 
 <div id='menuActions'>
-  <?php if($mode == 'in' or $mode == 'all')       commonModel::printLink('trade', 'create', 'type=in',  "{$lang->trade->createIn}", "class='btn btn-primary'")?>
-  <?php if($mode == 'out' or $mode == 'all')      commonModel::printLink('trade', 'create', 'type=out', "{$lang->trade->createOut}", "class='btn btn-primary'")?>
-  <?php if($mode == 'transfer' or $mode == 'all') commonModel::printLink('trade', 'transfer', '', "{$lang->trade->transfer}", "class='btn btn-primary'")?>
-  <?php if($mode == 'inveset' or $mode == 'all')  commonModel::printLink('trade', 'inveset', '', "{$lang->trade->inveset}", "class='btn btn-primary'")?>
-  <?php if($mode == 'all') commonModel::printLink('trade', 'batchcreate', '', "{$lang->trade->batchCreate}", "class='btn btn-primary'")?>
-  <?php commonModel::printLink('trade', 'import', '', "{$lang->trade->import}", "class='btn btn-primary' data-toggle='modal'")?>
+  <?php commonModel::printLink('trade', 'import', '', "<i class='icon-download-alt'> </i>" . $lang->trade->import, "class='btn btn-primary' data-toggle='modal'")?>
   <?php if(commonModel::hasPriv('trade', 'export')):?>
   <div class='btn-group'>
-    <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo $lang->export;?> <span class='caret'></span></button>
+    <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo "<i class='icon-upload-alt'> </i>" . $lang->export;?> <span class='caret'></span></button>
     <ul id='exportActionMenu' class='dropdown-menu pull-right'>
       <li><?php commonModel::printLink('trade', 'export', "mode=all&orderBy={$orderBy}", $lang->exportAll, "class='iframe' data-width='700'");?></li>
       <li><?php commonModel::printLink('trade', 'export', "mode=thisPage&orderBy={$orderBy}", $lang->exportThisPage, "class='iframe' data-width='700'");?></li>
     </ul>
   </div>
+  <?php if($mode == 'all'):?>
+  <div class='btn-group'>
+    <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo  "<i class='icon-sitemap'> </i>" . $lang->trade->create;?> <span class='caret'></span></button>
+    <ul id='createActionMenu' class='dropdown-menu pull-right'>
+      <li><?php commonModel::printLink('trade', 'create', 'type=in',  $lang->trade->createIn)?></li>
+      <li><?php commonModel::printLink('trade', 'create', 'type=out', $lang->trade->createOut)?></li>
+      <li><?php commonModel::printLink('trade', 'transfer', '', $lang->trade->transfer)?></li>
+      <li><?php commonModel::printLink('trade', 'inveset', '', $lang->trade->inveset)?></li>
+    </ul>
+  </div>
+  <?php endif;?>
+  <?php if($mode == 'in')       commonModel::printLink('trade', 'create', 'type=in',  "<i class='icon-sitemap'> </i>" . $lang->trade->createIn, "class='btn btn-primary'")?>
+  <?php if($mode == 'out')      commonModel::printLink('trade', 'create', 'type=out', "<i class='icon-sitemap'> </i>" . $lang->trade->createOut, "class='btn btn-primary'")?>
+  <?php if($mode == 'transfer') commonModel::printLink('trade', 'transfer', '', "<i class='icon-sitemap'> </i>" . $lang->trade->transfer, "class='btn btn-primary'")?>
+  <?php if($mode == 'inveset')  commonModel::printLink('trade', 'inveset', '', "<i class='icon-sitemap'> </i>" . $lang->trade->inveset, "class='btn btn-primary'")?>
+  <?php if($mode == 'all' || $mode == 'in' || $mode == 'out') commonModel::printLink('trade', 'batchcreate', '', "<i class='icon-plus'> </i>" . $lang->trade->batchCreate, "class='btn btn-primary'")?>
   <?php endif;?>
 </div>
 <div class='panel'>
   <form method='post' action='<?php echo inlink('batchedit', 'step=form')?>'>
-    <table class='table table-hover table-striped tablesorter table-data table-fixed' id='tradeList'>
+    <table class='table table-hover table-striped table-bordered tablesorter table-data table-fixed' id='tradeList'>
       <thead>
         <tr class='text-center'>
           <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->trade->date);?></th>

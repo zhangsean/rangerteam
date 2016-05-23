@@ -1,11 +1,11 @@
 <?php 
 /**
- * The browse view file of contact module of RanZhi.
+ * The browse view file of leads module of RanZhi.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
- * @package     contact 
+ * @package     leads 
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
@@ -30,7 +30,7 @@
   <?php commonModel::printLink('leads', 'create', '', "<i class='icon-plus'></i> {$lang->leads->create}", "class='btn btn-primary'")?>
 </div>
 <div class='panel'>
-  <table class='table table-hover table-striped tablesorter table-data table-fixed' id='contactList'>
+  <table class='table table-hover table-striped table-bordered tablesorter table-data table-fixed' id='contactList'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "mode={$mode}&status={$status}&origin={$origin}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>

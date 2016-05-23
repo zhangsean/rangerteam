@@ -69,7 +69,7 @@ $lang->refund->moneyTip          = '低於金額只需要一級審批，高於�
 
 $lang->refund->settings = new stdclass();
 $lang->refund->settings->common       = '報銷設置';
-$lang->refund->settings->setreviewer  = "審批人|refund|setreviewer";
+$lang->refund->settings->setReviewer  = "審批人|refund|setreviewer";
 $lang->refund->settings->setCategory  = "報銷科目|refund|setcategory";
 $lang->refund->settings->setDepositor = "報銷賬戶|refund|setdepositor";
 $lang->refund->settings->setMoney     = "金額|refund|setmoney";

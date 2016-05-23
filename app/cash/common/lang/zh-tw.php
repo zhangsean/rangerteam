@@ -14,13 +14,13 @@ $lang->app->name = 'CASH';
 
 $lang->menu->cash = new stdclass();
 $lang->menu->cash->dashboard = '首頁|dashboard|index|';
-$lang->menu->cash->all       = '賬目|trade|browse|mode=all';
+$lang->menu->cash->all       = '所有|trade|browse|mode=all';
 $lang->menu->cash->in        = '收入|trade|browse|mode=in';
 $lang->menu->cash->out       = '支出|trade|browse|mode=out';
 $lang->menu->cash->transfer  = '轉賬|trade|browse|mode=transfer';
 $lang->menu->cash->inveset   = '投資|trade|browse|mode=inveset';
-$lang->menu->cash->annual    = '報表|trade|report|';
 $lang->menu->cash->check     = '對賬|depositor|check|';
+$lang->menu->cash->annual    = '報表|trade|report|';
 $lang->menu->cash->depositor = '賬戶|depositor|browse|';
 $lang->menu->cash->provider  = '供應商|provider|browse|';
 //$lang->menu->cash->contact   = '聯繫人|contact|browse|';

@@ -16,6 +16,9 @@
 <?php js::set('browseType ', $browseType);?>
 <?php js::set('mode', $mode)?>
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
+<div id='menuActions'>
+  <?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&productID=$productID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?>
+</div>
 <div class='row'>
   <div class='col-sm-3'>
     <div class='panel' id='treebox'>
@@ -47,7 +50,6 @@
     <div class='panel'>
       <div class='panel-heading'>
         <strong><i class='icon-list-ul'></i> <?php echo $lang->doc->browse;?></strong>
-        <div class='panel-actions pull-right'><?php commonModel::printLink('doc', 'create', "libID=$libID&moduleID=$moduleID&productID=$productID&projectID=$projectID", '<i class="icon-plus"></i> ' . $lang->doc->create, 'class="btn btn-primary"');?></div>
       </div>
       <table class='table table-hover table-striped tablesorter table-fixed' id='docList'>
         <thead>

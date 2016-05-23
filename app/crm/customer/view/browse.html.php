@@ -27,7 +27,7 @@
 </div>
 <div class='panel'>
   <form id='ajaxForm' method='post' action='<?php echo inlink('batchAssign');?>'>
-    <table class='table table-hover table-striped tablesorter table-data table-fixed'>
+    <table class='table table-hover table-striped table-bordered tablesorter table-data table-fixed table-fixedHeader'>
       <thead>
         <tr class='text-center'>
           <?php $vars = "mode={$mode}&param=&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>

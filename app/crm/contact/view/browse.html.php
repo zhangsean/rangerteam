@@ -27,7 +27,7 @@
   <?php commonModel::printLink('contact', 'create', '', "<i class='icon-plus'></i> {$lang->contact->create}", "class='btn btn-primary'")?>
 </div>
 <div class='panel'>
-  <table class='table table-hover table-striped tablesorter table-data table-fixed' id='contactList'>
+  <table class='table table-hover table-striped table-bordered tablesorter table-data table-fixed' id='contactList'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "mode={$mode}&status={$status}&origin={$origin}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
