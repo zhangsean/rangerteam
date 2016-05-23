@@ -23,6 +23,10 @@
       </td>
     </tr>
     <tr>
+      <th><?php echo $lang->trade->customer;?></th>
+      <td><?php echo html::select('customer', $customerList, '', "class='form-control chosen' onchange='getContract(this.value)'");?></td>
+    </tr>
+    <tr>
       <th><?php echo $lang->trade->order;?></th>
       <td><?php echo html::select('order', array('') + (array) $orderList, '', "class='form-control chosen'");?></td>
     </tr>

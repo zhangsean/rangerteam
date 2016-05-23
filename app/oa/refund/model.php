@@ -422,6 +422,7 @@ class refundModel extends model
         $trade = new stdclass();
         $trade->type        = 'out';
         $trade->depositor   = $this->post->depositor;
+        $trade->trader      = $this->post->customer ? $this->post->customer : 0;
         $trade->order       = $this->post->order ? $this->post->order : 0;
         $trade->contract    = $this->post->contract ? $this->post->contract : 0;
         $trade->money       = $refund->money;
