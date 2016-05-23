@@ -90,8 +90,8 @@ class overtime extends control
             { 
                 if($this->config->attend->reviewedBy == $this->app->user->account)
                 {
-                    $deptList = $this->loadModel('tree')->getPairs('', 'dept');
-                    $deptList[0] = '/';
+                    $deptList     = $this->loadModel('tree')->getPairs('', 'dept');
+                    $deptList[0]  = '';
                     $overtimeList = $this->overtime->getList($type, $currentYear, $currentMonth, '', array_keys($deptList), '', $orderBy);
                 }
             }
