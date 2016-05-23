@@ -72,5 +72,4 @@ $lang->refund->settings->common       = '报销设置';
 $lang->refund->settings->setReviewer  = "审批人|refund|setreviewer";
 $lang->refund->settings->setCategory  = "报销科目|refund|setcategory";
 $lang->refund->settings->setDepositor = "报销账户|refund|setdepositor";
-$lang->refund->settings->setMoney     = "金额|refund|setmoney";
 $lang->refund->settings->setRefundBy  = "由谁报销|refund|setrefundby";

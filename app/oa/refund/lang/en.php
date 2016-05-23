@@ -72,5 +72,4 @@ $lang->refund->settings->common       = 'Settings';
 $lang->refund->settings->setReviewer  = "Reviewer|refund|setreviewer";
 $lang->refund->settings->setCategory  = "Category|refund|setcategory";
 $lang->refund->settings->setDepositor = "Depositor|refund|setdepositor";
-$lang->refund->settings->setMoney     = "Money|refund|setmoney";
 $lang->refund->settings->setRefundBy  = "RefundBy|refund|setrefundby";

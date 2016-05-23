@@ -478,25 +478,6 @@ class refund extends control
     }
 
     /**
-     * Set money for review of refund.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setMoney()
-    {
-        if($_POST)
-        {
-            $this->loadModel('setting')->setItem('system.oa.refund.money', $this->post->money);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
-        }
-
-        $this->view->title = $this->lang->refund->money;
-        $this->display();
-    }
-
-    /**
      * Set refundBy for refund.
      * 
      * @access public

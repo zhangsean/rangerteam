@@ -36,7 +36,18 @@
           </tr>
           <tr>
             <th><?php echo $lang->refund->secondReviewer;?></th>
-            <td><?php echo html::select('secondReviewer', $secondReviewers, $secondReviewer, "class='form-control chosen'")?></td>
+            <td>
+              <div class='row'>
+                <div class='col-sm-6'><?php echo html::select('secondReviewer', $secondReviewers, $secondReviewer, "class='form-control chosen'")?></div>
+                <div class='col-sm-6'>
+                  <div class='input-group'>
+                    <span class='input-group-addon'><?php echo $lang->refund->money;?></span>
+                    <?php echo html::input('money', isset($this->config->refund->money) ? $this->config->refund->money : '', "class='form-control'");?>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td class='pd-0'><?php echo html::a('javascript:void(0)', "<i class='icon-question-sign'></i>", "data-original-title='{$lang->refund->moneyTip}' data-toggle='tooltip'");?></td>
           </tr>
           <tr><th></th><td colspan='2'><?php echo html::submitButton();?></td></tr>
           </table>
