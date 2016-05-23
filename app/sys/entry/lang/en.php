@@ -82,7 +82,7 @@ $lang->entry->error->url   = 'Non built-in application login address, you must i
 
 $lang->entry->error->admin         = 'Wrong admin account or password.';
 $lang->entry->error->zentaoSetting = 'ZentaoPMS set config failed, Please upgrade ZentaoPMS to head.';
-$lang->entry->error->version       = 'Your zentaoPMS version is lower than 7.4';
+$lang->entry->error->version       = 'Your zentaoPMS version is lower than %s';
 $lang->entry->error->zentaoUrl     = 'Wrong ZentaoPMS login url.';
 $lang->entry->error->accessDenied  = 'Access denied';
 

@@ -82,7 +82,7 @@ $lang->entry->error->url   = ' 非内置应用的登录地址，必须包含 /�
 
 $lang->entry->error->admin         = '管理员用户名或密码错误';
 $lang->entry->error->zentaoSetting = '禅道系统设置失败';
-$lang->entry->error->version       = '您的禅道系统版本低于7.4';
+$lang->entry->error->version       = '您的禅道系统版本低于%s';
 $lang->entry->error->zentaoUrl     = '禅道登录地址错误';
 $lang->entry->error->accessDenied  = '访问受限';
 

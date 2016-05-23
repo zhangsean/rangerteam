@@ -58,7 +58,8 @@ class entry extends control
                 /* Get zentao config. */
                 $zentaoConfig = $this->loadModel('sso')->getZentaoServerConfig($zentaoUrl);
                 if(empty($zentaoConfig)) $this->send(array('result' => 'fail', 'message' => $this->lang->entry->error->zentaoUrl));
-                if((strpos($zentaoConfig->version, 'pro') !== false and substr($zentaoConfig->version, 3) < 5.0) or (strpos($zentaoConfig->version, 'pro') === false and $zentaoConfig->version < 7.4)) $this->send(array('result' => 'fail', 'message' => $this->lang->entry->error->version));
+                if(strpos($zentaoConfig->version, 'pro') !== false and version_compare($zentaoConfig->version, 'pro5.0', '<')) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->entry->error->version, 'pro5.0')));
+                if(strpos($zentaoConfig->version, 'pro') === false and version_compare($zentaoConfig->version, '7.4', '<')) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->entry->error->version, '7.4')));
 
                 $_POST['login']  = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, "sso", "login", '', 'html', false);
                 $_POST['logout'] = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, "sso", "logout", '', 'html', false);
