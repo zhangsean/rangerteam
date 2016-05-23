@@ -69,7 +69,7 @@ $lang->refund->moneyTip          = '低于金额只需要一级审批，高于�
 
 $lang->refund->settings = new stdclass();
 $lang->refund->settings->common       = '报销设置';
-$lang->refund->settings->setreviewer  = "审批人|refund|setreviewer";
+$lang->refund->settings->setReviewer  = "审批人|refund|setreviewer";
 $lang->refund->settings->setCategory  = "报销科目|refund|setcategory";
 $lang->refund->settings->setDepositor = "报销账户|refund|setdepositor";
 $lang->refund->settings->setMoney     = "金额|refund|setmoney";
