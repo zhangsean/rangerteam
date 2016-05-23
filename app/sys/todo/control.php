@@ -44,16 +44,17 @@ class todo extends control
         $todoList['order']    = array();
         $todoList['customer'] = array();
 
+        $this->app->loadLang('entry');
         $zentaoEntryList = $this->dao->select('code, name')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchPairs();
         foreach($zentaoEntryList as $code => $name)
         {
-            if(!commonModel::hasAppPriv($code))
+            $zentaoTodoList = $this->loadModel('sso')->getZentaoTodoList($code, $this->app->user->account);
+            if(!commonModel::hasAppPriv($code) or empty($zentaoTodoList))
             {
                 unset($zentaoEntryList[$code]);
                 continue;
             }
-            $todoList["{$code}_task"] = array();
-            $todoList["{$code}_bug"]  = array();
+            $todoList[$code] = array();
 
             $this->lang->todo->typeList["{$code}_task"] = $name . $this->lang->todo->task;
             $this->lang->todo->typeList["{$code}_bug"]  = $name . $this->lang->todo->bug;

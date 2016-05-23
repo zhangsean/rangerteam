@@ -106,22 +106,37 @@ class sso extends control
      * Get todo list for ranzhi.
      * 
      * @param  string  $code 
-     * @param  string  $type 
      * @param  string  $account 
      * @access public
      * @return void
      */
-    public function getTodoList($code = '', $type = '', $account = '')
+    public function getTodoList($code = '', $account = '')
     {
+        $this->app->loadLang('todo', 'sys');
+
         if(!$account) $account = $this->app->user->account;
-        $datas = $this->sso->getZentaoTodoList($code, $type, $account);
+        $datas = $this->sso->getZentaoTodoList($code, $account);
 
-        $todos = $this->dao->select('*')->from(TABLE_TODO)->where('type')->eq("{$code}_{$type}")->fetchAll('idvalue');
-        foreach($datas as $id => $data)
+        $boardList = '';
+        foreach($datas as $type => $dataList)
         {
-            if(isset($todos[$id])) unset($datas[$id]);
-        }
+            if(empty($dataList)) continue;
 
-        die($this->loadModel('todo', 'sys')->buildBoardList($datas, $code . '_' . $type));
+            $todos = $this->dao->select('*')->from(TABLE_TODO)->where('type')->eq("{$code}_{$type}")->fetchAll('idvalue');
+            foreach($dataList as $id => $data)
+            {
+                if(isset($todos[$id]))
+                {
+                    unset($datas[$type][$id]);
+                }
+                else
+                {
+                    $datas[$type][$id] = '[' . $this->lang->todo->$type . '] ' . $data;
+                }
+            }
+
+            $boardList .= $this->loadModel('todo', 'sys')->buildBoardList($datas[$type], $code . '_' . $type);
+        }
+        die($boardList);
     }
 }

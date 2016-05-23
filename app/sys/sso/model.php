@@ -214,12 +214,11 @@ class ssoModel extends model
      * Get zentao todo list for ranzhi.
      * 
      * @param  string $code 
-     * @param  string $type 
      * @param  string $account 
      * @access public
      * @return void
      */
-    public function getZentaoTodoList($code = '', $type = '', $account = '')
+    public function getZentaoTodoList($code = '', $account = '')
     {
         $entry = $this->dao->select('*')->from(TABLE_ENTRY)->where('zentao')->eq(1)->andWhere('code')->eq($code)->fetch();
         if(strpos($entry->login, '&') === false) $zentaoUrl = substr($entry->login, 0, strrpos($entry->login, '/') + 1);
@@ -227,7 +226,7 @@ class ssoModel extends model
 
         $zentaoConfig = $this->loadModel('sso')->getZentaoServerConfig($zentaoUrl);
 
-        $url = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getTodoList', "type=$type&account=$account");
+        $url = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getTodoList', "account=$account");
         $results = commonModel::http($url);
         return json_decode($results, true);
     }

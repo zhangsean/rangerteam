@@ -366,21 +366,14 @@ class todoModel extends model
         $zentaoEntryList = $this->dao->select('*')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchAll();
         foreach($zentaoEntryList as $zentaoEntry)
         {
-            if(!commonModel::hasAppPriv($zentaoEntry->code)) continue;
-            static $zentaoTaskList = array();
-            static $zentaoBugList  = array();
+            static $zentaoTodoList = array();
             foreach($todos as $todo)
             {
-                if($todo->type == $zentaoEntry->code . '_task')
+                if(strpos($todo->type, $zentaoEntry->code) !== false)
                 {
-                    if(empty($zentaoTaskList)) $zentaoTaskList = $this->loadModel('sso')->getZentaoTodoList($zentaoEntry->code, 'task', $this->app->user->account);
-                    $todo->name = $zentaoTaskList[$todo->idvalue];
-                }
-
-                if($todo->type == $zentaoEntry->code . '_bug')
-                {
-                    if(empty($zentaoBugList)) $zentaoBugList = $this->loadModel('sso')->getZentaoTodoList($zentaoEntry->code, 'bug', $this->app->user->account);
-                    $todo->name = $zentaoBugList[$todo->idvalue];
+                    if(empty($zentaoTodoList)) $zentaoTodoList = $this->loadModel('sso')->getZentaoTodoList($zentaoEntry->code, $this->app->user->account);
+                    $type = substr($todo->type, strpos($todo->type, '_') + 1);
+                    $todo->name = $zentaoTodoList[$type][$todo->idvalue];
                 }
             }
         }

@@ -129,13 +129,9 @@ $(document).ready(function()
         for(i = 0; i < v.zentaoEntryList.length; i++)
         {
             var code = v.zentaoEntryList[i];
-            var param = 'code=' + code + '&type=task&account=';
+            var param = 'code=' + code + '&account=';
             var link = createLink('sso', 'getTodoList', param);
-            if(type == 'all' || type == code + '_task') $('#tab_' + code + '_task').load(link, function(){$('#tab_' + code + '_task [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_' + code + '_task');});
-
-            var param = 'code=' + code + '&type=bug&account=';
-            var link = createLink('sso', 'getTodoList', param);
-            if(type == 'all' || type == code + '_bug') $('#tab_' + code + '_bug').load(link, function(){$('#tab_' + code + '_bug [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_' + code + '_bug');});
+            if(type == 'all' || type == code) $('#tab_' + code).load(link, function(){$('#tab_' + code + ' [data-toggle="droppable"]').droppable(dropSetting); addPager('#tab_' + code);});
         }
     }
     addPager('#tab_custom');
