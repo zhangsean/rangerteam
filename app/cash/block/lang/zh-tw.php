@@ -24,6 +24,7 @@ $lang->block->availableBlocks->report    = '報表';
 $this->lang->block->orderByList->trade['id_asc']  = 'ID 遞增';
 $this->lang->block->orderByList->trade['id_desc'] = 'ID 遞減';
 
+$this->lang->block->typeList->trade['all']  = '全部';
 $this->lang->block->typeList->trade['in']   = '收入';
 $this->lang->block->typeList->trade['out']  = '支出';
 

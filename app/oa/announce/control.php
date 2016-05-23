@@ -138,18 +138,23 @@ class announce extends control
         if($currentCategory > 0 && isset($announce->categories[$currentCategory])) $category = $currentCategory;  
 
         $category = $this->loadModel('tree')->getByID($category);
+        $users    = $this->loadModel('user')->getPairs();
 
         $this->view->title       = $announce->title . ' - ' . $category->name;
         $this->view->category    = $category;
         $this->view->announce    = $announce;
         $this->view->author      = $this->loadModel('user')->getByAccount($announce->author);
-        $this->view->users       = $this->loadModel('user')->getPairs();
+        $this->view->users       = $users; 
         $this->view->prevAndNext = $this->article->getPrevAndNext($announce->id, $category->id);
         $this->view->modalWidth  = 800;
 
         if(!in_array($this->app->user->account, $announce->readers)) $announce->readers[] = $this->app->user->account;
-        $readers   = implode(',', $announce->readers);
-        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->set('readers')->eq($readers)->where('id')->eq($announceID)->exec(false);
+        $readers = array();
+        foreach($announce->readers as $reader) $readers[] = zget($users, $reader);
+        $announce->readers = implode(',', $announce->readers);
+        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->set('readers')->eq($announce->readers)->where('id')->eq($announceID)->exec(false);
+
+        $this->view->readers = $readers;
 
         $this->display();
     }
@@ -170,7 +175,7 @@ class announce extends control
         foreach($announce->readers as $reader) $readers[] = zget($users, $reader);
 
         $this->view->title   = $announce->title . ' - ' . sprintf($this->lang->article->lblReaders, count($readers));
-        $this->view->readers = $readers;
+        $this->view->readers = implode(', ', $readers);
         $this->display();
     }
 

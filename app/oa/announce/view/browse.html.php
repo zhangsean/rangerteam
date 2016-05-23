@@ -27,15 +27,15 @@
             <span title="<?php echo $lang->announce->createdDate;?>"><i class='icon-time'></i> <?php echo substr($announce->createdDate, 0, 10);?></span>&nbsp; 
             <span data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $announce->views);?>'><i class='icon-eye-open icon-large'></i> <?php echo $announce->views;?></span>
           </div>
-          <h4><span class='label label-primary'><?php echo $categories[$announce->category];?></span> <?php echo $announce->title;?></h4>
+          <h4><span class='label label-primary'><?php echo $categories[$announce->category];?></span> <?php echo html::a(inlink('view', "announceID={$announce->id}"), $announce->title, "class='nounderline' data-toggle='modal'");?></h4>
         </div>
         <div class='item-content'>
           <div class='text'><?php echo $announce->content;?></div>
           <div class='pull-left'>
-            <span class='text-muted'><?php printf($lang->article->lblReaders, count($announce->readers));?></span>
-            <?php echo html::a(inlink('viewReaders', "announceID={$announce->id}"), $lang->view, "data-toggle='modal'");?>
+            <?php echo html::a(inlink('viewReaders', "announceID={$announce->id}"), sprintf($lang->article->lblReaders, count($announce->readers)), "class='nounderline' data-toggle='modal'");?>
           </div>
           <div class='text pull-right'>
+            <?php echo html::a(inlink('view', "announceID={$announce->id}"), $lang->view, "data-toggle='modal'");?>
             <?php commonModel::printLink('announce', 'edit', "announceID={$announce->id}", $lang->edit);?>
             <?php commonModel::printLink('announce', 'delete', "announceID={$announce->id}", $lang->delete, "class='deleter'");?>
           </div>

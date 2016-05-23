@@ -80,10 +80,13 @@ class cashblockModel extends blockModel
         $this->app->loadLang('trade', 'cash');
         $this->app->loadLang('report', 'sys');
 
+        $options = $this->lang->block->typeList->trade;
+        unset($options['all']);
+
         $params = new stdclass();
 
         $params->type['name']    = $this->lang->trade->type;
-        $params->type['options'] = $this->lang->block->typeList->trade;
+        $params->type['options'] = $options;
         $params->type['control'] = 'select';
 
         $params->groupBy['name']    = $this->lang->report->common;

@@ -11,8 +11,8 @@
  */
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
-<div class='row'>
-  <?php foreach($readers as $reader) echo "<div class='col-xs-1 col-md-1'>$reader</span></div>";?>
+<div style='word-wrap:break-word;word-break:break-all;'>
+  <?php echo $readers;?>
 </div>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>
 
