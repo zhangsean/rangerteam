@@ -14,7 +14,7 @@ $lang->app->name = 'CASH';
 
 $lang->menu->cash = new stdclass();
 $lang->menu->cash->dashboard = 'Home|dashboard|index|';
-$lang->menu->cash->all       = 'Bills|trade|browse|mode=all';
+$lang->menu->cash->all       = 'All|trade|browse|mode=all';
 $lang->menu->cash->in        = 'Income|trade|browse|mode=in';
 $lang->menu->cash->out       = 'Expenditure|trade|browse|mode=out';
 $lang->menu->cash->transfer  = 'Transfer|trade|browse|mode=transfer';

@@ -14,7 +14,7 @@ $lang->app->name = 'CASH';
 
 $lang->menu->cash = new stdclass();
 $lang->menu->cash->dashboard = '首页|dashboard|index|';
-$lang->menu->cash->all       = '账目|trade|browse|mode=all';
+$lang->menu->cash->all       = '所有|trade|browse|mode=all';
 $lang->menu->cash->in        = '收入|trade|browse|mode=in';
 $lang->menu->cash->out       = '支出|trade|browse|mode=out';
 $lang->menu->cash->transfer  = '转账|trade|browse|mode=transfer';
