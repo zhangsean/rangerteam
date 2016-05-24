@@ -135,7 +135,8 @@ class sso extends control
                 }
             }
 
-            $boardList .= $this->loadModel('todo', 'sys')->buildBoardList($datas[$type], $code . '_' . $type);
+            $index = $type == 'bug' ? count($datas['task']) : 0;
+            $boardList .= $this->loadModel('todo', 'sys')->buildBoardList($datas[$type], $code . '_' . $type, $index);
         }
         die($boardList);
     }

@@ -491,10 +491,10 @@ class todoModel extends model
      * @access public
      * @return string
      */
-    public function buildBoardList($items, $type)
+    public function buildBoardList($items, $type, $index = 0)
     {
         $div = '';
-        $index = 1;
+        $index = $index ? $index + 1 : 1;
         foreach($items as $id => $name)
         {
             $div .= "<div class='board-item text-nowrap text-ellipsis' title='$name' data-id='$id' data-type='$type' data-action='create' data-index='$index' data-toggle='droppable' data-target='.day'>\r\n";
