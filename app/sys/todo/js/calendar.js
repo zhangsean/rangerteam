@@ -138,11 +138,6 @@ $(document).ready(function()
     addPager('#tab_undone');
     updateBoard('all');
 
-    /* adjust focus position. */
-    if($('.current').offset().top >= $(window).scrollTop() + $(window).height()) $(window).scrollTop($('.current').offset().top);
-
-    fixTableHeader();
-
     var gap  = $('.calendar header').offset().top - $('#mainNavbar').outerHeight();
     $(window).scroll(function()
     {
@@ -155,4 +150,9 @@ $(document).ready(function()
             $('.calendar header').removeClass('fixed-date');
         }
     });
+
+    /* adjust focus position. */
+    if($('.current').offset().top >= $(window).scrollTop() + $(window).height()) $(window).scrollTop($('.current').offset().top);
+
+    fixTableHeader();
 });
