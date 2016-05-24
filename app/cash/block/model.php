@@ -9,7 +9,8 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-helper::import(realpath('../../sys/block/model.php'));
+if(strpos(realpath('./'), '/ext/') !== false) helper::import(realpath('../../../../sys/block/model.php'));
+if(strpos(realpath('./'), '/ext/') === false) helper::import(realpath('../../sys/block/model.php'));
 class cashblockModel extends blockModel
 {
     /**
