@@ -17,24 +17,17 @@ class action extends control
      * @param  string    $objectType
      * @param  int       $objectID 
      * @param  string    $action
+     * @param  string    $from
      * @access public
      * @return void
      */
-    public function history($objectType, $objectID, $action = '', $from = 'view', $pageID = 1)
+    public function history($objectType, $objectID, $action = '', $from = 'view')
     {
-        $pager = null;
-        if($action == 'record')
-        {
-            $this->app->loadClass('pager', $static = true);
-            $pager = new pager($recTotal = 0, $recPerPage = 5, $pageID);
-        }
-
-        $this->view->actions    = $this->action->getList($objectType, $objectID, $action, $pager);
+        $this->view->actions    = $this->action->getList($objectType, $objectID, $action);
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->from       = $from;
-        $this->view->pager      = $pager;
         $this->view->behavior   = $action;
         $this->display();
     }
@@ -59,10 +52,11 @@ class action extends control
      * @param  string    $objectType  order|contact|customer
      * @param  int       $objectID 
      * @param  int       $customer 
+     * @param  bool      $history
      * @access public
      * @return void
      */
-    public function createRecord($objectType, $objectID, $customer = 0)
+    public function createRecord($objectType, $objectID, $customer = 0, $history = true)
     {
         if($_POST)
         {
@@ -116,10 +110,11 @@ class action extends control
         }
 
         $this->loadModel('file');
-        $this->view->title      = $this->lang->action->record->create;
+        $this->view->title      = "<i class='icon-comment-alt'> </i>" . $this->lang->action->record->create;
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
         $this->view->customer   = $customer;
+        $this->view->history    = $history;
         $this->view->contacts   = $this->loadModel('contact', 'crm')->getList($customer);
         $this->display();
     }

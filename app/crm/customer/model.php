@@ -51,7 +51,7 @@ class customerModel extends model
         {
             foreach($customerList as $id => $customer)
             {
-                if(!isset($customerIdList[$id])) unset($customerList[$id]);
+                if(!in_array($id, $customerIdList)) unset($customerList[$id]);
             }
         }
 

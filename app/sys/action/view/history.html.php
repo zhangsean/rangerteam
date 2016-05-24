@@ -13,6 +13,10 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <script src='<?php echo $config->webRoot;?>js/jquery/reverseorder/raw.js' type='text/javascript'></script>
 
+<style>
+.wordwrap {word-wrap:break-word;word-break:break-all;}
+</style>
+
 <div class='panel panel-history'>
   <div class='panel-heading'>
     <strong><?php echo $lang->history?></strong>
@@ -64,7 +68,7 @@
         <?php 
         if($action->comment) 
         {
-            echo "<div class='comment$action->id'>";
+            echo "<div class='comment$action->id wordwrap'>";
             echo strip_tags($action->comment) == $action->comment ? nl2br($action->comment) : $action->comment; 
             echo "</div>";
         }
@@ -88,9 +92,6 @@
       </li>
       <?php endforeach;?>
     </ol>
-    <?php if($behavior == 'record'):?>
-    <div class='pager pull-right'><?php $pager->show('right', 'shortest');?></div>
-    <?php endif;?>
   </div>
 </div>
 <?php js::execute($pageJS);?>

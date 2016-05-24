@@ -127,7 +127,7 @@ class actionModel extends model
               ->andWhere('objectID')->eq($objectID)
             ->fi()
             ->beginIF($action)->andWhere('action')->eq($action)->fi()
-            ->orderBy('id')
+            ->orderBy('id_desc')
             ->page($pager)
             ->fetchAll('id');
 

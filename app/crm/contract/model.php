@@ -728,7 +728,8 @@ class contractModel extends model
 
         if($type == 'view') $menu .= "<div class='btn-group'>";
 
-        if($canCreateRecord) $menu .= html::a(helper::createLink('action', 'createRecord', "objectType=contract&objectID={$contract->id}&customer={$contract->customer}"), $this->lang->contract->record, "class='$class' data-toggle='modal' data-type='iframe' data-width='860' data-icon='comment-alt'");
+        $history = $type == 'view' ? '&history=' : '';
+        if($canCreateRecord) $menu .= html::a(helper::createLink('action', 'createRecord', "objectType=contract&objectID={$contract->id}&customer={$contract->customer}$history"), $this->lang->contract->record, "class='$class' data-toggle='modal' data-width='860'");
 
         if($contract->return != 'done' and $contract->status == 'normal' and $canReceive)
         {

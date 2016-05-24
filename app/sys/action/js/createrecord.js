@@ -33,7 +33,13 @@ $(document).ready(function()
         }
     });
 
-    $('#actionBox').load(createLink('action', 'history', 'objectType=' + v.objectType + '&objectID=' + v.objectID + '&action=record&from=record'));
+    if(v.history) $('#actionBox').load(createLink('action', 'history', 'objectType=' + v.objectType + '&objectID=' + v.objectID + '&action=record&from=record'), function()
+    {
+        if($('#actionBox .panel-history .panel-body').height() > 300) 
+        {
+          $('#actionBox .panel-history .panel-body').css({'height' : 300, 'overflow' : 'auto'});
+        }
+    });
 
     $('[name*=objectType]').change(function()
     {
@@ -72,8 +78,11 @@ $(document).ready(function()
         qq    = qq    == '' ? '' : "<i class='icon-qq'></i><a target='_blank' href='http://wpa.qq.com/msgrd?v=3&uin=" + qq + "&site=&menu=yes'>" + qq + "</a>";
         email = email == '' ? '' : "<i class='icon-envelope-alt'></i><a href='mailto:" + email + "'>" + email + "</a>";
         
-        $('#phoneTR').show();
-        $('#phoneTD').html(phone + qq + email);
+        if(phone || qq || email)
+        {
+            $('#phoneTR').show();
+            $('#phoneTD').html(phone + qq + email);
+        }
     });
 
     $('#fileform > .text-danger').remove();

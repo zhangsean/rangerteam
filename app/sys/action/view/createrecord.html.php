@@ -10,13 +10,14 @@
  * @link        http://www.ranzhico.com
  */
 ?>
-<?php include '../../../sys/common/view/header.lite.html.php';?>
+<?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::import($jsRoot . 'date.js');?>
 <?php js::set('customer', $customer);?>
 <?php js::set('objectType', $objectType);?>
 <?php js::set('objectID', $objectID);?>
+<?php js::set('history', $history);?>
 <div class='panel-body'>
 <form method='post' id='createRecordForm' action='<?php echo inlink('createrecord', "objectType={$objectType}&objectID={$objectID}")?>' class='form-inline'>
   <table class='table table-form table-condensed'>
@@ -105,9 +106,9 @@
       </td>
     </tr>
   </table>
-  <div id='actionBox'>
-    <?php echo $this->fetch('action', 'history', "objectType={$objectType}&objectID={$objectID}&action=record&from=createRecord");?>
-  </div>
+  <?php if($history):?>
+  <div id='actionBox'></div>
+  <?php endif;?>
 </form>
 </div>
 <div class='errorMessage hide'>

@@ -53,7 +53,7 @@
       <td class='visible-lg'><?php echo empty($contact->qq) ? '' : html::a("tencent://Message/?Uin={$contact->qq}&websiteName=RanZhi&Menu=yes", $contact->qq, "target='_blank'")?></td>
       <td class='operate'>
         <?php
-        commonModel::printLink('action',  'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}", $lang->contact->record, "data-toggle='modal' data-type='iframe' data-width='860' data-icon='comment-alt'");
+        commonModel::printLink('action',  'createRecord', "objectType=contact&objectID={$contact->id}&customer={$contact->customer}", $lang->contact->record, "data-toggle='modal' data-width='860'");
         commonModel::printLink('address', 'browse', "objectType=contact&objectID=$contact->id", $lang->contact->address, "data-toggle='modal'");
         commonModel::printLink('contact', 'edit', "contactID=$contact->id", $lang->edit);
         commonModel::printLink('contact', 'vcard', "contactID=$contact->id", $lang->contact->qrcode, "class='iframe' data-width='400' data-icon='qrcode' data-height='440'");
