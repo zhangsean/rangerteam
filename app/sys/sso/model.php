@@ -226,6 +226,8 @@ class ssoModel extends model
         if(strpos($entry->login, '&') !== false) $zentaoUrl = substr($entry->login, 0, strpos($entry->login, '?'));
 
         $zentaoConfig = $this->loadModel('sso')->getZentaoServerConfig($zentaoUrl);
+        if(strpos($zentaoConfig->version, 'pro') !== false and version_compare($zentaoConfig->version, 'pro5.2.1', '<')) $results = array(); 
+        if(strpos($zentaoConfig->version, 'pro') === false and version_compare($zentaoConfig->version, '8.2.1', '<')) $results = array();
 
         $url  = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getTodoList', "account=$account", 'json', false);
         $url .= "?hash={$entry->key}";
