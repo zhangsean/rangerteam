@@ -406,7 +406,16 @@ class todo extends control
                 $confirmNote = sprintf($this->lang->todo->confirmTip, $zentaoEntry->name, $todo->id);
                 if($todo->type == $code . '_task') $referer = base64_encode($this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'task', 'view', "id=$todo->idvalue", 'html', false));
                 if($todo->type == $code . '_bug')  $referer = base64_encode($this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'bug', 'view', "id=$todo->idvalue", 'html', false));
-                $confirmURL  = $this->createLink('entry', 'visit', "entryID=$zentaoEntry->id", 'html') . '?referer=' . $referer;
+                $confirmURL = $this->createLink('entry', 'visit', "entryID=$zentaoEntry->id", 'html');
+                $pathinfo = parse_url($confirmURL);
+                if(!empty($pathinfo['query']))
+                {
+                    $confirmURL = rtrim($confirmURL, '&') . "&referer=$referer";
+                }
+                else
+                {
+                    $confirmURL = rtrim($confirmURL, '?') . "?referer=$referer";
+                }
                 $this->send(array('result' => 'success', 'confirm' => array('note' => $confirmNote, 'url' => $confirmURL, 'entry' => $zentaoEntry->id)));
             }
         }
