@@ -16,8 +16,7 @@
   <div class='side'>
     <nav class='menu leftmenu affix'>
       <ul class='nav nav-primary'>
-        <?php foreach($lang->refund->settings as $key => $setting):?>
-        <?php if($key == 'common') continue;?>
+        <?php foreach($lang->refund->settings as $setting):?>
         <?php list($label, $module, $method) = explode('|', $setting);?>
         <li><?php commonModel::printLink($module, $method, '', $label);?></li>
         <?php endforeach;?>

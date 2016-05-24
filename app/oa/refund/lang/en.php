@@ -12,12 +12,14 @@ $lang->refund->view         = 'View';
 $lang->refund->delete       = 'Delete';
 $lang->refund->review       = 'Review';
 $lang->refund->detail       = 'Detail';
-$lang->refund->settings     = 'Settings';
-$lang->refund->setCategory  = 'Category';
-$lang->refund->setDepositor = 'Depositor';
 $lang->refund->reimburse    = 'Reimburse';
 $lang->refund->cancel       = 'Cancel';
 $lang->refund->commit       = 'Commit';
+$lang->refund->settings     = 'Settings';
+$lang->refund->setReviewer  = 'Set Reviewer';
+$lang->refund->setCategory  = 'Set Category';
+$lang->refund->setDepositor = 'Set Depositor';
+$lang->refund->setRefundBy  = 'Set RefundBy';
 
 $lang->refund->id               = 'ID';
 $lang->refund->name             = 'Name';
@@ -43,6 +45,7 @@ $lang->refund->baseInfo         = 'Base Info';
 $lang->refund->reason           = 'Reason';
 $lang->refund->reviewer         = 'Reviewer';
 $lang->refund->related          = 'Related';
+$lang->refund->depositor        = 'Depositor';
 
 $lang->refund->statusList['draft']  = 'Draft';
 $lang->refund->statusList['wait']   = 'Wait';
@@ -68,7 +71,6 @@ $lang->refund->setExpense        = 'Go to set.';
 $lang->refund->moneyTip          = 'If money of refund is less than this, reviewed once, but money of refund is more than this, reviewed twice.';
 
 $lang->refund->settings = new stdclass();
-$lang->refund->settings->common       = 'Settings';
 $lang->refund->settings->setReviewer  = "Reviewer|refund|setreviewer";
 $lang->refund->settings->setCategory  = "Category|refund|setcategory";
 $lang->refund->settings->setDepositor = "Depositor|refund|setdepositor";

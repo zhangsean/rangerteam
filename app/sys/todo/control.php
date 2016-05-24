@@ -24,7 +24,6 @@ class todo extends control
         $this->loadModel('task');
         $this->loadModel('order', 'crm');
         $this->loadModel('customer', 'crm');
-
     }
 
     /**

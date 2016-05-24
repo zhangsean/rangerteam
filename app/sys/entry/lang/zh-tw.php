@@ -6,7 +6,7 @@
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id: zh-tw.php 3759 2016-04-15 05:11:46Z liugang $
+ * @version     $Id: zh-tw.php 3862 2016-05-23 07:16:04Z daitingting $
  * @link        http://www.ranzhico.com
  */
 $lang->entry->common      = '應用';
@@ -82,7 +82,7 @@ $lang->entry->error->url   = ' 非內置應用的登錄地址，必須包含 /�
 
 $lang->entry->error->admin         = '管理員用戶名或密碼錯誤';
 $lang->entry->error->zentaoSetting = '禪道系統設置失敗';
-$lang->entry->error->version       = '您的禪道系統版本低於7.4';
+$lang->entry->error->version       = '您的禪道系統版本低於%s';
 $lang->entry->error->zentaoUrl     = '禪道登錄地址錯誤';
 $lang->entry->error->accessDenied  = '訪問受限';
 

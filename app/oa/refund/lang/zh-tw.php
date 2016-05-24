@@ -12,12 +12,14 @@ $lang->refund->view         = '查看';
 $lang->refund->delete       = '刪除';
 $lang->refund->review       = '審批';
 $lang->refund->detail       = '明細';
-$lang->refund->settings     = '設置';
-$lang->refund->setCategory  = '報銷科目';
-$lang->refund->setDepositor = '報銷賬戶';
 $lang->refund->reimburse    = '報銷記賬';
 $lang->refund->cancel       = '撤銷';
 $lang->refund->commit       = '提交';
+$lang->refund->settings     = '設置';
+$lang->refund->setReviewer  = '審批人設置';
+$lang->refund->setCategory  = '報銷科目設置';
+$lang->refund->setDepositor = '報銷賬戶設置';
+$lang->refund->setRefundBy  = '報銷者設置';
 
 $lang->refund->id               = '編號';
 $lang->refund->name             = '名稱';
@@ -43,6 +45,7 @@ $lang->refund->baseInfo         = '基本信息';
 $lang->refund->reason           = '理由';
 $lang->refund->reviewer         = '審批人';
 $lang->refund->related          = '參與人';
+$lang->refund->depositor        = '報銷賬戶';
 
 $lang->refund->statusList['draft']  = '草稿';
 $lang->refund->statusList['wait']   = '等待審批';
@@ -68,7 +71,6 @@ $lang->refund->setExpense        = '設置科目';
 $lang->refund->moneyTip          = '低於金額只需要一級審批，高於金額需要二級審批';
 
 $lang->refund->settings = new stdclass();
-$lang->refund->settings->common       = '報銷設置';
 $lang->refund->settings->setReviewer  = "審批人|refund|setreviewer";
 $lang->refund->settings->setCategory  = "報銷科目|refund|setcategory";
 $lang->refund->settings->setDepositor = "報銷賬戶|refund|setdepositor";

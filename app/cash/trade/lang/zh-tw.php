@@ -123,6 +123,7 @@ $lang->trade->categoryList = $lang->trade->categoryList + $lang->trade->expenseC
 $lang->trade->invesetCategoryList['profit'] = '盈利';
 $lang->trade->invesetCategoryList['loss']   = '虧損';
 
+$lang->trade->objectTypeList['customer'] = '客戶支出';
 $lang->trade->objectTypeList['order']    = '訂單支出';
 $lang->trade->objectTypeList['contract'] = '合同支出';
 

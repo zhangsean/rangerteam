@@ -277,6 +277,7 @@ $lang->sales->methodOrder[20] = 'delete';
 /* Product plan. */
 $lang->resource->trade = new stdclass();
 $lang->resource->trade->browse      = 'browse';
+$lang->resource->trade->view        = 'view';
 $lang->resource->trade->create      = 'create';
 $lang->resource->trade->batchCreate = 'batchCreate';
 $lang->resource->trade->batchEdit   = 'batchEdit';
@@ -291,6 +292,7 @@ $lang->resource->trade->export      = 'export';
 $lang->resource->trade->report      = 'report';
 
 $lang->trade->methodOrder[10] = 'browse';
+$lang->trade->methodOrder[11] = 'view';
 $lang->trade->methodOrder[15] = 'create';
 $lang->trade->methodOrder[20] = 'batchCreate';
 $lang->trade->methodOrder[21] = 'batchEdit';
@@ -481,19 +483,23 @@ $lang->trip->methodOrder[10] = 'create';
 $lang->resource->refund = new stdclass();
 $lang->resource->refund->company      = 'company';
 $lang->resource->refund->todo         = 'todo';
-$lang->resource->refund->settings     = 'settings';
 $lang->resource->refund->browseReview = 'browseReview';
-$lang->resource->refund->setCategory  = 'setCategory';
 $lang->resource->refund->review       = 'review';
 $lang->resource->refund->reimburse    = 'reimburse';
+$lang->resource->refund->setReviewer  = 'setReviewer';
+$lang->resource->refund->setCategory  = 'setCategory';
+$lang->resource->refund->setDepositor = 'setDepositor';
+$lang->resource->refund->setRefundBy  = 'setRefundBy';
 
 $lang->refund->methodOrder[10] = 'company';
 $lang->refund->methodOrder[15] = 'todo';
-$lang->refund->methodOrder[40] = 'settings';
-$lang->refund->methodOrder[45] = 'browseReview';
-$lang->refund->methodOrder[50] = 'setCategory';
-$lang->refund->methodOrder[55] = 'review';
-$lang->refund->methodOrder[60] = 'reimburse';
+$lang->refund->methodOrder[20] = 'browseReview';
+$lang->refund->methodOrder[25] = 'review';
+$lang->refund->methodOrder[30] = 'reimburse';
+$lang->refund->methodOrder[35] = 'setReviewer';
+$lang->refund->methodOrder[40] = 'setCategory';
+$lang->refund->methodOrder[45] = 'setDepositor';
+$lang->refund->methodOrder[50] = 'setRefundBy';
 
 /* Blog. */
 $lang->resource->blog = new stdclass();

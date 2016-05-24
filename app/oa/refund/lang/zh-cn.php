@@ -12,12 +12,14 @@ $lang->refund->view         = '查看';
 $lang->refund->delete       = '删除';
 $lang->refund->review       = '审批';
 $lang->refund->detail       = '明细';
-$lang->refund->settings     = '设置';
-$lang->refund->setCategory  = '报销科目';
-$lang->refund->setDepositor = '报销账户';
 $lang->refund->reimburse    = '报销记账';
 $lang->refund->cancel       = '撤销';
 $lang->refund->commit       = '提交';
+$lang->refund->settings     = '设置';
+$lang->refund->setReviewer  = '审批人设置';
+$lang->refund->setCategory  = '报销科目设置';
+$lang->refund->setDepositor = '报销账户设置';
+$lang->refund->setRefundBy  = '报销者设置';
 
 $lang->refund->id               = '编号';
 $lang->refund->name             = '名称';
@@ -43,6 +45,7 @@ $lang->refund->baseInfo         = '基本信息';
 $lang->refund->reason           = '理由';
 $lang->refund->reviewer         = '审批人';
 $lang->refund->related          = '参与人';
+$lang->refund->depositor        = '报销账户';
 
 $lang->refund->statusList['draft']  = '草稿';
 $lang->refund->statusList['wait']   = '等待审批';
@@ -68,7 +71,6 @@ $lang->refund->setExpense        = '设置科目';
 $lang->refund->moneyTip          = '低于金额只需要一级审批，高于金额需要二级审批';
 
 $lang->refund->settings = new stdclass();
-$lang->refund->settings->common       = '报销设置';
 $lang->refund->settings->setReviewer  = "审批人|refund|setreviewer";
 $lang->refund->settings->setCategory  = "报销科目|refund|setcategory";
 $lang->refund->settings->setDepositor = "报销账户|refund|setdepositor";
