@@ -41,8 +41,6 @@ $(document).ready(function()
         return tradeChecked;
     });
 
-    fixTableFooter($('#tradeList'));
-
     if(v.treeview == '') 
     {
         $('a[href*=' + v.currentYear + ']').parents('li.expandable').find('ul').show();
@@ -53,4 +51,6 @@ $(document).ready(function()
 
     $('#menu > ul:first').prepend($('.month-menu'));
     $('#menu > ul:first').prepend($('.year-menu'));
+
+    fixTableFooter($('#tradeList'));
 });
