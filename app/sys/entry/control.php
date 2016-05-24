@@ -613,11 +613,13 @@ class entry extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('bindUser', "id=$id&sessionID=$sessionID")));
         }
 
-        $getUsersUrl = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getUserPairs');
+        $getUsersUrl  = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getUserPairs');
+        $getUsersUrl .= "&hash={$entry->key}";
         $results = commonModel::http($getUsersUrl);
         $zentaoUsers = json_decode($results, true);
 
-        $getBindUsersUrl = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getBindUsers');
+        $getBindUsersUrl  = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getBindUsers');
+        $getBindUsersUrl .= "&hash={$entry->key}";
         $results = commonModel::http($getBindUsersUrl);
         $bindUsers = json_decode($results, true);
 

@@ -121,6 +121,7 @@ class ssoModel extends model
     public function initZentaoSSO($config, $zentaoUrl, $account, $password, $code, $key)
     {
         /* login. */
+        $password = base64_encode($password);
         $loginUrl = $this->createZentaoLink($config, $zentaoUrl, 'user', 'login') . "&account={$account}&password={$password}";
         $result = $this->fetchZentaoAPI($loginUrl);
         if(!$result) return array('result' => 'fail', 'message' => $this->lang->entry->error->admin);
@@ -226,7 +227,8 @@ class ssoModel extends model
 
         $zentaoConfig = $this->loadModel('sso')->getZentaoServerConfig($zentaoUrl);
 
-        $url = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getTodoList', "account=$account");
+        $url  = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'getTodoList', "account=$account", 'json', false);
+        $url .= "?hash={$entry->key}";
         $results = commonModel::http($url);
         return json_decode($results, true);
     }
