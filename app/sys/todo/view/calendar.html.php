@@ -27,6 +27,7 @@
       <li><a href='#tab_task' data-toggle='tab'><?php echo $lang->task->common;?></a></li>
       <li><a href='#tab_order' data-toggle='tab'><?php echo $lang->order->common;?></a></li>
       <li><a href='#tab_customer' data-toggle='tab'><?php echo $lang->customer->common;?></a></li>
+      <?php if(!empty($zentaoEntryList)):?>
       <li class='dropdown'>
         <a data-toggle='dropdown' class='dropdown-toggle' href='#'><?php echo $lang->entry->common;?><b class='caret'></b></a>
         <ul aria-labelledby='myTabDrop1' role='menu' class='dropdown-menu pull-right'>
@@ -35,6 +36,7 @@
           <?php endforeach;?>
         </ul>
       </li>
+      <?php endif;?>
     </ul>
     <div class='tab-content'>
       <?php foreach($todoList as $type => $todos):?>
