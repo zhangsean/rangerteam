@@ -199,6 +199,7 @@ class refund extends control
         $this->view->currentMonth = $currentMonth;
         $this->view->monthList    = $monthList;
         $this->view->yearList     = $yearList;
+        $this->view->date         = $date;
         $this->display('refund', 'browse');
     }
     

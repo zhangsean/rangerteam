@@ -43,7 +43,7 @@
       <table class='table table-hover table-striped tablesorter table-data table-fixed text-center' id='refundTable'>
         <thead>
           <tr class='text-center'>
-            <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+            <?php $vars = "date=$date&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
             <th class='w-50px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->refund->id);?></th>
             <th class='w-100px visible-lg'><?php echo $lang->user->dept;?></th>
             <th><?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->refund->name);?></th>
