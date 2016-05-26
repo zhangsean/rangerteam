@@ -68,6 +68,9 @@ $config->file->maxSize = 1024 * 1024;
 /* IP white list settings.*/
 $config->ipWhiteList = '*';
 
+/* View type settings. */ 
+$config->viewPrefix['mhtml'] = 'm.';
+
 /* Set the allowed tags.  */
 $config->allowedTags = new stdclass();
 $config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><ol><ul><li><img><a><b><font><hr><pre>';    // For front mode.

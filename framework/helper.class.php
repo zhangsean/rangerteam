@@ -614,6 +614,20 @@ class helper
 
         return $ip;
     }   
+
+    /**
+     * Get device.
+     * 
+     * @access public
+     * @return void
+     */
+    public static function getClientDevice()
+    {
+        /* Detect mobile. */
+        $mobile = new mobile();
+        if(!$mobile->isTablet() and $mobile->isMobile()) return 'mobile';
+        return 'desktop';
+    }
 }
 
 /**
@@ -680,15 +694,17 @@ function a($var)
  * @access public
  * @return void
  */
-function zget($var, $key, $valueWhenNone = '', $valueWhenExists = '')
+function zget($var, $key, $valueWhenNone = false, $valueWhenExists = false)
 {
-    $var = (array)$var;
-    if(isset($var[$key]))
+    if(!is_array($var) and !is_object($var)) return false;
+    $type = is_array($var) ? 'array' : 'object';
+    $checkExists = $type == 'array' ? isset($var[$key]) : isset($var->$key);
+    if($checkExists)
     {
-        if($valueWhenExists) return $valueWhenExists;
-        return $var[$key];
+        if($valueWhenExists !== false) return $valueWhenExists;
+        return $type == 'array' ? $var[$key] : $var->$key;
     }
-    if($valueWhenNone) return $valueWhenNone;
+    if($valueWhenNone !== false) return $valueWhenNone;
     return $key;
 }
 

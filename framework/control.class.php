@@ -283,8 +283,7 @@ class control
      */
     public function setViewPrefix()
     {
-        $this->viewPrefix = '';
-        if($this->viewType == 'mhtml') $this->viewPrefix = 'm.';
+        $this->viewPrefix = zget($this->config->viewPrefix, $this->viewType, '');
     }
 
     //-------------------- View related methods --------------------//

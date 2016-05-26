@@ -282,6 +282,14 @@ class router
     public $global;
 
     /**
+     * The device type of client.
+     * 
+     * @var string   
+     * @access public
+     */
+    public $clientDevice;
+
+    /**
      * The construct function.
      * 
      * Prepare all the paths, classes, super objects and so on.
@@ -328,6 +336,9 @@ class router
         $this->loadClass('front',  $static = true);
         $this->loadClass('filter', $static = true);
         $this->loadClass('dao',    $static = true);
+        $this->loadClass('mobile', $static = true);
+
+        $this->setClientDevice();
     }
 
     /**
@@ -582,6 +593,17 @@ class router
     public function setTimezone()
     {
         if(isset($this->config->timezone)) date_default_timezone_set($this->config->timezone);
+    }
+
+    /**
+     * Set client device.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setClientDevice()
+    {
+        $this->clientDevice = helper::getClientDevice();
     }
 
     /**
