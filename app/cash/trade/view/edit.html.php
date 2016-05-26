@@ -45,19 +45,33 @@
             </div>
           </td>
         </tr>
-        <?php endif;?>
-        <?php if($trade->type == 'out'):?>
-        <tr>
+        <tr class='hide'>
           <th><?php echo $lang->trade->order;?></th>
-          <td><?php echo html::select('order', array('') + $orderList, $trade->order, "class='form-control chosen'");?></td>
+          <td>
+            <select class='form-control chosen' id='order' name='order'>
+              <option value=''></option>
+              <?php foreach($orderList as $id => $order):?>
+              <option <?php if($id == $trade->order) echo " selected='selected' ";?> value="<?php echo $id?>" data-customer="<?php echo $order->customer?>" data-amount="<?php echo $order->real;?>"><?php echo $order->name;?></option>
+              <?php endforeach;?>
+            </select>
+          </td>
         </tr>
-        <tr>
+        <tr class='hide'>
           <th><?php echo $lang->trade->contract;?></th>
-          <td><?php echo html::select('contract', array('') + $contractList, $trade->contract, "class='form-control chosen'");?></td>
+          <td>
+            <select class='form-control chosen' id='contract' name='contract'>
+              <option value=''></option>
+              <?php foreach($contractList as $id => $contract):?>
+              <option <?php if($id == $trade->contract) echo " selected='selected' ";?> value="<?php echo $id?>" data-customer="<?php echo $contract->customer?>" data-amount="<?php echo $contract->amount;?>"><?php echo $contract->name;?></option>
+              <?php endforeach;?>
+            </select>
+          </td>
         </tr>
-        <?php endif;?>
-        <?php if($trade->type == 'out'):?>
-        <tr>
+        <tr class='hide'>
+          <th><?php echo $lang->trade->customer;?></th>
+          <td><?php echo html::select('customer', $customerList, $trade->trader, "class='form-control chosen' onchange='getContract(this.value)'");?></td>
+        </tr>
+        <tr class='traderTR'>
           <th><?php echo $lang->trade->trader;?></th>
           <td>
             <div class='input-group'>

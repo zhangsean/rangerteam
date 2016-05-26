@@ -2,9 +2,9 @@ $(document).ready(function()
 {
     $('[name*=objectType]').change(function()
     {
-        if($(this).prop('checked'))$('[name*=objectType]').not(this).prop('checked', false).change();
-        if($(this).prop('checked') && $(this).val() == 'customer') 
+        if($(this).prop('checked')) 
         {
+            $('[name*=objectType]').not(this).prop('checked', false).change();
             $('.traderTR').hide();
         }
         else
@@ -12,8 +12,13 @@ $(document).ready(function()
             $('.traderTR').show();
         }
         $('#' + $(this).val()).parents('tr').toggle($(this).prop('checked'))
+        if($(this).val() != 'customer') $('#customer').parents('tr').toggle($(this).prop('checked'));
     })
-    $('[name*=objectType]').change();
+
+    $('[name*=objectType]').each(function()
+    {
+        if($(this).prop('checked')) $(this).change();
+    });
 
     /* Toggle create trader items. */
     $('[name*=createTrader]').change(function()

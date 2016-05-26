@@ -134,15 +134,18 @@ class trade extends control
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "type=$type")));
         }
+        $orderList = $this->loadModel('order', 'crm')->getList();
+        $orders    = $this->order->getPairs($customerID = 0);
+        foreach($orderList as $id => $order) $order->name = $orders[$id];
 
         unset($this->lang->trade->menu);
         $this->view->title         = $this->lang->trade->{$type};
         $this->view->type          = $type;
         $this->view->depositorList = array('' => '') + $this->loadModel('depositor')->getPairs();
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
-        $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
+        $this->view->orderList     = $orderList;
         $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
-        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider');
+        $this->view->traderList    = $this->customer->getPairs('provider');
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getList($customerID = 0);
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
@@ -215,6 +218,10 @@ class trade extends control
             $backURL = $this->session->tradeList == false ? inlink('browse') : $this->session->tradeList;
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $backURL));
         }
+
+        $orderList = $this->loadModel('order', 'crm')->getList();
+        $orders    = $this->order->getPairs($customerID = 0);
+        foreach($orderList as $id => $order) $order->name = $orders[$id];
         
         $objectType = array();
         if($trade->order)    $objectType[] = 'order';
@@ -224,11 +231,11 @@ class trade extends control
         $this->view->title         = $this->lang->trade->edit;
         $this->view->trade         = $trade;
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
-        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider');
         $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
-        $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
-        $this->view->contractList  = array('' => '') + $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
+        $this->view->orderList     = $orderList;
+        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->traderList    = $this->customer->getPairs('provider');
+        $this->view->contractList  = $this->loadModel('contract', 'crm')->getList($customerID = 0);
         $this->view->tradeContract = array('' => '') + $this->loadModel('contract', 'crm')->getPairs($customerID = $trade->trader);
         $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);

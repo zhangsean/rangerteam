@@ -41,29 +41,32 @@
             </div>
           </td>
         </tr>
-        <?php endif;?>
-        <?php if($type == 'out'):?>
-        <tr>
+        <tr class='hide'>
           <th><?php echo $lang->trade->order;?></th>
-          <td><?php echo html::select('order', array('') + (array) $orderList, '', "class='form-control chosen'");?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->trade->contract;?></th>
           <td>
-            <select class='form-control' id='contract' name='contract'>
+            <select class='form-control chosen' id='order' name='order'>
               <option value=''></option>
-              <?php foreach($contractList as $id => $contract):?>
-              <option value="<?php echo $id?>" data-amount="<?php echo $contract->amount;?>"><?php echo $contract->name;?></option>
+              <?php foreach($orderList as $id => $order):?>
+              <option value="<?php echo $id?>" data-customer="<?php echo $order->customer?>" data-amount="<?php echo $order->real;?>"><?php echo $order->name;?></option>
               <?php endforeach;?>
             </select>
           </td>
         </tr>
-        <tr>
+        <tr class='hide'>
+          <th><?php echo $lang->trade->contract;?></th>
+          <td>
+            <select class='form-control chosen' id='contract' name='contract'>
+              <option value=''></option>
+              <?php foreach($contractList as $id => $contract):?>
+              <option value="<?php echo $id?>" data-customer="<?php echo $contract->customer?>" data-amount="<?php echo $contract->amount;?>"><?php echo $contract->name;?></option>
+              <?php endforeach;?>
+            </select>
+          </td>
+        </tr>
+        <tr class='hide'>
           <th><?php echo $lang->trade->customer;?></th>
           <td><?php echo html::select('customer', $customerList, '', "class='form-control chosen' onchange='getContract(this.value)'");?></td>
         </tr>
-        <?php endif;?>
-        <?php if($type == 'out'):?>
         <tr class='traderTR'>
           <th><?php echo $lang->trade->trader;?></th>
           <td>
