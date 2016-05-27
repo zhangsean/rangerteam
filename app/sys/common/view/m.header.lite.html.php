@@ -19,7 +19,7 @@ $cssRoot      = $webRoot . "mobile/css/";
 <html lang='<?php echo $this->app->getClientLang();?>'>
 <head profile="http://www.w3.org/2005/10/profile">
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php
   echo html::icon($webRoot . 'favicon.ico');
 
