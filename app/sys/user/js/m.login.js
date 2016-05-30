@@ -1,10 +1,5 @@
 $(function()
 {
-    $('#langs').on('click', 'a', function()
-    {
-        selectLang($(this).data('value'));
-    });
-
     $('#loginForm').ajaxform(
     {
         onSubmit: function(data)

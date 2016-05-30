@@ -12,15 +12,16 @@
 ?>
 
 <?php
+$bodyClass = 'with-appnav-top';
 include '../../common/view/m.header.lite.html.php';
 js::import($webRoot . 'js/md5.js');
 js::set('scriptName', $_SERVER['SCRIPT_NAME']);
 js::set('random', $this->session->random);
 ?>
 
-<nav class='appnav affix dock-top nav justify-center' id='langs'>
+<nav class='appnav affix dock-top nav justify-center lang-menu'>
   <?php foreach($config->langs as $key => $value):?>
-    <a href='###' data-value='<?php echo $key; ?>'<?php if($key === $this->app->getClientLang()) echo ' class="active"' ?>><?php echo $value; ?></a>
+    <a data-value='<?php echo $key; ?>'<?php if($key === $this->app->getClientLang()) echo ' class="active"' ?>><?php echo $value; ?></a>
   <?php endforeach;?>
 </nav>
 
