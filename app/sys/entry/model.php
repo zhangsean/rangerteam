@@ -66,7 +66,30 @@ class entryModel extends model
 
             usort($entries, 'commonModel::sortEntryByOrder');
             $newEntries = array();
-            foreach($entries as $entry) $newEntries[$entry->id] = $entry;
+            foreach($entries as $entry)
+            {
+                switch ($entry->code)
+                {
+                    case 'crm':
+                        unset($entry->logo);
+                        $entry->icon = 'icon-phone';
+                        break;
+                    case 'oa':
+                        unset($entry->logo);
+                        $entry->icon = 'icon-check-board';
+                        break;
+                    case 'cash':
+                        unset($entry->logo);
+                        $entry->icon = 'icon-yen';
+                        break;
+                    case 'team':
+                        unset($entry->logo);
+                        $entry->icon = 'icon-group';
+                        break;
+                }
+                if(empty($entry->url)) $entry->url = helper::createLink('entry', 'visit', "entryID=$entry->id");
+                $newEntries[$entry->id] = $entry;
+            }
             return $newEntries;
         }
         if($type != 'custom') return $entries;

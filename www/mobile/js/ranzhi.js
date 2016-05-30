@@ -11,8 +11,12 @@
 {
     $.Skin.set(
     {
-        dashboard: '#3f51b5',
-        superadmin: '#607D8B'
+        dashboard:   '#3f51b5',
+        superadmin:  '#607D8B',
+        crm:         '#03a9f4',
+        cash:        '#ef6c00',
+        oa:          '#f44336',
+        team:        '#4caf50'
     });
 }());
 

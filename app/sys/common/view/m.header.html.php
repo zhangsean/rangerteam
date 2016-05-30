@@ -21,7 +21,7 @@ $currentEntry = isset($entriesList[$entryID]) ? $entriesList[$entryID] : $entrie
 ?>
 <header id='appbar' class='appbar heading primary affix dock-top dock-auto'>
   <a class='title' data-display='dropdown' data-target='#appMenu' data-backdrop='true' data-placement='beside-bottom-start'>
-    <div class="avatar" data-skin='<?php echo $currentEntry->id ?>'>
+    <div class="avatar" data-skin='<?php echo $currentEntry->code ?>'>
       <?php
       if($currentEntry->logo) echo '<img src="' . $currentEntry->logo . '">';
       else if($currentEntry->icon) echo '<i class="icon ' . $currentEntry->icon . '"></i>';
@@ -37,10 +37,21 @@ $currentEntry = isset($entriesList[$entryID]) ? $entriesList[$entryID] : $entrie
   </nav>
 </header>
 
+<nav class='appnav affix dock-top nav skin-<?php echo $currentEntry->code ?>-pale nav-secondary'>
+  <?php
+  if($currentEntry->id === 'dashboard')
+  {
+      echo html::a($this->createLink('index', 'index'), $lang->home, $this->moduleName == 'index' && $this->methodName == 'index' ? "class='active'" : '');
+      echo commonModel::createDashboardMenu('mobile');
+  }
+  else echo commonModel::createMainMenu($this->moduleName, 'mobile');
+  ?>
+</nav>
+
 <div id='appMenu' class='list layer hidden fade dock-top dock-left'>
 <?php foreach ($entriesList as $entry):?>
   <a class='item<?php if($entry->id == $currentEntry->id) echo ' active' ?>' href='<?php echo $entry->url ?>'>
-    <div class="avatar" data-skin='<?php echo $entry->id ?>'>
+    <div class="avatar" data-skin='<?php echo $entry->code ?>'>
       <?php
       if($entry->logo) echo '<img src="' . $entry->logo . '">';
       else if($entry->icon) echo '<i class="icon ' . $entry->icon . '"></i>';

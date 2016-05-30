@@ -322,14 +322,14 @@ class commonModel extends model
      * @access public
      * @return string
      */
-    public static function createMainMenu($currentModule)
+    public static function createMainMenu($currentModule, $type = '')
     {
         global $app, $lang, $config;
 
         /* Set current module. */
         if(isset($lang->menuGroups->$currentModule)) $currentModule = $lang->menuGroups->$currentModule;
 
-        $string = "<ul class='nav navbar-nav'>\n";
+        $string = $type != 'mobile' ? "<ul class='nav navbar-nav'>\n" : '';
 
         /* Print all main menus. */
         foreach($lang->menu->{$app->appName} as $moduleName => $moduleMenu)
@@ -350,7 +350,7 @@ class commonModel extends model
                     if(commonModel::hasPriv($moduleName, $methodName))
                     {
                         $link  = helper::createLink($moduleName, $methodName, $settingVars);
-                        $string .= "<li$class><a href='$link'>$label</a></li>\n";
+                        $string .= $type != 'mobile' ? "<li$class><a href='$link'>$label</a></li>\n" : "<a class='$class' href='$link'>$label</a>";
                         break;
                     }
                 }
@@ -360,12 +360,12 @@ class commonModel extends model
                 if(commonModel::hasPriv($module, $method))
                 {
                     $link  = helper::createLink($module, $method, $vars);
-                    $string .= "<li$class><a href='$link'>$label</a></li>\n";
+                    $string .= $type != 'mobile' ? "<li$class><a href='$link'>$label</a></li>\n" : "<a class='$class' href='$link'>$label</a>";
                 }
             }
         }
 
-        $string .= "</ul>\n";
+        $string .= $type != 'mobile' ? "</ul>\n" : '';
         return $string;
     }
 
@@ -440,10 +440,10 @@ class commonModel extends model
      * @access public
      * @return string
      */
-    public static function createDashboardMenu()
+    public static function createDashboardMenu($type = '')
     {
         global $app, $lang;
-        $string = "<ul class='nav navbar-nav'>\n";
+        $string = $type != 'mobile' ? "<ul class='nav navbar-nav'>\n" : '';
 
         $currentMethod = $app->getMethodName();
         $currentModule = $app->getModuleName();
@@ -473,11 +473,18 @@ class commonModel extends model
             if($hasPriv)
             {
                 $link = helper::createLink($module, $method, $vars);
-                $string .= "<li $class><a class='app-btn open' data-id='dashboard' href='$link'>$label</a></li>\n";
+                if($type != 'mobile')
+                {
+                    $string .= "<li $class><a class='app-btn open' data-id='dashboard' href='$link'>$label</a></li>\n";
+                }
+                else
+                {
+                    $string .= "<a class='$class' href='$link'>$label</a>\n";
+                }
             }
         }
 
-        $string .= "</ul>\n";
+        $string .= $type != 'mobile' ? "</ul>\n" : '';
         return $string;
     }
 
