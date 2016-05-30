@@ -515,7 +515,6 @@ class dao
         {
             /* Get the SELECT, FROM position, thus get the fields, replace it by count(*). */
             $sql       = $this->processSQL();
-            $sql       = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS ', $sql);
 
             /* Remove the part after order and limit. */
             $subLength = strlen($sql);
@@ -529,17 +528,14 @@ class dao
             /* Get the records count. */
             try
             {
-                $row = $this->dbh->query($sql)->fetch(PDO::FETCH_OBJ);
+                $rows = $this->dbh->query($sql)->rowCount();
             }
             catch (PDOException $e) 
             {
                 $this->app->triggerError($e->getMessage() . "<p>The sql is: $sql</p>", __FILE__, __LINE__, $exit = true);
             }
 
-            $sql  = 'SELECT FOUND_ROWS() as recTotal;';
-            $row = $this->dbh->query($sql)->fetch();
- 
-            $pager->setRecTotal($row->recTotal);
+            $pager->setRecTotal($rows);
             $pager->setPageTotal();
         }
         $this->sqlobj->limit($pager->limit());
