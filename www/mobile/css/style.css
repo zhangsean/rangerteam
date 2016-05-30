@@ -1,0 +1,9 @@
+/* App menu */
+
+#appMenu  {min-width: 18rem}
+
+
+/* User menu */
+
+#userMenu {min-width: 18rem; max-width: 50%}
+#userMenu .lang-menu {left: 2.5rem}

@@ -1350,4 +1350,23 @@ class commonModel extends model
         fwrite($fh, "\n");
         fclose($fh);
     }
+
+    /**
+     * Print user avatar
+     * 
+     * @param  string $size
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function printUserAvatar($class = '')
+    {
+        global $app;
+        $user = $app->user;
+
+        echo "<div class='avatar $class' data-skin='{$user->id}'>";
+        if(!empty($user->avatar)) echo html::image($user->avatar);
+        else echo substr(empty($user->realname) ? $user->account : $user->realname, 0, 1);
+        echo '</div>';
+    }
 }

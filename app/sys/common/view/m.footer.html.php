@@ -19,8 +19,6 @@ $extPath      = dirname(dirname(dirname(__FILE__))) . '/common/ext/view/';
 $extHookRule  = $extPath . 'footer.*.hook.php';
 $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
-if($this->loadModel('cron')->runable()) js::execute('startCron()');
 ?>
-
 </body>
 </html>

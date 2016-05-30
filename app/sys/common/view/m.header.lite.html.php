@@ -35,7 +35,9 @@ $cssRoot      = $webRoot . "mobile/css/";
   {
       js::import($jsRoot . 'mzui.min.js');
       js::import($jsRoot . 'ranzhi.js');
+      js::import($jsRoot . 'my.js');
       css::import($cssRoot . 'mzui.min.css');
+      css::import($cssRoot . 'style.css');
   }
   else
   {
@@ -46,4 +48,4 @@ $cssRoot      = $webRoot . "mobile/css/";
   if(isset($pageCSS)) css::internal($pageCSS);
   ?>
 </head>
-<body class='m-<?php echo $this->app->getModuleName() . '-' . $this->app->getMethodName() ?>'>
+<body class='m-<?php echo $this->app->getModuleName() . '-' . $this->app->getMethodName() . (isset($bodyClass) ? ' ' . $bodyClass : ''); ?>'>
