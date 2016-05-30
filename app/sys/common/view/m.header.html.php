@@ -15,8 +15,21 @@ $bodyClass = 'with-appbar-top with-appnav-top';
 include 'm.header.lite.html.php';
 ?>
 
-<header class='appbar heading primary affix dock-top dock-auto'>
-  <a class='title' data-display='dropdown' data-target='#appMenu' data-backdrop='true' data-placement='beside-bottom-start'><?php echo $lang->ranzhi ?></a>
+<?php
+$entriesList  = $this->loadModel('entry')->getEntries('mobile');
+$currentEntry = isset($entriesList[$entryID]) ? $entriesList[$entryID] : $entriesList['dashboard'];
+?>
+<header id='appbar' class='appbar heading primary affix dock-top dock-auto'>
+  <a class='title' data-display='dropdown' data-target='#appMenu' data-backdrop='true' data-placement='beside-bottom-start'>
+    <div class="avatar" data-skin='<?php echo $currentEntry->id ?>'>
+      <?php
+      if($currentEntry->logo) echo '<img src="' . $currentEntry->logo . '">';
+      else if($currentEntry->icon) echo '<i class="icon ' . $currentEntry->icon . '"></i>';
+      ?>
+    </div>
+    <span><?php echo $currentEntry->name ?></span>
+    <i class="icon icon-caret-down"></i>
+  </a>
   <nav class='nav'>
     <a data-target='#userMenu' data-backdrop='true' data-display data-placement='beside-bottom-end' class='has-padding-sm'>
       <?php commonModel::printUserAvatar('circle');?>
@@ -25,13 +38,21 @@ include 'm.header.lite.html.php';
 </header>
 
 <div id='appMenu' class='list layer hidden fade dock-top dock-left'>
-  <a href='##' class='item'>TEST</a>
-  <a href='##' class='item'>TEST2</a>
-  <a href='##' class='item'>TEST3</a>
+<?php foreach ($entriesList as $entry):?>
+  <a class='item<?php if($entry->id == $currentEntry->id) echo ' active' ?>' href='<?php echo $entry->url ?>'>
+    <div class="avatar" data-skin='<?php echo $entry->id ?>'>
+      <?php
+      if($entry->logo) echo '<img src="' . $entry->logo . '">';
+      else if($entry->icon) echo '<i class="icon ' . $entry->icon . '"></i>';
+      ?>
+    </div>
+    <div class='title'><?php echo $entry->name ?></div>
+  </a>
+<?php endforeach; ?>
 </div>
 
 <div id='userMenu' class='list compact layer hidden fade dock-top dock-right'>
-  <a class='item multi-lines primary-pale'>
+  <a class='item multi-lines gray-pale'>
     <?php commonModel::printUserAvatar('circle');?>
     <div class='content'>
       <div class='title'><?php echo empty($app->user->realname) ? ('@' . $app->user->account) : $app->user->realname ?></div>

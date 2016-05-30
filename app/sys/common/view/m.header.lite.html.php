@@ -11,9 +11,18 @@
  */
 
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
-$webRoot      = $config->webRoot;
-$jsRoot       = $webRoot . "mobile/js/";
-$cssRoot      = $webRoot . "mobile/css/";
+
+// Common variables for views
+$webRoot = $config->webRoot;
+$jsRoot  = $webRoot . "mobile/js/";
+$cssRoot = $webRoot . "mobile/css/";
+$entryID = '';
+if(isset($this->app->entry->id)) $entryID = $this->app->entry->id;
+else if(RUN_MODE != 'upgrade' and RUN_MODE != 'install')
+{
+    if($this->app->user->admin == 'super') $entryID = 'superadmin';
+    if($this->moduleName == 'index' or $this->moduleName == 'my' or $this->moduleName == 'todo') $entryID = 'dashboard';
+}
 ?>
 <!DOCTYPE html>
 <html lang='<?php echo $this->app->getClientLang();?>'>
@@ -28,14 +37,14 @@ $cssRoot      = $webRoot . "mobile/css/";
   echo html::title($title . $lang->ranzhi);
 
   js::exportConfigVars();
-  if(isset($this->app->entry->id)) js::set('entryID', $this->app->entry->id);
-  if(RUN_MODE != 'upgrade' and RUN_MODE != 'install' and !isset($this->app->entry->id) and ($this->app->user->admin == 'super')) js::set('entryID', 'superadmin');
-  if(RUN_MODE != 'upgrade' and RUN_MODE != 'install' and !isset($this->app->entry->id) and ($this->moduleName == 'my' or $this->moduleName == 'todo')) js::set('entryID', 'dashboard');
+  js::set('entryID', $entryID);
+
   if($config->debug)
   {
       js::import($jsRoot . 'mzui.min.js');
       js::import($jsRoot . 'ranzhi.js');
       js::import($jsRoot . 'my.js');
+      
       css::import($cssRoot . 'mzui.min.css');
       css::import($cssRoot . 'style.css');
   }

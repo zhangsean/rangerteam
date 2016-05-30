@@ -41,6 +41,34 @@ class entryModel extends model
         }
         $entries = $newEntries;
 
+        if($type == 'mobile')
+        {
+            $dashboardEntry = new stdclass();
+            $dashboardEntry->id    = 'dashboard';
+            $dashboardEntry->code  = 'dashboard';
+            $dashboardEntry->name  = $this->lang->index->dashboard;
+            $dashboardEntry->icon  = 'icon-home';
+            $dashboardEntry->url   = helper::createLink('todo', 'calendar');
+            $dashboardEntry->order = 0;
+            $entries[] = $dashboardEntry;
+
+            if($this->app->user->admin == 'super' || commonModel::hasAppPriv('superadmin'))
+            {
+                $adminEntry = new stdclass();
+                $adminEntry->id    = 'superadmin';
+                $adminEntry->code  = 'superadmin';
+                $adminEntry->name  = $this->lang->index->superAdmin;
+                $adminEntry->icon  = 'icon-cog';
+                $adminEntry->url   = helper::createLink('admin');
+                $adminEntry->order = 999999;
+                $entries[] = $adminEntry;
+            }
+
+            usort($entries, 'commonModel::sortEntryByOrder');
+            $newEntries = array();
+            foreach($entries as $entry) $newEntries[$entry->id] = $entry;
+            return $newEntries;
+        }
         if($type != 'custom') return $entries;
 
         /* Add custom settings. */
