@@ -1366,10 +1366,10 @@ class commonModel extends model
      * @access public
      * @return void
      */
-    public static function printUserAvatar($class = '')
+    public static function printUserAvatar($class = '', $user = null)
     {
         global $app;
-        $user = $app->user;
+        if($user === null) $user = $app->user;
 
         echo "<div class='avatar $class' data-skin='{$user->id}'>";
         if(!empty($user->avatar)) echo html::image($user->avatar);
