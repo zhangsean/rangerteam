@@ -143,6 +143,7 @@ $lang->yes            = 'YES';
 $lang->no             = 'NO';
 $lang->signIn         = 'Sign in';
 $lang->signOut        = 'Sign out';
+$lang->sort           = 'Sort';
 
 $lang->exportAll      = 'Export All';
 $lang->exportThisPage = 'Export This Page';

@@ -322,14 +322,15 @@ class commonModel extends model
      * @access public
      * @return string
      */
-    public static function createMainMenu($currentModule, $type = '')
+    public static function createMainMenu($currentModule)
     {
         global $app, $lang, $config;
 
         /* Set current module. */
         if(isset($lang->menuGroups->$currentModule)) $currentModule = $lang->menuGroups->$currentModule;
 
-        $string = $type != 'mobile' ? "<ul class='nav navbar-nav'>\n" : '';
+        $isMobile = $app->viewType === 'mhtml';
+        $string   = !$isMobile ? "<ul class='nav navbar-nav'>\n" : '';
 
         /* Print all main menus. */
         foreach($lang->menu->{$app->appName} as $moduleName => $moduleMenu)
@@ -350,7 +351,7 @@ class commonModel extends model
                     if(commonModel::hasPriv($moduleName, $methodName))
                     {
                         $link  = helper::createLink($moduleName, $methodName, $settingVars);
-                        $string .= $type != 'mobile' ? "<li$class><a href='$link'>$label</a></li>\n" : "<a class='$class' href='$link'>$label</a>";
+                        $string .= !$isMobile ? "<li$class><a href='$link'>$label</a></li>\n" : "<a$class href='$link'>$label</a>";
                         break;
                     }
                 }
@@ -360,12 +361,12 @@ class commonModel extends model
                 if(commonModel::hasPriv($module, $method))
                 {
                     $link  = helper::createLink($module, $method, $vars);
-                    $string .= $type != 'mobile' ? "<li$class><a href='$link'>$label</a></li>\n" : "<a class='$class' href='$link'>$label</a>";
+                    $string .= !$isMobile ? "<li$class><a href='$link'>$label</a></li>\n" : "<a$class' href='$link'>$label</a>";
                 }
             }
         }
 
-        $string .= $type != 'mobile' ? "</ul>\n" : '';
+        $string .= !$isMobile ? "</ul>\n" : '';
         return $string;
     }
 
@@ -383,8 +384,9 @@ class commonModel extends model
 
         if(!isset($lang->$currentModule->menu)) return false;
 
-        $string = "<nav id='menu'><ul class='nav'>\n";
-        if(strpos(',setting, tree, schema, sales, group,', $currentModule)) $string = "<nav class='menu leftmenu affix'><ul class='nav nav-primary'>\n";
+        $isMobile = $app->viewType === 'mhtml';
+        $string   = !$isMobile ? "<nav id='menu'><ul class='nav'>\n" : '';
+        if(!$isMobile && strpos(',setting, tree, schema, sales, group,', $currentModule)) $string = "<nav class='menu leftmenu affix'><ul class='nav nav-primary'>\n";
 
         /* Get menus of current module and current method. */
         $moduleMenus   = $lang->$currentModule->menu;  
@@ -418,18 +420,21 @@ class commonModel extends model
                 $class = '';
                 if($module == $currentModule && $method == $currentMethod) $class = " class='active'";
                 if($module == $currentModule && strpos($methodAlias, $currentMethod) !== false) $class = " class='active'";
+                $url  = helper::createLink($module, $method, $vars);
+                $link = html::a($url, $label);
                 if(strpos($string, "class='active'") != false)
                 {
-                    $string .= "<li>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
+
+                    $string .= !$isMobile ? ("<li>$link</li>\n") : $link;
                 }
                 else
                 {
-                    $string .= "<li{$class}>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
+                    $string .= !$isMobile ? "<li{$class}>$link</li>\n" : html::a($url, $label, $class);
                 }
             }
         }
 
-        $string .= "</ul></nav>\n";
+        $string .= !$isMobile ? "</ul></nav>\n" : '';
         return $string;
     }
 
@@ -440,10 +445,12 @@ class commonModel extends model
      * @access public
      * @return string
      */
-    public static function createDashboardMenu($type = '')
+    public static function createDashboardMenu()
     {
         global $app, $lang;
-        $string = $type != 'mobile' ? "<ul class='nav navbar-nav'>\n" : '';
+
+        $isMobile = $app->viewType === 'mhtml';
+        $string   = !$isMobile ? "<ul class='nav navbar-nav'>\n" : '';
 
         $currentMethod = $app->getMethodName();
         $currentModule = $app->getModuleName();
@@ -473,18 +480,18 @@ class commonModel extends model
             if($hasPriv)
             {
                 $link = helper::createLink($module, $method, $vars);
-                if($type != 'mobile')
+                if(!$isMobile)
                 {
                     $string .= "<li $class><a class='app-btn open' data-id='dashboard' href='$link'>$label</a></li>\n";
                 }
                 else
                 {
-                    $string .= "<a class='$class' href='$link'>$label</a>\n";
+                    $string .= "<a $class href='$link'>$label</a>\n";
                 }
             }
         }
 
-        $string .= $type != 'mobile' ? "</ul>\n" : '';
+        $string .= !$isMobile ? "</ul>\n" : '';
         return $string;
     }
 
@@ -556,29 +563,32 @@ class commonModel extends model
         global $lang, $app;
         if(empty($module)) $module = $app->getModuleName();
         if(empty($method)) $method = $app->getMethodName();
-        $className = 'header';
+        $className = '';
+        $isMobile  = $app->viewType === 'mhtml';
 
         if(strpos($orderBy, $fieldName) !== false)
         {
             if(stripos($orderBy, 'desc') !== false)
             {
                 $orderBy   = str_ireplace('desc', 'asc', $orderBy);
-                $className = 'headerSortUp';
+                $className = 'SortDown';
             }
             elseif(stripos($orderBy, 'asc')  !== false)
             {
                 $orderBy = str_ireplace('asc', 'desc', $orderBy);
-                $className = 'headerSortDown';
+                $className = 'SortUp';
             }
         }
         else
         {
             $orderBy   = $fieldName . '_' . 'asc';
-            $className = 'header';
+            $className = '';
         }
 
         $link = helper::createLink($module, $method, sprintf($vars, $orderBy));
-        echo "<div class='$className'>" . html::a($link, $label) . '</div>';
+
+        if(!$isMobile) echo "<div class='header$className'>" . html::a($link, $label) . '</div>';
+        else echo html::a($link, $label, "class='$className'");
     }
  
     /**

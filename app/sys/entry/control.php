@@ -485,7 +485,7 @@ class entry extends control
         $this->get->set('sso', base64_encode(commonModel::getSysURL() . helper::createLink('entry', 'visit', "entry=$entry->id")));
         $this->get->set('param', $params);
         $html = $this->fetch('block', 'index', array(), $entry->code);
-
+        
         die($html);
     }
 
