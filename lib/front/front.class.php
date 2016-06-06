@@ -319,9 +319,9 @@ class html
      */
     static public function date($name, $value = "", $options = '', $attrib = '')
     {
-        $html = "<div class='input-append date date-picker' {$options}>";
+        $html = "<div class='input-group date form-date' {$options}>";
         $html .= "<input type='text' name='{$name}' id='$name' value='$value' {$attrib} />\n";
-        $html .= "<span class='add-on'><button class='btn btn-default' type='button'><i class='icon-calendar'></i></button></span></div>";
+        $html .= "<span class='input-group-addon'><i class='icon-calendar'></i></span></div>";
         return $html;
     }
 
@@ -338,9 +338,9 @@ class html
      */
     static public function dateTime($name, $value = "", $options = '', $attrib = '')
     {
-        $html = "<div class='input-append date time-picker' {$options}>";
+        $html = "<div class='input-group date form-datetime' {$options}>";
         $html .= "<input type='text' name='{$name}' id='$name' value='$value' {$attrib} />\n";
-        $html .= "<span class='add-on'><button class='btn btn-default' type='button'><i class='icon-calendar'></i></button></span></div>";
+        $html .= "<span class='input-group-addon'><i class='icon-calendar'></i></span></div>";
         return $html;
     }
 
