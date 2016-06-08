@@ -1543,7 +1543,6 @@ class router
         /* Set the files to includ. */
         if(!is_file($mainLangFile))
         {
-            if(empty($extLangFiles)) return false;  // also no extension file.
             $langFiles = $extLangFiles;
         }
         else
@@ -1568,17 +1567,37 @@ class router
         {
             foreach($lang->db->custom[$appName][$moduleName] as $section => $fields)
             {
-                foreach($fields as $key => $value)
+                if(empty($section))
                 {
-                    if($moduleName == 'common')
+                    foreach($fields as $key => $value)
                     {
-                        unset($lang->{$section}[$key]);
-                        $lang->{$section}[$key] = $value;
+                        if($moduleName == 'common')
+                        {
+                            unset($lang->{$key});
+                            $lang->{$key} = $value;
+                        }
+                        else
+                        {
+                            if(!isset($lang->{$moduleName})) $lang->{$moduleName} = new stdclass();
+                            unset($lang->{$moduleName}->{$key});
+                            $lang->{$moduleName}->{$key} = $value;
+                        }
                     }
-                    else
+                }
+                else
+                {
+                    foreach($fields as $key => $value)
                     {
-                        unset($lang->{$moduleName}->{$section}[$key]);
-                        $lang->{$moduleName}->{$section}[$key] = $value;
+                        if($moduleName == 'common')
+                        {
+                            unset($lang->{$section}[$key]);
+                            $lang->{$section}[$key] = $value;
+                        }
+                        else
+                        {
+                            unset($lang->{$moduleName}->{$section}[$key]);
+                            $lang->{$moduleName}->{$section}[$key] = $value;
+                        }
                     }
                 }
             }

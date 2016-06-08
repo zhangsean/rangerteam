@@ -41,7 +41,7 @@
         <tr>
           <?php if($i == 1):?>
           <?php $rowspan = $app == 'crm' ? count($lang->appModule->$app) + 1 : count($lang->appModule->$app);?>
-          <th rowspan="<?php echo $rowspan;?>" class='w-70px'>
+          <th rowspan="<?php echo $rowspan;?>" class='w-80px'>
             <label class="checkbox">
               <?php echo $lang->apps->$app;?>
               <input type="checkbox" class='checkApp' /> 

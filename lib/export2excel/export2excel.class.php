@@ -159,13 +159,13 @@ class export2Xls extends model
                     if(isset($this->excelKey[$key]))
                     {
                         /* Merge Cells.*/
-                        if(isset($this->rawExcelData->rowspan[$num]) and (strpos($this->rawExcelData->rowspan[$num]['rows'], ",$key,") !== false))
+                        if(isset($this->rawExcelData->rowspan[$num][$key]) && is_int($this->rawExcelData->rowspan[$num][$key]))
                         {
-                            $excelSheet->mergeCells($this->excelKey[$key] . $i . ":" . $this->excelKey[$key] . ($i + $this->rawExcelData->rowspan[$num]['num'] - 1));
+                            $excelSheet->mergeCells($this->excelKey[$key] . $i . ":" . $this->excelKey[$key] . ($i + $this->rawExcelData->rowspan[$num][$key]));
                         }
-                        if(isset($this->rawExcelData->colspan[$num]) and strpos($this->rawExcelData->colspan[$num]['cols'], ",$key,") !== false)
+                        if(isset($this->rawExcelData->colspan[$num][$key]) && is_int($this->rawExcelData->colspan[$num][$key]))
                         {
-                            $excelSheet->mergeCells($this->excelKey[$key] . $i . ":" . chr(ord($this->excelKey[$key]) + $this->rawExcelData->colspan[$num]['num'] - 1) . $i);
+                            $excelSheet->mergeCells($this->excelKey[$key] . $i . ":" . chr(ord($this->excelKey[$key]) + $this->rawExcelData->colspan[$num][$key] - 1) . $i);
                         }
 
                         /* Wipe off html tags.*/
@@ -338,9 +338,19 @@ class export2Xls extends model
             if(in_array($key, $customWidth)) $excelSheet->getColumnDimension($letter)->setWidth($this->rawExcelData->customWidth[$key]);
         }
 
-        /* Set interlaced color for this table. */
-        if(!isset($this->rawExcelData->nocolor))
+        if(isset($this->rawExcelData->colors))
         {
+            foreach($this->rawExcelData->colors as $row => $color)
+            {
+                $beginColumn = $this->excelKey[$color->begin];
+                $endColumn   = $this->excelKey[$color->end];
+                $excelSheet->getStyle("$beginColumn$row:$endColumn$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+                $excelSheet->getStyle("$beginColumn$row:$endColumn$row")->getFill()->getStartColor()->setRGB($color->color);
+            }
+        }
+        elseif(!isset($this->rawExcelData->nocolor))
+        {
+            /* Set interlaced color for this table. */
             for($row = 2; $row <= $i; $row++)
             {
                 $excelSheet->getRowDimension($row)->setRowHeight(20);
@@ -570,13 +580,13 @@ class export2Xlsx extends model
                 {
                     $value = isset($row[$key]) ? $row[$key] : '';
                     /* Merge Cells.*/
-                    if(isset($this->rawExcelData->rowspan[$num]) and strpos($this->rawExcelData->rowspan[$num]['rows'], ",$key,") !== false)
+                    if(isset($this->rawExcelData->rowspan[$num][$key]) and is_int($this->rawExcelData->rowspan[$num][$key]))
                     {
-                        $this->mergeCells($letter . $i, $letter . ($i + $this->rawExcelData->rowspan[$num]['num'] - 1));
+                        $this->mergeCells($letter . $i, $letter . ($i + $this->rawExcelData->rowspan[$num][$key]));
                     }
-                    if(isset($this->rawExcelData->colspan[$num]) and strpos($this->rawExcelData->colspan[$num]['cols'], ",$key,") !== false)
+                    if(isset($this->rawExcelData->colspan[$num][$key]) and is_int($this->rawExcelData->colspan[$num][$key]))
                     {
-                        $this->mergeCells($letter . $i , chr(ord($letter) + $this->rawExcelData->colspan[$num]['num'] - 1) . $i);
+                        $this->mergeCells($letter . $i , chr(ord($letter) + $this->rawExcelData->colspan[$num][$key] - 1) . $i);
                     }
 
                     /* Wipe off html tags. Use to export html message like company->selfDesc via js::kindeditor */
