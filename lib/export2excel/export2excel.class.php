@@ -13,8 +13,8 @@ class export2excel
 {
     public function export($excelData, $fileType = 'xls', $savePath = '')
     {
-        $xlsFile = $fileType == 'xls' ? new export2Xls() : new export2Xlsx();
-        $xlsFile->export($excelData, $savePath);
+        $xlsFile = new export2Xls();
+        $xlsFile->export($excelData, $savePath, $fileType);
     }
 }
 
@@ -118,7 +118,7 @@ class export2Xls extends model
      * @access public
      * @return void
      */
-    public function export($excelData, $savePath = '')
+    public function export($excelData, $savePath = '', $fileType)
     {
         $index = 0;
         /* Create sheets. */
@@ -190,8 +190,13 @@ class export2Xls extends model
                 }
             }
 
-            if(isset($this->lang->excel->help->{$this->post->kind})) $excelSheet->setCellValue("A" . $i, $this->lang->excel->help->{$this->post->kind});
             $this->setStyle($excelSheet, $i);
+            $i++;
+            if(isset($this->rawExcelData->help)) 
+            {
+                $excelSheet->mergeCells("A" . $i . ":" . end($this->excelKey) . $i);
+                $excelSheet->setCellValue("A" . $i, $this->rawExcelData->help);
+            }
             $index++;
         }
         /* If hasn't sys data remove the last sheet. */
@@ -202,13 +207,14 @@ class export2Xls extends model
         $fileName = $excelData->fileName;
         if(strpos($this->server->http_user_agent, 'MSIE') !== false || strpos($this->server->http_user_agent, 'Trident') !== false) $fileName = urlencode($fileName);
 
-        $excelWriter = PHPExcel_IOFactory::createWriter($this->phpExcel, 'Excel5');
+        $writer      = $fileType == 'xls' ? 'Excel5' : 'Excel2007';
+        $excelWriter = PHPExcel_IOFactory::createWriter($this->phpExcel, $writer);
         $excelWriter->setPreCalculateFormulas(false);
         if($savePath == '')
         {
             setcookie('downloading', 1);
             header('Content-Type: application/vnd.ms-excel');
-            header("Content-Disposition: attachment;filename=\"{$fileName}.xls\"");
+            header("Content-Disposition: attachment;filename=\"{$fileName}.{$fileType}\"");
             header('Cache-Control: max-age=0');
 
             $excelWriter->save('php://output');
@@ -230,7 +236,7 @@ class export2Xls extends model
     public function setStyle($excelSheet, $i)
     {
         $endColumn = $this->setExcelField(count($this->excelKey) - 1);
-        if(isset($this->lang->excel->help->{$this->rawExcelData->kind}) and isset($this->rawExcelData->extraNum)) $i--;
+        if(isset($this->rawExcelData->help) and isset($this->rawExcelData->extraNum)) $i--;
         /* Freeze column.*/
         if(isset($this->config->excel->freeze->{$this->rawExcelData->kind}))
         {
@@ -532,6 +538,8 @@ class export2Xlsx extends model
         $this->sheet1Params['cols']            = '';
         $this->sheet1Params['mergeCells']      = '';
         $this->sheet1Params['hyperlinks']      = '';
+        $this->sheet1Params['topLeftCell']     = '';
+        $this->sheet1Params['xSplit']          = '';
 
         $this->counts['dataValidations'] = 0;
         $this->counts['mergeCells']      = 0;
@@ -600,16 +608,17 @@ class export2Xlsx extends model
                 $this->sheet1SheetData .= '</row>';
             }
 
+            $this->setStyle($i);
             $this->sheet1Params['colspan'] = count($this->excelKey) - 1;
             /*Add help lang in end.*/
-            if(isset($this->lang->excel->help->{$this->post->kind}))
+            if(isset($this->rawExcelData->help))
             {
-                $this->mergeCells('A' . $i, $this->setExcelFiled($this->sheet1Params['colspan'] - 1) . $i);
+                $i++;
+                $this->mergeCells('A' . $i, $this->setExcelField($this->sheet1Params['colspan']) . $i);
                 $this->sheet1SheetData .= '<row r="' . $i . '" spans="1:%colspan%">';
-                $this->sheet1SheetData .= $this->setCellValue("A", $i, $this->lang->excel->help->{$this->post->kind});
+                $this->sheet1SheetData .= $this->setCellValue("A", $i, $this->rawExcelData->help, !isset($this->rawExcelData->nocolor));
                 $this->sheet1SheetData .= '</row>';
             }
-            $this->setStyle($i);
 
             if(!empty($this->sheet1Params['cols'])) $this->sheet1Params['cols'] = '<cols>' . $this->sheet1Params['cols'] . '</cols>';
             if(!empty($this->sheet1Params['mergeCells'])) $this->sheet1Params['mergeCells'] = '<mergeCells count="' . $this->counts['mergeCells'] . '">' . $this->sheet1Params['mergeCells'] . '</mergeCells>';
@@ -874,7 +883,7 @@ class export2Xlsx extends model
             $i++;
         }
 
-        if($hasSysData)
+        if($this->hasSysData)
         {
             $sheetCount = $count + 1;
             $sysSheetName = $this->exportPath . "xl/worksheets/sheet{$sheetCount}.xml";
