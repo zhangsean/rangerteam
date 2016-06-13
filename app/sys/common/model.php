@@ -1383,7 +1383,7 @@ class commonModel extends model
 
         echo "<div class='avatar text-tint $class' data-skin='{$user->id}'>";
         if(!empty($user->avatar)) echo html::image($user->avatar);
-        else echo substr($user->account, 0, 1);
+        else echo (!empty($user->realname) ? $user->realname : (!empty($user->name) ? $user->name : (!empty($user->account) ? $user->account : '<i class="icon icon-user"></i>')));
         echo '</div>';
     }
 }
