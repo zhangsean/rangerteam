@@ -271,6 +271,27 @@ class pager
         if($this->pageTotal > 1) $limit = ' limit ' . ($this->pageID - 1) * $this->recPerPage . ", $this->recPerPage";
         return $limit;
     }
+
+    /**
+     * Print show more link
+     *
+     * @access public
+     * @return void
+     */
+    public function showMore($class = 'pager-more')
+    {
+        $link = '';
+        if($this->recTotal === 0) $link = "<a class='$class disabled'>{$this->lang->pager->noRecord}</a>";
+        else if($this->pageTotal <= $this->pageID) $link = "<a class='$class disabled'>" . sprintf($this->lang->pager->showTotal, $this->recTotal, $this->recTotal) . " &nbsp; {$this->lang->pager->noMore}</a>";
+        else
+        {
+            $this->setParams();
+            $this->params['pageID'] = $this->pageID + 1;
+            $url  = helper::createLink($this->moduleName, $this->methodName, $this->params);
+            $link = "<a class='$class' data-more='$url'>" . sprintf($this->lang->pager->showTotal, $this->recPerPage * $this->pageID, $this->recTotal) . " &nbsp; <span class='text-link'>{$this->lang->pager->showMore}</span></a>";
+        }
+        echo $link;
+    }
    
     /**
      * Print the pager's html.
