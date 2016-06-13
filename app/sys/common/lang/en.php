@@ -144,6 +144,7 @@ $lang->no             = 'NO';
 $lang->signIn         = 'Sign in';
 $lang->signOut        = 'Sign out';
 $lang->sort           = 'Sort';
+$lang->required       = 'required';
 
 $lang->exportAll      = 'Export All';
 $lang->exportThisPage = 'Export This Page';
@@ -368,6 +369,9 @@ $lang->pager->pre        = " Previous";
 $lang->pager->next       = " Next";
 $lang->pager->last       = " Last";
 $lang->pager->locate     = "GO!";
+$lang->pager->showMore   = 'Show more <i class="icon icon-double-angle-down"></i>';
+$lang->pager->noMore     = 'No more';
+$lang->pager->showTotal  = 'Show <strong>%s</strong> of <strong>%s</strong>';
 
 /* The excel items. */
 $lang->excel = new stdClass();

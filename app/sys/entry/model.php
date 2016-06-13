@@ -43,14 +43,14 @@ class entryModel extends model
 
         if($type == 'mobile')
         {
-            $this->app->loadLang('index');
+            $this->app->loadLang('index', 'sys');
 
             $dashboardEntry = new stdclass();
             $dashboardEntry->id    = 'dashboard';
             $dashboardEntry->code  = 'dashboard';
             $dashboardEntry->name  = $this->lang->index->dashboard;
             $dashboardEntry->icon  = 'icon-home';
-            $dashboardEntry->url   = helper::createLink('todo', 'calendar');
+            $dashboardEntry->url   = helper::createLink('sys.todo', 'calendar');
             $dashboardEntry->order = 0;
             $entries[] = $dashboardEntry;
 

@@ -144,6 +144,7 @@ $lang->no             = '否';
 $lang->signIn         = '签到';
 $lang->signOut        = '签退';
 $lang->sort           = '排序';
+$lang->required       = '必填';
 
 $lang->exportAll      = '导出全部记录';
 $lang->exportThisPage = '导出本页记录';
@@ -368,6 +369,10 @@ $lang->pager->pre        = '上页';
 $lang->pager->next       = '下页';
 $lang->pager->last       = '末页';
 $lang->pager->locate     = 'Go!';
+$lang->pager->showMore   = '显示更多 <i class="icon icon-double-angle-down"></i>';
+$lang->pager->noMore     = '没有更多';
+$lang->pager->showTotal  = '已显示 <strong>%s</strong> 项，共 <strong>%s</strong> 项';
+
 
 /* The excel items. */
 $lang->excel = new stdClass();

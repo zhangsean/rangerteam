@@ -361,7 +361,7 @@ class commonModel extends model
                 if(commonModel::hasPriv($module, $method))
                 {
                     $link  = helper::createLink($module, $method, $vars);
-                    $string .= !$isMobile ? "<li$class><a href='$link'>$label</a></li>\n" : "<a$class' href='$link'>$label</a>";
+                    $string .= !$isMobile ? "<li$class><a href='$link'>$label</a></li>\n" : "<a$class href='$link'>$label</a>";
                 }
             }
         }
@@ -1381,9 +1381,9 @@ class commonModel extends model
         global $app;
         if($user === null) $user = $app->user;
 
-        echo "<div class='avatar $class' data-skin='{$user->id}'>";
+        echo "<div class='avatar text-tint $class' data-skin='{$user->id}'>";
         if(!empty($user->avatar)) echo html::image($user->avatar);
-        else echo substr(empty($user->realname) ? $user->account : $user->realname, 0, 1);
+        else echo substr($user->account, 0, 1);
         echo '</div>';
     }
 }
