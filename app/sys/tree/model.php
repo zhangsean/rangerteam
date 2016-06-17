@@ -781,7 +781,7 @@ class treeModel extends model
         if($this->app->user->admin == 'super') return true;
 
         $category = $this->getByID($categoryID);
-        if(!$category) return false;
+        if(!$category) return true;
 
         if(empty($category->users) && empty($category->rights))
         {
