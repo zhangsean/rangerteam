@@ -478,8 +478,11 @@ class actionModel extends model
 
             $fieldName = $history->field;
             $history->fieldLabel = isset($this->lang->$objectType->$fieldName) ? $this->lang->$objectType->$fieldName : $fieldName;
-            if(strpos($action, 'order') !== false) $history->fieldLabel = isset($this->lang->order->$fieldName) ? $this->lang->order->$fieldName : $fieldName;
-            if(strpos($action, 'contract') !== false) $history->fieldLabel = isset($this->lang->contract->$fieldName) ? $this->lang->contract->$fieldName : $fieldName;
+            if(isset($this->config->action->actionModules[$action]))
+            {
+                $module = $this->config->action->actionModules[$action];
+                $history->fieldLabel = isset($this->lang->$module->$fieldName) ? $this->lang->$module->$fieldName : $fieldName;
+            }
             if($objectType == 'contact') $history->fieldLabel = isset($this->lang->contact->$fieldName) ? $this->lang->contact->$fieldName : (isset($this->lang->resume->$fieldName) ? $this->lang->resume->$fieldName : $fieldName);
             if(($length = strlen($history->fieldLabel)) > $maxLength) $maxLength = $length;
             $history->diff ? $historiesWithDiff[] = $history : $historiesWithoutDiff[] = $history;

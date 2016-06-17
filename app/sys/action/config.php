@@ -57,3 +57,17 @@ $config->action->objectAppNames['depositor'] = 'cash';
 $config->action->objectAppNames['trade']     = 'cash';
 $config->action->objectAppNames['schema']    = 'cash';
 $config->action->objectAppNames['provider']  = 'cash';
+
+$config->action->actionModules['createorder']           = 'order';
+$config->action->actionModules['editorder']             = 'order';
+$config->action->actionModules['assignorder']           = 'order';
+$config->action->actionModules['closeorder']            = 'order';
+$config->action->actionModules['activateorder']         = 'order';
+$config->action->actionModules['createcontract']        = 'contract';
+$config->action->actionModules['editcontract']          = 'contract';
+$config->action->actionModules['delivercontract']       = 'contract';
+$config->action->actionModules['receivecontract']       = 'contract';
+$config->action->actionModules['finishdelivercontract'] = 'contract';
+$config->action->actionModules['finishreceivecontract'] = 'contract';
+$config->action->actionModules['finishcontract']        = 'contract';
+$config->action->actionModules['cancelcontract']        = 'contract';
