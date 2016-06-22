@@ -159,7 +159,7 @@ class orderModel extends model
      * @access public
      * @return array
      */
-    public function getPairs($customer, $status = '')
+    public function getPairs($customer = 0, $status = '')
     {
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();

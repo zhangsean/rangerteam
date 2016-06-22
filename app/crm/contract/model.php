@@ -96,7 +96,7 @@ class contractModel extends model
      * @access public
      * @return array
      */
-    public function getPairs($customerID)
+    public function getPairs($customerID = 0)
     {
         return $this->dao->select('id, name')->from(TABLE_CONTRACT)
             ->where(1)
