@@ -59,9 +59,6 @@ class customerModel extends model
         $customers = $this->dao->select('customer')->from(TABLE_ORDER)->where('assignedTo')->in($accountsSawByMe)->fetchPairs();
         foreach($customers as $customer) $customerList[$customer] = $customer;
 
-        $this->session->set('getCustomersTime', time());
-        $this->session->set('customersSawByMe', $customerList);
-
         return $customerList;
     }
 
