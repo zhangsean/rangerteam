@@ -145,6 +145,7 @@ $lang->signIn         = '签到';
 $lang->signOut        = '签退';
 $lang->sort           = '排序';
 $lang->required       = '必填';
+$lang->custom         = '自定义';
 
 $lang->exportAll      = '导出全部记录';
 $lang->exportThisPage = '导出本页记录';

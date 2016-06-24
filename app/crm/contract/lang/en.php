@@ -72,6 +72,7 @@ $lang->contract->editDelivery     = 'Edit delivery';
 $lang->contract->deleteReturn     = 'Delete Return';
 $lang->contract->deleteDelivery   = 'Delete Delivery';
 $lang->contract->export           = 'Export';
+$lang->contract->totalReturn      = 'Total returned';
 
 $lang->contract->deliveryList[]        = '';
 $lang->contract->deliveryList['wait']  = 'Pending';

@@ -602,7 +602,7 @@ class fileModel extends model
         foreach($editors as $editorID)
         {
             $editorID = trim($editorID);
-            if(empty($editorID) or !isset($data->$editorID)) continue;
+            if(empty($editorID) or !isset($data->$editorID) or !isset($data->uid)) continue;
             $data->$editorID = $this->pasteImage($data->$editorID, $data->uid);
         }
         return $data;

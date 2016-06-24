@@ -51,8 +51,10 @@
       echo "<div class='btn-group'>";
       commonModel::printLink('action', 'createRecord', "objectType=order&objectID={$order->id}&customer={$order->customer}&history=", $lang->order->record, "class='btn' data-toggle='modal' data-width='860'");
       if($order->status == 'normal') commonModel::printLink('contract', 'create', "customer={$order->customer}&orderID={$order->id}", $lang->order->sign, "class='btn btn-default'");
+
       if($order->status != 'normal') echo html::a('###', $lang->order->sign, "class='btn' disabled='disabled' class='disabled'");
       if($order->status != 'closed') commonModel::printLink('order', 'assign', "orderID=$order->id", $lang->assign, "data-toggle='modal' class='btn btn-default'");
+      
       if($order->status == 'closed') echo html::a('###', $lang->assign, "data-toggle='modal' class='btn btn-default disabled' disabled");
       echo '</div>';
 

@@ -489,6 +489,11 @@ class contract extends control
     {
         $orders = $this->loadModel('order')->getOrderForCustomer($customerID, $status);
 
+        if($this->app->getViewType() == 'json')
+        {
+            $this->send(array_values($orders));
+        }
+
         $html = "<div class='form-group'><span class='col-sm-7'><select name='order[]' class='select-order form-control'>";
 
         foreach($orders as $order)

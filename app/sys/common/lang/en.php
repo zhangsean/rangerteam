@@ -144,7 +144,8 @@ $lang->no             = 'NO';
 $lang->signIn         = 'Sign in';
 $lang->signOut        = 'Sign out';
 $lang->sort           = 'Sort';
-$lang->required       = 'required';
+$lang->required       = 'Required';
+$lang->custom         = 'Custom';
 
 $lang->exportAll      = 'Export All';
 $lang->exportThisPage = 'Export This Page';
