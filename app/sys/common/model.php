@@ -1376,7 +1376,7 @@ class commonModel extends model
      * @access public
      * @return void
      */
-    public static function printUserAvatar($class = '', $user = null)
+    public static function printUserAvatar($class = 'circle', $user = null)
     {
         global $app;
         if($user === null) $user = $app->user;
