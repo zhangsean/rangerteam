@@ -51,6 +51,8 @@ class contact extends control
         $this->config->contact->search['params']['t2.customer']['values'] = $customers;
         $this->search->setSearchParams($this->config->contact->search);
 
+        $this->app->loadLang('resume');
+
         $this->view->title     = $this->lang->contact->list;
         $this->view->mode      = $mode;
         $this->view->status    = $status;
