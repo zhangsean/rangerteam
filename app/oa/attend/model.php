@@ -283,6 +283,25 @@ EOT;
     }
 
     /**
+     * Check user is sign or not
+     * 
+     * @param  string $account
+     * @param  string $date
+     * @access public
+     * @return bool | object
+     */
+    public function checkSignIn($account = '', $date = '')
+    {
+        if(!$this->checkIP()) return false;
+        if($account == '') $account = $this->app->user->account;
+        if($date == '')    $date    = date('Y-m-d');
+
+        $attend = $this->dao->select('*')->from(TABLE_ATTEND)->where('account')->eq($account)->andWhere('`date`')->eq($date)->fetch();
+        if(!empty($attend) and $attend->signIn != '' and $attend->signIn != '00:00:00') return $attend;
+        return false;
+    }
+
+    /**
      * sign out.
      * 
      * @param  string $account 
