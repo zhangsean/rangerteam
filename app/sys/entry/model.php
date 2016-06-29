@@ -46,23 +46,25 @@ class entryModel extends model
             $this->app->loadLang('index', 'sys');
 
             $dashboardEntry = new stdclass();
-            $dashboardEntry->id    = 'dashboard';
-            $dashboardEntry->code  = 'dashboard';
-            $dashboardEntry->name  = $this->lang->index->dashboard;
-            $dashboardEntry->icon  = 'icon-home';
-            $dashboardEntry->url   = helper::createLink('sys.todo', 'calendar');
-            $dashboardEntry->order = 0;
+            $dashboardEntry->id      = 'dashboard';
+            $dashboardEntry->buildin = true;
+            $dashboardEntry->code    = 'dashboard';
+            $dashboardEntry->name    = $this->lang->index->dashboard;
+            $dashboardEntry->icon    = 'icon-home';
+            $dashboardEntry->url     = helper::createLink('sys.todo', 'calendar');
+            $dashboardEntry->order   = 0;
             $entries[] = $dashboardEntry;
 
             if($this->app->user->admin == 'super' || commonModel::hasAppPriv('superadmin'))
             {
                 $adminEntry = new stdclass();
-                $adminEntry->id    = 'superadmin';
-                $adminEntry->code  = 'superadmin';
-                $adminEntry->name  = $this->lang->index->superAdmin;
-                $adminEntry->icon  = 'icon-cog';
-                $adminEntry->url   = helper::createLink('admin');
-                $adminEntry->order = 999999;
+                $adminEntry->id      = 'superadmin';
+                $adminEntry->buildin = true;
+                $adminEntry->code    = 'superadmin';
+                $adminEntry->name    = $this->lang->index->superAdmin;
+                $adminEntry->icon    = 'icon-cog';
+                $adminEntry->url     = helper::createLink('admin');
+                $adminEntry->order   = 999999;
                 $entries[] = $adminEntry;
             }
 
@@ -78,11 +80,11 @@ class entryModel extends model
                         break;
                     case 'oa':
                         unset($entry->logo);
-                        $entry->icon = 'icon-check-board';
+                        $entry->icon = 'icon-check';
                         break;
                     case 'cash':
                         unset($entry->logo);
-                        $entry->icon = 'icon-yen';
+                        $entry->icon = 'icon-dollar';
                         break;
                     case 'team':
                         unset($entry->logo);
