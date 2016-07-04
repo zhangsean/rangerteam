@@ -51,7 +51,7 @@ class entryModel extends model
             $dashboardEntry->code    = 'dashboard';
             $dashboardEntry->name    = $this->lang->index->dashboard;
             $dashboardEntry->icon    = 'icon-home';
-            $dashboardEntry->url     = helper::createLink('sys.todo', 'calendar');
+            $dashboardEntry->url     = helper::createLink('sys.index');
             $dashboardEntry->order   = 0;
             $entries[] = $dashboardEntry;
 

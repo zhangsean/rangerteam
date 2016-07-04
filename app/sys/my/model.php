@@ -15,7 +15,7 @@ class myModel extends model
     {
         if(!isset($this->lang->my->$method->menu)) return false;
 
-        $isMobile = $this->viewType === 'mhtml';
+        $isMobile = $this->app->getViewType() === 'mhtml';
         $string   = !$isMobile ? "<nav id='menu'><ul class='nav'>\n" : '';
 
         /* Get menus of current module and current method. */
