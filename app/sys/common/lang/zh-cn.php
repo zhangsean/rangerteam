@@ -260,11 +260,11 @@ $lang->menu->dashboard->dynamic  = '动态|my|dynamic|';
 $lang->todo = new stdclass();
 $lang->todo->menu = new stdclass();
 $lang->todo->menu->calendar        = '日历|todo|calendar|';
+$lang->todo->menu->all             = '所有|todo|browse|mode=all';
 $lang->todo->menu->assignedToOther = '指派他人|todo|browse|mode=assignedtoother';
 $lang->todo->menu->assignedToMe    = '指派给我|todo|browse|mode=assignedtome';
 $lang->todo->menu->undone          = '未完成|todo|browse|mode=undone';
 $lang->todo->menu->future          = '待定|todo|browse|mode=future';
-$lang->todo->menu->all             = '所有|todo|browse|mode=all';
 
 $lang->my = new stdclass();
 $lang->my->review = new stdclass();
