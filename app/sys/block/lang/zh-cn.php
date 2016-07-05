@@ -165,7 +165,7 @@ $lang->block->moreLinkList->depositor = '账户|cash|depositor|index|';
 $lang->block->moreLinkList->provider  = '供应商|cash|provider|browse|';
 
 $lang->block->moreLinkList->announce = '公告|oa|announce|browse|';
-$lang->block->moreLinkList->attend   = '日历|oa|todo|calendar|';
+$lang->block->moreLinkList->attend   = '日历|sys|todo|calendar|';
 
 $lang->block->moreLinkList->task['assignedTo'] = '指派给我|sys|my|task|type=assignedTo';
 $lang->block->moreLinkList->task['createdBy']  = '由我创建|sys|my|task|type=createdBy';

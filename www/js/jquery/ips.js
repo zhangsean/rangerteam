@@ -1937,7 +1937,7 @@
         {
             var category = categories[index];
             var id   = category.id;
-            var name = category.name.substr(0, 6);
+            var name = category.name.substr(0, 2).toUpperCase();
             var hue  = (parseInt(id) - 820000) * 47 % 360;
             $('#categoryTpl' + id).remove();
             $('#categoryMenu' + id).remove();

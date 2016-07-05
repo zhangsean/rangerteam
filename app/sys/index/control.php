@@ -40,7 +40,7 @@ class index extends control
             if($entry->category)
             {
                 $category = $this->tree->getById($entry->category);
-                $categories[$category->id] = $category->name;
+                if($category) $categories[$category->id] = $category->name;
             }
 
             $sso     = $this->createLink('entry', 'visit', "entryID=$entry->id");

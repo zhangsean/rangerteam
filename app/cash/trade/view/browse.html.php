@@ -58,6 +58,7 @@
       <li><?php commonModel::printLink('trade', 'export', "mode=thisPage&orderBy={$orderBy}", $lang->exportThisPage, "class='iframe' data-width='700'");?></li>
     </ul>
   </div>
+  <?php endif;?>
   <?php if($mode == 'all'):?>
   <div class='btn-group'>
     <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo  "<i class='icon-sitemap'> </i>" . $lang->trade->create;?> <span class='caret'></span></button>
@@ -74,7 +75,6 @@
   <?php if($mode == 'transfer') commonModel::printLink('trade', 'transfer', '', "<i class='icon-sitemap'> </i>" . $lang->trade->transfer, "class='btn btn-primary'")?>
   <?php if($mode == 'inveset')  commonModel::printLink('trade', 'inveset', '', "<i class='icon-sitemap'> </i>" . $lang->trade->inveset, "class='btn btn-primary'")?>
   <?php if($mode == 'all' || $mode == 'in' || $mode == 'out') commonModel::printLink('trade', 'batchcreate', '', "<i class='icon-plus'> </i>" . $lang->trade->batchCreate, "class='btn btn-primary'")?>
-  <?php endif;?>
 </div>
 <div class='panel'>
   <form method='post' action='<?php echo inlink('batchedit', 'step=form')?>'>

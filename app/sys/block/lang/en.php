@@ -165,7 +165,7 @@ $lang->block->moreLinkList->depositor = 'Depositor|cash|depositor|index|';
 $lang->block->moreLinkList->provider  = 'Provider|cash|provider|browse|';
 
 $lang->block->moreLinkList->announce = 'Announce|oa|announce|browse|';
-$lang->block->moreLinkList->attend   = 'Attend|oa|todo|calendar|';
+$lang->block->moreLinkList->attend   = 'Attend|sys|todo|calendar|';
 
 $lang->block->moreLinkList->task['assignedTo'] = 'Assigned To Me|sys|my|task|type=assignedTo';
 $lang->block->moreLinkList->task['createdBy']  = 'Created By Me|sys|my|task|type=createdBy';

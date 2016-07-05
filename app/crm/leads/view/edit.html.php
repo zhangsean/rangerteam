@@ -49,8 +49,8 @@
         <div class='panel-heading'><strong><?php echo $lang->contact->basicInfo;?></strong></div>
         <div class='panel-body'>
           <table class='table table-info table-form'>
-            <tr>
-              <th class='w-80px'><?php echo $lang->contact->realname;?></th>
+            <tr class='required'>
+              <th class='w-70px'><?php echo $lang->contact->realname;?></th>
               <td><?php echo html::input('realname', $contact->realname, "class='form-control'");?></td>
             </tr>
             <tr>

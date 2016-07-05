@@ -143,6 +143,8 @@ $lang->yes            = '是';
 $lang->no             = '否';
 $lang->signIn         = '簽到';
 $lang->signOut        = '簽退';
+$lang->sort           = '排序';
+$lang->required       = '必填';
 
 $lang->exportAll      = '導出全部記錄';
 $lang->exportThisPage = '導出本頁記錄';
@@ -367,6 +369,10 @@ $lang->pager->pre        = '上頁';
 $lang->pager->next       = '下頁';
 $lang->pager->last       = '末頁';
 $lang->pager->locate     = 'Go!';
+$lang->pager->showMore   = '顯示更多 <i class="icon icon-double-angle-down"></i>';
+$lang->pager->noMore     = '沒有更多';
+$lang->pager->showTotal  = '已顯示 <strong>%s</strong> 項，共 <strong>%s</strong> 項';
+
 
 /* The excel items. */
 $lang->excel = new stdClass();

@@ -35,4 +35,4 @@ $lang->setting->menu = new stdclass();
 $lang->setting->menu->board = 'Forum Board|tree|browse|type=forum|';
 $lang->setting->menu->blog  = 'Blog Category|tree|browse|type=blog|';
 $lang->setting->menu->dept  = 'Admin Department|tree|browse|type=dept|';
-$lang->setting->menu->role  = 'Admin Role|setting|lang|module=user&field=roleList&appName=sys|';
+$lang->setting->menu->role  = 'Admin Role|setting|lang|module=user&field=roleList&appName=team|';
