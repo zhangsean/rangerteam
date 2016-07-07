@@ -8,9 +8,8 @@ $baseDir = dirname(dirname(__FILE__));
 
 //--------------------------------- PROCESS JS FILES ------------------------------ //
 
-/* Set jsRoot and jqueryRoot. */
-$jsRoot     = $baseDir . '/www/js/';
-$jqueryRoot = $jsRoot . 'jquery/';
+/* Set jsRoot. */
+$jsRoot = $baseDir . '/www/js/';
 
 /* Set js files to combined. */
 $jsFiles[] = $jsRoot . 'jquery/min.js';
