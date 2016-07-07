@@ -232,7 +232,7 @@ class settingModel extends model
      */
     public function getVersion()
     {
-        $version = isset($this->config->global->version) ? $this->config->global->version : '1.1';    // No version, set as 1.0.
+        $version = isset($this->config->global->version) ? $this->config->global->version : '1.0';    // No version, set as 1.0.
         return $version;
     }
 
