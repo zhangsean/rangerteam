@@ -108,7 +108,7 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function personal($date = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function personal($date = '', $orderBy = 'status', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->browse('personal', $date, $orderBy, $recTotal, $recPerPage, $pageID);
     }
