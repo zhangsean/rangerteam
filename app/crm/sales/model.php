@@ -122,9 +122,8 @@ class salesModel extends model
         {
             foreach($this->post->privs_view as $key => $value)
             {
-                $value = explode('_', $value);
-                $data['account']    = $value[0];
-                $data['salesgroup'] = $value[1];
+                $data['account']    = substr($value, 0, strrpos($value, '_'));
+                $data['salesgroup'] = substr($value, strrpos($value, '_') + 1);
                 $data['priv']       = 'view';
 
                 $this->dao->insert(TABLE_SALESPRIV)->data($data)->exec();
