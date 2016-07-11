@@ -4,6 +4,7 @@ $lang->attend->common       = '考勤';
 $lang->attend->personal     = '我的考勤';
 $lang->attend->department   = '部门考勤';
 $lang->attend->company      = '公司考勤';
+$lang->attend->detail       = '考勤明细';
 $lang->attend->edit         = '补录';
 $lang->attend->edited       = '已补录';
 $lang->attend->leave        = '请假';

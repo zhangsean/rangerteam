@@ -15,6 +15,7 @@ $lang->overtime->browseReview = '審核列表';
 $lang->overtime->company      = '所有加班';
 
 $lang->overtime->id           = '編號';
+$lang->overtime->year         = '年';
 $lang->overtime->begin        = '開始';
 $lang->overtime->end          = '結束';
 $lang->overtime->start        = '開始時間';

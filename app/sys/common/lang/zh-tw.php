@@ -123,6 +123,7 @@ $lang->switchDisplay  = '切換顯示';
 $lang->feature        = '未來';
 $lang->year           = '年';
 $lang->month          = '月';
+$lang->day            = '日';
 $lang->loading        = '稍候...';
 $lang->saveSuccess    = '保存成功';
 $lang->setSuccess     = '設置成功';
@@ -145,6 +146,7 @@ $lang->signIn         = '簽到';
 $lang->signOut        = '簽退';
 $lang->sort           = '排序';
 $lang->required       = '必填';
+$lang->custom         = '自定義';
 
 $lang->exportAll      = '導出全部記錄';
 $lang->exportThisPage = '導出本頁記錄';
@@ -259,11 +261,11 @@ $lang->menu->dashboard->dynamic  = '動態|my|dynamic|';
 $lang->todo = new stdclass();
 $lang->todo->menu = new stdclass();
 $lang->todo->menu->calendar        = '日曆|todo|calendar|';
+$lang->todo->menu->all             = '所有|todo|browse|mode=all';
 $lang->todo->menu->assignedToOther = '指派他人|todo|browse|mode=assignedtoother';
 $lang->todo->menu->assignedToMe    = '指派給我|todo|browse|mode=assignedtome';
 $lang->todo->menu->undone          = '未完成|todo|browse|mode=undone';
 $lang->todo->menu->future          = '待定|todo|browse|mode=future';
-$lang->todo->menu->all             = '所有|todo|browse|mode=all';
 
 $lang->my = new stdclass();
 $lang->my->review = new stdclass();

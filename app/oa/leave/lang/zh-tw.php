@@ -14,6 +14,7 @@ $lang->leave->browseReview = '審核列表';
 $lang->leave->company      = '所有請假';
 
 $lang->leave->id           = '編號';
+$lang->leave->year         = '年';
 $lang->leave->begin        = '開始';
 $lang->leave->end          = '結束';
 $lang->leave->start        = '開始時間';

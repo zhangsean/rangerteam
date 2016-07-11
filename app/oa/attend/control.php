@@ -708,4 +708,51 @@ class attend extends control
         $this->view->fileName = $currentYear . $this->lang->year . $currentMonth . $this->lang->month . $this->lang->attend->report;
         $this->display();
     }
+
+    public function detail($date = '')
+    {
+        if($date == '' or strlen($date) != 6) $date = date('Ym');
+        $currentYear  = substr($date, 0, 4);
+        $currentMonth = substr($date, 4, 2);
+        $startDate    = "{$currentYear}-{$currentMonth}-01";
+        $endDate      = date('Y-m-d', strtotime("$startDate +1 month"));
+
+        $monthList = $this->attend->getAllMonth();
+        $yearList  = array_reverse(array_keys($monthList));
+        $dayNum    = date('t', strtotime("{$currentYear}-{$currentMonth}"));
+        if($currentYear . $currentMonth == date('Ym') && $dayNum > date('d')) $dayNum = date('d');
+
+        /* Get deptList. */
+        $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
+        foreach($deptList as $key => $value) $deptList[$key] = $value->name;
+
+        /* Get attend. */
+        $attends = array();
+        if(!empty($deptList)) 
+        {
+            $dept = array_keys($deptList);
+            $attends = $this->attend->getByDept($dept, $startDate, $endDate < helper::today() ? $endDate : helper::today());
+        }
+
+        foreach($attends as $dept => $deptAttends)
+        {
+            ksort($deptAttends);
+            $attends[$dept] = $deptAttends; 
+        }
+
+        $users    = $this->loadModel('user')->getList();
+        $newUsers = array();
+        foreach($users as $key => $user) $newUsers[$user->account] = $user;
+
+        $this->view->title        = $this->lang->attend->department;
+        $this->view->currentYear  = $currentYear;
+        $this->view->currentMonth = $currentMonth;
+        $this->view->yearList     = $yearList;
+        $this->view->monthList    = $monthList;
+        $this->view->dayNum       = $dayNum;
+        $this->view->deptList     = $deptList;
+        $this->view->attends      = $attends;
+        $this->view->users        = $newUsers;
+        $this->display();
+    }
 }
