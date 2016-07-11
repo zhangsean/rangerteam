@@ -520,8 +520,8 @@ EOT;
     {
         $goToHtml  = "<input type='hidden' id='_recTotal'  value='$this->recTotal' />\n";
         $goToHtml .= "<input type='hidden' id='_pageTotal' value='$this->pageTotal' />\n";
-        $goToHtml .= "<input type='text'   id='_pageID'    value='$this->pageID' style='text-align:center;width:30px;' class='form-control' /> \n";
-        $goToHtml .= "<input type='button' id='goto'       value='{$this->lang->pager->locate}' onclick='submitPage(\"changePageID\");' class='btn'/>";
+        $goToHtml .= "<input type='text'   id='_pageID'    value='$this->pageID' class='form-control text-center w-50px'/> \n";
+        $goToHtml .= "<input type='button' id='goto'       value='{$this->lang->pager->locate}' onclick='submitPage(\"changePageID\");' class='btn btn-xs'/>";
         return $goToHtml;
     }    
 }
