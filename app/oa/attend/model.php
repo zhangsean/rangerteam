@@ -89,7 +89,13 @@ class attendModel extends model
      */
     public function getStat($date)
     {
-        return $this->dao->select('*')->from(TABLE_ATTENDSTAT)->where('month')->eq($date)->fetchAll('account');
+        $attends = $this->dao->select('*')->from(TABLE_ATTENDSTAT)->where('month')->eq($date)->fetchAll('account');
+        foreach($attends as $account => $attendList)
+        {
+            if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $account . ',') !== false and empty($attendList)) unset($attends[$account]);
+        }
+
+        return $attends;
     }
 
     /**
@@ -114,6 +120,11 @@ class attendModel extends model
         foreach($users as $account => $realname)
         {
             if(!isset($attends[$account])) $attends[$account] = array();
+        }
+
+        foreach($attends as $account => $attendList)
+        {
+            if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $account . ',') !== false and empty($attendList)) unset($attends[$account]);
         }
 
         return $attends;
@@ -160,6 +171,12 @@ class attendModel extends model
         {
             foreach($newAttends[$dept] as $user => $userAttends)
             {
+                if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $user . ',') !== false and empty($newAttends[$dept][$user]))
+                {
+                    unset($newAttends[$dept][$user]);
+                    continue;
+                }
+
                 if($reviewStatus == '') $newAttends[$dept][$user] = $this->fixUserAttendList($newAttends[$dept][$user], $startDate, $endDate, $user);
                 $newAttends[$dept][$user] = $this->processAttendList($newAttends[$dept][$user]);
             }
@@ -214,6 +231,8 @@ class attendModel extends model
     public function getNotice()
     {
         $account = $this->app->user->account;
+        if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $account . ',') !== false) return '';
+
         $link    = helper::createLink('oa.attend', 'personal');
         $misc    = "class='app-btn alert-link' data-id='oa'";
         $notice  = '';

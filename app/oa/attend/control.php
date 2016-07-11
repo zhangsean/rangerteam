@@ -278,6 +278,7 @@ class attend extends control
                 ->setDefault('ip', '*')
                 ->setIF($this->post->allip, 'ip', '*')
                 ->join('mustSignOut', '')
+                ->join('noAttendUsers', ',')
                 ->remove('allip')
                 ->get();
 
@@ -289,15 +290,16 @@ class attend extends control
         }
 
         $this->loadModel('user');
-        $this->view->title        = $this->lang->attend->settings; 
-        $this->view->signInLimit  = $this->config->attend->signInLimit;
-        $this->view->signOutLimit = $this->config->attend->signOutLimit;
-        $this->view->workingDays  = $this->config->attend->workingDays;
-        $this->view->workingHours = $this->config->attend->workingHours;
-        $this->view->mustSignOut  = $this->config->attend->mustSignOut;
-        $this->view->ip           = $this->config->attend->ip;
-        $this->view->reviewedBy   = isset($this->config->attend->reviewedBy) ? $this->config->attend->reviewedBy : '';
-        $this->view->users        = array('' => $this->lang->dept->moderators) + $this->user->getPairs('noempty,noclosed,nodeleted');
+        $this->view->title          = $this->lang->attend->settings; 
+        $this->view->signInLimit    = $this->config->attend->signInLimit;
+        $this->view->signOutLimit   = $this->config->attend->signOutLimit;
+        $this->view->workingDays    = $this->config->attend->workingDays;
+        $this->view->workingHours   = $this->config->attend->workingHours;
+        $this->view->mustSignOut    = $this->config->attend->mustSignOut;
+        $this->view->noAttendUsers  = isset($this->config->attend->mustSignOut) ? $this->config->attend->noAttendUsers : '';
+        $this->view->ip             = $this->config->attend->ip;
+        $this->view->reviewedBy     = isset($this->config->attend->reviewedBy) ? $this->config->attend->reviewedBy : '';
+        $this->view->users          = $this->user->getPairs('noempty,noclosed,nodeleted');
         $this->display();
     }
 

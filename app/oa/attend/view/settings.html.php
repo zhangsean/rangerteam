@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <div class='with-side'>
   <div class='side'>
     <nav class='menu leftmenu affix'>
@@ -49,7 +50,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->attend->reviewedBy;?></th>
-              <td><?php echo html::select('reviewedBy', $users, $reviewedBy, "class='form-control'")?></td>
+              <td><?php echo html::select('reviewedBy', array('' => $this->lang->dept->moderators) + $users, $reviewedBy, "class='form-control'")?></td>
               <td></td>
             </tr>
             <tr>
@@ -65,6 +66,11 @@
               <td style='padding-left: 10px'>
                 <?php echo html::a('javascript:void(0)', "<i class='icon-question-sign'></i>", "data-original-title='{$lang->attend->note->ip}' data-toggle='tooltip' data-placement='right' ");?>     
               </td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->attend->noAttendUsers;?></th>
+              <td><?php echo html::select('noAttendUsers[]', $users, $noAttendUsers, "class='form-control chosen' multiple")?></td>
+              <td></td>
             </tr>
             <tr>
               <th></th>
