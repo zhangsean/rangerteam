@@ -28,7 +28,11 @@ class myModel extends model
             /* Split the methodMenu to label, module, method, vars. */
             list($label, $module, $method, $vars) = explode('|', $methodMenu);
 
-            if($method == 'review' and !commonModel::isAvailable($methodName)) continue;
+            if($method == 'review')
+            {
+                if($methodName == 'leave') $methodName = 'attend';
+                if(!commonModel::hasPriv($methodName, 'review')) continue;
+            }
 
             $class = '';
             if($method == $currentMethod) $class = "class='active'";
