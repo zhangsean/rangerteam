@@ -28,10 +28,10 @@
           <th class='w-30px'><?php echo $lang->todo->id;?></th> 
           <th class='w-120px'><?php echo $lang->todo->type;?></th>
           <th class='w-80px'><?php echo $lang->todo->pri;?></th>
-          <th class='w-80px'><?php echo $lang->todo->assignedTo;?></th>
+          <th class='w-100px'><?php echo $lang->todo->assignedTo;?></th>
           <th class='w-p30 red'><?php echo $lang->todo->name;?></th>
           <th><?php echo $lang->todo->desc;?></th>
-          <th class='w-300px'><?php echo $lang->todo->beginAndEnd;?></th>
+          <th class='w-160px'><?php echo $lang->todo->beginAndEnd;?></th>
           <th class='w-70px'><input type='checkbox' name='switchAll' id='switchAll' onclick='switchDateAll(this)'><?php echo $lang->todo->periods['future'];?></th>
         </tr>
       </thead>

@@ -349,4 +349,70 @@ class leave extends control
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('personal')));
     }
+
+    /**
+     * get data to export.
+     * 
+     * @param  string $mode 
+     * @param  string $orderBy 
+     * @access public
+     * @return void
+     */
+    public function export($mode = 'all', $orderBy = 'id_desc')
+    { 
+        if($_POST)
+        {
+            $leaveLang   = $this->lang->leave;
+            $leaveConfig = $this->config->leave;
+
+            /* Create field lists. */
+            $fields = explode(',', $leaveConfig->list->exportFields);
+            foreach($fields as $key => $fieldName)
+            {
+                $fieldName = trim($fieldName);
+                $fields[$fieldName] = isset($leaveLang->$fieldName) ? $leaveLang->$fieldName : $fieldName;
+                unset($fields[$key]);
+            }
+
+            $leaves = array();
+            if($mode == 'all')
+            {
+                $leaveQueryCondition = $this->session->leaveQueryCondition;
+                if(strpos($leaveQueryCondition, 'limit') !== false) $leaveQueryCondition = substr($leaveQueryCondition, 0, strpos($leaveQueryCondition, 'limit'));
+                $stmt = $this->dbh->query($leaveQueryCondition);
+                while($row = $stmt->fetch()) $leaves[$row->id] = $row;
+            }
+            if($mode == 'thisPage')
+            {
+                $stmt = $this->dbh->query($this->session->leaveQueryCondition);
+                while($row = $stmt->fetch()) $leaves[$row->id] = $row;
+            }
+
+            $users = $this->loadModel('user')->getPairs();
+
+            foreach($leaves as $leave)
+            {
+                $leave->desc = htmlspecialchars_decode($leave->desc);
+                $leave->desc = str_replace("<br />", "\n", $leave->desc);
+                $leave->desc = str_replace('"', '""', $leave->desc);
+
+                /* fill some field with useful value. */
+                if(isset($leaveLang->statusList[$leave->status])) $leave->status = $leaveLang->statusList[$leave->status];
+                if(isset($leaveLang->typeList[$leave->type]))     $leave->type   = $leaveLang->typeList[$leave->type];
+
+                if(isset($users[$leave->createdBy]))   $leave->createdBy  = $users[$leave->createdBy];
+                if(isset($users[$leave->reviewedBy]))  $leave->reviewedBy = $users[$leave->reviewedBy];
+
+                $leave->createdDate  = substr($leave->createdDate, 0, 10);
+                $leave->reviewedDate = substr($leave->reviewedDate, 0, 10);
+            }
+
+            $this->post->set('fields', $fields);
+            $this->post->set('rows', $leaves);
+            $this->post->set('kind', 'leave');
+            $this->fetch('file', 'export2CSV' , $_POST);
+        }
+
+        $this->display();
+    }
 }

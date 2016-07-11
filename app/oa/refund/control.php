@@ -637,4 +637,76 @@ class refund extends control
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
+
+    /**
+     * get data to export.
+     * 
+     * @param  string $mode 
+     * @param  string $orderBy 
+     * @access public
+     * @return void
+     */
+    public function export($mode = 'all', $orderBy = 'id_desc')
+    { 
+        if($_POST)
+        {
+            $refundLang   = $this->lang->refund;
+            $refundConfig = $this->config->refund;
+
+            /* Create field lists. */
+            $fields = explode(',', $refundConfig->list->exportFields);
+            foreach($fields as $key => $fieldName)
+            {
+                $fieldName = trim($fieldName);
+                $fields[$fieldName] = isset($refundLang->$fieldName) ? $refundLang->$fieldName : $fieldName;
+                unset($fields[$key]);
+            }
+
+            $refunds = array();
+            if($mode == 'all')
+            {
+                $refundQueryCondition = $this->session->refundQueryCondition;
+                if(strpos($refundQueryCondition, 'limit') !== false) $refundQueryCondition = substr($refundQueryCondition, 0, strpos($refundQueryCondition, 'limit'));
+                $stmt = $this->dbh->query($refundQueryCondition);
+                while($row = $stmt->fetch()) $refunds[$row->id] = $row;
+            }
+            if($mode == 'thisPage')
+            {
+                $stmt = $this->dbh->query($this->session->refundQueryCondition);
+                while($row = $stmt->fetch()) $refunds[$row->id] = $row;
+            }
+
+            $users = $this->loadModel('user')->getPairs();
+
+            foreach($refunds as $refund)
+            {
+                $refund->desc = htmlspecialchars_decode($refund->desc);
+                $refund->desc = str_replace("<br />", "\n", $refund->desc);
+                $refund->desc = str_replace('"', '""', $refund->desc);
+
+                /* fill some field with useful value. */
+                if(isset($refundLang->statusList[$refund->status]))     $refund->status   = $refundLang->statusList[$refund->status];
+                if(isset($this->lang->currencyList[$refund->currency])) $refund->currency = $this->lang->currencyList[$refund->currency];
+
+                if(isset($users[$refund->createdBy]))      $refund->createdBy      = $users[$refund->createdBy];
+                if(isset($users[$refund->editedBy]))       $refund->editedBy       = $users[$refund->editedBy];
+                if(isset($users[$refund->firstReviewer]))  $refund->firstReviewer  = $users[$refund->firstReviewer];
+                if(isset($users[$refund->secondReviewer])) $refund->secondReviewer = $users[$refund->secondReviewer];
+                if(isset($users[$refund->refundBy]))       $refund->refundBy       = $users[$refund->refundBy];
+
+                $refund->createdDate      = substr($refund->createdDate, 0, 10);
+                $refund->editedDate       = substr($refund->editedDate, 0, 10);
+                $refund->firstReviewDate  = substr($refund->firstReviewDate, 0, 10);
+                $refund->secondReviewDate = substr($refund->secondReviewDate, 0, 10);
+                $refund->refundDate       = substr($refund->refundDate, 0, 10);
+            }
+
+            $this->post->set('fields', $fields);
+            $this->post->set('rows', $refunds);
+            $this->post->set('kind', 'refund');
+            $this->fetch('file', 'export2CSV' , $_POST);
+        }
+
+        $this->display();
+    }
 }

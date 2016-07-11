@@ -36,6 +36,7 @@ $config->customer->search['fields']['assignedTo']    = $lang->customer->assigned
 $config->customer->search['fields']['industry']      = $lang->customer->industry;
 $config->customer->search['fields']['area']          = $lang->customer->area;
 $config->customer->search['fields']['id']            = $lang->customer->id;
+$config->customer->search['fields']['relation']      = $lang->customer->relation;
 
 $config->customer->search['params']['name']          = array('operator' => 'include', 'control' => 'input', 'values' => '');
 $config->customer->search['params']['intension']     = array('operator' => 'include', 'control' => 'input', 'values' => '');
@@ -51,6 +52,7 @@ $config->customer->search['params']['assignedTo']    = array('operator' => '=', 
 $config->customer->search['params']['industry']      = array('operator' => 'belong', 'control' => 'select', 'values' => 'set in control');
 $config->customer->search['params']['area']          = array('operator' => 'belong', 'control' => 'select', 'values' => 'set in control');
 $config->customer->search['params']['id']            = array('operator' => '=', 'control' => 'input',  'values' => '');
+$config->customer->search['params']['relation']      = array('operator' => '=', 'control' => 'select',  'values' => $lang->customer->relationList);
 
 $config->customer->list = new stdclass();
 $config->customer->list->exportFields = '

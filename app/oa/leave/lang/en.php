@@ -14,6 +14,7 @@ $lang->leave->browseReview = 'Review list';
 $lang->leave->company      = 'All leave';
 
 $lang->leave->id           = 'ID';
+$lang->leave->year         = 'Year';
 $lang->leave->begin        = 'Begin date';
 $lang->leave->end          = 'End date';
 $lang->leave->start        = 'Begin time';

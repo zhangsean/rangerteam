@@ -123,6 +123,7 @@ $lang->switchDisplay  = 'Switching Display';
 $lang->feature        = 'Feature';
 $lang->year           = 'Year';
 $lang->month          = 'Month';
+$lang->day            = 'Day';
 $lang->loading        = 'Loading...';
 $lang->saveSuccess    = 'Successfully saved.';
 $lang->setSuccess     = 'Successfully saved.';

@@ -14,6 +14,7 @@
 <?php include '../../../sys/common/view/treeview.html.php';?>
 <?php js::set('confirmReview', $lang->overtime->confirmReview)?>
 <div id='menuActions'>
+  <?php commonModel::printLink('overtime', 'export', "mode=all&orderBy={$orderBy}", $lang->exportIcon . $lang->export, "class='btn btn-primary iframe' data-width='700'");?>
   <?php commonModel::printLink('overtime', 'create', "", "<i class='icon icon-plus'></i> {$lang->overtime->create}", "data-toggle='modal' class='btn btn-primary'")?>
 </div>
 <div class='with-side'>

@@ -15,6 +15,7 @@ $lang->overtime->browseReview = 'Review List';
 $lang->overtime->company      = 'All';
 
 $lang->overtime->id           = 'ID';
+$lang->overtime->year         = 'Year';
 $lang->overtime->begin        = 'Begin';
 $lang->overtime->end          = 'End';
 $lang->overtime->start        = 'Start';

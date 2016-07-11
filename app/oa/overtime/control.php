@@ -359,4 +359,70 @@ class overtime extends control
         $this->loadModel('mail')->send($toList, $subject, $mailContent);
         if($this->mail->isError()) trigger_error(join("\n", $this->mail->getError()));
     }
+
+    /**
+     * get data to export.
+     * 
+     * @param  string $mode 
+     * @param  string $orderBy 
+     * @access public
+     * @return void
+     */
+    public function export($mode = 'all', $orderBy = 'id_desc')
+    { 
+        if($_POST)
+        {
+            $overtimeLang   = $this->lang->overtime;
+            $overtimeConfig = $this->config->overtime;
+
+            /* Create field lists. */
+            $fields = explode(',', $overtimeConfig->list->exportFields);
+            foreach($fields as $key => $fieldName)
+            {
+                $fieldName = trim($fieldName);
+                $fields[$fieldName] = isset($overtimeLang->$fieldName) ? $overtimeLang->$fieldName : $fieldName;
+                unset($fields[$key]);
+            }
+
+            $overtimes = array();
+            if($mode == 'all')
+            {
+                $overtimeQueryCondition = $this->session->overtimeQueryCondition;
+                if(strpos($overtimeQueryCondition, 'limit') !== false) $overtimeQueryCondition = substr($overtimeQueryCondition, 0, strpos($overtimeQueryCondition, 'limit'));
+                $stmt = $this->dbh->query($overtimeQueryCondition);
+                while($row = $stmt->fetch()) $overtimes[$row->id] = $row;
+            }
+            if($mode == 'thisPage')
+            {
+                $stmt = $this->dbh->query($this->session->overtimeQueryCondition);
+                while($row = $stmt->fetch()) $overtimes[$row->id] = $row;
+            }
+
+            $users = $this->loadModel('user')->getPairs();
+
+            foreach($overtimes as $overtime)
+            {
+                $overtime->desc = htmlspecialchars_decode($overtime->desc);
+                $overtime->desc = str_replace("<br />", "\n", $overtime->desc);
+                $overtime->desc = str_replace('"', '""', $overtime->desc);
+
+                /* fill some field with useful value. */
+                if(isset($overtimeLang->statusList[$overtime->status])) $overtime->status = $overtimeLang->statusList[$overtime->status];
+                if(isset($overtimeLang->typeList[$overtime->type]))     $overtime->type   = $overtimeLang->typeList[$overtime->type];
+
+                if(isset($users[$overtime->createdBy]))   $overtime->createdBy  = $users[$overtime->createdBy];
+                if(isset($users[$overtime->reviewedBy]))  $overtime->reviewedBy = $users[$overtime->reviewedBy];
+
+                $overtime->createdDate  = substr($overtime->createdDate, 0, 10);
+                $overtime->reviewedDate = substr($overtime->reviewedDate, 0, 10);
+            }
+
+            $this->post->set('fields', $fields);
+            $this->post->set('rows', $overtimes);
+            $this->post->set('kind', 'overtime');
+            $this->fetch('file', 'export2CSV' , $_POST);
+        }
+
+        $this->display();
+    }
 }

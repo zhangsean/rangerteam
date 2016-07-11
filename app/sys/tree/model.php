@@ -191,7 +191,8 @@ class treeModel extends model
     public function getDeptManagedByMe($account)
     {
         return $this->dao->select('*')->from(TABLE_CATEGORY)
-            ->where('moderators')->eq(",$account,")
+            ->where(1)
+            ->beginIF($this->app->user->admin != 'super')->andWhere('moderators')->eq(",$account,")->fi()
             ->andWhere('type')->eq('dept')
             ->fetchAll('id');
     }
