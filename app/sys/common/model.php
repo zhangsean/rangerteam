@@ -338,6 +338,11 @@ class commonModel extends model
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
+            if(strpos(',' . $config->attend->noAttendUsers . ',', ',' . $app->user->account . ',') !== false and $module == 'attend' and $method == 'personal')
+            {
+                $method = 'department';
+            }
+
             if(!commonModel::isAvailable($module)) continue;
 
             if(strpos(',tree,setting,schema,sales,', $module) != false and isset($lang->setting->menu)) 
@@ -380,9 +385,13 @@ class commonModel extends model
      */
     public static function createModuleMenu($currentModule)
     {
-        global $lang, $app;
+        global $lang, $app, $config;
 
         if(!isset($lang->$currentModule->menu)) return false;
+        if(strpos(',' . $config->attend->noAttendUsers . ',', ',' . $app->user->account . ',') !== false and isset($lang->attend->menu->personal))
+        {
+            unset($lang->attend->menu->personal);
+        }
 
         $isMobile = $app->viewType === 'mhtml';
         $string   = !$isMobile ? "<nav id='menu'><ul class='nav'>\n" : '';
