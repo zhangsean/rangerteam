@@ -85,10 +85,10 @@ $lang->trade->modeList['transfer'] = 'Transfer';
 $lang->trade->modeList['inveset']  = 'Inveset';
 
 $lang->trade->quarters = new stdclass();
-$lang->trade->quarters->Q1 = '01,02,03';
-$lang->trade->quarters->Q2 = '04,05,06';
-$lang->trade->quarters->Q3 = '07,08,09';
 $lang->trade->quarters->Q4 = '10,11,12';
+$lang->trade->quarters->Q3 = '07,08,09';
+$lang->trade->quarters->Q2 = '04,05,06';
+$lang->trade->quarters->Q1 = '01,02,03';
 
 $lang->trade->quarterList['Q1'] = 'First quarter';
 $lang->trade->quarterList['Q2'] = 'Second quarter';
@@ -122,6 +122,9 @@ $lang->trade->categoryList = $lang->trade->categoryList + $lang->trade->expenseC
 
 $lang->trade->invesetCategoryList['profit'] = 'Profit';
 $lang->trade->invesetCategoryList['loss']   = 'Loss';
+
+$lang->trade->transferCategoryList['transferin']  = 'Transfer In';
+$lang->trade->transferCategoryList['transferout'] = 'Transfer Out';
 
 $lang->trade->objectTypeList['customer'] = 'Customer';
 $lang->trade->objectTypeList['order']    = 'Order';

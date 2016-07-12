@@ -375,7 +375,6 @@ $lang->pager->showMore   = '显示更多 <i class="icon icon-double-angle-down">
 $lang->pager->noMore     = '没有更多';
 $lang->pager->showTotal  = '已显示 <strong>%s</strong> 项，共 <strong>%s</strong> 项';
 
-
 /* The excel items. */
 $lang->excel = new stdClass();
 $lang->excel->canNotRead = '不能解析该文件';
