@@ -338,7 +338,7 @@ class commonModel extends model
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
-            if(strpos(',' . $config->attend->noAttendUsers . ',', ',' . $app->user->account . ',') !== false and $module == 'attend' and $method == 'personal')
+            if(isset($config->attend->noAttendUsers) and strpos(',' . $config->attend->noAttendUsers . ',', ',' . $app->user->account . ',') !== false and $module == 'attend' and $method == 'personal')
             {
                 $method = 'department';
             }
@@ -388,7 +388,7 @@ class commonModel extends model
         global $lang, $app, $config;
 
         if(!isset($lang->$currentModule->menu)) return false;
-        if(strpos(',' . $config->attend->noAttendUsers . ',', ',' . $app->user->account . ',') !== false and isset($lang->attend->menu->personal))
+        if(isset($config->attend->noAttendUsers) and strpos(',' . $config->attend->noAttendUsers . ',', ',' . $app->user->account . ',') !== false and isset($lang->attend->menu->personal))
         {
             unset($lang->attend->menu->personal);
         }
