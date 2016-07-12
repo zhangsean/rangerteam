@@ -60,7 +60,12 @@ class trade extends control
         $this->config->trade->search['params']['category']['values'] = $searchCategories;
         $this->search->setSearchParams($this->config->trade->search);
 
-        $tradeDates = $this->trade->getDatePairs();
+        $type = 'all';
+        if($mode == 'in')       $type = 'in';
+        if($mode == 'out')      $type = 'out';
+        if($mode == 'transfer') $type = 'transferin,transferout';
+        if($mode == 'inveset')  $type = 'inveset,redeem';
+        $tradeDates = $this->trade->getDatePairs($type);
 
         $tradeYears    = array();
         $tradeQuarters = array();
@@ -82,8 +87,6 @@ class trade extends control
                 }
             }
 
-            krsort($tradeQuarters[$year]);
-
             if(!isset($tradeMonths[$year][$quarter])) $tradeMonths[$year][$quarter] = array();
 
             if(!in_array($month, $tradeMonths[$year][$quarter]))
@@ -95,7 +98,16 @@ class trade extends control
         }
 
         $currentYear = current($tradeYears);
-        $currentDate = $date ? $date : ($this->session->date ? $this->session->date : '');
+        if($mode != 'inveset' and !empty($tradeDates))
+        {
+            $currentQuarter = current($tradeQuarters[$currentYear]);
+            $currentMonth   = current($tradeMonths[$currentYear][$currentQuarter]);
+            $currentDate    = $date ? $date : ($this->session->date ? $this->session->date : $currentYear . $currentMonth);
+        }
+        else
+        {
+            $currentDate = $date ? $date : ($this->session->date ? $this->session->date : '');
+        }
         $trades = $this->trade->getList($mode, $currentDate, $orderBy, $pager);
 
         $this->view->title   = $this->lang->trade->browse;

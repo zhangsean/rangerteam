@@ -102,9 +102,13 @@ class tradeModel extends model
      * @access public
      * @return array
      */
-    public function getDatePairs()
+    public function getDatePairs($type = 'all')
     {
-        return $this->dao->select('id, date')->from(TABLE_TRADE)->orderBy('date_desc')->fetchPairs();
+        return $this->dao->select('id, date')->from(TABLE_TRADE)
+            ->where('1=1')
+            ->beginIf($type != 'all')->andWhere('type')->in($type)->fi()
+            ->orderBy('date_desc')
+            ->fetchPairs();
     }
 
     /**
