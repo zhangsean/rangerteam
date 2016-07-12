@@ -40,9 +40,6 @@ class trade extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $expenseTypes = $this->loadModel('tree')->getPairs(0, 'out');
-        $incomeTypes  = $this->loadModel('tree')->getPairs(0, 'in');
-
         $this->session->set('tradeList', $this->app->getURI(true));
         if($date) $this->session->set('date', $date);
 
@@ -50,8 +47,17 @@ class trade extends control
         $this->loadModel('search', 'sys');
         $this->config->trade->search['actionURL'] = $this->createLink('trade', 'browse', 'mode=bysearch');
         $this->config->trade->search['params']['depositor']['values'] = array('' => '') + $this->loadModel('depositor')->getPairs();
+        $this->config->trade->search['params']['product']['values']   = array('' => '') + $this->loadModel('product', 'crm')->getPairs();
         $this->config->trade->search['params']['trader']['values']    = $this->loadModel('customer', 'crm')->getPairs();
-        $this->config->trade->search['params']['category']['values']  = array('' => '') + $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
+
+        $incomeCategories  = $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
+        $expenseCategories = $this->tree->getOptionMenu('out', 0, $removeRoot = true);
+        $searchCategories  = array('' => '') + $this->lang->trade->categoryList + $incomeCategories + $expenseCategories;
+        if($mode == 'in')       $searchCategories = array('' => '') + $this->lang->trade->incomeCategoryList + $incomeCategories;
+        if($mode == 'out')      $searchCategories = array('' => '') + $this->lang->trade->expenseCategoryList + $expenseCategories;
+        if($mode == 'transfer') $searchCategories = array('' => '') + $this->lang->trade->transferCategoryList;
+        if($mode == 'inveset')  $searchCategories = array('' => '') + $this->lang->trade->invesetTypeList + $this->lang->trade->invesetCategoryList;
+        $this->config->trade->search['params']['category']['values'] = $searchCategories;
         $this->search->setSearchParams($this->config->trade->search);
 
         $tradeDates = $this->trade->getDatePairs();
@@ -99,9 +105,12 @@ class trade extends control
         $this->view->pager   = $pager;
         $this->view->orderBy = $orderBy;
 
+        $expenseTypes = $this->tree->getPairs(0, 'out');
+        $incomeTypes  = $this->tree->getPairs(0, 'in');
+
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
         $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
-        $this->view->deptList      = $this->loadModel('tree')->getPairs(0, 'dept');
+        $this->view->deptList      = $this->tree->getPairs(0, 'dept');
         $this->view->categories    = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->currencySign  = $this->loadModel('common', 'sys')->getCurrencySign();
