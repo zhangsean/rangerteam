@@ -85,10 +85,10 @@ $lang->trade->modeList['transfer'] = '轉賬';
 $lang->trade->modeList['inveset']  = '投資';
 
 $lang->trade->quarters = new stdclass();
-$lang->trade->quarters->Q1 = '01,02,03';
-$lang->trade->quarters->Q2 = '04,05,06';
-$lang->trade->quarters->Q3 = '07,08,09';
 $lang->trade->quarters->Q4 = '10,11,12';
+$lang->trade->quarters->Q3 = '07,08,09';
+$lang->trade->quarters->Q2 = '04,05,06';
+$lang->trade->quarters->Q1 = '01,02,03';
 
 $lang->trade->quarterList['Q1'] = '第一季度';
 $lang->trade->quarterList['Q2'] = '第二季度';
@@ -122,6 +122,9 @@ $lang->trade->categoryList = $lang->trade->categoryList + $lang->trade->expenseC
 
 $lang->trade->invesetCategoryList['profit'] = '盈利';
 $lang->trade->invesetCategoryList['loss']   = '虧損';
+
+$lang->trade->transferCategoryList['transferin']  = '轉入';
+$lang->trade->transferCategoryList['transferout'] = '轉出';
 
 $lang->trade->objectTypeList['customer'] = '客戶支出';
 $lang->trade->objectTypeList['order']    = '訂單支出';

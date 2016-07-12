@@ -7,3 +7,6 @@ $config->attend->workingDays   = '5';
 $config->attend->mustSignOut   = 'yes';
 $config->attend->ip            = '*';
 $config->attend->noAttendUsers = '';
+
+$config->attend->list = new stdclass();
+$config->attend->list->exportFields = 'dept, account, date, dayName, status, signIn, signOut, ip';

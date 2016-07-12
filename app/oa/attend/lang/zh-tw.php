@@ -36,6 +36,11 @@ $lang->attend->PM            = '下午';
 $lang->attend->ipList        = 'IP列表';
 $lang->attend->noAttendUsers = '無需考勤';
 
+$lang->attend->user          = '用戶';
+$lang->attend->begin         = '開始';
+$lang->attend->end           = '截至';
+$lang->attend->search        = '搜索';
+
 $lang->attend->manualIn     = '簽到時間';
 $lang->attend->manualOut    = '簽退時間';
 $lang->attend->reason       = '原因';

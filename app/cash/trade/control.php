@@ -397,7 +397,7 @@ class trade extends control
             $file = $file[0];
 
             $fc = file_get_contents($file['tmpname']);
-            if( $this->post->encode != "utf8") 
+            if($this->post->encode != "utf8") 
             {
                 if(function_exists('mb_convert_encoding'))
                 {

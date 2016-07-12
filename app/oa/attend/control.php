@@ -710,50 +710,228 @@ class attend extends control
         $this->display();
     }
 
-    public function detail($date = '')
+    /**
+     * Show attend details. 
+     * 
+     * @param  string $date 
+     * @param  int    $dept 
+     * @param  string $account 
+     * @access public
+     * @return void
+     */
+    public function detail($date = '', $dept = 0, $account = '')
     {
+        if($_POST)
+        {
+            $dept    = $this->post->dept;
+            $account = $this->post->account;
+            $date    = str_replace('-', '', $this->post->date);
+        }
+
         if($date == '' or strlen($date) != 6) $date = date('Ym');
         $currentYear  = substr($date, 0, 4);
         $currentMonth = substr($date, 4, 2);
         $startDate    = "{$currentYear}-{$currentMonth}-01";
         $endDate      = date('Y-m-d', strtotime("$startDate +1 month"));
-
-        $monthList = $this->attend->getAllMonth();
-        $yearList  = array_reverse(array_keys($monthList));
-        $dayNum    = date('t', strtotime("{$currentYear}-{$currentMonth}"));
+        $dayNum       = date('t', strtotime("{$currentYear}-{$currentMonth}"));
         if($currentYear . $currentMonth == date('Ym') && $dayNum > date('d')) $dayNum = date('d');
 
-        /* Get deptList. */
-        $deptList = $this->loadModel('tree')->getDeptManagedByMe($this->app->user->account);
-        foreach($deptList as $key => $value) $deptList[$key] = $value->name;
+        $deptList = array('') + $this->loadModel('tree')->getPairs(0, 'dept');
+        $userList = $this->loadModel('user')->getList();
+        $users    = array();
+        foreach($userList as $user) $users[$user->account] = $user;
+        $userList = $this->user->getPairs('noclosed,nodelete,noforbidden', $dept);
 
-        /* Get attend. */
+        /* Sort data. */
+        $clientLang = $this->app->getClientLang();
+        if($clientLang == 'zh-cn')
+        {
+            foreach($deptList as $key => $value) $deptList[$key] = iconv('UTF-8', 'GBK', $value);
+            foreach($userList as $key => $value) $userList[$key] = iconv('UTF-8', 'GBK', $value);
+        }
+        elseif($clientLang == 'zh-tw')
+        {
+            foreach($deptList as $key => $value) $deptList[$key] = iconv('UTF-8', 'BIG5', $value);
+            foreach($userList as $key => $value) $userList[$key] = iconv('UTF-8', 'BIG5', $value);
+        }
+        
+        asort($deptList);
+        asort($userList);
+        
+        if($clientLang == 'zh-cn')
+        {
+            foreach($deptList as $key => $value) $deptList[$key] = iconv('GBK', 'UTF-8', $value);
+            foreach($userList as $key => $value) $userList[$key] = iconv('GBK', 'UTF-8', $value);
+        }                                                                                
+        elseif($clientLang == 'zh-tw')                                                   
+        {                                                                                
+            foreach($deptList as $key => $value) $deptList[$key] = iconv('BIG5','UTF-8',  $value);
+            foreach($userList as $key => $value) $userList[$key] = iconv('BIG5','UTF-8',  $value);
+        }
+
+        /* Get attends. */
         $attends = array();
-        if(!empty($deptList)) 
+        if($account)
         {
-            $dept = array_keys($deptList);
-            $attends = $this->attend->getByDept($dept, $startDate, $endDate < helper::today() ? $endDate : helper::today());
+            $user       = $users[$account];
+            $attendList = $this->attend->getByAccount($account, $startDate, $endDate < helper::today() ? $endDate : helper::today());
+            $attends[$user->dept][$account] = $attendList;
+        }
+        else
+        {
+            if($dept) 
+            {
+                $attends = $this->attend->getByDept(array($dept), $startDate, $endDate < helper::today() ? $endDate : helper::today());
+            }
+            else
+            {
+                $attends = $this->attend->getByDept(array_keys($deptList), $startDate, $endDate < helper::today() ? $endDate : helper::today());
+            }
+
+            foreach($attends as $key => $deptAttends)
+            {
+                ksort($deptAttends);
+                $attends[$key] = $deptAttends; 
+            }
         }
 
-        foreach($attends as $dept => $deptAttends)
-        {
-            ksort($deptAttends);
-            $attends[$dept] = $deptAttends; 
-        }
-
-        $users    = $this->loadModel('user')->getList();
-        $newUsers = array();
-        foreach($users as $key => $user) $newUsers[$user->account] = $user;
+        $this->session->set('attendDept', $dept);
+        $this->session->set('attendAccount', $account);
 
         $this->view->title        = $this->lang->attend->department;
+        $this->view->dept         = $dept;
+        $this->view->account      = $account;
+        $this->view->date         = $startDate; 
         $this->view->currentYear  = $currentYear;
         $this->view->currentMonth = $currentMonth;
-        $this->view->yearList     = $yearList;
-        $this->view->monthList    = $monthList;
         $this->view->dayNum       = $dayNum;
         $this->view->deptList     = $deptList;
+        $this->view->userList     = $userList;
+        $this->view->users        = $users;
         $this->view->attends      = $attends;
-        $this->view->users        = $newUsers;
         $this->display();
+    }
+
+    /**
+     * Get dept users by ajax. 
+     * 
+     * @param  int    $dept 
+     * @access public
+     * @return void
+     */
+    public function ajaxGetDeptUsers($dept = 0)
+    {
+        $users = $this->loadModel('user')->getPairs('noclosed,nodelete,noforbidden', $dept);
+        $html  = '';
+        foreach($users as $account => $name)
+        {
+            $html .= "<option value='{$account}'>$name</option>";
+        }
+        echo $html;
+    }
+
+    /**
+     * Export attend details.
+     * 
+     * @param  string $date 
+     * @param  bool   $company 
+     * @access public
+     * @return void
+     */
+    public function exportDetail($date = '')
+    {
+        if($date == '' or strlen($date) != 6) $date = date('Ym');
+        $currentYear  = substr($date, 0, 4);
+        $currentMonth = substr($date, 4, 2);
+        $dept         = isset($_SESSION['attendDept'])    ? $_SESSION['attendDept'] : 0;
+        $account      = isset($_SESSION['attendAccount']) ? $_SESSION['attendAccount'] : '';
+        $deptList     = array('') + $this->loadModel('tree')->getPairs(0, 'dept');
+        $userList     = $this->loadModel('user')->getList();
+        $users        = array();
+        foreach($userList as $user) $users[$user->account] = $user;
+
+        if($_POST)
+        {
+            $startDate    = "{$currentYear}-{$currentMonth}-01";
+            $endDate      = date('Y-m-d', strtotime("$startDate +1 month"));
+            $dayNum       = date('t', strtotime("{$currentYear}-{$currentMonth}"));
+            if($currentYear . $currentMonth == date('Ym') && $dayNum > date('d')) $dayNum = date('d');
+
+            $attends = array();
+            if($account)
+            {
+                $user       = $users[$account];
+                $attendList = $this->attend->getByAccount($account, $startDate, $endDate < helper::today() ? $endDate : helper::today());
+                $attends[$user->dept][$account] = $attendList;
+            }
+            else
+            {
+                if($dept) 
+                {
+                    $attends = $this->attend->getByDept(array($dept), $startDate, $endDate < helper::today() ? $endDate : helper::today());
+                }
+                else
+                {
+                    $attends = $this->attend->getByDept(array_keys($deptList), $startDate, $endDate < helper::today() ? $endDate : helper::today());
+                }
+
+                foreach($attends as $key => $deptAttends)
+                {
+                    ksort($deptAttends);
+                    $attends[$key] = $deptAttends; 
+                }
+            }
+
+            /* Get fields. */
+            $fields = explode(',', $this->config->attend->list->exportFields);
+            foreach($fields as $key => $field)
+            {
+                $field = trim($field);
+                $fields[$field] = isset($this->lang->attend->$field) ? $this->lang->attend->$field : '';
+                unset($fields[$key]);
+            }
+            $fields['dept'] = $this->lang->user->dept;
+
+            /* Get dayname */
+            $datas = array();
+            foreach($attends as $dept => $deptAttends)
+            {
+                ksort($deptAttends);
+                foreach($deptAttends as $account => $userAttends)
+                {
+                    for($day = 1; $day <= $dayNum; $day++)
+                    {
+                        $currentDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-{$day}"));
+
+                        $data = new stdclass();
+                        $data->dept    = isset($users[$account]) ? $deptList[$users[$account]->dept] : '';
+                        $data->account = isset($users[$account]) ? $users[$account]->realname : '';
+                        $data->date    = $currentDate;
+                        $data->dayName = $this->lang->datepicker->dayNames[(int)date('w', strtotime($currentDate))];
+                        $data->status  = $this->lang->attend->statusList[$userAttends[$currentDate]->status];
+                        if(strpos('leave,trip,overtime', $userAttends[$currentDate]->status) !== false and $userAttends[$currentDate]->desc)
+                        {
+                            $data->status .= $userAttends[$currentDate]->desc . 'h';
+                        }
+                        $data->signIn  = $userAttends[$currentDate]->signIn;
+                        $data->signOut = $userAttends[$currentDate]->signOut;
+                        $data->ip      = $userAttends[$currentDate]->ip;
+
+                        $datas[] = $data;
+                    }
+                }
+            }
+
+            $this->post->set('fields', $fields);
+            $this->post->set('rows', $datas);
+            $this->fetch('file', 'export2CSV', $_POST);
+        }
+
+        $fileName = $currentYear . $this->lang->year . $currentMonth . $this->lang->month . $this->lang->attend->detail;
+        if($account) $fileName = isset($users[$account]) ? $users[$account]->realname . ' - ' . $fileName : $fileName;
+        if($dept)    $fileName = isset($deptList[$dept]) ? $deptList[$dept] . ' - ' . $fileName : $fileName;
+
+        $this->view->fileName = $fileName;
+        $this->display('attend', 'export');
     }
 }

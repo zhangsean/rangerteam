@@ -36,6 +36,11 @@ $lang->attend->PM            = 'PM';
 $lang->attend->ipList        = 'IP List';
 $lang->attend->noAttendUsers = 'Without Attendance';
 
+$lang->attend->user          = 'User';
+$lang->attend->begin         = 'Begin';
+$lang->attend->end           = 'End';
+$lang->attend->search        = 'Search';
+
 $lang->attend->manualIn     = 'Manual sign in';
 $lang->attend->manualOut    = 'Manual sign out';
 $lang->attend->reason       = 'Reason';

@@ -12,41 +12,68 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/treeview.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
+<?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php $lang->attend->abbrStatusList['rest'] = '';?>
 <div id='menuActions'>
-  <?php commonModel::printLink('attend', 'export', "date=$currentYear$currentMonth", "{$lang->attend->export}", "class='iframe btn btn-primary'")?>
+  <?php commonModel::printLink('attend', 'exportDetail', "date=$currentYear$currentMonth", "{$lang->attend->export}", "class='iframe btn btn-primary'")?>
 </div>
 <div class='with-side'>
   <div class='side'>
-    <div class='panel panel-sm'>
+    <div class='panel'>
+      <div class='panel-heading'><strong><?php echo $currentYear . $lang->year . $lang->attend->detail;?></strong></div>
       <div class='panel-body'>
-        <ul class='tree' data-collapsed='true'>
-          <?php foreach($yearList as $year):?>
-          <li class='<?php echo $year == $currentYear ? 'active' : ''?>'>
-            <?php commonModel::printLink('attend', 'detail', "date=$year&type=year", $year);?>
-            <ul>
-              <?php foreach($monthList[$year] as $month):?>
-              <li class='<?php echo ($year == $currentYear and $month == $currentMonth) ? 'active' : ''?>'>
-                <?php commonModel::printLink('attend', 'detail', "date=$year$month&type=month", $year . $month);?>
-              </li>
-              <?php endforeach;?>
-            </ul>
-          </li>
-          <?php endforeach;?>
-        </ul>
+      <?php 
+        $lastmonth = $currentYear == date('Y') ? date('m') : 12;
+        for($month = 1; $month <= $lastmonth; $month++)
+        {
+            $class = $month == $currentMonth ? 'btn-primary' : '';
+            $month = $month < 10 ? '0' . $month : $month;
+            echo "<div class='col-xs-3 monthDIV'>" . html::a(inlink('detail', "date=$currentYear$month"), $month . $lang->month, "class='btn btn-mini $class'") . '</div>';
+        }
+      ?>
+      </div>
+    </div>
+    <div class='panel'>
+      <div class='panel-heading'><strong><?php echo $lang->attend->search;?></strong></div>
+      <div class='panel-body'>
+        <form id='searchForm' method='post' action='<?php echo inlink('detail');?>'>
+          <div class='form-group'>
+            <div class='input-group'>
+              <span class='input-group-addon'><?php echo $lang->user->dept;?></span>
+              <?php echo html::select('dept', $deptList, $dept, "class='form-control chosen'");?>
+            </div>
+          </div>
+          <div class='form-group'>
+            <div class='input-group'>
+              <span class='input-group-addon'><?php echo $lang->attend->user;?></span>
+              <?php echo html::select('account', $userList, $account, "class='form-control chosen'");?>
+            </div>
+          </div>
+          <div class='form-group'>
+            <div class='input-group'>
+              <span class='input-group-addon'><?php echo $lang->attend->date;?></span>
+              <?php echo html::input('date', $date, "class='form-control form-month'");?>
+            </div>
+          </div>
+          <div class='form-group'><?php echo html::submitButton($lang->attend->search);?></div>
+        </form>
       </div>
     </div>
   </div>
   <div class='main'>
     <div class='panel'>
       <div class='panel-heading text-center'>
-        <strong><?php echo $currentYear . $lang->year . $currentMonth . $lang->month . $lang->attend->report;?></strong>
+        <?php $fileName = $currentYear . $lang->year . $currentMonth . $lang->month . $lang->attend->detail;?>
+        <?php if($account) $fileName = isset($users[$account]) ? $users[$account]->realname . ' - ' . $fileName : $fileName;?>
+        <?php if($dept)    $fileName = isset($deptList[$dept]) ? $deptList[$dept] . ' - ' . $fileName : $fileName;?>
+        <strong><?php echo $fileName;?></strong>
       </div>
       <table class='table table-data table-bordered text-center table-fixed'>
         <thead>
           <tr class='text-center'>
             <th class='w-80px'><?php echo $lang->user->dept;?></th>
-            <th class='w-80px'><?php echo $lang->user->realname;?></th>
+            <th class='w-80px'><?php echo $lang->attend->user;?></th>
             <th class='w-120px'><?php echo $lang->attend->date;?></th>
             <th class='w-80px'><?php echo $lang->attend->dayName;?></th>
             <th class='w-100px'><?php echo $lang->attend->status;?></th>
