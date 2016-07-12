@@ -277,6 +277,7 @@ class attend extends control
                 ->setDefault('mustSignOut', 'no')
                 ->setDefault('ip', '*')
                 ->setIF($this->post->allip, 'ip', '*')
+                ->setIF(!$this->post->noAttendUsers, 'noAttendUsers', '')
                 ->join('mustSignOut', '')
                 ->join('noAttendUsers', ',')
                 ->remove('allip')
