@@ -65,9 +65,11 @@ class salesModel extends model
         {
             foreach($this->post->privs_view as $key => $value)
             {
-                $value = explode('_', $value);
-                $data['account']    = $value[0];
-                $data['salesgroup'] = $value[1];
+                $account = substr($value, 0, strrpos($value, '_'));
+                if(strpos($users, ',' . $account . ',') === false) continue;
+
+                $data['account']    = $account;
+                $data['salesgroup'] = substr($value, strrpos($value, '_') + 1);
                 $data['priv']       = 'view';
                 if($data['salesgroup'] == 'current') $data['salesgroup'] = $groupID;
 
@@ -80,9 +82,11 @@ class salesModel extends model
         {
             foreach($this->post->privs_edit as $key => $value)
             {
-                $value = explode('_', $value);
-                $data['account']    = $value[0];
-                $data['salesgroup'] = $value[1];
+                $account = substr($value, 0, strrpos($value, '_'));
+                if(strpos($users, ',' . $account . ',') === false) continue;
+
+                $data['account']    = $account;
+                $data['salesgroup'] = substr($value, strrpos($value, '_') + 1);
                 $data['priv']       = 'edit';
                 if($data['salesgroup'] == 'current') $data['salesgroup'] = $groupID;
 
@@ -122,7 +126,10 @@ class salesModel extends model
         {
             foreach($this->post->privs_view as $key => $value)
             {
-                $data['account']    = substr($value, 0, strrpos($value, '_'));
+                $account = substr($value, 0, strrpos($value, '_'));
+                if(strpos($users, ',' . $account . ',') === false) continue;
+
+                $data['account']    = $account;
                 $data['salesgroup'] = substr($value, strrpos($value, '_') + 1);
                 $data['priv']       = 'view';
 
@@ -135,9 +142,11 @@ class salesModel extends model
         {
             foreach($this->post->privs_edit as $key => $value)
             {
-                $value = explode('_', $value);
-                $data['account']    = $value[0];
-                $data['salesgroup'] = $value[1];
+                $account = substr($value, 0, strrpos($value, '_'));
+                if(strpos($users, ',' . $account . ',') === false) continue;
+
+                $data['account']    = $account;
+                $data['salesgroup'] = substr($value, strrpos($value, '_') + 1);
                 $data['priv']       = 'edit';
 
                 $this->dao->insert(TABLE_SALESPRIV)->data($data)->exec();
