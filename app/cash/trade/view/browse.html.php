@@ -61,20 +61,20 @@
   <?php endif;?>
   <?php if($mode == 'all'):?>
   <div class='btn-group'>
-    <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo  "<i class='icon-sitemap'> </i>" . $lang->trade->create;?> <span class='caret'></span></button>
+    <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo  "<i class='icon-plus'> </i>" . $lang->trade->create;?> <span class='caret'></span></button>
     <ul id='createActionMenu' class='dropdown-menu pull-right'>
       <li><?php commonModel::printLink('trade', 'create', 'type=in',  $lang->trade->createIn)?></li>
       <li><?php commonModel::printLink('trade', 'create', 'type=out', $lang->trade->createOut)?></li>
       <li><?php commonModel::printLink('trade', 'transfer', '', $lang->trade->transfer)?></li>
-      <li><?php commonModel::printLink('trade', 'inveset', '', $lang->trade->inveset)?></li>
+      <li><?php commonModel::printLink('trade', 'invest', '', $lang->trade->invest)?></li>
     </ul>
   </div>
   <?php endif;?>
-  <?php if($mode == 'in')       commonModel::printLink('trade', 'create', 'type=in',  "<i class='icon-sitemap'> </i>" . $lang->trade->createIn, "class='btn btn-primary'")?>
-  <?php if($mode == 'out')      commonModel::printLink('trade', 'create', 'type=out', "<i class='icon-sitemap'> </i>" . $lang->trade->createOut, "class='btn btn-primary'")?>
-  <?php if($mode == 'transfer') commonModel::printLink('trade', 'transfer', '', "<i class='icon-sitemap'> </i>" . $lang->trade->transfer, "class='btn btn-primary'")?>
-  <?php if($mode == 'inveset')  commonModel::printLink('trade', 'inveset', '', "<i class='icon-sitemap'> </i>" . $lang->trade->inveset, "class='btn btn-primary'")?>
-  <?php if($mode == 'all' || $mode == 'in' || $mode == 'out') commonModel::printLink('trade', 'batchcreate', '', "<i class='icon-plus'> </i>" . $lang->trade->batchCreate, "class='btn btn-primary'")?>
+  <?php if($mode == 'in')       commonModel::printLink('trade', 'create', 'type=in',  "<i class='icon-plus'> </i>" . $lang->trade->createIn, "class='btn btn-primary'")?>
+  <?php if($mode == 'out')      commonModel::printLink('trade', 'create', 'type=out', "<i class='icon-plus'> </i>" . $lang->trade->createOut, "class='btn btn-primary'")?>
+  <?php if($mode == 'transfer') commonModel::printLink('trade', 'transfer', '', "<i class='icon-plus'> </i>" . $lang->trade->transfer, "class='btn btn-primary'")?>
+  <?php if($mode == 'invest')   commonModel::printLink('trade', 'invest', '', "<i class='icon-plus'> </i>" . $lang->trade->invest, "class='btn btn-primary'")?>
+  <?php if($mode == 'all' || $mode == 'in' || $mode == 'out') commonModel::printLink('trade', 'batchcreate', '', "<i class='icon-sitemap'> </i>" . $lang->trade->batchCreate, "class='btn btn-primary'")?>
 </div>
 <div class='panel'>
   <form method='post' action='<?php echo inlink('batchedit', 'step=form')?>'>

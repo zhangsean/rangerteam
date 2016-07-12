@@ -246,7 +246,7 @@ class depositorModel extends model
                 if($item->type == 'redeem')      $money += $item->money;    
                 if($item->type == 'out')         $money -= $item->money;    
                 if($item->type == 'transferout') $money -= $item->money;    
-                if($item->type == 'inveset')     $money -= $item->money;    
+                if($item->type == 'invest')      $money -= $item->money;    
             }
         }
 

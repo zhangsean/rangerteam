@@ -44,7 +44,7 @@ $lang->trade->uploadFile  = 'Upload File';
 $lang->trade->create      = 'Create Trade';
 $lang->trade->in          = 'Income';
 $lang->trade->out         = 'Expend';
-$lang->trade->inveset     = 'Inveset';
+$lang->trade->invest      = 'Invest';
 $lang->trade->redeem      = 'Redeem';
 $lang->trade->createIn    = 'Income';
 $lang->trade->createOut   = 'Expend';
@@ -75,14 +75,14 @@ $lang->trade->typeList['in']          = 'Income';
 $lang->trade->typeList['out']         = 'Expend';
 $lang->trade->typeList['transferout'] = 'Transfer out';
 $lang->trade->typeList['transferin']  = 'Transfer in';
-$lang->trade->typeList['inveset']     = 'Inveset';
+$lang->trade->typeList['invest']      = 'Invest';
 $lang->trade->typeList['redeem']      = 'Redeem';
 
 $lang->trade->modeList['all']      = 'All';
 $lang->trade->modeList['in']       = 'In';
 $lang->trade->modeList['out']      = 'Out';
 $lang->trade->modeList['transfer'] = 'Transfer';
-$lang->trade->modeList['inveset']  = 'Inveset';
+$lang->trade->modeList['invest']   = 'Invest';
 
 $lang->trade->quarters = new stdclass();
 $lang->trade->quarters->Q4 = '10,11,12';
@@ -110,7 +110,7 @@ $lang->trade->monthList['12'] = 'December';
 
 $lang->trade->categoryList['transferin']  = 'Transfer In';
 $lang->trade->categoryList['transferout'] = 'Transfer Out';
-$lang->trade->categoryList['inveset']     = 'Inveset';
+$lang->trade->categoryList['invest']      = 'Invest';
 $lang->trade->categoryList['redeem']      = 'Redeem';
 
 $lang->trade->expenseCategoryList['fee']  = 'Fee';
@@ -120,8 +120,8 @@ $lang->trade->incomeCategoryList['profit'] = 'Profit';
 
 $lang->trade->categoryList = $lang->trade->categoryList + $lang->trade->expenseCategoryList + $lang->trade->incomeCategoryList;
 
-$lang->trade->invesetCategoryList['profit'] = 'Profit';
-$lang->trade->invesetCategoryList['loss']   = 'Loss';
+$lang->trade->investCategoryList['profit'] = 'Profit';
+$lang->trade->investCategoryList['loss']   = 'Loss';
 
 $lang->trade->transferCategoryList['transferin']  = 'Transfer In';
 $lang->trade->transferCategoryList['transferout'] = 'Transfer Out';
@@ -130,8 +130,8 @@ $lang->trade->objectTypeList['customer'] = 'Customer';
 $lang->trade->objectTypeList['order']    = 'Order';
 $lang->trade->objectTypeList['contract'] = 'Contract';
 
-$lang->trade->invesetTypeList['inveset'] = 'Inveset';
-$lang->trade->invesetTypeList['redeem']  = 'Redeem';
+$lang->trade->investTypeList['invest'] = 'Invest';
+$lang->trade->investTypeList['redeem'] = 'Redeem';
 
 $lang->trade->encodeList['gbk']  = 'GBK';
 $lang->trade->encodeList['utf8'] = 'UTF-8';

@@ -83,7 +83,7 @@ class tradeModel extends model
             ->beginIF($mode == 'in')->andWhere('type')->eq('in')->fi()
             ->beginIF($mode == 'out')->andWhere('type')->eq('out')->fi()
             ->beginIF($mode == 'transfer')->andWhere('type', true)->like('transfer%')->orWhere('category')->eq('fee')->markRight(1)->fi()
-            ->beginIF($mode == 'inveset')->andWhere('type', true)->in('inveset,redeem')->orWhere('category')->in('profit,loss')->markRight(1)->fi()
+            ->beginIF($mode == 'invest')->andWhere('type', true)->in('invest,redeem')->orWhere('category')->in('profit,loss')->markRight(1)->fi()
             ->beginIF($mode == 'bysearch')->andWhere($tradeQuery)->fi()
             ->beginIF(!empty($denyCategories))->andWhere('category')->notin($denyCategories)
             ->beginIF(!$expensePriv)->andWhere('type')->ne('out')->fi()
@@ -658,12 +658,12 @@ class tradeModel extends model
     }
 
     /**
-     * Inveset.
+     * Invest.
      * 
      * @access public
      * @return int|bool
      */
-    public function inveset()
+    public function invest()
     {
         $depositor = $this->loadModel('depositor')->getByID($this->post->depositor);
         $now = helper::now();
@@ -679,9 +679,9 @@ class tradeModel extends model
             ->get();
 
         $this->dao->insert(TABLE_TRADE)
-            ->data($trade, $skip = 'invesetCategory,invesetMoney,createTrader,traderName')
+            ->data($trade, $skip = 'investCategory,investMoney,createTrader,traderName')
             ->autoCheck()
-            ->batchCheck($this->config->trade->require->inveset, 'notempty')
+            ->batchCheck($this->config->trade->require->invest, 'notempty')
             ->exec();
 
         if(dao::isError()) return false;
@@ -689,7 +689,7 @@ class tradeModel extends model
         $tradeID = $this->dao->lastInsertID();
         $this->loadModel('action')->create('trade', $tradeID, 'Created');
 
-        if($this->post->createTrader and $this->post->type == 'inveset')
+        if($this->post->createTrader and $this->post->type == 'invest')
         {
             $trader = new stdclass();
             $trader->relation    = 'provider';
@@ -707,13 +707,13 @@ class tradeModel extends model
             $this->dao->update(TABLE_TRADE)->set('trader')->eq($traderID)->where('id')->eq($tradeID)->exec();
         }
 
-        if($this->post->type == 'redeem' and $this->post->invesetMoney)
+        if($this->post->type == 'redeem' and $this->post->investMoney)
         {
-            $inveset = fixer::input('post') 
-                ->setIF($this->post->invesetCategory == 'profit', 'type', 'in')
-                ->setIF($this->post->invesetCategory == 'loss', 'type', 'out')
-                ->add('category', $this->post->invesetCategory)
-                ->add('money', $this->post->invesetMoney)
+            $invest = fixer::input('post') 
+                ->setIF($this->post->investCategory == 'profit', 'type', 'in')
+                ->setIF($this->post->investCategory == 'loss', 'type', 'out')
+                ->add('category', $this->post->investCategory)
+                ->add('money', $this->post->investMoney)
                 ->add('currency', !empty($depositor) ? $depositor->currency : '')
                 ->add('handlers', trim(join(',', $this->post->handlers), ','))
                 ->setIf($this->post->createTrader or !$this->post->trader, 'trader', 0)
@@ -723,9 +723,9 @@ class tradeModel extends model
                 ->get();
 
             $this->dao->insert(TABLE_TRADE)
-                ->data($inveset, $skip = 'invesetCategory,invesetMoney,createTrader,traderName')
+                ->data($invest, $skip = 'investCategory,investMoney,createTrader,traderName')
                 ->autoCheck()
-                ->batchCheck($this->config->trade->require->inveset, 'notempty')
+                ->batchCheck($this->config->trade->require->invest, 'notempty')
                 ->exec();
 
             if(dao::isError()) return false;

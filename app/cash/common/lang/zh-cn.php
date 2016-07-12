@@ -18,7 +18,7 @@ $lang->menu->cash->all       = '所有|trade|browse|mode=all';
 $lang->menu->cash->in        = '收入|trade|browse|mode=in';
 $lang->menu->cash->out       = '支出|trade|browse|mode=out';
 $lang->menu->cash->transfer  = '转账|trade|browse|mode=transfer';
-$lang->menu->cash->inveset   = '投资|trade|browse|mode=inveset';
+$lang->menu->cash->invest    = '投资|trade|browse|mode=invest';
 $lang->menu->cash->check     = '对账|depositor|check|';
 $lang->menu->cash->annual    = '报表|trade|report|';
 $lang->menu->cash->depositor = '账户|depositor|browse|';

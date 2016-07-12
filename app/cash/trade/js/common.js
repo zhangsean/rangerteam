@@ -42,7 +42,7 @@ $(document).ready(function()
     {
         if(v.mode == 'in')
         {
-            $('#mainNavbar li').removeClass('active').find("[href*='=" + v.mode + "']").not('[href*=mode\\=inveset]').parent().addClass('active');
+            $('#mainNavbar li').removeClass('active').find("[href*='=" + v.mode + "']").not('[href*=mode\\=invest]').parent().addClass('active');
         }
         else
         {

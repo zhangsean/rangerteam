@@ -10,9 +10,9 @@
  * @link        http://www.ranzhico.com
  */
 $config->trade->require = new stdclass();
-$config->trade->require->create  = 'depositor,money,type,handlers';
-$config->trade->require->edit    = 'depositor,money,type,handlers';
-$config->trade->require->inveset = 'depositor,money,type,handlers';
+$config->trade->require->create = 'depositor,money,type,handlers';
+$config->trade->require->edit   = 'depositor,money,type,handlers';
+$config->trade->require->invest = 'depositor,money,type,handlers';
 
 $config->trade->batchCreateCount = 10;
 

@@ -44,7 +44,7 @@ $lang->trade->uploadFile  = '上傳附件';
 $lang->trade->create      = '記賬';
 $lang->trade->in          = '收入';
 $lang->trade->out         = '支出';
-$lang->trade->inveset     = '投資';
+$lang->trade->invest      = '投資';
 $lang->trade->redeem      = '贖回';
 $lang->trade->createIn    = '記收入';
 $lang->trade->createOut   = '記支出';
@@ -75,14 +75,14 @@ $lang->trade->typeList['in']          = '收入';
 $lang->trade->typeList['out']         = '支出';
 $lang->trade->typeList['transferout'] = '轉出';
 $lang->trade->typeList['transferin']  = '轉入';
-$lang->trade->typeList['inveset']     = '投資';
+$lang->trade->typeList['invest']      = '投資';
 $lang->trade->typeList['redeem']      = '贖回';
 
 $lang->trade->modeList['all']      = '所有賬目';
 $lang->trade->modeList['in']       = '收入';
 $lang->trade->modeList['out']      = '支出';
 $lang->trade->modeList['transfer'] = '轉賬';
-$lang->trade->modeList['inveset']  = '投資';
+$lang->trade->modeList['invest']   = '投資';
 
 $lang->trade->quarters = new stdclass();
 $lang->trade->quarters->Q4 = '10,11,12';
@@ -110,7 +110,7 @@ $lang->trade->monthList['12'] = '十二月';
 
 $lang->trade->categoryList['transferin']  = '轉入';
 $lang->trade->categoryList['transferout'] = '轉出';
-$lang->trade->categoryList['inveset']     = '投資';
+$lang->trade->categoryList['invest']      = '投資';
 $lang->trade->categoryList['redeem']      = '贖回';
 
 $lang->trade->expenseCategoryList['fee']  = '手續費';
@@ -120,8 +120,8 @@ $lang->trade->incomeCategoryList['profit'] = '理財盈利';
 
 $lang->trade->categoryList = $lang->trade->categoryList + $lang->trade->expenseCategoryList + $lang->trade->incomeCategoryList;
 
-$lang->trade->invesetCategoryList['profit'] = '盈利';
-$lang->trade->invesetCategoryList['loss']   = '虧損';
+$lang->trade->investCategoryList['profit'] = '盈利';
+$lang->trade->investCategoryList['loss']   = '虧損';
 
 $lang->trade->transferCategoryList['transferin']  = '轉入';
 $lang->trade->transferCategoryList['transferout'] = '轉出';
@@ -130,8 +130,8 @@ $lang->trade->objectTypeList['customer'] = '客戶支出';
 $lang->trade->objectTypeList['order']    = '訂單支出';
 $lang->trade->objectTypeList['contract'] = '合同支出';
 
-$lang->trade->invesetTypeList['inveset'] = '投資';
-$lang->trade->invesetTypeList['redeem']  = '贖回';
+$lang->trade->investTypeList['invest'] = '投資';
+$lang->trade->investTypeList['redeem'] = '贖回';
 
 $lang->trade->encodeList['gbk']  = 'GBK';
 $lang->trade->encodeList['utf8'] = 'UTF-8';

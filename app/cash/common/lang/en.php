@@ -18,7 +18,7 @@ $lang->menu->cash->all       = 'All|trade|browse|mode=all';
 $lang->menu->cash->in        = 'Income|trade|browse|mode=in';
 $lang->menu->cash->out       = 'Expenditure|trade|browse|mode=out';
 $lang->menu->cash->transfer  = 'Transfer|trade|browse|mode=transfer';
-$lang->menu->cash->inveset   = 'Inveset|trade|browse|mode=inveset';
+$lang->menu->cash->invest    = 'Invest|trade|browse|mode=invest';
 $lang->menu->cash->check     = 'Checking|depositor|check|';
 $lang->menu->cash->annual    = 'Annual Report|trade|report|';
 $lang->menu->cash->depositor = 'Depositor|depositor|index|';

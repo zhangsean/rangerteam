@@ -56,7 +56,7 @@ class trade extends control
         if($mode == 'in')       $searchCategories = array('' => '') + $this->lang->trade->incomeCategoryList + $incomeCategories;
         if($mode == 'out')      $searchCategories = array('' => '') + $this->lang->trade->expenseCategoryList + $expenseCategories;
         if($mode == 'transfer') $searchCategories = array('' => '') + $this->lang->trade->transferCategoryList;
-        if($mode == 'inveset')  $searchCategories = array('' => '') + $this->lang->trade->invesetTypeList + $this->lang->trade->invesetCategoryList;
+        if($mode == 'invest')   $searchCategories = array('' => '') + $this->lang->trade->investTypeList + $this->lang->trade->investCategoryList;
         $this->config->trade->search['params']['category']['values'] = $searchCategories;
         $this->search->setSearchParams($this->config->trade->search);
 
@@ -64,7 +64,7 @@ class trade extends control
         if($mode == 'in')       $type = 'in';
         if($mode == 'out')      $type = 'out';
         if($mode == 'transfer') $type = 'transferin,transferout';
-        if($mode == 'inveset')  $type = 'inveset,redeem';
+        if($mode == 'invest')   $type = 'invest,redeem';
         $tradeDates = $this->trade->getDatePairs($type);
 
         $tradeYears    = array();
@@ -98,7 +98,7 @@ class trade extends control
         }
 
         $currentYear = current($tradeYears);
-        if($mode != 'inveset' and !empty($tradeDates))
+        if($mode != 'invest' and !empty($tradeDates))
         {
             $currentQuarter = current($tradeQuarters[$currentYear]);
             $currentMonth   = current($tradeMonths[$currentYear][$currentQuarter]);
@@ -196,7 +196,7 @@ class trade extends control
         unset($this->lang->trade->menu);
         unset($this->lang->trade->typeList['transferin']);
         unset($this->lang->trade->typeList['transferout']);
-        unset($this->lang->trade->typeList['inveset']);
+        unset($this->lang->trade->typeList['invest']);
         unset($this->lang->trade->typeList['redeem']);
 
         $this->view->title        = $this->lang->trade->batchCreate;
@@ -319,22 +319,22 @@ class trade extends control
     }
 
     /**
-     * Inveset.
+     * Invest.
      * 
      * @access public
      * @return void
      */
-    public function inveset()
+    public function invest()
     {
         if($_POST)
         {
-            $this->trade->inveset(); 
+            $this->trade->invest(); 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
 
         unset($this->lang->trade->menu);
-        $this->view->title         = $this->lang->trade->inveset;
+        $this->view->title         = $this->lang->trade->invest;
         $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->depositorList = array('' => '') + $this->loadModel('depositor')->getPairs();
@@ -515,7 +515,7 @@ class trade extends control
         unset($this->lang->trade->menu);
         unset($this->lang->trade->typeList['transferin']);
         unset($this->lang->trade->typeList['transferout']);
-        unset($this->lang->trade->typeList['inveset']);
+        unset($this->lang->trade->typeList['invest']);
         unset($this->lang->trade->typeList['redeem']);
 
         $customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
