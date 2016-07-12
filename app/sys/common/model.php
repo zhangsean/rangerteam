@@ -1175,11 +1175,13 @@ class commonModel extends model
     {
         global $app;
         if(!is_array($vars)) parse_str($vars, $vars);
+        if(strpos($module, '.') !== false) $module = substr($module, strpos($module, '.') + 1);
         $method = strtolower($method);
 
         /* Check priv by {$moduleName}ID. */
         $checkByID['customer'] = ',assign,edit,delete,linkcontact,';
         $checkByID['order']    = ',assign,edit,delete,close,activate,';
+        $checkByID['contract'] = ',receive,delivery,edit,delete,finish,cancel,';
         $checkByID['resume']   = ',edit,delete,';
         $checkByID['address']  = ',edit,delete,';
         if($app->appName == 'crm') $checkByID['contact'] = ',edit,delete,';

@@ -283,6 +283,8 @@ class my extends control
         /* Save session for return link. */
         $this->session->set('contractList', "javascript:$.openEntry(\"dashboard\")");
 
+        $this->app->user->canEditContractIdList = ',' . implode(',', $this->contract->getContractsSawByMe('edit', array_keys($contracts))) . ',';
+
         $this->view->title        = $this->lang->contract->browse;
         $this->view->contracts    = $contracts;
         $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs('client');

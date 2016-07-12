@@ -66,6 +66,9 @@ class contract extends control
         $this->config->contract->search['actionURL'] = $this->createLink('contract', 'browse', 'mode=bysearch');
         $this->search->setSearchParams($this->config->contract->search);
 
+        /* Set allowed edit contract ID list. */
+        $this->app->user->canEditContractIdList = ',' . implode(',', $this->contract->getContractsSawByMe('edit', array_keys($contracts))) . ',';
+
         $this->view->title        = $this->lang->contract->browse;
         $this->view->contracts    = $contracts;
         $this->view->customers    = $this->loadModel('customer')->getPairs('client');
@@ -442,6 +445,9 @@ class contract extends control
     public function view($contractID)
     {
         $contract = $this->contract->getByID($contractID);
+
+        /* Set allowed edit contract ID list. */
+        $this->app->user->canEditContractIdList = ',' . implode(',', $this->contract->getContractsSawByMe('edit', (array)$contractID)) . ',';
 
         /* Save session for return link. */
         $uri = $this->app->getURI(true);
