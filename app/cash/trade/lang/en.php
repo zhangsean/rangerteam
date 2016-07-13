@@ -64,8 +64,9 @@ $lang->trade->fullYear    = 'Full year';
 $lang->trade->quarter     = 'Quarter';
 
 $lang->trade->report = new stdclass();
-$lang->trade->report->common = 'Report'; 
-$lang->trade->report->annual = 'Annual Report'; 
+$lang->trade->report->common    = 'Report'; 
+$lang->trade->report->annual    = 'Annual Report'; 
+$lang->trade->report->undefined = 'Undefined';
 
 $lang->trade->report->typeList['annual']  = 'Annual balance report'; 
 $lang->trade->report->typeList['compare'] = 'Annual comparison report'; 
@@ -78,12 +79,6 @@ $lang->trade->typeList['transferin']  = 'Transfer in';
 $lang->trade->typeList['invest']      = 'Invest';
 $lang->trade->typeList['redeem']      = 'Redeem';
 
-$lang->trade->modeList['all']      = 'All';
-$lang->trade->modeList['in']       = 'In';
-$lang->trade->modeList['out']      = 'Out';
-$lang->trade->modeList['transfer'] = 'Transfer';
-$lang->trade->modeList['invest']   = 'Invest';
-
 $lang->trade->quarters = new stdclass();
 $lang->trade->quarters->Q4 = '10,11,12';
 $lang->trade->quarters->Q3 = '07,08,09';
@@ -95,18 +90,20 @@ $lang->trade->quarterList['Q2'] = 'Second quarter';
 $lang->trade->quarterList['Q3'] = 'Third quarter';
 $lang->trade->quarterList['Q4'] = 'Fourth quarter';
 
-$lang->trade->monthList['01'] = 'January';
-$lang->trade->monthList['02'] = 'February';
-$lang->trade->monthList['03'] = 'March';
-$lang->trade->monthList['04'] = 'April';
-$lang->trade->monthList['05'] = 'May';
-$lang->trade->monthList['06'] = 'June';
-$lang->trade->monthList['07'] = 'July';
-$lang->trade->monthList['08'] = 'August';
-$lang->trade->monthList['09'] = 'September';
-$lang->trade->monthList['10'] = 'October';
-$lang->trade->monthList['11'] = 'November';
-$lang->trade->monthList['12'] = 'December';
+$lang->trade->monthList['last']  = 'Last Year';
+$lang->trade->monthList['01']    = 'January';
+$lang->trade->monthList['02']    = 'February';
+$lang->trade->monthList['03']    = 'March';
+$lang->trade->monthList['04']    = 'April';
+$lang->trade->monthList['05']    = 'May';
+$lang->trade->monthList['06']    = 'June';
+$lang->trade->monthList['07']    = 'July';
+$lang->trade->monthList['08']    = 'August';
+$lang->trade->monthList['09']    = 'September';
+$lang->trade->monthList['10']    = 'October';
+$lang->trade->monthList['11']    = 'November';
+$lang->trade->monthList['12']    = 'December';
+$lang->trade->monthList['total'] = 'Total';
 
 $lang->trade->categoryList['transferin']  = 'Transfer In';
 $lang->trade->categoryList['transferout'] = 'Transfer Out';
@@ -168,3 +165,10 @@ $lang->trade->ignore        = 'Ignore';
 
 $lang->trade->chartList['category'] = 'statistic according to category';
 $lang->trade->chartList['dept']     = 'statistic according to department';
+
+$lang->trade->excel = new stdclass();
+$lang->trade->excel->title = new stdclass();
+$lang->trade->excel->title->depositor = ' Depositor Profit and Loss';
+
+$lang->trade->excel->help = new stdclass();
+$lang->trade->excel->help->depositor = "This report don't differentiate currencies, and just contains the trades whose type is 'in' or 'out'.";

@@ -46,25 +46,27 @@ class entryModel extends model
             $this->app->loadLang('index', 'sys');
 
             $dashboardEntry = new stdclass();
-            $dashboardEntry->id      = 'dashboard';
-            $dashboardEntry->buildin = true;
-            $dashboardEntry->code    = 'dashboard';
-            $dashboardEntry->name    = $this->lang->index->dashboard;
-            $dashboardEntry->icon    = 'icon-home';
-            $dashboardEntry->url     = helper::createLink('sys.index');
-            $dashboardEntry->order   = 0;
+            $dashboardEntry->id       = 'dashboard';
+            $dashboardEntry->buildin  = true;
+            $dashboardEntry->code     = 'dashboard';
+            $dashboardEntry->name     = $this->lang->index->dashboard;
+            $dashboardEntry->icon     = 'icon-home';
+            $dashboardEntry->url      = helper::createLink('sys.index');
+            $dashboardEntry->order    = 0;
+            $dashboardEntry->category = 0;
             $entries[] = $dashboardEntry;
 
             if($this->app->user->admin == 'super' || commonModel::hasAppPriv('superadmin'))
             {
                 $adminEntry = new stdclass();
-                $adminEntry->id      = 'superadmin';
-                $adminEntry->buildin = true;
-                $adminEntry->code    = 'superadmin';
-                $adminEntry->name    = $this->lang->index->superAdmin;
-                $adminEntry->icon    = 'icon-cog';
-                $adminEntry->url     = helper::createLink('admin');
-                $adminEntry->order   = 999999;
+                $adminEntry->id       = 'superadmin';
+                $adminEntry->buildin  = true;
+                $adminEntry->code     = 'superadmin';
+                $adminEntry->name     = $this->lang->index->superAdmin;
+                $adminEntry->icon     = 'icon-cog';
+                $adminEntry->url      = helper::createLink('admin');
+                $adminEntry->order    = 999999;
+                $adminEntry->category = 0;
                 $entries[] = $adminEntry;
             }
 

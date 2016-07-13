@@ -866,4 +866,155 @@ class tradeModel extends model
             die(js::locate($errorLink));
         }
     }
+
+    /**
+     * Get data to export. 
+     * 
+     * @param  string $mode 
+     * @access public
+     * @return object 
+     */
+    public function getExportData($mode = '')
+    {
+        $trades     = $this->getList($mode = 'all', $date = date('Y'), $orderBy = 'date');
+        $depositors = $this->loadModel('depositor', 'cash')->getPairs();
+        $lastDates  = $this->dao->select('depositor, max(date)')
+            ->from(TABLE_BALANCE)
+            ->where('date')->lt(date('Y-01-01'))
+            ->groupBy('depositor')
+            ->fetchPairs();
+        $balances = array();
+        foreach($lastDates as $depositor => $date)
+        {
+            $balances[$depositor] = $this->dao->select('money')
+                ->from(TABLE_BALANCE)
+                ->where('depositor')->eq($depositor)
+                ->andWhere('date')->eq($date)
+                ->fetch('money');
+        }
+
+        $numberFields = $this->config->trade->excel->numberFields;
+        $customWidth  = $this->config->trade->excel->customWidth;
+
+        $titles = array();
+        $titles['In']      = $this->lang->trade->in;
+        $titles['Out']     = $this->lang->trade->out;
+        $titles['Profit']  = $this->lang->trade->profit . $this->lang->trade->loss;
+        $titles['Balance'] = $this->lang->depositor->balance;
+
+        $depositors += array('undefined' => $this->lang->trade->report->undefined, 'total' => $this->lang->trade->total);
+
+        $fields = array();
+        $rows   = array();
+
+        $fields['month'] = '';
+        foreach($depositors as $key => $depositor)
+        {
+            foreach($titles as $titleKey => $title)
+            {
+                $fields[$key . $titleKey] = $depositor . $title;
+
+                $numberFields[] = $key . $titleKey; 
+                $customWidth[$key . $titleKey] = 20;
+            }
+        }
+
+        /* Initial rows. */
+        foreach($this->lang->trade->monthList as $monthKey => $month)
+        {
+            foreach($fields as $fieldsKey => $field)
+            {
+                $rows[$monthKey][$fieldsKey] = 0;
+            }
+
+            $rows[$monthKey]['month'] = $month;
+        }
+
+        $undefined = false;
+        /* Add last year balance. */
+        foreach($balances as $depositor => $money)
+        {
+            if(!isset($depositors[$depositor]))
+            {
+                $depositor = 'undefined';
+                $undefined = true;
+            }
+
+            /* Add money to balance of last year. */
+            $rows['last']["{$depositor}Balance"] += $money;
+            $rows['last']['totalBalance']        += $money;
+
+            /* Add money to balance of every month in this year. */
+            for($i = 1; $i <= (int)date('m'); $i++)
+            {
+                $month = $i < 10 ? '0' . $i : $i;
+                $rows[$month]["{$depositor}Balance"] += $money;
+                $rows[$month]['totalBalance']        += $money;
+            }
+
+            /* Add money to total balance. */
+            $rows['total']["{$depositor}Balance"] += $money;
+            $rows['total']['totalBalance']        += $money;
+        }
+
+        foreach($trades as $trade)
+        {
+            if($trade->type != 'in' && $trade->type != 'out') continue;
+
+            if(isset($depositors[$trade->depositor]))
+            {
+                $depositor = $trade->depositor;
+            }
+            else
+            {
+                $depositor = 'undefined';
+                $undefined = true;
+            }
+
+            $month = date('m', strtotime($trade->date));
+            $type  = ucfirst($trade->type);
+            $money = $trade->type == 'in' ? $trade->money : -$trade->money;
+
+            /* Add money to profit and balance of this month. */
+            $rows[$month]["{$depositor}{$type}"] += $trade->money;
+            $rows[$month]["{$depositor}Profit"]  += $money;
+            $rows[$month]["{$depositor}Balance"] += $money;
+            $rows[$month]["total{$type}"]        += $trade->money;
+            $rows[$month]["totalProfit"]         += $money;
+            $rows[$month]["totalBalance"]        += $money;
+
+            /* Add money to profit and balance of every month that after this month. */
+            for($i = (int)$month + 1; $i <= (int)date('m'); $i++)
+            {
+                $m = $i < 10 ? '0' . $i : $i;
+                $rows[$m]["{$depositor}Balance"] += $money;
+                $rows[$m]['totalBalance']        += $money;
+            }
+
+            /* Add money to total profit and balance. */
+            $rows['total']["{$depositor}{$type}"] += $trade->money;
+            $rows['total']["{$depositor}Profit"]  += $money;
+            $rows['total']["{$depositor}Balance"] += $money;
+            $rows['total']["total{$type}"]        += $trade->money;
+            $rows['total']["totalProfit"]         += $money;
+            $rows['total']["totalBalance"]        += $money;
+        }
+
+        /* Remove undefined columns. */
+        if(!$undefined) 
+        {
+            foreach($titles as $key => $title) unset($fields["undefined{$key}"]);
+        }
+        
+        $data = new stdclass();
+        $data->fields       = $fields;
+        $data->numberFields = $numberFields;
+        $data->kind         = 'depositor';
+        $data->rows         = $rows;
+        $data->title        = $this->lang->trade->excel->title->depositor;
+        $data->customWidth  = $customWidth;
+        $data->help         = $this->lang->trade->excel->help->depositor;
+
+        return $data;
+    }
 }

@@ -37,7 +37,7 @@ class index extends control
         $categories = array();
         foreach($entries as $entry)
         {
-            if($entry->category)
+            if(!empty($entry->category))
             {
                 $category = $this->tree->getById($entry->category);
                 if($category) $categories[$category->id] = $category->name;

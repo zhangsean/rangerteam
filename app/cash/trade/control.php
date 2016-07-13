@@ -784,6 +784,30 @@ class trade extends control
     }
 
     /**
+     * Export data to excel.
+     * 
+     * @param  string $mode 
+     * @access public
+     * @return void
+     */
+    public function export2Excel($mode = 'depositor')
+    {
+        if($_POST)
+        {
+            $data = $this->trade->getExportData($mode);
+
+            $excelData = new stdclass();
+            $excelData->dataList = array($data);
+            $excelData->fileName = $this->post->fileName ? $this->post->fileName : $this->lang->trade->excel->title->$mode;
+
+            $this->app->loadClass('export2excel')->export($excelData, $this->post->fileType);
+        }
+
+        $this->view->title = $this->lang->export;
+        $this->display();
+    }
+
+    /**
      * Report for trade.
      * 
      * @param  string $date 

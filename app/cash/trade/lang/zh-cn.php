@@ -64,8 +64,9 @@ $lang->trade->fullYear    = '全年';
 $lang->trade->quarter     = '季度';
 
 $lang->trade->report = new stdclass();
-$lang->trade->report->common = '报表'; 
-$lang->trade->report->annual = '年度收支表'; 
+$lang->trade->report->common    = '报表'; 
+$lang->trade->report->annual    = '年度收支表'; 
+$lang->trade->report->undefined = '未定义';
 
 $lang->trade->report->typeList['annual']  = '年度收支表'; 
 $lang->trade->report->typeList['compare'] = '年度对比表'; 
@@ -78,12 +79,6 @@ $lang->trade->typeList['transferin']  = '转入';
 $lang->trade->typeList['invest']      = '投资';
 $lang->trade->typeList['redeem']      = '赎回';
 
-$lang->trade->modeList['all']      = '所有账目';
-$lang->trade->modeList['in']       = '收入';
-$lang->trade->modeList['out']      = '支出';
-$lang->trade->modeList['transfer'] = '转账';
-$lang->trade->modeList['invest']   = '投资';
-
 $lang->trade->quarters = new stdclass();
 $lang->trade->quarters->Q4 = '10,11,12';
 $lang->trade->quarters->Q3 = '07,08,09';
@@ -95,18 +90,20 @@ $lang->trade->quarterList['Q2'] = '第二季度';
 $lang->trade->quarterList['Q3'] = '第三季度';
 $lang->trade->quarterList['Q4'] = '第四季度';
 
-$lang->trade->monthList['01'] = '一月';
-$lang->trade->monthList['02'] = '二月';
-$lang->trade->monthList['03'] = '三月';
-$lang->trade->monthList['04'] = '四月';
-$lang->trade->monthList['05'] = '五月';
-$lang->trade->monthList['06'] = '六月';
-$lang->trade->monthList['07'] = '七月';
-$lang->trade->monthList['08'] = '八月';
-$lang->trade->monthList['09'] = '九月';
-$lang->trade->monthList['10'] = '十月';
-$lang->trade->monthList['11'] = '十一月';
-$lang->trade->monthList['12'] = '十二月';
+$lang->trade->monthList['last']  = '上年结转';
+$lang->trade->monthList['01']    = '一月';
+$lang->trade->monthList['02']    = '二月';
+$lang->trade->monthList['03']    = '三月';
+$lang->trade->monthList['04']    = '四月';
+$lang->trade->monthList['05']    = '五月';
+$lang->trade->monthList['06']    = '六月';
+$lang->trade->monthList['07']    = '七月';
+$lang->trade->monthList['08']    = '八月';
+$lang->trade->monthList['09']    = '九月';
+$lang->trade->monthList['10']    = '十月';
+$lang->trade->monthList['11']    = '十一月';
+$lang->trade->monthList['12']    = '十二月';
+$lang->trade->monthList['total'] = '总计';
 
 $lang->trade->categoryList['transferin']  = '转入';
 $lang->trade->categoryList['transferout'] = '转出';
@@ -168,3 +165,10 @@ $lang->trade->ignore        = '忽略';
 
 $lang->trade->chartList['category'] = '按科目统计';
 $lang->trade->chartList['dept']     = '按部门统计';
+
+$lang->trade->excel = new stdclass();
+$lang->trade->excel->title = new stdclass();
+$lang->trade->excel->title->depositor = '账号盈亏';
+
+$lang->trade->excel->help = new stdclass();
+$lang->trade->excel->help->depositor       = '本报表不区分币种，仅统计交易类型为收入和支出的帐目。';
