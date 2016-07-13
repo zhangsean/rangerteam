@@ -46,6 +46,11 @@ $lang->category->groups   = '授权分组';
 $lang->category->origin   = '源科目';
 $lang->category->target   = '目标科目';
 
+$lang->category->majorList['1'] = '主营业务收入';
+$lang->category->majorList['2'] = '非主营业务收入';
+$lang->category->majorList['3'] = '主营业务成本';
+$lang->category->majorList['4'] = '非主营业务成本';
+
 /* Lang items for area. */
 $lang->area = new stdclass();
 $lang->area->common   = '区域';

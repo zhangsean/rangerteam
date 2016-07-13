@@ -639,7 +639,7 @@ CREATE TABLE `sys_category` (
   `users` text NOT NULL,
   `rights` varchar(255) NOT NULL,
   `refund` enum('0','1') NOT NULL DEFAULT '0',
-  `major` enum('0','1') NOT NULL DEFAULT '0',
+  `major` enum('0','1','2','3','4') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `tree` (`type`),
   KEY `order` (`order`),
@@ -1397,6 +1397,12 @@ INSERT INTO `sys_category` (`id`, `name`, `alias`, `desc`, `keywords`, `root`, `
 (654200,'塔城地区','','','',0,650000,',650000,654200,',2,0,'area','0','',0,0,'','0000-00-00 00:00:00',0,0,'',''),
 (654300,'阿勒泰地区','','','',0,650000,',650000,654300,',2,0,'area','0','',0,0,'','0000-00-00 00:00:00',0,0,'',''),
 (659000,'自治区直辖县级行政区划','','','',0,650000,',650000,659000,',2,0,'area','0','',0,0,'','0000-00-00 00:00:00',0,0,'','');
+
+INSERT INTO `sys_category` (`id`, `name`, `parent`, `grade`, `type`, `major`) VALUES
+('660001', '主营业务收入', ',660001,', 1, 'in', '1'),
+('660002', '非主营业务收入', ',660002,', 1, 'in', '2'),
+('660003', '主营业务成本', ',660003,', 1, 'out', '3'),
+('660004', '非主营业务成本', ',660004,', 1, 'out', '4');
 
 INSERT INTO `sys_group` VALUES (1,'管理员','管理员拥有前台所有权限'),(2,'财务专员','财务专员拥有现金流所有权限'),(3,'销售经理','销售经理拥有客户管理所有权限'),(4,'销售人员','默认的销售人员权限'),(5,'普通用户','默认的普通账号权限');
 INSERT INTO `sys_usergroup` (account,`group`) SELECT account,5 FROM `sys_user`;

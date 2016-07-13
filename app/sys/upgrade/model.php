@@ -1032,4 +1032,60 @@ class upgradeModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Update trade categories.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function updateTradeCategories() 
+    {
+        $this->app->loadLang('tree', 'sys');
+
+        $majorIncomeCategories = $this->dao->select('*')->from(TABLE_CATEGORY)
+            ->where('major')->eq('1')
+            ->andWhere('type')->eq('in')
+            ->andWhere('grade')->eq('1')
+            ->fetchAll();
+
+        $majorExpenseCategories = $this->dao->select('*')->from(TABLE_CATEGORY)
+            ->where('major')->eq('1')
+            ->andWhere('type')->eq('out')
+            ->andWhere('grade')->eq('1')
+            ->fetchAll();
+
+        $this->dao->update(TABLE_CATEGORY)->set('major')->eq(0)->where('type')->in('in,out')->andWhere('grade')->ne('1')->exec();
+
+        foreach($this->lang->category->majorList as $key => $major)
+        {
+            $data = new stdclass();
+            $data->name  = $major;
+            $data->major = $key;
+            $data->type  = $key < 3 ? 'in' : 'out';
+            $data->grade = '1';
+
+            $this->dao->insert(TABLE_CATEGORY)->data($data)->exec();
+            $newCategoryID = $this->dao->lastInsertID();
+            $this->dao->update(TABLE_CATEGORY)->set('path')->eq(',' . $newCategoryID . ',')->where('id')->eq($newCategoryID)->exec();
+            
+            if($key == '1' or $key == '3')
+            {
+                $categories = $key == '1' ? $majorIncomeCategories : $majorExpenseCategories;
+                foreach($categories as $category)
+                {
+                    $children = $this->dao->select('*')->from(TABLE_CATEGORY)->where('path')->like($category->path . '%')->fetchAll();
+                    foreach($children as $child)
+                    {
+                        $path  = ',' . $newCategoryID . $child->path;
+                        $grade = $child->grade + 1;
+                        if($grade == 2) $this->dao->update(TABLE_CATEGORY)->set('major')->eq(0)->set('path')->eq($path)->set('grade')->eq($grade)->set('parent')->eq($newCategoryID)->where('id')->eq($child->id)->exec();
+                        if($grade != 2) $this->dao->update(TABLE_CATEGORY)->set('major')->eq(0)->set('path')->eq($path)->set('grade')->eq($grade)->where('id')->eq($child->id)->exec();
+                    }
+                }
+            }
+        }
+
+        return !dao::isError();
+    }
 }
