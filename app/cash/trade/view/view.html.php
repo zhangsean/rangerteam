@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php js::set('mode', $mode);?>
 <ul id='menuTitle'>
   <li><?php commonModel::printLink('trade', 'browse', '', $lang->trade->browse);?></li>
   <li class='divider angle'></li>

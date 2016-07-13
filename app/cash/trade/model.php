@@ -654,7 +654,7 @@ class tradeModel extends model
             $this->loadModel('action')->create('trade', $feeID, 'Created');
         }
 
-        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'));
+        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', 'mode=transfer'));
     }
 
     /**

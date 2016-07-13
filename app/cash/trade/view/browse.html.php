@@ -107,7 +107,7 @@
           <td class='text-left'><?php echo isset($productList[$trade->product]) ? $productList[$trade->product] . $lang->slash . zget($categories, $trade->category, ' ') : zget($categories, $trade->category, ' ');?></td>
           <td class='text-left visible-lg'><div title="<?php echo $trade->desc;?>" class='w-200px text-ellipsis'><?php echo $trade->desc;?><div></td>
           <td>
-            <?php commonModel::printLink('trade', 'view', "tradeID={$trade->id}", $lang->view);?>
+            <?php commonModel::printLink('trade', 'view', "tradeID={$trade->id}&mode={$mode}", $lang->view);?>
             <?php commonModel::printLink('trade', 'edit', "tradeID={$trade->id}", $lang->edit);?>
             <?php commonModel::printLink('trade', 'detail', "tradeID={$trade->id}", $lang->trade->detail, "data-toggle='modal'");?>
             <?php commonModel::printLink('trade', 'delete', "tradeID={$trade->id}", $lang->delete, "class='deleter'");?>

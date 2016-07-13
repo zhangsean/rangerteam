@@ -271,14 +271,16 @@ class trade extends control
      * View a trade.
      * 
      * @param  int    $tradeID 
+     * @param  string $mode
      * @access public
      * @return void
      */
-    public function view($tradeID)
+    public function view($tradeID = 0, $mode = '')
     {
         $trade = $this->trade->getByID($tradeID);
 
         $this->view->trade         = $trade;
+        $this->view->mode          = $mode;
         $this->view->title         = $this->lang->trade->view;
         $this->view->depositorList = $this->loadModel('depositor')->getPairs();
         $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
@@ -330,7 +332,7 @@ class trade extends control
         {
             $this->trade->invest(); 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', 'mode=invest')));
         }
 
         unset($this->lang->trade->menu);
