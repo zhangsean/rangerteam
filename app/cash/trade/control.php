@@ -171,8 +171,8 @@ class trade extends control
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
 
-        if($type == 'out') $this->view->categories = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
-        if($type == 'in')  $this->view->categories = $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
+        if($type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
+        if($type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
 
         $this->display();
     }
@@ -204,8 +204,8 @@ class trade extends control
         $this->view->users        = $this->loadModel('user')->getPairs('nodeleted');
         $this->view->customerList = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->view->traderList   = $this->loadModel('customer', 'crm')->getPairs('provider');
-        $this->view->expenseTypes = array('' => '') + $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
-        $this->view->incomeTypes  = array('' => '') + $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
+        $this->view->expenseTypes = array('' => '') + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
+        $this->view->incomeTypes  = array('' => '') + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
         $this->view->deptList     = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->productList  = array(0 => '') + $this->loadModel('product', 'crm')->getPairs();
 
@@ -261,8 +261,8 @@ class trade extends control
         $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
        
-        if($trade->type == 'out') $this->view->categories = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0);
-        if($trade->type == 'in')  $this->view->categories = $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0);
+        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0);
+        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0);
 
         $this->display();
     }
@@ -449,8 +449,8 @@ class trade extends control
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->customerList = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->view->traderList   = $this->loadModel('customer', 'crm')->getPairs('provider');
-        $this->view->expenseTypes = array('' => '') + $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
-        $this->view->incomeTypes  = array('' => '') + $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
+        $this->view->expenseTypes = array('' => '') + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
+        $this->view->incomeTypes  = array('' => '') + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
         $this->view->deptList     = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->productList  = array(0 => '') + $this->loadModel('product', 'crm')->getPairs();
 
