@@ -156,6 +156,7 @@ $lang->trade->importedFields['product']  = '产品';
 $lang->trade->totalIn       = '%s收入%s；';
 $lang->trade->totalOut      = '%s支出%s；';
 $lang->trade->totalAmount   = '%s收入%s，支出%s，%s；';
+$lang->trade->totalInvest   = '%s投资%s，赎回%s，未赎回%s，%s；';
 $lang->trade->profit        = '盈';
 $lang->trade->loss          = '亏';
 $lang->trade->balance       = '收支平衡';

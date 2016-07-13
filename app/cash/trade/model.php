@@ -798,34 +798,52 @@ class tradeModel extends model
     {
         $totalMoney  = array();
         $currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
+
         foreach($currencyList as $key => $currency)
         {
             $totalMoney[$key]['in']  = 0;
             $totalMoney[$key]['out'] = 0;
+            if($mode == 'invest')
+            {
+                $totalMoney[$key]['invest'] = 0;
+                $totalMoney[$key]['redeem'] = 0;
+            }
+
             foreach($trades as $trade)
             {
                 if($trade->currency != $key) continue;
                 if($trade->type == 'in' or $trade->type == 'out') $totalMoney[$key][$trade->type] += $trade->money;
+                if($mode == 'invest' and ($trade->type == 'invest' or $trade->type == 'redeem')) $totalMoney[$key][$trade->type] += $trade->money;
             }
         }
 
         foreach($totalMoney as $currency => $money)
         {
-            if($money['in'] == 0 and $money['out'] == 0) continue;
+            if($mode != 'invest' and $money['in'] == 0 and $money['out'] == 0) continue;
+            if($mode == 'invest')
+            {
+                if($money['invest'] == 0 and $money['redeem'] == 0 and $money['in'] == 0 and $money['out'] == 0) continue;
+
+                $tidyMoneyInvest   = "<span title='" . $money['invest'] . "'>" . commonModel::tidyMoney($money['invest']) . '</span>';
+                $tidyMoneyRedeem   = "<span title='" . $money['redeem'] . "'>" . commonModel::tidyMoney($money['redeem']) . '</span>';
+                $tidyUnRedeemMoney = "<span title='" . ($money['invest'] - $money['redeem']) . "'>" .  commonModel::tidyMoney($money['invest'] - $money['redeem']) . '</span>';
+            }
+
             $tidyMoneyIn  = "<span title='" . $money['in'] . "'>" . commonModel::tidyMoney($money['in']) . '</span>';
             $tidyMoneyOut = "<span title='" . $money['out'] . "'>" . commonModel::tidyMoney($money['out']) . '</span>';
             
             if($mode == 'in')  printf($this->lang->trade->totalIn, $currencyList[$currency], $tidyMoneyIn);
             if($mode == 'out') printf($this->lang->trade->totalOut, $currencyList[$currency], $tidyMoneyOut);
 
-            if($mode == 'all' or $mode == 'bysearch') 
+            if($mode == 'all' or $mode == 'bysearch' or $mode == 'invest') 
             {
                 $profitsMoney = $money['in'] - $money['out'];
                 if($profitsMoney > 0)  $profits = "<span title='$profitsMoney'>" . $this->lang->trade->profit . commonModel::tidyMoney($profitsMoney) . '</span>';
                 if($profitsMoney < 0)  $profits = "<span title='" . -$profitsMoney . "'>" . $this->lang->trade->loss . commonModel::tidyMoney(-$profitsMoney) . '</span>';
                 if($profitsMoney == 0) $profits = $this->lang->trade->balance;
 
-                printf($this->lang->trade->totalAmount, $currencyList[$currency], $tidyMoneyIn, $tidyMoneyOut, $profits);
+                if($mode == 'invest') printf($this->lang->trade->totalInvest, $currencyList[$currency], $tidyMoneyInvest, $tidyMoneyRedeem, $tidyUnRedeemMoney, $profits);
+                if($mode != 'invest') printf($this->lang->trade->totalAmount, $currencyList[$currency], $tidyMoneyIn, $tidyMoneyOut, $profits);
             }
         }
     }

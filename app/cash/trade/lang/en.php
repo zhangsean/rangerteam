@@ -153,9 +153,10 @@ $lang->trade->importedFields['desc']     = 'Desc';
 $lang->trade->importedFields['fee']      = 'Fee';
 $lang->trade->importedFields['product']  = 'Product';
 
-$lang->trade->totalIn       = '%s: income %s；';
-$lang->trade->totalOut      = '%s: expend %s；';
-$lang->trade->totalAmount   = '%s: income %s, expend %s，%s；';
+$lang->trade->totalIn       = '%s: income %s;';
+$lang->trade->totalOut      = '%s: expend %s;';
+$lang->trade->totalAmount   = '%s: income %s, expend %s, %s;';
+$lang->trade->totalInvest   = '%s: invest %s, redeem %s,unredeem %s, %s;';
 $lang->trade->profit        = 'profit';
 $lang->trade->loss          = 'loss';
 $lang->trade->balance       = 'Income is equal to expenditure';
