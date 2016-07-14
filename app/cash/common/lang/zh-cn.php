@@ -20,7 +20,7 @@ $lang->menu->cash->out       = '支出|trade|browse|mode=out';
 $lang->menu->cash->transfer  = '转账|trade|browse|mode=transfer';
 $lang->menu->cash->invest    = '投资|trade|browse|mode=invest';
 $lang->menu->cash->check     = '对账|depositor|check|';
-$lang->menu->cash->annual    = '报表|trade|report|';
+$lang->menu->cash->report    = '报表|trade|report|';
 $lang->menu->cash->depositor = '账户|depositor|browse|';
 $lang->menu->cash->provider  = '供应商|provider|browse|';
 //$lang->menu->cash->contact   = '联系人|contact|browse|';
@@ -42,6 +42,11 @@ $lang->provider->menu->browse = array('link' => '供应商列表|provider|browse
 $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
 $lang->contact->menu->browse = array('link' => '联系人列表|contact|browse|', 'alias' => 'create,edit,view');
+
+$lang->report = new stdclass();
+$lang->report->menu = new stdclass();
+$lang->report->menu->annual  = '年度收支表|trade|report|';
+$lang->report->menu->compare = '年度对比表|trade|compare|';
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

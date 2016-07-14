@@ -841,10 +841,10 @@ class trade extends control
         rsort($tradeYears);
 
         $currentYear  = current($tradeYears);
-        $currentMonth = !empty($tradeMonths[$currentYear]) ? end($tradeMonths[$currentYear]) : '';
+        $currentMonth = '00';
         if(!empty($date))
         {
-            $currentYear  = substr($date, 0, 4);
+            $currentYear = substr($date, 0, 4);
             if(strlen($date) == 6) $currentMonth = substr($date, 4, 2);
         }
 
@@ -871,15 +871,16 @@ class trade extends control
         }
         ksort($annualChartDatas, SORT_STRING);
 
-        $monthlyChartDatas['in']['category'] = $this->trade->getChartData('in', $currentYear, $currentMonth, 'category', $currency);
-        $monthlyChartDatas['in']['category'] = $this->report->computePercent($monthlyChartDatas['in']['category']);
-        $monthlyChartDatas['in']['dept']     = $this->trade->getChartData('in', $currentYear, $currentMonth, 'dept', $currency);
-        $monthlyChartDatas['in']['dept']     = $this->report->computePercent($monthlyChartDatas['in']['dept']);
+        $groupByList = array('productLine', 'category', 'area', 'industry', 'size', 'dept');
 
-        $monthlyChartDatas['out']['category'] = $this->trade->getChartData('out', $currentYear, $currentMonth, 'category', $currency);
-        $monthlyChartDatas['out']['category'] = $this->report->computePercent($monthlyChartDatas['out']['category']);
-        $monthlyChartDatas['out']['dept']     = $this->trade->getChartData('out', $currentYear, $currentMonth, 'dept', $currency);
-        $monthlyChartDatas['out']['dept']     = $this->report->computePercent($monthlyChartDatas['out']['dept']);
+        foreach($groupByList as $groupBy)
+        {
+            $monthlyChartDatas[$groupBy]['in'] = $this->trade->getChartData('in', $currentYear, $currentMonth, $groupBy, $currency);
+            $monthlyChartDatas[$groupBy]['in'] = $this->report->computePercent($monthlyChartDatas[$groupBy]['in']);
+
+            $monthlyChartDatas[$groupBy]['out'] = $this->trade->getChartData('out', $currentYear, $currentMonth, $groupBy, $currency);
+            $monthlyChartDatas[$groupBy]['out'] = $this->report->computePercent($monthlyChartDatas[$groupBy]['out']);
+        }
 
         $this->view->title             = $this->lang->trade->report->common . '#' . $this->lang->trade->report->annual;
         $this->view->annualChartDatas  = $annualChartDatas;
@@ -890,6 +891,69 @@ class trade extends control
         $this->view->currentMonth      = $currentMonth;
         $this->view->currencyList      = $currencyList;
         $this->view->currentCurrency   = $currency;
+        $this->view->moduleMenu        = commonModel::createModuleMenu('report');
+        $this->display();
+    }
+
+    /**
+     * Annual comparision report
+     * 
+     * @access public
+     * @return void
+     */
+    public function compare()
+    {
+        $currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
+        $tradeYears   = array();
+        $tradeDates   = $this->trade->getDatePairs();
+
+        foreach($tradeDates as $tradeDate)
+        {
+            $year = substr($tradeDate, 0, 4);
+            if(!in_array($year, $tradeYears)) $tradeYears[$year] = $year;
+        }
+
+        $selectYears = $this->post->years ? $this->post->years : array_slice($tradeYears, 0, 2);
+        $currency    = $this->post->currency ? $this->post->currency : current(array_flip($currencyList));
+
+        $incomeDatas  = array();
+        $expenseDatas = array();
+        $profitDatas  = array();
+        foreach($selectYears as $year)
+        {
+            $trades = $this->trade->getByYear($year, $currency);
+            $incomeDatas['all'][$year]  = 0; 
+            $expenseDatas['all'][$year] = 0; 
+            foreach($trades as $month => $monthTrades)
+            {
+                $incomeDatas[$month][$year]  = 0;
+                $expenseDatas[$month][$year] = 0;
+                $profitDatas[$month][$year]  = 0;
+                foreach($monthTrades as $trade)
+                {
+                    if($trade->type == 'in')  $incomeDatas[$month][$year]  += $trade->money;
+                    if($trade->type == 'out') $expenseDatas[$month][$year] += $trade->money;
+                }
+
+                $profitDatas[$month][$year]  = $incomeDatas[$month][$year] - $expenseDatas[$month][$year];
+                $incomeDatas['all'][$year]  += $incomeDatas[$month][$year];
+                $expenseDatas['all'][$year] += $expenseDatas[$month][$year];
+            }
+        }
+
+        ksort($incomeDatas, SORT_STRING);
+        ksort($expenseDatas, SORT_STRING);
+        ksort($profitDatas, SORT_STRING);
+
+        $this->view->title        = $this->lang->trade->report->common . '#' . $this->lang->trade->report->compare;
+        $this->view->tradeYears   = $tradeYears;
+        $this->view->selectYears  = $selectYears;
+        $this->view->incomeDatas  = $incomeDatas;
+        $this->view->expenseDatas = $expenseDatas;
+        $this->view->profitDatas  = $profitDatas;
+        $this->view->currency     = $currency;
+        $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
+        $this->view->moduleMenu   = commonModel::createModuleMenu('report');
         $this->display();
     }
 }

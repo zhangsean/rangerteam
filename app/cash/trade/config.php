@@ -41,6 +41,13 @@ $config->trade->search['params']['handlers']  = array('operator' => 'include', '
 $config->trade->search['params']['date']      = array('operator' => '>=', 'control' => 'input', 'values' => '', 'class' => 'date');
 $config->trade->search['params']['id']        = array('operator' => '=',  'control' => 'input',  'values' => '');
 
+$config->trade->groupBy['category']    = 'trade|category|';
+$config->trade->groupBy['dept']        = 'trade|dept|';
+$config->trade->groupBy['productLine'] = 'product|line|product';
+$config->trade->groupBy['area']        = 'customer|area|trader';
+$config->trade->groupBy['industry']    = 'customer|industry|trader';
+$config->trade->groupBy['size']        = 'customer|size|trader';
+
 $config->trade->exportFields = '
   id, depositor, type, money, currency, category, trader, date,
   desc, dept, handlers, product, order, contract,

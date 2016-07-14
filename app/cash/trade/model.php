@@ -124,6 +124,8 @@ class tradeModel extends model
      */
     public function getChartData($type, $currentYear, $currentMonth, $groupBy, $currency)
     {
+        list($module, $groupBy, $field) = explode('|', $this->config->trade->groupBy[$groupBy]);
+
         /* Get this year data if currentMonth == '00'. */
         $startDate = $currentMonth == '00' ? $currentYear . '-01-01' : $currentYear . '-' . $currentMonth . '-01';
         $endDate   = $currentMonth == '00' ? date('Y-m-d', strtotime('+12 months', strtotime($startDate))) : date('Y-m-d', strtotime('+1 months', strtotime($startDate)));
@@ -136,20 +138,97 @@ class tradeModel extends model
         }
 
         if($groupBy == 'dept') $list = $this->loadModel('tree')->getOptionMenu('dept', 0, true);
+        if($groupBy == 'area') $list = $this->loadModel('tree')->getOptionMenu('area', 0, true);
+        if($groupBy == 'line')
+        {
+            $this->app->loadLang('product', 'crm');
+            $list = $this->lang->product->lineList;
+        }
 
-        $datas = $this->dao->select("$groupBy as name, sum(money) as value")->from(TABLE_TRADE)
-            ->where('type')->eq($type)
-            ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
-            ->beginIf($startDate != '' and $endDate != '')->andWhere('date')->ge($startDate)->andWhere('date')->lt($endDate)->fi()
-            ->beginIf($groupBy == 'category')->andWhere('category')->in(array_keys($list))
-            ->groupBy($groupBy)
-            ->orderBy('value_desc')
-            ->fetchAll('name');
+        if($module == 'trade')
+        {
+            $datas = $this->dao->select("$groupBy as name, sum(money) as value")->from(TABLE_TRADE)
+                ->where('type')->eq($type)
+                ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
+                ->beginIf($startDate != '' and $endDate != '')->andWhere('date')->ge($startDate)->andWhere('date')->lt($endDate)->fi()
+                ->beginIf($groupBy == 'category')->andWhere('category')->in(array_keys($list))
+                ->groupBy($groupBy)
+                ->orderBy('value_desc')
+                ->fetchAll('name');
+        }
+        else
+        {
+            $t2 = $this->config->report->moduleList[$module];
+            $datas = $this->dao->select("ifnull(t2.{$groupBy}, 'null') as name, sum(money) as value")->from(TABLE_TRADE)->alias('t1')
+                ->leftJoin($t2)->alias('t2')->on("t1.$field = t2.id")
+                ->where('t1.type')->eq($type)
+                ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
+                ->beginIf($startDate != '' and $endDate != '')->andWhere('date')->ge($startDate)->andWhere('date')->lt($endDate)->fi()
+                ->groupBy("t2.{$groupBy}")
+                ->orderBy('value_desc')
+                ->fetchAll("name");
+        }
 
         if(empty($datas)) return array();
 
-        $this->app->loadLang('report', 'sys');
-        foreach($datas as $name => $data) $data->name = ($name and isset($list[$name])) ? $list[$name] : $this->lang->report->undefined;
+        if($groupBy == 'area')
+        {
+            $areaParents = $this->dao->select('id')->from(TABLE_CATEGORY)->where('parent')->eq(0)->andWhere('type')->eq('area')->fetchPairs();
+            $areas       = $this->dao->select('id,path')->from(TABLE_CATEGORY)->where('type')->eq('area')->fetchPairs();
+            $areaList    = array();
+            foreach($areaParents as $areaParent)
+            {
+                foreach($areas as $id => $path)
+                {
+                    if(strpos($path, ',' . $areaParent . ',') !== false) $areaList[$areaParent][] = $id;
+                }
+            }
+
+            $areaDatas = array();
+            foreach($areaList as $parent => $areaChildren)
+            {
+                foreach($areaChildren as $areaChild)
+                {
+                    foreach($datas as $name => $data)
+                    {
+                        if($name == $areaChild)
+                        {
+                            if(empty($list[$name]))
+                            {
+                                $areaDatas['unset']->name  = $this->lang->trade->report->undefined;
+                                $areaDatas['unset']->value = isset($areaDatas['unset']) ? $areaDatas['unset']->value + $data->value : $data->value;
+                                $areaDatas['unset'] = $data;
+                                unset($datas[$name]);
+                            }
+                            else
+                            {
+                                if(!isset($areaDatas[$parent])) $areaDatas[$parent] = new stdclass();
+                                $areaDatas[$parent]->name  = $list[$parent];
+                                $areaDatas[$parent]->value = isset($areaDatas[$parent]->value) ? $areaDatas[$parent]->value + $data->value : $data->value;
+                            }
+                        }
+                    }
+                }
+            }
+            $datas = $areaDatas;
+        }
+        else
+        {
+            foreach($datas as $name => $data)
+            {
+                if(empty($list[$name]))
+                {
+                    $data->name  = $this->lang->trade->report->undefined;
+                    $data->value = isset($datas['unset']) ? $datas['unset']->value + $data->value : $data->value;
+                    $datas['unset'] = $data;
+                    unset($datas[$name]);
+                }
+                else
+                {
+                    $data->name = $list[$name];
+                }
+            }
+        }
 
         return $datas;
     }
