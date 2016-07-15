@@ -13,4 +13,6 @@ $(document).ready(function()
         var date = $(this).val();
         $(this).val(date.substr(0, 7));
     });
+
+    fixTableHeader();
 })

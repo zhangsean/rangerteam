@@ -66,7 +66,7 @@
       <div class='panel-heading text-center'>
         <strong><?php echo $fileName;?></strong>
       </div>
-      <table class='table table-data table-bordered text-center'>
+      <table class='table table-data table-bordered text-center table-fixedHeader'>
         <thead>
           <tr class='text-center'>
             <th><?php echo $lang->user->dept;?></th>

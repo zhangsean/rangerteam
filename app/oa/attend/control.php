@@ -495,14 +495,16 @@ class attend extends control
         {
             $mode = 'edit';
 
-            $attends   = $this->attend->getGroupByAccount($startDate, $endDate < helper::today() ? $endDate : helper::today());
-            $trips     = $this->loadModel('trip')->getList($currentYear, $currentMonth);
-            $leaves    = $this->loadModel('leave')->getList($type = 'company', $currentYear, $currentMonth, '', '', $status = 'pass');
-            $overtimes = $this->loadModel('overtime')->getList($type = 'company', $currentYear, $currentMonth, '', '', $status = 'pass');
+            $attends      = $this->attend->getGroupByAccount($startDate, $endDate < helper::today() ? $endDate : helper::today());
+            $trips        = $this->loadModel('trip')->getList($currentYear, $currentMonth, $account = '', $dept = '', $orderBy = 'begin, start');
+            $leaves       = $this->loadModel('leave')->getList($type = 'company', $currentYear, $currentMonth, $account = '', $dept = '', $status = 'pass', $orderBy = 'begin, start');
+            $overtimes    = $this->loadModel('overtime')->getList($type = 'company', $currentYear, $currentMonth, $account = '', $dept = '', $status = 'pass', $orderBy = 'begin, start');
+            $workingHours = empty($this->config->attend->workingHours) ? $this->config->attend->signOutLimit - $this->config->attend->signInLimit : $this->config->attend->workingHours;
 
             $stat = array();
             foreach($attends as $account => $accountAttends)
             {
+                if($account != 'admin') continue;
                 $stat[$account] = new stdclass(); 
                 $stat[$account]->deserve  = $workingDays;
                 $stat[$account]->normal   = 0;
@@ -534,76 +536,86 @@ class attend extends control
 
                     if($attend->status == 'trip')
                     {
+                        $normalDay = 1;
+                        $leftHours = 24;
                         foreach($trips as $trip)
                         {
+                            if($leftHours <= 0) break;
+
                             if($trip->end >= $attend->date and $attend->date >= $trip->begin and $trip->createdBy == $account)
                             {
-                                if($attend->desc < ($this->config->attend->signOutLimit - $this->config->attend->signInLimit))
-                                {
-                                    $stat[$account]->trip += round($attend->desc / $this->config->attend->workingHours, 2);
-                                    $stat[$account]->normal += 1 - round($attend->desc / $this->config->attend->workingHours, 2);
-                                }
-                                else
-                                {
-                                    $stat[$account]->trip ++;
-                                }
+                                $hours = 0;
+                                if($hours > $leftHours) $hours = $leftHours;
+
+                                $tripDay   = round($hours / $workingHours, 2);
+                                $normalDay = round($normalDay - $tripDay, 2);
+                                $leftHours = round($leftHours - $hours, 2);
+
+                                $stat[$account]->trip += $tripDay;
                             }
                         }
+                        $stat[$account]->normal += $normalDay;
                     }
 
                     if($attend->status == 'leave')
                     {
+                        $normalDay = 1;
+                        $leftHours = $workingHours;     
                         foreach($leaves as $leave)
                         {
-                            if($leave->end >= $attend->date and $attend->date >= $leave->begin and $leave->createdBy == $account)
+                            if($leftHours <= 0) break;
+
+                            if($leave->begin <= $attend->date and $leave->end >= $attend->date and $leave->createdBy == $account)
                             {
-                                if($attend->desc < ($this->config->attend->signOutLimit - $this->config->attend->signInLimit))
+                                $hours = $attend->desc;
+                                if($hours > $leave->hours) $hours = $leave->hours;
+                                if($hours > $leftHours)    $hours = $leftHours;
+
+                                $leaveDay  = round($hours / $workingHours, 2);
+                                $normalDay = round($normalDay - $leaveDay, 2);
+                                $leftHours = round($leftHours - $hours, 2);
+
+                                if(strpos('affairs,sick', $leave->type) !== false)
                                 {
-                                    if(strpos('affairs,sick', $leave->type) !== false)
-                                    {
-                                        $stat[$account]->unpaidLeave += round($attend->desc / $this->config->attend->workingHours, 2);
-                                        $stat[$account]->normal += 1 - round($attend->desc / $this->config->attend->workingHours, 2);
-                                    }
-                                    if(strpos('annual,home,marry,maternity', $leave->type) !== false)
-                                    {
-                                        $stat[$account]->paidLeave += round($attend->desc / $this->config->attend->workingHours, 2);
-                                        $stat[$account]->normal += 1 - round($attend->desc / $this->config->attend->workingHours, 2);
-                                    }
+                                    $stat[$account]->unpaidLeave += $leaveDay;
                                 }
-                                else
+                                if(strpos('annual,home,marry,maternity', $leave->type) !== false)
                                 {
-                                    if(strpos('affairs,sick', $leave->type) !== false)  $stat[$account]->unpaidLeave ++;
-                                    if(strpos('annual,home,marry,maternity', $leave->type) !== false) $stat[$account]->paidLeave ++;
+                                    $stat[$account]->paidLeave += $leaveDay;
                                 }
                             }
                         }
+                        $stat[$account]->normal += $normalDay;
                     }
                     if($attend->status == 'overtime')
                     {
+                        $normalDay = 0;
+                        $leftHours = 24;
                         foreach($overtimes as $overtime)
                         {
+                            if($leftHours <= 0) break;
+
                             if($overtime->end >= $attend->date and $attend->date >= $overtime->begin and $overtime->createdBy == $account)
                             {
+                                $hours = $attend->desc;
+                                if($hours > $overtime->hours) $hours = $overtime->hours;
+                                if($hours > $leftHours)       $hours = $leftHours;
+
+                                $overtimeDay = round($hours / $workingHours, 2);
+                                $leftHours   = round($leftHours - $hours, 2);
+
                                 if($overtime->type == 'time')
                                 {
-                                    $stat[$account]->timeOvertime += round($attend->desc / $this->config->attend->workingHours, 2);
-                                    $stat[$account]->normal ++;
+                                    $normalDay += $overtimeDay;
+                                    $stat[$account]->timeOvertime += $overtimeDay;
                                 }
 
-                                if($attend->desc < ($this->config->attend->signOutLimit - $this->config->attend->signInLimit))
-                                {
-                                    if($overtime->type == 'rest') $stat[$account]->restOvertime += round($attend->desc / $this->config->attend->workingHours, 2);
-                                    if($overtime->type == 'holiday') $stat[$account]->holidayOvertime += round($attend->desc / $this->config->attend->workingHours, 2);
-                                    if($overtime->type == 'lieu') $stat[$account]->normal += round($attend->desc / $this->config->attend->workingHours, 2);
-                                }
-                                else
-                                {
-                                    if($overtime->type == 'rest') $stat[$account]->restOvertime ++;
-                                    if($overtime->type == 'holiday') $stat[$account]->holidayOvertime ++;
-                                    if($overtime->type == 'lieu') $stat[$account]->normal ++;
-                                }
+                                if($overtime->type == 'rest')    $stat[$account]->restOvertime += $overtimeDay;
+                                if($overtime->type == 'holiday') $stat[$account]->holidayOvertime += $overtimeDay;
+                                if($overtime->type == 'lieu')    $stat[$account]->normal += $overtimeDay;
                             }
                         }
+                        $stat[$account]->normal += $normalDay; 
                     }
                 }
 
