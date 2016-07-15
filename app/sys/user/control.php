@@ -114,7 +114,7 @@ class user extends control
     public function logout($referer = 0)
     {
         /* Save sign out info. */
-        if(commonModel::isAvailable('attend') and $this->config->attend->signOut == 'no') $this->loadModel('attend', 'oa')->signOut();
+        if(commonModel::isAvailable('attend') and $this->config->attend->mustSignOut == 'no') $this->loadModel('attend', 'oa')->signOut();
 
         if(isset($this->app->user->id)) $this->loadModel('action')->create('user', $this->app->user->id, 'logout');
 
