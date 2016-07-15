@@ -297,7 +297,7 @@ class attend extends control
         $this->view->workingDays    = $this->config->attend->workingDays;
         $this->view->workingHours   = $this->config->attend->workingHours;
         $this->view->mustSignOut    = $this->config->attend->mustSignOut;
-        $this->view->noAttendUsers  = isset($this->config->attend->mustSignOut) ? $this->config->attend->noAttendUsers : '';
+        $this->view->noAttendUsers  = $this->config->attend->noAttendUsers;
         $this->view->ip             = $this->config->attend->ip;
         $this->view->reviewedBy     = isset($this->config->attend->reviewedBy) ? $this->config->attend->reviewedBy : '';
         $this->view->users          = $this->user->getPairs('noempty,noclosed,nodeleted');
