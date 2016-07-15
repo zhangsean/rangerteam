@@ -16,36 +16,7 @@
 <?php js::set('date', $date);?>
 <?php js::set('currentYear', $currentYear);?>
 <?php js::set('treeview', !empty($_COOKIE['treeview']) ? $_COOKIE['treeview'] : '');?>
-<?php $vars = "mode={$mode}&date={$date}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
-<?php if(!empty($tradeYears)):?>
-<li class='year-menu'>
-  <div class='dropdown'>
-    <?php if(count($tradeYears) == 1):?>
-    <?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$year", $year . $lang->year);?></button>
-    <?php else:?>
-    <?php echo html::a('#', $year . $lang->year . "<span class='caret'></span>", "class='dropdown-toggle' data-toggle='dropdown'");?>
-    <ul aria-labelledby="dropdownMenu1" role="menu" class="dropdown-menu">
-      <?php foreach($tradeYears as $tradeYear):?>
-      <li><?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$tradeYear", $tradeYear);?></li>
-      <?php endforeach;?>
-    </ul>
-    <?php endif;?>
-  </div> 
-</li>
-<li class='month-menu'>
-  <div class='dropdown'>
-    <?php echo html::a('#', (strpos($date, 'Q') !== false ? $lang->trade->quarterList[substr($date, 4, 2)] : (strlen($date) == '6' ? $lang->trade->monthList[substr($date, 4, 2)] : $lang->trade->month)) . "<span class='caret'></span>", "class='dropdown-toggle' data-toggle='dropdown'");?>
-    <ul aria-labelledby="dropdownMenu1" role="menu" class="dropdown-menu">
-    <?php foreach($tradeQuarters[$year] as $quarter):?>
-      <li><?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$year$quarter", $lang->trade->quarterList[$quarter]);?></li>
-      <?php foreach($tradeMonths[$year][$quarter] as $month):?>
-      <li><?php commonModel::printLink('trade', 'browse', "mode=$mode&date=$year$month", $lang->trade->monthList[$month]);?></li>
-      <?php endforeach;?>
-    <?php endforeach;?>
-    </ul>
-  </div> 
-</li>
-<?php endif;?>
+
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 
 <div id='menuActions'>
@@ -82,6 +53,7 @@
     <table class='table table-hover table-striped table-bordered tablesorter table-data table-fixed' id='tradeList'>
       <thead>
         <tr class='text-center'>
+          <?php $vars = "mode={$mode}&date={$date}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
           <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->trade->date);?></th>
           <th class='w-100px'><?php commonModel::printOrderLink('depositor', $orderBy, $vars, $lang->trade->depositor);?></th>
           <th class='w-60px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->trade->type);?></th>

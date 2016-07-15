@@ -49,8 +49,5 @@ $(document).ready(function()
         $('a[href*=' + v.currentYear + ']').parents('li').find('.hitarea').replaceClass('expandable-hitarea', 'collapsable-hitarea');
     }
 
-    $('#menu > ul:first').prepend($('.month-menu'));
-    $('#menu > ul:first').prepend($('.year-menu'));
-
     fixTableFooter($('#tradeList'));
 });
