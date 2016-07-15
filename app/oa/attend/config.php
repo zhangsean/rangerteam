@@ -9,4 +9,4 @@ $config->attend->ip            = '*';
 $config->attend->noAttendUsers = '';
 
 $config->attend->list = new stdclass();
-$config->attend->list->exportFields = 'dept, account, date, dayName, status, signIn, signOut, ip';
+$config->attend->list->exportFields = 'dept, realname, date, dayName, status, signIn, signOut, ip';

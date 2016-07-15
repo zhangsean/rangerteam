@@ -176,10 +176,10 @@ class overtime extends control
             $result = $this->overtime->create();
             if(is_array($result)) $this->send($result);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            if(is_numeric($result))
+            if(is_int($result))
             {
                 $overtimeID = $result;
-                $actionID = $this->loadModel('action')->create('overtime', $overtimeID, 'created');
+                $actionID   = $this->loadModel('action')->create('overtime', $overtimeID, 'created');
                 $this->sendmail($overtimeID, $actionID);
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
@@ -187,7 +187,7 @@ class overtime extends control
 
         if($date)
         {
-            $date = date('Y-m-d', strtotime($date));
+            $date     = date('Y-m-d', strtotime($date));
             $overtime = $this->overtime->getByDate($date, $this->app->user->account);
             if($overtime) $this->locate(inlink('edit', "id=$overtime->id"));
         }
@@ -211,7 +211,7 @@ class overtime extends control
         /* check privilage. */
         if($overtime->createdBy != $this->app->user->account) 
         {
-            $locate = helper::safe64Encode(helper::createLink('oa.overtime', 'browse'));
+            $locate    = helper::safe64Encode(helper::createLink('oa.overtime', 'browse'));
             $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
             die(js::locate($errorLink));
         }

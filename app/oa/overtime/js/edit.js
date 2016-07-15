@@ -14,12 +14,11 @@ $(document).ready(function()
         var hours = 0;
         var beginTime = Date.parse(new Date(begin + ' ' + start));
         var endTime   = Date.parse(new Date(end + ' ' + finish));
-        var dayHours  = ((Date.parse(new Date(begin + ' ' + v.signOut)) - Date.parse(new Date(begin + ' ' + v.signIn)))/(3600*100))/10;
         if(beginTime > endTime) return false;
 
         if(begin == end)
         {
-            hours = ((endTime - beginTime)/(3600*100))/10;
+            hours = Math.round((endTime - beginTime)/(3600*1000)*100)/100;
         }
         else
         {
@@ -28,9 +27,10 @@ $(document).ready(function()
             var hoursStart   = 0;
             var hoursEnd     = 0;
             var hoursContent = 0;
-            if(beginTime < signOutTime) hoursStart = ((signOutTime - beginTime)/(3600*100))/10;
-            if(endTime > signInTime) hoursEnd = ((endTime - signInTime)/(3600*100))/10;
-            var days = Math.floor((Date.parse(new Date(end)) - Date.parse(new Date(begin)))/(24*3600*1000));
+            if(beginTime < signOutTime) hoursStart = Math.round((signOutTime - beginTime)/(3600*1000)*100)/100;
+            if(endTime > signInTime) hoursEnd = Math.round((endTime - signInTime)/(3600*1000)*100)/100;
+            var dayHours = Math.round((Date.parse(new Date(begin + ' ' + v.signOut)) - Date.parse(new Date(begin + ' ' + v.signIn)))/(3600*1000)*100)/100;
+            var days     = Math.floor((Date.parse(new Date(end)) - Date.parse(new Date(begin)))/(24*3600*1000));
             if(days > 1) hoursContent = (days - 1) * dayHours;
 
             hours = hoursStart + hoursEnd + hoursContent;

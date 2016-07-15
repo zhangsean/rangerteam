@@ -64,43 +64,32 @@
   <div class='main'>
     <div class='panel'>
       <div class='panel-heading text-center'>
-        <?php $fileName = $currentYear . $lang->year . $currentMonth . $lang->month . $lang->attend->detail;?>
-        <?php if($account) $fileName = isset($users[$account]) ? $users[$account]->realname . ' - ' . $fileName : $fileName;?>
-        <?php if($dept)    $fileName = isset($deptList[$dept]) ? $deptList[$dept] . ' - ' . $fileName : $fileName;?>
         <strong><?php echo $fileName;?></strong>
       </div>
-      <table class='table table-data table-bordered text-center table-fixed'>
+      <table class='table table-data table-bordered text-center'>
         <thead>
           <tr class='text-center'>
-            <th class='w-80px'><?php echo $lang->user->dept;?></th>
-            <th class='w-80px'><?php echo $lang->attend->user;?></th>
-            <th class='w-120px'><?php echo $lang->attend->date;?></th>
-            <th class='w-80px'><?php echo $lang->attend->dayName;?></th>
-            <th class='w-100px'><?php echo $lang->attend->status;?></th>
-            <th class='w-100px'><?php echo $lang->attend->signIn;?></th>
-            <th class='w-100px'><?php echo $lang->attend->signOut;?></th>
-            <th class='w-200px'><?php echo $lang->attend->ip;?></th>
+            <th><?php echo $lang->user->dept;?></th>
+            <th><?php echo $lang->attend->user;?></th>
+            <th><?php echo $lang->attend->date;?></th>
+            <th><?php echo $lang->attend->dayName;?></th>
+            <th><?php echo $lang->attend->status;?></th>
+            <th><?php echo $lang->attend->signIn;?></th>
+            <th><?php echo $lang->attend->signOut;?></th>
+            <th><?php echo $lang->attend->ip;?></th>
           </tr>
         </thead>
-        <?php foreach($attends as $dept => $deptAttends):?>
-          <?php foreach($deptAttends as $account => $userAttends):?>
-            <?php for($day = 1; $day <= $dayNum; $day++):?>
-            <?php $currentDate = date("Y-m-d", strtotime("{$currentYear}-{$currentMonth}-{$day}"));?>
-            <tr>
-              <td><?php echo isset($users[$account]) ? $deptList[$users[$account]->dept] : ''?></td>
-              <td class='valign-middle'><?php echo isset($users[$account]) ? $users[$account]->realname : '';?></td>
-              <td><?php echo $currentDate;?></td>
-              <td><?php echo $lang->datepicker->dayNames[(int)date('w', strtotime($currentDate))];?>
-              <td>
-                <?php echo $lang->attend->statusList[$userAttends[$currentDate]->status]?>
-                <?php if(strpos('leave,trip,overtime', $userAttends[$currentDate]->status) !== false and $userAttends[$currentDate]->desc) echo ' ' . $userAttends[$currentDate]->desc . 'h';?>
-              </td>
-              <td><?php echo $userAttends[$currentDate]->signIn;?></td>
-              <td><?php echo $userAttends[$currentDate]->signOut;?></td>
-              <td><?php echo $userAttends[$currentDate]->ip;?></td>
-            </tr>
-            <?php endfor;?>
-          <?php endforeach;?>
+        <?php foreach($attends as $attend):?>
+        <tr>
+          <td><?php echo $attend->dept;?></td>
+          <td><?php echo $attend->realname;?></td>
+          <td><?php echo $attend->date;?></td>
+          <td><?php echo $attend->dayName;?>
+          <td><?php echo $attend->status;?></td>
+          <td><?php echo $attend->signIn;?></td>
+          <td><?php echo $attend->signOut;?></td>
+          <td><?php echo $attend->ip;?></td>
+        </tr>
         <?php endforeach;?>
       </table>
     </div>

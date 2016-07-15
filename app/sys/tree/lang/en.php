@@ -46,6 +46,11 @@ $lang->category->groups   = 'Groups';
 $lang->category->origin   = 'Origin Category';
 $lang->category->target   = 'Target Category';
 
+$lang->category->majorList['1'] = 'Revenue from main operations';
+$lang->category->majorList['2'] = 'Other operating revenue';
+$lang->category->majorList['3'] = 'Cost of main operations';
+$lang->category->majorList['4'] = 'Other operating expense';
+
 /* Lang items for area. */
 $lang->area = new stdclass();
 $lang->area->common   = 'Area';

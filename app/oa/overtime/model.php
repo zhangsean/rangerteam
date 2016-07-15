@@ -85,6 +85,37 @@ class overtimeModel extends model
     }
 
     /**
+     * Check overtime.
+     * 
+     * @param  object $currentOvertime
+     * @param  string $account 
+     * @param  int    $id
+     * @access public
+     * @return bool 
+     */
+    public function checkOvertime($currentOvertime = null, $account = '', $id = 0)
+    {
+        $beginTime     = date('Y-m-d H:i:s', strtotime($currentOvertime->begin . ' ' . $currentOvertime->start));
+        $endTime       = date('Y-m-d H:i:s', strtotime($currentOvertime->end   . ' ' . $currentOvertime->finish));
+        $overtimeList  = $this->getList($type = '', $year = '', $month = '', $account, $dept = '', $status = '', $orderBy = 'begin, start');
+        $existOvertime = array();
+        foreach($overtimeList as $overtime)
+        {
+            if($overtime->id == $id) continue;
+
+            $begin = $overtime->begin . ' ' . $overtime->start;
+            $end   = $overtime->end   . ' ' . $overtime->finish;
+            if(($beginTime > $begin && $beginTime < $end) 
+                || ($endTime > $begin && $endTime < $end) 
+                || ($beginTime <= $begin && $endTime >= $end))
+            {
+                $existOvertime[] = substr($begin, 0, 16) . ' ~ ' . substr($end, 0, 16);
+            }
+        }
+        return $existOvertime;
+    }
+
+    /**
      * Create a overtime.
      * 
      * @access public
@@ -100,13 +131,14 @@ class overtimeModel extends model
 
         if(isset($overtime->begin) and $overtime->begin != '') $overtime->year = substr($overtime->begin, 0, 4);
 
-        $dates = range(strtotime($overtime->begin), strtotime($overtime->end), 60 * 60 * 24);
-        foreach($dates as $date)
-        {
-            $date = date('Y-m-d', $date);
-            $existOvertime = $this->getByDate($date, $this->app->user->account);
-            if($existOvertime) return array('result' => 'fail', 'message' => sprintf($this->lang->overtime->unique, $date)); 
-        }
+        $existOvertime = $this->checkOvertime($overtime, $this->app->user->account);
+        if(!empty($existOvertime)) return array('result' => 'fail', 'message' => sprintf($this->lang->overtime->unique, implode(', ', $existOvertime))); 
+
+        $existLeave = $this->loadModel('leave')->checkLeave($overtime, $this->app->user->account);
+        if(!empty($existLeave)) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, implode(', ', $existLeave))); 
+        
+        $existTrip = $this->loadModel('trip')->checkTrip($overtime, $this->app->user->account); 
+        if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
 
         $this->dao->insert(TABLE_OVERTIME)
             ->data($overtime)
@@ -115,13 +147,7 @@ class overtimeModel extends model
             ->check('end', 'ge', $overtime->begin)
             ->exec();
 
-        $overtimeID = $this->dao->lastInsertID();
-        if(!dao::isError())
-        {
-            $this->loadModel('attend')->batchUpdate($dates, $overtime->createdBy, '', 'overtime');
-            return $overtimeID;
-        }
-        return false;
+        return $this->dao->lastInsertID();
     }
 
     /**
@@ -143,13 +169,14 @@ class overtimeModel extends model
 
         if(isset($overtime->begin) and $overtime->begin != '') $overtime->year = substr($overtime->begin, 0, 4);
 
-        $dates = range(strtotime($overtime->begin), strtotime($overtime->end), 60 * 60 * 24);
-        foreach($dates as $date)
-        {
-            $date = date('Y-m-d', $date);
-            $existOvertime = $this->getByDate($date, $this->app->user->account);
-            if($existOvertime and $existOvertime->id != $oldOvertime->id) return array('result' => 'fail', 'message' => sprintf($this->lang->overtime->unique, $date)); 
-        }
+        $existOvertime = $this->checkOvertime($overtime, $this->app->user->account, $id);
+        if(!empty($existOvertime)) return array('result' => 'fail', 'message' => sprintf($this->lang->overtime->unique, implode(', ', $existOvertime))); 
+        
+        $existLeave = $this->loadModel('leave')->checkLeave($overtime, $this->app->user->account);
+        if(!empty($existLeave)) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, implode(', ', $existLeave))); 
+        
+        $existTrip = $this->loadModel('trip')->checkTrip($overtime, $this->app->user->account); 
+        if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
 
         $this->dao->update(TABLE_OVERTIME)
             ->data($overtime)
@@ -158,14 +185,6 @@ class overtimeModel extends model
             ->check('end', 'ge', $overtime->begin)
             ->where('id')->eq($id)
             ->exec();
-
-        if(!dao::isError())
-        {
-            $oldDates = range(strtotime($oldOvertime->begin), strtotime($oldOvertime->end), 60 * 60 * 24);
-            $this->loadModel('attend')->batchUpdate($oldDates, $oldOvertime->createdBy, '');
-
-            $this->loadModel('attend')->batchUpdate($dates, $oldOvertime->createdBy, '', 'overtime');
-        }
 
         return !dao::isError();
     }

@@ -172,9 +172,9 @@ class leave extends control
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            if(is_numeric($result))
+            if(is_int($result))
             {
-                $leaveID = $result;
+                $leaveID  = $result;
                 $actionID = $this->loadModel('action')->create('leave', $leaveID, 'created');
                 $this->sendmail($leaveID, $actionID);
             }
@@ -184,7 +184,7 @@ class leave extends control
 
         if($date)
         {
-            $date = date('Y-m-d', strtotime($date));
+            $date  = date('Y-m-d', strtotime($date));
             $leave = $this->leave->getByDate($date, $this->app->user->account);
             if($leave) $this->locate(inlink('edit', "id=$leave->id"));
         }
@@ -211,14 +211,13 @@ class leave extends control
         if(empty($this->config->attend->reviewedBy))
         {
             $createdUser = $this->loadModel('user')->getByAccount($leave->createdBy);
-            $dept = $this->loadModel('tree')->getByID($createdUser->dept);
-            $reviewedBy = empty($dept) ? '' : trim($dept->moderators, ',');
+            $dept        = $this->loadModel('tree')->getByID($createdUser->dept);
+            $reviewedBy  = empty($dept) ? '' : trim($dept->moderators, ',');
         }
-
 
         if($leave->createdBy != $this->app->user->account and $this->app->user->account != $reviewedBy) 
         {
-            $locate = helper::safe64Encode(helper::createLink('oa.leave', 'browse'));
+            $locate    = helper::safe64Encode(helper::createLink('oa.leave', 'browse'));
             $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
             die(js::locate($errorLink));
         }

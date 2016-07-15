@@ -12,6 +12,9 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
+<?php js::set('signIn', $this->config->attend->signInLimit)?>
+<?php js::set('signOut', $this->config->attend->signOutLimit)?>
+<?php js::set('workingHours', $this->config->attend->workingHours)?>
 <div class='panel-body'>
   <form id='ajaxForm' method='post' action="<?php echo $this->createLink('oa.overtime', 'edit', "id=$overtime->id")?>">
     <table class='table table-form table-condensed'>

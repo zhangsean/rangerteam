@@ -98,6 +98,37 @@ class tripModel extends model
     }
 
     /**
+     * Check trip.
+     * 
+     * @param  object $currentTrip
+     * @param  string $account 
+     * @param  int    $id
+     * @access public
+     * @return bool 
+     */
+    public function checkTrip($currentTrip = null, $account = '', $id = 0)
+    {
+        $beginTime = date('Y-m-d H:i:s', strtotime($currentTrip->begin . ' ' . $currentTrip->start));
+        $endTime   = date('Y-m-d H:i:s', strtotime($currentTrip->end   . ' ' . $currentTrip->finish));
+        $tripList  = $this->getList($year = '', $month = '', $account, $dept = '', $orderBy = 'begin, start');
+        $existTrip = array();
+        foreach($tripList as $trip)
+        {
+            if($trip->id == $id) continue;
+
+            $begin = $trip->begin . ' ' . $trip->start;
+            $end   = $trip->end   . ' ' . $trip->finish;
+            if(($beginTime > $begin && $beginTime < $end) 
+                || ($endTime > $begin && $endTime < $end) 
+                || ($beginTime <= $begin && $endTime >= $end))
+            {
+                $existTrip[] = substr($begin, 0, 16) . ' ~ ' . substr($end, 0, 16);
+            }
+        }
+        return $existTrip;
+    }
+
+    /**
      * Create a trip.
      * 
      * @access public
@@ -111,16 +142,14 @@ class tripModel extends model
             ->get();
         if(isset($trip->begin) and $trip->begin != '') $trip->year = substr($trip->begin, 0, 4);
 
-        $dates = range(strtotime($trip->begin), strtotime($trip->end), 60*60*24);
-        foreach($dates as $date)
-        {
-            $date = date('Y-m-d', $date);
-            $existTrip = $this->getByDate($date, $this->app->user->account);
-            if($existTrip) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, $date)); 
-
-            $existLeave = $this->loadModel('leave')->getByDate($date, $this->app->user->account);
-            if($existLeave) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, $date)); 
-        }
+        $existTrip = $this->checkTrip($trip, $this->app->user->account); 
+        if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
+        
+        $existLeave = $this->loadModel('leave')->checkLeave($trip, $this->app->user->account);
+        if(!empty($existLeave)) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, implode(', ', $existLeave))); 
+        
+        $existOvertime = $this->loadModel('overtime')->checkOvertime($trip, $this->app->user->account);
+        if(!empty($existOvertime)) return array('result' => 'fail', 'message' => sprintf($this->lang->overtime->unique, implode(', ', $existOvertime))); 
 
         $this->dao->insert(TABLE_TRIP)
             ->data($trip)
@@ -129,9 +158,7 @@ class tripModel extends model
             ->check('end', 'ge', $trip->begin)
             ->exec();
 
-        if(!dao::isError()) $this->loadModel('attend')->batchUpdate($dates, $this->app->user->account, 'trip', '', $trip);
-
-        return !dao::isError();
+        return $this->dao->lastInsertID();
     }
 
     /**
@@ -143,7 +170,7 @@ class tripModel extends model
      */
     public function update($id)
     {
-        $oldTrip  = $this->getByID($id);
+        $oldTrip = $this->getByID($id);
 
         $trip = fixer::input('post')
             ->remove('createdBy')
@@ -151,16 +178,14 @@ class tripModel extends model
             ->get();
         if(isset($trip->begin) and $trip->begin != '') $trip->year = substr($trip->begin, 0, 4);
 
-        $dates = range(strtotime($trip->begin), strtotime($trip->end), 60*60*24);
-        foreach($dates as $date)
-        {
-            $date = date('Y-m-d', $date);
-            $existTrip = $this->getByDate($date, $this->app->user->account);
-            if($existTrip and $existTrip->id != $oldTrip->id) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, $date)); 
-
-            $existLeave = $this->loadModel('leave')->getByDate($date, $this->app->user->account);
-            if($existLeave) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, $date)); 
-        }
+        $existTrip = $this->checkTrip($trip, $this->app->user->account, $id); 
+        if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
+        
+        $existLeave = $this->loadModel('leave')->checkLeave($trip, $this->app->user->account);
+        if(!empty($existLeave)) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, implode(', ', $existLeave))); 
+        
+        $existOvertime = $this->loadModel('overtime')->checkOvertime($trip, $this->app->user->account);
+        if(!empty($existOvertime)) return array('result' => 'fail', 'message' => sprintf($this->lang->overtime->unique, implode(', ', $existOvertime))); 
 
         $this->dao->update(TABLE_TRIP)
             ->data($trip)
@@ -169,14 +194,6 @@ class tripModel extends model
             ->check('end', 'ge', $trip->begin)
             ->where('id')->eq($id)
             ->exec();
-
-        if(!dao::isError())
-        {
-            $oldDates = range(strtotime($oldTrip->begin), strtotime($oldTrip->end), 60*60*24);
-            $this->loadModel('attend')->batchUpdate($oldDates, $oldTrip->createdBy, '');
-
-            $this->loadModel('attend')->batchUpdate($dates, $oldTrip->createdBy, 'trip', '', $trip);
-        }
 
         return !dao::isError();
     }

@@ -202,6 +202,154 @@ class attendModel extends model
     }
 
     /**
+     * Get detail attends. 
+     * 
+     * @param  string $date 
+     * @param  string $account 
+     * @param  int    $deptID 
+     * @access public
+     * @return array 
+     */
+    public function getDetailAttends($date = '', $account = '', $deptID = 0)
+    {
+        $currentYear  = substr($date, 0, 4);
+        $currentMonth = substr($date, 4, 2);
+        $startDate    = "{$currentYear}-{$currentMonth}-01";
+        $endDate      = date('Y-m-d', strtotime("$startDate +1 month -1 days"));
+        $dayNum       = date('t', strtotime("{$currentYear}-{$currentMonth}"));
+        if($currentYear . $currentMonth == date('Ym') && $dayNum > date('d')) $dayNum = date('d');
+
+        $deptList = array('') + $this->loadModel('tree')->getPairs(0, 'dept');
+        $userList = $this->loadModel('user')->getList();
+        $users    = array();
+        foreach($userList as $user) $users[$user->account] = $user;
+
+        /* Get attends. */
+        $attendList = array();
+        if($account)
+        {
+            $user    = $users[$account];
+            $attends = $this->getByAccount($account, $startDate, $endDate < helper::today() ? $endDate : helper::today());
+            $attendList[$user->dept][$account] = $attends;
+        }
+        else
+        {
+            if($deptID) 
+            {
+                $attendList = $this->getByDept($deptID, $startDate, $endDate < helper::today() ? $endDate : helper::today());
+            }
+            else
+            {
+                $attendList = $this->getByDept(array_keys($deptList), $startDate, $endDate < helper::today() ? $endDate : helper::today());
+            }
+        }
+
+        $attends = array();
+        foreach($attendList as $dept => $deptAttends)
+        {
+            ksort($deptAttends);
+            foreach($deptAttends as $account => $userAttends)
+            {
+                for($day = 1; $day <= $dayNum; $day++)
+                {
+                    if($day < 10) $day = '0' . $day;
+                    $currentDate = "{$currentYear}-{$currentMonth}-{$day}";
+
+                    $attend = $userAttends[$currentDate];
+                    $attend->dept     = isset($users[$account]) ? $deptList[$users[$account]->dept] : '';
+                    $attend->realname = isset($users[$account]) ? $users[$account]->realname : '';
+                    $attend->dayName  = $this->lang->datepicker->dayNames[(int)date('w', strtotime($currentDate))];
+
+                    $status = $this->lang->attend->statusList[$attend->status];
+                    if(strpos('leave,trip,overtime', $attend->status) !== false and $attend->desc)
+                    {
+                        $status .= $attend->desc . $this->lang->attend->h;
+                    }
+                    elseif($attend->status == 'late' && !empty($attend->signIn))
+                    {
+                        $seconds = strtotime($attend->signIn) - strtotime($this->config->attend->signInLimit);
+                        if($seconds >= 3600)
+                        {
+                            $hours   = floor($seconds / 3600);
+                            $status .= $hours . $this->lang->attend->h;
+                            $seconds = $seconds % 3600;
+                        }
+                        if($seconds >= 60)
+                        {
+                            $minutes = floor($seconds / 60);
+                            $seconds = $seconds % 60;
+                            $status .= $minutes . $this->lang->attend->m;
+                        }
+                        if($seconds > 0) $status .= $seconds . $this->lang->attend->s;
+                    }
+                    elseif($attend->status == 'early' && !empty($attend->signOut))
+                    {
+                        $seconds = strtotime($this->config->attend->signOutLimit) - strtotime($attend->signOut);
+                        if($seconds >= 3600)
+                        {
+                            $hours   = floor($seconds / 3600);
+                            $status .= $hours . $this->lang->attend->h;
+                            $seconds = $seconds % 3600;
+                        }
+                        if($seconds >= 60)
+                        {
+                            $minutes = floor($seconds / 60);
+                            $seconds = $seconds % 60;
+                            $status .= $minutes . $this->lang->attend->m;
+                        }
+                        if($seconds > 0) $status .= $seconds . $this->lang->attend->s;
+                    }
+                    elseif($attend->status == 'both')
+                    {
+                        $status = $this->lang->attend->statusList['late'];
+                        if(!empty($attend->signIn))
+                        {
+                            $seconds = strtotime($attend->signIn) - strtotime($this->config->attend->signInLimit);
+                            if($seconds >= 3600)
+                            {
+                                $hours   = floor($seconds / 3600);
+                                $status .= $hours . $this->lang->attend->h;
+                                $seconds = $seconds % 3600;
+                            }
+                            if($seconds >= 60)
+                            {
+                                $minutes = floor($seconds / 60);
+                                $seconds = $seconds % 60;
+                                $status .= $minutes . $this->lang->attend->m;
+                            }
+                            if($seconds > 0) $status .= $seconds . $this->lang->attend->s;
+                        }
+
+                        $status .= ', ' . $this->lang->attend->statusList['early'];
+                        if(!empty($attend->signOut))
+                        {
+                            $seconds = strtotime($this->config->attend->signOutLimit) - strtotime($attend->signOut);
+                            if($seconds >= 3600)
+                            {
+                                $hours   = floor($seconds / 3600);
+                                $status .= $hours . $this->lang->attend->h;
+                                $seconds = $seconds % 3600;
+                            }
+                            if($seconds >= 60)
+                            {
+                                $minutes = floor($seconds / 60);
+                                $seconds = $seconds % 60;
+                                $status .= $minutes . $this->lang->attend->m;
+                            }
+                            if($seconds > 0) $status .= $seconds . $this->lang->attend->s;
+                        }
+                    }
+                    $attend->status = $status;
+
+                    $attends[] = $attend;
+                }
+            }
+        }
+
+        return $attends;
+    }
+
+    /**
      * Get all month data.
      * return array[year][month]
      * 
@@ -687,9 +835,24 @@ EOT;
 
             if(is_object($time))
             {
-                if($time->begin == $date and $time->end == $date) $hours = floor((strtotime("{$date} {$time->finish}") - strtotime("{$date} {$time->start}")) / 3600);
-                if($time->begin == $date and $time->end != $date) $hours = floor((strtotime("{$date} {$this->config->attend->signOutLimit}") - strtotime("{$date} {$time->start}")) / 3600);
-                if($time->begin != $date and $time->end == $date) $hours = floor((strtotime("{$date} {$time->finish}") - strtotime("{$date} {$this->config->attend->signInLimit}")) / 3600);
+                $hours = '';
+                if($time->begin == $date and $time->end == $date) 
+                {
+                    $hours = round((strtotime("{$date} {$time->finish}") - strtotime("{$date} {$time->start}")) / 3600, 2);
+                }
+                elseif($time->begin == $date and $time->end != $date) 
+                {
+                    $hours = round((strtotime("{$date} {$this->config->attend->signOutLimit}") - strtotime("{$date} {$time->start}")) / 3600, 2);
+                }
+                elseif($time->begin != $date and $time->end == $date) 
+                {
+                    $hours = round((strtotime("{$date} {$time->finish}") - strtotime("{$date} {$this->config->attend->signInLimit}")) / 3600, 2);
+                }
+                else
+                {
+                    $hours = round((strtotime("{$date} {$this->config->attend->signOutLimit}") - strtotime("{$date} {$this->config->attend->signInLimit}")) / 3600, 2);
+                }
+                if($status == 'leave' && !empty($this->config->attend->workingHours) && $hours > $this->config->attend->workingHours) $hours = $this->config->attend->workingHours;
 
                 $attend->desc = $hours;
             }
@@ -703,6 +866,7 @@ EOT;
             }
             else
             {
+                if(strpos('leave, overtime', $status) !== false && !empty($oldAttend->desc)) $attend->desc += (float)$oldAttend->desc;
                 $attend->status = $this->computeStatus($oldAttend);
                 $this->dao->update(TABLE_ATTEND)->data($attend)->autoCheck()->where('date')->eq($date)->andWhere('account')->eq($account)->exec();
             }
