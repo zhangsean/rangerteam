@@ -759,7 +759,7 @@ class contractModel extends model
 
         if($contract->return != 'done' and $contract->status == 'normal' and $canReceive)
         {
-            $menu .= commonModel::printLink('crm.contract', 'receive',  "contract=$contract->id", $this->lang->contract->return, "data-toggle='modal' class='$class'", false);
+            $menu .= commonModel::printLink('crm.contract', 'receive',  "contractID=$contract->id", $this->lang->contract->return, "data-toggle='modal' class='$class'", false);
         }
         else
         {
@@ -768,7 +768,7 @@ class contractModel extends model
 
         if($contract->delivery != 'done' and $contract->status == 'normal' and $canDelivery)
         {
-            $menu .= commonModel::printLink('crm.contract', 'delivery', "contract=$contract->id", $this->lang->contract->delivery, "data-toggle='modal' class='$class'", false);
+            $menu .= commonModel::printLink('crm.contract', 'delivery', "contractID=$contract->id", $this->lang->contract->delivery, "data-toggle='modal' class='$class'", false);
         }
         else
         {
@@ -779,21 +779,21 @@ class contractModel extends model
 
         if($contract->status == 'normal' and $contract->return == 'done' and $contract->delivery == 'done' and $canFinish)
         {
-            $menu .= commonModel::printLink('crm.contract', 'finish', "contract=$contract->id", $this->lang->finish, "data-toggle='modal' class='$class'", false);
+            $menu .= commonModel::printLink('crm.contract', 'finish', "contractID=$contract->id", $this->lang->finish, "data-toggle='modal' class='$class'", false);
         }
         else
         {
             $menu .= "<a href='###' disabled='disabled' class='disabled $class'>" . $this->lang->finish . '</a> ';
         }
 
-        if($canEdit) $menu .= commonModel::printLink('crm.contract', 'edit', "contract=$contract->id", $this->lang->edit, "class='$class'", false);
+        if($canEdit) $menu .= commonModel::printLink('crm.contract', 'edit', "contractID=$contract->id", $this->lang->edit, "class='$class'", false);
 
         if($type == 'view')
         {
             $menu .= "</div><div class='btn-group'>";
             if($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done') and $canCancel)
             {
-                $menu .= commonModel::printLink('crm.contract', 'cancel', "contract=$contract->id", $this->lang->cancel, "data-toggle='modal' class='$class'", false);
+                $menu .= commonModel::printLink('crm.contract', 'cancel', "contractID=$contract->id", $this->lang->cancel, "data-toggle='modal' class='$class'", false);
             }
             else
             {
@@ -802,7 +802,7 @@ class contractModel extends model
 
             if($contract->status == 'canceled' or ($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done')) and $canDelete)
             {
-                $menu .= commonModel::printLink('crm.contract', 'delete', "contract=$contract->id", $this->lang->delete, "class='deleter $class'", false);
+                $menu .= commonModel::printLink('crm.contract', 'delete', "contractID=$contract->id", $this->lang->delete, "class='deleter $class'", false);
             }
             else
             {
@@ -817,7 +817,7 @@ class contractModel extends model
 
             if($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done') and $canCancel)
             {
-                $menu .= commonModel::printLink('crm.contract', 'cancel', "contract=$contract->id", $this->lang->cancel, "data-toggle='modal' class='$class'", false, '', 'li');
+                $menu .= commonModel::printLink('crm.contract', 'cancel', "contractID=$contract->id", $this->lang->cancel, "data-toggle='modal' class='$class'", false, '', 'li');
             }
             else
             {
@@ -826,7 +826,7 @@ class contractModel extends model
 
             if($contract->status == 'canceled' or ($contract->status == 'normal' and !($contract->return == 'done' and $contract->delivery == 'done')) and $canDelete)
             {
-                $menu .= commonModel::printLink('crm.contract', 'delete', "contract=$contract->id", $this->lang->delete, "class='reloadDeleter $class'", false, '', 'li');
+                $menu .= commonModel::printLink('crm.contract', 'delete', "contractID=$contract->id", $this->lang->delete, "class='reloadDeleter $class'", false, '', 'li');
             }
             else
             {
