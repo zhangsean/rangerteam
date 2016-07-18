@@ -92,7 +92,7 @@ class attendModel extends model
         $attends = $this->dao->select('*')->from(TABLE_ATTENDSTAT)->where('month')->eq($date)->fetchAll('account');
         foreach($attends as $account => $attendList)
         {
-            if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $account . ',') !== false and empty($attendList)) unset($attends[$account]);
+            if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $account . ',') !== false) unset($attends[$account]);
         }
 
         return $attends;
@@ -124,7 +124,7 @@ class attendModel extends model
 
         foreach($attends as $account => $attendList)
         {
-            if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $account . ',') !== false and empty($attendList)) unset($attends[$account]);
+            if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $account . ',') !== false) unset($attends[$account]);
         }
 
         return $attends;
@@ -171,7 +171,7 @@ class attendModel extends model
         {
             foreach($newAttends[$dept] as $user => $userAttends)
             {
-                if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $user . ',') !== false and empty($newAttends[$dept][$user]))
+                if(strpos(',' . $this->config->attend->noAttendUsers . ',', ',' . $user . ',') !== false)
                 {
                     unset($newAttends[$dept][$user]);
                     continue;
