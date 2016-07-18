@@ -285,8 +285,8 @@ class trade extends control
         $this->view->users         = $this->loadModel('user')->getPairs('nodeleted');
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
        
-        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0);
-        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0);
+        if($trade->type == 'out') $this->view->categories = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0);
+        if($trade->type == 'in')  $this->view->categories = $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0);
 
         $this->display();
     }
