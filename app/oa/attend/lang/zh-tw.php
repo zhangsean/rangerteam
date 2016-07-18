@@ -18,6 +18,8 @@ $lang->attend->export       = '導出';
 $lang->attend->stat         = '統計';
 $lang->attend->saveStat     = '保存考勤統計';
 $lang->attend->exportStat   = '導出考勤統計表';
+$lang->attend->detail       = '瀏覽考勤明細';
+$lang->attend->exportDetail = '導出考勤明細';
 $lang->attend->browseReview = '補錄列表';
 
 $lang->attend->id            = '編號';
@@ -34,7 +36,7 @@ $lang->attend->report        = '考勤表';
 $lang->attend->AM            = '上午';
 $lang->attend->PM            = '下午';
 $lang->attend->ipList        = 'IP列表';
-$lang->attend->noAttendUsers = '無需考勤';
+$lang->attend->noAttendUsers = '無需考勤者';
 
 $lang->attend->user          = '用戶';
 $lang->attend->begin         = '開始';
@@ -121,8 +123,9 @@ $lang->attend->settings   = '考勤設置';
 $lang->attend->setManager = '部門經理設置';
 
 $lang->attend->note = new stdClass();
-$lang->attend->note->ip    = "允許簽到的ip，多個ip用逗號隔開。支持IP段，如192.168.1.*";
-$lang->attend->note->allip = '無限制';
+$lang->attend->note->ip       = "允許簽到的ip，多個ip用逗號隔開。支持IP段，如192.168.1.*";
+$lang->attend->note->allip    = '無限制';
+$lang->attend->note->IPDenied = '簽到IP受限，無法簽到';
 
 $lang->attend->h = '小時';
 $lang->attend->m = '分';

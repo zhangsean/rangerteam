@@ -99,6 +99,8 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('3.2.1'));
             case '3_3':
                 $this->execSQL($this->getUpgradeFile('3.3'));
+            case '3_4':
+                $this->execSQL($this->getUpgradeFile('3.4'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -136,6 +138,7 @@ class upgradeModel extends model
             case '3_2'     : $confirmContent .= file_get_contents($this->getUpgradeFile('3.2'));
             case '3_2_1'   : $confirmContent .= file_get_contents($this->getUpgradeFile('3.2.1'));
             case '3_3'     : $confirmContent .= file_get_contents($this->getUpgradeFile('3.3'));
+            case '3_4'     : $confirmContent .= file_get_contents($this->getUpgradeFile('3.4'));
         }
         return $confirmContent;
     }
