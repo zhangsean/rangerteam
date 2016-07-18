@@ -156,13 +156,12 @@ function initKindeditor(afterInit)
                             var html = K(doc.body).html();
                             if(html.search(/<img src="data:.+;base64,/) > -1)
                             {
-                                K(doc.body).html(html.replace(/<img src="data:.+;base64,.*".*\/>/, ''));
                                 $.post(createLink('file', 'ajaxPasteImage', "uid=" + v.uid), {editor: html}, function(data)
                                 {
                                     if(data) return K(doc.body).html(data);
 
                                     alert(v.errorUnwritable);
-                                    return K(doc.body).html(html);
+                                    return K(doc.body).html(data);
                                 });
                             }
                         }, 80);
