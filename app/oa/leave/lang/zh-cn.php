@@ -8,6 +8,7 @@ $lang->leave->delete = '删除';
 $lang->leave->review = '审核';
 $lang->leave->cancel = '撤销';
 $lang->leave->commit = '提交';
+$lang->leave->export = '导出请假记录';
 
 $lang->leave->personal     = '我的请假';
 $lang->leave->browseReview = '审核列表';

@@ -9,6 +9,7 @@ $lang->overtime->delete = '删除';
 $lang->overtime->review = '审核';
 $lang->overtime->cancel = '撤销';
 $lang->overtime->commit = '提交';
+$lang->overtime->export = '导出加班记录';
 
 $lang->overtime->personal     = '我的加班';
 $lang->overtime->browseReview = '审核列表';

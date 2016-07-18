@@ -9,6 +9,7 @@ $lang->overtime->delete = 'Delete';
 $lang->overtime->review = 'Review';
 $lang->overtime->cancel = 'Cancel';
 $lang->overtime->commit = 'Commit';
+$lang->overtime->export = 'Export';
 
 $lang->overtime->personal     = 'My Overtime';
 $lang->overtime->browseReview = 'Review List';

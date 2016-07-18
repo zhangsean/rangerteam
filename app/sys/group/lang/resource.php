@@ -276,20 +276,21 @@ $lang->sales->methodOrder[20] = 'delete';
 
 /* Product plan. */
 $lang->resource->trade = new stdclass();
-$lang->resource->trade->browse      = 'browse';
-$lang->resource->trade->view        = 'view';
-$lang->resource->trade->create      = 'create';
-$lang->resource->trade->batchCreate = 'batchCreate';
-$lang->resource->trade->batchEdit   = 'batchEdit';
-$lang->resource->trade->edit        = 'edit';
-$lang->resource->trade->transfer    = 'transfer';
-$lang->resource->trade->invest      = 'invest';
-$lang->resource->trade->detail      = 'detail';
-$lang->resource->trade->delete      = 'delete';
-$lang->resource->trade->import      = 'import';
-$lang->resource->trade->showImport  = 'showImport';
-$lang->resource->trade->export      = 'export';
-$lang->resource->trade->report      = 'report';
+$lang->resource->trade->browse       = 'browse';
+$lang->resource->trade->view         = 'view';
+$lang->resource->trade->create       = 'create';
+$lang->resource->trade->batchCreate  = 'batchCreate';
+$lang->resource->trade->batchEdit    = 'batchEdit';
+$lang->resource->trade->edit         = 'edit';
+$lang->resource->trade->transfer     = 'transfer';
+$lang->resource->trade->invest       = 'invest';
+$lang->resource->trade->detail       = 'detail';
+$lang->resource->trade->delete       = 'delete';
+$lang->resource->trade->import       = 'import';
+$lang->resource->trade->showImport   = 'showImport';
+$lang->resource->trade->export       = 'export';
+$lang->resource->trade->report       = 'report';
+$lang->resource->trade->export2Excel = 'export2Excel';
 
 $lang->trade->methodOrder[10] = 'browse';
 $lang->trade->methodOrder[11] = 'view';
@@ -305,6 +306,7 @@ $lang->trade->methodOrder[45] = 'import';
 $lang->trade->methodOrder[50] = 'showImport';
 $lang->trade->methodOrder[55] = 'export';
 $lang->trade->methodOrder[60] = 'report';
+$lang->trade->methodOrder[65] = 'export2Excel';
 
 /* Depositor. */
 $lang->resource->depositor = new stdclass();
@@ -428,6 +430,8 @@ $lang->resource->attend->setManager   = 'setManager';
 $lang->resource->attend->stat         = 'stat';
 $lang->resource->attend->saveStat     = 'saveStat';
 $lang->resource->attend->exportStat   = 'exportStat';
+$lang->resource->attend->detail       = 'detail';
+$lang->resource->attend->exportDetail = 'exportDetail';
 
 $lang->attend->methodOrder[5]  = 'department';
 $lang->attend->methodOrder[10] = 'company';
@@ -439,6 +443,8 @@ $lang->attend->methodOrder[40] = 'setManager';
 $lang->attend->methodOrder[45] = 'stat';
 $lang->attend->methodOrder[50] = 'saveStat';
 $lang->attend->methodOrder[55] = 'exportStat';
+$lang->attend->methodOrder[60] = 'detail';
+$lang->attend->methodOrder[65] = 'exportDetail';
 
 /* Holiday */
 $lang->resource->holiday = new stdclass();
@@ -455,20 +461,24 @@ $lang->resource->leave = new stdclass();
 $lang->resource->leave->browseReview = 'browseReview';
 $lang->resource->leave->company      = 'company';
 $lang->resource->leave->review       = 'review';
+$lang->resource->leave->export       = 'export';
 
 $lang->leave->methodOrder[0]  = 'browseReview';
 $lang->leave->methodOrder[5]  = 'company';
 $lang->leave->methodOrder[10] = 'review';
+$lang->leave->methodOrder[15] = 'export';
 
 /* Overtime */
 $lang->resource->overtime = new stdclass();
 $lang->resource->overtime->browseReview = 'browseReview';
 $lang->resource->overtime->company      = 'company';
 $lang->resource->overtime->review       = 'review';
+$lang->resource->overtime->export       = 'export';
 
 $lang->overtime->methodOrder[0]  = 'browseReview';
 $lang->overtime->methodOrder[5]  = 'company';
 $lang->overtime->methodOrder[10] = 'review';
+$lang->overtime->methodOrder[15] = 'export';
 
 /* Trip */
 $lang->resource->trip = new stdclass();
@@ -490,6 +500,7 @@ $lang->resource->refund->setReviewer  = 'setReviewer';
 $lang->resource->refund->setCategory  = 'setCategory';
 $lang->resource->refund->setDepositor = 'setDepositor';
 $lang->resource->refund->setRefundBy  = 'setRefundBy';
+$lang->resource->refund->export       = 'export';
 
 $lang->refund->methodOrder[10] = 'company';
 $lang->refund->methodOrder[15] = 'todo';
@@ -500,6 +511,7 @@ $lang->refund->methodOrder[35] = 'setReviewer';
 $lang->refund->methodOrder[40] = 'setCategory';
 $lang->refund->methodOrder[45] = 'setDepositor';
 $lang->refund->methodOrder[50] = 'setRefundBy';
+$lang->refund->methodOrder[55] = 'export';
 
 /* Blog. */
 $lang->resource->blog = new stdclass();

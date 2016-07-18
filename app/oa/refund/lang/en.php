@@ -20,6 +20,7 @@ $lang->refund->setReviewer  = 'Set Reviewer';
 $lang->refund->setCategory  = 'Set Category';
 $lang->refund->setDepositor = 'Set Depositor';
 $lang->refund->setRefundBy  = 'Set RefundBy';
+$lang->refund->export       = 'Export';
 
 $lang->refund->id               = 'ID';
 $lang->refund->name             = 'Name';

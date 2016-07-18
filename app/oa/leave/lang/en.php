@@ -8,6 +8,7 @@ $lang->leave->delete = 'Delete';
 $lang->leave->review = 'Review';
 $lang->leave->cancel = 'Cancel';
 $lang->leave->commit = 'Commit';
+$lang->leave->export = 'Export';
 
 $lang->leave->personal     = 'My leave';
 $lang->leave->browseReview = 'Review list';

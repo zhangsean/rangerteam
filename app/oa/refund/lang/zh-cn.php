@@ -20,6 +20,7 @@ $lang->refund->setReviewer  = '审批人设置';
 $lang->refund->setCategory  = '报销科目设置';
 $lang->refund->setDepositor = '报销账户设置';
 $lang->refund->setRefundBy  = '报销者设置';
+$lang->refund->export       = '导出报销记录';
 
 $lang->refund->id               = '编号';
 $lang->refund->name             = '名称';

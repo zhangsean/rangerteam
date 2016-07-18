@@ -18,6 +18,8 @@ $lang->attend->export       = 'Export';
 $lang->attend->stat         = 'Stat';
 $lang->attend->saveStat     = 'Save Stat';
 $lang->attend->exportStat   = 'Export Stat';
+$lang->attend->detail       = 'Detail Attends';
+$lang->attend->exportDetail = 'Export Detail Attends';
 $lang->attend->browseReview = 'Review List';
 
 $lang->attend->id            = 'ID';
