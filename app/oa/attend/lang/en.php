@@ -123,8 +123,9 @@ $lang->attend->settings   = 'Normal Settings';
 $lang->attend->setManager = 'Depatment Manager Settings';
 
 $lang->attend->note = new stdClass();
-$lang->attend->note->ip    = "Use comma between two IPs, and support IP segment, for example 192.168.1.*";
-$lang->attend->note->allip = 'All IP';
+$lang->attend->note->ip       = "Use comma between two IPs, and support IP segment, for example 192.168.1.*";
+$lang->attend->note->allip    = 'All IP';
+$lang->attend->note->IPDenied = 'IP denied.';
 
 $lang->attend->h = 'hours';
 $lang->attend->m = 'minutes';
