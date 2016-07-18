@@ -34,7 +34,7 @@ $lang->attend->report        = '考勤表';
 $lang->attend->AM            = '上午';
 $lang->attend->PM            = '下午';
 $lang->attend->ipList        = 'IP列表';
-$lang->attend->noAttendUsers = '无需考勤';
+$lang->attend->noAttendUsers = '无需考勤者';
 
 $lang->attend->user          = '用户';
 $lang->attend->begin         = '开始';

@@ -34,7 +34,7 @@ $lang->attend->report        = 'Report';
 $lang->attend->AM            = 'AM';
 $lang->attend->PM            = 'PM';
 $lang->attend->ipList        = 'IP List';
-$lang->attend->noAttendUsers = 'Without Attendance';
+$lang->attend->noAttendUsers = 'Users Without Attendance';
 
 $lang->attend->user          = 'User';
 $lang->attend->begin         = 'Begin';
