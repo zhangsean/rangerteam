@@ -504,7 +504,6 @@ class attend extends control
             $stat = array();
             foreach($attends as $account => $accountAttends)
             {
-                if($account != 'wwccss') continue;
                 $stat[$account] = new stdclass(); 
                 $stat[$account]->deserve  = $workingDays;
                 $stat[$account]->normal   = 0;

@@ -260,10 +260,10 @@ class attendModel extends model
                     $attend->realname = isset($users[$account]) ? $users[$account]->realname : '';
                     $attend->dayName  = $this->lang->datepicker->dayNames[(int)date('w', strtotime($currentDate))];
 
-                    $status = $this->lang->attend->statusList[$attend->status];
+                    $desc = zget($this->lang->attend->statusList, $attend->status);
                     if(strpos('leave,trip,overtime', $attend->status) !== false and $attend->desc)
                     {
-                        $status .= $attend->desc . $this->lang->attend->h;
+                        $desc .= $attend->desc . $this->lang->attend->h;
                     }
                     elseif($attend->status == 'late' && !empty($attend->signIn))
                     {
@@ -271,16 +271,16 @@ class attendModel extends model
                         if($seconds >= 3600)
                         {
                             $hours   = floor($seconds / 3600);
-                            $status .= $hours . $this->lang->attend->h;
+                            $desc   .= $hours . $this->lang->attend->h;
                             $seconds = $seconds % 3600;
                         }
                         if($seconds >= 60)
                         {
                             $minutes = floor($seconds / 60);
                             $seconds = $seconds % 60;
-                            $status .= $minutes . $this->lang->attend->m;
+                            $desc   .= $minutes . $this->lang->attend->m;
                         }
-                        if($seconds > 0) $status .= $seconds . $this->lang->attend->s;
+                        if($seconds > 0) $desc .= $seconds . $this->lang->attend->s;
                     }
                     elseif($attend->status == 'early' && !empty($attend->signOut))
                     {
@@ -288,58 +288,59 @@ class attendModel extends model
                         if($seconds >= 3600)
                         {
                             $hours   = floor($seconds / 3600);
-                            $status .= $hours . $this->lang->attend->h;
+                            $desc   .= $hours . $this->lang->attend->h;
                             $seconds = $seconds % 3600;
                         }
                         if($seconds >= 60)
                         {
                             $minutes = floor($seconds / 60);
                             $seconds = $seconds % 60;
-                            $status .= $minutes . $this->lang->attend->m;
+                            $desc   .= $minutes . $this->lang->attend->m;
                         }
-                        if($seconds > 0) $status .= $seconds . $this->lang->attend->s;
+                        if($seconds > 0) $desdc .= $seconds . $this->lang->attend->s;
                     }
                     elseif($attend->status == 'both')
                     {
-                        $status = $this->lang->attend->statusList['late'];
+                        $desc = $this->lang->attend->statusList['late'];
                         if(!empty($attend->signIn))
                         {
                             $seconds = strtotime($attend->signIn) - strtotime($this->config->attend->signInLimit);
                             if($seconds >= 3600)
                             {
                                 $hours   = floor($seconds / 3600);
-                                $status .= $hours . $this->lang->attend->h;
+                                $desc   .= $hours . $this->lang->attend->h;
                                 $seconds = $seconds % 3600;
                             }
                             if($seconds >= 60)
                             {
                                 $minutes = floor($seconds / 60);
                                 $seconds = $seconds % 60;
-                                $status .= $minutes . $this->lang->attend->m;
+                                $desc   .= $minutes . $this->lang->attend->m;
                             }
-                            if($seconds > 0) $status .= $seconds . $this->lang->attend->s;
+                            if($seconds > 0) $desc .= $seconds . $this->lang->attend->s;
                         }
 
-                        $status .= ', ' . $this->lang->attend->statusList['early'];
+                        $desc .= ', ' . $this->lang->attend->statusList['early'];
                         if(!empty($attend->signOut))
                         {
                             $seconds = strtotime($this->config->attend->signOutLimit) - strtotime($attend->signOut);
                             if($seconds >= 3600)
                             {
                                 $hours   = floor($seconds / 3600);
-                                $status .= $hours . $this->lang->attend->h;
+                                $desc   .= $hours . $this->lang->attend->h;
                                 $seconds = $seconds % 3600;
                             }
                             if($seconds >= 60)
                             {
                                 $minutes = floor($seconds / 60);
                                 $seconds = $seconds % 60;
-                                $status .= $minutes . $this->lang->attend->m;
+                                $desc   .= $minutes . $this->lang->attend->m;
                             }
-                            if($seconds > 0) $status .= $seconds . $this->lang->attend->s;
+                            if($seconds > 0) $desc .= $seconds . $this->lang->attend->s;
                         }
                     }
-                    $attend->status = $status;
+                    $attend->status = zget($this->lang->attend->statusList, $attend->status);
+                    $attend->desc   = $desc == $attend->status ? '' : $desc;
 
                     $attends[] = $attend;
                 }

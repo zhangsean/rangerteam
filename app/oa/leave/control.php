@@ -361,17 +361,25 @@ class leave extends control
     { 
         if($_POST)
         {
-            $leaveLang   = $this->lang->leave;
-            $leaveConfig = $this->config->leave;
+            $deptList  = $this->loadModel('tree')->getPairs('', 'dept');
+            $users     = $this->loadModel('user')->getList();
+            $userPairs = array();
+            $userDepts = array();
+            foreach($users as $key => $user) 
+            {
+                $userPairs[$user->account] = $user->realname;
+                $userDepts[$user->account] = zget($deptList, $user->dept);
+            }
 
             /* Create field lists. */
-            $fields = explode(',', $leaveConfig->list->exportFields);
+            $fields = explode(',', $this->config->leave->list->exportFields);
             foreach($fields as $key => $fieldName)
             {
                 $fieldName = trim($fieldName);
-                $fields[$fieldName] = isset($leaveLang->$fieldName) ? $leaveLang->$fieldName : $fieldName;
+                $fields[$fieldName] = isset($this->lang->leave->$fieldName) ? $this->lang->leave->$fieldName : $fieldName;
                 unset($fields[$key]);
             }
+            $fields['dept'] = $this->lang->user->dept;
 
             $leaves = array();
             if($mode == 'all')
@@ -387,23 +395,18 @@ class leave extends control
                 while($row = $stmt->fetch()) $leaves[$row->id] = $row;
             }
 
-            $users = $this->loadModel('user')->getPairs();
-
             foreach($leaves as $leave)
             {
-                $leave->desc = htmlspecialchars_decode($leave->desc);
-                $leave->desc = str_replace("<br />", "\n", $leave->desc);
-                $leave->desc = str_replace('"', '""', $leave->desc);
-
-                /* fill some field with useful value. */
-                if(isset($leaveLang->statusList[$leave->status])) $leave->status = $leaveLang->statusList[$leave->status];
-                if(isset($leaveLang->typeList[$leave->type]))     $leave->type   = $leaveLang->typeList[$leave->type];
-
-                if(isset($users[$leave->createdBy]))   $leave->createdBy  = $users[$leave->createdBy];
-                if(isset($users[$leave->reviewedBy]))  $leave->reviewedBy = $users[$leave->reviewedBy];
-
-                $leave->createdDate  = substr($leave->createdDate, 0, 10);
-                $leave->reviewedDate = substr($leave->reviewedDate, 0, 10);
+                $leave->createdBy  = zget($userPairs, $leave->createdBy);
+                $leave->dept       = zget($userDepts, $leave->createdBy);
+                $leave->type       = zget($this->lang->leave->typeList, $leave->type);
+                $leave->begin      = $leave->begin . ' ' . $leave->start;
+                $leave->end        = $leave->end   . ' ' . $leave->finish;
+                $leave->desc       = htmlspecialchars_decode($leave->desc);
+                $leave->desc       = str_replace("<br />", "\n", $leave->desc);
+                $leave->desc       = str_replace('"', '""', $leave->desc);
+                $leave->status     = zget($this->lang->leave->statusList, $leave->status);
+                $leave->reviewedBy = zget($userPairs, $leave->reviewedBy);
             }
 
             $this->post->set('fields', $fields);

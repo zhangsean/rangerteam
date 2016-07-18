@@ -5,6 +5,4 @@ $config->refund->require->create = 'name,money';
 $config->refund->require->edit   = 'name,money';
 
 $config->refund->list = new stdclass();
-$config->refund->list->exportFields = 'id, name, category, date, money, currency, desc, 
-related, status, createdBy, createdDate, editedBy, editedDate, firstReviewer, 
-firstReviewDate, secondReviewer, secondReviewDate, refundBy, refundDate, reason';
+$config->refund->list->exportFields = 'id, createdBy, createdDate, dept, name, category, money, status, related, reviewer, refundBy, refundDate';

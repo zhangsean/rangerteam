@@ -85,7 +85,7 @@
           <td><?php echo $attend->realname;?></td>
           <td><?php echo $attend->date;?></td>
           <td><?php echo $attend->dayName;?>
-          <td><?php echo $attend->status;?></td>
+          <td><?php echo empty($attend->desc) ? $attend->status : $attend->desc;?></td>
           <td><?php echo $attend->signIn;?></td>
           <td><?php echo $attend->signOut;?></td>
           <td><?php echo $attend->ip;?></td>

@@ -650,17 +650,27 @@ class refund extends control
     { 
         if($_POST)
         {
-            $refundLang   = $this->lang->refund;
-            $refundConfig = $this->config->refund;
+            $categories   = $this->refund->getCategoryPairs();
+            $currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
+            $deptList     = $this->loadModel('tree')->getPairs('', 'dept');
+            $users        = $this->loadModel('user')->getList();
+            $userPairs    = array();
+            $userDepts    = array();
+            foreach($users as $key => $user) 
+            {
+                $userPairs[$user->account] = $user->realname;
+                $userDepts[$user->account] = zget($deptList, $user->dept);
+            }
 
             /* Create field lists. */
-            $fields = explode(',', $refundConfig->list->exportFields);
+            $fields = explode(',', $this->config->refund->list->exportFields);
             foreach($fields as $key => $fieldName)
             {
                 $fieldName = trim($fieldName);
-                $fields[$fieldName] = isset($refundLang->$fieldName) ? $refundLang->$fieldName : $fieldName;
+                $fields[$fieldName] = isset($this->lang->refund->$fieldName) ? $this->lang->refund->$fieldName : $fieldName;
                 unset($fields[$key]);
             }
+            $fields['dept'] = $this->lang->user->dept;
 
             $refunds = array();
             if($mode == 'all')
@@ -676,29 +686,26 @@ class refund extends control
                 while($row = $stmt->fetch()) $refunds[$row->id] = $row;
             }
 
-            $users = $this->loadModel('user')->getPairs();
-
             foreach($refunds as $refund)
             {
-                $refund->desc = htmlspecialchars_decode($refund->desc);
-                $refund->desc = str_replace("<br />", "\n", $refund->desc);
-                $refund->desc = str_replace('"', '""', $refund->desc);
+                $refund->createdBy   = zget($userPairs, $refund->createdBy);
+                $refund->createdDate = substr($refund->createdDate, 0, 10);
+                $refund->dept        = zget($userDepts, $refund->createdBy);
+                $refund->category    = zget($categories, $refund->category);
+                $refund->money       = zget($currencySign, $refund->currency) . $refund->money;
+                $refund->status      = zget($this->lang->refund->statusList, $refund->status);
 
-                /* fill some field with useful value. */
-                if(isset($refundLang->statusList[$refund->status]))     $refund->status   = $refundLang->statusList[$refund->status];
-                if(isset($this->lang->currencyList[$refund->currency])) $refund->currency = $this->lang->currencyList[$refund->currency];
+                $related = array();
+                foreach(explode(',', $refund->related) as $account) 
+                {
+                    if(empty($account)) continue;
+                    $related[] = zget($userPairs, $account);
+                }
 
-                if(isset($users[$refund->createdBy]))      $refund->createdBy      = $users[$refund->createdBy];
-                if(isset($users[$refund->editedBy]))       $refund->editedBy       = $users[$refund->editedBy];
-                if(isset($users[$refund->firstReviewer]))  $refund->firstReviewer  = $users[$refund->firstReviewer];
-                if(isset($users[$refund->secondReviewer])) $refund->secondReviewer = $users[$refund->secondReviewer];
-                if(isset($users[$refund->refundBy]))       $refund->refundBy       = $users[$refund->refundBy];
-
-                $refund->createdDate      = substr($refund->createdDate, 0, 10);
-                $refund->editedDate       = substr($refund->editedDate, 0, 10);
-                $refund->firstReviewDate  = substr($refund->firstReviewDate, 0, 10);
-                $refund->secondReviewDate = substr($refund->secondReviewDate, 0, 10);
-                $refund->refundDate       = substr($refund->refundDate, 0, 10);
+                $refund->related    = implode(',', $related);
+                $refund->reviewer   = zget($userPairs, $refund->firstReviewer) . ' ' . zget($userPairs, $refund->secondReviewer);
+                $refund->refundBy   = zget($userPairs, $refund->refundBy);
+                $refund->refundDate = substr($refund->refundDate, 0, 10);
             }
 
             $this->post->set('fields', $fields);

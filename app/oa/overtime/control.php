@@ -372,17 +372,25 @@ class overtime extends control
     { 
         if($_POST)
         {
-            $overtimeLang   = $this->lang->overtime;
-            $overtimeConfig = $this->config->overtime;
+            $deptList  = $this->loadModel('tree')->getPairs('', 'dept');
+            $users     = $this->loadModel('user')->getList();
+            $userPairs = array();
+            $userDepts = array();
+            foreach($users as $key => $user) 
+            {
+                $userPairs[$user->account] = $user->realname;
+                $userDepts[$user->account] = zget($deptList, $user->dept);
+            }
 
             /* Create field lists. */
-            $fields = explode(',', $overtimeConfig->list->exportFields);
+            $fields = explode(',', $this->config->overtime->list->exportFields);
             foreach($fields as $key => $fieldName)
             {
                 $fieldName = trim($fieldName);
-                $fields[$fieldName] = isset($overtimeLang->$fieldName) ? $overtimeLang->$fieldName : $fieldName;
+                $fields[$fieldName] = isset($this->lang->overtime->$fieldName) ? $this->lang->overtime->$fieldName : $fieldName;
                 unset($fields[$key]);
             }
+            $fields['dept'] = $this->lang->user->dept;
 
             $overtimes = array();
             if($mode == 'all')
@@ -398,23 +406,18 @@ class overtime extends control
                 while($row = $stmt->fetch()) $overtimes[$row->id] = $row;
             }
 
-            $users = $this->loadModel('user')->getPairs();
-
             foreach($overtimes as $overtime)
             {
-                $overtime->desc = htmlspecialchars_decode($overtime->desc);
-                $overtime->desc = str_replace("<br />", "\n", $overtime->desc);
-                $overtime->desc = str_replace('"', '""', $overtime->desc);
-
-                /* fill some field with useful value. */
-                if(isset($overtimeLang->statusList[$overtime->status])) $overtime->status = $overtimeLang->statusList[$overtime->status];
-                if(isset($overtimeLang->typeList[$overtime->type]))     $overtime->type   = $overtimeLang->typeList[$overtime->type];
-
-                if(isset($users[$overtime->createdBy]))   $overtime->createdBy  = $users[$overtime->createdBy];
-                if(isset($users[$overtime->reviewedBy]))  $overtime->reviewedBy = $users[$overtime->reviewedBy];
-
-                $overtime->createdDate  = substr($overtime->createdDate, 0, 10);
-                $overtime->reviewedDate = substr($overtime->reviewedDate, 0, 10);
+                $overtime->createdBy  = zget($userPairs, $overtime->createdBy);
+                $overtime->dept       = zget($userDepts, $overtime->createdBy);
+                $overtime->type       = zget($this->lang->overtime->typeList, $overtime->type);
+                $overtime->begin      = $overtime->begin . ' ' . $overtime->start;
+                $overtime->end        = $overtime->end   . ' ' . $overtime->finish;
+                $overtime->desc       = htmlspecialchars_decode($overtime->desc);
+                $overtime->desc       = str_replace("<br />", "\n", $overtime->desc);
+                $overtime->desc       = str_replace('"', '""', $overtime->desc);
+                $overtime->status     = zget($this->lang->overtime->statusList, $overtime->status);
+                $overtime->reviewedBy = zget($userPairs, $overtime->reviewedBy);
             }
 
             $this->post->set('fields', $fields);
