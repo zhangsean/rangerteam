@@ -506,8 +506,10 @@ class attend extends control
             $stat = array();
             foreach($attends as $account => $accountAttends)
             {
+                if($account != 'admin') continue;
                 $stat[$account] = new stdclass(); 
                 $stat[$account]->deserve  = $workingDays;
+                $stat[$account]->actual   = 0;
                 $stat[$account]->normal   = 0;
                 $stat[$account]->abnormal = 0;
                 $stat[$account]->late     = 0;
@@ -524,6 +526,7 @@ class attend extends control
                 $notAttendDays = array();
                 foreach($accountAttends as $attend)
                 {
+                    $stat[$account]->actual++;
                     if($attend->status == 'rest')   $notAttendDays[$attend->date] = $attend->date;
                     if($attend->status == 'normal') $stat[$account]->normal ++;
                     if($attend->status == 'late' or $attend->status == 'both')
@@ -539,7 +542,6 @@ class attend extends control
 
                     if($attend->status == 'trip')
                     {
-                        $normalDay = 1;
                         $leftHours = $workingHours;
                         foreach($trips as $trip)
                         {
@@ -564,18 +566,15 @@ class attend extends control
                                 if($hours > $leftHours) $hours = $leftHours;
 
                                 $tripDay   = round($hours / $workingHours, 2);
-                                $normalDay = round($normalDay - $tripDay, 2);
                                 $leftHours = round($leftHours - $hours, 2);
 
                                 $stat[$account]->trip += $tripDay;
                             }
                         }
-                        $stat[$account]->normal += $normalDay;
                     }
 
                     if($attend->status == 'leave')
                     {
-                        $normalDay = 1;
                         $leftHours = $workingHours;     
                         foreach($leaves as $leave)
                         {
@@ -588,7 +587,6 @@ class attend extends control
                                 if($hours > $leftHours)    $hours = $leftHours;
 
                                 $leaveDay  = round($hours / $workingHours, 2);
-                                $normalDay = round($normalDay - $leaveDay, 2);
                                 $leftHours = round($leftHours - $hours, 2);
 
                                 if(strpos('affairs,sick', $leave->type) !== false)
@@ -601,11 +599,11 @@ class attend extends control
                                 }
                             }
                         }
-                        $stat[$account]->normal += $normalDay;
                     }
 
                     if($attend->status == 'overtime')
                     {
+                        $normalDay = 0;
                         $leftHours = 24;
                         foreach($overtimes as $overtime)
                         {
@@ -623,7 +621,6 @@ class attend extends control
                                 if($overtime->type == 'time')    
                                 {
                                     $stat[$account]->timeOvertime += $overtimeDay;
-                                    $stat[$account]->normal++;
                                 }
                                 if($overtime->type == 'rest')    
                                 {
@@ -635,13 +632,14 @@ class attend extends control
                                     $stat[$account]->holidayOvertime += $overtimeDay;
                                     $notAttendDays[$attend->date]     = $attend->date;
                                 }
-                                if($overtime->type == 'lieu') $stat[$account]->normal += $overtimeDay;
+                                if($overtime->type == 'lieu') $normalDay += $overtimeDay;
                             }
                         }
+                        if($normalDay > 1) $normal = 1;
+                        $stat[$account]->normal += $normalDay;
                     }
                 }
 
-                $stat[$account]->actual = $stat[$account]->normal + $stat[$account]->restOvertime + $stat[$account]->holidayOvertime + $stat[$account]->timeOvertime + $stat[$account]->trip + $stat[$account]->abnormal;
                 $stat[$account]->absent = $workingDays - (count($accountAttends) - count($notAttendDays)) > 0 ? $workingDays - (count($accountAttends) - count($notAttendDays)) : 0;
             }
         }

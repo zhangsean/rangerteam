@@ -169,6 +169,10 @@ class leaveModel extends model
             ->autoCheck()
             ->batchCheck($this->config->leave->require->create, 'notempty')
             ->check('end', 'ge', $leave->begin)
+            ->check('start', 'ge', $this->config->attend->signInLimit)
+            ->check('start', 'le', $this->config->attend->signOutLimit)
+            ->check('finish', 'ge', $this->config->attend->signInLimit)
+            ->check('finish', 'le', $this->config->attend->signOutLimit)
             ->exec();
 
         return $this->dao->lastInsertID();
@@ -211,6 +215,10 @@ class leaveModel extends model
             ->autoCheck()
             ->batchCheck($this->config->leave->require->edit, 'notempty')
             ->check('end', 'ge', $leave->begin)
+            ->check('start', 'ge', $this->config->attend->signInLimit)
+            ->check('start', 'le', $this->config->attend->signOutLimit)
+            ->check('finish', 'ge', $this->config->attend->signInLimit)
+            ->check('finish', 'le', $this->config->attend->signOutLimit)
             ->where('id')->eq($id)
             ->exec();
 

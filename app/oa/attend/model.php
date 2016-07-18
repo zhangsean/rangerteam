@@ -844,17 +844,35 @@ EOT;
                 }
                 elseif($time->begin == $date and $time->end != $date) 
                 {
-                    $hours = round((strtotime("{$date} {$this->config->attend->signOutLimit}") - strtotime("{$date} {$time->start}")) / 3600, 2);
+                    if($status == 'leave' || ($status == 'overtime' && $time->start < $this->config->attend->signOutLimit))    
+                    {
+                        $hours = round((strtotime("{$date} {$this->config->attend->signOutLimit}") - strtotime("{$date} {$time->start}")) / 3600, 2);
+                    }
+                    elseif($status == 'overtime') 
+                    {
+                        $hours = round((strtotime("{$date} +1 days") - strtotime("{$date} {$time->start}")) / 3600, 2);
+                    }
                 }
                 elseif($time->begin != $date and $time->end == $date) 
                 {
-                    $hours = round((strtotime("{$date} {$time->finish}") - strtotime("{$date} {$this->config->attend->signInLimit}")) / 3600, 2);
+                    if($status == 'leave' || ($status == 'overtime' && $time->finish > $this->config->attend->signInLimit))    
+                    {
+                        $hours = round((strtotime("{$date} {$time->finish}") - strtotime("{$date} {$this->config->attend->signInLimit}")) / 3600, 2);
+                    }
+                    elseif($status == 'overtime') 
+                    {
+                        $hours = round((strtotime("{$date} {$time->finish}") - strtotime("{$date}")) / 3600, 2);
+                    }
                 }
                 else
                 {
-                    $hours = round((strtotime("{$date} {$this->config->attend->signOutLimit}") - strtotime("{$date} {$this->config->attend->signInLimit}")) / 3600, 2);
+                    if($status == 'leave')    $hours = $this->config->attend->workingHours;
+                    if($status == 'overtime') $hours = $this->config->attend->signOutLimit - $this->config->attend->signInLimit;
                 }
-                if($status == 'leave' && !empty($this->config->attend->workingHours) && $hours > $this->config->attend->workingHours) $hours = $this->config->attend->workingHours;
+                if($hours > $this->config->attend->workingHours && ($status == 'leave' || ($status == 'overtime' && $time->type == 'lieu'))) 
+                {
+                    $hours = $this->config->attend->workingHours;
+                }
 
                 $attend->desc = $hours;
             }
