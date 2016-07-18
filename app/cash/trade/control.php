@@ -247,7 +247,7 @@ class trade extends control
     {
         $trade = $this->trade->getByID($tradeID);
         if(empty($trade)) die();
-        if($trade->type == 'out') $this->loadModel('tree')->checkRight($trade->category);
+        if($trade->type == 'out' and $trade->category != 'loss' and $trade->category != 'fee') $this->loadModel('tree')->checkRight($trade->category);
 
         if($_POST)
         {
