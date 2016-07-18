@@ -246,6 +246,8 @@ class attend extends control
     public function signIn()
     {
         $result = $this->attend->signIn();
+        if(is_array($result)) $this->send($result);
+
         if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->attend->inFail));
         $this->send(array('result' => 'success', 'message' => $this->lang->attend->inSuccess));
     }

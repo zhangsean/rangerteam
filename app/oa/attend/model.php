@@ -425,7 +425,8 @@ EOT;
      */
     public function signIn($account = '', $date = '')
     {
-        if(!$this->checkIP()) return false;
+        if(!$this->checkIP()) return array('result' => 'fail', 'message' => $this->lang->attend->note->IPDenied);
+
         if($account == '') $account = $this->app->user->account;
         if($date == '')    $date    = date('Y-m-d');
 

@@ -121,8 +121,9 @@ $lang->attend->settings   = '考勤设置';
 $lang->attend->setManager = '部门经理设置';
 
 $lang->attend->note = new stdClass();
-$lang->attend->note->ip    = "允许签到的ip，多个ip用逗号隔开。支持IP段，如192.168.1.*";
-$lang->attend->note->allip = '无限制';
+$lang->attend->note->ip       = "允许签到的ip，多个ip用逗号隔开。支持IP段，如192.168.1.*";
+$lang->attend->note->allip    = '无限制';
+$lang->attend->note->IPDenied = '签到IP受限，无法签到';
 
 $lang->attend->h = '小时';
 $lang->attend->m = '分';
