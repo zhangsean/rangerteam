@@ -80,7 +80,6 @@ $lang->in->parent   = 'Parent';
 $lang->in->desc     = 'Description';
 $lang->in->keywords = 'Keyword';
 $lang->in->children = "Children";
-$lang->in->major    = 'Major Income';
 $lang->in->merge    = 'Merge Category';
 
 /* Lang items for expend. */
@@ -94,7 +93,6 @@ $lang->out->keywords = 'Keyword';
 $lang->out->children = "Children";
 $lang->out->rights   = 'Rights';
 $lang->out->refund   = 'Reimbursement';
-$lang->out->major    = 'Major Expense';
 $lang->out->merge    = 'Merge Category';
 
 $lang->out->refundList[1] = 'Yes';

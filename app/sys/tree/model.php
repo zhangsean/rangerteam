@@ -560,7 +560,6 @@ class treeModel extends model
             ->join('rights', ',')
             ->join('users', ',')
             ->setDefault('readonly', 0)
-            ->setDefault('major', 0)
             ->get();
 
         $category->rights = !empty($category->rights) ? ',' . trim($category->rights, ',') . ',' : '';
@@ -588,9 +587,6 @@ class treeModel extends model
             ->exec();
 
         $this->fixPath($category->type);
-
-        $newCategory = $this->getByID($categoryID);
-        if(!$oldCategory->major and $newCategory->major) $this->dao->update(TABLE_CATEGORY)->set('major')->eq('1')->where('path')->like($newCategory->path . '%')->exec();
 
         return !dao::isError();
     }

@@ -80,7 +80,6 @@ $lang->in->parent   = '上級科目';
 $lang->in->desc     = '描述';
 $lang->in->keywords = '關鍵詞';
 $lang->in->children = '子科目';
-$lang->in->major    = '主營業務收入';
 $lang->in->merge    = '科目合併';
 
 /* Lang items for expend. */
@@ -94,7 +93,6 @@ $lang->out->keywords = '關鍵詞';
 $lang->out->children = '子科目';
 $lang->out->rights   = '權限';
 $lang->out->refund   = '報銷科目';
-$lang->out->major    = '主營業務成本';
 $lang->out->merge    = '合併科目';
 
 $lang->out->refundList[1] = '是';
