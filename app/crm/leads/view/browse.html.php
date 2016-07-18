@@ -45,7 +45,7 @@
         <th class='w-160px'><?php commonModel::printOrderLink('email', $orderBy, $vars, $lang->contact->email);?></th>
         <th class='w-80px visible-lg'><?php commonModel::printOrderLink('qq', $orderBy, $vars, $lang->contact->qq);?></th>
         <th class='w-100px'><?php commonModel::printOrderLink('origin', $orderBy, $vars, $lang->contact->origin);?></th>
-        <th class='w-200px'><?php echo $lang->actions;?></th>
+        <th class='w-220px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -70,6 +70,8 @@
         commonModel::printLink('leads', 'edit', "contactID={$contact->id}&mode={$mode}&status={$status}", $lang->edit);
         commonModel::printLink('leads', 'transform', "contactID=$contact->id", $lang->confirm, "data-toggle='modal'");
         commonModel::printLink('leads', 'ignore', "contactID=$contact->id", $lang->ignore, "data-toggle='modal'");
+        if($contact->status == 'ignore') commonModel::printLink('leads', 'delete', "contactID=$contact->id", $lang->delete, "class='deleter'");
+        if($contact->status != 'ignore') echo html::a('#', $lang->delete, "disabled='disabled'");
         ?>
       </td>
     </tr>

@@ -173,6 +173,23 @@ class leads extends control
     }
 
     /**
+     * Delete a lead.
+     *
+     * @param  int    $contactID
+     * @access public
+     * @return void
+     */
+    public function delete($contactID)
+    {
+        $contact = $this->loadModel('contact')->getByID($contactID);
+        if($contact->status != 'ignore') $this->send(array('result' => 'fail'));
+
+        $this->contact->delete(TABLE_CONTACT, $contactID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'locate' => inlink('browse')));
+    }
+
+    /**
      * Apply leads.
      * 
      * @access public
