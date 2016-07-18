@@ -134,10 +134,14 @@ class overtimeModel extends model
         $existOvertime = $this->checkOvertime($overtime, $this->app->user->account);
         if(!empty($existOvertime)) return array('result' => 'fail', 'message' => sprintf($this->lang->overtime->unique, implode(', ', $existOvertime))); 
 
-        $existLeave = $this->loadModel('leave')->checkLeave($overtime, $this->app->user->account);
+        $leave = clone $overtime;
+        $leave ->start  = '00:00:00';
+        $leave ->finish = '23:59:59';
+        $existLeave = $this->loadModel('leave')->checkLeave($leave, $this->app->user->account);
         if(!empty($existLeave)) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, implode(', ', $existLeave))); 
         
-        $existTrip = $this->loadModel('trip')->checkTrip($overtime, $this->app->user->account); 
+        $trip = $leave;
+        $existTrip = $this->loadModel('trip')->checkTrip($trip, $this->app->user->account); 
         if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
 
         $this->dao->insert(TABLE_OVERTIME)
@@ -172,10 +176,14 @@ class overtimeModel extends model
         $existOvertime = $this->checkOvertime($overtime, $this->app->user->account, $id);
         if(!empty($existOvertime)) return array('result' => 'fail', 'message' => sprintf($this->lang->overtime->unique, implode(', ', $existOvertime))); 
         
-        $existLeave = $this->loadModel('leave')->checkLeave($overtime, $this->app->user->account);
+        $leave = clone $overtime;
+        $leave ->start  = '00:00:00';
+        $leave ->finish = '23:59:59';
+        $existLeave = $this->loadModel('leave')->checkLeave($leave, $this->app->user->account);
         if(!empty($existLeave)) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, implode(', ', $existLeave))); 
         
-        $existTrip = $this->loadModel('trip')->checkTrip($overtime, $this->app->user->account); 
+        $trip = $leave;
+        $existTrip = $this->loadModel('trip')->checkTrip($trip, $this->app->user->account); 
         if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
 
         $this->dao->update(TABLE_OVERTIME)

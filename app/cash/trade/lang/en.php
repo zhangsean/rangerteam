@@ -40,6 +40,11 @@ $lang->trade->editedBy    = 'Edited By';
 $lang->trade->editedDate  = 'Edited Date';
 $lang->trade->month       = 'Month';
 $lang->trade->uploadFile  = 'Upload File';
+$lang->trade->productLine = 'Product Line';
+$lang->trade->area        = 'Customer Area';
+$lang->trade->industry    = 'Customer Industry';
+$lang->trade->level       = 'Customer Level';
+$lang->trade->size        = 'Customer Size';
 
 $lang->trade->create      = 'Create Trade';
 $lang->trade->in          = 'Income';
@@ -64,9 +69,13 @@ $lang->trade->fullYear    = 'Full year';
 $lang->trade->quarter     = 'Quarter';
 
 $lang->trade->report = new stdclass();
-$lang->trade->report->common    = 'Report'; 
-$lang->trade->report->annual    = 'Annual Report'; 
-$lang->trade->report->undefined = 'Undefined';
+$lang->trade->report->common      = 'Report'; 
+$lang->trade->report->annual      = 'Annual Report'; 
+$lang->trade->report->compare     = 'Annual Compare';
+$lang->trade->report->create      = 'Create Report';
+$lang->trade->report->selectYears = 'Select Years';
+$lang->trade->report->undefined   = 'Undefined';
+$lang->trade->report->compareTip  = 'Select 2 years to compare.';
 
 $lang->trade->report->typeList['annual']  = 'Annual balance report'; 
 $lang->trade->report->typeList['compare'] = 'Annual comparison report'; 
@@ -163,8 +172,13 @@ $lang->trade->noTraderMatch = 'No matched trader，click to create';
 $lang->trade->unique        = 'There has been same record';
 $lang->trade->ignore        = 'Ignore';
 
-$lang->trade->chartList['category'] = 'statistic according to category';
-$lang->trade->chartList['dept']     = 'statistic according to department';
+$lang->trade->chartList['category']    = 'statistic according to category';
+$lang->trade->chartList['dept']        = 'statistic according to department';
+$lang->trade->chartList['area']        = 'statistic according to customer area';
+$lang->trade->chartList['industry']    = 'statistic according to customer industry';
+$lang->trade->chartList['level']       = 'statistic according to customer level';
+$lang->trade->chartList['size']        = 'statistic according to customer size';
+$lang->trade->chartList['productLine'] = 'statistic according to product line';
 
 $lang->trade->excel = new stdclass();
 $lang->trade->excel->title = new stdclass();

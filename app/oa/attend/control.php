@@ -504,7 +504,7 @@ class attend extends control
             $stat = array();
             foreach($attends as $account => $accountAttends)
             {
-                if($account != 'admin') continue;
+                if($account != 'wwccss') continue;
                 $stat[$account] = new stdclass(); 
                 $stat[$account]->deserve  = $workingDays;
                 $stat[$account]->normal   = 0;
@@ -520,8 +520,10 @@ class attend extends control
                 $stat[$account]->restOvertime    = 0;
                 $stat[$account]->holidayOvertime = 0;
 
+                $notAttendDays = array();
                 foreach($accountAttends as $attend)
                 {
+                    if($attend->status == 'rest')   $notAttendDays[$attend->date] = $attend->date;
                     if($attend->status == 'normal') $stat[$account]->normal ++;
                     if($attend->status == 'late' or $attend->status == 'both')
                     {
@@ -537,14 +539,27 @@ class attend extends control
                     if($attend->status == 'trip')
                     {
                         $normalDay = 1;
-                        $leftHours = 24;
+                        $leftHours = $workingHours;
                         foreach($trips as $trip)
                         {
                             if($leftHours <= 0) break;
 
-                            if($trip->end >= $attend->date and $attend->date >= $trip->begin and $trip->createdBy == $account)
+                            if($trip->begin <= $attend->date and $trip->end >= $attend->date and $trip->createdBy == $account)
                             {
-                                $hours = 0;
+                                $hours = round((strtotime("{$attend->date} {$this->config->attend->signOutLimit}") - strtotime("{$attend->date} {$this->config->attend->signInLimit}")) / 3600, 2);
+                                if($trip->begin == $attend->date and $trip->end == $attend->date) 
+                                {
+                                    $hours = round((strtotime("{$attend->date} {$trip->finish}") - strtotime("{$attend->date} {$trip->start}")) / 3600, 2);
+                                }
+                                elseif($trip->begin == $attend->date and $trip->end != $attend->date) 
+                                {
+                                    $hours = round((strtotime("{$attend->date} {$this->config->attend->signOutLimit}") - strtotime("{$attend->date} {$trip->start}")) / 3600, 2);
+                                }
+                                elseif($trip->begin != $attend->date and $trip->end == $attend->date) 
+                                {
+                                    $hours = round((strtotime("{$attend->date} {$trip->finish}") - strtotime("{$attend->date} {$this->config->attend->signInLimit}")) / 3600, 2);
+                                }
+
                                 if($hours > $leftHours) $hours = $leftHours;
 
                                 $tripDay   = round($hours / $workingHours, 2);
@@ -587,15 +602,15 @@ class attend extends control
                         }
                         $stat[$account]->normal += $normalDay;
                     }
+
                     if($attend->status == 'overtime')
                     {
-                        $normalDay = 0;
                         $leftHours = 24;
                         foreach($overtimes as $overtime)
                         {
                             if($leftHours <= 0) break;
 
-                            if($overtime->end >= $attend->date and $attend->date >= $overtime->begin and $overtime->createdBy == $account)
+                            if($overtime->begin <= $attend->date and $overtime->end >= $attend->date and $overtime->createdBy == $account)
                             {
                                 $hours = $attend->desc;
                                 if($hours > $overtime->hours) $hours = $overtime->hours;
@@ -604,23 +619,29 @@ class attend extends control
                                 $overtimeDay = round($hours / $workingHours, 2);
                                 $leftHours   = round($leftHours - $hours, 2);
 
-                                if($overtime->type == 'time')
+                                if($overtime->type == 'time')    
                                 {
-                                    $normalDay += $overtimeDay;
                                     $stat[$account]->timeOvertime += $overtimeDay;
+                                    $stat[$account]->normal++;
                                 }
-
-                                if($overtime->type == 'rest')    $stat[$account]->restOvertime += $overtimeDay;
-                                if($overtime->type == 'holiday') $stat[$account]->holidayOvertime += $overtimeDay;
-                                if($overtime->type == 'lieu')    $stat[$account]->normal += $overtimeDay;
+                                if($overtime->type == 'rest')    
+                                {
+                                    $stat[$account]->restOvertime += $overtimeDay;
+                                    $notAttendDays[$attend->date]  = $attend->date;
+                                }
+                                if($overtime->type == 'holiday') 
+                                {
+                                    $stat[$account]->holidayOvertime += $overtimeDay;
+                                    $notAttendDays[$attend->date]     = $attend->date;
+                                }
+                                if($overtime->type == 'lieu') $stat[$account]->normal += $overtimeDay;
                             }
                         }
-                        $stat[$account]->normal += $normalDay; 
                     }
                 }
 
                 $stat[$account]->actual = $stat[$account]->normal + $stat[$account]->restOvertime + $stat[$account]->holidayOvertime + $stat[$account]->timeOvertime + $stat[$account]->trip + $stat[$account]->abnormal;
-                $stat[$account]->absent = ($workingDays - count($accountAttends) + $stat[$account]->restOvertime + $stat[$account]->holidayOvertime + $stat[$account]->timeOvertime > 0) ? ($workingDays - count($accountAttends) + $stat[$account]->restOvertime + $stat[$account]->holidayOvertime + $stat[$account]->timeOvertime) : 0;
+                $stat[$account]->absent = $workingDays - (count($accountAttends) - count($notAttendDays)) > 0 ? $workingDays - (count($accountAttends) - count($notAttendDays)) : 0;
             }
         }
 

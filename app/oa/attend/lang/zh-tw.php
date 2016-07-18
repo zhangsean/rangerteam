@@ -123,3 +123,7 @@ $lang->attend->setManager = '部門經理設置';
 $lang->attend->note = new stdClass();
 $lang->attend->note->ip    = "允許簽到的ip，多個ip用逗號隔開。支持IP段，如192.168.1.*";
 $lang->attend->note->allip = '無限制';
+
+$lang->attend->h = '小時';
+$lang->attend->m = '分';
+$lang->attend->s = '秒';

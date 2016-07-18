@@ -40,6 +40,11 @@ $lang->trade->editedBy    = '由誰編輯';
 $lang->trade->editedDate  = '編輯時間';
 $lang->trade->month       = '月份';
 $lang->trade->uploadFile  = '上傳附件';
+$lang->trade->productLine = '產品綫';
+$lang->trade->area        = '客戶區域';
+$lang->trade->industry    = '客戶行業';
+$lang->trade->level       = '客戶級別';
+$lang->trade->size        = '客戶規模';
 
 $lang->trade->create      = '記賬';
 $lang->trade->in          = '收入';
@@ -64,9 +69,13 @@ $lang->trade->fullYear    = '全年';
 $lang->trade->quarter     = '季度';
 
 $lang->trade->report = new stdclass();
-$lang->trade->report->common    = '報表'; 
-$lang->trade->report->annual    = '年度收支表'; 
-$lang->trade->report->undefined = '未定義';
+$lang->trade->report->common      = '報表'; 
+$lang->trade->report->annual      = '年度收支表'; 
+$lang->trade->report->compare     = '年度對比表';
+$lang->trade->report->create      = '生成報表';
+$lang->trade->report->selectYears = '選擇年份';
+$lang->trade->report->undefined   = '未定義';
+$lang->trade->report->compareTip  = '必須選擇兩個年份進行比較';
 
 $lang->trade->report->typeList['annual']  = '年度收支表'; 
 $lang->trade->report->typeList['compare'] = '年度對比表'; 
@@ -163,8 +172,13 @@ $lang->trade->noTraderMatch = '沒有匹配到相應的商戶，點擊新建';
 $lang->trade->unique        = '今天已經有相同金額的賬目';
 $lang->trade->ignore        = '忽略';
 
-$lang->trade->chartList['category'] = '按科目統計';
-$lang->trade->chartList['dept']     = '按部門統計';
+$lang->trade->chartList['category']    = '按科目統計';
+$lang->trade->chartList['dept']        = '按部門統計';
+$lang->trade->chartList['area']        = '按客戶區域統計';
+$lang->trade->chartList['industry']    = '按客戶行業統計';
+$lang->trade->chartList['level']       = '按客戶級別統計';
+$lang->trade->chartList['size']        = '按客戶規模統計';
+$lang->trade->chartList['productLine'] = '按產品綫統計';
 
 $lang->trade->excel = new stdclass();
 $lang->trade->excel->title = new stdclass();
