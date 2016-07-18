@@ -35,7 +35,12 @@
             </tr>
             <tr>
               <th><?php echo $lang->attend->signOutLimit?></th>
-              <td><?php echo html::input('signOutLimit', $signOutLimit, "class='form-control form-time'")?></td>
+              <td>
+                <div class='input-group'>
+                  <?php echo html::input('signOutLimit', $signOutLimit, "class='form-control form-time'")?>
+                  <span class='input-group-addon'><?php echo html::checkbox('mustSignOut', array('yes' => $lang->attend->mustSignOut), $mustSignOut);?></span>
+                </div>
+              </td>
               <td></td>
             </tr>
             <tr>
@@ -70,11 +75,6 @@
             <tr>
               <th><?php echo $lang->attend->noAttendUsers;?></th>
               <td><?php echo html::select('noAttendUsers[]', $users, $noAttendUsers, "class='form-control chosen' multiple")?></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th></th>
-              <td><?php echo html::checkbox('mustSignOut', array('yes' => $lang->attend->mustSignOut), $mustSignOut)?></td>
               <td></td>
             </tr>
             <tr><th></th><td colspan='2'><?php echo html::submitButton();?></td></tr>
