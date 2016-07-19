@@ -994,11 +994,11 @@ CREATE TABLE IF NOT EXISTS `sys_cron` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `sys_category` (`id`, `name`, `parent`, `grade`, `type`, `major`) VALUES
-('660001', '主营业务收入', ',660001,', 1, 'in', '1'),
-('660002', '非主营业务收入', ',660002,', 1, 'in', '2'),
-('660003', '主营业务成本', ',660003,', 1, 'out', '3'),
-('660004', '非主营业务成本', ',660004,', 1, 'out', '4');
+INSERT INTO `sys_category` (`id`, `name`, `parent`, `path`, `grade`, `type`, `major`) VALUES
+('1', '主营业务收入',   '0', ',1,', 1, 'in',  '1'),
+('2', '非主营业务收入', '0', ',2,', 1, 'in',  '2'),
+('3', '主营业务成本',   '0', ',3,', 1, 'out', '3'),
+('4', '非主营业务成本', '0', ',4,', 1, 'out', '4');
 
 INSERT INTO `sys_group` VALUES (1,'管理员','管理员拥有前台所有权限'),(2,'财务专员','财务专员拥有现金流所有权限'),(3,'销售经理','销售经理拥有客户管理所有权限'),(4,'销售人员','默认的销售人员权限'),(5,'普通用户','默认的普通账号权限');
 INSERT INTO `sys_usergroup` (account,`group`) SELECT account,5 FROM `sys_user`;
