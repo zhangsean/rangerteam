@@ -12,9 +12,9 @@
 ?>
 <?php include '../../../sys/common/view/header.modal.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
-<?php js::set('signIn', $this->config->attend->signInLimit)?>
-<?php js::set('signOut', $this->config->attend->signOutLimit)?>
-<?php js::set('workingHours', $this->config->attend->workingHours)?>
+<?php js::set('signIn', $config->attend->signInLimit)?>
+<?php js::set('signOut', $config->attend->signOutLimit)?>
+<?php js::set('workingHours', $config->attend->workingHours)?>
 <div class='panel-body'>
   <form id='ajaxForm' method='post' action="<?php echo $this->createLink('oa.leave', 'edit', "id=$leave->id")?>">
     <table class='table table-form table-condensed'>

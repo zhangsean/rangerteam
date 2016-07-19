@@ -164,6 +164,7 @@ class leaveModel extends model
         $existTrip = $this->loadModel('trip')->checkTrip($trip, $this->app->user->account); 
         if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
 
+        $this->app->loadConfig('attend');
         $this->dao->insert(TABLE_LEAVE)
             ->data($leave)
             ->autoCheck()
@@ -210,6 +211,7 @@ class leaveModel extends model
         $existTrip = $this->loadModel('trip')->checkTrip($trip, $this->app->user->account); 
         if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
 
+        $this->app->loadConfig('attend');
         $this->dao->update(TABLE_LEAVE)
             ->data($leave)
             ->autoCheck()
