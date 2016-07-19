@@ -3,6 +3,7 @@ $lang->leads->common    = '名单';
 $lang->leads->browse    = '浏览名单';
 $lang->leads->create    = '添加名单';
 $lang->leads->edit      = '编辑名单';
+$lang->leads->delete    = '删除名单';
 $lang->leads->view      = '名单详情';
 $lang->leads->apply     = '申请';
 $lang->leads->assign    = '指派';

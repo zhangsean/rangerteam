@@ -3,6 +3,7 @@ $lang->leads->common    = 'Leads';
 $lang->leads->browse    = 'Browse';
 $lang->leads->create    = 'Create';
 $lang->leads->edit      = 'Edit';
+$lang->leads->delete    = 'Delete';
 $lang->leads->view      = 'View';
 $lang->leads->apply     = 'Apply';
 $lang->leads->assign    = 'Assign';

@@ -68,6 +68,7 @@ $lang->trade->showImport   = 'Show result';
 $lang->trade->fullYear     = 'Full year';
 $lang->trade->quarter      = 'Quarter';
 $lang->trade->export2Excel = 'Export Excel';
+$lang->trade->compare      = 'Annual Compare';
 
 $lang->trade->report = new stdclass();
 $lang->trade->report->common      = 'Report'; 
@@ -80,7 +81,6 @@ $lang->trade->report->compareTip  = 'Select 2 years to compare.';
 
 $lang->trade->report->typeList['annual']  = 'Annual balance report'; 
 $lang->trade->report->typeList['compare'] = 'Annual comparison report'; 
-$lang->trade->report->typeList['in']      = 'Income statistical report'; 
 
 $lang->trade->typeList['in']          = 'Income';
 $lang->trade->typeList['out']         = 'Expend';

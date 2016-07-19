@@ -205,6 +205,7 @@ $lang->resource->leads = new stdclass();
 $lang->resource->leads->browse    = 'browse';
 $lang->resource->leads->create    = 'create';
 $lang->resource->leads->edit      = 'edit';
+$lang->resource->leads->delete    = 'delete';
 $lang->resource->leads->view      = 'view';
 $lang->resource->leads->assign    = 'assign';
 $lang->resource->leads->apply     = 'apply';
@@ -215,6 +216,7 @@ $lang->resource->leads->setting   = 'settings';
 $lang->leads->methodOrder[10] = 'browse';
 $lang->leads->methodOrder[11] = 'create';
 $lang->leads->methodOrder[15] = 'edit';
+$lang->leads->methodOrder[16] = 'delete';
 $lang->leads->methodOrder[20] = 'view';
 $lang->leads->methodOrder[25] = 'assign';
 $lang->leads->methodOrder[30] = 'apply';
@@ -290,6 +292,7 @@ $lang->resource->trade->import       = 'import';
 $lang->resource->trade->showImport   = 'showImport';
 $lang->resource->trade->export       = 'export';
 $lang->resource->trade->report       = 'report';
+$lang->resource->trade->compare      = 'compare';
 $lang->resource->trade->export2Excel = 'export2Excel';
 
 $lang->trade->methodOrder[10] = 'browse';
@@ -306,6 +309,7 @@ $lang->trade->methodOrder[45] = 'import';
 $lang->trade->methodOrder[50] = 'showImport';
 $lang->trade->methodOrder[55] = 'export';
 $lang->trade->methodOrder[60] = 'report';
+$lang->trade->methodOrder[61] = 'compare';
 $lang->trade->methodOrder[65] = 'export2Excel';
 
 /* Depositor. */
