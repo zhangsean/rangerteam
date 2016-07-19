@@ -230,7 +230,6 @@ class leads extends control
             {
                 $actionID = $this->loadModel('action')->create('contact', $contactID, 'Assigned', $this->post->comment, $this->post->assignedTo);
                 $this->sendmail($contactID, $actionID);
-                $this->action->create('leads', $contactID, 'assigned', $this->post->comment, '', '', '', $contactID);
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
