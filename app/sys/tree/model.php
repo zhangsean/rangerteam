@@ -537,9 +537,9 @@ class treeModel extends model
         if($category->type == 'forum' and $category->grade == 2) $childrenLinkClass = 'hidden';
 
         $linkHtml  = $category->name;
-        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'edit',     "category={$category->id}"), $lang->tree->edit, "class='ajax'");
+        $linkHtml .= ' ' . $category->major ? html::a('#', $lang->tree->edit, "disabled='disabled'") : html::a(helper::createLink('tree', 'edit', "category={$category->id}"), $lang->tree->edit, "class='ajax'");
         if($category->type != 'product') $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}&root=$category->root"), $lang->category->children, "class='$childrenLinkClass ajax'");
-        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
+        $linkHtml .= ' ' . $category->major ? html::a('#', $lang->delete, "disabled='disabled'") : html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
 
         return $linkHtml;
     }

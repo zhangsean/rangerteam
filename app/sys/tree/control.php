@@ -72,6 +72,7 @@ class tree extends control
     {
         /* Get current category. */
         $category = $this->tree->getById($categoryID);
+        if($category->major) return false;
 
         if($category->type == 'out') $this->tree->checkRight($category->id);
 
@@ -193,6 +194,7 @@ class tree extends control
     {
         /* If type is 'forum' and has children, warning. */
         $category = $this->tree->getByID($categoryID);
+        if($category->major) return false;
 
         if($category->type == 'out') $this->tree->checkRight($categoryID);
 
