@@ -368,7 +368,7 @@ class leave extends control
             foreach($users as $key => $user) 
             {
                 $userPairs[$user->account] = $user->realname;
-                $userDepts[$user->account] = zget($deptList, $user->dept);
+                $userDepts[$user->account] = zget($deptList, $user->dept, ' ');
             }
 
             /* Create field lists. */
