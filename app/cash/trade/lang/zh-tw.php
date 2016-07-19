@@ -68,6 +68,7 @@ $lang->trade->showImport   = '導入確認';
 $lang->trade->fullYear     = '全年';
 $lang->trade->quarter      = '季度';
 $lang->trade->export2Excel = '導出Excel';
+$lang->trade->compare      = '年度對比表';
 
 $lang->trade->report = new stdclass();
 $lang->trade->report->common      = '報表'; 
@@ -80,7 +81,6 @@ $lang->trade->report->compareTip  = '必須選擇兩個年份進行比較';
 
 $lang->trade->report->typeList['annual']  = '年度收支表'; 
 $lang->trade->report->typeList['compare'] = '年度對比表'; 
-$lang->trade->report->typeList['in']      = '收入統計表'; 
 
 $lang->trade->typeList['in']          = '收入';
 $lang->trade->typeList['out']         = '支出';
