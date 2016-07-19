@@ -101,6 +101,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('3.3'));
             case '3_4':
                 $this->execSQL($this->getUpgradeFile('3.4'));
+                $this->updateTradeCategories();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
