@@ -186,4 +186,4 @@ $lang->trade->excel->title = new stdclass();
 $lang->trade->excel->title->depositor = '賬號盈虧';
 
 $lang->trade->excel->help = new stdclass();
-$lang->trade->excel->help->depositor       = '本報表不區分幣種，僅統計交易類型為收入和支出的帳目。';
+$lang->trade->excel->help->depositor = '本報表不區分幣種，僅統計交易類型為收入和支出的帳目。';

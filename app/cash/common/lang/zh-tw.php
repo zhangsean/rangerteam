@@ -47,6 +47,7 @@ $lang->report = new stdclass();
 $lang->report->menu = new stdclass();
 $lang->report->menu->annual  = '年度收支表|trade|report|';
 $lang->report->menu->compare = '年度對比表|trade|compare|';
+$lang->report->menu->export  = '賬號盈虧表|trade|export2Excel|mode=depositor';
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();

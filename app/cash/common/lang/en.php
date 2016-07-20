@@ -47,6 +47,7 @@ $lang->report = new stdclass();
 $lang->report->menu = new stdclass();
 $lang->report->menu->annual  = 'Annual Income and Expense|trade|report|';
 $lang->report->menu->compare = 'Annual Compare|trade|compare|';
+$lang->report->menu->export  = 'Depositor Profit and Loss|trade|export2Excel|mode=depositor';
 
 /* Menu of setting module. */
 $lang->setting = new stdclass();
