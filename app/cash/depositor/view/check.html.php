@@ -51,9 +51,9 @@
       <tr class='<?php echo $class;?>'>
         <td><?php echo zget($depositorList, $depositorID); ?></td>
         <td><?php echo zget($currencyList, $result->currency); ?></td>
-        <td><?php echo formatMoney($result->origin);?></td>
-        <td><?php echo formatMoney($result->computed);?></td>
-        <td><?php echo formatMoney($result->actual);?></td>
+        <td><?php echo $result->origin ? formatMoney($result->origin) : $result->origin;?></td>
+        <td><?php echo $result->computed ? formatMoney($result->computed) : $result->computed;?></td>
+        <td><?php echo $result->actual ? formatMoney($result->actual) : $result->actual;?></td>
         <?php if($diff == 0):?>
         <td><?php echo $lang->depositor->success;?></td>
         <?php endif;?>
