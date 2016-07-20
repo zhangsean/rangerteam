@@ -11,4 +11,4 @@
  */
 ?>
 <?php include '../../../sys/file/view/export2excel.html.php';?>
-<?php css::import($this->app->getClientTheme() . 'theme.oa.css');?>
+<?php css::import($this->app->getClientTheme() . 'theme.cash.css');?>
