@@ -1612,7 +1612,7 @@
             if(entry.hasMenu)
             {
                 $shortcut = $(entry.toLeftBarShortcutHtml());
-                if(entry.category !== undefined && entry.category != 0) 
+                if(entry.category !== undefined && entry.category != 0 && document.getElementById('categoryTpl' + entry.category)) 
                 {
                     var shortcut = entry.toLeftBarShortcutHtml();
                     $('#categoryMenu' + entry.category).append(shortcut);
@@ -1936,12 +1936,15 @@
         for(var index in categories)
         {
             var category = categories[index];
-            var id   = category.id;
-            var name = category.name.substr(0, 2).toUpperCase();
-            var hue  = (parseInt(id) - 820000) * 47 % 360;
-            $('#categoryTpl' + id).remove();
-            $('#categoryMenu' + id).remove();
-            $('#leftBar #apps-menu .bar-menu:first').after($('#categoryTpl').html().replace(/categoryid/g, id).replace(/categoryname/g, name).replace(/categoryhue/g, hue));
+            var id = category.id;
+            if(id)
+            {
+                var name = category.name.substr(0, 2).toUpperCase();
+                var hue  = (parseInt(id) - 820000) * 47 % 360;
+                $('#categoryTpl' + id).remove();
+                $('#categoryMenu' + id).remove();
+                $('#leftBar #apps-menu .bar-menu:first').after($('#categoryTpl').html().replace(/categoryid/g, id).replace(/categoryname/g, name).replace(/categoryhue/g, hue));
+            }
         }
     }
 
