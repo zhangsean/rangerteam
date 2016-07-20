@@ -17,7 +17,7 @@ $config->leads->editor->view   = array('id' => 'comment,lastComment', 'tools' =>
 
 global $lang, $app;
 $app->loadLang('contact', 'crm');
-$config->leads->search['module'] = 'contact';
+$config->leads->search['module'] = 'leads';
 
 $config->leads->search['fields']['realname']      = $lang->contact->realname;
 $config->leads->search['fields']['origin']        = $lang->contact->origin;
