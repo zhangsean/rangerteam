@@ -433,7 +433,7 @@ class html
             global $lang;
             $label = $lang->goback;
         }
-        return " <input type='button' value='$label' class='$class'  $misc onclick='history.back(-1);' /> ";
+        return " <input type='button' value='$label' class='$class' $misc onclick='history.back(-1);' /> ";
     }
 
     /**
