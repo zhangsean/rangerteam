@@ -323,7 +323,7 @@ foreach($fieldParams as $fieldName => $param)
           {
               $fieldName  = $formSession["field$fieldNO"];
               $extraClass = isset($param['class']) ? $param['class'] : '';
-              echo html::input("value$fieldNO",  $formSession["value$fieldNO"], "class='form-control $extraClass searchInput'");
+              echo html::input("value$fieldNO", $formSession["value$fieldNO"], "class='form-control $extraClass searchInput'");
           }
           echo '</td>';
 
