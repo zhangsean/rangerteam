@@ -42,7 +42,7 @@ if(RUN_MODE != 'upgrade')
     if(version_compare($config->version, $config->installedVersion, '>')) die(header('location: upgrade.php'));
 }
 
-if($app->clientDevice == 'mobile' and $config->default->view == 'html') $config->default->view = 'mhtml';
+if($app->clientDevice == 'mobile' and strpos($config->installedVersion, 'pro') === 0 and $config->default->view == 'html') $config->default->view = 'mhtml';
 
 $app->parseRequest();
 $common->checkPriv();
