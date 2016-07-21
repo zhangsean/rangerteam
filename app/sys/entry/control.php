@@ -529,6 +529,10 @@ class entry extends control
         {
             $id      = $this->post->id;
             $visible = $this->post->menu == 'all' ? 1 : 0;
+
+            $this->dao->update(TABLE_ENTRY)->set('visible')->eq($visible)->where('id')->eq($id)->exec();
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             $allEntries = isset($this->config->personal->common->customApp) ? json_decode($this->config->personal->common->customApp->value) : new stdclass();
             if(!isset($allEntries->$id))
             {
@@ -536,6 +540,8 @@ class entry extends control
                 $allEntries->{$id}->id = $id;
             }
             $allEntries->{$id}->visible = $visible;
+            if(!$visible) unset($allEntries->{$id}->visible);
+
             $this->loadModel('setting')->setItem("{$this->app->user->account}.sys.common.customApp", json_encode($allEntries));
             if(dao::isError()) $this->send(array('result' => 'fael', 'message' => dao::getError()));
         }
