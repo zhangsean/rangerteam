@@ -16,9 +16,7 @@
 <?php js::set('date', $date);?>
 <?php js::set('currentYear', $currentYear);?>
 <?php js::set('treeview', !empty($_COOKIE['treeview']) ? $_COOKIE['treeview'] : '');?>
-
 <li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
-
 <div id='menuActions'>
   <?php commonModel::printLink('trade', 'import', '', "<i class='icon-download-alt'> </i>" . $lang->trade->import, "class='btn btn-primary' data-toggle='modal'")?>
   <?php if(commonModel::hasPriv('trade', 'export')):?>

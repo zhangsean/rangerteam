@@ -65,6 +65,7 @@ $(function()
                 if(!date.valueOf()) date = new Date();
 
                 if($this.hasClass('form-datetime')) $this.val(date.format('yyyy-MM-dd hh:mm:ss'));
+                else if($this.hasClass('form-month')) $this.val(date.format('yyyy-MM'));
                 else $this.val(date.format('yyyy-MM-dd'));
             }
             return $this;
