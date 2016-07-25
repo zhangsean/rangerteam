@@ -27,11 +27,12 @@
       $maxOrder = 0;
       foreach($children as $child)
       {
+          $disabled = $child->major ? "disabled='disabled'" : '';
           if($child->order > $maxOrder) $maxOrder = $child->order;
           echo "<div class='form-group'>";
-          echo "<div class='col-xs-6 col-md-4 col-md-offset-2'>" . html::input("children[$child->id]", $child->name, "class='form-control'") . "</div>";
+          echo "<div class='col-xs-6 col-md-4 col-md-offset-2'>" . html::input("children[$child->id]", $child->name, "class='form-control' $disabled") . "</div>";
           echo "</div>";
-          echo html::hidden("mode[$child->id]", 'update');
+          echo html::hidden("mode[$child->id]", 'update', "$disabled");
       }
 
       for($i = 0; $i < TREE::NEW_CHILD_COUNT ; $i ++)
