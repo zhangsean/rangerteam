@@ -886,7 +886,7 @@ EOT;
             }
             else
             {
-                if(strpos('leave, overtime', $status) !== false && !empty($oldAttend->desc)) $attend->desc += (float)$oldAttend->desc;
+                if($status && strpos('leave, overtime', $status) !== false && !empty($oldAttend->desc)) $attend->desc += (float)$oldAttend->desc;
                 $attend->status = $this->computeStatus($oldAttend);
                 $this->dao->update(TABLE_ATTEND)->data($attend)->autoCheck()->where('date')->eq($date)->andWhere('account')->eq($account)->exec();
             }

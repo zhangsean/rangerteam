@@ -90,6 +90,13 @@ class project extends control
         $this->display();
     }
 
+    /**
+     * View a project.
+     * 
+     * @param  int    $projectID 
+     * @access public
+     * @return void
+     */
     public function view($projectID = 0)
     {
         $this->view->title      = $this->lang->project->view;
