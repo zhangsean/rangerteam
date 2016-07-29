@@ -829,7 +829,8 @@ class trade extends control
             $this->app->loadClass('export2excel')->export($excelData, $this->post->fileType);
         }
 
-        $this->view->title = $this->lang->export;
+        $this->view->title    = $this->lang->export;
+        $this->view->fileName = $this->lang->trade->excel->title->$mode;
         $this->display();
     }
 
@@ -843,10 +844,6 @@ class trade extends control
      */
     public function report($date = '', $currency = 'rmb')
     {
-        unset($this->lang->trade->menu);
-        $this->loadModel('report');
-        $currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
-
         $tradeYears  = array();
         $tradeMonths = array();
         $tradeDates = $this->trade->getDatePairs();
@@ -897,6 +894,7 @@ class trade extends control
 
         $groupByList = array('productLine', 'category', 'area', 'industry', 'size', 'dept');
 
+        $this->loadModel('report');
         foreach($groupByList as $groupBy)
         {
             $monthlyChartDatas[$groupBy]['in'] = $this->trade->getChartData('in', $currentYear, $currentMonth, $groupBy, $currency);
@@ -906,6 +904,8 @@ class trade extends control
             $monthlyChartDatas[$groupBy]['out'] = $this->report->computePercent($monthlyChartDatas[$groupBy]['out']);
         }
 
+        $this->lang->trade->menu = $this->lang->report->menu;
+
         $this->view->title             = $this->lang->trade->report->common . '#' . $this->lang->trade->report->annual;
         $this->view->annualChartDatas  = $annualChartDatas;
         $this->view->monthlyChartDatas = $monthlyChartDatas;
@@ -913,9 +913,8 @@ class trade extends control
         $this->view->tradeMonths       = $tradeMonths;
         $this->view->currentYear       = $currentYear;
         $this->view->currentMonth      = $currentMonth;
-        $this->view->currencyList      = $currencyList;
         $this->view->currentCurrency   = $currency;
-        $this->view->moduleMenu        = commonModel::createModuleMenu('report');
+        $this->view->currencyList      = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->display();
     }
 
@@ -969,6 +968,8 @@ class trade extends control
         ksort($expenseDatas, SORT_STRING);
         ksort($profitDatas, SORT_STRING);
 
+        $this->lang->trade->menu = $this->lang->report->menu;
+
         $this->view->title        = $this->lang->trade->report->common . '#' . $this->lang->trade->report->compare;
         $this->view->tradeYears   = $tradeYears;
         $this->view->selectYears  = $selectYears;
@@ -976,8 +977,7 @@ class trade extends control
         $this->view->expenseDatas = $expenseDatas;
         $this->view->profitDatas  = $profitDatas;
         $this->view->currency     = $currency;
-        $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
-        $this->view->moduleMenu   = commonModel::createModuleMenu('report');
+        $this->view->currencyList = $currencyList;
         $this->display();
     }
 }

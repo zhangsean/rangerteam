@@ -33,7 +33,7 @@ class tradeModel extends model
      * @access public
      * @return array
      */
-    public function getList($mode, $date, $orderBy, $pager = null)
+    public function getList($mode = 'all', $date = '', $orderBy = 'id_desc', $pager = null)
     {
         if($this->session->tradeQuery === false) $this->session->set('tradeQuery', ' 1 = 1');
         $tradeQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->tradeQuery);
@@ -105,7 +105,7 @@ class tradeModel extends model
     public function getDatePairs($type = 'all')
     {
         return $this->dao->select('id, date')->from(TABLE_TRADE)
-            ->where('1=1')
+            ->where('1')
             ->beginIf($type != 'all')->andWhere('type')->in($type)->fi()
             ->orderBy('date_desc')
             ->fetchPairs();
