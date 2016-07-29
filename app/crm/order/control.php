@@ -243,7 +243,7 @@ class order extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $order = $this->order->getByID($order);
-        $contacts = $this->loadModel('contact')->getList($order->customer, 'client', $orderBy, $pager);
+        $contacts = $this->loadModel('contact')->getList($order->customer, $relation = 'client', $mode = '', $status = 'normal', $origin = '', $orderBy, $pager);
 
         $this->view->title    = $this->lang->order->contact;
         $this->view->contacts = $contacts;

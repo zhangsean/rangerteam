@@ -180,7 +180,6 @@ class customer extends control
             foreach($files as $file) $fileList[$file->id] = $file;
         }
 
-
         $this->view->title        = $this->lang->customer->view;
         $this->view->customer     = $customer;
         $this->view->orders       = $this->loadModel('order')->getList($mode = 'query', "customer=$customerID");

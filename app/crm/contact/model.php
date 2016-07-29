@@ -120,7 +120,7 @@ class contactModel extends model
 
             $contacts = $this->dao->select('*')->from(TABLE_CONTACT)
                 ->where('deleted')->eq(0)
-                ->andWhere('status')->ne('normal')
+                ->beginIF($status)->andWhere('status')->eq($status)->fi()
                 ->beginIF($origin)->andWhere('origin')->like("%,$origin,%")->fi()
                 ->beginIF($mode == 'assignedTo')->andWhere('assignedTo')->eq($this->app->user->account)->fi()
                 ->beginIF($mode == 'ignoredBy')->andWhere('ignoredBy')->eq($this->app->user->account)->fi()
@@ -166,7 +166,7 @@ class contactModel extends model
             $contacts = $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
                 ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
                 ->where('t1.deleted')->eq(0)
-                ->andWhere('status')->eq($status)
+                ->beginIF($status)->andWhere('status')->eq($status)->fi()
                 ->beginIF($origin)->andWhere('origin')->like("%,$origin,%")->fi()
                 ->beginIF($customer)->andWhere('t1.id')->in(array_keys($resumes))->fi()
                 ->beginIF($mode == 'assignedTo')->andWhere('t1.assignedTo')->eq($this->app->user->account)->fi()
