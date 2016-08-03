@@ -24,7 +24,7 @@
     </tr>
     <tr>
       <th><?php echo $lang->trade->customer;?></th>
-      <td><?php echo html::select('customer', $customerList, '', "class='form-control chosen' onchange='getContract(this.value)'");?></td>
+      <td><?php echo html::select('customer', $customerList, '', "class='form-control chosen'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->trade->order;?></th>
