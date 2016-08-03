@@ -106,11 +106,11 @@ function computeNextDate(delta)
 
     if(delta == 365000)
     {
-      $('#nextDate').val('').attr('disabled', true);
+        $('#createRecordForm #nextDate').val('').attr('disabled', true);
     }
     else
     {
-        $('#nextDate').val(nextDate).attr('disabled', false);
+        $('#createRecordForm #nextDate').val(nextDate).attr('disabled', false);
     }
 }
 
