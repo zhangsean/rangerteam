@@ -142,13 +142,13 @@ class contract extends control
             }
             $files = $this->loadModel('file')->saveUpload('contract', $contractID);
 
-            if($this->post->comment or $changes or $files)
+            if($this->post->remark or $changes or $files)
             {
                 $fileAction = '';
-                if($this->post->comment) $fileAction = $this->post->comment;
+                if($this->post->remark) $fileAction = $this->post->remark;
                 if($files) $fileAction = $this->lang->addFiles . join(',', $files);
 
-                $action           = $this->post->comment == '' ? 'Edited' : 'Commented';
+                $action           = $this->post->remark == '' ? 'Edited' : 'Commented';
                 $contractActionID = $this->loadModel('action')->create('contract', $contractID, $action, $fileAction);
                 if($changes) $this->action->logHistory($contractActionID, $changes);
 
