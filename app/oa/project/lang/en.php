@@ -32,6 +32,7 @@ $lang->project->import     = 'Import';
 $lang->project->importTask = 'Import task';
 $lang->project->role       = 'Role';
 $lang->project->project    = 'Project';
+$lang->project->dateRange  = 'Date Range';
 
 $lang->project->id          = 'ID';
 $lang->project->name        = 'Name';
