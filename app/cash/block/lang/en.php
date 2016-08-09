@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
+$lang->block->common    = 'Blocks';
 $lang->block->depositor = 'Payment Depositor';
 $lang->block->lblBlock  = 'Block';
 $lang->block->admin     = 'Manage Block';

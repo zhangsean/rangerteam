@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
+$lang->block->common   = '區塊';
 $lang->block->blog     = '最新博客';
 $lang->block->lblBlock = '區塊';
 $lang->block->admin    = '管理區塊';

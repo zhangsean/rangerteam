@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
+$lang->block->common    = '區塊';
 $lang->block->depositor = '付款賬號';
 $lang->block->lblBlock  = '區塊';
 $lang->block->admin     = '管理區塊';

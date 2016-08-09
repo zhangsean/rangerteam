@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
+$lang->block->common   = 'Blocks';
 $lang->block->blog     = 'Latest Blog';
 $lang->block->lblBlock = 'Block';
 $lang->block->admin    = 'Manage Block';

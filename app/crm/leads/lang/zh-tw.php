@@ -1,4 +1,6 @@
 <?php
+if(!isset($lang->leads)) $lang->leads = new stdclass();
+
 $lang->leads->common    = '名單';
 $lang->leads->browse    = '瀏覽名單';
 $lang->leads->create    = '添加名單';
