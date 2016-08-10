@@ -161,7 +161,6 @@ define('TABLE_TRADE',     '`cash_trade`');
 /* Tables for team. */
 define('TABLE_THREAD',  '`team_thread`');
 define('TABLE_REPLY',   '`team_reply`');
-define('TABLE_MESSAGE', '`sys_message`');
 
 /* The mapping list of object and tables. */
 $config->objectTables['product']     = TABLE_PRODUCT;
