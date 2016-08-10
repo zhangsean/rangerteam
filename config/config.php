@@ -136,7 +136,6 @@ define('TABLE_CONTACT',       '`crm_contact`');
 define('TABLE_CONTRACT',      '`crm_contract`');
 define('TABLE_CONTRACTORDER', '`crm_contractorder`');
 define('TABLE_PLAN',          '`crm_plan`');
-define('TABLE_SERVICE',       '`crm_service`');
 define('TABLE_DELIVERY',      '`crm_delivery`');
 define('TABLE_SALESGROUP',    '`crm_salesgroup`');
 define('TABLE_SALESPRIV',     '`crm_salespriv`');
@@ -144,9 +143,6 @@ define('TABLE_SALESPRIV',     '`crm_salespriv`');
 /* Tables for oa. */
 define('TABLE_TODO',       '`oa_todo`');
 define('TABLE_PROJECT',    '`oa_project`');
-define('TABLE_EFFORT',     '`oa_effort`');
-define('TABLE_BOOK',       '`oa_book`');
-define('TABLE_LAYOUT',     '`oa_layout`');
 define('TABLE_DOC',        '`oa_doc`');
 define('TABLE_DOCLIB',     '`oa_doclib`');
 define('TABLE_ATTEND',     '`oa_attend`');
