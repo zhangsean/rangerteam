@@ -123,7 +123,7 @@ class articleModel extends model
     /**
      * Get article pairs.
      * 
-     * @param string $modules 
+     * @param string $categories
      * @param string $orderBy 
      * @param string $pager 
      * @access public
@@ -147,8 +147,9 @@ class articleModel extends model
     /**
      * get hot articles. 
      *
-     * @param array      $categories
-     * @param int        $count
+     * @param  array   $categories
+     * @param  int     $count
+     * @param  string  $type
      * @access public
      * @return array
      */
@@ -162,8 +163,9 @@ class articleModel extends model
     /**
      * get latest articles. 
      *
-     * @param array      $categories
-     * @param int        $count
+     * @param  array   $categories
+     * @param  int     $count
+     * @param  string  $type
      * @access public
      * @return array
      */

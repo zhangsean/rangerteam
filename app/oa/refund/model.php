@@ -31,6 +31,7 @@ class refundModel extends model
      * Get refund list. 
      * 
      * @param  string $mode 
+     * @param  string $date
      * @param  string $deptID 
      * @param  string $status 
      * @param  string $createdBy 

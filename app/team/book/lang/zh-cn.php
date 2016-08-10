@@ -1,4 +1,6 @@
 <?php
+if(!isset($lang->book)) $lang->book = new stdclass();
+
 $lang->book->common       = '手册';
 $lang->book->list         = '手册列表';
 $lang->book->articles     = '文档导航';

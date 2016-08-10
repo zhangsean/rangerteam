@@ -18,7 +18,7 @@ class resumeModel extends model
      * @access public
      * @return object
      */
-    public function getByID($resumeID)
+    public function getByID($resumeID = 0)
     {
         return $this->dao->select('*')->from(TABLE_RESUME)->where('id')->eq($resumeID)->fetch();
     }
@@ -53,7 +53,7 @@ class resumeModel extends model
      * @access public
      * @return array
      */
-    public function getList($contactID)
+    public function getList($contactID = 0)
     {
         return $this->dao->select('*')->FROM(TABLE_RESUME)->where('contact')->eq($contactID)->andWhere('deleted')->eq(0)->orderBy('id')->fetchAll('id');
     }

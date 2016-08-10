@@ -384,6 +384,7 @@ class todoModel extends model
     /**
      * getCalendarData 
      * 
+     * @param  string $date
      * @access public
      * @return object
      */

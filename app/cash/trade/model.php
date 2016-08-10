@@ -28,10 +28,12 @@ class tradeModel extends model
     /** 
      * Get trade list.
      * 
-     * @param  string  $orderBy 
-     * @param  object  $pager 
+     * @param  string $mode 
+     * @param  string $date 
+     * @param  string $orderBy 
+     * @param  int    $pager 
      * @access public
-     * @return array
+     * @return array 
      */
     public function getList($mode = 'all', $date = '', $orderBy = 'id_desc', $pager = null)
     {
@@ -99,6 +101,7 @@ class tradeModel extends model
     /**
      * Get date pairs of trade.
      * 
+     * @param  string
      * @access public
      * @return array
      */

@@ -311,7 +311,7 @@ class actionModel extends model
     /**
      * Get actions as dynamic.
      * 
-     * @param  string $acount 
+     * @param  string $account 
      * @param  string $period 
      * @param  string $orderBy 
      * @param  object $pager

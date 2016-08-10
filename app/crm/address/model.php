@@ -18,7 +18,7 @@ class addressModel extends model
      * @access public
      * @return object
      */
-    public function getByID($addressID)
+    public function getByID($addressID = 0)
     {
         return $this->dao->select('*')->from(TABLE_ADDRESS)->where('id')->eq($addressID)->fetch();
     }
@@ -31,7 +31,7 @@ class addressModel extends model
      * @access public
      * @return array
      */
-    public function getByObject($objectType, $objectID)
+    public function getByObject($objectType = '', $objectID = 0)
     {
         return $this->dao->select('*')->from(TABLE_ADDRESS)->where('objectType')->eq($objectType)->andWhere('objectID')->eq($objectID)->fetchAll();
     }
@@ -72,7 +72,7 @@ class addressModel extends model
      * @access public
      * @return array
      */
-    public function getList($objectType, $objectID)
+    public function getList($objectType = '', $objectID = 0)
     {
         $addresses = $this->getByObject($objectType, $objectID);
 

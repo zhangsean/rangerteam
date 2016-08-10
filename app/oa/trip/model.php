@@ -43,6 +43,7 @@ class tripModel extends model
      * @param  string $month 
      * @param  string $account 
      * @param  string $dept 
+     * @param  string $orderBy
      * @access public
      * @return array
      */

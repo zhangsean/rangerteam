@@ -1,4 +1,6 @@
 <?php
+if(!isset($lang->book)) $lang->book = new stdclass();
+
 $lang->book->common       = 'Book';
 $lang->book->list         = 'List';
 $lang->book->articles     = 'Articles';

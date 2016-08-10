@@ -32,6 +32,7 @@ class leaveModel extends model
      * @param  string $account 
      * @param  string $dept 
      * @param  string $status 
+     * @param  string $orderBy
      * @access public
      * @return array
      */

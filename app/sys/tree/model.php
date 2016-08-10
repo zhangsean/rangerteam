@@ -306,9 +306,10 @@ class treeModel extends model
     /**
      * Get the tree menu in <ul><ol> type.
      * 
-     * @param string    $type           the tree type
-     * @param int       $startCategoryID  the start category
-     * @param string    $userFunc       which function to be called to create the link
+     * @param  string   $type           the tree type
+     * @param  int      $startCategoryID  the start category
+     * @param  string   $userFunc       which function to be called to create the link
+     * @param  int      $root
      * @access public
      * @return string   the html code of the tree menu.
      */

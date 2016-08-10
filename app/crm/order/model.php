@@ -18,7 +18,7 @@ class orderModel extends model
      * @access public
      * @return object|bool
      */
-    public function getByID($id)
+    public function getByID($id = 0)
     {
         $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
         if(empty($customerIdList)) return null;
@@ -58,14 +58,15 @@ class orderModel extends model
     /** 
      * Get order list.
      * 
-     * @param  string  $mode 
-     * @param  mix     $param 
-     * @param  string  $orderBy 
-     * @param  object  $pager 
+     * @param  string $mode 
+     * @param  string $param 
+     * @param  string $owner
+     * @param  string $orderBy 
+     * @param  object $pager 
      * @access public
      * @return array
      */
-    public function getList($mode = 'all', $param = null, $owner = '', $orderBy = 'id_desc', $pager = null)
+    public function getList($mode = 'all', $param = '', $owner = '', $orderBy = 'id_desc', $pager = null)
     {
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
@@ -133,7 +134,7 @@ class orderModel extends model
      * @access public
      * @return array
      */
-    public function getByIdList($idList)
+    public function getByIdList($idList = array())
     {
         $orders = $this->dao->select('o.*, c.name as customerName')->from(TABLE_ORDER)->alias('o')
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
@@ -191,7 +192,7 @@ class orderModel extends model
      * @access public
      * @return array
      */
-    public function getOrderForCustomer($customerID, $status = '')
+    public function getOrderForCustomer($customerID = 0, $status = '')
     {
         $orders = $this->dao->select('id, `plan`, customer, product, createdDate, currency, editedDate')->from(TABLE_ORDER)
             ->where(1)
@@ -219,7 +220,7 @@ class orderModel extends model
      * @access public
      * @return float
      */
-    public function getAmount($idList)
+    public function getAmount($idList = array())
     {
         $orders = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->in($idList)->fetchAll();
 

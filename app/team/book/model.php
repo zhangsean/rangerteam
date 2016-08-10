@@ -96,6 +96,7 @@ class bookModel extends model
      * Get book catalog for front.
      * 
      * @param  int    $nodeID 
+     * @param  array  $serials
      * @access public
      * @return string
      */

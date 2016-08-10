@@ -46,6 +46,7 @@ class messageModel extends model
      * @param  string $type          the message type
      * @param  string $objectType    the object type
      * @param  int    $objectID      the object id
+     * @param  object $pager
      * @access public
      * @return array
      */

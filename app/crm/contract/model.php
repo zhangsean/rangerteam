@@ -18,7 +18,7 @@ class contractModel extends model
      * @access public
      * @return object.
      */
-    public function getByID($contractID)
+    public function getByID($contractID = 0)
     {
         $contract = $this->dao->select('*')->from(TABLE_CONTRACT)->where('id')->eq($contractID)->fetch();
 
@@ -40,6 +40,8 @@ class contractModel extends model
      * Get contract list.
      * 
      * @param  int    $customer
+     * @param  string $mode
+     * @param  string $owner
      * @param  string $orderBy 
      * @param  object $pager 
      * @access public
@@ -138,7 +140,7 @@ class contractModel extends model
      * @access public
      * @return object
      */
-    public function getReturnByID($returnID)
+    public function getReturnByID($returnID = 0)
     {
         return $this->dao->select('*')->from(TABLE_PLAN)->where('id')->eq($returnID)->fetch();
     }
@@ -147,10 +149,11 @@ class contractModel extends model
      * Get returnList of its contract.
      * 
      * @param  int    $contractID 
+     * @param  string $orderBy
      * @access public
      * @return array
      */
-    public function getReturnList($contractID, $orderBy = 'id_desc')
+    public function getReturnList($contractID = 0, $orderBy = 'id_desc')
     {
         return $this->dao->select('*')->from(TABLE_PLAN)->where('contract')->eq($contractID)->orderBy($orderBy)->fetchAll();
     }
@@ -162,7 +165,7 @@ class contractModel extends model
      * @access public
      * @return object
      */
-    public function getDeliveryByID($deliveryID)
+    public function getDeliveryByID($deliveryID = 0)
     {
         return $this->dao->select('*')->from(TABLE_DELIVERY)->where('id')->eq($deliveryID)->fetch();
     }
@@ -171,10 +174,11 @@ class contractModel extends model
      * Get deliveryList of its contract.
      * 
      * @param  int    $contractID 
+     * @param  string $orderBy
      * @access public
      * @return array
      */
-    public function getDeliveryList($contractID, $orderBy = 'id_desc')
+    public function getDeliveryList($contractID = 0, $orderBy = 'id_desc')
     {
         return $this->dao->select('*')->from(TABLE_DELIVERY)->where('contract')->eq($contractID)->orderBy($orderBy)->fetchAll();
     }

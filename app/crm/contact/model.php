@@ -15,10 +15,11 @@ class contactModel extends model
      * Get contact by id.
      * 
      * @param  int    $id 
+     * @param  string $status
      * @access public
      * @return object
      */
-    public function getByID($id, $status = 'normal')
+    public function getByID($id = 0, $status = 'normal')
     {
         $contact = $this->dao->select('*')->from(TABLE_CONTACT)->where('id')->eq($id)->fetch();
 
@@ -91,9 +92,13 @@ class contactModel extends model
     /** 
      * Get contact list.
      * 
-     * @param  int     $customer
-     * @param  string  $orderBy 
-     * @param  object  $pager 
+     * @param  int    $customer
+     * @param  string $relation
+     * @param  string $mode
+     * @param  string $status
+     * @param  string $origin
+     * @param  string $orderBy 
+     * @param  object $pager 
      * @access public
      * @return array
      */
@@ -238,7 +243,7 @@ class contactModel extends model
      * @access public
      * @return array
      */
-    public function getCustomerPairs($contactID)
+    public function getCustomerPairs($contactID = 0)
     {
         $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();

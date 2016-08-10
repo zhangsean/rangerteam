@@ -25,6 +25,8 @@ class customer extends control
     /**
      * Browse customer.
      * 
+     * @param string $mode
+     * @param string $param
      * @param string $orderBy     the order by
      * @param int    $recTotal 
      * @param int    $recPerPage 

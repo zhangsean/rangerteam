@@ -18,7 +18,7 @@ class customerModel extends model
      * @access public
      * @return int|bool
      */
-    public function getByID($id)
+    public function getByID($id = 0)
     {
         $customerIdList = $this->getCustomersSawByMe();
         if(empty($customerIdList)) return false;
@@ -66,14 +66,14 @@ class customerModel extends model
      * Get customer list.
      * 
      * @param  string  $mode 
-     * @param  mix     $param 
+     * @param  string  $param 
      * @param  string  $relation  client|provider
      * @param  string  $orderBy 
      * @param  object  $pager 
      * @access public
      * @return array
      */
-    public function getList($mode = 'all', $param = null, $relation = 'client', $orderBy = 'id_desc', $pager = null)
+    public function getList($mode = 'all', $param = '', $relation = 'client', $orderBy = 'id_desc', $pager = null)
     {
         $customerIdList = $this->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
@@ -111,9 +111,7 @@ class customerModel extends model
     /** 
      * Get customer pairs.
      * 
-     * @param  string  $mode 
-     * @param  mix     $param 
-     * @param  string  $orderBy 
+     * @param  string  $relation
      * @param  bool    $emptyOption 
      * @access public
      * @return array

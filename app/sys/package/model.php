@@ -107,8 +107,11 @@ class packageModel extends model
     /**
      * Get packages by some condition.
      * 
-     * @param  string    $type 
-     * @param  mixed     $param 
+     * @param  string $type 
+     * @param  mixed  $param 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
      * @access public
      * @return array|bool
      */
@@ -337,7 +340,7 @@ class packageModel extends model
     /**
      * Get the package's condition. 
      * 
-     * @param  string    $extenstion 
+     * @param  string $package 
      * @access public
      * @return object
      */

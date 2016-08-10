@@ -104,6 +104,9 @@ class webappModel extends model
      * 
      * @param  string    $type 
      * @param  mixed     $param 
+     * @param  int       $recTotal
+     * @param  int       $recPerPage
+     * @param  int       $pageID
      * @access public
      * @return array|bool
      */
@@ -146,7 +149,7 @@ class webappModel extends model
     /**
      * Get webapps by status.
      * 
-     * @param  string    $status 
+     * @param  string $key 
      * @access public
      * @return array
      */

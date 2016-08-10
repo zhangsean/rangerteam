@@ -82,6 +82,7 @@ class replyModel extends model
     /**
      * Get replies. 
      * 
+     * @param  string $orderBy
      * @param  object $pager 
      * @access public
      * @return object | false

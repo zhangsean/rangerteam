@@ -18,7 +18,7 @@ class productModel extends model
      * @access public
      * @return object 
      */
-    public function getByID($id)
+    public function getByID($id = 0)
     {
         return $this->dao->select('*')->from(TABLE_PRODUCT)->where('id')->eq($id)->fetch();
     }
@@ -26,6 +26,8 @@ class productModel extends model
     /** 
      * Get product list.
      * 
+     * @param  string  $mode
+     * @param  string  $line
      * @param  string  $orderBy 
      * @param  object  $pager 
      * @access public
@@ -49,6 +51,7 @@ class productModel extends model
     /** 
      * Get product pairs.
      * 
+     * @param  string  $status
      * @param  string  $orderBy 
      * @access public
      * @return array
@@ -92,11 +95,11 @@ class productModel extends model
     /**
      * Update a product.
      * 
-     * @param  int $productID 
+     * @param  int    $productID 
      * @access public
      * @return void
      */
-    public function update($productID)
+    public function update($productID = 0)
     {
         $oldProduct = $this->getByID($productID);
 
@@ -127,7 +130,7 @@ class productModel extends model
      * @access public
      * @return array
      */
-    public function checkUnique($name)
+    public function checkUnique($name = '')
     {
         if($name) $data = $this->dao->select('*')->from(TABLE_PRODUCT)->where('name')->eq($name)->fetch();
         if(!empty($data))

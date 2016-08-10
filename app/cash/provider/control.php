@@ -33,10 +33,12 @@ class provider extends control
     /**
      * Browse provider.
      * 
-     * @param string    $orderBy     the order by
-     * @param int       $recTotal 
-     * @param int       $recPerPage 
-     * @param int       $pageID 
+     * @param  string $mode
+     * @param  string $param
+     * @param  string $orderBy     the order by
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
      * @access public
      * @return void
      */

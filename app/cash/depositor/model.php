@@ -38,6 +38,7 @@ class depositorModel extends model
     /** 
      * Get depositor list.
      * 
+     * @param  string  $tag
      * @param  string  $orderBy 
      * @param  object  $pager 
      * @access public

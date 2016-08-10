@@ -61,7 +61,9 @@ class projectModel extends model
     /**
      * Get project list.
      * 
-     * @param  string  $status 
+     * @param  string $status 
+     * @param  string $orderBy
+     * @param  object $pager
      * @access public
      * @return array
      */

@@ -166,6 +166,7 @@ class taskModel extends model
      * 
      * @param  int    $projectID 
      * @param  string $type       all|wait|doing|done|cancel
+     * @param  string $orderBy
      * @param  object $pager 
      * @access public
      * @return array
@@ -1139,7 +1140,7 @@ class taskModel extends model
      * Get next user. 
      * 
      * @param  string $users 
-     * @param  string $currentUser 
+     * @param  string $current
      * @access public
      * @return void
      */
