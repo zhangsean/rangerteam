@@ -66,6 +66,18 @@ var dtOptions =
     format: 'yyyy-mm-dd'
 };
 
+var datetimeOptions = 
+{
+    language: '<?php echo $this->app->getClientLang();?>',
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd hh:ii'
+};
+
 $(function()
 {
     $('.date').each(function()
@@ -77,6 +89,21 @@ $(function()
             var d = time.substring(6, 8);
             time = Y + '-' + m + '-' + d;
             $('.date').val(time);
+        }
+        setDateField(this);
+    });
+
+    $('.datetime').each(function()
+    {
+        time = $(this).val();
+        if(!isNaN(time) && time != ''){
+            var Y = time.substring(0, 4);
+            var m = time.substring(4, 6);
+            var d = time.substring(6, 8);
+            var h = time.substring(8, 10);
+            var i = time.substring(10, 12);
+            time = Y + '-' + m + '-' + d + ' ' + h + ':' + i;
+            $('.datetime').val(time);
         }
         setDateField(this);
     });
@@ -94,11 +121,15 @@ var actionURL     = '<?php echo $actionURL;?>';
  * @param  string $query 
  * @return void
  */
-function setDateField(query, fieldNO)
+function setDateField(query, fieldNO, type)
 {
     var $query = $(query);
     if(fieldNO === undefined) fieldNO = $query.closest('.search-field').data('id');
     var $period = $('#selectPeriod');
+
+    if(type == 'date') var options = dtOptions;
+    if(type == 'datetime') var options = datetimeOptions;
+
     if(!$period.length)
     {
         $period = $("<ul id='selectPeriod' class='dropdown-menu'><li class='dropdown-header'><?php echo $lang->datepicker->dpText->TEXT_OR . ' ' . $lang->datepicker->dpText->TEXT_DATE;?></li><li><a href='#lastWeek'><?php echo $lang->datepicker->dpText->TEXT_PREV_WEEK;?></a></li><li><a href='#thisWeek'><?php echo $lang->datepicker->dpText->TEXT_THIS_WEEK;?></a></li><li><a href='#yesterday'><?php echo $lang->datepicker->dpText->TEXT_YESTERDAY;?></a></li><li><a href='#today'><?php echo $lang->datepicker->dpText->TEXT_TODAY;?></a></li><li><a href='#lastMonth'><?php echo $lang->datepicker->dpText->TEXT_PREV_MONTH;?></a></li><li><a href='#thisMonth'><?php echo $lang->datepicker->dpText->TEXT_THIS_MONTH;?></a></li></ul>").appendTo('body');
@@ -115,7 +146,7 @@ function setDateField(query, fieldNO)
             return false;
         });
     }
-    $query.datetimepicker('remove').datetimepicker(dtOptions).on('show', function(e)
+    $query.datetimepicker('remove').datetimepicker(options).on('show', function(e)
     {
         var $e = $(e.target);
         var ePos = $e.offset();
@@ -143,10 +174,11 @@ function setField(fieldName, fieldNO)
     $('#valueBox' + fieldNO).html($('#box' + fieldName.replace('.', '\\.')).children().clone());
     $('#valueBox' + fieldNO).children().attr({name : 'value' + fieldNO, id : 'value' + fieldNO});
 
-    if(typeof(params[fieldName]['class']) != undefined && params[fieldName]['class'] == 'date')
+    if(typeof(params[fieldName]['class']) != undefined && (params[fieldName]['class'] == 'date' || params[fieldName]['class'] == 'datetime'))
     {
-        setDateField("#value" + fieldNO, fieldNO);
-        $("#value" + fieldNO).addClass('date');   // Shortcut the width of the datepicker to make sure align with others. 
+        var type = params[fieldName]['class'];
+        setDateField("#value" + fieldNO, fieldNO, type);
+        $("#value" + fieldNO).addClass(type);   // Shortcut the width of the datepicker to make sure align with others. 
         var groupItems = <?php echo $config->search->groupItems?>;
         var maxNO      = 2 * groupItems;
         var nextNO     = fieldNO > groupItems ? fieldNO - groupItems + 1 : fieldNO + groupItems;
@@ -157,8 +189,8 @@ function setField(fieldName, fieldNO)
             $('#operator' + nextNO).val('<=');
             $('#valueBox' + nextNO).html($('#box' + fieldName.replace('.', '\\.')).children().clone());
             $('#valueBox' + nextNO).children().attr({name : 'value' + nextNO, id : 'value' + nextNO});
-            setDateField("#value" + nextNO, nextNO);
-            $("#value" + nextNO).addClass('date');
+            setDateField("#value" + nextNO, nextNO, type);
+            $("#value" + nextNO).addClass(type);
         }
     }
 
