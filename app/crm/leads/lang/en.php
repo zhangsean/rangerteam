@@ -1,4 +1,6 @@
 <?php
+if(!isset($lang->leads)) $lang->leads = new stdclass();
+
 $lang->leads->common    = 'Leads';
 $lang->leads->browse    = 'Browse';
 $lang->leads->create    = 'Create';
