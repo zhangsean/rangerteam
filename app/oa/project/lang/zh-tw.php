@@ -32,6 +32,7 @@ $lang->project->import     = '導入';
 $lang->project->importTask = '導入任務';
 $lang->project->role       = '角色';
 $lang->project->project    = '項目';
+$lang->project->dateRange  = '起止日期';
 
 $lang->project->id          = '編號';
 $lang->project->name        = '項目名稱';
