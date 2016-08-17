@@ -5,7 +5,7 @@ ALTER TABLE `sys_category` CHANGE `major` `major` enum('0','1','2','3','4') NOT 
 UPDATE `cash_trade` SET `type` = 'invest' WHERE `type` = '';
 UPDATE `sys_grouppriv` SET `method` = 'invest' WHERE `module` = 'trade' and `method` = 'inveset';
 
-INSERT INTO `sys_grouppriv` (`group`, `module`, `method`) VALUES
+REPLACE INTO `sys_grouppriv` (`group`, `module`, `method`) VALUES
 (1,'trade','compare'),
 (1,'trade','export2Excel'),
 (1,'attend','detail'),
