@@ -11,7 +11,7 @@
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
-  <div class='modal-dialog w-450px'>
+  <div class='modal-dialog w-700px'>
     <?php if($result == 'fail'):?>
     <div class='modal-header'><h3><?php echo $lang->upgrade->fail;?></h3></div>
     <div class='modal-body'><?php echo join('<br />', $errors); ?></div>
