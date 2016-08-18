@@ -20,7 +20,7 @@ class thread extends control
      */
     public function post($boardID = 0)
     {
-        $this->loadModel('forum');
+        $this->loadModel('forum', 'team');
         if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login', "referer=" . helper::safe64Encode($this->app->getURI()))));
 
         /* Get the board. */
@@ -91,7 +91,7 @@ class thread extends control
         $this->view->title     = $this->lang->thread->edit . $this->lang->minus . $thread->title;
         $this->view->thread    = $thread;
         $this->view->board     = $board;
-        $this->view->boards    = $this->loadModel('forum')->getBoards();
+        $this->view->boards    = $this->loadModel('forum', 'team')->getBoards();
         $this->view->canManage = $this->thread->canManage($board->id);
 
         $this->display();
@@ -119,7 +119,7 @@ class thread extends control
         /* Get replies. */
         $this->app->loadClass('pager', $static = true);
         $pager   = new pager(0, 10, $pageID);
-        $replies = $this->loadModel('reply')->getByThread($threadID, $pager);
+        $replies = $this->loadModel('reply', 'team')->getByThread($threadID, $pager);
 
         /* Get all speakers. */
         $speakers = $this->thread->getSpeakers($thread, $replies);
@@ -139,7 +139,7 @@ class thread extends control
         $this->view->replies  = $replies;
         $this->view->pager    = $pager;
         $this->view->speakers = $speakers;
-        $this->view->boards   = $this->loadModel('forum')->getBoards();
+        $this->view->boards   = $this->loadModel('forum', 'team')->getBoards();
 
         $this->display();
     }
@@ -182,7 +182,7 @@ class thread extends control
      */
     public function locate($threadID, $replyID = 0)
     {
-        $position = $replyID ? $this->loadModel('reply')->getPosition($replyID) : ''; 
+        $position = $replyID ? $this->loadModel('reply', 'team')->getPosition($replyID) : ''; 
         $location = $this->createLink('thread', 'view', "threadID=$threadID", $position);
         header("location:$location");
     }

@@ -154,7 +154,7 @@ class block extends control
             ->fetchAll('id');
 
         $this->view->currencySign  = $this->loadModel('common', 'sys')->getCurrencySign();
-        $this->view->depositorList = $this->loadModel('depositor')->getPairs();
+        $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
         $this->display();
     }
 

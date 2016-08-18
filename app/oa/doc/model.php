@@ -162,7 +162,7 @@ class docModel extends model
     {
         $products = $this->loadModel('product', 'crm')->getPairs();
         $projects = array();
-        //$projects = $this->loadModel('project')->getPairs();
+        //$projects = $this->loadModel('project', 'oa')->getPairs();
 
         $keysOfProducts = array_keys($products);
         $keysOfProjects = array_keys($projects);

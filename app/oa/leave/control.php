@@ -332,7 +332,7 @@ class leave extends control
             $actionID = $this->loadModel('action')->create('leave', $leaveID, 'revoked');
             $this->sendmail($leaveID, $actionID);
 
-            $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy);
+            $this->loadModel('attend', 'oa')->batchUpdate($dates, $leave->createdBy);
         }
 
         if($leave->status == 'draft')
@@ -342,7 +342,7 @@ class leave extends control
             $actionID = $this->loadModel('action')->create('leave', $leaveID, 'commited');
             $this->sendmail($leaveID, $actionID);
 
-            $this->loadModel('attend')->batchUpdate($dates, $leave->createdBy, '', 'leave');
+            $this->loadModel('attend', 'oa')->batchUpdate($dates, $leave->createdBy, '', 'leave');
         }
 
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));

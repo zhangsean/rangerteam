@@ -38,7 +38,7 @@ class depositor extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->view->trades       = $this->depositor->getTradesAmount();
-        $this->view->balances     = $this->loadModel('balance')->getLatest();
+        $this->view->balances     = $this->loadModel('balance', 'cash')->getLatest();
         $this->view->title        = $this->lang->depositor->browse;
         $this->view->depositors   = $this->depositor->getList($tag, $orderBy, $pager);
         $this->view->pager        = $pager;
@@ -159,7 +159,7 @@ class depositor extends control
     {
         if(!function_exists('bccomp')) die(js::alert($this->lang->depositor->placeholder->noBccomp) . js::locate('back'));
 
-        $this->loadModel('trade');
+        $this->loadModel('trade', 'cash');
         unset($this->lang->depositor->menu);
         $this->lang->menuGroups->depositor = 'check';
 
@@ -180,7 +180,7 @@ class depositor extends control
         $this->view->title         = $this->lang->depositor->check;
         $this->view->selected      = $selected;
         $this->view->depositorList = $this->depositor->getPairs();
-        $this->view->dateOptions   = (array) $this->loadModel('balance')->getDateOptions();
+        $this->view->dateOptions   = (array) $this->loadModel('balance', 'cash')->getDateOptions();
         $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
         $this->view->categories    = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
         $this->view->currencySign  = $this->loadModel('common', 'sys')->getCurrencySign();
@@ -201,7 +201,7 @@ class depositor extends control
      */
     public function saveBalance($depositor, $money, $date)
     {
-        $depositor = $this->loadModel('depositor')->getByID($depositor);
+        $depositor = $this->depositor->getByID($depositor);
         $balance = new stdclass();
         $balance->depositor   = $depositor->id;
         $balance->currency    = $depositor->currency;
@@ -210,7 +210,7 @@ class depositor extends control
         $balance->money       = $money;
         $balance->date        = date(DT_DATE1, $date);
 
-        $this->loadModel('balance')->create($balance);
+        $this->loadModel('balance', 'cash')->create($balance);
         if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));
 
         $this->loadModel('action')->create('depositor', $this->post->depositor, 'CreatedBalance', $this->post->date . ':'  . $this->post->money . $this->post->currency);
@@ -259,7 +259,7 @@ class depositor extends control
 
             /* Get users and projects. */
             $users    = $this->loadModel('user')->getPairs();
-            $balances = $this->loadModel('balance')->getLatest();
+            $balances = $this->loadModel('balance', 'cash')->getLatest();
             
             foreach($depositors as $depositor)
             {

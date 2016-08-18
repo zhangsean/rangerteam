@@ -498,9 +498,9 @@ class attend extends control
             $mode = 'edit';
 
             $attends      = $this->attend->getGroupByAccount($startDate, $endDate < helper::today() ? $endDate : helper::today());
-            $trips        = $this->loadModel('trip')->getList($currentYear, $currentMonth, $account = '', $dept = '', $orderBy = 'begin, start');
-            $leaves       = $this->loadModel('leave')->getList($type = 'company', $currentYear, $currentMonth, $account = '', $dept = '', $status = 'pass', $orderBy = 'begin, start');
-            $overtimes    = $this->loadModel('overtime')->getList($type = 'company', $currentYear, $currentMonth, $account = '', $dept = '', $status = 'pass', $orderBy = 'begin, start');
+            $trips        = $this->loadModel('trip', 'oa')->getList($currentYear, $currentMonth, $account = '', $dept = '', $orderBy = 'begin, start');
+            $leaves       = $this->loadModel('leave', 'oa')->getList($type = 'company', $currentYear, $currentMonth, $account = '', $dept = '', $status = 'pass', $orderBy = 'begin, start');
+            $overtimes    = $this->loadModel('overtime', 'oa')->getList($type = 'company', $currentYear, $currentMonth, $account = '', $dept = '', $status = 'pass', $orderBy = 'begin, start');
             $workingHours = empty($this->config->attend->workingHours) ? $this->config->attend->signOutLimit - $this->config->attend->signInLimit : $this->config->attend->workingHours;
 
             $stat = array();

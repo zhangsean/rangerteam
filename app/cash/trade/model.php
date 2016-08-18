@@ -305,7 +305,7 @@ class tradeModel extends model
             ->striptags('desc')
             ->get();
 
-        $depositor = $this->loadModel('depositor')->getByID($trade->depositor);
+        $depositor = $this->loadModel('depositor', 'cash')->getByID($trade->depositor);
         if(!empty($depositor)) $trade->currency = $depositor->currency;
 
         $this->dao->insert(TABLE_TRADE)
@@ -347,7 +347,7 @@ class tradeModel extends model
         $now    = helper::now();
         $trades = array();
 
-        $depositorList = $this->loadModel('depositor')->getList();
+        $depositorList = $this->loadModel('depositor', 'cash')->getList();
 
         $this->loadModel('action');
         /* Get data. */
@@ -408,7 +408,7 @@ class tradeModel extends model
     {
         $trades = array();
 
-        $depositorList = $this->loadModel('depositor')->getList();
+        $depositorList = $this->loadModel('depositor', 'cash')->getList();
 
         /* Get data. */
         if($this->post->type === false) return array('result' => 'fail');
@@ -547,7 +547,7 @@ class tradeModel extends model
     {
         $now       = helper::now();
         $trades    = array();
-        $depositor = $this->loadModel('depositor')->getByID($depositorID);
+        $depositor = $this->loadModel('depositor', 'cash')->getByID($depositorID);
 
         $this->loadModel('action');
 
@@ -665,8 +665,8 @@ class tradeModel extends model
     {
         if($this->post->receipt == $this->post->payment) return array('result' => 'fail', 'message' => $this->lang->trade->notEqual);
 
-        $receiptDepositor = $this->loadModel('depositor')->getByID($this->post->receipt);
-        $paymentDepositor = $this->loadModel('depositor')->getByID($this->post->payment);
+        $receiptDepositor = $this->loadModel('depositor', 'cash')->getByID($this->post->receipt);
+        $paymentDepositor = $this->loadModel('depositor', 'cash')->getByID($this->post->payment);
 
         $diffCurrency = $receiptDepositor->currency != $paymentDepositor->currency;
 
@@ -747,7 +747,7 @@ class tradeModel extends model
      */
     public function invest()
     {
-        $depositor = $this->loadModel('depositor')->getByID($this->post->depositor);
+        $depositor = $this->loadModel('depositor', 'cash')->getByID($this->post->depositor);
         $now = helper::now();
 
         $trade = fixer::input('post')

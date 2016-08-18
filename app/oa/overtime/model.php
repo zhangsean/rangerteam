@@ -138,11 +138,11 @@ class overtimeModel extends model
         $leave = clone $overtime;
         $leave ->start  = '00:00:00';
         $leave ->finish = '23:59:59';
-        $existLeave = $this->loadModel('leave')->checkLeave($leave, $this->app->user->account);
+        $existLeave = $this->loadModel('leave', 'oa')->checkLeave($leave, $this->app->user->account);
         if(!empty($existLeave)) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, implode(', ', $existLeave))); 
         
         $trip = $leave;
-        $existTrip = $this->loadModel('trip')->checkTrip($trip, $this->app->user->account); 
+        $existTrip = $this->loadModel('trip', 'oa')->checkTrip($trip, $this->app->user->account); 
         if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
 
         $this->dao->insert(TABLE_OVERTIME)
@@ -180,11 +180,11 @@ class overtimeModel extends model
         $leave = clone $overtime;
         $leave ->start  = '00:00:00';
         $leave ->finish = '23:59:59';
-        $existLeave = $this->loadModel('leave')->checkLeave($leave, $this->app->user->account);
+        $existLeave = $this->loadModel('leave', 'oa')->checkLeave($leave, $this->app->user->account);
         if(!empty($existLeave)) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, implode(', ', $existLeave))); 
         
         $trip = $leave;
-        $existTrip = $this->loadModel('trip')->checkTrip($trip, $this->app->user->account); 
+        $existTrip = $this->loadModel('trip', 'oa')->checkTrip($trip, $this->app->user->account); 
         if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
 
         $this->dao->update(TABLE_OVERTIME)
@@ -213,7 +213,7 @@ class overtimeModel extends model
         if(!dao::isError())
         {
             $oldDates = range(strtotime($oldOvertime->begin), strtotime($oldOvertime->end), 60 * 60 * 24);
-            $this->loadModel('attend')->batchUpdate($oldDates, $oldOvertime->createdBy, '');
+            $this->loadModel('attend', 'oa')->batchUpdate($oldDates, $oldOvertime->createdBy, '');
         }
         return !dao::isError();
     }
@@ -242,7 +242,7 @@ class overtimeModel extends model
         if(!dao::isError() and $status == 'pass')
         {
             $dates = range(strtotime($overtime->begin), strtotime($overtime->end), 60 * 60 * 24);
-            $this->loadModel('attend')->batchUpdate($dates, $overtime->createdBy, 'overtime', '', $overtime);
+            $this->loadModel('attend', 'oa')->batchUpdate($dates, $overtime->createdBy, 'overtime', '', $overtime);
         }
 
         return !dao::isError();

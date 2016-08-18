@@ -127,7 +127,7 @@ class replyModel extends model
      */
     public function post($threadID)
     {
-        $thread = $this->loadModel('thread')->getByID($threadID);
+        $thread = $this->loadModel('thread', 'team')->getByID($threadID);
         $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
 
         $reply = fixer::input('post')
@@ -158,7 +158,7 @@ class replyModel extends model
             $this->thread->updateStats($threadID);
 
             /* Update board stats. */
-            $this->loadModel('forum')->updateBoardStats($thread->board);
+            $this->loadModel('forum', 'team')->updateBoardStats($thread->board);
 
             return $replyID;
         }
@@ -234,8 +234,8 @@ class replyModel extends model
         if(dao::isError()) return false;
 
         /* Update thread and board stats. */
-        $this->loadModel('thread')->updateStats($thread->id);
-        $this->loadModel('forum')->updateBoardStats($thread->board);
+        $this->loadModel('thread', 'team')->updateStats($thread->id);
+        $this->loadModel('forum', 'team')->updateBoardStats($thread->board);
         return !dao::isError();
     }
 

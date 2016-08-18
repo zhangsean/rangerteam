@@ -77,7 +77,7 @@ class contact extends control
             $this->send($return);
         }
 
-        $this->app->loadLang('resume');
+        $this->app->loadLang('resume', 'crm');
 
         unset($this->lang->contact->menu);
         $this->view->title     = $this->lang->contact->create;
@@ -106,7 +106,7 @@ class contact extends control
             $this->send($return);
         }
 
-        $this->app->loadLang('resume');
+        $this->app->loadLang('resume', 'crm');
 
         $this->view->title      = $this->lang->contact->edit;
         $this->view->customers  = $this->customer->getPairs('provider');

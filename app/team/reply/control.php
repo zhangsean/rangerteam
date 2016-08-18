@@ -66,7 +66,7 @@ class reply extends control
         $reply = $this->reply->getByID($replyID);
         if(!$reply) die(js::locate('back'));
 
-        $thread = $this->loadModel('thread')->getByID($reply->thread);
+        $thread = $this->loadModel('thread', 'team')->getByID($reply->thread);
         if(!$this->thread->canManage($thread->board, $reply->author)) die(js::locate('back'));
         
         $this->thread->setEditor($thread->board, 'edit');
@@ -82,7 +82,7 @@ class reply extends control
         $this->view->reply  = $reply;
         $this->view->thread = $thread;
         $this->view->board  = $this->loadModel('tree')->getById($thread->board);
-        $this->view->boards = $this->loadModel('forum')->getBoards();
+        $this->view->boards = $this->loadModel('forum', 'team')->getBoards();
 
         $this->display();
     }
@@ -99,7 +99,7 @@ class reply extends control
         $reply = $this->reply->getByID($replyID);
         if(!$reply) $this->send(array('result' => 'fail', 'message' => 'Not found'));
 
-        $thread = $this->loadModel('thread')->getByID($reply->thread);
+        $thread = $this->loadModel('thread', 'team')->getByID($reply->thread);
         if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
 
         if(RUN_MODE == 'admin')
@@ -130,7 +130,7 @@ class reply extends control
         $reply = $this->reply->getByID($replyID);
         if(!$reply) $this->send(array('result'=>'fail', 'message'=> 'data error'));
 
-        $thread = $this->loadModel('thread')->getByID($reply->thread);
+        $thread = $this->loadModel('thread', 'team')->getByID($reply->thread);
         if(!$thread) $this->send(array('result'=>'fail', 'message'=> 'data error'));
 
         /* Judge current user has priviledge to edit the reply or not. */

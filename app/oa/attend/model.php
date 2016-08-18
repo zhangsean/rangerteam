@@ -626,9 +626,9 @@ EOT;
     public function computeStatus($attend)
     {
         /* 'leave': ask for leave. 'trip': biz trip. */
-        if($this->loadModel('leave')->isLeave($attend->date, $attend->account)) return 'leave';
-        if($this->loadModel('trip')->isTrip($attend->date, $attend->account)) return 'trip';
-        if($this->loadModel('overtime')->isOvertime($attend->date, $attend->account)) return 'overtime';
+        if($this->loadModel('leave', 'oa')->isLeave($attend->date, $attend->account)) return 'leave';
+        if($this->loadModel('trip', 'oa')->isTrip($attend->date, $attend->account)) return 'trip';
+        if($this->loadModel('overtime', 'oa')->isOvertime($attend->date, $attend->account)) return 'overtime';
 
         $status = 'normal';
         if(($attend->signIn == "00:00:00" and $attend->signOut == "00:00:00") or (!$attend->signIn and !$attend->signOut)) 
@@ -650,7 +650,7 @@ EOT;
         }
 
         /* 'rest': rest day. */
-        if($this->isWeekend($attend->date) or $this->loadModel('holiday')->isHoliday($attend->date)) $status = 'rest';
+        if($this->isWeekend($attend->date) or $this->loadModel('holiday', 'oa')->isHoliday($attend->date)) $status = 'rest';
 
         return $status;
     }
@@ -803,7 +803,7 @@ EOT;
         {
             $date = date('Y-m-d', $datetime);
             if($this->isWeekend($date)) continue;
-            if($this->loadModel('holiday')->isHoliday($date)) continue;
+            if($this->loadModel('holiday', 'oa')->isHoliday($date)) continue;
             $workingDays ++;
         }
         return $workingDays;
@@ -830,7 +830,7 @@ EOT;
             $date = date('Y-m-d', $datetime);
 
             $attend = new stdclass();
-            $attend->status       = $status ? $status : (($this->isWeekend($date) or $this->loadModel('holiday')->isHoliday($date)) ? 'rest' : 'absent');
+            $attend->status       = $status ? $status : (($this->isWeekend($date) or $this->loadModel('holiday', 'oa')->isHoliday($date)) ? 'rest' : 'absent');
             $attend->reason       = $reason;
             $attend->reviewStatus = '';
             $attend->desc         = '';
@@ -877,7 +877,7 @@ EOT;
                 $attend->desc = $hours;
             }
 
-            $oldAttend = $this->loadModel('attend')->getByDate($date, $account);
+            $oldAttend = $this->getByDate($date, $account);
             if(isset($oldAttend->new))
             {
                 $attend->date    = $date;

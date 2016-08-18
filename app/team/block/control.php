@@ -151,7 +151,7 @@ class block extends control
             ->limit($this->params->num)
             ->fetchAll('id');
 
-        $this->loadModel('thread')->setRealNames($threads);
+        $this->loadModel('thread', 'team')->setRealNames($threads);
         $threads = $this->thread->process($threads);
 
         $this->view->threads = $threads;

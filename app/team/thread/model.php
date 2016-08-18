@@ -213,7 +213,7 @@ class threadModel extends model
             $this->file->saveUpload('thread', $threadID);
 
             /* Update board stats. */
-            $this->loadModel('forum')->updateBoardStats($boardID);
+            $this->loadModel('forum', 'team')->updateBoardStats($boardID);
 
             return $threadID;
         }
@@ -293,8 +293,8 @@ class threadModel extends model
 
         if(dao::isError()) return false;
 
-        $this->loadModel('forum')->updateBoardStats($oldBoard);
-        $this->loadModel('forum')->updateBoardStats($targetBoard);
+        $this->loadModel('forum', 'team')->updateBoardStats($oldBoard);
+        $this->forum->updateBoardStats($targetBoard);
         return true;
     }
 
@@ -313,7 +313,7 @@ class threadModel extends model
         if(dao::isError()) return false;
 
         /* Update board stats. */
-        $this->loadModel('forum')->updateBoardStats($thread->board);
+        $this->loadModel('forum', 'team')->updateBoardStats($thread->board);
         return !dao::isError();
     }
 
@@ -332,7 +332,7 @@ class threadModel extends model
         if(dao::isError()) return false;
 
         /* Update board stats. */
-        $this->loadModel('forum')->updateBoardStats($thread->board);
+        $this->loadModel('forum', 'team')->updateBoardStats($thread->board);
         return !dao::isError();
     }
 

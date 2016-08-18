@@ -51,8 +51,8 @@ class forum extends control
         /* Get common threads. */
         $this->app->loadClass('pager', $static = true);
         $pager   = new pager(0, 10, $pageID);
-        if($mode != 'bysearch') $threads = $this->loadModel('thread')->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
-        if($mode == 'bysearch') $threads = $this->loadModel('thread')->getBySearch($board->id, 'bysearch', $orderBy = 'repliedDate_desc', $pager);
+        if($mode != 'bysearch') $threads = $this->loadModel('thread', 'team')->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
+        if($mode == 'bysearch') $threads = $this->loadModel('thread', 'team')->getBySearch($board->id, 'bysearch', $orderBy = 'repliedDate_desc', $pager);
 
         $this->view->boardID  = $boardID;
         $this->view->title    = $board->name;
@@ -84,8 +84,8 @@ class forum extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $boards  = $this->loadModel('tree')->getFamily($boardID, 'forum');
-        $threads = $boards ? $this->loadModel('thread')->getList($boards, $orderBy, $pager) : array();
+        $boards  = $this->loadModel('tree', 'team')->getFamily($boardID, 'forum');
+        $threads = $boards ? $this->loadModel('thread', 'team')->getList($boards, $orderBy, $pager) : array();
 
         $this->view->boardID  = $boardID;
         $this->view->orderBy  = $orderBy;

@@ -253,9 +253,10 @@ class block extends control
         }
 
         /* Get task info of project. */
+        $this->loadModel('project', 'oa');
         foreach($projects as $project)
         {
-            if(!$this->loadModel('project')->checkPriv($project->id))
+            if(!$this->project->checkPriv($project->id))
             {
                 unset($projects[$project->id]);
                 continue;

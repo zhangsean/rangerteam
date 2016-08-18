@@ -82,7 +82,7 @@ class balanceModel extends model
         if(empty($balance))
         {
             $now = helper::now();
-            $depositor = $this->loadModel('depositor')->getByID($this->post->depositor);
+            $depositor = $this->loadModel('depositor', 'cash')->getByID($this->post->depositor);
 
             $balance = fixer::input('post')
                 ->add('currency', !empty($depositor) ? "{$depositor->currency}" : '')
@@ -111,7 +111,7 @@ class balanceModel extends model
     {
         $oldBalance = $this->getByID($balanceID);
 
-        $depositor = $this->loadModel('depositor')->getByID($this->post->depositor);
+        $depositor = $this->loadModel('depositor', 'cash')->getByID($this->post->depositor);
 
         $balance = fixer::input('post')
             ->add('currency', $depositor->currency)

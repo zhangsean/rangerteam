@@ -286,7 +286,7 @@ class overtime extends control
             $actionID = $this->loadModel('action')->create('overtime', $overtimeID, 'revoked');
             $this->sendmail($overtimeID, $actionID);
 
-            $this->loadModel('attend')->batchUpdate($dates, $overtime->createdBy);
+            $this->loadModel('attend', 'oa')->batchUpdate($dates, $overtime->createdBy);
         }
 
         if($overtime->status == 'draft')
@@ -296,7 +296,7 @@ class overtime extends control
             $actionID = $this->loadModel('action')->create('overtime', $overtimeID, 'commited');
             $this->sendmail($overtimeID, $actionID);
 
-            $this->loadModel('attend')->batchUpdate($dates, $overtime->createdBy, '', 'overtime');
+            $this->loadModel('attend', 'oa')->batchUpdate($dates, $overtime->createdBy, '', 'overtime');
         }
 
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
