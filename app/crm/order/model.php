@@ -43,7 +43,7 @@ class orderModel extends model
      */
     public function getOrdersSawByMe($type = 'view', $orderIdList = array())
     {
-        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
         $orderList = $this->dao->select('*')->from(TABLE_ORDER)
             ->where('deleted')->eq(0)
             ->beginIF(!empty($orderIdList))->andWhere('id')->in($orderIdList)->fi()
@@ -68,10 +68,10 @@ class orderModel extends model
      */
     public function getList($mode = 'all', $param = '', $owner = '', $orderBy = 'id_desc', $pager = null)
     {
-        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
-        $products = $this->loadModel('product')->getPairs();
+        $products = $this->loadModel('product', 'crm')->getPairs();
 
         $this->app->loadClass('date', $static = true);
         $thisMonth = date::getThisMonth();
@@ -162,7 +162,7 @@ class orderModel extends model
      */
     public function getPairs($customer = 0, $status = '')
     {
-        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
         $orders = $this->dao->select('o.id, o.createdDate, o.product, c.name as customerName')->from(TABLE_ORDER)->alias('o')
@@ -273,7 +273,7 @@ class orderModel extends model
         /* Check data. */
         if($this->post->createProduct)
         {
-            $this->loadModel('product');
+            $this->loadModel('product', 'crm');
             if(!commonModel::hasPriv('product', 'create')) return array('result' => 'fail', 'message' => sprintf($this->lang->order->deny, $this->lang->product->common));
             
             $errors = array();
@@ -318,7 +318,7 @@ class orderModel extends model
             $customer->createdBy   = $this->app->user->account;
             $customer->createdDate = helper::now();
 
-            $return = $this->loadModel('customer')->create($customer);
+            $return = $this->loadModel('customer', 'crm')->create($customer);
             if($return['result'] == 'fail') return $return;
             $customerID = $return['customerID'];
             $order->customer = isset($customerID) ? $customerID : '';
@@ -356,8 +356,8 @@ class orderModel extends model
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
 
         $orderID = $this->dao->lastInsertID();
-        $this->loadModel('action')->create('order', $orderID, 'Created', '');
-        $this->loadModel('action')->create('customer', $this->post->customer, 'createOrder', '', html::a(helper::createLink('order', 'view', "orderID=$orderID"), $orderID));
+        $this->loadModel('action', 'sys')->create('order', $orderID, 'Created', '');
+        $this->loadModel('action', 'sys')->create('customer', $this->post->customer, 'createOrder', '', html::a(helper::createLink('order', 'view', "orderID=$orderID"), $orderID));
 
         return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('order', 'browse'), 'orderID' => $orderID);
     }

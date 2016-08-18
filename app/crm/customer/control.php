@@ -184,12 +184,12 @@ class customer extends control
 
         $this->view->title        = $this->lang->customer->view;
         $this->view->customer     = $customer;
-        $this->view->orders       = $this->loadModel('order')->getList($mode = 'query', "customer=$customerID");
-        $this->view->contacts     = $this->loadModel('contact')->getList($customerID);
-        $this->view->contracts    = $this->loadModel('contract')->getList($customerID);
-        $this->view->addresses    = $this->loadModel('address')->getList('customer', $customerID);
+        $this->view->orders       = $this->loadModel('order', 'crm')->getList($mode = 'query', "customer=$customerID");
+        $this->view->contacts     = $this->loadModel('contact', 'crm')->getList($customerID);
+        $this->view->contracts    = $this->loadModel('contract', 'crm')->getList($customerID);
+        $this->view->addresses    = $this->loadModel('address', 'crm')->getList('customer', $customerID);
         $this->view->actions      = $this->loadModel('action')->getList('customer', $customerID);
-        $this->view->products     = $this->loadModel('product')->getPairs();
+        $this->view->products     = $this->loadModel('product', 'crm')->getPairs();
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->areaList     = $this->loadModel('tree')->getPairs('', 'area');
         $this->view->industryList = $this->tree->getPairs('', 'industry');
@@ -267,8 +267,8 @@ class customer extends control
     {
         $this->view->title      = $this->lang->customer->order;
         $this->view->modalWidth = 'lg';
-        $this->view->orders     = $this->loadModel('order')->getList($mode = 'query', "customer=$customerID");
-        $this->view->products   = $this->loadModel('product')->getPairs();
+        $this->view->orders     = $this->loadModel('order', 'crm')->getList($mode = 'query', "customer=$customerID");
+        $this->view->products   = $this->loadModel('product', 'crm')->getPairs();
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->display();
     }
@@ -283,11 +283,11 @@ class customer extends control
     public function contact($customerID)
     {
         $this->app->loadLang('resume');
-        $this->app->user->canEditContactIdList = ',' . implode(',', $this->loadModel('contact')->getContactsSawByMe('edit')) . ',';
+        $this->app->user->canEditContactIdList = ',' . implode(',', $this->loadModel('contact', 'crm')->getContactsSawByMe('edit')) . ',';
 
         $this->view->title      = $this->lang->customer->contact;
         $this->view->modalWidth = 'lg';
-        $this->view->contacts   = $this->loadModel('contact')->getList($customerID);
+        $this->view->contacts   = $this->loadModel('contact', 'crm')->getList($customerID);
         $this->view->customerID = $customerID;
         $this->display();
     }
@@ -308,7 +308,7 @@ class customer extends control
         }
 
         $this->view->title      = $this->lang->customer->linkContact;
-        $this->view->contacts   = $this->loadModel('contact')->getPairs();
+        $this->view->contacts   = $this->loadModel('contact', 'crm')->getPairs();
         $this->view->customerID = $customerID;
         $this->display();
     }
@@ -323,7 +323,7 @@ class customer extends control
     public function contract($customerID)
     {
         $this->view->title      = $this->lang->customer->contract;
-        $this->view->contracts  = $this->loadModel('contract')->getList($customerID);
+        $this->view->contracts  = $this->loadModel('contract', 'crm')->getList($customerID);
         $this->view->modalWidth = 'lg';
         $this->display();
     }

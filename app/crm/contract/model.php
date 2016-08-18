@@ -28,7 +28,7 @@ class contractModel extends model
             $contractOrders  = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->fetchAll();
             foreach($contractOrders as $contractOrder) $contract->order[] = $contractOrder->order;
 
-            $contract->files        = $this->loadModel('file')->getByObject('contract', $contractID);
+            $contract->files        = $this->loadModel('file', 'sys')->getByObject('contract', $contractID);
             $contract->returnList   = $this->getReturnList($contractID);
             $contract->deliveryList = $this->getDeliveryList($contractID);
         }
@@ -49,7 +49,7 @@ class contractModel extends model
      */
     public function getList($customer = 0, $mode = 'all', $owner = 'all', $orderBy = 'id_desc', $pager = null)
     {
-        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
         
         /* process search condition. */
@@ -121,7 +121,7 @@ class contractModel extends model
      */
     public function getContractsSawByMe($type = 'view', $contractIdList = array())
     {
-        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
         $contractList = $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('deleted')->eq(0)
             ->beginIF(!empty($contractIdList))->andWhere('id')->in($contractIdList)->fi()
@@ -207,7 +207,7 @@ class contractModel extends model
             ->stripTags('items', $this->config->allowedTags->admin)
             ->get();
 
-        $contract = $this->loadModel('file')->processEditor($contract, $this->config->contract->editor->create['id']);
+        $contract = $this->loadModel('file', 'sys')->processEditor($contract, $this->config->contract->editor->create['id']);
         $this->dao->insert(TABLE_CONTRACT)->data($contract, 'order,uid,files,labels,real')
             ->autoCheck()
             ->batchCheck($this->config->contract->require->create, 'notempty')
@@ -235,7 +235,7 @@ class contractModel extends model
                     $this->dao->update(TABLE_ORDER)->data($order)->where('id')->eq($orderID)->exec();
 
                     if(dao::isError()) return false;
-                    $this->loadModel('action')->create('order', $orderID, 'Signed', '', $contract->real[$key]);
+                    $this->loadModel('action', 'sys')->create('order', $orderID, 'Signed', '', $contract->real[$key]);
                 }
             }
 
@@ -245,7 +245,7 @@ class contractModel extends model
             $customer->editedDate = helper::now();
             $this->dao->update(TABLE_CUSTOMER)->data($customer)->where('id')->eq($contract->customer)->exec();
 
-            $this->loadModel('file')->saveUpload('contract', $contractID);
+            $this->loadModel('file', 'sys')->saveUpload('contract', $contractID);
 
             return $contractID;
         }
@@ -290,7 +290,7 @@ class contractModel extends model
             ->stripTags('items', $this->config->allowedTags->admin)
             ->get();
 
-        $data = $this->loadModel('file')->processEditor($data, $this->config->contract->editor->edit['id']);
+        $data = $this->loadModel('file', 'sys')->processEditor($data, $this->config->contract->editor->edit['id']);
         $this->dao->update(TABLE_CONTRACT)->data($data, 'uid,order,real')
             ->where('id')->eq($contractID)
             ->autoCheck()
@@ -302,7 +302,7 @@ class contractModel extends model
         {
             if($data->order)
             {
-                $oldOrders = $this->loadModel('order')->getByIdList($data->order);
+                $oldOrders = $this->loadModel('order', 'crm')->getByIdList($data->order);
                 foreach($data->order as $key => $orderID)
                 {
                     if(!$orderID) continue;
@@ -314,7 +314,7 @@ class contractModel extends model
                     $this->dao->delete()->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->exec();
                     foreach($data->order as $key => $orderID)
                     {
-                        $oldOrder = $this->loadModel('order')->getByID($orderID);
+                        $oldOrder = $this->loadModel('order', 'crm')->getByID($orderID);
 
                         $contractOrder = new stdclass();
                         $contractOrder->contract = $contractID;
@@ -332,7 +332,7 @@ class contractModel extends model
                         if(dao::isError()) return false;
 
                         $changes  = commonModel::createChanges($oldOrder, $order);
-                        $actionID = $this->loadModel('action')->create('order', $orderID, 'Edited');
+                        $actionID = $this->loadModel('action', 'sys')->create('order', $orderID, 'Edited');
                         $this->action->logHistory($actionID, $changes);
                     }
                 }
@@ -391,7 +391,7 @@ class contractModel extends model
             ->stripTags('comment', $this->config->allowedTags->admin)
             ->get();
 
-        $data = $this->loadModel('file')->processEditor($data, $this->config->contract->editor->delivery['id']);
+        $data = $this->loadModel('file', 'sys')->processEditor($data, $this->config->contract->editor->delivery['id']);
         $this->dao->insert(TABLE_DELIVERY)->data($data, $skip = 'uid, handlers, finish')->autoCheck()->exec();
 
         if(!dao::isError())
@@ -436,7 +436,7 @@ class contractModel extends model
             ->stripTags('comment', $this->config->allowedTags->admin)
             ->get();
 
-        $data = $this->loadModel('file')->processEditor($data, $this->config->contract->editor->editdelivery['id']);
+        $data = $this->loadModel('file', 'sys')->processEditor($data, $this->config->contract->editor->editdelivery['id']);
         $this->dao->update(TABLE_DELIVERY)->data($data, $skip = 'uid, handlers, finish')->where('id')->eq($delivery->id)->autoCheck()->exec();
 
         if(!dao::isError())
@@ -444,7 +444,7 @@ class contractModel extends model
             $changes = commonModel::createChanges($delivery, $data);
             if($changes)
             {
-                $actionID = $this->loadModel('action')->create('contract', $contract->id, 'editDelivered');
+                $actionID = $this->loadModel('action', 'sys')->create('contract', $contract->id, 'editDelivered');
                 $this->action->logHistory($actionID, $changes);
             }
 
@@ -609,7 +609,7 @@ class contractModel extends model
             $changes = commonModel::createChanges($return, $data);
             if($changes or $this->post->comment)
             {
-                $actionID = $this->loadModel('action')->create('contract', $contract->id, 'editReturned', $this->post->comment);
+                $actionID = $this->loadModel('action', 'sys')->create('contract', $contract->id, 'editReturned', $this->post->comment);
                 if($changes) $this->action->logHistory($actionID, $changes);
             }
 

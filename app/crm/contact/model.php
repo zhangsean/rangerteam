@@ -75,7 +75,7 @@ class contactModel extends model
      */
     public function getContactsSawByMe($type = 'view', $contactIdList = array())
     {
-        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
         $contactList = $this->dao->select('t1.id')->from(TABLE_CONTACT)->alias('t1')
             ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
             ->where('t1.deleted')->eq(0)
@@ -245,7 +245,7 @@ class contactModel extends model
      */
     public function getCustomerPairs($contactID = 0)
     {
-        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
         return $this->dao->select('customer,name')
@@ -304,7 +304,7 @@ class contactModel extends model
                     if($return['result'] == 'fail') return $return;
                 }
 
-                $return = $this->loadModel('customer')->create($customer);
+                $return = $this->loadModel('customer', 'crm')->create($customer);
                 if($return['result'] == 'fail') return $return;
                 $contact->customer = $return['customerID'];
             }
@@ -328,7 +328,7 @@ class contactModel extends model
         if(!dao::isError())
         {
             $contactID = $this->dao->lastInsertID();
-            $this->loadModel('action')->create('contact', $contactID, 'Created', '');
+            $this->loadModel('action', 'sys')->create('contact', $contactID, 'Created', '');
 
             if($type != 'leads')
             {
@@ -424,7 +424,7 @@ class contactModel extends model
     {
         if(!$_FILES) return array('result' => true, 'contactID' => $contactID);
 
-        $fileModel = $this->loadModel('file');
+        $fileModel = $this->loadModel('file', 'sys');
 
         if(!$this->file->checkSavePath()) return array('result' => false, 'message' => $this->lang->file->errorUnwritable);
         
@@ -541,14 +541,14 @@ class contactModel extends model
 
             if(!$this->post->continue)
             {
-                $return = $this->loadModel('customer')->checkUnique($customer);
+                $return = $this->loadModel('customer', 'crm')->checkUnique($customer);
                 if($return['result'] == 'fail') return $return;
             }
             
             $this->dao->insert(TABLE_CUSTOMER)->data($customer, $skip = 'uid,contact,email,qq,phone,continue')->autoCheck()->batchCheck('name', 'notempty')->exec();
             if(dao::isError()) return false;
             $customerID = $this->dao->lastInsertID();
-            $this->loadModel('action')->create('customer', $customerID, 'Created');
+            $this->loadModel('action', 'sys')->create('customer', $customerID, 'Created');
 
             $resume = new stdclass();
             $resume->contact  = $contactID;
@@ -596,7 +596,7 @@ class contactModel extends model
         {
             $fields[$field] = $this->lang->contact->$field;
         }
-        $contactList = $this->loadModel('file')->parseExcel($fields);
+        $contactList = $this->loadModel('file', 'sys')->parseExcel($fields);
         
         $errorList   = array();
         $successList = array();
@@ -638,7 +638,7 @@ class contactModel extends model
             }
 
             $contactID = $this->dao->lastInsertID();
-            $this->loadModel('action')->create('contact', $contactID, 'Created', $this->lang->import);
+            $this->loadModel('action', 'sys')->create('contact', $contactID, 'Created', $this->lang->import);
         }
         $this->session->set('errorList', $errorList);
 

@@ -123,7 +123,7 @@ class leads extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->loadModel('customer')->updateEditedDate($this->post->customer);
+            $this->loadModel('customer', 'crm')->updateEditedDate($this->post->customer);
             $return = $this->contact->updateAvatar($contactID);
 
             $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
@@ -165,7 +165,7 @@ class leads extends control
         $this->view->mode       = $mode;
         $this->view->status     = $status;
         $this->view->contact    = $this->contact->getByID($contactID, $status);
-        $this->view->addresses  = $this->loadModel('address')->getList('contact', $contactID);
+        $this->view->addresses  = $this->loadModel('address', 'crm')->getList('contact', $contactID);
         $this->view->preAndNext = $this->loadModel('common', 'sys')->getPreAndNextObject('contact', $contactID); 
         $this->view->fileList   = $fileList;
 
@@ -181,7 +181,7 @@ class leads extends control
      */
     public function delete($contactID)
     {
-        $contact = $this->loadModel('contact')->getByID($contactID);
+        $contact = $this->loadModel('contact', 'crm')->getByID($contactID);
         if($contact->status != 'ignore') $this->send(array('result' => 'fail'));
 
         $this->contact->delete(TABLE_CONTACT, $contactID);
@@ -261,7 +261,7 @@ class leads extends control
 
         $this->view->title     = $this->lang->confirm . $this->lang->contact->common;
         $this->view->contact   = $this->contact->getByID($contactID, 'wait');
-        $this->view->customers = $this->loadModel('customer')->getPairs('client');
+        $this->view->customers = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->display();
     }
 

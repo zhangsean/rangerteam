@@ -43,7 +43,7 @@ class contact extends control
         $this->session->set('customerList', $this->app->getURI(true));
         $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit', array_keys($contacts))) . ',';
 
-        $customers = $this->loadModel('customer')->getPairs();
+        $customers = $this->loadModel('customer', 'crm')->getPairs();
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
@@ -83,7 +83,7 @@ class contact extends control
         unset($this->lang->contact->menu);
         $this->view->title     = $this->lang->contact->create;
         $this->view->customer  = $customer;
-        $this->view->customers = $this->loadModel('customer')->getPairs('client');
+        $this->view->customers = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->view->sizeList  = $this->customer->combineSizeList();
         $this->view->levelList = $this->customer->combineLevelList();
         $this->display();
@@ -114,11 +114,11 @@ class contact extends control
             if($this->post->comment != '' or !empty($changes))
             {
                 $action   = $this->post->comment == '' ? 'Edited' : 'Commented';
-                $actionID = $this->loadModel('action')->create('contact', $contactID, $action, $this->post->comment);
+                $actionID = $this->loadModel('action', 'sys')->create('contact', $contactID, $action, $this->post->comment);
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->loadModel('customer')->updateEditedDate($this->post->customer);
+            $this->loadModel('customer', 'crm')->updateEditedDate($this->post->customer);
             $return = $this->contact->updateAvatar($contactID);
 
             $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
@@ -130,7 +130,7 @@ class contact extends control
         $this->app->loadLang('resume');
 
         $this->view->title      = $this->lang->contact->edit;
-        $this->view->customers  = $this->loadModel('customer')->getPairs('client');
+        $this->view->customers  = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->view->contact    = $contact;
         $this->view->modalWidth = 1000;
 
@@ -149,9 +149,9 @@ class contact extends control
         if($this->session->customerList == $this->session->contactList) $this->session->set('customerList', $this->app->getURI(true));
         $this->app->user->canEditContactIdList = ',' . implode(',', $this->contact->getContactsSawByMe('edit', (array)$contactID)) . ',';
 
-        $actionList = $this->loadModel('action')->getList('contact', $contactID);
+        $actionList = $this->loadModel('action', 'sys')->getList('contact', $contactID);
         $actionIDList = array_keys($actionList);
-        $actionFiles = $this->loadModel('file')->getByObject('action', $actionIDList);
+        $actionFiles = $this->loadModel('file', 'sys')->getByObject('action', $actionIDList);
         $fileList = array();
         foreach($actionFiles as $files)
         {
@@ -160,9 +160,9 @@ class contact extends control
 
         $this->view->title      = $this->lang->contact->view;
         $this->view->contact    = $this->contact->getByID($contactID, $status);
-        $this->view->addresses  = $this->loadModel('address')->getList('contact', $contactID);
-        $this->view->resumes    = $this->loadModel('resume')->getList($contactID);
-        $this->view->customers  = $this->loadModel('customer')->getPairs('client');
+        $this->view->addresses  = $this->loadModel('address', 'crm')->getList('contact', $contactID);
+        $this->view->resumes    = $this->loadModel('resume', 'crm')->getList($contactID);
+        $this->view->customers  = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->view->preAndNext = $this->loadModel('common', 'sys')->getPreAndNextObject('contact', $contactID); 
         $this->view->fileList   = $fileList;
 
@@ -228,8 +228,8 @@ class contact extends control
     public function vcard($contactID)
     {
         $contact = $this->contact->getByID($contactID);
-        $customer = $this->loadModel('customer')->getByID($contact->customer);
-        $addresses = $this->loadModel('address')->getList('contact', $contactID);
+        $customer = $this->loadModel('customer', 'crm')->getByID($contact->customer);
+        $addresses = $this->loadModel('address', 'crm')->getList('contact', $contactID);
 
         $fullAddress = '';
         foreach($addresses as $address) $fullAddress .= $address->fullLocation . ';';
@@ -291,12 +291,12 @@ END:VCARD";
                 while($row = $stmt->fetch()) $contacts[$row->id] = $row;
             }
 
-            $users     = $this->loadModel('user')->getPairs();
-            $customers = $this->loadModel('customer')->getPairs();
+            $users     = $this->loadModel('user', 'sys')->getPairs();
+            $customers = $this->loadModel('customer', 'crm')->getPairs();
 
             $resumes     = $this->dao->select('*')->FROM(TABLE_RESUME)->where('deleted')->eq(0)->fetchGroup('contact');
             $addressList = $this->dao->select('*')->FROM(TABLE_ADDRESS)->fetchGroup('objectID');
-            $areaList    = $this->loadModel('tree')->getOptionMenu('area');
+            $areaList    = $this->loadModel('tree', 'sys')->getOptionMenu('area');
 
             foreach($contacts as $id => $contact)
             {
@@ -404,7 +404,7 @@ END:VCARD";
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $file = $this->loadModel('file')->getUpload('files');
+            $file = $this->loadModel('file', 'sys')->getUpload('files');
             if(empty($file)) $this->send(array('result' => 'fail', 'message' => $this->lang->contact->noFile));
             $file = $file[0];
             move_uploaded_file($file['tmpname'], $this->file->savePath . $file['pathname']);

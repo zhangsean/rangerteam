@@ -122,8 +122,8 @@ class block extends control
 
         $this->view->sso       = base64_decode($this->get->sso);
         $this->view->code      = $this->get->blockid;
-        $this->view->products  = $this->loadModel('product')->getPairs();
-        $this->view->customers = $this->loadModel('customer')->getPairs('client');
+        $this->view->products  = $this->loadModel('product', 'crm')->getPairs();
+        $this->view->customers = $this->loadModel('customer', 'crm')->getPairs('client');
 
         $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe('view');
 

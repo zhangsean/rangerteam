@@ -175,7 +175,7 @@ class customerModel extends model
             if($return['result'] == 'fail') return $return;
         }
 
-        $this->loadModel('contact');
+        $this->loadModel('contact', 'crm');
         if(!empty($customer->contact))
         {
             $contact = new stdclass();
@@ -210,7 +210,7 @@ class customerModel extends model
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
         $customerID = $this->dao->lastInsertID();
         $objectType = $relation == 'provider' ? 'provider' : 'customer';
-        $this->loadModel('action')->create($objectType, $customerID, 'Created');
+        $this->loadModel('action', 'sys')->create($objectType, $customerID, 'Created');
 
         if(isset($contact))
         {
@@ -246,7 +246,7 @@ class customerModel extends model
         if($customer->site == 'http://') $customer->site = '';
         if($customer->weibo == 'http://weibo.com/') $customer->weibo = '';
 
-        $customer = $this->loadModel('file')->processEditor($customer, $this->config->customer->editor->edit['id']);
+        $customer = $this->loadModel('file', 'sys')->processEditor($customer, $this->config->customer->editor->edit['id']);
         $this->dao->update(TABLE_CUSTOMER)
             ->data($customer, $skip = 'uid')
             ->autoCheck()
@@ -306,8 +306,8 @@ class customerModel extends model
      */
     public function linkContact($customerID)
     {
-        $this->loadModel('action');
-        $this->loadModel('contact');
+        $this->loadModel('action', 'sys');
+        $this->loadModel('contact', 'crm');
         if(!$this->post->selectContact)
         {
             $contact = fixer::input('post')
@@ -331,7 +331,7 @@ class customerModel extends model
                 $resume = new stdclass();
                 $resume->customer = $customerID;
                 $resume->contact  = $contactID;
-                $resumeID = $this->loadModel('resume')->create($contactID, $resume);
+                $resumeID = $this->loadModel('resume', 'crm')->create($contactID, $resume);
 
                 if($resumeID)
                 {
@@ -340,7 +340,7 @@ class customerModel extends model
                     $this->action->logHistory($actionID, $changes);
                 }
 
-                $this->loadModel('action')->create('customer', $customerID, 'linkContact', '', $this->post->newcontact ? $this->post->realname : $contacts[$this->post->contact]);
+                $this->loadModel('action', 'sys')->create('customer', $customerID, 'linkContact', '', $this->post->newcontact ? $this->post->realname : $contacts[$this->post->contact]);
 
                 return array('result' => 'success', 'message' => $this->lang->saveSuccess);
             }
@@ -431,7 +431,7 @@ class customerModel extends model
         $changes[] = array('field' => 'public', 'old' => '0', 'new' => '1', 'diff' => '');
         foreach($customers as $key => $customer)
         {
-            $actionID = $this->loadModel('action')->create('customer', $key, 'Edited');
+            $actionID = $this->loadModel('action', 'sys')->create('customer', $key, 'Edited');
             $this->action->logHistory($actionID, $changes);
         }
     }

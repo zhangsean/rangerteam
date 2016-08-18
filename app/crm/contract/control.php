@@ -71,7 +71,7 @@ class contract extends control
 
         $this->view->title        = $this->lang->contract->browse;
         $this->view->contracts    = $contracts;
-        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
+        $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->view->pager        = $pager;
         $this->view->mode         = $mode;
         $this->view->orderBy      = $orderBy;
@@ -97,8 +97,8 @@ class contract extends control
             $contractID = $this->contract->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            $this->loadModel('action')->create('contract', $contractID, 'Created');
-            $this->loadModel('action')->create('customer', $this->post->customer, 'createContract', '', html::a($this->createLink('contract', 'view', "contractID=$contractID"), $this->post->name));
+            $this->loadModel('action', 'sys')->create('contract', $contractID, 'Created');
+            $this->loadModel('action', 'sys')->create('customer', $this->post->customer, 'createContract', '', html::a($this->createLink('contract', 'view', "contractID=$contractID"), $this->post->name));
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
@@ -106,15 +106,15 @@ class contract extends control
         if($orderID && $customerID)
         {
             $this->view->customer     = $customerID;
-            $this->view->currentOrder = $this->loadModel('order')->getByID($orderID);
+            $this->view->currentOrder = $this->loadModel('order', 'crm')->getByID($orderID);
             $this->view->orders       = $this->order->getList($mode = 'query', "customer={$customerID} and o.status = 'normal'");
         }
 
         unset($this->lang->contract->menu);
         $this->view->title        = $this->lang->contract->create;
         $this->view->orderID      = $orderID;
-        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
-        $this->view->users        = $this->loadModel('user')->getPairs('nodeleted,noclosed');
+        $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->users        = $this->loadModel('user', 'crm')->getPairs('nodeleted,noclosed');
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->display();
@@ -140,7 +140,7 @@ class contract extends control
                 $changes = $this->contract->update($contractID);
                 if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             }
-            $files = $this->loadModel('file')->saveUpload('contract', $contractID);
+            $files = $this->loadModel('file', 'sys')->saveUpload('contract', $contractID);
 
             if($this->post->remark or $changes or $files)
             {
@@ -149,17 +149,17 @@ class contract extends control
                 if($files) $fileAction = $this->lang->addFiles . join(',', $files);
 
                 $action           = $this->post->remark == '' ? 'Edited' : 'Commented';
-                $contractActionID = $this->loadModel('action')->create('contract', $contractID, $action, $fileAction);
+                $contractActionID = $this->loadModel('action', 'sys')->create('contract', $contractID, $action, $fileAction);
                 if($changes) $this->action->logHistory($contractActionID, $changes);
 
-                $customerActionID = $this->loadModel('action')->create('customer', $contract->customer, 'editContract', $fileAction, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
+                $customerActionID = $this->loadModel('action', 'sys')->create('customer', $contract->customer, 'editContract', $fileAction, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
                 if($changes) $this->action->logHistory($customerActionID, $changes);
 
                 if($contract->order)
                 {
                     foreach($contract->order as $orderID)
                     {
-                        $orderActionID = $this->loadModel('action')->create('order', $orderID, 'editContract', $fileAction, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
+                        $orderActionID = $this->loadModel('action', 'sys')->create('order', $orderID, 'editContract', $fileAction, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name));
                         if($changes) $this->action->logHistory($orderActionID, $changes);
                     }
                 }
@@ -170,11 +170,11 @@ class contract extends control
 
         $this->view->title          = $this->lang->contract->edit;
         $this->view->contract       = $contract; 
-        $this->view->contractOrders = $this->loadModel('order')->getByIdList($contract->order);
+        $this->view->contractOrders = $this->loadModel('order', 'crm')->getByIdList($contract->order);
         $this->view->orders         = array('' => '') + $this->order->getList($mode = 'query', "customer={$contract->customer}");
-        $this->view->customers      = $this->loadModel('customer')->getPairs('client');
-        $this->view->contacts       = $this->loadModel('contact')->getPairs($contract->customer);
-        $this->view->users          = $this->loadModel('user')->getPairs('nodeleted,noclosed');
+        $this->view->customers      = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->contacts       = $this->loadModel('contact', 'crm')->getPairs($contract->customer);
+        $this->view->users          = $this->loadModel('user', 'sys')->getPairs('nodeleted,noclosed');
         $this->view->currencyList   = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->view->currencySign   = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->display();
@@ -197,13 +197,13 @@ class contract extends control
 
             if($this->post->finish)
             {
-                $this->loadModel('action')->create('contract', $contractID, 'finishDelivered', $this->post->comment, '', $this->post->deliveredBy);
-                $this->loadModel('action')->create('customer', $contract->customer, 'finishDeliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
+                $this->loadModel('action', 'sys')->create('contract', $contractID, 'finishDelivered', $this->post->comment, '', $this->post->deliveredBy);
+                $this->loadModel('action', 'sys')->create('customer', $contract->customer, 'finishDeliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
             }
             else
             {
-                $this->loadModel('action')->create('contract', $contractID, 'Delivered', $this->post->comment, '', $this->post->deliveredBy);
-                $this->loadModel('action')->create('customer', $contract->customer, 'deliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
+                $this->loadModel('action', 'sys')->create('contract', $contractID, 'Delivered', $this->post->comment, '', $this->post->deliveredBy);
+                $this->loadModel('action', 'sys')->create('customer', $contract->customer, 'deliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
             }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
@@ -211,7 +211,7 @@ class contract extends control
 
         $this->view->title    = $this->lang->contract->delivery;
         $this->view->contract = $contract;
-        $this->view->users    = $this->loadModel('user')->getPairs();
+        $this->view->users    = $this->loadModel('user', 'sys')->getPairs();
         $this->display();
     }
 
@@ -237,7 +237,7 @@ class contract extends control
         $this->view->title    = $this->lang->contract->editDelivery;
         $this->view->delivery = $delivery;
         $this->view->contract = $contract;
-        $this->view->users    = $this->loadModel('user')->getPairs();
+        $this->view->users    = $this->loadModel('user', 'sys')->getPairs();
         $this->display();
     }
 
@@ -257,10 +257,10 @@ class contract extends control
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
         $deleteInfo = sprintf($this->lang->contract->deleteDeliveryInfo, $delivery->deliveredDate);
-        $this->loadModel('action')->create('contract', $contract->id, 'deletedelivered', '', $deleteInfo);
+        $this->loadModel('action', 'sys')->create('contract', $contract->id, 'deletedelivered', '', $deleteInfo);
 
         $actionExtra = html::a($this->createLink('contract', 'view', "contractID=$contract->id"), $contract->name) . $deleteInfo; 
-        $this->loadModel('action')->create('customer', $contract->customer, 'deletedelivered', $this->post->comment, $actionExtra, $this->post->returnedBy);
+        $this->loadModel('action', 'sys')->create('customer', $contract->customer, 'deletedelivered', $this->post->comment, $actionExtra, $this->post->returnedBy);
 
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
@@ -286,21 +286,21 @@ class contract extends control
 
             if($this->post->finish)
             {
-                $this->loadModel('action')->create('contract', $contractID, 'finishReturned', $this->post->comment, zget($currencySign, $contract->currency, '') . $this->post->amount, $this->post->returnedBy);
-                $this->loadModel('action')->create('customer', $contract->customer, 'finishReceiveContract', $this->post->comment, $actionExtra, $this->post->returnedBy);
+                $this->loadModel('action', 'sys')->create('contract', $contractID, 'finishReturned', $this->post->comment, zget($currencySign, $contract->currency, '') . $this->post->amount, $this->post->returnedBy);
+                $this->loadModel('action', 'sys')->create('customer', $contract->customer, 'finishReceiveContract', $this->post->comment, $actionExtra, $this->post->returnedBy);
             }
             else
             {
-                $this->loadModel('action')->create('contract', $contractID, 'returned', $this->post->comment, zget($currencySign, $contract->currency, '') . $this->post->amount, $this->post->returnedBy);
-                $this->loadModel('action')->create('customer', $contract->customer, 'receiveContract', $this->post->comment, $actionExtra, $this->post->returnedBy);
+                $this->loadModel('action', 'sys')->create('contract', $contractID, 'returned', $this->post->comment, zget($currencySign, $contract->currency, '') . $this->post->amount, $this->post->returnedBy);
+                $this->loadModel('action', 'sys')->create('customer', $contract->customer, 'receiveContract', $this->post->comment, $actionExtra, $this->post->returnedBy);
             }
             $this->send($return);
         }
 
-        $user    = $this->loadModel('user')->getByAccount($contract->createdBy);
+        $user    = $this->loadModel('user', 'sys')->getByAccount($contract->createdBy);
         $dept    = $this->loadModel('tree')->getByID($user->dept);
         $orderID = $this->dao->select('`order`')->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->fetch('order');
-        $order   = $this->loadModel('order')->getByID($orderID);
+        $order   = $this->loadModel('order', 'crm')->getByID($orderID);
 
         $productList = array();
         if(isset($order->product))
@@ -456,10 +456,10 @@ class contract extends control
         if(!$this->session->orderList) $this->session->set('orderList', $uri);
 
         $this->view->title        = $this->lang->contract->view;
-        $this->view->orders       = $this->loadModel('order')->getByIdList($contract->order);
-        $this->view->customers    = $this->loadModel('customer')->getPairs('client');
-        $this->view->contacts     = $this->loadModel('contact')->getPairs($contract->customer);
-        $this->view->products     = $this->loadModel('product')->getPairs();
+        $this->view->orders       = $this->loadModel('order', 'crm')->getByIdList($contract->order);
+        $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->contacts     = $this->loadModel('contact', 'crm')->getPairs($contract->customer);
+        $this->view->products     = $this->loadModel('product', 'crm')->getPairs();
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->contract     = $contract;
         $this->view->actions      = $this->loadModel('action')->getList('contract', $contractID);
@@ -493,7 +493,7 @@ class contract extends control
      */
     public function getOrder($customerID, $status = '')
     {
-        $orders = $this->loadModel('order')->getOrderForCustomer($customerID, $status);
+        $orders = $this->loadModel('order', 'crm')->getOrderForCustomer($customerID, $status);
 
         if($this->app->getViewType() == 'json')
         {
@@ -583,8 +583,8 @@ class contract extends control
             }
 
             $users        = $this->loadModel('user')->getPairs();
-            $customers    = $this->loadModel('customer')->getPairs();
-            $contacts     = $this->loadModel('contact')->getPairs();
+            $customers    = $this->loadModel('customer', 'crm')->getPairs();
+            $contacts     = $this->loadModel('contact', 'crm')->getPairs();
             $relatedFiles = $this->dao->select('id, objectID, pathname, title')->from(TABLE_FILE)->where('objectType')->eq('contract')->andWhere('objectID')->in(@array_keys($contracts))->fetchGroup('objectID');
 
             $contractOrderList = $this->dao->select('*')->from(TABLE_CONTRACTORDER)->fetchGroup('contract');
@@ -603,7 +603,7 @@ class contract extends control
             /* Get related products names. */
             $orderPairs = array();
             $orders = $this->dao->select('*')->from(TABLE_ORDER)->fetchAll('id');
-            $this->loadModel('order')->setProductsForOrders($orders);
+            $this->loadModel('order', 'crm')->setProductsForOrders($orders);
             foreach($orders as $key => $order)
             {
                 $productName = count($order->products) > 1 ? current($order->products) . $this->lang->etc : current($order->products);

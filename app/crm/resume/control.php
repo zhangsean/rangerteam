@@ -20,7 +20,7 @@ class resume extends control
      */
     public function browse($contactID)
     {
-        $contact = $this->loadModel('contact')->getByID($contactID);
+        $contact = $this->loadModel('contact', 'crm')->getByID($contactID);
         $resumes = $this->resume->getList($contactID);
         $this->app->user->canEditResumeIdList = ',' . implode(',', $this->resume->getResumesSawByMe('edit', array_keys($resumes))) . ',';
 
@@ -28,7 +28,7 @@ class resume extends control
         $this->view->modalWidth = 800;
         $this->view->contact    = $contact;
         $this->view->resumes    = $resumes;
-        $this->view->customers  = $this->loadModel('customer')->getPairs('client');
+        $this->view->customers  = $this->loadModel('customer', 'crm')->getPairs('client');
 
         $this->display();
     }
@@ -42,7 +42,7 @@ class resume extends control
      */
     public function create($contactID)
     {
-        $customers = $this->loadModel('customer')->getPairs('client');
+        $customers = $this->loadModel('customer', 'crm')->getPairs('client');
 
         if($_POST)
         {
@@ -50,7 +50,7 @@ class resume extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             /* Update customer info. */
-            $this->loadModel('customer')->updateEditedDate($this->post->customer);
+            $this->loadModel('customer', 'crm')->updateEditedDate($this->post->customer);
 
             $this->loadModel('action')->create('contact', $contactID, "createdResume", '', $this->post->newCustomer ? $this->post->name : $customers[$this->post->customer]);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
@@ -84,7 +84,7 @@ class resume extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             /* Update customer info. */
-            $this->loadModel('customer')->updateEditedDate($resume->customer);
+            $this->loadModel('customer', 'crm')->updateEditedDate($resume->customer);
 
             if($changes)
             {
@@ -96,7 +96,7 @@ class resume extends control
 
         $this->view->title    = $this->lang->resume->edit;
         $this->view->resume   = $resume;
-        $this->view->customer = $this->loadModel('customer')->getByID($resume->customer);
+        $this->view->customer = $this->loadModel('customer', 'crm')->getByID($resume->customer);
         $this->display();
     }
 
@@ -135,7 +135,7 @@ class resume extends control
         $resume = $this->resume->getByID($resumeID);
         $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($resume) ? 0 : $resume->customer, 'edit');
 
-        $customers = $this->loadModel('customer')->getPairs('client');
+        $customers = $this->loadModel('customer', 'crm')->getPairs('client');
 
         $this->resume->delete(TABLE_RESUME, $resumeID);
         if(dao::isError())$this->send(array('result' => 'fail', 'message' => dao::getError()));

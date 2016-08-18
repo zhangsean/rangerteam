@@ -46,8 +46,8 @@ class addressModel extends model
      */
     public function getAddressesSawByMe($type = 'view', $addressIdList = array())
     {
-        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
-        $contactIdList  = $this->loadModel('contact')->getContactsSawByMe($type);
+        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
+        $contactIdList  = $this->loadModel('contact', 'crm')->getContactsSawByMe($type);
 
         $addressListOfCustomer = $this->dao->select('*')->from(TABLE_ADDRESS)
             ->where('objectType')->eq('customer')
@@ -78,12 +78,12 @@ class addressModel extends model
 
         if($objectType == 'contact')
         {
-            $contact = $this->loadModel('contact')->getByID($objectID);
+            $contact = $this->loadModel('contact', 'crm')->getByID($objectID);
             if(isset($contact->customer)) $addresses = array_merge($this->getByObject('customer', $contact->customer), $addresses);
         }
 
         /* Join area and location to fullLocation. */
-        $areaList = $this->loadModel('tree')->getOptionMenu('area');
+        $areaList = $this->loadModel('tree', 'sys')->getOptionMenu('area');
         foreach($addresses as $address)
         {
             $address->fullLocation = '';
