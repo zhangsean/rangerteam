@@ -717,6 +717,7 @@ class actionModel extends model
         $todos = $this->loadModel('todo', 'sys')->getList('self', $account, $date);
         if(empty($todos))
         {
+            $this->app->loadConfig('attend', 'oa');
             $signInLimit = date('Y-m-d ') . $this->config->attend->signInLimit;
             $begin = (int)date('Hi', strtotime("+30 minute $signInLimit"));
             $end   = (int)date('Hi', strtotime("+30 minute $interval seconds $signInLimit"));
