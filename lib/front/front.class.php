@@ -198,6 +198,7 @@ class html
         $i = 1;
         foreach($options as $key => $value)
         {
+            if(!$value) continue;
             $string .= "<label><input type='radio' id='{$name}{$i}' name='$name' value='$key' ";
             $string .= ($key == $checked) ? " checked ='checked'" : "";
             $string .= $attrib;
@@ -229,6 +230,7 @@ class html
         $i = 1;
         foreach($options as $key => $value)
         {
+            if(!$value) continue;
             $key     = str_replace('item', '', $key);
             $string .= "<label class='checkbox'><input type='checkbox' id='{$name}{$i}'  name='{$name}[]' value='$key' ";
             $string .= strpos($checked, ",$key,") !== false ? " checked ='checked'" : "";
