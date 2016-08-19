@@ -222,28 +222,6 @@ class user extends control
     }
 
     /**
-     * List message of a user.
-     * 
-     * @param  int    $recTotal 
-     * @param  int    $recPerPage 
-     * @param  int    $pageID 
-     * @access public
-     * @return void
-     */
-    public function message($recTotal = 0, $recPerPage = 20, $pageID = 1)
-    {
-        if($this->app->user->account == 'guest') $this->locate(inlink('login'));
-
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
-
-        $this->view->messages = $this->loadModel('message')->getByAccount($this->app->user->account, $pager);
-        $this->view->pager    = $pager;
-
-        $this->display();
-    }
-
-    /**
      * Create user 
      * 
      * @access public

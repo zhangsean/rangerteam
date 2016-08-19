@@ -22,7 +22,6 @@ class blog extends control
         $this->view->authors        = $this->loadModel('article', 'sys')->getAuthorList('blog');
         $this->view->months         = $this->loadModel('article', 'sys')->getMonthList('blog');
         $this->view->tags           = array_unique($this->loadModel('article', 'sys')->getTagList('blog'));
-        $this->view->latestComments = $this->loadModel('message', 'sys')->getList('comment', 'blog', '');
     }
 
     /** 
