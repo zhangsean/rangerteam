@@ -2,11 +2,11 @@
 /**
  * The zh-cn file of common module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common 
- * @version     $Id$
+ * @version     $Id: zh-cn.php 4194 2016-10-21 09:23:53Z daitingting $
  * @link        http://www.ranzhico.com
  */
 $lang->colon      = ' : ';
@@ -273,6 +273,7 @@ $lang->my->review->menu = new stdclass();
 $lang->my->review->menu->attend   = '考勤|my|review|type=attend';
 $lang->my->review->menu->leave    = '请假|my|review|type=leave';
 $lang->my->review->menu->overtime = '加班|my|review|type=overtime';
+$lang->my->review->menu->lieu     = '调休|my|review|type=lieu';
 $lang->my->review->menu->refund   = '报销|my|review|type=refund';
 
 $lang->my->order = new stdclass();
@@ -300,6 +301,7 @@ $lang->my->task->menu->createdByMe  = '由我创建|my|task|type=createdBy';
 $lang->my->task->menu->finishedByMe = '由我完成|my|task|type=finishedBy';
 $lang->my->task->menu->closedByMe   = '由我关闭|my|task|type=closedBy';
 $lang->my->task->menu->canceledByMe = '由我取消|my|task|type=canceledBy';
+$lang->my->task->menu->unclosed     = '未关闭|my|task|type=unclosed';
 
 $lang->my->dynamic = new stdclass();
 $lang->my->dynamic->menu = new stdclass();

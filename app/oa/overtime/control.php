@@ -2,7 +2,7 @@
 /**
  * The control file of overtime of Ranzhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     overtime
@@ -86,6 +86,7 @@ class overtime extends control
         }
         elseif($type == 'browseReview')
         {
+            $this->app->loadModuleConfig('attend');
             if(!empty($this->config->attend->reviewedBy))
             { 
                 if($this->config->attend->reviewedBy == $this->app->user->account)
@@ -143,6 +144,7 @@ class overtime extends control
         $overtime = $this->overtime->getById($id);
 
         /* Check privilage. */
+        $this->app->loadModuleConfig('attend');
         if(!empty($this->config->attend->reviewedBy))
         { 
             if($this->config->attend->reviewedBy != $this->app->user->account) $this->send(array('result' => 'fail', 'message' => $this->lang->overtime->denied));
@@ -154,13 +156,35 @@ class overtime extends control
             if((empty($dept) or ",{$this->app->user->account}," != $dept->moderators)) $this->send(array('result' => 'fail', 'message' => $this->lang->overtime->denied));
         }
 
-        $this->overtime->review($id, $status);
-        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        if($status == 'reject')
+        {
+            if($_POST)
+            {
+                $this->overtime->review($id, $status);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-        $actionID = $this->loadModel('action')->create('overtime', $id, 'reviewed', '', zget($this->lang->overtime->statusList, $status));
-        $this->sendmail($id, $actionID);
+                $actionID = $this->loadModel('action')->create('overtime', $id, 'reviewed', '', zget($this->lang->overtime->statusList, $status));
+                $this->sendmail($id, $actionID);
+                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browseReview')));
+            }
+        }
+        else
+        {
+            $this->overtime->review($id, $status);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $actionID = $this->loadModel('action')->create('overtime', $id, 'reviewed', '', zget($this->lang->overtime->statusList, $status));
+            $this->sendmail($id, $actionID);
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        if($status == 'reject')
+        {
+            $this->view->title    = $this->lang->overtime->review;
+            $this->view->overtime = $overtime;
+            $this->display();
+        }
     }
 
     /**
@@ -175,13 +199,13 @@ class overtime extends control
         {
             $result = $this->overtime->create();
             if(is_array($result)) $this->send($result);
+
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            if(is_int($result))
-            {
-                $overtimeID = $result;
-                $actionID   = $this->loadModel('action')->create('overtime', $overtimeID, 'created');
-                $this->sendmail($overtimeID, $actionID);
-            }
+
+            $overtimeID = $result;
+            $actionID   = $this->loadModel('action')->create('overtime', $overtimeID, 'created');
+            $this->sendmail($overtimeID, $actionID);
+            
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
 
@@ -192,7 +216,7 @@ class overtime extends control
             if($overtime) $this->locate(inlink('edit', "id=$overtime->id"));
         }
 
-        $this->app->loadConfig('attend');
+        $this->app->loadModuleConfig('attend');
         $this->view->title = $this->lang->overtime->create;
         $this->view->date  = $date;
         $this->display();
@@ -207,6 +231,7 @@ class overtime extends control
      */
     public function edit($id)
     {
+        $this->app->loadModuleConfig('attend');
         $overtime = $this->overtime->getById($id);
         /* check privilage. */
         if($overtime->createdBy != $this->app->user->account) 
@@ -332,6 +357,7 @@ class overtime extends control
         }
         if($action->action == 'created' or $action->action == 'revoked' or $action->action == 'commited')
         {
+            $this->app->loadModuleConfig('attend');
             if(!empty($this->config->attend->reviewedBy))
             {
                 $toList = $this->config->attend->reviewedBy; 

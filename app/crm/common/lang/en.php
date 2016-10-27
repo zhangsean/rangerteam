@@ -2,7 +2,7 @@
 /**
  * The en file of crm common module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     common 
@@ -17,13 +17,14 @@ $lang->menu->crm->dashboard = 'Home|dashboard|index|';
 $lang->menu->crm->order     = 'Orders|order|index|';
 $lang->menu->crm->contract  = 'Contracts|contract|browse|mode=unfinished';
 $lang->menu->crm->customer  = 'Customers|customer|index|';
+$lang->menu->crm->provider  = 'Providers|provider|browse|';
 $lang->menu->crm->contact   = 'Contact|contact|index|';
 $lang->menu->crm->leads     = 'Leads|leads|browse|';
 $lang->menu->crm->product   = 'Products|product|index|';
 $lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=statusList';
 
 /* Menu of customer module. */
-$lang->customer = new stdclass();
+if(!isset($lang->customer)) $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
 $lang->customer->menu->browse       = 'All Customers|customer|browse|mode=all';
 $lang->customer->menu->assignedTo   = 'Assigned To Me|customer|browse|mode=assignedtome';
@@ -35,8 +36,13 @@ $lang->customer->menu->thismonth    = 'Contact This Month|customer|browse|mode=t
 $lang->customer->menu->public       = 'Public Customers|customer|browse|mode=public';
 $lang->customer->menu->report       = 'Report|report|browse|module=customer';
 
+/* Menu of provider module. */
+if(!isset($lang->provider)) $lang->provider = new stdclass();
+$lang->provider->menu = new stdclass();
+$lang->provider->menu->browse = array('link' => 'All Providers|provider|browse|', 'alias' => 'create,edit,view');
+
 /* Menu of product module. */
-$lang->product = new stdclass();
+if(!isset($lang->product)) $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
 $lang->product->menu->browse     = 'All Products|product|browse|mode=all';
 $lang->product->menu->normal     = 'Normal|product|browse|mode=normal';
@@ -44,7 +50,7 @@ $lang->product->menu->developing = 'Developing|product|browse|mode=developing';
 $lang->product->menu->offline    = 'Offline|product|browse|mode=offline';
 
 /* Menu of order module. */
-$lang->order = new stdclass();
+if(!isset($lang->order)) $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
 $lang->order->menu->browse       = 'All Orders|order|browse|mode=all';
 $lang->order->menu->assignedTo   = 'Assigned To Me|order|browse|mode=assignedtome';
@@ -57,7 +63,7 @@ $lang->order->menu->public       = 'Public|order|browse|mode=public';
 $lang->order->menu->report       = 'Report|report|browse|module=order';
 
 /* Menu of contact module. */
-$lang->contact = new stdclass();
+if(!isset($lang->contact)) $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
 $lang->contact->menu->browse    = 'All Contacts|contact|browse|mode=all';
 $lang->contact->menu->past      = 'Urgently need contacted|contact|browse|mode=past';
@@ -66,7 +72,7 @@ $lang->contact->menu->tomorrow  = 'Contact Tomorrow|contact|browse|mode=tomorrow
 $lang->contact->menu->thisweek  = 'Contact This Week|contact|browse|mode=thisweek';
 $lang->contact->menu->thismonth = 'Contact This Month|contact|browse|mode=thismonth';
 
-$lang->leads = new stdclass();
+if(!isset($lang->leads)) $lang->leads = new stdclass();
 $lang->leads->menu = new stdclass();
 $lang->leads->menu->assignedTo  = 'Assigned To Me|leads|browse|mode=assignedTo';
 $lang->leads->menu->next        = 'Next contact|leads|browse|mode=next';
@@ -75,7 +81,7 @@ $lang->leads->menu->public      = 'Public|leads|browse|mode=all&status=ignore';
 $lang->leads->menu->setting     = 'Setting|leads|setting|';
 
 /* Menu of contract module. */
-$lang->contract = new stdclass();
+if(!isset($lang->contract)) $lang->contract = new stdclass();
 $lang->contract->menu = new stdclass();
 $lang->contract->menu->browse       = 'All Contracts|contract|browse|mode=all';
 $lang->contract->menu->unfinished   = 'Unfinished|contract|browse|mode=unfinished';
@@ -103,9 +109,9 @@ $lang->setting->menu->salesGroup     = array('link' => 'Sales Group|sales|browse
 $lang->setting->menu->customerPool   = 'Customer Pool|setting|customerpool||';
 
 /* Menu of sales module. */
-$lang->sales = new stdclass();
+if(!isset($lang->sales)) $lang->sales = new stdclass();
 $lang->sales->menu = $lang->setting->menu;
 
 $lang->dashboard = new stdclass();
-$lang->resume    = new stdclass();
-$lang->address   = new stdclass();
+if(!isset($lang->resume))  $lang->resume  = new stdclass();
+if(!isset($lang->address)) $lang->address = new stdclass();

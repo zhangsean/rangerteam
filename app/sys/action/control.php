@@ -2,7 +2,7 @@
 /**
  * The control file of action module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     action
@@ -58,6 +58,8 @@ class action extends control
      */
     public function createRecord($objectType, $objectID, $customer = 0, $history = true)
     {
+        if($customer) $this->loadModel('common', 'sys')->checkPrivByCustomer($customer);
+
         if($_POST)
         {
             if($this->post->contract)
@@ -129,6 +131,7 @@ class action extends control
     public function editRecord($recordID, $from = '')
     {
         $record = $this->loadModel('action')->getByID($recordID);
+        if($record->customer) $this->loadModel('common', 'sys')->checkPrivByCustomer($record->customer);
         if($record->action != 'record') exit;
         $object = $this->loadModel($record->objectType)->getByID($record->objectID);
 

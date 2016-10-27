@@ -2,7 +2,7 @@
 /**
  * The assignTo view file of customer module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     customer
@@ -19,7 +19,7 @@
       <th class='w-50px'><?php echo $lang->customer->assignedTo;?></th>
       <td>
         <div class='input-group'>
-          <?php echo html::select('assignedTo', $members, '', "class='form-control chosen'")?>
+          <?php echo html::select('assignedTo', $members, $customer->assignedTo, "class='form-control chosen'")?>
           <div class='input-group-addon'>
             <label class='checkbox'><input type='checkbox' id='public' name='public' value='1' <?php if($customer->public) echo 'checked';?>> <?php echo $lang->customer->public;?></label>
           </div>

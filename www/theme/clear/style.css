@@ -7,3 +7,5 @@
 #fixedHeader thead th, #fixedHeader thead td{background: #3949ab; color: #ccc; font-weight: normal;}
 #fixedHeader thead th a, #fixedHeader thead td a{color: #ccc; font-weight: normal;}
 #fixedHeader thead tr .headerSortUp:after,#fixedHeader thead tr .headerSortDown:after{color: #fff!important;}
+.categoryButton .icon, .categoryMenu li .app-btn .icon{border-radius:0 !important;}
+td i.icon-default{border-radius:0 !important;}

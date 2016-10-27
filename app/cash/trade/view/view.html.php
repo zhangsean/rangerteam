@@ -2,7 +2,7 @@
 /**
  * The view file of trade module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     contract
@@ -72,10 +72,12 @@
             <th><?php echo $lang->trade->product;?></th>
             <td><?php echo zget($productList, $trade->product, ' ');?></td>
           </tr>
+          <?php if($trade->type == 'in' or $trade->type == 'out'):?>
           <tr>
             <th><?php echo $lang->trade->category;?></th>
             <td><?php echo zget($categories, $trade->category, ' ');?></td>
           </tr>
+          <?php endif;?>
           <?php if($trade->trader and $trade->type == 'out'):?>
           <tr>
             <th><?php echo isset($customerList[$trade->trader]) ? $lang->trade->customer : $lang->trade->trader;?></th>

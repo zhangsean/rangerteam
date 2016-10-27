@@ -2,7 +2,7 @@
 /**
  * The set money view file of refund module of Ranzhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     refund
@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <div class='with-side'>
   <div class='side'>
     <nav class='menu leftmenu affix'>
@@ -30,7 +31,7 @@
           <table class='table table-form table-condensed w-p50'>
             <tr>
               <th class='w-60px'><?php echo $lang->refund->refundBy;?></th>
-              <td><?php echo html::select('refundBy', $users, isset($this->config->refund->refundBy) ? $this->config->refund->refundBy : '', "class='form-control'");?></td>
+              <td><?php echo html::select('refundBy', $users, isset($this->config->refund->refundBy) ? $this->config->refund->refundBy : '', "class='form-control chosen'");?></td>
             </tr>
             <tr>
               <th></th>

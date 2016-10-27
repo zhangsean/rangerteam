@@ -2,11 +2,11 @@
 /**
  * The model file of article module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     article
- * @version     $Id$
+ * @version     $Id: model.php 4169 2016-10-19 08:57:15Z liugang $
  * @link        http://www.ranzhico.com
  */
 class articleModel extends model
@@ -265,14 +265,13 @@ class articleModel extends model
         $now = helper::now();
         $article = fixer::input('post')
             ->join('categories', ',')
-            ->setDefault('createdDate', $now)
-            ->add('editedDate', $now)
             ->add('author', $this->app->user->account)
+            ->add('createdDate', $now)
             ->add('type', $type)
             ->add('order', 0)
             ->add('keywords', helper::unify($this->post->keywords, ','))
             ->add('readers', $this->app->user->account)
-            ->stripTags('content', $this->config->allowedTags->admin)
+            ->stripTags('content', $this->config->allowedTags)
             ->join('users', ',')
             ->join('groups', ',')
             ->get();
@@ -312,7 +311,7 @@ class articleModel extends model
         $category = array_keys($article->categories);
 
         $article = fixer::input('post')
-            ->stripTags('content', $this->config->allowedTags->admin)
+            ->stripTags('content', $this->config->allowedTags)
             ->join('categories', ',')
             ->add('editor', $this->app->user->account)
             ->add('keywords', helper::unify($this->post->keywords, ','))

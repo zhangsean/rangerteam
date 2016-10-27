@@ -2,7 +2,7 @@
 /**
  * The model file of task module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     task
@@ -68,14 +68,14 @@ class taskModel extends model
             ->beginIF($mode == 'finishedBy')->andWhere('finishedBy')->eq($this->app->user->account)->fi()
             ->beginIF($mode == 'canceledBy')->andWhere('canceledBy')->eq($this->app->user->account)->fi()
             ->beginIF($mode == 'closedBy')->andWhere('closedBy')->eq($this->app->user->account)->fi()
+            ->beginIF($mode == 'unclosed')->andWhere('assignedTo')->eq($this->app->user->account)->andWhere('status')->in('done,cancel')->fi()
             ->beginIF($mode == 'untilToday')->andWhere('deadline')->eq(helper::today())->fi()
             ->beginIF($mode == 'expired')->andWhere('deadline')->ne('0000-00-00')->andWhere('deadline')->lt(helper::today())->fi()
             ->beginIF($mode == 'bysearch')->andWhere($taskQuery)->fi()
             ->beginIF($groupBy == 'closedBy')->andWhere('status')->eq('closed')->fi()
             ->beginIF($groupBy == 'finishedBy')->andWhere('finishedBy')->ne('')->fi()
             ->beginIF(!$canViewAll)
-            ->andWhere()->markLeft(1)
-            ->where('assignedTo')->eq($this->app->user->account)
+            ->andWhere('assignedTo', true)->eq($this->app->user->account)
             ->orWhere('finishedBy')->eq($this->app->user->account)
             ->orWhere('createdBy')->eq($this->app->user->account)
             ->markRight(1)
@@ -187,8 +187,7 @@ class taskModel extends model
             ->beginIF($type == 'delayed')->andWhere('deadline')->between('1970-1-1', helper::now())->andWhere('status')->in('wait,doing')->fi()
             ->beginIF(is_array($type) or strpos(',all,undone,assignedtome,delayed,finishedbyme,', ",$type,") === false)->andWhere('status')->in($type)->fi()
             ->beginIF(!$canViewAll)
-            ->andWhere()->markLeft(1)
-            ->where('assignedTo')->eq($this->app->user->account)
+            ->andWhere('assignedTo', true)->eq($this->app->user->account)
             ->orWhere('finishedBy')->eq($this->app->user->account)
             ->orWhere('createdBy')->eq($this->app->user->account)
             ->markRight(1)
@@ -264,7 +263,7 @@ class taskModel extends model
                 ->setForce('assignedTo', $this->post->assignedTo)
                 ->setDefault('createdBy', $this->app->user->account)
                 ->setDefault('createdDate', $now)
-                ->stripTags('desc', $this->config->allowedTags->admin)
+                ->stripTags('desc', $this->config->allowedTags)
                 ->join('mailto', ',')
                 ->get();
 
@@ -355,7 +354,7 @@ class taskModel extends model
             $task->estimate    = (float)$this->post->estimate[$key];
             $task->left        = $task->estimate;
             $task->deadline    = $this->post->deadline[$key] ? $this->post->deadline[$key] : '0000-00-00';
-            $task->desc        = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags->admin);
+            $task->desc        = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags);
             $task->pri         = $this->post->pri[$key];
             $task->status      = 'wait';
             $task->createdBy   = $this->app->user->account;
@@ -461,7 +460,7 @@ class taskModel extends model
 
                 ->add('editedBy',   $this->app->user->account)
                 ->add('editedDate', $now)
-                ->stripTags('desc', $this->config->allowedTags->admin)
+                ->stripTags('desc', $this->config->allowedTags)
                 ->remove('referer,files,labels,multiple,team,teamEstimate,teamConsumed,teamLeft,remark')
                 ->join('mailto', ',')
                 ->get();

@@ -2,7 +2,7 @@
 /**
  * The model file of customer module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     customer
@@ -56,6 +56,7 @@ class customerModel extends model
         }
 
         /* Get customers not assigned to these accounts but theirs orders assigned to. */
+        $accountsSawByMe = trim($accountsSawByMe, ',');
         $customers = $this->dao->select('customer')->from(TABLE_ORDER)->where('assignedTo')->in($accountsSawByMe)->fetchPairs();
         foreach($customers as $customer) $customerList[$customer] = $customer;
 
@@ -77,6 +78,7 @@ class customerModel extends model
     {
         $customerIdList = $this->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
+        $this->session->set('customerIdList', $customerIdList);
 
         $this->app->loadClass('date', $static = true);
         $thisMonth = date::getThisMonth();
@@ -155,7 +157,7 @@ class customerModel extends model
         if(empty($customer))
         {
             $customer = fixer::input('post')
-                ->setIF($this->post->name == '', 'name', $this->post->contact)
+                ->setIF($this->post->name == '' and !$this->post->selectContact, 'name', $this->post->contact)
                 ->add('relation', $relation)
                 ->setIF($relation == 'provider', 'public', 1)
                 ->add('createdBy', $this->app->user->account)
@@ -176,6 +178,7 @@ class customerModel extends model
         }
 
         $this->loadModel('contact', 'crm');
+
         if(!empty($customer->contact))
         {
             $contact = new stdclass();
@@ -200,9 +203,9 @@ class customerModel extends model
             }
         }
 
-        if(!isset($customer->contact)) $this->config->customer->require->create = 'name';
+        if(!isset($customer->contact) or $this->post->selectContact) $this->config->customer->require->create = 'name';
         $this->dao->insert(TABLE_CUSTOMER)
-            ->data($customer, $skip = 'uid,contact,email,qq,phone,continue')
+            ->data($customer, $skip = 'uid,contact,email,qq,phone,continue,selectContact,contactID')
             ->autoCheck()
             ->batchCheck($this->config->customer->require->create, 'notempty')
             ->exec();
@@ -217,6 +220,25 @@ class customerModel extends model
             $contact->customer = $customerID;
             $return = $this->contact->create($contact);
             if($return['result'] == 'fail') return $return;
+        }
+
+        if($this->post->selectContact)
+        {
+            $contactID = $this->post->contactID;
+            $contact   = $this->contact->getByID($contactID);
+            $contacts  = $this->contact->getPairs();
+
+            $resume = new stdclass();
+            $resume->customer = $customerID;
+            $resume->contact  = $contactID;
+            $resumeID = $this->loadModel('resume', 'crm')->create($contactID, $resume);
+
+            if($resumeID)
+            {
+                $changes[] = array('field' => 'customer', 'old' => $contact->customer, 'new' => $customerID, 'diff' => '');
+                $actionID  = $this->action->create('contact', $contactID, 'Edited');
+                $this->action->logHistory($actionID, $changes);
+            }
         }
 
         $locate = $relation == 'provider' ? helper::createLink('provider', 'browse') : helper::createLink('customer', 'browse');
@@ -237,7 +259,7 @@ class customerModel extends model
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->setIF(!$this->post->public and $oldCustomer->relation == 'client', 'public', 0)
-            ->stripTags('desc', $this->config->allowedTags->admin)
+            ->stripTags('desc', $this->config->allowedTags)
             ->get();
 
         /* Add http:// in head when that has not http:// or https://. */
@@ -284,6 +306,7 @@ class customerModel extends model
         $customer = fixer::input('post')
             ->setDefault('assignedBy', $this->app->user->account)
             ->setDefault('assignedDate', helper::now())
+            ->setIF(!$this->post->public, 'public', 0)
             ->add('editedBy', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->get();

@@ -2,11 +2,11 @@
 /**
  * The tree module zh-cn file of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     tree
- * @version     $Id$
+ * @version     $Id: zh-cn.php 4103 2016-09-30 09:22:14Z daitingting $
  * @link        http://www.ranzhico.com
  */
 $lang->tree->common        = "类目";
@@ -45,11 +45,6 @@ $lang->category->users    = '授权用户';
 $lang->category->groups   = '授权分组';
 $lang->category->origin   = '源科目';
 $lang->category->target   = '目标科目';
-
-$lang->category->majorList['1'] = '主营业务收入';
-$lang->category->majorList['2'] = '非主营业务收入';
-$lang->category->majorList['3'] = '主营业务成本';
-$lang->category->majorList['4'] = '非主营业务成本';
 
 /* Lang items for area. */
 $lang->area = new stdclass();

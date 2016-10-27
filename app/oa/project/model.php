@@ -2,7 +2,7 @@
 /**
  * The model file of project module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     project 
@@ -69,14 +69,17 @@ class projectModel extends model
      */
     public function getList($status = null, $orderBy = 'id_desc', $pager = null)
     {
-        if($status == 'involved')
+        if($this->session->projectQuery == false) $this->session->set('projectQuery', ' 1 = 1');
+        $projectQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->projectQuery);
+
+        if($status == 'involved' or $status == 'bysearch')
         {
             $projects = $this->dao->select('t1.*')->from(TABLE_PROJECT)->alias('t1')
                 ->leftJoin(TABLE_TEAM)->alias('t2')->on('t1.id=t2.id')
                 ->where('t1.deleted')->eq(0)
                 ->andWhere('t2.type')->eq('project')
-                ->andWhere('t1.status')->eq('doing')
-                ->andWhere('t2.account')->eq($this->app->user->account)
+                ->beginIF($status == 'involved')->andWhere('t1.status')->eq('doing')->andWhere('t2.account')->eq($this->app->user->account)->fi()
+                ->beginIF($status == 'bysearch')->andWhere($projectQuery)->fi()
                 ->orderBy($orderBy)
                 ->fetchAll('id');
         }
@@ -179,7 +182,7 @@ class projectModel extends model
             ->add('createdDate', helper::now())
             ->join('whitelist', ',')
             ->remove('member,manager,master')
-            ->stripTags('desc', $this->config->allowedTags->admin)
+            ->stripTags('desc', $this->config->allowedTags)
             ->get();
 
         $project = $this->loadModel('file')->processEditor($project, $this->config->project->editor->create['id']);
@@ -227,7 +230,7 @@ class projectModel extends model
                 ->add('editedDate', helper::now())
                 ->join('whitelist', ',')
                 ->setDefault('whitelist', '')
-                ->stripTags('desc', $this->config->allowedTags->admin)
+                ->stripTags('desc', $this->config->allowedTags)
                 ->remove('member,manager,master')
                 ->get();
         }
@@ -595,7 +598,6 @@ class projectModel extends model
             {
                 $menu .= '<li><a href="javascript:;" id="toggleAll"><i class="icon-plus"></i></a></li>';
             }
-
             $menu .= "</ul>";
         }
 

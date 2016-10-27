@@ -8,6 +8,7 @@ $lang->leave->delete = 'Delete';
 $lang->leave->review = 'Review';
 $lang->leave->cancel = 'Cancel';
 $lang->leave->commit = 'Commit';
+$lang->leave->back   = 'Back';
 $lang->leave->export = 'Export';
 
 $lang->leave->personal     = 'My leave';
@@ -21,6 +22,7 @@ $lang->leave->end          = 'End date';
 $lang->leave->start        = 'Begin time';
 $lang->leave->finish       = 'End time';
 $lang->leave->hours        = 'Hours';
+$lang->leave->backDate     = 'Back Date';
 $lang->leave->type         = 'Type';
 $lang->leave->desc         = 'Description';
 $lang->leave->status       = 'Status';
@@ -47,8 +49,10 @@ $lang->leave->statusList['wait']   = 'Wait';
 $lang->leave->statusList['pass']   = 'Pass';
 $lang->leave->statusList['reject'] = 'Reject';
 
-$lang->leave->denied = 'access denied';
-$lang->leave->unique = 'There was a record of leave in %s.';
+$lang->leave->denied    = 'access denied';
+$lang->leave->unique    = 'There was a record of leave in %s.';
+$lang->leave->sameMonth = 'Leave must be in the same month.';
+$lang->leave->wrongEnd  = 'End time should be greater than begin time.';
 
 $lang->leave->confirmReview['pass']   = 'Are you sure to pass it?';
 $lang->leave->confirmReview['reject'] = 'Are you sure to reject it?';

@@ -9,7 +9,10 @@ $lang->attend->edit         = '补录';
 $lang->attend->edited       = '已补录';
 $lang->attend->leave        = '请假';
 $lang->attend->leaved       = '已请假';
+$lang->attend->lieu         = '调休';
+$lang->attend->lieud        = '已调休';
 $lang->attend->trip         = '出差';
+$lang->attend->egress       = '外出';
 $lang->attend->overtime     = '加班';
 $lang->attend->overtimed    = '已加班';
 $lang->attend->review       = '补录审核';
@@ -59,8 +62,10 @@ $lang->attend->statusList['both']     = '迟到+早退';
 $lang->attend->statusList['absent']   = '旷工';
 $lang->attend->statusList['leave']    = '请假';
 $lang->attend->statusList['trip']     = '出差';
+$lang->attend->statusList['egress']   = '外出';
 $lang->attend->statusList['rest']     = '休息日';
 $lang->attend->statusList['overtime'] = '加班';
+$lang->attend->statusList['lieu']     = '调休';
 
 $lang->attend->abbrStatusList['normal']   = '√';
 $lang->attend->abbrStatusList['late']     = '迟';
@@ -69,8 +74,10 @@ $lang->attend->abbrStatusList['both']     = '迟+早';
 $lang->attend->abbrStatusList['absent']   = '旷';
 $lang->attend->abbrStatusList['leave']    = '假';
 $lang->attend->abbrStatusList['trip']     = '差';
+$lang->attend->abbrStatusList['egress']   = '出';
 $lang->attend->abbrStatusList['rest']     = '休';
 $lang->attend->abbrStatusList['overtime'] = '加';
+$lang->attend->abbrStatusList['lieu']     = '调';
 
 $lang->attend->markStatusList['normal']   = '√';
 $lang->attend->markStatusList['late']     = '=';
@@ -79,12 +86,16 @@ $lang->attend->markStatusList['both']     = '=>';
 $lang->attend->markStatusList['absent']   = 'x';
 $lang->attend->markStatusList['leave']    = '!';
 $lang->attend->markStatusList['trip']     = '$';
+$lang->attend->markStatusList['egress']   = '#';
 $lang->attend->markStatusList['rest']     = '~';
 $lang->attend->markStatusList['overtime'] = '+';
+$lang->attend->markStatusList['lieu']     = '↓';
 
 $lang->attend->reasonList['normal'] = '准点上下班';
 $lang->attend->reasonList['trip']   = '出差';
+$lang->attend->reasonList['egress'] = '外出';
 $lang->attend->reasonList['leave']  = '请假';
+$lang->attend->reasonList['lieu']   = '调休';
 
 $lang->attend->reviewStatusList['wait']   = '等待审核';
 $lang->attend->reviewStatusList['pass']   = '通过';
@@ -121,6 +132,7 @@ $lang->attend->confirmReview['reject'] = '您确定要执行拒绝操作吗？';
 
 $lang->attend->settings   = '考勤设置';
 $lang->attend->setManager = '部门经理设置';
+$lang->attend->setDept    = '部门设置';
 
 $lang->attend->note = new stdClass();
 $lang->attend->note->ip       = "允许签到的ip，多个ip用逗号隔开。支持IP段，如192.168.1.*";

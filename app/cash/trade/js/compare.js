@@ -79,4 +79,6 @@ $(document).ready(function()
             return false;
         }
     });
+
+    $('.table-wrapper').height($('.chart-wrapper').outerHeight() - 2);
 })

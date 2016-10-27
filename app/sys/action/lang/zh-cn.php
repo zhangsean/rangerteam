@@ -2,7 +2,7 @@
 /**
  * The lang file of zh-cn module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     action
@@ -104,6 +104,8 @@ $lang->action->desc->hidden                = '$date, 由 <strong>$actor</strong>
 $lang->action->desc->undeleted             = '$date, 由 <strong>$actor</strong> 还原。' . "\n";
 $lang->action->desc->transform             = '$date, 由 <strong>$actor</strong> 转换为联系人。' . "\n";
 $lang->action->desc->ignored               = '$date, 由 <strong>$actor</strong> 忽略。' . "\n";
+$lang->action->desc->createtrip            = '$date, 由 <strong>$actor</strong> 创建出差：<strong>$extra</strong>。' . "\n";
+$lang->action->desc->createegress          = '$date, 由 <strong>$actor</strong> 创建外出：<strong>$extra</strong>。' . "\n";
 
 /* 用来显示动态信息。*/
 $lang->action->label = new stdclass();
@@ -161,12 +163,17 @@ $lang->action->label->finishreceivecontract = '完成回款';
 $lang->action->label->finishreturned        = '完成回款';
 $lang->action->label->deletereturned        = '删除回款';
 
+/* 用来做动态搜索中显示动作 */
+$lang->action->search = new stdclass();
+$lang->action->search->label = (array)$lang->action->label;
+
 /* 用来生成相应对象的链接。*/
 $lang->action->label->product   = '产品|product|view|productID=%s';
 $lang->action->label->order     = '订单|order|view|orderID=%s';
 $lang->action->label->task      = '任务|task|view|taskID=%s';
 $lang->action->label->contract  = '合同|contract|view|contractID=%s';
 $lang->action->label->announce  = '公告|announce|view|announceID=%s';
+$lang->action->label->holiday   = '放假安排|holiday|browse|';
 $lang->action->label->customer  = '客户|customer|view|customerID=%s';
 $lang->action->label->provider  = '供应商|provider|view|providerID=%s';
 $lang->action->label->contact   = '联系人|contact|view|contactID=%s';
@@ -205,42 +212,12 @@ $lang->action->label->user = array();
 $lang->action->label->user['login']  = '登录|user|login|';
 $lang->action->label->user['logout'] = '退出|user|logout|';
 
-/* Object type. */
-$lang->action->search->objectTypeList['']            = '';    
-$lang->action->search->objectTypeList['product']     = '产品';    
-$lang->action->search->objectTypeList['task']        = '任务'; 
-$lang->action->search->objectTypeList['user']        = '成员'; 
-$lang->action->search->objectTypeList['order']       = '订单'; 
-$lang->action->search->objectTypeList['contract']    = '合同'; 
-$lang->action->search->objectTypeList['orderAction'] = '动作'; 
-
 $lang->action->nextContactList[1]      = '明天';
 $lang->action->nextContactList[2]      = '后天';
 $lang->action->nextContactList[3]      = '三天后';
 $lang->action->nextContactList[7]      = '一周后';
 $lang->action->nextContactList[14]     = '两周后';
 $lang->action->nextContactList[365000] = '无需联系';
-
-/* 用来在动态显示中显示动作 */
-$lang->action->search->label['']            = '';
-$lang->action->search->label['created']     = $lang->action->label->created;            
-$lang->action->search->label['edited']      = $lang->action->label->edited;             
-$lang->action->search->label['assigned']    = $lang->action->label->assigned;           
-$lang->action->search->label['transmit']    = $lang->action->label->transmit;           
-$lang->action->search->label['closed']      = $lang->action->label->closed;             
-$lang->action->search->label['deleted']     = $lang->action->label->deleted;            
-$lang->action->search->label['deletedfile'] = $lang->action->label->deletedfile;        
-$lang->action->search->label['editfile']    = $lang->action->label->editfile;           
-$lang->action->search->label['commented']   = $lang->action->label->commented;          
-$lang->action->search->label['activated']   = $lang->action->label->activated;          
-$lang->action->search->label['resolved']    = $lang->action->label->resolved;           
-$lang->action->search->label['reviewed']    = $lang->action->label->reviewed;           
-$lang->action->search->label['moved']       = $lang->action->label->moved;              
-$lang->action->search->label['started']     = $lang->action->label->started;            
-$lang->action->search->label['canceled']    = $lang->action->label->canceled;           
-$lang->action->search->label['finished']    = $lang->action->label->finished;           
-$lang->action->search->label['login']       = $lang->action->label->login;              
-$lang->action->search->label['logout']      = $lang->action->label->logout;
 
 $lang->action->record = new stdclass();
 $lang->action->record->common     = '沟通';
@@ -277,6 +254,7 @@ $lang->action->objectTypes['depositor'] = '账户';
 $lang->action->objectTypes['balance']   = '余额';
 $lang->action->objectTypes['todo']      = '待办';
 $lang->action->objectTypes['announce']  = '公告';
+$lang->action->objectTypes['holiday']   = '放假安排';
 $lang->action->objectTypes['trade']     = '账目';
 $lang->action->objectTypes['schema']    = '记账模板';
 $lang->action->objectTypes['doclib']    = '文档库';

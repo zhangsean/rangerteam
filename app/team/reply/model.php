@@ -2,11 +2,11 @@
 /**
  * The model file of reply module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     reply
- * @version     $Id$
+ * @version     $Id: model.php 4169 2016-10-19 08:57:15Z liugang $
  * @link        http://www.ranzhico.com
  */
 class replyModel extends model
@@ -128,13 +128,12 @@ class replyModel extends model
     public function post($threadID)
     {
         $thread = $this->loadModel('thread', 'team')->getByID($threadID);
-        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
 
         $reply = fixer::input('post')
             ->setForce('author', $this->app->user->account)
             ->setForce('createdDate', helper::now())
             ->setForce('thread', $threadID)
-            ->stripTags('content', $allowedTags)
+            ->stripTags('content', $this->config->allowedTags)
             ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
             ->get();
 
@@ -174,12 +173,10 @@ class replyModel extends model
      */
     public function update($replyID)
     {
-        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
-
         $reply = fixer::input('post')
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
-            ->stripTags('content', $allowedTags)
+            ->stripTags('content', $this->config->allowedTags)
             ->remove('files,labels,hidden')
             ->get();
 

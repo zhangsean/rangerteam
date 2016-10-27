@@ -1,20 +1,15 @@
 $(document).ready(function()
 {
-    $(document).on('change', '#type', function()
+    if(v.type == 'redeem')
     {
-        var type = $(this).val();
-        if(type == 'redeem')
-        {
-            $('tr.category').show();
-            $('tr.trader').hide();
-        }
-        else
-        {
-            $('tr.category').hide();
-            $('tr.trader').show();
-        }
-
-    })
-
-    $('#type').change();
+        $('tr.category').show();
+        $('tr.investList').show();
+        $('tr.trader').hide();
+    }
+    else
+    {
+        $('tr.category').hide();
+        $('tr.investList').hide();
+        $('tr.trader').show();
+    }
 });

@@ -2,11 +2,11 @@
 /**
  * The English file of common module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common 
- * @version     $Id$
+ * @version     $Id: en.php 4194 2016-10-21 09:23:53Z daitingting $
  * @link        http://www.ranzhico.com
  */
 $lang->colon      = ' : ';
@@ -273,6 +273,7 @@ $lang->my->review->menu = new stdclass();
 $lang->my->review->menu->attend   = 'Attend|my|review|type=attend';
 $lang->my->review->menu->leave    = 'Leave|my|review|type=leave';
 $lang->my->review->menu->overtime = 'Overtime|my|review|type=overtime';
+$lang->my->review->menu->lieu     = 'Lieu|my|review|type=lieu';
 $lang->my->review->menu->refund   = 'Refund|my|review|type=refund';
 
 $lang->my->order = new stdclass();
@@ -300,6 +301,7 @@ $lang->my->task->menu->createdByMe  = 'Created By Me|my|task|type=createdBy';
 $lang->my->task->menu->finishedByMe = 'Finished By Me|my|task|type=finishedBy';
 $lang->my->task->menu->closedByMe   = 'Closed By Me|my|task|type=closedBy';
 $lang->my->task->menu->canceledByMe = 'Canceled By Me|my|task|type=canceledBy';
+$lang->my->task->menu->unclosed     = 'Unclosed|my|task|type=unclosed';
 
 $lang->my->dynamic = new stdclass();
 $lang->my->dynamic->menu = new stdclass();
@@ -334,24 +336,24 @@ $lang->menuGroups->backup = 'system';
 
 /* The error messages. */
 $lang->error = new stdclass();
-$lang->error->length       = array("<strong>%s</strong>length should be<strong>%s</strong>", "<strong>%s</strong>length should between<strong>%s</strong>and <strong>%s</strong>.");
-$lang->error->reg          = "<strong>%s</strong>should like<strong>%s</strong>";
-$lang->error->unique       = "<strong>%s</strong>has<strong>%s</strong>already. If you are sure this record has been deleted, you can restore it in admin panel, trash page.";
-$lang->error->notempty     = "<strong>%s</strong>can not be empty.";
+$lang->error->length       = array("<strong>%s</strong> length should be <strong>%s</strong>", "<strong>%s</strong> length should between <strong>%s</strong> and <strong>%s</strong>.");
+$lang->error->reg          = "<strong>%s</strong> should like <strong>%s</strong>";
+$lang->error->unique       = "<strong>%s</strong> has <strong>%s</strong> already. If you are sure this record has been deleted, you can restore it in admin panel, trash page.";
+$lang->error->notempty     = "<strong>%s</strong> can not be empty.";
 $lang->error->empty        = "<strong>%s</strong> must be empty.";
-$lang->error->equal        = "<strong>%s</strong>must be<strong>%s</strong>.";
+$lang->error->equal        = "<strong>%s</strong> must be <strong>%s</strong>.";
 $lang->error->gt           = "<strong>%s</strong> should be geater than <strong>%s</strong>.";
 $lang->error->ge           = "<strong>%s</strong> should be not less than <strong>%s</strong>.";
 $lang->error->lt           = "<strong>%s</strong> should be less than <strong>%s</strong>";
 $lang->error->le           = "<strong>%s</strong> should be no greater than <strong>%s</strong>.";
-$lang->error->in           = '<strong>%s</strong>must in<strong>%s</strong>。';
-$lang->error->int          = array("<strong>%s</strong>should be interger", "<strong>%s</strong>should between<strong>%s-%s</strong>.");
-$lang->error->float        = "<strong>%s</strong>should be a interger or float.";
-$lang->error->email        = "<strong>%s</strong>should be email.";
-$lang->error->URL          = "<strong>%s</strong>should be url.";
-$lang->error->date         = "<strong>%s</strong>should be date";
+$lang->error->in           = '<strong>%s</strong> must in<strong>%s</strong>。';
+$lang->error->int          = array("<strong>%s</strong> should be interger", "<strong>%s</strong> should between <strong>%s - %s</strong>.");
+$lang->error->float        = "<strong>%s</strong> should be a interger or float.";
+$lang->error->email        = "<strong>%s</strong> should be email.";
+$lang->error->URL          = "<strong>%s</strong> should be url.";
+$lang->error->date         = "<strong>%s</strong> should be date";
 $lang->error->code         = '<strong>%s</strong> should be a combination of letters or numbers.';
-$lang->error->account      = "<strong>%s</strong>should be a valid account.";
+$lang->error->account      = "<strong>%s</strong> should be a valid account.";
 $lang->error->passwordsame = "Two passwords must be the same";
 $lang->error->passwordrule = "Password should more than six letters.";
 $lang->error->captcha      = 'Captcah wrong.';
@@ -422,9 +424,9 @@ $lang->datepicker->abbrDayNames = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'
 $lang->datepicker->monthNames   = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
 /* Set currency items. */
-$lang->currencyList['rmb']  = 'Renminbi Yuan';
+$lang->currencyList['rmb']  = 'RMB Yuan';
 $lang->currencyList['usd']  = 'U.S.Dollar';
-$lang->currencyList['hkd']  = 'HongKong Dollars';
+$lang->currencyList['hkd']  = 'HongKong Dollar';
 $lang->currencyList['twd']  = 'New Taiwan Dollar';
 $lang->currencyList['euro'] = 'Euro';
 $lang->currencyList['dem']  = 'Deutsche Mark';
@@ -438,7 +440,7 @@ $lang->currencyList['inr']  = 'Indian Rupee';
 $lang->currencyList['aud']  = 'Australian Dollar';
 $lang->currencyList['nzd']  = 'New Zealand Dollar';
 $lang->currencyList['thb']  = 'Thai Baht';
-$lang->currencyList['sgd']  = 'Ssingapore Dollar';
+$lang->currencyList['sgd']  = 'Singapore Dollar';
 
 /* Currency symbols setting. */
 $lang->currencySymbols['rmb']  = '￥';

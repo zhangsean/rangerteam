@@ -2,7 +2,7 @@
 /**
  * The browse view file of overtime module of Ranzhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     overtime
@@ -79,7 +79,7 @@
             <?php if($type != 'company'):?>
             <?php if($type == 'browseReview' and $overtime->status == 'wait'):?>
             <?php commonModel::printLink('oa.overtime', 'review', "id=$overtime->id&status=pass", $lang->overtime->statusList['pass'], "class='reviewPass'");?>
-            <?php commonModel::printLink('oa.overtime', 'review', "id=$overtime->id&status=reject", $lang->overtime->statusList['reject'], "class='reviewReject'");?>
+            <?php commonModel::printLink('oa.overtime', 'review', "id=$overtime->id&status=reject", $lang->overtime->statusList['reject'], "data-toggle='modal'");?>
             <?php endif;?>
             <?php if($type == 'personal' and ($overtime->status == 'wait' or $overtime->status == 'draft')):?>
             <?php if($overtime->status == 'wait' or $overtime->status == 'draft') commonModel::printLink('oa.overtime', 'switchstatus', "id=$overtime->id", $overtime->status == 'wait' ? $lang->overtime->cancel : $lang->overtime->commit, "class='reload'");?>

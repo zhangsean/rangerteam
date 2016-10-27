@@ -2,7 +2,7 @@
 /**
  * The customer module zh-tw file of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     customer
@@ -15,6 +15,7 @@ $lang->customer->common        = '客戶';
 $lang->customer->id            = '編號';
 $lang->customer->name          = '名稱';
 $lang->customer->contact       = '聯繫人';
+$lang->customer->depositor     = '對公賬戶';
 $lang->customer->type          = '類型';
 $lang->customer->size          = '規模';
 $lang->customer->industry      = '行業';

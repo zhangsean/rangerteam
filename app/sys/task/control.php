@@ -2,7 +2,7 @@
 /**
  * The control file of task module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     task 
@@ -74,7 +74,8 @@ class task extends control
         $this->view->title = $this->lang->task->browse;
         if($projectID) $this->view->title = $project->name . $this->lang->minus . $this->view->title;
 
-        $tasks = $this->task->getList($projectID, $mode, $orderBy, $pager);
+        $tasks   = $this->task->getList($projectID, $mode, $orderBy, $pager);
+        $backURL = $this->session->projectList ? $this->session->projectList : (helper::createLink('project', 'index'));
 
         $this->view->tasks     = $tasks;
         $this->view->pager     = $pager;
@@ -84,6 +85,7 @@ class task extends control
         $this->view->projectID = $projectID;
         $this->view->projects  = $this->loadModel('project', 'oa')->getPairs();
         $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->view->backLink  = html::a($backURL, $this->lang->goback);
         $this->display();
     }
 
@@ -109,7 +111,7 @@ class task extends control
         $this->view->title     = $this->lang->task->create;
         $this->view->projectID = $projectID;
         $this->view->projects  = $this->loadModel('project', 'oa')->getPairs();
-        $this->view->users     = $this->loadModel('user')->getPairs('noclosed,nodeleted');
+        $this->view->users     = $this->loadModel('user')->getPairs('noclosed,nodeleted,noforbidden');
         $this->view->members   = $this->loadModel('project', 'oa')->getMemberPairs($projectID);
         $this->display();
     }
@@ -186,7 +188,7 @@ class task extends control
         $this->view->projects       = $this->loadModel('project', 'oa')->getPairs();
         $this->view->members        = !empty($task->team) ? $this->task->getMemberPairs($task) : array();
         $this->view->projectMembers = $this->loadModel('project', 'oa')->getMemberPairs($task->project);
-        $this->view->users          = $this->loadModel('user')->getPairs();
+        $this->view->users          = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
         $this->display();
     }
 
@@ -600,9 +602,9 @@ class task extends control
         if($groupBy == 'status') $orderBy = 'pri';
         if($groupBy == 'assignedTo' or $groupBy == 'createdBy') $orderBy = 'status';
 
-        $tasks = $this->task->getList($projectID, $mode = null, $orderBy, $pager = null, $groupBy);
-
-        $tasks = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
+        $tasks   = $this->task->getList($projectID, $mode = null, $orderBy, $pager = null, $groupBy);
+        $tasks   = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
+        $backURL = $this->session->projectList ? $this->session->projectList : (helper::createLink('project', 'index'));
 
         $this->view->tasks       = $tasks;
         $this->view->groupBy     = $groupBy;
@@ -612,6 +614,7 @@ class task extends control
         $this->view->project     = $project;
         $this->view->users       = $this->loadModel('user')->getPairs();
         $this->view->colWidth    = 100/min(6, max(2, count($tasks)));
+        $this->view->backLink    = html::a($backURL, $this->lang->goback);
         $this->display();
     }
 
@@ -640,9 +643,9 @@ class task extends control
         if($groupBy == 'assignedTo' or $groupBy == 'createdBy') $orderBy = 'status';
 
         /* Get tasks and group them. */
-        $tasks = $this->task->getList($projectID, $mode = null, $orderBy, $pager = null, $groupBy);
-
-        $tasks = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
+        $tasks   = $this->task->getList($projectID, $mode = null, $orderBy, $pager = null, $groupBy);
+        $tasks   = $this->task->fixTaskGroups($project, $tasks, $groupBy); 
+        $backURL = $this->session->projectList ? $this->session->projectList : (helper::createLink('project', 'index'));
 
         $this->view->tasks     = $tasks;
         $this->view->groupBy   = $groupBy;
@@ -651,6 +654,7 @@ class task extends control
         $this->view->projects  = $this->project->getPairs();
         $this->view->project   = $project;
         $this->view->users     = $this->loadModel('user')->getPairs();
+        $this->view->backLink  = html::a($backURL, $this->lang->goback);
         $this->display();
     }
 

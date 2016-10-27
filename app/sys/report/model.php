@@ -2,7 +2,7 @@
 /**
  * The model file of report module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     report
@@ -111,7 +111,7 @@ class reportModel extends model
             $listName = $this->config->report->{$module}->listName[$chart];
 
             /* Set list. */
-            if($listName == 'USERS')      $list = $this->loadModel('user')->getPairs('noempty');
+            if($listName == 'USERS')      $list = $this->loadModel('user')->getPairs();
             if($listName == 'AREA')       $list = $this->loadModel('tree')->getOptionMenu('area', 0, true);
             if($listName == 'INDUSTRY')   $list = $this->loadModel('tree')->getOptionMenu('industry', 0, true);
             if($listName == 'PRODUCTS')   $list = $this->loadModel('product', 'crm')->getPairs();
@@ -181,9 +181,26 @@ class reportModel extends model
         }
         else
         {
+            if($module == 'customer' && $tableName == TABLE_CUSTOMER)
+            {
+                $relation       = 'client';
+                $customerIdList = $this->session->customerIdList;
+
+                if($this->session->customerQuery == false) $this->session->set('customerQuery', ' 1 = 1');
+                $customerQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->customerQuery);
+            }
+            else
+            {
+                $relation       = '';
+                $customerIdList = '';
+                $customerQuery  = '';
+            }
             $datas = $this->dao->select("$groupBy as name, $func($field) as value")->from($tableName)
                 ->where('deleted')->eq('0')
-                ->beginIf($currency != '')->andWhere('currency')->eq($currency)->fi()
+                ->beginIF($currency != '')->andWhere('currency')->eq($currency)->fi()
+                ->beginIF($relation)->andWhere('relation')->eq($relation)->fi()
+                ->beginIF($customerIdList)->andWhere('id')->in($customerIdList)->fi()
+                ->beginIF($customerQuery)->andWhere($customerQuery)->fi()
                 ->groupBy($groupBy)
                 ->orderBy('value_desc')
                 ->fetchAll('name');

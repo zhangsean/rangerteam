@@ -53,4 +53,7 @@ $(document).ready(function()
        var selectCurrency = $('#currency').val();
        location.href = createLink('trade', 'report', "date=" + selectYear + "&currency=" + selectCurrency);
     })
+
+    $('td.monthly > .table-wrapper').height($('td.monthly > .chart-wrapper').outerHeight() - 2);
+    $('td.annual > .table-wrapper').height($('td.annual > .chart-wrapper').outerHeight() - 2);
 })

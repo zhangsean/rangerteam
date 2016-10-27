@@ -2,7 +2,7 @@
 /**
  * The trade module zh-cn file of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     trade
@@ -18,6 +18,8 @@ $lang->trade->currency    = '货币';
 $lang->trade->trader      = '商户';
 $lang->trade->customer    = '客户';
 $lang->trade->money       = '金额';
+$lang->trade->status      = '状态';
+$lang->trade->rate        = '投资回报率';
 $lang->trade->desc        = '说明';
 $lang->trade->product     = '产品';
 $lang->trade->order       = '订单';
@@ -45,12 +47,18 @@ $lang->trade->area        = '客户区域';
 $lang->trade->industry    = '客户行业';
 $lang->trade->level       = '客户级别';
 $lang->trade->size        = '客户规模';
+$lang->trade->interest    = '借贷利息';
+$lang->trade->loanID      = '借贷';
+$lang->trade->investID    = '投资';
+$lang->trade->loanrate    = '利率';
 
 $lang->trade->create       = '记账';
 $lang->trade->in           = '收入';
 $lang->trade->out          = '支出';
 $lang->trade->invest       = '投资';
 $lang->trade->redeem       = '赎回';
+$lang->trade->loan         = '借贷';
+$lang->trade->repay        = '还贷';
 $lang->trade->createIn     = '记收入';
 $lang->trade->createOut    = '记支出';
 $lang->trade->transfer     = '转账';
@@ -78,6 +86,8 @@ $lang->trade->report->create      = '生成报表';
 $lang->trade->report->selectYears = '选择年份';
 $lang->trade->report->undefined   = '未定义';
 $lang->trade->report->compareTip  = '必须选择两个年份进行比较';
+$lang->trade->report->unit        = '万元';
+$lang->trade->report->ratio       = 10000;
 
 $lang->trade->report->typeList['annual']  = '年度收支表'; 
 $lang->trade->report->typeList['compare'] = '年度对比表'; 
@@ -88,6 +98,8 @@ $lang->trade->typeList['transferout'] = '转出';
 $lang->trade->typeList['transferin']  = '转入';
 $lang->trade->typeList['invest']      = '投资';
 $lang->trade->typeList['redeem']      = '赎回';
+$lang->trade->typeList['loan']        = '借贷';
+$lang->trade->typeList['repay']       = '还贷';
 
 $lang->trade->quarters = new stdclass();
 $lang->trade->quarters->Q4 = '10,11,12';
@@ -119,16 +131,8 @@ $lang->trade->categoryList['transferin']  = '转入';
 $lang->trade->categoryList['transferout'] = '转出';
 $lang->trade->categoryList['invest']      = '投资';
 $lang->trade->categoryList['redeem']      = '赎回';
-
-$lang->trade->expenseCategoryList['fee']  = '手续费';
-$lang->trade->expenseCategoryList['loss'] = '理财亏损';
-
-$lang->trade->incomeCategoryList['profit'] = '理财盈利';
-
-$lang->trade->categoryList = $lang->trade->categoryList + $lang->trade->expenseCategoryList + $lang->trade->incomeCategoryList;
-
-$lang->trade->investCategoryList['profit'] = '盈利';
-$lang->trade->investCategoryList['loss']   = '亏损';
+$lang->trade->categoryList['loan']        = '借贷';
+$lang->trade->categoryList['repay']       = '还贷';
 
 $lang->trade->transferCategoryList['transferin']  = '转入';
 $lang->trade->transferCategoryList['transferout'] = '转出';
@@ -139,6 +143,9 @@ $lang->trade->objectTypeList['contract'] = '合同支出';
 
 $lang->trade->investTypeList['invest'] = '投资';
 $lang->trade->investTypeList['redeem'] = '赎回';
+
+$lang->trade->loanTypeList['loan']  = '借贷';
+$lang->trade->loanTypeList['repay'] = '还贷';
 
 $lang->trade->encodeList['gbk']  = 'GBK';
 $lang->trade->encodeList['utf8'] = 'UTF-8';
@@ -159,6 +166,13 @@ $lang->trade->importedFields['dept']     = '部门';
 $lang->trade->importedFields['desc']     = '备注';
 $lang->trade->importedFields['fee']      = '手续费';
 $lang->trade->importedFields['product']  = '产品';
+
+$lang->trade->statusList['returned']   = '已赎回';
+$lang->trade->statusList['returning']  = '赎回中';
+$lang->trade->statusList['unReturned'] = '未赎回';
+$lang->trade->statusList['repaied']    = '已还贷';
+$lang->trade->statusList['repaying']   = '还贷中';
+$lang->trade->statusList['unRepaied']  = '未还贷';
 
 $lang->trade->totalIn       = '%s收入%s；';
 $lang->trade->totalOut      = '%s支出%s；';
@@ -186,4 +200,4 @@ $lang->trade->excel->title = new stdclass();
 $lang->trade->excel->title->depositor = '账号盈亏';
 
 $lang->trade->excel->help = new stdclass();
-$lang->trade->excel->help->depositor = '本报表不区分币种，仅统计交易类型为收入和支出的帐目。';
+$lang->trade->excel->help->depositor = '本报表不区分币种。';

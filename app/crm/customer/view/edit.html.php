@@ -2,7 +2,7 @@
 /**
  * The edit view file of customer module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     customer 
@@ -60,6 +60,10 @@
            <th class='w-70px'><?php echo $lang->customer->relation;?></th>
            <td><?php echo html::select('relation', $lang->customer->relationList, $customer->relation, "class='form-control'");?></td>
          </tr>
+        <tr>
+          <th><?php echo $lang->customer->depositor;?></th>
+          <td><?php echo html::input('depositor', $customer->depositor, "class='form-control'");?></td>
+        </tr>
          <tr>
            <th><?php echo $lang->customer->level;?></th>
            <td><?php echo html::select('level', $levelList, $customer->level, "class='form-control'");?></td>

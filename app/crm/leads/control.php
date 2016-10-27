@@ -2,7 +2,7 @@
 /**
  * The control file of leads module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     leads
@@ -53,9 +53,6 @@ class leads extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $contacts = $this->contact->getList($customer = '', $relation = 'client', $mode, $status, $origin, $orderBy, $pager);
-        $this->session->set('contactQueryCondition', $this->dao->get());
-        $this->session->set('contactList', $this->app->getURI(true));
-        $this->app->user->canEditContactIdList = ',' . implode(',', array_keys($contacts)) . ',';
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
@@ -235,7 +232,7 @@ class leads extends control
         }
 
         $this->view->title     = $this->lang->contact->assign;
-        $this->view->users     = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->users     = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->contactID = $contactID;
         $this->display();
     }

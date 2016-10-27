@@ -2,7 +2,7 @@
 /**
  * The zh-tw file of common module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng wang <chunsheng@cnezsoft.com>
  * @package     common 
@@ -19,6 +19,7 @@ $lang->menu->cash->in        = '收入|trade|browse|mode=in';
 $lang->menu->cash->out       = '支出|trade|browse|mode=out';
 $lang->menu->cash->transfer  = '轉賬|trade|browse|mode=transfer';
 $lang->menu->cash->invest    = '投資|trade|browse|mode=invest';
+$lang->menu->cash->loan      = '借貸|trade|browse|mode=loan';
 $lang->menu->cash->check     = '對賬|depositor|check|';
 $lang->menu->cash->report    = '報表|trade|report|';
 $lang->menu->cash->depositor = '賬戶|depositor|browse|';
@@ -27,23 +28,24 @@ $lang->menu->cash->provider  = '供應商|provider|browse|';
 $lang->menu->cash->setting   = '設置|tree|browse|type=in|';
 
 /* Menu of depositor module. */
-$lang->depositor = new stdclass();
+if(!isset($lang->depositor)) $lang->depositor = new stdclass();
 
 /* Menu of trade module. */
-$lang->trade = new stdclass();
+if(!isset($lang->trade)) $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
 
-/* Menu of trade module. */
-$lang->provider = new stdclass();
+/* Menu of provider module. */
+if(!isset($lang->provider)) $lang->provider = new stdclass();
 $lang->provider->menu = new stdclass();
 $lang->provider->menu->browse = array('link' => '供應商列表|provider|browse|', 'alias' => 'create,edit,view');
 
-/* Menu of trade module. */
-$lang->contact = new stdclass();
+/* Menu of contact module. */
+if(!isset($lang->contact)) $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
 $lang->contact->menu->browse = array('link' => '聯繫人列表|contact|browse|', 'alias' => 'create,edit,view');
 
-$lang->report = new stdclass();
+/* Menu of report module. */
+if(!isset($lang->report)) $lang->report = new stdclass();
 $lang->report->menu = new stdclass();
 $lang->report->menu->annual  = '年度收支表|trade|report|';
 $lang->report->menu->compare = '年度對比表|trade|compare|';

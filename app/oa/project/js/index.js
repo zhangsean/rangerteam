@@ -35,5 +35,6 @@ $(document).ready(function()
 
     var type = $.cookie('projectViewType');
     if(typeof(type) == 'undefined' || type == '') type = 'card';
+    if(v.status == 'bysearch') type = 'list';
     $('#menuActions a[data-mode=' + type +']').click();
 });

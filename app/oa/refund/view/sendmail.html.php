@@ -2,7 +2,7 @@
 /**
  * The mail file of customer module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chu Jilu <chujilu@cnezsoft.com>
  * @package     customer
@@ -27,7 +27,7 @@
   <td style='padding: 10px; border: none;'>
     <fieldset style='border: 1px solid #e5e5e5'>
       <div style='padding:5px;'>
-        <table style='width: 100%; text-align: left;'>
+        <table style='font-size: 13px; width: 100%; text-align: left;'>
           <tr>
             <th style='width:80px;'><?php echo $lang->refund->createdBy?></th>
             <td><?php echo zget($users, $refund->createdBy)?></td>

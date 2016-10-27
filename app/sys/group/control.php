@@ -2,7 +2,7 @@
 /**
  * The control file of group module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     group
@@ -208,7 +208,7 @@ class group extends control
                 $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
             }
 
-            $apps  = $this->loadModel('entry')->getEntries();
+            $apps = $this->loadModel('entry')->getEntries();
 
             $app = new stdclass();
             $app->id = 'superadmin';
@@ -302,7 +302,7 @@ class group extends control
         }
         $group      = $this->group->getById($groupID);
         $groupUsers = $this->group->getUserPairs($groupID);
-        $allUsers   = $this->user->getPairs('nodeleted|noclosed|noempty');
+        $allUsers   = $this->user->getPairs('nodeleted,noforbidden,noclosed,noempty');
         $otherUsers = array_diff_assoc($allUsers, $groupUsers);
 
         $title      = $group->name . $this->lang->group->manageMember;

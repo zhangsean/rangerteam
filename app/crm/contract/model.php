@@ -2,7 +2,7 @@
 /**
  * The model file for contract of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     contract
@@ -61,9 +61,7 @@ class contractModel extends model
         return $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('deleted')->eq(0)
             ->beginIF($owner == 'my' and strpos('returnedBy,deliveredBy', $mode) === false)
-            ->andWhere()
-            ->markLeft(1)
-            ->where('createdBy')->eq($this->app->user->account)
+            ->andWhere('createdBy', true)->eq($this->app->user->account)
             ->orWhere('editedBy')->eq($this->app->user->account)
             ->orWhere('signedBy')->eq($this->app->user->account)
             ->orWhere('returnedBy')->eq($this->app->user->account)
@@ -204,7 +202,7 @@ class contractModel extends model
             ->setDefault('end', '0000-00-00')
             ->setDefault('signedDate', substr($now, 0, 10))
             ->join('handlers', ',')
-            ->stripTags('items', $this->config->allowedTags->admin)
+            ->stripTags('items', $this->config->allowedTags)
             ->get();
 
         $contract = $this->loadModel('file', 'sys')->processEditor($contract, $this->config->contract->editor->create['id']);
@@ -287,7 +285,7 @@ class contractModel extends model
             ->setIF($this->post->status == 'finished' and $this->post->finishedBy == '', 'finishedBy', $this->app->user->account)
             ->setIF($this->post->status == 'finished' and $this->post->finishedDate == '0000-00-00', 'finishedDate', $now)
             ->remove('files,labels')
-            ->stripTags('items', $this->config->allowedTags->admin)
+            ->stripTags('items', $this->config->allowedTags)
             ->get();
 
         $data = $this->loadModel('file', 'sys')->processEditor($data, $this->config->contract->editor->edit['id']);
@@ -388,7 +386,7 @@ class contractModel extends model
             ->add('contract', $contractID)
             ->setDefault('deliveredBy', $this->app->user->account)
             ->setDefault('deliveredDate', $now)
-            ->stripTags('comment', $this->config->allowedTags->admin)
+            ->stripTags('comment', $this->config->allowedTags)
             ->get();
 
         $data = $this->loadModel('file', 'sys')->processEditor($data, $this->config->contract->editor->delivery['id']);
@@ -433,7 +431,7 @@ class contractModel extends model
             ->add('contract', $contract->id)
             ->setDefault('deliveredBy', $this->app->user->account)
             ->setDefault('deliveredDate', $now)
-            ->stripTags('comment', $this->config->allowedTags->admin)
+            ->stripTags('comment', $this->config->allowedTags)
             ->get();
 
         $data = $this->loadModel('file', 'sys')->processEditor($data, $this->config->contract->editor->editdelivery['id']);
@@ -564,6 +562,7 @@ class contractModel extends model
                     ->join('handlers', ',')
                     ->add('trader', $contract->customer)
                     ->add('contract', $contractID)
+                    ->add('desc', strip_tags($this->post->comment))
                     ->remove('finish,amount,returnedBy,returnedDate,createTrade,continue')
                     ->get();
 
@@ -865,12 +864,20 @@ class contractModel extends model
             {
                 if($contract->currency == $key)
                 {
-                    if(!isset($totalAmount['contract'][$key])) $totalAmount['contract'][$key] = 0;
-                    if(!isset($totalAmount['return'][$key]))   $totalAmount['return'][$key] = 0;
+                    if(!isset($totalAmount['contract'][$key]))     $totalAmount['contract'][$key] = 0;
+                    if(!isset($totalAmount['return'][$key]))       $totalAmount['return'][$key] = 0;
+                    if(!isset($totalAmount['currentMonth'][$key])) $totalAmount['currentMonth'][$key] = 0;
 
                     $totalAmount['contract'][$key] += $contract->amount;
                     
-                    if(isset($totalReturn[$contract->id])) foreach($totalReturn[$contract->id] as $return) $totalAmount['return'][$key] += $return->amount;
+                    if(isset($totalReturn[$contract->id])) 
+                    {
+                        foreach($totalReturn[$contract->id] as $return) 
+                        {
+                            $totalAmount['return'][$key] += $return->amount;
+                            if(date('Y-m', strtotime($return->returnedDate)) == date('Y-m')) $totalAmount['currentMonth'][$key] += $return->amount;
+                        }
+                    }
                 }
             }
         }

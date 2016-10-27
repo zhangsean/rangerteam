@@ -1114,7 +1114,7 @@
                 var iframe$ = window.frames[fName].$;
                 if(iframe$)
                 {
-                    iframe$.extend({refreshDesktop: $.refreshDesktop, openEntry: $.openEntry, refreshCategoryMenu: $.refreshCategoryMenu});
+                    iframe$.extend({refreshDesktop: $.refreshDesktop, openEntry: $.openEntry});
                 }
             }
             catch(e){}
@@ -1516,12 +1516,12 @@
         /* Initialize */
         this.init = function()
         {
-            this.$leftBar     = $('#leftBar');
-            this.$taskBar     = $('#taskbar');
-            this.$appsMenu    = $('#apps-menu .bar-menu');
-            this.$allAppsList = $("#allAppsList .bar-menu");
-            this.$categoryMenu= $('.categoryMenu');
-            this.firstRender  = true;
+            this.$leftBar      = $('#leftBar');
+            this.$taskBar      = $('#taskbar');
+            this.$appsMenu     = $('#apps-menu .bar-menu');
+            this.$allAppsList  = $("#allAppsList .bar-menu");
+            this.$categoryMenu = $('.categoryMenu');
+            this.firstRender   = true;
 
             this.render();
             this.bindEvents();
@@ -1533,6 +1533,7 @@
             this.$appsMenu.empty();
             this.$allAppsList.empty();
             this.$categoryMenu.empty();
+            $('.categoryMenu').empty();
             this.showAll();
 
             if(this.firstRender)
@@ -1590,7 +1591,7 @@
         /* Show all shortcuts */
         this.showAll = function()
         {
-            this.categories = new Array();
+            /* Show entries has no category. */
             for(var index in entries)
             {
                 this.show(entries[index]);
@@ -1612,26 +1613,28 @@
             if(entry.hasMenu)
             {
                 $shortcut = $(entry.toLeftBarShortcutHtml());
-                if(entry.category !== undefined && entry.category != 0 && document.getElementById('categoryTpl' + entry.category)) 
+                if(entry.code == '')
                 {
-                    var shortcut = entry.toLeftBarShortcutHtml();
-                    $('#categoryMenu' + entry.category).append(shortcut);
-                    $shortcut.html($('#categoryTpl' + entry.category).html().replace(/categoryid/g, entry.category));
-
-                    if($.inArray(entry.category, this.categories) == -1) 
-                    {
-                        this.categories.push(entry.category);
-                    }
-                    else
-                    {
-                        $shortcut = '';
-                    }
+                    $shortcut.find('button').attr('id', 'category' + entry.id).addClass('categoryButton');
+                    $shortcut.find('button').removeAttr('title');
                 }
-                if(activedId && entry.id === activedId)
+                if(entry.category !== undefined && entry.category != 0) 
                 {
-                    $shortcut.find('.app-btn').addClass('active');
+                    if($('#categoryMenu' + entry.category).length == 0)
+                    {
+                        $('#leftBar #apps-menu .bar-menu:first').after($('#categoryTpl').html().replace(/categoryid/g, entry.category));
+                    }
+                    $shortcut.find('.app-btn').removeAttr('title');
+                    $('#categoryMenu' + entry.category).append($shortcut);
                 }
-                this.$appsMenu.append($shortcut);
+                else
+                {
+                    if(activedId && entry.id === activedId)
+                    {
+                        $shortcut.find('.app-btn').addClass('active');
+                    }
+                    this.$appsMenu.append($shortcut);
+                }
             }
             if(entry.menu == 'all' || entry.menu == 'list')
             {
@@ -1661,6 +1664,7 @@
                 return false;
             }).on('click', '.app-btn', function(event)
             {
+                if($(this).hasClass('categoryButton')) return false;
                 var $this = $(this);
                 var et = getEntry($this.attr('data-id'));
                 if(et)
@@ -1931,23 +1935,6 @@
         desktop.refreshMenuSize();
     }
 
-    function refreshCategoryMenu(categories)
-    {
-        for(var index in categories)
-        {
-            var category = categories[index];
-            var id = category.id;
-            if(id)
-            {
-                var name = category.name.substr(0, 2).toUpperCase();
-                var hue  = (parseInt(id) - 820000) * 47 % 360;
-                $('#categoryTpl' + id).remove();
-                $('#categoryMenu' + id).remove();
-                $('#leftBar #apps-menu .bar-menu:first').after($('#categoryTpl').html().replace(/categoryid/g, id).replace(/categoryname/g, name).replace(/categoryhue/g, hue));
-            }
-        }
-    }
-
     /*
      * Close modal window opened in desktop
      *
@@ -1972,5 +1959,5 @@
     }
 
     /* make jquery object call the ips interface manager */
-    $.extend({ipsStart: start, closeModal: closeModal, openEntry: openEntry, getQueryString: getQueryString, refreshDesktop: refreshDesktop, refreshCategoryMenu: refreshCategoryMenu});
+    $.extend({ipsStart: start, closeModal: closeModal, openEntry: openEntry, getQueryString: getQueryString, refreshDesktop: refreshDesktop});
 }(jQuery, window, document, Math);

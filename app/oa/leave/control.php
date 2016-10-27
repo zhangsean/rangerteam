@@ -2,7 +2,7 @@
 /**
  * The control file of leave of Ranzhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      chujilu <chujilu@cnezsoft.com>
  * @package     leave
@@ -82,6 +82,7 @@ class leave extends control
         }
         elseif($type == 'browseReview')
         {
+            $this->app->loadModuleConfig('attend');
             if(!empty($this->config->attend->reviewedBy))
             { 
                 if($this->config->attend->reviewedBy == $this->app->user->account)
@@ -137,6 +138,7 @@ class leave extends control
         $leave = $this->leave->getById($id);
 
         /* Check privilage. */
+        $this->app->loadModuleConfig('attend');
         if(!empty($this->config->attend->reviewedBy))
         { 
             if($this->config->attend->reviewedBy != $this->app->user->account) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
@@ -158,6 +160,38 @@ class leave extends control
     }
 
     /**
+     * reviewBack 
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return void
+     */
+    public function reviewBack($id)
+    {
+        $leave = $this->leave->getByID($id);
+
+        /* Check privilage. */
+        $this->app->loadModuleConfig('attend');
+        if(!empty($this->config->attend->reviewedBy))
+        { 
+            if($this->config->attend->reviewedBy != $this->app->user->account) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
+        }
+        else
+        {
+            $createdUser = $this->loadModel('user')->getByAccount($leave->createdBy);
+            $dept = $this->loadModel('tree')->getByID($createdUser->dept);
+            if((empty($dept) or ",{$this->app->user->account}," != $dept->moderators)) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
+        }
+
+        $this->leave->reviewBackDate($id);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+        $actionID = $this->loadModel('action')->create('leave', $id, 'reviewed', '', 'pass');
+        $this->sendmail($id, $actionID);
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+    }
+
+    /**
      * create leave.
      * 
      * @access public
@@ -172,12 +206,9 @@ class leave extends control
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            if(is_int($result))
-            {
-                $leaveID  = $result;
-                $actionID = $this->loadModel('action')->create('leave', $leaveID, 'created');
-                $this->sendmail($leaveID, $actionID);
-            }
+            $leaveID  = $result;
+            $actionID = $this->loadModel('action')->create('leave', $leaveID, 'created');
+            $this->sendmail($leaveID, $actionID);
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
         }
@@ -189,7 +220,7 @@ class leave extends control
             if($leave) $this->locate(inlink('edit', "id=$leave->id"));
         }
 
-        $this->app->loadConfig('attend');
+        $this->app->loadModuleConfig('attend');
         $this->view->title = $this->lang->leave->create;
         $this->view->date  = $date;
         $this->display();
@@ -207,6 +238,7 @@ class leave extends control
         $leave = $this->leave->getById($id);
 
         /* check privilage. */
+        $this->app->loadModuleConfig('attend');
         if(!empty($this->config->attend->reviewedBy)) $reviewedBy = $this->config->attend->reviewedBy;
         if(empty($this->config->attend->reviewedBy))
         {
@@ -232,6 +264,35 @@ class leave extends control
         }
 
         $this->view->title = $this->lang->leave->edit;
+        $this->view->leave = $leave;
+        $this->display();
+    }
+
+    /**
+     * Back to report.
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return void
+     */
+    public function back($id)
+    {
+        $leave = $this->leave->getByID($id);
+        if($leave->createdBy != $this->app->user->account) 
+        {
+            $locate    = helper::safe64Encode(helper::createLink('oa.leave', 'personal'));
+            $errorLink = helper::createLink('error', 'index', "type=accessLimited&locate={$locate}");
+            die(js::locate($errorLink));
+        }
+
+        if($_POST)
+        {
+            $this->leave->back($id);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        }
+
+        $this->view->title = $this->lang->leave->back;
         $this->view->leave = $leave;
         $this->display();
     }
@@ -282,6 +343,7 @@ class leave extends control
         }
         if($action->action == 'created' or $action->action == 'revoked' or $action->action == 'commited')
         {
+            $this->app->loadModuleConfig('attend');
             if(!empty($this->config->attend->reviewedBy))
             {
                 $toList = $this->config->attend->reviewedBy; 

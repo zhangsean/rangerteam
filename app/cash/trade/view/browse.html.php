@@ -2,7 +2,7 @@
 /**
  * The browse view file of trade module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     trade 
@@ -32,17 +32,21 @@
   <div class='btn-group'>
     <button data-toggle='dropdown' class='btn btn-primary dropdown-toggle' type='button'><?php echo  "<i class='icon-plus'> </i>" . $lang->trade->create;?> <span class='caret'></span></button>
     <ul id='createActionMenu' class='dropdown-menu pull-right'>
-      <li><?php commonModel::printLink('trade', 'create', 'type=in',  $lang->trade->createIn)?></li>
-      <li><?php commonModel::printLink('trade', 'create', 'type=out', $lang->trade->createOut)?></li>
-      <li><?php commonModel::printLink('trade', 'transfer', '', $lang->trade->transfer)?></li>
-      <li><?php commonModel::printLink('trade', 'invest', '', $lang->trade->invest)?></li>
+      <li><?php commonModel::printLink('trade', 'create',   'type=in',     $lang->trade->createIn)?></li>
+      <li><?php commonModel::printLink('trade', 'create',   'type=out',    $lang->trade->createOut)?></li>
+      <li><?php commonModel::printLink('trade', 'transfer', '',            $lang->trade->transfer)?></li>
+      <li><?php commonModel::printLink('trade', 'invest',   'type=invest', $lang->trade->invest)?></li>
+      <li><?php commonModel::printLink('trade', 'loan',     'type=loan',   $lang->trade->loan)?></li>
     </ul>
   </div>
   <?php endif;?>
-  <?php if($mode == 'in')       commonModel::printLink('trade', 'create', 'type=in',  "<i class='icon-plus'> </i>" . $lang->trade->createIn, "class='btn btn-primary'")?>
-  <?php if($mode == 'out')      commonModel::printLink('trade', 'create', 'type=out', "<i class='icon-plus'> </i>" . $lang->trade->createOut, "class='btn btn-primary'")?>
-  <?php if($mode == 'transfer') commonModel::printLink('trade', 'transfer', '', "<i class='icon-plus'> </i>" . $lang->trade->transfer, "class='btn btn-primary'")?>
-  <?php if($mode == 'invest')   commonModel::printLink('trade', 'invest', '', "<i class='icon-plus'> </i>" . $lang->trade->invest, "class='btn btn-primary'")?>
+  <?php if($mode == 'in')       commonModel::printLink('trade', 'create',   'type=in',     "<i class='icon-plus'> </i>" . $lang->trade->createIn,  "class='btn btn-primary'");?>
+  <?php if($mode == 'out')      commonModel::printLink('trade', 'create',   'type=out',    "<i class='icon-plus'> </i>" . $lang->trade->createOut, "class='btn btn-primary'");?>
+  <?php if($mode == 'transfer') commonModel::printLink('trade', 'transfer', '',            "<i class='icon-plus'> </i>" . $lang->trade->transfer,  "class='btn btn-primary'");?>
+  <?php if($mode == 'invest')   commonModel::printLink('trade', 'invest',   'type=invest', "<i class='icon-plus'> </i>" . $lang->trade->invest,    "class='btn btn-primary'");?>
+  <?php if($mode == 'invest')   commonModel::printLink('trade', 'invest',   'type=redeem', "<i class='icon-plus'> </i>" . $lang->trade->redeem,    "class='btn btn-primary'");?>
+  <?php if($mode == 'loan')     commonModel::printLink('trade', 'loan',     'type=loan',   "<i class='icon-plus'> </i>" . $lang->trade->loan,      "class='btn btn-primary'");?>
+  <?php if($mode == 'loan')     commonModel::printLink('trade', 'loan',     'type=repay',  "<i class='icon-plus'> </i>" . $lang->trade->repay,     "class='btn btn-primary'");?>
   <?php if($mode == 'all' || $mode == 'in' || $mode == 'out') commonModel::printLink('trade', 'batchcreate', '', "<i class='icon-sitemap'> </i>" . $lang->trade->batchCreate, "class='btn btn-primary'")?>
 </div>
 <div class='panel'>
@@ -59,6 +63,15 @@
           <th class='w-100px'><?php commonModel::printOrderLink('handlers', $orderBy, $vars, $lang->trade->handlers);?></th>
           <th class='w-200px'><?php commonModel::printOrderLink('product', $orderBy, $vars, $lang->trade->product . $lang->slash . $lang->trade->category);?></th>
           <th class='w-200px visible-lg'><?php echo $lang->trade->desc;?></th>
+          <?php if($mode == 'invest' or $mode == 'loan'):?>
+          <th class='w-80px'><?php echo $lang->trade->status;?></th>
+          <?php endif;?>
+          <?php if($mode == 'invest'):?>
+          <th class='w-80px'><?php echo $lang->trade->rate;?></th>
+          <?php endif;?>
+          <?php if($mode == 'loan'):?>
+          <th class='w-80px'><?php echo $lang->trade->loanrate;?></th>
+          <?php endif;?>
           <th class='w-130px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
@@ -75,10 +88,19 @@
           <td title='<?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?>'><?php foreach(explode(',', $trade->handlers) as $handler) echo zget($users, $handler) . ' ';?></td>
           <td class='text-left'><?php echo isset($productList[$trade->product]) ? $productList[$trade->product] . $lang->slash . zget($categories, $trade->category, ' ') : zget($categories, $trade->category, ' ');?></td>
           <td class='text-left visible-lg'><div title="<?php echo $trade->desc;?>" class='w-200px text-ellipsis'><?php echo $trade->desc;?><div></td>
+          <?php if($mode == 'invest' or $mode == 'loan'):?>
+          <td><?php echo zget($lang->trade->statusList, $trade->status);?></td>
+          <?php endif;?>
+          <?php if($mode == 'invest'):?>
+          <td><?php if($trade->return) echo $trade->return;?></td>
+          <?php endif;?>
+          <?php if($mode == 'loan'):?>
+          <td><?php if($trade->interest) echo $trade->interest;?></td>
+          <?php endif;?>
           <td>
             <?php commonModel::printLink('trade', 'view', "tradeID={$trade->id}&mode={$mode}", $lang->view);?>
             <?php commonModel::printLink('trade', 'edit', "tradeID={$trade->id}", $lang->edit);?>
-            <?php commonModel::printLink('trade', 'detail', "tradeID={$trade->id}", $lang->trade->detail, "data-toggle='modal'");?>
+            <?php commonModel::printLink('trade', 'detail', "tradeID={$trade->id}&mode={$mode}", $lang->trade->detail, "data-toggle='modal'");?>
             <?php commonModel::printLink('trade', 'delete', "tradeID={$trade->id}", $lang->delete, "class='deleter'");?>
           </td>
         </tr>

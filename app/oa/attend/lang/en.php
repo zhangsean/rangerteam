@@ -9,7 +9,10 @@ $lang->attend->edit         = 'Manual sign';
 $lang->attend->edited       = 'Signed in';
 $lang->attend->leave        = 'Leave';
 $lang->attend->leaved       = 'Already leave';
+$lang->attend->lieu         = 'Lieu';
+$lang->attend->lieud        = 'Already lieu';
 $lang->attend->trip         = 'Trip';
+$lang->attend->egress       = 'Egress';
 $lang->attend->overtime     = 'Overtime';
 $lang->attend->overtimed    = 'Already overtime';
 $lang->attend->review       = 'Review attendance';
@@ -59,8 +62,10 @@ $lang->attend->statusList['both']     = 'Late and Leave early';
 $lang->attend->statusList['absent']   = 'Absent';
 $lang->attend->statusList['leave']    = 'Ask for leave';
 $lang->attend->statusList['trip']     = 'Biz trip';
+$lang->attend->statusList['egress']   = 'Biz egress';
 $lang->attend->statusList['rest']     = 'Rest day';
 $lang->attend->statusList['overtime'] = 'Overtime';
+$lang->attend->statusList['lieu']     = 'Lieu';
 
 $lang->attend->abbrStatusList['normal']   = '√';
 $lang->attend->abbrStatusList['late']     = 'Late';
@@ -69,8 +74,10 @@ $lang->attend->abbrStatusList['both']     = 'L+E';
 $lang->attend->abbrStatusList['absent']   = 'Absent';
 $lang->attend->abbrStatusList['leave']    = 'Leave';
 $lang->attend->abbrStatusList['trip']     = 'Biz';
+$lang->attend->abbrStatusList['egress']   = 'Out';
 $lang->attend->abbrStatusList['rest']     = 'Rest';
 $lang->attend->abbrStatusList['overtime'] = 'Over';
+$lang->attend->abbrStatusList['lieu']     = 'Lieu';
 
 $lang->attend->markStatusList['normal']   = '√';
 $lang->attend->markStatusList['late']     = '=';
@@ -79,12 +86,16 @@ $lang->attend->markStatusList['both']     = '=>';
 $lang->attend->markStatusList['absent']   = 'x';
 $lang->attend->markStatusList['leave']    = '!';
 $lang->attend->markStatusList['trip']     = '$';
+$lang->attend->markStatusList['egress']   = '#';
 $lang->attend->markStatusList['rest']     = '~';
 $lang->attend->markStatusList['overtime'] = '+';
+$lang->attend->markStatusList['lieu']     = '↓';
 
 $lang->attend->reasonList['normal'] = 'Normal';
 $lang->attend->reasonList['trip']   = 'Biz trip';
+$lang->attend->reasonList['egress'] = 'Biz egress';
 $lang->attend->reasonList['leave']  = 'Ask for leave';
+$lang->attend->reasonList['lieu']   = 'Lieu';
 
 $lang->attend->reviewStatusList['wait']   = 'Wait';
 $lang->attend->reviewStatusList['pass']   = 'Pass';
@@ -120,7 +131,8 @@ $lang->attend->confirmReview['pass']   = 'Are sure to pass it?';
 $lang->attend->confirmReview['reject'] = 'Are sure to reject it?';
 
 $lang->attend->settings   = 'Normal Settings';
-$lang->attend->setManager = 'Depatment Manager Settings';
+$lang->attend->setManager = 'Department Manager Settings';
+$lang->attend->setDept    = 'Set Department';
 
 $lang->attend->note = new stdClass();
 $lang->attend->note->ip       = "Use comma between two IPs, and support IP segment, for example 192.168.1.*";

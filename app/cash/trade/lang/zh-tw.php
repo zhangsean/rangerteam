@@ -2,7 +2,7 @@
 /**
  * The trade module zh-tw file of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     trade
@@ -18,6 +18,8 @@ $lang->trade->currency    = '貨幣';
 $lang->trade->trader      = '商戶';
 $lang->trade->customer    = '客戶';
 $lang->trade->money       = '金額';
+$lang->trade->status      = '狀態';
+$lang->trade->rate        = '投資回報率';
 $lang->trade->desc        = '說明';
 $lang->trade->product     = '產品';
 $lang->trade->order       = '訂單';
@@ -45,12 +47,18 @@ $lang->trade->area        = '客戶區域';
 $lang->trade->industry    = '客戶行業';
 $lang->trade->level       = '客戶級別';
 $lang->trade->size        = '客戶規模';
+$lang->trade->interest    = '借貸利息';
+$lang->trade->loanID      = '借貸';
+$lang->trade->investID    = '投資';
+$lang->trade->loanrate    = '利率';
 
 $lang->trade->create       = '記賬';
 $lang->trade->in           = '收入';
 $lang->trade->out          = '支出';
 $lang->trade->invest       = '投資';
 $lang->trade->redeem       = '贖回';
+$lang->trade->loan         = '借貸';
+$lang->trade->repay        = '還貸';
 $lang->trade->createIn     = '記收入';
 $lang->trade->createOut    = '記支出';
 $lang->trade->transfer     = '轉賬';
@@ -78,6 +86,8 @@ $lang->trade->report->create      = '生成報表';
 $lang->trade->report->selectYears = '選擇年份';
 $lang->trade->report->undefined   = '未定義';
 $lang->trade->report->compareTip  = '必須選擇兩個年份進行比較';
+$lang->trade->report->unit        = '萬元';
+$lang->trade->report->ratio       = 10000;
 
 $lang->trade->report->typeList['annual']  = '年度收支表'; 
 $lang->trade->report->typeList['compare'] = '年度對比表'; 
@@ -88,6 +98,8 @@ $lang->trade->typeList['transferout'] = '轉出';
 $lang->trade->typeList['transferin']  = '轉入';
 $lang->trade->typeList['invest']      = '投資';
 $lang->trade->typeList['redeem']      = '贖回';
+$lang->trade->typeList['loan']        = '借貸';
+$lang->trade->typeList['repay']       = '還貸';
 
 $lang->trade->quarters = new stdclass();
 $lang->trade->quarters->Q4 = '10,11,12';
@@ -119,16 +131,8 @@ $lang->trade->categoryList['transferin']  = '轉入';
 $lang->trade->categoryList['transferout'] = '轉出';
 $lang->trade->categoryList['invest']      = '投資';
 $lang->trade->categoryList['redeem']      = '贖回';
-
-$lang->trade->expenseCategoryList['fee']  = '手續費';
-$lang->trade->expenseCategoryList['loss'] = '理財虧損';
-
-$lang->trade->incomeCategoryList['profit'] = '理財盈利';
-
-$lang->trade->categoryList = $lang->trade->categoryList + $lang->trade->expenseCategoryList + $lang->trade->incomeCategoryList;
-
-$lang->trade->investCategoryList['profit'] = '盈利';
-$lang->trade->investCategoryList['loss']   = '虧損';
+$lang->trade->categoryList['loan']        = '借貸';
+$lang->trade->categoryList['repay']       = '還貸';
 
 $lang->trade->transferCategoryList['transferin']  = '轉入';
 $lang->trade->transferCategoryList['transferout'] = '轉出';
@@ -139,6 +143,9 @@ $lang->trade->objectTypeList['contract'] = '合同支出';
 
 $lang->trade->investTypeList['invest'] = '投資';
 $lang->trade->investTypeList['redeem'] = '贖回';
+
+$lang->trade->loanTypeList['loan']  = '借貸';
+$lang->trade->loanTypeList['repay'] = '還貸';
 
 $lang->trade->encodeList['gbk']  = 'GBK';
 $lang->trade->encodeList['utf8'] = 'UTF-8';
@@ -159,6 +166,13 @@ $lang->trade->importedFields['dept']     = '部門';
 $lang->trade->importedFields['desc']     = '備註';
 $lang->trade->importedFields['fee']      = '手續費';
 $lang->trade->importedFields['product']  = '產品';
+
+$lang->trade->statusList['returned']   = '已贖回';
+$lang->trade->statusList['returning']  = '贖回中';
+$lang->trade->statusList['unReturned'] = '未贖回';
+$lang->trade->statusList['repaied']    = '已還貸';
+$lang->trade->statusList['repaying']   = '還貸中';
+$lang->trade->statusList['unRepaied']  = '未還貸';
 
 $lang->trade->totalIn       = '%s收入%s；';
 $lang->trade->totalOut      = '%s支出%s；';
@@ -186,4 +200,4 @@ $lang->trade->excel->title = new stdclass();
 $lang->trade->excel->title->depositor = '賬號盈虧';
 
 $lang->trade->excel->help = new stdclass();
-$lang->trade->excel->help->depositor = '本報表不區分幣種，僅統計交易類型為收入和支出的帳目。';
+$lang->trade->excel->help->depositor = '本報表不區分幣種。';

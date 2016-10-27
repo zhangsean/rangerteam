@@ -2,7 +2,7 @@
 /**
  * The create view file of leave module of Ranzhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      chujilu <chujilu@cnezsoft.com>
  * @package     leave
@@ -16,7 +16,7 @@
 <?php js::set('signOut', $config->attend->signOutLimit)?>
 <?php js::set('workingHours', $config->attend->workingHours)?>
 <div class='panel-body'>
-    <form id='ajaxForm' method='post' action="<?php echo $this->createLink('oa.leave', 'create')?>">
+  <form id='ajaxForm' method='post' action="<?php echo $this->createLink('oa.leave', 'create')?>">
     <table class='table table-form table-condensed'>
       <tr>
         <th class='w-80px'><?php echo $lang->leave->type?></th>

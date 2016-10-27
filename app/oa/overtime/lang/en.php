@@ -31,19 +31,22 @@ $lang->overtime->reviewedBy   = 'Reviewed By';
 $lang->overtime->reviewedDate = 'Reviewed Date';
 $lang->overtime->date         = 'Date';
 $lang->overtime->time         = 'Time';
+$lang->overtime->rejectReason = 'Reject Reason';
 
-$lang->overtime->typeList['time']    = 'After work';
-$lang->overtime->typeList['rest']    = 'On weekends';
-$lang->overtime->typeList['holiday'] = 'On holiday';
-$lang->overtime->typeList['lieu']    = 'Lieu';
+$lang->overtime->typeList['time']       = 'After work';
+$lang->overtime->typeList['rest']       = 'On weekends';
+$lang->overtime->typeList['holiday']    = 'On holiday';
+$lang->overtime->typeList['compensate'] = 'Compensated Leave';
 
 $lang->overtime->statusList['draft']  = 'Draft';
 $lang->overtime->statusList['wait']   = 'Wait';
 $lang->overtime->statusList['pass']   = 'Pass';
 $lang->overtime->statusList['reject'] = 'Reject';
 
-$lang->overtime->denied = 'Access denied';
-$lang->overtime->unique = 'There was a record of overtime in %s.';
+$lang->overtime->denied    = 'Access denied';
+$lang->overtime->unique    = 'There was a record of overtime in %s.';
+$lang->overtime->sameMonth = 'Overtime must be in the same month.';
+$lang->overtime->wrongEnd  = 'End time should be greater than begin time.';
 
 $lang->overtime->confirmReview['pass']   = 'Are you sure to pass it?';
 $lang->overtime->confirmReview['reject'] = 'Are you sure to reject it?';

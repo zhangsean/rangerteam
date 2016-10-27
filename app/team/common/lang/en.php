@@ -2,7 +2,7 @@
 /**
  * The en file of common module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     common 
@@ -21,10 +21,10 @@ $lang->menu->team->company   = 'Company|company|index|';
 $lang->menu->team->setting   = 'Settings|tree|browse|type=forum|';
 
 /* Menu of forum module. */
-$lang->forum = new stdclass();
+if(!isset($lang->forum)) $lang->forum = new stdclass();
 
 /* Menu of blog module. */
-$lang->blog = new stdclass();
+if(!isset($lang->blog)) $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
 $lang->blog->menu->index    = 'Blog List|blog|index|';
 $lang->blog->menu->category = 'Category|tree|browse|type=blog';

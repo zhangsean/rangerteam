@@ -2,7 +2,7 @@
 /**
  * The invest view file of trade module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     trade 
@@ -14,9 +14,10 @@
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
 <?php js::set('mode', 'invest');?>
+<?php js::set('type', $type);?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class="icon-plus"></i> <?php echo $lang->trade->invest;?></strong>
+    <strong><i class="icon-plus"></i> <?php echo $lang->trade->typeList[$type];?></strong>
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
@@ -24,10 +25,6 @@
         <tr>
           <th class='w-100px'><?php echo $lang->trade->depositor;?></th>
           <td><?php echo html::select('depositor', $depositorList, '', "class='form-control'");?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->trade->type;?></th>
-          <td><?php echo html::select('type', $lang->trade->investTypeList, '', "class='form-control'");?></td>
         </tr>
         <tr class='trader'>
           <th><?php echo $lang->trade->trader;?></th>
@@ -39,8 +36,15 @@
               <div class='input-group-addon'><?php echo html::checkbox('createTrader', array( 1 => $lang->trade->newTrader));?></div>
             </div>
             <?php else:?>
-            <?php echo html::input('traderName', '', "class='form-control'") . html::hidden('createTrader', '');?>
+            <?php echo html::input('traderName', '', "class='form-control'") . html::hidden('createTrader', '1');?>
             <?php endif;?>
+          </td>
+        </tr>
+        <tr class='investList'>
+          <th><?php echo $lang->trade->invest;?></th>
+          <td>
+            <div class="required required-wrapper"></div>
+            <?php echo html::select('investID', $investList, '', "class='form-control'");?>
           </td>
         </tr>
         <tr>
@@ -51,7 +55,7 @@
           <th><?php echo $lang->trade->in;?></th>
           <td>
             <div class='input-group'>
-              <?php echo html::select('investCategory', $lang->trade->investCategoryList, '', "class='form-control'");?>
+              <?php echo html::select('investCategory', $investCategoryList, '', "class='form-control'");?>
               <span class="input-group-addon fix-border fix-padding"></span>
               <?php echo html::input('investMoney', '', "class='form-control'");?>
             </div>

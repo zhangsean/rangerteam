@@ -2,7 +2,7 @@
 /**
  * The browse view file of product module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     product 
@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('mode', $mode);?>
 <div id='menuActions'>
-  <?php commonModel::printLink('product', 'create', '', '<i class="icon-plus"></i> ' . $lang->product->create, "class='btn btn-primary' data-toggle='modal'");?>
+  <?php commonModel::printLink('product', 'create', '', '<i class="icon-plus"></i> ' . $lang->product->create, "class='btn btn-primary' data-toggle='modal' data-width='600'");?>
 </div>
 <div class='with-side'>
   <div class='side panel'>
@@ -56,7 +56,7 @@
           <td><?php echo $lang->product->statusList[$product->status];?></td>
           <td>
             <?php
-            commonModel::printLink('product', 'edit', "productID=$product->id", $lang->edit, "data-toggle='modal'");
+            commonModel::printLink('product', 'edit', "productID=$product->id", $lang->edit, "data-toggle='modal' data-width='600'");
             commonModel::printLink('product', 'delete', "productID=$product->id", $lang->delete, "class='reloadDeleter'");
             ?>
           </td>

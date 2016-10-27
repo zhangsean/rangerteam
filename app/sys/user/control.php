@@ -2,11 +2,11 @@
 /**
  * The control file of user module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user
- * @version     $Id$
+ * @version     $Id: control.php 4219 2016-10-25 05:45:16Z daitingting $
  * @link        http://www.ranzhico.com
  */
 class user extends control
@@ -31,7 +31,7 @@ class user extends control
         $this->setReferer($referer);
 
         /* Load mail config for reset password. */
-        $this->app->loadConfig('mail');
+        $this->app->loadModuleConfig('mail');
 
         $loginLink = $this->createLink('user', 'login');
         $denyLink  = $this->createLink('user', 'deny');
@@ -113,8 +113,9 @@ class user extends control
      */
     public function logout($referer = 0)
     {
+        $this->app->loadModuleConfig('attend');
         /* Save sign out info. */
-        if(commonModel::isAvailable('attend') and $this->config->attend->mustSignOut == 'no') $this->loadModel('attend', 'oa')->signOut();
+        if(commonModel::isAvailable('attend') and isset($this->config->attend->mustSignOut) and $this->config->attend->mustSignOut == 'no') $this->loadModel('attend', 'oa')->signOut();
 
         if(isset($this->app->user->id)) $this->loadModel('action')->create('user', $this->app->user->id, 'logout');
 

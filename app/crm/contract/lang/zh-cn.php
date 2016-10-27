@@ -2,7 +2,7 @@
 /**
  * The zh-cn file of crm contract module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     contract 
@@ -99,7 +99,7 @@ $lang->contract->codeUnitList['input'] = '输入值';
 $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = '成交金额';
 
-$lang->contract->totalAmount        = '本页合同总金额：%s，已回款：%s；';
+$lang->contract->totalAmount        = '本页合同总金额：%s，已回款：%s，其中本月回款：%s；';
 $lang->contract->returnInfo         = "<p>%s, 由 <strong>%s</strong> 回款%s。</p>";
 $lang->contract->deliveryInfo       = "<p>%s由%s交付。</p>";
 $lang->contract->deleteReturnInfo   = "%s的回款%s";

@@ -2,7 +2,7 @@
 /**
  * The control file of todo module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     todo
@@ -54,9 +54,6 @@ class todo extends control
                 continue;
             }
             $todoList[$code] = array();
-
-            $this->lang->todo->typeList["{$code}_task"] = $name . $this->lang->todo->task;
-            $this->lang->todo->typeList["{$code}_bug"]  = $name . $this->lang->todo->bug;
         }
 
         $this->view->title           = $this->lang->todo->calendar;
@@ -196,7 +193,7 @@ class todo extends control
         $this->view->date  = (int)$date == 0 ? $date : date('Y-m-d', strtotime($date));
         $this->view->times = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
         $this->view->time  = date::now();
-        $this->view->users = $this->loadModel('user')->getPairs('noclosed,nodeleted');
+        $this->view->users = $this->loadModel('user')->getPairs('noclosed,noforbidden,nodeleted');
         $this->view->modalWidth = '85%';
 
         $this->display();
@@ -247,6 +244,42 @@ class todo extends control
         $this->view->position[] = $this->lang->todo->edit;
         $this->view->times      = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
         $this->view->todo       = $todo;
+        $this->display();
+    }
+
+    /**
+     * Batch edit todos. 
+     * 
+     * @param  string $mode 
+     * @access public
+     * @return void
+     */
+    public function batchEdit($mode = 'all')
+    {
+        $todoIDList = $this->post->todoIDList ? $this->post->todoIDList : array();
+
+        if($this->post->names)
+        {
+            $this->todo->batchUpdate();
+
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse', "mode=$mode")));
+        }
+
+        $zentaoEntryList = $this->dao->select('code, name')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchPairs();
+        foreach($zentaoEntryList as $code => $name)
+        {
+            $this->lang->todo->typeList["{$code}_task"] = $name . $this->lang->todo->task;
+            $this->lang->todo->typeList["{$code}_bug"]  = $name . $this->lang->todo->bug;
+        }
+
+        $this->loadModel('my');
+        $this->view->title      = $this->lang->todo->batchEdit;
+        $this->view->mode       = $mode;
+        $this->view->todos      = $this->todo->getByIdList($todoIDList);
+        $this->view->times      = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
+        $this->view->users      = $this->loadModel('user')->getPairs('noclosed,nodeleted,noforbidden');
+        $this->view->moduleMenu = commonModel::createModuleMenu($this->moduleName);
         $this->display();
     }
 
@@ -339,7 +372,7 @@ class todo extends control
             if($this->todo->checkPriv($todo, 'close') and $todo->status == 'done') $this->todo->close($todoID);
         }
 
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));
+        $this->send(array('result' => 'success'));
     }
 
     /**
@@ -354,7 +387,7 @@ class todo extends control
         $todo = $this->todo->getById($todoID);
         $this->checkPriv($todo, 'activate', 'json');
 
-        if($todo->status == 'closed') $this->todo->activate($todoID);
+        if(strpos('done,closed', $todo->status) !== false) $this->todo->activate($todoID);
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 
@@ -423,6 +456,38 @@ class todo extends control
     }
 
     /**
+     * Batch finish todos. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function batchFinish()
+    {
+        $todoIDList = $this->post->todoIDList ? $this->post->todoIDList : array();
+        foreach($todoIDList as $todoID)
+        {
+            $todo = $this->todo->getById($todoID);
+            $this->checkPriv($todo, 'finish', 'json');
+            if(strpos('done,closed', $todo->status) === false) $this->todo->finish($todoID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if($todo->type == 'task') 
+            {
+                $task = $this->loadModel('task')->getById($todo->idvalue);
+                $_POST['consumed'] = $task->left == 0 ? 1 : $task->left;
+                $changes = $this->loadModel('task')->finish($todo->idvalue);
+                if(!empty($changes))
+                {
+                    $actionID = $this->loadModel('action')->create('task', $todo->idvalue, 'Finished');
+                    $this->action->logHistory($actionID, $changes);
+                }
+            }
+        }
+
+        $this->send(array('result' => 'success'));
+    }
+
+    /**
      * Assign one todo to someone. 
      * 
      * @param  int    $todoID 
@@ -450,7 +515,7 @@ class todo extends control
         if($todo->date != '00000000') $todo->date = strftime("%Y-%m-%d", strtotime($todo->date));
         $this->view->title = $this->lang->todo->assignTo;
         $this->view->todo  = $todo;
-        $this->view->users = $this->loadModel('user')->getPairs('nodeleted,noclosed');
+        $this->view->users = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->times = date::buildTimeList($this->config->todo->times->begin, $this->config->todo->times->end, $this->config->todo->times->delta);
         $this->display();
     }

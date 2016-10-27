@@ -2,7 +2,7 @@
 /**
  * The todo module English file of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     todo
@@ -24,7 +24,6 @@ $lang->todo->batchFinish  = "Batch finish";
 $lang->todo->export       = "Export";
 $lang->todo->delete       = "Delete";
 $lang->todo->browse       = "Browse";
-$lang->todo->import2Today = "Import to today";
 $lang->todo->import       = "Import to";
 $lang->todo->changeStatus = "Change";
 $lang->todo->legendBasic  = "Basic Info";

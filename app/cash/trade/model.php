@@ -2,7 +2,7 @@
 /**
  * The model file of trade module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     contact
@@ -37,6 +37,7 @@ class tradeModel extends model
      */
     public function getList($mode = 'all', $date = '', $orderBy = 'id_desc', $pager = null)
     {
+        if($mode == 'bysearch') $date = '';
         if($this->session->tradeQuery === false) $this->session->set('tradeQuery', ' 1 = 1');
         $tradeQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->tradeQuery);
 
@@ -79,19 +80,89 @@ class tradeModel extends model
             $endDate    = substr($date, 5, 1) == 4 ? (substr($date, 0, 4) + 1) . '-01-01' : substr($date, 0, 4) . '-' . $endMonth . '-01';
         }
 
+        $feeCategories      = $this->getSystemCategoryPairs('fee');
+        $interestCategories = $this->getSystemCategoryPairs('interest');
+        $investCategories   = $this->getSystemCategoryPairs('invest');
+
         $trades = $this->dao->select('*')->from(TABLE_TRADE)
             ->where('parent')->eq('')
             ->beginIF($startDate and $endDate)->andWhere('date')->ge($startDate)->andWhere('date')->lt($endDate)->fi()
             ->beginIF($mode == 'in')->andWhere('type')->eq('in')->fi()
             ->beginIF($mode == 'out')->andWhere('type')->eq('out')->fi()
-            ->beginIF($mode == 'transfer')->andWhere('type', true)->like('transfer%')->orWhere('category')->eq('fee')->markRight(1)->fi()
-            ->beginIF($mode == 'invest')->andWhere('type', true)->in('invest,redeem')->orWhere('category')->in('profit,loss')->markRight(1)->fi()
+            ->beginIF($mode == 'transfer')->andWhere('type', true)->like('transfer%')->orWhere('category')->in(array_keys($feeCategories))->markRight(1)->fi()
+            ->beginIF($mode == 'invest')->andWhere('type', true)->in('invest,redeem')->orWhere('category')->in(array_keys($investCategories))->markRight(1)->fi()
+            ->beginIF($mode == 'loan')->andWhere('type', true)->in('loan,repay')->orWhere('category')->in(array_keys($interestCategories))->markRight(1)->fi()
             ->beginIF($mode == 'bysearch')->andWhere($tradeQuery)->fi()
             ->beginIF(!empty($denyCategories))->andWhere('category')->notin($denyCategories)
             ->beginIF(!$expensePriv)->andWhere('type')->ne('out')->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
+
+        if($mode == 'invest')
+        {
+            $matches = $this->dao->select('*')->from(TABLE_TRADE)->where('type')->eq('redeem')->andWhere('investID')->ne(0)->fetchGroup('investID');
+            $returns = $this->dao->select('*')->from(TABLE_TRADE)->where('type')->in('in,out')->andWhere('investID')->ne(0)->fetchGroup('investID');
+
+            foreach($trades as $trade)
+            {
+                $redeem = 0;
+                $trade->status = '';
+                $trade->return = 0;
+
+                if($trade->type == 'invest')
+                {
+                    $trade->status = 'unReturned';
+                    if(isset($matches[$trade->id]))
+                    {
+                        foreach($matches[$trade->id] as $match) $redeem += $match->money;
+                        $trade->status = $redeem < $trade->money ? 'returning' : 'returned';
+                    }
+
+                    if(isset($returns[$trade->id]))
+                    {
+                        foreach($returns[$trade->id] as $return)
+                        {
+                            if($return->type == 'in')  $trade->return += $return->money;
+                            if($return->type == 'out') $trade->return -= $return->money;
+                        }
+                        $trade->return = round($trade->return / $trade->money * 100, 4) . '%';
+                    }
+                }
+
+            }
+        }
+
+        if($mode == 'loan')
+        {
+            $matches   = $this->dao->select('*')->from(TABLE_TRADE)->where('type')->eq('repay')->andWhere('loanID')->ne(0)->fetchGroup('loanID');
+            $interests = $this->dao->select('*')->from(TABLE_TRADE)->where('type')->in('out')->andWhere('loanID')->ne(0)->fetchGroup('loanID');
+
+            foreach($trades as $trade)
+            {
+                $repay = 0;
+                $trade->status   = '';
+                $trade->interest = 0;
+                if($trade->type == 'loan')
+                {
+                    $trade->status = 'unRepaied';
+                    if(isset($matches[$trade->id]))
+                    {
+                        foreach($matches[$trade->id] as $match) $repay += $match->money;
+                        $trade->status = $repay < $trade->money ? 'repaying' : 'repaied';
+                    }
+
+                    if(isset($interests[$trade->id]))
+                    {
+                        foreach($interests[$trade->id] as $interest)
+                        {
+                            $trade->interest += $interest->money;
+                        }
+                        $trade->interest = round($trade->interest / $trade->money * 100, 4) . '%';
+                    }
+                }
+            }
+        }
 
         $this->session->set('tradeQueryCondition', $this->dao->get());
 
@@ -135,13 +206,19 @@ class tradeModel extends model
 
         if($groupBy == 'category')
         {
-            if($type == 'in')  $list = $this->lang->trade->incomeCategoryList + $this->loadModel('tree')->getOptionMenu('in', 0, true);
-            if($type == 'out') $list = $this->lang->trade->expenseCategoryList + $this->loadModel('tree')->getOptionMenu('out', 0, true);
+            if($type == 'in')  $list = $this->loadModel('tree')->getOptionMenu('in', 0, true);
+            if($type == 'out') $list = $this->loadModel('tree')->getOptionMenu('out', 0, true);
             $list = array('' => '') + $list;
         }
 
-        if($groupBy == 'dept') $list = $this->loadModel('tree')->getOptionMenu('dept', 0, true);
-        if($groupBy == 'area') $list = $this->loadModel('tree')->getOptionMenu('area', 0, true);
+        if($groupBy == 'dept')     $list = $this->loadModel('tree')->getOptionMenu('dept', 0, true);
+        if($groupBy == 'area')     $list = $this->loadModel('tree')->getOptionMenu('area', 0, true);
+        if($groupBy == 'industry') $list = $this->loadModel('tree')->getOptionMenu('industry', 0, true);
+        if($groupBy == 'size')
+        {
+            $this->app->loadLang('customer', 'crm');
+            $list = $this->lang->customer->sizeNameList;
+        }
         if($groupBy == 'line')
         {
             $this->app->loadLang('product', 'crm');
@@ -187,7 +264,17 @@ class tradeModel extends model
                 }
             }
 
-            $areaDatas = array();
+            foreach($datas as $name => $data)
+            {
+                if(empty($list[$name]))
+                {
+                    if(!isset($datas['unset'])) $datas['unset'] = new stdclass();
+                    $datas['unset']->name  = $this->lang->trade->report->undefined;
+                    $datas['unset']->value = isset($datas['unset']->value) ? $datas['unset']->value + $data->value : $data->value;
+                    unset($datas[$name]);
+                }
+            }
+
             foreach($areaList as $parent => $areaChildren)
             {
                 foreach($areaChildren as $areaChild)
@@ -196,24 +283,14 @@ class tradeModel extends model
                     {
                         if($name == $areaChild)
                         {
-                            if(empty($list[$name]))
-                            {
-                                $areaDatas['unset']->name  = $this->lang->trade->report->undefined;
-                                $areaDatas['unset']->value = isset($areaDatas['unset']) ? $areaDatas['unset']->value + $data->value : $data->value;
-                                $areaDatas['unset'] = $data;
-                                unset($datas[$name]);
-                            }
-                            else
-                            {
-                                if(!isset($areaDatas[$parent])) $areaDatas[$parent] = new stdclass();
-                                $areaDatas[$parent]->name  = $list[$parent];
-                                $areaDatas[$parent]->value = isset($areaDatas[$parent]->value) ? $areaDatas[$parent]->value + $data->value : $data->value;
-                            }
+                            if(!isset($datas[$parent])) $datas[$parent] = new stdclass();
+                            $datas[$parent]->name  = $list[$parent];
+                            $datas[$parent]->value = isset($datas[$parent]->value) ? $datas[$parent]->value + $data->value : $data->value;
+                            unset($datas[$name]);
                         }
                     }
                 }
             }
-            $datas = $areaDatas;
         }
         else
         {
@@ -233,7 +310,11 @@ class tradeModel extends model
             }
         }
 
-        return $datas;
+        $chartDatas = array();
+        foreach($datas as $data) $chartDatas[$data->value] = $data;
+        krsort($chartDatas);
+
+        return $chartDatas;
     }
 
     /** 
@@ -275,6 +356,23 @@ class tradeModel extends model
     public function getDetail($tradeID)
     {
         return $this->dao->select('*')->from(TABLE_TRADE)->where('parent')->eq($tradeID)->fetchAll();
+    }
+
+    /**
+     * Get system category pairs.
+     * 
+     * @param  string    $type 
+     * @access public
+     * @return array
+     */
+    public function getSystemCategoryPairs($type)
+    {
+        return $this->dao->select('id,name')->from(TABLE_CATEGORY)
+            ->where(1)
+            ->beginIF($type == 'fee')->andWhere('major')->eq('7')->fi()
+            ->beginIF($type == 'invest')->andWhere('major')->in('5,6')->fi()
+            ->beginIF($type == 'interest')->andWhere('major')->eq('8')->fi()
+            ->fetchPairs();
     }
 
     /**
@@ -368,7 +466,7 @@ class tradeModel extends model
             $trade->handlers       = !empty($this->post->handlers[$key]) ? join(',', $this->post->handlers[$key]) : '';
             $trade->product        = $this->post->product[$key];
             $trade->date           = $this->post->date[$key];
-            $trade->desc           = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags->admin);
+            $trade->desc           = strip_tags(nl2br($this->post->desc[$key]), $this->config->allowedTags);
             $trade->currency       = isset($depositorList[$trade->depositor]) ? $depositorList[$trade->depositor]->currency : '';
             $trade->createdBy      = $this->app->user->account;
             $trade->createdDate    = $now;
@@ -742,21 +840,25 @@ class tradeModel extends model
     /**
      * Invest.
      * 
+     * @param  string $type
      * @access public
      * @return int|bool
      */
-    public function invest()
+    public function invest($type)
     {
         $depositor = $this->loadModel('depositor', 'cash')->getByID($this->post->depositor);
         $now = helper::now();
 
         $trade = fixer::input('post')
-            ->add('category', $this->post->type)
+            ->add('type', $type)
+            ->add('category', $type)
             ->add('currency', !empty($depositor) ? $depositor->currency : '')
             ->add('handlers', trim(join(',', $this->post->handlers), ','))
             ->add('createdBy', $this->app->user->account)
             ->add('createdDate', $now)
             ->add('editedDate', $now)
+            ->setIf(!$this->post->depositor, 'depositor', 0)
+            ->setIf($type == 'invest', 'investID', 0)
             ->setIf($this->post->createTrader or !$this->post->trader, 'trader', 0)
             ->get();
 
@@ -771,7 +873,7 @@ class tradeModel extends model
         $tradeID = $this->dao->lastInsertID();
         $this->loadModel('action')->create('trade', $tradeID, 'Created');
 
-        if($this->post->createTrader and $this->post->type == 'invest')
+        if($this->post->createTrader and $type == 'invest')
         {
             $trader = new stdclass();
             $trader->relation    = 'provider';
@@ -789,21 +891,24 @@ class tradeModel extends model
             $this->dao->update(TABLE_TRADE)->set('trader')->eq($traderID)->where('id')->eq($tradeID)->exec();
         }
 
-        if($this->post->type == 'redeem' and $this->post->investMoney)
+        $profitCategory = $this->dao->select('*')->from(TABLE_CATEGORY)->where('major')->eq(5)->fetch();
+        $lossCategory   = $this->dao->select('*')->from(TABLE_CATEGORY)->where('major')->eq(6)->fetch();
+        if($type == 'redeem' and $this->post->investMoney)
         {
             $invest = fixer::input('post') 
-                ->setIF($this->post->investCategory == 'profit', 'type', 'in')
-                ->setIF($this->post->investCategory == 'loss', 'type', 'out')
                 ->add('category', $this->post->investCategory)
                 ->add('money', $this->post->investMoney)
                 ->add('currency', !empty($depositor) ? $depositor->currency : '')
                 ->add('handlers', trim(join(',', $this->post->handlers), ','))
-                ->setIf($this->post->createTrader or !$this->post->trader, 'trader', 0)
                 ->add('createdBy', $this->app->user->account)
                 ->add('createdDate', $now)
                 ->add('editedDate', $now)
+                ->setIf($this->post->createTrader or !$this->post->trader, 'trader', 0)
+                ->setIF($this->post->investCategory == $profitCategory->id, 'type', 'in')
+                ->setIF($this->post->investCategory == $lossCategory->id, 'type', 'out')
                 ->get();
 
+            $this->config->trade->require->invest = 'depositor,money,type,handlers,investID';
             $this->dao->insert(TABLE_TRADE)
                 ->data($invest, $skip = 'investCategory,investMoney,createTrader,traderName')
                 ->autoCheck()
@@ -814,6 +919,92 @@ class tradeModel extends model
 
             $revesetID = $this->dao->lastInsertID();
             $this->loadModel('action')->create('trade', $revesetID, 'Created');
+        }
+
+        return !dao::isError();
+    }
+
+    /**
+     * Loan.
+     * 
+     * @param  string $type
+     * @access public
+     * @return int|bool
+     */
+    public function loan($type)
+    {
+        $depositor = $this->loadModel('depositor', 'cash')->getByID($this->post->depositor);
+        $now = helper::now();
+
+        $trade = fixer::input('post')
+            ->add('type', $type)
+            ->add('category', $type)
+            ->add('currency', !empty($depositor) ? $depositor->currency : '')
+            ->add('handlers', trim(join(',', $this->post->handlers), ','))
+            ->add('createdBy', $this->app->user->account)
+            ->add('createdDate', $now)
+            ->add('editedDate', $now)
+            ->setIf(!$this->post->depositor, 'depositor', 0)
+            ->setIf($type == 'loan', 'loanID', 0)
+            ->setIf($this->post->createTrader or !$this->post->trader, 'trader', 0)
+            ->get();
+
+        $this->dao->insert(TABLE_TRADE)
+            ->data($trade, $skip = 'loanCategory,interest,createTrader,traderName')
+            ->autoCheck()
+            ->batchCheck($this->config->trade->require->loan, 'notempty')
+            ->exec();
+
+        if(dao::isError()) return false;
+
+        $tradeID = $this->dao->lastInsertID();
+        $this->loadModel('action')->create('trade', $tradeID, 'Created');
+
+        if($this->post->createTrader and $type == 'loan')
+        {
+            $trader = new stdclass();
+            $trader->relation    = 'provider';
+            $trader->name        = $this->post->traderName;
+            $trader->createdBy   = $this->app->user->account;
+            $trader->createdDate = helper::now();
+            $trader->public      = 1;
+
+            $this->dao->insert(TABLE_CUSTOMER)->data($trader)->check('name', 'notempty')->exec();
+            if(dao::isError()) return false;
+
+            $traderID = $this->dao->lastInsertID();
+            $this->loadModel('action')->create('customer', $traderID, 'Created');
+
+            $this->dao->update(TABLE_TRADE)->set('trader')->eq($traderID)->where('id')->eq($tradeID)->exec();
+        }
+
+        if($type == 'repay' and $this->post->interest)
+        {
+            $interestCategory = $this->dao->select('*')->from(TABLE_CATEGORY)->where('major')->eq(8)->fetch();
+
+            $interest = fixer::input('post') 
+                ->add('type', 'out')
+                ->add('category', $interestCategory->id)
+                ->add('money', $this->post->interest)
+                ->add('currency', !empty($depositor) ? $depositor->currency : '')
+                ->add('handlers', trim(join(',', $this->post->handlers), ','))
+                ->add('createdBy', $this->app->user->account)
+                ->add('createdDate', $now)
+                ->add('editedDate', $now)
+                ->setIf($this->post->createTrader or !$this->post->trader, 'trader', 0)
+                ->get();
+
+            $this->config->trade->require->create = 'depositor,money,type,handlers,loanID';
+            $this->dao->insert(TABLE_TRADE)
+                ->data($interest, $skip = 'interest,createTrader,traderName')
+                ->autoCheck()
+                ->batchCheck($this->config->trade->require->create, 'notempty')
+                ->exec();
+
+            if(dao::isError()) return false;
+
+            $interestID = $this->dao->lastInsertID();
+            $this->loadModel('action')->create('trade', $interestID, 'Created');
         }
 
         return !dao::isError();
@@ -850,7 +1041,7 @@ class tradeModel extends model
             if(isset($this->post->category[$key])) $trade->category = join(',', $this->post->category[$key]);
             if(isset($this->post->handlers[$key])) $trade->handlers = join(',', $this->post->handlers[$key]);
 
-            $this->dao->insert(TABLE_TRADE)->data($trade, 'id')->exec();
+            $this->dao->insert(TABLE_TRADE)->data($trade, 'id,files')->exec();
         }
 
         return !dao::isError();
@@ -979,70 +1170,75 @@ class tradeModel extends model
         $customWidth  = $this->config->trade->excel->customWidth;
 
         $titles = array();
-        $titles['In']      = $this->lang->trade->in;
-        $titles['Out']     = $this->lang->trade->out;
-        $titles['Profit']  = $this->lang->trade->profit . $this->lang->trade->loss;
-        $titles['Balance'] = $this->lang->depositor->balance;
+        $titles['in']          = $this->lang->trade->in;
+        $titles['out']         = $this->lang->trade->out;
+        $titles['profit']      = $this->lang->trade->profit . $this->lang->trade->loss;
+        $titles['transferin']  = $this->lang->trade->typeList['transferin'];
+        $titles['transferout'] = $this->lang->trade->typeList['transferout'];
+        $titles['invest']      = $this->lang->trade->invest;
+        $titles['redeem']      = $this->lang->trade->redeem;
+        $titles['loan']        = $this->lang->trade->loan;
+        $titles['repay']       = $this->lang->trade->repay;
+        $titles['balance']     = $this->lang->depositor->balance;
 
         $depositors += array('undefined' => $this->lang->trade->report->undefined, 'total' => $this->lang->trade->total);
 
         $fields = array();
         $rows   = array();
-
-        $fields['month'] = '';
-        foreach($depositors as $key => $depositor)
+        foreach($depositors as $depositorID => $depositorName)
         {
+            $fields[$depositorID]['month'] = '';
             foreach($titles as $titleKey => $title)
             {
-                $fields[$key . $titleKey] = $depositor . $title;
+                if($depositorID == 'total' && ($title == 'transferin' or $title == 'transferout')) continue;
 
-                $numberFields[] = $key . $titleKey; 
-                $customWidth[$key . $titleKey] = 20;
+                $fields[$depositorID][$titleKey] = $title;
+
+                if(!in_array($titleKey, $numberFields)) $numberFields[] = $titleKey; 
+                if(!in_array($titleKey, $customWidth))  $customWidth[$titleKey] = 10;
             }
         }
 
         /* Initial rows. */
         foreach($this->lang->trade->monthList as $monthKey => $month)
         {
-            foreach($fields as $fieldsKey => $field)
+            foreach($fields as $depositorID => $field)
             {
-                $rows[$monthKey][$fieldsKey] = 0;
+                foreach($field as $fieldKey => $fieldName)
+                {
+                    $rows[$depositorID][$monthKey][$fieldKey] = 0;
+                }
+                $rows[$depositorID][$monthKey]['month'] = $month;
             }
-
-            $rows[$monthKey]['month'] = $month;
         }
 
-        $undefined = false;
         /* Add last year balance. */
         foreach($balances as $depositor => $money)
         {
             if(!isset($depositors[$depositor]))
             {
                 $depositor = 'undefined';
-                $undefined = true;
             }
 
             /* Add money to balance of last year. */
-            $rows['last']["{$depositor}Balance"] += $money;
-            $rows['last']['totalBalance']        += $money;
+            $rows[$depositor]['last']['balance'] += $money;
+            $rows['total']['last']['balance']    += $money;
 
             /* Add money to balance of every month in this year. */
             for($i = 1; $i <= (int)date('m'); $i++)
             {
                 $month = $i < 10 ? '0' . $i : $i;
-                $rows[$month]["{$depositor}Balance"] += $money;
-                $rows[$month]['totalBalance']        += $money;
+                $rows[$depositor][$month]['balance'] += $money;
+                $rows['total'][$month]['balance']    += $money;
             }
 
             /* Add money to total balance. */
-            $rows['total']["{$depositor}Balance"] += $money;
-            $rows['total']['totalBalance']        += $money;
+            $rows[$depositor]['total']['balance'] += $money;
+            $rows['total']['total']['balance']    += $money;
         }
 
         foreach($trades as $trade)
         {
-            if($trade->type != 'in' && $trade->type != 'out') continue;
-
             if(isset($depositors[$trade->depositor]))
             {
                 $depositor = $trade->depositor;
@@ -1050,53 +1246,104 @@ class tradeModel extends model
             else
             {
                 $depositor = 'undefined';
-                $undefined = true;
             }
 
             $month = date('m', strtotime($trade->date));
-            $type  = ucfirst($trade->type);
-            $money = $trade->type == 'in' ? $trade->money : -$trade->money;
+            $type  = $trade->type;
+            $money = $trade->money;
+            if($type == 'in'  or $type == 'transferin'  or $type == 'redeem' or $type == 'loan')  $money = $trade->money; 
+            if($type == 'out' or $type == 'transferout' or $type == 'invest' or $type == 'repay') $money = -$trade->money; 
 
             /* Add money to profit and balance of this month. */
-            $rows[$month]["{$depositor}{$type}"] += $trade->money;
-            $rows[$month]["{$depositor}Profit"]  += $money;
-            $rows[$month]["{$depositor}Balance"] += $money;
-            $rows[$month]["total{$type}"]        += $trade->money;
-            $rows[$month]["totalProfit"]         += $money;
-            $rows[$month]["totalBalance"]        += $money;
+            $rows[$depositor][$month][$type]     += $trade->money;
+            $rows[$depositor][$month]['balance'] += $money;
+            $rows['total'][$month]['balance']    += $money;
+            if($type !='transferin' && $type != 'transferout')
+            {
+                $rows['total'][$month][$type] += $trade->money;
+            }
+            if($type == 'in' or $type == 'out') 
+            {
+                $rows[$depositor][$month]['profit'] += $money;
+                $rows['total'][$month]['profit']    += $money;
+            }
 
             /* Add money to profit and balance of every month that after this month. */
             for($i = (int)$month + 1; $i <= (int)date('m'); $i++)
             {
                 $m = $i < 10 ? '0' . $i : $i;
-                $rows[$m]["{$depositor}Balance"] += $money;
-                $rows[$m]['totalBalance']        += $money;
+                $rows[$depositor][$m]['balance'] += $money;
+                $rows['total'][$m]['balance']    += $money;
             }
 
             /* Add money to total profit and balance. */
-            $rows['total']["{$depositor}{$type}"] += $trade->money;
-            $rows['total']["{$depositor}Profit"]  += $money;
-            $rows['total']["{$depositor}Balance"] += $money;
-            $rows['total']["total{$type}"]        += $trade->money;
-            $rows['total']["totalProfit"]         += $money;
-            $rows['total']["totalBalance"]        += $money;
+            $rows[$depositor]['total'][$type]     += $trade->money;
+            $rows[$depositor]['total']['balance'] += $money;
+            $rows['total']['total']['balance']    += $money;
+            if($type !='transferin' && $type != 'transferout')
+            {
+                $rows['total']['total'][$type] += $trade->money;
+            }
+            if($trade->type == 'in' or $trade->type == 'out') 
+            {
+                $rows[$depositor]['total']['profit'] += $money;
+                $rows['total']['total']['profit']    += $money;
+            }
         }
 
-        /* Remove undefined columns. */
-        if(!$undefined) 
+        /* Remove empty columns and depositors. */
+        foreach($rows as $depositor => $row)
         {
-            foreach($titles as $key => $title) unset($fields["undefined{$key}"]);
+            /* Init emptyDepositor and emptyColumns. */
+            $emptyDepositor = true;
+            $emptyColumns   = array();
+            foreach($titles as $key => $title)
+            {
+                $emptyColumns[$key] = true;
+            }
+
+            foreach($row as $month => $data)
+            {
+                foreach($data as $key => $money)
+                {
+                    if($key != 'month' && $money) 
+                    {
+                        $emptyDepositor = false;
+                        unset($emptyColumns[$key]);
+                    }
+                }
+            }
+
+            /* Remove empty columns. */
+            foreach($emptyColumns as $key => $value)
+            {
+                if($key == 'profit' or $key == 'balance') continue;
+                unset($fields[$depositor][$key]);
+            }
+
+            /* Remove empty depositor. */
+            if($emptyDepositor) 
+            {
+                unset($fields[$depositor]);
+                unset($rows[$depositor]);
+            }
         }
         
-        $data = new stdclass();
-        $data->fields       = $fields;
-        $data->numberFields = $numberFields;
-        $data->kind         = 'depositor';
-        $data->rows         = $rows;
-        $data->title        = $this->lang->trade->excel->title->depositor;
-        $data->customWidth  = $customWidth;
-        $data->help         = $this->lang->trade->excel->help->depositor;
+        $datas = array();
+        foreach($fields as $depositor => $fieldData)
+        {
+            $data = new stdclass();
+            $data->fields       = $fieldData;
+            $data->numberFields = $numberFields;
+            $data->kind         = 'depositor';
+            $data->rows         = $rows[$depositor];
+            $data->title        = $depositors[$depositor];
+            $data->customWidth  = $customWidth;
+            $data->help         = $this->lang->trade->excel->help->depositor;
 
-        return $data;
+            $datas[] = $data;
+        }
+
+        return $datas;
     }
 }

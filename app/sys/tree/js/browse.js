@@ -17,6 +17,7 @@ $(document).ready(function()
     {
          $(menu + " a[href*='" + v.root +"']").parent().addClass('active');
     }
+    if(v.type == 'provider') $(menu + " a[href*=" + v.type + "]").parent().addClass('active');
 
     /* Load the children of current category when page loaded. */
     var link = createLink('tree', 'children', 'type=' + v.type + '&moduleID=' + v.moduleID + '&root=' + v.root);

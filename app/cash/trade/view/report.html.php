@@ -2,7 +2,7 @@
 /**
  * The report view file of trade module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     trade
@@ -45,14 +45,14 @@
     <?php if($currentMonth == '00'):?>
     <table class='table active-disabled'>
       <tr>
-        <td colspan='3'>
+        <td colspan='3' class='annual'>
           <div class='chart-wrapper text-center'>
-            <h5><?php echo $currentYear . $lang->trade->report->annual . '(' . $currencyList[$currentCurrency] . ')';?></h5>
+            <h5><?php echo $currentYear . $lang->trade->report->annual . '(' . $currencyList[$currentCurrency] . ':' . $lang->trade->report->unit . ')';?></h5>
             <div class='chart-canvas'><canvas height='260' width='800' id='myBarChart'></canvas></div>
           </div>
         </td>
-        <td class='w-400px'>
-          <div class='table-wrapper'>
+        <td class='w-400px annual'>
+          <div style="overflow:auto;" class='table-wrapper'>
             <table id='barChart' class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='bar' data-target='#myBarChart' data-animation='false'>
               <thead>
                 <tr class='text-center'>
@@ -82,28 +82,27 @@
     <table class='table active-disabled'>
       <tr class='text-top'>
         <?php foreach($chartDatas as $type => $datas):?>
-        <td class='w-p25'>
+        <td class='w-p25 monthly'>
           <div class='chart-wrapper text-center'>
             <?php $dateTip = $currentMonth == '00' ? $currentYear . $lang->year : $currentMonth . $lang->month;?>
             <h5><?php echo $dateTip . $lang->trade->$type . $lang->trade->chartList[$groupBy];?></h5>
             <div class='chart-canvas'><canvas id="<?php echo 'chart-' . $type . '-' . $groupBy;?>" width='400' height='200' data-responsive='true'></canvas></div>
           </div>
         </td>
-        <td class='w-p25'>
-          <div style="overflow:auto; max-height:260px" class='table-wrapper'>
-            <table class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='pie' data-target="<?php echo '#chart-' . $type . '-' . $groupBy;?>" data-animation='false'>
+        <td class='w-p25 monthly'>
+          <div style="overflow:auto;" class='table-wrapper'>
+            <table class='table table-fixed table-condensed table-hover table-striped table-chart' data-chart='pie' data-target="<?php echo '#chart-' . $type . '-' . $groupBy;?>" data-animation='false'>
               <thead>
                 <tr class='text-center'>
-                  <th colspan='2'><?php echo $lang->trade->$groupBy;?></th>
-                  <th><?php echo $lang->trade->money;?></th>
+                  <th><?php echo $lang->trade->$groupBy;?></th>
+                  <th class='w-70px'><?php echo $lang->trade->money;?></th>
                   <th class='w-50px'><?php echo $lang->report->percent;?></th>
                 </tr>
               </thead>
               <tbody>
               <?php foreach($datas as $data):?>
               <tr class='text-center'>
-                <td class='chart-color w-20px'><i class='chart-color-dot icon-circle'></i></td>
-                <td class='chart-label text-left'><?php echo $data->name;?></td>
+                <td class='chart-label text-left' title="<?php echo $data->name;?>"><i class='chart-color-dot icon-circle'></i> <?php echo $data->name;?></td>
                 <td class='chart-value'><?php echo $data->value;?></td>
                 <td><?php echo ($data->percent * 100) . '%';?></td>
               </tr>

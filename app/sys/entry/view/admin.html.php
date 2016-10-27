@@ -2,11 +2,11 @@
 /**
  * The admin view of entry module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id$
+ * @version     $Id: admin.html.php 4227 2016-10-25 08:27:56Z liugang $
  * @link        http://www.ranzhico.com
  */
 include '../../common/view/header.html.php';
@@ -36,6 +36,9 @@ include '../../common/view/treeview.html.php';
       <thead>
         <tr class='text-center'>
           <th class='w-70px'></th>
+          <?php if($showCategory):?>
+          <th class='w-70px'><?php echo $lang->entry->category;?></th>
+          <?php endif;?>
           <th class='w-200px'><?php echo $lang->entry->name;?></th>
           <th class='w-80px'><?php echo $lang->entry->code;?></th>
           <th class='w-240px'><?php echo $lang->entry->key;?></th>
@@ -47,6 +50,9 @@ include '../../common/view/treeview.html.php';
         <?php foreach($entries as $entry):?>
         <tr class='text-left'>
           <td><?php echo html::input("order[$entry->id]", $entry->order, "class='form-control input-sm text-center'")?></td>
+          <?php if($showCategory):?>
+          <td class='text-center'><?php echo zget($categories, $entry->category, '');?></td>
+          <?php endif;?>
           <td>
             <?php if($entry->logo):?> 
             <img src="<?php echo $entry->logo;?>" class='small-icon' /> 

@@ -28,4 +28,10 @@ $(document).ready(function()
     });
 
     fixTableFooter($('#todoList'));
+
+    $(document).on('click', '.import', function()
+    {
+        $(this).parents('.input-group').find('.datepicker-date').toggle();
+        $(this).parents('.input-group').find('.confirm').toggleClass('hidden');
+    });
 });

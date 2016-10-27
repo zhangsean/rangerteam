@@ -2,7 +2,7 @@
 /**
  * The model file of contact module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     contact
@@ -115,21 +115,21 @@ class contactModel extends model
         $thisMonth = date::getThisMonth();
         $thisWeek  = date::getThisWeek();
 
-        if($this->session->contactQuery == false) $this->session->set('contactQuery', ' 1 = 1');
-        $contactQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->contactQuery);
-
         if($status != 'normal')
         {
             if($orderBy == 'maker_desc') $orderBy = 'id_desc';
             if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
+            if($this->session->leadsQuery == false) $this->session->set('leadsQuery', ' 1 = 1');
+            $leadsQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->leadsQuery);
+
             $contacts = $this->dao->select('*')->from(TABLE_CONTACT)
                 ->where('deleted')->eq(0)
-                ->beginIF($status)->andWhere('status')->eq($status)->fi()
+                ->beginIF($mode != 'bysearch' && $status)->andWhere('status')->eq($status)->fi()
                 ->beginIF($origin)->andWhere('origin')->like("%,$origin,%")->fi()
                 ->beginIF($mode == 'assignedTo')->andWhere('assignedTo')->eq($this->app->user->account)->fi()
                 ->beginIF($mode == 'ignoredBy')->andWhere('ignoredBy')->eq($this->app->user->account)->fi()
-                ->beginIF($mode == 'bysearch')->andWhere($contactQuery)->fi()
+                ->beginIF($mode == 'bysearch')->andWhere($leadsQuery)->fi()
                 ->beginIF($mode == 'next')->andWhere('assignedTo')->eq($this->app->user->account)->andWhere('nextDate')->fi()
 
                 ->beginIF($this->app->user->admin != 'super')
@@ -145,12 +145,11 @@ class contactModel extends model
         else
         {
             $resumes = $this->dao->select('*')->from(TABLE_RESUME)
-                ->where('customer')->eq($customer)
-                ->andWhere('`left`')->eq('')
-                ->andWhere('deleted')->eq(0)
-                ->orWhere('customer')->eq($customer)
-                ->andWhere('`left`')->gt(helper::today())
-                ->andWhere('deleted')->eq(0)
+                ->where('deleted')->eq(0)
+                ->andWhere('customer')->eq($customer)
+                ->andWhere('`left`', true)->eq('')
+                ->orWhere('`left`')->gt(helper::today())
+                ->markRight(1)
                 ->fetchAll('contact');
 
             if($relation == 'client') 
@@ -168,9 +167,13 @@ class contactModel extends model
 
             if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
+            if($this->session->contactQuery == false) $this->session->set('contactQuery', ' 1 = 1');
+            $contactQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->contactQuery);
+
             $contacts = $this->dao->select('t1.*, t2.customer, t2.maker, t2.title, t2.dept, t2.join, t2.left')->from(TABLE_CONTACT)->alias('t1')
                 ->leftJoin(TABLE_RESUME)->alias('t2')->on('t1.resume = t2.id')
                 ->where('t1.deleted')->eq(0)
+                ->andWhere('t2.customer')->in($customerIdList)
                 ->beginIF($status)->andWhere('status')->eq($status)->fi()
                 ->beginIF($origin)->andWhere('origin')->like("%,$origin,%")->fi()
                 ->beginIF($customer)->andWhere('t1.id')->in(array_keys($resumes))->fi()
@@ -197,10 +200,6 @@ class contactModel extends model
                     $contacts[$contactID]->join     = $resume->join;
                     $contacts[$contactID]->left     = $resume->left;
                 }
-            }
-            foreach($contacts as $id => $contact)
-            {
-                if(!isset($customerIdList[$contact->customer])) unset($contacts[$id]);
             }
         }
 

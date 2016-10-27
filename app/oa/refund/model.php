@@ -2,7 +2,7 @@
 /**
  * The model file of refund module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     refund
@@ -40,8 +40,11 @@ class refundModel extends model
      * @access public
      * @return array
      */
-    public function getList($mode = 'company', $date = '', $deptID = '', $status = '', $createdBy = '', $orderBy = 'id_desc', $pager = null)
+    public function getList($mode = 'company', $type = '', $date = '', $deptID = '', $status = '', $createdBy = '', $orderBy = 'id_desc', $pager = null)
     {
+        if($this->session->refundQuery == false) $this->session->set('refundQuery', ' 1 = 1');
+        $refundQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->refundQuery);
+
         $users = $this->loadModel('user')->getPairs('noclosed,noempty', $deptID);
         $refunds = $this->dao->select('*')->from(TABLE_REFUND)
             ->where('parent')->eq('0')
@@ -51,11 +54,11 @@ class refundModel extends model
             ->beginIf($mode != 'personal')->andWhere('status')->ne('draft')->fi()
             ->beginIf($date != '')->andWhere('date')->like("$date%")->fi()
             ->beginIf($mode == 'browseReview' and $status == 'pass,finish')
-            ->andWhere()->markLeft(1)
-            ->where('firstReviewer')->eq($this->app->user->account)
+            ->andWhere('firstReviewer', true)->eq($this->app->user->account)
             ->orWhere('secondReviewer')->eq($this->app->user->account)
             ->markRight(1)
             ->fi()
+            ->beginIF($type == 'bysearch')->andWhere($refundQuery)->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
@@ -314,7 +317,13 @@ class refundModel extends model
      */
     public function getCategoryPairs()
     {
-        return $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->andWhere('refund')->eq(1)->fetchPairs('id', 'name');
+        $categories       = $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
+        $refundCategories = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('out')->andWhere('refund')->eq(1)->fetchPairs('id', 'name');
+        foreach($refundCategories as $key => $category)
+        {
+            $refundCategories[$key] = $categories[$key];
+        }
+        return $refundCategories;
     }
 
     /**
@@ -370,7 +379,7 @@ class refundModel extends model
         }
 
         if(isset($data->money) and $data->money > $refund->money) return array('result' => 'fail', 'message' => $this->lang->refund->correctMoney);
-        $this->dao->update(TABLE_REFUND)->data($data)->where('id')->eq($refundID)->exec();
+        $this->dao->update(TABLE_REFUND)->data($data)->check('money', 'notempty')->where('id')->eq($refundID)->exec();
 
         if(!empty($refund->detail))
         {
@@ -419,6 +428,7 @@ class refundModel extends model
     public function createTrade($refundID)
     {
         $refund = $this->getByID($refundID);
+        $user   = $this->loadModel('user')->getByAccount($refund->createdBy);
 
         $trade = new stdclass();
         $trade->type        = 'out';
@@ -432,13 +442,72 @@ class refundModel extends model
         $trade->handlers    = $refund->related;
         $trade->category    = $refund->category;
         $trade->desc        = $refund->desc;
+        $trade->dept        = $user->dept;
         $trade->createdBy   = $this->app->user->account;
         $trade->createdDate = helper::now();
         $trade->editedBy    = $this->app->user->account;
         $trade->editedDate  = helper::now();
 
         $this->dao->insert(TABLE_TRADE)->data($trade)->autoCheck()->exec();
+        $tradeID = $this->dao->lastInsertID();
+
+        if(!empty($refund->detail))
+        {
+            foreach($refund->detail as $detail)
+            {
+                if($detail->status != 'pass') continue;
+
+                $tradeDetail = new stdclass();
+                $tradeDetail->type        = 'out';
+                $tradeDetail->parent      = $tradeID;
+                $tradeDetail->money       = $detail->money;
+                $tradeDetail->date        = $detail->date;
+                $tradeDetail->handlers    = $detail->related;
+                $tradeDetail->category    = $detail->category;
+                $tradeDetail->desc        = $detail->desc;
+                $tradeDetail->createdBy   = $this->app->user->account;
+                $tradeDetail->editedBy    = $this->app->user->account;
+                $tradeDetail->createdDate = helper::now();
+                $tradeDetail->editedDate  = helper::now();
+
+                $this->dao->insert(TABLE_TRADE)->data($tradeDetail)->exec();
+            }
+        }
 
         return !dao::isError();
+    }
+
+    /**
+     * Total refund list.
+     * 
+     * @param  array    $refunds 
+     * @access public
+     * @return string
+     */
+    public function total($refunds)
+    {
+
+        $totalMoney  = array();
+        $currencyList = $this->loadModel('common', 'sys')->getCurrencySign();
+
+        foreach($currencyList as $key => $currency)
+        {
+            $totalMoney[$key] = 0;
+            foreach($refunds as $refund)
+            {
+                if($refund->currency != $key) continue;
+                $totalMoney[$key] += $refund->money;
+            }
+        }
+
+        $totalInfo = '';
+        foreach($totalMoney as $currency => $money)
+        {
+            if(!$money) continue;
+            $tidyMoney = "<span title='" . $money . "'>" . commonModel::tidyMoney($money) . '</span>';
+            $totalInfo .= sprintf($this->lang->refund->totalMoney, $currencyList[$currency], $tidyMoney);
+        }
+
+        return $totalInfo;
     }
 }

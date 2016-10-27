@@ -2,7 +2,7 @@
 /**
  * The model file of doc module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc 
@@ -256,7 +256,7 @@ class docModel extends model
             ->setDefault('product, project, module', 0)
             ->specialChars('title, digest, keywords')
             ->encodeURL('url')
-            ->stripTags('content', $this->config->allowedTags->admin)
+            ->stripTags('content', $this->config->allowedTags)
             ->cleanInt('product, project, module')
             ->remove('files,labels')
             ->join('users', ',')
@@ -299,7 +299,7 @@ class docModel extends model
             ->setDefault('module', 0)
             ->specialChars('title, digest, keywords')
             ->encodeURL('url')
-            ->stripTags('content', $this->config->allowedTags->admin)
+            ->stripTags('content', $this->config->allowedTags)
             ->add('editedBy',   $this->app->user->account)
             ->add('editedDate', helper::now())
             ->remove('comment,files,labels')

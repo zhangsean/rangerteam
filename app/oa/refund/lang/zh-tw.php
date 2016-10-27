@@ -70,6 +70,8 @@ $lang->refund->correctMoney      = '報銷額度不能多於申請金額';
 $lang->refund->categoryTips      = '尚未設置支出科目。';
 $lang->refund->setExpense        = '設置科目';
 $lang->refund->moneyTip          = '低於金額只需要一級審批，高於金額需要二級審批';
+$lang->refund->total             = '報銷合計：';
+$lang->refund->totalMoney        = '%s%s；';
 
 $lang->refund->settings = new stdclass();
 $lang->refund->settings->setReviewer  = "審批人|refund|setreviewer";

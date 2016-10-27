@@ -2,7 +2,7 @@
 /**
  * The set category view file of refund module of Ranzhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     refund
@@ -45,7 +45,7 @@
               <td>
                 <?php if(!empty($expenseList))
                 { 
-                    echo html::submitButton();
+                    echo html::submitButton() . "&nbsp;&nbsp;";
                 } 
                 commonModel::printLink('cash.tree', 'browse', 'type=out', $lang->refund->setExpense, "class='btn btn-primary setExpense'");
                 ?>

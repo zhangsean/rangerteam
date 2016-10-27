@@ -2,7 +2,7 @@
 /**
  * The view file of overtime module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     overtime
@@ -33,6 +33,12 @@
     <th><?php echo $lang->overtime->desc?></th>
     <td colspan='3'><?php echo $overtime->desc;?></td>
   </tr> 
+  <?php if($overtime->status == 'reject' and $overtime->rejectReason):?>
+  <tr>
+    <th><?php echo $lang->overtime->rejectReason;?></th>
+    <td colspan='3'><?php echo $overtime->rejectReason;?></td>
+  </tr>
+  <?php endif;?>
   <tr>
     <th><?php echo $lang->overtime->createdBy;?></th>
     <td><?php echo zget($users, $overtime->createdBy);?></td>

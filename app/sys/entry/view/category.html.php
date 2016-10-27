@@ -4,7 +4,7 @@
  *
  * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
- * @author      liugang <liugang@cnezsoft.com>
+ * @author      Gang Liu <liugang@cnezsoft.com>
  * @package     entry 
  * @version     $Id$
  * @link        http://www.ranzhico.com
@@ -17,7 +17,7 @@
   </div>
   <div class='panel-body'>
     <form id='ajaxForm' method='post'>
-      <div class='col-xs-6 col-md-4 col-md-offset-1'>
+      <div class='col-xs-6 col-md-4 col-md-offset-1' id='categoryList'>
       <?php
         $maxOrder = 0;
         foreach($children as $child)
@@ -32,8 +32,10 @@
 
         for($i = 0; $i < 5 ; $i ++)
         {
-            echo "<div class='form-group'>" . html::input("children[]", '', "class='form-control' placeholder='{$lang->entry->category}'") . "</div>";
+            echo "<div class='form-group'><div class='input-group'>";
+            echo html::input("children[]", '', "class='form-control' placeholder='{$lang->entry->category}'");
             echo html::hidden('mode[]', 'new');
+            echo "</div></div>";
         }
 
         echo "<div class='form-group'>" . html::submitButton() . "</div>";

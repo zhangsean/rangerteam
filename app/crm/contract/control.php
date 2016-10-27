@@ -2,7 +2,7 @@
 /**
  * The control file for contract of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     contract
@@ -174,7 +174,7 @@ class contract extends control
         $this->view->orders         = array('' => '') + $this->order->getList($mode = 'query', "customer={$contract->customer}");
         $this->view->customers      = $this->loadModel('customer', 'crm')->getPairs('client');
         $this->view->contacts       = $this->loadModel('contact', 'crm')->getPairs($contract->customer);
-        $this->view->users          = $this->loadModel('user', 'sys')->getPairs('nodeleted,noclosed');
+        $this->view->users          = $this->loadModel('user', 'sys')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->currencyList   = $this->loadModel('common', 'sys')->getCurrencyList();
         $this->view->currencySign   = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->display();
@@ -211,7 +211,7 @@ class contract extends control
 
         $this->view->title    = $this->lang->contract->delivery;
         $this->view->contract = $contract;
-        $this->view->users    = $this->loadModel('user', 'sys')->getPairs();
+        $this->view->users    = $this->loadModel('user', 'sys')->getPairs('nodeleted,noforbidden,noclosed');
         $this->display();
     }
 
@@ -237,7 +237,7 @@ class contract extends control
         $this->view->title    = $this->lang->contract->editDelivery;
         $this->view->delivery = $delivery;
         $this->view->contract = $contract;
-        $this->view->users    = $this->loadModel('user', 'sys')->getPairs();
+        $this->view->users    = $this->loadModel('user', 'sys')->getPairs('nodeleted,noforbidden,noclosed');
         $this->display();
     }
 
@@ -302,7 +302,7 @@ class contract extends control
         $orderID = $this->dao->select('`order`')->from(TABLE_CONTRACTORDER)->where('contract')->eq($contractID)->fetch('order');
         $order   = $this->loadModel('order', 'crm')->getByID($orderID);
 
-        $productList = array();
+        $productList = $this->loadModel('product', 'crm')->getPairs();
         if(isset($order->product))
         {
             $productList = $this->dao->select('id, name')->from(TABLE_PRODUCT)->where('id')->in($order->product)->fetchPairs();
@@ -310,7 +310,7 @@ class contract extends control
 
         $this->view->title         = $contract->name;
         $this->view->contract      = $contract;
-        $this->view->users         = $this->loadModel('user')->getPairs();
+        $this->view->users         = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
         $this->view->currencySign  = $currencySign;
         $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
@@ -344,7 +344,7 @@ class contract extends control
         $this->view->title        = $this->lang->contract->editReturn;
         $this->view->return       = $return;
         $this->view->contract     = $contract;
-        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->users        = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
         $this->view->currencySign = $currencySign;
         $this->display();
     }
@@ -445,6 +445,7 @@ class contract extends control
     public function view($contractID)
     {
         $contract = $this->contract->getByID($contractID);
+        $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($contract) ? '0' : $contract->customer);
 
         /* Set allowed edit contract ID list. */
         $this->app->user->canEditContractIdList = ',' . implode(',', $this->contract->getContractsSawByMe('edit', (array)$contractID)) . ',';

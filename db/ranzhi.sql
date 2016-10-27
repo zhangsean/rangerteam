@@ -4,7 +4,7 @@ CREATE TABLE `crm_address` (
   `objectType` char(30) NOT NULL,
   `objectID` mediumint(8) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
-  `area` mediumint(8) NOT NULL,
+  `area` mediumint(8) unsigned NOT NULL,
   `location` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `objectType` (`objectType`,`objectID`)
@@ -48,6 +48,7 @@ CREATE TABLE `crm_contact` (
   PRIMARY KEY (`id`),
   KEY `realname` (`realname`),
   KEY `nickname` (`nickname`),
+  KEY `origin` (`origin`),
   KEY `birthday` (`birthday`),
   KEY `createdBy` (`createdBy`),
   KEY `contactedBy` (`contactedBy`),
@@ -61,7 +62,8 @@ CREATE TABLE `crm_delivery` (
   `deliveredBy` char(30) COLLATE 'utf8_general_ci' NOT NULL,
   `deliveredDate` date NOT NULL,
   `comment` text NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `contract` (`contract`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `crm_plan`;
 CREATE TABLE `crm_plan` (
@@ -70,7 +72,8 @@ CREATE TABLE `crm_plan` (
   `contract` mediumint(8) unsigned NOT NULL,
   `returnedBy` char(30) COLLATE 'utf8_general_ci' NOT NULL,
   `returnedDate` date NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `contract` (`contract`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `crm_contract`;
 CREATE TABLE `crm_contract` (
@@ -141,6 +144,7 @@ CREATE TABLE `crm_customer` (
   `weibo` char(50) NOT NULL,
   `weixin` char(50) NOT NULL,
   `category` char(30) NOT NULL,
+  `depositor` varchar(100) NOT NULL,
   `desc` text NOT NULL,
   `public` enum('0', '1') NOT NULL DEFAULT '0',
   `createdBy` char(30) NOT NULL,
@@ -289,7 +293,7 @@ CREATE TABLE `oa_doclib` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_project`;
 CREATE TABLE `oa_project` (
-  `id` mediumint NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(90) NOT NULL,
   `desc` text NOT NULL,
   `begin` date NOT NULL,
@@ -305,7 +309,7 @@ CREATE TABLE `oa_project` (
 ) ENGINE='MyISAM' COLLATE 'utf8_general_ci'; 
 -- DROP TABLE IF EXISTS `oa_attend`;
 CREATE TABLE `oa_attend` (
-  `id` mediumint NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `account` char(30) NOT NULL,
   `date` date NOT NULL,
   `signIn` time NOT NULL,
@@ -331,7 +335,7 @@ CREATE TABLE `oa_attend` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_attendstat`;
 CREATE TABLE `oa_attendstat` (
-  `id` mediumint NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `account` char(30) NOT NULL,
   `month` char(10) NOT NULL DEFAULT '',
   `normal` decimal(12,2) NOT NULL DEFAULT 0.00,
@@ -339,6 +343,8 @@ CREATE TABLE `oa_attendstat` (
   `early` decimal(12,2) NOT NULL DEFAULT 0.00,
   `absent` decimal(12,2) NOT NULL DEFAULT 0.00,
   `trip` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `egress` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `lieu` decimal(12,2) NOT NULL DEFAULT 0.00,
   `paidLeave` decimal(12,2) NOT NULL DEFAULT 0.00,
   `unpaidLeave` decimal(12,2) NOT NULL DEFAULT 0.00,
   `timeOvertime` decimal(12,2) NOT NULL DEFAULT 0.00,
@@ -355,7 +361,7 @@ CREATE TABLE `oa_attendstat` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_overtime`;
 CREATE TABLE `oa_overtime` (
-  `id` mediumint NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `year` char(4) NOT NULL,
   `begin` date NOT NULL,
   `end` date NOT NULL,
@@ -365,6 +371,7 @@ CREATE TABLE `oa_overtime` (
   `type` varchar(30) NOT NULL DEFAULT '',
   `desc` text NOT NULL,
   `status` varchar(30) NOT NULL DEFAULT '',
+  `rejectReason` varchar(100) NOT NULL,
   `createdBy` char(30) NOT NULL,
   `createdDate` datetime NOT NULL,
   `reviewedBy` char(30) NOT NULL,
@@ -377,8 +384,9 @@ CREATE TABLE `oa_overtime` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_holiday`;
 CREATE TABLE `oa_holiday` (
-  `id` mediumint NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL DEFAULT '',
+  `type` enum('holiday', 'working') NOT NULL DEFAULT 'holiday',
   `desc` text NOT NULL,
   `year` char(4) NOT NULL,
   `begin` date NOT NULL,
@@ -389,13 +397,14 @@ CREATE TABLE `oa_holiday` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_leave`;
 CREATE TABLE `oa_leave` (
-  `id` mediumint NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `year` char(4) NOT NULL,
   `begin` date NOT NULL,
   `end` date NOT NULL,
   `start` time NOT NULL,
   `finish` time NOT NULL,
   `hours` float(4,1) unsigned NOT NULL DEFAULT '0.0',
+  `backDate` datetime NOT NULL,
   `type` varchar(30) NOT NULL DEFAULT '',
   `desc` text NOT NULL,
   `status` varchar(30) NOT NULL DEFAULT '',
@@ -409,9 +418,32 @@ CREATE TABLE `oa_leave` (
   KEY `status` (`status`),
   KEY `createdBy` (`createdBy`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `oa_lieu`;
+CREATE TABLE `oa_lieu` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `year` char(4) NOT NULL,
+  `begin` date NOT NULL,
+  `end` date NOT NULL,
+  `start` time NOT NULL,
+  `finish` time NOT NULL,
+  `hours` float(4,1) unsigned NOT NULL DEFAULT '0.0',
+  `overtime` char(255) NOT NULL,
+  `desc` text NOT NULL,
+  `status` varchar(30) NOT NULL DEFAULT '',
+  `createdBy` char(30) NOT NULL,
+  `createdDate` datetime NOT NULL,
+  `reviewedBy` char(30) NOT NULL,
+  `reviewedDate` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `year` (`year`),
+  KEY `status` (`status`),
+  KEY `createdBy` (`createdBy`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `oa_trip`;
 CREATE TABLE `oa_trip` (
-  `id` mediumint NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `type` enum('trip', 'egress') NOT NULL DEFAULT 'trip',
+  `customers` varchar(20) NOT NULL,
   `name` char(30) NOT NULL,
   `desc` text NOT NULL,
   `year` char(4) NOT NULL,
@@ -485,7 +517,7 @@ CREATE TABLE IF NOT EXISTS `oa_refund` (
 -- DROP TABLE IF EXISTS `sys_relation`;
 CREATE TABLE `sys_relation` (
   `type` char(20) NOT NULL,
-  `id` mediumint(9) NOT NULL,
+  `id` mediumint(8) NOT NULL,
   `category` mediumint(8) NOT NULL,
   UNIQUE KEY `relation` (`type`,`id`,`category`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -511,7 +543,7 @@ CREATE TABLE `cash_depositor` (
 -- DROP TABLE IF EXISTS `cash_balance`;
 CREATE TABLE `cash_balance` ( 
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `depositor` mediumint(8) NOT NULL,
+  `depositor` mediumint(8) unsigned NOT NULL,
   `date` date NOT NULL,
   `money` decimal(12,2) NOT NULL,
   `currency` char(30) NOT NULL,
@@ -531,8 +563,10 @@ CREATE TABLE `cash_trade` (
   `trader` mediumint(8) unsigned NOT NULL DEFAULT 0,
   `order` mediumint(8) unsigned NOT NULL,
   `contract` mediumint(8) unsigned NOT NULL,
+  `investID` mediumint(8) unsigned NOT NULL,
+  `loanID` mediumint(8) unsigned NOT NULL,
   `dept` mediumint(8) unsigned NOT NULL,
-  `type` enum('in', 'out', 'transferin', 'transferout', 'invest', 'redeem') NOT NULL,
+  `type` enum('in', 'out', 'transferin', 'transferout', 'invest', 'redeem', 'loan', 'repay') NOT NULL,
   `money` decimal(12,2) NOT NULL,
   `currency` varchar(30) NOT NULL,
   `date` date NOT NULL,
@@ -593,7 +627,7 @@ CREATE TABLE `sys_action` (
   `comment` text NOT NULL,
   `extra` varchar(255) NOT NULL,
   `read` enum('0', '1') NOT NULL DEFAULT '0',
-  `reader` varchar(255) NOT NULL DEFAULT '',
+  `reader` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `customer` (`customer`),
   KEY `contact` (`contact`),
@@ -634,12 +668,12 @@ CREATE TABLE `sys_category` (
   `posts` smallint(5) NOT NULL,
   `postedBy` varchar(30) NOT NULL,
   `postedDate` datetime NOT NULL,
-  `postID` mediumint(9) NOT NULL,
+  `postID` mediumint(8) unsigned NOT NULL,
   `replyID` mediumint(8) unsigned NOT NULL,
   `users` text NOT NULL,
   `rights` varchar(255) NOT NULL,
   `refund` enum('0','1') NOT NULL DEFAULT '0',
-  `major` enum('0','1','2','3','4') NOT NULL DEFAULT '0',
+  `major` enum('0','1','2','3','4','5','6','7','8') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `tree` (`type`),
   KEY `order` (`order`),
@@ -701,7 +735,7 @@ CREATE TABLE `sys_entry` (
   `visible` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `order` tinyint(5) unsigned NOT NULL DEFAULT '0',
   `zentao` enum('0', '1') NOT NULL DEFAULT '0',
-  `category` mediumint(8) NOT NULL DEFAULT '0',
+  `category` mediumint(8) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -768,7 +802,7 @@ CREATE TABLE `sys_file` (
   `extension` char(30) NOT NULL,
   `size` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `objectType` char(20) NOT NULL,
-  `objectID` mediumint(9) NOT NULL,
+  `objectID` mediumint(8) unsigned NOT NULL,
   `createdBy` char(30) NOT NULL DEFAULT '',
   `createdDate` datetime NOT NULL,
   `editor` enum('1','0') NOT NULL DEFAULT '0',
@@ -940,8 +974,9 @@ CREATE TABLE `sys_user` (
   `locked` datetime NOT NULL,
   `deleted` enum('0','1') NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `account` (`account`),
   KEY `admin` (`admin`),
-  KEY `account` (`account`,`password`),
+  KEY `accountPassword` (`account`,`password`),
   KEY `dept` (`dept`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `sys_group`;
@@ -998,7 +1033,11 @@ INSERT INTO `sys_category` (`id`, `name`, `parent`, `path`, `grade`, `type`, `ma
 ('1', '主营业务收入',   '0', ',1,', 1, 'in',  '1'),
 ('2', '非主营业务收入', '0', ',2,', 1, 'in',  '2'),
 ('3', '主营业务成本',   '0', ',3,', 1, 'out', '3'),
-('4', '非主营业务成本', '0', ',4,', 1, 'out', '4');
+('4', '非主营业务成本', '0', ',4,', 1, 'out', '4'),
+('5', '理财盈利',       '0', ',5,', 1, 'in',  '5'),
+('6', '理财亏损',       '0', ',6,', 1, 'out', '6'),
+('7', '手续费',         '0', ',7,', 1, 'out', '7'),
+('8', '借贷利息',       '0', ',8,', 1, 'out', '8');
 
 INSERT INTO `sys_group` VALUES (1,'管理员','管理员拥有前台所有权限'),(2,'财务专员','财务专员拥有现金流所有权限'),(3,'销售经理','销售经理拥有客户管理所有权限'),(4,'销售人员','默认的销售人员权限'),(5,'普通用户','默认的普通账号权限');
 INSERT INTO `sys_usergroup` (account,`group`) SELECT account,5 FROM `sys_user`;

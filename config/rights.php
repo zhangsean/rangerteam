@@ -83,18 +83,20 @@ $config->rights->member['task']['export']         = 'export';
 $config->rights->member['task']['delete']         = 'delete';
 $config->rights->member['task']['recordestimate'] = 'recordestimate';
 
-$config->rights->member['todo']['calendar']    = 'calendar';
-$config->rights->member['todo']['create']      = 'create';
-$config->rights->member['todo']['batchcreate'] = 'batchcreate';
-$config->rights->member['todo']['edit']        = 'edit';
-$config->rights->member['todo']['browse']      = 'browse';
-$config->rights->member['todo']['view']        = 'view';
-$config->rights->member['todo']['delete']      = 'delete';
-$config->rights->member['todo']['finish']      = 'finish';
-$config->rights->member['todo']['assignto']    = 'assignto';
-$config->rights->member['todo']['close']       = 'close';
-$config->rights->member['todo']['batchclose']  = 'batchclose';
-$config->rights->member['todo']['activate']    = 'activate';
+$config->rights->member['todo']['calendar']     = 'calendar';
+$config->rights->member['todo']['create']       = 'create';
+$config->rights->member['todo']['batchcreate']  = 'batchcreate';
+$config->rights->member['todo']['edit']         = 'edit';
+$config->rights->member['todo']['batchedit']    = 'batchedit';
+$config->rights->member['todo']['browse']       = 'browse';
+$config->rights->member['todo']['view']         = 'view';
+$config->rights->member['todo']['delete']       = 'delete';
+$config->rights->member['todo']['finish']       = 'finish';
+$config->rights->member['todo']['batchfinish']  = 'batchfinish';
+$config->rights->member['todo']['assignto']     = 'assignto';
+$config->rights->member['todo']['close']        = 'close';
+$config->rights->member['todo']['batchclose']   = 'batchclose';
+$config->rights->member['todo']['activate']     = 'activate';
 $config->rights->member['todo']['import2today'] = 'import2today';
 
 $config->rights->member['reply']['post']          = 'post';
@@ -139,6 +141,12 @@ $config->rights->member['leave']['edit']         = 'edit';
 $config->rights->member['leave']['delete']       = 'delete';
 $config->rights->member['leave']['switchstatus'] = 'switchstatus';
 
+$config->rights->member['lieu']['personal']     = 'personal';
+$config->rights->member['lieu']['create']       = 'create';
+$config->rights->member['lieu']['edit']         = 'edit';
+$config->rights->member['lieu']['delete']       = 'delete';
+$config->rights->member['lieu']['switchstatus'] = 'switchstatus';
+
 $config->rights->member['overtime']['personal']     = 'personal';
 $config->rights->member['overtime']['create']       = 'create';
 $config->rights->member['overtime']['edit']         = 'edit';
@@ -150,6 +158,11 @@ $config->rights->member['trip']['personal'] = 'personal';
 $config->rights->member['trip']['create']   = 'create';
 $config->rights->member['trip']['edit']     = 'edit';
 $config->rights->member['trip']['delete']   = 'delete';
+
+$config->rights->member['out']['personal'] = 'personal';
+$config->rights->member['out']['create']   = 'create';
+$config->rights->member['out']['edit']     = 'edit';
+$config->rights->member['out']['delete']   = 'delete';
 
 $config->rights->member['refund']['personal']     = 'personal';
 $config->rights->member['refund']['create']       = 'create';

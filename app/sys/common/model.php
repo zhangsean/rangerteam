@@ -2,11 +2,11 @@
 /**
  * The model file of common module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common
- * @version     $Id$
+ * @version     $Id: model.php 4150 2016-10-17 08:06:43Z liugang $
  * @link        http://www.ranzhico.com
  */
 class commonModel extends model
@@ -42,19 +42,22 @@ class commonModel extends model
         $this->config->system   = isset($config['system']) ? $config['system'] : new stdclass();
         $this->config->personal = isset($config[$account]) ? $config[$account] : new stdclass();
 
-        foreach($this->config->system as $module => $records)
-        {
-            /* Overide the items defined in config/config.php and config/my.php. */
-            if(!isset($this->config->$module)) $this->config->$module = new stdclass();
-            if(isset($this->config->system->$module)) helper::mergeConfig($this->config->system->$module, $module);
-        }
+        //foreach($this->config->system as $module => $records)
+        //{
+        //    /* Overide the items defined in config/config.php and config/my.php. */
+        //    if(!isset($this->config->$module)) $this->config->$module = new stdclass();
+        //    if(isset($this->config->system->$module)) helper::mergeConfig($this->config->system->$module, $module);
+        //}
 
-        foreach($this->config->personal as $module => $records)
-        {
-            /* Overide the items defined in config/config.php and config/my.php. */
-            if(!isset($this->config->$module)) $this->config->$module = new stdclass();
-            if(isset($this->config->personal->$module)) helper::mergeConfig($this->config->personal->$module, $module);
-        }
+        //foreach($this->config->personal as $module => $records)
+        //{
+        //    /* Overide the items defined in config/config.php and config/my.php. */
+        //    if(!isset($this->config->$module)) $this->config->$module = new stdclass();
+        //    if(isset($this->config->personal->$module)) helper::mergeConfig($this->config->personal->$module, $module);
+        //}
+        /* Overide the items defined in config/config.php and config/my.php. */
+        if(isset($this->config->system->common)) helper::mergeConfig($this->config->system->common, 'common');
+        if(isset($this->config->personal->common)) helper::mergeConfig($this->config->personal->common, 'common');
     }
 
     /**
@@ -122,7 +125,7 @@ class commonModel extends model
         if($this->app->user->account == 'guest')
         {
             $referer  = helper::safe64Encode($this->app->getURI(true));
-            die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
+            die(js::locate(helper::createLink('sys.user', 'login', "referer=$referer")));
         }
 
         /* Check the priviledge. */
@@ -184,7 +187,7 @@ class commonModel extends model
             if($app->user->admin != 'super') return false;
         }
 
-        $rights  = $app->user->rights;
+        $rights = $app->user->rights;
         /* Check app priv. */
         if(isset($rights['apppriv'][strtolower($appname)])) return true;
 
@@ -232,6 +235,14 @@ class commonModel extends model
         return (($ip & $netmask) == ($ipWhiteList & $netmask));
     }
 
+    /**
+     * Judge a module is available. 
+     * 
+     * @param  string $module 
+     * @static
+     * @access public
+     * @return bool
+     */
     public static function isAvailable($module)
     {
         global $config, $lang;
@@ -244,7 +255,6 @@ class commonModel extends model
      * 
      * @param  int    $customerID 
      * @param  string $type 
-     * @static
      * @access public
      * @return bool
      */
@@ -305,7 +315,7 @@ class commonModel extends model
         if($module == 'action' and $method == 'read') return true;
         if($module == 'block') return true;
         if($module == 'error') return true;
-        if($module == 'sso'  and strpos(',auth|check', $method)) return true;
+        if($module == 'sso' and strpos(',auth|check|gettodolist', $method)) return true;
         if($module == 'attend' and strpos(',signin|signout', $method)) return true;
         if($module == 'refund' and $method == 'createtrade') return true;
 
@@ -864,7 +874,6 @@ class commonModel extends model
      */
     public static function getSysURL()
     {
-        global $config;
         $httpType = isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == 'on' ? 'https' : 'http';
         $httpHost = $_SERVER['HTTP_HOST'];
         return "$httpType://$httpHost";

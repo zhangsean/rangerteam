@@ -2,7 +2,7 @@
 /**
  * The zh-cn file of my module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     my 
@@ -30,6 +30,7 @@ $lang->my->task->createdBy  = 'Created By Me';
 $lang->my->task->finishedBy = 'Finished By Me';
 $lang->my->task->closedBy   = 'Closed By Me';
 $lang->my->task->canceledBy = 'Canceled By Me';
+$lang->my->task->unclosed   = 'Unclosed';
 
 $lang->my->project = new stdclass();
 $lang->my->project->common = 'My Project';

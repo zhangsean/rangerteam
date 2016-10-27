@@ -2,11 +2,11 @@
 /**
  * The model file of mail module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     mail 
- * @version     $Id$
+ * @version     $Id: model.php 4145 2016-10-14 05:31:16Z liugang $
  * @link        http://www.ranzhico.com
  */
 ?>
@@ -266,7 +266,7 @@ class mailModel extends model
         }
 
         /* Remove deleted users. */
-        $users = $this->loadModel('user')->getPairs('nodeleted');
+        $users = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
         foreach($toList as $key => $to) if(!isset($users[trim($to)])) unset($toList[$key]);
         foreach($ccList as $key => $cc) if(!isset($users[trim($cc)])) unset($ccList[$key]);
 

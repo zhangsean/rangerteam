@@ -8,6 +8,7 @@ $lang->leave->delete = '刪除';
 $lang->leave->review = '審核';
 $lang->leave->cancel = '撤銷';
 $lang->leave->commit = '提交';
+$lang->leave->back   = '銷假';
 $lang->leave->export = '導出請假記錄';
 
 $lang->leave->personal     = '我的請假';
@@ -21,8 +22,9 @@ $lang->leave->end          = '結束';
 $lang->leave->start        = '開始時間';
 $lang->leave->finish       = '結束時間';
 $lang->leave->hours        = '總時長';
+$lang->leave->backDate     = '報到時間';
 $lang->leave->type         = '類型';
-$lang->leave->desc         = '描述';
+$lang->leave->desc         = '事由';
 $lang->leave->status       = '狀態';
 $lang->leave->createdBy    = '申請者';
 $lang->leave->createdDate  = '申請時間';
@@ -47,8 +49,10 @@ $lang->leave->statusList['wait']   = '等待審核';
 $lang->leave->statusList['pass']   = '通過';
 $lang->leave->statusList['reject'] = '拒絶';
 
-$lang->leave->denied = '信息訪問受限';
-$lang->leave->unique = '%s 已經存在請假記錄';
+$lang->leave->denied    = '信息訪問受限';
+$lang->leave->unique    = '%s 已經存在請假記錄';
+$lang->leave->sameMonth = '不支持跨月份請假';
+$lang->leave->wrongEnd  = '結束時間應該大於開始時間';
 
 $lang->leave->confirmReview['pass']   = '您確定要執行通過操作嗎？';
 $lang->leave->confirmReview['reject'] = '您確定要執行拒絶操作嗎？';

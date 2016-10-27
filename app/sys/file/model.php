@@ -2,11 +2,11 @@
 /**
  * The model file of file module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     file 
- * @version     $Id$
+ * @version     $Id: model.php 4182 2016-10-20 09:31:02Z liugang $
  * @link        http://www.ranzhico.com
  */
 ?>
@@ -606,5 +606,23 @@ class fileModel extends model
             $data->$editorID = $this->pasteImage($data->$editorID, $data->uid);
         }
         return $data;
+    }
+
+    /**
+     * Exclude html.
+     * 
+     * @param  string $content 
+     * @param  string $extra 
+     * @access public
+     * @return string
+     */
+    public function excludeHtml($content, $extra = '')
+    {
+        $content = str_replace(array('<i>', '&nbsp;', '<br />'), array('', ' ', "\n"),$content);
+        $content = preg_replace('/<[^ia\/]+(.*)>/U', '', $content);
+        $content = preg_replace('/<\/[^a]{1}.*>/U', '', $content);
+        $content = preg_replace('/<i .*>/U', '', $content);
+        if($extra != 'noImg') $content = preg_replace('/<img src="data\/"(.*)\/>/U', "<img src=\"" . common::getSysURL() . "data/\"\$1/>", $content);
+        return $content;
     }
 }

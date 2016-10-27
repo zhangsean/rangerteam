@@ -2,7 +2,7 @@
 /**
  * The trade module English file of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     trade
@@ -18,6 +18,8 @@ $lang->trade->currency    = 'Currency';
 $lang->trade->trader      = 'Provider';
 $lang->trade->customer    = 'Cusotmer';
 $lang->trade->money       = 'Money';
+$lang->trade->status      = 'Status';
+$lang->trade->rate        = 'ROI';
 $lang->trade->desc        = 'Desc';
 $lang->trade->product     = 'Product';
 $lang->trade->order       = 'Order';
@@ -45,12 +47,18 @@ $lang->trade->area        = 'Customer Area';
 $lang->trade->industry    = 'Customer Industry';
 $lang->trade->level       = 'Customer Level';
 $lang->trade->size        = 'Customer Size';
+$lang->trade->interest    = 'Loan Interest';
+$lang->trade->loanID      = 'Loan';
+$lang->trade->investID    = 'Invest';
+$lang->trade->loanrate    = 'Interest Rate';
 
 $lang->trade->create       = 'Create Trade';
 $lang->trade->in           = 'Income';
 $lang->trade->out          = 'Expend';
 $lang->trade->invest       = 'Invest';
 $lang->trade->redeem       = 'Redeem';
+$lang->trade->loan         = 'Loan';
+$lang->trade->repay        = 'Repay';
 $lang->trade->createIn     = 'Income';
 $lang->trade->createOut    = 'Expend';
 $lang->trade->transfer     = 'Transfer';
@@ -78,6 +86,8 @@ $lang->trade->report->create      = 'Create Report';
 $lang->trade->report->selectYears = 'Select Years';
 $lang->trade->report->undefined   = 'Undefined';
 $lang->trade->report->compareTip  = 'Select 2 years to compare.';
+$lang->trade->report->unit        = 'K';
+$lang->trade->report->ratio       = 1000;
 
 $lang->trade->report->typeList['annual']  = 'Annual balance report'; 
 $lang->trade->report->typeList['compare'] = 'Annual comparison report'; 
@@ -88,6 +98,8 @@ $lang->trade->typeList['transferout'] = 'Transfer out';
 $lang->trade->typeList['transferin']  = 'Transfer in';
 $lang->trade->typeList['invest']      = 'Invest';
 $lang->trade->typeList['redeem']      = 'Redeem';
+$lang->trade->typeList['loan']        = 'Loan';
+$lang->trade->typeList['repay']       = 'Repay';
 
 $lang->trade->quarters = new stdclass();
 $lang->trade->quarters->Q4 = '10,11,12';
@@ -119,16 +131,8 @@ $lang->trade->categoryList['transferin']  = 'Transfer In';
 $lang->trade->categoryList['transferout'] = 'Transfer Out';
 $lang->trade->categoryList['invest']      = 'Invest';
 $lang->trade->categoryList['redeem']      = 'Redeem';
-
-$lang->trade->expenseCategoryList['fee']  = 'Fee';
-$lang->trade->expenseCategoryList['loss'] = 'Loss';
-
-$lang->trade->incomeCategoryList['profit'] = 'Profit';
-
-$lang->trade->categoryList = $lang->trade->categoryList + $lang->trade->expenseCategoryList + $lang->trade->incomeCategoryList;
-
-$lang->trade->investCategoryList['profit'] = 'Profit';
-$lang->trade->investCategoryList['loss']   = 'Loss';
+$lang->trade->categoryList['loan']        = 'Loan';
+$lang->trade->categoryList['repay']       = 'Repay';
 
 $lang->trade->transferCategoryList['transferin']  = 'Transfer In';
 $lang->trade->transferCategoryList['transferout'] = 'Transfer Out';
@@ -139,6 +143,9 @@ $lang->trade->objectTypeList['contract'] = 'Contract';
 
 $lang->trade->investTypeList['invest'] = 'Invest';
 $lang->trade->investTypeList['redeem'] = 'Redeem';
+
+$lang->trade->loanTypeList['loan']  = 'Loan';
+$lang->trade->loanTypeList['repay'] = 'Repay';
 
 $lang->trade->encodeList['gbk']  = 'GBK';
 $lang->trade->encodeList['utf8'] = 'UTF-8';
@@ -159,6 +166,13 @@ $lang->trade->importedFields['dept']     = 'Department';
 $lang->trade->importedFields['desc']     = 'Desc';
 $lang->trade->importedFields['fee']      = 'Fee';
 $lang->trade->importedFields['product']  = 'Product';
+
+$lang->trade->statusList['returned']   = 'Returned';
+$lang->trade->statusList['returning']  = 'Returning';
+$lang->trade->statusList['unReturned'] = 'Unreturned';
+$lang->trade->statusList['repaied']    = 'Repaied';
+$lang->trade->statusList['repaying']   = 'Repaying';
+$lang->trade->statusList['unRepaied']  = 'Unrepaied';
 
 $lang->trade->totalIn       = '%s: income %s;';
 $lang->trade->totalOut      = '%s: expend %s;';
@@ -186,4 +200,4 @@ $lang->trade->excel->title = new stdclass();
 $lang->trade->excel->title->depositor = ' Depositor Profit and Loss';
 
 $lang->trade->excel->help = new stdclass();
-$lang->trade->excel->help->depositor = "This report don't differentiate currencies, and just contains the trades whose type is 'in' or 'out'.";
+$lang->trade->excel->help->depositor = "This report don't differentiate currencies.";

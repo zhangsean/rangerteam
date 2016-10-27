@@ -1,7 +1,5 @@
 $(function()
 {
-    $.refreshCategoryMenu(categories);
-
     /* start ips */
     $.ipsStart(entries, $.extend({onBlocksOrdered: sortBlocks, onDeleteBlock: deleteBlock, onDeleteEntry: deleteEntry, onUpdateEntryMenu: updateEntryMenu, onSortEntries: sortEntries}, config, ipsLang));
     if(v.attend)
@@ -18,7 +16,7 @@ $(function()
     {
         $('.categoryButton').not('.open').removeClass('active');
         $(this).addClass('active');
-        var id    = $(this).attr('data-id');
+        var id    = $(this).data('id');
         var menu  = $('#categoryMenu' + id);
         var lis   = menu.find('li');
         var color = $('body').css('background-color');
@@ -33,19 +31,26 @@ $(function()
         $(this).addClass('active');
     });
 
+    $(document).on('mouseout', '.categoryMenu li .app-btn', function()
+    {
+        $('.categoryMenu li .app-btn').removeClass('active');
+        var id = $(this).parents('.categoryMenu').data('id');
+        if(!$('#category' + id).hasClass('open')) $('#category' + id).removeClass('active');
+    });
+
     $(document).on('click', '.categoryMenu li .app-btn', function()
     {
         $('.categoryMenu').hide();
         $('.categoryButton').removeClass('active');
 
-        var id = $(this).parents('.categoryMenu').attr('data-id');
+        var id = $(this).parents('.categoryMenu').data('id');
         $('#category' + id).addClass('open active');
     });
 
     $(document).on('mouseover', '#leftBar #apps-menu .bar-menu li .app-btn', function()
     {
-        $('.categoryButton').not('.open').removeClass('active');
-        $('.categoryMenu').hide();
+        $('.categoryButton').not(this).not('.open').removeClass('active');
+        if(!$(this).hasClass('categoryButton')) $('.categoryMenu').hide();
     });
 
     $(document).on('click', '#leftBar #apps-menu .bar-menu li .app-btn', function()
@@ -57,12 +62,12 @@ $(function()
     $(document).on('click', '#bottomBar #taskbar .bar-menu li .app-btn', function()
     {
         $('.categoryButton').removeClass('active');
-        var dataid = $(this).attr('data-id');
+        var dataid = $(this).data('id');
         $('.categoryMenu li .app-btn').each(function()
         {
-            if($(this).attr('data-id') == dataid)
+            if($(this).data('id') == dataid)
             {
-                var id = $(this).parents('.categoryMenu').attr('data-id');
+                var id = $(this).parents('.categoryMenu').data('id');
                 $('#category' + id).addClass('active');
                 return;
             }
@@ -75,7 +80,7 @@ $(function()
         {
             if($(this).is(':visible'))
             {
-                var dataid  = $(this).attr('data-id');
+                var dataid  = $(this).data('id');
                 var button  = $('#category' + dataid);
                 var top     = button.offset().top;
                 var left    = button.offset().left;
@@ -205,7 +210,7 @@ function sortBlocks(orders)
             var index = $this.data('order');
             var url = createLink('entry', 'printBlock', 'index=' + index);
             /* Update new index for block id edit and delete. */
-            $this.attr('id', 'block' + index).attr('data-id', index).attr('data-url', url).data('url', url);
+            $this.attr('id', 'block' + index).data('id', index).attr('data-url', url).data('url', url);
             $this.find('.panel-actions .edit-block').attr('href', createLink('block', 'admin', 'index=' + index));
         });
     });

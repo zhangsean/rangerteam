@@ -2,7 +2,7 @@
 /**
  * The setting module english file of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     setting 
@@ -75,6 +75,8 @@ $lang->setting->reserveDaysTip = "System will move customer into pool if hasn't 
 
 $lang->setting->moduleList['attend']   = 'Attend';
 $lang->setting->moduleList['trip']     = 'Trip';
+$lang->setting->moduleList['egress']   = 'Egress';
 $lang->setting->moduleList['leave']    = 'Leave';
 $lang->setting->moduleList['overtime'] = 'Overtime';
+$lang->setting->moduleList['lieu']     = 'Lieu';
 $lang->setting->moduleList['refund']   = 'Refund';

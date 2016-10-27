@@ -6,7 +6,7 @@
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     RanZhi
- * @version     $Id$
+ * @version     $Id: index.php 3138 2015-11-09 07:32:18Z chujilu $
  * @link        http://www.ranzhico.com
  */
 $appName = 'oa'; 

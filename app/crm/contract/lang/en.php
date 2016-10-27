@@ -2,7 +2,7 @@
 /**
  * The en file of crm contract module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     contract 
@@ -99,7 +99,7 @@ $lang->contract->codeUnitList['input'] = 'Input';
 $lang->contract->placeholder = new stdclass();
 $lang->contract->placeholder->real = 'Turnover';
 
-$lang->contract->totalAmount        = 'The total amount:%s,returned amount:%s in this page;';
+$lang->contract->totalAmount        = 'The total amount:%s,returned amount:%s in this page,returned amount:%s in this month.;';
 $lang->contract->returnInfo         = "<p>%s, received payments by <strong>%s</strong>, %s.</p>";
 $lang->contract->deliveryInfo       = "<p>%s, delivered by %s.</p>";
 $lang->contract->deleteReturnInfo   = "%s in %s";

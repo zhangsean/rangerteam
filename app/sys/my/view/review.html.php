@@ -2,7 +2,7 @@
 /**
  * The personal view file of attend module of Ranzhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      chujilu <chujilu@cnezsoft.com>
  * @package     attend
@@ -118,6 +118,42 @@
       <td>
         <?php echo html::a($this->createLink('oa.overtime', 'review', "id={$overtime->id}&status=pass"), $lang->overtime->statusList['pass'], "data-status='pass' data-toggle='ajax'");?>
         <?php echo html::a($this->createLink('oa.overtime', 'review', "id={$overtime->id}&status=reject"), $lang->overtime->statusList['reject'], "data-status='reject' data-toggle='ajax'");?>
+      </td>
+    </tr>
+    <?php endforeach;?>
+  </table>
+</div>
+<?php endif;?>
+<?php if($type == 'lieu'):?>
+<div class='panel'>
+  <table class='table table-data table-hover text-center table-fixed tablesorter' id='lieuTable'>
+    <thead>
+      <tr class='text-center'>
+        <?php $vars = "type={$type}&orderBy=%s";?>
+        <th class='w-80px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->lieu->id);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->lieu->createdBy);?></th>
+        <th class='w-80px'><?php echo $lang->user->dept;?></th>
+        <th class='w-150px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->lieu->begin);?></th>
+        <th class='w-150px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->lieu->end);?></th>
+        <th><?php echo $lang->lieu->desc;?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->lieu->status);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('reviewedBy', $orderBy, $vars, $lang->lieu->reviewedBy);?></th>
+        <th class='w-150px'><?php echo $lang->actions;?></th>
+      </tr>
+    </thead>
+    <?php foreach($lieuList as $lieu):?>
+    <tr>
+      <td><?php echo $lieu->id;?></td>
+      <td><?php echo zget($users, $lieu->createdBy);?></td>
+      <td><?php echo zget($deptList, $lieu->dept);?></td>
+      <td><?php echo $lieu->begin . ' ' . $lieu->start;?></td>
+      <td><?php echo $lieu->end . ' ' . $lieu->finish;?></td>
+      <td title='<?php echo $lieu->desc?>'><?php echo $lieu->desc;?></td>
+      <td class='lieu-<?php echo $lieu->status?>'><?php echo zget($this->lang->lieu->statusList, $lieu->status);?></td>
+      <td><?php echo zget($users, $lieu->reviewedBy);?></td>
+      <td>
+        <?php echo html::a($this->createLink('oa.lieu', 'review', "id={$lieu->id}&status=pass"), $lang->lieu->statusList['pass'], "data-status='pass' data-toggle='ajax'");?>
+        <?php echo html::a($this->createLink('oa.lieu', 'review', "id={$lieu->id}&status=reject"), $lang->lieu->statusList['reject'], "data-status='reject' data-toggle='ajax'");?>
       </td>
     </tr>
     <?php endforeach;?>

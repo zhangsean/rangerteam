@@ -2,7 +2,7 @@
 /**
  * The edit view file of trade module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     trade 
@@ -13,9 +13,10 @@
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/datepicker.html.php';?>
 <?php include '../../../sys/common/view/chosen.html.php';?>
-<?php js::set('mode', $trade->type);?>
+<?php $mode = $trade->type == 'redeem' ? 'invest' : ($trade->type == 'repay' ? 'loan' : $trade->type);?>
+<?php js::set('mode', $mode);?>
 <ul id='menuTitle'>
-  <li><?php commonModel::printLink('trade', 'browse', '', $lang->trade->browse);?></li>
+  <li><?php commonModel::printLink('trade', 'browse', "mode=$mode", $lang->trade->browse);?></li>
   <li class='divider angle'></li>
 </ul>
 <div class='panel'>

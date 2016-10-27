@@ -2,11 +2,11 @@
 /**
  * The control file of index module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     index 
- * @version     $Id$
+ * @version     $Id: control.php 4205 2016-10-24 08:19:13Z liugang $
  * @link        http://www.ranzhico.com
  */
 class index extends control
@@ -30,19 +30,11 @@ class index extends control
      */
     public function index()
     {
-        $entries    = $this->loadModel('entry')->getEntries();
         $allEntries = '';
+        $entries    = $this->loadModel('entry')->getEntries();
 
-        $this->loadModel('tree');
-        $categories = array();
         foreach($entries as $entry)
         {
-            if(!empty($entry->category))
-            {
-                $category = $this->tree->getById($entry->category);
-                if($category) $categories[$category->id] = $category->name;
-            }
-
             $sso     = $this->createLink('entry', 'visit', "entryID=$entry->id");
             $logo    = !empty($entry->logo) ? $entry->logo : '';
             $size    = !empty($entry->size) ? ($entry->size != 'max' ? $entry->size : "'$entry->size'") : "'max'";
@@ -138,7 +130,6 @@ class index extends control
         }
 
         $this->view->allEntries  = $allEntries;
-        $this->view->categories  = $categories; 
         $this->view->blocks      = $blocks;
         $this->view->notice      = commonModel::isAvailable('attend') ? $this->attend->getNotice() : '';
         $this->view->signButtons = $signButtons;

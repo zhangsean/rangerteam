@@ -6,7 +6,7 @@
  * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     RanZhi
- * @version     $Id$
+ * @version     $Id: loader.php 4001 2016-07-21 01:47:54Z liugang $
  * @link        http://www.ranzhico.com
  */
 /* Set the error reporting. */

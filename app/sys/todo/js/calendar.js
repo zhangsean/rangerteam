@@ -36,7 +36,7 @@ $(document).ready(function()
                 'date': to.date.format('yyyy-MM-dd'),
                 'type': from.data('type'),
                 'idvalue': from.data('id'),
-                'name': '',
+                'name': from.data('name'),
                 'begin': '',
                 'end':'' 
                 }

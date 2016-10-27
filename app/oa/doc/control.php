@@ -2,7 +2,7 @@
 /**
  * The control file of doc module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     doc 
@@ -26,8 +26,6 @@ class doc extends control
         $this->loadModel('user');
         $this->loadModel('tree');
         $this->loadModel('action');
-        //$this->loadModel('product', 'crm');
-        //$this->loadModel('project', 'oa');
 
         $this->lang->doc->menu = $this->doc->getSubMenus($this->libs);
     }
@@ -151,7 +149,7 @@ class doc extends control
         }
 
         $this->view->title  = $this->lang->doc->createLib;
-        $this->view->users  = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->users  = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->groups = $this->loadModel('group')->getPairs();
         $this->display();
     }
@@ -184,7 +182,7 @@ class doc extends control
         $this->view->libID  = $libID;
         $this->view->title  = $this->lang->doc->editLib;
         $this->view->lib    = $lib;
-        $this->view->users  = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->users  = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->groups = $this->loadModel('group')->getPairs();
         
         $this->display();
@@ -257,10 +255,8 @@ class doc extends control
         $this->view->productID        = $productID;
         $this->view->projectID        = $projectID;
         $this->view->products         = array();
-        //$this->view->products         = $projectID == 0 ? $this->product->getPairs() : $this->project->getProducts($projectID);
         $this->view->projects         = array();
-        //$this->view->projects         = $this->project->getPairs('all');
-        $this->view->users            = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->users            = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->groups           = $this->loadModel('group')->getPairs();
 
         $this->display();
@@ -310,7 +306,7 @@ class doc extends control
         $this->view->doc              = $doc;
         $this->view->libID            = $libID;
         $this->view->moduleOptionMenu = $moduleOptionMenu;
-        $this->view->users            = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->users            = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->groups           = $this->loadModel('group')->getPairs();
         $this->display();
     }
@@ -341,7 +337,7 @@ class doc extends control
         $this->view->title      = "DOC #$doc->id $doc->title - " . $this->libs[$doc->lib];
         $this->view->doc        = $doc;
         $this->view->lib        = $lib;
-        $this->view->users      = $this->user->getPairs('noclosed');
+        $this->view->users      = $this->user->getPairs();
         $this->view->keTableCSS = $this->doc->extractKETableCSS($doc->content);
 
         $this->display();

@@ -2,11 +2,11 @@
 /**
  * The control file of entry module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id$
+ * @version     $Id: control.php 4227 2016-10-25 08:27:56Z liugang $
  * @link        http://www.ranzhico.com
  */
 class entry extends control
@@ -19,13 +19,41 @@ class entry extends control
      */
     public function admin($category = 0)
     {
-        $entries = $this->entry->getEntries($type = 'custom', $category);
+        $entries      = $this->entry->getEntries($type = 'custom', $category);
+        $categories   = $this->dao->select('id, name')->from(TABLE_CATEGORY)->where('type')->eq('entry')->orderBy('`order`')->fetchPairs();
+        $tmpEntries   = array();
+        $showCategory = false;
+        foreach($entries as $key => $entry)
+        {
+            /* Remove category. */
+            if($entry->code == '') 
+            {
+                unset($entries[$key]);
+                continue;
+            }
+            if(isset($categories[$entry->category]))
+            {
+                $showCategory = true;
+                $tmpEntries[$entry->category][] = $entry;
+                unset($entries[$key]);
+            }
+        }
+        foreach($tmpEntries as $categoryEntries)
+        {
+            foreach($categoryEntries as $entry)
+            {
+                $entries[] = $entry;
+            }
+        }
+
         /* add web root if logo not start with /  */
         foreach($entries as $entry) if(!empty($entry->logo) && substr($entry->logo, 0, 1) != '/') $entry->logo = $this->config->webRoot . $entry->logo;
         
-        $this->view->title    = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->admin;
-        $this->view->treeMenu = $this->loadModel('tree')->getTreeMenu('entry', 0, array('treeModel', 'createEntryAdminLink'));
-        $this->view->entries  = $entries;
+        $this->view->title        = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->admin;
+        $this->view->treeMenu     = $this->loadModel('tree')->getTreeMenu('entry', 0, array('treeModel', 'createEntryAdminLink'));
+        $this->view->entries      = $entries;
+        $this->view->categories   = $categories;
+        $this->view->showCategory = $showCategory;
         $this->display();
     }
 
@@ -74,7 +102,7 @@ class entry extends control
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
             $locate = inlink('admin');
             if($this->post->zentao) $locate = inlink('bindUser', "id=$entryID&sessionID=$zentaoConfig->sessionID");
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate, 'entries' => $this->entry->getJSONEntries(), 'categories' => $this->entry->getJSONCategories()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate, 'entries' => $this->entry->getJSONEntries()));
         }
         $this->view->title      = $this->lang->entry->common . $this->lang->colon . $this->lang->entry->create;
         $this->view->key        = $this->entry->createKey();
@@ -239,7 +267,7 @@ class entry extends control
 
             $this->entry->update($code);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
-            $this->send(array('result' => 'success', 'locate' => inlink('admin'), 'entries' => $this->entry->getJSONEntries(), 'categories' => $this->entry->getJSONCategories()));
+            $this->send(array('result' => 'success', 'locate' => inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
         }
 
         if($entry->size != 'max')
@@ -274,7 +302,7 @@ class entry extends control
                 $entry        = new stdclass();
                 $entry->id    = $id;
                 $entry->order = $order;
-                $entries[]    = $entry;
+                $entries[$id]    = $entry;
             }
             usort($entries, 'commonModel::sortEntryByOrder');
 
@@ -294,6 +322,8 @@ class entry extends control
                 unset($entry->order);
             }
             $this->loadModel('setting')->setItem("{$this->app->user->account}.sys.common.customApp", json_encode($allEntries));
+            /* Refresh config to sort custom apps. */
+            $this->config->personal->common->customApp->value = helper::jsonEncode($entries);
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin'), 'entries' => $this->entry->getJSONEntries()));
         }
@@ -332,7 +362,7 @@ class entry extends control
      */
     public function delete($code)
     {
-        if($this->entry->delete($code)) $this->send(array('result' => 'success', 'entries' => $this->entry->getJSONEntries(), 'categories' => $this->entry->getJSONCategories()));
+        if($this->entry->delete($code)) $this->send(array('result' => 'success', 'entries' => $this->entry->getJSONEntries()));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
@@ -601,6 +631,7 @@ class entry extends control
                 if(isset($this->post->createUsers[$key]) and $this->post->createUsers[$key])
                 {
                     $user = $this->loadModel('user')->getByAccount($ranzhiAccount);
+                    if($user->gender == 'u') $user->gender = 'm';
                     $createUrl = $this->sso->createZentaoLink($zentaoConfig, $zentaoUrl, 'sso', 'createUser');
                     $result = commonModel::http($createUrl, $user);
                     if($result != 'success') $this->send(array('result' => 'fail', 'message' => $result));
@@ -630,7 +661,7 @@ class entry extends control
         $bindUsers = json_decode($results, true);
 
         $this->view->title       = $this->lang->entry->bindUser;
-        $this->view->ranzhiUsers = $this->loadModel('user')->getPairs('noempty,noclosed,nodeleted');
+        $this->view->ranzhiUsers = $this->loadModel('user')->getPairs('noempty,noclosed,nodeleted,noforbidden');
         $this->view->zentaoUsers = $zentaoUsers;
         $this->view->bindUsers   = $bindUsers;
         $this->display();

@@ -2,7 +2,7 @@
 /**
  * The action module English file of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     action
@@ -104,6 +104,8 @@ $lang->action->desc->hidden                = '$date, hidden by <strong>$actor</s
 $lang->action->desc->undeleted             = '$date, restored by <strong>$actor</strong> .' . "\n";
 $lang->action->desc->transform             = '$date, transformed by <strong>$actor</strong> .' . "\n";
 $lang->action->desc->ignored               = '$date, ignored by <strong>$actor</strong> .' . "\n";
+$lang->action->desc->createtrip            = '$date, <strong>$actor</strong> created trip:<strong>$extra</strong>.' . "\n";
+$lang->action->desc->createegress          = '$date, <strong>$actor</strong> created egress:<strong>$extra</strong>.' . "\n";
 
 /* The action labels. */
 $lang->action->label = new stdclass();
@@ -161,23 +163,28 @@ $lang->action->label->finishreceivecontract = 'finish returned';
 $lang->action->label->finishreturned        = 'finish returned';
 $lang->action->label->deletereturned        = 'delete rerurned';
 
+/* Display action when search in dynamic view. */
+$lang->action->search = new stdclass();
+$lang->action->search->label = (array)$lang->action->label;
+
 /* Link of every action. */
-$lang->action->label->product   = 'product|product|view|productID=%s';
-$lang->action->label->order     = 'order|order|view|orderID=%s';
-$lang->action->label->task      = 'task|task|view|taskID=%s';
-$lang->action->label->contract  = 'contract|contract|view|contractID=%s';
-$lang->action->label->announce  = 'announce|announce|view|announceID=%s';
-$lang->action->label->customer  = 'customer|customer|view|customerID=%s';
-$lang->action->label->provider  = 'provider|provider|view|providerID=%s';
-$lang->action->label->contact   = 'contact|contact|view|contactID=%s';
-$lang->action->label->todo      = 'todo|todo|calendar|';
-$lang->action->label->project   = 'project|task|browse|projectID=%s';
-$lang->action->label->depositor = 'depositor|depositor|browse|';
+$lang->action->label->product   = 'Product|product|view|productID=%s';
+$lang->action->label->order     = 'Order|order|view|orderID=%s';
+$lang->action->label->task      = 'Task|task|view|taskID=%s';
+$lang->action->label->contract  = 'Contract|contract|view|contractID=%s';
+$lang->action->label->announce  = 'Announce|announce|view|announceID=%s';
+$lang->action->label->holiday   = 'Holiday|hiloday|browse|';
+$lang->action->label->customer  = 'Customer|customer|view|customerID=%s';
+$lang->action->label->provider  = 'Provider|provider|view|providerID=%s';
+$lang->action->label->contact   = 'Contact|contact|view|contactID=%s';
+$lang->action->label->todo      = 'Todo|todo|calendar|';
+$lang->action->label->project   = 'Project|task|browse|projectID=%s';
+$lang->action->label->depositor = 'Depositor|depositor|browse|';
 $lang->action->label->balance   = 'Balance|balance|browse|depositorID=%s';
-$lang->action->label->trade     = 'trade|trade|browse|';
-$lang->action->label->doc       = 'document|doc|view|docID=%s';
-$lang->action->label->doclib    = 'document library|doc|browse|doclibID=%s';
-$lang->action->label->schema    = 'trade schema|schema|browse|';
+$lang->action->label->trade     = 'Trade|trade|browse|';
+$lang->action->label->doc       = 'Document|doc|view|docID=%s';
+$lang->action->label->doclib    = 'Document library|doc|browse|doclibID=%s';
+$lang->action->label->schema    = 'Trade schema|schema|browse|';
 $lang->action->label->space     = ' ';
 
 $lang->action->label->attend = array();
@@ -205,42 +212,12 @@ $lang->action->label->user = array();
 $lang->action->label->user['login']  = 'login|user|login|';
 $lang->action->label->user['logout'] = 'logout|user|logout|';
 
-/* Object type. */
-$lang->action->search->objectTypeList['']            = '';    
-$lang->action->search->objectTypeList['product']     = 'product';    
-$lang->action->search->objectTypeList['task']        = 'task'; 
-$lang->action->search->objectTypeList['user']        = 'user'; 
-$lang->action->search->objectTypeList['order']       = 'order'; 
-$lang->action->search->objectTypeList['contract']    = 'contract'; 
-$lang->action->search->objectTypeList['orderAction'] = 'order action'; 
-
 $lang->action->nextContactList[1]      = 'tomorrow';
 $lang->action->nextContactList[2]      = 'the day after tomorrow';
 $lang->action->nextContactList[3]      = 'three days later';
 $lang->action->nextContactList[7]      = 'a week later';
 $lang->action->nextContactList[14]     = 'two weeks later';
 $lang->action->nextContactList[365000] = 'no cantact';
-
-/* Display action for search. */
-$lang->action->search->label['']            = '';
-$lang->action->search->label['created']     = $lang->action->label->created;
-$lang->action->search->label['edited']      = $lang->action->label->edited;
-$lang->action->search->label['assigned']    = $lang->action->label->assigned;
-$lang->action->search->label['transmit']    = $lang->action->label->transmit;
-$lang->action->search->label['closed']      = $lang->action->label->closed;
-$lang->action->search->label['deleted']     = $lang->action->label->deleted;
-$lang->action->search->label['deletedfile'] = $lang->action->label->deletedfile;
-$lang->action->search->label['editfile']    = $lang->action->label->editfile;
-$lang->action->search->label['commented']   = $lang->action->label->commented;
-$lang->action->search->label['activated']   = $lang->action->label->activated;
-$lang->action->search->label['resolved']    = $lang->action->label->resolved;
-$lang->action->search->label['reviewed']    = $lang->action->label->reviewed;
-$lang->action->search->label['moved']       = $lang->action->label->moved;
-$lang->action->search->label['started']     = $lang->action->label->started;
-$lang->action->search->label['canceled']    = $lang->action->label->canceled;
-$lang->action->search->label['finished']    = $lang->action->label->finished;
-$lang->action->search->label['login']       = $lang->action->label->login;
-$lang->action->search->label['logout']      = $lang->action->label->logout;
 
 $lang->action->record = new stdclass();
 $lang->action->record->common     = 'Communication';
@@ -277,6 +254,7 @@ $lang->action->objectTypes['depositor'] = 'Depositor';
 $lang->action->objectTypes['balance']   = 'Balance';
 $lang->action->objectTypes['todo']      = 'Todo';
 $lang->action->objectTypes['announce']  = 'Announce';
+$lang->action->objectTypes['holiday']   = 'Holiday';
 $lang->action->objectTypes['trade']     = 'Trade';
 $lang->action->objectTypes['schema']    = 'Trade schema';
 $lang->action->objectTypes['doclib']    = 'Document library';

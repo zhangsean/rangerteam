@@ -2,11 +2,11 @@
 /**
  * The control file of tree module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     tree
- * @version     $Id$
+ * @version     $Id: control.php 4145 2016-10-14 05:31:16Z liugang $
  * @link        http://www.ranzhico.com
  */
 class tree extends control
@@ -72,7 +72,6 @@ class tree extends control
     {
         /* Get current category. */
         $category = $this->tree->getById($categoryID);
-        if($category->major) return false;
 
         if($category->type == 'out') $this->tree->checkRight($category->id);
 
@@ -105,7 +104,7 @@ class tree extends control
 
         if(strpos('forum,blog', $category->type) !== false) $this->view->aliasAddon .=  $category->type . '/';
 
-        if($category->type == 'dept' or $category->type == 'forum' or $category->type == 'blog') $this->view->users = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        if($category->type == 'dept' or $category->type == 'forum' or $category->type == 'blog') $this->view->users = $this->loadModel('user')->getPairs('nodeleted,nodeleted,noclosed');
 
         $groups = $this->loadModel('group')->getPairs();
         $this->view->groups = $groups;

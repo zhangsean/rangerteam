@@ -2,7 +2,7 @@
 /**
  * The todo module zh-cn file of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     todo
@@ -24,8 +24,7 @@ $lang->todo->batchFinish  = "批量完成";
 $lang->todo->export       = "导出";
 $lang->todo->delete       = "删除待办";
 $lang->todo->browse       = "浏览待办";
-$lang->todo->import2Today = "导入到今天";
-$lang->todo->import       = "导入";
+$lang->todo->import       = "移动";
 $lang->todo->changeStatus = "更改";
 $lang->todo->legendBasic  = "基本信息";
 $lang->todo->calendar     = "日历";

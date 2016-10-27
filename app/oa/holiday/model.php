@@ -2,7 +2,7 @@
 /**
  * The model file of holiday module of ranzhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      chujilu <chujilu@cnezsoft.com>
  * @package     holiday
@@ -30,10 +30,12 @@ class holidayModel extends model
      * @access public
      * @return array
      */
-    public function getList($year = '')
+    public function getList($year = '', $type = 'all')
     {
         return $this->dao->select('*')->from(TABLE_HOLIDAY)
-            ->beginIf($year != '')->where('year')->eq($year)->fi()
+            ->where('1')
+            ->beginIf($year != '')->andWhere('year')->eq($year)->fi()
+            ->beginIf($type != 'all' && $type)->andWhere('type')->eq($type)->fi()
             ->fetchAll('id');
     }
 
@@ -50,7 +52,7 @@ class holidayModel extends model
         if($holidayList == null)
         {
             $year = substr($date, 0, 4);
-            $holidayList = $this->getList($year);
+            $holidayList = $this->getList($year, 'holiday');
         }
 
         $result = false;
@@ -62,6 +64,35 @@ class holidayModel extends model
                 break;
             }
         }
+        return $result;
+    }
+
+    /**
+     * Check a date is in working. 
+     * 
+     * @param  string    $date 
+     * @access public
+     * @return bool
+     */
+    public function isWorkingDay($date)
+    {
+        static $workingDays = null;
+        if($workingDays == null)
+        {
+            $year = substr($date, 0, 4);
+            $workingDays = $this->getList($year, 'working');
+        }
+
+        $result = false;
+        foreach($workingDays as $workingDay)
+        {
+            if(strtotime($date) >= strtotime($workingDay->begin) and strtotime($date) <= strtotime($workingDay->end))
+            {
+                $result = true;
+                break;
+            }
+        }
+
         return $result;
     }
 
@@ -93,7 +124,7 @@ class holidayModel extends model
             ->batchCheck($this->config->holiday->require->create, 'notempty')
             ->check('end', 'ge', $holiday->begin)
             ->exec();
-        return !dao::isError();
+        return $this->dao->lastInsertID();
     }
 
     /**

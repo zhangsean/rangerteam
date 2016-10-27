@@ -2,11 +2,11 @@
 /**
  * The zh-cn file of entry module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id$
+ * @version     $Id: zh-cn.php 4091 2016-09-30 07:16:50Z daitingting $
  * @link        http://www.ranzhico.com
  */
 $lang->entry->common      = '应用';
@@ -72,6 +72,7 @@ $lang->entry->note->visible = '左侧显示';
 $lang->entry->note->api     = '应用获取区块的接口地址';
 $lang->entry->note->ip      = "允许访问应用的ip，多个ip用逗号隔开。支持IP段，如192.168.1.*";
 $lang->entry->note->allip   = '无限制';
+$lang->entry->note->scheme  = '当前访问协议为https，内嵌窗口只能打开https协议的应用网址。';
 
 $lang->entry->error = new stdClass();
 $lang->entry->error->name  = '名称不能为空';

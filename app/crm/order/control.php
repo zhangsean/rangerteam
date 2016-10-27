@@ -2,7 +2,7 @@
 /**
  * The control file of order module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     order
@@ -127,7 +127,7 @@ class order extends control
         $this->view->order        = $order;
         $this->view->products     = $this->loadModel('product', 'crm')->getPairs();
         $this->view->customers    = $this->loadModel('customer', 'crm')->getPairs('client');
-        $this->view->users        = $this->loadModel('user')->getPairs();
+        $this->view->users        = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->currencyList = $this->loadModel('common', 'sys')->getCurrencyList();
 
         $this->display();
@@ -222,7 +222,7 @@ class order extends control
 
         $this->view->title   = $this->lang->order->activate;
         $this->view->orderID = $orderID;
-        $this->view->users   = $this->loadModel('user')->getPairs();
+        $this->view->users   = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->display();
     }
 
@@ -264,7 +264,7 @@ class order extends control
     public function assign($orderID, $table = null)
     {
         $order   = $this->order->getByID($orderID);
-        $members = $this->loadModel('user')->getPairs('noclosed, nodeleted, devfirst');
+        $members = $this->loadModel('user')->getPairs('noclosed,nodeleted,noforbidden');
         $this->loadModel('common', 'sys')->checkPrivByCustomer(empty($order)? '0' : $order->customer, 'edit');
 
         if($_POST)

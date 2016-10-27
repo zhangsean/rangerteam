@@ -2,11 +2,11 @@
 /**
  * The model file of thread module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     thread
- * @version     $Id$
+ * @version     $Id: model.php 4169 2016-10-19 08:57:15Z liugang $
  * @link        http://www.ranzhico.com
  */
 class threadModel extends model
@@ -182,10 +182,9 @@ class threadModel extends model
         $now   = helper::now();
         $isAdmin     = $this->app->user->admin == 'super';
         $canManage   = $this->canManage($boardID);
-        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
 
         $thread = fixer::input('post')
-            ->stripTags('content', $allowedTags)
+            ->stripTags('content', $this->config->allowedTags)
             ->setIF(!$canManage, 'readonly', 0)
             ->setForce('board', $boardID)
             ->setForce('author', $this->app->user->account)
@@ -248,11 +247,10 @@ class threadModel extends model
         $thread      = $this->getByID($threadID);
         $isAdmin     = $this->app->user->admin == 'super';
         $canManage   = $this->canManage($thread->board);
-        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
 
         $thread = fixer::input('post')
             ->setIF(!$canManage, 'readonly', 0)
-            ->stripTags('content', $allowedTags)
+            ->stripTags('content', $this->config->allowedTags)
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
             ->setDefault('readonly', 0)

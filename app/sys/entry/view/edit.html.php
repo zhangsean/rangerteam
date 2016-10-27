@@ -2,11 +2,11 @@
 /**
  * The edit view of entry module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     entry 
- * @version     $Id$
+ * @version     $Id: edit.html.php 4146 2016-10-14 09:10:58Z liugang $
  * @link        http://www.ranzhico.com
  */
 include '../../common/view/header.html.php';
@@ -46,10 +46,12 @@ include '../../common/view/chosen.html.php';
           <th><?php echo $lang->entry->login;?></th>
           <td><?php echo html::input('login', $entry->login, "class='form-control' placeholder='{$lang->entry->note->login}'");?></td>
         </tr>
+        <?php if($entry->buildin == 0):?>
         <tr>
           <th><?php echo $lang->entry->category;?></th>
           <td><?php echo html::select('category', $categories, $entry->category, "class='form-control chosen'");?></td>
         </tr>
+        <?php endif;?>
         <tr>
           <th></th><td><?php echo html::submitButton() . html::backButton();?></td>
         </tr>

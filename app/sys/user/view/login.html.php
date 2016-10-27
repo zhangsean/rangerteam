@@ -2,11 +2,11 @@
 /**
  * The login view file of user module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user 
- * @version     $Id$
+ * @version     $Id: login.html.php 4060 2016-09-29 00:51:35Z daitingting $
  * @link        http://www.ranzhico.com
  */
 ?>
@@ -68,7 +68,8 @@ css::internal('body{background-color:#f6f5f5}');
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);
-if(!isset($_SERVER['https']) and $config->checkVersion) js::import("http://api.ranzhico.com/updater-latest-{$config->version}.html");
+if($config->checkVersion and isset($_SERVER['https']))  js::import("https://api.ranzhico.com/updater-latest-{$config->version}.html");
+if($config->checkVersion and !isset($_SERVER['https'])) js::import("http://api.ranzhico.com/updater-latest-{$config->version}.html");
 js::set('ignoreNotice', $ignoreNotice);
 js::set('ignore', $lang->user->ignore);
 ?>

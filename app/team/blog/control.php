@@ -2,11 +2,11 @@
 /**
  * The control file of blog module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     blog
- * @version     $Id$
+ * @version     $Id: control.php 4145 2016-10-14 05:31:16Z liugang $
  * @link        http://www.ranzhico.com
  */
 class blog extends control
@@ -100,7 +100,7 @@ class blog extends control
         $this->view->title           = $this->lang->blog->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
-        $this->view->users           = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->users           = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->groups          = $this->loadModel('group')->getPairs();
         $this->view->type            = 'blog';
 
@@ -130,7 +130,7 @@ class blog extends control
         $this->view->title      = $this->lang->article->edit;
         $this->view->article    = $article;
         $this->view->categories = $categories;
-        $this->view->users      = $this->loadModel('user')->getPairs('nodeleted, noclosed');
+        $this->view->users      = $this->loadModel('user')->getPairs('nodeleted,noforbidden,noclosed');
         $this->view->groups     = $this->loadModel('group')->getPairs();
         $this->view->type       = 'blog';
         $this->display();

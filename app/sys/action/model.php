@@ -2,7 +2,7 @@
 /**
  * The model file of action module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     action
@@ -320,6 +320,9 @@ class actionModel extends model
      */
     public function getDynamic($account = 'all', $period = 'all', $orderBy = 'date_desc', $pager = null)
     {
+        if($this->session->myQuery == false) $this->session->set('myQuery', ' 1 = 1');
+        $myQuery = $this->loadModel('search', 'sys')->replaceDynamic($this->session->myQuery);
+
         /* Computer the begin and end date of a period. */
         $beginAndEnd = $this->computeBeginAndEnd($period);
         extract($beginAndEnd);
@@ -327,10 +330,11 @@ class actionModel extends model
         /* Get actions. */
         $actions = $this->dao->select('*')->from(TABLE_ACTION)
             ->where(1)
-            ->andWhere('objectType')->notin('attend,refund,leave,overtime,trip,action')
-            ->beginIF($period != 'all')->andWhere('date')->gt($begin)->fi()
-            ->beginIF($period != 'all')->andWhere('date')->lt($end)->fi()
-            ->beginIF($account != 'all')->andWhere('actor')->eq($account)->fi()
+            ->andWhere('objectType')->notin('attend,refund,leave,overtime,trip,egress,action')
+            ->beginIF($period != 'bysearch' && $period  != 'all')->andWhere('date')->gt($begin)->fi()
+            ->beginIF($period != 'bysearch' && $period  != 'all')->andWhere('date')->lt($end)->fi()
+            ->beginIF($period != 'bysearch' && $account != 'all')->andWhere('actor')->eq($account)->fi()
+            ->beginIF($period == 'bysearch')->andWhere($myQuery)->fi()
             ->orderBy($orderBy)
             ->fetchAll();
 
@@ -676,8 +680,6 @@ class actionModel extends model
             ->orderBy('id_desc')
             ->fetchAll('id');
 
-        $histories = $this->getHistory(array_keys($actions));
-        foreach($actions as $actionID => $action) $action->history = isset($histories[$actionID]) ? $histories[$actionID] : array();
         if(!empty($actions)) $actions = $this->transformActions($actions);
 
         /* Create action notices. */
@@ -693,10 +695,11 @@ class actionModel extends model
             /* process user and status. */
             if($action->objectType == 'leave')    $this->loadModel('leave', 'oa');
             if($action->objectType == 'overtime') $this->loadModel('overtime', 'oa');
+            if($action->objectType == 'egress')   $this->loadModel('egress', 'oa');
             if($action->objectType == 'attend')   $this->loadModel('attend', 'oa');
             if($action->objectType == 'refund')   $this->loadModel('refund', 'oa');
             if(isset($users[$action->actor])) $action->actor = $users[$action->actor];
-            if($action->action == 'assigned' and isset($users[$action->extra]) ) $action->extra = $users[$action->extra];
+            if($action->action == 'assigned' and isset($users[$action->extra])) $action->extra = $users[$action->extra];
             if($action->action == 'reviewed' and isset($this->lang->{$action->objectType}->statusList[$action->extra])) $action->extra = $this->lang->{$action->objectType}->statusList[$action->extra];
             if($action->action == 'reviewed' and isset($this->lang->{$action->objectType}->reviewStatusList[$action->extra])) $action->extra = $this->lang->{$action->objectType}->reviewStatusList[$action->extra];
 
@@ -710,14 +713,43 @@ class actionModel extends model
         }
 
         /* Create todo notices. */
-        $date     = helper::today();
         $interval = $this->config->pingInterval;
-
-        $link  = helper::createLink('sys.todo', 'calendar');
-        $todos = $this->loadModel('todo', 'sys')->getList('self', $account, $date);
-        if(empty($todos))
+        $now      = helper::now();
+        $link     = helper::createLink('sys.todo', 'calendar');
+        $todos    = $this->loadModel('todo', 'sys')->getList('self', $account, date(DT_DATE1), 'undone');
+        if($todos)
         {
-            $this->app->loadConfig('attend', 'oa');
+            $begins[1]  = date('Hi', strtotime($now));
+            $ends[1]    = date('Hi', strtotime("+$interval seconds $now"));
+            $begins[10] = date('Hi', strtotime("+10 minute $now"));
+            $ends[10]   = date('Hi', strtotime("+10 minute $interval seconds $now"));
+            $begins[30] = date('Hi', strtotime("+30 minute $now"));
+            $ends[30]   = date('Hi', strtotime("+30 minute $interval seconds $now"));
+            foreach($todos as $todo)
+            {
+                if(empty($todo->begin)) continue;
+                $time = str_replace(':', '', $todo->begin);
+
+                $lastTime = 0;
+                if((int)$time > (int)$begins[1]  and (int)$time <= (int)$ends[1])  $lastTime = 1;
+                if((int)$time > (int)$begins[10] and (int)$time <= (int)$ends[10]) $lastTime = 10;
+                if((int)$time > (int)$begins[30] and (int)$time <= (int)$ends[30]) $lastTime = 30;
+                if($lastTime)
+                {
+                    $notice = new stdclass();
+                    $notice->id      = 'todo' . $todo->id;
+                    $notice->title   = sprintf($this->lang->action->noticeTitle, $this->lang->todo->common, $link, 'oa', "{$todo->begin} {$todo->name}");
+                    $notice->content = ''; 
+                    $notice->type    = 'success';
+                    $notice->read    = '';
+
+                    $notices[$notice->id] = $notice;
+                }
+            }
+        }
+        else
+        {
+            $this->app->loadModuleConfig('attend', 'oa');
             $signInLimit = date('Y-m-d ') . $this->config->attend->signInLimit;
             $begin = (int)date('Hi', strtotime("+30 minute $signInLimit"));
             $end   = (int)date('Hi', strtotime("+30 minute $interval seconds $signInLimit"));
@@ -726,38 +758,6 @@ class actionModel extends model
                 $notice = new stdclass();
                 $notice->id      = "emptyTodo";
                 $notice->title   = sprintf($this->lang->action->noticeTitle, $this->lang->todo->common, $link, 'oa', "{$this->lang->todo->emptyTodo}");
-                $notice->content = ''; 
-                $notice->type    = 'success';
-                $notice->read    = '';
-
-                $notices[$notice->id] = $notice;
-            }
-        }
-
-        $now   = helper::now();
-        $link  = helper::createLink('sys.todo', 'calendar');
-        $todos = $this->loadModel('todo', 'sys')->getList('self', $account, $date, 'undone');
-
-        $begins[1]  = date('Hi', strtotime($now));
-        $ends[1]    = date('Hi', strtotime("+$interval seconds $now"));
-        $begins[10] = date('Hi', strtotime("+10 minute $now"));
-        $ends[10]   = date('Hi', strtotime("+10 minute $interval seconds $now"));
-        $begins[30] = date('Hi', strtotime("+30 minute $now"));
-        $ends[30]   = date('Hi', strtotime("+30 minute $interval seconds $now"));
-        foreach($todos as $todo)
-        {
-            if(empty($todo->begin)) continue;
-            $time = str_replace(':', '', $todo->begin);
-
-            $lastTime = 0;
-            if((int)$time > (int)$begins[1]  and (int)$time <= (int)$ends[1])  $lastTime = 1;
-            if((int)$time > (int)$begins[10] and (int)$time <= (int)$ends[10]) $lastTime = 10;
-            if((int)$time > (int)$begins[30] and (int)$time <= (int)$ends[30]) $lastTime = 30;
-            if($lastTime)
-            {
-                $notice = new stdclass();
-                $notice->id      = 'todo' . $todo->id;
-                $notice->title   = sprintf($this->lang->action->noticeTitle, $this->lang->todo->common, $link, 'oa', "{$todo->begin} {$todo->name}");
                 $notice->content = ''; 
                 $notice->type    = 'success';
                 $notice->read    = '';

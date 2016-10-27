@@ -20,7 +20,7 @@ $(document).ready(function()
         if(begin == end)
         {
             hours = Math.round((endTime - beginTime)/(3600*1000)*100)/100;
-            if(type == 'lieu' && hours > v.workingHours) hours = v.workingHours;
+            if(type == 'compensate' && hours > v.workingHours) hours = v.workingHours;
         }
         else
         {
@@ -38,7 +38,7 @@ $(document).ready(function()
             {
                 hoursStart = Math.round((Date.parse(new Date(begin + ' 23:59:60')) - beginTime)/(3600*1000)*100)/100;
             }
-            if(type == 'lieu' && hoursStart > v.workingHours) hoursStart = v.workingHours;
+            if(type == 'compensate' && hoursStart > v.workingHours) hoursStart = v.workingHours;
             
             if(endTime > signInTime)  
             {
@@ -48,10 +48,10 @@ $(document).ready(function()
             {
                 hoursEnd = Math.round((endTime - Date.parse(new Date(end)))/(3600*1000)*100)/100;
             }
-            if(type == 'lieu' && hoursEnd > v.workingHours) hoursEnd = v.workingHours;
+            if(type == 'compensate' && hoursEnd > v.workingHours) hoursEnd = v.workingHours;
             
             var dayHours = Math.round((Date.parse(new Date(begin + ' ' + v.signOut)) - Date.parse(new Date(begin + ' ' + v.signIn)))/(3600*1000)*100)/100;
-            if(type == 'lieu' && dayHours > v.workingHours) dayHours = v.workingHours;
+            if(type == 'compensate' && dayHours > v.workingHours) dayHours = v.workingHours;
             
             var days = Math.floor((Date.parse(new Date(end)) - Date.parse(new Date(begin)))/(24*3600*1000));
             if(days > 1) hoursContent = (days - 1) * dayHours;

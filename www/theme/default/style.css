@@ -5,7 +5,7 @@
 * @license     ZPL (http://zpl.pub/page/zplv12.html)
 * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
 * @package     RanZhi
-* @version     $Id$
+* @version     $Id: style.css 4069 2016-09-29 05:25:19Z daitingting $
 * @link        http://www.ranzhico.com
 */
 body {background: #fff;font-size:13px;}
@@ -325,6 +325,7 @@ body > form {margin-top: 20px;} /* form behind body */
 
 label.checkbox, input[type='radio']+label{font-weight: normal;}
 label.checkbox-inline input[type='checkbox'] {position: relative; top: -2px}
+label:not(:first-child) input[type='radio']{margin-left: 10px;}
 
 .panel-body > form{padding-right: 10px; max-width: 1000px}
 
@@ -555,14 +556,14 @@ td #aliasLabel {display: table-row;}
 .task-closed{color:#808080;}
 
 /* Pager. */
-.page {margin-bottom:0;line-height: 20px; color: #999}
-.page .dropdown {display: inline-block;}
-.page a {color: #444}
-.page a:hover {color: #141414}
-.page > .dropdown > a, .page > i, .page > a {display: inline-block; position: relative; padding: 5px; min-width: 25px; text-align: center; margin-left: -5px;}
-.page .dropdown > a:hover, .page > a:hover {background: #e5e5e5;}
-.page .dropdown-menu {margin-top: 0; width: 212px; margin-left: -5px; padding: 0;}
-.page .dropdown-menu > li {display: block; float: left; width: 70px; border-right: 1px dotted #ddd; border-bottom: 1px dotted #ddd}
+.pager {margin:0;line-height: 20px; color: #999}
+.pager .dropdown {display: inline-block;}
+.pager a {color: #444}
+.pager a:hover {color: #141414}
+.pager > .dropdown > a, .pager > i, .pager > a {display: inline-block; position: relative; padding: 5px; min-width: 25px; text-align: center; margin-left: -5px;}
+.pager .dropdown > a:hover, .pager > a:hover {background: #e5e5e5;}
+.pager .dropdown-menu {margin-top: 0; width: 212px; margin-left: -5px; padding: 0;}
+.pager .dropdown-menu > li {display: block; float: left; width: 70px; border-right: 1px dotted #ddd; border-bottom: 1px dotted #ddd}
 #_pageID, #goto {height: 20px; line-height: 20px; padding-top: 0; padding-bottom: 0;}
 
 /* Drop menu. */

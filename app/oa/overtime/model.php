@@ -2,7 +2,7 @@
 /**
  * The model file of overtime module of Ranzhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     overtime
@@ -86,37 +86,6 @@ class overtimeModel extends model
     }
 
     /**
-     * Check overtime.
-     * 
-     * @param  object $currentOvertime
-     * @param  string $account 
-     * @param  int    $id
-     * @access public
-     * @return bool 
-     */
-    public function checkOvertime($currentOvertime = null, $account = '', $id = 0)
-    {
-        $beginTime     = date('Y-m-d H:i:s', strtotime($currentOvertime->begin . ' ' . $currentOvertime->start));
-        $endTime       = date('Y-m-d H:i:s', strtotime($currentOvertime->end   . ' ' . $currentOvertime->finish));
-        $overtimeList  = $this->getList($type = '', $year = '', $month = '', $account, $dept = '', $status = '', $orderBy = 'begin, start');
-        $existOvertime = array();
-        foreach($overtimeList as $overtime)
-        {
-            if($overtime->id == $id) continue;
-
-            $begin = $overtime->begin . ' ' . $overtime->start;
-            $end   = $overtime->end   . ' ' . $overtime->finish;
-            if(($beginTime > $begin && $beginTime < $end) 
-                || ($endTime > $begin && $endTime < $end) 
-                || ($beginTime <= $begin && $endTime >= $end))
-            {
-                $existOvertime[] = substr($begin, 0, 16) . ' ~ ' . substr($end, 0, 16);
-            }
-        }
-        return $existOvertime;
-    }
-
-    /**
      * Create a overtime.
      * 
      * @access public
@@ -132,18 +101,8 @@ class overtimeModel extends model
 
         if(isset($overtime->begin) and $overtime->begin != '') $overtime->year = substr($overtime->begin, 0, 4);
 
-        $existOvertime = $this->checkOvertime($overtime, $this->app->user->account);
-        if(!empty($existOvertime)) return array('result' => 'fail', 'message' => sprintf($this->lang->overtime->unique, implode(', ', $existOvertime))); 
-
-        $leave = clone $overtime;
-        $leave ->start  = '00:00:00';
-        $leave ->finish = '23:59:59';
-        $existLeave = $this->loadModel('leave', 'oa')->checkLeave($leave, $this->app->user->account);
-        if(!empty($existLeave)) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, implode(', ', $existLeave))); 
-        
-        $trip = $leave;
-        $existTrip = $this->loadModel('trip', 'oa')->checkTrip($trip, $this->app->user->account); 
-        if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
+        $return = $this->checkDate($overtime);
+        if($return['result'] == 'fail') return $return;
 
         $this->dao->insert(TABLE_OVERTIME)
             ->data($overtime)
@@ -174,18 +133,8 @@ class overtimeModel extends model
 
         if(isset($overtime->begin) and $overtime->begin != '') $overtime->year = substr($overtime->begin, 0, 4);
 
-        $existOvertime = $this->checkOvertime($overtime, $this->app->user->account, $id);
-        if(!empty($existOvertime)) return array('result' => 'fail', 'message' => sprintf($this->lang->overtime->unique, implode(', ', $existOvertime))); 
-        
-        $leave = clone $overtime;
-        $leave ->start  = '00:00:00';
-        $leave ->finish = '23:59:59';
-        $existLeave = $this->loadModel('leave', 'oa')->checkLeave($leave, $this->app->user->account);
-        if(!empty($existLeave)) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, implode(', ', $existLeave))); 
-        
-        $trip = $leave;
-        $existTrip = $this->loadModel('trip', 'oa')->checkTrip($trip, $this->app->user->account); 
-        if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
+        $return = $this->checkDate($overtime, $id);
+        if($return['result'] == 'fail') return $return;
 
         $this->dao->update(TABLE_OVERTIME)
             ->data($overtime)
@@ -196,6 +145,70 @@ class overtimeModel extends model
             ->exec();
 
         return !dao::isError();
+    }
+
+    /**
+     * Check date.
+     * 
+     * @param  object $date
+     * @param  int    $id 
+     * @access public
+     * @return void
+     */
+    public function checkDate($date, $id = 0)
+    {
+        if(substr($date->begin, 0, 7) != substr($date->end, 0, 7)) return array('result' => 'fail', 'message' => $this->lang->overtime->sameMonth);
+        if("$date->end $date->finish" <= "$date->begin $date->start") return array('result' => 'fail', 'message' => $this->lang->overtime->wrongEnd);
+
+        $existOvertime = $this->checkOvertime($date, $this->app->user->account, $id);
+        if(!empty($existOvertime)) return array('result' => 'fail', 'message' => sprintf($this->lang->overtime->unique, implode(', ', $existOvertime))); 
+
+        $existLeave = $this->loadModel('leave', 'oa')->checkLeave($date, $this->app->user->account);
+        if(!empty($existLeave)) return array('result' => 'fail', 'message' => sprintf($this->lang->leave->unique, implode(', ', $existLeave))); 
+        
+        $existTrip = $this->loadModel('trip', 'oa')->checkTrip('trip', $date, $this->app->user->account); 
+        if(!empty($existTrip)) return array('result' => 'fail', 'message' => sprintf($this->lang->trip->unique, implode(', ', $existTrip))); 
+        
+        $this->app->loadLang('egress', 'oa');
+        $existEgress = $this->trip->checkTrip('egress', $date, $this->app->user->account); 
+        if(!empty($existEgress)) return array('result' => 'fail', 'message' => sprintf($this->lang->egress->unique, implode(', ', $existEgress))); 
+
+        $existLieu = $this->loadModel('lieu', 'oa')->checkLieu($date, $this->app->user->account);
+        if(!empty($existLieu)) return array('result' => 'fail', 'message' => sprintf($this->lang->lieu->unique, implode(', ', $existLieu)));  
+
+        return array('result' => 'success');
+    }
+
+    /**
+     * Check overtime.
+     * 
+     * @param  object $currentOvertime
+     * @param  string $account 
+     * @param  int    $id
+     * @access public
+     * @return bool 
+     */
+    public function checkOvertime($currentOvertime = null, $account = '', $id = 0)
+    {
+        $beginTime     = date('Y-m-d H:i:s', strtotime($currentOvertime->begin . ' ' . $currentOvertime->start));
+        $endTime       = date('Y-m-d H:i:s', strtotime($currentOvertime->end   . ' ' . $currentOvertime->finish));
+        $overtimeList  = $this->getList($type = '', $year = '', $month = '', $account, $dept = '', $status = '', $orderBy = 'begin, start');
+        $existOvertime = array();
+        foreach($overtimeList as $overtime)
+        {
+            if($overtime->id == $id) continue;
+            if($overtime->status == 'rejcet') continue;
+
+            $begin = $overtime->begin . ' ' . $overtime->start;
+            $end   = $overtime->end   . ' ' . $overtime->finish;
+            if(($beginTime > $begin && $beginTime < $end) 
+                || ($endTime > $begin && $endTime < $end) 
+                || ($beginTime <= $begin && $endTime >= $end))
+            {
+                $existOvertime[] = substr($begin, 0, 16) . ' ~ ' . substr($end, 0, 16);
+            }
+        }
+        return $existOvertime;
     }
 
     /**
@@ -230,17 +243,17 @@ class overtimeModel extends model
     {
         if(!isset($this->lang->overtime->statusList[$status])) return false;
 
-        $overtime = $this->getByID($id);
+        $data = new stdclass();
+        $data->status       = $status;
+        $data->reviewedBy   = $this->app->user->account;
+        $data->reviewedDate = helper::now();
+        $data->rejectReason = $status == 'reject' ? $this->post->rejectReason : '';
 
-        $this->dao->update(TABLE_OVERTIME)
-            ->set('status')->eq($status)
-            ->set('reviewedBy')->eq($this->app->user->account)
-            ->set('reviewedDate')->eq(helper::now())
-            ->where('id')->eq($id)
-            ->exec();
+        $this->dao->update(TABLE_OVERTIME)->data($data)->autoCheck()->where('id')->eq($id)->exec();
 
         if(!dao::isError() and $status == 'pass')
         {
+            $overtime = $this->getByID($id);
             $dates = range(strtotime($overtime->begin), strtotime($overtime->end), 60 * 60 * 24);
             $this->loadModel('attend', 'oa')->batchUpdate($dates, $overtime->createdBy, 'overtime', '', $overtime);
         }

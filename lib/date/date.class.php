@@ -6,7 +6,7 @@
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     RanZhi
- * @version     $Id$
+ * @version     $Id: date.class.php 3674 2016-03-30 09:43:20Z liugang $
  * @link        http://www.ranzhico.com
  */
 class date 

@@ -2,7 +2,7 @@
 /**
  * The model file of attend module of Ranzhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      chujilu <chujilu@cnezsoft.com>
  * @package     attend
@@ -110,12 +110,13 @@ class attendModel extends model
     {
         $this->processStatus();
 
-        $users = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted');
+        $users = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted,noforbidden');
         $attends = $this->dao->select('*')->from(TABLE_ATTEND)
             ->where(1)
             ->beginIf($startDate != '')->andWhere('`date`')->ge($startDate)->fi()
             ->beginIf($endDate != '')->andWhere('`date`')->le($endDate)->fi()
             ->fetchGroup('account');
+        unset($attends['guest']);
 
         foreach($users as $account => $realname)
         {
@@ -143,7 +144,7 @@ class attendModel extends model
     public function getByDept($deptID, $startDate = '', $endDate = '', $reviewStatus = '')
     {
         $this->processStatus();
-        $users = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted', $deptID);
+        $users = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted,noforbidden', $deptID);
 
         $attends = $this->dao->select('t1.*, t2.dept')->from(TABLE_ATTEND)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.account=t2.account")
             ->where('t1.account')->in(array_keys($users))
@@ -162,7 +163,7 @@ class attendModel extends model
         foreach($deptID as $dept)
         {
             if($dept == 0) continue;
-            $deptUsers = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted', $dept);
+            $deptUsers = $this->user->getPairs('noclosed,noempty,nodeleted,noforbidden', $dept);
             foreach($deptUsers as $account => $realname) if(!isset($newAttends[$dept][$account])) $newAttends[$dept][$account] = array();
         }
 
@@ -194,7 +195,7 @@ class attendModel extends model
      */
     public function getWaitAttends($deptID = '')
     {
-        if($deptID != '') $users = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted', $deptID);
+        if($deptID != '') $users = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted,noforbidden', $deptID);
         return $this->dao->select('*')->from(TABLE_ATTEND)
             ->where('reviewStatus')->eq('wait')
             ->beginIf($deptID != '')->andWhere('account')->in(array_keys($users))->fi()
@@ -261,7 +262,7 @@ class attendModel extends model
                     $attend->dayName  = $this->lang->datepicker->dayNames[(int)date('w', strtotime($currentDate))];
 
                     $desc = zget($this->lang->attend->statusList, $attend->status);
-                    if(strpos('leave,trip,overtime', $attend->status) !== false and $attend->desc)
+                    if(strpos('leave,trip,egress,overtime', $attend->status) !== false and $attend->desc)
                     {
                         $desc .= $attend->desc . $this->lang->attend->h;
                     }
@@ -627,8 +628,10 @@ EOT;
     {
         /* 'leave': ask for leave. 'trip': biz trip. */
         if($this->loadModel('leave', 'oa')->isLeave($attend->date, $attend->account)) return 'leave';
-        if($this->loadModel('trip', 'oa')->isTrip($attend->date, $attend->account)) return 'trip';
+        if($this->loadModel('trip', 'oa')->isTrip('trip', $attend->date, $attend->account)) return 'trip';
+        if($this->loadModel('trip', 'oa')->isTrip('egress', $attend->date, $attend->account)) return 'egress';
         if($this->loadModel('overtime', 'oa')->isOvertime($attend->date, $attend->account)) return 'overtime';
+        if($this->loadModel('lieu', 'oa')->isLieu($attend->date, $attend->account)) return 'lieu';
 
         $status = 'normal';
         if(($attend->signIn == "00:00:00" and $attend->signOut == "00:00:00") or (!$attend->signIn and !$attend->signOut)) 
@@ -674,7 +677,7 @@ EOT;
             if($status == 'both')  $attend->status = 'late';
         }
 
-        if($attend->status == '') $attend->status = $this->computeStatus($attend);
+        if($attend->status == '' or $attend->status == 'rest') $attend->status = $this->computeStatus($attend);
 
         /* Remove time. */
         if($attend->signIn == '00:00:00')    $attend->signIn = '';
@@ -773,6 +776,8 @@ EOT;
      */
     public function isWeekend($date)
     {
+        if($this->loadModel('holiday')->isWorkingDay($date)) return false;
+
         $dayIndex = date('w', strtotime($date));
         if( (($this->config->attend->workingDays == '5' and ($dayIndex == 0 or $dayIndex == 6)) or 
             ($this->config->attend->workingDays == '6' and $dayIndex == 0) or
@@ -788,23 +793,23 @@ EOT;
     }
 
     /**
-     * Compute working days between time.
+     * Compute working dates between time.
      * 
      * @param  date    $begin 
      * @param  date    $end 
      * @access public
-     * @return int
+     * @return array 
      */
-    public function computeWorkingDays($begin, $end)
+    public function computeWorkingDates($begin, $end)
     {
         $dates = range(strtotime($begin), strtotime($end), 60 * 60 * 24);
-        $workingDays = 0;
+        $workingDays = array();
         foreach($dates as $datetime)
         {
             $date = date('Y-m-d', $datetime);
             if($this->isWeekend($date)) continue;
             if($this->loadModel('holiday', 'oa')->isHoliday($date)) continue;
-            $workingDays ++;
+            $workingDays[$date] = $date;
         }
         return $workingDays;
     }
@@ -822,7 +827,7 @@ EOT;
      */
     public function batchUpdate($dates, $account, $status = '', $reason = '', $time = '')
     {
-        if($status != '' and strpos('trip,leave,overtime,normal', $status) === false) return false;
+        if($status != '' and strpos('trip,egress,leave,overtime,normal,lieu', $status) === false) return false;
         if($reason == '') $reason = $status;
 
         foreach($dates as $datetime)
@@ -869,7 +874,7 @@ EOT;
                     if($status == 'leave')    $hours = $this->config->attend->workingHours;
                     if($status == 'overtime') $hours = $this->config->attend->signOutLimit - $this->config->attend->signInLimit;
                 }
-                if($hours > $this->config->attend->workingHours && ($status == 'leave' || ($status == 'overtime' && $time->type == 'lieu'))) 
+                if($hours > $this->config->attend->workingHours && ($status == 'leave' || $status == 'lieu' || ($status == 'overtime' && $time->type == 'compensate'))) 
                 {
                     $hours = $this->config->attend->workingHours;
                 }
@@ -886,7 +891,7 @@ EOT;
             }
             else
             {
-                if($status && strpos('leave, overtime', $status) !== false && !empty($oldAttend->desc)) $attend->desc += (float)$oldAttend->desc;
+                if($status && strpos('leave, overtime, lieu', $status) !== false && !empty($oldAttend->desc)) $attend->desc += (float)$oldAttend->desc;
                 $attend->status = $this->computeStatus($oldAttend);
                 $this->dao->update(TABLE_ATTEND)->data($attend)->autoCheck()->where('date')->eq($date)->andWhere('account')->eq($account)->exec();
             }
@@ -913,6 +918,7 @@ EOT;
             $data->early           = $this->post->early[$account];
             $data->absent          = $this->post->absent[$account];
             $data->trip            = $this->post->trip[$account];
+            $data->egress          = $this->post->egress[$account];
             $data->paidLeave       = $this->post->paidLeave[$account];
             $data->unpaidLeave     = $this->post->unpaidLeave[$account];
             $data->timeOvertime    = $this->post->timeOvertime[$account];

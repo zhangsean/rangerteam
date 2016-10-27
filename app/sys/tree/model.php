@@ -2,11 +2,11 @@
 /**
  * The model file of tree module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     tree
- * @version     $Id$
+ * @version     $Id: model.php 4169 2016-10-19 08:57:15Z liugang $
  * @link        http://www.ranzhico.com
  */
 ?>
@@ -191,8 +191,7 @@ class treeModel extends model
     public function getDeptManagedByMe($account)
     {
         return $this->dao->select('*')->from(TABLE_CATEGORY)
-            ->where(1)
-            ->beginIF($this->app->user->admin != 'super')->andWhere('moderators')->eq(",$account,")->fi()
+            ->where('moderators')->eq(",$account,")
             ->andWhere('type')->eq('dept')
             ->fetchAll('id');
     }
@@ -538,7 +537,7 @@ class treeModel extends model
         if($category->type == 'forum' and $category->grade == 2) $childrenLinkClass = 'hidden';
 
         $linkHtml  = $category->name;
-        $linkHtml .= ' ' . ($category->major ? html::a('#', $lang->tree->edit, "disabled='disabled'") : html::a(helper::createLink('tree', 'edit', "category={$category->id}"), $lang->tree->edit, "class='ajax'"));
+        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'edit', "category={$category->id}"), $lang->tree->edit, "class='ajax'");
         if($category->type != 'product') $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}&root=$category->root"), $lang->category->children, "class='$childrenLinkClass ajax'");
         $linkHtml .= ' ' . ($category->major ? html::a('#', $lang->delete, "disabled='disabled'") : html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'"));
 
@@ -556,7 +555,7 @@ class treeModel extends model
     {
         $oldCategory = $this->getByID($categoryID);
         $category = fixer::input('post')
-            ->stripTags('desc', $this->config->allowedTags->admin)
+            ->stripTags('desc', $this->config->allowedTags)
             ->join('moderators', ',')
             ->join('rights', ',')
             ->join('users', ',')
@@ -665,10 +664,11 @@ class treeModel extends model
         foreach($children as $key => $categoryName)
         {
             if(empty($categoryName)) continue;
+            $order = $i * 10;
 
             /* First, save the child without path field. */
             $category->name  = $categoryName;
-            $category->order = $this->post->maxOrder + $i * 10;
+            $category->order = $order;
             $mode = $this->post->mode[$key];
 
             if($mode == 'new')
@@ -683,16 +683,17 @@ class treeModel extends model
                     ->set('path')->eq($categoryPath)
                     ->where('id')->eq($categoryID)
                     ->exec();
-                $i ++;
             }
             else
             {
                 $categoryID = $key;
                 $this->dao->update(TABLE_CATEGORY)
                     ->set('name')->eq($categoryName)
+                    ->set('order')->eq($order)
                     ->where('id')->eq($categoryID)
                     ->exec();
             }
+            $i ++;
         }
 
         return !dao::isError();

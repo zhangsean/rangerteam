@@ -2,7 +2,7 @@
 /**
  * The view file for the method of view of refund module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     customer 
@@ -59,7 +59,7 @@
     <?php echo $this->fetch('action', 'history', "objectType=refund&objectID={$refund->id}");?>
     <div class='page-actions'>
       <?php
-      if($refund->status == 'wait')
+      if($refund->status == 'wait' or $refund->status == 'draft')
       {
           echo "<div class='btn-group'>";
           commonModel::printLink('refund', 'edit', "refundID=$refund->id", $lang->edit, "class='btn btn-default'");

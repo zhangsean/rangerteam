@@ -2,7 +2,7 @@
 /**
  * The control file of project module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     project
@@ -31,10 +31,21 @@ class project extends control
         
         if(empty($this->projects)) $this->locate(inlink('create'));
 
+        /* Build search form. */
+        $this->loadModel('search', 'sys');
+        $users = $this->loadModel('user')->getPairs('noclosed');
+        $this->config->project->search['actionURL'] = $this->createLink('project', 'index', "status=bysearch");
+        $this->config->project->search['params']['t1.createdBy']['values'] = $users;
+        $this->config->project->search['params']['t2.account']['values']   = $users;
+        $this->search->setSearchParams($this->config->project->search);
+
+        /* Save session. */
+        $this->app->session->set('projectList',  $this->app->getURI(true));
+
         $this->view->title    = $this->lang->project->common;
         $this->view->status   = $status;
         $this->view->projects = $this->project->getList($status, $orderBy, $pager);
-        $this->view->users    = $this->loadModel('user')->getPairs('noclosed');
+        $this->view->users    = $this->user->getPairs('noclosed');
         $this->view->orderBy  = $orderBy;
         $this->view->pager    = $pager;
         $this->display();
@@ -57,7 +68,7 @@ class project extends control
         }
 
         $this->view->title  = $this->lang->project->create;
-        $this->view->users  = $this->loadModel('user')->getPairs('noclosed,nodeleted');
+        $this->view->users  = $this->loadModel('user')->getPairs('noclosed,nodeleted,noforbidden');
         $this->view->groups = $this->loadModel('group')->getPairs();
         $this->display();
     }
@@ -84,7 +95,7 @@ class project extends control
         }
 
         $this->view->title   = $this->lang->project->edit;
-        $this->view->users   = $this->loadModel('user')->getPairs('noclosed,nodeleted');
+        $this->view->users   = $this->loadModel('user')->getPairs('noclosed,nodeleted,noforbidden');
         $this->view->project = $this->project->getByID($projectID);
         $this->view->groups  = $this->loadModel('group')->getPairs();
         $this->display();
@@ -101,7 +112,7 @@ class project extends control
     {
         $this->view->title      = $this->lang->project->view;
         $this->view->project    = $this->project->getById($projectID);
-        $this->view->users      = $this->loadModel('user')->getPairs('noclosed,nodeleted');
+        $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->modalWidth = 500;
         $this->display();
     }
@@ -130,7 +141,7 @@ class project extends control
 
         $this->view->title   = $this->lang->project->member;
         $this->view->project = $project;
-        $this->view->users   = $this->loadModel('user')->getPairs('noclosed,nodeleted');
+        $this->view->users   = $this->loadModel('user')->getPairs('noclosed,nodeleted,noforbidden');
         $this->display();
     }
 

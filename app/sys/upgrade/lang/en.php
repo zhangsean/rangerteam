@@ -2,11 +2,11 @@
 /**
  * The upgrade module English file of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
- * @version     $Id$
+ * @version     $Id: en.php 4185 2016-10-21 07:44:16Z liugang $
  * @link        http://www.ranzhico.com
  */
 $lang->upgrade = new stdclass();
@@ -28,6 +28,18 @@ $lang->upgrade->redeployDesc  = "<h5>For reaseon of code adjustment app director
 $lang->upgrade->removeTodo    = 'Please remove %s directory before upgrade.';
 $lang->upgrade->removeTodoTip = "<h5>For reaseon of code adjustment %s directory need to remove.</h5><div class='text-important'>operating steps : delete directory of %s.</div>";
 $lang->upgrade->updateLicense = 'The license of RanZhi 2. 0 has changed to Z PUBLIC LICENSE(ZPL) 1.1.';
+
+$lang->upgrade->majorList['3_5'] = array();
+$lang->upgrade->majorList['3_5']['1'] = 'Revenue from main operations';
+$lang->upgrade->majorList['3_5']['2'] = 'Other operating revenue';
+$lang->upgrade->majorList['3_5']['3'] = 'Cost of main operations';
+$lang->upgrade->majorList['3_5']['4'] = 'Other operating expense';
+
+$lang->upgrade->majorList['3_6'] = array();
+$lang->upgrade->majorList['3_6']['5'] = 'Invest Profit';
+$lang->upgrade->majorList['3_6']['6'] = 'Invest loss';
+$lang->upgrade->majorList['3_6']['7'] = 'Fee';
+$lang->upgrade->majorList['3_6']['8'] = 'Loan interest';
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
@@ -60,3 +72,9 @@ $lang->upgrade->fromVersions['3_2']      = '3.2';
 $lang->upgrade->fromVersions['3_2_1']    = '3.2.1';
 $lang->upgrade->fromVersions['3_3']      = '3.3';
 $lang->upgrade->fromVersions['3_4']      = '3.4';
+$lang->upgrade->fromVersions['3_5']      = '3.5';
+$lang->upgrade->fromVersions['3_6']      = '3.6';
+
+$lang->upgrade->deleteTips   = 'Need to delete some files. The commands in Linux are:<br />';
+$lang->upgrade->deleteFile   = '<code>rm %s</code>';
+$lang->upgrade->afterDeleted = '<br />Refresh after delete.';

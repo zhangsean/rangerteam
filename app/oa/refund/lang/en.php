@@ -70,6 +70,8 @@ $lang->refund->correctMoney      = 'Approval amount can not be more than the app
 $lang->refund->categoryTips      = 'Not yet set up the expense category.';
 $lang->refund->setExpense        = 'Go to set.';
 $lang->refund->moneyTip          = 'If money of refund is less than this, reviewed once, but money of refund is more than this, reviewed twice.';
+$lang->refund->total             = 'Refund total:';
+$lang->refund->totalMoney        = '%s%s；';
 
 $lang->refund->settings = new stdclass();
 $lang->refund->settings->setReviewer  = "Reviewer|refund|setreviewer";

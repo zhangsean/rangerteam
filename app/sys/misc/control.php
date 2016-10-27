@@ -2,11 +2,11 @@
 /**
  * The control file of misc module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     misc 
- * @version     $Id$
+ * @version     $Id: control.php 4150 2016-10-17 08:06:43Z liugang $
  * @link        http://www.ranzhico.com
  */
 class misc extends control
@@ -20,8 +20,11 @@ class misc extends control
     public function ping($notice = '')
     {
         /* Save attend info. */
-        $this->app->loadConfig('attend', 'oa');
-        if(commonModel::isAvailable('attend') and $this->config->attend->mustSignOut == 'no') $this->loadModel('attend', 'oa')->signOut();
+        if(commonModel::isAvailable('attend'))
+        {
+            $this->app->loadModuleConfig('attend', 'oa');
+            if($this->config->attend->mustSignOut == 'no') $this->loadModel('attend', 'oa')->signOut();
+        }
 
         /* Save online status. */
         $this->loadModel('user')->online();

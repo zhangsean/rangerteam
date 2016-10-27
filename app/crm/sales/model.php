@@ -2,7 +2,7 @@
 /**
  * The model file of sales module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      chujilu <chujilu@cnezsoft.com>
  * @package     sales
@@ -46,10 +46,7 @@ class salesModel extends model
         if($this->post->users != false) foreach($this->post->users as $key => $value) $users .= ',' . $value;
         if($users != '') $users = $users . ',';
 
-        $group = fixer::input('post')
-            ->remove('users, privs_view, privs_edit')
-            ->get();
-
+        $group = fixer::input('post')->remove('users')->get(); 
         $group->users = $users;
 
         $this->dao->insert(TABLE_SALESGROUP)
@@ -57,42 +54,7 @@ class salesModel extends model
             ->batchCheck($this->config->sales->require->create, 'notempty')
             ->exec();
 
-        $groupID = $this->dao->lastInsertID();
-
-        /* Update user priv. */
-        $this->dao->delete()->from(TABLE_SALESPRIV)->where('priv')->eq('view')->exec();
-        if($this->post->privs_view != false)
-        {
-            foreach($this->post->privs_view as $key => $value)
-            {
-                $account = substr($value, 0, strrpos($value, '_'));
-                if(strpos($users, ',' . $account . ',') === false) continue;
-
-                $data['account']    = $account;
-                $data['salesgroup'] = substr($value, strrpos($value, '_') + 1);
-                $data['priv']       = 'view';
-                if($data['salesgroup'] == 'current') $data['salesgroup'] = $groupID;
-
-                $this->dao->insert(TABLE_SALESPRIV)->data($data)->exec();
-            }
-        }
-
-        $this->dao->delete()->from(TABLE_SALESPRIV)->where('priv')->eq('edit')->exec();
-        if($this->post->privs_edit != false)
-        {
-            foreach($this->post->privs_edit as $key => $value)
-            {
-                $account = substr($value, 0, strrpos($value, '_'));
-                if(strpos($users, ',' . $account . ',') === false) continue;
-
-                $data['account']    = $account;
-                $data['salesgroup'] = substr($value, strrpos($value, '_') + 1);
-                $data['priv']       = 'edit';
-                if($data['salesgroup'] == 'current') $data['salesgroup'] = $groupID;
-
-                $this->dao->insert(TABLE_SALESPRIV)->data($data)->exec();
-            }
-        }
+        return !dao::isError();
     }
 
     /**
@@ -108,10 +70,7 @@ class salesModel extends model
         if($this->post->users != false) foreach($this->post->users as $key => $value) $users .= ',' . $value;
         if($users != '') $users = $users . ',';
 
-        $group = fixer::input('post')
-            ->remove('users, privs_view, privs_edit, id')
-            ->get();
-
+        $group = fixer::input('post')->remove('users,id')->get();
         $group->users = $users;
 
         $this->dao->update(TABLE_SALESGROUP)
@@ -120,6 +79,30 @@ class salesModel extends model
             ->where('id')->eq($groupID)
             ->exec();
 
+        return !dao::isError();
+    }
+
+    /**
+     * delete a group.
+     * 
+     * @param  int    $groupID 
+     * @param  string $null 
+     * @access public
+     * @return void
+     */
+    public function delete($groupID, $null = '')
+    {
+        return $this->dao->delete()->from(TABLE_SALESGROUP)->where('id')->eq($groupID)->exec();
+    }
+
+    /**
+     * Update priv.
+     * 
+     * @access public
+     * @return void
+     */
+    public function updatePriv()
+    {
         /* Update user priv. */
         $this->dao->delete()->from(TABLE_SALESPRIV)->where('priv')->eq('view')->exec();
         if($this->post->privs_view != false)
@@ -127,7 +110,6 @@ class salesModel extends model
             foreach($this->post->privs_view as $key => $value)
             {
                 $account = substr($value, 0, strrpos($value, '_'));
-                if(strpos($users, ',' . $account . ',') === false) continue;
 
                 $data['account']    = $account;
                 $data['salesgroup'] = substr($value, strrpos($value, '_') + 1);
@@ -143,7 +125,6 @@ class salesModel extends model
             foreach($this->post->privs_edit as $key => $value)
             {
                 $account = substr($value, 0, strrpos($value, '_'));
-                if(strpos($users, ',' . $account . ',') === false) continue;
 
                 $data['account']    = $account;
                 $data['salesgroup'] = substr($value, strrpos($value, '_') + 1);
@@ -152,19 +133,8 @@ class salesModel extends model
                 $this->dao->insert(TABLE_SALESPRIV)->data($data)->exec();
             }
         }
-    }
 
-    /**
-     * delete a group.
-     * 
-     * @param  int    $groupID 
-     * @param  string $null 
-     * @access public
-     * @return void
-     */
-    public function delete($groupID, $null = '')
-    {
-        return $this->dao->delete()->from(TABLE_SALESGROUP)->where('id')->eq($groupID)->exec();
+        return !dao::isError();
     }
 
     /**

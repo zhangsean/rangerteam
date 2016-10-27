@@ -2,7 +2,7 @@
 /**
  * The config file of action module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     action 
@@ -24,6 +24,7 @@ $config->action->objectNameFields['contact']   = 'realname';
 $config->action->objectNameFields['project']   = 'name';
 $config->action->objectNameFields['resume']    = 'id';
 $config->action->objectNameFields['announce']  = 'title';
+$config->action->objectNameFields['holiday']   = 'name';
 $config->action->objectNameFields['todo']      = 'name';
 $config->action->objectNameFields['attend']    = 'date';
 $config->action->objectNameFields['leave']     = 'begin';
@@ -40,6 +41,7 @@ $config->action->objectAppNames['doc']       = 'oa';
 $config->action->objectAppNames['article']   = 'oa';
 $config->action->objectAppNames['project']   = 'oa';
 $config->action->objectAppNames['announce']  = 'oa';
+$config->action->objectAppNames['holiday']   = 'oa';
 $config->action->objectAppNames['attend']    = 'oa';
 $config->action->objectAppNames['leave']     = 'oa';
 $config->action->objectAppNames['overtime']  = 'oa';

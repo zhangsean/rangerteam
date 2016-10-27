@@ -2,7 +2,7 @@
 /**
  * The batch create view of todo module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Congzhi Chen <congzhi@cnezsoft.com>
  * @package     todo
@@ -69,5 +69,29 @@
 <script language='Javascript'>
 var batchCreateNum = '<?php echo $config->todo->batchCreate;?>';
 $(document).ready(function(){setBeginsAndEnds();});
+function setBeginsAndEnds(i, beginOrEnd)
+{
+    if(typeof i == 'undefined')
+    {
+        for(j = 0; j < batchCreateNum; j++)
+        {
+            if(j != 0) $("[name=begins\\[" + j + '\\]]')[0].selectedIndex = $("[name=ends\\[" + (j - 1) + '\\]]')[0].selectedIndex;
+            $("[name=ends\\[" + j + '\\]]')[0].selectedIndex = $("[name=begins\\[" + j + '\\]]')[0].selectedIndex + 3;
+        }
+    }
+    else
+    {
+        if(beginOrEnd == 'begin')
+        {
+            $("[name=ends\\[" + i + '\\]]')[0].selectedIndex = $("[name=begins\\[" + i + '\\]]')[0].selectedIndex + 3;
+        }
+        for(j = i+1; j < batchCreateNum; j++)
+        {
+            $("[name=begins\\[" + j + '\\]]')[0].selectedIndex = $("[name=ends\\[" + (j - 1) + '\\]]')[0].selectedIndex;
+            $("[name=ends\\[" + j + '\\]')[0].selectedIndex = $("[name=begins\\[" + j + '\\]]')[0].selectedIndex + 3;
+        }
+    }
+}
+
 </script>
 <?php include '../../../sys/common/view/footer.modal.html.php';?>

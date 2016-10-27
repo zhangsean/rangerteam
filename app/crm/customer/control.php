@@ -2,7 +2,7 @@
 /**
  * The control file of customer module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     customer 
@@ -102,9 +102,12 @@ class customer extends control
         }
 
         unset($this->lang->customer->menu);
-        $this->view->title     = $this->lang->customer->create;
-        $this->view->sizeList  = $this->customer->combineSizeList();
-        $this->view->levelList = $this->customer->combineLevelList();
+        $this->view->title        = $this->lang->customer->create;
+        $this->view->sizeList     = $this->customer->combineSizeList();
+        $this->view->industryList = $this->loadModel('tree')->getOptionMenu('industry');
+        $this->view->areaList     = $this->tree->getOptionMenu('area');
+        $this->view->levelList    = $this->customer->combineLevelList();
+        $this->view->contacts     = $this->loadModel('contact', 'crm')->getPairs();
         $this->display();
     }
 
@@ -228,7 +231,7 @@ class customer extends control
         $this->view->title      = $this->lang->customer->assignedTo;
         $this->view->customerID = $customerID;
         $this->view->customer   = $this->customer->getByID($customerID);
-        $this->view->members    = $this->loadModel('user')->getPairs('noclosed, nodeleted, devfirst');
+        $this->view->members    = $this->loadModel('user')->getPairs('noclosed,nodeleted,noforbidden');
         $this->display();
     }
 
@@ -307,8 +310,15 @@ class customer extends control
             $this->send($return);
         }
 
+        $customerContacts = $this->loadModel('contact', 'crm')->getList($customerID);
+        $contacts = $this->loadModel('contact', 'crm')->getPairs();
+        foreach($contacts as $id => $name)
+        {
+            if(isset($customerContacts[$id])) unset($contacts[$id]);
+        }
+
         $this->view->title      = $this->lang->customer->linkContact;
-        $this->view->contacts   = $this->loadModel('contact', 'crm')->getPairs();
+        $this->view->contacts   = $contacts;
         $this->view->customerID = $customerID;
         $this->display();
     }

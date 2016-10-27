@@ -2,7 +2,7 @@
 /**
  * The control file of contact module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     contact
@@ -388,7 +388,7 @@ END:VCARD";
             $excelData->dataList[] = $data;
             $excelData->fileName   = $this->lang->contact->template;
 
-            $this->app->loadClass('export2excel')->export($excelData, $this->post->fileType);
+            $this->app->loadClass('excel')->export($excelData, $this->post->fileType);
         }
 
         $this->display('file', 'exportTemplate');

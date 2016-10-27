@@ -2,7 +2,7 @@
 /**
  * The control file of refund of Ranzhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     refund
@@ -108,9 +108,9 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function personal($date = '', $orderBy = 'status', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function personal($date = '', $type = '', $orderBy = 'status, id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        $this->browse('personal', $date, $orderBy, $recTotal, $recPerPage, $pageID);
+        $this->browse('personal', $date, $type, $orderBy, $recTotal, $recPerPage, $pageID);
     }
 
     /**
@@ -123,9 +123,9 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function company($date = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function company($date = '', $type = '', $orderBy = 'status, id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        $this->browse('company', $date, $orderBy, $recTotal, $recPerPage, $pageID);
+        $this->browse('company', $date, $type, $orderBy, $recTotal, $recPerPage, $pageID);
     }
 
     /**
@@ -138,9 +138,9 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function todo($date = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function todo($date = '', $type = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        $this->browse('todo', $date, $orderBy, $recTotal, $recPerPage, $pageID);
+        $this->browse('todo', $date, $type, $orderBy, $recTotal, $recPerPage, $pageID);
     }
 
     /**
@@ -154,10 +154,23 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function browse($mode = 'personal', $date = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'personal', $date = '', $type = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $categories = $this->refund->getCategoryPairs();
+
+        /* Build search form. */
+        $this->loadModel('search', 'sys');
+        $users = $this->loadModel('user')->getPairs('noclosed');
+        $this->config->refund->search['actionURL'] = $this->createLink('refund', $mode, "date=&type=bysearch");
+        $this->config->refund->search['params']['category']['values']       = array('' => '') + $categories;
+        $this->config->refund->search['params']['createdBy']['values']      = $users;
+        $this->config->refund->search['params']['firstReviewer']['values']  = $users;
+        $this->config->refund->search['params']['secondReviewer']['values'] = $users;
+        $this->config->refund->search['params']['refundBy']['values']       = $users;
+        $this->search->setSearchParams($this->config->refund->search);
 
         if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Y");
         $currentYear  = substr($date, 0, 4);
@@ -178,10 +191,10 @@ class refund extends control
         }
 
         $refunds = array();
-        if($mode == 'personal') $refunds = $this->refund->getList($mode, $currentDate, '', '', $this->app->user->account, $orderBy, $pager);
-        if($mode == 'company')  $refunds = $this->refund->getList($mode, $currentDate, '', '', '', $orderBy, $pager);
-        if($mode == 'todo' and empty($this->config->refund->refundBy)) $refunds = $this->refund->getList($mode, $currentDate, '', 'pass', '', $orderBy, $pager);
-        if($mode == 'todo' and !empty($this->config->refund->refundBy) and $this->config->refund->refundBy == $this->app->user->account) $refunds = $this->refund->getList($mode, $currentDate, '', 'pass', '', $orderBy, $pager);
+        if($mode == 'personal') $refunds = $this->refund->getList($mode, $type, $currentDate, '', '', $this->app->user->account, $orderBy, $pager);
+        if($mode == 'company')  $refunds = $this->refund->getList($mode, $type, $currentDate, '', '', '', $orderBy, $pager);
+        if($mode == 'todo' and empty($this->config->refund->refundBy)) $refunds = $this->refund->getList($mode, $type, $currentDate, '', 'pass', '', $orderBy, $pager);
+        if($mode == 'todo' and !empty($this->config->refund->refundBy) and $this->config->refund->refundBy == $this->app->user->account) $refunds = $this->refund->getList($mode, $type, $currentDate, '', 'pass', '', $orderBy, $pager);
 
         /* Set return url. */
         $this->session->set('refundList', $this->app->getURI(true));
@@ -191,7 +204,7 @@ class refund extends control
         $this->view->orderBy      = $orderBy;
         $this->view->mode         = $mode;
         $this->view->pager        = $pager;
-        $this->view->categories   = $this->refund->getCategoryPairs();
+        $this->view->categories   = $categories;
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->userPairs    = $userPairs;
         $this->view->userDept     = $userDept;
@@ -248,8 +261,24 @@ class refund extends control
      * @access public
      * @return void
      */
-    public function browseReview($date = '', $status = 'unreviewed')
+    public function browseReview($date = '', $status = 'unreviewed', $type = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $categories = $this->refund->getCategoryPairs();
+
+        /* Build search form. */
+        $this->loadModel('search', 'sys');
+        $users = $this->loadModel('user')->getPairs('noclosed');
+        $this->config->refund->search['actionURL'] = $this->createLink('refund', 'browseReview', "date=&status=$status&type=bysearch");
+        $this->config->refund->search['params']['category']['values']       = array('' => '') + $categories;
+        $this->config->refund->search['params']['createdBy']['values']      = $users;
+        $this->config->refund->search['params']['firstReviewer']['values']  = $users;
+        $this->config->refund->search['params']['secondReviewer']['values'] = $users;
+        $this->config->refund->search['params']['refundBy']['values']       = $users;
+        $this->search->setSearchParams($this->config->refund->search);
+
         if($date == '' or (strlen($date) != 6 and strlen($date) != 4)) $date = date("Y");
         $currentYear  = substr($date, 0, 4);
         $currentMonth = strlen($date) == 6 ? substr($date, 4, 2) : '';
@@ -274,8 +303,8 @@ class refund extends control
         $secondRefunds = array();
         if(!empty($this->config->refund->secondReviewer) and $this->config->refund->secondReviewer == $account)
         {
-            if($status == 'unreviewed') $secondRefunds = $this->refund->getList($mode = 'browseReview', $currentDate, $deptIDList = '', 'doing');
-            if($status == 'reviewed')   $secondRefunds = $this->refund->getList($mode = 'browseReview', $currentDate, $deptIDList = '', 'pass,finish');
+            if($status == 'unreviewed') $secondRefunds = $this->refund->getList($mode = 'browseReview', $type, $currentDate, $deptIDList = '', 'doing', '', $orderBy, $pager);
+            if($status == 'reviewed')   $secondRefunds = $this->refund->getList($mode = 'browseReview', $type, $currentDate, $deptIDList = '', 'pass,finish', '', $orderBy, $pager);
         }
 
         /* Get refund list for firstReviewer. */
@@ -291,8 +320,8 @@ class refund extends control
 
         if(!empty($deptList))
         {
-            if($status == 'unreviewed') $firstRefunds = $this->refund->getList($mode = 'browseReview', $currentDate, $deptIDList = array_keys($deptList), 'wait');
-            if($status == 'reviewed')   $firstRefunds = $this->refund->getList($mode = 'browseReview', $currentDate, $deptIDList = array_keys($deptList), 'pass,finish');
+            if($status == 'unreviewed') $firstRefunds = $this->refund->getList($mode = 'browseReview', $type, $currentDate, $deptIDList = array_keys($deptList), 'wait', '', $orderBy, $pager);
+            if($status == 'reviewed')   $firstRefunds = $this->refund->getList($mode = 'browseReview', $type, $currentDate, $deptIDList = array_keys($deptList), 'pass,finish', '', $orderBy, $pager);
         }
 
         $refunds = array_merge($secondRefunds, $firstRefunds);
@@ -303,13 +332,16 @@ class refund extends control
         $this->view->users        = $newUsers;
         $this->view->refunds      = $refunds;
         $this->view->deptList     = $allDeptList;
-        $this->view->categories   = $this->refund->getCategoryPairs();
+        $this->view->categories   = $categories;
         $this->view->currencySign = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->currentYear  = $currentYear;
         $this->view->currentMonth = $currentMonth;
         $this->view->monthList    = $monthList;
         $this->view->yearList     = $yearList;
         $this->view->status       = $status;
+        $this->view->date         = $date;
+        $this->view->orderBy      = $orderBy;
+        $this->view->pager        = $pager;
 
         $this->display();
     }
@@ -588,7 +620,7 @@ class refund extends control
 
         if(strpos(',edit,delete,', ",$action,") !== false)
         {
-            if($refund->status != 'wait' or $refund->createdBy != $account) $pass = false;
+            if(($refund->status != 'wait' and $refund->status != 'draft') or $refund->createdBy != $account) $pass = false;
         }
 
         if(!$pass)

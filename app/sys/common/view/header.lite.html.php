@@ -2,11 +2,11 @@
 /**
  * The header.lite view of common module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common 
- * @version     $Id$
+ * @version     $Id: header.lite.html.php 4041 2016-09-27 07:09:30Z liugang $
  * @link        http://www.ranzhico.com
  */
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
@@ -20,7 +20,7 @@ $clientTheme  = $this->app->getClientTheme();
 <head profile="http://www.w3.org/2005/10/profile">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <?php echo html::icon($webRoot . 'favicon.ico');?>
+  <?php echo html::favicon($webRoot . 'favicon.ico');?>
   <?php
   if(!isset($title)) $title  = '';
   if(!empty($title)) $title .= $lang->minus;

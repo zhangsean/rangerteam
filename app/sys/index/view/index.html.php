@@ -2,11 +2,11 @@
 /**
  * The index view file of index module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     index 
- * @version     $Id$
+ * @version     $Id: index.html.php 4205 2016-10-24 08:19:13Z liugang $
  * @link        http://www.ranzhico.com
  */
 include "../../common/view/header.lite.html.php";
@@ -139,11 +139,6 @@ js::set('attend', commonModel::isAvailable('attend') ? 1 : 0);
   <?php echo $notice;?>
 </div>
 <div id='categoryTpl' class='hide'>
-  <div id='categoryTplcategoryid' class='category' style='display:none'>
-    <button id='categorycategoryid' class='categoryButton' data-id='categoryid'>
-      <i class='icon icon-default' style='background-color: hsl(categoryhue, 100%, 40%)'>categoryname</i>
-    </button>  
-  </div>
   <ul id='categoryMenucategoryid' class='category categoryMenu dropdown-menu fade' data-id='categoryid'></ul>
 </div>
 <script>
@@ -212,13 +207,5 @@ foreach ($lang->index->ips as $key => $value)
 ?>
 
 <?php echo $allEntries;?>
-
-var categories = [];
-<?php
-foreach($categories as $id => $name)
-{
-    echo "categories.push({id: '$id', name: '$name'});";
-}
-?>
 </script>
 <?php include "../../common/view/footer.html.php"; ?>

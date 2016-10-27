@@ -2,7 +2,7 @@
 /**
  * The all avaliabe actions in RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     group
@@ -38,7 +38,9 @@ $lang->appModule->oa[] = 'task';
 $lang->appModule->oa[] = 'attend';
 $lang->appModule->oa[] = 'holiday';
 $lang->appModule->oa[] = 'leave';
+$lang->appModule->oa[] = 'lieu';
 $lang->appModule->oa[] = 'trip';
+$lang->appModule->oa[] = 'egress';
 $lang->appModule->oa[] = 'refund';
 $lang->appModule->oa[] = 'overtime';
 
@@ -80,9 +82,11 @@ $lang->moduleOrder[57]  = 'task';
 $lang->moduleOrder[70]  = 'attend';
 $lang->moduleOrder[75]  = 'holiday';
 $lang->moduleOrder[80]  = 'leave';
+$lang->moduleOrder[81]  = 'lieu';
 $lang->moduleOrder[85]  = 'trip';
-$lang->moduleOrder[90]  = 'refund';
-$lang->moduleOrder[80]  = 'overtime';
+$lang->moduleOrder[90]  = 'egress';
+$lang->moduleOrder[95]  = 'refund';
+$lang->moduleOrder[100] = 'overtime';
 
 $lang->moduleOrder[95]  = 'blog';
 $lang->moduleOrder[100] = 'forum';
@@ -266,15 +270,17 @@ $lang->resume->methodOrder[25] = 'leave';
 
 /* Sales group. */
 $lang->resource->sales = new stdclass();
+$lang->resource->sales->admin  = 'admin';
 $lang->resource->sales->browse = 'browse';
 $lang->resource->sales->create = 'create';
 $lang->resource->sales->edit   = 'edit';
 $lang->resource->sales->delete = 'delete';
 
-$lang->sales->methodOrder[5]  = 'browse';
-$lang->sales->methodOrder[10] = 'create';
-$lang->sales->methodOrder[15] = 'edit';
-$lang->sales->methodOrder[20] = 'delete';
+$lang->sales->methodOrder[5]  = 'admin';
+$lang->sales->methodOrder[10] = 'browse';
+$lang->sales->methodOrder[15] = 'create';
+$lang->sales->methodOrder[20] = 'edit';
+$lang->sales->methodOrder[25] = 'delete';
 
 /* Product plan. */
 $lang->resource->trade = new stdclass();
@@ -286,6 +292,7 @@ $lang->resource->trade->batchEdit    = 'batchEdit';
 $lang->resource->trade->edit         = 'edit';
 $lang->resource->trade->transfer     = 'transfer';
 $lang->resource->trade->invest       = 'invest';
+$lang->resource->trade->loan         = 'loan';
 $lang->resource->trade->detail       = 'detail';
 $lang->resource->trade->delete       = 'delete';
 $lang->resource->trade->import       = 'import';
@@ -303,6 +310,7 @@ $lang->trade->methodOrder[21] = 'batchEdit';
 $lang->trade->methodOrder[25] = 'edit';
 $lang->trade->methodOrder[30] = 'transfer';
 $lang->trade->methodOrder[31] = 'invest';
+$lang->trade->methodOrder[32] = 'loan';
 $lang->trade->methodOrder[35] = 'detail';
 $lang->trade->methodOrder[40] = 'delete';
 $lang->trade->methodOrder[45] = 'import';
@@ -465,12 +473,24 @@ $lang->resource->leave = new stdclass();
 $lang->resource->leave->browseReview = 'browseReview';
 $lang->resource->leave->company      = 'company';
 $lang->resource->leave->review       = 'review';
+$lang->resource->leave->reviewBack   = 'reviewBack';
 $lang->resource->leave->export       = 'export';
 
 $lang->leave->methodOrder[0]  = 'browseReview';
 $lang->leave->methodOrder[5]  = 'company';
 $lang->leave->methodOrder[10] = 'review';
+$lang->leave->methodOrder[11] = 'reviewBack';
 $lang->leave->methodOrder[15] = 'export';
+
+/* Lieu */
+$lang->resource->lieu = new stdclass();
+$lang->resource->lieu->browseReview = 'browseReview';
+$lang->resource->lieu->company      = 'company';
+$lang->resource->lieu->review       = 'review';
+
+$lang->lieu->methodOrder[0]  = 'browseReview';
+$lang->lieu->methodOrder[5]  = 'company';
+$lang->lieu->methodOrder[10] = 'review';
 
 /* Overtime */
 $lang->resource->overtime = new stdclass();
@@ -491,7 +511,14 @@ $lang->resource->trip->company    = 'company';
 
 $lang->trip->methodOrder[0]  = 'department';
 $lang->trip->methodOrder[5]  = 'company';
-$lang->trip->methodOrder[10] = 'create';
+
+/* Trip */
+$lang->resource->egress = new stdclass();
+$lang->resource->egress->department = 'department';
+$lang->resource->egress->company    = 'company';
+
+$lang->egress->methodOrder[0]  = 'department';
+$lang->egress->methodOrder[5]  = 'company';
 
 /* Refund */
 $lang->resource->refund = new stdclass();

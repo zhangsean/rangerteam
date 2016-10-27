@@ -2,7 +2,7 @@
 /**
  * The create view file of customer module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     customer 
@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
+<?php include '../../../sys/common/view/chosen.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->customer->create;?></strong>
@@ -32,27 +33,47 @@
         </tr>
         <tr>
           <th><?php echo $lang->customer->contact;?></th>
-          <td><?php echo html::input('contact', '', "class='form-control'");?></td>
+          <td>
+            <div class='input-group'>
+              <?php echo html::input('contact', '', "class='form-control'");?>
+              <?php echo html::select('contactID', $contacts, '', "class='form-control chosen' style='display:none'");?>
+              <div class='input-group-addon'>
+                <label class='checkbox'><input type='checkbox' id='selectContact' name='selectContact' value='1'> <?php echo $lang->customer->selectContact;?></label>
+              </div>
+            </div>
+          </td>
         </tr>
-        <tr>
+        <tr class='contactInfo'>
           <th><?php echo $lang->customer->phone;?></th>
           <td><?php echo html::input('phone', '', "class='form-control'");?></td>
         </tr>
-        <tr>
+        <tr class='contactInfo'>
           <th><?php echo $lang->customer->email;?></th>
           <td><?php echo html::input('email', '', "class='form-control'");?></td>
         </tr>
-        <tr>
+        <tr class='contactInfo'>
           <th><?php echo $lang->customer->qq;?></th>
           <td><?php echo html::input('qq', '', "class='form-control'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->customer->depositor;?></th>
+          <td><?php echo html::input('depositor', '', "class='form-control'");?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->customer->type;?></th>
-          <td><?php echo html::select("type", $lang->customer->typeList, '', "class='form-control'");?></td>
+          <td><?php echo html::select('type', $lang->customer->typeList, '', "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->customer->size;?></th>
           <td><?php echo html::select('size', $sizeList, '', "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->industry;?></th>
+          <td><?php echo html::select('industry', $industryList, '', "class='form-control chosen'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->customer->area;?></th>
+          <td><?php echo html::select('area', $areaList, '', "class='form-control chosen'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->customer->status;?></th>

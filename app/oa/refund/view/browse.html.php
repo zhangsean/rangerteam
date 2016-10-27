@@ -2,7 +2,7 @@
 /**
  * The browse view file of order module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     order 
@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('mode', $mode);?>
 <?php js::set('createTradeTip', $lang->refund->createTradeTip);?>
+<li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <?php $secondReviewerClass = empty($this->config->refund->secondReviewer) ? 'hidden' : '';?>
 <div id='menuActions'>
   <?php if(commonModel::hasPriv('refund', 'export')):?>
@@ -52,7 +53,7 @@
       <table class='table table-hover table-striped tablesorter table-data table-fixed text-center' id='refundTable'>
         <thead>
           <tr class='text-center'>
-            <?php $vars = "date=$date&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+            <?php $vars = "date=$date&type=&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
             <th class='w-50px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->refund->id);?></th>
             <th class='w-100px visible-lg'><?php echo $lang->user->dept;?></th>
             <th><?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->refund->name);?></th>
@@ -107,6 +108,10 @@
         <?php endforeach;?>
       </table>
       <div class='table-footer'>
+        <?php $totalMoney = $this->refund->total($refunds);?>
+        <?php if($totalMoney):?>
+        <div class='pull-left text-danger'><?php echo $lang->refund->total . $totalMoney;?></div>
+        <?php endif;?>
         <?php $pager->show();?>
       </div>
     </div>

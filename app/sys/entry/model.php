@@ -2,11 +2,11 @@
 /**
  * The model file of entry module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     entry 
- * @version     $Id$
+ * @version     $Id: model.php 4205 2016-10-24 08:19:13Z liugang $
  * @link        http://www.ranzhico.com
  */
 class entryModel extends model
@@ -24,7 +24,41 @@ class entryModel extends model
         $entries = $this->dao->select('*')->from(TABLE_ENTRY)
             ->where(1)
             ->beginIF(!empty($category))->andWhere('category')->eq($category)->fi()
-            ->orderBy('`order, id`')->fetchAll();
+            ->orderBy('`order, id`')
+            ->fetchAll();
+        $categories = $this->dao->select('distinct t1.id, t1.name, t1.order')->from(TABLE_CATEGORY)->alias('t1')
+            ->leftjoin(TABLE_ENTRY)->alias('t2')->on('t1.id=t2.category')
+            ->where('t1.type')->eq('entry')
+            ->andWhere('t2.visible')->eq(1)
+            ->andWhere('t2.category')->ne(0)
+            ->orderBy('t1.order')
+            ->fetchAll('id');
+        foreach($categories as $category)
+        {
+            $entry = new stdclass();
+            $entry->id          = $category->id;
+            $entry->name        = $category->name;
+            $entry->code        = '';
+            $entry->abbr        = $category->name;
+            $entry->buildin     = 0;
+            $entry->integration = 0;
+            $entry->open        = '';
+            $entry->key         = '';
+            $entry->ip          = '';
+            $entry->logo        = '';
+            $entry->login       = '';
+            $entry->logout      = '';
+            $entry->block       = '';
+            $entry->control     = '';
+            $entry->size        = '';
+            $entry->position    = '';
+            $entry->visible     = 1;
+            $entry->order       = $category->id;
+            $entry->zentao      = 0;
+            $entry->category    = 0;
+
+            $entries[] = $entry;
+        }
 
         /* Remove entry if no rights and fix logo path. */
         $newEntries = array();
@@ -36,6 +70,11 @@ class entryModel extends model
                 $entry->name = $this->lang->install->buildinEntry->{$entry->code}['name'];
                 $entry->abbr = $this->lang->install->buildinEntry->{$entry->code}['abbr'];
             }
+            elseif($entry->category != 0)
+            {
+                $entry->abbr = $entry->name;
+            }
+
             if($entry->logo != '' && substr($entry->logo, 0, 1) != '/') $entry->logo = $this->config->webRoot . $entry->logo;
             if(commonModel::hasAppPriv($entry->code)) $newEntries[] = $entry; 
         }
@@ -167,7 +206,7 @@ class entryModel extends model
             ->setIF($this->post->zentao, 'integration', 1)
             ->setIF($this->post->zentao, 'control', 'full')
             ->remove('allip,adminAccount,adminPassword')
-            ->stripTags('login,logout,block', $this->config->allowedTags->admin)
+            ->stripTags('login,logout,block', $this->config->allowedTags)
             ->get();
 
         if($this->post->chanzhi) 
@@ -218,7 +257,7 @@ class entryModel extends model
      */
     public function update($code)
     {
-        $entry = fixer::input('post')->stripTags('login', $this->config->allowedTags->admin)->get();
+        $entry = fixer::input('post')->stripTags('login', $this->config->allowedTags)->get();
         if(!isset($entry->visible)) $entry->visible = 0;
 
         $this->dao->update(TABLE_ENTRY)->data($entry)
@@ -266,7 +305,7 @@ class entryModel extends model
             ->setDefault('ip', '*')
             ->setDefault('integration', 0)
             ->setIF($this->post->allip, 'ip', '*')
-            ->stripTags('logout,block', $this->config->allowedTags->admin)
+            ->stripTags('logout,block', $this->config->allowedTags)
             ->get();
 
         $this->dao->update(TABLE_ENTRY)->data($entry)->autoCheck()->where('code')->eq($code)->exec();
@@ -485,30 +524,5 @@ class entryModel extends model
             $allEntries[] = $tmpEntry;
         }
         return json_encode($allEntries);
-    }
-
-    /**
-     * Get categories of json. 
-     * 
-     * @access public
-     * @return string 
-     */
-    public function getJSONCategories()
-    {
-        $entries = $this->getEntries();
-        $categories = array();
-        $this->loadModel('tree');
-        foreach($entries as $entry)
-        {
-            if($entry->category)
-            {
-                unset($tmpCategory);
-                $tmpCategory['id']   = $entry->category;
-                $tmpCategory['name'] = $this->dao->select('name')->from(TABLE_CATEGORY)->where('id')->eq($entry->category)->fetch('name');
-
-                $categories[] = $tmpCategory;
-            }
-        }
-        return helper::jsonEncode($categories);
     }
 }

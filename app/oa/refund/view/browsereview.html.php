@@ -2,7 +2,7 @@
 /**
  * The review file of refund module of Ranzhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     refund
@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('status', $status);?>
+<li id='bysearchTab'><?php echo html::a('#', "<i class='icon-search icon'></i>" . $lang->search->common)?></li>
 <div class='with-side'>
   <div class='side'>
     <div class='panel panel-sm'>
@@ -35,17 +36,18 @@
   </div>
   <div class='main'>
     <div class='panel'>
-      <table class='table table-hover table-striped table-data table-fixed text-center'>
+      <table class='table table-hover table-striped table-data table-fixed tablesorter'>
         <thead>
           <tr class='text-center'>
-            <th class='w-50px'><?php echo $lang->refund->id;?></th>
+            <?php $vars = "date=$date&status=$status&type=&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+            <th class='w-50px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->refund->id);?></th>
             <th class='w-100px'><?php echo $lang->user->dept;?></th>
-            <th class='w-150px'><?php echo $lang->refund->name;?></th>
-            <th class='w-100px'><?php echo $lang->refund->category;?></th>
-            <th class='w-100px'><?php echo $lang->user->realname;?></th>
-            <th class='w-100px'><?php echo $lang->refund->money;?></th>
-            <th class='w-100px'><?php echo $lang->refund->date;?></th>
-            <th class='w-100px'><?php echo $lang->refund->status;?></th>
+            <th class='w-150px'><?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->refund->name);?></th>
+            <th class='w-100px'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->refund->category);?></th>
+            <th class='w-100px'><?php commonModel::printOrderLink('createdBy', $orderBy, $vars, $lang->user->realname);?></th>
+            <th class='w-100px text-right'><?php commonModel::printOrderLink('money', $orderBy, $vars, $lang->refund->money);?></th>
+            <th class='w-100px'><?php commonModel::printOrderLink('date', $orderBy, $vars, $lang->refund->date);?></th>
+            <th class='w-100px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->refund->status);?></th>
             <th><?php echo $lang->refund->desc;?></th>
             <th class='w-80px'><?php echo $lang->actions;?></th>
           </tr>
@@ -70,6 +72,12 @@
         </tr>
         <?php endforeach;?>
       </table>
+      <?php $totalMoney = $this->refund->total($refunds);?>
+      <?php if($totalMoney):?>
+      <div class='table-footer'>
+        <div class='pull-left text-danger'><?php echo $lang->refund->total . $totalMoney;?></div>
+      </div>
+      <?php endif;?>
     </div>
   </div>
 </div>

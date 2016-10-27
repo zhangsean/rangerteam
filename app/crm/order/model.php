@@ -2,7 +2,7 @@
 /**
  * The model file of order module of RanZhi.
  *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @copyright   Copyright 2009-2016 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     order
@@ -71,8 +71,6 @@ class orderModel extends model
         $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
-        $products = $this->loadModel('product', 'crm')->getPairs();
-
         $this->app->loadClass('date', $static = true);
         $thisMonth = date::getThisMonth();
         $thisWeek  = date::getThisWeek();
@@ -88,8 +86,7 @@ class orderModel extends model
             ->leftJoin(TABLE_CUSTOMER)->alias('c')->on("o.customer=c.id")
             ->where('o.deleted')->eq(0)
             ->beginIF($owner == 'my' and strpos('assignedTo,createdBy,signedBy', $mode) === false)
-            ->andWhere()->markLeft(1)
-            ->where('o.assignedTo')->eq($this->app->user->account)
+            ->andWhere('o.assignedTo', true)->eq($this->app->user->account)
             ->orWhere('o.createdBy')->eq($this->app->user->account)
             ->orWhere('o.editedBy')->eq($this->app->user->account)
             ->orWhere('o.signedBy')->eq($this->app->user->account)
@@ -110,6 +107,8 @@ class orderModel extends model
             ->orderBy($orderBy)->page($pager)->fetchAll('id');
 
         $this->session->set('orderQueryCondition', $this->dao->get());
+
+        $products = $this->loadModel('product', 'crm')->getPairs();
 
         foreach($orders as $order)
         {
