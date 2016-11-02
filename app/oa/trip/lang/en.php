@@ -4,7 +4,7 @@ $lang->trip->common = 'Trip';
 $lang->trip->browse = 'Browse trip';
 $lang->trip->create = 'Create';
 $lang->trip->edit   = 'Edit';
-$lang->trip->view   = 'Trip Detail'
+$lang->trip->view   = 'Trip Detail';
 $lang->trip->delete = 'Delete';
 
 $lang->trip->personal   = 'My trip';
