@@ -197,8 +197,7 @@ class trade extends control
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->users         = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
 
-        if($type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
-        if($type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
+        if($type == 'in' or $type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
 
         $this->display();
     }
@@ -289,8 +288,7 @@ class trade extends control
         $this->view->users         = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
        
-        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0);
-        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0);
+        if($trade->type == 'in' or $trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu($trade->type, 0, $removeRoot = true);
 
         $this->display();
     }
@@ -320,8 +318,7 @@ class trade extends control
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->preAndNext    = $this->loadModel('common')->getPreAndNextObject('trade', $tradeID);
         $this->view->currencySign  = $this->loadModel('common', 'sys')->getCurrencySign();
-        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0);
-        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0);
+        if($trade->type == 'in' or $trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu($trade->type, 0, $removeRoot = true);
         $this->display();
     }
 
@@ -465,8 +462,7 @@ class trade extends control
         $this->view->details    = $details;
         $this->view->users      = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
 
-        if($trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
-        if($trade->type == 'in')  $this->view->categories = $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
+        if($trade->type == 'in' or $trade->type == 'out') $this->view->categories = $this->loadModel('tree')->getOptionMenu($trade->type, 0, $removeRoot = true);
 
         $this->display();
     }
@@ -798,12 +794,12 @@ class trade extends control
 
             /* Get users and projects. */
             $expenseTypes = $this->loadModel('tree')->getPairs(0, 'out');
-            $incomeTypes  = $this->loadModel('tree')->getPairs(0, 'in');
+            $incomeTypes  = $this->tree->getPairs(0, 'in');
             
             $users      = $this->loadModel('user')->getPairs();
             $depositors = $this->loadModel('depositor', 'cash')->getPairs();
             $customers  = $this->loadModel('customer', 'crm')->getPairs();
-            $deptList   = $this->loadModel('tree')->getPairs(0, 'dept');
+            $deptList   = $this->tree->getPairs(0, 'dept');
             $categories = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
             $products   = $this->loadModel('product', 'crm')->getPairs();
 

@@ -104,12 +104,10 @@
           <th><?php echo $lang->trade->handlers;?></th>
           <td><?php echo html::select('handlers[]', $users, '', "class='form-control chosen' multiple");?></td>
         </tr>
-        <?php if($type == 'in'):?>
         <tr>
           <th><?php echo $lang->trade->product;?></th>
           <td><?php echo html::select('product', array('') + $productList, '', "class='form-control chosen'");?></td>
         </tr>
-        <?php endif;?>
         <tr>
           <th><?php echo $lang->trade->date;?></th>
           <td><?php echo html::input('date', date('Y-m-d'), "class='form-control form-date'");?></td>
