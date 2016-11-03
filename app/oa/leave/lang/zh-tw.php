@@ -48,6 +48,7 @@ $lang->leave->statusList['draft']  = '草稿';
 $lang->leave->statusList['wait']   = '等待審核';
 $lang->leave->statusList['pass']   = '通過';
 $lang->leave->statusList['reject'] = '拒絶';
+$lang->leave->statusList['back']   = '銷假待審';
 
 $lang->leave->denied    = '信息訪問受限';
 $lang->leave->unique    = '%s 已經存在請假記錄';
