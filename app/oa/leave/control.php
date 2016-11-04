@@ -150,44 +150,20 @@ class leave extends control
             if((empty($dept) or ",{$this->app->user->account}," != $dept->moderators)) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
         }
 
-        $this->leave->review($id, $status);
+        if($status == 'back')
+        {
+            $this->leave->reviewBackDate($id);
+            $status = 'pass';
+        }
+        else
+        {
+            $this->leave->review($id, $status);
+        }
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
         $actionID = $this->loadModel('action')->create('leave', $id, 'reviewed', '', $status);
         $this->sendmail($id, $actionID);
 
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
-    }
-
-    /**
-     * reviewBack 
-     * 
-     * @param  int    $id 
-     * @access public
-     * @return void
-     */
-    public function reviewBack($id)
-    {
-        $leave = $this->leave->getByID($id);
-
-        /* Check privilage. */
-        $this->app->loadModuleConfig('attend');
-        if(!empty($this->config->attend->reviewedBy))
-        { 
-            if($this->config->attend->reviewedBy != $this->app->user->account) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
-        }
-        else
-        {
-            $createdUser = $this->loadModel('user')->getByAccount($leave->createdBy);
-            $dept = $this->loadModel('tree')->getByID($createdUser->dept);
-            if((empty($dept) or ",{$this->app->user->account}," != $dept->moderators)) $this->send(array('result' => 'fail', 'message' => $this->lang->leave->denied));
-        }
-
-        $this->leave->reviewBackDate($id);
-        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-
-        $actionID = $this->loadModel('action')->create('leave', $id, 'reviewed', '', 'pass');
-        $this->sendmail($id, $actionID);
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 

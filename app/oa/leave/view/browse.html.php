@@ -49,6 +49,7 @@
             <th class='w-70px visible-lg'><?php echo $lang->user->dept;?></th>
             <th class='w-60px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->leave->type);?></th>
             <th class='w-140px'><?php commonModel::printOrderLink('begin', $orderBy, $vars, $lang->leave->start);?></th>
+            <th class='w-140px'><?php commonModel::printOrderLink('end', $orderBy, $vars, $lang->leave->finish);?></th>
             <th class='w-140px'><?php commonModel::printOrderLink('backDate', $orderBy, $vars, $lang->leave->backDate);?></th>
             <th class='w-60px visible-lg'><?php commonModel::printOrderLink('hours', $orderBy, $vars, $lang->leave->hours);?></th>
             <th><?php echo $lang->leave->desc;?></th>
@@ -69,9 +70,11 @@
           <td><?php echo zget($this->lang->leave->typeList, $leave->type);?></td>
           <td><?php echo $leave->begin . ' ' . $leave->start;?></td>
           <td><?php echo $leave->end . ' ' . $leave->finish;?></td>
+          <td><?php echo $leave->backDate;?></td>
           <td class='visible-lg'><?php echo $leave->hours == 0 ? '' : $leave->hours;?></td>
           <td title='<?php echo $leave->desc;?>'><?php echo $leave->desc;?></td>
-          <td class='leave-<?php echo $leave->status?>'><?php echo zget($this->lang->leave->statusList, $leave->status);?></td>
+          <?php $status = ($leave->status == 'pass' and $leave->backDate != '0000-00-00 00:00:00' and $leave->backDate != $leave->end . ' ' . $leave->finish) ? 'back' : $leave->status;?>
+          <td class='leave-<?php echo $status?>'><?php echo zget($this->lang->leave->statusList, $status);?></td>
           <?php if($type != 'browseReview'):?>
           <td><?php echo zget($users, $leave->reviewedBy);?></td>
           <?php endif;?>
@@ -90,7 +93,7 @@
             <?php endif;?>
 
             <?php if($type == 'browseReview' and $leave->status == 'pass' and $leave->backDate != '0000-00-00 00:00:00' and $leave->backDate != $leave->end . ' ' . $leave->finish):?>
-            <?php echo html::a($this->createLink('oa.leave', 'reviewBack', "id={$leave->id}"), $lang->leave->statusList['pass'] . $lang->leave->back, "class='reviewPass'");?>
+            <?php echo html::a($this->createLink('oa.leave', 'review', "id={$leave->id}&status=back"), $lang->leave->statusList['pass'] . $lang->leave->back, "class='reviewPass'");?>
             <?php endif;?>
 
             <?php if($type == 'personal' and $leave->status == 'pass' and $leave->backDate != $leave->end . ' ' . $leave->finish) echo html::a($this->createLink('oa.leave', 'back', "id={$leave->id}"), $lang->leave->back, "data-toggle='modal'");?>

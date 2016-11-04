@@ -48,6 +48,7 @@ $lang->leave->statusList['draft']  = 'Draft';
 $lang->leave->statusList['wait']   = 'Wait';
 $lang->leave->statusList['pass']   = 'Pass';
 $lang->leave->statusList['reject'] = 'Reject';
+$lang->leave->statusList['back']   = 'Back';
 
 $lang->leave->denied    = 'access denied';
 $lang->leave->unique    = 'There was a record of leave in %s.';

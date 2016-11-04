@@ -577,7 +577,16 @@ CREATE TABLE `cash_trade` (
   `createdDate` datetime NOT NULL,
   `editedBy` char(30) NOT NULL DEFAULT '',
   `editedDate` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `depositor` (`depositor`),
+  KEY `parent` (`parent`),
+  KEY `product` (`product`),
+  KEY `trader` (`trader`),
+  KEY `order` (`order`),
+  KEY `contract` (`contract`),
+  KEY `investID` (`investID`),
+  KEY `loanID` (`loanID`),
+  KEY `dept` (`dept`);
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `team_thread`;
 CREATE TABLE IF NOT EXISTS `team_thread` (

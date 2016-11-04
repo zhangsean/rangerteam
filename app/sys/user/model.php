@@ -580,6 +580,10 @@ class userModel extends model
      */
     public function compareHashPassword($password, $user)
     {
+        if($this->config->notMd5Pwd)
+        {
+            $password = md5(md5(md5($password) . $user->account) . $this->session->random);
+        }
         /* Check Hash if password leng is 40. */
         $passwordLength = strlen($password);
         if($passwordLength == 40)

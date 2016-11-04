@@ -473,13 +473,11 @@ $lang->resource->leave = new stdclass();
 $lang->resource->leave->browseReview = 'browseReview';
 $lang->resource->leave->company      = 'company';
 $lang->resource->leave->review       = 'review';
-$lang->resource->leave->reviewBack   = 'reviewBack';
 $lang->resource->leave->export       = 'export';
 
 $lang->leave->methodOrder[0]  = 'browseReview';
 $lang->leave->methodOrder[5]  = 'company';
 $lang->leave->methodOrder[10] = 'review';
-$lang->leave->methodOrder[11] = 'reviewBack';
 $lang->leave->methodOrder[15] = 'export';
 
 /* Lieu */
