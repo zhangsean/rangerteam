@@ -304,7 +304,7 @@ body.body-modal {padding-top: 10px;}
 .text-latin {font-family: Arial;}
 .text-lg {font-size: 24px;}
 .text-top,.text-top td {vertical-align: top !important;}
-.text-middle,.text-middle td {vertical-align: middle !important;}
+.text-middle,.text-middle th,.text-middle td {vertical-align: middle !important;}
 tr.text-center > td, tr.text-center > th {text-align: center;}
 tr.text-center > td.text-left, tr.text-center > th.text-left {text-align: left;}
 tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: right;}

@@ -105,7 +105,7 @@ class lieuModel extends model
 
         $this->dao->insert(TABLE_LIEU)->data($data)->autoCheck()
             ->batchCheck($this->config->lieu->require->create, 'notempty')
-            ->check('end', 'ge', $lieu->begin)
+            ->check('end', 'ge', $data->begin)
             ->exec();
         if(!dao::isError())
         {
