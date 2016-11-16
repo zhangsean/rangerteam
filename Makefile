@@ -27,7 +27,7 @@ ranzhi:
 	cp -fr tools ranzhi/tools && cd ranzhi/tools/ && php ./minifyfront.php && php ./cn2tw.php
 	rm -fr ranzhi/tools
 	# delete the useless files.
-	find ranzhi -name .svn |xargs rm -fr
+	find ranzhi -name .git|xargs rm -fr
 	find ranzhi -name tests |xargs rm -fr
 	for path in `find ranzhi/ -type d`; do touch "$$path/index.html"; done	
 	rm ranzhi/www/index.html
