@@ -42,13 +42,13 @@ $(document).ready(function()
 /* Keep session random valid. */
 $('#submit').click(function()
 {
-    var password    = v.notMd5Pwd ? $('#password').val() : md5(md5(md5($('#password').val()) + $('#account').val()) + v.random);
+    var password    = v.notEncryptedPwd ? $('#password').val() : md5(md5(md5($('#password').val()) + $('#account').val()) + v.random);
     var rawPassword = md5($('#password').val());
-
+    
     loginURL = createLink('user', 'login');
     $.ajax(
     {
-        contentType: v.notMd5Pwd ? 'application/json' : 'application/x-www-form-urlencoded';
+        contentType: 'application/x-www-form-urlencoded',
         type: "POST",
         data:"account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()) + '&rawPassword=' + rawPassword + '&keepLogin=' + $('#keepLogin1').is(':checked'),
         url:$('#ajaxForm').attr('action'),

@@ -580,7 +580,7 @@ class userModel extends model
      */
     public function compareHashPassword($password, $user)
     {
-        if($this->config->notMd5Pwd)
+        if(!empty($this->config->notEncryptedPwd))
         {
             $password = md5(md5(md5($password) . $user->account) . $this->session->random);
         }
