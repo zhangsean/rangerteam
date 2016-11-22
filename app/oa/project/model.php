@@ -99,6 +99,7 @@ class projectModel extends model
         {
             $project->members = isset($members[$project->id]) ? $members[$project->id] : array();
 
+            $project->PM = '';
             foreach($project->members as $member)
             {
                 if($member->role != 'manager') continue;

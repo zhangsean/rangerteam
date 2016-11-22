@@ -53,7 +53,7 @@ include '../../common/view/chosen.html.php';
         </tr>
         <?php endif;?>
         <tr>
-          <th></th><td><?php echo html::submitButton() . html::backButton();?></td>
+          <th></th><td><?php echo html::submitButton() . ' ' . html::backButton();?></td>
         </tr>
       </table>
     </form>
