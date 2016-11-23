@@ -1,15 +1,16 @@
 <?php
 if(!isset($lang->leave)) $lang->leave = new stdclass();
-$lang->leave->common = 'Leave';
-$lang->leave->browse = 'Browse leave';
-$lang->leave->create = 'Create';
-$lang->leave->edit   = 'Edit';
-$lang->leave->delete = 'Delete';
-$lang->leave->review = 'Review';
-$lang->leave->cancel = 'Cancel';
-$lang->leave->commit = 'Commit';
-$lang->leave->back   = 'Back';
-$lang->leave->export = 'Export';
+$lang->leave->common     = 'Leave';
+$lang->leave->browse     = 'Browse leave';
+$lang->leave->create     = 'Create';
+$lang->leave->edit       = 'Edit';
+$lang->leave->delete     = 'Delete';
+$lang->leave->review     = 'Review';
+$lang->leave->cancel     = 'Cancel';
+$lang->leave->commit     = 'Commit';
+$lang->leave->back       = 'Back';
+$lang->leave->export     = 'Export';
+$lang->leave->reviewBack = 'Review back date';
 
 $lang->leave->personal     = 'My leave';
 $lang->leave->browseReview = 'Review list';
