@@ -670,6 +670,8 @@ EOT;
         /* Compute status and remove signOut if date is today. */
         if($attend->date == helper::today()) 
         {
+            /* If the user did't quit system across a day, update signin time. */
+            if($attend->signIn == '00:00:00' && $attend->signOut > $this->config->attend->signInLimit) $attend->signIn = $this->config->attend->signInLimit;
             if(time() < strtotime("{$attend->date} {$this->config->attend->signOutLimit}")) $attend->signOut = '00:00:00';
             $status = $this->computeStatus($attend);
             $attend->status = $status;

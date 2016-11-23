@@ -445,7 +445,11 @@ class userModel extends model
 
         foreach($this->config->rights->member as $moduleName => $moduleMethods)
         {
-            foreach($moduleMethods as $method) $rights[$moduleName][$method] = $method;
+            foreach($moduleMethods as $method) 
+            {
+                $method = strtolower($method);
+                $rights[$moduleName][$method] = $method;
+            }
         }
 
         /* pull from ranzhi. */
@@ -580,7 +584,7 @@ class userModel extends model
      */
     public function compareHashPassword($password, $user)
     {
-        if($this->config->notMd5Pwd)
+        if(!empty($this->config->notEncryptedPwd))
         {
             $password = md5(md5(md5($password) . $user->account) . $this->session->random);
         }

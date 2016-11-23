@@ -44,7 +44,7 @@
       <div class='panel-body'>
         <div class='info'><?php echo $project->desc;?></div>
         <div class='footerbar text-important'>
-          <span><?php foreach($project->members as $member) if($member->role == 'manager') echo "<i class='icon icon-user'> </i>" . $users[$member->account];?></span>
+          <span><?php echo "<i class='icon icon-user'> </i>" . zget($users, $project->pm);?></span>
           <span class=''><i class='icon icon-time'> </i><?php echo formatTime($project->begin, 'm-d') . ' ~ ' .  formatTime($project->end, 'm-d');?></span>
           <?php $browseLink = helper::createLink('task', $this->cookie->taskListType == false ? 'browse' : $this->cookie->taskListType, "projectID=$project->id");?>
           <?php echo html::a($browseLink, $lang->project->enter, "class='btn btn-primary entry'");?>

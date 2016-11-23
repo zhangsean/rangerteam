@@ -7,3 +7,5 @@ ALTER TABLE `cash_trade` ADD INDEX `contract` (`contract`);
 ALTER TABLE `cash_trade` ADD INDEX `investID` (`investID`);
 ALTER TABLE `cash_trade` ADD INDEX `loanID` (`loanID`);
 ALTER TABLE `cash_trade` ADD INDEX `dept` (`dept`);
+
+DELETE FROM `sys_grouppriv` WHERE `module`='leave' AND `method`='reviewBack';
