@@ -445,7 +445,11 @@ class userModel extends model
 
         foreach($this->config->rights->member as $moduleName => $moduleMethods)
         {
-            foreach($moduleMethods as $method) $rights[$moduleName][$method] = $method;
+            foreach($moduleMethods as $method) 
+            {
+                $method = strtolower($method);
+                $rights[$moduleName][$method] = $method;
+            }
         }
 
         /* pull from ranzhi. */
