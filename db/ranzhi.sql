@@ -586,7 +586,7 @@ CREATE TABLE `cash_trade` (
   KEY `contract` (`contract`),
   KEY `investID` (`investID`),
   KEY `loanID` (`loanID`),
-  KEY `dept` (`dept`);
+  KEY `dept` (`dept`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 -- DROP TABLE IF EXISTS `team_thread`;
 CREATE TABLE IF NOT EXISTS `team_thread` (
