@@ -77,7 +77,7 @@ $lang->contact->emailTip     = 'Please divide emails with commas or space';
 $lang->contact->noFile       = 'No File';
 $lang->contact->importResult = '%s data imported successfully, %s data imported failure, as follows:';
 $lang->contact->failReason   = 'Reason';
-$lang->contact->showImport   = 'Show contact has been imported';
+$lang->contact->showImport   = 'Imported Contacts';
 $lang->contact->template     = 'Contact Template';
 
 $lang->contact->genderList['m'] = 'male';

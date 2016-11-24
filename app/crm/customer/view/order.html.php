@@ -31,8 +31,8 @@
       <td><?php echo $order->plan;?></td>
       <td><?php echo zget($users, $order->assignedTo);?></td>
       <td><?php echo $lang->order->statusList[$order->status];?></td>
-      <td><?php echo substr($order->contactedDate, 0, 10);?></td>
-      <td><?php echo substr($order->nextDate, 0, 10);?></td>
+      <td><?php echo formatTime($order->contactedDate, DT_DATE1);?></td>
+      <td><?php echo formatTime($order->nextDate, DT_DATE1);?></td>
     </tr>
     <?php endforeach;?>
   </tbody>
