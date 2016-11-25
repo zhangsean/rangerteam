@@ -78,6 +78,9 @@ $config->default->theme  = 'default';     // Default theme.
 $config->default->module = 'index';       // Default module.
 $config->default->method = 'index';       // Default method.
 
+$config->dashboard = new stdclass();
+$config->dashboard->modules = 'my,todo';
+
 /* Upload settings: danger files and max upload size. */
 $config->file = new stdclass();
 $config->file->dangers = 'php,php3,php4,phtml,php5,jsp,py,rb,asp,aspx,ashx,asa,cer,cdx,aspl,shtm,shtml,html,htm';
