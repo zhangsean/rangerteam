@@ -251,7 +251,7 @@ END:VCARD";
     /**
      * get data to export.
      * 
-     * @param  string $range 
+     * @param  string $type         contact | leads
      * @param  string $mode 
      * @param  string $orderBy 
      * @param  int    $recTotal 
@@ -260,7 +260,7 @@ END:VCARD";
      * @access public
      * @return void
      */
-    public function export($mode = 'all', $orderBy = 'id_desc')
+    public function export($type = 'contact', $mode = 'all', $orderBy = 'id_desc')
     { 
         if($_POST)
         {
@@ -277,17 +277,17 @@ END:VCARD";
             }
 
             $contacts = array();
+            $queryCondition = $this->session->{$type . 'QueryCondition'};
             if($mode == 'all')
             {
-                $contactQueryCondition = $this->session->contactQueryCondition;
-                if(strpos($contactQueryCondition, 'limit') !== false) $contactQueryCondition = substr($contactQueryCondition, 0, strpos($contactQueryCondition, 'limit'));
-                $stmt = $this->dbh->query($contactQueryCondition);
+                if(strpos($queryCondition, 'limit') !== false) $queryCondition = substr($queryCondition, 0, strpos($queryCondition, 'limit'));
+                $stmt = $this->dbh->query($queryCondition);
                 while($row = $stmt->fetch()) $contacts[$row->id] = $row;
             }
 
             if($mode == 'thisPage')
             {
-                $stmt = $this->dbh->query($this->session->contactQueryCondition);
+                $stmt = $this->dbh->query($queryCondition);
                 while($row = $stmt->fetch()) $contacts[$row->id] = $row;
             }
 
