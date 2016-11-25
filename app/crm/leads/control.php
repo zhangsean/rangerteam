@@ -53,6 +53,9 @@ class leads extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $contacts = $this->contact->getList($customer = '', $relation = 'client', $mode, $status, $origin, $orderBy, $pager);
+        $this->session->set('leadsQueryCondition', $this->dao->get());
+        $this->session->set('leadsList', $this->app->getURI(true));
+        $this->app->user->canEditContactIdList = ',' . implode(',', array_keys($contacts)) . ',';
 
         /* Build search form. */
         $this->loadModel('search', 'sys');
