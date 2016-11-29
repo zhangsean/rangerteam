@@ -354,7 +354,7 @@ class treeModel extends model
     public function getProductDocTreeMenu()
     {
         $menu = "<ul class='tree'>";
-        $products = $this->loadModel('product', 'crm')->getPairs();
+        $products = $this->loadModel('product')->getPairs();
         $modules  = $this->dao->findByType('productdoc')->from(TABLE_CATEGORY)->orderBy('`order`')->fetchAll();
         $projectModules = $this->dao->findByType('projectdoc')->from(TABLE_CATEGORY)->orderBy('`order`')->fetchAll();
 

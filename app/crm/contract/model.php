@@ -49,7 +49,7 @@ class contractModel extends model
      */
     public function getList($customer = 0, $mode = 'all', $owner = 'all', $orderBy = 'id_desc', $pager = null)
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
         
         /* process search condition. */
@@ -119,7 +119,7 @@ class contractModel extends model
      */
     public function getContractsSawByMe($type = 'view', $contractIdList = array())
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
         $contractList = $this->dao->select('*')->from(TABLE_CONTRACT)
             ->where('deleted')->eq(0)
             ->beginIF(!empty($contractIdList))->andWhere('id')->in($contractIdList)->fi()

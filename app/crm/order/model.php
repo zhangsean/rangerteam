@@ -20,7 +20,7 @@ class orderModel extends model
      */
     public function getByID($id = 0)
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return null;
 
         $order = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($id)->andWhere('customer')->in($customerIdList)->fetch(); 
@@ -43,7 +43,7 @@ class orderModel extends model
      */
     public function getOrdersSawByMe($type = 'view', $orderIdList = array())
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
         $orderList = $this->dao->select('*')->from(TABLE_ORDER)
             ->where('deleted')->eq(0)
             ->beginIF(!empty($orderIdList))->andWhere('id')->in($orderIdList)->fi()
@@ -68,7 +68,7 @@ class orderModel extends model
      */
     public function getList($mode = 'all', $param = '', $owner = '', $orderBy = 'id_desc', $pager = null)
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
         $this->app->loadClass('date', $static = true);
@@ -108,7 +108,7 @@ class orderModel extends model
 
         $this->session->set('orderQueryCondition', $this->dao->get());
 
-        $products = $this->loadModel('product', 'crm')->getPairs();
+        $products = $this->loadModel('product')->getPairs();
 
         foreach($orders as $order)
         {
@@ -161,7 +161,7 @@ class orderModel extends model
      */
     public function getPairs($customer = 0, $status = '')
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         if(empty($customerIdList)) return array();
 
         $orders = $this->dao->select('o.id, o.createdDate, o.product, c.name as customerName')->from(TABLE_ORDER)->alias('o')
@@ -199,7 +199,7 @@ class orderModel extends model
             ->beginIF($status)->andWhere('status')->eq($status)->fi()
             ->fetchAll('id');
 
-        $customers = $this->loadModel('customer', 'crm')->getPairs('client');
+        $customers = $this->loadModel('customer')->getPairs('client');
 
         $this->setProductsForOrders($orders);
 
@@ -272,7 +272,7 @@ class orderModel extends model
         /* Check data. */
         if($this->post->createProduct)
         {
-            $this->loadModel('product', 'crm');
+            $this->loadModel('product');
             if(!commonModel::hasPriv('product', 'create')) return array('result' => 'fail', 'message' => sprintf($this->lang->order->deny, $this->lang->product->common));
             
             $errors = array();
@@ -317,7 +317,7 @@ class orderModel extends model
             $customer->createdBy   = $this->app->user->account;
             $customer->createdDate = helper::now();
 
-            $return = $this->loadModel('customer', 'crm')->create($customer);
+            $return = $this->loadModel('customer')->create($customer);
             if($return['result'] == 'fail') return $return;
             $customerID = $return['customerID'];
             $order->customer = isset($customerID) ? $customerID : '';
@@ -570,7 +570,7 @@ class orderModel extends model
      */
     public function setProductsForOrders($orders)
     {
-        $products = $this->loadModel('product', 'crm')->getPairs();
+        $products = $this->loadModel('product')->getPairs();
 
         foreach($orders as $order)
         {

@@ -14,7 +14,7 @@ class provider extends control
     public function __CONSTRUCT()
     {
         parent::__CONSTRUCT();
-        $this->loadModel('customer', 'crm');
+        $this->loadModel('customer');
         $this->loadModel('contact', 'crm');
         $this->loadModel('resume', 'crm');
     }

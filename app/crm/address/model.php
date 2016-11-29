@@ -46,7 +46,7 @@ class addressModel extends model
      */
     public function getAddressesSawByMe($type = 'view', $addressIdList = array())
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
         $contactIdList  = $this->loadModel('contact', 'crm')->getContactsSawByMe($type);
 
         $addressListOfCustomer = $this->dao->select('*')->from(TABLE_ADDRESS)
