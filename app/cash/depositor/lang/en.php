@@ -10,7 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 if(!isset($lang->depositor)) $lang->depositor = new stdclass();
-$lang->depositor->common          = 'Depositor';
+$lang->depositor->common          = 'Account';
 $lang->depositor->id              = 'ID';
 $lang->depositor->abbr            = 'Abbreviation';
 $lang->depositor->serviceProvider = 'Service Provider';
@@ -18,7 +18,7 @@ $lang->depositor->bankProvider    = 'Account Branch';
 $lang->depositor->title           = 'Title';
 $lang->depositor->tags            = 'Tags';
 $lang->depositor->account         = 'Account';
-$lang->depositor->bankcode        = 'Bank Code';
+$lang->depositor->bankcode        = 'Account Number';
 $lang->depositor->public          = 'Public';
 $lang->depositor->type            = 'Type';
 $lang->depositor->currency        = 'Currency';
@@ -29,15 +29,15 @@ $lang->depositor->editedBy        = 'Edited By';
 $lang->depositor->editedDate      = 'Edited Date';
 
 $lang->depositor->all         = 'All';
-$lang->depositor->create      = 'Create Depositor';
-$lang->depositor->browse      = 'Browse Depositor';
-$lang->depositor->edit        = 'Edit Depositor';
-$lang->depositor->delete      = 'Delete Depositor';
+$lang->depositor->create      = 'Create Account';
+$lang->depositor->browse      = 'Account';
+$lang->depositor->edit        = 'Edit';
+$lang->depositor->delete      = 'Delete';
 $lang->depositor->view        = 'View';
 $lang->depositor->forbid      = 'Disable';
 $lang->depositor->activate    = 'Activate';
 $lang->depositor->export      = 'Export';
-$lang->depositor->balance     = 'Blance';
+$lang->depositor->balance     = 'Balance';
 $lang->depositor->saveBalance = 'Save balance';
 $lang->depositor->detail      = 'Detail';
 

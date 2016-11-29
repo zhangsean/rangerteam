@@ -62,7 +62,7 @@ class reply extends control
     {
         if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login')));
 
-        /* Judge current user has priviledge to edit the reply or not. */
+        /* Judge current user has Privilege to edit the reply or not. */
         $reply = $this->reply->getByID($replyID);
         if(!$reply) die(js::locate('back'));
 
@@ -133,7 +133,7 @@ class reply extends control
         $thread = $this->loadModel('thread', 'team')->getByID($reply->thread);
         if(!$thread) $this->send(array('result'=>'fail', 'message'=> 'data error'));
 
-        /* Judge current user has priviledge to edit the reply or not. */
+        /* Judge current user has Privilege to edit the reply or not. */
         if($this->thread->canManage($thread->board, $reply->author))
         {
             if($this->loadModel('file')->delete($fileID)) $this->send(array('result'=>'success'));

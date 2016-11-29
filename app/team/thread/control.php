@@ -73,7 +73,7 @@ class thread extends control
         $thread = $this->thread->getByID($threadID);
         if(!$thread) die(js::locate('back'));
 
-        /* Judge current user has priviledge to edit the thread or not. */
+        /* Judge current user has Privilege to edit the thread or not. */
         if(!$this->thread->canManage($thread->board, $thread->author)) die(js::locate('back'));
 
         /* Set editor for current user. */
@@ -275,7 +275,7 @@ class thread extends control
         $thread = $this->thread->getByID($threadID);
         if(!$thread) $this->send(array('result'=>'fail', 'message'=> 'data error'));
 
-        /* Judge current user has priviledge to edit the thread or not. */
+        /* Judge current user has Privilege to edit the thread or not. */
         if($this->thread->canManage($thread->board, $thread->author))
         {
             if($this->loadModel('file')->delete($fileID)) $this->send(array('result'=>'success'));

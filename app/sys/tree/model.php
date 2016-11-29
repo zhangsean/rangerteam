@@ -770,7 +770,7 @@ class treeModel extends model
     }
 
     /**
-     * Check current user has priviledge for this category. 
+     * Check current user has Privilege for this category. 
      *
      * @param  int    $category 
      * @access public
