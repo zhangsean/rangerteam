@@ -11,6 +11,12 @@
  */
 class productModel extends model
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->app->loadLang('product', 'sys');
+    }
+
     /**
      * Get produt by id.
      * 

@@ -258,6 +258,32 @@ $lang->menu->dashboard->review   = '审批|my|review|';
 $lang->menu->dashboard->company  = '组织|my|company|';
 $lang->menu->dashboard->dynamic  = '动态|my|dynamic|';
 
+/* Menu of customer module. */
+if(!isset($lang->customer)) $lang->customer = new stdclass();
+$lang->customer->menu = new stdclass();
+$lang->customer->menu->browse       = '所有客户|customer|browse|mode=all';
+$lang->customer->menu->assignedTo   = '指派给我|customer|browse|mode=assignedTo';
+$lang->customer->menu->past         = '亟需联系|customer|browse|mode=past';
+$lang->customer->menu->today        = '今天联系|customer|browse|mode=today';
+$lang->customer->menu->tomorrow     = '明天联系|customer|browse|mode=tomorrow';
+$lang->customer->menu->thisweek     = '本周内联系|customer|browse|mode=thisweek';
+$lang->customer->menu->thismonth    = '本月内联系|customer|browse|mode=thismonth';
+$lang->customer->menu->public       = '客户池|customer|browse|mode=public';
+$lang->customer->menu->report       = '报表|report|browse|module=customer';
+
+/* Menu of provider module. */
+if(!isset($lang->provider)) $lang->provider = new stdclass();
+$lang->provider->menu = new stdclass();
+$lang->provider->menu->browse = array('link' => '供应商列表|provider|browse|', 'alias' => 'create,edit,view');
+
+/* Menu of product module. */
+if(!isset($lang->product)) $lang->product = new stdclass();
+$lang->product->menu = new stdclass();
+$lang->product->menu->browse     = '所有产品|product|browse|mode=all';
+$lang->product->menu->normal     = '正常|product|browse|mode=normal';
+$lang->product->menu->developing = '研发中|product|browse|mode=developing';
+$lang->product->menu->offline    = '下线|product|browse|mode=offline';
+
 $lang->todo = new stdclass();
 $lang->todo->menu = new stdclass();
 $lang->todo->menu->calendar        = '日历|todo|calendar|';
