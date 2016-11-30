@@ -11,29 +11,31 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<?php js::set('mode', $mode);?>
+<?php js::set('status', $status);?>
 <div id='menuActions'>
   <?php commonModel::printLink('product', 'create', '', '<i class="icon-plus"></i> ' . $lang->product->create, "class='btn btn-primary' data-toggle='modal' data-width='600'");?>
 </div>
 <div class='with-side'>
-  <div class='side panel'>
-    <div class='panel-heading'>
-      <strong><?php echo $lang->product->line;?></strong>
-    </div>
-    <div class='panel-body'>
-      <ul class='tree treeview'>
-        <?php foreach($lang->product->lineList as $key => $line):?>
-        <?php if(!empty($line)) echo "<li id='{$key}'>" . html::a(inlink('browse', "mode={$mode}&line={$key}"), $line) . "</li>";?>
-        <?php endforeach;?>
-      </ul>
-      <?php commonModel::printLink('crm.setting', 'lang', 'module=product&field=lineList', $lang->product->setline, "class='btn btn-primary setting'");?>
+  <div class='side'>
+    <div class='panel'>
+      <div class='panel-heading'>
+        <strong><?php echo $lang->product->line;?></strong>
+      </div>
+      <div class='panel-body'>
+        <ul class='tree treeview'>
+          <?php foreach($lang->product->lineList as $key => $line):?>
+          <?php if(!empty($line)) echo "<li id='{$key}'>" . html::a(inlink('browse', "status={$status}&line={$key}"), $line) . "</li>";?>
+          <?php endforeach;?>
+        </ul>
+        <?php commonModel::printLink('crm.setting', 'lang', 'module=product&field=lineList', $lang->product->setline, "class='btn btn-primary setting'");?>
+      </div>
     </div>
   </div>
   <div class='main panel'>
     <table class='table table-hover table-striped tablesorter table-data' id='productList'>
       <thead>
         <tr class='text-center'>
-          <?php $vars = "mode={$mode}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
+          <?php $vars = "status={$status}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}&pageID={$pager->pageID}";?>
           <th class='w-60px'> <?php commonModel::printOrderLink('id',          $orderBy, $vars, $lang->product->id);?></th>
           <th>                <?php commonModel::printOrderLink('name',        $orderBy, $vars, $lang->product->name);?></th>
           <th class='w-200px'><?php commonModel::printOrderLink('code',        $orderBy, $vars, $lang->product->code);?></th>

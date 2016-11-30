@@ -1,4 +1,4 @@
 $(function()
 {
-    $('#menu li').removeClass('active').find('[href*=' + v.mode + ']').parent().addClass('active');
+    $('#menu li').removeClass('active').find('[href*=' + v.status + ']').parent().addClass('active');
 })
