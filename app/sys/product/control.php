@@ -45,7 +45,7 @@ class product extends control
         $this->view->products = $this->product->getList($status, $line, $orderBy, $pager);
         $this->view->pager    = $pager;
         $this->view->orderBy  = $orderBy;
-        $this->view->mode     = $status;
+        $this->view->status   = $status;
         $this->display();
     }   
 
