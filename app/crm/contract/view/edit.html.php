@@ -120,11 +120,11 @@
           </tr>
           <tr>
             <th><?php echo $lang->contract->begin;?></th>
-            <td><?php echo html::input('begin', $contract->begin, "class='form-control form-date'");?></td>
+            <td><?php echo html::input('begin', formatTime($contract->begin), "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->end;?></th>
-            <td><?php echo html::input('end', $contract->end, "class='form-control form-date'");?></td>
+            <td><?php echo html::input('end', formatTime($contract->end), "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->handlers;?></th>
@@ -149,7 +149,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->contract->signedDate;?></th>
-            <td><?php echo html::input('signedDate', $contract->signedDate, "class='form-control form-date'");?></td>
+            <td><?php echo html::input('signedDate', formatTime($contract->signedDate), "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->deliveredBy;?></th>
@@ -157,7 +157,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->contract->deliveredDate;?></th>
-            <td><?php echo html::input('deliveredDate', $contract->deliveredDate, "class='form-control form-date'");?></td>
+            <td><?php echo html::input('deliveredDate', formatTime($contract->deliveredDate), "class='form-control form-date'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->contract->returnedBy;?></th>
@@ -165,7 +165,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->contract->returnedDate;?></th>
-            <td><?php echo html::input('returnedDate', $contract->returnedDate, "class='form-control form-date'");?></td>
+            <td><?php echo html::input('returnedDate', formatTime($contract->returnedDate), "class='form-control form-date'");?></td>
           </tr>
           <?php if($contract->finishedBy):?>
           <tr>
@@ -174,7 +174,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->contract->finishedDate;?></th>
-            <td><?php echo html::input('finishedDate', $contract->finishedDate, "class='form-control form-date'");?></td>
+            <td><?php echo html::input('finishedDate', formatTime($contract->finishedDate), "class='form-control form-date'");?></td>
           </tr>
           <?php endif;?>
           <?php if($contract->canceledBy):?>
@@ -184,7 +184,7 @@
           </tr>
           <tr>
             <th><?php echo $lang->contract->canceledDate;?></th>
-            <td><?php echo html::input('canceledDate', $contract->canceledDate, "class='form-control form-date'");?></td>
+            <td><?php echo html::input('canceledDate', formatTime($contract->canceledDate), "class='form-control form-date'");?></td>
           </tr>
           <?php endif;?>
         </table>
