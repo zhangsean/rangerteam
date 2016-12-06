@@ -23,6 +23,7 @@ $lang->menu->crm->leads     = 'Leads|leads|browse|';
 $lang->menu->crm->product   = 'Product|product|index|';
 $lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=statusList';
 
+<<<<<<< HEAD
 /* Menu of customer module. */
 if(!isset($lang->customer)) $lang->customer = new stdclass();
 $lang->customer->menu = new stdclass();
@@ -49,6 +50,8 @@ $lang->product->menu->normal     = 'Normal|product|browse|mode=normal';
 $lang->product->menu->developing = 'Developing|product|browse|mode=developing';
 $lang->product->menu->offline    = 'Offline|product|browse|mode=offline';
 
+=======
+>>>>>>> ff7adfb781a62c0bbf4cf55ba210ca3fe366e25b
 /* Menu of order module. */
 if(!isset($lang->order)) $lang->order = new stdclass();
 $lang->order->menu = new stdclass();

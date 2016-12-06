@@ -216,12 +216,12 @@ class tradeModel extends model
         if($groupBy == 'industry') $list = $this->loadModel('tree')->getOptionMenu('industry', 0, true);
         if($groupBy == 'size')
         {
-            $this->app->loadLang('customer', 'crm');
+            $this->app->loadLang('customer');
             $list = $this->lang->customer->sizeNameList;
         }
         if($groupBy == 'line')
         {
-            $this->app->loadLang('product', 'crm');
+            $this->app->loadLang('product');
             $list = $this->lang->product->lineList;
         }
 

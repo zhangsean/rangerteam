@@ -181,7 +181,7 @@ class depositor extends control
         $this->view->selected      = $selected;
         $this->view->depositorList = $this->depositor->getPairs();
         $this->view->dateOptions   = (array) $this->loadModel('balance', 'cash')->getDateOptions();
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->customerList  = $this->loadModel('customer')->getPairs();
         $this->view->categories    = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
         $this->view->currencySign  = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->currencyList  = $this->loadModel('common', 'sys')->getCurrencyList();

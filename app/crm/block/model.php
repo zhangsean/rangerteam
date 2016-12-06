@@ -121,7 +121,7 @@ class crmblockModel extends blockModel
      */
     public function getCustomerParams()
     {
-        $this->app->loadLang('customer', 'crm');
+        $this->app->loadLang('customer');
 
         $params = new stdclass();
 

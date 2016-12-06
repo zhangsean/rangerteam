@@ -17,7 +17,7 @@
       <th class='w-120px text-center alert v-middle'>
         <?php $class = $contact->maker ? "class='text-red'" : "";?>
         <?php $class = $contact->left ? "class='text-strike'" : "";?>
-        <span class='lead'><?php echo html::a($this->createLink('contact', 'view', "contactID=$contact->id"), $contact->realname, $class);?></span>
+        <span class='lead'><?php echo html::a($this->createLink('crm.contact', 'view', "contactID=$contact->id"), $contact->realname, $class);?></span>
         <div><?php echo $contact->dept . ' ' . $contact->title;?></div>
       </th>
       <td>
@@ -29,7 +29,7 @@
           <?php if($contact->qq) echo "<div class='f-14'><i class='icon-qq'></i> " . html::a("http://wpa.qq.com/msgrd?v=3&uin={$contact->qq}&site={$companyName}&menu=yes", $contact->qq, "target='_blank'") . "</div>";?>
           <?php if($contact->email) echo "<div class='f-14'><i class='icon-envelope-alt'></i> " . html::mailto($contact->email, $contact->email) . "</div>";?>
         </div>
-        <p class='vcard text-center'><?php echo html::image(helper::createLink('contact', 'vcard', "contactID={$contact->id}"), "style='height:120px'");?></p>
+        <p class='vcard text-center'><?php echo html::image(helper::createLink('crm.contact', 'vcard', "contactID={$contact->id}"), "style='height:120px'");?></p>
         </div>
         <div class='col-sm-2'>
         <div class='text-right'><i class='btn-vcard icon icon-qrcode icon-large'> </i></div>

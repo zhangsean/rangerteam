@@ -192,7 +192,7 @@ class customer extends control
         $this->view->contracts    = $this->loadModel('contract', 'crm')->getList($customerID);
         $this->view->addresses    = $this->loadModel('address', 'crm')->getList('customer', $customerID);
         $this->view->actions      = $this->loadModel('action')->getList('customer', $customerID);
-        $this->view->products     = $this->loadModel('product', 'crm')->getPairs();
+        $this->view->products     = $this->loadModel('product')->getPairs();
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->areaList     = $this->loadModel('tree')->getPairs('', 'area');
         $this->view->industryList = $this->tree->getPairs('', 'industry');
@@ -271,7 +271,7 @@ class customer extends control
         $this->view->title      = $this->lang->customer->order;
         $this->view->modalWidth = 'lg';
         $this->view->orders     = $this->loadModel('order', 'crm')->getList($mode = 'query', "customer=$customerID");
-        $this->view->products   = $this->loadModel('product', 'crm')->getPairs();
+        $this->view->products   = $this->loadModel('product')->getPairs();
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->display();
     }
@@ -490,7 +490,7 @@ class customer extends control
     public function ajaxGetTodoList($account = '', $id = '', $type = 'select')
     {
         $this->app->loadClass('date', $static = true);
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe();
         $thisWeek       = date::getThisWeek();
         $customers      = array();
         if($account == '') $account = $this->app->user->account;

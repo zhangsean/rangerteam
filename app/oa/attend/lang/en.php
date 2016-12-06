@@ -125,7 +125,7 @@ $lang->attend->weeks = array('1st week', '2nd week', '3rd week', '4th week', '5t
 
 $lang->attend->notice['today']    = "<p>Your attendance yesterday is %s. <a href='%s' %s> Edit it.</a></p>";
 $lang->attend->notice['yestoday'] = "<p>Your attendance today is %s. <a href='%s' %s>Edit it.</a></p>";
-$lang->attend->notice['absent']   = "No records.";
+$lang->attend->notice['absent']   = "N/A";
 
 $lang->attend->confirmReview['pass']   = 'Do you want to pass it?';
 $lang->attend->confirmReview['reject'] = 'Do you want to reject it?';

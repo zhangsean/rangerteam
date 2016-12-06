@@ -53,11 +53,11 @@ class address extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             /* Update customer info. */
-            if($objectType == 'customer') $this->loadModel('customer', 'crm')->updateEditedDate($objectID);
+            if($objectType == 'customer') $this->loadModel('customer')->updateEditedDate($objectID);
             if($objectType == 'contact')
             {
                 $contact = $this->loadModel('contact', 'crm')->getByID($objectID);
-                if(isset($contact->customer)) $this->loadModel('customer', 'crm')->updateEditedDate($contact->customer);
+                if(isset($contact->customer)) $this->loadModel('customer')->updateEditedDate($contact->customer);
             }
 
             $this->loadModel('action', 'sys')->create($objectType, $objectID, "createAddress", '',  $this->post->title);
@@ -87,11 +87,11 @@ class address extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             /* Update customer info. */
-            if($address->objectType == 'customer') $this->loadModel('customer', 'crm')->updateEditedDate($address->objectID);
+            if($address->objectType == 'customer') $this->loadModel('customer')->updateEditedDate($address->objectID);
             if($address->objectType == 'contact')
             {
                 $contact = $this->loadModel('contact', 'crm')->getByID($address->objectID);
-                if(isset($contact->customer)) $this->loadModel('customer', 'crm')->updateEditedDate($contact->customer);
+                if(isset($contact->customer)) $this->loadModel('customer')->updateEditedDate($contact->customer);
             }
 
             if($changes)

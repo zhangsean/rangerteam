@@ -258,6 +258,32 @@ $lang->menu->dashboard->review   = 'Review|my|review|';
 $lang->menu->dashboard->company  = 'Company|my|company|';
 $lang->menu->dashboard->dynamic  = 'Dynamic|my|dynamic|';
 
+/* Menu of customer module. */
+if(!isset($lang->customer)) $lang->customer = new stdclass();
+$lang->customer->menu = new stdclass();
+$lang->customer->menu->browse       = 'All Customers|customer|browse|mode=all';
+$lang->customer->menu->assignedTo   = 'Assigned To Me|customer|browse|mode=assignedtome';
+$lang->customer->menu->past         = 'Urgently need contacted|customer|browse|mode=past';
+$lang->customer->menu->today        = 'Contact Today|customer|browse|mode=today';
+$lang->customer->menu->tomorrow     = 'Contact Tomorrow|customer|browse|mode=tomorrow';
+$lang->customer->menu->thisweek     = 'Contact This Week|customer|browse|mode=thisweek';
+$lang->customer->menu->thismonth    = 'Contact This Month|customer|browse|mode=thismonth';
+$lang->customer->menu->public       = 'Public Customers|customer|browse|mode=public';
+$lang->customer->menu->report       = 'Report|report|browse|module=customer';
+
+/* Menu of provider module. */
+if(!isset($lang->provider)) $lang->provider = new stdclass();
+$lang->provider->menu = new stdclass();
+$lang->provider->menu->browse = array('link' => 'All Providers|provider|browse|', 'alias' => 'create,edit,view');
+
+/* Menu of product module. */
+if(!isset($lang->product)) $lang->product = new stdclass();
+$lang->product->menu = new stdclass();
+$lang->product->menu->browse     = 'All Products|product|browse|mode=all';
+$lang->product->menu->normal     = 'Normal|product|browse|mode=normal';
+$lang->product->menu->developing = 'Developing|product|browse|mode=developing';
+$lang->product->menu->offline    = 'Offline|product|browse|mode=offline';
+
 $lang->todo = new stdclass();
 $lang->todo->menu = new stdclass();
 $lang->todo->menu->calendar        = 'Calendar|todo|calendar|';

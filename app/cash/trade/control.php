@@ -47,8 +47,8 @@ class trade extends control
         $this->loadModel('search', 'sys');
         $this->config->trade->search['actionURL'] = $this->createLink('trade', 'browse', 'mode=bysearch');
         $this->config->trade->search['params']['depositor']['values'] = array('' => '') + $this->loadModel('depositor', 'cash')->getPairs();
-        $this->config->trade->search['params']['product']['values']   = array('' => '') + $this->loadModel('product', 'crm')->getPairs();
-        $this->config->trade->search['params']['trader']['values']    = $this->loadModel('customer', 'crm')->getPairs();
+        $this->config->trade->search['params']['product']['values']   = array('' => '') + $this->loadModel('product')->getPairs();
+        $this->config->trade->search['params']['trader']['values']    = $this->loadModel('customer')->getPairs();
 
         $incomeCategories  = $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
         $expenseCategories = $this->tree->getOptionMenu('out', 0, $removeRoot = true);
@@ -150,13 +150,13 @@ class trade extends control
         $this->view->pager         = $pager;
         $this->view->orderBy       = $orderBy;
         $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->customerList  = $this->loadModel('customer')->getPairs();
         $this->view->deptList      = $this->tree->getPairs(0, 'dept');
         $this->view->categories    = $this->lang->trade->categoryList + $this->tree->getPairs(0, 'out') + $this->tree->getPairs(0, 'in');
         $this->view->users         = $this->loadModel('user')->getPairs();
         $this->view->currencySign  = $this->loadModel('common', 'sys')->getCurrencySign();
         $this->view->currencyList  = $this->common->getCurrencyList();
-        $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
+        $this->view->productList   = $this->loadModel('product')->getPairs();
         $this->view->currentYear   = $currentYear;
         $this->view->moduleMenu    = $moduleMenu; 
 
@@ -189,9 +189,9 @@ class trade extends control
         $this->view->title         = $this->lang->trade->{$type};
         $this->view->type          = $type;
         $this->view->depositorList = array('' => '') + $this->loadModel('depositor', 'cash')->getPairs();
-        $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
+        $this->view->productList   = $this->loadModel('product')->getPairs();
         $this->view->orderList     = $orderList;
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customerList  = $this->loadModel('customer')->getPairs('client');
         $this->view->traderList    = $this->customer->getPairs('provider');
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getList($customerID = 0);
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
@@ -229,12 +229,12 @@ class trade extends control
         $this->view->title        = $this->lang->trade->batchCreate;
         $this->view->depositors   = array('' => '') + $this->loadModel('depositor', 'cash')->getPairs();
         $this->view->users        = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
-        $this->view->customerList = $this->loadModel('customer', 'crm')->getPairs('client');
-        $this->view->traderList   = $this->loadModel('customer', 'crm')->getPairs('provider');
+        $this->view->customerList = $this->loadModel('customer')->getPairs('client');
+        $this->view->traderList   = $this->loadModel('customer')->getPairs('provider');
         $this->view->expenseTypes = array('' => '') + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
         $this->view->incomeTypes  = array('' => '') + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
         $this->view->deptList     = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
-        $this->view->productList  = array(0 => '') + $this->loadModel('product', 'crm')->getPairs();
+        $this->view->productList  = array(0 => '') + $this->loadModel('product')->getPairs();
 
         $this->display();
     }
@@ -279,9 +279,9 @@ class trade extends control
         $this->view->title         = $this->lang->trade->edit;
         $this->view->trade         = $trade;
         $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
-        $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
+        $this->view->productList   = $this->loadModel('product')->getPairs();
         $this->view->orderList     = $orderList;
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customerList  = $this->loadModel('customer')->getPairs('client');
         $this->view->traderList    = $this->customer->getPairs('provider');
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getList($customerID = 0);
         $this->view->tradeContract = array('' => '') + $this->loadModel('contract', 'crm')->getPairs($customerID = $trade->trader);
@@ -309,9 +309,9 @@ class trade extends control
         $this->view->mode          = $mode;
         $this->view->title         = $this->lang->trade->view;
         $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
-        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs('provider');
-        $this->view->productList   = $this->loadModel('product', 'crm')->getPairs();
+        $this->view->customerList  = $this->loadModel('customer')->getPairs('client');
+        $this->view->traderList    = $this->loadModel('customer')->getPairs('provider');
+        $this->view->productList   = $this->loadModel('product')->getPairs();
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
         $this->view->contractList  = array('' => '') + $this->loadModel('contract', 'crm')->getPairs($customerID = 0);
         $this->view->users         = $this->loadModel('user')->getPairs();
@@ -380,7 +380,7 @@ class trade extends control
         $this->view->users              = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
         $this->view->deptList           = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->depositorList      = $depositorList;
-        $this->view->traderList         = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->traderList         = $this->loadModel('customer')->getPairs();
         $this->view->investCategoryList = $investCategories;
         $this->view->investList         = $investList;
 
@@ -421,7 +421,7 @@ class trade extends control
         $this->view->users         = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
         $this->view->deptList      = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
         $this->view->depositorList = $depositorList;
-        $this->view->traderList    = $this->loadModel('customer', 'crm')->getPairs();
+        $this->view->traderList    = $this->loadModel('customer')->getPairs();
         $this->view->loanList      = $loanList;
 
         $this->display();
@@ -531,12 +531,12 @@ class trade extends control
         $this->view->trades             = $this->trade->getByIdList($this->post->tradeIDList);
         $this->view->depositors         = $this->loadModel('depositor', 'cash')->getPairs();
         $this->view->users              = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
-        $this->view->customerList       = $this->loadModel('customer', 'crm')->getPairs('client');
-        $this->view->traderList         = $this->loadModel('customer', 'crm')->getPairs('provider');
+        $this->view->customerList       = $this->loadModel('customer')->getPairs('client');
+        $this->view->traderList         = $this->loadModel('customer')->getPairs('provider');
         $this->view->expenseTypes       = array('' => '') + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
         $this->view->incomeTypes        = array('' => '') + $this->loadModel('tree')->getOptionMenu('in', 0, $removeRoot = true);
         $this->view->deptList           = $this->loadModel('tree')->getOptionMenu('dept', 0, $removeRoot = true);
-        $this->view->productList        = array(0 => '') + $this->loadModel('product', 'crm')->getPairs();
+        $this->view->productList        = array(0 => '') + $this->loadModel('product')->getPairs();
         $this->view->disabledCategories = $this->dao->select('*')->from(TABLE_CATEGORY)->where('major')->in('5,6,7,8')->fetchAll('id');
 
         $this->display();
@@ -603,12 +603,12 @@ class trade extends control
         unset($this->lang->trade->typeList['invest']);
         unset($this->lang->trade->typeList['redeem']);
 
-        $customerList       = $this->loadModel('customer', 'crm')->getPairs('client');
+        $customerList       = $this->loadModel('customer')->getPairs('client');
         $traderList         = $this->customer->getPairs('provider,partner');
         $expenseTypes       = array('' => '') + $this->loadModel('tree')->getOptionMenu('out', 0, $removeRoot = true);
         $incomeTypes        = array('' => '') + $this->tree->getOptionMenu('in', 0, $removeRoot = true);
         $deptList           = $this->loadModel('tree')->getPairs(0, 'dept');
-        $productList        = $this->loadModel('product', 'crm')->getPairs();
+        $productList        = $this->loadModel('product')->getPairs();
         $flipCustomers      = array_flip($customerList);
         $flipTraders        = array_flip($traderList);
         $flipTypeList       = array_flip($this->lang->trade->typeList);
@@ -798,10 +798,10 @@ class trade extends control
             
             $users      = $this->loadModel('user')->getPairs();
             $depositors = $this->loadModel('depositor', 'cash')->getPairs();
-            $customers  = $this->loadModel('customer', 'crm')->getPairs();
+            $customers  = $this->loadModel('customer')->getPairs();
             $deptList   = $this->tree->getPairs(0, 'dept');
             $categories = $this->lang->trade->categoryList + $expenseTypes + $incomeTypes;
-            $products   = $this->loadModel('product', 'crm')->getPairs();
+            $products   = $this->loadModel('product')->getPairs();
 
             $details = $this->dao->select('*')->from(TABLE_TRADE)->where('parent')->ne('')->fetchGroup('parent');
 

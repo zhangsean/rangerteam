@@ -260,7 +260,7 @@ class commonModel extends model
      */
     public function checkPrivByCustomer($customerID, $type = 'view')
     {
-        $customers = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
+        $customers = $this->loadModel('customer')->getCustomersSawByMe($type);
         if(!in_array($customerID, $customers))
         {
             $locate = helper::safe64Encode(helper::createLink('crm.index'));
@@ -355,7 +355,7 @@ class commonModel extends model
 
             if(!commonModel::isAvailable($module)) continue;
 
-            if(strpos(',tree,setting,schema,sales,', $module) != false and isset($lang->setting->menu)) 
+            if(strpos(',tree,setting,schema,sales,', ',' . $module . ',') != false and isset($lang->setting->menu)) 
             {
                 foreach($lang->setting->menu as $settingMenu)
                 {
@@ -405,7 +405,7 @@ class commonModel extends model
 
         $isMobile = $app->viewType === 'mhtml';
         $string   = !$isMobile ? "<nav id='menu'><ul class='nav'>\n" : '';
-        if(!$isMobile && strpos(',setting, tree, schema, sales, group,', $currentModule)) $string = "<nav class='menu leftmenu affix'><ul class='nav nav-primary'>\n";
+        if(!$isMobile && strpos(',setting, tree, schema, sales, group,', ',' . $currentModule . ',')) $string = "<nav class='menu leftmenu affix'><ul class='nav nav-primary'>\n";
 
         /* Get menus of current module and current method. */
         $moduleMenus   = $lang->$currentModule->menu;  
