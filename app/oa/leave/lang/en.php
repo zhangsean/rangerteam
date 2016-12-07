@@ -12,8 +12,8 @@ $lang->leave->back       = 'Back';
 $lang->leave->export     = 'Export';
 $lang->leave->reviewBack = 'Review back date';
 
-$lang->leave->personal     = 'My leave';
-$lang->leave->browseReview = 'Review list';
+$lang->leave->personal     = 'My Leave';
+$lang->leave->browseReview = 'Review List';
 $lang->leave->company      = 'All';
 
 $lang->leave->id           = 'ID';

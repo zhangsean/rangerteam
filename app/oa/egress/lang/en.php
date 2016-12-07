@@ -7,8 +7,8 @@ $lang->egress->menu = $menu;
 
 $lang->egress->common   = 'Egress';
 $lang->egress->browse   = 'Browse';
-$lang->egress->personal = 'My Egresses';
-$lang->egress->view     = 'Egress detail';
+$lang->egress->personal = 'My Egress';
+$lang->egress->view     = 'Details';
 
 $lang->egress->from = 'Departure';
 $lang->egress->to   = 'Destination';
