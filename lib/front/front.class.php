@@ -159,4 +159,19 @@ class js extends baseJS
  */
 class css extends baseCSS
 {
+    /**
+     * 引入css文件。
+     * Import a css file.
+     * 
+     * @param  string $url 
+     * @access public
+     * @return void
+     */
+    public static function import($url, $attrib = '')
+    {
+        global $config;
+        if(!empty($attrib)) $attrib = ' ' . $attrib;
+        echo "<link rel='stylesheet' href='$url?v={$config->version}' type='text/css' media='screen'{$attrib} />\n";
+        echo "<link rel='stylesheet' href='$url?v={$config->version}' type='text/css' media='print'{$attrib} />\n";
+    }
 }
