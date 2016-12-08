@@ -30,7 +30,7 @@ $lang->block->editBlock          = 'Edit';
 $lang->block->ordersSaved        = 'Ranking has been saved.';
 $lang->block->confirmRemoveBlock = 'Are you sure to remove Widget [{0}] ?';
 
-$lang->block->allEntries  = 'All Entries';
+$lang->block->allEntries  = 'All';
 $lang->block->dynamic     = 'Dynamic';
 $lang->block->dynamicInfo = "%s, %s <em>%s</em> %s <a href='%s'>%s</a>。";
 
@@ -53,7 +53,7 @@ $lang->block->default['oa']['3']['params']['orderBy'] = 'id_desc';
 $lang->block->default['oa']['3']['params']['status']  = array();
 $lang->block->default['oa']['3']['params']['type']    = 'assignedTo';
 
-$lang->block->default['oa']['4']['title'] = 'Project list';
+$lang->block->default['oa']['4']['title'] = 'ProjectS';
 $lang->block->default['oa']['4']['block'] = 'project';
 $lang->block->default['oa']['4']['grid']  = 4;
 

@@ -59,16 +59,16 @@ $lang->task->createdDate    = 'Create On';
 $lang->task->createdDateAB  = 'Create';
 $lang->task->editedBy       = 'Edited By';
 $lang->task->editedDate     = 'Edited On';
-$lang->task->assignedTo     = 'Assigned To';
+$lang->task->assignedTo     = 'Assignee';
 $lang->task->assignedDate   = 'Assigned On';
-$lang->task->estStarted     = 'Estimate start';
-$lang->task->realStarted    = 'Real start';
+$lang->task->estStarted     = 'Est. Start';
+$lang->task->realStarted    = 'Actual Start';
 $lang->task->finishedBy     = 'Finished By';
 $lang->task->finishedByAB   = 'Finish';
 $lang->task->finishedDate   = 'Finished On';
 $lang->task->finishedDateAB = 'Date';
-$lang->task->canceledBy     = 'Canceled By';
-$lang->task->canceledDate   = 'Canceled On';
+$lang->task->canceledBy     = 'CancelLed By';
+$lang->task->canceledDate   = 'CancelLed On';
 $lang->task->closedBy       = 'Closed By';
 $lang->task->closedDate     = 'Closed On';
 $lang->task->closedReason   = 'Closed Reason';
@@ -99,10 +99,10 @@ $lang->task->lblPri  = 'P';
 $lang->task->lblHour = '(h)';
 
 $lang->task->statusList['']        = '';
-$lang->task->statusList['wait']    = 'Pending';
+$lang->task->statusList['wait']    = 'Wait';
 $lang->task->statusList['doing']   = 'Doing';
 $lang->task->statusList['done']    = 'Done';
-$lang->task->statusList['cancel']  = 'Canceled';
+$lang->task->statusList['cancel']  = 'Cancelled';
 $lang->task->statusList['closed']  = 'Closed';
 
 $lang->task->typeList['']        = '';
@@ -122,8 +122,8 @@ $lang->task->reasonList['cancel'] = 'Cancelled';
 
 $lang->task->createdByMe  = 'Created By Me';
 $lang->task->assignedToMe = 'Assigned To Me';
-$lang->task->finishedByMe = 'Ffinished By Me';
-$lang->task->untilToday   = 'UntilToday';
+$lang->task->finishedByMe = 'Finished By Me';
+$lang->task->untilToday   = 'Until Today';
 $lang->task->expired      = 'Expired';
 $lang->task->all          = 'All';
 
@@ -131,7 +131,7 @@ $lang->task->basicInfo = 'Basic Info';
 $lang->task->life      = 'Task Life';
 
 $lang->task->kanban  = 'Boards';
-$lang->task->mind    = 'Mind map';
+$lang->task->mind    = 'Mind Map';
 $lang->task->list    = 'List';
 $lang->task->outline = 'Outline';
 
@@ -140,17 +140,17 @@ $lang->task->kanbanGroup['status']     = 'By Status';
 $lang->task->kanbanGroup['assignedTo'] = 'By Assigned';
 
 $lang->task->groups['']           = 'Choose group';
-$lang->task->groups['status']     = 'Group by status';
+$lang->task->groups['status']     = 'by Status';
 $lang->task->groups['assignedTo'] = 'Assigned To';
 $lang->task->groups['createdBy']  = 'Created By';
 $lang->task->groups['finishedBy'] = 'Finished By';
 $lang->task->groups['closedBy']   = 'Closed By';
 
 $lang->task->unkown     = 'Unkown';
-$lang->task->unAssigned = 'Un assigned';
+$lang->task->unAssigned = 'Unassigned';
 
 $lang->task->mindMoveTip = 'You should move a task to a sub node.';
-$lang->task->notAllowed  = 'Can not move like this.';
-$lang->task->skipClose   = 'The status of Tasks : %s are not finished or canceled, can not close.';
+$lang->task->notAllowed  = 'Not allowed.';
+$lang->task->skipClose   = 'The status of Tasks : %s are unfinished or cancelled. Not allowed to close.';
 
-$lang->task->groupinfo = "<div class='text-muted'>Total <strong>%s</strong>,waitin <strong>%s</strong>,doing <strong>%s</strong>,finished <strong>%s</strong>,closed <strong>%s</strong></div>";
+$lang->task->groupinfo = "<div class='text-muted'>Total <strong>%s</strong>, Wait <strong>%s</strong>, Doing <strong>%s</strong>, Finished <strong>%s</strong>, Closed <strong>%s</strong></div>";

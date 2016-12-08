@@ -76,7 +76,7 @@ $lang->article->lblViews     = ' <strong>Views:</strong>%s';
 $lang->article->lblEditor    = '<i>Edited by %s at %s</i>';
 $lang->article->lblReaders   = '%s users had read.';
 
-$lang->article->prev      = 'Previous';
+$lang->article->prev      = 'Prev';
 $lang->article->next      = 'Next';
 $lang->article->none      = 'None';
 $lang->article->directory = 'Back';

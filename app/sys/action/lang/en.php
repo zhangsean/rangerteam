@@ -13,7 +13,7 @@ if(!isset($lang->action)) $lang->action = new stdclass();
 
 $lang->action->common   = 'Logs';
 $lang->action->product  = 'Product';
-$lang->action->actor    = 'Actor';
+$lang->action->actor    = 'Account';
 $lang->action->contact  = 'Contact';
 $lang->action->comment  = 'Comment';
 $lang->action->action   = 'Action';
@@ -22,9 +22,9 @@ $lang->action->date     = 'Date';
 $lang->action->nextDate = 'Next Contact';
 
 $lang->action->trash      = 'Trash';
-$lang->action->objectType = 'Object type';
-$lang->action->objectID   = 'Object ID';
-$lang->action->objectName = 'Object name';
+$lang->action->objectType = 'Type';
+$lang->action->objectID   = 'ID';
+$lang->action->objectName = 'Details';
 
 $lang->action->createContact = 'Create Contact';
 $lang->action->editComment   = 'Edit Comment';
@@ -33,7 +33,7 @@ $lang->action->hideOne       = 'Hide';
 $lang->action->hideAll       = 'Hide all';
 $lang->action->hidden        = 'Hidden';
 $lang->action->undelete      = 'Undelete';
-$lang->action->trashTips     = 'Tips:The deleting actions in ranzhi are all logic';
+$lang->action->trashTips     = 'Tips:The deletions in Ranger are tag deletions.';
 
 $lang->action->textDiff = 'Text Mode';
 $lang->action->original = 'Original content';
@@ -247,14 +247,14 @@ $lang->action->objectTypes['provider']  = 'Supplier';
 $lang->action->objectTypes['doc']       = 'Doc';
 $lang->action->objectTypes['task']      = 'Task';
 $lang->action->objectTypes['product']   = 'Product';
-$lang->action->objectTypes['contact']   = 'Contact';
+$lang->action->objectTypes['contact']   = 'Contact';S
 $lang->action->objectTypes['contract']  = 'Contract';
 $lang->action->objectTypes['project']   = 'Project';
 $lang->action->objectTypes['user']      = 'User';
 $lang->action->objectTypes['resume']    = 'Resume';
 $lang->action->objectTypes['lieu']      = 'Lieu';
 $lang->action->objectTypes['overtime']  = 'Overtime';
-$lang->action->objectTypes['refund']    = 'Refund';
+$lang->action->objectTypes['refund']    = 'Reimburse';
 $lang->action->objectTypes['depositor'] = 'Account';
 $lang->action->objectTypes['balance']   = 'Balance';
 $lang->action->objectTypes['todo']      = 'Todo';
