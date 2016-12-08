@@ -30,4 +30,27 @@ class dao extends baseDAO
  */
 class sql extends baseSQL
 {
+    /**
+     * 创建ORDER BY部分。
+     * Create the order by part.
+     * 
+     * @param  string $order 
+     * @access public
+     * @return object the sql object.
+     */
+    public function orderBy($order)
+    {
+        if(strpos($order, 'convert(') !== false)
+        {
+            if($this->inCondition and !$this->conditionIsTrue) return $this;
+
+            $order = str_replace(array('|', '', '_'), ' ', $order);
+            $this->sql .= ' ' . DAO::ORDERBY . " $order";
+            return $this;
+        }
+        else
+        {
+            return parent::orderBy($order);
+        }
+    }
 }

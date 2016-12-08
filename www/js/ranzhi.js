@@ -52,7 +52,8 @@ $.extend(
                 {
                     if(response.message && response.message.length)
                     {
-                        submitButton.popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
+                        var placement = response.placement ? response.placement : 'right';
+                        submitButton.popover({trigger:'manual', content:response.message, placement:placement}).popover('show');
                         submitButton.next('.popover').addClass('popover-success');
                         function distroy(){submitButton.popover('destroy')}
                         setTimeout(distroy,2000);

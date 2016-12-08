@@ -25,9 +25,7 @@
       commonModel::printLink('product', 'edit',   "productID=$product->id", $this->lang->edit,   "class='btn btn-default' data-toggle='modal'");
       commonModel::printLink('product', 'delete', "productID=$product->id", $this->lang->delete, "class='deleter btn btn-default'");
       echo '</div>';
-
-      $browseLink = $this->session->productList ? $app->session->productList : inlink('browse');
-      echo html::a($browseLink, $lang->goback, "class='btn btn-default'");
+      echo html::backButton();
       ?>
     </div>
   </div>

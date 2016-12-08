@@ -405,7 +405,7 @@ class commonModel extends model
 
         $isMobile = $app->viewType === 'mhtml';
         $string   = !$isMobile ? "<nav id='menu'><ul class='nav'>\n" : '';
-        if(!$isMobile && strpos(',setting, tree, schema, sales, group,', ',' . $currentModule . ',')) $string = "<nav class='menu leftmenu affix'><ul class='nav nav-primary'>\n";
+        if(!$isMobile && strpos(',setting,tree,schema,sales,group,', ',' . $currentModule . ',') !== false) $string = "<nav class='menu leftmenu affix'><ul class='nav nav-primary'>\n";
 
         /* Get menus of current module and current method. */
         $moduleMenus   = $lang->$currentModule->menu;  
@@ -427,7 +427,6 @@ class commonModel extends model
 
             /* Split the methodLink to label, module, method, vars. */
             list($label, $module, $method, $vars) = explode('|', $methodLink);
-            // $label .= '<i class="icon-chevron-right"></i>';
 
             if(commonModel::hasPriv($module, $method))
             {
@@ -437,8 +436,8 @@ class commonModel extends model
                 }
 
                 $class = '';
-                if($module == $currentModule && $method == $currentMethod) $class = " class='active'";
-                if($module == $currentModule && strpos($methodAlias, $currentMethod) !== false) $class = " class='active'";
+                if($module == $currentModule && strtolower($method) == $currentMethod) $class = " class='active'";
+                if($module == $currentModule && stripos($methodAlias, $currentMethod) !== false) $class = " class='active'";
                 $url  = helper::createLink($module, $method, $vars);
                 $link = html::a($url, $label);
                 if(strpos($string, "class='active'") != false)
@@ -478,7 +477,7 @@ class commonModel extends model
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
             $class = '';
-            if($currentMethod == $method or ($currentModule == 'todo' and $module == 'todo')) $class = "class='active'";
+            if($currentMethod == strtolower($method) or ($currentModule == 'todo' and $module == 'todo')) $class = "class='active'";
             $hasPriv = commonModel::hasPriv($module, $method);
             if($module == 'my' and $method == 'order')    $hasPriv = commonModel::hasPriv('order', 'browse');
             if($module == 'my' and $method == 'contract') $hasPriv = commonModel::hasPriv('contract', 'browse');

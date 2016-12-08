@@ -11,12 +11,15 @@
  */
 ?>
 <?php include $app->appRoot . 'common/view/header.html.php';?>
+<ul id='menuTitle'>
+  <li><?php commonModel::printLink('provider', 'browse', '', $lang->provider->list);?></li>
+  <li class='divider angle'></li>
+  <li class='title'><?php echo $provider->name;?></li>
+</ul>
 <div class='row'>
   <div class='col-md-8'>
     <div class='panel'>
-      <div class='panel-heading'>
-        <strong><i class="icon-list-info"></i> <?php echo $provider->name . $lang->provider->desc;?></strong>
-      </div>
+      <div class='panel-heading'><strong><?php echo $lang->provider->desc;?></strong></div>
       <div class='panel-body'><?php echo $provider->desc;?></div>
     </div>
     <?php echo $this->fetch('action', 'history', "objectType=customer&objectID={$provider->id}")?>
@@ -46,11 +49,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->provider->industry;?></th>
-          <td><?php echo zget($industries, $provider->industry);?></td>
+          <td><?php echo zget($industries, $provider->industry, '');?></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->area;?></th>
-          <td><?php echo zget($areas, $provider->area);?></td>
+          <td><?php echo zget($areas, $provider->area, '');?></td>
         </tr>
         <tr>
           <th><?php echo $lang->provider->weibo;?></th>

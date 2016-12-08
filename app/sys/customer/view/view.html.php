@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <ul id='menuTitle'>
-  <li><?php commonModel::printLink('customer', 'browse', '', "<i class='icon-list-ul'></i> " . $lang->customer->list);?></li>
+  <li><?php commonModel::printLink('customer', 'browse', '', $lang->customer->list);?></li>
   <li class='divider angle'></li>
   <li class='title'>
     <?php echo $customer->name;?>
