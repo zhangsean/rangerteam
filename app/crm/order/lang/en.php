@@ -32,7 +32,7 @@ $lang->order->assignedBy     = 'Assigned By';
 $lang->order->assignedDate   = 'Assigned Date';
 $lang->order->signedBy       = 'Signed By';
 $lang->order->signedDate     = 'Signed Date';
-$lang->order->payedDate      = 'Payed Date';
+$lang->order->payedDate      = 'Paid Date';
 $lang->order->closedBy       = 'Closed By';
 $lang->order->closedDate     = 'Closed Date';
 $lang->order->closedReason   = 'Closed Reason';
@@ -47,7 +47,7 @@ $lang->order->editedDate     = 'Last Edited Date';
 $lang->order->createCustomer = 'Create Customer';
 $lang->order->createProduct  = 'Create';
 
-$lang->order->list          = 'Order List';
+$lang->order->list          = 'Orders';
 $lang->order->browse        = 'Browse Order';
 $lang->order->create        = 'Create';
 $lang->order->record        = 'History';
@@ -65,7 +65,7 @@ $lang->order->statusList['signed'] = 'Signed';
 $lang->order->statusList['closed'] = 'Closed';
 
 $lang->order->closedReasonList['']          = '';
-$lang->order->closedReasonList['payed']     = 'Payed';
+$lang->order->closedReasonList['payed']     = 'Paid';
 $lang->order->closedReasonList['failed']    = 'Failed';
 $lang->order->closedReasonList['postponed'] = 'Postponed';
 
@@ -79,4 +79,4 @@ $lang->order->infoContract  = 'Signed Contract: %s.';
 $lang->order->infoAmount    = 'Planned Amount: %s, Real Amount: %s.';
 $lang->order->infoContacted = 'Contacted Date: %s. ';
 $lang->order->infoNextDate  = 'Next Contact: %s.';
-$lang->order->deny          = 'You has no priviledge for createing %s.';
+$lang->order->deny          = 'You has no Privilege for createing %s.';

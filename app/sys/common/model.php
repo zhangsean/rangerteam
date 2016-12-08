@@ -94,7 +94,7 @@ class commonModel extends model
     }
 
     /**
-     * Check the priviledge.
+     * Check the Privilege.
      * 
      * @access public
      * @return void
@@ -128,12 +128,12 @@ class commonModel extends model
             die(js::locate(helper::createLink('sys.user', 'login', "referer=$referer")));
         }
 
-        /* Check the priviledge. */
+        /* Check the Privilege. */
         if(!commonModel::hasPriv($module, $method)) $this->deny($module, $method);
     }
 
     /**
-     * Check current user has priviledge to the module's method or not.
+     * Check current user has Privilege to the module's method or not.
      * 
      * @param mixed $module     the module
      * @param mixed $method     the method
@@ -167,7 +167,7 @@ class commonModel extends model
     }
 
     /**
-     * Check current user has priviledge to the app or not.
+     * Check current user has Privilege to the app or not.
      * 
      * @param  string $appname 
      * @static
@@ -251,7 +251,7 @@ class commonModel extends model
     }
 
     /**
-     * Check priviledge by customer.
+     * Check Privilege by customer.
      * 
      * @param  int    $customerID 
      * @param  string $type 

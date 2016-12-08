@@ -15,7 +15,7 @@ $lang->customer->common        = 'Customer';
 $lang->customer->id            = 'ID';
 $lang->customer->name          = 'Name';
 $lang->customer->contact       = 'Contact';
-$lang->customer->depositor     = 'Depositor';
+$lang->customer->depositor     = 'Account';
 $lang->customer->type          = 'Type';
 $lang->customer->size          = 'Size';
 $lang->customer->industry      = 'Industry';
@@ -72,9 +72,9 @@ $lang->customer->typeList['foreign']     = 'Foreign';
 $lang->customer->typeList['personal']    = 'Personal';
 
 $lang->customer->statusList['potential'] = 'Potential';
-$lang->customer->statusList['intension'] = 'Intension';
+$lang->customer->statusList['intension'] = 'Intended';
 $lang->customer->statusList['signed']    = 'Signed';
-$lang->customer->statusList['payed']     = 'Payed';
+$lang->customer->statusList['payed']     = 'Paid';
 $lang->customer->statusList['failed']    = 'Failed';
 
 $lang->customer->sizeNameList[0] = '';

@@ -5,17 +5,17 @@ $lang->backup->history     = 'History';
 $lang->backup->delete      = 'Delete';
 $lang->backup->backup      = 'Backup';
 $lang->backup->restore     = 'Restore';
-$lang->backup->setSaveDays = 'Set save days';
+$lang->backup->setSaveDays = 'Set hold days';
 
 $lang->backup->name     = 'Name';
 $lang->backup->time     = 'Time';
 $lang->backup->files    = 'Files';
 $lang->backup->size     = 'Size';
-$lang->backup->saveDays = 'Save days';
+$lang->backup->saveDays = 'Hold days';
 
 $lang->backup->waitting       = 'Restoring...';
-$lang->backup->confirmDelete  = 'Are you sure delete this backup?';
-$lang->backup->confirmRestore = 'Are you sure restore this backup?';
+$lang->backup->confirmDelete  = 'Do you want to delete this backup?';
+$lang->backup->confirmRestore = 'Do you want to restore this backup?';
 $lang->backup->deleteInfo     = 'Delete backup before %s days';
 
 $lang->backup->success = new stdclass();
