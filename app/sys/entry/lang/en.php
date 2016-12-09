@@ -10,14 +10,14 @@
  * @link        http://www.ranzhico.com
  */
 $lang->entry->common      = 'App';
-$lang->entry->admin       = 'App List';
-$lang->entry->create      = 'Add an App';
+$lang->entry->admin       = 'Apps';
+$lang->entry->create      = 'Add';
 $lang->entry->edit        = 'Edit';
 $lang->entry->delete      = 'Delete';
-$lang->entry->createKey   = 'New one';
+$lang->entry->createKey   = 'New';
 $lang->entry->order       = 'Order';
 $lang->entry->style       = 'Style';
-$lang->entry->setCategory = 'Manange Category';
+$lang->entry->setCategory = 'Manange Categories';
 
 $lang->entry->name        = 'Name';
 $lang->entry->abbr        = 'Abbr';
@@ -26,7 +26,7 @@ $lang->entry->buildin     = 'Build-in';
 $lang->entry->integration = 'Integration';
 $lang->entry->key         = 'Key';
 $lang->entry->block       = 'Block URL';
-$lang->entry->ip          = 'IP list';
+$lang->entry->ip          = 'IPs';
 $lang->entry->logo        = 'Logo';
 $lang->entry->login       = 'Access URL';
 $lang->entry->logout      = 'Logout URL';
@@ -38,7 +38,7 @@ $lang->entry->position    = 'Position';
 $lang->entry->width       = 'Width';
 $lang->entry->height      = 'Height';
 $lang->entry->priv        = 'Privilege';
-$lang->entry->category    = 'Manage Categories';
+$lang->entry->category    = 'Category';
 
 $lang->entry->chanzhi          = 'Changer';
 $lang->entry->zentao           = 'ZenTao';
@@ -47,7 +47,7 @@ $lang->entry->integrateZentao  = 'Integrate ZenTao';
 
 $lang->entry->chanzhiPlaceholder = 'Please enter Admin URL';
 $lang->entry->chanzhiURL         = 'Admin URL';
-$lang->entry->zentaoPlaceholder  = 'Example: http://www.zentaopms.com/user-login-Lw==.html';
+$lang->entry->zentaoPlaceholder  = 'E.g. http://www.zentaopms.com/user-login-Lw==.html';
 $lang->entry->zentaoURL          = 'Login ZenTao URL';
 
 $lang->entry->zentaoAdmin   = 'ZenTao Admin';
@@ -59,16 +59,16 @@ $lang->entry->createUser    = 'Create User';
 
 $lang->entry->confirmDelete = 'Do you want to delete this App?';
 $lang->entry->lblBlock      = 'Block';
-$lang->entry->editWarnning  = 'This is a system application. Edit it with care.';
+$lang->entry->editWarnning  = 'This is a system application. Think before you change it.';
 
 $lang->entry->note = new stdClass();
-$lang->entry->note->name    = 'Entry Name';
+$lang->entry->note->name    = 'App Name';
 $lang->entry->note->abbr    = 'Abbreviation';
 $lang->entry->note->logo    = 'Logo size 64*64. if upload the PNG format, you must keep transparency.';
 $lang->entry->note->code    = 'Entry alias should be letters, digits or underline.';
 $lang->entry->note->login   = 'Login URL or access App.';
 $lang->entry->note->logout  = 'Logout URL ';
-$lang->entry->note->visible = 'Display on the left bar';
+$lang->entry->note->visible = 'Display on the left';
 $lang->entry->note->api     = 'The URL of getting blocks.';
 $lang->entry->note->ip      = "Use comma between two IPs. IP segment is supported, e.g. 192.168.1.*";
 $lang->entry->note->allip   = 'All';

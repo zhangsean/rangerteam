@@ -79,4 +79,4 @@ $lang->setting->moduleList['egress']   = 'Egress';
 $lang->setting->moduleList['leave']    = 'Leave';
 $lang->setting->moduleList['overtime'] = 'Overtime';
 $lang->setting->moduleList['lieu']     = 'Lieu';
-$lang->setting->moduleList['refund']   = 'Refund';
+$lang->setting->moduleList['refund']   = 'Reimburse';

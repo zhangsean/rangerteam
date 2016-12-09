@@ -291,7 +291,7 @@ $lang->todo->menu->all             = 'All|todo|browse|mode=all';
 $lang->todo->menu->assignedToOther = 'Assigned to others|todo|browse|mode=assignedtoother';
 $lang->todo->menu->assignedToMe    = 'Assigned to me|todo|browse|mode=assignedtome';
 $lang->todo->menu->undone          = 'Undone|todo|browse|mode=undone';
-$lang->todo->menu->future          = 'Future|todo|browse|mode=future';
+$lang->todo->menu->future          = 'Pending|todo|browse|mode=future';
  
 $lang->my = new stdclass();
 $lang->my->review = new stdclass();
@@ -317,8 +317,8 @@ $lang->my->contract->menu = new stdclass();
 $lang->my->contract->menu->unfinished  = 'Unfinished|my|contract|type=unfinished';
 $lang->my->contract->menu->finished    = 'Finished|my|contract|type=finished';
 $lang->my->contract->menu->canceled    = 'Cancelled|my|contract|type=canceled';
-$lang->my->contract->menu->returnedBy  = 'Paid By Me|my|contract|type=returnedBy';
-$lang->my->contract->menu->deliveredBy = 'Delivered By Me|my|contract|type=deliveredBy';
+$lang->my->contract->menu->returnedBy  = 'Paid|my|contract|type=returnedBy';
+$lang->my->contract->menu->deliveredBy = 'Delivered|my|contract|type=deliveredBy';
 
 $lang->my->task = new stdclass();
 $lang->my->task->menu = new stdclass();
@@ -395,7 +395,7 @@ $lang->pager->noRecord   = "No records yet.";
 $lang->pager->digest     = "<strong>%s</strong> records, <strong>%s</strong> per page, <strong>%s/%s</strong> ";
 $lang->pager->recPerPage = "<strong>%s</strong> per page";
 $lang->pager->first      = " First";
-$lang->pager->pre        = " Previous";
+$lang->pager->pre        = " Prev";
 $lang->pager->next       = " Next";
 $lang->pager->last       = " Last";
 $lang->pager->locate     = "GO!";

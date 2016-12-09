@@ -9,11 +9,11 @@
  * @version     $Id: en.php 4029 2016-08-26 06:50:41Z liugang $
  * @link        http://www.ranzhico.com
  */
-$lang->mail->common = 'Email setting';
+$lang->mail->common = 'Email Settings';
 $lang->mail->index  = 'Index';
 $lang->mail->detect = 'Detect';
 $lang->mail->edit   = 'Configure';
-$lang->mail->save   = 'Successfully saved';
+$lang->mail->save   = 'Successfully saved.';
 $lang->mail->test   = 'Testing';
 $lang->mail->reset  = 'Reset';
 
@@ -43,16 +43,16 @@ $lang->mail->secureList['']    = 'plain';
 $lang->mail->secureList['ssl'] = 'ssl';
 $lang->mail->secureList['tls'] = 'tls';
 
-$lang->mail->inputFromEmail = 'Please input the from email:';
+$lang->mail->inputFromEmail = 'Please enter the from email:';
 $lang->mail->nextStep       = 'Next';
 $lang->mail->successSaved   = 'The configuration has been successfully saved.';
-$lang->mail->subject        = "It's a testing email from ranzhico.";
-$lang->mail->content        = 'If you can see this, the email notification feature can work now!';
-$lang->mail->successSended  = 'Successfully sended!';
-$lang->mail->needConfigure  = "I can not find the configuration, please configure it first.";
+$lang->mail->subject        = "This is a testing Email from Ranger.";
+$lang->mail->content        = 'If you see this notice, it means that the Email notification feature has been enabled!';
+$lang->mail->successSended  = 'Successfully sent!';
+$lang->mail->needConfigure  = "Configuration is not found. Configure it first.";
 
 $lang->mail->mailContentTip = <<<EOT
 <strong>%s</strong>(%s) Powered by <a href='https://www.ranzhico.com' target='blank'>RanZhi OA</a>.<br />
 <a href='http://www.cnezsoft.com' target='blank'>Nature Easy Soft</a>
 EOT;
-$lang->mail->openTip = 'Send e-mail when assign order, customer and task, review leave and refund.';
+$lang->mail->openTip = 'Send E-mail notifications when any update to orders, customers and tasks, reviews and reimbursements.';
