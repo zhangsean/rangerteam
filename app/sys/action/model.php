@@ -839,7 +839,7 @@ class actionModel extends model
         if($action->customer)
         {
             static $customers = array();
-            if(empty($customers)) $customers = $this->loadModel('customer', 'crm')->getCustomersSawByMe();
+            if(empty($customers)) $customers = $this->loadModel('customer')->getCustomersSawByMe();
             if(!in_array($action->customer, $customers)) $canView = false;
         }
 

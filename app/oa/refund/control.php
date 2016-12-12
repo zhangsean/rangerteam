@@ -430,7 +430,7 @@ class refund extends control
         $this->view->depositorList = $this->loadModel('depositor', 'cash')->getPairs();
         $this->view->orderList     = $this->loadModel('order', 'crm')->getPairs($customerID = 0);
         $this->view->contractList  = $this->loadModel('contract', 'crm')->getList($customerID = 0);
-        $this->view->customerList  = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customerList  = $this->loadModel('customer')->getPairs('client');
 
         $this->display();
     }

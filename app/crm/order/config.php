@@ -26,7 +26,7 @@ $config->order->statusClassList['payed']    = 'alert-success';
 $config->order->statusClassList['closed']   = '';
 
 global $lang, $app;
-$app->loadLang('customer', 'crm');
+$app->loadLang('customer');
 $config->order->search['module'] = 'order';
 
 $config->order->search['fields']['o.customer']      = $lang->order->customer;

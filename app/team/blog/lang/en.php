@@ -13,8 +13,8 @@ $lang->blog->common = "Blog";
 
 $lang->blog->latestArticles = 'Latest Articles';
 
-$lang->blog->index  = "Index";
-$lang->blog->create = "Create";
+$lang->blog->index  = "Home";
+$lang->blog->create = "Create Blog";
 $lang->blog->edit   = "Edit";
 $lang->blog->view   = "View";
 $lang->blog->delete = "Delete";

@@ -33,7 +33,7 @@ class resumeModel extends model
      */
     public function getResumesSawByMe($type = 'view', $resumeIdList = array())
     {
-        $customerIdList = $this->loadModel('customer', 'crm')->getCustomersSawByMe($type);
+        $customerIdList = $this->loadModel('customer')->getCustomersSawByMe($type);
         $resumeList = $this->dao->select('*')->from(TABLE_RESUME)
             ->where('deleted')->eq(0)
             ->beginIF(!empty($resumeIdList))->andWhere('id')->in($resumeIdList)->fi()
@@ -87,7 +87,7 @@ class resumeModel extends model
                 $customer->createdBy   = $this->app->user->account;
                 $customer->createdDate = helper::now();
 
-                $return = $this->loadModel('customer', 'crm')->create($customer);
+                $return = $this->loadModel('customer')->create($customer);
                 if($return['result'] == 'fail') return false;
 
                 $resume->customer = $return['customerID'];

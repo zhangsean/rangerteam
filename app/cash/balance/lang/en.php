@@ -13,13 +13,13 @@ $lang->balance = new stdclass();
 
 $lang->balance->common    = 'Balance';
 $lang->balance->id        = 'ID';
-$lang->balance->depositor = 'Depositor';
+$lang->balance->depositor = 'Account';
 $lang->balance->currency  = 'currency';
 $lang->balance->money     = 'Amount';
 $lang->balance->desc      = 'Description';
 $lang->balance->date      = 'Date';
 
-$lang->balance->create = 'Create Balance';
-$lang->balance->browse = 'Browse Balances';
-$lang->balance->edit   = 'Edit Balance';
-$lang->balance->delete = 'Delete Balance';
+$lang->balance->create = 'Add Balance';
+$lang->balance->browse = 'Balance';
+$lang->balance->edit   = 'Edit';
+$lang->balance->delete = 'Delete';

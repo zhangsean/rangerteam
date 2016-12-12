@@ -12,7 +12,7 @@
 $lang->index->common       = 'Index';
 $lang->index->dashboard    = 'Dashboard';
 $lang->index->about        = 'About';
-$lang->index->allEntries   = 'All Entries';
+$lang->index->allEntries   = 'All';
 $lang->index->showOnLeft   = 'On left';
 $lang->index->notOnLeft    = 'Not on left';
 $lang->index->opened       = 'opened';

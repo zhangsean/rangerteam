@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.html.php';?>
 <?php include '../../../sys/common/view/kindeditor.html.php';?>
 <ul id='menuTitle'>
-  <li><?php commonModel::printLink('customer', 'browse', '', "<i class='icon-list-ul'></i> " . $lang->customer->list);?></li>
+  <li><?php commonModel::printLink('customer', 'browse', '', $lang->customer->list);?></li>
   <li class='divider angle'></li>
   <li class='title'>
     <?php echo $customer->name;?>
@@ -118,7 +118,7 @@
         </table>
       </div>
     </div>
-    <?php echo $this->fetch('contact', 'block', "customer={$customer->id}")?>
+    <?php echo $this->fetch('contact', 'block', "customer={$customer->id}", 'crm')?>
     <div class='panel'>
       <div class='panel-heading'>
         <div class='row'>      
@@ -129,7 +129,7 @@
       </div>
       <table class='table table-data table-condensed'>
         <?php foreach($contracts as $contract):?>
-        <tr data-url='<?php echo $this->createLink('contract', 'view', "contractID=$contract->id"); ?>'>
+        <tr data-url='<?php echo $this->createLink('crm.contract', 'view', "contractID=$contract->id"); ?>'>
           <td class='w-p70'><?php echo $contract->name;?></td>
           <td class='w-p15'><?php echo zget($currencySign, $contract->currency, '') . $contract->amount;?></td>
           <td class='w-p15 <?php echo "contract-{$contract->status}";?>'><?php echo $lang->contract->statusList[$contract->status];?></td>
@@ -148,7 +148,7 @@
       </div>
       <table class='table table-data table-condensed'>
         <?php foreach($orders as $order):?>
-        <tr data-url='<?php echo $this->createLink('order', 'view', "orderID=$order->id"); ?>'>
+        <tr data-url='<?php echo $this->createLink('crm.order', 'view', "orderID=$order->id"); ?>'>
           <td class='w-p35'><?php foreach($order->products as $product) echo $product . ' ';?></td>
           <td class='w-p25'><?php echo $order->plan;?></td>
           <td class='w-p25'><?php echo zget($currencySign, $order->currency, '') . $order->real;?></td>

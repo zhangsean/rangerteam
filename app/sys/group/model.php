@@ -492,7 +492,7 @@ class groupModel extends model
     }
 
     /**
-     * Update accounts when change priviledge.
+     * Update accounts when change Privilege.
      * 
      * @param  int    $groupID 
      * @access public

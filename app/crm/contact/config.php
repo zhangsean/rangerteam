@@ -20,7 +20,7 @@ $config->contact->contactWayList  = array('mobile', 'phone', 'email', 'qq', 'wei
 $config->contact->areaCode = ',010,020,021,022,023,024,025,027,028,029,';
 
 global $lang, $app;
-$app->loadLang('customer', 'crm');
+$app->loadLang('customer');
 $config->contact->search['module'] = 'contact';
 
 $config->contact->search['fields']['t1.realname']      = $lang->contact->realname;

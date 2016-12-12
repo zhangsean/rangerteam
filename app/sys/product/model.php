@@ -11,6 +11,12 @@
  */
 class productModel extends model
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->app->loadLang('product', 'sys');
+    }
+
     /**
      * Get produt by id.
      * 
@@ -26,22 +32,20 @@ class productModel extends model
     /** 
      * Get product list.
      * 
-     * @param  string  $mode
+     * @param  string  $status
      * @param  string  $line
      * @param  string  $orderBy 
      * @param  object  $pager 
      * @access public
      * @return array
      */
-    public function getList($mode = '', $line = '', $orderBy = 'id_desc', $pager = null)
+    public function getList($status = '', $line = '', $orderBy = 'id_desc', $pager = null)
     {
         if(strpos($orderBy, 'id') === false) $orderBy .= ', id_desc';
 
         return $this->dao->select('*')->from(TABLE_PRODUCT)
             ->where('deleted')->eq(0)
-            ->beginIF($mode == 'developing')->andWhere('status')->eq('developing')->fi()
-            ->beginIF($mode == 'normal')->andWhere('status')->eq('normal')->fi()
-            ->beginIF($mode == 'offline')->andWhere('status')->eq('offline')->fi()
+            ->beginIF($status && $status != 'all')->andWhere('status')->eq($status)->fi()
             ->beginIF($line)->andWhere('line')->eq($line)->fi()
             ->orderBy($orderBy)
             ->page($pager)

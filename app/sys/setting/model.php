@@ -86,6 +86,7 @@ class settingModel extends model
 
         $table = $type == 'config' ? TABLE_CONFIG : TABLE_LANG;
         $this->dao->replace($table)->data($item)->exec();
+        return $this->dao->lastInsertID();
     }
 
     /**
@@ -115,7 +116,7 @@ class settingModel extends model
             }
             else
             {
-                $this->setItem($path . '.' . $key, $item);
+                $this->setItem($path . '.' . $key, $item, $type);
             }
         }
 

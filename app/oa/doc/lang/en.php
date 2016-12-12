@@ -17,7 +17,7 @@ $lang->doc->project        = 'Project';
 $lang->doc->lib            = 'Library';
 $lang->doc->category       = 'Category';
 $lang->doc->title          = 'Title';
-$lang->doc->digest         = 'Digest';
+$lang->doc->digest         = 'Summary';
 $lang->doc->comment        = 'Comment';
 $lang->doc->type           = 'Type';
 $lang->doc->content        = 'Content';
@@ -26,24 +26,24 @@ $lang->doc->url            = 'URL';
 $lang->doc->files          = 'File';
 $lang->doc->views          = 'Views';
 $lang->doc->createdBy      = 'Created by';
-$lang->doc->createdDate    = 'Created date';
+$lang->doc->createdDate    = 'Created on';
 $lang->doc->editedBy       = 'Edited by';
-$lang->doc->editedDate     = 'Edited date';
+$lang->doc->editedDate     = 'Edited on';
 $lang->doc->basicInfo      = 'Basic Info';
 $lang->doc->deleted        = 'Deleted';
 
 $lang->doc->index          = 'Index';
-$lang->doc->create         = 'Create doc';
-$lang->doc->edit           = 'Edit doc';
-$lang->doc->delete         = 'Delete doc';
-$lang->doc->browse         = 'Browse doc';
-$lang->doc->view           = 'View doc';
-$lang->doc->manageType     = 'Manage type';
+$lang->doc->create         = 'Create';
+$lang->doc->edit           = 'Edit';
+$lang->doc->delete         = 'Delete';
+$lang->doc->browse         = 'Documents';
+$lang->doc->view           = 'Documents';
+$lang->doc->manageType     = 'Manage Categories';
 
-$lang->doc->libName        = 'Library name';
-$lang->doc->createLib      = 'Create library';
-$lang->doc->editLib        = 'Edit library';
-$lang->doc->deleteLib      = 'Delete library';
+$lang->doc->libName        = 'Name';
+$lang->doc->createLib      = 'Create a Library';
+$lang->doc->editLib        = 'Edit';
+$lang->doc->deleteLib      = 'Delete';
 
 $lang->doc->allProduct     = 'All products';
 $lang->doc->allProject     = 'All projects';
@@ -60,13 +60,13 @@ $lang->doc->types['file'] = 'File';
 $lang->doc->types['url']  = 'Link';
 $lang->doc->types['text'] = 'Html';
 
-$lang->doc->confirmDelete      = "Are you sure to delete this doc?";
-$lang->doc->confirmDeleteLib   = "Are you sure to delete this doc library?";
-$lang->doc->errorEditSystemDoc = "System doc library needn't edit.";
+$lang->doc->confirmDelete      = "Do you want to delete this doc?";
+$lang->doc->confirmDeleteLib   = "Do you want to delete this doc library?";
+$lang->doc->errorEditSystemDoc = "System doc library cannot be edited.";
 
 $lang->doc->placeholder = new stdclass();
 $lang->doc->placeholder->url = 'url';
 
 $lang->doc->notFound    = 'The document does not exist';
 $lang->doc->libNotFound = 'The document library does not exist';
-$lang->doc->libNotFound = '该文档库不存在';
+$lang->doc->libNotFound = 'Doc Lib is not found.';

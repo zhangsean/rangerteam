@@ -123,7 +123,7 @@ class leads extends control
                 $this->action->logHistory($actionID, $changes);
             }
 
-            $this->loadModel('customer', 'crm')->updateEditedDate($this->post->customer);
+            $this->loadModel('customer')->updateEditedDate($this->post->customer);
             $return = $this->contact->updateAvatar($contactID);
 
             $message = $return['result'] ? $this->lang->saveSuccess : $return['message'];
@@ -261,7 +261,7 @@ class leads extends control
 
         $this->view->title     = $this->lang->confirm . $this->lang->contact->common;
         $this->view->contact   = $this->contact->getByID($contactID, 'wait');
-        $this->view->customers = $this->loadModel('customer', 'crm')->getPairs('client');
+        $this->view->customers = $this->loadModel('customer')->getPairs('client');
         $this->display();
     }
 

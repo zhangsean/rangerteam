@@ -114,8 +114,8 @@ class reportModel extends model
             if($listName == 'USERS')      $list = $this->loadModel('user')->getPairs();
             if($listName == 'AREA')       $list = $this->loadModel('tree')->getOptionMenu('area', 0, true);
             if($listName == 'INDUSTRY')   $list = $this->loadModel('tree')->getOptionMenu('industry', 0, true);
-            if($listName == 'PRODUCTS')   $list = $this->loadModel('product', 'crm')->getPairs();
-            if($listName == 'CUSTOMERS')  $list = $this->loadModel('customer', 'crm')->getPairs();
+            if($listName == 'PRODUCTS')   $list = $this->loadModel('product')->getPairs();
+            if($listName == 'CUSTOMERS')  $list = $this->loadModel('customer')->getPairs();
             if($listName == 'DEPOSITORS') $list = $this->loadModel('depositor')->getPairs();
             if(!isset($list))
             {

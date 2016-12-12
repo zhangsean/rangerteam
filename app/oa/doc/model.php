@@ -160,7 +160,7 @@ class docModel extends model
      */
     public function getDocList($libID, $productID, $projectID, $module, $orderBy, $pager)
     {
-        $products = $this->loadModel('product', 'crm')->getPairs();
+        $products = $this->loadModel('product')->getPairs();
         $projects = array();
         //$projects = $this->loadModel('project', 'oa')->getPairs();
 

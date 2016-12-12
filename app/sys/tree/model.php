@@ -354,7 +354,7 @@ class treeModel extends model
     public function getProductDocTreeMenu()
     {
         $menu = "<ul class='tree'>";
-        $products = $this->loadModel('product', 'crm')->getPairs();
+        $products = $this->loadModel('product')->getPairs();
         $modules  = $this->dao->findByType('productdoc')->from(TABLE_CATEGORY)->orderBy('`order`')->fetchAll();
         $projectModules = $this->dao->findByType('projectdoc')->from(TABLE_CATEGORY)->orderBy('`order`')->fetchAll();
 
@@ -538,7 +538,7 @@ class treeModel extends model
 
         $linkHtml  = $category->name;
         $linkHtml .= ' ' . html::a(helper::createLink('tree', 'edit', "category={$category->id}"), $lang->tree->edit, "class='ajax'");
-        if($category->type != 'product') $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}&root=$category->root"), $lang->category->children, "class='$childrenLinkClass ajax'");
+        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}&root=$category->root"), $lang->category->children, "class='$childrenLinkClass ajax'");
         $linkHtml .= ' ' . ($category->major ? html::a('#', $lang->delete, "disabled='disabled'") : html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'"));
 
         return $linkHtml;
@@ -770,7 +770,7 @@ class treeModel extends model
     }
 
     /**
-     * Check current user has priviledge for this category. 
+     * Check current user has Privilege for this category. 
      *
      * @param  int    $category 
      * @access public
