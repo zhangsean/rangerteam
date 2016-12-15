@@ -104,7 +104,7 @@ class orderModel extends model
             ->beginIF($mode == 'query')->andWhere($param)->fi()
             ->beginIF($mode == 'bysearch')->andWhere($orderQuery)->fi()
             ->andWhere('o.customer')->in($customerIdList)
-            ->orderBy($orderBy)->page($pager)->fetchAll('id');
+            ->orderBy("o.$orderBy")->page($pager)->fetchAll('id');
 
         $this->session->set('orderQueryCondition', $this->dao->get());
 

@@ -287,7 +287,11 @@ class todoModel extends model
         if($todo->type == 'customer') $todo->name = $this->dao->findById($todo->idvalue)->from(TABLE_CUSTOMER)->fetch('name'); 
         if($todo->type == 'order') 
         {
-            $order = $this->dao->select('c.name, o.createdDate')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->where('o.id')->eq($todo->idvalue)->fetch(); 
+            $order = $this->dao->select('c.name, o.createdDate')
+                ->from(TABLE_ORDER)->alias('o')
+                ->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')
+                ->where('o.id')->eq($todo->idvalue)
+                ->fetch(); 
             $todo->name = $order->name . '|' . date('Y-m-d', strtotime($order->createdDate));
         }
 
@@ -317,7 +321,10 @@ class todoModel extends model
         $todos     = $this->dao->select('*')->from(TABLE_TODO)->where('id')->in($todoIDList)->fetchAll('id');
         $tasks     = $this->dao->select('id, name')->from(TABLE_TASK)->fetchPairs();
         $customers = $this->loadModel('customer')->getPairs();
-        $orders    = $this->dao->select('o.id, o.createdDate, c.name')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->fetchAll('id');
+        $orders    = $this->dao->select('o.id, o.createdDate, c.name')
+            ->from(TABLE_ORDER)->alias('o')
+            ->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')
+            ->fetchAll('id');
         $zentaoEntryList = $this->dao->select('*')->from(TABLE_ENTRY)->where('zentao')->eq(1)->fetchAll();
 
         $this->loadModel('sso');
@@ -450,7 +457,11 @@ class todoModel extends model
             if($todo->type == 'customer') $todo->name = $this->dao->findById($todo->idvalue)->from(TABLE_CUSTOMER)->fetch('name'); 
             if($todo->type == 'order') 
             {
-                $order = $this->dao->select('c.name, o.createdDate')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->where('o.id')->eq($todo->idvalue)->fetch(); 
+                $order = $this->dao->select('c.name, o.createdDate')
+                    ->from(TABLE_ORDER)->alias('o')
+                    ->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')
+                    ->where('o.id')->eq($todo->idvalue)
+                    ->fetch(); 
                 $todo->name = $order->name . '|' . date('Y-m-d', strtotime($order->createdDate));
             }
 

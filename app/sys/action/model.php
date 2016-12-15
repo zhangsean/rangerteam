@@ -377,7 +377,11 @@ class actionModel extends model
             if($table != '`oa_todo`' and $table != '`cash_trade`')
             {
                 $objectNames[$objectType] = $this->dao->select("id, $field AS name")->from($table)->where('id')->in($objectIds)->fetchPairs();
-                if($objectType == 'order') $objectNames[$objectType] = $this->dao->select('o.id, concat(c.name, o.createdDate) as name')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->where('o.id')->in($objectIds)->fetchPairs(); 
+                if($objectType == 'order') $objectNames[$objectType] = $this->dao->select('o.id, concat(c.name, o.createdDate) as name')
+                    ->from(TABLE_ORDER)->alias('o')
+                    ->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')
+                    ->where('o.id')->in($objectIds)
+                    ->fetchPairs(); 
             }
             elseif($table == '`oa_todo`')
             {
@@ -388,7 +392,11 @@ class actionModel extends model
                     if($todo->type == 'customer') $todo->name = $this->dao->findById($todo->idvalue)->from(TABLE_CUSTOMER)->fetch('name'); 
                     if($todo->type == 'order') 
                     {
-                        $order = $this->dao->select('c.name, o.createdDate')->from(TABLE_ORDER)->alias('o')->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')->where('o.id')->eq($todo->idvalue)->fetch(); 
+                        $order = $this->dao->select('c.name, o.createdDate')
+                            ->from(TABLE_ORDER)->alias('o')
+                            ->leftJoin(TABLE_CUSTOMER)->alias('c')->on('o.customer=c.id')
+                            ->where('o.id')->eq($todo->idvalue)
+                            ->fetch(); 
                         $todo->name = $order->name . '|' . date('Y-m-d', strtotime($order->createdDate));
                     }
                     if(isset($this->lang->action->objectTypes[$todo->type])) $todo->name = $this->lang->action->objectTypes[$todo->type] . ':' . $todo->name;

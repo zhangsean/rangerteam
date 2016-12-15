@@ -146,7 +146,9 @@ class attendModel extends model
         $this->processStatus();
         $users = $this->loadModel('user')->getPairs('noclosed,noempty,nodeleted,noforbidden', $deptID);
 
-        $attends = $this->dao->select('t1.*, t2.dept')->from(TABLE_ATTEND)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.account=t2.account")
+        $attends = $this->dao->select('t1.*, t2.dept')
+            ->from(TABLE_ATTEND)->alias('t1')
+            ->leftJoin(TABLE_USER)->alias('t2')->on("t1.account=t2.account")
             ->where('t1.account')->in(array_keys($users))
             ->beginIf($startDate != '')->andWhere('t1.date')->ge($startDate)->fi()
             ->beginIf($endDate != '')->andWhere('t1.date')->le($endDate)->fi()

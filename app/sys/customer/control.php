@@ -496,7 +496,7 @@ class customer extends control
         if($account == '') $account = $this->app->user->account;
 
         $sql = $this->dao->select('c.id, c.name, c.nextDate, t.id as todo')->from(TABLE_CUSTOMER)->alias('c')
-            ->leftjoin(TABLE_TODO)->alias('t')->on("t.type='customer' and c.id = t.idvalue")
+            ->leftJoin(TABLE_TODO)->alias('t')->on("t.type='customer' and c.id = t.idvalue")
             ->where('c.deleted')->eq(0)
             ->andWhere('c.assignedTo')->eq($account)
             ->andWhere('c.relation')->ne('provider')

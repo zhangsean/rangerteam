@@ -80,7 +80,7 @@ class projectModel extends model
                 ->andWhere('t2.type')->eq('project')
                 ->beginIF($status == 'involved')->andWhere('t1.status')->eq('doing')->andWhere('t2.account')->eq($this->app->user->account)->fi()
                 ->beginIF($status == 'bysearch')->andWhere($projectQuery)->fi()
-                ->orderBy($orderBy)
+                ->orderBy("t1.$orderBy")
                 ->fetchAll('id');
         }
         else
@@ -142,7 +142,7 @@ class projectModel extends model
             ->where('t2.status')->notIN('done,closed')
             ->andWhere('t2.deleted')->eq(0)
             ->andWhere('t1.deleted')->eq(0)
-            ->orderBy('id desc')
+            ->orderBy('t1.id desc')
             ->fetchAll('id');
 
         $pairs = array();

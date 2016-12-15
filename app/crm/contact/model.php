@@ -185,7 +185,7 @@ class contactModel extends model
                 ->beginIF($mode == 'thismonth')->andWhere('t1.nextDate')->between($thisMonth['begin'], $thisMonth['end'])->fi()
                 ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
                 ->beginIF($mode == 'bysearch')->andWhere($contactQuery)->fi()
-                ->orderBy($orderBy)
+                ->orderBy("t1.$orderBy")
                 ->page($pager)
                 ->fetchAll('id');
 

@@ -50,7 +50,9 @@ class tripModel extends model
      */
     public function getList($type = 'trip', $year = '', $month = '', $account = '', $dept = '', $orderBy = 'id_desc')
     {
-        return $this->dao->select('t1.*, t2.realname, t2.dept')->from(TABLE_TRIP)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.createdBy=t2.account")
+        return $this->dao->select('t1.*, t2.realname, t2.dept')
+            ->from(TABLE_TRIP)->alias('t1')
+            ->leftJoin(TABLE_USER)->alias('t2')->on("t1.createdBy=t2.account")
             ->where('1=1')
             ->beginIF($type != '')->andWhere('t1.type')->eq($type)->fi()
             ->beginIF($year != '')->andWhere('t1.year')->eq($year)->fi()

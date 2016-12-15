@@ -38,7 +38,9 @@ class leaveModel extends model
      */
     public function getList($type = 'personal', $year = '', $month = '', $account = '', $dept = '', $status = '', $orderBy = 'id_desc')
     {
-        $leaveList = $this->dao->select('t1.*, t2.realname, t2.dept')->from(TABLE_LEAVE)->alias('t1')->leftJoin(TABLE_USER)->alias('t2')->on("t1.createdBy=t2.account")
+        $leaveList = $this->dao->select('t1.*, t2.realname, t2.dept')
+            ->from(TABLE_LEAVE)->alias('t1')
+            ->leftJoin(TABLE_USER)->alias('t2')->on("t1.createdBy=t2.account")
             ->where('1=1')
             ->beginIf($year != '')->andWhere('t1.year')->eq($year)->fi()
             ->beginIf($month != '')->andWhere('t1.begin')->like("%-$month-%")->fi()
