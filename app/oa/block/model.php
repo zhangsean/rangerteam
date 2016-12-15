@@ -23,8 +23,8 @@ class oablockModel extends blockModel
     {
         foreach($this->lang->block->availableBlocks as $key => $block)
         {
+            if($key == 'attend') continue;
             $method = $key == 'project' ? 'index' : 'browse';
-            if($key == 'attend') $method = 'personal';
             if(!commonModel::hasPriv($key, $method)) unset($this->lang->block->availableBlocks->$key);
         }
         return json_encode($this->lang->block->availableBlocks);
