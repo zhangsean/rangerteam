@@ -78,7 +78,7 @@ class articleModel extends model
             ->beginIf($mode == 'query' and $param)->andWhere($param)->fi()
             ->beginIf($mode == 'bysearch')->andWhere($$moduleQuery)->fi()
             ->groupBy('t2.id')
-            ->orderBy($orderBy)
+            ->orderBy("t1.$orderBy")
             ->fetchAll('id');
         if(!$articles) return array();
 
@@ -139,7 +139,7 @@ class articleModel extends model
             ->andWhere('t1.status')->eq('normal')
             ->fi()
             ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
-            ->orderBy($orderBy)
+            ->orderBy("t1.$orderBy")
             ->page($pager, false)
             ->fetchAll('id');
     }

@@ -886,8 +886,8 @@ class task extends control
 
         $sql = $this->dao->select('t1.id, t1.name, t2.name as project, t3.id as todo')
             ->from(TABLE_TASK)->alias('t1')
-            ->leftjoin(TABLE_PROJECT)->alias('t2')->on('t1.project = t2.id')
-            ->leftjoin(TABLE_TODO)->alias('t3')->on("t3.type='task' and t1.id = t3.idvalue")
+            ->leftJoin(TABLE_PROJECT)->alias('t2')->on('t1.project = t2.id')
+            ->leftJoin(TABLE_TODO)->alias('t3')->on("t3.type='task' and t1.id = t3.idvalue")
             ->where('t1.assignedTo')->eq($account)
             ->andwhere('t1.status')->in($status)
             ->andWhere('t1.deleted')->eq(0)
