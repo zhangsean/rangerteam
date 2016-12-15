@@ -198,12 +198,12 @@ class contract extends control
             if($this->post->finish)
             {
                 $this->loadModel('action', 'sys')->create('contract', $contractID, 'finishDelivered', $this->post->comment, '', $this->post->deliveredBy);
-                $this->loadModel('action', 'sys')->create('customer', $contract->customer, 'finishDeliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
+                $this->action->create('customer', $contract->customer, 'finishDeliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
             }
             else
             {
                 $this->loadModel('action', 'sys')->create('contract', $contractID, 'Delivered', $this->post->comment, '', $this->post->deliveredBy);
-                $this->loadModel('action', 'sys')->create('customer', $contract->customer, 'deliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
+                $this->action->create('customer', $contract->customer, 'deliverContract', $this->post->comment, html::a($this->createLink('contract', 'view', "contractID=$contractID"), $contract->name), $this->post->deliveredBy);
             }
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => 'reload'));

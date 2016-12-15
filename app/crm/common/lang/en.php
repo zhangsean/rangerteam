@@ -23,35 +23,6 @@ $lang->menu->crm->leads     = 'Leads|leads|browse|';
 $lang->menu->crm->product   = 'Product|product|index|';
 $lang->menu->crm->setting   = 'Settings|setting|lang|module=product&field=statusList';
 
-<<<<<<< HEAD
-/* Menu of customer module. */
-if(!isset($lang->customer)) $lang->customer = new stdclass();
-$lang->customer->menu = new stdclass();
-$lang->customer->menu->browse       = 'All Customers|customer|browse|mode=all';
-$lang->customer->menu->assignedTo   = 'Assigned To Me|customer|browse|mode=assignedtome';
-$lang->customer->menu->past         = 'Urgent|customer|browse|mode=past';
-$lang->customer->menu->today        = 'Today|customer|browse|mode=today';
-$lang->customer->menu->tomorrow     = 'Tomorrow|customer|browse|mode=tomorrow';
-$lang->customer->menu->thisweek     = 'This Week|customer|browse|mode=thisweek';
-$lang->customer->menu->thismonth    = 'This Month|customer|browse|mode=thismonth';
-$lang->customer->menu->public       = 'Public Customers|customer|browse|mode=public';
-$lang->customer->menu->report       = 'Report|report|browse|module=customer';
-
-/* Menu of provider module. */
-if(!isset($lang->provider)) $lang->provider = new stdclass();
-$lang->provider->menu = new stdclass();
-$lang->provider->menu->browse = array('link' => 'All Providers|provider|browse|', 'alias' => 'create,edit,view');
-
-/* Menu of product module. */
-if(!isset($lang->product)) $lang->product = new stdclass();
-$lang->product->menu = new stdclass();
-$lang->product->menu->browse     = 'All Products|product|browse|mode=all';
-$lang->product->menu->normal     = 'Normal|product|browse|mode=normal';
-$lang->product->menu->developing = 'Developing|product|browse|mode=developing';
-$lang->product->menu->offline    = 'Offline|product|browse|mode=offline';
-
-=======
->>>>>>> ff7adfb781a62c0bbf4cf55ba210ca3fe366e25b
 /* Menu of order module. */
 if(!isset($lang->order)) $lang->order = new stdclass();
 $lang->order->menu = new stdclass();
