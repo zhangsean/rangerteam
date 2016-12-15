@@ -1017,6 +1017,8 @@ class trade extends control
         $selectYears = $this->post->years ? $this->post->years : array_slice($tradeYears, 0, 2);
         $currency    = $this->post->currency ? $this->post->currency : current(array_flip($currencyList));
 
+        asort($selectYears);
+        $selectYears = array_values($selectYears);
         $incomeDatas  = array();
         $expenseDatas = array();
         $profitDatas  = array();
