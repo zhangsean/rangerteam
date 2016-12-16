@@ -174,7 +174,7 @@ class customer extends control
         $this->session->set('contactList',  $uri);
         if(!$this->session->contactList or $this->session->customerList == $this->session->contactList) $this->session->set('contactList', $this->app->getURI(true));
 
-        $this->app->loadLang('resume');
+        $this->app->loadLang('resume', 'crm');
 
         $actionList   = $this->loadModel('action')->getList('customer', $customerID);
         $actionIDList = array_keys($actionList);
@@ -192,7 +192,7 @@ class customer extends control
         $this->view->contracts    = $this->loadModel('contract', 'crm')->getList($customerID);
         $this->view->addresses    = $this->loadModel('address', 'crm')->getList('customer', $customerID);
         $this->view->actions      = $this->loadModel('action')->getList('customer', $customerID);
-        $this->view->products     = $this->loadModel('product')->getPairs();
+        $this->view->products     = $this->loadModel('product', 'sys')->getPairs();
         $this->view->users        = $this->loadModel('user')->getPairs();
         $this->view->areaList     = $this->loadModel('tree')->getPairs('', 'area');
         $this->view->industryList = $this->tree->getPairs('', 'industry');
@@ -285,7 +285,7 @@ class customer extends control
      */
     public function contact($customerID)
     {
-        $this->app->loadLang('resume');
+        $this->app->loadLang('resume', 'crm');
         $this->app->user->canEditContactIdList = ',' . implode(',', $this->loadModel('contact', 'crm')->getContactsSawByMe('edit')) . ',';
 
         $this->view->title      = $this->lang->customer->contact;

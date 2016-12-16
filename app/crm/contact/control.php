@@ -32,7 +32,7 @@ class contact extends control
      * @access public
      * @return void
      */
-    public function browse($mode = 'all', $status = 'normal', $origin = '',  $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($mode = 'all', $status = 'normal', $origin = '',  $orderBy = 't1.id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -51,7 +51,7 @@ class contact extends control
         $this->config->contact->search['params']['t2.customer']['values'] = $customers;
         $this->search->setSearchParams($this->config->contact->search);
 
-        $this->app->loadLang('resume');
+        $this->app->loadLang('resume', 'crm');
 
         $this->view->title     = $this->lang->contact->list;
         $this->view->mode      = $mode;
@@ -79,7 +79,7 @@ class contact extends control
             $this->send($return);
         }
 
-        $this->app->loadLang('resume');
+        $this->app->loadLang('resume', 'crm');
         unset($this->lang->contact->menu);
         $this->view->title     = $this->lang->contact->create;
         $this->view->customer  = $customer;
@@ -127,7 +127,7 @@ class contact extends control
             $this->send(array('result' => 'success', 'message' => $message, 'locate' => $locate));
         }
 
-        $this->app->loadLang('resume');
+        $this->app->loadLang('resume', 'crm');
 
         $this->view->title      = $this->lang->contact->edit;
         $this->view->customers  = $this->loadModel('customer')->getPairs('client');
