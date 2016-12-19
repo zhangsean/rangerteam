@@ -28,4 +28,3 @@ $lang->trip->denied    = '信息訪問受限';
 $lang->trip->unique    = '%s 已經存在出差記錄';
 $lang->trip->wrongEnd  = '結束時間應該大於開始時間';
 $lang->trip->sameMonth = '不支持跨月份出差';
-$lang->trip->wrongEnd  = '結束時間應該大於開始時間';

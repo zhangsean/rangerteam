@@ -1346,4 +1346,39 @@ class tradeModel extends model
 
         return $datas;
     }
+
+    public function getCompareDatas($selectYears = array(), &$incomeDatas = array(), &$expenseDatas = array(), &$profitDatas = array(), $currency = 'rmb')
+    {
+        foreach($selectYears as $year)
+        {
+            $trades = $this->getByYear($year, $currency);
+            $incomeDatas['all'][$year]  = 0; 
+            $expenseDatas['all'][$year] = 0; 
+            $profitDatas['all'][$year]  = 0; 
+            foreach($trades as $month => $monthTrades)
+            {
+                $incomeDatas[$month][$year]  = 0;
+                $expenseDatas[$month][$year] = 0;
+                $profitDatas[$month][$year]  = 0;
+                foreach($monthTrades as $trade)
+                {
+                    if($trade->type == 'in')  $incomeDatas[$month][$year]  += $trade->money;
+                    if($trade->type == 'out') $expenseDatas[$month][$year] += $trade->money;
+                }
+
+                $profitDatas[$month][$year]  = $incomeDatas[$month][$year] - $expenseDatas[$month][$year];
+                $profitDatas['all'][$year]  += $incomeDatas[$month][$year] - $expenseDatas[$month][$year];
+                $incomeDatas['all'][$year]  += $incomeDatas[$month][$year];
+                $expenseDatas['all'][$year] += $expenseDatas[$month][$year];
+            }
+        }
+
+        ksort($incomeDatas, SORT_STRING);
+        ksort($expenseDatas, SORT_STRING);
+        ksort($profitDatas, SORT_STRING);
+
+        foreach($incomeDatas as $month => $data)  foreach($data as $year => $money) $incomeDatas[$month][$year]  = round($money / (int)$this->lang->trade->report->ratio, 2);
+        foreach($expenseDatas as $month => $data) foreach($data as $year => $money) $expenseDatas[$month][$year] = round($money / (int)$this->lang->trade->report->ratio, 2);
+        foreach($profitDatas as $month => $data)  foreach($data as $year => $money) $profitDatas[$month][$year]  = round($money / (int)$this->lang->trade->report->ratio, 2);
+    }
 }
