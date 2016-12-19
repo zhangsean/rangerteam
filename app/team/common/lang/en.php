@@ -36,3 +36,4 @@ $lang->setting->menu->board = 'Boards|tree|browse|type=forum|';
 $lang->setting->menu->blog  = 'Blogs|tree|browse|type=blog|';
 $lang->setting->menu->dept  = 'Departments|tree|browse|type=dept|';
 $lang->setting->menu->role  = 'Roles|setting|lang|module=user&field=roleList&appName=team|';
+include(dirname(__FILE__) . '/menuOrder.php');

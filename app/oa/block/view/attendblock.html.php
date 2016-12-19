@@ -109,6 +109,7 @@
       </td>
     <?php endforeach;?>
   </tr>
+  <?php if(strpos($this->config->setting->modules, 'attend') !== false):?>
   <?php $link = "$.openEntry('oa', '" . $this->createLink('oa.attend', 'personal') . "')";?>
   <tr class='status'>
     <th><?php echo $lang->attend->common?></th>
@@ -124,6 +125,7 @@
     <?php endif;?>
     <?php endforeach;?>
   </tr>
+  <?php endif;?>
 </table>
 <script>
 $(document).ready(function()

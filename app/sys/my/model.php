@@ -17,9 +17,30 @@ class myModel extends model
 
         $isMobile = $this->app->getViewType() === 'mhtml';
         $string   = !$isMobile ? "<nav id='menu'><ul class='nav'>\n" : '';
+        
+        $menuOrder = isset($this->lang->my->{$method}->menuOrder) ? $this->lang->my->{$method}->menuOrder : array();  
+
+        /* Get menus of current module. */
+        $moduleMenus = new stdclass(); 
+        if(!empty($menuOrder))
+        {
+            ksort($menuOrder);
+            foreach($this->lang->my->{$method}->menu as $methodName => $methodMenu)
+            {
+                if(!in_array($methodName, $menuOrder)) $menuOrder[] = $methodName;
+            }
+
+            foreach($menuOrder as $name)
+            {
+                if(isset($this->lang->my->{$method}->menu->$name)) $moduleMenus->$name = $this->lang->my->{$method}->menu->$name;
+            }
+        }
+        else
+        {
+            $moduleMenus = $this->lang->my->$method->menu;  
+        }
 
         /* Get menus of current module and current method. */
-        $moduleMenus = $this->lang->my->$method->menu;  
         $currentMethod = $this->app->getMethodName();
 
         /* Cycling to print every menus of current module. */
