@@ -100,6 +100,8 @@ $lang->moduleOrder[120] = 'adminUser';
 
 $lang->moduleOrder[125] = 'tree';
 $lang->moduleOrder[130] = 'setting';
+$lang->moduleOrder[135] = 'report';
+$lang->moduleOrder[140] = 'my';
 
 $lang->resource = new stdclass();
 

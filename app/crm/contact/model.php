@@ -102,7 +102,7 @@ class contactModel extends model
      * @access public
      * @return array
      */
-    public function getList($customer = 0, $relation = 'client', $mode = '', $status = 'normal', $origin = '', $orderBy = 'maker_desc', $pager = null)
+    public function getList($customer = 0, $relation = 'client', $mode = '', $status = 'normal', $origin = '', $orderBy = 't2.maker_desc', $pager = null)
     {
         $customerIdList = array();
         if($relation != 'provider' and $status == 'normal')
@@ -185,7 +185,7 @@ class contactModel extends model
                 ->beginIF($mode == 'thismonth')->andWhere('t1.nextDate')->between($thisMonth['begin'], $thisMonth['end'])->fi()
                 ->beginIF($mode == 'public')->andWhere('public')->eq('1')->fi()
                 ->beginIF($mode == 'bysearch')->andWhere($contactQuery)->fi()
-                ->orderBy("t1.$orderBy")
+                ->orderBy($orderBy)
                 ->page($pager)
                 ->fetchAll('id');
 

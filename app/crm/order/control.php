@@ -148,8 +148,8 @@ class order extends control
         /* Set allowed edit order ID list. */
         $this->app->user->canEditOrderIdList = ',' . implode(',', $this->order->getOrdersSawByMe('edit', (array)$orderID)) . ',';
 
-        $this->app->loadLang('resume');
-        $this->app->loadLang('contract');
+        $this->app->loadLang('resume', 'crm');
+        $this->app->loadLang('contract', 'crm');
 
         $uri = $this->app->getURI(true);
         $this->session->set('customerList', $uri);

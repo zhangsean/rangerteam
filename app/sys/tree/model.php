@@ -88,12 +88,13 @@ class treeModel extends model
      * Get list of one type.
      * 
      * @param  string $type 
+     * @param  string $orderBy
      * @access public
      * @return array
      */
-    public function getListByType($type = 'article')
+    public function getListByType($type = 'article', $orderBy = 'id_asc')
     {
-        return $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq($type)->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq($type)->orderBy($orderBy)->fetchAll('id');
     }
 
     /**

@@ -56,7 +56,7 @@ class resume extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
-        $this->app->loadLang('contact');
+        $this->app->loadLang('contact', 'crm');
 
         $this->view->title     = $this->lang->resume->create;
         $this->view->customers = $customers;
