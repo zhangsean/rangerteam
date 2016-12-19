@@ -342,8 +342,28 @@ class commonModel extends model
         $isMobile = $app->viewType === 'mhtml';
         $string   = !$isMobile ? "<ul class='nav navbar-nav'>\n" : '';
 
+        $menuOrder = isset($lang->{$app->appName}->menuOrder) ? $lang->{$app->appName}->menuOrder : array();  
+        $allMenus  = new stdclass(); 
+        if(!empty($menuOrder))
+        {
+            ksort($menuOrder);
+            foreach($lang->menu->{$app->appName} as $moduleName => $moduleMenu)
+            {
+                if(!in_array($moduleName, $menuOrder)) $menuOrder[] = $moduleName;
+            }
+
+            foreach($menuOrder as $name)
+            {
+                if(isset($lang->menu->{$app->appName}->$name)) $allMenus->$name = $lang->menu->{$app->appName}->$name;
+            }
+        }
+        else
+        {
+            $allMenus = $lang->menu->{$app->appName};
+        }
+
         /* Print all main menus. */
-        foreach($lang->menu->{$app->appName} as $moduleName => $moduleMenu)
+        foreach($allMenus as $moduleName => $moduleMenu)
         {
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
@@ -407,8 +427,29 @@ class commonModel extends model
         $string   = !$isMobile ? "<nav id='menu'><ul class='nav'>\n" : '';
         if(!$isMobile && strpos(',setting,tree,schema,sales,group,', ',' . $currentModule . ',') !== false) $string = "<nav class='menu leftmenu affix'><ul class='nav nav-primary'>\n";
 
-        /* Get menus of current module and current method. */
-        $moduleMenus   = $lang->$currentModule->menu;  
+        $menuOrder = isset($lang->{$currentModule}->menuOrder) ? $lang->{$currentModule}->menuOrder : array();  
+
+        /* Get menus of current module. */
+        $moduleMenus = new stdclass(); 
+        if(!empty($menuOrder))
+        {
+            ksort($menuOrder);
+            foreach($lang->{$currentModule}->menuOrder as $methodName => $methodMenu)
+            {
+                if(!in_array($methodName, $menuOrder)) $menuOrder[] = $methodName;
+            }
+
+            foreach($menuOrder as $name)
+            {
+                if(isset($lang->{$currentModule}->menu->$name)) $moduleMenus->$name = $lang->{$currentModule}->menu->$name;
+            }
+        }
+        else
+        {
+            $moduleMenus = $lang->$currentModule->menu;  
+        }
+
+        /* Get current method. */
         $currentMethod = $app->getMethodName();
 
         /* Cycling to print every menus of current module. */

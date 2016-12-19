@@ -59,3 +59,4 @@ $lang->setting->menu->expend    = 'Expense|tree|browse|type=out|';
 $lang->setting->menu->currency  = 'Currency|setting|lang|module=common&field=currencyList';
 $lang->setting->menu->schema    = 'Import Template|schema|browse|';
 $lang->setting->menu->tradePriv = 'Expense Privilege|group|managetradepriv|';
+include(dirname(__FILE__) . '/menuOrder.php');

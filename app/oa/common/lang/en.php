@@ -100,3 +100,4 @@ $lang->refund->menu->settings   = array('link' => 'Settings|refund|settings|', '
 
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->modules = 'Modules|setting|modules|app=oa';
+include (dirname(__FILE__) . '/menuOrder.php');

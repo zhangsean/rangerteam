@@ -100,3 +100,4 @@ $lang->refund->menu->settings   = array('link' => '設置|refund|setreviewer|', 
 
 $lang->setting->menu = new stdclass();
 $lang->setting->menu->modules = '功能模組|setting|modules|app=oa';
+include (dirname(__FILE__) . '/menuOrder.php');

@@ -115,3 +115,4 @@ $lang->sales->menu = $lang->setting->menu;
 $lang->dashboard = new stdclass();
 if(!isset($lang->resume))  $lang->resume  = new stdclass();
 if(!isset($lang->address)) $lang->address = new stdclass();
+include (dirname(__FILE__) . '/menuOrder.php');
