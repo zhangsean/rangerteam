@@ -16,14 +16,15 @@ $lang->system->menuOrder[10] = 'trash';
 $lang->system->menuOrder[15] = 'cron';
 $lang->system->menuOrder[20] = 'backup';
 
-$lang->dashboard->menuOrder[5]  = 'todo';
-$lang->dashboard->menuOrder[10] = 'task'; 
-$lang->dashboard->menuOrder[15] = 'project';
-$lang->dashboard->menuOrder[20] = 'order';
-$lang->dashboard->menuOrder[25] = 'contract';
-$lang->dashboard->menuOrder[30] = 'review';
-$lang->dashboard->menuOrder[35] = 'company';
-$lang->dashboard->menuOrder[40] = 'dynamic';
+$lang->sys->dashboard = new stdclass();
+$lang->sys->dashboard->menuOrder[5]  = 'todo';
+$lang->sys->dashboard->menuOrder[10] = 'task'; 
+$lang->sys->dashboard->menuOrder[15] = 'project';
+$lang->sys->dashboard->menuOrder[20] = 'order';
+$lang->sys->dashboard->menuOrder[25] = 'contract';
+$lang->sys->dashboard->menuOrder[30] = 'review';
+$lang->sys->dashboard->menuOrder[35] = 'company';
+$lang->sys->dashboard->menuOrder[40] = 'dynamic';
 
 $lang->customer->menuOrder[5]  = 'browse'; 
 $lang->customer->menuOrder[10] = 'assignedTo';
