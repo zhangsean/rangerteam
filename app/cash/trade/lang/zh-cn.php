@@ -187,13 +187,12 @@ $lang->trade->noTraderMatch = '没有匹配到相应的商户，点击新建';
 $lang->trade->unique        = '今天已经有相同金额的账目';
 $lang->trade->ignore        = '忽略';
 
+$lang->trade->chartList['productLine'] = '按产品线统计';
 $lang->trade->chartList['category']    = '按科目统计';
-$lang->trade->chartList['dept']        = '按部门统计';
 $lang->trade->chartList['area']        = '按客户区域统计';
 $lang->trade->chartList['industry']    = '按客户行业统计';
-$lang->trade->chartList['level']       = '按客户级别统计';
 $lang->trade->chartList['size']        = '按客户规模统计';
-$lang->trade->chartList['productLine'] = '按产品线统计';
+$lang->trade->chartList['dept']        = '按部门统计';
 
 $lang->trade->excel = new stdclass();
 $lang->trade->excel->title = new stdclass();

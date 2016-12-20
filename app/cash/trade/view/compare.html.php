@@ -37,12 +37,12 @@
             <td colspan='3'>
               <div class='chart-wrapper text-center'>
                 <h5><?php echo $lang->trade->in . $lang->trade->report->compare . '(' . $currencyList[$currency] . ':' . $lang->trade->report->unit . ')';?></h5>
-                <div class='chart-canvas'><canvas height='350' width='800' id='incomeBarChart'></canvas></div>
+                <div class='chart-canvas'><canvas height='350' width='800' id='chart-income'></canvas></div>
               </div>
             </td>
             <td class='w-p30'>
               <div class='table-wrapper' style='overflow:auto'>
-                <table id='barChart' class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='bar' data-target='#incomeBarChart' data-animation='false'>
+                <table id='barChart' class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='bar' data-target='#chart-income' data-animation='false'>
                   <thead>
                     <tr class='text-center'>
                       <th><?php echo $lang->trade->month;?></th>
@@ -78,12 +78,12 @@
             <td colspan='3'>
               <div class='chart-wrapper text-center'>
                 <h5><?php echo $lang->trade->out . $lang->trade->report->compare . '(' . $currencyList[$currency] . ':' . $lang->trade->report->unit . ')';?></h5>
-                <div class='chart-canvas'><canvas height='350' width='800' id='expenseBarChart'></canvas></div>
+                <div class='chart-canvas'><canvas height='350' width='800' id='chart-expense'></canvas></div>
               </div>
             </td>
             <td class='w-p30'>
               <div class='table-wrapper' style='overflow:auto'>
-                <table id='barChart' class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='bar' data-target='#expenseBarChart' data-animation='false'>
+                <table id='barChart' class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='bar' data-target='#chart-expense' data-animation='false'>
                   <thead>
                     <tr class='text-center'>
                       <th><?php echo $lang->trade->month;?></th>
@@ -119,12 +119,12 @@
             <td colspan='3'>
               <div class='chart-wrapper text-center'>
                 <h5><?php echo $lang->trade->profit . $lang->trade->loss . $lang->trade->report->compare . '(' . $currencyList[$currency] . ':' . $lang->trade->report->unit . ')';?></h5>
-                <div class='chart-canvas'><canvas height='350' width='800' id='profitBarChart'></canvas></div>
+                <div class='chart-canvas'><canvas height='350' width='800' id='chart-profit'></canvas></div>
               </div>
             </td>
             <td class='w-p30'>
               <div class='table-wrapper' style='overflow:auto'>
-                <table id='barChart' class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='bar' data-target='#profitBarChart' data-animation='false'>
+                <table id='barChart' class='table table-condensed table-hover table-striped table-bordered table-chart' data-chart='bar' data-target='#chart-profit' data-animation='false'>
                   <thead>
                     <tr class='text-center'>
                       <th><?php echo $lang->trade->month;?></th>

@@ -952,10 +952,8 @@ class trade extends control
         }
         ksort($annualChartDatas, SORT_STRING);
 
-        $groupByList = array('productLine', 'category', 'area', 'industry', 'size', 'dept');
-
         $this->loadModel('report');
-        foreach($groupByList as $groupBy)
+        foreach($this->config->trade->report->annual as $groupBy)
         {
             $monthlyChartDatas[$groupBy]['in'] = $this->trade->getChartData('in', $currentYear, $currentMonth, $groupBy, $currency);
             $monthlyChartDatas[$groupBy]['in'] = $this->report->computePercent($monthlyChartDatas[$groupBy]['in']);
@@ -1018,41 +1016,11 @@ class trade extends control
         $currency    = $this->post->currency ? $this->post->currency : current(array_flip($currencyList));
 
         asort($selectYears);
-        $selectYears = array_values($selectYears);
+        $selectYears  = array_values($selectYears);
         $incomeDatas  = array();
         $expenseDatas = array();
         $profitDatas  = array();
-        foreach($selectYears as $year)
-        {
-            $trades = $this->trade->getByYear($year, $currency);
-            $incomeDatas['all'][$year]  = 0; 
-            $expenseDatas['all'][$year] = 0; 
-            $profitDatas['all'][$year]  = 0; 
-            foreach($trades as $month => $monthTrades)
-            {
-                $incomeDatas[$month][$year]  = 0;
-                $expenseDatas[$month][$year] = 0;
-                $profitDatas[$month][$year]  = 0;
-                foreach($monthTrades as $trade)
-                {
-                    if($trade->type == 'in')  $incomeDatas[$month][$year]  += $trade->money;
-                    if($trade->type == 'out') $expenseDatas[$month][$year] += $trade->money;
-                }
-
-                $profitDatas[$month][$year]  = $incomeDatas[$month][$year] - $expenseDatas[$month][$year];
-                $profitDatas['all'][$year]  += $incomeDatas[$month][$year] - $expenseDatas[$month][$year];
-                $incomeDatas['all'][$year]  += $incomeDatas[$month][$year];
-                $expenseDatas['all'][$year] += $expenseDatas[$month][$year];
-            }
-        }
-
-        ksort($incomeDatas, SORT_STRING);
-        ksort($expenseDatas, SORT_STRING);
-        ksort($profitDatas, SORT_STRING);
-
-        foreach($incomeDatas as $month => $data)  foreach($data as $year => $money) $incomeDatas[$month][$year]  = round($money / (int)$this->lang->trade->report->ratio, 2);
-        foreach($expenseDatas as $month => $data) foreach($data as $year => $money) $expenseDatas[$month][$year] = round($money / (int)$this->lang->trade->report->ratio, 2);
-        foreach($profitDatas as $month => $data)  foreach($data as $year => $money) $profitDatas[$month][$year]  = round($money / (int)$this->lang->trade->report->ratio, 2);
+        $this->trade->getCompareDatas($selectYears, $incomeDatas, $expenseDatas, $profitDatas, $currency);
 
         $this->lang->trade->menu = $this->lang->report->menu;
 

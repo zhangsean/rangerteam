@@ -45,7 +45,7 @@ $(document).ready(function()
     var data = {labels: labels, datasets: [datasetIn, datasetOut]};
     
     var options = {multiTooltipTemplate: "<%= datasetLabel %> <%= value %>"};
-    chart = $('#myBarChart').barChart(data, options);
+    chart = $('#chart-annual').barChart(data, options);
     
     $('#currency').change(function()
     {

@@ -80,8 +80,8 @@ $lang->trade->compare      = 'Annual Compare';
 
 $lang->trade->report = new stdclass();
 $lang->trade->report->common      = 'Report'; 
-$lang->trade->report->annual      = 'Annual Report'; 
-$lang->trade->report->compare     = 'Annual Compare';
+$lang->trade->report->annual      = ' Annual Report'; 
+$lang->trade->report->compare     = ' Annual Compare';
 $lang->trade->report->create      = 'Create Report';
 $lang->trade->report->selectYears = 'Select Years';
 $lang->trade->report->undefined   = 'Undefined';
@@ -187,13 +187,12 @@ $lang->trade->noTraderMatch = 'No matched trader，click to create';
 $lang->trade->unique        = 'There has been same record';
 $lang->trade->ignore        = 'Ignore';
 
+$lang->trade->chartList['productLine'] = 'by product line';
 $lang->trade->chartList['category']    = 'by category';
-$lang->trade->chartList['dept']        = 'by department';
 $lang->trade->chartList['area']        = 'by customer area';
 $lang->trade->chartList['industry']    = 'by customer industry';
-$lang->trade->chartList['level']       = 'by customer level';
 $lang->trade->chartList['size']        = 'by customer size';
-$lang->trade->chartList['productLine'] = 'by product line';
+$lang->trade->chartList['dept']        = 'by department';
 
 $lang->trade->excel = new stdclass();
 $lang->trade->excel->title = new stdclass();

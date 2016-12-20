@@ -1,15 +1,16 @@
 <?php
 if(!isset($lang->leave)) $lang->leave = new stdclass();
-$lang->leave->common = '請假';
-$lang->leave->browse = '請假列表';
-$lang->leave->create = '請假';
-$lang->leave->edit   = '編輯';
-$lang->leave->delete = '刪除';
-$lang->leave->review = '審核';
-$lang->leave->cancel = '撤銷';
-$lang->leave->commit = '提交';
-$lang->leave->back   = '銷假';
-$lang->leave->export = '導出請假記錄';
+$lang->leave->common     = '請假';
+$lang->leave->browse     = '請假列表';
+$lang->leave->create     = '請假';
+$lang->leave->edit       = '編輯';
+$lang->leave->delete     = '刪除';
+$lang->leave->review     = '審核';
+$lang->leave->cancel     = '撤銷';
+$lang->leave->commit     = '提交';
+$lang->leave->back       = '銷假';
+$lang->leave->export     = '導出請假記錄';
+$lang->leave->reviewBack = '審核銷假';
 
 $lang->leave->personal     = '我的請假';
 $lang->leave->browseReview = '審核列表';
