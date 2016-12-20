@@ -511,7 +511,7 @@ class commonModel extends model
         $isMobile = $app->viewType === 'mhtml';
         $string   = !$isMobile ? "<ul class='nav navbar-nav'>\n" : '';
 
-        $menuOrder = isset($lang->dashboard->menuOrder) ? $lang->dashboard->menuOrder : array();  
+        $menuOrder = isset($lang->sys->dashboard->menuOrder) ? $lang->sys->dashboard->menuOrder : array();  
         $allMenus  = new stdclass(); 
         if(!empty($menuOrder))
         {
@@ -530,7 +530,6 @@ class commonModel extends model
         {
             $allMenus = $lang->menu->dashboard;
         }
-
 
         $currentMethod = $app->getMethodName();
         $currentModule = $app->getModuleName();

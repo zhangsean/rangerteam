@@ -249,7 +249,6 @@ $lang->article->menu->create = array('link' => '添加文章|article|create|type
 
 $lang->menuGroups = new stdclass();
 
-$lang->dashboard = new stdclass();
 $lang->menu->dashboard = new stdclass();
 $lang->menu->dashboard->todo     = '待办|todo|calendar|';
 $lang->menu->dashboard->task     = '任务|my|task|';
