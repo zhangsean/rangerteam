@@ -73,7 +73,6 @@ $lang->link           = '友情链接';
 $lang->frontHome      = '前台';
 $lang->forumHome      = '论坛';
 $lang->bookHome       = '手册';
-$lang->dashboard      = '成员中心';
 $lang->register       = '注册';
 $lang->logout         = '退出';
 $lang->login          = '登录';
@@ -250,6 +249,7 @@ $lang->article->menu->create = array('link' => '添加文章|article|create|type
 
 $lang->menuGroups = new stdclass();
 
+$lang->dashboard = new stdclass();
 $lang->menu->dashboard = new stdclass();
 $lang->menu->dashboard->todo     = '待办|todo|calendar|';
 $lang->menu->dashboard->task     = '任务|my|task|';
