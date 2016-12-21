@@ -311,7 +311,7 @@ class customer extends control
         }
 
         $customerContacts = $this->loadModel('contact', 'crm')->getList($customerID);
-        $contacts = $this->loadModel('contact', 'crm')->getPairs();
+        $contacts = $this->contact->getPairs();
         foreach($contacts as $id => $name)
         {
             if(isset($customerContacts[$id])) unset($contacts[$id]);
