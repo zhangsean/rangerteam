@@ -245,10 +245,12 @@ class mailModel extends model
      * @param  string  $body 
      * @param  string  $ccList 
      * @param  bool    $includeMe 
+     * @param  string  $attachmentName
+     * @param  string  $attachmentFile
      * @access public
      * @return void
      */
-    public function send($toList, $subject, $body = '', $ccList = '', $includeMe = false)
+    public function send($toList, $subject, $body = '', $ccList = '', $includeMe = false, $attachmentName = '', $attachmentFile = '')
     {
         if(!$this->config->mail->turnon) return;
 
@@ -267,8 +269,8 @@ class mailModel extends model
 
         /* Remove deleted users. */
         $users = $this->loadModel('user')->getPairs('nodeleted,noforbidden');
-        foreach($toList as $key => $to) if(!isset($users[trim($to)])) unset($toList[$key]);
-        foreach($ccList as $key => $cc) if(!isset($users[trim($cc)])) unset($ccList[$key]);
+        foreach($toList as $key => $to) if(!isset($users[trim($to)]) and strpos($to, '@') === false) unset($toList[$key]);
+        foreach($ccList as $key => $cc) if(!isset($users[trim($cc)]) and strpos($to, '@') === false) unset($ccList[$key]);
 
         if(!$toList and !$ccList) return;
         if(!$toList and $ccList) $toList = array(array_shift($ccList));
@@ -291,6 +293,7 @@ class mailModel extends model
             $this->setTO($toList, $emails);
             $this->setCC($ccList, $emails);
             $this->setBody($this->convertCharset($body));
+            if($attachmentFile) $this->mta->AddAttachment($attachmentFile, $attachmentName);
             $this->setErrorLang();
             $this->mta->send();
         }
