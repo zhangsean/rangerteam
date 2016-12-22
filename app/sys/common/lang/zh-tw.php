@@ -73,7 +73,6 @@ $lang->link           = '友情連結';
 $lang->frontHome      = '前台';
 $lang->forumHome      = '論壇';
 $lang->bookHome       = '手冊';
-$lang->dashboard      = '成員中心';
 $lang->register       = '註冊';
 $lang->logout         = '退出';
 $lang->login          = '登錄';

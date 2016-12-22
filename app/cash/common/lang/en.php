@@ -34,11 +34,6 @@ if(!isset($lang->depositor)) $lang->depositor = new stdclass();
 if(!isset($lang->trade)) $lang->trade = new stdclass();
 $lang->trade->menu = new stdclass();
 
-/* Menu of provider module. */
-if(!isset($lang->provider)) $lang->provider = new stdclass();
-$lang->provider->menu = new stdclass();
-$lang->provider->menu->browse = array('link' => 'Suppliers|provider|browse|', 'alias' => 'create,edit,view');
-
 /* Menu of contact module. */
 if(!isset($lang->contact)) $lang->contact = new stdclass();
 $lang->contact->menu = new stdclass();
