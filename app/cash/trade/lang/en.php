@@ -81,6 +81,7 @@ $lang->trade->compare      = 'Annual Compare';
 $lang->trade->report = new stdclass();
 $lang->trade->report->common      = 'Report'; 
 $lang->trade->report->annual      = ' Annual Report'; 
+$lang->trade->report->month       = ' Month Report'; 
 $lang->trade->report->compare     = ' Annual Compare';
 $lang->trade->report->create      = 'Create Report';
 $lang->trade->report->selectYears = 'Select Years';
